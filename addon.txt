@@ -1,0 +1,6 @@
+"AddonInfo"
+{
+	"name" "STALKER Gamemode"
+	"author_name" "some faggot & verne"
+	"info" " { 	"description": "Description", 	"type": "gamemode", 	"tags":  	[ 		"roleplay", 		"gameplay" 	] }"
+}

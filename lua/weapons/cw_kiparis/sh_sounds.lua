@@ -1,0 +1,1 @@
+CustomizableWeaponry:addFireSound("CW_KIPARIS_FIRE", "weapons/kiparis/kiparis-1.wav", 1, 107, CHAN_STATIC)

@@ -1,0 +1,10 @@
+ITEM.name = "Hacking USB"
+ITEM.description = "A Hacking USB"
+ITEM.longdesc = "USB stick with software designed to automatically attack weaknesses in common systems that weren't updated in a bit."
+ITEM.model = "models/kek1ch/dev_flash_1.mdl"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 2000
+ITEM.busflag = "dev"
+ITEM.securitytype =  "computers"
+ITEM.securityquality = 2

@@ -1,0 +1,10 @@
+ITEM.name = "Hair Pins"
+ITEM.description = "A bunch of Hair Pins"
+ITEM.longdesc = "Improvised lockpicking tool that can defeat cheap locks. Materials are common, but who wears hairpins in the zone?"
+ITEM.model = "models/kek1ch/box_toolkit_2.mdl"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 1000
+ITEM.busflag = "dev"
+ITEM.securitytype =  "mechanical"
+ITEM.securityquality = 1

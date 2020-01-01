@@ -1,0 +1,10 @@
+ITEM.name = "Locksmith's Kit"
+ITEM.description = "A Locksmith's Kit"
+ITEM.longdesc = "Large kit of various tools designed to repair locks, test their security, get them open safely."
+ITEM.model = "models/kek1ch/box_toolkit_2.mdl"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 15000
+ITEM.busflag = "dev"
+ITEM.securitytype =  "mechanical"
+ITEM.securityquality = 4

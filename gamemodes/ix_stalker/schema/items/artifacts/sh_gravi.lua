@@ -1,0 +1,9 @@
+ITEM.name = "Gravi"
+ITEM.model ="models/nasca/etherealsrp_artifacts/gravi.mdl"
+ITEM.description = "Lumpy, reddish artifact."
+ITEM.longdesc = "Gravi is formed from metallic substances exposed to prolonged gravitation. This makes it capable of sustaining a gravitational field, which causes it to have various properties, among others increasing weight of all objects in its close proximity. For a long time, the artifact was a mystery, and it was scientist Sakharov at Yantar who first discovered that Gravi creates a minute singularity field of gravitational nature, the phenomenon which occurs in intervals of 30 minutes. This artifact may yield beneficial results in medicine or warfare if the mechanism behind its functioning is harnessed for the purposes of science. Suffice it to say, its positive properties completely outweigh its negative aspects. Namely, it increases weight of objects as a result of gravitational field and emits lethal doses of radiation. On the other hand, it will protect the user from harmful effects of fire anomalies found throughout the Zone and from acids of chemical/toxic anomalies. However, instead of absorbing deadly chemicals and toxins, Gravi causes chemical compounds to be broken down to simpler substances thanks to its singularity field. As noted above, it is extremely heavy and it is not recommended to use it on long excursions into the Zone, especially for extended periods of time. Very Rare artifact."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 27500
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5

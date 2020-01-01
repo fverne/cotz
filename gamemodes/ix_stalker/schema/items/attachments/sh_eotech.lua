@@ -1,0 +1,12 @@
+ITEM.name = "Eotech holographic sight"
+ITEM.description = "American holographic sight. Circle cross type sight."
+ITEM.category = "Attachments"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.attachName = "md_eotech"
+ITEM.model = "models/cw2/attachments/microt1.mdl"
+ITEM.upgradeIcon = Material("materials/vgui/ui/stalker/weaponupgrades/sights.png")
+ITEM.attachSlot = 1
+--ITEM.busflag = "SPECIAL3"
+ITEM.price = 5000
+ITEM.repairCost = ITEM.price/100*1

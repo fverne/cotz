@@ -1,0 +1,9 @@
+ITEM.name = "Sparkler"
+ITEM.model ="models/nasca/etherealsrp_artifacts/sparkler.mdl"
+ITEM.description = "Silky in appearance. Artifact."
+ITEM.longdesc = "This artifact has the appearance of translucent spider webs. Just as proteinaceous spider silk, it is sticky and has properties of glue. It can be found most commonly in or near electro anomalies and it seems to have absorbed their certain characteristics: it is able to smooth fluctuations in electric field density and acts as a weak resistor, protecting the wearer from electricity and reducing its damaging effects. When worn, the artifact is also known to slightly counter the harmful effects of psy-anomalies or psy-waves of some mutants. Because of its electrical nature, it provides the body with additional albeit weak source of energy. It does not possess any beneficial healing properties, as the gluey fluid produced by the artifact is damaging to living tissue and will prevent blood clotting. It is extremely light. Common artifact."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 1500
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5

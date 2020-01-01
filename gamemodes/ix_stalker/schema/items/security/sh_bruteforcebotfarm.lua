@@ -1,0 +1,10 @@
+ITEM.name = "Brute-Force Bot Farm"
+ITEM.description = "A Brute-Force Bot Farm"
+ITEM.longdesc = "A laptop with wireless internet connection and a subscription to a farm of hacked PCs. If all else fails, over 1,000 computers outside of the zone will use their GPU and CPU to guess the password."
+ITEM.model = "models/tnb/props/laptop.mdl"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 50000
+ITEM.busflag = "dev"
+ITEM.securitytype =  "computers"
+ITEM.securityquality = 6

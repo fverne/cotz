@@ -1,0 +1,9 @@
+ITEM.name = "Mama's beads"
+ITEM.model ="models/nasca/etherealsrp_artifacts/mamas_beads.mdl"
+ITEM.description = "Helix-shaped, pulsating artifact."
+ITEM.longdesc = "Shaped like a DNA helix, Mama's Beads are created in the Burner anomaly. One of their most characteristic features is that they constantly pulsate, generating emissions beneficial to the human body. These emissions increase the metabolism of any living creature, accelerating coagulation and healing of wounds. The mechanism behind the effects of this artifact is still unknown. Mama's Beads also possess potent protective qualities: they are able to shield the body and objects from extreme heat and acids. On the other hand, it should be noted that the presence of this artifact increases the corrosivity of acids, leading to accelerated deterioration of equipment and higher damage to tissues of any living organism. It is thus strongly advised to proceed with caution in acidic as well as in toxic environments when in possession of Mama's Beads. Another dangerous effect of this artifact is the fact that it will increase electrical conductivity, so the probability of electrocution while wearing this artifact is much higher, especially during storms and in the vicinity of electrical anomalies. The weight is also quite high for such a small artifact, which leads to a conclusion that is of extremely high density. Very rare artifact."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 23000
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5

@@ -1,0 +1,10 @@
+ITEM.name = "Crude Pulser"
+ITEM.description = "A Crude Pulser"
+ITEM.longdesc = "Battery and a set of wires to short out or send impulses down the wires, sometimes effective at bypassing cheap electronic security"
+ITEM.model = "models/alyx_emptool_prop.mdl"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 1000
+ITEM.busflag = "dev"
+ITEM.securitytype =  "electronic"
+ITEM.securityquality = 1

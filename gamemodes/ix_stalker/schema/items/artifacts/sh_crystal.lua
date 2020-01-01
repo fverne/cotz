@@ -1,0 +1,9 @@
+ITEM.name = "Crystal"
+ITEM.model ="models/nasca/etherealsrp_artifacts/crystal.mdl"
+ITEM.description = "A crystal-like artifact."
+ITEM.longdesc = "This artifact is formed in anomalous zones with intense thermal activity. Actively consumes excessive heat and remains cool at all times. It will also protect the user against acids found in toxic and chemical anomalies. On the other hand, exposure to such environments makes the artifact increase the corrosivity of acids due to unknown as of now mechanism. For this reason, one is forced to weigh pros and cons of Crystal when in the vicinity of areas of high toxicity. It also acts as a conductor of electricity. Another positive effect possessed by this artifact is that it accelerates clotting if worn close to the body. (Side note: it is not recommended to keep this artifact in your possession for longer periods of time as blood clots can be hazardous to your health.) This artifact is also highly sought for by jewelers outside the Zone as its inner core is not radioactive and considered to be of exceptional beauty if polished and refined. Only the first 1 cm of its outer layer emits radiation. It is, however, highly advised to proceed with caution when planning to bring the artifact to the market as prolonged exposure to even minimal amounts of radioactive materials can result in death of the user. Covered with very hard layer. Relatively heavy due to high density. Rare artifact."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 2750
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5

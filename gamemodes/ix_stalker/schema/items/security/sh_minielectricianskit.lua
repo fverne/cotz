@@ -1,0 +1,10 @@
+ITEM.name = "Mini Electrician's Kit"
+ITEM.description = "A Mini Electrician's Kit"
+ITEM.longdesc = "A small set of tools to install, repair and bypass electronic devices and security."
+ITEM.model = "models/kek1ch/toolkit_p.mdl"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 4000
+ITEM.busflag = "dev"
+ITEM.securitytype =  "electronic"
+ITEM.securityquality = 3

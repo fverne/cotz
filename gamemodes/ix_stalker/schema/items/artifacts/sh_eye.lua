@@ -1,0 +1,9 @@
+ITEM.name = "Eye"
+ITEM.model ="models/nasca/etherealsrp_artifacts/eye.mdl"
+ITEM.description = "This artifact looks like an eye."
+ITEM.longdesc = "This artifact, which resembles the human eye, considerably increases metabolism of the body, helping wounds heal quicker. Experienced stalkers say that Eye also brings luck. Irrespective of the validity of that statement, its positive effects are indeed quite potent. First of all, it reduces temperature of user's body and cools all objects in its vicinity. Secondly, it provides substantial protection against all types of acids by gradually increasing their pH to the level of water (pH of 7). Thirdly, this artifact soothes the pain and is extremely useful when treating wounds. These beneficial qualities, however, come at a price. This artifact is extremely dangerous when exposed to chemical anomalies as it amplifies their toxicity and increases their potency. It is hence highly recommended to keep the artifact in your backpack, never on the body, when exploring toxic areas unless you have a death wish. The artifact is also known colloquially as 'copper eye' as it conducts electricity and amplifies its dangerous effects in the same way as copper does. Very rare artifact."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 30000
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5

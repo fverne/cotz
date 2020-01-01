@@ -1,0 +1,9 @@
+ITEM.name = "Bubble"
+ITEM.model ="models/nasca/etherealsrp_artifacts/bubble.mdl"
+ITEM.description = "A green artifact."
+ITEM.longdesc = "A compound of several hollow organic formations, this artifact emits a gaseous substance that can neutralize chemical or toxic particles inside the body without harming it. Apart from that Bubble, however, possesses numerous negative properties. For example, it greatly amplifies the effects of psy-waves as well as fields produced by mutants and anomalies. This disadvantage is not to be taken lightly: some stalkers have reported that psy influence was so potent when in possession of a Bubble that they felt their heads cracking from the inside and the only thing they could do was scream in pain and run as far as they could. The same mechanism seems to be at work in case of electro anomalies: the artifact will conduct electricity and increase amps of electric current. Moreover, many reports by stalkers indicate that Bubble needs a power source to be functional. This power source is the body itself: the artifact drains vitality and willpower from the user, often on such a scale that it induces dizziness and in extreme cases causes the user to faint. The only other positive aspect to this artifact is the fact that it speeds up healing process and closes up wounds, however it is so potent in this regard that its high price on the market and the demand for it are perfectly justified. WARNING: Because of its organic nature and instability this artifact is well known to spontaneously combust more so than any other organic artifact and for this reason it is advised to abstain from wearing it in the vicinity of a fire or acid anomaly. Very rare artifact."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 42500
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5

@@ -1,0 +1,10 @@
+ITEM.name = "Vault Maintenance Kit"
+ITEM.description = "A Vault Maintenance Kit"
+ITEM.longdesc = "Large kit of various tools designated to test and unlock bank vaults or other cutting edge mechanical locks."
+ITEM.model = "models/kek1ch/box_toolkit_2.mdl"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 50000
+ITEM.busflag = "dev"
+ITEM.securitytype =  "mechanical"
+ITEM.securityquality = 6

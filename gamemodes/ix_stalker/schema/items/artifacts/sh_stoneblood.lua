@@ -1,0 +1,9 @@
+ITEM.name = "Stoneblood"
+ITEM.model ="models/nasca/etherealsrp_artifacts/stoneblood.mdl"
+ITEM.description = "Red and green artifact."
+ITEM.longdesc = "A reddish formation of compressed fossilized plants, soil and animal debris. Can partially neutralize chemical poisons by absorbing them and reducing overall toxicity level in user's bloodstream. Quite widespread and not very effective as it makes chemical burns fester. It will catch fire when exposed to open flame or even spontaneously combust. Another downside to this artifact is that it will increase the negative effects of psy-waves and is a potent conductor. It also drains energy from user's body. Stone blood will, however, speed up wound recovery due to its organic nature. Rare artifact."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 3250
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5

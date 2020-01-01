@@ -1,0 +1,10 @@
+CustomizableWeaponry:addFireSound("CW_SG552_FIRE", "weapons/sg55x/sg552_fire1.wav", 1, 100, CHAN_STATIC)
+CustomizableWeaponry:addFireSound("CW_SG552_FIRE_SUPPRESSED", "weapons/sg55x/sg552_suppressed_fire1.wav", 1, 75, CHAN_STATIC)
+
+CustomizableWeaponry:addReloadSound("CW_SG552_DRAW", "weapons/sg55x/sg550_stock.wav")
+CustomizableWeaponry:addReloadSound("CW_SG552_MAGOUT", "weapons/sg55x/sg550_magout.wav")
+CustomizableWeaponry:addReloadSound("CW_SG552_MAGIN", "weapons/sg55x/sg550_magin.wav")
+CustomizableWeaponry:addReloadSound("CW_SG552_MAGOUT2", "weapons/sg55x/sg550_magout_empty.wav")
+CustomizableWeaponry:addReloadSound("CW_SG552_MAGIN2", "weapons/sg55x/sg550_magin.wav")
+CustomizableWeaponry:addReloadSound("CW_SG552_BOLTBACK", "weapons/sg55x/sg550_boltback.wav")
+CustomizableWeaponry:addReloadSound("CW_SG552_BOLTBACK2", "weapons/sg55x/sg550_boltforward.wav")

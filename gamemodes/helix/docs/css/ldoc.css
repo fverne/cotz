@@ -1,0 +1,424 @@
+
+/* accent: rgb(115, 53, 142) */
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+h1, h2, h3, h4 {
+	font-weight: 400;
+}
+
+ul li {
+	margin-left: 24px;
+}
+
+h1.title {
+	color: rgb(255, 255, 255);
+	background-color: rgb(115, 53, 142);
+	margin: 16px 0 16px 0;
+	padding: 8px;
+
+	font-size: 20px;
+	font-weight: 100;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+code {
+	font-family: "Source Code Pro", monospace;
+	font-size: 85%;
+	white-space: pre;
+	tab-size: 4;
+	padding: 2px 4px;
+	background-color: rgb(33, 33, 33, 0.1);
+}
+
+span.realm {
+	width: 14px;
+	height: 14px;
+	border-radius: 3px;
+	display: inline-block;
+	margin-right: 6px;
+}
+
+span.realm.shared {
+	background: linear-gradient(45deg, #f80 0%, #f80 50%, #08f 51%, #08f 100%);
+}
+
+span.realm.client {
+	background-color: #f80;
+}
+
+span.realm.server {
+	background-color: #08f;
+}
+
+a.reference {
+	color: rgb(115, 53, 142);
+	float: right;
+	margin-top: 8px;
+	padding-left: 8px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.internal::before {
+	content: "This is an internal function! You are able to use it, but you risk unintended side effects if used incorrectly.";
+}
+
+.internal {
+	color: rgb(255, 255, 255);
+	background-color: rgb(237, 54, 96);
+	margin-top: 8px;
+	padding: 8px;
+}
+
+body {
+	display: grid;
+
+	grid-template-areas:
+		"header header"
+		"sidebar content"
+		"footer footer";
+
+	grid-template-columns: 300px 1fr;
+	grid-template-rows: auto 1fr;
+	grid-gap: 0;
+
+	height: 100vh;
+	font-family: Segoe UI, Helvetica, Arial, sans-serif;
+	background-color: rgb(230, 230, 230);
+}
+
+header {
+	grid-area: header;
+}
+
+/* sidebar */
+aside {
+	grid-area: sidebar;
+	background-color: rgb(33, 33, 33);
+	color: rgb(200, 200, 200);
+	padding-bottom: 16px;
+}
+
+aside h1 {
+	color: rgb(255, 255, 255);
+	background-color: rgb(115, 53, 142);
+	padding: 16px;
+	margin-bottom: 12px;
+
+	font-size: 24px;
+	text-align: center;
+}
+
+aside section {
+}
+
+aside section > :not(ul) {
+	padding-left: 16px;
+}
+
+aside section h2 {
+	color: rgb(115, 53, 142);
+	margin: 8px 0 8px 0;
+
+	font-size: 18px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+aside section ul {
+}
+
+aside section ul li {
+	list-style: none;
+	margin: 0;
+	padding: 2px 2px 2px 16px;
+}
+
+aside section ul li:hover {
+	background-color: rgba(115, 53, 142, 0.2);
+}
+
+aside section ul li a {
+	display: block;
+}
+
+/* content */
+article {
+	grid-area: content;
+	padding: 8px;
+	max-width: 800px;
+
+	background-color: rgb(255, 255, 255);
+}
+
+/* header */
+article header {
+	color: rgb(255, 255, 255);
+	background-color: rgb(115, 53, 142);
+	padding: 8px;
+}
+
+article header h1 {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+	padding-bottom: 8px;
+	font-family: "Source Code Pro", monospace;
+	margin: 0;
+}
+
+article header h2 {
+	padding-top: 8px;
+	margin: 0;
+	font-weight: 600;
+	font-size: 16px;
+}
+
+article header.module a {
+	color: white !important;
+	text-decoration: underline;
+}
+
+/* function summary */
+article details {
+	background-color: rgb(230, 230, 230);
+	margin-top: 8px;
+}
+
+article details summary {
+	background-color: rgb(115, 53, 142);
+	color: rgb(255, 255, 255);
+	padding: 8px;
+}
+
+article details .contents {
+	padding: 0 8px 8px 8px;
+	margin: 0;
+}
+
+article details .contents h2 {
+	color: rgb(115, 53, 142);
+	margin: 0;
+	margin: 8px 0 6px 0;
+	font-size: 20px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+article details .contents ul li {
+	font-size: 18px;
+	font-family: "Source Code Pro", monospace;
+	list-style: none;
+	margin: 0;
+}
+
+article details a {
+	color: inherit !important;
+	font-weight: inherit !important;
+}
+
+article h1 {
+	font-size: 28px;
+	font-weight: 600;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+	margin-top: 24px;
+	margin-bottom: 16px;
+	padding-bottom: 8px;
+}
+
+article h2 {
+	font-size: 20px;
+	font-weight: 600;
+	margin-top: 12px;
+}
+
+article h3 {
+	color: rgb(115, 53, 142);
+	margin-top: 12px;
+	text-transform: uppercase;
+}
+
+article p {
+	margin-top: 16px;
+}
+
+article p a,
+article ul li a,
+article h1 a,
+article h2 a {
+	color: rgb(115, 53, 142);
+	font-weight: 600;
+}
+
+article pre {
+	color: rgb(255, 255, 255);
+	background-color: rgb(33, 33, 33);
+	padding: 8px;
+	margin-top: 8px;
+}
+
+article pre code {
+	color: rgb(255, 255, 255);
+	background-color: rgb(33, 33, 33);
+	font-weight: 300;
+}
+
+/* function/table */
+.method {
+	display: flex;
+	flex-flow: column;
+	background-color: rgb(230, 230, 230);
+	padding: 8px;
+	margin-top: 8px;
+}
+
+.method header {
+	color: rgb(0, 0, 0);
+	background-color: inherit;
+	padding: 0;
+	order: -1;
+}
+
+.method header h1 {
+	font-family: "Source Code Pro", monospace;
+	padding-bottom: 8px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+	font-size: 20px;
+}
+
+.method header p:first-of-type {
+	margin-top: 8px;
+}
+
+.method h3 {
+	color: rgb(115, 53, 142);
+	font-size: 16px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+.method aside {
+	position: absolute;
+	left: 1116px;
+	margin-top: -8px;
+	width: calc(100% - 1148px);
+	padding: 16px;
+}
+
+.method aside code {
+	color: rgb(255, 255, 255);
+	background-color: rgb(33, 33, 33);
+	padding: 0;
+	font-size: 16px;
+	font-weight: 300;
+}
+
+@media only screen and (max-width: 1500px)
+{
+	.method aside {
+		position: inherit;
+		left: 0;
+		margin-top: 8px;
+		width: auto;
+		padding: 8px;
+		order: 0;
+	}
+
+	.method aside code {
+		font-size: 14px;
+	}
+}
+
+.method ul {
+	margin-top: 2px;
+	background-color: inherit;
+}
+
+.method ul li {
+	list-style: none;
+	margin: 4px 0 0 32px;
+}
+
+.method ul li p {
+	margin: 4px 0 0 32px;
+}
+
+.method ul li pre {
+	margin: 4px 0 0 32px;
+}
+
+.method ul li a {
+	color: rgb(115, 53, 142);
+	font-weight: 600;
+}
+
+/* we have to manually specify these instead of making a shared class since you cannot customize the parameter class in ldoc */
+.parameter, .type, .default {
+	display: inline-block;
+	color: rgb(255, 255, 255) !important;
+
+	padding: 4px;
+	font-size: 14px;
+	font-family: "Source Code Pro", monospace;
+}
+
+.parameter {
+	background-color: rgb(115, 53, 142);
+}
+
+.type {
+	background-color: rgb(31, 141, 155);
+}
+
+a.type {
+	font-weight: 300 !important;
+	text-decoration: underline;
+}
+
+.default {
+	background-color: rgb(193, 114, 11);
+}
+
+.type a {
+	padding: 0;
+}
+
+.or {
+	color: rgba(115, 53, 142, 0.5);
+	background-color: inherit;
+
+	width: calc(100% - 32px);
+	height: 8px;
+	margin: 0 0 8px 32px;
+
+	text-align: center;
+	font-weight: 600;
+	border-bottom: 1px solid rgba(115, 53, 142, 0.5);
+}
+
+.or span {
+	background-color: inherit;
+	padding: 0 8px 0 8px;
+}
+
+/* footer */
+footer {
+	grid-area: footer;
+	color: rgb(180, 180, 180);
+	background-color: rgb(66, 66, 66);
+
+	padding: 8px;
+	text-align: center;
+}
+
+footer .timestamp {
+	font-family: "Source Code Pro", monospace;
+}

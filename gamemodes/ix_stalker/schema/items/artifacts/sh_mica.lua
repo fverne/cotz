@@ -1,0 +1,9 @@
+ITEM.name = "Mica"
+ITEM.model ="models/nasca/etherealsrp_artifacts/mica.mdl"
+ITEM.description = "Brown artifact."
+ITEM.longdesc = "A semi-transparent, hard object. A very rare artifact."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 34500
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5

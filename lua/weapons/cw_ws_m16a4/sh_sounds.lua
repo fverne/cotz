@@ -1,0 +1,10 @@
+CustomizableWeaponry:addFireSound("CW_WS_M16A4_FIRE", "weapons/WS_M16A4/famas-1.wav", 1, 105, CHAN_STATIC)
+CustomizableWeaponry:addFireSound("CW_WS_M16A4_FIRE_SUPPRESSED", "weapons/WS_M16A4/m4a1-1.wav", 1, 75, CHAN_STATIC)
+
+CustomizableWeaponry:addReloadSound("CW_WS_M16A4_DRAW", "weapons/WS_M16A4/famas_cloth.wav")
+CustomizableWeaponry:addReloadSound("CW_WS_M16A4_MAGOUT", "weapons/WS_M16A4/famas_clipout.wav")
+CustomizableWeaponry:addReloadSound("CW_WS_M16A4_MAGIN", "weapons/WS_M16A4/famas_clipin.wav")
+CustomizableWeaponry:addReloadSound("CW_WS_M16A4_MAGOUT2", "weapons/WS_M16A4/famas_clipout1.wav")
+CustomizableWeaponry:addReloadSound("CW_WS_M16A4_MAGIN2", "weapons/WS_M16A4/famas_clipin1.wav")
+CustomizableWeaponry:addReloadSound("CW_WS_M16A4_BOLTBACK", "weapons/WS_M16A4/famas_forearm.wav")
+CustomizableWeaponry:addReloadSound("CW_WS_M16A4_BOLTBACK2", "weapons/WS_M16A4/famas_forearm1.wav")

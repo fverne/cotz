@@ -1,0 +1,9 @@
+ITEM.name = "Meatchunk"
+ITEM.model ="models/nasca/etherealsrp_artifacts/meatchunk.mdl"
+ITEM.description = "Looks like flayed skin. Artifact."
+ITEM.longdesc = "This artifact has soft, porous, skin-like texture and is said to be able to compress. It resembles and acts like a sponge in this regard, but reveals its special characteristics only when exposed to certain external conditions. Firstly, when in the closest proximity of heat source it emits odor of burning flesh. Prolonged exposure may enhance its flammability and cause it to ignite. While this phenomenon leaves the artifact undamaged, it can cause objects in its vicinity to heat up and in extreme cases to ignite along with the artifact. For this reason, it is safe to conclude that it absorbs heat and is able to convey it to other objects. Secondly, to carry the sponge metaphor further, the pores on its surface are known to absorb small amounts of toxicity from environment. Thirdly, the artifact slightly amplifies the damaging effects of psy-fields to living organisms by absorbing psy energy and emitting it at a small rate. Fourthly, Meat Chunk is also known to be a conductor of electricity much like the skin of a living creature. Certain sources within stalker community indicate further that it makes one feel physically drained when used for even short periods of time. Fifthly, probably the most beneficial feature of this artifact is its ability to slowly close up wounds and heal damaged tissues. Rare artifact."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 18000
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5

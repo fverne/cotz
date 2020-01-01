@@ -1,0 +1,9 @@
+ITEM.name = "Goldfish"
+ITEM.model ="models/nasca/etherealsrp_artifacts/goldfish.mdl"
+ITEM.description = "Golden, beautiful artifact."
+ITEM.longdesc = "Direct successor to and a superior version of Gravi artifact. As was the case with Gravi, it was scientist Sakharov at Yantar who discovered its unique properties after a massive blowout/emission hit the Zone. Thanks to meticulous research that followed, it was established that this new artifact is produced when three Gravi artifacts interact and get sucked into one another's singularity fields. This phenomenon is extremely rare, due to which the artifact is highly valued. It is rumored within Ukrainian Spetsnaz circles that in the Zone there are agents from the Ministry of Defense of the Russian Federation whose sole objective is acquiring and transporting Goldfish to specialized laboratories located outside of the Zone. The artifact creates a constant gravitational singularity field which affects only its closest vicinity. However, some stalkers have been known to disappear for no apparent reason leaving only a Goldfish behind. The artifact provides exceptional thermal and acid protection. Furthermore, it also forms a protective and almost greasy film around its user which has qualities of strong fire retardant and also protects the user against acid by breaking down elements comprising acids into simpler substances. It is extremely heavy and it is not recommended to use it on long excursions into the Zone, especially for extended periods of time."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 45000
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5

@@ -1,0 +1,10 @@
+ITEM.name = "Hacking PDA"
+ITEM.description = "A Hacking PDA"
+ITEM.longdesc = "A PDA running OS with hacking software pre-installed, allows a trained hacker to attack targets with commercial security."
+ITEM.model = "models/kek1ch/dev_pda.mdl"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 4000
+ITEM.busflag = "dev"
+ITEM.securitytype =  "computers"
+ITEM.securityquality = 3
