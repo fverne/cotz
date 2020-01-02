@@ -9,6 +9,13 @@ ITEM.price = 7350
 ITEM.height = 1
 ITEM.busflag = {"guns6"}
 ITEM.repairCost = ITEM.price/100*1
+ITEM.Range = 30
+ITEM.RoF = "S/-/-"
+ITEM.Dmg = "1d10+3"
+ITEM.Pen = 10
+ITEM.Mag = 5
+ITEM.Rld = "Ready"
+ITEM.Special = "Short"
 
 ITEM.canAttach = false
 ITEM.iconCam = {

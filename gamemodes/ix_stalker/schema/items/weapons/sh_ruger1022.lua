@@ -10,6 +10,13 @@ ITEM.height = 2
 ITEM.busflag = {"guns"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_nightforce_nxs","md_reflex","md_tundra9mm"}
+ITEM.Range = 30
+ITEM.RoF = "S/-/-"
+ITEM.Dmg = "1d10+1"
+ITEM.Pen = 4
+ITEM.Mag = 10
+ITEM.Rld = "Ready"
+ITEM.Special = "Short, Subsonic"
 
 ITEM.exRender = true
 ITEM.iconCam = {

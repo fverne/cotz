@@ -99,12 +99,12 @@ PLUGIN.mapdata["arp_thecordon_ep6"].loadzones["togarbage"] = {
 	desc = "The area head leads into the cordon, in the military outpost."
 }
 
-PLUGIN.mapdata["arp_raspad_ep4"] = {}
-PLUGIN.mapdata["arp_raspad_ep4"].name = "Garbage"
-PLUGIN.mapdata["arp_raspad_ep4"].serverip = "159.69.226.141:27015"
-PLUGIN.mapdata["arp_raspad_ep4"].loadzones = PLUGIN.mapdata["arp_raspad_ep4"].loadzones or {}
+PLUGIN.mapdata["arp_raspad_ep4_1"] = {}
+PLUGIN.mapdata["arp_raspad_ep4_1"].name = "Garbage"
+PLUGIN.mapdata["arp_raspad_ep4_1"].serverip = "159.69.226.141:27015"
+PLUGIN.mapdata["arp_raspad_ep4_1"].loadzones = PLUGIN.mapdata["arp_raspad_ep4_1"].loadzones or {}
 
-PLUGIN.mapdata["arp_raspad_ep4"].loadzones["tocordon"] = {
+PLUGIN.mapdata["arp_raspad_ep4_1"].loadzones["tocordon"] = {
 	pos = Vector(2063.370117, -12300.505859, 77.249298), --edit me
 	ang = Angle(3.793991, 25.192659, 0.000000), --edit me
 	desc = "The area ahead leads into garbage."

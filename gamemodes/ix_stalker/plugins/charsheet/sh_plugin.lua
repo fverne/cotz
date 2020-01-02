@@ -271,7 +271,7 @@ ix.char.RegisterVar("backstory", {
 	OnPostSetup = function(self, panel, payload)
 		panel:SetMultiline(true)
 		panel:SetFont("ixMenuButtonFont")
-		panel:SetTall(panel:GetTall() * 8 + 6) -- add another line
+		panel:SetTall(panel:GetTall() * 6 + 6) -- add another line
 		panel.AllowInput = function(_, character)
 			if (character == "\n" or character == "\r") then
 				return true

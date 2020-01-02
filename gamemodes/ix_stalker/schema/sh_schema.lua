@@ -34,7 +34,6 @@ ix.util.Include("meta/sh_player.lua")
 ix.flag.Add("1", "Trader.")
 ix.flag.Add("A", "Admin")
 ix.flag.Add("N", "Event/Customization")
-ix.flag.Add("P", "PAC Access")
 
 ALWAYS_RAISED["weapon_flashlight"] = true
 ALWAYS_RAISED["stalker_bolt"] = true

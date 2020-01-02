@@ -9,3 +9,5 @@ ITEM.longdesc = "Birdshot 12 gauge shell filled with 3 mm shot. Highly lethal at
 ITEM.price = 650
 ITEM.busflag = {"ammo"}
 ITEM.img = Material("vgui/hud/12gauge.png")
+ITEM.Range = -10
+ITEM.Pen = -2

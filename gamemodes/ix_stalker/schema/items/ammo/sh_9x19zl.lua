@@ -6,3 +6,6 @@ ITEM.description= "A box that contains %s rounds of zone-loaded 9x19mm ammo. "
 ITEM.longdesc = "This basic 9x19 caliber round with a jacketed bullet has good characteristics while being simple to produce. The round is popular due to the fact that international conventions prohibit the use of expanding ammunition in combat. "
 ITEM.price = 750
 ITEM.img = Material("vgui/hud/9x19zl.png")
+ITEM.Range = "x0.5"
+ITEM.Dmg = -1
+ITEM.Pen = -2
