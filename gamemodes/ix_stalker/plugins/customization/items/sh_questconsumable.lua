@@ -1,4 +1,4 @@
-ITEM.name = "Quest Item"
+ITEM.name = "Quest Item (Consumable)"
 ITEM.model = "models/props_lab/box01a.mdl"
 ITEM.width = 1
 ITEM.height = 1

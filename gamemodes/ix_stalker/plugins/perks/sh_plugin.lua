@@ -104,7 +104,7 @@ ix.char.RegisterVar("perks", {
 				total = total + difference
 				payload.perks[k] = payload.perks[k] + difference
 
-				totalBar:SetValue(totalBar.value - difference)
+				totalBar:SetValue(totalBar:GetValue() - difference)
 			end
 
 			if (v.noStartBonus) then

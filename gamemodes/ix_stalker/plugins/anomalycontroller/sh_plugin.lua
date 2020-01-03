@@ -172,7 +172,7 @@ ix.command.Add("anomalyadd", {
 		local trace = client:GetEyeTraceNoCursor()
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local radius = radius or 128
-		local anomalies = anomalies or 11111
+		local anomalies = anomalies or 1111111111111111111
 		if (!radius or !isnumber(radius) or radius < 0) then
 			return "@invalidArg", 2
 		end

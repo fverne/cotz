@@ -58,6 +58,9 @@ do
 
 		ix.command.Add("loadzoneremove", {
 			superAdminOnly = true,
+			arguments = {
+				ix.type.string,
+			},
 			OnRun = function(self, client, range)
 				local trace = client:GetEyeTraceNoCursor()
 				local hitpos = trace.HitPos + trace.HitNormal*5

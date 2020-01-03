@@ -443,7 +443,7 @@ do
   tempQuest.name = "%d zombies."
   tempQuest.desc = "%d zombies."
   tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
+  tempQuest.tier = 2
   tempQuest.listenTrigger = "zombieKilled"
   tempQuest.numberRec = {5,10}
   tempQuest.reward = {{"kit_quest1"}}
@@ -459,7 +459,7 @@ do
   tempQuest.name = "%d zombies."
   tempQuest.desc = "%d zombies."
   tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
+  tempQuest.tier = 2
   tempQuest.listenTrigger = "zombieKilled"
   tempQuest.numberRec = {10,15}
   tempQuest.reward = {{"kit_quest2"}}
@@ -511,7 +511,7 @@ do
   tempQuest.name = "%d bloodsuckers."
   tempQuest.desc = "%d bloodsuckers."
   tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
+  tempQuest.tier = 2
   tempQuest.listenTrigger = "bloodsuckerKilled"
   tempQuest.numberRec = {1,3}
   tempQuest.reward = {{"kit_quest2"}}

@@ -501,7 +501,6 @@ PLUGIN.eventdefs["hoverstones1"] = {
 	loot = {
 		{"jellyfish", 1},
 		{"droplet", 1},
-		{"stoneblood", 1},
 	},
 	pdabroadcast = "Hoverstones has been spotted %s, don't bump your head walking into one.",
 	difficulty = {0, 1},
@@ -516,7 +515,6 @@ PLUGIN.eventdefs["hoverstones2"] = {
 	loot = {
 		{"jellyfish", 1},
 		{"droplet", 1},
-		{"stoneblood", 1},
 	},
 	pdabroadcast = "Hoverstones has been spotted %s, don't bump your head walking into one.",
 	difficulty = {0, 1},
@@ -532,7 +530,6 @@ PLUGIN.eventdefs["hoverstones3"] = {
 	loot = {
 		{"jellyfish", 1},
 		{"droplet", 1},
-		{"stoneblood", 1},
 	},
 	pdabroadcast = "Hoverstones has been spotted %s, don't bump your head walking into one.",
 	difficulty = {0, 1},

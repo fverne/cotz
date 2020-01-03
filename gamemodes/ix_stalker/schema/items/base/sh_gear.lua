@@ -554,24 +554,16 @@ end
 function ITEM:pacAdjust(pacdata, client)
 	
 	if (client:GetModel() == "models/nasca/stalker/male_berill1.mdl") then
-		print(client:GetModel())
-		client:Notify("berill1")
     	return self.pacDataBerill1
 	elseif (client:GetModel() == "models/nasca/stalker/male_expedition.mdl") then
-    	print(client:GetModel())
-	  	client:Notify("expedition")
 	   	return self.pacDataExpedition
 	elseif (client:GetModel() == "models/nasca/stalker/male_nbc_lone.mdl" or client:GetModel() == "models/nasca/stalker/male_nbc_mono.mdl" or client:GetModel() == "models/nasca/stalker/male_nbc_free.mdl" or client:GetModel() == "models/nasca/stalker/male_nbc_duty.mdl") then
-    	print(client:GetModel())
-	  	client:Notify("nbc")
 	   	return self.pacDataNBC
     /*elseif (client:GetModel() == "models/nasca/stalker/male_eagle_lone.mdl" or client:GetModel() == "models/nasca/stalker/male_eagle_bandit.mdl" or client:GetModel() == "models/nasca/stalker/male_eagle_duty.mdl" or client:GetModel() == "models/nasca/stalker/male_eagle_free.mdl" or client:GetModel() == "models/nasca/stalker/male_eagle_merc.mdl") then
     	print(client:GetModel())
     	client:Notify("eagle")
     	return self.pacDataEagle*/
     else
-    	print(client:GetModel())
-    	client:Notify("generic")
     	return self.pacData
 	end
 end

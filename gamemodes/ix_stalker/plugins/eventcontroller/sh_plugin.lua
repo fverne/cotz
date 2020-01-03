@@ -97,7 +97,7 @@ if SERVER then
 			if spawn.entities then
 				for k = 1, #spawn.entities do
 					for i = 1, spawn.entities[k][2] do
-						local position = eventpoint[1] + Vector( math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), 32 )
+						local position = eventpoint[1] + Vector( math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), 64 )
 						local data = {}
 						data.start = position
 						data.endpos = position

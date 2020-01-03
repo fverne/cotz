@@ -7,7 +7,7 @@ ITEM.weaponCategory = "primary"
 ITEM.width = 4
 ITEM.height = 2
 --ITEM.busflag = "ARMS2_3_1"
-ITEM.Price = 100000 -- someone decide a price other than "special" plz thx
+ITEM.price = 100000 -- someone decide a price other than "special" plz thx
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip"}
 ITEM.iconCam = {
@@ -20,7 +20,7 @@ ITEM.RoF = "S/3/6"
 ITEM.Dmg = "1d10+3"
 ITEM.Pen = 12
 ITEM.Mag = 30
-Item.Rld = "Ready"
+ITEM.Rld = "Ready"
 
 ITEM.pacData = {
 [1] = {
