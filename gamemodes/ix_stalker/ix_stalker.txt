@@ -1,8 +1,7 @@
-
-"skeleton"
+"stalker"
 {
 	"base" 			"helix"
 	"title" 		"IX: STALKER"
-	"author" 		"nebulous"
+	"author" 		"verne"
 	"menusystem"	"1"
 }
