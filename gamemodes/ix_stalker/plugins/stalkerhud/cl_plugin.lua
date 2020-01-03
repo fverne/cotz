@@ -76,7 +76,7 @@ local function cursorThink()
 	end
 end; 
 
-hook.Add("DrawOverlay", "Draw_Cursor_Function_FGSHAR", cursorDraw)
+hook.Add("PostRenderVGUI", "Draw_Cursor_Function_FGSHAR", cursorDraw) -- PostRenderVGUI makes our custom cursor be drawn after the UI elements, this will make it work properly.
 hook.Add("Think", "Cursor_Think_Function_FGSHAR", cursorThink)
 
 function PLUGIN:HUDPaint()
