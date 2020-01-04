@@ -6,3 +6,4 @@ ITEM.description= "A box that contains %s rounds of zone-loaded 9x18mm ammo."
 ITEM.longdesc = "This 9x18mm round contains full metal jacket rounds with a steel penetrator and a lead core under a metal jacket."
 ITEM.price = 600
 ITEM.img = Material("vgui/hud/9x18zl.png")
+ITEM.Range = "x0.5"

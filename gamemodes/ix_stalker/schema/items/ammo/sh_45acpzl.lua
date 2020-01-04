@@ -7,3 +7,6 @@ ITEM.longdesc = "The .45 caliber full metal jacket round has enjoyed popularity 
 ITEM.price = 950
 ITEM.width = 2
 ITEM.img = Material("vgui/hud/45acpzl.png")
+ITEM.Range = "x0.5"
+ITEM.Dmg = -1
+ITEM.Pen = -2

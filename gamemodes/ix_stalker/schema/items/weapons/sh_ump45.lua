@@ -10,6 +10,13 @@ ITEM.height = 2
 --ITEM.busflag = "ARMS1_1_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_cobram2"}
+ITEM.Range = 50
+ITEM.RoF = "S/3/6"
+ITEM.Dmg = "1d10+4"
+ITEM.Pen = 6
+ITEM.Mag = 25
+ITEM.Rld = "Ready"
+ITEM.Special = "Subsonic, Short"
 
 ITEM.iconCam = {
 	pos = Vector(2, 22, 4),

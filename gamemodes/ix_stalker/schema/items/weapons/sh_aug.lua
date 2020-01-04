@@ -5,7 +5,7 @@ ITEM.model = "models/weapons/w_rif_aug.mdl"
 ITEM.class = "cw_aug"
 ITEM.weaponCategory = "primary"
 ITEM.width = 3
-ITEM.price = 28500
+ITEM.price = 50000
 ITEM.height = 2
 --ITEM.busflag = "ARMS1_3_1"
 ITEM.repairCost = ITEM.price/100*1
@@ -16,6 +16,13 @@ ITEM.iconCam = {
 	ang = Angle(0, 270, 0),
 	fov = 70
 }
+ITEM.Range = 100
+ITEM.RoF = "S/3/6"
+ITEM.Dmg = "1d10+3"
+ITEM.Pen = 12
+ITEM.Mag = 30
+ITEM.Rld = "Ready"
+ITEM.Special = "Short"
 
 ITEM.pacData = {
 [1] = {

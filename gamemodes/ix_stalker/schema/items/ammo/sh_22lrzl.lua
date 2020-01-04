@@ -6,3 +6,6 @@ ITEM.description= "A box that contains %s rounds of zone-loaded .22LR ammo. "
 ITEM.longdesc = "This small .22LR round is primarily used for pest control, but also sports shooting and entry-level shooting."
 ITEM.price = 450
 ITEM.img = Material("vgui/hud/22lrzl.png")
+ITEM.Range = "x0.5"
+ITEM.Dmg = -1
+ITEM.Pen = -2

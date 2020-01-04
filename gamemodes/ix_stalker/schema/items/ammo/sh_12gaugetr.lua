@@ -9,3 +9,4 @@ ITEM.longdesc = "Tri-Ball 12 gauge shell filled with %s mm shot. This round fire
 ITEM.price = 750
 --ITEM.busflag = "SPECIAL8_1"
 ITEM.img = Material("vgui/hud/12gauge.png")
+ITEM.Dmg = 3
