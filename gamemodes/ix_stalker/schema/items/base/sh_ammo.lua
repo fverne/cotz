@@ -8,6 +8,7 @@ ITEM.loadSize = {1,5,15, ITEM.ammoAmount}
 ITEM.description = "A box with %s rounds of ammunition."
 ITEM.category = "Ammunition"
 ITEM.busflag = {"dev"}
+ITEM.isAmmo = true
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", self.ammoAmount)
@@ -126,52 +127,6 @@ if (CLIENT) then
 	end
 end
 
-ITEM.functions.use = {
-    name = "Load",
-    tip = "useTip",
-    icon = "icon16/stalker/load.png",
-    isMulti = true,
-    OnCanRun = function(item)				
-		return (!IsValid(item.entity))
-	end,
-	multiOptions = function(item, client)
-		local targets = {}
-        local quantity = item:GetData("quantity", item.ammoAmount)
-		
-        for i=1,#item.loadSize do
-			if quantity >= item.loadSize[i] then
-				table.insert(targets, {
-					name = item.loadSize[i].." rounds",
-					data = {item.loadSize[i]},
-				})
-			end
-		end
-		table.insert(targets, {
-			name = quantity.." rounds",
-			data = {quantity},
-		})
-        return targets
-	end,
-    OnRun = function(item, data)
-		if !data[1] then
-			return false
-		end
-
-		local quantity = item:GetData("quantity", item.ammoAmount)
-		item.player:GiveAmmo(data[1], item.ammo, true)
-		item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
-		
-		quantity = quantity - data[1]
-
-		if (quantity >= 1) then
-			item:SetData("quantity", quantity)
-			return false
-		end
-		
-		return true
-	end,
-}
-
 ITEM.functions.split = {
     name = "Split",
     tip = "useTip",
@@ -248,4 +203,12 @@ function ITEM:OnRegistered()
 	if (ix.ammo) then
 		ix.ammo.Register(self.ammo)
 	end
+end
+
+function ITEM:OnInstanced()
+	timer.Simple(0.5,function()
+		if self:GetData("quantity",0) == 0 then
+			self:SetData("quantity",self.ammoAmount)
+		end
+	end)
 end

@@ -78,8 +78,9 @@ function SWEP:GetTracerOrigin()
 	if self.dt.State == CW_AIMING and self.SimulateCenterMuzzle then
 		return self.CenterPos
 	end
-	
-	return self:getMuzzlePosition().Pos
+	if self:getMuzzlePosition() then
+		return self:getMuzzlePosition().Pos
+	end
 end
 
 function SWEP:FireAnimationEvent(pos, ang, event, name)

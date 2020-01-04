@@ -1012,12 +1012,19 @@ local mag, ammo
 
 local IFTP
 local wl, ws
+local delay = 0
 
 function SWEP:Think()
 	-- in vehicle? can't do anything, also prevent needless calculations of stuff
 	if self.Owner:InVehicle() and not self.Owner:GetAllowWeaponsInVehicle() then
 		self.dt.State = CW_ACTION
 		return
+	end
+	
+	if delay < CurTime() then
+		delay = CurTime() + 0.5
+		local client = self.Owner
+		hook.Run("AmmoCheck",client,self)
 	end
 	
 	CustomizableWeaponry.actionSequence.process(self)
@@ -1596,7 +1603,7 @@ function SWEP:PrimaryAttack()
 	end
 	
 	self.ReloadWait = CT + (self.WaitForReloadAfterFiring and self.WaitForReloadAfterFiring or self.FireDelay)
-	
+	hook.Run("WeaponFired", self.Owner)
 	self:postPrimaryAttack()
 	CustomizableWeaponry.callbacks.processCategory(self, "postConsumeAmmo")
 	
