@@ -5,61 +5,6 @@ PLUGIN.desc = "Compatible with bad air and localized damage, plus it adds damage
 
 ix.util.Include("cl_plugin.lua")
 
-function PLUGIN:EntityTakeDamage( target, dmginfo )
-    -- Bullet resistance
-	if ( target:IsPlayer() and dmginfo:IsDamageType(DMG_BULLET)) then
-		local damage = dmginfo:GetDamage()
-		local perRes = target:GetNWFloat("ixperbulletres")
-		local flatRes = target:GetNWInt("ixflatbulletres")
-		local suitDuraDmg = damage / 100
-		local suit = target:getEquippedBodyArmor()
-		
-		if suit != nil then
-			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitDuraDmg, 0, 100))
-		end
-
-		damage = damage * (1-perRes)
-		damage = damage - flatRes
-
-		dmginfo:SetDamage(damage)
-		
-	end
-	
-	--Anomaly resistance
-	local anomtypes = {}
-	anomtypes[DMG_SHOCK] = true
-	anomtypes[DMG_BURN] = true
-	anomtypes[DMG_ACID] = true
-	anomtypes[DMG_BLAST] = true
-	anomtypes[DMG_SONIC] = true
-	anomtypes[DMG_DROWN] = true
-	anomtypes[DMG_POISON] = true
-	anomtypes[DMG_NERVEGAS] = true
-	anomtypes[DMG_SLOWBURN] = true
-	anomtypes[DMG_AIRBOAT] = true
-	anomtypes[DMG_GENERIC] = true
-
-
-
-
-	if ( target:IsPlayer() and anomtypes[dmginfo:GetDamageType()]) then
-		local damage = dmginfo:GetDamage()
-		local perRes = target:GetNWFloat("ixperanomres")
-		local flatRes = target:GetNWInt("ixflatanomres")
-		local suitDuraDmg = damage / 50
-		local suit = target:getEquippedBodyArmor()
-		
-		if suit != nil then
-			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitDuraDmg, 0, 100))
-		end
-			
-		damage = damage * (1-perRes)
-		damage = damage - flatRes
-
-		dmginfo:SetDamage(damage)
-	end
-end
-
 local playerMeta = FindMetaTable("Player")
 
 function playerMeta:getPercentageBulletRes()

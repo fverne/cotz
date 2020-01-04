@@ -49,7 +49,7 @@ function ENT:PhysicsCollide(data, physobj)
 	end
 	
 	if CurTime() > self.ArmTime then
-		util.BlastDamage(self:GetOwner(), self:GetOwner(), self:GetPos(), self.BlastRadius, self.BlastDamage)
+		util.BlastDamage(self, self:GetOwner(), self:GetPos(), self.BlastRadius, self.BlastDamage)
 		local ef = EffectData()
 		ef:SetOrigin(self:GetPos())
 		ef:SetMagnitude(1)

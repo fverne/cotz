@@ -20,7 +20,16 @@ ITEM.maxAgi = 30
 ITEM.Special = {"Heavy"}
 ITEM.img = Material("vgui/hud/cs2.png")
 ITEM.noBusiness = true
-
+ITEM.res = {
+	["Bullet"] = 0.34,
+	["Blast"] = 0.17,
+	["Fall"] = 0.0,
+	["Burn"] = 0.2,
+	["Radiation"] = 0.2,
+	["Chemical"] = 0.2,
+	["Shock"] = 0.2,
+	["Psi"] = 0,
+}
 
 
 ITEM.newSkin = 0

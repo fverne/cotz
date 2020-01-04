@@ -957,12 +957,24 @@ function SWEP:getBaseCone()
 	local finalSpread = nil
 	
 	if self.dt.State == CW_AIMING then
-		finalSpread = self.AimSpread * (aimSpreadMod or 1) + self.HealthEffect - (self.HealthEffect * (self:GetWeaponHP()/100))
+		if self.HealthEffect then
+			finalSpread = self.AimSpread * (aimSpreadMod or 1) + self.HealthEffect - (self.HealthEffect * (self:GetWeaponHP()/100))
+		else
+			finalSpread = self.AimSpread * (aimSpreadMod or 1)
+		end
 	else
 		if self.dt.BipodDeployed then
-			finalSpread = self:getBipodHipSpread() * (aimSpreadMod or 1) + self.HealthEffect - (self.HealthEffect * (self:GetWeaponHP()/100))
+			if self.HealthEffect then
+				finalSpread = self:getBipodHipSpread() * (aimSpreadMod or 1) + self.HealthEffect - (self.HealthEffect * (self:GetWeaponHP()/100))
+			else
+				finalSpread = self:getBipodHipSpread() * (aimSpreadMod or 1)
+			end
 		else
-			finalSpread = self.HipSpread * (hipSpreadMod or 1) + self.HealthEffect - (self.HealthEffect * (self:GetWeaponHP()/100))
+			if self.HealthEffect then
+				finalSpread = self.HipSpread * (hipSpreadMod or 1) + self.HealthEffect - (self.HealthEffect * (self:GetWeaponHP()/100))
+			else
+				finalSpread = self.HipSpread * (hipSpreadMod or 1)
+			end
 		end
 	end
 	

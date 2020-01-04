@@ -4,11 +4,12 @@ include("shared.lua")
 
 ENT.ExplodeRadius = 384
 ENT.ExplodeDamage = 100
+ENT.Model = "models/weapons/w_eq_smokegrenade_thrown.mdl"
 
 local phys, ef
 
 function ENT:Initialize()
-	self:SetModel("models/weapons/w_eq_smokegrenade_thrown.mdl") 
+	self:SetModel(self.Model) 
 	self:PhysicsInit(SOLID_VPHYSICS)
 	self:SetMoveType(MOVETYPE_VPHYSICS)
 	self:SetSolid(SOLID_VPHYSICS)

@@ -18,7 +18,16 @@ ITEM.anomalousrpglevels = {"2","2","2","2","2"}
 ITEM.artifactcontainers = {"0"}
 ITEM.Special = {"Light"}
 ITEM.img = Material("vgui/hud/trenchcoat.png")
-
+ITEM.res = {
+	["Bullet"] = 0.02,
+	["Blast"] = 0.01,
+	["Fall"] = 0.02,
+	["Burn"] = 0.02,
+	["Radiation"] = 0.02,
+	["Chemical"] = 0.02,
+	["Shock"] = 0.02,
+	["Psi"] = 0,
+}
 
 ITEM.newSkin = 0
 ITEM.bodyGroups = {

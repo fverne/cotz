@@ -37,6 +37,7 @@ include("cw/shared/cw_interactionmenuhandler.lua")
 include("cw/shared/cw_cmodel_management.lua")
 include("cw/shared/cw_sight_position_adjustment.lua")
 include("cw/shared/cw_firemodes.lua")
+include("cw/shared/cw_physical_bullets.lua")
 
 if SERVER then
 	-- load server files

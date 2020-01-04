@@ -283,7 +283,7 @@ function PANEL:Init()
 	self:ShowCloseButton(false)
 	self:SetDraggable(true)
 	self:SetSizable(true)
-	self:SetTitle(L"inv")
+	self:SetTitle("Inventory")
 	self:Receiver(RECEIVER_NAME, self.ReceiveDrop)
 
 	self.btnMinim:SetVisible(false)
@@ -299,20 +299,12 @@ function PANEL:GetPadding(index)
 end
 
 function PANEL:SetTitle(text)
-	if (text == nil) then
-		self.oldPadding = {self:GetDockPadding()}
-
+	if (text == "") then
 		self.lblTitle:SetText("")
 		self.lblTitle:SetVisible(false)
-
-		self:DockPadding(5, 5, 5, 5)
 	else
-		if (self.oldPadding) then
-			self:DockPadding(unpack(self.oldPadding))
-			self.oldPadding = nil
-		end
-
-		BaseClass.SetTitle(self, text)
+		self.lblTitle:SetVisible(true)
+		self.lblTitle:SetText(text)
 	end
 end
 

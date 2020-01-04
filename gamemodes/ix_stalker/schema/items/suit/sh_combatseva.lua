@@ -24,7 +24,16 @@ ITEM.Special = {"Psy+20","CC","Heavy"}
 ITEM.maxAgi = 30
 ITEM.img = Material("vgui/hud/seva.png")
 ITEM.noBusiness = true
-
+ITEM.res = {
+	["Bullet"] = 0.28,
+	["Blast"] = 0.14,
+	["Fall"] = 0.15,
+	["Burn"] = 0.30,
+	["Radiation"] = 0.30,
+	["Chemical"] = 0.30,
+	["Shock"] = 0.30,
+	["Psi"] = 0,
+}
 
 ITEM.newSkin = 0
 ITEM.bodyGroups = {

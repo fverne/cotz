@@ -18,6 +18,16 @@ ITEM.anomalousrpglevels = {"5","15","15","15","15"}
 ITEM.artifactcontainers = {"1"}
 ITEM.maxAgi = 50
 ITEM.img = Material("vgui/hud/io7a.png")
+ITEM.res = {
+	["Bullet"] = 0.18,
+	["Blast"] = 0.09,
+	["Fall"] = 0.05,
+	["Burn"] = 0.15,
+	["Radiation"] = 0.15,
+	["Chemical"] = 0.15,
+	["Shock"] = 0.15,
+	["Psi"] = 0,
+}
 
 ITEM.newSkin = 0
 ITEM.bodygroup = {0}

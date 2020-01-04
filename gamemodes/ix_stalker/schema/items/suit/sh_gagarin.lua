@@ -20,6 +20,16 @@ ITEM.Special = {"Psy+20","CC","Heavy"}
 ITEM.maxAgi = 30
 ITEM.img = Material("vgui/hud/berill7.png")
 ITEM.noBusiness = true
+ITEM.res = {
+	["Bullet"] = 0.28,
+	["Blast"] = 0.14,
+	["Fall"] = 0.15,
+	["Burn"] = 0.10,
+	["Radiation"] = 0.10,
+	["Chemical"] = 0.10,
+	["Shock"] = 0.10,
+	["Psi"] = 0,
+}
 
 ITEM.newSkin = 0
 ITEM.bodygroup = {0}

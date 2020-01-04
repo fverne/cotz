@@ -5,11 +5,12 @@ include("shared.lua")
 ENT.MaxIntensityDistance = 384 -- if an entity is THIS close to the grenade upon explosion, the intensity of the flashbang will be maximum
 ENT.FlashDistance = 1024 -- will decay over this much distance
 ENT.FlashDuration = 2
+ENT.Model = "models/weapons/w_eq_flashbang_thrown.mdl"
 
 local phys, ef
 
 function ENT:Initialize()
-	self:SetModel("models/weapons/w_eq_flashbang_thrown.mdl") 
+	self:SetModel(self.Model) 
 	self:PhysicsInit(SOLID_VPHYSICS)
 	self:SetMoveType(MOVETYPE_VPHYSICS)
 	self:SetSolid(SOLID_VPHYSICS)

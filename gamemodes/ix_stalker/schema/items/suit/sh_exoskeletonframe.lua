@@ -20,7 +20,16 @@ ITEM.Special = {"Heavy","Bracing"}
 ITEM.maxAgi = 20
 ITEM.img = Material("vgui/hud/radsuit.png")
 ITEM.noBusiness = true
-
+ITEM.res = {
+	["Bullet"] = 0.0,
+	["Blast"] = 0.0,
+	["Fall"] = 0.0,
+	["Burn"] = 0.0,
+	["Radiation"] = 0.0,
+	["Chemical"] = 0.0,
+	["Shock"] = 0.0,
+	["Psi"] = 0,
+}
 
 ITEM.newSkin = 0
 ITEM.bodyGroups = {

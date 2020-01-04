@@ -4,6 +4,7 @@ ENT.PrintName = "Dropped CW 2.0 weapon"
 ENT.Author = "Spy"
 ENT.Spawnable = false
 ENT.AdminSpawnable = false
+ENT.pickupDotProduct = 0.98 -- closer to 1 - need to look in a more general direction towards the weapon
 ENT.giveAttachmentsOnPickup = true -- whether the player should be given the attachments that are attached on the weapon upon pickup (if he is not given them, then upon pickup, the attachments the player does not have will not be attached)
 
 function ENT:SetupDataTables()

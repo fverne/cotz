@@ -5,7 +5,7 @@ CustomizableWeaponry.reloadSoundVolume = 60
 
 -- default settings
 CustomizableWeaponry.reloadSoundTable = {
-	channel = CHAN_AUTO, 
+	channel = CHAN_WEAPON, 
 	volume = 1,
 	level = CustomizableWeaponry.reloadSoundVolume, 
 	pitchstart = 100,
@@ -15,7 +15,7 @@ CustomizableWeaponry.reloadSoundTable = {
 	}
 	
 CustomizableWeaponry.fireSoundTable = {
-	channel = CHAN_AUTO, 
+	channel = CHAN_WEAPON, 
 	volume = 1,
 	level = 97, 
 	pitchstart = 92,
@@ -25,7 +25,7 @@ CustomizableWeaponry.fireSoundTable = {
 	}
 	
 CustomizableWeaponry.regularSoundTable = {
-	channel = CHAN_AUTO,
+	channel = CHAN_WEAPON,
 	volume = 1,
 	level = 65, 
 	pitchstart = 92,
@@ -51,7 +51,7 @@ function CustomizableWeaponry:addFireSound(name, snd, volume, soundLevel, channe
 	-- use defaults if no args are provided
 	volume = volume or 1
 	soundLevel = soundLevel or 97
-	channel = channel or CHAN_AUTO
+	channel = channel or CHAN_WEAPON
 	pitchStart = pitchStart or 92
 	pitchEnd = pitchEnd or 112
 	

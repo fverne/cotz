@@ -26,6 +26,205 @@ function ITEM:GetDescription()
     end
 end
 
+ITEM:Hook("drop", function(item)
+    local client = item.player;
+    local Character = client:GetChar();
+
+    if (item:GetData("equip")) then
+        
+        if item.buff == "heal" then
+            local curheal = client:GetNetVar("ArtiHealAmt") or 0
+            local newheal = (curheal - item.buffval)
+            client:SetNetVar("ArtiHealAmt", newheal)
+        end
+        
+        if item.buff == "woundheal" then
+            local curwheal = client:GetNetVar("WoundHeal") or 0
+            local newwheal = (curwheal - item.buffval)
+            client:SetNetVar("WoundHeal", newwheal)
+        end
+        
+        if item.buff == "antirad" then
+            local curantirad = client:GetNetVar("AntiRads") or 0
+            local newantirad = (curantirad - item.buffval)
+            client:SetNetVar("AntiRads", newantirad)
+        end
+        
+        if item.buff == "end" then
+            local curend = client:GetNetVar("EndBuff") or 0
+            local newend = (curend - item.buffval)
+            client:SetNetVar("EndBuff", newend)
+        end
+        
+        if item.debuff == "rads" then
+            local currads = client:GetNetVar("Rads") or 0
+            local newrads = (currads - item.debuffval) or 0
+            client:SetNetVar("Rads", newrads)
+        end
+        
+        if item.debuff == "end" then
+            local curend = client:GetNetVar("EndRed") or 0
+            local newend = (curend - item.debuffval)
+            client:SetNetVar("EndRed", newend)
+        end
+        
+        if item.buff == "weight" then
+           local curweight = client:GetNetVar("WeightBuff") or 0
+           local newweight = (curweight - item.buffval)
+           client:SetNetVar("WeightBuff",newweight)
+        end
+        
+        hook.Run("ArtifactChange", client)
+        
+        item:SetData("equip", nil);
+    end;
+end);
+
+ITEM.functions.Equip = 
+{
+    name = "Equip",
+    tip = "equipTip",
+    icon = "icon16/tick.png",
+    
+    OnRun = function(item)
+        local client = item.player
+        
+        if item.buff == "heal" then
+            local curheal = client:GetNetVar("ArtiHealAmt") or 0
+            local newheal = (curheal + item.buffval)
+            client:SetNetVar("ArtiHealAmt", newheal)
+        end
+        
+        if item.buff == "woundheal" then
+            local curwheal = client:GetNetVar("WoundHeal") or 0
+            local newwheal = (curwheal + item.buffval)
+            client:SetNetVar("WoundHeal", newwheal)
+        end
+        
+        if item.buff == "antirad" then
+            local curantirad = client:GetNetVar("AntiRads") or 0
+            local newantirad = (curantirad + item.buffval)
+            client:SetNetVar("AntiRads", newantirad)
+        end
+        
+        if item.buff == "end" then
+            local curend = client:GetNetVar("EndBuff") or 0
+            local newend = (curend + item.buffval)
+            client:SetNetVar("EndBuff", newend)
+        end
+        
+        if item.debuff == "rads" then
+            local currads = client:GetNetVar("Rads") or 0
+            local newrads = (currads + item.debuffval)
+            client:SetNetVar("Rads", newrads)
+        end
+        
+        if item.debuff == "end" then
+            local curend = client:GetNetVar("EndRed") or 0
+            local newend = (curend + item.debuffval)
+            client:SetNetVar("EndRed", newend)
+        end
+        
+        if item.buff == "weight" then
+           local curweight = client:GetNetVar("WeightBuff") or 0
+           local newweight = (curweight + item.buffval)
+           client:SetNetVar("WeightBuff",newweight)
+        end
+        
+        item:SetData("equip", true)
+        
+        hook.Run("ArtifactChange", client)
+        
+        return false
+    end;
+    
+    OnCanRun = function(item)
+        local client = item.player
+		local artislots = client:GetNetVar("ArtiSlots") or "0"
+        local cap = util.StringToType(artislots, "int")
+        local char = client:GetChar()
+        local inv = char:GetInv()
+        local items = inv:GetItems()
+        local curr = 0
+        
+        for k, invItem in pairs(items) do
+            if invItem.isArtefact and invItem:GetData("equip") then
+                curr = curr + 1
+            end
+        end
+        
+        if cap > curr then
+            return (!IsValid(item.entity) and item:GetData("equip") ~= true)
+        else
+            return false
+        end
+    end;
+    
+}
+
+ITEM.functions.UnEquip =
+{
+    name = "Unequip",
+    tip = "unequipTip",
+    icon = "icon16/cross.png",
+    
+    OnRun = function(item)
+        local client = item.player
+        
+        if item.buff == "heal" then
+           local curheal = client:GetNetVar("ArtiHealAmt") or 0
+            local newheal = (curheal - item.buffval)
+            client:SetNetVar("ArtiHealAmt", newheal)
+        end
+        
+        if item.buff == "woundheal" then
+            local curwheal = client:GetNetVar("WoundHeal") or 0
+            local newwheal = (curwheal - item.buffval)
+            client:SetNetVar("WoundHeal", newwheal)
+        end
+        
+        if item.buff == "antirad" then
+            local curantirad = client:GetNetVar("AntiRads") or 0
+            local newantirad = (curantirad - item.buffval)
+            client:SetNetVar("AntiRads", newantirad)
+        end
+        
+        if item.buff == "end" then
+            local curend = client:GetNetVar("EndBuff") or 0
+            local newend = (curend - item.buffval)
+            client:SetNetVar("EndBuff", newend)
+        end
+        
+        if item.debuff == "rads" then
+            local currads = client:GetNetVar("Rads") or 0
+            local newrads = (currads - item.debuffval) or 0
+            client:SetNetVar("Rads", newrads)
+        end
+        
+        if item.debuff == "end" then
+            local curend = client:GetNetVar("EndRed") or 0
+            local newend = (curend - item.debuffval)
+            client:SetNetVar("EndRed", newend)
+        end
+        
+        if item.buff == "weight" then
+           local curweight = client:GetNetVar("WeightBuff") or 0
+           local newweight = (curweight - item.buffval)
+           client:SetNetVar("WeightBuff",newweight)
+        end
+        
+        item:SetData("equip", false)
+        
+        hook.Run("ArtifactChange", client)
+        
+        return false
+    end;
+    
+    OnCanRun = function(item)
+        return (!IsValid(item.entity) and item:GetData("equip") == true)
+    end;
+}
+
 function ITEM:GetName()
     local name = self.name
     
@@ -127,7 +326,7 @@ if (CLIENT) then
 
         entity:DrawModel()
     end
-/*    function ITEM:PaintOver(item, w, h)
+    function ITEM:PaintOver(item, w, h)
         if (item:GetData("equip")) then
             surface.SetDrawColor(110, 255, 110, 255)
         else
@@ -136,10 +335,8 @@ if (CLIENT) then
 
         surface.SetMaterial(item.equipIcon)
         surface.DrawTexturedRect(w-23,h-23,19,19)
-    end*/
+    end
 end
-
-
 
 ITEM.functions.Sell = {
     icon = "icon16/coins.png",
@@ -148,7 +345,54 @@ ITEM.functions.Sell = {
         local client = item.player
         client:Notify( "Sold for "..(item.value).." rubles." )
         client:GetChar():GiveMoney(item.value)
-        
+        if (item:GetData("equip")) then
+			
+			if item.buff == "heal" then
+				local curheal = client:GetNetVar("ArtiHealAmt") or 0
+				local newheal = (curheal - item.buffval)
+				client:SetNetVar("ArtiHealAmt", newheal)
+			end
+			
+			if item.buff == "woundheal" then
+				local curwheal = client:GetNetVar("WoundHeal") or 0
+				local newwheal = (curwheal - item.buffval)
+				client:SetNetVar("WoundHeal", newwheal)
+			end
+			
+			if item.buff == "antirad" then
+				local curantirad = client:GetNetVar("AntiRads") or 0
+				local newantirad = (curantirad - item.buffval)
+				client:SetNetVar("AntiRads", newantirad)
+			end
+			
+			if item.buff == "end" then
+				local curend = client:GetNetVar("EndBuff") or 0
+				local newend = (curend - item.buffval)
+				client:SetNetVar("EndBuff", newend)
+			end
+			
+			if item.debuff == "rads" then
+				local currads = client:GetNetVar("Rads") or 0
+				local newrads = (currads - item.debuffval) or 0
+				client:SetNetVar("Rads", newrads)
+			end
+			
+			if item.debuff == "end" then
+				local curend = client:GetNetVar("EndRed") or 0
+				local newend = (curend - item.debuffval)
+				client:SetNetVar("EndRed", newend)
+			end
+			
+			if item.buff == "weight" then
+			   local curweight = client:GetNetVar("WeightBuff") or 0
+			   local newweight = (curweight - item.buffval)
+			   client:SetNetVar("WeightBuff",newweight)
+			end
+			
+			hook.Run("ArtifactChange", client)
+			
+			item:SetData("equip", nil);
+		end;
     end,
     OnCanRun = function(item)
         return !IsValid(item.entity) and item:GetOwner():GetCharacter():HasFlags("1")

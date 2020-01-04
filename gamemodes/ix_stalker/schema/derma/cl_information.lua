@@ -454,7 +454,7 @@ hook.Add("CreateMenuButtons", "ixCharInfo", function(tabs)
 			panel:SetPos(0, 0)
 			panel:SetDraggable(false)
 			panel:SetSizable(false)
-			panel:SetTitle(nil)
+			panel:SetTitle("")
 			panel.bNoBackgroundBlur = true
 			panel.childPanels = {}
 

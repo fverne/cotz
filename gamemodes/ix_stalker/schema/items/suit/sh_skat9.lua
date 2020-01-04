@@ -20,7 +20,16 @@ ITEM.Special = {"Heavy"}
 ITEM.maxAgi = 30
 ITEM.img = Material("vgui/hud/skat.png")
 ITEM.noBusiness = true
-
+ITEM.res = {
+	["Bullet"] = 0.34,
+	["Blast"] = 0.17,
+	["Fall"] = 0.2,
+	["Burn"] = 0.1,
+	["Radiation"] = 0.1,
+	["Chemical"] = 0.1,
+	["Shock"] = 0.1,
+	["Psi"] = 0,
+}
 
 ITEM.newSkin = 0
 ITEM.bodygroup = {0}

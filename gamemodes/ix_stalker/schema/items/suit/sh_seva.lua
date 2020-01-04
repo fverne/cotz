@@ -23,6 +23,16 @@ ITEM.artifactcontainers = {"3"}
 ITEM.Special = {"Psy+20","CC","Heavy"}
 ITEM.maxAgi = 40
 ITEM.img = Material("vgui/hud/seva.png")
+ITEM.res = {
+	["Bullet"] = 0.12,
+	["Blast"] = 0.06,
+	["Fall"] = 0.05,
+	["Burn"] = 0.3,
+	["Radiation"] = 0.3,
+	["Chemical"] = 0.3,
+	["Shock"] = 0.3,
+	["Psi"] = 0,
+}
 
 
 ITEM.newSkin = 0

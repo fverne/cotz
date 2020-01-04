@@ -7,3 +7,6 @@ ITEM.height = 1
 ITEM.price = 1000
 ITEM.flag = "A"
 ITEM.value = ITEM.price*0.5
+ITEM.buff = "antirad"
+ITEM.buffval = 2
+ITEM.isArtefact = true

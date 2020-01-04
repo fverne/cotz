@@ -24,10 +24,8 @@ end
 function ENT:Think()
 	local CT = CurTime()
 	
-	local ply = LocalPlayer()
-	
 	-- get the distance from the impact position to the player
-	local distToPlayer = ply:GetPos():Distance(self:GetPos())
+	local distToPlayer = EyePos():Distance(self:GetPos())
 	
 	if distToPlayer > self.SmokeStartDistance then
 		return

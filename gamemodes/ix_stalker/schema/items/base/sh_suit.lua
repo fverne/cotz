@@ -452,7 +452,7 @@ function ITEM:RemoveOutfit(client)
 	for k, _ in pairs(self:GetData("outfitAttachments", {})) do
 		self:RemoveAttachment(k, client)
 	end
-
+	self.player:SetNetVar("ArtiSlots",0)
 	self:OnUnequipped()
 end
 
@@ -672,7 +672,7 @@ ITEM.functions.Equip = {
 				char:AddBoost(item.uniqueID, k, v)
 			end
 		end
-
+		item.player:SetNetVar("ArtiSlots",item.artifactcontainers[1])
 		item:OnEquipped()
 		return false
 	end,

@@ -19,6 +19,16 @@ ITEM.anomalousrpglevels = {"2","2","2","2","2"}
 ITEM.artifactcontainers = {"0"}
 ITEM.Special = {"Light"}
 ITEM.img = Material("vgui/hud/anorak.png")
+ITEM.res = {
+	["Bullet"] = 0.05,
+	["Blast"] = 0.025,
+	["Fall"] = 0.02,
+	["Burn"] = 0.02,
+	["Radiation"] = 0.02,
+	["Chemical"] = 0.02,
+	["Shock"] = 0.02,
+	["Psi"] = 0,
+}
 
 
 ITEM.newSkin = 0

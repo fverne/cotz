@@ -14,7 +14,22 @@ function ENT:Use(activator, caller)
 		return
 	end
 	
+	local pos = self:GetPos() - activator:GetShootPos()
+	local pickupDotProduct = activator:EyeAngles():Forward():Dot(pos) / pos:Length()
+		
+	if pickupDotProduct < self.pickupDotProduct then
+		return
+	end
+	
+	-- if use key is down we restrict picking the weapon up, because we might be wanting to throw a grenade, and if we throw + pick up the weapon - nothing will happen, because weapons will be switched
 	if CurTime() < self.useDelay then
+		return
+	end
+	
+	local curWep = activator:GetActiveWeapon()
+	
+	-- can't pick up a weapon if we're performing an action of some kind
+	if IsValid(curWep) and curWep.CW20Weapon and curWep.dt.State == CW_ACTION then
 		return
 	end
 	
@@ -105,7 +120,7 @@ concommand.Add("cw_request_wep_data", function(ply, com, args)
 	entityID = tonumber(entityID)
 	local entity = ents.GetByIndex(entityID)
 	
-	if entity then
+	if IsValid(entity) and entity:GetClass() == "cw_dropped_weapon" then
 		entity:sendWepData(ply)
 	end
 end)

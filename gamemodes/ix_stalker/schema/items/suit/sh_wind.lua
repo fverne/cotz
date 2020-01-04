@@ -17,7 +17,16 @@ ITEM.ballisticrpglevels = {["body"] = "5", ["limb"] = "2"}
 ITEM.anomalousrpglevels = {"2","15","15","15","15"}
 ITEM.artifactcontainers = {"3"}
 ITEM.img = Material("vgui/hud/wind.png")
-
+ITEM.res = {
+	["Bullet"] = 0.05,
+	["Blast"] = 0.025,
+	["Fall"] = 0.02,
+	["Burn"] = 0.15,
+	["Radiation"] = 0.15,
+	["Chemical"] = 0.15,
+	["Shock"] = 0.15,
+	["Psi"] = 0,
+}
 
 ITEM.newSkin = 0
 ITEM.bodygroup = {0}

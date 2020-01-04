@@ -7,3 +7,16 @@ ITEM.height = 1
 ITEM.price = 2750
 ITEM.flag = "A"
 ITEM.value = ITEM.price*0.5
+ITEM.debuff = "rads"
+ITEM.debuffval = 1
+ITEM.isArtefact = true
+ITEM.res = {
+	["Fall"] = 0.00,
+	["Blast"] = 0.00,
+	["Bullet"] = 0.00,
+	["Shock"] = 0.00,
+	["Burn"] = 0.05,
+	["Radiation"] = 0.00,
+	["Chemical"] = 0.00,
+	["Psi"] = 0.00,
+}
