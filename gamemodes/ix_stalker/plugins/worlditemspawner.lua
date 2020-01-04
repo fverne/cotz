@@ -155,7 +155,7 @@ PLUGIN.spawngroups = {
 }
 
 --PLUGIN.spawnchance = 0.5 + (1 * #player.GetAll())
-PLUGIN.spawnrate = 1000
+PLUGIN.spawnrate = 750
 PLUGIN.maxitems = 1
 PLUGIN.itemsperspawn = 1
 PLUGIN.spawneditems = PLUGIN.spawneditems or {}

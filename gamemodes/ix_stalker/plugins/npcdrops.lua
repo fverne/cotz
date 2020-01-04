@@ -15,13 +15,13 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 /*		if math.random(101) < 15 then -- 15 %
 			ix.item.Spawn(table.Random(zombieitems), entity:GetPos() + Vector(0, 0, 8))
 		end*/
-		if math.random(101) < 25 then -- 15 %
+		if math.random(101) < 30 then -- 15 %
 			ix.item.Spawn("zombiehand", entity:GetPos() + Vector(0, 0, 8))
 		end
 	end
 	
 	if class == "npc_mutant_boar" then
-		if math.random(101) < 25 then -- 15 %
+		if math.random(101) < 30 then -- 15 %
 			ix.item.Spawn("boarhoof", entity:GetPos() + Vector(0, 0, 8))
 		end
 		if math.random(101) < 25 then -- 15 %
@@ -30,7 +30,7 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 	end
 	
 	if class == "npc_mutant_dog" then
-		if math.random(101) < 25 then -- 15 %
+		if math.random(101) < 30 then -- 15 %
 			ix.item.Spawn("dogtail", entity:GetPos() + Vector(0, 0, 8))
 		end	
 		if math.random(101) < 25 then -- 15 %
@@ -39,7 +39,7 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 	end
 	
 	if class == "npc_mutant_flesh" then
-		if math.random(101) < 25 then -- 15 %
+		if math.random(101) < 30 then -- 15 %
 			ix.item.Spawn("flesheye", entity:GetPos() + Vector(0, 0, 8))
 		end
 		if math.random(101) < 25 then -- 15 %
@@ -48,7 +48,7 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 	end
 	
 	if class == "npc_mutant_pseudodog" then
-		if math.random(101) < 25 then -- 15 %
+		if math.random(101) < 30 then -- 15 %
 			ix.item.Spawn("pseudodogtail", entity:GetPos() + Vector(0, 0, 8))
 		end
 		if math.random(101) < 25 then -- 15 %
@@ -57,7 +57,7 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 	end
 	
 	if class == "npc_mutant_rodent" then
-		if math.random(101) < 25 then -- 15 %
+		if math.random(101) < 30 then -- 15 %
 			ix.item.Spawn("rodentsear", entity:GetPos() + Vector(0, 0, 8))
 		end
 		if math.random(101) < 15 then -- 15 %
@@ -66,7 +66,7 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 	end
 	
 	if class == "npc_mutant_snork" then
-		if math.random(101) < 25 then -- 15 %
+		if math.random(101) < 30 then -- 15 %
 			ix.item.Spawn("snorksfoot", entity:GetPos() + Vector(0, 0, 8))
 		end
 		if math.random(101) < 25 then -- 15 %
