@@ -92,7 +92,7 @@ ix.command.Add("CharTakeFlag", {
 	end
 })
 
-ix.command.Add("chargiveitem", {
+ix.command.Add("CharGiveItem", {
 	description = "@cmdCharGiveItem",
 	adminOnly = true,
 	arguments = {

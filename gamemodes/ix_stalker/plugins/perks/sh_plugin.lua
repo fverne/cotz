@@ -104,7 +104,8 @@ ix.char.RegisterVar("perks", {
 				total = total + difference
 				payload.perks[k] = payload.perks[k] + difference
 
-				totalBar:SetValue(totalBar:GetValue() - difference)
+				totalBar:SetValue(totalBar.value - difference)
+				totalBar:SetText("Perk Points left:".." ("..totalBar:GetMax()-total..")")
 			end
 
 			if (v.noStartBonus) then

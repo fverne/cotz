@@ -66,6 +66,7 @@ ix.command.Add("rollstat", {
 		local str = "tested his "
 		local realattriname
 		local perksign = nil
+		local stat = string.lower(stat)
 		
 		for k, v in pairs(ix.perks.list) do
 			if v.shortname == stat or v.name == stat or k == stat then
