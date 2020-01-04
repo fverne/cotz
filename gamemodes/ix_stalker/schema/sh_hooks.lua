@@ -86,7 +86,7 @@ do
 		ix.command.Add("CharSet" .. MONEY_NAME, {
 			alias = {"CharSetMoney"},
 			description = "@cmdCharSetMoney",
-			superAdminOnly = true,
+			adminOnly = true,
 			arguments = {
 				ix.type.character,
 				ix.type.number
