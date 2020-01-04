@@ -145,7 +145,7 @@ function ITEM:GetDescription()
 					str = (str.."\n".."Penetration: "..self.Pen)
 					if self.Rld then
 						str = (str.."\n".."Reload Time: "..self.Rld)
-						if self.Special then
+						if self.Special ~= "" then
 							str = (str.."\n".."Special Attribute(s): "..self.Special)
 						end
 					end
