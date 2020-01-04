@@ -13,6 +13,13 @@ ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 ITEM.longdesc = "No longer description available."
 ITEM.validAttachments = {}
 ITEM.canAttach = true
+ITEM.Range = 0
+ITEM.RoF = ""
+ITEM.Dmg = ""
+ITEM.Pen = 0
+ITEM.Mag = 0
+ITEM.Rld = ""
+ITEM.Special = ""
 
 
 -- Attachment translator
@@ -127,6 +134,25 @@ function ITEM:GetDescription()
 	if(customData.desc) then
 		str = customData.desc
 	end
+	
+	if self.Range then
+		str = (str.."\n\n".."Range: "..self.Range)
+		if self.RoF then
+			str = (str.."\n".."Rate of Fire: "..self.RoF)
+			if self.Dmg then
+				str = (str.."\n".."Damage: "..self.Dmg) 
+				if self.Pen then
+					str = (str.."\n".."Penetration: "..self.Pen)
+					if self.Rld then
+						str = (str.."\n".."Reload Time: "..self.Rld)
+						if self.Special ~= "" then
+							str = (str.."\n".."Special Attribute(s): "..self.Special)
+						end
+					end
+				end
+			end
+		end
+	end
 
 	if (self.entity) then
 		return (self.description .. "\n \nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
@@ -149,7 +175,6 @@ function ITEM:GetDescription()
 		else
 			str = str.."None\n"
 		end
-
         return (str .. "\n \nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 	end
 end

@@ -22,6 +22,7 @@ ITEM.iconCam = {
 	ang = Angle(0, 270, 5),
 	fov = 13.235
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {
