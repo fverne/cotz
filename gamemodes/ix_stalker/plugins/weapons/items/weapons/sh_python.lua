@@ -1,0 +1,20 @@
+ITEM.name = "Colt Python"
+ITEM.description = "The Colt Python is a .357 Magnum caliber revolver formerly manufactured by Colt's Manufacturing Company of Hartford, Connecticut. It is sometimes referred to as a 'Combat Magnum'. It was first introduced in 1955, the same year as Smith & Wesson's M29 .44 Magnum."
+ITEM.model = "models/weapons/ethereal/w_python.mdl"
+ITEM.class = "cw_kk_ins2_python"
+ITEM.weaponCategory = "secondary"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 17000
+ITEM.flag = "D"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_R_Thigh",
+	ang = Angle(-0, -0,90),
+	pos = Vector(-6, 8, -4),
+}
+ITEM.modifier = 2
+ITEM.weight = 1.1
+ITEM.repairCost = ITEM.price/100*1

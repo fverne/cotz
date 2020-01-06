@@ -1,0 +1,20 @@
+ITEM.name = "CZ Scorpion EVO3"
+ITEM.description = "The Scorpion EVO 3 is a 9mm carbine manufactured by Česká zbrojovka Uherský Brod, the select-fire variant designated as A1 being a submachine gun and the semi-automatic variant designated as S1. The EVO 3 designation denotes that the firearm is a third generation of CZ's line of small submachine guns started by the Škorpion vz. 61. Despite the name, it is mechanically unrelated to the Skorpion vz. 61."
+ITEM.model = "models/weapons/ethereal/w_scorpion.mdl"
+ITEM.class = "cw_kk_ins2_scorpion"
+ITEM.weaponCategory = "primary"
+ITEM.width = 3
+ITEM.height = 2
+ITEM.price = 11350
+ITEM.flag = "b"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 4
+ITEM.weight = 2.4
+ITEM.repairCost = ITEM.price/100*1

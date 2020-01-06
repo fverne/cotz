@@ -1,0 +1,11 @@
+CustomizableWeaponry:addFireSound("CW_KK_INS2_USP45_FIRE", "weapons/usp45/usp45_fp.wav")
+CustomizableWeaponry:addFireSound("CW_KK_INS2_USP45_FIRE_SUPPRESSED", "weapons/usp45/usp45_suppressed_fp.wav")
+
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M1911_BOLTBACK", "weapons/m1911/handling/m1911_boltback.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M1911_BOLTRELEASE", "weapons/m1911/handling/m1911_boltrelease.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M1911_EMPTY", "weapons/m1911/handling/m1911_empty.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M1911_MAGHIT", "weapons/m1911/handling/m1911_maghit.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M1911_MAGIN", "weapons/m1911/handling/m1911_magin.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M1911_MAGOUT", "weapons/m1911/handling/m1911_magout.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M1911_MAGRELEASE", "weapons/m1911/handling/m1911_magrelease.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M1911_SAFETY", "weapons/m1911/handling/m1911_safety.wav")

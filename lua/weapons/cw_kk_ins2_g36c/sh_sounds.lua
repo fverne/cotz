@@ -1,0 +1,12 @@
+CustomizableWeaponry:addFireSound("CW_KK_INS2_G36C_FIRE", "weapons/cw_kk_ins2_g36c/fire.wav")
+CustomizableWeaponry:addFireSound("CW_KK_INS2_G36C_FIRE_SUPPRESSED", "weapons/cw_kk_ins2_g36c/fire_suppressed.wav")
+
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_G36C_BOLTBACK", "weapons/cw_kk_ins2_g36c/boltback.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_G36C_BOLTRELEASE", "weapons/cw_kk_ins2_g36c/boltforward.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M4A1_EMPTY", "weapons/m4a1/handling/m4a1_empty.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M4A1_FIRESELECT", "weapons/m4a1/handling/m4a1_fireselect.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M4A1_HIT", "weapons/m4a1/handling/m4a1_hit.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M4A1_MAGHITRELEASE", "weapons/m4a1/handling/m4a1_maghitrelease.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_G36C_MAGIN", "weapons/cw_kk_ins2_g36c/magin.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_G36C_MAGOUT", "weapons/cw_kk_ins2_g36c/magout.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M4A1_MAGRELEASE", "weapons/m4a1/handling/m4a1_magrelease.wav")

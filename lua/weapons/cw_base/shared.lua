@@ -1520,8 +1520,7 @@ function SWEP:PrimaryAttack()
 	end
 	
 	if self.dt.Safe then
-		self:CycleFiremodes()
-		return
+		return false
 	end
 	
 	if not self:canFireWeapon(3) then
@@ -1804,8 +1803,7 @@ function SWEP:SecondaryAttack()
 	end
 	
 	if self.dt.Safe then
-		self:CycleFiremodes()
-		return
+		return false
 	end
 	
 	if self.InactiveWeaponStates[self.dt.State] or (self.dt.State == CW_AIMING and self.HoldToAim) then

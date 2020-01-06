@@ -1,0 +1,11 @@
+CustomizableWeaponry:addFireSound("CW_KK_INS2_CZ805_FIRE", "weapons/cz805/mk18_fp.wav")
+CustomizableWeaponry:addFireSound("CW_KK_INS2_CZ805_FIRE_SUPPRESSED", "weapons/cz805/mk18_suppressed_fp.wav")
+
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_MK18_BOLTBACK", "weapons/mk18/handling/mk18_boltback.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_MK18_BOLTRELEASE", "weapons/mk18/handling/mk18_boltrelease.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_MK18_EMPTY", "weapons/mk18/handling/mk18_empty.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_MK18_FIRESELECT", "weapons/mk18/handling/mk18_fireselect.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_MK18_HIT", "weapons/mk18/handling/mk18_hit.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_MK18_MAGIN", "weapons/mk18/handling/mk18_magin.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_MK18_MAGOUT", "weapons/mk18/handling/mk18_magout.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_MK18_MAGRELEASE", "weapons/mk18/handling/mk18_magrelease.wav")

@@ -1,0 +1,20 @@
+ITEM.name = "SG-551"
+ITEM.description = "The SG 551 carbine has a short pattern 363 mm (14.3 in) barrel, gas tube and piston compared to the SG 550. The SG 551 series rifles have a 466 mm (18.3 in) long sight radius. The handguards were also changed and the bipod removed. The SG 551 cannot be used with a bayonet or fire rifle grenades. Fires 5.56x45 Rounds."
+ITEM.model = "models/weapons/ethereal/w_sg5511.mdl"
+ITEM.class = "cw_kk_ins2_sg551"
+ITEM.weaponCategory = "primary"
+ITEM.width = 3
+ITEM.height = 2
+ITEM.price = 43250
+ITEM.flag = "D"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 7
+ITEM.weight = 3.4
+ITEM.repairCost = ITEM.price/100*1

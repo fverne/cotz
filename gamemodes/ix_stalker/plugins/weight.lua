@@ -12,6 +12,8 @@ if (SERVER) then
         local totweight = 0
         local maxweight = 50
         for x, y in pairs(inventory:GetItems()) do
+			if y.weight == nil then continue end
+		
             if y.quantity then
                 quantity = y.quantity
             end

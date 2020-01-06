@@ -1,0 +1,20 @@
+ITEM.name = "MP7"
+ITEM.description = "The Heckler & Koch MP7 (Maschinenpistole 7) is a German personal defence weapon (PDW) designed and manufactured by Heckler & Koch (H&K) and chambered for the HK 4.6×30mm cartridge."
+ITEM.model = "models/weapons/ethereal/w_mp7.mdl"
+ITEM.class = "cw_kk_ins2_mp7"
+ITEM.weaponCategory = "primary"
+ITEM.width = 2
+ITEM.height = 1
+ITEM.price = 18500
+ITEM.flag = "D"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 6
+ITEM.weight = 1.9
+ITEM.repairCost = ITEM.price/100*1

@@ -1,0 +1,11 @@
+CustomizableWeaponry:addFireSound("CW_KK_INS2_P99_FIRE", "weapons/cw_kk_ins2_p99/fire.wav")
+CustomizableWeaponry:addFireSound("CW_KK_INS2_P99_FIRE_SUPPRESSED", "weapons/cw_kk_ins2_p99/fire_suppressed.wav")
+
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_P99_BOLTBACK", "weapons/cw_kk_ins2_p99/slideback.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_P99_BOLTRELEASE", "weapons/cw_kk_ins2_p99/slideforward.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M9_EMPTY", "weapons/m9/handling/m9_empty.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M9_MAGHIT", "weapons/m9/handling/m9_maghit.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_P99_MAGIN", "weapons/cw_kk_ins2_p99/magin.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_P99_MAGOUT", "weapons/cw_kk_ins2_p99/magout.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M9_MAGRELEASE", "weapons/m9/handling/m9_magrelease.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M9_SAFETY", "weapons/m9/handling/m9_safety.wav")

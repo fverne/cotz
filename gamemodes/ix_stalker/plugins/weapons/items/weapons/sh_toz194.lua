@@ -1,0 +1,20 @@
+ITEM.name = "TOZ-194"
+ITEM.description = "The TOZ-194 is a 12 Gauge, pump-action shotgun manufactured by the Tula Arms Plant. Designed during the later years of the Soviet Union, the production of this firearm has started after the Soviet era in Russia, and since then it has gained a certain popularity within civilian shooters in Russia itself and in Europe, and is reported to be in use with some Russian Security forces."
+ITEM.model = "models/weapons/ethereal/w_toz.mdl"
+ITEM.class = "cw_kk_ins2_toz194"
+ITEM.weaponCategory = "primary"
+ITEM.width = 3
+ITEM.height = 2
+ITEM.price = 6500
+ITEM.flag = "A"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 20
+ITEM.weight = 2.9
+ITEM.repairCost = ITEM.price/100*1

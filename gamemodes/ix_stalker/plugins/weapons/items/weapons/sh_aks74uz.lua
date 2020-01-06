@@ -1,0 +1,20 @@
+ITEM.name = "AKS-74U Zenith"
+ITEM.description = "The AK-74 is an assault rifle developed in the early 1970s by Russian designer Mikhail Kalashnikov as the replacement for the earlier AKM (itself a refined version of the AK-47). It uses a smaller 5.45×39mm cartridge, replacing the 7.62×39mm chambering of earlier Kalashnikov-pattern weapons. This particular variant is shorter for close quarter combat and reduced weight."
+ITEM.model = "models/weapons/ethereal/w_aks74uz.mdl"
+ITEM.class = "cw_kk_ins2_aks74uz"
+ITEM.weaponCategory = "primary"
+ITEM.width = 3
+ITEM.height = 2
+ITEM.price = 18000
+ITEM.flag = "A"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 5
+ITEM.weight = 2.79
+ITEM.repairCost = ITEM.price/100*1

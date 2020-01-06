@@ -1,0 +1,20 @@
+ITEM.name = "S&W M10 Revolver"
+ITEM.description = "The Smith & Wesson Model 10 is a revolver of worldwide popularity. It was the successor to the Smith & Wesson .32 Hand Ejector Model of 1896 and was the first Smith & Wesson revolver to feature a cylinder release latch on the left side of the frame like the Colt M1889. In production since 1899, it is a six-shot double-action .38 revolver with fixed sights."
+ITEM.model = "models/weapons/ethereal/w_38rev.mdl"
+ITEM.class = "cw_kk_ins2_revolver"
+ITEM.weaponCategory = "secondary"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 4250
+ITEM.flag = "C"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_R_Thigh",
+	ang = Angle(-0, -0,90),
+	pos = Vector(-6, 8, -4),
+}
+ITEM.modifier = 2
+ITEM.weight = 0.950
+ITEM.repairCost = ITEM.price/100*1

@@ -29,7 +29,11 @@ local function InventoryAction(action, itemID, invID, data)
 		net.WriteString(action)
 		net.WriteUInt(itemID, 32)
 		net.WriteUInt(invID, 32)
-		net.WriteTable(data or {})
+		if istable(data) then
+			net.WriteTable(data or {})
+		else
+			net.WriteTable({})
+		end
 	net.SendToServer()
 end
 

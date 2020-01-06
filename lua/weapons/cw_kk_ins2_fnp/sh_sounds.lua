@@ -1,0 +1,11 @@
+CustomizableWeaponry:addFireSound("CW_JK_INS2_FNP_FIRE", "weapons/fnp/fnp_fp.wav")
+CustomizableWeaponry:addFireSound("CW_JK_INS2_FNP_FIRE_SUPPRESSED", "weapons/fnp/fnp_suppressed_fp.wav")
+
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNP_BOLTBACK", "weapons/fnp/handling/fnp_boltback.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNP_BOLTRELEASE", "weapons/fnp/handling/fnp_boltrelease.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNP_EMPTY", "weapons/fnp/handling/fnp_empty.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNP_MAGHIT", "weapons/fnp/handling/fnp_maghit.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNP_MAGIN", "weapons/fnp/handling/fnp_magin.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNP_MAGOUT", "weapons/fnp/handling/fnp_magout.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNP_MAGRELEASE", "weapons/fnp/handling/fnp_magrelease.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNP_SAFETY", "weapons/fnp/handling/fnp_safety.wav")

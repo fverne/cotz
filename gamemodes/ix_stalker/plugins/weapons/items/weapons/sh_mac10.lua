@@ -1,0 +1,20 @@
+ITEM.name = "MAC-10"
+ITEM.description = "The Military Armament Corporation Model 10, officially abbreviated as 'M10' or 'M-10', and more commonly known as the MAC-10, is a compact, blowback operated machine pistol that was developed by Gordon B. Ingram in 1964. It is chambered in 9x19mm."
+ITEM.model = "models/weapons/ethereal/w_mac10.mdl"
+ITEM.class = "cw_kk_ins2_mac10"
+ITEM.weaponCategory = "primary"
+ITEM.width = 2
+ITEM.height = 2
+ITEM.price = 3500
+ITEM.flag = "C"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 6
+ITEM.weight = 2.84
+ITEM.repairCost = ITEM.price/100*1

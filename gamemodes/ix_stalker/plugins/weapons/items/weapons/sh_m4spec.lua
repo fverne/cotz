@@ -1,0 +1,20 @@
+ITEM.name = "M4 Spectre"
+ITEM.description = "The Spectre is a compact and light weapon, designed for instant firepower in close combat at short ranges. The four models have top-folding buttstocks, and were available with or without a forward handgrip ahead of the magazine housing. The largely steel Spectre has a polymer overmolded grip, magazine release and safety/selector levers."
+ITEM.model = "models/weapons/ethereal/w_m4spec.mdl"
+ITEM.class = "cw_kk_ins2_m4spec"
+ITEM.weaponCategory = "primary"
+ITEM.width = 2
+ITEM.height = 1
+ITEM.price = 7800
+ITEM.flag = "d"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 6
+ITEM.weight = 2.9
+ITEM.repairCost = ITEM.price/100*1

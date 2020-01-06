@@ -1,0 +1,19 @@
+ITEM.name = "M590"
+ITEM.description = "The Mossberg 590 is a variant of the Mossberg 500 series, specifically made to be easier to field strip for cleaning, as well as being simpler to repair internal damage. Fires 12 Gauge shells."
+ITEM.model = "models/weapons/ethereal/w_m590.mdl"
+ITEM.class = "cw_kk_ins2_m590"
+ITEM.weaponCategory = "primary"
+ITEM.width = 3
+ITEM.height = 2
+ITEM.price = 18250
+ITEM.flag = "D"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 20
+ITEM.weight = 3.3

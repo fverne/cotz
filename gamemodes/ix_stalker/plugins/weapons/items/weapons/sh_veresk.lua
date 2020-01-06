@@ -1,0 +1,20 @@
+ITEM.name = "SR-2 Veresk"
+ITEM.description = "The SR-2 'Veresk' differs from most SMGs by its gas-operated action with rotating bolt, typically used in assault rifles (normally SMGs utilise different blowback principles). This design is partially borrowed from the SR-3 'Vikhr' compact assault rifle. Externally the 'Veresk' is similar to the Uzi; 20- or 30-round magazines are inserted into the pistol grip. There are two AK-style control levers on both sides of the receiver: the right one is the safety switch, the left is a fire-mode selector. Fires 9x21 Rounds."
+ITEM.model = "models/weapons/ethereal/w_veresk.mdl"
+ITEM.class = "cw_kk_ins2_veresk"
+ITEM.weaponCategory = "primary"
+ITEM.width = 2
+ITEM.height = 2
+ITEM.price = 3150
+ITEM.flag = "a"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 4
+ITEM.weight = 1.65
+ITEM.repairCost = ITEM.price/100*1

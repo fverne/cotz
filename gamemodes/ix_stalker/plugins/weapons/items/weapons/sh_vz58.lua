@@ -1,0 +1,20 @@
+ITEM.name = "VZ-58"
+ITEM.description = "The vz. 58 (model 58) is a 7.62×39mm rifle designed and manufactured in Czechoslovakia and accepted into service in the late 1950s as the 7,62 mm samopal vzor 58, replacing the vz. 52 self-loading rifle and the 7.62×25mm Tokarev Sa 24 and Sa 26 submachine guns. While externally the vz. 58 resembles the Soviet AK-47, it is a different design based on a short-stroke gas piston. It shares no parts with Kalashnikov rifles, including the magazine."
+ITEM.model = "models/weapons/ethereal/w_vz58.mdl"
+ITEM.class = "cw_kk_ins2_vz58"
+ITEM.weaponCategory = "primary"
+ITEM.width = 3
+ITEM.height = 2
+ITEM.price = 20750
+ITEM.flag = "A"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 5
+ITEM.weight = 2.91
+ITEM.repairCost = ITEM.price/100*1

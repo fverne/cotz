@@ -1,0 +1,2 @@
+CustomizableWeaponry:addFireSound("CW_KK_INS2_MP5A4_FIRE", "weapons/cw_kk_ins2_mp5/mp5_fire.wav")
+CustomizableWeaponry:addFireSound("CW_KK_INS2_MP5A4_FIRE_SUPPRESSED", "weapons/cw_kk_ins2_mp5/mp5_fire_suppressed.wav")

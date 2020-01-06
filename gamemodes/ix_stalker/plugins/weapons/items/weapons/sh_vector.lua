@@ -1,0 +1,20 @@
+ITEM.name = "Vector"
+ITEM.description = "The KRISS Vector series are a family of weapons based upon the parent submachine gun design developed by KRISS USA, formerly Transformational Defense Industries (TDI). They use an unconventional delayed blowback system combined with in-line design to reduce perceived recoil and muzzle climb. This particular variant is chambered in 9x19."
+ITEM.model = "models/weapons/ethereal/w_vector.mdl"
+ITEM.class = "cw_kk_ins2_vector"
+ITEM.weaponCategory = "primary"
+ITEM.width = 2
+ITEM.height = 2
+ITEM.price = 38650
+ITEM.flag = "f"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 10
+ITEM.weight = 2.7
+ITEM.repairCost = ITEM.price/100*1

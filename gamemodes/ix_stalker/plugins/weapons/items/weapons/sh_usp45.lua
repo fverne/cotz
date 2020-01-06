@@ -1,0 +1,20 @@
+ITEM.name = "USP .45"
+ITEM.description = "The USP is a semi-automatic pistol developed in Germany by Heckler & Koch GmbH (H&K) of Oberndorf am Neckar as a replacement for the P7 series of handguns. This particular variant is chambered for the .45 ACP Round."
+ITEM.model = "models/weapons/ethereal/w_usp45.mdl"
+ITEM.class = "cw_kk_ins2_usp45"
+ITEM.weaponCategory = "secondary"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 7500
+ITEM.flag = "d"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_R_Thigh",
+	ang = Angle(-0, -0,90),
+	pos = Vector(-6, 8, -4),
+}
+ITEM.modifier = 13
+ITEM.weight = 0.789
+ITEM.repairCost = ITEM.price/100*1

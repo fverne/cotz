@@ -1,0 +1,20 @@
+ITEM.name = "Minebea PM9"
+ITEM.description = "The Minebea PM-9 Submachine Gun, known officially in the Japan Self-Defense Forces (JSDF) as the 9mm Machine Pistol or as the M9, is a Japanese-made machine pistol. Analogous to the Israeli IMI Mini-Uzi, the PM-9 has the same telescoping bolt as the Mini-Uzi, but differs in its appearance, operational use and handling."
+ITEM.model = "models/weapons/ethereal/w_pm9.mdl"
+ITEM.class = "cw_kk_ins2_pm9"
+ITEM.weaponCategory = "primary"
+ITEM.width = 2
+ITEM.height = 2
+ITEM.price = 7350
+ITEM.flag = "d"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 6
+ITEM.weight = 2.8
+ITEM.repairCost = ITEM.price/100*1

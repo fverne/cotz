@@ -1,0 +1,20 @@
+ITEM.name = "M240"
+ITEM.description = "The M240 has been used by the United States Armed Forces since the late 1970s. It is used extensively by infantry, most often in rifle companies, as well as on ground vehicles, watercraft and aircraft. Despite being heavier than some comparable weapons it is highly regarded for reliability and its standardization among NATO members is a major advantage. Fires 7.62x51 Rounds from Belts."
+ITEM.model = "models/weapons/ethereal/w_m240.mdl"
+ITEM.class = "cw_kk_ins2_m240"
+ITEM.weaponCategory = "primary"
+ITEM.width = 4
+ITEM.height = 3
+ITEM.price = 124500
+ITEM.flag = "Z"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 5
+ITEM.weight = 12.5
+ITEM.repairCost = ITEM.price/100*1

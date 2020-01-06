@@ -1,0 +1,20 @@
+ITEM.name = "Mini-14"
+ITEM.description = "The Mini-14 is a lightweight semi-automatic rifle manufactured by Sturm, Ruger & Co. used by military personnel, law enforcement personnel, and civilians. This particular variant of the rifle is chambered for 5.56 rounds, firing exclusively in semi-automatic."
+ITEM.model = "models/weapons/ethereal/w_mini14.mdl"
+ITEM.class = "cw_kk_ins2_mini14"
+ITEM.weaponCategory = "primary"
+ITEM.width = 3
+ITEM.height = 2
+ITEM.price = 9000 
+ITEM.flag = "C"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 10
+ITEM.weight = 2.900
+ITEM.repairCost = ITEM.price/100*1

@@ -1,0 +1,12 @@
+CustomizableWeaponry:addFireSound("CW_JK_INS2_SCAR_FIRE", "weapons/scar/sca1.wav")
+CustomizableWeaponry:addFireSound("CW_JK_INS2_SCAR_SUP", "weapons/scar/sca_sup.wav")
+
+CustomizableWeaponry:addReloadSound("CW_JK_INS2_SCAR_BOLT", "weapons/scar/sca_boltpull.wav")
+CustomizableWeaponry:addReloadSound("CW_JK_INS2_SCAR_CATCH", "weapons/scar/sca_catch.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M16A4_EMPTY", "weapons/m16a4/handling/m16_empty.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M16A4_FIRESELECT", "weapons/m16a4/handling/m16_fireselect.wav")
+CustomizableWeaponry:addReloadSound("CW_JK_INS2_SCAR_HIT", "weapons/scar/sca_hit.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M16A4_MAGHITRELEASE", "weapons/m16a4/handling/m16_maghitrelease.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_SCAR_MAGIN", "weapons/scar/sca_clipin.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_SCAR_MAGOUT", "weapons/scar/sca_clipout.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M16A4_MAGRELEASE", "weapons/m16a4/handling/m16_magrelease.wav")

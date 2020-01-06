@@ -1,0 +1,20 @@
+ITEM.name = "FN FNP-45"
+ITEM.description = "The FN FNP pistol is a series of semi-automatic, polymer-framed pistols manufactured in Columbia, South Carolina, by FNH USA, a division of Fabrique Nationale de Herstal. The pistol debuted in early 2006 and is chambered for the 9×19mm Parabellum, .40 S&W, .45 ACP, and .357 SIG cartridges."
+ITEM.model = "models/weapons/ethereal/w_fnp.mdl"
+ITEM.class = "cw_kk_ins2_fnp"
+ITEM.weaponCategory = "secondary"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 13950
+ITEM.flag = "D"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_R_Thigh",
+	ang = Angle(-0, -0,90),
+	pos = Vector(-6, 8, -4),
+}
+ITEM.modifier = 13
+ITEM.weight = 0.919
+ITEM.repairCost = ITEM.price/100*1

@@ -1,0 +1,20 @@
+ITEM.name = "MP-443 Grach"
+ITEM.description = "The MP-443 Grach, following traditional Russian naming procedure, is the Russian standard military-issue side arm. It fires 9x19 rounds."
+ITEM.model = "models/weapons/ethereal/w_grach.mdl"
+ITEM.class = "cw_kk_ins2_grach"
+ITEM.weaponCategory = "secondary"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 3700
+ITEM.flag = "A"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_R_Thigh",
+	ang = Angle(-0, -0,90),
+	pos = Vector(-6, 8, -4),
+}
+ITEM.modifier = 11
+ITEM.weight = 0.95
+ITEM.repairCost = ITEM.price/100*1

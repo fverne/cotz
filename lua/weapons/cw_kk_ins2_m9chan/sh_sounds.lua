@@ -1,0 +1,11 @@
+CustomizableWeaponry:addFireSound("CW_KK_INS2_M9CHAN_FIRE", "weapons/m9chan/moan_fire.wav")
+CustomizableWeaponry:addFireSound("CW_KK_INS2_M9CHAN_FIRE_SUPPRESSED", "weapons/m9chan/moan_fire.wav")
+
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M9CHAN_BOLTBACK", "weapons/m9chan/handling/m9_boltback.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M9CHAN_BOLTRELEASE", "weapons/m9chan/handling/m9_boltrelease_oniichan.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M9CHAN_EMPTY", "weapons/m9chan/handling/m9_empty.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M9CHAN_MAGHIT", "weapons/m9chan/handling/m9_maghit.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M9CHAN_MAGIN", "weapons/m9chan/handling/m9_magin.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M9CHAN_MAGOUT", "weapons/m9chan/handling/m9_magout.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M9_MAGRELEASE", "weapons/m9/handling/m9_magrelease.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_M9CHAN_SAFETY", "weapons/m9chan/handling/m9_safety.wav")

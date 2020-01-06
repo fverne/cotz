@@ -1,0 +1,20 @@
+ITEM.name = "ACR 5.56"
+ITEM.description = "The ACR 5.56, known by names such as the Masada or Bushmaster, is an advanced combat rifle made for military and civilian use alike. Fires 5.56x45 rounds "
+ITEM.model = "models/weapons/ethereal/w_acr.mdl"
+ITEM.class = "cw_kk_ins2_acr556"
+ITEM.weaponCategory = "primary"
+ITEM.width = 3
+ITEM.height = 2
+ITEM.price = 62500
+ITEM.flag = "f"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 7
+ITEM.weight = 4.4
+ITEM.repairCost = ITEM.price/100*1

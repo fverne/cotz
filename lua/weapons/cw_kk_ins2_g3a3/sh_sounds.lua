@@ -1,0 +1,12 @@
+CustomizableWeaponry:addFireSound("CW_KK_INS2_G3A3_FIRE", "weapons/g3a3/g3a3_fp.wav")
+CustomizableWeaponry:addFireSound("CW_KK_INS2_G3A3_FIRE_SUPPRESSED", "weapons/g3a3/g3a3_suppressed_fp.wav")
+
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNFAL_BOLTBACK", "weapons/fnfal/handling/fnfal_boltback.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNFAL_BOLTRELEASE", "weapons/fnfal/handling/fnfal_boltrelease.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNFAL_EMPTY", "weapons/fnfal/handling/fnfal_empty.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNFAL_FIRESELECT", "weapons/fnfal/handling/fnfal_fireselect_1.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNFAL_MAGIN", "weapons/fnfal/handling/fnfal_magin.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNFAL_MAGOUT", "weapons/fnfal/handling/fnfal_magout.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNFAL_MAGOUTRATTLE", "weapons/fnfal/handling/fnfal_magout_rattle.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNFAL_MAGRELEASE", "weapons/fnfal/handling/fnfal_magrelease.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_FNFAL_RATTLE", "weapons/fnfal/handling/fnfal_rattle.wav")

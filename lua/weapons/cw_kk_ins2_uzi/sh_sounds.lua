@@ -1,0 +1,12 @@
+CustomizableWeaponry:addFireSound("CW_KK_INS2_UZI_FIRE", "weapons/uzi/mp40_fp.wav")
+CustomizableWeaponry:addFireSound("CW_KK_INS2_UZI_FIRE_SUPPRESSED", "weapons/uzi/mp40_suppressed_fp.wav")
+
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_UZI_BOLTBACK", "weapons/uzi/handling/mp40_boltback.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_UZI_BOLTLOCK", "weapons/uzi/handling/mp40_boltlock.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_UZI_BOLTUNLOCK", "weapons/uzi/handling/mp40_boltunlock.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_UZI_EMPTY", "weapons/uzi/handling/mp40_empty.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_UZI_FIRESELECT", "weapons/uzi/handling/mp40_fireselect.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_UZI_MAGHIT", "weapons/uzi/handling/mp40_maghit.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_UZI_MAGIN", "weapons/uzi/handling/mp40_magin.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_UZI_MAGOUT", "weapons/uzi/handling/mp40_magout.wav")
+CustomizableWeaponry:addReloadSound("CW_KK_INS2_UZI_MAGRELEASE", "weapons/uzi/handling/mp40_magrelease.wav")

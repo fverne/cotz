@@ -1,0 +1,20 @@
+ITEM.name = "AKS-74N"
+ITEM.description = "The AK-74 is an assault rifle developed in the early 1970s by Russian designer Mikhail Kalashnikov as the replacement for the earlier AKM. It uses a smaller 5.45×39mm cartridge, replacing the 7.62×39mm chambering of earlier Kalashnikov-pattern weapons. This particular model is made for the Navy and colored appropriately. Features far superior rust and general environmental degradation resistance due to this. Similar in terms of performance and use-based degradation."
+ITEM.model = "models/weapons/ethereal/item_ak742.mdl"
+ITEM.class = "cw_kk_ins2_ak742"
+ITEM.weaponCategory = "primary"
+ITEM.width = 3
+ITEM.height = 2
+ITEM.price = 21000
+ITEM.flag = "A"
+ITEM.isWeapon = true
+ITEM.isPLWeapon = true
+ITEM.isCW = true
+ITEM.holsterDrawInfo = {
+	bone = "ValveBiped.Bip01_Spine2",
+	ang = Angle(180, 0,20),
+	pos = Vector(4, 10, -2),
+}
+ITEM.modifier = 4
+ITEM.weight = 3.2
+ITEM.repairCost = ITEM.price/100*1
