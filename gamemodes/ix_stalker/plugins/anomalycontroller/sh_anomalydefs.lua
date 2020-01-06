@@ -4,13 +4,12 @@ PLUGIN.anomalydefs[1] = {
 	interval = 64,
 	commonArtifacts = {
 		"droplet",
-		"jellyfish",
 	},
 	rareArtifacts = {
-		"crystal",
+		"jellyfish",
 	},
 	veryRareArtifacts = {
-		"fireball",
+		"crystal",
 	},
 }
 
@@ -20,13 +19,12 @@ PLUGIN.anomalydefs[2] = {
 	interval = 64,
 	commonArtifacts = {
 		"droplet",
-		"jellyfish",
 	},
 	rareArtifacts = {
-		"crystal",
+		"jellyfish",
 	},
 	veryRareArtifacts = {
-		"fireball",
+		"crystal",
 	},
 }
 
@@ -36,14 +34,13 @@ PLUGIN.anomalydefs[3] = {
 	interval = 64,
 	commonArtifacts = {
 		"battery",
-		"jellyfish",
 	},
 	rareArtifacts = {
+		"jellyfish",
 		"sparkler",
-		"flash",
 	},
 	veryRareArtifacts = {
-		"snowflake",
+		"flash",
 	},
 }
 
@@ -53,14 +50,13 @@ PLUGIN.anomalydefs[4] = {
 	interval = 64,
 	commonArtifacts = {
 		"battery",
-		"jellyfish",
 	},
 	rareArtifacts = {
+		"jellyfish",
 		"sparkler",
-		"flash",
 	},
 	veryRareArtifacts = {
-		"snowflake",
+		"flash",
 	},
 }
 
@@ -70,14 +66,12 @@ PLUGIN.anomalydefs[5] = {
 	interval = 64,	
 	commonArtifacts = {
 		"jellyfish",
-		"nightstar",
 	},
 	rareArtifacts = {
 		"stoneflower",
-		"shell",
 	},
 	veryRareArtifacts = {
-		"meatchunk",
+		"nightstar",
 	},
 }
 
@@ -87,14 +81,12 @@ PLUGIN.anomalydefs[6] = {
 	interval = 64,	
 	commonArtifacts = {
 		"jellyfish",
-		"nightstar",
 	},
 	rareArtifacts = {
 		"stoneflower",
-		"shell",
 	},
 	veryRareArtifacts = {
-		"meatchunk",
+		"nightstar",
 	},
 }
 
@@ -103,16 +95,13 @@ PLUGIN.anomalydefs[7] = {
 	entityname = "anom_voronka_anomaly",
 	interval = 128,
 	commonArtifacts = {
-		"wrenched",
 		"jellyfish",
-		"stoneblood",
 	},
 	rareArtifacts = {
-		"meatchunk",
-		"shell",
+		"stoneblood",
 	},
 	veryRareArtifacts = {
-		"soul",
+		"stoneflower",
 	},
 }
 
@@ -122,14 +111,12 @@ PLUGIN.anomalydefs[8] = {
 	interval = 64,
 	commonArtifacts = {
 		"slime",
-		"stoneblood",
 	},
 	rareArtifacts = {
-		"meatchunk",
-		"slug",
+		"stoneblood",
 	},
 	veryRareArtifacts = {
-		"urchin",
+		"slug",
 	},
 }
 
@@ -139,14 +126,12 @@ PLUGIN.anomalydefs[9] = {
 	interval = 64,
 	commonArtifacts = {
 		"slime",
-		"stoneblood",
 	},
 	rareArtifacts = {
-		"meatchunk",
-		"slug",
+		"stoneblood",
 	},
 	veryRareArtifacts = {
-		"urchin",
+		"slug",
 	},
 }
 
@@ -155,17 +140,13 @@ PLUGIN.anomalydefs[10] = {
 	entityname = "anom_tramplin_anomaly",
 	interval = 512,
 	commonArtifacts = {
-		"wrenched",
-		"stoneblood",
-		"meatchunk",
-		"sparkler",
+		"jellyfish",
 	},
 	rareArtifacts = {
-		"soul",
-		"gravi",
-		"shell",
+		"stoneblood",
+		"stoneflower",
 	},
 	veryRareArtifacts = {
-		"goldfish",
+		"nightstar",
 	},
 }

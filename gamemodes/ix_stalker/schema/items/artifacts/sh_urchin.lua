@@ -1,9 +1,0 @@
-ITEM.name = "Urchin"
-ITEM.model ="models/nasca/etherealsrp_artifacts/urchin.mdl"
-ITEM.description = "Spikey and brown artifact."
-ITEM.longdesc = "This artifact causes an increase in blood pressure. Very rare artifact."
-ITEM.width = 1
-ITEM.height = 1
-ITEM.price = 21000
-ITEM.flag = "A"
-ITEM.value = ITEM.price*0.5

@@ -1,0 +1,22 @@
+ITEM.name = "Compass"
+ITEM.model ="models/nasca/etherealsrp_artifacts/compass.mdl"
+ITEM.description = "A sphere shaped artifact."
+ITEM.longdesc = "It's been several years since one was found. The artifact can locate gaps in anomaly fields. It is believed that it can help one traverse the most complex anomaly fields completely unharmed. However, very few know how to handle it properly.. Unique artifact."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 70000
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5
+ITEM.isArtefact = true
+ITEM.buff = "end"
+ITEM.buffval = 200
+ITEM.res = {
+	["Fall"] = 0.00,
+	["Blast"] = 0.00,
+	["Bullet"] = 0.00,
+	["Shock"] = 0.30,
+	["Burn"] = 0.00,
+	["Radiation"] = 0.00,
+	["Chemical"] = 0.00,
+	["Psi"] = 0.35,
+}

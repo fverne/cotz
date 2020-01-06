@@ -1,9 +1,0 @@
-ITEM.name = "Slug"
-ITEM.model ="models/nasca/etherealsrp_artifacts/slug.mdl"
-ITEM.description = "Very slimey."
-ITEM.longdesc = "A ball of slime. Rare artifact."
-ITEM.width = 1
-ITEM.height = 1
-ITEM.price = 7500
-ITEM.flag = "A"
-ITEM.value = ITEM.price*0.5

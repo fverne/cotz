@@ -5,7 +5,7 @@ include( "autorun/client/blowout_cl.lua" )
 resource.AddWorkshop( 230520180 )
 
 
-local BlowoutEnabled = CreateConVar( "blowout_enabled", 1, { FCVAR_ARCHIVE }, "Enables / disables the Blowout addon. Value can be 0 (= off) or 1 (= on).")
+local BlowoutEnabled = CreateConVar( "blowout_enabled", 0, { FCVAR_ARCHIVE }, "Enables / disables the Blowout addon. Value can be 0 (= off) or 1 (= on).")
 local BlowoutInterval = CreateConVar( "blowout_interval", 36000, { FCVAR_ARCHIVE }, "The time in seconds between two blowouts (from the previous blowout's damage phase to the next one's announcement).")
 local AnnounceDuration = CreateConVar( "blowout_announcing_duration", 70, { FCVAR_ARCHIVE }, "The delay in seconds until a blowout sequence starts, after it's been announced.")
 local DamageDuration = CreateConVar( "blowout_damage_duration", 0, { FCVAR_ARCHIVE }, "The duration in seconds, after a blowout has hit, during which Wiremod E2s cannot be used.")

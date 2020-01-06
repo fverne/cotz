@@ -1,0 +1,22 @@
+ITEM.name = "Jellyfish"
+ITEM.model ="models/nasca/etherealsrp_artifacts/jellyfish.mdl"
+ITEM.description = "Cone artifact. Brown in appearance."
+ITEM.longdesc = "This gravitational artifact attracts and absorbs toxic/chemical particles, reducing the effects of toxic poisoning on the body. Very common in the Zone and unofficially used outside the Zone for treating people who have been exposed to hazardous or deadly chemical and toxic agents. This artifact is quite heavy as the gravitational field seems to increase mass. It will slightly protect its user against extreme heat and acids produced respectively by fire and chemical anomalies. Common artifact."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 1000
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5
+ITEM.buff = "antirad"
+ITEM.buffval = 5
+ITEM.isArtefact = true
+ITEM.res = {
+	["Fall"] = 0.00,
+	["Blast"] = 0.00,
+	["Bullet"] = 0.02,
+	["Shock"] = 0.00,
+	["Burn"] = 0.00,
+	["Radiation"] = 0.00,
+	["Chemical"] = 0.00,
+	["Psi"] = 0.00,
+}

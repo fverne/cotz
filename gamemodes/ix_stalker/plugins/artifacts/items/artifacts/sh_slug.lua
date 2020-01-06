@@ -1,0 +1,22 @@
+ITEM.name = "Slug"
+ITEM.model ="models/nasca/etherealsrp_artifacts/slug.mdl"
+ITEM.description = "Very slimey."
+ITEM.longdesc = "A ball of slime. Rare artifact."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 7500
+ITEM.flag = "A"
+ITEM.value = ITEM.price*0.5
+ITEM.isArtefact = true
+ITEM.buff = "woundheal"
+ITEM.buffval = 25
+ITEM.res = {
+	["Fall"] = 0.00,
+	["Blast"] = 0.00,
+	["Bullet"] = 0.00,
+	["Shock"] = 0.00,
+	["Burn"] = -0.10,
+	["Radiation"] = 0.00,
+	["Chemical"] = -0.10,
+	["Psi"] = 0.00,
+}

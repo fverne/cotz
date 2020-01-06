@@ -1,9 +1,0 @@
-ITEM.name = "Crystal Thorn"
-ITEM.model ="models/nasca/etherealsrp_artifacts/crystal_thorn.mdl"
-ITEM.description = "Pointy artifact."
-ITEM.longdesc = "Much like the Thorn, this artifact has spikes sticking out from it. Handle with caution. Rare artifact."
-ITEM.width = 1
-ITEM.height = 1
-ITEM.price = 3500
-ITEM.flag = "A"
-ITEM.value = ITEM.price*0.5

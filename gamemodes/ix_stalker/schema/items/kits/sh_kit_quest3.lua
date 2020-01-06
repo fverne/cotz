@@ -80,6 +80,7 @@ ITEM.items[3] = {
 	itemsVeryRare = {
 		{"toz66"},
 		{"toz34"},
+		{"w9422"},
 		{"m3supershort"},
 	},
 }

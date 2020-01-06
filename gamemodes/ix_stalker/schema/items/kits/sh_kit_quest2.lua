@@ -64,7 +64,6 @@ ITEM.items[3] = {
 	dropVeryRareChance = 5,
 	itemsCommon = {
 		{"rugermk3"},
-		{"w9422"},
 		{"cz52"},
 	},
 	itemsRare = {
