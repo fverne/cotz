@@ -109,6 +109,7 @@ function CustomizableWeaponry_KK.ins2.rtSight:renderTarget(wep, att)
 	cd.h = rtSize
 
 	render.PushRenderTarget(wep.ScopeRT, 0, 0, rtSize, rtSize)
+		pac.ForceRendering(true)
 		if alpha != 1 then
 			wep._skipDrawingScope = att.name
 			render.RenderView(cd)
@@ -118,7 +119,7 @@ function CustomizableWeaponry_KK.ins2.rtSight:renderTarget(wep, att)
 		cam.Start3D(mdlAttRear.Pos, ang)
 			if cvDrawVM:GetInt() == 1 then
 				wep.CW_VM:DrawModel()
-
+				
 				-- wep:drawAttachments()
 				-- wep.AttachmentModelsVM.kk_ins2_optic_iron.ent:DrawModel()
 
