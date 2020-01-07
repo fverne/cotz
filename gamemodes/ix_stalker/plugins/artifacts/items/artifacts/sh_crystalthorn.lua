@@ -9,3 +9,4 @@ ITEM.flag = "A"
 ITEM.value = ITEM.price*0.5
 ITEM.buff = "antirad"
 ITEM.buffval = 20
+ITEM.weight = 1

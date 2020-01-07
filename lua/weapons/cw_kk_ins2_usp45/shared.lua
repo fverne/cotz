@@ -57,7 +57,7 @@ SWEP.Attachments = {
 	{header = "Upgrade 2-1", offset = {200, 0}, atts = {"fn_acc2"}},
 	{header = "Upgrade 2-2", offset = {200, 0}, atts = {"fn_hndl2", "fn_stab2"}},
 	{header = "Upgrade 2-3", offset = {200, 0}, atts = {"fn_rec2", "fn_rof2"}},
-	["+reload"] = {header = "Ammo", offset = {500, 150}, atts = {"am_magnum", "am_matchgrade"}}
+	["+reload"] = {header = "Ammo", offset = {500, 150}, atts = {"am_zoneloaded", "am_matchgrade"}}
 }
 
 SWEP.Animations = {

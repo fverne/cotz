@@ -11,16 +11,12 @@ local IFTP, CT
 
 function SWEP:PrimaryAttack()
 	if self.boltAction_isShot then return end
-
+	
 	if self:IsOwnerCrawling() then
-		return
+		return false
 	end
 
 	if not self:canFireWeapon(1) then
-		return
-	end
-	
-	if self.dt.Safe then
 		return false
 	end
 
@@ -32,11 +28,15 @@ function SWEP:PrimaryAttack()
 	end
 
 	if not self:canFireWeapon(2) then
-		return
+		return false
 	end
 
 	if not self:canFireWeapon(3) then
-		return
+		return false
+	end
+	
+	if self.dt.Safe then
+		return false
 	end
 
 	IFTP = IsFirstTimePredicted()

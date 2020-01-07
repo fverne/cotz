@@ -12,3 +12,4 @@ ITEM.buffval = 10
 ITEM.debuff = "end"
 ITEM.debuffval = 20
 ITEM.isArtefact = true
+ITEM.weight = 1

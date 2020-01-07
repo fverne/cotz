@@ -6,6 +6,7 @@ ITEM.height = 1
 ITEM.price = "5000"
 ITEM.flag = "A"
 ITEM.toolValue = 2
+ITEM.weight = 0.25
 
 
 ITEM.functions.repair = {

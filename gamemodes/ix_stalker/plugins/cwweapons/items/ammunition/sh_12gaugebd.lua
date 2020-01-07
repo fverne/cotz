@@ -1,0 +1,15 @@
+ITEM.name = "12g Birdshot"
+ITEM.model = "models/kek1ch/ammo_12x70_buck.mdl"
+ITEM.width = 2
+ITEM.height = 1
+ITEM.ammo = "12 Gauge -BD-" // type of the ammo
+ITEM.ammoAmount = 50 // amount of the ammo
+ITEM.description= "A box that contains %s 12 gauge birdshot shells. "
+ITEM.longdesc = "Birdshot 12 gauge shell filled with 3 mm shot. Highly lethal at close range, but has poor armor piercing capabilities. Only suitable for use with smoothbore weapons."
+ITEM.price = 650
+ITEM.busflag = {"ammo"}
+ITEM.img = Material("vgui/hud/12gauge.png")
+ITEM.Range = -10
+ITEM.Pen = -2
+ITEM.weight = 0.04
+ITEM.isAmmo = true

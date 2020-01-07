@@ -7,6 +7,7 @@ ITEM.price = "15"
 --ITEM.busflag = "MERCH3"
 ITEM.busflag = {"hardware1_1"}
 ITEM.maxDie = 6
+ITEM.weight = 0.05
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)

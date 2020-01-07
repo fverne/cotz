@@ -6,9 +6,6 @@ AddCSLuaFile("sh_soundscript.lua")
 include("sh_sounds.lua")
 include("sh_soundscript.lua")
 
-CustomizableWeaponry:registerAmmo("7.62x51MM AP", "7.62x51MM AP", 762, 50)
-CustomizableWeaponry:registerAmmo("7.62x51MM MG", "7.62x51MM MG", 762, 49)
-
 if CLIENT then
 	SWEP.DrawCrosshair = false
 	SWEP.PrintName = "M40A1"
@@ -141,7 +138,7 @@ SWEP.Attachments = {
 	{header = "Upgrade 2-2", offset = {200, 0}, atts = {"fn_hndl2", "fn_stab2"}},
 	{header = "Upgrade 2-3", offset = {200, 0}, atts = {"fn_rec2"}},
 	["+use"] = {header = "Sight Contract", offset = {500, -0}, atts = {"kk_ins2_sights_cstm"}},
-	["+reload"] = {header = "Ammo", offset = {1000, 500}, atts = {"am_magnum", "am_matchgrade"}}
+	["+reload"] = {header = "Ammo", offset = {1000, 500}, atts = {"am_zoneloaded", "am_matchgrade"}}
 }
 
 SWEP.Animations = {

@@ -8,6 +8,7 @@ ITEM.repairAmount = 5
 ITEM.repairTreshhold = 75
 ITEM.maxStack = 3
 ITEM.sound = "stalkersound/inv_repair_kit_use_fast_2p8.mp3"
+ITEM.weight = 0.25
 
 ITEM.functions.use = {
 	name = "Clean Gun",

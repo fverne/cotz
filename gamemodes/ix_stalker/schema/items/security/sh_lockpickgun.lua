@@ -8,3 +8,4 @@ ITEM.price = 2000
 ITEM.busflag = "dev"
 ITEM.securitytype =  "mechanical"
 ITEM.securityquality = 2
+ITEM.weight = 0.25

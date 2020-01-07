@@ -5,43 +5,19 @@ ITEM.width = 2
 ITEM.height = 2
 ITEM.flag = "A"
 ITEM.itemsForcedDrop = {
-	{"detectorecho"},
 	{"9x18"},
-	{"9x19"},
-	{"9x19"},
-	{"radio"},
+	{"9x18"},
+	{"bagrubles", {["quantity"] = 1000}},
+	{"headlamp"},
+	{"fort12"},
+	{"mreukraine"},
+	{"mreukraine"},
+	{"water"},
+	{"water"},
 	{"water"},
 	{"geigercounter"},
-	{"medkitscientific"},
-	{"antirad"},
-	{"pda"},
+	{"detectorecho"},
+	{"radio"},
+	{"ssp99"},
 }
-
-ITEM.items[1] = {
-	dropAmount = 1,
-	itemsCommon = {
-		{"makarov", {["durability"] = 100},},
-		{"fort12", {["durability"] = 100},},
-}
-}
-
-ITEM.items[2] = {
-	dropAmount = 1,
-	itemsCommon = {
-		{"mp5", {["durability"] = 100},},
-		{"pp2000", {["durability"] = 100},},
-		{"mp9a1", {["durability"] = 100},},
-		{"uzi", {["durability"] = 100},},
-		{"sterling", {["durability"] = 100},},
-}
-}
-
-ITEM.items[3] = {
-	dropAmount = 1,
-	itemsCommon = {
-		{"droplet"},
-		{"jellyfish"},
-		{"thorn"},
-		{"stoneflower"},
-}
-}
+ITEM.weight = 5

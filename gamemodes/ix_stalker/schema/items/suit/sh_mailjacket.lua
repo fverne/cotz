@@ -19,6 +19,7 @@ ITEM.anomalousrpglevels = {"2","2","2","2","2"}
 ITEM.artifactcontainers = {"0"}
 ITEM.Special = {"Light"}
 ITEM.img = Material("vgui/hud/anorak.png")
+ITEM.weight = 2.5
 ITEM.res = {
 	["Bullet"] = 0.05,
 	["Blast"] = 0.025,

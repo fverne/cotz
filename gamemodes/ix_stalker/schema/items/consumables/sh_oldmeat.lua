@@ -14,5 +14,6 @@ ITEM:Hook("use", function(item)
 	item.player:AddBuff("debuff_radiation", 10, { amount = 1 })
 	ix.chat.Send(item.player, "iteminternal", "eats a bit of their "..item.name..".", false)
 end)
+ITEM.weight = 0.1
 
 ITEM:DecideFunction()

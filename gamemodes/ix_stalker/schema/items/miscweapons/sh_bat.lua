@@ -11,6 +11,7 @@ ITEM.width = 3
 ITEM.category = "Melee"
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
+ITEM.weight = 1
 ITEM.iconCam = {
 	pos = Vector(-23, 0, 5),
 	ang = Angle(0, -0, 90),

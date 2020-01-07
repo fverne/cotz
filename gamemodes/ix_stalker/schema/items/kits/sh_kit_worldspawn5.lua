@@ -4,6 +4,7 @@ ITEM.model = "models/weapons/w_eq_eholster_elite.mdl"
 ITEM.width = 2
 ITEM.height = 1
 ITEM.flag = "A"
+ITEM.weight = 3
 
 ITEM.items[1] = {
 	dropAmount = 1,

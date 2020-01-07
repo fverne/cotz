@@ -1,0 +1,12 @@
+ITEM.name = "7.62x54mm Belt"
+ITEM.model = "models/ethprops/ammo/pkm.mdl"
+ITEM.width = 2
+ITEM.height = 1
+ITEM.ammo = "7.62x54MMB"
+ITEM.description = "A Belt of 7.62x54mmR"
+ITEM.category = "Ammunition"
+ITEM.price = 1470
+ITEM.flag = "G"
+ITEM.ammoAmount = 100
+ITEM.weight = 0.039
+ITEM.isAmmo = true

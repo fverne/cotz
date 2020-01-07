@@ -17,6 +17,7 @@ ITEM.ballisticrpglevels = {["body"] = "10", ["limb"] = "5"}
 ITEM.anomalousrpglevels = {"10","5","5","5","5"}
 ITEM.artifactcontainers = {"0"}
 ITEM.img = Material("vgui/hud/io7a.png")
+ITEM.weight = 6.5
 ITEM.res = {
 	["Bullet"] = 0.1,
 	["Blast"] = 0.05,

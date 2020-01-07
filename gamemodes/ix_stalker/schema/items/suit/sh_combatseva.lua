@@ -24,6 +24,7 @@ ITEM.Special = {"Psy+20","CC","Heavy"}
 ITEM.maxAgi = 30
 ITEM.img = Material("vgui/hud/seva.png")
 ITEM.noBusiness = true
+ITEM.weight = 13.5
 ITEM.res = {
 	["Bullet"] = 0.28,
 	["Blast"] = 0.14,

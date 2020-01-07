@@ -14,3 +14,4 @@ ITEM.debuff = "end"
 ITEM.debuffval = 18
 ITEM.buff = "antirad"
 ITEM.buffval = 15
+ITEM.weight = 1

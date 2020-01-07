@@ -10,6 +10,7 @@ ITEM.busflag = {"medical1"}
 ITEM.radrem = 0.5
 ITEM.quantity = 6
 ITEM.sound = "stalkersound/inv_smoke.mp3"
+ITEM.weight = 0.1
 
 function ITEM:GetDescription()
 	if (!self.entity or !IsValid(self.entity)) then

@@ -4,6 +4,7 @@ ITEM.model = "models/kek1ch/dev_rukzak.mdl"
 ITEM.width = 3
 ITEM.height = 2
 ITEM.flag = "A"
+ITEM.weight = 4
 
 ITEM.items[1] = {
 	dropAmount = 1,

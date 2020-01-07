@@ -7,6 +7,7 @@ ITEM.flag = "A"
 ITEM.itemsForcedDrop = {
 	{"bagrubles", {["quantity"] = 100}},
 }
+ITEM.weight = 1
 
 ITEM.items[1] = {
 	dropAmount = 2,

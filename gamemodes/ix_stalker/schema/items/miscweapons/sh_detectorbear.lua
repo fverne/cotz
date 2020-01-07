@@ -11,6 +11,7 @@ ITEM.weaponCategory = "beltbackleft"
 ITEM.canAttach = false
 ITEM.keepWhenEquipped = true
 ITEM.repairCost = ITEM.price/100*1
+ITEM.weight = 0.25
 ITEM.pacData = {
 [1] = {
 	["children"] = {

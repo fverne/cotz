@@ -13,3 +13,4 @@ ITEM.itemsForcedDrop = {
 	{"geigercounter"},
 	{"headlamp"},
 }
+ITEM.weight = 5

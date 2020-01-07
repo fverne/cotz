@@ -39,7 +39,7 @@ SWEP.ShotgunReload = false
 SWEP.ReticleInactivityPostFire = 0.8
 
 SWEP.Attachments = {
-	-- ["+reload"] = {header = "Ammo", offset = {0, 0}, atts = {"am_slugrounds", "am_flechetterounds"}}
+	-- ["+reload"] = {header = "Ammo", offset = {0, 0}, atts = {"am_slugrounds", "am_birdshot", "am_trishot", "am_zoneloaded"}}
 }
 
 SWEP.KK_INS2_EmptyIdle = true

@@ -10,3 +10,4 @@ ITEM.value = ITEM.price*0.5
 ITEM.buff = "antirad"
 ITEM.buffval = 10
 ITEM.isArtefact = true
+ITEM.weight = 1

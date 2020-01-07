@@ -11,6 +11,7 @@ ITEM.width = 2
 ITEM.category = nil
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
+ITEM.weight = 0.25
 ITEM.iconCam = {
 	pos = Vector(33, 3.6, 0),
 	ang = Angle(0, 180, 0),

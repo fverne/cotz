@@ -7,6 +7,7 @@ ITEM.height = 1
 ITEM.price = 10000
 ITEM.flag = "A"
 ITEM.value = ITEM.price*1*1
+ITEM.weight = 0.25
 
 ITEM.functions.Sell = {
 	icon = "icon16/stalker/sell.png",

@@ -9,8 +9,6 @@ include("sh_soundscript.lua")
 SWEP.magType = "smgMag"
 
 CustomizableWeaponry:registerAmmo("9x21MM", "9x21MM Rounds", 9, 21)
-CustomizableWeaponry:registerAmmo("9x21MM MG", "9x21MM MG Rounds", 9, 21)
-CustomizableWeaponry:registerAmmo("9x21MM AP", "9x21MM AP Rounds", 9, 21)
 
 if CLIENT then
 	SWEP.DrawCrosshair = false
@@ -133,7 +131,7 @@ SWEP.Attachments = {
 	{header = "Upgrade 2-2", offset = {200, 0}, atts = {"fn_hndl2", "fn_stab2"}},
 	{header = "Upgrade 2-3", offset = {200, 0}, atts = {"fn_rec2", "fn_rof2"}},
 	["+use"] = {header = "Sight Contract", offset = {300, 0}, atts = {"kk_ins2_sights_cstm"}},
-	["+reload"] = {header = "Ammo", offset = {0, 500}, atts = {"am_magnum", "am_matchgrade"}}
+	["+reload"] = {header = "Ammo", offset = {0, 500}, atts = {"am_zoneloaded", "am_matchgrade"}}
 }
 
 SWEP.Animations = {

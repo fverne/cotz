@@ -17,7 +17,7 @@ ITEM.ballisticrpglevels = {["head"] = "0"}
 ITEM.anomalousrpglevels = {"2","2","10","10","5"}
 ITEM.img = Material("vgui/hud/halfmask.png")
 ITEM.repairCost = ITEM.price/100*1
-
+ITEM.weight = 0.95
 
 ITEM.pacData = {
 [1] = {

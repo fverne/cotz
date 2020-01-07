@@ -8,6 +8,7 @@ ITEM.repairAmount = 5
 ITEM.repairTreshhold = 75
 ITEM.maxStack = 3
 ITEM.sound = "stalkersound/inv_repair_sewing_kit_fast.mp3"
+ITEM.weight = 0.25
 
 ITEM.functions.use = {
 	name = "Stitch up outfit",

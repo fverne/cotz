@@ -8,6 +8,7 @@ ITEM.busflag = {"hardware"}
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 ITEM.img = Material("vgui/hud/pda1.png")
 ITEM.repairCost = ITEM.price/100*1
+ITEM.weight = 0.25
 
 function ITEM:GetDescription()
 	return "A PDA that encourages long range communication between individuals. Being the newest version of the PDA series, this allows the user to both select an avatar, but also select their own username." .. "\n\nAvatar: " .. self:GetData("avatar","vgui/icons/face_31.png") .. "\n\nNickname: " .. self:GetData("nickname", "meme")

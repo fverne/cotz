@@ -5,6 +5,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = "5000"
 ITEM.flag = "A"
+ITEM.weight = 0.25
 
 
 ITEM.functions.read = {

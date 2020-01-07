@@ -5,6 +5,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = "500"
 ITEM.flag = "1"
+ITEM.weight = 0.1
 
 ITEM.functions.connection = { -- sorry, for name order.
 	name = "Contact Connections",

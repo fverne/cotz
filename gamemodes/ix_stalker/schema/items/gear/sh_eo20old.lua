@@ -19,6 +19,7 @@ ITEM.anomalousrpglevels = {"2","2","2","2","2"}
 ITEM.Special = {"Light","No Aim"}
 ITEM.img = Material("vgui/hud/eo20old.png")
 ITEM.repairCost = ITEM.price/100*1
+ITEM.weight = 0.8
 
 ITEM.pacData = {
 [1] = {

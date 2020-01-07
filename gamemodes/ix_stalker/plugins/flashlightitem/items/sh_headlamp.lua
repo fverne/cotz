@@ -7,6 +7,7 @@ ITEM.category = "Tools"
 ITEM.busflag = {"hardware"}
 ITEM.price = 2500
 ITEM.repairCost = ITEM.price/100*1
+ITEM.weight = 0.25
 
 ITEM:Hook("drop", function(item)
 	item.player:Flashlight(false)

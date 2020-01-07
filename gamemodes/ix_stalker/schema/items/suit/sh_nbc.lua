@@ -22,6 +22,7 @@ ITEM.anomalousrpglevels = {"2","25","25","25","25"}
 ITEM.artifactcontainers = {"2"}
 ITEM.maxAgi = 50
 ITEM.img = Material("vgui/hud/nbc.png")
+ITEM.weight = 9.3
 ITEM.res = {
 	["Bullet"] = 0.08,
 	["Blast"] = 0.04,

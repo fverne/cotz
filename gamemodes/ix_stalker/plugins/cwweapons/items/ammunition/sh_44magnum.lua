@@ -1,0 +1,12 @@
+ITEM.name = ".44 Magnum"
+ITEM.model = "models/kek1ch/ammo_1143x23_fmj.mdl"
+ITEM.ammo = ".44 Magnum" // type of the ammo
+ITEM.ammoAmount = 100 // amount of the ammo
+ITEM.description= "A box that contains %s rounds of .44 Magnum ammo. "
+ITEM.longdesc = "This large-bore .44 Magnum cartridge was originally designed for revolvers, but quickly adopted by rifles and carbines."
+ITEM.price = 1000
+ITEM.busflag = {"ammo1_1"}
+ITEM.width = 2
+ITEM.img = Material("vgui/hud/44magnum.png")
+ITEM.weight = 0.023
+ITEM.isAmmo = true

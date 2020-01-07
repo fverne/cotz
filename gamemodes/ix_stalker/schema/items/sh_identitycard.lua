@@ -4,6 +4,7 @@ ITEM.model = "models/kek1ch/access_card.mdl"
 ITEM.price = "1000"
 ITEM.flag = "A"
 ITEM.data = { customName = ITEM.name, customDesc = ITEM.description, isUsed = 0}
+ITEM.weight = 0.05
 
 ITEM.functions.Custom = {
 	name = "Assign",

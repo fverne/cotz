@@ -298,21 +298,6 @@ end
 do
 	-- Load the chat types after the configs so we can access changed configs.
 	hook.Add("InitializedConfig", "ixChatTypes", function()
-		-- The default in-character chat.
-		ix.chat.Register("ic", {
-			format = "%s says \"%s\"",
-			indicator = "chatTalking",
-			GetColor = function(self, speaker, text)
-				-- If you are looking at the speaker, make it greener to easier identify who is talking.
-				if (LocalPlayer():GetEyeTrace().Entity == speaker) then
-					return ix.config.Get("chatListenColor")
-				end
-
-				-- Otherwise, use the normal chat color.
-				return ix.config.Get("chatColor")
-			end,
-			CanHear = ix.config.Get("chatRange", 280)
-		})
 
 		-- Actions and such.
 		ix.chat.Register("me", {

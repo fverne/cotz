@@ -4,6 +4,7 @@ ITEM.model = "models/items/item_item_crate.mdl"
 ITEM.width = 3
 ITEM.height = 3
 ITEM.flag = "A"
+ITEM.weight = 7.5
 
 ITEM.items[1] = {
 	dropAmount = 4,

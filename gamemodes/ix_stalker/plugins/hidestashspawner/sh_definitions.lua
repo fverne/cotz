@@ -51,7 +51,7 @@ PLUGIN.StashItems = {
     },
 
     {
-      {"ppsh", {["durability"] = 34, ["ammo"] = 12}},
+      {"ppsh", {["durability"] = 34}},
       {"9x18", {["quantity"] = 50}},
       {"kit_hidestash3"},
     },

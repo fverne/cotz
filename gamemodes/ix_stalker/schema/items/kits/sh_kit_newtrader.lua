@@ -5,6 +5,17 @@ ITEM.width = 2
 ITEM.height = 1
 ITEM.flag = "A"
 ITEM.itemsForcedDrop = {
+	{"9x18"},
+	{"9x18"},
 	{"bagrubles", {["quantity"] = 30000}},
+	{"headlamp"},
+	{"makarov"},
+	{"cannedtuna"},
+	{"cannedtuna"},
+	{"water"},
+	{"water"},
 	{"sattelitephone"},
+	{"geigercounter"},
 }
+
+ITEM.weight = 5

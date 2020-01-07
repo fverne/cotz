@@ -1036,7 +1036,7 @@ function SWEP:Think()
 	if delay < CurTime() then
 		delay = CurTime() + 0.5
 		local client = self.Owner
-		hook.Run("AmmoCheck",client,self)
+		hook.Run("AmmoCheck", client, self)
 	end
 	
 	CustomizableWeaponry.actionSequence.process(self)
@@ -1474,9 +1474,11 @@ function SWEP:canFireWeapon(checkType)
 			return
 		end
 	elseif checkType == 2 then
+	
 		if CurTime() < self.GlobalDelay then
-			return false
+			return
 		end
+		
 	elseif checkType == 3 then
 		if self:isNearWall() then
 			return
@@ -1519,11 +1521,11 @@ function SWEP:PrimaryAttack()
 		return
 	end
 	
-	if self.dt.Safe then
-		return false
+	if not self:canFireWeapon(3) then
+		return
 	end
 	
-	if not self:canFireWeapon(3) then
+	if self.dt.Safe then
 		return
 	end
 	
@@ -1533,11 +1535,6 @@ function SWEP:PrimaryAttack()
 	if mag == 0 then
 		self:EmitSound("CW_EMPTY", 100, 100)
 		self:SetNextPrimaryFire(CT + 0.25)
-		return
-	end
-	
-	if self:GetWeaponHP() < 0 then
-		self:unloadWeapon()
 		return
 	end
 	

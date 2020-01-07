@@ -8,6 +8,7 @@ ITEM.price = 1
 ITEM.maxStack = 5000
 ITEM.splitSize = {1,5,10,25,100,1000}
 ITEM.noBusiness = true
+ITEM.weight = 0.01
 
 function ITEM:GetDescription()
 	local quant = math.Round(self:GetData("quantity", 1), 0)

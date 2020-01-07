@@ -13,6 +13,7 @@ ITEM.iconCam = {
 	ang = Angle(90, 0, 0),
 	fov = 2.5,
 }
+ITEM.weight = 0.001
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)

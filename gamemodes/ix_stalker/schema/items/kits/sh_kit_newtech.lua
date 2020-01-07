@@ -6,6 +6,18 @@ ITEM.height = 2
 ITEM.flag = "A"
 ITEM.itemsForcedDrop = {
 	{"toolsbasic"},
-	{"component", {["quantity"] = 500}},
+	{"disassemblingkitbasic"},
+	{"9x18"},
+	{"9x18"},
+	{"bagrubles", {["quantity"] = 20000}},
+	{"headlamp"},
+	{"makarov"},
+	{"cannedtuna"},
+	{"cannedtuna"},
+	{"water"},
+	{"water"},
+	{"sattelitephone"},
+	{"geigercounter"},
 }
 
+ITEM.weight = 5

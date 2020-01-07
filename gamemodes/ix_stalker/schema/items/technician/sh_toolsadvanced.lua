@@ -15,6 +15,7 @@ ITEM.toolMult = 3
 ITEM.compMultiplier = 1.15
 ITEM.repairAmount = 25
 ITEM.sound = "stalkersound/inv_repair_kit_use_fast.mp3"
+ITEM.weight = 0.25
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", 1)

@@ -484,25 +484,26 @@ else
 		local item = data
 		local weapon = LocalPlayer():GetWeapon(item.class)
 		
-		if(weapon and IsValid(weapon)) then
-			if(item.name) then
+		if (weapon and IsValid(weapon)) then
+			if (item.name) then
 				weapon.PrintName = item.name
 			end
 			
-			if(item.wepDmg) then
+			if (item.wepDmg) then
 				weapon.Damage = tonumber(item.wepDmg)
 			end
 			
-			if(item.wepSpd) then
+			if (item.wepSpd) then
 				weapon.FireDelay = weapon.FireDelay * tonumber(item.wepSpd)
+				print(weapon.FireDelay)
 			end
 			
-			if(item.wepRec) then
+			if (item.wepRec) then
 				weapon.Recoil = weapon.Recoil * item.wepRec
 			end
 			
 			--needs to happen in both client and server
-			if(item.wepAcc) then
+			if (item.wepAcc) then
 				weapon.MaxSpreadInc = weapon.MaxSpreadInc * item.wepAcc
 				weapon.AimSpread = weapon.AimSpread * item.wepAcc
 			end				

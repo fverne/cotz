@@ -7,6 +7,7 @@ ITEM.maxStack = 100
 ITEM.compMultiplier = 1
 ITEM.category = "Technician"
 ITEM.sound = "stalkersound/inv_repair_kit_use_fast_2p8.mp3"
+ITEM.weight = 0.25
 
 function ITEM:GetDescription()
 	local quant = math.Round(self:GetData("quantity", 1), 0)

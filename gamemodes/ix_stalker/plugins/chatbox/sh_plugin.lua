@@ -5,11 +5,6 @@ PLUGIN.name = "Chatbox"
 PLUGIN.author = "`impulse"
 PLUGIN.description = "Replaces the chatbox to enable customization, autocomplete, and useful info."
 
-if (CLIENT) then
-	ix.chat.history = ix.chat.history or {} -- array of strings the player has entered into the chatbox
-	ix.chat.currentCommand = ""
-	ix.chat.currentArguments = {}
-
 	ix.option.Add("chatNotices", ix.type.bool, false, {
 		category = "chat"
 	})
@@ -45,6 +40,11 @@ if (CLIENT) then
 			return true
 		end
 	})
+
+if (CLIENT) then
+	ix.chat.history = ix.chat.history or {} -- array of strings the player has entered into the chatbox
+	ix.chat.currentCommand = ""
+	ix.chat.currentArguments = {}
 
 	function PLUGIN:CreateChat()
 		if (IsValid(self.panel)) then

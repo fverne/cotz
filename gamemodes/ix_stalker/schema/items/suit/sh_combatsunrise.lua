@@ -20,6 +20,7 @@ ITEM.artifactcontainers = {"2"}
 ITEM.Special = {"Heavy"}
 ITEM.maxAgi = 40
 ITEM.img = Material("vgui/hud/sunrise.png")
+ITEM.weight = 9.4
 ITEM.res = {
 	["Bullet"] = 0.28,
 	["Blast"] = 0.14,

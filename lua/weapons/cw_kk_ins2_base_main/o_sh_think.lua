@@ -16,15 +16,15 @@ local Length = reg.Vector.Length
 
 local IFTP
 local wl, ws
-local delay = 0
+local timerdelay = 0
 
 function SWEP:Think()
 	-- in vehicle? can't do anything, also prevent needless calculations of stuff
 	
-	if delay < CurTime() then
-		delay = CurTime() + 0.5
+	if timerdelay < CurTime() then
+		timerdelay = CurTime() + 0.5
 		local client = self.Owner
-		hook.Run("AmmoCheck",client,self)
+		hook.Run("AmmoCheck", client, self)
 	end
 	
 	if self.Owner:InVehicle() and not self.Owner:GetAllowWeaponsInVehicle() then

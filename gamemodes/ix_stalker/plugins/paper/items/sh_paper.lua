@@ -6,6 +6,7 @@ ITEM.description = "A paper which one you can write on."
 ITEM.busflag = {"hardware1"}
 ITEM.price = 50
 ITEM.repairCost = ITEM.price/100*1
+ITEM.weight = 0.01
 
 ITEM.functions.use = {
 	name = "Interact",

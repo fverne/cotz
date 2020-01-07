@@ -1248,15 +1248,6 @@ do
 			self:SetWepRaised(!self:IsWepRaised(), weapon)
 
 			if (IsValid(weapon)) then
-			    if (CustomizableWeaponry) then
-    			    if istable(weapon.dt) and weapon.dt.Safe ~= nil then
-            			if (weapon.dt.Safe == false) and !self:IsWepRaised() then
-            			    weapon:SetSafe(true)
-                        elseif (weapon.dt.Safe == true) and self:IsWepRaised() then
-            			    weapon:SetSafe(false)
-            			end
-            		end
-    			end
 				if (self:IsWepRaised() and weapon.OnRaised) then
 					weapon:OnRaised()
 				elseif (!self:IsWepRaised() and weapon.OnLowered) then

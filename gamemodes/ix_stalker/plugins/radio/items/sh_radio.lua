@@ -6,6 +6,7 @@ ITEM.price = 2000
 --ITEM.busflag = "MERCH4"
 ITEM.busflag = {"hardware2"}
 ITEM.repairCost = ITEM.price/100*1
+ITEM.weight = 0.25
 
 local function getText(togga)
 	if (togga) then

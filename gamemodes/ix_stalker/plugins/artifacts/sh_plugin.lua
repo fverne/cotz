@@ -4,22 +4,22 @@ PLUGIN.desc = "Adds a relatively simple artifact system"
 
 function PLUGIN:ArtifactChange(client)
     -- INIT VALUES
-    local artiheal = client:GetNetVar("ArtiHealAmt")/10) or 0           -- Healing
-    local artihealcur = client:GetNetVar("ArtiHealCur")/10) or 0
+    local artiheal = (client:GetNetVar("ArtiHealAmt")/10) or 0           -- Healing
+    local artihealcur = (client:GetNetVar("ArtiHealCur")/10) or 0
     
-    local rads = client:GetNetVar("Rads")/10) or 0                      -- Radiation
-    local radscur = client:GetNetVar("RadsCur")/10) or 0
+    local rads = (client:GetNetVar("Rads")/10) or 0                      -- Radiation
+    local radscur = (client:GetNetVar("RadsCur")/10) or 0
     
-    local antirads = client:GetNetVar("AntiRads")/10) or 0              -- Anti-Radiation
-    local antiradscur = client:GetNetVar("AntiRadsCur")/10) or 0
+    local antirads = (client:GetNetVar("AntiRads")/10) or 0              -- Anti-Radiation
+    local antiradscur = (client:GetNetVar("AntiRadsCur")/10) or 0
     
-    local endbuff = client:GetNetVar("EndBuff")/10) or 0                -- Endurance buff
-    local endbuffcur = client:GetNetVar("EndBuffCur")/10) or 0
+    local endbuff = (client:GetNetVar("EndBuff")/10) or 0                -- Endurance buff
+    local endbuffcur = (client:GetNetVar("EndBuffCur")/10) or 0
     
-    local endred = client:GetNetVar("EndRed")/10) or 0                  -- Endurance debuff
-    local endredcur = client:GetNetVar("EndRedCur")/10) or 0
+    local endred = (client:GetNetVar("EndRed")/10) or 0                  -- Endurance debuff
+    local endredcur = (client:GetNetVar("EndRedCur")/10) or 0
     
-    local woundheal = client:GetNetVar("WoundHeal")/10) or 0
+    local woundheal = (client:GetNetVar("WoundHeal")/10) or 0
     local woundhealcur = (client:GetNetVar("WoundHealCur")/10) or 0
     
     local maxweight = client:GetChar():GetData("MaxWeight",50)

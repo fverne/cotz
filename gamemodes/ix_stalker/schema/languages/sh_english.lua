@@ -324,6 +324,7 @@ LANGUAGE = {
 
 	resetDefault = "Reset to default",
 	resetDefaultDescription = "This will reset \"%s\" to its default value of \"%s\".",
+	optPersonalchatcolor = "Personal Chat Color",
 	optGasmaskoverlay = "Dynamic Gasmask Overlays",
 	optCursor = "STALKER Cursor",
 	optOpenBags = "Open bags with inventory",

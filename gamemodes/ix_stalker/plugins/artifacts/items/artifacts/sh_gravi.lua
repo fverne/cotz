@@ -12,3 +12,4 @@ ITEM.buff = "weight"
 ITEM.debuff = "rads"
 ITEM.debuffval = 15
 ITEM.isArtefact = true
+ITEM.weight = 1

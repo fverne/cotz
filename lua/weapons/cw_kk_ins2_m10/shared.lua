@@ -7,8 +7,6 @@ include("sh_sounds.lua")
 include("sh_soundscript.lua")
 
 CustomizableWeaponry:registerAmmo(".38 Special", ".38 Special", 38, 39)
-CustomizableWeaponry:registerAmmo(".38 Special AP", ".38 Special AP", 38, 38)
-CustomizableWeaponry:registerAmmo(".38 Special MG", ".38 Special MG", 38, 40)
 
 if CLIENT then
 	SWEP.DrawCrosshair = false
@@ -55,7 +53,7 @@ SWEP.Attachments = {
 	{header = "Upgrade 2-1", offset = {200, 0}, atts = {"fn_acc2"}},
 	{header = "Upgrade 2-2", offset = {200, 0}, atts = {"fn_hndl2", "fn_stab2"}},
 	{header = "Upgrade 2-3", offset = {200, 0}, atts = {"fn_rec2", "fn_rof2"}},
-	["+reload"] = {header = "Ammo", offset = {500, 150}, atts = {"am_magnum", "am_matchgrade"}}
+	["+reload"] = {header = "Ammo", offset = {500, 150}, atts = {"am_zoneloaded", "am_matchgrade"}}
 }
 
 SWEP.Animations = {

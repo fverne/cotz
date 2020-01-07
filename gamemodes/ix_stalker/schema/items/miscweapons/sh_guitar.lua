@@ -11,6 +11,7 @@ ITEM.width = 4
 ITEM.category = nil
 ITEM.repairCost = ITEM.price/100*1
 ITEM.canAttach = false
+ITEM.weight = 2
 ITEM.iconCam = {
 	ang= Angle(-0.70499622821808, 268.25439453125, 90),
 	fov= 16.085652091515,

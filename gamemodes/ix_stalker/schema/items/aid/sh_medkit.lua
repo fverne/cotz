@@ -10,6 +10,7 @@ ITEM.sound = "stalkersound/inv_bandage.mp3"
 ITEM.price = "100"
 ITEM.busflag = {"medical2"}
 ITEM.quantity = 3
+ITEM.weight = 0.25
 
 function ITEM:GetDescription()
 	if (!self.entity or !IsValid(self.entity)) then

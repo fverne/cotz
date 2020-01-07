@@ -1,0 +1,14 @@
+ITEM.name = "9x21mm"
+ITEM.model = "models/ethprops/ammo/9x19.mdl"
+ITEM.width = 1
+ITEM.height = 1
+ITEM.ammo = "9x21MM" // type of the ammo
+ITEM.description = "A Box that contains 9x21mm"
+ITEM.category = "Ammunition"
+ITEM.price = 140
+ITEM.flag = "g"
+ITEM.basequantity = 100
+ITEM.quantity = 100
+ITEM.maxQuantity = 100
+ITEM.weight = 0.022
+ITEM.isAmmo = true

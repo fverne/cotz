@@ -18,6 +18,7 @@ ITEM.anomalousrpglevels = {"2","2","10","10","5"}
 ITEM.overlayPath = "vgui/overlays/hud_merc"
 ITEM.img = Material("vgui/hud/xm40.png")
 ITEM.repairCost = ITEM.price/100*1
+ITEM.weight = 0.8
 
 ITEM.pacData = {
 [1] = {

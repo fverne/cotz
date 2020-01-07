@@ -20,3 +20,4 @@ ITEM.res = {
 	["Chemical"] = -0.10,
 	["Psi"] = 0.00,
 }
+ITEM.weight = 1

@@ -1,0 +1,15 @@
+ITEM.name = "Nightforce NXS"
+ITEM.description = "American optic sight. 8.0x magnification. Cross type sight."
+ITEM.category = "Attachments"
+ITEM.width = 2
+ITEM.height = 1
+ITEM.attSearch = { "md_nightforce_nxs"}
+ITEM.model = "models/cw2/attachments/pso.mdl"
+ITEM.upgradeIcon = Material("materials/vgui/ui/stalker/weaponupgrades/8xmag.png")
+ITEM.slot = 1
+--ITEM.busflag = "SPECIAL3_1"
+ITEM.price = 6000
+ITEM.Range = 20
+ITEM.Special = "+20 to CALLED SHOT"
+ITEM.weight = 1.205
+ITEM.isAttachment = true

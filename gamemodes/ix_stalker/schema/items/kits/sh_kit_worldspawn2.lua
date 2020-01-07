@@ -4,6 +4,7 @@ ITEM.model = "models/props_junk/cardboard_box004a.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.flag = "A"
+ITEM.weight = 4.5
 
 ITEM.items[1] = {
 	dropAmount = 1,

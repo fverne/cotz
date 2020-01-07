@@ -7,8 +7,6 @@ include("sh_sounds.lua")
 include("sh_soundscript.lua")
 
 CustomizableWeaponry:registerAmmo("23mm Shell", "23mm Shell", 23, 75)
-CustomizableWeaponry:registerAmmo("23mm Shell Slug", "23mm Shell Slug", 23, 76)
-CustomizableWeaponry:registerAmmo("23mm Shell Flechette", "23mm Shell Flechette", 23, 76)
 
 if CLIENT then
 	SWEP.DrawCrosshair = false
@@ -97,7 +95,7 @@ SWEP.Attachments = {
 	{header = "Upgrade 2-2", offset = {200, 0}, atts = {"fn_hndl2", "fn_stab2"}},
 	{header = "Upgrade 2-3", offset = {200, 0}, atts = {"fn_rec2"}},
 	["+use"] = {header = "Sight Contract", offset = {400, 0}, atts = {"kk_ins2_sights_cstm"}},
-	["+reload"] = {header = "Ammo", offset = {900, 500}, atts = {"am_slugrounds", "am_flechetterounds"}}
+	["+reload"] = {header = "Ammo", offset = {900, 500}, atts = {"am_slugrounds", "am_birdshot", "am_trishot", "am_zoneloaded"}}
 }
 
 SWEP.Animations = {
