@@ -19,29 +19,17 @@ ix.chat.Register("ic", {
 	OnChatAdd = function( _, speaker, text)
 		local suffix = string.sub(text, text:len())
 		local teamColor = team.GetColor(speaker:GetChar():GetFaction())
-		local speako = hook.Run("GetDisplayedName", speaker, "ic") or (IsValid(speaker) and speaker:Name() or "Console")
+		local speako = hook.Run("GetCharacterName", speaker, "ic") or (IsValid(speaker) and speaker:Name() or "Console")
 		local pSay = string.upper(string.sub(text, 0, 1))..string.sub(text, 2)
 		local pSayC = string.upper(string.sub(text, 0, 1))..string.sub(text, 2)-- fuck your period bullshit
 		local nameCol = ix.config.Get("chatColor")
 		nameCol = Color(nameCol.r + 50, nameCol.g + 50, nameCol.b + 50)
 		if suffix == "?" then
-			if math.random(1, 2) == 1 then
-				chat.AddText(nameCol, speako, ix.config.Get("chatColor"), " asks \""..pSay.."\"")
-			else
-				chat.AddText(ix.config.Get("chatColor"), "\""..pSay.."\" asks ", nameCol, speako)
-			end
+			chat.AddText(nameCol, speako, ix.config.Get("chatColor"), " asks \""..pSay.."\"")
 		elseif suffix == "!" then
-			if math.random(1, 2) == 1 then
-				chat.AddText(nameCol, speako, ix.config.Get("chatColor"), " shouts \""..pSay.."\"")
-			else
-				chat.AddText(ix.config.Get("chatColor"), "\""..pSay.."\" shouts ", nameCol, speako)
-			end
+			chat.AddText(nameCol, speako, ix.config.Get("chatColor"), " shouts \""..pSay.."\"")
 		elseif suffix == "." then
-			if math.random(1, 2) == 1 then
-				chat.AddText(nameCol, speako, ix.config.Get("chatColor"), " says \""..pSay.."\"")
-			else
-				chat.AddText(ix.config.Get("chatColor"), "\""..pSay.."\" says ", nameCol, speako)
-			end
+			chat.AddText(nameCol, speako, ix.config.Get("chatColor"), " says \""..pSay.."\"")
 		else
 			chat.AddText(ix.config.Get("chatColor"), speako, ix.config.Get("chatColor"), " says \""..pSayC.."\"")
 		end

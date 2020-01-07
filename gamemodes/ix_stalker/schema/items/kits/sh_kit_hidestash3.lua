@@ -60,7 +60,6 @@ ITEM.items[2] = {
 	itemsVeryRare = {
 		{"trenchcoat"},
 		{"mailjacket"},
-		{"tooloil2"},
 		{"halfmask"},
 	},
 }

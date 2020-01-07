@@ -61,6 +61,13 @@ if (CLIENT) then
 	CHAT_RECOGNIZED["y"] = true
 	CHAT_RECOGNIZED["w"] = true
 	CHAT_RECOGNIZED["me"] = true
+	CHAT_RECOGNIZED["s"] = true
+	CHAT_RECOGNIZED["meclose"] = true
+	CHAT_RECOGNIZED["mefar"] = true
+	CHAT_RECOGNIZED["mefarfar"] = true
+	CHAT_RECOGNIZED["itclose"] = true
+	CHAT_RECOGNIZED["itfar"] = true
+	CHAT_RECOGNIZED["itfarfar"] = true
 
 	function PLUGIN:IsRecognizedChatType(chatType)
 		if (CHAT_RECOGNIZED[chatType]) then

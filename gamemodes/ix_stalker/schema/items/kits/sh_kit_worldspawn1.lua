@@ -16,9 +16,8 @@ ITEM.items[1] = {
 	},
 	itemsRare = {
 		{"bat"},
-		{"fireaxe"},
 	},
 	itemsVeryRare = {
-		{"tooloil1"},
+		{"fireaxe"},
 	},
 }

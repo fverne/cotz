@@ -38,7 +38,6 @@ ITEM.items[1] = {
 		{"cannedolives", {["quantity"] = 1}},
 		{"energydrink"},
 		{"bandage"},
-		{"tooloil1"},
 		{"component", {["quantity"] = math.random(5, 15)}},
 		{"diecup"},
 		{"caffeine", {["quantity"] = math.random(3)}},

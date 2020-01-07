@@ -55,7 +55,7 @@ ITEM.items[2] = {
 	dropRareChance = 35,
 	dropVeryRareChance = 5,
 	itemsCommon = {
-		{"tooloil2"},
+		{"component", {["quantity"] = 15}},
 	},
 	itemsRare = {
 		{"component", {["quantity"] = 35}},
