@@ -436,7 +436,6 @@ function ITEM:OnEquipWeapon(client, weapon)
     timer.Simple(0.1, function()
 		if (IsValid(weapon)) then
 			if ammotype ~= "Normal" then
-				print(ammotype)
 				weapon:attachSpecificAttachment(ammotype)
 			end
     		for _, b in ipairs(attList) do
@@ -514,8 +513,9 @@ function ITEM:OnLoadout()
 			weapon:SetWeaponHP((self:GetData("durability")/100),100)
 			client:RemoveAmmo(weapon:Clip1(), weapon:GetPrimaryAmmoType())
 			client.carryWeapons[self.weaponCategory] = weapon
+			
 			timer.Simple(0.1,function()
-			local ammotype = self:GetData("ammoType", "Normal")
+				local ammotype = self:GetData("ammoType", "Normal")
 				if ammotype ~= "Normal" then
 					weapon:attachSpecificAttachment(ammotype)
 				end
