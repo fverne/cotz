@@ -49,6 +49,7 @@ function SWEP:fireM203(IFTP)
 			ParticleEffectAttach("muzzleflash_pistol", PATTACH_POINT_FOLLOW, vm, 1)
 		end
 	end
+	hook.Run("M203Fired", self.Owner)
 end
 
 //-----------------------------------------------------------------------------

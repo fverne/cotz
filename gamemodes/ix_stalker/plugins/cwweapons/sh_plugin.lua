@@ -80,12 +80,15 @@ hook.Add("WeaponFired", "Weapon_Fired", WeaponFired)
 
 function PLUGIN:AmmoCheck(client, weapon)
 	local ammoCount = 0
+	local ammoCountGL = 0
 	local ammoType = weapon.Primary.Ammo
 	
 	for k,v in pairs(client:GetChar():GetInv():GetItems()) do
 		if v.isAmmo == true then
 			if ammoType == v.ammo then
 				ammoCount = ammoCount + v:GetData("quantity",1)
+			elseif "40MM" == v.ammo then
+				ammoCountGL = ammoCount + v:GetData("quantity",1)
 			end
 		end
 	end
@@ -96,9 +99,32 @@ function PLUGIN:AmmoCheck(client, weapon)
 		client:SetAmmo(0,ammoType)
 		weapon:SetClip1(0)
 	end
+	
+	if ammoCountGL > 0 then
+		client:SetAmmo((ammoCountGL - weapon:Clip1()),"40MM")
+	else
+		client:SetAmmo(0,"40MM")
+	end
 end
 
 hook.Add("AmmoCheck", "Ammo_Check", AmmoCheck)
+
+function PLUGIN:M203Fired(client)
+	for k,v in pairs(client:GetChar():GetInv():GetItems()) do
+		if v.isAmmo == true then
+			if v.ammo == "40MM" then
+				local oldquan = v:GetData("quantity",1)
+				if oldquan <= 1 then
+					v:Remove()
+				end
+				v:SetData("quantity",(oldquan - 1))
+				return
+			end
+		end
+	end
+end
+
+hook.Add("M203Fired", "M203_Fired", M203Fired)
 
 function PLUGIN:InitializedPlugins()
 		-- There is no Customization Keys.

@@ -55,6 +55,6 @@ ITEM.items[2] = {
 		{"component", {["quantity"] = 40}},
 	},
 	itemsVeryRare = {
-		{"component", {["quantity"] = 100}},
+		{"component", {["quantity"] = 60}},
 	},
 }

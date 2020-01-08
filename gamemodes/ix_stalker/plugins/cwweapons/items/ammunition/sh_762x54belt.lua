@@ -1,5 +1,5 @@
 ITEM.name = "7.62x54mm Belt"
-ITEM.model = "models/ethprops/ammo/pkm.mdl"
+ITEM.model = "models/kek1ch/ammo_pkm.mdl"
 ITEM.width = 2
 ITEM.height = 1
 ITEM.ammo = "7.62x54MMB"
