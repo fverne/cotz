@@ -196,6 +196,11 @@ function ITEM:GetDescription()
 		return (self.description .. "\n \nDurability: " .. (math.floor(self:GetData("durability", 10000))/100) .. "%")
 	else
 		local client = self:GetOwner()
+		
+		if client == nil then
+			return self.description
+		end
+		
 		local weapon = client:GetActiveWeapon()
 		local SWEP = weapons.Get(self.class)
 		local atts = SWEP.Attachments

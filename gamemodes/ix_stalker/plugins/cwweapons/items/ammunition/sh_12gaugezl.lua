@@ -7,6 +7,7 @@ ITEM.ammoAmount = 50 // amount of the ammo
 ITEM.description= "A box that contains %s zone-loaded 12 gauge shells. "
 ITEM.longdesc = "Standard 12 gauge shell filled with 6 mm shot. Highly lethal at close range. Only suitable for use with smoothbore weapons."
 ITEM.price = 600
+ITEM.busflag = {"ammo2"}
 ITEM.img = Material("vgui/hud/12gaugezl.png")
 ITEM.Range = "x0.5"
 ITEM.Dmg = -1

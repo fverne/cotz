@@ -332,6 +332,7 @@ function SWEP:PrimaryAttack()
 			self.AttackStart = CurTime()
 		end
 	end
+	hook.Run("WeaponFired", self.Owner)
 end
 
 function SWEP:SecondaryAttack()

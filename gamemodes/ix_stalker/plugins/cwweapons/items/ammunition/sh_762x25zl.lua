@@ -7,6 +7,7 @@ ITEM.longdesc = "The 7.62x25mm cartridge is a Russian bottle-necked pistol cartr
 ITEM.price = 500
 ITEM.width = 1
 ITEM.height = 1
+ITEM.busflag = {"ammo"}
 ITEM.img = Material("vgui/hud/762x25zl.png")
 ITEM.Range = "x0.5"
 ITEM.Dmg = -1

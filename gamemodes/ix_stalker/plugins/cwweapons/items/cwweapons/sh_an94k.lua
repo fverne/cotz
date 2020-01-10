@@ -7,7 +7,6 @@ ITEM.weaponCategory = "primary"
 ITEM.width = 4
 ITEM.price = 50000
 ITEM.height = 2
---ITEM.busflag = "ARMS2_3_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.Range = 100
 ITEM.RoF = "S/2/6"
@@ -19,7 +18,7 @@ ITEM.isCW = true
 ITEM.isPLWeapon = true
 ITEM.modifier = 5
 ITEM.weight = 3.85
-ITEM.busflag = {"guns4_1"}
+ITEM.busflag = {"guns4_1_1"}
 
 ITEM.iconCam = {
 	ang= Angle(-0.70499622821808, 268.25439453125, 0),

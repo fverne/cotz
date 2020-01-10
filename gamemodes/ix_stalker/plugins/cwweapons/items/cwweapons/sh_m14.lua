@@ -7,7 +7,6 @@ ITEM.weaponCategory = "primary"
 ITEM.width = 5
 ITEM.price = 100000 -- price me daddy uwu
 ITEM.height = 2
-ITEM.busflag = {"guns7_1_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.Range = 150
 ITEM.RoF = "S/2/4"

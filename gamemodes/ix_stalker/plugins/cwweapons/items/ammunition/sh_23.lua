@@ -1,5 +1,5 @@
 ITEM.name = "23mm Shells"
-ITEM.model = "models/ethprops/ammo/12x70.mdl"
+ITEM.model = "models/kek1ch/ammo_12x70_buck.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.ammo = "23mm Shell"

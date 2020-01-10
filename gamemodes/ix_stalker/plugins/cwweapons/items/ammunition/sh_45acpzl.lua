@@ -6,6 +6,7 @@ ITEM.description= "A box that contains %s rounds of zone-loaded .45 ACP ammo. "
 ITEM.longdesc = "The .45 caliber full metal jacket round has enjoyed popularity for a hundred years thanks to its ballistic performance and a relatively small propelling charge. As a result, the bullet in this round is relatively slow but highly accurate and provides considerable stopping power."
 ITEM.price = 950
 ITEM.width = 2
+ITEM.busflag = {"ammo1_1"}
 ITEM.img = Material("vgui/hud/45acpzl.png")
 ITEM.Range = "x0.5"
 ITEM.Dmg = -1

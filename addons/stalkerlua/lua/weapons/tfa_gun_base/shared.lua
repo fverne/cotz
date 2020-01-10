@@ -1713,7 +1713,7 @@ Purpose:  Main SWEP function
 ]]--
 
 function SWEP:PrimaryAttack()
-
+	
 	if self.Callback.PrimaryAttack then
 		local val = self.Callback.PrimaryAttack(self)
 		if val then return val end
@@ -1860,7 +1860,6 @@ function SWEP:PrimaryAttack()
 			
 			self:DoAmmoCheck()
 		end
-	--end
 end
 
 --[[ 
@@ -2292,7 +2291,6 @@ function SWEP:SecondaryAttack()
 		local val = self.Callback.SecondaryAttack(self)
 		if val then return val end
 	end
-	
 	return false
 end
 

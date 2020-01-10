@@ -149,59 +149,59 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
   local class = string.lower(entity:GetClass())
 	if attacker:IsPlayer() then
 	  if class == "npc_mutant_classiczombie" then
-	    attacker:addReputation(0.5)
+	    attacker:addReputation(0.05)
 	  end
 
 	  if class == "npc_mutant_rodent" then
-	    attacker:addReputation(0.5)
+	    attacker:addReputation(0.05)
 	  end
 
 	  if class == "npc_mutant_snork" then
-	    attacker:addReputation(2)
+	    attacker:addReputation(0.05)
 	  end
 
 	  if class == "npc_mutant_cat" then
-	    attacker:addReputation(1)
+	    attacker:addReputation(0.05)
 	  end
 
 	  if class == "npc_mutant_bloodsucker" then
-	    attacker:addReputation(2)
+	    attacker:addReputation(0.05)
 	  end
 
 	  if class == "npc_mutant_boar" then
-	    attacker:addReputation(1)
+	    attacker:addReputation(0.05)
 	  end  
 
 	  if class == "npc_mutant_burer" then
-	    attacker:addReputation(3)
+	    attacker:addReputation(0.05)
 	  end
 
 	  if class == "npc_mutant_chimera" then
-	    attacker:addReputation(4)
+	    attacker:addReputation(0.1)
 	  end
 
 	  if class == "npc_mutant_controller" then
-	    attacker:addReputation(3)
+	    attacker:addReputation(0.1)
 	  end
 
 	  if class == "npc_mutant_dog" then
-	    attacker:addReputation(1)
+	    attacker:addReputation(0.05)
 	  end
 
 	  if class == "npc_mutant_flesh" then
-	    attacker:addReputation(0.5)
+	    attacker:addReputation(0.05)
 	  end
 
 	  if class == "npc_mutant_pseudodog" then
-	    attacker:addReputation(2)
+	    attacker:addReputation(0.05)
 	  end
 
 	  if class == "npc_mutant_psydog" then
-	    attacker:addReputation(3)
+	    attacker:addReputation(0.1)
 	  end 
 
 	  if class == "npc_mutant_pseudogiant" then
-	    attacker:addReputation(4)
+	    attacker:addReputation(0.15)
 	  end
 	end
 end

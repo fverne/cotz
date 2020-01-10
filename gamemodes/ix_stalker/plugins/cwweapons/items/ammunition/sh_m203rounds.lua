@@ -1,8 +1,8 @@
 ITEM.name = "M203 Grenade"
 ITEM.model = ("models/weapons/upgrades/a_projectile_m203.mdl")
 ITEM.description = "An M203 Grenade, made specifically to be launched from NATO Grenade Launchers."
-ITEM.price = 1210
-ITEM.flag = "G"
+ITEM.price = 3000
+ITEM.busflag = {"ammo5_1"}
 ITEM.category = "Ammunition"
 ITEM.ammo = "40MM"
 ITEM.ammoAmount = 3

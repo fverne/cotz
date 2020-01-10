@@ -1,12 +1,12 @@
 ITEM.name = "9x21mm"
-ITEM.model = "models/ethprops/ammo/9x19.mdl"
+ITEM.model = "models/kek1ch/ammo_9x19_pbp.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.ammo = "9x21MM" // type of the ammo
 ITEM.description = "A Box that contains 9x21mm"
 ITEM.category = "Ammunition"
 ITEM.price = 140
-ITEM.flag = "g"
+ITEM.busflag = {"ammo1"}
 ITEM.basequantity = 100
 ITEM.quantity = 100
 ITEM.maxQuantity = 100

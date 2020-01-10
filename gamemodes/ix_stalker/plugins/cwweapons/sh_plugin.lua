@@ -32,9 +32,12 @@ function PLUGIN:WeaponFired(entity)
 			end
 		end
 		
-		local ammoCount = ammo:GetData("quantity")
-		if ammoCount == 1 then
-			ammo:Remove()
+		local ammoCount = 1
+		if ammo then
+			local ammoCount = ammo:GetData("quantity")
+			if ammoCount == 1 then
+				ammo:Remove()
+			end
 		end
 		
 		local dura
@@ -42,9 +45,13 @@ function PLUGIN:WeaponFired(entity)
 		
 		if delay < CurTime() then
 			delay = CurTime() + 3
-			ammo:SetData("quantity",newAmmo)
+			if ammo then
+				ammo:SetData("quantity",newAmmo)
+			end
 			if not item then return end
-			wep:SetWeaponHP((item:GetData("durability")/100),100)
+			if ammo then
+				wep:SetWeaponHP((item:GetData("durability")/100),100)
+			end
 			dura = item:GetData("durability", 10000)
 			if (dura ~= 0) then
 				if string.EndsWith(wep.Primary.Ammo, " -ZL-") then
@@ -60,7 +67,9 @@ function PLUGIN:WeaponFired(entity)
 				entity:StripWeapon(wepclass)
 			end
 		else
-			ammo:SetData("quantity",newAmmo,nil,true)
+			if ammo then
+				ammo:SetData("quantity",newAmmo,nil,true)
+			end
 			if not item then return end
 			dura = item:GetData("durability", 10000)
 			if (dura ~= 0) then

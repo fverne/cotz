@@ -9,6 +9,7 @@ ITEM.longdesc = "Cheap 7.62 PP (also known as 7.62 R) is a dated rifle caliber i
 ITEM.price = 2100
 ITEM.width = 2
 ITEM.height = 1
+ITEM.busflag = {"ammo4"}
 ITEM.img = Material("vgui/hud/762x54zl.png")
 ITEM.Range = "x0.5"
 ITEM.Dmg = -1

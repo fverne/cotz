@@ -11,3 +11,4 @@ ITEM.Dmg = -1
 ITEM.Pen = -2
 ITEM.weight = 0.008
 ITEM.isAmmo = true
+ITEM.busflag = {"ammo1_1"}

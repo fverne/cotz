@@ -6,7 +6,6 @@ ITEM.weaponCategory = "primary"
 ITEM.width = 3
 ITEM.height = 2
 ITEM.price = 51320
-ITEM.flag = "D"
 ITEM.isWeapon = true
 ITEM.isPLWeapon = true
 ITEM.isCW = true

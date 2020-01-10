@@ -9,3 +9,4 @@ ITEM.price = 850
 ITEM.img = Material("vgui/hud/57x28.png")
 ITEM.weight = 0.008
 ITEM.isAmmo = true
+ITEM.busflag = {"ammo1_1_1"}

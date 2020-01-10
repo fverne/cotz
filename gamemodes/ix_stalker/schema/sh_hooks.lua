@@ -127,3 +127,20 @@ do
 		})
 	end)
 end
+
+function Schema:PurchaseItems(client,x,y)
+	while y > 0 do
+		local item = ix.item.list[x]
+		local k, v, baginv = client:GetChar():GetInv():FindEmptySlot(item.width,item.height)
+		if baginv then
+			client:GetChar():GiveMoney(item.price)
+		else
+			local succ = client:GetChar():GetInv():Add(x)
+			if !succ then
+				client:GetChar():GetInv():Add(item)
+			end
+		end
+		hook.Run("PurchasedItems", client, x)
+		y = y - 1
+	end
+end

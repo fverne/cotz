@@ -79,11 +79,11 @@ do
 
 
 	-- AMMO
-	ix.busflag.add("ammo", "-Ammunition-", "", 1, 3000)
+	ix.busflag.add("ammo", "-Ammunition-", "", 1, 3000) 
 	
 	ix.busflag.add("ammo1", "Ammunition - Pistol 1", "", 1, 3000, {"ammo"})
 	ix.busflag.add("ammo1_1", "Ammunition - Pistol 2", "", 1, 6000, {"ammo1"})
---	ix.busflag.add("ammo1_1_1", "Ammunition - Pistol 3", "", 1, 7000, {"ammo1_1"})
+	ix.busflag.add("ammo1_1_1", "Ammunition - Pistol 3", "", 1, 7000, {"ammo1_1"})
 --	ix.busflag.add("ammo1_1_1_1", "Ammunition - Pistol 4", "", 1, 9000, {"ammo1_1_1"})
 --	ix.busflag.add("ammo1_1_1_1_1", "Ammunition - Pistol 5", "", 1, 15000, {"ammo1_1_1_1"})
 --	ix.busflag.add("ammo1_1_1_1_1_1", "Ammunition - Pistol 6", "", 1, 30000, {"ammo1_1_1_1_1"})
@@ -93,15 +93,18 @@ do
 --	ix.busflag.add("ammo2_1_1", "Ammunition - Shotgun 3", "", 1, 12000, {"ammo2_1"})
 
 	ix.busflag.add("ammo3", "Ammunition - Rifle 1", "", 1, 4000, {"ammo"})
---	ix.busflag.add("ammo3_1", "Ammunition - Rifle 2", "", 1, 5000, {"ammo3"})
---	ix.busflag.add("ammo3_1_1", "Ammunition - Rifle 3", "", 1, 7000, {"ammo3_1"})
+	ix.busflag.add("ammo3_1", "Ammunition - Rifle 2", "", 1, 5000, {"ammo3"})
+	ix.busflag.add("ammo3_1_1", "Ammunition - Rifle 3", "", 1, 7000, {"ammo3_1"})
 --	ix.busflag.add("ammo3_1_1_1", "Ammunition - Rifle 4", "", 1, 14000, {"ammo3_1_1"})
 --	ix.busflag.add("ammo3_1_1_1_1", "Ammunition - Rifle 5", "", 1, 40000, {"ammo3_1_1_1"})
 
 	ix.busflag.add("ammo4", "Ammunition - Long Rifle 1", "", 1, 5000, {"ammo"})
---	ix.busflag.add("ammo4_1", "Ammunition - Long Rifle 2", "", 1, 12000, {"ammo4"})
+	ix.busflag.add("ammo4_1", "Ammunition - Long Rifle 2", "", 1, 12000, {"ammo4"})
 --	ix.busflag.add("ammo4_1_1", "Ammunition - Long Rifle 3", "", 1, 19000, {"ammo4_1"})
 --	ix.busflag.add("ammo4_1_1_1", "Ammunition - Long Rifle 4", "", 1, 60000, {"ammo4_1_1"})
+
+	ix.busflag.add("ammo5", "Ammunition - Special 1", "", 1, 20000, {"ammo"})
+	ix.busflag.add("ammo5_1", "Ammunition - Special 2", "", 1, 40000, {"ammo5"})
 
 
 	-- MELEE

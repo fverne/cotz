@@ -1,12 +1,12 @@
 ITEM.name = ".357 Magnum"
-ITEM.model = "models/ethprops/ammo/357.mdl"
+ITEM.model = "models/kek1ch/ammo_9x18_fmj.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.ammo = ".357" // type of the ammo
 ITEM.description = "A Box that contains .357 Magnum"
 ITEM.category = "Ammunition"
 ITEM.price = 480
-ITEM.flag = "g"
+ITEM.busflag = {"ammo1_1"}
 ITEM.ammoAmount = 100
 ITEM.weight = 0.021
 ITEM.isAmmo = true

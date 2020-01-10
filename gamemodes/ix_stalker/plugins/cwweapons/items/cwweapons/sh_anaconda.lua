@@ -7,7 +7,6 @@ ITEM.weaponCategory = "secondary"
 ITEM.width = 2
 ITEM.price = 100000 --NEEDS PRICE NERDS
 ITEM.height = 1
-ITEM.busflag = {"guns3_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.Range = 50
 ITEM.RoF = "S/2/-"
@@ -20,7 +19,6 @@ ITEM.isCW = true
 ITEM.isPLWeapon = true
 ITEM.modifier = 5
 ITEM.weight = 1.3
-ITEM.busflag = {"guns3_1"}
 
 ITEM.canAttach = false
 ITEM.iconCam = {

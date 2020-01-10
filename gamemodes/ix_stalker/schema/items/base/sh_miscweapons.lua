@@ -50,7 +50,11 @@ function ITEM:GetDescription()
 	if (self.entity) then
 		return self.description
 	else
-        return (str)
+		if self:GetData("durability") then
+			return (str .. "\n \nDurability: " .. (math.floor(self:GetData("durability", 10000))/100) .. "%")
+		else
+			return str
+		end
 	end
 end
 

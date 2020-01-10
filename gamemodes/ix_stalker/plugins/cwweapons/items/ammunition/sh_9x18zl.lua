@@ -9,3 +9,4 @@ ITEM.img = Material("vgui/hud/9x18zl.png")
 ITEM.Range = "x0.5"
 ITEM.weight = 0.016
 ITEM.isAmmo = true
+ITEM.busflag = {"ammo"}
