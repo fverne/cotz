@@ -9,6 +9,35 @@ ITEM.pacData = {}
 ITEM.outfitCategory = "Trinket"
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 
+ITEM.functions.Sell = {
+	name = "Sell",
+	icon = "icon16/stalker/sell.png",
+	sound = "physics/metal/chain_impact_soft2.wav",
+	OnRun = function(item)
+		local client = item.player
+		client:Notify( "Sold for "..(item.value).." rubles." )
+		client:GetCharacter():GiveMoney(item.value)
+		
+	end,
+	OnCanRun = function(item)
+		return !IsValid(item.entity) and item:GetOwner():GetCharacter():HasFlags("1")
+	end
+}
+
+ITEM.functions.Value = {
+	name = "Value",
+	icon = "icon16/help.png",
+	sound = "physics/metal/chain_impact_soft2.wav",
+	OnRun = function(item)
+		local client = item.player
+		client:Notify( "Item is sellable for "..(item.value).." rubles." )
+		return false
+	end,
+	OnCanRun = function(item)
+		return !IsValid(item.entity) and item:GetOwner():GetCharacter():HasFlags("1")
+	end
+}
+
 function ITEM:GetDescription()
 	local str = self.description.." \n\n"..self.longdesc
 

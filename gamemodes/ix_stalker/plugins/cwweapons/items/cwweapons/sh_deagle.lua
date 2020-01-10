@@ -7,7 +7,6 @@ ITEM.weaponCategory = "secondary"
 ITEM.width = 2
 ITEM.price = 100000 -- GIB PRICES DAMMIT
 ITEM.height = 1
---ITEM.busflag = {"ARMS1_1_1", "SPECIAL5_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.Range = 50
 ITEM.RoF = "S/3/-"

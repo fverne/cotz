@@ -7,7 +7,6 @@ ITEM.weaponCategory = "primary"
 ITEM.width = 4
 ITEM.price = 55000
 ITEM.height = 2
---ITEM.busflag = "ARMS2_3_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.Range = 100
 ITEM.RoF = "S/3/9"
@@ -20,6 +19,7 @@ ITEM.isCW = true
 ITEM.isPLWeapon = true
 ITEM.modifier = 5
 ITEM.weight = 3.3
+ITEM.busflag = {"guns_4_1"}
 
 ITEM.iconCam = {
 	pos = Vector(-12, 35, 0),

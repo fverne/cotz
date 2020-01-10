@@ -10,6 +10,7 @@ ITEM.sound = "stalkersound/inv_bandage_2p9.mp3"
 ITEM.price = "25"
 ITEM.busflag = {"medical"}
 ITEM.weight = 0.05
+ITEM.stopsBleed = true
 
 ITEM.functions.use = {
 	name = "Heal",

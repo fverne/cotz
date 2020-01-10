@@ -236,9 +236,9 @@ ITEM.functions.repairgun = {
 				local items = inv:GetItems()
 
 				for k, v in pairs(items) do
-					if v.isWeapon and v:GetData("durability", 0) < 100 then
+					if v.isWeapon and v:GetData("durability", 0) < 10000 then
 						table.insert(targets, {
-							name = L("Repair "..v.name.." with "..math.Round(v:GetData("durability",0), 2).." percent durability to "..math.Clamp(math.Round(v:GetData("durability",0), 2)+item.repairAmount*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0, 100).." percent durability | Costs "..math.Round(v.repairCost*(1-(client:GetCharacter():GetAttribute("technician", 0)/100))).." components."),
+							name = L("Repair "..v.name.." with "..math.Round((v:GetData("durability",0)/100), 2).." percent durability to "..math.Clamp(math.Round((v:GetData("durability",0)/100), 2)+item.repairAmount*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0, 100).." percent durability | Costs "..math.Round(v.repairCost*(1-(client:GetCharacter():GetAttribute("technician", 0)/100))).." components."),
 							data = {v:GetID()},
 						})
 					else
@@ -276,7 +276,7 @@ ITEM.functions.repairgun = {
 		
 		if target:GetData("equip") != true then
 			if comp and (comp:GetData("quantity", 1)) >= target.repairCost then
-				target:SetData("durability", math.Clamp(target:GetData("durability",100) + item.repairAmount*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0, 100))
+				target:SetData("durability", (math.Clamp(target:GetData("durability",100) + item.repairAmount*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0, 100)*100))
 				client:Notify(target.name.." successfully repaired.")
 				comp:SetData("quantity", comp:GetData("quantity") - target.repairCost*(1-(client:GetCharacter():GetAttribute("technician", 0)/100)))
 				item.player:EmitSound(item.sound or "items/battery_pickup.wav")

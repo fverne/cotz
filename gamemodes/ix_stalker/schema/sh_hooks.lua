@@ -7,7 +7,7 @@ function Schema:CanDrive(client, entity)
 end
 
 function Schema:CanPlayerUseBusiness(client, uniqueID)
-	if !client:GetCharacter():HasFlags("1") then
+	if !client:GetCharacter():HasFlags("1") and !client:GetCharacter():HasFlags("2") then
     	return false
     end
 end

@@ -169,13 +169,13 @@ ITEM.functions.split = {
 
 ITEM.functions.combine = {
 	OnCanRun = function(item, data)
-		if !data then
+		if !data[1] then
 			return false
 		end
-
+		
 		local targetItem = ix.item.instances[data[1]]
 
-		if targetItem.ammo == item.ammo then
+		if targetItem.uniqueID == item.uniqueID then
 			return true
 		else
 			return false
@@ -183,16 +183,22 @@ ITEM.functions.combine = {
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		local targetAmmoDiff = targetItem.ammoAmount - targetItem:GetData("quantity", targetItem.ammoAmount)
-		local localQuant = item:GetData("quantity", item.ammoAmount)
-		local targetQuant = targetItem:GetData("quantity", targetItem.ammoAmount)
+		local localQuant = item:GetData("quantity", item.quantity)
+		local targetQuant = targetItem:GetData("quantity", targetItem.quantity)
+		local combinedQuant = (localQuant + targetQuant)
+
 		item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
-		if targetAmmoDiff >= localQuant then
-			targetItem:SetData("quantity", targetQuant + localQuant)
+
+		if combinedQuant <= item.maxStack then
+			targetItem:SetData("quantity", combinedQuant)
 			return true
+		elseif localQuant >= targetQuant then
+			targetItem:SetData("quantity",item.maxStack)
+			item:SetData("quantity",(localQuant - (item.maxStack - targetQuant)))
+			return false
 		else
-			item:SetData("quantity", localQuant - targetAmmoDiff)
-			targetItem:SetData("quantity", targetItem.ammoAmount)
+			targetItem:SetData("quantity",(targetQuant - (item.maxStack - localQuant)))
+			item:SetData("quantity",item.maxStack)
 			return false
 		end
 	end,
@@ -212,3 +218,31 @@ function ITEM:OnInstanced()
 		end
 	end)
 end
+
+ITEM.functions.Sell = {
+	name = "Sell",
+	icon = "icon16/stalker/sell.png",
+	sound = "physics/metal/chain_impact_soft2.wav",
+	OnRun = function(item)
+		local client = item.player
+		client:Notify( "Sold for "..((item.price/2)*(item:GetData("quantity",1)/item.ammoAmount)).." rubles." )
+		client:GetCharacter():GiveMoney((item.price/2)*(item:GetData("quantity",1)/item.ammoAmount))
+	end,
+	OnCanRun = function(item)
+		return !IsValid(item.entity) and item:GetOwner():GetCharacter():HasFlags("1")
+	end
+}
+
+ITEM.functions.Value = {
+	name = "Value",
+	icon = "icon16/help.png",
+	sound = "physics/metal/chain_impact_soft2.wav",
+	OnRun = function(item)
+		local client = item.player
+		client:Notify( "Item is sellable for "..((item.price/2)*(item:GetData("quantity",1)/item.ammoAmount)).." rubles." )
+		return false
+	end,
+	OnCanRun = function(item)
+		return !IsValid(item.entity) and item:GetOwner():GetCharacter():HasFlags("1")
+	end
+}

@@ -3,7 +3,6 @@ ITEM.desc = "A book that can introduce someone to the art of being a technician.
 ITEM.model = "models/kek1ch/book2.mdl"
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = "5000"
 ITEM.flag = "A"
 ITEM.weight = 0.25
 
@@ -20,7 +19,7 @@ ITEM.functions.read = {
 		local inv = char:GetInventory()
 
 		
-		client:GetCharacter():SetFlags("T")
+		client:GetCharacter():SetFlags("2")
 		client:Notify("Technician flag added.")
 		item.player:EmitSound("stalkersound/money.mp3")
 		

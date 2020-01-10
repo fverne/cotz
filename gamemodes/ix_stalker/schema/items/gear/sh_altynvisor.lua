@@ -18,6 +18,16 @@ ITEM.anomalousrpglevels = {"20","2","2","2","2"}
 ITEM.Special = {"Heavy","Psy+10","No Aim"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.weight = 1.6
+ITEM.res = {
+	["Fall"] = 0.00,
+	["Blast"] = 0.00,
+	["Bullet"] = 0.10,
+	["Shock"] = 0.02,
+	["Burn"] = 0.02,
+	["Radiation"] = 0.02,
+	["Chemical"] = 0.02,
+	["Psi"] = 0.10,
+}
 
 ITEM.pacData = {
 [1] = {

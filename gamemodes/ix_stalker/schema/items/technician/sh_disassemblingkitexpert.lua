@@ -2,7 +2,6 @@ ITEM.name = "Expert Disassembling Kit"
 ITEM.model = "models/kek1ch/ckit.mdl"
 ITEM.description = "Tools for disassembling items into components."
 ITEM.flag = "A"
-ITEM.price = "15000"
 ITEM.maxStack = 100
 ITEM.compMultiplier = 1.25
 ITEM.category = "Technician"
@@ -36,27 +35,30 @@ ITEM.functions.combine = {
 		
 		local targetItem = ix.item.instances[data[1]]
 
-		if targetItem.uniqueid == item.uniqueid then
+		if targetItem.uniqueID == item.uniqueID then
 			return true
 		else
 			return false
-
 		end
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		local targetQuantDiff = targetItem.maxStack - targetItem:GetData("quantity", targetItem.quantity)
 		local localQuant = item:GetData("quantity", item.quantity)
 		local targetQuant = targetItem:GetData("quantity", targetItem.quantity)
+		local combinedQuant = (localQuant + targetQuant)
 
 		item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
 
-		if targetQuantDiff >= localQuant then
-			targetItem:SetData("quantity", targetQuant + localQuant)
+		if combinedQuant <= item.maxStack then
+			targetItem:SetData("quantity", combinedQuant)
 			return true
+		elseif localQuant >= targetQuant then
+			targetItem:SetData("quantity",item.maxStack)
+			item:SetData("quantity",(localQuant - (item.maxStack - targetQuant)))
+			return false
 		else
-			item:SetData("quantity", localQuant - targetQuantDiff)
-			targetItem:SetData("quantity", targetItem.quantity)
+			targetItem:SetData("quantity",(targetQuant - (item.maxStack - localQuant)))
+			item:SetData("quantity",item.maxStack)
 			return false
 		end
 	end,
@@ -80,7 +82,7 @@ ITEM.functions.use = {
 				for k, v in pairs(items) do
 					if (v.repairCost) then
 						table.insert(targets, {
-							name = L("Disassemble "..v.name.." | Yields "..math.Round(math.sqrt( v.repairCost )*item.compMultiplier*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0).." components"),
+							name = L("Disassemble "..v.name.." | Yields "..(math.Round(math.sqrt( v.repairCost )*item.compMultiplier*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0)*2).." components"),
 							data = {v:GetID()},
 						})
 					else
@@ -119,7 +121,7 @@ ITEM.functions.use = {
 		cost = target.repairCost
 
 		if math.sqrt( cost )/10 < item:GetData("quantity", 1) then
-			client:GetChar():GetInventory():Add("component", 1, {["quantity"] = math.Round(math.sqrt( cost )*item.compMultiplier*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0)})
+			client:GetChar():GetInventory():Add("component", 1, {["quantity"] = math.Round((math.sqrt( cost )*item.compMultiplier*(1+(client:GetCharacter():GetAttribute("technician", 0)/100))*2), 0)})
 			item:SetData("quantity", item:GetData("quantity", 1) - math.sqrt( cost ))
 			target:Remove()
 			item.player:EmitSound(item.sound or "items/battery_pickup.wav")

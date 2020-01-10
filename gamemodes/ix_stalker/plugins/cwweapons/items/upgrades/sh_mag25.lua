@@ -6,7 +6,6 @@ ITEM.width = 2
 ITEM.height = 1
 ITEM.price = 1755
 ITEM.slot = 2
-ITEM.flag = "s"
 ITEM.isAttachment = true
 ITEM.attSearch = { "fn_mag25", }
 ITEM.weight = 0.937

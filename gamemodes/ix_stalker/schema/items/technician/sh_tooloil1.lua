@@ -3,8 +3,7 @@ ITEM.desc = "Used by technicians to restore the durability of tools."
 ITEM.model = "models/kek1ch/solvent.mdl"
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = "5000"
-ITEM.flag = "A"
+ITEM.price = "400"
 ITEM.toolValue = 2
 ITEM.weight = 0.25
 

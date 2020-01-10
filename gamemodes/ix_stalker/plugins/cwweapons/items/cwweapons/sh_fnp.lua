@@ -10,6 +10,7 @@ ITEM.flag = "D"
 ITEM.isWeapon = true
 ITEM.isPLWeapon = true
 ITEM.isCW = true
+ITEM.busflag = {"guns3_1_1"}
 ITEM.holsterDrawInfo = {
 	bone = "ValveBiped.Bip01_R_Thigh",
 	ang = Angle(-0, -0,90),

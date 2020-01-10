@@ -6,7 +6,6 @@ ITEM.width = 2
 ITEM.height = 1
 ITEM.price = 2000
 ITEM.slot = 8
-ITEM.flag = "q"
 ITEM.isAttachment = true
 ITEM.attSearch = { "fn_rec2", }
 ITEM.weight = 0.2

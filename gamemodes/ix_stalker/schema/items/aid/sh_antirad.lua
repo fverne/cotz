@@ -54,31 +54,36 @@ ITEM.functions.use = {
 
 ITEM.functions.combine = {
 	OnCanRun = function(item, data)
-		if !data then
+		if !data[1] then
 			return false
 		end
 		
 		local targetItem = ix.item.instances[data[1]]
 
-		if targetItem.uniqueid == item.uniqueid then
+		if targetItem.uniqueID == item.uniqueID then
 			return true
 		else
 			return false
-
 		end
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		local targetQuantDiff = targetItem.quantity - targetItem:GetData("quantity", targetItem.quantity)
 		local localQuant = item:GetData("quantity", item.quantity)
 		local targetQuant = targetItem:GetData("quantity", targetItem.quantity)
+		local combinedQuant = (localQuant + targetQuant)
+
 		item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
-		if targetQuantDiff >= localQuant then
-			targetItem:SetData("quantity", targetQuant + localQuant)
+
+		if combinedQuant <= item.maxStack then
+			targetItem:SetData("quantity", combinedQuant)
 			return true
+		elseif localQuant >= targetQuant then
+			targetItem:SetData("quantity",item.maxStack)
+			item:SetData("quantity",(localQuant - (item.maxStack - targetQuant)))
+			return false
 		else
-			item:SetData("quantity", localQuant - targetQuantDiff)
-			targetItem:SetData("quantity", targetItem.quantity)
+			targetItem:SetData("quantity",(targetQuant - (item.maxStack - localQuant)))
+			item:SetData("quantity",item.maxStack)
 			return false
 		end
 	end,

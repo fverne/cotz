@@ -6,7 +6,6 @@ ITEM.width = 2
 ITEM.height = 1
 ITEM.price = 120
 ITEM.slot = 1
-ITEM.flag = "R"
 ITEM.isAttachment = true
 ITEM.attSearch = { "am_cal_45", }
 ITEM.weight = 0.1

@@ -11,6 +11,7 @@ ITEM.price = "350"
 ITEM.busflag = {"medical2_1"}
 ITEM.quantity = 3
 ITEM.weight = 0.3
+ITEM.stopsBleed = true
 
 function ITEM:GetDescription()
 	if (!self.entity or !IsValid(self.entity)) then

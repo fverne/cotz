@@ -3,14 +3,27 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.desc = "Helps your body survive in the zone - in one way or another."
 ITEM.longdesc = "Longer description here."
+ITEM.stopsBleed = false
 
 ITEM:Hook("use", function(item)
+	stopBleed(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
 end)
 
 ITEM:Hook("usetarget", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
 end)
+
+local function stopBleed(item)
+	local client = item.player
+	if(item.stopsBleed) then
+		if(timer.Exists(client:Name().."res_bleed")) then
+			timer.Remove(client:Name().."res_bleed")
+			
+			client:Notify("Your bleeding has stopped.")
+		end
+	end
+end
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", 1)
@@ -117,5 +130,34 @@ ITEM.functions.Clone = {
 	OnCanRun = function(item)
 		local client = item.player
 		return client:GetCharacter():HasFlags("N") and !IsValid(item.entity)
+	end
+}
+
+ITEM.functions.Sell = {
+	name = "Sell",
+	icon = "icon16/stalker/sell.png",
+	sound = "physics/metal/chain_impact_soft2.wav",
+	OnRun = function(item)
+		local client = item.player
+		client:Notify( "Sold for "..(item.price/2).." rubles." )
+		client:GetCharacter():GiveMoney((item.price/2)*item:GetData("quantity",1))
+		
+	end,
+	OnCanRun = function(item)
+		return !IsValid(item.entity) and item:GetOwner():GetCharacter():HasFlags("1")
+	end
+}
+
+ITEM.functions.Value = {
+	name = "Value",
+	icon = "icon16/help.png",
+	sound = "physics/metal/chain_impact_soft2.wav",
+	OnRun = function(item)
+		local client = item.player
+		client:Notify( "Item is sellable for "..(item.price/2)*(item:GetData("quantity",1)).." rubles." )
+		return false
+	end,
+	OnCanRun = function(item)
+		return !IsValid(item.entity) and item:GetOwner():GetCharacter():HasFlags("1")
 	end
 }

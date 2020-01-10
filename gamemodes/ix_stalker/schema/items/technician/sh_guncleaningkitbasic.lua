@@ -3,7 +3,6 @@ ITEM.model = "models/kek1ch/cleaning_kit_p.mdl"
 ITEM.description = "Common tools and materials for taking care of weaponry."
 ITEM.longdesc = "Advanced gun cleaning kit fitting all common weapon calibers. Besides cleaning and maintenance, it can also be used as an effective repair tool. The set comprises a small portion of efficient lubricant and cleaning solvent as well as some light tools to facilitate access to inner mechanisms of a firearm. In order to maximize effectiveness, combine with additional materials or specialized repair sets."
 ITEM.flag = "A"
-ITEM.price = "3000"
 ITEM.repairAmount = 5
 ITEM.repairTreshhold = 75
 ITEM.maxStack = 3
@@ -27,9 +26,9 @@ ITEM.functions.use = {
 				local items = inv:GetItems()
 
 				for k, v in pairs(items) do
-					if v.isWeapon and item.repairTreshhold < v:GetData("durability", 0) and v:GetData("durability", 0) < 100 then
+					if v.isWeapon and item.repairTreshhold < (v:GetData("durability", 0)/100) and v:GetData("durability", 0) < 10000 then
 						table.insert(targets, {
-							name = L("Repair "..v.name.." with "..math.Round(v:GetData("durability",0), 2).." percent durability to "..math.Clamp(math.Round(v:GetData("durability",0), 2)+item.repairAmount*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0, 100).." percent durability."),
+							name = L("Repair "..v.name.." with "..math.Round((v:GetData("durability",0)/100), 2).." percent durability to "..math.Clamp(math.Round((v:GetData("durability",0)/100), 2)+item.repairAmount*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0, 100).." percent durability."),
 							data = {v:GetID()},
 						})
 					else
@@ -67,7 +66,7 @@ ITEM.functions.use = {
 		
 		if target:GetData("equip") != true then
 			if target:GetData("durability",100) > item.repairTreshhold then
-				target:SetData("durability", math.Clamp(target:GetData("durability",100) + item.repairAmount*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0, 100))
+				target:SetData("durability", (math.Clamp(target:GetData("durability",10000) + item.repairAmount*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0, 100))*100)
 				client:Notify(target.name.." successfully repaired.")
 				comp:SetData("quantity", comp:GetData("quantity") - (target.repairCost/5)*(1-(client:GetCharacter():GetAttribute("technician", 0)/100)))
 				item.player:EmitSound(item.sound or "items/battery_pickup.wav")

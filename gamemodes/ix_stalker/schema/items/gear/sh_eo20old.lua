@@ -20,6 +20,16 @@ ITEM.Special = {"Light","No Aim"}
 ITEM.img = Material("vgui/hud/eo20old.png")
 ITEM.repairCost = ITEM.price/100*1
 ITEM.weight = 0.8
+ITEM.res = {
+	["Fall"] = 0.00,
+	["Blast"] = 0.00,
+	["Bullet"] = 0.00,
+	["Shock"] = 0.02,
+	["Burn"] = 0.02,
+	["Radiation"] = 0.02,
+	["Chemical"] = 0.02,
+	["Psi"] = 0.00,
+}
 
 ITEM.pacData = {
 [1] = {

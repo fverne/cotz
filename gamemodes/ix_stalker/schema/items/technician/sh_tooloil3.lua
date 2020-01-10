@@ -3,8 +3,7 @@ ITEM.desc = "Used by technicians to restore the durability of tools."
 ITEM.model = "models/kek1ch/glue_e.mdl"
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = "8000"
-ITEM.flag = "A"
+ITEM.price = "800"
 ITEM.toolValue = 3
 ITEM.weight = 0.25
 

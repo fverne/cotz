@@ -18,3 +18,4 @@ ITEM.holsterDrawInfo = {
 ITEM.modifier = 20
 ITEM.weight = 3.8
 ITEM.repairCost = ITEM.price/100*1
+ITEM.busflag = {"guns2_1"}

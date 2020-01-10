@@ -1,6 +1,9 @@
 PLUGIN.name = "CW Weapons"
 PLUGIN.author = "Lt. Taylor"
 PLUGIN.desc = "Allows CW2.0 and CW2.0 KK INS2 SWEPs to be used."
+PLUGIN.techFlag = "2"
+
+ix.flag.Add(PLUGIN.techFlag, "Access to apply internal weapon upgrades.")
 
 if (CLIENT) then return end
 

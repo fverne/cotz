@@ -436,6 +436,7 @@ function ITEM:OnEquipWeapon(client, weapon)
     timer.Simple(0.1, function()
 		if (IsValid(weapon)) then
 			if ammotype ~= "Normal" then
+				print(ammotype)
 				weapon:attachSpecificAttachment(ammotype)
 			end
     		for _, b in ipairs(attList) do
@@ -513,9 +514,8 @@ function ITEM:OnLoadout()
 			weapon:SetWeaponHP((self:GetData("durability")/100),100)
 			client:RemoveAmmo(weapon:Clip1(), weapon:GetPrimaryAmmoType())
 			client.carryWeapons[self.weaponCategory] = weapon
-			
 			timer.Simple(0.1,function()
-				local ammotype = self:GetData("ammoType", "Normal")
+			local ammotype = self:GetData("ammoType", "Normal")
 				if ammotype ~= "Normal" then
 					weapon:attachSpecificAttachment(ammotype)
 				end
@@ -674,8 +674,12 @@ ITEM.functions.RemoveUpgrade = {
 		if (table.Count(item:GetData("upgrades", {})) <= 0) then
 			return false
 		end
-				
-		return (!IsValid(item.entity))
+		
+		if item.player:GetChar():HasFlags("2") then
+			return (!IsValid(item.entity))
+		end
+		
+		return false
 	end,
 	OnRun = function(item, data)
 		local client = item.player
@@ -791,7 +795,7 @@ ITEM.functions.UpgList = {
     icon = "icon16/tag_blue_edit.png",
     isMulti = true,
     multiOptions = function(item, client)
-
+		print("plz")
     	local targets = {}
         local wepon = client:GetActiveWeapon()
         local SWEP = weapons.Get(item.class)
@@ -800,12 +804,11 @@ ITEM.functions.UpgList = {
         for atcat, data in pairs(atts) do
             for k, name in pairs(data.atts) do
 				if upgrades[name] then
-					local attname = upgrades[name]["name"]
 					name = upgrades[name]["name"]
 					for x,y in pairs(curUpgs) do
 						local attTable = ix.item.list[y[1]]
 						local niceName = attTable:GetName()
-						if attName == niceName then
+						if name == niceName then
 							name = name.." ✓"
 						end
 					end

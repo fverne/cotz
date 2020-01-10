@@ -7,10 +7,8 @@ ITEM.weaponCategory = "secondary"
 ITEM.width = 2
 ITEM.price = 20000
 ITEM.height = 1
-ITEM.busflag = {"guns2_1_1"}
+ITEM.busflag = {"guns2_1"}
 ITEM.repairCost = ITEM.price/100*1
-
-ITEM.canAttach = false
 ITEM.iconCam = {
 	pos = Vector(1.3999999761581, 11, -2.5),
 	ang = Angle(0, 270, 0),

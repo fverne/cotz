@@ -1,6 +1,6 @@
 local PLUGIN = PLUGIN
 
-ITEM.name = "FNUpgrade"
+ITEM.name = "Upgrades"
 ITEM.description = "An upgrade. It goes in a weapon."
 ITEM.category = "Attachments"
 ITEM.model = "models/toolkit_p.mdl"
@@ -8,7 +8,7 @@ ITEM.width = 2
 ITEM.height = 1
 ITEM.price = 1
 ITEM.slot = 1
-ITEM.flag = "R"
+ITEM.flag = "2"
 ITEM.isAttachment = true
 ITEM.attSearch = { "am_cal_9x18", }
 ITEM.quantity = 1
@@ -120,8 +120,12 @@ ITEM.functions.Upgrade = {
 	icon = "icon16/stalker/attach.png",
     
     
-    OnCanRun = function(item)
-        return (!IsValid(item.entity))
+	OnCanRun = function(item)
+		if item.player:GetChar():HasFlags("2") then
+			return (!IsValid(item.entity))
+		end
+		
+		return false
     end,
 	
     OnRun = function(item, data)

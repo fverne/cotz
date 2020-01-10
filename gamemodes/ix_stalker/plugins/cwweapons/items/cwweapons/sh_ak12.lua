@@ -6,7 +6,6 @@ ITEM.class = "cw_kk_ins2_ak12"
 ITEM.weaponCategory = "primary"
 ITEM.width = 4
 ITEM.height = 2
---ITEM.busflag = "ARMS2_3_1"
 ITEM.price = 100000 -- someone decide a price other than "special" plz thx
 ITEM.repairCost = ITEM.price/100*1
 ITEM.iconCam = {

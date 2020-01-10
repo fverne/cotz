@@ -20,6 +20,7 @@ ITEM.isCW = true
 ITEM.isPLWeapon = true
 ITEM.modifier = 5
 ITEM.weight = 1.3
+ITEM.busflag = {"guns3_1"}
 
 ITEM.canAttach = false
 ITEM.iconCam = {

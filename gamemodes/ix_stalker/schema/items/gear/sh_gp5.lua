@@ -19,6 +19,16 @@ ITEM.anomalousrpglevels = {"2","2","5","5","2"}
 ITEM.img = Material("vgui/hud/gp5.png")
 ITEM.repairCost = ITEM.price/100*1
 ITEM.weight = 1.1
+ITEM.res = {
+	["Fall"] = 0.00,
+	["Blast"] = 0.00,
+	["Bullet"] = 0.00,
+	["Shock"] = 0.02,
+	["Burn"] = 0.05,
+	["Radiation"] = 0.05,
+	["Chemical"] = 0.02,
+	["Psi"] = 0.00,
+}
 
 
 ITEM.pacData = {

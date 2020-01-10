@@ -20,7 +20,7 @@ ITEM.isCW = true
 ITEM.isPLWeapon = true
 ITEM.modifier = 5
 ITEM.weight = 3.3
-
+ITEM.busflag = {"guns5_1"}
 ITEM.iconCam = {
 	pos = Vector(5.5, 27, 6),
 	ang = Angle(0, 270, 0),
