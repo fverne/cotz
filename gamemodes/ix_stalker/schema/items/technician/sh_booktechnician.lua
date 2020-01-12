@@ -4,7 +4,7 @@ ITEM.model = "models/kek1ch/book2.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.flag = "A"
-ITEM.weight = 0.25
+ITEM.weight = 0.5
 
 
 ITEM.functions.read = {

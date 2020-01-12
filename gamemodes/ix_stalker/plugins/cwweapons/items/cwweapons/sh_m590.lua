@@ -17,3 +17,9 @@ ITEM.holsterDrawInfo = {
 }
 ITEM.modifier = 20
 ITEM.weight = 3.3
+ITEM.RoF = "S/2/-"
+ITEM.Dmg = "1d10+5"
+ITEM.Pen = 5
+ITEM.Mag = 8
+ITEM.Rld = "2 Ready"
+ITEM.Special = "Long, Buckshot"

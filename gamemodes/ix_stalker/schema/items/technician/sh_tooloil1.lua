@@ -5,7 +5,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = "400"
 ITEM.toolValue = 2
-ITEM.weight = 0.25
+ITEM.weight = 0.2
 ITEM.flag = "A"
 
 

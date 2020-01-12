@@ -17,3 +17,10 @@ ITEM.holsterDrawInfo = {
 }
 ITEM.modifier = 5
 ITEM.weight = 4.4
+ITEM.Range = 150
+ITEM.RoF = "S/3/6"
+ITEM.Dmg = "1d10+6"
+ITEM.Pen = 10
+ITEM.Mag = 75
+ITEM.Rld = "Ready"
+ITEM.Special = "Long"

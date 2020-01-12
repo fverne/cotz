@@ -66,9 +66,6 @@ local function CalcStaminaChange(client)
 				client:SetRunSpeed(walkSpeed)
 				client:SetNetVar("brth", true)
 
-				character:UpdateAttrib("end", 0.1)
-				character:UpdateAttrib("stm", 0.01)
-
 				hook.Run("PlayerStaminaLost", client)
 			elseif (value >= 50 and client:GetNetVar("brth", false)) then
 				client:SetRunSpeed(runSpeed)
@@ -145,8 +142,4 @@ else
 			predictedStamina = var
 		end
 	end
-
-	ix.bar.Add(function()
-		return predictedStamina / 100
-	end, Color(200, 200, 40), nil, "stm")
 end

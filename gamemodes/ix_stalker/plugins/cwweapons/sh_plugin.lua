@@ -32,12 +32,9 @@ function PLUGIN:WeaponFired(entity)
 			end
 		end
 		
-		local ammoCount = 1
-		if ammo then
-			local ammoCount = ammo:GetData("quantity")
-			if ammoCount == 1 then
-				ammo:Remove()
-			end
+		local ammoCount = ammo:GetData("quantity",ammo.ammoAmount) or 1
+		if ammoCount == 1 then
+			ammo:Remove()
 		end
 		
 		local dura

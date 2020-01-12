@@ -8,7 +8,7 @@ ITEM.price = 150
 ITEM.flag = "A"
 ITEM.attribBoosts = { ["luck"] = 1 }
 ITEM.value = ITEM.price*1*1
-ITEM.weight = 0.25
+ITEM.weight = 1
 
 ITEM.pacData = {
 [1] = {

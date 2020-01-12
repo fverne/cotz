@@ -16,7 +16,7 @@ ITEM.ballisticlevels = {"lll-a"}
 ITEM.ballisticrpglevels = {["head"] = "18"}
 ITEM.anomalousrpglevels = {"10","0","0","0","0"}
 ITEM.repairCost = ITEM.price/100*1
-ITEM.weight = 1.2
+ITEM.weight = 4.5
 ITEM.res = {
 	["Fall"] = 0.00,
 	["Blast"] = 0.00,

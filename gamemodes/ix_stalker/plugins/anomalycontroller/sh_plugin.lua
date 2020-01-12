@@ -105,22 +105,26 @@ if SERVER then
 			end
 
 			local entity = table.Random(selectedAnoms)
-			for i = 1, math.ceil(v[2]/entity.interval) do
-				local position = v[1] + Vector( math.Rand(-v[2],v[2]), math.Rand(-v[2],v[2]), math.Rand(10,20) )
-				local data = {}
-				data.start = position
-				data.endpos = position
-				data.mins = Vector(-16, -16, 0)
-				data.maxs = Vector(16, 16, 71)
-				local trace = util.TraceHull(data)
+			if entity then
+				for i = 1, math.ceil(v[2]/entity.interval) do
+					local position = v[1] + Vector( math.Rand(-v[2],v[2]), math.Rand(-v[2],v[2]), math.Rand(10,20) )
+					local data = {}
+					data.start = position
+					data.endpos = position
+					data.mins = Vector(-16, -16, 0)
+					data.maxs = Vector(16, 16, 71)
+					local trace = util.TraceHull(data)
 
-				if trace.Entity:IsValid() then
-					continue
+					if trace.Entity:IsValid() then
+						continue
+					end
+					
+					local spawnedent = ents.Create(entity.entityname)
+					if spawnedent then
+						spawnedent:SetPos(position)
+						spawnedent:Spawn()
+					end
 				end
-				
-				local spawnedent = ents.Create(entity.entityname)
-				spawnedent:SetPos(position)
-				spawnedent:Spawn()
 			end
 			
 			--Passive damage component

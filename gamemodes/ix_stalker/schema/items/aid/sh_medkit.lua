@@ -13,6 +13,17 @@ ITEM.quantity = 3
 ITEM.weight = 0.25
 ITEM.stopsBleed = true
 
+local function stopBleed(item)
+	local client = item.player
+	if(item.stopsBleed) then
+		if(timer.Exists(client:Name().."res_bleed")) then
+			timer.Remove(client:Name().."res_bleed")
+			
+			client:Notify("Your bleeding has stopped.")
+		end
+	end
+end
+
 function ITEM:GetDescription()
 	if (!self.entity or !IsValid(self.entity)) then
 		local quant = self:GetData("quantity", self.quantity)
@@ -38,7 +49,7 @@ ITEM.functions.use = {
 		local quantity = item:GetData("quantity", item.quantity)
 		item.player:AddBuff("buff_slowheal", 10, { amount = item.restore })
 		ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it.", false)
-
+		stopBleed(item)
 		quantity = quantity - 1
 
 		if (quantity >= 1) then

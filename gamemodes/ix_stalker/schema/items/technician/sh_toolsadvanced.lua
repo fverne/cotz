@@ -15,7 +15,7 @@ ITEM.toolMult = 3
 ITEM.compMultiplier = 1.15
 ITEM.repairAmount = 25
 ITEM.sound = "stalkersound/inv_repair_kit_use_fast.mp3"
-ITEM.weight = 0.25
+ITEM.weight = 8
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", 1)
@@ -228,17 +228,30 @@ ITEM.functions.repairgun = {
 		local targets = {}
 		local char = client:GetCharacter()
 		
-		
 		if (char) then
 			local inv = char:GetInventory()
-
 			if (inv) then
 				local items = inv:GetItems()
-
 				for k, v in pairs(items) do
 					if v.isWeapon and v:GetData("durability", 0) < 10000 then
+						local curPrice = v:GetData("RealPrice")
+						if !curPrice then
+							curPrice = v.price
+						end
+						
+						local lincost = ((v:GetData("durability",10000) / 1000)-10)
+						local cost = math.Round(((curPrice / 50) * (lincost * lincost))/2)
+						
+						local maxcost = (curPrice * 1.05)
+						
+						if cost > maxcost then
+							cost = maxcost
+						end
+						
+						local compcost = math.Round(((100 - math.Round((v:GetData("durability",10000)/100),0))*(1-(client:GetCharacter():GetPerk("weapontechnician", 0)/20))),0)
+						
 						table.insert(targets, {
-							name = L("Repair "..v.name.." with "..math.Round((v:GetData("durability",0)/100), 2).." percent durability to "..math.Clamp(math.Round((v:GetData("durability",0)/100), 2)+item.repairAmount*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0, 100).." percent durability | Costs "..math.Round(v.repairCost*(1-(client:GetCharacter():GetAttribute("technician", 0)/100))).." components."),
+							name = L("Repair "..v.name.." | Costs: "..compcost.." components, "..cost.."Rubles"),
 							data = {v:GetID()},
 						})
 					else
@@ -250,8 +263,12 @@ ITEM.functions.repairgun = {
 
 		return targets
 		end,
-	OnCanRun = function(item)				
-		return (!IsValid(item.entity)) and item.player:GetFlags("T")
+	OnCanRun = function(item)
+		if (item.player:GetCharacter():GetPerk("weapontechnician", 0) > 0) then 
+			return (!IsValid(item.entity)) and item.player:GetFlags("2")
+		else
+			return false
+		end
 	end,
 	OnRun = function(item, data)
 		local client = item.player
@@ -259,40 +276,108 @@ ITEM.functions.repairgun = {
 		local inv = char:GetInventory()
 		local items = inv:GetItems()
 		local target = data[1]
-		local comp = client:GetCharacter():GetInventory():HasItem("component")
 		
 		for k, invItem in pairs(items) do
 			if (data[1]) then
 				if (invItem:GetID() == data[1]) then
 					target = invItem
-
 					break
 				end
 			else
-				client:Notify("No weapon selected.")
+				client:Notify("No outfit selected.")
 				return false
 			end
 		end
 		
 		if target:GetData("equip") != true then
-			if comp and (comp:GetData("quantity", 1)) >= target.repairCost then
-				target:SetData("durability", (math.Clamp(target:GetData("durability",100) + item.repairAmount*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0, 100)*100))
-				client:Notify(target.name.." successfully repaired.")
-				comp:SetData("quantity", comp:GetData("quantity") - target.repairCost*(1-(client:GetCharacter():GetAttribute("technician", 0)/100)))
-				item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-				ix.chat.Send(item.player, "iteminternal", "uses their "..item.name.." to repair their "..target.name..".", false)
-				if item:GetData("quantity",100) > 1 then
-					item:SetData("quantity", item:GetData("quantity",100) - 1)
-					return false
-				else
-					return true
+			local compcount = 0
+			local bigstack
+			local itemquan = 0
+			local bigstackquan
+			local items = client:GetChar():GetInv():GetItems()
+			for k,v in pairs(items) do
+				if v:GetName() == "Components" then
+					itemquan = v:GetData("quantity",1)
+					compcount = compcount + itemquan
+					if bigstack == nil then
+						bigstack = v
+					elseif bigstack:GetData("quantity",1) < itemquan then
+						bigstack = v
+					end
 				end
-			else
-				client:Notify("Not enough components.")
+			end
+			
+			if not bigstack then
+				client:Notify("No Components")
 				return false
 			end
+			
+			bigstackquan = bigstack:GetData("quantity",1)
+			
+			local lincost = math.Round((target:GetData("durability") / 1000) - 10)
+        
+			local curPrice = target:GetData("RealPrice")
+			if !curPrice then
+				curPrice = target.price
+			end
+				
+			local lincost = ((v:GetData("durability",10000) / 1000)-10)
+			local cost = math.Round(((curPrice / 50) * (lincost * lincost))/2)
+			local maxcost = (curPrice * 1.05)
+
+			if cost > maxcost then
+				cost = maxcost
+			end
+
+			local compcost = math.Round(((100 - math.Round((target:GetData("durability",10000)/100),0))*(1-(client:GetCharacter():GetPerk("weapontechnician", 0)/20))),0)
+
+			if compcost > compcount then
+				client:Notify("Not enough components")
+				return false
+			end
+			
+			
+			if (client:GetChar():HasMoney(cost) == true) then
+				client:GetChar():TakeMoney(cost)
+				if bigstackquan > compcost then
+					bigstack:SetData("quantity", (bigstackquan - compcost))
+				elseif bigstackquan == compcost then
+					bigstack:Remove()
+				else
+					local costtracker = compcost - bigstackquan
+					bigstack:Remove()
+					for k,v in pairs(items) do
+						if v:GetName() == "Components" then
+							local compquan = v:GetData("quantity",1)
+							if compquan > costtracker then
+								v:SetData("quantity", (compquan - costtracker))
+								break
+							elseif compquan == costtracker then
+								v:Remove()
+								break
+							else
+								costtracker = costtracker - compquan
+								v:Remove()
+							end
+						end
+					end
+				end
+				target:SetData("durability", 10000)
+				client:EmitSound(item.sound or "items/battery_pickup.wav")
+				ix.chat.Send(client, "iteminternal", "uses their "..item.name.." to repair a "..target.name..".", false)
+			else
+				client:Notify("Could not afford repairs")
+				return false
+			end
+				
+			if item:GetData("quantity",100) > 1 then
+				item:SetData("quantity", item:GetData("quantity",100) - 1)
+				return false
+			else
+				return true
+			end
 		else
-			client:Notify("Unequip the weapon first!")
+			client:Notify("Unequip first!")
 			return false	
 		end
 	end,
@@ -315,9 +400,25 @@ ITEM.functions.repairarmor = {
 				local items = inv:GetItems()
 
 				for k, v in pairs(items) do
-					if v.isBodyArmor and v:GetData("durability", 0) < 100 then
+					if (v.isBodyArmor or v.isHelmet or v.isGasmask) and v:GetData("durability", 0) < 100 then
+					
+						local curPrice = v:GetData("RealPrice")
+						if !curPrice then
+							curPrice = v.price
+						end
+						
+						local lincost = ((v:GetData("durability",100) / 10)-10)
+						local cost = math.Round(((curPrice / 50) * (lincost * lincost))/2)
+						local maxcost = (curPrice * 1.05)
+						
+						if cost > maxcost then
+							cost = maxcost
+						end
+						
+						local compcost = math.Round(((100 - math.Round(v:GetData("durability",100),0))*(1-(client:GetCharacter():GetPerk("armortechnician", 0)/20))),0)
+						
 						table.insert(targets, {
-							name = L("Repair "..v.name.." with "..math.Round(v:GetData("durability",0), 2).." percent durability to "..math.Clamp(math.Round(v:GetData("durability",0), 2)+item.repairAmount*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0, 100).." percent durability | Costs "..math.Round((v.price/100)*(1-(client:GetCharacter():GetAttribute("technician", 0)/100))).." components."),
+							name = L("Repair "..v.name.." | Costs: "..compcost.." components, "..cost.."Rubles"),
 							data = {v:GetID()},
 						})
 					else
@@ -330,7 +431,11 @@ ITEM.functions.repairarmor = {
 		return targets
 		end,
 	OnCanRun = function(item)				
-		return (!IsValid(item.entity)) and item.player:GetFlags("T")
+		if (item.player:GetCharacter():GetPerk("armortechnician", 0) > 0) then 
+			return (!IsValid(item.entity)) and item.player:GetFlags("2")
+		else
+			return false
+		end
 	end,
 	OnRun = function(item, data)
 		local client = item.player
@@ -338,7 +443,6 @@ ITEM.functions.repairarmor = {
 		local inv = char:GetInventory()
 		local items = inv:GetItems()
 		local target = data[1]
-		local comp = client:GetCharacter():GetInventory():HasItem("component")
 		
 		for k, invItem in pairs(items) do
 			if (data[1]) then
@@ -354,24 +458,91 @@ ITEM.functions.repairarmor = {
 		end
 		
 		if target:GetData("equip") != true then
-			if comp and (comp:GetData("quantity", 1)) >= (target.price/100) then
-				target:SetData("durability", math.Clamp(target:GetData("durability",100) + item.repairAmount*(1+(client:GetCharacter():GetAttribute("technician", 0)/100)), 0, 100))
-				client:Notify(target.name.." successfully repaired.")
-				comp:SetData("quantity", comp:GetData("quantity") - (target.price/100)*(1-(client:GetCharacter():GetAttribute("technician", 0)/100)))
-				item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-				ix.chat.Send(item.player, "iteminternal", "uses their "..item.name.." to repair their "..target.name..".", false)
-				if item:GetData("quantity",100) > 1 then
-					item:SetData("quantity", item:GetData("quantity",100) - 1)
-					return false
-				else
-					return true
+			local compcount = 0
+			local bigstack
+			local itemquan = 0
+			local bigstackquan
+			local items = client:GetChar():GetInv():GetItems()
+			for k,v in pairs(items) do
+				if v:GetName() == "Components" then
+					itemquan = v:GetData("quantity",1)
+					compcount = compcount + itemquan
+					if bigstack == nil then
+						bigstack = v
+					elseif bigstack:GetData("quantity",1) < itemquan then
+						bigstack = v
+					end
 				end
-			else
-				client:Notify("Not enough components.")
+			end
+			
+			if not bigstack then
+				client:Notify("No Components")
 				return false
 			end
+			
+			bigstackquan = bigstack:GetData("quantity",1)
+        
+			local curPrice = target:GetData("RealPrice")
+			if !curPrice then
+				curPrice = target.price
+			end
+				
+			local lincost = ((v:GetData("durability",10000) / 1000)-10)
+			local cost = math.Round(((curPrice / 50) * (lincost * lincost))/2)
+			local maxcost = (curPrice * 1.05)
+			
+			if cost > maxcost then
+				cost = maxcost
+			end
+				
+			local compcost = math.Round(((100 - math.Round(target:GetData("durability",100),0))*(1-(client:GetCharacter():GetPerk("armortechnician", 0)/20))),0)
+			
+			if compcost > compcount then
+				client:Notify("Not enough components")
+				return false
+			end
+				
+			if (client:GetChar():HasMoney(cost) == true) then
+				client:GetChar():TakeMoney(cost)
+				if bigstackquan > compcost then
+					bigstack:SetData("quantity", (bigstackquan - compcost))
+				elseif bigstackquan == compcost then
+					bigstack:Remove()
+				else
+					local costtracker = compcost - bigstackquan
+					bigstack:Remove()
+					for k,v in pairs(items) do
+						if v:GetName() == "Components" then
+							local compquan = v:GetData("quantity",1)
+							if compquan > costtracker then
+								v:SetData("quantity", (compquan - costtracker))
+								break
+							elseif compquan == costtracker then
+								v:Remove()
+								break
+							else
+								costtracker = costtracker - compquan
+								v:Remove()
+							end
+						end
+					end
+				end
+				target:SetData("durability", 100)
+				client:EmitSound(item.sound or "items/battery_pickup.wav")
+				ix.chat.Send(client, "iteminternal", "uses their "..item.name.." to repair a "..target.name..".", false)
+			else
+				client:Notify("Could not afford repairs")
+				return false
+			end
+				
+			if item:GetData("quantity",100) > 1 then
+				item:SetData("quantity", item:GetData("quantity",100) - 1)
+				return false
+			else
+				return true
+			end
 		else
-			client:Notify("Unequip the outfit first!")
+			client:Notify("Unequip first!")
 			return false	
 		end
 	end,

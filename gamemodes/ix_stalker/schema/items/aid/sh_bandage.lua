@@ -12,15 +12,24 @@ ITEM.busflag = {"medical"}
 ITEM.weight = 0.05
 ITEM.stopsBleed = true
 
+local function stopBleed(item)
+	local client = item.player
+	if(item.stopsBleed) then
+		if(timer.Exists(client:Name().."res_bleed")) then
+			timer.Remove(client:Name().."res_bleed")
+			
+			client:Notify("Your bleeding has stopped.")
+		end
+	end
+end
+
 ITEM.functions.use = {
 	name = "Heal",
 	icon = "icon16/stalker/heal.png",
 	OnRun = function(item)
 		item.player:AddBuff("buff_slowheal", 10, { amount = item.restore/5 })
 		ix.chat.Send(item.player, "iteminternal", "unwraps and ties a "..item.name.." to their wound.", false)
-		
-		
-
+		stopBleed(item)
 		return true
 	end,
 	OnCanRun = function(item)

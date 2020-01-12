@@ -169,6 +169,10 @@ ITEM.functions.split = {
 
 ITEM.functions.combine = {
 	OnCanRun = function(item, data)
+		if !data then
+			return false
+		end
+		
 		if !data[1] then
 			return false
 		end
@@ -183,22 +187,22 @@ ITEM.functions.combine = {
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		local localQuant = item:GetData("quantity", item.quantity)
-		local targetQuant = targetItem:GetData("quantity", targetItem.quantity)
+		local localQuant = item:GetData("quantity", item.ammoAmount)
+		local targetQuant = targetItem:GetData("quantity", targetItem.ammoAmount)
 		local combinedQuant = (localQuant + targetQuant)
 
 		item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
 
-		if combinedQuant <= item.maxStack then
+		if combinedQuant <= item.ammoAmount then
 			targetItem:SetData("quantity", combinedQuant)
 			return true
 		elseif localQuant >= targetQuant then
-			targetItem:SetData("quantity",item.maxStack)
-			item:SetData("quantity",(localQuant - (item.maxStack - targetQuant)))
+			targetItem:SetData("quantity",item.ammoAmount)
+			item:SetData("quantity",(localQuant - (item.ammoAmount - targetQuant)))
 			return false
 		else
-			targetItem:SetData("quantity",(targetQuant - (item.maxStack - localQuant)))
-			item:SetData("quantity",item.maxStack)
+			targetItem:SetData("quantity",(targetQuant - (item.ammoAmount - localQuant)))
+			item:SetData("quantity",item.ammoAmount)
 			return false
 		end
 	end,
