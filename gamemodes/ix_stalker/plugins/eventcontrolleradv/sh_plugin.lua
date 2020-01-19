@@ -188,7 +188,7 @@ else
 
 end
 
-ix.command.Add("eventadd", {
+ix.command.Add("eventadvadd", {
 	superAdminOnly = true,
 	arguments = {
 		ix.type.string,
@@ -209,7 +209,7 @@ ix.command.Add("eventadd", {
 	end
 })
 
-ix.command.Add("eventremove", {
+ix.command.Add("eventadvremove", {
 	superAdminOnly = true,
 	OnRun = function(self, client, arguments)
 		local trace = client:GetEyeTraceNoCursor()
@@ -227,7 +227,7 @@ ix.command.Add("eventremove", {
 	end
 })
 
-ix.command.Add("eventdisplay", {
+ix.command.Add("eventadvdisplay", {
 	adminOnly = true,
 	OnRun = function(self, client, arguments)
 		if SERVER then
@@ -237,14 +237,14 @@ ix.command.Add("eventdisplay", {
 	end
 })
 
-ix.command.Add("eventforce", {
+ix.command.Add("eventadvforce", {
 	adminOnly = true,
 	OnRun = function(client, arguments)
 		PLUGIN:setSpawnTime(1)
 	end
 })
 
-ix.command.Add("eventpopulate", {
+ix.command.Add("eventadvpopulate", {
 	adminOnly = true,
 	OnRun = function(self, client, arguments)
 		PLUGIN:setPopulate(true)
