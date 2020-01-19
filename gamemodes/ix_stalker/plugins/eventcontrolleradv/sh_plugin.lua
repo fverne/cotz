@@ -1,22 +1,23 @@
 local PLUGIN = PLUGIN
-PLUGIN.name = "EventController"
+PLUGIN.name = "EventController - Adv"
 PLUGIN.author = "some faggot"
-PLUGIN.desc = "Makes events occur randomly on your server"
+PLUGIN.desc = "Makes events occur randomly on your server. More intricate and complex configuration possible."
 
 PLUGIN.eventdefs = PLUGIN.eventdefs or {}
 PLUGIN.eventpoints = PLUGIN.eventpoints or {} -- EVENTPOINT STRUCTURE table.insert( PLUGIN.eventpoints, { position, name, difficulty } )
 
 ix.util.Include("sh_eventdefs.lua")
 
+PLUGIN.updaterate = 5
+
 PLUGIN.spawnratebase = 1800
 PLUGIN.spawnrateplayer = 30
 PLUGIN.spawnradius = 128
 PLUGIN.populateAmount = 5
 
-PLUGIN.pdachatter = true
-PLUGIN.pdachatterchance = 100
-
 PLUGIN.saferadius = 1000
+
+PLUGIN.currentEvents = {} --To keep track of and update running events
 
 local icon = Material("vgui/icons/news.png")
 
@@ -74,6 +75,7 @@ ix.chat.Register("eventpdainternal", {
 
 if SERVER then
 	local spawntime = 1
+	local updatetime = 1
 	local populate = true
 	
 	local function isClear(position)
@@ -93,134 +95,13 @@ if SERVER then
 	
 	local function spawnEvent(eventpoint, spawn)
 		if isClear(eventpoint[1]) then
-			--spawnents
-			if spawn.entities then
-				for k = 1, #spawn.entities do
-					for i = 1, spawn.entities[k][2] do
-						local position = eventpoint[1] + Vector( math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), 64 )
-						local data = {}
-						data.start = position
-						data.endpos = position
-						data.mins = Vector(-16, -16, 0)
-						data.maxs = Vector(16, 16, 71)
-						local trace = util.TraceHull(data)
-							
-						if trace.Entity:IsValid() then
-							continue
-						end
+			key = #currentEvents+1
+			currentEvents[key].data = {}
+			currentEvents[key].eventpoint = eventpoint
+			currentEvents[key].eventDef = spawn.key
 
-						local newNPC = ents.Create(spawn.entities[k][1])
-						newNPC:SetPos(position)
-						newNPC:Spawn()
-					end
-				end
-			end
-			--spawnitems
-			if spawn.items then
-				for k = 1, #spawn.items do
-					local position = eventpoint[1] + Vector( math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), 32 )
-					local data = {}
-					data.start = position
-					data.endpos = position
-					data.mins = Vector(-16, -16, 0)
-					data.maxs = Vector(16, 16, 71)
-					local trace = util.TraceHull(data)
-					
-					if trace.Entity:IsValid() then
-						continue
-					end
-
-					ix.item.Spawn(spawn.items[k][1], position, nil, AngleRand(), spawn.items[k][2] or {})
-				end
-			end
-			--spawn props 
-			/*
-			if spawn.props then
-				for k = 1, #spawn.props do
-					for i = 1, spawn.props[k][2] do
-						local position = eventpoint[1] + Vector( math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), 32 )
-						local data = {}
-						data.start = position
-						data.endpos = position
-						data.mins = Vector(-16, -16, 0)
-						data.maxs = Vector(16, 16, 71)
-						local trace = util.TraceHull(data)
-						
-						if trace.Entity:IsValid() then
-							continue
-						end
-
-						local prop = ents.Create( "prop_physics" )
-						prop:SetModel( spawn.props[k][1] )
-						prop:SetPos( position )
-						prop:Spawn()
-						timer.Simple(300, function() prop:Remove() end)
-					end
-				end
-			end */
-			--spawn ragdolls
-			/*
-			if spawn.ragdolls then
-				for k = 1, #spawn.ragdolls do
-					for i = 1, spawn.ragdolls[k][2] do
-						local position = eventpoint[1] + Vector( math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), 32 )
-						local data = {}
-						data.start = position
-						data.endpos = position
-						data.mins = Vector(-16, -16, 0)
-						data.maxs = Vector(16, 16, 71)
-						local trace = util.TraceHull(data)
-						
-						if trace.Entity:IsValid() then
-							continue
-						end */
-						
-						/*
-						local ragdoll = ClientsideRagdoll( spawn.ragdolls[k][1] )
-						ragdoll:SetPos( position )
-						ragdoll:SetSkin(spawn.ragdolls[k][3])
-						ragdoll:SetBodyGroups(spawn.ragdolls[k][4])
-						ragdoll:SetNoDraw( false )
-						ragdoll:DrawShadow( true )
-						ragdoll:Fire( "FadeAndRemove", "", 300 )
-						*/ /*
-						-- Serversided ragdolls, tough performance
-						local ragdoll = ents.Create( "prop_ragdoll" )
-						ragdoll:SetModel( spawn.ragdolls[k][1] )
-						ragdoll:SetPos( position )
-						ragdoll:Spawn()
-						ragdoll:SetSkin(spawn.ragdolls[k][3])
-						ragdoll:SetBodyGroups(spawn.ragdolls[k][4])
-						ragdoll:SetCollisionGroup( COLLISION_GROUP_DEBRIS ) --minimize performance hit
-						ragdoll:Fire( "FadeAndRemove", "", 300 )
-
-					end
-				end
-			end */
-
-			
-			--spawn loot
-			if spawn.loot then
-				for k = 1, #spawn.loot do
-					for i = 1, spawn.loot[k][2] do
-						local position = eventpoint[1] + Vector( math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), 32 )
-						local data = {}
-						data.start = position
-						data.endpos = position
-						data.mins = Vector(-16, -16, 0)
-						data.maxs = Vector(16, 16, 71)
-						local trace = util.TraceHull(data)
-						
-						if trace.Entity:IsValid() then
-							continue
-						end
-
-						if math.random(100) <= spawn.lootChance then
-							ix.item.Spawn(spawn.loot[k][1], position, nil, AngleRand(), spawn.loot[k][3] or {})
-						end
-					end
-				end
-			end
+			/*currentEvents[key].dat = */self.eventdefs[v.key]:funcPrestart(currentEvents[key])
+			/*currentEvents[key].dat = */self.eventdefs[v.key]:funcStart(currentEvents[key])
 		end
 	end
 
@@ -260,6 +141,18 @@ if SERVER then
 			populate = false
 		end
 		
+		if (updatetime < CurTime() ) then
+			for k,v in pairs( self.currentEvents) do
+				self.eventdefs[v.key]:funcUpdate(v.eventpoint, v.dat)
+				if self.eventdefs[v.key]:funcShouldEnd(v.eventpoint, v.dat) then
+					self.eventdefs[v.key]:funcEnd(v.eventpoint, v.dat)
+					table.remove(self.currentEvents, k)
+				end
+			end
+
+			updatetime = CurTime() + self.updaterate
+		end
+
 		if spawntime > CurTime() then return end
 		spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * #player.GetAll()))
 
@@ -270,20 +163,11 @@ if SERVER then
 			return
 		end
 
-
 		while table.Random(spawn.difficulty) != eventpoint[3] do
 			spawn = table.Random(self.eventdefs)
 		end
 
 		spawnEvent(eventpoint, spawn)
-		
-		if self.pdachatter == true then
-			if math.Rand(1,100) <= self.pdachatterchance then
-				for k, ply in pairs( player.GetAll() ) do
-					ix.chat.Send(ply, "eventpdainternal", Format(spawn.pdabroadcast, eventpoint[2]), true, ply)
-				end
-			end
-		end
 
 	end	
 else
@@ -362,14 +246,7 @@ ix.command.Add("eventforce", {
 
 ix.command.Add("eventpopulate", {
 	adminOnly = true,
-	--syntax = "<number amount>",
 	OnRun = function(self, client, arguments)
 		PLUGIN:setPopulate(true)
-		--local amount = tonumber(arguments[1]) or 5
-		--if isnumber(amount) then
-		--	PLUGIN.populateAmount = arguments[1]
-		--else
-		--	client:ChatPrint("Amount must be a number.")
-		--end
 	end
 })
