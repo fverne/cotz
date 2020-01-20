@@ -163,7 +163,7 @@ if SERVER then
 			return
 		end
 
-		while table.Random(spawn.difficulty) != eventpoint[3] do
+		while table.HasValue(spawn.allowedPoints,eventpoint[3]) do
 			spawn = table.Random(self.eventdefs)
 		end
 
@@ -192,17 +192,18 @@ ix.command.Add("eventadvadd", {
 	superAdminOnly = true,
 	arguments = {
 		ix.type.string,
-		ix.type.number
+		ix.type.string,
 	},
-	OnRun = function(self, client, name, difficulty)
+	OnRun = function(self, client, name, internalname)
 		local trace = client:GetEyeTraceNoCursor()
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local name = name or "UNNAMED AREA"
+		local internalname = internalname or "UNDEFINED_INTERNAL_NAME"
 		local difficulty = difficulty or 1
 
 		if isnumber(difficulty) then
-			table.insert( PLUGIN.eventpoints, { hitpos, name, difficulty } )
-			client:Notify( "Event area named '"..name.."' with difficulty "..difficulty.." succesfully added"  )
+			table.insert( PLUGIN.eventpoints, { hitpos, name, internalname, difficulty } )
+			client:Notify( "Event area named '"..name.."'("..internalname..") with difficulty "..difficulty.." succesfully added"  )
 		else
 			client:ChatPrint("Difficulty must be a number.")
 		end

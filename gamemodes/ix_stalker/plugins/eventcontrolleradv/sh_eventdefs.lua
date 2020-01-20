@@ -1,7 +1,8 @@
 /*
 	PLUGIN.eventdefs["Key123"] = {
 		key = "Key123", --Should be identical to the actual key
-		difficulty = {1},
+		allowedPoints = {"gm_flatgrass_point1", "gm_flatgrass_point2"}
+		difficulty = 1,
 		funcPrestart = function(dat) 
 
 		end,
@@ -20,6 +21,7 @@
 	}
 */
 --difficulty: Given difficulty for the encounter
+--allowedPoints: Points that can spawn this event
 --funcPrestart: Things to set up before starting, possibly some data tables
 --funcStart: Things to do when starting, most likely spawn stuff
 --funcUpdate: To allow a more dynamic structure, will be ran every few seconds
@@ -30,7 +32,7 @@
 /*
 	PLUGIN.eventdefs["Zombie1"] = {
 		key = "Zombie1",
-		difficulty = {1},
+		difficulty = 1,
 		funcPrestart = function(dat)
 			ix.item.Spawn("makarov", dat.eventpoint[1], nil, AngleRand(), {["durability"] = 30})
 			for k, ply in pairs( player.GetAll() ) do
