@@ -86,8 +86,6 @@ if SERVER then
 		for i,j in pairs (currentents) do
 			if j:IsPlayer() then
 				return false
-			elseif (string.sub(j:GetClass(), 1, 10) == "npc_mutant") then
-				return false
 			end
 		end
 		return true
@@ -195,14 +193,9 @@ ix.command.Add("eventadvadd", {
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local name = name or "UNNAMED AREA"
 		local internalname = internalname or "UNDEFINED_INTERNAL_NAME"
-		local difficulty = difficulty or 1
 
-		if isnumber(difficulty) then
-			table.insert( PLUGIN.eventpoints, internalname, { hitpos, name, internalname, difficulty } )
-			client:Notify( "Event area named '"..name.."'("..internalname..") with difficulty "..difficulty.." succesfully added"  )
-		else
-			client:ChatPrint("Difficulty must be a number.")
-		end
+		table.insert( PLUGIN.eventpoints, internalname, { hitpos, name } )
+		client:Notify( "Event area named '"..name.."'("..internalname..") succesfully added" )
 	end
 })
 
