@@ -156,15 +156,11 @@ if SERVER then
 		if spawntime > CurTime() then return end
 		spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * #player.GetAll()))
 
-		local eventpoint = table.Random(self.eventpoints)
 		local spawn = table.Random(self.eventdefs)
+		local eventpoint = table.Random(self.eventpoints[table.Random(spawn.allowedPoints)])
 
 		if (!eventpoint) then
 			return
-		end
-
-		while table.HasValue(spawn.allowedPoints,eventpoint[3]) do
-			spawn = table.Random(self.eventdefs)
 		end
 
 		spawnEvent(eventpoint, spawn)
@@ -202,7 +198,7 @@ ix.command.Add("eventadvadd", {
 		local difficulty = difficulty or 1
 
 		if isnumber(difficulty) then
-			table.insert( PLUGIN.eventpoints, { hitpos, name, internalname, difficulty } )
+			table.insert( PLUGIN.eventpoints, internalname, { hitpos, name, internalname, difficulty } )
 			client:Notify( "Event area named '"..name.."'("..internalname..") with difficulty "..difficulty.." succesfully added"  )
 		else
 			client:ChatPrint("Difficulty must be a number.")
