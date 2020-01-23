@@ -8,7 +8,13 @@ PLUGIN.eventpoints = PLUGIN.eventpoints or {} -- EVENTPOINT STRUCTURE table.inse
 
 ix.util.Include("sh_eventdefs.lua")
 
+ix.config.Add("maxActiveEvents", 5, "How many events can be active at any one time.", nil, {
+	data = {min = 1, max = 50},
+	category = "Spawning"
+})
+
 PLUGIN.updaterate = 5
+PLUGIN.noSpaceRate = 900
 
 PLUGIN.spawnratebase = 1800
 PLUGIN.spawnrateplayer = 30
@@ -147,7 +153,14 @@ if SERVER then
 			updatetime = CurTime() + self.updaterate
 		end
 
+
 		if spawntime > CurTime() then return end
+
+		if #self.currentEvents > ix.config.Get("maxActiveEvents", 5) then 
+			spawntime = CurTime() + self.noSpaceRate
+			return 
+		end
+
 		spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * #player.GetAll()))
 
 		local spawn = table.Random(self.eventdefs)
