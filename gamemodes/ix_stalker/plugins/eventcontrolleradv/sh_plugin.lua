@@ -122,15 +122,11 @@ if SERVER then
 	function PLUGIN:Think()
 		if populate then
 			for i = 1, self.populateAmount do
-				local eventpoint = table.Random(self.eventpoints)
 				local spawn = table.Random(self.eventdefs)
+				local eventpoint = table.Random(self.eventpoints[table.Random(spawn.allowedPoints)])
 
 				if (!eventpoint) then
 					return
-				end
-
-				while table.Random(spawn.difficulty) != eventpoint[3] do
-					spawn = table.Random(self.eventdefs)
 				end
 				
 				spawnEvent(eventpoint,spawn)
