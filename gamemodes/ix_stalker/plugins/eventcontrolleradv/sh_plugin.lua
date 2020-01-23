@@ -143,9 +143,9 @@ if SERVER then
 		
 		if (updatetime < CurTime() ) then
 			for k,v in pairs( self.currentEvents) do
-				self.eventdefs[v.key]:funcUpdate(v.eventpoint, v.dat)
-				if self.eventdefs[v.key]:funcShouldEnd(v.eventpoint, v.dat) then
-					self.eventdefs[v.key]:funcEnd(v.eventpoint, v.dat)
+				self.eventdefs[v.key]:funcUpdate(v)
+				if self.eventdefs[v.key]:funcShouldEnd(v) then
+					self.eventdefs[v.key]:funcEnd(v)
 					table.remove(self.currentEvents, k)
 				end
 			end
