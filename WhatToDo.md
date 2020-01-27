@@ -1,5 +1,16 @@
 #What To Do
 
+## Changes to character
+- [ ] Background, chosen on character creation - Influences starting stats, starting gear etc.
+- [ ] Stats, but they are only changeable temporarily by items/artifacts
+- [ ] Name chosen automatically on character creation
+- [ ] Description automatically generated, from randomly selected traits
+
+## Prestige System
+- [ ] Unlock face models
+- [ ] Unlock more backgrounds
+- [ ] Choose nickname from list
+
 ## NPCs
 - [ ] Rewrite base to not use timers
 - [ ] Investigate inconsistent damage at different ranges
@@ -7,6 +18,8 @@
 - [ ] Investigate NPCs turning invulnerable
 
 ## Profession system
+- [ ] Tiering
+
 ### Tied to quests?
 ### Tied to gear?
 ### Tied to character?
