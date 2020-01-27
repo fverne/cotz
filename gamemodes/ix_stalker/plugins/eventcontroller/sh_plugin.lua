@@ -133,7 +133,8 @@ if SERVER then
 					ix.item.Spawn(spawn.items[k][1], position, nil, AngleRand(), spawn.items[k][2] or {})
 				end
 			end
-			--spawn props
+			--spawn props 
+			/*
 			if spawn.props then
 				for k = 1, #spawn.props do
 					for i = 1, spawn.props[k][2] do
@@ -156,8 +157,9 @@ if SERVER then
 						timer.Simple(300, function() prop:Remove() end)
 					end
 				end
-			end
+			end */
 			--spawn ragdolls
+			/*
 			if spawn.ragdolls then
 				for k = 1, #spawn.ragdolls do
 					for i = 1, spawn.ragdolls[k][2] do
@@ -171,7 +173,7 @@ if SERVER then
 						
 						if trace.Entity:IsValid() then
 							continue
-						end
+						end */
 						
 						/*
 						local ragdoll = ClientsideRagdoll( spawn.ragdolls[k][1] )
@@ -181,7 +183,7 @@ if SERVER then
 						ragdoll:SetNoDraw( false )
 						ragdoll:DrawShadow( true )
 						ragdoll:Fire( "FadeAndRemove", "", 300 )
-						*/
+						*/ /*
 						-- Serversided ragdolls, tough performance
 						local ragdoll = ents.Create( "prop_ragdoll" )
 						ragdoll:SetModel( spawn.ragdolls[k][1] )
@@ -189,12 +191,14 @@ if SERVER then
 						ragdoll:Spawn()
 						ragdoll:SetSkin(spawn.ragdolls[k][3])
 						ragdoll:SetBodyGroups(spawn.ragdolls[k][4])
-						ragdoll:SetCollisionGroup( COLLISION_GROUP_DEBRIS ) --minimal performance hit
+						ragdoll:SetCollisionGroup( COLLISION_GROUP_DEBRIS ) --minimize performance hit
 						ragdoll:Fire( "FadeAndRemove", "", 300 )
 
 					end
 				end
-			end
+			end */
+
+			
 			--spawn loot
 			if spawn.loot then
 				for k = 1, #spawn.loot do
