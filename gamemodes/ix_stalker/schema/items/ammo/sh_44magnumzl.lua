@@ -7,6 +7,3 @@ ITEM.longdesc = "This large-bore .44 Magnum cartridge was originally designed fo
 ITEM.price = 1000
 ITEM.width = 2
 ITEM.img = Material("vgui/hud/44magnumzl.png")
-ITEM.Range = "x0.5"
-ITEM.Dmg = -1
-ITEM.Pen = -2

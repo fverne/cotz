@@ -5,16 +5,10 @@ ITEM.model = "models/weapons/w_grub_ppsh_stick.mdl"
 ITEM.class = "cw_ppsh"
 ITEM.weaponCategory = "primary"
 ITEM.width = 3
-ITEM.price = 10000
+ITEM.price = 4200
 ITEM.height = 2
 ITEM.busflag = {"guns1_1_1"}
 ITEM.repairCost = ITEM.price/100*1
-ITEM.Range = 50
-ITEM.RoF = "S/3/6"
-ITEM.Dmg = "1d10+2"
-ITEM.Pen = 7
-ITEM.Mag = 71
-ITEM.Rld = "Ready"
 
 ITEM.canAttach = false
 ITEM.iconCam = {

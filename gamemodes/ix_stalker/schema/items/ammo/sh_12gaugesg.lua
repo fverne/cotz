@@ -9,6 +9,3 @@ ITEM.longdesc = "This heavy 12-caliber slug round is normally used for hunting b
 ITEM.price = 700
 ITEM.busflag = {"ammo2_1"}
 ITEM.img = Material("vgui/hud/12gaugesg.png")
-ITEM.Range = 20
-ITEM.Dmg = 1
-ITEM.Pen = 5

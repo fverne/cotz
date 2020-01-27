@@ -5,9 +5,9 @@ ITEM.model = "models/weapons/w_rif_ak12.mdl"
 ITEM.class = "cw_ak12"
 ITEM.weaponCategory = "primary"
 ITEM.width = 4
+ITEM.price = 29600
 ITEM.height = 2
 --ITEM.busflag = "ARMS2_3_1"
-ITEM.price = 100000 -- someone decide a price other than "special" plz thx
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip"}
 ITEM.iconCam = {
@@ -15,12 +15,6 @@ ITEM.iconCam = {
 	ang = Angle(0, 270, 3),
 	fov = 70
 }
-ITEM.Range = 100
-ITEM.RoF = "S/3/6"
-ITEM.Dmg = "1d10+3"
-ITEM.Pen = 12
-ITEM.Mag = 30
-ITEM.Rld = "Ready"
 
 ITEM.pacData = {
 [1] = {

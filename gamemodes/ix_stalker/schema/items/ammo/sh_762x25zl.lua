@@ -8,6 +8,4 @@ ITEM.price = 500
 ITEM.width = 1
 ITEM.height = 1
 ITEM.img = Material("vgui/hud/762x25zl.png")
-ITEM.Range = "x0.5"
-ITEM.Dmg = -1
-ITEM.Pen = -2
+

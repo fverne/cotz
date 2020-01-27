@@ -10,5 +10,3 @@ ITEM.attachSlot = 1
 --ITEM.busflag = "SPECIAL3_1"
 ITEM.price = 6000
 ITEM.repairCost = ITEM.price/100*1
-ITEM.Range = 10
-ITEM.Special = "+10 to CALLED SHOT"

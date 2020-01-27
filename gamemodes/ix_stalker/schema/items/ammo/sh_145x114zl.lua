@@ -8,6 +8,5 @@ ITEM.price = 8000
 ITEM.flag = "0"
 ITEM.width = 2
 ITEM.height = 1
-ITEM.Range = "x0.5"
-ITEM.Dmg = -1
-ITEM.Pen = -2
+
+

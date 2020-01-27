@@ -10,4 +10,3 @@ ITEM.attachSlot = 1
 --ITEM.busflag = "SPECIAL3"
 ITEM.price = 5000
 ITEM.repairCost = ITEM.price/100*1
-ITEM.Special = "+5 BAL"

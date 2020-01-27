@@ -5,7 +5,7 @@ ITEM.model = "models/weapons/w_shot_shortygun.mdl"
 ITEM.class = "cw_m3supershort"
 ITEM.weaponCategory = "secondary"
 ITEM.width = 2
-ITEM.price = 20000
+ITEM.price = 7200
 ITEM.height = 1
 ITEM.busflag = {"guns2_1_1"}
 ITEM.repairCost = ITEM.price/100*1
@@ -16,13 +16,6 @@ ITEM.iconCam = {
 	ang = Angle(0, 270, 0),
 	fov = 70
 }
-ITEM.Range = 30
-ITEM.RoF = "S/2/-"
-ITEM.Dmg = "1d10+4"
-ITEM.Pen = 2
-ITEM.Mag = 4
-ITEM.Rld = "Ready"
-ITEM.Special = "Short, Buckshot"
 
 ITEM.pacData = {
 [1] = {

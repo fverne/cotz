@@ -8,6 +8,5 @@ ITEM.description= "A box that contains %s rounds of zone-loaded 5.45x39mm ammo. 
 ITEM.longdesc = "Military 5.45x39 7H10 caliber is an improved piercing round for automatic rifles of Warsaw Pact countries. Provides better accuracy than the 7.62 caliber round thanks to reduced recoil and a 100 meter increase in range."
 ITEM.price = 1500
 ITEM.img = Material("vgui/hud/545x39zl.png")
-ITEM.Range = "x0.5"
-ITEM.Dmg = -1
-ITEM.Pen = -2
+
+
