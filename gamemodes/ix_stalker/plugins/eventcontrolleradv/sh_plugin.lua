@@ -129,6 +129,9 @@ if SERVER then
 		if populate then
 			for i = 1, self.populateAmount do
 				local spawn = table.Random(self.eventdefs)
+				if (!spawn) then
+					return
+				end
 				local eventpoint = table.Random(self.eventpoints[table.Random(spawn.allowedPoints)])
 
 				if (!eventpoint) then
@@ -164,6 +167,9 @@ if SERVER then
 		spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * #player.GetAll()))
 
 		local spawn = table.Random(self.eventdefs)
+		if (!spawn) then
+			return
+		end
 		local eventpoint = table.Random(self.eventpoints[table.Random(spawn.allowedPoints)])
 
 		if (!eventpoint) then
