@@ -206,46 +206,7 @@ ITEM.functions.Equip = {
 ITEM.functions.Unload = {
 	icon = "icon16/stalker/unload2.png",
 	OnRun = function(item)
-		local client = item:GetOwner()
-		local isEquipped = item:GetData("equip", false)
-		local weapon = client:GetWeapon(item.class)
-		local ammoType
-		local ammoAmount
-		local ammoBox = ""
-		local ammoSubClass = ""
-
-		if isEquipped then
-			ammoType = weapon:GetPrimaryAmmoType()
-			ammoAmount = weapon:Clip1()
-		else 
-			ammoType = item:GetAmmoType()
-			ammoAmount = item:GetData("ammo", 0)
-		end
-
-		if ammoAmount > 0 then
-	
-			if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-				ammoSubClass = string.lower(string.sub(game.GetAmmoName(ammoType), -3, -2))
-				ammoBox = ix.weapontables.ammotypes[string.sub(game.GetAmmoName(ammoType),1,-6)].uID
-				ammoBox = ammoBox..ammoSubClass
-			else
-				ammoBox = ix.weapontables.ammotypes[game.GetAmmoName(ammoType)].uID
-			end
-	
-			if(!client:GetCharacter():GetInventory():Add(ammoBox, 1, {["quantity"] = ammoAmount})) then
-				client:Notify("No space in inventory for unloaded ammo")
-				return false
-			end
-
-			if isEquipped then
-				weapon:SetClip1(0)
-			else
-				item:SetData("ammo", 0)
-			end
-			client:EmitSound("stalkersound/inv_properties.mp3", 80)
-	
-		end
-		return false
+		return item:Unload()
 	end,
 	OnCanRun = function(item)
 		return (!IsValid(item.entity) && ((item:GetData("equip",false) && item:GetOwner():GetWeapon(item.class):Clip1() > 0) || (!item:GetData("equip",false) && item:GetData("ammo",0) > 0 )))
@@ -262,6 +223,48 @@ function ITEM:RemovePAC(client)
 	if (ix.pac and self.pacData) then
 		client:RemovePart(self.uniqueID)
 	end
+end
+
+function ITEM:Unload()
+	local client = self:GetOwner()
+	local isEquipped = self:GetData("equip", false)
+	local weapon = client:GetWeapon(self.class)
+	local ammoType
+	local ammoAmount
+	local ammoBox = ""
+	local ammoSubClass = ""
+
+	if isEquipped then
+		ammoType = weapon:GetPrimaryAmmoType()
+		ammoAmount = weapon:Clip1()
+	else 
+		ammoType = self:GetAmmoType()
+		ammoAmount = self:GetData("ammo", 0)
+	end
+
+	if ammoAmount > 0 then
+		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+			ammoSubClass = string.lower(string.sub(game.GetAmmoName(ammoType), -3, -2))
+			ammoBox = ix.weapontables.ammotypes[string.sub(game.GetAmmoName(ammoType),1,-6)].uID
+			ammoBox = ammoBox..ammoSubClass
+		else
+			ammoBox = ix.weapontables.ammotypes[game.GetAmmoName(ammoType)].uID
+		end
+	
+		if(!client:GetCharacter():GetInventory():Add(ammoBox, 1, {["quantity"] = ammoAmount})) then
+			client:Notify("No space in inventory for unloaded ammo")
+			return false
+		end
+
+		if isEquipped then
+			weapon:SetClip1(0)
+		else
+			self:SetData("ammo", 0)
+		end
+		client:EmitSound("stalkersound/inv_properties.mp3", 80)
+	
+	end
+	return false
 end
 
 function ITEM:Equip(client)
@@ -421,6 +424,8 @@ function ITEM:Unequip(client, bPlaySound, bRemoveItem)
 	end
 
 	if (IsValid(weapon)) then
+		local ammoType = weapon:GetPrimaryAmmoType()
+
 		weapon.ixItem = nil
 
 		self:SetData("ammo", weapon:Clip1())

@@ -175,6 +175,10 @@ local function CW20_Attach(ply, com, args)
 	if numberCategory then
 		category = numberCategory
 	end
+
+	if wep.ixItem && category == "+reload" then
+		wep.ixItem:Unload()
+	end
 	
 	wep:attach(category)
 end
