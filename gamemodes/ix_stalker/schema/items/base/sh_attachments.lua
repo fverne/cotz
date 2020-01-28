@@ -8,24 +8,6 @@ ITEM.height = 1
 ITEM.attachName = "namegoeshere"
 ITEM.busflag = "dev"
 
-local attachments = {}
-attachments["md_microt1"] = {name = "Aimpoint Micro T1", slot = 1}
-attachments["md_nightforce_nxs"] = {name = "Nightforce NXS", slot = 1}
-attachments["md_rmr"] = {name = "Trijicon RMR", slot = 1}
-attachments["md_schmidt_shortdot"] = {name = "Schmidt Shortdot", slot = 1}
-attachments["md_pso1"] = {name = "PSO-1", slot = 1}
-attachments["md_aimpoint"] = {name = "Aimpoint CompM4", slot = 1}
-attachments["md_cmore"] = {name = "CMore Railway", slot = 1}
-attachments["md_eotech"] = {name = "Eotech Holographic Sight", slot = 1}
-attachments["md_reflex"] = {name = "King Arms MR", slot = 1}
-attachments["md_kobra"] = {name = "Kobra Sight", slot = 1}
-attachments["md_acog"] = {name = "Trijicon ACOG Sight", slot = 1}
-attachments["md_pbs1"] = {name = "PBS Supressor", slot = 2}
-attachments["md_cobram2"] = {name = "Cobra M2 Suppressor", slot = 2}
-attachments["md_tundra9mm"] = {name = "Tundra Supressor", slot = 2}
-attachments["md_saker"] = {name = "SAKER Supressor", slot = 2}
-attachments["md_foregrip"] = {name = "Foregrip", slot = 3}
-
 ITEM.functions.use = {
 	name = "Install",
 	tip = "useTip",
@@ -82,7 +64,7 @@ ITEM.functions.use = {
 		targetAttach = target:GetData("attachments") or {}
 		if targetAttach then
 			for k = 1, #targetAttach do
-				if attachments[targetAttach[k]].slot == item.attachSlot then
+				if ix.weapontables.attachments[targetAttach[k]].slot == item.attachSlot then
 					client:Notify("Weapon already has an attachment of this type installed.")
 					return false
 				end

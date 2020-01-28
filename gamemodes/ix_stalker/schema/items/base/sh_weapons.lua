@@ -14,48 +14,6 @@ ITEM.longdesc = "No longer description available."
 ITEM.validAttachments = {}
 ITEM.canAttach = true
 
-
--- Attachment translator
-local attachments = {}
-attachments["md_microt1"] = {name = "Aimpoint Micro T1", slot = 1, uID = "microt1"}
-attachments["md_nightforce_nxs"] = {name = "Nightforce NXS", slot = 1, uID = "nightforce"}
-attachments["md_rmr"] = {name = "Trijicon RMR", slot = 1, uID = "trijiconrmr"}
-attachments["md_schmidt_shortdot"] = {name = "Schmidt Shortdot", slot = 1, uID = "shortdot"}
-attachments["md_pso1"] = {name = "PSO-1", slot = 1, uID = "pso1"}
-attachments["md_psothermal"] = {name = "PSO-T", slot = 1, uID = "psothermal"}
-attachments["md_aimpoint"] = {name = "Aimpoint CompM4", slot = 1, uID = "pso1"}
-attachments["md_cmore"] = {name = "CMore Railway", slot = 1, uID = "cmore"}
-attachments["md_eotech"] = {name = "Eotech Holographic Sight", slot = 1, uID = "eotech"}
-attachments["md_reflex"] = {name = "King Arms MR", slot = 1, uID = "kingarmsmr"}
-attachments["md_kobra"] = {name = "Kobra Sight", slot = 1, uID = "kobra"}
-attachments["md_acog"] = {name = "Trijicon ACOG Sight", slot = 1, uID = "acog"}
-attachments["md_pbs1"] = {name = "PBS Supressor", slot = 2, uID = "pbssuppressor"}
-attachments["md_cobram2"] = {name = "Cobra M2 Suppressor", slot = 2, uID = "cobrasuppressor"}
-attachments["md_tundra9mm"] = {name = "Tundra Supressor", slot = 2, uID = "tundrasuppressor"}
-attachments["md_saker"] = {name = "SAKER Supressor", slot = 2, uID = "sakersuppressor"}
-attachments["md_foregrip"] = {name = "Foregrip", slot = 3, uID = "foregrip"}
-
--- Ammo translator
-local ammotypes = {}
-ammotypes["7.62x25MM"] = {uID = "762x25"}
-ammotypes["7.62x39MM"] = {uID = "762x39"}
-ammotypes["7.62x51MM"] = {uID = "762x51"}
-ammotypes["7.62x54MMR"] = {uID = "762x54"}
-ammotypes["7.62x54MM"] = {uID = "762x54"}
-ammotypes["5.45x39MM"] = {uID = "545x39"}
-ammotypes["5.56x45MM"] = {uID = "556x45"}
-ammotypes["5.7x28MM"] = {uID = "57x28"}
-ammotypes["14.5x144MM"] = {uID = "145x114"}
-ammotypes[".22LR"] = {uID = "22lr"}
-ammotypes[".338 Lapua"] = {uID = "338lapua"}
-ammotypes[".44 Magnum"] = {uID = "44magnum"}
-ammotypes[".45 ACP"] = {uID = "45acp"}
-ammotypes[".50 AE"] = {uID = "50ae"}
-ammotypes["9x18MM"] = {uID = "9x18"}
-ammotypes["9x19MM"] = {uID = "9x19"}
-ammotypes["9x39MM"] = {uID = "9x39"}
-ammotypes["12 Gauge"] = {uID = "12gauge"}
-
 -- Inventory drawing
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
@@ -105,7 +63,7 @@ if (CLIENT) then
 		if item:GetData("attachments") then
 			for k, v in pairs(item:GetData("attachments")) do
 				surface.SetDrawColor( Color( 255, 255, 255, 255 ) )
-				surface.SetMaterial(ix.item.list[attachments[v].uID].upgradeIcon)
+				surface.SetMaterial(ix.item.list[ix.weapontables.attachments[v].uID].upgradeIcon)
 				surface.DrawTexturedRect(w-2-(22*iterator),4,19,19)
 				iterator = iterator + 1
 			end
@@ -135,7 +93,7 @@ function ITEM:GetDescription()
 		str = str.."\n\nAttachments available:\n"
 		if self.canAttach then
 			for i=1, #self.validAttachments do
-				str = str.."- "..attachments[self.validAttachments[i]].name
+				str = str.."- "..ix.weapontables.attachments[self.validAttachments[i]].name
 				if self:GetData("attachments") then
 					local att = self:GetData("attachments")
 					for k=1, #att do
@@ -249,37 +207,48 @@ ITEM.functions.Unload = {
 	icon = "icon16/stalker/unload2.png",
 	OnRun = function(item)
 		local client = item:GetOwner()
-		local weapon = client:GetActiveWeapon()
-		local ammoType =  weapon:GetPrimaryAmmoType()
-		local ammoAmount = weapon:Clip1()
+		local isEquipped = item:GetData("equip", false)
+		local weapon = client:GetWeapon(item.class)
+		local ammoType
+		local ammoAmount
 		local ammoBox = ""
 		local ammoSubClass = ""
-		if weapon:GetClass() == item.class then
-			if ammoAmount > 0 then
 
-				if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-					ammoSubClass = string.lower(string.sub(game.GetAmmoName(ammoType), -3, -2))
-					ammoBox = ammotypes[string.sub(game.GetAmmoName(ammoType),1,-6)].uID
-					ammoBox = ammoBox..ammoSubClass
-				else
-					ammoBox = ammotypes[game.GetAmmoName(ammoType)].uID
-				end
+		if isEquipped then
+			ammoType = weapon:GetPrimaryAmmoType()
+			ammoAmount = weapon:Clip1()
+		else 
+			ammoType = item:GetAmmoType()
+			ammoAmount = item:GetData("ammo", 0)
+		end
 
-				if(!client:GetCharacter():GetInventory():Add(ammoBox, 1, {["quantity"] = ammoAmount})) then
-					client:Notify("No space in inventory for unloaded ammo")
-					return false
-				end
-				weapon:SetClip1(0)
-				client:EmitSound("stalkersound/inv_properties.mp3", 80)
-
+		if ammoAmount > 0 then
+	
+			if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+				ammoSubClass = string.lower(string.sub(game.GetAmmoName(ammoType), -3, -2))
+				ammoBox = ix.weapontables.ammotypes[string.sub(game.GetAmmoName(ammoType),1,-6)].uID
+				ammoBox = ammoBox..ammoSubClass
+			else
+				ammoBox = ix.weapontables.ammotypes[game.GetAmmoName(ammoType)].uID
 			end
-		else
-			client:Notify("You must be wielding the weapon to unload it")
+	
+			if(!client:GetCharacter():GetInventory():Add(ammoBox, 1, {["quantity"] = ammoAmount})) then
+				client:Notify("No space in inventory for unloaded ammo")
+				return false
+			end
+
+			if isEquipped then
+				weapon:SetClip1(0)
+			else
+				item:SetData("ammo", 0)
+			end
+			client:EmitSound("stalkersound/inv_properties.mp3", 80)
+	
 		end
 		return false
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity) and (item:GetData("equip") == true) and item:GetOwner():GetActiveWeapon():GetClass() == item.class and item:GetOwner():GetActiveWeapon():Clip1() > 0)
+		return (!IsValid(item.entity) && ((item:GetData("equip",false) && item:GetOwner():GetWeapon(item.class):Clip1() > 0) || (!item:GetData("equip",false) && item:GetData("ammo",0) > 0 )))
 	end
 }
 
@@ -386,6 +355,10 @@ function ITEM:Equip(client)
 			client:SetAmmo(1, ammoType)
 		end
 
+		if self:GetData("ammoRechamber") then
+			weapon:attachSpecificAttachment(self:GetData("ammoRechamber").attachmentName)
+		end
+
 		weapon:SetWeaponHP( self:GetData("durability") )
 		self:SetData("equip", true)
 		if self:GetData("ammoType") ~= nil then
@@ -451,6 +424,11 @@ function ITEM:Unequip(client, bPlaySound, bRemoveItem)
 		weapon.ixItem = nil
 
 		self:SetData("ammo", weapon:Clip1())
+		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+			self:SetData("ammoType", string.lower(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
+		else
+			self:SetData("ammoType", nil)
+		end
 		self:SetData("durability", weapon:GetWeaponHP())
 
 		client:StripWeapon(self.class)
@@ -499,6 +477,11 @@ function ITEM:OnLoadout()
 		if (IsValid(weapon)) then
 			client:RemoveAmmo(weapon:Clip1(), weapon:GetPrimaryAmmoType())
 			client.carryWeapons[self.weaponCategory] = weapon
+
+			if self:GetData("ammoRechamber") then
+				weapon:attachSpecificAttachment(self:GetData("ammoRechamber").attachmentName)
+			end
+
 			timer.Simple(0.1,function()
 				if self:GetData("ammoType") then
 					if self:GetData("ammoType") == "ZL" then
@@ -532,6 +515,19 @@ function ITEM:OnLoadout()
 		else
 			print(Format("[Helix] Cannot give weapon - %s does not exist!", self.class))
 		end
+	end
+end
+
+function ITEM:GetAmmoType()
+	if !self:GetData("ammoRechamber") then
+		local subtype = ""
+		if self:GetData("ammoType") then
+			subtype = " -"..self:GetData("ammoType").."-"
+		end
+
+		return game.GetAmmoID(weapons.Get(self.class).Primary.Ammo..subtype)
+	else
+		return self:GetData("ammoRechamber").ammotypeName
 	end
 end
 
@@ -569,7 +565,7 @@ ITEM.functions.detach = {
 
 		for k = 1, #curattach do
 			table.insert(targets, {
-				name = attachments[curattach[k]].name,
+				name = ix.weapontables.attachments[curattach[k]].name,
 				data = {curattach[k]},
 			})
 		end
@@ -582,7 +578,7 @@ ITEM.functions.detach = {
 	OnRun = function(item, data)
 		if data[1] then
 
-			item.player:GetCharacter():GetInventory():Add(attachments[data[1]].uID)
+			item.player:GetCharacter():GetInventory():Add(ix.weapontables.attachments[data[1]].uID)
 
 			local curattach = item:GetData("attachments") or {}
 			local iterator = 0

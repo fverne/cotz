@@ -4,6 +4,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.ammo = "pistol" -- type of the ammo
 ITEM.ammoAmount = 30 -- amount of the ammo
+ITEM.isAmmo = true
 ITEM.loadSize = {1,5,15, ITEM.ammoAmount}
 ITEM.description = "A box with %s rounds of ammunition."
 ITEM.category = "Ammunition"
@@ -38,6 +39,13 @@ function ITEM:GetName()
 	end
 	
 	return name
+end
+
+function ITEM:OnInstanced(invID, x, y)
+	
+	if !self:GetData("quantity") then
+		self:SetData("quantity", self.ammoAmount)
+	end
 end
 
 ITEM.functions.Custom = {
