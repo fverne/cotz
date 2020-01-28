@@ -14,10 +14,6 @@ ITEM.ar = 0
 ITEM.far = 0
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","ll-a","ll-a","0","0"}
-ITEM.ballisticrpglevels = {["body"] = "5", ["limb"] = "2"}
-ITEM.anomalousrpglevels = {"2","2","2","2","2"}
-ITEM.artifactcontainers = {"0"}
-ITEM.Special = {"Light"}
 ITEM.img = Material("vgui/hud/anorak.png")
 
 

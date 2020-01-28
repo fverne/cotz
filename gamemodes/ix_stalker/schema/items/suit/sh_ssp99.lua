@@ -17,11 +17,6 @@ ITEM.radProt = 0.8
 ITEM.repairCost = ITEM.price/100*1
 ITEM.overlayPath = "vgui/overlays/hud_sci"
 ITEM.ballisticlevels = {"l","ll-a","ll-a","l","l"}
-ITEM.ballisticrpglevels = {["body"] = "8", ["limb"] = "2"}
-ITEM.anomalousrpglevels = {"2","40","40","40","40"}
-ITEM.artifactcontainers = {"5"}
-ITEM.Special = {"Psy+30","CC","Heavy"}
-ITEM.maxAgi = 30
 ITEM.img = Material("vgui/hud/ssp99.png")
 ITEM.noBusiness = true
 

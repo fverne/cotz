@@ -13,11 +13,6 @@ ITEM.ar = 0
 ITEM.far = 0
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","0","0","0","0"}
-ITEM.ballisticrpglevels = {["body"] = "0", ["limb"] = "0"}
-ITEM.anomalousrpglevels = {"0","0","0","0","0"}
-ITEM.artifactcontainers = {"0"}
-ITEM.Special = {"Heavy","Bracing"}
-ITEM.maxAgi = 20
 ITEM.img = Material("vgui/hud/radsuit.png")
 ITEM.noBusiness = true
 

@@ -14,8 +14,6 @@ ITEM.skincustom = {}
 ITEM.bgcustom = {}
 ITEM.ballisticlevels = {"1", "1", "1", "1", "1", "1", "1"}
 ITEM.ballisticareas = {"  Head:", "  Torso:", "  Abdomen:", "  Arms:", "  Legs:", "  Anomaly:", "  Radiation:"}
-ITEM.ballisticrpgtypes = {"Ballistic (Body)", "Ballistic (Limb)"}
-ITEM.anomalousrpgtypes = {"Impact","Burning","Radiation","Chemical","Electrical"}
 
 ITEM.br = 0
 ITEM.fbr = 0
@@ -303,95 +301,8 @@ if (CLIENT) then
 				rrighttext:SetTextColor(Color(0, 135, 255))
 			end
 			rrighttext:SetFont("ixSmallFont")
-
-			local rpgdesc = tooltip:AddRowAfter("radtitle", "rpgdesc")
-			rpgdesc:SetText("\nRPG VALUES:")
-			rpgdesc:SizeToContents()	
-
-			local rpgballisticdesc = tooltip:AddRowAfter("rpgdesc", "rpgballisticdesc")
-			rpgballisticdesc:SetText("  "..self.ballisticrpgtypes[1]..":")
-			rpgballisticdesc:SizeToContents()
-
-			local rpgballistictext = rpgballisticdesc:Add("DLabel")
-			rpgballistictext:MoveRightOf(rpgballisticdesc)
-			rpgballistictext:SetText(" "..self.ballisticrpglevels["body"])
-			rpgballistictext:SetContentAlignment(1)
-			rpgballistictext:SetFont("ixSmallFont")
-			if self:RPGSuitTranslator(self.ballisticrpglevels["body"] or 0) == "None" then
-				rpgballistictext:SetTextColor(Color(255, 0, 0))
-			elseif self:RPGSuitTranslator(self.ballisticrpglevels["body"] or 0) == "Negligible" then
-				rpgballistictext:SetTextColor(Color(255, 80, 0))
-			elseif self:RPGSuitTranslator(self.ballisticrpglevels["body"] or 0) == "Bad" then
-				rpgballistictext:SetTextColor(Color(255, 160, 0))
-			elseif self:RPGSuitTranslator(self.ballisticrpglevels["body"] or 0) == "Decent" then
-				rpgballistictext:SetTextColor(Color(255, 255, 0))
-			elseif self:RPGSuitTranslator(self.ballisticrpglevels["body"] or 0) == "Good" then
-				rpgballistictext:SetTextColor(Color(130, 255, 0))
-			elseif self:RPGSuitTranslator(self.ballisticrpglevels["body"] or 0) == "Very Good" then
-				rpgballistictext:SetTextColor(Color(0, 255, 0))
-			elseif self:RPGSuitTranslator(self.ballisticrpglevels["body"] or 0) == "Excellent" then
-				rpgballistictext:SetTextColor(Color(0, 135, 255))
-			end
-
-			local rpgballisticdesc2 = tooltip:AddRowAfter("rpgballisticdesc", "rpgballisticdesc2")
-			rpgballisticdesc2:SetText("  "..self.ballisticrpgtypes[2]..":")
-			rpgballisticdesc2:SizeToContents()
-
-			local rpgballistictext2 = rpgballisticdesc2:Add("DLabel")
-			rpgballistictext2:MoveRightOf(rpgballisticdesc2)
-			rpgballistictext2:SetText(" "..self.ballisticrpglevels["limb"])
-			rpgballistictext2:SetContentAlignment(1)
-			rpgballistictext2:SetFont("ixSmallFont")
-			if self:RPGSuitTranslator(self.ballisticrpglevels["limb"] or 0) == "None" then
-				rpgballistictext2:SetTextColor(Color(255, 0, 0))
-			elseif self:RPGSuitTranslator(self.ballisticrpglevels["limb"] or 0) == "Negligible" then
-				rpgballistictext2:SetTextColor(Color(255, 80, 0))
-			elseif self:RPGSuitTranslator(self.ballisticrpglevels["limb"] or 0) == "Bad" then
-				rpgballistictext2:SetTextColor(Color(255, 160, 0))
-			elseif self:RPGSuitTranslator(self.ballisticrpglevels["limb"] or 0) == "Decent" then
-				rpgballistictext2:SetTextColor(Color(255, 255, 0))
-			elseif self:RPGSuitTranslator(self.ballisticrpglevels["limb"] or 0) == "Good" then
-				rpgballistictext2:SetTextColor(Color(130, 255, 0))
-			elseif self:RPGSuitTranslator(self.ballisticrpglevels["limb"] or 0) == "Very Good" then
-				rpgballistictext2:SetTextColor(Color(0, 255, 0))
-			elseif self:RPGSuitTranslator(self.ballisticrpglevels["limb"] or 0) == "Excellent" then
-				rpgballistictext2:SetTextColor(Color(0, 135, 255))
-			end
-
-			for i = 1, #self.anomalousrpglevels do
-				local rpganomalousdesc = tooltip:AddRowAfter("rpgballisticdesc", "rpganomalousdesc")
-				rpganomalousdesc:SetText("  "..self.anomalousrpgtypes[i]..":")
-				rpganomalousdesc:SizeToContents()
-
-				local rpganomaloustext = rpganomalousdesc:Add("DLabel")
-				rpganomaloustext:MoveRightOf(rpganomalousdesc)
-				rpganomaloustext:SetText(" "..self.anomalousrpglevels[i])
-				rpganomaloustext:SetContentAlignment(1)
-				rpganomaloustext:SetFont("ixSmallFont")
-				if self:RPGSuitTranslator(self.anomalousrpglevels[i] or 0) == "None" then
-					rpganomaloustext:SetTextColor(Color(255, 0, 0))
-				elseif self:RPGSuitTranslator(self.anomalousrpglevels[i] or 0) == "Negligible" then
-					rpganomaloustext:SetTextColor(Color(255, 80, 0))
-				elseif self:RPGSuitTranslator(self.anomalousrpglevels[i] or 0) == "Bad" then
-					rpganomaloustext:SetTextColor(Color(255, 160, 0))
-				elseif self:RPGSuitTranslator(self.anomalousrpglevels[i] or 0) == "Decent" then
-					rpganomaloustext:SetTextColor(Color(255, 255, 0))
-				elseif self:RPGSuitTranslator(self.anomalousrpglevels[i] or 0) == "Good" then
-					rpganomaloustext:SetTextColor(Color(130, 255, 0))
-				elseif self:RPGSuitTranslator(self.anomalousrpglevels[i] or 0) == "Very Good" then
-					rpganomaloustext:SetTextColor(Color(0, 255, 0))
-				elseif self:RPGSuitTranslator(self.anomalousrpglevels[i] or 0) == "Excellent" then
-					rpganomaloustext:SetTextColor(Color(0, 135, 255))
-				end
-			end
-
-			if self.maxAgi then
-				local maxagititle = tooltip:AddRow("maxagititle")
-				maxagititle:SetText("\nMaximum Agility when worn: "..self.maxAgi)
-				maxagititle:SizeToContents()
-			end
 			
-			local skintitle = tooltip:AddRowAfter("maxagititle", "skintitle")
+			local skintitle = tooltip:AddRow("skintitle")
 			skintitle:SetText("\nCurrent skin: "..self:GetData("setSkin", self.newSkin))
 			skintitle:SizeToContents()
 
@@ -705,7 +616,6 @@ function ITEM:OnLoadout()
 			end
 		end
 	end
-	self:checkMaxAGI()
 end
 
 function ITEM:CanTransfer(oldInventory, newInventory)
@@ -728,14 +638,12 @@ function ITEM:OnRemoved()
 end
 
 function ITEM:OnEquipped()
-	self:checkMaxAGI()
-	self:GetOwner():GetCharacter():setRPGValues()
+
 	self.player:EmitSound("stalkersound/inv_slot.mp3")
 end
 
 function ITEM:OnUnequipped()
-	self:checkMaxAGI()
-	self:GetOwner():GetCharacter():setRPGValues()
+
 	self.player:EmitSound("stalkersound/inv_slot.mp3")
 end
 
@@ -791,33 +699,3 @@ function ITEM:getFAR()
 	return res
 end
 
-function ITEM:RPGSuitTranslator(value)
-	if tonumber(value) == 0 then
-		return "None"
-	elseif tonumber(value) <= 4 then
-		return "Negligible"
-	elseif tonumber(value) <= 8 then
-		return "Bad"
-	elseif tonumber(value) <= 12 then
-		return "Decent"
-	elseif tonumber(value) <= 16 then
-		return "Good"
-	elseif tonumber(value) <= 20 then
-		return "Very Good"
-	elseif tonumber(value) > 20 then
-		return "Excellent"
-	end
-end
-
-function ITEM:checkMaxAGI() 
-	local character = self:GetOwner():GetCharacter()
-	local agi = character:GetAttribute("agility", 0)
-	
-	character:RemoveBoost("maxagiboost", "agility")
-
-	if self.maxAgi then
-		if self:GetData("equip") and agi > self.maxAgi then
-			character:AddBoost("maxagiboost", "agility", self.maxAgi-agi)
-		end
-	end
-end

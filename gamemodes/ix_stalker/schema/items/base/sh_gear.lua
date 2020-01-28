@@ -17,8 +17,6 @@ ITEM.isGasmask = nil
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 ITEM.ballisticlevels = {"0"}
 ITEM.ballisticareas = {"  Head:"}
-ITEM.ballisticrpgtypes = {"Ballistic (Head)"}
-ITEM.anomalousrpgtypes = {"Impact","Burning","Radiation","Chemical","Electrical"}
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", 1)
@@ -164,24 +162,6 @@ function ITEM:AnomProtTranslator(value)
 	end
 end
 
-function ITEM:RPGHelmTranslator(value)
-	if tonumber(value) == 0 then
-		return "None"
-	elseif tonumber(value) <= 4 then
-		return "Negligible"
-	elseif tonumber(value) <= 8 then
-		return "Bad"
-	elseif tonumber(value) <= 12 then
-		return "Decent"
-	elseif tonumber(value) <= 16 then
-		return "Good"
-	elseif tonumber(value) <= 20 then
-		return "Very Good"
-	elseif tonumber(value) > 20 then
-		return "Excellent"
-	end
-end
-
 -- Inventory drawing
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
@@ -298,64 +278,6 @@ if (CLIENT) then
 				rrighttext:SetTextColor(Color(0, 255, 0))
 			elseif self:RadProtTranslator(self.radProt or 0) == "Excellent" then
 				rrighttext:SetTextColor(Color(0, 135, 255))
-			end
-
-			local rpgdesc = tooltip:AddRowAfter("radtitle", "rpgdesc")
-			rpgdesc:SetText("\nRPG VALUES:")
-			rpgdesc:SizeToContents()	
-
-			for i = 1, #self.ballisticrpgtypes do
-				local rpgballisticdesc = tooltip:AddRowAfter("rpgdesc", "rpgballisticdesc")
-				rpgballisticdesc:SetText("  "..self.ballisticrpgtypes[i]..":")
-				rpgballisticdesc:SizeToContents()
-
-				local rpgballistictext = rpgballisticdesc:Add("DLabel")
-				rpgballistictext:MoveRightOf(rpgballisticdesc)
-				rpgballistictext:SetText(" "..self.ballisticrpglevels["head"])
-				rpgballistictext:SetContentAlignment(1)
-				rpgballistictext:SetFont("ixSmallFont")
-				if self:RPGHelmTranslator(self.ballisticrpglevels["head"] or 0) == "None" then
-					rpgballistictext:SetTextColor(Color(255, 0, 0))
-				elseif self:RPGHelmTranslator(self.ballisticrpglevels["head"] or 0) == "Negligible" then
-					rpgballistictext:SetTextColor(Color(255, 80, 0))
-				elseif self:RPGHelmTranslator(self.ballisticrpglevels["head"] or 0) == "Bad" then
-					rpgballistictext:SetTextColor(Color(255, 160, 0))
-				elseif self:RPGHelmTranslator(self.ballisticrpglevels["head"] or 0) == "Decent" then
-					rpgballistictext:SetTextColor(Color(255, 255, 0))
-				elseif self:RPGHelmTranslator(self.ballisticrpglevels["head"] or 0) == "Good" then
-					rpgballistictext:SetTextColor(Color(130, 255, 0))
-				elseif self:RPGHelmTranslator(self.ballisticrpglevels["head"] or 0) == "Very Good" then
-					rpgballistictext:SetTextColor(Color(0, 255, 0))
-				elseif self:RPGHelmTranslator(self.ballisticrpglevels["head"] or 0) == "Excellent" then
-					rpgballistictext:SetTextColor(Color(0, 135, 255))
-				end
-			end
-
-			for i = 1, #self.anomalousrpglevels do
-				local rpganomalousdesc = tooltip:AddRowAfter("rpgballisticdesc", "rpganomalousdesc")
-				rpganomalousdesc:SetText("  "..self.anomalousrpgtypes[i]..":")
-				rpganomalousdesc:SizeToContents()
-
-				local rpganomaloustext = rpganomalousdesc:Add("DLabel")
-				rpganomaloustext:MoveRightOf(rpganomalousdesc)
-				rpganomaloustext:SetText(" "..self.anomalousrpglevels[i])
-				rpganomaloustext:SetContentAlignment(1)
-				rpganomaloustext:SetFont("ixSmallFont")
-				if self:RPGHelmTranslator(self.anomalousrpglevels[i] or 0) == "None" then
-					rpganomaloustext:SetTextColor(Color(255, 0, 0))
-				elseif self:RPGHelmTranslator(self.anomalousrpglevels[i] or 0) == "Negligible" then
-					rpganomaloustext:SetTextColor(Color(255, 80, 0))
-				elseif self:RPGHelmTranslator(self.anomalousrpglevels[i] or 0) == "Bad" then
-					rpganomaloustext:SetTextColor(Color(255, 160, 0))
-				elseif self:RPGHelmTranslator(self.anomalousrpglevels[i] or 0) == "Decent" then
-					rpganomaloustext:SetTextColor(Color(255, 255, 0))
-				elseif self:RPGHelmTranslator(self.anomalousrpglevels[i] or 0) == "Good" then
-					rpganomaloustext:SetTextColor(Color(130, 255, 0))
-				elseif self:RPGHelmTranslator(self.anomalousrpglevels[i] or 0) == "Very Good" then
-					rpganomaloustext:SetTextColor(Color(0, 255, 0))
-				elseif self:RPGHelmTranslator(self.anomalousrpglevels[i] or 0) == "Excellent" then
-					rpganomaloustext:SetTextColor(Color(0, 135, 255))
-				end
 			end
 
 			local duratitle = tooltip:AddRow("duratitle")
@@ -487,7 +409,6 @@ function ITEM:OnEquipped()
 		self.player:EmitSound("stalkersound/gasmask_on.ogg")
 		return
 	end
-	self:GetOwner():GetCharacter():setRPGValues()
 end
 
 function ITEM:OnUnequipped()
@@ -495,7 +416,6 @@ function ITEM:OnUnequipped()
 		self.player:EmitSound("stalkersound/gasmask_off.ogg")
 		return
 	end
-	self:GetOwner():GetCharacter():setRPGValues()
 end
 
 

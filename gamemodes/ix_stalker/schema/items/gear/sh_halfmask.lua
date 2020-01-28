@@ -13,9 +13,6 @@ ITEM.radProt = 0.02
 ITEM.isGasmask = true
 ITEM.isHelmet = nil
 ITEM.ballisticlevels = {"0"}
-ITEM.ballisticrpglevels = {["head"] = "0"}
-ITEM.anomalousrpglevels = {"2","2","2","2","2"}
-ITEM.Special = {"Light"}
 ITEM.img = Material("vgui/hud/halfmask.png")
 ITEM.repairCost = ITEM.price/100*1
 

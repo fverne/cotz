@@ -13,9 +13,6 @@ ITEM.radProt = 0
 ITEM.isGasmask = false
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
-ITEM.ballisticrpglevels = {["head"] = "8"}
-ITEM.anomalousrpglevels = {"15","0","0","0","0"}
-ITEM.Special = {"Heavy","Psy+5"}
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.pacData = {

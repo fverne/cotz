@@ -254,7 +254,7 @@ function PANEL:Init()
 	if (!suppress.secattributes) then
 		local character = LocalPlayer().GetCharacter and LocalPlayer():GetCharacter()
 
-		if (character) then
+		/*if (character) then
 			self.secattributes = self:Add("ixCategoryPanel")
 			self.secattributes:SetText("Secondary Attributes")
 			self.secattributes:Dock(TOP)
@@ -308,11 +308,11 @@ function PANEL:Init()
 			end
 
 			self.secattributes:SizeToContents()
-		end
+		end*/
 	end
 
 	if (!suppress.perks) then
-		local character = LocalPlayer().GetCharacter and LocalPlayer():GetCharacter()
+		/*local character = LocalPlayer().GetCharacter and LocalPlayer():GetCharacter()
 
 		if (character) then
 			self.perks = self:Add("ixCategoryPanel")
@@ -360,7 +360,7 @@ function PANEL:Init()
 			end
 
 			self.perks:SizeToContents()
-		end
+		end*/
 	end
 
 	hook.Run("CreateCharacterInfoCategory", self)

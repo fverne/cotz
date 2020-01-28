@@ -13,8 +13,6 @@ ITEM.radProt = 1
 ITEM.isGasmask = true
 ITEM.isHelmet = nil
 ITEM.ballisticlevels = {"0"}
-ITEM.ballisticrpglevels = {["head"] = "0"}
-ITEM.anomalousrpglevels = {"2","2","10","10","5"}
 ITEM.overlayPath = "vgui/overlays/hud_merc"
 ITEM.img = Material("vgui/hud/xm40.png")
 ITEM.repairCost = ITEM.price/100*1

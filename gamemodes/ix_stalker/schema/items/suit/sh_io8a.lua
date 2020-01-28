@@ -13,9 +13,6 @@ ITEM.ar = 0.1
 ITEM.far = 0
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","lll-a","lll-a","ll-a","ll-a"}
-ITEM.ballisticrpglevels = {["body"] = "18", ["limb"] = "8"}
-ITEM.anomalousrpglevels = {"15","5","5","5","5"}
-ITEM.maxAgi = 50
 ITEM.img = Material("vgui/hud/io7a.png")
 
 ITEM.newSkin = 0
