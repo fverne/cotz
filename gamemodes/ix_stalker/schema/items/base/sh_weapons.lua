@@ -367,17 +367,8 @@ function ITEM:Equip(client)
 		if self:GetData("ammoType") ~= nil then
 			timer.Simple(0.1,function()
 				local weapon1 = client:GetActiveWeapon()
-				if self:GetData("ammoType") == "ZL" then
-					weapon1:attachSpecificAttachment("am_zoneloaded")
-				elseif self:GetData("ammoType") == "MG" then
-					weapon1:attachSpecificAttachment("am_matchgrade")
-				elseif self:GetData("ammoType") == "SG" then
-					weapon1:attachSpecificAttachment("am_slugrounds")
-				elseif self:GetData("ammoType") == "BD" then
-					weapon1:attachSpecificAttachment("am_birdshot")
-				elseif self:GetData("ammoType") == "TR" then
-					weapon1:attachSpecificAttachment("am_trishot")
-				end
+				weapon1:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
+
 				weapon1:SetClip1(self:GetData("ammo", 0))
 			end)
 		else
@@ -489,18 +480,7 @@ function ITEM:OnLoadout()
 
 			timer.Simple(0.1,function()
 				if self:GetData("ammoType") then
-					if self:GetData("ammoType") == "ZL" then
-						weapon:attachSpecificAttachment("am_zoneloaded")
-						
-					elseif self:GetData("ammoType") == "MG" then
-						weapon:attachSpecificAttachment("am_matchgrade")
-					elseif self:GetData("ammoType") == "SG" then
-						weapon:attachSpecificAttachment("am_slugrounds")
-					elseif self:GetData("ammoType") == "BD" then
-						weapon:attachSpecificAttachment("am_birdshot")
-					elseif self:GetData("ammoType") == "TR" then
-						weapon:attachSpecificAttachment("am_trishot")
-					end
+					weapon1:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
 				end
 			end)
 
