@@ -3,8 +3,6 @@ PLUGIN.name = "Rollable Stats"
 PLUGIN.author = "Verne"
 PLUGIN.desc = "Stats used for rolling in various situations."
 
-
-
 function PLUGIN:CharacterAttributeUpdated(client, self, key)
 	local character = client:GetCharacter()
 
