@@ -27,6 +27,18 @@ if (CLIENT) then
 
 		draw.SimpleText(item:GetData("quantity", item.quantity).."/"..item.quantity, "DermaDefault", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
 	end
+
+	function ITEM:PopulateTooltip(tooltip)
+		if !self.entity then
+			local descheader = tooltip:AddRow("properties")
+			descheader:SetText("\nPROPERTIES:")
+			descheader:SizeToContents()
+
+			ix.util.PropertyDesc(tooltip, "Everyday Item", Color(200, 200, 200))
+			ix.util.PropertyDesc(tooltip, "Removes Radiation Very Slightly", Color(0, 255, 255))
+			ix.util.PropertyDesc(tooltip, "Unhealthy", Color(255, 0, 0))
+		end
+	end
 end
 
 ITEM.functions.use = {
