@@ -45,25 +45,6 @@ function PLUGIN:WeaponReloadFinished(entity)
 			foundAmmo = foundAmmo + ammocount
 			neededAmmo = neededAmmo - ammocount
 		end
-
-		/*
-		local newAmmo = ammoCount - neededAmmo
-
-		if newAmmo <= 0 then
-			timer.Simple( 0.1, function() ammo:Remove() end )
-			wepitem:SetData("ammo", ammoCount+ammoInMag)
-		else
-			ammo:SetData("quantity",newAmmo)
-			wepitem:SetData("ammo", maxAmmoInMag)
-		end
-		
-		if delay < CurTime() then
-			delay = CurTime() + 1
-			ammo:SetData("quantity",newAmmo)
-		else
-			ammo:SetData("quantity",newAmmo,nil,true)
-		end
-		*/
     end
 end
 
