@@ -144,7 +144,7 @@ function PLUGIN:HUDPaint()
 	
 --AMMO
 	if IsValid( wep ) then
-		if wep:HasAmmo() and wep:Clip1() >= 0 then
+		if wep:GetMaxClip1() > 0 then
 			draw.DrawText( tostring(wep:Clip1()) .. " / " .. tostring(lp:GetAmmoCount( wep:GetPrimaryAmmoType() )), "stalkermainmenufont", ScrW() -120, ScrH() -75, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
 			if wep:GetPrimaryAmmoType() then
 				if string.sub(game.GetAmmoName(wep:GetPrimaryAmmoType()) or "no", -1) == "-" then
