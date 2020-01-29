@@ -34,6 +34,15 @@ if SERVER then
 
 	local playerMeta = FindMetaTable("Player")
 
+	function playerMeta:DamagePsyHealth(amount)
+		local char = self:GetCharacter()
+
+		if (char) then
+			char:SetData("psyhealth", char:GetData("psyhealth", 100) - amount)
+			self:SetLocalVar("psyhealth", char:GetData("psyhealth", 100) - amount)
+		end
+	end
+
 	function playerMeta:SetPsyHealth(amount)
 		local char = self:GetCharacter()
 
