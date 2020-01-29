@@ -11,13 +11,12 @@ function PLUGIN:WeaponReloadFinished(entity)
 		local wep = entity:GetActiveWeapon()
 		local wepclass = wep:GetClass()
 		local wepitem
-		local ammo
-		local newdura = 0
+		local ammo = {}
 		
 		for k,v in pairs(entity:GetChar():GetInv():GetItems()) do
 			if v.isAmmo == true then
 				if wep.Primary.Ammo == v.ammo then
-					ammo = v
+					table.insert(ammo, v)
 				end
 			end
 
@@ -25,14 +24,29 @@ function PLUGIN:WeaponReloadFinished(entity)
 				wepitem = v
 			end
 		end
-		
-		local ammoCount = ammo:GetData("quantity",1)
+
 		local ammoInMag = wep:Clip1()
 		local maxAmmoInMag = wep:GetMaxClip1()
-
 		local neededAmmo = maxAmmoInMag - ammoInMag
+		local foundAmmo = 0
 
-		
+		for k,v in pairs(ammo) do
+			local ammocount = v:GetData("quantity",1)
+
+			if ammocount > neededAmmo then
+				v:SetData("quantity", ammocount-neededAmmo)
+				wepitem:SetData("ammo", ammoInMag+foundAmmo)
+				break
+			else
+
+				v:Remove()
+			end
+
+			foundAmmo = foundAmmo + ammocount
+			neededAmmo = neededAmmo - ammocount
+		end
+
+		/*
 		local newAmmo = ammoCount - neededAmmo
 
 		if newAmmo <= 0 then
@@ -44,11 +58,12 @@ function PLUGIN:WeaponReloadFinished(entity)
 		end
 		
 		if delay < CurTime() then
-			delay = CurTime() + 3
+			delay = CurTime() + 1
 			ammo:SetData("quantity",newAmmo)
 		else
 			ammo:SetData("quantity",newAmmo,nil,true)
 		end
+		*/
     end
 end
 
