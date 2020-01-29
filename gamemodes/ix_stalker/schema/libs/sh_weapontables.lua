@@ -41,8 +41,11 @@ ix.weapontables.attachments["md_tundra9mm"] = {name = "Tundra Supressor", slot =
 ix.weapontables.attachments["md_saker"] = {name = "SAKER Supressor", slot = 2, uID = "sakersuppressor"}
 ix.weapontables.attachments["md_foregrip"] = {name = "Foregrip", slot = 3, uID = "foregrip"}
 
+ix.weapontables.ammosubtypes = {}
+
 ix.weapontables.ammosubtypes["ZL"] = {uID = "am_zoneloaded"}
 ix.weapontables.ammosubtypes["MG"] = {uID = "am_matchgrade"}
 ix.weapontables.ammosubtypes["SG"] = {uID = "am_slugrounds"}
 ix.weapontables.ammosubtypes["BD"] = {uID = "am_birdshot"}
 ix.weapontables.ammosubtypes["TR"] = {uID = "am_trishot"}
+ix.weapontables.ammosubtypes["AP"] = {uID = "am_armorpiercing"}

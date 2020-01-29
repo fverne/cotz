@@ -367,6 +367,7 @@ function ITEM:Equip(client)
 		if self:GetData("ammoType") ~= nil then
 			timer.Simple(0.1,function()
 				local weapon1 = client:GetActiveWeapon()
+
 				weapon1:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
 
 				weapon1:SetClip1(self:GetData("ammo", 0))
@@ -421,7 +422,7 @@ function ITEM:Unequip(client, bPlaySound, bRemoveItem)
 
 		self:SetData("ammo", weapon:Clip1())
 		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-			self:SetData("ammoType", string.lower(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
+			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
 		else
 			self:SetData("ammoType", nil)
 		end
@@ -480,7 +481,7 @@ function ITEM:OnLoadout()
 
 			timer.Simple(0.1,function()
 				if self:GetData("ammoType") then
-					weapon1:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
+					weapon:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
 				end
 			end)
 
@@ -504,15 +505,16 @@ function ITEM:OnLoadout()
 end
 
 function ITEM:GetAmmoType()
-	if !self:GetData("ammoRechamber") then
-		local subtype = ""
-		if self:GetData("ammoType") then
-			subtype = " -"..self:GetData("ammoType").."-"
-		end
+	local subtype = ""
+	if self:GetData("ammoType") then
+		subtype = " -"..self:GetData("ammoType").."-"
+	end
 
+
+	if !self:GetData("ammoRechamber") then
 		return game.GetAmmoID(weapons.Get(self.class).Primary.Ammo..subtype)
 	else
-		return self:GetData("ammoRechamber").ammotypeName
+		return game.GetAmmoID(self:GetData("ammoRechamber").ammotypeName..subtype)
 	end
 end
 
@@ -522,6 +524,14 @@ function ITEM:OnSave()
 	if (IsValid(weapon)) then
 		self:SetData("ammo", weapon:Clip1())
 		self:SetData("durability", weapon:GetWeaponHP())
+
+		local ammoType = weapon:GetPrimaryAmmoType()
+
+		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
+		else
+			self:SetData("ammoType", nil)
+		end
 	end
 end
 
