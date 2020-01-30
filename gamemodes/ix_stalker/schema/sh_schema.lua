@@ -30,6 +30,7 @@ ix.util.Include("sv_hooks.lua")
 -- You'll need to manually include files in the meta/ folder, however.
 ix.util.Include("meta/sh_character.lua")
 ix.util.Include("meta/sh_player.lua")
+ix.util.Include("meta/sh_inventory.lua")
 
 ix.flag.Add("1", "Trader.")
 ix.flag.Add("A", "Admin")

@@ -73,7 +73,8 @@ if (SERVER) then
 						v:GetModel(),
 						v.password,
 						v.name,
-						v:GetMoney()
+						v:GetMoney(),
+						v.spawnCategory
 					}
 				end
 			else
@@ -139,6 +140,10 @@ if (SERVER) then
 
 					if (v[7]) then
 						entity:SetMoney(v[7])
+					end
+
+					if (v[8]) then
+						entity.spawnCategory = v[8]
 					end
 
 					ix.item.RestoreInv(inventoryID, data2.width, data2.height, function(inventory)
