@@ -98,9 +98,9 @@ end
 SWEP.SightBGs = {main = 2, none = 1}
 SWEP.ADSFireAnim = true
 
-SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -300}, atts = {"md_microt1", "md_eotech", "md_aimpoint", "am_zoneloaded"}},
+SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -300}, atts = {"md_microt1", "md_eotech", "md_aimpoint"}},
 [3] = {header = "Handguard", offset = {-500, -200}, atts = {"md_foregrip"}},
-["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_birdshot", "am_trishot"}}
+["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_birdshot", "am_trishot", "am_dartrounds", "am_zoneloaded"}}
 }
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
