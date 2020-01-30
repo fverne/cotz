@@ -6,6 +6,14 @@ file = {
 	exclude = {"gamemode/core/libs/thirdparty"}
 }
 
+module_file = {
+	Character = "gamemode/core/meta/sh_character.lua",
+	Entity = "gamemode/core/meta/sh_entity.lua",
+	Inventory = "gamemode/core/meta/sh_inventory.lua",
+	Item = "gamemode/core/meta/sh_item.lua",
+	Player = "gamemode/core/meta/sh_player.lua"
+}
+
 dir = "docs/html"
 project = "Helix"
 title = "Helix Documentation"
@@ -18,6 +26,8 @@ ignore = true
 topics = "docs/manual"
 use_markdown_titles = true
 kind_names = {module = "Libraries", topic = "Manual"}
+merge = true
+sort = true
 
 custom_tags = {
 	{"realm", hidden = true},
@@ -50,8 +60,8 @@ tparam_alias("date", "date")
 tparam_alias("string", "string")
 tparam_alias("bool", "boolean")
 tparam_alias("func", "function")
-tparam_alias("player", "player")
-tparam_alias("entity", "entity")
+tparam_alias("player", "Player")
+tparam_alias("entity", "Entity")
 tparam_alias("color", "color")
 tparam_alias("tab", "table")
 tparam_alias("material", "material")

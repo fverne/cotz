@@ -36,6 +36,7 @@ code {
 	font-size: 85%;
 	white-space: pre;
 	tab-size: 4;
+	-moz-tab-size: 4;
 	padding: 2px 4px;
 	background-color: rgb(33, 33, 33, 0.1);
 }
@@ -269,6 +270,7 @@ article pre code {
 	color: rgb(255, 255, 255);
 	background-color: rgb(33, 33, 33);
 	font-weight: 300;
+	padding: 0;
 }
 
 /* function/table */
@@ -311,12 +313,17 @@ article pre code {
 	margin-top: -8px;
 	width: calc(100% - 1148px);
 	padding: 16px;
+	overflow: auto;
 }
 
-.method aside code {
+.method aside pre {
 	color: rgb(255, 255, 255);
 	background-color: rgb(33, 33, 33);
 	padding: 0;
+	margin: 0;
+}
+
+.method aside pre code {
 	font-size: 16px;
 	font-weight: 300;
 }

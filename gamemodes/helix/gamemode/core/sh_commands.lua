@@ -5,9 +5,13 @@ ix.command.Add("Roll", {
 	OnRun = function(self, client, maximum)
 		maximum = math.Clamp(maximum or 100, 0, 1000000)
 
-		ix.chat.Send(client, "roll", tostring(math.random(0, maximum)), nil, nil, {
+		local value = math.random(0, maximum)
+
+		ix.chat.Send(client, "roll", tostring(value), nil, nil, {
 			max = maximum
 		})
+
+		ix.log.Add(client, "roll", value, maximum)
 	end
 })
 
@@ -339,9 +343,8 @@ ix.command.Add("CharBan", {
 			minutes = minutes * 60
 		end
 
-		target:Save(function()
-			target:Ban(minutes)
-		end)
+		target:Ban(minutes)
+		target:Save()
 
 		for _, v in ipairs(player.GetAll()) do
 			if (self:OnCheckAccess(v) or v == target:GetPlayer()) then
