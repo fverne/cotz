@@ -181,6 +181,8 @@ local function CW20_Attach(ply, com, args)
 	end
 	
 	wep:attach(category)
+
+	hook.Run("AmmoCheck", wep.Owner, wep)
 end
 
 concommand.Add("cw_attach", CW20_Attach)
