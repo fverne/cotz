@@ -29,6 +29,7 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
 ENT.hp = 80
 
+ENT.FleeTime = 0
 ENT.MustFlee = false
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -94,6 +95,8 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	if self.FleeTime < CurTime() then self.MustFlee = false end
+
 	if self.MustFlee then
 		self.RangeSchedule = SCHED_RUN_RANDOM
 	else
@@ -115,7 +118,7 @@ function ENT:RunAway()
 	if !self.HasLeader then
 		self.MustFlee = true
 		self:SetSchedule(SCHED_RUN_FROM_ENEMY)
-		timer.Simple( 5, function() self.MustFlee = false end )
+		self.FleeTime = CurTime() + 5
 	end
 end
 

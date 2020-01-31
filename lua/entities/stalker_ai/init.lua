@@ -12,6 +12,10 @@ include( "tasks.lua" )
 ENT.m_fMaxYawSpeed = 240
 ENT.m_iClass = CLASS_NONE
 
+
+
+ENT.meleeAttackTimers = {}
+
 AccessorFunc( ENT, "m_iClass", "NPCClass", FORCE_NUMBER )
 AccessorFunc( ENT, "m_fMaxYawSpeed", "MaxYawSpeed", FORCE_NUMBER )
 
@@ -561,6 +565,15 @@ function ENT:STALKERNPCSetMeleeParamsGesture(NUM,SEQ,CNT,TBL,TBLH,TBLM)
 	end
 end
 
+function ENT:STALKERNPCProcessMeleeAttacks()
+	for k,v in pairs(self.meleeAttackTimers) do
+		if !v[1] && v[2] < CurTime() then
+			v[1] = true
+			v[3]()
+		end 
+	end
+end
+
 function ENT:STALKERNPCMakeMeleeAttack(IND)
 	if( self.PlayingAnimation == true ) then
 
@@ -569,9 +582,11 @@ function ENT:STALKERNPCMakeMeleeAttack(IND)
 		local TEMP_TargetTakeDamage = false
 		local TEMP_SomeoneTakeDamage = false
 		local TEMP_DamagesCount = 0
+
+		self.meleeAttackTimers = {}
 		
 		for i=1, self.MeleeDamageCount[IND] do
-			timer.Create("DamageAttack"..tostring(self)..i,self.MeleeDamageTime[IND][i]-0.2,1,function()
+			self.meleeAttackTimers[i] = {false, CurTime() + self.MeleeDamageTime[IND][i]-0.2, function()
 				if(IsValid(self)&&self!=nil&&self!=NULL) then
 					if(istable(self.MeleeDamageDamage[IND])&&isnumber(self.MeleeDamageDamage[IND][i])) then
 						local TEMP_TARGETDMG, TEMP_SOMEONEDMG, TEMP_DMGCNT = self:STALKERNPCDoMeleeDamage(self.MeleeDamageDamage[IND][i],
@@ -594,7 +609,7 @@ function ENT:STALKERNPCMakeMeleeAttack(IND)
 						end
 					end
 				end
-			end )
+			end }  -- {hasrun, Time, function}
 		end
 		
 		TEMP_AnimDur = self:SequenceDuration(self:LookupSequence(self.Animation))
@@ -602,13 +617,13 @@ function ENT:STALKERNPCMakeMeleeAttack(IND)
 		if(self.PlayingGesture==true) then
 			TEMP_AnimDur = (self:SequenceDuration(self:LookupSequence(self.Animation))/2)
 		end
-		
-		timer.Create("EndAttack"..tostring(self),TEMP_AnimDur+0.1,1,function()
+
+		self.meleeAttackTimers[self.MeleeDamageCount[IND]+1] = {false, CurTime() + TEMP_AnimDur+0.1, function()
 			if(IsValid(self)&&self!=nil&&self!=NULL) then
 				self:STALKERNPCMeleeSequenceEnd(self.Animation)
 				self:STALKERNPCClearAnimation()
 			end
-		end)
+		end}
 		
 		
 	end
@@ -914,6 +929,8 @@ function ENT:Think()
 			local TEMP_NearEnemyCount = self:STALKERNPCTryToFindEnemy()
 			self:STALKERNPCOnEnemyCountFinded(TEMP_NearEnemyCount)
 		end
+
+		self:STALKERNPCProcessMeleeAttacks()
 		
 		if(self:GetEnemy()&&IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL&&
 		(self:STALKERNPCIsEnemyNPC(self:GetEnemy())||self:STALKERNPCIsEnemyPlayer(self:GetEnemy()))) then
