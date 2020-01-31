@@ -307,8 +307,9 @@ AddSound("Stalker.Rodent.Die3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"hgn/stalker/c
 local ControllerPlayerPsyEffectTime = 0
 local LanguageChoosen = 0
 local TEMP_CheckPosTime = 0
-
+/*
 if(CLIENT) then
+
 	local function ControllerWeaponFuncNoDraw( self )
 		if(LocalPlayer():GetNWFloat("PsyDamage",0)>0.1) then		
 			return
@@ -385,7 +386,7 @@ if(CLIENT) then
 	end)
 end
 
-/*
+
 hook.Add( "PostDrawOpaqueRenderables", "BControllerReRenderCreatures", function()
 	local ply = LocalPlayer()
 	

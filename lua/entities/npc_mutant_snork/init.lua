@@ -34,6 +34,11 @@ ENT.isAttacking = 0
 ENT.jumping1 = 0
 ENT.jumping2 = 0
 ENT.CanLongJump = 0
+
+ENT.IsLongJumping = 0
+ENT.longjumping1 = 0
+ENT.longjumping2 = 0
+
 ENT.hp = 175
 
 ENT.NextAbilityTime = 0
@@ -45,7 +50,7 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 function ENT:Initialize()
 	self.Model = "models/stalkertnb/snork1.mdl"
-	self:STALKERNPCInit(Vector(-16,-16,60),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-24,-24,90),MOVETYPE_STEP)
 	
 	
 	self.MinRangeDist = 0
@@ -146,7 +151,7 @@ function ENT:Initialize()
 	TEMP_MeleeTable.radius[2] = 80
 	TEMP_MeleeTable.time[2] = 1.2
 	TEMP_MeleeTable.bone[2] = "ValveBiped.Bip01_R_Hand"
-	self:STALKERNPCSetMeleeParams(8,"attackF",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(7,"attackF",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 	
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
@@ -156,7 +161,7 @@ function ENT:Initialize()
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 1
 	TEMP_MeleeTable.bone[1] = "ValveBiped.Bip01_L_Hand"
-	self:STALKERNPCSetMeleeParams(9,"attackC",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(8,"attackC",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
 	self:SetHealth(self.hp)	
 	
@@ -174,7 +179,51 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	local distance = 0
+	if self:GetEnemy() then
+		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
+	end
+	
 
+	-- LONGJUMP
+	if self.longjumping1 < CurTime() && self.IsLongJumping == 1 then 
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
+			self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(8*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
+			self:STALKERNPCPlayAnimation("attackF",7)
+			self:STALKERNPCMakeMeleeAttack(7)
+			self:EmitSound("Stalker.Snork.Die2")
+			self.IsLongJumping = 2
+		end
+			
+	end
+
+	if self.longjumping2 < CurTime() && self.IsLongJumping == 2 then 
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCStopAllTimers()
+			self:STALKERNPCClearAnimation()
+			self.NextAbilityTime = CurTime()+0.5
+			self.IsLongJumping = 0
+		end
+	end
+	-- LONGJUMP END
+
+
+	-- SMALL JUMP
+	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
+		self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(14*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
+		self:STALKERNPCPlayAnimation("attackC",8)
+		self:STALKERNPCMakeMeleeAttack(8)
+		self:EmitSound("Stalker.Snork.Die2")
+		self.isAttacking = 2		
+	end
+
+	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
+		self:STALKERNPCStopAllTimers()
+		self:STALKERNPCClearAnimation()
+		self.NextAbilityTime = CurTime()+0.5
+		self.isAttacking = 0
+	end
 end
 
 
@@ -191,22 +240,11 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 					--self:STALKERNPCPlayAnimation("releasecrab",6)
 					self:STALKERNPCPlayAnimation("Stand_to_crouch",1)
 
-					timer.Create("Attack"..tostring(self).."1",0.7,1,function()
-						if(IsValid(self)&&self!=nil&&self!=NULL) then
-							local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-							self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(8*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
-							self:STALKERNPCPlayAnimation("attackF",8)
-							self:STALKERNPCMakeMeleeAttack(8)
-							self:EmitSound("Stalker.Snork.Die2")
-						end
-					end)
-					timer.Create("Attack"..tostring(self).."3",2,1,function()
-						if(IsValid(self)&&self!=nil&&self!=NULL) then
-							self:STALKERNPCStopAllTimers()
-							self:STALKERNPCClearAnimation()
-							self.NextAbilityTime = CurTime()+0.5
-						end
-					end)	
+					self.IsLongJumping = 1
+
+					self.longjumping1 = CurTime()+0.4
+					self.longjumping1 = CurTime()+2
+
 				end
 			end
 		end
@@ -224,21 +262,6 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 					self.isAttacking = 1
 					self.jumping1 = CurTime()+0.2
 					self.jumping2 = CurTime()+5
-				end
-
-				if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-					self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(14*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
-					self:STALKERNPCPlayAnimation("attackC",9)
-					self:STALKERNPCMakeMeleeAttack(9)
-					self:EmitSound("Stalker.Snork.Die2")
-					self.isAttacking = 2
-				end
-
-				if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-					self:STALKERNPCStopAllTimers()
-					self:STALKERNPCClearAnimation()
-					self.NextAbilityTime = CurTime()+0.5
-					self.isAttacking = 0
 				end
 			end
 		end

@@ -40,7 +40,7 @@ ENT.RangeSchedule = SCHED_RUN_RANDOM
 
 function ENT:Initialize()
 	self.Model = "models/jerry/mutants/stalker_anomaly_flesh.mdl"
-	self:STALKERNPCInit(Vector(-16,-16,60),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-32,-32,90),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
 	self.MaxRangeDist = 1200

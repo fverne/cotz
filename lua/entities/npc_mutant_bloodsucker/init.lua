@@ -41,9 +41,23 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_RUN_RANDOM
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
+ENT.jumping1 = 0
+ENT.jumping2 = 0
+ENT.IsJumping = 0
+ENT.succing1 = 0
+ENT.succing2 = 0
+ENT.succing3 = 0
+ENT.succing4 = 0
+ENT.IsSuccing = 0
+
+ENT.SuccVictim = 0
+
+TEMP_TargetDamage = 0
+distance = 0
+
 function ENT:Initialize()
 	self.Model = "models/stalkertnb/bloodsucker1.mdl"
-	self:STALKERNPCInit(Vector(-16,-16,60),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-20,-20,90),MOVETYPE_STEP)
 	
 	
 	self.MinRangeDist = 0
@@ -145,6 +159,72 @@ end
 
 function ENT:STALKERNPCThink()
 
+
+
+	-- JUMP
+	if self.jumping1 < CurTime() && self.IsJumping == 1 then
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(10*distance) +self:GetUp()*math.Clamp((0.5 * distance),200,400))
+			self:STALKERNPCPlayAnimation("attackF",6)
+			self:STALKERNPCMakeMeleeAttack(6)
+			self:EmitSound("Stalker.Bloodsucker.Hit1")
+			self.IsJumping = 2
+		end
+	end
+
+	if self.jumping2 < CurTime() && self.IsJumping == 2 then
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCStopAllTimers()
+			self:STALKERNPCClearAnimation()
+			self.NextAbilityTime = CurTime()+1
+			self.IsJumping = 0
+		end
+	end
+	-- JUMP END
+
+
+	-- SUCC
+	if self.succing1 < CurTime() && self.IsSuccing == 1 then
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCPlayAnimation("Tantrum")
+			self:EmitSound("Stalker.Bloodsucker.Feed")
+			self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
+			self.SuccVictim:TakeDamageInfo(TEMP_TargetDamage)
+			self.IsSuccing = 2
+		end
+	end
+	if self.succing2 < CurTime() && self.IsSuccing == 2 then
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCPlayAnimation("Tantrum")
+			self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
+			self.SuccVictim:TakeDamageInfo(TEMP_TargetDamage)
+			self.IsSuccing = 3
+		end
+	end
+
+	if self.succing3 < CurTime() && self.IsSuccing == 3 then
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCPlayAnimation("Tantrum")
+			self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
+			self.SuccVictim:TakeDamageInfo(TEMP_TargetDamage)
+			self.IsSuccing = 4
+		end
+	end
+
+	if self.succing4 < CurTime() && self.IsSuccing == 4 then
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCStopAllTimers()
+			self:STALKERNPCClearAnimation()
+			self.NextAbilityTime = CurTime()+1
+
+			self.SuccVictim:TakeDamageInfo(TEMP_TargetDamage)
+			self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
+			self.SuccVictim:Freeze(false)
+			self.EatTarget = nil
+			self.IsSuccing = 0
+		end
+	end
+	-- SUCC END
 end
 
 //little aggressive jump
@@ -159,28 +239,18 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 					if(TEMP_Rand==1) then		
 						self.CanJump = CurTime()+3
 						self.NextAbilityTime = CurTime()+2
-						timer.Create("Attack"..tostring(self).."1",0.2,1,function()
-							if(IsValid(self)&&self!=nil&&self!=NULL) then
-								self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(10*distance) +self:GetUp()*math.Clamp((0.5 * distance),200,400))
-								self:STALKERNPCPlayAnimation("attackF",6)
-								self:STALKERNPCMakeMeleeAttack(6)
-								self:EmitSound("Stalker.Bloodsucker.Hit1")
-							end
-						end)
-						timer.Create("Attack"..tostring(self).."2",2,1,function()
-							if(IsValid(self)&&self!=nil&&self!=NULL) then
-								self:STALKERNPCStopAllTimers()
-								self:STALKERNPCClearAnimation()
-								self.NextAbilityTime = CurTime()+1
-							end
-						end)	
+
+						self.jumping1 = CurTime() + 0.2
+						self.jumping2 = CurTime() + 2
+						self.IsJumping = 1
+
 					end
 				end
 			end
 		end
 
 		if(self.PlayingAnimation==false) then
-			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
+			distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
 			if distance < 125 then
 				if(self.CanSuck<CurTime()) then
 					local TEMP_Rand = math.random(1,5)
@@ -192,53 +262,25 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 						self.EatTarget = target
 						target:Freeze(true)
 
+						self.SuccVictim = target
+
 						self.NextAbilityTime = CurTime()+4
 
-						local TEMP_TargetDamage = DamageInfo()
+						TEMP_TargetDamage = DamageInfo()
 									
-						TEMP_TargetDamage:SetDamage(10)
+						TEMP_TargetDamage:SetDamage(30)
 						TEMP_TargetDamage:SetInflictor(self)
 						TEMP_TargetDamage:SetDamageType(DMG_SONIC)
 						TEMP_TargetDamage:SetAttacker(self)
 						TEMP_TargetDamage:SetDamagePosition(self:GetEnemy():NearestPoint(self:GetPos()+self:OBBCenter()))
 						TEMP_TargetDamage:SetDamageForce(Vector(0,0,0))
 
-						timer.Create("Attack"..tostring(self).."3",0.2,1,function()
-							if(IsValid(self)&&self!=nil&&self!=NULL) then
-								self:STALKERNPCPlayAnimation("Tantrum")
-								self:EmitSound("Stalker.Bloodsucker.Feed")
-								self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
-								target:TakeDamageInfo(TEMP_TargetDamage)
-							end
-						end)
-
-						timer.Create("Attack"..tostring(self).."4",1.2,1,function()
-							if(IsValid(self)&&self!=nil&&self!=NULL) then
-								self:STALKERNPCPlayAnimation("Tantrum")
-								self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
-								target:TakeDamageInfo(TEMP_TargetDamage)
-							end
-						end)
-
-						timer.Create("Attack"..tostring(self).."5",2.2,1,function()
-							if(IsValid(self)&&self!=nil&&self!=NULL) then
-								self:STALKERNPCPlayAnimation("Tantrum")
-								self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
-								target:TakeDamageInfo(TEMP_TargetDamage)
-							end
-						end)
-						timer.Create("Suck"..tostring(self).."1",3,1,function()
-							if(IsValid(self)&&self!=nil&&self!=NULL) then
-								self:STALKERNPCStopAllTimers()
-								self:STALKERNPCClearAnimation()
-								self.NextAbilityTime = CurTime()+1
-
-								target:TakeDamageInfo(TEMP_TargetDamage)
-								self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
-								target:Freeze(false)
-								self.EatTarget = nil
-							end
-						end)	
+						self.succing1 = CurTime() + 0.2
+						self.succing2 = CurTime() + 1.2
+						self.succing3 = CurTime() + 2.2
+						self.succing4 = CurTime() + 3.0
+						self.IsSuccing = 1
+	
 					end
 				end
 			end

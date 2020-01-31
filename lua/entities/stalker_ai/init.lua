@@ -70,13 +70,14 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 	
 	self:SetModel( self.Model )
 	
-	self:SetCustomCollisionCheck()
+	
+	--self:SetCustomCollisionCheck()
 	
 	self:SetHullSizeNormal()
 	if(isvector(VEC)) then
 		VEC = Vector(math.abs(VEC.x),math.abs(VEC.y),math.abs(VEC.z))
 		
-		self:SetCollisionBounds(Vector(-VEC.x,-VEC.y,0),VEC)
+		self:SetCollisionBounds(Vector(-VEC.x,-VEC.y,0),Vector(VEC.x,VEC.y,VEC.z))
 	elseif(istable(VEC)) then
 		self:SetCollisionBounds(VEC[1],VEC[2])
 	end
@@ -639,13 +640,24 @@ function ENT:STALKERNPCDoMeleeDamage(DMG,TYPE,DIST,RAD,BONE,HITSND,MISSSND)
 		local TEMP_OBBSize = (Vector(math.abs(self:OBBMins().x),math.abs(self:OBBMins().y),0)+
 		Vector(math.abs(self:OBBMaxs().x),math.abs(self:OBBMaxs().y),0))/2
 		local TEMP_PossibleDamageTargets = ents.FindInSphere(self:GetPos(), DIST+TEMP_OBBSize:Length()+15)
-		local TEMP_DMGMAT = self:GetBoneMatrix(self:LookupBone(BONE))
-		local TEMP_DMGPOS, TEMP_DMGANG = TEMP_DMGMAT:GetTranslation(), TEMP_DMGMAT:GetAngles()
+		local TEMP_BONE = self:LookupBone(BONE)
+		local TEMP_DMGPOS
+		local TEMP_DMGANG
+		if TMP_BONE then
+			local TEMP_DMGMAT = self:GetBoneMatrix(TMP_BONE)
+			TEMP_DMGPOS, TEMP_DMGANG = TEMP_DMGMAT:GetTranslation(), TEMP_DMGMAT:GetAngles()
+		end
 		local TEMP_DamageApplied = false
 			
 		if(#TEMP_PossibleDamageTargets>0) then
 			for _,v in pairs(TEMP_PossibleDamageTargets) do
 				if(self:STALKERNPCCanAttackThis(v)&&self:Visible(v)&&v!=self) then
+					if(TEMP_DMGPOS == nil) then
+						TEMP_DMGPOS = v:GetPos()
+					end
+					if(TEMP_DMGANG == nil) then
+						TEMP_DMGANG = AngleRand()
+					end
 
 					local TEMP_DistanceForMelee = self:STALKERNPCEnemyInMeleeRange(v,0,DIST)
 					
@@ -695,7 +707,7 @@ function ENT:STALKERNPCDoMeleeDamage(DMG,TYPE,DIST,RAD,BONE,HITSND,MISSSND)
 			
 			sound.Play( table.Random(HITSND),TEMP_DMGPOS)
 		else
-			sound.Play( table.Random(MISSSND),TEMP_DMGPOS)
+			sound.Play( table.Random(MISSSND),self:GetPos())
 		end
 	end
 	
@@ -917,7 +929,7 @@ end
 
 function ENT:Think()
 	if(GetConVar("ai_disabled"):GetInt()==0&&self.IsAlive==true) then
-		
+
 		self:STALKERNPCThink()
 		
 		if(self.PlayingAnimation==true) then
@@ -978,7 +990,10 @@ function ENT:Think()
 			self:STALKERNPCThinkNoEnemy()
 		end
 	end
-	
+
+	self:NextThink( CurTime() )
+	return true
+
 end
 
 function ENT:OnTakeDamage(dmginfo)
