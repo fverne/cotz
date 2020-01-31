@@ -277,6 +277,12 @@ SWEP.FiremodesEnabled = true
 SWEP.SuppressedOnEquip = false
 SWEP.CanCustomize = true
 
+
+-- KLAMT
+timerdelay = 0
+--
+
+
 -- bipod-related
 SWEP.BipodRecoilModifier = 0.3
 SWEP.BipodInstalled = false
@@ -825,6 +831,8 @@ end
 function SWEP:finishReload()
 	mag, ammo = self:Clip1(), self.Owner:GetAmmoCount(self.Primary.Ammo)
 
+	hook.Run("WeaponReloadFinished",self.Owner)
+
 	if mag > 0 then
 		if self.SnapToIdlePostReload then
 			self:sendWeaponAnim("idle", 1, 1)
@@ -1019,6 +1027,13 @@ function SWEP:Think()
 		self.dt.State = CW_ACTION
 		return
 	end
+
+
+	if timerdelay < CurTime() then
+		timerdelay = CurTime() + 0.5
+		hook.Run("AmmoCheck", self.Owner, self)
+	end
+
 	
 	CustomizableWeaponry.actionSequence.process(self)
 	

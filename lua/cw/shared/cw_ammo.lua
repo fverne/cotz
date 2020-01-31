@@ -3,11 +3,11 @@ AddCSLuaFile()
 CustomizableWeaponry.ammoTypes = CustomizableWeaponry.ammoTypes or {}
 
 -- base ammo registration function
-function CustomizableWeaponry:registerAmmo(name, text, bulletDiameter, caseLength)
+function CustomizableWeaponry:registerAmmo(name, text, bulletDiameter, caseLength, dmgtype_override)
 	CustomizableWeaponry.ammoTypes[name] = {bulletDiameter = bulletDiameter, caseLength = caseLength}
 	
 	game.AddAmmoType({name = name,
-	dmgtype = DMG_BULLET})
+	dmgtype = dmgtype_override or DMG_BULLET})
 	
 	if CLIENT then
 		language.Add(name .. "_ammo", text)
@@ -87,3 +87,23 @@ CustomizableWeaponry:registerAmmo("12 Gauge -SG-", "12 Gauge Slug Shells", 5, 10
 CustomizableWeaponry:registerAmmo("12 Gauge -BD-", "12 Gauge Bird Shells", 5, 10)
 CustomizableWeaponry:registerAmmo("12 Gauge -TR-", "12 Gauge Tri Rounds", 5, 10)
 CustomizableWeaponry:registerAmmo("12 Gauge -ZL-", "12 Gauge Zone Loaded", 5, 10)
+CustomizableWeaponry:registerAmmo("12 Gauge -DT-", "12 Gauge Dart Shells", 5, 10,DMG_SONIC)
+
+--Armor Piercing
+CustomizableWeaponry:registerAmmo("7.62x25MM -AP-", "7.62x25MM Rounds", 7.62, 25,DMG_SONIC)
+CustomizableWeaponry:registerAmmo("7.62x39MM -AP-", "7.62x39MM Rounds", 7.62, 39,DMG_SONIC)
+CustomizableWeaponry:registerAmmo("7.62x51MM -AP-", "7.62x51MM Rounds", 7.62, 51,DMG_SONIC)
+CustomizableWeaponry:registerAmmo("7.62x54MMR -AP-", "7.62x54MMR Rounds", 7.62, 39,DMG_SONIC)
+CustomizableWeaponry:registerAmmo("7.62x54MM -AP-", "7.62x54MM Rounds", 7.62, 54,DMG_SONIC)
+CustomizableWeaponry:registerAmmo("5.45x39MM -AP-", "5.45x39MM Rounds", 5.45, 39,DMG_SONIC)
+CustomizableWeaponry:registerAmmo("5.56x45MM -AP-", "5.56x45MM Rounds", 5.56, 45,DMG_SONIC)
+CustomizableWeaponry:registerAmmo("5.7x28MM -AP-", "5.7x28MM Rounds", 5.7, 28,DMG_SONIC)
+CustomizableWeaponry:registerAmmo("14.5x114MM -AP-", "14.5x114MM Rounds", 14.5, 114,DMG_SONIC)
+CustomizableWeaponry:registerAmmo(".22LR -AP-", ".22LR Rounds", 5.7, 15.6,DMG_SONIC)
+CustomizableWeaponry:registerAmmo(".338 Lapua -AP-", ".338 Lapua", 8.58, 69.20,DMG_SONIC)
+CustomizableWeaponry:registerAmmo(".44 Magnum -AP-", ".44 Magnum Rounds", 10.9, 32.6,DMG_SONIC)
+CustomizableWeaponry:registerAmmo(".45 ACP -AP-", ".45 ACP Rounds", 11.5, 22.8,DMG_SONIC)
+CustomizableWeaponry:registerAmmo(".50 AE -AP-", ".50 AE Rounds", 12.7, 32.6,DMG_SONIC)
+CustomizableWeaponry:registerAmmo("9x18MM -AP-", "9x18MM Rounds", 9, 18,DMG_SONIC)
+CustomizableWeaponry:registerAmmo("9x19MM -AP-", "9x19MM Rounds", 9, 19,DMG_SONIC)
+CustomizableWeaponry:registerAmmo("9x39MM -AP-", "9x39MM Rounds", 9, 39,DMG_SONIC)
