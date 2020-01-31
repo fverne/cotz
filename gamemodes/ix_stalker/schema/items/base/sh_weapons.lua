@@ -568,7 +568,7 @@ ITEM.functions.detach = {
 		return targets
 		end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity) and item.canAttach)
+		return (!IsValid(item.entity) and item.canAttach and (#(item:GetData("attachments",{})) > 0))
 	end,
 	OnRun = function(item, data)
 		if data[1] then
