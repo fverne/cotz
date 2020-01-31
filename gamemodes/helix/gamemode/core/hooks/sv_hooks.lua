@@ -411,6 +411,20 @@ function GM:PlayerSpawnedVehicle(client, entity)
 	entity:SetNetVar("owner", client:GetCharacter():GetID())
 end
 
+ix.allowedHoldableClasses = {
+	["ix_item"] = true,
+	["prop_physics"] = true,
+	["prop_physics_override"] = true,
+	["prop_physics_multiplayer"] = true,
+	["prop_ragdoll"] = true
+}
+
+function GM:CanPlayerHoldObject(client, entity)
+	if (ix.allowedHoldableClasses[entity:GetClass()]) then
+		return true
+	end
+end
+
 local voiceDistance = 360000
 local function CalcPlayerCanHearPlayersVoice(listener)
 	if (!IsValid(listener)) then
@@ -429,6 +443,22 @@ end
 function GM:InitializedConfig()
 	voiceDistance = ix.config.Get("voiceDistance")
 	voiceDistance = voiceDistance * voiceDistance
+end
+
+function GM:VoiceToggled(bAllowVoice)
+	for _, v in ipairs(player.GetAll()) do
+		local uniqueID = v:SteamID64() .. "ixCanHearPlayersVoice"
+
+		if (bAllowVoice) then
+			timer.Create(uniqueID, 0.5, 0, function()
+				CalcPlayerCanHearPlayersVoice(v)
+			end)
+		else
+			timer.Remove(uniqueID)
+
+			v.ixVoiceHear = nil
+		end
+	end
 end
 
 function GM:VoiceDistanceChanged(distance)
