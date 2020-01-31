@@ -29,6 +29,10 @@ AddNPC("Pseudodog","npc_mutant_pseudodog")
 AddNPC("Psydog","npc_mutant_psydog")
 AddNPC("Tushkano","npc_mutant_rodent")
 
+--AddNPC("Pseudogiant","npc_mutant_pseudogiant")
+
+AddNPC("Karlik","npc_mutant_karlik")
+
 local function AddSoundInterval(NAME,IMIN,IMAX,CHAN,VOL,LEV,PITMIN,PITMAX,PATH)
 	for S=IMIN, IMAX do
 		sound.Add( {
