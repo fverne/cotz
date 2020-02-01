@@ -1,18 +1,18 @@
 AddCSLuaFile()
 
 ENT.Type = "anim"
-ENT.PrintName = "Проигрыватель"
-ENT.Category = "Warfare ENT"
+ENT.PrintName = "Cassette Player"
+ENT.Category = "Helix"
 ENT.Spawnable = true
 ENT.AdminOnly = true
 
 if (SERVER) then
 	function ENT:Initialize()
-		self:SetModel("models/props_c17/FurnitureCupboard001a.mdl")
+		self:SetModel("models/maver1k_xvii/stalker/props/decor/radiola01.mdl")
 		self:SetSolid(SOLID_VPHYSICS)
 		self:PhysicsInit(SOLID_VPHYSICS)
 		self:SetUseType(SIMPLE_USE)
-		self:SetAngles(self:GetAngles() - Angle(0, 180, 0))
+		self:SetAngles(self:GetAngles() - Angle(0, 0, 0))
 		self:DropToFloor()
 
 		if (IsValid(self:GetPhysicsObject())) then
@@ -24,9 +24,9 @@ if (SERVER) then
 		if (self.sound) then
 			timer.Remove("repeat_player")
 			self.sound:Stop()
-			activator:GetCharacter():GetInventory():Add(self.PutCassette)
-			self.PutCassette = nil
 		end
+		activator:GetCharacter():GetInventory():Add(self.PutCassette)
+		self.PutCassette = nil
 	end
 
 	function ENT:Repeat(data)

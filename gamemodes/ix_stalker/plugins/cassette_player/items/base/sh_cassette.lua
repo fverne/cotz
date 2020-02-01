@@ -20,7 +20,7 @@ function ITEM:GetDescription()
 end
 
 ITEM.functions.View = {
-	name = "воспроизвести",
+	name = "Insert into Target",
 	OnRun = function(item)
 		local client = item.player
 		local Hit = client:GetEyeTraceNoCursor()
@@ -32,7 +32,7 @@ ITEM.functions.View = {
 			item.options[#item.options + 1] = k
 		end
 
-		if (entity:GetClass() == "nut_cassette_player") and (dist < 200) then
+		if (entity:GetClass() == "ix_cassette_player") and (dist < 200) then
 			if not (entity.PutCassette) then
 				entity.sound = CreateSound( entity, table.Random(item.options))
 				entity.sound:Play()

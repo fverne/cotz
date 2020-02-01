@@ -1,4 +1,4 @@
-﻿ITEM.name = "Обычная Кассета"
+﻿ITEM.name = "Plain Cassette Tape"
 ITEM.desc = "На нее записана распространенная и приятная музыка, подойдет для большинства слушателей, содержит большое количество миксов."
 ITEM.price = 27940
 ITEM.model = "models/kek1ch/cassette_orange.mdl"

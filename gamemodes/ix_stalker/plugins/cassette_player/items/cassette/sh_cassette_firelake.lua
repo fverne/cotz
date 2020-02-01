@@ -1,4 +1,4 @@
-﻿ITEM.name = "Кассета FireLake"
+﻿ITEM.name = "Firelake Cassette Tape"
 ITEM.desc = "Список треков:\n1. Firelake - Against the ionized odds\n2. Firelake - Dirge For The Planet\n3. Firelake - Life to Forget"
 ITEM.price = 51490
 ITEM.model = "models/kek1ch/cassette_white.mdl"

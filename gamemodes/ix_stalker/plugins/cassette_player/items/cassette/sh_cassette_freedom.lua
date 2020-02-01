@@ -1,4 +1,4 @@
-﻿ITEM.name = "Кассета Свободы"
+﻿ITEM.name = "Freedom Cassette Tape"
 ITEM.desc = "Список треков:\n1. Джайа - Малиновые пальмы\n2. Тема свободы"
 ITEM.price = 44240
 ITEM.model = "models/kek1ch/cassette_red1.mdl"
