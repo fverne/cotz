@@ -102,6 +102,20 @@ function ENT:STALKERNPCThink()
 	else
 		self.RangeSchedule = SCHED_CHASE_ENEMY
 	end
+
+	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
+		self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(12*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
+		self:STALKERNPCPlayAnimation("attack3",6)
+		self:STALKERNPCMakeMeleeAttack(6)
+		self:EmitSound("Stalker.Dog.Melee1")
+		self.isAttacking = 2
+	end
+	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
+		self:STALKERNPCStopAllTimers()
+		self:STALKERNPCClearAnimation()
+		self.NextAbilityTime = CurTime()+0.5
+		self.isAttacking = 0
+	end
 end
 
 function ENT:STALKERNPCOnDeath()
@@ -135,21 +149,6 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 					self.isAttacking = 1
 					self.jumping1 = CurTime()+0.2
 					self.jumping2 = CurTime()+5
-				end
-
-				if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-					self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(12*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
-					self:STALKERNPCPlayAnimation("attack3",6)
-					self:STALKERNPCMakeMeleeAttack(6)
-					self:EmitSound("Stalker.Dog.Melee1")
-					self.isAttacking = 2
-				end
-
-				if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-					self:STALKERNPCStopAllTimers()
-					self:STALKERNPCClearAnimation()
-					self.NextAbilityTime = CurTime()+0.5
-					self.isAttacking = 0
 				end
 			end
 		end

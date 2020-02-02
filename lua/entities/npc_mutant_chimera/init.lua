@@ -100,7 +100,23 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
+		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
+		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
+		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,32) + self:OBBCenter()) - (self:GetPos())):GetNormal()
 
+		self:SetVelocity((dirnormal*(distance*2)))
+		self:STALKERNPCPlayAnimation("leap",3)
+		self:STALKERNPCMakeMeleeAttack(3)
+		self:EmitSound("Stalker.Chimera.Hit4")
+		self.isAttacking = 2
+	end
+	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
+		self:STALKERNPCStopAllTimers()
+		self:STALKERNPCClearAnimation()
+		self.NextAbilityTime = CurTime()+0.5
+		self.isAttacking = 0
+	end
 end
 
 
@@ -108,7 +124,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 	if(self.PlayingAnimation==false) then
 		if self:GetEnemy() then
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance > 300 then
+			if distance > 300 && distance < 1200 then
 				if(self.CanJump<CurTime()) then
 
 					local TEMP_Rand = math.random(1,5)
@@ -118,23 +134,6 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 						self.isAttacking = 1
 						self.jumping1 = CurTime()+0.2
 						self.jumping2 = CurTime()+5
-					end
-						
-					if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-						local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-						self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(8*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
-						self:STALKERNPCPlayAnimation("leap",3)
-						self:STALKERNPCMakeMeleeAttack(3)
-						self:EmitSound("Stalker.Chimera.Hit4")
-						self.isAttacking = 2
-
-					end
-
-					if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-						self:STALKERNPCStopAllTimers()
-						self:STALKERNPCClearAnimation()
-						self.NextAbilityTime = CurTime()+0.5
-						self.isAttacking = 0
 					end
 				end
 			end

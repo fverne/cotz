@@ -188,8 +188,11 @@ function ENT:STALKERNPCThink()
 	-- LONGJUMP
 	if self.longjumping1 < CurTime() && self.IsLongJumping == 1 then 
 		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCClearAnimation()
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(8*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
+			local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,32) + self:OBBCenter()) - (self:GetPos())):GetNormal()
+
+			self:SetVelocity((dirnormal*(distance*2)))
 			self:STALKERNPCPlayAnimation("attackF",7)
 			self:STALKERNPCMakeMeleeAttack(7)
 			self:EmitSound("Stalker.Snork.Die2")
@@ -233,7 +236,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 			local TEMP_Rand = math.random(1,5)
 
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance > 200 then
+			if distance > 200 && distance < 800 then
 				if(TEMP_Rand==1) then		
 					self.CanLongJump = CurTime()+6
 						
@@ -242,8 +245,8 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 
 					self.IsLongJumping = 1
 
-					self.longjumping1 = CurTime()+0.4
-					self.longjumping1 = CurTime()+2
+					self.longjumping1 = CurTime()+0.8
+					self.longjumping2 = CurTime()+2
 
 				end
 			end
