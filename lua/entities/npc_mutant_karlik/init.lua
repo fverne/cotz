@@ -99,12 +99,8 @@ function ENT:STALKERNPCThink()
 	end
 
 	if(self.warpdelay < CurTime() && self.IsWarping == 1) then
-		local TEMP_CEffectData = EffectData()
-		TEMP_CEffectData:SetOrigin(self:GetPos())
-		TEMP_CEffectData:SetScale(100)
-		--TEMP_CEffectData:SetAngles(data.Norm:Angle())
-		--TEMP_CEffectData:SetNormal(data.Norm)
-		util.Effect( "HelicopterMegaBomb", TEMP_CEffectData, false, true )
+		self.Entity:SetNWBool( "Teleport", true )
+		self.Entity:SetNWVector( "OldPos", self:GetPos()+Vector(0,0,45))
 
 		self:SetPos(self:GetTeleportLocation())
 		self.IsWarping = 0
@@ -234,5 +230,35 @@ end
 
 
 function ENT:GetTeleportLocation( )
-	return self:GetPos() + Vector(100,100,180)
+	local tracegood = false
+	local teleres
+
+	local firstTrace = util.TraceLine( {
+			start = self:GetPos() + Vector(0,0,64),
+			endpos = self:GetPos() + Vector(0,0,800),
+			filter = "npc_mutant_karlik",
+			mask = MASK_ALL,
+			ignoreworld = false
+		} )
+
+	repeat
+		local trace = util.TraceHull( {
+			start = firstTrace.HitPos - Vector(0,0,-64),
+			endpos = self:GetEnemy():GetPos() + Vector(math.random(-1200,1200),math.random(-1200,1200),-400),
+			mins = Vector( -32, -32, 0 ),
+			maxs = Vector( 32, 32, 64 ),
+			filter = "npc_mutant_karlik",
+			mask = MASK_ALL,
+			ignoreworld = false
+		} )
+
+		if !trace.HitSky && trace.HitPos:Distance(self:GetEnemy():GetPos()) > 600 then
+			tracegood = true
+			teleres = trace.HitPos
+		end
+
+	until tracegood
+
+
+	return teleres
 end
