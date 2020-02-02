@@ -21,6 +21,7 @@ end
 
 ITEM.functions.View = {
 	name = "Insert into Target",
+	icon = "icon16/stalker/attach.png",
 	OnRun = function(item)
 		local client = item.player
 		local Hit = client:GetEyeTraceNoCursor()

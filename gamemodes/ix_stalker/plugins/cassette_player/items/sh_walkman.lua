@@ -166,7 +166,7 @@ ITEM.functions.play = {
 ITEM.functions.insert = {
     name = "Insert Tape",
     tip = "useTip",
-    icon = "icon16/stalker/split.png",
+    icon = "icon16/stalker/attach.png",
     isMulti = true,
     OnCanRun = function(item)				
 		return (!IsValid(item.entity) and item:GetData("CurTape", nil) == nil)
@@ -228,7 +228,7 @@ ITEM.functions.insert = {
 ITEM.functions.remove = {
     name = "Remove Tape",
     tip = "useTip",
-    icon = "icon16/stalker/split.png",
+    icon = "icon16/stalker/detach.png",
     OnCanRun = function(item)				
 		return (!IsValid(item.entity) and item:GetData("CurTape", nil) != nil)
 	end,
