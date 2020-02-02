@@ -831,7 +831,7 @@ end
 function SWEP:finishReload()
 	mag, ammo = self:Clip1(), self.Owner:GetAmmoCount(self.Primary.Ammo)
 
-	hook.Run("WeaponReloadFinished",self.Owner)
+	hook.Run("WeaponReloadFinished",self.Owner,self.ShotgunReload)
 
 	if mag > 0 then
 		if self.SnapToIdlePostReload then
@@ -1219,6 +1219,7 @@ function SWEP:Think()
 				if SERVER then
 					self:SetClip1(mag + 1)
 					self.Owner:SetAmmo(ammo - 1, self.Primary.Ammo)
+					hook.Run("ProcessShotgunReload",self.Owner)
 				end
 				
 				self.ReloadDelay = CT + self.InsertShellTime / self.ReloadSpeed
