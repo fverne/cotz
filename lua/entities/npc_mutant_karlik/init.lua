@@ -99,6 +99,13 @@ function ENT:STALKERNPCThink()
 	end
 
 	if(self.warpdelay < CurTime() && self.IsWarping == 1) then
+		local TEMP_CEffectData = EffectData()
+		TEMP_CEffectData:SetOrigin(self:GetPos())
+		TEMP_CEffectData:SetScale(100)
+		--TEMP_CEffectData:SetAngles(data.Norm:Angle())
+		--TEMP_CEffectData:SetNormal(data.Norm)
+		util.Effect( "HelicopterMegaBomb", TEMP_CEffectData, false, true )
+
 		self:SetPos(self:GetTeleportLocation())
 		self.IsWarping = 0
 		self.WantToWarp = false
