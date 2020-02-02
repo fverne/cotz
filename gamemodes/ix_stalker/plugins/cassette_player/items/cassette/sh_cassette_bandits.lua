@@ -1,5 +1,6 @@
 ﻿ITEM.name = "Bandit Cassette Tape"
-ITEM.description = "Отлично подойдет для любителей тюремной романтики.\n\nСписок треков:\n1. Михаил Круг - Владимирский Централ\n2. Михаил Круг - Водочку пьём\n3. Тема бандитов\n4. Бутырка - Не трогай осень\n5. Воровайки - Хоп, мусорок\n6. Бутырка - Вернусь домой"
+ITEM.description = "A black and battered cassette tape."
+ITEM.longdesc = "A cassette tape. It features some skulls on the front of it, and also what appears to be prison slang is written on the back."
 ITEM.price = 57940
 ITEM.model = "models/kek1ch/cassette_ad60.mdl"
 

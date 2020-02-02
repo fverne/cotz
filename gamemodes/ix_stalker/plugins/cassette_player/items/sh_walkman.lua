@@ -16,6 +16,12 @@ ITEM.weight = 1.12
 function ITEM:GetDescription()
 	local str = self.description
 
+	if item:GetData("CurTape", nil) == nil then
+		str = str.." \n\n Current tape: None."
+	else
+		str = str.." \n\n Current tape:"..item:GetData("CurTape", nil)
+	end
+
 	local customData = self:GetData("custom", {})
 	if(customData.desc) then
 		str = str.." \n\n"..customData.desc

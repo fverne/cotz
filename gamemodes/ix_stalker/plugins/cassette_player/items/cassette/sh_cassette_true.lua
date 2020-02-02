@@ -1,5 +1,6 @@
-﻿ITEM.name = "Weathered Cassette Tape"
-ITEM.desc = "Список треков:\n7Б - Нашла коса на камень\nАльянс - На заре\nLumen - С небес за землю\nУрбан - 4Б\n7Б - Некрещённая Луна\n7Б - Убегаем - догоняют\nLumen - Гореть\nLumen - Не надо снов\n\nНа кассете написано «Таксин Лох». Скорее всего, этот человек промышлял мелким воровством, из-за чего получил дурную славу. Наверное, его псевдоним запечатлен ради забавы."
+﻿ITEM.name = "'True' Cassette Tape"
+ITEM.description = "A bashed cassette tape."
+ITEM.longdesc = "This cassette tape has a signature on the back, but it's a name you don't recognize."
 ITEM.price = 176940
 ITEM.model = "models/kek1ch/cassette_taksin.mdl"
 

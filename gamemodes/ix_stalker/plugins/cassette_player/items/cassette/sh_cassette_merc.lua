@@ -1,5 +1,6 @@
 ﻿ITEM.name = "Mercenary Cassette Tape"
-ITEM.desc = "Список треков:\n1. Тимур Муцураев - Нет дороги назад\n2. Тимур Муцураев - Шамиль ведет отряд\n3. Тимур Муцураев - Мама, приезжай и меня забери\n4. Тимур Муцураев - Они ушли\n5. Тимур Муцураев - Если духом ты слаб\n6. Любэ - Комбат\n\nНа кассете написано «Танксит-Бекдорщик», в углу подпись «M&L». Интересно, что бы это могло значить?"
+ITEM.description = "A battered cassette tape."
+ITEM.longdesc = "This cassette tape features tracks that the local guns for hire seems to adore."
 ITEM.price = 87940
 ITEM.model = "models/kek1ch/cassette_backkek.mdl"
 

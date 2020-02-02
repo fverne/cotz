@@ -1,8 +1,9 @@
-﻿ITEM.name = "База для кассет"
-ITEM.desc = "Обычная кассета. На нее записано несколько треков от ТрипПила, Лизера, Флеша и Фейса. Можно сказать, что ее бывший вледелец «шарил»."
-ITEM.category = "Кассета"
+﻿ITEM.name = "Cassette"
+ITEM.description = "A basic playable Cassette."
+ITEM.category = "Cassette"
 ITEM.price = 10000
 ITEM.model = "models/kek1ch/cassette_backkek.mdl"
+ITEM.busflag = "dev"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.iconCam = {
@@ -13,10 +14,31 @@ ITEM.iconCam = {
 ITEM.weight = 0.14
 ITEM.isCassette = true
 
+if (CLIENT) then
+	function ITEM:PopulateTooltip(tooltip)
+		if !self.entity then
+			local descheader = tooltip:AddRow("properties")
+			descheader:SetText("\nPROPERTIES:")
+			descheader:SizeToContents()
+
+			ix.util.PropertyDesc(tooltip, "Very Rare Item", Color(200, 200, 200))
+			ix.util.PropertyDesc(tooltip, "Fits into cassette players", Color(200, 200, 200))
+			ix.util.PropertyDesc(tooltip, "Valuable", Color(218, 165, 32))
+		end
+	end
+end
+
 function ITEM:GetDescription()
-	local description = self.desc
-	description = description.."\n\nХАРАКТЕРИСТИКИ:\n-рекдкая вещь\n-повсеместное применение\n\nПри активации необходимо смотреть на проигрыватель"
-	return description
+	local str = self.description
+
+	local customData = self:GetData("custom", {})
+	if(customData.desc) then
+		str = str.." \n\n"..customData.desc
+	else
+		str = str.." \n\n"..self.longdesc
+	end
+
+	return str
 end
 
 ITEM.functions.View = {

@@ -1,5 +1,6 @@
-﻿ITEM.name = "Bloodied Cassette Tape"
-ITEM.desc = "Список треков:\n1. Сектор Газа - Лирика\n2. Сплин – Линия Жизни\n3. Сектор газа - Бомж\n4. Виктор Цой - Перемен\n5. Кино – Группа крови\n6. Кино – Звезда по имени Солнце\n7. Сектор Газа - Туман\n\nНа кассете написано «С любовью WickedRabbit»."
+﻿ITEM.name = "Orange Cassette Tape"
+ITEM.description = "A cassette tape has blood on it."
+ITEM.longdesc = "This cassette tape has a signature on the back. It reads 'Wicked Rabbit'."
 ITEM.price = 236940
 ITEM.model = "models/kek1ch/cassette_wicked.mdl"
 

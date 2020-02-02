@@ -1,5 +1,6 @@
 ﻿ITEM.name = "Barman's Cassette Tape"
-ITEM.desc = "На кассете записана нейтральная и мелодичная музыка, отлично подойдет для людных мест. \n\nСписок треков:\n1. Тема бара\n2. Океан Ельзи - Стрiляй\n3. Океан Эльзы - На лінії вогню\n4. Океан Ельзи - Вулиця\n5. Океан Ельзи - Я нэ здамся без бою\n6. Океан Эльзы - Коли Тебе Нема\n7. Океан Ельзи - Все Буде Добре\n8. Firelake - Dirge For The Planet\n\nНа кассете написано «Спасибо Дроде за победу». Видимо, этот человек достоен уважения."
+ITEM.description = "A weathered cassette tape."
+ITEM.longdesc = "The cassette tape is signed by a deceased, and famous, barman from the zone. The tracklist reveals most of the songs are relaxed, and therefor fit for crowded places."
 ITEM.price = 76940
 ITEM.model = "models/kek1ch/cassette_droda.mdl"
 

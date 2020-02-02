@@ -1,5 +1,6 @@
 ﻿ITEM.name = "Firelake Cassette Tape"
-ITEM.desc = "Список треков:\n1. Firelake - Against the ionized odds\n2. Firelake - Dirge For The Planet\n3. Firelake - Life to Forget"
+ITEM.description = "An old cassette tape."
+ITEM.longdesc = "This cassette tape only features three songs, all by the band Firelake."
 ITEM.price = 51490
 ITEM.model = "models/kek1ch/cassette_white.mdl"
 
