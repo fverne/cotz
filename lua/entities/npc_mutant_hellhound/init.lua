@@ -27,7 +27,7 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 80
+ENT.hp = 400
 
 ENT.IgniteTime = 0
 
