@@ -4,17 +4,17 @@ include('shared.lua')
 include("STALKERNPCBaseVars.lua")
 
 ENT.DieSoundEnabled = true
-ENT.DieSound.name = "Stalker.Burer.Die"
+ENT.DieSound.name = "Stalker.Karlik.Die"
 ENT.DieSound.min = 1
 ENT.DieSound.max = 1
 
 ENT.MeleeSoundEnabled = true
-ENT.MeleeSound.name = "Stalker.Burer.Melee"
+ENT.MeleeSound.name = "Stalker.Karlik.Melee"
 ENT.MeleeSound.min = 1
 ENT.MeleeSound.max = 1
 
 ENT.IdlingSoundEnabled = true
-ENT.IdlingSound.name = "Stalker.Burer.Idle"
+ENT.IdlingSound.name = "Stalker.Karlik.Idle"
 ENT.IdlingSound.min = 1
 ENT.IdlingSound.max = 3
 
@@ -40,9 +40,14 @@ ENT.IsThrow2 = 0
 ENT.throw2_1 = 0
 ENT.throw2_2 = 0
 
+ENT.WantToKnock = false
+ENT.CanKnock = 0
+ENT.knocking = 0
+ENT.secondKnock = 0
+
 ENT.NextAbilityTime = 0
 
-ENT.MinRangeDist = 400
+ENT.MinRangeDist = 800
 ENT.MaxRangeDist = 1500
 ENT.VisibleSchedule = SCHED_ALERT_FACE
 ENT.RangeSchedule = SCHED_IDLE_STAND
@@ -51,7 +56,7 @@ function ENT:Initialize()
 	self.Model = "models/maver1k_XVII/Stalker/mutants/karlik.mdl"
 	self:STALKERNPCInit(Vector(-32,-32,40),MOVETYPE_STEP)
 	
-	self.MinRangeDist = 400
+	self.MinRangeDist = 800
 	self.MaxRangeDist = 1500
 	self:SetBloodColor(BLOOD_COLOR_ZOMBIE)
 	
@@ -78,6 +83,7 @@ function ENT:Initialize()
 
 	self.CanWarp = CurTime()+1
 	self.CanThrow = CurTime()+1
+	self.CanKnock = CurTime()+1
 	
 	self.NextAbilityTime = CurTime()+1
 	
@@ -99,6 +105,7 @@ function ENT:STALKERNPCThink()
 	end
 
 	if(self.warpdelay < CurTime() && self.IsWarping == 1) then
+		sound.Play("Stalker.Controller.Control.3",self:GetPos())
 		self.Entity:SetNWBool( "Teleport", true )
 		self.Entity:SetNWVector( "OldPos", self:GetPos()+Vector(0,0,45))
 
@@ -112,8 +119,8 @@ function ENT:STALKERNPCThink()
 	if self:GetEnemy() then
 		local dist = self:GetPos():Distance(self:GetEnemy():GetPos())
 
-		if dist < self.MinRangeDist then
-			self.WantToWarp = true
+		if dist < self.MinRangeDist/2 then
+			self.WantToKnock = true
 		end
 	end
 
@@ -123,6 +130,8 @@ function ENT:STALKERNPCThink()
 		if(IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL) then
 			TEMP_ShootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
 		end
+
+		self:STALKERNPCPlaySoundRandom(100,"Stalker.Karlik.Push",1,1)
 
 		local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
 					
@@ -146,6 +155,8 @@ function ENT:STALKERNPCThink()
 			TEMP_ShootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
 		end
 
+		self:STALKERNPCPlaySoundRandom(100,"Stalker.Karlik.Push",1,1)
+
 		local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
 					
 		local TEMP_Grav = ents.Create("ent_karlik_ball")
@@ -166,6 +177,8 @@ function ENT:STALKERNPCThink()
 			TEMP_ShootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
 		end
 
+		self:STALKERNPCPlaySoundRandom(100,"Stalker.Karlik.Push",1,1)
+
 		local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
 					
 		local TEMP_Grav = ents.Create("ent_karlik_ball")
@@ -177,6 +190,39 @@ function ENT:STALKERNPCThink()
 							
 		TEMP_Grav:GetPhysicsObject():SetVelocity((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized()*2000)
 
+		self:STALKERNPCClearAnimation()
+	end
+
+	if self.WantToKnock && self.CanKnock < CurTime() then
+		self:STALKERNPCClearAnimation()
+		self:STALKERNPCPlayAnimation("stand_attack_3",1)
+
+		self.CanKnock = CurTime() + 10
+		self.secondKnock = CurTime() + 1.6
+		
+		self.WantToKnock = false
+		self.knocking = 1
+	end
+
+	if self.secondKnock < CurTime() && self.knocking == 1 then
+		for k,v in pairs(ents.FindInSphere( self:GetPos(), self.MinRangeDist )) do
+			if(v == self) then continue end
+			local dirnormal =((v:GetPos() + self:OBBCenter()) - (self:GetPos() - Vector(0,0,96))):GetNormal()
+
+			local phys = v:GetPhysicsObject()
+			if IsValid(phys) then
+				v:GetPhysicsObject():SetVelocity(dirnormal*700)
+			end
+			if v:IsPlayer() then
+				v:SetVelocity(dirnormal*700)
+			end
+
+			
+		end
+
+		self.Entity:SetNWBool( "Knocking", true )
+
+		self.knocking = 0
 		self:STALKERNPCClearAnimation()
 	end
 end
@@ -193,7 +239,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 			local TEMP_Rand = math.random(1,9)
 			
 			if(TEMP_Rand < 3) then
-				self.CanThrow = CurTime() + 8
+				self.CanThrow = CurTime() + 4
 				
 				self:STALKERNPCPlayAnimation("stand_attack_0", 1 )
 
@@ -203,7 +249,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 			end
 
 			if(TEMP_Rand == 7) then
-				self.CanThrow = CurTime() + 8
+				self.CanThrow = CurTime() + 6
 				
 				self:STALKERNPCPlayAnimation("stand_attack_1", 1 )
 

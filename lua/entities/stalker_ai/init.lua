@@ -1091,7 +1091,13 @@ function ENT:OnTakeDamage(dmginfo)
 		TEMP_DMGMUL = TEMP_DMGMUL*1.25
 	end
 
+	local prenpc = TEMP_DMGMUL
+
 	TEMP_DMGMUL = self:STALKERNPCDamageTake(dmginfo,TEMP_DMGMUL)
+
+	if TEMP_DMGMUL == nil then
+		TEMP_DMGMUL = prenpc
+	end
 	
 	self:SetHealth(self:Health()-(dmginfo:GetDamage()*TEMP_DMGMUL))
 	
