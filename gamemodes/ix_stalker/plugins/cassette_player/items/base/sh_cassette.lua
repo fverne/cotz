@@ -41,7 +41,7 @@ function ITEM:GetDescription()
 	return str
 end
 
-ITEM.functions.View = {
+ITEM.functions.insert = {
 	name = "Insert into Target",
 	icon = "icon16/stalker/attach.png",
 	OnRun = function(item)
@@ -61,6 +61,7 @@ ITEM.functions.View = {
 				entity.sound:Play()
 				entity.sound:SetSoundLevel(0)
 				entity.PutCassette = item.uniqueID
+				entity:EmitSound("stalkersound/inv_slot.mp3", 40)
 
 				entity:Repeat(item.cassette_options)
 			else

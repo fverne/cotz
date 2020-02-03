@@ -24,6 +24,7 @@ if (SERVER) then
 		if (self.sound) then
 			timer.Remove("repeat_player")
 			self.sound:Stop()
+			self:EmitSound("stalkersound/inv_slot.mp3", 40)
 		end
 		activator:GetCharacter():GetInventory():Add(self.PutCassette)
 		self.PutCassette = nil
@@ -53,6 +54,22 @@ if (SERVER) then
 		if (self.sound) then
 			timer.Remove("repeat_player")
 			self.sound:Stop()
+		end
+	end
+else
+
+	ENT.PopulateEntityInfo = true
+
+	function ENT:OnPopulateEntityInfo(container)
+		local name = container:AddRow("name")
+		name:SetImportant()
+		name:SetText("Old Cassette Player")
+		name:SizeToContents()
+		local descriptionText = self:GetNetVar("Description", "This cassette player accepts a various amount of tapes. Press E to take the tape from the machine.")
+		if (descriptionText != nil) then
+			local description = container:AddRow("Description")
+			description:SetText(descriptionText)
+			description:SizeToContents()
 		end
 	end
 end
