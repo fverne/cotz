@@ -280,9 +280,6 @@ function ENT:GetEntityMenu(client)
 	itemTable.entity = self
 
 	for k, v in SortedPairs(itemTable.functions) do
-		if (k == "take") then
-			continue
-		end
 
 		if (v.OnCanRun and v.OnCanRun(itemTable) == false) then
 			continue
