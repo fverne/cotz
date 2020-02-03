@@ -39,7 +39,6 @@ function PLUGIN:WeaponReloadFinished(entity, isShotgunReload)
 					wepitem:SetData("ammo", ammoInMag+foundAmmo)
 					break
 				else
-	
 					v:Remove()
 				end
 	
@@ -81,6 +80,7 @@ function PLUGIN:ProcessShotgunReload(entity)
 				break
 			else
 				v:Remove()
+				break
 			end
 		end
     end
