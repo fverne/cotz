@@ -51,7 +51,7 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 function ENT:Initialize()
 	self.Model = "models/stalkertnb/zombie1.mdl"
 	self:SetSkin(math.random(0,6))
-	self:STALKERNPCInit(Vector(-16,-16,60),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-24,-24,90),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
 	self.MaxRangeDist = 1200

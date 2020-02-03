@@ -4,7 +4,7 @@ include("shared.lua")
 
 
 ENT.Exploding = false
-ENT.TouchDamage = 73
+ENT.TouchDamage = 55
 
 function ENT:Initialize()
 	self:SetModel( "models/props_phx/misc/smallcannonball.mdl" )
@@ -26,13 +26,13 @@ function ENT:Initialize()
 		phys:EnableGravity(false)
 	end
 	
-	self:SetModelScale(1.25)
+	self:SetModelScale(0.5)
 	
 	local TEMP_TrailStartSize = 45
 	local TEMP_TrailEndSize = 1
 		
-	util.SpriteTrail( self, 0, Color(245,245,245,15), true, TEMP_TrailStartSize, TEMP_TrailEndSize, 0.2, 
-	1/(TEMP_TrailStartSize/TEMP_TrailEndSize)*0.5, "trails/smoke.vmt" )
+	util.SpriteTrail( self, 0, Color(50,245,50,55), true, TEMP_TrailStartSize, TEMP_TrailEndSize, 0.2, 
+	1/(TEMP_TrailStartSize/TEMP_TrailEndSize)*0.5, "trails/plasma" )
 	
 	self.Exploding = false
 	
@@ -68,7 +68,7 @@ function ENT:Detonate(ent,data)
 	TEMP_CEffectData:SetAngles(data.Norm:Angle())
 	TEMP_CEffectData:SetNormal(data.Norm)
 	util.Effect( "ThumperDust", TEMP_CEffectData, false, true )
-	self:Remove()
+	self.SetKill = true
 end
 
 function ENT:PhysicsCollide(data)
@@ -94,10 +94,13 @@ function ENT:StartTouch(ent)
 end
 		
 function ENT:Think()
-	self.TouchDamage = self.TouchDamage-0.5
+	self.TouchDamage = self.TouchDamage-5
 	
-	if(self.TouchDamage<10) then
+	if(self.TouchDamage<5) then
+		self:Remove()
+	end
+
+	if self.SetKill then
 		self:Remove()
 	end
 end
-

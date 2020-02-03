@@ -45,7 +45,7 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 function ENT:Initialize()
 	self.Model = "models/jerry/mutants/stalker_anomaly_pseudodog.mdl"
-	self:STALKERNPCInit(Vector(-16,-16,60),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-24,-24,90),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
 	self.MaxRangeDist = 1200
@@ -103,6 +103,20 @@ function ENT:STALKERNPCThink()
 		end
 		self.PackTimer = CurTime()+10
 	end
+
+	if (self.jumping1 < CurTime()) and self.isAttacking == 1 && self:GetEnemy() then
+		self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(12*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
+		self:STALKERNPCPlayAnimation("attack1",2)
+		self:STALKERNPCMakeMeleeAttack(3)
+		self:EmitSound("Stalker.Pseudodog.Melee1")
+		self.isAttacking = 2
+	end
+	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
+		self:STALKERNPCStopAllTimers()
+		self:STALKERNPCClearAnimation()
+		self.NextAbilityTime = CurTime()+0.5
+		self.isAttacking = 0
+	end
 end
 
 function ENT:STALKERNPCOnDeath()
@@ -131,20 +145,6 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 					self.jumping2 = CurTime()+5
 				end
 
-				if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-					self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(12*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
-					self:STALKERNPCPlayAnimation("attack1",2)
-					self:STALKERNPCMakeMeleeAttack(3)
-					self:EmitSound("Stalker.Pseudodog.Melee1")
-					self.isAttacking = 2
-				end
-
-				if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-					self:STALKERNPCStopAllTimers()
-					self:STALKERNPCClearAnimation()
-					self.NextAbilityTime = CurTime()+0.5
-					self.isAttacking = 0
-				end
 			end
 		end
 	end

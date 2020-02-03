@@ -30,6 +30,19 @@ ENT.CanPush = 0
 ENT.hp = 1000
 
 ENT.MustShield = 0
+ENT.IsShielding = 0
+
+ENT.shield1 = 0
+ENT.shield2 = 0
+ENT.shield3 = 0
+
+ENT.IsStamAttack = 0
+ENT.stam1 = 0
+ENT.stam2 = 0
+
+ENT.IsBlast = 0
+ENT.blast1 = 0
+ENT.blast2 = 0
 
 ENT.NextAbilityTime = 0
 
@@ -40,7 +53,7 @@ ENT.RangeSchedule = SCHED_RUN_RANDOM
 
 function ENT:Initialize()
 	self.Model = "models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl"
-	self:STALKERNPCInit(Vector(-16,-16,60),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-32,-32,90),MOVETYPE_STEP)
 	
 	
 	self.MinRangeDist = 800
@@ -90,32 +103,94 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- SHIELDING
+	if self.shield1 < CurTime() && self.IsShielding == 1 then 
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCPlayAnimation("S_Shield_Idle",1)
+			self.IsShielding = 2
+		end
+	end
+
+	if self.shield2 < CurTime() && self.IsShielding == 2 then 
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCPlayAnimation("S_Shield_End",1)
+			self.IsShielding = 3
+		end
+	end
+
+	if self.shield3 < CurTime() && self.IsShielding == 3 then 
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCStopAllTimers()
+			self:STALKERNPCClearAnimation()
+			self.IsShielding = 0
+		end
+	end
+	-- SHIELDING END
+
+	-- STAMINA ATTACK
+	if self.stam1 < CurTime() && self.IsStamAttack == 1 then 
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:GetEnemy():ViewPunch(Angle(math.random(-1,1)*40,math.random(-1,1)*40,math.random(-1,1)*40))
+			self:GetEnemy():RestoreStamina(-80)
+			self.IsStamAttack = 2
+		end
+	end
+
+	if self.stam2 < CurTime() && self.IsStamAttack == 2 then 
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCStopAllTimers()
+			self:STALKERNPCClearAnimation()
+			self.NextAbilityTime = CurTime()+0.5
+			self.IsStamAttack = 0
+		end
+	end
+	-- STAMINA ATTACK END 
+
+
+	-- BLAST
+	if self.blast1 < CurTime() && self.IsBlast == 1 then 
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			local TEMP_ShootPoint = self:GetPos()+(self:GetForward()*1000)
+						
+			if(IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL) then
+				TEMP_ShootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
+			end
+						
+			local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
+					
+			local TEMP_Grav = ents.Create("ent_burer_wave")
+			TEMP_Grav:SetPos(TEMP_ShootPos)
+			TEMP_Grav:SetAngles((TEMP_ShootPoint-TEMP_ShootPos):Angle())
+			TEMP_Grav:Spawn()
+							
+			TEMP_Grav:SetOwner(self)
+							
+							
+			TEMP_Grav:GetPhysicsObject():SetVelocity((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized()*2000)
+							
+			self:STALKERNPCPlaySoundRandom(100,"Stalker.Burer.Push",1,1)
+
+			self.IsBlast = 2
+		end
+	end
+
+	if self.blast2 < CurTime() && self.IsBlast == 2 then 
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCStopAllTimers()
+			self:STALKERNPCClearAnimation()
+			self.NextAbilityTime = CurTime()+0.5
+
+			self.IsBlast = 0
+		end
+	end
+	-- BLAST END
 end
 
 
 function ENT:STALKERNPCDistanceForMeleeTooBig() 
 	if(self.MustShield>CurTime()&&self.PlayingAnimation==false) then
 		self:STALKERNPCPlayAnimation("S_Shield_Start",1)
-				
-		timer.Create("Attack"..tostring(self).."1",0.6,1,function()
-			if(IsValid(self)&&self!=nil&&self!=NULL) then
-				self:STALKERNPCPlayAnimation("S_Shield_Idle",1)
-			end
-		end)
-		
-		timer.Create("Attack"..tostring(self).."2",2.3,1,function()
-			if(IsValid(self)&&self!=nil&&self!=NULL) then
-				self:STALKERNPCPlayAnimation("S_Shield_End",1)
-			end
-		end)
-		
-		timer.Create("Attack"..tostring(self).."3",2.7,1,function()
-			if(IsValid(self)&&self!=nil&&self!=NULL) then
-				self:STALKERNPCStopAllTimers()
-				self:STALKERNPCClearAnimation()
-			end
-		end)
-		
+		self.IsShielding = 1
 		self.CanShield = CurTime()+10
 	end
 		
@@ -129,20 +204,10 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 					self.CanGrab = CurTime()+15
 					
 					self:STALKERNPCPlayAnimation("S_Stamina_Attack",1)
-					
-					timer.Create("Attack"..tostring(self).."1",0.4,1,function()
-						if(IsValid(self)&&self!=nil&&self!=NULL) then
-							self:GetEnemy():ViewPunch(Angle(math.random(-1,1)*40,math.random(-1,1)*40,math.random(-1,1)*40))
-							self:GetEnemy():RestoreStamina(-80)
-						end
-					end)
-					timer.Create("Attack"..tostring(self).."3",2.2,1,function()
-						if(IsValid(self)&&self!=nil&&self!=NULL) then
-							self:STALKERNPCStopAllTimers()
-							self:STALKERNPCClearAnimation()
-							self.NextAbilityTime = CurTime()+0.5
-						end
-					end)	
+
+					self.stam1 = CurTime() + 0.4
+					self.stam2 = CurTime() + 2.2
+					self.IsStamAttack = 1
 				end
 			end
 		end
@@ -156,38 +221,11 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 				self.CanPush = CurTime()+5
 					
 				self:STALKERNPCPlayAnimation("S_Power_Attack",1)
+
+				self.IsBlast = 1
+				self.blast1 = CurTime() + 0.9
+				self.blast2 = CurTime() + 2.2
 					
-				timer.Create("Attack"..tostring(self).."1",0.9,1,function()
-					if(IsValid(self)&&self!=nil&&self!=NULL) then
-						local TEMP_ShootPoint = self:GetPos()+(self:GetForward()*1000)
-						
-						if(IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL) then
-							TEMP_ShootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
-						end
-						
-						local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
-					
-						local TEMP_Grav = ents.Create("ent_burer_wave")
-						TEMP_Grav:SetPos(TEMP_ShootPos)
-						TEMP_Grav:SetAngles((TEMP_ShootPoint-TEMP_ShootPos):Angle())
-						TEMP_Grav:Spawn()
-							
-						TEMP_Grav:SetOwner(self)
-							
-							
-						TEMP_Grav:GetPhysicsObject():SetVelocity((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized()*2000)
-							
-						self:STALKERNPCPlaySoundRandom(100,"Stalker.Burer.Push",1,1)
-					end
-				end)
-				
-				timer.Create("Attack"..tostring(self).."2",2.2,1,function()
-					if(IsValid(self)&&self!=nil&&self!=NULL) then
-						self:STALKERNPCStopAllTimers()
-						self:STALKERNPCClearAnimation()
-						self.NextAbilityTime = CurTime()+0.5
-					end
-				end)	
 			end
 		end
 	end
@@ -199,6 +237,10 @@ function ENT:STALKERNPCDamageTake(dmginfo,mul)
 		
 		if(TEMP_Rand==1) then
 			self.MustShield = CurTime()+1
+			self.IsShielding = 1
+			self.shield1 = CurTime()+0.6
+			self.shield2 = CurTime()+math.random(2,4)
+			self.shield3 = self.shield2+0.3
 		end
 	end
 	

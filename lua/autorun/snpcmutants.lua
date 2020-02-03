@@ -29,6 +29,16 @@ AddNPC("Pseudodog","npc_mutant_pseudodog")
 AddNPC("Psydog","npc_mutant_psydog")
 AddNPC("Tushkano","npc_mutant_rodent")
 
+--AddNPC("Snork - New","npc_mutant_snorknew")  --New snork commented out as the model does not have ACT_WALK defined
+
+--AddNPC("Izlom","npc_mutant_izlom") -- As above
+
+--AddNPC("Pseudogiant","npc_mutant_pseudogiant")  -- As above
+
+AddNPC("Karlik","npc_mutant_karlik")
+
+AddNPC("Hellhound","npc_mutant_hellhound")
+
 local function AddSoundInterval(NAME,IMIN,IMAX,CHAN,VOL,LEV,PITMIN,PITMAX,PATH)
 	for S=IMIN, IMAX do
 		sound.Add( {
@@ -113,7 +123,19 @@ AddSound("Stalker.Burer.Melee1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"GSC/S.T.A.L.
 AddSound("Stalker.Burer.Push1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"GSC/S.T.A.L.K.E.R/Monsters/burer/burer_gravi_attack_0.wav")
 AddSound("Stalker.Burer.Tele1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"GSC/S.T.A.L.K.E.R/Monsters/burer/burer_telekinetic_0.wav")
 
-AddSound("Stalker.BurerWave.Collide",CHAN_WEAPON,1,400,98,102,"GSC/S.T.A.L.K.E.R/Monsters/burer/burer_gravi_wave_0.wav")
+
+AddSound("Stalker.Karlik.Die1",CHAN_VOICE,1,TEMP_VOICEDIST,120,130,"GSC/S.T.A.L.K.E.R/Monsters/burer/burer_attacking_0.wav")
+
+AddSound("Stalker.Karlik.Idle1",CHAN_VOICE,1,TEMP_VOICEDIST,120,130,"GSC/S.T.A.L.K.E.R/Monsters/burer/burer_idle_0.wav")
+AddSound("Stalker.Karlik.Idle2",CHAN_VOICE,1,TEMP_VOICEDIST,120,130,"GSC/S.T.A.L.K.E.R/Monsters/burer/burer_idle_1.wav")
+AddSound("Stalker.Karlik.Idle3",CHAN_VOICE,1,TEMP_VOICEDIST,120,130,"GSC/S.T.A.L.K.E.R/Monsters/burer/burer_idle_2.wav")
+
+AddSound("Stalker.Karlik.Melee1",CHAN_VOICE,1,TEMP_VOICEDIST,120,130,"GSC/S.T.A.L.K.E.R/Monsters/burer/burer_attack_0.wav")
+
+AddSound("Stalker.Karlik.Push1",CHAN_VOICE,1,TEMP_VOICEDIST,120,130,"GSC/S.T.A.L.K.E.R/Monsters/burer/burer_gravi_attack_0.wav")
+AddSound("Stalker.Karlik.Tele1",CHAN_VOICE,1,TEMP_VOICEDIST,120,130,"GSC/S.T.A.L.K.E.R/Monsters/burer/burer_telekinetic_0.wav")
+
+AddSound("Stalker.KarlikWave.Collide",CHAN_WEAPON,1,400,98,102,"GSC/S.T.A.L.K.E.R/Monsters/burer/burer_gravi_wave_0.wav")
 
 
 
@@ -307,8 +329,9 @@ AddSound("Stalker.Rodent.Die3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"hgn/stalker/c
 local ControllerPlayerPsyEffectTime = 0
 local LanguageChoosen = 0
 local TEMP_CheckPosTime = 0
-
+/*
 if(CLIENT) then
+
 	local function ControllerWeaponFuncNoDraw( self )
 		if(LocalPlayer():GetNWFloat("PsyDamage",0)>0.1) then		
 			return
@@ -385,7 +408,7 @@ if(CLIENT) then
 	end)
 end
 
-/*
+
 hook.Add( "PostDrawOpaqueRenderables", "BControllerReRenderCreatures", function()
 	local ply = LocalPlayer()
 	
