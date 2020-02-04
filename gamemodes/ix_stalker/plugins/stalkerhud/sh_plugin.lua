@@ -21,25 +21,10 @@ if ix.bar then
 		
 
 		if (finish > curTime) then
-			local fraction = 1 - math.TimeFraction(start, finish, curTime)
-			local alpha = fraction * 255
+			local x, y = scrW*0.05, scrH*0.96
 
-			if (alpha > 0) then
-				local w, h = scrW * 0.35, 28
-				local x, y = (scrW * 0.5) - (w * 0.5), (scrH * 0.725) - (h * 0.5)
-
-				ix.util.DrawBlurAt(x, y, w, h)
-
-				surface.SetDrawColor(255, 255, 255, 255)
-				surface.SetMaterial(Material("stalker/buttontab.png"))
-				surface.DrawTexturedRect(x, y, w, h)
-
-				surface.SetDrawColor(125, 200, 0, 255)
-				surface.SetMaterial(Material("stalker/ui/bar3.png"))
-				surface.DrawTexturedRect(x + 4, y + 4, math.max(w * fraction, 8) - 8, h - 8)
-
-				draw.SimpleText(ix.bar.actionText, "stalkerregularfont", x, y - 24, TEXT_COLOR)
-			end
+			draw.SimpleText(ix.bar.actionText, "stalkerregulartitlefont", x, y * 0.92, TEXT_COLOR)
+			draw.SimpleText(math.Round(finish - curTime, 1), "stalkerregulartitlefont", x, y * 0.95, TEXT_COLOR)
 		end
 	end
 end
