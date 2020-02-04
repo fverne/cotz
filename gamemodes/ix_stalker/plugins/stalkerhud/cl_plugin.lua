@@ -1,5 +1,4 @@
 local Texture2 = Material("stalker/ui/bar.png", "noclamp smooth") 
-local Texture3 = Material("stalker/ui/bar4.png", "noclamp smooth") 
 local Texture7 = Material("stalker/ui/hud_hunger.png", "noclamp smooth") 
 local gun = Material("vgui/hud/gun.png", "noclamp smooth")
 local gun2 = Material("vgui/hud/gun2.png", "noclamp smooth") 
@@ -100,9 +99,6 @@ function PLUGIN:HUDPaint()
 	surface.SetDrawColor(Color(255, 255, 255, 255))
 	surface.DrawTexturedRect(ScrW()-233, ScrH()-136, (1.72*math.Clamp( LocalPlayer():Health()/LocalPlayer():GetMaxHealth()*100, 0, 100 )), 17)
 	
-	surface.SetMaterial(Texture3)
-	surface.SetDrawColor(Color(255, 255, 255, 255))
-	surface.DrawTexturedRect(ScrW()-233, ScrH()-163, (173*LocalPlayer():GetLocalVar("stm", 100)) / 100, 17, Color(255, 255, 255, 255))
 /*
 	surface.SetMaterial(Texture7)
 

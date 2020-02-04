@@ -124,9 +124,7 @@ if (SERVER) then
 
 		self:SetLocalVar("stm", value)
 	end
-
 else
-
 	local predictedStamina = 100
 
 	function PLUGIN:Think()
@@ -145,6 +143,14 @@ else
 			predictedStamina = var
 		end
 	end
+
+	function PLUGIN:HUDPaint()
+		local Texture3 = Material("stalker/ui/bar4.png", "noclamp smooth") 
+		surface.SetMaterial(Texture3)
+		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.DrawTexturedRect(ScrW()-233, ScrH()-163, predictedStamina*173 / 100, 17, Color(255, 255, 255, 255))
+	end
+
 /*
 	ix.bar.Add(function()
 		return predictedStamina / 100
