@@ -31,6 +31,12 @@ surface.CreateFont("stalkerregulartitlefont", {
 	extended = true,
 	weight = 500
 })
+surface.CreateFont("stalkerregularbigfont", {
+	font = "alsina",
+	size = ScreenScale(18),
+	extended = true,
+	weight = 500
+})
 surface.CreateFont("stalkertitlefont", {
 	font = "type-ra",
 	size = ScreenScale(16),
@@ -152,4 +158,28 @@ function PLUGIN:HUDPaint()
 		end
 	end
 --// End HUD Code //--
+end
+
+
+
+function ix.hud.DrawDeath()
+	local owner, w, h, ceil, ft, clmp
+	owner = LocalPlayer()
+	ft = FrameTime()
+	w, h = ScrW(), ScrH()
+
+	if (owner:GetCharacter()) then
+		if !(owner:Alive()) then
+			if (IsValid(ix.gui.characterMenu) and ix.gui.characterMenu:IsVisible() or !owner:GetCharacter()) then
+				return
+			end
+
+			surface.SetDrawColor(0, 0, 0, 255)
+			surface.DrawRect(-1, -1, w+2, h+2)
+
+			ix.util.DrawText(
+				string.upper("Lost to the Zone"), w/2, h/2, Color(255, 0, 0), 1, 1, "stalkerregularbigfont", 255
+			)
+		end
+	end	
 end
