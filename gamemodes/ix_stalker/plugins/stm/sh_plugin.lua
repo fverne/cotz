@@ -145,6 +145,8 @@ else
 	end
 
 	function PLUGIN:HUDPaint()
+		if (!LocalPlayer():GetCharacter() or !LocalPlayer():Alive() or ix.gui.characterMenu:IsVisible()) then return end
+		
 		local Texture3 = Material("stalker/ui/bar4.png", "noclamp smooth") 
 		surface.SetMaterial(Texture3)
 		surface.SetDrawColor(Color(255, 255, 255, 255))
