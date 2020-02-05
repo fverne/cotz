@@ -31,11 +31,13 @@ end
 function ITEM:GetDescription()
 	local str = self.description
 
-	local customData = self:GetData("custom", {})
-	if(customData.desc) then
-		str = str.." \n\n"..customData.desc
-	else
-		str = str.." \n\n"..self.longdesc
+	if !self.entity then
+		local customData = self:GetData("custom", {})
+		if(customData.desc) then
+			str = str.." \n\n"..customData.desc
+		else
+			str = str.." \n\n"..self.longdesc
+		end
 	end
 
 	return str
