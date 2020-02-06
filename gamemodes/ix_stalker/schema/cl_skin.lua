@@ -254,9 +254,9 @@ function SKIN:PaintTooltipBackground(panel, width, height)
 end
 
 function SKIN:PaintTooltipMinimalBackground(panel, width, height)
-	surface.SetDrawColor(0, 0, 0, 150 * panel.fraction)
-	surface.SetMaterial(gradientRadial)
-	surface.DrawTexturedRect(0, 0, width, height)
+	--surface.SetDrawColor(0, 0, 0, 150 * panel.fraction)
+	--surface.SetMaterial(gradientRadial)
+	--surface.DrawTexturedRect(0, 0, width, height)
 end
 
 function SKIN:PaintSegmentedProgressBackground(panel, width, height)

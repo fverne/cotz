@@ -447,13 +447,12 @@ function PANEL:Init()
 	self.bMinimal = true
 	self.ixAlpha = 0 -- to avoid conflicts if we're animating a non-tooltip panel
 
-	self:SetExpensiveShadow(1, color_black)
+	--self:SetExpensiveShadow(1, color_black)
 	self:SetContentAlignment(5)
 end
 
 function PANEL:SetImportant()
 	self:SetFont("stalkerregulartitlefont")
-	self:SetBackgroundColor(ix.config.Get("color"))
 end
 
 -- background color will affect text instead in minimal tooltips
@@ -461,7 +460,7 @@ function PANEL:SetBackgroundColor(color)
 	color = table.Copy(color)
 	color.a = math.min(color.a or 255, 100)
 
-	self:SetTextColor(color)
+	--self:SetTextColor(color)
 	self.backgroundColor = color
 end
 
