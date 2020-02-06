@@ -162,7 +162,7 @@ if (CLIENT) then
 
 		if IsValid(entity) then
 
-			local frame = vgui.Create("DFrame")
+			local frame = vgui.Create("ixStalkerFrame")
 			frame:SetTitle( "Artifact Sales" )
 			frame:SetVisible( true )
 			--frame:SetDrawOnTop(true)
