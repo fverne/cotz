@@ -187,8 +187,8 @@ SWEP.FireSound = "CW_SAIGA308_FIRE"
 SWEP.FireSoundSuppressed = "CW_M14_FIRE_SUPPRESSED"
 SWEP.Recoil = 2.4
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005

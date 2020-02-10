@@ -110,8 +110,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".50 AE"
 
-SWEP.HealthDamage = 0.125
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.125
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_DEAGLE_FIRE"

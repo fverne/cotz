@@ -164,8 +164,8 @@ SWEP.FireSound = "CW_AK74_FIRE"
 SWEP.FireSoundSuppressed = "CW_AK74_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.65
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005

@@ -142,8 +142,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.56x45MM"
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.08
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.08
 
 SWEP.FireDelay = 0.1
 SWEP.FireSound = "CW_LR300_FIRE"
