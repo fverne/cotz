@@ -147,10 +147,11 @@ else
 	function PLUGIN:HUDPaint()
 		if (!LocalPlayer():GetCharacter() or !LocalPlayer():Alive() or ix.gui.characterMenu:IsVisible()) then return end
 		
-		local Texture3 = Material("stalker/ui/bar4.png", "noclamp smooth") 
-		surface.SetMaterial(Texture3)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
-		surface.DrawTexturedRect(ScrW()-233, ScrH()-163, predictedStamina*173 / 100, 17, Color(255, 255, 255, 255))
+		local Texture2 = Material("stalker/bars.png", "noclamp smooth") 
+
+		surface.SetMaterial(Texture2)
+		surface.SetDrawColor(Color(140, 140, 255, 255))
+		surface.DrawTexturedRectUV(ScrW()*0.05, ScrH()*0.92,  math.Clamp(math.Round(predictedStamina / 100, 2), 0, 1) * ScrW()*0.15, ScrH()*0.008, 0, 0,  math.Clamp(math.Round(predictedStamina / 100, 2), 0, 1) * 1.4, 0)
 	end
 
 /*

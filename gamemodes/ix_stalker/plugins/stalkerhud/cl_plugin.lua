@@ -1,10 +1,9 @@
-local Texture2 = Material("stalker/ui/bar.png", "noclamp smooth") 
+local Texture2 = Material("stalker/bars.png", "noclamp smooth") 
 local Texture7 = Material("stalker/ui/hud_hunger.png", "noclamp smooth") 
 local gun = Material("vgui/hud/gun.png", "noclamp smooth")
 local gun2 = Material("vgui/hud/gun2.png", "noclamp smooth") 
 local gun3 = Material("vgui/hud/gun3.png", "noclamp smooth") 
 local gun4 = Material("vgui/hud/gun4.png", "noclamp smooth") 
-local Texture1 = Material("stalker/ui/health.png", "noclamp smooth") 
 local Ammo = Material("stalker/ui/ammo.png", "noclamp smooth") 
 
 surface.CreateFont("stalkermainmenufont", {
@@ -93,17 +92,13 @@ function PLUGIN:HUDPaint()
 	local char = lp:GetCharacter()
 	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible()) then return end
 
-	surface.SetMaterial(Texture1)
-	surface.SetDrawColor(Color(255, 255, 255, 255))
-	surface.DrawTexturedRect(ScrW()-280, ScrH()-195, 250, 90, Color(41, 128, 185, 255))
-
 	surface.SetMaterial(Ammo)
 	surface.SetDrawColor(Color(255, 255, 255, 255))
 	surface.DrawTexturedRect(ScrW()-250, ScrH()-115, 210, 90, Color(41, 128, 185, 255))
 
 	surface.SetMaterial(Texture2)
-	surface.SetDrawColor(Color(255, 255, 255, 255))
-	surface.DrawTexturedRect(ScrW()-233, ScrH()-136, (1.72*math.Clamp( LocalPlayer():Health()/LocalPlayer():GetMaxHealth()*100, 0, 100 )), 17)
+	surface.SetDrawColor(Color(255, 120, 120, 255))
+	surface.DrawTexturedRectUV(ScrW()*0.05, ScrH()*0.905, math.Clamp(LocalPlayer():Health()/LocalPlayer():GetMaxHealth(), 0, 1)*ScrW()*0.15, ScrH()*0.008, 0, 0, math.Clamp(LocalPlayer():Health()/LocalPlayer():GetMaxHealth(), 0, 1)*1.4, 0)
 	
 /*
 	surface.SetMaterial(Texture7)
