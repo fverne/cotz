@@ -189,10 +189,11 @@ if (CLIENT) then
 			
 			for k, v in ipairs(artSales[1]) do
 				
-				local btn = frame:Add("DButton")
+				local btn = frame:Add("ixStalkerButton")
 				btn:Dock(TOP)
 				btn:SetText(ix.item.list[v].name.." - "..ix.item.list[v].price*ix.plugin.list["specialsale"].priceModifier)
 				btn:DockMargin(5, 5, 5, 0)
+				btn:SetTall(50)
 
 				function btn.DoClick()
 					local arti = k
