@@ -1,6 +1,6 @@
 local background = Material("stalker/ui.png")
 local background2 = Material("stalker/backgroundempty.png", "noclamp")
-local qboard = Material("stalker/questboard.png", "noclamp")
+local qboard = Material("stalker/btn1.png", "noclamp smooth")
 
 
 local PANEL = {}
@@ -31,10 +31,6 @@ function PANEL:Paint(width, height)
 	surface.SetMaterial(qboard)
 	surface.SetDrawColor(255, 255, 255, 255)
 	surface.DrawTexturedRect(0, 0, width, height)
-
-	surface.SetMaterial(background2)
-	surface.SetDrawColor(255, 255, 255, 255)
-	surface.DrawTexturedRect(5, 5, width-10, height-10)
 
 	--local texW = 490
 	--local texH = 338

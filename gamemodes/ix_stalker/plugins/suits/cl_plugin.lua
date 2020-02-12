@@ -64,5 +64,5 @@ function PLUGIN:HUDPaint()
 	else
 		surface.SetDrawColor(Color(0, 0, 0, 0))
 	end
-	surface.DrawTexturedRect(ScrW()-80, ScrH()-400, 33, 35, Color(0, 255, 0, 255))
+	surface.DrawTexturedRect(ScrW()*0.88, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
 end

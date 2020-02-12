@@ -204,7 +204,7 @@ function PLUGIN:HUDPaint()
 		surface.SetMaterial(thirst4)
 		surface.SetDrawColor(Color(255, 255, 255, 255))
 	end
-	surface.DrawTexturedRect(ScrW()-80, ScrH()-500, 33, 35, Color(0, 255, 0, 255))
+	surface.DrawTexturedRect(ScrW()*0.84, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
 
 	surface.SetMaterial(hunger)
 	if LocalPlayer():GetHunger() > 60 then
@@ -223,7 +223,7 @@ function PLUGIN:HUDPaint()
 		surface.SetMaterial(hunger4)
 		surface.SetDrawColor(Color(255, 255, 255, 255))
 	end
-	surface.DrawTexturedRect(ScrW()-80, ScrH()-450, 33, 35, Color(0, 255, 0, 255))
+	surface.DrawTexturedRect(ScrW()*0.82, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
 
 end
 
