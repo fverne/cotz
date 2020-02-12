@@ -144,10 +144,10 @@ else
 			
 				if (v:GetNetVar("radiation", 0) > 45 and v:GetNetVar("radiation", 0) < 75) then
 					v:addRadiation(-0.1)
-					v:TakeDamage(1,v,v:GetActiveWeapon())
+					v:TakeDamage(1,v,v)
 				elseif (v:GetNetVar("radiation", 0) > 75) then
 					v:addRadiation(-0.1)
-					v:TakeDamage(1.5,v,v:GetActiveWeapon())
+					v:TakeDamage(1.5,v,v)
 				end
 			end
 			damageTime = CurTime() + 15
