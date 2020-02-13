@@ -92,7 +92,10 @@ end
 function SWEP:Holster( wep )
 	if not IsFirstTimePredicted() then return end
 	self.Owner:AllowFlashlight( true )
-	self.Owner:Flashlight( false )
+	if (SERVER) then
+		self.Owner:Flashlight( false )
+	end
+
 	self.Owner:AllowFlashlight( false )
 	self.Active = false
 return true
