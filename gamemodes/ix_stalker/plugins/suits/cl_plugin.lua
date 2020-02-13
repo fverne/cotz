@@ -39,27 +39,58 @@ function PLUGIN:HUDPaint()
 	local wep = LocalPlayer():GetActiveWeapon()
 	local char = lp:GetCharacter()
 	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible()) then return end
+	local equippedgasmask = LocalPlayer():getEquippedGasmask()
+	local equippedhelmet = LocalPlayer():getEquippedHelmet() 
+	local equippedarmor = LocalPlayer():getEquippedBodyArmor()
+	local equippedpartdura = 100
+	local equippedpartdurafinal = 100
 	local armor = Material("vgui/hud/bron.png", "noclamp smooth") 
 	local armor2 = Material("vgui/hud/bron2.png", "noclamp smooth") 
 	local armor3 = Material("vgui/hud/bron3.png", "noclamp smooth") 
 	local armor4 = Material("vgui/hud/bron4.png", "noclamp smooth") 
 
+	
+	if equippedgasmask then
+		if equippedgasmask:GetData("durability") and equippedgasmask:GetData("durability") < equippedpartdura then
+			equippedpartdura = equippedgasmask:GetData("durability")
+			if equippedpartdurafinal > equippedpartdura then
+				equippedpartdurafinal = equippedpartdura
+			end
+		end
+	end
+	if equippedhelmet then
+		if equippedhelmet:GetData("durability") and equippedhelmet:GetData("durability") < equippedpartdura then
+			equippedpartdura = equippedhelmet:GetData("durability")
+			if equippedpartdurafinal > equippedpartdura then
+				equippedpartdurafinal = equippedpartdura
+			end
+		end
+	end
+	if equippedarmor then
+		if equippedarmor:GetData("durability") and equippedarmor:GetData("durability") < equippedpartdura then
+			equippedpartdura = equippedarmor:GetData("durability")
+			if equippedpartdurafinal > equippedpartdura then
+				equippedpartdurafinal = equippedpartdura
+			end
+		end
+	end
+
+	if equippedpartdura then
 	surface.SetMaterial(armor)
-	if LocalPlayer():getEquippedGasmask() != nil then
-		if LocalPlayer():getEquippedGasmask():GetData("durability") >= 80 then
+		if equippedpartdurafinal >= 80 then
 			surface.SetDrawColor(Color(0, 0, 0, 0))
-		elseif LocalPlayer():getEquippedGasmask():GetData("durability") < 80 and LocalPlayer():getEquippedGasmask():GetData("durability") >= 60 then
+		elseif equippedpartdurafinal < 80 and equippedpartdurafinal >= 60 then
 			surface.SetMaterial(armor)
-			surface.SetDrawColor(Color(255, 255, 255, 255))
-		elseif LocalPlayer():getEquippedGasmask():GetData("durability") < 60 and LocalPlayer():getEquippedGasmask():GetData("durability") >= 40 then
+			surface.SetDrawColor(Color(200, 200, 200, 255))
+		elseif equippedpartdurafinal < 60 and equippedpartdurafinal >= 40 then
 			surface.SetMaterial(armor2)
-			surface.SetDrawColor(Color(255, 255, 255, 255))
-		elseif LocalPlayer():getEquippedGasmask():GetData("durability") < 40 and LocalPlayer():getEquippedGasmask():GetData("durability") >= 20 then
+			surface.SetDrawColor(Color(200, 200, 200, 255))
+		elseif equippedpartdurafinal < 40 and equippedpartdurafinal >= 20 then
 			surface.SetMaterial(armor3)
-			surface.SetDrawColor(Color(255, 255, 255, 255))
-		elseif LocalPlayer():getEquippedGasmask():GetData("durability") < 20 and LocalPlayer():getEquippedGasmask():GetData("durability") >= 0 then
+			surface.SetDrawColor(Color(200, 200, 200, 255))
+		elseif equippedpartdurafinal < 20 and equippedpartdurafinal >= 0 then
 			surface.SetMaterial(armor4)
-			surface.SetDrawColor(Color(255, 255, 255, 255))
+			surface.SetDrawColor(Color(200, 200, 200, 255))
 		end
 	else
 		surface.SetDrawColor(Color(0, 0, 0, 0))

@@ -187,16 +187,16 @@ function PLUGIN:HUDPaint()
 				surface.SetDrawColor(Color(0, 0, 0, 0))
 			elseif LocalPlayer():GetActiveWeapon():GetWeaponHP() > 60 and LocalPlayer():GetActiveWeapon():GetWeaponHP() <= 80 then
 				surface.SetMaterial(gun)
-				surface.SetDrawColor(Color(255, 255, 255, 255))
+				surface.SetDrawColor(Color(200, 200, 200, 255))
 			elseif LocalPlayer():GetActiveWeapon():GetWeaponHP() > 40 and LocalPlayer():GetActiveWeapon():GetWeaponHP() <= 60 then
 				surface.SetMaterial(gun2)
-				surface.SetDrawColor(Color(255, 255, 255, 255))
+				surface.SetDrawColor(Color(200, 200, 200, 255))
 			elseif LocalPlayer():GetActiveWeapon():GetWeaponHP() > 20 and LocalPlayer():GetActiveWeapon():GetWeaponHP() <= 40 then
 				surface.SetMaterial(gun3)
-				surface.SetDrawColor(Color(255, 255, 255, 255))
+				surface.SetDrawColor(Color(200, 200, 200, 255))
 			elseif LocalPlayer():GetActiveWeapon():GetWeaponHP() > 0 and LocalPlayer():GetActiveWeapon():GetWeaponHP() <= 20 then
 				surface.SetMaterial(gun4)
-				surface.SetDrawColor(Color(255, 255, 255, 255))
+				surface.SetDrawColor(Color(200, 200, 200, 255))
 			end
 		else
 			surface.SetDrawColor(Color(0, 0, 0, 0))

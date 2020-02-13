@@ -11,11 +11,7 @@ ITEM.width = 2
 ITEM.category = nil
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
-ITEM.iconCam = {
-	pos = Vector(33, 3.6, 0),
-	ang = Angle(0, 180, 0),
-	fov = 12
-}
+ITEM.img = Material("vgui/hud/binoculars.png")
 ITEM.pacData = {
 [1] = {
 	["children"] = {
