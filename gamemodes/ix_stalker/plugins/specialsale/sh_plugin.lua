@@ -133,7 +133,7 @@ if (CLIENT) then
 			frame:SetVisible( true )
 			--frame:SetDrawOnTop(true)
 			frame:SetDraggable( true )
-			frame:ShowCloseButton( true )
+			frame:ShowCloseButton( false )
 			frame:Center()
 			frame:MakePopup()
 			frame:SetSize(600, 400)
@@ -152,14 +152,17 @@ if (CLIENT) then
 			meme:SetContentAlignment(8)
 			meme:SetText("Daily Sales")
 			meme:DockMargin(5, 5, 5, 0)
+			meme:SetFont("stalkerregulartitlefont")
+			meme:SetTall(ScrH()*0.04)
 			
 			for k, v in ipairs(artSales[1]) do
 				
 				local btn = frame:Add("ixStalkerButton")
 				btn:Dock(TOP)
 				btn:SetText(ix.item.list[v].name.." - "..ix.item.list[v].price*ix.plugin.list["specialsale"].priceModifier)
-				btn:DockMargin(5, 5, 5, 0)
-				btn:SetTall(50)
+				btn:DockMargin(btn:GetParent():GetWide()*0.35, 5, btn:GetParent():GetWide()*0.35, 0)
+				btn:SetTall(ScrH()*0.04)
+				btn:SetFont("stalkerregularfont")
 
 				function btn.DoClick()
 					local arti = k
@@ -175,14 +178,18 @@ if (CLIENT) then
 			meme2:SetContentAlignment(8)
 			meme2:SetText("Weekly Sales")
 			meme2:DockMargin(5, 5, 5, 0)
+			meme2:SetFont("stalkerregulartitlefont")
+			meme2:SetTall(ScrH()*0.04)
 			
 			
 			for k, v in ipairs(artSales[2]) do
 				
-				local btn = frame:Add("DButton")
+				local btn = frame:Add("ixStalkerButton")
 				btn:Dock(TOP)
 				btn:SetText(ix.item.list[v].name.." - "..ix.item.list[v].price*ix.plugin.list["specialsale"].priceModifier)
-				btn:DockMargin(5, 5, 5, 0)
+				btn:DockMargin(btn:GetParent():GetWide()*0.35, 5, btn:GetParent():GetWide()*0.35, 0)
+				btn:SetTall(ScrH()*0.04)
+				btn:SetFont("stalkerregularfont")
 
 				function btn.DoClick()
 					local arti = k
