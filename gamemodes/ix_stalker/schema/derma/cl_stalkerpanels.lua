@@ -9,7 +9,7 @@ function PANEL:Init()
 	self:SetTitle("stalkertest")
 
 	local closebtn = self:Add("DImageButton")
-	closebtn:SetWidth(ScrW()*0.02)
+	closebtn:SetSize(20, 20)
 	closebtn:SetMaterial(btnclose)
 	closebtn:SetPos(10, 10)
 
