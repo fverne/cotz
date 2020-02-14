@@ -42,6 +42,7 @@ ALWAYS_RAISED["detector_bear"] = true
 ALWAYS_RAISED["detector_veles"] = true
 ALWAYS_RAISED["detector_echo"] = true
 ALWAYS_RAISED["guitar"] = true
+ALWAYS_RAISED["m9k_ww2artillery"] = true
 
 ix.currency.symbol = "₽"
 ix.currency.singular = "ruble"

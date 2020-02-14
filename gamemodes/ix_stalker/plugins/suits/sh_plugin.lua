@@ -175,23 +175,6 @@ function playerMeta:getEquippedBodyArmor()
 	return nil
 end
 
-function playerMeta:getEquippedBodyArmor()
-	local char = self:GetCharacter()
-	local inventory = char:GetInventory()
-	if inventory then
-		local items = char:GetInventory():GetItems(true)
-
-		for k, v in pairs(items) do
-			if (v.isBodyArmor and v:GetData("equip")) then
-				return v
-			end
-		end
-
-		return nil
-	end
-	return nil
-end
-
 function playerMeta:getEquippedHelmet()
 	local char = self:GetCharacter()
 	local inventory = char:GetInventory()
