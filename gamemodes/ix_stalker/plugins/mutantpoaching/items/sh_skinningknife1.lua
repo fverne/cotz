@@ -1,12 +1,13 @@
 ITEM.name = "Skinning Knife (Tier 1)"
 ITEM.description = "A knife for mutant poaching."
-ITEM.model = "models/kek1ch/notes_letter_1.mdl"
-ITEM.width = 1
+ITEM.model = "models/weapons/ws kabar/w_knife_t.mdl"
+ITEM.width = 2
 ITEM.height = 1
 ITEM.price = 500
 ITEM.flag = "A"
 ITEM.value = ITEM.price*0.5
-ITEM.knifeTier = "tier1"
+ITEM.meattickets = 2
+ITEM.parttickets = 5
 
 ITEM.functions.SkinTarget = {
 	name = "Skin Mutant",
@@ -18,13 +19,11 @@ ITEM.functions.SkinTarget = {
 			if (client:Alive()) then
 				local Hit = client:GetEyeTraceNoCursor()
 				local npc = Hit.Entity
-				if item.knifeTier then
-					if (npc:IsRagdoll() and ix.MutantTable[npc:GetModel()] and npc:GetPos():Distance( client:GetPos() ) <= 55) then
-						local knife = item.uniqueID
-						local mutant = ix.MutantTable[npc:GetModel()]
+				if (npc:IsRagdoll() and ix.MutantTable[npc:GetModel()] and npc:GetPos():Distance( client:GetPos() ) <= 55) then
+					local knife = item.uniqueID
+					local mutant = ix.MutantTable[npc:GetModel()]
 
-						ix.plugin.list["mutantpoaching"]:GetLoot(mutant, knife)
-					end
+					ix.plugin.list["mutantpoaching"]:OpenPoachMenu(mutant, knife)
 				end
 			end
 		end
