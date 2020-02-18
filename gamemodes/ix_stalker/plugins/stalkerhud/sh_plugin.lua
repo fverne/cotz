@@ -21,10 +21,10 @@ if ix.bar then
 		
 
 		if (finish > curTime) then
-			local x, y = scrW*0.05, scrH*0.96
+			local x, y = scrW*0.05, scrH*0.04
 
-			draw.SimpleText(ix.bar.actionText, "stalkerregulartitlefont", x, y * 0.92, TEXT_COLOR)
-			draw.SimpleText(math.Round(finish - curTime, 1), "stalkerregulartitlefont", x, y * 0.95, TEXT_COLOR)
+			draw.SimpleText(ix.bar.actionText, "stalkerregulartitlefont", x, y, TEXT_COLOR)
+			draw.SimpleText(math.Round(finish - curTime, 1), "stalkerregulartitlefont", x, y + ScrH() * 0.03, TEXT_COLOR)
 		end
 	end
 end
