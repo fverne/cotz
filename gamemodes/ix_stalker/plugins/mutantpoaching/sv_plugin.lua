@@ -1,16 +1,20 @@
 local PLUGIN = PLUGIN
 
 ix.MutantTable = {
-	["models/hdmodels/kek1ch/new_izlom_spen.mdl"] = "dogtail",
-	["models/hdmodels/kek1ch/new_zombi_spen.mdl"] = "dogtail",
-	["models/hdmodels/kek1ch/new_tush_spen.mdl"] = "dogtail",
-	["models/hdmodels/kek1ch/new_snork_spen.mdl"] = "dogtail",
-	["models/hdmodels/kek1ch/new_psydog_spen.mdl"] = "dogtail",
-	["models/hdmodels/kek1ch/new_krovo_spen.mdl"] = "dogtail",
-	["models/hdmodels/kek1ch/new_plot_spen.mdl"] = "dogtail",
-	["models/hdmodels/kek1ch/new_dog_spen.mdl"] = "dog",
-	["models/hdmodels/kek1ch/new_boar_spen.mdl"] = "dogtail",
-	["models/hdmodels/kek1ch/new_chimer_spen.mdl"] = "dogtail",
+	["models/stalker/new_izlom_spen.mdl"] = "izlom",
+	["models/stalkertnb/zombie1.mdl"] = "classiczombie",
+	["models/stalkertnb/rodent1.mdl"] = "tushkano",
+	["models/stalkertnb/snork1.mdl"] = "snork",
+	["models/jerry/mutants/stalker_anomaly_pseudodog.mdl"] = "pseudodog",
+	["models/stalkertnb/bloodsucker1.mdl"] = "bloodsucker",
+	["models/jerry/mutants/stalker_anomaly_flesh.mdl"] = "flesh",
+	["models/stalkertnb/dog1.mdl"] = "dog",
+	["models/stalkertnb/boar1.mdl"] = "boar",
+	["models/stalkertnb/chimera1.mdl"] = "chimera",
+	["models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl"] = "burer",
+	["models/jerry/mutants/stalker_anomaly_ca1.mdl"] = "cat",
+	["models/maver1k_XVII/Stalker/mutants/karlik.mdl"] = "karlik",
+
 }
 
 ix.MutantParts = {
@@ -21,14 +25,93 @@ ix.MutantParts = {
 		["meattype"] = "meatdog",
 		["parttype"] = "dogtail",
 	},
-	["zombie"] = {
-		["meat"] = "makarov",
-		["mix"] = "9x18",
-		["part"] = "cig1",
-	}
+	["izlom"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meathuman",
+		["parttype"] = "izlomhand",
+	},
+	["classiczombie"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meathuman",
+		["parttype"] = "zombiehand",
+	},
+	["tushkano"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meattushkano",
+		["parttype"] = "rodentsear",
+	},
+	["snork"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meathuman",
+		["parttype"] = "snorksfoot",
+	},
+	["pseudodog"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meatpseudodog",
+		["parttype"] = "pseudodogtail",
+	},
+	["bloodsucker"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meatbloodsucker",
+		["parttype"] = "bloodsuckerjaw",
+	},
+	["flesh"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meatflesh",
+		["parttype"] = "flesheye",
+	},
+	["boar"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meatboar",
+		["parttype"] = "boarhoof",
+	},
+	["chimera"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meatchimera",
+		["parttype"] = "chimerasclaw",
+	},
+	["burer"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meathuman",
+		["parttype"] = "burerbrain",
+	},
+	["cat"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meatcat",
+		["parttype"] = "cattail",
+	},
+	["karlik"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meathuman",
+		["parttype"] = "medkit",
+	},
 }
 
-function PLUGIN:OpenPoachMenu(mutant, knife)
+function PLUGIN:OpenPoachMenu(client, mutant, knife)
 
 	netstream.Start(client, "mutantPoachOpen", client, mutant, knife)
 end
@@ -60,8 +143,8 @@ if SERVER then
 						--getting the total amount of parts
 						totaltickets = totaltickets + meattickets + parttickets
 
-						print("meattickets:", meattickets)
-						print("parttickets:", parttickets)
+						--print("meattickets:", meattickets)
+						--print("parttickets:", parttickets)
 
 						-- create table of the loot that should spawn, based on the tickets
 						for i = 1, lootamount do
@@ -73,7 +156,7 @@ if SERVER then
 							end
 						end
 
-						PrintTable(loot)
+						--PrintTable(loot)
 
 						--Do animation, remove ragdoll and spawn loot
 						local Hit = client:GetEyeTraceNoCursor()
@@ -83,7 +166,7 @@ if SERVER then
 								client:SetAction("Poaching", 5)
 								client:Freeze(true) 
 								client:ForceSequence("Cidle All")
-								npc:EmitSound( "interface/inv_mutant_loot_animal.ogg", 60, 100 )
+								npc:EmitSound( "stalkersound/inv_mutant_loot_animal.ogg", 60, 100 )
 								client:ScreenFade( SCREENFADE.OUT, Color( 0, 0, 0 ), 1, 3 ) 
 								timer.Simple(1, function() 
 									client:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 3 ) 

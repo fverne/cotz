@@ -1,8 +1,8 @@
-ITEM.name = "Dog Meat"
-ITEM.model = "models/kek1ch/raw_flesh.mdl"
+ITEM.name = "Chimera Meat"
+ITEM.model = "models/kek1ch/raw_boar.mdl"
 ITEM.hunger = 21
-ITEM.description = "Uncooked meat from a Dog."
-ITEM.longdesc = "Meat of mutated dogs is used as a cheap alternative to the more popular boar meat. The scientists have enough samples already, which limits its use as a commodity. However, it can also serve as a source of animal fat for gun lubrication."
+ITEM.description = "Uncooked meat from a Chimera."
+ITEM.longdesc = "A heavy chunk of chimera meat. Since chimeras are considered one of the most dangerous creatures, their meat is highly valued by veteran stalkers who are willing to buy it for fairly high prices. The cook on Skadovsk uses this meat as one of the ingredients of the so called masculine meal, although only few claim that it tastes better than boar meat. Can be sold to the scientists. Furthermore, it provides the best quality animal fat available in the Zone which can be used for the purposes of very effective gun lubrication."
 ITEM.quantity = 3
 ITEM.price = 70
 ITEM.width = 1
@@ -23,7 +23,7 @@ function ITEM:PopulateTooltip(tooltip)
 		descheader:SetText("\nPROPERTIES:")
 		descheader:SizeToContents()
 
-		ix.util.PropertyDesc(tooltip, "Low Tier Mutant Meat", Color(0, 255, 0))
+		ix.util.PropertyDesc(tooltip, "High Tier Mutant Meat", Color(0, 255, 0))
 		ix.util.PropertyDesc(tooltip, "Cookable", Color(0, 255, 0))
 		ix.util.PropertyDesc(tooltip, "Toxic Food", Color(255, 0, 0))
 	end

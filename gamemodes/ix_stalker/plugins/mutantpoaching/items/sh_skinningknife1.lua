@@ -23,7 +23,7 @@ ITEM.functions.SkinTarget = {
 					local knife = item.uniqueID
 					local mutant = ix.MutantTable[npc:GetModel()]
 
-					ix.plugin.list["mutantpoaching"]:OpenPoachMenu(mutant, knife)
+					ix.plugin.list["mutantpoaching"]:OpenPoachMenu(client, mutant, knife)
 				end
 			end
 		end

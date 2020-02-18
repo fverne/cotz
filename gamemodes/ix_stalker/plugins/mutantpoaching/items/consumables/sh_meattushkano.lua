@@ -1,8 +1,8 @@
-ITEM.name = "Dog Meat"
-ITEM.model = "models/kek1ch/raw_flesh.mdl"
+ITEM.name = "Tushkano Meat"
+ITEM.model = "models/kek1ch/raw_tushkano.mdl"
 ITEM.hunger = 21
-ITEM.description = "Uncooked meat from a Dog."
-ITEM.longdesc = "Meat of mutated dogs is used as a cheap alternative to the more popular boar meat. The scientists have enough samples already, which limits its use as a commodity. However, it can also serve as a source of animal fat for gun lubrication."
+ITEM.description = "Uncooked meat from a Tushkano."
+ITEM.longdesc = "A small portion of a mutated rodent's body. A cheap and commonly found food that is said to strengthen your heart after being cooked in open fire. Can be sold to the scientists."
 ITEM.quantity = 3
 ITEM.price = 70
 ITEM.width = 1

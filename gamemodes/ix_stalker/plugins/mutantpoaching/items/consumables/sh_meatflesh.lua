@@ -1,8 +1,8 @@
-ITEM.name = "Dog Meat"
-ITEM.model = "models/kek1ch/raw_flesh.mdl"
+ITEM.name = "Flesh Meat"
+ITEM.model = "models/kek1ch/raw_dog.mdl"
 ITEM.hunger = 21
-ITEM.description = "Uncooked meat from a Dog."
-ITEM.longdesc = "Meat of mutated dogs is used as a cheap alternative to the more popular boar meat. The scientists have enough samples already, which limits its use as a commodity. However, it can also serve as a source of animal fat for gun lubrication."
+ITEM.description = "Uncooked meat from a Flesh."
+ITEM.longdesc = "A popular choice in the Zone, flesh meat has a good taste and high nutritional value. The scientists have enough samples already, which limits its use as a commodity. However, it can also serve as a source of animal fat for gun lubrication."
 ITEM.quantity = 3
 ITEM.price = 70
 ITEM.width = 1

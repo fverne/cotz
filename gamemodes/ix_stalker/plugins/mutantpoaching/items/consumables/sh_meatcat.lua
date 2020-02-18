@@ -1,8 +1,8 @@
-ITEM.name = "Dog Meat"
+ITEM.name = "Cat Meat"
 ITEM.model = "models/kek1ch/raw_flesh.mdl"
 ITEM.hunger = 21
-ITEM.description = "Uncooked meat from a Dog."
-ITEM.longdesc = "Meat of mutated dogs is used as a cheap alternative to the more popular boar meat. The scientists have enough samples already, which limits its use as a commodity. However, it can also serve as a source of animal fat for gun lubrication."
+ITEM.description = "Uncooked meat from a Cat."
+ITEM.longdesc = "The texture of the flesh is very smooth compared to other types of mutant meat. This type of meat is not very popular within the zone, as it is said to make you feel nauseous for a few hours while digesting it."
 ITEM.quantity = 3
 ITEM.price = 70
 ITEM.width = 1
