@@ -128,7 +128,7 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 10
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= "7.62x54mmR"
+SWEP.Primary.Ammo			= "7.62x54MMR"
 
 SWEP.FireDelay = 0.1
 SWEP.FireSound = "CW_BER_SVT40_FIRE"
