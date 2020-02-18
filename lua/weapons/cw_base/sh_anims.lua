@@ -73,6 +73,10 @@ function SWEP:playAnim(anim, speed, cycle, ent)
 	if SERVER then
 		return
 	end
+
+	if !ent then
+		return
+	end
 	
 	ent:ResetSequence(foundAnim)
 	
