@@ -1,4 +1,4 @@
-ITEM.name = "Modern Military Backpack (Ukranian)"
+ITEM.name = "Modern Military Backpack (Ukrainian)"
 ITEM.description = "A backpack. Features compartments for easy storage of your valuables."
 ITEM.width = 2
 ITEM.height = 2
