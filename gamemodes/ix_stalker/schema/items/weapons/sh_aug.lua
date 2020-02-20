@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -106.201),
-						["Position"] = Vector(-13.43, -0.853, -4.551),
+						["Angles"] = Angle(180, 0, 0),
+						["Position"] =	Vector(1.943, -4.451, 1.975),
 						["Model"] = "models/weapons/w_rif_aug.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "7842129091",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "aug",
 					},
 				},

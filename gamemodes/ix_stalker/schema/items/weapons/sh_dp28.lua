@@ -25,14 +25,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.219, -177.469, -76.57),
-						["Position"] = Vector(-4.607, -3.621, 7.157),
+						["Angles"] = Angle(180, 0, 0),
+						["Position"] = Vector(11.765, -4.449, -1.126),
 						["Model"] = "models/weapons/w_ro2_dp28.mdl",
 						["ClassName"] = "model",
 						["Size"] = 0.9,
 						["EditorExpand"] = true,
 						["UniqueID"] = "7923896121",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "dp28",
 					},
 				},

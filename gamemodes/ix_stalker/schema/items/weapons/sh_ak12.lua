@@ -25,14 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
+						["Angles"] = Angle(180, 0, 0),
 						["Model"] = "models/weapons/w_rif_ak12.mdl",
 						["ClassName"] = "model",
-						["Position"] =	Vector(-7.659, -1.39, 7.009),
-						["AngleOffset"] = Angle(0, -10.5, 0),
+						["Position"] =	Vector(14.702, -4.244, -1.16),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3512531291",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "ak12",
 					},
 				},

@@ -25,15 +25,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(-8.912, 96.435, -164.117),
-						["Position"] = Vector(-12.767, -4.922, -5.399),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(8.791, -4.174, -1.903),
 						["Model"] = "models/khrcw2/doipack/w_mp34.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "88831938491",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "cw_mp34",
-						["AngleOffset"] = Angle(0, 0, 90),
 					},
 				},
 			},

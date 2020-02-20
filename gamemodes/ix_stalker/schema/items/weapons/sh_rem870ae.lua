@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(78.519, -177.46875, -100.487),
-						["Position"] = Vector(-7.361, -1.493, 11.48),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(14.98, -4.153, -1.175),
 						["Model"] = "models/weapons/w_shot_remington.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "7793798673",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "rem870",
 					},
 				},

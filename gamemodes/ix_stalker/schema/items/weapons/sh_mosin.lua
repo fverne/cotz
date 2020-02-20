@@ -25,13 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-7.678, -3.941, 7.315),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(12.493, -4.312, -3.803),
 						["Model"] = "models/weapons/ws mosin/w_ws_mosin.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "8542553421",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "mosin",
 					},
 				},

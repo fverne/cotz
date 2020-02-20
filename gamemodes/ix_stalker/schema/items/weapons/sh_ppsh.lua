@@ -25,13 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Position"] = Vector(-12.414306640625, 0.842529296875, 7.36279296875),
+						["Position"] = Vector(16.759, -7.327, 4.486),
 						["Name"] = "ppsh",
 						["ClassName"] = "model",
-						["Size"] = 0.85,
+						["Size"] = 0.8,
 						["UniqueID"] = "3544245692",
-						["Angles"] = Angle(-1.7127491235733, -46.162250518799, -88.74031829834),
-						["Bone"] = "chest",
+						["Angles"] = Angle(60.521, 89.241, 4.292),
+						["Bone"] = "spine 2",
 						["Model"] = "models/weapons/w_grub_ppsh_stick.mdl",
 						["EditorExpand"] = true,
 					},

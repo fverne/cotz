@@ -25,13 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-11.734, -4.97998046875, 0.350830078125),
+						["Angles"] = Angle(180, 0, 0),
+						["Position"] =	Vector(4.093, -4.807, -4.414),
 						["Model"] = "models/weapons/w_smg_aks.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "3543445691",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "aks74u",
 					},
 				},

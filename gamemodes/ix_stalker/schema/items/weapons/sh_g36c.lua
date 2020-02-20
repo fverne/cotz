@@ -25,13 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(71.319, -177.46875, -96.1875),
-						["Position"] = Vector(-7.446, -3.087, 12.014),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(14.673, -4.309, -1.334),
 						["Model"] = "models/weapons/cw20_g36c.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "7809869091",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "g36c",
 					},
 				},

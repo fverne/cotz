@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.219, -177.469, -118.542),
-						["Position"] = Vector(-8.464, -4.375, 6.669),
+						["Angles"] = Angle(180, 0, 0),
+						["Position"] = Vector(16.652, -4.444, -1.132),
 						["Model"] = "models/cw2/weapons/w_cw2_efi.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "5551187212",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "f2000",
 					},
 				},

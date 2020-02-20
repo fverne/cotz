@@ -25,13 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-11.419, -0.046, -6.601),
+						["Angles"] = Angle(180, 0, 0),
+						["Position"] = Vector(2.141, -4.444, 2.193),
 						["Model"] = "models/weapons/w_rif_famas.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "7809869952",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "famas",
 					},
 				},

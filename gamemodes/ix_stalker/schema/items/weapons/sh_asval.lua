@@ -25,13 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(-11.74, -169.377, -91.9),
-						["Position"] = Vector(-11.314, -7.027, -0.342),
+						["Angles"] = Angle(180, 90, 0),
+						["Position"] = Vector(4.252, -5.172, -5.865),
 						["Model"] = "models/weapons/w_dmg_vally.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "3421542291",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "asval",
 					},
 				},

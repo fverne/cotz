@@ -25,13 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(270, 180, 291.8),
-						["Position"] = Vector(-10.468, -4.789, -3.387),
+						["Angles"] = Angle(180, 0, 0),
+						["Position"] = Vector(2.253, -3.558, -4.24),
 						["Model"] = "models/khrcw2/doipack/w_ithaca37.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
-						["UniqueID"] = "787987394673",
-						["Bone"] = "chest",
+						["UniqueID"] = "ithaca37_1",
+						["Bone"] = "spine 2",
 						["Name"] = "ith37",
 					},
 				},
@@ -39,7 +39,7 @@ ITEM.pacData = {
 			["self"] = {
 				["AffectChildrenOnly"] = true,
 				["ClassName"] = "event",
-				["UniqueID"] = "12378689322",
+				["UniqueID"] = "ithaca37_2",
 				["Event"] = "weapon_class",
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
@@ -49,7 +49,7 @@ ITEM.pacData = {
 	},
 	["self"] = {
 		["ClassName"] = "group",
-		["UniqueID"] = "27879386348",
+		["UniqueID"] = "ithaca37_3",
 		["EditorExpand"] = true,
 	},
 },

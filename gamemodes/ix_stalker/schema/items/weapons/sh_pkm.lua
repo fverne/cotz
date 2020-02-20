@@ -25,13 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-8.946, -3.987, 12.214),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(11.188, -4.175, -0.658),
 						["Model"] = "models/weapons/w_mach_pkmbenis.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "7923894673",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "pkm",
 					},
 				},

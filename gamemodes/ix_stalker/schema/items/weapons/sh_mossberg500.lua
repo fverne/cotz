@@ -25,13 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(270, 180, 291.8),
-						["Position"] = Vector(-10.468, -4.789, -3.387),
+						["Angles"] = Angle(0, 0, 180),
+						["Position"] = Vector(-2.502, -4.31, -2.254),
 						["Model"] = "models/weapons/w_shot_mossberg5.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "78798794673",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "moss500",
 					},
 				},

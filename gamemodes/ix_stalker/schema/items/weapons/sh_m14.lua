@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-7.746, -3.287, 12.214),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(13.989, -4.313, -1.375),
 						["Model"] = "models/weapons/w_cstm_m14.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "7946894673",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "m14",
 					},
 				},
