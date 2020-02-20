@@ -1,0 +1,16 @@
+CustomizableWeaponry:addFireSound("Weapon_PP19V", "weapons/pp19vityaz/mp5-1.wav", 1, 100, CHAN_STATIC)
+CustomizableWeaponry:addFireSound("CW_PP19V_SUPPRESSED", "weapons/pp19vityaz/sil.wav", 1, 70, CHAN_STATIC)
+
+CustomizableWeaponry:addReloadSound("Weapon_PP19V_Cloth", "weapons/pp19vityaz/mp5_cloth.wav")
+CustomizableWeaponry:addReloadSound("Weapon_PP19V_Cliprelease", "weapons/pp19vityaz/mp5_cliprelease.wav")
+CustomizableWeaponry:addReloadSound("Weapon_PP19V_Clipout", "weapons/pp19vityaz/mp5_clipout.wav")
+CustomizableWeaponry:addReloadSound("Weapon_PP19V_Clipin", "weapons/pp19vityaz/mp5_clipin.wav")
+CustomizableWeaponry:addReloadSound("Weapon_PP19V_Slideback", "weapons/pp19vityaz/mp5_slideback.wav")
+CustomizableWeaponry:addReloadSound("Weapon_PP19V_drawcloth", "weapons/pp19vityaz/mp5_drawcloth.wav")
+CustomizableWeaponry:addReloadSound("Weapon_PP19V_draw", "weapons/pp19vityaz/mp5_draw.wav")
+
+CustomizableWeaponry:addReloadSound("Weapon_Cloth1", "weapons/pp19vityaz/cloth.wav")
+CustomizableWeaponry:addReloadSound("Weapon_Cloth2", "weapons/pp19vityaz/cloth1.wav")
+CustomizableWeaponry:addReloadSound("Weapon_Cloth3", "weapons/pp19vityaz/cloth2.wav")
+CustomizableWeaponry:addReloadSound("Weapon_Cloth4", "weapons/pp19vityaz/cloth3.wav")
+CustomizableWeaponry:addReloadSound("Weapon_Cloth5", "weapons/pp19vityaz/cloth4.wav")

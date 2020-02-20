@@ -282,6 +282,9 @@ SWEP.CanCustomize = true
 timerdelay = 0
 --
 
+SWEP.HealthDamage = 0.0
+SWEP.HealthEffect = 0.0
+
 
 -- bipod-related
 SWEP.BipodRecoilModifier = 0.3

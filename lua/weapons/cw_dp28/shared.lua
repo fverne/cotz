@@ -127,7 +127,7 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 47
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
-SWEP.Primary.Ammo			= "7.62x54MMr"
+SWEP.Primary.Ammo			= "7.62x54MMR"
 
 SWEP.HealthDamage = 0.1
 SWEP.HealthEffect = 0.05
