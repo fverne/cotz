@@ -17,7 +17,7 @@ if (CLIENT) then
 			sentence:Dock(TOP)
 			sentence:SetContentAlignment(8)
 			sentence:SetFont("stalkerregularfont")
-			sentence:SetText("Select what you want to poach. Using your "..ix.item.list[tool].name)
+			sentence:SetText("Select what you want to poach. Using your "..ix.item.instances[tool].name)
 			sentence:SetTall(100)
 			sentence:DockMargin(5, 5, 5, 0)
 

@@ -111,6 +111,29 @@ ix.MutantParts = {
 	},
 }
 
+function PLUGIN:KeyPress(client, key)
+	if (client:GetCharacter()) then
+		if (client:Alive()) then
+			local Hit = client:GetEyeTraceNoCursor()
+			local npc = Hit.Entity
+			if (key == IN_USE) then
+				if (npc:IsRagdoll() and ix.MutantTable[npc:GetModel()] and npc:GetPos():Distance( client:GetPos() ) <= 55) then
+					local knife = client:GetCharacter():GetInventory():GetItems()
+					local mutant = ix.MutantTable[npc:GetModel()]
+					for _, v in pairs(knife) do
+						if v:GetData("equip") and v.isPoachKnife then
+							knife = ix.item.instances[v.id].id
+						end
+					end
+					print(knife)
+					
+					ix.plugin.list["mutantpoaching"]:OpenPoachMenu(client, mutant, knife)
+				end
+			end
+		end
+	end
+end
+
 function PLUGIN:OpenPoachMenu(client, mutant, knife)
 
 	netstream.Start(client, "mutantPoachOpen", client, mutant, knife)
@@ -133,8 +156,8 @@ if SERVER then
 						parttickets = parttickets + v2.parttickets
 
 						-- gets the ticket additions from the knife used
-						meattickets = meattickets + ix.item.list[knife].meattickets 
-						parttickets = parttickets + ix.item.list[knife].parttickets
+						meattickets = meattickets + ix.item.instances[knife].meattickets 
+						parttickets = parttickets + ix.item.instances[knife].parttickets
 
 						-- making sure value isnt below zero for each parttype 
 						meattickets = math.max(0, meattickets)
