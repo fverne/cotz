@@ -125,7 +125,6 @@ function PLUGIN:KeyPress(client, key)
 							knife = ix.item.instances[v.id].id
 						end
 					end
-					print(knife)
 					
 					ix.plugin.list["mutantpoaching"]:OpenPoachMenu(client, mutant, knife)
 				end
@@ -150,6 +149,9 @@ if SERVER then
 						local parttickets = 0
 						local lootamount = math.random(1,3)
 						local loot = {}
+
+						-- adds extra loot from the knife used
+						lootamount = lootamount + ix.item.instances[knife].lootbonus
 
 						-- gets all the tickets in the mutantpart table based on poachoption
 						meattickets = meattickets + v2.meattickets
