@@ -25,14 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(-73.093, -13.529, 128.826),
+						["Angles"] = Angle(0, 0, 180),
 						["Model"] = "models/weapons/world/rifles/sks.mdl",
 						["ClassName"] = "model",
-						["Position"] =	Vector(-6.922, -3.151, 8.242),
-						["AngleOffset"] = Angle(0, -10.5, 0),
+						["Position"] =	Vector(15.415, -4.194, -4.119),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3888831291",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "sks",
 					},
 				},

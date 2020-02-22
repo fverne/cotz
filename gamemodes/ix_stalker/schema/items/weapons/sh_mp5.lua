@@ -33,7 +33,7 @@ ITEM.pacData = {
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "79478794673",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "mp5",
 					},
 				},

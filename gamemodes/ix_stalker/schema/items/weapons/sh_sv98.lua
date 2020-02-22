@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(-74.107, -0.518, 112.847),
-						["Position"] = Vector(-10.008, -3.559, -0.159),
+						["Angles"] = Angle(0, 0, 180),
+						["Position"] = Vector(2.152, -5.054, -3.132),
 						["Model"] = "models/weapons/w_sv98_scopeless.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "8544253421",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "sv98",
 					},
 				},

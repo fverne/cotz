@@ -26,15 +26,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(62.727, 107.588, 8.727),
-						["Position"] = Vector(-10.144, -3.047, -4.744),
+						["Angles"] = Angle(0, 0, 180),
+						["Position"] = Vector(0.066, -5.077, -3.147),
 						["Model"] = "models/weapons/w_sv10.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "8592523121",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "toz34",
-						["AngleOffset"] = Angle(200, 0, 0),
 					},
 				},
 			},

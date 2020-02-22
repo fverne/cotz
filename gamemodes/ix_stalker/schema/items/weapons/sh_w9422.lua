@@ -27,15 +27,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-14.65, -0.247, -9.327),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(15.528, -4.265, -3.556),
 						["Model"] = "models/weapons/tfa_nmrih/w_fa_win1892.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "8544325421",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "w9422",
-						["AngleOffset"] = Angle(200, 0, 0),
 					},
 				},
 			},

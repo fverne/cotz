@@ -25,15 +25,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(64.78, 128.029, 30.251),
-						["Position"] = Vector(-12.508, -1.447, -2.534),
+						["Angles"] = Angle(0, 0, 180),
+						["Position"] = Vector(3.44, -5.078, -2.039),
 						["Model"] = "models/weapons/w_svt40.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "8824425421",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "svt40",
-						["AngleOffset"] = Angle(200, 0, 0),
 					},
 				},
 			},
