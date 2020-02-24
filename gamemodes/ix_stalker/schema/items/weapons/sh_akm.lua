@@ -4,18 +4,19 @@ ITEM.longdesc = "The AKM is an assault rifle firing the 7.62×39mm Soviet interm
 ITEM.model = "models/weapons/w_ops_ak47.mdl"
 ITEM.class = "cw_akm"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 19250
+ITEM.width = 5
 ITEM.height = 2
 --ITEM.busflag = {"ARMS2_3_1", "SPECIAL7_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_kobra","md_pso1","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(-10, 200, 0),
-	ang = Angle(0, 270, 5),
-	fov = 13.235
+	pos = Vector(8, -205, 0),
+	ang = Angle(0, 90, 5),
+	fov = 10.6,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

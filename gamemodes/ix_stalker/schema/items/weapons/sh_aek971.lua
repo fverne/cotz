@@ -4,18 +4,19 @@ ITEM.longdesc = "The AEK-971 is an experimental assault rifle released around th
 ITEM.model = "models/weapons/w_rif_aek97.mdl"
 ITEM.class = "cw_aek971"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 24200
+ITEM.width = 5
 ITEM.height = 2
 --ITEM.busflag = "ARMS2_3_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_kobra","md_pso1","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(-12, 35, 0),
-	ang = Angle(0, 270, 3),
-	fov = 70
+	pos = Vector(0.5, -205, 1),
+	ang = Angle(0, 87.058822631836, 2.3529412746429),
+	fov = 13,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

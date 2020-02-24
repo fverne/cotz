@@ -4,18 +4,19 @@ ITEM.longdesc = "The AK-74 is the replacement for the AKM and the most notable d
 ITEM.model = "models/weapons/w_ops_ak74.mdl"
 ITEM.class = "cw_ak74"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 15000
+ITEM.width = 5
 ITEM.height = 2
 --ITEM.busflag = {"ARMS2_3_1", "SPECIAL4_1", "SPECIAL7_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_kobra","md_pso1","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(-10, 200, 0),
-	ang = Angle(0, 270, 5),
-	fov = 13.235
+	pos = Vector(10, -205, 2),
+	ang = Angle(0, 90, 4.5),
+	fov = 12.5,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

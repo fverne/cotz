@@ -4,18 +4,17 @@ ITEM.longdesc = "The standard rifle for the British armed forces. This rifle was
 ITEM.model = ("models/weapons/w_rif_l852.mdl")
 ITEM.class = "cw_l85"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 24600
+ITEM.width = 4
 ITEM.height = 2
 --ITEM.busflag = "ARMS1_3_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_saker","md_foregrip"}
 
-ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(11.5, 200, 3),
-	ang = Angle(0, 270, 0),
-	fov = 10,
+	pos = Vector(11.5, -205, 3),
+	ang = Angle(0, 90, 0),
+	fov = 9,
 }
 
 ITEM.pacData = {

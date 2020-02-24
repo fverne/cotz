@@ -4,18 +4,19 @@ ITEM.longdesc = "The Beretta 92, also known as the M9, is the Italian-made repla
 ITEM.model = ("models/weapons/w_M92f_p228.mdl")
 ITEM.class = "cw_beretta92"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 3000
+ITEM.width = 2
 ITEM.height = 1
 ITEM.busflag = {"guns3"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_rmr","md_tundra9mm"}
 
 ITEM.iconCam = {
-	pos = Vector(-6, 10, 1.5),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(6.5, -205, 1.5),
+	ang = Angle(0, 90, 0),
+	fov = 4,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

@@ -4,19 +4,18 @@ ITEM.longdesc = "The Browning Hi-Power pistol is product of the French military 
 ITEM.model = "models/weapons/w_pist_brhp.mdl"
 ITEM.class = "cw_brhp"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 1200
+ITEM.width = 2
 ITEM.height = 1
 ITEM.busflag = {"guns3_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_rmr","md_tundra9mm"}
 
 ITEM.iconCam = {
-	ang= Angle(0, 0, 0),
-	fov= 23.889,
-	pos= Vector(-35, 0, -2)
+	pos = Vector(-0.40000000596046, 200, -2),
+	ang = Angle(0, 270, 0),
+	fov = 4,
 }
-
 ITEM.pacData = {
 [1] = {
 	["children"] = {

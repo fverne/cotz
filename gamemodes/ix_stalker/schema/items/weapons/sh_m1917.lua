@@ -4,17 +4,20 @@ ITEM.longdesc = "The M1917 Revolvers are six-shot, .45 ACP, large frame revolver
 ITEM.model = ("models/khrcw2/doipack/w_sw1917.mdl")
 ITEM.class = "cw_m1917"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 14000
+ITEM.width = 2
 ITEM.height = 1
 --ITEM.busflag = {"ARMS2_1_1", "SPECIAL5"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_rmr","md_cobram2"}
+
 ITEM.iconCam = {
-	pos = Vector(-7, 12, 0),
-	ang = Angle(0, 270, -5),
-	fov = 70
+	pos = Vector(3.5, -205, -1.8999999761581),
+	ang = Angle(0, 90, 0),
+	fov = 4,
 }
+
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

@@ -4,18 +4,19 @@ ITEM.longdesc = "The Suomi KP-31 is regarded by many as one of the most successf
 ITEM.model = ("models/khrcw2/doipack/w_suomi.mdl")
 ITEM.class = "cw_kp31"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 9600
+ITEM.width = 4
 ITEM.height = 2
 ITEM.busflag = {"guns3_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_tundra9mm"}
 
 ITEM.iconCam = {
-	pos = Vector(-22, 8, -2),
-	ang = Angle(0, -0, 0),
-	fov = 70
+	pos = Vector(-6, 200, -1),
+	ang = Angle(0, 270, 0),
+	fov = 13,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

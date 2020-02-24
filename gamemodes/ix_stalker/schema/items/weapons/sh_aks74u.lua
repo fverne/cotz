@@ -4,18 +4,19 @@ ITEM.longdesc = "The AKS-74U bridges the gap between a submachine gun and an ass
 ITEM.model = "models/weapons/w_smg_aks.mdl"
 ITEM.class = "cw_aks74u"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 12750
+ITEM.width = 4
 ITEM.height = 2
 ITEM.busflag = {"guns4"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_kobra", "md_pso1", "md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(3, 25, -2),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(-2.5, -205, -3),
+	ang = Angle(0, 90, 0),
+	fov = 10,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

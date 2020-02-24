@@ -4,17 +4,17 @@ ITEM.longdesc = "The Remington Model 870 is a pump-action shotgun manufactured b
 ITEM.model = ("models/weapons/w_shot_remington.mdl")
 ITEM.class = "cw_rem870ae"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 14000
+ITEM.width = 5
 ITEM.height = 1
 ITEM.busflag = {"guns2_1_1"}
 ITEM.repairCost = ITEM.price/100*1
-
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(-12, 37, 1),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(12, -205, 1.5),
+	ang = Angle(0, 90, 0),
+	fov = 14.5,
 }
 
 ITEM.pacData = {

@@ -4,17 +4,17 @@ ITEM.longdesc = "The M1911 first came into service in the American army in 1911 
 ITEM.model = "models/weapons/cw_pist_m1911.mdl"
 ITEM.class = "cw_m1911"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 6600
+ITEM.width = 2
 ITEM.height = 1
 --ITEM.busflag = "ARMS1_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_rmr","md_cobram2"}
 
 ITEM.iconCam = {
-	pos = Vector(-7, 10, 1),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(7, -205, 1.2000000476837),
+	ang = Angle(0, 90, 0),
+	fov = 4,
 }
 
 ITEM.pacData = {

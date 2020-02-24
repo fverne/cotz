@@ -4,17 +4,17 @@ ITEM.longdesc = "A double barrel hunting shotgun, a classic Russian design popul
 ITEM.model = ("models/weapons/w_sv10.mdl")
 ITEM.class = "cw_toz34"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 8000
+ITEM.width = 6
 ITEM.height = 1
 ITEM.busflag = {"guns2_1"}
 ITEM.repairCost = ITEM.price/100*1
-
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(-3, -37, 0),
-	ang = Angle(0, 90, 0),
-	fov = 70
+	pos = Vector(4, 200, -0.5),
+	ang = Angle(0, 270, 0),
+	fov = 14,
 }
 
 ITEM.pacData = {

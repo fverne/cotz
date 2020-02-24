@@ -4,17 +4,17 @@ ITEM.longdesc = "The AUG is an Austrian assault rifle designed around the 60-70'
 ITEM.model = "models/weapons/w_rif_aug.mdl"
 ITEM.class = "cw_aug"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 28500
+ITEM.width = 5
 ITEM.height = 2
 --ITEM.busflag = "ARMS1_3_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker"}
 
 ITEM.iconCam = {
-	pos = Vector(5.5, 27, 6),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(-5, -205, 5),
+	ang = Angle(0, 90, 0),
+	fov = 10.5,
 }
 
 ITEM.pacData = {
