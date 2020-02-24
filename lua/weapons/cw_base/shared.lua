@@ -283,8 +283,8 @@ timerdelay = 0
 --
 
 SWEP.DurabilityDamageChance = 0.01
-SWEP.HealthDamage = 0.0
-SWEP.HealthEffect = 0.0
+SWEP.WearDamage = 0.0
+SWEP.WearEffect = 0.0
 
 
 
@@ -984,7 +984,7 @@ function SWEP:getBaseCone()
 end
 
 function SWEP:getMaxSpreadIncrease(maxSpreadMod)
-	return (self.MaxSpreadInc * maxSpreadMod) * (1 + self.WearEffect - (self.WearEffect * (self:GetWeaponWear()/100))*2
+	return (self.MaxSpreadInc * maxSpreadMod) * (1 + self.WearEffect - (self.WearEffect * (self:GetWeaponWear()/100))*2)
 end
 
 function SWEP:getCrouchSpreadModifier()

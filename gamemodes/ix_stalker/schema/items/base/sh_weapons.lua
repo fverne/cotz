@@ -45,7 +45,7 @@ if (CLIENT) then
 					wear = item:GetData("wear",0)
 				end
 			end
-		else
+		end
 
 		surface.SetDrawColor( Color( 255, 255, 255, 255 ) ) -- Outline
 		surface.DrawOutlinedRect( 7, h - 15, 41, 9 )
