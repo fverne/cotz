@@ -14,6 +14,8 @@ ITEM.longdesc = "No longer description available."
 ITEM.validAttachments = {}
 ITEM.canAttach = true
 
+ITEM.exRender = true
+
 -- Inventory drawing
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)

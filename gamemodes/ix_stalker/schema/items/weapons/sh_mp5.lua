@@ -12,9 +12,9 @@ ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm"}
 ITEM.validUpgrades = {"up_firerate1"}
 ITEM.iconCam = {
-	pos = Vector(-9.8999996185303, 25, 2),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(10.071999549866, -205.14999389648, 0),
+	ang = Angle(0, 90, 0),
+	fov = 10,
 }
 
 
