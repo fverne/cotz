@@ -30,6 +30,11 @@ if CLIENT then
 	SWEP.LuaVMRecoilAxisMod = {vert = 1, hor = 1.5, roll = 3, forward = 1, pitch = 4}
 	SWEP.CustomizationMenuScale = 0.01
 	SWEP.DisableSprintViewSimulation = true
+
+	SWEP.DrawTraditionalWorldModel = false
+	SWEP.WM = "models/weapons/cwc_mateba/w_pist_mateba.mdl"
+	SWEP.WMPos = Vector(-1, 0, 0)
+	SWEP.WMAng = Vector(0, 0, 180)
 	
 end
 
@@ -72,7 +77,7 @@ SWEP.Instructions	= ""
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/cw2/pistols/mr96.mdl"
-SWEP.WorldModel		= "models/weapons/w_357.mdl"
+SWEP.WorldModel		= "models/weapons/cwc_mateba/w_pist_mateba.mdl"
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

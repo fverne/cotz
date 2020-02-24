@@ -1,7 +1,7 @@
 ITEM.name = "MR96"
 ITEM.description= "A double-action revolver chambered for .44 Magnum."
 ITEM.longdesc = "The Manurhin MR96 is a French-manufactured, double-action revolver chambered for .44 Magnum.\nThis specific weapon is a 6-inch version.\nEvery MR96 is match grade accurate, shipped with its own factory test target fired at 25 meters.\nAveraging 15 rounds, no group over 20mm diameter with selected ammunition is allowed.\n\nAmmo: .44 Magnum\nMagazine Capacity: 6"
-ITEM.model = ("models/weapons/w_357.mdl")
+ITEM.model = ("models/weapons/cwc_mateba/w_pist_mateba.mdl")
 ITEM.class = "cw_mr96"
 ITEM.weaponCategory = "secondary"
 ITEM.width = 2
@@ -25,7 +25,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/weapons/w_357.mdl",
+						["Model"] = "models/weapons/cwc_mateba/w_pist_mateba.mdl",
 						["ClassName"] = "model",
 						["Position"] = Vector(-7.5, 6.578, 0.844),
 						["AngleOffset"] = Angle(0, -10.5, 0),
