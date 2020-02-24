@@ -283,6 +283,9 @@ timerdelay = 0
 --
 
 SWEP.DurabilityDamageChance = 0.01
+SWEP.HealthDamage = 0.0
+SWEP.HealthEffect = 0.0
+
 
 
 -- bipod-related

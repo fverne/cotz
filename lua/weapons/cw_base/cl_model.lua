@@ -1103,6 +1103,10 @@ end
 function SWEP:performViewmodelMovement()
 	CT = UnPredictedCurTime()
 	vm = self.CW_VM
+
+	if not self.CW_VM then
+		return
+	end
 	
 	self.Cycle = vm:GetCycle()
 	self.Sequence = vm:GetSequenceName(vm:GetSequence())

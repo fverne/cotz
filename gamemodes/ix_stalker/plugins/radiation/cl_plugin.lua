@@ -16,17 +16,17 @@ function PLUGIN:HUDPaint()
 		surface.SetDrawColor(Color(0, 0, 0, 0))
 	elseif LocalPlayer():getRadiation() > 0 and LocalPlayer():getRadiation() <= 25 then
 		surface.SetMaterial(rad)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.SetDrawColor(Color(200, 200, 200, 255))
 	elseif LocalPlayer():getRadiation() > 25 and LocalPlayer():getRadiation() <= 45 then
 		surface.SetMaterial(rad2)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.SetDrawColor(Color(200, 200, 200, 255))
 	elseif LocalPlayer():getRadiation() > 45 and LocalPlayer():getRadiation() <= 75 then
 		surface.SetMaterial(rad3)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.SetDrawColor(Color(200, 200, 200, 255))
 	elseif LocalPlayer():getRadiation() > 75 and LocalPlayer():getRadiation() <= 100 then
 		surface.SetMaterial(rad4)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.SetDrawColor(Color(200, 200, 200, 255))
 	end
 
-	surface.DrawTexturedRect(ScrW()-80, ScrH()-300, 33, 35, Color(0, 255, 0, 255))
+	surface.DrawTexturedRect(ScrW()*0.86, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
 end

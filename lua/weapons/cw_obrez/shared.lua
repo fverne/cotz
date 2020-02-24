@@ -108,7 +108,7 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 5
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= "7.62x54mmR"
+SWEP.Primary.Ammo			= "7.62x54MMR"
 
 SWEP.FireDelay = 1.45
 SWEP.FireSound = "CW_WS_MOSIN_FIRE"

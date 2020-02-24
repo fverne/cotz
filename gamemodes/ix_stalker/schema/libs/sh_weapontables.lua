@@ -29,7 +29,7 @@ ix.weapontables.attachments["md_rmr"] = {name = "Trijicon RMR", slot = 1, uID = 
 ix.weapontables.attachments["md_schmidt_shortdot"] = {name = "Schmidt Shortdot", slot = 1, uID = "shortdot"}
 ix.weapontables.attachments["md_pso1"] = {name = "PSO-1", slot = 1, uID = "pso1"}
 ix.weapontables.attachments["md_psothermal"] = {name = "PSO-T", slot = 1, uID = "psothermal"}
-ix.weapontables.attachments["md_aimpoint"] = {name = "Aimpoint CompM4", slot = 1, uID = "pso1"}
+ix.weapontables.attachments["md_aimpoint"] = {name = "Aimpoint CompM4", slot = 1, uID = "aimpoint"}
 ix.weapontables.attachments["md_cmore"] = {name = "CMore Railway", slot = 1, uID = "cmore"}
 ix.weapontables.attachments["md_eotech"] = {name = "Eotech Holographic Sight", slot = 1, uID = "eotech"}
 ix.weapontables.attachments["md_reflex"] = {name = "King Arms MR", slot = 1, uID = "kingarmsmr"}

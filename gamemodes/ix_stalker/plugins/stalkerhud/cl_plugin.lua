@@ -1,10 +1,9 @@
-local Texture2 = Material("stalker/ui/bar.png", "noclamp smooth") 
+local Texture2 = Material("stalker/bars.png", "noclamp smooth") 
 local Texture7 = Material("stalker/ui/hud_hunger.png", "noclamp smooth") 
 local gun = Material("vgui/hud/gun.png", "noclamp smooth")
 local gun2 = Material("vgui/hud/gun2.png", "noclamp smooth") 
 local gun3 = Material("vgui/hud/gun3.png", "noclamp smooth") 
 local gun4 = Material("vgui/hud/gun4.png", "noclamp smooth") 
-local Texture1 = Material("stalker/ui/health.png", "noclamp smooth") 
 local Ammo = Material("stalker/ui/ammo.png", "noclamp smooth") 
 
 surface.CreateFont("stalkermainmenufont", {
@@ -16,6 +15,12 @@ surface.CreateFont("stalkermainmenufont", {
 surface.CreateFont("stalkerregularsmallfont", {
 	font = "alsina",
 	size = ScreenScale(6),
+	extended = true,
+	weight = 500
+})
+surface.CreateFont("stalkerregularsmallfont2", {
+	font = "alsina",
+	size = ScreenScale(7),
 	extended = true,
 	weight = 500
 })
@@ -91,19 +96,74 @@ function PLUGIN:HUDPaint()
 	local lp = LocalPlayer()
 	local wep = LocalPlayer():GetActiveWeapon()
 	local char = lp:GetCharacter()
+
 	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible()) then return end
 
-	surface.SetMaterial(Texture1)
-	surface.SetDrawColor(Color(255, 255, 255, 255))
-	surface.DrawTexturedRect(ScrW()-280, ScrH()-195, 250, 90, Color(41, 128, 185, 255))
+	local AmmoImage
+	local ammoType = wep:GetPrimaryAmmoType()
+	local ammoAmount = wep:Clip1()
+	local ammoBox = ""
+	local ammoSubClass = ""	
 
 	surface.SetMaterial(Ammo)
-	surface.SetDrawColor(Color(255, 255, 255, 255))
-	surface.DrawTexturedRect(ScrW()-250, ScrH()-115, 210, 90, Color(41, 128, 185, 255))
+	surface.SetDrawColor(Color(255, 255, 255, 200))
+	surface.DrawTexturedRect(ScrW()*0.81, ScrH()*0.835, ScrW()*0.1318, ScrH()*0.1172)
+
+	if IsValid( wep ) then
+		if wep:GetMaxClip1() > 0 then
+			draw.DrawText(tostring(wep:Clip1()), "stalkerregularfont", ScrW()*0.84, ScrH()*0.88, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+			draw.DrawText(tostring(lp:GetAmmoCount( wep:GetPrimaryAmmoType() )), "stalkerregularfont", ScrW()*0.84, ScrH()*0.91, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+		end
+	end
+
+	if IsValid( wep ) then
+		if string.sub(wep:GetClass(),1,3) == "cw_" then
+			if wep:GetMaxClip1() > 0 then
+				if wep:GetPrimaryAmmoType() then
+					if string.sub(game.GetAmmoName(wep:GetPrimaryAmmoType()) or "no", -1) == "-" then
+						--draw.DrawText( string.sub(game.GetAmmoName(wep:GetPrimaryAmmoType()), -3, -2) , "stalkerregularsmallfont", ScrW()*0.83, ScrH()*0.82, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
+						draw.DrawText( game.GetAmmoName(wep:GetPrimaryAmmoType()), "stalkerregularsmallfont2", ScrW()*0.83, ScrH()*0.838, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
+					else
+						--draw.DrawText( "--" , "stalkerregularsmallfont", ScrW()*0.83, ScrH()*0.82, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
+						draw.DrawText( game.GetAmmoName(wep:GetPrimaryAmmoType()), "stalkerregularsmallfont2", ScrW()*0.83, ScrH()*0.838, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
+					end
+				end
+			end
+		end
+	end
+
+	if wep:GetMaxClip1() > 0 then
+		if string.sub(wep:GetClass(),1,3) == "cw_" then
+			if game.GetAmmoName(wep:GetPrimaryAmmoType()) or "" != "" then
+				if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+					ammoSubClass = string.lower(string.sub(game.GetAmmoName(ammoType), -3, -2))
+					ammoBox = ix.weapontables.ammotypes[string.sub(game.GetAmmoName(ammoType), 1, -6)].uID
+					ammoBox = ammoBox..ammoSubClass
+				else
+					ammoBox = ix.weapontables.ammotypes[game.GetAmmoName(ammoType)].uID
+				end
+
+				if ammoBox then
+					if ix.item.list[ammoBox] then
+						AmmoImage = ix.item.list[ammoBox].img
+
+						surface.SetMaterial(AmmoImage)
+						surface.SetDrawColor(Color(255, 255, 255, 255))
+
+						if ix.item.list[ammoBox].width == 1 then
+							surface.DrawTexturedRect(ScrW()*0.89, ScrH()*0.87, 50, 50)
+						else
+							surface.DrawTexturedRect(ScrW()*0.86, ScrH()*0.87, 100, 50)
+						end
+					end
+				end	
+			end
+		end
+	end
 
 	surface.SetMaterial(Texture2)
-	surface.SetDrawColor(Color(255, 255, 255, 255))
-	surface.DrawTexturedRect(ScrW()-233, ScrH()-136, (1.72*math.Clamp( LocalPlayer():Health()/LocalPlayer():GetMaxHealth()*100, 0, 100 )), 17)
+	surface.SetDrawColor(Color(255, 120, 120, 255))
+	surface.DrawTexturedRectUV(ScrW()*0.05, ScrH()*0.905, math.Clamp(LocalPlayer():Health()/LocalPlayer():GetMaxHealth(), 0, 1)*ScrW()*0.15, ScrH()*0.008, 0, 0, math.Clamp(LocalPlayer():Health()/LocalPlayer():GetMaxHealth(), 0, 1)*1.4, 0)
 	
 /*
 	surface.SetMaterial(Texture7)
@@ -127,36 +187,23 @@ function PLUGIN:HUDPaint()
 				surface.SetDrawColor(Color(0, 0, 0, 0))
 			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 60 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 80 then
 				surface.SetMaterial(gun)
-				surface.SetDrawColor(Color(255, 255, 255, 255))
+				surface.SetDrawColor(Color(200, 200, 200, 255))
 			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 40 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 60 then
 				surface.SetMaterial(gun2)
-				surface.SetDrawColor(Color(255, 255, 255, 255))
+				surface.SetDrawColor(Color(200, 200, 200, 255))
 			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 20 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 40 then
 				surface.SetMaterial(gun3)
-				surface.SetDrawColor(Color(255, 255, 255, 255))
+				surface.SetDrawColor(Color(200, 200, 200, 255))
 			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 0 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 20 then
+
 				surface.SetMaterial(gun4)
-				surface.SetDrawColor(Color(255, 255, 255, 255))
+				surface.SetDrawColor(Color(200, 200, 200, 255))
 			end
 		else
 			surface.SetDrawColor(Color(0, 0, 0, 0))
 		end
 	end
-	surface.DrawTexturedRect(ScrW()-80, ScrH()-350, 33, 35, Color(0, 255, 0, 255))
-	
---AMMO
-	if IsValid( wep ) then
-		if wep:GetMaxClip1() > 0 then
-			draw.DrawText( tostring(wep:Clip1()) .. " / " .. tostring(lp:GetAmmoCount( wep:GetPrimaryAmmoType() )), "stalkermainmenufont", ScrW() -120, ScrH() -75, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
-			if wep:GetPrimaryAmmoType() then
-				if string.sub(game.GetAmmoName(wep:GetPrimaryAmmoType()) or "no", -1) == "-" then
-					draw.DrawText( string.sub(game.GetAmmoName(wep:GetPrimaryAmmoType()), -3, -2) , "stalkermainmenufont", ScrW() -210, ScrH() -75, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
-				else
-					draw.DrawText( "--" , "stalkermainmenufont", ScrW() -210, ScrH() -75, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
-				end
-			end
-		end
-	end
+	surface.DrawTexturedRect(ScrW()*0.9, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
 --// End HUD Code //--
 end
 

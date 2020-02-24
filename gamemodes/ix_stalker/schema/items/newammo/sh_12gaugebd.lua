@@ -8,4 +8,4 @@ ITEM.description= "A box that contains %s 12 gauge birdshot shells. "
 ITEM.longdesc = "Birdshot 12 gauge shell filled with 3 mm shot. Highly lethal at close range, but has poor armor piercing capabilities. Only suitable for use with smoothbore weapons."
 ITEM.price = 650
 ITEM.busflag = {"ammo"}
-ITEM.img = Material("vgui/hud/12gauge.png")
+ITEM.img = Material("vgui/hud/12gaugezl.png")

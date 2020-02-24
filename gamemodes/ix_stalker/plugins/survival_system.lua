@@ -193,18 +193,18 @@ function PLUGIN:HUDPaint()
 		surface.SetDrawColor(Color(0, 0, 0, 0))
 	elseif LocalPlayer():GetThirst() <= 60 and LocalPlayer():GetThirst() > 45 then
 		surface.SetMaterial(thirst)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.SetDrawColor(Color(200, 200, 200, 255))
 	elseif LocalPlayer():GetThirst() <= 45 and LocalPlayer():GetThirst() > 30 then
 		surface.SetMaterial(thirst2)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.SetDrawColor(Color(200, 200, 200, 255))
 	elseif LocalPlayer():GetThirst() <= 30 and LocalPlayer():GetThirst() > 15 then
 		surface.SetMaterial(thirst3)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.SetDrawColor(Color(200, 200, 200, 255))
 	elseif LocalPlayer():GetThirst() <= 15 then
 		surface.SetMaterial(thirst4)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.SetDrawColor(Color(200, 200, 200, 255))
 	end
-	surface.DrawTexturedRect(ScrW()-80, ScrH()-500, 33, 35, Color(0, 255, 0, 255))
+	surface.DrawTexturedRect(ScrW()*0.84, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
 
 	surface.SetMaterial(hunger)
 	if LocalPlayer():GetHunger() > 60 then
@@ -212,18 +212,18 @@ function PLUGIN:HUDPaint()
 		surface.SetDrawColor(Color(0, 0, 0, 0))
 	elseif LocalPlayer():GetHunger() <= 60 and LocalPlayer():GetHunger() > 45 then
 		surface.SetMaterial(hunger)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.SetDrawColor(Color(200, 200, 200, 255))
 	elseif LocalPlayer():GetHunger() <= 45 and LocalPlayer():GetHunger() > 30 then
 		surface.SetMaterial(hunger2)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.SetDrawColor(Color(200, 200, 200, 255))
 	elseif LocalPlayer():GetHunger() <= 30 and LocalPlayer():GetHunger() > 15 then
 		surface.SetMaterial(hunger3)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.SetDrawColor(Color(200, 200, 200, 255))
 	elseif LocalPlayer():GetHunger() <= 15 then
 		surface.SetMaterial(hunger4)
-		surface.SetDrawColor(Color(255, 255, 255, 255))
+		surface.SetDrawColor(Color(200, 200, 200, 255))
 	end
-	surface.DrawTexturedRect(ScrW()-80, ScrH()-450, 33, 35, Color(0, 255, 0, 255))
+	surface.DrawTexturedRect(ScrW()*0.82, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
 
 end
 
