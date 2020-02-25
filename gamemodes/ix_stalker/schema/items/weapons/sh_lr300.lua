@@ -4,18 +4,19 @@ ITEM.longdesc = "When one is looking for an M4 in the Zone, chances are he'll se
 ITEM.model = "models/weapons/w_lr300.mdl"
 ITEM.class = "cw_lr300"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 23100
+ITEM.width = 5
 ITEM.height = 2
 --ITEM.busflag = {"ARMS1_3", "SPECIAL5"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(5.1999998092651, 30, 5.5),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(-5, -205, 5),
+	ang = Angle(0, 90, 0),
+	fov = 12,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

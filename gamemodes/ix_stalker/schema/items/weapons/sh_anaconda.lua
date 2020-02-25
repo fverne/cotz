@@ -4,17 +4,18 @@ ITEM.longdesc = "The Colt Anaconda is a double action handgun chambered for the 
 ITEM.model = ("models/weapons/w_python.mdl")
 ITEM.class = "cw_python"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 7500
+ITEM.width = 2
 ITEM.height = 1
 ITEM.busflag = {"guns3_1"}
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(-10, -11, 1.5),
-	ang = Angle(0, 90, 0),
-	fov = 70
+	pos = Vector(10, 200, 1),
+	ang = Angle(0, 270, -2),
+	fov = 5,
 }
 
 ITEM.pacData = {

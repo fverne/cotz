@@ -4,17 +4,17 @@ ITEM.longdesc = "The Benelli M3 (Super 90) is a dual-mode shotgun designed and m
 ITEM.model = "models/weapons/w_cstm_m3super90.mdl"
 ITEM.class = "cw_m3super90"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 11500
+ITEM.width = 4
 ITEM.height = 1
 --ITEM.busflag = "ARMS1_2_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(-10, 31, 1.5),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(10, -205, 1.7000000476837),
+	ang = Angle(0, 90, 0),
+	fov = 12,
 }
 
 ITEM.pacData = {

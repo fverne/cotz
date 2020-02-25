@@ -4,18 +4,20 @@ ITEM.longdesc = "The PPSh is a Soviet submachinegun that gained a fearful reputa
 ITEM.model = "models/weapons/w_grub_ppsh_stick.mdl"
 ITEM.class = "cw_ppsh"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 4200
-ITEM.height = 2
+ITEM.width = 3
+ITEM.height = 1
 ITEM.busflag = {"guns1_1_1"}
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(-10, -12, -35),
-	ang = Angle(-90, 0, 3),
-	fov = 70
+	pos = Vector(0, 10.5, -235),
+	ang = Angle(-87.658996582031, 0, -178),
+	fov = 10.8,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

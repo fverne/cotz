@@ -4,18 +4,19 @@ ITEM.longdesc = "The Bizon is a submachinegun that features an uncommon large he
 ITEM.model = ("models/weapons/w_smg_biz.mdl")
 ITEM.class = "cw_pp19"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 16000
-ITEM.height = 2
+ITEM.width = 3
+ITEM.height = 1
 ITEM.busflag = {"guns1_1_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_kobra","md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm"}
 
 ITEM.iconCam = {
-ang= Angle(-0.70499622821808, 268.25439453125, 0),
-fov= 9.085652091515,
-pos= Vector(10, 200, -2)
+	pos = Vector(-4, -205, -1),
+	ang = Angle(0, 90, 0),
+	fov = 8.8,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

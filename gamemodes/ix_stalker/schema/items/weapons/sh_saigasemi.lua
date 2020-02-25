@@ -4,18 +4,19 @@ ITEM.longdesc = "The Saiga semi-automatic rifles are a family of Russian semi-au
 ITEM.model = "models/weapons/w_bfh_saiga308.mdl"
 ITEM.class = "cw_saigasport"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 22500
-ITEM.height = 2
+ITEM.width = 5
+ITEM.height = 1
 ITEM.busflag = {"guns4"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_kobra","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_nightforce_nxs","md_pso1","md_reflex","md_pbs1","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(-9, 28, 1),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(9, -205, 1),
+	ang = Angle(0, 90, 0),
+	fov = 11,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

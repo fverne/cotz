@@ -4,17 +4,17 @@ ITEM.longdesc = "The Striker-12 is an unique shotgun, as it is fed by a permanen
 ITEM.model = ("models/weapons/w_shot_strike.mdl")
 ITEM.class = "cw_striker"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 33900
-ITEM.height = 2
+ITEM.width = 3
+ITEM.height = 1
 --ITEM.busflag = "ARMS1_2_1_1"
 ITEM.repairCost = ITEM.price/100*1
-
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(-1, 15, -1),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(1, -205, -1.5),
+	ang = Angle(0, 90, 0),
+	fov = 7.5,
 }
 ITEM.pacData = {
 [1] = {

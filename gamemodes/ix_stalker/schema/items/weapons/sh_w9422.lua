@@ -4,18 +4,17 @@ ITEM.longdesc = "A modified version of the Winchester rifle. It is a traditional
 ITEM.model = ("models/weapons/tfa_nmrih/w_fa_win1892.mdl")
 ITEM.class = "cw_w9422"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 5000
+ITEM.width = 6
 ITEM.height = 1
 ITEM.busflag = {"guns"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_reflex","md_nightforce_nxs","md_tundra9mm"}
 
-ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(13.071895599365, 200, 0),
-	ang = Angle(0, 270, 0),
-	fov = 12.352941176471,
+	pos = Vector(13, -205, 0),
+	ang = Angle(0, 90, -0),
+	fov = 11.5,
 }
 
 ITEM.pacData = {

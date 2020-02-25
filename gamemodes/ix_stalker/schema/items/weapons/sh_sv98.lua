@@ -4,17 +4,17 @@ ITEM.longdesc = "The SV-98 is a Russian-made sniper rifle that was based on a ci
 ITEM.model = ("models/weapons/w_sv98_scopeless.mdl")
 ITEM.class = "cw_sv98"
 ITEM.weaponCategory = "primary"
-ITEM.width = 6
 ITEM.price = 48500
-ITEM.height = 2
+ITEM.width = 6
+ITEM.height = 1
 --ITEM.busflag = "ARMS2_4_1_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_nightforce_nxs","md_reflex","md_saker","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(0, -35, 0),
-	ang = Angle(0, 90, 0),
-	fov = 70
+	pos = Vector(0, 200, 0),
+	ang = Angle(0, 270, 0),
+	fov = 15,
 }
 
 ITEM.pacData = {

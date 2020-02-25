@@ -4,18 +4,19 @@ ITEM.longdesc = "The Saiga-12 is a 12-gauge shotgun available in a wide range of
 ITEM.model = "models/cw2/weapons/w_saiga_chan.mdl"
 ITEM.class = "cw_saiga12"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 30600
+ITEM.width = 5
 ITEM.height = 2
 --ITEM.busflag = "ARMS2_2_1_1"
 ITEM.repairCost = ITEM.price/100*1
-
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(-6.9000000953674, 28.299999237061, 1),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(7, -205, 1.6000000238419),
+	ang = Angle(0, 90, 0),
+	fov = 11,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

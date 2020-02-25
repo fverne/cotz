@@ -4,17 +4,19 @@ ITEM.longdesc = "As a weapon solely issued to the US Marines, the M16A4's origin
 ITEM.model = ("models/weapons/m16a4/w_rif_m16a4.mdl")
 ITEM.class = "cw_ws_m16a4"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 18000
+ITEM.width = 5
 ITEM.height = 2
 --ITEM.busflag = {"ARMS1_3", "SPECIAL5_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker","md_foregrip"}
+
 ITEM.iconCam = {
-ang= Angle(-0.70499622821808, 268.25439453125, 0),
-fov= 14.085652091515,
-pos= Vector(-9, 200, 0)
+	pos = Vector(15, -205, 1),
+	ang = Angle(0, 90, 0),
+	fov = 13.7,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

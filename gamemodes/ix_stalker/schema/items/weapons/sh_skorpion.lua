@@ -4,18 +4,19 @@ ITEM.longdesc = "The Škorpion vz. 61 is a Czechoslovak machine pistol developed
 ITEM.model = ("models/weapons/w_smg_skorp.mdl")
 ITEM.class = "cw_skorpion"
 ITEM.weaponCategory = "primary"
-ITEM.width = 2
 ITEM.price = 6200
-ITEM.height = 2
+ITEM.width = 3
+ITEM.height = 1
 ITEM.busflag = {"guns1_1_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_aimpoint","md_reflex","md_tundra9mm"}
 
 ITEM.iconCam = {
-	pos = Vector(9, 20, -2),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(-8, -205, -2),
+	ang = Angle(0, 90, 0),
+	fov = 9,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

@@ -4,18 +4,19 @@ ITEM.longdesc = "The Thompson submachine gun is an American submachine gun inven
 ITEM.model = ("models/khrcw2/doipack/w_thompson1928.mdl")
 ITEM.class = "cw_m1928a1"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 100
+ITEM.width = 4
 ITEM.height = 2
 ITEM.busflag = {"guns3_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_cobram2"}
 
 ITEM.iconCam = {
-	pos = Vector(-22, 8, -2),
-	ang = Angle(0, -0, 0),
-	fov = 70
+	pos = Vector(2, -205, -2),
+	ang = Angle(0, 90, 0),
+	fov = 11,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

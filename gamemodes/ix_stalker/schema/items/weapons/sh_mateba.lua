@@ -4,17 +4,19 @@ ITEM.longdesc = "The Mateba Model 6 Unica (often known simply as the Mateba or t
 ITEM.model = ("models/weapons/cwc_mateba/w_pist_mateba.mdl")
 ITEM.class = "cw_mateba"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 14000
+ITEM.width = 2
 ITEM.height = 1
 --ITEM.busflag = {"ARMS2_1_1", "SPECIAL5"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_rmr","md_saker"}
+
 ITEM.iconCam = {
-	pos = Vector(-7, 12, 0),
-	ang = Angle(0, 270, -5),
-	fov = 70
+	pos = Vector(8, -205, 1.5),
+	ang = Angle(0, 90, 0),
+	fov = 4.2,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

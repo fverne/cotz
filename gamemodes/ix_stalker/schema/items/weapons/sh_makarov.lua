@@ -4,19 +4,19 @@ ITEM.longdesc = "The Makarov is the replacement for the Tokarev pistol.\nIt's a 
 ITEM.model = "models/weapons/w_makarov_pm_fixed.mdl"
 ITEM.class = "cw_makarov"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 900
+ITEM.width = 2
 ITEM.height = 1
 ITEM.busflag = {"guns1_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.canAttach = false
 
-ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(-8, 215.68627929688, 4),
-	ang = Angle(0, 270, 4.7058825492859),
-	fov = 5,
+	pos = Vector(-7.5, -205, 4.5),
+	ang = Angle(0, 90, -5),
+	fov = 3.5,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

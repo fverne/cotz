@@ -4,17 +4,18 @@ ITEM.longdesc = "The MP5 is an iconic German submachinegun developed in the 1960
 ITEM.model = "models/srp/weapons/w_mp5.mdl"
 ITEM.class = "cw_mp5"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 12750
+ITEM.width = 3
 ITEM.height = 2
 --ITEM.busflag = {"ARMS1_1_1", "SPECIAL6"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm"}
 ITEM.validUpgrades = {"up_firerate1"}
+
 ITEM.iconCam = {
-	pos = Vector(10.071999549866, -205.14999389648, 0),
+	pos = Vector(10, -205, 2),
 	ang = Angle(0, 90, 0),
-	fov = 10,
+	fov = 9.7,
 }
 
 

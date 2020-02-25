@@ -4,18 +4,19 @@ ITEM.longdesc = "The RK 95 TP is the Finnish answer to the Kalashnikov rifles.\n
 ITEM.model = "models/weapons/world/rifles/rk95.mdl"
 ITEM.class = "cw_rk95"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 25150
+ITEM.width = 5
 ITEM.height = 2
 --ITEM.busflag = "ARMS2_3_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1"}
 
 ITEM.iconCam = {
-	pos = Vector(-3.5, 27, -1),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(3.7999999523163, -205, -1.7999999523163),
+	ang = Angle(0, 90, 0),
+	fov = 10.8,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

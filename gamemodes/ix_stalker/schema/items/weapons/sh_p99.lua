@@ -4,17 +4,19 @@ ITEM.longdesc = "The Walther P99 is a semi-automatic pistol developed by the Ger
 ITEM.model = ("models/srp/weapons/w_p99.mdl")
 ITEM.class = "cw_p99"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 4250
+ITEM.width = 2
 ITEM.height = 1
 ITEM.busflag = {"guns3"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_rmr","md_tundra9mm"}
+
 ITEM.iconCam = {
-	pos = Vector(-5, 8, 1.5),
-	ang = Angle(0, 270, 2),
-	fov = 70
+	pos = Vector(5.5, -205, 1.5),
+	ang = Angle(0, 90, 0),
+	fov = 3.5,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

@@ -4,18 +4,19 @@ ITEM.longdesc = "The Sten Gun was introduced when the British army was facing a 
 ITEM.model = ("models/weapons/w_smg_ste.mdl")
 ITEM.class = "cw_sten"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 3500
-ITEM.height = 2
+ITEM.width = 3
+ITEM.height = 1
 ITEM.busflag = {"guns3"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_tundra9mm"}
 
 ITEM.iconCam = {
-	pos = Vector(0, 200, 0),
-	ang = Angle(0, 270, 0),
-	fov = 12.777777777778
+	pos = Vector(0, -200, -2),
+	ang = Angle(0, 90, 0),
+	fov = 12,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {
