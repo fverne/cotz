@@ -31,6 +31,8 @@ ix.util.Include("sv_hooks.lua")
 ix.util.Include("meta/sh_character.lua")
 ix.util.Include("meta/sh_player.lua")
 ix.util.Include("meta/sh_item.lua")
+ix.util.Include("meta/sh_inventory.lua")
+
 
 ix.flag.Add("1", "Trader.")
 ix.flag.Add("A", "Admin")
