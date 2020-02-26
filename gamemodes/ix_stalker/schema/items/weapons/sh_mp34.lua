@@ -4,18 +4,19 @@ ITEM.longdesc = "The MP34 is a submachine gun that was manufactured by Waffenfab
 ITEM.model = ("models/khrcw2/doipack/w_mp34.mdl")
 ITEM.class = "cw_mp34"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 9600
+ITEM.width = 4
 ITEM.height = 2
 ITEM.busflag = {"guns3_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_tundra9mm"}
 
---ITEM.iconCam = {
---	pos = Vector(-22, 8, -2),
---	ang = Angle(0, -0, 0),
---	fov = 70
---}
+ITEM.iconCam = {
+	pos = Vector(2, -205, 0),
+	ang = Angle(0, 90, 0),
+	fov = 11.5,
+}
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

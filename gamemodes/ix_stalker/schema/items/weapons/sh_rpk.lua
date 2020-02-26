@@ -4,18 +4,19 @@ ITEM.longdesc = "A modification of the AK rifle, fit with a more supporting stoc
 ITEM.model = ("models/weapons/w_rif_rpkm.mdl")
 ITEM.class = "cw_rpk"
 ITEM.weaponCategory = "primary"
-ITEM.width = 5
 ITEM.price = 45000
+ITEM.width = 6
 ITEM.height = 2
 --ITEM.busflag = "ARMS2_2_1_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_kobra","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_pso1","md_reflex","md_pbs1","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(-11, 30, 0),
-	ang = Angle(0, 270, 2),
-	fov = 70
+	pos = Vector(11, -205, -1),
+	ang = Angle(0, 90, 0),
+	fov = 12,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

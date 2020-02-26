@@ -4,17 +4,17 @@ ITEM.longdesc = "When the Stetchkin automatic pistol was phased out of Soviet ar
 ITEM.model = "models/weapons/w_ma85_wf_pt10.mdl"
 ITEM.class = "cw_stechaps"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price =  7500
+ITEM.width = 2
 ITEM.height = 1
 --ITEM.busflag = "ARMS2_1_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_tundra9mm"}
 
 ITEM.iconCam = {
-	pos = Vector(-10, 4.5, -2.4000000953674),
-	ang = Angle(0, -0, 0),
-	fov = 70
+	pos = Vector(200, -5, -2.5),
+	ang = Angle(180, -0, 180),
+	fov = 4,
 }
 
 ITEM.pacData = {

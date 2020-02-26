@@ -4,16 +4,17 @@ ITEM.longdesc = "The AK-12, also known as the AK-200, is the newest member of th
 ITEM.model = "models/weapons/w_rif_ak12.mdl"
 ITEM.class = "cw_ak12"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 29600
+ITEM.width = 5
 ITEM.height = 2
 --ITEM.busflag = "ARMS2_3_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip"}
+
 ITEM.iconCam = {
-	pos = Vector(-10, 33, 0.5),
-	ang = Angle(0, 270, 3),
-	fov = 70
+	pos = Vector(8.8999996185303, -205, 0),
+	ang = Angle(0, 90, 2.3529412746429),
+	fov = 11.5,
 }
 
 ITEM.pacData = {

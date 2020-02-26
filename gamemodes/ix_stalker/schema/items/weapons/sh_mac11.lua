@@ -4,16 +4,17 @@ ITEM.longdesc = "The MAC-11 is the milder alternative to the formidable MAC-10.\
 ITEM.model = "models/weapons/w_cst_mac11.mdl"
 ITEM.class = "cw_mac11"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 6000
+ITEM.width = 2
 ITEM.height = 2
 ITEM.busflag = {"guns3"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm"}
+
 ITEM.iconCam = {
-	pos = Vector(-9.5, 10.5, 1.5),
-	ang = Angle(0, 270, 3),
-	fov = 70
+	pos = Vector(9.5, -200, 1),
+	ang = Angle(0, 90, 3),
+	fov = 4.3,
 }
 
 ITEM.pacData = {

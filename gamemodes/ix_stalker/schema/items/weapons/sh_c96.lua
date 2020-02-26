@@ -4,21 +4,20 @@ ITEM.longdesc = "It has a few distinctive characteristics, mainly the integral b
 ITEM.model = "models/khrcw2/doipack/w_c96.mdl"
 ITEM.class = "cw_c96"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 3
 ITEM.price = 1000
+ITEM.width = 2
 ITEM.height = 1
 ITEM.busflag = {"guns1_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.canAttach = true
 ITEM.validAttachments = {"md_rmr","md_tundra9mm"}
 
-
-ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(-8, 215.68627929688, 4),
-	ang = Angle(0, 270, 4.7058825492859),
-	fov = 5,
+	pos = Vector(5, -205, -2),
+	ang = Angle(0, 90, 0),
+	fov = 6,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

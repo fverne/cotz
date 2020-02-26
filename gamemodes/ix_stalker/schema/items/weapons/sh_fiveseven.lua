@@ -4,18 +4,19 @@ ITEM.longdesc = "The FiveSeven and its iconic cartridge, the FN 5.7x28mm, was de
 ITEM.model = "models/weapons/w_pist_fiveseven.mdl"
 ITEM.class = "cw_fiveseven"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 6900
+ITEM.width = 2
 ITEM.height = 1
 --ITEM.busflag = {"ARMS1_1", "SPECIAL1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_rmr","md_tundra9mm"}
 
 ITEM.iconCam = {
-	pos = Vector(-2.5999999046326, 10, 3.5),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(3, -205, 3.4000000953674),
+	ang = Angle(0, 90, 0),
+	fov = 4,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

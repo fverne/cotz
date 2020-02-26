@@ -4,18 +4,19 @@ ITEM.longdesc = "The IMI Desert Eagle is a semi-automatic handgun notable for ch
 ITEM.model = "models/weapons/w_pist_deagle.mdl"
 ITEM.class = "cw_deagle"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 14000
+ITEM.width = 2
 ITEM.height = 1
 --ITEM.busflag = {"ARMS1_1_1", "SPECIAL5_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_rmr","md_cobram2"}
 
 ITEM.iconCam = {
-	ang= Angle(-0.70499622821808, 268.25439453125, 0),
-	fov= 5.085652091515,
-	pos= Vector(0, 200, 1)
+	pos = Vector(4, -205, 3.7000000476837),
+	ang = Angle(0, 90, 0),
+	fov = 4.5,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

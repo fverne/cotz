@@ -4,18 +4,19 @@ ITEM.longdesc = "The VSS 'Vintorez' is issued primarily to Spetsnaz units for un
 ITEM.model = ("models/cw2/rifles/w_vss.mdl")
 ITEM.class = "cw_vss"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
+ITEM.width = 5
 ITEM.price = 45000
-ITEM.height = 2
+ITEM.height = 1
 --ITEM.busflag = {"ARMS2_4_1", "SPECIAL4_1_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_kobra","md_pso1","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(0, -32, 0),
-	ang = Angle(0, 90, 0),
-	fov = 70
+	pos = Vector(0, 200, 0),
+	ang = Angle(0, 270, 0),
+	fov = 13,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

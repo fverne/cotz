@@ -4,17 +4,17 @@ ITEM.longdesc = "The Mk 14 Enhanced Battle Rifle (EBR) is an American selective 
 ITEM.model = "models/weapons/w_cstm_m14.mdl"
 ITEM.class = "cw_m14"
 ITEM.weaponCategory = "primary"
-ITEM.width = 5
 ITEM.price = 37500
-ITEM.height = 2
+ITEM.width = 5
+ITEM.height = 1
 --ITEM.busflag = "ARMS1_2_1_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_nightforce_nxs","md_reflex","md_saker","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(-11.5, 27.5, 1.5),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(10.89999961853, -205, 1),
+	ang = Angle(0, 90, 0),
+	fov = 12,
 }
 
 ITEM.pacData = {

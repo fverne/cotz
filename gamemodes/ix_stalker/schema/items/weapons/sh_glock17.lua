@@ -4,18 +4,20 @@ ITEM.longdesc = "The Glock is an Austrian polymer handgun, famous for it's price
 ITEM.model = "models/weapons/w_pist_glock30.mdl"
 ITEM.class = "cw_glock17"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 4800
+ITEM.width = 2
 ITEM.height = 1
 ITEM.busflag = {"guns3"}
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(0.89999997615814, -9, -1.6000000238419),
-	ang = Angle(0, 90, 0),
-	fov = 70
+	pos = Vector(-0.80000001192093, 200, -1.7000000476837),
+	ang = Angle(0, 270, 0),
+	fov = 3.6,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

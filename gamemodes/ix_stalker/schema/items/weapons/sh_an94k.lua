@@ -4,18 +4,19 @@ ITEM.longdesc = "The AN-94 offers a unique two-shot burst function at a stated 1
 ITEM.model = "models/srp/weapons/w_abakan.mdl"
 ITEM.class = "cw_an94k"
 ITEM.weaponCategory = "primary"
-ITEM.width = 4
 ITEM.price = 28600
+ITEM.width = 5
 ITEM.height = 2
 --ITEM.busflag = "ARMS2_3_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_kobra", "md_pso1", "md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip"}
 
 ITEM.iconCam = {
-	ang= Angle(-0.70499622821808, 268.25439453125, 0),
-	fov= 12.085652091515,
-	pos= Vector(-6.5, 200, -1)
+	pos = Vector(13, -205, 0),
+	ang = Angle(0, 90, 0),
+	fov = 11.5,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

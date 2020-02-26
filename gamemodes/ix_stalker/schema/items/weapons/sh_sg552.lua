@@ -4,17 +4,17 @@ ITEM.longdesc = "The Sig 552 is the carbine version of the 550 rifle, often agre
 ITEM.model = ("models/weapons/w_rif_tg552.mdl")
 ITEM.class = "cw_sg552"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 24000
+ITEM.width = 5
 ITEM.height = 2
 --ITEM.busflag = "ARMS1_3_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker"}
 
 ITEM.iconCam = {
-	pos = Vector(-7.5, 156.86274719238, 0),
-	ang = Angle(0, 270, 0),
-	fov = 13.52
+	pos = Vector(7.5, -205, 1),
+	ang = Angle(0, 90, 0),
+	fov = 10.5,
 }
 
 ITEM.pacData = {

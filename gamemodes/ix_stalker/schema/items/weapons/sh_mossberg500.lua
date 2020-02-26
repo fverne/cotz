@@ -4,18 +4,19 @@ ITEM.longdesc = "The Mossberg 500 is one of the most popular smooth-bore pump ac
 ITEM.model = "models/weapons/w_shot_mossberg5.mdl"
 ITEM.class = "cw_mossberg500"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
+ITEM.width = 4
 ITEM.price = 10200
 ITEM.height = 1
 ITEM.busflag = {"guns2_1_1"}
 ITEM.repairCost = ITEM.price/100*1
-
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(-2.2000000476837, -23, 1),
-	ang = Angle(0, 90, 5),
-	fov = 70
+	pos = Vector(2, 200, 0.5),
+	ang = Angle(0, 270, 5),
+	fov = 10,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

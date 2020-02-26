@@ -4,18 +4,21 @@ ITEM.longdesc = "The Degtyaryov machine gun or DP is a light machine gun firing 
 ITEM.model = ("models/weapons/w_ro2_dp28.mdl")
 ITEM.class = "cw_dp28"
 ITEM.weaponCategory = "primary"
-ITEM.width = 6
 ITEM.price = 555000
-ITEM.height = 2
+ITEM.width = 8
+ITEM.height = 3
 ITEM.flag = "0"
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(-15, 45, -2),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(15, -205, -3),
+	ang = Angle(0, 90, 0),
+	fov = 18,
 }
+
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

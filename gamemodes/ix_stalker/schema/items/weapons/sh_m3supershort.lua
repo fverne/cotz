@@ -4,17 +4,17 @@ ITEM.longdesc = "The Super-Shorty is a compact, stockless, pump-action AOW chamb
 ITEM.model = "models/weapons/w_shot_shortygun.mdl"
 ITEM.class = "cw_m3supershort"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 7200
+ITEM.width = 2
 ITEM.height = 1
 ITEM.busflag = {"guns2_1_1"}
 ITEM.repairCost = ITEM.price/100*1
-
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(1.3999999761581, 11, -2.5),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(-1, -205, -2.7000000476837),
+	ang = Angle(0, 90, 0),
+	fov = 5,
 }
 
 ITEM.pacData = {

@@ -4,18 +4,19 @@ ITEM.longdesc = "The UMP is a blowback operated, magazine-fed submachine gun fir
 ITEM.model = ("models/weapons/w_smg_ump45.mdl")
 ITEM.class = "cw_ump45"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 14700
+ITEM.width = 3
 ITEM.height = 2
 --ITEM.busflag = "ARMS1_1_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_cobram2"}
 
 ITEM.iconCam = {
-	pos = Vector(2, 22, 4),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(-2, -205, 4),
+	ang = Angle(0, 90, 0),
+	fov = 8.4,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

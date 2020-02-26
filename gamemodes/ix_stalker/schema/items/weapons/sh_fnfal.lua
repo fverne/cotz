@@ -4,17 +4,17 @@ ITEM.longdesc = "Nicknamed ”The Right Arm of The Free World”, the FAL was a 
 ITEM.model = "models/hgn/srp/weapons/w_rif_fnfal.mdl"
 ITEM.class = "cw_fnfal"
 ITEM.weaponCategory = "primary"
-ITEM.width = 5
 ITEM.price = 36000
+ITEM.width = 6
 ITEM.height = 2
 --ITEM.busflag = "ARMS1_2_1_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(-12, 32, 1.5),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(12, -205, 1),
+	ang = Angle(0, 90, 2),
+	fov = 12.3,
 }
 
 ITEM.pacData = {

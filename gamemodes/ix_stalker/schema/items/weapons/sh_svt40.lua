@@ -4,18 +4,19 @@ ITEM.longdesc = "The SVT-40 is a Soviet semi-automatic battle rifle.\nThe SVT-40
 ITEM.model = ("models/weapons/w_svt40.mdl")
 ITEM.class = "cw_svt40"
 ITEM.weaponCategory = "primary"
-ITEM.width = 6
 ITEM.price = 23000
-ITEM.height = 2
+ITEM.width = 6
+ITEM.height = 1
 --ITEM.busflag = "ARMS2_4_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_pso1","md_pbs1"}
 
 ITEM.iconCam = {
-	pos = Vector(-3, -32, 1),
-	ang = Angle(0, 90, 0),
-	fov = 70
+	pos = Vector(3, 200, 1.5),
+	ang = Angle(0, 270, 0),
+	fov = 12.7,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

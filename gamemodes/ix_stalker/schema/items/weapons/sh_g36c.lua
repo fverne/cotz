@@ -4,18 +4,19 @@ ITEM.longdesc = "This subcarbine model is a further development of the G36K.\nIt
 ITEM.model = "models/weapons/cw20_g36c.mdl"
 ITEM.class = "cw_g36c"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 24900
+ITEM.width = 4
 ITEM.height = 2
 --ITEM.busflag = "ARMS1_3_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(-6.3000001907349, 22, 1.5),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(6.5, -205, 1.3999999761581),
+	ang = Angle(0, 90, 0),
+	fov = 9,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

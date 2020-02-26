@@ -4,18 +4,19 @@ ITEM.longdesc = "The FAMAS is the French army's service rifle, one of the more w
 ITEM.model = "models/weapons/w_rif_famas.mdl"
 ITEM.class = "cw_famas"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 23700
+ITEM.width = 5
 ITEM.height = 2
 --ITEM.busflag = "ARMS1_3_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker"}
 
 ITEM.iconCam = {
-	pos = Vector(6, 27.5, 7),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(-6, -205, 6),
+	ang = Angle(0, 90, 0),
+	fov = 10.5,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

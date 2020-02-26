@@ -4,18 +4,19 @@ ITEM.longdesc = "The Sterling was taken into service as a replacement for the St
 ITEM.model = ("models/weapons/b_sterling.mdl")
 ITEM.class = "cw_sterling"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 9600
-ITEM.height = 2
+ITEM.width = 3
+ITEM.height = 1
 ITEM.busflag = {"guns3_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_tundra9mm"}
 
 ITEM.iconCam = {
-	pos = Vector(-22, 8, -2),
-	ang = Angle(0, -0, 0),
-	fov = 70
+	pos = Vector(200, -8, -3),
+	ang = Angle(180, -0, 180),
+	fov = 9,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

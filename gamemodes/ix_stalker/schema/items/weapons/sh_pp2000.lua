@@ -4,16 +4,17 @@ ITEM.longdesc = "The PP-2000 is a conventional blowback-operated weapon.\nThe PP
 ITEM.model = "models/weapons/w_bf4_pp2000.mdl"
 ITEM.class = "cw_pp2000"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 14000
-ITEM.height = 2
+ITEM.width = 3
+ITEM.height = 1
 --ITEM.busflag = {"ARMS2_1_1", "SPECIAL4"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm"}
+
 ITEM.iconCam = {
-	pos = Vector(-2.0999999046326, 19, -1),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(2, -205, -1.2999999523163),
+	ang = Angle(0, 90, 0),
+	fov = 9.5,
 }
 
 ITEM.pacData = {

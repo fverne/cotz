@@ -4,17 +4,17 @@ ITEM.longdesc = "This sawn-off double barrelled shotgun is a must-have in many r
 ITEM.model = ("models/weapons/w_sawnoff.mdl")
 ITEM.class = "cw_shawedoff"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 4400
+ITEM.width = 3
 ITEM.height = 1
 ITEM.busflag = {"guns2"}
 ITEM.repairCost = ITEM.price/100*1
-
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(0.5, 14, -1.5),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(-0.80000001192093, -205, -2),
+	ang = Angle(0, 90, 0),
+	fov = 5,
 }
 
 ITEM.pacData = {

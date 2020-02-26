@@ -4,18 +4,20 @@ ITEM.longdesc = "A well-used sawn-off Mosin Nagant rifle, it's exact model is un
 ITEM.model = ("models/weapons/w_obrez.mdl")
 ITEM.class = "cw_obrez"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 7350
+ITEM.width = 2
 ITEM.height = 1
 ITEM.busflag = {"guns6"}
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(-4, -20, 2),
-	ang = Angle(0, 90, 0),
-	fov = 70
+	pos = Vector(4, 200, 1.3999999761581),
+	ang = Angle(0, 270, 0),
+	fov = 7,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

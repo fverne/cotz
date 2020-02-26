@@ -9,12 +9,12 @@ ITEM.price = 3000
 ITEM.height = 1
 ITEM.busflag = {"guns"}
 ITEM.repairCost = ITEM.price/100*1
-
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(2, -10, -1.5),
-	ang = Angle(0, 90, 0),
-	fov = 70
+	pos = Vector(-2, 200, -1.6000000238419),
+	ang = Angle(0, 270, -1.2000000476837),
+	fov = 4,
 }
 
 ITEM.pacData = {

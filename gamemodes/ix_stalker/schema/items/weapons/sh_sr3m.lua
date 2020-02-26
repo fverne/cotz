@@ -4,18 +4,19 @@ ITEM.longdesc = "The SR-3M 'Vikhr' is based on the AS 'Val' silenced assault rif
 ITEM.model = ("models/weapons/w_dmg_vikhr.mdl")
 ITEM.class = "cw_sr3m"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 45000
+ITEM.width = 4
 ITEM.height = 2
 --ITEM.busflag = "ARMS2_2_1_1"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_kobra","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_pso1","md_reflex","md_pbs1","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(-11, -27, -3),
-	ang = Angle(0, 90, 10),
-	fov = 70
+	pos = Vector(11, 200, -1.8999999761581),
+	ang = Angle(0, 270, 10),
+	fov = 10,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

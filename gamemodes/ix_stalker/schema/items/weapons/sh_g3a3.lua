@@ -4,7 +4,7 @@ ITEM.longdesc = "The G3 was Germany's response to the more expensive FAL rifle, 
 ITEM.model = "models/weapons/w_hk_g3.mdl"
 ITEM.class = "cw_g3a3"
 ITEM.weaponCategory = "primary"
-ITEM.width = 5
+ITEM.width = 6
 ITEM.price = 34250
 ITEM.height = 2
 --ITEM.busflag = "ARMS1_2_1_1"
@@ -12,10 +12,11 @@ ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_nightforce_nxs","md_reflex","md_saker","md_foregrip"}
 
 ITEM.iconCam = {
-	pos = Vector(-10, 29, 2),
-	ang = Angle(0, 270, -5),
-	fov = 70
+	pos = Vector(10, -205, 3),
+	ang = Angle(0, 90, -5.5),
+	fov = 11.5,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

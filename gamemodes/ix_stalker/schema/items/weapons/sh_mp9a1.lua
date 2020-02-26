@@ -4,17 +4,17 @@ ITEM.longdesc = "The Machine Pistol 9 is a Swiss-made submachinegun from the ear
 ITEM.model = ("models/weapons/w_smg_mp9a1.mdl")
 ITEM.class = "cw_mp9a1"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 11100
+ITEM.width = 2
 ITEM.height = 2
 ITEM.busflag = {"guns3_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm"}
 
 ITEM.iconCam = {
-	pos = Vector(4.5, 13, -4),
-	ang = Angle(0, 270, 2),
-	fov = 70
+	pos = Vector(-4, -205, -4),
+	ang = Angle(0, 90, 0),
+	fov = 4.6,
 }
 
 ITEM.pacData = {

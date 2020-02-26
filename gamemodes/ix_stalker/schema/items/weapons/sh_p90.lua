@@ -4,18 +4,19 @@ ITEM.longdesc = "The FN P90 is the sister gun to the FN FiveSeven pistol, develo
 ITEM.model = ("models/weapons/therambotnic09/w_cst_p90.mdl")
 ITEM.class = "cw_p90"
 ITEM.weaponCategory = "primary"
-ITEM.width = 3
 ITEM.price = 19000
+ITEM.width = 3
 ITEM.height = 2
 --ITEM.busflag = {"ARMS1_1_1", "SPECIAL5_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm"}
 
 ITEM.iconCam = {
-	pos = Vector(-7, 17, 3.5),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(7, -205, 3.5),
+	ang = Angle(0, 90, 0),
+	fov = 6.5,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

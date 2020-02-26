@@ -4,17 +4,17 @@ ITEM.longdesc = "A russian submachinegun, the OTS-02 is a blowback-operated weap
 ITEM.model = ("models/weapons/w_smg_skorp.mdl")
 ITEM.class = "cw_kiparis"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 6300
-ITEM.height = 2
+ITEM.width = 3
+ITEM.height = 1
 ITEM.busflag = {"guns1_1_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_tundra9mm"}
 
 ITEM.iconCam = {
-	pos = Vector(-10, -16, 0),
+	pos = Vector(-8, -205, -2),
 	ang = Angle(0, 90, 0),
-	fov = 70
+	fov = 9,
 }
 
 ITEM.pacData = {

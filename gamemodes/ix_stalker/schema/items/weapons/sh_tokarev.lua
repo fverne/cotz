@@ -4,18 +4,20 @@ ITEM.longdesc = "The TT-30 is a Russian semi-automatic pistol.\nIt was developed
 ITEM.model = ("models/weapons/w_pist_tt38.mdl")
 ITEM.class = "cw_tokarev"
 ITEM.weaponCategory = "secondary"
-ITEM.width = 2
 ITEM.price = 800
+ITEM.width = 2
 ITEM.height = 1
 ITEM.busflag = {"guns1"}
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.canAttach = false
+
 ITEM.iconCam = {
-	pos = Vector(0.5, -11, -1.7999999523163),
-	ang = Angle(0, 90, 0),
-	fov = 70
+	pos = Vector(-0.5, 200, -1.7000000476837),
+	ang = Angle(0, 270, 0),
+	fov = 4,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

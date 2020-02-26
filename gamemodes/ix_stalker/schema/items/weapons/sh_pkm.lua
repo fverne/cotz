@@ -4,18 +4,19 @@ ITEM.longdesc = "The PK is a 7.62x54mm general-purpose machine gun designed in t
 ITEM.model = ("models/weapons/w_mach_pkmbenis.mdl")
 ITEM.class = "cw_pkm"
 ITEM.weaponCategory = "primary"
-ITEM.width = 6
 ITEM.price = 80000
+ITEM.width = 6
 ITEM.height = 2
 ITEM.flag = "0"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_pbs1"}
 
 ITEM.iconCam = {
-	pos = Vector(-9.1999998092651, 32, 2),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(9.5, -205, 2.5),
+	ang = Angle(0, 90, -2),
+	fov = 12.5,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {
