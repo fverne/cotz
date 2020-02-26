@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-13.292, -5.403, -2.197),
+						["Angles"] = Angle(0, 180, 0),
+						["Position"] = Vector(-11.714, -2.715, 4.444),
 						["Model"] = "models/weapons/w_smg_mp9a1.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "79898994673",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "mp9a1",
 					},
 				},

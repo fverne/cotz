@@ -3,7 +3,7 @@ ITEM.description= "A submachinegun with a folded stock. Fires 9x18mm."
 ITEM.longdesc = "A russian submachinegun, the OTS-02 is a blowback-operated weapon of a conventional design chambered in 9×18mm Makarov.\n\nAmmo: 9x18mm\nMagazine Capacity: 30"
 ITEM.model = ("models/weapons/w_smg_skorp.mdl")
 ITEM.class = "cw_kiparis"
-ITEM.weaponCategory = "primary"
+ITEM.weaponCategory = "secondary"
 ITEM.width = 2
 ITEM.price = 6300
 ITEM.height = 2
@@ -26,15 +26,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-14.65, -0.247, -9.327),
+						["Angles"] = Angle(0, 180, 0),
+						["Position"] = Vector(-11.007, -2.714, 3.862),
 						["Model"] = "models/weapons/w_smg_skorp.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "8544325421",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "kiparis",
-						["AngleOffset"] = Angle(200, 0, 0),
 					},
 				},
 			},
