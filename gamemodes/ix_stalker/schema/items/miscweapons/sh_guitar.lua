@@ -1,6 +1,6 @@
 ITEM.name = "Guitar"
 ITEM.description = "An acoustic guitar."
-ITEM.model = "models/custom/guitar/m_d_45.mdl"
+ITEM.model = "models/kek1ch/dev_guitar.mdl"
 ITEM.class = "guitar"
 ITEM.weaponCategory = "primary"
 ITEM.price = 500
@@ -25,13 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(-28.537, 90, -173.5),
-						["Position"] = Vector(-10.705, -7.085, 15.227),
-						["Model"] = "models/custom/guitar/m_d_45.mdl",
+						["Angles"] = Angle(0, 0, 90),
+						["Position"] = Vector(13.915, -0.932, -3.453),
+						["Model"] = "models/kek1ch/dev_guitar.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "7978994673",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "guitar",
 					},
 				},
