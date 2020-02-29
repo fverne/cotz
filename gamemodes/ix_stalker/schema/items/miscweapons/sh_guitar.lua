@@ -6,16 +6,19 @@ ITEM.weaponCategory = "primary"
 ITEM.price = 500
 --ITEM.busflag = {"MERCH3", "SPECIAL7_1"}
 ITEM.busflag = {"hardware1_1"}
-ITEM.height = 2
-ITEM.width = 4
+ITEM.height = 1
+ITEM.width = 3
 ITEM.category = nil
 ITEM.repairCost = ITEM.price/100*1
 ITEM.canAttach = false
+
+ITEM.exRender = true
 ITEM.iconCam = {
-	ang= Angle(-0.70499622821808, 268.25439453125, 90),
-	fov= 16.085652091515,
-	pos= Vector(8, 200, 22)
+	ang= Angle(90, 90, 0),
+	fov= 12,
+	pos= Vector(-10, 0, 200)
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {
