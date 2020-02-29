@@ -23,6 +23,11 @@ if CLIENT then
 	SWEP.ForeGripOffsetCycle_Reload_Empty = 0.8
 	SWEP.FireMoveMod = 1
 
+	SWEP.DrawTraditionalWorldModel = false
+	SWEP.WM = "models/dobytchick/weapons/gmzone/deadair/w_kiparis.mdl"
+	SWEP.WMPos = Vector(2, -3, 1)
+	SWEP.WMAng = Vector(-5, 180, 180)
+
 	SWEP.BoltBone = "Bolt"
 	SWEP.BoltShootOffset = Vector(-2, 0, 0)
 
@@ -96,7 +101,7 @@ SWEP.Instructions	= ""
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/v_notmicro_kiparis.mdl"
-SWEP.WorldModel		= "models/weapons/w_smg_skorp.mdl"
+SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_kiparis.mdl"
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

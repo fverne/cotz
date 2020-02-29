@@ -9,10 +9,14 @@ function PLUGIN:CanDrawAmmoHUD()
 	return false
 end
 
+function PLUGIN:ShouldHideBars()
+	return true
+end
+
 if ix.bar then
-	ix.bar.Remove("health")
-	ix.bar.Remove("armor")
-	ix.bar.Remove("stm")
+	--ix.bar.Remove("health")
+	--ix.bar.Remove("armor")
+	--ix.bar.Remove("stm")
 
 	function ix.bar.DrawAction()
 		local start, finish = ix.bar.actionStart, ix.bar.actionEnd
