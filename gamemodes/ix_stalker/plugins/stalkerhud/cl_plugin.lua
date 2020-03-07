@@ -120,13 +120,7 @@ function PLUGIN:HUDPaint()
 		if string.sub(wep:GetClass(),1,3) == "cw_" then
 			if wep:GetMaxClip1() > 0 then
 				if wep:GetPrimaryAmmoType() then
-					if string.sub(game.GetAmmoName(wep:GetPrimaryAmmoType()) or "no", -1) == "-" then
-						--draw.DrawText( string.sub(game.GetAmmoName(wep:GetPrimaryAmmoType()), -3, -2) , "stalkerregularsmallfont", ScrW()*0.83, ScrH()*0.82, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
-						draw.DrawText( game.GetAmmoName(wep:GetPrimaryAmmoType()), "stalkerregularsmallfont2", ScrW()*0.83, ScrH()*0.838, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
-					else
-						--draw.DrawText( "--" , "stalkerregularsmallfont", ScrW()*0.83, ScrH()*0.82, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
-						draw.DrawText( game.GetAmmoName(wep:GetPrimaryAmmoType()), "stalkerregularsmallfont2", ScrW()*0.83, ScrH()*0.838, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
-					end
+					draw.DrawText( language.GetPhrase(game.GetAmmoName(wep:GetPrimaryAmmoType()).."_ammo"), "stalkerregularsmallfont2", ScrW()*0.83, ScrH()*0.838, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
 				end
 			end
 		end

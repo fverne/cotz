@@ -374,11 +374,6 @@ function ITEM:Equip(client)
 
 				weapon1:SetClip1(self:GetData("ammo", 0))
 			end)
-		else
-			timer.Simple(0.1,function()
-				local weapon1 = client:GetActiveWeapon()
-				weapon1:SetClip1(self:GetData("ammo", 0))
-			end)
 		end
 
 		if (self.isGrenade) then

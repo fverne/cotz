@@ -1,7 +1,7 @@
 ITEM.name = "MP5k"
 ITEM.description= "A small, black submachinegun. Fires 9x19mm."
 ITEM.longdesc = "A shorter version of the German MP5 submachinegun, mostly identical to the original. It lacks the stock and thus suffers from higher recoil.\nHowever, the gun is very compact and can be easily hidden under most jackets, making it a formidable backup solution.\nThe shorter design means that the bolt is lighter, leading to a higher rate of fire.\n\nAmmo: 9x19mm\nMagazine Capacity: 30"
-ITEM.model = ("models/weapons/w_smg_mpk.mdl")
+ITEM.model = ("models/weapons/w_tfa_dmm5k.mdl")
 ITEM.class = "cw_mp5k"
 ITEM.weaponCategory = "primary"
 ITEM.width = 2
@@ -11,9 +11,9 @@ ITEM.busflag = {"guns3_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm"}
 ITEM.iconCam = {
-	pos = Vector(1.5, 12, -1),
-	ang = Angle(0, 270, 0),
-	fov = 70
+	pos = Vector(1.2999999523163, -205, 5),
+	ang = Angle(0, 90, 0),
+	fov = 3.8,
 }
 
 ITEM.pacData = {
@@ -27,7 +27,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
 						["Position"] = Vector(-11.724, -4.649, 0.866),
-						["Model"] = "models/weapons/w_smg_mpk.mdl",
+						["Model"] = "models/weapons/w_tfa_dmm5k.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "79468794673",

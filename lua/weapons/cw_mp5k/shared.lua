@@ -133,7 +133,7 @@ SWEP.Instructions	= ""
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= true
 SWEP.ViewModel		= "models/cw2/smgs/mp5.mdl"
-SWEP.WorldModel		= "models/weapons/w_smg_mpk.mdl"
+SWEP.WorldModel		= "models/weapons/w_tfa_dmm5k.mdl"
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
