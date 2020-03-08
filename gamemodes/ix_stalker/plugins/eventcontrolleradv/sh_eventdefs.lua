@@ -29,15 +29,20 @@
 --funcEnd: Cleanup to do after the encounter is over
 
 --Example with spawning zombies:
-/*
+
 	PLUGIN.eventdefs["Zombie1"] = {
 		key = "Zombie1",
+		allowedPoints = {"gm_flatgrass_point2"},
 		difficulty = 1,
 		funcPrestart = function(dat)
 			ix.item.Spawn("makarov", dat.eventpoint[1], nil, AngleRand(), {["durability"] = 30})
 			for k, ply in pairs( player.GetAll() ) do
-				ix.chat.Send(ply, "eventpdainternal", Format("Flot zimbis ved %s.", dat.eventpoint[2]), true, ply)
+				ix.chat.Send(ply, "eventpdainternal", Format("The dead walks the earth at %s.", dat.eventpoint[2]), true, ply)
 			end
+
+			dat.data.zombies = {}
+
+			return dat
 		end,
 		funcStart = function(dat)
 			for i=1,5 do
@@ -57,9 +62,20 @@
 				dat.data.zombies[i]:SetPos(position)
 				dat.data.zombies[i]:Spawn()
 			end
+
+			return dat
 		end,
-		funcUpdate = function(dat) {
+		funcUpdate = function(dat) 
+			if data.respawndone then
+				return dat
+			end
+
 			local zombalive = 0
+
+			if !dat.data.zombies then
+				return dat
+			end
+
 			for k,v in pairs(dat.data.zombies) do
 				if IsValid(v) then zombalive = zombalive+1 end
 			end
@@ -84,10 +100,11 @@
 					dat.data.zombies[i]:SetPos(position)
 					dat.data.zombies[i]:Spawn()
 				end
+				data.respawndone = true
 			end
-			--return dat
-		},
-		funcShouldEnd = function(dat) {
+			return dat
+		end,
+		funcShouldEnd = function(dat)
 			shouldend = false
 
 			local zombalive = 0
@@ -99,10 +116,9 @@
 				shouldend = true
 			end
 			return shouldend
-		},
-		funcEnd = function(dat) {
+		end,
+		funcEnd = function(dat)
 			ix.item.Spawn("mp5", dat.eventpoint[1], nil, AngleRand(), {["durability"] = 100})
-			--return dat
-		}
+			return dat
+		end
 	}
-*/

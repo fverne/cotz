@@ -80,9 +80,9 @@ ix.chat.Register("eventpdainternal", {
 })
 
 if SERVER then
-	local spawntime = 1
-	local updatetime = 1
-	local populate = true
+	local spawntime = CurTime() + 30
+	local updatetime = CurTime() + 30
+	local populate = false
 	
 	local function isClear(position)
 		
@@ -97,15 +97,21 @@ if SERVER then
 		return true
 	end
 	
-	local function spawnEvent(eventpoint, spawn)
+	function PLUGIN:spawnEvent(eventpoint, spawn)
 		if isClear(eventpoint[1]) then
-			key = #currentEvents+1
-			currentEvents[key].data = {}
-			currentEvents[key].eventpoint = eventpoint
-			currentEvents[key].eventDef = spawn.key
+			key = #self.currentEvents+1
+			self.currentEvents[key] = {}
+			self.currentEvents[key].data = {}
+			self.currentEvents[key].eventpoint = eventpoint
+			self.currentEvents[key].eventDef = spawn.key
 
-			/*currentEvents[key].dat = */self.eventdefs[v.key]:funcPrestart(currentEvents[key])
-			/*currentEvents[key].dat = */self.eventdefs[v.key]:funcStart(currentEvents[key])
+
+			local tmpfunc = self.eventdefs[spawn.key].funcPrestart
+			local data = tmpfunc(self.currentEvents[key])
+			self.currentEvents[key] = data
+			tmpfunc = self.eventdefs[spawn.key].funcStart
+			data = tmpfunc(self.currentEvents[key])
+			self.currentEvents[key] = data
 		end
 	end
 
@@ -130,15 +136,19 @@ if SERVER then
 			for i = 1, self.populateAmount do
 				local spawn = table.Random(self.eventdefs)
 				if (!spawn) then
+					print("No spawn found")
 					return
 				end
-				local eventpoint = table.Random(self.eventpoints[table.Random(spawn.allowedPoints)])
+				--if !table.IsEmpty(self.eventpoints) then return end
+				local eventpoint = self.eventpoints[table.Random(spawn.allowedPoints)]
 
 				if (!eventpoint) then
+					print("No eventpoint found")
 					return
 				end
 				
-				spawnEvent(eventpoint,spawn)
+				print("spawned forced event")
+				self:spawnEvent(eventpoint,spawn)
 			end
 			
 			populate = false
@@ -146,9 +156,15 @@ if SERVER then
 		
 		if (updatetime < CurTime() ) then
 			for k,v in pairs( self.currentEvents) do
-				self.eventdefs[v.key]:funcUpdate(v)
-				if self.eventdefs[v.key]:funcShouldEnd(v) then
-					self.eventdefs[v.key]:funcEnd(v)
+				local tmpfunc = self.eventdefs[v.eventDef].funcUpdate
+				v = tmpfunc(v)
+				self.currentEvents[k] = v
+
+				tmpfunc = self.eventdefs[v.eventDef].funcShouldEnd
+				if tmpfunc(v) then
+					tmpfunc = self.eventdefs[v.eventDef].funcEnd
+					v = tmpfunc(v)
+					self.currentEvents[k] = v
 					table.remove(self.currentEvents, k)
 				end
 			end
@@ -170,13 +186,13 @@ if SERVER then
 		if (!spawn) then
 			return
 		end
-		local eventpoint = table.Random(self.eventpoints[table.Random(spawn.allowedPoints)])
+		local eventpoint = self.eventpoints[table.Random(spawn.allowedPoints)]
 
 		if (!eventpoint) then
 			return
 		end
 
-		spawnEvent(eventpoint, spawn)
+		self:spawnEvent(eventpoint, spawn)
 
 	end	
 else
@@ -209,7 +225,7 @@ ix.command.Add("eventadvadd", {
 		local name = name or "UNNAMED AREA"
 		local internalname = internalname or "UNDEFINED_INTERNAL_NAME"
 
-		table.insert( PLUGIN.eventpoints, internalname, { hitpos, name } )
+		PLUGIN.eventpoints[internalname] = {hitpos,name}
 		client:Notify( "Event area named '"..name.."'("..internalname..") succesfully added" )
 	end
 })
