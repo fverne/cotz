@@ -19,8 +19,7 @@
         if (!IsValid(weapon)) then return end
  
         if (string.sub(weapon:GetClass(), 1, 3) == "cw_") then
-            weapon:SelectFiremode("safe")
-            --setCyclingAllowed(weapon, false)
+            timer.Simple(0.1, function() weapon:SelectFiremode("safe") setCyclingAllowed(weapon, false) end )
         end
     end
  
@@ -40,11 +39,11 @@
  
         if (string.sub(weapon:GetClass(), 1, 3) == "cw_") then
             if (state) then
-                --setCyclingAllowed(weapon, true)
+                setCyclingAllowed(weapon, true)
                 weapon:SelectFiremode(weapon.FireModes[1])
             else
                 weapon:SelectFiremode("safe")
-                --setCyclingAllowed(weapon, false)
+                setCyclingAllowed(weapon, false)
             end
         end
     end
