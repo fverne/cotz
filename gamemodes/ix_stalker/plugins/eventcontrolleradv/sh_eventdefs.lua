@@ -29,7 +29,7 @@
 --funcEnd: Cleanup to do after the encounter is over
 
 --Example with spawning zombies:
-
+/*
 	PLUGIN.eventdefs["Zombie1"] = {
 		key = "Zombie1",
 		allowedPoints = {"gm_flatgrass_point2"},
@@ -119,6 +119,84 @@
 		end,
 		funcEnd = function(dat)
 			ix.item.Spawn("mp5", dat.eventpoint[1], nil, AngleRand(), {["durability"] = 100})
+			return dat
+		end
+	}
+*/
+
+	PLUGIN.eventdefs["Dog_Ambush"] = {
+		key = "Dog_Ambush",
+		allowedPoints = {"dog_ambush"},
+		difficulty = 1,
+		funcPrestart = function(dat)
+			local spawnedItem 
+			ix.item.Spawn("cannedtushonka", dat.eventpoint[1]+Vector(0,0,32), function(item, entity) spawnedItem = entity end, AngleRand(), {})
+
+			dat.data.itement = spawnedItem
+
+			dat.data.dogs = {}
+			dat.data.spawnsleft = 2
+
+			return dat
+		end,
+		funcStart = function(dat)
+			return dat
+		end,
+		funcUpdate = function(dat) 
+			if dat.data.spawnsleft == 0 then
+				dat.data.eventdone = true
+				return dat
+			end
+
+			if !dat.data.dogs then
+				return dat
+			end
+
+			if IsValid(dat.data.itement) then
+
+				return dat
+			end
+
+			local bsalive = 0
+
+			for k,v in pairs(dat.data.dogs) do
+				if IsValid(v) then bsalive = bsalive+1 end
+			end
+
+			if bsalive == 0 then
+				sound.Play( "hgn/stalker/creature/dog/bdog_idle_4.wav", dat.eventpoint[1])
+
+				for i=#dat.data.dogs,#dat.data.dogs+2 do
+					local position = dat.eventpoint[1] + Vector( math.Rand(-256,256), math.Rand(-256,256), 128 )
+					local data = {}
+					data.start = position
+					data.endpos = position
+					data.mins = Vector(-16, -16, 0)
+					data.maxs = Vector(16, 16, 71)
+					local trace = util.TraceHull(data)
+
+					if trace.Entity:IsValid() then
+						continue
+					end
+					dat.data.dogs[i] = ents.Create("npc_mutant_dog")
+					dat.data.dogs[i]:SetPos(position)
+					dat.data.dogs[i]:Spawn()
+				end
+				dat.data.spawnsleft = dat.data.spawnsleft - 1
+			end
+			return dat
+		end,
+		funcShouldEnd = function(dat)
+			shouldend = false
+
+			shouldend = dat.data.eventdone
+
+			return shouldend
+		end,
+		funcEnd = function(dat)
+			ix.item.Spawn("battery", dat.eventpoint[1] + Vector(0,0,64), nil, AngleRand(), {})
+			sound.Play( "anomaly/electra_blast1.mp3", dat.eventpoint[1])
+
 			return dat
 		end
 	}
