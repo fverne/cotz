@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.333, -177.64, -112.274),
-						["Position"] = Vector(-12.637, 0.423, -1.243),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(1.203, -4.313, 2.519),
 						["Model"] = "models/weapons/w_lr300.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "7442869091",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "lr300",
 					},
 				},

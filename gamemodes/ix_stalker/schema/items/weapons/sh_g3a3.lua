@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -110.587),
-						["Position"] = Vector(-8.846, -2.987, 12.214),
+						["Angles"] = Angle(-7.344, 180, 180),
+						["Position"] = Vector(14.673, -5.375, -2.02),
 						["Model"] = "models/weapons/w_hk_g3.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "3329802291",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "g3a3",
 					},
 				},

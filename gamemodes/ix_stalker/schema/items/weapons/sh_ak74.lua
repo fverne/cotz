@@ -26,14 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
+						["Angles"] = Angle(180, 0, 0),
 						["Model"] = "models/weapons/w_ops_ak74.mdl",
 						["ClassName"] = "model",
-						["Position"] =	Vector(-11.558959960938, 0.410400390625, 0.008544921875),
-						["AngleOffset"] = Angle(0, -10.5, 0),
+						["Position"] =	Vector(11.522, -4.244, -1.16),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3543431291",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "ak74",
 					},
 				},

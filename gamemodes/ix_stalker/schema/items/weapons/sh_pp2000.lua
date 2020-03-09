@@ -3,7 +3,7 @@ ITEM.description= "A folding-stock submachine gun chambered for 9x19mm."
 ITEM.longdesc = "The PP-2000 is a conventional blowback-operated weapon.\nThe PP-2000 is designed as a close-quarter combat weapon, intended for riot police and special operations forces.\nIn 2008, it was adopted as a standard SMG in the Russian police.\nIts high rate of fire makes it perfect for defending yourself against smaller mutants and bandits.\n\nAmmo: 9x19mm \nMagazine Capacity: 20"
 ITEM.model = "models/weapons/w_bf4_pp2000.mdl"
 ITEM.class = "cw_pp2000"
-ITEM.weaponCategory = "primary"
+ITEM.weaponCategory = "secondary"
 ITEM.price = 14000
 ITEM.width = 3
 ITEM.height = 1
@@ -28,13 +28,12 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_bf4_pp2000.mdl",
 						["ClassName"] = "model",
-						["Position"] = Vector(-12.909, 1.219, -5.928),
-						["AngleOffset"] = Angle(0, -10.5, 0),
+						["Position"] = Vector(-1.452, -2.714, 2.521),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3540269892",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "pp2000",
-						["Angles"] = Angle(-82.139, -77.12, 167.002),
+						["Angles"] = Angle(0, 180, 0),
 					},
 				},
 			},

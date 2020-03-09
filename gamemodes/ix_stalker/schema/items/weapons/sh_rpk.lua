@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-7.446, -3.987, 9.214),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(14.48, -3.675, -1.348),
 						["Model"] = "models/weapons/w_rif_rpkm.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "3583945391",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "rpk",
 					},
 				},

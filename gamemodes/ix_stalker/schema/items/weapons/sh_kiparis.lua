@@ -3,7 +3,7 @@ ITEM.description= "A submachinegun with a folded stock. Fires 9x18mm."
 ITEM.longdesc = "A russian submachinegun, the OTS-02 is a blowback-operated weapon of a conventional design chambered in 9×18mm Makarov.\n\nAmmo: 9x18mm\nMagazine Capacity: 30"
 ITEM.model = ("models/dobytchick/weapons/gmzone/deadair/w_kiparis.mdl")
 ITEM.class = "cw_kiparis"
-ITEM.weaponCategory = "primary"
+ITEM.weaponCategory = "secondary"
 ITEM.price = 6300
 ITEM.width = 3
 ITEM.height = 1
@@ -12,9 +12,9 @@ ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_tundra9mm"}
 
 ITEM.iconCam = {
-	pos = Vector(1, 320, 0),
-	ang = Angle(0, 180, 0),
+	ang = Angle(0, 270, 0),
 	fov = 5,
+	pos = Vector(1, 320, 0),
 }
 
 ITEM.pacData = {

@@ -26,15 +26,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(-8.912, 96.435, -164.117),
-						["Position"] = Vector(-12.767, -4.922, -5.399),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(10.833, -4.312, -3.803),
 						["Model"] = "models/khrcw2/doipack/w_thompson1928.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "8882318491",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "m1928a1",
-						["AngleOffset"] = Angle(0, 0, 90),
 					},
 				},
 			},

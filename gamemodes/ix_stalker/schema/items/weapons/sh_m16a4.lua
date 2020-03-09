@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(72.219, -177.46875, -98.487),
-						["Position"] = Vector(-6.713, -3.194, 12.803),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(16.543, -4.312, -1.374),
 						["Model"] = "models/weapons/m16a4/w_rif_m16a4.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "8553655421",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "m16",
 					},
 				},

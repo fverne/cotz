@@ -7,7 +7,7 @@ ITEM.height = 1
 ITEM.price = 12000
 ITEM.busflag = {"dev"}
 ITEM.class = "detector_bear"
-ITEM.weaponCategory = "beltbackleft"
+ITEM.weaponCategory = "detectorslot"
 ITEM.canAttach = false
 ITEM.keepWhenEquipped = true
 ITEM.repairCost = ITEM.price/100*1
@@ -20,12 +20,12 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(-8.2, 94, 150),
-						["Position"] = Vector(3.9, 1.38, -8.027734375),
+						["Angles"] = Angle(0, -90, -40),
+						["Position"] = Vector(5.874, 3.09, 3.622),
 						["UniqueID"] = "3522654444",
 						["EditorExpand"] = true,
 						["Bone"] = "pelvis",
-						["Model"] = "models/kali/miscstuff/stalker/detector_bear.mdl",
+						["Model"] = "models/kek1ch/dev_detector_2.mdl",
 						["ClassName"] = "model",
 					},
 				},

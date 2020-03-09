@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-12.348, 2.674, 0.436),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(8.614, -4.265, 3.43),
 						["Model"] = "models/weapons/w_smg_ump45.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "8545625421",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "ump45",
 					},
 				},

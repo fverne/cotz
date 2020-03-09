@@ -26,14 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(87.526, -83.765, -6.541),
+						["Angles"] = Angle(180, 0, 0),
 						["Model"] = "models/weapons/w_rif_aek97.mdl",
 						["ClassName"] = "model",
-						["Position"] =	Vector(-9.812, -1.536, 7.308),
-						["AngleOffset"] = Angle(0, -10.5, 0),
+						["Position"] =	Vector(14.702, -4.244, -1.16),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3547696121",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "aek971",
 					},
 				},

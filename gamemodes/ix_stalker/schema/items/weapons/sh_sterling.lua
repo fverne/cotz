@@ -26,15 +26,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(-8.912, 96.435, -164.117),
-						["Position"] = Vector(-12.767, -4.922, -5.399),
+						["Angles"] = Angle(0, 270, 180),
+						["Position"] = Vector(1.419, -5.056, -5.256),
 						["Model"] = "models/weapons/b_sterling.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "8883938491",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "sterling",
-						["AngleOffset"] = Angle(0, 0, 90),
 					},
 				},
 			},

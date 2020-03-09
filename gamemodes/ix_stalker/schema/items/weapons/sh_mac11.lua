@@ -3,7 +3,7 @@ ITEM.description= "A metal box of a submachinegun that fires 9x19mm"
 ITEM.longdesc = "The MAC-11 is the milder alternative to the formidable MAC-10.\nIt's well known through the gangster world for it's cheap design capable of firing 20 rounds a second in full auto.\nIt uses an open-bolt design and features a charging handle safety known to malfunction at times.\n\nAmmo: 9x19mm\nMagazine Capacity: 32"
 ITEM.model = "models/weapons/w_cst_mac11.mdl"
 ITEM.class = "cw_mac11"
-ITEM.weaponCategory = "primary"
+ITEM.weaponCategory = "secondary"
 ITEM.price = 6000
 ITEM.width = 2
 ITEM.height = 2
@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(77.219, -177.46875, -96.1875),
-						["Position"] = Vector(-7.346, -2.087, 12.214),
+						["Angles"] = Angle(0, -90, -30),
+						["Position"] = Vector(-9.731, 10.516, -1.729),
 						["Model"] = "models/weapons/w_cst_mac11.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "79468794673",
-						["Bone"] = "chest",
+						["Bone"] = "pelvis",
 						["Name"] = "mac11",
 					},
 				},

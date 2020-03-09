@@ -26,15 +26,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(81.9, 177.2, 85.1),
-						["Position"] = Vector(-12.432, -4.995, -5.716),
+						["Angles"] = Angle(-6, 0, 180),
+						["Position"] = Vector(-1.724, -4.195, -3.961),
 						["Model"] = "models/weapons/w_dmg_vikhr.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "7767986673",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "vikhr",
-						["AngleOffset"] = Angle(200, 0, 0),
 					},
 				},
 			},

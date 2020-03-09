@@ -26,14 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(86.159, 170.247, -108.41),
+						["Angles"] = Angle(0, 180, 180),
 						["Model"] = "models/weapons/world/rifles/rk95.mdl",
 						["ClassName"] = "model",
-						["Position"] =	Vector(-9.449, -5.929, 5.252),
-						["AngleOffset"] = Angle(0, -10.5, 0),
+						["Position"] =	Vector(10.203, -4.154, -4.08),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3547382491",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "rk95",
 					},
 				},

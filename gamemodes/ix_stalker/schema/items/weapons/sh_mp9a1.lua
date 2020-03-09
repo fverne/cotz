@@ -3,7 +3,7 @@ ITEM.description= "A compact machine pistol. Fires 9x19mm."
 ITEM.longdesc = "The Machine Pistol 9 is a Swiss-made submachinegun from the early 2000s, it weighs 1.4 kilograms unloaded and is generally compact.\nIt features a drop, trigger and ambidextrious safety switch and has a fire-rate of 900 rounds a minute.\n\nAmmo: 9x19mm\nMagazine Capacity: 3"
 ITEM.model = ("models/weapons/w_smg_mp9a1.mdl")
 ITEM.class = "cw_mp9a1"
-ITEM.weaponCategory = "primary"
+ITEM.weaponCategory = "secondary"
 ITEM.price = 11100
 ITEM.width = 2
 ITEM.height = 2
@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-13.292, -5.403, -2.197),
+						["Angles"] = Angle(0, 180, 0),
+						["Position"] = Vector(-11.714, -2.715, 4.444),
 						["Model"] = "models/weapons/w_smg_mp9a1.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "79898994673",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "mp9a1",
 					},
 				},

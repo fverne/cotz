@@ -25,13 +25,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-11.065, -5.617, 0.194),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(5.922, -5.054, -4.465),
 						["Model"] = "models/weapons/w_shot_strike.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "8883923491",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "striker",
 					},
 				},

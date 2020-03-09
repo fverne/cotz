@@ -28,13 +28,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -101.487),
-						["Position"] = Vector(-7.646, -2.504, 12.214),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(17.39, -4.308, 0.361),
 						["Model"] = "models/srp/weapons/w_mp5.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "79478794673",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "mp5",
 					},
 				},

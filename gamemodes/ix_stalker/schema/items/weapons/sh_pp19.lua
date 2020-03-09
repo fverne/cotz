@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-13.141, -4.329, -1.789),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(4.174, -5.064, -3.862),
 						["Model"] = "models/weapons/w_smg_biz.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "7793894673",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "biz",
 					},
 				},

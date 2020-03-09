@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-7.546, -3.987, 12.214),
+						["Angles"] = Angle(180, 0, 0),
+						["Position"] =	Vector(15.89, -4.626, -1.283),
 						["Model"] = "models/srp/weapons/w_abakan.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "3543412391",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "an94k",
 					},
 				},

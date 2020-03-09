@@ -26,13 +26,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.219, -177.469, -108.987),
-						["Position"] = Vector(-7.346, -3.587, 12.614),
+						["Angles"] = Angle(180, 0, 0),
+						["Position"] = Vector(13.596, -4.444, -1.874),
 						["Model"] = "models/hgn/srp/weapons/w_rif_fnfal.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "3327382291",
-						["Bone"] = "chest",
+						["Bone"] = "spine 2",
 						["Name"] = "fnfal",
 					},
 				},
