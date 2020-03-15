@@ -523,6 +523,9 @@ function SWEP:getFinalSpread(vel, maxMultiplier)
 	if self.ShootWhileProne and self:isPlayerProne() then
 		final = final + vel / 1000
 	end
+
+	final = final * (1 + self.WearEffect - (self.WearEffect * (self:GetWeaponWear()/100)))
+	final = final * (1 + self.WearEffect - (self.WearEffect * (self:GetWeaponDurability()/100)))
 	
 	-- as well as the spread caused by rapid mouse movement
 	final = final + self.Owner.ViewAff

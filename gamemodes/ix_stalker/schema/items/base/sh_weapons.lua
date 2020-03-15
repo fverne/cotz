@@ -30,35 +30,47 @@ if (CLIENT) then
 		surface.SetMaterial(item.equipIcon)
 		surface.DrawTexturedRect(w-23,h-23,19,19)
 
-		//Durability bar
-		if item:GetData("durability") then --checks if we are in the business menu
+		--Less mental way of doing the above:
+		local dura = 0
+		local wear = 0
+
+		if item:GetData("wear") then --checks if we are in the business menu
 			if (item:GetOwner():GetWeapon( item.class )) and (item:GetData("equip")) then
 				local weapon = item:GetOwner():GetWeapon( item.class )
-				surface.SetDrawColor( Color( 255, 255, 255, 255 ) )
-				surface.DrawOutlinedRect( 7, h - 15, 41, 9 )
 				if IsValid(weapon) then
-					if (weapon:GetWeaponHP() > 0) then
-						surface.SetDrawColor(110, 255, 110, 100)
-						surface.DrawRect(8, h - 14, (weapon:GetWeaponHP()/100) * 40, 8)
-					else
-						surface.SetDrawColor(255, 110, 110, 100)
-						surface.DrawRect(8, h - 14, 40, 8)
-					end
+					dura = weapon:GetWeaponDurability()
+					wear = weapon:GetWeaponWear()
 				end
 			else
-				if (item:GetData("durability")) then
-					surface.SetDrawColor( Color( 255, 255, 255, 255 ) )
-					surface.DrawOutlinedRect( 7, h - 15, 41, 9 )
-					if (item:GetData("durability") > 0) then
-						surface.SetDrawColor(110, 255, 110, 100)
-						surface.DrawRect(8, h - 14, (item:GetData("durability")/100) * 40, 8)
-					else
-						surface.SetDrawColor(255, 110, 110, 100)
-						surface.DrawRect(8, h - 14, 40, 8)
-					end
+				if (item:GetData("durability") && item:GetData("wear")) then
+					dura = item:GetData("durability",0)
+					wear = item:GetData("wear",0)
 				end
 			end
 		end
+
+		surface.SetDrawColor( Color( 255, 255, 255, 255 ) ) -- Outline
+		surface.DrawOutlinedRect( 7, h - 15, 41, 9 )
+
+		if (dura > 0) then -- Draw small dura bar
+			surface.SetDrawColor(110, 255, 110, 100)
+			surface.DrawRect(8, h - 14, (dura/100) * 40, 2)
+			surface.SetDrawColor(255, 110, 110, 100)
+			surface.DrawRect(8 + (dura/100) * 40, h - 14, 40-((dura/100) * 40), 2)
+		else
+			surface.SetDrawColor(255, 110, 110, 100)
+			surface.DrawRect(8, h - 14, 40, 2)
+		end
+		if (wear > 0) then -- Draw larger wear bar
+			surface.SetDrawColor(110, 255, 110, 100)
+			surface.DrawRect(8, h - 12, (wear/100) * 40, 6)
+			surface.SetDrawColor(255, 110, 110, 100)
+			surface.DrawRect(8 + (wear/100) * 40, h - 14, 40-((wear/100) * 40), 6)
+		else
+			surface.SetDrawColor(255, 110, 110, 100)
+			surface.DrawRect(8, h - 12, 40, 6)
+		end
+
 
 		//Attachment Icons
 		local iterator = 1
@@ -160,7 +172,8 @@ ITEM:Hook("drop", function(item)
 
 		if (IsValid(weapon)) then
 			item:SetData("ammo", weapon:Clip1())
-			item:SetData("durability", weapon:GetWeaponHP())
+			item:SetData("wear", weapon:GetWeaponWear())
+			item:SetData("durability", weapon:GetWeaponDurability())
 
 			owner:StripWeapon(item.class)
 			owner.carryWeapons[item.weaponCategory] = nil
@@ -364,7 +377,8 @@ function ITEM:Equip(client)
 			weapon:attachSpecificAttachment(self:GetData("ammoRechamber").attachmentName)
 		end
 
-		weapon:SetWeaponHP( self:GetData("durability") )
+		weapon:SetWeaponWear( self:GetData("wear") )
+		weapon:SetWeaponDurability( self:GetData("durability") )
 		self:SetData("equip", true)
 		if self:GetData("ammoType") ~= nil then
 			timer.Simple(0.1,function()
@@ -398,6 +412,9 @@ function ITEM:OnInstanced(invID, x, y)
 	if !self:GetData("durability") then
 		self:SetData("durability", 100)
 	end
+	if !self:GetData("wear") then
+		self:SetData("wear", 100)
+	end
 	if !self:GetData("ammo") then
 		self:SetData("ammo", 0)
 	end
@@ -423,7 +440,8 @@ function ITEM:Unequip(client, bPlaySound, bRemoveItem)
 		else
 			self:SetData("ammoType", nil)
 		end
-		self:SetData("durability", weapon:GetWeaponHP())
+		self:SetData("durability", weapon:GetWeaponDurability())
+		self:SetData("wear", weapon:GetWeaponWear())
 
 		client:StripWeapon(self.class)
 	else
@@ -494,7 +512,8 @@ function ITEM:OnLoadout()
 
 			weapon.ixItem = self
 			weapon:SetClip1(self:GetData("ammo", 0))
-			weapon:SetWeaponHP( self:GetData("durability", 0))
+			weapon:SetWeaponWear( self:GetData("wear", 0))
+			weapon:SetWeaponDurability( self:GetData("durability", 0))
 		else
 			print(Format("[Helix] Cannot give weapon - %s does not exist!", self.class))
 		end
@@ -520,9 +539,10 @@ function ITEM:OnSave()
 
 	if (IsValid(weapon)) && self:GetData("equip",false) then
 		self:SetData("ammo", weapon:Clip1())
-		self:SetData("durability", weapon:GetWeaponHP())
+		self:SetData("wear", weapon:GetWeaponWear())
+		self:SetData("durability", weapon:GetWeaponDurability())
 
-		local ammoType = weapon:GetPrimaryAmmoType()
+		local ammoType = weapon.Primary.Ammo
 
 		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
 			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))

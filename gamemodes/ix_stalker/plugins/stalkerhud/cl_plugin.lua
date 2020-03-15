@@ -177,18 +177,19 @@ function PLUGIN:HUDPaint()
 	surface.SetMaterial(gun)
 	if IsValid( wep ) then
 		if string.sub(wep:GetClass(),1,3) == "cw_" then
-			if LocalPlayer():GetActiveWeapon():GetWeaponHP() > 80 then
+			if LocalPlayer():GetActiveWeapon():GetWeaponWear() > 80 then
 				surface.SetDrawColor(Color(0, 0, 0, 0))
-			elseif LocalPlayer():GetActiveWeapon():GetWeaponHP() > 60 and LocalPlayer():GetActiveWeapon():GetWeaponHP() <= 80 then
+			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 60 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 80 then
 				surface.SetMaterial(gun)
 				surface.SetDrawColor(Color(200, 200, 200, 255))
-			elseif LocalPlayer():GetActiveWeapon():GetWeaponHP() > 40 and LocalPlayer():GetActiveWeapon():GetWeaponHP() <= 60 then
+			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 40 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 60 then
 				surface.SetMaterial(gun2)
 				surface.SetDrawColor(Color(200, 200, 200, 255))
-			elseif LocalPlayer():GetActiveWeapon():GetWeaponHP() > 20 and LocalPlayer():GetActiveWeapon():GetWeaponHP() <= 40 then
+			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 20 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 40 then
 				surface.SetMaterial(gun3)
 				surface.SetDrawColor(Color(200, 200, 200, 255))
-			elseif LocalPlayer():GetActiveWeapon():GetWeaponHP() > 0 and LocalPlayer():GetActiveWeapon():GetWeaponHP() <= 20 then
+			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 0 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 20 then
+
 				surface.SetMaterial(gun4)
 				surface.SetDrawColor(Color(200, 200, 200, 255))
 			end

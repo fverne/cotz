@@ -112,8 +112,8 @@ SWEP.FireDelay = 0.7
 SWEP.FireSound = "CW_M3SUPER90_FIRE"
 SWEP.Recoil = 3
 
-SWEP.HealthDamage = 0.5
-SWEP.HealthEffect = 0.005
+SWEP.WearDamage = 0.5
+SWEP.WearEffect = 0.005
 
 SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005
