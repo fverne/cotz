@@ -145,9 +145,9 @@ function PLUGIN:HUDPaint()
 						surface.SetDrawColor(Color(255, 255, 255, 255))
 
 						if ix.item.list[ammoBox].width == 1 then
-							surface.DrawTexturedRect(ScrW()*0.89, ScrH()*0.87, 50, 50)
+							surface.DrawTexturedRect(ScrW()*0.89, ScrH()*0.87, ScrW()*0.0366, ScrH()*0.0652)
 						else
-							surface.DrawTexturedRect(ScrW()*0.86, ScrH()*0.87, 100, 50)
+							surface.DrawTexturedRect(ScrW()*0.86, ScrH()*0.87, ScrW()*0.073, ScrH()*0.0652)
 						end
 					end
 				end	
