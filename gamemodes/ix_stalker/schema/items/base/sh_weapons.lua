@@ -18,6 +18,8 @@ ITEM.exRender = true
 
 -- Inventory drawing
 if (CLIENT) then
+	local Texture2 = Material("stalker/bars.png", "noclamp smooth") 
+
 	function ITEM:PaintOver(item, w, h)
 		//Equipsquare
 		if (item:GetData("equip")) then
@@ -49,27 +51,43 @@ if (CLIENT) then
 			end
 		end
 
-		surface.SetDrawColor( Color( 255, 255, 255, 255 ) ) -- Outline
-		surface.DrawOutlinedRect( 7, h - 15, 41, 9 )
+		//durability
+		surface.SetMaterial(Texture2)
+		surface.SetDrawColor(Color(120, 120, 120, 255))
+		surface.DrawTexturedRectUV(5, h - 10, ScrW()*0.028, ScrH()*0.006, 0, 0, 1.02, 0)
 
-		if (dura > 0) then -- Draw small dura bar
-			surface.SetDrawColor(110, 255, 110, 100)
-			surface.DrawRect(8, h - 14, (dura/100) * 40, 2)
-			surface.SetDrawColor(255, 110, 110, 100)
-			surface.DrawRect(8 + (dura/100) * 40, h - 14, 40-((dura/100) * 40), 2)
-		else
-			surface.SetDrawColor(255, 110, 110, 100)
-			surface.DrawRect(8, h - 14, 40, 2)
+		surface.SetMaterial(Texture2)
+		if (dura >= 80) then 
+			surface.SetDrawColor(Color(120, 255, 120, 255))
+		elseif (dura >= 60) then 
+			surface.SetDrawColor(Color(180, 255, 120, 255))
+		elseif (dura >= 40) then 
+			surface.SetDrawColor(Color(255, 255, 120, 255))
+		elseif (dura >= 20) then 
+			surface.SetDrawColor(Color(255, 180, 120, 255))
+		elseif (dura > 0) then 
+			surface.SetDrawColor(Color(255, 120, 120, 255))	
 		end
-		if (wear > 0) then -- Draw larger wear bar
-			surface.SetDrawColor(110, 255, 110, 100)
-			surface.DrawRect(8, h - 12, (wear/100) * 40, 6)
-			surface.SetDrawColor(255, 110, 110, 100)
-			surface.DrawRect(8 + (wear/100) * 40, h - 14, 40-((wear/100) * 40), 6)
-		else
-			surface.SetDrawColor(255, 110, 110, 100)
-			surface.DrawRect(8, h - 12, 40, 6)
+		surface.DrawTexturedRectUV(5, h - 10, math.Clamp(dura/100, 0, 1)*ScrW()*0.028, ScrH()*0.006, 0, 0, math.Clamp(dura/100, 0, 1), 0)
+
+		//wear
+		surface.SetMaterial(Texture2)
+		surface.SetDrawColor(Color(120, 120, 120, 255))
+		surface.DrawTexturedRectUV(5, h - 16, ScrW()*0.028, ScrH()*0.006, 0, 0, 1.02, 0)
+
+		surface.SetMaterial(Texture2)
+		if (wear >= 80) then 
+			surface.SetDrawColor(Color(120, 255, 120, 255))
+		elseif (wear >= 60) then 
+			surface.SetDrawColor(Color(180, 255, 120, 255))
+		elseif (wear >= 40) then 
+			surface.SetDrawColor(Color(255, 255, 120, 255))
+		elseif (wear >= 20) then 
+			surface.SetDrawColor(Color(255, 180, 120, 255))
+		elseif (wear > 0) then 
+			surface.SetDrawColor(Color(255, 120, 120, 255))	
 		end
+		surface.DrawTexturedRectUV(5, h - 16, math.Clamp(wear/100, 0, 1)*ScrW()*0.028, ScrH()*0.006, 0, 0, math.Clamp(wear/100, 0, 1), 0)
 
 
 		//Attachment Icons
