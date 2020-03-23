@@ -120,8 +120,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.7x28MM"
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.07
 SWEP.FireSound = "CW_P90_FIRE"

@@ -145,8 +145,8 @@ SWEP.Shots = 1
 SWEP.Damage = 118
 SWEP.DeployTime = 1.5
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.RecoilToSpread = 0.8 -- the M14 in particular will have 30% more recoil from continuous fire to give a feeling of "oh fuck I should stop firing 7.62x51MM in full auto at 750 RPM"
 

@@ -151,6 +151,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "7.62x54MMR"
 SWEP.ForceBackToHipAfterAimedShot = true
+
 SWEP.FireDelay = 60/36
 SWEP.FireSound = "KHRMOSIN_FIRE"
 SWEP.Recoil = 2.5
@@ -161,6 +162,11 @@ SWEP.VelocitySensitivity = 1.7
 SWEP.MaxSpreadInc = 0.5
 SWEP.SpreadPerShot = 0.025
 SWEP.SpreadCooldown = 1.75
+SWEP.GlobalDelayOnShoot = 1.1
+
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
+
 SWEP.Shots = 1
 SWEP.Damage = 110
 SWEP.DeployTime = .6

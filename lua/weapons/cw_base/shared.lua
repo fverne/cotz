@@ -282,8 +282,10 @@ SWEP.CanCustomize = true
 timerdelay = 0
 --
 
-SWEP.HealthDamage = 0.0
-SWEP.HealthEffect = 0.0
+SWEP.DurabilityDamageChance = 0.01
+SWEP.WearDamage = 0.0
+SWEP.WearEffect = 0.0
+
 
 
 -- bipod-related
@@ -527,7 +529,8 @@ function SWEP:SetupDataTables()
 	self:DTVar("Bool", 2, "BipodDeployed")
 	self:DTVar("Bool", 3, "M203Active")
 	self:DTVar("Angle", 0, "ViewOffset")
-	self:NetworkVar("Float", 4, "WeaponHP")
+	self:NetworkVar("Float", 4, "WeaponDurability")
+	self:NetworkVar("Float", 5, "WeaponWear")
 end
 
 -- we have to do THIS fucking garbage because there is no distinction between DTVars and NWVars (look above) and therefore upon duplication of a spawned weapon object
@@ -968,12 +971,12 @@ function SWEP:getBaseCone()
 	local finalSpread = nil
 	
 	if self.dt.State == CW_AIMING then
-		finalSpread = self.AimSpread * (aimSpreadMod or 1) + self.HealthEffect - (self.HealthEffect * (self:GetWeaponHP()/100))
+		finalSpread = self.AimSpread * (aimSpreadMod or 1)
 	else
 		if self.dt.BipodDeployed then
-			finalSpread = self:getBipodHipSpread() * (aimSpreadMod or 1) + self.HealthEffect - (self.HealthEffect * (self:GetWeaponHP()/100))
+			finalSpread = self:getBipodHipSpread() * (aimSpreadMod or 1)
 		else
-			finalSpread = self.HipSpread * (hipSpreadMod or 1) + self.HealthEffect - (self.HealthEffect * (self:GetWeaponHP()/100))
+			finalSpread = self.HipSpread * (hipSpreadMod or 1)
 		end
 	end
 	
@@ -981,7 +984,7 @@ function SWEP:getBaseCone()
 end
 
 function SWEP:getMaxSpreadIncrease(maxSpreadMod)
-	return self.MaxSpreadInc * maxSpreadMod
+	return (self.MaxSpreadInc * maxSpreadMod) * (1 + self.WearEffect - (self.WearEffect * (self:GetWeaponWear()/100))*2)
 end
 
 function SWEP:getCrouchSpreadModifier()
@@ -1537,7 +1540,7 @@ function SWEP:PrimaryAttack()
 		return
 	end
 	
-	if self:GetWeaponHP() < 0 then
+	if self:GetWeaponWear() < 0 then
 		self:unloadWeapon()
 		return
 	end
@@ -1577,7 +1580,14 @@ function SWEP:PrimaryAttack()
 
 		self:FireBullet(self.Damage, self.CurCone, self.ClumpSpread, self.Shots)
 		self:makeFireEffects()
-		self:SetWeaponHP(self:GetWeaponHP() - self.HealthDamage)  -- HEALTH REDUCTION
+
+		self:SetWeaponWear(self:GetWeaponWear() - self.WearDamage)  -- WEAR REDUCTION
+
+		if(math.random() < self.DurabilityDamageChance) then
+			self:SetWeaponDurability(self:GetWeaponDurability() - 1)
+		end
+
+
 		if CLIENT then
 			self:simulateRecoil()
 		end

@@ -132,8 +132,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.56x45MM"
 
-SWEP.HealthDamage = 0.15
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.15
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.0705882352941176
 SWEP.FireSound = "CW_F2000_FIRE"

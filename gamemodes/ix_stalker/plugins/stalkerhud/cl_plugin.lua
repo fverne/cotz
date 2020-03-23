@@ -94,16 +94,52 @@ function PLUGIN:HUDPaint()
 	--// STALKER Hud Exported on 03/13/16 11:46:26 //--
 	
 	local lp = LocalPlayer()
-	local wep = LocalPlayer():GetActiveWeapon()
 	local char = lp:GetCharacter()
+	local wep = LocalPlayer():GetActiveWeapon()
 
 	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible()) then return end
 
+	local ammoType
+	local ammoAmount
 	local AmmoImage
-	local ammoType = wep:GetPrimaryAmmoType()
-	local ammoAmount = wep:Clip1()
 	local ammoBox = ""
 	local ammoSubClass = ""	
+
+	if IsValid(wep) then
+		if wep:GetPrimaryAmmoType() then
+			ammoType = wep:GetPrimaryAmmoType()
+			ammoAmount = wep:Clip1()
+		end
+
+		if wep:GetMaxClip1() > 0 then
+			if string.sub(wep:GetClass(),1,3) == "cw_" then
+				if game.GetAmmoName(wep:GetPrimaryAmmoType()) or "" != "" then
+					if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+						ammoSubClass = string.lower(string.sub(game.GetAmmoName(ammoType), -3, -2))
+						ammoBox = ix.weapontables.ammotypes[string.sub(game.GetAmmoName(ammoType), 1, -6)].uID
+						ammoBox = ammoBox..ammoSubClass
+					else
+						ammoBox = ix.weapontables.ammotypes[game.GetAmmoName(ammoType)].uID
+					end
+
+					if ammoBox then
+						if ix.item.list[ammoBox] then
+							AmmoImage = ix.item.list[ammoBox].img
+
+							surface.SetMaterial(AmmoImage)
+							surface.SetDrawColor(Color(255, 255, 255, 255))
+
+							if ix.item.list[ammoBox].width == 1 then
+								surface.DrawTexturedRect(ScrW()*0.89, ScrH()*0.87, ScrW()*0.0366, ScrH()*0.0652)
+							else
+								surface.DrawTexturedRect(ScrW()*0.86, ScrH()*0.87, ScrW()*0.073, ScrH()*0.0652)
+							end
+						end
+					end	
+				end
+			end
+		end
+	end
 
 	surface.SetMaterial(Ammo)
 	surface.SetDrawColor(Color(255, 255, 255, 200))
@@ -122,35 +158,6 @@ function PLUGIN:HUDPaint()
 				if wep:GetPrimaryAmmoType() then
 					draw.DrawText( language.GetPhrase(game.GetAmmoName(wep:GetPrimaryAmmoType()).."_ammo"), "stalkerregularsmallfont2", ScrW()*0.83, ScrH()*0.838, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
 				end
-			end
-		end
-	end
-
-	if wep:GetMaxClip1() > 0 then
-		if string.sub(wep:GetClass(),1,3) == "cw_" then
-			if game.GetAmmoName(wep:GetPrimaryAmmoType()) or "" != "" then
-				if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-					ammoSubClass = string.lower(string.sub(game.GetAmmoName(ammoType), -3, -2))
-					ammoBox = ix.weapontables.ammotypes[string.sub(game.GetAmmoName(ammoType), 1, -6)].uID
-					ammoBox = ammoBox..ammoSubClass
-				else
-					ammoBox = ix.weapontables.ammotypes[game.GetAmmoName(ammoType)].uID
-				end
-
-				if ammoBox then
-					if ix.item.list[ammoBox] then
-						AmmoImage = ix.item.list[ammoBox].img
-
-						surface.SetMaterial(AmmoImage)
-						surface.SetDrawColor(Color(255, 255, 255, 255))
-
-						if ix.item.list[ammoBox].width == 1 then
-							surface.DrawTexturedRect(ScrW()*0.89, ScrH()*0.87, 50, 50)
-						else
-							surface.DrawTexturedRect(ScrW()*0.86, ScrH()*0.87, 100, 50)
-						end
-					end
-				end	
 			end
 		end
 	end
@@ -177,18 +184,19 @@ function PLUGIN:HUDPaint()
 	surface.SetMaterial(gun)
 	if IsValid( wep ) then
 		if string.sub(wep:GetClass(),1,3) == "cw_" then
-			if LocalPlayer():GetActiveWeapon():GetWeaponHP() > 80 then
+			if LocalPlayer():GetActiveWeapon():GetWeaponWear() > 80 then
 				surface.SetDrawColor(Color(0, 0, 0, 0))
-			elseif LocalPlayer():GetActiveWeapon():GetWeaponHP() > 60 and LocalPlayer():GetActiveWeapon():GetWeaponHP() <= 80 then
+			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 60 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 80 then
 				surface.SetMaterial(gun)
 				surface.SetDrawColor(Color(200, 200, 200, 255))
-			elseif LocalPlayer():GetActiveWeapon():GetWeaponHP() > 40 and LocalPlayer():GetActiveWeapon():GetWeaponHP() <= 60 then
+			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 40 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 60 then
 				surface.SetMaterial(gun2)
 				surface.SetDrawColor(Color(200, 200, 200, 255))
-			elseif LocalPlayer():GetActiveWeapon():GetWeaponHP() > 20 and LocalPlayer():GetActiveWeapon():GetWeaponHP() <= 40 then
+			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 20 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 40 then
 				surface.SetMaterial(gun3)
 				surface.SetDrawColor(Color(200, 200, 200, 255))
-			elseif LocalPlayer():GetActiveWeapon():GetWeaponHP() > 0 and LocalPlayer():GetActiveWeapon():GetWeaponHP() <= 20 then
+			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 0 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 20 then
+
 				surface.SetMaterial(gun4)
 				surface.SetDrawColor(Color(200, 200, 200, 255))
 			end

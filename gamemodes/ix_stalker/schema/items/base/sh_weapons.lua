@@ -18,6 +18,8 @@ ITEM.exRender = true
 
 -- Inventory drawing
 if (CLIENT) then
+	local Texture2 = Material("stalker/bars.png", "noclamp smooth") 
+
 	function ITEM:PaintOver(item, w, h)
 		//Equipsquare
 		if (item:GetData("equip")) then
@@ -30,35 +32,63 @@ if (CLIENT) then
 		surface.SetMaterial(item.equipIcon)
 		surface.DrawTexturedRect(w-23,h-23,19,19)
 
-		//Durability bar
-		if item:GetData("durability") then --checks if we are in the business menu
+		--Less mental way of doing the above:
+		local dura = 0
+		local wear = 0
+
+		if item:GetData("wear") then --checks if we are in the business menu
 			if (item:GetOwner():GetWeapon( item.class )) and (item:GetData("equip")) then
 				local weapon = item:GetOwner():GetWeapon( item.class )
-				surface.SetDrawColor( Color( 255, 255, 255, 255 ) )
-				surface.DrawOutlinedRect( 7, h - 15, 41, 9 )
 				if IsValid(weapon) then
-					if (weapon:GetWeaponHP() > 0) then
-						surface.SetDrawColor(110, 255, 110, 100)
-						surface.DrawRect(8, h - 14, (weapon:GetWeaponHP()/100) * 40, 8)
-					else
-						surface.SetDrawColor(255, 110, 110, 100)
-						surface.DrawRect(8, h - 14, 40, 8)
-					end
+					dura = weapon:GetWeaponDurability()
+					wear = weapon:GetWeaponWear()
 				end
 			else
-				if (item:GetData("durability")) then
-					surface.SetDrawColor( Color( 255, 255, 255, 255 ) )
-					surface.DrawOutlinedRect( 7, h - 15, 41, 9 )
-					if (item:GetData("durability") > 0) then
-						surface.SetDrawColor(110, 255, 110, 100)
-						surface.DrawRect(8, h - 14, (item:GetData("durability")/100) * 40, 8)
-					else
-						surface.SetDrawColor(255, 110, 110, 100)
-						surface.DrawRect(8, h - 14, 40, 8)
-					end
+				if (item:GetData("durability") && item:GetData("wear")) then
+					dura = item:GetData("durability",0)
+					wear = item:GetData("wear",0)
 				end
 			end
 		end
+
+		//durability
+		surface.SetMaterial(Texture2)
+		surface.SetDrawColor(Color(120, 120, 120, 255))
+		surface.DrawTexturedRectUV(5, h - 10, ScrW()*0.028, ScrH()*0.006, 0, 0, 1.02, 0)
+
+		surface.SetMaterial(Texture2)
+		if (dura >= 80) then 
+			surface.SetDrawColor(Color(120, 255, 120, 255))
+		elseif (dura >= 60) then 
+			surface.SetDrawColor(Color(180, 255, 120, 255))
+		elseif (dura >= 40) then 
+			surface.SetDrawColor(Color(255, 255, 120, 255))
+		elseif (dura >= 20) then 
+			surface.SetDrawColor(Color(255, 180, 120, 255))
+		elseif (dura > 0) then 
+			surface.SetDrawColor(Color(255, 120, 120, 255))	
+		end
+		surface.DrawTexturedRectUV(5, h - 10, math.Clamp(dura/100, 0, 1)*ScrW()*0.028, ScrH()*0.006, 0, 0, math.Clamp(dura/100, 0, 1), 0)
+
+		//wear
+		surface.SetMaterial(Texture2)
+		surface.SetDrawColor(Color(120, 120, 120, 255))
+		surface.DrawTexturedRectUV(5, h - 16, ScrW()*0.028, ScrH()*0.006, 0, 0, 1.02, 0)
+
+		surface.SetMaterial(Texture2)
+		if (wear >= 80) then 
+			surface.SetDrawColor(Color(120, 255, 120, 255))
+		elseif (wear >= 60) then 
+			surface.SetDrawColor(Color(180, 255, 120, 255))
+		elseif (wear >= 40) then 
+			surface.SetDrawColor(Color(255, 255, 120, 255))
+		elseif (wear >= 20) then 
+			surface.SetDrawColor(Color(255, 180, 120, 255))
+		elseif (wear > 0) then 
+			surface.SetDrawColor(Color(255, 120, 120, 255))	
+		end
+		surface.DrawTexturedRectUV(5, h - 16, math.Clamp(wear/100, 0, 1)*ScrW()*0.028, ScrH()*0.006, 0, 0, math.Clamp(wear/100, 0, 1), 0)
+
 
 		//Attachment Icons
 		local iterator = 1
@@ -160,7 +190,8 @@ ITEM:Hook("drop", function(item)
 
 		if (IsValid(weapon)) then
 			item:SetData("ammo", weapon:Clip1())
-			item:SetData("durability", weapon:GetWeaponHP())
+			item:SetData("wear", weapon:GetWeaponWear())
+			item:SetData("durability", weapon:GetWeaponDurability())
 
 			owner:StripWeapon(item.class)
 			owner.carryWeapons[item.weaponCategory] = nil
@@ -364,7 +395,8 @@ function ITEM:Equip(client)
 			weapon:attachSpecificAttachment(self:GetData("ammoRechamber").attachmentName)
 		end
 
-		weapon:SetWeaponHP( self:GetData("durability") )
+		weapon:SetWeaponWear( self:GetData("wear") )
+		weapon:SetWeaponDurability( self:GetData("durability") )
 		self:SetData("equip", true)
 		if self:GetData("ammoType") ~= nil then
 			timer.Simple(0.1,function()
@@ -398,6 +430,9 @@ function ITEM:OnInstanced(invID, x, y)
 	if !self:GetData("durability") then
 		self:SetData("durability", 100)
 	end
+	if !self:GetData("wear") then
+		self:SetData("wear", 100)
+	end
 	if !self:GetData("ammo") then
 		self:SetData("ammo", 0)
 	end
@@ -423,7 +458,8 @@ function ITEM:Unequip(client, bPlaySound, bRemoveItem)
 		else
 			self:SetData("ammoType", nil)
 		end
-		self:SetData("durability", weapon:GetWeaponHP())
+		self:SetData("durability", weapon:GetWeaponDurability())
+		self:SetData("wear", weapon:GetWeaponWear())
 
 		client:StripWeapon(self.class)
 	else
@@ -480,6 +516,7 @@ function ITEM:OnLoadout()
 				if self:GetData("ammoType") then
 					weapon:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
 				end
+				weapon:SetClip1(self:GetData("ammo", 0))
 			end)
 
 			if self.canAttach == true then
@@ -493,8 +530,8 @@ function ITEM:OnLoadout()
 			end
 
 			weapon.ixItem = self
-			weapon:SetClip1(self:GetData("ammo", 0))
-			weapon:SetWeaponHP( self:GetData("durability", 0))
+			weapon:SetWeaponWear( self:GetData("wear", 0))
+			weapon:SetWeaponDurability( self:GetData("durability", 0))
 		else
 			print(Format("[Helix] Cannot give weapon - %s does not exist!", self.class))
 		end
@@ -520,7 +557,8 @@ function ITEM:OnSave()
 
 	if (IsValid(weapon)) && self:GetData("equip",false) then
 		self:SetData("ammo", weapon:Clip1())
-		self:SetData("durability", weapon:GetWeaponHP())
+		self:SetData("wear", weapon:GetWeaponWear())
+		self:SetData("durability", weapon:GetWeaponDurability())
 
 		local ammoType = weapon:GetPrimaryAmmoType()
 

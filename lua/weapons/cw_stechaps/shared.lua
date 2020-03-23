@@ -118,8 +118,8 @@ SWEP.FireSound = "WARFACE_pt10_FIRE"
 SWEP.FireSoundSuppressed = "WARFACE_pt10_FIRESIL"
 SWEP.Recoil = 1.45
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.015

@@ -119,8 +119,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.HealthDamage = 0.5
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.5
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.7
 SWEP.FireSound = "CW_M3SUPER90_FIRE"
