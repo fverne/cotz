@@ -516,6 +516,7 @@ function ITEM:OnLoadout()
 				if self:GetData("ammoType") then
 					weapon:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
 				end
+				weapon:SetClip1(self:GetData("ammo", 0))
 			end)
 
 			if self.canAttach == true then
@@ -529,7 +530,6 @@ function ITEM:OnLoadout()
 			end
 
 			weapon.ixItem = self
-			weapon:SetClip1(self:GetData("ammo", 0))
 			weapon:SetWeaponWear( self:GetData("wear", 0))
 			weapon:SetWeaponDurability( self:GetData("durability", 0))
 		else
@@ -560,7 +560,7 @@ function ITEM:OnSave()
 		self:SetData("wear", weapon:GetWeaponWear())
 		self:SetData("durability", weapon:GetWeaponDurability())
 
-		local ammoType = weapon.Primary.Ammo
+		local ammoType = weapon:GetPrimaryAmmoType()
 
 		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
 			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
