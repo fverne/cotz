@@ -228,3 +228,6 @@ SWEP.ReloadFinishWait = 0.6
 SWEP.ShotgunReload = true
 
 SWEP.Chamberable = false
+
+SWEP.UseHands = true
+
