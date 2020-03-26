@@ -1,39 +1,78 @@
 DIALOGUE.name = "Universal Union"
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Welcome to the Universal Union!",
+	response = "Welcome to the zone!",
 	options = {
 		"Topic01", 
 		"Topic02",
-		"GetMoney",
+		"Topic03",
+		"GetItems",
 		"GOODBYE"
 	}
 })
 
 DIALOGUE.addTopic("Topic01", {
 	statement = "Who are you?",
-	response = "Why, I'm the Universal Union!",
+	response = "I'm Sidorovich, I run the place. I can make sure you get a good start here, or I can rat you out to the military. Just stay cool with me, and I'll stay cool with you, got that?",
 	options = {
-		"Topic03",
+		"Return",
 		"GOODBYE"
 	}
 })
 
 DIALOGUE.addTopic("Topic02", {
-	statement = "What are you?",
-	response = "I'm just testing a lot of text right now, I just need to see what happens if you add this much text and how much it looks like, because you know...sometimes people like to talk A LOT.",
+	statement = "wasap negr",
+	response = "Nice reference, you retard.",
 	options = {
-		"Topic03",
+		"Return",
 		"GOODBYE"
 	}
 })
 
 DIALOGUE.addTopic("Topic03", {
+	statement = "Why is Helix such a nice framework?",
+	response = "It's pretty neat, yeah.",
+	options = {
+		"Return",
+		"GOODBYE"
+	}
+})
+
+DIALOGUE.addTopic("GetItems", {
+	statement = "Can you give me something for free?",
+	response = "That depends buddy.",
+	options = {
+		"GetMoney",
+		"GetStarterKit",
+		"GOODBYE"
+	}
+})
+
+DIALOGUE.addTopic("Return", {
 	statement = "Let's talk about something else.",
 	response = "What would you like to know?",
 	options = {
 		"Topic01",
 		"Topic02",
+		"Topic03",
+		"GOODBYE"
+	}
+})
+
+DIALOGUE.addTopic("GetStarterKit", {
+	statement = "Hey, can I get a starterkit from you?",
+	response = "",
+	preCallback = function(self, client, target)
+		if (CLIENT) then
+			self.response = "Okay "..client:GetName().." here is a starter kit. It contains a bit of money, a TT-33, and a bit of ammo. I won't give you any more of these. Don't go die somewhere, I expect this to be an investment."
+		end
+	end,
+	postCallback = function(self, client, target)
+		if (SERVER) then
+			client:GetCharacter():GetInventory():Add("kit_newchar")
+		end
+	end,
+	options = {
 		"GOODBYE"
 	}
 })
@@ -58,5 +97,5 @@ DIALOGUE.addTopic("GetMoney", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "Goodbye.",
-	response = "Going so soon?"
+	response = "Take care, STALKER..."
 })
