@@ -104,7 +104,7 @@ function PANEL:dialogue(name, message, instant, color, topicID)
 
 
 
-	parseMessage = "''"..message.."''"
+	local parseMessage = "''"..message.."''"
 
 	if instant then
 		self.nametitle:SetText(name)
