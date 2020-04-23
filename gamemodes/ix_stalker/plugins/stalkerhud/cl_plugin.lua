@@ -1,4 +1,4 @@
-local Texture2 = Material("stalker/bars.png", "noclamp smooth") 
+local Texture2 = Material("cotz/panels/hp1.png", "noclamp smooth") 
 local Texture7 = Material("stalker/ui/hud_hunger.png", "noclamp smooth") 
 local gun = Material("vgui/hud/gun.png", "noclamp smooth")
 local gun2 = Material("vgui/hud/gun2.png", "noclamp smooth") 
@@ -10,43 +10,64 @@ surface.CreateFont("stalkermainmenufont", {
 	font = "stalker2",
 	size = ScreenScale(8),
 	extended = true,
-	weight = 500
+	weight = 500, 
+	antialias = true
 })
+
 surface.CreateFont("stalkerregularsmallfont", {
 	font = "alsina",
 	size = ScreenScale(6),
 	extended = true,
-	weight = 500
+	weight = 500, 
+	antialias = true
 })
+
 surface.CreateFont("stalkerregularsmallfont2", {
 	font = "alsina",
 	size = ScreenScale(7),
 	extended = true,
-	weight = 500
+	weight = 500, 
+	antialias = true
 })
+
 surface.CreateFont("stalkerregularfont", {
 	font = "alsina",
 	size = ScreenScale(8),
 	extended = true,
-	weight = 500
+	weight = 500, 
+	antialias = true
 })
+
+surface.CreateFont("stalkerregularchatfont", {
+	font = "alsina",
+	size = ScreenScale(9),
+	extended = true,
+	weight = 500, 
+	antialias = true
+})
+
 surface.CreateFont("stalkerregulartitlefont", {
 	font = "alsina",
-	size = ScreenScale(12),
+	size = ScreenScale(9),
 	extended = true,
-	weight = 500
+	weight = 500, 
+	antialias = true
 })
+
 surface.CreateFont("stalkerregularbigfont", {
 	font = "alsina",
 	size = ScreenScale(18),
 	extended = true,
-	weight = 500
+	weight = 500, 
+	antialias = true
 })
+
 surface.CreateFont("stalkertitlefont", {
 	font = "type-ra",
 	size = ScreenScale(16),
 	extended = true,
-	weight = 500
+	weight = 500, 
+	antialias = true
 })
 
 local color = {}
@@ -164,7 +185,7 @@ function PLUGIN:HUDPaint()
 
 	surface.SetMaterial(Texture2)
 	surface.SetDrawColor(Color(255, 120, 120, 255))
-	surface.DrawTexturedRectUV(ScrW()*0.05, ScrH()*0.905, math.Clamp(LocalPlayer():Health()/LocalPlayer():GetMaxHealth(), 0, 1)*ScrW()*0.15, ScrH()*0.008, 0, 0, math.Clamp(LocalPlayer():Health()/LocalPlayer():GetMaxHealth(), 0, 1)*1.4, 0)
+	surface.DrawTexturedRectUV(ScrW()*0.05, ScrH()*0.905, math.Clamp(LocalPlayer():Health()/LocalPlayer():GetMaxHealth(), 0, 1)*ScrW()*0.15, ScrH()*0.008, 0, 0, math.Clamp(LocalPlayer():Health()/LocalPlayer():GetMaxHealth(), 0, 1), 1)
 	
 /*
 	surface.SetMaterial(Texture7)

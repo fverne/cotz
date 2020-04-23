@@ -1,4 +1,4 @@
-PLUGIN.name = "Охота"
+PLUGIN.name = "Mutant Poaching"
 PLUGIN.author = "Spenser&Kek1ch"
 PLUGIN.desc = ""
 

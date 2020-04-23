@@ -33,14 +33,14 @@ function PANEL:Init()
 
 	-- main button panel
 	self.buttons = self:Add("Panel")
-	self.buttons:SetSize(self:GetWide() * 0.25, self:GetTall() - self:GetPadding() * 2)
+	self.buttons:SetSize(self:GetWide() * 0.1, self:GetTall() - self:GetPadding() * 2)
 	self.buttons:Dock(LEFT)
 	self.buttons:SetPaintedManually(true)
 
 	self.unibuttons = self.buttons:Add("Panel")
 	self.unibuttons:Dock(BOTTOM)
 	self.unibuttons:SetTall(self.buttons:GetTall()*0.1)
-	self.unibuttons:DockMargin(0, 0, self.buttons:GetWide()*0.86, 20)
+	self.unibuttons:DockMargin(0, 0, self.buttons:GetWide()*0.66, 20)
 
 	local characters = self.unibuttons:Add("ixMenuButton")
 	characters:SetFont("stalkertitlefont")
@@ -270,7 +270,8 @@ function PANEL:PopulateTabs()
 		button:Dock(TOP)
 		button:SetButtonList(self.tabs.buttons)
 		button:SetBackgroundColor(buttonColor)
-		button:DockMargin(0, 0, 0, 20)
+		button:DockMargin(0, 0, 0, 10)
+		button:SetTall(ScrH()*0.05)
 		button.id = id
 		button.OnSelected = function()
 			self:TransitionSubpanel(id)

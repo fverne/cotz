@@ -18,7 +18,7 @@ ITEM.exRender = true
 
 -- Inventory drawing
 if (CLIENT) then
-	local Texture2 = Material("stalker/bars.png", "noclamp smooth") 
+	local Texture2 = Material("cotz/panels/hp1.png", "noclamp smooth") 
 
 	function ITEM:PaintOver(item, w, h)
 		//Equipsquare
@@ -54,7 +54,7 @@ if (CLIENT) then
 		//durability
 		surface.SetMaterial(Texture2)
 		surface.SetDrawColor(Color(120, 120, 120, 255))
-		surface.DrawTexturedRectUV(5, h - 10, ScrW()*0.028, ScrH()*0.006, 0, 0, 1.02, 0)
+		surface.DrawTexturedRectUV(5, h - 10, ScrW()*0.028, ScrH()*0.006, 0, 0, 0.2, 1)
 
 		surface.SetMaterial(Texture2)
 		if (dura >= 80) then 
@@ -68,12 +68,12 @@ if (CLIENT) then
 		elseif (dura > 0) then 
 			surface.SetDrawColor(Color(255, 120, 120, 255))	
 		end
-		surface.DrawTexturedRectUV(5, h - 10, math.Clamp(dura/100, 0, 1)*ScrW()*0.028, ScrH()*0.006, 0, 0, math.Clamp(dura/100, 0, 1), 0)
+		surface.DrawTexturedRectUV(5, h - 10, math.Clamp(dura/100, 0, 1)*ScrW()*0.028, ScrH()*0.006, 0, 0, math.Clamp(dura/100, 0, 1)*0.2, 1)
 
 		//wear
 		surface.SetMaterial(Texture2)
 		surface.SetDrawColor(Color(120, 120, 120, 255))
-		surface.DrawTexturedRectUV(5, h - 16, ScrW()*0.028, ScrH()*0.006, 0, 0, 1.02, 0)
+		surface.DrawTexturedRectUV(5, h - 16, ScrW()*0.028, ScrH()*0.006, 0, 0, 0.2, 1)
 
 		surface.SetMaterial(Texture2)
 		if (wear >= 80) then 
@@ -87,7 +87,7 @@ if (CLIENT) then
 		elseif (wear > 0) then 
 			surface.SetDrawColor(Color(255, 120, 120, 255))	
 		end
-		surface.DrawTexturedRectUV(5, h - 16, math.Clamp(wear/100, 0, 1)*ScrW()*0.028, ScrH()*0.006, 0, 0, math.Clamp(wear/100, 0, 1), 0)
+		surface.DrawTexturedRectUV(5, h - 16, math.Clamp(wear/100, 0, 1)*ScrW()*0.028, ScrH()*0.006, 0, 0, math.Clamp(wear/100, 0, 1)*0.2, 1)
 
 
 		//Attachment Icons
