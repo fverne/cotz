@@ -248,7 +248,7 @@ end
 
 function SKIN:PaintTooltipBackground(panel, width, height)
 	surface.SetMaterial(Material("cotz/panels/loot_interface.png"))
-	surface.SetDrawColor(255, 255, 255, 220)
+	surface.SetDrawColor(255, 255, 255, 245)
 	surface.DrawTexturedRect(0, 0, width, height)
 end
 

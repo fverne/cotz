@@ -63,8 +63,8 @@ surface.CreateFont("stalkerregularbigfont", {
 })
 
 surface.CreateFont("stalkertitlefont", {
-	font = "type-ra",
-	size = ScreenScale(16),
+	font = "alsina",
+	size = ScreenScale(13),
 	extended = true,
 	weight = 500, 
 	antialias = true

@@ -119,7 +119,7 @@ function ITEM:GetDescription()
 	end
 
 	if (self.entity) then
-		return (self.description .. "\n \nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
+		return (self.description .. "\n \nWear: " .. math.floor(self:GetData("wear", 100)) .. "%\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 	else
 		//Attachments
 		str = str.."\n\nAttachments available:\n"
@@ -140,7 +140,7 @@ function ITEM:GetDescription()
 			str = str.."None\n"
 		end
 
-        return (str .. "\n \nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
+        return (str .. "\n \nWear: " .. math.floor(self:GetData("wear", 100)) .. "%\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 	end
 end
 
