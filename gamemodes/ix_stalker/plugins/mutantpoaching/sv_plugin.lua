@@ -13,8 +13,7 @@ ix.MutantTable = {
 	["models/stalkertnb/chimera1.mdl"] = "chimera",
 	["models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl"] = "burer",
 	["models/jerry/mutants/stalker_anomaly_ca1.mdl"] = "cat",
-	["models/maver1k_XVII/Stalker/mutants/karlik.mdl"] = "karlik",
-
+	["models/maver1k_XVII/Stalker/mutants/karlik.mdl"] = "karlik"
 }
 
 ix.MutantParts = {
@@ -190,7 +189,7 @@ if SERVER then
 							if (npc:IsRagdoll() and ix.MutantTable[npc:GetModel()] and npc:GetPos():Distance( client:GetPos() ) <= 55) then
 								client:SetAction("Poaching", 5)
 								client:Freeze(true) 
-								client:ForceSequence("Cidle All")
+								--client:ForceSequence("Cidle All")
 								npc:EmitSound( "stalkersound/inv_mutant_loot_animal.ogg", 60, 100 )
 								client:ScreenFade( SCREENFADE.OUT, Color( 0, 0, 0 ), 1, 3 ) 
 								timer.Simple(1, function() 
