@@ -31,6 +31,8 @@ if (SERVER) then
 			physObj:Wake()
 		end
 
+		self:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
+
 		hook.Run("OnItemSpawned", self)
 	end
 

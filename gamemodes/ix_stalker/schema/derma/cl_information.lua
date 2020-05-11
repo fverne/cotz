@@ -4,9 +4,9 @@ local PANEL = {}
 function PANEL:Init()
 	local parent = self:GetParent()
 
-	self:SetSize(parent:GetWide() * 0.3, parent:GetTall())
-	self:Dock(RIGHT)
-	self:DockMargin(0, ScrH() * 0.05, ScrW()*0.02, 0)
+	self:SetSize(parent:GetWide(), parent:GetTall())
+	self:Dock(FILL)
+	self:DockMargin(0, ScrH() * 0.05, 0, 0)
 
 	self.VBar:SetWide(0)
 
@@ -430,7 +430,7 @@ hook.Add("CreateMenuButtons", "ixCharInfo", function(tabs)
 		buttonColor = team.GetColor(LocalPlayer():Team()),
 		Create = function(info, container)
 			container.infoPanel = container:Add("ixCharacterInfo")
-			container.infoPanel:DockMargin(0,container.infoPanel:GetParent():GetTall()*0.15,container.infoPanel:GetParent():GetWide()*0.05,container.infoPanel:GetParent():GetWide()*0.17)
+			container.infoPanel:DockMargin(0,0,0,0)
 
 
 			container.OnMouseReleased = function(this, key)
