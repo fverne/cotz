@@ -123,7 +123,7 @@ ITEM.functions.Clone = {
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
-		draw.SimpleText(math.Round(item:GetData("quantity", 1)).."/"..item.maxStack, "DermaDefault", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
+		draw.SimpleText(math.Round(item:GetData("quantity", 1)).."/"..item.maxStack, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
 	end
 end
 

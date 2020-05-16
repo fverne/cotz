@@ -11,7 +11,7 @@ ITEM.maxDie = 6
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
 		if (item:GetData("diecount")) then
-			draw.SimpleText("d:"..item:GetData("diecount", 1), "DermaDefault", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
+			draw.SimpleText("d:"..item:GetData("diecount", 1), "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
 		end
 	end
 end

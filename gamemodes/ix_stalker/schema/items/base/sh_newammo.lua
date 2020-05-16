@@ -129,7 +129,7 @@ ITEM.functions.Clone = {
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
 		draw.SimpleText(
-			item:GetData("quantity", item.ammoAmount).."/"..item.ammoAmount, "DermaDefault", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black
+			item:GetData("quantity", item.ammoAmount).."/"..item.ammoAmount, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black
 		)
 	end
 end

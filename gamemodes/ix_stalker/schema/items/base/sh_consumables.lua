@@ -122,7 +122,7 @@ if (CLIENT) then
 		local cooked = item:GetData("cooked", 1)
 		local quantity = item:GetData("quantity", item.quantity)
 
-		draw.SimpleText(quantity.."/"..item.quantity, "DermaDefault", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
+		draw.SimpleText(quantity.."/"..item.quantity, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
 	end
 end
 
