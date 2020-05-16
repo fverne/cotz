@@ -43,7 +43,7 @@ if (SERVER) then
 		self:Remove()
 
 		local BottomBox = ents.Create("prop_physics")
-		BottomBox:SetCollisionGroup( COLLISION_GROUP_PASSABLE_DOOR )
+		BottomBox:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
 		BottomBox:SetPos(pos)
 		BottomBox:SetAngles(ang)
 		BottomBox:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_metall_01_1.mdl")
@@ -52,7 +52,7 @@ if (SERVER) then
 		
 
 		local TopBox = ents.Create("prop_physics")
-		TopBox:SetCollisionGroup( COLLISION_GROUP_PASSABLE_DOOR )
+		TopBox:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
 		TopBox:SetPos(pos + Vector(0, 0, 5))
 		TopBox:SetAngles(ang)
 		TopBox:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_metall_01_2.mdl")
@@ -60,7 +60,7 @@ if (SERVER) then
 		TopBox:Activate()
 		
 
-		timer.Simple(25, function()
+		timer.Simple(3, function()
 			BottomBox:Remove()
 			TopBox:Remove()
 		end)

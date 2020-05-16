@@ -100,7 +100,7 @@ if (SERVER) then
 
 
 
-		timer.Simple(25, function()
+		timer.Simple(3, function()
 			BottomBox:Remove()
 			TopBox:Remove()
 			FrontBox:Remove()
