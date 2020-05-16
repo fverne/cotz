@@ -54,6 +54,13 @@ function PLUGIN:GetDefaultAttributePoints(client, count)
 	return 40
 end
 
+if (CLIENT) then
+	function PLUGIN:CharacterLoaded()
+		ix.option.Set("minimalTooltips", true, true)
+		ix.option.stored["minimalTooltips"].hidden = function() return true end
+	end
+end
+
 do
 	ix.char.RegisterVar("attributes", {
 		field = "attributes",

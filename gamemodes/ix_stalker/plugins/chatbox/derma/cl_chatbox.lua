@@ -101,7 +101,7 @@ AccessorFunc(PANEL, "bActive", "Active", FORCE_BOOL)
 AccessorFunc(PANEL, "bUnread", "Unread", FORCE_BOOL)
 
 function PANEL:Init()
-	self:SetFont("ixChatFont")
+	self:SetFont("stalkerregularchatfont")
 	self:SetContentAlignment(5)
 
 	self.unreadAlpha = 0
@@ -767,7 +767,7 @@ function PANEL:Init()
 	self.name:Dock(TOP)
 	self.name:DockMargin(4, 4, 0, 0)
 	self.name:SetContentAlignment(4)
-	self.name:SetFont("ixChatFont")
+	self.name:SetFont("stalkerregularchatfont")
 	self.name:SetTextColor(ix.config.Get("color"))
 	self.name:SetExpensiveShadow(1, color_black)
 
@@ -775,7 +775,7 @@ function PANEL:Init()
 	self.description:Dock(BOTTOM)
 	self.description:DockMargin(4, 4, 0, 4)
 	self.description:SetContentAlignment(4)
-	self.description:SetFont("ixChatFont")
+	self.description:SetFont("stalkerregularchatfont")
 	self.description:SetTextColor(color_white)
 	self.description:SetExpensiveShadow(1, color_black)
 
@@ -844,7 +844,7 @@ function PANEL:Init()
 	local entryPanel = self:Add("Panel")
 	entryPanel:SetZPos(1)
 	entryPanel:Dock(BOTTOM)
-	entryPanel:DockMargin(4, 0, 4, 4)
+	entryPanel:DockMargin(self:GetWide()*0.02, self:GetWide()*0.005, self:GetWide()*0.02, self:GetTall()*0.031)
 
 	self.entry = entryPanel:Add("ixChatboxEntry")
 	self.entry:Dock(FILL)
@@ -862,6 +862,7 @@ function PANEL:Init()
 
 	self.tabs = self:Add("ixChatboxTabs")
 	self.tabs:Dock(FILL)
+	self.tabs:DockPadding(self:GetWide()*0.016, self:GetTall()*0.001, self:GetWide()*0.011, 0)
 	self.tabs.OnTabChanged = ix.util.Bind(self, self.OnTabChanged)
 
 	self.autocomplete = self.tabs:Add("ixChatboxAutocomplete")

@@ -29,8 +29,17 @@ function PANEL:SetText(text, noTranslation)
 end
 
 function PANEL:PaintBackground(width, height)
-	surface.SetMaterial( Material("stalker/textentry.png") )
 	surface.SetDrawColor(255, 255, 255, 255)
+	surface.SetMaterial( Material("cotz/panels/button3_1.png") )
+
+	if self:IsHovered() then
+		surface.SetDrawColor(150, 150, 150, 255)
+	end
+
+	if self.selected then
+		surface.SetMaterial( Material("cotz/panels/button3_2.png") )
+	end
+
 	surface.DrawTexturedRect(0, 0, width, height)
 end
 
@@ -142,10 +151,18 @@ end
 
 function PANEL:PaintBackground(width, height)
 	local alpha = self.selected and 255 or self.currentBackgroundAlpha
-	surface.SetMaterial( Material("stalker/textentry.png") )
 	surface.SetDrawColor(255, 255, 255, 255)
+	surface.SetMaterial( Material("cotz/panels/button3_1.png") )
+
+	if self:IsHovered() then
+		surface.SetDrawColor(150, 150, 150, 255)
+	end
+
+	if self.selected then
+		surface.SetMaterial( Material("cotz/panels/button3_2.png") )
+	end
 	surface.DrawTexturedRect(0, 0, width, height)
-	derma.SkinFunc("DrawImportantBackground", 0, 0, width, height, ColorAlpha(self.backgroundColor, alpha))
+	--derma.SkinFunc("DrawImportantBackground", 0, 0, width, height, ColorAlpha(self.backgroundColor, alpha))
 end
 
 function PANEL:SetSelected(bValue)

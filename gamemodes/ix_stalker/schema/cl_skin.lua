@@ -3,13 +3,12 @@ local gradient = surface.GetTextureID("vgui/gradient-d")
 local gradientUp = surface.GetTextureID("vgui/gradient-u")
 local gradientLeft = surface.GetTextureID("vgui/gradient-l")
 local gradientRadial = Material("helix/gui/radial-gradient.png")
-local background = Material("stalker/x.png")
+local background = Material("cotz/panels/frame1.png")
 local background2 = Material("vgui/background/wallpaper.jpg")
 local background3 = Material("vgui/background/stalkerbackground1.png")
 local background4 = Material("vgui/background/stalkerbackground2.jpg")
 local background5 = Material("vgui/background/stalkerbackground3.jpg")
-local menubuttonbackground = Material("stalker/menubutton.png")
-local panelbackground = Material("stalker/ui.png")
+local menubuttonbackground = Material("cotz/panels/button2.png")
 local defaultBackgroundColor = Color(30, 30, 30, 200)
 
 local SKIN = {}
@@ -248,8 +247,8 @@ function SKIN:PaintEntityInfoBackground(panel, width, height)
 end
 
 function SKIN:PaintTooltipBackground(panel, width, height)
-	surface.SetMaterial(Material("stalker/ui.png"))
-	surface.SetDrawColor(255, 255, 255, 255)
+	surface.SetMaterial(Material("cotz/panels/loot_interface.png"))
+	surface.SetDrawColor(255, 255, 255, 245)
 	surface.DrawTexturedRect(0, 0, width, height)
 end
 
@@ -432,7 +431,7 @@ function SKIN:PaintChatboxBackground(panel, width, height)
 	if (panel:GetActive()) then
 		surface.SetDrawColor(255, 255, 255, 255)
 		surface.SetMaterial(background)
-		surface.DrawTexturedRect(0, 0, width, height)
+		surface.DrawTexturedRectUV(0, 0, width, height, 0, 1, 1, 0)
 	end
 
 	surface.SetDrawColor(color_black)

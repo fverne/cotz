@@ -23,7 +23,7 @@ function PANEL:Init()
 
 	self.options = self:Add("DScrollPanel")
 	self.options:Dock(FILL)
-	self.options:DockMargin(ScrW()*0.021, ScrH()*0.04, ScrW()*0.021, ScrH()*0.02)
+	self.options:DockMargin(ScrW()*0.021, ScrH()*0.03, ScrW()*0.021, ScrH()*0.02)
 end
 
 function PANEL:Think()
@@ -104,7 +104,7 @@ function PANEL:dialogue(name, message, instant, color, topicID)
 
 
 
-	parseMessage = "''"..message.."''"
+	local parseMessage = "''"..message.."''"
 
 	if instant then
 		self.nametitle:SetText(name)

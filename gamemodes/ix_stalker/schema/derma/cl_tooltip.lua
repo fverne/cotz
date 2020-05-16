@@ -88,7 +88,7 @@ end
 -- unless you set the font/colors manually.
 -- @realm client
 function PANEL:SetImportant()
-	self:SetFont("stalkerregulartitlefont")
+	self:SetFont("stalkertitlefont")
 	self:SetExpensiveShadow(1, color_black)
 	self:SetBackgroundColor(ix.config.Get("color"))
 end
@@ -414,7 +414,8 @@ function PANEL:SizeToContents()
 		height = height + v:GetTall()
 	end
 
-	self:SetSize(width, height)
+	self:SetSize(width*1.1, height*1.05)
+	self:DockPadding(self:GetWide()*0.05, self:GetTall()*0.02, self:GetWide()*0.05, self:GetTall()*0.1)
 end
 
 function PANEL:Remove()
@@ -452,7 +453,7 @@ function PANEL:Init()
 end
 
 function PANEL:SetImportant()
-	self:SetFont("stalkerregulartitlefont")
+	self:SetFont("stalkertitlefont")
 end
 
 -- background color will affect text instead in minimal tooltips

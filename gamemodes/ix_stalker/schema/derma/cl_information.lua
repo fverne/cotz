@@ -96,7 +96,7 @@ function PANEL:Init()
 	end
 
 	if (!suppress.description) then
-		local descriptionPanel = self:Add("Panel")
+		/*local descriptionPanel = self:Add("Panel")
 		descriptionPanel:Dock(TOP)
 		descriptionPanel:DockMargin(0, 0, 0, 8)
 		descriptionPanel.PerformLayout = function(_, width, height)
@@ -150,7 +150,7 @@ function PANEL:Init()
 			end
 
 			descriptionPanel:SetTall(this:GetTall())
-		end
+		end*/
 	end
 
 	if (!suppress.characterInfo) then
@@ -171,9 +171,9 @@ function PANEL:Init()
 		end
 
 		if (!suppress.faction) then
-			self.faction = self.characterInfo:Add("ixListRow")
+			/*self.faction = self.characterInfo:Add("ixListRow")
 			self.faction:SetList(self.characterInfo.list)
-			self.faction:Dock(TOP)
+			self.faction:Dock(TOP)*/
 		end
 
 		if (!suppress.class) then
@@ -198,7 +198,7 @@ function PANEL:Init()
 	if (!suppress.attributes) then
 		local character = LocalPlayer().GetCharacter and LocalPlayer():GetCharacter()
 
-		if (character) then
+		/*if (character) then
 			self.attributes = self:Add("ixCategoryPanel")
 			self.attributes:SetText("Primary Attributes")
 			self.attributes:Dock(TOP)
@@ -248,7 +248,7 @@ function PANEL:Init()
 			end
 
 			self.attributes:SizeToContents()
-		end
+		end*/
 	end
 
 	if (!suppress.secattributes) then
