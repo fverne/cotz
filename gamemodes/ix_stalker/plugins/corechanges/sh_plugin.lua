@@ -50,15 +50,31 @@ if (SERVER) then
 	end
 end
 
-function PLUGIN:GetDefaultAttributePoints(client, count)
-	return 40
-end
-
 if (CLIENT) then
 	function PLUGIN:CharacterLoaded()
 		ix.option.Set("minimalTooltips", true, true)
 		ix.option.stored["minimalTooltips"].hidden = function() return true end
 	end
+
+	function PLUGIN:SpawnMenuOpen()
+		if LocalPlayer():GetCharacter():HasFlags("petN") or LocalPlayer():IsAdmin() then
+			return true
+		else
+			return false
+		end
+	end
+
+	function PLUGIN:ContextMenuOpen()
+		if LocalPlayer():GetCharacter():HasFlags("petN") or LocalPlayer():IsAdmin() then
+			return true
+		else
+			return false
+		end
+	end
+end
+
+function PLUGIN:GetDefaultAttributePoints(client, count)
+	return 40
 end
 
 do
