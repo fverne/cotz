@@ -34,8 +34,8 @@ if (SERVER) then
 			self.IsDamaged = true
 
 			for i = 1,4 do
-				if (math.random(1, 2) == 2) then
-					ix.item.Spawn(table.Random(items), self:GetPos()+Vector(0,0,i))
+				if (math.random(1, 6) == 6) then
+					ix.item.Spawn(table.Random(items), self:GetPos()+Vector(0, 0, 2 + i))
 				end
 			end
 		end
@@ -44,21 +44,22 @@ if (SERVER) then
 
 		local BottomBox = ents.Create("prop_physics")
 		BottomBox:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
-		BottomBox:SetPos(pos)
+		BottomBox:PhysicsInit(SOLID_VPHYSICS)
+		BottomBox:SetPos(pos + Vector(0, 0, 1))
 		BottomBox:SetAngles(ang)
 		BottomBox:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_metall_01_1.mdl")
-		BottomBox:Spawn()
-		BottomBox:Activate()
-		
 
 		local TopBox = ents.Create("prop_physics")
 		TopBox:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
-		TopBox:SetPos(pos + Vector(0, 0, 5))
+		TopBox:PhysicsInit(SOLID_VPHYSICS)
+		TopBox:SetPos(pos + Vector(0, 0, 8))
 		TopBox:SetAngles(ang)
 		TopBox:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_metall_01_2.mdl")
-		TopBox:Spawn()
-		TopBox:Activate()
 		
+		timer.Simple(0.0001, function()
+			BottomBox:Spawn()
+			TopBox:Spawn()
+		end)
 
 		timer.Simple(3, function()
 			BottomBox:Remove()
