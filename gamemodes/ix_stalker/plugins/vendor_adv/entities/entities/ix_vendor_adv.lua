@@ -7,7 +7,7 @@ ENT.AdminOnly = true
 ENT.isVendor = true
 ENT.bNoPersist = true
 
-ENT.RestockThinkInterval = 10 --600
+ENT.RestockThinkInterval = 600
 ENT.restockCheckTimer = 0
 
 function ENT:SetupDataTables()
@@ -33,6 +33,8 @@ function ENT:Initialize()
 
 		self:SetDisplayName("John Doe")
 		self:SetDescription("")
+
+		self.dialogueid = "tradertest"
 
 		self.receivers = {}
 
@@ -191,38 +193,11 @@ if (SERVER) then
 			return
 		end
 
-		self.receivers[#self.receivers + 1] = activator
+		activator:dialogue(self.dialogueid, self)
+	end
 
-		if (self.messages[VENDOR_WELCOME]) then
-			activator:ChatPrint(self:GetDisplayName()..": "..self.messages[VENDOR_WELCOME])
-		end
-
-		local items = {}
-
-		-- Only send what is needed.
-		for k, v in pairs(self.items) do
-			if (!table.IsEmpty(v) and (CAMI.PlayerHasAccess(activator, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])) then
-				items[k] = v
-			end
-		end
-
-		self.scale = self.scale or 0.5
-
-		activator.ixVendorAdv = self
-
-		-- force sync to prevent outdated inventories while buying/selling
-		if (character) then
-			character:GetInventory():Sync(activator, true)
-		end
-
-		net.Start("ixVendorAdvOpen")
-			net.WriteEntity(self)
-			net.WriteUInt(self.money or 0, 16)
-			net.WriteTable(items)
-			net.WriteFloat(self.scale or 0.5)
-		net.Send(activator)
-
-		ix.log.Add(activator, "vendorUse", self:GetDisplayName())
+	function ENT:SetDialogueID(value)
+		self.dialogueid = value
 	end
 
 	function ENT:SetMoney(value)
@@ -286,10 +261,8 @@ if (SERVER) then
 
 			v[VENDOR_RESTOCK_TIME] = v[VENDOR_RESTOCK_TIME] or 0
 
-			print("Restock time is", v[VENDOR_RESTOCK_TIME], " theTime was ", theTime)
-
 			if v[VENDOR_RESTOCK_TIME] < theTime then
-				v[VENDOR_RESTOCK_TIME] = theTime + v[VENDOR_RESTOCK_INTERVAL] * 60 --* 60 -- Interval is in hours, os.time() is in seconds
+				v[VENDOR_RESTOCK_TIME] = theTime + v[VENDOR_RESTOCK_INTERVAL] * 60 * 60 -- Interval is in hours, os.time() is in seconds
 				self:AddStock(k, v[VENDOR_RESTOCK_AMOUNT])
 			end
 		end
@@ -322,6 +295,18 @@ else
 		self:DrawModel()
 	end
 
+	function ENT:PlayerNearby()
+		for k,v in pairs(player.GetAll()) do
+			if self:GetPos():Distance(v:GetPos()) < 200 then return true end
+		end
+
+		return false
+	end
+
+	function ENT:MakeNoise()
+		self:EmitSound("stalkersound/pain"..math.random(12)..".wav")
+	end
+
 	function ENT:Think()
 		local noBubble = self:GetNoBubble()
 
@@ -334,6 +319,11 @@ else
 		if ((self.nextAnimCheck or 0) < CurTime()) then
 			self:SetAnim()
 			self.nextAnimCheck = CurTime() + 60
+		end
+
+		if (((self.nextNoise or 0) < CurTime()) and self:PlayerNearby()) then
+			self:MakeNoise()
+			self.nextNoise = CurTime() + math.random(15,45)
 		end
 
 		self:SetNextClientThink(CurTime() + 0.25)

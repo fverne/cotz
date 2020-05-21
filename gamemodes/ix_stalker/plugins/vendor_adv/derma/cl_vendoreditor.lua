@@ -12,6 +12,7 @@ function PANEL:Init()
 	self.name = self:Add("DTextEntry")
 	self.name:Dock(TOP)
 	self.name:SetText(entity:GetDisplayName())
+	self.name:SetPlaceholderText( "Name" )
 	self.name.OnEnter = function(this)
 		if (entity:GetDisplayName() != this:GetText()) then
 			self:updateVendor("name", this:GetText())
@@ -22,9 +23,21 @@ function PANEL:Init()
 	self.description:Dock(TOP)
 	self.description:DockMargin(0, 4, 0, 0)
 	self.description:SetText(entity:GetDescription())
+	self.description:SetPlaceholderText( "Description" )
 	self.description.OnEnter = function(this)
 		if (entity:GetDescription() != this:GetText()) then
 			self:updateVendor("description", this:GetText())
+		end
+	end
+
+	self.dialogueid = self:Add("DTextEntry")
+	self.dialogueid:Dock(TOP)
+	self.dialogueid:DockMargin(0, 4, 0, 0)
+	self.dialogueid:SetText(entity.dialogueid)
+	self.dialogueid:SetPlaceholderText( "Dialogue ID" )
+	self.dialogueid.OnEnter = function(this)
+		if (entity.dialogueid != this:GetText()) then
+			self:updateVendor("dialogueid", this:GetText())
 		end
 	end
 
@@ -32,6 +45,7 @@ function PANEL:Init()
 	self.model:Dock(TOP)
 	self.model:DockMargin(0, 4, 0, 0)
 	self.model:SetText(entity:GetModel())
+	self.model:SetPlaceholderText( "Modelpath" )
 	self.model.OnEnter = function(this)
 		if (entity:GetModel():lower() != this:GetText():lower()) then
 			self:updateVendor("model", this:GetText():lower())
@@ -47,6 +61,7 @@ function PANEL:Init()
 	self.money:SetDisabled(!useMoney)
 	self.money:SetEnabled(useMoney)
 	self.money:SetNumeric(true)
+	self.money:SetPlaceholderText( "Money amount" )
 	self.money.OnEnter = function(this)
 		local value = tonumber(this:GetText()) or entity.money
 

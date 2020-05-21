@@ -44,6 +44,10 @@ function PANEL:Think()
 end
 
 function PANEL:targetName()
+	if self.target.GetDisplayName then
+		return self.target:GetDisplayName()
+	end
+
 	return self.target.PrintName or "Unknown"
 end
 

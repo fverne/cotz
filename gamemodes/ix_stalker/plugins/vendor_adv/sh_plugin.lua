@@ -73,7 +73,8 @@ if (SERVER) then
 				factions = entity.factions,
 				classes = entity.classes,
 				money = entity.money,
-				scale = entity.scale
+				scale = entity.scale,
+				dialogueid = entity.dialogueid
 			}
 		end
 
@@ -118,6 +119,7 @@ if (SERVER) then
 			entity.classes = v.classes or {}
 			entity.money = v.money
 			entity.scale = v.scale or 0.5
+			entity.dialogueid = v.dialogueid
 		end
 	end
 
@@ -183,6 +185,8 @@ if (SERVER) then
 			entity:SetDisplayName(data)
 		elseif (key == "description") then
 			entity:SetDescription(data)
+		elseif (key == "dialogueid") then
+			entity:SetDialogueID(data)
 		elseif (key == "bubble") then
 			entity:SetNoBubble(data)
 		elseif (key == "mode") then
@@ -463,6 +467,7 @@ else
 		entity.messages = net.ReadTable()
 		entity.factions = net.ReadTable()
 		entity.classes = net.ReadTable()
+		entity.dialogueid = net.ReadString();
 
 		ix.gui.vendor = vgui.Create("ixVendorAdv")
 		ix.gui.vendor:SetReadOnly(true)
@@ -577,6 +582,8 @@ else
 			editor.name:SetText(data)
 		elseif (key == "description") then
 			editor.description:SetText(data)
+		elseif (key == "dialogueid") then
+			editor.dialogueid:SetText(data)
 		elseif (key == "bubble") then
 			editor.bubble.noSend = true
 			editor.bubble:SetValue(data and 1 or 0)
@@ -743,6 +750,7 @@ properties.Add("vendor_edit", {
 			net.WriteTable(entity.messages)
 			net.WriteTable(entity.factions)
 			net.WriteTable(entity.classes)
+			net.WriteString(entity.dialogueid)
 		net.Send(client)
 	end
 })
