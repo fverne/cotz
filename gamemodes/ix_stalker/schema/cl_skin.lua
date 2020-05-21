@@ -58,11 +58,12 @@ hook.Add("ColorSchemeChanged", "ixSkin", function(color)
 	SKIN.Colours.Area.Background = color
 end)
 
-function SKIN:DrawHelixCurved(x, y, radius, segments, barHeight, fraction, color)
+function SKIN:DrawHelixCurved(x, y, radius, segments, barHeight, fraction, color, altColor)
 	radius = radius or math.min(ScreenScale(72), 128) * 2
 	segments = segments or 76
 	barHeight = barHeight or 64
 	color = color or ix.config.Get("color")
+	altColor = altColor or Color(color.r * 0.5, color.g * 0.5, color.b * 0.5, color.a)
 	fraction = fraction or 1
 
 	surface.SetTexture(-1)
@@ -76,7 +77,7 @@ function SKIN:DrawHelixCurved(x, y, radius, segments, barHeight, fraction, color
 		if (barOffset > 0) then
 			surface.SetDrawColor(color)
 		else
-			surface.SetDrawColor(color.r * 0.5, color.g * 0.5, color.b * 0.5, color.a)
+			surface.SetDrawColor(altColor)
 		end
 
 		surface.DrawTexturedRectRotated(barX, barY, 4, barOffset * (barHeight * fraction), math.deg(angle))
@@ -109,6 +110,9 @@ function SKIN:PaintFrame(panel)
 	if (!panel.bNoBackgroundBlur) then
 		ix.util.DrawBlur(panel, 10)
 	end
+
+	surface.SetDrawColor(30, 30, 30, 150)
+	surface.DrawRect(0, 0, panel:GetWide(), panel:GetTall())
 
 	if (panel:GetTitle() != "" or panel.btnClose:IsVisible()) then
 		surface.SetDrawColor(ix.config.Get("color"))
@@ -498,6 +502,17 @@ function SKIN:PaintWindowMinimizeButton(panel, width, height)
 end
 
 function SKIN:PaintWindowMaximizeButton(panel, width, height)
+end
+
+function SKIN:PaintInfoBar(panel, width, height, color)
+	-- bar
+	surface.SetDrawColor(color.r, color.g, color.b, 250)
+	surface.DrawRect(0, 0, width, height)
+
+	-- gradient overlay
+	surface.SetDrawColor(230, 230, 230, 8)
+	surface.SetTexture(gradientUp)
+	surface.DrawTexturedRect(0, 0, width, height)
 end
 
 do

@@ -1,5 +1,6 @@
 
 local animationTime = 1
+local matrixZScale = Vector(1, 1, 0.0001)
 
 DEFINE_BASECLASS("ixSubpanelParent")
 local PANEL = {}
@@ -17,6 +18,9 @@ function PANEL:Init()
 	self.manualChildren = {}
 	self.noAnchor = CurTime() + 0.4
 	self.anchorMode = true
+	self.rotationOffset = Angle(0, 180, 0)
+	self.projectedTexturePosition = Vector(0, 0, 6)
+	self.projectedTextureRotation = Angle(-45, 60, 0)
 
 	self.bCharacterOverview = false
 	self.bOverviewOut = false
@@ -33,33 +37,25 @@ function PANEL:Init()
 
 	-- main button panel
 	self.buttons = self:Add("Panel")
-	self.buttons:SetSize(self:GetWide() * 0.1, self:GetTall() - self:GetPadding() * 2)
+	self.buttons:SetSize(self:GetWide() * 0.25, self:GetTall() - self:GetPadding() * 2)
 	self.buttons:Dock(LEFT)
 	self.buttons:SetPaintedManually(true)
 
-	self.unibuttons = self.buttons:Add("Panel")
-	self.unibuttons:Dock(BOTTOM)
-	self.unibuttons:SetTall(self.buttons:GetTall()*0.1)
-	self.unibuttons:DockMargin(0, 0, self.buttons:GetWide()*0.66, 20)
+	local close = self.buttons:Add("ixMenuButton")
+	close:SetText("return")
+	close:SizeToContents()
+	close:Dock(BOTTOM)
+	close.DoClick = function()
+		self:Remove()
+	end
 
-	local characters = self.unibuttons:Add("ixMenuButton")
-	characters:SetFont("stalkertitlefont")
-	characters:SetText("⇧")
-	characters:Dock(TOP)
-	characters:SetTall(self:GetParent():GetTall()*0.03)
+	local characters = self.buttons:Add("ixMenuButton")
+	characters:SetText("characters")
+	characters:SizeToContents()
+	characters:Dock(BOTTOM)
 	characters.DoClick = function()
 		self:Remove()
 		vgui.Create("ixCharMenu")
-	end
-
-	local close = self.unibuttons:Add("ixMenuButton")
-	close:SetFont("ixMediumFont")
-	close:SetText("✕")
-	close:Dock(TOP)
-	close:SetTall(self:GetParent():GetTall()*0.03)
-	close:DockMargin(0, 20, 0, 0)
-	close.DoClick = function()
-		self:Remove()
 	end
 
 	-- @todo make a better way to avoid clicks in the padding PLEASE
@@ -72,10 +68,6 @@ function PANEL:Init()
 	self.tabs.buttons = {}
 	self.tabs:Dock(FILL)
 	self:PopulateTabs()
-
---	self.backgroundimage = self:Add("DImage")
---	self.backgroundimage:SetImage("stalker/ui/pdabase.png")
---	self.backgroundimage:SetSize(ScrW(), ScrH())
 
 	self:MakePopup()
 	self:OnOpened()
@@ -110,6 +102,11 @@ function PANEL:TransitionSubpanel(id)
 
 	if (IsValid(subpanel)) then
 		if (!subpanel.bPopulated) then
+			-- we need to set the size of the subpanel if it's a section since it will be 0, 0
+			if (subpanel.sectionParent) then
+				subpanel:SetSize(self:GetStandardSubpanelSize())
+			end
+
 			local info = subpanel.info
 			subpanel.Paint = nil
 
@@ -218,7 +215,7 @@ function PANEL:GetOverviewInfo(origin, angles, fov)
 		newOrigin = origin - LocalPlayer():OBBCenter() * 0.6 + forward
 	end
 
-	local newAngles = originAngles + Angle(0, 180, 0)
+	local newAngles = originAngles + self.rotationOffset
 	newAngles.pitch = 5
 	newAngles.roll = 0
 
@@ -241,6 +238,74 @@ function PANEL:ShowBackground()
 	})
 end
 
+function PANEL:GetStandardSubpanelSize()
+	return ScrW() * 0.75 - self:GetPadding() * 3, ScrH() - self:GetPadding() * 2
+end
+
+function PANEL:SetupTab(name, info, sectionParent)
+	local bTable = istable(info)
+	local buttonColor = (bTable and info.buttonColor) or (ix.config.Get("color") or Color(140, 140, 140, 255))
+	local bDefault = (bTable and info.bDefault) or false
+	local qualifiedName = sectionParent and (sectionParent.name .. "/" .. name) or name
+
+	-- setup subpanels without populating them so we can retain the order
+	local subpanel = self:AddSubpanel(qualifiedName, true)
+	local id = subpanel.subpanelID
+	subpanel.info = info
+	subpanel.sectionParent = sectionParent and qualifiedName
+	subpanel:SetPaintedManually(true)
+	subpanel:SetTitle(nil)
+
+	if (sectionParent) then
+		-- hide section subpanels if they haven't been populated to seeing more subpanels than necessary
+		-- fly by as you navigate tabs in the menu
+		subpanel:SetSize(0, 0)
+	else
+		subpanel:SetSize(self:GetStandardSubpanelSize())
+
+		-- this is called while the subpanel has not been populated
+		subpanel.Paint = function(panel, width, height)
+			derma.SkinFunc("PaintPlaceholderPanel", panel, width, height)
+		end
+	end
+
+	local button
+
+	if (sectionParent) then
+		button = sectionParent:AddSection(L(name))
+		name = qualifiedName
+	else
+		button = self.tabs:Add("ixMenuSelectionButton")
+		button:SetText(L(name))
+		button:SizeToContents()
+		button:Dock(TOP)
+		button:SetButtonList(self.tabs.buttons)
+		button:SetBackgroundColor(buttonColor)
+	end
+
+	button.name = name
+	button.id = id
+	button.OnSelected = function()
+		self:TransitionSubpanel(id)
+	end
+
+	if (bTable and info.PopulateTabButton) then
+		info:PopulateTabButton(button)
+	end
+
+	-- don't allow sections in sections
+	if (sectionParent or !bTable or !info.Sections) then
+		return bDefault, button, subpanel
+	end
+
+	-- create button sections
+	for sectionName, sectionInfo in pairs(info.Sections) do
+		self:SetupTab(sectionName, sectionInfo, button)
+	end
+
+	return bDefault, button, subpanel
+end
+
 function PANEL:PopulateTabs()
 	local default
 	local tabs = {}
@@ -248,38 +313,7 @@ function PANEL:PopulateTabs()
 	hook.Run("CreateMenuButtons", tabs)
 
 	for name, info in SortedPairs(tabs) do
-		local bTable = istable(info)
-		local buttonColor = (bTable and info.buttonColor) or (ix.config.Get("color") or Color(140, 140, 140, 255))
-		local bDefault = (bTable and info.bDefault) or false
-
-		-- setup subpanels without populating them so we can retain the order
-		local subpanel = self:AddSubpanel(name, true)
-		local id = subpanel.subpanelID
-		subpanel.info = info
-		subpanel:SetPaintedManually(true)
-		subpanel:SetTitle(nil)
-		subpanel:SetSize(ScrW() * 0.75 - self:GetPadding() * 3, ScrH() - self:GetPadding() * 2)
-
-		-- this is called while the subpanel has not been populated
-		subpanel.Paint = function(panel, width, height)
-			derma.SkinFunc("PaintPlaceholderPanel", panel, width, height)
-		end
-
-		local button = self.tabs:Add("ixMenuSelectionButton")
-		button:SetText(L(name))
-		button:Dock(TOP)
-		button:SetButtonList(self.tabs.buttons)
-		button:SetBackgroundColor(buttonColor)
-		button:DockMargin(0, 0, 0, 10)
-		button:SetTall(ScrH()*0.05)
-		button.id = id
-		button.OnSelected = function()
-			self:TransitionSubpanel(id)
-		end
-
-		if (bTable and info.PopulateTabButton) then
-			info:PopulateTabButton(button)
-		end
+		local bDefault, button = self:SetupTab(name, info)
 
 		if (bDefault) then
 			default = button
@@ -334,8 +368,8 @@ function PANEL:Think()
 		right.z = 0
 
 		self.projectedTexture:SetBrightness(self.overviewFraction * 4)
-		self.projectedTexture:SetPos(LocalPlayer():GetPos() + right * 16 - forward * 8 + Vector(0, 0, 6))
-		self.projectedTexture:SetAngles(forward:Angle() + Angle(-45, 60, 0))
+		self.projectedTexture:SetPos(LocalPlayer():GetPos() + right * 16 - forward * 8 + self.projectedTexturePosition)
+		self.projectedTexture:SetAngles(forward:Angle() + self.projectedTextureRotation)
 		self.projectedTexture:Update()
 	end
 
@@ -364,7 +398,7 @@ function PANEL:Paint(width, height)
 		local currentScale = Lerp(self.currentAlpha / 255, 0.9, 1)
 		local matrix = Matrix()
 
-		matrix:Scale(Vector(1, 1, 0.0001) * currentScale)
+		matrix:Scale(matrixZScale * currentScale)
 		matrix:Translate(Vector(
 			ScrW() * 0.5 - (ScrW() * currentScale * 0.5),
 			ScrH() * 0.5 - (ScrH() * currentScale * 0.5),

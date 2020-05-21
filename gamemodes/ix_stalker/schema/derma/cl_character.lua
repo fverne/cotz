@@ -3,6 +3,7 @@ local gradient = surface.GetTextureID("vgui/gradient-d")
 local background5 = Material("vgui/background/stalkerbackground3.jpg")
 local audioFadeInTime = 2
 local animationTime = 0.5
+local matrixZScale = Vector(1, 1, 0.0001)
 
 -- character menu panel
 DEFINE_BASECLASS("ixSubpanelParent")
@@ -70,7 +71,7 @@ function PANEL:Paint(width, height)
 	-- draw child panels with scaling if needed
 	if (bShouldScale) then
 		matrix = Matrix()
-		matrix:Scale(Vector(1, 1, 0.0001) * self.currentScale)
+		matrix:Scale(matrixZScale * self.currentScale)
 		matrix:Translate(Vector(
 			ScrW() * 0.5 - (ScrW() * self.currentScale * 0.5),
 			ScrH() * 0.5 - (ScrH() * self.currentScale * 0.5),
@@ -236,6 +237,7 @@ function PANEL:Init()
 	-- create character button
 	local createButton = self.mainButtonList:Add("ixMenuButton")
 	createButton:SetText("create")
+	createButton:SizeToContents()
 	createButton.DoClick = function()
 		local maximum = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 5)
 		-- don't allow creation if we've hit the character limit
@@ -252,6 +254,7 @@ function PANEL:Init()
 	-- load character button
 	self.loadButton = self.mainButtonList:Add("ixMenuButton")
 	self.loadButton:SetText("load")
+	self.loadButton:SizeToContents()
 	self.loadButton.DoClick = function()
 		self:Dim()
 		parent.loadCharacterPanel:SlideUp()
@@ -272,6 +275,7 @@ function PANEL:Init()
 
 		local extraButton = self.mainButtonList:Add("ixMenuButton")
 		extraButton:SetText(extraText, true)
+		extraButton:SizeToContents()
 		extraButton.DoClick = function()
 			gui.OpenURL(extraURL)
 		end
@@ -297,6 +301,7 @@ function PANEL:UpdateReturnButton(bValue)
 	end
 
 	self.returnButton:SetText(bValue and "return" or "leave")
+	self.returnButton:SizeToContents()
 end
 
 function PANEL:OnDim()
@@ -444,7 +449,7 @@ function PANEL:Close(bFromMenu)
 	self.bClosing = true
 	self.bFromMenu = bFromMenu
 
-	local fadeOutTime = animationTime * 3
+	local fadeOutTime = animationTime * 8
 
 	self:CreateAnimation(fadeOutTime, {
 		index = 1,
@@ -521,6 +526,10 @@ function PANEL:Paint(width, height)
 end
 
 function PANEL:PaintOver(width, height)
+	if (self.bClosing and self.bFromMenu) then
+		surface.SetDrawColor(color_black)
+		surface.DrawRect(0, 0, width, height)
+	end
 end
 
 vgui.Register("ixCharMenu", PANEL, "EditablePanel")

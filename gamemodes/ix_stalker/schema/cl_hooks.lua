@@ -31,6 +31,22 @@ function Schema:BuildBusinessMenu(panel)
 	return bHasItems
 end
 
+function Schema:SpawnMenuOpen()
+	if LocalPlayer():GetCharacter():HasFlags("petN") or LocalPlayer():IsAdmin() then
+		return true
+	else
+		return false
+	end
+end
+
+function Schema:ContextMenuOpen()
+	if LocalPlayer():GetCharacter():HasFlags("petN") or LocalPlayer():IsAdmin() then
+		return true
+	else
+		return false
+	end
+end
+
 hook.Add( "OnEntityCreated", "R_Optimisation.OnEntityCreated", function(ply)
     if ply != LocalPlayer() then return end
     RunConsoleCommand("rope_smooth", "0")

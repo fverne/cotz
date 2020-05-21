@@ -1,5 +1,6 @@
 
 local buttonPadding = ScreenScale(14) * 0.5
+local animationTime = 0.5
 
 -- base menu button
 DEFINE_BASECLASS("DButton")
@@ -11,13 +12,27 @@ AccessorFunc(PANEL, "backgroundAlpha", "BackgroundAlpha")
 function PANEL:Init()
 	self:SetFont("stalkerregulartitlefont")
 	self:SetTextColor(color_white)
-	self:SetDrawBackground(false)
+	self:SetPaintBackground(true)
 	self:SetContentAlignment(4)
 	self:SetTextInset(buttonPadding, 0)
 
+	self.padding = {32, 12, 32, 12} -- left, top, right, bottom
 	self.backgroundColor = Color(0, 0, 0)
 	self.backgroundAlpha = 128
 	self.currentBackgroundAlpha = 0
+end
+
+function PANEL:GetPadding()
+	return self.padding
+end
+
+function PANEL:SetPadding(left, top, right, bottom)
+	self.padding = {
+		left or self.padding[1],
+		top or self.padding[2],
+		right or self.padding[3],
+		bottom or self.padding[4]
+	}
 end
 
 function PANEL:SetText(text, noTranslation)
@@ -29,10 +44,11 @@ function PANEL:SetText(text, noTranslation)
 end
 
 function PANEL:PaintBackground(width, height)
+	local alpha = self.selected and 255 or self.currentBackgroundAlpha
 	surface.SetDrawColor(255, 255, 255, 255)
 	surface.SetMaterial( Material("cotz/panels/button3_1.png") )
 
-	if self:IsHovered() then
+	if self.IsHovered() then
 		surface.SetDrawColor(150, 150, 150, 255)
 	end
 
@@ -147,6 +163,7 @@ function PANEL:Init()
 	self.backgroundColor = color_white
 	self.selected = false
 	self.buttonList = {}
+	self.sectionPanel = nil -- sub-sections this button has; created only if it has any sections
 end
 
 function PANEL:PaintBackground(width, height)
@@ -154,13 +171,14 @@ function PANEL:PaintBackground(width, height)
 	surface.SetDrawColor(255, 255, 255, 255)
 	surface.SetMaterial( Material("cotz/panels/button3_1.png") )
 
-	if self:IsHovered() then
+	if self.IsHovered() then
 		surface.SetDrawColor(150, 150, 150, 255)
 	end
 
 	if self.selected then
 		surface.SetMaterial( Material("cotz/panels/button3_2.png") )
 	end
+
 	surface.DrawTexturedRect(0, 0, width, height)
 	--derma.SkinFunc("DrawImportantBackground", 0, 0, width, height, ColorAlpha(self.backgroundColor, alpha))
 end
@@ -170,6 +188,14 @@ function PANEL:SetSelected(bValue)
 
 	if (bValue) then
 		self:OnSelected()
+
+		if (self.sectionPanel) then
+			self.sectionPanel:Show()
+		elseif (self.sectionParent) then
+			self.sectionParent.sectionPanel:Show()
+		end
+	elseif (self.sectionPanel and self.sectionPanel:IsVisible() and !bSelectedSection) then
+		self.sectionPanel:Hide()
 	end
 end
 
@@ -181,10 +207,25 @@ function PANEL:SetButtonList(list, bNoAdd)
 	self.buttonList = list
 end
 
+function PANEL:GetSectionPanel()
+	return self.sectionPanel
+end
+
+function PANEL:AddSection(name)
+	if (!IsValid(self.sectionPanel)) then
+		-- add section panel to regular button list
+		self.sectionPanel = vgui.Create("ixMenuSelectionList", self:GetParent())
+		self.sectionPanel:Dock(self:GetDock())
+		self.sectionPanel:SetParentButton(self)
+	end
+
+	return self.sectionPanel:AddButton(name, self.buttonList)
+end
+
 function PANEL:OnMousePressed(key)
 	for _, v in pairs(self.buttonList) do
-		if (IsValid(v)) then
-			v:SetSelected(false)
+		if (IsValid(v) and v != self) then
+			v:SetSelected(false, self.sectionParent == v)
 		end
 	end
 
@@ -196,3 +237,78 @@ function PANEL:OnSelected()
 end
 
 vgui.Register("ixMenuSelectionButton", PANEL, "ixMenuButton")
+
+-- collapsable list for menu button sections
+PANEL = {}
+AccessorFunc(PANEL, "parent", "ParentButton")
+
+function PANEL:Init()
+	self.parent = nil -- button that is responsible for controlling this list
+	self.height = 0
+	self.targetHeight = 0
+
+	self:DockPadding(0, 1, 0, 1)
+	self:SetVisible(false)
+	self:SetTall(0)
+end
+
+function PANEL:AddButton(name, buttonList)
+	assert(IsValid(self.parent), "attempted to add button to ixMenuSelectionList without a ParentButton")
+	assert(buttonList ~= nil, "attempted to add button to ixMenuSelectionList without a buttonList")
+
+	local button = self:Add("ixMenuSelectionButton")
+	button.sectionParent = self.parent
+	button:SetTextInset(buttonPadding * 2, 0)
+	button:SetPadding(nil, 8, nil, 8)
+	button:SetFont("stalkerregulartitlefont")
+	button:Dock(TOP)
+	button:SetText(name)
+	button:SizeToContents()
+	button:SetButtonList(buttonList)
+	button:SetBackgroundColor(self.parent:GetBackgroundColor())
+
+	self.targetHeight = self.targetHeight + button:GetTall()
+	return button
+end
+
+function PANEL:Show()
+	self:SetVisible(true)
+
+	self:CreateAnimation(animationTime, {
+		index = 1,
+		target = {
+			height = self.targetHeight + 2 -- +2 for padding
+		},
+		easing = "outQuart",
+
+		Think = function(animation, panel)
+			panel:SetTall(panel.height)
+		end
+	})
+end
+
+function PANEL:Hide()
+	self:CreateAnimation(animationTime, {
+		index = 1,
+		target = {
+			height = 0
+		},
+		easing = "outQuint",
+
+		Think = function(animation, panel)
+			panel:SetTall(panel.height)
+		end,
+
+		OnComplete = function(animation, panel)
+			panel:SetVisible(false)
+		end
+	})
+end
+
+function PANEL:Paint(width, height)
+	surface.SetDrawColor(Color(255, 255, 255, 33))
+	surface.DrawRect(0, 0, width, 1)
+	surface.DrawRect(0, height - 1, width, 1)
+end
+
+vgui.Register("ixMenuSelectionList", PANEL, "Panel")
