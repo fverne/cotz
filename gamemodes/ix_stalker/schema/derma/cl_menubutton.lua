@@ -22,6 +22,19 @@ function PANEL:Init()
 	self.currentBackgroundAlpha = 0
 end
 
+function PANEL:GetPadding()
+	return self.padding
+end
+
+function PANEL:SetPadding(left, top, right, bottom)
+	self.padding = {
+		left or self.padding[1],
+		top or self.padding[2],
+		right or self.padding[3],
+		bottom or self.padding[4]
+	}
+end
+
 function PANEL:SetText(text, noTranslation)
 	surface.SetFont("ixMenuButtonFont")
 	BaseClass.SetText(self, noTranslation and text:upper() or L(text):upper())
@@ -154,13 +167,18 @@ end
 
 function PANEL:PaintBackground(width, height)
 	local alpha = self.selected and 255 or self.currentBackgroundAlpha
+	surface.SetDrawColor(255, 255, 255, 255)
+	surface.SetMaterial( Material("cotz/panels/button3_1.png") )
 
+	if self.IsHovered() then
 		surface.SetDrawColor(150, 150, 150, 255)
 	end
 
 	if self.selected then
 		surface.SetMaterial( Material("cotz/panels/button3_2.png") )
 	end
+
+	surface.DrawTexturedRect(0, 0, width, height)
 	--derma.SkinFunc("DrawImportantBackground", 0, 0, width, height, ColorAlpha(self.backgroundColor, alpha))
 end
 
@@ -241,7 +259,7 @@ function PANEL:AddButton(name, buttonList)
 	button.sectionParent = self.parent
 	button:SetTextInset(buttonPadding * 2, 0)
 	button:SetPadding(nil, 8, nil, 8)
-	button:SetFont("ixMenuButtonFontSmall")
+	button:SetFont("stalkerregulartitlefont")
 	button:Dock(TOP)
 	button:SetText(name)
 	button:SizeToContents()
