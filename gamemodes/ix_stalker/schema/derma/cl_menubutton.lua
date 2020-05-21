@@ -12,7 +12,7 @@ AccessorFunc(PANEL, "backgroundAlpha", "BackgroundAlpha")
 function PANEL:Init()
 	self:SetFont("stalkerregulartitlefont")
 	self:SetTextColor(color_white)
-	self:SetPaintBackground(false)
+	self:SetPaintBackground(true)
 	self:SetContentAlignment(4)
 	self:SetTextInset(buttonPadding, 0)
 
@@ -44,10 +44,11 @@ function PANEL:SetText(text, noTranslation)
 end
 
 function PANEL:PaintBackground(width, height)
+	local alpha = self.selected and 255 or self.currentBackgroundAlpha
 	surface.SetDrawColor(255, 255, 255, 255)
 	surface.SetMaterial( Material("cotz/panels/button3_1.png") )
 
-	if self:IsHovered() then
+	if self.IsHovered() then
 		surface.SetDrawColor(150, 150, 150, 255)
 	end
 
