@@ -395,8 +395,8 @@ function ITEM:Equip(client)
 			weapon:attachSpecificAttachment(self:GetData("ammoRechamber").attachmentName)
 		end
 
-		weapon:SetWeaponWear( self:GetData("wear") )
-		weapon:SetWeaponDurability( self:GetData("durability") )
+		weapon:SetWeaponWear( self:GetData("wear", 100) )
+		weapon:SetWeaponDurability( self:GetData("durability", 100) )
 		self:SetData("equip", true)
 		if self:GetData("ammoType") ~= nil then
 			timer.Simple(0.1,function()
