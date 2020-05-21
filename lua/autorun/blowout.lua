@@ -2,7 +2,7 @@ if CLIENT then return end	--GET OUT OF HERE STALKER!
 
 AddCSLuaFile( "autorun/client/blowout_cl.lua" )
 include( "autorun/client/blowout_cl.lua" )
-resource.AddWorkshop( 230520180 )
+--resource.AddWorkshop( 230520180 )
 
 
 local BlowoutEnabled = CreateConVar( "blowout_enabled", 1, { FCVAR_ARCHIVE }, "Enables / disables the Blowout addon. Value can be 0 (= off) or 1 (= on).")
