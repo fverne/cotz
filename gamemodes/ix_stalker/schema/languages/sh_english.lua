@@ -4,8 +4,8 @@ NAME = "English"
 LANGUAGE = {
 	helix = "Helix",
 
-	introTextOne = "infinity networks presents",
-	introTextTwo = "a STALKER Gamemode created by verne",
+	introTextOne = "Call of the Zone presents",
+	introTextTwo = "a STALKER Gamemode created by verne and some faggot",
 	introContinue = "press space to continue",
 
 	helpIdle = "Select a category",
