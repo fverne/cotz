@@ -47,10 +47,11 @@ if (CLIENT) then
 		ix.option.Set("minimalTooltips", true, true)
 		ix.option.stored["minimalTooltips"].hidden = function() return true end
 	end
-end
-
-function PLUGIN:GetDefaultAttributePoints(client, count)
-	return 40
+	
+	hook.Add("PopulateHelpMenu", "ixHelpRemove", function(tabs)
+	    tabs["flags"] = nil
+	    tabs["plugins"] = nil
+	end)
 end
 
 do
