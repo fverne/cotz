@@ -1,3 +1,5 @@
+
+-- luacheck: globals TEAM_RED TEAM_BLUE
 TEAM_RED = 1
 TEAM_BLUE = 2
 
