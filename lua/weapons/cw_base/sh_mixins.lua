@@ -15,10 +15,10 @@ if not vec.__div then
 			a.x = a.x / b.x
 			a.y = a.y / b.y
 			a.z = a.z / b.z
-			
+
 			return a
 		end
-		
+
 		-- if they aren't, just return the first vector
 		return a
 	end
@@ -29,15 +29,15 @@ end
 if not vec.__sub then
 	vec.__sub = function(a, b)
 		-- make sure both A and B are vectors
-		
+
 		if a == VEC and b == VEC then
 			a.x = a.x - b.x
 			a.y = a.y - b.y
 			a.z = a.z - b.z
-			
+
 			return a
 		end
-		
+
 		-- if they aren't, just return the first vector
 		return a
 	end
@@ -55,10 +55,10 @@ if not ang.__sub then
 			a.p = a.p - b.p
 			a.y = a.y - b.y
 			a.r = a.r - a.r
-			
+
 			return a
 		end
-		
+
 		return a
 	end
 end
@@ -69,7 +69,7 @@ end
 
 	function ang:Length()
 		local p, y, r = math.abs(p), math.abs(y), math.abs(r)
-		
+
 		return p + y + r
 	end
 --end
@@ -79,7 +79,7 @@ function LerpColor(dt, a, b)
 	a.g = LerpCW20(dt, a.g, b.g)
 	a.b = LerpCW20(dt, a.b, b.b)
 	a.a = LerpCW20(dt, a.a, b.a)
-	
+
 	return a
 end
 
@@ -87,6 +87,6 @@ function math.randomizeVector(vecObj, offset)
 	vecObj.x = vecObj.x + math.Rand(-offset, offset)
 	vecObj.y = vecObj.y + math.Rand(-offset, offset)
 	vecObj.z = vecObj.z + math.Rand(-offset, offset)
-	
+
 	return vecObj
 end
