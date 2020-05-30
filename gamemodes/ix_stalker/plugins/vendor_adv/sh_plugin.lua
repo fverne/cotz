@@ -8,6 +8,8 @@ PLUGIN.name = "Vendors - Advanced"
 PLUGIN.author = "Chessnut - expanded by some faggot"
 PLUGIN.description = "Adds NPC vendors that can sell things."
 
+-- PLEASE NOTE: Requires the "dialogue" plugin present in this folder, or this plugin will not function correctly
+
 CAMI.RegisterPrivilege({
 	Name = "Helix - Manage Vendors",
 	MinAccess = "admin"
@@ -49,6 +51,8 @@ if (SERVER) then
 	util.AddNetworkString("ixVendorAdvMoney")
 	util.AddNetworkString("ixVendorAdvStock")
 	util.AddNetworkString("ixVendorAdvAddItem")
+
+	util.AddNetworkString("ixVendorAdvTemplate")
 
 	function PLUGIN:SaveData()
 		local data = {}
@@ -321,6 +325,10 @@ if (SERVER) then
 			entity.scale = data
 
 			UpdateEditReceivers(entity.receivers, key, data)
+		elseif (key == "soundgroup") then
+			entity.soundgroup = data
+		elseif (key == "animgroup") then
+			entity.animgroup = data
 		end
 
 		PLUGIN:SaveData()
@@ -338,6 +346,16 @@ if (SERVER) then
 				net.WriteString(key)
 				net.WriteType(data)
 			net.Send(receivers)
+		end
+	end)
+
+	net.Receive("ixVendorAdvTemplate", function(length, client)
+		local entity = client.ixVendorAdv
+
+		local templatename = net.ReadString()
+		
+		if (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil)) then
+			entity:LoadTemplate(templatename)
 		end
 	end)
 
@@ -634,6 +652,10 @@ else
 		elseif (key == "scale") then
 			editor.sellScale.noSend = true
 			editor.sellScale:SetValue(data)
+		elseif (key == "soundgroup") then
+			entity.soundgroup = data
+		elseif (key == "animgroup") then
+			entity.animgroup = data
 		end
 
 		surface.PlaySound("buttons/button14.wav")

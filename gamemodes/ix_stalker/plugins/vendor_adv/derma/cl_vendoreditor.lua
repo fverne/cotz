@@ -3,14 +3,64 @@ local PANEL = {}
 function PANEL:Init()
 	local entity = ix.gui.vendor.entity
 
-	self:SetSize(320, 480)
+	self:SetSize(480, 600)
 	self:MoveLeftOf(ix.gui.vendor, 8)
 	self:MakePopup()
 	self:CenterVertical()
 	self:SetTitle(L"vendorEditor")
 
+	self.templatedrop = self:Add("DComboBox")
+	self.templatedrop:Dock(TOP)
+
+	for key,v in pairs(ix.npctemplates.templates) do
+		self.templatedrop:AddChoice(v.name, key)
+	end
+
+	self.load = self:Add("DButton")
+	self.load:SetText("Load")
+	self.load:Dock(TOP)
+	self.load:SetTextColor(color_white)
+	self.load:DockMargin(0, 4, 0, 0)
+	self.load.DoClick = function(this)
+		local _, key = self.templatedrop:GetSelected()
+		self:loadVendorTemplate(key)
+		self:Close()
+	end
+
+	self.sounddrop = self:Add("DComboBox")
+	self.sounddrop:Dock(TOP)
+	self.sounddrop.OnSelect = function( combo, index, value )
+		self:updateVendor("soundgroup", value)
+	end
+
+	for key,v in pairs(ix.npctemplates.soundtemplates) do
+		self.sounddrop:AddChoice(key, key)
+	end
+
+	self.animdrop = self:Add("DComboBox")
+	self.animdrop:Dock(TOP)
+	self.animdrop.OnSelect = function( combo, index, value )
+		self:updateVendor("animgroup", value)
+	end
+
+	for key,v in pairs(ix.npctemplates.animtemplates) do
+		self.animdrop:AddChoice(key, key)
+	end
+
 	self.name = self:Add("DTextEntry")
 	self.name:Dock(TOP)
+	self.name:DockMargin(0, 4, 0, 0)
+	self.name:SetText(entity:GetDisplayName())
+	self.name:SetPlaceholderText( "Name" )
+	self.name.OnEnter = function(this)
+		if (entity:GetDisplayName() != this:GetText()) then
+			self:updateVendor("name", this:GetText())
+		end
+	end
+
+	self.name = self:Add("DTextEntry")
+	self.name:Dock(TOP)
+	self.name:DockMargin(0, 4, 0, 0)
 	self.name:SetText(entity:GetDisplayName())
 	self.name:SetPlaceholderText( "Name" )
 	self.name.OnEnter = function(this)
@@ -296,6 +346,12 @@ function PANEL:updateVendor(key, value)
 	net.Start("ixVendorAdvEdit")
 		net.WriteString(key)
 		net.WriteType(value)
+	net.SendToServer()
+end
+
+function PANEL:loadVendorTemplate(templatename)
+	net.Start("ixVendorAdvTemplate")
+		net.WriteString(templatename)
 	net.SendToServer()
 end
 

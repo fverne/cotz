@@ -1,4 +1,5 @@
 
+ENT.Base = "base_anim"
 ENT.Type = "anim"
 ENT.PrintName = "Vendor - Advanced"
 ENT.Category = "Helix"
@@ -6,6 +7,7 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.isVendor = true
 ENT.bNoPersist = true
+ENT.AutomaticFrameAdvance = true
 
 ENT.RestockThinkInterval = 600
 ENT.restockCheckTimer = 0
@@ -37,6 +39,8 @@ function ENT:Initialize()
 		self.dialogueid = "tradertest"
 
 		self.receivers = {}
+
+		self.ShouldResetSequence = false
 
 		local physObj = self:GetPhysicsObject()
 
@@ -150,6 +154,17 @@ function ENT:HasMoney(amount)
 end
 
 function ENT:SetAnim()
+	if( math.random(1,100) < 50) and self.animgroup ~= nil and not self.ShouldResetSequence then
+		local tab = ix.npctemplates.animtemplates[self.animgroup]
+		local sel = math.random(1, #tab)
+		local seq, dur = self:LookupSequence(tab[sel])
+		timer.Simple( dur, function() self.ShouldResetSequence = true end)
+
+		return self:ResetSequence(seq)
+	end
+
+	self.ShouldResetSequence = false
+
 	for k, v in ipairs(self:GetSequenceList()) do
 		if (v:lower():find("idle") and v != "idlenoise") then
 			return self:ResetSequence(k)
@@ -260,6 +275,8 @@ if (SERVER) then
 			if(!v[VENDOR_RESTOCK_AMOUNT]) then continue end
 
 			v[VENDOR_RESTOCK_TIME] = v[VENDOR_RESTOCK_TIME] or 0
+			v[VENDOR_RESTOCK_INTERVAL] = v[VENDOR_RESTOCK_INTERVAL] or 0.5
+			v[VENDOR_RESTOCK_AMOUNT] = v[VENDOR_RESTOCK_AMOUNT] or 1
 
 			if v[VENDOR_RESTOCK_TIME] < theTime then
 				v[VENDOR_RESTOCK_TIME] = theTime + v[VENDOR_RESTOCK_INTERVAL] * 60 * 60 -- Interval is in hours, os.time() is in seconds
@@ -304,7 +321,8 @@ else
 	end
 
 	function ENT:MakeNoise()
-		self:EmitSound("stalkersound/pain"..math.random(12)..".wav")
+		local tab = ix.npctemplates.soundtemplates[self.soundgroup] or {"buttons/lever1.wav"}
+		self:EmitSound(tab[math.random(1, #tab)])
 	end
 
 	function ENT:Think()
@@ -316,9 +334,9 @@ else
 			self:CreateBubble()
 		end
 
-		if ((self.nextAnimCheck or 0) < CurTime()) then
+		if ((self.nextAnimCheck or 0) < CurTime() or self.ShouldResetSequence) then
 			self:SetAnim()
-			self.nextAnimCheck = CurTime() + 60
+			self.nextAnimCheck = CurTime() + 15
 		end
 
 		if (((self.nextNoise or 0) < CurTime()) and self:PlayerNearby()) then
@@ -326,7 +344,7 @@ else
 			self.nextNoise = CurTime() + math.random(15,45)
 		end
 
-		self:SetNextClientThink(CurTime() + 0.25)
+		self:SetNextClientThink(CurTime())
 
 		return true
 	end
@@ -357,4 +375,38 @@ end
 
 function ENT:GetMoney()
 	return self.money
+end
+
+function ENT:LoadTemplate(templatename)
+	local tmplt = ix.npctemplates.templates[templatename]
+
+	if tmplt ~= nil then
+		self:SetModel(tmplt.model or self.model)
+		self:SetSkin(tmplt.skin or 0)
+
+		self:SetNoBubble(tmplt.bubble or self:GetNoBubble())
+		self:SetDisplayName(tmplt.name or self:GetDisplayName())
+		self:SetDescription(tmplt.description or self:GetDescription())
+
+		for id, bodygroup in pairs(tmplt.bodygroups or {}) do
+			self:SetBodygroup(id, bodygroup)
+		end
+
+		local items = {}
+
+		if tmplt.items then
+			for uniqueID, data in pairs(tmplt.items) do
+				items[tostring(uniqueID)] = data
+			end
+		end
+
+		self.items = items
+		self.factions = tmplt.factions or self.factions
+		self.classes = tmplt.classes or self.classes
+		self.money = tmplt.money or self.money
+		self.scale = tmplt.scale or self.scale
+		self.dialogueid = tmplt.dialogueid or self.dialogueid
+		self.soundgroup = tmplt.soundgroup or self.soundgroup
+		self.animgroup = tmplt.animgroup or self.animgroup
+	end
 end
