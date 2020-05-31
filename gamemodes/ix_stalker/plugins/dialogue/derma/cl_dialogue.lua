@@ -213,7 +213,7 @@ function PANEL:Paint(w, h)
 --	surface.SetDrawColor(0, 0, 0, 250)
 --	surface.DrawRect(0, 0, w, h)
 
-	surface.SetMaterial( Material("stalker/ui/dialogue.png") )
+	surface.SetMaterial( Material("cotz/panels/dialogue.png") )
 	surface.SetDrawColor(255, 255, 255, 255)
 	surface.DrawTexturedRect(0, 0, w, h)
 
