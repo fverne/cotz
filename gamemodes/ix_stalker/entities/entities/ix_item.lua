@@ -15,6 +15,9 @@ function ENT:SetupDataTables()
 end
 
 if (SERVER) then
+	local invalidBoundsMin = Vector(-8, -8, -8)
+	local invalidBoundsMax = Vector(8, 8, 8)
+
 	util.AddNetworkString("ixItemEntityAction")
 
 	function ENT:Initialize()
@@ -22,6 +25,7 @@ if (SERVER) then
 		self:SetSolid(SOLID_VPHYSICS)
 		self:PhysicsInit(SOLID_VPHYSICS)
 		self:SetUseType(SIMPLE_USE)
+		self:SetCollisionGroup( COLLISION_GROUP_DEBRIS_TRIGGER )
 		self.health = 50
 
 		local physObj = self:GetPhysicsObject()
@@ -52,17 +56,6 @@ if (SERVER) then
 			itemTable.player = nil
 			itemTable.entity = nil
 		end
-	end
-
-	function ENT:OnTakeDamage(damageInfo)
-	/*	local damage = damageInfo:GetDamage()
-		self:SetHealth(self:Health() - damage)
-
-		if (self:Health() <= 0 and !self.ixIsDestroying) then
-			self.ixIsDestroying = true
-			self.ixDamageInfo = {damageInfo:GetAttacker(), damage, damageInfo:GetInflictor()}
-			self:Remove()
-		end*/
 	end
 
 	function ENT:SetItem(itemID)
@@ -98,10 +91,8 @@ if (SERVER) then
 			local physObj = self:GetPhysicsObject()
 
 			if (!IsValid(physObj)) then
-				local min, max = Vector(-8, -8, -8), Vector(8, 8, 8)
-
-				self:PhysicsInitBox(min, max)
-				self:SetCollisionBounds(min, max)
+				self:PhysicsInitBox(invalidBoundsMin, invalidBoundsMax)
+				self:SetCollisionBounds(invalidBoundsMin, invalidBoundsMax)
 			end
 
 			if (IsValid(physObj)) then
@@ -123,6 +114,25 @@ if (SERVER) then
 			self:SetItem(item:GetID())
 		end)
 	end
+
+	-- DONT destroy my items when shot at please
+	/*function ENT:OnTakeDamage(damageInfo)
+		local itemTable = ix.item.instances[self.ixItemID]
+
+		if (itemTable.OnEntityTakeDamage
+		and itemTable:OnEntityTakeDamage(self, damageInfo) == false) then
+			return
+		end
+
+		local damage = damageInfo:GetDamage()
+		self:SetHealth(self:Health() - damage)
+
+		if (self:Health() <= 0 and !self.ixIsDestroying) then
+			self.ixIsDestroying = true
+			self.ixDamageInfo = {damageInfo:GetAttacker(), damage, damageInfo:GetInflictor()}
+			self:Remove()
+		end
+	end*/
 
 	function ENT:OnRemove()
 		if (!ix.shuttingDown and !self.ixIsSafe and self.ixItemID) then
@@ -280,6 +290,10 @@ function ENT:GetEntityMenu(client)
 	itemTable.entity = self
 
 	for k, v in SortedPairs(itemTable.functions) do
+		-- Needs to go away to allow our own NS entity menu to work
+		-- if (k == "take") then
+		-- 	continue
+		-- end
 
 		if (v.OnCanRun and v.OnCanRun(itemTable) == false) then
 			continue

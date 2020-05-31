@@ -4,9 +4,9 @@ local PANEL = {}
 function PANEL:Init()
 	local parent = self:GetParent()
 
-	self:SetSize(parent:GetWide() * 0.3, parent:GetTall())
-	self:Dock(RIGHT)
-	self:DockMargin(0, ScrH() * 0.05, ScrW()*0.02, 0)
+	self:SetSize(parent:GetWide(), parent:GetTall())
+	self:Dock(FILL)
+	self:DockMargin(0, ScrH() * 0.05, 0, 0)
 
 	self.VBar:SetWide(0)
 
@@ -96,7 +96,7 @@ function PANEL:Init()
 	end
 
 	if (!suppress.description) then
-		local descriptionPanel = self:Add("Panel")
+		/*local descriptionPanel = self:Add("Panel")
 		descriptionPanel:Dock(TOP)
 		descriptionPanel:DockMargin(0, 0, 0, 8)
 		descriptionPanel.PerformLayout = function(_, width, height)
@@ -150,7 +150,7 @@ function PANEL:Init()
 			end
 
 			descriptionPanel:SetTall(this:GetTall())
-		end
+		end*/
 	end
 
 	if (!suppress.characterInfo) then
@@ -171,9 +171,9 @@ function PANEL:Init()
 		end
 
 		if (!suppress.faction) then
-			self.faction = self.characterInfo:Add("ixListRow")
+			/*self.faction = self.characterInfo:Add("ixListRow")
 			self.faction:SetList(self.characterInfo.list)
-			self.faction:Dock(TOP)
+			self.faction:Dock(TOP)*/
 		end
 
 		if (!suppress.class) then
@@ -198,7 +198,7 @@ function PANEL:Init()
 	if (!suppress.attributes) then
 		local character = LocalPlayer().GetCharacter and LocalPlayer():GetCharacter()
 
-		if (character) then
+		/*if (character) then
 			self.attributes = self:Add("ixCategoryPanel")
 			self.attributes:SetText("Primary Attributes")
 			self.attributes:Dock(TOP)
@@ -248,7 +248,7 @@ function PANEL:Init()
 			end
 
 			self.attributes:SizeToContents()
-		end
+		end*/
 	end
 
 	if (!suppress.secattributes) then
@@ -430,7 +430,7 @@ hook.Add("CreateMenuButtons", "ixCharInfo", function(tabs)
 		buttonColor = team.GetColor(LocalPlayer():Team()),
 		Create = function(info, container)
 			container.infoPanel = container:Add("ixCharacterInfo")
-			container.infoPanel:DockMargin(0,container.infoPanel:GetParent():GetTall()*0.15,container.infoPanel:GetParent():GetWide()*0.05,container.infoPanel:GetParent():GetWide()*0.17)
+			container.infoPanel:DockMargin(0,0,0,0)
 
 
 			container.OnMouseReleased = function(this, key)

@@ -4,7 +4,7 @@
 -- Schema info
 Schema.name = "Call of the Zone"
 Schema.author = "faggot, verne"
-Schema.description = "A STALKER Roleplaying gamemode with tabletop elements."
+Schema.description = "An automated STALKER Gamemode."
 --Schema.logo = "vgui/background/wallpaper.jpg"
 
 
@@ -28,8 +28,6 @@ ix.util.Include("sh_hooks.lua")
 ix.util.Include("sv_hooks.lua")
 
 -- You'll need to manually include files in the meta/ folder, however.
-ix.util.Include("meta/sh_character.lua")
-ix.util.Include("meta/sh_player.lua")
 ix.util.Include("meta/sh_item.lua")
 ix.util.Include("meta/sh_inventory.lua")
 

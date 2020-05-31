@@ -46,6 +46,7 @@ nut.command.add("nickremove", {
 
 ix.command.Add("CharGiveFlag", {
 	description = "@cmdCharGiveFlag",
+	privilege = "Manage Character Flags",
 	adminOnly = true,
 	arguments = {
 		ix.type.character,
@@ -69,12 +70,18 @@ ix.command.Add("CharGiveFlag", {
 		end
 
 		target:GiveFlags(flags)
-		ix.util.NotifyLocalized("flagGive", nil, client:GetName(), target:GetName(), flags)
+
+		for _, v in ipairs(player.GetAll()) do
+			if (self:OnCheckAccess(v) or v == target:GetPlayer()) then
+				v:NotifyLocalized("flagGive", client:GetName(), target:GetName(), flags)
+			end
+		end
 	end
 })
 
 ix.command.Add("CharTakeFlag", {
 	description = "@cmdCharTakeFlag",
+	privilege = "Manage Character Flags",
 	adminOnly = true,
 	arguments = {
 		ix.type.character,
@@ -88,7 +95,12 @@ ix.command.Add("CharTakeFlag", {
 		end
 
 		target:TakeFlags(flags)
-		ix.util.NotifyLocalized("flagTake", nil, client:GetName(), flags, target:GetName())
+
+		for _, v in ipairs(player.GetAll()) do
+			if (self:OnCheckAccess(v) or v == target:GetPlayer()) then
+				v:NotifyLocalized("flagTake", client:GetName(), flags, target:GetName())
+			end
+		end
 	end
 })
 
@@ -139,7 +151,11 @@ ix.command.Add("CharSetModel", {
 		target:SetModel(model)
 		target:GetPlayer():SetupHands()
 
-		ix.util.NotifyLocalized("cChangeModel", nil, client:GetName(), target:GetName(), model)
+		for _, v in ipairs(player.GetAll()) do
+			if (self:OnCheckAccess(v) or v == target:GetPlayer()) then
+				v:NotifyLocalized("cChangeModel", client:GetName(), target:GetName(), model)
+			end
+		end
 	end
 })
 
@@ -425,56 +441,6 @@ hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 		menu:AddOption(k,v[1])
 	end
 end)
-
-ix.chat.Register("adminchat", {
-	format = "whocares",
-	--font = "nutRadioFont",
-	OnGetColor = function(self, speaker, text)
-		return Color(0, 196, 255)
-	end,
-	CanHear = function(self, speaker, listener)
-		if listener:IsAdmin() then
-			return true
-		end
-
-		return false
-	end,
-	OnCanSay = function(self, speaker, text)
-
-		if not speaker:IsAdmin() then
-			speaker:Notify("You aren't an admin.")
-		end
-
-		--speaker.NextAR = ix.config.Get("arequestinterval")
-
-		return true
-	end,
-	OnChatAdd = function(self, speaker, text)
-		local color = team.GetColor(speaker:Team())
-		chat.AddText(Color(100, 255, 100), "[ADMIN] ", color, speaker:Name() .. " (" .. speaker:SteamName() .. ")", ": ", Color(255, 255, 255), text)
-	end,
-	prefix = "/a"
-})
-
-function PLUGIN:PlayerSay(client, text)
-	local chatType, message, anonymous = ix.chat.Parse(client, text, true)
-
-	if (chatType == "ic") then
-		if (string.sub(text, 1, 1) == "@") then
-			message = string.gsub(message, "@", "", 1)
-			print(message)
-
-			if not client:IsAdmin() then
-				return
-			end
-
-			serverguard.command.Run(client, "a", false, message)
-
-			return false
-		end
-	end
-end
-
 
 ix.command.Add("coinflip", {
 	OnRun = function(self, client, arguments)

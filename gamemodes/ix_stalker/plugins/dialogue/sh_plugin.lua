@@ -56,16 +56,6 @@ function playerMeta:dialogue(id, target)
 
 		self:Freeze(true)
 	end
-
-	if target == self then return end
-
-	local entVector = target:EyePos() - self:GetShootPos()
-	local ratio = 0
-	timer.Create("turnTo", 0, 10, function()
-		ratio = ratio + 0.1
-		lerpAngle = LerpAngle(ratio, self:EyeAngles(), entVector:Angle())
-		self:SetEyeAngles(lerpAngle)
-	end)
 end
 
 --EXAMPLE USAGE

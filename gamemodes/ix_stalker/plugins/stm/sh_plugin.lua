@@ -41,12 +41,12 @@ local function CalcStaminaChange(client)
 	end
 
 	local walkSpeed = ix.config.Get("walkSpeed")
-	local maxAttributes = ix.config.Get("maxAttributes", 30)
+	local maxAttributes = ix.config.Get("maxAttributes", 100)
 	local offset
 
 	if (client:KeyDown(IN_SPEED) and client:GetVelocity():LengthSqr() >= (walkSpeed * walkSpeed)) then
 		-- characters could have attribute values greater than max if the config was changed
-		offset = -ix.config.Get("staminaDrain", 1) + math.min(character:GetAttribute("end", 0), maxAttributes) / maxAttributes
+		offset = -ix.config.Get("staminaDrain", 1) + math.min(character:GetAttribute("end", 0), maxAttributes) / 100
 	else
 		offset = client:Crouching() and ix.config.Get("staminaCrouchRegeneration", 2) or ix.config.Get("staminaRegeneration", 1.75)
 	end
@@ -124,7 +124,9 @@ if (SERVER) then
 
 		self:SetLocalVar("stm", value)
 	end
+
 else
+	
 	local predictedStamina = 100
 
 	function PLUGIN:Think()
@@ -147,11 +149,11 @@ else
 	function PLUGIN:HUDPaint()
 		if (!LocalPlayer():GetCharacter() or !LocalPlayer():Alive() or ix.gui.characterMenu:IsVisible()) then return end
 		
-		local Texture2 = Material("stalker/bars.png", "noclamp smooth") 
+		local Texture2 = Material("cotz/panels/hp1.png", "noclamp smooth") 
 
 		surface.SetMaterial(Texture2)
-		surface.SetDrawColor(Color(140, 140, 255, 255))
-		surface.DrawTexturedRectUV(ScrW()*0.05, ScrH()*0.92,  math.Clamp(math.Round(predictedStamina / 100, 2), 0, 1) * ScrW()*0.15, ScrH()*0.008, 0, 0,  math.Clamp(math.Round(predictedStamina / 100, 2), 0, 1) * 1.4, 0)
+		surface.SetDrawColor(Color(170, 170, 255, 255))
+		surface.DrawTexturedRectUV(ScrW()*0.05, ScrH()*0.92,  math.Clamp(math.Round(predictedStamina / 100, 2), 0, 1) * ScrW()*0.15, ScrH()*0.008, 0, 0,  math.Clamp(math.Round(predictedStamina / 100, 2), 0, 1), 0)
 	end
 
 /*

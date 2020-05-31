@@ -2,27 +2,19 @@ PLUGIN.name = "Core changes"
 PLUGIN.author = "verne"
 PLUGIN.desc = "Changes some core helix things"
 
---adds automatic me's when picking up items
-function PLUGIN:PlayerInteractItem(client, action, item)
-	if (type(item) == "Entity") then
-		if (IsValid(item)) then
-			local itemID = item.ixItemID
-			item = ix.item.instances[itemID]
-		else
-			return
-		end
-	elseif (type(item) == "number") then
-		item = ix.item.instances[item]
-	end
-
-	if (!item) then
-		return
-	end
-
-	if action == "take" then
+--adds automatic me's when picking up and dropping items
+function PLUGIN:OnItemTransferred(item, curInv, inventory)
+	if curInv:GetID() == 0 then
+		local client = inventory:GetOwner()
 		ix.chat.Send(client, "iteminternal", Format("picks up the %s.", item.name), false)
 	end
+
+	if inventory:GetID() == 0 then
+		local client = curInv:GetOwner()
+		ix.chat.Send(client, "iteminternal", Format("drops their %s.", item.name), false)
+	end
 end
+
 
 --	ix.plugin.SetUnloaded("stamina", true)
 --	ix.plugin.SetUnloaded("strength", true)
@@ -50,8 +42,16 @@ if (SERVER) then
 	end
 end
 
-function PLUGIN:GetDefaultAttributePoints(client, count)
-	return 40
+if (CLIENT) then
+	function PLUGIN:CharacterLoaded()
+		ix.option.Set("minimalTooltips", true, true)
+		ix.option.stored["minimalTooltips"].hidden = function() return true end
+	end
+	
+	hook.Add("PopulateHelpMenu", "ixHelpRemove", function(tabs)
+	    tabs["flags"] = nil
+	    tabs["plugins"] = nil
+	end)
 end
 
 do

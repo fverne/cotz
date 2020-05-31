@@ -122,7 +122,7 @@ if (CLIENT) then
 		local cooked = item:GetData("cooked", 1)
 		local quantity = item:GetData("quantity", item.quantity)
 
-		draw.SimpleText(quantity.."/"..item.quantity, "DermaDefault", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
+		draw.SimpleText(quantity.."/"..item.quantity, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
 	end
 end
 
@@ -148,9 +148,22 @@ function ITEM:DecideFunction()
 			OnRun = function(item)
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
 				local thirst = item.player:GetCharacter():GetData("thirst", 100)
+				local client = item.player
+
+				item.player:SetAction("Drinking", 5)
+				item.player:Freeze(true) 
+				item.player:ScreenFade( SCREENFADE.OUT, Color( 0, 0, 0 ), 1, 3 ) 
+				timer.Simple(1, function() 
+					client:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 3 ) 
+				end)
+				timer.Simple(4, function() 
+					client:SetHunger(hunger + item.hunger)
+					client:SetThirst(thirst + item.thirst)
+					client:Freeze(false)
+				end)
+
 				local quantity = item:GetData("quantity", item.quantity)
-				item.player:SetHunger(hunger + item.hunger)
-				item.player:SetThirst(thirst + item.thirst)
+				
 				item.player:UpdateThirstState(item.player)
 				if item.empty then
 					local inv = item.player:GetCharacter():GetInventory()
@@ -186,9 +199,21 @@ function ITEM:DecideFunction()
 			OnRun = function(item)
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
 				local thirst = item.player:GetCharacter():GetData("thirst", 100)
+				local client = item.player
+
+				item.player:SetAction("Eating", 5)
+				item.player:Freeze(true) 
+				item.player:ScreenFade( SCREENFADE.OUT, Color( 0, 0, 0 ), 1, 3 ) 
+				timer.Simple(1, function() 
+					client:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 3 ) 
+				end)
+				timer.Simple(4, function() 
+					client:SetHunger(hunger + item.hunger)
+					client:SetThirst(thirst + item.thirst)
+					client:Freeze(false)
+				end)
+
 				local quantity = item:GetData("quantity", item.quantity)
-				item.player:SetHunger(hunger + item.hunger)
-				item.player:SetThirst(thirst + item.thirst)
 				item.player:UpdateHungerState(item.player)
 				if item.empty then
 					local inv = item.player:GetCharacter():GetInventory()
@@ -224,9 +249,21 @@ function ITEM:DecideFunction()
 			OnRun = function(item)
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
 				local thirst = item.player:GetCharacter():GetData("thirst", 100)
+				local client = item.player
+
+				item.player:SetAction("Consuming", 5)
+				item.player:Freeze(true) 
+				item.player:ScreenFade( SCREENFADE.OUT, Color( 0, 0, 0 ), 1, 3 ) 
+				timer.Simple(1, function() 
+					client:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 3 ) 
+				end)
+				timer.Simple(4, function() 
+					client:SetHunger(hunger + item.hunger)
+					client:SetThirst(thirst + item.thirst)
+					client:Freeze(false)
+				end)
+
 				local quantity = item:GetData("quantity", item.quantity)
-				item.player:SetHunger(hunger + item.hunger)
-				item.player:SetThirst(thirst + item.thirst)
 				item.player:UpdateHungerState(item.player)
 				item.player:UpdateThirstState(item.player)
 				if item.empty then

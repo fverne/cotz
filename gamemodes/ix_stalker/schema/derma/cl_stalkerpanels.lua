@@ -1,6 +1,9 @@
-local background = Material("stalker/ui.png")
+local background = Material("cotz/panels/loot_interface.png")
 local background2 = Material("stalker/backgroundempty.png", "noclamp")
-local qboard = Material("stalker/btn1.png", "noclamp smooth")
+local btn1 = Material("cotz/panels/button1_1.png", "noclamp smooth")
+local btn1hover = Material("cotz/panels/button1_2.png", "noclamp smooth")
+local btn1press = Material("cotz/panels/button1_4.png", "noclamp smooth")
+local btn1pressed = Material("cotz/panels/button1_3.png", "noclamp smooth")
 local btnclose = Material("stalker/btnclose.png", "noclamp smooth")
 
 local PANEL = {}
@@ -34,7 +37,16 @@ function PANEL:Init()
 end
 
 function PANEL:Paint(width, height)
-	surface.SetMaterial(qboard)
+	surface.SetMaterial(btn1)
+
+	if self:IsHovered() then
+		surface.SetMaterial(btn1hover)
+	end
+
+	if self:IsDown() then
+		surface.SetMaterial(btn1press)
+	end
+
 	surface.SetDrawColor(255, 255, 255, 255)
 	surface.DrawTexturedRect(0, 0, width, height)
 end

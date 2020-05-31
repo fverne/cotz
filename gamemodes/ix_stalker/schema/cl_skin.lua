@@ -3,13 +3,12 @@ local gradient = surface.GetTextureID("vgui/gradient-d")
 local gradientUp = surface.GetTextureID("vgui/gradient-u")
 local gradientLeft = surface.GetTextureID("vgui/gradient-l")
 local gradientRadial = Material("helix/gui/radial-gradient.png")
-local background = Material("stalker/x.png")
+local background = Material("cotz/panels/frame1.png")
 local background2 = Material("vgui/background/wallpaper.jpg")
 local background3 = Material("vgui/background/stalkerbackground1.png")
 local background4 = Material("vgui/background/stalkerbackground2.jpg")
 local background5 = Material("vgui/background/stalkerbackground3.jpg")
-local menubuttonbackground = Material("stalker/menubutton.png")
-local panelbackground = Material("stalker/ui.png")
+local menubuttonbackground = Material("cotz/panels/button2.png")
 local defaultBackgroundColor = Color(30, 30, 30, 200)
 
 local SKIN = {}
@@ -59,11 +58,12 @@ hook.Add("ColorSchemeChanged", "ixSkin", function(color)
 	SKIN.Colours.Area.Background = color
 end)
 
-function SKIN:DrawHelixCurved(x, y, radius, segments, barHeight, fraction, color)
+function SKIN:DrawHelixCurved(x, y, radius, segments, barHeight, fraction, color, altColor)
 	radius = radius or math.min(ScreenScale(72), 128) * 2
 	segments = segments or 76
 	barHeight = barHeight or 64
 	color = color or ix.config.Get("color")
+	altColor = altColor or Color(color.r * 0.5, color.g * 0.5, color.b * 0.5, color.a)
 	fraction = fraction or 1
 
 	surface.SetTexture(-1)
@@ -77,7 +77,7 @@ function SKIN:DrawHelixCurved(x, y, radius, segments, barHeight, fraction, color
 		if (barOffset > 0) then
 			surface.SetDrawColor(color)
 		else
-			surface.SetDrawColor(color.r * 0.5, color.g * 0.5, color.b * 0.5, color.a)
+			surface.SetDrawColor(altColor)
 		end
 
 		surface.DrawTexturedRectRotated(barX, barY, 4, barOffset * (barHeight * fraction), math.deg(angle))
@@ -110,6 +110,9 @@ function SKIN:PaintFrame(panel)
 	if (!panel.bNoBackgroundBlur) then
 		ix.util.DrawBlur(panel, 10)
 	end
+
+	surface.SetDrawColor(30, 30, 30, 150)
+	surface.DrawRect(0, 0, panel:GetWide(), panel:GetTall())
 
 	if (panel:GetTitle() != "" or panel.btnClose:IsVisible()) then
 		surface.SetDrawColor(ix.config.Get("color"))
@@ -248,8 +251,8 @@ function SKIN:PaintEntityInfoBackground(panel, width, height)
 end
 
 function SKIN:PaintTooltipBackground(panel, width, height)
-	surface.SetMaterial(Material("stalker/ui.png"))
-	surface.SetDrawColor(255, 255, 255, 255)
+	surface.SetMaterial(Material("cotz/panels/loot_interface.png"))
+	surface.SetDrawColor(255, 255, 255, 245)
 	surface.DrawTexturedRect(0, 0, width, height)
 end
 
@@ -432,7 +435,7 @@ function SKIN:PaintChatboxBackground(panel, width, height)
 	if (panel:GetActive()) then
 		surface.SetDrawColor(255, 255, 255, 255)
 		surface.SetMaterial(background)
-		surface.DrawTexturedRect(0, 0, width, height)
+		surface.DrawTexturedRectUV(0, 0, width, height, 0, 1, 1, 0)
 	end
 
 	surface.SetDrawColor(color_black)
@@ -499,6 +502,17 @@ function SKIN:PaintWindowMinimizeButton(panel, width, height)
 end
 
 function SKIN:PaintWindowMaximizeButton(panel, width, height)
+end
+
+function SKIN:PaintInfoBar(panel, width, height, color)
+	-- bar
+	surface.SetDrawColor(color.r, color.g, color.b, 250)
+	surface.DrawRect(0, 0, width, height)
+
+	-- gradient overlay
+	surface.SetDrawColor(230, 230, 230, 8)
+	surface.SetTexture(gradientUp)
+	surface.DrawTexturedRect(0, 0, width, height)
 end
 
 do

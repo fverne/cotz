@@ -1,0 +1,13 @@
+
+util.AddNetworkString("CW20_DEPLOYANGLE")
+util.AddNetworkString("CW20_DEPLOY")
+util.AddNetworkString("CW20_THROWGRENADE")
+util.AddNetworkString("CW20_GLOBALDELAY")
+util.AddNetworkString("CW20_FORCESTATE")
+util.AddNetworkString("CW20_M203ON")
+util.AddNetworkString("CW20_M203OFF")
+util.AddNetworkString("CW20_M203OFF_RELOAD")
+util.AddNetworkString("CW20_FIREM203")
+util.AddNetworkString("CW20_RELOADM203")
+util.AddNetworkString("CW20_GRENADETYPE")
+util.AddNetworkString("CW20_M203CHAMBER")

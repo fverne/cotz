@@ -25,7 +25,7 @@ function ix.menu.AddToList(options, position, onRemove)
 	local entity
 
 	-- The font for the buttons.
-	surface.SetFont("ixMediumFont")
+	surface.SetFont("stalkerregulartitlefont")
 
 	-- Set the width to the longest button width.
 	for k, v in pairs(options) do
@@ -161,7 +161,7 @@ function ix.menu.DrawAll()
 			end
 
 			-- Draw the button's text.
-			ix.util.DrawText(k2, startX + 4, y, ColorAlpha(color_white, v.alpha), nil, nil, "ixMediumFont")
+			ix.util.DrawText(k2, startX + 4, y + 4, ColorAlpha(color_white, v.alpha), nil, nil, "stalkerregulartitlefont")
 
 			-- Make sure we draw the next button in line.
 			i = i + 1
