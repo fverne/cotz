@@ -200,14 +200,9 @@ function PANEL:Init()
 	self:SetTall(36)
 	self:DockMargin(4, 4, 4, 0)
 
-	self.icon = self:Add("SpawnIcon")
-	self.icon:SetPos(2, 2)
-	self.icon:SetSize(32, 32)
-	self.icon:SetModel("models/error.mdl")
-
 	self.name = self:Add("DLabel")
 	self.name:Dock(FILL)
-	self.name:DockMargin(42, 0, 0, 0)
+	self.name:DockMargin(82, 0, 0, 0)
 	self.name:SetFont("ixChatFont")
 	self.name:SetTextColor(color_white)
 	self.name:SetExpensiveShadow(1, Color(0, 0, 0, 200))
@@ -236,10 +231,62 @@ end
 
 function PANEL:Setup(uniqueID)
 	local item = ix.item.list[uniqueID]
+	local invicon = item.img
+	local exIcon = ikon:GetIcon(item.uniqueID)
+	local wmax = 32
+	local hmax = 32
+	local whratio = 1
+
+	if item.width > item.height then
+		whratio = item.height / item.width
+		wmax = 32
+		hmax = 32 * whratio
+	elseif item.height > item.width then
+		whratio = item.width / item.height
+		wmax = 32 * whratio
+		hmax = 32
+	end
 
 	if (item) then
 		self.item = uniqueID
-		self.icon:SetModel(item:GetModel(), item:GetSkin())
+		if !(item.img or item.exRender) then
+			self.icon = self:Add("SpawnIcon")
+			self.icon:SetPos(2, 2)
+			self.icon:SetSize(32, 32)
+			self.icon:SetModel(item:GetModel(), item:GetSkin())
+		elseif item.img then
+			self.icon = self:Add("DImage")
+			if (invicon) then
+				self.icon:SetMaterial(invicon)
+				self.icon:SetSize(wmax, hmax)
+
+				if hmax == 32 then
+					self.icon:SetPos(18 - (16 * whratio), 2)
+				else
+					self.icon:SetPos(2, 18 - (16 * whratio))
+				end
+			end
+		elseif item.exRender then
+			self.icon = self:Add("DImage")			
+			if (exIcon) then
+				self.icon:SetMaterial(exIcon)
+				self.icon:SetSize(wmax, hmax)
+				if hmax == 32 then
+					self.icon:SetPos(18 - (16 * whratio), 2)
+				else
+					self.icon:SetPos(2, 18 - (16 * whratio))
+				end
+			else
+				ikon:renderIcon(
+					item.uniqueID,
+					item.width,
+					item.height,
+					item:GetModel(),
+					item.iconCam
+				)
+			end
+		end
+
 		self.name:SetText(item:GetName())
 		self.itemName = item:GetName()
 

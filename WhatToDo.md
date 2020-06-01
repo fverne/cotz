@@ -39,6 +39,9 @@
 ## Profession system
 - [ ] Tiering
 
+## Derma
+- [ ] Add item entity ikons
+
 ### Tied to quests?
 ### Tied to gear?
 ### Tied to character?
