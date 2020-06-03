@@ -5,6 +5,7 @@
 - [ ] Name chosen automatically on character creation
 - [ ] Description automatically generated, from randomly selected traits
 - [ ] Capabilties based on background
+- [ ] Charcreation derma rework
 
 ## Prestige System
 - [ ] Unlock face models
@@ -17,12 +18,15 @@
 - [x] Investigate NPCs turning invisible
 - [x] Investigate NPCs turning invulnerable
 - [ ] Implement new NPCs with the new model pack
+- [ ] Consider NextBot port
+- [ ] Implement Human NPC (Bandit, etc.)
 
 ## Talker NPC
 - [x] Implement system
 - [x] Add templating
 - [ ] Add Tech support
 - [ ] Investigate dynamic dialog possibilities
+- [ ] Vendor derma overhaul
 
 ## Addiction
 - [x] Implement system
@@ -31,10 +35,22 @@
 
 ## Quests
 - [ ] Implement system
+- [ ] Integrate into dialogue
 - [ ] Implement and configure simple 8 quest chain with a simple branching path
+
+## Job system
+- [ ] Rework current quest system to be more dynamic, with more parameters
+- [ ] Integrate into dialogue
 
 ## Progression
 - [ ] Implement system to keep track of progression state and to perform actions based on progression level
 
 ## Misc
 - [ ] Weight-based item spawning
+- [ ] Lockpicking system
+- [ ] Configure Mutant Poaching
+- [ ] Configure AdvEventController
+- [ ] Reconfigure old plugins ( WorldItemSpawn, ContainerItemSpawn, etc. )
+- [ ] Cyclic TalkerNPCs
+- [ ] Cyclic containers
+- [ ] Configure TalkerNPCs
