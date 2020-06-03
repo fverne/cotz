@@ -2,9 +2,9 @@
 
 ## Changes to character
 - [ ] Background, chosen on character creation - Influences starting stats, starting gear etc.
-- [ ] Stats, but they are only changeable temporarily by items/artifacts
 - [ ] Name chosen automatically on character creation
 - [ ] Description automatically generated, from randomly selected traits
+- [ ] Capabilties based on background
 
 ## Prestige System
 - [ ] Unlock face models
@@ -20,7 +20,7 @@
 
 ## Talker NPC
 - [x] Implement system
-- [ ] Add templating
+- [x] Add templating
 - [ ] Add Tech support
 - [ ] Investigate dynamic dialog possibilities
 
@@ -33,14 +33,8 @@
 - [ ] Implement system
 - [ ] Implement and configure simple 8 quest chain with a simple branching path
 
+## Progression
+- [ ] Implement system to keep track of progression state and to perform actions based on progression level
+
 ## Misc
 - [ ] Weight-based item spawning
-
-## Profession system
-- [ ] Tiering
-
-### Tied to quests?
-### Tied to gear?
-### Tied to character?
-### Can you obtain every profession, or should it be locked off?
-### Apprenticeship/Training of skills? 
