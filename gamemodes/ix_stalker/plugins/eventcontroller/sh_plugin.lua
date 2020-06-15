@@ -97,7 +97,7 @@ if SERVER then
 			if spawn.entities then
 				for k = 1, #spawn.entities do
 					for i = 1, spawn.entities[k][2] do
-						local position = eventpoint[1] + Vector( math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), 64 )
+						local position = GetSpawnLocation( eventpoint[1] )
 						local data = {}
 						data.start = position
 						data.endpos = position
@@ -112,13 +112,14 @@ if SERVER then
 						local newNPC = ents.Create(spawn.entities[k][1])
 						newNPC:SetPos(position)
 						newNPC:Spawn()
+						newNPC:DropToFloor()
 					end
 				end
 			end
 			--spawnitems
 			if spawn.items then
 				for k = 1, #spawn.items do
-					local position = eventpoint[1] + Vector( math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), 32 )
+					local position = GetSpawnLocation( eventpoint[1] )
 					local data = {}
 					data.start = position
 					data.endpos = position
@@ -133,77 +134,12 @@ if SERVER then
 					ix.item.Spawn(spawn.items[k][1], position, nil, AngleRand(), spawn.items[k][2] or {})
 				end
 			end
-			--spawn props 
-			/*
-			if spawn.props then
-				for k = 1, #spawn.props do
-					for i = 1, spawn.props[k][2] do
-						local position = eventpoint[1] + Vector( math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), 32 )
-						local data = {}
-						data.start = position
-						data.endpos = position
-						data.mins = Vector(-16, -16, 0)
-						data.maxs = Vector(16, 16, 71)
-						local trace = util.TraceHull(data)
-						
-						if trace.Entity:IsValid() then
-							continue
-						end
-
-						local prop = ents.Create( "prop_physics" )
-						prop:SetModel( spawn.props[k][1] )
-						prop:SetPos( position )
-						prop:Spawn()
-						timer.Simple(300, function() prop:Remove() end)
-					end
-				end
-			end */
-			--spawn ragdolls
-			/*
-			if spawn.ragdolls then
-				for k = 1, #spawn.ragdolls do
-					for i = 1, spawn.ragdolls[k][2] do
-						local position = eventpoint[1] + Vector( math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), 32 )
-						local data = {}
-						data.start = position
-						data.endpos = position
-						data.mins = Vector(-16, -16, 0)
-						data.maxs = Vector(16, 16, 71)
-						local trace = util.TraceHull(data)
-						
-						if trace.Entity:IsValid() then
-							continue
-						end */
-						
-						/*
-						local ragdoll = ClientsideRagdoll( spawn.ragdolls[k][1] )
-						ragdoll:SetPos( position )
-						ragdoll:SetSkin(spawn.ragdolls[k][3])
-						ragdoll:SetBodyGroups(spawn.ragdolls[k][4])
-						ragdoll:SetNoDraw( false )
-						ragdoll:DrawShadow( true )
-						ragdoll:Fire( "FadeAndRemove", "", 300 )
-						*/ /*
-						-- Serversided ragdolls, tough performance
-						local ragdoll = ents.Create( "prop_ragdoll" )
-						ragdoll:SetModel( spawn.ragdolls[k][1] )
-						ragdoll:SetPos( position )
-						ragdoll:Spawn()
-						ragdoll:SetSkin(spawn.ragdolls[k][3])
-						ragdoll:SetBodyGroups(spawn.ragdolls[k][4])
-						ragdoll:SetCollisionGroup( COLLISION_GROUP_DEBRIS ) --minimize performance hit
-						ragdoll:Fire( "FadeAndRemove", "", 300 )
-
-					end
-				end
-			end */
-
 			
 			--spawn loot
 			if spawn.loot then
 				for k = 1, #spawn.loot do
 					for i = 1, spawn.loot[k][2] do
-						local position = eventpoint[1] + Vector( math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), math.Rand(-PLUGIN.spawnradius,PLUGIN.spawnradius), 32 )
+						local position = GetSpawnLocation( eventpoint[1] )
 						local data = {}
 						data.start = position
 						data.endpos = position
@@ -238,6 +174,46 @@ if SERVER then
 
 	function PLUGIN:SaveData()
 		self:SetData(self.eventpoints)
+	end
+
+	function PLUGIN:GetSpawnLocation( pos )
+		local tracegood = false
+		local teleres
+		local tracecnt = 0
+
+		local firstTrace = util.TraceLine( {
+				start = pos + Vector(0,0,64),
+				endpos = pos + Vector(0,0,512),
+				mask = MASK_ALL,
+				ignoreworld = false
+			} )
+
+		repeat
+			local trace = util.TraceHull( {
+				start = firstTrace.HitPos - Vector(0,0,64),
+				endpos = pos + Vector(math.random(-PLUGIN.spawnradius,PLUGIN.spawnradius),math.random(-PLUGIN.spawnradius,PLUGIN.spawnradius),-400),
+				mins = Vector( -32, -32, 0 ),
+				maxs = Vector( 32, 32, 64 ),
+				mask = MASK_ALL,
+				ignoreworld = false
+			} )
+
+			if not trace.HitSky then
+				tracegood = true
+				teleres = trace.HitPos + ( trace.HitNormal * 32 )
+			end
+
+			tracecnt = tracecnt + 1
+
+			if tracecnt > 50 then
+				tracegood = true
+				teleres = pos + Vector(0,0,64) -- Teleport to original position if we cant find a position
+			end
+
+		until tracegood
+
+
+		return teleres
 	end
 	
 	function PLUGIN:Think()

@@ -106,7 +106,7 @@ if SERVER then
 
 			local entity = table.Random(selectedAnoms)
 			for i = 1, math.ceil(v[2]/entity.interval) do
-				local position = v[1] + Vector( math.Rand(-v[2],v[2]), math.Rand(-v[2],v[2]), math.Rand(10,20) )
+				local position = GetSpawnLocation( v[1], v[2] )
 				local data = {}
 				data.start = position
 				data.endpos = position
@@ -121,15 +121,8 @@ if SERVER then
 				local spawnedent = ents.Create(entity.entityname)
 				spawnedent:SetPos(position)
 				spawnedent:Spawn()
+				spawnedent:DropToFloor()
 			end
-			
-			--Passive damage component
-			--local spawnedent = ents.Create("anom_passive")
-			--spawnedent:SetPos(v[1] + Vector(0,0,32))
-			--spawnedent:setNetVar("range", v[2])
-			--spawnedent:Spawn()
-			--Passive damage component end
-			
 		end
 	end
 
@@ -142,6 +135,46 @@ if SERVER then
 
 	function PLUGIN:SaveData()
 		self:SetData(self.anomalypoints)
+	end
+
+	function PLUGIN:GetSpawnLocation( pos , radius )
+		local tracegood = false
+		local teleres
+		local tracecnt = 0
+
+		local firstTrace = util.TraceLine( {
+				start = pos + Vector(0,0,64),
+				endpos = pos + Vector(0,0,512),
+				mask = MASK_ALL,
+				ignoreworld = false
+			} )
+
+		repeat
+			local trace = util.TraceHull( {
+				start = firstTrace.HitPos - Vector(0,0,64),
+				endpos = pos + Vector(math.random(-radius,radius),math.random(-radius,radius),-400),
+				mins = Vector( -32, -32, 0 ),
+				maxs = Vector( 32, 32, 64 ),
+				mask = MASK_ALL,
+				ignoreworld = false
+			} )
+
+			if not trace.HitSky then
+				tracegood = true
+				teleres = trace.HitPos + ( trace.HitNormal * 32 )
+			end
+
+			tracecnt = tracecnt + 1
+
+			if tracecnt > 50 then
+				tracegood = true
+				teleres = pos + Vector(0,0,64) -- Teleport to original position if we cant find a position
+			end
+
+		until tracegood
+
+
+		return teleres
 	end
 
 else

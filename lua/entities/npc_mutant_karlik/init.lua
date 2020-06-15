@@ -278,6 +278,7 @@ end
 function ENT:GetTeleportLocation( )
 	local tracegood = false
 	local teleres
+	local tracecnt = 0
 
 	local firstTrace = util.TraceLine( {
 			start = self:GetPos() + Vector(0,0,64),
@@ -301,6 +302,13 @@ function ENT:GetTeleportLocation( )
 		if !trace.HitSky && trace.HitPos:Distance(self:GetEnemy():GetPos()) > 600 then
 			tracegood = true
 			teleres = trace.HitPos
+		end
+
+		tracecnt = tracecnt + 1
+
+		if tracecnt > 50 then
+			tracegood = true
+			teleres = self:GetPos() -- Teleport to original position if we cant find a position
 		end
 
 	until tracegood
