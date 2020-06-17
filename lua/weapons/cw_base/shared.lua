@@ -1177,6 +1177,7 @@ function SWEP:Think()
 				if SERVER then
 					self:SetClip1(mag + 1)
 					self.Owner:SetAmmo(ammo - 1, self.Primary.Ammo)
+					hook.Run("ProcessShotgunReload",self.Owner)
 				end
 
 				self.ReloadDelay = CT + self.InsertShellTime / self.ReloadSpeed
