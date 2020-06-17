@@ -20,6 +20,11 @@ function Schema:PlayerNoClip(client)
 	end
 end
 
+function Schema:OnItemSpawned(entity)
+	entity:SetCollisionGroup( COLLISION_GROUP_DEBRIS_TRIGGER )
+	entity.OnTakeDamage = nil
+end
+
 function Schema:ShouldShowPlayerOnScoreboard(client)
 	if client:GetCharacter():GetFaction() == FACTION_ADMINS then
 		return false
@@ -40,13 +45,13 @@ if SERVER then
 end
 
 
-ix.command.Add("CharFallOver", {
+/*ix.command.Add("CharFallOver", {
 	description = "disabled",
 	arguments = bit.bor(ix.type.number, ix.type.optional),
 	OnRun = function(self, client, time)
  		return
 	end
-})
+})*/
 
 do
 	hook.Add("InitializedConfig", "ixMoneyCommands", function()

@@ -25,7 +25,6 @@ if (SERVER) then
 		self:SetSolid(SOLID_VPHYSICS)
 		self:PhysicsInit(SOLID_VPHYSICS)
 		self:SetUseType(SIMPLE_USE)
-		self:SetCollisionGroup( COLLISION_GROUP_DEBRIS_TRIGGER )
 		self.health = 50
 
 		local physObj = self:GetPhysicsObject()
@@ -115,8 +114,7 @@ if (SERVER) then
 		end)
 	end
 
-	-- DONT destroy my items when shot at please
-	/*function ENT:OnTakeDamage(damageInfo)
+	function ENT:OnTakeDamage(damageInfo)
 		local itemTable = ix.item.instances[self.ixItemID]
 
 		if (itemTable.OnEntityTakeDamage
@@ -132,7 +130,7 @@ if (SERVER) then
 			self.ixDamageInfo = {damageInfo:GetAttacker(), damage, damageInfo:GetInflictor()}
 			self:Remove()
 		end
-	end*/
+	end
 
 	function ENT:OnRemove()
 		if (!ix.shuttingDown and !self.ixIsSafe and self.ixItemID) then
