@@ -91,13 +91,13 @@ if SERVER then
 		return true
 	end
 	
-	local function spawnEvent(eventpoint, spawn)
+	function PLUGIN:spawnEvent(eventpoint, spawn)
 		if isClear(eventpoint[1]) then
 			--spawnents
 			if spawn.entities then
 				for k = 1, #spawn.entities do
 					for i = 1, spawn.entities[k][2] do
-						local position = GetSpawnLocation( eventpoint[1] )
+						local position = self:GetSpawnLocation( eventpoint[1] )
 						local data = {}
 						data.start = position
 						data.endpos = position
@@ -119,7 +119,7 @@ if SERVER then
 			--spawnitems
 			if spawn.items then
 				for k = 1, #spawn.items do
-					local position = GetSpawnLocation( eventpoint[1] )
+					local position = self:GetSpawnLocation( eventpoint[1] )
 					local data = {}
 					data.start = position
 					data.endpos = position
@@ -139,7 +139,7 @@ if SERVER then
 			if spawn.loot then
 				for k = 1, #spawn.loot do
 					for i = 1, spawn.loot[k][2] do
-						local position = GetSpawnLocation( eventpoint[1] )
+						local position = self:GetSpawnLocation( eventpoint[1] )
 						local data = {}
 						data.start = position
 						data.endpos = position
@@ -230,7 +230,7 @@ if SERVER then
 					spawn = table.Random(self.eventdefs)
 				end
 				
-				spawnEvent(eventpoint,spawn)
+				self:spawnEvent(eventpoint,spawn)
 			end
 			
 			populate = false
@@ -251,7 +251,7 @@ if SERVER then
 			spawn = table.Random(self.eventdefs)
 		end
 
-		spawnEvent(eventpoint, spawn)
+		self:spawnEvent(eventpoint, spawn)
 		
 		if self.pdachatter == true then
 			if math.Rand(1,100) <= self.pdachatterchance then
