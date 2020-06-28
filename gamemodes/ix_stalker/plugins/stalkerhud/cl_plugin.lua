@@ -167,12 +167,11 @@ function PLUGIN:HUDPaint()
 					end	
 				end
 			end
+			surface.SetMaterial(Ammo)
+			surface.SetDrawColor(Color(255, 255, 255, 200))
+			surface.DrawTexturedRect(ScrW()*0.81, ScrH()*0.835, ScrW()*0.1318, ScrH()*0.1172)
 		end
 	end
-
-	surface.SetMaterial(Ammo)
-	surface.SetDrawColor(Color(255, 255, 255, 200))
-	surface.DrawTexturedRect(ScrW()*0.81, ScrH()*0.835, ScrW()*0.1318, ScrH()*0.1172)
 
 	if IsValid( wep ) then
 		if wep:GetMaxClip1() > 0 then
