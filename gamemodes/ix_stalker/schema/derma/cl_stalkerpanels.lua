@@ -52,3 +52,63 @@ function PANEL:Paint(width, height)
 end
 
 vgui.Register("ixStalkerButton", PANEL, "DImageButton")
+
+
+local PANEL = {}
+
+function PANEL:Init()
+	self:SetSize(400, 400)
+	self:Dock(FILL)
+
+
+
+	ix.gui.menuInventoryContainer = self
+
+	local panel = self:Add("ixInventory")
+	panel:SetPos(0, 0)
+	panel:SetDraggable(false)
+	panel:SetSizable(false)
+	panel:SetTitle(nil)
+	panel.bNoBackgroundBlur = true
+	panel.childPanels = {}
+
+	local inventory = LocalPlayer():GetCharacter():GetInventory()
+
+	if (inventory) then
+		panel:SetInventory(inventory)
+	end
+
+	ix.gui.inv1 = panel
+
+	if (ix.option.Get("openBags", true)) then
+		for _, v in pairs(inventory:GetItems()) do
+			if (v.isBag) and v:GetData("equip") == true then
+				v.functions.View.OnClick(v)
+			end					
+		end
+	end
+
+	self:SetWide(panel:GetWide() + 28)
+
+end
+
+vgui.Register("ixStalkerInventory", PANEL, "DScrollPanel")
+
+
+
+local PANEL = {}
+
+function PANEL:Init()
+	self:ShowCloseButton(false)
+	self:ShowCloseButton(true)
+	self:SetDraggable(true)
+	self:SetSizable(true)
+	self:SetTitle("lutz")
+
+	local container = self:Add("ixStalkerInventory")
+
+	self:SetSize(container:GetWide(), container:GetTall())
+end
+
+vgui.Register("ixStalkerInventoryPanel", PANEL, "DFrame")
+
