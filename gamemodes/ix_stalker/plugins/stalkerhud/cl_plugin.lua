@@ -46,6 +46,22 @@ surface.CreateFont("stalkerregularfont", {
 	antialias = true
 })
 
+surface.CreateFont("stalkerregularfont2", {
+	font = "alsina",
+	size = 26,
+	extended = true,
+	weight = 500, 
+	antialias = true
+})
+
+surface.CreateFont("stalkerregularfont3", {
+	font = "alsina",
+	size = 20,
+	extended = true,
+	weight = 500, 
+	antialias = true
+})
+
 surface.CreateFont("stalkerregularchatfont", {
 	font = "alsina",
 	size = ScreenScale(9),

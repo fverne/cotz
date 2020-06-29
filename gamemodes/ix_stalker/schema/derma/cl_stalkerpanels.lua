@@ -57,10 +57,8 @@ vgui.Register("ixStalkerButton", PANEL, "DImageButton")
 local PANEL = {}
 
 function PANEL:Init()
-	self:SetSize(400, 400)
+	self:SetSize(400, 600)
 	self:Dock(FILL)
-
-
 
 	ix.gui.menuInventoryContainer = self
 
@@ -88,7 +86,8 @@ function PANEL:Init()
 		end
 	end
 
-	self:SetWide(panel:GetWide() + 28)
+	self:SetWide(panel:GetWide() - 64)
+	
 
 end
 
@@ -103,11 +102,41 @@ function PANEL:Init()
 	self:ShowCloseButton(true)
 	self:SetDraggable(true)
 	self:SetSizable(true)
-	self:SetTitle("lutz")
+	self:SetTitle("")
 
 	local container = self:Add("ixStalkerInventory")
+	self:SetSize(container:GetWide() + 100, container:GetTall() + 100)
+	self:DockPadding(12, 112, 12, 48)
 
-	self:SetSize(container:GetWide(), container:GetTall())
+	self.charbackground = self:Add("DImage")
+	self.charbackground:SetSize(container:GetWide() + 100, container:GetTall() + 100)
+	self.charbackground:SetImage( "cotz/panels/menuplayers.png" )
+	self.charbackground:SetPos(0, 0)
+	self.charbackground:SetZPos(-1)
+
+	self.name = self:Add("DLabel")
+	self.name:SetFont("stalkerregularfont2")
+	self.name:SetTextColor(color_white)
+	self.name:SetPos(24, 16)
+	self.name:SetContentAlignment(7)
+	self.name:SetWide(220)
+	self.name:SetTall(self:GetTall()*0.1)
+	self.name:SetText(LocalPlayer():GetName())
+
+	self.rep = self:Add("DLabel")
+	self.rep:SetFont("stalkerregularfont3")
+	self.rep:SetTextColor(color_white)
+	self.rep:SetText("Rank: "..LocalPlayer():getCurrentRankName())
+	self.rep:SetPos(24, 42)
+	self.rep:SetWide(220)
+	self.rep:SetContentAlignment(7)
+
+	self.money = self:Add("DLabel")
+	self.money:SetFont("stalkerregularfont3")
+	self.money:SetPos(24, 72)
+	self.money:SetWide(210)
+	self.money:SetContentAlignment(6)
+	self.money:SetText(ix.currency.Get(LocalPlayer():GetCharacter():GetMoney()))
 end
 
 vgui.Register("ixStalkerInventoryPanel", PANEL, "DFrame")

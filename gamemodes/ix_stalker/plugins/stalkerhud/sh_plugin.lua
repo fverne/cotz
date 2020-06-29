@@ -50,7 +50,7 @@ ix.command.Add("invtest", {
 if (CLIENT) then
 	netstream.Hook("invtest", function(self, client)
 		local frame = vgui.Create("ixStalkerInventoryPanel")
-		frame:SetPos(300, 300)
+		frame:SetPos(200, 50)
 		--frame:SetSize(500, 500)
 		frame:MakePopup()
 	end)

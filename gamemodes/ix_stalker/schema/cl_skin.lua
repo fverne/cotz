@@ -111,20 +111,23 @@ function SKIN:PaintFrame(panel)
 		ix.util.DrawBlur(panel, 10)
 	end
 
-	surface.SetDrawColor(30, 30, 30, 150)
-	surface.DrawRect(0, 0, panel:GetWide(), panel:GetTall())
+	
 
 	if (panel:GetTitle() != "" or panel.btnClose:IsVisible()) then
+		surface.SetDrawColor(30, 30, 30, 150)
+		surface.DrawRect(0, 0, panel:GetWide(), panel:GetTall())
+		
 		surface.SetDrawColor(ix.config.Get("color"))
 		surface.DrawRect(0, 0, panel:GetWide(), 24)
 
 		if (panel.bHighlighted) then
 			self:DrawImportantBackground(0, 0, panel:GetWide(), 24, ColorAlpha(color_white, 22))
 		end
+		surface.SetDrawColor(ix.config.Get("color"))
+		surface.DrawOutlinedRect(0, 0, panel:GetWide(), panel:GetTall())
 	end
 
-	surface.SetDrawColor(ix.config.Get("color"))
-	surface.DrawOutlinedRect(0, 0, panel:GetWide(), panel:GetTall())
+	
 end
 
 function SKIN:PaintBaseFrame(panel, width, height)
