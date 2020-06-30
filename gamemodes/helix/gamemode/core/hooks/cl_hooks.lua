@@ -452,8 +452,6 @@ function GM:CalcView(client, origin, angles, fov)
 	local entity = Entity(client:GetLocalVar("ragdoll", 0))
 	local ragdoll = IsValid(client:GetRagdollEntity()) and client:GetRagdollEntity() or entity
 
-	view.drawviewer = false
-
 	if ((!client:ShouldDrawLocalPlayer() and IsValid(entity) and entity:IsRagdoll())
 	or (!LocalPlayer():Alive() and IsValid(ragdoll))) then
 		local ent = LocalPlayer():Alive() and entity or ragdoll
