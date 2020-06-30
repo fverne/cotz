@@ -429,23 +429,17 @@ hook.Add("CreateMenuButtons", "ixCharInfo", function(tabs)
 		bHideBackground = true,
 		buttonColor = team.GetColor(LocalPlayer():Team()),
 		Create = function(info, container)
-			container.infoPanel = container:Add("ixCharacterInfo")
-			container.infoPanel:DockMargin(0,0,0,0)
-
-
-			container.OnMouseReleased = function(this, key)
-				if (key == MOUSE_RIGHT) then
-					this.infoPanel:OnSubpanelRightClick()
-				end
-			end
-
-
 			local inventory = container:Add("ixStalkerInventoryPanel")
 			inventory:SetPos(container:GetWide() - inventory:GetWide() - container:GetWide()*0.05, 0)
 			
 		end,
 		OnSelected = function(info, container)
-			container.infoPanel:Update(LocalPlayer():GetCharacter())
+			ix.gui.menu.PaintOver = function(w, h)
+				surface.SetMaterial(Material("cotz/panels/pdaframe.png"))
+				surface.SetDrawColor(255, 255, 255, 255)
+				surface.DrawTexturedRect(0, 0, ScrW(), ScrH())
+			end
+
 			ix.gui.menu:SetCharacterOverview(true)
 		end,
 		OnDeselected = function(info, container)
