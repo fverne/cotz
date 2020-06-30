@@ -14,7 +14,7 @@ function PANEL:Init()
 	local suppress = {}
 	hook.Run("CanCreateCharacterInfo", suppress)
 
-	self.charbackground = parent:Add("DImage")
+	/*self.charbackground = parent:Add("DImage")
 	self.charbackground:SetSize(parent:GetWide()*0.365, parent:GetTall()*0.80)
 	self.charbackground:SetImage( "stalker/ui/ui_actor_menu.png" )
 	self.charbackground:SetPos(parent:GetWide()*0.62, parent:GetTall()*0.025)
@@ -46,7 +46,7 @@ function PANEL:Init()
 	self.rep:SetText(LocalPlayer():getCurrentRankName())
 	self.rep:SetPos(parent:GetWide()*0.64, parent:GetTall()*0.075)
 	self.rep:SetWide(parent:GetWide()*0.18)
-	self.rep:SetContentAlignment(6)
+	self.rep:SetContentAlignment(6)/*
 
 	/*if (!suppress.time) then
 		local format = "%A, %B %d, %Y. %H:%M:%S"
@@ -154,7 +154,7 @@ function PANEL:Init()
 	end
 
 	if (!suppress.characterInfo) then
-		self.characterInfo = self:Add("Panel")
+	/*	self.characterInfo = self:Add("Panel")
 		self.characterInfo.list = {}
 		self.characterInfo:Dock(TOP) -- no dock margin because this is handled by ixListRow
 		self.characterInfo.SizeToContents = function(this)
@@ -171,9 +171,9 @@ function PANEL:Init()
 		end
 
 		if (!suppress.faction) then
-			/*self.faction = self.characterInfo:Add("ixListRow")
+			self.faction = self.characterInfo:Add("ixListRow")
 			self.faction:SetList(self.characterInfo.list)
-			self.faction:Dock(TOP)*/
+			self.faction:Dock(TOP)
 		end
 
 		if (!suppress.class) then
@@ -191,7 +191,7 @@ function PANEL:Init()
 		end
 
 		hook.Run("CreateCharacterInfo", self.characterInfo)
-		self.characterInfo:SizeToContents()
+		self.characterInfo:SizeToContents()*/
 	end
 
 	-- no need to update since we aren't showing the attributes panel
@@ -413,7 +413,7 @@ function PANEL:Update(character)
 
 	hook.Run("UpdateCharacterInfo", self.characterInfo, character)
 
-	self.characterInfo:SizeToContents()
+	--self.characterInfo:SizeToContents()
 
 	hook.Run("UpdateCharacterInfoCategory", self, character)
 end
@@ -438,45 +438,11 @@ hook.Add("CreateMenuButtons", "ixCharInfo", function(tabs)
 					this.infoPanel:OnSubpanelRightClick()
 				end
 			end
-			--cl_inventory start
-			local canvas = container:Add("DTileLayout")
-			local canvasLayout = canvas.PerformLayout
-			canvas.PerformLayout = nil -- we'll layout after we add the panels instead of each time one is added
-			canvas:SetBorder(0)
-			canvas:SetSpaceX(2)
-			canvas:SetSpaceY(2)
-			canvas:Dock(FILL)
 
 
-			ix.gui.menuInventoryContainer = canvas
-
-			local panel = canvas:Add("ixInventory")
-			panel:SetPos(0, 0)
-			panel:SetDraggable(false)
-			panel:SetSizable(false)
-			panel:SetTitle(nil)
-			panel.bNoBackgroundBlur = true
-			panel.childPanels = {}
-
-			local inventory = LocalPlayer():GetCharacter():GetInventory()
-
-			if (inventory) then
-				panel:SetInventory(inventory)
-			end
-
-			ix.gui.inv1 = panel
-
-			if (ix.option.Get("openBags", true)) then
-				for _, v in pairs(inventory:GetItems()) do
-					if (v.isBag) and v:GetData("equip") == true then
-						v.functions.View.OnClick(v)
-					end					
-				end
-			end
-
-			canvas.PerformLayout = canvasLayout
-			canvas:Layout()
-			--cl_inventory end
+			local inventory = container:Add("ixStalkerInventoryPanel")
+			inventory:SetPos(container:GetWide() - inventory:GetWide() - container:GetWide()*0.05, 0)
+			
 		end,
 		OnSelected = function(info, container)
 			container.infoPanel:Update(LocalPlayer():GetCharacter())

@@ -48,7 +48,7 @@ surface.CreateFont("stalkerregularfont", {
 
 surface.CreateFont("stalkerregularfont2", {
 	font = "alsina",
-	size = 26,
+	size = 24,
 	extended = true,
 	weight = 500, 
 	antialias = true
@@ -56,7 +56,7 @@ surface.CreateFont("stalkerregularfont2", {
 
 surface.CreateFont("stalkerregularfont3", {
 	font = "alsina",
-	size = 20,
+	size = 18,
 	extended = true,
 	weight = 500, 
 	antialias = true

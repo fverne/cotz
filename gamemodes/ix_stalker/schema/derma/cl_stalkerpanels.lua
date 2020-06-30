@@ -98,10 +98,9 @@ vgui.Register("ixStalkerInventory", PANEL, "DScrollPanel")
 local PANEL = {}
 
 function PANEL:Init()
-	self:ShowCloseButton(false)
 	self:ShowCloseButton(true)
 	self:SetDraggable(true)
-	self:SetSizable(true)
+	self:SetSizable(false)
 	self:SetTitle("")
 
 	local container = self:Add("ixStalkerInventory")
@@ -114,12 +113,13 @@ function PANEL:Init()
 	self.charbackground:SetPos(0, 0)
 	self.charbackground:SetZPos(-1)
 
+
 	self.name = self:Add("DLabel")
 	self.name:SetFont("stalkerregularfont2")
 	self.name:SetTextColor(color_white)
 	self.name:SetPos(24, 16)
 	self.name:SetContentAlignment(7)
-	self.name:SetWide(220)
+	self.name:SetWide(190)
 	self.name:SetTall(self:GetTall()*0.1)
 	self.name:SetText(LocalPlayer():GetName())
 
@@ -128,15 +128,44 @@ function PANEL:Init()
 	self.rep:SetTextColor(color_white)
 	self.rep:SetText("Rank: "..LocalPlayer():getCurrentRankName())
 	self.rep:SetPos(24, 42)
-	self.rep:SetWide(220)
+	self.rep:SetWide(190)
 	self.rep:SetContentAlignment(7)
 
 	self.money = self:Add("DLabel")
 	self.money:SetFont("stalkerregularfont3")
 	self.money:SetPos(24, 72)
-	self.money:SetWide(210)
+	self.money:SetWide(180)
 	self.money:SetContentAlignment(6)
 	self.money:SetText(ix.currency.Get(LocalPlayer():GetCharacter():GetMoney()))
+
+
+	local carry = LocalPlayer():GetCharacter():GetData("carry", 0)
+	local maxWeight = ix.config.Get("maxWeight", 30)
+	self.weight = self:Add("DLabel")
+	self.weight:SetFont("stalkerregularfont3")
+	self.weight:SetPos(200, 673)
+	self.weight:SetWide(155)
+	self.weight:SetContentAlignment(6)
+	if (ix.option.Get("imperial", false)) then
+		self.weight:SetText(math.Round(carry * 2.20462, 2).." lbs / "..math.Round(maxWeight * 2.20462, 2).." lbs")
+	else
+		self.weight:SetText(math.Round(carry, 2).." kg / "..maxWeight.." kg")
+	end
+	
+	self.charbackgroundicon = self:Add("DImage")
+	self.charbackgroundicon:SetSize(138, 80)
+	self.charbackgroundicon:SetPos(230, 13)
+	self.charbackgroundicon:SetZPos(-1)
+
+	if LocalPlayer():GetCharacter():GetData("pdaavatar") then 
+		self.charbackgroundicon:SetImage( LocalPlayer():GetCharacter():GetData("pdaavatar") )
+	else
+		self.charbackgroundicon:SetImage( "vgui/icons/face_31.png" )
+	end
+end
+
+function PANEL:Paint(w, h)
+	return
 end
 
 vgui.Register("ixStalkerInventoryPanel", PANEL, "DFrame")
