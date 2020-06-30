@@ -30,7 +30,7 @@ function PANEL:Init()
 	self.currentBlur = 0
 
 	-- setup
-	self:SetPadding(ScreenScale(16), true)
+	self:SetPadding(ScreenScale(26), true)
 	self:SetSize(ScrW(), ScrH())
 	self:SetPos(0, 0)
 	self:SetLeftOffset(self:GetWide() * 0.25 + self:GetPadding())
@@ -153,7 +153,7 @@ end
 
 function PANEL:SetCharacterOverview(bValue, length)
 	bValue = tobool(bValue)
-	length = length or animationTime
+	length = 0
 
 	if (bValue) then
 		if (!IsValid(self.projectedTexture)) then
