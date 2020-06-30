@@ -469,20 +469,6 @@ function GM:CalcView(client, origin, angles, fov)
 		end
 	end
 
-	local menu = ix.gui.menu
-	local entityMenu = ix.menu.panel
-
-	if (IsValid(menu) and menu:IsVisible() and menu:GetCharacterOverview()) then
-		local newOrigin, newAngles, newFOV, bDrawPlayer = menu:GetOverviewInfo(origin, angles, fov)
-
-		view.drawviewer = bDrawPlayer
-		view.fov = newFOV
-		view.origin = newOrigin
-		view.angles = newAngles
-	elseif (IsValid(entityMenu)) then
-		view.angles = entityMenu:GetOverviewInfo(origin, angles)
-	end
-
 	return view
 end
 
