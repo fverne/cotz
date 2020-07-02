@@ -355,7 +355,7 @@ end
 vgui.Register("ixScoreboard", PANEL, "DScrollPanel")
 
 hook.Add("CreateMenuButtons", "ixScoreboard", function(tabs)
-	tabs["scoreboard"] = function(container)
+	tabs["STALKERnet"] = function(container)
 		container:Add("ixScoreboard")
 	end
 end)

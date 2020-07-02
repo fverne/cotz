@@ -455,7 +455,7 @@ ix.command.Add("coinflip", {
 
 
 ix.command.Add("giveitemmenu", {
---	adminOnly = true,
+	adminOnly = true,
 	OnRun = function(self, client, arguments)
 		if client:GetCharacter():GetFlags("N") or client:IsAdmin() then
 			netstream.Start(client, "ixItemMenu")

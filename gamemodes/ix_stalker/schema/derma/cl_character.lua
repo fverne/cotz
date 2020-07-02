@@ -169,7 +169,7 @@ function PANEL:Init()
 		screenY = screenY + y
 
 		render.SetScissorRect(0, screenY, width, screenY + newHeight, true)
-		ix.util.DrawBlur(panel, 15, nil, 200)
+		--ix.util.DrawBlur(panel, 15, nil, 200)
 
 		-- background dim
 		surface.SetDrawColor(0, 0, 0, 100)
@@ -514,13 +514,13 @@ function PANEL:Close(bFromMenu)
 end
 
 function PANEL:Paint(width, height)
-	surface.SetMaterial(background5)
-	surface.SetDrawColor(255, 255, 255, 255)
-	surface.DrawTexturedRect(0, 0, width, height)
+	--surface.SetMaterial(background5)
+	--surface.SetDrawColor(255, 255, 255, 255)
+	--surface.DrawTexturedRect(0, 0, width, height)
 
 	if (!ix.option.Get("cheapBlur", false)) then
-		surface.SetDrawColor(255, 255, 255, 150)
-		surface.DrawTexturedRect(0, 0, width, height)
+		--surface.SetDrawColor(255, 255, 255, 150)
+		--surface.DrawTexturedRect(0, 0, width, height)
 		--ix.util.DrawBlur(self, Lerp((self.currentAlpha - 200) / 255, 0, 10))
 	end
 end

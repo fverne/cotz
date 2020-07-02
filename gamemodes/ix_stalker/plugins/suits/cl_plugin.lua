@@ -5,9 +5,6 @@ local character = LocalPlayer():GetCharacter()
 	if character then
 		if ix.option.Get("gasmaskoverlay", false) then
 			if (LocalPlayer():GetNetVar("gasmask") == true) then
-				if (IsValid(ix.gui.menu)) then
-  					return
-  				end
 
 				local inventory = character:GetInventory()
 				local items = inventory:GetItems()

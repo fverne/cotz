@@ -51,7 +51,7 @@ function PANEL:Init()
 	end
 
 	local characters = self.buttons:Add("ixMenuButton")
-	characters:SetText("characters")
+	characters:SetText("main menu")
 	characters:SizeToContents()
 	characters:Dock(BOTTOM)
 	characters.DoClick = function()

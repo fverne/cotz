@@ -11,6 +11,8 @@ ix.chat.Register("iteminternal", {
 	deadCanChat = true
 })
 
+
+/*
 ix.chat.Register("lev", {
 	CanSay =  function(self, speaker, text)
 		return speaker:IsAdmin() or speaker:getChar():hasFlags("N")
@@ -21,6 +23,8 @@ ix.chat.Register("lev", {
 	end,
 	prefix = {"/eventlocal", "/levent", "/lev"}
 })
+
+
 
 -- scream out loud.
 ix.chat.Register("s", {
@@ -172,7 +176,6 @@ ix.chat.Register("itfarfar", {
 	deadCanChat = true
 })
 
-/*
 nut.command.add("nickset", {
 	syntax = "[String Nickname]",
 	onRun = function(client, arguments)
@@ -242,7 +245,7 @@ ix.command.Add("cleannpcs", {
 	end
 })
 */
-
+/*
 ix.chat.Register("adminchat", {
 	format = "whocares",
 	--font = "nutRadioFont",
@@ -292,7 +295,7 @@ function PLUGIN:PlayerSay(client, text)
 	end
 end
 
-/*
+
 ix.command.Add("coinflip", {
 	onRun = function(client, arguments)
 		local coinSide = math.random(0, 1);
