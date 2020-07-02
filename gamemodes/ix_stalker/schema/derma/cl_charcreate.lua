@@ -9,6 +9,7 @@ function PANEL:Init()
 	local parent = self:GetParent()
 	local halfWidth = parent:GetWide() * 0.5 - (padding * 2)
 	local halfHeight = parent:GetTall() * 0.5 - (padding * 2)
+	local modelFOV = (ScrW() > ScrH() * 1.8) and 100 or 78
 
 	self:ResetPayload(true)
 
@@ -33,6 +34,7 @@ function PANEL:Init()
 	proceed:SetText("proceed")
 	proceed:SetContentAlignment(6)
 	proceed:Dock(BOTTOM)
+	proceed:SizeToContents()
 	proceed.DoClick = function()
 		self.progress:IncrementProgress()
 
@@ -43,7 +45,7 @@ function PANEL:Init()
 	self.factionModel = modelList:Add("ixModelPanel")
 	self.factionModel:Dock(FILL)
 	self.factionModel:SetModel("models/error.mdl")
-	self.factionModel:SetFOV(78)
+	self.factionModel:SetFOV(modelFOV)
 	self.factionModel.PaintModel = self.factionModel.Paint
 
 	self.factionButtonsPanel = self.factionPanel:Add("ixCharMenuButtonList")
@@ -52,6 +54,7 @@ function PANEL:Init()
 
 	local factionBack = self.factionPanel:Add("ixMenuButton")
 	factionBack:SetText("return")
+	factionBack:SizeToContents()
 	factionBack:Dock(BOTTOM)
 	factionBack.DoClick = function()
 		self.progress:DecrementProgress()
@@ -73,6 +76,7 @@ function PANEL:Init()
 	local descriptionBack = descriptionModelList:Add("ixMenuButton")
 	descriptionBack:SetText("return")
 	descriptionBack:SetContentAlignment(4)
+	descriptionBack:SizeToContents()
 	descriptionBack:Dock(BOTTOM)
 	descriptionBack.DoClick = function()
 		self.progress:DecrementProgress()
@@ -87,7 +91,7 @@ function PANEL:Init()
 	self.descriptionModel = descriptionModelList:Add("ixModelPanel")
 	self.descriptionModel:Dock(FILL)
 	self.descriptionModel:SetModel(self.factionModel:GetModel())
-	self.descriptionModel:SetFOV(65)
+	self.descriptionModel:SetFOV(modelFOV - 13)
 	self.descriptionModel.PaintModel = self.descriptionModel.Paint
 
 	self.descriptionPanel = self.description:Add("Panel")
@@ -97,57 +101,20 @@ function PANEL:Init()
 	local descriptionProceed = self.descriptionPanel:Add("ixMenuButton")
 	descriptionProceed:SetText("proceed")
 	descriptionProceed:SetContentAlignment(6)
+	descriptionProceed:SizeToContents()
 	descriptionProceed:Dock(BOTTOM)
 	descriptionProceed.DoClick = function()
 		if (self:VerifyProgression("description")) then
-
-			self.progress:IncrementProgress()
-			self:SetActiveSubpanel("charsheet")
-		end
-	end
-
--------------------------- NEW
-	-- charsheet subpanel
-	self.charsheet = self:AddSubpanel("charsheet")
-	self.charsheet:SetTitle("chooseDescription")
-
-	local charsheetModelList = self.charsheet:Add("Panel")
-	charsheetModelList:Dock(LEFT)
-	charsheetModelList:SetSize(halfWidth, halfHeight)
-
-	local charsheetBack = charsheetModelList:Add("ixMenuButton")
-	charsheetBack:SetText("return")
-	charsheetBack:SetContentAlignment(4)
-	charsheetBack:Dock(BOTTOM)
-	charsheetBack.DoClick = function()
-		self.progress:DecrementProgress()
-		self:SetActiveSubpanel("description")
-
-	end
-
-	self.charsheetModel = charsheetModelList:Add("ixModelPanel")
-	self.charsheetModel:Dock(FILL)
-	self.charsheetModel:SetModel(self.factionModel:GetModel())
-	self.charsheetModel:SetFOV(65)
-	self.charsheetModel.PaintModel = self.charsheetModel.Paint
-
-	self.charsheetPanel = self.charsheet:Add("Panel")
-	self.charsheetPanel:SetWide(halfWidth + padding * 2)
-	self.charsheetPanel:Dock(RIGHT)
-
-	local charsheetProceed = self.charsheetPanel:Add("ixMenuButton")
-	charsheetProceed:SetText("proceed")
-	charsheetProceed:SetContentAlignment(6)
-	charsheetProceed:Dock(BOTTOM)
-	charsheetProceed.DoClick = function()
-		if (self:VerifyProgression("charsheet")) then
 			-- there are no panels on the attributes section other than the create button, so we can just create the character
+			if (#self.attributesPanel:GetChildren() < 2) then
+				self:SendPayload()
+				return
+			end
 
 			self.progress:IncrementProgress()
 			self:SetActiveSubpanel("attributes")
 		end
 	end
------------------------------- NEW END
 
 	-- attributes subpanel
 	self.attributes = self:AddSubpanel("attributes")
@@ -160,25 +127,27 @@ function PANEL:Init()
 	local attributesBack = attributesModelList:Add("ixMenuButton")
 	attributesBack:SetText("return")
 	attributesBack:SetContentAlignment(4)
+	attributesBack:SizeToContents()
 	attributesBack:Dock(BOTTOM)
 	attributesBack.DoClick = function()
 		self.progress:DecrementProgress()
-		self:SetActiveSubpanel("charsheet")
+		self:SetActiveSubpanel("description")
 	end
 
 	self.attributesModel = attributesModelList:Add("ixModelPanel")
 	self.attributesModel:Dock(FILL)
 	self.attributesModel:SetModel(self.factionModel:GetModel())
-	self.attributesModel:SetFOV(65)
+	self.attributesModel:SetFOV(modelFOV - 13)
 	self.attributesModel.PaintModel = self.attributesModel.Paint
 
 	self.attributesPanel = self.attributes:Add("Panel")
 	self.attributesPanel:SetWide(halfWidth + padding * 2)
 	self.attributesPanel:Dock(RIGHT)
 
-	local create = self.attributesModel:Add("ixMenuButton")
+	local create = self.attributesPanel:Add("ixMenuButton")
 	create:SetText("finish")
-	create:SetContentAlignment(4)
+	create:SetContentAlignment(6)
+	create:SizeToContents()
 	create:Dock(BOTTOM)
 	create.DoClick = function()
 		self:SendPayload()
@@ -202,12 +171,10 @@ function PANEL:Init()
 			if (istable(model)) then
 				self.factionModel:SetModel(model[1], model[2] or 0, model[3])
 				self.descriptionModel:SetModel(model[1], model[2] or 0, model[3])
-				self.charsheetModel:SetModel(model[1], model[2] or 0, model[3])
 				self.attributesModel:SetModel(model[1], model[2] or 0, model[3])
 			else
 				self.factionModel:SetModel(model)
 				self.descriptionModel:SetModel(model)
-				self.charsheetModel:SetModel(model)
 				self.attributesModel:SetModel(model)
 			end
 		end
@@ -349,8 +316,6 @@ function PANEL:GetContainerPanel(name)
 	-- TODO: yuck
 	if (name == "description") then
 		return self.descriptionPanel
-	elseif (name == "charsheet") then
-		return self.charsheetPanel
 	elseif (name == "attributes") then
 		return self.attributesPanel
 	end
@@ -384,7 +349,8 @@ function PANEL:Populate()
 			if (ix.faction.HasWhitelist(v.index)) then
 				local button = self.factionButtonsPanel:Add("ixMenuSelectionButton")
 				button:SetBackgroundColor(v.color or color_white)
-				button:SetText(L(v.name):upper())
+				button:SetText(L(v.name):utf8upper())
+				button:SizeToContents()
 				button:SetButtonList(self.factionButtons)
 				button.faction = v.index
 				button.OnSelected = function(panel)
@@ -451,7 +417,7 @@ function PANEL:Populate()
 				-- add label for entry
 				local label = container:Add("DLabel")
 				label:SetFont("ixMenuButtonLabelFont")
-				label:SetText(L(k):upper())
+				label:SetText(L(k):utf8upper())
 				label:SizeToContents()
 				label:DockMargin(0, 16, 0, 2)
 				label:Dock(TOP)
@@ -479,8 +445,6 @@ function PANEL:Populate()
 		end
 
 		self.progress:AddSegment("@description")
-
-		self.progress:AddSegment("Character Background")
 
 		if (#self.attributesPanel:GetChildren() > 1) then
 			self.progress:AddSegment("@skills")
