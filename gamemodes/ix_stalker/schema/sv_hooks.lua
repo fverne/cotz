@@ -24,6 +24,12 @@ function Schema:OnCharacterCreated(client, character)
 	end
 end
 
+function Schema:EntityTakeDamage(target, dmg)
+	if (target:IsPlayer() and dmg:GetAttacker():IsPlayer()) then
+		return true
+	end
+end
+
 function Schema:PlayerSpray(client)
 	return true
 end
