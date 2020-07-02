@@ -30,9 +30,9 @@ function PANEL:Init()
 	self.currentBlur = 0
 
 	-- setup
-	self:SetPadding(ScreenScale(26), true)
-	self:SetSize(ScrW(), ScrH())
-	self:SetPos(0, 0)
+	self:SetPadding(ScreenScale(12), true)
+	self:SetSize(1333, 750)
+	self:SetPos(ScrW() / 2 - 666, ScrH() / 2 - 375)
 	self:SetLeftOffset(self:GetWide() * 0.25 + self:GetPadding())
 
 	-- main button panel
@@ -40,6 +40,7 @@ function PANEL:Init()
 	self.buttons:SetSize(self:GetWide() * 0.25, self:GetTall() - self:GetPadding() * 2)
 	self.buttons:Dock(LEFT)
 	self.buttons:SetPaintedManually(true)
+	self.buttons:DockPadding(0, 0, 0, 20)
 
 	local close = self.buttons:Add("ixMenuButton")
 	close:SetText("return")
@@ -75,6 +76,7 @@ end
 
 function PANEL:OnOpened()
 	self:SetAlpha(0)
+	surface.PlaySound("stalkersound/inv_pda_on.ogg")
 
 	self:CreateAnimation(animationTime, {
 		target = {currentAlpha = 255},
@@ -239,7 +241,7 @@ function PANEL:ShowBackground()
 end
 
 function PANEL:GetStandardSubpanelSize()
-	return ScrW() * 0.75 - self:GetPadding() * 3, ScrH() - self:GetPadding() * 2
+	return self:GetWide() * 0.75 - self:GetPadding() * 3, self:GetTall() - self:GetPadding() * 2.5
 end
 
 function PANEL:SetupTab(name, info, sectionParent)
@@ -381,7 +383,7 @@ function PANEL:Think()
 
 	if (bTabDown and (self.noAnchor or CurTime() + 0.4) < CurTime() and self.anchorMode) then
 		self.anchorMode = false
-		surface.PlaySound("buttons/lightswitch2.wav")
+		
 	end
 
 	if ((!self.anchorMode and !bTabDown) or gui.IsGameUIVisible()) then
@@ -440,6 +442,7 @@ function PANEL:Remove()
 	self:SetMouseInputEnabled(false)
 	self:SetKeyboardInputEnabled(false)
 	self:SetCharacterOverview(false, animationTime * 0.5)
+	surface.PlaySound("stalkersound/inv_pda_off.ogg")
 
 	-- remove input from opened child panels since they grab focus
 	if (IsValid(ix.gui.inv1) and ix.gui.inv1.childPanels) then

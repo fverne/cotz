@@ -6,7 +6,7 @@ PLUGIN.desc = "Allows for basic cross server interaction."
 
 PLUGIN.loadpoints = PLUGIN.loadpoints or {}
 PLUGIN.mapdata = PLUGIN.mapdata or {}
-PLUGIN.homemap = "arp_thecordon_ep6"
+PLUGIN.homemap = "rp_stalker_redux"
 
 local DEBUGSETUP = true
 local checktime = 0
