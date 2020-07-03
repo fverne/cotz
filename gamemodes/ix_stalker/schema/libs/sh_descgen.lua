@@ -23,22 +23,22 @@ function ix.util.PropertyDesc(tooltip, text, color)
 end
 
 function ix.util.PropertyDesc2(tooltip, text, color, imagestring)
-	imagestring = Material(imagestring)
 
 	local dot = tooltip:AddRow("propertyitem")
+
+	local image = dot:Add("DImage")
+	image:SetMaterial(imagestring)
+	image:SetPos(0, 0)
+	image:SetSize(dot:GetTall(), dot:GetTall())
+	image:SizeToContents()
+
 	dot:SetText(" •")
-	dot:SetContentAlignment(7)
+	dot:SetContentAlignment(7)	
 	dot:SizeToContents()
 	dot:SetTextColor( color or Color( 255, 255, 255) )
 
-	local image = dot:Add("DImage")
-	image:SetImage(imagestring)
-	image:SetPos(0, 0)
-	image:SetSize(dot:GetTall(), dot:GetTall())
-	image:MoveLeftOf(dot)
-
 	local desctext = dot:Add("DLabel")
-	desctext:MoveRightOf(dot)
+	desctext:MoveRightOf(image)
 	desctext:SetText(" "..text)
 	desctext:SetTextColor(Color(255, 255, 255))
 	desctext:SetFont("ixSmallFont")
