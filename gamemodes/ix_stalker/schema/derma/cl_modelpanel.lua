@@ -91,18 +91,23 @@ local PANEL = {}
 	function PANEL:Paint(w,h)
 		--draw.RoundedBox(4,0,0,w,h,Color(53,53,53,200))
 		if (!IsValid(self.Entity)) then return end
+
+		if ix.gui.menu.bClosing then
+			return 
+		end
+
 		local x,y = self:LocalToScreen()
 
 		tegnmanden = true
 
 		local angx, angy, angz = self.Entity:GetAngles():Unpack()
 
-		local fwd = Angle(0,angy,0):Forward()*55
+		local fwd = Angle(0,angy,0):Forward()*100
 
-		local campos = self.Entity:GetPos() + fwd + Vector(0,0,32)
-		local camtarget = self.Entity:GetPos() + Vector(0,0,32)
+		local campos = self.Entity:GetPos() + fwd + Vector(0,0,36)
+		local camtarget = self.Entity:GetPos() + Vector(0,0,36)
 
-		cam.Start3D(campos,(camtarget-campos):Angle(),80,x,y,w,h,5,4096)
+		cam.Start3D(campos,(camtarget-campos):Angle(),36,x,y,w,h,5,4096)
 		--cam.Start3D(self.Entity:LocalToWorld(self.Entity:OBBCenter())-ang:Forward()*100,ang,self.fFOV,x,y,w,h,5,4096)
 		cam.IgnoreZ(true)
 

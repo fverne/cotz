@@ -431,15 +431,6 @@ hook.Add("CreateMenuButtons", "ixCharInfo", function(tabs)
 		Create = function(info, container)
 			local inventory = container:Add("ixStalkerInventoryPanel")
 			inventory:SetPos(container:GetWide() - inventory:GetWide() - container:GetWide()*0.01, 0)
-
-			-- modelpaneltest
-
-			local modelpanel = container:Add("ixPlayerModelPanel")
-			modelpanel.Entity = LocalPlayer()
-			modelpanel.OnRemove = nil
-			modelpanel:SetSize(600,600) -- Probably needs to be 600x600 to draw the character in the correct size
-			modelpanel:SetPos(container:GetWide() - inventory:GetWide() - modelpanel:GetWide() - container:GetWide()*0.01, 0)
-
 			
 		end,
 		OnSelected = function(info, container)

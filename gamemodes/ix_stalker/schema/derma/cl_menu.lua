@@ -42,6 +42,18 @@ function PANEL:Init()
 	self.buttons:SetPaintedManually(true)
 	self.buttons:DockPadding(0, 0, 0, 20)
 
+	self.modelpanelframe = self.buttons:Add("DImage")
+	self.modelpanelframe:SetSize(300, 300)
+	self.modelpanelframe:SetMaterial(Material("cotz/panels/loot_interface.png"))
+	self.modelpanelframe:Dock(BOTTOM)
+	self.modelpanelframe:DockMargin(0, 0, 100, 0)
+
+	-- modelpaneltest
+	self.modelpanel = self.modelpanelframe:Add("ixPlayerModelPanel")
+	self.modelpanel.Entity = LocalPlayer()
+	self.modelpanel.OnRemove = nil
+	self.modelpanel:Dock(FILL)
+
 	/*local close = self.buttons:Add("ixMenuButton")
 	close:SetText("return")
 	close:SizeToContents()
