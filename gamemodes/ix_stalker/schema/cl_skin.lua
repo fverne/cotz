@@ -288,15 +288,15 @@ function SKIN:PaintSegmentedProgress(panel, width, height)
 end
 
 function SKIN:PaintCharacterCreateBackground(panel, width, height)
-	surface.SetDrawColor(100, 100, 100, 255)
-	surface.SetMaterial(background2)
-	surface.DrawTexturedRect(0, 0, width, height)
+	surface.SetDrawColor(255, 255, 255, 255)
+	surface.SetMaterial(background4)
+	surface.DrawTexturedRectUV(0, 0, width, height, 1, 0, 0, 1)
 end
 
 function SKIN:PaintCharacterLoadBackground(panel, width, height)
-	surface.SetDrawColor(150, 150, 150, 255)
-	surface.SetMaterial(background4)
-	surface.DrawTexturedRect(0, 0, width, height)
+	surface.SetDrawColor(255, 255, 255, 255)
+	surface.SetMaterial(background2)
+	surface.DrawTexturedRectUV(0, 0, width, height, 0, 0, 1, 1)
 end
 
 function SKIN:PaintCharacterTransitionOverlay(panel, x, y, width, height, color)

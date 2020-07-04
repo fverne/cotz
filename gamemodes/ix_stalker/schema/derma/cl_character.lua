@@ -1,6 +1,6 @@
 
 local gradient = surface.GetTextureID("vgui/gradient-d")
-local background5 = Material("vgui/background/stalkerbackground3.jpg")
+local background5 = Material("cotz/panels/pdaframe.png")
 local audioFadeInTime = 2
 local animationTime = 0.5
 local matrixZScale = Vector(1, 1, 0.0001)
@@ -154,7 +154,7 @@ function PANEL:Init()
 
 	local logoPanel = self:Add("Panel")
 	logoPanel:SetSize(ScrW(), ScrH() * 0.25)
-	logoPanel:SetPos(0, ScrH() * 0.25)
+	logoPanel:SetPos(0, ScrH() * 0.15)
 	logoPanel.Paint = function(panel, width, height)
 		local matrix = self.currentMatrix
 
@@ -172,13 +172,18 @@ function PANEL:Init()
 		--ix.util.DrawBlur(panel, 15, nil, 200)
 
 		-- background dim
-		surface.SetDrawColor(0, 0, 0, 100)
-		surface.DrawRect(0, y, width, newHeight)
+		--surface.SetDrawColor(0, 0, 0, 100)
+		--surface.DrawRect(0, y, width, newHeight)
 
 		-- border lines
-		surface.SetDrawColor(ix.config.Get("color") or color_white)
-		surface.DrawRect(0, y, width, 1)
-		surface.DrawRect(0, y + newHeight - 1, width, 1)
+		--surface.SetDrawColor(ix.config.Get("color") or color_white)
+		--surface.DrawRect(0, y, width, 1)
+		--surface.DrawRect(0, y + newHeight - 1, width, 1)
+
+		-- background
+		surface.SetMaterial(Material("cotz/panels/buttontab.png"))
+		surface.SetDrawColor(255, 255, 255)
+		surface.DrawTexturedRect(width * 0.35, 0, width * 0.3, height)
 
 		if (matrix) then
 			cam.PushModelMatrix(matrix)
@@ -514,9 +519,9 @@ function PANEL:Close(bFromMenu)
 end
 
 function PANEL:Paint(width, height)
-	--surface.SetMaterial(background5)
-	--surface.SetDrawColor(255, 255, 255, 255)
-	--surface.DrawTexturedRect(0, 0, width, height)
+	surface.SetMaterial(background5)
+	surface.SetDrawColor(255, 255, 255, 255)
+	surface.DrawTexturedRect(0, 0, width, height)
 
 	if (!ix.option.Get("cheapBlur", false)) then
 		--surface.SetDrawColor(255, 255, 255, 150)

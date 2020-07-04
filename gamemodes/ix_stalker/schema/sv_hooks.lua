@@ -14,7 +14,7 @@ function Schema:OnCharacterCreated(client, character)
 			}
 		end
 		
-		local i = 7
+		local i = 1
 		for k, v in pairs(items) do
 			timer.Simple(i + k, function()
 				inventory:Add(v)

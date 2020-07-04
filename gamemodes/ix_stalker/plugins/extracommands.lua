@@ -43,7 +43,7 @@ nut.command.add("nickremove", {
 	end;
 })
 */
-
+/*
 ix.command.Add("CharGiveFlag", {
 	description = "@cmdCharGiveFlag",
 	privilege = "Manage Character Flags",
@@ -158,7 +158,7 @@ ix.command.Add("CharSetModel", {
 		end
 	end
 })
-
+*/
 ix.command.Add("Event", {
 	description = "@cmdEvent",
 	arguments = ix.type.text,
@@ -280,6 +280,7 @@ ix.command.Add("clearinv", {
 	end
 })
 
+/*
 hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 	--[[-------------------------------------------------------------------------
 	WAY too lazy to convert this
@@ -441,7 +442,7 @@ hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)
 		menu:AddOption(k,v[1])
 	end
 end)
-
+*/
 ix.command.Add("coinflip", {
 	OnRun = function(self, client, arguments)
 		local coinSide = math.random(0, 1);

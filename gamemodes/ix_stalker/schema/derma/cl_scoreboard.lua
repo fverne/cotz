@@ -17,7 +17,7 @@ AccessorFunc(PANEL, "model", "Model", FORCE_STRING)
 AccessorFunc(PANEL, "bHidden", "Hidden", FORCE_BOOL)
 
 function PANEL:Init()
-	self:SetSize(64, 64)
+	self:SetSize(96, 64)
 	self.bodygroups = BODYGROUPS_EMPTY
 end
 
@@ -166,19 +166,19 @@ function PANEL:Init()
 	self.name:DockMargin(4, 1, 0, 0)
 	self.name:Dock(TOP)
 	self.name:SetTextColor(color_white)
-	self.name:SetFont("ixGenericFont")
+	self.name:SetFont("stalkerregularsmallfont2")
 
 	self.rep = self:Add("DLabel")
 	self.rep:DockMargin(5, 0, 0, 0)
 	self.rep:Dock(TOP)
 	self.rep:SetTextColor(Color(138, 43, 226))
-	self.rep:SetFont("ixSmallFont")
+	self.rep:SetFont("stalkerregularsmallfont")
 
 	self.description = self:Add("DLabel")
 	self.description:DockMargin(5, 0, 0, 0)
 	self.description:Dock(TOP)
 	self.description:SetTextColor(color_white)
-	self.description:SetFont("ixSmallFont")
+	self.description:SetFont("stalkerregularsmallfont")
 
 	self.paintFunction = rowPaintFunctions[1]
 	self.nextThink = CurTime() + 1
