@@ -92,8 +92,7 @@ ITEM.items[3] = {
 },
 	itemsVeryRare = {
 		{"documents1"},
-		{"pda"},
-		{"radio"},
+				{"radio"},
 		{"sradio"},
 		{"geigercounter"},
 		{"guitar"},

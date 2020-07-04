@@ -14,8 +14,7 @@ ITEM.itemsForcedDrop = {
 	{"geigercounter"},
 	{"medkitscientific"},
 	{"antirad"},
-	{"pda"},
-}
+	}
 
 ITEM.items[1] = {
 	dropAmount = 1,

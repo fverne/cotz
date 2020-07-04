@@ -8,8 +8,7 @@ ITEM.itemsForcedDrop = {
 	{"bagrubles", {["quantity"] = 5000},},
 	{"9x18", {["quantity"] = 100},},
 	{"makarov", {["durability"] = 100},},
-	{"pda"},
-	{"radio"},
+		{"radio"},
 	{"geigercounter"},
 	{"headlamp"},
 }

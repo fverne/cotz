@@ -18,8 +18,7 @@ ITEM.items[1] = {
 		{"vodka2", {["quantity"] = 3}},
 },
 	itemsRare = {
-		{"pda"},
-		{"headlamp"},
+				{"headlamp"},
 		{"radio"},
 		{"geigercounter"},
 		{"boarhoof"},

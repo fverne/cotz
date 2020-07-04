@@ -57,8 +57,7 @@ ITEM.items[1] = {
 */		{"radio"},
 		{"headlamp"},
 		{"geigercounter"},
-		{"pda"},
-		{"documents4"},
+				{"documents4"},
 	},
 	itemsVeryRare = {
 		{"documents0"},
