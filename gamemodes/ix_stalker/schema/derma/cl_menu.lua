@@ -42,21 +42,35 @@ function PANEL:Init()
 	self.buttons:SetPaintedManually(true)
 	self.buttons:DockPadding(0, 0, 0, 20)
 
-	local close = self.buttons:Add("ixMenuButton")
+	/*local close = self.buttons:Add("ixMenuButton")
 	close:SetText("return")
 	close:SizeToContents()
 	close:Dock(BOTTOM)
 	close.DoClick = function()
 		self:Remove()
-	end
+	end*/
 
-	local characters = self.buttons:Add("ixMenuButton")
-	characters:SetText("main menu")
+	local characters = self:Add("ixMenuButton")
+	characters:SetText("")
 	characters:SizeToContents()
-	characters:Dock(BOTTOM)
+	characters:SetPos(self:GetWide() - characters:GetWide()*1, /*self:GetTall() - characters:GetTall() * 1.2*/ 0)
+	characters:SetSize(32, 32)
+	characters:SetZPos(500)
 	characters.DoClick = function()
 		self:Remove()
 		vgui.Create("ixCharMenu")
+	end
+	characters.Paint = function(this, w, h)
+		if characters:IsHovered() then
+			surface.SetMaterial(Material("cotz/panels/pdapowerselect.png", "smooth"))
+			surface.SetDrawColor(255, 255, 255)
+			surface.DrawTexturedRectUV(0, 0, w, h, 0, 0, 1.000, 1.000)
+		else
+			surface.SetMaterial(Material("cotz/panels/pdapower.png", "smooth"))
+			surface.SetDrawColor(255, 255, 255)
+			surface.DrawTexturedRectUV(0, 0, w, h, 0, 0, 1.000, 1.000)
+		end
+		
 	end
 
 	-- @todo make a better way to avoid clicks in the padding PLEASE
