@@ -18,6 +18,7 @@ end
 
 --	ix.plugin.SetUnloaded("stamina", true)
 --	ix.plugin.SetUnloaded("strength", true)
+--  ix.plugin.SetUnloaded("doors", true)
 
 function PLUGIN:LoadFonts(font, genericFont)
 	surface.CreateFont("ixTypingIndicator", {
@@ -55,97 +56,11 @@ if (CLIENT) then
 end
 
 do
-	ix.char.RegisterVar("attributes", {
-		field = "attributes",
-		fieldType = ix.type.text,
-		default = {},
-		index = 4,
-		category = "attributes",
-		isLocal = true,
-		OnDisplay = function(self, container, payload)
-			local maximum = hook.Run("GetDefaultAttributePoints", LocalPlayer(), payload) or ix.config.Get("maxAttributes", 30)
+	--Removal of helix commands we dont use
+	hook.Add("InitializedConfig", "ixCommandRemoval", function()
+		ix.command.list["becomeclass"] = nil
+		ix.command.list["chardesc"] = nil
+		ix.command.list["eventpda"] = nil
 
-			if (maximum < 1) then
-				return
-			end
-
-			local attributes = container:Add("DPanel")
-			attributes:Dock(TOP)
-
-			local y
-			local total = 0
-
-			payload.attributes = {}
-
-			-- total spendable attribute points
-			local totalBar = attributes:Add("ixAttributeBar")
-			totalBar:SetMax(maximum)
-			totalBar:SetValue(maximum)
-			totalBar:Dock(TOP)
-			totalBar:DockMargin(2, 2, 2, 2)
-			totalBar:SetText("Attribute Points left:".." ("..totalBar:GetValue()..")")
-			totalBar:SetReadOnly(true)
-			totalBar:SetColor(Color(20, 120, 20, 255))
-
-			y = totalBar:GetTall() + 4
-
-			for k, v in SortedPairsByMemberValue(ix.attributes.list, "name") do
-				if v.secondary == true then
-					continue
-				end
-
-				payload.attributes[k] = 0
-
-				local bar = attributes:Add("ixAttributeBar")
-				bar:SetMax(40)
-				bar:SetValue(20)
-				bar:SetMin(20)
-				bar:Dock(TOP)
-				bar:DockMargin(2, 2, 2, 2)
-				bar:SetText(L(v.name.." ("..bar:GetValue()..")"))
-				payload.attributes[k] = bar:GetValue()
-				bar.OnChanged = function(this, difference)
-					if ((total + difference) > maximum) then
-						return false
-					end
-
-					total = total + difference
-					payload.attributes[k] = bar.value+difference
-					bar:SetText(L(v.name.." ("..bar.value+difference..")"))
-
-					totalBar:SetValue(totalBar.value - difference)
-					totalBar:SetText("Attribute Points left:".." ("..totalBar:GetMax()-total..")")
-				end
-
-				if (v.noStartBonus) then
-					bar:SetReadOnly()
-				end
-
-				y = y + bar:GetTall() + 4
-			end
-
-			attributes:SetTall(y)
-			return attributes
-		end,
-		OnValidate = function(self, value, data, client)
-			if (value != nil) then
-				if (istable(value)) then
-					local count = 0
-
-					for _, v in pairs(value) do
-						count = count + v
-					end
-
-					if (count > (300)) then
-						return false, "unknownError"
-					end
-				else
-					return false, "unknownError"
-				end
-			end
-		end,
-		ShouldDisplay = function(self, container, payload)
-			return !table.IsEmpty(ix.attributes.list)
-		end
-	})
+	end)
 end
