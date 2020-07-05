@@ -11,6 +11,13 @@ ITEM.busflag = {"guns2_1_1"}
 ITEM.repairCost = ITEM.price/100*1
 ITEM.canAttach = false
 
+ITEM.bulletweight = 0.031
+ITEM.unloadedweight = 2.26
+
+function ITEM:GetWeight()
+  return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
+end
+
 ITEM.model = "models/khrcw2/doipack/w_ithaca37.mdl"
 ITEM.iconCam = {
 	pos = Vector(3, -205, -0.30000001192093),
