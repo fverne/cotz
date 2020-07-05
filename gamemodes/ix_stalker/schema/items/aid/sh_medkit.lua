@@ -10,6 +10,12 @@ ITEM.sound = "stalkersound/inv_bandage.mp3"
 ITEM.price = "100"
 ITEM.busflag = {"medical2"}
 ITEM.quantity = 3
+ITEM.weight = 0.1
+ITEM.flatweight = 0.050
+
+function ITEM:GetWeight()
+	return self.flatweight + (self.weight * self:GetData("quantity", self.quantity))
+end
 
 function ITEM:GetDescription()
 	if (!self.entity or !IsValid(self.entity)) then

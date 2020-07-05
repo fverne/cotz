@@ -9,6 +9,7 @@ ITEM.restore = 15
 ITEM.sound = "stalkersound/inv_bandage_2p9.mp3"
 ITEM.price = "25"
 ITEM.busflag = {"medical"}
+ITEM.weight = 0.040
 
 ITEM.functions.use = {
 	name = "Heal",
