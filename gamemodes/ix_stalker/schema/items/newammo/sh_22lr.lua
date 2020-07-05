@@ -7,3 +7,10 @@ ITEM.longdesc = "This small .22LR round is primarily used for pest control, but 
 ITEM.price = 450
 ITEM.busflag = {"ammo"}
 ITEM.img = Material("vgui/hud/22lr.png")
+
+ITEM.weight = 0.0025
+ITEM.flatweight = 0.05
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

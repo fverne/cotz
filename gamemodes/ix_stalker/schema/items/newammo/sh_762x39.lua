@@ -10,3 +10,9 @@ ITEM.price = 1700
 --ITEM.busflag = "SPECIAL8_1"
 ITEM.img = Material("vgui/hud/762x39.png")
 
+ITEM.weight = 0.019
+ITEM.flatweight = 0.05
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

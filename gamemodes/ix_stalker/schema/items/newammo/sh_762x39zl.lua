@@ -9,3 +9,9 @@ ITEM.longdesc = "7.62x39 Full Metal Jacket is one the most commonly used types o
 ITEM.price = 1700
 ITEM.img = Material("vgui/hud/762x39zl.png")
 
+ITEM.weight = 0.018
+ITEM.flatweight = 0.05
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

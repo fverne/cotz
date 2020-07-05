@@ -9,3 +9,9 @@ ITEM.longdesc = "The 7.62x51 NATO round is a military variant of the .308 round 
 ITEM.price = 1950
 ITEM.img = Material("vgui/hud/762x51zl.png")
 
+ITEM.weight = 0.025
+ITEM.flatweight = 0.05
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

@@ -7,3 +7,10 @@ ITEM.longdesc = "The FN 5.7x28mm is a high velocity cartridge designed and manuf
 ITEM.price = 850
 --ITEM.busflag = "SPECIAL8"
 ITEM.img = Material("vgui/hud/57x28.png")
+
+ITEM.weight = 0.006
+ITEM.flatweight = 0.06
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

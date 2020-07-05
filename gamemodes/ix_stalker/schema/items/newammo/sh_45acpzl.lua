@@ -7,3 +7,10 @@ ITEM.longdesc = "The .45 caliber full metal jacket round has enjoyed popularity 
 ITEM.price = 950
 ITEM.width = 2
 ITEM.img = Material("vgui/hud/45acpzl.png")
+
+ITEM.weight = 0.017
+ITEM.flatweight = 0.05
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

@@ -9,4 +9,9 @@ ITEM.longdesc = "The .338 Lapua Magnum is a specialized rimless bottlenecked cen
 ITEM.price = 3500
 ITEM.img = Material("vgui/hud/338lapuazl.png")
 
+ITEM.weight = 0.016
+ITEM.flatweight = 0.05
 
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

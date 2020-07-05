@@ -9,4 +9,9 @@ ITEM.longdesc = "Military 5.45x39 7H10 caliber is an improved piercing round for
 ITEM.price = 1500
 ITEM.img = Material("vgui/hud/545x39zl.png")
 
+ITEM.weight = 0.010
+ITEM.flatweight = 0.05
 
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

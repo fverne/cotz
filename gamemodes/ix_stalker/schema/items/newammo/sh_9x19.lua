@@ -7,3 +7,10 @@ ITEM.longdesc = "This basic 9x19 caliber round with a jacketed bullet has good c
 ITEM.price = 750
 ITEM.busflag = {"ammo1"}
 ITEM.img = Material("vgui/hud/9x19.png")
+
+ITEM.weight = 0.008
+ITEM.flatweight = 0.05
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end
