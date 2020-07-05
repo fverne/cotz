@@ -17,10 +17,6 @@ ITEM.isCassette = true
 if (CLIENT) then
 	function ITEM:PopulateTooltip(tooltip)
 		if !self.entity then
-			local descheader = tooltip:AddRow("properties")
-			descheader:SetText("\nPROPERTIES:")
-			descheader:SizeToContents()
-
 			ix.util.PropertyDesc(tooltip, "Very Rare Item", Color(200, 200, 200))
 			ix.util.PropertyDesc(tooltip, "Fits into cassette players", Color(200, 200, 200))
 			ix.util.PropertyDesc2(tooltip, "Valuable", Color(218, 165, 32), Material("icon16/stalker/sell.png"))

@@ -8,39 +8,65 @@ ix.util.text = ix.util.text or {}
 -- Your library functions should reside in the table as regular function calls, not method calls (i.e use "." instead of ":") to
 -- maintain consistency with the rest of Helix. What you shouldn't do: function ix.test:Add(one, two)
 function ix.util.PropertyDesc(tooltip, text, color)
+	if !tooltip:GetRow("propertyheader") then
+		local descheader = tooltip:AddRow("propertyheader")
+		descheader:SetText("\nPROPERTIES:")
+		descheader:SizeToContents()
+		descheader:SetContentAlignment(4)
+	end
+
 	local dot = tooltip:AddRow("propertyitem")
-	dot:SetText(" •")
-	dot:SetContentAlignment(7)
-	dot:SizeToContents()
-	dot:SetTextColor( color or Color( 255, 255, 255) )
+	dot:SetText("")
+
+	local image = dot:Add("DLabel")
+	image:SetText("•")
+	image:SetContentAlignment(8)
+	image:SetTextColor( color or Color( 255, 255, 255) )
+	image:SetPos(8, 0)
+	image:SetSize(dot:GetTall(), dot:GetTall())
+	--image:SizeToContents()
+
 
 	local desctext = dot:Add("DLabel")
-	desctext:MoveRightOf(dot)
-	desctext:SetText(" "..text)
+	desctext:MoveRightOf(image)
+	desctext:SetText("  "..text)
 	desctext:SetTextColor(Color(255, 255, 255))
 	desctext:SetFont("ixSmallFont")
 	desctext:SizeToContents()
 end
 
 function ix.util.PropertyDesc2(tooltip, text, color, imagestring)
+	if !tooltip:GetRow("propertyheader") then
+		local descheader = tooltip:AddRow("propertyheader")
+		descheader:SetText("\nPROPERTIES:")
+		descheader:SizeToContents()
+		descheader:SetContentAlignment(4)
+	end
 
-	local dot = tooltip:AddRow("propertyitem")
+	local dot
+
+	if !tooltip:GetRow("propertyitem") then
+		dot = tooltip:AddRowAfter("propertyheader", "propertyitem")
+		dot:SetText("")
+	else
+		dot = tooltip:AddRow("propertyitem")
+		dot:SetText("")
+	end
+
+	
 
 	local image = dot:Add("DImage")
 	image:SetMaterial(imagestring)
-	image:SetPos(0, 0)
+	image:SetPos(8, 0)
 	image:SetSize(dot:GetTall(), dot:GetTall())
 	image:SizeToContents()
 
-	dot:SetText(" •")
-	dot:SetContentAlignment(7)	
-	dot:SizeToContents()
-	dot:SetTextColor( color or Color( 255, 255, 255) )
-
 	local desctext = dot:Add("DLabel")
 	desctext:MoveRightOf(image)
-	desctext:SetText(" "..text)
+	desctext:SetText("  "..text)
 	desctext:SetTextColor(Color(255, 255, 255))
 	desctext:SetFont("ixSmallFont")
 	desctext:SizeToContents()
+
+	dot:SizeToContents()
 end
