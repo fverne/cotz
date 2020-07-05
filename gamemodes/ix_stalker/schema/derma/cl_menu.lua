@@ -33,7 +33,7 @@ function PANEL:Init()
 	self:SetPadding(ScreenScale(12), true)
 	self:SetSize(1333, 750)
 	self:SetPos(ScrW() / 2 - 666, ScrH() / 2 - 375)
-	self:SetLeftOffset(self:GetWide() * 0.25 + self:GetPadding())
+	self:SetLeftOffset(self:GetWide() * 0.2 + self:GetPadding())
 
 	-- main button panel
 	self.buttons = self:Add("Panel")
@@ -46,7 +46,7 @@ function PANEL:Init()
 	self.modelpanelframe:SetSize(300, 300)
 	self.modelpanelframe:SetMaterial(Material("cotz/panels/loot_interface.png"))
 	self.modelpanelframe:Dock(BOTTOM)
-	self.modelpanelframe:DockMargin(0, 0, 100, 0)
+	self.modelpanelframe:DockMargin(0, 0, 0, 0)
 
 	-- modelpaneltest
 	self.modelpanel = self.modelpanelframe:Add("ixPlayerModelPanel")
@@ -82,7 +82,6 @@ function PANEL:Init()
 			surface.SetDrawColor(255, 255, 255)
 			surface.DrawTexturedRectUV(0, 0, w, h, 0, 0, 1.000, 1.000)
 		end
-		
 	end
 
 	-- @todo make a better way to avoid clicks in the padding PLEASE
@@ -267,7 +266,7 @@ function PANEL:ShowBackground()
 end
 
 function PANEL:GetStandardSubpanelSize()
-	return self:GetWide() * 0.75 - self:GetPadding() * 3, self:GetTall() - self:GetPadding() * 2.5
+	return self:GetWide() * 0.8 - self:GetPadding() * 3, self:GetTall() - self:GetPadding() * 2.5
 end
 
 function PANEL:SetupTab(name, info, sectionParent)
