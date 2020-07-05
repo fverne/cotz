@@ -2,7 +2,7 @@ ITEM.name = "Orange Juice"
 ITEM.model = "models/kek1ch/item_sok.mdl"
 ITEM.thirst = 35
 ITEM.description = "A carton of juice."
-ITEM.longdesc = "A carton of multi-fruit juice. It's briefly refreshing."
+ITEM.longdesc = "A carton of orange juice. It's briefly refreshing."
 ITEM.quantity = 1
 ITEM.price = 80
 ITEM.width = 1
@@ -17,3 +17,5 @@ ITEM:Hook("use", function(item)
 end)
 
 ITEM:DecideFunction()
+
+ITEM.weight = 1.1

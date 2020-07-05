@@ -17,3 +17,5 @@ ITEM:Hook("use", function(item)
 	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
 end)
 ITEM:DecideFunction()
+
+ITEM.weight = 0.540
