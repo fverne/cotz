@@ -37,7 +37,7 @@ function PANEL:Init()
 
 	-- main button panel
 	self.buttons = self:Add("Panel")
-	self.buttons:SetSize(self:GetWide() * 0.25, self:GetTall() - self:GetPadding() * 2)
+	self.buttons:SetSize(self:GetWide() * 0.2, self:GetTall() - self:GetPadding() * 2)
 	self.buttons:Dock(LEFT)
 	self.buttons:SetPaintedManually(true)
 	self.buttons:DockPadding(0, 0, 0, 20)
