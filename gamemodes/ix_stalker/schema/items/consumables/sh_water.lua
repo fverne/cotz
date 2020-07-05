@@ -2,7 +2,7 @@ ITEM.name = "Water"
 ITEM.model = "models/kek1ch/dev_mineral_water.mdl"
 ITEM.thirst = 45
 ITEM.description = "A bottle containing water."
-ITEM.longdesc = "A bottle containing water which has been cleansed inside the zone. The result is a radiation-free product, albeit it still has a sour taste."
+ITEM.longdesc = "A bottle containing water which has been cleansed inside the zone. The result is a radiation-free product, although it still has a sour taste."
 ITEM.quantity = 1
 ITEM.price = 70
 ITEM.width = 1
@@ -16,3 +16,5 @@ ITEM:Hook("use", function(item)
 end)
 
 ITEM:DecideFunction()
+
+ITEM.weight = 0.58

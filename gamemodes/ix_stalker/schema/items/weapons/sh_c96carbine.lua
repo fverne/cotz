@@ -12,6 +12,13 @@ ITEM.repairCost = ITEM.price/100*1
 ITEM.canAttach = true
 ITEM.validAttachments = {"md_rmr","md_tundra9mm"}
 
+ITEM.bulletweight = 0.010
+ITEM.unloadedweight = 1.45
+
+function ITEM:GetWeight()
+  return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
+end
+
 ITEM.iconCam = {
 	pos = Vector(4, -205, 0),
 	ang = Angle(0, 90, 0),

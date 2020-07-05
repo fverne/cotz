@@ -9,3 +9,10 @@ ITEM.longdesc = "The .410 bore, is the second-smallest caliber of shotgun shell 
 ITEM.price = 600
 ITEM.busflag = {"ammo2"}
 ITEM.img = Material("vgui/hud/410buck.png")
+
+ITEM.weight = 0.015
+ITEM.flatweight = 0.07
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

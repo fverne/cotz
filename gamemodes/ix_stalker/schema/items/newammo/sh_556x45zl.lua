@@ -9,4 +9,9 @@ ITEM.longdesc = "A standard-issue NATO 5.56x45 caliber round specially designed 
 ITEM.price = 1650
 ITEM.img = Material("vgui/hud/556x45zl.png")
 
+ITEM.weight = 0.011
+ITEM.flatweight = 0.05
 
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

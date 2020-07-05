@@ -15,3 +15,10 @@ ITEM:Hook("use", function(item)
 end)
 
 ITEM:DecideFunction()
+
+ITEM.weight = 0.56
+ITEM.flatweight = 0.05
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.quantity))
+end

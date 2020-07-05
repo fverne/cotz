@@ -7,3 +7,10 @@ ITEM.longdesc = "This 9x18mm round contains full metal jacket rounds with a stee
 ITEM.price = 600
 ITEM.busflag = {"ammo"}
 ITEM.img = Material("vgui/hud/9x18.png")
+
+ITEM.weight = 0.011
+ITEM.flatweight = 0.05
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

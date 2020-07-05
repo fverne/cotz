@@ -9,3 +9,10 @@ ITEM.longdesc = "This heavy 12-caliber slug round is normally used for hunting b
 ITEM.price = 700
 ITEM.busflag = {"ammo2_1"}
 ITEM.img = Material("vgui/hud/12gaugesg.png")
+
+ITEM.weight = 0.036
+ITEM.flatweight = 0.03
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

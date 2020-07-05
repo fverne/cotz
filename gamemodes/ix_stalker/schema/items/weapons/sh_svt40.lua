@@ -11,6 +11,13 @@ ITEM.height = 1
 ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_pso1","md_pbs1"}
 
+ITEM.bulletweight = 0.022
+ITEM.unloadedweight = 3.85
+
+function ITEM:GetWeight()
+  return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
+end
+
 ITEM.iconCam = {
 	pos = Vector(3, 200, 1.5),
 	ang = Angle(0, 270, 0),

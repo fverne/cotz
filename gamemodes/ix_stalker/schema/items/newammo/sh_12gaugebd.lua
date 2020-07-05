@@ -9,3 +9,10 @@ ITEM.longdesc = "Birdshot 12 gauge shell filled with 3 mm shot. Highly lethal at
 ITEM.price = 650
 ITEM.busflag = {"ammo"}
 ITEM.img = Material("vgui/hud/12gaugezl.png")
+
+ITEM.weight = 0.034
+ITEM.flatweight = 0.03
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

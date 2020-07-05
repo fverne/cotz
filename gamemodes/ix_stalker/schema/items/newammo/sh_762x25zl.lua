@@ -9,3 +9,9 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.img = Material("vgui/hud/762x25zl.png")
 
+ITEM.weight = 0.0095
+ITEM.flatweight = 0.03
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

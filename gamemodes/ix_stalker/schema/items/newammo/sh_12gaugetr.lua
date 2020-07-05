@@ -9,3 +9,10 @@ ITEM.longdesc = "Tri-Ball 12 gauge shell filled with %s mm shot. This round fire
 ITEM.price = 750
 --ITEM.busflag = "SPECIAL8_1"
 ITEM.img = Material("vgui/hud/12gauge.png")
+
+ITEM.weight = 0.04
+ITEM.flatweight = 0.03
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end

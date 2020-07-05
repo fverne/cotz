@@ -10,3 +10,5 @@ ITEM.attachSlot = 2
 --ITEM.busflag = "SPECIAL3_1_1"
 ITEM.price = 4000
 ITEM.repairCost = ITEM.price/100*1
+
+ITEM.weight = 0.197

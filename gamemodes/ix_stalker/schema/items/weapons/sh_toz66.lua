@@ -12,6 +12,13 @@ ITEM.repairCost = ITEM.price/100*1
 
 ITEM.canAttach = false
 
+ITEM.bulletweight = 0.031
+ITEM.unloadedweight = 3.2
+
+function ITEM:GetWeight()
+  return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
+end
+
 ITEM.iconCam = {
 	pos = Vector(2.4000000953674, -205, -3),
 	ang = Angle(0, 90, -2),

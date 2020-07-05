@@ -3,7 +3,7 @@ ITEM.model = "models/kek1ch/dev_beer.mdl"
 ITEM.thirst = 31
 ITEM.description = "A bottle of beer"
 ITEM.longdesc = "Ochakovo Beer is not subject to pasteurization. \nLong-term storage is based on cold filtering technology with the use of fine-meshed polymeric membranes which filter out even the smallest yeast."
-ITEM.quantity = 1
+ITEM.quantity = 2
 ITEM.price = 350
 ITEM.width = 1
 ITEM.height = 2
@@ -17,3 +17,10 @@ ITEM:Hook("use", function(item)
 end)
 
 ITEM:DecideFunction()
+
+ITEM.weight = 1.0
+ITEM.flatweight = 0.500
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.quantity))
+end
