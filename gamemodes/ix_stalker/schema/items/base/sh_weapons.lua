@@ -347,39 +347,6 @@ function ITEM:Equip(client)
 		client:SelectWeapon(weapon:GetClass())
 		client:EmitSound("stalkersound/items/inv_items_wpn_1.ogg")
 
-		timer.Simple(0, function()
-			local custom = self:GetData("custom", {})
-			
-			if(custom.wepDmg) then
-				weapon.Damage = tonumber(custom.wepDmg)
-			end
-			
-			if(custom.wepSpd) then
-				weapon.FireDelay = weapon.FireDelay * tonumber(custom.wepSpd)
-			end
-			
-			if(custom.wepRec) then
-				weapon.Recoil = weapon.Recoil and (weapon.Recoil * custom.wepRec)
-			end
-
-			if(custom.wepAcc) then
-				weapon.MaxSpreadInc = weapon.MaxSpreadInc * custom.wepAcc
-				weapon.AimSpread = weapon.AimSpread * custom.wepAcc
-			end				
-
-			if(custom.wepMag) then
-				weapon.Primary.ClipSize = tonumber(custom.wepMag)
-			end
-		
-			client:SelectWeapon(weapon:GetClass())
-			
-			timer.Simple(1, function()
-				if(ix.plugin.list["customization"]) then
-					ix.plugin.list["customization"]:updateSWEP(client, self)
-				end
-			end)
-		end)
-
 		-- Remove default given ammo.
 		if (client:GetAmmoCount(ammoType) == weapon:Clip1() and self:GetData("ammo", 0) == 0) then
 			client:RemoveAmmo(weapon:Clip1(), ammoType)
@@ -632,84 +599,6 @@ ITEM.functions.detach = {
 		end
 		return false
 	end,
-}
-
-ITEM.functions.Custom = {
-	name = "Customize",
-	tip = "Customize this item",
-	icon = "icon16/wrench.png",
-	OnRun = function(item)		
-		ix.plugin.list["customization"]:startCustom(item.player, item)
-		
-		return false
-	end,
-	
-	OnCanRun = function(item)
-		local client = item.player
-		return client:GetCharacter():HasFlags("N") and !IsValid(item.entity)
-	end
-}
-
-ITEM.functions.Inspect = {
-	name = "Inspect",
-	tip = "Inspect this item",
-	icon = "icon16/picture.png",
-	OnClick = function(item, test)
-		local customData = item:GetData("custom", {})
-
-		local frame = vgui.Create("DFrame")
-		frame:SetSize(540, 680)
-		frame:SetTitle(item.name)
-		frame:MakePopup()
-		frame:Center()
-
-		frame.html = frame:Add("DHTML")
-		frame.html:Dock(FILL)
-		
-		local imageCode = [[<img src = "]]..customData.img..[["/>]]
-		
-		frame.html:SetHTML([[<html><body style="background-color: #000000; color: #282B2D; font-family: 'Book Antiqua', Palatino, 'Palatino Linotype', 'Palatino LT STD', Georgia, serif; font-size 16px; text-align: justify;">]]..imageCode..[[</body></html>]])
-	end,
-	OnRun = function(item)
-		return false
-	end,
-	OnCanRun = function(item)
-		local customData = item:GetData("custom", {})
-	
-		if(!customData.img) then
-			return false
-		end
-		
-		if(item.entity) then
-			return false
-		end
-		
-		return true
-	end
-}
-
-ITEM.functions.Clone = {
-	name = "Clone",
-	tip = "Clone this item",
-	icon = "icon16/wrench.png",
-	OnRun = function(item)
-		local client = item.player	
-	
-		client:requestQuery("Are you sure you want to clone this item?", "Clone", function(text)
-			if text then
-				local inventory = client:GetCharacter():GetInventory()
-				
-				if(!inventory:Add(item.uniqueID, 1, item.data)) then
-					client:Notify("Inventory is full")
-				end
-			end
-		end)
-		return false
-	end,
-	OnCanRun = function(item)
-		local client = item.player
-		return client:GetCharacter():HasFlags("N") and !IsValid(item.entity)
-	end
 }
 
 hook.Add("PlayerDeath", "ixStripClip", function(client)
