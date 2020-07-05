@@ -290,7 +290,7 @@ end
 
 function PANEL:SetFaction(faction)
 	self:SetColor(faction.color)
-	self:SetText(L(faction.name))
+	self:SetText("Online Users: "..L(faction.name))
 
 	self.faction = faction
 end

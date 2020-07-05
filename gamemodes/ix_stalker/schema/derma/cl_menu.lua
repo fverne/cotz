@@ -46,7 +46,7 @@ function PANEL:Init()
 	self.modelpanelframe:SetSize(300, 300)
 	self.modelpanelframe:SetMaterial(Material("cotz/panels/loot_interface.png"))
 	self.modelpanelframe:Dock(BOTTOM)
-	self.modelpanelframe:DockMargin(0, 0, 25, 0)
+	self.modelpanelframe:DockMargin(0, 0, 0, 0)
 
 	-- modelpaneltest
 	self.modelpanel = self.modelpanelframe:Add("ixPlayerModelPanel")

@@ -5,7 +5,7 @@
 FACTION.name = "Loners"
 FACTION.description = "Regular inhabitants of the zone."
 FACTION.isDefault = true
-FACTION.color = Color(110, 80, 0)
+FACTION.color = Color(142, 142, 142)
 FACTION.models = {
 	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 1, "000002"},
 	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 2, "000002"},
