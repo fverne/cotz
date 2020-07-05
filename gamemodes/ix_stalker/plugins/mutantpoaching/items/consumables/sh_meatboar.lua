@@ -20,9 +20,7 @@ ITEM:DecideFunction()
 if (CLIENT) then
 	function ITEM:PopulateTooltip(tooltip)
 		if !self.entity then
-			local descheader = tooltip:AddRow("properties")
-			descheader:SetText("\nPROPERTIES:")
-			descheader:SizeToContents()
+			
 
 			ix.util.PropertyDesc(tooltip, "Low Tier Mutant Meat", Color(0, 255, 0))
 			ix.util.PropertyDesc(tooltip, "Cookable", Color(0, 255, 0))

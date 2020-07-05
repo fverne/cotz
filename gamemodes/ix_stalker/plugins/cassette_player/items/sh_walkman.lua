@@ -46,9 +46,7 @@ end
 if (CLIENT) then
 	function ITEM:PopulateTooltip(tooltip)
 		if !self.entity then
-			local descheader = tooltip:AddRow("properties")
-			descheader:SetText("\nPROPERTIES:")
-			descheader:SizeToContents()
+			
 
 			ix.util.PropertyDesc(tooltip, "Rare Item", Color(200, 200, 200))
 			ix.util.PropertyDesc(tooltip, "Electronic Device", Color(200, 200, 200))

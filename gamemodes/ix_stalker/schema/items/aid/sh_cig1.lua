@@ -31,9 +31,7 @@ if (CLIENT) then
 
 	function ITEM:PopulateTooltip(tooltip)
 		if !self.entity then
-			local descheader = tooltip:AddRow("properties")
-			descheader:SetText("\nPROPERTIES:")
-			descheader:SizeToContents()
+			
 
 			ix.util.PropertyDesc(tooltip, "Everyday Item", Color(200, 200, 200))
 			ix.util.PropertyDesc(tooltip, "Removes Radiation Very Slightly", Color(0, 255, 255))

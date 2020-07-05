@@ -54,10 +54,7 @@ if (CLIENT) then
 		local weight = item:GetWeight()
 
 		if (weight) then
-			local row = tooltip:AddRowAfter("description", "weight")
-				row:SetText(ix.weight.WeightString(weight, ix.option.Get("imperial", false)))
-				row:SetExpensiveShadow(1, color_black)
-				row:SizeToContents()
+			ix.util.PropertyDesc2(tooltip, "Weight: "..ix.weight.WeightString(weight, ix.option.Get("imperial", false)), Color(255, 255, 255), Material("vgui/ui/stalker/armorupgrades/carryweightinc.png"))
 		end
 	end
 end
