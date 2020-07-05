@@ -7,7 +7,7 @@ ITEM.longdesc = "The 14.5x114mm round was originally developed for the PTRS and 
 ITEM.price = 8000
 ITEM.flag = "0"
 ITEM.width = 2
-ITEM.height = 
+ITEM.height = 1
 
 ITEM.weight = 0.200
 ITEM.flatweight = 0.1
