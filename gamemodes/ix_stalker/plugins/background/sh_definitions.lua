@@ -35,14 +35,3 @@ ix.backgrounds["cripple"] = {
 		print("loaded cripple")
 	end,
 }
-
-ix.backgrounds["epic"] = {
-	name = "test",
-	description = "test.",
-	OnCreated = function(client, character) 
-		print("created epic")
-	end,
-	OnLoaded  = function(client, character) 
-		print("loaded epic")
-	end,
-}

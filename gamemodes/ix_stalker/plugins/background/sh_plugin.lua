@@ -38,39 +38,11 @@ ix.char.RegisterVar("backgrounds", {
 	bNoDisplay = true,
 })
 
-ix.command.Add("backgroundtestadd", {
-	OnRun = function(self, client)
-		client:GetChar():AddBackground("cripple")
-	end
-})
-
-ix.command.Add("backgroundtestremove", {
-	OnRun = function(self, client)
-		client:GetChar():RemoveBackground("cripple")
-	end
-})
-
-ix.command.Add("backgroundtest2add", {
-	OnRun = function(self, client)
-		client:GetChar():AddBackground("epic")
-	end
-})
-
-ix.command.Add("backgroundtest2remove", {
-	OnRun = function(self, client)
-		client:GetChar():RemoveBackground("epic")
-	end
-})
-
-
-
 local CHAR = ix.meta.character or {}
 
 function CHAR:AddBackground(background)
 	local data = self:GetBackgrounds() or {}
-
 	data[background] = true
-
 	self:SetBackgrounds(data)
 
 end
