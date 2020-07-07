@@ -9,19 +9,75 @@ ix.backgrounds = ix.backgrounds or {}
 ix.util.Include("sh_definitions.lua")
 
 function PLUGIN:OnCharacterCreated(client, character)
-	if (false) then
-		--ix.backgrounds[client:GetBackground()]:OnCreated(client, character)
-	end
-end
-
-function PLUGIN:CharacterLoaded(char)
-	if SERVER then
-		if (false) then
-			--ix.backgrounds[client:GetBackground()]:OnLoaded(char)
+	local backgrounds = character:GetBackgrounds()
+	if (backgrounds != nil) then
+		for background, _ in pairs(backgrounds) do
+			local func = ix.backgrounds[background].OnCreated or (function(client, char) return true end)
+			func(client, character)
 		end
 	end
 end
 
---[[
-registervar background here? should a player be able to have multiple backgrounds? if so, how do we store it
-]]--
+if (SERVER) then
+	function PLUGIN:CharacterLoaded(character)
+		local backgrounds = character:GetBackgrounds()
+
+		if (backgrounds != nil) then
+			for background, _ in pairs(backgrounds) do
+				local func = ix.backgrounds[background].OnLoaded or (function(char) return true end)
+				func(character)
+			end
+		end
+	end
+end
+
+ix.char.RegisterVar("backgrounds", {
+	field = "backgrounds",
+	fieldType = ix.type.string,
+	default = {},
+	bNoDisplay = true,
+})
+
+ix.command.Add("backgroundtestadd", {
+	OnRun = function(self, client)
+		client:GetChar():AddBackground("cripple")
+	end
+})
+
+ix.command.Add("backgroundtestremove", {
+	OnRun = function(self, client)
+		client:GetChar():RemoveBackground("cripple")
+	end
+})
+
+ix.command.Add("backgroundtest2add", {
+	OnRun = function(self, client)
+		client:GetChar():AddBackground("epic")
+	end
+})
+
+ix.command.Add("backgroundtest2remove", {
+	OnRun = function(self, client)
+		client:GetChar():RemoveBackground("epic")
+	end
+})
+
+
+
+local CHAR = ix.meta.character or {}
+
+function CHAR:AddBackground(background)
+	local data = self:GetBackgrounds() or {}
+
+	data[background] = true
+
+	self:SetBackgrounds(data)
+
+end
+
+function CHAR:RemoveBackground(background)
+	local data = self:GetBackgrounds() or {}
+	data[background] = nil
+	self:SetBackgrounds(data)
+end
+

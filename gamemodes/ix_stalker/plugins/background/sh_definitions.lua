@@ -21,3 +21,28 @@
 		end,
 	}
 ]]--
+
+ix.backgrounds["cripple"] = {
+	name = "Cripple",
+	description = "Your right leg is busted, and you can't move around as fast. You use painkillers to numb the pain.",
+	OnCreated = function(client, character) 
+		character:GetInventory():Add("painkillers", 3)
+	end,
+	OnLoaded = function(character)
+		--local client = character:GetPlayer()  
+		--client:SetRunSpeed(400) -- These things dont actually work, they're overridden by the stamina plugin almost instantly
+		--client:SetWalkSpeed(200)
+		print("loaded cripple")
+	end,
+}
+
+ix.backgrounds["epic"] = {
+	name = "test",
+	description = "test.",
+	OnCreated = function(client, character) 
+		print("created epic")
+	end,
+	OnLoaded  = function(client, character) 
+		print("loaded epic")
+	end,
+}
