@@ -62,7 +62,7 @@ function Schema:OnCharacterCreated(client, character)
 		"propic/loner/loner97",
 		"propic/loner/loner98",
 	}
-	character:SetData("pdaavatar", table.Random(avatars))
+	character:SetPdaavatar(table.Random(avatars))
 end
 
 function Schema:EntityTakeDamage(target, dmg)

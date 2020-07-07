@@ -157,7 +157,7 @@ function PANEL:Init()
 
 	self.icon.Paint = function(this, w, h)
 		local client = self.player
-		surface.SetMaterial(Material(client:GetCharacter():GetData("pdaavatar", "vgui/icons/face_31.png")))
+		surface.SetMaterial(Material(client:GetCharacter():GetPdaavatar()))
 		surface.SetDrawColor(255, 255, 255)
 		surface.DrawTexturedRect(0, 0, w, h)
 	end

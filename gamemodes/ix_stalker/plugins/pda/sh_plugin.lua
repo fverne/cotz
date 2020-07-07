@@ -17,7 +17,7 @@ hook.Add("InitializedChatClasses", "ixChatRemoval", function()
 			return true
 		end,
 		OnChatAdd = function(self, speaker, text, bAnonymous, data)
-			chat.AddText(Color(0,191,255), "[GPDA-"..speaker:GetCharacter():GetData("pdanickname", speaker:GetCharacter():GetName()).."] ", Material(speaker:GetCharacter():GetData("pdaavatar", "vgui/icons/face_31.png")), color_white, ": "..text)
+			chat.AddText(Color(0,191,255), "[GPDA-"..speaker:GetCharacter():GetData("pdanickname", speaker:GetCharacter():GetName()).."] ", Material(speaker:GetCharacter():GetPdaavatar()), color_white, ": "..text)
 		end,
 		prefix = {"//", "/OOC", "/gpda"},
 		description = "Send a message over the Global PDA network",
@@ -34,3 +34,10 @@ hook.Add("InitializedChatClasses", "ixChatRemoval", function()
 		end,
 	})
 end)
+
+ix.char.RegisterVar("pdaavatar", {
+	field = "pdaavatar",
+	fieldType = ix.type.string,
+	default = "vgui/icons/face_31.png",
+	bNoDisplay = true,
+})

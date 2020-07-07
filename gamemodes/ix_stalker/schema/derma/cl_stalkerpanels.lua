@@ -157,8 +157,8 @@ function PANEL:Init()
 	self.charbackgroundicon:SetPos(230, 13)
 	self.charbackgroundicon:SetZPos(-1)
 
-	if LocalPlayer():GetCharacter():GetData("pdaavatar") then 
-		self.charbackgroundicon:SetImage( LocalPlayer():GetCharacter():GetData("pdaavatar") )
+	if LocalPlayer():GetCharacter():GetPdaavatar() then 
+		self.charbackgroundicon:SetImage( LocalPlayer():GetCharacter():GetPdaavatar() )
 	else
 		self.charbackgroundicon:SetImage( "vgui/icons/face_31.png" )
 	end
