@@ -3,7 +3,7 @@ PLUGIN.author = "verne"
 PLUGIN.description = "PDA chatting system, supporting avatars and nicknames"
 
 --removal of helix chats we dont use
-hook.Add("InitializedChatClasses", "ixChatRemoval", function()
+hook.Add("InitializedChatClasses", "ixChatRemoval2", function()
 	ix.chat.classes["ooc"] = nil
 
 	ix.chat.Register("ooc", {

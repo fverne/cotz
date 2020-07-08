@@ -38,25 +38,31 @@ ix.chat.Register("eventpda", {
 	prefix = {"/eventpda"},
 	CanHear = function(self, speaker, listener)
 		local pda = listener:GetCharacter():GetData("pdaequipped", false)
-		if pda then
+		
+		return true
+
+		/*if pda then
 			listener:EmitSound( "stalkersound/pda_alarm.wav", 55, 100, 1, CHAN_AUTO ) 
 			return true
 		else
 			return false
-		end
+		end*/
 	end,
 })
 
 ix.chat.Register("eventpdainternal", {
 	CanSay = function(self, speaker, text)
 		local pda = speaker:GetCharacter():GetData("pdaequipped", false)
-		if pda then
+
+		return true
+
+		/*if pda then
 			speaker:EmitSound( "stalkersound/pda_alarm.wav", 55, 100, 1, CHAN_AUTO ) 
 			return true
 		else 
 			return false
 		end
-		return false
+		return false*/
 	end,
 	OnChatAdd = function(self, speaker, text)
 		chat.AddText(Color(0,191,255), "[GPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
@@ -64,11 +70,14 @@ ix.chat.Register("eventpdainternal", {
 	prefix = {},
 	CanHear = function(self, speaker, listener)
 		local pda = listener:GetCharacter():GetData("pdaequipped", false)
-		if pda then
+
+		return true
+
+		/*if pda then
 			return true
 		else
 			return false
-		end
+		end*/
 	end,
 })
 

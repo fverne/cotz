@@ -57,10 +57,15 @@ end
 
 do
 	--Removal of helix commands we dont use
-	hook.Add("InitializedConfig", "ixCommandRemoval", function()
+	hook.Add("InitializedPlugins", "ixCommandRemoval", function()
 		ix.command.list["becomeclass"] = nil
 		ix.command.list["chardesc"] = nil
 		ix.command.list["eventpda"] = nil
 
+	end)
+
+	--removal of helix chats we dont use
+	hook.Add("InitializedChatClasses", "ixChatRemoval", function()
+		ix.chat.classes["looc"] = nil
 	end)
 end
