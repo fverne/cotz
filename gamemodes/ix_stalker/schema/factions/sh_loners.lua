@@ -41,6 +41,7 @@ FACTION.models = {
 	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 32, "000002"},
 }
 
+
 -- You should define a global variable for this faction's index for easy access wherever you need. FACTION.index is
 -- automatically set, so you can simply assign the value.
 

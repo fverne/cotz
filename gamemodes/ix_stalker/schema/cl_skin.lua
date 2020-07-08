@@ -6,7 +6,7 @@ local gradientRadial = Material("helix/gui/radial-gradient.png")
 local background = Material("cotz/panels/frame1.png")
 local background2 = Material("vgui/background/wallpaper.jpg")
 local background3 = Material("cotz/panels/pda.png")
-local background4 = Material("vgui/background/stalkerbackground2.jpg")
+local background4 = Material("vgui/background/swamps.jpg")
 local background5 = Material("vgui/background/stalkerbackground3.jpg")
 local menubuttonbackground = Material("cotz/panels/button2.png")
 local defaultBackgroundColor = Color(30, 30, 30, 200)
@@ -290,7 +290,7 @@ end
 function SKIN:PaintCharacterCreateBackground(panel, width, height)
 	surface.SetDrawColor(255, 255, 255, 255)
 	surface.SetMaterial(background4)
-	surface.DrawTexturedRectUV(0, 0, width, height, 1, 0, 0, 1)
+	surface.DrawTexturedRectUV(0, 0, width, height, 0, 0, 1, 1)
 end
 
 function SKIN:PaintCharacterLoadBackground(panel, width, height)

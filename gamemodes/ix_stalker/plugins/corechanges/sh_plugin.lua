@@ -55,17 +55,16 @@ if (CLIENT) then
 	end)
 end
 
-do
-	--Removal of helix commands we dont use
-	hook.Add("InitializedPlugins", "ixCommandRemoval", function()
-		ix.command.list["becomeclass"] = nil
-		ix.command.list["chardesc"] = nil
-		ix.command.list["eventpda"] = nil
+--removal of helix commands we dont use
+--removal of helix chats we dont use
+function PLUGIN:InitializedPlugins()
+	ix.command.list["becomeclass"] = nil
+	ix.command.list["chardesc"] = nil
+	ix.command.list["eventpda"] = nil
+	ix.command.list["looc"] = nil
+end
 
-	end)
-
-	--removal of helix chats we dont use
-	hook.Add("InitializedChatClasses", "ixChatRemoval", function()
-		ix.chat.classes["looc"] = nil
-	end)
+function PLUGIN:InitializedChatClasses()
+	ix.chat.classes["looc"] = nil
+	
 end
