@@ -117,6 +117,10 @@ function Schema:PlayerSpawnEffect(client, weapon, info)
 	return client:IsAdmin() or client:GetCharacter():HasFlags("N")
 end
 
+function Schema:PostPlayerLoadout(client)
+	client:SetCanZoom(false)
+end
+
 function Schema:Initialize()
 	game.ConsoleCommand("net_maxfilesize 64\n");
 	game.ConsoleCommand("sv_kickerrornum 0\n");

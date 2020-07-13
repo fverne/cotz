@@ -3,7 +3,7 @@
 
 -- Schema info
 Schema.name = "Call of the Zone"
-Schema.author = "faggot, verne"
+Schema.author = "some faggot, verne"
 Schema.description = "An automated STALKER Gamemode."
 --Schema.logo = "vgui/background/wallpaper.jpg"
 
