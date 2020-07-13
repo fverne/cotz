@@ -66,5 +66,4 @@ end
 
 function PLUGIN:InitializedChatClasses()
 	ix.chat.classes["looc"] = nil
-	
 end
