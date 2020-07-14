@@ -38,7 +38,7 @@ DIALOGUE.addTopic("RepairItem1", { -- Repair primary weapon
         end
 			  self.response = "Okay "..client:GetName()..", I have repaired and cleaned your "..foundName.."."
       else 
-        self.response = "You don't have "..cost.." "..ix.currency.plural.."!"b
+        	self.response = "You don't have "..cost.." "..ix.currency.plural.."!"
       end
 		end
 	end,
