@@ -19,13 +19,3 @@ end
 function PLUGIN:SaveData()
 	self:SetData(ix.progression.status)
 end
-
-function PLUGIN:InvokeProgression(progid)
-	local levelreached = ix.progression.GetProgression(progid)
-
-	-- Call all unlocked functions
-	for k, func in pairs(ix.progression.definitions[progid].progressfunctions) do
-		if(k > levelreached) then return end
-		func()
-	end
-end

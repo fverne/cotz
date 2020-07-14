@@ -22,6 +22,14 @@ ix.progression.Register("EcologistResearchMutant", {
 			end,
 		[2] = function()
 		  print("Reached level 2 in Eco Research (Mutants) - Add items to vendor")
-		end, -- etc...
+		end,
+		[3] = function()
+		  print("Reached level 3 in Eco Research (Mutants) - Spawn more props")
+		end,  -- etc...
+	},
+	progressneeded = {
+		[1] = 1000,
+		[2] = 3000,
+		[3] = 9000, -- etc..
 	}
 })
