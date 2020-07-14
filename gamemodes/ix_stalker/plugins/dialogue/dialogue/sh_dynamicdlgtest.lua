@@ -96,10 +96,10 @@ DIALOGUE.addTopic("RepairItems", {
 
 	      for _, item in pairs( items ) do
 		  		if item.weaponCategory == "primary" && item:GetData("equip", false) then
-		  			DIALOGUE.tree["RepairItem1"].statement = item.name
+		  			ix.dialogue.list["dynamicdlgtest"].tree["RepairItem1"].statement = item.name
 		  		end
           if item.weaponCategory == "secondary" && item:GetData("equip", false) then
-		  			DIALOGUE.tree["RepairItem2"].statement = item.name
+		  			ix.dialogue.list["dynamicdlgtest"].tree["RepairItem2"].statement = item.name
 		  		end
 		  	end
       end
