@@ -14,6 +14,10 @@ ix.util.Include("sh_definitions.lua")
 
 function PLUGIN:LoadData()
 	ix.progression.status = self:GetData() or {}
+
+	for progid, _ in pairs(ix.progression.definitions) do
+		ix.progression.InvokeProgression(progid)
+	end
 end
 
 function PLUGIN:SaveData()
