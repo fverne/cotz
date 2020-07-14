@@ -12,7 +12,7 @@ DIALOGUE.addTopic("GREETING", {
 DIALOGUE.addTopic("Return", {
 	statement = "Let's talk about something else.",
 	response = "What would you like to know?",
-	options = DIALOGUE.tree["GREETING"].options --Identical to GREETING's options
+	options = ix.dialogue.list["dynamicdlgtest"].tree["GREETING"].options --Identical to GREETING's options
 })
 
 DIALOGUE.addTopic("RepairItem1", { -- Repair primary weapon
@@ -102,16 +102,16 @@ DIALOGUE.addTopic("RepairItems", {
 			if (char) then
 				local items = char:GetInventory():GetItems()
 
-				for _, item in pairs( items ) do
-					if item.weaponCategory == "primary" && item:GetData("equip", false) then
-						DIALOGUE.tree["RepairItem1"].statement = item.name
-					end
-					if item.weaponCategory == "secondary" && item:GetData("equip", false) then
-						DIALOGUE.tree["RepairItem2"].statement = item.name
-					end
-				end
-			end
-		end
+	      for _, item in pairs( items ) do
+		  		if item.weaponCategory == "primary" && item:GetData("equip", false) then
+		  			ix.dialogue.list["dynamicdlgtest"].tree["RepairItem1"].statement = item.name
+		  		end
+          if item.weaponCategory == "secondary" && item:GetData("equip", false) then
+		  			ix.dialogue.list["dynamicdlgtest"].tree["RepairItem2"].statement = item.name
+		  		end
+		  	end
+      end
+    end
 	end,
 })
 

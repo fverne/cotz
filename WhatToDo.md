@@ -54,3 +54,13 @@
 - [ ] Cyclic TalkerNPCs
 - [ ] Cyclic containers
 - [ ] Configure TalkerNPCs
+
+## Derma
+- [ ] Add item entity ikons
+
+### Tied to quests?
+### Tied to gear?
+### Tied to character?
+### Can you obtain every profession, or should it be locked off?
+### Apprenticeship/Training of skills? 
+
