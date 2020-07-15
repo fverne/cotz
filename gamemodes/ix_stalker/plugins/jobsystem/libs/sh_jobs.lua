@@ -151,7 +151,7 @@ if SERVER then
     temp = {}
 
     if type(ix.job.list[identifier].numberRec) == "table" then
-      temp.numberRec = math.random(ix.job.list[identifier].numberRec[1],ix.quest.list[identifier].numberRec[2])
+      temp.numberRec = math.random(ix.job.list[identifier].numberRec[1],ix.job.list[identifier].numberRec[2])
     else
       temp.numberRec = ix.job.list[identifier].numberRec
     end
