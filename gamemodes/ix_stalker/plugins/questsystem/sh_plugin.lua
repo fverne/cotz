@@ -11,10 +11,15 @@ IX_QUEST_COMPLETED = 65536
 
 ix.util.Include("sh_definitions.lua")
 
+ix.char.RegisterVar("quests", {
+	field = "quests",
+	fieldType = ix.type.string,
+	default = {},
+	bNoDisplay = true,
+})
 
---GetData("quests") here should probably be replaced with registerVar(quests) and GetQuests
 function charMeta:HasQuest(questid)
-	local quests = self:GetData("quests", {})
+	local quests = self:GetQuests()
 
 	if (quests[questid]) then
 		return true
@@ -24,7 +29,7 @@ function charMeta:HasQuest(questid)
 end
 
 function charMeta:HasQuestWithStageAbove(questid, stage)
-	local quests = self:GetData("quests", {})
+	local quests = self:GetQuests()
 
 	if (quests[questid] >= stage) then
 		return true
@@ -34,7 +39,7 @@ function charMeta:HasQuestWithStageAbove(questid, stage)
 end
 
 function charMeta:HasQuestWithSpecificStage(questid, stage)
-	local quests = self:GetData("quests", {})
+	local quests = self:GetQuests()
 
 	if (quests[questid] == stage) then
 		return true
@@ -44,29 +49,29 @@ function charMeta:HasQuestWithSpecificStage(questid, stage)
 end
 
 function charMeta:CompleteQuest(questid)
-	local quests = self:GetData("quests", {})
+	local quests = self:GetQuests()
 
 	quests[questid] = IX_QUEST_COMPLETED
 
-	self:SetData("quests", quests)
+	self:SetQuests(quests)
 end
 
 function charMeta:CompleteQuestWithSpecificStage(questid)
-	local quests = self:GetData("quests", {})
+	local quests = self:GetQuests()
 	
 	if (quests[questid] == stage) then
 		quests[questid] = IX_QUEST_COMPLETED
 	end
 
-	self:SetData("quests", quests)
+	self:SetQuests(quests)
 end
 
 function charMeta:CompleteQuest(questid)
-	local quests = self:GetData("quests", {})
+	local quests = self:GetQuests()
 
 	quests[questid] = nil
 
-	self:SetData("quests", quests)
+	self:SetQuests(quests)
 end
 
 function charMeta:StartQuest(questid)
@@ -75,16 +80,16 @@ end
 
 function charMeta:StartQuestWithStage(questid, stage)
 	if(self:CanStartQuest(questid)) then
-		local quests = self:GetData("quests", {})
+		local quests = self:GetQuests()
 
 		quests[questid] = stage
 
-		self:SetData("quests", quests)
+		self:SetQuests(quests)
 	end
 end
 
 function charMeta:CanStartQuest(questid)
-	local quests = self:GetData("quests", {})
+	local quests = self:GetQuests()
 
 	if (quests[questid] == nil) then
 		return true
@@ -94,7 +99,7 @@ function charMeta:CanStartQuest(questid)
 end
 
 function charMeta:AdvanceQuestToStage(questid, stage)
-	local quests = self:GetData("quests", {})
+	local quests = self:GetQuests()
 
 	if( self:HasQuest(questid) ) then
 		quests[questid] = stage
