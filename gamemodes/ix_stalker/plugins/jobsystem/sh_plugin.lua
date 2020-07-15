@@ -1,67 +1,26 @@
 local PLUGIN = PLUGIN
 
-PLUGIN.name = "Quests"
+PLUGIN.name = "Job System"
 PLUGIN.author = "some faggot, ported to ix by verne"
-PLUGIN.desc = "Implements the quest library"
+PLUGIN.desc = "Implements the job library."
 
-ix.util.Include("sh_quests.lua")
+function ix.jobs.register(jobstruct,identifier)
+  if ix.jobs.isStructValid(jobstruct) then
+    ix.job.list[identifier] = jobstruct
+  else
+    print("ERROR IN JOB DEFINITION")
+  end
+end
+
+ix.char.RegisterVar("jobs", {
+	field = "jobs",
+	fieldType = ix.type.string,
+	default = {},
+	bNoDisplay = true,
+})
+
+ix.util.Include("sh_jobs.lua")
 ix.util.Include("sh_listeners.lua")
-
---DEBUG
-ix.command.Add("questdebugaddall", {
-	adminOnly = true,
-	OnRun = function(self, client, arguments)
-		client:GetCharacter():SetData("quests", {})
-		client:ixQuestAdd("itemQuest_makarov")
-		client:ixQuestAdd("killZombiesLow")
-		client:ixQuestAdd("killRodentsLow")
-	end
-})
-
-ix.command.Add("questdebugtrycomplete", {
-	adminOnly = true,
-	OnRun = function(self, client, arguments)
-		client:ixQuestComplete("killMutantsLow")
-		client:ixQuestComplete("killZombiesLow")
-		client:ixQuestComplete("killRodentsLow")
-	end
-})
-
-ix.command.Add("questdebugcheckprogress", {
-	adminOnly = true,
-	OnRun = function(self, client, arguments)
-		PrintTable(client:GetCharacter():GetData("quests", {}))
-	end
-})
-
-ix.command.Add("questmenu", {
-	adminOnly = true,
-	OnRun = function(self, client, arguments)
-		netstream.Start(client, "questmenu", client)
-	end,
-})
-
-ix.command.Add("questitemadd", {
-	adminOnly = true,
-	OnRun = function(self, client, arguments)
-		client:GetCharacter():SetData("quests", {})
-		client:ixQuestAdd("itemQuest_makarov")
-	end
-})
-
-ix.command.Add("questreset", {
-	adminOnly = true,
-	arguments = {
-		ix.type.character,
-	},
-	OnRun = function(self, client, character)
-		character:SetData("quests", nil)
-		client:Notify("You reset the quests of "..character:GetName())
-	end
-})
-
-
---DEBUG END
 
 if CLIENT then
 local buttons = {}
@@ -189,19 +148,19 @@ local buttons = {}
 
 		end)
 else
-	netstream.Hook("questmenuitemdeliver", function(client, questsystemquest)
-		if client:GetCharacter():GetInventory():HasItem(ix.quest.isItemQuest(questsystemquest)) then
-			hook.Run("ix_QuestTrigger", client, "itemDeliver_"..ix.quest.isItemQuest(questsystemquest))
-			client:GetCharacter():GetInventory():HasItem(ix.quest.isItemQuest(questsystemquest)):Remove()
+	netstream.Hook("questmenuitemdeliver", function(client, npcidentifier)
+		if client:GetCharacter():GetInventory():HasItem(ix.quest.isItemQuest(npcidentifier)) then
+			hook.Run("ix_JobTrigger", client, "itemDeliver_"..ix.quest.isItemQuest(npcidentifier))
+			client:GetCharacter():GetInventory():HasItem(ix.quest.isItemQuest(npcidentifier)):Remove()
 			client:Notify("Item delivered!")
 			netstream.Start(client, "questmenu", client)
 		else
 			client:Notify("Required item not in inventory!")
 		end
 	end)
-	netstream.Hook("questmenucomplete", function(client, questsystemquest)
-			client:ixQuestComplete(questsystemquest)
-			client:Notify("The quest has been completed!")
+	netstream.Hook("questmenucomplete", function(client, npcidentifier)
+			client:ixJobComplete(npcidentifier)
+			client:Notify("The job has been completed!")
 			netstream.Start(client, "questmenu", client)
 	end)
 
@@ -231,12 +190,3 @@ else
 		self:SetData(data2)
 	end
 end
-
-/*
-local tempStr = ""
-
-for _, l in pairs(ix.quest.list[k].reward) do
-	tempStr = tempStr..ix.item.list[l[1]].."\n"
-end
-
-*/

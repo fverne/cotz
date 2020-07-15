@@ -4,63 +4,63 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
   local class = string.lower(entity:GetClass())
   if attacker:IsPlayer() then
     if(string.find( class, "npc_mutant" )) then
-      hook.Run("ix_QuestTrigger", attacker, "mutantKilled")
+      hook.Run("ix_JobTrigger", attacker, "mutantKilled")
     end
 
     if class == "npc_mutant_classiczombie" then
-      hook.Run("ix_QuestTrigger", attacker, "zombieKilled")
+      hook.Run("ix_JobTrigger", attacker, "zombieKilled")
     end
 
     if class == "npc_mutant_rodent" then
-      hook.Run("ix_QuestTrigger", attacker, "rodentKilled")
+      hook.Run("ix_JobTrigger", attacker, "rodentKilled")
     end
 
     if class == "npc_mutant_snork" then
-      hook.Run("ix_QuestTrigger", attacker, "snorkKilled")
+      hook.Run("ix_JobTrigger", attacker, "snorkKilled")
     end
 
     if class == "npc_mutant_cat" then
-      hook.Run("ix_QuestTrigger", attacker, "catKilled")
+      hook.Run("ix_JobTrigger", attacker, "catKilled")
     end
 
     if class == "npc_mutant_bloodsucker" then
-      hook.Run("ix_QuestTrigger", attacker, "bloodsuckerKilled")
+      hook.Run("ix_JobTrigger", attacker, "bloodsuckerKilled")
     end
 
     if class == "npc_mutant_boar" then
-      hook.Run("ix_QuestTrigger", attacker, "boarKilled")
+      hook.Run("ix_JobTrigger", attacker, "boarKilled")
     end  
 
     if class == "npc_mutant_burer" then
-      hook.Run("ix_QuestTrigger", attacker, "burerKilled")
+      hook.Run("ix_JobTrigger", attacker, "burerKilled")
     end
 
     if class == "npc_mutant_chimera" then
-      hook.Run("ix_QuestTrigger", attacker, "chimeraKilled")
+      hook.Run("ix_JobTrigger", attacker, "chimeraKilled")
     end
 
     if class == "npc_mutant_controller" then
-      hook.Run("ix_QuestTrigger", attacker, "controllerKilled")
+      hook.Run("ix_JobTrigger", attacker, "controllerKilled")
     end
 
     if class == "npc_mutant_dog" then
-      hook.Run("ix_QuestTrigger", attacker, "dogKilled")
+      hook.Run("ix_JobTrigger", attacker, "dogKilled")
     end
 
     if class == "npc_mutant_flesh" then
-      hook.Run("ix_QuestTrigger", attacker, "fleshKilled")
+      hook.Run("ix_JobTrigger", attacker, "fleshKilled")
     end
 
     if class == "npc_mutant_pseudodog" then
-      hook.Run("ix_QuestTrigger", attacker, "pseudodogKilled")
+      hook.Run("ix_JobTrigger", attacker, "pseudodogKilled")
     end
 
     if class == "npc_mutant_psydog" then
-      hook.Run("ix_QuestTrigger", attacker, "psydogKilled")
+      hook.Run("ix_JobTrigger", attacker, "psydogKilled")
     end 
 
     if class == "npc_mutant_pseudogiant" then
-      hook.Run("ix_QuestTrigger", attacker, "pseudogiantKilled")
+      hook.Run("ix_JobTrigger", attacker, "pseudogiantKilled")
     end
   end
 end
