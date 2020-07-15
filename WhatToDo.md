@@ -1,8 +1,8 @@
 #What To Do
 
 ## Changes to character
-- [ ] Background, chosen on character creation - Influences starting stats, starting gear etc.
-- [ ] Name chosen automatically on character creation
+- [x] Background, chosen on character creation - Influences starting stats, starting gear etc.
+- [x] Name chosen automatically on character creation
 - [ ] Description automatically generated, from randomly selected traits
 - [ ] Capabilties based on background
 - [ ] Charcreation derma rework
@@ -14,7 +14,7 @@
 
 ## NPCs
 - [x] Rewrite base to not use timers
-- [ ] Investigate inconsistent damage at different ranges
+- [x] Investigate inconsistent damage at different ranges
 - [x] Investigate NPCs turning invisible
 - [x] Investigate NPCs turning invulnerable
 - [ ] Implement new NPCs with the new model pack
@@ -25,7 +25,7 @@
 - [x] Implement system
 - [x] Add templating
 - [ ] Add Tech support
-- [ ] Investigate dynamic dialog possibilities
+- [x] Investigate dynamic dialog possibilities
 - [ ] Vendor derma overhaul
 
 ## Addiction
@@ -34,7 +34,7 @@
 - [ ] Balance
 
 ## Quests
-- [ ] Implement system
+- [x] Implement system
 - [ ] Integrate into dialogue
 - [ ] Implement and configure simple 8 quest chain with a simple branching path
 
@@ -43,7 +43,8 @@
 - [ ] Integrate into dialogue
 
 ## Progression
-- [ ] Implement system to keep track of progression state and to perform actions based on progression level
+- [x] Implement system to keep track of progression state and to perform actions based on progression level
+- [ ] Expand and configure
 
 ## Misc
 - [ ] Weight-based item spawning
@@ -56,11 +57,4 @@
 - [ ] Configure TalkerNPCs
 
 ## Derma
-- [ ] Add item entity ikons
-
-### Tied to quests?
-### Tied to gear?
-### Tied to character?
-### Can you obtain every profession, or should it be locked off?
-### Apprenticeship/Training of skills? 
-
+- [ ] Add item entity icons
