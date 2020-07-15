@@ -20,13 +20,13 @@ ix.progression.Register("EcologistResearchMutant", {
 					print("Reached level 1 in Eco Research (Mutants) - Spawn props")
 				end,
 			RunOnce = false, -- Props are not persisted, so we need to spawn them every time server reloads
-			}
+		},
 		[2] = { 
 			OnRun = function()
 		  	print("Reached level 2 in Eco Research (Mutants) - Add items to vendor")
 			end,
 			RunOnce = true, -- Item stock is persisted by vendor, so we dont need to run this every time we load
-			}
+		},
 		[3] = {
 			OnRun = function()
 		  	print("Reached level 3 in Eco Research (Mutants) - Spawn more props")

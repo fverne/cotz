@@ -12,7 +12,7 @@ function ix.progression.SetProgressionValue(progid, amount, playername)
 		ix.progression.status[progid].contributors[playername] = ix.progression.status[progid].contributors[playername] or 0
 		ix.progression.status[progid].contributors[playername] = ix.progression.status[progid].contributors[playername] + amount
 
-		for level, threshold in pairs(ix.progression.definitions[progid].progressthresholds) ) do
+		for level, threshold in pairs(ix.progression.definitions[progid].progressthresholds) do
 			if( preval < threshold && ix.progression.status[progid].value >= threshold) then
 				ix.progression.InvokeProgressionLevel(progid, level) -- If we pass a threshold, run the function
 			end
