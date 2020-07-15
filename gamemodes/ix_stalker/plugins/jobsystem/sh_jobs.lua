@@ -1,843 +1,843 @@
 
 do
-  --item return quest
-  local tempQuest = {}
-
-  tempQuest.name = "%d makarovs."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_makarov"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_makarov")
-
-  tempQuest = nil
+  --item return Job
+  local tempJob = {}
+
+  tempJob.name = "%d makarovs."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_makarov"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_makarov")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d lead pipes."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_leadpipe"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_leadpipe")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d lead pipes."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_leadpipe"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_leadpipe")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d crowbars."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_crowbar"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_crowbar")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d crowbars."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_crowbar"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_crowbar")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d bats."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_bat"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_bat")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d bats."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_bat"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_bat")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d fire axes."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_fireaxe"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_fireaxe")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d fire axes."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_fireaxe"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_fireaxe")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d anomaly maps."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_documents0"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_documents0")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d anomaly maps."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_documents0"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_documents0")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d military maps."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_documents1"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest2"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_documents1")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d military maps."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_documents1"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_documents1")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d Anomaly Research Documents (simple)."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_documents2"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest3"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_documents2")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d Anomaly Research Documents (simple)."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_documents2"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest3"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_documents2")
+
+  tempJob = nil
 
-  /*local tempQuest = {}
-
-  tempQuest.name = "%d Beretta 92s."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_beretta92"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_beretta92")
-
-  tempQuest = nil
+  /*local tempJob = {}
+
+  tempJob.name = "%d Beretta 92s."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_beretta92"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_beretta92")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d Browning Highpowers."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_brhp"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_brhp")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d Browning Highpowers."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_brhp"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_brhp")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d Tokarevs."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_tokarev"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_tokarev")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d Tokarevs."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_tokarev"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_tokarev")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d CZ-52s."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_cz52"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_cz52")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d CZ-52s."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_cz52"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_cz52")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d P99s."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_p99"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_p99")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d P99s."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_p99"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_p99")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d Fort 12s."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_fort12"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_fort12")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d Fort 12s."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_fort12"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_fort12")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d Glock 17s."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_glock17"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_glock17")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d Glock 17s."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_glock17"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_glock17")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d Ruger MK3s."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_rugermk3"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_rugermk3")
-
-  tempQuest = nil
+  local tempJob = {}
+
+  tempJob.name = "%d Ruger MK3s."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_rugermk3"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_rugermk3")
+
+  tempJob = nil
 
-  local tempQuest = {}
-
-  tempQuest.name = "%d Black Flashdrives."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_flashdriveblack"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest2"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_flashdriveblack")
-
-  tempQuest = nil
-
-  local tempQuest = {}
-
-  tempQuest.name = "%d Blue Flashdrives."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_flashdriveblue"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest2"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_flashdriveblue")
-
-  tempQuest = nil*/
-
-  local tempQuest = {}
-
-  tempQuest.name = "%d Personal Belongings."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_documents4"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_documents4")
-
-  tempQuest = nil
-
-  /*local tempQuest = {}
-
-  tempQuest.name = "%d Traders Journals."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_documents8"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_documents8")
-
-  tempQuest = nil
-
-  local tempQuest = {}
-
-  tempQuest.name = "%d Ecologists Journals."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_documents8"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_documents9")
-
-  tempQuest = nil
-
-  local tempQuest = {}
-
-  tempQuest.name = "%d GPS Mapping Devices."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_gpsmappingdevice"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_gpsmappingdevice")
-
-  tempQuest = nil
-
-  local tempQuest = {}
-
-  tempQuest.name = "%d GPS Tracking Devices."
-  tempQuest.desc = "xD."
-  tempQuest.icon = "stalker/questpaper_item.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "itemDeliver_gpstrackingdevice"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
-
-  ix.quest.register(tempQuest, "itemQuest_gpstrackingdevice")
-
-  tempQuest = nil*/
+  local tempJob = {}
+
+  tempJob.name = "%d Black Flashdrives."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_flashdriveblack"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_flashdriveblack")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Blue Flashdrives."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_flashdriveblue"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_flashdriveblue")
+
+  tempJob = nil*/
+
+  local tempJob = {}
+
+  tempJob.name = "%d Personal Belongings."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_documents4"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_documents4")
+
+  tempJob = nil
+
+  /*local tempJob = {}
+
+  tempJob.name = "%d Traders Journals."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_documents8"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_documents8")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Ecologists Journals."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_documents8"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_documents9")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d GPS Mapping Devices."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_gpsmappingdevice"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_gpsmappingdevice")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d GPS Tracking Devices."
+  tempJob.desc = "xD."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_gpstrackingdevice"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+
+  ix.job.register(tempJob, "ItemJob_gpstrackingdevice")
+
+  tempJob = nil*/
 
   --random amount of mutants
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d mutants."
-  tempQuest.desc = "%d mutants."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "mutantKilled"
-  tempQuest.numberRec = {20,30}
-  tempQuest.reward = {{"kit_quest2"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d mutants."
+  tempJob.desc = "%d mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "mutantKilled"
+  tempJob.numberRec = {20,30}
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killMutantsLow")
+  ix.job.register(tempJob, "killMutantsLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d mutants."
-  tempQuest.desc = "%d mutants."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 2
-  tempQuest.listenTrigger = "mutantKilled"
-  tempQuest.numberRec = {40,50}
-  tempQuest.reward = {{"kit_quest3"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 20
+  tempJob.name = "%d mutants."
+  tempJob.desc = "%d mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "mutantKilled"
+  tempJob.numberRec = {40,50}
+  tempJob.reward = {{"kit_quest3"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
 
-  ix.quest.register(tempQuest, "killMutantsHigh")
+  ix.job.register(tempJob, "killMutantsHigh")
 
-  tempQuest = nil
+  tempJob = nil
 
 --rodents
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d rodents."
-  tempQuest.desc = "%d rodents."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "rodentKilled"
-  tempQuest.numberRec = {5,10}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 10
+  tempJob.name = "%d rodents."
+  tempJob.desc = "%d rodents."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "rodentKilled"
+  tempJob.numberRec = {5,10}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 10
 
-  ix.quest.register(tempQuest, "killRodentsLow")
+  ix.job.register(tempJob, "killRodentsLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d rodents."
-  tempQuest.desc = "%d rodents."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "rodentKilled"
-  tempQuest.numberRec = {10,15}
-  tempQuest.reward = {{"kit_quest2"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d rodents."
+  tempJob.desc = "%d rodents."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "rodentKilled"
+  tempJob.numberRec = {10,15}
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killRodentsHigh")
+  ix.job.register(tempJob, "killRodentsHigh")
 
-  tempQuest = nil
+  tempJob = nil
 
 -- Zombies
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d zombies."
-  tempQuest.desc = "%d zombies."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 2
-  tempQuest.listenTrigger = "zombieKilled"
-  tempQuest.numberRec = {5,10}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 10
+  tempJob.name = "%d zombies."
+  tempJob.desc = "%d zombies."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "zombieKilled"
+  tempJob.numberRec = {5,10}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 10
 
-  ix.quest.register(tempQuest, "killZombiesLow")
+  ix.job.register(tempJob, "killZombiesLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d zombies."
-  tempQuest.desc = "%d zombies."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 2
-  tempQuest.listenTrigger = "zombieKilled"
-  tempQuest.numberRec = {10,15}
-  tempQuest.reward = {{"kit_quest2"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d zombies."
+  tempJob.desc = "%d zombies."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "zombieKilled"
+  tempJob.numberRec = {10,15}
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killZombiesHigh")
+  ix.job.register(tempJob, "killZombiesHigh")
 
-  tempQuest = nil    
+  tempJob = nil    
 
 -- Cats
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d cats."
-  tempQuest.desc = "%d cats."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "catKilled"
-  tempQuest.numberRec = {2,3}
-  tempQuest.reward = {{"kit_quest2"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 10
+  tempJob.name = "%d cats."
+  tempJob.desc = "%d cats."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "catKilled"
+  tempJob.numberRec = {2,3}
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 10
 
-  ix.quest.register(tempQuest, "killCatsLow")
+  ix.job.register(tempJob, "killCatsLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d cats."
-  tempQuest.desc = "%d cats."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 2
-  tempQuest.listenTrigger = "catKilled"
-  tempQuest.numberRec = {4,6}
-  tempQuest.reward = {{"kit_quest3"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d cats."
+  tempJob.desc = "%d cats."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "catKilled"
+  tempJob.numberRec = {4,6}
+  tempJob.reward = {{"kit_quest3"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killCatsHigh")
+  ix.job.register(tempJob, "killCatsHigh")
 
-  tempQuest = nil
+  tempJob = nil
 
 -- bloodsuckers
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d bloodsuckers."
-  tempQuest.desc = "%d bloodsuckers."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 2
-  tempQuest.listenTrigger = "bloodsuckerKilled"
-  tempQuest.numberRec = {1,3}
-  tempQuest.reward = {{"kit_quest2"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 10
+  tempJob.name = "%d bloodsuckers."
+  tempJob.desc = "%d bloodsuckers."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "bloodsuckerKilled"
+  tempJob.numberRec = {1,3}
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 10
 
-  ix.quest.register(tempQuest, "killBloodsuckersLow")
+  ix.job.register(tempJob, "killBloodsuckersLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d bloodsuckers."
-  tempQuest.desc = "%d bloodsuckers."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 2
-  tempQuest.listenTrigger = "bloodsuckerKilled"
-  tempQuest.numberRec = {3,6}
-  tempQuest.reward = {{"kit_quest3"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d bloodsuckers."
+  tempJob.desc = "%d bloodsuckers."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "bloodsuckerKilled"
+  tempJob.numberRec = {3,6}
+  tempJob.reward = {{"kit_quest3"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killBloodsuckersHigh")
+  ix.job.register(tempJob, "killBloodsuckersHigh")
 
-  tempQuest = nil
+  tempJob = nil
 
 -- boars
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d boars."
-  tempQuest.desc = "%d boars."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "boarKilled"
-  tempQuest.numberRec = {2,4}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 10
+  tempJob.name = "%d boars."
+  tempJob.desc = "%d boars."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "boarKilled"
+  tempJob.numberRec = {2,4}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 10
 
-  ix.quest.register(tempQuest, "killBoarsLow")
+  ix.job.register(tempJob, "killBoarsLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d boars."
-  tempQuest.desc = "%d boars."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "boarKilled"
-  tempQuest.numberRec = {4,6}
-  tempQuest.reward = {{"kit_quest2"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d boars."
+  tempJob.desc = "%d boars."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "boarKilled"
+  tempJob.numberRec = {4,6}
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killBoarsHigh")
+  ix.job.register(tempJob, "killBoarsHigh")
 
-  tempQuest = nil
+  tempJob = nil
 
 -- Burers
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d burers."
-  tempQuest.desc = "%d burers."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 3
-  tempQuest.listenTrigger = "burerKilled"
-  tempQuest.numberRec = {1,2}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d burers."
+  tempJob.desc = "%d burers."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 3
+  tempJob.listenTrigger = "burerKilled"
+  tempJob.numberRec = {1,2}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killBurersLow")
+  ix.job.register(tempJob, "killBurersLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d burers."
-  tempQuest.desc = "%d burers."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 3
-  tempQuest.listenTrigger = "burerKilled"
-  tempQuest.numberRec = {2,3}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 20
+  tempJob.name = "%d burers."
+  tempJob.desc = "%d burers."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 3
+  tempJob.listenTrigger = "burerKilled"
+  tempJob.numberRec = {2,3}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
 
-  ix.quest.register(tempQuest, "killBurersHigh")
+  ix.job.register(tempJob, "killBurersHigh")
 
-  tempQuest = nil
+  tempJob = nil
 
 -- Chimeras
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d chimeras."
-  tempQuest.desc = "%d chimeras."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 3
-  tempQuest.listenTrigger = "chimeraKilled"
-  tempQuest.numberRec = {1,2}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d chimeras."
+  tempJob.desc = "%d chimeras."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 3
+  tempJob.listenTrigger = "chimeraKilled"
+  tempJob.numberRec = {1,2}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killChimerasLow")
+  ix.job.register(tempJob, "killChimerasLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d chimeras."
-  tempQuest.desc = "%d chimeras."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 4
-  tempQuest.listenTrigger = "chimeraKilled"
-  tempQuest.numberRec = {2,3}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 20
+  tempJob.name = "%d chimeras."
+  tempJob.desc = "%d chimeras."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 4
+  tempJob.listenTrigger = "chimeraKilled"
+  tempJob.numberRec = {2,3}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
 
-  ix.quest.register(tempQuest, "killChimerasHigh")
+  ix.job.register(tempJob, "killChimerasHigh")
 
-  tempQuest = nil
+  tempJob = nil
 
 -- Controllers
 /*
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d controllers."
-  tempQuest.desc = "%d controllers."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 2
-  tempQuest.listenTrigger = "controllerKilled"
-  tempQuest.numberRec = {1,2}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d controllers."
+  tempJob.desc = "%d controllers."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "controllerKilled"
+  tempJob.numberRec = {1,2}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killControllersLow")
+  ix.job.register(tempJob, "killControllersLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d controllers."
-  tempQuest.desc = "%d controllers."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 3
-  tempQuest.listenTrigger = "controllerKilled"
-  tempQuest.numberRec = {2,4}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 20
+  tempJob.name = "%d controllers."
+  tempJob.desc = "%d controllers."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 3
+  tempJob.listenTrigger = "controllerKilled"
+  tempJob.numberRec = {2,4}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
 
-  ix.quest.register(tempQuest, "killControllersHigh")
+  ix.job.register(tempJob, "killControllersHigh")
 */
 -- dogs
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d dogs."
-  tempQuest.desc = "%d dogs."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "dogKilled"
-  tempQuest.numberRec = {3,5}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 10
+  tempJob.name = "%d dogs."
+  tempJob.desc = "%d dogs."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "dogKilled"
+  tempJob.numberRec = {3,5}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 10
 
-  ix.quest.register(tempQuest, "killDogsLow")
+  ix.job.register(tempJob, "killDogsLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d dogs."
-  tempQuest.desc = "%d dogs."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "dogKilled"
-  tempQuest.numberRec = {6,10}
-  tempQuest.reward = {{"kit_quest2"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d dogs."
+  tempJob.desc = "%d dogs."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "dogKilled"
+  tempJob.numberRec = {6,10}
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killDogsHigh")
+  ix.job.register(tempJob, "killDogsHigh")
 
-  tempQuest = nil  
+  tempJob = nil  
 
 --fleshes
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d fleshes."
-  tempQuest.desc = "%d fleshes."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "fleshKilled"
-  tempQuest.numberRec = {3,5}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 10
+  tempJob.name = "%d fleshes."
+  tempJob.desc = "%d fleshes."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "fleshKilled"
+  tempJob.numberRec = {3,5}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 10
 
-  ix.quest.register(tempQuest, "killFleshesLow")
+  ix.job.register(tempJob, "killFleshesLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d fleshes."
-  tempQuest.desc = "%d fleshes."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "fleshKilled"
-  tempQuest.numberRec = {6,10}
-  tempQuest.reward = {{"kit_quest2"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d fleshes."
+  tempJob.desc = "%d fleshes."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "fleshKilled"
+  tempJob.numberRec = {6,10}
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killFleshesHigh")
+  ix.job.register(tempJob, "killFleshesHigh")
 
-  tempQuest = nil
+  tempJob = nil
 
 -- pseudodogs
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d pseudodogs."
-  tempQuest.desc = "%d pseudodogs."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 1
-  tempQuest.listenTrigger = "pseudodogKilled"
-  tempQuest.numberRec = {1,3}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 10
+  tempJob.name = "%d pseudodogs."
+  tempJob.desc = "%d pseudodogs."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "pseudodogKilled"
+  tempJob.numberRec = {1,3}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 10
 
-  ix.quest.register(tempQuest, "killPseudodogsLow")
+  ix.job.register(tempJob, "killPseudodogsLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d pseudodogs."
-  tempQuest.desc = "%d pseudodogs."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 2
-  tempQuest.listenTrigger = "pseudodogKilled"
-  tempQuest.numberRec = {3,5}
-  tempQuest.reward = {{"kit_quest2"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d pseudodogs."
+  tempJob.desc = "%d pseudodogs."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "pseudodogKilled"
+  tempJob.numberRec = {3,5}
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killPseudodogsHigh")
+  ix.job.register(tempJob, "killPseudodogsHigh")
 
-  tempQuest = nil
+  tempJob = nil
 
 -- psydogs
 /*
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d psydogs."
-  tempQuest.desc = "%d psydogs."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 2
-  tempQuest.listenTrigger = "psydogKilled"
-  tempQuest.numberRec = {1,1}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d psydogs."
+  tempJob.desc = "%d psydogs."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "psydogKilled"
+  tempJob.numberRec = {1,1}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killPsydogsLow")
+  ix.job.register(tempJob, "killPsydogsLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d psydogs."
-  tempQuest.desc = "%d psydogs."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 3
-  tempQuest.listenTrigger = "psydogKilled"
-  tempQuest.numberRec = {2,3}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 20
+  tempJob.name = "%d psydogs."
+  tempJob.desc = "%d psydogs."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 3
+  tempJob.listenTrigger = "psydogKilled"
+  tempJob.numberRec = {2,3}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
 
-  ix.quest.register(tempQuest, "killPsydogsLow")
+  ix.job.register(tempJob, "killPsydogsLow")
 
-  tempQuest = nil
+  tempJob = nil
 
 -- Pseudogiants
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d pseudogiants."
-  tempQuest.desc = "%d pseudogiants."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 3
-  tempQuest.listenTrigger = "pseudogiantKilled"
-  tempQuest.numberRec = {1,2}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 15
+  tempJob.name = "%d pseudogiants."
+  tempJob.desc = "%d pseudogiants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 3
+  tempJob.listenTrigger = "pseudogiantKilled"
+  tempJob.numberRec = {1,2}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
 
-  ix.quest.register(tempQuest, "killPseudogiantsLow")
+  ix.job.register(tempJob, "killPseudogiantsLow")
 
-  tempQuest = nil
+  tempJob = nil
 
-  local tempQuest = {}
+  local tempJob = {}
 
-  tempQuest.name = "%d pseudogiants."
-  tempQuest.desc = "%d pseudogiants."
-  tempQuest.icon = "stalker/questpaper_mutant.png"
-  tempQuest.tier = 4
-  tempQuest.listenTrigger = "pseudogiantKilled"
-  tempQuest.numberRec = {2,3}
-  tempQuest.reward = {{"kit_quest1"}}
-  tempQuest.rewardCount = {1,1}
-  tempQuest.repReward = 20
+  tempJob.name = "%d pseudogiants."
+  tempJob.desc = "%d pseudogiants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 4
+  tempJob.listenTrigger = "pseudogiantKilled"
+  tempJob.numberRec = {2,3}
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
 
-  ix.quest.register(tempQuest, "killPseudogiantsHigh")
+  ix.job.register(tempJob, "killPseudogiantsHigh")
 
-  tempQuest = nil
+  tempJob = nil
 */
 end

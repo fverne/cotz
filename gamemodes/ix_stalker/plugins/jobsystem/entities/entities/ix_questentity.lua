@@ -25,9 +25,9 @@ if (SERVER) then
 				if (activator:GetPos():Distance(self:GetPos()) <= 100) then
 					if activator:GetCharacter():GetData("quests", nil) == nil then
 						activator:GetCharacter():SetData("quests", {})
-						activator:ixQuestGetNew()
-						activator:ixQuestGetNew()
-						activator:ixQuestGetNew()
+						--activator:ixQuestGetNew()
+						--activator:ixQuestGetNew()
+						--activator:ixQuestGetNew()
 					end
 					netstream.Start(activator, "questmenu", activator, self, activator:GetCharacter():GetData("quests", {}))
 				end

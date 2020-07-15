@@ -102,7 +102,7 @@ if SERVER then
   function playerMeta:ixJobComplete(identifier, npcidentifer)
     --print("Completing quest with ID: "..identifier)
 
-    if self:ixJobHas(npcidentifier) then
+    if self:ixHasJobFromNPC(npcidentifier) then
 
       local curJobs = self:GetCharacter():GetJobs()
       --Check if job is marked as complete
@@ -167,7 +167,7 @@ if SERVER then
     self:GetCharacter():SetJobs(curJobs)
   end
 
-  function playerMeta:ixJobHas(npcidentifier)
+  function playerMeta:ixHasJobFromNPC(npcidentifier)
     curJobs = self:GetCharacter():GetJobs()
 
     if curJobs[npcidentifier] then
