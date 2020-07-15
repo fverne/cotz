@@ -83,10 +83,10 @@ if (CLIENT) then
 		local drawFunction = self.DrawCrosshair
 
 		-- we'll manually call this since CHudCrosshair is never drawn; checks are already performed
-		if (wep.DoDrawCrosshair) then
-			drawTarget = wep
-			drawFunction = wep.DoDrawCrosshair
-		end
+		--if (wep.DoDrawCrosshair) then
+		--	drawTarget = wep
+		--	drawFunction = wep.DoDrawCrosshair
+		--end
 
 		screen = trace.HitPos:ToScreen()
 		drawFunction(drawTarget, screen.x, screen.y, trace)
