@@ -2,7 +2,7 @@
 local gradient = surface.GetTextureID("vgui/gradient-d")
 local background5 = Material("cotz/panels/pdaframe.png")
 local audioFadeInTime = 2
-local animationTime = 0.5
+local animationTime = 0.1
 local matrixZScale = Vector(1, 1, 0.0001)
 
 -- character menu panel
@@ -181,9 +181,9 @@ function PANEL:Init()
 		--surface.DrawRect(0, y + newHeight - 1, width, 1)
 
 		-- background
-		surface.SetMaterial(Material("cotz/panels/buttontab.png"))
-		surface.SetDrawColor(255, 255, 255)
-		surface.DrawTexturedRect(width * 0.35, 0, width * 0.3, height)
+		surface.SetMaterial(Material("cotz/panels/loot_interface.png"))
+		surface.SetDrawColor(255, 255, 255, 250)
+		surface.DrawTexturedRectUV(width * 0.35, 0, width * 0.3, height, 0, 1, 1, 0)
 
 		if (matrix) then
 			cam.PushModelMatrix(matrix)
@@ -238,15 +238,17 @@ function PANEL:Init()
 	-- button list
 	self.mainButtonList = self:Add("ixCharMenuButtonList")
 	self.mainButtonList:Dock(LEFT)
+	self.mainButtonList:SetWide(self:GetWide() * 0.15)
 
+	local charmaximum = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 5)
 	-- create character button
 	local createButton = self.mainButtonList:Add("ixMenuButton")
-	createButton:SetText("create")
+	createButton:SetText("enter the zone")
 	createButton:SizeToContents()
 	createButton.DoClick = function()
-		local maximum = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 5)
+		local charmaximum = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 5)
 		-- don't allow creation if we've hit the character limit
-		if (#ix.characters >= maximum) then
+		if (#ix.characters >= charmaximum) then
 			self:GetParent():ShowNotice(3, L("maxCharacters"))
 			return
 		end
@@ -256,9 +258,14 @@ function PANEL:Init()
 		parent.newCharacterPanel:SlideUp()
 	end
 
+	if (#ix.characters >= charmaximum) then
+		createButton:SetDisabled(true)
+		createButton:Remove()
+	end
+
 	-- load character button
 	self.loadButton = self.mainButtonList:Add("ixMenuButton")
-	self.loadButton:SetText("load")
+	self.loadButton:SetText("re-enter the zone")
 	self.loadButton:SizeToContents()
 	self.loadButton.DoClick = function()
 		self:Dim()
@@ -267,6 +274,7 @@ function PANEL:Init()
 
 	if (!bHasCharacter) then
 		self.loadButton:SetDisabled(true)
+		self.loadButton:Remove()
 	end
 
 	-- community button
@@ -305,7 +313,7 @@ function PANEL:UpdateReturnButton(bValue)
 		bValue = self.bUsingCharacter
 	end
 
-	self.returnButton:SetText(bValue and "return" or "leave")
+	self.returnButton:SetText(bValue and "return" or "exit the zone")
 	self.returnButton:SizeToContents()
 end
 
