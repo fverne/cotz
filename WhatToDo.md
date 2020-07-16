@@ -1,4 +1,4 @@
-#What To Do
+# What To Do
 
 ## Changes to character
 - [x] Background, chosen on character creation - Influences starting stats, starting gear etc.
@@ -47,7 +47,7 @@
 - [ ] Expand and configure
 
 ## Misc
-- [ ] Weight-based item spawning
+- [x] Weight-based item spawning
 - [ ] Lockpicking system
 - [ ] Configure Mutant Poaching
 - [ ] Configure AdvEventController
@@ -55,6 +55,7 @@
 - [ ] Cyclic TalkerNPCs
 - [ ] Cyclic containers
 - [ ] Configure TalkerNPCs
+- [ ] Add grenade-type SWEPs and items
 
 ## Derma
 - [ ] Add item entity icons
