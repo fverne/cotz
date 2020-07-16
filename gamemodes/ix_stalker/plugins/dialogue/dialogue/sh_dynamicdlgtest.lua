@@ -12,7 +12,11 @@ DIALOGUE.addTopic("GREETING", {
 DIALOGUE.addTopic("Return", {
 	statement = "Let's talk about something else.",
 	response = "What would you like to know?",
-	options = ix.dialogue.list["dynamicdlgtest"].tree["GREETING"].options --Identical to GREETING's options
+	options = {
+		"RepairItems", 
+		"GetTask",
+		"GOODBYE"
+	} --Identical to GREETING's options
 })
 
 DIALOGUE.addTopic("RepairItem1", { -- Repair primary weapon

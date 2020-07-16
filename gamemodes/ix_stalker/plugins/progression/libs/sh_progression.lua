@@ -21,8 +21,8 @@ function ix.progression.SetProgressionValue(progid, amount, playername)
 end
 
 function ix.progression.GetProgressionValue(progid)
-	if (ix.plugin.list["progression"].progressiondefinitions[progid]) then
-		return ix.plugin.list["progression"].progressionstatus[progid].value
+	if (ix.progression.definitions[progid]) then
+		return ix.progression.status[progid].value
 	end
 end
 

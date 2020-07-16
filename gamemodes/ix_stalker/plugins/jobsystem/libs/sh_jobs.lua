@@ -27,7 +27,7 @@ ix.jobs.list = ix.jobs.list or {}
   tempJob.rewardCount = {1,3}
   tempJob.repReward = 200
 
-  ix.job.register(tempJob)
+  ix.jobs.register(tempJob)
 
   ACTIVE JOB STRUCT should contain
   
@@ -39,7 +39,7 @@ ix.jobs.list = ix.jobs.list or {}
   
 --]]
 
-function ix.job.isStructValid(jobstruct)
+function ix.jobs.isStructValid(jobstruct)
   if (!jobstruct.name or type(jobstruct.name) != "string") then return false end
   if (!jobstruct.listenTrigger or type(jobstruct.listenTrigger) != "string") then return false end
   if !jobstruct.numberRec then return false end
@@ -49,15 +49,15 @@ function ix.job.isStructValid(jobstruct)
   return true
 end
 
-function ix.job.getFormattedName(identifier, activejob)
-  return string.format(ix.job.list[identifier].name,activejob.numberRec)
+function ix.jobs.getFormattedName(identifier, activejob)
+  return string.format(ix.jobs.list[identifier].name,activejob.numberRec)
 end
 
-function ix.job.getFormattedDesc(identifier, activejob)
-  return string.format(ix.job.list[identifier].desc,activejob.numberRec)
+function ix.jobs.getFormattedDesc(identifier, activejob)
+  return string.format(ix.jobs.list[identifier].desc,activejob.numberRec)
 end
 
-function ix.job.isItemJob(jobname)
+function ix.jobs.isItemJob(jobname)
   local underscorepos = string.find(jobname, "_")
   if underscorepos then
     return string.sub(jobname, underscorepos + 1)
@@ -110,18 +110,18 @@ if SERVER then
         --Check rewards & rewardcount
 
         local rewCount = 0
-        if type(ix.job.list[identifier].rewardCount) == "table" then
-          rewCount = math.random(ix.job.list[identifier].rewardCount[1],ix.job.list[identifier].rewardCount[2])
+        if type(ix.jobs.list[identifier].rewardCount) == "table" then
+          rewCount = math.random(ix.jobs.list[identifier].rewardCount[1],ix.jobs.list[identifier].rewardCount[2])
         else 
-          rewCount = ix.job.list[identifier].rewardCount
+          rewCount = ix.jobs.list[identifier].rewardCount
         end
 
         for i = 1, rewCount do
           local reward
-          if type(ix.job.list[identifier].reward) == "table" then
-            reward = table.Random(ix.job.list[identifier].reward)
+          if type(ix.jobs.list[identifier].reward) == "table" then
+            reward = table.Random(ix.jobs.list[identifier].reward)
           else 
-            reward = ix.job.list[identifier].reward
+            reward = ix.jobs.list[identifier].reward
           end
 
           --Give player items
@@ -130,7 +130,7 @@ if SERVER then
           end
         end
 
-        self:addReputation(ix.job.list[identifier].repReward)
+        self:addReputation(ix.jobs.list[identifier].repReward)
 
         --Remove job from player
         curJobs[npcidentifier] = nil
@@ -150,13 +150,13 @@ if SERVER then
     --Evaluate job parameters | numberRec, listenTrigger, progress=0, isCompleted=false |
     temp = {}
 
-    if type(ix.job.list[identifier].numberRec) == "table" then
-      temp.numberRec = math.random(ix.job.list[identifier].numberRec[1],ix.job.list[identifier].numberRec[2])
+    if type(ix.jobs.list[identifier].numberRec) == "table" then
+      temp.numberRec = math.random(ix.jobs.list[identifier].numberRec[1],ix.jobs.list[identifier].numberRec[2])
     else
-      temp.numberRec = ix.job.list[identifier].numberRec
+      temp.numberRec = ix.jobs.list[identifier].numberRec
     end
 
-    temp.listenTrigger = ix.job.list[identifier].listenTrigger
+    temp.listenTrigger = ix.jobs.list[identifier].listenTrigger
 
     temp.progress = 0
 
