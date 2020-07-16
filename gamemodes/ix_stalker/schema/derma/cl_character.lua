@@ -73,8 +73,8 @@ function PANEL:Paint(width, height)
 		matrix = Matrix()
 		matrix:Scale(matrixZScale * self.currentScale)
 		matrix:Translate(Vector(
-			ScrW() * 0.5 - (ScrW() * self.currentScale * 0.5),
-			ScrH() * 0.5 - (ScrH() * self.currentScale * 0.5),
+			ScrW() * 1 - (ScrW() * self.currentScale * 0.5),
+			ScrH() * 1 - (ScrH() * self.currentScale * 0.5),
 			1
 		))
 
@@ -93,7 +93,7 @@ function PANEL:Paint(width, height)
 		local color = Color(0, 0, 0, amount)
 
 		surface.SetDrawColor(color)
-		surface.DrawRect(0, 0, width, height)
+		--surface.DrawRect(0, 0, width, height)
 	end
 end
 
