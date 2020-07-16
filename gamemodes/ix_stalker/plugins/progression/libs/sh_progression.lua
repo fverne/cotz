@@ -22,6 +22,8 @@ end
 
 function ix.progression.GetProgressionValue(progid)
 	if (ix.progression.definitions[progid]) then
+		ix.progression.status[progid] = ix.progression.status[progid] or {}
+		ix.progression.status[progid].value = ix.progression.status[progid].value or 0
 		return ix.progression.status[progid].value
 	end
 end

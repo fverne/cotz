@@ -13,7 +13,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_makarov")
+  ix.jobs.register(tempJob, "ItemJob_makarov")
 
   tempJob = nil
 
@@ -29,7 +29,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_leadpipe")
+  ix.jobs.register(tempJob, "ItemJob_leadpipe")
 
   tempJob = nil
 
@@ -45,7 +45,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_crowbar")
+  ix.jobs.register(tempJob, "ItemJob_crowbar")
 
   tempJob = nil
 
@@ -61,7 +61,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_bat")
+  ix.jobs.register(tempJob, "ItemJob_bat")
 
   tempJob = nil
 
@@ -77,7 +77,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_fireaxe")
+  ix.jobs.register(tempJob, "ItemJob_fireaxe")
 
   tempJob = nil
 
@@ -93,7 +93,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_documents0")
+  ix.jobs.register(tempJob, "ItemJob_documents0")
 
   tempJob = nil
 
@@ -109,7 +109,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_documents1")
+  ix.jobs.register(tempJob, "ItemJob_documents1")
 
   tempJob = nil
 
@@ -125,7 +125,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_documents2")
+  ix.jobs.register(tempJob, "ItemJob_documents2")
 
   tempJob = nil
 
@@ -141,7 +141,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_beretta92")
+  ix.jobs.register(tempJob, "ItemJob_beretta92")
 
   tempJob = nil
 
@@ -157,7 +157,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_brhp")
+  ix.jobs.register(tempJob, "ItemJob_brhp")
 
   tempJob = nil
 
@@ -173,7 +173,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_tokarev")
+  ix.jobs.register(tempJob, "ItemJob_tokarev")
 
   tempJob = nil
 
@@ -189,7 +189,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_cz52")
+  ix.jobs.register(tempJob, "ItemJob_cz52")
 
   tempJob = nil
 
@@ -205,7 +205,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_p99")
+  ix.jobs.register(tempJob, "ItemJob_p99")
 
   tempJob = nil
 
@@ -221,7 +221,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_fort12")
+  ix.jobs.register(tempJob, "ItemJob_fort12")
 
   tempJob = nil
 
@@ -237,7 +237,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_glock17")
+  ix.jobs.register(tempJob, "ItemJob_glock17")
 
   tempJob = nil
 
@@ -253,7 +253,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_rugermk3")
+  ix.jobs.register(tempJob, "ItemJob_rugermk3")
 
   tempJob = nil
 
@@ -269,7 +269,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_flashdriveblack")
+  ix.jobs.register(tempJob, "ItemJob_flashdriveblack")
 
   tempJob = nil
 
@@ -285,7 +285,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_flashdriveblue")
+  ix.jobs.register(tempJob, "ItemJob_flashdriveblue")
 
   tempJob = nil*/
 
@@ -301,7 +301,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_documents4")
+  ix.jobs.register(tempJob, "ItemJob_documents4")
 
   tempJob = nil
 
@@ -317,7 +317,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_documents8")
+  ix.jobs.register(tempJob, "ItemJob_documents8")
 
   tempJob = nil
 
@@ -333,7 +333,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_documents9")
+  ix.jobs.register(tempJob, "ItemJob_documents9")
 
   tempJob = nil
 
@@ -349,7 +349,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_gpsmappingdevice")
+  ix.jobs.register(tempJob, "ItemJob_gpsmappingdevice")
 
   tempJob = nil
 
@@ -365,7 +365,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "ItemJob_gpstrackingdevice")
+  ix.jobs.register(tempJob, "ItemJob_gpstrackingdevice")
 
   tempJob = nil*/
 
@@ -382,7 +382,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killMutantsLow")
+  ix.jobs.register(tempJob, "killMutantsLow")
 
   tempJob = nil
 
@@ -398,7 +398,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
 
-  ix.job.register(tempJob, "killMutantsHigh")
+  ix.jobs.register(tempJob, "killMutantsHigh")
 
   tempJob = nil
 
@@ -416,7 +416,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
 
-  ix.job.register(tempJob, "killRodentsLow")
+  ix.jobs.register(tempJob, "killRodentsLow")
 
   tempJob = nil
 
@@ -432,7 +432,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killRodentsHigh")
+  ix.jobs.register(tempJob, "killRodentsHigh")
 
   tempJob = nil
 
@@ -450,7 +450,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
 
-  ix.job.register(tempJob, "killZombiesLow")
+  ix.jobs.register(tempJob, "killZombiesLow")
 
   tempJob = nil
 
@@ -466,7 +466,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killZombiesHigh")
+  ix.jobs.register(tempJob, "killZombiesHigh")
 
   tempJob = nil    
 
@@ -484,7 +484,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
 
-  ix.job.register(tempJob, "killCatsLow")
+  ix.jobs.register(tempJob, "killCatsLow")
 
   tempJob = nil
 
@@ -500,7 +500,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killCatsHigh")
+  ix.jobs.register(tempJob, "killCatsHigh")
 
   tempJob = nil
 
@@ -518,7 +518,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
 
-  ix.job.register(tempJob, "killBloodsuckersLow")
+  ix.jobs.register(tempJob, "killBloodsuckersLow")
 
   tempJob = nil
 
@@ -534,7 +534,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killBloodsuckersHigh")
+  ix.jobs.register(tempJob, "killBloodsuckersHigh")
 
   tempJob = nil
 
@@ -552,7 +552,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
 
-  ix.job.register(tempJob, "killBoarsLow")
+  ix.jobs.register(tempJob, "killBoarsLow")
 
   tempJob = nil
 
@@ -568,7 +568,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killBoarsHigh")
+  ix.jobs.register(tempJob, "killBoarsHigh")
 
   tempJob = nil
 
@@ -585,7 +585,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killBurersLow")
+  ix.jobs.register(tempJob, "killBurersLow")
 
   tempJob = nil
 
@@ -601,7 +601,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
 
-  ix.job.register(tempJob, "killBurersHigh")
+  ix.jobs.register(tempJob, "killBurersHigh")
 
   tempJob = nil
 
@@ -618,7 +618,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killChimerasLow")
+  ix.jobs.register(tempJob, "killChimerasLow")
 
   tempJob = nil
 
@@ -634,7 +634,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
 
-  ix.job.register(tempJob, "killChimerasHigh")
+  ix.jobs.register(tempJob, "killChimerasHigh")
 
   tempJob = nil
 
@@ -652,7 +652,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killControllersLow")
+  ix.jobs.register(tempJob, "killControllersLow")
 
   tempJob = nil
 
@@ -668,7 +668,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
 
-  ix.job.register(tempJob, "killControllersHigh")
+  ix.jobs.register(tempJob, "killControllersHigh")
 */
 -- dogs
 
@@ -684,7 +684,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
 
-  ix.job.register(tempJob, "killDogsLow")
+  ix.jobs.register(tempJob, "killDogsLow")
 
   tempJob = nil
 
@@ -700,7 +700,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killDogsHigh")
+  ix.jobs.register(tempJob, "killDogsHigh")
 
   tempJob = nil  
 
@@ -718,7 +718,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
 
-  ix.job.register(tempJob, "killFleshesLow")
+  ix.jobs.register(tempJob, "killFleshesLow")
 
   tempJob = nil
 
@@ -734,7 +734,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killFleshesHigh")
+  ix.jobs.register(tempJob, "killFleshesHigh")
 
   tempJob = nil
 
@@ -752,7 +752,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
 
-  ix.job.register(tempJob, "killPseudodogsLow")
+  ix.jobs.register(tempJob, "killPseudodogsLow")
 
   tempJob = nil
 
@@ -768,7 +768,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killPseudodogsHigh")
+  ix.jobs.register(tempJob, "killPseudodogsHigh")
 
   tempJob = nil
 
@@ -786,7 +786,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killPsydogsLow")
+  ix.jobs.register(tempJob, "killPsydogsLow")
 
   tempJob = nil
 
@@ -802,7 +802,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
 
-  ix.job.register(tempJob, "killPsydogsLow")
+  ix.jobs.register(tempJob, "killPsydogsLow")
 
   tempJob = nil
 
@@ -820,7 +820,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
-  ix.job.register(tempJob, "killPseudogiantsLow")
+  ix.jobs.register(tempJob, "killPseudogiantsLow")
 
   tempJob = nil
 
@@ -836,7 +836,7 @@ do
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
 
-  ix.job.register(tempJob, "killPseudogiantsHigh")
+  ix.jobs.register(tempJob, "killPseudogiantsHigh")
 
   tempJob = nil
 */
