@@ -6,7 +6,7 @@ PLUGIN.desc = "Implements the job library."
 
 function ix.jobs.register(jobstruct,identifier)
   if ix.jobs.isStructValid(jobstruct) then
-    ix.job.list[identifier] = jobstruct
+    ix.jobs.list[identifier] = jobstruct
   else
     print("ERROR IN JOB DEFINITION")
   end
