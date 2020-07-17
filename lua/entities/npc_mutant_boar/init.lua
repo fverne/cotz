@@ -38,7 +38,7 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 function ENT:Initialize()
 	self.Model = "models/stalkertnb/boar1.mdl"
-	self:STALKERNPCInit(Vector(-40,-40,90),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-50,-50,90),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
 	self.MaxRangeDist = 1200
