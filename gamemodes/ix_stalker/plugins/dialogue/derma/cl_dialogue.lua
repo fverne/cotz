@@ -36,11 +36,11 @@ function PANEL:Think()
 		end
 	end
 
-	--[[
+	
 	if input.IsKeyDown(KEY_TAB) then
 		self:exit()
 	end
-	--]]
+	
 end
 
 function PANEL:targetName()
