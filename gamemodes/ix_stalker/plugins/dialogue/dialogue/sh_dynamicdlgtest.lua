@@ -37,6 +37,12 @@ DIALOGUE.addTopic("RepairItem1", { -- Repair primary weapon
 					if (SERVER) then
 						item:SetData("durability", math.Clamp(item:GetData("durability", 0) + 20, 0, 100))
 						item:SetData("wear", 100);
+						
+						local wep = client:GetWeapon(item.class)
+						if (wep) then
+							wep:SetWeaponDurability(math.Clamp(wep:GetWeaponDurability()+20,0,100))
+							wep:SetWeaponWear(100)
+						end
 						char:TakeMoney(cost)
 					end
 				end
@@ -73,6 +79,13 @@ DIALOGUE.addTopic("RepairItem2", { -- Repair secondary weapon
 					if (SERVER) then
 					 	item:SetData("durability", math.Clamp(item:GetData("durability", 0) + 20, 0, 100))
 					 	item:SetData("wear", 100);
+
+						local wep = client:GetWeapon(item.class)
+						if (wep) then
+							wep:SetWeaponDurability(math.Clamp(wep:GetWeaponDurability()+20,0,100))
+							wep:SetWeaponWear(100)
+						end
+
 						char:TakeMoney(cost)
 					end
 				end
@@ -106,12 +119,35 @@ DIALOGUE.addTopic("RepairItems", {
 			if (char) then
 				local items = char:GetInventory():GetItems()
 
+				ix.dialogue.list["dynamicdlgtest"].tree["RepairItem1"].statement = ""
+				ix.dialogue.list["dynamicdlgtest"].tree["RepairItem2"].statement = ""
+
 	      for _, item in pairs( items ) do
 		  		if item.weaponCategory == "primary" && item:GetData("equip", false) then
-		  			ix.dialogue.list["dynamicdlgtest"].tree["RepairItem1"].statement = item.name
+						local str = item.name
+						local wep = client:GetWeapon(item.class)
+						local cost = 1000 -- ix.util.GetRepairCost()
+						if (wep) then
+							str = str.." (Wear: "..wep:GetWeaponWear()..")"
+						else
+							str = str.." (Wear: "..item:GetData("wear",0)..")"
+						end
+						str = str.." - "..cost
+
+		  			ix.dialogue.list["dynamicdlgtest"].tree["RepairItem1"].statement = str
 		  		end
           if item.weaponCategory == "secondary" && item:GetData("equip", false) then
-		  			ix.dialogue.list["dynamicdlgtest"].tree["RepairItem2"].statement = item.name
+						local str = item.name
+						local wep = client:GetWeapon(item.class)
+						local cost = 1000 -- ix.util.GetRepairCost()
+						if (wep) then
+							str = str.." (Wear: "..wep:GetWeaponWear()..")"
+						else
+							str = str.." (Wear: "..item:GetData("wear",0)..")"
+						end
+						str = str.." - "..cost
+
+		  			ix.dialogue.list["dynamicdlgtest"].tree["RepairItem2"].statement = str
 		  		end
 		  	end
       end
