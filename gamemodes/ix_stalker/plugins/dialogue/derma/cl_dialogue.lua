@@ -4,7 +4,7 @@ local gradient = ix.util.GetMaterial("vgui/gradient-d")
 function PANEL:Init()
 	self.loading = true
 
-	self.ANIM_SPEED = 0.25
+	self.ANIM_SPEED = 0.15
 
 	gui.EnableScreenClicker(true)
 
@@ -16,14 +16,14 @@ function PANEL:Init()
 
 	self.chatbox = self:Add("DScrollPanel")
 	self.chatbox:Dock(TOP)
-	self.chatbox:SetTall(ScrH() * 0.53)
-	self.chatbox:DockMargin(ScrW()*0.023, ScrH()*0.048, ScrW()*0.023, ScrH()*0.02)
+	self.chatbox:SetTall(ScrH() * 0.52)
+	self.chatbox:DockMargin(ScrW()*0.025, ScrH()*0.048, ScrW()*0.025, ScrH()*0.02)
 	self:InvalidateLayout(true)
 	self:InvalidateChildren(true)
 
 	self.options = self:Add("DScrollPanel")
 	self.options:Dock(FILL)
-	self.options:DockMargin(ScrW()*0.021, ScrH()*0.03, ScrW()*0.021, ScrH()*0.02)
+	self.options:DockMargin(ScrW()*0.024, ScrH()*0.03, ScrW()*0.024, ScrH()*0.02)
 end
 
 function PANEL:Think()
