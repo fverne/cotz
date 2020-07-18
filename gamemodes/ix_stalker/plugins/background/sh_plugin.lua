@@ -12,8 +12,11 @@ function PLUGIN:OnCharacterCreated(client, character)
 	local backgrounds = character:GetBackgrounds()
 	if (backgrounds != nil) then
 		for background, _ in pairs(backgrounds) do
-			local func = ix.backgrounds[background].OnCreated or (function(client, char) return true end)
-			func(client, character)
+			local bck = ix.backgrounds[background]
+			if (bck) then
+				local func = bck.OnCreated or (function(client, char) return true end)
+				func(client, character)
+			end
 		end
 	end
 end
@@ -24,8 +27,11 @@ if (SERVER) then
 
 		if (backgrounds != nil) then
 			for background, _ in pairs(backgrounds) do
-				local func = ix.backgrounds[background].OnLoaded or (function(char) return true end)
-				func(character)
+				local bck = ix.backgrounds[background]
+				if (bck) then
+					local func = bck.OnLoaded or (function(char) return true end)
+					func(character)
+				end
 			end
 		end
 	end
