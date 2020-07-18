@@ -109,7 +109,8 @@ DIALOGUE.addTopic("RepairItems", {
 	response = "What would you like me to look at?",
 	options = {
 		"RepairItem1",
-		"RepairItem2"
+		"RepairItem2",
+		"Return"
 	},
 	preCallback = function(self, client, target)
 		if(CLIENT)then
@@ -132,7 +133,7 @@ DIALOGUE.addTopic("RepairItems", {
 						else
 							str = str.." (Wear: "..item:GetData("wear",0)..")"
 						end
-						str = str.." - "..cost
+						str = str.." - "..cost.." "..ix.currency.symbol
 
 		  			ix.dialogue.list["dynamicdlgtest"].tree["RepairItem1"].statement = str
 		  		end
@@ -145,7 +146,7 @@ DIALOGUE.addTopic("RepairItems", {
 						else
 							str = str.." (Wear: "..item:GetData("wear",0)..")"
 						end
-						str = str.." - "..cost
+						str = str.." - "..cost.." "..ix.currency.symbol
 
 		  			ix.dialogue.list["dynamicdlgtest"].tree["RepairItem2"].statement = str
 		  		end
