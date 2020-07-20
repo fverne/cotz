@@ -17,7 +17,10 @@ function ix.dialogue.LoadFromDir(directory)
 					response = data.response or "",
 					preCallback = data.preCallback,
 					postCallback = data.postCallback,
-					options = data.options or {}
+					options = data.options or {},
+					IsDynamic = data.IsDynamic or false,
+					GetDynamicOptions = data.GetDynamicOptions,
+					ResolveDynamicOption = data.ResolveDynamicOption
 				}
 
 				DIALOGUE.tree[topicID] = topicData

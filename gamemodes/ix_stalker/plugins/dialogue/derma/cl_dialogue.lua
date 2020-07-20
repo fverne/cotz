@@ -166,7 +166,13 @@ function PANEL:dialogue(name, message, instant, color, topicID)
 					self:exit()
 				end
 
-				self:prepareOptions(topic.options)
+				if (topic.IsDynamic) then
+					self:prepareOptions(topic.options)
+				else
+					local dynopts = topic.GetDynamicOptions(topic, LocalPlayer(), self.target)
+
+					self:prepareDynamicOptions(dynopts, topic.options)
+				end
 			end
 
 			timer.Destroy("typewriter")
@@ -196,6 +202,72 @@ function PANEL:prepareOptions(options)
 			self:startTopic(topicID)
 		end
 	end
+end
+
+function PANEL:prepareDynamicOptions(dynopts, normalopts)
+	self.buttonList = {}
+	local nButs = 1
+	for k, data in ipairs(dynopts) do
+		local topic = self.tree[data.topicID]
+		self.buttonList[k] = self.options:Add("DLabel")
+		self.buttonList[k]:Dock(TOP)
+		self.buttonList[k]:DockMargin(4, 0, 4, 4)
+		self.buttonList[k]:SetText(data.statement)
+		self.buttonList[k]:SetTextColor(Color(20, 20, 20, 255))
+		self.buttonList[k]:SetFont("ixSmallFont")
+		self.buttonList[k]:SetMouseInputEnabled(true)
+		self.buttonList[k].Think = function()
+			if self.buttonList[k]:IsHovered() then
+				self.buttonList[k]:SetTextColor(Color(255, 255, 255))
+			else
+				self.buttonList[k]:SetTextColor(Color(220, 220, 220))
+			end
+		end
+		self.buttonList[k].DoClick = function()
+			local nexttopic = self:ResolveDynamicOption(topic, LocalPlayer(), self.target, data.dyndata)
+			self:startTopic(nexttopic)
+		end
+
+		nButs = k
+	end
+
+	for _, topicID in ipairs(normalopts) do
+		topic = self.tree[topicID]
+		self.buttonList[nButs] = self.options:Add("DLabel")
+		self.buttonList[nButs]:Dock(TOP)
+		self.buttonList[nButs]:DockMargin(4, 0, 4, 4)
+		self.buttonList[nButs]:SetText(topic.statement)
+		self.buttonList[nButs]:SetTextColor(Color(20, 20, 20, 255))
+		self.buttonList[nButs]:SetFont("ixSmallFont")
+		self.buttonList[nButs]:SetMouseInputEnabled(true)
+		self.buttonList[nButs].Think = function()
+			if self.buttonList[nButs]:IsHovered() then
+				self.buttonList[nButs]:SetTextColor(Color(255, 255, 255))
+			else
+				self.buttonList[nButs]:SetTextColor(Color(220, 220, 220))
+			end
+		end
+		self.buttonList[nButs].DoClick = function()
+			self:startTopic(topicID)
+		end
+
+		nButs = nButs + 1
+	end
+end
+
+function PANEL:ResolveDynamicOption(topicID, client, target, dyndata)
+	local topic = self.tree[data.topicID]
+	if isfunction(topic.ResolveDynamicOption) then
+		local ret = topic.ResolveDynamicOption(data.topicID, LocalPlayer(), self.target, dyndata)
+		net.Start("ixDialogueResolveDynamic")
+		net.WriteString(self.treeID)
+		net.WriteString(data.topicID)
+		net.WriteEntity(self.target)
+		net.WriteTable(dyndata)
+		net.SendToServer()
+	end
+
+	return ret
 end
 
 function PANEL:exit()

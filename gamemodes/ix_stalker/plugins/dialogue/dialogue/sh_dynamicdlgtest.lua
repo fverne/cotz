@@ -160,7 +160,23 @@ DIALOGUE.addTopic("GetTask", {
 	response = "Yes, have a look.",
 	options = {
 		"Return"
-	}
+	},
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {
+			{statement = "Option 1", topicID = "GetTask", dyndata = {option = 1}},
+			{statement = "Option 2", topicID = "GetTask", dyndata = {option = 2}},
+			{statement = "Option 3", topicID = "GetTask", dyndata = {option = 3}},
+			{statement = "Option 4", topicID = "GetTask", dyndata = {option = 4}}
+		}
+		
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		client:Notify("Selected option number: "..(dyndata.option or "INVALID OPTION"))
+
+		return "Return"
+	end,
 })
 
 DIALOGUE.addTopic("GOODBYE", {

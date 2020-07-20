@@ -7,6 +7,7 @@ if (SERVER) then
 	util.AddNetworkString("ixDialogueFreeze")
 	util.AddNetworkString("ixPreCallback")
 	util.AddNetworkString("ixPostCallback")
+	util.AddNetworkString("ixDialogueResolveDynamic")
 
 	net.Receive("ixDialogueFreeze", function(len, client)
 		freeze = net.ReadBool()
@@ -32,6 +33,16 @@ if (SERVER) then
 		topic = ix.dialogue.list[treeID].tree[topicID]
 
 		topic.postCallback(topic, client, target)
+	end)
+
+	net.Receive("ixDialogueResolveDynamic", function(len, client)
+		local treeID 	= net.ReadString()
+		local topicID = net.ReadString()
+		local target 	= net.ReadEntity()
+		local dyndata = net.ReadTable()
+		local topic = ix.dialogue.list[treeID].tree[topicID]
+
+		topic.ResolveDynamicOption(topic, client, target, dyndata)
 	end)
 end
 
