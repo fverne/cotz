@@ -171,6 +171,10 @@ DIALOGUE.addTopic("GetTask", {
 			{statement = "Option 4", topicID = "GetTask", dyndata = {option = 4}}
 		}
 		
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
 		return dynopts
 	end,
 	ResolveDynamicOption = function(self, client, target, dyndata)

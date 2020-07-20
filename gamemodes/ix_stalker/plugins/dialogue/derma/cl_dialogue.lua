@@ -230,7 +230,7 @@ function PANEL:prepareDynamicOptions(dynopts, normalopts)
 			self:startTopic(nexttopic)
 		end
 
-		nButs = k
+		nButs = k + 1
 	end
 
 	for _, topicID in ipairs(normalopts) do
