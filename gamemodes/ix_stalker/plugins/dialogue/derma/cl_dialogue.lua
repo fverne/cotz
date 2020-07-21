@@ -262,8 +262,10 @@ end
 
 function PANEL:ResolveDynamicOption(topicID, client, target, dyndata)
 	local topic = self.tree[topicID]
+	local ret = "GOODBYE"
+	
 	if isfunction(topic.ResolveDynamicOption) then
-		local ret = topic.ResolveDynamicOption(topicID, LocalPlayer(), self.target, dyndata)
+		ret = topic.ResolveDynamicOption(topicID, LocalPlayer(), self.target, dyndata)
 		net.Start("ixDialogueResolveDynamic")
 		net.WriteString(self.treeID)
 		net.WriteString(topicID)
