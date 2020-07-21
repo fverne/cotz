@@ -14,6 +14,8 @@ ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 
 -- Inventory drawing
 if (CLIENT) then
+	local Texture2 = Material("cotz/panels/hp1.png", "noclamp smooth") 
+
 	function ITEM:PaintOver(item, w, h)
 		//Equipsquare
 		if (item:GetData("equip")) then
@@ -25,6 +27,34 @@ if (CLIENT) then
 
 		surface.SetMaterial(item.equipIcon)
 		surface.DrawTexturedRect(w-23,h-23,19,19)
+
+		local dura = 0
+
+		if (item:GetData("durability", false)) then
+			dura = item:GetData("durability",0)
+		end
+
+		//durability
+		if dura != 0 then
+			surface.SetMaterial(Texture2)
+			surface.SetDrawColor(Color(120, 120, 120, 255))
+			surface.DrawTexturedRectUV(5, h - 10, 38, 4.6, 0, 0, 0.2, 1)
+
+			surface.SetMaterial(Texture2)
+			if (dura >= 80) then 
+				surface.SetDrawColor(Color(120, 255, 120, 255))
+			elseif (dura >= 60) then 
+				surface.SetDrawColor(Color(180, 255, 120, 255))
+			elseif (dura >= 40) then 
+				surface.SetDrawColor(Color(255, 255, 120, 255))
+			elseif (dura >= 20) then 
+				surface.SetDrawColor(Color(255, 180, 120, 255))
+			elseif (dura > 0) then 
+				surface.SetDrawColor(Color(255, 120, 120, 255))	
+			end
+			surface.DrawTexturedRectUV(5, h - 10, math.Clamp(dura/100, 0, 1)*38, 4.6, 0, 0, math.Clamp(dura/100, 0, 1)*0.2, 1)
+		end
+		
 	end
 
 	function ITEM:PopulateTooltip(tooltip)
@@ -310,12 +340,12 @@ end
 
 function ITEM:OnInstanced(invID, x, y)
 	
-	if !self:GetData("durability") then
-		self:SetData("durability", 100)
-	end
-	if !self:GetData("ammo") then
-		self:SetData("ammo", 0)
-	end
+	--if !self:GetData("durability") then
+	--	self:SetData("durability", 100)
+	--end
+	--if !self:GetData("ammo") then
+	--	self:SetData("ammo", 0)
+	--end
 end
 
 function ITEM:Unequip(client, bPlaySound, bRemoveItem)
