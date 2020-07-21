@@ -24,8 +24,9 @@
 ## Talker NPC
 - [x] Implement system
 - [x] Add templating
-- [ ] Add Tech support
+- [x] Add Tech support
 - [x] Investigate dynamic dialog possibilities
+- [ ] Reimplement tech dialog in new dynamic dialog system
 - [ ] Vendor derma overhaul
 
 ## Addiction
