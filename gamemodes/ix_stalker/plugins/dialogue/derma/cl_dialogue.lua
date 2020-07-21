@@ -167,11 +167,10 @@ function PANEL:dialogue(name, message, instant, color, topicID)
 				end
 
 				if (topic.IsDynamic) then
-					self:prepareOptions(topic.options)
-				else
 					local dynopts = topic.GetDynamicOptions(topic, LocalPlayer(), self.target)
-
-					self:prepareDynamicOptions(dynopts, topic.options)
+					self:prepareDynamicOptions(dynopts, topic.options)	
+				else
+					self:prepareOptions(topic.options)
 				end
 			end
 
