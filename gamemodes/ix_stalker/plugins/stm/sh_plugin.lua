@@ -153,7 +153,7 @@ else
 
 		surface.SetMaterial(Texture2)
 		surface.SetDrawColor(Color(170, 170, 255, 255))
-		surface.DrawTexturedRectUV(ScrW()*0.05, ScrH()*0.92,  math.Clamp(math.Round(predictedStamina / 100, 2), 0, 1) * ScrW()*0.15, ScrH()*0.008, 0, 0,  math.Clamp(math.Round(predictedStamina / 100, 2), 0, 1), 0)
+		surface.DrawTexturedRectUV(ScrW()*0.05, ScrH()*0.92,  math.Clamp(math.Round(predictedStamina / 100, 3), 0, 1) * ScrW()*0.15, ScrH()*0.008, 0, 0,  math.Clamp(math.Round(predictedStamina / 100, 3), 0, 1), 0)
 	end
 
 /*
