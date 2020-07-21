@@ -35,3 +35,14 @@ ix.backgrounds["cripple"] = {
 		print("loaded cripple")
 	end,
 }
+
+ix.backgrounds["alcoholic"] = {
+	name = "Alcoholic",
+	description = "Alcoholic background for testing.",
+	OnCreated = function(client, character) 
+		character:GetInventory():Add("vodka", 5)
+	end,
+	OnLoaded = function(character)
+		print("loaded alcoholic")
+	end,
+}

@@ -43,7 +43,44 @@ ix.char.RegisterVar("backgrounds", {
 	field = "backgrounds",
 	fieldType = ix.type.string,
 	default = {},
-	bNoDisplay = true,
+	bNoDisplay = false,
+	OnValidate = function(self, value, payload)
+		if (!ix.backgrounds[value]) then
+			return false, "invalid", "background"
+		end
+
+		return value
+	end,
+	OnDisplay = function(self, container, payload)
+		local panel = container:Add("DPanel")
+		local combo = panel:Add("DComboBox")
+		combo:Dock(TOP) -- TODO: don't fill so we can allow other panels
+		combo.Paint = function(panel, width, height)
+			derma.SkinFunc("DrawImportantBackground", 0, 0, width, height, Color(255, 255, 255, 25))
+		end
+
+		local label = panel:Add("DLabel")
+		label:Dock(TOP)
+		label:SetText("")
+		label:SizeToContents()
+		label:SetContentAlignment(7)
+		label:SetFont("stalkerregularfont")
+
+		for bkid, bkstruct in SortedPairs(ix.backgrounds) do
+			combo:AddChoice(bkstruct.name, bkid)
+		end
+
+		combo.OnSelect = function( self, index, value )
+			local dat = self:GetOptionData(index)
+
+			if (ix.backgrounds[dat]) then
+				payload:Set("background", dat)
+				label:SetText(ix.backgrounds[dat].description)
+			end
+		end
+
+		return panel
+	end,
 })
 
 local CHAR = ix.meta.character or {}
