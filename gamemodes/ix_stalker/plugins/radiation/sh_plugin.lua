@@ -5,6 +5,13 @@ PLUGIN.desc = "Radiation System"
 
 ix.util.Include("cl_plugin.lua")
 
+ix.char.RegisterVar("radiation", {
+	field = "radiation",
+	fieldType = ix.type.number,
+	default = 0,
+	bNoDisplay = true,
+})
+
 local playerMeta = FindMetaTable("Player")
 local entityMeta = FindMetaTable("Entity")
 
@@ -30,7 +37,6 @@ function playerMeta:setRadiation(amount)
 end
 
 function playerMeta:hasGeiger()
-	local char = self:GetChar()
 	local geigercounter = self:GetNetVar("ixhasgeiger")
 
 	if !geigercounter then
@@ -52,10 +58,6 @@ function playerMeta:getRadResist()
 	local items = char:GetInventory():GetItems(true)
 
 	for j, i in pairs(items) do
---		if (i:getData("gasmask") == true and i:getData("equip") == true) then
---			res = res + 0.3
---			break
---		end
 		if (i.radProt and i:GetData("equip") == true) then
 			res = res + i.radProt
 			break
@@ -101,12 +103,12 @@ else
 	
 	function PLUGIN:CharacterPreSave(character)
 		local savedRads = math.Clamp(character.player:getRadiation(), 0, 100)
-		character:SetData("radiation", savedRads)
+		character:SetRadiation(savedRads)
 	end
 
 	function PLUGIN:PostPlayerLoadout(client)
-		if (client:GetCharacter():GetData("radiation")) then
-			client:SetNetVar("radiation", client:GetCharacter():GetData("radiation"))
+		if (client:GetCharacter():GetRadiation()) then
+			client:SetNetVar("radiation", client:GetCharacter():GetRadiation())
 		else
 			client:SetNetVar("radiation", 0)
 		end

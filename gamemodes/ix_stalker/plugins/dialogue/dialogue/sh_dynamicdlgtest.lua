@@ -180,6 +180,7 @@ DIALOGUE.addTopic("GetTask", {
 	ResolveDynamicOption = function(self, client, target, dyndata)
 		client:Notify("Selected option number: "..(dyndata.option or "INVALID OPTION"))
 
+		-- Return the next topicID
 		return "Return"
 	end,
 })

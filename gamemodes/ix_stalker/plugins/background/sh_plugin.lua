@@ -8,6 +8,7 @@ ix.backgrounds = ix.backgrounds or {}
 
 ix.util.Include("sh_definitions.lua")
 
+-- Will run all the characters background OnCreated functions
 function PLUGIN:OnCharacterCreated(client, character)
 	local backgrounds = character:GetBackgrounds()
 	if (backgrounds != nil) then
@@ -22,6 +23,7 @@ function PLUGIN:OnCharacterCreated(client, character)
 end
 
 if (SERVER) then
+	-- Will run all the characters backgrounds OnLoaded functions
 	function PLUGIN:CharacterLoaded(character)
 		local backgrounds = character:GetBackgrounds()
 
@@ -46,6 +48,7 @@ ix.char.RegisterVar("backgrounds", {
 
 local CHAR = ix.meta.character or {}
 
+-- Helper to add background
 function CHAR:AddBackground(background)
 	local data = self:GetBackgrounds() or {}
 	data[background] = true
@@ -53,6 +56,7 @@ function CHAR:AddBackground(background)
 
 end
 
+-- Helper to remove background
 function CHAR:RemoveBackground(background)
 	local data = self:GetBackgrounds() or {}
 	data[background] = nil

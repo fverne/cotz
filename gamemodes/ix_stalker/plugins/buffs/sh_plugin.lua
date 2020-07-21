@@ -1,15 +1,8 @@
 local PLUGIN = PLUGIN
 PLUGIN.name = "Buffs and Debuffs"
-PLUGIN.author = "Black Tea (NS 1.0), Neon (NS 1.1)"
+PLUGIN.author = "Black Tea (NS 1.0), Neon (NS 1.1), verne (Helix)"
 PLUGIN.desc = "Sometimes, You get sick or high. DrunkyBlur by Spy."
 PLUGIN.buffs = {}
-
-/*
-if !nut.plugin.list["_oldplugins-fix"] then
-	print("[Buffs Plugin] _oldplugins-fix Plugin is not found!")
-	print("Download from GitHub: https://github.com/tltneon/nsplugins\n")
-	return
-end*/
 
 local playerMeta = FindMetaTable("Player")
 

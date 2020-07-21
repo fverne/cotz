@@ -26,6 +26,20 @@ PLUGIN.karmaDefs = {
 	{"Symbol of Order", 100},
 }
 
+ix.char.RegisterVar("reputation", {
+	field = "reputation",
+	fieldType = ix.type.number,
+	default = 0,
+	bNoDisplay = true,
+})
+
+ix.char.RegisterVar("karma", {
+	field = "karma",
+	fieldType = ix.type.number,
+	default = 0,
+	bNoDisplay = true,
+})
+
 local playerMeta = FindMetaTable("Player")
 local entityMeta = FindMetaTable("Entity")
 
@@ -100,26 +114,25 @@ function PLUGIN:PopulateCharacterInfo(client, character, container)
 	repnametext:SizeToContents()
 end
 
--- Register HUD Bars.
 if (SERVER) then
 	local PLUGIN = PLUGIN
 	
 	function PLUGIN:CharacterPreSave(character)
 		local savedKarma = math.Clamp(character.player:getKarma(), -100, 100)
-		character:SetData("karma", savedKarma)
-		character:SetData("reputation", character.player:getReputation())
+		character:SetKarma(savedKarma)
+		character:SetReputation(character.player:getReputation())
 		character:SetData("repOverride", character.player:getRepName())
 	end
 
 	function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
-		if (character:GetData("karma")) then
-			client:SetNetVar("karma", character:GetData("karma"))
+		if (character:GetKarma()) then
+			client:SetNetVar("karma", character:GetKarma())
 		else
 			client:SetNetVar("karma", 0)
 		end
 		
-		if (character:GetData("reputation")) then
-			client:SetNetVar("reputation", character:GetData("reputation"))
+		if (character:GetReputation()) then
+			client:SetNetVar("reputation", character:GetReputation())
 		else
 			client:SetNetVar("reputation", 0)
 		end
@@ -132,14 +145,9 @@ if (SERVER) then
 	end
 
 	function PLUGIN:PlayerDeath(client)
-		--client.resetRads = true
 	end
 
 	function PLUGIN:PlayerSpawn(client)
-		--if (client.resetRads) then
-		--	client:setNetVar("radiation", 0)
-		--	client.resetRads = false
-		--end
 	end
 end
 

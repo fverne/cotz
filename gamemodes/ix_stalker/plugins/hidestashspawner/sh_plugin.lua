@@ -55,7 +55,7 @@ else
 
 	end)
 end
-
+--[[
 ix.command.Add("stashspawntest", {
 	adminOnly = true,
 	arguments = {
@@ -70,8 +70,6 @@ ix.command.Add("stashspawntest", {
 		local loot = table.Random(PLUGIN.StashItems[category])
 		local spawnpoint = table.Random(PLUGIN.stashspawnpoints)
 		ix.plugin.list["hidestash"]:SpawnStash(spawnpoint, { loot[1], loot[2] })
-		--print(spawnpoint[2], "meme2")
-		--PrintTable(spawnpoint)
 
 		for i = 1, #loot[1] do
 			stashcontent = stashcontent..", "..loot[i][1]
@@ -85,7 +83,7 @@ ix.command.Add("stashspawntest", {
 			--ix.chat.Send(client, "iteminternal", "hides something away.", false)
 		end
 	end
-})
+}) ]]--
 
 ix.command.Add("stashspawneradd", {
 	superAdminOnly = true,

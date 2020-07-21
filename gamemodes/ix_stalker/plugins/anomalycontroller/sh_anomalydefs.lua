@@ -1,3 +1,19 @@
+--[[
+
+	Example of anomalydef definition
+
+	PLUGIN.anomalydefs[index] = {
+		name : name of definition
+		entityname : name of entity to spawn
+		interval : how many entities will be spawned at a point - (radius/interval) anomalies will be spawned
+		commonArtifacts : table of item uniqueids that will be spawned the most commonly from the anomaly points
+		rareArtifacts : table of item uniqueids that will be spawned more rarely from the anomaly points
+		veryRareArtifacts : table of item uniqueids that will be spawned very rarely from the anomaly points
+	}
+
+]]--
+
+
 PLUGIN.anomalydefs[1] = {
 	name = "Burner",
 	entityname = "anom_jarka",

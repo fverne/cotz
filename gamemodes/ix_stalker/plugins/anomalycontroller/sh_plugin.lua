@@ -82,7 +82,7 @@ if SERVER then
 		end
 	end
 
-
+	-- Function that cleans up all anomalies (Entities with names starting with "anom_")
 	function PLUGIN:cleanAnomalies()
 		for k, v in pairs( ents.GetAll() ) do
 			if (string.sub(v:GetClass(), 1, 5) == "anom_") then
@@ -91,6 +91,8 @@ if SERVER then
 		end
 	end
 
+	-- Function that will spawn anomalies
+	-- It will populate all spawnpoints with valid anomalies
 	function PLUGIN:spawnAnomalies()
 		if CurTime() > 5 then
 			spawntime = 1
@@ -179,6 +181,7 @@ if SERVER then
 
 else
 
+	-- Simple hook to display points
 	netstream.Hook("ix_DisplaySpawnPoints", function(data)
 	 	for k, v in pairs(data) do
 	 		local emitter = ParticleEmitter( v[1] )
@@ -195,6 +198,11 @@ else
 	end)
 end
 
+-- Adds a point to to the list of anomaly spawnpoints
+-- Example : /anomalyadd 256 111
+-- Will add a point at the users crosshair with a radius of 256
+-- (meaning it will spawn anomalies in a 256 unit radius around the point)
+-- allowing the first three anomaly definitions to spawn there
 ix.command.Add("anomalyadd", {
 	superAdminOnly = true,
 	arguments = {
@@ -216,6 +224,11 @@ ix.command.Add("anomalyadd", {
 	end
 })
 
+-- Removes anomaly spawnpoints in a radius around the users crosshair
+-- Example : /anomalyremove
+-- Will remove anomaly spawnpoints in a 128 range around the users crosshair
+-- Example : /anomalyremove 256
+-- Will remove anomaly spawnpoints in a 256 range around the users crosshair
 ix.command.Add("anomalyremove", {
 	superAdminOnly = true,
 	arguments = {
@@ -241,6 +254,7 @@ ix.command.Add("anomalyremove", {
 	end
 })
 
+-- Will display glow sprites at all the anomaly spawn points on the map
 ix.command.Add("anomalydisplay", {
 	adminOnly = true,
 	OnRun = function(self, client, arguments)
@@ -251,6 +265,9 @@ ix.command.Add("anomalydisplay", {
 	end
 })
 
+-- Debug command for removing anomaly entities in a radius
+-- Example : /anomalyentremove 512
+-- Will remove all entities that have names starting with "anom_" in a 512 radius around the users crosshair
 ix.command.Add("anomalyentremove", {
 	adminOnly = true,
 	arguments = {

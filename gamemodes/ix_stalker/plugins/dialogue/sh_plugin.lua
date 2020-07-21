@@ -1,5 +1,5 @@
 PLUGIN.name = "Dialogue"
-PLUGIN.author = "Pilot"
+PLUGIN.author = "Pilot - expanded by some faggot"
 PLUGIN.desc = "System for communication between all NPCs."
 
 if (SERVER) then

@@ -4,6 +4,18 @@ PLUGIN.name = "Business flags"
 PLUGIN.author = "some faggot"
 PLUGIN.desc = "Implements the business flag library"
 
+-- This plugin is not used in this gamemode, 
+-- however it can be very useful in a roleplay context
+-- It allows string-based business flags, rather than just char based
+-- These flags can also be exclusively be used for business, 
+-- rather than the multi-use flags of Helix
+--
+-- See sh_definitions for an example
+--
+-- Add an attribute "busflag" to your items, 
+-- e.g. ITEM.busflag = "Small_Weapons"
+-- to lock an item to characters that have this business flag
+
 ix.util.Include("sh_definitions.lua")
 
 function PLUGIN:CanPlayerUseBusiness(client, uniqueID)
@@ -72,9 +84,6 @@ ix.command.Add("CharTakeBusflag", {
 		return "Busflag not found!"
 	end
 })
-
-
---Lav derma meme her bro xdD
 
 if (CLIENT) then
 local buttons = {}

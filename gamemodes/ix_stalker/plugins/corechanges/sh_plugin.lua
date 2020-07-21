@@ -31,6 +31,7 @@ end
 
 
 if (SERVER) then
+	-- Stamina drain on jump
 	function PLUGIN:KeyPress(client, key)
 		if (key == IN_JUMP) then
 			if (client:OnGround()) then

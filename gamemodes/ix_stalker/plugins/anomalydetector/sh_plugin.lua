@@ -6,6 +6,8 @@ PLUGIN.desc = "Beeps when anomalies are nearby when you have an anomaly detector
 local playerMeta = FindMetaTable("Player")
 local entityMeta = FindMetaTable("Entity")
 
+-- Function on Player meta object that lets you see if player has an anomaly detector
+-- See item in this plugin for how this is set
 function playerMeta:hasAnomdetector()
 	local char = self:GetChar()
 	local anomdetector = self:GetNetVar("ixhasanomdetector")

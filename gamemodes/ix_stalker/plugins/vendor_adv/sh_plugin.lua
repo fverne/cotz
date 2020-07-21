@@ -8,7 +8,7 @@ PLUGIN.name = "Vendors - Advanced"
 PLUGIN.author = "Chessnut - expanded by some faggot"
 PLUGIN.description = "Adds NPC vendors that can sell things."
 
--- PLEASE NOTE: Requires the "dialogue" plugin present in this folder, or this plugin will not function correctly
+-- PLEASE NOTE: Requires the "dialogue" plugin present in the plugin folder, or this plugin will not function correctly
 
 CAMI.RegisterPrivilege({
 	Name = "Helix - Manage Vendors",

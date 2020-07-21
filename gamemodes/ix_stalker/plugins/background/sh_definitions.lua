@@ -1,9 +1,9 @@
 --[[
 	ix.backgrounds[identifier] = {
-		name = name,
-		description = description,
-		OnCreated = function(client, character) end,
-		OnLoaded  = function(character) end,
+		name : name of background,
+		description = description of background,
+		OnCreated = function(client, character) end, : Function that will run when character is created
+		OnLoaded  = function(character) end, : Function that will run whenever the character is loaded
 
 	}
 
