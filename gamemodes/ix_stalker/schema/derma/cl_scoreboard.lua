@@ -193,6 +193,8 @@ function PANEL:Update()
 	local description = hook.Run("GetCharacterDescription", client) or
 		(client:GetCharacter() and client:GetCharacter():GetDescription()) or ""
 
+	local reputation = client:getReputation()
+
 	local bRecognize = false
 	local localCharacter = LocalPlayer():GetCharacter()
 	local character = IsValid(self.player) and self.player:GetCharacter()
@@ -225,8 +227,13 @@ function PANEL:Update()
 		self.rep:SizeToContents()
 	end
 
-	if (self.description:GetText() != description) then
-		self.description:SetText(description)
+	--if (self.description:GetText() != description) then
+	--	self.description:SetText(description)
+	--	self.description:SizeToContents()
+	--end
+
+	if (self.description:GetText() != "Reputation: "..reputation) then
+		self.description:SetText("Reputation: "..reputation)
 		self.description:SizeToContents()
 	end
 end
