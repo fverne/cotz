@@ -230,7 +230,7 @@ function PANEL:prepareDynamicOptions(dynopts, normalopts)
 			end
 		end
 		self.buttonList[k].DoClick = function()
-			local nexttopic = self:ResolveDynamicOption(topic, LocalPlayer(), self.target, data.dyndata)
+			local nexttopic = self:ResolveDynamicOption(data.topicID, LocalPlayer(), self.target, data.dyndata)
 			self:startTopic(nexttopic)
 		end
 
@@ -262,12 +262,12 @@ function PANEL:prepareDynamicOptions(dynopts, normalopts)
 end
 
 function PANEL:ResolveDynamicOption(topicID, client, target, dyndata)
-	local topic = self.tree[data.topicID]
+	local topic = self.tree[topicID]
 	if isfunction(topic.ResolveDynamicOption) then
-		local ret = topic.ResolveDynamicOption(data.topicID, LocalPlayer(), self.target, dyndata)
+		local ret = topic.ResolveDynamicOption(topicID, LocalPlayer(), self.target, dyndata)
 		net.Start("ixDialogueResolveDynamic")
 		net.WriteString(self.treeID)
-		net.WriteString(data.topicID)
+		net.WriteString(topicID)
 		net.WriteEntity(self.target)
 		net.WriteTable(dyndata)
 		net.SendToServer()
