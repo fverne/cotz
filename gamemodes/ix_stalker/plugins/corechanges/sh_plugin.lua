@@ -15,10 +15,12 @@ function PLUGIN:OnItemTransferred(item, curInv, inventory)
 	end
 end
 
+-- removes plugins we dont need
+ix.plugin.SetUnloaded("stamina", true)
+ix.plugin.SetUnloaded("strength", true)
+ix.plugin.SetUnloaded("doors", true)
+ix.plugin.SetUnloaded("recognition", true)
 
---	ix.plugin.SetUnloaded("stamina", true)
---	ix.plugin.SetUnloaded("strength", true)
---  ix.plugin.SetUnloaded("doors", true)
 
 function PLUGIN:LoadFonts(font, genericFont)
 	surface.CreateFont("ixTypingIndicator", {
