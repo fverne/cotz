@@ -74,7 +74,7 @@ ix.char.RegisterVar("backgrounds", {
 			local dat = self:GetOptionData(index)
 
 			if (ix.backgrounds[dat]) then
-				payload:Set("background", dat)
+				payload:Set("backgrounds", dat)
 				label:SetText(ix.backgrounds[dat].description)
 			end
 		end
