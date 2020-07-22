@@ -24,7 +24,11 @@
 
 ix.backgrounds["cripple"] = {
 	name = "Cripple",
-	description = "Your right leg is busted, and you can't move around as fast. You use painkillers to numb the pain.",
+	description = "Your right leg is busted, and you can't move around as fast. You use painkillers to numb the pain.".. 
+	"\n\nStarting Equipment:"..
+	"\n  3x Painkillers"..
+	"\n  1x Makarov"..
+	"\n  1x 9x18 round",
 	OnCreated = function(client, character) 
 		character:GetInventory():Add("painkillers", 3)
 	end,
