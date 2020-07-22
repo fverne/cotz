@@ -1485,7 +1485,7 @@ function SWEP:PrimaryAttack()
 		return
 	end
 
-	if self:GetWeaponDurability() =< 0 then
+	if self:GetWeaponDurability() <= 0 then
 		if self.ixItem then
 			self.ixItem:Unload()
 		end
