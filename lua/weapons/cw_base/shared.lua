@@ -1523,9 +1523,9 @@ function SWEP:PrimaryAttack()
 		self:FireBullet(self.Damage, self.CurCone, self.ClumpSpread, self.Shots)
 		self:makeFireEffects()
 
-		self:SetWeaponWear(self:GetWeaponWear() - self.WearDamage)  -- WEAR REDUCTION
+		self:SetWeaponWear(math.Clamp(self:GetWeaponWear() - self.WearDamage,0,100))  -- WEAR REDUCTION
 
-		if(math.random() < self.DurabilityDamageChance) then
+		if(math.random() < self.DurabilityDamageChance || self:GetWeaponWear() == 0) then
 			self:SetWeaponDurability(self:GetWeaponDurability() - 1)
 		end
 		if CLIENT then
