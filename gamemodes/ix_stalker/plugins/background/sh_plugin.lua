@@ -45,9 +45,9 @@ ix.char.RegisterVar("backgrounds", {
 	default = {},
 	bNoDisplay = false,
 	OnValidate = function(self, value, payload)
-		if (!ix.backgrounds[value]) then
-			return false, "invalid", "background"
-		end
+		--if (!ix.backgrounds[value]) then
+		--	return false, "invalid", "background"
+		--end
 
 		return value
 	end,
@@ -74,7 +74,7 @@ ix.char.RegisterVar("backgrounds", {
 			local dat = self:GetOptionData(index)
 
 			if (ix.backgrounds[dat]) then
-				payload:Set("backgrounds", dat)
+				payload:Set("backgrounds", {[dat] = true})
 				label:SetText(ix.backgrounds[dat].description)
 			end
 		end
