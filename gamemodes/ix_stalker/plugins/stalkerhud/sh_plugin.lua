@@ -34,11 +34,11 @@ if ix.bar then
 end
 
 ix.option.Add("cursor", ix.type.bool, true, {
-	category = "appearance",
+	category = "_stalkersettings",
 })
 
 ix.option.Add("gasmaskoverlay", ix.type.bool, true, {
-	category = "appearance",
+	category = "_stalkersettings",
 })
 
 ix.command.Add("invtest", {

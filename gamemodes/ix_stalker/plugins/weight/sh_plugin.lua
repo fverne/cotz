@@ -47,7 +47,7 @@ end
 
 if (CLIENT) then
 	ix.option.Add("imperial", ix.type.bool, false, {
-		category = "Weight"
+		category = "_stalkersettings"
 	})
 
 	function PLUGIN:PopulateItemTooltip(tooltip, item)

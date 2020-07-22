@@ -105,6 +105,7 @@ LANGUAGE = {
 	config = "Config",
 	chat = "Chat",
 	appearance = "Appearance",
+	_stalkersettings = "STALKER Settings",
 	misc = "Miscellaneous",
 	oocDelay = "You must wait %s more seconds before using OOC again!",
 	loocDelay = "You must wait %s more seconds before using LOOC again!",
@@ -333,7 +334,8 @@ LANGUAGE = {
 
 	resetDefault = "Reset to default",
 	resetDefaultDescription = "This will reset \"%s\" to its default value of \"%s\".",
-	optGasmaskoverlay = "Dynamic Gasmask Overlays",
+	optImperial = "Imperial units for weight",
+	optGasmaskoverlay = "Dynamic gasmask overlays",
 	optCursor = "STALKER Cursor",
 	optOpenBags = "Open bags with inventory",
 	optdOpenBags = "Automatically views all the bags in your inventory when the menu is opened.",
