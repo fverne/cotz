@@ -242,10 +242,10 @@ function PANEL:Init()
 
 	local charmaximum = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 5)
 	-- create character button
-	local createButton = self.mainButtonList:Add("ixMenuButton")
-	createButton:SetText("enter the zone")
-	createButton:SizeToContents()
-	createButton.DoClick = function()
+	self.createButton = self.mainButtonList:Add("ixMenuButton")
+	self.createButton:SetText("enter the zone")
+	self.createButton:SizeToContents()
+	self.createButton.DoClick = function()
 		local charmaximum = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 5)
 		-- don't allow creation if we've hit the character limit
 		if (#ix.characters >= charmaximum) then
@@ -259,8 +259,8 @@ function PANEL:Init()
 	end
 
 	if (#ix.characters >= charmaximum) then
-		createButton:SetDisabled(true)
-		createButton:Remove()
+		--self.createButton:SetDisabled(true)
+		self.createButton:Hide()
 	end
 
 	-- load character button
@@ -273,8 +273,8 @@ function PANEL:Init()
 	end
 
 	if (!bHasCharacter) then
-		self.loadButton:SetDisabled(true)
-		self.loadButton:Remove()
+		--self.loadButton:SetDisabled(true)
+		self.loadButton:Hide()
 	end
 
 	-- community button
@@ -439,7 +439,8 @@ end
 
 function PANEL:OnCharacterDeleted(character)
 	if (#ix.characters == 0) then
-		self.mainPanel.loadButton:SetDisabled(true)
+		self.mainPanel.createButton:Show()
+		self.mainPanel.loadButton:Hide()
 		self.mainPanel:Undim() -- undim since the load panel will slide down
 	else
 		self.mainPanel.loadButton:SetDisabled(false)
