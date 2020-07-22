@@ -21,19 +21,18 @@ ix.plugin.SetUnloaded("strength", true)
 ix.plugin.SetUnloaded("doors", true)
 ix.plugin.SetUnloaded("recognition", true)
 
+--remove description box from char creation
+ix.char.vars["description"].bNoDisplay = true
+ix.char.vars["description"].OnValidate = function() return true	end
 
 function PLUGIN:LoadFonts(font, genericFont)
 	surface.CreateFont("ixTypingIndicator", {
-		font = "alsina",
+		font = font,
 		size = 128,
 		extended = true,
 		weight = 1000
 	})
 end
-
---remove description box from char creation
-ix.char.vars["description"].bNoDisplay = true
-ix.char.vars["description"].OnValidate = function() return true	end
 
 if (SERVER) then
 	-- Stamina drain on jump
