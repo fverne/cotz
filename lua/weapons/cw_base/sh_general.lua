@@ -523,8 +523,11 @@ function SWEP:getFinalSpread(vel, maxMultiplier)
 		final = final + vel / 1000
 	end
 
-	final = final * (1 + self.WearEffect - (self.WearEffect * (self:GetWeaponWear()/100)))
-	final = final * (1 + self.WearEffect - (self.WearEffect * (self:GetWeaponDurability()/100)))
+
+	if( self:GetWeaponWear() < 80) then
+		local wearmult = ix.util.mapValueToRange(self:GetWeaponWear()/100,0,0.8,0,1)
+		final = final * (1 + self.WearEffect - (self.WearEffect * (wearmult)))
+	end
 	
 	-- as well as the spread caused by rapid mouse movement
 	final = final + self.Owner.ViewAff
