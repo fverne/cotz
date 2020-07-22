@@ -406,7 +406,7 @@ function PANEL:Populate()
 			elseif (isstring(v.default)) then
 				panel = container:Add("ixTextEntry")
 				panel:Dock(TOP)
-				panel:SetFont("ixMenuButtonHugeFont")
+				panel:SetFont("stalkertitlefont")
 				panel:SetUpdateOnType(true)
 				panel.OnValueChange = function(this, text)
 					self.payload:Set(k, text)
@@ -416,7 +416,7 @@ function PANEL:Populate()
 			if (IsValid(panel)) then
 				-- add label for entry
 				local label = container:Add("DLabel")
-				label:SetFont("ixMenuButtonLabelFont")
+				label:SetFont("stalkertitlefont")
 				label:SetText(L(k):utf8upper())
 				label:SizeToContents()
 				label:DockMargin(0, 16, 0, 2)

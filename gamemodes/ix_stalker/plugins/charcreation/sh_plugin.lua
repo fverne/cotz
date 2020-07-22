@@ -45,17 +45,6 @@ do
 			value = tostring(value):gsub("\r\n", ""):gsub("\n", "")
 			value = string.Trim(value)
 
-			local minLength = ix.config.Get("minNameLength", 4)
-			local maxLength = ix.config.Get("maxNameLength", 32)
-
-			if (value:utf8len() < minLength) then
-				return false, "nameMinLen", minLength
-			elseif (!value:find("%S")) then
-				return false, "invalid", "name"
-			elseif (value:gsub("%s", ""):utf8len() > maxLength) then
-				return false, "nameMaxLen", maxLength
-			end
-
 			return hook.Run("GetDefaultCharacterName", client, payload.faction) or value:utf8sub(1, 70)
 		end,
 		OnPostSetup = function(self, panel, payload)
@@ -72,7 +61,7 @@ do
 				panel:SetEditable(false)
 			end
 
-			panel:SetBackgroundColor(faction.color or Color(255, 255, 255, 25))
+			--panel:SetBackgroundColor(faction.color or Color(255, 255, 255, 25))
 		end
 	})
 end
