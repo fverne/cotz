@@ -1484,11 +1484,26 @@ function SWEP:PrimaryAttack()
 		self:SetNextPrimaryFire(CT + 0.25)
 		return
 	end
-	
-	-- TODO: ADD JAMMING, ETC CODE HERE
-	if self:GetWeaponWear() < 0 then
+
+	if self:GetWeaponDurability() =< 0 then
+		if self.ixItem then
+			self.ixItem:Unload()
+		end
 		self:unloadWeapon()
+		hook.Run("AmmoCheck", self.Owner, self)
 		return
+	end
+
+	if self:GetWeaponWear() < 60 then
+		local jamchance = 6 - math.floor(self:GetWeaponWear() / 10)
+
+		if (math.random(0,100) < (jamchance * (self.JamChance or 2))) then
+			if self.ixItem then
+				self.ixItem:Unload()
+			end
+			self:unloadWeapon()
+			hook.Run("AmmoCheck", self.Owner, self)
+		end
 	end
 	
 	if self.BurstAmount and self.BurstAmount > 0 then
