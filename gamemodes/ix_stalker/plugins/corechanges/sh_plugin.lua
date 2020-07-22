@@ -49,8 +49,14 @@ end
 
 if (CLIENT) then
 	function PLUGIN:CharacterLoaded()
+		-- puts on minimal tooltips by default
 		ix.option.Set("minimalTooltips", true, true)
+
+		--hides various settings from the client that dont do anything
 		ix.option.stored["minimalTooltips"].hidden = function() return true end
+		ix.option.stored["alwaysShowBars"].hidden = function() return true end
+		ix.option.stored["24hourTime"].hidden = function() return true end
+		ix.option.stored["openBags"].hidden = function() return true end
 	end
 	
 	hook.Add("PopulateHelpMenu", "ixHelpRemove", function(tabs)
@@ -68,6 +74,7 @@ function PLUGIN:InitializedPlugins()
 	ix.command.list["looc"] = nil
 end
 
+--needs to be done for both chat class and command
 function PLUGIN:InitializedChatClasses()
 	ix.chat.classes["looc"] = nil
 end
