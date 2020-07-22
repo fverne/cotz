@@ -19,7 +19,7 @@ function PANEL:Init()
 	self.vendorName:SetText("John Doe")
 	self.vendorName:SetTextInset(4, 0)
 	self.vendorName:SetTextColor(color_white)
-	self.vendorName:SetFont("ixMediumFont")
+	self.vendorName:SetFont("stalkerregularfont")
 
 	self.ourName = header:Add("DLabel")
 	self.ourName:Dock(RIGHT)
@@ -27,7 +27,7 @@ function PANEL:Init()
 	self.ourName:SetText(L"you".." ("..ix.currency.Get(LocalPlayer():GetCharacter():GetMoney())..")")
 	self.ourName:SetTextInset(0, 0)
 	self.ourName:SetTextColor(color_white)
-	self.ourName:SetFont("ixMediumFont")
+	self.ourName:SetFont("stalkerregularfont")
 
 	local footer = self:Add("DPanel")
 	footer:SetTall(34)
@@ -35,7 +35,7 @@ function PANEL:Init()
 	footer:SetPaintBackground(false)
 
 	self.vendorSell = footer:Add("DButton")
-	self.vendorSell:SetFont("ixMediumFont")
+	self.vendorSell:SetFont("stalkerregularfont")
 	self.vendorSell:SetWide(self.vendorName:GetWide())
 	self.vendorSell:Dock(LEFT)
 	self.vendorSell:SetContentAlignment(5)
@@ -53,7 +53,7 @@ function PANEL:Init()
 	end
 
 	self.vendorBuy = footer:Add("DButton")
-	self.vendorBuy:SetFont("ixMediumFont")
+	self.vendorBuy:SetFont("stalkerregularfont")
 	self.vendorBuy:SetWide(self.ourName:GetWide())
 	self.vendorBuy:Dock(RIGHT)
 	self.vendorBuy:SetContentAlignment(5)
@@ -113,8 +113,8 @@ function PANEL:addItem(uniqueID, listID)
 	and LocalPlayer():GetCharacter():GetInventory():HasItem(uniqueID)) then
 		if (data and data[VENDOR_MODE] and data[VENDOR_MODE] != VENDOR_SELLONLY) then
 			local item = self.buyingItems:Add("ixVendorAdvItem")
-			item:Setup(uniqueID)
 			item.isLocal = true
+			item:Setup(uniqueID)
 
 			self.buyingList[uniqueID] = item
 			self.buyingItems:InvalidateLayout()
@@ -202,10 +202,28 @@ function PANEL:Init()
 
 	self.name = self:Add("DLabel")
 	self.name:Dock(FILL)
-	self.name:DockMargin(82, 0, 0, 0)
-	self.name:SetFont("ixChatFont")
+	self.name:DockMargin(48, 0, 0, 0)
+	self.name:SetFont("stalkerregularfont")
 	self.name:SetTextColor(color_white)
 	self.name:SetExpensiveShadow(1, Color(0, 0, 0, 200))
+
+	self.infocontainer = self.name:Add("DPanel")
+	self.infocontainer:Dock(RIGHT)
+	self.infocontainer:DockPadding(0, 0, 5, 0)
+	self.infocontainer:DockMargin(0, 0, 6, 0)
+	self.infocontainer:SetWide(self:GetWide() * 1.5)
+	self.infocontainer.Paint = function() end
+
+	self.stock = self.infocontainer:Add("DLabel")
+	self.stock:Dock(TOP)
+	self.stock:SetContentAlignment(6)
+	self.stock:SetFont("stalkerregularsmallfont")
+	self.stock:SetText("Stock: Unlimited")
+
+	self.price = self.infocontainer:Add("DLabel")
+	self.price:SetContentAlignment(6)
+	self.price:Dock(FILL)
+	self.price:SetFont("stalkerregularsmallfont")
 
 	self.click = self:Add("DButton")
 	self.click:Dock(FILL)
@@ -289,6 +307,19 @@ function PANEL:Setup(uniqueID)
 
 		self.name:SetText(item:GetName())
 		self.itemName = item:GetName()
+
+		local entity = ix.gui.vendor.entity
+		if (entity and entity.items[self.item] and entity.items[self.item][VENDOR_MAXSTOCK]) then
+			local info = entity.items[self.item]
+			
+			self.stock:SetText(string.format("Stock: %d/%d", info[VENDOR_STOCK], info[VENDOR_MAXSTOCK]))
+		end
+
+		self.price:SetText(ix.currency.Get(entity:GetPrice(self.item, self.isLocal)))
+		
+		self.stock:SizeToContents()
+		self.price:SizeToContents()
+		self.infocontainer:SizeToContents()
 
 		self.click:SetHelixTooltip(function(tooltip)
 			ix.hud.PopulateItemTooltip(tooltip, item)
