@@ -29,6 +29,9 @@ function PLUGIN:LoadFonts(font, genericFont)
 	})
 end
 
+--remove description box from char creation
+ix.char.vars["description"].bNoDisplay = true
+ix.char.vars["description"].OnValidate = function() return true	end
 
 if (SERVER) then
 	-- Stamina drain on jump
