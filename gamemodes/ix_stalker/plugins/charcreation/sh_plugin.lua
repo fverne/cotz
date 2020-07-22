@@ -39,7 +39,7 @@ do
 	ix.char.RegisterVar("name", {
 		field = "name",
 		fieldType = ix.type.string,
-		default = "lutz",
+		default = "",
 		index = 1,
 		OnValidate = function(self, value, payload, client)
 			value = tostring(value):gsub("\r\n", ""):gsub("\n", "")
@@ -60,8 +60,6 @@ do
 				panel:SetDisabled(true)
 				panel:SetEditable(false)
 			end
-
-			--panel:SetBackgroundColor(faction.color or Color(255, 255, 255, 25))
 		end
 	})
 end
