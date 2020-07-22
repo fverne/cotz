@@ -238,7 +238,7 @@ function PANEL:Init()
 	-- button list
 	self.mainButtonList = self:Add("ixCharMenuButtonList")
 	self.mainButtonList:Dock(LEFT)
-	self.mainButtonList:SetWide(self:GetWide() * 0.15)
+	self.mainButtonList:SetWide(ScrW() * 0.12)
 
 	local charmaximum = hook.Run("GetMaxPlayerCharacter", LocalPlayer()) or ix.config.Get("maxCharacters", 5)
 	-- create character button
