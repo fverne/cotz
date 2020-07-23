@@ -161,7 +161,7 @@ function ix.menu.DrawAll()
 			end
 
 			-- Draw the button's text.
-			ix.util.DrawText(k2, startX + 4, y + 4, ColorAlpha(color_white, v.alpha), nil, nil, "stalkerregulartitlefont")
+			ix.util.DrawText(k2, startX + 4, y + 1, ColorAlpha(color_white, v.alpha), nil, nil, "stalkerregularfont2")
 
 			-- Make sure we draw the next button in line.
 			i = i + 1
