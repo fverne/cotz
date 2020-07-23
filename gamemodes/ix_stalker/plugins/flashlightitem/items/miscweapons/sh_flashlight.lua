@@ -1,6 +1,6 @@
 ITEM.name = "Handheld Flashlight"
 ITEM.description = "A sturdy flashlight used to light your way in the dark."
-ITEM.model = "models/raviool/flashlight.mdl"
+ITEM.model = "models/weapons/w_flashlight_zm.mdl"
 ITEM.class = "weapon_flashlight"
 ITEM.weaponCategory = "flashlight"
 ITEM.price = 225
@@ -23,7 +23,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(-21.944, 90.808, -173.845),
 						["Position"] = Vector(-1.907, -11.458, -11.853),
-						["Model"] = "models/raviool/flashlight.mdl",
+						["Model"] = "models/weapons/w_flashlight_zm.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "7979294673",
