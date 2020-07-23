@@ -172,11 +172,10 @@ ix.command.Add("cleanitems", {
 	adminOnly = true,
 	OnRun = function(self, client, arguments)
 
-	for k, v in pairs(ents.FindByClass("ix_item")) do
-		
-		v:Remove()
-		
-	end;
+		for k, v in pairs(ents.FindByClass("ix_item")) do
+			v:Remove()
+		end
+
 		client:Notify("All items have been cleaned up from the map.")
 	end
 })
@@ -279,6 +278,33 @@ ix.command.Add("clearinv", {
 		end
 	end
 })
+
+ix.command.Add("chartogglehidden", {
+	description = "Hides the given character from being displayed on the scoreboard.",
+	adminOnly = true,
+	arguments = {
+		ix.type.character
+	},	
+	OnRun = function (self, client, character)
+		local target = character
+		
+		if (target) then
+			if target:GetData("scoreboardhidden", false) then
+				target:SetData("scoreboardhidden", false)
+				client:Notify(target:GetName().." is now displayed on the scoreboard.")
+			else
+				target:SetData("scoreboardhidden", true)
+				client:Notify(target:GetName().." has been hidden on the scoreboard.")
+			end
+		end
+	end
+})
+
+function PLUGIN:ShouldShowPlayerOnScoreboard(client)
+	if client:GetCharacter():GetData("scoreboardhidden", false) then
+		return false
+	end
+end
 
 /*
 hook.Add("PopulateScoreboardPlayerMenu", "ixAdmin", function(client, menu)

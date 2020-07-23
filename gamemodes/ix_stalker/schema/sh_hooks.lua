@@ -25,12 +25,6 @@ function Schema:OnItemSpawned(entity)
 	entity.OnTakeDamage = nil
 end
 
-function Schema:ShouldShowPlayerOnScoreboard(client)
-	if client:GetCharacter():GetFaction() == FACTION_ADMINS then
-		return false
-	end
-end
-
 if SERVER then
 	local playerMeta = FindMetaTable("Player")
 
