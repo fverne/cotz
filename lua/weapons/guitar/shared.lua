@@ -36,7 +36,7 @@ function SWEP:Initialize()
 end
 
 function SWEP:Holster()
-	self.Weapon:EmitSound(Sound("ambient/machines/squeak_2.wav"))
+	--self.Weapon:EmitSound(Sound("ambient/machines/squeak_2.wav"))
 	if CLIENT and IsValid(self.Owner) then
 		local vm = self.Owner:GetViewModel()
 		if IsValid(vm) then
@@ -585,10 +585,10 @@ end
 
 local reloadmemelyd = 0
 function SWEP:Reload()
-	if reloadmemelyd < CurTime() then
-		self.Weapon:EmitSound(Sound("ambient/machines/squeak_2.wav"))
-		reloadmemelyd = CurTime() + 5
-	end
+	-- if reloadmemelyd < CurTime() then
+	-- 	self.Weapon:EmitSound(Sound("ambient/machines/squeak_2.wav"))
+	-- 	reloadmemelyd = CurTime() + 5
+	-- end
 end
 
 function SWEP:Deploy()
