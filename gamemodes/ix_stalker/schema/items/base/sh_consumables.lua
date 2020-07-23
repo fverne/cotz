@@ -143,6 +143,8 @@ function ITEM:DecideFunction()
 							return false
 						end
 					end
+				else
+					return false
 				end
 			end,
 			OnRun = function(item)
@@ -194,6 +196,8 @@ function ITEM:DecideFunction()
 							return false
 						end
 					end
+				else
+					return false
 				end
 			end,
 			OnRun = function(item)
@@ -244,6 +248,8 @@ function ITEM:DecideFunction()
 							return false
 						end
 					end
+				else
+					return false
 				end
 			end,
 			OnRun = function(item)
