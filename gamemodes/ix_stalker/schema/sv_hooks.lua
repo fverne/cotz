@@ -118,6 +118,9 @@ function Schema:PlayerSpawnEffect(client, weapon, info)
 end
 
 function Schema:PostPlayerLoadout(client)
+	if client:IsAdmin() then
+		return false
+	end
 	client:SetCanZoom(false)
 end
 
