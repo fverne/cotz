@@ -218,7 +218,7 @@ function PANEL:Init()
 	self.stock:Dock(TOP)
 	self.stock:SetContentAlignment(6)
 	self.stock:SetFont("stalkerregularsmallfont")
-	self.stock:SetText("Stock: Unlimited")
+	self.stock:SetText("")
 
 	self.price = self.infocontainer:Add("DLabel")
 	self.price:SetContentAlignment(6)
@@ -309,10 +309,14 @@ function PANEL:Setup(uniqueID)
 		self.itemName = item:GetName()
 
 		local entity = ix.gui.vendor.entity
-		if (entity and entity.items[self.item] and entity.items[self.item][VENDOR_MAXSTOCK]) then
-			local info = entity.items[self.item]
+		if !self.isLocal then
+			self.stock:SetText("Stock: Unlimited")
+			if (entity and entity.items[self.item] and entity.items[self.item][VENDOR_MAXSTOCK]) then
+				local info = entity.items[self.item]
 			
-			self.stock:SetText(string.format("Stock: %d/%d", info[VENDOR_STOCK], info[VENDOR_MAXSTOCK]))
+			
+				self.stock:SetText(string.format("Stock: %d/%d", info[VENDOR_STOCK], info[VENDOR_MAXSTOCK]))
+			end
 		end
 
 		self.price:SetText(ix.currency.Get(entity:GetPrice(self.item, self.isLocal)))
