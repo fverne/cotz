@@ -108,7 +108,7 @@ if SERVER then
 
 			local entity = table.Random(selectedAnoms)
 			for i = 1, math.ceil(v[2]/entity.interval) do
-				local position = GetSpawnLocation( v[1], v[2] )
+				local position = self:GetSpawnLocation( v[1], v[2] )
 				local data = {}
 				data.start = position
 				data.endpos = position
@@ -289,5 +289,25 @@ ix.command.Add("anomalyentremove", {
 		else
 			client:Notify( "No anomalies found at location.")
 		end
+	end
+})
+
+ix.command.Add("cleananomalies", {
+	adminOnly = true,
+	OnRun = function(self, client, arguments)
+
+		ix.plugin.list["anomalycontroller"]:cleanAnomalies()
+
+		client:Notify("All anomalies have been cleaned up from the map.")
+	end
+})
+
+ix.command.Add("spawnanomalies", {
+	adminOnly = true,
+	OnRun = function(self, client, arguments)
+
+		ix.plugin.list["anomalycontroller"]:spawnAnomalies()
+
+		client:Notify("Spawned anomalies on points (if any).")
 	end
 })
