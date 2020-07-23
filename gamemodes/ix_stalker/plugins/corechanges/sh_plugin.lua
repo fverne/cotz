@@ -34,6 +34,10 @@ function PLUGIN:LoadFonts(font, genericFont)
 	})
 end
 
+ix.config.Add("charloadremove", true, "If enabled, instantly loads first character.", nil, {
+	category = "1development"
+})
+
 if (SERVER) then
 	-- Stamina drain on jump
 	function PLUGIN:KeyPress(client, key)

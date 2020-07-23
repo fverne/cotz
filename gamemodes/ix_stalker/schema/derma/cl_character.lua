@@ -264,15 +264,26 @@ function PANEL:Init()
 	end
 
 	-- load character button
+	local firstchar = ix.characters[1]
+	local loadedfirstchar = ix.char.loaded[firstchar]
 	self.loadButton = self.mainButtonList:Add("ixMenuButton")
 	self.loadButton:SetText("re-enter the zone")
 	self.loadButton:SizeToContents()
 	self.loadButton.DoClick = function()
+		print(loadedfirstchar)
+		if (ix.config.Get("charloadremove", true) and bHasCharacter and LocalPlayer().GetCharacter) then
+			net.Start("ixCharacterChoose")
+				-- net.WriteUInt(self.character:GetID(), 32)
+				net.WriteUInt(firstchar, 32)
+			net.SendToServer()
+			return
+		end
+
 		self:Dim()
 		parent.loadCharacterPanel:SlideUp()
 	end
 
-	if (!bHasCharacter) then
+	if (!bHasCharacter or (ix.config.Get("charloadremove", true) and bHasCharacter and LocalPlayer().GetCharacter)) then
 		--self.loadButton:SetDisabled(true)
 		self.loadButton:Hide()
 	end
