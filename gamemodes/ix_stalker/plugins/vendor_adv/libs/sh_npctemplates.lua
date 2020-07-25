@@ -10,8 +10,8 @@ local BUYONLY 	= 3
 
 ix.npctemplates.templates["Sidorovich"] = {
 	name 		= "Sidorovich",
-	description = "A squat, fat man. He looks displeased.",
-	model 		= "models/kleiner.mdl",
+	description = "A bearded, lonely man. He looks displeased..",
+	model 		= "models/legends/lesnik.mdl",
 	skin 		= 0,
 	bubble 		= 0,
 	scale 		= 1.0,
@@ -29,26 +29,10 @@ ix.npctemplates.templates["Sidorovich"] = {
 
 
 ix.npctemplates.soundtemplates["GenericPain"] = {
-	"stalkersound/pain1.wav",
-	"stalkersound/pain2.wav",
-	"stalkersound/pain3.wav",
-	"stalkersound/pain4.wav",
-	"stalkersound/pain5.wav",
-	"stalkersound/pain6.wav",
-	"stalkersound/pain7.wav",
-	"stalkersound/pain8.wav",
-	"stalkersound/pain9.wav",
-	"stalkersound/pain10.wav",
-	"stalkersound/pain11.wav",
-	"stalkersound/pain12.wav",
+	"npc/barman/barman_hello1.ogg",
+	"npc/barman/barman_hello2.ogg",
 }
 
 ix.npctemplates.animtemplates["TestAnimations"] = {
-	"sprint_all",
-	"ss_alyx_move",
-	"typinggesture",
-	"seafloor_poses",
-	"wave",
-	"wave_close",
-	"welder_loop",
+	"Trader Idle",
 }

@@ -36,7 +36,6 @@ ix.backgrounds["cripple"] = {
 		--local client = character:GetPlayer()  
 		--client:SetRunSpeed(400) -- These things dont actually work, they're overridden by the stamina plugin almost instantly
 		--client:SetWalkSpeed(200)
-		print("loaded cripple")
 	end,
 }
 
@@ -47,6 +46,5 @@ ix.backgrounds["alcoholic"] = {
 		character:GetInventory():Add("vodka", 5)
 	end,
 	OnLoaded = function(character)
-		print("loaded alcoholic")
 	end,
 }
