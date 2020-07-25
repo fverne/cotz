@@ -97,9 +97,9 @@ else
 	--]]
 
   ix.temp = ix.temp or {}
-	ix.temp.Corpses = ix.temp.Corpses or {}
+  ix.temp.Corpses = ix.temp.Corpses or {}
 
-	function PLUGIN:DoPlayerDeath( client, attacker, dmg )
+  function PLUGIN:DoPlayerDeath( client, attacker, dmg )
 		if not client:GetChar() then 
 			return 
 		end
@@ -144,36 +144,6 @@ else
 				client:GetRagdollEntity():Remove()
 			end
 		end)
-
-
 	end
-
-	hook.Add( "KeyPress", "keypress_use_revive", function( ply, key )
-		if ( key == IN_USE ) then
-			local traceRes = ply:GetEyeTrace()
-			if ( IsValid( traceRes.Entity ) and traceRes.Entity:GetClass( ) == "prop_ragdoll" ) then
-				local traceEnt = traceRes.Entity
-				if ( traceEnt.isDeadBody ) then
-					if not ( IsValid( traceEnt.player ) ) then
-						ply:notify( "You cannot revive a disconnected player's body." )
-						return
-					end
-					ply:SetAction("Reviving...", ix.config.Get("reviveRessurrectionTime", 10))
-					ply:DoStaredAction(traceEnt, function()
-						traceEnt.player:UnSpectate()
-						traceEnt.player:SetNetVar("resurrected", true)
-						traceEnt.player:SetNetVar("deathsdoortime", CurTime()+180)
-						traceEnt.player:Spawn()
-						traceEnt.player:SetHealth( 1 ) 
-						traceEnt.player:SetPos(traceEnt:GetPos())
-						ply:notify( "You revived "..traceEnt.player:GetName() )
-						traceEnt.player:notify( "You were revived by "..ply:GetName() )
-					end, ix.config.Get("reviveRessurrectionTime", 10), function() ply:SetAction() end, 128)
-
-				end
-			end
-		end
-
-	end )
 end
 
