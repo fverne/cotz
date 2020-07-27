@@ -341,6 +341,7 @@ else
 
 		if (((self.nextNoise or 0) < CurTime()) and self:PlayerNearby()) then
 			self:MakeNoise()
+			self:SetAnim()
 			self.nextNoise = CurTime() + math.random(15,45)
 		end
 
