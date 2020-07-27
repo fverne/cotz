@@ -294,6 +294,10 @@ if (SERVER) then
 			self:RestockThink()
 			self.restockCheckTimer = CurTime() + self.RestockThinkInterval
 		end
+
+		self:NextThink(CurTime())
+
+		return true
 	end
 
 else
