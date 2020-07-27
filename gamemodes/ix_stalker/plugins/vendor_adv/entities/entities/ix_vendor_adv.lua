@@ -156,8 +156,12 @@ end
 function ENT:SetAnim()
 	if( math.random(1,100) < 50) and self.animgroup ~= nil and not self.ShouldResetSequence then
 		local tab = ix.npctemplates.animtemplates[self.animgroup]
+		PrintTable(tab)
 		local sel = math.random(1, #tab)
+		print(sel)
 		local seq, dur = self:LookupSequence(tab[sel])
+		print(seq)
+		print(dur)
 		timer.Simple( dur, function() self.ShouldResetSequence = true end)
 
 		return self:ResetSequence(seq)

@@ -34,5 +34,5 @@ ix.npctemplates.soundtemplates["GenericPain"] = {
 }
 
 ix.npctemplates.animtemplates["TestAnimations"] = {
-	"Trader Idle",
+	"bandit2_idle1",
 }
