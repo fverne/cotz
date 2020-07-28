@@ -156,12 +156,12 @@ end
 function ENT:SetAnim()
 	if( math.random(1,100) < 50) and self.animgroup ~= nil and not self.ShouldResetSequence then
 		local tab = ix.npctemplates.animtemplates[self.animgroup]
-		PrintTable(tab)
+		--PrintTable(tab)
 		local sel = math.random(1, #tab)
-		print(sel)
+		--print(sel)
 		local seq, dur = self:LookupSequence(tab[sel])
-		print(seq)
-		print(dur)
+		--print(seq)
+		--print(dur)
 		timer.Simple( dur, function() self.ShouldResetSequence = true end)
 
 		return self:ResetSequence(seq)
@@ -169,10 +169,15 @@ function ENT:SetAnim()
 
 	self.ShouldResetSequence = false
 
-	for k, v in ipairs(self:GetSequenceList()) do
-		if (v:lower():find("idle") and v != "idlenoise") then
-			return self:ResetSequence(k)
+	if (!self.idleanim) then
+		for k, v in ipairs(self:GetSequenceList()) do
+			if (v:lower():find("idle") and v != "idlenoise") then
+				return self:ResetSequence(k)
+			end
 		end
+	else
+		local seq, dur = self:LookupSequence(self.idleanim)
+		return self:ResetSequence(seq)
 	end
 
 	if (self:GetSequenceCount() > 1) then
@@ -417,5 +422,6 @@ function ENT:LoadTemplate(templatename)
 		self.dialogueid = tmplt.dialogueid or self.dialogueid
 		self.soundgroup = tmplt.soundgroup or self.soundgroup
 		self.animgroup = tmplt.animgroup or self.animgroup
+		self.idleanim = tmplt.idleanim or nil
 	end
 end
