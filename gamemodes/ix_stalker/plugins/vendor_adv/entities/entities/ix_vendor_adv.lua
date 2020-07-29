@@ -93,9 +93,9 @@ function ENT:GetStockInterval(uniqueID)
 	end
 end
 
-function ENT:GetPrice(uniqueID, selling)
+function ENT:GetPrice(uniqueID, selling, iteminstanceID)
 	local price = ix.item.list[uniqueID] and self.items[uniqueID] and
-		self.items[uniqueID][VENDOR_PRICE] or ix.item.list[uniqueID].price or 0
+		self.items[uniqueID][VENDOR_PRICE] or (ix.item.instances[iteminstanceID] and ix.item.list[uniqueID].GetPrice and ix.item.instances[iteminstanceID]:GetPrice()) or ix.item.list[uniqueID].price or 0
 
 	if (selling) then
 		price = math.floor(price * (self.scale or 0.5))

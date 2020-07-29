@@ -375,11 +375,12 @@ if (SERVER) then
 		end
 
 		local uniqueID = net.ReadString()
+		local iteminstanceID = net.ReadUInt(32)
 		local isSellingToVendor = net.ReadBool()
 
 		if (entity.items[uniqueID] and
 			hook.Run("CanPlayerTradeWithVendor", client, entity, uniqueID, isSellingToVendor) != false) then
-			local price = entity:GetPrice(uniqueID, isSellingToVendor)
+			local price = entity:GetPrice(uniqueID, isSellingToVendor, iteminstanceID)
 
 			if (isSellingToVendor) then
 				local found = false
@@ -392,7 +393,7 @@ if (SERVER) then
 				local invOkay = true
 
 				for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
-					if (v.uniqueID == uniqueID and v:GetID() != 0 and ix.item.instances[v:GetID()] and v:GetData("equip", false) == false) then
+					if (v.uniqueID == uniqueID and v:GetID() != 0 and ix.item.instances[v:GetID()] and v:GetID() == iteminstanceID and v:GetData("equip", false) == false) then
 						invOkay = v:Remove()
 						found = true
 						name = L(v.name, client)
@@ -440,6 +441,7 @@ if (SERVER) then
 				else
 					net.Start("ixVendorAdvAddItem")
 						net.WriteString(uniqueID)
+						net.WriteUInt(0,32)
 					net.Send(client)
 				end
 
@@ -722,9 +724,10 @@ else
 
 	net.Receive("ixVendorAdvAddItem", function()
 		local uniqueID = net.ReadString()
+		local iteminstanceID = net.ReadUInt(32)
 
 		if (IsValid(ix.gui.vendor)) then
-			ix.gui.vendor:addItem(uniqueID, "buying")
+			ix.gui.vendor:addItem(uniqueID, "buying", iteminstanceID)
 		end
 	end)
 end
