@@ -1,6 +1,6 @@
 ﻿ITEM.name = "Taurus Judge"
 ITEM.description= "A home security revolver chambered for .410 buckshot."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: .410 Buck\nMagazine Capacity: 5"
+ITEM.longdesc = "The Judge, a derivative of the Taurus Tracker, is a long cylindered five shot revolver. The long cylinder allows for loading both .410 Buck and .45 ACP, and this makes the Judge a very versatile revolver, and therefore quite popular in the Zone.\n\nAmmo: .410 Buck\nMagazine Capacity: 5"
 ITEM.model = "models/weapons/cwc_judge/w_khri_410jury.mdl"
 ITEM.class = "cw_taurusjudge"
 ITEM.weaponCategory = "secondary"
