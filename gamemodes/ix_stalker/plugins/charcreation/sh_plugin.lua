@@ -14,7 +14,7 @@ function PLUGIN:GetFirstNameBySteamID(client)
 	local steamid = client:AccountID()
 	local firstname
 
-	firstname = #self.stalkernames % steamid
+	firstname = steamid % #self.stalkernames
 
 	return self.stalkernames[firstname]
 end
@@ -23,7 +23,7 @@ function PLUGIN:GetLastNameBySteamID(client)
 	local steamid = client:AccountID()
 	local lastname
 
-	lastname = #self.stalkersnames % steamid
+	lastname = steamid % #self.stalkersnames
 	
 	return self.stalkersnames[lastname]
 end
