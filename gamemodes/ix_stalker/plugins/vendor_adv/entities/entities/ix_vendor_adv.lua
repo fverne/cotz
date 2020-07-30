@@ -333,7 +333,7 @@ else
 	end
 
 	function ENT:MakeNoise()
-		local tab = ix.npctemplates.soundtemplates[self:GetSoundGroup] or {"buttons/lever1.wav"}
+		local tab = ix.npctemplates.soundtemplates[self:GetSoundGroup()] or {"buttons/lever1.wav"}
 		self:EmitSound(tab[math.random(1, #tab)])
 	end
 
