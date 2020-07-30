@@ -2,10 +2,13 @@ ix.npctemplates = {}
 ix.npctemplates.templates = {}
 ix.npctemplates.soundtemplates = {}
 ix.npctemplates.animtemplates = {}
+ix.npctemplates.animtemplatestranslation = {}
 
 local BUYSELL 	= 1
 local SELLONLY 	= 2
 local BUYONLY 	= 3
+
+ix.npctemplates.animtemplatestranslation[1] = "TestAnimations"
 
 
 ix.npctemplates.templates["Sidorovich"] = {
@@ -17,7 +20,7 @@ ix.npctemplates.templates["Sidorovich"] = {
 	scale 		= 1.0,
 	dialogueid 	= "universalunion",
 	soundgroup 	= "GenericHello",
-	animgroup 	= "TestAnimations",
+	animgroup 	= 1,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
@@ -34,7 +37,7 @@ ix.npctemplates.templates["Barmantest"] = {
 	scale 		= 1.2,
 	dialogueid 	= "universalunion",
 	soundgroup 	= "GenericHello",
-	--animgroup 	= "TestAnimations",
+	--animgroup 	= 1,
 	idleanim = "idle_lider",
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
@@ -52,7 +55,7 @@ ix.npctemplates.templates["Stalkertest1"] = {
 	scale 		= 1.0,
 	dialogueid 	= "universalunion",
 	soundgroup 	= "GenericHello",
-	--animgroup 	= "TestAnimations",
+	--animgroup 	= 1,
 	idleanim = "sidit3",
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
@@ -66,6 +69,6 @@ ix.npctemplates.soundtemplates["GenericHello"] = {
 	"npc/barman/barman_hello2.ogg",
 }
 
-ix.npctemplates.animtemplates["TestAnimations"] = {
+ix.npctemplates.animtemplates[1] = {
 	"bandit2_idle1",
 }
