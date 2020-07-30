@@ -17,8 +17,8 @@ function ENT:SetupDataTables()
 	self:NetworkVar("String", 0, "DisplayName")
 	self:NetworkVar("String", 1, "Description")
 	self:NetworkVar("String", 2, "IdleAnim")
-	self:NetworkVar("String", 3, "AnimGroup")
-	self:NetworkVar("String", 4, "SoundGroup")
+	self:NetworkVar("String", 3, "SoundGroup")
+	self:NetworkVar("Int", 0, "AnimGroupId")
 end
 
 function ENT:Initialize()
@@ -157,8 +157,8 @@ function ENT:HasMoney(amount)
 end
 
 function ENT:SetAnim()
-	if( math.random(1,100) < 50) and self:GetAnimGroup() ~= "" and not self.ShouldResetSequence then
-		local tab = ix.npctemplates.animtemplates[self:GetAnimGroup()]
+	if( math.random(1,100) < 50) and self:GetAnimGroupId() > 0 and not self.ShouldResetSequence then
+		local tab = ix.npctemplates.animtemplates[ix.npctemplates.animtemplatestranslation[self:GetAnimGroupId()]]
 		local sel = math.random(1, #tab)
 		local seq, dur = self:LookupSequence(tab[sel])
 		timer.Simple( dur, function() self.ShouldResetSequence = true end)
@@ -420,7 +420,7 @@ function ENT:LoadTemplate(templatename)
 		self.scale = tmplt.scale or self.scale
 		self.dialogueid = tmplt.dialogueid or self.dialogueid
 		self:SetSoundGroup(tmplt.soundgroup or self:GetSoundGroup())
-		self:SetAnimGroup(tmplt.animgroup or self:GetAnimGroup())
+		self:SetAnimGroup(tmplt.animgroup or self:GetAnimGroupId())
 		self:SetIdleAnim(tmplt.idleanim or "")
 	end
 end
