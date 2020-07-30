@@ -1,6 +1,6 @@
 ITEM.name = "Stoeger Double Defense Short"
 ITEM.description= "A short break-action hunting shotgun firing 12 gauge shells."
-ITEM.longdesc = "PLACEHOLDER. \n\nAmmo: 12 Gauge \nMagazine Capacity: 2"
+ITEM.longdesc = "The Stoeger Double Defense shotgun is a re-envisioned and modernised version of the classic coach gun. With picatinny rails for mounting optics and a light weight body, it's the quintessential double barreled shotgun for hunting and self defense. This is a cut down, sawn off version with no stock, cutting the weight down by a lot, but sacrificing accuraccy for it.\n\nAmmo: 12 Gauge \nMagazine Capacity: 2"
 ITEM.model = "models/weapons/w_pist_lyxn_dualb.mdl"
 ITEM.class = "cw_stoegerddshort"
 ITEM.weaponCategory = "primary"

@@ -41,6 +41,12 @@ function ITEM:GetName()
 	return name
 end
 
+function ITEM:GetPrice()
+	local base = self.price / self.ammoAmount
+
+	return base * self:GetData("quantity", self.ammoAmount)
+end
+
 function ITEM:OnInstanced(invID, x, y)
 	
 	if !self:GetData("quantity") then

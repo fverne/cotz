@@ -1,6 +1,6 @@
 ﻿ITEM.name = "G2 Contender"
 ITEM.description= "A markmanship pistol chambered in .45 ACP."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: .45 ACP\nMagazine Capacity: 1"
+ITEM.longdesc = "Outside of the zone, it is mainly used in marksmanship competitions, as its high accuracy makes it very suited for it. The only issue is its low ammo capacity, as only a single round can be fired at a time. Some STALKERs have been using this with .410 Magnum Buckshot as a fairly cost and weight effective shotgun.\n\nAmmo: .45 ACP\nMagazine Capacity: 1"
 ITEM.model = "models/cw2/pistols/w_contender.mdl"
 ITEM.class = "cw_contender"
 ITEM.weaponCategory = "secondary"

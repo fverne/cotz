@@ -47,6 +47,7 @@ function PANEL:Init()
 		if (IsValid(self.activeSell)) then
 			net.Start("ixVendorAdvTrade")
 				net.WriteString(self.activeSell.item)
+				net.WriteUInt(0, 32) -- Not an existing item
 				net.WriteBool(false)
 			net.SendToServer()
 		end
@@ -63,8 +64,11 @@ function PANEL:Init()
 		if (IsValid(self.activeBuy)) then
 			net.Start("ixVendorAdvTrade")
 				net.WriteString(self.activeBuy.item)
+				net.WriteUInt(self.activeBuy.iteminstanceID, 32)
 				net.WriteBool(true)
 			net.SendToServer()
+
+			self:removeItem(self.activeBuy.item, "buying", self.activeBuy.iteminstanceID) -- We assume everything goes well - not always the case!!
 		end
 	end
 
@@ -93,7 +97,7 @@ function PANEL:Init()
 	self.buyingList = {}
 end
 
-function PANEL:addItem(uniqueID, listID)
+function PANEL:addItem(uniqueID, listID, iteminstanceID)
 	local entity = self.entity
 	local items = entity.items
 	local data = items[uniqueID]
@@ -109,20 +113,19 @@ function PANEL:addItem(uniqueID, listID)
 		end
 	end
 
-	if ((!listID or listID == "buying") and !IsValid(self.buyingList[uniqueID])
-	and LocalPlayer():GetCharacter():GetInventory():HasItem(uniqueID)) then
+	if ((!listID or listID == "buying") and !IsValid(self.buyingList[iteminstanceID]) and iteminstanceID) then
 		if (data and data[VENDOR_MODE] and data[VENDOR_MODE] != VENDOR_SELLONLY) then
 			local item = self.buyingItems:Add("ixVendorAdvItem")
 			item.isLocal = true
-			item:Setup(uniqueID)
+			item:Setup(uniqueID, iteminstanceID)
 
-			self.buyingList[uniqueID] = item
+			self.buyingList[iteminstanceID] = item
 			self.buyingItems:InvalidateLayout()
 		end
 	end
 end
 
-function PANEL:removeItem(uniqueID, listID)
+function PANEL:removeItem(uniqueID, listID, iteminstanceID)
 	if (!listID or listID == "selling") then
 		if (IsValid(self.sellingList[uniqueID])) then
 			self.sellingList[uniqueID]:Remove()
@@ -131,8 +134,8 @@ function PANEL:removeItem(uniqueID, listID)
 	end
 
 	if (!listID or listID == "buying") then
-		if (IsValid(self.buyingList[uniqueID])) then
-			self.buyingList[uniqueID]:Remove()
+		if (IsValid(self.buyingList[iteminstanceID])) then
+			self.buyingList[iteminstanceID]:Remove()
 			self.buyingItems:InvalidateLayout()
 		end
 	end
@@ -151,7 +154,7 @@ function PANEL:Setup(entity)
 	end
 
 	for _, v in SortedPairs(LocalPlayer():GetCharacter():GetInventory():GetItems()) do
-		self:addItem(v.uniqueID, "buying")
+		self:addItem(v.uniqueID, "buying", v:GetID())
 	end
 end
 
@@ -183,7 +186,7 @@ function PANEL:Think()
 end
 
 function PANEL:OnItemSelected(panel)
-	local price = self.entity:GetPrice(panel.item, panel.isLocal)
+	local price = self.entity:GetPrice(panel.item, panel.isLocal, panel.iteminstanceID)
 
 	if (panel.isLocal) then
 		self.vendorBuy:SetText(L"sell".." ("..ix.currency.Get(price)..")")
@@ -247,8 +250,8 @@ function PANEL:SetCallback(callback)
 	end
 end
 
-function PANEL:Setup(uniqueID)
-	local item = ix.item.list[uniqueID]
+function PANEL:Setup(uniqueID, iteminstanceID)
+	local item = ix.item.instances[iteminstanceID] or ix.item.list[uniqueID]
 	local invicon = item.img
 	local exIcon = ikon:GetIcon(item.uniqueID)
 	local wmax = 32
@@ -267,6 +270,9 @@ function PANEL:Setup(uniqueID)
 
 	if (item) then
 		self.item = uniqueID
+
+		self.iteminstanceID = iteminstanceID or 0
+
 		if !(item.img or item.exRender) then
 			self.icon = self:Add("SpawnIcon")
 			self.icon:SetPos(2, 2)
@@ -309,7 +315,7 @@ function PANEL:Setup(uniqueID)
 		self.itemName = item:GetName()
 
 		local entity = ix.gui.vendor.entity
-		if !self.isLocal then
+		if (!self.isLocal) then
 			self.stock:SetText("Stock: Unlimited")
 			if (entity and entity.items[self.item] and entity.items[self.item][VENDOR_MAXSTOCK]) then
 				local info = entity.items[self.item]
@@ -319,7 +325,7 @@ function PANEL:Setup(uniqueID)
 			end
 		end
 
-		self.price:SetText(ix.currency.Get(entity:GetPrice(self.item, self.isLocal)))
+		self.price:SetText(ix.currency.Get(entity:GetPrice(self.item, self.isLocal, self.iteminstanceID)))
 		
 		self.stock:SizeToContents()
 		self.price:SizeToContents()
