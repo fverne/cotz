@@ -79,6 +79,8 @@ if (SERVER) then
 				money = entity.money,
 				scale = entity.scale,
 				dialogueid = entity.dialogueid,
+				soundgroup = entity.soundgroup,
+				animgroup = entity.animgroup,
 				idleanim = entity.idleanim
 			}
 		end
@@ -125,6 +127,8 @@ if (SERVER) then
 			entity.money = v.money
 			entity.scale = v.scale or 0.5
 			entity.dialogueid = v.dialogueid
+			entity.soundgroup = v.soundgroup
+			entity.animgroup = v.animgroup
 			entity.idleanim = v.idleanim
 		end
 	end

@@ -350,9 +350,13 @@ function PANEL:updateVendor(key, value)
 end
 
 function PANEL:loadVendorTemplate(templatename)
-	net.Start("ixVendorAdvTemplate")
-		net.WriteString(templatename)
-	net.SendToServer()
+  	local entity = ix.gui.vendor.entity
+
+  	net.Start("ixVendorAdvTemplate")
+    	net.WriteString(templatename)
+  	net.SendToServer()
+
+  	entity:LoadTemplate(templatename)
 end
 
 vgui.Register("ixVendorAdvEditor", PANEL, "DFrame")
