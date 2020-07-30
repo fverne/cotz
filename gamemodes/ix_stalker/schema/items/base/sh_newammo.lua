@@ -159,7 +159,11 @@ ITEM.functions.split = {
 		end
         return targets
 	end,
-	OnCanRun = function(item)				
+	OnCanRun = function(item)
+		if item:GetData("quantity", item.ammoAmount) == 1 then
+			return false
+		end	
+
 		return (!IsValid(item.entity))
 	end,
     OnRun = function(item, data)
