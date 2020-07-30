@@ -69,6 +69,6 @@ ix.npctemplates.soundtemplates["GenericHello"] = {
 	"npc/barman/barman_hello2.ogg",
 }
 
-ix.npctemplates.animtemplates[1] = {
+ix.npctemplates.animtemplates["TestAnimations"] = {
 	"bandit2_idle1",
 }
