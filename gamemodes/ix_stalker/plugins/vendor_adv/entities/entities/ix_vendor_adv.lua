@@ -168,7 +168,7 @@ function ENT:SetAnim()
 
 	self.ShouldResetSequence = false
 
-	if (self:GetIdleAnim() ~= "") then
+	if (self:GetIdleAnim() == "") then
 		for k, v in ipairs(self:GetSequenceList()) do
 			if (v:lower():find("idle") and v != "idlenoise") then
 				return self:ResetSequence(k)
