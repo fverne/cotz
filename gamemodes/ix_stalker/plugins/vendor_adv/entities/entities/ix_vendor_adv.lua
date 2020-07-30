@@ -16,6 +16,9 @@ function ENT:SetupDataTables()
 	self:NetworkVar("Bool", 0, "NoBubble")
 	self:NetworkVar("String", 0, "DisplayName")
 	self:NetworkVar("String", 1, "Description")
+	self:NetworkVar("String", 2, "IdleAnim")
+	self:NetworkVar("String", 3, "AnimGroup")
+	self:NetworkVar("String", 4, "SoundGroup")
 end
 
 function ENT:Initialize()
@@ -154,14 +157,10 @@ function ENT:HasMoney(amount)
 end
 
 function ENT:SetAnim()
-	if( math.random(1,100) < 50) and self.animgroup ~= nil and not self.ShouldResetSequence then
-		local tab = ix.npctemplates.animtemplates[self.animgroup]
-		--PrintTable(tab)
+	if( math.random(1,100) < 50) and self:GetAnimGroup() ~= "" and not self.ShouldResetSequence then
+		local tab = ix.npctemplates.animtemplates[self:GetAnimGroup()]
 		local sel = math.random(1, #tab)
-		--print(sel)
 		local seq, dur = self:LookupSequence(tab[sel])
-		--print(seq)
-		--print(dur)
 		timer.Simple( dur, function() self.ShouldResetSequence = true end)
 
 		return self:ResetSequence(seq)
@@ -169,16 +168,14 @@ function ENT:SetAnim()
 
 	self.ShouldResetSequence = false
 
-	print(self.idleanim)
-	
-	if (!self.idleanim) then
+	if (self:GetIdleAnim() ~= "") then
 		for k, v in ipairs(self:GetSequenceList()) do
 			if (v:lower():find("idle") and v != "idlenoise") then
 				return self:ResetSequence(k)
 			end
 		end
 	else
-		local seq, dur = self:LookupSequence(self.idleanim)
+		local seq, dur = self:LookupSequence(self:GetIdleAnim())
 		return self:ResetSequence(seq)
 	end
 
@@ -336,7 +333,7 @@ else
 	end
 
 	function ENT:MakeNoise()
-		local tab = ix.npctemplates.soundtemplates[self.soundgroup] or {"buttons/lever1.wav"}
+		local tab = ix.npctemplates.soundtemplates[self:GetSoundGroup] or {"buttons/lever1.wav"}
 		self:EmitSound(tab[math.random(1, #tab)])
 	end
 
@@ -422,8 +419,8 @@ function ENT:LoadTemplate(templatename)
 		self.money = tmplt.money or self.money
 		self.scale = tmplt.scale or self.scale
 		self.dialogueid = tmplt.dialogueid or self.dialogueid
-		self.soundgroup = tmplt.soundgroup or self.soundgroup
-		self.animgroup = tmplt.animgroup or self.animgroup
-		self.idleanim = tmplt.idleanim or nil
+		self:SetSoundGroup(tmplt.soundgroup or self:GetSoundGroup())
+		self:SetAnimGroup(tmplt.animgroup or self:GetAnimGroup())
+		self:SetIdleAnim(tmplt.idleanim or "")
 	end
 end
