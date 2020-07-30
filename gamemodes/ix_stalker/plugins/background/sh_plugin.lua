@@ -81,6 +81,7 @@ ix.char.RegisterVar("backgrounds", {
 
 		local label = panel:Add("DLabel")
 		label:Dock(FILL)
+		label:SetWrap(true)
 		label:SetText("Select a Background for your character above.")
 		label:SetFont("stalkerregularfont")
 		label:SetContentAlignment(7)
