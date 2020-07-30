@@ -1,6 +1,6 @@
 ITEM.name = "Stoeger Double Defense"
 ITEM.description= "A break-action hunting shotgun firing 12 gauge shells."
-ITEM.longdesc = "PLACEHOLDER. \n\nAmmo: 12 Gauge \nMagazine Capacity: 2"
+ITEM.longdesc = "The Stoeger Double Defense shotgun is a re-envisioned and modernised version of the classic coach gun. With picatinny rails for mounting optics and a light weight body, it's the quintessential double barreled shotgun for hunting and self defense. This is the classic full length version with 20 inch barrels.\n\nAmmo: 12 Gauge \nMagazine Capacity: 2"
 ITEM.model = "models/weapons/w_pist_lyxn_dualb.mdl"
 ITEM.class = "cw_stoegerdd"
 ITEM.weaponCategory = "primary"
