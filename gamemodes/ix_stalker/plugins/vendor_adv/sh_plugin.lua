@@ -80,7 +80,7 @@ if (SERVER) then
 				scale = entity.scale,
 				dialogueid = entity.dialogueid,
 				soundgroup = entity:GetSoundGroup(),
-				animgroup = entity:GetAnimGroup(),
+				animgroup = entity:GetAnimGroupId(),
 				idleanim = entity:GetIdleAnim()
 			}
 		end
@@ -128,7 +128,7 @@ if (SERVER) then
 			entity.scale = v.scale or 0.5
 			entity.dialogueid = v.dialogueid
 			entity:SetSoundGroup(v.soundgroup)
-			entity:SetAnimGroup(v.animgroup)
+			entity:SetAnimGroupId(v.animgroup)
 			entity:SetIdleAnim(v.idleanim)
 		end
 	end
@@ -334,7 +334,7 @@ if (SERVER) then
 		elseif (key == "soundgroup") then
 			entity:SetSoundGroup(data)
 		elseif (key == "animgroup") then
-			entity:SetAnimGroup(data)
+			entity:SetAnimGroupId(data)
 		end
 
 		PLUGIN:SaveData()
@@ -663,7 +663,7 @@ else
 		elseif (key == "soundgroup") then
 			entity:SetSoundGroup(data)
 		elseif (key == "animgroup") then
-			entity:SetAnimGroup(data)
+			entity:SetAnimGroupId(data)
 		end
 
 		surface.PlaySound("buttons/button14.wav")
