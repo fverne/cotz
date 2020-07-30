@@ -420,7 +420,7 @@ function ENT:LoadTemplate(templatename)
 		self.scale = tmplt.scale or self.scale
 		self.dialogueid = tmplt.dialogueid or self.dialogueid
 		self:SetSoundGroup(tmplt.soundgroup or self:GetSoundGroup())
-		self:SetAnimGroup(tmplt.animgroup or self:GetAnimGroupId())
+		self:SetAnimGroupId(tmplt.animgroup or self:GetAnimGroupId())
 		self:SetIdleAnim(tmplt.idleanim or "")
 	end
 end
