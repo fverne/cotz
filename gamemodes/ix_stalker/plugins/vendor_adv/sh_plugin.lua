@@ -79,9 +79,9 @@ if (SERVER) then
 				money = entity.money,
 				scale = entity.scale,
 				dialogueid = entity.dialogueid,
-				soundgroup = entity.soundgroup,
-				animgroup = entity.animgroup,
-				idleanim = entity.idleanim
+				soundgroup = entity:GetSoundGroup(),
+				animgroup = entity:GetAnimGroup(),
+				idleanim = entity:GetIdleAnim()
 			}
 		end
 
@@ -127,9 +127,9 @@ if (SERVER) then
 			entity.money = v.money
 			entity.scale = v.scale or 0.5
 			entity.dialogueid = v.dialogueid
-			entity.soundgroup = v.soundgroup
-			entity.animgroup = v.animgroup
-			entity.idleanim = v.idleanim
+			entity:SetSoundGroup(v.soundgroup)
+			entity:SetAnimGroup(v.animgroup)
+			entity:SetIdleAnim(v.idleanim)
 		end
 	end
 
@@ -332,9 +332,9 @@ if (SERVER) then
 
 			UpdateEditReceivers(entity.receivers, key, data)
 		elseif (key == "soundgroup") then
-			entity.soundgroup = data
+			entity:SetSoundGroup(data)
 		elseif (key == "animgroup") then
-			entity.animgroup = data
+			entity:SetAnimGroup(data)
 		end
 
 		PLUGIN:SaveData()
@@ -661,9 +661,9 @@ else
 			editor.sellScale.noSend = true
 			editor.sellScale:SetValue(data)
 		elseif (key == "soundgroup") then
-			entity.soundgroup = data
+			entity:SetSoundGroup(data)
 		elseif (key == "animgroup") then
-			entity.animgroup = data
+			entity:SetAnimGroup(data)
 		end
 
 		surface.PlaySound("buttons/button14.wav")
