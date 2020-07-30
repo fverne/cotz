@@ -132,20 +132,8 @@ function ITEM:DecideFunction()
 			name = "Drink",
 			icon = "icon16/stalker/drink.png",
 			OnCanRun = function(item)
-				if !IsValid(item.entity) then
-					if item.thirst != 0 then
-						if item.player:GetCharacter():GetData("thirst", 100) >= 100 then
-							return false
-						end
-					end
-					if item.hunger != 0 then
-						if item.player:GetCharacter():GetData("hunger", 100) >= 100 then
-							return false
-						end
-					end
-				else
-					return false
-				end
+
+				return (!IsValid(item.entity))
 			end,
 			OnRun = function(item)
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
@@ -185,20 +173,8 @@ function ITEM:DecideFunction()
 			name = "Eat",
 			icon = "icon16/stalker/eat.png",
 			OnCanRun = function(item)
-				if !IsValid(item.entity) then
-					if item.thirst != 0 then
-						if item.player:GetCharacter():GetData("thirst", 100) >= 100 then
-							return false
-						end
-					end
-					if item.hunger != 0 then
-						if item.player:GetCharacter():GetData("hunger", 100) >= 100 then
-							return false
-						end
-					end
-				else
-					return false
-				end
+
+				return (!IsValid(item.entity))
 			end,
 			OnRun = function(item)
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
@@ -237,20 +213,8 @@ function ITEM:DecideFunction()
 			name = "Consume",
 			icon = "icon16/stalker/eat.png",
 			OnCanRun = function(item)
-				if !IsValid(item.entity) then
-					if item.thirst != 0 then
-						if item.player:GetCharacter():GetData("thirst", 100) >= 100 then
-							return false
-						end
-					end
-					if item.hunger != 0 then
-						if item.player:GetCharacter():GetData("hunger", 100) >= 100 then
-							return false
-						end
-					end
-				else
-					return false
-				end
+
+				return (!IsValid(item.entity))
 			end,
 			OnRun = function(item)
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
