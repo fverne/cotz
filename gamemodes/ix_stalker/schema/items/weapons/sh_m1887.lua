@@ -1,6 +1,6 @@
 ITEM.name = "M1887"
 ITEM.description= "A lever-action shotgun firing 12 gauge shells."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: 12 Gauge \nMagazine Capacity: 6"
+ITEM.longdesc = "The Model 1887 was one of the first successful repeating shotguns. Its lever-action design was chosen at the behest of the Winchester Repeating Arms Company, best known at the time as manufacturers of lever-action rifles such as the Winchester Model 1873. Designer John Browning suggested that a pump-action would be much more appropriate for a repeating shotgun, but Winchester management's position was that, at the time, the company was known as a 'lever-action firearm company', and felt that their new shotgun must also be a lever-action for reasons of brand recognition.\n\nAmmo: 12 Gauge \nMagazine Capacity: 6"
 ITEM.model = ("models/weapons/w_shot_m1887.mdl")
 ITEM.class = "cw_m1887"
 ITEM.weaponCategory = "primary"
