@@ -1,6 +1,6 @@
 ITEM.name = "AR15 9mm"
 ITEM.description= "An American combat rifle chambered for 9x19mm."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: 5.56x45mm\nMagazine Capacity: 20"
+ITEM.longdesc = "An AR-15 platform with a 9x19mm receiver assembly. Some benefits of this rechambering include cheaper ammunition, low recoil and excellent ability to be suppressed compared to a rifle firing a full size cartridge instead of a pistol cartridge. These properties makes it excellent for beginner shooters, as well as STALKERs shooting on a budget.\n\nAmmo: 9x19mm\nMagazine Capacity: 20"
 ITEM.model = ("models/cw2/weapons/w_cam_m49m.mdl")
 ITEM.class = "cw_ar159mm"
 ITEM.weaponCategory = "primary"
