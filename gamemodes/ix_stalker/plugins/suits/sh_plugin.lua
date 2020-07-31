@@ -6,6 +6,11 @@ PLUGIN.desc = "Compatible with bad air and localized damage, plus it adds damage
 ix.util.Include("cl_plugin.lua")
 
 function PLUGIN:EntityTakeDamage( target, dmginfo )
+	--disable pvp
+	if target:IsPlayer() and dmginfo:GetAttacker():IsPlayer() then
+		return true
+	end
+
     -- Bullet resistance
 	if ( target:IsPlayer() and dmginfo:IsDamageType(DMG_BULLET)) then
 		local damage = dmginfo:GetDamage()

@@ -38,8 +38,6 @@ function Schema:PlayerShouldTaunt()
 	return false
 end
 
-
-
 local deathSounds = {
 Sound("stalkersound/die1.wav"),
 Sound("stalkersound/die2.wav"),
