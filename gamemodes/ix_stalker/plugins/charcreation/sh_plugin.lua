@@ -63,3 +63,17 @@ do
 		end
 	})
 end
+
+--pda avatar tied to steam id on char creation
+function PLUGIN:GetPDAAvatar(client)
+	local steamid = client:AccountID()
+	local avatar
+
+	avatar = steamid % #self.pdaavatars
+	
+	return self.pdaavatars[avatar]
+end
+
+function PLUGIN:OnCharacterCreated(client, character)
+	character:SetPdaavatar(self:GetPDAAvatar(client))
+end

@@ -21,55 +21,14 @@ function Schema:OnCharacterCreated(client, character)
 			end)
 		end
 	end
-
-	local avatars = {}
-	avatars = {
-		"propic/loner/loner1",
-		"propic/loner/loner100",
-		"propic/loner/loner11",
-		"propic/loner/loner12",
-		"propic/loner/loner13",
-		"propic/loner/loner14",
-		"propic/loner/loner16",
-		"propic/loner/loner17",
-		"propic/loner/loner3",
-		"propic/loner/loner43",
-		"propic/loner/loner47",
-		"propic/loner/loner53",
-		"propic/loner/loner54",
-		"propic/loner/loner55",
-		"propic/loner/loner56",
-		"propic/loner/loner57",
-		"propic/loner/loner58",
-		"propic/loner/loner59",
-		"propic/loner/loner60",
-		"propic/loner/loner62",
-		"propic/loner/loner63",
-		"propic/loner/loner68",
-		"propic/loner/loner69",
-		"propic/loner/loner7",
-		"propic/loner/loner79",
-		"propic/loner/loner8",
-		"propic/loner/loner80",
-		"propic/loner/loner81",
-		"propic/loner/loner83",
-		"propic/loner/loner84",
-		"propic/loner/loner85",
-		"propic/loner/loner86",
-		"propic/loner/loner87",
-		"propic/loner/loner90",
-		"propic/loner/loner96",
-		"propic/loner/loner97",
-		"propic/loner/loner98",
-	}
-	character:SetPdaavatar(table.Random(avatars))
 end
 
-function Schema:EntityTakeDamage(target, dmg)
-	if (target:IsPlayer() and dmg:GetAttacker():IsPlayer()) then
-		return true
-	end
-end
+-- this is in the suits plugin, but leaving it commented here as its nice to have if the plugin is removed
+-- function Schema:EntityTakeDamage(target, dmg)
+-- 	if (target:IsPlayer() and dmg:GetAttacker():IsPlayer()) then
+-- 		return true
+-- 	end
+-- end
 
 function Schema:PlayerSpray(client)
 	return true
