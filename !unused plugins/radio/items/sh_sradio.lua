@@ -2,9 +2,10 @@ ITEM.name = "Stationary Radio"
 ITEM.model = "models/props_lab/citizenradio.mdl"
 ITEM.width = 2
 ITEM.height = 2
-ITEM.price = 350
+ITEM.price = 4000
 --ITEM.busflag = "MERCH4"
 ITEM.busflag = {"hardware2_1"}
+ITEM.repairCost = ITEM.price/100*1
 
 local function getText(togga)
 	if (togga) then
@@ -14,23 +15,23 @@ local function getText(togga)
 	end
 end
 
-function ITEM:getDesc()
+function ITEM:GetDescription()
 	local str
 	
 	if (!self.entity or !IsValid(self.entity)) then
 		str = "A stationary radio, used for two-way communication. \nPower: %s\nFrequency: %s"
-		return Format(str, (self:getData("power") and "On" or "Off"), self:getData("freq", "000.0"))
+		return Format(str, (self:GetData("power") and "On" or "Off"), self:GetData("freq", "000.0"))
 	else
-		local data = self.entity:getData()
+		local data = self.entity:GetData()
 		
 		str = "A stationary radio, used for two-way communication. Power: %s Frequency: %s"
-		return Format(str, (self.entity:getData("power") and "On" or "Off"), self.entity:getData("freq", "000.0"))
+		return Format(str, (self.entity:GetData("power") and "On" or "Off"), self.entity:GetData("freq", "000.0"))
 	end
 end
 
 if (CLIENT) then
-	function ITEM:paintOver(item, w, h)
-		if (item:getData("power")) then
+	function ITEM:PaintOver(item, w, h)
+		if (item:GetData("power")) then
 			surface.SetDrawColor(110, 255, 110, 100)
 		else
 			surface.SetDrawColor(255, 110, 110, 100)
@@ -43,13 +44,13 @@ if (CLIENT) then
 	local COLOR_ACTIVE = Color(0, 255, 0)
 	local COLOR_INACTIVE = Color(255, 0, 0)
 
-	function ITEM:drawEntity(entity, item)
+	function ITEM:DrawEntity(entity, item)
 		entity:DrawModel()
 
 		local position = entity:GetPos() + entity:GetForward() * 10 + entity:GetUp() * 11 + entity:GetRight() * 9.5
 
 		render.SetMaterial(GLOW_MATERIAL)
-		render.DrawSprite(position, 14, 14, entity:getData("power", false) and COLOR_ACTIVE or COLOR_INACTIVE)
+		render.DrawSprite(position, 14, 14, entity:GetData("power", false) and COLOR_ACTIVE or COLOR_INACTIVE)
 	end
 end
 
@@ -57,9 +58,9 @@ end
 ITEM.functions.toggle = { -- sorry, for name order.
 	name = "Toggle",
 	tip = "useTip",
-	icon = "icon16/stalker/accept.png",
-	onRun = function(item)
-		item:setData("power", !item:getData("power", false), nil, nil)
+	icon = "icon16/stalker/throw.png",
+	OnRun = function(item)
+		item:SetData("power", !item:GetData("power", false), nil, nil)
 		item.player:EmitSound("buttons/button14.wav", 70, 150)
 
 		return false
@@ -70,8 +71,8 @@ ITEM.functions.use = { -- sorry, for name order.
 	name = "Freq",
 	tip = "useTip",
 	icon = "icon16/stalker/customize.png",
-	onRun = function(item)
-		netstream.Start(item.player, "radioAdjust", item:getData("freq", "000,0"), item.id)
+	OnRun = function(item)
+		netstream.Start(item.player, "radioAdjust", item:GetData("freq", "000,0"), item.id)
 
 		return false
 	end,
