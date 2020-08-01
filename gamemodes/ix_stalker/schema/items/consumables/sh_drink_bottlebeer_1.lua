@@ -1,26 +1,24 @@
 ITEM.name = "Ochakovo Beer, 2l"
-ITEM.model = "models/kek1ch/dev_beer.mdl"
-ITEM.thirst = 31
-ITEM.description = "A bottle of beer"
+ITEM.description = "A large bottle of beer"
 ITEM.longdesc = "Ochakovo Beer is not subject to pasteurization. \nLong-term storage is based on cold filtering technology with the use of fine-meshed polymeric membranes which filter out even the smallest yeast."
-ITEM.quantity = 2
-ITEM.price = 350
+ITEM.model = "models/kek1ch/dev_beer.mdl"
+
+ITEM.price = 1
 ITEM.width = 1
-ITEM.height = 2
-ITEM.cookable = false
+ITEM.height = 3
+ITEM.weight = 0.500
+ITEM.flatweight = 0.250
+
+ITEM.thirst = 10
+ITEM.quantity = 4
+
 ITEM.sound = "stalkersound/inv_flask.mp3"
-ITEM.busflag = {"consumables1"}
+ITEM.img = Material("vgui/hud/items/drink/bottlebeer_1.png")
+
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-	item.player:AddBuff("buff_radiationremoval", 10, { amount = 0.5 })
+	item.player:AddBuff("buff_radiationremoval", 10, { amount = 0.15 })
 	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
 end)
 
 ITEM:DecideFunction()
-
-ITEM.weight = 1.0
-ITEM.flatweight = 0.500
-
-function ITEM:GetWeight()
-  return self.flatweight + (self.weight * self:GetData("quantity", self.quantity))
-end

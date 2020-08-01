@@ -8,6 +8,8 @@ ITEM.hunger = 0
 ITEM.thirst = 0
 ITEM.empty = false
 ITEM.quantity = 1
+ITEM.weight = 0
+ITEM.flatweight = 0
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", 1)
@@ -250,4 +252,8 @@ function ITEM:DecideFunction()
 			end
 		}
 	end	
+end
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.quantity))
 end
