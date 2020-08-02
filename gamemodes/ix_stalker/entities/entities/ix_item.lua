@@ -213,6 +213,49 @@ else
 		-- set the arrow to be the same colour as the title/name row
 		tooltip:SetArrowColor(color)
 
+		ikon:renderIcon(		
+			item.uniqueID,
+			item.width,
+			item.height,
+			item:GetModel(),
+			item.iconCam
+		)
+
+		local invicon = item.img
+		local exIcon = ikon:GetIcon(item.uniqueID)
+		local iconrow = tooltip:Add("DLabel")
+		local icon
+		iconrow:SetText("")
+		if item.img then
+			icon = iconrow:Add("DImage")
+			if (invicon) then
+				icon:SetMaterial(invicon)
+				icon:SetSize(48 * item.width, 48 * item.height)
+			end
+		elseif item.exRender then
+			icon = iconrow:Add("DImage")			
+			if (exIcon) then
+				icon:SetMaterial(exIcon)
+				icon:SetSize(48 * item.width, 48 * item.height)
+			else
+				ikon:renderIcon(
+					item.uniqueID,
+					item.width,
+					item.height,
+					item:GetModel(),
+					item.iconCam
+				)
+			end
+		else
+			icon = iconrow:Add("DImage")
+			icon:SetMaterial(exIcon)
+			icon:SetSize(48 * item.width, 48 * item.height)
+		end
+
+
+		iconrow:Dock(TOP)
+		iconrow:SetTall(item.height * 48)
+
 		if ((item.width > 1 or item.height > 1) and
 			hook.Run("ShouldDrawItemSize", item) != false) then
 
@@ -258,6 +301,10 @@ else
 
 			tooltip:SizeToContents()
 		end
+
+		tooltip:SizeToContents()
+		iconrow:SetWide(tooltip:GetWide())
+		icon:SetPos((tooltip:GetWide() * 0.5) - (icon:GetWide() * 0.5), 0)
 
 		item.entity = nil
 		item.data = oldData
