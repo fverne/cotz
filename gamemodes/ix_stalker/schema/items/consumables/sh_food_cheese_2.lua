@@ -1,7 +1,7 @@
 ITEM.name = "Seliskaya Cheese"
 ITEM.description = "A block  of cheese"
 ITEM.longdesc = "A Ukrainian produced Swiss style cheese. This semi-hard cheese is easy to eat. It is ripened for 90 days, and it has a rich sweet-spicy taste and a specific pronounced cheese smell."
-ITEM.model = "models/lostsignalproject/items/consumable/tomato.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/conserva.mdl"
 ITEM.material = "models/antlion/antlion_innards"
 
 ITEM.price = 1
