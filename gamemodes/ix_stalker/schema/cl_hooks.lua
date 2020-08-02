@@ -31,6 +31,10 @@ function Schema:BuildBusinessMenu(panel)
 	return bHasItems
 end
 
+function Schema:ShouldDrawItemSize(item)
+	return false
+end
+
 function Schema:SpawnMenuOpen()
 	if LocalPlayer():GetCharacter():HasFlags("petN") or LocalPlayer():IsAdmin() then
 		return true
