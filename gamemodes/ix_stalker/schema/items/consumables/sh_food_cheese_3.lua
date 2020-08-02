@@ -1,7 +1,8 @@
 ITEM.name = "'Russian' Cheese"
 ITEM.description = "A block  of cheese"
 ITEM.longdesc = "This massive block of 'Russian Cheese' brand cheese is semi-solid and made from cow's milk. The taste of the cheese is popular and has been for many years. 50% fat content."
-ITEM.model = "models/kek1ch/dev_sausage.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/tomato.mdl"
+ITEM.material = "models/antlion/antlion_innards"
 
 ITEM.price = 1
 ITEM.width = 2

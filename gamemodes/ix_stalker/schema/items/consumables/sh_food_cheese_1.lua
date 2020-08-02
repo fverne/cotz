@@ -1,7 +1,8 @@
 ITEM.name = "Parmesan Cheese"
 ITEM.description = "A pack of Parmesan cheese"
 ITEM.longdesc = "A hard block of parmesan cheese, well aged. Popular with older STALKERs and cooks in the zone."
-ITEM.model = "models/kek1ch/dev_sausage.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/tomato.mdl"
+ITEM.material = "models/antlion/antlion_innards"
 
 ITEM.price = 1
 ITEM.width = 1

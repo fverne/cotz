@@ -1,7 +1,7 @@
 ITEM.name = "Redline Extreme, 240ml"
 ITEM.description = "A small plastic bottle with an energy drink inside."
 ITEM.longdesc = "Redline Xtreme is one of the most powerful and fast-acting, ready-to-drink energy products on the market. Redline Xtreme is a unique blend that will boost energy and intensity for whatever your day has in store.\nYou won’t get a sugar-induced energy crash, nor will you suffer the harsh comedowns so prevalent with other, overly caffeinated products. That’s because Redline Xtreme’s ingredients work with, instead of against, your body’s natural energy-producing mechanisms. If you’re looking for a big-time energy boost that lets you be productive and focused, Redline Xtreme is the perfect drink."
-ITEM.model = "models/kek1ch/dev_drink_stalker.mdl"
+ITEM.model = "models/lostsignalproject/items/medical/booster.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

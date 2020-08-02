@@ -127,9 +127,9 @@ if (SERVER) then
 			entity.money = v.money
 			entity.scale = v.scale or 0.5
 			entity.dialogueid = v.dialogueid
-			entity:SetSoundGroup(v.soundgroup)
-			entity:SetAnimGroupId(v.animgroup)
-			entity:SetIdleAnim(v.idleanim)
+			entity:SetSoundGroup(v.soundgroup or "")
+			entity:SetAnimGroupId(v.animgroup or 0)
+			entity:SetIdleAnim(v.idleanim or "")
 		end
 	end
 

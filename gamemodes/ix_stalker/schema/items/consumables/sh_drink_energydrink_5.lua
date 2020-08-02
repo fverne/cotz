@@ -1,7 +1,7 @@
 ITEM.name = "Monster Energy Classic, 500ml"
 ITEM.description = "An aluminium can with energy drink inside."
 ITEM.longdesc = "Monster Energy is an energy drink that was introduced by Hansen Natural Company (now Monster Beverage Corporation) in April of 2002. The caffeine content of most Monster Energy drinks is approximately 33 mg / 100 ml, or 160 mg for a 500ml can. This is the classic Monster Energy blend, a sugary sweet drink, with a taste that's hard to pinpoint."
-ITEM.model = "models/kek1ch/dev_drink_stalker.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/drink_water.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

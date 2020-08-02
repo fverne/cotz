@@ -1,7 +1,7 @@
 ITEM.name = "Lvivske 1715, 500ml"
 ITEM.description = "A can of beer"
 ITEM.longdesc = "Lvivske 1715 is a light beer of flawless quality that is based on tercentenary traditions and even more ancient secrets of Lviv brewers. The secrets of ancient recipe were passed by word of mouth, from father to son. Light hop beverage with pure malt aroma and inimitable taste is a true discovery for all who are devoted to classics and ancient traditions."
-ITEM.model = "models/kek1ch/dev_beer.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/drink_water.mdl"
 
 ITEM.price = 1
 ITEM.width = 1
