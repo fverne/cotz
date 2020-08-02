@@ -1,7 +1,7 @@
 ITEM.name = "Baileys Irish Cream, 1l"
 ITEM.description = "A dark liqour bottle."
 ITEM.longdesc = "Baileys Irish Cream is an Irish cream liqueur - an alcoholic beverage flavoured with cream, cocoa, and Irish whiskey. It is very popular with coffee drinkers in the zone, and usually fetches a decent price, as it is not often seen in the zone."
-ITEM.model = "models/kek1ch/dev_vodka2.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/vodka_putinka.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

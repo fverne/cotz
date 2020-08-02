@@ -1,7 +1,7 @@
 ITEM.name = "Glenfiddich Whisky, 700ml"
 ITEM.description = "A bottle with a clear golden yellow substance inside."
 ITEM.longdesc = "Matured for at least 12 years in American and Spanish oak casks, this single malt Scotch whisky possesses Glenfiddich’s signature sweet and fruity essence, this single malt lingers with an aroma of pear and notes of butterscotch, cream and malt, dwelling on the palate with a subtle oak flavour. Glenfiddich 12 Year Old has been crafted to endure a long, smooth and mellow finish, ensuring it is always easily enjoyed."
-ITEM.model = "models/kek1ch/dev_vodka2.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/vodka_putinka.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

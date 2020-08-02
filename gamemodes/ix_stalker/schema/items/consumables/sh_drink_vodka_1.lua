@@ -1,7 +1,7 @@
 ITEM.name = "Cossacks Vodka, 700ml"
 ITEM.description = "A bottle with a clear substance inside."
 ITEM.longdesc = "Made by GSC. Goes down easy and lowers the effects of radiation. Should be enjoyed in moderation."
-ITEM.model = "models/kek1ch/dev_vodka2.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/vodka.mdl"
 
 ITEM.price = 1
 ITEM.width = 1
