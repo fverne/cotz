@@ -50,6 +50,15 @@ if (SERVER) then
 			end
 		end
 	end
+	--funny meme when PostPlayerLoadout breaks in the framework and is never called :)))
+	function PLUGIN:PostPlayerLoadout(client)
+		local character = client:GetCharacter()
+		if (character:GetInventory()) then
+			for _, v in pairs(character:GetInventory():GetItems()) do
+				v:Call("OnLoadout", client)
+			end
+		end
+	end
 end
 
 if (CLIENT) then

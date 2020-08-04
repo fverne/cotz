@@ -465,14 +465,11 @@ function ITEM:CanTransfer(oldInventory, newInventory)
 end
 
 function ITEM:OnLoadout()
-	print("Running loadout")
 	if (self:GetData("equip")) then
 		local client = self.player
 		client.carryWeapons = client.carryWeapons or {}
 
 		local weapon = client:Give(self.class)
-
-		print("Weapon found for loadout: ", weapon)
 
 		if (IsValid(weapon)) then
 			print("Weapon is valid")
