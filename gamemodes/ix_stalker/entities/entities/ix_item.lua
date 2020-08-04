@@ -213,14 +213,6 @@ else
 		-- set the arrow to be the same colour as the title/name row
 		tooltip:SetArrowColor(color)
 
-		ikon:renderIcon(		
-			item.uniqueID,
-			item.width,
-			item.height,
-			item:GetModel(),
-			item.iconCam
-		)
-
 		local invicon = item.img
 		local exIcon = ikon:GetIcon(item.uniqueID)
 		local iconrow = tooltip:Add("DLabel")
@@ -245,10 +237,15 @@ else
 					item:GetModel(),
 					item.iconCam
 				)
+				local tmpIcon = ikon:GetIcon(item.uniqueID)
+				icon:SetMaterial(tmpIcon)
+				icon:SetSize(48 * item.width, 48 * item.height)
 			end
 		else
-			icon = iconrow:Add("DImage")
-			icon:SetMaterial(exIcon)
+			-- We dont want to end up here...
+			-- USE img OR exRender PLEASE
+			icon = iconrow:Add("SpawnIcon")
+			icon:SetModel(item:GetModel())
 			icon:SetSize(48 * item.width, 48 * item.height)
 		end
 
