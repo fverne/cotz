@@ -35,12 +35,6 @@ function PANEL:Think()
 			self.loading = false
 		end
 	end
-
-	
-	if input.IsKeyDown(KEY_TAB) then
-		self:exit()
-	end
-	
 end
 
 function PANEL:targetName()
@@ -289,6 +283,8 @@ function PANEL:exit()
 		net.Start("ixDialogueFreeze")
 		net.WriteBool(false)
 		net.SendToServer()
+
+		ix.gui.dialogue = nil
 	end)
 end
 
@@ -310,7 +306,7 @@ net.Receive("ixDialogue", function()
 	local target = net.ReadEntity()
 	local treeID = net.ReadString()
 
-	local panel = vgui.Create("ixDialogue")
-	panel.target = target
-	panel.treeID = treeID
+	ix.gui.dialogue = vgui.Create("ixDialogue")
+	ix.gui.dialogue.target = target
+	ix.gui.dialogue.treeID = treeID
 end)

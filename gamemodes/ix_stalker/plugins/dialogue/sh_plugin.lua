@@ -52,9 +52,9 @@ function playerMeta:dialogue(id, target)
 	if not isentity(target) then return end
 
 	if (CLIENT) then
-		local panel = vgui.Create("ixDialogue")
-		panel.target = target
-		panel.id = id
+		ix.gui.dialogue = vgui.Create("ixDialogue")
+		ix.gui.dialogue.target = target
+		ix.gui.dialogue.id = id
 
 		net.Start("ixDialogueFreeze")
 		net.WriteBool(true)
@@ -77,3 +77,11 @@ ix.command.Add("forwardconvo", {
 		client:dialogue("universalunion", target)
 	end
 })
+
+if(CLIENT) then
+	hook.Add("ShouldSuppressMenu", "DialogMenuSuppress", function(client) 
+		if(ix.gui.dialogue) then
+			return true
+		end
+	end)
+end

@@ -70,3 +70,9 @@ hook.Add( "OnEntityCreated", "R_Optimisation.OnEntityCreated", function(ply)
     -- RunConsoleCommand("in_usekeyboardsampletime", "0")
     -- RunConsoleCommand("r_3dsky", "0")
 end)
+
+function GM:ScoreboardShow()
+	if (LocalPlayer():GetCharacter() && !hook.Run("ShouldSuppressMenu", LocalPlayer())) then
+		vgui.Create("ixMenu")
+	end
+end

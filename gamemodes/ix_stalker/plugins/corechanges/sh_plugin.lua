@@ -92,3 +92,9 @@ end
 function PLUGIN:InitializedChatClasses()
 	ix.chat.classes["looc"] = nil
 end
+
+hook.Add("ShouldSuppressMenu", "DeadMenuSuppress", function(client) 
+	if(!client:Alive()) then
+		return true
+	end
+end)
