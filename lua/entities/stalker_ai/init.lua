@@ -377,7 +377,7 @@ function ENT:STALKERNPCKill(dmginfo)
 		
 
 		if(!(IsValid(TEMP_ATTACKER)&&TEMP_ATTACKER!=nil&&TEMP_ATTACKER!=NULL&&TEMP_ATTACKER:GetClass()=="npc_barnacle")) then
-			if(GetConVar("ai_serverragdolls"):GetInt()==0) then
+			if(false/*GetConVar("ai_serverragdolls"):GetInt()==0*/) then
 				net.Start("STALKERNPCRagdoll")
 				net.WriteEntity(self)
 				net.Broadcast()
@@ -386,6 +386,7 @@ function ENT:STALKERNPCKill(dmginfo)
 				TEMP_Ragdoll:SetModel(self:GetModel())
 				TEMP_Ragdoll:SetPos(self:GetPos())
 				TEMP_Ragdoll:SetAngles(self:GetAngles())
+				TEMP_Ragdoll:SetSkin(self:GetSkin())
 				TEMP_Ragdoll:Spawn()
 				
 				TEMP_Ragdoll:SetMaterial(self:GetMaterial())

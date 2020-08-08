@@ -31,7 +31,7 @@ AddNPC("Tushkano","npc_mutant_rodent")
 
 --AddNPC("Snork - New","npc_mutant_snorknew")  --New snork commented out as the model does not have ACT_WALK defined
 
---AddNPC("Izlom","npc_mutant_izlom") -- As above
+AddNPC("Izlom","npc_mutant_izlom")
 
 --AddNPC("Pseudogiant","npc_mutant_pseudogiant")  -- As above
 
@@ -163,6 +163,44 @@ AddSound("Stalker.Dog.Miss4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss4.wa
 ----DEATH
 AddSound("Stalker.Dog.Die1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"hgn/stalker/creature/dog/bdog_die_2.wav")
 AddSound("Stalker.Dog.Die2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"hgn/stalker/creature/dog/bdog_die_3.wav")
+
+-- Izlom sounds
+----IDLE
+AddSound("Stalker.Izlom.Idle1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_idle_1.ogg")
+AddSound("Stalker.Izlom.Idle2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_idle_12.ogg")
+AddSound("Stalker.Izlom.Idle3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_idle_2.ogg")
+AddSound("Stalker.Izlom.Idle4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_idle_3.ogg")
+AddSound("Stalker.Izlom.Idle5",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_idle_4.ogg")
+----CHASE
+AddSound("Stalker.Izlom.Chase1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_attack_1.ogg")
+AddSound("Stalker.Izlom.Chase2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_attack_2.ogg")
+AddSound("Stalker.Izlom.Chase3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_attack_3.ogg")
+AddSound("Stalker.Izlom.Chase4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_attack_4.ogg")
+AddSound("Stalker.Izlom.Chase5",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_attack_5.ogg")
+AddSound("Stalker.Izlom.Chase6",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_attack_6.ogg")
+AddSound("Stalker.Izlom.Chase7",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_attack_7.ogg")
+AddSound("Stalker.Izlom.Chase8",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_attack_8.ogg")
+AddSound("Stalker.Izlom.Chase9",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_enemy_1.ogg")
+AddSound("Stalker.Izlom.Chase10",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_enemy_2.ogg")
+AddSound("Stalker.Izlom.Chase11",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_enemy_3.ogg")
+AddSound("Stalker.Izlom.Chase12",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_enemy_4.ogg")
+AddSound("Stalker.Izlom.Chase13",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_enemy_5.ogg")
+----HIT
+AddSound("Stalker.Izlom.Melee1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_hit_1.ogg")
+AddSound("Stalker.Izlom.Melee2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_hit_2.ogg")
+AddSound("Stalker.Izlom.Melee3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_hit_3.ogg")
+AddSound("Stalker.Izlom.Melee4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_hit_4.ogg")
+----MISS
+AddSound("Stalker.Izlom.Miss1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss1.wav")
+AddSound("Stalker.Izlom.Miss2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss2.wav")
+AddSound("Stalker.Izlom.Miss3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss3.wav")
+AddSound("Stalker.Izlom.Miss4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss4.wav")
+----DEATH
+AddSound("Stalker.Izlom.Die1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_death_2.ogg")
+AddSound("Stalker.Izlom.Die2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_death_3.ogg")
+AddSound("Stalker.Izlom.Die3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_death_4.ogg")
+AddSound("Stalker.Izlom.Die4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_death_5.ogg")
+AddSound("Stalker.Izlom.Die5",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/izlome/izlome_death_6.ogg")
 
 -- Snork sounds
 ----IDLE
