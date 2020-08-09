@@ -337,15 +337,18 @@ end
 
 
 function STALKERNPCBleed(Ent,INT,Pos,Ang)
-	local TEMP_CEffectData = EffectData()
-	TEMP_CEffectData:SetOrigin(Pos)
-	TEMP_CEffectData:SetFlags(3)
-	TEMP_CEffectData:SetScale(INT)
-	TEMP_CEffectData:SetColor(0)
-	TEMP_CEffectData:SetNormal(Ang:Forward())
-	TEMP_CEffectData:SetEntity(Ent)
-	TEMP_CEffectData:SetAngles(Ang)
-	util.Effect( "BloodImpact", TEMP_CEffectData, false )
+
+	if(Ent:GetBloodColor()!=BLOOD_COLOR_MECH and Ent:GetBloodColor()!=DONT_BLEED) then
+		local TEMP_CEffectData = EffectData()
+		TEMP_CEffectData:SetOrigin(Pos)
+		TEMP_CEffectData:SetFlags(3)
+		TEMP_CEffectData:SetScale(INT)
+		TEMP_CEffectData:SetColor(0)
+		TEMP_CEffectData:SetNormal(Ang:Forward())
+		TEMP_CEffectData:SetEntity(Ent)
+		TEMP_CEffectData:SetAngles(Ang)
+		util.Effect( "BloodImpact", TEMP_CEffectData, false )
+	end
 end
 
 
@@ -1102,7 +1105,7 @@ function ENT:OnTakeDamage(dmginfo)
 	
 	self:SetHealth(self:Health()-(dmginfo:GetDamage()*TEMP_DMGMUL))
 	
-	if(dmginfo:GetDamageType()!=DMG_SONIC&&dmginfo:GetDamageType()!=DMG_POISON) then
+	if(dmginfo:GetDamageType()!=DMG_SONIC and dmginfo:GetDamageType()!=DMG_POISON ) then
 		STALKERNPCBleed(self,dmginfo:GetDamage()/4,dmginfo:GetDamagePosition(),Angle(math.random(1,360),math.random(1,360),math.random(1,360)))
 	end
 	

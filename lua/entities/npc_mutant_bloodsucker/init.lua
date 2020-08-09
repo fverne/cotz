@@ -123,7 +123,7 @@ function ENT:Initialize()
 	TEMP_MeleeTable.radius[2] = 120
 	TEMP_MeleeTable.time[2] = 3.3
 	TEMP_MeleeTable.bone[2] = "bip01_r_hand"
-	self:STALKERNPCSetMeleeParams(5,"vampire",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(6,"vampire",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
 	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	
@@ -248,8 +248,8 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 
 						self.NextAbilityTime = CurTime()+4
 
-						self:STALKERNPCPlayAnimation("vampire",5)
-						self:STALKERNPCMakeMeleeAttack(5)
+						self:STALKERNPCPlayAnimation("vampire",6)
+						self:STALKERNPCMakeMeleeAttack(6)
 
 						self.succing1 = CurTime() + 0.2
 						self.succing2 = CurTime() + 1.2
