@@ -14,22 +14,22 @@ ENT.HitBoxToHitGroup = {
 }
 
 ENT.DieSoundEnabled = true
-ENT.DieSound.name = "Stalker.Zombie.Die"
+ENT.DieSound.name = "Stalker.ZombieB.Die"
 ENT.DieSound.min = 1
-ENT.DieSound.max = 9
+ENT.DieSound.max = 18
 
 ENT.MeleeSoundEnabled = true
-ENT.MeleeSound.name = "Stalker.Zombie.Hit"
+ENT.MeleeSound.name = "Stalker.ZombieB.Hit"
 ENT.MeleeSound.min = 1
-ENT.MeleeSound.max = 10
+ENT.MeleeSound.max = 15
 
 ENT.IdlingSoundEnabled = true
-ENT.IdlingSound.name = "Stalker.Zombie.Idle"
+ENT.IdlingSound.name = "Stalker.ZombieB.Idle"
 ENT.IdlingSound.min = 1
-ENT.IdlingSound.max = 10
+ENT.IdlingSound.max = 30
 
 ENT.ChasingSoundEnabled = true
-ENT.ChasingSound.name = "Stalker.Zombie.Chase"
+ENT.ChasingSound.name = "Stalker.ZombieB.Chase"
 ENT.ChasingSound.min = 1
 ENT.ChasingSound.max = 8
 ENT.ChasingSound.chance = 5
@@ -37,8 +37,8 @@ ENT.ChasingSound.chance = 5
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 240
-ENT.hpvar = 50
+ENT.hp = 120
+ENT.hpvar = 25
 
 ENT.CanFakeDeath = true
 ENT.FakeDeath = 0
@@ -55,7 +55,7 @@ ENT.VisibleSchedule = SCHED_IDLE_WANDER
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 function ENT:Initialize()
-	self.Model = "models/monsters/zombie.mdl"
+	self.Model = "models/monsters/babka.mdl"
 	self:STALKERNPCInit(Vector(-24,-24,90),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
@@ -126,7 +126,7 @@ function ENT:STALKERNPCThink()
 			local _, dur = self:LookupSequence("fake_death_"..self.FakeDeathAnimSet.."_0")
 			self.FakeDeath = 2
 			self.FakeDeathTimer = CurTime()+dur-0.1
-			self:EmitSound("Stalker.Zombie.Die"..math.random(self.DieSound.min, self.DieSound.max ))
+			self:EmitSound("Stalker.ZombieB.Die"..math.random(self.DieSound.min, self.DieSound.max ))
 			self.ShouldEmitSound = false
 			self.OldCollisionGroup = self:GetCollisionGroup()
 			self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
