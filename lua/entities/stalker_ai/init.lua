@@ -772,7 +772,7 @@ end
 
 //Sounds
 function ENT:STALKERNPCPlaySoundRandom(CH,SNDNM,IMIN,IMAX,CHAN)
-	if(self.NextSoundCanPlayTime<CurTime()) then
+	if(self.NextSoundCanPlayTime<CurTime() and (self.ShouldEmitSound or true)) then
 
 		local TEMP_SoundChance = math.random(1,100)
 	

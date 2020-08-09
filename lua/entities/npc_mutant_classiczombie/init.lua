@@ -126,6 +126,10 @@ function ENT:STALKERNPCThink()
 			local _, dur = self:LookupSequence("fake_death_"..self.FakeDeathAnimSet.."_0")
 			self.FakeDeath = 2
 			self.FakeDeathTimer = CurTime()+dur-0.1
+			self:EmitSound("Stalker.Zombie.Die1")
+			self.ShouldEmitSound = false
+			self.OldCollisionGroup = self:GetCollisionGroup()
+			self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
 		end
 	end
 
@@ -146,6 +150,8 @@ function ENT:STALKERNPCThink()
 	if (self.FakeDeath == 4 and self.FakeDeathTimer2 < CurTime()) then
 		self:STALKERNPCClearAnimation()
 		self.FakeDeath = 0
+		self.ShouldEmitSound = true
+		self:SetCollisionGroup(self.OldCollisionGroup)
 	end
 
 end
@@ -176,7 +182,7 @@ function ENT:STALKERNPCDamageTake(dmginfo,mul)
 	--hacky shit code end
 
 	--fakedeath
-	if (self:Health() <= dmginfo:GetDamage() and self.CanFakeDeath) then
+	if ( ((self:Health() - dmginfo:GetDamage()) < 30) and self.CanFakeDeath ) then
 		dmginfo:SetDamage(0)
 		self.CanFakeDeath = false
 		self.FakeDeath = 1
