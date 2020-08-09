@@ -11,17 +11,17 @@ ENT.DieSound.max = 5
 ENT.MeleeSoundEnabled = true
 ENT.MeleeSound.name = "Stalker.Izlom.Melee"
 ENT.MeleeSound.min = 1
-ENT.MeleeSound.max = 8
+ENT.MeleeSound.max = 4
 
 ENT.IdlingSoundEnabled = true
 ENT.IdlingSound.name = "Stalker.Izlom.Idle"
 ENT.IdlingSound.min = 1
-ENT.IdlingSound.max = 4
+ENT.IdlingSound.max = 5
 
 ENT.ChasingSoundEnabled = true
 ENT.ChasingSound.name = "Stalker.Izlom.Chase"
 ENT.ChasingSound.min = 1
-ENT.ChasingSound.max = 4
+ENT.ChasingSound.max = 13
 ENT.ChasingSound.chance = 15
 
 --ENT.SNPCClass="C_MONSTER_LAB"

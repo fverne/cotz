@@ -29,11 +29,12 @@ AddNPC("Pseudodog","npc_mutant_pseudodog")
 AddNPC("Psydog","npc_mutant_psydog")
 AddNPC("Tushkano","npc_mutant_rodent")
 
---AddNPC("Snork - New","npc_mutant_snorknew")  --New snork commented out as the model does not have ACT_WALK defined
+--AddNPC("Snork - New","npc_mutant_snorkold")  --Old snork
 
 AddNPC("Izlom","npc_mutant_izlom")
 
---AddNPC("Pseudogiant","npc_mutant_pseudogiant")  -- As above
+AddNPC("Pseudogiant (Fast)","npc_mutant_pseudogiant_fast")
+AddNPC("Pseudogiant (Slow)","npc_mutant_pseudogiant_slow")
 
 AddNPC("Karlik","npc_mutant_karlik")
 
@@ -143,6 +144,33 @@ AddSound("Stalker.KarlikWave.Collide",CHAN_WEAPON,1,400,98,102,"GSC/S.T.A.L.K.E.
 AddSound("Stalker.Claw.Hit",CHAN_WEAPON,1,300,98,102,"GSC/S.T.A.L.K.E.R/Monsters/slash_physics_hit1.wav")
 AddSound("Stalker.Claw.Miss",CHAN_WEAPON,1,300,98,102,"GSC/S.T.A.L.K.E.R/Monsters/claw_miss.wav")
 
+-- Pseudogiant sounds
+----IDLE
+AddSound("Stalker.Pseudogiant.Idle1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant2/11.ogg")
+AddSound("Stalker.Pseudogiant.Idle2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant2/giant_underground_0.ogg")
+AddSound("Stalker.Pseudogiant.Idle3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant2/giant_threaten_0.ogg")
+AddSound("Stalker.Pseudogiant.Idle4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant2/giant_threaten_1.ogg")
+----CHASE
+AddSound("Stalker.Pseudogiant.Chase1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_aggressive_0.ogg")
+AddSound("Stalker.Pseudogiant.Chase2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_aggressive_1.ogg")
+AddSound("Stalker.Pseudogiant.Chase3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_breath_0.ogg")
+AddSound("Stalker.Pseudogiant.Chase4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_breath_1.ogg")
+AddSound("Stalker.Pseudogiant.Chase5",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_breath_2.ogg")
+AddSound("Stalker.Pseudogiant.Chase6",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_breath_3.ogg")
+AddSound("Stalker.Pseudogiant.Chase7",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_breath_4.ogg")
+----HIT
+AddSound("Stalker.Pseudogiant.Melee1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_hit.ogg")
+AddSound("Stalker.Pseudogiant.Melee2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_threaten_1.ogg")
+AddSound("Stalker.Pseudogiant.Melee3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_attack_0.ogg")
+AddSound("Stalker.Pseudogiant.Melee4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_attack_1.ogg")
+----MISS
+AddSound("Stalker.Pseudogiant.Miss1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss1.wav")
+AddSound("Stalker.Pseudogiant.Miss2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss2.wav")
+AddSound("Stalker.Pseudogiant.Miss3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss3.wav")
+AddSound("Stalker.Pseudogiant.Miss4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss4.wav")
+----DEATH
+AddSound("Stalker.Pseudogiant.Die1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_death_1.ogg")
+AddSound("Stalker.Pseudogiant.Die2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/giant/giant_hurt_4.ogg")
 
 -- Dog sounds
 ----IDLE
