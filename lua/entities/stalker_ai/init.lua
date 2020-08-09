@@ -781,7 +781,7 @@ function ENT:STALKERNPCPlaySoundRandom(CH,SNDNM,IMIN,IMAX,CHAN)
 			local TEMP_SND = SNDNM..math.random(IMIN,IMAX)
 				
 			self:EmitSound( TEMP_SND )
-			self.NextSoundCanPlayTime = CurTime()+SoundDuration(TEMP_SND)+0.1
+			self.NextSoundCanPlayTime = CurTime()+SoundDuration(TEMP_SND)+4.5
 			self.LastPlayedSound = TEMP_SND
 		end
 	end

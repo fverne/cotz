@@ -33,6 +33,8 @@ AddNPC("Tushkano","npc_mutant_rodent")
 
 AddNPC("Izlom","npc_mutant_izlom")
 
+AddNPC("Bear","npc_mutant_bear")
+
 AddNPC("Pseudogiant (Fast)","npc_mutant_pseudogiant_fast")
 AddNPC("Pseudogiant (Slow)","npc_mutant_pseudogiant_slow")
 
@@ -191,6 +193,25 @@ AddSound("Stalker.Dog.Miss4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss4.wa
 ----DEATH
 AddSound("Stalker.Dog.Die1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"hgn/stalker/creature/dog/bdog_die_2.wav")
 AddSound("Stalker.Dog.Die2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"hgn/stalker/creature/dog/bdog_die_3.wav")
+
+-- Bear sounds
+----IDLE
+AddSound("Stalker.Bear.Idle1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/bear/bear_aggressive_0.ogg")
+AddSound("Stalker.Bear.Idle2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/bear/bear_idle_0.ogg")
+AddSound("Stalker.Bear.Idle3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/bear/bear_threaten_1.ogg")
+----HIT
+AddSound("Stalker.Bear.Melee1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/bear/bear_attack_0.ogg")
+AddSound("Stalker.Bear.Melee2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/bear/bear_attack_1.ogg")
+----MISS
+AddSound("Stalker.Bear.Miss1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss1.wav")
+AddSound("Stalker.Bear.Miss2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss2.wav")
+AddSound("Stalker.Bear.Miss3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss3.wav")
+AddSound("Stalker.Bear.Miss4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"misses/miss4.wav")
+----DEATH
+AddSound("Stalker.Bear.Die1",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/bear/bear_death_0.ogg")
+AddSound("Stalker.Bear.Die2",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/bear/bear_death_1.ogg")
+AddSound("Stalker.Bear.Die3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/bear/bear_death_2.ogg")
+AddSound("Stalker.Bear.Die4",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"npc/bear/bear_death_3.ogg")
 
 -- Izlom sounds
 ----IDLE

@@ -39,7 +39,8 @@ ENT.IsLongJumping = 0
 ENT.longjumping1 = 0
 ENT.longjumping2 = 0
 
-ENT.hp = 175
+ENT.hp = 200
+ENT.hpvar = 50
 
 ENT.NextAbilityTime = 0
 
@@ -116,7 +117,7 @@ function ENT:Initialize()
 	TEMP_MeleeTable.bone[2] = "bip01_l_hand"
 	self:STALKERNPCSetMeleeParams(5,"stand_attack_3",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 	
-	self:SetHealth(self.hp)	
+	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	
 	self:SetMaxHealth(self:Health())
 

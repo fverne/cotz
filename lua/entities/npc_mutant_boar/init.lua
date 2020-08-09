@@ -27,7 +27,8 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 200
+ENT.hp = 225
+ENT.hpvar = 50
 
 ENT.NextAbilityTime = 0
 
@@ -37,7 +38,7 @@ ENT.VisibleSchedule = SCHED_IDLE_WANDER
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 function ENT:Initialize()
-	self.Model = "models/stalkertnb/boar1.mdl"
+	self.Model = "models/monsters/boar.mdl"
 	self:STALKERNPCInit(Vector(-50,-50,90),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
@@ -52,26 +53,35 @@ function ENT:Initialize()
 						
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
-	TEMP_MeleeTable.damage[1] = 30
+	TEMP_MeleeTable.damage[1] = 60
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
 	TEMP_MeleeTable.distance[1] = 70
 	TEMP_MeleeTable.radius[1] = 90
-	TEMP_MeleeTable.time[1] = 0.5
+	TEMP_MeleeTable.time[1] = 1
 	TEMP_MeleeTable.bone[1] = "bip01_head"
-	self:STALKERNPCSetMeleeParams(1,"attack2",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-	self:STALKERNPCSetMeleeParams(2,"attack3",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-	
+	self:STALKERNPCSetMeleeParams(1,"stand_attack_0",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	TEMP_MeleeTable.damage[1] = 30
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
 	TEMP_MeleeTable.distance[1] = 128
 	TEMP_MeleeTable.radius[1] = 60
-	TEMP_MeleeTable.time[1] = 0.55
+	TEMP_MeleeTable.time[1] = 0.85
 	TEMP_MeleeTable.bone[1] = "bip01_r_forearm"
-	self:STALKERNPCSetMeleeParams(3,"attack4",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(2,"stand_attack_1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
 
-	self:SetHealth(self.hp)	
+	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
+	TEMP_MeleeTable.damage[1] = 30
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.distance[1] = 70
+	TEMP_MeleeTable.radius[1] = 90
+	TEMP_MeleeTable.time[1] = 0.65
+	TEMP_MeleeTable.bone[1] = "bip01_head"
+	self:STALKERNPCSetMeleeParams(3,"stand_attack_2",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	
+
+	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	
 	self:SetMaxHealth(self:Health())
 	

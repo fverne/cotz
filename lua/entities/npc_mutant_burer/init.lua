@@ -27,7 +27,8 @@ ENT.CanShield = 0
 ENT.CanGrab = 0
 ENT.CanPush = 0
 
-ENT.hp = 1000
+ENT.hp = 1300
+ENT.hpvar = 450
 
 ENT.MustShield = 0
 ENT.IsShielding = 0
@@ -82,8 +83,7 @@ function ENT:Initialize()
 	TEMP_MeleeTable.bone[2] = "left_hand"
 	self:STALKERNPCSetMeleeParams(1,"S_Melee",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
-	
-	self:SetHealth(self.hp)	
+	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	
 	self:SetMaxHealth(self:Health())
 

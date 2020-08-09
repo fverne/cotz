@@ -28,6 +28,7 @@ ENT.ChasingSound.chance = 15
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
 ENT.hp = 600
+ENT.hpvar = 100
 
 ENT.FleeTime = 0
 ENT.MustFlee = false
@@ -102,7 +103,7 @@ function ENT:Initialize()
 	TEMP_MeleeTable.bone[2] = "bip01_r_hand"
 	self:STALKERNPCSetMeleeParams(4,"stand_attack_1",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
-	self:SetHealth(self.hp)
+	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	
 	self:SetMaxHealth(self:Health())
 	

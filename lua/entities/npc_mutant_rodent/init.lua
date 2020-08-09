@@ -27,7 +27,8 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 6
+ENT.hp = 7
+ENT.hpvar = 2
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -103,8 +104,7 @@ function ENT:Initialize()
 	TEMP_MeleeTable.bone[4] = "bip01_l_forearm"
 	self:STALKERNPCSetMeleeParams(4,"attack2",4, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
-
-	self:SetHealth(self.hp)	
+	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	
 	self:SetMaxHealth(self:Health())
 	

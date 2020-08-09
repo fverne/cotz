@@ -42,6 +42,8 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_IDLE_WANDER 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
+ENT.flatbulletresistance = 6
+ENT.percentbulletresistance = 35
 
 function ENT:Initialize()
 	self.Model = "models/monsters/gigant3.mdl"
@@ -186,5 +188,13 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 				end
 			end
 		end
+	end
+end
+
+function ENT:STALKERNPCDamageTake(dmginfo,mul)
+	if(dmginfo:GetDamageType() == DMG_BULLET) then
+		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
+		dmginfo:SubtractDamage(self.flatbulletresistance)
+		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 end

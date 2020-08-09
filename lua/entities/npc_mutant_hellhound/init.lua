@@ -27,7 +27,8 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 400
+ENT.hp = 500
+ENT.hpvar = 100
 
 ENT.IgniteTime = 0
 
@@ -45,7 +46,7 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 
 function ENT:Initialize()
-	self.Model = "models/stalkertnb/dog1.mdl"
+	self.Model = "models/monsters/slep_dog2.mdl"
 	self:STALKERNPCInit(Vector(-24,-24,90),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
@@ -66,10 +67,9 @@ function ENT:Initialize()
 	TEMP_MeleeTable.radius[1] = 128
 	TEMP_MeleeTable.time[1] = 0.6
 	TEMP_MeleeTable.bone[1] = "bip01_head"
-	self:STALKERNPCSetMeleeParams(1,"attack2",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-	self:STALKERNPCSetMeleeParams(2,"attack3",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-	self:STALKERNPCSetMeleeParams(3,"attack4",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-	self:STALKERNPCSetMeleeParams(4,"attack5",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(1,"stand_attack_0",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(2,"stand_attack_1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(3,"stand_attack_2",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
@@ -136,14 +136,13 @@ function ENT:Initialize()
 	TEMP_MeleeTable.time[9] = 1.0
 	TEMP_MeleeTable.bone[9] = "bip01_head"
 
+	self:STALKERNPCSetMeleeParams(5,"stand_attack_0",9, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
-	self:STALKERNPCSetMeleeParams(6,"attack3",9, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-
-	self:SetHealth(self.hp)	
+	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	
 	self:SetMaxHealth(self:Health())
 	
-	
+	self:SetModelScale(1.5)
 	
 	self:SetRenderMode(RENDERMODE_TRANSALPHA)
 end
@@ -158,18 +157,12 @@ function ENT:STALKERNPCThink()
 		self.IgniteTime = CurTime() + 29
 	end
 
-	if self.MustFlee then
-		self.RangeSchedule = SCHED_RUN_RANDOM
-	else
-		self.RangeSchedule = SCHED_CHASE_ENEMY
-	end
-
 	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
 
 		self.Entity:SetNWBool( "Burn", true )
 
-		self:STALKERNPCPlayAnimation("attack3",6)
-		self:STALKERNPCMakeMeleeAttack(6)
+		self:STALKERNPCPlayAnimation("stand_attack_0",5)
+		self:STALKERNPCMakeMeleeAttack(5)
 		self:EmitSound("Stalker.Dog.Melee1")
 		self.isAttacking = 2
 	end

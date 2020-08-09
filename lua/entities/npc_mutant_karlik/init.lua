@@ -25,7 +25,8 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
 ENT.CanWarp = 0
 
-ENT.hp = 800
+ENT.hp = 900
+ENT.hpvar = 200
 
 ENT.WantToWarp = false
 ENT.IsWarping = 0
@@ -76,8 +77,7 @@ function ENT:Initialize()
 	TEMP_MeleeTable.bone[1] = "right_hand"
 	self:STALKERNPCSetMeleeParams(1,"stand_idle_0",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
-	
-	self:SetHealth(self.hp)	
+	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	
 	self:SetMaxHealth(self:Health())
 

@@ -27,7 +27,8 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 80
+ENT.hp = 90
+ENT.hpvar = 30
 
 ENT.FleeTime = 0
 ENT.MustFlee = false
@@ -45,7 +46,7 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 
 function ENT:Initialize()
-	self.Model = "models/stalkertnb/dog1.mdl"
+	self.Model = "models/monsters/slep_dog2.mdl"
 	self:STALKERNPCInit(Vector(-24,-24,90),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
@@ -66,10 +67,9 @@ function ENT:Initialize()
 	TEMP_MeleeTable.radius[1] = 128
 	TEMP_MeleeTable.time[1] = 0.6
 	TEMP_MeleeTable.bone[1] = "bip01_head"
-	self:STALKERNPCSetMeleeParams(1,"attack2",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-	self:STALKERNPCSetMeleeParams(2,"attack3",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-	self:STALKERNPCSetMeleeParams(3,"attack4",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-	self:STALKERNPCSetMeleeParams(4,"attack5",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(1,"stand_attack_0",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(2,"stand_attack_1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(3,"stand_attack_2",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
@@ -79,13 +79,11 @@ function ENT:Initialize()
 	TEMP_MeleeTable.radius[1] = 128
 	TEMP_MeleeTable.time[1] = 0.6
 	TEMP_MeleeTable.bone[1] = "bip01_head"
-	self:STALKERNPCSetMeleeParams(6,"attack3",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(5,"jump_ataka_01",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
-	self:SetHealth(self.hp)	
+	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	
 	self:SetMaxHealth(self:Health())
-	
-	
 	
 	self:SetRenderMode(RENDERMODE_TRANSALPHA)
 end
@@ -104,13 +102,13 @@ function ENT:STALKERNPCThink()
 	end
 
 	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(12*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
-		self:STALKERNPCPlayAnimation("attack3",6)
-		self:STALKERNPCMakeMeleeAttack(6)
+		self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*500 +self:GetForward()*(12*distance) +self:GetUp()*math.Clamp((distance),150,400))
+		self:STALKERNPCPlayAnimation("jump_ataka_01",5)
+		self:STALKERNPCMakeMeleeAttack(5)
 		self:EmitSound("Stalker.Dog.Melee1")
 		self.isAttacking = 2
 	end
-	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
+	if (self.jumping2 < CurTime()) and self.isAttacking == 2 and self:IsOnGround() then
 		self:STALKERNPCStopAllTimers()
 		self:STALKERNPCClearAnimation()
 		self.NextAbilityTime = CurTime()+0.5
@@ -129,7 +127,7 @@ function ENT:STALKERNPCOnDeath()
 end
 
 function ENT:RunAway()
-	if !self.HasLeader then
+	if (!self.HasLeader) then
 		self.MustFlee = true
 		self:SetSchedule(SCHED_RUN_FROM_ENEMY)
 		self.FleeTime = CurTime() + 5
@@ -148,7 +146,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 					self.CanJump = CurTime()+3
 					self.isAttacking = 1
 					self.jumping1 = CurTime()+0.2
-					self.jumping2 = CurTime()+5
+					self.jumping2 = CurTime()+1
 				end
 			end
 		end

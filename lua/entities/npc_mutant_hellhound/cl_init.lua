@@ -1,13 +1,13 @@
 include('shared.lua')
 
 function ENT:Initialize()
-	self.RealModel = "models/stalkertnb/dog1.mdl"
+	self.RealModel = "models/monsters/slep_dog2.mdl"
 	self.TEMP_Emitter = ParticleEmitter(Vector(0,0,0), false)
 end
 
 function ENT:Draw()
 	
-	self:SetModel("models/stalkertnb/dog1.mdl")
+	self:SetModel("models/monsters/slep_dog2.mdl")
 	self:DrawModel()
 end
 
