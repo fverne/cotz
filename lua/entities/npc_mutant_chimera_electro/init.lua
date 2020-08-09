@@ -34,8 +34,10 @@ ENT.isAttacking = 0
 ENT.jumping1 = 0
 ENT.jumping2 = 0
 
-ENT.hp = 2100
-ENT.hpvar = 500
+ENT.hp = 5800
+ENT.hpvar = 800
+
+ENT.CanBlast = 0
 
 ENT.NextAbilityTime = 0
 
@@ -44,8 +46,17 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_RUN_RANDOM
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
-ENT.flatbulletresistance = 8
-ENT.percentbulletresistance = 20
+ENT.flatbulletresistance = 11
+ENT.percentbulletresistance = 30
+
+sound.Add( {
+	name = "electra_blast",
+	channel = CHAN_STATIC,
+	volume = 1,
+	level = 100,
+	pitch = 100,
+	sound = "anomaly/electra_blast1.mp3"
+} )
 
 
 function ENT:Initialize()
@@ -136,10 +147,35 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 	end
 end
 
+function ENT:STALKERNPCHitSomething()
+	self:Blast()
+end
+
 function ENT:STALKERNPCDamageTake(dmginfo,mul)
 	if(dmginfo:GetDamageType() == DMG_BULLET) then
 		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
 		dmginfo:SubtractDamage(self.flatbulletresistance)
 		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
+
+		self:Blast()
+	end
+end
+
+function ENT:Blast()
+	if (self.CanBlast < CurTime()) then
+		ParticleEffect( "electra_activated", self:GetPos() + Vector(0,0,16), Angle( 0, 0, 0 ) )
+		for _,v in pairs(ents.FindInSphere(self:GetPos() + Vector(0,0,16), 512)) do
+			if v == self then continue end
+			local dmg = DamageInfo()
+			dmg:SetDamage(75)
+			dmg:SetAttacker(self)
+			dmg:SetDamageType(DMG_SHOCK)
+			dmg:SetInflictor(self)
+			dmg:SetDamagePosition(v:NearestPoint(self:GetPos()))
+
+			v:TakeDamageInfo(dmg)
+		end
+
+		self.CanBlast = CurTime() + 4
 	end
 end

@@ -3,6 +3,11 @@ if(SERVER) then
 end
 local TEMP_VOICEDIST = 350
 
+game.AddParticles("particles/stalker_anomaly.pcf")
+PrecacheParticleSystem("electra")
+PrecacheParticleSystem("electra_activated")
+PrecacheParticleSystem("electra_static")
+PrecacheParticleSystem("electra_static_electra")
 
 local function AddNPC(NAME,TYPE)
 	local NPC = {
@@ -34,6 +39,8 @@ AddNPC("Tushkano","npc_mutant_rodent")
 AddNPC("Izlom","npc_mutant_izlom")
 
 AddNPC("Bear","npc_mutant_bear")
+
+AddNPC("Chimera (Electro)","npc_mutant_chimera_electro")
 
 AddNPC("Pseudogiant (Fast)","npc_mutant_pseudogiant_fast")
 AddNPC("Pseudogiant (Slow)","npc_mutant_pseudogiant_slow")
