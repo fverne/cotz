@@ -46,8 +46,8 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_RUN_RANDOM
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
-ENT.flatbulletresistance = 11
-ENT.percentbulletresistance = 30
+ENT.flatbulletresistance = 9
+ENT.percentbulletresistance = 25
 
 sound.Add( {
 	name = "electra_blast",
