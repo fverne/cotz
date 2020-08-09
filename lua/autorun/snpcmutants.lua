@@ -423,139 +423,8 @@ AddSound("Stalker.Rodent.Die3",CHAN_VOICE,1,TEMP_VOICEDIST,98,102,"hgn/stalker/c
 local ControllerPlayerPsyEffectTime = 0
 local LanguageChoosen = 0
 local TEMP_CheckPosTime = 0
+
 /*
-if(CLIENT) then
-
-	local function ControllerWeaponFuncNoDraw( self )
-		if(LocalPlayer():GetNWFloat("PsyDamage",0)>0.1) then		
-			return
-		end
-		
-		self:DrawModel()
-	end
-	
-	local function ControllerNpcFuncChangeDraw( self )
-		if(IsValid(self:GetActiveWeapon())) then
-			self:GetActiveWeapon().RenderOverride = ControllerWeaponFuncNoDraw
-		end
-		
-		local TEMP_RealModel = self:GetModel()
-		local TEMP_RealPos = self:GetPos()
-			
-		if(LocalPlayer():GetNWFloat("PsyDamage",0)>0.1) then		
-			if(!isvector(self.TEMP_PrevPos)) then
-				self.TEMP_PrevPos = TEMP_RealPos
-			end
-			
-			
-			local TEMP_Seq = "S_Idle"
-			
-			if(TEMP_RealPos:Distance(self.TEMP_PrevPos)>3) then
-				TEMP_Seq = "S_Walk"
-			end
-			
-			self:SetModel("models/GSC/S.T.A.L.K.E.R/Monsters/Controller.mdl")
-			self:SetModelScale(1)
-			
-			self:SetSequence(self:LookupSequence(TEMP_Seq))
-			
-			local TEMP_RandVec = (VectorRand()*math.random(5,10))
-			self:SetPos(self:GetPos()+TEMP_RandVec)
-			self:SetupBones()
-			self:DrawModel()
-			
-			self:SetModel(TEMP_RealModel)
-			self:SetPos(TEMP_RealPos)
-			self:SetupBones()
-			
-			return
-		end
-		
-		self:DrawModel()
-	end
-
-	local TEMP_ControllerReDrawNext = 0
-
-	hook.Add("Think","StalkerControllerEntsRender",function()
-		if(TEMP_ControllerReDrawNext<CurTime()) then
-			local ply = LocalPlayer()
-			
-			if(ply:GetNWFloat("PsyDamage",0)>0.1&&ply:Alive()) then 
-				local TEMP_NPCS = ents.FindInSphere(ply:GetPos(),3000)
-				
-				if(#TEMP_NPCS>0) then
-					for N=1, #TEMP_NPCS do
-						if(IsValid(TEMP_NPCS[N])&&TEMP_NPCS[N]!=NULL&&
-						TEMP_NPCS[N]:GetClass()!="npc_stalker_controller"&&(TEMP_NPCS[N]:IsNPC()&&
-						TEMP_NPCS[N]:GetMoveType()==MOVETYPE_STEP)||
-						(TEMP_NPCS[N]:IsPlayer()&&TEMP_NPCS[N]!=ply&&TEMP_NPCS[N]:Alive())) then
-							if(!isfunction(TEMP_NPCS[N].RenderOverride)) then
-								TEMP_NPCS[N].RenderOverride = ControllerNpcFuncChangeDraw
-							end
-						end
-					end
-				end
-			end
-			
-			TEMP_ControllerReDrawNext = CurTime()+1
-		end
-	end)
-end
-
-
-hook.Add( "PostDrawOpaqueRenderables", "BControllerReRenderCreatures", function()
-	local ply = LocalPlayer()
-	
-	if(ply:GetNWFloat("PsyDamage",0)>0.1&&ply:Alive()) then 
-		local TEMP_NPCS = ents.FindInSphere(ply:GetPos(),3000)
-		
-		if(#TEMP_NPCS>0) then
-			for N=1, #TEMP_NPCS do
-				if((TEMP_NPCS[N]:IsNPC()&&TEMP_NPCS[N]!=NULL&&TEMP_NPCS[N]:GetMoveType()==MOVETYPE_STEP)||
-				(TEMP_NPCS[N]:IsPlayer()&&TEMP_NPCS[N]!=ply&&TEMP_NPCS[N]:Alive())) then
-					local TEMP_RealModel = TEMP_NPCS[N]:GetModel()
-					local TEMP_RealPos = TEMP_NPCS[N]:GetPos()
-					
-					if(!isvector(TEMP_NPCS[N].TEMP_PrevPos)) then
-						TEMP_NPCS[N].TEMP_PrevPos = TEMP_RealPos
-					end
-					
-					
-					local TEMP_Seq = "S_Idle"
-					
-					if(TEMP_RealPos:Distance(TEMP_NPCS[N].TEMP_PrevPos)>2) then
-						TEMP_Seq = "S_Walk"
-					end
-					
-					TEMP_NPCS[N]:SetModel("models/GSC/S.T.A.L.K.E.R/Monsters/Controller.mdl")
-					TEMP_NPCS[N]:SetModelScale(1)
-					
-					TEMP_NPCS[N]:SetSequence(TEMP_NPCS[N]:LookupSequence(TEMP_Seq))
-					
-					local TEMP_RandVec = (VectorRand()*math.random(5,10))
-					TEMP_NPCS[N]:SetPos(TEMP_NPCS[N]:GetPos()+TEMP_RandVec)
-					//TEMP_NPCS[N]:SetupBones()
-					TEMP_NPCS[N]:DrawModel()
-					
-					
-					
-					TEMP_NPCS[N]:SetPos(TEMP_RealPos)
-					TEMP_NPCS[N]:SetModelScale(0)
-					TEMP_NPCS[N]:SetModel(TEMP_RealModel)
-					//TEMP_NPCS[N]:SetupBones()
-					
-					if(TEMP_CheckPosTime<CurTime()) then
-						TEMP_NPCS[N].TEMP_PrevPos = TEMP_RealPos
-						TEMP_CheckPosTime = CurTime()+0.1
-					end
-				end
-			end
-		end
-	end
-	
-end)*/
-
-
 hook.Add("Think","StalkerControllerPlayerPsyDamage",function()
 	if(CLIENT) then
 		if(IsValid(LocalPlayer())&&LocalPlayer()!=nil&&LocalPlayer()!=NULL) then
@@ -706,7 +575,6 @@ hook.Add("Think","StalkerControllerPlayerPsyDamage",function()
 		end
 	end
 end)
-	
 if(CLIENT) then
 	local TEMP_NEXTSCARYSOUNDTIME = 0
 	local PsyVoicesPlaying = false
@@ -793,44 +661,4 @@ if(CLIENT) then
 	end)
 end
 
-
-
-if(SERVER) then
-	hook.Add("EntityTakeDamage" , "Burer Bolt Damage" , function( ent , dmginfo )
-		if(IsValid(dmginfo:GetInflictor())&&dmginfo:GetInflictor():GetClass()=="crossbow_bolt"&&
-		IsValid(dmginfo:GetInflictor():GetOwner())&&dmginfo:GetInflictor():GetOwner():GetClass()=="npc_stalker_burer") then
-			if(isnumber(dmginfo:GetInflictor().BurerBoltDamage)) then
-				dmginfo:SetAttacker(dmginfo:GetInflictor():GetOwner())
-				dmginfo:SetDamage( dmginfo:GetInflictor().BurerBoltDamage )
-			end
-		end
-	end)
-end
-
-
-function STALKERNPCClearPsyEffect(ply)
-	if(timer.Exists("ControllerCameraShake"..tostring(ply))) then
-		timer.Remove("ControllerCameraShake"..tostring(ply))
-	end
-	
-	if(ply.ControlPsyAuraPlayerSound) then
-		ply.ControlPsyAuraPlayerSound:Stop()
-		ply.ControlPsyAuraPlayerSound = nil
-	end
-	
-	ply:SetNWFloat("PsyDamage",0)
-	ply:SetNWFloat("PsyHealthTemp",0)
-	
-	net.Start("STALKERNPCControllerStopPsySound")
-	net.Send(ply)
-end
-
-
-hook.Add("PlayerDeath","StalkerControllerPlayerDeath",function(ply)
-	STALKERNPCClearPsyEffect(ply)
-end)
-
-
-hook.Add("PlayerSpawn","StalkerControllerPlayerPsyHealthRestore",function(ply)
-	STALKERNPCClearPsyEffect(ply)
-end)
+*/

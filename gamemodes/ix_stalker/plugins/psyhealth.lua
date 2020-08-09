@@ -110,7 +110,7 @@ function PLUGIN:PreDrawHUD()
 			[ "$pp_colour_addr" ] = 0.01*(psydmg*2),
 			[ "$pp_colour_addg" ] = 0.02*(psydmg*2),
 			[ "$pp_colour_addb" ] = 0.3*(psydmg*2),
-			[ "$pp_colour_brightness" ] = -0.43*(psydmg*2),
+			[ "$pp_colour_brightness" ] = -0.33*(psydmg*2),
 			[ "$pp_colour_contrast" ] = 1-(0.22*(psydmg*2)),
 			[ "$pp_colour_colour" ] = 1-(0.7*(psydmg*2)),
 		}
@@ -169,3 +169,27 @@ ix.command.Add("CharSetPsyHealth", {
         target:UpdatePsyHealthState(target)
 	end
 })
+
+function PLUGIN:EntityTakeDamage(entity, dmgInfo)
+	--SONIC OVERRIDE
+	if ( entity:IsPlayer() and dmgInfo:IsDamageType(DMG_SONIC)) then
+		local dmgAmount = dmgInfo:GetDamage()
+		local psyResist = 0--entity:GetPsyResist()
+		
+		entity:DamagePsyHealth(math.Clamp(dmgAmount *(1-psyResist) ,0, 100))
+		dmgInfo:SetDamage(0)
+	end
+end
+
+if (SERVER) then
+	function PLUGIN:PlayerDeath(client)
+		client.resetPsyHealth = true
+	end
+
+	function PLUGIN:PlayerSpawn(client)
+		if (client.resetPsyHealth) then
+			client:SetPsyHealth(75)
+			client.resetPsyHealth = nil
+		end
+	end
+end

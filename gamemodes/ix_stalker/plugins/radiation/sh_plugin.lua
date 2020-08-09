@@ -48,7 +48,7 @@ end
 
 function PLUGIN:PostPlayerLoadout(client)
 	if client:GetData("ixhasgeiger", false) then
-		client:SetNetVar("ixhasgeiger", true)
+		client:SetNetVar("ixhasgeiger", false)
 	end
 end
 
