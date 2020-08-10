@@ -7,7 +7,7 @@ ITEM.quantity = 1
 ITEM.price = 70
 ITEM.width = 1
 ITEM.height = 1
-ITEM.busflag = {"dev"}
+ITEM.cookable = true
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
@@ -17,12 +17,10 @@ end)
 
 ITEM:DecideFunction()
 
-function ITEM:PopulateTooltip(tooltip)
+function ITEM:PopulateTooltipIndividual(tooltip)
 	if !self.entity then
 		
-
 		ix.util.PropertyDesc(tooltip, "High Tier Mutant Meat", Color(0, 255, 0))
-		ix.util.PropertyDesc(tooltip, "Cookable", Color(0, 255, 0))
 		ix.util.PropertyDesc(tooltip, "Toxic Food", Color(255, 0, 0))
 	end
 end

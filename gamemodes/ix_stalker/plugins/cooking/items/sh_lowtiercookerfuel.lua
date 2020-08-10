@@ -4,10 +4,9 @@ ITEM.longdesc = "No longer description available."
 ITEM.model = "models/lostsignalproject/items/misc/charcoal.mdl"
 ITEM.width = 2
 ITEM.height = 2
-ITEM.lowtierfuel = true
+ITEM.fueltier = "low"
 ITEM.maxStack = 3
-ITEM.splitSize = {1, 2, 5, ITEM.maxStack}
-ITEM.busflag = {"dev"}
+ITEM.splitSize = {1, 2, ITEM.maxStack}
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
@@ -27,9 +26,9 @@ ITEM.functions.combine = {
 
 		if targetItem.uniqueid == item.uniqueid then
 			return true
-		else
-			return false
 		end
+
+		return false
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
