@@ -4,9 +4,9 @@ ITEM.longdesc = "No longer description available."
 ITEM.model = "models/lostsignalproject/items/misc/charcoal.mdl"
 ITEM.width = 2
 ITEM.height = 2
-ITEM.fueltier = "low"
+ITEM.fueltier = 1
 ITEM.maxStack = 3
-ITEM.splitSize = {1, 2, ITEM.maxStack}
+ITEM.splitSize = {1, 2}
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
@@ -18,33 +18,38 @@ end
 
 ITEM.functions.combine = {
 	OnCanRun = function(item, data)
-		if !data then
+		if !data[1] then
 			return false
 		end
 
 		local targetItem = ix.item.instances[data[1]]
+		return (targetItem.uniqueID == item.uniqueID or targetItem.cookertier and targetItem.cookertier >= item.fueltier)
 
-		if targetItem.uniqueid == item.uniqueid then
-			return true
-		end
-
-		return false
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		local targetAmmoDiff = targetItem.maxStack - targetItem:GetData("quantity", targetItem.maxStack)
-		local localQuant = item:GetData("quantity", item.maxStack)
-		local targetQuant = targetItem:GetData("quantity", targetItem.maxStack)
-		item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
+		if( targetItem.uniqueID == item.uniqueID ) then
+			local targetAmmoDiff = targetItem.maxStack - targetItem:GetData("quantity", targetItem.maxStack)
+			local localQuant = item:GetData("quantity", item.maxStack)
+			local targetQuant = targetItem:GetData("quantity", targetItem.maxStack)
+			item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
 
-		if targetAmmoDiff >= localQuant then
-			targetItem:SetData("quantity", targetQuant + localQuant)
-			return true
-		else
-			item:SetData("quantity", localQuant - targetAmmoDiff)
-			targetItem:SetData("quantity", targetItem.maxStack)
-			return false
+			if targetAmmoDiff >= localQuant then
+				targetItem:SetData("quantity", targetQuant + localQuant)
+				return true
+			else
+				item:SetData("quantity", localQuant - targetAmmoDiff)
+				targetItem:SetData("quantity", targetItem.maxStack)
+				return false
+			end
+		elseif ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and !targetItem:GetData("cancook", false) ) then
+			item:SetData("quantity", item:GetData("quantity", item.maxStack) - 1)
+			targetItem:SetData("cancook", true)
+
+			return (item:GetData("quantity", item.maxStack) == 0)
 		end
+
+		return false
 	end,
 }
 

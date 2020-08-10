@@ -197,6 +197,7 @@ else
 		local item = self:GetItemTable()
 
 		if (!item) then
+			print("NONEXISTANT ITEM - CHECK THIS ASAP")
 			return
 		end
 
