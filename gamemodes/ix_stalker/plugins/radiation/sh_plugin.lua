@@ -37,13 +37,7 @@ function playerMeta:setRadiation(amount)
 end
 
 function playerMeta:hasGeiger()
-	local geigercounter = self:GetNetVar("ixhasgeiger")
-
-	if !geigercounter then
-		return false
-	else
-		return true
-	end
+	return self:GetNetVar("ixhasgeiger")
 end
 
 function PLUGIN:PostPlayerLoadout(client)
@@ -133,7 +127,7 @@ else
 				if v:GetNetVar("radiation", 0) == 100 then
 					if v:Alive() then
 						v:Kill()
-						ix.log.Add(client, "death", "radiation")
+						ix.log.Add(v, "playerDeath", "radiation")
 					end
 				end	
 			end
