@@ -18,7 +18,7 @@ end
 
 ITEM.functions.combine = {
 	OnCanRun = function(item, data)
-		if !data[1] then
+		if !data or !data[1] then
 			return false
 		end
 
