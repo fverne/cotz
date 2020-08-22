@@ -1,49 +1,30 @@
 ITEM.name = "Scientific Medkit"
-ITEM.description = "Medkit used by ecologists."
-ITEM.longdesc = "A medical kit designed specifically for use in the Zone.\nThe kit contains products for handling wounds, as well as preventing the development of radiation poisoning and reducing accumulated radiation in the body."
-ITEM.model = "models/kek1ch/dev_aptechka_mid.mdl"
-ITEM.width = 1
-ITEM.height = 1
-ITEM.category = "Aid"
-ITEM.restore = 4
-ITEM.radrem = 2
+ITEM.description = "A small military medkit."
+ITEM.longdesc = "A specialized medical kit for providing first aid to combat casualties. The kit includes blood coagulants based on menadione, painkillers, antibiotics and immunostimulants."
+ITEM.model = "models/lostsignalproject/items/medical/medical_bag_science.mdl"
+
 ITEM.sound = "stalkersound/inv_bandage.mp3"
-ITEM.price = "750"
-ITEM.flag = "A"
-ITEM.busflag = {"medical2_1_1"}
+
+ITEM.width = 2
+ITEM.height = 1
+ITEM.price = 1400
+
 ITEM.quantity = 3
-ITEM.weight = 0.15
-ITEM.flatweight = 0.1
+ITEM.restore  = 90
+item.radrem   = 50
 
-function ITEM:GetWeight()
-	return self.flatweight + (self.weight * self:GetData("quantity", self.quantity))
-end
-
-function ITEM:GetDescription()
-	if (!self.entity or !IsValid(self.entity)) then
-		local quant = self:GetData("quantity", self.quantity)
-		local str = self.longdesc.."\n \nThere's only "..quant.." use left."
-
-		return str
-	else
-		return self.desc
-	end
-end
-
-if (CLIENT) then
-	function ITEM:PaintOver(item, w, h)
-
-		draw.SimpleText(item:GetData("quantity", item.quantity).."/"..item.quantity, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
-	end
-end
+ITEM.weight = 0.050
+ITEM.flatweight = 0.400
 
 ITEM.functions.use = {
 	name = "Heal",
 	icon = "icon16/stalker/heal.png",
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
-		item.player:AddBuff("buff_slowheal", 10, { amount = item.restore })
-		item.player:AddBuff("buff_radiationremoval", 10, { amount = item.radrem })
+
+		item.player:AddBuff("buff_slowheal", 60, { amount = item.restore/120 })
+		item.player:AddBuff("buff_radiationremoval", 60, { amount = item.radrem/120 })
+		--item.player:AddBuff("buff_bleedheal", 5, { amount = 40/10 })
 		ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it.", false)
 
 		quantity = quantity - 1
@@ -53,14 +34,13 @@ ITEM.functions.use = {
 			return false
 		end
 		
-		
-
 		return true
 	end,
 	OnCanRun = function(item)
 		return (!IsValid(item.entity))
 	end
 }
+
 /*
 ITEM.functions.usetarget = {
 	name = "Heal Target",
@@ -95,3 +75,4 @@ ITEM.functions.usetarget = {
 		return (!IsValid(item.entity))
 	end
 }
+*/

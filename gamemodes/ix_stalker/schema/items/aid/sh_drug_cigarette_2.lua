@@ -1,40 +1,26 @@
-ITEM.name = "Russian brand of cigarettes"
-ITEM.description = "The pack is so worn it's hard to see the brand."
-ITEM.longdesc = "The cheapest pack of cigarettes in the Zone. Russian budget brand. You can smoke these.\nThey have a soothing effect on the body, and counters radioactivity very slightly."
-ITEM.model = "models/kek1ch/drink_cigar1.mdl"
+ITEM.name = "'Petr 1.' Cigarettes (10pk)"
+ITEM.description = "A pack of 'Petr 1.' brand cigarettes."
+ITEM.longdesc = "'Petr 1.' (Пётр I) brand cigarettes are produced by Japan Tobacco International and sold regionally in Russia. The name refers to Peter the Great, the Tsar who made Russia a major European power in the eighteenth century. The dark packaging and use of the Russian imperial coat of arms, with the words 'The Great Russia', evokes a bygone era of a powerful empire. This suggests the design of the packet is intended to appeal to male smokers of all ages, especially those attracted to nationalist sentiments. The cigarettes are manufactured by JTI in St. Petersburg, Peter the Great's northern capital.\nIt is popular with STALKERs due to its good taste and decent nicotine content, not to mention the affordable price. "
+ITEM.model = "models/lostsignalproject/items/consumable/cigarettes_russian.mdl"
+
+ITEM.sound = "stalkersound/inv_smoke.mp3"
+
 ITEM.width = 1
 ITEM.height = 1
-ITEM.category = "Aid"
-ITEM.price = "60"
-ITEM.busflag = {"medical1"}
-ITEM.radrem = 0.5
-ITEM.quantity = 6
-ITEM.sound = "stalkersound/inv_smoke.mp3"
-ITEM.weight = 0.01
+ITEM.price = 350
 
-function ITEM:GetDescription()
-	if (!self.entity or !IsValid(self.entity)) then
-		local quant = self:GetData("quantity", self.quantity)
-		local str = self.longdesc.."\n \nThere's only "..quant.." left."
+ITEM.quantity = 10
+ITEM.hunger = 4
+ITEM.psyheal = 4
 
-		return str
-	else
-		return self.desc
-	end
-end
+ITEM.flatweight = 0.010
+ITEM.weight = 0.001
 
 if (CLIENT) then
-	function ITEM:PaintOver(item, w, h)
-
-		draw.SimpleText(item:GetData("quantity", item.quantity).."/"..item.quantity, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
-	end
-
 	function ITEM:PopulateTooltip(tooltip)
-		if !self.entity then
-			
-
+		if (!self.entity) then
 			ix.util.PropertyDesc(tooltip, "Everyday Item", Color(200, 200, 200))
-			ix.util.PropertyDesc(tooltip, "Removes Radiation Very Slightly", Color(0, 255, 255))
+			ix.util.PropertyDesc(tooltip, "Calms the Mind Very Slightly", Color(0, 255, 255))
 			ix.util.PropertyDesc(tooltip, "Unhealthy", Color(255, 0, 0))
 		end
 	end
@@ -45,7 +31,11 @@ ITEM.functions.use = {
 	icon = "icon16/stalker/smoke.png",
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
-		item.player:AddBuff("buff_radiationremoval", 10, { amount = item.radrem })
+
+		local hunger = item.player:GetCharacter():GetData("hunger", 100)
+		item.player:SetHunger(hunger + item.hunger)
+
+		--item.player:AddBuff("buff_psyheal", 15, { amount = self.psyheal/30 })
 
 		quantity = quantity - 1
 

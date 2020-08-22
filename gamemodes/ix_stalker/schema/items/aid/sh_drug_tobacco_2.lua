@@ -1,41 +1,41 @@
-ITEM.name = "Caffeine Pills"
-ITEM.description = "Over the counter caffeine pills."
-ITEM.longdesc = "Imported caffeine pills. Used to give you a boost when you are tired, and increases your stamina regeneration, making those long hauls with equipment a more overcomeable task."
-ITEM.model = "models/kek1ch/dev_caffeine.mdl"
-ITEM.width = 1
+ITEM.name = "Russian Cigarette Tobacco"
+ITEM.description = "A box of russian tobacco."
+ITEM.longdesc = "A hard box filled with tobacco. Produced in Russia, this box is still somewhat rare in the zone, and as such the price is somewhat steep.\nMany STALKERs are fans of this brand, as the taste is unmatched by anything else found in the zone."
+ITEM.model = "models/lostsignalproject/items/misc/tobacco.mdl"
+
+ITEM.sound = "stalkersound/inv_smoke.mp3"
+
+ITEM.width = 2
 ITEM.height = 1
-ITEM.category = "Aid"
-ITEM.price = "150"
-ITEM.busflag = {"medical1_1_1"}
-ITEM.quantity = 5
-ITEM.restore = 0.5
-ITEM.sound = "stalkersound/inv_drug_engine.mp3"
-ITEM.weight = 0.1
+ITEM.price = 2350
 
-function ITEM:GetDescription()
-	if (!self.entity or !IsValid(self.entity)) then
-		local quant = self:GetData("quantity", self.quantity)
-		local str = self.longdesc.."\n \nThere's only "..quant.." uses left."
+ITEM.quantity = 15
+ITEM.hunger = 8
+ITEM.psyheal = 8
 
-		return str
-	else
-		return self.desc
-	end
-end
+ITEM.flatweight = 0.010
+ITEM.weight = 0.002
 
 if (CLIENT) then
-	function ITEM:PaintOver(item, w, h)
-
-		draw.SimpleText(item:GetData("quantity", item.quantity).."/"..item.quantity, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
+	function ITEM:PopulateTooltip(tooltip)
+		if (!self.entity) then
+			ix.util.PropertyDesc(tooltip, "Rare Item", Color(200, 200, 200))
+			ix.util.PropertyDesc(tooltip, "Calms the Mind", Color(0, 255, 255))
+			ix.util.PropertyDesc(tooltip, "Unhealthy", Color(255, 0, 0))
+		end
 	end
 end
 
 ITEM.functions.use = {
-	name = "Swallow",
-	icon = "icon16/stalker/swallow.png",
+	name = "Smoke",
+	icon = "icon16/stalker/smoke.png",
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
-		item.player:AddBuff("buff_staminarestore", 150, { amount = item.restore })
+
+		local hunger = item.player:GetCharacter():GetData("hunger", 100)
+		item.player:SetHunger(hunger + item.hunger)
+
+		--item.player:AddBuff("buff_psyheal", 30, { amount = self.psyheal/60 })
 
 		quantity = quantity - 1
 
@@ -44,7 +44,7 @@ ITEM.functions.use = {
 			return false
 		end
 		
-		ix.chat.Send(item.player, "iteminternal", "snorts some "..item.name..".", false)
+		ix.chat.Send(item.player, "iteminternal", "lights his "..item.name.." and inhales deeply.", false)
 
 		return true
 	end,
