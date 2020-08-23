@@ -12,7 +12,7 @@ ITEM.flatweight = 0.080
 ITEM.thirst = 17
 ITEM.quantity = 3
 
-ITEM.sound = "stalkersound/inv_drink_flask_2.mp3"
+ITEM.sound = "stalkersound/inv_drink_flask_effect.mp3"
 ITEM.img = Material("vgui/hud/items/drink/milk.png")
 
 ITEM:Hook("use", function(item)

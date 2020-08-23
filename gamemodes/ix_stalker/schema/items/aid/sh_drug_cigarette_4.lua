@@ -16,6 +16,13 @@ ITEM.psyheal = 3
 ITEM.flatweight = 0.010
 ITEM.weight = 0.001
 
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 0, 200),
+	ang = Angle(90, 0, 180),
+	fov = 1.2,
+}
+
 if (CLIENT) then
 	function ITEM:PopulateTooltip(tooltip)
 		if (!self.entity) then

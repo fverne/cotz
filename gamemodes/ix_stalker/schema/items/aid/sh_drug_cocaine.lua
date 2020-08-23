@@ -14,6 +14,13 @@ ITEM.quantity = 3
 ITEM.flatweight = 0.050
 ITEM.weight = 0.0005
 
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 0, 200),
+	ang = Angle(90, 0, 45),
+	fov = 1.4,
+}
+
 ITEM.functions.use = {
 	name = "Snort",
 	icon = "icon16/stalker/heal.png",

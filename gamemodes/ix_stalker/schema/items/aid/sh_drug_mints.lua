@@ -15,6 +15,13 @@ ITEM.psyheal = 2
 ITEM.weight = 0.0002
 ITEM.flatweight = 0.025
 
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 0, 200),
+	ang = Angle(90, 0, 180),
+	fov = 1.4,
+}
+
 ITEM.functions.use = {
 	name = "Swallow",
 	icon = "icon16/stalker/swallow.png",

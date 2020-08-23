@@ -1,9 +1,9 @@
 ITEM.name = "Swamp Doctor's Brew"
 ITEM.description = "A cup of strange liquid."
 ITEM.longdesc = "A hearty cup of some thick almost souplike liquid.\nThe taste is awful, but the positive effects of it cannot be understated. It'll clear your mind, heal your wounds, cleanse your body of the effects of radiation and energize your muscles."
-ITEM.model = "models/lostsignalproject/items/medical/stim_pack3.mdl"
+ITEM.model = "models/lostsignalproject/items/medical/drink_crow.mdl"
 
-ITEM.sound = "stalkersound/inv_syringe.mp3"
+ITEM.sound = "stalkersound/inv_drink_flask_effect.mp3"
 
 ITEM.width = 1
 ITEM.height = 1

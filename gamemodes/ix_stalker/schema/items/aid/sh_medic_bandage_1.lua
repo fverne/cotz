@@ -12,6 +12,13 @@ ITEM.sound = "stalkersound/inv_bandage_2p9.mp3"
 ITEM.price = 40
 ITEM.weight = 0.008
 
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(-1, 0, 200),
+	ang = Angle(90, 0, -45),
+	fov = 3,
+}
+
 ITEM.functions.use = {
 	name = "Heal",
 	icon = "icon16/stalker/heal.png",

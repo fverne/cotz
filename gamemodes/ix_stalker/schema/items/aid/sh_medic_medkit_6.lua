@@ -16,6 +16,13 @@ ITEM.radrem   = 35
 ITEM.weight = 0.025
 ITEM.flatweight = 0.045
 
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(200, 0, 0),
+	ang = Angle(180, -0, 180),
+	fov = 2.1,
+}
+
 ITEM.functions.use = {
 	name = "Heal",
 	icon = "icon16/stalker/heal.png",
