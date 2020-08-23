@@ -82,7 +82,7 @@ if (SERVER) then
 					tblBuffInfo.func( v, dat[2] )
 				end
 				if dat[1] < CurTime() then
-					v:RemoveBuff( name )
+					v:RemoveBuff( name, dat[2] )
 				end
 			end
 		end
