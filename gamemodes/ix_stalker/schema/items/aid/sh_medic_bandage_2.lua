@@ -27,6 +27,14 @@ ITEM.functions.use = {
 		--item.player:HealBleeding(50)
 		ix.chat.Send(item.player, "iteminternal", "unwraps and ties a "..item.name.." to their wound.", false)
 
+		local quantity = item:GetData("quantity", item.quantity)
+		quantity = quantity - 1
+
+		if (quantity >= 1) then
+			item:SetData("quantity", quantity)
+			return false
+		end
+		
 		return true
 	end,
 	OnCanRun = function(item)

@@ -38,9 +38,6 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 
-		local hunger = item.player:GetCharacter():GetData("hunger", 100)
-		item.player:SetHunger(hunger + item.hunger)
-
 		item.player:AddBuff("buff_psyheal", 60, { amount = item.psyheal/120 })
 		item.player:AddBuff("buff_psysuppress", 60, { })
 		item.player:AddBuff("buff_psyblock", 60, { amount = item.psyblock })
