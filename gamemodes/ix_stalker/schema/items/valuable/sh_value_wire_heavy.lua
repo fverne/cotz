@@ -1,0 +1,10 @@
+ITEM.name = "Heavy Duty Cabling"
+ITEM.description = "A thick electric wire, used in military applications."
+ITEM.longdesc = ""
+ITEM.model = "models/illusion/eftcontainers/militarycable.mdl"
+
+ITEM.width = 2
+ITEM.height = 2
+ITEM.price = 1200
+
+ITEM.flatweight = 0.800
