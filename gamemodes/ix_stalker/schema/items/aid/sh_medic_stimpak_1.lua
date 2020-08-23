@@ -23,7 +23,7 @@ ITEM.iconCam = {
 }
 
 ITEM.functions.use = {
-	name = "Heal",
+	name = "Inject",
 	icon = "icon16/stalker/heal.png",
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)

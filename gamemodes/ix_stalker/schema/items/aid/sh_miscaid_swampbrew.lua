@@ -18,7 +18,7 @@ ITEM.weight = 0.125
 ITEM.flatweight = 0.450
 
 ITEM.functions.use = {
-	name = "Heal",
+	name = "Drink",
 	icon = "icon16/stalker/heal.png",
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)

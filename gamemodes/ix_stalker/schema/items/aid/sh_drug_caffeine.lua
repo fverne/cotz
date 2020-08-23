@@ -22,7 +22,7 @@ ITEM.iconCam = {
 }
 
 ITEM.functions.use = {
-	name = "Snort",
+	name = "Swallow",
 	icon = "icon16/stalker/heal.png",
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
