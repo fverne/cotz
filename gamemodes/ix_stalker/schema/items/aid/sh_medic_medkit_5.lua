@@ -11,7 +11,7 @@ ITEM.price = 1400
 
 ITEM.quantity = 3
 ITEM.restore  = 90
-item.radrem   = 50
+ITEM.radrem   = 50
 
 ITEM.weight = 0.050
 ITEM.flatweight = 0.400
@@ -24,7 +24,7 @@ ITEM.functions.use = {
 
 		item.player:AddBuff("buff_slowheal", 60, { amount = item.restore/120 })
 		item.player:AddBuff("buff_radiationremoval", 60, { amount = item.radrem/120 })
-		--item.player:AddBuff("buff_bleedheal", 5, { amount = 40/10 })
+		--item.player:HealBleeding(80)
 		ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it.", false)
 
 		quantity = quantity - 1

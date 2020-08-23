@@ -11,8 +11,8 @@ ITEM.price = 450
 
 ITEM.quantity = 8
 
-ITEM.weight = 0.050
-ITEM.flatweight = 0.005
+ITEM.weight = 0.005
+ITEM.flatweight = 0.050
 
 ITEM.functions.use = {
 	name = "Heal",
@@ -20,7 +20,7 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 
-		--item.player:AddBuff("buff_psysuppress", 180, { })
+		item.player:AddBuff("buff_psysuppress", 180, { })
 		ix.chat.Send(item.player, "iteminternal", "pops out a pill from the "..item.name.." package and swallows it.", false)
 
 		quantity = quantity - 1

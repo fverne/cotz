@@ -35,7 +35,7 @@ ITEM.functions.use = {
 		local hunger = item.player:GetCharacter():GetData("hunger", 100)
 		item.player:SetHunger(hunger + item.hunger)
 
-		--item.player:AddBuff("buff_psyheal", 30, { amount = self.psyheal/60 })
+		item.player:AddBuff("buff_psyheal", 30, { amount = item.psyheal/60 })
 
 		quantity = quantity - 1
 

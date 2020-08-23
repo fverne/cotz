@@ -43,6 +43,10 @@ if SERVER then
 		end
 	end
 
+	function playerMeta:HealPsyHealth(amount)
+		self:DamagePsyHealth(-amount)
+	end
+
 	function playerMeta:SetPsyHealth(amount)
 		local char = self:GetCharacter()
 
@@ -78,6 +82,8 @@ if SERVER then
 	end
 
 	function playerMeta:UpdatePsyHealthState(client)
+
+		if (self:GetNetVar("ix_psysuppressed", false)) then return end --if psysuppressed, we dont do anything
 		--Do whatever PsyHealth will do in here
 	end
 end
@@ -94,12 +100,31 @@ function playerMeta:GetPsyHealth()
 	end
 end
 
+function playerMeta:GetPsyResist()
+	local res = 0
+	local char = self:GetCharacter()
+	local items = char:GetInventory():GetItems(true)
+
+	for j, i in pairs(items) do
+		if (i.psyProt and i:GetData("equip") == true) then
+			res = res + i.psyProt
+			break
+		end
+	end
+
+	res = res + self:GetNetVar("ix_psyblock",0)
+
+	return res
+end
+
 function PLUGIN:PreDrawHUD()
 	local lp = LocalPlayer()
 	local wep = LocalPlayer():GetActiveWeapon()
 	local char = lp:GetCharacter()
 
 	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible()) then return end
+
+	if (lp:GetNWBool("ix_psysuppressed")) then return end
 
 	local psydmgPre = (100 - lp:GetPsyHealth())
 
@@ -174,9 +199,9 @@ function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 	--SONIC OVERRIDE
 	if ( entity:IsPlayer() and dmgInfo:IsDamageType(DMG_SONIC)) then
 		local dmgAmount = dmgInfo:GetDamage()
-		local psyResist = 0--entity:GetPsyResist()
+		local psyResist = entity:GetPsyResist()
 		
-		entity:DamagePsyHealth(math.Clamp(dmgAmount *(1-psyResist) ,0, 100))
+		entity:DamagePsyHealth(math.Clamp(dmgAmount *((100-psyResist)/100) ,0, 100))
 		dmgInfo:SetDamage(0)
 	end
 end

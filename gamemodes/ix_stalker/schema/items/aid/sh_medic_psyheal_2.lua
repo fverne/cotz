@@ -21,7 +21,7 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 
-		--item.player:AddBuff("buff_psyheal", 160, { amount = self.psyheal/320 })
+		item.player:AddBuff("buff_psyheal", 160, { amount = item.psyheal/320 })
 		--item.player:AddBuff("debuff_psypillmovement", 15, {})
 		ix.chat.Send(item.player, "iteminternal", "pops out a pill from the "..item.name.." package and swallows it.", false)
 

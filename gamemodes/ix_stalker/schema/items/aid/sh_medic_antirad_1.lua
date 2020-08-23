@@ -21,7 +21,7 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 
-		item.player:AddBuff("buff_radiationremoval", 120, { amount = self.restore/240 })
+		item.player:AddBuff("buff_radiationremoval", 120, { amount = item.restore/240 })
 
 		quantity = quantity - 1
 

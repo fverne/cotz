@@ -1,5 +1,5 @@
 ITEM.name = "aid"
-ITEM.desc = "Helps your body survive in the zone - in one way or another."
+ITEM.description = "Helps your body survive in the zone - in one way or another."
 ITEM.longdesc = "Longer description here."
 ITEM.category = "Aid"
 
@@ -16,11 +16,11 @@ ITEM.flatweight = 0
 function ITEM:GetDescription()
 	if (!self.entity or !IsValid(self.entity)) then
 		local quant = self:GetData("quantity", self.quantity)
-		local str = self.longdesc.."\n \nThere's only "..quant.." uses left."
+		local str = self.description.."\n\n"..self.longdesc.."\n \nThere's only "..quant.." uses left."
 
 		return str
 	else
-		return self.desc
+		return self.description
 	end
 end
 

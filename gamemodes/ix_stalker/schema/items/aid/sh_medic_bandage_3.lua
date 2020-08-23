@@ -17,7 +17,7 @@ ITEM.functions.use = {
 	icon = "icon16/stalker/heal.png",
 	OnRun = function(item)
 		item.player:AddBuff("buff_slowheal", 5, { amount = item.restore/10 })
-		--item.player:AddBuff("buff_bleedheal", 5, { amount = 90/10 })
+		--item.player:HealBleeding(90)
 		ix.chat.Send(item.player, "iteminternal", "unwraps and ties a "..item.name.." to their wound.", false)
 
 		return true

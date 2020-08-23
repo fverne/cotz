@@ -21,7 +21,7 @@ end
 -- returns table or boolean( false )
 -- This function allows you handle buffs
 function playerMeta:HasBuff( strBuff )
-	if self:GetNetVar( "buffs" ) != nil then
+	if (self:GetNetVar( "buffs" ) != nil) then
 		return ( self:GetNetVar( "buffs" )[ strBuff ] )
 	else
 		return false
@@ -38,7 +38,7 @@ if (SERVER) then
 	function playerMeta:AddBuff( strBuff, intDuration, parameter ) 
 		if intDuration < 0 then intDuration = 1000000 end
 		local tblBuffs = self:GetNetVar( "buffs" ) or {}
-		local tblBuffInfo = PLUGIN:GetBuff(strBuff)
+		local tblBuffInfo = PLUGIN.buffs[strBuff]
 		if tblBuffInfo and tblBuffInfo.onbuffed then
 			if !self:HasBuff( strBuff ) then
 				tblBuffInfo.onbuffed( self, parameter )
@@ -53,7 +53,7 @@ if (SERVER) then
 	-- This function allows you to add some buffs to player.
 	function playerMeta:RemoveBuff( strBuff, parameter ) -- perma
 		local tblBuffs = self:GetNetVar( "buffs" ) or {}
-			local tblBuffInfo = PLUGIN:GetBuff(strBuff)
+			local tblBuffInfo = PLUGIN.buffs[strBuff]
 			if tblBuffInfo and tblBuffInfo.ondebuffed then
 				tblBuffInfo.ondebuffed( self, parameter )
 			end

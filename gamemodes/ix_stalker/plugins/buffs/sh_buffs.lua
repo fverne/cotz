@@ -24,6 +24,19 @@ PLUGIN.buffs[ "buff_slowheal" ] = {
 	end,
 }
 
+PLUGIN.buffs[ "buff_rapidheal" ] = {
+	name = "Healing",
+	desc = "You're healing.",
+	func = function( player, parameter)
+		player.timeNextFastHeal = player.timeNextFastHeal or CurTime()
+		if player.timeNextFastHeal < CurTime() then
+			player:SetHealth(math.Clamp(player:Health() + (parameter.amount or 1), 0, player:GetMaxHealth()))
+
+			player.timeNextFastHeal = CurTime() + 0.5
+		end
+	end,
+}
+
 PLUGIN.buffs[ "buff_staminarestore" ] = {
 	name = "Energy",
 	desc = "You're restoring energy faster.",
@@ -50,11 +63,54 @@ PLUGIN.buffs[ "buff_radiationremoval" ] = {
 	end,
 }
 
+PLUGIN.buffs[ "buff_psyheal" ] = {
+	name = "Psyheal",
+	desc = "Your mind is clearing up.",
+	func = function( player, parameter)
+		player.timeNextTickPsyHeal = player.timeNextTickPsyHeal or CurTime()
+		if player.timeNextTickPsyHeal < CurTime() then
+			player:HealPsyHealth(parameter.amount)
+
+			player.timeNextTickPsyHeal = CurTime() + 0.5
+		end
+	end,
+}
+
 PLUGIN.buffs[ "buff_radprotect" ] = {
 	name = "Radiation Protection",
 	desc = "You're protected from radiation.",
 	func = function( player, parameter)
 		
+	end,
+}
+
+PLUGIN.buffs[ "buff_psysuppress" ] = {
+	name = "Psy Suppression",
+	desc = "Psychic effects are suppressed.",
+	func = function( player, parameter)
+		
+	end,
+	onbuffed = function( player, parameter )
+		print("player "..player:GetName().." is psysuppressed")
+		player:SetNWBool("ix_psysuppressed", true)
+	end,
+	ondebuffed = function( player, parameter )
+		print("player "..player:GetName().." is no longer psysuppressed")
+		player:SetNWBool("ix_psysuppressed", false)
+	end,
+}
+
+PLUGIN.buffs[ "buff_psyblock" ] = {
+	name = "Psyblock",
+	desc = "You're protected from psychic attacks.",
+	func = function( player, parameter)
+		
+	end,
+	onbuffed = function( player, parameter )
+		player:SetNWFloat("ix_psyblock", player:GetNWFloat("ix_psyblock",0) + parameter.amount )
+	end,
+	ondebuffed = function( player, parameter )
+		player:SetNWFloat("ix_psyblock", player:GetNWFloat("ix_psyblock",0) - parameter.amount )
 	end,
 }
 

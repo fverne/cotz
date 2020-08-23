@@ -22,7 +22,7 @@ ITEM.functions.use = {
 		local quantity = item:GetData("quantity", item.quantity)
 		
 		item.player:AddBuff("buff_slowheal", 20, { amount = item.restore/40 })
-		--item.player:AddBuff("buff_bleedheal", 5, { amount = 40/10 })
+
 		ix.chat.Send(item.player, "iteminternal", "opens the "..item.name.." and injects himself with a syrette.", false)
 
 		quantity = quantity - 1
