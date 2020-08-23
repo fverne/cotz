@@ -91,11 +91,9 @@ PLUGIN.buffs[ "buff_psysuppress" ] = {
 		
 	end,
 	onbuffed = function( player, parameter )
-		print("player "..player:GetName().." is psysuppressed")
 		player:SetNWBool("ix_psysuppressed", true)
 	end,
 	ondebuffed = function( player, parameter )
-		print("player "..player:GetName().." is no longer psysuppressed")
 		player:SetNWBool("ix_psysuppressed", false)
 	end,
 }
