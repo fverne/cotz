@@ -19,7 +19,7 @@ PLUGIN.buffs[ "buff_slowheal" ] = {
 		if player.timeNextHeal < CurTime() then
 			player:SetHealth(math.Clamp(player:Health() + (parameter.amount or 1), 0, player:GetMaxHealth()))
 
-			player.timeNextHeal = CurTime() + 0.5
+			player.timeNextHeal = CurTime() + 1
 		end
 	end,
 }
@@ -32,7 +32,7 @@ PLUGIN.buffs[ "buff_rapidheal" ] = {
 		if player.timeNextFastHeal < CurTime() then
 			player:SetHealth(math.Clamp(player:Health() + (parameter.amount or 1), 0, player:GetMaxHealth()))
 
-			player.timeNextFastHeal = CurTime() + 0.5
+			player.timeNextFastHeal = CurTime() + 1
 		end
 	end,
 }

@@ -29,7 +29,7 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 		
-		item.player:AddBuff("buff_slowheal", 5, { amount = item.restore/10 })
+		item.player:AddBuff("buff_slowheal", 5, { amount = item.restore/5 })
 		item.player:AddBuff("buff_psyheal", 60, { amount = item.psyheal/120 })
 
 		quantity = quantity - 1

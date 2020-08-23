@@ -10,7 +10,7 @@ ITEM.height = 1
 ITEM.price = 1800
 
 ITEM.quantity = 1
-ITEM.restore  = 300
+ITEM.restore  = 450
 ITEM.psyheal = 300
 ITEM.radrem   = 300
 
@@ -25,7 +25,7 @@ ITEM.functions.use = {
 
 		item.player:AddBuff("buff_staminarestore", 300, { amount = 1 })
 		item.player:AddBuff("buff_psyheal", 300, { amount = item.psyheal/600 })
-		item.player:AddBuff("buff_slowheal", 300, { amount = item.restore/600 })
+		item.player:AddBuff("buff_slowheal", 300, { amount = item.restore/300 })
 		item.player:AddBuff("buff_radiationremoval", 300, { amount = item.radrem/600 })
 
 		ix.chat.Send(item.player, "iteminternal", "downs the "..item.name..".", false)

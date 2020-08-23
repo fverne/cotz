@@ -23,9 +23,14 @@ ITEM.functions.use = {
 	name = "Heal",
 	icon = "icon16/stalker/heal.png",
 	OnRun = function(item)
-		item.player:AddBuff("buff_slowheal", 5, { amount = item.restore/10 })
-		--item.player:HealBleeding(20)
+		
+		
 		ix.chat.Send(item.player, "iteminternal", "unwraps and ties a "..item.name.." to their wound.", false)
+
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Wrapping Bandages", 4, function(player) 
+			player:AddBuff("buff_slowheal", 5, { amount = item.restore/5 })
+			--player:HealBleeding(20)
+		end)
 		
 		local quantity = item:GetData("quantity", item.quantity)
 		quantity = quantity - 1

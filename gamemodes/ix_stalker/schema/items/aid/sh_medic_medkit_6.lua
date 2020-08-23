@@ -29,11 +29,14 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 
-		item.player:AddBuff("buff_slowheal", 20, { amount = item.restore/40 })
-		item.player:AddBuff("buff_radiationremoval", 10, { amount = item.radrem/20 })
+
 
 		ix.chat.Send(item.player, "iteminternal", "opens the "..item.name.." and injects himself with a syrette.", false)
-
+		
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Injecting Syrette", 3, function(player) 
+			player:AddBuff("buff_slowheal", 20, { amount = item.restore/20 })
+			player:AddBuff("buff_radiationremoval", 10, { amount = item.radrem/20 })
+		end)
 		quantity = quantity - 1
 
 		if (quantity >= 1) then

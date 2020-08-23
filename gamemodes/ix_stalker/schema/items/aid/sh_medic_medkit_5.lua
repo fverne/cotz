@@ -29,10 +29,14 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 
-		item.player:AddBuff("buff_slowheal", 60, { amount = item.restore/120 })
-		item.player:AddBuff("buff_radiationremoval", 60, { amount = item.radrem/120 })
-		--item.player:HealBleeding(80)
+
 		ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it.", false)
+
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Treating Wounds", 8, function(player) 
+			player:AddBuff("buff_slowheal", 60, { amount = item.restore/60 })
+			player:AddBuff("buff_radiationremoval", 60, { amount = item.radrem/120 })
+			--player:HealBleeding(80)
+		end)
 
 		quantity = quantity - 1
 
