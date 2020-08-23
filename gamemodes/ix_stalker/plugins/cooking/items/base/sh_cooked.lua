@@ -37,20 +37,13 @@ ITEM.functions.use = {
 		local thirst = item.player:GetCharacter():GetData("thirst", 100)
 		local client = item.player
 
-		item.player:SetAction("Eating", 5)
-		item.player:Freeze(true) 
-		item.player:ScreenFade( SCREENFADE.OUT, Color( 0, 0, 0 ), 1, 3 ) 
-		timer.Simple(1, function() 
-			client:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 3 ) 
-		end)
-		timer.Simple(4, function() 
-			client:SetHunger(hunger + item:GetHunger())
-			client:SetThirst(thirst + item:GetThirst())
-			client:Freeze(false)
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
+			player:SetHunger(hunger + item:GetHunger())
+			player:SetThirst(thirst + item:GetThirst())
 		end)
 
 		item.player:UpdateHungerState(item.player)
 
-		return false
+		return true
 	end
 }
