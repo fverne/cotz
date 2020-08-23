@@ -6,7 +6,7 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.restore = 4
-ITEM.quantity = 5 -- Total of 20 health recovered over 25s
+ITEM.quantity = 5 -- Total of 20 health recovered over 20s
 
 ITEM.sound = "stalkersound/inv_bandage_2p9.mp3"
 ITEM.price = 40
@@ -28,7 +28,7 @@ ITEM.functions.use = {
 		ix.chat.Send(item.player, "iteminternal", "unwraps and ties a "..item.name.." to their wound.", false)
 
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Wrapping Bandages", 4, function(player) 
-			player:AddBuff("buff_slowheal", 5, { amount = item.restore/5 })
+			player:AddBuff("buff_slowheal", 4, { amount = item.restore/4 })
 			--player:HealBleeding(20)
 		end)
 		
