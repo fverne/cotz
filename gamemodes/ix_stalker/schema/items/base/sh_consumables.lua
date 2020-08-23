@@ -12,15 +12,21 @@ ITEM.weight = 0
 ITEM.flatweight = 0
 
 function ITEM:GetDescription()
-	local str = self.description
+	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
+	local quantdesc = ""
+	local invdesc = ""
 	if self.longdesc then
-		str = str.."\n"..(self.longdesc or "")
+		invdesc = "\n\n"..(self.longdesc)
 	end
-	
+
+	if self.quantdesc then
+		quantdesc = "\n\n"..Format(self.quantdesc, quant)
+	end
+
 	if (self.entity) then
 		return (self.description)
 	else
-        return (str)
+        return (self.description..quantdesc..invdesc)
 	end
 end
 

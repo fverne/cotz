@@ -2,6 +2,7 @@ ITEM.name = "aid"
 ITEM.description = "Helps your body survive in the zone - in one way or another."
 ITEM.longdesc = "Longer description here."
 ITEM.category = "Aid"
+ITEM.quantdesc = "This item has %d uses left."
 
 ITEM.width = 1
 ITEM.height = 1
@@ -14,13 +15,21 @@ ITEM.weight = 0
 ITEM.flatweight = 0
 
 function ITEM:GetDescription()
-	if (!self.entity or !IsValid(self.entity)) then
-		local quant = self:GetData("quantity", self.quantity)
-		local str = self.description.."\n\n"..self.longdesc.."\n \nThere's only "..quant.." uses left."
+	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
+	local quantdesc = ""
+	local invdesc = ""
+	if self.longdesc then
+		invdesc = "\n\n"..(self.longdesc)
+	end
 
-		return str
+	if self.quantdesc then
+		quantdesc = "\n\n"..Format(self.quantdesc, quant)
+	end
+
+	if (self.entity) then
+		return (self.description)
 	else
-		return self.description
+        return (self.description..quantdesc..invdesc)
 	end
 end
 

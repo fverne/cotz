@@ -144,17 +144,6 @@ function ITEM:GetDescription()
 	end
 end
 
-function ITEM:GetName()
-	local name = self.name
-	
-	local customData = self:GetData("custom", {})
-	if(customData.name) then
-		name = customData.name
-	end
-	
-	return name
-end
-
 -- On item is dropped, Remove a weapon from the player and keep the ammo in the item.
 ITEM:Hook("drop", function(item)
 	local inventory = ix.item.inventories[item.invID]
@@ -472,7 +461,6 @@ function ITEM:OnLoadout()
 		local weapon = client:Give(self.class)
 
 		if (IsValid(weapon)) then
-			print("Weapon is valid")
 			client:RemoveAmmo(weapon:Clip1(), weapon:GetPrimaryAmmoType())
 			client.carryWeapons[self.weaponCategory] = weapon
 

@@ -25,18 +25,22 @@ if (CLIENT) then
 end
 
 function ITEM:GetDescription()
-	local str = self.description
-
-	if !self.entity then
-		local customData = self:GetData("custom", {})
-		if(customData.desc) then
-			str = str.." \n\n"..customData.desc
-		else
-			str = str.." \n\n"..self.longdesc
-		end
+	local quant = self:GetData("quantity", 1)
+	local quantdesc = ""
+	local invdesc = ""
+	if self.longdesc then
+		invdesc = (self.longdesc)
 	end
 
-	return str
+	if self.quantdesc then
+		quantdesc = Format(self.quantdesc, quant)
+	end
+
+	if (self.entity) then
+		return (self.description)
+	else
+        return (self.description.."\n\n"..quantdesc.."\n\n"..invdesc)
+	end
 end
 
 ITEM.functions.insert = {
