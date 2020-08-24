@@ -1,14 +1,14 @@
 local PLUGIN = PLUGIN
 
 ix.MutantTable = {
-	["models/stalker/new_izlom_spen.mdl"] = "izlom",
+	["models/monsters/izlom.mdl"] = "izlom",
 	["models/stalkertnb/zombie1.mdl"] = "classiczombie",
 	["models/stalkertnb/rodent1.mdl"] = "tushkano",
 	["models/stalkertnb/snork1.mdl"] = "snork",
 	["models/jerry/mutants/stalker_anomaly_pseudodog.mdl"] = "pseudodog",
 	["models/stalkertnb/bloodsucker1.mdl"] = "bloodsucker",
 	["models/jerry/mutants/stalker_anomaly_flesh.mdl"] = "flesh",
-	["models/stalkertnb/dog1.mdl"] = "dog",
+	["models/monsters/slep_dog2.mdl"] = "dog",
 	["models/stalkertnb/boar1.mdl"] = "boar",
 	["models/stalkertnb/chimera1.mdl"] = "chimera",
 	["models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl"] = "burer",

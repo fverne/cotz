@@ -1,12 +1,12 @@
-ITEM.name = "Lost Veteran PDA"
+ITEM.name = "Lost Rookie PDA"
 ITEM.model = "models/kek1ch/dev_pda.mdl"
 ITEM.width = 1
 ITEM.height = 1
-ITEM.description = "The PDA of a lost stalker. It looks fairly used, and did probably belong to an experienced STALKER."
+ITEM.description = "The PDA of a lost stalker. It looks new, and did probably belong to a rookie STALKER."
 ITEM.price = 500
 ITEM.flag = "A"
-ITEM.hidestashcategory = "tier3"
-ITEM.moneyinterval = {400, 800}
+ITEM.hidestashcategory = "tier2"
+ITEM.moneyinterval = {200, 400}
 
 function ITEM:GetDescription()
 	if self:GetData("stashtext", nil) == nil then
@@ -23,6 +23,12 @@ ITEM.functions.use = {
 		local loot = table.Random(ix.plugin.list["hidestashspawner"].StashItems[item.hidestashcategory])
 		local spawnpoint = table.Random(ix.plugin.list["hidestashspawner"].stashspawnpoints)
 		local stashcontent = "CONTENT: "
+
+		if !spawnpoint then
+			item.player:Notify("No hidestash spawn points defined for this map, contact the developers.")
+			print("a hidestash item was used, but there are no points on the map to spawn it in!")
+			return false
+		end
 
 		local chance = math.random(1,2)
 		if chance == 1 then

@@ -3,11 +3,11 @@ ITEM.description = "A sturdy flashlight used to light your way in the dark."
 ITEM.model = "models/weapons/w_flashlight_zm.mdl"
 ITEM.class = "weapon_flashlight"
 ITEM.weaponCategory = "flashlight"
+
 ITEM.price = 225
---ITEM.busflag = {"MERCH4", "SPECIAL6"}
-ITEM.busflag = {"hardware1"}
 ITEM.height = 1
 ITEM.width = 2
+
 ITEM.category = nil
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1

@@ -23,6 +23,12 @@ ITEM.functions.use = {
 		local spawnpoint = table.Random(ix.plugin.list["hidestashspawner"].stashspawnpoints)
 		local stashcontent = "CONTENT: "
 
+		if !spawnpoint then
+			item.player:Notify("No hidestash spawn points defined for this map, contact the developers.")
+			print("a hidestash item was used, but there are no points on the map to spawn it in!")
+			return false
+		end
+
 		ix.plugin.list["hidestash"]:SpawnStash(spawnpoint[1], { loot[1], loot[2], loot[3] })
 		item:SetData("stashcoordinates", spawnpoint[1])
 		item:SetData("stashtext", spawnpoint[2])

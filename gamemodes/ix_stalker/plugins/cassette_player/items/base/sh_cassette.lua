@@ -1,18 +1,39 @@
 ﻿ITEM.name = "Cassette"
 ITEM.description = "A basic playable Cassette."
 ITEM.category = "Cassette"
-ITEM.price = 10000
 ITEM.model = "models/kek1ch/cassette_backkek.mdl"
-ITEM.busflag = "dev"
+
 ITEM.width = 1
 ITEM.height = 1
+ITEM.price = 10000
+
 ITEM.iconCam = {
 	pos = Vector(0.40000000596046, 0, 200),
 	ang = Angle(90, 0, -174.26751708984),
 	fov = 2.3
 }
-ITEM.weight = 0.14
 ITEM.isCassette = true
+
+ITEM.weight = 0.14
+
+function ITEM:GetDescription()
+	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
+	local quantdesc = ""
+	local invdesc = ""
+	if self.longdesc then
+		invdesc = "\n\n"..(self.longdesc)
+	end
+
+	if self.quantdesc then
+		quantdesc = "\n\n"..Format(self.quantdesc, quant)
+	end
+
+	if (self.entity) then
+		return (self.description)
+	else
+        return (self.description..quantdesc..invdesc)
+	end
+end
 
 if (CLIENT) then
 	function ITEM:PopulateTooltip(tooltip)
@@ -21,25 +42,6 @@ if (CLIENT) then
 			ix.util.PropertyDesc(tooltip, "Fits into cassette players", Color(200, 200, 200))
 			ix.util.PropertyDesc2(tooltip, "Valuable", Color(218, 165, 32), Material("icon16/stalker/sell.png"))
 		end
-	end
-end
-
-function ITEM:GetDescription()
-	local quant = self:GetData("quantity", 1)
-	local quantdesc = ""
-	local invdesc = ""
-	if self.longdesc then
-		invdesc = (self.longdesc)
-	end
-
-	if self.quantdesc then
-		quantdesc = Format(self.quantdesc, quant)
-	end
-
-	if (self.entity) then
-		return (self.description)
-	else
-        return (self.description.."\n\n"..quantdesc.."\n\n"..invdesc)
 	end
 end
 
