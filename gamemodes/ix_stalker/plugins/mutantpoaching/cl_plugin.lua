@@ -73,6 +73,7 @@ if (CLIENT) then
 				frame:Close()
 			end
 
+			frame:PostLayoutUpdate()
 		--end
 	end)
 else

@@ -9,18 +9,29 @@ local btnclose = Material("stalker/btnclose.png", "noclamp smooth")
 local PANEL = {}
 
 function PANEL:Init()
-	self:SetTitle("stalkertest")
-	self:ShowCloseButton(false)
+	self.frame = self
+	self.frame:SetTitle("stalkertest")
+	self.frame:ShowCloseButton(false)
+	self.frame:DockPadding(self.frame:GetWide() * 0.1, self.frame:GetTall() * 0.05, self.frame:GetWide() * 0.1, self.frame:GetTall() * 0.05)
 
-	local closebtn = self:Add("DImageButton")
-	closebtn:SetSize(ScrW()*0.0183, ScrH()*0.03255)
-	closebtn:SetMaterial(btnclose)
-	closebtn:SetPos(15, 15)
 
-	function closebtn.DoClick()
+	self.closebtn = self.frame:Add("DImageButton")
+	self.closebtn:SetSize(ScrW()*0.0123, ScrH()*0.02155)
+	self.closebtn:SetMaterial(btnclose)
+	self.closebtn:SetPos(self.frame:GetWide() - self.frame:GetWide() * 0.08, self.frame:GetTall() - self.frame:GetTall() * 0.96)
+
+	function self.closebtn.DoClick()
 		self:Close()
 	end
 end
+
+function PANEL:PostLayoutUpdate()
+	self.frame:DockPadding(self.frame:GetWide() * 0.075, self.frame:GetTall() * 0.05, self.frame:GetWide() * 0.075, self.frame:GetTall() * 0.05)
+	self.frame:SetSize(self.frame:GetWide() * 1.15, self.frame:GetTall() * 1.1)
+	self.closebtn:SetPos(self.frame:GetWide() - self.frame:GetWide() * 0.04 - self.closebtn:GetWide(), self.frame:GetTall() - self.frame:GetTall() * 0.96)
+	self.frame:Center()
+end
+	
 
 function PANEL:Paint(width, height)
 	surface.SetMaterial(background)
@@ -33,7 +44,10 @@ vgui.Register("ixStalkerFrame", PANEL, "DFrame")
 local PANEL = {}
 
 function PANEL:Init()
-	
+	self:SetText(" -- ")
+	self:DockMargin(self:GetParent():GetWide()*0.3, 20, self:GetParent():GetWide()*0.3, 0)
+	self:SetTall(ScrH()*0.05)
+	self:SetFont("stalkerregularfont")
 end
 
 function PANEL:Paint(width, height)

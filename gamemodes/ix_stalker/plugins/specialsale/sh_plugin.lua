@@ -136,8 +136,8 @@ if (CLIENT) then
 			frame:ShowCloseButton( false )
 			frame:Center()
 			frame:MakePopup()
-			frame:SetSize(600, 400)
-			frame:SetPos((ScrW()/2)-300,(ScrH()/2)-200)
+			frame:SetSize(600, 800)
+			frame:SetPos((ScrW()/2)-300,(ScrH()/2)-400)
 			
 			local sentence = frame:Add("DLabel")
 			sentence:Dock(TOP)
@@ -199,6 +199,7 @@ if (CLIENT) then
 				end
 			end
 
+			frame:PostLayoutUpdate()
 		end
 	end)
 else

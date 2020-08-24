@@ -143,7 +143,7 @@ end
 
 function PANEL:Setup(entity)
 	self.entity = entity
-	self:SetTitle(entity:GetDisplayName())
+	self:SetTitle("")
 	self.vendorName:SetText(entity:GetDisplayName()..(entity.money and " ("..entity.money..")" or ""))
 
 	self.vendorBuy:SetEnabled(!self:GetReadOnly())
@@ -156,6 +156,8 @@ function PANEL:Setup(entity)
 	for _, v in SortedPairs(LocalPlayer():GetCharacter():GetInventory():GetItems()) do
 		self:addItem(v.uniqueID, "buying", v:GetID())
 	end
+
+	self:PostLayoutUpdate()
 end
 
 function PANEL:OnRemove()
@@ -177,7 +179,7 @@ function PANEL:Think()
 	end
 
 	if ((self.nextUpdate or 0) < CurTime()) then
-		self:SetTitle(self.entity:GetDisplayName())
+		self:SetTitle("")
 		self.vendorName:SetText(entity:GetDisplayName()..(entity.money and " ("..ix.currency.Get(entity.money)..")" or ""))
 		self.ourName:SetText(L"you".." ("..ix.currency.Get(LocalPlayer():GetCharacter():GetMoney())..")")
 
@@ -195,7 +197,7 @@ function PANEL:OnItemSelected(panel)
 	end
 end
 
-vgui.Register("ixVendorAdv", PANEL, "DFrame")
+vgui.Register("ixVendorAdv", PANEL, "ixStalkerFrame")
 
 PANEL = {}
 
