@@ -313,7 +313,7 @@ ITEM.functions.Equip = {
 	OnCanRun = function(item)
 		local client = item.player
 
-		return !IsValid(item.entity) and IsValid(client) and item:GetData("equip") != true
+		return !IsValid(item.entity) and IsValid(client) and item:GetData("equip") != true and item.invID == client:GetCharacter():GetInventory():GetID()
 	end
 }
 
