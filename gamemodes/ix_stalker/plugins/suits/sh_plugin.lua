@@ -61,6 +61,9 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		damage = damage * (1-perRes)
 		damage = damage - flatRes
 
+		--Make sure we dont heal the player
+		damage = math.max(damage,0)
+
 		dmginfo:SetDamage(damage)
 	end
 end

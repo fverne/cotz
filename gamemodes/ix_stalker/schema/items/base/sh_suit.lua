@@ -592,15 +592,26 @@ function ITEM:OnUnequipped()
 end
 
 function ITEM:getBR() 
-	local res = self.br
+	local res = (1 - self.br)
 	local upgrades = self:GetData("upgrades", {})
 	
 	for k,v in pairs(upgrades) do
-		if upgrades[v].br ~= nil then
-			res = res + upgrades[v].br
+		if (!ix.armortables.upgrades[k]) then continue end
+		if ix.armortables.upgrades[k].br then
+			res = res - ix.armortables.upgrades[k].br
 		end
 	end
 	
+	--For artifacts, kevlarplates, mutant hides, etc..
+	local attachments = self:GetData("attachments", {})
+	
+	for k,v in pairs(attachments) do
+		if (!ix.armortables.attachments[k]) then continue end
+		if ix.armortables.attachments[k].br then
+			res = res * (1 - ix.armortables.attachments[k].br)
+		end
+	end
+
 	return res
 end
 
@@ -609,8 +620,9 @@ function ITEM:getFBR()
 	local upgrades = self:GetData("upgrades", {})
 	
 	for k,v in pairs(upgrades) do
-		if upgrades[v].fbr ~= nil then
-			res = res + upgrades[v].fbr
+		if (!ix.armortables.upgrades[k]) then continue end
+		if ix.armortables.upgrades[k].fbr then
+			res = res + ix.armortables.upgrades[k].fbr
 		end
 	end
 	
@@ -618,12 +630,23 @@ function ITEM:getFBR()
 end
 
 function ITEM:getAR()
-	local res = self.ar
+	local res = (1 - self.ar)
 	local upgrades = self:GetData("upgrades", {})
 	
 	for k,v in pairs(upgrades) do
-		if v.ar ~= nil then
-			res = res + upgrades[v].ar
+		if (!ix.armortables.upgrades[k]) then continue end
+		if ix.armortables.upgrades[k].ar then
+			res = res - ix.armortables.upgrades[k].ar
+		end
+	end
+	
+	--For artifacts, kevlarplates, mutant hides, etc..
+	local attachments = self:GetData("attachments", {})
+	
+	for k,v in pairs(attachments) do
+		if (!ix.armortables.attachments[k]) then continue end
+		if ix.armortables.attachments[k].ar then
+			res = res * (1 - ix.armortables.attachments[k].ar)
 		end
 	end
 
@@ -635,11 +658,36 @@ function ITEM:getFAR()
 	local upgrades = self:GetData("upgrades", {})
 	
 	for k,v in pairs(upgrades) do
-		if upgrades[v].far ~= nil then
-			res = res + upgrades[v].far
+		if (!ix.armortables.upgrades[k]) then continue end
+		if ix.armortables.upgrades[k].far then
+			res = res + ix.armortables.upgrades[k].far
 		end
 	end
 	
 	return res
 end
 
+function ITEM:GetWeight()
+  local retval = self.weight
+
+  local upgrades = self:GetData("upgrades", {})
+	
+  for k,v in pairs(upgrades) do
+  	if (!ix.armortables.upgrades[k]) then continue end
+    if ix.armortables.upgrades[k].weight then
+		  retval = retval + ix.armortables.upgrades[k].weight
+    end
+  end
+	
+	--For artifacts, kevlarplates, mutant hides, etc..
+	local attachments = self:GetData("attachments", {})
+	
+	for k,v in pairs(attachments) do
+		if (!ix.armortables.attachments[k]) then continue end
+		if ix.armortables.attachments[k].weight then
+			retval = retval + ix.armortables.attachments[k].weight
+		end
+	end
+
+  return retval
+end

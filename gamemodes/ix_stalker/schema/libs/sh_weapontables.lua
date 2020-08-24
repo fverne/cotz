@@ -50,3 +50,12 @@ ix.weapontables.ammosubtypes["BD"] = {uID = "am_birdshot"}
 ix.weapontables.ammosubtypes["TR"] = {uID = "am_trishot"}
 ix.weapontables.ammosubtypes["AP"] = {uID = "am_armorpiercing"}
 ix.weapontables.ammosubtypes["41"] = {uID = "am_410buck"}
+
+ix.armortables = {}
+ix.armortables.attachments = {} -- Artifacts, kevlar plates, mutant hides etc.
+
+ix.armortables.attachments["kevlarplate"] = { br = 0.10, ar = -0.05 weight = 1.250 }
+
+ix.armortables.upgrades = {} -- Armor upgrades
+ix.armortables.upgrades["integratedceramics"] = { br = 0.03, ar = -0.03 weight = 0.500 }
+ix.armortables.upgrades["lightercomponents"] = { br = -0.02, ar = -0.02 weight = -1.500 }
