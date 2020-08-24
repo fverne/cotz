@@ -54,6 +54,16 @@ function ITEM:GetDescription()
 	end
 end
 
+function ITEM:PopulateTooltip(tooltip)
+    if !self.entity then
+        ix.util.PropertyDesc(tooltip, "Openable, contains items", Color(64, 224, 208))
+    end
+
+    if (self.PopulateTooltipIndividual) then
+      self:PopulateTooltipIndividual(tooltip)
+    end
+end
+
 ITEM.functions.Open = {
     icon = "icon16/stalker/unlock.png",
     sound = "stalkersound/inv_ruck.mp3",

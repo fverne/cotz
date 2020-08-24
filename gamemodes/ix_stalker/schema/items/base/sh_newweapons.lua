@@ -135,6 +135,22 @@ function ITEM:GetDescription()
 	end
 end
 
+function ITEM:PopulateTooltip(tooltip)
+    if (!self.entity) then
+        ix.util.PropertyDesc(tooltip, "Firearm", Color(64, 224, 208))
+        if self.weaponCategory == "secondary" then
+        	ix.util.PropertyDesc(tooltip, "Slot: Secondary", Color(64, 224, 208))
+        end
+        if self.weaponCategory == "primary" then
+        	ix.util.PropertyDesc(tooltip, "Slot: Primary", Color(64, 224, 208))
+        end
+    end
+
+    if (self.PopulateTooltipIndividual) then
+      self:PopulateTooltipIndividual(tooltip)
+    end
+end
+
 -- On item is dropped, Remove a weapon from the player and keep the ammo in the item.
 ITEM:Hook("drop", function(item)
 	local inventory = ix.item.inventories[item.invID]
