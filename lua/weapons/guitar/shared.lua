@@ -49,7 +49,7 @@ end
 
 function SWEP:OnRemove()
 	self:Holster()
-	end
+end
 
 if CLIENT then
 
@@ -453,10 +453,10 @@ if CLIENT then
 end
 
 if CLIENT then
-SWEP.ViewModelBoneMods = {}
-SWEP.WElements = {
-	["guitar"] = { type = "Model", model = "models/kek1ch/dev_guitar.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(3.635, 1.557, 1.557), angle = Angle(10.519, 59.61, 122.726), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
-}
+	SWEP.ViewModelBoneMods = {}
+	SWEP.WElements = {
+		["guitar"] = { type = "Model", model = "models/kek1ch/dev_guitar.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(3.635, 1.557, 1.557), angle = Angle(10.519, 59.61, 122.726), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+	}
 end
 
 SWEP.Base = "weapon_base"
@@ -585,10 +585,10 @@ end
 
 local reloadmemelyd = 0
 function SWEP:Reload()
-	-- if reloadmemelyd < CurTime() then
-	-- 	self.Weapon:EmitSound(Sound("ambient/machines/squeak_2.wav"))
-	-- 	reloadmemelyd = CurTime() + 5
-	-- end
+	if reloadmemelyd < CurTime() then
+	 	self.Weapon:EmitSound(Sound("stalkersound/inv_nosound.mp3"))
+	 	reloadmemelyd = CurTime() + 1
+	end
 end
 
 function SWEP:Deploy()
