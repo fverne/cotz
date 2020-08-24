@@ -11,7 +11,6 @@ ITEM.ballisticlevels = {"1", "1", "1", "1", "1", "1", "1"}
 ITEM.ballisticareas = {"  Head:", "  Torso:", "  Abdomen:", "  Arms:", "  Legs:", "  Anomaly:", "  Radiation:"}
 ITEM.outfitCategory = "model"
 ITEM.resiAmount = 1
-ITEM.resistance = true
 ITEM.isBodyArmor = true
 ITEM.pacData = {}
 ITEM.skincustom = {}

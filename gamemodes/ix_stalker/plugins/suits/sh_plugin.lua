@@ -44,9 +44,6 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 	anomtypes[DMG_AIRBOAT] = true
 	anomtypes[DMG_GENERIC] = true
 
-
-
-
 	if ( target:IsPlayer() and anomtypes[dmginfo:GetDamageType()]) then
 		local damage = dmginfo:GetDamage()
 		local perRes = target:GetNWFloat("ixperanomres")
@@ -58,8 +55,8 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitDuraDmg, 0, 100))
 		end
 			
-		damage = damage * (1-perRes)
 		damage = damage - flatRes
+		damage = damage * (1-perRes)
 
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
@@ -76,7 +73,7 @@ function playerMeta:getPercentageBulletRes()
 	local items = char:GetInventory():GetItems()
 
 	for k, v in pairs(items) do
-		if (v.resistance and v:GetData("equip")) then
+		if (v.isBodyArmor and v:GetData("equip")) then
 			if v:GetData("durability",100) < 80 then
 				res = res + v:getBR(v) * (v:GetData("durability",0)/80)
 			else
@@ -84,8 +81,8 @@ function playerMeta:getPercentageBulletRes()
 			end
 		end
 
-		if (v.br ~= nil and !v.resistance and v:GetData("equip") == true) then
-			res = res + v.br
+		if (v.br ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+			res = res * (1 - v.br)
 		end
 	end
 	
@@ -100,7 +97,7 @@ function playerMeta:getFlatBulletRes()
 	local items = char:GetInventory():GetItems()
 
 	for k, v in pairs(items) do
-		if (v.resistance and v:GetData("equip")) then
+		if (v.isBodyArmor and v:GetData("equip")) then
 			if v:GetData("durability",100) < 80 then
 				res = res + v:getFBR(v) * (v:GetData("durability",0)/80)
 			else
@@ -108,7 +105,7 @@ function playerMeta:getFlatBulletRes()
 			end
 		end
 
-		if (v.fbr ~= nil and !v.resistance and v:GetData("equip") == true) then
+		if (v.fbr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
 			res = res + v.fbr
 		end
 	end
@@ -124,7 +121,7 @@ function playerMeta:getPercentageAnomalyRes()
 	local items = char:GetInventory():GetItems()
 
 	for k, v in pairs(items) do
-		if (v.resistance and v:GetData("equip")) then
+		if (v.isBodyArmor and v:GetData("equip")) then
 			if v:GetData("durability",100) < 80 then
 				res = res + v:getAR(v) * (v:GetData("durability",0)/80)
 			else
@@ -132,8 +129,8 @@ function playerMeta:getPercentageAnomalyRes()
 			end
 		end
 
-		if (v.ar ~= nil and !v.resistance and v:GetData("equip") == true) then
-			res = res + v.ar
+		if (v.ar ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+			res = res * (1 - v.ar)
 		end
 	end
 	
@@ -148,7 +145,7 @@ function playerMeta:getFlatAnomalyRes()
 	local items = char:GetInventory():GetItems()
 
 	for k, v in pairs(items) do
-		if (v.resistance and v:GetData("equip")) then
+		if (v.isBodyArmor and v:GetData("equip")) then
 			if v:GetData("durability",100) < 80 then
 				res = res + v:getFAR(v) * (v:GetData("durability",0)/80)
 			else
@@ -156,7 +153,7 @@ function playerMeta:getFlatAnomalyRes()
 			end
 		end
 
-		if (v.far ~= nil and !v.resistance and v:GetData("equip") == true) then
+		if (v.far ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
 			res = res + v.far
 		end
 	end
