@@ -9,9 +9,4 @@ ITEM.price = 2250
 
 ITEM.flatweight = 1.350
 
-ITEM.exRender = true
-ITEM.iconCam = {
-	pos = Vector(110, 0, 7.5999999046326),
-	ang = Angle(0, 180, 0),
-	fov = 6,
-}
+ITEM.img = Material("vgui/hud/valuable/motorclean.png")

@@ -12,6 +12,8 @@ ITEM.quantity = 5
 ITEM.flatweight = 0
 ITEM.weight = 0.085
 
+ITEM.img = Material("vgui/hud/valuable/sparkplug.png")
+
 function ITEM:GetPrice()
 	return self.price * self:GetData("quantity", self.quantity)
 end
@@ -45,3 +47,9 @@ ITEM.functions.combine = {
 		end
 	end,
 }
+
+function ITEM:OnInstanced()
+	if (!self:GetData("quantity")) then
+		self:SetData("quantity", math.random(1,2))
+	end
+end

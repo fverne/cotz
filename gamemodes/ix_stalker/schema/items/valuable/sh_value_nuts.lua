@@ -12,13 +12,6 @@ ITEM.quantity = 20
 ITEM.flatweight = 0
 ITEM.weight = 0.008
 
-ITEM.exRender = true
-ITEM.iconCam = {
-	pos = Vector(67.915367126465, 56.987754821777, 42.328720092773),
-	ang = Angle(25, 220, 0),
-	fov = 3,
-}
-
 function ITEM:GetPrice()
 	return self.price * self:GetData("quantity", self.quantity)
 end
@@ -52,3 +45,9 @@ ITEM.functions.combine = {
 		end
 	end,
 }
+
+function ITEM:OnInstanced()
+	if (!self:GetData("quantity")) then
+		self:SetData("quantity", math.random(3,8))
+	end
+end

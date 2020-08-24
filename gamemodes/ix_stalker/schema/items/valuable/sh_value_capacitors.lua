@@ -12,12 +12,7 @@ ITEM.quantity = 10
 ITEM.flatweight = 0
 ITEM.weight = 0.090
 
-ITEM.exRender = true
-ITEM.iconCam = { -- Looks odd
-	pos = Vector(-28, 0, 8.5),
-	ang = Angle(15, -0, 0),
-	fov = 15,
-}
+ITEM.img = Material("vgui/hud/valuable/capacitor.png")
 
 function ITEM:GetPrice()
 	return self.price * self:GetData("quantity", self.quantity)

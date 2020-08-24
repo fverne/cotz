@@ -14,6 +14,9 @@ ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_s
 ITEM.bulletweight = 0.011
 ITEM.unloadedweight = 3.3
 
+ITEM.exRender = false
+ITEM.img = Material("vgui/hud/weapons/ak12.png")
+
 function ITEM:GetWeight()
   return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
 end

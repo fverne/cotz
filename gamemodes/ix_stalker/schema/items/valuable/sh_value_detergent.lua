@@ -9,9 +9,4 @@ ITEM.price = 550
 
 ITEM.flatweight = 0.485
 
-ITEM.exRender = true
-ITEM.iconCam = {
-	pos = Vector(-200, 2.5, 5),
-	ang = Angle(0, -0, 0),
-	fov = 2.4,
-}
+ITEM.img = Material("vgui/hud/valuable/detergent.png")

@@ -8,3 +8,5 @@ ITEM.height = 3
 ITEM.price = 4860
 
 ITEM.flatweight = 6.850
+
+ITEM.img = Material("vgui/hud/valuable/propanetank.png")

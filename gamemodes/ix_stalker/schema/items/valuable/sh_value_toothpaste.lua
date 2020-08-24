@@ -8,3 +8,5 @@ ITEM.height = 1
 ITEM.price = 200
 
 ITEM.flatweight = 0.020
+
+ITEM.img = Material("vgui/hud/valuable/toothpaste.png")

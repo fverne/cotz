@@ -8,3 +8,5 @@ ITEM.height = 1
 ITEM.price = 11560
 
 ITEM.flatweight = 1.100
+
+ITEM.img = Material("vgui/hud/valuable/gpu.png")

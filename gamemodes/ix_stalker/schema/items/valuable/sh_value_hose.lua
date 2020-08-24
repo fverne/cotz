@@ -9,9 +9,4 @@ ITEM.price = 350
 
 ITEM.flatweight = 0.180
 
-ITEM.exRender = true
-ITEM.iconCam = {
-	pos = Vector(0, 2, 200),
-	ang = Angle(90, 0, 0),
-	fov = 4.5,
-}
+ITEM.img = Material("vgui/hud/valuable/hose.png")

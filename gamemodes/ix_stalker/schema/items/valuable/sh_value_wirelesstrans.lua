@@ -8,3 +8,5 @@ ITEM.height = 1
 ITEM.price = 4150
 
 ITEM.flatweight = 1.500
+
+ITEM.img = Material("vgui/hud/valuable/wirelesstrans.png")

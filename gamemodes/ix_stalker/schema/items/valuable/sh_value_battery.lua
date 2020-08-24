@@ -45,3 +45,9 @@ ITEM.functions.combine = {
 		end
 	end,
 }
+
+function ITEM:OnInstanced()
+	if (!self:GetData("quantity")) then
+		self:SetData("quantity", math.random(1,6))
+	end
+end

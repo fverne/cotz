@@ -55,10 +55,10 @@ ix.armortables = {}
 ix.armortables.attachments = {} -- Artifacts, kevlar plates, mutant hides etc.
 
 ix.armortables.attachments["kevlarplate"] = { 
-	name = "Kevlar Plate"
+	name = "Kevlar Plate",
 	br = 0.10, 
-	ar = -0.05 
-	weight = 1.250 
+	ar = -0.05,
+	weight = 1.250,
 }
 
 ix.armortables.upgrades = {} -- Armor upgrades
@@ -66,13 +66,13 @@ ix.armortables.upgrades["integratedceramics"] = {
 	name = "Integrated Ceramic Plates",
 	description = "Better bullet resistance at the cost of anomaly resistance",
 	br = 0.03, 
-	ar = -0.03 
-	weight = 0.500 
+	ar = -0.03,
+	weight = 0.500,
 }
 ix.armortables.upgrades["lightercomponents"] = { 
 	name = "Lighter Components",
 	description = "Lighter, but less effective internals",
 	br = -0.02, 
-	ar = -0.02 
-	weight = -1.500 
+	ar = -0.02,
+	weight = -1.500,
 }

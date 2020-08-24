@@ -9,9 +9,4 @@ ITEM.price = 400
 
 ITEM.flatweight = 0.035
 
-ITEM.exRender = true
-ITEM.iconCam = {
-	pos = Vector(1.5, 0, 75),
-	ang = Angle(90, 0, 0),
-	fov = 5,
-}
+ITEM.img = Material("vgui/hud/valuable/lightbulb.png")

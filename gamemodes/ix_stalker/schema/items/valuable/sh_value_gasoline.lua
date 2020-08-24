@@ -9,9 +9,4 @@ ITEM.price = 2860
 
 ITEM.flatweight = 4.350
 
-ITEM.exRender = true
-ITEM.iconCam = {
-	pos = Vector(-200, 0, 13),
-	ang = Angle(0, -0, 0),
-	fov = 5.8,
-}
+ITEM.img = Material("vgui/hud/valuable/gasoline.png")

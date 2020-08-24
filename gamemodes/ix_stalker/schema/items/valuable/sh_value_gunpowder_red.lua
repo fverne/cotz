@@ -9,9 +9,4 @@ ITEM.price = 1700
 
 ITEM.flatweight = 0.500
 
-ITEM.exRender = true
-ITEM.iconCam = {
-	pos = Vector(-65, 0, 5.3000001907349),
-	ang = Angle(0, -0, 0),
-	fov = 5,
-}
+ITEM.img = Material("vgui/hud/valuable/gpred.png")

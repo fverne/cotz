@@ -8,3 +8,5 @@ ITEM.height = 1
 ITEM.price = 7800
 
 ITEM.flatweight = 0.240
+
+ITEM.img = Material("vgui/hud/valuable/phone_new.png")

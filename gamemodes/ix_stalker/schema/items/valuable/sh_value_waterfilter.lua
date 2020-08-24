@@ -8,3 +8,5 @@ ITEM.height = 2
 ITEM.price = 3400
 
 ITEM.flatweight = 2.100
+
+ITEM.img = Material("vgui/hud/valuable/waterfilter.png")
