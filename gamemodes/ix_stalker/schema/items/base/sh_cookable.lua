@@ -36,7 +36,7 @@ end
 
 function ITEM:PopulateTooltip(tooltip)
     if (!self.entity) then
-        ix.util.PropertyDesc(tooltip, "Cookable", Color(255, 255, 0))
+        ix.util.PropertyDesc(tooltip, "Cookable", Color(64, 224, 208))
     end
 
     if (self.PopulateTooltipIndividual) then

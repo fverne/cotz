@@ -43,6 +43,20 @@ if (CLIENT) then
 	end
 end
 
+function ITEM:PopulateTooltip(tooltip)
+    if (!self.entity and self.thirst > 0) then
+        ix.util.PropertyDesc(tooltip, "Drink", Color(64, 224, 208))
+    elseif (!self.entity and self.hunger > 0) then
+        ix.util.PropertyDesc(tooltip, "Food", Color(64, 224, 208))
+    elseif (!self.entity and self.thirst > 0 and self.hunger > 0) then
+        ix.util.PropertyDesc(tooltip, "Consumable", Color(64, 224, 208))
+    end
+
+    if (self.PopulateTooltipIndividual) then
+      self:PopulateTooltipIndividual(tooltip)
+    end
+end
+
 function ITEM:DecideFunction()
 	if ITEM.thirst > 0 then
 		ITEM.functions.use = {

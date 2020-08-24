@@ -179,7 +179,19 @@ if (CLIENT) then
 			local duratitle = tooltip:AddRow("duratitle")
 			duratitle:SetText("\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 			duratitle:SizeToContents()
-		end
+
+			if self.isGasmask then
+	        	ix.util.PropertyDesc(tooltip, "Gasmask", Color(64, 224, 208))
+	        end
+	        
+	        if self.isHelmet then
+	        	ix.util.PropertyDesc(tooltip, "Helmet", Color(64, 224, 208))
+	        end
+
+	        if (self.PopulateTooltipIndividual) then
+		      self:PopulateTooltipIndividual(tooltip)
+		    end
+		end   
 	end
 end
 

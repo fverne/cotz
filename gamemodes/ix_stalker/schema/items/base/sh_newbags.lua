@@ -47,6 +47,16 @@ if (CLIENT) then
 	end
 end
 
+function ITEM:PopulateTooltip(tooltip)
+    if (!self.entity) then
+        ix.util.PropertyDesc(tooltip, "Backpack", Color(64, 224, 208))
+    end
+
+    if (self.PopulateTooltipIndividual) then
+      self:PopulateTooltipIndividual(tooltip)
+    end
+end
+
 ITEM.functions.Equip = {
 	name = "Equip",
 	tip = "equipTip",
