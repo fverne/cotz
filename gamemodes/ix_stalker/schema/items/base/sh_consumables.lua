@@ -1,13 +1,17 @@
 ITEM.name = "Consumable"
 ITEM.description = "Something to eat"
 ITEM.model = "models/kleiner.mdl"
+ITEM.category = "Consumables"
+
 ITEM.width = 1
 ITEM.height = 1
-ITEM.category = "Consumables"
+ITEM.price = 0
+
 ITEM.hunger = 0
 ITEM.thirst = 0
 ITEM.empty = false
 ITEM.quantity = 1
+
 ITEM.weight = 0
 ITEM.flatweight = 0
 

@@ -3,21 +3,21 @@ ITEM.model = "models/kek1ch/ckit.mdl"
 ITEM.description = "Tools for disassembling items into components."
 ITEM.flag = "A"
 ITEM.price = "15000"
-ITEM.maxStack = 100
+ITEM.quantity = 100
 ITEM.compMultiplier = 1.25
 ITEM.category = "Technician"
 ITEM.sound = "stalkersound/inv_repair_kit_use_fast_2p8.mp3"
 
 function ITEM:GetDescription()
 	local quant = math.Round(self:GetData("quantity", 1), 0)
-	local str = self.description.."\n \nThis tool has "..quant.."/"..self.maxStack.." durability."
+	local str = self.description.."\n \nThis tool has "..quant.."/"..self.quantity.." durability."
 
 	return str
 end
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
-		draw.SimpleText(math.Round(item:GetData("quantity", 1), 0).."/"..item.maxStack, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
+		draw.SimpleText(math.Round(item:GetData("quantity", 1), 0).."/"..item.quantity, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
 	end
 end
 
@@ -44,7 +44,7 @@ ITEM.functions.combine = {
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		local targetQuantDiff = targetItem.maxStack - targetItem:GetData("quantity", targetItem.quantity)
+		local targetQuantDiff = targetItem.quantity - targetItem:GetData("quantity", targetItem.quantity)
 		local localQuant = item:GetData("quantity", item.quantity)
 		local targetQuant = targetItem:GetData("quantity", targetItem.quantity)
 

@@ -2,19 +2,22 @@ ITEM.name = "Weapon"
 ITEM.description = "A Weapon."
 ITEM.category = "Weapons"
 ITEM.model = "models/weapons/w_pistol.mdl"
-ITEM.class = "weapon_pistol"
+ITEM.longdesc = "No longer description available."
+
 ITEM.width = 2
 ITEM.height = 2
+
+ITEM.class = "weapon_pistol"
 ITEM.isWeapon = true
 ITEM.isGrenade = false
-ITEM.busflag = {"dev"}
 ITEM.weaponCategory = "sidearm"
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
-ITEM.longdesc = "No longer description available."
+ITEM.exRender = true
+
 ITEM.validAttachments = {}
 ITEM.canAttach = true
 
-ITEM.exRender = true
+ITEM.unloadedweight = 0
 
 -- Inventory drawing
 if (CLIENT) then
@@ -101,22 +104,10 @@ if (CLIENT) then
 			end
 		end
 	end
-
-	function ITEM:PopulateTooltip(tooltip)
-		if (self:GetData("equip")) then
-			local name = tooltip:GetRow("name")
-			name:SetBackgroundColor(derma.GetColor("Success", tooltip))
-		end
-	end
 end
 
 function ITEM:GetDescription()
 	local str = self.description.." \n\n"..self.longdesc
-
-	local customData = self:GetData("custom", {})
-	if(customData.desc) then
-		str = customData.desc
-	end
 
 	if (self.entity) then
 		return (self.description .. "\n \nWear: " .. math.floor(self:GetData("wear", 100)) .. "%\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")

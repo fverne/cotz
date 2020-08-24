@@ -2,15 +2,19 @@ ITEM.name = "Weapon"
 ITEM.description = "A Weapon."
 ITEM.category = "Weapons"
 ITEM.model = "models/weapons/w_pistol.mdl"
-ITEM.class = "weapon_pistol"
 ITEM.longdesc = nil
+
 ITEM.width = 2
 ITEM.height = 2
+ITEM.price = 0
+
+ITEM.class = "weapon_pistol"
 ITEM.isWeapon = true
 ITEM.isGrenade = false
 ITEM.weaponCategory = "sidearm"
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 
+ITEM.weight = 0
 
 -- Inventory drawing
 if (CLIENT) then
@@ -53,15 +57,7 @@ if (CLIENT) then
 				surface.SetDrawColor(Color(255, 120, 120, 255))	
 			end
 			surface.DrawTexturedRectUV(5, h - 10, math.Clamp(dura/100, 0, 1)*38, 4.6, 0, 0, math.Clamp(dura/100, 0, 1)*0.2, 1)
-		end
-		
-	end
-
-	function ITEM:PopulateTooltip(tooltip)
-		if (self:GetData("equip")) then
-			local name = tooltip:GetRow("name")
-			name:SetBackgroundColor(derma.GetColor("Success", tooltip))
-		end
+		end	
 	end
 end
 

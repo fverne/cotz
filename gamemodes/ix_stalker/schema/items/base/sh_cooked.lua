@@ -2,8 +2,11 @@ ITEM.name = "Cooked Consumable"
 ITEM.description = "Consumable that has been cooked."
 ITEM.category = "Cooked Meat"
 ITEM.model = "models/props/cs_office/Cardboard_box02.mdl"
+
 ITEM.width = 1
 ITEM.height = 1
+ITEM.price = 0
+
 ITEM.weight = 0 --make sure you set this
 ITEM.WeightPerThirst = -0.25
 ITEM.WeightPerHunger = 0.5
@@ -27,14 +30,6 @@ function ITEM:GetDescription()
     end
 end
 
-function ITEM:GetThirst()
-	return self:GetWeight()/self.WeightPerThirst
-end
-
-function ITEM:GetHunger()
-	return self:GetWeight()/self.WeightPerHunger
-end
-
 function ITEM:PopulateTooltip(tooltip)
     if !self.entity then
         ix.util.PropertyDesc(tooltip, "Zone-Cooked", Color(255, 255, 0))
@@ -43,6 +38,14 @@ function ITEM:PopulateTooltip(tooltip)
     if (self.PopulateTooltipIndividual) then
       self:PopulateTooltipIndividual(tooltip)
     end
+end
+
+function ITEM:GetThirst()
+	return self:GetWeight()/self.WeightPerThirst
+end
+
+function ITEM:GetHunger()
+	return self:GetWeight()/self.WeightPerHunger
 end
 
 ITEM.functions.use = {

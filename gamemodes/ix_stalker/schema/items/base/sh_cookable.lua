@@ -2,14 +2,18 @@ ITEM.name = "Cookable Consumable"
 ITEM.description = "Consumable that can be cooked."
 ITEM.category = "Cookable Meat"
 ITEM.model = "models/lostsignalproject/items/consumable/meat_dog.mdl"
+
 ITEM.width = 1
 ITEM.height = 1
-ITEM.BaseWeight = 1
-ITEM.WeightPerLevel = 0.5
+ITEM.price = 0
+
 ITEM.meattier = 1
 ITEM.WeightPerThirst = -0.25
 ITEM.WeightPerHunger = 0.5
 ITEM.cookable = true
+
+ITEM.BaseWeight = 1
+ITEM.WeightPerLevel = 0.5
 
 function ITEM:GetDescription()
     local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
@@ -30,14 +34,6 @@ function ITEM:GetDescription()
     end
 end
 
-function ITEM:GetThirst()
-	return self:GetWeight()/self.WeightPerThirst
-end
-
-function ITEM:GetHunger()
-	return self:GetWeight()/self.WeightPerHunger
-end
-
 function ITEM:PopulateTooltip(tooltip)
     if (!self.entity) then
         ix.util.PropertyDesc(tooltip, "Cookable", Color(255, 255, 0))
@@ -46,6 +42,14 @@ function ITEM:PopulateTooltip(tooltip)
     if (self.PopulateTooltipIndividual) then
       self:PopulateTooltipIndividual(tooltip)
     end
+end
+
+function ITEM:GetThirst()
+	return self:GetWeight()/self.WeightPerThirst
+end
+
+function ITEM:GetHunger()
+	return self:GetWeight()/self.WeightPerHunger
 end
 
 ITEM.functions.combine = {

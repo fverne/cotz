@@ -3,11 +3,16 @@ ITEM.description = "valuable item."
 ITEM.longdesc = "No Longer Description Available"
 ITEM.category = "trinket"
 ITEM.model = "models/Gibs/HGIBS.mdl"
+
 ITEM.width = 1
 ITEM.height = 1
+ITEM.price = 0
+
 ITEM.pacData = {}
 ITEM.outfitCategory = "Trinket"
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
+
+ITEM.weight = 0
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
@@ -42,10 +47,8 @@ if (CLIENT) then
 	end
 end
 
-
 function ITEM:RemovePart(client)
 	local char = client:GetCharacter()
-
 	self:SetData("equip", false)
 	client:RemovePart(self.uniqueID)
 

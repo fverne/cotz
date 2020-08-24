@@ -1,9 +1,13 @@
 ITEM.name = "Tool"
-ITEM.width = 1
-ITEM.height = 1
 ITEM.description = "Technician stuff."
 ITEM.longdesc = "Longer description here."
+
+ITEM.width = 1
+ITEM.height = 1
 ITEM.price = 1
+
+ITEM.weight = 0
+ITEM.flatweight = 0
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
@@ -22,4 +26,8 @@ function ITEM:GetDescription()
 	else
         return (self.description..quantdesc..invdesc)
 	end
+end
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("quantity", self.quantity))
 end

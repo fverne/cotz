@@ -2,13 +2,13 @@ ITEM.name = "Ukrainian rubles"
 ITEM.description = "A bunch of weathered ukrainian currency."
 ITEM.longdesc = "Trade in the Zone is conducted mainly by means of electronic transactions for safety and managing reasons. But many stalkers keep at least a few rubles in their pockets in case they want to buy smaller things like cigarettes. This makes life easier and conserves battery life."
 ITEM.model = "models/kek1ch/money_ukraina.mdl"
+ITEM.quantdesc = "This bundle of cash has a value of %d rubles."
+
 ITEM.width = 1
 ITEM.height = 1
-ITEM.flag = "A"
-ITEM.maxStack = 5000000
-ITEM.quantity = 0
+
+ITEM.quantity = 5000000
 ITEM.exRender = true
-ITEM.quantdesc = "This bundle of cash has a value of %d rubles."
 ITEM.iconCam = {
 	pos = Vector(0, 0, 200),
 	ang = Angle(90, 0, 0),
@@ -28,7 +28,7 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local position = item.player:GetItemDropPos()
 		local client = item.player
-		local quant = item:GetData("quantity", 1)
+		local quant = item:GetData("quantity", 0)
 		client:GetCharacter():GiveMoney(quant)
 		ix.chat.Send(item.player, "iteminternal", "counts up some rubles and puts them in their wallet.", false)
 	end,
@@ -38,7 +38,7 @@ ITEM.functions.use = {
 }
 
 function ITEM:GetDescription()
-	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
+	local quant = self:GetData("quantity", self.quantity or self.quantity or 0)
 	local quantdesc = ""
 	local invdesc = ""
 	if self.longdesc then
@@ -61,29 +61,26 @@ ITEM.functions.combine = {
 		if !data then
 			return false
 		end
-		
+
 		local targetItem = ix.item.instances[data[1]]
 
-		if targetItem.uniqueid == item.uniqueid then
+		if targetItem.ammo == item.ammo then
 			return true
 		else
 			return false
-
 		end
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		local targetQuantDiff = targetItem.maxStack - targetItem:GetData("quantity", targetItem.quantity)
-		local localQuant = item:GetData("quantity", 1)
-		local targetQuant = targetItem:GetData("quantity", 1)
-
+		local targetAmmoDiff = targetItem.quantity - targetItem:GetData("quantity", targetItem.quantity)
+		local localQuant = item:GetData("quantity", item.quantity)
+		local targetQuant = targetItem:GetData("quantity", targetItem.quantity)
 		item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
-		
-		if targetQuantDiff >= localQuant then
+		if targetAmmoDiff >= localQuant then
 			targetItem:SetData("quantity", targetQuant + localQuant)
 			return true
 		else
-			item:SetData("quantity", localQuant - targetQuantDiff)
+			item:SetData("quantity", localQuant - targetAmmoDiff)
 			targetItem:SetData("quantity", targetItem.quantity)
 			return false
 		end

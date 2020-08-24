@@ -1,11 +1,15 @@
 ITEM.name = "Artifact"
-ITEM.width = 1
-ITEM.height = 1
 ITEM.category = "Artifacts"
 ITEM.description = "An artifact. Valuable."
 ITEM.longdesc = "Longer description here."
+
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 0
+
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
-ITEM.price = 1
+
+ITEM.weight = 0
 
 function ITEM:GetDescription()
     local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
@@ -37,6 +41,16 @@ if (CLIENT) then
         end
 
         entity:DrawModel()
+    end
+end
+
+function ITEM:PopulateTooltip(tooltip)
+    if (!self.entity) then
+        ix.util.PropertyDesc(tooltip, "Artifact", Color(255, 255, 0), Material("materials/vgui/ui/stalker/weaponupgrades/genericmod.png"))
+    end
+
+    if (self.PopulateTooltipIndividual) then
+      self:PopulateTooltipIndividual(tooltip)
     end
 end
 

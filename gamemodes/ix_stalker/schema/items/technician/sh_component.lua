@@ -5,7 +5,7 @@ ITEM.description = "Components used for crafting various items."
 ITEM.longdesc = "This box contains components salvaged from various items within the zone. They can be used by technicians to craft and repair various items."
 ITEM.flag = "A"
 ITEM.price = 1
-ITEM.maxStack = 5000
+ITEM.quantity = 5000
 ITEM.splitSize = {1,5,10,25,100,1000}
 ITEM.noBusiness = true
 
@@ -29,9 +29,9 @@ function ITEM:GetDescription()
 	end
 
 	if (self.entity) then
-		return self.description.."\n \nThis box has "..math.Round(quant).."/"..self.maxStack.." components."
+		return self.description.."\n \nThis box has "..math.Round(quant).."/"..self.quantity.." components."
 	else
-        return (str.."\n \nThis box has "..math.Round(quant).."/"..self.maxStack.." components.")
+        return (str.."\n \nThis box has "..math.Round(quant).."/"..self.quantity.." components.")
 	end
 end
 
@@ -126,7 +126,7 @@ ITEM.functions.Clone = {
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
-		draw.SimpleText(math.Round(item:GetData("quantity", 1), 0).."/"..item.maxStack, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
+		draw.SimpleText(math.Round(item:GetData("quantity", 1), 0).."/"..item.quantity, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
 	end
 end
 
@@ -147,7 +147,7 @@ ITEM.functions.combine = {
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		local targetQuantDiff = targetItem.maxStack - targetItem:GetData("quantity", 1)
+		local targetQuantDiff = targetItem.quantity - targetItem:GetData("quantity", 1)
 		local localQuant = item:GetData("quantity", 1)
 		local targetQuant = targetItem:GetData("quantity", 1)
 

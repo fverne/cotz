@@ -1,11 +1,17 @@
 ITEM.name = "Kit"
 ITEM.description= "Default kit."
 ITEM.model = "models/props_junk/garbage_bag001a.mdl"
+ITEM.category = "Kits"
+
 ITEM.width = 1
 ITEM.height = 1
-ITEM.category = "Kits"
+ITEM.price = 0
+
 ITEM.itemsForcedDrop = {}
 ITEM.items = {}
+
+ITEM.weight = 0
+
 --[[ Example format
 ITEM.items[1] = {
 	dropAmount = 5, --How many times it will roll for drop

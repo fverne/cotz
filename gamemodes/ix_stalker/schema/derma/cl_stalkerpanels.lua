@@ -78,17 +78,7 @@ function PANEL:Init()
 
 	ix.gui.inv1 = panel
 
-	if (ix.option.Get("openBags", true)) then
-		for _, v in pairs(inventory:GetItems()) do
-			if (v.isBag) and v:GetData("equip") == true then
-				v.functions.View.OnClick(v)
-			end					
-		end
-	end
-
 	self:SetWide(panel:GetWide() - 64)
-	
-
 end
 
 vgui.Register("ixStalkerInventory", PANEL, "DScrollPanel")

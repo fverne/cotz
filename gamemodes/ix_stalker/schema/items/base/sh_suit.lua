@@ -2,18 +2,20 @@ ITEM.name = "Armor"
 ITEM.description = "An Armor Base."
 ITEM.category = "Armor"
 ITEM.model = "models/Gibs/HGIBS.mdl"
-ITEM.width = 1
-ITEM.resiAmount = 1
-ITEM.height = 1
-ITEM.outfitCategory = "model"
 ITEM.longdesc = "No Longer Description Available"
+
+ITEM.width = 1
+ITEM.height = 1
+
+ITEM.ballisticlevels = {"1", "1", "1", "1", "1", "1", "1"}
+ITEM.ballisticareas = {"  Head:", "  Torso:", "  Abdomen:", "  Arms:", "  Legs:", "  Anomaly:", "  Radiation:"}
+ITEM.outfitCategory = "model"
+ITEM.resiAmount = 1
 ITEM.resistance = true
 ITEM.isBodyArmor = true
 ITEM.pacData = {}
 ITEM.skincustom = {}
 ITEM.bgcustom = {}
-ITEM.ballisticlevels = {"1", "1", "1", "1", "1", "1", "1"}
-ITEM.ballisticareas = {"  Head:", "  Torso:", "  Abdomen:", "  Arms:", "  Legs:", "  Anomaly:", "  Radiation:"}
 
 ITEM.br = 0
 ITEM.fbr = 0
@@ -22,6 +24,7 @@ ITEM.far = 0
 ITEM.radProt = 0
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 
+ITEM.weight = 0
 
 --[[
 -- This will change a player's skin after changing the model. Keep in mind it starts at 0.

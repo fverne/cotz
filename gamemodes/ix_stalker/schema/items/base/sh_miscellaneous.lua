@@ -2,8 +2,12 @@ ITEM.name = "misc"
 ITEM.description = "misc item."
 ITEM.longdesc = "No Longer Description Available"
 ITEM.model = "models/Gibs/HGIBS.mdl"
+
 ITEM.width = 1
 ITEM.height = 1
+ITEM.price = 0
+
+ITEM.weight = 0
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)

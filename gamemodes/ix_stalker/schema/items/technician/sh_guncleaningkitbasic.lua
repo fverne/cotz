@@ -6,7 +6,7 @@ ITEM.flag = "A"
 ITEM.price = "3000"
 ITEM.repairAmount = 5
 ITEM.repairTreshhold = 75
-ITEM.maxStack = 3
+ITEM.quantity = 3
 ITEM.sound = "stalkersound/inv_repair_kit_use_fast_2p8.mp3"
 
 ITEM.functions.use = {
@@ -99,7 +99,7 @@ function ITEM:GetDescription()
 	if (self.entity) then
 		return self.description.."\n \nThis tool has "..math.Round(quant).." uses left durability."
 	else
-        return (str.."Amount of durability restored: "..self.repairAmount.."% \nMinimum durability percentage: "..self.repairTreshhold.."%".."\n \nThis tool has "..quant.."/"..self.maxStack.." uses left.")
+        return (str.."Amount of durability restored: "..self.repairAmount.."% \nMinimum durability percentage: "..self.repairTreshhold.."%".."\n \nThis tool has "..quant.."/"..self.quantity.." uses left.")
 	end
 end
 
@@ -194,12 +194,12 @@ ITEM.functions.Clone = {
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
-		draw.SimpleText(item:GetData("quantity", 1).."/"..item.maxStack, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
+		draw.SimpleText(item:GetData("quantity", 1).."/"..item.quantity, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
 	end
 end
 
 function ITEM:OnInstanced(invID, x, y)
 	if !self:GetData("quantity") then
-		self:SetData("quantity", self.maxStack)
+		self:SetData("quantity", self.quantity)
 	end
 end

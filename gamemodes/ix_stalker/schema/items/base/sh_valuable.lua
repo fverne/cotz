@@ -2,8 +2,10 @@ ITEM.name = "valuable"
 ITEM.description = "valuable item."
 ITEM.longdesc = "No Longer Description Available"
 ITEM.model = "models/Gibs/HGIBS.mdl"
+
 ITEM.width = 1
 ITEM.height = 1
+ITEM.price = 0
 
 ITEM.flatweight = 0
 ITEM.weight = 0

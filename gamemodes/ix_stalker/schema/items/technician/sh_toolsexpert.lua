@@ -9,7 +9,7 @@ ITEM.price = "25000"
 --ITEM.busflag = "MERCH3"
 ITEM.busflag = {"technician1_1_1"}
 ITEM.noDeathDrop = true
-ITEM.maxStack = 100
+ITEM.quantity = 100
 ITEM.isTool = true
 ITEM.toolMult = 1
 ITEM.compMultiplier = 1.25
@@ -123,7 +123,7 @@ ITEM.functions.Clone = {
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
-		draw.SimpleText(math.Round(item:GetData("quantity", 1)).."/"..item.maxStack, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
+		draw.SimpleText(math.Round(item:GetData("quantity", 1)).."/"..item.quantity, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
 	end
 end
 

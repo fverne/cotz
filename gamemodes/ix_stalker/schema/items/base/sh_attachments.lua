@@ -2,10 +2,44 @@ ITEM.name = "Attachment"
 ITEM.description = "An attachment."
 ITEM.category = "Attachments"
 ITEM.model = "models/props/cs_office/Cardboard_box02.mdl"
-ITEM.upgradeIcon = Material("materials/vgui/ui/stalker/weaponupgrades/genericmod.png")
+
 ITEM.width = 1
 ITEM.height = 1
+ITEM.price = 0
+
 ITEM.attachName = "namegoeshere"
+ITEM.upgradeIcon = Material("materials/vgui/ui/stalker/weaponupgrades/genericmod.png")
+
+ITEM.weight = 0
+
+function ITEM:GetDescription()
+	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
+	local quantdesc = ""
+	local invdesc = ""
+	if self.longdesc then
+		invdesc = "\n\n"..(self.longdesc)
+	end
+
+	if self.quantdesc then
+		quantdesc = "\n\n"..Format(self.quantdesc, quant)
+	end
+
+	if (self.entity) then
+		return (self.description)
+	else
+        return (self.description..quantdesc..invdesc)
+	end
+end
+
+function ITEM:PopulateTooltip(tooltip)
+    if (!self.entity) then
+        ix.util.PropertyDesc(tooltip, "Weapon Attachment", Color(255, 255, 0), Material("materials/vgui/ui/stalker/weaponupgrades/genericmod.png"))
+    end
+
+    if (self.PopulateTooltipIndividual) then
+      self:PopulateTooltipIndividual(tooltip)
+    end
+end
 
 ITEM.functions.use = {
 	name = "Install",
@@ -89,22 +123,3 @@ ITEM.functions.use = {
 		return false
 	end,
 }
-
-function ITEM:GetDescription()
-	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
-	local quantdesc = ""
-	local invdesc = ""
-	if self.longdesc then
-		invdesc = "\n\n"..(self.longdesc)
-	end
-
-	if self.quantdesc then
-		quantdesc = "\n\n"..Format(self.quantdesc, quant)
-	end
-
-	if (self.entity) then
-		return (self.description)
-	else
-        return (self.description..quantdesc..invdesc)
-	end
-end

@@ -1,13 +1,18 @@
 ITEM.name = "Ammo Base"
 ITEM.model = "models/Items/BoxSRounds.mdl"
+ITEM.description = "A box with %s rounds of ammunition."
+ITEM.category = "Ammunition"
+
 ITEM.width = 1
 ITEM.height = 1
+ITEM.price = 0
+
 ITEM.ammo = "pistol" -- type of the ammo
 ITEM.ammoAmount = 30 -- amount of the ammo
 ITEM.isAmmo = true
 ITEM.loadSize = {1,5,15, ITEM.ammoAmount}
-ITEM.description = "A box with %s rounds of ammunition."
-ITEM.category = "Ammunition"
+
+ITEM.weight = 0
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
@@ -27,6 +32,14 @@ function ITEM:GetDescription()
 	end
 end
 
+if (CLIENT) then
+	function ITEM:PaintOver(item, w, h)
+		draw.SimpleText(
+			item:GetData("quantity", item.ammoAmount).."/"..item.ammoAmount, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black
+		)
+	end
+end
+
 function ITEM:GetPrice()
 	local base = self.price / self.ammoAmount
 
@@ -37,14 +50,6 @@ function ITEM:OnInstanced(invID, x, y)
 	
 	if !self:GetData("quantity") then
 		self:SetData("quantity", self.ammoAmount)
-	end
-end
-
-if (CLIENT) then
-	function ITEM:PaintOver(item, w, h)
-		draw.SimpleText(
-			item:GetData("quantity", item.ammoAmount).."/"..item.ammoAmount, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black
-		)
 	end
 end
 

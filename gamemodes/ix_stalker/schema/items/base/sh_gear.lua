@@ -3,9 +3,15 @@ ITEM.description = "A PAC Outfit Base."
 ITEM.longdesc = "No Longer Description Available"
 ITEM.category = "Outfit"
 ITEM.model = "models/Gibs/HGIBS.mdl"
+
 ITEM.width = 2
 ITEM.height = 2
+ITEM.price = 0
+
 ITEM.pacData = {}
+ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
+ITEM.ballisticlevels = {"0"}
+ITEM.ballisticareas = {"  Head:"}
 ITEM.br = 0
 ITEM.fbr = 0
 ITEM.ar = 0
@@ -14,9 +20,9 @@ ITEM.radProt = 0
 ITEM.resistance = true
 ITEM.isHelmet = nil
 ITEM.isGasmask = nil
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
-ITEM.ballisticlevels = {"0"}
-ITEM.ballisticareas = {"  Head:"}
+
+ITEM.weight = 0
+
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
@@ -34,42 +40,6 @@ function ITEM:GetDescription()
 		return (self.description)
 	else
         return (self.description..quantdesc..invdesc)
-	end
-end
-
-function ITEM:RadProtTranslator(value)
-	if value == 0 then
-		return "None"
-	elseif value <= 0.1 then
-		return "Negligible"
-	elseif value <= 0.2 then
-		return "Bad"
-	elseif value <= 0.3 then
-		return "Decent"
-	elseif value <= 0.4 then
-		return "Good"
-	elseif value < 0.8 then
-		return "Very Good"
-	elseif value >= 0.8 then
-		return "Excellent"
-	end
-end
-
-function ITEM:AnomProtTranslator(value)
-	if value == 0 then
-		return "None"
-	elseif value <= 0.02 then
-		return "Negligible"
-	elseif value <= 0.04 then
-		return "Bad"
-	elseif value <= 0.06 then
-		return "Decent"
-	elseif value <= 0.08 then
-		return "Good"
-	elseif value <= 0.10 then
-		return "Very Good"
-	elseif value > 0.10 then
-		return "Excellent"
 	end
 end
 
@@ -210,6 +180,42 @@ if (CLIENT) then
 			duratitle:SetText("\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 			duratitle:SizeToContents()
 		end
+	end
+end
+
+function ITEM:RadProtTranslator(value)
+	if value == 0 then
+		return "None"
+	elseif value <= 0.1 then
+		return "Negligible"
+	elseif value <= 0.2 then
+		return "Bad"
+	elseif value <= 0.3 then
+		return "Decent"
+	elseif value <= 0.4 then
+		return "Good"
+	elseif value < 0.8 then
+		return "Very Good"
+	elseif value >= 0.8 then
+		return "Excellent"
+	end
+end
+
+function ITEM:AnomProtTranslator(value)
+	if value == 0 then
+		return "None"
+	elseif value <= 0.02 then
+		return "Negligible"
+	elseif value <= 0.04 then
+		return "Bad"
+	elseif value <= 0.06 then
+		return "Decent"
+	elseif value <= 0.08 then
+		return "Good"
+	elseif value <= 0.10 then
+		return "Very Good"
+	elseif value > 0.10 then
+		return "Excellent"
 	end
 end
 
