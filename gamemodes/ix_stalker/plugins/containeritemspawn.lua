@@ -4,7 +4,7 @@ PLUGIN.desc = "Spawns items in containers."
 
 PLUGIN.itemspawngroups = {
 	["default"] = {
-		{"medkit"},
+		{"medic_medkit_2"},
 	},
 	["small"] = {
 		{"makarov", {["ammo"] = 3}, {["durability"] = 15}},

@@ -6,7 +6,7 @@ PLUGIN.itempoints = PLUGIN.itempoints or {}
 
 PLUGIN.spawngroups = {
 	["default"] = {
-		{"medkit"},
+		{"medic_medkit_2"},
 	},
 	["small"] = {
 		{"9x18zl", {["quantity"] = math.random(8)}},
