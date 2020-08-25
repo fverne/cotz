@@ -107,6 +107,8 @@ function PANEL:Init()
 	self:SetSizable(false)
 	self:SetTitle("")
 
+	ix.gui.menuInventoryFrame = self
+
 	local container = self:Add("ixStalkerInventory")
 	self:SetSize(container:GetWide() + 100, container:GetTall() + 100)
 	self:DockPadding(12, 112, 12, 42)
@@ -161,6 +163,25 @@ function PANEL:Init()
 	self.charbackgroundicon:SetPos(230, 13)
 	self.charbackgroundicon:SetZPos(-1)
 
+	if LocalPlayer():GetCharacter():GetPdaavatar() then 
+		self.charbackgroundicon:SetImage( LocalPlayer():GetCharacter():GetPdaavatar() )
+	else
+		self.charbackgroundicon:SetImage( "vgui/icons/face_31.png" )
+	end
+end
+
+function PANEL:Update()
+	-- money update
+	self.money:SetText(ix.currency.Get(LocalPlayer():GetCharacter():GetMoney()))
+
+	-- weight update
+	if (ix.option.Get("imperial", false)) then
+		self.weight:SetText(math.Round(carry * 2.20462, 2).." lbs / "..math.Round(maxWeight * 2.20462, 2).." lbs")
+	else
+		self.weight:SetText(math.Round(carry, 2).." kg / "..maxWeight.." kg")
+	end
+
+	-- avatar update
 	if LocalPlayer():GetCharacter():GetPdaavatar() then 
 		self.charbackgroundicon:SetImage( LocalPlayer():GetCharacter():GetPdaavatar() )
 	else
