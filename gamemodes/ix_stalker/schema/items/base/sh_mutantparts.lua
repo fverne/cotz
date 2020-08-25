@@ -49,7 +49,7 @@ end
 
 function ITEM:PopulateTooltip(tooltip)
     if !self.entity then
-        ix.util.PropertyDesc(tooltip, "Mutant Part", Color(64, 224, 208))
+        ix.util.PropertyDesc2(tooltip, "Mutant Part", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
         ix.util.PropertyDesc(tooltip, "Valuable", Color(225, 223, 0))
     end
 

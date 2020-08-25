@@ -2,13 +2,14 @@ ITEM.name = "Bat"
 ITEM.description = "A baseball bat."
 ITEM.model = "models/weapons/tfa_nmrih/w_me_bat_metal.mdl"
 ITEM.longdesc = "A worn aluminium bat, with several dents in it. The leather wrapping around the handle is torn in several places."
-ITEM.class = "tfa_nmrih_bat"
-ITEM.weaponCategory = "secondary"
+ITEM.category = "Melee"
+
 ITEM.price = 450
-ITEM.busflag = {"melee"}
 ITEM.height = 1
 ITEM.width = 3
-ITEM.category = "Melee"
+
+ITEM.class = "tfa_nmrih_bat"
+ITEM.weaponCategory = "secondary"
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
 ITEM.iconCam = {
@@ -54,3 +55,7 @@ ITEM.pacData = {
 	},
 },
 }
+
+function ITEM:PopulateTooltipIndividual(tooltip)
+    ix.util.PropertyDesc(tooltip, "Melee", Color(64, 224, 208))
+end

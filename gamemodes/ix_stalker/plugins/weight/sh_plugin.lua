@@ -54,7 +54,7 @@ if (CLIENT) then
 		local weight = item:GetWeight()
 
 		if (weight) then
-			ix.util.PropertyDesc2(tooltip, "Weight: "..ix.weight.WeightString(weight, ix.option.Get("imperial", false)), Color(255, 255, 255), Material("vgui/ui/stalker/armorupgrades/carryweightinc.png"))
+			ix.util.PropertyDesc3(tooltip, "Weight: "..ix.weight.WeightString(weight, ix.option.Get("imperial", false)), Color(255, 255, 255), Material("vgui/ui/stalker/armorupgrades/carryweightinc.png"), 999)
 		end
 	end
 end

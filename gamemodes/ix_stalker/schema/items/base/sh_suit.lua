@@ -251,14 +251,14 @@ if (CLIENT) then
 			duratitle:SetText("Durability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 			duratitle:SizeToContents()
 
-			ix.util.PropertyDesc(tooltip, "Protective Suit", Color(64, 224, 208))
+			ix.util.PropertyDesc2(tooltip, "Protective Suit", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 
 			if self.isGasmask then
-	        	ix.util.PropertyDesc(tooltip, "Includes Gasmask", Color(64, 224, 208))
+	        	ix.util.PropertyDesc2(tooltip, "Gasmask", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 	        end
 	        
 	        if self.isHelmet then
-	        	ix.util.PropertyDesc(tooltip, "Includes Helmet", Color(64, 224, 208))
+	        	ix.util.PropertyDesc2(tooltip, "Helmet", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 	        end
 
 	        if (self.PopulateTooltipIndividual) then

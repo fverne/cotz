@@ -181,11 +181,11 @@ if (CLIENT) then
 			duratitle:SizeToContents()
 
 			if self.isGasmask then
-	        	ix.util.PropertyDesc(tooltip, "Gasmask", Color(64, 224, 208))
+	        	ix.util.PropertyDesc2(tooltip, "Gasmask", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 	        end
 	        
 	        if self.isHelmet then
-	        	ix.util.PropertyDesc(tooltip, "Helmet", Color(64, 224, 208))
+	        	ix.util.PropertyDesc2(tooltip, "Helmet", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 	        end
 
 	        if (self.PopulateTooltipIndividual) then

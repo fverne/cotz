@@ -15,7 +15,8 @@ function ix.util.PropertyDesc(tooltip, text, color)
 		descheader:SetContentAlignment(4)
 	end
 
-	local dot = tooltip:AddRow("propertyitem")
+	local dot 
+	dot = tooltip:AddRowAfter("propertyheader", "propertyitem")
 	dot:SetText("")
 
 	local image = dot:Add("DLabel")
@@ -24,8 +25,6 @@ function ix.util.PropertyDesc(tooltip, text, color)
 	image:SetTextColor( color or Color( 255, 255, 255) )
 	image:SetPos(8, 0)
 	image:SetSize(dot:GetTall(), dot:GetTall())
-	--image:SizeToContents()
-
 
 	local desctext = dot:Add("DLabel")
 	desctext:MoveRightOf(image)
@@ -33,6 +32,10 @@ function ix.util.PropertyDesc(tooltip, text, color)
 	desctext:SetTextColor(Color(255, 255, 255))
 	desctext:SetFont("ixSmallFont")
 	desctext:SizeToContents()
+
+	dot:SetWide(image:GetWide() + desctext:GetWide() + 15)
+
+	tooltip:SizeToContents()
 end
 
 function ix.util.PropertyDesc2(tooltip, text, color, imagestring)
@@ -44,22 +47,18 @@ function ix.util.PropertyDesc2(tooltip, text, color, imagestring)
 	end
 
 	local dot
-
 	if !tooltip:GetRow("propertyitem") then
-		dot = tooltip:AddRowAfter("propertyheader", "propertyitem")
+		dot = tooltip:AddRowAfter("propertyitem", "propertyitem2")
 		dot:SetText("")
 	else
-		dot = tooltip:AddRow("propertyitem")
+		dot = tooltip:AddRowAfter("propertyitem", "propertyitem2")
 		dot:SetText("")
 	end
-
-	
 
 	local image = dot:Add("DImage")
 	image:SetMaterial(imagestring)
 	image:SetPos(8, 0)
 	image:SetSize(dot:GetTall(), dot:GetTall())
-	image:SizeToContents()
 
 	local desctext = dot:Add("DLabel")
 	desctext:MoveRightOf(image)
@@ -68,5 +67,45 @@ function ix.util.PropertyDesc2(tooltip, text, color, imagestring)
 	desctext:SetFont("ixSmallFont")
 	desctext:SizeToContents()
 
-	dot:SizeToContents()
+	dot:SetWide(image:GetWide() + desctext:GetWide() + 15)
+
+	tooltip:SizeToContents()
+end
+
+function ix.util.PropertyDesc3(tooltip, text, color, imagestring, zpos)
+	if !tooltip:GetRow("propertyheader") then
+		local descheader = tooltip:AddRow("propertyheader")
+		descheader:SetText("\nPROPERTIES:")
+		descheader:SizeToContents()
+		descheader:SetContentAlignment(4)
+	end
+
+	local dot
+	if !tooltip:GetRow("propertyitemheader") then
+		dot = tooltip:AddRowAfter("propertyitem", "propertyitem2")
+		dot:SetText("")
+	else
+		dot = tooltip:AddRowAfter("propertyitem", "propertyitem2")
+		dot:SetText("")
+	end
+
+	local image = dot:Add("DImage")
+	image:SetMaterial(imagestring)
+	image:SetPos(8, 0)
+	image:SetSize(dot:GetTall(), dot:GetTall())
+
+	local desctext = dot:Add("DLabel")
+	desctext:MoveRightOf(image)
+	desctext:SetText("  "..text)
+	desctext:SetTextColor(Color(255, 255, 255))
+	desctext:SetFont("ixSmallFont")
+	desctext:SizeToContents()
+
+	if zpos then
+		dot:SetZPos(zpos)
+	end
+
+	dot:SetWide(image:GetWide() + desctext:GetWide() + 15)
+
+	tooltip:SizeToContents()
 end

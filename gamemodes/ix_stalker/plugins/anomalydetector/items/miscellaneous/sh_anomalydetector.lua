@@ -23,6 +23,12 @@ if (CLIENT) then
 	end
 end
 
+function ITEM:PopulateTooltip(tooltip)
+    if !self.entity then
+        ix.util.PropertyDesc2(tooltip, "Anomaly Detector", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
+    end
+end
+
 ITEM.functions.Equip = { -- sorry, for name order.
 	name = "Equip",
 	tip = "useTip",

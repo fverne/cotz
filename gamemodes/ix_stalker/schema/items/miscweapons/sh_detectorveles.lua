@@ -48,3 +48,7 @@ ITEM.pacData = {
 	},
 },
 }
+
+function ITEM:PopulateTooltipIndividual(tooltip)
+    ix.util.PropertyDesc(tooltip, "High-Tier Artifact Detector", Color(64, 224, 208))
+end
