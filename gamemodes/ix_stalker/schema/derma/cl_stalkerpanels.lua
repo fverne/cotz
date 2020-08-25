@@ -106,6 +106,7 @@ function PANEL:Init()
 	self:SetDraggable(false)
 	self:SetSizable(false)
 	self:SetTitle("")
+	self.thinkdelay = 0
 
 	ix.gui.menuInventoryFrame = self
 
@@ -168,6 +169,8 @@ function PANEL:Init()
 	else
 		self.charbackgroundicon:SetImage( "vgui/icons/face_31.png" )
 	end
+
+	self:IsVisible()
 end
 
 function PANEL:Update()
@@ -175,6 +178,8 @@ function PANEL:Update()
 	self.money:SetText(ix.currency.Get(LocalPlayer():GetCharacter():GetMoney()))
 
 	-- weight update
+	local carry = LocalPlayer():GetCharacter():GetData("carry", 0)
+	local maxWeight = ix.config.Get("maxWeight", 30)
 	if (ix.option.Get("imperial", false)) then
 		self.weight:SetText(math.Round(carry * 2.20462, 2).." lbs / "..math.Round(maxWeight * 2.20462, 2).." lbs")
 	else
@@ -186,6 +191,13 @@ function PANEL:Update()
 		self.charbackgroundicon:SetImage( LocalPlayer():GetCharacter():GetPdaavatar() )
 	else
 		self.charbackgroundicon:SetImage( "vgui/icons/face_31.png" )
+	end
+end
+
+function PANEL:Think()
+	if self.thinkdelay < CurTime() then
+		self:Update()
+		self.thinkdelay = CurTime() + 0.1
 	end
 end
 
