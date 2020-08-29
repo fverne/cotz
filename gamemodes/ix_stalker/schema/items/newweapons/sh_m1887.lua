@@ -18,11 +18,8 @@ function ITEM:GetWeight()
   return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
 end
 
-ITEM.iconCam = {
-	pos = Vector(12, -205, 2),
-	ang = Angle(0, 90, 4.7058825492859),
-	fov = 10,
-}
+ITEM.exRender = false
+ITEM.img = Material("vgui/hud/weapons/m1887.png")
 
 ITEM.pacData = {
 [1] = {
