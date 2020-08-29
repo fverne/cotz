@@ -379,7 +379,7 @@ function ENT:STALKERNPCKill(dmginfo)
 		self:SetNPCState(NPC_STATE_DEAD)
 		
 
-		if(!(IsValid(TEMP_ATTACKER)&&TEMP_ATTACKER!=nil&&TEMP_ATTACKER!=NULL&&TEMP_ATTACKER:GetClass()=="npc_barnacle")) then
+		if(!(IsValid(TEMP_ATTACKER)&&TEMP_ATTACKER!=nil&&TEMP_ATTACKER!=NULL&&TEMP_ATTACKER:GetClass()=="npc_barnacle")&&!self.noRagdoll) then
 			if(false/*GetConVar("ai_serverragdolls"):GetInt()==0*/) then
 				net.Start("STALKERNPCRagdoll")
 				net.WriteEntity(self)
