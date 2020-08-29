@@ -165,6 +165,7 @@ end
 
 function ENT:STALKERNPCOnDeath()
 	self:EmitSound("npc/antlion_grub/squashed.wav")
+	self:EmitSound("weapons/mortar/mortar_explode1.wav")
 
 	local effectdata = EffectData()
 	effectdata:SetOrigin( self:GetPos() + Vector(0,0,32) )
