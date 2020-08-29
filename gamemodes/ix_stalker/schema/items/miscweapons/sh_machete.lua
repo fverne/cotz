@@ -10,11 +10,14 @@ ITEM.width = 3
 ITEM.category = "Melee"
 ITEM.repairCost = ITEM.price/100*1
 ITEM.canAttach = false
+
+ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(0, 20, 0),
-	ang = Angle(0, 270, 90),
-	fov = 70
+	pos = Vector(0, 34, 0),
+	ang = Angle(0, 270, -90),
+	fov = 45,
 }
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

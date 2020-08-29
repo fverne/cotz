@@ -12,9 +12,11 @@ ITEM.class = "tfa_nmrih_bat"
 ITEM.weaponCategory = "secondary"
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
+
+ITEM.exRender = true
 ITEM.iconCam = {
 	pos = Vector(-23, 0, 5),
-	ang = Angle(0, -0, 90),
+	ang = Angle(0, -0, -90),
 	fov = 70
 }
 ITEM.pacData = {
