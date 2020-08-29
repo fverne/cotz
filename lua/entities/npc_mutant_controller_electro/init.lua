@@ -198,7 +198,10 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 		end
 		local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
 
-		self:SetAngles((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized():Angle())
+		local _, yaw, _ = (TEMP_ShootPoint-TEMP_ShootPos):GetNormalized():Angle():Unpack()
+		local pitch, _, roll = self:GetAngles():Unpack()
+
+		self:SetAngles(Angle(pitch,yaw,roll))
 
 		self:STALKERNPCPlayAnimation("psy_attack_0")
 		
