@@ -155,7 +155,7 @@ function ENT:STALKERNPCThink()
 	end
 
 	if self.grabbing2 < CurTime() && self.IsGrabbing == 2 then
-		if(IsValid(self)&&self!=nil&&self!=NULL) and self:GetEnemy() then
+		if(IsValid(self)&&self!=nil&&self!=NULL) and self.GrabTarget then
 
 			if(!IsValid(self.GrabTarget)) then
 				self.IsGrabbing = 0
@@ -165,7 +165,7 @@ function ENT:STALKERNPCThink()
 			self:STALKERNPCClearAnimation()
 
 			self.GrabTarget:Freeze(false)			
-			self.GrabTarget:SetLocalVelocity(((self:GetEnemy():GetPos() - self:GetPos()):GetNormal() + self:GetUp()*5)*120)
+			self.GrabTarget:SetLocalVelocity(((self.GrabTarget:GetPos() - self:GetPos()):GetNormal() + self:GetUp()*5)*120)
 			self.GrabTarget = nil
 			self.IsGrabbing = 0
 		end

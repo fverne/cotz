@@ -144,7 +144,7 @@ function ENT:STALKERNPCThink()
 	if(self.PostSuccRunFinish<CurTime()) then
 		self.RangeSchedule = SCHED_CHASE_ENEMY
 	else
-		self.RangeSchedule = SCHED_RUN_FROM_ENEMY
+		self.RangeSchedule = SCHED_RUN_FROM_ENEMY_FALLBACK
 	end
 
 	-- JUMP
