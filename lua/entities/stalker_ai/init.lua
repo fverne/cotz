@@ -584,6 +584,11 @@ function ENT:STALKERNPCMakeMeleeAttack(IND)
 
 		local TEMP_MeleeAttackSequenceName = self.Animation
 
+		if (!TEMP_MeleeAttackSequenceName or !self.MeleeDamageCount[IND]) then 
+			self.PlayingAnimation = false 
+			return 
+		end
+
 		local TEMP_TargetTakeDamage = false
 		local TEMP_SomeoneTakeDamage = false
 		local TEMP_DamagesCount = 0
@@ -815,7 +820,7 @@ function ENT:STALKERNPCPlayAnimation(ANM,IND,RESETCYCLE)
 	self:StopMoving()
 	self:SetNPCState(NPC_STATE_NONE)
 
-	if(self:GetSequence()!=self:LookupSequence(self.Animation)) then
+	if(self.Animation and self:GetSequence()!=self:LookupSequence(self.Animation)) then
 		self:SetNPCState(NPC_STATE_SCRIPT)
 		self:ResetSequence(self:LookupSequence(self.Animation))
 	end
