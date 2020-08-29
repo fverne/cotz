@@ -24,7 +24,7 @@ sound.Add({	name		= "V92_Uni_Holster",
 
 
 SWEP.PrintName			= "Bear Detector"			
-SWEP.Slot				= 3
+SWEP.Slot				= 4
 SWEP.SlotPos			= 1
 SWEP.Category = "S.T.A.L.K.E.R. Detector Sweps"
 SWEP.Author	= "Subleader and AirBlack"

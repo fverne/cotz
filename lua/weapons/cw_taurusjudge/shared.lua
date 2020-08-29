@@ -104,7 +104,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CWC_JUDGE_DRAW"},
 
 SWEP.SpeedDec = 15
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"

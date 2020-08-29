@@ -123,7 +123,7 @@ SWEP.FullAimViewmodelRecoil = true
 SWEP.LuaVMRecoilAxisMod = {vert = -0.1, hor = 1, roll = 4, forward = 1.5, pitch = -0.5} -- modifier for intensity of the recoil on varying axes
 
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"

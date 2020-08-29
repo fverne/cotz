@@ -8,6 +8,8 @@ SWEP.PrintName = "Machete"
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/v_me_machete.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
+SWEP.Slot = 2
+
 SWEP.WorldModel			= "models/weapons/tfa_nmrih/w_me_machete.mdl" --Viewmodel path
 SWEP.HoldType = "melee"
 SWEP.DefaultHoldType = "melee"

@@ -72,7 +72,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "TT_SLIDE"}},
 
 SWEP.SpeedDec = 10
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"

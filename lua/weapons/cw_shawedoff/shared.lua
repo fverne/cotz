@@ -61,7 +61,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 
 SWEP.SpeedDec = 10
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "shotgun"
 SWEP.NormalHoldType = "shotgun"

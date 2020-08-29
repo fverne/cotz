@@ -8,6 +8,8 @@ SWEP.PrintName = "Fubar"
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/v_me_fubar.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
+SWEP.Slot = 3
+
 SWEP.WorldModel			= "models/weapons/tfa_nmrih/w_me_fubar.mdl" --Viewmodel path
 SWEP.HoldType = "melee2"
 SWEP.DefaultHoldType = "melee2"

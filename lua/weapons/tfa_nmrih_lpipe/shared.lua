@@ -8,6 +8,8 @@ SWEP.PrintName = "Lead Pipe"
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/v_me_pipe_lead.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
+SWEP.Slot = 2
+
 SWEP.WorldModel			= "models/weapons/tfa_nmrih/w_me_pipe_lead.mdl" --Viewmodel path
 SWEP.HoldType = "melee"
 SWEP.DefaultHoldType = "melee"

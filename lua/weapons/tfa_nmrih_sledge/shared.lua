@@ -8,6 +8,8 @@ SWEP.PrintName = "Sledgehammer"
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/v_me_sledge.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
+SWEP.Slot = 3
+
 SWEP.WorldModel			= "models/weapons/tfa_nmrih/w_me_sledge.mdl" --Viewmodel path
 SWEP.HoldType = "melee2"
 SWEP.DefaultHoldType = "melee2"

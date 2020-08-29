@@ -473,7 +473,7 @@ end
 
 SWEP.Category = "STALKER Misc"
 SWEP.PrintName		= "Guitar"
-SWEP.Slot		= 2
+SWEP.Slot		= 3
 SWEP.SlotPos		= 4
 SWEP.DrawAmmo		= false
 SWEP.ViewModel		= "models/weapons/tayley/v_guitar.mdl"

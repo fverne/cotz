@@ -34,6 +34,8 @@ SWEP.IronSightsMoveSpeed  = SWEP.MoveSpeed
 SWEP.InspectPos = Vector(4.84, 1.424, -3.131)
 SWEP.InspectAng = Vector(17.086, 3.938, 14.836)
 
+SWEP.Slot = 2
+
 SWEP.Primary.RPM = 50
 SWEP.Primary.Damage = 25
 SWEP.Secondary.BashDelay = 0.3

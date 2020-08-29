@@ -127,7 +127,7 @@ SWEP.Sounds = {
 
 SWEP.SpeedDec = 5
 
-SWEP.Slot = 1
+SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.NormalHoldType = "shotgun"
 SWEP.RunHoldType = "passive"

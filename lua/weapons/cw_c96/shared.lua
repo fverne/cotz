@@ -153,7 +153,7 @@ SWEP.ReloadViewBobEnabled = true
 
 SWEP.SpeedDec = 5
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"

@@ -85,7 +85,7 @@ SWEP.DryFire = true
 SWEP.AimViewModelFOV = 70
 SWEP.SpeedDec = 10
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"

@@ -8,6 +8,8 @@ SWEP.PrintName = "Crowbar"
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/v_me_crowbar.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
+SWEP.Slot = 2
+
 SWEP.WorldModel			= "models/weapons/tfa_nmrih/w_me_crowbar.mdl" --Viewmodel path
 SWEP.HoldType = "melee"
 SWEP.DefaultHoldType = "melee"

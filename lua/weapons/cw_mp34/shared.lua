@@ -92,7 +92,7 @@ SWEP.Animations = {fire = {"base_fire"},
 
 SWEP.SpeedDec = 15
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "passive"
