@@ -72,7 +72,7 @@ if (CLIENT) then
 				end
 
 				surface.SetFont("stalkerregulartitlefont")
-				local weaponName = weapons[i] and weapons[i]:GetPrintName():utf8upper() or "None"
+				local weaponName = weapons[i] and weapons[i]:GetPrintName():utf8upper() or "NONE"
 				if (weaponName[1] == "#") then weaponName = language.GetPhrase(weaponName) end
 				weaponName = "["..i.."] "..weaponName
 				local tx, ty = surface.GetTextSize(weaponName)
