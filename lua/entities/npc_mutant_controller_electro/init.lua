@@ -13,8 +13,8 @@ ENT.DieSoundEnabled = true
 ENT.DieSound.name = "Stalker.Controller.Die"
 ENT.DieSound.min = 1
 ENT.DieSound.max = 2
-ENT.hp = 1500
-ENT.hpvar = 100
+ENT.hp = 1800
+ENT.hpvar = 200
 
 ENT.CanSpecial = true
 
@@ -32,8 +32,17 @@ ENT.MaxRangeDist = 1500
 ENT.VisibleSchedule = SCHED_RUN_FROM_ENEMY_FALLBACK
 ENT.RangeSchedule = SCHED_RUN_RANDOM
 
+sound.Add( {
+	name = "electra_blast",
+	channel = CHAN_STATIC,
+	volume = 1,
+	level = 100,
+	pitch = 100,
+	sound = "anomaly/electra_blast1.mp3"
+} )
+
 function ENT:Initialize()
-	self.Model = "models/monsters/controler_fast.mdl"
+	self.Model = "models/monsters/controler_big.mdl"
 	self:STALKERNPCInit(Vector(-16,-16,70),MOVETYPE_STEP)
 	
 	self:SetBloodColor(BLOOD_COLOR_RED)
@@ -64,6 +73,7 @@ function ENT:Initialize()
 	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	self.MaxVictims = 0
 
+	self:SetSkin(3)
 
 	self.GoingToSpawnThem = false
 	self.NextSpawn = 0
@@ -82,24 +92,35 @@ end
 function ENT:STALKERNPCThink()
 
 	if (self.farttimer < CurTime()) then
-		for _,v in pairs(ents.FindInSphere(self:GetPos(),512)) do
-			if v:IsPlayer() then
-				local distance = self:GetPos():Distance(v:GetPos())
+		for _,v in pairs(ents.FindInSphere(self:GetPos(),256)) do
+			if (v == self or (!v:IsNPC() and !v:IsPlayer()) or !v:Alive()) then continue end
 
-				local TEMP_TargetDamage = DamageInfo()
+			local distance = self:GetPos():Distance(v:GetPos())
 
-				TEMP_TargetDamage:SetDamage(2 * ((512-distance)/512))
-				TEMP_TargetDamage:SetInflictor(self)
-				TEMP_TargetDamage:SetDamageType(DMG_SONIC)
-				TEMP_TargetDamage:SetAttacker(self)
-				TEMP_TargetDamage:SetDamagePosition(v:NearestPoint(self:GetPos()+self:OBBCenter()))
-				TEMP_TargetDamage:SetDamageForce(self:GetForward()*1000)
-			
-				v:TakeDamageInfo(TEMP_TargetDamage)
+			local TEMP_TargetDamage = DamageInfo()
+
+			TEMP_TargetDamage:SetDamage(15)
+			TEMP_TargetDamage:SetInflictor(self)
+			TEMP_TargetDamage:SetDamageType(DMG_SHOCK)
+			TEMP_TargetDamage:SetAttacker(self)
+			TEMP_TargetDamage:SetDamagePosition(v:NearestPoint(self:GetPos()+self:OBBCenter()))
+			TEMP_TargetDamage:SetDamageForce(self:GetForward()*1000)
+
+			v:TakeDamageInfo(TEMP_TargetDamage)
+
+			if (distance < 256) then
+				local TEMP_Effect = EffectData()
+				TEMP_Effect:SetOrigin(self:GetPos()+Vector(0,0,50))
+				TEMP_Effect:SetStart(v:GetPos()+v:OBBCenter())
+				TEMP_Effect:SetNormal((v:GetPos()-self:GetPos()):GetNormalized())
+				TEMP_Effect:SetScale(10)
+				TEMP_Effect:SetRadius(10)
+	
+				util.Effect("lightningzap", TEMP_Effect, true, true)
 			end
 		end
 
-		self.farttimer = CurTime() + 1
+		self.farttimer = CurTime() + 0.5
 	end
 
 	if(self.CanSpecialTimer < CurTime()) then
@@ -117,14 +138,27 @@ function ENT:STALKERNPCThink()
 
 				local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
 					
-				local TEMP_Grav = ents.Create("ent_fastcontroller_ball")
-				TEMP_Grav:SetPos(TEMP_ShootPos)
-				TEMP_Grav:SetAngles((TEMP_ShootPoint-TEMP_ShootPos):Angle())
-				TEMP_Grav:Spawn()
-							
-				TEMP_Grav:SetOwner(self)
-							
-				TEMP_Grav:GetPhysicsObject():SetVelocity((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized()*2500)
+				local TEMP_Effect = EffectData()
+				TEMP_Effect:SetOrigin(TEMP_ShootPos)
+				TEMP_Effect:SetStart(TEMP_ShootPoint)
+				TEMP_Effect:SetNormal((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized())
+				TEMP_Effect:SetScale(10)
+				TEMP_Effect:SetRadius(10)
+
+				util.Effect("lightningzap", TEMP_Effect, true, true)
+
+				ParticleEffect( "electra_activated", TEMP_ShootPoint, Angle( 0, 0, 0 ) )
+
+				local dmg = DamageInfo()
+				dmg:SetDamage(75)
+				dmg:SetAttacker(self)
+				dmg:SetDamageType(DMG_SHOCK)
+				dmg:SetInflictor(self)
+				dmg:SetDamagePosition(TEMP_POORGUY:NearestPoint(self:GetPos()))
+
+				TEMP_POORGUY:TakeDamageInfo(dmg)
+				TEMP_POORGUY:EmitSound("electra_blast")
+
 			end
 
 			self.SpecialAttack = 2

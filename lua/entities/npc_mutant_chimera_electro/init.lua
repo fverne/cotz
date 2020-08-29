@@ -163,6 +163,7 @@ end
 
 function ENT:Blast()
 	if (self.CanBlast < CurTime()) then
+		self:EmitSound("electra_blast")
 		ParticleEffect( "electra_activated", self:GetPos() + Vector(0,0,16), Angle( 0, 0, 0 ) )
 		for _,v in pairs(ents.FindInSphere(self:GetPos() + Vector(0,0,16), 512)) do
 			if v == self then continue end
