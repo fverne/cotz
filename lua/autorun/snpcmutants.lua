@@ -38,6 +38,8 @@ AddNPC("Tushkano","npc_mutant_rodent")
 
 --AddNPC("Snork - New","npc_mutant_snorkold")  --Old snork
 
+AddNPC("Controller (Fast)","npc_mutant_controller_fast")
+
 AddNPC("Izlom","npc_mutant_izlom")
 
 AddNPC("Bear","npc_mutant_bear")

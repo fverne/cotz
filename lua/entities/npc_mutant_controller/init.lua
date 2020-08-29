@@ -52,21 +52,6 @@ function ENT:Initialize()
 	TEMP_MeleeTable.bone[1] = "bip01_r_hand"
 	self:STALKERNPCSetMeleeParams(1,"S_Melee1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 	
-	TEMP_MeleeTable.damage[1] = 19
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH, DMG_CLUB)
-	TEMP_MeleeTable.distance[1] = 21
-	TEMP_MeleeTable.radius[1] = 60
-	TEMP_MeleeTable.time[1] = 0.8
-	TEMP_MeleeTable.bone[1] = "bip01_r_hand"
-	TEMP_MeleeTable.damage[2] = 19
-	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_SLASH, DMG_CLUB)
-	TEMP_MeleeTable.distance[2] = 21
-	TEMP_MeleeTable.radius[2] = 60
-	TEMP_MeleeTable.time[2] = 1.2
-	TEMP_MeleeTable.bone[2] = "bip01_l_hand"
-	self:STALKERNPCSetMeleeParams(2,"S_Melee2",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-
-	
 	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	self.MaxVictims = 0
 
