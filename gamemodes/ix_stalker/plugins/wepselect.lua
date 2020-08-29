@@ -18,7 +18,7 @@ if (CLIENT) then
 			font = font,
 			size = ScreenScale(8),
 			extended = true,
-			weight = 1000
+			weight = 500
 		})
 	end
 
@@ -71,16 +71,16 @@ if (CLIENT) then
 					end
 				end
 
-				surface.SetFont("ixWeaponSelectFont")
+				surface.SetFont("stalkerregulartitlefont")
 				local weaponName = weapons[i] and weapons[i]:GetPrintName():utf8upper() or "None"
 				if (weaponName[1] == "#") then weaponName = language.GetPhrase(weaponName) end
 				weaponName = "["..i.."] "..weaponName
 				local tx, ty = surface.GetTextSize(weaponName)
 				local scale = 1 - math.abs(theta * 2)
 
-				local selectedOffset = i == self.index and 10 or 0
+				local selectedOffset = i == self.index and 15 or 5
 
-				ix.util.DrawText(weaponName, ScrW() - (tx) - 10 - selectedOffset, ScrH()/3 + (ty * 1.5 * i), color, 0, 1, "ixWeaponSelectFont")
+				ix.util.DrawText(weaponName, /*ScrW() - (tx) - 10 - +*/ selectedOffset, ScrH()/3 + (ty * 1.5 * i), color, 0, 1, "ixWeaponSelectFont")
 				
 			end
 
