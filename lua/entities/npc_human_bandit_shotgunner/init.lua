@@ -60,10 +60,16 @@ ENT.grenadesounds= {
                     }
 
 ENT.models       = {
-                      "models/legends/zhila.mdl",
-                      "models/legends/shishak.mdl",
-                      "models/legends/zub.mdl"
+                      "models/bandit/bandit_regulare.mdl",
+                      "models/bandit/bandit_veteran.mdl",
+                      "models/bandit/bandit_novice.mdl",
                     }
+
+ENT.weapons      = {
+                      "weapon_npc_sawnoff",
+                      "weapon_npc_toz34"
+                    }
+
 -- Live vars
 ENT.Alerted     = false
 ENT.Grenades    = 2
@@ -78,13 +84,15 @@ ENT.GotACloseOne = false
 ENT.dead = false
 ENT.speaktime = 0
 ENT.FireBurst = 0
+ENT.NextAttack = 0
    
 function ENT:Initialize()
 
-  self:Give("weapon_npc_aksu")
-  --self:Give("weapon_smg1")
+  self:Give(self.weapons[math.random(#self.weapons)])
 
   self:SetModel(self.models[math.random(1,#self.models)])
+
+  self:SetSkin(math.random(1,self:SkinCount()))
    
   self:SetHullType( HULL_HUMAN )
   self:SetHullSizeNormal();
@@ -114,7 +122,7 @@ end
    
 function ENT:OnTakeDamage(dmg)
   if ((self.NextFlinch or 0) < CurTime()) then
-    self:SetSchedule(SCHED_SMALL_FLINCH)
+    //self:SetSchedule(SCHED_SMALL_FLINCH)
     self.NextFlinch = CurTime() + 3
   end
 
@@ -128,10 +136,8 @@ function ENT:OnTakeDamage(dmg)
   end
 
   if (dmg:GetAttacker():GetClass() != self:GetClass() ) then
-    self:ResetEnemy()
     self:AddEntityRelationship( dmg:GetAttacker(), 1, 10 )
     self:SetEnemy(dmg:GetAttacker())
-    self:CallForHelp()
   end
 
   --if (self.TakingCover == false) || self.Alerted == false then
@@ -152,22 +158,6 @@ schedd:EngTask( "TASK_FACE_ENEMY",       0 )
 schedd:EngTask( "TASK_RANGE_ATTACK1",    0 )
 
 function ENT:Think()
-  local function Attack_Melee()
-    local entstoattack = ents.FindInSphere(self:GetPos() + self:GetForward()*75,74)
-    if (entstoattack != nil) then
-      self:EmitSound( "physics/body/body_medium_impact_hard"..math.random(1,6)..".wav", 400, 100)
-      for _,v in pairs(entstoattack) do
-        if ( (v:IsNPC() || ( v:IsPlayer() && v:Alive())) && (v != self) || (v:GetClass() == "prop_physics")) then
-          v:TakeDamage( 17, self ) 
-        end
-      end
-    else
-      self:EmitSound( "zombie/claw_miss1.wav", 400, 100)
-    --add miss stuff here
-    end
-    --timer.Create( "melee_done_timer" .. self.Entity:EntIndex( ), 0.25, 1, setmeleefalse )
-  end
-
   if self:Health() > 0 then
     local enttable = ents.FindByClass("npc_*")
     local monstertable = ents.FindByClass("monster_*")
@@ -186,21 +176,9 @@ function ENT:Think()
         self:FindCloseEnemies()//get guys close to me
       end
     end
-
-    if (self:GetEnemy() != nil) then
-      if (self:GetEnemy():GetPos():Distance(self:GetPos()) < 70) then
-        if self.MeleeAttacking == false then
-          self:SetSchedule( SCHED_MELEE_ATTACK1 )
-          --timer.Create( "melee_attack_timer" .. self.Entity:EntIndex( ), 0.25, 1, Attack_Melee )
-          self.MeleeAttacking = true;
-        end
-      else
-        self.MeleeAttacking = false
-      end
-    end  
   end
 end
-   
+
 function ENT:GetFaction()
   return "Bandit"
 end
@@ -215,22 +193,7 @@ end
 
 function ENT:SelectSchedule()
   if self:Alive() then
-    if (self.FireBurst > 0 and self:HasLOS()) then
-      self:StartSchedule(schedd)
-      self.FireBurst = self.FireBurst - 1
-      return
-    end
-
-    --makes it never run out of ammo... :D
-    self:GetActiveWeapon():SetClip1(45)
     local haslos = self:HasLOS()
-
-    if math.random(1,100) < 5 and (self.NextReloadAllowed or 0) < CurTime() then
-      print("RELOAD SCHEDULE")
-      self:SetSchedule(SCHED_RELOAD)
-      self.NextReloadAllowed = CurTime() + 10
-      return
-    end
 
     local distance = 0
     local enemy_pos = 0
@@ -238,7 +201,8 @@ function ENT:SelectSchedule()
       self:FindEnemyDan()
       -- If there's still no enemy after looking for one, we patrol
       if( self:GetEnemy() == nil) then
-        self:SetSchedule(SCHED_COMBAT_PATROL)
+        print("SCHED_PATROL_WALK")
+        self:SetSchedule(SCHED_PATROL_WALK)
         self.TakingCover = false
         return
       end
@@ -250,15 +214,12 @@ function ENT:SelectSchedule()
     else
       enemy_pos = self:GetEnemy():GetPos()
       distance = self:GetPos():Distance(enemy_pos)
-      if distance > 4000 then
+      if distance > 750 then
+        print("SCHED_CHASE_ENEMY")
         self:SetSchedule(SCHED_CHASE_ENEMY)
-      elseif (distance < 4000 && distance > 200) then
+      elseif (distance < 750 && distance > 200) then
         --if damaged > 75% and not in cover
         if self:Health() < (self.StartHealth*0.25) then
-          self.TakingCover = true
-          self:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY)//take cover
-        else
-          self.TakingCover = false
           if self.speaktime < CurTime() then
             self.speaktime = CurTime() + 6
             if math.random(1,100) < 5 then
@@ -267,22 +228,23 @@ function ENT:SelectSchedule()
             end
           end
         end
-
         if (!haslos) then
+          print("SCHED_ESTABLISH_LINE_OF_FIRE")
           self:SetSchedule(SCHED_ESTABLISH_LINE_OF_FIRE) --move to shoot enemy
         else
-          self:StartSchedule(schedd)
-          if( self.FireBurst == 0) then
-            self.FireBurst = 5
+          if(self.NextAttack < CurTime()) then
+            self:StartSchedule(schedd)
+            self.NextAttack = CurTime() + 2
+          else
+            self:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY)
           end
         end
-      elseif ( haslos and distance < 200) then
-        if self.TakingCover == false then
-          self.TakingCover = true
-          self:SetSchedule( SCHED_TAKE_COVER_FROM_ENEMY )
-        end
+      elseif ( haslos and distance < 200 and (self.NextAttack or 0) < CurTime()) then
+        self:StartSchedule(schedd)
+        self.NextAttack = CurTime() + 2
       else
         self.TakingCover = false
+        print("SCHED_CHASE_ENEMY")
         self:SetSchedule(SCHED_CHASE_ENEMY)//move to shoot enemy
       end
     end
@@ -417,10 +379,10 @@ function ENT:KilledDan()
   self:Remove()
 end
 
-function ENT:CallForHelp()
-end
-
 function ENT:ResetEnemy()
+  if( self:GetEnemy() ) then
+    self:SetEnemy(nil)
+  end
 end
 
 function ENT:FindCloseEnemies()

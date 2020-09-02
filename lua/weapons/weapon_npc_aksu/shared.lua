@@ -64,7 +64,7 @@ SWEP.Secondary.TakeAmmoPerBullet  = false
 SWEP.Secondary.Automatic      = false
 SWEP.Secondary.Ammo         = ""
 
-SWEP.BurstNum = 5
+SWEP.BurstNum = 6
 SWEP.BurstCnt = 0
 
 -- Hooks
@@ -105,11 +105,12 @@ function SWEP:PrimaryAttack()
 
   self.BurstCnt = self.BurstCnt - 1
   if( self.BurstCnt == 0 ) then
-    self:SetNextPrimaryFire( CurTime() + 2 )
+    self:SetNextPrimaryFire( CurTime() + 3 )
+    self.Owner:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY)
+    self.Owner.NextAttack = CurTime() + 8
   else
     self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
   end
-
 
 end
 
@@ -142,4 +143,19 @@ function SWEP:Precache()
 end
 
 function SWEP:OwnerChanged()
+end
+
+function SWEP:GetNPCBurstSettings()
+  local burstcntmin = 4
+  local busrtcntmax = 5
+  local burstdelay = 0.05
+
+  return burstcntmin, burstcntmax, burstdelay
+end
+
+function SWEP:GetNPCRestTimes()
+  local minwait = 0.05
+  local maxwait = 0.1
+
+  return minwait, maxwait
 end

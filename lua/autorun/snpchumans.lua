@@ -1,15 +1,20 @@
 local Category = "S.T.A.L.K.E.R RP Humans"
 
-local NPC = { 	Name = "Bandit (AKS74u)", 
-				Class = "npc_human_bandit_aksu",
+local NPC = { 	Name = "Bandit (Rifles)", 
+				Class = "npc_human_bandit_rifleman",
 				Category = Category	}
 list.Set( "NPC", NPC.Class, NPC )
 
-local NPC = { 	Name = "Bandit (Sawnoff)", 
-				Class = "npc_human_bandit_sawnoff",
+local NPC = { 	Name = "Bandit (Shotguns)", 
+				Class = "npc_human_bandit_shotgunner",
 				Category = Category	}
 list.Set( "NPC", NPC.Class, NPC )
-  
+
+local NPC = { 	Name = "Bandit (Pistols)", 
+				Class = "npc_human_bandit_pistolman",
+				Category = Category	}
+list.Set( "NPC", NPC.Class, NPC )
+
 local Npc = FindMetaTable("NPC")
  
 function Npc:GetEyeTrace()

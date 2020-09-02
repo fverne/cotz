@@ -2,11 +2,11 @@ SWEP.Base = "weapon_base"
 
 if ( SERVER ) then
   AddCSLuaFile( "shared.lua" )
-  SWEP.HoldType     = "shotgun"
+  SWEP.HoldType     = "revolver"
 end
 
 -- Visual/sound settings
-SWEP.PrintName    = "Sawnoff"
+SWEP.PrintName    = "Makarov"
 SWEP.Category   = "NPC SWEPS"
 SWEP.Slot     = 2
 SWEP.SlotPos    = 4
@@ -15,9 +15,9 @@ SWEP.DrawCrosshair  = true
 SWEP.ViewModelFlip  = true
 SWEP.ViewModelFOV = 64
 SWEP.ViewModel    = "models/weapons/v_rif_ak47.mdl"
-SWEP.WorldModel   = "models/weapons/w_sawnoff.mdl"
+SWEP.WorldModel   = "models/weapons/w_makarov_pm_fixed.mdl"
 SWEP.ReloadSound  = "weapons/pistol/pistol_reload1.wav"
-SWEP.HoldType   = "shotgun"
+SWEP.HoldType   = "revolver"
 
 -- Other settings
 SWEP.Weight     = 5
@@ -35,13 +35,13 @@ SWEP.Instructions = ""
 SWEP.firepitch = 100
 
 -- Primary fire settings
-SWEP.Primary.Sound        = "CW_TOZ_FIRE"
-SWEP.Primary.Damage       = 12
-SWEP.Primary.NumShots     = 9
+SWEP.Primary.Sound        = "CW_MAKAROV_FIRE"
+SWEP.Primary.Damage       = 8
+SWEP.Primary.NumShots     = 1
 SWEP.Primary.Recoil       = 0
-SWEP.Primary.Cone       = 16
+SWEP.Primary.Cone       = 7
 SWEP.Primary.Delay        = 0.1
-SWEP.Primary.ClipSize     = 2
+SWEP.Primary.ClipSize     = 8
 SWEP.Primary.DefaultClip    = 256
 SWEP.Primary.Tracer       = 1
 SWEP.Primary.Force        = 10
@@ -64,7 +64,7 @@ SWEP.Secondary.TakeAmmoPerBullet  = false
 SWEP.Secondary.Automatic      = false
 SWEP.Secondary.Ammo         = ""
 
-SWEP.BurstNum = 2
+SWEP.BurstNum = 8
 SWEP.BurstCnt = 0
 
 -- Hooks
@@ -106,7 +106,7 @@ function SWEP:PrimaryAttack()
   self.BurstCnt = self.BurstCnt - 1
   if( self.BurstCnt == 0 ) then
     self:SetNextPrimaryFire( CurTime() + 2 )
-    self.Owner:SetSchedule(SCHED_RELOAD)
+    self.Owner:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY)
     self.Owner.NextAttack = CurTime() + 5
   else
     self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
@@ -134,6 +134,11 @@ function SWEP:Holster()
 end
 
 function SWEP:OnRemove()
+  if(CLIENT) then
+    if (self.customwm) then
+      self.customwm:Remove()
+    end
+  end
 end
 
 function SWEP:OnRestore()
@@ -155,8 +160,8 @@ function SWEP:GetNPCBurstSettings()
 end
 
 function SWEP:GetNPCRestTimes()
-  local minwait = 1.5
-  local maxwait = 5.0
+  local minwait = 0.4
+  local maxwait = 0.6
 
   return minwait, maxwait
 end

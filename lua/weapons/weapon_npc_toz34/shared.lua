@@ -15,7 +15,7 @@ SWEP.DrawCrosshair  = true
 SWEP.ViewModelFlip  = true
 SWEP.ViewModelFOV = 64
 SWEP.ViewModel    = "models/weapons/v_rif_ak47.mdl"
-SWEP.WorldModel   = "models/weapons/w_sawnoff.mdl"
+SWEP.WorldModel   = "models/weapons/w_sv10.mdl"
 SWEP.ReloadSound  = "weapons/pistol/pistol_reload1.wav"
 SWEP.HoldType   = "shotgun"
 
