@@ -1,5 +1,5 @@
 PLUGIN.name = "PsyHealth System"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.description = "A PsyHealth system akin to the STALKER games."
 
 ix.config.Add("PsyHealthRecoverTime", 600, "How many seconds it takes to restore 1 percent PsyHealth.", nil, {

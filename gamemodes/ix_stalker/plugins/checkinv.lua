@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 
 PLUGIN.name = "Check Inventory"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Simple command to check inventory of target player"
 
 ix.command.Add("charcheckinv", {

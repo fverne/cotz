@@ -1,7 +1,7 @@
 "stalker"
 {
 	"base" 			"helix"
-	"title" 		"IX: STALKER"
-	"author" 		"verne"
+	"title" 		"IX: Call of the Zone"
+	"author" 		"verne & gumlefar"
 	"menusystem"	"1"
 }

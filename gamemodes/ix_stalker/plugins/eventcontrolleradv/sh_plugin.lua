@@ -1,6 +1,6 @@
 local PLUGIN = PLUGIN
 PLUGIN.name = "EventController - Adv"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Makes events occur randomly on your server. More intricate and complex configuration possible."
 
 PLUGIN.eventdefs = PLUGIN.eventdefs or {}

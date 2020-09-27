@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 
 PLUGIN.name = "Backgrounds"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.description = "Lets you add a background to a character, instilling special properties in them."
 
 ix.backgrounds = ix.backgrounds or {}

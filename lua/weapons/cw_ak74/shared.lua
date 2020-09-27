@@ -138,7 +138,7 @@ SWEP.Category = "STALKER Weapons"
 SWEP.WearDamage = 0.1
 SWEP.WearEffect = 0.05
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""

@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 
 PLUGIN.name = "Business flags"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Implements the business flag library"
 
 -- This plugin is not used in this gamemode, 

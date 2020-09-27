@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 ENT.Type = "anim"
 ENT.PrintName = "Artifact Purchaser"
-ENT.Author = "some faggot"
+ENT.Author = "gumlefar"
 ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.RenderGroup 		= RENDERGROUP_BOTH

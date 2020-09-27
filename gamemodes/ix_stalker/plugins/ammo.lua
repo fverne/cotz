@@ -1,5 +1,5 @@
 PLUGIN.name = "Ammo"
-PLUGIN.author = "Lt. Taylor - modified by some faggot"
+PLUGIN.author = "Lt. Taylor - modified by gumlefar"
 PLUGIN.desc = "Adds an ammo from inventory system - only takes ammo on reload"
 
 if (CLIENT) then return end

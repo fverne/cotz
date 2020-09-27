@@ -1,6 +1,6 @@
 local PLUGIN = PLUGIN
 PLUGIN.name = "Special Sale"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Special items spot sale plugin"
 
 PLUGIN.priceModifier = 1.5

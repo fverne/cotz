@@ -5,7 +5,7 @@ LANGUAGE = {
 	helix = "Helix",
 
 	introTextOne = "Call of the Zone presents",
-	introTextTwo = "a STALKER Gamemode created by verne and some faggot",
+	introTextTwo = "a STALKER Gamemode created by verne and gumlefar",
 	introContinue = "press space to continue",
 
 	helpIdle = "Select a category",

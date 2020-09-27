@@ -1,6 +1,6 @@
 local PLUGIN = PLUGIN
 PLUGIN.name = "Hidden Stash System"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Simple hidestash system."
 PLUGIN.stashpoints = PLUGIN.stashpoints or {}
 

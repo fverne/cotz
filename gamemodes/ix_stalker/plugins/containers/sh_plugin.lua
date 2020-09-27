@@ -2,7 +2,7 @@
 local PLUGIN = PLUGIN
 
 PLUGIN.name = "Containers"
-PLUGIN.author = "Chessnut - expanded by some faggot"
+PLUGIN.author = "Chessnut - expanded by gumlefar"
 PLUGIN.description = "Provides the ability to store items."
 
 ix.container = ix.container or {}

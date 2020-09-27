@@ -1,5 +1,5 @@
 PLUGIN.name = "Progression"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "System for tracking serverwide progression and performing actions based on progression levels."
 
 ix.progression = ix.progression or {}

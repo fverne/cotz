@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 
 PLUGIN.name = "Simple Cross Server"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Allows for basic cross server interaction."
 
 PLUGIN.loadpoints = PLUGIN.loadpoints or {}

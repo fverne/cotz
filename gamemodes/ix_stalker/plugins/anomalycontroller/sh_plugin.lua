@@ -1,6 +1,6 @@
 local PLUGIN = PLUGIN
 PLUGIN.name = "Anomaly Controller"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Allows for randomly spawning anomaly entities"
 
 PLUGIN.anomalydefs = PLUGIN.anomalydefs or {}

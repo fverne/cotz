@@ -1,5 +1,5 @@
 PLUGIN.name = "Container Item Spawner"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Spawns items in containers."
 
 PLUGIN.itemspawngroups = {

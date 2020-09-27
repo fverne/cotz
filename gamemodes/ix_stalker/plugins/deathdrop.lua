@@ -1,5 +1,5 @@
 PLUGIN.name = "DeathDrop"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Handles items when player dies."
 
 ix.config.Add("deathWeaponDura", true, "If true weapons will take damage.", nil, {

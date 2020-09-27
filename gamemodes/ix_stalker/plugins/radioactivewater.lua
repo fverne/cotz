@@ -1,5 +1,5 @@
 PLUGIN.name = "Radioactive Water"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Makes water less safe to traverse."
 
 ix.config.Add("radioactiveWaterEnabled", true, "If true, water will be radioactive.", nil, {

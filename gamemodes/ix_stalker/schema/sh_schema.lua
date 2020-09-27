@@ -3,7 +3,7 @@
 
 -- Schema info
 Schema.name = "Call of the Zone"
-Schema.author = "some faggot, verne"
+Schema.author = "gumlefar & verne"
 Schema.description = "A multiplayer STALKER experience"
 --Schema.logo = "vgui/background/wallpaper.jpg"
 
@@ -145,8 +145,6 @@ local stalker_models = {
 	["models/nasca/stalker/male_ssp_eco.mdl"] = true,
 	["models/nasca/stalker/male_eagle_lone.mdl"] = true,
 	["models/nasca/stalker/male_expedition.mdl"] = true,
-	
-
 }
 
 for k, v in pairs(stalker_models) do

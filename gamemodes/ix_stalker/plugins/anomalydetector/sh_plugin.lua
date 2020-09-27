@@ -1,6 +1,6 @@
 local PLUGIN = PLUGIN
 PLUGIN.name = "Anomaly Detector"
-PLUGIN.author = "some faggot, verne"
+PLUGIN.author = "gumlefar, verne"
 PLUGIN.desc = "Beeps when anomalies are nearby when you have an anomaly detector."
 
 local playerMeta = FindMetaTable("Player")

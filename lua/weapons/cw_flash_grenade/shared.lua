@@ -42,7 +42,7 @@ SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_grenade_base"
 SWEP.Category = "CW 2.0"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""

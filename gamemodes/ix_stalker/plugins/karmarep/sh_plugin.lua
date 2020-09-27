@@ -1,6 +1,6 @@
 local PLUGIN = PLUGIN
 PLUGIN.name = "KarmaREp"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Karma & Reputation System"
 
 PLUGIN.repDefs = {

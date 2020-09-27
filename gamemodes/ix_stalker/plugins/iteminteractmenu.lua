@@ -1,5 +1,5 @@
 PLUGIN.name = "Nutscript-like Item Menu"
-PLUGIN.author = "some faggot"
+PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Replaces the default awful Helix item interaction menu."
 
 ix.menu = ix.menu or {}

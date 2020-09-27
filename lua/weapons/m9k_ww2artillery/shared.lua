@@ -1,7 +1,7 @@
 -- Variables that are used on both client and server
 SWEP.Gun = ("m9k_ww2artillery")					-- must be the name of your swep
 SWEP.Category				= "STALKER Misc"
-SWEP.Author				= "some faggot and verne"
+SWEP.Author				= "gumlefar and verne"
 SWEP.Contact				= ""
 SWEP.Purpose				= "See things from far away."
 SWEP.MuzzleAttachment			= "1" 	-- Should be "1" for CSS models or "muzzle" for hl2 models

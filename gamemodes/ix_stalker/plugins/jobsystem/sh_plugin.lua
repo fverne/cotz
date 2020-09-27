@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 
 PLUGIN.name = "Job System"
-PLUGIN.author = "some faggot, ported to ix by verne"
+PLUGIN.author = "gumlefar, ported to ix by verne"
 PLUGIN.desc = "Implements the job library."
 
 function ix.jobs.register(jobstruct,identifier)
