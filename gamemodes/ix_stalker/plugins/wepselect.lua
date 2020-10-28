@@ -31,7 +31,7 @@ if (CLIENT) then
 	function PLUGIN:HUDPaint()
 		local frameTime = FrameTime()
 
-		self.alphaDelta = Lerp(frameTime * 10, self.alphaDelta, self.alpha)
+		self.alphaDelta = Lerp(frameTime * 100, self.alphaDelta, self.alpha)
 
 		local fraction = self.alphaDelta
 
@@ -95,10 +95,8 @@ if (CLIENT) then
 		self.fadeTime = CurTime() + 5
 		self.markup = nil
 
-		if (IsValid(weapon)) then
-			local source, pitch = hook.Run("WeaponCycleSound")
-			LocalPlayer():EmitSound(source or "common/talk.wav", 50, pitch or 180)
-		end
+		local source, pitch = hook.Run("WeaponCycleSound")
+		LocalPlayer():EmitSound(source or "common/talk.wav", 50, pitch or 180)
 	end
 
 	function PLUGIN:PlayerBindPress(client, bind, pressed)
@@ -151,11 +149,11 @@ if (CLIENT) then
 			local weapon = weapons[self.index]
 
 			if (IsValid(weapon)) then
-				LocalPlayer():EmitSound(hook.Run("WeaponSelectSound", weapon) or "HL2Player.Use")
+				LocalPlayer():EmitSound(hook.Run("WeaponSelectSound", weapon) or "stalkersound/inv_ruck.mp3", 75, 100, 0.5)
 				input.SelectWeapon(weapon)
 			else
 				if(IsValid(weapons[3])) then
-					LocalPlayer():EmitSound(hook.Run("WeaponSelectSound", weapon) or "HL2Player.Use")
+					LocalPlayer():EmitSound(hook.Run("WeaponSelectSound", weapon) or "stalkersound/inv_ruck.mp3", 75, 100, 0.5)
 					input.SelectWeapon(weapons[3])
 				end
 			end
