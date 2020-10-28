@@ -97,22 +97,18 @@ if SERVER then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed"))
 			client:SetRunSpeed(ix.config.Get("runSpeed") * 1.1)
 			client:SetMaxSpeed(200)
-			client:SetJumpPower(200)
 		elseif client:GetHunger() <= 60 and client:GetHunger() > 30 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed"))
 			client:SetRunSpeed(ix.config.Get("runSpeed"))
 			client:SetMaxSpeed(125)
-			client:SetJumpPower(125)
 		elseif client:GetHunger() <= 30 and client:GetHunger() > 0 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed") * 0.5)
 			client:SetRunSpeed(ix.config.Get("runSpeed") * 0.5)
 			client:SetMaxSpeed(100)
-			client:SetJumpPower(50)
 		elseif client:GetHunger() <= 0 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed") * 0.1)
 			client:SetRunSpeed(ix.config.Get("runSpeed") * 0.1)
 			client:SetMaxSpeed(50)
-			client:SetJumpPower(50)
 		end
 	end
 
@@ -121,22 +117,18 @@ if SERVER then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed"))
 			client:SetRunSpeed(ix.config.Get("runSpeed") * 1.1)
 			client:SetMaxSpeed(200)
-			client:SetJumpPower(200)
 		elseif client:GetThirst() <= 60 and client:GetThirst() > 30 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed"))
 			client:SetRunSpeed(ix.config.Get("runSpeed"))
 			client:SetMaxSpeed(125)
-			client:SetJumpPower(125)
 		elseif client:GetThirst() <= 30 and client:GetThirst() > 0 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed") * 0.5)
 			client:SetRunSpeed(ix.config.Get("runSpeed") * 0.5)
 			client:SetMaxSpeed(100)
-			client:SetJumpPower(50)
 		elseif client:GetThirst() <= 0 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed") * 0.1)
 			client:SetRunSpeed(ix.config.Get("runSpeed") * 0.1)
 			client:SetMaxSpeed(50)
-			client:SetJumpPower(50)
 		end
 	end
 end
