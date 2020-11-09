@@ -5,7 +5,7 @@
 -- will be largely the same as any DLabel panel.
 -- @panel ixTooltipRow
 
-local animationTime = 1
+local animationTime = 0.5
 
 -- panel meta
 do

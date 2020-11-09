@@ -25,14 +25,6 @@ ix.plugin.SetUnloaded("recognition", true)
 ix.char.vars["description"].bNoDisplay = true
 ix.char.vars["description"].OnValidate = function() return true	end
 
-function PLUGIN:LoadFonts(font, genericFont)
-	surface.CreateFont("ixTypingIndicator", {
-		font = font,
-		size = 128,
-		extended = true,
-		weight = 1000
-	})
-end
 
 ix.config.Add("charloadremove", true, "If enabled, instantly loads first character.", nil, {
 	category = "1development"
@@ -62,6 +54,15 @@ if (SERVER) then
 end
 
 if (CLIENT) then
+	function PLUGIN:LoadFonts(font, genericFont)
+		surface.CreateFont("ixTypingIndicator", {
+			font = font,
+			size = 128,
+			extended = true,
+			weight = 1000
+		})
+	end
+
 	function PLUGIN:CharacterLoaded()
 		-- puts on minimal tooltips by default
 		ix.option.Set("minimalTooltips", true, true)

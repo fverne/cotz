@@ -82,8 +82,6 @@ function PANEL:DoRightClick()
 			return
 		end
 
-		menu:SetDrawOnTop(false) -- this renders the cursor on top
-
 		for k, v in SortedPairs(itemTable.functions) do
 			if (k == "drop" or k == "combine" or (v.OnCanRun and v.OnCanRun(itemTable) == false)) then
 				continue
