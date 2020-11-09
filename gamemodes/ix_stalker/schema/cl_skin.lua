@@ -549,10 +549,10 @@ do
 	sound.Add({
 		name = "Helix.Rollover",
 		channel = CHAN_STATIC,
-		volume = 0.5,
+		volume = 0.2,
 		level = 80,
-		pitch = {95, 105},
-		sound = bRollover and "helix/ui/rollover.wav" or "ui/buttonrollover.wav"
+		pitch = {99, 101},
+		sound = bRollover and "stalkerdetectors/contact.wav" or "ui/buttonrollover.wav"
 	})
 
 	sound.Add({
@@ -560,8 +560,8 @@ do
 		channel = CHAN_STATIC,
 		volume = 0.5,
 		level = 80,
-		pitch = bPress and {95, 110} or 100,
-		sound = bPress and "helix/ui/press.wav" or "ui/buttonclickrelease.wav"
+		pitch = bPress and {99, 101} or 100,
+		sound = bPress and "stalkersound/inv_geiger.ogg" or "ui/buttonclickrelease.wav"
 	})
 
 	sound.Add({
