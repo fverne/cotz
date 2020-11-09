@@ -1,5 +1,5 @@
 
-local animationTime = 1
+local animationTime = 0.4
 local matrixZScale = Vector(1, 1, 0.0001)
 
 DEFINE_BASECLASS("ixSubpanelParent")
@@ -103,6 +103,8 @@ function PANEL:OnOpened()
 	self:SetAlpha(0)
 	surface.PlaySound("stalkersound/inv_pda_on.ogg")
 
+	self:PlayStaticPDASound()
+
 	self:CreateAnimation(animationTime, {
 		target = {currentAlpha = 255},
 		easing = "outQuint",
@@ -111,6 +113,21 @@ function PANEL:OnOpened()
 			panel:SetAlpha(panel.currentAlpha)
 		end
 	})
+end
+
+function PANEL:PlayStaticPDASound()
+	//pda static
+	if (self.sound) then
+		self.sound:Stop()
+	end
+
+	self.sound = CreateSound(LocalPlayer(), "stalkersound/inv_pda_static.ogg")
+	self.sound:SetSoundLevel(45)
+	self.sound:Play()
+	timer.Remove("RepeatPDA")
+	timer.Create("RepeatPDA", 30, 0, function()
+		self:PlayStaticPDASound()
+	end)
 end
 
 function PANEL:GetActiveTab()
@@ -463,6 +480,10 @@ function PANEL:PerformLayout()
 end
 
 function PANEL:Remove()
+	//pda static
+	timer.Remove("RepeatPDA")
+	self.sound:Stop()
+
 	self.bClosing = true
 	self:SetMouseInputEnabled(false)
 	self:SetKeyboardInputEnabled(false)
