@@ -406,6 +406,8 @@ end
 
 ix.allowedHoldableClasses = {
 	["ix_item"] = true,
+	["ix_money"] = true,
+	["ix_shipment"] = true,
 	["prop_physics"] = true,
 	["prop_physics_override"] = true,
 	["prop_physics_multiplayer"] = true,
@@ -434,6 +436,8 @@ local function CalcPlayerCanHearPlayersVoice(listener)
 end
 
 function GM:InitializedConfig()
+	ix.date.Initialize()
+
 	voiceDistance = ix.config.Get("voiceDistance")
 	voiceDistance = voiceDistance * voiceDistance
 end
@@ -732,6 +736,10 @@ function GM:InitPostEntity()
 	end)
 end
 
+function GM:SaveData()
+	ix.date.Save()
+end
+
 function GM:ShutDown()
 	ix.shuttingDown = true
 	ix.config.Save()
@@ -763,8 +771,6 @@ function GM:PlayerDeathSound()
 end
 
 function GM:InitializedSchema()
-	ix.date.Initialize()
-
 	game.ConsoleCommand("sbox_persist ix_"..Schema.folder.."\n")
 end
 

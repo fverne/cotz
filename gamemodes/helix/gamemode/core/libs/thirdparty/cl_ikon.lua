@@ -98,8 +98,8 @@ ikon.max = ikon.maxSize * 64
 ikon.RT = GetRenderTargetEx("ixIconRendered",
 	ikon.max,
 	ikon.max,
-	RT_SIZE_DEFAULT,
-	MATERIAL_RT_DEPTH_SEPARATE,
+	RT_SIZE_NO_CHANGE,
+	MATERIAL_RT_DEPTH_SHARED,
 	bit.bor(TEXTURE_FLAGS_CLAMP_S, TEXTURE_FLAGS_CLAMP_T),
 	CREATERENDERTARGETFLAGS_UNFILTERABLE_OK,
 	IMAGE_FORMAT_RGBA8888
@@ -146,7 +146,7 @@ function ikon:renderHook()
 	xpcall(function()
 			render.OverrideAlphaWriteEnable(true, true) -- some playermodel eyeballs will not render without this
 			render.SetWriteDepthToDestAlpha(false)
-			--render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+			render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
 			render.SuppressEngineLighting(true)
 			render.Clear(0, 0, 0, 0, true, true)
 

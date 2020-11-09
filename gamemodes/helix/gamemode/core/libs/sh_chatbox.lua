@@ -46,7 +46,7 @@ function ix.chat.Register(chatType, data)
 
 		function data:CanHear(speaker, listener)
 			-- Length2DSqr is faster than Length2D, so just check the squares.
-			return (speaker:GetPos() - listener:GetPos()):LengthSqr() <= range
+			return (speaker:GetPos() - listener:GetPos()):LengthSqr() <= self.range
 		end
 	end
 
@@ -457,8 +457,11 @@ do
 			CanHear = ix.config.Get("chatRange", 280),
 			deadCanChat = true,
 			OnChatAdd = function(self, speaker, text, bAnonymous, data)
-				chat.AddText(self.color, string.format(self.format,
-					speaker:GetName(), text, data.max or 100
+				local max = data.max or 100
+				local translated = L2(self.uniqueID.."Format", speaker:Name(), text, max)
+
+				chat.AddText(self.color, translated and "** "..translated or string.format(self.format,
+					speaker:Name(), text, max
 				))
 			end
 		})

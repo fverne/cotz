@@ -551,8 +551,15 @@ end
 function OnCharacterDisconnect(client, character)
 end
 
---- @realm shared
+--- @realm server
 function OnCharacterFallover(client, entity, bFallenOver)
+end
+
+--- Called when a character has gotten up from the ground.
+-- @realm server
+-- @player client Player that has gotten up
+-- @entity ragdoll Ragdoll used to represent the player
+function OnCharacterGetup(client, ragdoll)
 end
 
 --- @realm client
