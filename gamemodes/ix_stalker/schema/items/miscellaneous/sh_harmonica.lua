@@ -1,6 +1,6 @@
 ITEM.name = "Harmonica"
 ITEM.description = "A playable harmonica."
-ITEM.model = "models/kek1ch/iphone.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/harmonica.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 500

@@ -44,48 +44,42 @@ else
 
 end
 
-ix.command.Add("stashhide", {
-	adminOnly = false,
-	OnRun = function(self, client)
-		client:SetAction("Covering up items...", 2, function()
-
-			local trace = client:GetEyeTraceNoCursor()
-			local hitpos = trace.HitPos + trace.HitNormal*5
-			local stasheditem = ix.item.instances
-			local mt = 0
-			
-			for k, v in pairs( stasheditem ) do
-				if v:GetEntity() then
-					local dist = hitpos:Distance(client:GetPos())
-					local distance = v:GetEntity():GetPos():Distance( hitpos )
-					if dist <= 70 then
-						if distance <= 32 then
-							table.insert( PLUGIN.stashpoints, { hitpos, v.uniqueID, v:GetEntity():GetAngles(), v.data } )
-							ix.log.Add(client, "command", "created a stash at x:"..hitpos.x.." y:"..hitpos.y.." z:"..hitpos.z.." containing: "..v.name)
-							--if v:getData("id") then
-							--	att = nut.item.inventories[ v:getData("id") ]:getItems()
-							--	for h,j in pairs (att) do
-							--		j:transfer()
-							--	end
-							--end
-							v:Remove()
-							client:Notify( "You hid ".. v.name )
-							mt = mt + 1
-						end
+function PLUGIN:StashHide(client)
+	ix.util.PlayerPerformBlackScreenAction(client, "Hiding the stash...", 3, function(client) 
+		local trace = client:GetEyeTraceNoCursor()
+		local hitpos = trace.HitPos + trace.HitNormal*5
+		local stasheditem = ix.item.instances
+		local mt = 0
+		
+		for k, v in pairs( stasheditem ) do
+			if v:GetEntity() then
+				local dist = hitpos:Distance(client:GetPos())
+				local distance = v:GetEntity():GetPos():Distance( hitpos )
+				if dist <= 70 then
+					if distance <= 32 then
+						table.insert( PLUGIN.stashpoints, { hitpos, v.uniqueID, v:GetEntity():GetAngles(), v.data } )
+						ix.log.Add(client, "command", "created a stash at x:"..hitpos.x.." y:"..hitpos.y.." z:"..hitpos.z.." containing: "..v.name)
+						--if v:getData("id") then
+						--	att = nut.item.inventories[ v:getData("id") ]:getItems()
+						--	for h,j in pairs (att) do
+						--		j:transfer()
+						--	end
+						--end
+						v:Remove()
+						client:Notify( "You hid a ".. v.name )
+						mt = mt + 1
 					end
 				end
 			end
-			if mt > 0 then
-				--ix.chat.Send(client, "iteminternal", "hides something away.", false)
-			end
-		end)
-	end
-})
+		end
+		if mt > 0 then
+			ix.chat.Send(client, "iteminternal", "hides something away.", false)
+		end
+	end)
+end
 
-ix.command.Add("stashunhide", {
-	adminOnly = false,
-	OnRun = function(self, client)
-		client:SetAction("Searching...", 5, function()
+function PLUGIN:StashUnhide(client)
+	ix.util.PlayerPerformBlackScreenAction(client, "Searching for a stash...", 8, function(client) 
 		local trace = client:GetEyeTraceNoCursor()
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local mt = 0
@@ -98,7 +92,7 @@ ix.command.Add("stashunhide", {
 					--local itemdata = v[4]
 					ix.item.Spawn(v[2], v[1] + Vector( 0, 0, mt * 5 ), nil, v[3], v[4])
 					PLUGIN.stashpoints[k] = nil
-					client:Notify( "You uncovered a(n) ".. ix.item.list[v[2]].name )
+					client:Notify( "You uncovered a ".. ix.item.list[v[2]].name )
 					mt = mt + 1
 				end
 			end
@@ -106,10 +100,22 @@ ix.command.Add("stashunhide", {
 		if mt == 0 then
 			client:Notify( "You didn't find anything" )
 		else
-			--nut.chat.send(client, "meclose", "uncovers something", false)
+			ix.chat.Send(client, "iteminternal", "uncovers something.", false)
 		end
-		end)
+	end)
+end
 
+ix.command.Add("stashhide", {
+	adminOnly = true,
+	OnRun = function(self, client)
+		PLUGIN:StashHide(client)
+	end,
+})
+
+ix.command.Add("stashunhide", {
+	adminOnly = true,
+	OnRun = function(self, client)
+		PLUGIN:StashUnhide(client)
 	end
 })
 
