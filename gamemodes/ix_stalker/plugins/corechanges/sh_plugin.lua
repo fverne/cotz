@@ -51,6 +51,10 @@ if (SERVER) then
 			end
 		end
 	end
+
+	function PLUGIN:GetFallDamage(client, speed)
+		return (speed / 8)
+	end
 end
 
 if (CLIENT) then
