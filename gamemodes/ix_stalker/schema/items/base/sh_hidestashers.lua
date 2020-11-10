@@ -87,6 +87,8 @@ ITEM.functions.hidestash = {
 
 		ix.plugin.list["hidestash"]:StashHide(item.player)
 
+		quantity = quantity - 1
+
 		if (quantity >= 1) then
 			item:SetData("quantity", quantity)
 			return false
@@ -114,7 +116,7 @@ ITEM.functions.unhidestash = {
 		ix.plugin.list["hidestash"]:StashUnhide(item.player)
 
 		quantity = quantity - 1
-		
+
 		if (quantity >= 1) then
 			item:SetData("quantity", quantity)
 			return false
