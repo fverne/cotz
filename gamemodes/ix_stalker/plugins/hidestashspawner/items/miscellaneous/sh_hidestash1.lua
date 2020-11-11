@@ -1,5 +1,5 @@
 ITEM.name = "Lost Note"
-ITEM.model = "models/kek1ch/notes_letter_1.mdl"
+ITEM.model = "models/lostsignalproject/items/quest/notes_letter_1.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "The note looks crumbled and dirty."

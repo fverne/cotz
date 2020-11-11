@@ -1,5 +1,5 @@
 ITEM.name = "Lost Rookie PDA"
-ITEM.model = "models/kek1ch/dev_pda.mdl"
+ITEM.model = "models/lostsignalproject/items/devices/pda.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "The PDA of a lost stalker. It looks new, and did probably belong to a rookie STALKER."

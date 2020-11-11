@@ -1,5 +1,5 @@
 ITEM.name = "Anomaly Detector"
-ITEM.model = "models/kek1ch/dev_decoder.mdl"
+ITEM.model = "models/lostsignalproject/items/devices/dosimeter.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.category = "Electronics"

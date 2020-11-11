@@ -1,7 +1,7 @@
 ITEM.name = "Water (Dirty), 500ml"
 ITEM.description = "A dirty water bottle."
 ITEM.longdesc = "A plastic bottle filled with slightly dirty water. Has probably been filled in some pond in the zone."
-ITEM.model = "models/kek1ch/dev_drink_water.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/tea.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

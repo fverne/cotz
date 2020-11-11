@@ -1,5 +1,5 @@
 ITEM.name = "Snork's foot"
-ITEM.model ="models/kek1ch/item_snork_leg.mdl"
+ITEM.model ="models/lostsignalproject/items/parts/snork_leg.mdl"
 ITEM.description = "A severed snork's foot."
 ITEM.longdesc = "Snork feet and legs contain a huge number of highly elastic tendons. This explains the beast's ability to perform its characteristic long leaps at its prey. The scientists still look for potential uses of the snork's leg, and will be grateful for each specimen you bring to their base."
 ITEM.width = 1

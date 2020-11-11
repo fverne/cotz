@@ -11,7 +11,7 @@ ENT.AutomaticFrameAdvance = true
 
 if (SERVER) then
 	function ENT:Initialize()
-		self:SetModel("models/kek1ch/notes_letter_1.mdl")
+		self:SetModel("models/lostsignalproject/items/quest/notes_letter_1.mdl")
 		self:SetSolid(SOLID_VPHYSICS)
 		self:PhysicsInit(SOLID_VPHYSICS)
 		self:SetMoveType(MOVETYPE_NONE)

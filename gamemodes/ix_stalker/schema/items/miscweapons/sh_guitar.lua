@@ -1,6 +1,6 @@
 ITEM.name = "Guitar"
 ITEM.description = "An acoustic guitar."
-ITEM.model = "models/kek1ch/dev_guitar.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/guitar.mdl"
 ITEM.class = "guitar"
 ITEM.weaponCategory = "primary"
 ITEM.price = 500
@@ -30,7 +30,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 0, 90),
 						["Position"] = Vector(13.915, -0.932, -3.453),
-						["Model"] = "models/kek1ch/dev_guitar.mdl",
+						["Model"] = "models/lostsignalproject/items/misc/guitar.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "7978994673",

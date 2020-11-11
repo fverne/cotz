@@ -1,7 +1,7 @@
 ITEM.name = "Can of Chili Beans"
 ITEM.description = "A can with something edible inside"
 ITEM.longdesc = "Pinto beans, chili peppers, onion & garlic in a zesty tomato sauce."
-ITEM.model = "models/kek1ch/dev_chili.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/chili.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

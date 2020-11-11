@@ -1,7 +1,7 @@
 ITEM.name = "Pseudodog Meat"
 ITEM.description = "Uncooked meat from a Pseudodog."
 ITEM.longdesc = "Pseudodog meat is a common dietary component in the Zone. Tasty, with high nutritional value, a popular choice among stalkers. Can be sold to the scientists. Moreover, it can also serve as a source of animal fat for gun lubrication."
-ITEM.model = "models/kek1ch/raw_flesh.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/raw_pseudodog.mdl"
 
 ITEM.price = 70
 ITEM.width = 1

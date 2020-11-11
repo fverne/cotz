@@ -1,5 +1,5 @@
 ITEM.name = "Boar hoof"
-ITEM.model ="models/kek1ch/item_boar_leg.mdl"
+ITEM.model ="models/lostsignalproject/items/parts/boar_leg.mdl"
 ITEM.description = "A hoof from a boar."
 ITEM.longdesc = "Hoofs of boars can be used to produce various drugs, for example anti-radiation serums."
 ITEM.width = 1

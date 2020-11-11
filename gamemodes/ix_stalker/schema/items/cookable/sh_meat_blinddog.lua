@@ -1,7 +1,7 @@
 ITEM.name = "Dog Meat"
 ITEM.description = "Uncooked meat from a Dog."
 ITEM.longdesc = "Meat of mutated dogs is used as a cheap alternative to the more popular boar meat. The scientists have enough samples already, which limits its use as a commodity. However, it can also serve as a source of animal fat for gun lubrication."
-ITEM.model = "models/kek1ch/raw_flesh.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/raw_dog.mdl"
 
 ITEM.price = 70
 ITEM.width = 1

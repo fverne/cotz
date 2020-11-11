@@ -1,7 +1,7 @@
 ITEM.name = "Can of Baked Beans"
 ITEM.description = "A can with something edible inside"
 ITEM.longdesc = "Classic baked beans in deliciously rich tomato sauce; high in fibre, virtually fat free.\nThey also contain no artificial colours, flavours or preservatives, which makes them an ideal snack or accompaniment to any meal."
-ITEM.model = "models/kek1ch/dev_beans.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/beans.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

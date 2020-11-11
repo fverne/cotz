@@ -1,6 +1,6 @@
 ITEM.name = "Stalker Startup Kit"
 ITEM.description= "A bag containing various items, intended for tourists and new stalkers."
-ITEM.model = "models/kek1ch/grooming.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/backpack.mdl"
 ITEM.width = 2
 ITEM.height = 2
 ITEM.flag = "A"

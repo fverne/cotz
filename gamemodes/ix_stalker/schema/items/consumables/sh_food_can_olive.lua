@@ -1,7 +1,7 @@
 ITEM.name = "Can of Olives"
 ITEM.description = "A can with something edible inside"
 ITEM.longdesc = "Tins of fresh olives are a rare sight in the Zone. A popular and highly tradable item for stalkers, but also spoils quickly once opened."
-ITEM.model = "models/kek1ch/dev_tomato.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/chili.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

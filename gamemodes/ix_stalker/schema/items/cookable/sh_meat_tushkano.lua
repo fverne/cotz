@@ -1,7 +1,7 @@
 ITEM.name = "Tushkano Meat"
 ITEM.description = "Uncooked meat from a Tushkano."
 ITEM.longdesc = "A small portion of a mutated rodent's body. A cheap and commonly found food that is said to strengthen your heart after being cooked in open fire. Can be sold to the scientists."
-ITEM.model = "models/kek1ch/raw_tushkano.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/raw_tushkano.mdl"
 
 ITEM.price = 70
 ITEM.width = 1

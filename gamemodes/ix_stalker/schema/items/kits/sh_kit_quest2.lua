@@ -1,6 +1,6 @@
 ITEM.name = "Small plastic crate"
 ITEM.description= "A small plastic crate, rewarded for completing a quest. Something is inside."
-ITEM.model = "models/kek1ch/safe_container.mdl"
+ITEM.model = "models/lostsignalproject/items/quest/toolkit_ammo.mdl"
 ITEM.width = 3
 ITEM.height = 3
 ITEM.flag = "A"

@@ -1,7 +1,7 @@
 ITEM.name = "Flesh Meat"
 ITEM.description = "Uncooked meat from a Flesh."
 ITEM.longdesc = "A popular choice in the Zone, flesh meat has a good taste and high nutritional value. The scientists have enough samples already, which limits its use as a commodity. However, it can also serve as a source of animal fat for gun lubrication."
-ITEM.model = "models/kek1ch/raw_dog.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/raw_flesh.mdl"
 
 ITEM.price = 70
 ITEM.width = 1

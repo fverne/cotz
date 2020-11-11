@@ -1,7 +1,7 @@
 ITEM.name = "Anheuser-Busch sparkling water, 330ml"
 ITEM.description = "A small, white can bottle."
 ITEM.longdesc = "Sparkling water for thirsty stalkers. It has some exhilarating effect when you're tired."
-ITEM.model = "models/kek1ch/dev_mineral_water.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/drink_water.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

@@ -1,7 +1,7 @@
 ITEM.name = "Chimera Meat"
 ITEM.description = "Uncooked meat from a Chimera."
 ITEM.longdesc = "A heavy chunk of chimera meat. Since chimeras are considered one of the most dangerous creatures, their meat is highly valued by veteran stalkers who are willing to buy it for fairly high prices. The cook on Skadovsk uses this meat as one of the ingredients of the so called masculine meal, although only few claim that it tastes better than boar meat. Can be sold to the scientists. Furthermore, it provides the best quality animal fat available in the Zone which can be used for the purposes of very effective gun lubrication."
-ITEM.model = "models/kek1ch/raw_boar.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/raw_chimera.mdl"
 
 ITEM.price = 70
 ITEM.width = 1

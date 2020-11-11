@@ -1,5 +1,5 @@
 ITEM.name = "Geiger Counter"
-ITEM.model = "models/kek1ch/dev_datchik1.mdl"
+ITEM.model = "models/lostsignalproject/items/devices/geiger.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.category = "Electronics"

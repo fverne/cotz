@@ -1,5 +1,5 @@
 ITEM.name = "Cat Tail"
-ITEM.model ="models/kek1ch/item_cat_tail.mdl"
+ITEM.model ="models/lostsignalproject/items/parts/cat_tail.mdl"
 ITEM.description = "The tail from a cat."
 ITEM.longdesc = "Cat tails contain various materials inside their strands of hair which helps their balancing on supernatural levels, aiding them in gaining their infamous agility."
 ITEM.width = 1

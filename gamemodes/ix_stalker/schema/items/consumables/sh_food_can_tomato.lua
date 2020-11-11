@@ -1,7 +1,7 @@
 ITEM.name = "Can of Tomatoes"
 ITEM.description = "A can with something edible inside"
 ITEM.longdesc = "Canned, sliced and diced tomatoes are imported to the Zone on a regular basis.\nThe best before date on the bottom suggests they're still fresh."
-ITEM.model = "models/kek1ch/dev_tomato.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/tomato.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

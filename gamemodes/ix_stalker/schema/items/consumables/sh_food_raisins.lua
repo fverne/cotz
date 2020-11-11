@@ -1,7 +1,7 @@
 ITEM.name = "Raisins"
 ITEM.description = "A small bag containing raisins."
 ITEM.longdesc = "A small bag with raisins inside. They seem hard and dry, but edible regardless. Useful when you are on the go and need a quick snack."
-ITEM.model = "models/kek1ch/dev_raisins.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/raisins.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

@@ -1,7 +1,7 @@
 ITEM.name = "Shevkoff Black Ultra Premium Vodka, 500ml"
 ITEM.description = "A bottle with a clear substance inside."
 ITEM.longdesc = "Ukrainian high-shelf vodka. Goes down incredibly smooth, and pulling one of these out of your bag will make you the most popular guy in your camp."
-ITEM.model = "models/kek1ch/dev_vodka2.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/vodka_putinka.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

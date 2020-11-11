@@ -1,5 +1,5 @@
 ITEM.name = "12g Dart Rounds"
-ITEM.model = "models/kek1ch/ammo_12x70_buck.mdl"
+ITEM.model = "models/lostsignalproject/items/ammo/12x70.mdl"
 ITEM.width = 2
 ITEM.height = 1
 ITEM.ammo = "12 Gauge -DT-" // type of the ammo

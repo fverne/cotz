@@ -1,7 +1,7 @@
 ITEM.name = "Chocolate"
 ITEM.description = "A bar of chocolate"
 ITEM.longdesc = "The favorite treat of many stalkers. An excellent remedy for a bad mood."
-ITEM.model = "models/kek1ch/dev_chocolate.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/chocolate.mdl"
 
 ITEM.price = 1
 ITEM.width = 2

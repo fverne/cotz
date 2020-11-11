@@ -1,6 +1,6 @@
 ITEM.name = "Small tattered backpack"
 ITEM.description= "A small backpack. Something is inside."
-ITEM.model = "models/kek1ch/dev_rukzak.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/backpack.mdl"
 ITEM.width = 3
 ITEM.height = 2
 ITEM.flag = "A"

@@ -1,7 +1,7 @@
 ITEM.name = "Can of Sprats"
 ITEM.description = "A can with something edible inside"
 ITEM.longdesc = "These Riga Sprats are tiny, fine, firm little Brisling sardines that are naturally smoked over Oak hardwood logs and then packed with Sunflower oil in big, round 5.6oz tins. This big tin contains 24 to 30 fish (head off) packed in 3 neat layers. Canned sprats (usually smoked) are available in many north European countries, including the Baltic States, Scandinavia, Germany, Poland, Ukraine and Russia. They are an important Latvian export."
-ITEM.model = "models/kek1ch/dev_conserv.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/conserva.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

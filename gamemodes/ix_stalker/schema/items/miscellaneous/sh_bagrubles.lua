@@ -1,7 +1,7 @@
 ITEM.name = "Ukrainian rubles"
 ITEM.description = "A bunch of weathered ukrainian currency."
 ITEM.longdesc = "Trade in the Zone is conducted mainly by means of electronic transactions for safety and managing reasons. But many stalkers keep at least a few rubles in their pockets in case they want to buy smaller things like cigarettes. This makes life easier and conserves battery life."
-ITEM.model = "models/kek1ch/money_ukraina.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/money_50.mdl"
 ITEM.quantdesc = "This bundle of cash has a value of %d rubles."
 
 ITEM.width = 1

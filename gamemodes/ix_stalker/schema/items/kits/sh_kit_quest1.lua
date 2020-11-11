@@ -1,6 +1,6 @@
 ITEM.name = "Small cloth bag"
 ITEM.description= "A small bag made of cloth, rewarded for completing a quest. Something is inside."
-ITEM.model = "models/kek1ch/conventer_grenade_box.mdl"
+ITEM.model = "models/lostsignalproject/items/repair/armor_repair_pro.mdl"
 ITEM.width = 3
 ITEM.height = 3
 ITEM.flag = "A"

@@ -1,7 +1,7 @@
 ITEM.name = "Bloodsucker Meat"
 ITEM.description = "Uncooked meat from a Bloodsucker."
 ITEM.longdesc = "Bloodsucker meat is stringy and thus not suited for eating. Although bloodsuckers are fearsome beasts, the price of the meat is not very high due to its limited use. Can be sold to the scientists. Moreover, it can also serve as a source of animal fat for gun lubrication."
-ITEM.model = "models/kek1ch/raw_dog.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/raw_bloodsucker.mdl"
 
 ITEM.price = 70
 ITEM.width = 1

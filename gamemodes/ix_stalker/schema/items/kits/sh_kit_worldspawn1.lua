@@ -1,6 +1,6 @@
 ITEM.name = "Toolbox"
 ITEM.description= "A toolbox with something inside."
-ITEM.model = "models/kek1ch/dev_instrument_1.mdl"
+ITEM.model = "models/lostsignalproject/items/upgrades/upgrw1.mdl"
 ITEM.width = 2
 ITEM.height = 1
 ITEM.flag = "A"

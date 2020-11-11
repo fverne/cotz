@@ -1,6 +1,6 @@
 ITEM.name = "A box of general equipment"
 ITEM.description= "A box filled with standard stalker equipments."
-ITEM.model = "models/kek1ch/dev_rukzak.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/backpack.mdl"
 ITEM.width = 2
 ITEM.height = 2
 ITEM.flag = "A"

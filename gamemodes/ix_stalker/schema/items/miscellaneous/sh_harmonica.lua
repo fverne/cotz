@@ -19,7 +19,7 @@ ITEM.functions.use = { -- sorry, for name order.
 	icon = "icon16/stalker/sell.png",
 	OnRun = function(item)
 		local soundplay = table.Random(item.sounds)
-		item.player:EmitSound(soundplay)
+		item.player:EmitSound(soundplay, 50, 100, 0.5)
 		ix.chat.Send(item.player, "iteminternal", "puts their "..item.name.." to their mouths and plays a tune.", false)
 
 		return false

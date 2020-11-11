@@ -1,6 +1,6 @@
 ITEM.name = "Cup of dice"
 ITEM.description = "A cup of dice"
-ITEM.model = "models/kek1ch/jar.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/jar.mdl"
 
 ITEM.width = 1
 ITEM.height = 1

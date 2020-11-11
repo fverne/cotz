@@ -1,7 +1,7 @@
 ITEM.name = "Water (Clean), 500ml"
 ITEM.description = "A bottle containing water."
 ITEM.longdesc = "A bottle containing water which has been cleansed inside the zone. The result is a radiation-free product, although it still has a sour taste."
-ITEM.model = "models/kek1ch/dev_mineral_water.mdl"
+ITEM.model = "models/lostsignalproject/items/consumable/mineral_water.mdl"
 
 ITEM.price = 1
 ITEM.width = 1
