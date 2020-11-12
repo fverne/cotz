@@ -12,7 +12,7 @@ end
 -- Set this to your webhook URL.
 DiscordRelay.WebhookURL = "https://discord.com/api/webhooks/776427981005520896/4_MB4Ns53oeTp21kHR1OK8kuTyYBm5UIpNOSF2q8q8tz1SiKbx-FwGo-58Ytcpj2tNc0"
 
---[[
+
 local authkey
 if not file.Exists("cfg/apikey.cfg", "GAME") or file.Read("cfg/apikey.cfg", "GAME") == nil then
 	print("Error! No auth key for Discord relay!")
@@ -21,9 +21,10 @@ else
 	authkey = file.Read("cfg/apikey.cfg", "GAME"):Trim()
 end
 -- Set this to your Steam Web API Key
-DiscordRelay.SteamWebAPIKey = authkey
-]]
+DiscordRelay.SteamWebAPIKey = "08758F8D6073703961DD78B0DBF92ED4"
 
+
+--[[
 local token
 if not file.Exists("cfg/relay_bot_token.cfg", "GAME") or file.Read("cfg/relay_bot_token.cfg", "GAME") == nil then
 	print("Error! No bot token for Discord relay!")
@@ -38,6 +39,7 @@ DiscordRelay.BotToken = token
 -- Remove the <# at the start and the > at the end, so you are left with only a long number.
 DiscordRelay.DiscordGuildID = "172686511085584384"
 DiscordRelay.DiscordChannelID = "290488910608465930"
+]]
 
 /*----------------------------------------
 Non Critical Config Options Below
