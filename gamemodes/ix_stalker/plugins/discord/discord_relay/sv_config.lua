@@ -10,7 +10,7 @@ else
 	webhook = file.Read("cfg/relay_webhook.cfg", "GAME"):Trim()
 end
 -- Set this to your webhook URL.
-DiscordRelay.WebhookURL = webhook
+DiscordRelay.WebhookURL = "https://discord.com/api/webhooks/776427981005520896/4_MB4Ns53oeTp21kHR1OK8kuTyYBm5UIpNOSF2q8q8tz1SiKbx-FwGo-58Ytcpj2tNc0"
 
 --[[
 local authkey
