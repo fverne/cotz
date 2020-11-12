@@ -14,7 +14,10 @@ ix.AdvDupeIntegration.HeadEnt={}
 
 ix.AdvDupeIntegration.CreatedEntities = {}
 
-function PLUGIN:SpawnDupe(dupetospawn)
+-- dupetospawn: filename of the dupe to spawn
+-- uniqueid: special name to save this spawned dupe under to identify it again (eg. if multiple of the same dupe is spawned)
+-- offset: Vector offset from the original spawn position
+function PLUGIN:SpawnDupe(dupetospawn, uniqueid, offset)
 	local path = AdvDupe2.DataFolder.."/STALKERDupes/"..dupetospawn..".txt"
 
 	if(not file.Exists(path, "DATA"))then print("File does not exist:", dupetospawn) return end
@@ -36,8 +39,9 @@ function PLUGIN:SpawnDupe(dupetospawn)
 		ix.AdvDupeIntegration.Constraints = dupe["Constraints"]
 		ix.AdvDupeIntegration.HeadEnt = dupe["HeadEnt"]
 
-		local ents = AdvDupe2.duplicator.Paste( nil, ix.AdvDupeIntegration.Entities, ix.AdvDupeIntegration.Constraints, nil, nil, ix.AdvDupeIntegration.HeadEnt.Pos, true )
+		local ents = AdvDupe2.duplicator.Paste( nil, ix.AdvDupeIntegration.Entities, ix.AdvDupeIntegration.Constraints, nil, nil, ix.AdvDupeIntegration.HeadEnt.Pos + (offset or Vector(0,0,0), true )
 
+		if (not uniqueid) then uniqueid = dupetospawn end
 		local PhysObj
 		for k,v in pairs(ents) do -- Enable motion
 			if(IsValid(v))then
@@ -50,7 +54,7 @@ function PLUGIN:SpawnDupe(dupetospawn)
 				if v.CPPISetOwner then v:CPPISetOwner(game.GetWorld()) end
 			end
 
-			table.insert(ix.AdvDupeIntegration.CreatedEntities[dupetospawn], v)
+			table.insert(ix.AdvDupeIntegration.CreatedEntities[uniqueid], v)
 		end
 
 		ix.AdvDupeIntegration.Entities = {}
