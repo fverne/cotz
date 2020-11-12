@@ -37,7 +37,7 @@ DiscordRelay.BotToken = "Nzc2NDY0MDY4ODY4MzA5MDAy.X61QhA.hggdJcCmYsQylOmXhe-jxCR
 
 -- Set this to your Channel ID. You can get this number in Discord by typing \#channelnamehere into chat.
 -- Remove the <# at the start and the > at the end, so you are left with only a long number.
-DiscordRelay.DiscordGuildID = "172686511085584384"
+DiscordRelay.DiscordGuildID = "597102659820060673"
 DiscordRelay.DiscordChannelID = "776427962518077440"
 
 
