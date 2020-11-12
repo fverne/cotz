@@ -1,5 +1,5 @@
 ITEM.name = "Basic Disassembling Kit"
-ITEM.model = "models/kek1ch/ckit.mdl"
+ITEM.model = "models/lostsignalproject/items/repair/ramrod_tool.mdl"
 ITEM.description = "Tools for disassembling items into components."
 ITEM.flag = "A"
 ITEM.price = "3000"

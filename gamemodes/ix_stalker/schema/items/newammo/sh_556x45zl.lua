@@ -1,5 +1,5 @@
 ITEM.name = "5.56x45mm Zone-Loaded"
-ITEM.model = "models/kek1ch/ammo_556x45_ap.mdl"
+ITEM.model = "models/lostsignalproject/items/ammo/556x45.mdl"
 ITEM.width = 2
 ITEM.height = 1
 ITEM.ammo = "5.56x45MM -ZL-" // type of the ammo

@@ -1,6 +1,6 @@
 ITEM.name = "Sattelite Phone"
 ITEM.description = "A sattelite phone used by traders to make connection to their contacts and their storage."
-ITEM.model = "models/kek1ch/iphone.mdl"
+ITEM.model = "models/illusion/eftcontainers/gphone.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = "500"

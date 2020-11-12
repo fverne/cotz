@@ -1,7 +1,7 @@
 ITEM.name = "Artifact Detector (Bear)"
 ITEM.description = "A mid-tier artifact detector."
 ITEM.longdesc = "This last generation anomalous activity detector can be used to locate anomalous formations and has a color diode panel, which not only indicates the direction of artifacts, but also measures the distance to them. To switch to artifact search mode, open the device's front cover. Unfortunately, the device is programmed with a somewhat outdated list of detectable artifacts."
-ITEM.model = "models/kek1ch/dev_detector_2.mdl"
+ITEM.model = "models/lostsignalproject/items/devices/detector_bear.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 12000
@@ -20,12 +20,12 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0, -90, -40),
-						["Position"] = Vector(5.874, 3.09, 3.622),
+						["Angles"] = Angle(2.544, 93.658, 25.026),
+						["Position"] = Vector(5.145, 3.09, 3.893),
 						["UniqueID"] = "3522654444",
 						["EditorExpand"] = true,
 						["Bone"] = "pelvis",
-						["Model"] = "models/kek1ch/dev_detector_2.mdl",
+						["Model"] = "models/lostsignalproject/items/devices/detector_bear.mdl",
 						["ClassName"] = "model",
 					},
 				},

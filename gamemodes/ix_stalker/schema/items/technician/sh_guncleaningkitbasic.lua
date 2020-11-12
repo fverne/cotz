@@ -1,5 +1,5 @@
 ITEM.name = "Gun Cleaning Kit"
-ITEM.model = "models/kek1ch/cleaning_kit_p.mdl"
+ITEM.model = "models/lostsignalproject/items/repair/cleaning_kit_p.mdl"
 ITEM.description = "Common tools and materials for taking care of weaponry."
 ITEM.longdesc = "Advanced gun cleaning kit fitting all common weapon calibers. Besides cleaning and maintenance, it can also be used as an effective repair tool. The set comprises a small portion of efficient lubricant and cleaning solvent as well as some light tools to facilitate access to inner mechanisms of a firearm. In order to maximize effectiveness, combine with additional materials or specialized repair sets."
 ITEM.flag = "A"

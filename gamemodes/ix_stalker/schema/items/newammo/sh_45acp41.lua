@@ -1,5 +1,5 @@
 ITEM.name = ".410 Magnum Buck"
-ITEM.model = "models/kek1ch/ammo_12x70_buck.mdl"
+ITEM.model = "models/lostsignalproject/items/ammo/12x76_jhp.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.ammo = ".45 ACP -41-" // type of the ammo

@@ -455,7 +455,7 @@ end
 if CLIENT then
 	SWEP.ViewModelBoneMods = {}
 	SWEP.WElements = {
-		["guitar"] = { type = "Model", model = "models/kek1ch/dev_guitar.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(3.635, 1.557, 1.557), angle = Angle(10.519, 59.61, 122.726), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		["guitar"] = { type = "Model", model = "models/lostsignalproject/items/misc/guitar.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(3.635, 1.557, 1.557), angle = Angle(10.519, 59.61, 122.726), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
 	}
 end
 
@@ -477,7 +477,7 @@ SWEP.Slot		= 3
 SWEP.SlotPos		= 4
 SWEP.DrawAmmo		= false
 SWEP.ViewModel		= "models/weapons/tayley/v_guitar.mdl"
-SWEP.WorldModel		= "models/kek1ch/dev_guitar.mdl"
+SWEP.WorldModel		= "models/lostsignalproject/items/misc/guitar.mdl"
 SWEP.HoldType = "slam"
 
 SWEP.ViewModelFOV = 70

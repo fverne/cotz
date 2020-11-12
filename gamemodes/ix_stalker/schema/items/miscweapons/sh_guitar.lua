@@ -28,8 +28,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0, 0, 90),
-						["Position"] = Vector(13.915, -0.932, -3.453),
+						["Angles"] = Angle(0, 180, -90),
+						["Position"] = Vector(0, -2.932, -3.453),
 						["Model"] = "models/lostsignalproject/items/misc/guitar.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

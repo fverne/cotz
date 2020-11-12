@@ -1,6 +1,6 @@
 ITEM.name = "Components"
 ITEM.category = "Technician"
-ITEM.model = "models/kek1ch/box_condensers.mdl"
+ITEM.model = "models/lostsignalproject/items/quest/condensers.mdl"
 ITEM.description = "Components used for crafting various items."
 ITEM.longdesc = "This box contains components salvaged from various items within the zone. They can be used by technicians to craft and repair various items."
 ITEM.flag = "A"

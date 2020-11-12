@@ -1,6 +1,6 @@
 ITEM.name = "Technician's Manual"
 ITEM.desc = "A book that can introduce someone to the art of being a technician."
-ITEM.model = "models/kek1ch/book2.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/book2.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = "5000"

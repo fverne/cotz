@@ -1,6 +1,6 @@
 ITEM.name = "Ecologist's Journal"
 ITEM.description = "This small book is filled with scribblings by an ecologist. It seems to be a variety artifact and anomaly related notes."
-ITEM.model = "models/kek1ch/notes_document_case_1.mdl"
+ITEM.model = "models/lostsignalproject/items/quest/notes_writing_book_1.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = "1050"

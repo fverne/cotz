@@ -1,6 +1,6 @@
 ITEM.name = "Anomaly map"
 ITEM.description = "Handdrawn by an unknown stalker. Useless, as the locations change between blowouts."
-ITEM.model = "models/kek1ch/notes_letter_1.mdl"
+ITEM.model = "models/lostsignalproject/items/quest/notes_paper_1.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 500

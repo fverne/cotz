@@ -1,5 +1,5 @@
 ITEM.name = "Outfit Sewing Kit"
-ITEM.model = "models/kek1ch/sewing_kit_a.mdl"
+ITEM.model = "models/lostsignalproject/items/repair/sewing_kit_a.mdl"
 ITEM.description = "Common tools and materials for taking care of damaged outfits."
 ITEM.longdesc = "A light sewing kit consisting of a cloth reel, several steel needles and a pair of scissors. It can be used to sew up bullet holes or ruptures in soft fabrics of outfits. Its practical applications are limited due to the short length of the thread and subpar durability of needles, so the kit will be useless in case of more serious damage. For the same reason, it's compatible with only a handful of materials. Nonetheless, it is strongly advised to always use whatever is available to make the kit more effective."
 ITEM.flag = "A"

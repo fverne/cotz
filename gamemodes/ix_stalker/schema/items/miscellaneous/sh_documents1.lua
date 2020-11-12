@@ -1,6 +1,6 @@
 ITEM.name = "Military maps"
 ITEM.description = "Used by military to traverse the zone. Useless, if you have a PDA."
-ITEM.model = "models/kek1ch/mili_maps.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/maps.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = "1250"

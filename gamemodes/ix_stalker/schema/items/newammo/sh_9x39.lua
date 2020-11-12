@@ -1,5 +1,5 @@
 ITEM.name = "9x39mm"
-ITEM.model = "models/kek1ch/ammo_9x39_pab9.mdl"
+ITEM.model = "models/lostsignalproject/items/ammo/9x39.mdl"
 ITEM.width = 2
 ITEM.height = 1
 ITEM.ammo = "9x39MM" // type of the ammo

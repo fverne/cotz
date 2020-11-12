@@ -1,5 +1,5 @@
 ITEM.name = ".45 ACP Zone-Loaded"
-ITEM.model = "models/kek1ch/ammo_1143x23_fmj.mdl"
+ITEM.model = "models/lostsignalproject/items/ammo/45cal.mdl"
 ITEM.ammo = ".45 ACP -ZL-" // type of the ammo
 ITEM.ammoAmount = 100 // amount of the ammo
 ITEM.description= "A box that contains %s rounds of zone-loaded .45 ACP ammo. "

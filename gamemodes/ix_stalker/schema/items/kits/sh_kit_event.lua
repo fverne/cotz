@@ -1,6 +1,6 @@
 ITEM.name = "Event kit (OOC)"
 ITEM.description= "This item is supposed to be given to people who wants to create events. Contains some items and 1000 rubles."
-ITEM.model = "models/kek1ch/dev_rukzak.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/backpack.mdl"
 ITEM.width = 2
 ITEM.height = 2
 ITEM.flag = "A"

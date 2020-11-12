@@ -1,6 +1,6 @@
 ITEM.name = "Unassigned Identification Card"
 ITEM.description = "A flat piece of plastic for identification."
-ITEM.model = "models/kek1ch/access_card.mdl"
+ITEM.model = "models/lostsignalproject/items/quest/keycard.mdl"
 ITEM.price = "1000"
 ITEM.flag = "A"
 ITEM.data = { customName = ITEM.name, customDesc = ITEM.description, isUsed = 0}

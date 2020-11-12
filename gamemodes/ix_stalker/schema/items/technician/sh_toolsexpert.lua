@@ -1,7 +1,7 @@
 ITEM.name = "Expert Tools"
 ITEM.description = "Used by technicians to do expert work on equipment."
 ITEM.longdesc = "A professional set of high quality tools for fine-tuning equipment. Contains drill bit set, precision tweezers, soldiering iron, 4 mm Screwdriver bits and a multimeter. With enough knowledge and experience, this kit can be used for the creation of advanced equipment."
-ITEM.model = "models/kek1ch/box_toolkit_3.mdl"
+ITEM.model = "models/lostsignalproject/items/quest/toolkit_3.mdl"
 ITEM.width = 2
 ITEM.height = 1
 ITEM.category = "Technician"

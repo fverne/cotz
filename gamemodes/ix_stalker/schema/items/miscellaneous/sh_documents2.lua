@@ -1,6 +1,6 @@
 ITEM.name = "Anomaly Research Documents (simple)"
 ITEM.description = "Describes different anomalies. Only covers the most common anomalies."
-ITEM.model = "models/kek1ch/notes_paper_1.mdl"
+ITEM.model = "models/lostsignalproject/items/quest/document_02.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = "2150"

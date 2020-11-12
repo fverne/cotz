@@ -1,6 +1,6 @@
 ITEM.name = "Cleaning Solvent"
 ITEM.desc = "Used by technicians to restore the durability of tools."
-ITEM.model = "models/kek1ch/solvent.mdl"
+ITEM.model = "models/lostsignalproject/items/repair/gun_oil_ru_d.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = "5000"

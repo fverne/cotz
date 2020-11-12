@@ -1,5 +1,5 @@
 ITEM.name = "7.62x25mm"
-ITEM.model = "models/kek1ch/ammo_762x25_p.mdl"
+ITEM.model = "models/lostsignalproject/items/ammo/9x18.mdl"
 ITEM.ammo = "7.62x25MM" // type of the ammo
 ITEM.ammoAmount = 100 // amount of the ammo
 ITEM.description= "A box that contains %s rounds of 7.62x25mm ammo. "

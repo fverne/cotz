@@ -1,7 +1,7 @@
 ITEM.name = "Advanced Tools"
 ITEM.description = "Used by technicians to do advanced work on equipment."
 ITEM.longdesc = "A decent set of old tools, but despite their age they appear to be in good condition. Contains a handful set of small pliers, tipped tweezers, probe and pick set. With enough knowledge and experience, this kit can be used for the creation of better equipment."
-ITEM.model = "models/kek1ch/box_toolkit_2.mdl"
+ITEM.model = "models/lostsignalproject/items/quest/toolkit_2.mdl"
 ITEM.width = 2
 ITEM.height = 1
 ITEM.category = "Technician"

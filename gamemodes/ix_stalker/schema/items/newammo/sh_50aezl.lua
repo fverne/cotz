@@ -1,5 +1,5 @@
 ITEM.name = ".50AE Zone-Loaded"
-ITEM.model = "models/kek1ch/ammo_50_ae.mdl"
+ITEM.model = "models/lostsignalproject/items/ammo/50cal_hs.mdl"
 ITEM.ammo = ".50 AE -ZL-" // type of the ammo
 ITEM.ammoAmount = 100 // amount of the ammo
 ITEM.description= "A box that contains %s rounds of zone-loaded .50 AE ammo. "

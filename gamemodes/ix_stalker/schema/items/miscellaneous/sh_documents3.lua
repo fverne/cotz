@@ -1,6 +1,6 @@
 ITEM.name = "Artifact Research Documents (simple)"
 ITEM.description = "Describes different artifacts. Covers only the most common artifacts."
-ITEM.model = "models/kek1ch/notes_letter_3.mdl"
+ITEM.model = "models/lostsignalproject/items/quest/document_03.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = "2250"

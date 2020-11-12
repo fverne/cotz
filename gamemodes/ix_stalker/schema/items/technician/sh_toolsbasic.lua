@@ -1,7 +1,7 @@
 ITEM.name = "Basic Tools"
 ITEM.description = "Used by technicians to do basic work on equipment."
 ITEM.longdesc = "A basic repair toolkit. Unlikely to be suitable for advanced maintenance, but they could be useful in the hands of a thrifty technician. Contains different types and sizes of pliers, screws, adhesives and assorted fasteners. With enough knowledge and experience, this kit can be used for the creation of basic equipment."
-ITEM.model = "models/kek1ch/box_toolkit_1.mdl"
+ITEM.model = "models/lostsignalproject/items/quest/toolkit_1.mdl"
 ITEM.width = 2
 ITEM.height = 1
 ITEM.category = "Technician"

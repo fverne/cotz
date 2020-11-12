@@ -1,7 +1,7 @@
 ITEM.name = "Artifact Detector (Echo)"
 ITEM.description = "A low-tier artifact detector."
 ITEM.longdesc = "This dated anomalous activity detector produces an alarm signal when anomalous particles enter a special chamber as you approach an anomaly. It can also register the presence of artifacts and measure the distance to the nearest one. The distance is indicated by the frequency of the sound the detector emits. To switch to artifact search mode, open the device's front cover. Due to its simple design, Echo can only be used to locate the most common artifacts."
-ITEM.model = "models/kek1ch/dev_detector_1.mdl"
+ITEM.model = "models/lostsignalproject/items/devices/detector_echo.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 4000
@@ -20,12 +20,12 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0, -90, -40),
-						["Position"] = Vector(5.874, 3.09, 3.622),
+						["Angles"] = Angle(2.544, 93.658, 25.026),
+						["Position"] = Vector(5.145, 3.09, 3.893),
 						["UniqueID"] = "3522654987",
 						["EditorExpand"] = true,
 						["Bone"] = "pelvis",
-						["Model"] = "models/kek1ch/dev_detector_1.mdl",
+						["Model"] = "models/lostsignalproject/items/devices/detector_echo.mdl",
 						["ClassName"] = "model",
 					},
 				},
