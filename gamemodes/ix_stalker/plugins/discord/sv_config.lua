@@ -32,7 +32,7 @@ else
 	token = file.Read("cfg/relay_bot_token.cfg", "GAME"):Trim()
 end
 -- Set this to your Bot Token. Your bot must be added to your server.
-DiscordRelay.BotToken = token
+DiscordRelay.BotToken = "Nzc2NDY0MDY4ODY4MzA5MDAy.X61QhA.hggdJcCmYsQylOmXhe-jxCRzduc"
 
 
 -- Set this to your Channel ID. You can get this number in Discord by typing \#channelnamehere into chat.
