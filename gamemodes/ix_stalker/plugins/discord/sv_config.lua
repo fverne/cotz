@@ -23,8 +23,7 @@ end
 -- Set this to your Steam Web API Key
 DiscordRelay.SteamWebAPIKey = "08758F8D6073703961DD78B0DBF92ED4"
 
-
---[[
+/*
 local token
 if not file.Exists("cfg/relay_bot_token.cfg", "GAME") or file.Read("cfg/relay_bot_token.cfg", "GAME") == nil then
 	print("Error! No bot token for Discord relay!")
@@ -34,12 +33,13 @@ else
 end
 -- Set this to your Bot Token. Your bot must be added to your server.
 DiscordRelay.BotToken = token
+*/
 
 -- Set this to your Channel ID. You can get this number in Discord by typing \#channelnamehere into chat.
 -- Remove the <# at the start and the > at the end, so you are left with only a long number.
 DiscordRelay.DiscordGuildID = "172686511085584384"
-DiscordRelay.DiscordChannelID = "290488910608465930"
-]]
+DiscordRelay.DiscordChannelID = "776427962518077440"
+
 
 /*----------------------------------------
 Non Critical Config Options Below
