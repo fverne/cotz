@@ -3,7 +3,7 @@
 require("gwsockets")
 
 local wsEndpoint = "ws://127.0.0.1:27015/" --should be an IP, usually is the server that websockets is running on, anyways
-local wsApiKey = "https://discord.com/api/webhooks/776427981005520896/4_MB4Ns53oeTp21kHR1OK8kuTyYBm5UIpNOSF2q8q8tz1SiKbx-FwGo-58Ytcpj2tNc0" --requires an API key
+local wsApiKey = "335fc1528f7df19138fe95c479ef34e5555dc9b578b4383d11fb0d507249006a" --requires an API key
 
 COMM_SOCKET = COMM_SOCKET or GWSockets.createWebSocket(wsEndpoint, false)
 
