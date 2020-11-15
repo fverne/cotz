@@ -112,6 +112,8 @@ function PLUGIN:PopulateCharacterInfo(client, character, container)
 	repnametext:SetText(client:getCurrentRankName())
 	repnametext:SetTextColor(Color(138, 43, 226))
 	repnametext:SizeToContents()
+
+	return true
 end
 
 if (SERVER) then
