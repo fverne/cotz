@@ -67,7 +67,7 @@ end
 
 function PLUGIN:DespawnDupe(dupetodespawn)
 	for k,v in pairs(ix.AdvDupeIntegration.CreatedEntities[dupetodespawn]) do
-		v:Remove()
+		if( IsValid(v) ) then v:Remove() end
 	end
 
 	ix.AdvDupeIntegration.CreatedEntities[dupetodespawn] = {}
