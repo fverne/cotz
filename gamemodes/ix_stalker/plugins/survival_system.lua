@@ -93,44 +93,37 @@ if SERVER then
 	end
 
 	function playerMeta:UpdateHungerState(client)
-		if client:GetHunger() > 60 then
+/*		if client:GetHunger() > 60 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed"))
 			client:SetRunSpeed(ix.config.Get("runSpeed") * 1.1)
-			client:SetMaxSpeed(200)
 		elseif client:GetHunger() <= 60 and client:GetHunger() > 30 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed"))
 			client:SetRunSpeed(ix.config.Get("runSpeed"))
-			client:SetMaxSpeed(125)
 		elseif client:GetHunger() <= 30 and client:GetHunger() > 0 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed") * 0.5)
 			client:SetRunSpeed(ix.config.Get("runSpeed") * 0.5)
-			client:SetMaxSpeed(100)
 		elseif client:GetHunger() <= 0 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed") * 0.1)
 			client:SetRunSpeed(ix.config.Get("runSpeed") * 0.1)
-			client:SetMaxSpeed(50)
-		end
+		end*/
 	end
 
 	function playerMeta:UpdateThirstState(client)
-		if client:GetThirst() > 60 then
+/*		if client:GetThirst() > 60 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed"))
 			client:SetRunSpeed(ix.config.Get("runSpeed") * 1.1)
-			client:SetMaxSpeed(200)
 		elseif client:GetThirst() <= 60 and client:GetThirst() > 30 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed"))
 			client:SetRunSpeed(ix.config.Get("runSpeed"))
-			client:SetMaxSpeed(125)
 		elseif client:GetThirst() <= 30 and client:GetThirst() > 0 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed") * 0.5)
 			client:SetRunSpeed(ix.config.Get("runSpeed") * 0.5)
-			client:SetMaxSpeed(100)
 		elseif client:GetThirst() <= 0 then
 			client:SetWalkSpeed(ix.config.Get("walkSpeed") * 0.1)
 			client:SetRunSpeed(ix.config.Get("runSpeed") * 0.1)
-			client:SetMaxSpeed(50)
-		end
+		end*/
 	end
+
 end
 
 
@@ -175,7 +168,6 @@ function PLUGIN:HUDPaint()
 	local thirst3 = Material("vgui/hud/thirst3.png", "noclamp smooth") 
 	local thirst4 = Material("vgui/hud/thirst4.png", "noclamp smooth") 
 	local lp = LocalPlayer()
-	local wep = LocalPlayer():GetActiveWeapon()
 	local char = lp:GetCharacter()
 	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible()) then return end
 
