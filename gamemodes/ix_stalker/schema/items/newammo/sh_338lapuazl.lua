@@ -1,5 +1,5 @@
 ITEM.name = ".338 Lapua Zone-Loaded"
-ITEM.model = "models/lostsignalproject/items/ammo/127x55.mdl"
+ITEM.model = "models/kek1ch/ammo_86x70_fmj.mdl"
 ITEM.width = 2
 ITEM.height = 1
 ITEM.ammo = ".338 Lapua -ZL-" // type of the ammo
