@@ -12,7 +12,8 @@ ITEM.outfitCategory = "backpack"
 ITEM.pacData = {}
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 
-ITEM.weight = 0
+ITEM.weight = 1
+ITEM.carryinc = 10
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
@@ -79,6 +80,7 @@ ITEM.functions.Equip = {
 
 		item:SetData("equip", true)
 		item.player:AddPart(item.uniqueID, item)
+		char:UpdateWeight()
 
 		if (item.attribBoosts) then
 			for k, v in pairs(item.attribBoosts) do
@@ -102,7 +104,15 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	tip = "equipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)
+		local char = item.player:GetCharacter()
+
+		if (!char:CanRemoveCarry(item)) then
+			item.player:Notify("Removing this item would make you heavily overweight.")
+			return false
+		end
+
 		item:RemovePart(item.player)
+		char:UpdateWeight()
 
 		return false
 	end,
@@ -115,7 +125,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 }
 
 ITEM:Hook("drop", function(item)
-	if (item:GetData("equip")) then
+	if (item:GetData("equip") && item.player:GetCharacter():CanRemoveCarry(item)) then
 		item:RemovePart(item.player)
 	end
 end)

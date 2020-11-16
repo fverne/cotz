@@ -7,7 +7,7 @@ ix.util.text = ix.util.text or {}
 
 -- Your library functions should reside in the table as regular function calls, not method calls (i.e use "." instead of ":") to
 -- maintain consistency with the rest of Helix. What you shouldn't do: function ix.test:Add(one, two)
-function ix.util.PropertyDesc(tooltip, text, color)
+function ix.util.PropertyDesc(tooltip, text, color) -- property, no image
 	if !tooltip:GetRow("propertyheader") then
 		local descheader = tooltip:AddRow("propertyheader")
 		descheader:SetText("\nPROPERTIES:")
@@ -38,7 +38,7 @@ function ix.util.PropertyDesc(tooltip, text, color)
 	tooltip:SizeToContents()
 end
 
-function ix.util.PropertyDesc2(tooltip, text, color, imagestring)
+function ix.util.PropertyDesc2(tooltip, text, color, imagestring) -- property, with image
 	if !tooltip:GetRow("propertyheader") then
 		local descheader = tooltip:AddRow("propertyheader")
 		descheader:SetText("\nPROPERTIES:")
@@ -72,7 +72,7 @@ function ix.util.PropertyDesc2(tooltip, text, color, imagestring)
 	tooltip:SizeToContents()
 end
 
-function ix.util.PropertyDesc3(tooltip, text, color, imagestring, zpos)
+function ix.util.PropertyDesc3(tooltip, text, color, imagestring, zpos) -- property, with image and zpos
 	if !tooltip:GetRow("propertyheader") then
 		local descheader = tooltip:AddRow("propertyheader")
 		descheader:SetText("\nPROPERTIES:")

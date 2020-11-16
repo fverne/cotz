@@ -179,7 +179,7 @@ function PANEL:Update()
 
 	-- weight update
 	local carry = LocalPlayer():GetCharacter():GetData("carry", 0)
-	local maxWeight = ix.config.Get("maxWeight", 30)
+	local maxWeight = ix.weight.BaseWeight(LocalPlayer():GetCharacter())
 	if (ix.option.Get("imperial", false)) then
 		self.weight:SetText(math.Round(carry * 2.20462, 2).." lbs / "..math.Round(maxWeight * 2.20462, 2).." lbs")
 	else

@@ -1,19 +1,22 @@
 ITEM.name = "Modern Military Backpack (Ukrainian)"
 ITEM.description = "A backpack. Features compartments for easy storage of your valuables."
+ITEM.model = "models/kek1ch/sumka1.mdl"
+
+ITEM.price = 1500
 ITEM.width = 2
 ITEM.height = 2
-ITEM.invWidth = 5
-ITEM.invHeight = 2
-ITEM.busflag = {"backpacks"}
-ITEM.price = 1500
-ITEM.model = "models/kek1ch/sumka1.mdl"
-ITEM.weaponCategory = "back"
+ITEM.weight = 1.15
+
+ITEM.carryinc = 10
+ITEM.outfitCategory = "backpack"
+
 ITEM.exRender = true
 ITEM.iconCam = {
 	pos = Vector(0, 0, 200),
 	ang = Angle(90, 0, -90),
 	fov = 4.9
 }
+
 ITEM.pacData = {
 	[1] = {
 		["children"] = {

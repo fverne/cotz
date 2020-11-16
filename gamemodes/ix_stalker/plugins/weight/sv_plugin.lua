@@ -14,10 +14,26 @@ end
 
 function ix.weight.Update(character) -- Updates the specified character's current carry weight.
 	character:SetData("carry", ix.weight.CalculateWeight(character))
+
+	local client = character:GetPlayer()
+	if character:HeavilyOverweight() then
+		client:SetWalkSpeed(1)
+		client:SetRunSpeed(1)
+	elseif character:Overweight() then
+		client:SetWalkSpeed(ix.config.Get("walkSpeed") * 0.5)
+		client:SetRunSpeed(ix.config.Get("walkSpeed"))
+	else
+		client:SetWalkSpeed(ix.config.Get("walkSpeed"))
+		client:SetRunSpeed(ix.config.Get("runSpeed"))
+	end
 end
 
 function PLUGIN:CharacterLoaded(character) -- This is just a safety net to make sure the carry weight data is up-to-date.
 	ix.weight.Update(character)
+end
+
+function PLUGIN:AmmoCheck(client) -- updates weight after each reload, do we keep this?
+	ix.weight.Update(client:GetCharacter())
 end
 
 function PLUGIN:CanTransferItem(item, old, inv) -- When a player attempts to take an item out of a container.
@@ -25,7 +41,16 @@ function PLUGIN:CanTransferItem(item, old, inv) -- When a player attempts to tak
 		local character = ix.char.loaded[inv.owner]
 
 		if (!character:CanCarry(item)) then
-			character:GetPlayer():NotifyLocalized("You are carrying too much weight to take that.")
+			character:GetPlayer():NotifyLocalized("You are extremely overweight and cannot take that.")
+			return false
+		end
+	end
+
+	if(old.owner and item:GetCarryInc() and item:GetData("equip", nil) == true and (inv and inv.owner != old.owner)) then
+		local character = ix.char.loaded[old.owner]
+
+		if (!character:CanRemoveCarry(item)) then
+			character:GetPlayer():NotifyLocalized("You would be too overweight without that.")
 			return false
 		end
 	end
