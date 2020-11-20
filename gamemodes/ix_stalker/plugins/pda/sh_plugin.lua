@@ -24,12 +24,12 @@ hook.Add("InitializedChatClasses", "ixChatRemoval2", function()
 		CanHear = function(self, speaker, listener)
 			/*local pda = speaker:GetCharacter():GetData("pdaequipped", false)
 			if pda then
-				listener:EmitSound( "stalkersound/pda_news.wav", 50, 100, 1, CHAN_AUTO )
+				listener:EmitSound( "stalkersound/da-2_beep1.ogg", 90, 100, 1, CHAN_AUTO )
 				return true
 			else
 				return false
 			end*/
-			listener:EmitSound( "stalkersound/pda_news.wav", 50, 100, 0.4, CHAN_AUTO )
+			listener:EmitSound( "stalkersound/da-2_beep1.ogg", 90, 100, 0.4, CHAN_AUTO )
 			return true
 		end,
 	})
