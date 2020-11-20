@@ -105,7 +105,7 @@ function PANEL:OnOpened()
 
 	self:PlayStaticPDASound()
 
-	self:CreateAnimation(animationTime, {
+	self:CreateAnimation(0, {
 		target = {currentAlpha = 255},
 		easing = "outQuint",
 
@@ -505,13 +505,13 @@ function PANEL:Remove()
 	CloseDermaMenus()
 	gui.EnableScreenClicker(false)
 
-	self:CreateAnimation(animationTime * 0.5, {
+	self:CreateAnimation(0, {
 		index = 2,
 		target = {currentBlur = 0},
 		easing = "outQuint"
 	})
 
-	self:CreateAnimation(animationTime * 0.5, {
+	self:CreateAnimation(0, {
 		target = {currentAlpha = 0},
 		easing = "outQuint",
 
