@@ -72,7 +72,7 @@ ITEM.items[3] = {
 		{"ruger1022"},
 	},
 	itemsRare = {
-		{"sawnoff"},
+		{"toz66short"},
 		{"toz34short"},	
 		{"makarov"},		
 	},

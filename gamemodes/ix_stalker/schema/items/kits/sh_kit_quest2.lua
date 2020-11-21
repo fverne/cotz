@@ -72,7 +72,7 @@ ITEM.items[3] = {
 	},
 	itemsVeryRare = {
 		{"makarov"},
-		{"sawnoff"},
+		{"toz66short"},
 		{"toz34short"},
 	},
 }

@@ -7,7 +7,7 @@ PLUGIN.StashItems = {
     },
 
     {
-      {"sawnoff", {["durability"] = 45}},
+      {"toz66short", {["durability"] = 45}},
       {"12gaugezl", {["quantity"] = 20}},
       {"kit_hidestash1"},
     },

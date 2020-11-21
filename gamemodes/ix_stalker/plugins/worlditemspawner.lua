@@ -36,7 +36,7 @@ PLUGIN.spawngroups = {
 		{"fort12", {["ammo"] = math.random(0,3)}, {["durability"] = math.random(8)}},
 		{"toz34short", {["ammo"] = math.random(0,2)}, {["durability"] = math.random(8)}},
 		{"tokarev", {["ammo"] = math.random(0,3)}, {["durability"] = math.random(8)}},
-		{"sawnoff", {["ammo"] = math.random(0,2)}, {["durability"] = math.random(8)}},
+		{"toz66short", {["ammo"] = math.random(0,2)}, {["durability"] = math.random(8)}},
 		{"cz52", {["ammo"] = math.random(0,3)}, {["durability"] = math.random(8)}},*/
 		{"milkold", {["ammo"] = math.random(0,3)}, {["quantity"] = math.random(1)}},
 		{"oldmeat", {["ammo"] = math.random(0,3)}, {["quantity"] = math.random(1)}},
@@ -105,7 +105,7 @@ PLUGIN.spawngroups = {
 		{"fort12", {["ammo"] = math.random(0,3)}, {["durability"] = math.random(8)}},
 		{"toz34short", {["ammo"] = math.random(0,2)}, {["durability"] = math.random(8)}},
 		{"tokarev", {["ammo"] = math.random(0,3)}, {["durability"] = math.random(8)}},
-		{"sawnoff", {["ammo"] = math.random(0,2)}, {["durability"] = math.random(8)}},
+		{"toz66short", {["ammo"] = math.random(0,2)}, {["durability"] = math.random(8)}},
 		{"cz52", {["ammo"] = math.random(0,3)}, {["durability"] = math.random(8)}},*/
 		{"milkold", {["quantity"] = math.random(1)}},
 		{"oldmeat", {["quantity"] = math.random(1)}},

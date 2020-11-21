@@ -2,7 +2,7 @@ ITEM.name = "TOZ BM-16 Sawnoff"
 ITEM.description= "A sawn-off hunting shotgun. Fires 12 gauge."
 ITEM.longdesc = "This sawn-off double barrelled shotgun is a must-have in many rookies eyes.\nIt dispatches mutants and unarmored stalkers with ease, and is cheap to keep supplied with ammo.\n\nAmmo: 12 Gauge \nMagazine Capacity: 2"
 ITEM.model = ("models/weapons/w_sawnoff.mdl")
-ITEM.class = "cw_shawedoff"
+ITEM.class = "cw_toz66short"
 ITEM.weaponCategory = "secondary"
 ITEM.price = 4400
 ITEM.width = 3
@@ -39,7 +39,7 @@ ITEM.pacData = {
 						["EditorExpand"] = true,
 						["UniqueID"] = "3976837955",
 						["Bone"] = "pelvis",
-						["Name"] = "sawnoff",
+						["Name"] = "toz66short",
 						["Angles"] = Angle(0, 270, -30),
 					},
 				},
@@ -51,7 +51,7 @@ ITEM.pacData = {
 				["Event"] = "weapon_class",
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
-				["Arguments"] = "cw_shawedoff@@0",
+				["Arguments"] = "cw_toz66short@@0",
 			},
 		},
 	},

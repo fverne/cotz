@@ -8,7 +8,7 @@ PLUGIN.itemspawngroups = {
 	},
 	["small"] = {
 		{"makarov", {["ammo"] = 3}, {["durability"] = 15}},
-		{"sawnoff", {["durability"] = 10}},
+		{"toz66short", {["durability"] = 10}},
 	},
 }
 

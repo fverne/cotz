@@ -52,7 +52,7 @@ ITEM.items[1] = {
 		{"fort12", {["ammo"] = math.random(0,3)}, {["durability"] = math.random(8)}},
 		{"toz34short", {["ammo"] = math.random(0,2)}, {["durability"] = math.random(8)}},
 		{"tokarev", {["ammo"] = math.random(0,3)}, {["durability"] = math.random(8)}},
-		{"sawnoff", {["ammo"] = math.random(0,2)}, {["durability"] = math.random(8)}},
+		{"toz66short", {["ammo"] = math.random(0,2)}, {["durability"] = math.random(8)}},
 		{"cz52", {["ammo"] = math.random(0,3)}, {["durability"] = math.random(8)}},
 		{"ruger1022", {["ammo"] = math.random(0,3)}, {["durability"] = math.random(8)}},
 		{"w9422", {["ammo"] = math.random(0,3)}, {["durability"] = math.random(8)}},*/

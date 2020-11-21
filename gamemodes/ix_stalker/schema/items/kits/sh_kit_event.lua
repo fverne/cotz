@@ -48,7 +48,7 @@ ITEM.items[2] = {
 },
 	itemsRare = {
 		{"ppsh", {["durability"] = 0},},
-		{"sawnoff", {["durability"] = 0},},
+		{"toz66short", {["durability"] = 0},},
 		{"m1911", {["durability"] = 0},},
 		{"beretta92", {["durability"] = 0},},
 },
