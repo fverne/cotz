@@ -60,8 +60,8 @@ SWEP.SpeedDec = 20
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
-SWEP.HoldType = "shotgun"
-SWEP.NormalHoldType = "shotgun"
+SWEP.HoldType = "ar2"
+SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"break"}
 SWEP.Base = "cw_base"
@@ -79,6 +79,12 @@ SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/stalker/toz66.mdl"
 SWEP.WorldModel		= "models/weapons/w_doublebarrel.mdl"
+
+SWEP.DrawTraditionalWorldModel = false
+SWEP.WM = "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl"
+SWEP.WMPos = Vector(1, 0, 0)
+SWEP.WMAng = Vector(-6, 180, 180)
+
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

@@ -1,12 +1,15 @@
 ITEM.name = "TOZ-66"
 ITEM.description= "A break-action hunting shotgun firing 12 gauge shells."
 ITEM.longdesc = "A double barrel hunting shotgun, a classic Russian design popular with hunters and loners alike.\nThe cheap price and long barrel makes it useful for engaging animals and unarmed targets at ranges up to fifty meters.\nThe side-by-side barrels makes the weapon simpler built compared to the TOZ, but the sights are not aligned to both barrels.\n\nAmmo: 12 Gauge \nMagazine Capacity: 2"
-ITEM.model = "models/weapons/w_doublebarrel.mdl"
+ITEM.model = "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl"
+
+ITEM.width = 5
+ITEM.height = 1
+ITEM.price = 9300
+
 ITEM.class = "cw_toz66"
 ITEM.weaponCategory = "primary"
-ITEM.width = 5
-ITEM.price = 9300
-ITEM.height = 1
+
 ITEM.busflag = {"guns2_1"}
 ITEM.repairCost = ITEM.price/100*1
 
@@ -20,9 +23,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(2.4000000953674, -205, -3),
-	ang = Angle(0, 90, -2),
-	fov = 12,
+	pos = Vector(-9, 52, -0.30000001192093),
+	ang = Angle(0, 270, 0),
+	fov = 45,
 }
 
 ITEM.pacData = {
@@ -34,10 +37,10 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/weapons/w_doublebarrel.mdl",
+						["Model"] = "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl",
 						["ClassName"] = "model",
-						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(6.687, -5.597, -5.128),
+						["Angles"] = Angle(0, 0, 180),
+						["Position"] = Vector(6.687, -2.597, -5.128),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3552126135",
 						["Bone"] = "spine 2",
