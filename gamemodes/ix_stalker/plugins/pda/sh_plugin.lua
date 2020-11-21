@@ -29,7 +29,7 @@ hook.Add("InitializedChatClasses", "ixChatRemoval2", function()
 			else
 				return false
 			end*/
-			listener:EmitSound( "stalkersound/da-2_beep1.ogg", 90, 100, 0.4, CHAN_AUTO )
+			listener:EmitSound( "stalkersound/da-2_beep1.ogg", 90, 100, 1, CHAN_AUTO )
 			return true
 		end,
 	})

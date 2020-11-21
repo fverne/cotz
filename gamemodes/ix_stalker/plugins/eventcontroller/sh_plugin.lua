@@ -8,10 +8,10 @@ PLUGIN.eventpoints = PLUGIN.eventpoints or {} -- EVENTPOINT STRUCTURE table.inse
 
 ix.util.Include("sh_eventdefs.lua")
 
-PLUGIN.spawnratebase = 1800
+PLUGIN.spawnratebase = 900
 PLUGIN.spawnrateplayer = 30
 PLUGIN.spawnradius = 128
-PLUGIN.populateAmount = 5
+PLUGIN.populateAmount = 6
 
 PLUGIN.pdachatter = true
 PLUGIN.pdachatterchance = 100
@@ -146,7 +146,7 @@ if SERVER then
 			
 			--spawn loot
 			if spawn.loot then
-				for k = 1, #spawn.loot do
+				/*for k = 1, #spawn.loot do
 					for i = 1, spawn.loot[k][2] do
 						local position = self:GetSpawnLocation( eventpoint[1] )
 						local data = {}
@@ -164,7 +164,7 @@ if SERVER then
 							ix.item.Spawn(spawn.loot[k][1], position, nil, AngleRand(), spawn.loot[k][3] or {})
 						end
 					end
-				end
+				end*/
 			end
 		end
 	end
