@@ -184,7 +184,7 @@ SWEP.WorldModel		= "models/cw2/rifles/w_vss.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 20
+SWEP.Primary.ClipSize		= 10
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x39MM"
@@ -213,5 +213,5 @@ SWEP.ReloadHalt = 3.6
 SWEP.ReloadHalt_Empty = 4.7
 
 function SWEP:IndividualInitialize()
-	self:setBodygroup( 4 , 1 )
+	--self:setBodygroup( 4 , 1 )
 end
