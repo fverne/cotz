@@ -78,7 +78,7 @@ SWEP.Instructions	= ""
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/stalker/toz66.mdl"
-SWEP.WorldModel		= "models/weapons/w_doublebarrel.mdl"
+SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl"
 
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WM = "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl"

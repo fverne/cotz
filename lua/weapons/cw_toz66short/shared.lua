@@ -78,7 +78,12 @@ SWEP.Instructions	= ""
 SWEP.ViewModelFOV	= 60
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/tayley/v_bm16.mdl"
-SWEP.WorldModel		= "models/weapons/w_sawnoff.mdl"
+SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_toz66_obrez.mdl"
+
+SWEP.DrawTraditionalWorldModel = false
+SWEP.WM = "models/dobytchick/weapons/gmzone/deadair/w_toz66_obrez.mdl"
+SWEP.WMPos = Vector(1.7, -2.5, -0.5)
+SWEP.WMAng = Vector(-10, 180, 180)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

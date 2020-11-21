@@ -1,7 +1,7 @@
 ITEM.name = "TOZ BM-16 Sawnoff"
 ITEM.description= "A sawn-off hunting shotgun. Fires 12 gauge."
 ITEM.longdesc = "This sawn-off double barrelled shotgun is a must-have in many rookies eyes.\nIt dispatches mutants and unarmored stalkers with ease, and is cheap to keep supplied with ammo.\n\nAmmo: 12 Gauge \nMagazine Capacity: 2"
-ITEM.model = ("models/weapons/w_sawnoff.mdl")
+ITEM.model = "models/dobytchick/weapons/gmzone/deadair/w_toz66_obrez.mdl"
 ITEM.class = "cw_toz66short"
 ITEM.weaponCategory = "secondary"
 ITEM.price = 4400
@@ -19,9 +19,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(-0.80000001192093, -205, -2),
-	ang = Angle(0, 90, 0),
-	fov = 5,
+	pos = Vector(-5, 25, 0.5),
+	ang = Angle(0, 270, 0),
+	fov = 45,
 }
 
 ITEM.pacData = {
@@ -33,14 +33,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/weapons/w_sawnoff.mdl",
+						["Model"] = "models/dobytchick/weapons/gmzone/deadair/w_toz66_obrez.mdl",
 						["ClassName"] = "model",
-						["Position"] = Vector(-7.89, -1.128, 3.612),
+						["Position"] = Vector(-7.89, 4.128, 0),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3976837955",
 						["Bone"] = "pelvis",
 						["Name"] = "toz66short",
-						["Angles"] = Angle(0, 270, -30),
+						["Angles"] = Angle(10, 90, 30),
 					},
 				},
 			},
