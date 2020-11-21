@@ -10,8 +10,8 @@ if CLIENT then
 	
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/w_smg_pp19vityaz.mdl"
-	SWEP.WMPos = Vector(-1, -2, -0.5)
-	SWEP.WMAng = Vector(0, 0, 180)
+	SWEP.WMPos = Vector(-1, -2, -1.5)
+	SWEP.WMAng = Vector(-15, 0, 180)
 	
 	SWEP.IronsightPos = Vector(-3.116, -4.801, 1.1)
 	SWEP.IronsightAng = Vector(0, 0, 0)
@@ -99,8 +99,9 @@ SWEP.SpeedDec = 15
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
-SWEP.NormalHoldType = "smg"
-SWEP.RunHoldType = "passive"
+SWEP.HoldType = "ar2"
+SWEP.NormalHoldType = "ar2"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"

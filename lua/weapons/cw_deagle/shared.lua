@@ -102,6 +102,11 @@ SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/cw2/pistols/deagle.mdl"
 SWEP.WorldModel		= "models/weapons/w_pist_deagle.mdl"
 
+SWEP.DrawTraditionalWorldModel = true --temporarily removing this until we want to update theix item
+SWEP.WM = "models/dobytchick/weapons/gmzone/deadair/w_deagle.mdl"
+SWEP.WMPos = Vector(1, -3, 1.9)
+SWEP.WMAng = Vector(-10, 180, 180)
+
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 

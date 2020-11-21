@@ -125,6 +125,7 @@ SWEP.LuaVMRecoilAxisMod = {vert = -0.1, hor = 1, roll = 4, forward = 1.5, pitch 
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0
+SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"
 SWEP.FireModes = {"double"}

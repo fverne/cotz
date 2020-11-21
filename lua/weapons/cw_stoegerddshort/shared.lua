@@ -16,8 +16,8 @@ if CLIENT then
 	
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/w_pist_lyxn_dualb.mdl"
-	SWEP.WMPos = Vector(-1, 2.75, 0.55)
-	SWEP.WMAng = Vector(0, 0, 180)
+	SWEP.WMPos = Vector(-1, 2, -1)
+	SWEP.WMAng = Vector(-4, -5, 180)
 	
 	SWEP.ForeGripOffsetCycle_Draw = 0
 	SWEP.ForeGripOffsetCycle_Reload = 0.90
@@ -126,8 +126,9 @@ SWEP.SpeedDec = 5
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0
-SWEP.NormalHoldType = "shotgun"
-SWEP.RunHoldType = "passive"
+SWEP.HoldType = "ar2"
+SWEP.NormalHoldType = "ar2"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"break"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"

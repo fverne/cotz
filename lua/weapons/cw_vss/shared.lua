@@ -25,7 +25,7 @@ if CLIENT then
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/cw2/rifles/w_vss.mdl"
 	SWEP.WMPos = Vector(1, -9, 1.2)
-	SWEP.WMAng = Vector(0, 180, 180)
+	SWEP.WMAng = Vector(-10, 180, 180)
 
 	SWEP.PSOPos = Vector(-2.304, 1.417, 0.402)
 	SWEP.PSOAng = Vector(0, 0, 0)
@@ -161,8 +161,9 @@ SWEP.SpeedDec = 30
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"

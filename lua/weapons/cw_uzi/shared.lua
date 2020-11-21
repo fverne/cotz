@@ -28,7 +28,7 @@ if CLIENT then
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/w_uzi.mdl"
 	SWEP.WMPos = Vector(0, -15,0)
-	SWEP.WMAng = Vector(0, 180, 180)
+	SWEP.WMAng = Vector(-5, 180, 180)
 	
 	SWEP.MicroT1Pos = Vector(-2.55, 8, -0.33)
 	SWEP.MicroT1Ang = Vector(0, 0, 0)
@@ -130,7 +130,7 @@ SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "revolver"
 SWEP.NormalHoldType = "revolver"
-SWEP.RunHoldType = "normal"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"

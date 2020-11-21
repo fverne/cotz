@@ -120,7 +120,7 @@ SWEP.SpeedDec = 10
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0
-SWEP.HoldType = "revolver"
+SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"
 SWEP.FireModes = {"auto"}

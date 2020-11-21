@@ -91,9 +91,9 @@ SWEP.SpeedDec = 20
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
-SWEP.HoldType = "shotgun"
-SWEP.NormalHoldType = "shotgun"
-SWEP.RunHoldType = "passive"
+SWEP.HoldType = "ar2"
+SWEP.NormalHoldType = "ar2"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"pump"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"

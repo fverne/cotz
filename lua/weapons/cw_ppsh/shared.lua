@@ -82,14 +82,14 @@ SWEP.SpeedDec = 20
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
-SWEP.HoldType = "ar2"
-SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.HoldType = "smg"
+SWEP.NormalHoldType = "smg"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "Spy"
+SWEP.Author			= "gumlefar"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""

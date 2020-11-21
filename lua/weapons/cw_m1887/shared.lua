@@ -21,8 +21,8 @@ if CLIENT then
 	
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/w_shot_m1887.mdl"
-	SWEP.WMPos = Vector(-1, 1.5, 0)
-	SWEP.WMAng = Vector(0, 0, 180)
+	SWEP.WMPos = Vector(-1, 0, -3)
+	SWEP.WMAng = Vector(-15, 0, 180)
 	
 	SWEP.ShellPosOffset = {x = 4, y = 0, z = -3}
 	SWEP.ForeGripOffsetCycle_Draw = 0
@@ -83,9 +83,9 @@ SWEP.SpeedDec = 20
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
-SWEP.HoldType = "shotgun"
-SWEP.NormalHoldType = "shotgun"
-SWEP.RunHoldType = "passive"
+SWEP.HoldType = "ar2"
+SWEP.NormalHoldType = "ar2"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"pump"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"

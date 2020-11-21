@@ -40,7 +40,7 @@ if CLIENT then
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/cw2/pistols/w_makarov.mdl"
 	SWEP.WMPos = Vector(-2.5, -1.5, -1.25)
-	SWEP.WMAng = Vector(0, 90, 180)
+	SWEP.WMAng = Vector(-5, 90, 180)
 
 	
 	SWEP.LuaVMRecoilAxisMod = {vert = 0.25, hor = 0.5, roll = 2, forward = 0, pitch = 1}

@@ -99,9 +99,9 @@ SWEP.SpeedDec = 10
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0
-SWEP.HoldType = "smg"
-SWEP.NormalHoldType = "smg"
-SWEP.RunHoldType = "passive"
+SWEP.HoldType = "revolver"
+SWEP.NormalHoldType = "revolver"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
@@ -118,7 +118,7 @@ SWEP.WorldModel		= "models/weapons/w_bf4_pp2000.mdl"
 
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WM = "models/weapons/w_bf4_pp2000.mdl"
-SWEP.WMPos = Vector(-1, -2, 0)
+SWEP.WMPos = Vector(-1, -3, 0.5)
 SWEP.WMAng = Vector(-10, 0, 180)
 
 SWEP.Spawnable			= true

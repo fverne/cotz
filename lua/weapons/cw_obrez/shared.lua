@@ -120,8 +120,9 @@ SWEP.SpeedDec = 45
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "normal"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"bolt"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"

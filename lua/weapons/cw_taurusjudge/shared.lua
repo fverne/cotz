@@ -16,8 +16,8 @@ if CLIENT then
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/cwc_judge/w_khri_410jury.mdl"
 
-	SWEP.WMPos = Vector(-1.2, 5, 1.2)
-	SWEP.WMAng = Vector(-15, 0, 180)
+	SWEP.WMPos = Vector(-1.2, 3.5, 1)
+	SWEP.WMAng = Vector(-5, 0, 180)
 	
 	SWEP.MuzzleEffect = "muzzleflash_pistol_deagle"
 	SWEP.PosBasedMuz = true
@@ -106,6 +106,7 @@ SWEP.SpeedDec = 15
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0
+SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"
 SWEP.FireModes = {"double"}

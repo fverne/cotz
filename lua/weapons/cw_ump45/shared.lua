@@ -116,7 +116,7 @@ SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.HoldType = "smg"
 SWEP.NormalHoldType = "smg"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
@@ -132,7 +132,12 @@ SWEP.WearEffect = 0.05
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/cw2/smgs/ump.mdl"
-SWEP.WorldModel		= "models/weapons/w_smg_ump45.mdl"
+SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_ump45.mdl"
+
+SWEP.DrawTraditionalWorldModel = false
+SWEP.WM = "models/dobytchick/weapons/gmzone/deadair/w_ump45.mdl"
+SWEP.WMPos = Vector(1, -3, 0.5)
+SWEP.WMAng = Vector(-10,180,180)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

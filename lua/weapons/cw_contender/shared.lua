@@ -96,8 +96,9 @@ SWEP.SpeedDec = 30
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"break"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
@@ -114,7 +115,7 @@ SWEP.WorldModel		= "models/cw2/pistols/w_contender.mdl"
 SWEP.DrawTraditionalWorldModel = false	--Whether to use world model's embedded/compiled origin
 SWEP.WM = "models/cw2/pistols/w_contender.mdl"
 SWEP.WMPos = Vector(0.5,-17.0,0.0)	--world model origin X,Y,Z
-SWEP.WMAng = Vector(-10,179.5,180)	--world model angles X,Y,Z
+SWEP.WMAng = Vector(-20,179.5,180)	--world model angles X,Y,Z
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

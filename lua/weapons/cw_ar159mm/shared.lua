@@ -104,8 +104,9 @@ SWEP.SpeedDec = 30
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "3burst", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
@@ -123,7 +124,7 @@ SWEP.WorldModel		= "models/cw2/weapons/w_cam_m49m.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WM = "models/cw2/weapons/w_cam_m49m.mdl"
 SWEP.WMPos = Vector(0,0,0)
-SWEP.WMAng = Vector(-3,1,180)
+SWEP.WMAng = Vector(-3,0,180)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
