@@ -3,7 +3,7 @@ att.name = "am_trishot"
 att.displayName = "Triball"
 att.displayNameShort = "Triball"
 
-att.statModifiers = {DamageMult = 4, ClumpSpreadMult = 0.5}
+att.statModifiers = {DamageMult = 6, ClumpSpreadMult = -0.5}
 
 if CLIENT then
 	att.displayIcon = surface.GetTextureID("atts/flechetterounds")
