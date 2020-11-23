@@ -25,19 +25,6 @@ function Schema:OnItemSpawned(entity)
 	entity.OnTakeDamage = nil
 end
 
-if SERVER then
-	local playerMeta = FindMetaTable("Player")
-
-	function playerMeta:requestQuery(title, subTitle, callback)
-		local time = math.floor(os.time())
-
-		self.nutQueReqs = self.nutQueReqs or {}
-		self.nutQueReqs[time] = callback
-
-		netstream.Start(self, "qurReq", time, title, subTitle)
-	end
-end
-
 
 /*ix.command.Add("CharFallOver", {
 	description = "disabled",
@@ -124,5 +111,44 @@ do
 				ix.item.Spawn("bagrubles", client:GetItemDropPos(), nil, AngleRand(), {["quantity"] = amount})
 			end
 		})
+	end)
+end
+
+--query, primarily used by simplecrossserver
+if SERVER then
+	local playerMeta = FindMetaTable("Player")
+
+	function playerMeta:requestQuery(title, subTitle, callback)
+		local time = math.floor(os.time())
+
+		self.ixQueReqs = self.ixQueReqs or {}
+		self.ixQueReqs[time] = callback
+
+		netstream.Start(self, "qurReq", time, title, subTitle)
+	end
+
+	netstream.Hook("qurReq", function(client, time, bResponse)
+		if (client.ixQueReqs and client.ixQueReqs[time]) then
+			client.ixQueReqs[time](bResponse)
+			client.ixQueReqs[time] = nil
+		end
+	end)
+end
+
+if CLIENT then
+	netstream.Hook("qurReq", function(time, title, subTitle)
+		if (title:sub(1, 1) == "@") then
+			title = L(title:sub(2))
+		end
+
+		if (subTitle:sub(1, 1) == "@") then
+			subTitle = L(subTitle:sub(2))
+		end
+
+		Derma_Query(subTitle, title, "Yes", function()
+			netstream.Start("qurReq", time, true)
+		end, "No", function()
+			netstream.Start("qurReq", time, false)
+		end)
 	end)
 end

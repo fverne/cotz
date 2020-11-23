@@ -89,10 +89,3 @@ function Schema:Initialize()
 	game.ConsoleCommand("sv_allowdownload 0\n");
 	game.ConsoleCommand("sv_allowcslua 0\n");
 end
-
-netstream.Hook("qurReq", function(client, time, bResponse)
-	if (client.nutQueReqs and client.nutQueReqs[time]) then
-		client.nutQueReqs[time](bResponse)
-		client.nutQueReqs[time] = nil
-	end
-end)
