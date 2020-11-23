@@ -185,6 +185,16 @@ ITEM:Hook("drop", function(item)
 		end
 
 		if (IsValid(weapon)) then
+			local ammoType = weapon:GetPrimaryAmmoType()
+
+			weapon.ixItem = nil
+
+			if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+				self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
+			else
+				self:SetData("ammoType", nil)
+			end
+				
 			item:SetData("ammo", weapon:Clip1())
 			item:SetData("wear", weapon:GetWeaponWear())
 			item:SetData("durability", weapon:GetWeaponDurability())
