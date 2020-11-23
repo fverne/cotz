@@ -64,6 +64,13 @@ function Schema:ScoreboardShow()
 end
 
 function Schema:LoadFonts(font, genericFont)
+	surface.CreateFont("ixTypingIndicator", {
+		font = font,
+		size = 128,
+		extended = true,
+		weight = 1000
+	})
+
 	surface.CreateFont("ix3D2DFont", {
 		font = font,
 		size = 128,
