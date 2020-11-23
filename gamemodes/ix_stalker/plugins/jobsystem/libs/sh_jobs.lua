@@ -49,12 +49,12 @@ function ix.jobs.isStructValid(jobstruct)
   return true
 end
 
-function ix.jobs.getFormattedName(identifier, activejob)
-  return string.format(ix.jobs.list[identifier].name,activejob.numberRec)
+function ix.jobs.getFormattedName(activejob)
+  return string.format(ix.jobs.list[activejob.identifier].name,activejob.numberRec)
 end
 
-function ix.jobs.getFormattedDesc(identifier, activejob)
-  return string.format(ix.jobs.list[identifier].desc,activejob.numberRec)
+function ix.jobs.getFormattedDesc(activejob)
+  return string.format(ix.jobs.list[activejob.identifier].desc,activejob.numberRec)
 end
 
 function ix.jobs.isItemJob(jobname)
@@ -62,6 +62,17 @@ function ix.jobs.isItemJob(jobname)
   if underscorepos then
     return string.sub(jobname, underscorepos + 1)
   else
+    return false
+  end
+end
+
+local playerMeta = FindMetaTable("Player")
+function playerMeta:ixHasJobFromNPC(npcidentifier)
+  curJobs = self:GetCharacter():GetJobs()
+
+  if curJobs[npcidentifier] then
+    return true
+  else 
     return false
   end
 end
@@ -74,7 +85,7 @@ if SERVER then
   local playerMeta = FindMetaTable("Player")
 
   function playerMeta:ixJobEvaluate(trigger)
-    --print("Evaluating quest with ID: "..trigger)
+    print("Evaluating quest with ID: "..trigger)
 
     --Check if player has quest
     local curJobs = self:GetCharacter():GetJobs()
@@ -99,15 +110,15 @@ if SERVER then
     self:GetCharacter():SetJobs(curJobs)
   end
 
-  function playerMeta:ixJobComplete(identifier, npcidentifer)
-    --print("Completing quest with ID: "..identifier)
+  function playerMeta:ixJobComplete(npcidentifier)
+    --print("Completing quest with ID: "..npcidentifier)
 
     if self:ixHasJobFromNPC(npcidentifier) then
-
       local curJobs = self:GetCharacter():GetJobs()
       --Check if job is marked as complete
       if curJobs[npcidentifier].isCompleted then
         --Check rewards & rewardcount
+        local identifier = curJobs[npcidentifier].identifier
 
         local rewCount = 0
         if type(ix.jobs.list[identifier].rewardCount) == "table" then
@@ -141,14 +152,16 @@ if SERVER then
     end
   end
 
-  function playerMeta:ixJobAdd(identifier, npcidentifer)
+  function playerMeta:ixJobAdd(identifier, npcidentifier)
     --print("Adding quest with ID: "..identifier)
     curJobs = self:GetCharacter():GetJobs()
 
     --Check if player already has a job from this npc
-    if curJobs[npcidentifer] then return false end
+    if curJobs[npcidentifier] then return false end
     --Evaluate job parameters | numberRec, listenTrigger, progress=0, isCompleted=false |
     temp = {}
+
+    temp.identifier = identifier
 
     if type(ix.jobs.list[identifier].numberRec) == "table" then
       temp.numberRec = math.random(ix.jobs.list[identifier].numberRec[1],ix.jobs.list[identifier].numberRec[2])
@@ -167,13 +180,4 @@ if SERVER then
     self:GetCharacter():SetJobs(curJobs)
   end
 
-  function playerMeta:ixHasJobFromNPC(npcidentifier)
-    curJobs = self:GetCharacter():GetJobs()
-
-    if curJobs[npcidentifier] then
-      return true
-    else 
-      return false
-    end
-  end
 end

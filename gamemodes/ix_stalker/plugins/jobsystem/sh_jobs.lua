@@ -1,5 +1,23 @@
 
 do
+  --TestJob
+  local tempJob = {}
+
+  tempJob.name = "Sneed test."
+  tempJob.desc = "Sneed test."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "chatSayTest"
+  tempJob.numberRec = 5
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 80
+
+  ix.jobs.register(tempJob, "TestJob")
+
+  tempJob = nil
+
+
   --item return Job
   local tempJob = {}
 
