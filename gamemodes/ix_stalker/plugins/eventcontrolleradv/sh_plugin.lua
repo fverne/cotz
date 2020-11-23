@@ -57,7 +57,7 @@ ix.chat.Register("eventpda", {
 
 ix.chat.Register("eventpdainternal", {
 	CanSay = function(self, speaker, text)
-		local pda = speaker:GetCharacter():GetData("pdaequipped", false)
+	speaker:EmitSound( "stalkersound/pda_alarm.wav", 55, 100, 1, CHAN_AUTO ) 
 
 		return true
 		/*if pda then
@@ -73,7 +73,6 @@ ix.chat.Register("eventpdainternal", {
 	end,
 	prefix = {},
 	CanHear = function(self, speaker, listener)
-		local pda = listener:GetCharacter():GetData("pdaequipped", false)
 
 		return true
 		/*if pda then
