@@ -1,5 +1,4 @@
 local Texture2 = Material("cotz/panels/hp1.png", "noclamp smooth") 
-local Texture7 = Material("stalker/ui/hud_hunger.png", "noclamp smooth") 
 local gun = Material("vgui/hud/gun.png", "noclamp smooth")
 local gun2 = Material("vgui/hud/gun2.png", "noclamp smooth") 
 local gun3 = Material("vgui/hud/gun3.png", "noclamp smooth") 
@@ -98,9 +97,9 @@ local color = {}
 color["$pp_colour_addr"] = 0
 color["$pp_colour_addg"] = 0
 color["$pp_colour_addb"] = 0
-color["$pp_colour_brightness"] = -0.01
-color["$pp_colour_contrast"] = 0.90
-color["$pp_colour_colour"] = 0.75
+color["$pp_colour_brightness"] = 0
+color["$pp_colour_contrast"] = 1
+color["$pp_colour_colour"] = 1
 color["$pp_colour_mulr"] = 0
 color["$pp_colour_mulg"] = 0
 color["$pp_colour_mulb"] = 0
@@ -210,21 +209,6 @@ function PLUGIN:HUDPaint()
 	surface.SetDrawColor(Color(255, 120, 120, 255))
 	surface.DrawTexturedRectUV(ScrW()*0.05, ScrH()*0.905, math.Clamp(LocalPlayer():Health()/LocalPlayer():GetMaxHealth(), 0, 1)*ScrW()*0.15, ScrH()*0.008, 0, 0, math.Clamp(LocalPlayer():Health()/LocalPlayer():GetMaxHealth(), 0, 1), 1)
 	
-/*
-	surface.SetMaterial(Texture7)
-
-	if LocalPlayer():getHungerPercent()*100 <= 25 then
-		surface.SetDrawColor(Color(0, 0, 0, 0))
-	elseif LocalPlayer():getHungerPercent()*100 > 25 and LocalPlayer():getHungerPercent()*100 <= 50 then
-		surface.SetDrawColor(Color(116, 195, 101, 255))
-	elseif LocalPlayer():getHungerPercent()*100 > 50 and LocalPlayer():getHungerPercent()*100 <= 90 then
-		surface.SetDrawColor(Color(255, 255, 102, 255))
-	elseif LocalPlayer():getHungerPercent()*100 > 90 and LocalPlayer():getHungerPercent()*100 <= 100 then
-		surface.SetDrawColor(Color(255, 36, 0, 255))
-	end
-
-	surface.DrawTexturedRect(ScrW()-260, ScrH()-149, 32, 32, Color(0, 255, 0, 255))
-*/
 	surface.SetMaterial(gun)
 	if IsValid( wep ) then
 		if string.sub(wep:GetClass(),1,3) == "cw_" then
