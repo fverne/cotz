@@ -54,11 +54,12 @@ ix.weapontables.ammosubtypes["41"] = {uID = "am_410buck"}
 ix.armortables = {}
 ix.armortables.attachments = {} -- Artifacts, kevlar plates, mutant hides etc.
 
-ix.armortables.attachments["kevlarplate"] = { 
-	name = "Kevlar Plate",
-	br = 0.10, 
-	ar = -0.05,
-	weight = 1.250,
+ix.armortables.attachments["steelplate_1"] = { 
+	name = "Well Worn Steel Plate",
+	br = 0.05, 
+	ar = -0.10,
+	weight = 0.950,
+	uID = "attachment_steelplate_1",
 }
 
 ix.armortables.upgrades = {} -- Armor upgrades

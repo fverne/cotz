@@ -25,6 +25,8 @@ ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 
 ITEM.weight = 0
 
+ITEM.miscslots = 1
+
 --[[
 -- This will change a player's skin after changing the model. Keep in mind it starts at 0.
 ITEM.newSkin = 1
@@ -242,6 +244,34 @@ if (CLIENT) then
 				rrighttext:SetTextColor(Color(0, 135, 255))
 			end
 			rrighttext:SetFont("ixSmallFont")
+
+			if((self.miscslots or 0) > 0) then
+				local attachmenttitle = tooltip:AddRow("attachments")
+				attachmenttitle:SetText("\nAttachments: ")
+				attachmenttitle:SizeToContents()
+
+				local lastrow = attachmenttitle
+
+				local attachmentdata = self:GetData("attachments", {})
+				for i = 1, (self.miscslots or 0) do
+					local attachmenttmp = tooltip:AddRowAfter("attachments", "attachment"..i)
+					local attachmentstr = "  ⬜ None"
+					attachmenttmp:SetTextColor(Color(120,120,120))
+					if(attachmentdata[i]) then
+						attachmentstr = "  ⬛ "
+						if (!ix.armortables.attachments[attachmentdata[i]]) then continue end
+						attachmentstr = attachmentstr..ix.armortables.attachments[attachmentdata[i]].name
+						attachmenttmp:SetTextColor(Color(255,255,255))
+					end
+
+					attachmenttmp:SetText(attachmentstr)
+					attachmenttmp:SetFont("ixSmallFont")
+					attachmenttmp:SizeToContents()
+
+					lastrow = attachmenttmp
+				end
+
+			end
 			
 			local skintitle = tooltip:AddRow("skintitle")
 			skintitle:SetText("\nCurrent skin: "..self:GetData("setSkin", self.newSkin))
@@ -552,6 +582,50 @@ ITEM.functions.Equip = {
 	end
 }
 
+ITEM.functions.detach = {
+	name = "Detach",
+	icon = "icon16/stalker/detach.png",
+	isMulti = true,
+	multiOptions = function(item, client)
+		local targets = {}
+		local curattach = item:GetData("attachments") or {}
+
+		for k = 1, #curattach do
+			table.insert(targets, {
+				name = ix.armortables.attachments[curattach[k]].name,
+				data = {curattach[k]},
+			})
+		end
+
+		return targets
+		end,
+	OnCanRun = function(item)
+		return (!IsValid(item.entity) and item.canAttach and (#(item:GetData("attachments",{})) > 0))
+	end,
+	OnRun = function(item, data)
+		if data[1] then
+
+			item.player:GetCharacter():GetInventory():Add(ix.armortables.attachments[data[1]].uID)
+
+			local curattach = item:GetData("attachments") or {}
+			local iterator = 0
+			for i = 1, #curattach do
+				iterator = iterator+1
+				if curattach[i] == data[1] then
+					break
+				end
+			end
+			table.remove(curattach,iterator)
+
+			item:SetData("attachments", curattach)
+
+		else
+			item.player:Notify("No attachment selected.")
+		end
+		return false
+	end,
+}
+
 function ITEM:OnLoadout()
 	if (self:GetData("equip")) then
 		local client = self.player
@@ -609,9 +683,9 @@ function ITEM:getBR()
 	local upgrades = self:GetData("upgrades", {})
 	
 	for k,v in pairs(upgrades) do
-		if (!ix.armortables.upgrades[k]) then continue end
-		if ix.armortables.upgrades[k].br then
-			res = res - ix.armortables.upgrades[k].br
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].br then
+			res = res - ix.armortables.upgrades[v].br
 		end
 	end
 	
@@ -619,9 +693,9 @@ function ITEM:getBR()
 	local attachments = self:GetData("attachments", {})
 	
 	for k,v in pairs(attachments) do
-		if (!ix.armortables.attachments[k]) then continue end
-		if ix.armortables.attachments[k].br then
-			res = res * (1 - ix.armortables.attachments[k].br)
+		if (!ix.armortables.attachments[v]) then continue end
+		if ix.armortables.attachments[v].br then
+			res = res * (1 - ix.armortables.attachments[v].br)
 		end
 	end
 
@@ -633,9 +707,9 @@ function ITEM:getFBR()
 	local upgrades = self:GetData("upgrades", {})
 	
 	for k,v in pairs(upgrades) do
-		if (!ix.armortables.upgrades[k]) then continue end
-		if ix.armortables.upgrades[k].fbr then
-			res = res + ix.armortables.upgrades[k].fbr
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].fbr then
+			res = res + ix.armortables.upgrades[v].fbr
 		end
 	end
 	
@@ -647,9 +721,9 @@ function ITEM:getAR()
 	local upgrades = self:GetData("upgrades", {})
 	
 	for k,v in pairs(upgrades) do
-		if (!ix.armortables.upgrades[k]) then continue end
-		if ix.armortables.upgrades[k].ar then
-			res = res - ix.armortables.upgrades[k].ar
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].ar then
+			res = res - ix.armortables.upgrades[v].ar
 		end
 	end
 	
@@ -657,9 +731,9 @@ function ITEM:getAR()
 	local attachments = self:GetData("attachments", {})
 	
 	for k,v in pairs(attachments) do
-		if (!ix.armortables.attachments[k]) then continue end
-		if ix.armortables.attachments[k].ar then
-			res = res * (1 - ix.armortables.attachments[k].ar)
+		if (!ix.armortables.attachments[v]) then continue end
+		if ix.armortables.attachments[v].ar then
+			res = res * (1 - ix.armortables.attachments[v].ar)
 		end
 	end
 
@@ -671,9 +745,9 @@ function ITEM:getFAR()
 	local upgrades = self:GetData("upgrades", {})
 	
 	for k,v in pairs(upgrades) do
-		if (!ix.armortables.upgrades[k]) then continue end
-		if ix.armortables.upgrades[k].far then
-			res = res + ix.armortables.upgrades[k].far
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].far then
+			res = res + ix.armortables.upgrades[v].far
 		end
 	end
 	
@@ -686,9 +760,9 @@ function ITEM:GetWeight()
   local upgrades = self:GetData("upgrades", {})
 	
   for k,v in pairs(upgrades) do
-  	if (!ix.armortables.upgrades[k]) then continue end
-    if ix.armortables.upgrades[k].weight then
-		  retval = retval + ix.armortables.upgrades[k].weight
+  	if (!ix.armortables.upgrades[v]) then continue end
+    if ix.armortables.upgrades[v].weight then
+		  retval = retval + ix.armortables.upgrades[v].weight
     end
   end
 	
@@ -696,9 +770,9 @@ function ITEM:GetWeight()
 	local attachments = self:GetData("attachments", {})
 	
 	for k,v in pairs(attachments) do
-		if (!ix.armortables.attachments[k]) then continue end
-		if ix.armortables.attachments[k].weight then
-			retval = retval + ix.armortables.attachments[k].weight
+		if (!ix.armortables.attachments[v]) then continue end
+		if ix.armortables.attachments[v].weight then
+			retval = retval + ix.armortables.attachments[v].weight
 		end
 	end
 

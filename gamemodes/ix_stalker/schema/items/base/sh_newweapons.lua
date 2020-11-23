@@ -190,9 +190,9 @@ ITEM:Hook("drop", function(item)
 			weapon.ixItem = nil
 
 			if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-				self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
+				item:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
 			else
-				self:SetData("ammoType", nil)
+				item:SetData("ammoType", nil)
 			end
 				
 			item:SetData("ammo", weapon:Clip1())
