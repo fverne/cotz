@@ -124,6 +124,24 @@ ix.npctemplates.templates["Stalkertestguard2"] = {
 	},
 }
 
+ix.npctemplates.templates["TaskNPCTest"] = {
+	name 		= "Sneed",
+	description = "Feeds and seeds.",
+	model 		= "models/legends/kostoprav.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 1.0,
+	dialogueid 	= "tasknpctest",
+	soundgroup 	= "nosound",
+	animgroup 	= 1,
+	idleanim = "sidit3",
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
+		["22lr"] 		= { 10, 1, SELLONLY, 2, 0.10, 1 },
+	},
+}
+
 ix.npctemplates.soundtemplates["GenericHello"] = {
 	"npc/beta/stalker_talk_1.ogg",
 	"npc/beta/stalker_talk_2.ogg",

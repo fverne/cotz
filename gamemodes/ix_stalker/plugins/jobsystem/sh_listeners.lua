@@ -64,3 +64,9 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
     end
   end
 end
+
+function PLUGIN:PlayerSay(sender, text, teamchat)
+  if(string.find(text, "sneed")) then
+    hook.Run("ix_JobTrigger", sender, "chatSayTest")
+  end
+end
