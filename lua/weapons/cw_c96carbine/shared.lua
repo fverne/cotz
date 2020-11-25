@@ -142,22 +142,25 @@ SWEP.Chamberable			= true
 
 SWEP.Primary.Ammo			= "7.62x25MM"
 
+SWEP.WearDamage = 0.075
+SWEP.WearEffect = 0.25
+
 SWEP.FireDelay = 60/1100
 SWEP.FireDelayAuto = 60/1100
 SWEP.FireDelaySemi = 60/750
 SWEP.FireSound = "DOIC96_FIRE"
 SWEP.FireSoundSuppressed = "TT_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.2
+SWEP.Recoil = 1.3
 SWEP.FOVPerShot = .15 -- = .5
 
-SWEP.HipSpread = 0.055
-SWEP.AimSpread = 0.0085
-SWEP.VelocitySensitivity = .45
-SWEP.MaxSpreadInc = 0.05
-SWEP.SpreadPerShot = 0.005
-SWEP.SpreadCooldown = 0.2
+SWEP.HipSpread = 0.1
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 8
+SWEP.MaxSpreadInc = 0.5
+SWEP.SpreadPerShot = 0.007
+SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 44
+SWEP.Damage = 39
 SWEP.DeployTime = .5
 SWEP.HolsterTime = .5
 

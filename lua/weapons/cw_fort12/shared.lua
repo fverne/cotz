@@ -117,14 +117,14 @@ SWEP.Primary.Ammo			= "9x18MM"
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_fort12_FIRE"
 SWEP.FireSoundSuppressed = "CW_DEAGLE_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.6
+SWEP.Recoil = 1.4
 
 SWEP.WearDamage = 0.125
 SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 5
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4

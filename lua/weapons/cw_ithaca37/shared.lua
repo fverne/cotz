@@ -136,18 +136,21 @@ SWEP.Primary.Ammo			= "12 Gauge"
 SWEP.FireDelay = 0.9
 SWEP.FireSound = "DOIM37_FIRE"
 SWEP.FireSoundSuppressed = "DOIM37_FIRE"
-SWEP.Recoil = 2.4
+SWEP.Recoil = 4.2
 SWEP.FOVPerShot = 0 -- = 1
 
+SWEP.WearDamage = 0.20
+SWEP.WearEffect = 0.1
+
 SWEP.HipSpread = 0.06
-SWEP.AimSpread = 0.045
-SWEP.VelocitySensitivity = .8
-SWEP.MaxSpreadInc = 0.04
-SWEP.ClumpSpread = 0.018
-SWEP.SpreadPerShot = 0.02
-SWEP.SpreadCooldown = 0.85
+SWEP.AimSpread = 0.05
+SWEP.VelocitySensitivity = 4
+SWEP.MaxSpreadInc = 0.35
+SWEP.ClumpSpread = 0.02
+SWEP.SpreadPerShot = 0.2
+SWEP.SpreadCooldown = 1.2
 SWEP.Shots = 9
-SWEP.Damage = 12
+SWEP.Damage = 21
 SWEP.DeployTime = .475
 SWEP.HolsterTime = .6
 

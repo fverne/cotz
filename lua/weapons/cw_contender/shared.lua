@@ -129,16 +129,19 @@ SWEP.Chamberable = false
 SWEP.FireDelay = 0.1
 SWEP.FireSound = "ContenderLB.Shoot"
 SWEP.FireSoundSuppressed = "ContenderSD.Shoot"
-SWEP.Recoil = 2.6
+SWEP.Recoil = 3.5
 
-SWEP.HipSpread = 0.045
-SWEP.AimSpread = 0
-SWEP.VelocitySensitivity = 1.8
-SWEP.MaxSpreadInc = 0.04
+SWEP.WearDamage = 0.05
+SWEP.WearEffect = 0.001
+
+SWEP.HipSpread = 0.075
+SWEP.AimSpread = 0.0125
+SWEP.VelocitySensitivity = 12
+SWEP.MaxSpreadInc = 0.5
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.13
+SWEP.SpreadCooldown = 0.5
 SWEP.Shots = 1
-SWEP.Damage = 45
+SWEP.Damage = 58
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 1
