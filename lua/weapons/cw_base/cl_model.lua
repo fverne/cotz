@@ -299,7 +299,7 @@ function SWEP:offsetBones()
 					end
 				end
 			else
-				if foregrip then
+				if foregrip or self.ForegripOverride then
 					targetTbl = self.ForeGripHoldPos
 				elseif m203 then
 					targetTbl = self.M203HoldPos

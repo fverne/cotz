@@ -137,22 +137,25 @@ SWEP.Chamberable			= false
 
 SWEP.Primary.Ammo			= ".45 ACP"
 
-SWEP.FireDelay = 350/400
+SWEP.FireDelay = 0.8
 SWEP.FireSound = "DOIM1917_FIRE"
 SWEP.FireSoundSuppressed = "CW_M1911_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.3
+SWEP.Recoil = 2.9
 SWEP.FOVPerShot = 0.25 -- = .5
 
-SWEP.HipSpread = 0.07
-SWEP.AimSpread = 0.007
-SWEP.VelocitySensitivity = .35
-SWEP.MaxSpreadInc = 0.06
+SWEP.WearDamage = 0.095
+SWEP.WearEffect = 0.01
+
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 5
+SWEP.MaxSpreadInc = 0.4
 SWEP.ClumpSpread_Orig = nil
 SWEP.ClumpSpread = nil
 SWEP.SpreadPerShot = 0.015
 SWEP.SpreadCooldown = 0.58
 SWEP.Shots = 1
-SWEP.Damage = 48
+SWEP.Damage = 56
 SWEP.DeployTime = .375
 SWEP.HolsterTime = .35
 

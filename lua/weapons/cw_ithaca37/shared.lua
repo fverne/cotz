@@ -143,7 +143,7 @@ SWEP.WearDamage = 0.20
 SWEP.WearEffect = 0.1
 
 SWEP.HipSpread = 0.06
-SWEP.AimSpread = 0.05
+SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.35
 SWEP.ClumpSpread = 0.02

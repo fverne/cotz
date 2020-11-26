@@ -64,7 +64,7 @@ if CLIENT then
 		["md_cmore"] = { type = "Model", model = "models/attachments/cmore.mdl", bone = "gun", rel = "", pos = Vector(0, -1.4, 2.6), angle = Angle(0, 180, 0), size = Vector(0.649, 0.649, 0.649), color = Color(255, 255, 255, 0)},
 	}
 	
-	SWEP.BoneTypeMod = {
+	SWEP.ForegripOverridePos = {{
 			["Bip01 R Hand"] = {pos = Vector(0, 0, 0), angle = Angle(0.263, 23.951, -31.754) },
 			["Bip01 R Finger2"] = {pos = Vector(0, 0, 0), angle = Angle(-0.894, 32.728, 3.026) },
 			["Bip01 R Finger21"] = {pos = Vector(0, 0, 0), angle = Angle(0, 12.1, 0) },
@@ -79,13 +79,16 @@ if CLIENT then
 			["Bip01 R Finger0"] = {pos = Vector(0, 0, 0), angle = Angle(-15.782, -6.495, 33.964) },
 			["Bip01 R Finger32"] = {pos = Vector(0, 0, 0), angle = Angle(0, 54.675, -4.284) },
 			["Bip01 R Finger42"] = {pos = Vector(0, 0, 0), angle = Angle(0, 67.799, 0) }
-	}
+	}}
 	
 
 	SWEP.LaserPosAdjust = {x = 1, y = 0, z = 0}
 	SWEP.LaserAngAdjust = {p = 2, y = 180, r = 0}
 	SWEP.SightWithRail = true
 	SWEP.CustomizationMenuScale = 0.012
+
+	SWEP.ForegripOverride = true
+	SWEP.ForegripParent = 1
 end
 
 SWEP.BarrelBGs = {main = 2, sd = 1, k = 2, regular = 0}
@@ -93,6 +96,7 @@ SWEP.StockBGs = {main = 1, regular = 0, retractable = 1, none = 2}
 SWEP.RailBGs = {main = 3, on = 1, off = 0}
 SWEP.MagBGs = {main = 4, round15 = 0, round30 = 1}
 SWEP.LuaViewmodelRecoil = true
+
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {700, -400}, atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_reflex", "md_cmore"}},
 [2] = {header = "Barrel", offset = {200, -400}, atts = {"md_tundra9mm"}},
@@ -146,19 +150,19 @@ SWEP.Primary.Ammo			= "9x19MM"
 SWEP.FireDelay = 0.06666
 SWEP.FireSound = "CW_MP5_FIRE"
 SWEP.FireSoundSuppressed = "CW_MP5_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.9
+SWEP.Recoil = 2.2
 
 SWEP.WearDamage = 0.1
 SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.01
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 6
+SWEP.MaxSpreadInc = 0.55
+SWEP.SpreadPerShot = 0.016
+SWEP.SpreadCooldown = 0.7
 SWEP.Shots = 1
-SWEP.Damage = 44
+SWEP.Damage = 57
 SWEP.DeployTime = 0.8
 
 SWEP.ReloadSpeed = 1.3

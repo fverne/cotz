@@ -131,19 +131,19 @@ SWEP.Primary.Ammo			= "9x19MM"
 SWEP.FireDelay = 0.075
 SWEP.FireSound = "CW_MP5_FIRE"
 SWEP.FireSoundSuppressed = "CW_MP5_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.2
+SWEP.Recoil = 1.9
 
 SWEP.WearDamage = 0.1
 SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 4
+SWEP.MaxSpreadInc = 0.55
+SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 45
+SWEP.Damage = 57
 SWEP.DeployTime = 0.8
 
 SWEP.ReloadSpeed = 1.3

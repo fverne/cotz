@@ -145,26 +145,29 @@ SWEP.Chamberable			= false
 
 SWEP.Primary.Ammo			= "9x19MM"
 
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.175
+
 SWEP.FireDelay = 60/535
 SWEP.FireSound = "DOIMP40_FIRE"
 SWEP.FireSoundSuppressed = "DOIMP40_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.2
+SWEP.Recoil = 2.9
 SWEP.FOVPerShot = 0 -- = .6
 
-SWEP.HipSpread = 0.045
-SWEP.AimSpread = 0.01
-SWEP.VelocitySensitivity = .35
-SWEP.MaxSpreadInc = 0.042
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.15
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 4
+SWEP.MaxSpreadInc = 0.55
+SWEP.SpreadPerShot = 0.011
+SWEP.SpreadCooldown = 0.6
 SWEP.Shots = 1
-SWEP.Damage = 33
+SWEP.Damage = 55
 SWEP.DeployTime = .5
 SWEP.HolsterTime = .5
 
 SWEP.ADSFireAnim = true
 
-SWEP.RecoilToSpread = .8
+SWEP.RecoilToSpread = .2
 
 SWEP.ReloadSpeed = 1.1
 SWEP.ReloadTime = 2.225

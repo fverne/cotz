@@ -97,7 +97,7 @@ SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "crossbow"
-SWEP.FireModes = {"auto","3burst","semi"}
+SWEP.FireModes = {"auto","semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
@@ -129,7 +129,7 @@ SWEP.RVBRollMod = .5
 SWEP.Primary.ClipSize		= 20
 SWEP.Primary.DefaultClip	= 10
 SWEP.Primary.Automatic		= true
-SWEP.Chamberable			= false
+SWEP.Chamberable			= true
 
 SWEP.Primary.Ammo			= "9x19MM"
 
@@ -138,17 +138,20 @@ SWEP.FireDelayAuto = 60/700
 SWEP.FireDelaySemi = 60/780
 SWEP.FireSound = "DOIMP40_FIRE"
 SWEP.FireSoundSuppressed = "DOIMP40_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.03
+SWEP.Recoil = 2.75
 SWEP.FOVPerShot = 0.05 -- = .6
 
-SWEP.HipSpread = 0.042
-SWEP.AimSpread = 0.0135
-SWEP.VelocitySensitivity = .35
-SWEP.MaxSpreadInc = 0.055
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.17
+SWEP.WearDamage = 0.075
+SWEP.WearEffect = 0.2
+
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 4
+SWEP.MaxSpreadInc = 0.55
+SWEP.SpreadPerShot = 0.012
+SWEP.SpreadCooldown = 0.7
 SWEP.Shots = 1
-SWEP.Damage = 30
+SWEP.Damage = 55
 SWEP.DeployTime = .4
 SWEP.HolsterTime = .5
 SWEP.ADSFireAnim = true

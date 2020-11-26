@@ -125,7 +125,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "9x19MM"
 
-SWEP.FireDelay = 0.15
+SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_P99_FIRE"
 SWEP.FireSoundSuppressed = "CW_P99_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.67

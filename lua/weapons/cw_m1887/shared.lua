@@ -113,17 +113,17 @@ SWEP.HealthEffect = 0.05
 
 SWEP.FireDelay = 0.7
 SWEP.FireSound = "CW_M1887_FIRE"
-SWEP.Recoil = 3
+SWEP.Recoil = 5
 
-SWEP.HipSpread = 0.15
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 0.5
-SWEP.MaxSpreadInc = 0.4
-SWEP.ClumpSpread = 0.04
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.HipSpread = 0.08
+SWEP.AimSpread = 0.005
+SWEP.VelocitySensitivity = 7
+SWEP.MaxSpreadInc = 0.35
+SWEP.ClumpSpread = 0.03
+SWEP.SpreadPerShot = 0.25
+SWEP.SpreadCooldown = 1.1
 SWEP.Shots = 9
-SWEP.Damage = 15
+SWEP.Damage = 20
 SWEP.DeployTime = 1
 
 SWEP.SnapToIdlePostReload = true

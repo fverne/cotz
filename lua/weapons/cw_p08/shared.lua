@@ -119,19 +119,22 @@ SWEP.Primary.Ammo			= "9x19MM"
 SWEP.FireDelay = 60/500
 SWEP.FireSound = "DOIP08_FIRE"
 SWEP.FireSoundSuppressed = "CW_P99_FIRE_SUPPRESSED"
-SWEP.Recoil = .93
+SWEP.Recoil = 1.6
 SWEP.FOVPerShot = 0 -- = .57
 
 SWEP.HipSpread = 0.042
 SWEP.AimSpread = 0.006
-SWEP.VelocitySensitivity = .3
+SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.055
 SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 20
+SWEP.Damage = 44
 SWEP.DeployTime = .2
 SWEP.HolsterTime = .30
+
+SWEP.WearDamage = 0.15
+SWEP.WearEffect = 0.15
 
 SWEP.ADSFireAnim = true
 SWEP.ShootWhileProne = true

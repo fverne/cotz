@@ -124,17 +124,17 @@ SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.7
 SWEP.FireSound = "CW_M3SUPER90_FIRE"
-SWEP.Recoil = 3
+SWEP.Recoil = 6.6
 
-SWEP.HipSpread = 0.1
+SWEP.HipSpread = 0.06
 SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 0.5
-SWEP.MaxSpreadInc = 0.4
-SWEP.ClumpSpread = 0.060
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.VelocitySensitivity = 7
+SWEP.MaxSpreadInc = 0.35
+SWEP.ClumpSpread = 0.045
+SWEP.SpreadPerShot = 0.22
+SWEP.SpreadCooldown = 0.9
 SWEP.Shots = 9
-SWEP.Damage = 14
+SWEP.Damage = 18
 SWEP.DeployTime = 1
 
 SWEP.ReloadStartTime = 0.3

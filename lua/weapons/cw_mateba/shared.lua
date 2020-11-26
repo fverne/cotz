@@ -156,9 +156,9 @@ SWEP.FireSound = "CWC_MATEBA_FIRE"
 SWEP.FireSoundSuppressed = "CWC_MATEBA_FIRE_SUP"
 SWEP.Recoil = 4
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
