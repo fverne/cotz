@@ -125,9 +125,9 @@ SWEP.FOVPerShot = 0 -- = .57
 SWEP.HipSpread = 0.042
 SWEP.AimSpread = 0.006
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.055
-SWEP.SpreadPerShot = 0.01
-SWEP.SpreadCooldown = 0.2
+SWEP.MaxSpreadInc = 0.4
+SWEP.SpreadPerShot = 0.007
+SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
 SWEP.Damage = 44
 SWEP.DeployTime = .2
