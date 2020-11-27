@@ -1,7 +1,7 @@
 if(SERVER) then
 	util.AddNetworkString("STALKERNPCControllerStopPsySound")
 end
-local TEMP_VOICEDIST = 350
+local TEMP_VOICEDIST = 85
 
 game.AddParticles("particles/stalker_anomaly.pcf")
 PrecacheParticleSystem("electra")
