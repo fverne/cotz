@@ -42,7 +42,7 @@ ix.chat.Register("eventpda", {
 		return true
 
 		/*if pda then
-			listener:EmitSound( "stalkersound/pda_alarm.wav", 55, 100, 1, CHAN_AUTO ) 
+			listener:EmitSound( "stalkersound/da-2_beep1.ogg", 55, 100, 1, CHAN_AUTO ) 
 			return true
 		else
 			return false
@@ -57,7 +57,7 @@ ix.chat.Register("eventpdainternal", {
 		return true
 
 		/*if pda then
-			speaker:EmitSound( "stalkersound/pda_alarm.wav", 55, 100, 1, CHAN_AUTO ) 
+			speaker:EmitSound( "stalkersound/da-2_beep1.ogg", 55, 100, 1, CHAN_AUTO ) 
 			return true
 		else 
 			return false
