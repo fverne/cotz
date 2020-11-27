@@ -61,7 +61,7 @@ ITEM.functions.use = {
   end,
   OnRun = function(item, data)
     if(!data[1]) then return false end
-    item:CookMeat(self, {data[1]})
+    item:CookMeat(self, data[1])
     return false
   end,
 }
