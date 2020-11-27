@@ -43,7 +43,7 @@ function PLUGIN:CanTransferItem(item, old, inv) -- When a player attempts to tak
 		local character = ix.char.loaded[inv.owner]
 
 		if (!character:CanCarry(item)) then
-			character:GetPlayer():NotifyLocalized("You are extremely overweight and cannot take that.")
+			character:GetPlayer():NotifyLocalized("You are extremely overencumbered and cannot take that.")
 			return false
 		end
 	end
@@ -52,7 +52,7 @@ function PLUGIN:CanTransferItem(item, old, inv) -- When a player attempts to tak
 		local character = ix.char.loaded[old.owner]
 
 		if (!character:CanRemoveCarry(item)) then
-			character:GetPlayer():NotifyLocalized("You would be too overweight without that.")
+			character:GetPlayer():NotifyLocalized("You would be too overencumbered without that.")
 			return false
 		end
 	end
