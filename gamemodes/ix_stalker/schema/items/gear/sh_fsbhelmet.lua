@@ -16,7 +16,7 @@ ITEM.ballisticlevels = {"lll-a"}
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.pacData = {
-[17] = {
+[1] = {
 	["children"] = {
 		[1] = {
 			["children"] = {

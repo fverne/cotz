@@ -16,12 +16,10 @@ ITEM.ballisticlevels = {"0","0","0","0","0"}
 ITEM.img = Material("vgui/hud/trenchcoat.png")
 
 
-ITEM.newSkin = 0
 ITEM.bodyGroups = {
-	["vests"] = 0,
+	["vest"] = 0,
 	["torso"] = 2,
 }
-
 
 
 ITEM.skincustom[1] = {

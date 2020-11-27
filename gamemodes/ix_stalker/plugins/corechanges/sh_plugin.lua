@@ -94,7 +94,7 @@ if (CLIENT) then
 		ix.option.stored["disableAnimations"].hidden = function() return true end
 		ix.option.stored["cheapBlur"].hidden = function() return true end
 		ix.option.stored["language"].hidden = function() return true end
-		ix.option.stored["legsInVehicle"].hidden = function() return true end
+		--ix.option.stored["legsInVehicle"].hidden = function() return true end
 	end
 	
 	--removes help menu tabs (as its now an encyclopedia)

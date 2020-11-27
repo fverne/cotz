@@ -66,10 +66,14 @@ local stalker_models = {
 	["models/nasca/stalker/male_ssp_eco.mdl"] = true,
 	["models/nasca/stalker/male_eagle_lone.mdl"] = true,
 	["models/nasca/stalker/male_expedition.mdl"] = true,
+	["models/nasca/stalker/male_gagarin.mdl"]= true,
+	["models/nasca/stalker/male_jupiter_duty.mdl"]= true,
+	["models/nasca/stalker/male_jupiter_eco.mdl"]= true,
 }
 
 for k, v in pairs(stalker_models) do
 	player_manager.AddValidModel("stalker_default", k)
+	ix.anim.SetModelClass(k, "player" )
 	util.PrecacheModel(k)
 end
 

@@ -17,11 +17,9 @@ ITEM.ballisticlevels = {"0","ll-a","ll-a","0","0"}
 ITEM.img = Material("vgui/hud/anorak.png")
 
 
-ITEM.newSkin = 0
 ITEM.bodyGroups = {
 	["vests"] = 1,
 }
-
 
 
 ITEM.skincustom[1] = {

@@ -273,9 +273,11 @@ if (CLIENT) then
 
 			end
 			
-			local skintitle = tooltip:AddRow("skintitle")
-			skintitle:SetText("\nCurrent skin: "..self:GetData("setSkin", self.newSkin))
-			skintitle:SizeToContents()
+			if self:GetData("setSkin", self.newSkin) then
+				local skintitle = tooltip:AddRow("skintitle")
+				skintitle:SetText("\nCurrent skin: "..self:GetData("setSkin", self.newSkin))
+				skintitle:SizeToContents()
+			end
 
 			local duratitle = tooltip:AddRowAfter("skintitle", "duratitle")
 			duratitle:SetText("Durability: " .. math.floor(self:GetData("durability", 100)) .. "%")
