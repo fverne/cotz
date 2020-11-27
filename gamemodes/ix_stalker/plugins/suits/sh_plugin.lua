@@ -68,16 +68,16 @@ end
 local playerMeta = FindMetaTable("Player")
 
 function playerMeta:getPercentageBulletRes()
-	local res = 0
+	local res = 1
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems()
 
 	for k, v in pairs(items) do
 		if (v.isBodyArmor and v:GetData("equip")) then
 			if v:GetData("durability",100) < 80 then
-				res = res + v:getBR(v) * (v:GetData("durability",0)/80)
+				res = v:getBR(v) * (v:GetData("durability",0)/80)
 			else
-				res = res + v:getBR(v)
+				res = v:getBR(v)
 			end
 		end
 
@@ -116,16 +116,16 @@ function playerMeta:getFlatBulletRes()
 end
 
 function playerMeta:getPercentageAnomalyRes()
-	local res = 0
+	local res = 1
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems()
 
 	for k, v in pairs(items) do
 		if (v.isBodyArmor and v:GetData("equip")) then
 			if v:GetData("durability",100) < 80 then
-				res = res + v:getAR(v) * (v:GetData("durability",0)/80)
+				res = v:getAR(v) * (v:GetData("durability",0)/80)
 			else
-				res = res + v:getAR(v)
+				res = v:getAR(v)
 			end
 		end
 
