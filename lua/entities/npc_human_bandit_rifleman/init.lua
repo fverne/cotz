@@ -369,7 +369,7 @@ function ENT:KilledDan()
 
     for i=1,128 do
     local bone = ragdoll:GetPhysicsObjectNum( i )
-    if ValidEntity( bone ) then
+    if IsValid( bone ) then
       local bonepos, boneang = self:GetBonePosition( ragdoll:TranslatePhysBoneToBone( i ) )
       bone:SetPos( bonepos )
       bone:SetAngles( boneang )
