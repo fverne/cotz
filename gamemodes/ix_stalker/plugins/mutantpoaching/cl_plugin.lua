@@ -10,7 +10,7 @@ if (CLIENT) then
 			frame:SetDraggable( true )
 			frame:Center()
 			frame:MakePopup()
-			frame:SetSize(ScrW()*0.3, ScrH()*0.4)
+			frame:SetSize(ScrW()*0.2, ScrH()*0.4)
 			frame:SetPos((ScrW()/2)-ScrW()*0.15,(ScrH()/2)-ScrH()*0.2)
 			
 			local sentence = frame:Add("DLabel")
@@ -31,7 +31,7 @@ if (CLIENT) then
 			local btnmeat = frame:Add("ixStalkerButton")
 			btnmeat:Dock(TOP)
 			btnmeat:SetText("Mostly Meat")
-			btnmeat:DockMargin(btnmeat:GetParent():GetWide()*0.3, 20, btnmeat:GetParent():GetWide()*0.3, 0)
+			btnmeat:DockMargin(btnmeat:GetParent():GetWide()*0.2, 20, btnmeat:GetParent():GetWide()*0.2, 0)
 			btnmeat:SetTall(ScrH()*0.05)
 			btnmeat:SetFont("stalkerregularfont")
 
@@ -46,7 +46,7 @@ if (CLIENT) then
 			local btnmix = frame:Add("ixStalkerButton")
 			btnmix:Dock(TOP)
 			btnmix:SetText("Mix of Parts and Meat")
-			btnmix:DockMargin(btnmix:GetParent():GetWide()*0.3, 20, btnmix:GetParent():GetWide()*0.3, 0)
+			btnmix:DockMargin(btnmix:GetParent():GetWide()*0.2, 20, btnmix:GetParent():GetWide()*0.2, 0)
 			btnmix:SetTall(ScrH()*0.05)
 			btnmix:SetFont("stalkerregularfont")
 
@@ -61,7 +61,7 @@ if (CLIENT) then
 			local btnparts = frame:Add("ixStalkerButton")
 			btnparts:Dock(TOP)
 			btnparts:SetText("Mostly Parts")
-			btnparts:DockMargin(btnparts:GetParent():GetWide()*0.3, 20, btnparts:GetParent():GetWide()*0.3, 0)
+			btnparts:DockMargin(btnparts:GetParent():GetWide()*0.2, 20, btnparts:GetParent():GetWide()*0.2, 0)
 			btnparts:SetTall(ScrH()*0.05)
 			btnparts:SetFont("stalkerregularfont")
 

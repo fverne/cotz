@@ -1,16 +1,17 @@
-ITEM.name = "Meat Knife"
+ITEM.name = "Skinning Knife"
 ITEM.description = "A knife for mutant poaching."
 ITEM.model = "models/weapons/w_knife_ct.mdl"
+
 ITEM.width = 2
 ITEM.height = 1
 ITEM.price = 500
-ITEM.flag = "A"
-ITEM.value = ITEM.price*0.5
-ITEM.meattickets = 6
-ITEM.parttickets = 1
-ITEM.lootbonus = 1
+
+ITEM.meattickets = 0
+ITEM.parttickets = 0
+ITEM.lootbonus = 0
 ITEM.isPoachKnife = true
-ITEM.img = Material("vgui/hud/knife2.png", "noclamp smooth")
+
+ITEM.img = Material("vgui/hud/knife1.png", "noclamp smooth")
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 
 
@@ -28,7 +29,7 @@ if (CLIENT) then
 		surface.DrawTexturedRect(w-23,h-23,19,19)
 	end
 end
-
+	
 ITEM.functions.Equip = { -- sorry, for name order.
 	name = "Equip",
 	tip = "useTip",
