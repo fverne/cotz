@@ -19,12 +19,6 @@ function playerMeta:hasAnomdetector()
 	end
 end
 
-function PLUGIN:PostPlayerLoadout(client)
-	if client:GetData("ixhasanomdetector", false) then
-		client:SetNetVar("ixhasanomdetector", true)
-	end
-end
-
 function PLUGIN:Think()
 	for k,v in pairs(player.GetAll()) do
 		if v.LastBeep == nil then 

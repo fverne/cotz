@@ -1,17 +1,23 @@
 ITEM.name = "Geiger Counter"
+ITEM.description = "A personal geiger counter that measures local radiation levels."
 ITEM.model = "models/lostsignalproject/items/devices/geiger.mdl"
+ITEM.category = "Electronics"
+
 ITEM.width = 1
 ITEM.height = 1
-ITEM.category = "Electronics"
 ITEM.price = 150
-ITEM.isGeiger = true
-ITEM.busflag = {"hardware"}
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
-ITEM.repairCost = ITEM.price/100*1
+ITEM.weight = 0.460
 
-function ITEM:GetDescription()
-	return "This device detects the radiation levels nearby, alarming you if they increase."
-end
+ITEM.isGeiger = true
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 0, 200),
+	ang = Angle(90, 0, -180),
+	fov = 2.1,
+}
+
+ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
@@ -38,31 +44,7 @@ ITEM.functions.Equip = { -- sorry, for name order.
 	icon = "icon16/stalker/equip.png",
 	sound = "stalkersound/inv_dozimetr.ogg",
 	OnRun = function(item)
-		local client = item.player
-		local char = client:GetCharacter()
-		local items = char:GetInventory():GetItems()
-		for _, v in pairs(items) do
-			if (v.id != item.id) then
-				local itemTable = ix.item.instances[v.id]
-
-				if (!itemTable) then
-					client:NotifyLocalized("tellAdmin", "wid!xt")
-
-					return false
-				else
-					if (itemTable.isGeiger == true and itemTable:GetData("equip")) then
-						client:NotifyLocalized("You are already equipping a gieger counter detector.")
-
-						return false
-					end
-				end
-			end
-		end
-
-
-		item:SetData("equip", true)
-		item.player:SetNetVar("ixhasgeiger", true)
-		item.player:SetData("ixhasgeiger", true)
+		item:Equip(item.player)
 
 		return false
 	end,
@@ -79,10 +61,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	tip = "equipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)
-		local client = item.player
-		item:SetData("equip", false)
-		item.player:SetNetVar("ixhasgeiger", false)
-		item.player:SetData("ixhasgeiger", false)
+		item:UnEquip(item.player)
 
 		return false
 	end,
@@ -93,3 +72,45 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 			hook.Run("CanPlayerUnequipItem", client, item) != false and item.invID == client:GetCharacter():GetInventory():GetID()
 	end
 }
+
+function ITEM:Equip(client)
+	local char = client:GetCharacter()
+	local items = char:GetInventory():GetItems()
+	for _, v in pairs(items) do
+		if (v.id != self.id) then
+			local itemTable = ix.item.instances[v.id]
+
+			if (!itemTable) then
+				client:NotifyLocalized("tellAdmin", "wid!xt")
+
+				return false
+			else
+				if (itemTable.isGeiger == true and itemTable:GetData("equip")) then
+					client:NotifyLocalized("You are already equipping a gieger counter detector.")
+
+					return false
+				end
+			end
+		end
+	end
+
+	self:SetData("equip", true)
+	self:OnLoadout()
+end
+
+function ITEM:UnEquip(client)
+	self:SetData("equip", false)
+	self.player:SetNetVar("ixhasgeiger", false)
+	self.player:SetData("ixhasgeiger", false)
+end
+
+ITEM:Hook("drop", function(item)
+	item:UnEquip(item.player)
+end)
+
+function ITEM:OnLoadout()
+	if self:GetData("equip", false) then
+		self.player:SetNetVar("ixhasgeiger", true)
+		self.player:SetData("ixhasgeiger", true)
+	end
+end

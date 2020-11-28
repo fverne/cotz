@@ -1,14 +1,24 @@
 ITEM.name = "Anomaly Detector"
+ITEM.description = "A device that beeps when anomalies are close."
+ITEM.longdesc = "This hacked dosimteter is a prototype made by unknown sources. It seems to have been produced in quite large numbers, albeit it's mysterious appearances in the hands of most stalkers around the zone. Some speculate the emissions have turned these dosimeters into detecting anomalies as well, but it's nowhere near confirmed."
 ITEM.model = "models/lostsignalproject/items/devices/dosimeter.mdl"
+ITEM.category = "Electronics"
+
 ITEM.width = 1
 ITEM.height = 1
-ITEM.category = "Electronics"
 ITEM.price = 5000
-ITEM.description = "A device that beeps when anomalies are close."
+ITEM.weight = 0.500
+
 ITEM.isAnomalydetector = true
-ITEM.busflag = {"hardware2"}
+
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
-ITEM.repairCost = ITEM.price/100*1
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 0, 200),
+	ang = Angle(90, 0, -180),
+	fov = 2.1,
+}
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
@@ -33,32 +43,8 @@ ITEM.functions.Equip = { -- sorry, for name order.
 	name = "Equip",
 	tip = "useTip",
 	icon = "icon16/stalker/equip.png",
-	sound = "stalkersound/inv_dozimetr.ogg",
 	OnRun = function(item)
-		local client = item.player
-		local char = client:GetCharacter()
-		local items = char:GetInventory():GetItems()
-		for _, v in pairs(items) do
-			if (v.id != item.id) then
-				local itemTable = ix.item.instances[v.id]
-
-				if (!itemTable) then
-					client:NotifyLocalized("tellAdmin", "wid!xt")
-
-					return false
-				else
-					if (itemTable.isAnomalydetector and itemTable:GetData("equip")) then
-						client:NotifyLocalized("You are already equipping an anomaly detector.")
-
-						return false
-					end
-				end
-			end
-		end
-
-		item:SetData("equip", true)
-		item.player:SetData("ixhasanomdetector", true)
-		item.player:SetNetVar("ixhasanomdetector", true)
+		item:Equip(item.player)
 
 		return false
 	end,
@@ -75,11 +61,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	tip = "equipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)
-		local client = item.player
-		item:SetData("equip", false)
-		item.player:SetNetVar("ixhasanomdetector", false)
-		item.player:SetData("ixhasanomdetector", false)
-
+		item:UnEquip()
 
 		return false
 	end,
@@ -90,3 +72,46 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 			hook.Run("CanPlayerUnequipItem", client, item) != false and item.invID == client:GetCharacter():GetInventory():GetID()
 	end
 }
+
+function ITEM:Equip(client)
+	local char = client:GetCharacter()
+	local items = char:GetInventory():GetItems()
+	for _, v in pairs(items) do
+		if (v.id != self.id) then
+			local itemTable = ix.item.instances[v.id]
+
+			if (!itemTable) then
+				client:NotifyLocalized("tellAdmin", "wid!xt")
+
+				return false
+			else
+				if (itemTable.isAnomalydetector and itemTable:GetData("equip")) then
+					client:NotifyLocalized("You are already equipping an anomaly detector.")
+
+					return false
+				end
+			end
+		end
+	end
+
+	self:SetData("equip", true)
+	client:EmitSound("stalkersound/inv_dozimetr.ogg", 80)
+	self:OnLoadout()
+end
+
+function ITEM:UnEquip(client)
+	self:SetData("equip", false)
+	self.player:SetNetVar("ixhasanomdetector", false)
+	self.player:SetData("ixhasanomdetector", false)
+end
+
+ITEM:Hook("drop", function(item)
+	item:UnEquip(item.player)
+end)
+
+function ITEM:OnLoadout()
+	if self:GetData("equip", false) then
+		self.player:SetNetVar("ixhasanomdetector", true)
+		self.player:SetData("ixhasanomdetector", true)
+	end
+end
