@@ -66,13 +66,13 @@ function PLUGIN:StashHide(client)
 						--	end
 						--end
 						v:Remove()
-						client:Notify( "You hid a ".. v.name )
 						mt = mt + 1
 					end
 				end
 			end
 		end
 		if mt > 0 then
+			client:Notify( "You hid ".. mt .. " items." )
 			ix.chat.Send(client, "iteminternal", "hides something away.", false)
 		end
 	end)
@@ -92,7 +92,6 @@ function PLUGIN:StashUnhide(client)
 					--local itemdata = v[4]
 					ix.item.Spawn(v[2], v[1] + Vector( 0, 0, mt * 5 ), nil, v[3], v[4])
 					PLUGIN.stashpoints[k] = nil
-					client:Notify( "You uncovered a ".. ix.item.list[v[2]].name )
 					mt = mt + 1
 				end
 			end
@@ -100,6 +99,7 @@ function PLUGIN:StashUnhide(client)
 		if mt == 0 then
 			client:Notify( "You didn't find anything" )
 		else
+			client:Notify( "You found ".. mt .. " items.")
 			ix.chat.Send(client, "iteminternal", "uncovers something.", false)
 		end
 	end)
