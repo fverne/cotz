@@ -206,14 +206,14 @@ SWEP.CustomizationMenuScale = 0.018
 SWEP.ForceBackToHipAfterAimedShot = true
 SWEP.GlobalDelayOnShoot = 1.1
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.2
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
+SWEP.VelocitySensitivity = 9
+SWEP.MaxSpreadInc = 0.9
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadCooldown = 1
 SWEP.Shots = 1
-SWEP.Damage = 120
+SWEP.Damage = 185
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1

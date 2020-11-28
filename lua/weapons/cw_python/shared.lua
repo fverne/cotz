@@ -79,18 +79,18 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".44 Magnum"
 
-SWEP.FireDelay = 0.15
+SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_MR96_FIRE_LONG"
-SWEP.Recoil = 2.9
+SWEP.Recoil = 3.6
 
 SWEP.WearDamage = 0.125
-SWEP.WearEffect = 0.05
+SWEP.WearEffect = 0.001
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 7
 SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
+SWEP.SpreadPerShot = 0.02
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
 SWEP.Damage = 54

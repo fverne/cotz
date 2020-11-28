@@ -185,16 +185,16 @@ SWEP.Primary.Ammo			= "7.62x39MM"
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_SAIGA308_FIRE"
 SWEP.FireSoundSuppressed = "CW_M14_FIRE_SUPPRESSED"
-SWEP.Recoil = 2.4
+SWEP.Recoil = 2.8
 
-SWEP.WearDamage = 0.1
+SWEP.WearDamage = 0.12
 SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.1
+SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 3
+SWEP.VelocitySensitivity = 6
 SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
+SWEP.SpreadPerShot = 0.03
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
 SWEP.Damage = 75

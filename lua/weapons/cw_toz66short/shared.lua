@@ -100,15 +100,15 @@ SWEP.Recoil = 4.7
 SWEP.WearDamage = 0.5
 SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 0.5
+SWEP.HipSpread = 0.06
+SWEP.AimSpread = 0.006
+SWEP.VelocitySensitivity = 6
 SWEP.MaxSpreadInc = 0.4
-SWEP.ClumpSpread = 0.060
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.ClumpSpread = 0.0425
+SWEP.SpreadPerShot = 0.3
+SWEP.SpreadCooldown = 0.5
 SWEP.Shots = 9
-SWEP.Damage = 14
+SWEP.Damage = 21
 SWEP.DeployTime = 1
 SWEP.Chamberable = false
 

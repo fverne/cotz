@@ -133,18 +133,18 @@ SWEP.Primary.DefaultClip	= 5
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".45 ACP"
 
-SWEP.FireDelay = 0.2
+SWEP.FireDelay = 0.08
 SWEP.FireSound = "CWC_JUDGE_FIRE"
-SWEP.Recoil = 4
+SWEP.Recoil = 3.5
 
-SWEP.HipSpread = 0.035
-SWEP.AimSpread = 0.02
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.29
-SWEP.SpreadPerShot = 0.21
-SWEP.SpreadCooldown = 0.1
+SWEP.MaxSpreadInc = 0.4
+SWEP.SpreadPerShot = 0.01
+SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 42
+SWEP.Damage = 72
 SWEP.DeployTime = 0.5
 SWEP.Chamberable = false
 
@@ -155,6 +155,8 @@ SWEP.ReloadHalt = 4
 SWEP.ReloadTime_Empty = 2.7
 SWEP.ReloadHalt_Empty = 4
 
+SWEP.WearDamage = 0.35
+SWEP.WearEffect = 0.04
 
 SWEP.SoundLayer1 = Sound("CWC_JUDGE_CLICK")
 SWEP.SoundLayer2 = Sound("CWC_JUDGE_IN")

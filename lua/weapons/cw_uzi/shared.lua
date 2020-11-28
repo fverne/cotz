@@ -140,7 +140,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.1
+SWEP.WearDamage = 0.02
 SWEP.WearEffect = 0.05
 
 SWEP.ViewModelFOV	= 70
@@ -161,10 +161,10 @@ SWEP.Chamberable = false
 SWEP.FireDelay = 0.1
 SWEP.FireSound = "CW_MAC11_FIRE"
 SWEP.FireSoundSuppressed = "CW_MAC11_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.2
+SWEP.Recoil = 1.4
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 1
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007

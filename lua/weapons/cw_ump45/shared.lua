@@ -150,16 +150,16 @@ SWEP.Primary.Ammo			= ".45 ACP"
 SWEP.FireDelay = 0.1
 SWEP.FireSound = "CW_UMP45_FIRE"
 SWEP.FireSoundSuppressed = "CW_UMP45_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.2
+SWEP.Recoil = 1.8
 
 SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.VelocitySensitivity = 2
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 54
+SWEP.Damage = 71
 SWEP.DeployTime = 0.5
 
 SWEP.ReloadSpeed = 0.9

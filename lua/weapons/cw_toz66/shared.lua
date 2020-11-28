@@ -94,19 +94,19 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.FireDelay = 0.01
+SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_TOZ_FIRE"
 SWEP.Recoil = 3
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 0.5
+SWEP.HipSpread = 0.06
+SWEP.AimSpread = 0.006
+SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
-SWEP.ClumpSpread = 0.015
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.ClumpSpread = 0.0095
+SWEP.SpreadPerShot = 0.3
+SWEP.SpreadCooldown = 0.6
 SWEP.Shots = 9
-SWEP.Damage = 14
+SWEP.Damage = 24
 SWEP.DeployTime = 1
 SWEP.Chamberable = false
 

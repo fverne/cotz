@@ -151,22 +151,25 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.FireDelay = 0.21
+SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_LYNXDB"
-SWEP.Recoil = 2.5
+SWEP.Recoil = 4
 
-SWEP.ClumpSpread = 0.05
+SWEP.ClumpSpread = 0.04
 
-SWEP.HipSpread = 0.050
+SWEP.HipSpread = 0.06
 SWEP.AimSpread = 0.006
-SWEP.VelocitySensitivity = 1.2
-SWEP.MaxSpreadInc = 0.020
-SWEP.SpreadPerShot = 0.08
-SWEP.SpreadCooldown = 0.3
+SWEP.VelocitySensitivity = 5
+SWEP.MaxSpreadInc = 0.35
+SWEP.SpreadPerShot = 0.3
+SWEP.SpreadCooldown = 0.5
 SWEP.Shots = 9
-SWEP.Damage = 12
+SWEP.Damage = 22
 SWEP.DeployTime = 0.4
 SWEP.Chamberable = false
+
+SWEP.WearDamage = 0.4
+SWEP.WearEffect = 0.005
 
 SWEP.ReloadSpeed = 1.2
 SWEP.ReloadTime = 3.5

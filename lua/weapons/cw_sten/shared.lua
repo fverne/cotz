@@ -124,16 +124,16 @@ SWEP.FireSoundSuppressed = "CW_STEN_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.4
 
 SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearEffect = 0.0005
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 43
+SWEP.Damage = 55
 SWEP.DeployTime = 0.8
 
 SWEP.ReloadSpeed = 1.3

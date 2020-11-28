@@ -127,16 +127,19 @@ SWEP.Primary.Ammo			= "9x19MM"
 SWEP.FireDelay = 0.076
 SWEP.FireSound = "Weapon_PP19V"
 SWEP.FireSoundSuppressed = "CW_PP19V_SUPPRESSED"
-SWEP.Recoil = 0.8
+SWEP.Recoil = 1.25
 
-SWEP.HipSpread = 0.040
-SWEP.AimSpread = 0.01
-SWEP.VelocitySensitivity = 1.5
-SWEP.MaxSpreadInc = 0.02
-SWEP.SpreadPerShot = 0.055
+SWEP.WearDamage = 0.008
+SWEP.WearEffect = 0.30
+
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 4
+SWEP.MaxSpreadInc = 0.4
+SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.6
 SWEP.Shots = 1
-SWEP.Damage = 40
+SWEP.Damage = 54
 SWEP.DeployTime = 1.5
 
 SWEP.ReloadSpeed = 1.0
