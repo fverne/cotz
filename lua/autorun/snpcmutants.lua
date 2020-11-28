@@ -2,7 +2,7 @@ if(SERVER) then
 	util.AddNetworkString("STALKERNPCControllerStopPsySound")
 end
 local TEMP_ANGERDIST = 85
-local TEMP_IDLEDIST = 55
+local TEMP_IDLEDIST = 65
 
 game.AddParticles("particles/stalker_anomaly.pcf")
 PrecacheParticleSystem("electra")
@@ -57,6 +57,8 @@ AddNPC("Pseudogiant (Slow)","npc_mutant_pseudogiant_slow")
 AddNPC("Karlik","npc_mutant_karlik")
 
 AddNPC("Hellhound","npc_mutant_hellhound")
+
+AddNPC("Sprig", "npc_mutant_sprig")
 
 local function AddSoundInterval(NAME,IMIN,IMAX,CHAN,VOL,LEV,PITMIN,PITMAX,PATH)
 	for S=IMIN, IMAX do
@@ -532,6 +534,23 @@ AddSound("Stalker.Rodent.Chase4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker
 AddSound("Stalker.Rodent.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_death_0.wav")
 AddSound("Stalker.Rodent.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_death_1.wav")
 AddSound("Stalker.Rodent.Die3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_death_2.wav")
+
+-- Sprig sounds
+----IDLE
+AddSound("Stalker.Sprig.Idle1",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/zanoza/house_wind1.wav")
+AddSound("Stalker.Sprig.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/zanoza/swamp_wind_short_1.wav")
+AddSound("Stalker.Sprig.Idle3",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/zanoza/swamp_wind_short_2.wav")
+----HIT
+AddSound("Stalker.Sprig.Melee1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zanoza/wood_big_hard_1.wav")
+AddSound("Stalker.Sprig.Melee2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zanoza/wood_big_hard_2.wav")
+AddSound("Stalker.Sprig.Melee3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zanoza/wood_big_hard_3.wav")
+----Chase
+AddSound("Stalker.Sprig.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zanoza/zanoza_sound_1.wav")
+AddSound("Stalker.Sprig.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zanoza/zanoza_sound_2.wav")
+AddSound("Stalker.Sprig.Chase3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zanoza/zanoza_eat_0.wav")
+AddSound("Stalker.Sprig.Chase4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zanoza/zanoza_eat_2.wav")
+----DEATH
+AddSound("Stalker.Sprig.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zanoza/zanoza_death.wav")
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
