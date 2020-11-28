@@ -6,8 +6,8 @@ ITEM.category = "Electronics"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 5000
-ITEM.weight = 0.500
+ITEM.price = 400
+ITEM.weight = 0.720
 
 ITEM.isAnomalydetector = true
 
@@ -95,8 +95,8 @@ function ITEM:Equip(client)
 	end
 
 	self:SetData("equip", true)
-	client:EmitSound("stalkersound/inv_dozimetr.ogg", 80)
 	self:OnLoadout()
+	client:EmitSound("stalkersound/inv_dozimetr.ogg", 80)
 end
 
 function ITEM:UnEquip(client)
