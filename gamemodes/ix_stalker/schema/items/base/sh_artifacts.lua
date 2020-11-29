@@ -32,12 +32,12 @@ function ITEM:GetDescription()
 end
 
 if (CLIENT) then
-    function ITEM:DrawEntity(entity, item)
+    function ITEM:DrawEntity(entity)
         if LocalPlayer():GetPos():Distance(entity:GetPos()) > 128 then
             entity:SetMaterial("models/shadertest/predator.vmt")
             entity:DrawShadow(false)
         else
-            entity:SetMaterial(null)
+            entity:SetMaterial(entity:GetData("material"))
             entity:DrawShadow(true)
         end
 

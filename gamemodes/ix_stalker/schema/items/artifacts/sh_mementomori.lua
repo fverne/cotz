@@ -6,7 +6,6 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 5750
 ITEM.flag = "A"
-ITEM.value = ITEM.price*0.5
 ITEM.rarity = 2
 ITEM.baseweight = 1.050
 ITEM.varweight  = 0.150
@@ -23,7 +22,7 @@ function ITEM:OnInstanced(invID, x, y)
     	{"models/props_c17/frostedglass_01a", 1.3},
     	{"models/props_combine/prtl_sky_sheet", 1.6},
     	{"models/props_lab/cornerunit_cloud", 2.1},
-    	{"models/props_wasteland/wood_fence01a_skin2", 1.1}
+    	{"models/props_wasteland/wood_fence01a_skin2", 0.3}
     }
 
     if(!self:GetData("material"))then
@@ -31,10 +30,6 @@ function ITEM:OnInstanced(invID, x, y)
     	self:SetData("material", tmp[1])
     	self:SetData("valuemultiplier", tmp[2])
     end
-end
-
-function ITEM:GetMaterial()
-	return self:GetData("material")
 end
 
 function ITEM:GetPrice()
