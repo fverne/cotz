@@ -27,8 +27,8 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 550
-ENT.hpvar = 175
+ENT.hp = 350
+ENT.hpvar = 75
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -158,7 +158,7 @@ function ENT:STALKERNPCDamageTake(dmginfo,mul)
 		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 
-	if (passive != 0) then passive = 0 end
+	if (self.passive != 0) then self.passive = 1 end
 end
 
 
