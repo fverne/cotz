@@ -84,5 +84,11 @@ end
 function ix.dialogue.notifyTaskComplete(client, text)
 	ix.dialogue.notify(client, 3, text)
 end
+function ix.dialogue.notifyMoneyReceive(client, text)
+	ix.dialogue.notify(client, 4, text)
+end
+function ix.dialogue.notifyMoneyLost(client, text)
+	ix.dialogue.notify(client, 5, text)
+end
 
 end

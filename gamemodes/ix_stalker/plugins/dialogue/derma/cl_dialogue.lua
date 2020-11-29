@@ -326,12 +326,26 @@ net.Receive("ixDialogueNotify", function()
 	local notitype = net.ReadUInt(4)
 	local notidesc = net.ReadString()
 
-	local typetext = ""
+	local typetextarr = {
+		"Got item: ",
+		"Lost item: ",
+		"New task: ",
+		"Completed task: ",
+		"Received money: ",
+		"Lost money: "
+	}
 
-	if (notitype == 0) then typetext = "Got item: " end
-	if (notitype == 1) then typetext = "Lost item: " end
-	if (notitype == 2) then typetext = "New task: " end
-	if (notitype == 3) then typetext = "Completed task: " end
+	local typeimgarr = {
+		"vgui/icons/storage.png", --ITEM GET
+		"vgui/icons/storage.png", --ITEM LOSE
+		"vgui/icons/storage.png", --NEW TASK
+		"vgui/icons/storage.png", --COMPLETED TASK
+		"vgui/icons/storage.png", --MONEY GET
+		"vgui/icons/storage.png"  --MONEY LOSE
+	}
+
+	local typetext = typetextarr[notitype+1] or "INVALID TYPE: "
+	local typeimg  = typeimgarr[notitype+1] or typeimgarr[1]
 
 	local notitext = typetext..notidesc
 
@@ -339,11 +353,24 @@ net.Receive("ixDialogueNotify", function()
 		local notif = ix.gui.dialogue.chatbox:Add("DLabel")
 		notif:Dock(TOP)
 		notif:DockMargin(ScrW()*0.06, 0, 0, 4)
-		notif:SetFont("ixSmallFont")
-		notif:SetWrap(true)
+		notif:SetHeight(120)
 		notif:SetAutoStretchVertical(true)
-		notif:Center()
-		notif:SetText(notitext)
+
+		local img = notif:Add("DImage")
+		img:SetMaterial(typeimg)
+		img:SetKeepAspect(true)
+		img:SetSize(80, 40)
+		img:Dock(LEFT)
+
+		local txt = notif:Add("DLabel")
+		txt:Dock(FILL)
+		txt:SetFont("ixSmallFont")
+		txt:SetAutoStretchVertical(true)
+		txt:Center()
+		txt:SetText(notitext)
+		txt:SizeToContents()
+		txt:SetSize(300, 40)
+
 	else
 		LocalPlayer():Notify(notitext)
 	end
