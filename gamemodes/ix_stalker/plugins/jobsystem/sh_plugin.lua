@@ -148,10 +148,11 @@ local buttons = {}
 
 		end)
 else
-	netstream.Hook("questmenuitemdeliver", function(client, npcidentifier)
-		if client:GetCharacter():GetInventory():HasItem(ix.quest.isItemQuest(npcidentifier)) then
-			hook.Run("ix_JobTrigger", client, "itemDeliver_"..ix.quest.isItemQuest(npcidentifier))
-			client:GetCharacter():GetInventory():HasItem(ix.quest.isItemQuest(npcidentifier)):Remove()
+	netstream.Hook("job_deliveritem", function(client, npcidentifier)
+		local jobidentifier = client:GetCharacter():GetJobs()[npcidentifier].identifier
+		if client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier)) then
+			hook.Run("ix_JobTrigger", client, "itemDeliver_"..ix.jobs.isItemJob(jobidentifier))
+			client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier)):Remove()
 			client:Notify("Item delivered!")
 			netstream.Start(client, "questmenu", client)
 		else

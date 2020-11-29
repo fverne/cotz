@@ -57,6 +57,26 @@ function ix.jobs.getFormattedDesc(activejob)
   return string.format(ix.jobs.list[activejob.identifier].desc,activejob.numberRec)
 end
 
+function ix.jobs.getFormattedNameInactive(identifier)
+  local n = 0
+  if istable(ix.jobs.list[identifier].numberRec) then
+    n = ix.jobs.list[identifier].numberRec[1]
+  else
+    n = ix.jobs.list[identifier].numberRec
+  end
+  return string.format(ix.jobs.list[identifier].name,n)
+end
+
+function ix.jobs.getFormattedDescInactive(identifier)
+  local n = 0
+  if istable(ix.jobs.list[identifier].numberRec) then
+    n = ix.jobs.list[identifier].numberRec[1]
+  else
+    n = ix.jobs.list[identifier].numberRec
+  end
+  return string.format(ix.jobs.list[identifier].desc,n)
+end
+
 function ix.jobs.isItemJob(jobname)
   local underscorepos = string.find(jobname, "_")
   if underscorepos then
@@ -64,6 +84,18 @@ function ix.jobs.isItemJob(jobname)
   else
     return false
   end
+end
+
+function ix.jobs.getJobFromTier(tier)
+  local v, k = table.Random(ix.jobs.list)
+  local n = 0
+
+  while (v.tier != tier or n == 20) do
+    v, k = table.Random(ix.jobs.list)
+    n = n+1
+  end
+
+  return k
 end
 
 local playerMeta = FindMetaTable("Player")
@@ -139,6 +171,8 @@ if SERVER then
           if (self:GetCharacter() and !self:GetCharacter():GetInventory():Add(reward[1], 1, reward[2] or {})) then
             ix.item.Spawn(reward[1], self:GetItemDropPos(), nil, AngleRand(), reward[2] or {})
           end
+
+          ix.dialogue.notifyItemGet(self, ix.item.list[reward[1]].name)
         end
 
         self:addReputation(ix.jobs.list[identifier].repReward)

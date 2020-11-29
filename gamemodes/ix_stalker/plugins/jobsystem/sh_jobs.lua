@@ -3,8 +3,8 @@ do
   --TestJob
   local tempJob = {}
 
-  tempJob.name = "Sneed test."
-  tempJob.desc = "Sneed test."
+  tempJob.name = "Say sneed %d times."
+  tempJob.desc = "I need you to sneed %d times for me."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "chatSayTest"

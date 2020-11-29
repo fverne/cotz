@@ -20,7 +20,9 @@ function ix.dialogue.LoadFromDir(directory)
 					options = data.options or {},
 					IsDynamic = data.IsDynamic or false,
 					GetDynamicOptions = data.GetDynamicOptions,
-					ResolveDynamicOption = data.ResolveDynamicOption
+					ResolveDynamicOption = data.ResolveDynamicOption,
+					IsDynamicFollowup = data.IsDynamicFollowup or false,
+					DynamicPreCallback = data.DynamicPreCallback
 				}
 
 				DIALOGUE.tree[topicID] = topicData
@@ -60,3 +62,27 @@ end
 hook.Add("DoPluginIncludes", "ixDialogueLib", function(path)
 	ix.dialogue.LoadFromDir(path.."/dialogue")
 end)
+
+if SERVER then
+
+function ix.dialogue.notify(client, type, text)
+	net.Start("ixDialogueNotify")
+	net.WriteUInt(type, 4)
+	net.WriteString(text)
+	net.Send(client)
+end
+
+function ix.dialogue.notifyItemGet(client, text)
+	ix.dialogue.notify(client, 0, text)
+end
+function ix.dialogue.notifyItemLost(client, text)
+	ix.dialogue.notify(client, 1, text)
+end
+function ix.dialogue.notifyTaskGet(client, text)
+	ix.dialogue.notify(client, 2, text)
+end
+function ix.dialogue.notifyTaskComplete(client, text)
+	ix.dialogue.notify(client, 3, text)
+end
+
+end

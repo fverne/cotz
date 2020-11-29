@@ -28,24 +28,100 @@ DIALOGUE.addTopic("InterestTopic", {
 DIALOGUE.addTopic("AboutWorkTopic", {
 	statement = "About work...",
 	response = "",
+	IsDynamic = true,
 	options = {
 		"BackTopic"
 	},
-	preCallback = function(self, client, target)
-		if client:ixHasJobFromNPC("identifierthatisdefinedinthenpc") then
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		if(client:ixHasJobFromNPC(target:GetDisplayName())) then
 			local jobs = client:GetCharacter():GetJobs()
-			if (jobs["identifierthatisdefinedinthenpc"].isCompleted) then
-				if (SERVER) then client:ixJobComplete("identifierthatisdefinedinthenpc") end
+
+			-- If it's an item delivery quest
+			local itemuid = ix.jobs.isItemJob(jobs[target:GetDisplayName()].identifier)
+
+			if itemuid and not jobs[target:GetDisplayName()].isCompleted then
+				dynopts = {
+					{statement = string.format("Hand over 1 %s", ix.item.list[itemuid].name), topicID = "AboutWorkTopic", dyndata = {identifier = itemuid}},
+				}
+			end
+		end
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	preCallback = function(self, client, target)
+		if client:ixHasJobFromNPC(target:GetDisplayName()) then
+			local jobs = client:GetCharacter():GetJobs()
+			if (jobs[target:GetDisplayName()].isCompleted) then
+				if (SERVER) then 
+					ix.dialogue.notifyTaskComplete(client, ix.jobs.getFormattedName(jobs[target:GetDisplayName()]))
+					client:ixJobComplete(target:GetDisplayName()) 
+				end
 				if (CLIENT) then self.response = "Great work on the job, here's your reward." end
 			else
-				if (CLIENT) then self.response = string.format("Have you finished %s yet?", ix.jobs.getFormattedName(jobs["identifierthatisdefinedinthenpc"])) end
+				if (CLIENT) then self.response = string.format("Have you finished %s yet?", ix.jobs.getFormattedName(jobs[target:GetDisplayName()])) end
 			end
 		else
 			if (CLIENT) then self.response = "You're not working for me right now." end
 		end
 
 	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		netstream.Start("job_deliveritem", target:GetDisplayName())
+
+		-- Return the next topicID
+		return "BackTopic"
+	end,
+
+
+
+	--
 } )
+
+DIALOGUE.addTopic("ConfirmTask", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	IsDynamic = true,
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if(dyndata) then
+			if (CLIENT) then
+				self.response = dyndata.description
+			else
+				target.taskid = dyndata.identifier
+			end
+		end
+	end,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {
+			{statement = "I'll take it", topicID = "ConfirmTask", dyndata = {accepted = true}},
+			{statement = "I'll pass", topicID = "ConfirmTask", dyndata = {accepted = false}},
+		}
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if( SERVER and dyndata.accepted ) then
+			--client:Notify("You have accepted task with identifeir: "..(self.taskid or "INVALID OPTION"))
+			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(target.taskid))
+
+			client:ixJobAdd(target.taskid, target:GetDisplayName())
+		end
+		if(SERVER)then
+			target.taskid = nil
+		end
+		-- Return the next topicID
+		return "BackTopic"
+	end,
+})
 
 DIALOGUE.addTopic("GetTask", {
 	statement = "Do you have any work for me?",
@@ -54,18 +130,20 @@ DIALOGUE.addTopic("GetTask", {
 		"BackTopic"
 	},
 	preCallback = function(self, client, target)
-		if client:ixHasJobFromNPC("identifierthatisdefinedinthenpc") and CLIENT then
+		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
 			self.response = "I already gave you some work."
 		end
 	end,
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {
-			{statement = "Sneed test task", topicID = "GetTask", dyndata = {identifier = "TestJob"}},
-		}
+		local dynopts = {}
 
-		if client:ixHasJobFromNPC("identifierthatisdefinedinthenpc") then
-			dynopts = {}
+		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
+			for i = 1, 4 do
+				local taskid = ix.jobs.getJobFromTier(1)
+
+				dynopts[i] = {statement = ix.jobs.getFormattedNameInactive(taskid), topicID = "GetTask", dyndata = {identifier = taskid}}
+			end
 		end
 		
 		-- Return table of options
@@ -75,12 +153,9 @@ DIALOGUE.addTopic("GetTask", {
 		return dynopts
 	end,
 	ResolveDynamicOption = function(self, client, target, dyndata)
-		if( SERVER ) then
-			client:Notify("You have accepted task with identifeir: "..(dyndata.identifier or "INVALID OPTION"))
-			client:ixJobAdd(dyndata.identifier, "identifierthatisdefinedinthenpc")
-		end
+
 		-- Return the next topicID
-		return "BackTopic"
+		return "ConfirmTask", {description = ix.jobs.getFormattedDescInactive(dyndata.identifier), identifier = dyndata.identifier}
 	end,
 })
 

@@ -45,7 +45,7 @@ function PANEL:targetName()
 	return self.target.PrintName or "Unknown"
 end
 
-function PANEL:startTopic(topicID)
+function PANEL:startTopic(topicID, dyndata)
 	topic = self.tree[topicID]
 
 	self.options:Clear()
@@ -57,6 +57,16 @@ function PANEL:startTopic(topicID)
 		net.WriteString(self.treeID)
 		net.WriteString(topicID)
 		net.WriteEntity(self.target)
+		net.SendToServer()
+	end
+
+	if ( dyndata and topic.IsDynamicFollowup and isfunction(topic.DynamicPreCallback) ) then
+		topic.DynamicPreCallback(topic, LocalPlayer(),self.target, dyndata)
+		net.Start("ixPreDynamicCallback")
+		net.WriteString(self.treeID)
+		net.WriteString(topicID)
+		net.WriteEntity(self.target)
+		net.WriteTable(dyndata)
 		net.SendToServer()
 	end
 
@@ -224,8 +234,8 @@ function PANEL:prepareDynamicOptions(dynopts, normalopts)
 			end
 		end
 		self.buttonList[k].DoClick = function()
-			local nexttopic = self:ResolveDynamicOption(data.topicID, LocalPlayer(), self.target, data.dyndata)
-			self:startTopic(nexttopic)
+			local nexttopic, dyndata = self:ResolveDynamicOption(data.topicID, LocalPlayer(), self.target, data.dyndata)
+			self:startTopic(nexttopic, dyndata)
 		end
 
 		nButs = k + 1
@@ -257,9 +267,10 @@ end
 function PANEL:ResolveDynamicOption(topicID, client, target, dyndata)
 	local topic = self.tree[topicID]
 	local ret = "GOODBYE"
+	local data = {}
 	
 	if isfunction(topic.ResolveDynamicOption) then
-		ret = topic.ResolveDynamicOption(topicID, LocalPlayer(), self.target, dyndata)
+		ret, data = topic.ResolveDynamicOption(topicID, LocalPlayer(), self.target, dyndata)
 		net.Start("ixDialogueResolveDynamic")
 		net.WriteString(self.treeID)
 		net.WriteString(topicID)
@@ -268,7 +279,7 @@ function PANEL:ResolveDynamicOption(topicID, client, target, dyndata)
 		net.SendToServer()
 	end
 
-	return ret
+	return ret, data
 end
 
 function PANEL:exit()
@@ -309,4 +320,31 @@ net.Receive("ixDialogue", function()
 	ix.gui.dialogue = vgui.Create("ixDialogue")
 	ix.gui.dialogue.target = target
 	ix.gui.dialogue.treeID = treeID
+end)
+
+net.Receive("ixDialogueNotify", function()
+	local notitype = net.ReadUInt(4)
+	local notidesc = net.ReadString()
+
+	local typetext = ""
+
+	if (notitype == 0) then typetext = "Got item: " end
+	if (notitype == 1) then typetext = "Lost item: " end
+	if (notitype == 2) then typetext = "New task: " end
+	if (notitype == 3) then typetext = "Completed task: " end
+
+	local notitext = typetext..notidesc
+
+	if (ix.gui.dialogue) then
+		local notif = ix.gui.dialogue.chatbox:Add("DLabel")
+		notif:Dock(TOP)
+		notif:DockMargin(ScrW()*0.06, 0, 0, 4)
+		notif:SetFont("ixSmallFont")
+		notif:SetWrap(true)
+		notif:SetAutoStretchVertical(true)
+		notif:Center()
+		notif:SetText(notitext)
+	else
+		LocalPlayer():Notify(notitext)
+	end
 end)

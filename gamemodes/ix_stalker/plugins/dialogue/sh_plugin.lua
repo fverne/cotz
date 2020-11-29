@@ -4,10 +4,12 @@ PLUGIN.desc = "System for communication between all NPCs."
 
 if (SERVER) then
 	util.AddNetworkString("ixDialogue")
+	util.AddNetworkString("ixDialogueNotify")
 	util.AddNetworkString("ixDialogueFreeze")
 	util.AddNetworkString("ixPreCallback")
 	util.AddNetworkString("ixPostCallback")
 	util.AddNetworkString("ixDialogueResolveDynamic")
+	util.AddNetworkString("ixPreDynamicCallback")
 
 	net.Receive("ixDialogueFreeze", function(len, client)
 		freeze = net.ReadBool()
@@ -43,6 +45,16 @@ if (SERVER) then
 		local topic = ix.dialogue.list[treeID].tree[topicID]
 
 		topic.ResolveDynamicOption(topic, client, target, dyndata)
+	end)
+
+	net.Receive("ixPreDynamicCallback", function(len, client)
+		local treeID 	= net.ReadString()
+		local topicID = net.ReadString()
+		local target 	= net.ReadEntity()
+		local dyndata = net.ReadTable()
+		local topic = ix.dialogue.list[treeID].tree[topicID]
+
+		topic.DynamicPreCallback(topic, client, target, dyndata)
 	end)
 end
 
