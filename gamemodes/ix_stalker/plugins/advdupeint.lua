@@ -95,3 +95,11 @@ ix.command.Add("debug_despawndupe", {
 		PLUGIN:DespawnDupe(dupetodespawn)
 	end,
 })
+
+function ix.util.SpawnAdvDupe2Dupe( dupetospawn, uniqueid, offset )
+	ix.plugin.list["advdupeint"]:SpawnDupe(dupetospawn, uniqueid, offset)
+end
+
+function ix.util.SpawnAdvDupe2Dupe( dupetodespawn )
+	ix.plugin.list["advdupeint"]:DespawnDupe(dupetodespawn)
+end
