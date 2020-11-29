@@ -9,7 +9,8 @@ ITEM.price = 0
 
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 
-ITEM.weight = 0
+ITEM.baseweight = 1.000
+ITEM.varweight  = 0.500
 
 function ITEM:GetDescription()
     local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
@@ -54,6 +55,13 @@ function ITEM:PopulateTooltip(tooltip)
     end
 end
 
+function ITEM:OnInstanced(invID, x, y)
+    if(!self:GetData("weight")) then
+        self:SetData("weight", self.baseweight + math.random(-self.varweight, self.varweight))
+    end
+end
+
+--[[
 ITEM.functions.Sell = {
     icon = "icon16/coins.png",
     sound = "physics/metal/chain_impact_soft2.wav",
@@ -80,3 +88,4 @@ ITEM.functions.Value = {
         return !IsValid(item.entity) and item:GetOwner():GetChar():HasFlags("1")
     end
 }
+]]--
