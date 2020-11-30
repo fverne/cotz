@@ -352,24 +352,23 @@ net.Receive("ixDialogueNotify", function()
 	if (ix.gui.dialogue) then
 		local notif = ix.gui.dialogue.chatbox:Add("DLabel")
 		notif:Dock(TOP)
-		notif:DockMargin(ScrW()*0.06, 0, 0, 4)
-		notif:SetHeight(120)
-		notif:SetAutoStretchVertical(true)
+		notif:DockMargin(ScrW()*0.02, 0, 0, 4)
+		notif:SetText("")
 
 		local img = notif:Add("DImage")
-		img:SetMaterial(typeimg)
-		img:SetKeepAspect(true)
-		img:SetSize(80, 40)
 		img:Dock(LEFT)
+		img:SetImage(typeimg)
+		img:SetSize(ScrW()*0.04, ScrH()*0.035)
 
 		local txt = notif:Add("DLabel")
 		txt:Dock(FILL)
 		txt:SetFont("ixSmallFont")
-		txt:SetAutoStretchVertical(true)
-		txt:Center()
+		txt:DockMargin(8, 0, 0, 0)
 		txt:SetText(notitext)
-		txt:SizeToContents()
-		txt:SetSize(300, 40)
+		txt:SetSize(ScrW()*0.1, ScrH()*0.02)
+
+		notif:SizeToChildren(true, true)
+		
 
 	else
 		LocalPlayer():Notify(notitext)
