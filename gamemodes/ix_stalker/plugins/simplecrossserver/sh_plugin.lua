@@ -6,7 +6,7 @@ PLUGIN.desc = "Allows for basic cross server interaction."
 
 PLUGIN.loadpoints = PLUGIN.loadpoints or {}
 PLUGIN.mapdata = PLUGIN.mapdata or {}
-PLUGIN.homemap = "rp_marsh_cs"
+PLUGIN.homemap = "rp_marsh_cs_cotz"
 
 local DEBUGSETUP = true
 local checktime = 0
