@@ -1,6 +1,8 @@
 ix.jobs = ix.jobs or {}
 ix.jobs.list = ix.jobs.list or {}
 
+ix.jobs.jobsbycategory = ix.jobs.jobsbycategory or {}
+
 --[[
   JOB STRUCT should contain
 
@@ -98,6 +100,22 @@ function ix.jobs.getJobFromTier(tier)
   return k
 end
 
+function ix.jobs.getJobFromCategory(categories)
+  if (!istable(categories)) then categories = {categories} end
+
+  local tmp = {}
+
+  for k,v in pairs(categories) do
+    if(ix.jobs.jobsbycategory[v]) then
+      table.Add(tmp, ix.jobs.jobsbycategory[v])
+    end
+  end
+
+  table.Add(tmp, ix.jobs.jobsbycategory["miscjobs"] or {})
+
+  return tmp[ math.random( #tmp ) ]
+end
+
 local playerMeta = FindMetaTable("Player")
 function playerMeta:ixHasJobFromNPC(npcidentifier)
   curJobs = self:GetCharacter():GetJobs()
@@ -117,7 +135,7 @@ if SERVER then
   local playerMeta = FindMetaTable("Player")
 
   function playerMeta:ixJobEvaluate(trigger)
-    print("Evaluating quest with ID: "..trigger)
+    --print("Evaluating quest with ID: "..trigger)
 
     --Check if player has quest
     local curJobs = self:GetCharacter():GetJobs()

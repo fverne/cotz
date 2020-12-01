@@ -9,6 +9,7 @@ DIALOGUE.addTopic("GREETING", {
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
+		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), "miscjobs", 4)
 	end
 })
 
@@ -110,10 +111,11 @@ DIALOGUE.addTopic("ConfirmTask", {
 	end,
 	ResolveDynamicOption = function(self, client, target, dyndata)
 		if( SERVER and dyndata.accepted ) then
-			--client:Notify("You have accepted task with identifeir: "..(self.taskid or "INVALID OPTION"))
 			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(target.taskid))
 
 			client:ixJobAdd(target.taskid, target:GetDisplayName())
+
+			ix.jobs.setNPCJobTaken(target:GetDisplayName(), target.taskid)
 		end
 		if(SERVER)then
 			target.taskid = nil
@@ -139,10 +141,10 @@ DIALOGUE.addTopic("GetTask", {
 		local dynopts = {}
 
 		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
-			for i = 1, 4 do
-				local taskid = ix.jobs.getJobFromTier(1)
+			local jobs = target:GetNetVar("jobs")
 
-				dynopts[i] = {statement = ix.jobs.getFormattedNameInactive(taskid), topicID = "GetTask", dyndata = {identifier = taskid}}
+			for k,v in pairs(jobs) do
+				table.insert(dynopts, {statement = ix.jobs.getFormattedNameInactive(v), topicID = "GetTask", dyndata = {identifier = v}})
 			end
 		end
 		
