@@ -215,7 +215,7 @@ function ENT:SelectSchedule()
       self:FindEnemyDan()
       -- If there's still no enemy after looking for one, we patrol
       if( self:GetEnemy() == nil) then
-        print("SCHED_PATROL_WALK")
+        --print("SCHED_PATROL_WALK")
         self:SetSchedule(SCHED_PATROL_WALK)
         self.TakingCover = false
         return
@@ -229,7 +229,7 @@ function ENT:SelectSchedule()
       enemy_pos = self:GetEnemy():GetPos()
       distance = self:GetPos():Distance(enemy_pos)
       if distance > 750 then
-        print("SCHED_CHASE_ENEMY")
+        --print("SCHED_CHASE_ENEMY")
         self:SetSchedule(SCHED_CHASE_ENEMY)
       elseif (distance < 750 && distance > 200) then
         --if damaged > 75% and not in cover
@@ -243,7 +243,7 @@ function ENT:SelectSchedule()
           end
         end
         if (!haslos) then
-          print("SCHED_ESTABLISH_LINE_OF_FIRE")
+          ----print("SCHED_ESTABLISH_LINE_OF_FIRE")
           self:SetSchedule(SCHED_ESTABLISH_LINE_OF_FIRE) --move to shoot enemy
         else
           if(self.NextAttack < CurTime()) then
@@ -258,7 +258,7 @@ function ENT:SelectSchedule()
         self.NextAttack = CurTime() + 2
       else
         self.TakingCover = false
-        print("SCHED_CHASE_ENEMY")
+        --print("SCHED_CHASE_ENEMY")
         self:SetSchedule(SCHED_CHASE_ENEMY)//move to shoot enemy
       end
     end
