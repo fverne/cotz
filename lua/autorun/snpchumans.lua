@@ -36,6 +36,6 @@ function Npc:KeyDown()
  if math.Rand(1,10)  == 1 then return true end --Someone should make A.I. to tell the npc which key to press, this is just a temp solution
 end
 
-function NPC:GetFaction()
+function Npc:GetFaction()
 	return "none"
 end
