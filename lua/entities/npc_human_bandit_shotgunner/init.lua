@@ -116,6 +116,7 @@ function ENT:Initialize()
   self:SetEnemy(NULL)
 
   self:AddRelationship("player D_HT 10")
+  self:InitEnemies()
 
   self:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD )
 end
@@ -157,17 +158,27 @@ local schedd = ai_schedule.New( "FireSched" )
 schedd:EngTask( "TASK_FACE_ENEMY",       0 )
 schedd:EngTask( "TASK_RANGE_ATTACK1",    0 )
 
+function ENT:InitEnemies()
+  local bandittable = ents.FindByClass("npc_human_bandit_*")
+  local mutanttable = ents.FindByClass("npc_mutant_*")
+
+  for _, x in pairs(bandittable) do
+    x:AddEntityRelationship( self, D_NU, 10 )
+    self:AddEntityRelationship( x, D_NU, 10 )
+  end
+
+  for _, x in pairs(mutanttable) do
+    x:AddEntityRelationship( self, D_HT, 10 )
+    self:AddEntityRelationship( x, D_HT, 10 )
+  end
+end
+
 function ENT:Think()
   if self:Health() > 0 then
-    local enttable = ents.FindByClass("npc_*")
-    local monstertable = ents.FindByClass("monster_*")
-    table.Add(monstertable,enttable)
 
-    for _, x in pairs(monstertable) do
-      if (!ents) then print( "No Entities!" ); return end
-      if (x:GetClass() != self:GetClass() && x:GetClass() != "npc_grenade_frag" && x:GetFaction() != self:GetFaction()) then
-        x:AddEntityRelationship( self, D_HT, 10 )
-      end
+    if (self.RecheckEnemyTimer or 0) < CurTime() then
+      self.RecheckEnemyTimer = CurTime() + 8
+      self:InitEnemies()
     end
 
     if self.TakingCover == false then
@@ -177,10 +188,6 @@ function ENT:Think()
       end
     end
   end
-end
-
-function ENT:GetFaction()
-  return "Bandit"
 end
 
 function ENT:PlayRandomSound(soundtable)
