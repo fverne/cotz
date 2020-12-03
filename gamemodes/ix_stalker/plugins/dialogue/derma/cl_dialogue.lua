@@ -336,12 +336,12 @@ net.Receive("ixDialogueNotify", function()
 	}
 
 	local typeimgarr = {
-		"vgui/icons/storage.png", --ITEM GET
-		"vgui/icons/storage.png", --ITEM LOSE
-		"vgui/icons/storage.png", --NEW TASK
-		"vgui/icons/storage.png", --COMPLETED TASK
-		"vgui/icons/storage.png", --MONEY GET
-		"vgui/icons/storage.png"  --MONEY LOSE
+		"propic/event/lootdown", --ITEM GET
+		"propic/event/lootup", --ITEM LOSE
+		"propic/event/compass", --NEW TASK
+		"propic/event/negotiation", --COMPLETED TASK
+		"propic/event/moneydown", --MONEY GET
+		"propic/event/moneyup"  --MONEY LOSE
 	}
 
 	local typetext = typetextarr[notitype+1] or "INVALID TYPE: "

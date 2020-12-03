@@ -217,7 +217,7 @@ if SERVER then
 										npc:Remove()
 										for i = 1, lootamount do
 											if (IsValid(client) and client:GetCharacter() and !inv:Add(loot[i], 1, {["weight"] = math.Rand(0.3, 0.35)})) then
-												ix.item.Spawn(loot[i], position, nil, AngleRand(), {["weight"] = math.Rand(0.9, 1.1)} or {})
+												ix.item.Spawn(loot[i], position, nil, AngleRand(), {["weight"] = math.Rand(0.3, 0.35)} or {})
 												position = position + Vector(0, 0, 5)
 												client:Notify("No space in your inventory! Items have been dropped.")
 											end
