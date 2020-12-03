@@ -57,7 +57,7 @@ function ENT:Initialize()
 	TEMP_MeleeTable.damage[1] = 25
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
 	TEMP_MeleeTable.distance[1] = 80
-	TEMP_MeleeTable.radius[1] = 60
+	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.6
 	TEMP_MeleeTable.bone[1] = "bip01_r_hand"
 	self:STALKERNPCSetMeleeParams(1,"stand_attack_0",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
@@ -66,13 +66,13 @@ function ENT:Initialize()
 	TEMP_MeleeTable.damage[1] = 25
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
 	TEMP_MeleeTable.distance[1] = 80
-	TEMP_MeleeTable.radius[1] = 60
+	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.9
 	TEMP_MeleeTable.bone[1] = "bip01_r_hand"
 	TEMP_MeleeTable.damage[2] = 25
 	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
 	TEMP_MeleeTable.distance[2] = 80
-	TEMP_MeleeTable.radius[2] = 60
+	TEMP_MeleeTable.radius[2] = 64
 	TEMP_MeleeTable.time[2] = 1
 	TEMP_MeleeTable.bone[2] = "bip01_l_hand"
 	self:STALKERNPCSetMeleeParams(2,"stand_attack_1",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)

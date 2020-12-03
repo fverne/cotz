@@ -39,7 +39,7 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 function ENT:Initialize()
 	self.Model = "models/monsters/boar.mdl"
-	self:STALKERNPCInit(Vector(-40,-40,70),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-42,-42,70),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
 	self.MaxRangeDist = 1200
@@ -55,8 +55,8 @@ function ENT:Initialize()
 	
 	TEMP_MeleeTable.damage[1] = 60
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[1] = 70
-	TEMP_MeleeTable.radius[1] = 90
+	TEMP_MeleeTable.distance[1] = 160
+	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 1
 	TEMP_MeleeTable.bone[1] = "bip01_head"
 	self:STALKERNPCSetMeleeParams(1,"stand_attack_0",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
@@ -64,8 +64,8 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	TEMP_MeleeTable.damage[1] = 30
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[1] = 128
-	TEMP_MeleeTable.radius[1] = 60
+	TEMP_MeleeTable.distance[1] = 125
+	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.85
 	TEMP_MeleeTable.bone[1] = "bip01_r_forearm"
 	self:STALKERNPCSetMeleeParams(2,"stand_attack_1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
@@ -74,8 +74,8 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	TEMP_MeleeTable.damage[1] = 30
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[1] = 70
-	TEMP_MeleeTable.radius[1] = 90
+	TEMP_MeleeTable.distance[1] = 100
+	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.65
 	TEMP_MeleeTable.bone[1] = "bip01_head"
 	self:STALKERNPCSetMeleeParams(3,"stand_attack_2",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)

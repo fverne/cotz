@@ -60,8 +60,8 @@ function ENT:Initialize()
 	
 	TEMP_MeleeTable.damage[1] = 40
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[1] = 80
-	TEMP_MeleeTable.radius[1] = 120
+	TEMP_MeleeTable.distance[1] = 50
+	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.6
 	TEMP_MeleeTable.bone[1] = "bip01_head"
 	self:STALKERNPCSetMeleeParams(1,"stand_attack_0",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
@@ -69,14 +69,14 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	TEMP_MeleeTable.damage[1] = 30
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[1] = 80
-	TEMP_MeleeTable.radius[1] = 90
+	TEMP_MeleeTable.distance[1] = 50
+	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.35
 	TEMP_MeleeTable.bone[1] = "bip01_r_forearm"
 	TEMP_MeleeTable.damage[2] = 30
 	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[2] = 80
-	TEMP_MeleeTable.radius[2] = 90
+	TEMP_MeleeTable.distance[2] = 50
+	TEMP_MeleeTable.radius[2] = 64
 	TEMP_MeleeTable.time[2] = 0.45
 	TEMP_MeleeTable.bone[2] = "bip01_l_forearm"
 	self:STALKERNPCSetMeleeParams(2,"stand_attack_1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
@@ -86,14 +86,14 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	TEMP_MeleeTable.damage[1] = 30
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[1] = 90
-	TEMP_MeleeTable.radius[1] = 90
+	TEMP_MeleeTable.distance[1] = 50
+	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.35
 	TEMP_MeleeTable.bone[1] = "bip01_r_forearm"
 	TEMP_MeleeTable.damage[2] = 30
 	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[2] = 90
-	TEMP_MeleeTable.radius[2] = 90
+	TEMP_MeleeTable.distance[2] = 50
+	TEMP_MeleeTable.radius[2] = 64
 	TEMP_MeleeTable.time[2] = 0.45
 	TEMP_MeleeTable.bone[2] = "bip01_l_forearm"
 	self:STALKERNPCSetMeleeParams(4,"stand_attack_1",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
