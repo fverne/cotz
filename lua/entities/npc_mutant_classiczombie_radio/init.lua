@@ -61,7 +61,7 @@ ENT.sndGeigerHeavy = {"geiger/heavy/geiger_heavy_1.wav", "geiger/heavy/geiger_he
 
 function ENT:Initialize()
 	self.Model = "models/monsters/zombie2.mdl"
-	self:STALKERNPCInit(Vector(-24,-24,90),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
 	self.MaxRangeDist = 1200

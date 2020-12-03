@@ -48,7 +48,7 @@ ENT.percentbulletresistance = 0
 
 function ENT:Initialize()
 	self.Model = "models/monsters/psydog.mdl"
-	self:STALKERNPCInit(Vector(-24,-24,90),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
 	self.MaxRangeDist = 1200

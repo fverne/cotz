@@ -50,7 +50,7 @@ ENT.percentbulletresistance = 20
 
 function ENT:Initialize()
 	self.Model = "models/monsters/chimera2.mdl"
-	self:STALKERNPCInit(Vector(-48,-48,90),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-48,-48,70),MOVETYPE_STEP)
 	
 	
 	self.MinRangeDist = 0

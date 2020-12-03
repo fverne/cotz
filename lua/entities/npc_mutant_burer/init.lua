@@ -54,7 +54,7 @@ ENT.RangeSchedule = SCHED_RUN_RANDOM
 
 function ENT:Initialize()
 	self.Model = "models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl"
-	self:STALKERNPCInit(Vector(-32,-32,90),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-32,-32,70),MOVETYPE_STEP)
 	
 	
 	self.MinRangeDist = 800

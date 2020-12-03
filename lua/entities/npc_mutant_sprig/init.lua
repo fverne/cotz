@@ -48,7 +48,7 @@ ENT.flatbulletresistance = 14
 
 function ENT:Initialize()
 	self.Model = "models/monsters/zanoza.mdl"
-	self:STALKERNPCInit(Vector(-24,-24,60),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
 	self.MaxRangeDist = 1200

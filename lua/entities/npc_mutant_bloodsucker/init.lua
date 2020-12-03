@@ -60,7 +60,7 @@ distance = 0
 
 function ENT:Initialize()
 	self.Model = "models/monsters/krovosos.mdl"
-	self:STALKERNPCInit(Vector(-20,-20,90),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-28,-28,70),MOVETYPE_STEP)
 	
 	
 	self.MinRangeDist = 0

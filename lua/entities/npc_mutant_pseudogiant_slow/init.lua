@@ -47,7 +47,7 @@ ENT.percentbulletresistance = 35
 
 function ENT:Initialize()
 	self.Model = "models/monsters/gigant3.mdl"
-	self:STALKERNPCInit(Vector(-48,-48,90),MOVETYPE_STEP)
+	self:STALKERNPCInit(Vector(-48,-48,70),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
 	self.MaxRangeDist = 1200
