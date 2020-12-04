@@ -13,11 +13,15 @@ ITEM.isGrenade = false
 ITEM.weaponCategory = "sidearm"
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 ITEM.exRender = true
+ITEM.hasWeaponWear = true
 
 ITEM.validAttachments = {}
 ITEM.canAttach = true
 
 ITEM.unloadedweight = 0
+
+ITEM.repair_PartsComplexity = 1
+ITEM.repair_PartsRarity = 1
 
 -- Inventory drawing
 if (CLIENT) then
@@ -133,6 +137,11 @@ function ITEM:GetDescription()
 
         return (str .. "\n \nWear: " .. math.floor(self:GetData("wear", 100)) .. "%\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 	end
+end
+
+
+function ITEM:GetRepairCost()
+	return ((self.price * 0.0025) * self.repair_PartsComplexity) + ((self.price * 0.005) * self.repair_PartsRarity)
 end
 
 function ITEM:PopulateTooltip(tooltip)
