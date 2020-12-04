@@ -11,17 +11,37 @@ local BUYONLY 	= 3
 ix.npctemplates.animtemplatestranslation[1] = "TestAnimations"
 ix.npctemplates.animtemplatestranslation[2] = "Bartrader"
 ix.npctemplates.animtemplatestranslation[3] = "Guard"
+ix.npctemplates.animtemplatestranslation[4] = "testtech"
 
-ix.npctemplates.templates["Sidorovich"] = {
-	name 		= "Sidorovich",
+ix.npctemplates.templates["testtech"] = {
+	name 		= "Screwdriver",
 	description = "A bearded, lonely man. He looks displeased..",
-	model 		= "models/legends/lesnik.mdl",
+	model 		= "models/legends/griyc.mdl",
 	skin 		= 0,
 	bubble 		= 0,
 	scale 		= 1.0,
-	dialogueid 	= "universalunion",
+	dialogueid 	= "testtech",
 	soundgroup 	= "GenericHello",
-	animgroup 	= 1,
+	idleanim 	= "sidit",
+	animgroup 	= 4,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
+		["22lr"] 		= { 10, 1, SELLONLY, 2, 0.10, 1 },
+	},
+}
+
+ix.npctemplates.templates["testcook"] = {
+	name 		= "Greaser",
+	description = "A bearded, lonely man. He looks displeased..",
+	model 		= "models/legends/krohobor.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 1.0,
+	dialogueid 	= "testcook",
+	soundgroup 	= "GenericHello",
+	idleanim 	= "trader_idle",
+	--animgroup 	= 4,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
@@ -186,4 +206,8 @@ ix.npctemplates.animtemplates["Bartrader"] = {
 
 ix.npctemplates.animtemplates["Guard"] = {
 	"hello_idle",
+}
+
+ix.npctemplates.animtemplates["testtech"] = {
+	"sidit2",
 }
