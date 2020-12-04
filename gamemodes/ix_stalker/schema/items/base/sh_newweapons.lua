@@ -13,7 +13,7 @@ ITEM.isGrenade = false
 ITEM.weaponCategory = "sidearm"
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 ITEM.exRender = true
-ITEM.hasWeaponWear = true
+ITEM.canRepair = true
 
 ITEM.validAttachments = {}
 ITEM.canAttach = true

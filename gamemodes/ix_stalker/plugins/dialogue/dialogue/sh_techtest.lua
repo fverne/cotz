@@ -65,11 +65,20 @@ DIALOGUE.addTopic("RepairItems", {
 		local items = client:GetCharacter():GetInventory():GetItems()
 
 		for k,v in pairs(items) do
-			if v.hasWeaponWear then
-				local percenttorepair = (100 - v:GetData("wear", 100))
-				local repaircost = math.Round(percenttorepair * v:GetRepairCost())
+			if v.canRepair then
+				if v.isWeapon then
+					local percenttorepair = (100 - v:GetData("wear", 100))
+					if(percenttorepair < 0.5) then continue end
+					local repaircost = math.Round(percenttorepair * v:GetRepairCost())
 
-				table.insert(dynopts, {statement = v:GetName().." ( "..math.Round(v:GetData("wear", 100)).."% Wear ) - "..ix.currency.Get(repaircost), topicID = "RepairItems", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = repaircost}})
+					table.insert(dynopts, {statement = v:GetName().." ( "..math.Round(v:GetData("wear", 100)).."% Wear ) - "..ix.currency.Get(repaircost), topicID = "RepairItems", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = repaircost, type="wear"}})
+				else
+					local percenttorepair = (100 - v:GetData("durability", 100))
+					if(percenttorepair < 0.5) then continue end
+					local repaircost = math.Round(percenttorepair * v:GetRepairCost())
+
+					table.insert(dynopts, {statement = v:GetName().." ( "..math.Round(v:GetData("durability", 100)).."% Durability ) - "..ix.currency.Get(repaircost), topicID = "RepairItems", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = repaircost, type="durability"}})
+				end
 			end
 		end
 		
@@ -99,7 +108,7 @@ DIALOGUE.addTopic("ConfirmRepair", {
 			if (CLIENT) then
 				self.response = string.format("Repairing that %s will cost you %s, is that a deal?", ix.item.list[dyndata.itemuid].name ,ix.currency.Get(dyndata.cost))
 			else
-				target.repairstruct = { dyndata.itemid, dyndata.cost }
+				target.repairstruct = { dyndata.itemid, dyndata.cost, dyndata.type }
 			end
 		end
 	end,
@@ -121,7 +130,8 @@ DIALOGUE.addTopic("ConfirmRepair", {
 			ix.dialogue.notifyMoneyLost(client, target.repairstruct[2])
 			client:GetCharacter():TakeMoney(target.repairstruct[2])
 
-			ix.item.instances[target.repairstruct[1]]:SetData("wear", 100)
+
+			ix.item.instances[target.repairstruct[1]]:SetData(target.repairstruct[3], 100)
 
 		end
 		if(SERVER)then
