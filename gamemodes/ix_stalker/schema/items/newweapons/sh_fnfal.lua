@@ -7,12 +7,13 @@ ITEM.weaponCategory = "primary"
 ITEM.price = 36000
 ITEM.width = 6
 ITEM.height = 2
---ITEM.busflag = "ARMS1_2_1_1"
-ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker","md_foregrip"}
 
 ITEM.bulletweight = 0.026
 ITEM.unloadedweight = 4.45
+
+ITEM.repair_PartsComplexity = 2
+ITEM.repair_PartsRarity = 3
 
 function ITEM:GetWeight()
   return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))

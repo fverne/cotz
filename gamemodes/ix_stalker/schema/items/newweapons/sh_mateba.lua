@@ -7,8 +7,6 @@ ITEM.weaponCategory = "secondary"
 ITEM.price = 14000
 ITEM.width = 2
 ITEM.height = 1
---ITEM.busflag = {"ARMS2_1_1", "SPECIAL5"}
-ITEM.repairCost = ITEM.price/100*1
 ITEM.validAttachments = {"md_microt1","md_rmr","md_saker"}
 
 ITEM.exRender = false
@@ -16,6 +14,9 @@ ITEM.img = Material("vgui/hud/weapons/mateba.png")
 
 ITEM.bulletweight = 0.019
 ITEM.unloadedweight = 1.35
+
+ITEM.repair_PartsComplexity = 5
+ITEM.repair_PartsRarity = 2
 
 function ITEM:GetWeight()
   return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
