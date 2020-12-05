@@ -308,6 +308,12 @@ function SWEP:DrawHUD()
 
 	local disableCrosshair, disableCustomHUD, disableTabDisplay = CustomizableWeaponry.callbacks.processCategory(self, "suppressHUDElements", customHUD)
 
+	if ix then
+		disableCrosshair  = not ix.option.Get("cw2crosshair", false)
+		disableCustomHUD  = true
+		disableTabDisplay = true
+	end
+
 	if not disableCrosshair then
 		if self.CrosshairEnabled and cw_crosshair:GetInt() > 0 then
 			lp = self.Owner:ShouldDrawLocalPlayer()

@@ -41,6 +41,13 @@ ix.option.Add("gasmaskoverlay", ix.type.bool, true, {
 	category = "_stalkersettings",
 })
 
+ix.option.Add("cw2crosshair", ix.type.bool, true, {
+	category = "_stalkersettings",
+	hidden = function()
+		return not LocalPlayer():IsAdmin()
+	end
+})
+
 /*ix.command.Add("invtest", {
 	OnRun = function(self, client)
 		netstream.Start(client, "invtest")

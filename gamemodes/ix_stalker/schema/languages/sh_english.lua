@@ -337,6 +337,7 @@ LANGUAGE = {
 	optImperial = "Imperial units for weight",
 	optGasmaskoverlay = "Dynamic gasmask overlays",
 	optCursor = "STALKER Cursor",
+	optCw2crosshair = "CW2.0 Crosshair (debug)",
 	optOpenBags = "Open bags with inventory",
 	optdOpenBags = "Automatically views all the bags in your inventory when the menu is opened.",
 	optShowIntro = "Show intro on join",
