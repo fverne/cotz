@@ -42,8 +42,6 @@ function ix.util.GetRandomItemFromPool(itempool)
 
     -- Cache weight for later
     ix.randomitems.tableweights[itempool] = totalweight
-
-    print("Total weight of "..itempool.." : "..totalweight)
   end
 
   local roll = math.random(1, totalweight)
