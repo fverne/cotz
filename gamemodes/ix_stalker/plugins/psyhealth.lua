@@ -218,3 +218,31 @@ if (SERVER) then
 		end
 	end
 end
+
+function PLUGIN:HUDPaint()
+	local psy1 = Material("vgui/hud/psyz.png", "noclamp smooth") 
+	local psy2 = Material("vgui/hud/psyz2.png", "noclamp smooth") 
+	local psy3 = Material("vgui/hud/psyz3.png", "noclamp smooth") 
+	local psy4 = Material("vgui/hud/psyz4.png", "noclamp smooth") 
+	local lp = LocalPlayer()
+	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible()) then return end
+
+	surface.SetDrawColor(Color(200, 200, 200, 0))
+	if (lp:GetPsyHealth() <= 70) then
+		surface.SetMaterial(psy1)
+		surface.SetDrawColor(Color(200, 200, 200, 255))
+	end
+	if (lp:GetPsyHealth() <= 55) then
+		surface.SetMaterial(psy2)
+		surface.SetDrawColor(Color(200, 200, 200, 255))
+	end
+	if (lp:GetPsyHealth() <= 35) then
+		surface.SetMaterial(psy3)
+		surface.SetDrawColor(Color(200, 200, 200, 255))
+	end
+	if (lp:GetPsyHealth() <= 20) then
+		surface.SetMaterial(psy4)
+		surface.SetDrawColor(Color(200, 200, 200, 255))
+	end
+	surface.DrawTexturedRect(ScrW()*0.92, ScrH()*0.75, ScrW()*0.018, ScrH()*0.032)
+end
