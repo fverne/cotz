@@ -106,5 +106,11 @@ function ITEM:OnInstanced(invID, x, y)
 end
 
 function ITEM:SetWeight(knifetier)
-	self:SetData("weight", self.BaseWeight + (self.WeightPerLevel * knifetier))
+	local weightvar = self.BaseWeight * 0.05
+
+	self:SetData("weight", math.Round(self.BaseWeight + math.Rand(-weightvar, weightvar)) + (self.WeightPerLevel * knifetier))
+end
+
+function ITEM:GetPrice()
+	return self.price * self:GetWeight()
 end

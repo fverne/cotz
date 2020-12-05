@@ -1,15 +1,15 @@
-ITEM.name = "Flesh Meat"
-ITEM.description = "Uncooked meat from a Flesh."
-ITEM.longdesc = "A popular choice in the Zone, flesh meat has a good taste and high nutritional value. The scientists have enough samples already, which limits its use as a commodity. However, it can also serve as a source of animal fat for gun lubrication."
-ITEM.model = "models/lostsignalproject/items/consumable/raw_flesh.mdl"
+ITEM.name = "Sprig Meat"
+ITEM.description = "Uncooked meat from a Sprig."
+ITEM.longdesc = "A small portion of strangely soft wood. Can be cooked and eaten, but has an odd taste. Scientists seem interested in this."
+ITEM.model = "models/lostsignalproject/items/consumable/salmon.mdl"
 
-ITEM.price = 180
+ITEM.price = 300
 ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.040
-ITEM.BaseWeight = 0.843
-ITEM.WeightPerLevel = 0.363
+ITEM.BaseWeight = 0.376
+ITEM.WeightPerLevel = 0.126
 
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)
@@ -24,4 +24,8 @@ function ITEM:PopulateTooltipIndividual(tooltip)
 		ix.util.PropertyDesc(tooltip, "Low Tier Mutant Meat", Color(0, 255, 0))
 		ix.util.PropertyDesc(tooltip, "Toxic Food", Color(255, 0, 0))
 	end
+end
+
+function ITEM:GetMaterial()
+	return "nickmaps/rostok/trees/trees_bark_a_02"
 end

@@ -1,21 +1,21 @@
-ITEM.name = "Decomposing Meat"
-ITEM.description = "Uncooked meat from a Humanoid creature."
-ITEM.longdesc = "Meat from a human. It's very frowned upon to eat by stalkers, even though it originates from creatures that are no longer classified as humans."
+ITEM.name = "Burer Meat"
+ITEM.description = "Uncooked meat from a Burer."
+ITEM.longdesc = "Meat from a Burer. Most STALKERs keep away from this meat, but it's extremely filling. Some STALKERs say it deterioates the mind."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_flesh.mdl"
 
-ITEM.price = 10
+ITEM.price = 960
 ITEM.width = 1
 ITEM.height = 1
 
-ITEM.WeightPerHunger = 0.060
-ITEM.BaseWeight = 1.661
-ITEM.WeightPerLevel = 0.349
+ITEM.WeightPerHunger = 0.070
+ITEM.BaseWeight = 1.722
+ITEM.WeightPerLevel = 0.486
 
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-	item.player:AddBuff("debuff_radiation", 10, { amount = 25/20 })
-	item.player:AddBuff("debuff_psy", 10, {amount = 15/20})
+	item.player:AddBuff("debuff_radiation", 10, { amount = 48/20 })
+	item.player:AddBuff("debuff_psy", 10, {amount = 20/20})
 	ix.chat.Send(item.player, "iteminternal", "eats a bit of their "..item.name..".", false)
 end)
 

@@ -3,14 +3,18 @@ ITEM.description = "Uncooked meat from a Tushkano."
 ITEM.longdesc = "A small portion of a mutated rodent's body. A cheap and commonly found food that is said to strengthen your heart after being cooked in open fire. Can be sold to the scientists."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_tushkano.mdl"
 
-ITEM.price = 70
+ITEM.price = 35
 ITEM.width = 1
 ITEM.height = 1
+
+ITEM.WeightPerHunger = 0.070
+ITEM.BaseWeight = 0.423
+ITEM.WeightPerLevel = 0.112
 
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-	item.player:AddBuff("debuff_radiation", 10, { amount = 0.5 })
+	item.player:AddBuff("debuff_radiation", 10, { amount = 9/20 })
 	ix.chat.Send(item.player, "iteminternal", "eats a bit of their "..item.name..".", false)
 end)
 

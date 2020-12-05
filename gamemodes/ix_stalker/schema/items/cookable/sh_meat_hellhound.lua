@@ -1,17 +1,15 @@
-ITEM.name = "Dog Meat"
-ITEM.description = "Uncooked meat from a Dog."
-ITEM.longdesc = "Meat of mutated dogs is used as a cheap alternative to the more popular boar meat. The scientists have enough samples already, which limits its use as a commodity. However, it can also serve as a source of animal fat for gun lubrication."
+ITEM.name = "Hellhound Meat"
+ITEM.description = "Uncooked meat from a Hellhound."
+ITEM.longdesc = "This chunk of meat from the mutated type of dog called a Hellhound feels warm to the touch, even though it was killed hours ago. Considered a delicacy among STALKERs used to eating the regular dog meat."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_dog.mdl"
 
-ITEM.price = 70
+ITEM.price = 1680
 ITEM.width = 1
 ITEM.height = 1
 
-ITEM.WeightPerHunger = 0.080
-ITEM.BaseWeight = 0.642
-ITEM.WeightPerLevel = 0.231
-
-ITEM.meal = "meal_blinddog"
+ITEM.WeightPerHunger = 0.040
+ITEM.BaseWeight = 0.688
+ITEM.WeightPerLevel = 0.276
 
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)

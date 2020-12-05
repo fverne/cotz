@@ -14,7 +14,8 @@ ix.MutantTable = {
 	["models/monsters/chimera2.mdl"] = "chimera",
 	["models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl"] = "burer",
 	["models/monsters/cat.mdl"] = "cat",
-	["models/maver1k_XVII/Stalker/mutants/karlik.mdl"] = "karlik"
+	["models/maver1k_XVII/Stalker/mutants/karlik.mdl"] = "karlik",
+	["models/monsters/zanoza.mdl"] = "sprig"
 }
 
 ix.MutantParts = {
@@ -99,7 +100,7 @@ ix.MutantParts = {
 		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
 		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
 		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
-		["meattype"] = "meat_human",
+		["meattype"] = "meat_burer",
 		["parttype"] = "burershand",
 	},
 	["cat"] = {
@@ -116,6 +117,13 @@ ix.MutantParts = {
 		["meattype"] = "meat_human",
 		["parttype"] = "medkit",
 	},
+	["sprig"] = {
+		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
+		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
+		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
+		["meattype"] = "meat_sprig",
+		["parttype"] = "meat_sprig",
+	}
 }
 
 function PLUGIN:KeyPress(client, key)			
