@@ -159,7 +159,7 @@ function ENT:STALKERNPCThink()
 	end
 
 	if( self.IsTeleporting == 3 and self.TeleportTimer < CurTime()) then
-		
+		self:STALKERNPCClearAnimation()
 		self.IsTeleporting = 0
 	end
 

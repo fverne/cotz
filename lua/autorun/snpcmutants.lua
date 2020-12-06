@@ -38,8 +38,6 @@ AddNPC("Pseudodog","npc_mutant_pseudodog")
 AddNPC("Psydog","npc_mutant_psydog")
 AddNPC("Tushkano","npc_mutant_rodent")
 
---AddNPC("Snork - New","npc_mutant_snorkold")  --Old snork
-
 AddNPC("Controller (Fast)","npc_mutant_controller_fast")
 AddNPC("Controller (Electric)","npc_mutant_controller_electro")
 AddNPC("Controller (Swamp)","npc_mutant_controller_swamp")
@@ -62,6 +60,10 @@ AddNPC("Hellhound","npc_mutant_hellhound")
 AddNPC("Sprig", "npc_mutant_sprig")
 
 AddNPC("Spider", "npc_mutant_spider")
+
+AddNPC("Tark", "npc_mutant_tark")
+
+AddNPC("Vareshka", "npc_mutant_vareshka")
 
 local function AddSoundInterval(NAME,IMIN,IMAX,CHAN,VOL,LEV,PITMIN,PITMAX,PATH)
 	for S=IMIN, IMAX do
@@ -575,6 +577,50 @@ AddSound("Stalker.Spider.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/spider/sp
 AddSound("Stalker.Spider.Die3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/spider/spider_dying2.wav")
 ----SPECIAL
 AddSound("Stalker.Spider.Burrow",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"building_rubble5.wav")
+
+-- Tark sounds
+----IDLE
+AddSound("Stalker.Tark.Idle1",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/tark/1.ogg")
+AddSound("Stalker.Tark.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/tark/2.ogg")
+AddSound("Stalker.Tark.Idle3",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/tark/7.ogg")
+----HIT
+AddSound("Stalker.Tark.Melee1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tark/4.ogg")
+AddSound("Stalker.Tark.Melee2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tark/5.ogg")
+AddSound("Stalker.Tark.Melee3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tark/6.ogg")
+----Chase
+AddSound("Stalker.Tark.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tark/3.ogg")
+AddSound("Stalker.Tark.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tark/7.ogg")
+AddSound("Stalker.Tark.Chase3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tark/8.ogg")
+AddSound("Stalker.Tark.Chase4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tark/9.ogg")
+----DEATH
+AddSound("Stalker.Tark.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tark/10.ogg")
+AddSound("Stalker.Tark.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tark/11.ogg")
+AddSound("Stalker.Tark.Die3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tark/12.ogg")
+
+-- Vareshka sounds
+----IDLE
+AddSound("Stalker.Vareshka.Idle1",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/vypolzen/vypolzen_idle_1.ogg")
+AddSound("Stalker.Vareshka.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/vypolzen/vypolzen_idle_2.ogg")
+AddSound("Stalker.Vareshka.Idle3",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/vypolzen/vypolzen_idle_3.ogg")
+AddSound("Stalker.Vareshka.Idle4",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/vypolzen/vypolzen_idle_4.ogg")
+----HIT
+AddSound("Stalker.Vareshka.Hit1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_attack_hit_0.ogg")
+AddSound("Stalker.Vareshka.Hit2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_attack_hit_1.ogg")
+AddSound("Stalker.Vareshka.Hit2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_attack_hit_2.ogg")
+----MELEE
+AddSound("Stalker.Vareshka.Melee1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_attack_0.ogg")
+AddSound("Stalker.Vareshka.Melee2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_attack_1.ogg")
+AddSound("Stalker.Vareshka.Melee3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_attack_2.ogg")
+AddSound("Stalker.Vareshka.Melee4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_attack_3.ogg")
+----CHASE
+AddSound("Stalker.Vareshka.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_panic_0.ogg")
+AddSound("Stalker.Vareshka.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_panic_1.ogg")
+AddSound("Stalker.Vareshka.Chase3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_damage_0.ogg")
+AddSound("Stalker.Vareshka.Chase4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_damage_2.ogg")
+----DEATH
+AddSound("Stalker.Vareshka.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_die_0.ogg")
+AddSound("Stalker.Vareshka.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_die_1.ogg")
+AddSound("Stalker.Vareshka.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/vypolzen/vypolzen_die_2.ogg")
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
