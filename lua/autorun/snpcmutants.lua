@@ -42,6 +42,7 @@ AddNPC("Tushkano","npc_mutant_rodent")
 
 AddNPC("Controller (Fast)","npc_mutant_controller_fast")
 AddNPC("Controller (Electric)","npc_mutant_controller_electro")
+AddNPC("Controller (Swamp)","npc_mutant_controller_swamp")
 
 AddNPC("Izlom","npc_mutant_izlom")
 
@@ -59,6 +60,8 @@ AddNPC("Karlik","npc_mutant_karlik")
 AddNPC("Hellhound","npc_mutant_hellhound")
 
 AddNPC("Sprig", "npc_mutant_sprig")
+
+AddNPC("Spider", "npc_mutant_spider")
 
 local function AddSoundInterval(NAME,IMIN,IMAX,CHAN,VOL,LEV,PITMIN,PITMAX,PATH)
 	for S=IMIN, IMAX do
@@ -551,6 +554,27 @@ AddSound("Stalker.Sprig.Chase3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zanoza/z
 AddSound("Stalker.Sprig.Chase4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zanoza/zanoza_eat_2.wav")
 ----DEATH
 AddSound("Stalker.Sprig.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zanoza/zanoza_death.wav")
+
+-- Spider sounds
+----IDLE
+AddSound("Stalker.Spider.Idle1",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/spider/spider_misc0.wav")
+AddSound("Stalker.Spider.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/spider/spider_misc1.wav")
+AddSound("Stalker.Spider.Idle3",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/spider/spider_misc2.wav")
+----HIT
+AddSound("Stalker.Spider.Melee1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/spider/spider_ouch0.wav")
+AddSound("Stalker.Spider.Melee2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/spider/spider_striking0.wav")
+AddSound("Stalker.Spider.Melee3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/spider/spider_striking1.wav")
+----Chase
+AddSound("Stalker.Spider.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/spider/spider_threat0.wav")
+AddSound("Stalker.Spider.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/spider/spider_threat1.wav")
+AddSound("Stalker.Spider.Chase3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/spider/spider_threat2.wav")
+AddSound("Stalker.Spider.Chase4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/spider/spider_threat3.wav")
+----DEATH
+AddSound("Stalker.Spider.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/spider/spider_dying0.wav")
+AddSound("Stalker.Spider.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/spider/spider_dying1.wav")
+AddSound("Stalker.Spider.Die3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/spider/spider_dying2.wav")
+----SPECIAL
+AddSound("Stalker.Spider.Burrow",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"building_rubble5.wav")
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
