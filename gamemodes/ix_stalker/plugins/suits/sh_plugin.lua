@@ -7,7 +7,7 @@ ix.util.Include("cl_plugin.lua")
 
 function PLUGIN:EntityTakeDamage( target, dmginfo )
 	--disable pvp
-	if target:IsPlayer() and dmginfo:GetAttacker():IsPlayer() then
+	if target:IsPlayer() and dmginfo:GetAttacker():IsPlayer() and (target != dmginfo:GetAttacker()) then
 		return true
 	end
 

@@ -1,0 +1,11 @@
+ITEM.name = "Thorn"
+ITEM.model ="models/lostsignalproject/items/artefacts/needles.mdl"
+ITEM.description = "Spikey artifact, but quite small."
+ITEM.longdesc = "A small, hard lump of rigid bony material, with spaced out, long, sturdy spikes. The spikes are are unaturally strong and almost impossible to break off. This gives the artifact decent value, as such a lightweight and hardy material could be very useful in many industries."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 3500
+ITEM.flag = "A"
+ITEM.rarity = 1
+ITEM.baseweight = 0.450
+ITEM.varweight  = 0.100

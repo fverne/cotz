@@ -44,8 +44,9 @@ ITEM.functions.use = {
 
         if(item:GetData("cooldown",0) < os.time())then
         	item:SetData("cooldown", os.time()+(3600*2) ) --2 hours
-
-        	item.player:HealPsyHealth(15)
+            ix.util.PlayerPerformBlackScreenAction(item.player, "Looking deep into the skull", 3, function(player) 
+                player:HealPsyHealth(15)
+            end)
         end
 
         return false
