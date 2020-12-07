@@ -491,7 +491,7 @@ ITEM.functions.Equip = {
 				local itemTable = ix.item.instances[v.id]
 
 				if (itemTable.pacData and v.outfitCategory == item.outfitCategory and itemTable:GetData("equip")) then
-					item.player:Notify("You're already equipping this kind of outfit")
+					item.player:Notify("You're already equipping a suit!")
 
 					return false
 				end
@@ -678,12 +678,12 @@ end
 
 function ITEM:OnEquipped()
 
-	self.player:EmitSound("stalkersound/inv_slot.mp3")
+	self.player:EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
 end
 
 function ITEM:OnUnequipped()
 
-	self.player:EmitSound("stalkersound/inv_slot.mp3")
+	self.player:EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
 end
 
 function ITEM:getBR() 

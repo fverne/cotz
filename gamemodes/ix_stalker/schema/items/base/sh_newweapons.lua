@@ -622,7 +622,7 @@ hook.Add("PlayerDeath", "ixStripClip", function(client)
 	for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
 		if (v.isWeapon and v:GetData("equip")) then
 			v:SetData("ammo", nil)
-			v:SetData("equip", nil)
+			--v:SetData("equip", nil)
 
 			if (v.pacData) then
 				v:RemovePAC(client)
