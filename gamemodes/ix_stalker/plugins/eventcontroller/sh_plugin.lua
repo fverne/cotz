@@ -10,8 +10,8 @@ ix.util.Include("sh_eventdefs.lua")
 
 PLUGIN.spawnratebase = 900
 PLUGIN.spawnrateplayer = 30
-PLUGIN.spawnradius = 128
-PLUGIN.populateAmount = 6
+PLUGIN.spawnradius = 512
+PLUGIN.populateAmount = 10
 
 PLUGIN.pdachatter = true
 PLUGIN.pdachatterchance = 100
@@ -110,8 +110,8 @@ if SERVER then
 						local data = {}
 						data.start = position
 						data.endpos = position
-						data.mins = Vector(-16, -16, 0)
-						data.maxs = Vector(16, 16, 71)
+						data.mins = Vector(-42, -42, 0)
+						data.maxs = Vector(42, 42, 71)
 						local trace = util.TraceHull(data)
 							
 						if trace.Entity:IsValid() then
