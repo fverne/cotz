@@ -93,6 +93,17 @@ surface.CreateFont("stalkertitlefont", {
 	antialias = true
 })
 
+local FiremodeTranslationTable = {
+	["semi"] = "1",
+	["pump"] = "1",
+	["bolt"] = "1",
+	["break"] = "1",
+	["2burst"] = "2",
+	["3burst"] = "3",
+	["auto"] = "A",
+
+}
+
 local color = {}
 color["$pp_colour_addr"] = 0
 color["$pp_colour_addg"] = 0
@@ -157,7 +168,7 @@ function PLUGIN:HUDPaint()
 
 		if wep:GetMaxClip1() > 0 then
 			if string.sub(wep:GetClass(),1,3) == "cw_" then
-				if game.GetAmmoName(wep:GetPrimaryAmmoType()) or "" != "" then
+				if ((game.GetAmmoName(wep:GetPrimaryAmmoType()) or "") != "") then
 					if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
 						ammoSubClass = string.lower(string.sub(game.GetAmmoName(ammoType), -3, -2))
 						ammoBox = ix.weapontables.ammotypes[string.sub(game.GetAmmoName(ammoType), 1, -6)].uID
@@ -174,7 +185,7 @@ function PLUGIN:HUDPaint()
 							surface.SetDrawColor(Color(255, 255, 255, 255))
 
 							if ix.item.list[ammoBox].width == 1 then
-								surface.DrawTexturedRect(ScrW()*0.90, ScrH()*0.87, ScrW()*0.0366, ScrH()*0.0652)
+								surface.DrawTexturedRect(ScrW()*0.89, ScrH()*0.87, ScrW()*0.0366, ScrH()*0.0652)
 							else
 								surface.DrawTexturedRect(ScrW()*0.87, ScrH()*0.87, ScrW()*0.073, ScrH()*0.0652)
 							end
@@ -190,12 +201,16 @@ function PLUGIN:HUDPaint()
 
 	if IsValid( wep ) then
 		if wep:GetMaxClip1() > 0 then
-			draw.DrawText(tostring(wep:Clip1()), "stalkerregularfont", ScrW()*0.85, ScrH()*0.88, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
-			draw.DrawText(tostring(lp:GetAmmoCount( wep:GetPrimaryAmmoType() )), "stalkerregularfont", ScrW()*0.85, ScrH()*0.91, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+			draw.DrawText(tostring(wep:Clip1()), "stalkerregularfont", ScrW()*0.865, ScrH()*0.875, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+			draw.DrawText(tostring(lp:GetAmmoCount( wep:GetPrimaryAmmoType() )), "stalkerregularfont", ScrW()*0.865, ScrH()*0.905, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
 
 			if string.sub(wep:GetClass(),1,3) == "cw_" then
 				if wep:GetPrimaryAmmoType() then
 					draw.DrawText( language.GetPhrase(game.GetAmmoName(wep:GetPrimaryAmmoType()).."_ammo"), "stalkerregularsmallfont2", ScrW()*0.83, ScrH()*0.838, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
+				end
+			
+				if (wep.FireMode) then
+					draw.DrawText( FiremodeTranslationTable[wep.FireMode] or "-", "stalkerregularsmallfont2", ScrW()*0.835, ScrH()*0.875, Color( 193, 193, 136, 255 ), TEXT_ALIGN_LEFT )
 				end
 			end
 		end
@@ -238,7 +253,7 @@ function ix.hud.DrawDeath()
 	w, h = ScrW(), ScrH()
 
 	if (owner:GetCharacter()) then
-		if !(owner:Alive()) then
+		if (!owner:Alive()) then
 			if (IsValid(ix.gui.characterMenu) and ix.gui.characterMenu:IsVisible() or !owner:GetCharacter()) then
 				return
 			end
