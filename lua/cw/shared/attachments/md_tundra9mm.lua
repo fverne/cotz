@@ -4,9 +4,7 @@ att.displayName = "Tundra 9MM"
 att.displayNameShort = "Tundra"
 att.isSuppressor = true
 
-att.statModifiers = {OverallMouseSensMult = -0.1,
-RecoilMult = -0.15,
-DamageMult = -0.1}
+att.statModifiers = {DamageMult = -0.2}
 
 if CLIENT then
 	att.displayIcon = surface.GetTextureID("atts/saker")
