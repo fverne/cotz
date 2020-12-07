@@ -75,7 +75,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 60
+SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/tayley/v_bm16.mdl"
 SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_toz66_obrez.mdl"

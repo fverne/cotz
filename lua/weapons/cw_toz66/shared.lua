@@ -75,7 +75,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 90
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/stalker/toz66.mdl"
 SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl"
@@ -116,3 +116,7 @@ SWEP.ReloadTime = 3.2
 SWEP.ReloadTime_Empty = 3.2
 SWEP.ReloadHalt = 4.8
 SWEP.ReloadHalt_Empty = 3.9
+
+function SWEP:IndividualInitialize()
+	self:setBodygroup( 1 , 1 )
+end
