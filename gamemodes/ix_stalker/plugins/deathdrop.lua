@@ -33,6 +33,9 @@ function PLUGIN:DoPlayerDeath( client, attacker, dmg )
 
 			if item.ammoAmount then
 				item:SetData("quantity", math.Clamp( math.Round(item:GetData("quantity") - item.ammoAmount/2), 0, 100 ) )
+				if item:GetData("quantity", 100) == 0 then
+					item:Remove()
+				end
 			end
 	    end
 	end
