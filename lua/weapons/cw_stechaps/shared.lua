@@ -62,7 +62,7 @@ SWEP.AttachmentModelsVM = {
 
 SWEP.Attachments = {
 [1] = {header = "Muzzle", offset = {0, 150}, atts = {"md_tundra9mm"}},
-["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_zoneloaded", "am_matchgrade"}}
+["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_hollowpoint", "am_armorpiercing"}}
 }
 
 SWEP.Animations = {fire = "fire",

@@ -81,7 +81,7 @@ SWEP.ForegripOverridePos = {
 
 SWEP.Attachments = {[2] = {header = "Barrel", offset = {-750, -200}, atts = {"md_saker"}},
 	[1] = {header = "Sight", offset = {500, -300}, atts = {"md_microt1", "md_rmr"}},
-	["+reload"] = {header = "Ammo", offset = {800, 300}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {800, 300}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
 	reload = "reload",

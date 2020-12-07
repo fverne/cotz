@@ -65,7 +65,7 @@ SWEP.BipodBGs = {main = 4, on = 1, off = 0}
 SWEP.SightBGs = {main = 2, sg1 = 1, none = 0}
 SWEP.LuaViewmodelRecoil = true
 
-SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 
 SWEP.Animations = {fire = "shoot",

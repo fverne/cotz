@@ -55,7 +55,7 @@ end
 SWEP.SightBGs = {main = 2, none = 1}
 SWEP.ADSFireAnim = true
 
-SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_birdshot", "am_trishot", "am_dartrounds", "am_zoneloaded"}}}
+SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
 	reload_start = "start_reload",

@@ -75,7 +75,7 @@ SWEP.BipodFireAnim = true
 SWEP.Attachments = {[1] = {header = "Sight", offset = {300, -400},  atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_acog", "md_cmore", "md_reflex"}},
 	[2] = {header = "Muzzle", offset = {-400, -200}, atts = {"md_pbs1"}},
 	[3] = {header = "Barrel", offset = {-600, 300}, atts = {"md_bipod"}},
-	["+reload"] = {header = "Ammo", offset = {1500, 400}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {1500, 400}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
 	reload = "reload",

@@ -137,7 +137,7 @@ end
 		{header = "Sight", offset = {550, -475}, atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_reflex", "md_cmore","md_schmidt_shortdot", "md_acog"}},
 		{header = "Barrel ext", offset = {-600, -475}, atts = {"md_saker"}},
 		{header = "Bottom Rail", offset = {-600, 425}, atts = {"md_foregrip"}},
-		["+reload"] = {header = "Ammo", offset = {1000, 510}, atts = {"am_magnum", "am_matchgrade"}},
+		["+reload"] = {header = "Ammo", offset = {1000, 510}, atts = {"am_magnum", "am_armorpiercing"}},
 	}
 
 	SWEP.Animations = {

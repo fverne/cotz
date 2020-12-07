@@ -1,9 +1,9 @@
 local att = {}
-att.name = "am_matchgrade"
-att.displayName = "Match grade rounds"
-att.displayNameShort = "Match"
+att.name = "am_hollowpoint"
+att.displayName = "Hollow Point rounds"
+att.displayNameShort = "Hollow Point"
 
-att.statModifiers = {AimSpreadMult = -0.3}
+att.statModifiers = {DamageMult = 1.3}
 
 if CLIENT then
 	att.displayIcon = surface.GetTextureID("atts/matchgradeammo")
@@ -12,7 +12,7 @@ end
 
 function att:attachFunc()
 	self:unloadWeapon()
-	local str = self.Primary.Ammo.." -MG-"
+	local str = self.Primary.Ammo.." -HP-"
 	self.Primary.Ammo = str
 end
 

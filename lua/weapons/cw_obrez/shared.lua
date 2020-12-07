@@ -68,7 +68,7 @@ SWEP.SightBGs = {main = 2, scope = 1, none = 0}
 SWEP.StockBGs = {main = 0, full = 0, custom = 1, carbine = 2, obrez = 3}
 
 SWEP.Attachments = {
-["+reload"] = {header = "Ammo", offset = {-150, 425}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+["+reload"] = {header = "Ammo", offset = {-150, 425}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = "base_fire_start",
 	reload_start = "reload_start",

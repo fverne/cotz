@@ -112,7 +112,7 @@ SWEP.BarrelBGs = {main = 5, smg = 0, carbine = 1}
 SWEP.StockBGs = {main = 4, off = 0, on = 1}
 
 SWEP.Attachments = {[2] = {header = "Barrel Extension", offset = {-650, -450}, atts = {"md_cobram2"}},
-["+reload"] = {header = "Ammo", offset = {-370, 70}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+["+reload"] = {header = "Ammo", offset = {-370, 70}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"base_fire_1"},
 	fire_aim = {"iron_fire_1","iron_fire_2"},

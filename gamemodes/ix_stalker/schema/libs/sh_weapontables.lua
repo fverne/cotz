@@ -43,12 +43,10 @@ ix.weapontables.attachments["md_foregrip"] = {name = "Foregrip", slot = 3, uID =
 
 ix.weapontables.ammosubtypes = {}
 
-ix.weapontables.ammosubtypes["ZL"] = {uID = "am_zoneloaded"}
-ix.weapontables.ammosubtypes["MG"] = {uID = "am_matchgrade"}
 ix.weapontables.ammosubtypes["SG"] = {uID = "am_slugrounds"}
-ix.weapontables.ammosubtypes["BD"] = {uID = "am_birdshot"}
 ix.weapontables.ammosubtypes["TR"] = {uID = "am_trishot"}
 ix.weapontables.ammosubtypes["AP"] = {uID = "am_armorpiercing"}
+ix.weapontables.ammosubtypes["HP"] = {uID = "am_hollowpoint"}
 ix.weapontables.ammosubtypes["41"] = {uID = "am_410buck"}
 
 ix.armortables = {}

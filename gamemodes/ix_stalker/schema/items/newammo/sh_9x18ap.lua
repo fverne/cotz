@@ -1,8 +1,8 @@
-ITEM.name = "9x18mm Zone-Loaded"
+ITEM.name = "9x18mm Armor-Piercing"
 ITEM.model = "models/lostsignalproject/items/ammo/9x18.mdl"
-ITEM.ammo = "9x18MM -ZL-" // type of the ammo
+ITEM.ammo = "9x18MM -AP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo
-ITEM.description= "A box that contains %s rounds of zone-loaded 9x18mm ammo."
+ITEM.description= "A box that contains %s rounds of Armor-Piercing 9x18mm ammo."
 ITEM.longdesc = "This repurposed 9x18mm round contains full metal jacket rounds with a steel penetrator and a lead core under a metal jacket."
 ITEM.price = 600
 ITEM.img = Material("vgui/hud/9x18zl.png")

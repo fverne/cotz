@@ -63,7 +63,7 @@ SWEP.LuaViewmodelRecoil = true
 SWEP.LuaViewmodelRecoilOverride = true
 SWEP.CanRestOnObjects = false
 
-SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {500, 200}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {500, 200}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {reload = "reload",
 	fire = {"fire1"},

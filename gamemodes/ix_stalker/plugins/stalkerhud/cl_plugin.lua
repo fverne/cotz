@@ -174,9 +174,9 @@ function PLUGIN:HUDPaint()
 							surface.SetDrawColor(Color(255, 255, 255, 255))
 
 							if ix.item.list[ammoBox].width == 1 then
-								surface.DrawTexturedRect(ScrW()*0.89, ScrH()*0.87, ScrW()*0.0366, ScrH()*0.0652)
+								surface.DrawTexturedRect(ScrW()*0.90, ScrH()*0.87, ScrW()*0.0366, ScrH()*0.0652)
 							else
-								surface.DrawTexturedRect(ScrW()*0.86, ScrH()*0.87, ScrW()*0.073, ScrH()*0.0652)
+								surface.DrawTexturedRect(ScrW()*0.87, ScrH()*0.87, ScrW()*0.073, ScrH()*0.0652)
 							end
 						end
 					end	
@@ -184,20 +184,16 @@ function PLUGIN:HUDPaint()
 			end
 			surface.SetMaterial(Ammo)
 			surface.SetDrawColor(Color(255, 255, 255, 200))
-			surface.DrawTexturedRect(ScrW()*0.81, ScrH()*0.835, ScrW()*0.1318, ScrH()*0.1172)
+			surface.DrawTexturedRect(ScrW()*0.81, ScrH()*0.835, ScrW()*0.1518, ScrH()*0.1172)
 		end
 	end
 
 	if IsValid( wep ) then
 		if wep:GetMaxClip1() > 0 then
-			draw.DrawText(tostring(wep:Clip1()), "stalkerregularfont", ScrW()*0.84, ScrH()*0.88, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
-			draw.DrawText(tostring(lp:GetAmmoCount( wep:GetPrimaryAmmoType() )), "stalkerregularfont", ScrW()*0.84, ScrH()*0.91, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
-		end
-	end
+			draw.DrawText(tostring(wep:Clip1()), "stalkerregularfont", ScrW()*0.85, ScrH()*0.88, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+			draw.DrawText(tostring(lp:GetAmmoCount( wep:GetPrimaryAmmoType() )), "stalkerregularfont", ScrW()*0.85, ScrH()*0.91, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
 
-	if IsValid( wep ) then
-		if string.sub(wep:GetClass(),1,3) == "cw_" then
-			if wep:GetMaxClip1() > 0 then
+			if string.sub(wep:GetClass(),1,3) == "cw_" then
 				if wep:GetPrimaryAmmoType() then
 					draw.DrawText( language.GetPhrase(game.GetAmmoName(wep:GetPrimaryAmmoType()).."_ammo"), "stalkerregularsmallfont2", ScrW()*0.83, ScrH()*0.838, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
 				end
@@ -224,7 +220,6 @@ function PLUGIN:HUDPaint()
 				surface.SetMaterial(gun3)
 				surface.SetDrawColor(Color(200, 200, 200, 255))
 			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 0 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 20 then
-
 				surface.SetMaterial(gun4)
 				surface.SetDrawColor(Color(200, 200, 200, 255))
 			end
@@ -233,7 +228,6 @@ function PLUGIN:HUDPaint()
 		end
 	end
 	surface.DrawTexturedRect(ScrW()*0.9, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
---// End HUD Code //--
 end
 
 
@@ -241,7 +235,6 @@ end
 function ix.hud.DrawDeath()
 	local owner, w, h, ceil, ft, clmp
 	owner = LocalPlayer()
-	ft = FrameTime()
 	w, h = ScrW(), ScrH()
 
 	if (owner:GetCharacter()) then

@@ -68,7 +68,7 @@ SWEP.CanRestOnObjects = false
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {200, -200}, atts = {"md_microt1", "md_eotech", "md_rmr"}},
 [2] = {header = "Barrel", offset = {-600, -350}, atts = {"md_tundra9mm"}},
-["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"fire"},
 	reload = "reload",

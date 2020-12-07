@@ -78,7 +78,7 @@ SWEP.MuzzleVelocity = 250
 
 SWEP.Attachments = {[1] = {header = "Barrel", offset = {-350, -200}, atts = {"md_cobram2"}},
 	[2] = {header = "Sight", offset = {300, -300}, atts = {"md_rmr"}},
-	["+reload"] = {header = "Ammo", offset = {800, 100}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {800, 100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"base_fire","base_fire2"},
 	fire_aim = {"iron_fire_1"},

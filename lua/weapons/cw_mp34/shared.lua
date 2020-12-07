@@ -78,7 +78,7 @@ SWEP.CanRestOnObjects = true
 --SWEP.AimBreathingIntensity = .75
 
 SWEP.Attachments = {[2] = {header = "Barrel Extension", offset = {-650, -450}, atts = {"md_tundra9mm"}},
-["+reload"] = {header = "Ammo", offset = {-370, 70}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+["+reload"] = {header = "Ammo", offset = {-370, 70}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"base_fire"},
 	fire_aim = {"iron_fire"},

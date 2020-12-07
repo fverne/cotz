@@ -1,8 +1,8 @@
-ITEM.name = ".44 Magnum Zone-Loaded"
+ITEM.name = ".44 Magnum Armor-Piercing"
 ITEM.model = "models/lostsignalproject/items/ammo/357.mdl"
-ITEM.ammo = ".44 Magnum -ZL-" // type of the ammo
+ITEM.ammo = ".44 Magnum -AP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo
-ITEM.description= "A box that contains %s rounds of zone-loaded .44 Magnum ammo. "
+ITEM.description= "A box that contains %s rounds of Armor-Piercing .44 Magnum ammo. "
 ITEM.longdesc = "This large-bore .44 Magnum cartridge was originally designed for revolvers, but quickly adopted by rifles and carbines."
 ITEM.price = 1000
 ITEM.width = 2

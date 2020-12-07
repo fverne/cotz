@@ -244,5 +244,5 @@ function PLUGIN:HUDPaint()
 		surface.SetMaterial(psy4)
 		surface.SetDrawColor(Color(200, 200, 200, 255))
 	end
-	surface.DrawTexturedRect(ScrW()*0.92, ScrH()*0.75, ScrW()*0.018, ScrH()*0.032)
+	surface.DrawTexturedRect(ScrW()*0.94, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
 end

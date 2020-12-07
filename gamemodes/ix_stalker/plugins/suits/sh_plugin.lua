@@ -41,7 +41,6 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 	anomtypes[DMG_POISON] = true
 	anomtypes[DMG_NERVEGAS] = true
 	anomtypes[DMG_SLOWBURN] = true
-	anomtypes[DMG_AIRBOAT] = true
 	anomtypes[DMG_GENERIC] = true
 
 	if ( target:IsPlayer() and anomtypes[dmginfo:GetDamageType()]) then

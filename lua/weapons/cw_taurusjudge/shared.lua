@@ -76,7 +76,7 @@ SWEP.ADSFireAnim = true
 SWEP.CanRestOnObjects = false
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {300, -700}, atts = {"md_microt1"}},
-["+reload"] = {header = "Ammo", offset = {800, -200}, atts = {"am_zoneloaded", "am_matchgrade", "am_410buck"}}}
+["+reload"] = {header = "Ammo", offset = {800, -200}, atts = {"am_hollowpoint", "am_armorpiercing", "am_410buck"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
 	reload = "reload",

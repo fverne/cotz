@@ -93,7 +93,7 @@ SWEP.LuaViewmodelRecoil = true
 SWEP.Attachments = {[1] = {header = "Sight", offset = {200, -500}, atts = {"md_microt1", "md_eotech", "md_cmore", "md_reflex", "md_aimpoint", "md_schmidt_shortdot", "md_acog"}},
 	[2] = {header = "Barrel", offset = {-300, -200}, atts = {"md_saker"}},
 	[3] = {header = "Rail", offset = {250, 400}, atts = {"md_anpeq15"}},
-	["+reload"] = {header = "Ammo", offset = {800, 100}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {800, 100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 	
 SWEP.Animations = {fire = {"shoot1", "shoot2", "shoot3"},
 	reload = "reload",

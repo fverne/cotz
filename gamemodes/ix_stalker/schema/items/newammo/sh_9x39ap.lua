@@ -1,10 +1,10 @@
-ITEM.name = "9x39mm Zone-Loaded"
+ITEM.name = "9x39mm Armor-Piercing"
 ITEM.model = "models/lostsignalproject/items/ammo/9x39.mdl"
 ITEM.width = 2
 ITEM.height = 1
-ITEM.ammo = "9x39MM -ZL-" // type of the ammo
+ITEM.ammo = "9x39MM -AP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo
-ITEM.description= "A box that contains %s rounds of zone-loaded 9x39mm ammo. "
+ITEM.description= "A box that contains %s rounds of Armor-Piercing 9x39mm ammo. "
 ITEM.longdesc = "The SP-5 is a subsonic 9x39mm rifle round with a bimetallic casing. The round contains a steel core with a gap behind it that is filled with lead. Requires a suppressor for stealth firing. Used by special services of Warsaw Pact countries."
 ITEM.price = 1900
 ITEM.img = Material("vgui/hud/9x39zl.png")

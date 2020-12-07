@@ -85,7 +85,7 @@ SWEP.LuaViewmodelRecoil = true
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {450, -500}, atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_reflex", "md_cmore","md_schmidt_shortdot", "md_acog"}},
 	[2] = {header = "Barrel", offset = {0, -500}, atts = {"md_saker"}},
-	["+reload"] = {header = "Ammo", offset = {200, 250}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {200, 250}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 	
 	if CustomizableWeaponry_KK_HK416 then
 		table.insert(SWEP.Attachments[1].atts, 2, "md_cod4_reflex")

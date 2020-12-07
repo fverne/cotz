@@ -112,7 +112,7 @@ SWEP.LuaViewmodelRecoil = true
 		[1] = {header = "Sight", offset = {400, -300},  atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_reflex", "md_cmore","md_schmidt_shortdot", "md_acog"}},
 		[3] = {header = "Silencer", offset = {-400, -200},  atts = {"md_saker"}},
 		[4] = {header = "Handguard", offset = {-400, 200}, atts = {"md_foregrip"}}, 
-		["+reload"] = {header = "Ammo", offset = {800, 150}, atts = {"am_zoneloaded", "am_matchgrade"}}
+		["+reload"] = {header = "Ammo", offset = {800, 150}, atts = {"am_hollowpoint", "am_armorpiercing"}}
 	}
 
 	

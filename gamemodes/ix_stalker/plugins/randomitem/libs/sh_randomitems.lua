@@ -62,5 +62,5 @@ end
 ix.randomitems.tables["default"] = {
   {2000, {"bread"}},
   {50, {"mp5",{ ["durability"] = 35, ["wear"] = 80}}},
-  {200, {"9x19zl", { ["quantity"] = 25}}},
+  {200, {"9x19", { ["quantity"] = 25}}},
 }

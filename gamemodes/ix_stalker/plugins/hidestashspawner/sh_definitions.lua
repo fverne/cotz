@@ -2,23 +2,23 @@ PLUGIN.StashItems = {
   ["tier1"] = {
     {
       {"toz34short", {["durability"] = 45}},
-      {"12gaugezl", {["quantity"] = 20}},
+      {"12gauge", {["quantity"] = 20}},
       {"kit_hidestash1"},
     },
 
     {
       {"toz66short", {["durability"] = 45}},
-      {"12gaugezl", {["quantity"] = 20}},
+      {"12gauge", {["quantity"] = 20}},
       {"kit_hidestash1"},
     },
     {
       {"tokarev", {["durability"] = 45}},
-      {"762x25zl", {["quantity"] = 40}},
+      {"762x25", {["quantity"] = 40}},
       {"kit_hidestash1"}, 
     },
     {
       {"cz52", {["durability"] = 45}},
-      {"762x25zl", {["quantity"] = 40}},
+      {"762x25", {["quantity"] = 40}},
       {"kit_hidestash1"}, 
     },
 
@@ -32,13 +32,13 @@ PLUGIN.StashItems = {
     },
     {
       {"toz34", {["durability"] = 40}},
-      {"12gaugezl", {["quantity"] = 20}},
+      {"12gauge", {["quantity"] = 20}},
       {"kit_hidestash2"},
     },
 
     {
       {"toz66", {["durability"] = 34}},
-      {"12gaugezl", {["quantity"] = 20}},
+      {"12gauge", {["quantity"] = 20}},
       {"kit_hidestash2"},
     },
   },

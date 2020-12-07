@@ -99,7 +99,7 @@ SWEP.Attachments = {[1] = {header = "Barrel", offset = {-450, -500}, atts = {"md
 	[2] = {header = "Sight", offset = {350, -500}, atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_cmore", "md_reflex", "md_schmidt_shortdot", "md_acog"}},
 	[3] = {header = "Rail", offset = {-450, -100}, atts = {"md_anpeq15"}},
 	[4] = {header = "Under", offset = {-450, 325}, atts = {"md_foregrip"}},
-	["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2", "shoot3"},
 	reload = "reload",

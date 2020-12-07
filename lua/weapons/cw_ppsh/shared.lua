@@ -56,7 +56,7 @@ SWEP.RailBGs = {main = 3, on = 1, off = 0}
 SWEP.MagBGs = {main = 4, round15 = 0, round30 = 1}
 SWEP.LuaViewmodelRecoil = true
 
-SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 
 SWEP.Animations = {fire = "Shoot",

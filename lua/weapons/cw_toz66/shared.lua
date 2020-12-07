@@ -37,7 +37,7 @@ SWEP.CanRestOnObjects = false
 SWEP.ADSFireAnim = true
 
 SWEP.Attachments = {
-["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_birdshot", "am_trishot", "am_zoneloaded", "am_dartrounds"}}
+["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds"}}
 }
 	
 SWEP.Animations = {fire = "fire_iron",
