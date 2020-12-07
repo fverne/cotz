@@ -98,6 +98,7 @@ local FiremodeTranslationTable = {
 	["pump"] = "1",
 	["bolt"] = "1",
 	["break"] = "1",
+	["double"] = "1",
 	["2burst"] = "2",
 	["3burst"] = "3",
 	["auto"] = "A",
