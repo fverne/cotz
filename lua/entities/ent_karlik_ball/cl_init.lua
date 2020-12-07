@@ -11,7 +11,7 @@ function ENT:Think()
 	self.TEMP_Emitter:SetPos(self:GetPos(), false)
 		
 	if(IsValid(self.TEMP_Emitter)) then
-		local TEMP_Particle = self.TEMP_Emitter:Add( "effects/conc_warp", self:GetPos()+
+		local TEMP_Particle = self.TEMP_Emitter:Add( "particles/conc_warp", self:GetPos()+
 		Vector(math.Rand(-10,10),math.Rand(-10,10),math.Rand(-10,10)))
 		TEMP_Particle:SetDieTime( 2 )
 		TEMP_Particle:SetStartAlpha( 255 )
@@ -29,7 +29,7 @@ end
 
 function ENT:Draw()
 	cam.Start3D()
-		render.SetMaterial( Material("effects/conc_warp") )
+		render.SetMaterial( Material("particles/conc_warp") )
 		render.DrawSprite( self:GetPos(), 70, 70, Color(50,255,50,155) ) -- Draw the sprite in the middle of the map, at 16x16 in it's original colour with full alpha.
 	cam.End3D()
     //self:DrawModel()

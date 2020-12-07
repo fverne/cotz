@@ -14,7 +14,7 @@ function ENT:Draw()
 		local TEMP_Emitter = ParticleEmitter(self:GetPos(), false)
 	
 		if(IsValid(TEMP_Emitter)) then
-			local TEMP_Particle = TEMP_Emitter:Add( "effects/conc_warp", self.Entity:GetNWVector("OldPos", self:GetPos()))
+			local TEMP_Particle = TEMP_Emitter:Add( "particles/conc_warp", self.Entity:GetNWVector("OldPos", self:GetPos()))
 			TEMP_Particle:SetDieTime( 4 )
 			TEMP_Particle:SetStartAlpha( 255 )
 			TEMP_Particle:SetEndAlpha( 10 )
@@ -37,7 +37,7 @@ function ENT:Draw()
 		local TEMP_Emitter = ParticleEmitter(self:GetPos(), false)
 	
 		if(IsValid(TEMP_Emitter)) then
-			local TEMP_Particle = TEMP_Emitter:Add( "effects/conc_warp", self:GetPos()+Vector(0,0,64))
+			local TEMP_Particle = TEMP_Emitter:Add( "particles/conc_warp", self:GetPos()+Vector(0,0,64))
 			TEMP_Particle:SetDieTime( 0.3 )
 			TEMP_Particle:SetStartAlpha( 255 )
 			TEMP_Particle:SetEndAlpha( 100 )
