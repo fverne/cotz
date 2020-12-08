@@ -165,7 +165,7 @@ function Schema:PlayerWeaponChanged(client, weapon)
 	end
 end
 
-function GM:PlayerSwitchWeapon(client, oldWeapon, weapon)
+function Schema:PlayerSwitchWeapon(client, oldWeapon, weapon)
 	if (!IsFirstTimePredicted()) then
 		return
 	end
