@@ -27,7 +27,7 @@ if (SERVER) then
 	end
 
 	function ENT:OnTakeDamage(damageInfo)
-		self.hp = self.hp - dmginfo:GetDamage()
+		self.hp = self.hp - damageInfo:GetDamage()
 		if(self.hp > 0) then return end
 		
 		local pos = self:GetPos()
