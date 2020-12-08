@@ -8,14 +8,14 @@ ENT.AdminOnly = true
 ENT.Category = "Helix"
 ENT.RenderGroup = RENDERGROUP_BOTH
 
-local items = {"545x39", "vodka", "bandage", "9x18", "762x25", "22lr"}
-
 if (SERVER) then
 	function ENT:Initialize()
 		self:SetModel("models/z-o-m-b-i-e/st/box/st_box_metall_01.mdl")
 		self:SetSolid(SOLID_VPHYSICS)
 		self:PhysicsInit(SOLID_VPHYSICS)
 		local physObj = self:GetPhysicsObject()
+
+		self.hp = 20
 
 		if (IsValid(physObj)) then
 			physObj:EnableMotion(true)
@@ -27,6 +27,9 @@ if (SERVER) then
 	end
 
 	function ENT:OnTakeDamage(damageInfo)
+		self.hp = self.hp - dmginfo:GetDamage()
+		if(self.hp > 0) then return end
+		
 		local pos = self:GetPos()
 		local ang = self:GetAngles()
 
@@ -35,7 +38,8 @@ if (SERVER) then
 
 			for i = 1,4 do
 				if (math.random(1, 6) == 6) then
-					ix.item.Spawn(table.Random(items), self:GetPos()+Vector(0, 0, 2 + i))
+					local drop = ix.util.GetRandomItemFromPool("ix_entbox_drops")
+					ix.item.Spawn(drop[1], self:GetPos()+Vector(0, 0, 2 + i), nil, AngleRand(), drop[2] or {})
 				end
 			end
 		end
@@ -59,9 +63,10 @@ if (SERVER) then
 		timer.Simple(0.0001, function()
 			BottomBox:Spawn()
 			TopBox:Spawn()
+			TopBox:GetPhysicsObject():SetVelocity(Vector(math.random(-50,50),math.random(-50,50),100))
 		end)
 
-		timer.Simple(3, function()
+		timer.Simple(5, function()
 			BottomBox:Remove()
 			TopBox:Remove()
 		end)
