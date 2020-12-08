@@ -38,7 +38,7 @@ if (SERVER) then
 
 			for i = 1,4 do
 				if (math.random(1, 4) == 4) then
-					local drop = ix.util.GetRandomItemFromPool("ix_wood_entbox_drops")
+					local drop = ix.util.GetRandomItemFromPool(self.CustomSpawngroup or "ix_wood_entbox_drops")
 					ix.item.Spawn(drop[1], self:GetPos()+Vector(0, 0, 2 + i), nil, AngleRand(), drop[2] or {})
 				end
 			end
@@ -124,6 +124,10 @@ if (SERVER) then
 			LeftBox:Remove()
 			Left2Box:Remove()
 		end)
+	end
+
+	function ENT:SetCustomSpawngroup(custgroup)
+		self.CustomSpawngroup = custgroup
 	end
 end
 

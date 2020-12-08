@@ -29,7 +29,7 @@ if (SERVER) then
 	function ENT:OnTakeDamage(damageInfo)
 		self.hp = self.hp - damageInfo:GetDamage()
 		if(self.hp > 0) then return end
-		
+
 		local pos = self:GetPos()
 		local ang = self:GetAngles()
 
@@ -38,7 +38,7 @@ if (SERVER) then
 
 			for i = 1,4 do
 				if (math.random(1, 6) == 6) then
-					local drop = ix.util.GetRandomItemFromPool("ix_entbox_drops")
+					local drop = ix.util.GetRandomItemFromPool(self.CustomSpawngroup or "ix_entbox_drops")
 					ix.item.Spawn(drop[1], self:GetPos()+Vector(0, 0, 2 + i), nil, AngleRand(), drop[2] or {})
 				end
 			end
@@ -70,6 +70,10 @@ if (SERVER) then
 			BottomBox:Remove()
 			TopBox:Remove()
 		end)
+	end
+
+	function ENT:SetCustomSpawngroup(custgroup)
+		self.CustomSpawngroup = custgroup
 	end
 end
 
