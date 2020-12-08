@@ -421,7 +421,7 @@ function ENT:STALKERNPCKill(dmginfo)
 				
 				TEMP_Ragdoll:TakeDamageInfo(dmginfo)
 
-				TEMP_Ragdoll:Fire("kill","",30)
+				TEMP_Ragdoll:Fire("kill","",180)
 				TEMP_KillTime = 0.1
 			end
 		else
