@@ -35,6 +35,8 @@ function PANEL:Think()
 			self.loading = false
 		end
 	end
+
+	gui.EnableScreenClicker(true)
 end
 
 function PANEL:targetName()
