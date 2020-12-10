@@ -486,9 +486,9 @@ function SWEP:DrawHUD()
 		end
 	end
 
-	if cw_customhud_ammo:GetInt() >= 1 then
-		self:draw3D2DHUD()
-	end
+--	if cw_customhud_ammo:GetInt() >= 1 then
+--		self:draw3D2DHUD()
+--	end
 
 	if not disableTabDisplay then
 		if self.dt.State == CW_CUSTOMIZE then
