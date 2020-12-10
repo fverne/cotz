@@ -17,6 +17,8 @@ ITEM.ballisticlevels = {"0"}
 ITEM.img = Material("vgui/hud/eo20.png")
 ITEM.repairCost = ITEM.price/100*1
 
+ITEM.weight = 1.800
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

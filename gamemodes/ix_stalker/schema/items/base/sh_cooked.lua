@@ -69,3 +69,7 @@ ITEM.functions.use = {
 		return true
 	end
 }
+
+function ITEM:GetPrice()
+    return self.price * self:GetWeight()
+end

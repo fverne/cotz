@@ -15,6 +15,8 @@ ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 ITEM.repairCost = ITEM.price/100*1
 
+ITEM.weight = 3.600
+
 ITEM.pacData = {
 [7] = {
 	["children"] = {

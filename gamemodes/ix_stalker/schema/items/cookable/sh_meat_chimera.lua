@@ -11,6 +11,8 @@ ITEM.WeightPerHunger = 0.120
 ITEM.BaseWeight = 4.144
 ITEM.WeightPerLevel = 1.843
 
+ITEM.meal = "meal_chimera"
+
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")

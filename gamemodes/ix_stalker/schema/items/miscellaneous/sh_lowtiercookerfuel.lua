@@ -132,7 +132,7 @@ ITEM.functions.use = {
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		if (!targetitem) then return false end
+		if (!targetItem) then return false end
 		
 		if ( targetItem.cookertier and targetItem.cookertier <= item.fueltier and !targetItem:GetData("cancook", false) ) then
 			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)

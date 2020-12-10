@@ -11,6 +11,8 @@ ITEM.WeightPerHunger = 0.110
 ITEM.BaseWeight = 1.441
 ITEM.WeightPerLevel = 0.433
 
+ITEM.meal = "meal_pseudodog"
+
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
