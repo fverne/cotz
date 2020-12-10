@@ -47,3 +47,37 @@ function ix.util.GetLongLatFromVector(pos)
 
 	return {xposconv, yposconv}
 end
+
+function ix.util.GetHeadingFromAngle(ang)
+	local tmp = ang[2]
+
+	local str = "The compass is spinning wildly"
+
+	--nice code
+	if( tmp < -157.5 or tmp > 157.5 ) then
+		return "S"
+	end
+	if( tmp > 112.5 and tmp <= 157.5 ) then
+		return "SE"
+	end
+	if( tmp > 67.5 and tmp <= 112.5 ) then
+		return "E"
+	end
+	if( tmp > 22.5 and tmp <= 67.5 ) then
+		return "NE"
+	end
+	if( tmp > -22.5 and tmp <= 22.5 ) then
+		return "N"
+	end
+	if( tmp > -67.5 and tmp <= -22.5 ) then
+		return "NW"
+	end
+	if( tmp > -112.5 and tmp <= -67.5 ) then
+		return "W"
+	end
+	if( tmp > -157.5 and tmp <= -112.5 ) then
+		return "SW"
+	end
+
+	return str
+end
