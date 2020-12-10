@@ -89,7 +89,7 @@ function ITEM:OnInstanced(invID, x, y)
 	if (!self:GetData("points")) then
 		local tmptbl = {}
 
-		for i = 0, 4 do
+		for i = 1, 2 do
 			table.insert(tmptbl,ix.util.GetRandomTaskPoint())
 		end
 

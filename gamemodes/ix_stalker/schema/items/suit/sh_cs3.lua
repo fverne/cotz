@@ -1,7 +1,7 @@
-ITEM.name = "Sky-3a"
+ITEM.name = "Sky-3"
 ITEM.model ="models/kek1ch/cs_heavy_outfit.mdl"
 ITEM.replacements ="models/stalkerisaac/playermodel/male_01_cs4.mdl"
-ITEM.description= "A Sky-3a suit."
+ITEM.description= "A Sky-3 suit."
 ITEM.longdesc = "A pair of reinforced tactical pants, comfortable nomex jacket and a plate carrier with pouches, it's a bare minimum of equipment for a seasoned merc, faction soldier or professional bandit."
 ITEM.width = 2
 ITEM.height = 3
@@ -16,7 +16,8 @@ ITEM.ballisticlevels = {"0","lll","lll","l","l"}
 ITEM.img = Material("vgui/hud/cs2.png")
 ITEM.noBusiness = true
 
-
+ITEM.weight = 8.600
+ITEM.miscslots = 3
 
 ITEM.newSkin = 0
 ITEM.bodygroup = {0}

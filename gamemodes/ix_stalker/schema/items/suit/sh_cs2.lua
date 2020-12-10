@@ -15,8 +15,8 @@ ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","lll-a","lll-a","0","0"}
 ITEM.img = Material("vgui/hud/cs2.png")
 
-
-
+ITEM.weight = 6.900
+ITEM.miscslots = 2
 
 ITEM.newSkin = 1
 ITEM.bodygroup = {0}

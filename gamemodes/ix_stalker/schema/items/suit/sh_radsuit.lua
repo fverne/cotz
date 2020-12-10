@@ -16,6 +16,8 @@ ITEM.ballisticlevels = {"0","lV","lV","lll-a","lll-a"}
 ITEM.img = Material("vgui/hud/radsuit.png")
 ITEM.noBusiness = true
 
+ITEM.weight = 14.400
+ITEM.miscslots = 4
 
 ITEM.newSkin = 0
 ITEM.bodyGroups = {
