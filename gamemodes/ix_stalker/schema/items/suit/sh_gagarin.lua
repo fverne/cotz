@@ -11,6 +11,9 @@ ITEM.br = 0.4
 ITEM.fbr = 7
 ITEM.ar = 0.5
 ITEM.far = 2
+ITEM.isHelmet = true
+ITEM.isGasmask = true
+ITEM.radProt = 0.60
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","lll","lll","lll-a","lll-a"}
 ITEM.img = Material("vgui/hud/berill7.png")
@@ -18,6 +21,11 @@ ITEM.noBusiness = true
 
 ITEM.weight = 7.600
 ITEM.miscslots = 4
+
+ITEM.bodyGroups = {
+	["Closed-Cycle"] = 1,
+	["Shoulderpads"] = 1,
+}
 
 ITEM.newSkin = 0
 ITEM.bodygroup = {0}
