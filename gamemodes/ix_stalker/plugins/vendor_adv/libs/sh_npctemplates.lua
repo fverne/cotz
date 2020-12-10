@@ -4,7 +4,7 @@ ix.npctemplates.soundtemplates = {}
 ix.npctemplates.animtemplates = {}
 ix.npctemplates.animtemplatestranslation = {}
 
-local BUYSELL 	= 1
+local SELLANDBUY 	= 1
 local SELLONLY 	= 2
 local BUYONLY 	= 3
 
@@ -64,29 +64,6 @@ ix.npctemplates.templates["Barmantest"] = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
 		["22lr"] 		= { 10, 1, SELLONLY, 2, 0.10, 1 },
-	},
-}
-
-ix.npctemplates.templates["Barmantest2"] = {
-	name 		= "Sorter",
-	description = "A bulky man. He looks at you with disdain.",
-	model 		= "models/legends/chich.mdl",
-	skin 		= 0,
-	bubble 		= 0,
-	scale 		= 1.0,
-	dialogueid 	= "tradertest",
-	soundgroup 	= "TraderHello",
-	--animgroup 	= 2,
-	idleanim = "sidit2",
-	items = {
-	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
-		["22lr"] 		= { 10, 1, SELLONLY, 2, 0.10, 1 },
-		["sunrise"] 	= { 15000, 1, SELLONLY, 2, 0.10, 1 },
-		["toz66short"] 	= { 1600, 1, SELLONLY, 2, 0.10, 1 },
-		["ak74"] 	= { 7400, 1, SELLONLY, 2, 0.10, 1 },
-		["io7a"] 	= { 2000, 2, SELLONLY, 4, 0.25, 2 },
-		["lowtiercookerfuel"] 	= { 400, 2, BUYONLY, 4, 0.25, 2 },
 	},
 }
 
@@ -177,6 +154,57 @@ ix.npctemplates.templates["TechNPCTest"] = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
 		["22lr"] 		= { 10, 1, SELLONLY, 2, 0.10, 1 },
+	},
+}
+
+ix.npctemplates.templates["TraderNPCTest"] = {
+	name 		= "Sorter",
+	description = "A bulky man. He looks at you with disdain.",
+	model 		= "models/legends/chich.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 1.0,
+	dialogueid 	= "tradertest",
+	soundgroup 	= "TraderHello",
+	--animgroup 	= 2,
+	idleanim = "bandit2_idle2",
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["g2contender"] 	= { nil, 2, SELLANDBUY, 2, 0.25, 1 },
+		["brhp"] 		= { nil, 2, SELLONLY, 2, 0.10, 1 },
+		["c96"] 	= { nil, 2, SELLONLY, 2, 0.10, 1 },
+		["cz52"] 	= { nil, 2, SELLONLY, 2, 0.10, 1 },
+		["makarov"] 	= { nil, 2, SELLONLY, 2, 0.10, 1 },
+		["tokarev"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["rugermk3"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["ppsh"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["skorpion"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["kiparis"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["stechaps"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["w9422"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["ruger1022"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["taurusjudge"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["m1917"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["anaconda"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["obrez"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["mac11"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["sten"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["toz34short"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["toz66short"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["m3supershort"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["toz66"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["toz34"] 	= { nil, 2, SELLONLY, 2, 0.25, 1 },
+		["mossberg500"] 	= { nil, 2, SELLONLY, 2, 0.25, 2 },
+		["12gauge"] 	= { nil, 6, SELLONLY, 10, 0.10, 4 },
+		["12gaugesg"] 	= { nil, 6, SELLONLY, 10, 0.10, 4 },
+		["9x18"] 	= { nil, 6, SELLONLY, 10, 0.10, 4 },
+		["9x19"] 	= { nil, 6, SELLONLY, 10, 0.10, 4 },
+		["762x25"] 	= { nil, 6, SELLONLY, 10, 0.10, 10 },
+		["22lr"] 	= { nil, 6, SELLONLY, 10, 0.10, 10 },
+		["45acp"] 	= { nil, 6, SELLONLY, 10, 0.10, 4 },
+		["44magnum"] 	= { nil, 6, SELLONLY, 10, 0.10, 4 },
+		["762x54"] 	= { nil, 6, SELLONLY, 10, 0.10, 4 },
+
 	},
 }
 
