@@ -113,8 +113,10 @@ function SWEP.PlayerBindPress(ply, b, p)
 					end
 
 					if b == CustomizableWeaponry.customizationMenuKey then
-						if wep.dt.State == CW_IDLE then
+						if wep.dt.State == CW_IDLE and CurTime() > wep.ReloadWait and wep.ShotgunReloadState == 0 then
 							return wep.processSlotKeyPress(wep, "+reload", p)
+						else
+							return true
 						end
 					end
 				end

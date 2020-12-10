@@ -8,14 +8,14 @@ ENT.AdminOnly = true
 ENT.Category = "Helix"
 ENT.RenderGroup = RENDERGROUP_BOTH
 
-local items = {"545x39", "vodka", "bandage", "9x18", "762x25", "22lr"}
-
 if (SERVER) then
 	function ENT:Initialize()
 		self:SetModel("models/z-o-m-b-i-e/st/box/st_box_wood_01.mdl")
 		self:SetSolid(SOLID_VPHYSICS)
 		self:PhysicsInit(SOLID_VPHYSICS)
 		local physObj = self:GetPhysicsObject()
+
+		self.hp = 40
 
 		if (IsValid(physObj)) then
 			physObj:EnableMotion(true)
@@ -27,6 +27,9 @@ if (SERVER) then
 	end
 
 	function ENT:OnTakeDamage(dmginfo)
+		self.hp = self.hp - dmginfo:GetDamage()
+		if(self.hp > 0) then return end
+
 		local pos = self:GetPos()
 		local ang = self:GetAngles()
 
@@ -35,7 +38,8 @@ if (SERVER) then
 
 			for i = 1,4 do
 				if (math.random(1, 4) == 4) then
-					ix.item.Spawn(table.Random(items), self:GetPos()+Vector(0, 0, 2 + i * 2))
+					local drop = ix.util.GetRandomItemFromPool(self.CustomSpawngroup or "ix_wood_entbox_drops")
+					ix.item.Spawn(drop[1], self:GetPos()+Vector(0, 0, 2 + i), nil, AngleRand(), drop[2] or {})
 				end
 			end
 		end
@@ -94,19 +98,24 @@ if (SERVER) then
 		Left2Box:SetAngles(ang)
 		Left2Box:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_wood_01_7.mdl")
 		
-
+		
 		timer.Simple(0.001, function()
 			BottomBox:Spawn()
 			TopBox:Spawn()
+			TopBox:GetPhysicsObject():SetVelocity(Vector(math.random(-50,50),math.random(-50,50),100))
 			FrontBox:Spawn()
+			FrontBox:GetPhysicsObject():SetVelocity(Vector(math.random(-50,50),math.random(-50,50),100))
 			RightBox:Spawn()
+			RightBox:GetPhysicsObject():SetVelocity(Vector(math.random(-50,50),math.random(-50,50),100))
 			BackBox:Spawn()
+			BackBox:GetPhysicsObject():SetVelocity(Vector(math.random(-50,50),math.random(-50,50),100))
 			LeftBox:Spawn()
+			LeftBox:GetPhysicsObject():SetVelocity(Vector(math.random(-50,50),math.random(-50,50),100))
 			Left2Box:Spawn()
+			Left2Box:GetPhysicsObject():SetVelocity(Vector(math.random(-50,50),math.random(-50,50),100))
 		end)
 
-
-		timer.Simple(3, function()
+		timer.Simple(5, function()
 			BottomBox:Remove()
 			TopBox:Remove()
 			FrontBox:Remove()
@@ -115,6 +124,10 @@ if (SERVER) then
 			LeftBox:Remove()
 			Left2Box:Remove()
 		end)
+	end
+
+	function ENT:SetCustomSpawngroup(custgroup)
+		self.CustomSpawngroup = custgroup
 	end
 end
 

@@ -64,3 +64,21 @@ ix.randomitems.tables["default"] = {
   {50, {"mp5",{ ["durability"] = 35, ["wear"] = 80}}},
   {200, {"9x19", { ["quantity"] = 25}}},
 }
+
+ix.randomitems.tables["ix_entbox_drops"] = {
+  {10, {"545x39"}},
+  {100, {"drink_vodka_1"}},
+  {100, {"medic_bandage_1"}},
+  {50, {"9x18"}},
+  {50, {"762x25"}},
+  {50, {"22lr"}},
+}
+
+ix.randomitems.tables["ix_wood_entbox_drops"] = {
+  {10, {"545x39"}},
+  {100, {"drink_vodka_1"}},
+  {100, {"medic_bandage_1"}},
+  {50, {"9x18"}},
+  {50, {"762x25"}},
+  {50, {"22lr"}},
+}

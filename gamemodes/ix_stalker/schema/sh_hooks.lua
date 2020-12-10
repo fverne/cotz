@@ -152,3 +152,24 @@ if CLIENT then
 		end)
 	end)
 end
+
+
+function Schema:PlayerWeaponChanged(client, weapon)
+	if (CLIENT) then
+		return
+	end
+	-- If player already had weapon raised
+	if (client:GetNetVar("keepraised",false)) then
+		client:SetWepRaised(client:GetNetVar("keepraised",false), weapon)
+		return true
+	end
+end
+
+function Schema:PlayerSwitchWeapon(client, oldWeapon, weapon)
+	if (!IsFirstTimePredicted()) then
+		return
+	end
+	if (SERVER) then
+		client:SetNetVar("keepraised", client:IsWepRaised())
+	end
+end
