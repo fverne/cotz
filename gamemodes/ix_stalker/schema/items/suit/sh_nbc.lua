@@ -19,6 +19,8 @@ ITEM.overlayPath = "vgui/overlays/hud_gas"
 ITEM.ballisticlevels = {"0","ll-a","ll-a","0","0"}
 ITEM.img = Material("vgui/hud/nbc.png")
 
+ITEM.weight = 9.800
+ITEM.miscslots = 2
 
 ITEM.newSkin = 0
 ITEM.bodyGroups = {

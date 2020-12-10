@@ -20,6 +20,8 @@ ITEM.ballisticlevels = {"0","lll","lll","l","l"}
 ITEM.img = Material("vgui/hud/seva.png")
 ITEM.noBusiness = true
 
+ITEM.weight = 15.300
+ITEM.miscslots = 3
 
 ITEM.newSkin = 0
 ITEM.bodyGroups = {

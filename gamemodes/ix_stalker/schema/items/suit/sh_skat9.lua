@@ -16,6 +16,8 @@ ITEM.ballisticlevels = {"0","lV","lV","lll-a","lll-a"}
 ITEM.img = Material("vgui/hud/skat.png")
 ITEM.noBusiness = true
 
+ITEM.weight = 9.800
+ITEM.miscslots = 2
 
 ITEM.newSkin = 0
 ITEM.bodygroup = {0}

@@ -16,6 +16,9 @@ ITEM.ballisticlevels = {"0","lll","lll","l","l"}
 ITEM.img = Material("vgui/hud/berill7.png")
 ITEM.noBusiness = true
 
+ITEM.weight = 8.800
+ITEM.miscslots = 1
+
 ITEM.newSkin = 0
 ITEM.bodygroup = {0}
 ITEM.bodygroupsub = {0}
