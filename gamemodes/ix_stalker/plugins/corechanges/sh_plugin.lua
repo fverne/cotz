@@ -70,6 +70,13 @@ if (SERVER) then
 
 		return true
 	end
+
+	--disable damage from trigger_hurt
+	function PLUGIN:EntityTakeDamage( target, dmginfo )
+		if dmginfo:GetAttacker():GetClass() == "trigger_hurt" and dmginfo:GetDamageType() == DMG_GENERIC then
+			return true
+		end
+	end
 end
 
 if (CLIENT) then
