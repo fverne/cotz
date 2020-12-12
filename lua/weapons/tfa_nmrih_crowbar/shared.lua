@@ -37,7 +37,7 @@ SWEP.InspectPos = Vector(-3.086, -6.5, 7.236)
 SWEP.InspectAng = Vector(-8.443, 11.651, 12.725)
 
 SWEP.Primary.Blunt = true
-SWEP.Primary.Damage = 30
+SWEP.Primary.Damage = 45
 SWEP.Primary.Reach = 60
 SWEP.Primary.RPM = 100
 SWEP.Primary.SoundDelay = 0.15
@@ -46,11 +46,11 @@ SWEP.Primary.Window = 0.2
 
 SWEP.Secondary.Blunt = true
 SWEP.Secondary.RPM = 60 -- Delay = 60/RPM, this is only AFTER you release your heavy attack
-SWEP.Secondary.Damage = 60
+SWEP.Secondary.Damage = 90
 SWEP.Secondary.Reach = 60	
 SWEP.Secondary.SoundDelay = 0.1
 SWEP.Secondary.Delay = 0.3
 
-SWEP.Secondary.BashDamage = 50
+SWEP.Secondary.BashDamage = 75
 SWEP.Secondary.BashDelay = 0.35
 SWEP.Secondary.BashLength = 50

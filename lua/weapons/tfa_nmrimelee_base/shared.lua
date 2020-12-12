@@ -678,7 +678,7 @@ function SWEP:ApplyForce(ent,dmg,pos,physbone)
 		end
 	end
 end
-/*
+
 function SWEP:AltAttack()
 	if !self:OwnerIsValid() then return end
 
@@ -836,7 +836,7 @@ function SWEP:AltAttack()
 		end
 	end)
 end
-*/
+
 function SWEP:ToggleInspect()
 
 	if self.Callback.ToggleInspect then

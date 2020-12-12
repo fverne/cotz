@@ -48,15 +48,15 @@ SWEP.Primary.Reach = 65
 SWEP.Primary.RPM = 80
 SWEP.Primary.SoundDelay = 0.1
 SWEP.Primary.Delay = 0.25
-SWEP.Primary.Damage = 30
+SWEP.Primary.Damage = 60
 
 SWEP.Secondary.RPM = 45 -- Delay = 60/RPM, this is only AFTER you release your heavy attack
-SWEP.Secondary.Damage = 60
+SWEP.Secondary.Damage = 120
 SWEP.Secondary.Reach = 65
 SWEP.Secondary.SoundDelay = 0.05
 SWEP.Secondary.Delay = 0.25
 
-SWEP.Secondary.BashDamage = 24
+SWEP.Secondary.BashDamage = 30
 SWEP.Secondary.BashDelay = 0.1
 SWEP.Secondary.BashLength = 54
 SWEP.Secondary.BashDamageType = DMG_CLUB
