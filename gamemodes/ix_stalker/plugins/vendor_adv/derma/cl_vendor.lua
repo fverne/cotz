@@ -50,6 +50,8 @@ function PANEL:Init()
 				net.WriteUInt(0, 32) -- Not an existing item
 				net.WriteBool(false)
 			net.SendToServer()
+
+			self:removeItem(self.activeSell.item, "selling", 0) -- We assume everything goes well - not always the case!!
 		end
 	end
 
@@ -128,7 +130,9 @@ end
 function PANEL:removeItem(uniqueID, listID, iteminstanceID)
 	if (!listID or listID == "selling") then
 		if (IsValid(self.sellingList[uniqueID])) then
-			self.sellingList[uniqueID]:Remove()
+			self.sellingList[uniqueID].stock.curstock = math.max(self.sellingList[uniqueID].stock.curstock - 1,0)
+			self.sellingList[uniqueID].stock:SetText(string.format("Stock: %d/%d", self.sellingList[uniqueID].stock.curstock, ix.gui.vendor.entity.items[uniqueID][VENDOR_MAXSTOCK]))
+			--self.sellingList[uniqueID]:Remove()
 			self.sellingItems:InvalidateLayout()
 		end
 	end
@@ -322,8 +326,8 @@ function PANEL:Setup(uniqueID, iteminstanceID)
 			if (entity and entity.items[self.item] and entity.items[self.item][VENDOR_MAXSTOCK]) then
 				local info = entity.items[self.item]
 			
-			
-				self.stock:SetText(string.format("Stock: %d/%d", info[VENDOR_STOCK], info[VENDOR_MAXSTOCK]))
+				self.stock.curstock = info[VENDOR_STOCK]
+				self.stock:SetText(string.format("Stock: %d/%d", self.stock.curstock, info[VENDOR_MAXSTOCK]))
 			end
 		end
 
