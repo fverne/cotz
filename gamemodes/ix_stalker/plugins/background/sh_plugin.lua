@@ -37,6 +37,24 @@ if (SERVER) then
 			end
 		end
 	end
+
+	-- Will run all the characters backgrounds OnLoaded functions
+	function PLUGIN:PlayerSpawn( player )
+		local character = player:GetCharacter()
+		if( !character ) then return end
+
+		local backgrounds = character:GetBackgrounds()
+
+		if (backgrounds != nil) then
+			for background, _ in pairs(backgrounds) do
+				local bck = ix.backgrounds[background]
+				if (bck) then
+					local func = bck.OnLoaded or (function(char) return true end)
+					func(character)
+				end
+			end
+		end
+	end
 end
 
 ix.char.RegisterVar("backgrounds", {
