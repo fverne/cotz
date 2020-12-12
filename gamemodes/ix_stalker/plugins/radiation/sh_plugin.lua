@@ -139,11 +139,11 @@ else
 			for k, v in ipairs(player.GetAll()) do
 			
 				if (v:GetNetVar("radiation", 0) > 45 and v:GetNetVar("radiation", 0) < 75) then
-					v:addRadiation(-0.1)
-					v:TakeDamage(1,v,v)
+					v:addRadiation(-0.5)
+					v:SetHealth(v:Health()-1)
 				elseif (v:GetNetVar("radiation", 0) > 75) then
-					v:addRadiation(-0.1)
-					v:TakeDamage(1.5,v,v)
+					v:addRadiation(-0.5)
+					v:SetHealth(v:Health()-2)
 				end
 			end
 			damageTime = CurTime() + 15
