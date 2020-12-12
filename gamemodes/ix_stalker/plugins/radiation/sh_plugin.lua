@@ -115,6 +115,7 @@ else
 	function PLUGIN:PlayerSpawn(client)
 		if (client.resetRads) then
 			client:SetNetVar("radiation", 0)
+			if (client:GetCharacter()) then client:GetCharacter():SetRadiation(0) end
 			client.resetRads = false
 		end
 	end
@@ -141,9 +142,11 @@ else
 				if (v:GetNetVar("radiation", 0) > 45 and v:GetNetVar("radiation", 0) < 75) then
 					v:addRadiation(-0.5)
 					v:SetHealth(v:Health()-1)
+					if(v:Health() <= 0) then v:Kill() end
 				elseif (v:GetNetVar("radiation", 0) > 75) then
 					v:addRadiation(-0.5)
 					v:SetHealth(v:Health()-2)
+					if(v:Health() <= 0) then v:Kill() end
 				end
 			end
 			damageTime = CurTime() + 5
