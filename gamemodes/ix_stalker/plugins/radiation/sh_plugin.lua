@@ -146,7 +146,7 @@ else
 					v:SetHealth(v:Health()-2)
 				end
 			end
-			damageTime = CurTime() + 15
+			damageTime = CurTime() + 5
 		end
 	end
 end
