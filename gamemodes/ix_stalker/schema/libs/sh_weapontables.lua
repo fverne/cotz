@@ -58,6 +58,9 @@ ix.armortables.attachments["steelplate_1"] = {
 	ar = -0.10,
 	weight = 0.950,
 	uID = "attachment_steelplate_1",
+	onAttach = function(player) print("Ran onAttach with playername: ", player:GetName()) end,
+	onDetach = function(player) print("Ran onDetach with playername: ", player:GetName()) end,
+	onThink  = function(player) print("Ran onThink with playername: ", player:GetName()) end,
 }
 
 ix.armortables.upgrades = {} -- Armor upgrades

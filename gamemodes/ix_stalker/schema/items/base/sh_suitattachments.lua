@@ -101,6 +101,10 @@ ITEM.functions.use = {
 			end
 		end
 
+		if( isfunction(ix.armortables.attachments[item.attachName].onAttach) ) then
+			ix.armortables.attachments[item.attachName].onAttach(client)
+		end
+
 		table.insert(targetAttach,item.attachName)
 		target:SetData("attachments", targetAttach)
 		client:Notify("Installed "..item.name.." on "..target.name)
@@ -108,3 +112,19 @@ ITEM.functions.use = {
 		return true
 	end,
 }
+
+hook.Add("PlayerPostThink", "ixSuitAttachThink", function(client)
+	if CLIENT then return end
+	if (client.nextsuitthink or 0) > CurTime() then return end
+	if (!client:GetChar()) then return end
+
+	client.nextsuitthink = CurTime()+5
+	local armor = client:getEquippedBodyArmor()
+	if (!armor) then return end
+
+	for _, v in pairs(armor:GetData("attachments", {})) do
+		if (isfunction(ix.armortables.attachments[v].onThink)) then
+			ix.armortables.attachments[v].onThink(client)
+		end
+	end
+end)

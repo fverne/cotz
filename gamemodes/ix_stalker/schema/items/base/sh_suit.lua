@@ -625,6 +625,10 @@ ITEM.functions.detach = {
 			end
 			table.remove(curattach,iterator)
 
+			if( isfunction(ix.armortables.attachments[data[1]].onDetach) ) then
+				ix.armortables.attachments[data[1]].onDetach(item.player)
+			end
+
 			item:SetData("attachments", curattach)
 
 		else
