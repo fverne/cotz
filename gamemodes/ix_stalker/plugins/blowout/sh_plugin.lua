@@ -90,8 +90,17 @@ if (SERVER) then
 
 			if( self.BlowoutVars.BlowoutHitTime < CT and self.BlowoutVars.BlowoutStep == 5 ) then
 				self.BlowoutVars.BlowoutStep = 6
+
+				local movetypes = {
+					[0] = true,
+					[5] = true,
+					[8] = true,
+					[10] = true
+				}
+
 				for _, v in pairs(player.GetAll()) do
-					if (!self:IsPosSafe(v:GetShootPos())) then
+
+					if (!self:IsPosSafe(v:GetShootPos()) or !movetypes[v:GetMoveType()]) then
 						v:Kill()
 					end
 
