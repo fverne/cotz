@@ -2,7 +2,7 @@ ITEM.name = "Colt Anaconda"
 ITEM.description= "A snub-nosed double-action revolver chambered for .44 Magnum."
 ITEM.longdesc = "The Colt Anaconda is a double action handgun chambered for the .44 Magnum cartridge, built on Colt's large I-frame.\nAnacondas have a reputation for accuracy, smooth trigger pull, and a tight cylinder lock-up.\nIt is quite heavy considering it is a handgun.\n\nAmmo: .44 Magnum\nMagazine Capacity: 6"
 ITEM.model = ("models/weapons/w_python.mdl")
-ITEM.class = "cw_python"
+ITEM.class = "cw_anaconda"
 ITEM.weaponCategory = "secondary"
 ITEM.price = 7500
 ITEM.width = 2
@@ -50,7 +50,7 @@ ITEM.pacData = {
 				["Event"] = "weapon_class",
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
-				["Arguments"] = "cw_python@@0",
+				["Arguments"] = "cw_anaconda@@0",
 			},
 		},
 	},

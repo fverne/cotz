@@ -14,9 +14,9 @@ if CLIENT then
 	SWEP.PosBasedMuz = false
 	SWEP.NoShells = true
 		
-	SWEP.IronsightPos = Vector(-5.671, 0, 3.16)
-	SWEP.IronsightAng = Vector(-1.4, -0.101, 0)
-	
+	SWEP.IronsightPos = Vector(4.24, 6, 2.65)
+	SWEP.IronsightAng = Vector(0.8, -0.12, 0)
+
 	SWEP.SprintPos = Vector(0.256, 0.01, 1.2)
 	SWEP.SprintAng = Vector(-17.778, 0, 0)
 	
@@ -24,24 +24,25 @@ if CLIENT then
 	SWEP.AlternativeAng = Vector(0, 0, 0)
 
 	SWEP.ViewModelMovementScale = 0.8
-	SWEP.FullAimViewmodelRecoil = true
+	SWEP.FullAimViewmodelRecoil = false
 	SWEP.HUD_MagText = "CYLINDER: "
 
 	SWEP.LuaVMRecoilAxisMod = {vert = 1, hor = 1.5, roll = 3, forward = 1, pitch = 4}
 	SWEP.CustomizationMenuScale = 0.01
 	SWEP.DisableSprintViewSimulation = true
-	
+
+	SWEP.UseHands = true
 end
 
-SWEP.LuaViewmodelRecoil = true
+SWEP.LuaViewmodelRecoil = false
 SWEP.CanRestOnObjects = false
 
 SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {500, -75}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
-SWEP.Animations = {fire = {"shoot1", "shoot2"},
-	reload = "reload",
-	idle = "idle",
-	draw = "draw"}
+SWEP.Animations = {fire = "anaconda_shoot1",
+	reload = "anaconda_reload",
+	idle = "anaconda_idle1",
+	draw = "anaconda_draw"}
 	
 SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 
@@ -54,9 +55,9 @@ SWEP.SpeedDec = 10
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0
-SWEP.HoldType = "pistol"
+SWEP.HoldType = "revolver"
 SWEP.NormalHoldType = "revolver"
-SWEP.RunHoldType = "normal"
+SWEP.RunHoldType = "revolver"
 SWEP.FireModes = {"double"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
@@ -66,10 +67,10 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
-SWEP.ViewModelFlip	= false
-SWEP.ViewModel		= "models/weapons/v_python.mdl"
-SWEP.WorldModel		= "models/weapons/w_python.mdl"
+SWEP.ViewModelFOV	= 90
+SWEP.ViewModelFlip	= true
+SWEP.ViewModel		= "models/weapons/c_anaconda.mdl"
+SWEP.WorldModel		= "models/weapons/w_anaconda.mdl"
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
@@ -93,7 +94,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.02
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 54
+SWEP.Damage = 110
 SWEP.DeployTime = 0.7
 SWEP.Chamberable = false
 
