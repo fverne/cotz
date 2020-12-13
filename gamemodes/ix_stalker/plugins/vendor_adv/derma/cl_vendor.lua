@@ -218,8 +218,8 @@ function PANEL:Init()
 
 	self.infocontainer = self.name:Add("DPanel")
 	self.infocontainer:Dock(RIGHT)
-	self.infocontainer:DockPadding(0, 0, 5, 0)
-	self.infocontainer:DockMargin(0, 0, 6, 0)
+	self.infocontainer:DockPadding(0, 0, 6, 0)
+	self.infocontainer:DockMargin(0, 0, 12, 0)
 	self.infocontainer:SetWide(self:GetWide() * 1.5)
 	self.infocontainer.Paint = function() end
 
@@ -327,15 +327,15 @@ function PANEL:Setup(uniqueID, iteminstanceID)
 				local info = entity.items[self.item]
 			
 				self.stock.curstock = info[VENDOR_STOCK]
-				self.stock:SetText(string.format("Stock: %d/%d", self.stock.curstock, info[VENDOR_MAXSTOCK]))
+				self.stock:SetText(string.format("Stock: %d/%d ", self.stock.curstock, info[VENDOR_MAXSTOCK]))
 			end
 		end
 
-		self.price:SetText(ix.currency.Get(entity:GetPrice(self.item, self.isLocal, self.iteminstanceID)))
+		self.price:SetText(ix.currency.Get(entity:GetPrice(self.item, self.isLocal, self.iteminstanceID)).." ")
 		
 		self.stock:SizeToContents()
 		self.price:SizeToContents()
-		self.infocontainer:SizeToContents()
+		self.infocontainer:SizeToChildren()
 
 		self.click:SetHelixTooltip(function(tooltip)
 			ix.hud.PopulateItemTooltip(tooltip, item)
@@ -344,7 +344,7 @@ function PANEL:Setup(uniqueID, iteminstanceID)
 			if (entity and entity.items[self.item] and entity.items[self.item][VENDOR_MAXSTOCK]) then
 				local info = entity.items[self.item]
 				local stock = tooltip:AddRowAfter("name", "stock")
-				stock:SetText(string.format("Stock: %d/%d", info[VENDOR_STOCK], info[VENDOR_MAXSTOCK]))
+				stock:SetText(string.format("Stock: %d/%d ", info[VENDOR_STOCK], info[VENDOR_MAXSTOCK]))
 				stock:SetBackgroundColor(derma.GetColor("Info", self))
 				stock:SizeToContents()
 			end
