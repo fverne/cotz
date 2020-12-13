@@ -2,44 +2,44 @@ PLUGIN.name = "Revive"
 PLUGIN.author = "some faggot"
 PLUGIN.desc = "A downed/revive implementation"
 
-ix.config.Add("reviveOn", false, "If true revive mode will be active.", nil, {
+ix.config.Add("reviveOn", true, "If true revive mode will be active.", nil, {
 	category = "Revive"
 })
 
-nut.config.Add("reviveRessurrectionTime", 5, "How long it should take to revive someone.", nil, {
+nut.config.Add("reviveRessurrectionTime", 2, "How long it should take to revive someone.", nil, {
 	data = {min = 1, max = 60},
 	category = "Revive"
 })
 
+--[[
 function PLUGIN:PlayerDisconnected(ply)
   if ix.temp.Corpses[ply] then
-		for k, v in ipairs(ix.faction.indices) do
-			if (k == client:Team()) then
-				points = ix.plugin.list["spawns"].spawns[v.uniqueID] or {}
+	for k, v in ipairs(ix.faction.indices) do
+		if (k == client:Team()) then
+			points = ix.plugin.list["spawns"].spawns[v.uniqueID] or {}
+
+			break
+		end
+	end
+
+	if (points) then 
+		for k, v in ipairs(nut.class.list) do
+			if (class == v.index) then
+				className = v.uniqueID
 
 				break
 			end
 		end
 
-		if (points) then 
-			for k, v in ipairs(nut.class.list) do
-				if (class == v.index) then
-					className = v.uniqueID
+		points = points[className] or points[""]
 
-					break
-				end
-			end
+		if (points and table.Count(points) > 0) then
+			local position = table.Random(points)
 
-			points = points[className] or points[""]
-
-			if (points and table.Count(points) > 0) then
-				local position = table.Random(points)
-
-				ply:SetPos(position)
-			end
+			ply:SetPos(position)
 		end
-	end*/
-end
+	end
+end]]--
 
 if (CLIENT) then
 
@@ -83,7 +83,7 @@ else
 		end
 
 		if IsValid(ix.temp.Corpses[client]) then
-			if !client:GetNetVar("resurrected") then
+			if (!client:GetNetVar("resurrected")) then
 				hook.Run("DeathDrop",client,ix.temp.Corpses[client]:GetPos())
 			end
 			ix.temp.Corpses[client]:Remove()
@@ -104,12 +104,6 @@ else
 			return 
 		end
 
-		if client:GetNetVar("deathsdoortime") != nil and client:GetNetVar("deathsdoortime") > CurTime() then
-			hook.Run("DeathDrop",client,client:GetPos())
-			client:SetNetVar("deathsdoortime", CurTime())
-			return
-		end
-
 		ix.temp.Corpses[client] = ents.Create("prop_ragdoll")
 		ix.temp.Corpses[client]:SetPos(client:GetPos())
 		ix.temp.Corpses[client]:SetModel(client:GetModel())
@@ -127,7 +121,7 @@ else
 			phys:ApplyForceCenter(client:GetVelocity() * 15);
 		end
 		ix.temp.Corpses[client].player = client
-		ix.temp.Corpses[client]:SetNWFloat("Time", CurTime() + nut.config.get("spawnTime", 10))
+		ix.temp.Corpses[client]:SetNWFloat("Time", CurTime() + ix.config.get("spawnTime", 10))
 		ix.temp.Corpses[client]:SetNWBool("Body", true)
 
 		timer.Simple(0.5, function()

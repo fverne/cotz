@@ -6,14 +6,6 @@ ITEM.description = "Placeholder."
 ITEM.price = 800
 ITEM.flag = "A"
 
-function ITEM:GetDescription()
-	if self:GetData("stashtext", nil) == nil then
-		return self.description
-	else
-		return self.description.."\n\nThe note has a stash location. It reads:\n"..self:GetData("stashtext", nil)
-	end
-end
-
 ITEM.functions.use = {
 	name = "Revive",
 	icon = "icon16/stalker/unlock.png",
@@ -27,17 +19,16 @@ ITEM.functions.use = {
 					ply:notify( "You cannot revive a disconnected player's body." )
 					return false
 				end
-				ply:SetAction("Reviving...", ix.config.Get("reviveRessurrectionTime", 10))
+				ply:SetAction("Reviving...", ix.config.Get("reviveRessurrectionTime", 2))
 				ply:DoStaredAction(traceEnt, function()
 					traceEnt.player:UnSpectate()
 					traceEnt.player:SetNetVar("resurrected", true)
-					traceEnt.player:SetNetVar("deathsdoortime", CurTime()+180)
 					traceEnt.player:Spawn()
 					traceEnt.player:SetHealth( 1 ) 
 					traceEnt.player:SetPos(traceEnt:GetPos())
 					ply:notify( "You revived "..traceEnt.player:GetName() )
 					traceEnt.player:notify( "You were revived by "..ply:GetName() )
-				end, ix.config.Get("reviveRessurrectionTime", 10), function() ply:SetAction() end, 128)
+				end, ix.config.Get("reviveRessurrectionTime", 2), function() ply:SetAction() end, 128)
 
 				end
 			end
