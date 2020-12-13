@@ -10,7 +10,7 @@ ENT.RenderGroup = RENDERGROUP_BOTH
 
 if (SERVER) then
 	function ENT:Initialize()
-		self:SetModel("models/z-o-m-b-i-e/st/box/st_box_wood_01.mdl")
+		self:SetModel("models/lostsignalproject/items/misc/box_wood.mdl")
 		self:SetSolid(SOLID_VPHYSICS)
 		self:PhysicsInit(SOLID_VPHYSICS)
 		local physObj = self:GetPhysicsObject()
@@ -51,28 +51,28 @@ if (SERVER) then
 		BottomBox:PhysicsInit(SOLID_VPHYSICS)
 		BottomBox:SetPos(pos + Vector(0, 0, 1))
 		BottomBox:SetAngles(ang)
-		BottomBox:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_wood_01_1.mdl")
+		BottomBox:SetModel("models/lostsignalproject/items/misc/box_wood_01.mdl")
 
 		local TopBox = ents.Create("prop_physics")
 		TopBox:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
 		TopBox:PhysicsInit(SOLID_VPHYSICS)
 		TopBox:SetPos(pos + Vector(0, 0, 1))
 		TopBox:SetAngles(ang)
-		TopBox:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_wood_01_5.mdl")
+		TopBox:SetModel("models/lostsignalproject/items/misc/box_wood_05.mdl")
 		
 		local FrontBox = ents.Create("prop_physics")
 		FrontBox:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
 		FrontBox:PhysicsInit(SOLID_VPHYSICS)
 		FrontBox:SetPos(pos + Vector(0, 0, 1))
 		FrontBox:SetAngles(ang)
-		FrontBox:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_wood_01_3.mdl")
+		FrontBox:SetModel("models/lostsignalproject/items/misc/box_wood_03.mdl")
 
 		local RightBox = ents.Create("prop_physics")
 		RightBox:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
 		RightBox:PhysicsInit(SOLID_VPHYSICS)
 		RightBox:SetPos(pos + Vector(0, 0, 1))
 		RightBox:SetAngles(ang)
-		RightBox:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_wood_01_2.mdl")
+		RightBox:SetModel("models/lostsignalproject/items/misc/box_wood_02.mdl")
 		
 
 		local BackBox = ents.Create("prop_physics")
@@ -80,7 +80,7 @@ if (SERVER) then
 		BackBox:PhysicsInit(SOLID_VPHYSICS)
 		BackBox:SetPos(pos + Vector(0, 0, 1))
 		BackBox:SetAngles(ang)
-		BackBox:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_wood_01_4.mdl")
+		BackBox:SetModel("models/lostsignalproject/items/misc/box_wood_04.mdl")
 		
 
 		local LeftBox = ents.Create("prop_physics")
@@ -88,7 +88,7 @@ if (SERVER) then
 		LeftBox:PhysicsInit(SOLID_VPHYSICS)
 		LeftBox:SetPos(pos + Vector(0, 0, 1))
 		LeftBox:SetAngles(ang)
-		LeftBox:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_wood_01_6.mdl")
+		LeftBox:SetModel("models/lostsignalproject/items/misc/box_wood_06.mdl")
 		
 
 		local Left2Box = ents.Create("prop_physics")
@@ -96,7 +96,7 @@ if (SERVER) then
 		Left2Box:PhysicsInit(SOLID_VPHYSICS)
 		Left2Box:SetPos(pos + Vector(0, 0, 1))
 		Left2Box:SetAngles(ang)
-		Left2Box:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_wood_01_7.mdl")
+		Left2Box:SetModel("models/lostsignalproject/items/misc/box_wood_07.mdl")
 		
 		
 		timer.Simple(0.001, function()

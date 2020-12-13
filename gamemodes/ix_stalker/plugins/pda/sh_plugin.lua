@@ -5,6 +5,7 @@ PLUGIN.description = "PDA chatting system, supporting avatars and nicknames"
 --removal of helix chats we dont use
 hook.Add("InitializedChatClasses", "ixChatRemoval2", function()
 	ix.chat.classes["ooc"] = nil
+	ix.chat.classes["pm"] = nil
 
 	ix.chat.Register("ooc", {
 		CanSay = function(self, speaker, text)
@@ -33,6 +34,20 @@ hook.Add("InitializedChatClasses", "ixChatRemoval2", function()
 			return true
 		end,
 	})
+
+	ix.chat.Register("pm", {
+	format = "[PM-PDA] %s -> %s: %s",
+	color = Color(125, 150, 75, 255),
+	deadCanChat = true,
+
+	OnChatAdd = function(self, speaker, text, bAnonymous, data)
+		chat.AddText(self.color, string.format(self.format, speaker:GetName(), data.target:GetName(), text))
+
+		if (LocalPlayer() != speaker) then
+			surface.PlaySound("stalkersound/pda.wav")
+		end
+	end
+})
 end)
 
 ix.char.RegisterVar("pdaavatar", {

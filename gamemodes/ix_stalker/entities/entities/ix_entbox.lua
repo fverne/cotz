@@ -10,7 +10,7 @@ ENT.RenderGroup = RENDERGROUP_BOTH
 
 if (SERVER) then
 	function ENT:Initialize()
-		self:SetModel("models/z-o-m-b-i-e/st/box/st_box_metall_01.mdl")
+		self:SetModel("models/lostsignalproject/items/misc/box_metal.mdl")
 		self:SetSolid(SOLID_VPHYSICS)
 		self:PhysicsInit(SOLID_VPHYSICS)
 		local physObj = self:GetPhysicsObject()
@@ -51,14 +51,14 @@ if (SERVER) then
 		BottomBox:PhysicsInit(SOLID_VPHYSICS)
 		BottomBox:SetPos(pos + Vector(0, 0, 1))
 		BottomBox:SetAngles(ang)
-		BottomBox:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_metall_01_1.mdl")
+		BottomBox:SetModel("models/lostsignalproject/items/misc/box_metall_part01.mdl")
 
 		local TopBox = ents.Create("prop_physics")
 		TopBox:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
 		TopBox:PhysicsInit(SOLID_VPHYSICS)
 		TopBox:SetPos(pos + Vector(0, 0, 8))
 		TopBox:SetAngles(ang)
-		TopBox:SetModel("models/z-o-m-b-i-e/st/box/part/st_box_metall_01_2.mdl")
+		TopBox:SetModel("models/lostsignalproject/items/misc/box_metall_part02.mdl")
 		
 		timer.Simple(0.0001, function()
 			BottomBox:Spawn()

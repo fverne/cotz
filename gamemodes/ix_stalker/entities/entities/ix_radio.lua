@@ -28,7 +28,7 @@ end
 
 if (SERVER) then
 	function ENT:Initialize()
-		self:SetModel("models/z-o-m-b-i-e/st/el_tehnika/st_priemnik_gorizont_01.mdl")
+		self:SetModel("models/lostsignalproject/items/misc/radio.mdl")
 		self:SetSolid(SOLID_VPHYSICS)
 		self:PhysicsInit(SOLID_VPHYSICS)
 		local physObj = self:GetPhysicsObject()

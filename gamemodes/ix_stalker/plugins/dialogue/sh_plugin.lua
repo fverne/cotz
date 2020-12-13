@@ -81,15 +81,6 @@ function playerMeta:dialogue(id, target)
 	end
 end
 
---EXAMPLE USAGE
-
-ix.command.Add("forwardconvo", {
-	OnRun = function(self, client, arguments)
-		local target = client:GetEyeTrace().Entity
-		client:dialogue("universalunion", target)
-	end
-})
-
 if(CLIENT) then
 	hook.Add("ShouldSuppressMenu", "DialogMenuSuppress", function(client) 
 		if(ix.gui.dialogue) then

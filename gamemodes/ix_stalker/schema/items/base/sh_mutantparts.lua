@@ -8,10 +8,6 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 0
 
-ITEM.pacData = {}
-ITEM.outfitCategory = "Trinket"
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
-
 ITEM.weight = 0
 
 function ITEM:GetDescription()
@@ -33,20 +29,6 @@ function ITEM:GetDescription()
 	end
 end
 
--- Inventory drawing
-if (CLIENT) then
-	function ITEM:PaintOver(item, w, h)
-		if (item:GetData("equip")) then
-			surface.SetDrawColor(110, 255, 110, 255)
-		else
-			surface.SetDrawColor(255, 110, 110, 255)
-		end
-
-		surface.SetMaterial(item.equipIcon)
-		surface.DrawTexturedRect(w-23,h-23,19,19)
-	end
-end
-
 function ITEM:PopulateTooltip(tooltip)
     if !self.entity then
         ix.util.PropertyDesc2(tooltip, "Mutant Part", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
@@ -56,52 +38,4 @@ function ITEM:PopulateTooltip(tooltip)
     if (self.PopulateTooltipIndividual) then
       self:PopulateTooltipIndividual(tooltip)
     end
-end
-
-function ITEM:RemovePart(client)
-	local char = client:GetCharacter()
-	self:SetData("equip", false)
-	client:RemovePart(self.uniqueID)
-
-	if (self.attribBoosts) then
-		for k, _ in pairs(self.attribBoosts) do
-			char:RemoveBoost(self.uniqueID, k)
-		end
-	end
-
-	self:OnUnequipped()
-end
-
--- On item is dropped, Remove a weapon from the player and keep the ammo in the item.
-ITEM:Hook("drop", function(item)
-	if (item:GetData("equip")) then
-		item:RemovePart(item.player)
-	end
-end)
-
-function ITEM:CanTransfer(oldInventory, newInventory)
-	if (newInventory and self:GetData("equip")) then
-		return false
-	end
-
-	return true
-end
-
-function ITEM:OnRemoved()
-	local inventory = ix.item.inventories[self.invID]
-	local owner = inventory.GetOwner and inventory:GetOwner()
-
-	if (IsValid(owner) and owner:IsPlayer()) then
-		if (self:GetData("equip")) then
-			self:RemovePart(owner)
-		end
-	end
-end
-
-function ITEM:OnEquipped()
-	self.player:EmitSound("stalkersound/inv_slot.mp3")
-end
-
-function ITEM:OnUnequipped()
-	self.player:EmitSound("stalkersound/inv_slot.mp3")
 end

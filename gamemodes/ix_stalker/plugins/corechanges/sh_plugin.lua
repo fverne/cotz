@@ -119,6 +119,8 @@ function PLUGIN:InitializedPlugins()
 	ix.command.list["eventpda"] = nil
 	ix.command.list["looc"] = nil
 	ix.command.list["charfallover"] = nil
+	ix.command.list["chargetup"] = nil
+	ix.command.list["setvoicemail"] = nil
 end
 
 --needs to be done for both chat class and command
