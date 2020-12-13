@@ -78,7 +78,7 @@ if (CLIENT) then
 else
 	function PLUGIN:PlayerSpawn( client )
 		client:UnSpectate()
-		if not client:GetChar() then 
+		if not client:GetCharacter() then 
 			return 
 		end
 
@@ -87,7 +87,7 @@ else
 				hook.Run("DeathDrop",client,ix.temp.Corpses[client]:GetPos())
 			end
 			ix.temp.Corpses[client]:Remove()
-			client:setNetVar("resurrected", false)
+			client:SetNetVar("resurrected", false)
 		end
 
 	end
@@ -100,7 +100,7 @@ else
   ix.temp.Corpses = ix.temp.Corpses or {}
 
   function PLUGIN:DoPlayerDeath( client, attacker, dmg )
-		if not client:GetChar() then 
+		if not client:GetCharacter() then 
 			return 
 		end
 
@@ -121,7 +121,7 @@ else
 			phys:ApplyForceCenter(client:GetVelocity() * 15);
 		end
 		ix.temp.Corpses[client].player = client
-		ix.temp.Corpses[client]:SetNWFloat("Time", CurTime() + ix.config.get("spawnTime", 10))
+		ix.temp.Corpses[client]:SetNWFloat("Time", CurTime() + ix.config.Get("spawnTime", 10))
 		ix.temp.Corpses[client]:SetNWBool("Body", true)
 
 		timer.Simple(0.5, function()
@@ -131,8 +131,8 @@ else
 		--ix.chat.Send(client, "iteminternal", "falls to the ground due to their injuries.", false)
 
 		client:Spectate(OBS_MODE_CHASE)
-		client:SpectateEntity(SCHEMA.Corpses[client])
-		client:notify("You will respawn in "..math.Round(ix.config.Get("spawnTime", 10)).." seconds.")
+		client:SpectateEntity(ix.temp.Corpses[client])
+		client:Notify("You will respawn in "..math.Round(ix.config.Get("spawnTime", 10)).." seconds.")
 		timer.Simple(0.01, function()
 			if(client:GetRagdollEntity() != nil and client:GetRagdollEntity():IsValid()) then
 				client:GetRagdollEntity():Remove()
