@@ -102,7 +102,7 @@ function ENT:STALKERNPCThink()
 	end
 
 	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*500 +self:GetForward()*(12*distance) +self:GetUp()*math.Clamp((distance),150,400))
+		self:SetVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*500 +self:GetForward()*(12*distance) +self:GetUp()*math.Clamp((distance),150,400))
 		self:STALKERNPCPlayAnimation("jump_ataka_01",5)
 		self:STALKERNPCMakeMeleeAttack(5)
 		self:EmitSound("Stalker.Dog.Melee1")
