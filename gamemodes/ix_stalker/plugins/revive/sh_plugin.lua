@@ -6,7 +6,7 @@ ix.config.Add("reviveOn", true, "If true revive mode will be active.", nil, {
 	category = "Revive"
 })
 
-nut.config.Add("reviveRessurrectionTime", 2, "How long it should take to revive someone.", nil, {
+ix.config.Add("reviveRessurrectionTime", 2, "How long it should take to revive someone.", nil, {
 	data = {min = 1, max = 60},
 	category = "Revive"
 })
