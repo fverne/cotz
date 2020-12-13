@@ -1,7 +1,7 @@
-DIALOGUE.name = "Trader Test"
+DIALOGUE.name = "Tech Test"
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Hmm?",
+	response = "Hello, buddy!",
 	options = {
 		"InterestTopic",
 		"TradeTopic", 
@@ -12,7 +12,7 @@ DIALOGUE.addTopic("GREETING", {
 
 DIALOGUE.addTopic("TradeTopic", {
 	statement = "Want to trade?",
-	response = "Yes",
+	response = "Absolutely!",
 	postCallback = function(self, client, target)
 		if (SERVER) then
 			local character = client:GetCharacter()
@@ -54,7 +54,7 @@ DIALOGUE.addTopic("TradeTopic", {
 
 DIALOGUE.addTopic("RepairItems", {
 	statement = "Can you repair my items?",
-	response = "What would you like me to look at?",
+	response = "Hoho! Sure! What would you like me to look at?",
 	IsDynamic = true,
 	options = {
 		"BackTopic"
@@ -106,7 +106,7 @@ DIALOGUE.addTopic("ConfirmRepair", {
 	DynamicPreCallback = function(self, player, target, dyndata)
 		if(dyndata) then
 			if (CLIENT) then
-				self.response = string.format("Repairing that %s will cost you %s, is that a deal?", ix.item.list[dyndata.itemuid].name ,ix.currency.Get(dyndata.cost))
+				self.response = string.format("Jeesh! Repairing that %s will cost you %s, is that a deal?", ix.item.list[dyndata.itemuid].name ,ix.currency.Get(dyndata.cost))
 			else
 				target.repairstruct = { dyndata.itemid, dyndata.cost, dyndata.type }
 			end
@@ -144,7 +144,7 @@ DIALOGUE.addTopic("ConfirmRepair", {
 
 DIALOGUE.addTopic("NotEnoughMoneyRepair", {
 	statement = "",
-	response = "You don't have enough money to repair that..",
+	response = "Oh no... You don't have enough money to repair that..",
 	options = {
 		"BackTopic"
 	}
@@ -152,7 +152,7 @@ DIALOGUE.addTopic("NotEnoughMoneyRepair", {
 
 DIALOGUE.addTopic("InterestTopic", {
 	statement = "Can you tell me something useful?",
-	response = "Sneed.",
+	response = "Some people say there's a big area called the garbage, that sounds like heaven to me...",
 	options = {
 		"BackTopic"
 	}
@@ -171,5 +171,5 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you!",
-	response = "Come back soon, STALKER..."
+	response = "Hey, come back soon!"
 })

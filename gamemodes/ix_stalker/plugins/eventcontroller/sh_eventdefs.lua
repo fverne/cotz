@@ -951,3 +951,47 @@ PLUGIN.eventdefs["crate1"] = {
 	lootChance = 75, 
 }
 */
+
+
+
+--SPECIAL
+PLUGIN.eventdefs["spider1"] = {
+	entities = {
+		{"npc_mutant_spider", 1},
+	},
+	pdabroadcast = "Weird creature spotted %s. Take care, stalker.",
+	difficulty = {2},
+}
+
+PLUGIN.eventdefs["sprig1"] = {
+	entities = {
+		{"npc_mutant_sprig", 1},
+	},
+	pdabroadcast = "Weird creature spotted %s. Take care, stalker.",
+	difficulty = {2},
+}
+
+PLUGIN.eventdefs["controllerswamp1"] = {
+	entities = {
+		{"npc_mutant_controller_swamp", 1},
+	},
+	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
+	difficulty = {2},
+}
+
+PLUGIN.eventdefs["zombieradio1"] = {
+	entities = {
+		{"npc_mutant_classiczombie_radio", 2},
+		{"npc_mutant_classiczombie", 3},
+	},
+	pdabroadcast = "Zombies detected %s... Getting some high radiation readings too. Be careful, stalker.",
+	difficulty = {2},
+}
+
+PLUGIN.eventdefs["psydog1"] = {
+	entities = {
+		{"npc_mutant_psydog", 1},
+	},
+	pdabroadcast = "Mutant hound detected, but... Getting some strange readings from %s... Be careful, stalker.",
+	difficulty = {2},
+}
