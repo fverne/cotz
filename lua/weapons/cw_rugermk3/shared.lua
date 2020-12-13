@@ -36,7 +36,7 @@ if CLIENT then
 	
     SWEP.MoveType = 1
 	SWEP.ViewModelMovementScale = 0.3
-	SWEP.FullAimViewmodelRecoil = true
+	--SWEP.FullAimViewmodelRecoil = true
 	SWEP.BoltBone = "bolt"
 	SWEP.BoltShootOffset = Vector(-1.3, 0, 0)
 	SWEP.BoltBonePositionRecoverySpeed = 5
@@ -120,7 +120,7 @@ SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.002
 SWEP.SpreadCooldown = 0.4
-SWEP.Damage = 30
+SWEP.Damage = 20
 SWEP.DeployTime = .7
 SWEP.ADSFireAnim = true
 

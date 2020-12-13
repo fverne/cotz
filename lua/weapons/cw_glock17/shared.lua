@@ -17,18 +17,18 @@ if CLIENT then
 	SWEP.ShellOffsetMul = 1
 	SWEP.ShellPosOffset = {x = 2, y = 0, z = 0}
 		
-	SWEP.IronsightPos = Vector(2.279, 0, 1.519)
+	SWEP.IronsightPos = Vector(2.279, 3, 1.519)
 	SWEP.IronsightAng = Vector(0, 0.1, 0)
 
-	SWEP.SprintPos = Vector(-2, -9.933, -8.775)
-	SWEP.SprintAng = Vector(70, 0, 0)
+	SWEP.SprintPos = Vector(0.602, 1.202, 1)
+	SWEP.SprintAng = Vector(-21.961, 3.517, 0)
 	
 	SWEP.CustomizePos = Vector(0, 0, 0)
 	SWEP.CustomizeAng = Vector(8, -15, 0)
 	
 	SWEP.MoveType = 1
 	SWEP.ViewModelMovementScale = 0.8
-	SWEP.FullAimViewmodelRecoil = true
+	--SWEP.FullAimViewmodelRecoil = true
 	SWEP.BoltBone = "Slide"
 	SWEP.BoltShootOffset = Vector(1.5, 0, 0)
 	SWEP.BoltBonePositionRecoverySpeed = 25
@@ -89,7 +89,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 80
 SWEP.ViewModelFlip	= true
 SWEP.ViewModel		= "models/weapons/v_pist_glock30.mdl"
 SWEP.WorldModel		= "models/weapons/w_pist_glock30.mdl"
@@ -100,7 +100,7 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 17
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= "9x19mm"
+SWEP.Primary.Ammo			= "9x19MM"
 
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_GLOCK_FIRE"

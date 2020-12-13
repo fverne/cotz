@@ -18,7 +18,7 @@ if CLIENT then
 	SWEP.ShellOffsetMul = 1
 	SWEP.ShellPosOffset = {x = -5, y = 4, z = -5}
 		
-	SWEP.IronsightPos = Vector(2.5, -0.603, 1.259)
+	SWEP.IronsightPos = Vector(2.5, 1.603, 1.259)
 	SWEP.IronsightAng = Vector(0.703, 0, 0)
 
 	SWEP.MicroT1Pos = Vector(2.5, 0, 0.28)
@@ -30,8 +30,8 @@ if CLIENT then
 	SWEP.RMRPos = Vector(2.5, 0, 0.7)
 	SWEP.RMRAng = Vector(0, 0, 0)
 
-	SWEP.SprintPos = Vector(-3.449, -7.035, -10.32)
-	SWEP.SprintAng = Vector(70, 0.703, 0)
+	SWEP.SprintPos = Vector(0.602, -0.202, 0)
+	SWEP.SprintAng = Vector(-21.961, 3.517, 0)
 	
 	SWEP.CustomizePos = Vector(0, 0, 0)
 	SWEP.CustomizeAng = Vector(8.364, 0.741, 0.277)
@@ -114,7 +114,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 90
 SWEP.ViewModelFlip	= true
 SWEP.ViewModel		= "models/weapons/v_pist_brhp.mdl"
 SWEP.WorldModel		= "models/weapons/w_pist_brhp.mdl"

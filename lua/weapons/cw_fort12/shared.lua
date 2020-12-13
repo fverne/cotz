@@ -33,8 +33,8 @@ if CLIENT then
 	SWEP.RMRPos = Vector(2.82, -5, 0.5)
 	SWEP.RMRAng = Vector(0, 0, 0)
 
-	SWEP.SprintPos = Vector(-4.361, -5.829, -8.87)
-	SWEP.SprintAng = Vector(70, 14.774, 0)
+	SWEP.SprintPos = Vector(0.602, -0.202, 0)
+	SWEP.SprintAng = Vector(-21.961, 3.517, 0)
 	
 	SWEP.AlternativePos = Vector(-0.88, 1.325, -0.561)
 	SWEP.AlternativeAng = Vector(0, 0, 0)

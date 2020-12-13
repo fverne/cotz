@@ -20,8 +20,8 @@ if CLIENT then
 	SWEP.IronsightPos = Vector(3.16, 6, 1.559)
 	SWEP.IronsightAng = Vector(0, 0, 0)
 
-	SWEP.SprintPos = Vector(-2, -9.933, -8.775)
-	SWEP.SprintAng = Vector(70, 0, 0)
+	SWEP.SprintPos = Vector(0.602, -0.202, 0)
+	SWEP.SprintAng = Vector(-21.961, 3.517, 0)
 	
 	SWEP.MicroT1Pos = Vector(3.15, 6, 0.2)
 	SWEP.MicroT1Ang = Vector(0, 0, 0)
@@ -37,7 +37,7 @@ if CLIENT then
 	
 	SWEP.MoveType = 1
 	SWEP.ViewModelMovementScale = 0.8
-	SWEP.FullAimViewmodelRecoil = false
+	--SWEP.FullAimViewmodelRecoil = false
 	SWEP.BoltBone = "slidizzle"
 	SWEP.BoltShootOffset = Vector(0, 1.5, 0)
 	SWEP.BoltBonePositionRecoverySpeed = 25
@@ -62,7 +62,7 @@ if CLIENT then
 		["md_rmr"] = {model = "models/cw2/attachments/pistolholo.mdl", bone = "animooshiunzbysporkeh", pos = Vector(0.4, 3, -3.9), angle = Angle(0, 90, 0), size = Vector(1, 1, 1)},
 	}
 
-	SWEP.LuaVMRecoilAxisMod = {vert = 0.25, hor = 0.5, roll = 2, forward = 0, pitch = 1}
+	--SWEP.LuaVMRecoilAxisMod = {vert = 0.25, hor = 0.5, roll = 2, forward = 0, pitch = 1}
 	SWEP.CustomizationMenuScale = 0.01
 	SWEP.BoltBonePositionRecoverySpeed = 17 -- how fast does the bolt bone move back into it's initial position after the weapon has fired
 
@@ -108,7 +108,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 90
 SWEP.ViewModelFlip	= true
 SWEP.ViewModel		= "models/weapons/v_M92f_p228.mdl"
 SWEP.WorldModel		= "models/weapons/w_M92f_p228.mdl"

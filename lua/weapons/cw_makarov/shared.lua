@@ -24,8 +24,8 @@ if CLIENT then
 	SWEP.PBIronsightsPos = Vector(-1.8, -3.067, 0.584)
 	SWEP.PBIronsightsAng = Vector(0.699, 0, 0)
 	
-	SWEP.SprintPos = Vector(3, -9, -8)
-	SWEP.SprintAng = Vector(70, 0, 0)
+	SWEP.SprintPos = Vector(0.602, -0.202, 0)
+	SWEP.SprintAng = Vector(-21.961, 3.517, 0)
 	
 	SWEP.MoveType = 1
 	SWEP.ViewModelMovementScale = 0.8
@@ -44,7 +44,7 @@ if CLIENT then
 
 	
 	SWEP.LuaVMRecoilAxisMod = {vert = 0.25, hor = 0.5, roll = 2, forward = 0, pitch = 1}
-	SWEP.FullAimViewmodelRecoil = true
+	--SWEP.FullAimViewmodelRecoil = true
 	SWEP.CustomizationMenuScale = 0.01
 	SWEP.BoltBonePositionRecoverySpeed = 17 -- how fast does the bolt bone move back into it's initial position after the weapon has fired
 	
@@ -92,7 +92,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 80
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/cw2/pistols/makarov.mdl"
 SWEP.WorldModel		= "models/cw2/pistols/w_makarov.mdl"

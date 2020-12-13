@@ -37,7 +37,7 @@ if CLIENT then
 	SWEP.AlternativeAng = Vector(0, 0, 0)
 	
 	SWEP.SprintPos = Vector(0.602, -0.202, 0)
-	SWEP.SprintAng = Vector(-11.961, 3.517, 0)
+	SWEP.SprintAng = Vector(-21.961, 3.517, 0)
 
 	SWEP.MoveType = 1
 	SWEP.ViewModelMovementScale = 1
@@ -100,7 +100,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 90
 SWEP.AimViewModelFOV = 70
 SWEP.ViewModelFlip	= true
 SWEP.ViewModel		= "models/weapons/v_khri_cz52.mdl"
