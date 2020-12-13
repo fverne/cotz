@@ -4,7 +4,7 @@ include("sh_sounds.lua")
 
 if CLIENT then
 	SWEP.DrawCrosshair = false
-	SWEP.PrintName = "Glock 17"
+	SWEP.PrintName = "Glock 18"
 	SWEP.CSMuzzleFlashes = true
 
 	SWEP.SelectIcon = surface.GetTextureID("weaponicons/glock.vmt")
@@ -103,7 +103,7 @@ SWEP.SlotPos = 0
 SWEP.NormalHoldType = "pistol"
 SWEP.RunHoldType = "normal"
 SWEP.AddSafeMode = false
-SWEP.FireModes = {"semi"}
+SWEP.FireModes = {"auto","semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
@@ -122,10 +122,10 @@ SWEP.AdminSpawnable		= true
 
 SWEP.Primary.ClipSize		= 17
 SWEP.Primary.DefaultClip	= 17
-SWEP.Primary.Automatic		= false
+SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x19MM"
 
-SWEP.FireDelay = 0.08
+SWEP.FireDelay = 60/1100
 SWEP.FireSound = "CW_G18_FIRE"
 SWEP.FireSoundSuppressed = "CW_G18_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.7

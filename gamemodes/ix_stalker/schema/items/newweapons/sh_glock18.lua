@@ -1,8 +1,8 @@
-ITEM.name = "Glock 17"
+ITEM.name = "Glock 18"
 ITEM.description= "An Austrian handgun that fires 9x19mm."
-ITEM.longdesc = "The Glock is an Austrian polymer handgun, famous for it's price, reliability and trigger safety mechanism.\nIt's favored by police agencies around the world and comes in many flavors.\n\nAmmo: 9x19mm\nMagazine Capacity: 17"
+ITEM.longdesc = "The Glock is an Austrian polymer handgun, famous for it's price, reliability and trigger safety mechanism. The Glock 18 is a variant on the Glock 17 pattern, enabling it to fire in full auto.\nIt's favored by police agencies around the world and comes in many flavors.\n\nAmmo: 9x19mm\nMagazine Capacity: 17"
 ITEM.model = "models/cw2_g18/w_dmg_glock.mdl"
-ITEM.class = "cw_glock17"
+ITEM.class = "cw_glock18"
 ITEM.weaponCategory = "secondary"
 ITEM.price = 4800
 ITEM.width = 2
@@ -37,12 +37,12 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/cw2_g18/w_dmg_glock.mdl",
 						["ClassName"] = "model",
-						["Position"] = Vector(-6.774, 2.172, 3.359),
+						["Position"] = Vector(-6.774, 3.172, 3.359),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3547633835",
 						["Bone"] = "pelvis",
-						["Name"] = "glock17",
-						["Angles"] = Angle(180, 0, 210),
+						["Name"] = "glock18",
+						["Angles"] = Angle(0, 90, 30),
 					},
 				},
 			},
@@ -53,7 +53,7 @@ ITEM.pacData = {
 				["Event"] = "weapon_class",
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
-				["Arguments"] = "cw_glock17@@0",
+				["Arguments"] = "cw_glock18@@0",
 			},
 		},
 	},
