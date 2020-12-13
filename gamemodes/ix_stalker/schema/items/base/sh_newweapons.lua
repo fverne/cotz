@@ -141,7 +141,7 @@ end
 
 
 function ITEM:GetRepairCost()
-	return ((self.price * 0.00125) * self.repair_PartsComplexity) + ((self.price * 0.0025) * self.repair_PartsRarity)
+	return ((self.price * 0.00125) * self.repair_PartsComplexity) + ((self.price * 0.00125) * self.repair_PartsRarity)
 end
 
 function ITEM:PopulateTooltip(tooltip)

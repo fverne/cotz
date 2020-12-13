@@ -5,10 +5,10 @@ ITEM.width = 3
 ITEM.height = 3
 ITEM.flag = "A"
 ITEM.itemsForcedDrop = {
-	{"bagrubles", {["quantity"] = 3500}},
+	{"bagrubles", {["quantity"] = 5500}},
 }
 
-ITEM.items[3] = {
+ITEM.items[1] = {
 	dropAmount = 1,
 	dropRareChance = 35,
 	dropVeryRareChance = 5,

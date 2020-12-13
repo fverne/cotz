@@ -5,7 +5,7 @@ ITEM.width = 2
 ITEM.height = 2
 ITEM.flag = "A"
 ITEM.itemsForcedDrop = {
-	{"bagrubles", {["quantity"] = 1000}},
+	{"bagrubles", {["quantity"] = 2000}},
 }
 
 ITEM.items[1] = {
