@@ -124,6 +124,8 @@ else
 		ix.temp.Corpses[client]:SetNWFloat("Time", CurTime() + ix.config.Get("spawnTime", 10))
 		ix.temp.Corpses[client]:SetNWBool("Body", true)
 
+		ix.temp.Corpses[client].isDeadBody = true
+
 		timer.Simple(0.5, function()
 			netstream.Start(nil, "ix_DeadBody", ix.temp.Corpses[client]:EntIndex())
 		end)
