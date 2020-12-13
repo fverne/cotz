@@ -11,7 +11,7 @@ if (SERVER) then
 	util.AddNetworkString("BlowoutPlaySound")
 	util.AddNetworkString("BlowoutChangePhase")
 
-	PLUGIN.NextBlowout = CurTime() + 600
+	PLUGIN.NextBlowout = CurTime() + 7200
 	
 	PLUGIN.NextThink = 0
 
@@ -92,15 +92,15 @@ if (SERVER) then
 				self.BlowoutVars.BlowoutStep = 6
 
 				local movetypes = {
-					[0] = true,
-					[5] = true,
-					[8] = true,
-					[10] = true
+					[MOVETYPE_NONE] = true,
+					[MOVETYPE_FLYGRAVITY] = true,
+					[MOVETYPE_NOCLIP] = true,
+					[MOVETYPE_OBSERVER] = true
 				}
 
 				for _, v in pairs(player.GetAll()) do
 
-					if (!self:IsPosSafe(v:GetShootPos()) or !movetypes[v:GetMoveType()]) then
+					if (!self:IsPosSafe(v:GetShootPos()) and !movetypes[v:GetMoveType()]) then
 						v:Kill()
 					end
 
@@ -235,7 +235,7 @@ if (SERVER) then
 		self.BlowoutVars.PostHitActionTime	= 0
 		self.BlowoutVars.BlowoutFinishTime	= 0
 
-		self.NextBlowout = CurTime() + 600
+		self.NextBlowout = CurTime() + 7200
 	end
 end
 
