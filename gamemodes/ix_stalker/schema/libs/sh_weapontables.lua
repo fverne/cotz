@@ -18,6 +18,7 @@ ix.weapontables.ammotypes[".45 ACP"] = {uID = "45acp"}
 ix.weapontables.ammotypes[".50 AE"] = {uID = "50ae"}
 ix.weapontables.ammotypes["9x18MM"] = {uID = "9x18"}
 ix.weapontables.ammotypes["9x19MM"] = {uID = "9x19"}
+ix.weapontables.ammotypes["9x21MM"] = {uID = "9x21"}
 ix.weapontables.ammotypes["9x39MM"] = {uID = "9x39"}
 ix.weapontables.ammotypes["12 Gauge"] = {uID = "12gauge"}
 

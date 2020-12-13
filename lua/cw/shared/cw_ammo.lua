@@ -39,6 +39,7 @@ CustomizableWeaponry:registerAmmo(".45 ACP", ".45 ACP Rounds", 11.5, 22.8)
 CustomizableWeaponry:registerAmmo(".50 AE", ".50 AE Rounds", 12.7, 32.6)
 CustomizableWeaponry:registerAmmo("9x18MM", "9x18MM Rounds", 9, 18)
 CustomizableWeaponry:registerAmmo("9x19MM", "9x19MM Rounds", 9, 19)
+CustomizableWeaponry:registerAmmo("9x21MM", "9x21MM Gyurza", 9, 21)
 CustomizableWeaponry:registerAmmo("9x39MM", "9x39MM Rounds", 9, 39)
 CustomizableWeaponry:registerAmmo("12 Gauge", "12 Gauge Shells", 5, 10)
 CustomizableWeaponry:registerAmmo("40MM", "40MM Grenades", 0, 0)
@@ -68,6 +69,7 @@ CustomizableWeaponry:registerAmmo(".45 ACP -AP-", ".45 ACP Rounds - Armor Pierci
 CustomizableWeaponry:registerAmmo(".50 AE -AP-", ".50 AE Rounds - Armor Piercing", 12.7, 32.6,DMG_AIRBOAT)
 CustomizableWeaponry:registerAmmo("9x18MM -AP-", "9x18MM Rounds - Armor Piercing", 9, 18,DMG_AIRBOAT)
 CustomizableWeaponry:registerAmmo("9x19MM -AP-", "9x19MM Rounds - Armor Piercing", 9, 19,DMG_AIRBOAT)
+CustomizableWeaponry:registerAmmo("9x21MM -AP-", "9x21MM Gyurza - Armor Piercing", 9, 21,DMG_AIRBOAT)
 CustomizableWeaponry:registerAmmo("9x39MM -AP-", "9x39MM Rounds - Armor Piercing", 9, 39,DMG_AIRBOAT)
 
 --HOLLOWPOINT AMMO
@@ -87,4 +89,5 @@ CustomizableWeaponry:registerAmmo(".45 ACP -HP-", ".45 ACP Rounds - Hollow Point
 CustomizableWeaponry:registerAmmo(".50 AE -HP-", ".50 AE Rounds - Hollow Point", 12.7, 32.6)
 CustomizableWeaponry:registerAmmo("9x18MM -HP-", "9x18MM Rounds - Hollow Point", 9, 18)
 CustomizableWeaponry:registerAmmo("9x19MM -HP-", "9x19MM Rounds - Hollow Point", 9, 19)
+CustomizableWeaponry:registerAmmo("9x21MM -HP-", "9x21MM Gyurza - Hollow Point", 9, 21)
 CustomizableWeaponry:registerAmmo("9x39MM -HP-", "9x39MM Rounds - Hollow Point", 9, 39)
