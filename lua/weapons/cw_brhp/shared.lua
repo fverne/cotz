@@ -18,17 +18,17 @@ if CLIENT then
 	SWEP.ShellOffsetMul = 1
 	SWEP.ShellPosOffset = {x = -5, y = 4, z = -5}
 		
-	SWEP.IronsightPos = Vector(2.5, 1.603, 1.259)
-	SWEP.IronsightAng = Vector(0.703, 0, 0)
+	SWEP.IronsightPos = Vector(-2.243, 2.494, 0.416)
+	SWEP.IronsightAng = Vector(0.693, 0, 0)
 
-	SWEP.MicroT1Pos = Vector(2.5, 0, 0.28)
-	SWEP.MicroT1Ang = Vector(0, 0, 0)
+	SWEP.MicroT1Pos = Vector(-2.243, 2.494, -0.95)
+	SWEP.MicroT1Ang = Vector(0.693, 0, 0)
 	
-	SWEP.EoTechPos = Vector(2.49, -2, 0.3)
-	SWEP.EoTechAng = Vector(0, 0, 0)
+	SWEP.EoTechPos = Vector(-2.243, -2.494, -1.12)
+	SWEP.EoTechAng = Vector(0.693, 0, 0)
 	
-	SWEP.RMRPos = Vector(2.5, 0, 0.7)
-	SWEP.RMRAng = Vector(0, 0, 0)
+	SWEP.RMRPos = Vector(-2.243, -2.494, -0.6)
+	SWEP.RMRAng = Vector(0.693, 0, 0)
 
 	SWEP.SprintPos = Vector(0.602, -0.202, 0)
 	SWEP.SprintAng = Vector(-21.961, 3.517, 0)
@@ -36,15 +36,15 @@ if CLIENT then
 	SWEP.CustomizePos = Vector(0, 0, 0)
 	SWEP.CustomizeAng = Vector(8.364, 0.741, 0.277)
 
-	SWEP.MoveType = 1
+	SWEP.MoveType = 2
 	SWEP.ViewModelMovementScale = 0.8
 	SWEP.FullAimViewmodelRecoil = false
-	SWEP.BoltBone = "slidestuff04"
+	SWEP.BoltBone = "Slidez"
 	SWEP.BoltShootOffset = Vector(-1, 0, 0)
 	SWEP.BoltBonePositionRecoverySpeed = 25
 	SWEP.OffsetBoltDuringNonEmptyReload = false
 	SWEP.BoltReloadOffset = Vector(0, 1.39, 0)
-	SWEP.EmptyBoltHoldAnimExclusion = "fire_last"
+	SWEP.EmptyBoltHoldAnimExclusion = ""
 	SWEP.ReloadBoltBonePositionRecoverySpeed = 20
 	SWEP.ReloadBoltBonePositionMoveSpeed = 100
 	SWEP.StopReloadBoneOffset = 0.8
@@ -55,11 +55,11 @@ if CLIENT then
 	SWEP.FOVPerShot = 0.3
 
 	SWEP.AttachmentModelsVM = {
-		["md_tundra9mm"] = {model = "models/cw2/attachments/9mmsuppressor.mdl", bone = "framestuff04", pos = Vector(-0.431, 6, 0), angle = Angle(0, 180, 0), size = Vector(0.5, 0.5, 0.5)},
-		["md_rail"] = {model = "models/cw2/attachments/pistolrail.mdl", bone = "framestuff04", pos = Vector(-0.431, -0.401, -1.201), angle = Angle(0, 90, 0), size = Vector(0.15, 0.15, 0.15)},
-		["md_microt1"] = {model = "models/cw2/attachments/microt1.mdl", bone = "framestuff04", pos = Vector(-0.419, 0.518, 1.399), angle = Angle(0, 180, 0), size = Vector(0.5, 0.5, 0.5)},
-		["md_eotech"] = {model = "models/wystan/attachments/2otech557sight.mdl", bone = "framestuff04", pos = Vector(-0.15, -10, -9.547), angle = Angle(0, 270, 0), size = Vector(1, 1, 1)},
-		["md_rmr"] = {model = "models/cw2/attachments/pistolholo.mdl", bone = "framestuff04", pos = Vector(-0.8, -4, -3.85), angle = Angle(0, 270, 0), size = Vector(0.9, 0.9, 0.9)},
+		["md_tundra9mm"] = {model = "models/cw2/attachments/9mmsuppressor.mdl", bone = "Base", pos = Vector(0, 6, 1.05), angle = Angle(0, 180, 0), size = Vector(0.6, 0.6, 0.6)},
+		["md_rail"] = {model = "models/cw2/attachments/pistolrail.mdl", bone = "Base", pos = Vector(0, -0.601, 0.201), angle = Angle(0, 90, 0), size = Vector(0.15, 0.15, 0.15)},
+		["md_microt1"] = {model = "models/cw2/attachments/microt1.mdl", bone = "Base", pos = Vector(0, 0.018, 2.85), angle = Angle(0, 180, 0), size = Vector(0.4, 0.4, 0.4)},
+		["md_eotech"] = {model = "models/wystan/attachments/2otech557sight.mdl", bone = "Base", pos = Vector(0.25, -11, -8.047), angle = Angle(0, 270, 0), size = Vector(1, 1, 1)},
+		["md_rmr"] = {model = "models/cw2/attachments/pistolholo.mdl", bone = "Base", pos = Vector(-0.35, -5, -2.45), angle = Angle(0, 270, 0), size = Vector(0.9, 0.9, 0.9)},
 	}
 	
 	SWEP.LaserPosAdjust = Vector(0.5, 0, -2)
@@ -85,8 +85,8 @@ SWEP.Attachments = {[1] = {header = "Barrel", offset = {-350, -200}, atts = {"md
 	["+reload"] = {header = "Ammo", offset = {800, 100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {reload = "reload",
-	fire = {"fire1", "fire2", "fire3"},
-	fire_dry = "fire_last",
+	fire = {"s1", "s2", "s3"},
+	fire_dry = "sl",
 	idle = "idle",
 	draw = "draw"}
 	
@@ -115,8 +115,8 @@ SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
 SWEP.ViewModelFOV	= 90
-SWEP.ViewModelFlip	= true
-SWEP.ViewModel		= "models/weapons/v_pist_brhp.mdl"
+SWEP.ViewModelFlip	= false
+SWEP.ViewModel		= "models/weapons/v_baseplategsh18.mdl"
 SWEP.WorldModel		= "models/weapons/w_pist_brhp.mdl"
 
 SWEP.Spawnable			= true
@@ -150,7 +150,7 @@ SWEP.ReloadSpeed = 1
 SWEP.ReloadTime = 1.5
 SWEP.ReloadHalt = 2.8
 
-SWEP.ReloadTime_Empty = 2.78
-SWEP.ReloadHalt_Empty = 3
+SWEP.ReloadTime_Empty = 2.5
+SWEP.ReloadHalt_Empty = 2.8
 
 SWEP.SnapToIdlePostReload = false
