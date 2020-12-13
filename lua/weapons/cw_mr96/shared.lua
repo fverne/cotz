@@ -32,7 +32,7 @@ if CLIENT then
 	SWEP.DisableSprintViewSimulation = true
 
 	SWEP.DrawTraditionalWorldModel = false
-	SWEP.WM = "models/weapons/cwc_mateba/w_pist_mateba.mdl"
+	SWEP.WM = "models/weapons/w_pist_mr_96s.mdl"
 	SWEP.WMPos = Vector(-1, 0, 0)
 	SWEP.WMAng = Vector(0, 0, 180)
 	
@@ -77,7 +77,7 @@ SWEP.Instructions	= ""
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/cw2/pistols/mr96.mdl"
-SWEP.WorldModel		= "models/weapons/cwc_mateba/w_pist_mateba.mdl"
+SWEP.WorldModel		= "models/weapons/w_pist_mr_96s.mdl"
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
