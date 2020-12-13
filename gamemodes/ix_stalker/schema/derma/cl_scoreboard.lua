@@ -311,23 +311,16 @@ function PANEL:Update()
 	else
 		local bHasPlayers
 
-		local tmp = team.GetPlayers(faction.index)
-		local tmp2 = {}
-		for k, v in pairs(tmp) do
-			table.insert(tmp2, {v, v:getReputation()})
-		end
+		local tab = team.GetPlayers(faction.index)
+		table.sort(tab, function(p1,p2) return p1:getReputation() < p2:getReputation() end)
 
-		table.SortByMember(tmp2,2)
-
-		for k, v in ipairs(tmp2) do
-			ply = v[1]
-
+		for k, v in pairs(tab) do
 			if (!IsValid(v.ixScoreboardSlot)) then
-				if (self:AddPlayer(ply, k)) then
+				if (self:AddPlayer(v, k)) then
 					bHasPlayers = true
 				end
 			else
-				ply.ixScoreboardSlot:Update()
+				v.ixScoreboardSlot:Update()
 				bHasPlayers = true
 			end
 		end
