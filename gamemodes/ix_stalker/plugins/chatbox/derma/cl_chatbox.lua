@@ -2,7 +2,7 @@
 local PLUGIN = PLUGIN
 
 local animationTime = 0.5
-local chatBorder = 32
+local chatBorder = 96
 local sizingBorder = 20
 local maxChatEntries = 100
 
@@ -101,7 +101,7 @@ AccessorFunc(PANEL, "bActive", "Active", FORCE_BOOL)
 AccessorFunc(PANEL, "bUnread", "Unread", FORCE_BOOL)
 
 function PANEL:Init()
-	self:SetFont("stalkerregularchatfont")
+	self:SetFont("ixChatFont")
 	self:SetContentAlignment(5)
 
 	self.unreadAlpha = 0
@@ -137,6 +137,7 @@ function PANEL:Init()
 	self.buttons = self:Add("Panel")
 	self.buttons:Dock(TOP)
 	self.buttons:DockPadding(1, 1, 0, 0)
+	self.buttons:SetTall(self:GetTall()*1.5)
 	self.buttons.OnMousePressed = ix.util.Bind(ix.gui.chat, ix.gui.chat.OnMousePressed) -- we want mouse events to fall through
 	self.buttons.OnMouseReleased = ix.util.Bind(ix.gui.chat, ix.gui.chat.OnMouseReleased)
 	self.buttons.Paint = function(_, width, height)
@@ -191,8 +192,8 @@ function PANEL:RemoveTab(id)
 
 	-- add default tab if we don't have any tabs left
 	if (table.IsEmpty(self.tabs)) then
-		self:AddTab(L("Chat"), {})
-		self:SetActiveTab(L("Chat"))
+		self:AddTab(L("chat"), {})
+		self:SetActiveTab(L("chat"))
 	elseif (id == self:GetActiveTabID()) then
 		-- set a different active tab if we've removed a tab that is currently active
 		self:SetActiveTab(next(self.tabs))
@@ -768,7 +769,7 @@ function PANEL:Init()
 	self.name:Dock(TOP)
 	self.name:DockMargin(4, 4, 0, 0)
 	self.name:SetContentAlignment(4)
-	self.name:SetFont("stalkerregularchatfont")
+	self.name:SetFont("ixChatFont")
 	self.name:SetTextColor(ix.config.Get("color"))
 	self.name:SetExpensiveShadow(1, color_black)
 
@@ -776,7 +777,7 @@ function PANEL:Init()
 	self.description:Dock(BOTTOM)
 	self.description:DockMargin(4, 4, 0, 4)
 	self.description:SetContentAlignment(4)
-	self.description:SetFont("stalkerregularchatfont")
+	self.description:SetFont("ixChatFont")
 	self.description:SetTextColor(color_white)
 	self.description:SetExpensiveShadow(1, color_black)
 
@@ -845,7 +846,8 @@ function PANEL:Init()
 	local entryPanel = self:Add("Panel")
 	entryPanel:SetZPos(1)
 	entryPanel:Dock(BOTTOM)
-	entryPanel:DockMargin(self:GetWide()*0.02, self:GetWide()*0.005, self:GetWide()*0.02, self:GetTall()*0.031)
+	entryPanel:SetTall(self:GetTall()*0.08)
+	entryPanel:DockMargin(self:GetWide()*0.02, self:GetTall()*0.025, self:GetWide()*0.018, self:GetTall()*0.025)
 
 	self.entry = entryPanel:Add("ixChatboxEntry")
 	self.entry:Dock(FILL)
@@ -863,7 +865,7 @@ function PANEL:Init()
 
 	self.tabs = self:Add("ixChatboxTabs")
 	self.tabs:Dock(FILL)
-	self.tabs:DockPadding(self:GetWide()*0.016, self:GetTall()*0.001, self:GetWide()*0.011, 0)
+	self.tabs:DockPadding(self:GetWide()*0.016, self:GetTall()*0.001, self:GetWide()*0.016, 0)
 	self.tabs.OnTabChanged = ix.util.Bind(self, self.OnTabChanged)
 
 	self.autocomplete = self.tabs:Add("ixChatboxAutocomplete")
@@ -889,7 +891,7 @@ function PANEL:GetDefaultSize()
 end
 
 function PANEL:GetDefaultPosition()
-	return chatBorder, ScrH() - self:GetTall() - chatBorder
+	return chatBorder, ScrH() - self:GetTall() - chatBorder * 1.5
 end
 
 DEFINE_BASECLASS("Panel")
@@ -984,8 +986,9 @@ function PANEL:SetupPosition(info)
 		width, height = self:GetDefaultSize()
 	else
 		-- screen size may have changed so we'll need to clamp the values
-		width = math.Clamp(info[3], 32, ScrW() - chatBorder * 2)
-		height = math.Clamp(info[4], 32, ScrH() - chatBorder * 2)
+		--width = math.Clamp(info[3], 32, ScrW() - chatBorder * 2)
+		--height = math.Clamp(info[4], 32, ScrH() - chatBorder * 2)
+		width, height = self:GetDefaultSize() -- always default to same size
 		x = math.Clamp(info[1], 0, ScrW() - width)
 		y = math.Clamp(info[2], 0, ScrH() - height)
 	end
@@ -1045,10 +1048,10 @@ function PANEL:OnMousePressed(key)
 	end
 
 	-- capture the mouse if we're in bounds for sizing this panel
-	if (self:SizingInBounds()) then
+	/*if (self:SizingInBounds()) then -- disable resizing the chat box
 		self.bSizing = true
 		self:MouseCapture(true)
-	elseif (self:DraggingInBounds()) then
+	else*/if (self:DraggingInBounds()) then
 		local mouseX, mouseY = self:ScreenToLocal(gui.MousePos())
 
 		-- mouse offset relative to the panel
