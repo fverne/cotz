@@ -88,4 +88,5 @@ function Schema:Initialize()
 	game.ConsoleCommand("sv_allowupload 0\n");
 	game.ConsoleCommand("sv_allowdownload 0\n");
 	game.ConsoleCommand("sv_allowcslua 0\n");
+
 end

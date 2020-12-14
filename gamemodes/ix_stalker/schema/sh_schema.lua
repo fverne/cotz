@@ -7,7 +7,6 @@ Schema.author = "gumlefar & verne"
 Schema.description = "A multiplayer STALKER experience"
 --Schema.logo = "vgui/background/wallpaper.jpg"
 
-
 ix.util.Include("libs/thirdparty/sh_netstream2.lua")
 
 -- Additional files that aren't auto-included should be included here. Note that ix.util.Include will take care of properly
@@ -73,7 +72,7 @@ local stalker_models = {
 
 for k, v in pairs(stalker_models) do
 	player_manager.AddValidModel("stalker_default", k)
-	ix.anim.SetModelClass(k, "player" )
+	ix.anim.SetModelClass(k, "player")
 	util.PrecacheModel(k)
 end
 

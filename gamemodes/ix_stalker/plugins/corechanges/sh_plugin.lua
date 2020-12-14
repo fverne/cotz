@@ -2,6 +2,15 @@ PLUGIN.name = "Core changes"
 PLUGIN.author = "verne"
 PLUGIN.desc = "Changes some core helix things"
 
+ix.chat.Register("iteminternal", {
+	format = "**%s %s",
+	GetColor = function(speaker, text)
+		return Color(255, 70, 0)
+	end,
+	CanHear = ix.config.Get("chatRange", 280),
+	deadCanChat = true
+})
+
 --adds automatic me's when picking up and dropping items
 function PLUGIN:OnItemTransferred(item, curInv, inventory)
 	if curInv:GetID() == 0 then
