@@ -2,8 +2,6 @@ AddCSLuaFile()
 AddCSLuaFile("sh_sounds.lua")
 include("sh_sounds.lua")
 
-	SWEP.magType = "smgMag"
-
 if CLIENT then
 	SWEP.DrawCrosshair = false
 	SWEP.PrintName = "SR-2 Veresk"
@@ -25,18 +23,21 @@ if CLIENT then
 
 	SWEP.IronsightPos = Vector(-2.4476, -2, 1.41)
 	SWEP.IronsightAng = Vector(0, 0.05, 0)
-	
-	SWEP.KR_CMOREPos = Vector(-2.45, -3.5, 0.74)
-	SWEP.KR_CMOREAng = Vector(0, 0.05, 0)
 
-	SWEP.FAS2AimpointPos = Vector(-2.429, -4, 0.868)
-	SWEP.FAS2AimpointAng = Vector(0, 0.05, 0)
-
-	SWEP.EoTech553Pos = Vector(-2.45, -3.5, 0.63)
-	SWEP.EoTech553Ang = Vector(0, 0.05, 0)
-
-	SWEP.MicroT1Pos = Vector(-2.46, -3.5, 0.85)
+	SWEP.MicroT1Pos = Vector(-2.45, 4.5, 0.85)
 	SWEP.MicroT1Ang = Vector(0, 0.05, 0)
+
+	SWEP.EoTechPos = Vector(-2.45, -1.5, 0.35)
+	SWEP.EoTechAng = Vector(0, 0.05, 0)
+	
+	SWEP.AimpointPos = Vector(-2.45, -1.5, 0.7)
+	SWEP.AimpointAng = Vector(0, 0.05, 0)
+	
+	SWEP.ReflexPos = Vector(-2.44, -1.5, 0.8)
+	SWEP.ReflexAng = Vector(0, 0.05, 0)	
+	
+	SWEP.CmorePos = Vector(-2.44, 0.5, 0.79)
+	SWEP.CmoreAng = Vector(0, 0.05, 0)	
 	
 	SWEP.SprintPos = Vector(-0.5556, -0.5556, -1.6667)
 	SWEP.SprintAng = Vector(-14, 26, -26)
@@ -56,13 +57,13 @@ if CLIENT then
 	SWEP.CustomizationMenuScale = 0.015
 	
 	SWEP.AttachmentModelsVM = {
-	["md_anpeq15"] = { type = "Model", model = "models/cw2/attachments/anpeq15.mdl", bone = "Mp7_Body", rel = "", pos = Vector(-4.2, -15.5, 3.2), angle = Angle(0, -90, 90), size = Vector(0.5, 0.5, 0.5), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} },
-	["md_fas2_aimpoint"] = { type = "Model", model = "models/c_fas2_aimpoint.mdl", bone = "Mp7_Body", rel = "", pos = Vector(-3.741, -11.948, 2.539), angle = Angle(-180, -90, 0), size = Vector(0.8, 0.8, 0.8), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} },
-	["md_microt1"] = { type = "Model", model = "models/cw2/attachments/microt1.mdl", bone = "Mp7_Body", rel = "", pos = Vector(-3.767, -9.87, 1.87), angle = Angle(180, 0, 0), size = Vector(0.28, 0.28, 0.28), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} },
-	["md_rail"] = { type = "Model", model = "models/wystan/attachments/rail.mdl", bone = "Mp7_Body", rel = "", pos = Vector(-3.567, -11.171, 3.545), angle = Angle(180, 90, 0), size = Vector(0.85, 0.85, 0.85), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} },
-	["md_tundra9mm"] = { type = "Model", model = "models/cw2/attachments/9mmsuppressor.mdl", bone = "Mp7_Body", rel = "", pos = Vector(-3.75, -22, 4), angle = Angle(180, 0, 0), size = Vector(0.649, 0.649, 0.649), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} },
-	["odec3d_cmore_kry"] = { type = "Model", model = "models/weapons/krycek/sights/odec3d_cmore_reddot.mdl", bone = "Mp7_Body", rel = "", pos = Vector(-3.83, -9.91, 1.899), angle = Angle(180, -90, 0), size = Vector(0.189, 0.189, 0.189), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} },
-	["md_fas2_eotech"] = { type = "Model", model = "models/c_fas2_eotech.mdl", bone = "Mp7_Body", rel = "", pos = Vector(-3.757, -12.5, 2.359), angle = Angle(180, -90, 0), size = Vector(0.8, 0.8, 0.8), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		["md_microt1"] = {model = "models/cw2/attachments/microt1.mdl", bone = "Mp7_Body", pos = Vector(-3.767, -9.87, 1.87), angle = Angle(180, 0, 0), adjustment = {min = -1.5, max = -0.2, axis = "y", inverse = true}, size = Vector(0.28, 0.28, 0.28) },
+		["md_rail"] = { type = "Model", model = "models/wystan/attachments/rail.mdl", bone = "Mp7_Body", rel = "", pos = Vector(-3.567, -11.171, 3.545), angle = Angle(180, 90, 0), size = Vector(0.85, 0.85, 0.85) },
+		["md_tundra9mm"] = { type = "Model", model = "models/cw2/attachments/9mmsuppressor.mdl", bone = "Mp7_Body", rel = "", pos = Vector(-3.75, -22, 4), angle = Angle(180, 0, 0), size = Vector(0.649, 0.649, 0.649)  },
+		["md_eotech"] = {model = "models/wystan/attachments/2otech557sight.mdl", bone = "Mp7_Body", pos = Vector(-3.5, 1, 12.7), angle = Angle(180, -90, 0), size = Vector(1, 1, 1)},
+		["md_aimpoint"] = {model = "models/wystan/attachments/aimpoint.mdl", bone = "Mp7_Body", pos = Vector(-3.95, -6, 5.9), angle = Angle(180, 180, 0), size = Vector(0.7, 0.7, 0.7)},
+		["md_reflex"] = { type = "Model", model = "models/attachments/kascope.mdl", bone = "Mp7_Body", rel = "", pos = Vector(-3.767, -11.87, 1.75), angle = Angle(180, 180, 0), size = Vector(0.5, 0.5, 0.5), color = Color(255, 255, 255, 0)},
+		["md_cmore"] = { type = "Model", model = "models/attachments/cmore.mdl", bone = "Mp7_Body", rel = "", pos = Vector(-3.767, -9.87, 2), angle = Angle(180, 180, 0), size = Vector(0.5, 0.5, 0.5), color = Color(255, 255, 255, 0)},
 	}
 	
 end
@@ -75,7 +76,7 @@ SWEP.LaserAngAdjust = Angle(0, 180, 0) --{p = 2, y = 180, r = 0}
 SWEP.LuaViewmodelRecoil = true
 SWEP.CanRestOnObjects = true
 
-SWEP.Attachments = {[3] = {header = "Optic", offset = {300, -500}, atts = {"md_microt1"}},
+SWEP.Attachments = {[1] = {header = "Optic", offset = {300, -500}, atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_reflex", "md_cmore"}},
 [2] = {header = "Barrel", offset = {-300, -600}, atts = {"md_tundra9mm"}},
 ["+reload"] = {header = "Ammo", offset = {-50, 350}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
