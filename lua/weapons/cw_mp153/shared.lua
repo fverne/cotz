@@ -131,22 +131,26 @@ SWEP.Primary.Ammo			= "12 Gauge"
 
 SWEP.FireDelay = 0.4
 SWEP.FireSound = "MP153_FIRE"
-SWEP.Recoil = 2
+SWEP.Recoil = 5.5
 
-SWEP.HipSpread = 0.045
+SWEP.HipSpread = 0.06
 SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1.75
-SWEP.MaxSpreadInc = 0.08
+SWEP.VelocitySensitivity = 4
+SWEP.MaxSpreadInc = 0.55
 SWEP.ClumpSpread = 0.01
-SWEP.SpreadPerShot = 0.02
-SWEP.SpreadCooldown = 0.75
-SWEP.Shots = 12
-SWEP.Damage = 6
+SWEP.SpreadPerShot = 0.012
+SWEP.SpreadCooldown = 0.7
+SWEP.Shots = 9
+SWEP.Damage = 19
 SWEP.DeployTime = .5
 
+SWEP.ReloadSpeed = 0.8
 SWEP.ReloadStartTime = .5
-SWEP.InsertShellTime = 0.65
+SWEP.InsertShellTime = 0.7
 SWEP.ReloadFinishWait = .7
 SWEP.ShotgunReload = true
 
 SWEP.Chamberable = false
+
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05

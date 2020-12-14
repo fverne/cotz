@@ -124,15 +124,15 @@ SWEP.FireDelay = 60/120
 SWEP.FireSound = "TOZ194_FIRE"
 SWEP.Recoil = 4.2
 
-SWEP.HipSpread = 0.05
-SWEP.AimSpread = 0.012
-SWEP.VelocitySensitivity = 1.9
-SWEP.MaxSpreadInc = 0.08
+SWEP.HipSpread = 0.06
+SWEP.AimSpread = 0.005
+SWEP.VelocitySensitivity = 4
+SWEP.MaxSpreadInc = 0.4
 SWEP.ClumpSpread = 0.018
-SWEP.SpreadPerShot = 0.02
+SWEP.SpreadPerShot = 0.3
 SWEP.SpreadCooldown = 0.75
 SWEP.Shots = 9
-SWEP.Damage = 10
+SWEP.Damage = 21
 SWEP.DeployTime = 1.5
 
 SWEP.ReloadSpeed = .7
@@ -181,3 +181,7 @@ function SWEP:DrawWorldModel( )
                 self:DrawModel()
         end
 end
+
+
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
