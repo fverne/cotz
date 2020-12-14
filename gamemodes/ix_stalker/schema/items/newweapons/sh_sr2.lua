@@ -1,6 +1,6 @@
 ITEM.name = "SR-2 Veresk"
 ITEM.description= "A russian submachinegun that fires an uncommon cartridge. Fires 9x21mm."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: 9x21mm\nMagazine Capacity: 30"
+ITEM.longdesc = "The SR-2 'Veresk' is a Russian submachine gun designed to fire the 9x21mm Gyurza pistol cartridge. This weapon and its round were created as a compact weapon capable of engaging enemies wearing Russian class-II body armor (able to stop ordinary pistol bullets, such as 9x19mm Parabellum and 7.62x25mm Tokarev), and soft-skinned vehicles, at distances up to 200 metres.\n\nAmmo: 9x21mm\nMagazine Capacity: 30"
 ITEM.model = ("models/sr-2m veresk/sr2.mdl")
 ITEM.class = "cw_veresk"
 ITEM.weaponCategory = "secondary"
