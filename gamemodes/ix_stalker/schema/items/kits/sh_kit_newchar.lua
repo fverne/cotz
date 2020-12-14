@@ -37,7 +37,7 @@ ITEM.items[1] = {
 	},
 }
 
-ITEM.items[1] = {
+ITEM.items[2] = {
 	dropAmount = 1,
 	itemsCommon = {
 		{"backpack1"},
