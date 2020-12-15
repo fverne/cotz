@@ -39,6 +39,11 @@ ix.config.Add("charloadremove", true, "If enabled, instantly loads first charact
 	category = "1development"
 })
 
+function PLUGIN:PostPlayerLoadout(client)
+	concommand.Remove( "status" ) -- needs testing...
+	concommand.Remove( "ix_togglethirdperson" ) -- needs testing...
+end
+
 if (SERVER) then
 	-- Stamina drain on jump
 	function PLUGIN:KeyPress(client, key)
