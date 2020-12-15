@@ -52,38 +52,64 @@ ITEM.functions.use = {
 	end
 }
 
-/*
 ITEM.functions.usetarget = {
 	name = "Heal Target",
 	icon = "icon16/stalker/heal.png",
-	onRun = function(item)
+	OnRun = function(item)
 		local data = {}
 			data.start = item.player:GetShootPos()
 			data.endpos = data.start + item.player:GetAimVector()*96
 			data.filter = item.player
 		local target = util.TraceLine(data).Entity
-		local quantity = item:getData("quantity", item.quantity)
+		local quantity = item:GetData("quantity", item.quantity)
 		if (IsValid(target) and target:IsPlayer()) then
-			target:AddBuff("buff_slowheal", 5, { amount = item.restore*(1+(item.player:getChar():getAttrib("medical", 0)/50))/10 })
-			nut.chat.send(item.player, "iteminternal", "opens a "..item.name.." and uses it on "..target:Name()..".", false)
+			ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it on "..target:Name()..".", false)
+			ix.util.PlayerPerformBlackScreenAction(item.player, "Treating "..target:Name().."'s Wounds", 4, function(player) 
+				target:AddBuff("buff_slowheal", 60, { amount = item.restore/60 })
+				target:AddBuff("buff_radiationremoval", 60, { amount = item.radrem/120 })
+			end)
+			
+			ix.util.PlayerPerformBlackScreenAction(target, "Being treated by "..item.player:Name()..".", 4)
 			
 			quantity = quantity - 1
 
 			if (quantity >= 1) then
-				item:setData("quantity", quantity)
+				item:SetData("quantity", quantity)
 				return false
 			end
-			
-			
+		elseif ( IsValid( target ) and target:GetClass( ) == "prop_ragdoll" ) then
+			if ( target.isDeadBody ) then
+				if not ( IsValid( target.player ) ) then
+					ply:notify( "You cannot revive a disconnected player's body." )
+					return false
+				end
+
+				target.player:UnSpectate()
+				target.player:SetNetVar("resurrected", true)
+				target.player:Spawn()
+				target.player:SetHealth( 1 ) 
+				target.player:SetPos(target:GetPos())
+				ply:Notify( "You revived "..target.player:GetName() )
+				target.player:Notify( "You were revived by "..ply:GetName() )
+
+				target.player:AddBuff("buff_slowheal", 60, { amount = item.restore/60 })
+				target.player:AddBuff("buff_radiationremoval", 60, { amount = item.radrem/120 })
+				ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it on "..target.player:Name()..".", false)
+				
+				quantity = quantity - 1
+				if (quantity >= 1) then
+					item:SetData("quantity", quantity)
+					return false
+				end
+			end
 		else
-			item.player:notify("Not looking at a player!")
+			item.player:Notify("Not looking at a player!")
 			return false
 		end
 
 		return true
 	end,
-	onCanRun = function(item)
+	OnCanRun = function(item)
 		return (!IsValid(item.entity))
 	end
 }
-*/
