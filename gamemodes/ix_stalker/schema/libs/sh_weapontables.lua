@@ -13,6 +13,7 @@ ix.weapontables.ammotypes["5.7x28MM"] = {uID = "57x28"}
 ix.weapontables.ammotypes["14.5x144MM"] = {uID = "145x114"}
 ix.weapontables.ammotypes[".22LR"] = {uID = "22lr"}
 ix.weapontables.ammotypes[".338 Lapua"] = {uID = "338lapua"}
+ix.weapontables.ammotypes[".357 Magnum"] = {uID = "357magnum"}
 ix.weapontables.ammotypes[".44 Magnum"] = {uID = "44magnum"}
 ix.weapontables.ammotypes[".500 Magnum"] = {uID = "500magnum"}
 ix.weapontables.ammotypes[".45 ACP"] = {uID = "45acp"}

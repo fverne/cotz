@@ -1,5 +1,5 @@
 ITEM.name = ".500 Magnum Hollow Point"
-ITEM.model = "models/lostsignalproject/items/ammo/357.mdl"
+ITEM.model = "models/items/ammo_500sw.mdl"
 ITEM.ammo = ".500 Magnum -HP-" // type of the ammo
 ITEM.ammoAmount = 30 // amount of the ammo
 ITEM.description= "A box that contains %s rounds of .500 Magnum ammo. "

@@ -44,7 +44,7 @@ SWEP.LuaViewmodelRecoil = true
 SWEP.CanRestOnObjects = false
 
 
-SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {500, -75}, atts = {"am_armorpiercing"}}}
+SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {500, -75}, atts = {"am_armorpiercing", "am_hollowpoint"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
 	reload = "reload",
@@ -85,7 +85,7 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 6
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= ".44 Magnum"
+SWEP.Primary.Ammo			= ".357 Magnum"
 
 SWEP.FireDelay = 0.15
 SWEP.FireSound = "CW_MR96_FIRE_LONG"
@@ -101,7 +101,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 60
+SWEP.Damage = 110
 SWEP.DeployTime = 0.7
 SWEP.Chamberable = false
 

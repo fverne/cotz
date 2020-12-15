@@ -1,5 +1,5 @@
 ITEM.name = ".44 Magnum Armor-Piercing"
-ITEM.model = "models/lostsignalproject/items/ammo/357.mdl"
+ITEM.model = "models/items/ammo_44mag.mdl"
 ITEM.ammo = ".44 Magnum -AP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo
 ITEM.description= "A box that contains %s rounds of Armor-Piercing .44 Magnum ammo. "
