@@ -161,6 +161,11 @@ if (CLIENT) then
 			self.alpha = 0
 
 			return true
+		elseif (bind:find("attack") and !(self.alpha > 0)) then --If M1/M2 is pressed but wepselection isn't active; then we want to raise our weapon!
+			if(!client:IsWepRaised() and client:GetActiveWeapon():GetClass() != "ix_hands")then
+				net.Start("ixRequestWeaponRaise")
+				net.SendToServer()
+			end
 		end
 	end
 
@@ -207,4 +212,18 @@ if (CLIENT) then
 
 		return weapons, extraslot-1
 	end
+end
+
+if(SERVER)then
+	util.AddNetworkString("ixRequestWeaponRaise")
+	net.Receive("ixRequestWeaponRaise", function(len, client)
+		if (!client:IsRestricted()) then
+			client:SetWepRaised(true)
+			timer.Simple(0.25, function()
+				if (IsValid(client)) then
+					client:SetNetVar("canShoot", true)
+				end
+			end)
+		end
+	end)
 end
