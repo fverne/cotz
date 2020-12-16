@@ -14,9 +14,9 @@ if CLIENT then
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/w_erect_re500.mdl"
 	SWEP.WMPos = Vector(-1, 0, 0)
-	SWEP.WMAng = Vector(0, 0, 180)
+	SWEP.WMAng = Vector(-10, 0, 180)
 	
-	SWEP.MuzzleEffect = "muzzleflash_g3"
+	SWEP.MuzzleEffect = "muzzleflash_smg"
 	SWEP.PosBasedMuz = false
 	SWEP.NoShells = true
 

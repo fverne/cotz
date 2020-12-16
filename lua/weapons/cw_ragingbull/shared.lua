@@ -11,9 +11,14 @@ if CLIENT then
 	killicon.Add( "khr_rgnbull", "icons/killicons/khr_rgnbull", Color(255, 80, 0, 150))
 	SWEP.SelectIcon = surface.GetTextureID("icons/killicons/khr_rgnbull")
 	
-	SWEP.MuzzleEffect = "muzzleflash_6"
+	SWEP.MuzzleEffect = "muzzleflash_smg"
 	SWEP.PosBasedMuz = true
 	SWEP.NoShells = true
+
+	SWEP.DrawTraditionalWorldModel = false
+	SWEP.WM = "models/weapons/w_raging_bull.mdl"
+	SWEP.WMPos = Vector(-1, 0, 0)
+	SWEP.WMAng = Vector(-10, 0, 180)
 	
 	SWEP.EffectiveRange_Orig = 56.7 * 39.37
 	SWEP.DamageFallOff_Orig = .36
@@ -75,8 +80,9 @@ SWEP.Sounds = {draw = {{time = 0, sound = "RB_DRAW"}},
 
 SWEP.SpeedDec = 35
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
+SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"
 SWEP.FireModes = {"double"}
