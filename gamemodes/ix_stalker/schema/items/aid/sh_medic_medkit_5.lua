@@ -80,7 +80,7 @@ ITEM.functions.usetarget = {
 		elseif ( IsValid( target ) and target:GetClass( ) == "prop_ragdoll" ) then
 			if ( target.isDeadBody ) then
 				if not ( IsValid( target.player ) ) then
-					ply:notify( "You cannot revive a disconnected player's body." )
+					item.player:Notify( "You cannot revive a disconnected player's body." )
 					return false
 				end
 
@@ -89,8 +89,8 @@ ITEM.functions.usetarget = {
 				target.player:Spawn()
 				target.player:SetHealth( 1 ) 
 				target.player:SetPos(target:GetPos())
-				ply:Notify( "You revived "..target.player:GetName() )
-				target.player:Notify( "You were revived by "..ply:GetName() )
+				item.player:Notify( "You revived "..target.player:GetName() )
+				target.player:Notify( "You were revived by "..item.player:GetName() )
 
 				target.player:AddBuff("buff_slowheal", 60, { amount = item.restore/60 })
 				target.player:AddBuff("buff_radiationremoval", 60, { amount = item.radrem/120 })
