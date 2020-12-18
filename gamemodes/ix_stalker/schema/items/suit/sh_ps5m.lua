@@ -1,6 +1,6 @@
 ITEM.name = "PS5-M" 
 ITEM.model ="models/kek1ch/stalker_outfit.mdl"
-ITEM.replacements ="models/stalkerisaac/playermodel/male_01_sunset.mdl"
+ITEM.newModel ="models/stalkerisaac/playermodel/male_01_sunset.mdl"
 ITEM.description= "PS5-M Universal Protection Suit." 
 ITEM.longdesc = "This modern version of the Duty bodysuit is better suited for stalker recruits who are used to lightweight suits. Unlike the SKAT series, the suit provides reasonable protection against anomalies while also being capable of stopping a pistol bullet."
 ITEM.width = 2

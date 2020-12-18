@@ -1,6 +1,6 @@
 ITEM.name = "Gagarin" 
 ITEM.model = "models/kek1ch/spec_sold_outfit.mdl"
-ITEM.replacements = "models/nasca/stalker/male_gagarin.mdl"
+ITEM.newModel = "models/nasca/stalker/male_gagarin.mdl"
 ITEM.description= "A Gagarin Suit." 
 ITEM.longdesc = "A prototype suit intended for use by the military, seemingly an attempt to militarize the SEVA. PSZ-12 protective vest is of high quality, but the rest of the armor had to be downsized to keep the system's weight in check. It is a mystery how it ended up in the zone."
 ITEM.width = 2

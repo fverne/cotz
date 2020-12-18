@@ -1,6 +1,6 @@
 ITEM.name = "Sunrise"
 ITEM.model ="models/kek1ch/stalker_outfit.mdl"
-ITEM.replacements ="models/stalkerisaac/playermodel/male_01_sunrise.mdl"
+ITEM.newModel ="models/stalkerisaac/playermodel/male_01_sunrise.mdl"
 ITEM.description= "Sunrise suit."
 ITEM.longdesc = "This DIY stalker bodysuit is a combination of twin-layered rubberised cloth with Plexiglas lining and built-in body armour. The vest stops slower, weaker pistol calibers. The suit enjoys great popularity due to its low cost and modification potential."
 ITEM.width = 2

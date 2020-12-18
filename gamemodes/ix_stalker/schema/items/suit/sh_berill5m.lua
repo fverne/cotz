@@ -1,6 +1,6 @@
 ITEM.name = "Berill-5M" 
 ITEM.model = "models/kek1ch/spec_sold_outfit.mdl"
-ITEM.replacements = "models/stalkerisaac/playermodel/male_01_berill.mdl"
+ITEM.newModel = "models/stalkerisaac/playermodel/male_01_berill.mdl"
 ITEM.description= "Berill-5M Suit." 
 ITEM.longdesc = "This item comprises an early PS-5 body suit with beryllium sputter and military armored vest. Designed for assault operations in highly radioactive areas, it is ineffective in areas of high anomalous activity. The suit makes its way to stalkers through the military, who exchange it for loot."
 ITEM.width = 2

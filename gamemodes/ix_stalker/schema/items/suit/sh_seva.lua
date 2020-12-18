@@ -1,6 +1,6 @@
 ITEM.name = "SEVA"
 ITEM.model ="models/kek1ch/scientific_outfit.mdl"
-ITEM.replacements ="models/nasca/stalker/male_seva_lone.mdl"
+ITEM.newModel ="models/nasca/stalker/male_seva_lone.mdl"
 ITEM.description= "SEVA suit."
 ITEM.longdesc = "This suit was produced by one of Kiev's Defence Research institutes and represents a phenomenal alternative to stalker hand-made suits. It is an excellent combination of a bulletproof vest, a closed cycle breathing system and an integrated system of anomalous field suppression. Due to the perfect choice of materials, the suit is highly efficient and is often regarded as a good choice for veterans."
 ITEM.width = 2

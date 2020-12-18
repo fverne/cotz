@@ -1,6 +1,6 @@
 ITEM.name = "Combat SEVA"
 ITEM.model ="models/kek1ch/scientific_outfit.mdl"
-ITEM.replacements ="models/nasca/stalker/male_jupiter_eco.mdl"
+ITEM.newModel ="models/nasca/stalker/male_jupiter_eco.mdl"
 ITEM.description= "A Combat SEVA suit."
 ITEM.longdesc = "Factory-made SEVA bodysuit adorned with various heavy protective pieces. Whoever designed and assembled it didn't seem to care about effectively wearing two suits at once, and demanded ultimate protection from everything the zone has to offer. Why? That's the real mystery."
 ITEM.width = 2

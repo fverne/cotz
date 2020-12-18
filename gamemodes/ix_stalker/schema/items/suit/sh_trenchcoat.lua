@@ -1,6 +1,6 @@
 ITEM.name = "Trenchcoat"
 ITEM.model ="models/kek1ch/novice_outfit.mdl"
-ITEM.replacements ="models/stalkerisaac/playermodel/male_01_anorak.mdl"
+ITEM.newModel ="models/stalkerisaac/playermodel/male_01_anorak.mdl"
 ITEM.description= "A trenchcoat."
 ITEM.longdesc = "A regular leather trench coat. Has no special purpose other than to keep the wearer warm at night or protect from a blind dog bite. Although the trench coat is not particularly comfortable, it is often used by Bandits in the Zone - either because it allows them to hide in the dark or simply due to its 'cool' appearance."
 ITEM.width = 2

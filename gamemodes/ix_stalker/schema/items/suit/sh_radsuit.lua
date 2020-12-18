@@ -1,6 +1,6 @@
 ITEM.name = "Radsuit"
 ITEM.model ="models/kek1ch/exolight_outfit.mdl"
-ITEM.replacements ="models/stalkerisaac/playermodel/male_01_radsuit.mdl"
+ITEM.newModel ="models/stalkerisaac/playermodel/male_01_radsuit.mdl"
 ITEM.description= "A Radsuit."
 ITEM.longdesc = "A competently made western entry-man suit worn for high risk assaults. Bodysuit reinforced with plates can stop some assault rifle bullets, while heavy assault vest stops most ballistic threats on the battlefield. It's heavy weight makes it most useful in close quarters and a liability in open spaces."
 ITEM.width = 2

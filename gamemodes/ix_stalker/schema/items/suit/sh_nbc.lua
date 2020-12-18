@@ -1,6 +1,6 @@
 ITEM.name = "Kopach"
 ITEM.model ="models/kek1ch/stalker_outfit.mdl"
-ITEM.replacements ="models/nasca/stalker/male_nbc_lone.mdl"
+ITEM.newModel ="models/nasca/stalker/male_nbc_lone.mdl"
 ITEM.description= "Kopach suit."
 ITEM.longdesc = "This suit is a modified version of the standard Sunrise outfit, composed of a camouflaged CBRN suit with a Class III-a Kevlar vest. Favored by diggers and underground explorers."
 ITEM.width = 2

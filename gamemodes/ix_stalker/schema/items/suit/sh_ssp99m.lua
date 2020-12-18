@@ -1,6 +1,6 @@
 ITEM.name = "SSP-99M suit"
 ITEM.model ="models/kek1ch/ecolog_outfit_green.mdl"
-ITEM.replacements ="models/nasca/stalker/male_ssp_eco.mdl"
+ITEM.newModel ="models/nasca/stalker/male_ssp_eco.mdl"
 ITEM.description= "An SSP-99M suit, designed for ecologists."
 ITEM.longdesc = "High quality modified SSP-99 Scientific Research Suit. It provides increased body protection from bullet and splinter damage. It is designed for the guards working with scientific expeditions. It provides good protection from radiation and biological anomalies. It is resistant to chemically aggressive environments and other effects dangerous to the body."
 ITEM.width = 2

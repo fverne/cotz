@@ -1,6 +1,6 @@
 ITEM.name = "Sky-2"
 ITEM.model ="models/kek1ch/cs_heavy_outfit.mdl"
-ITEM.replacements ="models/stalkerisaac/playermodel/male_01_cs2.mdl"
+ITEM.newModel ="models/stalkerisaac/playermodel/male_01_cs2.mdl"
 ITEM.description= "Sky-2 Suit"
 ITEM.longdesc = "A pair of jeans, nomex jacket, with Russian class-3 vest and load bearing gear. Combined with a helmet, it is useful for low intensity conflicts within the zone. Worn by the kinds of people who'd walk far just to shoot somebody."
 ITEM.width = 2

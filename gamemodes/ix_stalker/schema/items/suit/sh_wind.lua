@@ -1,6 +1,6 @@
 ITEM.name = "Wind" 
 ITEM.model ="models/kek1ch/stalker_outfit.mdl"
-ITEM.replacements ="models/stalkerisaac/playermodel/male_01_wind.mdl"
+ITEM.newModel ="models/stalkerisaac/playermodel/male_01_wind.mdl"
 ITEM.description= "Wind Suit" 
 ITEM.longdesc = "A light stalker suit made by craftsmen not satisfied with the Sunrise suit. Care went into improving protection against anomalous hazards. A pacifist's suit, lack of body armor and careful weight management allows one to 'run like the wind' from a fight."
 ITEM.width = 2

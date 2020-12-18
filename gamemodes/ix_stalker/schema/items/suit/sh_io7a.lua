@@ -1,6 +1,6 @@
 ITEM.name = "IO7a"
 ITEM.model ="models/kek1ch/merc_outfit.mdl"
-ITEM.replacements ="models/stalkerisaac/playermodel/male_01_io7a.mdl"
+ITEM.newModel ="models/stalkerisaac/playermodel/male_01_io7a.mdl"
 ITEM.description= "An IO7a."
 ITEM.longdesc = "One of the more common uniforms, seen around the zone. The IO7a is a popular use by many factions, thanks to it's great ability to deflect and or stop most calibers on it's armour. The IO7a itself is a uniform adapted from outside the zone, a tactical force uniform, sadly the tactical force itself is unknown, due to the secretive, and covered up operations. \n\nThe suit is popular with mercenaries, who very often engage in firefights to maintain their quality. It's also a popular choice with bandits, as the cheap price allows the common bandit to supply their rather cheap setup. The suit is the best low-class for good ballistic protection."
 ITEM.width = 2

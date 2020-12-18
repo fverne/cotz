@@ -1,6 +1,6 @@
 ITEM.name = "SKAT-9"
 ITEM.model = "models/kek1ch/military_outfit.mdl"
-ITEM.replacements = "models/stalkerisaac/playermodel/male_01_skat.mdl"
+ITEM.newModel = "models/stalkerisaac/playermodel/male_01_skat.mdl"
 ITEM.description= "SKAT9 suit." 
 ITEM.longdesc = "This modern military armoured suit is designed for assault operations in anomalous areas. Mainly designed for Spetsnaz units for the purposes of high risk operations. Comprises a PSZ-12p heavy military armoured suit, built-in compensation suit, and an anomalous protection bodysuit. The armour provides excellent protection against bullet and fragmentation damage, without greatly reducing the wearer’s mobility."
 ITEM.width = 2

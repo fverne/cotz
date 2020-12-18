@@ -1,6 +1,6 @@
 ITEM.name = "Mail Anorak"
 ITEM.model ="models/kek1ch/rookie_outfit.mdl"
-ITEM.replacements ="models/stalkerisaac/playermodel/male_01_anorak.mdl"
+ITEM.newModel ="models/stalkerisaac/playermodel/male_01_anorak.mdl"
 ITEM.description= "An anorak with a vest on it."
 ITEM.longdesc = "A leather jacket with woven armour elements in common use amongst bandits and crooks. Gives some amount of protection, though is extremely inadequate in the conditions of the Zone. Fitted with reinforced armour."
 ITEM.width = 2
