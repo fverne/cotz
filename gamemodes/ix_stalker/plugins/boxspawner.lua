@@ -77,7 +77,7 @@ if SERVER then
 	function PLUGIN:GetNumBoxes()
 		local combinedtable = {}
 
-		for k,v in pairs(boxtypes) do
+		for k,v in pairs(self.boxtypes) do
 			table.Add(combinedtable, ents.FindByClass(v))
 		end
 
