@@ -4,59 +4,55 @@ PLUGIN.author = "Black Tea (NS 1.0), Neon (NS 1.1), ported to ix by verne"
 PLUGIN.desc = "World Item Spawner."
 PLUGIN.itempoints = PLUGIN.itempoints or {}
 
-PLUGIN.spawngroups = {
-	["default"] = {
-		{"medic_medkit_2"},
-	},
-}
+PLUGIN.spawnrate = 30
+PLUGIN.spawntime = 0
+PLUGIN.saferadius = 256
 
---PLUGIN.spawnchance = 0.5 + (1 * #player.GetAll())
-PLUGIN.spawnrate = 750
-PLUGIN.maxitems = 1
-PLUGIN.itemsperspawn = 1
-PLUGIN.spawneditems = PLUGIN.spawneditems or {}
+ix.config.Add("worldSpawnerThreshold", 75, "How many items the worldspawner should keep the map populated with.", nil, {
+	data = {min = 10, max = 200},
+	category = "Spawning"
+})
 
 if SERVER then
-	local spawntime = 1
+	function PLUGIN:IsClear(position)
+		for i,j in pairs (ents.FindInSphere( position, PLUGIN.saferadius )) do
+			if j:IsPlayer() or j.generated then
+				return false
+			end
+		end
+		return true
+	end
 
 	function PLUGIN:ItemShouldSave(entity)
 		return (!entity.generated)
 	end
 
 	function PLUGIN:Think()
-		if spawntime > CurTime() then return end
-		spawntime = CurTime() + self.spawnrate + math.random(self.spawnrate/2)
-		for k, v in ipairs(self.spawneditems) do
-			if (!v:IsValid()) then
-				table.remove(self.spawneditems, k)
+		if self.spawntime > CurTime() then return end
+		self.spawntime = CurTime() + self.spawnrate
+
+		local numitems = self:GetNumSpawnedItems()
+
+		for i, j in pairs(self.itempoints) do
+			if (!j) then
+				return
 			end
-		end
 
-		if #self.spawneditems >= self.maxitems then return end
-
-		for i = 1, self.itemsperspawn do
-			if #self.spawneditems >= self.maxitems then
-					table.remove(self.spawneditems)
-			return
-			end
-			for i, j in pairs(self.itempoints) do
-
-				if (!j) then
-					return
-				end
+			if (numitems > ix.config.Get("worldSpawnerThreshold",75)) then return end
+			if ( self:IsClear(j[1]) ) then continue end
 	
-				local data = {}
-				data.start = j[1]
-				data.endpos = data.start + Vector(0, 0, -64)
-				data.filter = client
-				data.mins = Vector(-32, -32, 0)
-				data.maxs = Vector(32, 32, 32)
-				local trace = util.TraceHull(data)
+			local data = {}
+			data.start = j[1]
+			data.endpos = data.start + Vector(0, 0, -64)
+			data.filter = client
+			data.mins = Vector(-32, -32, 0)
+			data.maxs = Vector(32, 32, 32)
+			local trace = util.TraceHull(data)
 			
-				local idat = ix.util.GetRandomItemFromPool(j[2])
-				if math.random(101) <= (0 + math.sqrt(1.7 * #player.GetAll())) then
-					ix.item.Spawn(idat[1], j[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), nil, AngleRand(), idat[2] or {})
-				end
+			local idat = ix.util.GetRandomItemFromPool(j[2])
+			if math.random(101) <= 25 then -- Spread spawns out
+				ix.item.Spawn(idat[1], j[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), function(item, ent) ent.generated = true end, AngleRand(), idat[2] or {})
+				numitems = numitems + 1
 			end
 		end
 	end
@@ -67,6 +63,17 @@ if SERVER then
 
 	function PLUGIN:SaveData()
 		self:SetData(self.itempoints)
+	end
+
+	function PLUGIN:GetNumSpawnedItems()
+		local n = 0
+		for k,v in pairs(ents.FindByClass("ix_item")) do
+			if( v.generated ) then
+				n = n + 1
+			end
+		end
+
+		return n
 	end
 
 else

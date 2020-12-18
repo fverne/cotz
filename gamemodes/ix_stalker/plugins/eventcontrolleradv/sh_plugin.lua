@@ -8,15 +8,15 @@ PLUGIN.eventpoints = PLUGIN.eventpoints or {} -- EVENTPOINT STRUCTURE table.inse
 
 ix.util.Include("sh_eventdefs.lua")
 
-ix.config.Add("maxActiveEvents", 5, "How many events can be active at any one time.", nil, {
+ix.config.Add("eventControllerAdvThreshold", 5, "How many events can be active at any one time.", nil, {
 	data = {min = 1, max = 50},
 	category = "Spawning"
 })
 
 PLUGIN.updaterate = 5
-PLUGIN.noSpaceRate = 900
+PLUGIN.noSpaceRate = 450
 
-PLUGIN.spawnratebase = 1800
+PLUGIN.spawnratebase = 900
 PLUGIN.spawnrateplayer = 30
 PLUGIN.spawnradius = 128
 PLUGIN.populateAmount = 5

@@ -4,19 +4,19 @@
 		allowedPoints = {"gm_flatgrass_point1", "gm_flatgrass_point2"}
 		difficulty = 1,
 		funcPrestart = function(dat) 
-
+			return dat
 		end,
 		funcStart = function(dat) 
-
+			return dat
 		end,
 		funcUpdate = function(dat) 
-
+			return dat
 		end,
 		funcShouldEnd = function(dat)
-		
+			return dat
 		end,
 		funcEnd = function(dat) 
-		
+			return dat
 		end
 	}
 */
@@ -27,6 +27,7 @@
 --funcUpdate: To allow a more dynamic structure, will be ran every few seconds
 --funcShouldEnd: Predicate to determine if the encounter is done
 --funcEnd: Cleanup to do after the encounter is over
+-- NOTE : All func* functions should return the parameter dat!
 
 --Example with spawning zombies:
 /*

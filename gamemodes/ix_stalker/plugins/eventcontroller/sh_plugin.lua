@@ -8,8 +8,6 @@ PLUGIN.eventpoints = PLUGIN.eventpoints or {} -- EVENTPOINT STRUCTURE table.inse
 
 ix.util.Include("sh_eventdefs.lua")
 
-PLUGIN.spawnratebase = 900
-PLUGIN.spawnrateplayer = 30
 PLUGIN.spawnradius = 512
 PLUGIN.populateAmount = 10
 
@@ -18,7 +16,15 @@ PLUGIN.pdachatterchance = 100
 
 PLUGIN.saferadius = 1000
 
+PLUGIN.spawnrate = 30
+
 local icon = Material("vgui/icons/news.png")
+
+ix.config.Add("eventControllerThreshold", 35, "How many mutants should the controller keep on the map.", nil, {
+	data = {min = 10, max = 100},
+	category = "Spawning"
+})
+
 
 ix.chat.Register("eventpda", {
 	CanSay = function(self, speaker, text)
@@ -40,13 +46,6 @@ ix.chat.Register("eventpda", {
 		local pda = listener:GetCharacter():GetData("pdaequipped", false)
 		
 		return true
-
-		/*if pda then
-			listener:EmitSound( "stalkersound/da-2_beep1.ogg", 55, 100, 1, CHAN_AUTO ) 
-			return true
-		else
-			return false
-		end*/
 	end,
 })
 
@@ -55,14 +54,6 @@ ix.chat.Register("eventpdainternal", {
 		local pda = speaker:GetCharacter():GetData("pdaequipped", false)
 
 		return true
-
-		/*if pda then
-			speaker:EmitSound( "stalkersound/da-2_beep1.ogg", 55, 100, 1, CHAN_AUTO ) 
-			return true
-		else 
-			return false
-		end
-		return false*/
 	end,
 	OnChatAdd = function(self, speaker, text)
 		chat.AddText(Color(0,191,255), "[GPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
@@ -72,12 +63,6 @@ ix.chat.Register("eventpdainternal", {
 		local pda = listener:GetCharacter():GetData("pdaequipped", false)
 
 		return true
-
-		/*if pda then
-			return true
-		else
-			return false
-		end*/
 	end,
 })
 
@@ -85,7 +70,7 @@ if SERVER then
 	local spawntime = 1
 	local populate = true
 	
-	local function isClear(position)
+	function PLUGIN:IsClear(position)
 		
 		local currentdefs = {}
 		local currentents = ents.FindInSphere( position, PLUGIN.saferadius )
@@ -101,33 +86,51 @@ if SERVER then
 	end
 	
 	function PLUGIN:spawnEvent(eventpoint, spawn)
-		if isClear(eventpoint[1]) then
-			--spawnents
-			if spawn.entities then
-				for k = 1, #spawn.entities do
-					for i = 1, spawn.entities[k][2] do
-						local position = self:GetSpawnLocation( eventpoint[1] )
-						local data = {}
-						data.start = position
-						data.endpos = position
-						data.mins = Vector(-42, -42, 0)
-						data.maxs = Vector(42, 42, 71)
-						local trace = util.TraceHull(data)
+		--spawnents
+		if spawn.entities then
+			for k = 1, #spawn.entities do
+				for i = 1, spawn.entities[k][2] do
+					local position = self:GetSpawnLocation( eventpoint[1] )
+					local data = {}
+					data.start = position
+					data.endpos = position
+					data.mins = Vector(-42, -42, 0)
+					data.maxs = Vector(42, 42, 71)
+					local trace = util.TraceHull(data)
 							
-						if trace.Entity:IsValid() then
-							continue
-						end
-
-						local newNPC = ents.Create(spawn.entities[k][1])
-						newNPC:SetPos(position)
-						newNPC:Spawn()
-						newNPC:DropToFloor()
+					if trace.Entity:IsValid() then
+						continue
 					end
+
+					local newNPC = ents.Create(spawn.entities[k][1])
+					newNPC:SetPos(position)
+					newNPC:Spawn()
+					newNPC:DropToFloor()
 				end
 			end
-			--spawnitems
-			if spawn.items then
-				for k = 1, #spawn.items do
+		end
+		--spawnitems
+		if spawn.items then
+			for k = 1, #spawn.items do
+				local position = self:GetSpawnLocation( eventpoint[1] )
+				local data = {}
+				data.start = position
+				data.endpos = position
+				data.mins = Vector(-16, -16, 0)
+				data.maxs = Vector(16, 16, 71)
+				local trace = util.TraceHull(data)
+					
+				if trace.Entity:IsValid() then
+					continue
+				end
+				ix.item.Spawn(spawn.items[k][1], position, nil, AngleRand(), spawn.items[k][2] or {})
+			end
+		end
+			
+		--spawn loot
+		if spawn.loot then
+			/*for k = 1, #spawn.loot do
+				for i = 1, spawn.loot[k][2] do
 					local position = self:GetSpawnLocation( eventpoint[1] )
 					local data = {}
 					data.start = position
@@ -135,37 +138,16 @@ if SERVER then
 					data.mins = Vector(-16, -16, 0)
 					data.maxs = Vector(16, 16, 71)
 					local trace = util.TraceHull(data)
-					
+						
 					if trace.Entity:IsValid() then
 						continue
 					end
 
-					ix.item.Spawn(spawn.items[k][1], position, nil, AngleRand(), spawn.items[k][2] or {})
-				end
-			end
-			
-			--spawn loot
-			if spawn.loot then
-				/*for k = 1, #spawn.loot do
-					for i = 1, spawn.loot[k][2] do
-						local position = self:GetSpawnLocation( eventpoint[1] )
-						local data = {}
-						data.start = position
-						data.endpos = position
-						data.mins = Vector(-16, -16, 0)
-						data.maxs = Vector(16, 16, 71)
-						local trace = util.TraceHull(data)
-						
-						if trace.Entity:IsValid() then
-							continue
-						end
-
-						if math.random(100) <= spawn.lootChance then
-							ix.item.Spawn(spawn.loot[k][1], position, nil, AngleRand(), spawn.loot[k][3] or {})
-						end
+					if math.random(100) <= spawn.lootChance then
+						ix.item.Spawn(spawn.loot[k][1], position, nil, AngleRand(), spawn.loot[k][3] or {})
 					end
-				end*/
-			end
+				end
+			end*/
 		end
 	end
 
@@ -246,18 +228,22 @@ if SERVER then
 		end
 		
 		if spawntime > CurTime() then return end
-		spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * #player.GetAll()))
+		spawntime = CurTime() + self.spawnrate
+
+		if( self:GetNumMutants() > ix.config.Get("eventControllerThreshold",35)) then return end
 
 		local eventpoint = table.Random(self.eventpoints)
-		local spawn = table.Random(self.eventdefs)
+		if( !self:IsClear(eventpoint[1]) ) then return end
 
 		if (!eventpoint) then
 			return
 		end
 
-
-		while table.Random(spawn.difficulty) != eventpoint[3] do
+		local spawn = table.Random(self.eventdefs)
+		local n = 0
+		while table.Random(spawn.difficulty) != eventpoint[3] and n<15 do
 			spawn = table.Random(self.eventdefs)
+			n = n + 1
 		end
 
 		self:spawnEvent(eventpoint, spawn)
@@ -271,6 +257,10 @@ if SERVER then
 		end
 
 	end	
+
+	function PLUGIN:GetNumMutants()
+		return #ents.FindByClass("npc_mutant_*")
+	end
 else
 	netstream.Hook("nut_DisplaySpawnPoints", function(data)
 		for k, v in pairs(data) do

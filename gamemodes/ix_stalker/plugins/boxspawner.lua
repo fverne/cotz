@@ -5,14 +5,20 @@ PLUGIN.desc = "Spawns boxes at set locations"
 
 PLUGIN.boxpoints = PLUGIN.boxpoints or {}
 
-PLUGIN.spawnrate = 600
+PLUGIN.spawnrate = 300
 
 PLUGIN.saferadius = 1024
+PLUGIN.boxchance = 10
 
 PLUGIN.boxtypes = {
 	"ix_entbox",
 	"ix_wood_entbox",
 }
+
+ix.config.Add("boxSpawnerThreshold", 50, "How many boxes should the controller keep on the map.", nil, {
+	data = {min = 20, max = 100},
+	category = "Spawning"
+})
 
 if SERVER then
 	local spawntime = 1
@@ -37,6 +43,8 @@ if SERVER then
 	
 	function PLUGIN:spawnBoxes()
 		for _,v in pairs(self.boxpoints) do
+			if (math.random(100) > self.boxchance) then continue end
+
 			local pos = v[1]
 			local boxtype = self.boxtypes[v[2]]
 			local customgroup = v[3] or nil
@@ -61,9 +69,21 @@ if SERVER then
 	function PLUGIN:Think()
 		if spawntime > CurTime() then return end
 		spawntime = CurTime() + self.spawnrate
+		if( self:GetNumBoxes() > ix.config.Get("boxSpawnerThreshold",50)) then return end
 
 		self:spawnBoxes()
 	end	
+
+	function PLUGIN:GetNumBoxes()
+		local combinedtable = {}
+
+		for k,v in pairs(boxtypes) do
+			table.Add(combinedtable, ents.FindByClass(v))
+		end
+
+		return #combinedtable
+	end
+
 else
 	netstream.Hook("nut_DisplaySpawnPoints", function(data)
 		for k, v in pairs(data) do
