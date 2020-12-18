@@ -10,9 +10,7 @@ ITEM.height = 1
 ITEM.ballisticlevels = {"1", "1", "1", "1", "1", "1", "1"}
 ITEM.ballisticareas = {"  Head:", "  Torso:", "  Abdomen:", "  Arms:", "  Legs:", "  Anomaly:", "  Radiation:"}
 ITEM.outfitCategory = "model"
-ITEM.resiAmount = 1
 ITEM.isBodyArmor = true
-ITEM.pacData = {}
 ITEM.skincustom = {}
 ITEM.bgcustom = {}
 
@@ -32,15 +30,8 @@ ITEM.miscslots = 1
 --[[
 -- This will change a player's skin after changing the model. Keep in mind it starts at 0.
 ITEM.newSkin = 1
--- This will change a certain part of the model.
-ITEM.replacements = {"group01", "group02"}
 -- This will change the player's model completely.
-ITEM.replacements = "models/manhack.mdl"
--- This will have multiple replacements.
-ITEM.replacements = {
-	{"male", "female"},
-	{"group01", "group02"}
-}
+ITEM.newModel = "models/manhack.mdl"
 
 -- This will apply body groups.
 ITEM.bodyGroups = {
@@ -333,73 +324,27 @@ function ITEM:RemoveOutfit(client)
 		if (index > -1) then
 			client:SetBodygroup(index, 0)
 
-			local groups = character:GetData("groups" .. self.outfitCategory, {})
+			local groups = character:GetData("groups", {})
 
 			if (groups[index]) then
 				groups[index] = nil
-				character:SetData("groups" .. self.outfitCategory, groups)
+				character:SetData("groups", groups)
 			end
 		end
 	end
 
-	for k, v in pairs( self:GetData("origgroups")) do
+	for k, v in pairs( self:GetData("origgroups", {})) do
 		self.player:SetBodygroup( k, v )
 		bgroups[k] = v
 	end
 
 	self.player:GetCharacter():SetData("groups", bgroups)
 
-	if (self.attribBoosts) then
-		for k, _ in pairs(self.attribBoosts) do
-			character:RemoveBoost(self.uniqueID, k)
-		end
-	end
-
-	for k, _ in pairs(self:GetData("outfitAttachments", {})) do
-		self:RemoveAttachment(k, client)
-	end
-
 	self:OnUnequipped()
-end
-
--- makes another outfit depend on this outfit in terms of requiring this item to be equipped in order to equip the attachment
--- also unequips the attachment if this item is dropped
-function ITEM:AddAttachment(id)
-	local attachments = self:GetData("outfitAttachments", {})
-	attachments[id] = true
-
-	self:SetData("outfitAttachments", attachments)
-end
-
-function ITEM:RemoveAttachment(id, client)
-	local item = ix.item.instances[id]
-	local attachments = self:GetData("outfitAttachments", {})
-
-	if (item and attachments[id]) then
-		item:OnDetached(client)
-	end
-
-	attachments[id] = nil
-	self:SetData("outfitAttachments", attachments)
 end
 
 function ITEM:OnInstanced()
 	self:SetData("durability", 100)
-end
-
-local function skinset(item, data)
-	if data then
-		item.player:SetSkin(data[1])
-		item:SetData("setSkin", data[1])
-		if data[2] then
-			--item.player:GetCharacter():SetModel(data[2])
-			item:SetData("setSkinOverrideModel", data[2])
-		else
-			--item.player:GetCharacter():SetModel(item.replacements)
-			item:SetData("setSkinOverrideModel", nil)
-		end
-	end
-	return false
 end
 
 ITEM.functions.zCustomizeSkin = {
@@ -427,7 +372,17 @@ ITEM.functions.zCustomizeSkin = {
 			return false
 		end
 
-		return skinset(item, data)
+		item.player:SetSkin(data[1])
+		item:SetData("setSkin", data[1])
+		if data[2] then
+			item.player:GetCharacter():SetModel(data[2])
+			item:SetData("setSkinOverrideModel", data[2])
+		else
+			item.player:GetCharacter():SetModel(item.newModel)
+			item:SetData("setSkinOverrideModel", nil)
+		end
+
+		return false
 	end,
 }
 
@@ -437,22 +392,8 @@ ITEM:Hook("drop", function(item)
 		item.player:RecalculateResistances()
 		item.player:ReevaluateOverlay()
 		item:RemoveOutfit(item:GetOwner())
-		item:RemovePart(item.player)
 	end
 end)
-
-function ITEM:RemovePart(client)
-	local char = client:GetCharacter()
-
-	self:SetData("equip", false)
-	client:RemovePart(self.uniqueID)
-
-	if (self.attribBoosts) then
-		for k, _ in pairs(self.attribBoosts) do
-			char:RemoveBoost(self.uniqueID, k)
-		end
-	end
-end
 
 ITEM.functions.EquipUn = { -- sorry, for name order.
 	name = "Unequip",
@@ -462,7 +403,6 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 		local client = item.player
 				
 		item:RemoveOutfit(item.player)
-		item:RemovePart(item.player)
 
 		item.player:RecalculateResistances()
 		item.player:ReevaluateOverlay()
@@ -490,7 +430,7 @@ ITEM.functions.Equip = {
 			if (v.id != item.id) then
 				local itemTable = ix.item.instances[v.id]
 
-				if (itemTable.pacData and v.outfitCategory == item.outfitCategory and itemTable:GetData("equip")) then
+				if (itemTable.isBodyArmor and v.outfitCategory == item.outfitCategory and itemTable:GetData("equip")) then
 					item.player:Notify("You're already equipping a suit!")
 
 					return false
@@ -511,43 +451,19 @@ ITEM.functions.Equip = {
 		end
 
 		item:SetData("equip", true)
-		item.player:AddPart(item.uniqueID, item)
-
-		local origbgroups = {}
-		for k, v in ipairs(client:GetBodyGroups()) do
-			origbgroups[v.id] = client:GetBodygroup(v.id)
-		end
-		item:SetData("origgroups", origbgroups)
 
 		item.player:RecalculateResistances()
 		item.player:ReevaluateOverlay()
 
-		if (type(item.OnGetReplacement) == "function") then
-			char:SetData("oldModel" .. item.outfitCategory, char:GetData("oldModel" .. item.outfitCategory, item.player:GetModel()))
-			char:SetModel(item:OnGetReplacement())
-		elseif (item.replacement or item.replacements) then
-			char:SetData("oldModel" .. item.outfitCategory, char:GetData("oldModel" .. item.outfitCategory, item.player:GetModel()))
-
-			if (type(item.replacements) == "table") then
-				if (#item.replacements == 2 and type(item.replacements[1]) == "string") then
-					char:SetModel(item.player:GetModel():gsub(item.replacements[1], item.replacements[2]))
-				else
-					for _, v in ipairs(item.replacements) do
-						char:SetModel(item.player:GetModel():gsub(v[1], v[2]))
-					end
-				end
-			else
-				char:SetModel(item.replacement or item.replacements)
-			end
-		end
+		char:SetData("oldModel" .. item.outfitCategory, char:GetData("oldModel" .. item.outfitCategory, item.player:GetModel()))
+		char:SetModel(item.newModel)
 
 		if (item.newSkin) then
 			char:SetData("oldSkin" .. item.outfitCategory, item.player:GetSkin())
 			item.player:SetSkin(item.newSkin)
-		end
-
-		if item:GetData("setSkin", nil) != nil then
-			client:SetSkin( item:GetData("setSkin", item.newSkin) )
+			if item:GetData("setSkin", nil) != nil then
+				client:SetSkin( item:GetData("setSkin", item.newSkin) )
+			end
 		end
 
 		if (item.bodyGroups) then
@@ -570,12 +486,6 @@ ITEM.functions.Equip = {
 
 			if (table.Count(newGroups) > 0) then
 				char:SetData("groups", newGroups)
-			end
-		end
-
-		if (item.attribBoosts) then
-			for k, v in pairs(item.attribBoosts) do
-				char:AddBoost(item.uniqueID, k, v)
 			end
 		end
 
@@ -641,9 +551,6 @@ ITEM.functions.detach = {
 function ITEM:OnLoadout()
 	if (self:GetData("equip")) then
 		local client = self.player
-		if self.newSkin then
-			client:SetSkin( self.newSkin )
-		end
 
 		if self:GetData("setSkin", nil) != nil then
 			client:SetSkin( self:GetData("setSkin", self.newSkin) )
@@ -670,13 +577,11 @@ function ITEM:CanTransfer(oldInventory, newInventory)
 end
 
 function ITEM:OnRemoved()
-	local inventory = ix.item.inventories[self.invID]
-	local owner = inventory.GetOwner and inventory:GetOwner()
-
-	if (IsValid(owner) and owner:IsPlayer()) then
-		if (self:GetData("equip")) then
-			self:RemovePart(owner)
-		end
+	local client = self:GetOwner()
+	if (self:GetData("equip")) then
+		client:RecalculateResistances()
+		client:ReevaluateOverlay()
+		self:RemoveOutfit(self:GetOwner())
 	end
 end
 
