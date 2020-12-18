@@ -1,82 +1,100 @@
 
 
+local function CalculateCredit(entity, attacker, trigger)
+  hook.Run("ix_JobTrigger", attacker, trigger)
+
+  local players = {}
+
+  for k,v in pairs(ents.FindInSphere( attacker:GetPos(), 1024 )) do
+    if (v:IsPlayer() and v != attacker) then
+      players[v:EntIndex()] = true
+      hook.Run("ix_JobTrigger", v, trigger)
+    end
+  end
+  for k,v in pairs(ents.FindInSphere( entity:GetPos(), 1024 )) do
+    if (v:IsPlayer() and v != attacker and !players[v:EntIndex()]) then
+      hook.Run("ix_JobTrigger", v, trigger)
+    end
+  end
+end
+
 function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
   local class = string.lower(entity:GetClass())
   if attacker:IsPlayer() then
     if(string.find( class, "npc_mutant" )) then
-      hook.Run("ix_JobTrigger", attacker, "mutantKilled")
+      CalculateCredit(entity, attacker, "mutantKilled")
     end
 
     if class == "npc_mutant_classiczombie" or class == "npc_mutant_classiczombie_babka" or class == "npc_mutant_classiczombie_radio" or class == "npc_mutant_classiczombie_volatile" then
-      hook.Run("ix_JobTrigger", attacker, "zombieKilled")
+      CalculateCredit(entity, attacker, "zombieKilled")
     end
 
     if class == "npc_mutant_rodent" then
-      hook.Run("ix_JobTrigger", attacker, "rodentKilled")
+      CalculateCredit(entity, attacker, "rodentKilled")
     end
 
     if class == "npc_mutant_snork" then
-      hook.Run("ix_JobTrigger", attacker, "snorkKilled")
+      CalculateCredit(entity, attacker, "snorkKilled")
     end
 
     if class == "npc_mutant_cat" then
-      hook.Run("ix_JobTrigger", attacker, "catKilled")
+      CalculateCredit(entity, attacker, "catKilled")
     end
 
     if class == "npc_mutant_bloodsucker" then
-      hook.Run("ix_JobTrigger", attacker, "bloodsuckerKilled")
+      CalculateCredit(entity, attacker, "bloodsuckerKilled")
     end
 
     if class == "npc_mutant_boar" then
-      hook.Run("ix_JobTrigger", attacker, "boarKilled")
+      CalculateCredit(entity, attacker, "boarKilled")
     end  
 
     if class == "npc_mutant_burer" then
-      hook.Run("ix_JobTrigger", attacker, "burerKilled")
+      CalculateCredit(entity, attacker, "burerKilled")
     end
 
     if class == "npc_mutant_chimera" then
-      hook.Run("ix_JobTrigger", attacker, "chimeraKilled")
+      CalculateCredit(entity, attacker, "chimeraKilled")
     end
 
     if class == "npc_mutant_controller" or class == "npc_mutant_controller_swamp" then
-      hook.Run("ix_JobTrigger", attacker, "controllerKilled")
+      CalculateCredit(entity, attacker, "controllerKilled")
     end
 
     if class == "npc_mutant_dog" or class == "npc_mutant_hellhound" or class == "npc_mutant_pseudodog" or class == "npc_mutant_psydog" then
-      hook.Run("ix_JobTrigger", attacker, "dogKilled")
+      CalculateCredit(entity, attacker, "dogKilled")
     end
 
     if class == "npc_mutant_flesh" then
-      hook.Run("ix_JobTrigger", attacker, "fleshKilled")
+      CalculateCredit(entity, attacker, "fleshKilled")
     end
 
     if class == "npc_mutant_pseudodog" then
-      hook.Run("ix_JobTrigger", attacker, "pseudodogKilled")
+      CalculateCredit(entity, attacker, "pseudodogKilled")
     end
 
     if class == "npc_mutant_psydog" then
-      hook.Run("ix_JobTrigger", attacker, "psydogKilled")
+      CalculateCredit(entity, attacker, "psydogKilled")
     end 
 
     if class == "npc_mutant_pseudogiant" then
-      hook.Run("ix_JobTrigger", attacker, "pseudogiantKilled")
+      CalculateCredit(entity, attacker, "pseudogiantKilled")
     end
 
     if class == "npc_mutant_izlom" then
-      hook.Run("ix_JobTrigger", attacker, "izlomKilled")
+      CalculateCredit(entity, attacker, "izlomKilled")
     end
 
     if class == "npc_mutant_spider" then
-      hook.Run("ix_JobTrigger", attacker, "spiderKilled")
+      CalculateCredit(entity, attacker, "spiderKilled")
     end
 
     if class == "npc_mutant_sprig" then
-      hook.Run("ix_JobTrigger", attacker, "sprigKilled")
+      CalculateCredit(entity, attacker, "sprigKilled")
     end
 
     if class == "npc_mutant_tark" then
-      hook.Run("ix_JobTrigger", attacker, "tarkKilled")
+      CalculateCredit(entity, attacker, "tarkKilled")
     end
   end
 end
