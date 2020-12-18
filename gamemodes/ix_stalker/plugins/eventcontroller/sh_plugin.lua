@@ -233,11 +233,10 @@ if SERVER then
 		if( self:GetNumMutants() > ix.config.Get("eventControllerThreshold",35)) then return end
 
 		local eventpoint = table.Random(self.eventpoints)
-		if( !self:IsClear(eventpoint[1]) ) then return end
-
 		if (!eventpoint) then
 			return
 		end
+		if( !self:IsClear(eventpoint[1]) ) then return end
 
 		local spawn = table.Random(self.eventdefs)
 		local n = 0
