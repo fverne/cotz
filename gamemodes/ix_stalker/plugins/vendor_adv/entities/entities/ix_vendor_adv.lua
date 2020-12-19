@@ -265,6 +265,7 @@ if (SERVER) then
 	end
 
 	function ENT:AddStock(uniqueID, value)
+		if (!self.items[uniqueID]) then return end
 		if (!self.items[uniqueID][VENDOR_MAXSTOCK]) then
 			return
 		end
