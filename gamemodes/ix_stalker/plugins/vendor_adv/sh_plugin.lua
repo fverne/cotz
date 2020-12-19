@@ -383,7 +383,7 @@ if (SERVER) then
 		local isSellingToVendor = net.ReadBool()
 
 		if (entity.items[uniqueID] and
-			hook.Run("CanPlayerTradeWithVendor", client, entity, uniqueID, isSellingToVendor) != false) then
+			hook.Run("CanPlayerTradeWithVendor", client, entity, uniqueID, isSellingToVendor) != false) or entity:GetBuyAll() then
 			local price = entity:GetPrice(uniqueID, isSellingToVendor, iteminstanceID)
 
 			if (isSellingToVendor) then
