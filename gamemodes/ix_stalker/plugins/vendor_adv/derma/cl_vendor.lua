@@ -116,7 +116,7 @@ function PANEL:addItem(uniqueID, listID, iteminstanceID)
 	end
 
 	if ((!listID or listID == "buying") and !IsValid(self.buyingList[iteminstanceID]) and iteminstanceID) then
-		if (data and data[VENDOR_MODE] and data[VENDOR_MODE] != VENDOR_SELLONLY) then
+		if (data and data[VENDOR_MODE] and data[VENDOR_MODE] != VENDOR_SELLONLY) or entity:GetBuyAll() then
 			local item = self.buyingItems:Add("ixVendorAdvItem")
 			item.isLocal = true
 			item:Setup(uniqueID, iteminstanceID)

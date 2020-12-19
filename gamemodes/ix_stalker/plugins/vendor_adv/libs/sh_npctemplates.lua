@@ -40,6 +40,7 @@ ix.npctemplates.templates["Barmantest"] = {
 	scale 		= 1.0,
 	dialogueid 	= "universalunion",
 	soundgroup 	= "nosound",
+	buyAll 		= true,
 	--animgroup 	= 2,
 	idleanim = "trader_idle",
 	items = {

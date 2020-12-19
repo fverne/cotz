@@ -14,6 +14,7 @@ ENT.restockCheckTimer = 0
 
 function ENT:SetupDataTables()
 	self:NetworkVar("Bool", 0, "NoBubble")
+	self:NetworkVar("Bool", 1, "BuyAll")
 	self:NetworkVar("String", 0, "DisplayName")
 	self:NetworkVar("String", 1, "Description")
 	self:NetworkVar("String", 2, "IdleAnim")
@@ -100,8 +101,14 @@ function ENT:GetPrice(uniqueID, selling, iteminstanceID)
 	local price = ix.item.list[uniqueID] and self.items[uniqueID] and
 		self.items[uniqueID][VENDOR_PRICE] or (ix.item.instances[iteminstanceID] and ix.item.list[uniqueID].GetPrice and ix.item.instances[iteminstanceID]:GetPrice()) or ix.item.list[uniqueID].price or 0
 
+
+
 	if (selling) then
-		price = math.floor(price * (self.scale or 0.5))
+		if(self.items[uniqueID] and self.items[uniqueID][VENDOR_PRICE] and self.items[uniqueID][VENDOR_PRICE] < 5) then
+			price = (ix.item.instances[iteminstanceID] and ix.item.list[uniqueID].GetPrice and ix.item.instances[iteminstanceID]:GetPrice()) or ix.item.list[uniqueID].price) * self.items[uniqueID][VENDOR_PRICE]
+		else
+			price = math.floor(price * (self.scale or 0.5))
+		end
 	end
 
 	return price
@@ -418,6 +425,7 @@ function ENT:LoadTemplate(templatename)
 		self.classes = tmplt.classes or self.classes
 		self.money = tmplt.money or self.money
 		self.scale = tmplt.scale or self.scale
+		self:SetBuyAll(tmplt.buyAll or self:GetBuyAll())
 		self.dialogueid = tmplt.dialogueid or self.dialogueid
 		self:SetSoundGroup(tmplt.soundgroup or self:GetSoundGroup())
 		self:SetAnimGroupId(tmplt.animgroup or self:GetAnimGroupId())
