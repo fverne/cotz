@@ -81,7 +81,8 @@ if (SERVER) then
 				dialogueid = entity.dialogueid,
 				soundgroup = entity:GetSoundGroup(),
 				animgroup = entity:GetAnimGroupId(),
-				idleanim = entity:GetIdleAnim()
+				idleanim = entity:GetIdleAnim(),
+				buyall = entity:GetBuyAll()
 			}
 		end
 
@@ -130,6 +131,7 @@ if (SERVER) then
 			entity:SetSoundGroup(v.soundgroup or "")
 			entity:SetAnimGroupId(v.animgroup or 0)
 			entity:SetIdleAnim(v.idleanim or "")
+			entity:SetBuyAll(v.buyall or false)
 		end
 	end
 
