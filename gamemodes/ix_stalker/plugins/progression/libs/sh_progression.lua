@@ -76,3 +76,13 @@ end
 function ix.progression.GetContributors(progid)
 	return ix.progression.status[progid].contributors or {}
 end
+
+function ix.progression.GetNPCFromName(npcname)
+	for _, entity in ipairs(ents.FindByClass("ix_vendor_adv")) do
+		if( entity:GetDisplayName() == npcname) then
+			return entity
+		end
+	end
+
+	return nil
+end

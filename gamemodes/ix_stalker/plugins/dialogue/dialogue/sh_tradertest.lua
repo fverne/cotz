@@ -8,6 +8,7 @@ DIALOGUE.addTopic("GREETING", {
 		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
+		"ProgressionTestTopic",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
@@ -208,6 +209,19 @@ DIALOGUE.addTopic("GetTask", {
 	end,
 })
 
+DIALOGUE.addTopic("ProgressionTestTopic", {
+	statement = "Progression?",
+	response = "ok)",
+	postCallback = function(self, client, target)
+		if (SERVER) then
+			ix.progression.AddProgessionValue("TestProgression", 1, client:Name())
+		end
+	end,
+	options = {
+		"BackTopic",
+	}
+})
+
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
 	response = "All right.",
@@ -217,6 +231,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
+		"ProgressionTestTopic",
 		"GOODBYE"
 	}
 })
@@ -225,3 +240,4 @@ DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "Come back soon, STALKER..."
 })
+

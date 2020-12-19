@@ -398,6 +398,8 @@ function ENT:GetMoney()
 	return self.money
 end
 
+if(SERVER)then
+
 function ENT:LoadTemplate(templatename)
 	local tmplt = ix.npctemplates.templates[templatename]
 
@@ -431,5 +433,17 @@ function ENT:LoadTemplate(templatename)
 		self:SetSoundGroup(tmplt.soundgroup or self:GetSoundGroup())
 		self:SetAnimGroupId(tmplt.animgroup or self:GetAnimGroupId())
 		self:SetIdleAnim(tmplt.idleanim or "")
+	end
+end
+
+function ENT:AddItemToList(uniqueID, setprice, stock, mode, maxstock, restockinterval, restockamount) --Any of these can be nil, except uniqueID
+	if (!self.items[uniqueID]) then
+		local transtable = {
+			["SELLANDBUY"] = 1,
+			["SELLONLY"] = 2,
+			["BUYONLY"] = 3,
+		}
+
+		self.items[uniqueID] = { setprice, stock, transtable[mode], maxstock, restockinterval, restockamount }
 	end
 end

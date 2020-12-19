@@ -40,3 +40,46 @@ ix.progression.Register("EcologistResearchMutant", {
 		[3] = 9000, -- etc..
 	}
 })
+
+
+ix.progression.Register("TestProgression", {
+	name = "Test Progression",
+	description = "Progression goal used for testing, talk with Sorter to progress",
+	progressfunctions = {
+		[1] = {
+			OnRun = function()
+				print("Reached level 1 in TestProgression - Added Stimpak Mk1")
+				local npc = ix.progression.GetNPCFromName("Sorter")
+				if (npc) then
+					npc:AddItemToList("medic_stimpak_1", nil, 4, "SELLANDBUY", 4, 1, 4)
+				end
+			end,
+			RunOnce = true
+		},
+		[2] = {
+			OnRun = function()
+				print("Reached level 2 in TestProgression - Added Syringe Mk2")
+				local npc = ix.progression.GetNPCFromName("Sorter")
+				if (npc) then
+					npc:AddItemToList("medic_stimpak_2", nil, 4, "SELLANDBUY", 4, 1, 4)
+				end
+			end,
+			RunOnce = true
+		},
+		[3] = {
+			OnRun = function()
+				print("Reached level 3 in TestProgression - Added Syringe Mk3")
+				local npc = ix.progression.GetNPCFromName("Sorter")
+				if (npc) then
+					npc:AddItemToList("medic_stimpak_3", nil, 4, "SELLANDBUY", 4, 1, 4)
+				end
+			end,
+			RunOnce = true
+		},
+	},
+	progressthresholds = {
+		[1] = 5,
+		[2] = 10,
+		[3] = 15, -- etc..
+	}
+})
