@@ -1,4 +1,6 @@
 ix.progression = ix.progression or {}
+ix.progression.status = ix.progression.status or {}
+
 
 function ix.progression.SetProgressionValue(progid, amount, playername)
 	if (ix.progression.definitions[progid]) then
@@ -69,7 +71,9 @@ function ix.progression.InvokeProgressionLevel(progid, level)
 
 	local func = ix.progression.definitions[progid].progressfunctions[level]
 	func:OnRun()
-	ix.progression.status[progid].hasfuncrun[k] = true
+	ix.progression.status[progid] = ix.progression.status[progid] or {}
+	ix.progression.status[progid].hasfuncrun = ix.progression.status[progid].hasfuncrun or {}
+	ix.progression.status[progid].hasfuncrun[level] = true
 	
 end
 
