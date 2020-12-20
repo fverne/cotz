@@ -8,7 +8,7 @@ ITEM.price = 1000
 ITEM.width = 2
 ITEM.img = Material("vgui/hud/44magnumzl.png")
 
-ITEM.weight = 0.017
+ITEM.weight = 0.021
 ITEM.flatweight = 0.03
 
 function ITEM:GetWeight()
