@@ -1,6 +1,6 @@
-ITEM.name = "S&W Model 29"
+ITEM.name = "Smith&Wesson Model 29"
 ITEM.description= "A double-action revolver chambered for .44 Magnum."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: .44 Magnum\nMagazine Capacity: 6"
+ITEM.longdesc = "The Model 29 was made famous worldwide by the 1971 movie Dirty Harry, being the most powerful production handgun in the world at the time. It has since been surpassed by other offerings from Smith&Wesson, but it still packs a punch.\n\nAmmo: .44 Magnum\nMagazine Capacity: 6"
 ITEM.model = ("models/weapons/w_taurus_327p.mdl")
 ITEM.class = "cw_model29"
 ITEM.weaponCategory = "secondary"
@@ -13,7 +13,7 @@ ITEM.exRender = true
 --ITEM.img = Material("vgui/hud/weapons/mateba.png")
 
 ITEM.bulletweight = 0.019
-ITEM.unloadedweight = 1.35
+ITEM.unloadedweight = 1.27
 
 ITEM.repair_PartsComplexity = 5
 ITEM.repair_PartsRarity = 2

@@ -9,7 +9,7 @@ ITEM.busflag = {"ammo1_1"}
 ITEM.width = 2
 ITEM.img = Material("vgui/hud/44magnum.png")
 
-ITEM.weight = 0.019
+ITEM.weight = 0.017
 ITEM.flatweight = 0.03
 
 function ITEM:GetWeight()

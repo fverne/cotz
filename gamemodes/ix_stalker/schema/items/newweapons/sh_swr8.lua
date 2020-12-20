@@ -1,6 +1,6 @@
-ITEM.name = "S&W M&P R8"
+ITEM.name = "Smith&Wesson M&P R8"
 ITEM.description= "A double-action revolver chambered for .357 Magnum."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: .357 Magnum\nMagazine Capacity: 8"
+ITEM.longdesc = "This small-framed revolver is a newer offering from Smith&Wesson, housing 8 shots in its cylinder, giving a slightly higher capacity than most revolvers. This makes it quite popular in the Zone, as being caught with an empty cylinder usually means death.\n\nAmmo: .357 Magnum\nMagazine Capacity: 8"
 ITEM.model = ("models/weapons/w_revolver_r8.mdl")
 ITEM.class = "cw_swr8"
 ITEM.weaponCategory = "secondary"
@@ -13,7 +13,7 @@ ITEM.exRender = true
 --ITEM.img = Material("vgui/hud/weapons/mateba.png")
 
 ITEM.bulletweight = 0.019
-ITEM.unloadedweight = 1.35
+ITEM.unloadedweight = 1.01
 
 ITEM.repair_PartsComplexity = 5
 ITEM.repair_PartsRarity = 2
