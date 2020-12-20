@@ -44,11 +44,14 @@ if SERVER then
 		if client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier)) then
 			local item = client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier))
 			local noremove = false
+			local n = 0
 			if(item.quantity) then
 				for 1, item:GetData("quantity", item.quantity) do
 					hook.Run("ix_JobTrigger", client, "itemDeliver_"..ix.jobs.isItemJob(jobidentifier))
+					n = n + 1
 					if (client:GetCharacter():GetJobs()[npcidentifier].isCompleted) then 
-						noremove = true 
+						item:SetData("quantity", item:GetData("quantity", item.quantity)-n)
+						noremove = (item:GetData("quantity", item.quantity) > 0)
 						break 
 					end
 				end
