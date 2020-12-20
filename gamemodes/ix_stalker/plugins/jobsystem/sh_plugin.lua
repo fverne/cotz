@@ -42,8 +42,18 @@ if SERVER then
 	netstream.Hook("job_deliveritem", function(client, npcidentifier)
 		local jobidentifier = client:GetCharacter():GetJobs()[npcidentifier].identifier
 		if client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier)) then
-			hook.Run("ix_JobTrigger", client, "itemDeliver_"..ix.jobs.isItemJob(jobidentifier))
-			client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier)):Remove()
+			local item = client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier))
+			local noremove = false
+			if(item.quantity) then
+				for 1, item:GetData("quantity", item.quantity) do
+					hook.Run("ix_JobTrigger", client, "itemDeliver_"..ix.jobs.isItemJob(jobidentifier))
+					if (client:GetCharacter():GetJobs()[npcidentifier].isCompleted) then 
+						noremove = true 
+						break 
+					end
+				end
+			end
+			if(!noremove) then item:Remove() end
 			ix.dialogue.notifyItemLost(client, ix.item.list[ix.jobs.isItemJob(jobidentifier)].name)
 			client:Notify("Item delivered!")
 		else
