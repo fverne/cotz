@@ -256,6 +256,63 @@ ix.npctemplates.templates["testtech"] = {
 	},
 }
 
+ix.npctemplates.templates["tutorialnpc"] = {
+	name 		= "Old Timer",
+	description = "An older, but experienced looking man. He has a stern look on his face.",
+	model 		= "models/legends/shram.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.1,
+	dialogueid 	= "tutorialnpc",
+	soundgroup 	= "TutorialNpc",
+	idleanim 	= "idle_lider",
+	--animgroup 	= 4,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["flashlight"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
+		["headlamp"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
+		["geigercounter"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
+		["anomalydetector"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
+		["guitar"] 	= { nil, 4, SELLANDBUY, 4, 0.10, 1 },
+		["harmonica"] 	= { nil, 4, SELLANDBUY, 4, 0.10, 1 },
+		["diecup"] 	= { nil, 4, SELLANDBUY, 4, 0.10, 1 },
+		["lowtiercooker"] 	= { nil, 4, SELLANDBUY, 4, 0.10, 1 },
+		["lowtiercookerfuel"] 	= { nil, 4, SELLANDBUY, 4, 0.10, 2 },
+		["drug_cigarette_1"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
+		["drug_cigarette_2"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
+		["drug_cigarette_3"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
+		["medic_medkit_1"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
+		["medic_medkit_2"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
+		["medic_bandage_1"] 	= { nil, 15, SELLANDBUY, 15, 0.10, 2 },
+		["drink_bottlebeer_1"] 	= { nil, 6, SELLANDBUY, 6, 0.10, 2 },
+		["drink_bottletea"] 	= { nil, 6, SELLANDBUY, 6, 0.10, 2 },
+		["drink_bottlwater"] 	= { nil, 6, SELLANDBUY, 6, 0.10, 2 },
+		["drink_vodka_1"] 	= { nil, 6, SELLANDBUY, 6, 0.10, 2 },
+		["drink_vodka_2"] 	= { nil, 6, SELLANDBUY, 6, 0.10, 2 },
+		["drink_vodka_3"] 	= { nil, 6, SELLANDBUY, 6, 0.10, 2 },
+		["mailjacket"] 	= { nil, 1, SELLANDBUY, 2, 2, 1 },
+		["trenchcoat"] 	= { nil, 1, SELLANDBUY, 2, 2, 1 },
+		["halfmask"] 	= { nil, 1, SELLANDBUY, 2, 0.5, 1 },
+		["steelhelmetgerman"] 	= { nil, 1, SELLANDBUY, 2, 2, 1 },
+		["steelhelmetrussian"] 	= { nil, 1, SELLANDBUY, 2, 2, 1 },
+
+		["bloodsuckerjaw"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["boarhoof"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["burershand"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["cattail"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["controllerhand"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["crowbeak"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["flesheye"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["dogtail"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["izlomhand"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["pseudodogtail"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["psydogbrain"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["snorksfoot"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["rodentshead"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["zombiehand"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+	},
+}
+
 ix.npctemplates.soundtemplates["GenericHello"] = {
 	"npc/beta/stalker_talk_1.ogg",
 	"npc/beta/stalker_talk_2.ogg",
@@ -282,6 +339,14 @@ ix.npctemplates.soundtemplates["TraderHello"] = {
 	"npc/barman/bar_barman_hello_3.ogg",
 	"npc/barman/bar_barman_hello_4.ogg",
 	"npc/barman/bar_barman_hello_5.ogg"
+}
+
+ix.npctemplates.soundtemplates["TutorialNpc"] = {
+	"npc/shram/idle_16.ogg",
+	"npc/shram/idle_17.ogg",
+	"npc/shram/idle_18.ogg",
+	"npc/shram/idle_20.ogg",
+	"npc/shram/idle_4.ogg"
 }
 
 
