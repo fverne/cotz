@@ -46,7 +46,7 @@ if SERVER then
 			local noremove = false
 			local n = 0
 			if(item.quantity) then
-				for 1, item:GetData("quantity", item.quantity) do
+				for i=1, item:GetData("quantity", item.quantity) do
 					hook.Run("ix_JobTrigger", client, "itemDeliver_"..ix.jobs.isItemJob(jobidentifier))
 					n = n + 1
 					if (client:GetCharacter():GetJobs()[npcidentifier].isCompleted) then 

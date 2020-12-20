@@ -298,10 +298,30 @@ function ITEM:Unload()
 		else
 			ammoBox = ix.weapontables.ammotypes[game.GetAmmoName(ammoType)].uID
 		end
-	
-		if(!client:GetCharacter():GetInventory():Add(ammoBox, 1, {["quantity"] = ammoAmount})) then
-			client:Notify("No space in inventory for unloaded ammo")
-			return false
+
+		local addbox = true
+
+		for k,v in pairs(client:GetCharacter():GetInventory():GetItemsByUniqueID(ammoBox,true)) do
+			local ammoamt = v:GetData("quantity", v.ammoAmount)
+			local ammomax = v.ammoAmount
+			local ammodiff = ammomax - ammoamt
+
+			if (ammodiff >= ammoAmount) then
+				v:SetData("quantity", ammoamt+ammoAmount)
+				addbox = false
+				break
+			end
+
+			v:SetData("quantity", ammomax)
+			ammoAmount = ammoAmount - ammodiff
+		end
+
+		if addbox then
+			if(!client:GetCharacter():GetInventory():Add(ammoBox, 1, {["quantity"] = ammoAmount})) then
+				ix.item.Spawn(ammoBox, client:GetItemDropPos(), nil, AngleRand(), {["quantity"] = ammoAmount})
+				client:Notify("No space in inventory for unloaded ammo")
+				return false
+			end
 		end
 
 		if isEquipped then
