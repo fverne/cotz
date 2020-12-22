@@ -94,10 +94,10 @@ ix.command.Add("stashspawntest", {
 ix.command.Add("stashspawneradd", {
 	superAdminOnly = true,
 	arguments = {
+		ix.type.string
 		ix.type.text,
-		bit.bor(ix.type.text, ix.type.optional)
 	},
-	OnRun = function(self, client, text, category)
+	OnRun = function(self, client, category, text)
 		local trace = client:GetEyeTraceNoCursor()
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local text = text
