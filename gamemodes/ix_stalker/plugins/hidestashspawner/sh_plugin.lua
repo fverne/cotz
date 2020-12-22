@@ -21,6 +21,12 @@ if SERVER then
 		self:SetData(self.stashspawnpoints)
 	end
 
+	function PLUGIN:GetPointFromCategory(category)
+		if(!isstring(category)) then return end
+		self.stashspawnpoints[category] = self.stashspawnpoints[category] or {}
+		return table.Random(self.stashspawnpoints[category])
+	end
+
 else
 
 	netstream.Hook("nut_DisplayStashSpawnPoints", function(data)
@@ -89,13 +95,16 @@ ix.command.Add("stashspawneradd", {
 	superAdminOnly = true,
 	arguments = {
 		ix.type.text,
+		bit.bor(ix.type.text, ix.type.optional)
 	},
-	OnRun = function(self, client, text)
+	OnRun = function(self, client, text, category)
 		local trace = client:GetEyeTraceNoCursor()
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local text = text
+		local category = category or "default"
         PLUGIN.stashspawnpoints = PLUGIN.stashspawnpoints or {}
-		table.insert( PLUGIN.stashspawnpoints, {hitpos, text} )
+        PLUGIN.stashspawnpoints[category] = PLUGIN.stashspawnpoints[category] or {}
+		table.insert( PLUGIN.stashspawnpoints[category], {hitpos, text} )
 		client:Notify( "You added a hidden stash spawner." )
 	end
 })
