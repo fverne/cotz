@@ -56,20 +56,12 @@ function charMeta:CompleteQuest(questid)
 	self:SetQuests(quests)
 end
 
-function charMeta:CompleteQuestWithSpecificStage(questid)
+function charMeta:CompleteQuestWithSpecificStage(questid, stage)
 	local quests = self:GetQuests()
 	
 	if (quests[questid] == stage) then
 		quests[questid] = IX_QUEST_COMPLETED
 	end
-
-	self:SetQuests(quests)
-end
-
-function charMeta:CompleteQuest(questid)
-	local quests = self:GetQuests()
-
-	quests[questid] = nil
 
 	self:SetQuests(quests)
 end
