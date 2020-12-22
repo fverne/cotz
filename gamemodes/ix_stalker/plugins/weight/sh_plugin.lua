@@ -81,7 +81,7 @@ function PLUGIN:HUDPaint()
 		surface.SetMaterial(weight)
 		surface.SetDrawColor(Color(0, 0, 0, 0))
 	elseif (ix.weight.BaseWeight(char) - char:GetData("carry", 0)) >= 0 then
-		surface.SetMaterial(weight2)
+		surface.SetMaterial(weight)
 		surface.SetDrawColor(Color(200, 200, 200, 255))
 	elseif char:Overweight() then
 		surface.SetMaterial(weight3)
