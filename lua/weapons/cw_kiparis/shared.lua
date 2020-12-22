@@ -89,7 +89,7 @@ SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "crossbow"
-SWEP.FireModes = {"auto"}
+SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
@@ -98,7 +98,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 90
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/v_notmicro_kiparis.mdl"
 SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_kiparis.mdl"

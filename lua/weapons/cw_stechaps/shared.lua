@@ -82,7 +82,7 @@ SWEP.Animations = {fire = "fire",
 	[4] = {time = 1.5, sound = "WARFACE_pt10_BOLTFORWARD"}}}
 	
 SWEP.DryFire = true
-SWEP.AimViewModelFOV = 70
+SWEP.AimViewModelFOV = 90
 SWEP.SpeedDec = 10
 
 SWEP.Slot = 2
@@ -101,7 +101,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 90
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/v_ma85_wf_pt10.mdl"
 SWEP.WorldModel		= "models/weapons/w_ma85_wf_pt10.mdl"
