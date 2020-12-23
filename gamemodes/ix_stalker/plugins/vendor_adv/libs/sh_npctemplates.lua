@@ -199,14 +199,14 @@ ix.npctemplates.templates["TraderNPCTest"] = {
 	},
 }
 
-ix.npctemplates.templates["testtech"] = {
-	name 		= "Technut",
+ix.npctemplates.templates["technpc"] = {
+	name 		= "'Technut'",
 	description = "A weak man, his tone is very overjoyous.",
 	model 		= "models/legends/griyc.mdl",
 	skin 		= 0,
 	bubble 		= 0,
 	scale 		= 0.5,
-	dialogueid 	= "techtest",
+	dialogueid 	= "technpc",
 	soundgroup 	= "GenericHello",
 	idleanim 	= "trader_idle2",
 	--animgroup 	= 4,
@@ -257,7 +257,7 @@ ix.npctemplates.templates["testtech"] = {
 }
 
 ix.npctemplates.templates["tutorialnpc"] = {
-	name 		= "Old Timer",
+	name 		= "'Old Timer'",
 	description = "An older, but experienced looking man. He has a stern look on his face.",
 	model 		= "models/legends/shram.mdl",
 	skin 		= 0,

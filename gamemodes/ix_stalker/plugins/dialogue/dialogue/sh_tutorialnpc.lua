@@ -92,11 +92,7 @@ DIALOGUE.addTopic("BackgroundTopic4", {
 
 DIALOGUE.addTopic("InterestTopic", {
 	statement = "Can you tell me something interesting?",
-	response = table.Random({
-	"table haystack",
-	"Stop being a dick.",
-	"Reddit"
-	}),
+	response = "No.",
 	options = {
 		"BackTopic",
 	}
