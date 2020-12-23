@@ -36,19 +36,39 @@ hook.Add("InitializedChatClasses", "ixChatRemoval2", function()
 	})
 
 	ix.chat.Register("pm", {
-	format = "[PM-PDA] %s -> %s: %s",
-	color = Color(125, 150, 75, 255),
-	deadCanChat = true,
+		format = "[PMPDA] %s %s -> %s %s: %s",
+		color = Color(0, 191, 255, 255),
+		deadCanChat = true,
 
-	OnChatAdd = function(self, speaker, text, bAnonymous, data)
-		chat.AddText(self.color, string.format(self.format, speaker:GetName(), data.target:GetName(), text))
+		OnChatAdd = function(self, speaker, text, bAnonymous, data)
+			chat.AddText(self.color, "[PPDA-"..speaker:GetCharacter():GetData("pdanickname", speaker:GetCharacter():GetName()).."] ", " ", Material(speaker:GetCharacter():GetPdaavatar()), color_white, " TO  ", self.color, "[PPDA-"..data.target:GetCharacter():GetData("pdanickname", data.target:GetCharacter():GetName()).." ] ", " ", Material(data.target:GetCharacter():GetPdaavatar()), color_white, "\nMESSAGE : ", text)
 
-		if (LocalPlayer() != speaker) then
 			surface.PlaySound("stalkersound/pda/pda.wav")
 		end
-	end
-})
+	})
 end)
+
+-- Overwrites defualt PM Command
+function PLUGIN:InitializedPlugins()
+	ix.command.list["pm"] = nil
+
+	ix.command.Add("ppda", {
+		description = "@cmdPM",
+		arguments = {
+			ix.type.player,
+			ix.type.text
+		},
+		alias = {"PM", "pmpda"},
+		OnRun = function(self, client, target, message)
+			if ((client.ixNextPM or 0) < CurTime()) then
+				ix.chat.Send(client, "pm", message, false, {client, target}, {target = target})
+
+				client.ixNextPM = CurTime() + 0.5
+				target.ixLastPM = client
+			end
+		end
+	})
+end
 
 ix.char.RegisterVar("pdaavatar", {
 	field = "pdaavatar",
