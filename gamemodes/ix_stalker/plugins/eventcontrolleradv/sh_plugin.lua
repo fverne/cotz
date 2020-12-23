@@ -47,7 +47,7 @@ ix.chat.Register("eventpda", {
 		local pda = listener:GetCharacter():GetData("pdaequipped", false)
 		return true
 		/*if pda then
-			listener:EmitSound( "stalkersound/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
+			listener:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
 			return true
 		else
 			return false
@@ -57,11 +57,11 @@ ix.chat.Register("eventpda", {
 
 ix.chat.Register("eventpdainternal", {
 	CanSay = function(self, speaker, text)
-	speaker:EmitSound( "stalkersound/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
+	speaker:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
 
 		return true
 		/*if pda then
-			speaker:EmitSound( "stalkersound/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
+			speaker:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
 			return true
 		else 
 			return false

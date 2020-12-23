@@ -567,7 +567,7 @@ do
 		volume = 0.35,
 		level = 80,
 		pitch = 100,
-		sound = bNotify and "helix/ui/REPLACEME.wav" or "stalkersound/pda_alarm.wav"
+		sound = bNotify and "helix/ui/REPLACEME.wav" or "stalkersound/pda/pda_alarm.wav"
 	})
 end
 

@@ -44,7 +44,7 @@ hook.Add("InitializedChatClasses", "ixChatRemoval2", function()
 		chat.AddText(self.color, string.format(self.format, speaker:GetName(), data.target:GetName(), text))
 
 		if (LocalPlayer() != speaker) then
-			surface.PlaySound("stalkersound/pda.wav")
+			surface.PlaySound("stalkersound/pda/pda.wav")
 		end
 	end
 })
