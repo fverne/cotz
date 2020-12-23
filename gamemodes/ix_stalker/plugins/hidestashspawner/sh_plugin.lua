@@ -94,7 +94,7 @@ ix.command.Add("stashspawntest", {
 ix.command.Add("stashspawneradd", {
 	superAdminOnly = true,
 	arguments = {
-		ix.type.string
+		ix.type.string,
 		ix.type.text,
 	},
 	OnRun = function(self, client, category, text)
