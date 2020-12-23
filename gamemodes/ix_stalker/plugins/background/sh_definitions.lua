@@ -24,7 +24,7 @@
 
 ix.backgrounds["sickly"] = {
 	name = "Sickly",
-	description = "You’ve always been sickly. Colds, influenzas, sore throats, rashes, ear and sinus infections, you just can’t seem to avoid them. Your immune system is working overtime, all the time. You’re not exactly in top physical shape, and can’t really keep up with most people. You’ve heard rumors that wonders can happen inside the exclusion zone, and you wonder if your frail nature could be overturned in there.".. 
+	description = "TODO".. 
 	"\n\nCons:"..
 	"\n  Start with 20% less max health."..
 	"\n  Start with 20% less max stamina."..
@@ -44,15 +44,24 @@ ix.backgrounds["sickly"] = {
 	end,
 }
 
-ix.backgrounds["cripple"] = {
-	name = "Cripple",
-	description = "Your right leg is busted, and you can't move around as fast. You use painkillers to numb the pain.".. 
+ix.backgrounds["alcoholic_light"] = {
+	name = "Alcoholic (Light)",
+	description = "Beer is one of your favorite things to drink, ever since starting to do so at age 16. But since the mob came to fuck you over...".. 
+	"\n\nAddicted to Light Alcohol"..
 	"\n\nStarting Equipment:"..
-	"\n  3x Painkillers"..
-	"\n  1x Makarov"..
-	"\n  1x 9x18 round",
+	"\n  1x Contender (.45 ACP, .410 Magnum Buck) (Damaged)"..
+	"\n  15x rounds of .45 ACP"..
+	"\n  10x rounds of .410 Magnum Buck"..
+	"\n  1x Lvivske Svitle, 1.5l"..
+	"\n  1x Chernihivske White, 500ml"..
+	"\n  1000 Rubles",
 	OnCreated = function(client, character) 
-		character:GetInventory():Add("painkillers", 3)
+		character:GetInventory():Add("contender", 1, {["durability"] = 50})
+		character:GetInventory():Add("45acp", 1, {["quantity"] = 15})
+		character:GetInventory():Add("45acp41", 1, {["quantity"] = 10})
+		character:GetInventory():Add("drink_bottlebeer_2", 1)
+		character:GetInventory():Add("drink_canbeer_2", 1)
+		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  
@@ -61,12 +70,69 @@ ix.backgrounds["cripple"] = {
 	end,
 }
 
-ix.backgrounds["alcoholic"] = {
-	name = "Alcoholic",
-	description = "Alcoholic background for testing.",
+
+ix.backgrounds["alcoholic_heavy"] = {
+	name = "Alcoholic (Strong)",
+	description = "Seeing your family fall apart due to your misuse didn't help it, actually it made it worse...".. 
+	"\n\nAddicted to Strong Alcohol"..
+	"\n\nStarting Equipment:"..
+	"\n  1x CZ52 (7.62x25mm) (Damaged)"..
+	"\n  32x rounds of 7.62x25mm"..
+	"\n  2x Smirnoff Vodka, 700ml"..
+	"\n  1000 Rubles",
 	OnCreated = function(client, character) 
-		character:GetInventory():Add("vodka", 5)
+		character:GetInventory():Add("cz52", 1, {["durability"] = 50})
+		character:GetInventory():Add("762x25", 1, {["quantity"] = 32})
+		character:GetInventory():Add("drink_vodka_3", 2)
+		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 	end,
 	OnLoaded = function(character)
+		--local client = character:GetPlayer()  
+		--client:SetRunSpeed(400) -- These things dont actually work, they're overridden by the stamina plugin almost instantly
+		--client:SetWalkSpeed(200)
+	end,
+}
+
+ix.backgrounds["smoker"] = {
+	name = "Smoker",
+	description = "Smoking started as a pasttime, but after your traumatic event...".. 
+	"\n\nAddicted to Nicotine"..
+	"\n\nStarting Equipment:"..
+	"\n  1x TT-33 (7.62x25mm) (Damaged)"..
+	"\n  32x rounds of 7.62x25mm"..
+	"\n  1x 'Petr 1.' Cigarettes (10pk)"..
+	"\n  1000 Rubles",
+	OnCreated = function(client, character) 
+		character:GetInventory():Add("tt33", 1, {["durability"] = 50})
+		character:GetInventory():Add("762x25", 1, {["quantity"] = 32})
+		character:GetInventory():Add("drug_cigarette_2", 1)
+		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
+	end,
+	OnLoaded = function(character)
+		--local client = character:GetPlayer()  
+		--client:SetRunSpeed(400) -- These things dont actually work, they're overridden by the stamina plugin almost instantly
+		--client:SetWalkSpeed(200)
+	end,
+}
+
+ix.backgrounds["eater"] = {
+	name = "Eater",
+	description = "You've eaten a lot your entire life, and you are now addicted to doing so...".. 
+	"\n\nAddicted to Eating"..
+	"\n\nStarting Equipment:"..
+	"\n  1x Makarov (9x18mm) (Damaged)"..
+	"\n  32x rounds of 9x18mm"..
+	"\n  1x Seliskaya Cheese"..
+	"\n  1000 Rubles",
+	OnCreated = function(client, character) 
+		character:GetInventory():Add("makarov", 1, {["durability"] = 50})
+		character:GetInventory():Add("9x18", 1, {["quantity"] = 32})
+		character:GetInventory():Add("food_cheese_2", 1)
+		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
+	end,
+	OnLoaded = function(character)
+		--local client = character:GetPlayer()  
+		--client:SetRunSpeed(400) -- These things dont actually work, they're overridden by the stamina plugin almost instantly
+		--client:SetWalkSpeed(200)
 	end,
 }
