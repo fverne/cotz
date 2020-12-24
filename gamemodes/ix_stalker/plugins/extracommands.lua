@@ -160,6 +160,8 @@ ix.command.Add("clearinv", {
 				v:Remove()
 			end
 			client:Notify("The inventory of "..target:GetName().." has been cleared.")
+			ix.weight.Update(target)
+			client:Notify("Weight of "..target:GetName().."has been set to 0.")
 		end
 	end
 })
