@@ -27,8 +27,8 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 90
-ENT.hpvar = 30
+ENT.hp = 500
+ENT.hpvar = 100
 
 ENT.FleeTime = 0
 ENT.MustFlee = false
