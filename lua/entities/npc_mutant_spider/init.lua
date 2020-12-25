@@ -212,7 +212,7 @@ end
 //little aggressive jump
 function ENT:STALKERNPCDistanceForMeleeTooBig() 
 	if(self.PlayingAnimation==false) then
-		if self:Health() < 0.5*self:GetMaxHealth() then
+		if self:Health() > 0.5*self:GetMaxHealth() then
 
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
 			if distance < 1200 and distance > 300 then
