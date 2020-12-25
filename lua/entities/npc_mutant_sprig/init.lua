@@ -131,7 +131,7 @@ function ENT:STALKERNPCThink()
 	if ( self.passive == 2 ) then
 		self:STALKERNPCPlayAnimation("lie_idle_0")
 
-		for k,v in pairs(ents.FindInSphere(self:GetPos(), 128)) do
+		for k,v in pairs(ents.FindInSphere(self:GetPos(), 256)) do
 			if(v:IsPlayer())then
 				self.passive = 1 
 				self:EmitSound("Stalker.Sprig.Chase2")
