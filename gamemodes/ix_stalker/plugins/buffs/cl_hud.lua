@@ -10,7 +10,7 @@ function PLUGIN:HUDPaint()
 	local Texture6 = Material("vgui/hud/psypro.png", "noclamp smooth") 
 	
 
-	if LocalPlayer():HasBuff("buff_slowheal") then
+	if LocalPlayer():HasBuff("buff_slowheal") or LocalPlayer():HasBuff("buff_rapidheal") then
 		surface.SetDrawColor(Color(255, 255, 255, 255))
 		surface.SetMaterial(Texture1)
 		surface.DrawTexturedRect(ScrW()*0.82, ScrH()*0.75, ScrW()*0.016, ScrH()*0.032)
