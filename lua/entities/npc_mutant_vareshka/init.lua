@@ -157,7 +157,10 @@ function ENT:STALKERNPCThink()
 
 	-- SMALL JUMP
 	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		self:SetVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(14*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
+		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
+		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,32) + self:OBBCenter()) - (self:GetPos())):GetNormal()
+
+		self:SetVelocity((dirnormal*(distance*3)))
 		self:STALKERNPCPlayAnimation("attack_1",3)
 		self:STALKERNPCMakeMeleeAttack(3)
 		self:EmitSound("Stalker.Vareshka.Chase4")

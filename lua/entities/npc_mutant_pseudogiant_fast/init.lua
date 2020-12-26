@@ -174,7 +174,11 @@ function ENT:STALKERNPCThink()
 
 	-- SMALL JUMP
 	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		self:SetVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(12*distance) +self:GetUp()*math.Clamp((distance),150,400))
+		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
+		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,32) + self:OBBCenter()) - (self:GetPos())):GetNormal()
+
+		self:SetVelocity((dirnormal*(distance*3)))
+
 		self:STALKERNPCPlayAnimation("stand_attack_run_0",6)
 		self:STALKERNPCMakeMeleeAttack(6)
 		self:EmitSound("Stalker.Pseudogiant.Melee1")
