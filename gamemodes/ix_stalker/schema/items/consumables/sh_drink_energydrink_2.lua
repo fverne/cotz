@@ -12,13 +12,20 @@ ITEM.flatweight = 0.050
 ITEM.thirst = 8
 ITEM.quantity = 2
 
+ITEM.addictionLightAlcohol = true
+
 ITEM.sound = "stalkersound/inv_drink_can.mp3"
 ITEM.img = Material("vgui/hud/items/drink/energydrink_2.png")
+
+function ITEM:PopulateTooltipIndividual(tooltip)
+    ix.util.PropertyDesc(tooltip, "Light Alcohol", Color(64, 224, 208))
+end
 
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
 	item.player:AddBuff("buff_staminarestore", 50, { amount = 0.5 })
 	item.player:AddBuff("buff_radiationremoval", 10, { amount = 0.15 })
+
 	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
 end)
 
