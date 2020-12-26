@@ -425,7 +425,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkillgroupeasy"}
 
   ix.jobs.register(tempJob, "killMutantsLow")
 
@@ -442,7 +442,7 @@ do
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkillgroupeasy"}
 
   ix.jobs.register(tempJob, "killMutantsMid")
 
@@ -459,9 +459,271 @@ do
   tempJob.reward = {{"kit_quest3"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkillgroupeasy"}
 
   ix.jobs.register(tempJob, "killMutantsHigh")
+
+  tempJob = nil
+
+
+  -- Humanoid Mutants
+  local tempJob = {}
+
+  tempJob.name = "%d humanoid mutants."
+  tempJob.desc = "%d humanoid mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupHumanoidKilled"
+  tempJob.numberRec = 5
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantkillgroupeasy"}
+
+  ix.jobs.register(tempJob, "killHumanoidsLow")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d humanoid mutants."
+  tempJob.desc = "%d humanoid mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupHumanoidKilled"
+  tempJob.numberRec = 9
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"mutantkillgroupeasy"}
+
+  ix.jobs.register(tempJob, "killHumanoidsMid")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d humanoid mutants."
+  tempJob.desc = "%d humanoid mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupHumanoidKilled"
+  tempJob.numberRec = 15
+  tempJob.reward = {{"kit_quest3"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 25
+  tempJob.categories = {"mutantkillgroupeasy"}
+
+  ix.jobs.register(tempJob, "killHumanoidsHigh")
+
+  tempJob = nil
+
+  -- Predator Mutants
+  local tempJob = {}
+
+  tempJob.name = "%d predator mutants."
+  tempJob.desc = "%d predator mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupPredatorKilled"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"mutantkillgroupmedium"}
+
+  ix.jobs.register(tempJob, "killPredatorsLow")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d predator mutants."
+  tempJob.desc = "%d predator mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupPredatorKilled"
+  tempJob.numberRec = 4
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 25
+  tempJob.categories = {"mutantkillgroupmedium"}
+
+  ix.jobs.register(tempJob, "killPredatorsMid")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d predator mutants."
+  tempJob.desc = "%d predator mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupPredatorKilled"
+  tempJob.numberRec = 6
+  tempJob.reward = {{"kit_quest3"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 30
+  tempJob.categories = {"mutantkillgroupmedium"}
+
+  ix.jobs.register(tempJob, "killPredatorsHigh")
+
+  tempJob = nil
+
+
+  -- Canine Mutants
+  local tempJob = {}
+
+  tempJob.name = "%d canine mutants."
+  tempJob.desc = "%d canine mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupCanineKilled"
+  tempJob.numberRec = 5
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantkillgroupeasy"}
+
+  ix.jobs.register(tempJob, "killCaninesLow")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d canine mutants."
+  tempJob.desc = "%d canine mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupCanineKilled"
+  tempJob.numberRec = 9
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"mutantkillgroupeasy"}
+
+  ix.jobs.register(tempJob, "killCaninesMid")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d canine mutants."
+  tempJob.desc = "%d canine mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupCanineKilled"
+  tempJob.numberRec = 13
+  tempJob.reward = {{"kit_quest3"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 25
+  tempJob.categories = {"mutantkillgroupeasy"}
+
+  ix.jobs.register(tempJob, "killCaninesHigh")
+
+  tempJob = nil
+
+  -- Meat Mutants
+  local tempJob = {}
+
+  tempJob.name = "%d meat mutants."
+  tempJob.desc = "%d meat mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupMeatKilled"
+  tempJob.numberRec = 4
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantkillgroupeasy"}
+
+  ix.jobs.register(tempJob, "killMeatsLow")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d meat mutants."
+  tempJob.desc = "%d meat mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupMeatKilled"
+  tempJob.numberRec = 8
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"mutantkillgroupeasy"}
+
+  ix.jobs.register(tempJob, "killMeatsMid")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d meat mutants."
+  tempJob.desc = "%d meat mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupMeatKilled"
+  tempJob.numberRec = 14
+  tempJob.reward = {{"kit_quest3"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 25
+  tempJob.categories = {"mutantkillgroupeasy"}
+
+  ix.jobs.register(tempJob, "killMeatsHigh")
+
+  tempJob = nil
+
+  -- Psychic Mutants
+  local tempJob = {}
+
+  tempJob.name = "%d psychic mutants."
+  tempJob.desc = "%d psychic mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupPsyKilled"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"mutantkillgroupmedium"}
+
+  ix.jobs.register(tempJob, "killPsyLow")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d psychic mutants."
+  tempJob.desc = "%d psychic mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupPsyKilled"
+  tempJob.numberRec = 4
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 30
+  tempJob.categories = {"mutantkillgroupmedium"}
+
+  ix.jobs.register(tempJob, "killPsyMid")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d psychic mutants."
+  tempJob.desc = "%d psychic mutants."
+  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "groupPsyKilled"
+  tempJob.numberRec = 6
+  tempJob.reward = {{"kit_quest3"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 40
+  tempJob.categories = {"mutantkillgroupmedium"}
+
+  ix.jobs.register(tempJob, "killPsyHigh")
 
   tempJob = nil
 
@@ -478,7 +740,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killRodentsLow")
 
@@ -495,7 +757,7 @@ do
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killRodentsMid")
 
@@ -512,7 +774,7 @@ do
   tempJob.reward = {{"kit_quest3"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killRodentsHigh")
 
@@ -531,7 +793,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killZombiesLow")
 
@@ -548,7 +810,7 @@ do
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killZombiesMid")
 
@@ -565,7 +827,7 @@ do
   tempJob.reward = {{"kit_quest3"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killZombiesHigh")
 
@@ -584,7 +846,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killCatsLow")
 
@@ -637,7 +899,7 @@ do
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
-  tempJob.categories = {"mutantkillmedium", "mutantkillgroupmedium"}
+  tempJob.categories = {"mutantkillmedium"}
 
   ix.jobs.register(tempJob, "killBloodsuckersLow")
 
@@ -654,7 +916,7 @@ do
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
-  tempJob.categories = {"mutantkillmedium", "mutantkillgroupmedium"}
+  tempJob.categories = {"mutantkillmedium"}
 
   ix.jobs.register(tempJob, "killBloodsuckersMid")
 
@@ -671,7 +933,7 @@ do
   tempJob.reward = {{"kit_quest3"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkillmedium", "mutantkillgroupmedium"}
+  tempJob.categories = {"mutantkillmedium"}
 
   ix.jobs.register(tempJob, "killBloodsuckersHigh")
 
@@ -690,7 +952,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killBoarsLow")
 
@@ -707,7 +969,7 @@ do
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killBoarsMid")
 
@@ -724,7 +986,7 @@ do
   tempJob.reward = {{"kit_quest3"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killBoarsHigh")
 
@@ -743,7 +1005,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
-  tempJob.categories = {"mutantkillhard", "mutantkillspecial"}
+  tempJob.categories = {"mutantkillhard"}
 
   ix.jobs.register(tempJob, "killBurersLow")
 
@@ -815,7 +1077,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
-  tempJob.categories = {"mutantkillhard", "mutantkillspecial"}
+  tempJob.categories = {"mutantkillhard"}
 
   ix.jobs.register(tempJob, "killControllersLow")
 
@@ -848,7 +1110,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killDogsLow")
 
@@ -865,7 +1127,7 @@ do
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killDogsMid")
 
@@ -882,7 +1144,7 @@ do
   tempJob.reward = {{"kit_quest3"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killDogsHigh")
 
@@ -901,7 +1163,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killFleshesLow")
 
@@ -918,7 +1180,7 @@ do
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killFleshesMid")
 
@@ -935,7 +1197,7 @@ do
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killFleshesHigh")
 
@@ -954,7 +1216,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killPseudodogsLow")
 
@@ -971,7 +1233,7 @@ do
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killPseudodogsMid")
 
@@ -988,7 +1250,7 @@ do
   tempJob.reward = {{"kit_quest3"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killPseudodogsHigh")
 
@@ -1006,7 +1268,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkillmedium", "mutantkillgroupmedium"}
+  tempJob.categories = {"mutantkillmedium"}
 
   ix.jobs.register(tempJob, "killSnorksLow")
 
@@ -1023,7 +1285,7 @@ do
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 25
-  tempJob.categories = {"mutantkillmedium", "mutantkillgroupmedium"}
+  tempJob.categories = {"mutantkillmedium"}
 
   ix.jobs.register(tempJob, "killSnorksMid")
 
@@ -1040,7 +1302,7 @@ do
   tempJob.reward = {{"kit_quest3"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 30
-  tempJob.categories = {"mutantkillmedium", "mutantkillgroupmedium"}
+  tempJob.categories = {"mutantkillmedium"}
 
   ix.jobs.register(tempJob, "killSnorksHigh")
 
@@ -1126,7 +1388,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkillmedium", "mutantkillgroupmedium"}
+  tempJob.categories = {"mutantkillmedium"}
 
   ix.jobs.register(tempJob, "killIzlomsLow")
 
@@ -1143,7 +1405,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkillmedium", "mutantkillgroupmedium"}
+  tempJob.categories = {"mutantkillmedium"}
 
   ix.jobs.register(tempJob, "killSpidersLow")
 
@@ -1161,7 +1423,7 @@ do
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 25
-  tempJob.categories = {"mutantkillmedium", "mutantkillgroupmedium"}
+  tempJob.categories = {"mutantkillmedium"}
 
   ix.jobs.register(tempJob, "killSpidersMid")
 
@@ -1179,7 +1441,7 @@ do
   tempJob.reward = {{"kit_quest3"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 30
-  tempJob.categories = {"mutantkillmedium", "mutantkillgroupmedium"}
+  tempJob.categories = {"mutantkillmedium"}
 
   ix.jobs.register(tempJob, "killSpidersHigh")
 
@@ -1196,7 +1458,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killTarksLow")
 
@@ -1213,7 +1475,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killTarksMid")
 
@@ -1230,7 +1492,7 @@ do
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 25
-  tempJob.categories = {"mutantkilleasy", "mutantkillgroupeasy"}
+  tempJob.categories = {"mutantkilleasy"}
 
   ix.jobs.register(tempJob, "killTarksHigh")
 

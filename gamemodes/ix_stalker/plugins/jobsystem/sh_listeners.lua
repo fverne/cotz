@@ -77,12 +77,12 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 
     if class == "npc_mutant_dog" then
       CalculateCredit(entity, attacker, "blinddogKilled")
-      CalculateCredit(entity, attacker, "groupDogKilled")
+      CalculateCredit(entity, attacker, "groupCanineKilled")
     end
 
     if class == "npc_mutant_hellhound" then
       CalculateCredit(entity, attacker, "hellhoundKilled")
-      CalculateCredit(entity, attacker, "groupDogKilled")
+      CalculateCredit(entity, attacker, "groupCanineKilled")
     end
 
     if class == "npc_mutant_flesh" then
@@ -92,12 +92,12 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 
     if class == "npc_mutant_pseudodog" then
       CalculateCredit(entity, attacker, "pseudodogKilled")
-      CalculateCredit(entity, attacker, "groupDogKilled")
+      CalculateCredit(entity, attacker, "groupCanineKilled")
     end
 
     if class == "npc_mutant_psydog" then
       CalculateCredit(entity, attacker, "psydogKilled")
-      CalculateCredit(entity, attacker, "groupDogKilled")
+      CalculateCredit(entity, attacker, "groupCanineKilled")
       CalculateCredit(entity, attacker, "groupPsyKilled")
     end 
 
