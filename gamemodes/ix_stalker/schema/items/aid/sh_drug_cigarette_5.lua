@@ -16,6 +16,8 @@ ITEM.psyheal = 5
 ITEM.flatweight = 0.010
 ITEM.weight = 0.001
 
+ITEM.addictionNicotine = true
+
 ITEM.exRender = true
 ITEM.iconCam = {
 	pos = Vector(0, 0, 200),
@@ -28,7 +30,7 @@ if (CLIENT) then
 		if (!self.entity) then
 			ix.util.PropertyDesc(tooltip, "Everyday Item", Color(200, 200, 200))
 			ix.util.PropertyDesc(tooltip, "Calms the Mind Very Slightly", Color(0, 255, 255))
-			ix.util.PropertyDesc(tooltip, "Unhealthy", Color(255, 0, 0))
+            ix.util.PropertyDesc(tooltip, "Contains Nicotine", Color(64, 224, 208))
 		end
 	end
 end
