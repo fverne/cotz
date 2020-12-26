@@ -37,7 +37,7 @@ function playerMeta:setRadiation(amount)
 end
 
 function playerMeta:hasGeiger()
-	return self:GetNetVar("ixhasgeiger")
+	return self:GetNetVar("ixhasgeiger", false)
 end
 
 function PLUGIN:PostPlayerLoadout(client)
