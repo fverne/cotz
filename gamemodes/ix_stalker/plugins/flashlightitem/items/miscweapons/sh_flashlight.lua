@@ -1,16 +1,17 @@
 ITEM.name = "Handheld Flashlight"
 ITEM.description = "A sturdy flashlight used to light your way in the dark."
 ITEM.model = "models/weapons/w_flashlight_zm.mdl"
-ITEM.class = "weapon_flashlight"
-ITEM.weaponCategory = "flashlight"
 
-ITEM.price = 225
 ITEM.height = 1
 ITEM.width = 2
+ITEM.price = 225
+ITEM.weight = 0.600
 
-ITEM.category = nil
+ITEM.class = "weapon_flashlight"
+ITEM.weaponCategory = "flashlight"
 ITEM.canAttach = false
-ITEM.repairCost = ITEM.price/100*1
+
+ITEM.img = ix.util.GetMaterial("cotz/ui/icons/misc_flashlight.png")
 
 ITEM.pacData = {
 [1] = {
