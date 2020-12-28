@@ -77,7 +77,7 @@ SWEP.Sounds = {draw = {{time = 0.2, sound = "29_CYLINDERCLOSE"}},
 	[3] = {time = 2, sound = "29_ROUNDSIN"},
 	[4] = {time = 2.7, sound = "29_CYLINDERCLOSE"}}}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 0
 
 SWEP.Slot = 1
 SWEP.SlotPos = 0

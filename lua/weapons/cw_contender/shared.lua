@@ -92,7 +92,7 @@ SWEP.Animations = {fire = "shoot1",
 		[6] = {time = 2.1, sound = "Contender.Close"},
 		[7] = {time = 2.2, sound = "Contender.Cock"}}}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 0
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0

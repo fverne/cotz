@@ -95,7 +95,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	reload = {[1] = {time = 0.4, sound = "CW_PP2000_MAGOUT"},
 	[2] = {time = 2.8, sound = "CW_MP5_MAGIN"}}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 5
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0

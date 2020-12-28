@@ -95,7 +95,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"},
     [8] = {time = 2.5, sound = "Weapon_Cloth4"},
 	[9] = {time = 2.55, sound = "Weapon_PP19V_Slideback"}}}
 
-SWEP.SpeedDec = 15
+SWEP.SpeedDec = 5
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

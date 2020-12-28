@@ -79,7 +79,7 @@ SWEP.Sounds = {fire1 = {{time = 0.35, sound = "CW_M1887_PUMPFWD"},
 	draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"},
 	{time = 0.55, sound = "CW_M1887_PUMPBCK"}}}
 
-SWEP.SpeedDec = 20
+SWEP.SpeedDec = 10
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

@@ -86,7 +86,7 @@ SWEP.Sounds = {draw = {{time = 0.0, sound = "CW_SW500_DEPLOY"}},
 
 	reload = {{time = 0.0, sound = "CW_SW500_CLIPOUT"}}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 5
 
 SWEP.LuaViewmodelRecoil = true
 SWEP.LuaViewmodelRecoilOverride = true

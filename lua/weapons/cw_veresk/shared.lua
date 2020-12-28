@@ -93,7 +93,7 @@ SWEP.Sounds = {draw = {{time = 0.45, sound = "VERESK_FOREGRIP"}},
 	[4] = {time = 2.2, sound = "VERESK_BOLTREL"},
 	[5] = {time = 2.7, sound = "VERESK_HANDLE"}}}
 
-SWEP.SpeedDec = 25
+SWEP.SpeedDec = 5
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0

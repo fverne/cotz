@@ -148,7 +148,7 @@ SWEP.Sounds = {Reload_30 = {[1] = {time = 0.7, sound = "CW_SKS_BOLTBACK"},
 	}
 	
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 15
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

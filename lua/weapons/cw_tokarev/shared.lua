@@ -70,7 +70,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "TT_SLIDE"}},
 	[2] = {time = 1.15, sound = "TT_CLIPIN"},
 	[3] = {time = 1.6, sound = "TT_SLIDE"}}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 0
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0

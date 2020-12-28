@@ -92,7 +92,7 @@ SWEP.Sounds = {
 	[4] = {time = 2.1, sound = "CW_BERETTA92_SLIDEFORW"}}
 	
 }
-SWEP.SpeedDec = 5
+SWEP.SpeedDec = 0
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0

@@ -78,7 +78,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "RB_DRAW"}},
 	[3] = {time = 2.5, sound = "RB_INSERT"},
 	[4] = {time = 3.25, sound = "RB_IN"}}}
 
-SWEP.SpeedDec = 35
+SWEP.SpeedDec = 0
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0

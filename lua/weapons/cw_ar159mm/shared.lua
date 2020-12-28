@@ -100,7 +100,7 @@ SWEP.Sounds = {draw_unsil = {{time = 0, sound = "CW_FOLEY_MEDIUM"},
 	[4] = {time = 3, sound = "CW_M49MM_BOLTPULL"},
 	[5] = {time = 3.3, sound = "CW_M49MM_RELA"}}}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 5
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

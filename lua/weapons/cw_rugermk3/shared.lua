@@ -76,7 +76,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 	[2] = {time = 1.5, sound = "MK3_CLIPIN"},
 	[3] = {time = 2.1, sound = "MK3_SLIDERELEASE"}}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 0
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0

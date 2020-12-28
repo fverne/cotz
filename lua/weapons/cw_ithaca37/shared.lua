@@ -91,7 +91,7 @@ SWEP.Animations = {fire = {"base_fire_1","base_fire_2"},
 	draw = "base_draw"}
 	
 
-SWEP.SpeedDec = 40
+SWEP.SpeedDec = 10
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

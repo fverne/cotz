@@ -128,7 +128,7 @@ SWEP.Sounds = {Reload = {[1] = {time = 0.6, sound = "CW_R1022_MAGOUT"},
 	}
 	
 
-SWEP.SpeedDec = 20
+SWEP.SpeedDec = 10
 SWEP.UseHands = true
 SWEP.Slot = 3
 SWEP.SlotPos = 0

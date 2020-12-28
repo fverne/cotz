@@ -114,7 +114,7 @@ SWEP.Sounds = {draw = {{time = 0.0, sound = "CWC_FOLEY_LIGHT"},
 {time = 2.0, sound = "CWC_MATEBA_SPIN"},
 {time = 2.4, sound = "CWC_MAG_DROP_REVOLVER"}}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 0
 
 SWEP.LuaViewmodelRecoil = true
 SWEP.LuaViewmodelRecoilOverride = true
