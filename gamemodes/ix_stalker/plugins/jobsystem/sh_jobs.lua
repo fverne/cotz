@@ -330,7 +330,7 @@ do
 
   ix.jobs.register(tempJob, "ItemJob_flashdriveblue")
 
-  tempJob = nil*/
+  tempJob = nil
 
   local tempJob = {}
 
@@ -347,7 +347,7 @@ do
   ix.jobs.register(tempJob, "ItemJob_documents4")
 
   tempJob = nil
-
+  */
   /*local tempJob = {}
 
   tempJob.name = "%d Traders Journals."
