@@ -47,11 +47,10 @@ if (SERVER) then
 end
 
 function ix.util.GetMutantMeatWeight(uniqueID, knifetier)
-	local pos = string.find(uniqueID, "meat")
-	if(!pos) then return end
+	if(!string.find(uniqueID, "meat")) then return end
 
 	local item = ix.item.list[uniqueID]
 	local weightvar = item.BaseWeight * 0.05
 
-	return math.Round(item.BaseWeight + math.Rand(-weightvar, weightvar)) + (item.WeightPerLevel * knifetier)
+	return item.BaseWeight + math.Rand(-weightvar, weightvar) + (item.WeightPerLevel * knifetier)
 end

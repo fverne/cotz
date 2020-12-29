@@ -148,12 +148,15 @@ if SERVER then
 					local position = client:GetItemDropPos()
 					if IsValid(npc) then
 						npc:Remove()
-						for i = 1, #loot do
-							local weight = ix.util.GetMutantMeatWeight(loot[i], knifetier)
-							local dat = weight and {["weight"] = weight} or {}
+						for _,v in pairs(loot) do
+							local weight = ix.util.GetMutantMeatWeight(v, knifetier)
+							local dat = {}
+							if(weight) then
+								dat = {["weight"] = weight}
+							end
 
-							if (IsValid(client) and client:GetCharacter() and !inv:Add(loot[i], 1, dat)) then
-								ix.item.Spawn(loot[i], position, nil, AngleRand(), dat)
+							if (IsValid(client) and client:GetCharacter() and !inv:Add(v, 1, dat)) then
+								ix.item.Spawn(v, position, nil, AngleRand(), dat)
 								position = position + Vector(0, 0, 5)
 								client:Notify("No space in your inventory! Items have been dropped.")
 							end
