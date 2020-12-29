@@ -1,13 +1,14 @@
 ITEM.name = "PBS suppressor"
 ITEM.description = " A suppressor for most AK variants and other larger caliber rifles of eastern european origin."
-ITEM.category = "Attachments"
+ITEM.model = "models/cw2/attachments/cobra_m2.mdl"
+
 ITEM.width = 2
 ITEM.height = 1
-ITEM.attachName = "md_pbs1"
-ITEM.model = "models/cw2/attachments/cobra_m2.mdl"
-ITEM.upgradeIcon = Material("materials/vgui/ui/stalker/weaponupgrades/silenced.png")
-ITEM.attachSlot = 2
---ITEM.busflag = "SPECIAL3_1_1"
 ITEM.price = 5000
-ITEM.repairCost = ITEM.price/100*1
 ITEM.weight = 0.669
+
+ITEM.attachName = "md_pbs1"
+ITEM.attachSlot = 2
+ITEM.upgradeIcon = Material("materials/vgui/ui/stalker/weaponupgrades/silenced.png")
+
+ITEM.img = ix.util.GetMaterial("cotz/ui/icons/attachment_silencer3.png")
