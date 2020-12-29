@@ -235,7 +235,7 @@ DIALOGUE.addTopic("GetTask", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
-	response = "Well, sure! I'm sure I have the information you need.",
+	response = "Very nice...",
 	options = {
 		"TradeTopic",
 		"BackgroundTopic",
