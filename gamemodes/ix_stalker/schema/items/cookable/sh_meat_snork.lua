@@ -1,19 +1,17 @@
-ITEM.name = "Decomposing Meat"
-ITEM.description = "Uncooked meat from a Humanoid creature."
-ITEM.longdesc = "Meat from a human. It's very frowned upon to eat by stalkers, even though it originates from creatures that are no longer classified as humans."
-ITEM.model = "models/lostsignalproject/items/consumable/raw_flesh.mdl"
+ITEM.name = "Snork Hand"
+ITEM.description = "Uncooked meat from a snork."
+ITEM.longdesc = "An uncooked snork hand. Legend has that they bring luck when you eat them, albeit veterans tend to cook them first."
+ITEM.model = "models/lostsignalproject/items/consumable/raw_snork.mdl"
 
-ITEM.price = 10
+ITEM.price = 450
 ITEM.width = 1
 ITEM.height = 1
 
-ITEM.WeightPerHunger = 0.060
-ITEM.BaseWeight = 1.661
-ITEM.WeightPerLevel = 0.349
+ITEM.WeightPerHunger = 0.120
+ITEM.BaseWeight = 0.387
+ITEM.WeightPerLevel = 0.129
 
-ITEM.meal = "meal_human"
-
-ITEM.img = ix.util.GetMaterial("cotz/ui/icons/food_14.png")
+ITEM.meal = "meal_snork"
 
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)
