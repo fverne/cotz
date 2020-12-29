@@ -80,7 +80,7 @@ function ix.jobs.getFormattedDescInactive(identifier)
 end
 
 function ix.jobs.isItemJob(jobname)
-  local underscorepos = string.find(jobname, "_")
+  local underscorepos = string.find(jobname, "#")
   if underscorepos then
     return string.sub(jobname, underscorepos + 1)
   else
