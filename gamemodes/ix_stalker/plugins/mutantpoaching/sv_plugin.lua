@@ -216,7 +216,7 @@ if SERVER then
 									return
 								end
 
-								client:ForceSequence("cidle_knife")
+								client:ForceSequence("cidle_knife", nil, 5)
 								npc:SetNetVar("beingSkinned", true)
 								npc:EmitSound( "stalkersound/inv_mutant_loot_animal.ogg", 60 )
 								ix.util.PlayerPerformBlackScreenAction(client, "Poaching", 5, function(player) 

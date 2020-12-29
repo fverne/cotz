@@ -261,7 +261,7 @@ function CanPlayerTakeItem(client, item)
 end
 
 --- Whether or not the player is allowed to punch with the hands SWEP.
--- @realm server
+-- @realm shared
 -- @player client Player attempting throw a punch
 -- @treturn bool Whether or not to allow the player to punch
 -- @usage function PLUGIN:CanPlayerThrowPunch(client)
@@ -566,7 +566,14 @@ end
 function OnCharacterMenuCreated(panel)
 end
 
---- @realm shared
+--- Called whenever an item entity has spawned in the world. You can access the entity's item table with
+-- `entity:GetItemTable()`.
+-- @realm server
+-- @entity entity Spawned item entity
+-- @usage function PLUGIN:OnItemSpawned(entity)
+-- 	local item = entity:GetItemTable()
+-- 	-- do something with the item here
+-- end
 function OnItemSpawned(entity)
 end
 

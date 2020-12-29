@@ -39,7 +39,7 @@ ix.config.Add("charloadremove", true, "If enabled, instantly loads first charact
 	category = "1development"
 })
 
-function PLUGIN:PostPlayerLoadout(client)
+function PLUGIN:PostGamemodeLoaded()
 	concommand.Remove( "status" ) -- needs testing...
 	concommand.Remove( "ix_togglethirdperson" ) -- needs testing...
 end
@@ -56,6 +56,7 @@ if (SERVER) then
 			end
 		end
 	end
+
 	--funny meme when PostPlayerLoadout breaks in the framework and is never called :)))
 	function PLUGIN:PostPlayerLoadout(client)
 		local character = client:GetCharacter()
