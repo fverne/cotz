@@ -47,7 +47,7 @@ if SERVER then
 			local n = 0
 			if(item.quantity) then
 				for i=1, item:GetData("quantity", item.quantity) do
-					hook.Run("ix_JobTrigger", client, "itemDeliver#"..ix.jobs.isItemJob(jobidentifier))
+					hook.Run("ix_JobTrigger", client, "itemDeliver_"..ix.jobs.isItemJob(jobidentifier))
 					n = n + 1
 					if (client:GetCharacter():GetJobs()[npcidentifier].isCompleted) then 
 						item:SetData("quantity", item:GetData("quantity", item.quantity)-n)
