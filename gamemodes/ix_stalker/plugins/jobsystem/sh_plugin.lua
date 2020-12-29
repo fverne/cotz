@@ -56,7 +56,7 @@ if SERVER then
 					end
 				end
 			else
-				hook.Run("ix_JobTrigger", client, "itemDeliver#"..ix.jobs.isItemJob(jobidentifier))
+				hook.Run("ix_JobTrigger", client, "itemDeliver_"..ix.jobs.isItemJob(jobidentifier))
 			end
 			if(!noremove) then item:Remove() end
 			ix.dialogue.notifyItemLost(client, ix.item.list[ix.jobs.isItemJob(jobidentifier)].name)
