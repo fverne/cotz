@@ -1518,7 +1518,7 @@ do
   tempJob.repReward = 15
   tempJob.categories = {"mutantmeateasy"}
 
-  ix.jobs.register(tempJob, "ItemJob_meat_blinddog")
+  ix.jobs.register(tempJob, "ItemJob#meat_blinddog")
 
   tempJob = nil
 
@@ -1536,7 +1536,7 @@ do
   tempJob.repReward = 15
   tempJob.categories = {"mutantmeatmedium"}
 
-  ix.jobs.register(tempJob, "ItemJob_meat_bloodsucker")
+  ix.jobs.register(tempJob, "ItemJob#meat_bloodsucker")
 
   tempJob = nil
 
@@ -1554,7 +1554,7 @@ do
   tempJob.repReward = 15
   tempJob.categories = {"mutantmeateasy"}
 
-  ix.jobs.register(tempJob, "ItemJob_meat_boar")
+  ix.jobs.register(tempJob, "ItemJob#meat_boar")
 
   tempJob = nil
 
@@ -1572,7 +1572,7 @@ do
   tempJob.repReward = 15
   tempJob.categories = {"mutantmeatmedium"}
 
-  ix.jobs.register(tempJob, "ItemJob_meat_burer")
+  ix.jobs.register(tempJob, "ItemJob#meat_burer")
 
   tempJob = nil
 */
@@ -1590,7 +1590,7 @@ do
   tempJob.repReward = 15
   tempJob.categories = {"mutantmeateasy"}
 
-  ix.jobs.register(tempJob, "ItemJob_meat_cat")
+  ix.jobs.register(tempJob, "ItemJob#meat_cat")
 
   tempJob = nil
 
@@ -1609,7 +1609,7 @@ do
   tempJob.repReward = 15
   tempJob.categories = {"mutantmeateasy"}
 
-  ix.jobs.register(tempJob, "ItemJob_meat_flesh")
+  ix.jobs.register(tempJob, "ItemJob#meat_flesh")
 
   tempJob = nil
 
@@ -1627,7 +1627,7 @@ do
   tempJob.repReward = 15
   tempJob.categories = {"mutantmeatmedium"}
 
-  ix.jobs.register(tempJob, "ItemJob_meat_hellhound")
+  ix.jobs.register(tempJob, "ItemJob#meat_hellhound")
 
   tempJob = nil
 
@@ -1645,7 +1645,7 @@ do
   tempJob.repReward = 15
   tempJob.categories = {"mutantmeatmedium"}
 
-  ix.jobs.register(tempJob, "ItemJob_meat_human")
+  ix.jobs.register(tempJob, "ItemJob#meat_human")
 
   tempJob = nil
 
@@ -1663,7 +1663,7 @@ do
   tempJob.repReward = 15
   tempJob.categories = {"mutantmeateasy"}
 
-  ix.jobs.register(tempJob, "ItemJob_meat_pseudodog")
+  ix.jobs.register(tempJob, "ItemJob#meat_pseudodog")
 
   tempJob = nil
 
@@ -1681,7 +1681,7 @@ do
   tempJob.repReward = 15
   tempJob.categories = {"mutantmeatmedium"}
 
-  ix.jobs.register(tempJob, "ItemJob_meat_sprig")
+  ix.jobs.register(tempJob, "ItemJob#meat_sprig")
 
   tempJob = nil
 
@@ -1693,13 +1693,13 @@ do
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver#meat_tushkano"
-  tempJob.numberRec = 2
+  tempJob.numberRec = 4
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantmeateasy"}
 
-  ix.jobs.register(tempJob, "ItemJob_meat_tushkano")
+  ix.jobs.register(tempJob, "ItemJob#meat_tushkano")
 
   tempJob = nil
 
