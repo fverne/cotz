@@ -181,9 +181,9 @@ function PANEL:Init()
 		--surface.DrawRect(0, y + newHeight - 1, width, 1)
 
 		-- background
-		surface.SetMaterial(Material("cotz/panels/loot_interface.png"))
-		surface.SetDrawColor(255, 255, 255, 250)
-		surface.DrawTexturedRectUV(width * 0.35, 0, width * 0.3, height, 0, 1, 1, 0)
+		--surface.SetMaterial(Material("cotz/panels/loot_interface.png"))
+		--surface.SetDrawColor(255, 255, 255, 250)
+		--surface.DrawTexturedRectUV(width * 0.35, 0, width * 0.3, height, 0, 1, 1, 0)
 
 		if (matrix) then
 			cam.PushModelMatrix(matrix)
@@ -213,7 +213,7 @@ function PANEL:Init()
 
 		local titleLabel = logoPanel:Add("DLabel")
 		titleLabel:SetTextColor(color_white)
-		titleLabel:SetFont("ixTitleFont")
+		titleLabel:SetFont("stalkermaintitlefont")
 		titleLabel:SetText(L2("schemaName") or Schema.name or L"unknown")
 		titleLabel:SizeToContents()
 		titleLabel:SetPos(halfWidth - titleLabel:GetWide() * 0.5, halfPadding)
@@ -223,7 +223,7 @@ function PANEL:Init()
 		if (subtitle) then
 			local subtitleLabel = logoPanel:Add("DLabel")
 			subtitleLabel:SetTextColor(color_white)
-			subtitleLabel:SetFont("ixSubTitleFont")
+			subtitleLabel:SetFont("stalkermainsubtitlefont")
 			subtitleLabel:SetText(subtitle)
 			subtitleLabel:SizeToContents()
 			subtitleLabel:SetPos(halfWidth - subtitleLabel:GetWide() * 0.5, 0)

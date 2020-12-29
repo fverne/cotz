@@ -93,6 +93,22 @@ surface.CreateFont("stalkertitlefont", {
 	antialias = true
 })
 
+surface.CreateFont("stalkermaintitlefont", {
+	font = "stalker2",
+	size = ScreenScale(26),
+	extended = true,
+	weight = 500, 
+	antialias = true
+})
+
+surface.CreateFont("stalkermainsubtitlefont", {
+	font = "stalker2",
+	size = ScreenScale(20),
+	extended = true,
+	weight = 500, 
+	antialias = true
+})
+
 local FiremodeTranslationTable = {
 	["semi"] = "1",
 	["pump"] = "1",
