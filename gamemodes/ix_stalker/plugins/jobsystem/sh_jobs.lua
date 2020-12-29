@@ -1497,4 +1497,29 @@ do
   ix.jobs.register(tempJob, "killTarksHigh")
 
   tempJob = nil
+
+
+
+
+---------------------------------------
+-------------ITEM RETRIEVAL------------
+---------------------------------------
+
+  local tempJob = {}
+
+  tempJob.name = "%d pieces of blind dog meat."
+  tempJob.desc = "%d pieces of blind dog meat."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_blinddog"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeateasy"}
+
+  ix.jobs.register(tempJob, "ItemJob_meat_blinddog")
+
+  tempJob = nil
+
 end

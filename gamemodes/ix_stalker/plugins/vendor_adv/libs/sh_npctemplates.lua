@@ -233,20 +233,9 @@ ix.npctemplates.templates["tutorialnpc"] = {
 		["guitar"] 	= { nil, 4, SELLANDBUY, 4, 0.10, 1 },
 		["harmonica"] 	= { nil, 4, SELLANDBUY, 4, 0.10, 1 },
 		["diecup"] 	= { nil, 4, SELLANDBUY, 4, 0.10, 1 },
-		["lowtiercooker"] 	= { nil, 4, SELLANDBUY, 4, 0.10, 1 },
-		["lowtiercookerfuel"] 	= { nil, 4, SELLANDBUY, 4, 0.10, 2 },
-		["drug_cigarette_1"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
-		["drug_cigarette_2"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
-		["drug_cigarette_3"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
 		["medic_medkit_1"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
 		["medic_medkit_2"] 	= { nil, 10, SELLANDBUY, 10, 0.10, 2 },
 		["medic_bandage_1"] 	= { nil, 15, SELLANDBUY, 15, 0.10, 2 },
-		["drink_bottlebeer_1"] 	= { nil, 6, SELLANDBUY, 6, 0.10, 2 },
-		["drink_bottletea"] 	= { nil, 6, SELLANDBUY, 6, 0.10, 2 },
-		["drink_bottlwater"] 	= { nil, 6, SELLANDBUY, 6, 0.10, 2 },
-		["drink_vodka_1"] 	= { nil, 6, SELLANDBUY, 6, 0.10, 2 },
-		["drink_vodka_2"] 	= { nil, 6, SELLANDBUY, 6, 0.10, 2 },
-		["drink_vodka_3"] 	= { nil, 6, SELLANDBUY, 6, 0.10, 2 },
 		["mailjacket"] 	= { nil, 1, SELLANDBUY, 2, 2, 1 },
 		["trenchcoat"] 	= { nil, 1, SELLANDBUY, 2, 2, 1 },
 		["halfmask"] 	= { nil, 1, SELLANDBUY, 2, 0.5, 1 },
@@ -267,6 +256,66 @@ ix.npctemplates.templates["tutorialnpc"] = {
 		["snorksfoot"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 		["rodentshead"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 		["zombiehand"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+	},
+}
+
+ix.npctemplates.templates["cooknpc"] = {
+	name 		= "'Spicy Lemon'",
+	description = "A large man. He has a confident smirk on his face, and smells of a mix of spices and sweat.",
+	model 		= "models/legends/makar.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.7,
+	dialogueid 	= "cooknpc",
+	soundgroup 	= "CookHello",
+	idleanim 	= "doctor_idle",
+	--animgroup 	= 4,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["lowtiercooker"] 	= { nil, 2, SELLANDBUY, 4, 0.10, 1 },
+		["lowtiercookerfuel"] 	= { nil, 4, SELLANDBUY, 10, 0.50, 2 },
+
+		["drug_cigarette_1"] 	= { nil, nil, SELLANDBUY, 10, 0.10, 2 },
+		["drug_cigarette_2"] 	= { nil, nil, SELLANDBUY, 10, 0.10, 2 },
+		["drug_cigarette_3"] 	= { nil, nil, SELLANDBUY, 10, 0.10, 2 },
+
+		["drink_bottlebeer_1"] 	= { nil, nil, SELLANDBUY, 6, 0.10, 2 },
+		["drink_bottletea"] 	= { nil, nil, SELLANDBUY, 6, 0.10, 2 },
+		["drink_bottlewater"] 	= { nil, nil, SELLANDBUY, 6, 0.10, 2 },
+		["drink_vodka_1"] 	= { nil, nil, SELLANDBUY, 6, 0.10, 2 },
+		["drink_vodka_2"] 	= { nil, nil, SELLANDBUY, 6, 0.10, 2 },
+		["drink_vodka_3"] 	= { nil, nil, SELLANDBUY, 6, 0.10, 2 },
+        ["food_bread"] 	= { nil, nil, SELLANDBUY, 6, 0.10, 2 },
+        ["food_nuts_1"] 	= { nil, nil, SELLANDBUY, 6, 0.10, 2 },
+        ["food_oldmeat"] 	= { nil, nil, SELLANDBUY, 6, 0.10, 2 },
+        ["food_sausage_1"] 	= { nil, nil, SELLANDBUY, 6, 0.10, 2 },
+        ["food_can_sprats"] 	= { nil, nil, SELLANDBUY, 6, 0.10, 2 },
+
+		["meat_blinddog"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["meat_bloodsucker"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["meat_boar"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["meat_burer"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["meat_cat"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["meat_chimera"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["meat_flesh"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["meat_hellhound"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["meat_human"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["meat_pseudodog"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["meat_sprig"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+		["meat_tushkano"] 	= { nil, nil, BUYONLY, nil, nil, nil },
+
+		["meal_blinddog"] 	= { nil, nil, SELLANDBUY, 2, nil, nil },
+		["meal_bloodsucker"] 	= { nil, nil, SELLANDBUY, 2, nil, nil },
+		["meal_boar"] 	= { nil, nil, SELLANDBUY, 2, nil, nil },
+		["meal_burer"] 	= { nil, nil, SELLANDBUY, 2, nil, nil },
+		["meal_cat"] 	= { nil, nil, SELLANDBUY, 2, nil, nil },
+		["meal_chimera"] 	= { nil, nil, SELLANDBUY, 2, nil, nil },
+		["meal_flesh"] 	= { nil, nil, SELLANDBUY, 2, nil, nil },
+		["meal_hellhound"] 	= { nil, nil, SELLANDBUY, 2, nil, nil },
+		["meal_human"] 	= { nil, nil, SELLANDBUY, 2, nil, nil },
+		["meal_pseudodog"] 	= { nil, nil, SELLANDBUY, 2, nil, nil },
+		["meal_sprig"] 	= { nil, nil, SELLANDBUY, 2, nil, nil },
+		["meal_tushkano"] 	= { nil, nil, SELLANDBUY, 2, nil, nil },
 	},
 }
 
@@ -306,6 +355,14 @@ ix.npctemplates.soundtemplates["TutorialNpc"] = {
 	"npc/shram/idle_4.ogg"
 }
 
+ix.npctemplates.soundtemplates["CookNpc"] = {
+	"npc/lesnik/red_forester_meet_hello_0.ogg",
+	"npc/lesnik/red_forester_meet_hello_1.ogg",
+	"npc/lesnik/red_forester_meet_hello_2.ogg",
+	"npc/lesnik/red_forester_greet_1.ogg",
+    "npc/lesnik/red_forester_hello_bye_0.ogg",
+    "npc/lesnik/red_forester_hello_bye_1.ogg",
+}
 
 ix.npctemplates.soundtemplates["nosound"] = {
 	"stalkersound/inv_nosound.mp3",
