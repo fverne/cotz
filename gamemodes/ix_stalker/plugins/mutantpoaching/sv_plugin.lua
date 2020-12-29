@@ -89,12 +89,12 @@ function PLUGIN:KeyPress(client, key)
 	local Hit = client:GetEyeTraceNoCursor()
 	local npc = Hit.Entity
 	local items = client:GetCharacter():GetInventory():GetItems()
-	local mutant = ix.MutantTable[npc:GetModel()]
+	local mutant = ix.poaching.MutantTable[npc:GetModel()]
 	local knife = nil
 
 	if client:GetCharacter() and client:Alive() then
 		if (key == IN_USE) then
-			if (npc:IsRagdoll() and ix.MutantTable[npc:GetModel()] and npc:GetPos():Distance( client:GetPos() ) <= 55) then
+			if (npc:IsRagdoll() and ix.poaching.MutantTable[npc:GetModel()] and npc:GetPos():Distance( client:GetPos() ) <= 55) then
 				for _, v in pairs(items) do
 					if v:GetData("equip") and v.isPoachKnife then
 						knife = ix.item.instances[v.id].id
