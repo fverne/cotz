@@ -11,3 +11,4 @@ ITEM.attachName = "md_tundra9mm"
 ITEM.attachSlot = 2
 ITEM.upgradeIcon = Material("materials/vgui/ui/stalker/weaponupgrades/silenced.png")
 
+ITEM.img = ix.util.GetMaterial("cotz/ui/icons/attachment_silencer16.png")
