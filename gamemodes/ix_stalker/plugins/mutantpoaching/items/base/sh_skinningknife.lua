@@ -8,7 +8,7 @@ ITEM.price = 500
 
 ITEM.meattickets = 0
 ITEM.parttickets = 0
-ITEM.lootbonus = 0
+ITEM.knifetier = 0
 ITEM.isPoachKnife = true
 
 ITEM.img = Material("vgui/hud/knife1.png", "noclamp smooth")

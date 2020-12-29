@@ -128,6 +128,8 @@ function PLUGIN:PreDrawHUD()
 
 	local psydmgPre = (100 - lp:GetPsyHealth())
 
+	if(lp:GetNetVar("ix_psysuppressed", false)) then psydmgPre = psydmgPre/2 end
+
 	if psydmgPre > 25 then
 		local psydmg = math.Clamp((ix.util.mapValueToRange(psydmgPre,25,100,0,100)/100),0,1)
 
@@ -203,6 +205,8 @@ function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 		
 		entity:DamagePsyHealth(math.Clamp(dmgAmount *((100-psyResist)/100) ,0, 100))
 		dmgInfo:SetDamage(0)
+
+		if(entity:GetPsyHealth() < 0) then entity:Kill() end
 	end
 end
 

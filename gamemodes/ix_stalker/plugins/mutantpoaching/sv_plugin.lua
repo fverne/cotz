@@ -1,9 +1,11 @@
 local PLUGIN = PLUGIN
 
-ix.MutantTable = {
+ix.poaching = ix.poaching or {}
+
+ix.poaching.MutantTable = {
 	["models/monsters/izlom.mdl"] = "izlom",
 	["models/monsters/zombie.mdl"] = "classiczombie",
-	["models/monsters/babka.mdl"] = "classiczombiebabka",
+	["models/monsters/babka.mdl"] = "classiczombie",
 	["models/stalkertnb/rodent1.mdl"] = "tushkano",
 	["models/monsters/snork2.mdl"] = "snork",
 	["models/monsters/psydog.mdl"] = "pseudodog",
@@ -15,114 +17,71 @@ ix.MutantTable = {
 	["models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl"] = "burer",
 	["models/monsters/cat.mdl"] = "cat",
 	["models/maver1k_XVII/Stalker/mutants/karlik.mdl"] = "karlik",
-	["models/monsters/zanoza.mdl"] = "sprig"
+	["models/monsters/zanoza.mdl"] = "sprig",
+	["models/monsters/tibet.mdl"] = "swampcontroller"
+
 }
 
-ix.MutantParts = {
+ix.poaching.MutantParts = {
 	["dog"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_blinddog",
-		["parttype"] = "dogtail",
+		["parts"] = {{"part_blinddog", 20}, {"hide_blinddog", 3}},
 	},
 	["izlom"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_human",
-		["parttype"] = "izlomhand",
+		["parts"] = {{"part_izlom", 15}, {"hide_izlom", 2}},
 	},
 	["classiczombie"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_human",
-		["parttype"] = "zombiehand",
-	},
-	["classiczombiebabka"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
-		["meattype"] = "meathuman",
-		["parttype"] = "zombiehand",
+		["parts"] = {{"part_zombie_1", 25}, {"part_zombie_2", 5}},
 	},
 	["tushkano"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_tushkano",
-		["parttype"] = "rodentshead",
+		["parts"] = {{"part_tushkano", 45}, {"hide_tushkano", 8}},
 	},
 	["snork"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_human",
-		["parttype"] = "snorksfoot",
+		["parts"] = {{"part_snork_1", 35}, {"part_snork_2", 4}},
 	},
 	["pseudodog"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_pseudodog",
-		["parttype"] = "pseudodogtail",
+		["parts"] = {{"part_pseudodog", 15}, {"hide_pseudodog", 2}},
 	},
 	["bloodsucker"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_bloodsucker",
-		["parttype"] = "bloodsuckerjaw",
+		["parts"] = {{"part_bloodsucker", 25}, {"hide_bloodsucker", 1}},
 	},
 	["flesh"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_flesh",
-		["parttype"] = "flesheye",
+		["parts"] = {{"part_flesh", 75}, {"hide_flesh", 1}},
 	},
 	["boar"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_boar",
-		["parttype"] = "boarhoof",
+		["parts"] = {{"part_boar", 75}, {"hide_boar", 5}},
 	},
 	["chimera"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_chimera",
-		["parttype"] = "chimerasclaw",
+		["parts"] = {{"part_chimera", 90}, {"hide_chimera", 2}},
 	},
 	["burer"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_burer",
-		["parttype"] = "burershand",
+		["parts"] = {{"part_burer_1", 45}, {"part_burer_2", 5}, {"hide_chimera", 2}},
 	},
 	["cat"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_cat",
-		["parttype"] = "cattail",
+		["parts"] = {{"part_cat", 35}, {"hide_cat", 4}},
 	},
 	["karlik"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
-		["meattype"] = "meat_human",
-		["parttype"] = "medkit",
+		["meattype"] = "meat_karlik",
+		["parts"] = {{"part_karlik_1", 45}, {"part_karlik_2", 5}, {"hide_karlik", 4}},
 	},
 	["sprig"] = {
-		["meat"] = {["meattickets"] = 8, ["parttickets"] = 1},
-		["mix"] = {["meattickets"] = 8, ["parttickets"] = 2},
-		["part"] = {["meattickets"] = 8, ["parttickets"] = 4},
 		["meattype"] = "meat_sprig",
-		["parttype"] = "meat_sprig",
+		["parts"] = {{"part_sprig", 20}, {"hide_sprig", 3}},
+	},
+	["swampcontroller"] = {
+		["meattype"] = "meat_swampcontroller",
+		["parts"] = {{"part_swampcontroller", 20}, {"hide_swampcontroller", 3}},
 	}
 }
 
@@ -142,7 +101,7 @@ function PLUGIN:KeyPress(client, key)
 					end
 				end
 				
-				if knife != nil then
+				if (knife != nil) then
 					ix.plugin.list["mutantpoaching"]:OpenPoachMenu(client, mutant, knife)
 				end
 			end
@@ -155,89 +114,53 @@ function PLUGIN:OpenPoachMenu(client, mutant, knife)
 end
 
 if SERVER then
-	netstream.Hook("doPoach", function(client, poachoption, knife, mutant)
+	netstream.Hook("doPoach", function(client, knife, mutant)
 		local char = client:GetCharacter()
 		local inv = char:GetInventory()
 
-		if !inv:HasItem(ix.item.instances[knife].uniqueID) then
+		if (!inv:HasItem(ix.item.instances[knife].uniqueID)) then
 			client:Notify("Stop cheating, and notify developers")
 		end
 
-		for k, v in pairs(ix.MutantParts) do
-			if k == mutant then
-				for k2, v2 in pairs(v) do
-					if k2 == poachoption then
-						local totaltickets = 0
-						local meattickets = 0
-						local parttickets = 0
-						local lootamount = math.random(1,3)
-						local loot = {}
+		local mutanttable = ix.poaching.MutantParts[ix.poaching.MutantTable[mutant]]
+		local knifetier = ix.item.instances[knife].knifetier
 
-						-- adds extra loot from the knife used
-						lootamount = lootamount + ix.item.instances[knife].lootbonus
+		local loot = {}
 
-						-- gets all the tickets in the mutantpart table based on poachoption
-						meattickets = meattickets + v2.meattickets
-						parttickets = parttickets + v2.parttickets
+		table.insert(loot, mutanttable["meattype"])
+		for _,v in pairs(mutanttable["parts"]) do
+			if( math.random(0,100) < v[2] ) then table.insert(loot, v[1]) end
+		end
 
-						-- gets the ticket additions from the knife used
-						meattickets = meattickets + ix.item.instances[knife].meattickets 
-						parttickets = parttickets + ix.item.instances[knife].parttickets
+		--Do animation, remove ragdoll and spawn loot
+		local Hit = client:GetEyeTraceNoCursor()
+		local npc = Hit.Entity
+		if npc then
+			if (npc:IsRagdoll() and ix.poaching.MutantTable[npc:GetModel()] and npc:GetPos():Distance( client:GetPos() ) <= 55) then
+				if npc:GetNetVar("beingSkinned", false) then
+					client:Notify("That mutant is being skinned by someone else!")
+					return
+				end
+				client:ForceSequence("cidle_knife", nil, 5)
+				npc:SetNetVar("beingSkinned", true)
+				npc:EmitSound( "stalkersound/inv_mutant_loot_animal.ogg", 60 )
+				ix.util.PlayerPerformBlackScreenAction(client, "Poaching", 5, function(player) 
+					local position = client:GetItemDropPos()
+					if IsValid(npc) then
+						npc:Remove()
+						for i = 1, #loot do
+							local weight = ix.util.GetMutantMeatWeight(loot[i], knifetier)
+							local dat = weight and {["weight"] = weight} or {}
 
-						-- making sure value isnt below zero for each parttype 
-						meattickets = math.max(0, meattickets)
-						parttickets = math.max(0, parttickets)
-
-						--getting the total amount of parts
-						totaltickets = totaltickets + meattickets + parttickets
-
-						--print("meattickets:", meattickets)
-						--print("parttickets:", parttickets)
-
-						-- create table of the loot that should spawn, based on the tickets
-						for i = 1, lootamount do
-							local ticketdecider = math.random(1, totaltickets)
-							if ticketdecider <= meattickets then
-								loot[i] = v.meattype
-							else
-								loot[i] = v.parttype
+							if (IsValid(client) and client:GetCharacter() and !inv:Add(loot[i], 1, dat)) then
+								ix.item.Spawn(loot[i], position, nil, AngleRand(), dat)
+								position = position + Vector(0, 0, 5)
+								client:Notify("No space in your inventory! Items have been dropped.")
 							end
 						end
-
-						--PrintTable(loot)
-
-						--Do animation, remove ragdoll and spawn loot
-						local Hit = client:GetEyeTraceNoCursor()
-						local npc = Hit.Entity
-						if npc then
-							if (npc:IsRagdoll() and ix.MutantTable[npc:GetModel()] and npc:GetPos():Distance( client:GetPos() ) <= 55) then
-								if npc:GetNetVar("beingSkinned", false) then
-									client:Notify("That mutant is being skinned by someone else!")
-									return
-								end
-
-								client:ForceSequence("cidle_knife", nil, 5)
-								npc:SetNetVar("beingSkinned", true)
-								npc:EmitSound( "stalkersound/inv_mutant_loot_animal.ogg", 60 )
-								ix.util.PlayerPerformBlackScreenAction(client, "Poaching", 5, function(player) 
-									local position = client:GetItemDropPos()
-									if IsValid(npc) then
-										npc:Remove()
-										for i = 1, lootamount do
-											if (IsValid(client) and client:GetCharacter() and !inv:Add(loot[i], 1, {["weight"] = math.Rand(0.3, 0.35)})) then
-												ix.item.Spawn(loot[i], position, nil, AngleRand(), {["weight"] = math.Rand(0.3, 0.35)} or {})
-												position = position + Vector(0, 0, 5)
-												client:Notify("No space in your inventory! Items have been dropped.")
-											end
-										end
-									end
-								end)
-							end	
-						end
 					end
-				end
-			end
+				end)
+			end	
 		end
-			
 	end)
 end
