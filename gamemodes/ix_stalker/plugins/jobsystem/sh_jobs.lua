@@ -50,7 +50,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#makarov"
+  tempJob.listenTrigger = "itemDeliver_makarov"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -66,7 +66,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#leadpipe"
+  tempJob.listenTrigger = "itemDeliver_leadpipe"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -82,7 +82,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#crowbar"
+  tempJob.listenTrigger = "itemDeliver_crowbar"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -98,7 +98,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#bat"
+  tempJob.listenTrigger = "itemDeliver_bat"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -114,7 +114,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#fireaxe"
+  tempJob.listenTrigger = "itemDeliver_fireaxe"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -130,7 +130,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#documents0"
+  tempJob.listenTrigger = "itemDeliver_documents0"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -146,7 +146,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#documents1"
+  tempJob.listenTrigger = "itemDeliver_documents1"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
@@ -162,7 +162,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#documents2"
+  tempJob.listenTrigger = "itemDeliver_documents2"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest3"}}
   tempJob.rewardCount = {1,1}
@@ -178,7 +178,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#beretta92"
+  tempJob.listenTrigger = "itemDeliver_beretta92"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -194,7 +194,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#brhp"
+  tempJob.listenTrigger = "itemDeliver_brhp"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -210,7 +210,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#tokarev"
+  tempJob.listenTrigger = "itemDeliver_tokarev"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -226,7 +226,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#cz52"
+  tempJob.listenTrigger = "itemDeliver_cz52"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -242,7 +242,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#p99"
+  tempJob.listenTrigger = "itemDeliver_p99"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -258,7 +258,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#fort12"
+  tempJob.listenTrigger = "itemDeliver_fort12"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -274,7 +274,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#glock17"
+  tempJob.listenTrigger = "itemDeliver_glock17"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -290,7 +290,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#rugermk3"
+  tempJob.listenTrigger = "itemDeliver_rugermk3"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -306,7 +306,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#flashdriveblack"
+  tempJob.listenTrigger = "itemDeliver_flashdriveblack"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
@@ -322,7 +322,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#flashdriveblue"
+  tempJob.listenTrigger = "itemDeliver_flashdriveblue"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
@@ -338,7 +338,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#documents4"
+  tempJob.listenTrigger = "itemDeliver_documents4"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -354,7 +354,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#documents8"
+  tempJob.listenTrigger = "itemDeliver_documents8"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -370,7 +370,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#documents8"
+  tempJob.listenTrigger = "itemDeliver_documents8"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -386,7 +386,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#gpsmappingdevice"
+  tempJob.listenTrigger = "itemDeliver_gpsmappingdevice"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -402,7 +402,7 @@ do
   tempJob.desc = "xD."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#gpstrackingdevice"
+  tempJob.listenTrigger = "itemDeliver_gpstrackingdevice"
   tempJob.numberRec = {1,1}
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -1511,7 +1511,7 @@ do
   tempJob.desc = "%d pieces of blind dog meat."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#meat_blinddog"
+  tempJob.listenTrigger = "itemDeliver_meat_blinddog"
   tempJob.numberRec = 4
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -1529,7 +1529,7 @@ do
   tempJob.desc = "%d pieces of bloodsucker meat."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#meat_bloodsucker"
+  tempJob.listenTrigger = "itemDeliver_meat_bloodsucker"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
@@ -1547,7 +1547,7 @@ do
   tempJob.desc = "%d pieces of boar meat."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#meat_boar"
+  tempJob.listenTrigger = "itemDeliver_meat_boar"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -1565,7 +1565,7 @@ do
   tempJob.desc = "%d pieces of burer meat."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#meat_burer"
+  tempJob.listenTrigger = "itemDeliver_meat_burer"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -1583,7 +1583,7 @@ do
   tempJob.desc = "%d pieces of cat meat."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#meat_cat"
+  tempJob.listenTrigger = "itemDeliver_meat_cat"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -1602,7 +1602,7 @@ do
   tempJob.desc = "%d pieces of flesh meat."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#meat_flesh"
+  tempJob.listenTrigger = "itemDeliver_meat_flesh"
   tempJob.numberRec = 3
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -1620,7 +1620,7 @@ do
   tempJob.desc = "%d pieces of hellhound meat."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#meat_hellhound"
+  tempJob.listenTrigger = "itemDeliver_meat_hellhound"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
@@ -1638,7 +1638,7 @@ do
   tempJob.desc = "%d pieces of human meat."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#meat_human"
+  tempJob.listenTrigger = "itemDeliver_meat_human"
   tempJob.numberRec = 4
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
@@ -1656,7 +1656,7 @@ do
   tempJob.desc = "%d pieces of pseudodog meat."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#meat_pseudodog"
+  tempJob.listenTrigger = "itemDeliver_meat_pseudodog"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
@@ -1674,7 +1674,7 @@ do
   tempJob.desc = "%d pieces of sprig meat."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#meat_sprig"
+  tempJob.listenTrigger = "itemDeliver_meat_sprig"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
@@ -1692,7 +1692,7 @@ do
   tempJob.desc = "%d pieces of tushkano meat."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver#meat_tushkano"
+  tempJob.listenTrigger = "itemDeliver_meat_tushkano"
   tempJob.numberRec = 4
   tempJob.reward = {{"kit_quest1"}}
   tempJob.rewardCount = {1,1}
