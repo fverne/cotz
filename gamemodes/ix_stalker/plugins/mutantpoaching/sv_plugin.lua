@@ -122,7 +122,7 @@ if SERVER then
 			client:Notify("Stop cheating, and notify developers")
 		end
 
-		local mutanttable = ix.poaching.MutantParts[ix.poaching.MutantTable[mutant]]
+		local mutanttable = ix.poaching.MutantParts[mutant]
 		local knifetier = ix.item.instances[knife].knifetier
 
 		local loot = {}
