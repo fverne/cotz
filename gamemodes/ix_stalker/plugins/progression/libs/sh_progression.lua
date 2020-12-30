@@ -43,7 +43,7 @@ function ix.progression.InvokeProgression(progid)
 	local levelreached = 0
 
 	for level, threshold in pairs(ix.progression.definitions[progid].progressthresholds) do
-		if(totalprogression > threshold) then 
+		if(totalprogression >= threshold) then 
 			levelreached = level 
 		else 
 			break
@@ -54,7 +54,7 @@ function ix.progression.InvokeProgression(progid)
 
 	-- Call all unlocked functions
 	for k, func in pairs(ix.progression.definitions[progid].progressfunctions) do
-		if(k > levelreached) then return end
+		if(k >= levelreached) then return end
 		if( func.RunOnce && !(ix.progression.status[progid].hasfuncrun[k] or false)) then
 			func:OnRun()
 			ix.progression.status[progid].hasfuncrun[k] = true
