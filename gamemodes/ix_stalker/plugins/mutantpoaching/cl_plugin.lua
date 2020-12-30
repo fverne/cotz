@@ -10,7 +10,7 @@ if (CLIENT) then
 			frame:SetDraggable( true )
 			frame:Center()
 			frame:MakePopup()
-			frame:SetSize(ScrW()*0.2, ScrH()*0.4)
+			frame:SetSize(ScrW()*0.2, ScrH()*0.3)
 			frame:SetPos((ScrW()/2)-ScrW()*0.15,(ScrH()/2)-ScrH()*0.2)
 			
 			local sentence = frame:Add("DLabel")
