@@ -106,7 +106,7 @@ if SERVER then
 
 		for k,v in pairs(ix.jobs.activejobs[npcidentifier]) do
 			if (v.identifier and v.identifier == jobidentifier) then
-				ix.jobs.activejobs[npcidentifier][k] = { identifier = ix.jobs.getJobFromCategory(categories), expiration = os.time() + 3600*2 }
+				ix.jobs.activejobs[npcidentifier][k] = nil
 				break
 			end
 		end
