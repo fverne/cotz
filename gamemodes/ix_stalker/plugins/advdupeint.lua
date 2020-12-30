@@ -48,12 +48,7 @@ function PLUGIN:SpawnDupe(dupetospawn, uniqueid, offset)
 				for i=0, #ix.AdvDupeIntegration.Entities[k].PhysicsObjects do
 					PhysObj = v:GetPhysicsObjectNum( i )
 					if IsValid(PhysObj) then
-						if PhysObj:IsMoveable() then
-							PhysObj:EnableMotion(false)
-						else
-							PhysObj:EnableMotion(true)
-							PhysObj:Wake()
-						end
+						PhysObj:EnableMotion(false)
 					end
 				end
 				if v.CPPISetOwner then v:CPPISetOwner(game.GetWorld()) end
