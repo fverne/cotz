@@ -44,6 +44,15 @@ function ENT:SelectSchedule( iNPCState )
 			if(self:VisibleVec(self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter())&&
 			self:GetEnemy():VisibleVec(self:GetPos()+self:OBBCenter())) then
 				self.SeeEnemy = CurTime()+3
+
+				if(self:IsUnreachable(self:GetEnemy())) then
+					if(!self:IsCurrentSchedule(SCHED_MOVE_AWAY_FROM_ENEMY) or self.NextSchedForce < CurTime()) then
+						self:SetSchedule(SCHED_MOVE_AWAY_FROM_ENEMY)
+					end
+					self.NextSchedForce = CurTime()+0.5
+					self.NextRun = CurTime()+3
+					return
+				end
 				
 				local TEMP_EDist = (self:GetPos()+self:OBBCenter()):Distance(self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter())
 				
