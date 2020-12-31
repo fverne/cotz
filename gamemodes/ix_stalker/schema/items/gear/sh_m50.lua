@@ -13,7 +13,7 @@ ITEM.radProt = 0.1
 ITEM.isGasmask = true
 ITEM.isHelmet = nil
 ITEM.ballisticlevels = {"0"}
-ITEM.img = Material("vgui/hud/halfmask.png")
+ITEM.img = ix.util.GetMaterial("cotz/ui/icons/mask_gas2.png")
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.weight = 2.100

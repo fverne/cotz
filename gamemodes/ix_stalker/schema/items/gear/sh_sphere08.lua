@@ -14,6 +14,7 @@ ITEM.isGasmask = false
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"lll-a"}
 ITEM.repairCost = ITEM.price/100*1
+ITEM.img = ix.util.GetMaterial("cotz/ui/icons/headgear_sphere08.png")
 
 ITEM.weight = 4.100
 
