@@ -43,7 +43,7 @@ function ix.progression.InvokeProgression(progid)
 	local levelreached = 0
 
 	for level, threshold in pairs(ix.progression.definitions[progid].progressthresholds) do
-		if(totalprogression > threshold) then 
+		if(totalprogression >= threshold) then 
 			levelreached = level 
 		else 
 			break

@@ -53,8 +53,10 @@ ix.progression.Register("TestProgression", {
 				if (npc) then
 					npc:AddItemToList("medic_stimpak_1", nil, 4, "SELLANDBUY", 4, 1, 4)
 				end
+
+				ix.util.SpawnAdvDupe2Dupe( "progressiontest1" )
 			end,
-			RunOnce = true
+			RunOnce = false
 		},
 		[2] = {
 			OnRun = function()
@@ -64,7 +66,7 @@ ix.progression.Register("TestProgression", {
 					npc:AddItemToList("medic_stimpak_2", nil, 4, "SELLANDBUY", 4, 1, 4)
 				end
 			end,
-			RunOnce = true
+			RunOnce = false
 		},
 		[3] = {
 			OnRun = function()
@@ -73,8 +75,10 @@ ix.progression.Register("TestProgression", {
 				if (npc) then
 					npc:AddItemToList("medic_stimpak_3", nil, 4, "SELLANDBUY", 4, 1, 4)
 				end
+
+				ix.util.SpawnAdvDupe2Dupe( "progressiontest2" )
 			end,
-			RunOnce = true
+			RunOnce = false
 		},
 	},
 	progressthresholds = {
