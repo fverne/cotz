@@ -32,10 +32,10 @@ ENT.hpvar = 100
 
 ENT.FleeTime = 0
 ENT.MustFlee = false
-ENT.CanJump = 0
+ENT.CanPull = 0
 ENT.isAttacking = 0
-ENT.jumping1 = 0
-ENT.jumping2 = 0
+ENT.pulling1 = 0
+ENT.pulling2 = 0
 
 ENT.CanGrab = 0
 ENT.grabbing1 = 0
@@ -124,25 +124,30 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
-	-- JUMPING
-	if (self.jumping1 < CurTime()) and self.isAttacking == 1 and self:GetEnemy() then
+	-- PULLING
+	if (self.pulling1 < CurTime()) and self.isAttacking == 1 and self:GetEnemy() then
 		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,32) + self:OBBCenter()) - (self:GetPos())):GetNormal()
+		local dirnormal =((self:GetPos() + self:OBBCenter()) - (self:GetEnemy():GetPos())):GetNormal()
+		dirnormal[3] = 0.25
 
-		self:SetVelocity((dirnormal*(distance*3)))
+		self:GetEnemy():SetVelocity((dirnormal*(distance*1.5)))
+
+		if(self:GetEnemy().ConsumeStamina) then
+			self:GetEnemy():ConsumeStamina(35)
+		end
 
 		self:STALKERNPCPlayAnimation("stand_run_attack_0",3)
 		self:STALKERNPCMakeMeleeAttack(3)
 		self:EmitSound("Stalker.Izlom.Melee1")
 		self.isAttacking = 2
 	end
-	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
+	if (self.pulling2 < CurTime()) and self.isAttacking == 2 then
 		self:STALKERNPCStopAllTimers()
 		self:STALKERNPCClearAnimation()
 		self.NextAbilityTime = CurTime()+0.5
 		self.isAttacking = 0
 	end
-	-- JUMPING END
+	-- PULLING END
 
 	-- GRAB
 	if self.grabbing1 < CurTime() && self.IsGrabbing == 1 then
@@ -181,15 +186,15 @@ end
 function ENT:STALKERNPCDistanceForMeleeTooBig() 
 	if(self.PlayingAnimation==false) then
 		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos())) or 0
-		if distance < 200 then
-			if(self.CanJump<CurTime()) then
+		if distance > 256 and distance < 512 then
+			if(self.CanPull<CurTime()) then
 				local TEMP_Rand = math.random(1,5)
 				
 				if(TEMP_Rand==1) then		
-					self.CanJump = CurTime()+9
+					self.CanPull = CurTime()+7
 					self.isAttacking = 1
-					self.jumping1 = CurTime()+0.2
-					self.jumping2 = CurTime()+0.9
+					self.pulling1 = CurTime()+0.2
+					self.pulling2 = CurTime()+0.9
 				end
 			end
 		end
