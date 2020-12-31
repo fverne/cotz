@@ -11,4 +11,4 @@ ITEM.attachName = "md_saker"
 ITEM.attachSlot = 2
 ITEM.upgradeIcon = Material("materials/vgui/ui/stalker/weaponupgrades/silenced.png")
 
-ITEM.img = ix.util.GetMaterial("cotz/ui/icons/attachment_silencer7.png")
+ITEM.img = ix.util.GetMaterial("cotz/ui/icons/attachment_silencer19.png")
