@@ -60,7 +60,7 @@ function PANEL:OnMouseReleased(code)
 	end
 
 	self:DragMouseRelease(code)
-	self:SetZPos(99)
+	self:SetZPos(999) --apparently fixes items not being grabbable in right side of inv when set to 999 instead of 99
 	self:MouseCapture(false)
 end
 
