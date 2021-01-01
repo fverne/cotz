@@ -148,3 +148,9 @@ hook.Add("ShouldSuppressMenu", "DeadMenuSuppress", function(client)
 		return true
 	end
 end)
+
+if(SERVER)then
+	function PLUGIN:PlayerSpawn(client)
+		client:SetWepRaised(false)
+	end
+end
