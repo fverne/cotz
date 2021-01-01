@@ -75,6 +75,17 @@ if (CLIENT) then
 			ragdoll.isDeadBody = true
 		end
 	end)
+
+	function PLUGIN:PlayerButtonDown(ply, but)
+		if ( IsFirstTimePredicted() and but == 15 and !LocalPlayer():Alive()) then
+			timer.Simple(2.5, function()
+				if( input.IsButtonDown(15)) then
+					net.Start("ix_PleaseKillMe")
+					net.SendToServer()
+				end
+			end)
+		end
+	end
 else
 	function PLUGIN:PlayerSpawn( client )
 		client:UnSpectate()
@@ -141,5 +152,10 @@ else
 			end
 		end)
 	end
+
+	util.AddNetworkString("ix_PleaseKillMe")
+	net.Receive("ix_PleaseKillMe", function(length, client)
+		if(!client:Alive()) then client:SetNetVar("deathTime", CurTime()) end
+	end)
 end
 

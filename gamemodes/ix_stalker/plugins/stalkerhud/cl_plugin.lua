@@ -281,6 +281,10 @@ function ix.hud.DrawDeath()
 			ix.util.DrawText(
 				string.upper("Lost to the Zone"), w/2, h/2, Color(255, 0, 0), 1, 1, "stalkerregularbigfont", 255
 			)
+
+			ix.util.DrawText(
+				"Hold [E] to bleed out and respawn", w/2, (h/5) * 4, Color(220, 220, 220), 1, 1, "stalkerregularfont", 255
+			)
 		end
 	end	
 end
