@@ -33,7 +33,9 @@ ix.char.RegisterVar("jobs", {
 	bNoDisplay = true,
 })
 
-ix.util.Include("sh_jobs.lua")
+ix.util.Include("sh_killjobs.lua")
+ix.util.Include("sh_itemjobs.lua")
+ix.util.Include("sh_specialjobs.lua")
 ix.util.Include("sh_listeners.lua")
 
 ix.jobs.activejobs = {}
