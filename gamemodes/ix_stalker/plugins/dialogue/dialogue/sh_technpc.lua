@@ -134,6 +134,13 @@ DIALOGUE.addTopic("ConfirmRepair", {
 
 			ix.item.instances[target.repairstruct[1]]:SetData(target.repairstruct[3], 100)
 
+			if (ix.item.instances[target.repairstruct[1]].class) then
+				local wep = client:GetWeapon(ix.item.instances[target.repairstruct[1]].class)
+				if(wep)then
+					wep:SetWeaponWear(100)
+				end
+			end
+
 		end
 		if(SERVER)then
 			target.repairstruct = nil
