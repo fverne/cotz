@@ -74,18 +74,18 @@ function Schema:PlayerSpawnEffect(client, weapon, info)
 end
 
 function Schema:PostPlayerLoadout(client)
-	if client:IsAdmin() then
-		return false
-	end
 	client:SetCanZoom(false)
+
+	if client:IsAdmin() then
+		client:SetCanZoom(true)
+	end
 end
 
 function Schema:Initialize()
-	game.ConsoleCommand("net_maxfilesize 64\n");
-	game.ConsoleCommand("sv_kickerrornum 0\n");
+	game.ConsoleCommand("net_maxfilesize 64");
+	game.ConsoleCommand("sv_kickerrornum 0");
 
-	game.ConsoleCommand("sv_allowupload 0\n");
-	game.ConsoleCommand("sv_allowdownload 0\n");
-	game.ConsoleCommand("sv_allowcslua 0\n");
-
+	game.ConsoleCommand("sv_allowupload 0");
+	game.ConsoleCommand("sv_allowdownload 0");
+	game.ConsoleCommand("sv_allowcslua 0");
 end
