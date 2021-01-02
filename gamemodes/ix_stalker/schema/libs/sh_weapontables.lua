@@ -55,18 +55,163 @@ ix.weapontables.ammosubtypes["41"] = {uID = "am_410buck"}
 ix.armortables = {}
 ix.armortables.attachments = {} -- Artifacts, kevlar plates, mutant hides etc.
 
+
+
+
+-- ATTACHMENTS --
+-- EXAMPLE:
+--ix.armortables.attachments["steelplate_1"] = { 
+--	name = "Well Worn Steel Plate",
+--	br = 0.05, 
+--	ar = -0.10,
+--	weight = 0.950,
+--	uID = "attachment_steelplate_1",
+--	onAttach = function(player) print("Ran onAttach with playername: ", player:GetName()) end,
+--	onDetach = function(player) print("Ran onDetach with playername: ", player:GetName()) end,
+--	onThink  = function(player) print("Ran onThink with playername: ", player:GetName()) end,
+--}
+
 ix.armortables.attachments["steelplate_1"] = { 
 	name = "Well Worn Steel Plate",
 	br = 0.05, 
 	ar = -0.10,
 	weight = 0.950,
 	uID = "attachment_steelplate_1",
-	onAttach = function(player) print("Ran onAttach with playername: ", player:GetName()) end,
-	onDetach = function(player) print("Ran onDetach with playername: ", player:GetName()) end,
-	onThink  = function(player) print("Ran onThink with playername: ", player:GetName()) end,
 }
 
-ix.armortables.upgrades = {} -- Armor upgrades
+ix.armortables.attachments["steelplate_2"] = { 
+	name = "Steel Plate",
+	br = 0.09, 
+	ar = -0.10,
+	weight = 1.150,
+	uID = "attachment_steelplate_2",
+}
+
+ix.armortables.attachments["steelplate_3"] = { 
+	name = "Galvanized Steel Plate",
+	br = 0.13, 
+	ar = -0.10,
+	weight = 1.550,
+	uID = "attachment_steelplate_3",
+}
+
+ix.armortables.attachments["steelplate_4"] = { 
+	name = "Anomalous Steel Plate",
+	br = 0.17, 
+	ar = -0.10,
+	weight = 1.950,
+	uID = "attachment_steelplate_4",
+}
+
+-- HIDES --
+ix.armortables.attachments["hide_blinddog"] = { 
+	name = "Blind Dog Hide",
+	br = 0.01, 
+	ar = 0.07,
+	weight = 1.100,
+	uID = "hide_blinddog",
+}
+
+ix.armortables.attachments["hide_tushkano"] = { 
+	name = "Tushkano Hide",
+	br = 0.02, 
+	ar = 0.04,
+	weight = 0.700,
+	uID = "hide_tushkano",
+}
+
+ix.armortables.attachments["hide_pseudodog"] = { 
+	name = "Pseudodog Hide",
+	br = 0.06, 
+	ar = 0.11,
+	weight = 1.650,
+	uID = "hide_pseudodog",
+}
+
+ix.armortables.attachments["hide_bloodsucker"] = { 
+	name = "Bloodsucker Hide",
+	br = 0.11, 
+	ar = 0.03,
+	weight = 1.800,
+	uID = "hide_bloodsucker",
+}
+
+ix.armortables.attachments["hide_boar"] = { 
+	name = "Boar Hide",
+	br = 0.08, 
+	ar = 0.02,
+	weight = 2.500,
+	uID = "hide_boar",
+}
+
+ix.armortables.attachments["hide_burer"] = { 
+	name = "Burer Scalp",
+	br = 0.10, 
+	weight = 3.000,
+	uID = "hide_burer",
+	onAttach = function(player) --[[add 15psyprot]] end,
+	onDetach = function(player) --[[remove 15psyprot]] end,
+}
+
+ix.armortables.attachments["hide_cat"] = { 
+	name = "Cat Hide",
+	br = 0.08, 
+	ar = 0.09,
+	weight = 1.250,
+	uID = "hide_cat",
+}
+
+ix.armortables.attachments["hide_chimera"] = { 
+	name = "Chimera Hide",
+	br = 0.15, 
+	ar = 0.12,
+	weight = 2.150,
+	uID = "hide_chimera",
+}
+
+ix.armortables.attachments["hide_sprig"] = { 
+	name = "Sprig Leg",
+	weight = 0.500,
+	uID = "hide_sprig",
+}
+
+ix.armortables.attachments["hide_flesh"] = { 
+	name = "Flesh Hide",
+	br = 0.07, 
+	ar = 0.01,
+	weight = 1.800,
+	uID = "hide_flesh",
+}
+
+ix.armortables.attachments["hide_controller"] = { 
+	name = "Controller Scalp",
+	br = 0.12, 
+	weight = 3.500,
+	uID = "hide_controller",
+	onAttach = function(player) --[[add 35psyprot]] end,
+	onDetach = function(player) --[[remove 35psyprot]] end,
+}
+
+ix.armortables.attachments["hide_swampcontroller"] = { 
+	name = "Swampcontroller Scalp",
+	br = 0.05, 
+	weight = 3.000,
+	uID = "hide_swampcontroller",
+	onAttach = function(player) --[[add 10psyprot]] end,
+	onDetach = function(player) --[[remove 10psyprot]] end,
+}
+
+ix.armortables.attachments["hide_pseudogiant"] = { 
+	name = "Pseudogiant Hide",
+	br = 0.30, 
+	ar = 0.30,
+	weight = 5.550,
+	uID = "hide_pseudogiant",
+}
+
+
+-- ARMOR UPGRADES --
+ix.armortables.upgrades = {} 
 ix.armortables.upgrades["integratedceramics"] = { 
 	name = "Integrated Ceramic Plates",
 	description = "Better bullet resistance at the cost of anomaly resistance",
