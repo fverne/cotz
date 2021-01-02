@@ -8,7 +8,8 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 0
 
-ITEM.weight = 0
+ITEM.baseweight = 1.000
+ITEM.varweight  = 0.500
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
@@ -37,5 +38,11 @@ function ITEM:PopulateTooltip(tooltip)
 
     if (self.PopulateTooltipIndividual) then
       self:PopulateTooltipIndividual(tooltip)
+    end
+end
+
+function ITEM:OnInstanced(invID, x, y)
+    if(!self:GetData("weight")) then
+        self:SetData("weight", self.baseweight + math.random(-self.varweight, self.varweight))
     end
 end

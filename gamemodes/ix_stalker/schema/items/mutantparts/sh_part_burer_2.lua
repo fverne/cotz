@@ -5,4 +5,6 @@ ITEM.longdesc = "Burers have potent mental powers and it's safe to say that thes
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 10000
+ITEM.price = 9500
+ITEM.baseweight = 3.500
+ITEM.varweight = 0.400

@@ -5,4 +5,6 @@ ITEM.longdesc = "Hoofs of boars can be used to produce various drugs, for exampl
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 400
+ITEM.price = 450
+ITEM.baseweight = 1.800
+ITEM.varweight = 0.300

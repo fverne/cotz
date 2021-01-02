@@ -5,4 +5,6 @@ ITEM.longdesc = "Bloodsucker tentacles contain a special gland which produces an
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 3500
+ITEM.price = 3400
+ITEM.baseweight = 0.900
+ITEM.varweight = 0.200
