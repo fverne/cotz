@@ -44,6 +44,22 @@ do
 
   tempJob = nil
 
+  local tempJob = {}
+
+  tempJob.name = "%d pieces of blind dog meat."
+  tempJob.desc = "%d pieces of blind dog meat."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_blinddog"
+  tempJob.numberRec = 8
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeateasy"}
+
+  ix.jobs.register(tempJob, "ItemJob2_meat_blinddog")
+
+  tempJob = nil
 
   local tempJob = {}
 
@@ -59,6 +75,23 @@ do
   tempJob.categories = {"mutantmeatmedium"}
 
   ix.jobs.register(tempJob, "ItemJob1_meat_bloodsucker")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d pieces of bloodsucker meat."
+  tempJob.desc = "%d pieces of bloodsucker meat."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_bloodsucker"
+  tempJob.numberRec = 4
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeatmedium"}
+
+  ix.jobs.register(tempJob, "ItemJob2_meat_bloodsucker")
 
   tempJob = nil
 
@@ -80,6 +113,22 @@ do
 
   tempJob = nil
 
+  local tempJob = {}
+
+  tempJob.name = "%d pieces of boar meat."
+  tempJob.desc = "%d pieces of boar meat."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_boar"
+  tempJob.numberRec = 5
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeateasy"}
+
+  ix.jobs.register(tempJob, "ItemJob2_meat_boar")
+
+  tempJob = nil
 /*
   local tempJob = {}
 
@@ -116,6 +165,22 @@ do
 
   tempJob = nil
 
+  local tempJob = {}
+
+  tempJob.name = "%d pieces of cat meat."
+  tempJob.desc = "%d pieces of cat meat."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_cat"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeateasy"}
+
+  ix.jobs.register(tempJob, "ItemJob2_meat_cat")
+
+  tempJob = nil
     --needs chimera
 
   local tempJob = {}
@@ -135,6 +200,22 @@ do
 
   tempJob = nil
 
+  local tempJob = {}
+
+  tempJob.name = "%d pieces of flesh meat."
+  tempJob.desc = "%d pieces of flesh meat."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_flesh"
+  tempJob.numberRec = 6
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeateasy"}
+
+  ix.jobs.register(tempJob, "ItemJob2_meat_flesh")
+
+  tempJob = nil
 
   local tempJob = {}
 
@@ -143,7 +224,7 @@ do
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_hellhound"
-  tempJob.numberRec = 2
+  tempJob.numberRec = 1
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
@@ -153,11 +234,27 @@ do
 
   tempJob = nil
 
+  local tempJob = {}
+
+  tempJob.name = "%d pieces of hellhound meat."
+  tempJob.desc = "%d pieces of hellhound meat."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_hellhound"
+  tempJob.numberRec = 3
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeatmedium"}
+
+  ix.jobs.register(tempJob, "ItemJob2_meat_hellhound")
+
+  tempJob = nil
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of human meat."
-  tempJob.desc = "%d pieces of human meat."
+  tempJob.name = "%d pieces of decomposing meat."
+  tempJob.desc = "%d pieces of decomposing meat."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_human"
@@ -171,6 +268,22 @@ do
 
   tempJob = nil
 
+  local tempJob = {}
+
+  tempJob.name = "%d pieces of decomposing meat."
+  tempJob.desc = "%d pieces of decomposing meat."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_human"
+  tempJob.numberRec = 8
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeatmedium"}
+
+  ix.jobs.register(tempJob, "ItemJob2_meat_human")
+
+  tempJob = nil
 
   local tempJob = {}
 
@@ -189,6 +302,22 @@ do
 
   tempJob = nil
 
+  local tempJob = {}
+
+  tempJob.name = "%d pieces of pseudodog meat."
+  tempJob.desc = "%d pieces of pseudodog meat."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_pseudodog"
+  tempJob.numberRec = 4
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeateasy"}
+
+  ix.jobs.register(tempJob, "ItemJob2_meat_pseudodog")
+
+  tempJob = nil
 
   local tempJob = {}
 
@@ -197,13 +326,64 @@ do
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_sprig"
-  tempJob.numberRec = 2
+  tempJob.numberRec = 1
   tempJob.reward = {{"kit_quest2"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantmeatmedium"}
 
   ix.jobs.register(tempJob, "ItemJob1_meat_sprig")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d pieces of sprig meat."
+  tempJob.desc = "%d pieces of sprig meat."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_sprig"
+  tempJob.numberRec = 3
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeatmedium"}
+
+  ix.jobs.register(tempJob, "ItemJob2_meat_sprig")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d snork hands."
+  tempJob.desc = "%d snork hands."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_snork"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeatmedium"}
+
+  ix.jobs.register(tempJob, "ItemJob1_meat_snork")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d snork hands."
+  tempJob.desc = "%d snork hands."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_snork"
+  tempJob.numberRec = 3
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeatmedium"}
+
+  ix.jobs.register(tempJob, "ItemJob2_meat_snork")
 
   tempJob = nil
 
@@ -225,9 +405,32 @@ do
 
   tempJob = nil
 
+  local tempJob = {}
+
+  tempJob.name = "%d pieces of tushkano meat."
+  tempJob.desc = "%d pieces of tushkano meat."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_meat_tushkano"
+  tempJob.numberRec = 8
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mutantmeateasy"}
+
+  ix.jobs.register(tempJob, "ItemJob2_meat_tushkano")
+
+  tempJob = nil
+
+
+-----------------------------------------------------
 -----------------------------------------------------
 ------------- ITEM RETRIEVAL - ELECTRONICS ----------
 -----------------------------------------------------
+-----------------------------------------------------
+
+
+
   local tempJob = {}
 
   tempJob.name = "%d SSD."
