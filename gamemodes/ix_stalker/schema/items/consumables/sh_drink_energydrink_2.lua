@@ -1,7 +1,7 @@
 ITEM.name = "Revo Alco Energy, 500ml"
 ITEM.description = "An aluminium can with an energy drink inside."
 ITEM.longdesc = "Revo is a ukrainian energy drink brand, and this can is one of the variants. Revo Alco Energy is a ready-to-drink cocktail with a refreshing taste, made with vodka, energy drink, and juice. It contains 8.5% alcohol, guarana and damiana extracts, natural juice, and caffeine."
-ITEM.model = "models/lostsignalproject/items/consumable/energy_drink.mdl"
+ITEM.model = "models/weapons4/w_energy2.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

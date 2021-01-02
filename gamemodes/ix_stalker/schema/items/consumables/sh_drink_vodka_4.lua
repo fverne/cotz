@@ -1,7 +1,7 @@
 ITEM.name = "Khortytsa Vodka, 700ml"
 ITEM.description = "A bottle with a clear substance inside."
 ITEM.longdesc = "Made from durum wheat and corn, this is one of the few vodkas that uses the latest technology of platinum filtration and a unique system of special birch and alder-tree charcoal filters. Platinum filtration is a state of the art process that gives this vodka a clean, balanced, and soft finish. Thanks to an optimal balance of all ingredients this vodka is perfect for making cocktails One of the three best selling vodkas globally. Spring Water clear. Big, assertive, snack-cracker-grain aroma. Toasty on the palate, dry, creamy texture. A winner on all levels."
-ITEM.model = "models/lostsignalproject/items/consumable/vodka_nemiroff.mdl"
+ITEM.model = "models/weapons4/w_vodka2.mdl"
 
 ITEM.price = 1
 ITEM.width = 1

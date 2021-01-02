@@ -1,7 +1,7 @@
 ITEM.name = "Smirnoff Vodka, 700ml"
 ITEM.description = "A bottle with a clear substance inside."
 ITEM.longdesc = "Smirnoff Vodka is the largest vodka brand in the world. It is an ultra smooth vodka with a classic taste that has inspired other varieties of vodkas worldwide.\nIt is often mixed with soft drinks and energy drinks, for a strong intoxicating effect."
-ITEM.model = "models/lostsignalproject/items/consumable/vodka.mdl"
+ITEM.model = "models/weapons4/w_vodka3.mdl"
 
 ITEM.price = 1
 ITEM.width = 1
