@@ -88,7 +88,7 @@ ix.command.Add("containerspawnadd", {
 			ent.spawnCategory = spawnCat
 			client:Notify("Storage spawngroup set to "..spawnCat)
 		else
-			client:notifyLocalized("invalid", "Entity")
+			client:NotifyLocalized("invalid", "Entity")
 		end
 	end
 })
@@ -104,7 +104,7 @@ ix.command.Add("containerspawnremove", {
 			ent.spawnCategory = nil
 			client:Notify("Storage will no longer spawn items")
 		else
-			client:notifyLocalized("invalid", "Entity")
+			client:NotifyLocalized("invalid", "Entity")
 		end
 	end
 })
