@@ -103,6 +103,92 @@ ix.armortables.attachments["steelplate_4"] = {
 	uID = "attachment_steelplate_4",
 }
 
+ix.armortables.attachments["kevlar_1"] = { 
+	name = "Kevlar K119 Plates",
+	br = 0.02, 
+	ar = 0.05,
+	weight = 0.550,
+	uID = "attachment_kevlar_1",
+}
+
+ix.armortables.attachments["kevlar_2"] = { 
+	name = "Kevlar K29 Plates",
+	br = 0.07, 
+	ar = 0.10,
+	weight = 0.650,
+	uID = "attachment_kevlar_2",
+}
+
+ix.armortables.attachments["carbonfibre"] = { 
+	name = "Carbon Fibre Layers",
+	br = 0.01, 
+	ar = 0.15,
+	weight = 0.200,
+	uID = "attachment_carbonfibre",
+}
+
+ix.armortables.attachments["ceramicplate_1"] = { 
+	name = "Old Ceramic Plate",
+	br = 0.03,
+	weight = 1.400,
+	uID = "attachment_ceramicplate_1",
+}
+
+ix.armortables.attachments["ceramicplate_2"] = { 
+	name = "Ceramic Plate",
+	br = 0.06, 
+	weight = 1.250,
+	uID = "attachment_ceramicplate_2",
+}
+
+ix.armortables.attachments["ceramicplate_3"] = { 
+	name = "Modern Ceramic Plate",
+	br = 0.09, 
+	weight = 1.650,
+	uID = "attachment_ceramicplate_3",
+}
+
+ix.armortables.attachments["ceramicplate_4"] = { 
+	name = "Glowing Ceramic Plate",
+	br = 0.13, 
+	weight = 2.650,
+	uID = "attachment_ceramicplate_4",
+}
+
+ix.armortables.attachments["steelframe"] = { 
+	name = "Steel Frame",
+	weight = 2.500,
+	ar = -0.30,
+	uID = "attachment_steelframe",
+	onAttach = function(player)
+		local armor = player:getEquippedBodyArmor()
+		if armor then
+			armor:SetData("carryinc", armor:GetData("carryinc", 0) + 30)
+		end
+	end,
+	onDetach = function(player)
+		local armor = player:getEquippedBodyArmor()
+		if armor then
+			armor:SetData("carryinc", armor:GetData("carryinc", 0) - 30)
+		end
+	end,
+}
+
+ix.armortables.attachments["fabric_1"] = { 
+	name = "Insulating Fabrics", 
+	ar = 0.10,
+	weight = 1.200,
+	uID = "attachment_fabric_1",
+}
+
+ix.armortables.attachments["fabric_2"] = { 
+	name = "Thick Insulating Fabrics",
+	br = 0.02, 
+	ar = 0.20,
+	weight = 3.400,
+	uID = "attachment_fabric_2",
+}
+
 -- HIDES --
 ix.armortables.attachments["hide_blinddog"] = { 
 	name = "Blind Dog Hide",

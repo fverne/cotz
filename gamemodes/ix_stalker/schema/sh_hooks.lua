@@ -164,3 +164,11 @@ function Schema:PlayerSwitchWeapon(client, oldWeapon, weapon)
 		client:SetNetVar("keepraised", client:IsWepRaised())
 	end
 end
+
+-- To make sure suit attachments get their detach function run when character disconnects
+function Schema:OnCharacterDisconnect(client, character)
+	local armor = client:getEquippedBodyArmor()
+	if(armor and armor.RunAllAttachmentDetach) then
+		armor:RunAllAttachmentDetach()
+	end
+end

@@ -392,6 +392,7 @@ ITEM:Hook("drop", function(item)
 		item.player:RecalculateResistances()
 		item.player:ReevaluateOverlay()
 		item:RemoveOutfit(item:GetOwner())
+		item.player:RunAllAttachmentDetach()
 	end
 end)
 
@@ -552,11 +553,11 @@ function ITEM:OnLoadout()
 	if (self:GetData("equip")) then
 		local client = self.player
 
-		if self:GetData("setSkin", nil) != nil then
+		if self:GetData("setSkin", nil) then
 			client:SetSkin( self:GetData("setSkin", self.newSkin) )
 		end
 
-		if self:GetData("setBG", nil) != nil then
+		if self:GetData("setBG", nil) then
 			local data = self:GetData("setBG", nil)
 			local bgroup = data[1]
 			local bgroupsub = data[2]
@@ -565,6 +566,8 @@ function ITEM:OnLoadout()
 				client:SetBodygroup( bgroup[i], bgroupsub[i] )
 			end
 		end
+
+		self:RunAllAttachmentAttach()
 	end
 end
 
@@ -582,16 +585,17 @@ function ITEM:OnRemoved()
 		client:RecalculateResistances()
 		client:ReevaluateOverlay()
 		self:RemoveOutfit(self:GetOwner())
+		self:RunAllAttachmentDetach()
 	end
 end
 
 function ITEM:OnEquipped()
-
+	self:RunAllAttachmentAttach()
 	self.player:EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
 end
 
 function ITEM:OnUnequipped()
-
+	self:RunAllAttachmentDetach()
 	self.player:EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
 end
 
@@ -694,4 +698,26 @@ function ITEM:GetWeight()
 	end
 
   return retval
+end
+
+function ITEM:RunAllAttachmentAttach()
+	local attachments = self:GetData("attachments", {})
+	
+	for k,v in pairs(attachments) do
+		if (!ix.armortables.attachments[v]) then continue end
+		if ix.armortables.attachments[v].onAttach then
+			ix.armortables.attachments[v].onAttach(self:GetOwner())
+		end
+	end
+end
+
+function ITEM:RunAllAttachmentDetach()
+	local attachments = self:GetData("attachments", {})
+
+	for k,v in pairs(attachments) do
+		if (!ix.armortables.attachments[v]) then continue end
+		if ix.armortables.attachments[v].onDetach then
+			ix.armortables.attachments[v].onDetach(self:GetOwner())
+		end
+	end
 end
