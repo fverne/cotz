@@ -3,7 +3,7 @@ ITEM.description = "An older pair of binoculars."
 ITEM.model = "models/weapons/w_binoculars_uk.mdl"
 
 ITEM.height = 1
-ITEM.width = 2
+ITEM.width = 1
 ITEM.price = 600
 
 ITEM.weight = 0.440
@@ -11,6 +11,13 @@ ITEM.weight = 0.440
 ITEM.weaponCategory = "Binoculars"
 ITEM.class = "weapon_rpw_binoculars_explorer"
 ITEM.canAttach = false
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(-15, -3, -1.5),
+	ang = Angle(0, -0, 0),
+	fov = 45,
+}
 
 ITEM.pacData = {
 [1] = {

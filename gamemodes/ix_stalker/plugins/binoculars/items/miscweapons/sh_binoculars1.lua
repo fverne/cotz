@@ -3,7 +3,7 @@ ITEM.description = "A pair of worn binoculars. Features multiple zoom levels."
 ITEM.model = "models/weapons/w_binocularsbp.mdl"
 
 ITEM.height = 1
-ITEM.width = 2
+ITEM.width = 1
 ITEM.price = 6000
 
 ITEM.weight = 0.590
@@ -11,6 +11,13 @@ ITEM.weight = 0.590
 ITEM.weaponCategory = "Binoculars"
 ITEM.class = "weapon_rpw_binoculars"
 ITEM.canAttach = false
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(-15, -3, -1.5),
+	ang = Angle(0, -0, 0),
+	fov = 45,
+}
 
 ITEM.pacData = {
 [1] = {
