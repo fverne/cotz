@@ -6,6 +6,8 @@ ITEM.height = 1
 ITEM.width = 2
 ITEM.price = 6000
 
+ITEM.weight = 0.590
+
 ITEM.weaponCategory = "Binoculars"
 ITEM.class = "weapon_rpw_binoculars"
 ITEM.canAttach = false
