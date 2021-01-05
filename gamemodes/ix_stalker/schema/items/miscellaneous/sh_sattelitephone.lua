@@ -39,7 +39,7 @@ ITEM.functions.storage = { -- sorry, for name order.
 function ITEM:OnInstanced(invID, x, y)
 	local inventory = ix.item.inventories[invID]
 
-	ix.item.NewInv(inventory and inventory.owner or 0, self.uniqueID, function(inv)
+	ix.inventory.New(inventory and inventory.owner or 0, self.uniqueID, function(inv)
 		local client = inv:GetOwner()
 
 		self:SetData("id", inv:GetID())
@@ -51,5 +51,5 @@ function ITEM:OnInstanced(invID, x, y)
 end
 
 function ITEM:OnRegistered()
-	ix.item.RegisterInv(self.uniqueID, 9999, 9999)
+	ix.inventory.Register(self.uniqueID, 9999, 9999)
 end
