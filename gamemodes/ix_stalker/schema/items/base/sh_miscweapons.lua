@@ -132,8 +132,6 @@ ITEM:Hook("drop", function(item)
 		end
 
 		if (IsValid(weapon)) then
-			item:SetData("ammo", weapon:Clip1())
-
 			owner:StripWeapon(item.class)
 			owner.carryWeapons[item.weaponCategory] = nil
 			owner:EmitSound("stalkersound/inv_drop.mp3", 80)
@@ -219,39 +217,12 @@ function ITEM:Equip(client)
 	local weapon = client:Give(self.class, !self.isGrenade)
 
 	if (IsValid(weapon)) then
-		local ammoType = weapon:GetPrimaryAmmoType()
 
 		client.carryWeapons[self.weaponCategory] = weapon
 		client:SelectWeapon(weapon:GetClass())
 		client:EmitSound("stalkersound/items/inv_items_wpn_1.ogg")
 
-		-- Remove default given ammo.
-		if (client:GetAmmoCount(ammoType) == weapon:Clip1() and self:GetData("ammo", 0) == 0) then
-			client:RemoveAmmo(weapon:Clip1(), ammoType)
-		end
-
-		-- assume that a weapon with -1 clip1 and clip2 would be a throwable (i.e hl2 grenade)
-		-- TODO: figure out if this interferes with any other weapons
-		if (weapon:GetMaxClip1() == -1 and weapon:GetMaxClip2() == -1 and client:GetAmmoCount(ammoType) == 0) then
-			client:SetAmmo(1, ammoType)
-		end
-
 		self:SetData("equip", true)
-		if self:GetData("ammoType") ~= nil then
-
-		else
-			timer.Simple(0.1,function()
-				local weapon1 = client:GetActiveWeapon()
-				weapon1:SetClip1(self:GetData("ammo", 0))
-			end)
-		end
-
-		if (self.isGrenade) then
-			weapon:SetClip1(1)
-			client:SetAmmo(0, ammoType)
-		else
-			weapon:SetClip1(self:GetData("ammo", 0))
-		end
 
 		weapon.ixItem = self
 
@@ -264,13 +235,7 @@ function ITEM:Equip(client)
 end
 
 function ITEM:OnInstanced(invID, x, y)
-	
-	--if !self:GetData("durability") then
-	--	self:SetData("durability", 100)
-	--end
-	--if !self:GetData("ammo") then
-	--	self:SetData("ammo", 0)
-	--end
+
 end
 
 function ITEM:Unequip(client, bPlaySound, bRemoveItem)
@@ -284,8 +249,6 @@ function ITEM:Unequip(client, bPlaySound, bRemoveItem)
 
 	if (IsValid(weapon)) then
 		weapon.ixItem = nil
-
-		self:SetData("ammo", weapon:Clip1())
 
 		client:StripWeapon(self.class)
 	else
@@ -331,10 +294,8 @@ function ITEM:OnLoadout()
 		local weapon = client:Give(self.class)
 
 		if (IsValid(weapon)) then
-			client:RemoveAmmo(weapon:Clip1(), weapon:GetPrimaryAmmoType())
 			client.carryWeapons[self.weaponCategory] = weapon
 			weapon.ixItem = self
-			weapon:SetClip1(self:GetData("ammo", 0))
 		else
 			print(Format("[Helix] Cannot give weapon - %s does not exist!", self.class))
 		end
@@ -343,10 +304,6 @@ end
 
 function ITEM:OnSave()
 	local weapon = self.player:GetWeapon(self.class)
-
-	if (IsValid(weapon)) then
-		self:SetData("ammo", weapon:Clip1())
-	end
 end
 
 function ITEM:OnRemoved()
@@ -369,8 +326,6 @@ hook.Add("PlayerDeath", "ixStripClip", function(client)
 
 	for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
 		if (v.isWeapon and v:GetData("equip")) then
-			v:SetData("ammo", nil)
-			--v:SetData("equip", nil)
 
 			if (v.pacData) then
 				v:RemovePAC(client)
