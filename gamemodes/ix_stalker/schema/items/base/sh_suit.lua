@@ -452,6 +452,12 @@ ITEM.functions.Equip = {
 		end
 
 		item:SetData("equip", true)
+		
+		local origbgroups = {}
+		for k, v in ipairs(client:GetBodyGroups()) do
+			origbgroups[v.id] = client:GetBodygroup(v.id)
+		end
+		item:SetData("origgroups", origbgroups)
 
 		item.player:RecalculateResistances()
 		item.player:ReevaluateOverlay()
