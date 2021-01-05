@@ -8,11 +8,11 @@ DIALOGUE.addTopic("GREETING", {
 		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
-		"ProgressionTestTopic",
+		--"ProgressionTestTopic",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkilleasy", "mutantkillspecial"}, 4)
+		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkillgroupeasy"}, 4)
 	end
 })
 
