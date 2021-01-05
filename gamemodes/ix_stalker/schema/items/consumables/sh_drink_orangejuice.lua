@@ -13,7 +13,7 @@ ITEM.thirst = 17
 ITEM.quantity = 3
 
 ITEM.sound = "stalkersound/inv_drink_flask_2.mp3"
-ITEM.img = Material("vgui/hud/items/drink/orangejuice.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/orangejuice.png")
 
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")

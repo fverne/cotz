@@ -13,7 +13,7 @@ ITEM.ar = 0.2
 ITEM.far = 3
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","ll-a","ll-a","l","l"}
-ITEM.img = Material("vgui/hud/wind.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/wind.png")
 
 ITEM.weight = 3.400
 ITEM.miscslots = 1

@@ -6,7 +6,7 @@ ITEM.category = "Communication"
 ITEM.price = 1000
 ITEM.busflag = {"hardware"}
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
-ITEM.img = Material("vgui/hud/pda1.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/pda1.png")
 ITEM.repairCost = ITEM.price/100*1
 
 function ITEM:GetDescription()

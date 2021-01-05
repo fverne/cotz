@@ -13,7 +13,7 @@ ITEM.hunger = 14
 ITEM.quantity = 2
 
 ITEM.sound = "stalkersound/inv_eat_can_open.mp3"
-ITEM.img = Material("vgui/hud/items/food/can_beans.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/items/food/can_beans.png")
 
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")

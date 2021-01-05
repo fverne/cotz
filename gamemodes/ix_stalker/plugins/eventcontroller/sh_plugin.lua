@@ -8,62 +8,21 @@ PLUGIN.eventpoints = PLUGIN.eventpoints or {} -- EVENTPOINT STRUCTURE table.inse
 
 ix.util.Include("sh_eventdefs.lua")
 
-PLUGIN.spawnradius = 512
-PLUGIN.populateAmount = 10
+PLUGIN.spawnradius = 750
+PLUGIN.populateAmount = 15
 
 PLUGIN.pdachatter = true
 PLUGIN.pdachatterchance = 100
 
-PLUGIN.saferadius = 1000
+PLUGIN.saferadius = 1500
 
 PLUGIN.spawnrate = 30
 
 local icon = Material("vgui/icons/news.png")
 
-ix.config.Add("eventControllerThreshold", 35, "How many mutants should the controller keep on the map.", nil, {
+ix.config.Add("eventControllerThreshold", 70, "How many mutants should the controller keep on the map.", nil, {
 	data = {min = 10, max = 100},
 	category = "Spawning"
-})
-
-
-ix.chat.Register("eventpda", {
-	CanSay = function(self, speaker, text)
-		if IsValid(speaker) then
-			if speaker:GetCharacter():HasFlags("N") or speaker:IsAdmin() then
-				return true
-			else
-				return false
-			end
-		else
-			return false
-		end
-	end,
-	OnChatAdd = function(self, speaker, text)
-		chat.AddText(Color(0,191,255), "[GPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
-	end,
-	prefix = {"/eventpda"},
-	CanHear = function(self, speaker, listener)
-		local pda = listener:GetCharacter():GetData("pdaequipped", false)
-		
-		return true
-	end,
-})
-
-ix.chat.Register("eventpdainternal", {
-	CanSay = function(self, speaker, text)
-		local pda = speaker:GetCharacter():GetData("pdaequipped", false)
-
-		return true
-	end,
-	OnChatAdd = function(self, speaker, text)
-		chat.AddText(Color(0,191,255), "[GPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
-	end,
-	prefix = {},
-	CanHear = function(self, speaker, listener)
-		local pda = listener:GetCharacter():GetData("pdaequipped", false)
-
-		return true
-	end,
 })
 
 if SERVER then

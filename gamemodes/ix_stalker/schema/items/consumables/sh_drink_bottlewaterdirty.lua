@@ -13,7 +13,7 @@ ITEM.thirst = 17
 ITEM.quantity = 1
 
 ITEM.sound = "stalkersound/inv_drink_beak.ogg"
-ITEM.img = Material("vgui/hud/items/drink/bottlewaterdirty.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/bottlewaterdirty.png")
 
 ITEM:Hook("use", function(item)
 	item.player:AddBuff("debuff_radiation", 10, { amount = 0.4 })

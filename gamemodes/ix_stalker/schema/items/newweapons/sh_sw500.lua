@@ -10,7 +10,7 @@ ITEM.height = 1
 ITEM.validAttachments = {"md_rmr","md_saker"}
 
 ITEM.exRender = false
-ITEM.img = Material("vgui/hud/weapons/sw500.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/weapons/sw500.png")
 
 ITEM.bulletweight = 0.040
 ITEM.unloadedweight = 2.26

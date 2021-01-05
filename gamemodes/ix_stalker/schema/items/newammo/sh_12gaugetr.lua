@@ -8,7 +8,7 @@ ITEM.description= "A box that contains %s 12 gauge tri-ball shells. "
 ITEM.longdesc = "Tri-Ball 12 gauge shell filled with %s mm shot. This round fires three large shots, with relatively high accuracy compared to other shells. Highly lethal at close range. Only suitable for use with smoothbore weapons."
 ITEM.price = 750
 --ITEM.busflag = "SPECIAL8_1"
-ITEM.img = Material("vgui/hud/12gauge.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/12gauge.png")
 
 ITEM.weight = 0.04
 ITEM.flatweight = 0.03

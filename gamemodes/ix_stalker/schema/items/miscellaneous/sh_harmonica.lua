@@ -4,7 +4,7 @@ ITEM.model = "models/lostsignalproject/items/misc/harmonica.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 500
-ITEM.img = Material("vgui/hud/harmonica.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/harmonica.png")
 
 ITEM.sounds = {
 	Sound("stalkersound/harmonica/harmonica_1.ogg"),

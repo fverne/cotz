@@ -16,7 +16,7 @@ ITEM.repair_PartsComplexity = 2
 ITEM.repair_PartsRarity = 3
 
 ITEM.exRender = false
-ITEM.img = Material("vgui/hud/weapons/ak12.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/weapons/ak12.png")
 
 function ITEM:GetWeight()
   return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))

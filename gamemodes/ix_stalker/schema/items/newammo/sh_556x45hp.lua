@@ -7,7 +7,7 @@ ITEM.ammoAmount = 60 // amount of the ammo
 ITEM.description= "A box that contains %s rounds of Hollow-Point 5.56x45mm ammo. "
 ITEM.longdesc = "A standard-issue NATO 5.56x45 caliber round specially designed for accurate automatic fire. Provides good ballistic characteristics, having been designed on the basis of a hunting round. Widely known under its SS109 index."
 ITEM.price = 1650
-ITEM.img = Material("vgui/hud/556x45zl.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/556x45zl.png")
 
 ITEM.weight = 0.011
 ITEM.flatweight = 0.05

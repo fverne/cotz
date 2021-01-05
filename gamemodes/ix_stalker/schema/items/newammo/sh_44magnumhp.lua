@@ -6,7 +6,7 @@ ITEM.description= "A box that contains %s rounds of Hollow-Point .44 Magnum ammo
 ITEM.longdesc = "This large-bore .44 Magnum cartridge was originally designed for revolvers, but quickly adopted by rifles and carbines."
 ITEM.price = 1000
 ITEM.width = 2
-ITEM.img = Material("vgui/hud/44magnumzl.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/44magnumzl.png")
 
 ITEM.weight = 0.017
 ITEM.flatweight = 0.03

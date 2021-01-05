@@ -17,7 +17,7 @@ ITEM.radProt = 0.5
 ITEM.repairCost = ITEM.price/100*1
 ITEM.overlayPath = "vgui/overlays/hud_gas"
 ITEM.ballisticlevels = {"0","ll-a","ll-a","0","0"}
-ITEM.img = Material("vgui/hud/nbc.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/nbc.png")
 
 ITEM.weight = 9.800
 ITEM.miscslots = 2

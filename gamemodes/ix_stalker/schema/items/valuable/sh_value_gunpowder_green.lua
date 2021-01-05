@@ -9,4 +9,4 @@ ITEM.price = 2100
 
 ITEM.flatweight = 0.650
 
-ITEM.img = Material("vgui/hud/valuable/gpgreen.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/valuable/gpgreen.png")

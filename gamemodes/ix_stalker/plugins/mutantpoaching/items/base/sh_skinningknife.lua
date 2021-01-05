@@ -11,7 +11,7 @@ ITEM.parttickets = 0
 ITEM.knifetier = 0
 ITEM.isPoachKnife = true
 
-ITEM.img = Material("vgui/hud/knife1.png", "noclamp smooth")
+ITEM.img = ix.util.GetMaterial("vgui/hud/knife1.png", "noclamp smooth")
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
 
 

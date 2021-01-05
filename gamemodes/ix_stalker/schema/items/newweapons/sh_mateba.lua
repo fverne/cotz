@@ -10,7 +10,7 @@ ITEM.height = 1
 ITEM.validAttachments = {"md_microt1","md_rmr","md_saker"}
 
 ITEM.exRender = false
-ITEM.img = Material("vgui/hud/weapons/mateba.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/weapons/mateba.png")
 
 ITEM.bulletweight = 0.019
 ITEM.unloadedweight = 1.35

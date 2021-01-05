@@ -8,7 +8,7 @@ ITEM.description= "A box that contains %s rounds of 5.56x45mm ammo. "
 ITEM.longdesc = "A standard-issue NATO 5.56x45 caliber round specially designed for accurate automatic fire. Provides good ballistic characteristics, having been designed on the basis of a hunting round. Widely known under its SS109 index."
 ITEM.price = 1650
 --ITEM.busflag = "SPECIAL8_1"
-ITEM.img = Material("vgui/hud/556x45.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/556x45.png")
 
 ITEM.weight = 0.012
 ITEM.flatweight = 0.05

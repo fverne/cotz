@@ -17,7 +17,7 @@ ITEM.radProt = 0.8
 ITEM.repairCost = ITEM.price/100*1
 ITEM.overlayPath = "vgui/overlays/hud_sci"
 ITEM.ballisticlevels = {"l","ll-a","ll-a","l","l"}
-ITEM.img = Material("vgui/hud/ssp99.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/ssp99.png")
 ITEM.noBusiness = true
 
 ITEM.weight = 7.900

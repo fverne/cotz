@@ -13,7 +13,7 @@ ITEM.ar = 0.1
 ITEM.far = 0
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","lll-a","lll-a","ll-a","ll-a"}
-ITEM.img = Material("vgui/hud/io7a.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/io7a.png")
 
 ITEM.newSkin = 0
 ITEM.bodygroup = {0}

@@ -12,7 +12,7 @@ ITEM.quantity = 10
 ITEM.flatweight = 0
 ITEM.weight = 0.090
 
-ITEM.img = Material("vgui/hud/valuable/capacitor.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/valuable/capacitor.png")
 
 function ITEM:GetPrice()
 	return self.price * self:GetData("quantity", self.quantity)

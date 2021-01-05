@@ -10,7 +10,7 @@ ITEM.height = 1
 ITEM.canAttach = false
 
 ITEM.exRender = true
---ITEM.img = Material("vgui/hud/weapons/mateba.png")
+--ITEM.img = ix.util.GetMaterial("vgui/hud/weapons/mateba.png")
 
 ITEM.bulletweight = 0.019
 ITEM.unloadedweight = 2.05

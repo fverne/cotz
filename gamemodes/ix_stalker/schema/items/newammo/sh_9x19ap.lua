@@ -6,7 +6,7 @@ ITEM.description= "A box that contains %s rounds of 9x19mm armor piercing ammo. 
 ITEM.longdesc = "This 9x19 round has a strong armor penetrating effect, due to an overpressure load. "
 ITEM.price = 750
 ITEM.busflag = {"ammo1"}
-ITEM.img = Material("vgui/hud/9x19.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/9x19.png")
 
 ITEM.weight = 0.010
 ITEM.flatweight = 0.05

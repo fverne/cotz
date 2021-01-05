@@ -6,7 +6,7 @@ ITEM.description= "A box that contains %s rounds of 9x21mm Gyurza SP-11 (7N28) a
 ITEM.longdesc = "A variant of the Gyurza bullet type, featuring a regular FMJ bullet with a lead core. It is the most versatile of the Gyurza line, but this of course means that the other variants can be more effective in different situations."
 ITEM.price = 750
 ITEM.busflag = {"ammo1"}
-ITEM.img = Material("vgui/hud/9x19.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/9x19.png")
 
 ITEM.weight = 0.008
 ITEM.flatweight = 0.05

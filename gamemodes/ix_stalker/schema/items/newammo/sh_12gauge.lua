@@ -8,7 +8,7 @@ ITEM.description= "A box that contains %s 12 gauge shells. "
 ITEM.longdesc = "Standard 12 gauge shell filled with 6 mm shot. Highly lethal at close range. Only suitable for use with smoothbore weapons."
 ITEM.price = 600
 ITEM.busflag = {"ammo2"}
-ITEM.img = Material("vgui/hud/12gauge.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/12gauge.png")
 
 ITEM.weight = 0.031
 ITEM.flatweight = 0.03

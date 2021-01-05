@@ -6,7 +6,7 @@ ITEM.description= "A box that contains %s rounds of Hollow-Point .45 ACP ammo. "
 ITEM.longdesc = "The .45 caliber full metal jacket round has enjoyed popularity for a hundred years thanks to its ballistic performance and a relatively small propelling charge. As a result, the bullet in this round is relatively slow but highly accurate and provides considerable stopping power."
 ITEM.price = 950
 ITEM.width = 2
-ITEM.img = Material("vgui/hud/45acpzl.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/45acpzl.png")
 
 ITEM.weight = 0.017
 ITEM.flatweight = 0.05

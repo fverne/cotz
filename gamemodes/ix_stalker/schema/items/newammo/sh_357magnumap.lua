@@ -6,7 +6,7 @@ ITEM.description= "A box that contains %s rounds of Armor-Piercing .357 Magnum a
 ITEM.longdesc = "This large-bore .357 Magnum cartridge was originally designed for revolvers, but quickly adopted by rifles and carbines."
 ITEM.price = 1000
 ITEM.width = 2
-ITEM.img = Material("vgui/hud/44magnumzl.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/44magnumzl.png")
 
 ITEM.weight = 0.015
 ITEM.flatweight = 0.03

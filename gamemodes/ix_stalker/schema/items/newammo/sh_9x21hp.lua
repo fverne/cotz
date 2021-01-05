@@ -5,7 +5,7 @@ ITEM.ammoAmount = 60 // amount of the ammo
 ITEM.description= "A box that contains %s rounds of 9x21mm Gyurza SP-12 ammo. "
 ITEM.longdesc = "The SP-12 is a bullet designed for maximum expansion, making it very effective against softer targets, however it lacks the armor piercing punch of the other Gyurza types."
 ITEM.price = 750
-ITEM.img = Material("vgui/hud/9x19zl.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/9x19zl.png")
 
 ITEM.weight = 0.007
 ITEM.flatweight = 0.05

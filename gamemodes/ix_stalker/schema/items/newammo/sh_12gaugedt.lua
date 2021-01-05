@@ -7,7 +7,7 @@ ITEM.ammoAmount = 30 // amount of the ammo
 ITEM.description= "A box that contains %s 12 gauge dart rounds. "
 ITEM.longdesc = "12 gauge shell loaded with a pointed dart. Gives decent armor penetration at range."
 ITEM.price = 600
-ITEM.img = Material("vgui/hud/12gaugedt.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/12gaugedt.png")
 
 ITEM.weight = 0.045
 ITEM.flatweight = 0.03

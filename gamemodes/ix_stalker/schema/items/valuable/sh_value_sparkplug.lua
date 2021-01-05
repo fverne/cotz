@@ -12,7 +12,7 @@ ITEM.quantity = 5
 ITEM.flatweight = 0
 ITEM.weight = 0.085
 
-ITEM.img = Material("vgui/hud/valuable/sparkplug.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/valuable/sparkplug.png")
 
 function ITEM:GetPrice()
 	return self.price * self:GetData("quantity", self.quantity)

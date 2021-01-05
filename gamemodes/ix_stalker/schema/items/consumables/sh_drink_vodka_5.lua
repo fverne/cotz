@@ -15,7 +15,7 @@ ITEM.quantity = 2
 ITEM.addictionStrongAlcohol = true
 
 ITEM.sound = "stalkersound/inv_flask.mp3"
-ITEM.img = Material("vgui/hud/items/drink/vodka_5.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/vodka_5.png")
 
 function ITEM:PopulateTooltipIndividual(tooltip)
     ix.util.PropertyDesc(tooltip, "Strong Alcohol", Color(64, 224, 208))

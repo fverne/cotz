@@ -13,7 +13,7 @@ ITEM.ar = 0
 ITEM.far = 0
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","0","0","0","0"}
-ITEM.img = Material("vgui/hud/radsuit.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/radsuit.png")
 ITEM.noBusiness = true
 
 

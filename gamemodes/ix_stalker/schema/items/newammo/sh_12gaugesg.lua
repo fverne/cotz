@@ -8,7 +8,7 @@ ITEM.description= "A box that contains %s 12 gauge slug shells. "
 ITEM.longdesc = "This heavy 12-caliber slug round is normally used for hunting big game, but is also good for other purposes."
 ITEM.price = 700
 ITEM.busflag = {"ammo2_1"}
-ITEM.img = Material("vgui/hud/12gaugesg.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/12gaugesg.png")
 
 ITEM.weight = 0.036
 ITEM.flatweight = 0.03

@@ -14,7 +14,7 @@ ITEM.ar = 0
 ITEM.far = 0
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","ll-a","ll-a","0","0"}
-ITEM.img = Material("vgui/hud/anorak.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/anorak.png")
 
 ITEM.weight = 2.600
 ITEM.miscslots = 0

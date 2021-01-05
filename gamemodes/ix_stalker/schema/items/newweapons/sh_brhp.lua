@@ -20,7 +20,7 @@ function ITEM:GetWeight()
 end
 
 ITEM.exRender = false
-ITEM.img = Material("vgui/hud/weapons/brhp.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/weapons/brhp.png")
 
 ITEM.pacData = {
 [1] = {

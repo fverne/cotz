@@ -16,7 +16,7 @@ ITEM.isGasmask = true
 ITEM.radProt = 0.60
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","lll","lll","lll-a","lll-a"}
-ITEM.img = Material("vgui/hud/berill7.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/berill7.png")
 ITEM.noBusiness = true
 
 ITEM.weight = 7.600

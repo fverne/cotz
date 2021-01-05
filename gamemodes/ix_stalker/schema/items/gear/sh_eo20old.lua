@@ -14,7 +14,7 @@ ITEM.isGasmask = true
 ITEM.isHelmet = nil
 ITEM.overlayPath = "vgui/overlays/hud_prot"
 ITEM.ballisticlevels = {"0"}
-ITEM.img = Material("vgui/hud/eo20old.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/eo20old.png")
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.weight = 1.800
