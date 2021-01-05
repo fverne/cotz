@@ -8,7 +8,8 @@ ix.poaching.MutantTable = {
 	["models/monsters/babka.mdl"] = "classiczombie",
 	["models/stalkertnb/rodent1.mdl"] = "tushkano",
 	["models/monsters/snork2.mdl"] = "snork",
-	["models/monsters/psydog.mdl"] = "pseudodog",
+	["models/monsters/psydog2.mdl"] = "pseudodog",
+	["models/monsters/psydog.mdl"] = "psydog",
 	["models/monsters/krovosos.mdl"] = "bloodsucker",
 	["models/monsters/plot.mdl"] = "flesh",
 	["models/monsters/slep_dog2.mdl"] = "dog",
@@ -18,8 +19,10 @@ ix.poaching.MutantTable = {
 	["models/monsters/cat.mdl"] = "cat",
 	["models/maver1k_XVII/Stalker/mutants/karlik.mdl"] = "karlik",
 	["models/monsters/zanoza.mdl"] = "sprig",
-	["models/monsters/tibet.mdl"] = "swampcontroller"
-
+	["models/monsters/controler.mdl"] = "controller",
+	["models/monsters/tibet.mdl"] = "swampcontroller",
+	["models/monsters/controler_big.mdl"] = "electrocontroller",
+	["models/monsters/bear.mdl"] = "bear",
 }
 
 ix.poaching.MutantParts = {
@@ -46,6 +49,10 @@ ix.poaching.MutantParts = {
 	["pseudodog"] = {
 		["meattype"] = "meat_pseudodog",
 		["parts"] = {{"part_pseudodog", 15}, {"hide_pseudodog", 2}},
+	},
+	["psydog"] = {
+		["meattype"] = "meat_pseudodog",
+		["parts"] = {{"part_pseudodog", 35}, {"part_psydog", 4}, {"hide_pseudodog", 5}},
 	},
 	["bloodsucker"] = {
 		["meattype"] = "meat_bloodsucker",
@@ -79,10 +86,23 @@ ix.poaching.MutantParts = {
 		["meattype"] = "meat_sprig",
 		["parts"] = {{"part_sprig", 20}, {"hide_sprig", 3}},
 	},
+	["controller"] = {
+		["meattype"] = "meat_controller",
+		["parts"] = {{"part_controller", 20}, {"hide_controller", 3}},
+	},
 	["swampcontroller"] = {
 		["meattype"] = "meat_swampcontroller",
 		["parts"] = {{"part_swampcontroller", 20}, {"hide_swampcontroller", 3}},
+	},
+	["electrocontroller"] = {
+		["meattype"] = "meat_controller",
+		["parts"] = {{"part_electrocontroller", 20}, {"hide_controller", 3}},
+	},
+	["bear"] = {
+		["meattype"] = "meat_bear",
+		["parts"] = {{"part_bear", 20}, {"hide_bear", 3}},
 	}
+
 }
 
 function PLUGIN:KeyPress(client, key)			
