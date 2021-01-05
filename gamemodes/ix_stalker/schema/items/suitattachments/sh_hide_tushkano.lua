@@ -1,4 +1,4 @@
-ITEM.name = "Blind Dog Hide"
+ITEM.name = "Tushkano Hide"
 ITEM.model ="models/lostsignalproject/items/parts/hide_burer.mdl"
 ITEM.description = "A small patch of skin from a dead rodent."
 ITEM.longdesc = "Getting any usable bit of skin off a tushkano is hard work, and the reward isn't the greatest, however it's better than nothing."
