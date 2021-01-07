@@ -141,7 +141,46 @@ end
 --needs to be done for both chat class and command
 function PLUGIN:InitializedChatClasses()
 	ix.chat.classes["looc"] = nil
+	ix.chat.classes["connect"] = nil
+	ix.chat.classes["disconnect"] = nil
 end
+
+ix.chat.Register("playerjoin", {
+	CanSay = function(self, speaker, text)
+		speaker:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
+		return true
+	end,
+	OnChatAdd = function(self, speaker, text)
+		chat.AddText(Color(0,191,255), "[GPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
+	end,
+	prefix = {},
+	CanHear = function(self, speaker, listener)
+		return true
+	end,
+})
+
+ix.chat.Register("playerleave", {
+	CanSay = function(self, speaker, text)
+		speaker:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
+		return true
+	end,
+	OnChatAdd = function(self, speaker, text)
+		chat.AddText(Color(0,191,255), "[GPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
+	end,
+	prefix = {},
+	CanHear = function(self, speaker, listener)
+		return true
+	end,
+})
+
+function PLUGIN:CharacterLoaded(character)
+	ix.chat.Send(nil, "playerjoin", string.format("%s has connected to STALKERNET.", character:GetName()))
+end
+
+function PLUGIN:PlayerDisconnected(client)
+	ix.chat.Send(nil, "playerleave", string.format("%s has lost connection to STALKERNET.", client:GetCharacter():GetName()))
+end
+
 
 hook.Add("ShouldSuppressMenu", "DeadMenuSuppress", function(client) 
 	if(!client:Alive()) then
