@@ -9,7 +9,7 @@ PLUGIN.eventpoints = PLUGIN.eventpoints or {} -- EVENTPOINT STRUCTURE table.inse
 ix.util.Include("sh_eventdefs.lua")
 
 PLUGIN.spawnradius = 750
-PLUGIN.populateAmount = 15
+PLUGIN.populateAmount = 7
 
 PLUGIN.pdachatter = true
 PLUGIN.pdachatterchance = 100

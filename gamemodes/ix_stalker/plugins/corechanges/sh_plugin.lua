@@ -145,9 +145,11 @@ function PLUGIN:InitializedChatClasses()
 	ix.chat.classes["disconnect"] = nil
 end
 
+
+local icon = Material("vgui/icons/news.png")
+
 ix.chat.Register("playerjoin", {
 	CanSay = function(self, speaker, text)
-		speaker:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text)
@@ -155,13 +157,16 @@ ix.chat.Register("playerjoin", {
 	end,
 	prefix = {},
 	CanHear = function(self, speaker, listener)
+		if IsValid(listener) then
+			listener:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
+		end
+
 		return true
 	end,
 })
 
 ix.chat.Register("playerleave", {
 	CanSay = function(self, speaker, text)
-		speaker:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text)
@@ -169,6 +174,9 @@ ix.chat.Register("playerleave", {
 	end,
 	prefix = {},
 	CanHear = function(self, speaker, listener)
+		if IsValid(listener) then
+			listener:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
+		end
 		return true
 	end,
 })
