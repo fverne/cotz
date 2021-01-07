@@ -120,11 +120,11 @@ ITEM.items[6] = {
 		{"drug_cigarette_3", {["quantity"] = math.random(5,8)}},
 	},
 	itemsRare = {
-		{"drug_tobacco_1", {["quantity"] = math.random(10,12)}},
+		{"drug_tobacco_1", {["quantity"] = math.random(6,9)}},
 		{"drug_cigarette_6", {["quantity"] = math.random(5,8)}},
 	},
 	itemsVeryRare = {
-		{"drug_tobacco_2", {["quantity"] = math.random(10,12)}},
+		{"drug_tobacco_2", {["quantity"] = math.random(6,9)}},
 		{"drug_cigarette_5", {["quantity"] = math.random(5,8)}},
 	},
 }
