@@ -17,11 +17,6 @@ ix.config.Add("containerOpenTime", 0.7, "How long it takes to open a container."
 	category = "Containers"
 })
 
-ix.config.Add("containerPasswordDelay", 1, "How long a user has to wait between password attempts.", nil, {
-	data = {min = 0, max = 50},
-	category = "Containers"
-})
-
 function ix.container.Register(model, data)
 	ix.container.stored[model] = data
 end
@@ -177,17 +172,12 @@ if (SERVER) then
 		local password = net.ReadString()
 		local dist = entity:GetPos():DistToSqr(client:GetPos())
 
-		if (client.lastPasswordAttempt and CurTime() < client.lastPasswordAttempt + ix.config.Get("containerPasswordDelay",1)) then
-			client:NotifyLocalized("passwordTooQuick")
-		else
-			if (dist < 16384 and password) then
-				if (entity.password and entity.password == password) then
-					entity:OpenInventory(client)
-				else
-					client:NotifyLocalized("wrongPassword")
-				end
+		if (dist < 16384 and password) then
+			if (entity.password and entity.password == password) then
+				entity:OpenInventory(client)
+			else
+				client:NotifyLocalized("wrongPassword")
 			end
-			client.lastPasswordAttempt = CurTime()
 		end
 	end)
 
