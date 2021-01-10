@@ -158,10 +158,11 @@ ix.chat.Register("playerjoin", {
 	prefix = {},
 	CanHear = function(self, speaker, listener)
 		if IsValid(listener) then
-			listener:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
+			listener:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO )
+			return true
 		end
 
-		return true
+		return false
 	end,
 })
 
@@ -181,12 +182,14 @@ ix.chat.Register("playerleave", {
 	end,
 })
 
-function PLUGIN:CharacterLoaded(character)
-	ix.chat.Send(nil, "playerjoin", string.format("%s has connected to STALKERNET.", character:GetName()))
-end
+if (SERVER) then
+	function PLUGIN:CharacterLoaded(character)
+		ix.chat.Send(nil, "playerjoin", string.format("%s has connected to STALKERNET.", character:GetName()))
+	end
 
-function PLUGIN:PlayerDisconnected(client)
-	ix.chat.Send(nil, "playerleave", string.format("%s has lost connection to STALKERNET.", client:GetCharacter():GetName()))
+	function PLUGIN:PlayerDisconnected(client)
+		ix.chat.Send(nil, "playerleave", string.format("%s has lost connection to STALKERNET.", client:GetCharacter():GetName()))
+	end
 end
 
 
