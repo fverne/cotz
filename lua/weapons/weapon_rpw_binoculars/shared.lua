@@ -120,34 +120,18 @@ end
 
 function SWEP:Think()
 
-	if !(GetConVar("rpw_binoculars_hold"):GetBool()) then
-	
-		if self.Owner:KeyPressed( IN_ATTACK2 ) then
-			if !(self.Zoom_Zooming) then
-				if (self.Zoom_InZoom) then
-					self:EndZoom()
-				else
-					self:SetZoom()
-				end
-			end
+	if self.Owner:KeyPressed( IN_ATTACK2 ) then
+		if !(self.Zoom_Zooming) then
+			self:SetZoom()
 		end
-	
-	else
-
-		if self.Owner:KeyPressed( IN_ATTACK2 ) then
-			if !(self.Zoom_Zooming) then
-				self:SetZoom()
-			end
-		end
-		
-		if self.Owner:KeyReleased( IN_ATTACK2 ) then
-			if !(self.Zoom_Zooming) then
-				self:EndZoom()
-			end
-		end
-		
 	end
-	
+		
+	if self.Owner:KeyReleased( IN_ATTACK2 ) then
+		if !(self.Zoom_Zooming) then
+			self:EndZoom()
+		end
+	end
+
 	if ( self.Owner:KeyReleased( IN_ATTACK ) || ( !self.Owner:KeyDown( IN_ATTACK ) && self.Sound ) ) then		
 		self:Idle()
 	end
@@ -181,11 +165,6 @@ function SWEP:SetZoom()
 	timer.Simple(self:SequenceDuration(), function()
 		if !self:IsValid() then return end
 		self.Zoom_Zooming = false
-		if (GetConVar("rpw_binoculars_hold"):GetBool()) then
-			if !self.Owner:KeyDown( IN_ATTACK2 ) then
-				self:EndZoom()
-			end
-		end
 	end)
 end
 
@@ -209,11 +188,6 @@ function SWEP:EndZoom()
 		if !self:IsValid() then return end
 		self.Zoom_Zooming = false
 		self:Idle()
-		if (GetConVar("rpw_binoculars_hold"):GetBool()) then
-			if self.Owner:KeyDown( IN_ATTACK2 ) then
-				self:SetZoom()
-			end
-		end
 	end)
 end
 
