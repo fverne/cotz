@@ -34,7 +34,7 @@ if SERVER then
 
 		local nearby = ents.FindInSphere( position, 20 )
 		for i,j in pairs (nearby) do
-			if string.find(j:GetClass(), "entbox") then
+			if string.find(j:GetClass(), "entbox") or string.find(j:GetClass(), "ix_item") then
 				return false
 			end
 		end
@@ -42,8 +42,16 @@ if SERVER then
 	end
 	
 	function PLUGIN:spawnBoxes()
-		for _,v in pairs(self.boxpoints) do
+		local n_boxes = self:GetNumBoxes()
+		local max_boxes = ix.config.Get("boxSpawnerThreshold",50)
+
+		local boxpoints = self.boxpoints
+
+		table.sort(boxpoints, function(a, b) math.random(100) > 50 end)
+
+		for _,v in pairs(boxpoints) do
 			if (math.random(100) > self.boxchance) then continue end
+			if (n_boxes > max_boxes) then return end
 
 			local pos = v[1]
 			local boxtype = self.boxtypes[v[2]]
@@ -55,6 +63,8 @@ if SERVER then
 				box:Spawn()
 				box:PhysWake()
 			end
+
+			n_boxes = n_boxes + 1
 		end
 	end
 
