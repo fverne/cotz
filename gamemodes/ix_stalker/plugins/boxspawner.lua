@@ -45,9 +45,7 @@ if SERVER then
 		local n_boxes = self:GetNumBoxes()
 		local max_boxes = ix.config.Get("boxSpawnerThreshold",50)
 
-
 		for _,v in RandomPairs(self.boxpoints) do
-			if (math.random(100) > self.boxchance) then continue end
 			if (n_boxes > max_boxes) then return end
 
 			local pos = v[1]
