@@ -47,7 +47,7 @@ if SERVER then
 
 		local boxpoints = self.boxpoints
 
-		table.sort(boxpoints, function(a, b) return math.random(100) > 50 end)
+		table.sort(boxpoints, function(a, b) return math.Rand( 0, 1 ) > 0.5 end)
 
 		for _,v in pairs(boxpoints) do
 			if (math.random(100) > self.boxchance) then continue end
