@@ -38,8 +38,19 @@ if (CLIENT) then
 		RunConsoleCommand("pac_restart")
 	end)
 
+	-- you need the proper permission to open the editor
+	function PLUGIN:PrePACEditorOpen()
+		if (!CAMI.PlayerHasAccess(LocalPlayer(), "Helix - Manage PAC", nil)) then
+			return false
+		end
+	end
 end
 
+function PLUGIN:pac_CanWearParts(client)
+	if (!CAMI.PlayerHasAccess(client, "Helix - Manage PAC", nil)) then
+		return false
+	end
+end
 
 local meta = FindMetaTable("Player")
 

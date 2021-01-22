@@ -12,3 +12,5 @@ ITEM.price = 5000
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.weight = 0.142
+
+ITEM.img = ix.util.GetMaterial("cotz/ui/icons/attachment_reddot6.png")

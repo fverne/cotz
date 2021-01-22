@@ -455,7 +455,20 @@ end
 function GetMaxPlayerCharacter(client)
 end
 
---- @realm server
+--- Returns the sound to emit from the player upon death. If nothing is returned then it will use the default male/female death
+-- sounds.
+-- @realm server
+-- @player client Player that died
+-- @treturn[1] string Sound to play
+-- @treturn[2] bool `false` if a sound shouldn't be played at all
+-- @usage function PLUGIN:GetPlayerDeathSound(client)
+-- 	-- play impact sound every time someone dies
+-- 	return "physics/body/body_medium_impact_hard1.wav"
+-- end
+-- @usage function PLUGIN:GetPlayerDeathSound(client)
+-- 	-- don't play a sound at all
+-- 	return false
+-- end
 function GetPlayerDeathSound(client)
 end
 
@@ -483,7 +496,24 @@ end
 function GetTypingIndicator(character, text)
 end
 
---- @realm shared
+--- Registers chat classes after the core framework chat classes have been registered. You should usually create your chat
+-- classes in this hook - especially if you want to reference the properties of a framework chat class.
+-- @realm shared
+-- @usage function PLUGIN:InitializedChatClasses()
+-- 	-- let's say you wanted to reference an existing chat class's color
+-- 	ix.chat.Register("myclass", {
+-- 		format = "%s says \"%s\"",
+-- 		GetColor = function(self, speaker, text)
+-- 			-- make the chat class slightly brighter than the "ic" chat class
+-- 			local color = ix.chat.classes.ic:GetColor(speaker, text)
+--
+-- 			return Color(color.r + 35, color.g + 35, color.b + 35)
+-- 		end,
+-- 		-- etc.
+-- 	})
+-- end
+-- @see ix.chat.Register
+-- @see ix.chat.classes
 function InitializedChatClasses()
 end
 

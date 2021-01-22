@@ -255,7 +255,7 @@ ITEM:Hook("drop", function(item)
 	if (item:GetData("equip")) then
 		item.player:RecalculateResistances()
 		item.player:ReevaluateOverlay()
-		item:RemovePart(item.player)
+		item:RemovePart(item:GetOwner())
 	end
 end)
 
