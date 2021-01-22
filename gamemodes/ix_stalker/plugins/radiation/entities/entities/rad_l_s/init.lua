@@ -2,11 +2,11 @@ AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
 
 include('shared.lua')
-local delayTime = 0
-local range = 512
-local radiationamount = 1
-local geigerHeavy = {"geiger/heavy/geiger_heavy_1.wav", "geiger/heavy/geiger_heavy_2.wav", "geiger/heavy/geiger_heavy_3.wav", "geiger/heavy/geiger_heavy_4.wav", "geiger/heavy/geiger_heavy_5.wav", }
-local geigerLight = {"geiger/light/geiger_light_1.wav", "geiger/light/geiger_light_2.wav", "geiger/light/geiger_light_3.wav", "geiger/light/geiger_light_4.wav", "geiger/light/geiger_light_5.wav", }
+ENT.delayTime = 0
+ENT.range = 512
+ENT.radiationamount = 1
+ENT.geigerHeavy = {"geiger/heavy/geiger_heavy_1.wav", "geiger/heavy/geiger_heavy_2.wav", "geiger/heavy/geiger_heavy_3.wav", "geiger/heavy/geiger_heavy_4.wav", "geiger/heavy/geiger_heavy_5.wav", }
+ENT.geigerLight = {"geiger/light/geiger_light_1.wav", "geiger/light/geiger_light_2.wav", "geiger/light/geiger_light_3.wav", "geiger/light/geiger_light_4.wav", "geiger/light/geiger_light_5.wav", }
 
 function ENT:SpawnFunction( ply, tr )
 	if ( !tr.Hit ) then return end
@@ -38,17 +38,15 @@ function ENT:Initialize()
 end
 
 function ENT:Think()
-	if delayTime < CurTime() then
-		delayTime = CurTime() + 0.2
+	if self.delayTime < CurTime() then
+		self.delayTime = CurTime() + 0.2
 		for k, v in pairs( ents.FindInSphere( self.Entity:GetPos(), 2560 )  ) do
-			if v:IsPlayer() and v:GetCharacter() and v:GetMoveType() != MOVETYPE_NOCLIP then
-				local items = v:GetCharacter():GetInventory():GetItems(true)
-				
-				if v:GetPos( ):Distance( self:GetPos( ) ) <= range then
+			if (v:IsPlayer() and v:GetCharacter() and v:GetMoveType() != MOVETYPE_NOCLIP) then
+				if v:GetPos( ):Distance( self:GetPos( ) ) <= self.range then
 				
 					local TEMP_TargetDamage = DamageInfo()
 								
-					TEMP_TargetDamage:SetDamage(radiationamount)
+					TEMP_TargetDamage:SetDamage(self.radiationamount)
 					TEMP_TargetDamage:SetInflictor(self)
 					TEMP_TargetDamage:SetDamageType(DMG_RADIATION)
 					TEMP_TargetDamage:SetAttacker(self)
@@ -56,12 +54,12 @@ function ENT:Think()
 					v:TakeDamageInfo(TEMP_TargetDamage)
 					
 					if v:hasGeiger() then
-						local randomsound = table.Random(geigerHeavy)
+						local randomsound = table.Random(self.geigerHeavy)
 						v:EmitSound(randomsound)
 					end
-				elseif v:GetPos( ):Distance( self:GetPos( ) ) <= range + 256 then
+				elseif v:GetPos( ):Distance( self:GetPos( ) ) <= self.range + 256 then
 					if v:hasGeiger() then
-						local randomsound = table.Random(geigerLight)
+						local randomsound = table.Random(self.geigerLight)
 						v:EmitSound(randomsound)
 					end
 				end
