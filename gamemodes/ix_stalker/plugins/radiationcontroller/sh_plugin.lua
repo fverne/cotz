@@ -158,9 +158,9 @@ ix.command.Add("radiationentremove", {
 			end
 		end
 		if mt > 0 then
-			client:Notify( "Removed " .. mt .. " radiation points.")
+			client:Notify( "Removed " .. mt .. " radiation entities.")
 		else
-			client:Notify( "No radiation points found at location.")
+			client:Notify( "No radiation entities found at location.")
 		end
 	end
 })

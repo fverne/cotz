@@ -1,24 +1,23 @@
-DIALOGUE.name = "Trader Test"
+DIALOGUE.name = "Trader NPC"
 
 DIALOGUE.addTopic("GREETING", {
-	response = "What is it?",
+	response = "Welcome to my humble shop.",
 	options = {
 		"TradeTopic",
 		"BackgroundTopic",
-		"InterestTopic",
+		--"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
-		--"ProgressionTestTopic",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkillgroupeasy"}, 4)
+		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantmeateasy"}, 4)
 	end
 })
 
 DIALOGUE.addTopic("TradeTopic", {
 	statement = "Want to trade?",
-	response = "Yes",
+	response = "Always - You looking for a good meal?",
 	postCallback = function(self, client, target)
 		if (SERVER) then
 			local character = client:GetCharacter()
@@ -60,7 +59,31 @@ DIALOGUE.addTopic("TradeTopic", {
 
 DIALOGUE.addTopic("BackgroundTopic", {
 	statement = "Tell me about yourself.",
-	response = "Not a whole lot to know. I came here a few months ago, after the military presence ramped up their presence around here - turns out the swamps are the only place they haven't really cut off around the perimeter of the zone, which means that this is where we stay for now. I worked as a trader back in the days, so thought I might as well put my skills to use here too. Oh, and I have a bunch of friends who can get things. And remove things, like you, if you keep asking.",
+	response = "Not a whole lot to say - I came here after consolidating with 'Old Timer', as you know him as. We met each other in a city nearby, back in the eighties, under different circumstances than these. I worked at a volunteer at a homeless shelter and... Well maybe the old guy will open up about it at some point. Let's just say we have different reasons for being here. ",
+	options = {
+		"BackgroundTopic2",
+	}
+})
+
+DIALOGUE.addTopic("BackgroundTopic2", {
+	statement = "Well, what's your reason?",
+	response = "Things didn't work out back home. I was led by temptations and my wife didn't take so kindly. But who cares, she was kind of on the big side anyways and didn't want to cook for me. Who would have believed, I had to cook by myself! It's her own fault and was definitely something she had coming. Stupid bitch.",
+	options = {
+		"BackgroundTopic3",
+	}
+})
+
+DIALOGUE.addTopic("BackgroundTopic3", {
+	statement = "Right... What made you come here, of all places?",
+	response = "Well, I heard about the artifacts of course, from good oldie! And I met some crazy people through my volunteer work who are interested in astrology or whatever it's called, they want to pay a big extra for whatever supernatural elements I can get out of here. Apparently they have sources who pay big. I don't care if you believe it, just trust the cash when it flows in, alright?",
+	options = {
+		"BackgroundTopic4",
+	}
+})
+
+DIALOGUE.addTopic("BackgroundTopic4", {
+	statement = "I'll keep that in mind.",
+	response = "You're always welcome to trade here. And remember - I do the best meals in town!",
 	options = {
 		"BackTopic",
 	}
@@ -68,7 +91,7 @@ DIALOGUE.addTopic("BackgroundTopic", {
 
 DIALOGUE.addTopic("InterestTopic", {
 	statement = "Can you tell me something interesting?",
-	response = "Sure. How about you do business with me, or shut the fuck up?",
+	response = "Not really, no.",
 	options = {
 		"BackTopic",
 	}
@@ -111,12 +134,12 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 					ix.dialogue.notifyTaskComplete(client, ix.jobs.getFormattedName(jobs[target:GetDisplayName()]))
 					client:ixJobComplete(target:GetDisplayName()) 
 				end
-				if (CLIENT) then self.response = "Great work on the job, here's your reward." end
+				if (CLIENT) then self.response = "Very nice! This is for you, for your efforts." end
 			else
 				if (CLIENT) then self.response = string.format("Have you finished %s yet?", ix.jobs.getFormattedName(jobs[target:GetDisplayName()])) end
 			end
 		else
-			if (CLIENT) then self.response = "You're not working for me right now." end
+			if (CLIENT) then self.response = "Uhh... I haven't talked to you about any tasks?" end
 		end
 
 	end,
@@ -175,13 +198,13 @@ DIALOGUE.addTopic("ConfirmTask", {
 
 DIALOGUE.addTopic("GetTask", {
 	statement = "Do you have any work for me?",
-	response = "Yes, have a look.",
+	response = "I do, actually. Check this out.",
 	options = {
 		"BackTopic"
 	},
 	preCallback = function(self, client, target)
 		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
-			self.response = "I already gave you some work."
+			self.response = "You already have a task, which isn't completed yet..."
 		end
 	end,
 	IsDynamic = true,
@@ -209,35 +232,22 @@ DIALOGUE.addTopic("GetTask", {
 	end,
 })
 
-DIALOGUE.addTopic("ProgressionTestTopic", {
-	statement = "Progression?",
-	response = "ok)",
-	postCallback = function(self, client, target)
-		if (SERVER) then
-			ix.progression.AddProgessionValue("TestProgression", 1, client:Name())
-		end
-	end,
-	options = {
-		"BackTopic",
-	}
-})
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
-	response = "All right.",
+	response = "Very nice...",
 	options = {
 		"TradeTopic",
 		"BackgroundTopic",
-		"InterestTopic",
+		--"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
-		--"ProgressionTestTopic",
 		"GOODBYE"
 	}
 })
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Come back soon, STALKER..."
+	response = "See you soon..."
 })
 

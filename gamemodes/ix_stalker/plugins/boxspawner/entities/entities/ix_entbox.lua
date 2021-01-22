@@ -81,5 +81,18 @@ if (CLIENT) then
 	function ENT:Draw()
 		self:DrawModel()
 	end
+
+	ENT.PopulateEntityInfo = true
+
+	function ENT:OnPopulateEntityInfo(container)
+		local name = container:AddRow("name")
+		name:SetImportant()
+		name:SetText("Damaged Metal Box")
+		name:SizeToContents()
+
+		local description = container:AddRow("description")
+		description:SetText("This box seems like it is on the brink of falling apart, and can be broken quite easily by hitting it.")
+		description:SizeToContents()
+	end
 end
 

@@ -16,7 +16,7 @@ PLUGIN.boxtypes = {
 }
 
 ix.config.Add("boxSpawnerThreshold", 50, "How many boxes should the controller keep on the map.", nil, {
-	data = {min = 20, max = 100},
+	data = {min = 0, max = 200},
 	category = "Spawning"
 })
 
