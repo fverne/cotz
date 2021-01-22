@@ -73,6 +73,14 @@ if (CLIENT) then
 
 		if IsValid(ragdoll) then
 			ragdoll.isDeadBody = true
+			if(ix.pac) then
+				ragdoll.RenderOverride = function()
+					ragdoll.objCache = ragdoll:GetNetVar("player")
+					ragdoll:DrawModel()
+
+					hook.Run("DrawPlayerRagdoll", ragdoll)
+				end
+			end
 		end
 	end)
 
@@ -137,14 +145,14 @@ else
 
 		ix.temp.Corpses[client].isDeadBody = true
 
-		if(ix.pac) then
-			ix.temp.Corpses[client].RenderOverride = function()
-				ix.temp.Corpses[client].objCache = ix.temp.Corpses[client]:GetNetVar("player")
-				ix.temp.Corpses[client]:DrawModel()
+		--if(ix.pac) then
+		--	ix.temp.Corpses[client].RenderOverride = function()
+		--		ix.temp.Corpses[client].objCache = ix.temp.Corpses[client]:GetNetVar("player")
+		--		ix.temp.Corpses[client]:DrawModel()
 
-				hook.Run("DrawPlayerRagdoll", ix.temp.Corpses[client])
-			end
-		end
+		--		hook.Run("DrawPlayerRagdoll", ix.temp.Corpses[client])
+		--	end
+		--end
 
 		timer.Simple(0.5, function()
 			netstream.Start(nil, "ix_DeadBody", ix.temp.Corpses[client]:EntIndex())
