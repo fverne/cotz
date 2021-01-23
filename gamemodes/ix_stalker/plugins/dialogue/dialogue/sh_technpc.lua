@@ -170,13 +170,36 @@ local interestingoptions = {"Yeah, the Zone is a dangerous place! But It also ho
 }
 
 DIALOGUE.addTopic("InterestTopic", {
-	statement = "Can you tell me something useful?",
-	response = table.Random(interestingoptions),
-	options = {
-		"BackTopic"
-	}
-})
+    statement = "Can you tell me something interesting?",
+    response = "",
+    options = {
+    	"InterestMoreTopic",
+        "BackTopic"
+    },
+    preCallback = function(self, client, target)
+        if (CLIENT) then
+            local tbl = {"heybro", "lutz", "nogetandet"}
 
+            self.response = table.Random(tbl)
+        end
+    end,
+} )
+
+DIALOGUE.addTopic("InterestMoreTopic", {
+    statement = "Very nice, can you tell me more?",
+    response = "",
+    options = {
+    	"InterestMoreTopic",
+        "BackTopic"
+    },
+    preCallback = function(self, client, target)
+        if (CLIENT) then
+            local tbl = {"heybro", "lutz", "nogetandet"}
+
+            self.response = table.Random(tbl)
+        end
+    end,
+} )
 
 DIALOGUE.addTopic("AboutWorkTopic", {
 	statement = "About work...",

@@ -11,7 +11,7 @@ local BUYONLY 	= 3
 ix.npctemplates.animtemplatestranslation[1] = "TestAnimations"
 ix.npctemplates.animtemplatestranslation[2] = "Bartrader"
 ix.npctemplates.animtemplatestranslation[3] = "Guard"
-ix.npctemplates.animtemplatestranslation[4] = "testtech"
+ix.npctemplates.animtemplatestranslation[4] = "sitchair"
 
 ix.npctemplates.templates["testcook"] = {
 	name 		= "Greaser",
@@ -319,6 +319,41 @@ ix.npctemplates.templates["cooknpc"] = {
 	},
 }
 
+ix.npctemplates.templates["tradernpc"] = {
+	name 		= "'Haggler'",
+	description = "The man before you is of larger stature. He has a wild look in his eyes.",
+	model 		= "models/legends/krohobor.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.7,
+	dialogueid 	= "tradernpc",
+	soundgroup 	= "GenericGuard",
+	idleanim 	= "doctor_idle",
+	--animgroup 	= 4,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+
+	},
+}
+
+ix.npctemplates.templates["pdanpc"] = {
+	name 		= "'Mute'",
+	description = "The man in front of you is of frail structure. You cannot get eye contact with him.",
+	model 		= "models/legends/petruha.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.7,
+	dialogueid 	= "stalkernetadmin",
+	soundgroup 	= "GenericGuard",
+	idleanim 	= "sidit",
+	animgroup 	= 4,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+
+	},
+}
+
+
 ix.npctemplates.soundtemplates["GenericHello"] = {
 	"npc/beta/stalker_talk_1.ogg",
 	"npc/beta/stalker_talk_2.ogg",
@@ -381,6 +416,6 @@ ix.npctemplates.animtemplates["Guard"] = {
 	"hello_idle",
 }
 
-ix.npctemplates.animtemplates["testtech"] = {
+ix.npctemplates.animtemplates["sitchar"] = {
 	"sidit2",
 }
