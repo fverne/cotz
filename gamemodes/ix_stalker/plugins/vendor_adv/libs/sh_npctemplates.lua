@@ -13,141 +13,14 @@ ix.npctemplates.animtemplatestranslation[2] = "Bartrader"
 ix.npctemplates.animtemplatestranslation[3] = "Guard"
 ix.npctemplates.animtemplatestranslation[4] = "sitchair"
 
-ix.npctemplates.templates["testcook"] = {
-	name 		= "Greaser",
-	description = "A bearded, lonely man. He looks displeased.",
-	model 		= "models/legends/krohobor.mdl",
-	skin 		= 0,
-	bubble 		= 0,
-	scale 		= 1.0,
-	dialogueid 	= "testcook",
-	soundgroup 	= "GenericHello",
-	idleanim 	= "trader_idle",
-	--animgroup 	= 4,
-	items = {
-	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
-		["22lr"] 		= { 10, 1, SELLONLY, 2, 0.10, 1 },
-	},
-}
-
-ix.npctemplates.templates["Barmantest"] = {
-	name 		= "Flake",
-	description = "A skinny, tall man. He has a stern look on his face.",
-	model 		= "models/legends/capitan.mdl",
-	skin 		= 0,
-	bubble 		= 0,
-	scale 		= 1.0,
-	dialogueid 	= "universalunion",
-	soundgroup 	= "nosound",
-	buyAll 		= true,
-	--animgroup 	= 2,
-	idleanim = "trader_idle",
-	items = {
-	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
-		["22lr"] 		= { 10, 1, SELLONLY, 2, 0.10, 1 },
-	},
-}
-
-ix.npctemplates.templates["Stalkertest1"] = {
-	name 		= "Pussy",
-	description = "A frail stalker. He has a worried look on his face.",
-	model 		= "models/legends/kostoprav.mdl",
-	skin 		= 0,
-	bubble 		= 0,
-	scale 		= 1.0,
-	dialogueid 	= "generictest",
-	soundgroup 	= "GenericIdle",
-	--animgroup 	= 1,
-	idleanim = "sidit3",
-	items = {
-	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["tea"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
-		["skinningknife1"] 		= { 10, 1, SELLONLY, 2, 0.10, 1 },
-	},
-}
-
-ix.npctemplates.templates["Stalkertestguard"] = {
-	name 		= "Godfather",
-	description = "You can smell this man as you get close to him. The look on his face tells you he means business.",
-	model 		= "models/legends/kastet.mdl",
-	skin 		= 0,
-	bubble 		= 0,
-	scale 		= 1.0,
-	dialogueid 	= "universalunion",
-	soundgroup 	= "GenericGuard",
-	animgroup 	= 3,
-	idleanim = "pistolidle1",
-	items = {
-	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
-		["22lr"] 		= { 10, 1, SELLONLY, 2, 0.10, 1 },
-	},
-}
-
-ix.npctemplates.templates["Stalkertestguard2"] = {
-	name 		= "Babysitter",
-	description = "The guy gives you such an angry look, you are compelled to break eye contact, despite his very young face.",
-	model 		= "models/legends/garyk.mdl",
-	skin 		= 0,
-	bubble 		= 0,
-	scale 		= 1.0,
-	dialogueid 	= "guardtest",
-	soundgroup 	= "nosound",
-	animgroup 	= 1,
-	idleanim = "bandit2_idle2",
-	items = {
-	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
-		["22lr"] 		= { 10, 1, SELLONLY, 2, 0.10, 1 },
-	},
-}
-
-ix.npctemplates.templates["TaskNPCTest"] = {
-	name 		= "Sneed",
-	description = "Feeds and seeds.",
-	model 		= "models/legends/kostoprav.mdl",
-	skin 		= 0,
-	bubble 		= 0,
-	scale 		= 1.0,
-	dialogueid 	= "tasknpctest",
-	soundgroup 	= "nosound",
-	animgroup 	= 1,
-	idleanim = "sidit3",
-	items = {
-	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
-		["22lr"] 		= { 10, 1, SELLONLY, 2, 0.10, 1 },
-	},
-}
-
-ix.npctemplates.templates["TechNPCTest"] = {
-	name 		= "Chuck",
-	description = "Fucks and sucks.",
-	model 		= "models/legends/kastet.mdl",
-	skin 		= 0,
-	bubble 		= 0,
-	scale 		= 1.0,
-	dialogueid 	= "techtest",
-	soundgroup 	= "nosound",
-	animgroup 	= 1,
-	idleanim = "pistolidle1",
-	items = {
-	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["12gauge"] 	= { 20, 2, SELLONLY, 4, 0.25, 2 },
-		["22lr"] 		= { 10, 1, SELLONLY, 2, 0.10, 1 },
-	},
-}
-
-ix.npctemplates.templates["TraderNPCTest"] = {
-	name 		= "Sorter",
+ix.npctemplates.templates["owlnpc"] = {
+	name 		= "'Cleaner'",
 	description = "A bulky man. He looks at you with disdain.",
 	model 		= "models/legends/chich.mdl",
 	skin 		= 0,
 	bubble 		= 0,
 	scale 		= 0.5,
-	dialogueid 	= "tradertest",
+	dialogueid 	= "owlnpc",
 	soundgroup 	= "TraderHello",
 	--animgroup 	= 2,
 	idleanim = "bandit2_idle2",
@@ -336,7 +209,7 @@ ix.npctemplates.templates["tradernpc"] = {
 	},
 }
 
-ix.npctemplates.templates["pdanpc"] = {
+ix.npctemplates.templates["stalkernetnpc"] = {
 	name 		= "'Mute'",
 	description = "The man in front of you is of frail structure. You cannot get eye contact with him.",
 	model 		= "models/legends/petruha.mdl",
@@ -344,7 +217,7 @@ ix.npctemplates.templates["pdanpc"] = {
 	bubble 		= 0,
 	scale 		= 0.7,
 	dialogueid 	= "stalkernetadmin",
-	soundgroup 	= "GenericGuard",
+	soundgroup 	= "nosound",
 	idleanim 	= "sidit",
 	animgroup 	= 4,
 	items = {
@@ -353,6 +226,10 @@ ix.npctemplates.templates["pdanpc"] = {
 	},
 }
 
+-- No sounds emitted
+ix.npctemplates.soundtemplates["nosound"] = {
+	"stalkersound/inv_nosound.mp3",
+}
 
 ix.npctemplates.soundtemplates["GenericHello"] = {
 	"npc/beta/stalker_talk_1.ogg",
@@ -399,10 +276,6 @@ ix.npctemplates.soundtemplates["CookNpc"] = {
     "npc/lesnik/red_forester_hello_bye_1.ogg",
 }
 
-ix.npctemplates.soundtemplates["nosound"] = {
-	"stalkersound/inv_nosound.mp3",
-}
-
 ix.npctemplates.animtemplates["TestAnimations"] = {
 	"bandit2_idle1",
 	"bandit2_idle3",
@@ -416,6 +289,6 @@ ix.npctemplates.animtemplates["Guard"] = {
 	"hello_idle",
 }
 
-ix.npctemplates.animtemplates["sitchar"] = {
+ix.npctemplates.animtemplates["sitchair"] = {
 	"sidit2",
 }

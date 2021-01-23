@@ -1,14 +1,13 @@
 DIALOGUE.name = "Stalkernet Admin"
 
 DIALOGUE.addTopic("GREETING", {
-	response = "* The man in front of you seems not even to aknowledge your presence, and stares at some object on the table *",
+	response = " ** The man in front of you seems not even to aknowledge your presence, and stares at some object on the table *",
 	options = {
 		"TradeTopic",
 		"BackgroundTopic",
 		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
-		--"ProgressionTestTopic",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
@@ -60,7 +59,7 @@ DIALOGUE.addTopic("TradeTopic", {
 
 DIALOGUE.addTopic("BackgroundTopic", {
 	statement = "Well... What's that on the table?",
-	response = " * The man hides the object in his lap, shielding it from your view.",
+	response = " ** The man hides the object in his lap, shielding it from your view.",
 	options = {
 		"BackgroundTopic2",
 	}
@@ -68,7 +67,7 @@ DIALOGUE.addTopic("BackgroundTopic", {
 
 DIALOGUE.addTopic("BackgroundTopic2", {
 	statement = "Right.",
-	response = "* He looks down a bit.",
+	response = " ** He looks down a bit.",
 	options = {
 		"BackTopic",
 	}
@@ -217,19 +216,6 @@ DIALOGUE.addTopic("GetTask", {
 	end,
 })
 
-DIALOGUE.addTopic("ProgressionTestTopic", {
-	statement = "Progression?",
-	response = "ok)",
-	postCallback = function(self, client, target)
-		if (SERVER) then
-			ix.progression.AddProgessionValue("TestProgression", 1, client:Name())
-		end
-	end,
-	options = {
-		"BackTopic",
-	}
-})
-
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's uhh, try something else.",
 	response = "...",
@@ -239,13 +225,12 @@ DIALOGUE.addTopic("BackTopic", {
 		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
-		--"ProgressionTestTopic",
 		"GOODBYE"
 	}
 })
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "* He nods frantically."
+	response = " ** He nods frantically."
 })
 
