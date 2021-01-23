@@ -90,5 +90,11 @@ end
 function ix.dialogue.notifyMoneyLost(client, text)
 	ix.dialogue.notify(client, 5, text)
 end
+function ix.dialogue.notifyReputationReceive(client, text)
+	ix.dialogue.notify(client, 6, text)
+end
+function ix.dialogue.notifyReputationLost(client, text)
+	ix.dialogue.notify(client, 7, text)
+end
 
 end

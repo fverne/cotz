@@ -334,7 +334,9 @@ net.Receive("ixDialogueNotify", function()
 		"New task: ",
 		"Completed task: ",
 		"Received money: ",
-		"Lost money: "
+		"Lost money: ",
+		"Received reputation: ",
+		"Lost reputation: "
 	}
 
 	local typeimgarr = {
@@ -343,7 +345,9 @@ net.Receive("ixDialogueNotify", function()
 		"propic/event/compass", --NEW TASK
 		"propic/event/negotiation", --COMPLETED TASK
 		"propic/event/moneydown", --MONEY GET
-		"propic/event/moneyup"  --MONEY LOSE
+		"propic/event/moneyup",  --MONEY LOSE
+		"propic/event/group2", --REP GET
+		"propic/event/system"  --REP LOSE
 	}
 
 	local typetext = typetextarr[notitype+1] or "INVALID TYPE: "

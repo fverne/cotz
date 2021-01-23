@@ -194,6 +194,7 @@ if SERVER then
         end
 
         self:addReputation(ix.jobs.list[identifier].repReward)
+        ix.dialogue.notifyReputationReceive(self, ix.jobs.list[identifier].repReward)
 
         --Remove job from player
         curJobs[npcidentifier] = nil
