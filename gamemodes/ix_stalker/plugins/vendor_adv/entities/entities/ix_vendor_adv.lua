@@ -40,7 +40,7 @@ function ENT:Initialize()
 		self:SetDisplayName("John Doe")
 		self:SetDescription("")
 
-		self.dialogueid = "dynamicdlgtest"
+		self.dialogueid = "00templatenpc"
 
 		self.receivers = {}
 

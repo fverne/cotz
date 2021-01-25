@@ -1,5 +1,5 @@
-ITEM.name = "valuable"
-ITEM.description = "valuable item."
+ITEM.name = "mutantpart"
+ITEM.description = "mutantpart item."
 ITEM.longdesc = "No Longer Description Available"
 ITEM.category = "trinket"
 ITEM.model = "models/Gibs/HGIBS.mdl"
