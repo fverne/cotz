@@ -32,16 +32,16 @@ ITEM.functions.use = {
 
 		local chance = math.random(1,2)
 		if chance == 1 then
-			ix.plugin.list["hidestash"]:SpawnStash(spawnpoint[1], { loot[1], loot[2], loot[3] })
-			item:SetData("stashcoordinates", spawnpoint[1])
-			item:SetData("stashtext", spawnpoint[2])
+			ix.plugin.list["hidestash"]:SpawnStash(spawnpoint[1][1], { loot[1], loot[2], loot[3] })
+			item:SetData("stashcoordinates", spawnpoint[1][1])
+			item:SetData("stashtext", spawnpoint[1][2])
 			item:SetData("map", game.GetMap())
 			for i = 1, #loot[1] do
 				stashcontent = stashcontent..", "..loot[i][1]
 			end
 
 			item.player:Notify( "You hid found the location of a stash!" )
-			ix.log.Add(item.player, "command", "created a stash from "..item.name.." at x:"..spawnpoint[1].x.." y:"..spawnpoint[1].y.." z:"..spawnpoint[1].z.." with "..stashcontent)
+			ix.log.Add(item.player, "command", "created a stash from "..item.name.." at x:"..spawnpoint[1][1].x.." y:"..spawnpoint[1][1].y.." z:"..spawnpoint[1][1].z.." with "..stashcontent)
 		else
 			local money = math.random(item.moneyinterval[1], item.moneyinterval[2])
 			item.player:GetCharacter():GiveMoney(money)

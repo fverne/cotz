@@ -32,8 +32,8 @@ else
 	netstream.Hook("nut_DisplayStashSpawnPoints", function(data)
 		for k, v in pairs(data) do
 			for k2, v2 in pairs(v) do
-				local emitter = ParticleEmitter( v[1] )
-				local smoke = emitter:Add( "sprites/glow04_noz", v[1] )
+				local emitter = ParticleEmitter( v[1][1] )
+				local smoke = emitter:Add( "sprites/glow04_noz", v[1][1] )
 				smoke:SetVelocity( Vector( 0, 0, 1 ) )
 				smoke:SetDieTime(10)
 				smoke:SetStartAlpha(255)
@@ -120,7 +120,7 @@ ix.command.Add("stashspawnerremove", {
 		local range = radius or 128
 		local mt = 0
 		for k, v in pairs( PLUGIN.stashspawnpoints ) do
-			local distance = v[1]:Distance( hitpos )
+			local distance = v[1][1]:Distance( hitpos )
 			if distance <= tonumber(range) then
 				PLUGIN.stashspawnpoints[k] = nil
 				mt = mt + 1
