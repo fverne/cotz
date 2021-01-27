@@ -1643,11 +1643,11 @@ do
 
 
   -- UNFINISHED
-  /*
+  
   local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents1."
-  tempJob.desc = "%d DEBUG Documents1."
+  tempJob.name = "%d Empty Noteblock."
+  tempJob.desc = "%d Empty Noteblock."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_1"
@@ -1663,8 +1663,8 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents2."
-  tempJob.desc = "%d DEBUG Documents2."
+  tempJob.name = "%d Trading Ledger."
+  tempJob.desc = "%d Trading Ledger."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_2"
@@ -1680,8 +1680,8 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents3."
-  tempJob.desc = "%d DEBUG Documents3."
+  tempJob.name = "%d Scientist Curriculum Vitae."
+  tempJob.desc = "%d Scientist Curriculum Vitae."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_3"
@@ -1697,8 +1697,8 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents4."
-  tempJob.desc = "%d DEBUG Documents4."
+  tempJob.name = "%d Scribbled Scientific Notes."
+  tempJob.desc = "%d Scribbled Scientific Notes."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_4"
@@ -1714,8 +1714,8 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents5."
-  tempJob.desc = "%d DEBUG Documents5."
+  tempJob.name = "%d Handdrawn Anomaly Map."
+  tempJob.desc = "%d Handdrawn Anomaly Map."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_5"
@@ -1731,8 +1731,8 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents6."
-  tempJob.desc = "%d DEBUG Documents6."
+  tempJob.name = "%d Pump Station Checklist."
+  tempJob.desc = "%d Pump Station Checklist."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_6"
@@ -1748,8 +1748,8 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents7."
-  tempJob.desc = "%d DEBUG Documents7."
+  tempJob.name = "%d Firearm Assembly Illustration."
+  tempJob.desc = "%d Firearm Assembly Illustration."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_7"
@@ -1765,8 +1765,8 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents8."
-  tempJob.desc = "%d DEBUG Documents8."
+  tempJob.name = "%d Unreadable Torn Note."
+  tempJob.desc = "%d Unreadable Torn Note."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_8"
@@ -1782,8 +1782,8 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents9."
-  tempJob.desc = "%d DEBUG Documents9."
+  tempJob.name = "%d Swamps Research Documents."
+  tempJob.desc = "%d Swamps Research Documents."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_9"
@@ -1800,8 +1800,8 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents10."
-  tempJob.desc = "%d DEBUG Documents10."
+  tempJob.name = "%d Anomalous Material Report."
+  tempJob.desc = "%d Anomalous Material Report."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_10"
@@ -1817,8 +1817,8 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents11."
-  tempJob.desc = "%d DEBUG Documents11."
+  tempJob.name = "%d Artifact Research Ledger."
+  tempJob.desc = "%d Artifact Research Ledger."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_11"
@@ -1834,8 +1834,8 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents12."
-  tempJob.desc = "%d DEBUG Documents12."
+  tempJob.name = "%d Soviet Manual of Arms."
+  tempJob.desc = "%d Soviet Manual of Arms."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_12"
@@ -1851,8 +1851,8 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents13."
-  tempJob.desc = "%d DEBUG Documents13."
+  tempJob.name = "%d Manufacture of Gear Wheels."
+  tempJob.desc = "%d Manufacture of Gear Wheels."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_13"
@@ -1868,8 +1868,8 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d DEBUG Documents14."
-  tempJob.desc = "%d DEBUG Documents14."
+  tempJob.name = "%d Kevlar Sewing Manual."
+  tempJob.desc = "%d Kevlar Sewing Manual."
   tempJob.icon = "stalker/questpaper_item.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_14"
@@ -1882,5 +1882,4 @@ do
   ix.jobs.register(tempJob, "ItemJob1_value_documents_14")
 
   tempJob = nil
-*/
 end
