@@ -10,6 +10,24 @@ ITEM.price = 0
 ITEM.flatweight = 0
 ITEM.weight = 0
 
+function ITEM:GetDescription()
+    local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
+    local quantdesc = ""
+    local invdesc = ""
+    if self.longdesc and self.longdesc != "" then
+        invdesc = "\n\n"..(self.longdesc)
+    end
+
+    if self.quantdesc then
+        quantdesc = "\n\n"..Format(self.quantdesc, quant)
+    end
+
+    if (self.entity) then
+        return (self.description)
+    else
+        return (self.description..quantdesc..invdesc)
+    end
+end
 
 if (CLIENT) then
     function ITEM:PaintOver(item, w, h)
