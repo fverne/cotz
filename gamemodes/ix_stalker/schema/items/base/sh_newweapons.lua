@@ -587,6 +587,10 @@ function ITEM:OnRemoved()
 	end
 end
 
+function ITEM:GetPrice()
+    return self.price * (math.Clamp(self:GetData("durability",100), 15, 100)/100)
+end
+
 ITEM.functions.detach = {
 	name = "Detach",
 	icon = "icon16/stalker/detach.png",
