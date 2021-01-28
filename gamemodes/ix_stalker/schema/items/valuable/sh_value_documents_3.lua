@@ -13,7 +13,7 @@ ITEM.exRender = true
 ITEM.iconCam = {
 	pos = Vector(0, 0, 19.607843399048),
 	ang = Angle(90, 180, 0),
-	fov = 57.058823529412,
+	fov = 30,
 }
 
 if (CLIENT) then

@@ -11,9 +11,9 @@ ITEM.flatweight = 0.410
 
 ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(0, -1, 13.071895599365),
+	pos = Vector(0, -0.5, 200),
 	ang = Angle(90, 180, 0),
-	fov = 65.294117647059,
+	fov = 5,
 }
 
 if (CLIENT) then

@@ -11,10 +11,11 @@ ITEM.flatweight = 0.550
 
 ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(0, 0, 19.607843399048),
+	pos = Vector(-1, 0, 200),
 	ang = Angle(90, 180, 0),
-	fov = 57.058823529412,
+	fov = 5,
 }
+
 
 if (CLIENT) then
 	function ITEM:PopulateTooltipIndividual(tooltip)
