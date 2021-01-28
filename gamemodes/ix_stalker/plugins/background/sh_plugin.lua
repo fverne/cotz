@@ -126,6 +126,8 @@ ix.char.RegisterVar("backgrounds", {
 				label:SetText(ix.backgrounds[dat].description)
 			end
 		end
+		
+		combo:ChooseOption(combo:GetOptionText(4), 4)
 
 		return panel
 	end,

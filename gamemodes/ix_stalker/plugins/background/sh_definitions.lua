@@ -22,6 +22,21 @@
 	}
 ]]--
 
+ix.backgrounds["nothing"] = {
+	name = "Nothing",
+	description = "You have no idea how you ended up in this forsaked place, but you are not prepared.".. 
+	"\n\nStarting Equipment:"..
+	"\n  Nothing",
+	OnCreated = function(client, character) 
+		character:GetInventory():Add("value_personal_1")
+	end,
+	OnLoaded = function(character)
+		--local client = character:GetPlayer()  
+		--client:SetRunSpeed(400) -- These things dont actually work, they're overridden by the stamina plugin almost instantly
+		--client:SetWalkSpeed(200)
+	end,
+}
+
 ix.backgrounds["alcoholic_light"] = {
 	name = "Alcoholic (Light)",
 	description = "You started drinking when you were young and could never kick the habit.".. 
@@ -35,6 +50,7 @@ ix.backgrounds["alcoholic_light"] = {
 	"\n  1x Damaged Bag with Supplies"..
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
+		character:GetInventory():Add("kit_newchar")
 		character:GetInventory():Add("g2contender", 1, {["durability"] = 50})
 		character:GetInventory():Add("45acp", 1, {["quantity"] = 15})
 		character:GetInventory():Add("45acp41", 1, {["quantity"] = 10})
@@ -52,7 +68,7 @@ ix.backgrounds["alcoholic_light"] = {
 
 ix.backgrounds["alcoholic_heavy"] = {
 	name = "Alcoholic (Strong)",
-	description = "After a traumatic event, you couldn't get back on your feet and started getting deep in the bottle.".. 
+	description = "After a traumatic event, you couldn't get back on your feet and started hitting the bottle.".. 
 	"\n\nAddicted to Strong Alcohol"..
 	"\n\nStarting Equipment:"..
 	"\n  1x CZ52 (7.62x25mm) (Damaged)"..
@@ -62,6 +78,7 @@ ix.backgrounds["alcoholic_heavy"] = {
 	"\n  1x Damaged Bag with Supplies"..
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
+		character:GetInventory():Add("kit_newchar")
 		character:GetInventory():Add("cz52", 1, {["durability"] = 50})
 		character:GetInventory():Add("762x25", 1, {["quantity"] = 32})
 		character:GetInventory():Add("drink_vodka_5", 1)
@@ -86,6 +103,7 @@ ix.backgrounds["smoker"] = {
 	"\n  1x Damaged Bag with Supplies"..
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
+		character:GetInventory():Add("kit_newchar")
 		character:GetInventory():Add("tokarev", 1, {["durability"] = 50})
 		character:GetInventory():Add("762x25", 1, {["quantity"] = 32})
 		character:GetInventory():Add("drug_cigarette_4", 1, {["quantity"] = math.random(13,15)})
@@ -109,6 +127,7 @@ ix.backgrounds["eater"] = {
 	"\n  1x Damaged Bag with Supplies"..
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
+		character:GetInventory():Add("kit_newchar")
 		character:GetInventory():Add("makarov", 1, {["durability"] = 50})
 		character:GetInventory():Add("9x18", 1, {["quantity"] = 32})
 		character:GetInventory():Add("food_cheese_2", 1)
