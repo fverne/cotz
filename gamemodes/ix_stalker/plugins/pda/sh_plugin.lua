@@ -81,10 +81,7 @@ ix.char.RegisterVar("pdaavatar", {
 local icon = Material("vgui/icons/news.png")
 ix.chat.Register("npcpdainternal", {
 	CanSay = function(self, speaker, text)
-		if speaker then
-			speaker:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
-		end 
-		
+	
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text, bAnonymous, data)
@@ -92,6 +89,7 @@ ix.chat.Register("npcpdainternal", {
 	end,
 	prefix = {},
 	CanHear = function(self, speaker, listener)
+		listener:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO ) 
 
 		return true
 	end,
