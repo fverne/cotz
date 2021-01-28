@@ -58,14 +58,14 @@ if (SERVER) then
 	end
 
 	--funny meme when PostPlayerLoadout breaks in the framework and is never called :)))
-	function PLUGIN:PostPlayerLoadout(client)
+	--[[function PLUGIN:PostPlayerLoadout(client)
 		local character = client:GetCharacter()
 		if (character:GetInventory()) then
 			for _, v in pairs(character:GetInventory():GetItems()) do
 				v:Call("OnLoadout", client)
 			end
 		end
-	end
+	end]]--
 
 	--disable ix fall damage hook
 	function PLUGIN:GetFallDamage(client, speed)
