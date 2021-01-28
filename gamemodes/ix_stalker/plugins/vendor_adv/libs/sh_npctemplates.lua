@@ -12,6 +12,7 @@ ix.npctemplates.animtemplatestranslation[1] = "TestAnimations"
 ix.npctemplates.animtemplatestranslation[2] = "Bartrader"
 ix.npctemplates.animtemplatestranslation[3] = "Guard"
 ix.npctemplates.animtemplatestranslation[4] = "sitchair"
+ix.npctemplates.animtemplatestranslation[5] = "banditidle"
 
 ix.npctemplates.templates["owlnpc"] = {
 	name 		= "'Cleaner'",
@@ -201,8 +202,8 @@ ix.npctemplates.templates["tradernpc"] = {
 	scale 		= 0.7,
 	dialogueid 	= "tradernpc",
 	soundgroup 	= "GenericGuard",
-	idleanim 	= "doctor_idle",
-	--animgroup 	= 4,
+	idleanim 	= "bandit_idle2",
+	animgroup 	= 5,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 
@@ -218,8 +219,8 @@ ix.npctemplates.templates["stalkernetnpc"] = {
 	scale 		= 0.7,
 	dialogueid 	= "stalkernetadmin",
 	soundgroup 	= "nosound",
-	idleanim 	= "sidit",
-	animgroup 	= 4,
+	idleanim 	= "doctor_idle",
+	--animgroup 	= 4,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 
@@ -291,4 +292,9 @@ ix.npctemplates.animtemplates["Guard"] = {
 
 ix.npctemplates.animtemplates["sitchair"] = {
 	"sidit2",
+}
+
+ix.npctemplates.animtemplates["banditidle"] = {
+	"bandit2_idle1",
+	"bandit2_idle3"
 }

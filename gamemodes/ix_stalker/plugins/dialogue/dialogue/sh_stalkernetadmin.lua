@@ -59,7 +59,7 @@ DIALOGUE.addTopic("TradeTopic", {
 
 DIALOGUE.addTopic("BackgroundTopic", {
 	statement = "Well... What's that on the table?",
-	response = " ** The man hides the object in his lap, shielding it from your view.",
+	response = " ** The man hides the object behind his hands, shielding it from your view.",
 	options = {
 		"BackgroundTopic2",
 	}
@@ -182,7 +182,7 @@ DIALOGUE.addTopic("ConfirmTask", {
 
 DIALOGUE.addTopic("GetTask", {
 	statement = "Do you have any work for me?",
-	response = "Yes, have a look.",
+	response = " ** He nods once. ** ",
 	options = {
 		"BackTopic"
 	},
