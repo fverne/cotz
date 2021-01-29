@@ -114,8 +114,8 @@ else
 
 	function PLUGIN:PlayerSpawn(client)
 		if (client.resetRads) then
-			client:SetNetVar("radiation", 0)
-			if (client:GetCharacter()) then client:GetCharacter():SetRadiation(0) end
+			client:SetNetVar("radiation", math.min(44, client:GetNetVar("radiation", 0)))
+			if (client:GetCharacter()) then client:GetCharacter():SetRadiation(math.min(44, client:GetNetVar("radiation", 0))) end
 			client.resetRads = false
 		end
 	end
