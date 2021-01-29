@@ -24,6 +24,10 @@ function ix.util.AddItemToDroppedPool(uniqueid, data)
   table.insert(ix.randomitems.droppedplayeritems,{uniqueid,data})
 end
 
+function ix.util.GetSizeOfDroppedPool()
+  return #ix.randomitems.droppedplayeritems
+end
+
 -- Function for getting weighted random item
 -- Will return a table where:
 -- [1] = uniqueid (string)
