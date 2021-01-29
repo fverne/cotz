@@ -15,6 +15,8 @@ ITEM.cookable = true
 ITEM.BaseWeight = 1
 ITEM.WeightPerLevel = 0.5
 
+ITEM.DropOnDeath = true
+
 function ITEM:GetDescription()
     local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
     local quantdesc = ""

@@ -37,6 +37,11 @@ function PLUGIN:DoPlayerDeath( client, attacker, dmg )
 					item:Remove()
 				end
 			end
+
+			if (item.DropOnDeath ) then
+				ix.util.AddItemToDroppedPool(item.uniqueID, item.data)
+				item:Remove()
+			end
 	    end
 	end
 end

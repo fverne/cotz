@@ -10,6 +10,8 @@ ITEM.price = 0
 ITEM.flatweight = 0
 ITEM.weight = 0
 
+ITEM.DropOnDeath = true
+
 function ITEM:GetDescription()
     local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
     local quantdesc = ""
