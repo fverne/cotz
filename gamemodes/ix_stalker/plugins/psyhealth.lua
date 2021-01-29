@@ -217,7 +217,7 @@ if (SERVER) then
 
 	function PLUGIN:PlayerSpawn(client)
 		if (client.resetPsyHealth) then
-			client:SetPsyHealth(75)
+			client:SetPsyHealth((math.max(65,client:GetPsyHealth())))
 			client.resetPsyHealth = nil
 		end
 	end
