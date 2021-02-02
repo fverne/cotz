@@ -120,10 +120,12 @@ ix.command.Add("stashspawnerremove", {
 		local range = radius or 128
 		local mt = 0
 		for k, v in pairs( PLUGIN.stashspawnpoints ) do
-			local distance = v[1][1]:Distance( hitpos )
-			if distance <= tonumber(range) then
-				PLUGIN.stashspawnpoints[k] = nil
-				mt = mt + 1
+			for k2, v2 in pairs(v) do
+				local distance = v2[1]:Distance( hitpos )
+				if distance <= tonumber(range) then
+					PLUGIN.stashspawnpoints[k][k2] = nil
+					mt = mt + 1
+				end
 			end
 		end
 		client:Notify( "You have removed "..mt.." stash spawners." )
