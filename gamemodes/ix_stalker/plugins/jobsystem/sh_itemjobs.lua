@@ -129,7 +129,8 @@ do
   ix.jobs.register(tempJob, "ItemJob2_meat_boar")
 
   tempJob = nil
-/*
+
+--[[
   local tempJob = {}
 
   tempJob.name = "%d pieces of burer meat."
@@ -146,7 +147,7 @@ do
   ix.jobs.register(tempJob, "ItemJob1_meat_burer")
 
   tempJob = nil
-*/
+]]--
 
   local tempJob = {}
 
@@ -841,6 +842,39 @@ do
 
   tempJob = nil
 
+  local tempJob = {}
+
+  tempJob.name = "%d 9 Volt Batteries."
+  tempJob.desc = "%d 9 Volt Batteries."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_9vbattery"
+  tempJob.numberRec = 3
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"electronics"}
+
+  ix.jobs.register(tempJob, "ItemJob1_value_9vbattery")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d 9 Volt Batteries."
+  tempJob.desc = "%d 9 Volt Batteries."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_9vbattery"
+  tempJob.numberRec = 20
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"electronics"}
+
+  ix.jobs.register(tempJob, "ItemJob2_value_9vbattery")
+
+  tempJob = nil
 
 
 -----------------------------------------------------
