@@ -3,7 +3,6 @@ DIALOGUE.name = "Technut"
 DIALOGUE.addTopic("GREETING", {
 	response = "Hello, buddy!",
 	options = {
-		"InterestTopic",
 		"TradeTopic", 
 		"RepairItems",
 		"BackgroundTopic",
@@ -322,7 +321,6 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about another topic.",
 	response = "Don't worry about it. Anything else?",
 	options = {
-		"InterestTopic",
 		"TradeTopic", 
 		"RepairItems",
 		"BackgroundTopic",

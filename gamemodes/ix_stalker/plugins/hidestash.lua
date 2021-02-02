@@ -86,6 +86,8 @@ function PLUGIN:StashUnhide(client)
 		
 		for k, v in pairs( PLUGIN.stashpoints ) do
 			local dist = hitpos:Distance(client:GetPos())
+			PrintTable(v)
+			PrintTable(v[1])
 			local distance = v[1]:Distance( hitpos )
 			if dist <= 70 then
 				if distance <= 32 then
