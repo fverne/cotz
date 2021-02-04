@@ -30,19 +30,17 @@ if SERVER then
 else
 
 	netstream.Hook("nut_DisplayStashSpawnPoints", function(data)
-		for k, v in pairs(data) do
-			for k2, v2 in pairs(v) do
-				local emitter = ParticleEmitter( v[1][1] )
-				local smoke = emitter:Add( "sprites/glow04_noz", v[1][1] )
-				smoke:SetVelocity( Vector( 0, 0, 1 ) )
-				smoke:SetDieTime(10)
-				smoke:SetStartAlpha(255)
-				smoke:SetEndAlpha(255)
-				smoke:SetStartSize(64)
-				smoke:SetEndSize(64)
-				smoke:SetColor(255,186,50)
-				smoke:SetAirResistance(300)
-			end
+		for i=1, #data do
+			local emitter = ParticleEmitter( data[i] )
+			local smoke = emitter:Add( "sprites/glow04_noz", data[i] )
+			smoke:SetVelocity( Vector( 0, 0, 1 ) )
+			smoke:SetDieTime(10)
+			smoke:SetStartAlpha(255)
+			smoke:SetEndAlpha(255)
+			smoke:SetStartSize(64)
+			smoke:SetEndSize(64)
+			smoke:SetColor(255,186,50)
+			smoke:SetAirResistance(300)
 		end
 	end)
 
@@ -136,7 +134,15 @@ ix.command.Add("stashspawnerdisplay", {
 	adminOnly = true,
 	OnRun = function(self, client, arguments)
 		if SERVER then
-			netstream.Start(client, "nut_DisplayStashSpawnPoints", PLUGIN.stashspawnpoints)
+			local data = {}
+
+			for k, v in pairs(PLUGIN.stashspawnpoints) do
+				for k1, v1 in pairs(v) do
+					table.insert(data, v1[1])
+				end
+			end	
+
+			netstream.Start(client, "nut_DisplayStashSpawnPoints", data)
 			client:Notify( "Displayed all stash spawners for 10 secs." )
 		end
 	end

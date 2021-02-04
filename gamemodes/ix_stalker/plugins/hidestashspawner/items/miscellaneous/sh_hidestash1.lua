@@ -20,7 +20,7 @@ ITEM.functions.use = {
 	icon = "icon16/stalker/unlock.png",
 	OnRun = function(item)
 		local loot = table.Random(ix.plugin.list["hidestashspawner"].StashItems[item.hidestashcategory])
-		local spawnpoint = table.Random(ix.plugin.list["hidestashspawner"].stashspawnpoints)
+		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPointFromCategory(item.hidestashcategory)
 		local stashcontent = "CONTENT: "
 
 		if !spawnpoint then
@@ -29,9 +29,9 @@ ITEM.functions.use = {
 			return false
 		end
 
-		ix.plugin.list["hidestash"]:SpawnStash(spawnpoint[1][1], { loot[1], loot[2], loot[3] })
-		item:SetData("stashcoordinates", spawnpoint[1][1])
-		item:SetData("stashtext", spawnpoint[1][2])
+		ix.plugin.list["hidestash"]:SpawnStash(spawnpoint[1], { loot[1], loot[2], loot[3] })
+		item:SetData("stashcoordinates", spawnpoint[1])
+		item:SetData("stashtext", spawnpoint[2])
 		item:SetData("map", game.GetMap())
 
 		for i = 1, #loot[1] do
@@ -39,7 +39,7 @@ ITEM.functions.use = {
 		end
 
 		item.player:Notify( "You hid found the location of a stash!" )
-		ix.log.Add(item.player, "command", "created a stash from "..item.name.." at x:"..spawnpoint[1][1].x.." y:"..spawnpoint[1][1].y.." z:"..spawnpoint[1][1].z.." with "..stashcontent)
+		ix.log.Add(item.player, "command", "created a stash from "..item.name.." at x:"..spawnpoint[1].x.." y:"..spawnpoint[1].y.." z:"..spawnpoint[1].z.." with "..stashcontent)
 
 		return false
 	end,
