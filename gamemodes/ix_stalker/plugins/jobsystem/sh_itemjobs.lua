@@ -876,6 +876,289 @@ do
 
   tempJob = nil
 
+-----------------------------------------------------
+-----------------------------------------------------
+-------- ITEM RETRIEVAL - GUNS/REPAIRING  -----------
+-----------------------------------------------------
+-----------------------------------------------------
+
+  local tempJob = {}
+
+  tempJob.name = "%d Household Glue."
+  tempJob.desc = "%d Household Glue."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_glue_1"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob1_value_glue_1")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Household Glue."
+  tempJob.desc = "%d Household Glue."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_glue_1"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob2_value_glue_1")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Superglue."
+  tempJob.desc = "%d Superglue."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_glue_2"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob1_value_glue_2")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Superglue."
+  tempJob.desc = "%d Superglue."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_glue_2"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob2_value_glue_2")
+
+  tempJob = nil
+
+
+  local tempJob = {}
+
+  tempJob.name = "%d Texture Glue."
+  tempJob.desc = "%d Texture Glue."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_glue_3"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob1_value_glue_3")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Texture Glue."
+  tempJob.desc = "%d Texture Glue."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_glue_3"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob2_value_glue_3")
+
+  tempJob = nil
+
+
+  local tempJob = {}
+
+  tempJob.name = "%d Universal Glue."
+  tempJob.desc = "%d Universal Glue."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_glue_4"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob1_value_glue_4")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Universal Glue."
+  tempJob.desc = "%d Universal Glue."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_glue_4"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob2_value_glue_4")
+
+  tempJob = nil
+
+
+  local tempJob = {}
+
+  tempJob.name = "%d Military-Grade Weapon Cleaner."
+  tempJob.desc = "%d Military-Grade Weapon Cleaner."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_guncleaner"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob1_value_guncleaner")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Military-Grade Weapon Cleaner."
+  tempJob.desc = "%d Military-Grade Weapon Cleaner."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_guncleaner"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob2_value_guncleaner")
+
+  tempJob = nil
+
+
+  local tempJob = {}
+
+  tempJob.name = "%d Civilian-Grade Gun Oil."
+  tempJob.desc = "%d Civilian-Grade Gun Oil."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_gunoil"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob1_value_gunoil")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Civilian-Grade Gun Oil."
+  tempJob.desc = "%d Civilian-Grade Gun Oil."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_gunoil"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob2_value_gunoil")
+
+  tempJob = nil
+
+
+  local tempJob = {}
+
+  tempJob.name = "%d Weapon Lubricant Spray."
+  tempJob.desc = "%d Weapon Lubricant Spray."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_gunspray"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob1_value_gunspray")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Weapon Lubricant Spray."
+  tempJob.desc = "%d Weapon Lubricant Spray."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_gunspray"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob2_value_gunspray")
+
+  tempJob = nil
+
+
+  local tempJob = {}
+
+  tempJob.name = "%d Firearm Lubricant."
+  tempJob.desc = "%d Firearm Lubricant."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_lubricant"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob1_value_lubricant")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Firearm Lubricant."
+  tempJob.desc = "%d Firearm Lubricant."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_lubricant"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"repair"}
+
+  ix.jobs.register(tempJob, "ItemJob2_value_lubricant")
+
+  tempJob = nil  
 
 -----------------------------------------------------
 -----------------------------------------------------
@@ -1235,6 +1518,41 @@ do
 
   local tempJob = {}
 
+  tempJob.name = "%d Military-Grade Adhesive Tape."
+  tempJob.desc = "%d Military-Grade Adhesive Tape."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_tape_heavy"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mechanical", "town"}
+
+  ix.jobs.register(tempJob, "ItemJob1_value_tape_heavy")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Military-Grade Adhesive Tape."
+  tempJob.desc = "%d Military-Grade Adhesive Tape."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_tape_heavy"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"mechanical", "town"}
+
+  ix.jobs.register(tempJob, "ItemJob2_value_tape_heavy")
+
+  tempJob = nil
+
+
+  local tempJob = {}
+
   tempJob.name = "%d Diesel Engine."
   tempJob.desc = "%d Diesel Engine."
   tempJob.icon = "stalker/questpaper_item.png"
@@ -1337,6 +1655,39 @@ do
 
   tempJob = nil
 
+  local tempJob = {}
+
+  tempJob.name = "%d Copper Wire."
+  tempJob.desc = "%d Copper Wire."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_wire_copper"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_quest1"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 15
+  tempJob.categories = {"mechanical", "town", "electronics"}
+
+  ix.jobs.register(tempJob, "ItemJob1_value_wire_copper")
+
+  tempJob = nil
+
+  local tempJob = {}
+
+  tempJob.name = "%d Copper Wire."
+  tempJob.desc = "%d Copper Wire."
+  tempJob.icon = "stalker/questpaper_item.png"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "itemDeliver_value_wire_copper"
+  tempJob.numberRec = 2
+  tempJob.reward = {{"kit_quest2"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 20
+  tempJob.categories = {"mechanical", "town", "electronics"}
+
+  ix.jobs.register(tempJob, "ItemJob2_value_wire_copper")
+
+  tempJob = nil
 
   local tempJob = {}
 
@@ -1676,8 +2027,6 @@ do
   tempJob = nil
 
 
-  -- UNFINISHED
-  
   local tempJob = {}
 
   tempJob.name = "%d Empty Noteblock."
