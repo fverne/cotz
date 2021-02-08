@@ -208,7 +208,7 @@ function PANEL:Init()
 
 		logoPanel:SetTall(logoImage:GetTall() + padding)
 	else
-		local newHeight = padding
+		--[[local newHeight = padding
 		local subtitle = L2("schemaDesc") or Schema.description
 
 		local titleLabel = logoPanel:Add("DLabel")
@@ -232,7 +232,7 @@ function PANEL:Init()
 			newHeight = newHeight + subtitleLabel:GetTall()
 		end
 
-		logoPanel:SetTall(newHeight)
+		logoPanel:SetTall(newHeight) ]]--
 	end
 
 	-- button list
