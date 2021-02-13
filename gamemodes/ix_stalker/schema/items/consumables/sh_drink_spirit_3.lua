@@ -3,7 +3,7 @@ ITEM.description = "A bottle with a clear golden yellow substance inside."
 ITEM.longdesc = "Matured for at least 12 years in American and Spanish oak casks, this single malt Scotch whisky possesses Glenfiddich’s signature sweet and fruity essence, this single malt lingers with an aroma of pear and notes of butterscotch, cream and malt, dwelling on the palate with a subtle oak flavour. Glenfiddich 12 Year Old has been crafted to endure a long, smooth and mellow finish, ensuring it is always easily enjoyed."
 ITEM.model = "models/weapons4/w_kona2.mdl"
 
-ITEM.price = 1
+ITEM.price = 3200
 ITEM.width = 1
 ITEM.height = 2
 ITEM.weight = 0.230

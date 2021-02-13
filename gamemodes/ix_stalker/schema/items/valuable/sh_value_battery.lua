@@ -1,11 +1,11 @@
 ITEM.name = "1.5 Volt Battery"
 ITEM.description = "AA battery."
-ITEM.longdesc = ""
+ITEM.longdesc = "Small AA batteries, often used for powering flashlights and other small electronic devices. Fetches a small price."
 ITEM.model = "models/illusion/eftcontainers/aabattery.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 50
+ITEM.price = 46
 
 ITEM.quantity = 20
 

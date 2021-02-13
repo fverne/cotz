@@ -3,7 +3,7 @@ ITEM.description = "A bottle of beer"
 ITEM.longdesc = "Lvivske is the oldest Ukrainian beer, which monks began brewing back in 1715. Nowadays, Lvivske has become part of the Ukrainian history. It is a symbol of the epoch and pride of Ukraine.\nLvivske Porter is a special type of dark beer with a touch of malt and wine smack. This hop beverage has a unique bouquet which has been polished for centuries."
 ITEM.model = "models/weapons4/w_pivo1.mdl"
 
-ITEM.price = 1
+ITEM.price = 75
 ITEM.width = 1
 ITEM.height = 2
 ITEM.weight = 0.500

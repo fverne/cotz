@@ -3,7 +3,7 @@ ITEM.description = "An old hip flask."
 ITEM.longdesc = "An extremely strong alcohol, made in the zone. Some STALKERs use it as radiation removal in a pinch. It's contained within an old hip flask, which smells of old leather." 
 ITEM.model = "models/lostsignalproject/items/consumable/flask3.mdl"
 
-ITEM.price = 1
+ITEM.price = 160
 ITEM.width = 1
 ITEM.height = 1
 ITEM.weight = 0.200

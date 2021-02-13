@@ -1,5 +1,5 @@
-ITEM.name = "Rubber Hose"
-ITEM.description = "A rubber hose, useful for many applications."
+ITEM.name = "Plastic Hose"
+ITEM.description = "A plastic hose, useful for many applications."
 ITEM.longdesc = ""
 ITEM.model = "models/illusion/eftcontainers/hose.mdl"
 

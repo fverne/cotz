@@ -5,7 +5,7 @@ ITEM.model = "models/lostsignalproject/items/misc/book1.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 0
+ITEM.price = 2010
 
 ITEM.flatweight = 0.400
 

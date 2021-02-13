@@ -1,6 +1,6 @@
 ITEM.name = "Silicone Tubing"
 ITEM.description = "A tube made of silicone, very useful in many crafting projects."
-ITEM.longdesc = ""
+ITEM.longdesc = "A thin silicone tube, often used in medical settings. Has also found use in moonshining operations within the zone."
 ITEM.model = "models/illusion/eftcontainers/silicontube.mdl"
 
 ITEM.width = 2

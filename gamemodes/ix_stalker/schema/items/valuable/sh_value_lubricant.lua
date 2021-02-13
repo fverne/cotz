@@ -5,9 +5,9 @@ ITEM.model = "models/lostsignalproject/items/repair/grease.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 0
+ITEM.price = 1350
 
-ITEM.flatweight = 0.290
+ITEM.flatweight = 0.100
 
 ITEM.exRender = true
 ITEM.iconCam = {

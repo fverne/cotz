@@ -3,7 +3,7 @@ ITEM.description = "A can of beer"
 ITEM.longdesc = "Obolon Strong is a lager beer with a harmony of bitter and light taste. The singularity of the recipe of this light beer lies in the fact that besides traditional ingredients such as barley malt, hops and water Obolon Strong contains maltose syrup. This gives the beer a pleasant light taste, sufficient alcohol content and lower carbohydrate content at the same time. It has a nice light flavor, and sufficient strength. The alchol content is between 6 and 14 percent."
 ITEM.model = "models/lostsignalproject/items/consumable/drink_water.mdl"
 
-ITEM.price = 1
+ITEM.price = 40
 ITEM.width = 1
 ITEM.height = 1
 ITEM.weight = 0.500

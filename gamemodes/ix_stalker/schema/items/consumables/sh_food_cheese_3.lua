@@ -4,7 +4,7 @@ ITEM.longdesc = "This massive block of 'Russian Cheese' brand cheese is semi-sol
 ITEM.model = "models/lostsignalproject/items/quest/resistors.mdl"
 ITEM.material = "models/antlion/antlion_innards"
 
-ITEM.price = 1
+ITEM.price = 140
 ITEM.width = 2
 ITEM.height = 1
 ITEM.weight = 0.090

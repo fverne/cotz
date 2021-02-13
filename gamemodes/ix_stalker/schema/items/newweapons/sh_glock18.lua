@@ -4,7 +4,7 @@ ITEM.longdesc = "The Glock is an Austrian polymer handgun, famous for it's price
 ITEM.model = "models/cw2_g18/w_dmg_glock.mdl"
 ITEM.class = "cw_glock18"
 ITEM.weaponCategory = "secondary"
-ITEM.price = 4800
+ITEM.price = 6700
 ITEM.width = 2
 ITEM.height = 1
 

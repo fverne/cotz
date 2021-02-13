@@ -4,7 +4,7 @@ ITEM.longdesc = "A hard block of parmesan cheese, well aged. Popular with older 
 ITEM.model = "models/lostsignalproject/items/consumable/conserva.mdl"
 ITEM.material = "models/antlion/antlion_innards"
 
-ITEM.price = 1
+ITEM.price = 65
 ITEM.width = 1
 ITEM.height = 1
 ITEM.weight = 0.065

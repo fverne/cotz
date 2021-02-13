@@ -1,11 +1,11 @@
 ITEM.name = "Handdrawn Anomaly Map"
 ITEM.description = "A hastily drawn, and soaked, anomaly map."
-ITEM.longdesc = "This map describes the anomalies quite detailed of an anomaly field. It's quite useless, as anomalies move between emissions."
+ITEM.longdesc = "A handdrawn map detailing the location of anomalies and their migration patterns in an indeterminate area. It might be valuable to someone studying anomaly positions."
 ITEM.model = "models/lostsignalproject/items/quest/notes_paper_1.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 0
+ITEM.price = 1200
 
 ITEM.flatweight = 0.180
 

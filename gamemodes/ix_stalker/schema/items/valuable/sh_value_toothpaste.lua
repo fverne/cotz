@@ -1,6 +1,6 @@
 ITEM.name = "Toothpaste"
 ITEM.description = "A tube of toothpaste."
-ITEM.longdesc = ""
+ITEM.longdesc = "A tube of toothpaste. Handy for keeping oral hygiene."
 ITEM.model = "models/illusion/eftcontainers/toothpaste.mdl"
 
 ITEM.width = 1

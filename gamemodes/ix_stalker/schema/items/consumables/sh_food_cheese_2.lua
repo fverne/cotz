@@ -4,7 +4,7 @@ ITEM.longdesc = "A Ukrainian produced Swiss style cheese. This semi-hard cheese 
 ITEM.model = "models/lostsignalproject/items/consumable/conserva.mdl"
 ITEM.material = "models/antlion/antlion_innards"
 
-ITEM.price = 1
+ITEM.price = 80
 ITEM.width = 1
 ITEM.height = 1
 ITEM.weight = 0.065

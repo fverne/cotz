@@ -3,7 +3,7 @@ ITEM.description = "An aluminium can with energy drink inside."
 ITEM.longdesc = "Euro Shopper is a discount brand of everyday commodities developed and marketed by AMS Sourcing B.V.. It was introduced to the market in 1996 and branded products have been sold by some of the AMS members in different countries in Europe ever since. This can most likely originates from either Finland or Lithuania."
 ITEM.model = "models/weapons4/w_energy2.mdl"
 
-ITEM.price = 1
+ITEM.price = 70
 ITEM.width = 1
 ITEM.height = 1
 ITEM.weight = 0.250

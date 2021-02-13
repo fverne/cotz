@@ -3,7 +3,7 @@ ITEM.description = "A loaf of bread"
 ITEM.longdesc = "No bakers have ever been identified in the Zone, but this bread is neither contaminated nor radioactive, being fresh and quite edible. \nAt least no complaints have been reported thus far."
 ITEM.model = "models/lostsignalproject/items/consumable/bread_spoiled.mdl"
 
-ITEM.price = 1
+ITEM.price = 15
 ITEM.width = 1
 ITEM.height = 1
 ITEM.weight = 0.220

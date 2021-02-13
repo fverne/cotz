@@ -3,7 +3,7 @@ ITEM.description = "A hip flask with a clear substance inside."
 ITEM.longdesc = "This hip flask contains zone-produced vodka produced from relatively good ingredients."
 ITEM.model = "models/lostsignalproject/items/consumable/flask4.mdl"
 
-ITEM.price = 450
+ITEM.price = 255
 ITEM.width = 1
 ITEM.height = 2
 ITEM.weight = 0.200

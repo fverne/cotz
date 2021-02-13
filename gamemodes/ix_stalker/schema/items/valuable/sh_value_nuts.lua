@@ -1,11 +1,11 @@
 ITEM.name = "Nuts"
 ITEM.description = "A bunch of metal nuts."
-ITEM.longdesc = ""
+ITEM.longdesc = "Nuts for fastening bolts and screws."
 ITEM.model = "models/illusion/eftcontainers/nuts.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 23
+ITEM.price = 20
 
 ITEM.quantity = 20
 

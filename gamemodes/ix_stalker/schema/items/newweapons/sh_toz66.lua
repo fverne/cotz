@@ -5,7 +5,7 @@ ITEM.model = "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl"
 
 ITEM.width = 5
 ITEM.height = 1
-ITEM.price = 9300
+ITEM.price = 7900
 
 ITEM.class = "cw_toz66"
 ITEM.weaponCategory = "primary"

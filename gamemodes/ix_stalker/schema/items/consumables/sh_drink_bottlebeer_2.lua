@@ -3,7 +3,7 @@ ITEM.description = "A large bottle of beer"
 ITEM.longdesc = "Lvivske Svitle is a bright premium-class camp, with impeccable quality, based on centuries-old traditions and professional secrets of Lviv brewers. The secrets of the recipe of this beer were passed down from generation to generation. The formulation of the camp includes water, light barley malt and hops. The lager has a pure malt aroma and a unique, light hop flavor."
 ITEM.model = "models/props_junk/garbage_glassbottle001a.mdl"
 
-ITEM.price = 1
+ITEM.price = 95
 ITEM.width = 1
 ITEM.height = 3
 ITEM.weight = 0.500

@@ -3,7 +3,7 @@ ITEM.description = "A can with something edible inside"
 ITEM.longdesc = "Canned sweet corn imported from the outside. Can be eaten as it is, but there are some who use it as a soup ingredient."
 ITEM.model = "models/lostsignalproject/items/consumable/corn.mdl"
 
-ITEM.price = 1
+ITEM.price = 15
 ITEM.width = 1
 ITEM.height = 1
 ITEM.weight = 0.250

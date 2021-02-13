@@ -3,7 +3,7 @@ ITEM.description = "A large bottle of beer"
 ITEM.longdesc = "Zaporiszke is a light beer. It has a clean and fresh malt flavor combined with a pleasant hop bitterness, sweetish flavor and a spicy-fruity aftertaste."
 ITEM.model = "models/props_junk/garbage_glassbottle001a.mdl"
 
-ITEM.price = 1
+ITEM.price = 125
 ITEM.width = 1
 ITEM.height = 3
 ITEM.weight = 0.500

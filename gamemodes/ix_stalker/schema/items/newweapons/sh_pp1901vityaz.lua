@@ -5,7 +5,7 @@ ITEM.model = ("models/weapons/w_smg_pp19vityaz.mdl")
 ITEM.class = "cw_pp1901_vityaz"
 ITEM.weaponCategory = "primary"
 ITEM.width = 3
-ITEM.price = 100
+ITEM.price = 17500
 ITEM.height = 2
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex", "md_schmidt_shortdot", "md_tundra9mm"}
 

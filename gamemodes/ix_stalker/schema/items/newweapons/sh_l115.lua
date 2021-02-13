@@ -5,7 +5,7 @@ ITEM.model = "models/weapons/w_cstm_l96.mdl"
 ITEM.class = "cw_l115"
 ITEM.weaponCategory = "primary"
 ITEM.width = 6
-ITEM.price = 115000
+ITEM.price = 65000
 ITEM.height = 2
 
 ITEM.canAttach = false

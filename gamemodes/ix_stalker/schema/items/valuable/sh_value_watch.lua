@@ -1,11 +1,11 @@
 ITEM.name = "Watch"
 ITEM.description = "A nice looking watch."
-ITEM.longdesc = ""
+ITEM.longdesc = "A nice watch. Seems to be made of gilded silver."
 ITEM.model = "models/illusion/eftcontainers/rolex.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 9500
+ITEM.price = 6500
 
 ITEM.flatweight = 0.180
 

@@ -3,7 +3,7 @@ ITEM.description = "A Ukrainian pack of rations"
 ITEM.longdesc = "This Ukrainian combat ration is based on a previous Russian version, and comprises commercially available cans and dried food items packed together in a sectioned box (resembling a takeout tray) made of very thin green plastic. Contains all that is necessary to provide a healthy adult with all calories and minerals needed during a single day."
 ITEM.model = "models/lostsignalproject/items/consumable/ration_ukr.mdl"
 
-ITEM.price = 1
+ITEM.price = 640
 ITEM.width = 2
 ITEM.height = 1
 ITEM.weight = 0.56

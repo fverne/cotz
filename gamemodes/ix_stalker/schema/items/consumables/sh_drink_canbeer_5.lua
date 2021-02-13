@@ -3,7 +3,7 @@ ITEM.description = "A can of beer"
 ITEM.longdesc = "Baltika No. 7 was launched on the occasion of the Goodwill Games in Saint Petersburg in 1994. This brew is made brewed from selected malt and a mixture of the best hop varieties. The alcohol content of Baltika No. 7 is slightly higher than in classic lager beers, while the hoppy notes are less pronounced. Baltika No. 7 is considered one of the most advanced and innovative brands of the Baltika portfolio."
 ITEM.model = "models/weapons4/w_pivo3.mdl"
 
-ITEM.price = 1
+ITEM.price = 85
 ITEM.width = 1
 ITEM.height = 2
 ITEM.weight = 0.450

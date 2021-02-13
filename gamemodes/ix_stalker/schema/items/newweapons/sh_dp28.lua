@@ -4,7 +4,7 @@ ITEM.longdesc = "The Degtyaryov machine gun or DP is a light machine gun firing 
 ITEM.model = ("models/weapons/w_ro2_dp28.mdl")
 ITEM.class = "cw_dp28"
 ITEM.weaponCategory = "primary"
-ITEM.price = 555000
+ITEM.price = 35600
 ITEM.width = 8
 ITEM.height = 3
 

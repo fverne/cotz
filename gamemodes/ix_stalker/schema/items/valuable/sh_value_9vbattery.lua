@@ -1,11 +1,11 @@
 ITEM.name = "9 Volt Battery"
 ITEM.description = "Worn and dirty, but seems to be in working condition."
-ITEM.longdesc = ""
+ITEM.longdesc = "A 9 volt battery, used for powering smaller electronic devices."
 ITEM.model = "models/lostsignalproject/items/misc/battery.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 0
+ITEM.price = 90
 
 ITEM.quantity = 10
 

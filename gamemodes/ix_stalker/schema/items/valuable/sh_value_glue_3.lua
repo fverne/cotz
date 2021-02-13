@@ -5,9 +5,9 @@ ITEM.model = "models/lostsignalproject/items/repair/glue_b.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 0
+ITEM.price = 340
 
-ITEM.flatweight = 0.090
+ITEM.flatweight = 0.003
 
 ITEM.exRender = true 
 ITEM.iconCam = {

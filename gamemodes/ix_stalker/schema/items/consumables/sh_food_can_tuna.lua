@@ -3,7 +3,7 @@ ITEM.description = "A can with something edible inside"
 ITEM.longdesc = "A tin can of tuna. Can be used in salads, sandwiches or soups, and it can even be eaten straight out of the can."
 ITEM.model =  "models/lostsignalproject/items/consumable/conserva.mdl"
 
-ITEM.price = 1
+ITEM.price = 45
 ITEM.width = 1
 ITEM.height = 1
 ITEM.weight = 0.250

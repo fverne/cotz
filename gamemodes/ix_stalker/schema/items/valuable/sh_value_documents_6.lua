@@ -5,7 +5,7 @@ ITEM.model = "models/lostsignalproject/items/quest/notes_letter_3.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 0
+ITEM.price = 570
 
 ITEM.flatweight = 0.175
 

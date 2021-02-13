@@ -1,6 +1,6 @@
 ITEM.name = "Gasoline Can"
 ITEM.description = "A can of gasoline for a car."
-ITEM.longdesc = ""
+ITEM.longdesc = "A full jerrycan of gasoline. Used in the zone for powering a generators."
 ITEM.model = "models/illusion/eftcontainers/gasoline.mdl"
 
 ITEM.width = 2

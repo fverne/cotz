@@ -1,6 +1,6 @@
 ITEM.name = "Pack of Nails"
 ITEM.description = "A pack of common nails."
-ITEM.longdesc = ""
+ITEM.longdesc = "A pack of 50 nails, useful in construction and repairs. Used to keep the buildings around STALKER camps in decent shape."
 ITEM.model = "models/illusion/eftcontainers/nailpack.mdl"
 
 ITEM.width = 1

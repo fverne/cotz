@@ -3,7 +3,7 @@ ITEM.description = "A bottle with a clear golden yellow substance inside."
 ITEM.longdesc = "Nemiroff is a brand with a 150-year history presented in 5 continents. Its production dates back to 1872 in Nemyriv town, Ukraine. This vodka is nice and smooth, spiced with an exciting mixture of honey and hot peppers, giving a real kick when drunk."
 ITEM.model = "models/lostsignalproject/items/consumable/vodka_nemiroff.mdl"
 
-ITEM.price = 1
+ITEM.price = 575
 ITEM.width = 1
 ITEM.height = 2
 ITEM.weight = 0.250

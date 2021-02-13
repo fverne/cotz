@@ -1,6 +1,6 @@
 ITEM.name = "Electric Light Bulb"
 ITEM.description = "An electric light bulb for lighting up rooms."
-ITEM.longdesc = ""
+ITEM.longdesc = "An incandescent electric light bulb. Used both inside and outside the zone, and as such it is somewhat valuable."
 ITEM.model = "models/illusion/eftcontainers/lightbulb.mdl"
 
 ITEM.width = 1

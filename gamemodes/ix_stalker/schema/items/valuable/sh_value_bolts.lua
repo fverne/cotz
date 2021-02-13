@@ -1,11 +1,11 @@
 ITEM.name = "Bolts"
 ITEM.description = "A bunch of metal bolts."
-ITEM.longdesc = ""
+ITEM.longdesc = "Bolts, most often used in construction and maintenance work."
 ITEM.model = "models/illusion/eftcontainers/screwnutbolt.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 45
+ITEM.price = 26
 
 ITEM.quantity = 20
 

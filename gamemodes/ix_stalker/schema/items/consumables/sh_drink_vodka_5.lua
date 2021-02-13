@@ -3,7 +3,7 @@ ITEM.description = "A bottle with a clear substance inside."
 ITEM.longdesc = "Ukrainian high-shelf vodka. Goes down incredibly smooth, and pulling one of these out of your bag will make you the most popular guy in your camp."
 ITEM.model = "models/lostsignalproject/items/consumable/vodka_putinka.mdl"
 
-ITEM.price = 1
+ITEM.price = 1260
 ITEM.width = 1
 ITEM.height = 2
 ITEM.weight = 0.250

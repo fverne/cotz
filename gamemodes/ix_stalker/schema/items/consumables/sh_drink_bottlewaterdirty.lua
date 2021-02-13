@@ -3,14 +3,14 @@ ITEM.description = "A dirty water bottle."
 ITEM.longdesc = "A plastic bottle filled with slightly dirty water. Has probably been filled in some pond in the zone."
 ITEM.model = "models/lostsignalproject/items/consumable/tea.mdl"
 
-ITEM.price = 1
+ITEM.price = 15
 ITEM.width = 1
 ITEM.height = 2
 ITEM.weight = 0.250
 ITEM.flatweight = 0.025
 
 ITEM.thirst = 17
-ITEM.quantity = 1
+ITEM.quantity = 2
 
 ITEM.sound = "stalkersound/inv_drink_beak.ogg"
 ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/bottlewaterdirty.png")
@@ -21,5 +21,3 @@ ITEM:Hook("use", function(item)
 end)
 
 ITEM:DecideFunction()
-
-ITEM.weight = 0.530

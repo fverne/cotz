@@ -1,6 +1,6 @@
 ITEM.name = "HDD"
 ITEM.description = "A hard disk drive for a computer."
-ITEM.longdesc = ""
+ITEM.longdesc = "A 250GB hard disk drive from a computer. The information on this might be of interest to some people."
 ITEM.model = "models/illusion/eftcontainers/hdd.mdl"
 
 ITEM.width = 1

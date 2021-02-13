@@ -3,7 +3,7 @@ ITEM.description = "A can of beer"
 ITEM.longdesc = "The easily recognizable label of Chernihivske beer is very common for a drinks assortment of any Ukrainian store. This lager-type beer has a specific refreshing taste, ensured by traditional brewing recipes of old Chernihiv city. This brand, appreciated by many Ukrainians who value national product, is represented on the market by many different kinds of beer. This one is the special 'White' type, which was the first unfiltered beer on the Ukrainian market."
 ITEM.model = "models/lostsignalproject/items/consumable/drink_water.mdl"
 
-ITEM.price = 1
+ITEM.price = 30
 ITEM.width = 1
 ITEM.height = 1
 ITEM.weight = 0.500

@@ -3,7 +3,7 @@ ITEM.description = "A bottle of beer"
 ITEM.longdesc = "The story of Tuborg starts in Hellerup, north of Copenhagen, where the Tuborg Brewery brewed Denmark’s first pilsner-type beer in 1880 and packaged it in bottles with a distinctive green label. It instantly became popular with the Danes.\nTuborg Green is a bottom-fermented lager beer. It's brewed on lager malt, a slightly roasted, bright type of malt which results in the well-known mild, fresh taste and aroma of flowers and cereal. The beer is medium rich and lively with a moderate bitterness in the aftertaste. Today, Tuborg has grown to become an international brand enjoyed in more than 70 countries around the world and known for its exceptional quality and refreshing taste, even in Ukraine, where the beer is also brewed."
 ITEM.model = "models/lostsignalproject/items/consumable/beer.mdl"
 
-ITEM.price = 1
+ITEM.price = 45
 ITEM.width = 1
 ITEM.height = 2
 ITEM.weight = 0.330

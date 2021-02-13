@@ -1,6 +1,6 @@
 ITEM.name = "Diesel Motor Conditioner"
 ITEM.description = "A tin of conditioner and cleaner for a diesel motor."
-ITEM.longdesc = ""
+ITEM.longdesc = "A can of conditioner for a diesel motor. Handy for keeping ones diesel motors healthy."
 ITEM.model = "models/illusion/eftcontainers/fuelconditioner.mdl"
 
 ITEM.width = 2

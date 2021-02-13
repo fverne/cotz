@@ -5,7 +5,7 @@ ITEM.model = "models/weapons/w_pist_lyxn_dualb.mdl"
 ITEM.class = "cw_stoegerddshort"
 ITEM.weaponCategory = "primary"
 ITEM.width = 3
-ITEM.price = 9300
+ITEM.price = 9500
 ITEM.height = 1
 ITEM.validAttachments = {"md_rmr", "md_microt1", "md_aimpoint", "md_eotech"}
 

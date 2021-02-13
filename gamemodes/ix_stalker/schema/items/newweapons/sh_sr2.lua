@@ -5,7 +5,7 @@ ITEM.model = ("models/sr-2m veresk/sr2.mdl")
 ITEM.class = "cw_veresk"
 ITEM.weaponCategory = "primary"
 ITEM.width = 3
-ITEM.price = 7500
+ITEM.price = 18000
 ITEM.height = 2
 ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm"}
 

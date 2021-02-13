@@ -3,7 +3,7 @@ ITEM.description = "A can with something edible inside"
 ITEM.longdesc = "Pinto beans, chili peppers, onion & garlic in a zesty tomato sauce."
 ITEM.model = "models/lostsignalproject/items/consumable/chili.mdl"
 
-ITEM.price = 1
+ITEM.price = 25
 ITEM.width = 1
 ITEM.height = 1
 ITEM.weight = 0.250

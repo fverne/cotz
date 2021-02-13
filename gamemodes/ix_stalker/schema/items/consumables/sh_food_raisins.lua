@@ -3,7 +3,7 @@ ITEM.description = "A small bag containing raisins."
 ITEM.longdesc = "A small bag with raisins inside. They seem hard and dry, but edible regardless. Useful when you are on the go and need a quick snack."
 ITEM.model = "models/lostsignalproject/items/consumable/raisins.mdl"
 
-ITEM.price = 1
+ITEM.price = 125
 ITEM.width = 1
 ITEM.height = 1
 ITEM.weight = 0.070

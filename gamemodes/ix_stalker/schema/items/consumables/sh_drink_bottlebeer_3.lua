@@ -3,7 +3,7 @@ ITEM.description = "A bottle of beer"
 ITEM.longdesc = "A foamy, golden brew with a delicate flavour of hops and first-class malt. \nThe Baltika invested in a large reconstruction that made the Baltika brewery the most advanced in Russia."
 ITEM.model = "models/props_junk/GlassBottle01a.mdl"
 
-ITEM.price = 1
+ITEM.price = 60
 ITEM.width = 1
 ITEM.height = 2
 ITEM.weight = 0.150

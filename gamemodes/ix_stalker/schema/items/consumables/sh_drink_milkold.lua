@@ -3,7 +3,7 @@ ITEM.description = "A carton of milk"
 ITEM.longdesc = "An old carton of milk. It doesn't seem like it's in too good a shape. Could still be used to quench some thirst, even if it might cause some slight nausea."
 ITEM.model = "models/props_junk/garbage_milkcarton002a.mdl"
 
-ITEM.price = 1
+ITEM.price = 10
 ITEM.width = 1
 ITEM.height = 2
 ITEM.weight = 0.330

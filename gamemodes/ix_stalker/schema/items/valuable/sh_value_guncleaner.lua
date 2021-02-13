@@ -5,9 +5,9 @@ ITEM.model = "models/lostsignalproject/items/repair/solvent.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 0
+ITEM.price = 1100
 
-ITEM.flatweight = 0.315
+ITEM.flatweight = 0.150
 
 ITEM.exRender = true 
 ITEM.iconCam = {

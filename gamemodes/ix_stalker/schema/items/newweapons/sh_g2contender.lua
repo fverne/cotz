@@ -5,7 +5,7 @@ ITEM.model = "models/cw2/pistols/w_contender.mdl"
 ITEM.class = "cw_contender"
 ITEM.weaponCategory = "secondary"
 ITEM.width = 3
-ITEM.price = 1500
+ITEM.price = 600
 ITEM.height = 1
 ITEM.validAttachments = {"md_aimpoint", "md_eotech", "md_microt1", "md_saker"}
 

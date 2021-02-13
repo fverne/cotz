@@ -3,7 +3,7 @@ ITEM.description = "A bar of chocolate"
 ITEM.longdesc = "The favorite treat of many stalkers. An excellent remedy for a bad mood."
 ITEM.model = "models/lostsignalproject/items/consumable/chocolate.mdl"
 
-ITEM.price = 1
+ITEM.price = 300
 ITEM.width = 2
 ITEM.height = 1
 ITEM.weight = 0.120

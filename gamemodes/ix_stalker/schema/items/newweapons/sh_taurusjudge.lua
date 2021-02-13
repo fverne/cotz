@@ -5,7 +5,7 @@ ITEM.model = "models/weapons/cwc_judge/w_khri_410jury.mdl"
 ITEM.class = "cw_taurusjudge"
 ITEM.weaponCategory = "secondary"
 ITEM.width = 2
-ITEM.price = 1500
+ITEM.price = 6800
 ITEM.height = 1
 ITEM.canAttach = false
 

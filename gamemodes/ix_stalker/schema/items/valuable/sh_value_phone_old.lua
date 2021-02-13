@@ -1,6 +1,6 @@
 ITEM.name = "Old Smartphone (Broken)"
 ITEM.description = "A broken, old smartphone."
-ITEM.longdesc = ""
+ITEM.longdesc = "An older model of a smartphone. The screen glass is broken, and the battery is almost completely discharged, but it still seems to work. It could fetch a decent price."
 ITEM.model = "models/illusion/eftcontainers/gphone.mdl"
 
 ITEM.width = 1

@@ -3,7 +3,7 @@ ITEM.description = "A small, white can bottle."
 ITEM.longdesc = "Sparkling water for thirsty stalkers. It has some exhilarating effect when you're tired."
 ITEM.model = "models/lostsignalproject/items/consumable/drink_water.mdl"
 
-ITEM.price = 1
+ITEM.price = 70
 ITEM.width = 1
 ITEM.height = 1
 ITEM.weight = 0.330

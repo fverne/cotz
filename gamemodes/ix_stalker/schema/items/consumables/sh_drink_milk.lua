@@ -3,7 +3,7 @@ ITEM.description = "A carton of milk"
 ITEM.longdesc = "A carton of UHT milk. Should probably be drunk quickly after opening, before it goes off. It still seems fresh."
 ITEM.model = "models/props_junk/garbage_milkcarton002a.mdl"
 
-ITEM.price = 1
+ITEM.price = 90
 ITEM.width = 1
 ITEM.height = 2
 ITEM.weight = 0.330

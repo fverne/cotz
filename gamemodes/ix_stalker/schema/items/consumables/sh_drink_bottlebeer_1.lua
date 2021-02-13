@@ -3,7 +3,7 @@ ITEM.description = "A large bottle of beer"
 ITEM.longdesc = "Ochakovo Beer is not subject to pasteurization. \nLong-term storage is based on cold filtering technology with the use of fine-meshed polymeric membranes which filter out even the smallest yeast."
 ITEM.model = "models/props_junk/garbage_glassbottle001a.mdl"
 
-ITEM.price = 1
+ITEM.price = 140
 ITEM.width = 1
 ITEM.height = 3
 ITEM.weight = 0.500
