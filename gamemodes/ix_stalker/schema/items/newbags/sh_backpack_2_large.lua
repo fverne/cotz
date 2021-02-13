@@ -2,10 +2,10 @@ ITEM.name = "Large Modern Military Backpack (USA)"
 ITEM.description = "A large backpack. Features compartments for easy storage of your valuables."
 ITEM.model = "models/kek1ch/sumka2.mdl"
 
-ITEM.price = 12000
+ITEM.price = 13500
 ITEM.width = 2
 ITEM.height = 2
-ITEM.weight = 1.25
+ITEM.weight = 1.250
 
 ITEM.carryinc = 20
 ITEM.outfitCategory = "backpack"

@@ -6,7 +6,7 @@ ITEM.category = "Electronics"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 400
+ITEM.price = 1100
 ITEM.weight = 0.720
 
 ITEM.isAnomalydetector = true

@@ -4,7 +4,7 @@ ITEM.model = "models/cw2/attachments/cobra_m2.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 5000
+ITEM.price = 7000
 ITEM.weight = 0.2
 
 ITEM.attachName = "md_tundra9mm"

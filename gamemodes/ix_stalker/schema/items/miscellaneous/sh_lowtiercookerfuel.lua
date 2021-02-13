@@ -9,6 +9,8 @@ ITEM.quantity = 3
 ITEM.splitSize = {1, 2}
 ITEM.quantdesc = "This bag has enough charcoal for another %d refills."
 
+ITEM.price = 500
+
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
 		draw.SimpleText(

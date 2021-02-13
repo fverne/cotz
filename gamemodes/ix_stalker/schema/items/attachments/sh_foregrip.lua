@@ -7,7 +7,7 @@ ITEM.attachName = "md_foregrip"
 ITEM.upgradeIcon = Material("materials/vgui/ui/stalker/weaponupgrades/grip.png")
 ITEM.attachSlot = 3
 --ITEM.busflag = "SPECIAL3"
-ITEM.price = 3500
+ITEM.price = 1800
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.weight = 0.210

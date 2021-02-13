@@ -4,7 +4,7 @@ ITEM.model = "models/lostsignalproject/items/devices/tactical_torch.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 2500
+ITEM.price = 1950
 ITEM.weight = 0.310
 
 ITEM.img = ix.util.GetMaterial("cotz/ui/icons/misc_headlamp.png")

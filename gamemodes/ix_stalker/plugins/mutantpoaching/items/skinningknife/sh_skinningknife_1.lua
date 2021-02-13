@@ -2,7 +2,7 @@ ITEM.name = "Homemade Knife"
 ITEM.description = "A sharpened piece of iron with a makeshift handle."
 ITEM.model = "models/weapons/w_knife_ct.mdl"
 
-ITEM.price = 500
+ITEM.price = 850
 ITEM.weight = 0.450
 
 ITEM.knifetier = 0

@@ -4,7 +4,7 @@ ITEM.model = "models/weapons/w_binoculars_usa.mdl"
 
 ITEM.height = 1
 ITEM.width = 1
-ITEM.price = 20000
+ITEM.price = 15000
 
 ITEM.weight = 0.640
 

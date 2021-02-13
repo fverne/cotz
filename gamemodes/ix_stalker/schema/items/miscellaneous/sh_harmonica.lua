@@ -3,7 +3,7 @@ ITEM.description = "A playable harmonica."
 ITEM.model = "models/lostsignalproject/items/misc/harmonica.mdl"
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 500
+ITEM.price = 400
 ITEM.img = ix.util.GetMaterial("vgui/hud/harmonica.png")
 
 ITEM.sounds = {

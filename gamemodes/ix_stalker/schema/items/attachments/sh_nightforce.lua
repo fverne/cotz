@@ -7,7 +7,7 @@ ITEM.attachName = "md_nightforce_nxs"
 ITEM.model = "models/cw2/attachments/pso.mdl"
 ITEM.upgradeIcon = Material("materials/vgui/ui/stalker/weaponupgrades/8xmag.png")
 ITEM.attachSlot = 1
-ITEM.price = 6000
+ITEM.price = 13000
 
 ITEM.weight = 0.788
 

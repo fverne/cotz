@@ -4,7 +4,7 @@ ITEM.model = "models/weapons/w_flashlight_zm.mdl"
 
 ITEM.height = 1
 ITEM.width = 2
-ITEM.price = 225
+ITEM.price = 230
 ITEM.weight = 0.600
 
 ITEM.class = "weapon_flashlight"

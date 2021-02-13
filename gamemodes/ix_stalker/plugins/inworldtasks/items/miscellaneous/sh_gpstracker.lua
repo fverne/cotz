@@ -1,7 +1,7 @@
 ITEM.name = "GPS Tracker"
 ITEM.description = "A small sensor that keeps track of its own position. Moving North will increase your Latitude, and moving East will increase your Longtitude in the zone."
 ITEM.model = "models/lostsignalproject/items/devices/sensor_b.mdl"
-ITEM.price = 7500
+ITEM.price = 1800
 ITEM.flag = "A"
 ITEM.weight = 0.100
 

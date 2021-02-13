@@ -2,10 +2,10 @@ ITEM.name = "Large Zone Survival Backpack"
 ITEM.description = "A large backpack. Featuring large compartments for storage of items, as well as being very comfortable."
 ITEM.model = "models/kek1ch/sumka4.mdl"
 
-ITEM.price = 30000
+ITEM.price = 32500
 ITEM.width = 2
 ITEM.height = 2
-ITEM.weight = 1.55
+ITEM.weight = 1.550
 
 ITEM.carryinc = 30
 ITEM.outfitCategory = "backpack"

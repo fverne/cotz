@@ -8,7 +8,7 @@ ITEM.model = "models/cw2/attachments/pso.mdl"
 ITEM.upgradeIcon = Material("materials/vgui/ui/stalker/weaponupgrades/4xmag.png")
 ITEM.attachSlot = 1
 --ITEM.busflag = "SPECIAL3_1"
-ITEM.price = 5000
+ITEM.price = 12000
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.weight = 0.280

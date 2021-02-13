@@ -4,7 +4,7 @@ ITEM.longdesc = "This jar contains various amounts of smaller items from outside
 ITEM.model = "models/lostsignalproject/items/misc/jar.mdl"
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 250
+ITEM.price = 200
 ITEM.flag = "A"
 
 

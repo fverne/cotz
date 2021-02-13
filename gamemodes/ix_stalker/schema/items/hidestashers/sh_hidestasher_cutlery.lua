@@ -9,6 +9,8 @@ ITEM.flag = "A"
 ITEM.weight = 0.550
 ITEM.quantity = 5
 
+ITEM.price = 200
+
 ITEM.exRender = true
 ITEM.iconCam = {
 	pos = Vector(0, 0, 200),

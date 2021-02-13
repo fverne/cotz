@@ -2,10 +2,10 @@ ITEM.name = "Modern Military Backpack (Russian)"
 ITEM.description = "A backpack. Features compartments for easy storage of your valuables."
 ITEM.model = "models/kek1ch/sumka3.mdl"
 
-ITEM.price = 1500
+ITEM.price = 1100
 ITEM.width = 2
 ITEM.height = 2
-ITEM.weight = 1.07
+ITEM.weight = 1.070
 
 ITEM.carryinc = 15
 ITEM.outfitCategory = "backpack"

@@ -5,7 +5,7 @@ ITEM.model = "models/kek1ch/sumka4.mdl"
 ITEM.price = 20000
 ITEM.width = 2
 ITEM.height = 2
-ITEM.weight = 1.35
+ITEM.weight = 1.350
 
 ITEM.carryinc = 25
 ITEM.outfitCategory = "backpack"

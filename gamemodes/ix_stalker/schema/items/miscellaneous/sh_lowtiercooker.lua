@@ -7,6 +7,8 @@ ITEM.height = 2
 ITEM.cookertier = 1
 ITEM.sound = "stalkersound/inv_cooking2.ogg"
 
+ITEM.price = 2500
+
 -- Inventory drawing
 if (CLIENT) then
 	local bar = Material("cotz/panels/hp1.png", "noclamp smooth") 
