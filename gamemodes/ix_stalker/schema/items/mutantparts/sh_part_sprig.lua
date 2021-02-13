@@ -6,5 +6,6 @@ ITEM.longdesc = "Sprigs can lie completely motionless for days at a time, being 
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 1800
+ITEM.pricepertier = 500
 ITEM.baseweight = 0.100
 ITEM.varweight = 0.010

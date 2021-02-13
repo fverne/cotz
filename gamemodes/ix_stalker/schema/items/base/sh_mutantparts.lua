@@ -7,6 +7,7 @@ ITEM.model = "models/Gibs/HGIBS.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 0
+ITEM.pricepertier = 0
 
 ITEM.baseweight = 1.000
 ITEM.varweight  = 0.500
@@ -47,4 +48,8 @@ function ITEM:OnInstanced(invID, x, y)
     if(!self:GetData("weight")) then
         self:SetData("weight", self.baseweight + math.random(-self.varweight, self.varweight))
     end
+end
+
+function ITEM:GetPrice()
+	return self.price + self.pricepertier * self:GetData("tier", 0)
 end

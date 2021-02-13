@@ -6,5 +6,6 @@ ITEM.longdesc = "Mutated, swollen eye of a flesh has a number of strange charact
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 650
+ITEM.pricepertier = 125
 ITEM.baseweight = 0.200
 ITEM.varweight = 0.030

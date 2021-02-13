@@ -6,5 +6,6 @@ ITEM.longdesc = "The controller seems to use its hand when mentally attacking it
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 6700
+ITEM.pricepertier = 1700
 ITEM.baseweight = 0.500
 ITEM.varweight = 0.050

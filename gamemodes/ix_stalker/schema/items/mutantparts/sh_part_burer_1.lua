@@ -6,5 +6,6 @@ ITEM.longdesc = "Burer's hand seems to play a vital role in the creature's use o
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 4250
+ITEM.pricepertier = 750
 ITEM.baseweight = 1.100
 ITEM.varweight = 0.150

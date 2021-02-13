@@ -6,5 +6,6 @@ ITEM.longdesc = "Cat tails contain various materials inside their strands of hai
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 1200
+ITEM.pricepertier = 100
 ITEM.baseweight = 0.450
 ITEM.varweight = 0.050

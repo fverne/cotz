@@ -6,5 +6,6 @@ ITEM.longdesc = "Snork feet and legs contain a huge number of highly elastic ten
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 1500
+ITEM.pricepertier = 500
 ITEM.baseweight = 1.200
 ITEM.varweight = 0.050

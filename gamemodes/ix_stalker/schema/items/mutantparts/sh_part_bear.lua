@@ -5,6 +5,7 @@ ITEM.longdesc = "The claw of a bear. Very durable, probably mostly used more for
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 7200
+ITEM.price = 9200
+ITEM.pricepertier = 1000
 ITEM.baseweight = 0.950
 ITEM.varweight = 0.150

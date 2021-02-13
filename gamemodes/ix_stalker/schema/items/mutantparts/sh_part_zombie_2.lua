@@ -6,5 +6,6 @@ ITEM.longdesc = "It has been theorized that much of the radiation resistance of 
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 600
+ITEM.pricepertier = 150
 ITEM.baseweight = 0.600
 ITEM.varweight = 0.020

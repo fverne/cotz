@@ -6,5 +6,6 @@ ITEM.longdesc = "The head of a tushkano. The origins of the creature is still di
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 175
+ITEM.pricepertier = 50
 ITEM.baseweight = 0.350
 ITEM.varweight = 0.050

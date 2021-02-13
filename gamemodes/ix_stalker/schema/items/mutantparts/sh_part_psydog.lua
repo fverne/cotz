@@ -6,5 +6,6 @@ ITEM.longdesc = "Psydogs have potent mental powers and it's safe to say that the
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 6000
+ITEM.pricepertier = 1000
 ITEM.baseweight = 2.100
 ITEM.varweight = 0.200

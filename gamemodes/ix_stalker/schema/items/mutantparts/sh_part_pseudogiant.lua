@@ -5,6 +5,7 @@ ITEM.longdesc = "A scientifically impossibly large hand, used by the hulking mut
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 18000
+ITEM.price = 13000
+ITEM.pricepertier = 2000
 ITEM.baseweight = 5.000
 ITEM.varweight = 1.275

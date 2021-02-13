@@ -6,5 +6,6 @@ ITEM.longdesc = "A severed hand of an izlom - an extremely deformed humanoid mut
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 2300
+ITEM.pricepertier = 550
 ITEM.baseweight = 1.500
 ITEM.varweight = 0.250

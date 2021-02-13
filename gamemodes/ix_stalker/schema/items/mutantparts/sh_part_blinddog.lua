@@ -6,5 +6,6 @@ ITEM.longdesc = "Resistance of mutant dogs' skin to electricity and chemical age
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 350
+ITEM.pricepertier = 100
 ITEM.baseweight = 0.500
 ITEM.varweight = 0.100

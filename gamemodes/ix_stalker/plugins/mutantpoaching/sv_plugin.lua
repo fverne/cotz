@@ -172,7 +172,7 @@ if SERVER then
 							local weight = ix.util.GetMutantMeatWeight(v, knifetier)
 							local dat = {}
 							if(weight) then
-								dat = {["weight"] = weight}
+								dat = {["weight"] = weight, ["tier"] = knifetier}
 							end
 
 							if (IsValid(client) and client:GetCharacter() and !inv:Add(v, 1, dat)) then

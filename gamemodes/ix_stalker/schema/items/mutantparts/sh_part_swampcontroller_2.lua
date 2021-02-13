@@ -5,6 +5,7 @@ ITEM.longdesc = "Controllers have potent mental powers and it's safe to say that
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 15000
+ITEM.price = 9000
+ITEM.pricepertier = 2000
 ITEM.baseweight = 4.000
 ITEM.varweight = 0.500

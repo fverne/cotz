@@ -5,7 +5,8 @@ ITEM.longdesc = "The mask that snorks wear seem to have special properties, keep
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 1500
+ITEM.price = 3000
+ITEM.pricepertier = 125
 ITEM.baseweight = 0.800
 ITEM.varweight = 0.120
 

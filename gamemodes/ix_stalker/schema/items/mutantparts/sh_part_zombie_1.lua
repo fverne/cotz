@@ -6,5 +6,6 @@ ITEM.longdesc = "This is a partly decomposed hand from a zombie - former human b
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 200
+ITEM.pricepertier = 200
 ITEM.baseweight = 0.350
 ITEM.varweight = 0.050

@@ -6,5 +6,6 @@ ITEM.longdesc = "Rumor has it that a certain trend has recently taken over the f
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 1250
+ITEM.pricepertier = 140
 ITEM.baseweight = 0.600
 ITEM.varweight = 0.075

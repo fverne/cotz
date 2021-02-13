@@ -6,5 +6,6 @@ ITEM.longdesc = "The claw of a chimera. Its exact molecular composition is unkno
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 7200
+ITEM.pricepertier = 1800
 ITEM.baseweight = 0.950
 ITEM.varweight = 0.150
