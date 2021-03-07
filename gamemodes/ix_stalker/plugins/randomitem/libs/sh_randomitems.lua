@@ -70,12 +70,6 @@ ix.randomitems.tables["default"] = {
 }
 
 ix.util.Include("ix_entbox_drops.lua")
-
-ix.randomitems.tables["ix_wood_entbox_drops"] = {
-  {10, {"545x39"}},
-  {100, {"drink_vodka_1"}},
-  {100, {"medic_bandage_1"}},
-  {50, {"9x18"}},
-  {50, {"762x25"}},
-  {50, {"22lr"}},
-}
+ix.util.Include("ix_wood_entbox_drops.lua")
+ix.util.Include("worldspawn_1.lua")
+ix.util.Include("worldspawn_2.lua")

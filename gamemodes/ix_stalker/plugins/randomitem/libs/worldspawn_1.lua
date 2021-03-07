@@ -1,4 +1,4 @@
-ix.randomitems.tables["ix_entbox_drops"] = {
+ix.randomitems.tables["worldspawn_1"] = {
   {2000, {"value_battery"}},
   {2000, {"value_nuts"}},
   {2000, {"value_bolts"}},
