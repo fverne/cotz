@@ -13,25 +13,15 @@ ITEM.items = {}
 ITEM.weight = 0
 
 --[[ Example format
-ITEM.items[1] = {
-	dropAmount = 5, --How many times it will roll for drop
-	dropRareChance = 40, --chances for the rarer drops
-	dropVeryRareChance = 20,
-	itemsCommon = {
-		{"9x18"},
-		{"9x19"},
-		{"12gauge"},
+ITEM.items = {
+	{
+		{9, "reward_ammo_low"}, -- { <likelihood of spawning> , <item pool to spawn> }
+		{1,  "reward_ammo_high"},
 	},
-	itemsRare = {
-		{"57x28"},
-		{"380acp"},
-		{"762x25"},
-	},
-	itemsVeryRare = {
-		{"22lr"},
-		{"mp5", {["durability"] = 30}}, --Data can also be passed
-		{"45acp"},
-	},
+	{
+		{9, "reward_aid_low"},
+		{1,  "reward_aid_high"},
+	}
 }
 ]]--
 
@@ -71,38 +61,30 @@ ITEM.functions.Open = {
         local position = item.player:GetItemDropPos()
         local client = item.player
 
-		for k = 1, #item.items do
-			for i = 1, item.items[k].dropAmount do
-				local droppedItem
-				local rchance
-				local vrchance
-				--Select item to be dropped
-				local casinoVar = math.random(100) --SPIN THE WHEEL
-				if item.items[k].dropVeryRareChance then
-					vrchance = item.items[k].dropVeryRareChance*(1+(client:GetCharacter():GetAttribute("luck", 0)/2))
-				else	
-					vrchance = 0
+		for k, itemlist in pairs(item.items) do
+			local totalweight = 0
+
+    		for _,tableentry in pairs(itemlist) do
+      			totalweight = totalweight + tableentry[1]
+    		end
+
+  			local roll = math.random(1, totalweight)
+  			local grouptospawn
+
+  			for _,tableentry in pairs(itemlist) do
+    			roll = roll - tableentry[1]
+    			if (roll <= 0) then
+      				grouptospawn = tableentry[2]
+      				break
+    			end
+  			end
+
+  			local droppedItem = ix.util.GetRandomItemFromPool(grouptospawn)
+			timer.Simple(k/10, function()
+				if (IsValid(client) and client:GetCharacter() and !client:GetCharacter():GetInventory():Add(droppedItem[1], 1, droppedItem[2] or {})) then
+					ix.item.Spawn(droppedItem[1], position, nil, AngleRand(), droppedItem[2] or {})
 				end
-				if item.items[k].dropRareChance then
-					rchance = item.items[k].dropRareChance*(1+(client:GetCharacter():GetAttribute("luck", 0)/2))
-				else	
-					rchance = 0
-				end
-				
-				if casinoVar >= (100 - vrchance) then
-					droppedItem = table.Random(item.items[k].itemsVeryRare)
-				elseif casinoVar >= (100 - rchance) then
-					droppedItem = table.Random(item.items[k].itemsRare)
-				else
-					droppedItem = table.Random(item.items[k].itemsCommon)
-				end
-				
-				timer.Simple(i/10, function()
-					if (IsValid(client) and client:GetCharacter() and !client:GetCharacter():GetInventory():Add(droppedItem[1], 1, droppedItem[2] or {})) then
-						ix.item.Spawn(droppedItem[1], position, nil, AngleRand(), droppedItem[2] or {})
-					end
-				end)
-			end
+			end)
         end
 		
 		if #item.itemsForcedDrop >= 0 then
