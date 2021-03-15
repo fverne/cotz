@@ -23,6 +23,10 @@ ITEM.iconCam = {
 	fov = 1.5,
 }
 
+function ITEM:PopulateTooltipIndividual(tooltip)
+    ix.util.PropertyDesc(tooltip, "Drug", Color(64, 224, 208))
+end
+
 ITEM.functions.use = {
 	name = "Swallow",
 	icon = "icon16/stalker/swallow.png",

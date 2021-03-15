@@ -17,6 +17,11 @@ ITEM.radrem   = 300
 ITEM.weight = 0.125
 ITEM.flatweight = 0.450
 
+function ITEM:PopulateTooltipIndividual(tooltip)
+    ix.util.PropertyDesc(tooltip, "Medical", Color(64, 224, 208))
+    ix.util.PropertyDesc(tooltip, "Calms the Mind", Color(64, 224, 208))
+end
+
 ITEM.functions.use = {
 	name = "Drink",
 	icon = "icon16/stalker/heal.png",

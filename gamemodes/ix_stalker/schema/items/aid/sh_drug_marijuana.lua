@@ -24,14 +24,10 @@ ITEM.iconCam = {
 	fov = 1.1,
 }
 
-if (CLIENT) then
-	function ITEM:PopulateTooltip(tooltip)
-		if (!self.entity) then
-			ix.util.PropertyDesc(tooltip, "Rare Item", Color(200, 200, 200))
-			ix.util.PropertyDesc(tooltip, "Calms the Mind", Color(0, 255, 255))
-            ix.util.PropertyDesc(tooltip, "Contains Nicotine", Color(64, 224, 208))
-		end
-	end
+function ITEM:PopulateTooltipIndividual(tooltip)
+    ix.util.PropertyDesc(tooltip, "Drug", Color(64, 224, 208))
+	ix.util.PropertyDesc(tooltip, "Contains Nicotine", Color(64, 224, 208))
+	ix.util.PropertyDesc(tooltip, "Calms the Mind", Color(64, 224, 208))
 end
 
 ITEM.functions.use = {

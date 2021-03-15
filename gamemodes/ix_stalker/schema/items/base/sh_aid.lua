@@ -39,6 +39,12 @@ if (CLIENT) then
 	end
 end
 
+function ITEM:PopulateTooltip(tooltip)
+    if (self.PopulateTooltipIndividual) then
+      self:PopulateTooltipIndividual(tooltip)
+    end
+end
+
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
 end)

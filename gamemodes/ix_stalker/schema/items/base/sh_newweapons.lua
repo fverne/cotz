@@ -139,11 +139,6 @@ function ITEM:GetDescription()
 	end
 end
 
-
-function ITEM:GetRepairCost()
-	return ((self.price * 0.00125) * self.repair_PartsComplexity) + ((self.price * 0.00125) * self.repair_PartsRarity)
-end
-
 function ITEM:PopulateTooltip(tooltip)
     if (!self.entity) then
         ix.util.PropertyDesc(tooltip, "Firearm", Color(64, 224, 208))
@@ -158,6 +153,10 @@ function ITEM:PopulateTooltip(tooltip)
     if (self.PopulateTooltipIndividual) then
       self:PopulateTooltipIndividual(tooltip)
     end
+end
+
+function ITEM:GetRepairCost()
+	return ((self.price * 0.00125) * self.repair_PartsComplexity) + ((self.price * 0.00125) * self.repair_PartsRarity)
 end
 
 -- On item is dropped, Remove a weapon from the player and keep the ammo in the item.

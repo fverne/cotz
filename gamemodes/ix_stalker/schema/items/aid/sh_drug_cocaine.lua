@@ -21,6 +21,10 @@ ITEM.iconCam = {
 	fov = 1.4,
 }
 
+function ITEM:PopulateTooltipIndividual(tooltip)
+    ix.util.PropertyDesc(tooltip, "Drug", Color(64, 224, 208))
+end
+
 ITEM.functions.use = {
 	name = "Snort",
 	icon = "icon16/stalker/heal.png",
