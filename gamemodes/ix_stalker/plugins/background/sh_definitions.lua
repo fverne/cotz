@@ -51,6 +51,7 @@ ix.backgrounds["alcoholic_light"] = {
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
 		character:GetInventory():Add("kit_newchar")
+		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("g2contender", 1, {["durability"] = 50})
 		character:GetInventory():Add("45acp", 1, {["quantity"] = 15})
 		character:GetInventory():Add("45acp41", 1, {["quantity"] = 10})
@@ -79,6 +80,7 @@ ix.backgrounds["alcoholic_heavy"] = {
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
 		character:GetInventory():Add("kit_newchar")
+		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("cz52", 1, {["durability"] = 50})
 		character:GetInventory():Add("762x25", 1, {["quantity"] = 32})
 		character:GetInventory():Add("drink_vodka_5", 1)
@@ -104,6 +106,7 @@ ix.backgrounds["smoker"] = {
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
 		character:GetInventory():Add("kit_newchar")
+		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("tokarev", 1, {["durability"] = 50})
 		character:GetInventory():Add("762x25", 1, {["quantity"] = 32})
 		character:GetInventory():Add("drug_cigarette_4", 1, {["quantity"] = math.random(13,15)})
@@ -128,6 +131,7 @@ ix.backgrounds["eater"] = {
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
 		character:GetInventory():Add("kit_newchar")
+		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("makarov", 1, {["durability"] = 50})
 		character:GetInventory():Add("9x18", 1, {["quantity"] = 32})
 		character:GetInventory():Add("food_cheese_2", 1)
