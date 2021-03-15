@@ -6,7 +6,7 @@ ITEM.description= "A box that contains %s rounds of Armor-Piercing .44 Magnum am
 ITEM.longdesc = "This large-bore .44 Magnum cartridge was originally designed for revolvers, but quickly adopted by rifles and carbines."
 ITEM.price = 1000
 ITEM.width = 2
-ITEM.img = ix.util.GetMaterial("vgui/hud/44magnumzl.png")
+ITEM.img = ix.util.GetMaterial("cotz/icons/ammo/ammo_long_4_1.png")
 
 ITEM.weight = 0.017
 ITEM.flatweight = 0.03

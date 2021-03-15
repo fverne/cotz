@@ -7,7 +7,7 @@ ITEM.longdesc = "This high power cartridge was designed by Smith&Wesson, release
 ITEM.price = 1000
 ITEM.busflag = {"ammo1_1"}
 ITEM.width = 2
-ITEM.img = ix.util.GetMaterial("vgui/hud/44magnum.png")
+ITEM.img = ix.util.GetMaterial("cotz/icons/ammo/ammo_long_38_3.png")
 
 ITEM.weight = 0.040
 ITEM.flatweight = 0.03

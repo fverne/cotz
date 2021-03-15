@@ -6,7 +6,7 @@ ITEM.description= "A box that contains %s rounds of .22LR ammo. "
 ITEM.longdesc = "This small .22LR round is primarily used for pest control, but also sports shooting and entry-level shooting."
 ITEM.price = 450
 ITEM.busflag = {"ammo"}
-ITEM.img = ix.util.GetMaterial("vgui/hud/22lr.png")
+ITEM.img = ix.util.GetMaterial("cotz/icons/ammo/ammo_short_11_3.png")
 
 ITEM.weight = 0.0025
 ITEM.flatweight = 0.05

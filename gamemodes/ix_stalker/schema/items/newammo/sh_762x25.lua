@@ -8,7 +8,7 @@ ITEM.price = 500
 ITEM.busflag = {"ammo"}
 ITEM.width = 1
 ITEM.height = 1
-ITEM.img = ix.util.GetMaterial("vgui/hud/762x25.png")
+ITEM.img = ix.util.GetMaterial("cotz/icons/ammo/ammo_short_1_3.png")
 
 ITEM.weight = 0.010
 ITEM.flatweight = 0.03

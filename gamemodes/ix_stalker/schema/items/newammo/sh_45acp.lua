@@ -7,7 +7,7 @@ ITEM.longdesc = "The .45 caliber full metal jacket round has enjoyed popularity 
 ITEM.price = 950
 --ITEM.busflag = "SPECIAL8"
 ITEM.width = 2
-ITEM.img = ix.util.GetMaterial("vgui/hud/45acp.png")
+ITEM.img = ix.util.GetMaterial("cotz/icons/ammo/ammo_long_3_3.png")
 
 ITEM.weight = 0.020
 ITEM.flatweight = 0.05

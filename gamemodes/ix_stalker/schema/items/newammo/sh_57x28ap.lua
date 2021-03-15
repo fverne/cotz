@@ -5,7 +5,7 @@ ITEM.ammoAmount = 60 // amount of the ammo
 ITEM.description= "A box that contains %s rounds of Armor-Piercing 5.7x28mm ammo. "
 ITEM.longdesc = "The FN 5.7x28mm is a high velocity cartridge designed and manufactured by FN Herstal. It is a bottlenecked centerfire cartridge that is somewhat similar to the .22 Hornet or .22 K-Hornet. The 5.7x28mm was developed in conjunction with the FN P90 personal defense weapon (PDW) and FN Five-seven pistol, in response to NATO requests for a replacement for the 9x19mm Parabellum cartridge."
 ITEM.price = 850
-ITEM.img = ix.util.GetMaterial("vgui/hud/57x28zl.png")
+ITEM.img = ix.util.GetMaterial("cotz/icons/ammo/ammo_short_5_1.png")
 
 ITEM.weight = 0.0055
 ITEM.flatweight = 0.06

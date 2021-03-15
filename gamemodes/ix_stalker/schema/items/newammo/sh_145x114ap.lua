@@ -8,6 +8,8 @@ ITEM.price = 8000
 ITEM.flag = "0"
 ITEM.width = 2
 ITEM.height = 1
+ITEM.img = ix.util.GetMaterial("cotz/icons/ammo/ammo_long_41_1.png")
+
 
 ITEM.weight = 0.190
 ITEM.flatweight = 0.1

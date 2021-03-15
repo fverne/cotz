@@ -6,7 +6,7 @@ ITEM.description= "A box that contains %s rounds of 9x19mm ammo. "
 ITEM.longdesc = "This basic 9x19 caliber round with a jacketed bullet has good characteristics while being simple to produce. The round is popular due to the fact that international conventions prohibit the use of expanding ammunition in combat. "
 ITEM.price = 750
 ITEM.busflag = {"ammo1"}
-ITEM.img = ix.util.GetMaterial("vgui/hud/9x19.png")
+ITEM.img = ix.util.GetMaterial("cotz/icons/ammo/ammo_short_4_3.png")
 
 ITEM.weight = 0.008
 ITEM.flatweight = 0.05

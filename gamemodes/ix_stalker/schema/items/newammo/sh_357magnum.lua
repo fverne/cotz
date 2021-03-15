@@ -7,7 +7,7 @@ ITEM.longdesc = "This large-bore .357 Magnum cartridge was originally designed f
 ITEM.price = 1000
 ITEM.busflag = {"ammo1_1"}
 ITEM.width = 2
-ITEM.img = ix.util.GetMaterial("vgui/hud/44magnum.png")
+ITEM.img = ix.util.GetMaterial("cotz/icons/ammo/ammo_long_2_3.png")
 
 ITEM.weight = 0.017
 ITEM.flatweight = 0.03
