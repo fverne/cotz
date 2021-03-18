@@ -1,22 +1,22 @@
 ITEM.name = "Anorak"
 ITEM.model ="models/kek1ch/rookie_outfit.mdl"
 ITEM.newModel ="models/stalkerisaac/playermodel/male_01_anorak.mdl"
-ITEM.description= "A leather anorak."
-ITEM.longdesc = "A regular anorak. Does not do a whole lot aside from soften the bites from rodents and dogs, but it does serve its purpose of keeping you warm."
+ITEM.description= "A worn anorak."
+ITEM.longdesc = "A simple polyester-cotton mix anorak. Doesn't provide much protection from anything except the wind and rain. "
 ITEM.width = 2
 ITEM.height = 2
-ITEM.price = 200
+ITEM.price = 2000
 --ITEM.busflag = {"SPECIAL6", "SPECIAL5", "SPECIAL7"}
 ITEM.busflag = "suits1"
-ITEM.br = 0.05
+ITEM.br = 0.20
 ITEM.fbr = 1
-ITEM.ar = 0
-ITEM.far = 0
+ITEM.ar = 0.10
+ITEM.far = 1
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","l","l","0","0"}
 ITEM.img = ix.util.GetMaterial("vgui/hud/outfit_anorak1.png")
 
-ITEM.weight = 1.100
+ITEM.weight = 0.760
 ITEM.miscslots = 0
 
 ITEM.skincustom[1] = {
