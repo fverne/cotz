@@ -17,7 +17,7 @@ ITEM.ballisticlevels = {"0","l","l","0","0"}
 ITEM.img = ix.util.GetMaterial("vgui/hud/outfit_anorak1.png")
 
 ITEM.weight = 0.760
-ITEM.miscslots = 0
+ITEM.miscslots = 1
 
 ITEM.skincustom[1] = {
 	name = "Skin 0",

@@ -16,7 +16,7 @@ ITEM.sound = "stalkersound/inv_drink_beak.ogg"
 ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/bottlewaterdirty.png")
 
 ITEM:Hook("use", function(item)
-	item.player:AddBuff("debuff_radiation", 10, { amount = 0.4 })
+	item.player:AddBuff("debuff_radiation", 10, { amount = 0.25 })
 	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
 end)
 
