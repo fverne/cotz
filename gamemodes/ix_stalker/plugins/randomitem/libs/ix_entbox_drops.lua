@@ -117,5 +117,5 @@ ix.randomitems.tables["ix_entbox_drops"] = {
   {700, {"value_glue_2"}},
   {700, {"value_glue_3"}},
   {700, {"value_glue_4"}},
-  {300, {"sh_value_gunoil"}}
+  {300, {"value_gunoil"}}
 }
