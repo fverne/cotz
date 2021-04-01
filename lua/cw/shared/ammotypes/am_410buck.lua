@@ -4,7 +4,7 @@ att.displayName = ".45 ACP"
 att.displayNameShort = ".45 ACP"
 att.isBG = true
 
-att.statModifiers = {DamageMult = -0.70,
+att.statModifiers = {DamageMult = -0.50,
 	AimSpreadMult = .25,
 	RecoilMult = -.25,}
 

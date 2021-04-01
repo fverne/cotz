@@ -155,7 +155,7 @@ SWEP.ClumpSpread = nil
 SWEP.SpreadPerShot = 0.015
 SWEP.SpreadCooldown = 0.58
 SWEP.Shots = 1
-SWEP.Damage = 56
+SWEP.Damage = 70
 SWEP.DeployTime = .375
 SWEP.HolsterTime = .35
 
