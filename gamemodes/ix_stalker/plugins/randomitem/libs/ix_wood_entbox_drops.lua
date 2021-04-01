@@ -87,7 +87,7 @@ ix.randomitems.tables["ix_wood_entbox_drops"] = {
   {250, {"g2contender", {["durability"] = 10, ["ammo"] = 1}}},
   {250, {"cz52", {["durability"] = 10, ["ammo"] = 6}}},
   {250, {"tokarev", {["durability"] = 10, ["ammo"] = 6}}},
-  {250, {"cz96", {["durability"] = 10, ["ammo"] = 4}}},
+  {250, {"c96", {["durability"] = 10, ["ammo"] = 4}}},
   {250, {"9x18", {["quantity"] = 10}}},
   {250, {"22lr", {["quantity"] = 18}}},
   {250, {"762x25", {["quantity"] = 8}}},
