@@ -179,6 +179,8 @@ if SERVER then
         --Check rewards & rewardcount
         local identifier = curJobs[npcidentifier].identifier
 
+        hook.Run("ix_OnJobComplete", client, npcidentifier, identifer)
+
         local rewCount = 0
         if type(ix.jobs.list[identifier].rewardCount) == "table" then
           rewCount = math.random(ix.jobs.list[identifier].rewardCount[1],ix.jobs.list[identifier].rewardCount[2])
@@ -209,7 +211,6 @@ if SERVER then
         curJobs[npcidentifier] = nil
 
         self:GetCharacter():SetJobs(curJobs)
-
       end
     end
   end
