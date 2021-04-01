@@ -8,7 +8,7 @@
   tempJob.tier = 1                                      --Tier, unused?
   tempJob.listenTrigger = "chatSayTest"                 --trigger word to listen for in the ix_JobTrigger hook, see sh_listeners
   tempJob.numberRec = 5                                 --integer amount of times the listenTrigger must be run through the ix_JobTrigger hook
-  tempJob.reward = {{"kit_quest1"}}                     --table of item ids for rewarding the player with
+  tempJob.reward = {{"tokarev"}}                     --table of item ids for rewarding the player with
   tempJob.rewardCount = 1                               --how many items should the player get
   tempJob.repReward = 80                                --how much reputation should be awarded for completion
   tempJob.categories = {"mutantkilleasy"}               --table of category identifiers, used for when npc gets tasks
@@ -28,11 +28,11 @@ do
 
   tempJob.name = "%d mutants."
   tempJob.desc = "%d mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "mutantKilled"
   tempJob.numberRec = 12
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkillgroupeasy"}
@@ -45,11 +45,11 @@ do
 
   tempJob.name = "%d mutants."
   tempJob.desc = "%d mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "mutantKilled"
   tempJob.numberRec = 24
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillgroupeasy"}
@@ -62,11 +62,11 @@ do
 
   tempJob.name = "%d mutants."
   tempJob.desc = "%d mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "mutantKilled"
   tempJob.numberRec = 40
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillgroupeasy"}
@@ -81,11 +81,11 @@ do
 
   tempJob.name = "%d humanoid mutants."
   tempJob.desc = "%d humanoid mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupHumanoidKilled"
   tempJob.numberRec = 5
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkillgroupeasy"}
@@ -98,11 +98,11 @@ do
 
   tempJob.name = "%d humanoid mutants."
   tempJob.desc = "%d humanoid mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupHumanoidKilled"
   tempJob.numberRec = 9
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillgroupeasy"}
@@ -115,11 +115,11 @@ do
 
   tempJob.name = "%d humanoid mutants."
   tempJob.desc = "%d humanoid mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupHumanoidKilled"
   tempJob.numberRec = 15
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 25
   tempJob.categories = {"mutantkillgroupeasy"}
@@ -133,11 +133,11 @@ do
 
   tempJob.name = "%d predator mutants."
   tempJob.desc = "%d predator mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupPredatorKilled"
   tempJob.numberRec = 2
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillgroupmedium"}
@@ -150,11 +150,11 @@ do
 
   tempJob.name = "%d predator mutants."
   tempJob.desc = "%d predator mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupPredatorKilled"
   tempJob.numberRec = 4
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 25
   tempJob.categories = {"mutantkillgroupmedium"}
@@ -167,11 +167,11 @@ do
 
   tempJob.name = "%d predator mutants."
   tempJob.desc = "%d predator mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupPredatorKilled"
   tempJob.numberRec = 6
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 30
   tempJob.categories = {"mutantkillgroupmedium"}
@@ -186,11 +186,11 @@ do
 
   tempJob.name = "%d canine mutants."
   tempJob.desc = "%d canine mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupCanineKilled"
   tempJob.numberRec = 5
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkillgroupeasy"}
@@ -203,11 +203,11 @@ do
 
   tempJob.name = "%d canine mutants."
   tempJob.desc = "%d canine mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupCanineKilled"
   tempJob.numberRec = 9
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillgroupeasy"}
@@ -220,11 +220,11 @@ do
 
   tempJob.name = "%d canine mutants."
   tempJob.desc = "%d canine mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupCanineKilled"
   tempJob.numberRec = 13
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 25
   tempJob.categories = {"mutantkillgroupeasy"}
@@ -238,11 +238,11 @@ do
 
   tempJob.name = "%d meat mutants."
   tempJob.desc = "%d meat mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupMeatKilled"
   tempJob.numberRec = 4
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkillgroupeasy"}
@@ -255,11 +255,11 @@ do
 
   tempJob.name = "%d meat mutants."
   tempJob.desc = "%d meat mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupMeatKilled"
   tempJob.numberRec = 8
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillgroupeasy"}
@@ -272,11 +272,11 @@ do
 
   tempJob.name = "%d meat mutants."
   tempJob.desc = "%d meat mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupMeatKilled"
   tempJob.numberRec = 14
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 25
   tempJob.categories = {"mutantkillgroupeasy"}
@@ -290,11 +290,11 @@ do
 
   tempJob.name = "%d psychic mutants."
   tempJob.desc = "%d psychic mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupPsyKilled"
   tempJob.numberRec = 2
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillgroupmedium"}
@@ -307,11 +307,11 @@ do
 
   tempJob.name = "%d psychic mutants."
   tempJob.desc = "%d psychic mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupPsyKilled"
   tempJob.numberRec = 4
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 30
   tempJob.categories = {"mutantkillgroupmedium"}
@@ -324,11 +324,11 @@ do
 
   tempJob.name = "%d psychic mutants."
   tempJob.desc = "%d psychic mutants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "groupPsyKilled"
   tempJob.numberRec = 6
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 40
   tempJob.categories = {"mutantkillgroupmedium"}
@@ -343,11 +343,11 @@ do
 
   tempJob.name = "%d rodents."
   tempJob.desc = "%d rodents."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "rodentKilled"
   tempJob.numberRec = 4
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
   tempJob.categories = {"mutantkilleasy"}
@@ -360,11 +360,11 @@ do
 
   tempJob.name = "%d rodents."
   tempJob.desc = "%d rodents."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "rodentKilled"
   tempJob.numberRec = 8
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkilleasy"}
@@ -377,11 +377,11 @@ do
 
   tempJob.name = "%d rodents."
   tempJob.desc = "%d rodents."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "rodentKilled"
   tempJob.numberRec = 13
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkilleasy"}
@@ -396,11 +396,11 @@ do
 
   tempJob.name = "%d zombies."
   tempJob.desc = "%d zombies."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "zombieKilled"
   tempJob.numberRec = 3
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
   tempJob.categories = {"mutantkilleasy"}
@@ -413,11 +413,11 @@ do
 
   tempJob.name = "%d zombies."
   tempJob.desc = "%d zombies."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "zombieKilled"
   tempJob.numberRec = 7
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkilleasy"}
@@ -430,11 +430,11 @@ do
 
   tempJob.name = "%d zombies."
   tempJob.desc = "%d zombies."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "zombieKilled"
   tempJob.numberRec = 12
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkilleasy"}
@@ -449,11 +449,11 @@ do
 
   tempJob.name = "%d cats."
   tempJob.desc = "%d cats."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "catKilled"
   tempJob.numberRec = 1
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
   tempJob.categories = {"mutantkilleasy"}
@@ -466,11 +466,11 @@ do
 
   tempJob.name = "%d cats."
   tempJob.desc = "%d cats."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "catKilled"
   tempJob.numberRec = 2
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkilleasy"}
@@ -483,11 +483,11 @@ do
 
   tempJob.name = "%d cats."
   tempJob.desc = "%d cats."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "catKilled"
   tempJob.numberRec = 4
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkilleasy"}
@@ -502,11 +502,11 @@ do
 
   tempJob.name = "%d bloodsuckers."
   tempJob.desc = "%d bloodsuckers."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "bloodsuckerKilled"
   tempJob.numberRec = 1
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
   tempJob.categories = {"mutantkillmedium"}
@@ -519,11 +519,11 @@ do
 
   tempJob.name = "%d bloodsuckers."
   tempJob.desc = "%d bloodsuckers."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "bloodsuckerKilled"
   tempJob.numberRec = 2
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkillmedium"}
@@ -536,11 +536,11 @@ do
 
   tempJob.name = "%d bloodsuckers."
   tempJob.desc = "%d bloodsuckers."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "bloodsuckerKilled"
   tempJob.numberRec = 4
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillmedium"}
@@ -555,11 +555,11 @@ do
 
   tempJob.name = "%d boars."
   tempJob.desc = "%d boars."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "boarKilled"
   tempJob.numberRec = 1
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
   tempJob.categories = {"mutantkilleasy"}
@@ -572,11 +572,11 @@ do
 
   tempJob.name = "%d boars."
   tempJob.desc = "%d boars."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "boarKilled"
   tempJob.numberRec = 3
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkilleasy"}
@@ -589,11 +589,11 @@ do
 
   tempJob.name = "%d boars."
   tempJob.desc = "%d boars."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "boarKilled"
   tempJob.numberRec = 6
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkilleasy"}
@@ -608,11 +608,11 @@ do
 
   tempJob.name = "%d burers."
   tempJob.desc = "%d burers."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 3
   tempJob.listenTrigger = "burerKilled"
   tempJob.numberRec = {1,1}
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkillhard"}
@@ -625,11 +625,11 @@ do
 
   tempJob.name = "%d burers."
   tempJob.desc = "%d burers."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 3
   tempJob.listenTrigger = "burerKilled"
   tempJob.numberRec = {2,3}
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillhard"}
@@ -644,11 +644,11 @@ do
 
   tempJob.name = "%d chimeras."
   tempJob.desc = "%d chimeras."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 3
   tempJob.listenTrigger = "chimeraKilled"
   tempJob.numberRec = {1,1}
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkillhard"}
@@ -661,11 +661,11 @@ do
 
   tempJob.name = "%d chimeras."
   tempJob.desc = "%d chimeras."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 4
   tempJob.listenTrigger = "chimeraKilled"
   tempJob.numberRec = {2,3}
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillhard"}
@@ -680,11 +680,11 @@ do
 
   tempJob.name = "%d controllers."
   tempJob.desc = "%d controllers."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "controllerKilled"
   tempJob.numberRec = {1,1}
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkillhard"}
@@ -697,11 +697,11 @@ do
 
   tempJob.name = "%d controllers."
   tempJob.desc = "%d controllers."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 3
   tempJob.listenTrigger = "controllerKilled"
   tempJob.numberRec = {2,3}
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
 
@@ -713,11 +713,11 @@ do
 
   tempJob.name = "%d blind dogs."
   tempJob.desc = "%d blind dogs."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "blinddogKilled"
   tempJob.numberRec = 2
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
   tempJob.categories = {"mutantkilleasy"}
@@ -730,11 +730,11 @@ do
 
   tempJob.name = "%d blind dogs."
   tempJob.desc = "%d blind dogs."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "blinddogKilled"
   tempJob.numberRec = 5
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkilleasy"}
@@ -747,11 +747,11 @@ do
 
   tempJob.name = "%d blind dogs."
   tempJob.desc = "%d blind dogs."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "blinddogKilled"
   tempJob.numberRec = 8
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkilleasy"}
@@ -766,11 +766,11 @@ do
 
   tempJob.name = "%d fleshes."
   tempJob.desc = "%d fleshes."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "fleshKilled"
   tempJob.numberRec = 2
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
   tempJob.categories = {"mutantkilleasy"}
@@ -783,11 +783,11 @@ do
 
   tempJob.name = "%d fleshes."
   tempJob.desc = "%d fleshes."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "fleshKilled"
   tempJob.numberRec = 5
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkilleasy"}
@@ -800,11 +800,11 @@ do
 
   tempJob.name = "%d fleshes."
   tempJob.desc = "%d fleshes."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "fleshKilled"
   tempJob.numberRec = 10
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkilleasy"}
@@ -819,11 +819,11 @@ do
 
   tempJob.name = "%d pseudodogs."
   tempJob.desc = "%d pseudodogs."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "pseudodogKilled"
   tempJob.numberRec = 1
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 10
   tempJob.categories = {"mutantkilleasy"}
@@ -836,11 +836,11 @@ do
 
   tempJob.name = "%d pseudodogs."
   tempJob.desc = "%d pseudodogs."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "pseudodogKilled"
   tempJob.numberRec = 2
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkilleasy"}
@@ -853,11 +853,11 @@ do
 
   tempJob.name = "%d pseudodogs."
   tempJob.desc = "%d pseudodogs."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "pseudodogKilled"
   tempJob.numberRec = 3
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkilleasy"}
@@ -871,11 +871,11 @@ do
 
   tempJob.name = "%d snorks."
   tempJob.desc = "%d snorks."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "snorkKilled"
   tempJob.numberRec = 1
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillmedium"}
@@ -888,11 +888,11 @@ do
 
   tempJob.name = "%d snorks."
   tempJob.desc = "%d snorks."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "snorkKilled"
   tempJob.numberRec = 2
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 25
   tempJob.categories = {"mutantkillmedium"}
@@ -905,11 +905,11 @@ do
 
   tempJob.name = "%d snorks."
   tempJob.desc = "%d snorks."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "snorkKilled"
   tempJob.numberRec = 4
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 30
   tempJob.categories = {"mutantkillmedium"}
@@ -924,11 +924,11 @@ do
 
   tempJob.name = "%d psydogs."
   tempJob.desc = "%d psydogs."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
   tempJob.listenTrigger = "psydogKilled"
   tempJob.numberRec = {1,1}
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
@@ -940,11 +940,11 @@ do
 
   tempJob.name = "%d psydogs."
   tempJob.desc = "%d psydogs."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 3
   tempJob.listenTrigger = "psydogKilled"
   tempJob.numberRec = {2,3}
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
 
@@ -958,11 +958,11 @@ do
 
   tempJob.name = "%d pseudogiants."
   tempJob.desc = "%d pseudogiants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 3
   tempJob.listenTrigger = "pseudogiantKilled"
   tempJob.numberRec = {1,2}
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
 
@@ -974,11 +974,11 @@ do
 
   tempJob.name = "%d pseudogiants."
   tempJob.desc = "%d pseudogiants."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 4
   tempJob.listenTrigger = "pseudogiantKilled"
   tempJob.numberRec = {2,3}
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
 
@@ -991,11 +991,11 @@ do
 
   tempJob.name = "%d izloms."
   tempJob.desc = "%d izloms."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "izlomKilled"
   tempJob.numberRec = 1
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillmedium"}
@@ -1008,11 +1008,11 @@ do
 
   tempJob.name = "%d spiders."
   tempJob.desc = "%d spiders."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "spiderKilled"
   tempJob.numberRec = 1
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkillmedium"}
@@ -1026,11 +1026,11 @@ do
 
   tempJob.name = "%d spiders."
   tempJob.desc = "%d spiders."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "spiderKilled"
   tempJob.numberRec = 2
-  tempJob.reward = {{"kit_quest2"}}
+  tempJob.reward = {{"m1911"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 25
   tempJob.categories = {"mutantkillmedium"}
@@ -1044,11 +1044,11 @@ do
 
   tempJob.name = "%d spiders."
   tempJob.desc = "%d spiders."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "spiderKilled"
   tempJob.numberRec = 3
-  tempJob.reward = {{"kit_quest3"}}
+  tempJob.reward = {{"skorpion"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 30
   tempJob.categories = {"mutantkillmedium"}
@@ -1061,11 +1061,11 @@ do
 
   tempJob.name = "%d tarks."
   tempJob.desc = "%d tarks."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "tarkKilled"
   tempJob.numberRec = 1
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 15
   tempJob.categories = {"mutantkilleasy"}
@@ -1078,11 +1078,11 @@ do
 
   tempJob.name = "%d tarks."
   tempJob.desc = "%d tarks."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "tarkKilled"
   tempJob.numberRec = 2
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 20
   tempJob.categories = {"mutantkilleasy"}
@@ -1095,11 +1095,11 @@ do
 
   tempJob.name = "%d tarks."
   tempJob.desc = "%d tarks."
-  tempJob.icon = "stalker/questpaper_mutant.png"
+  tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
   tempJob.listenTrigger = "tarkKilled"
   tempJob.numberRec = 4
-  tempJob.reward = {{"kit_quest1"}}
+  tempJob.reward = {{"tokarev"}}
   tempJob.rewardCount = {1,1}
   tempJob.repReward = 25
   tempJob.categories = {"mutantkilleasy"}
