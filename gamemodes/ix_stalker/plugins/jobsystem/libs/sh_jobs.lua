@@ -127,21 +127,21 @@ function playerMeta:ixHasJobFromNPC(npcidentifier)
   end
 end
 
--- Remove job with no reward given
-function playerMeta:ixJobRemove(npcidentifier)
-  curJobs = self:GetCharacter():GetJobs()
-
-  curJobs[npcidentifier] = nil
-
-  self:GetCharacter():SetJobs(curJobs)
-end
-
 hook.Add("ix_JobTrigger", "JobProgress", function(client, triggerstring)
   client:ixJobEvaluate(triggerstring)
 end)
 
 if SERVER then
   local playerMeta = FindMetaTable("Player")
+
+  -- Remove job with no reward given
+  function playerMeta:ixJobRemove(npcidentifier)
+    curJobs = self:GetCharacter():GetJobs()
+
+    curJobs[npcidentifier] = nil
+
+    self:GetCharacter():SetJobs(curJobs)
+  end
 
   function playerMeta:ixJobEvaluate(trigger)
     --print("Evaluating quest with ID: "..trigger)

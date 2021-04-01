@@ -74,6 +74,10 @@ if SERVER then
 		targetnpc:SetNetVar("jobs", jobs)
 	end)
 
+	netstream.Hook("job_removeplayerjob", function(client, npcidentifier) 
+		client:ixJobRemove(npcidentifier)
+	end)
+
 	function ix.jobs.getNPCJobs(npcidentifier, categories, amount)
 		ix.jobs.activejobs[npcidentifier] = ix.jobs.activejobs[npcidentifier] or {}
 
