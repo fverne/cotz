@@ -69,19 +69,19 @@ ix.randomitems.tables["default"] = {
   {200, {"9x19", { ["quantity"] = 25}}},
 }
 
-ix.util.Include("ix_entbox_drops.lua")
-ix.util.Include("ix_wood_entbox_drops.lua")
+ix.util.Include("ix_entbox_drops.lua","shared")
+ix.util.Include("ix_wood_entbox_drops.lua","shared")
 
-ix.util.Include("worldspawn_1.lua")
-ix.util.Include("worldspawn_2.lua")
+ix.util.Include("worldspawn_1.lua","shared")
+ix.util.Include("worldspawn_2.lua","shared")
 
-ix.util.Include("reward_aid_low.lua")
-ix.util.Include("reward_aid_high.lua")
+ix.util.Include("reward_aid_low.lua","shared")
+ix.util.Include("reward_aid_high.lua","shared")
 
-ix.util.Include("reward_ammo_low.lua")
-ix.util.Include("reward_ammo_high.lua")
-ix.util.Include("reward_ammo_rare.lua")
+ix.util.Include("reward_ammo_low.lua","shared")
+ix.util.Include("reward_ammo_high.lua","shared")
+ix.util.Include("reward_ammo_rare.lua","shared")
 
-ix.util.Include("reward_consumable.lua")
+ix.util.Include("reward_consumable.lua","shared")
 
-ix.util.Include("reward_generic_valuable.lua")
+ix.util.Include("reward_generic_valuable.lua","shared")

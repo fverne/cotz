@@ -34,7 +34,7 @@ ix.randomitems.tables["reward_generic_valuable"] = {
   {100, {"drug_morphine"}},
   {100, {"drug_marijuana"}},
   {100, {"drug_cigar"}},
-  {100, {"ar159mm", {["durability"] = 35}},
+  {100, {"ar159mm", {["durability"] = 35}}},
   {100, {"lugerp08", {["durability"] = 35}}},
   {100, {"mateba", {["durability"] = 75}}},
   {100, {"mp40", {["durability"] = 35}}},
