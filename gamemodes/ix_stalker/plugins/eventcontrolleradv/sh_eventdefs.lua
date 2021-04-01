@@ -131,7 +131,7 @@
 		difficulty = 1,
 		funcPrestart = function(dat)
 			local spawnedItem 
-			ix.item.Spawn("cannedtushonka", dat.eventpoint[1]+Vector(0,0,32), function(item, entity) spawnedItem = entity end, AngleRand(), {})
+			ix.item.Spawn("food_can_tushonka", dat.eventpoint[1]+Vector(0,0,32), function(item, entity) spawnedItem = entity end, AngleRand(), {})
 
 			dat.data.itement = spawnedItem
 
@@ -195,9 +195,45 @@
 			return shouldend
 		end,
 		funcEnd = function(dat)
-			ix.item.Spawn("battery", dat.eventpoint[1] + Vector(0,0,64), nil, AngleRand(), {})
+			ix.item.Spawn("artifact_battery", dat.eventpoint[1] + Vector(0,0,64), nil, AngleRand(), {})
 			sound.Play( "anomaly/electra_blast1.mp3", dat.eventpoint[1])
 
+			return dat
+		end
+	}
+
+
+PLUGIN.eventdefs["ShippingCrate_1"] = {
+		key = "ShippingCrate_1",
+		allowedPoints = {"shippingcrate_1"},
+		difficulty = 1,
+		funcPrestart = function(dat)
+			ix.util.SpawnAdvDupe2Dupe("event_shippingcrate_1", "shippingcrate")
+
+			return dat
+		end,
+		funcStart = function(dat)
+
+			return dat
+		end,
+		funcUpdate = function(dat) 
+			
+			return dat
+		end,
+		funcShouldEnd = function(dat)
+			shouldend = true
+
+			for i,j in pairs (ents.FindInSphere( dat.eventpoint[1], 512 )) do
+				if(j:GetClass() == "ix_entbox" || j:GetClass() == "ix_wood_entbox") then
+					shouldend = false
+					break
+				end
+			end
+
+			return shouldend
+		end,
+		funcEnd = function(dat)
+			ix.util.DepawnAdvDupe2Dupe("shippingcrate")
 			return dat
 		end
 	}
