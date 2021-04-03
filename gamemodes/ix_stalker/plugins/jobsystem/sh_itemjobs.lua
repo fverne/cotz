@@ -2,7 +2,7 @@
   --TestJob
   local tempJob = {}
 
-  tempJob.name = "Say sneed %d times."                  --Name that will be shown in dialogue when selecting tasks
+  tempJob.name = "Hand over Say sneed %d times."                  --Name that will be shown in dialogue when selecting tasks
   tempJob.desc = "I need you to sneed %d times for me." --Description of task, will be shown to the player when deciding to take quest or not
   tempJob.icon = "propic/event/loot"          --Icon, unused?
   tempJob.tier = 1                                      --Tier, unused?
@@ -29,7 +29,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of blind dog meat."
+  tempJob.name = "Hand over %d pieces of blind dog meat."
   tempJob.desc = "%d pieces of blind dog meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -46,7 +46,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of blind dog meat."
+  tempJob.name = "Hand over %d pieces of blind dog meat."
   tempJob.desc = "%d pieces of blind dog meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -63,7 +63,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of bloodsucker meat."
+  tempJob.name = "Hand over %d pieces of bloodsucker meat."
   tempJob.desc = "%d pieces of bloodsucker meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -80,7 +80,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of bloodsucker meat."
+  tempJob.name = "Hand over %d pieces of bloodsucker meat."
   tempJob.desc = "%d pieces of bloodsucker meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -98,7 +98,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of boar meat."
+  tempJob.name = "Hand over %d pieces of boar meat."
   tempJob.desc = "%d pieces of boar meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -115,7 +115,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of boar meat."
+  tempJob.name = "Hand over %d pieces of boar meat."
   tempJob.desc = "%d pieces of boar meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -133,7 +133,7 @@ do
 --[[
   local tempJob = {}
 
-  tempJob.name = "%d pieces of burer meat."
+  tempJob.name = "Hand over %d pieces of burer meat."
   tempJob.desc = "%d pieces of burer meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -151,7 +151,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of cat meat."
+  tempJob.name = "Hand over %d pieces of cat meat."
   tempJob.desc = "%d pieces of cat meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -168,7 +168,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of cat meat."
+  tempJob.name = "Hand over %d pieces of cat meat."
   tempJob.desc = "%d pieces of cat meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -186,7 +186,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of flesh meat."
+  tempJob.name = "Hand over %d pieces of flesh meat."
   tempJob.desc = "%d pieces of flesh meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -203,7 +203,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of flesh meat."
+  tempJob.name = "Hand over %d pieces of flesh meat."
   tempJob.desc = "%d pieces of flesh meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -220,7 +220,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of hellhound meat."
+  tempJob.name = "Hand over %d pieces of hellhound meat."
   tempJob.desc = "%d pieces of hellhound meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -237,7 +237,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of hellhound meat."
+  tempJob.name = "Hand over %d pieces of hellhound meat."
   tempJob.desc = "%d pieces of hellhound meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -254,7 +254,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of decomposing meat."
+  tempJob.name = "Hand over %d pieces of decomposing meat."
   tempJob.desc = "%d pieces of decomposing meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -271,7 +271,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of decomposing meat."
+  tempJob.name = "Hand over %d pieces of decomposing meat."
   tempJob.desc = "%d pieces of decomposing meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -288,7 +288,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of pseudodog meat."
+  tempJob.name = "Hand over %d pieces of pseudodog meat."
   tempJob.desc = "%d pieces of pseudodog meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -305,7 +305,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of pseudodog meat."
+  tempJob.name = "Hand over %d pieces of pseudodog meat."
   tempJob.desc = "%d pieces of pseudodog meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -322,7 +322,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of sprig meat."
+  tempJob.name = "Hand over %d pieces of sprig meat."
   tempJob.desc = "%d pieces of sprig meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -339,7 +339,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of sprig meat."
+  tempJob.name = "Hand over %d pieces of sprig meat."
   tempJob.desc = "%d pieces of sprig meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -356,7 +356,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d snork hands."
+  tempJob.name = "Hand over %d snork hands."
   tempJob.desc = "%d snork hands."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -373,7 +373,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d snork hands."
+  tempJob.name = "Hand over %d snork hands."
   tempJob.desc = "%d snork hands."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -391,7 +391,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of tushkano meat."
+  tempJob.name = "Hand over %d pieces of tushkano meat."
   tempJob.desc = "%d pieces of tushkano meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -408,7 +408,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pieces of tushkano meat."
+  tempJob.name = "Hand over %d pieces of tushkano meat."
   tempJob.desc = "%d pieces of tushkano meat."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -434,7 +434,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d SSD."
+  tempJob.name = "Hand over %d SSD."
   tempJob.desc = "%d SSD."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -451,7 +451,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d SSDs."
+  tempJob.name = "Hand over %d SSDs."
   tempJob.desc = "%d SSDs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -468,7 +468,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d HDD."
+  tempJob.name = "Hand over %d HDD."
   tempJob.desc = "%d HDD."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -485,7 +485,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d HDDs."
+  tempJob.name = "Hand over %d HDDs."
   tempJob.desc = "%d HDDs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -502,7 +502,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d PSU."
+  tempJob.name = "Hand over %d PSU."
   tempJob.desc = "%d PSU."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -519,7 +519,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d PSUs."
+  tempJob.name = "Hand over %d PSUs."
   tempJob.desc = "%d PSUs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -536,7 +536,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d LCD Panel."
+  tempJob.name = "Hand over %d LCD Panel."
   tempJob.desc = "%d LCD Panel."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -553,7 +553,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d LCD Panels."
+  tempJob.name = "Hand over %d LCD Panels."
   tempJob.desc = "%d LCD Panels."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -570,7 +570,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d GPU."
+  tempJob.name = "Hand over %d GPU."
   tempJob.desc = "%d GPU."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -587,7 +587,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d GPUs."
+  tempJob.name = "Hand over %d GPUs."
   tempJob.desc = "%d GPUs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -605,7 +605,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d FPGAs."
+  tempJob.name = "Hand over %d FPGAs."
   tempJob.desc = "%d FPGAs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -622,7 +622,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d FPGAs."
+  tempJob.name = "Hand over %d FPGAs."
   tempJob.desc = "%d FPGAs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -639,7 +639,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Powerbank."
+  tempJob.name = "Hand over %d Powerbank."
   tempJob.desc = "%d Powerbank."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -656,7 +656,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Powerbanks."
+  tempJob.name = "Hand over %d Powerbanks."
   tempJob.desc = "%d Powerbanks."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -673,7 +673,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Wireless Transmitter Module."
+  tempJob.name = "Hand over %d Wireless Transmitter Module."
   tempJob.desc = "%d Wireless Transmitter Module."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -691,7 +691,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Wireless Transmitter Modules."
+  tempJob.name = "Hand over %d Wireless Transmitter Modules."
   tempJob.desc = "%d Wireless Transmitter Modules."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -708,7 +708,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Capacitors."
+  tempJob.name = "Hand over %d Capacitors."
   tempJob.desc = "%d Capacitors."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -725,7 +725,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Capacitors."
+  tempJob.name = "Hand over %d Capacitors."
   tempJob.desc = "%d Capacitors."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -742,7 +742,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Electric Tape."
+  tempJob.name = "Hand over %d Electric Tape."
   tempJob.desc = "%d Electric Tape."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -759,7 +759,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Electric Tapes."
+  tempJob.name = "Hand over %d Electric Tapes."
   tempJob.desc = "%d Electric Tapes."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -776,7 +776,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Electrical Wire."
+  tempJob.name = "Hand over %d Electrical Wire."
   tempJob.desc = "%d Electrical Wire."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -793,7 +793,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Electrical Wires."
+  tempJob.name = "Hand over %d Electrical Wires."
   tempJob.desc = "%d Electrical Wires."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -810,7 +810,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d 1.5 Volt Batteries."
+  tempJob.name = "Hand over %d 1.5 Volt Batteries."
   tempJob.desc = "%d 1.5 Volt Batteries."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -827,7 +827,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d 1.5 Volt Batteries."
+  tempJob.name = "Hand over %d 1.5 Volt Batteries."
   tempJob.desc = "%d 1.5 Volt Batteries."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -844,7 +844,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d 9 Volt Batteries."
+  tempJob.name = "Hand over %d 9 Volt Batteries."
   tempJob.desc = "%d 9 Volt Batteries."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -861,7 +861,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d 9 Volt Batteries."
+  tempJob.name = "Hand over %d 9 Volt Batteries."
   tempJob.desc = "%d 9 Volt Batteries."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -884,7 +884,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Household Glue."
+  tempJob.name = "Hand over %d Household Glue."
   tempJob.desc = "%d Household Glue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -901,7 +901,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Household Glue."
+  tempJob.name = "Hand over %d Household Glue."
   tempJob.desc = "%d Household Glue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -918,7 +918,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Superglue."
+  tempJob.name = "Hand over %d Superglue."
   tempJob.desc = "%d Superglue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -935,7 +935,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Superglue."
+  tempJob.name = "Hand over %d Superglue."
   tempJob.desc = "%d Superglue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -953,7 +953,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Texture Glue."
+  tempJob.name = "Hand over %d Texture Glue."
   tempJob.desc = "%d Texture Glue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -970,7 +970,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Texture Glue."
+  tempJob.name = "Hand over %d Texture Glue."
   tempJob.desc = "%d Texture Glue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -988,7 +988,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Universal Glue."
+  tempJob.name = "Hand over %d Universal Glue."
   tempJob.desc = "%d Universal Glue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1005,7 +1005,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Universal Glue."
+  tempJob.name = "Hand over %d Universal Glue."
   tempJob.desc = "%d Universal Glue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1023,7 +1023,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Military-Grade Weapon Cleaner."
+  tempJob.name = "Hand over %d Military-Grade Weapon Cleaner."
   tempJob.desc = "%d Military-Grade Weapon Cleaner."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1040,7 +1040,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Military-Grade Weapon Cleaner."
+  tempJob.name = "Hand over %d Military-Grade Weapon Cleaner."
   tempJob.desc = "%d Military-Grade Weapon Cleaner."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1058,7 +1058,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Civilian-Grade Gun Oil."
+  tempJob.name = "Hand over %d Civilian-Grade Gun Oil."
   tempJob.desc = "%d Civilian-Grade Gun Oil."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1075,7 +1075,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Civilian-Grade Gun Oil."
+  tempJob.name = "Hand over %d Civilian-Grade Gun Oil."
   tempJob.desc = "%d Civilian-Grade Gun Oil."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1093,7 +1093,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Weapon Lubricant Spray."
+  tempJob.name = "Hand over %d Weapon Lubricant Spray."
   tempJob.desc = "%d Weapon Lubricant Spray."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1110,7 +1110,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Weapon Lubricant Spray."
+  tempJob.name = "Hand over %d Weapon Lubricant Spray."
   tempJob.desc = "%d Weapon Lubricant Spray."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1128,7 +1128,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Firearm Lubricant."
+  tempJob.name = "Hand over %d Firearm Lubricant."
   tempJob.desc = "%d Firearm Lubricant."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1145,7 +1145,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Firearm Lubricant."
+  tempJob.name = "Hand over %d Firearm Lubricant."
   tempJob.desc = "%d Firearm Lubricant."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1168,7 +1168,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Bolts."
+  tempJob.name = "Hand over %d Bolts."
   tempJob.desc = "%d Bolts."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1185,7 +1185,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Bolts."
+  tempJob.name = "Hand over %d Bolts."
   tempJob.desc = "%d Bolts."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1203,7 +1203,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Nuts."
+  tempJob.name = "Hand over %d Nuts."
   tempJob.desc = "%d Nuts."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1220,7 +1220,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Nuts."
+  tempJob.name = "Hand over %d Nuts."
   tempJob.desc = "%d Nuts."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1238,7 +1238,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Propane Tank."
+  tempJob.name = "Hand over %d Propane Tank."
   tempJob.desc = "%d Propane Tank."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1255,7 +1255,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Propane Tanks."
+  tempJob.name = "Hand over %d Propane Tanks."
   tempJob.desc = "%d Propane Tanks."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1273,7 +1273,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Gasoline Can."
+  tempJob.name = "Hand over %d Gasoline Can."
   tempJob.desc = "%d Gasoline Can."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1290,7 +1290,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Gasoline Cans."
+  tempJob.name = "Hand over %d Gasoline Cans."
   tempJob.desc = "%d Gasoline Cans."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1308,7 +1308,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Kerosene Can."
+  tempJob.name = "Hand over %d Kerosene Can."
   tempJob.desc = "%d Kerosene Can."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1325,7 +1325,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Kerosene Cans."
+  tempJob.name = "Hand over %d Kerosene Cans."
   tempJob.desc = "%d Kerosene Cans."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1343,7 +1343,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Diesel Motor Conditioner."
+  tempJob.name = "Hand over %d Diesel Motor Conditioner."
   tempJob.desc = "%d Diesel Motor Conditioner."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1360,7 +1360,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Diesel Motor Conditioners."
+  tempJob.name = "Hand over %d Diesel Motor Conditioners."
   tempJob.desc = "%d Diesel Motor Conditioners."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1378,7 +1378,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Spark Plugs."
+  tempJob.name = "Hand over %d Spark Plugs."
   tempJob.desc = "%d Spark Plugs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1395,7 +1395,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Spark Plugs."
+  tempJob.name = "Hand over %d Spark Plugs."
   tempJob.desc = "%d Spark Plugs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1413,7 +1413,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Light Bulb."
+  tempJob.name = "Hand over %d Light Bulb."
   tempJob.desc = "%d Light Bulb."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1430,7 +1430,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Light Bulbs."
+  tempJob.name = "Hand over %d Light Bulbs."
   tempJob.desc = "%d Light Bulbs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1448,7 +1448,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Car Battery."
+  tempJob.name = "Hand over %d Car Battery."
   tempJob.desc = "%d Car Battery."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1465,7 +1465,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Car Batteries."
+  tempJob.name = "Hand over %d Car Batteries."
   tempJob.desc = "%d Car Batteries."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1483,7 +1483,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Duct Tape."
+  tempJob.name = "Hand over %d Duct Tape."
   tempJob.desc = "%d Duct Tape."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1500,7 +1500,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Duct Tapes."
+  tempJob.name = "Hand over %d Duct Tapes."
   tempJob.desc = "%d Duct Tapes."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1518,7 +1518,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Military-Grade Adhesive Tape."
+  tempJob.name = "Hand over %d Military-Grade Adhesive Tape."
   tempJob.desc = "%d Military-Grade Adhesive Tape."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1535,7 +1535,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Military-Grade Adhesive Tape."
+  tempJob.name = "Hand over %d Military-Grade Adhesive Tape."
   tempJob.desc = "%d Military-Grade Adhesive Tape."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1553,7 +1553,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Diesel Engine."
+  tempJob.name = "Hand over %d Diesel Engine."
   tempJob.desc = "%d Diesel Engine."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1570,7 +1570,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Diesel Engines."
+  tempJob.name = "Hand over %d Diesel Engines."
   tempJob.desc = "%d Diesel Engines."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1588,7 +1588,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Water Filter."
+  tempJob.name = "Hand over %d Water Filter."
   tempJob.desc = "%d Water Filter."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1605,7 +1605,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Water Filters."
+  tempJob.name = "Hand over %d Water Filters."
   tempJob.desc = "%d Water Filters."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1623,7 +1623,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Pack of Nails."
+  tempJob.name = "Hand over %d Pack of Nails."
   tempJob.desc = "%d Pack of Nails."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1640,7 +1640,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Packs of Nails."
+  tempJob.name = "Hand over %d Packs of Nails."
   tempJob.desc = "%d Packs of Nails."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1657,7 +1657,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Copper Wire."
+  tempJob.name = "Hand over %d Copper Wire."
   tempJob.desc = "%d Copper Wire."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1674,7 +1674,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Copper Wire."
+  tempJob.name = "Hand over %d Copper Wire."
   tempJob.desc = "%d Copper Wire."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1691,7 +1691,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Heavy Duty Cabling."
+  tempJob.name = "Hand over %d Heavy Duty Cabling."
   tempJob.desc = "%d Heavy Duty Cabling."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1708,7 +1708,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Heavy Duty Cabling."
+  tempJob.name = "Hand over %d Heavy Duty Cabling."
   tempJob.desc = "%d Heavy Duty Cabling."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1726,7 +1726,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Plastic Hose."
+  tempJob.name = "Hand over %d Plastic Hose."
   tempJob.desc = "%d Plastic Hose."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1743,7 +1743,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Plastic Hoses."
+  tempJob.name = "Hand over %d Plastic Hoses."
   tempJob.desc = "%d Plastic Hoses."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1761,7 +1761,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Paracord."
+  tempJob.name = "Hand over %d Paracord."
   tempJob.desc = "%d Paracord."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1778,7 +1778,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Paracord."
+  tempJob.name = "Hand over %d Paracord."
   tempJob.desc = "%d Paracord."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1795,7 +1795,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Alkaline Booster."
+  tempJob.name = "Hand over %d Alkaline Booster."
   tempJob.desc = "%d Alkaline Booster."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1812,7 +1812,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Alkaline Booster."
+  tempJob.name = "Hand over %d Alkaline Booster."
   tempJob.desc = "%d Alkaline Booster."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1830,7 +1830,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Toothpaste."
+  tempJob.name = "Hand over %d Toothpaste."
   tempJob.desc = "%d Toothpaste."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1847,7 +1847,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Toothpaste."
+  tempJob.name = "Hand over %d Toothpaste."
   tempJob.desc = "%d Toothpaste."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1865,7 +1865,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Toilet Paper."
+  tempJob.name = "Hand over %d Toilet Paper."
   tempJob.desc = "%d Toilet Paper."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1882,7 +1882,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Toilet Papers."
+  tempJob.name = "Hand over %d Toilet Papers."
   tempJob.desc = "%d Toilet Papers."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1907,7 +1907,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Cat Statuette."
+  tempJob.name = "Hand over %d Cat Statuette."
   tempJob.desc = "%d Cat Statuette."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1924,7 +1924,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Horse Statuette."
+  tempJob.name = "Hand over %d Horse Statuette."
   tempJob.desc = "%d Horse Statuette."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1941,7 +1941,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Lion Statuette."
+  tempJob.name = "Hand over %d Lion Statuette."
   tempJob.desc = "%d Lion Statuette."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1958,7 +1958,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Watch."
+  tempJob.name = "Hand over %d Watch."
   tempJob.desc = "%d Watch."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1976,7 +1976,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Gold Chain."
+  tempJob.name = "Hand over %d Gold Chain."
   tempJob.desc = "%d Gold Chain."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -1994,7 +1994,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Old Smartphone (Broken)."
+  tempJob.name = "Hand over %d Old Smartphone (Broken)."
   tempJob.desc = "%d Old Smartphone (Broken)."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2011,7 +2011,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d New Smartphone (Broken)."
+  tempJob.name = "Hand over %d New Smartphone (Broken)."
   tempJob.desc = "%d New Smartphone (Broken)."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2029,7 +2029,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Empty Noteblock."
+  tempJob.name = "Hand over %d Empty Noteblock."
   tempJob.desc = "%d Empty Noteblock."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2046,7 +2046,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Trading Ledger."
+  tempJob.name = "Hand over %d Trading Ledger."
   tempJob.desc = "%d Trading Ledger."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2063,7 +2063,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Scientist Curriculum Vitae."
+  tempJob.name = "Hand over %d Scientist Curriculum Vitae."
   tempJob.desc = "%d Scientist Curriculum Vitae."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2080,7 +2080,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Scribbled Scientific Notes."
+  tempJob.name = "Hand over %d Scribbled Scientific Notes."
   tempJob.desc = "%d Scribbled Scientific Notes."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2097,7 +2097,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Handdrawn Anomaly Map."
+  tempJob.name = "Hand over %d Handdrawn Anomaly Map."
   tempJob.desc = "%d Handdrawn Anomaly Map."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2114,7 +2114,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Pump Station Checklist."
+  tempJob.name = "Hand over %d Pump Station Checklist."
   tempJob.desc = "%d Pump Station Checklist."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2131,7 +2131,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d Firearm Assembly Illustration."
+  tempJob.name = "Hand over %d Firearm Assembly Illustration."
   tempJob.desc = "%d Firearm Assembly Illustration."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2148,7 +2148,7 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d Unreadable Torn Note."
+  tempJob.name = "Hand over %d Unreadable Torn Note."
   tempJob.desc = "%d Unreadable Torn Note."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2165,7 +2165,7 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d Swamps Research Documents."
+  tempJob.name = "Hand over %d Swamps Research Documents."
   tempJob.desc = "%d Swamps Research Documents."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2183,7 +2183,7 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d Anomalous Material Report."
+  tempJob.name = "Hand over %d Anomalous Material Report."
   tempJob.desc = "%d Anomalous Material Report."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2200,7 +2200,7 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d Artifact Research Ledger."
+  tempJob.name = "Hand over %d Artifact Research Ledger."
   tempJob.desc = "%d Artifact Research Ledger."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2217,7 +2217,7 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d Soviet Manual of Arms."
+  tempJob.name = "Hand over %d Soviet Manual of Arms."
   tempJob.desc = "%d Soviet Manual of Arms."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2234,7 +2234,7 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d Manufacture of Gear Wheels."
+  tempJob.name = "Hand over %d Manufacture of Gear Wheels."
   tempJob.desc = "%d Manufacture of Gear Wheels."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
@@ -2251,7 +2251,7 @@ do
 
     local tempJob = {}
 
-  tempJob.name = "%d Kevlar Sewing Manual."
+  tempJob.name = "Hand over %d Kevlar Sewing Manual."
   tempJob.desc = "%d Kevlar Sewing Manual."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1

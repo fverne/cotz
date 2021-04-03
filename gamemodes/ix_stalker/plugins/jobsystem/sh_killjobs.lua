@@ -2,7 +2,7 @@
   --TestJob
   local tempJob = {}
 
-  tempJob.name = "Say sneed %d times."                  --Name that will be shown in dialogue when selecting tasks
+  tempJob.name = "Kill Say sneed %d times."                  --Name that will be shown in dialogue when selecting tasks
   tempJob.desc = "I need you to sneed %d times for me." --Description of task, will be shown to the player when deciding to take quest or not
   tempJob.icon = "stalker/questpaper_item.png"          --Icon, unused?
   tempJob.tier = 1                                      --Tier, unused?
@@ -26,7 +26,7 @@ do
   --random amount of mutants
   local tempJob = {}
 
-  tempJob.name = "%d mutants."
+  tempJob.name = "Kill %d mutants."
   tempJob.desc = "%d mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -43,7 +43,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d mutants."
+  tempJob.name = "Kill %d mutants."
   tempJob.desc = "%d mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -60,7 +60,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d mutants."
+  tempJob.name = "Kill %d mutants."
   tempJob.desc = "%d mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -79,7 +79,7 @@ do
   -- Humanoid Mutants
   local tempJob = {}
 
-  tempJob.name = "%d humanoid mutants."
+  tempJob.name = "Kill %d humanoid mutants."
   tempJob.desc = "%d humanoid mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -96,7 +96,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d humanoid mutants."
+  tempJob.name = "Kill %d humanoid mutants."
   tempJob.desc = "%d humanoid mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -113,7 +113,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d humanoid mutants."
+  tempJob.name = "Kill %d humanoid mutants."
   tempJob.desc = "%d humanoid mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -131,7 +131,7 @@ do
   -- Predator Mutants
   local tempJob = {}
 
-  tempJob.name = "%d predator mutants."
+  tempJob.name = "Kill %d predator mutants."
   tempJob.desc = "%d predator mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -148,7 +148,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d predator mutants."
+  tempJob.name = "Kill %d predator mutants."
   tempJob.desc = "%d predator mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -165,7 +165,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d predator mutants."
+  tempJob.name = "Kill %d predator mutants."
   tempJob.desc = "%d predator mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -184,7 +184,7 @@ do
   -- Canine Mutants
   local tempJob = {}
 
-  tempJob.name = "%d canine mutants."
+  tempJob.name = "Kill %d canine mutants."
   tempJob.desc = "%d canine mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -201,7 +201,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d canine mutants."
+  tempJob.name = "Kill %d canine mutants."
   tempJob.desc = "%d canine mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -218,7 +218,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d canine mutants."
+  tempJob.name = "Kill %d canine mutants."
   tempJob.desc = "%d canine mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -236,7 +236,7 @@ do
   -- Meat Mutants
   local tempJob = {}
 
-  tempJob.name = "%d meat mutants."
+  tempJob.name = "Kill %d meat mutants."
   tempJob.desc = "%d meat mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -253,7 +253,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d meat mutants."
+  tempJob.name = "Kill %d meat mutants."
   tempJob.desc = "%d meat mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -270,7 +270,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d meat mutants."
+  tempJob.name = "Kill %d meat mutants."
   tempJob.desc = "%d meat mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -288,7 +288,7 @@ do
   -- Psychic Mutants
   local tempJob = {}
 
-  tempJob.name = "%d psychic mutants."
+  tempJob.name = "Kill %d psychic mutants."
   tempJob.desc = "%d psychic mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -305,7 +305,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d psychic mutants."
+  tempJob.name = "Kill %d psychic mutants."
   tempJob.desc = "%d psychic mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -322,7 +322,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d psychic mutants."
+  tempJob.name = "Kill %d psychic mutants."
   tempJob.desc = "%d psychic mutants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -341,7 +341,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d rodents."
+  tempJob.name = "Kill %d rodents."
   tempJob.desc = "%d rodents."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -358,7 +358,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d rodents."
+  tempJob.name = "Kill %d rodents."
   tempJob.desc = "%d rodents."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -375,7 +375,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d rodents."
+  tempJob.name = "Kill %d rodents."
   tempJob.desc = "%d rodents."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -394,7 +394,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d zombies."
+  tempJob.name = "Kill %d zombies."
   tempJob.desc = "%d zombies."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -411,7 +411,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d zombies."
+  tempJob.name = "Kill %d zombies."
   tempJob.desc = "%d zombies."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -428,7 +428,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d zombies."
+  tempJob.name = "Kill %d zombies."
   tempJob.desc = "%d zombies."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -447,7 +447,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d cats."
+  tempJob.name = "Kill %d cats."
   tempJob.desc = "%d cats."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -464,7 +464,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d cats."
+  tempJob.name = "Kill %d cats."
   tempJob.desc = "%d cats."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -481,7 +481,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d cats."
+  tempJob.name = "Kill %d cats."
   tempJob.desc = "%d cats."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -500,7 +500,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d bloodsuckers."
+  tempJob.name = "Kill %d bloodsuckers."
   tempJob.desc = "%d bloodsuckers."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -517,7 +517,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d bloodsuckers."
+  tempJob.name = "Kill %d bloodsuckers."
   tempJob.desc = "%d bloodsuckers."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -534,7 +534,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d bloodsuckers."
+  tempJob.name = "Kill %d bloodsuckers."
   tempJob.desc = "%d bloodsuckers."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -553,7 +553,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d boars."
+  tempJob.name = "Kill %d boars."
   tempJob.desc = "%d boars."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -570,7 +570,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d boars."
+  tempJob.name = "Kill %d boars."
   tempJob.desc = "%d boars."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -587,7 +587,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d boars."
+  tempJob.name = "Kill %d boars."
   tempJob.desc = "%d boars."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -606,7 +606,7 @@ do
 -- Burers
   local tempJob = {}
 
-  tempJob.name = "%d burers."
+  tempJob.name = "Kill %d burers."
   tempJob.desc = "%d burers."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 3
@@ -623,7 +623,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d burers."
+  tempJob.name = "Kill %d burers."
   tempJob.desc = "%d burers."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 3
@@ -642,7 +642,7 @@ do
 -- Chimeras
   local tempJob = {}
 
-  tempJob.name = "%d chimeras."
+  tempJob.name = "Kill %d chimeras."
   tempJob.desc = "%d chimeras."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 3
@@ -659,7 +659,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d chimeras."
+  tempJob.name = "Kill %d chimeras."
   tempJob.desc = "%d chimeras."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 4
@@ -678,7 +678,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d controllers."
+  tempJob.name = "Kill %d controllers."
   tempJob.desc = "%d controllers."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -695,7 +695,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d controllers."
+  tempJob.name = "Kill %d controllers."
   tempJob.desc = "%d controllers."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 3
@@ -711,7 +711,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d blind dogs."
+  tempJob.name = "Kill %d blind dogs."
   tempJob.desc = "%d blind dogs."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -728,7 +728,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d blind dogs."
+  tempJob.name = "Kill %d blind dogs."
   tempJob.desc = "%d blind dogs."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -745,7 +745,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d blind dogs."
+  tempJob.name = "Kill %d blind dogs."
   tempJob.desc = "%d blind dogs."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -764,7 +764,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d fleshes."
+  tempJob.name = "Kill %d fleshes."
   tempJob.desc = "%d fleshes."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -781,7 +781,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d fleshes."
+  tempJob.name = "Kill %d fleshes."
   tempJob.desc = "%d fleshes."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -798,7 +798,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d fleshes."
+  tempJob.name = "Kill %d fleshes."
   tempJob.desc = "%d fleshes."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -817,7 +817,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pseudodogs."
+  tempJob.name = "Kill %d pseudodogs."
   tempJob.desc = "%d pseudodogs."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -834,7 +834,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pseudodogs."
+  tempJob.name = "Kill %d pseudodogs."
   tempJob.desc = "%d pseudodogs."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -851,7 +851,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pseudodogs."
+  tempJob.name = "Kill %d pseudodogs."
   tempJob.desc = "%d pseudodogs."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -869,7 +869,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d snorks."
+  tempJob.name = "Kill %d snorks."
   tempJob.desc = "%d snorks."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -886,7 +886,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d snorks."
+  tempJob.name = "Kill %d snorks."
   tempJob.desc = "%d snorks."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -903,7 +903,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d snorks."
+  tempJob.name = "Kill %d snorks."
   tempJob.desc = "%d snorks."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -922,7 +922,7 @@ do
 /*
   local tempJob = {}
 
-  tempJob.name = "%d psydogs."
+  tempJob.name = "Kill %d psydogs."
   tempJob.desc = "%d psydogs."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 2
@@ -938,7 +938,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d psydogs."
+  tempJob.name = "Kill %d psydogs."
   tempJob.desc = "%d psydogs."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 3
@@ -956,7 +956,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pseudogiants."
+  tempJob.name = "Kill %d pseudogiants."
   tempJob.desc = "%d pseudogiants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 3
@@ -972,7 +972,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d pseudogiants."
+  tempJob.name = "Kill %d pseudogiants."
   tempJob.desc = "%d pseudogiants."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 4
@@ -989,7 +989,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d izloms."
+  tempJob.name = "Kill %d izloms."
   tempJob.desc = "%d izloms."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -1006,7 +1006,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d spiders."
+  tempJob.name = "Kill %d spiders."
   tempJob.desc = "%d spiders."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -1024,7 +1024,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d spiders."
+  tempJob.name = "Kill %d spiders."
   tempJob.desc = "%d spiders."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -1042,7 +1042,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d spiders."
+  tempJob.name = "Kill %d spiders."
   tempJob.desc = "%d spiders."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -1059,7 +1059,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d tarks."
+  tempJob.name = "Kill %d tarks."
   tempJob.desc = "%d tarks."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -1076,7 +1076,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d tarks."
+  tempJob.name = "Kill %d tarks."
   tempJob.desc = "%d tarks."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1
@@ -1093,7 +1093,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "%d tarks."
+  tempJob.name = "Kill %d tarks."
   tempJob.desc = "%d tarks."
   tempJob.icon = "propic/event/mutanthunt"
   tempJob.tier = 1

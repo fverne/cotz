@@ -1,7 +1,8 @@
 if(CLIENT) then
 
 	local PANEL = {}
-
+	local background = Material("cotz/panels/questbackground_tall.png")
+	local questbackground = Material("cotz/panels/loot_interface.png")
 
 	function PANEL:Init()
 		if (IsValid(ix.gui.journal)) then
@@ -9,6 +10,8 @@ if(CLIENT) then
 		end
 
 		self:Dock(FILL)
+		self:InvalidateParent(true)
+		self:DockMargin(0, 0, self:GetWide()*0.25, 0)
 
 		ix.gui.journal = self
 
@@ -22,43 +25,70 @@ if(CLIENT) then
 
 		local color = ix.config.Get("color", Color(255, 255, 255))
 
+		self.title = self:Add("DLabel")
+		self.title:SetText("Current Tasks:")
+		self.title:Dock(TOP)
+		self.title:DockMargin(0, self:GetTall()*0.015, 0, 0)
+		self.title:SetFont("stalkerregularbigfont")
+		self.title:SetColor(Color(255, 255, 255))
+		self.title:SizeToContents()
+		self.title:SetContentAlignment(5)
+
 		self.index = {}
 
-		PrintTable(jobs)
 		for index, v in pairs(jobs) do
 			local job = ix.jobs.list[v.identifier]
 
 			self.index = self:Add("DFrame")
 			self.index:Dock(TOP)
 			self.index:SetHeight(100)
-			self.index:DockMargin(20, 20, 20, 0)
-			self.index:SetTitle("Task Giver: "..index or "Unknown")
+			self.index:InvalidateParent(true)
+			self.index:DockMargin(self:GetParent():GetWide()*0.02, self:GetParent():GetTall()*0.05, self:GetParent():GetWide()*0.02, 0)
+			self.index:DockPadding(self:GetWide()*0.01, self:GetTall()*0.01, self:GetWide()*0.01, self:GetTall()*0.01)
+			self.index:SetTitle("")
 			self.index:SetDraggable(false)
 			self.index:ShowCloseButton(false)
+			self.index.Paint = function(self, width, height)
+				surface.SetMaterial(background)
+				surface.SetDrawColor(255, 255, 255, 255)
+				surface.DrawTexturedRect(0, 0, width, height)
+			end
 
 			self.index.icon = self.index:Add("DImage")
 			self.index.icon:SetMaterial(job.icon or "propic/event/area")
 			self.index.icon:Dock(LEFT)
-			self.index.icon:SetWide(96)
+			self.index.icon:DockMargin(self:GetWide()*0.01, self:GetTall()*0.005, 0, self:GetTall()*0.005)
+			self.index.icon:SetSize(96, 48)
 
 			self.index.description = self.index:Add("DLabel")
 			self.index.description:SetText(string.format(job.name or "%d Unknown", job.numberRec))
 			self.index.description:Dock(TOP)
-			self.index.description:DockMargin(10, 2, 0, 0)
+			self.index.description:DockMargin(self:GetWide()*0.01, self:GetTall()*0.005, 0, self:GetTall()*0.005)
 			self.index.description:SetFont("ixGenericFont")
 			self.index.description:SetColor(Color(255, 255, 255))
 
-			--self.index.description = self.index:Add("DLabel")
-			--self.index.description:SetText(description)
-			--self.index.description:Dock(TOP)
-			--self.index.description:SetFont("ixGenericFont")
-			--self.index.description:DockMargin(10, 4, 0, 0)
+			self.index.description = self.index:Add("DLabel")
+			self.index.description:SetText(string.format("Progress: ".." %d / %d", v.progress, v.numberRec))
+			self.index.description:Dock(TOP)
+			self.index.description:SetFont("ixGenericFont")
+			self.index.description:DockMargin(self:GetWide()*0.01, self:GetTall()*0.005, 0, self:GetTall()*0.005)
+			if v.progress == v.numberRec then
+				self.index.description:SetText("Objective completed.")
+				self.index.description:SetColor(Color(180, 255, 180))
+			end
 
+			self.index.taskgiver = self.index:Add("DLabel")
+			self.index.taskgiver:SetText("Task Giver: "..index)
+			self.index.taskgiver:Dock(TOP)
+			self.index.taskgiver:DockMargin(self:GetWide()*0.01, self:GetTall()*0.005, 0, 0)
+			self.index.taskgiver:SetFont("ixGenericFont")
+			self.index.taskgiver:SetColor(Color(255, 255, 255))
 
+			--[[
 			self.index.details = self.index:Add("DButton")
 			self.index.details:Dock(BOTTOM)
 			self.index.details:DockMargin(10, 0, 0, 0)
-			self.index.details:SetText("Détails")
+			self.index.details:SetText("Details")
 			self.index.details.DoClick = function()
 				if (IsValid(self.questdetails)) then
 					self.questdetails:Remove()
@@ -79,7 +109,7 @@ if(CLIENT) then
 			self.questdetails.objective:SetSize(310, 20)
 
 			self.questdetails.objectiveTitle = self.questdetails.objective:Add("DLabel")
-			self.questdetails.objectiveTitle:SetText("Objectif(s) de la quête")
+			self.questdetails.objectiveTitle:SetText("Objectives: ")
 			self.questdetails.objectiveTitle:SizeToContents()
 			self.questdetails.objectiveTitle:Center()
 
@@ -146,9 +176,16 @@ if(CLIENT) then
 --			self.index.rarity:Dock(RIGHT)
 --			self.index.rarity:SetFont("ixMediumFont")
 --			self.index.rarity:DockMargin(0, -60, 0, 0)
+			
 
-			end
+			end]]
 		end
+	end
+
+	function PANEL:Paint(width, height)
+		surface.SetMaterial(background)
+		surface.SetDrawColor(255, 255, 255, 255)
+		surface.DrawTexturedRect(0, 0, width, height)
 	end
 
 	vgui.Register("ixCharacterJournal", PANEL, "DScrollPanel")
@@ -156,10 +193,10 @@ if(CLIENT) then
 
 -- ------------------------------------------------------------------------------ --
 
-
+	--[[
 	local PANEL = {}
 
-
+	
 	function PANEL:Init()
 		if (IsValid(ix.gui.detailsquest)) then
 			ix.gui.detailsquest:Remove()
@@ -171,6 +208,6 @@ if(CLIENT) then
 	end
 
 	vgui.Register("ixDetailsQuest", PANEL, "DFrame")
-
+	]]
 
 end -- Fin de la condition "CLIENT".
