@@ -11,8 +11,25 @@ local ADDICTION_STATE_HEAVYWITHDRAWAL = 4
 PLUGIN.addictionInterval = 600
 PLUGIN.addictionTickInterval = 30
 
+PLUGIN.addictionDefinitions = PLUGIN.addictionDefinitions or {}
 
 ix.util.Include("sh_definitions.lua")
+
+ix.char.RegisterVar("addictions", {
+	field = "addictions",
+	fieldType = ix.type.string,
+	default = {},
+	bNoDisplay = true,
+})
+
+--Unsure if this is the best way to do it, using data for now
+--[[
+ix.char.RegisterVar("addictions_nextcheck", {
+	field = "addictions_nextcheck",
+	fieldType = ix.type.number,
+	default = 0,
+	bNoDisplay = true,
+})]]
 
 local playerMeta = FindMetaTable("Player")
 
@@ -25,11 +42,12 @@ if SERVER then
 	end
 
 	function PLUGIN:CharacterLoaded(character)
-		if(character:GetData("addictions_nextcheck") < os.time()) then
+		if(character:GetData("addictions_nextcheck", 0) < os.time()) then
 			character:SetData("addictions_nextcheck", os.time() + self.addictionInterval/2)
 		end
 	end
 
+	-- Dont actually know what this was supposed to do
 	function playerMeta:CheckAddiction(addictionname)
 		local char = self:GetCharacter()
 
@@ -39,36 +57,35 @@ if SERVER then
 	end
 
 	function PLUGIN:Think()
-		local checktime = false
-		if character:GetData("addictions_nextcheck") < os.time() then checktime = true end
-
 		if updateinterval < CurTime() then
 
 			for _,ply in pairs( player.GetAll()) do
 				local char = ply:GetCharacter()
 
 				if char then
-					local addictions = char:GetData("addictions", {})
+					local addictions = char:GetAddictions()
 
-					if not addictions.IsEmpty() then
+					if not table.IsEmpty(addictions) then
 						for k,v in pairs(addictions) do
 							PLUGIN.addictionDefinitions[k].tickFunction(ply, v)
 
-							if checktime and PLUGIN.addictionDefinitions[k].checkChance > math.random(1,100) then
+							if char:GetData("addictions_nextcheck", 0) < os.time() and PLUGIN.addictionDefinitions[k].checkChance > math.random(1,100) then
 								PLUGIN.addictionDefinitions[k].updateFunction(ply, v, v+1)
 								addictions[k] = math.Clamp(v+1, ADDICTION_STATE_OK, ADDICTION_STATE_HEAVYWITHDRAWAL)
+								
 							end
 						end
 					end
 
-					char:SetData("addictions", addictions)
+					char:SetAddictions(addictions)
+
+					if char:GetData("addictions_nextcheck", 0) < os.time() then
+						char:SetData("addictions_nextcheck", os.time() + self.addictionInterval)
+					end
 				end
 			end
 
 			updateinterval = CurTime() + self.addictionTickInterval
-			if checktime then
-				character:SetData("addictions_nextcheck", os.time() + self.addictionInterval)
-			end
 		end
 	end
 end
@@ -77,25 +94,23 @@ function playerMeta:GetAddictionLevel(addictionname)
 	local char = self:GetCharacter()
 
 	if char then
-		local addictions = char:GetData("addictions", {})
+		local addictions = char:GetAddictions()
 
-		if not addictions.IsEmpty() then
-			for k,v in pairs(addictions) do
-				if k = addictionname then
-					return v
-				end
-			end
+		if addictions[addictionname] then
+			return addictions[addictionname]
 		end
 	end
+
+	return 0
 end
 
 function playerMeta:SatisfyAddictions(satisfyString)
 	local char = self:GetCharacter()
 
 	if char then
-		local addictions = char:GetData("addictions", {})
-
-		if not addictions.IsEmpty() then
+		local addictions = char:GetAddictions()
+		
+		if not table.IsEmpty(addictions) then
 			for addictionName,v in pairs(addictions) do
 				if v > ADDICTION_STATE_OK then
 					for _, satstruct in pairs(PLUGIN.addictionDefinitions[addictionName].satisfyStruct) do
@@ -108,7 +123,7 @@ function playerMeta:SatisfyAddictions(satisfyString)
 				end
 			end
 
-			char:SetData("addictions", addictions)
+			char:SetAddictions(addictions)
 		end
 	end
 end
@@ -117,11 +132,11 @@ function playerMeta:AddAddiction(addictionname)
 	local char = self:GetCharacter()
 
 	if char then
-		local addictions = char:GetData("addictions", {})
+		local addictions = char:GetAddictions()
 
 		addictions[addictionname] = ADDICTION_STATE_OK
 
-		char:SetData("addictions", addictions)
+		char:SetAddictions(addictions)
 	end
 end
 
@@ -129,10 +144,51 @@ function playerMeta:RemoveAddiction(addictionname)
 	local char = self:GetCharacter()
 
 	if char then
-		local addictions = char:GetData("addictions", {})
+		local addictions = char:GetAddictions()
 
 		addictions[addictionname] = nil
 
-		char:SetData("addictions", addictions)
+		char:SetAddictions(addictions)
 	end
 end
+
+ix.command.Add("debug_addictiongive", {
+	superAdminOnly = true,
+	OnRun = function(self, client)
+		client:AddAddiction("LightAlcoholic")
+	end
+})
+
+ix.command.Add("debug_addictionsatisfy", {
+	superAdminOnly = true,
+	OnRun = function(self, client)
+		client:SatisfyAddictions("MediumAlcohol")
+	end
+})
+
+ix.command.Add("debug_addictionsettoworst", {
+	superAdminOnly = true,
+	OnRun = function(self, client)
+		local char = client:GetCharacter()
+
+		if char then
+			local addictions = char:GetAddictions()
+
+			if (addictions["LightAlcoholic"]) then
+				addictions["LightAlcoholic"] = ADDICTION_STATE_HEAVYWITHDRAWAL
+			end
+
+			char:SetAddictions(addictions)
+			
+			PLUGIN.addictionDefinitions["LightAlcoholic"].updateFunction(client, ADDICTION_STATE_OK, ADDICTION_STATE_HEAVYWITHDRAWAL)
+
+		end
+	end
+})
+
+ix.command.Add("debug_addictionremove", {
+	superAdminOnly = true,
+	OnRun = function(self, client)
+		client:RemoveAddiction("LightAlcoholic")
+	end
+})

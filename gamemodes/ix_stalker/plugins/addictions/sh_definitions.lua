@@ -32,6 +32,10 @@
 }
 ]]--
 
+local ADDICTION_STATE_OK = 1
+local ADDICTION_STATE_NEED = 2
+local ADDICTION_STATE_WITHDRAWAL = 3
+local ADDICTION_STATE_HEAVYWITHDRAWAL = 4
 
 PLUGIN.addictionDefinitions["LightAlcoholic"] = {
 	name = "Alcoholic (Light)",
