@@ -3,7 +3,7 @@ ITEM.description = "A sturdy flashlight used to light your way in the dark."
 ITEM.model = "models/weapons/w_flashlight_zm.mdl"
 
 ITEM.height = 1
-ITEM.width = 2
+ITEM.width = 1
 ITEM.price = 230
 ITEM.weight = 0.600
 

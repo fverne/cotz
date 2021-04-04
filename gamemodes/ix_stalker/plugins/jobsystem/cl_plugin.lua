@@ -1,8 +1,8 @@
 if(CLIENT) then
 
 	local PANEL = {}
-	local background = Material("cotz/panels/questbackground_tall.png")
-	local questbackground = Material("cotz/panels/loot_interface.png")
+	local background = ix.util.GetMaterial("cotz/panels/questbackground_tall.png")
+	local questbackground = ix.util.GetMaterial("cotz/panels/loot_interface.png")
 
 	function PANEL:Init()
 		if (IsValid(ix.gui.journal)) then
@@ -11,7 +11,7 @@ if(CLIENT) then
 
 		self:Dock(FILL)
 		self:InvalidateParent(true)
-		self:DockMargin(0, 0, self:GetWide()*0.25, 0)
+		self:DockMargin(0, 0, self:GetWide()*0.025, 0)
 
 		ix.gui.journal = self
 
@@ -49,7 +49,7 @@ if(CLIENT) then
 			self.index:SetDraggable(false)
 			self.index:ShowCloseButton(false)
 			self.index.Paint = function(self, width, height)
-				surface.SetMaterial(background)
+				surface.SetMaterial(questbackground)
 				surface.SetDrawColor(255, 255, 255, 255)
 				surface.DrawTexturedRect(0, 0, width, height)
 			end
@@ -57,7 +57,7 @@ if(CLIENT) then
 			self.index.icon = self.index:Add("DImage")
 			self.index.icon:SetMaterial(job.icon or "propic/event/area")
 			self.index.icon:Dock(LEFT)
-			self.index.icon:DockMargin(self:GetWide()*0.01, self:GetTall()*0.005, 0, self:GetTall()*0.005)
+			self.index.icon:DockMargin(self:GetWide()*0.01, self:GetTall()*0.01, 0, self:GetTall()*0.01)
 			self.index.icon:SetSize(96, 48)
 
 			self.index.description = self.index:Add("DLabel")
