@@ -8,14 +8,21 @@ ix.config.Add("PsyHealthRecoverTime", 600, "How many seconds it takes to restore
 })
 
 
+ix.char.RegisterVar("PsyHP", {
+	field = "PsyHP",
+	fieldType = ix.type.number,
+	default = 100,
+	bNoDisplay = true,
+})
+
 if SERVER then
 	function PLUGIN:OnCharacterCreated(client, character)
-		character:SetData("psyhealth", 100)
+		character:SetPsyHP(100)
 	end
 
 	function PLUGIN:PlayerLoadedCharacter(client, character)
 		timer.Simple(0.25, function()
-			client:SetLocalVar("psyhealth", character:GetData("psyhealth", 100))
+			client:SetLocalVar("psyhealth", character:GetPsyHP())
 			
 		end)
 
@@ -28,7 +35,7 @@ if SERVER then
 		local client = character:GetPlayer()
 
 		if (IsValid(client)) then
-			character:SetData("psyhealth", client:GetLocalVar("psyhealth", 0))
+			character:SetPsyHP(client:GetLocalVar("psyhealth", 0))
 		end
 	end
 
@@ -38,8 +45,8 @@ if SERVER then
 		local char = self:GetCharacter()
 
 		if (char) then
-			char:SetData("psyhealth", char:GetData("psyhealth", 100) - amount)
-			self:SetLocalVar("psyhealth", char:GetData("psyhealth", 100) - amount)
+			char:SetPsyHP(char:GetPsyHP() - amount)
+			self:SetLocalVar("psyhealth", char:GetPsyHP() - amount)
 		end
 	end
 
@@ -51,7 +58,7 @@ if SERVER then
 		local char = self:GetCharacter()
 
 		if (char) then
-			char:SetData("psyhealth", amount)
+			char:SetPsyHP(amount)
 			self:SetLocalVar("psyhealth", amount)
 		end
 	end
@@ -60,11 +67,11 @@ if SERVER then
 		local char = self:GetCharacter()
 
 		if (char) then
-			char:SetData("psyhealth", char:GetData("psyhealth", 100) + amount)
-			self:SetLocalVar("psyhealth", char:GetData("psyhealth", 100) + amount)
+			char:SetPsyHP(char:GetPsyHP() + amount)
+			self:SetLocalVar("psyhealth", char:GetPsyHP() + amount)
 
-			if char:GetData("psyhealth", 100) > 100 then
-				char:SetData("psyhealth", 100)
+			if char:GetPsyHP() > 100 then
+				char:SetPsyHP(100)
 				self:SetLocalVar("psyhealth", 100)
 			end
 			self:UpdatePsyHealthState(self)
@@ -96,7 +103,7 @@ function playerMeta:GetPsyHealth()
 	local char = self:GetCharacter()
 
 	if (char) then
-		return char:GetData("psyhealth", 100)
+		return self:GetLocalVar("psyhealth", 100)
 	end
 end
 
