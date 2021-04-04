@@ -40,7 +40,7 @@ ITEM.functions.use = {
 			end
 
 			if(table.IsEmpty(tmptbl)) then
-				--hook.Run("ix_JobTrigger", attacker, "gasAnalysisCompleted"..id) -- have some sort of ID to differentiate tasks?
+				hook.Run("ix_JobTrigger", player, item:GetData("finishedtrigger", "error"))
 				item:SetData("finished", true)
 			end
 
@@ -89,7 +89,7 @@ function ITEM:OnInstanced(invID, x, y)
 	if (!self:GetData("points")) then
 		local tmptbl = {}
 
-		for i = 1, 2 do
+		for i = 1, self:GetData("npoints", 3) do
 			table.insert(tmptbl,ix.util.GetRandomTaskPoint())
 		end
 

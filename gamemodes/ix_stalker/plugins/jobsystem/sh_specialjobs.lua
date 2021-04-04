@@ -12,6 +12,8 @@
   tempJob.rewardCount = 1                               --how many items should the player get
   tempJob.repReward = 80                                --how much reputation should be awarded for completion
   tempJob.categories = {"mutantkilleasy"}               --table of category identifiers, used for when npc gets tasks
+  tempJob.OnTaskGet = function(client)                  --function to run when task is given
+  tempJob.OnTaskComplete = function(client)             --function to run when task is handed in
 
   ix.jobs.register(tempJob, "TestJob")                  --If item delivery quest, the final part of the quest identifier should read "_<uniqueid>" for proper operation
 
@@ -23,5 +25,98 @@
 
 
 do
+
+  --Scan 2 areas
+  local tempJob = {}
+
+  tempJob.name = "Scan 2 areas."
+  tempJob.desc = "2 areas."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "scanAreaEasyComplete"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"tokarev"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 50
+  tempJob.categories = {"scanareaeasy"}
+  tempJob.OnTaskGet = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaEasyComplete"} )
+        ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "gasanalyzer" then
+            -- Check that everything matches
+            if ((v:GetData("npoints", -1) == 2) and (v:GetData("finishedtrigger", "error") == "scanAreaEasyComplete") and v:GetData("finished", false)) then
+              v:Remove()
+              ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
+              break
+            end
+          end
+        end
+      end
+    end
+  end
+
+  ix.jobs.register(tempJob, "scanAreaEasy1")
+
+  tempJob = nil
+
+
+  --Scan 3 areas
+  local tempJob = {}
+
+  tempJob.name = "Scan 3 areas."
+  tempJob.desc = "3 areas."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "scanAreaMedComplete"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"tokarev"}}
+  tempJob.rewardCount = {1,1}
+  tempJob.repReward = 50
+  tempJob.categories = {"scanareamed"}
+  tempJob.OnTaskGet = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 3, ["finishedtrigger"] = "scanAreaMedComplete"} )
+        ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "gasanalyzer" then
+            -- Check that everything matches
+            if ((v:GetData("npoints", -1) == 3) and (v:GetData("finishedtrigger", "error") == "scanAreaMedComplete") and v:GetData("finished", false)) then
+              v:Remove()
+              ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
+              break
+            end
+          end
+        end
+      end
+    end
+  end
+
+  ix.jobs.register(tempJob, "scanAreaMed1")
+
+  tempJob = nil
 
 end

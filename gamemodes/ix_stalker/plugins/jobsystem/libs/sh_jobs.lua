@@ -210,6 +210,10 @@ if SERVER then
         --Remove job from player
         curJobs[npcidentifier] = nil
 
+        if(ix.jobs.list[identifier].OnTaskComplete)then
+          ix.jobs.list[identifier].OnTaskComplete(self)
+        end
+
         self:GetCharacter():SetJobs(curJobs)
       end
     end
@@ -239,6 +243,10 @@ if SERVER then
     temp.isCompleted = false
 
     curJobs[npcidentifier] = temp
+
+    if(ix.jobs.list[identifier].OnTaskGet)then
+      ix.jobs.list[identifier].OnTaskGet(self)
+    end
 
     self:GetCharacter():SetJobs(curJobs)
   end
