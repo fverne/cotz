@@ -5,8 +5,9 @@ PLUGIN.desc = "Adds periodically checked addictions."
 
 local ADDICTION_STATE_OK = 1
 local ADDICTION_STATE_NEED = 2
-local ADDICTION_STATE_WITHDRAWAL = 3
-local ADDICTION_STATE_HEAVYWITHDRAWAL = 4
+local ADDICTION_STATE_WITHDRAWAL = 4
+local ADDICTION_STATE_HEAVYWITHDRAWAL = 8
+local ADDICTION_STATE_WORSTWITHDRAWAL = 11
 
 PLUGIN.addictionInterval = 600
 PLUGIN.addictionTickInterval = 30
@@ -71,7 +72,7 @@ if SERVER then
 
 							if char:GetData("addictions_nextcheck", 0) < os.time() and PLUGIN.addictionDefinitions[k].checkChance > math.random(1,100) then
 								PLUGIN.addictionDefinitions[k].updateFunction(ply, v, v+1)
-								addictions[k] = math.Clamp(v+1, ADDICTION_STATE_OK, ADDICTION_STATE_HEAVYWITHDRAWAL)
+								addictions[k] = math.Clamp(v+1, ADDICTION_STATE_OK, ADDICTION_STATE_WORSTWITHDRAWAL)
 								
 							end
 						end
@@ -115,9 +116,9 @@ function playerMeta:SatisfyAddictions(satisfyString)
 				if v > ADDICTION_STATE_OK then
 					for _, satstruct in pairs(PLUGIN.addictionDefinitions[addictionName].satisfyStruct) do
 						if satstruct[1] == satisfyString and satstruct[2] > math.random(1,100) then
-							PLUGIN.addictionDefinitions[addictionName].updateFunction(ply, v, v-1)
+							PLUGIN.addictionDefinitions[addictionName].updateFunction(ply, v, v-(satstruct[3] or 1))
 
-							addictions[addictionName] = math.Clamp(v-1, ADDICTION_STATE_OK, ADDICTION_STATE_HEAVYWITHDRAWAL)
+							addictions[addictionName] = math.Clamp(v-(satstruct[3] or 1), ADDICTION_STATE_OK, ADDICTION_STATE_WORSTWITHDRAWAL)
 						end
 					end
 				end
@@ -151,44 +152,3 @@ function playerMeta:RemoveAddiction(addictionname)
 		char:SetAddictions(addictions)
 	end
 end
-
-ix.command.Add("debug_addictiongive", {
-	superAdminOnly = true,
-	OnRun = function(self, client)
-		client:AddAddiction("LightAlcoholic")
-	end
-})
-
-ix.command.Add("debug_addictionsatisfy", {
-	superAdminOnly = true,
-	OnRun = function(self, client)
-		client:SatisfyAddictions("MediumAlcohol")
-	end
-})
-
-ix.command.Add("debug_addictionsettoworst", {
-	superAdminOnly = true,
-	OnRun = function(self, client)
-		local char = client:GetCharacter()
-
-		if char then
-			local addictions = char:GetAddictions()
-
-			if (addictions["LightAlcoholic"]) then
-				addictions["LightAlcoholic"] = ADDICTION_STATE_HEAVYWITHDRAWAL
-			end
-
-			char:SetAddictions(addictions)
-			
-			PLUGIN.addictionDefinitions["LightAlcoholic"].updateFunction(client, ADDICTION_STATE_OK, ADDICTION_STATE_HEAVYWITHDRAWAL)
-
-		end
-	end
-})
-
-ix.command.Add("debug_addictionremove", {
-	superAdminOnly = true,
-	OnRun = function(self, client)
-		client:RemoveAddiction("LightAlcoholic")
-	end
-})
