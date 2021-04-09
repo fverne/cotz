@@ -23,8 +23,11 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitDuraDmg, 0, 100))
 		end
 
-		damage = damage * perRes
 		damage = damage - flatRes
+		damage = damage * perRes
+		
+		--Make sure we dont heal the player
+		damage = math.max(damage,0)
 
 		dmginfo:SetDamage(damage)
 		
