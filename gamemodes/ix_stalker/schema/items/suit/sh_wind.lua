@@ -7,16 +7,16 @@ ITEM.width = 2
 ITEM.height = 3
 ITEM.price = 17000
 ITEM.busflag = "dev"
-ITEM.br = 0.1
-ITEM.fbr = 7
+ITEM.br = 0.20
+ITEM.fbr = 4
 ITEM.ar = 0.2
-ITEM.far = 3
+ITEM.far = 4
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","ll-a","ll-a","l","l"}
 ITEM.img = ix.util.GetMaterial("vgui/hud/wind.png")
 
 ITEM.weight = 3.400
-ITEM.miscslots = 1
+ITEM.miscslots = 6
 
 ITEM.newSkin = 0
 ITEM.bodygroup = {0}

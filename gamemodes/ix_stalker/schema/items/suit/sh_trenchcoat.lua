@@ -16,7 +16,7 @@ ITEM.ballisticlevels = {"0","0","0","0","0"}
 ITEM.img = ix.util.GetMaterial("vgui/hud/trenchcoat.png")
 
 ITEM.weight = 1.800
-ITEM.miscslots = 0
+ITEM.miscslots = 1
 
 ITEM.bodyGroups = {
 	["vest"] = 0,
