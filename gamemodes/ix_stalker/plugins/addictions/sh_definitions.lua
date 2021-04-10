@@ -174,7 +174,7 @@ PLUGIN.addictionDefinitions["StrongSmoker"] = {
 PLUGIN.addictionDefinitions["DrugUser"] = {
 	name = "Drug User",
 	checkChance = 100,
-	satisfyStruct = {{"PainKillers", 75, 2}, {"Marijuana", 100, 2}, {"StrongerDrugs", 100, 6}},
+	satisfyStruct = {{"PrescriptionDrugs", 75, 2}, {"Marijuana", 100, 2}, {"StrongerDrugs", 100, 6}},
 	updateFunction 	= function(ply, oldlvl, newlvl)
 		if (newlvl => ADDICTION_STATE_HEAVYWITHDRAWAL) then
 			ply:DamagePsyHealth(20)

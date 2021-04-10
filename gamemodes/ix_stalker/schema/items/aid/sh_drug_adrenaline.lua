@@ -35,6 +35,8 @@ ITEM.functions.use = {
 		--item.player:AddBuff("buff_adrenalinerunspeed", 50, { })
 		--item.player:AddBuff("buff_adrenalinepunchdamage", 50, { })
 
+		item.player:GetCharacter():SatisfyAddictions("StrongerDrugs")
+
 		quantity = quantity - 1
 
 		if (quantity >= 1) then

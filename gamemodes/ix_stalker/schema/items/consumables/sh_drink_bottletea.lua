@@ -17,7 +17,7 @@ ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/bottletea.png")
 
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-	item.player:AddBuff("buff_radiationremoval", 10, { amount = 0.2 })
+	item.player:AddBuff("buff_radiationremoval", 10, { amount = 0.2 })	
 	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
 end)
 

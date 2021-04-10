@@ -24,7 +24,7 @@
 
 ix.backgrounds["nothing"] = {
 	name = "Nothing",
-	description = "You have no idea how you ended up in this forsaked place, but you are not prepared.".. 
+	description = "You have no idea how you ended up in this forsaken place, but you are not prepared.".. 
 	"\n\nStarting Equipment:"..
 	"\n  Nothing",
 	OnCreated = function(client, character) 
@@ -58,6 +58,7 @@ ix.backgrounds["alcoholic_light"] = {
 		character:GetInventory():Add("drink_bottlebeer_1", 1, {["quantity"] = 3})
 		character:GetInventory():Add("drink_canbeer_5", 1)
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
+		character:AddAddiction("LightAlcoholic")
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  
@@ -86,6 +87,7 @@ ix.backgrounds["alcoholic_heavy"] = {
 		character:GetInventory():Add("drink_vodka_5", 1)
 		character:GetInventory():Add("drink_vodka_3", 1, {["quantity"] = 1})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
+		character:AddAddiction("StrongAlcoholic")
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  
@@ -111,6 +113,7 @@ ix.backgrounds["smoker"] = {
 		character:GetInventory():Add("762x25", 1, {["quantity"] = 32})
 		character:GetInventory():Add("drug_cigarette_4", 1, {["quantity"] = math.random(13,15)})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
+		character:AddAddiction("StrongSmoker")
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  
@@ -119,10 +122,10 @@ ix.backgrounds["smoker"] = {
 	end,
 }
 
-ix.backgrounds["eater"] = {
-	name = "Eater",
-	description = "You've always snacked more than others. Hopefully there's food enough in the zone.".. 
-	"\n\nAddicted to Eating"..
+ix.backgrounds["druggie"] = {
+	name = "Druggie",
+	description = "You've tried it all, and you're still hooked.".. 
+	"\n\nAddicted to drugs"..
 	"\n\nStarting Equipment:"..
 	"\n  1x Makarov (9x18mm) (Damaged)"..
 	"\n  32x rounds of 9x18mm"..
@@ -136,6 +139,7 @@ ix.backgrounds["eater"] = {
 		character:GetInventory():Add("9x18", 1, {["quantity"] = 32})
 		character:GetInventory():Add("food_cheese_2", 1)
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
+		character:AddAddiction("DrugUser")
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  

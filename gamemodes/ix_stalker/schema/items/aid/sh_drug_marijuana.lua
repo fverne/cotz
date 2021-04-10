@@ -40,6 +40,8 @@ ITEM.functions.use = {
 			player:AddBuff("buff_psyheal", 60, { amount = item.psyheal/120 })
 			player:AddBuff("buff_psysuppress", 60, { })
 			player:AddBuff("buff_psyblock", 60, { amount = item.psyblock })
+
+			player:GetCharacter():SatisfyAddictions("Marijuana")
 		end)
 
 		quantity = quantity - 1

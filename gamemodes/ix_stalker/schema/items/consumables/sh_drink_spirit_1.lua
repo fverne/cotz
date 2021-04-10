@@ -9,7 +9,7 @@ ITEM.height = 2
 ITEM.weight = 0.250
 ITEM.flatweight = 0.220
 
-ITEM.thirst = 3
+ITEM.thirst = 0
 ITEM.quantity = 4
 
 ITEM.addictionStrongAlcohol = true
@@ -24,6 +24,8 @@ end
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
 	item.player:AddBuff("buff_radiationremoval", 10, { amount = 0.4 })
+
+	item.player:GetCharacter():SatisfyAddictions("ExpensiveAlcohol")
 
 	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
 end)

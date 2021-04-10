@@ -36,6 +36,8 @@ ITEM.functions.use = {
 		item.player:AddBuff("buff_slowheal", 5, { amount = item.restore/5 })
 		item.player:AddBuff("buff_psyheal", 60, { amount = item.psyheal/120 })
 
+		item.player:GetCharacter():SatisfyAddictions("StrongerDrugs")
+
 		quantity = quantity - 1
 
 		if (quantity >= 1) then

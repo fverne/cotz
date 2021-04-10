@@ -30,6 +30,8 @@ ITEM.functions.use = {
 
 		quantity = quantity - 1
 
+		item.player:GetCharacter():SatisfyAddictions("PrescriptionDrugs")
+
 		if (quantity >= 1) then
 			item:SetData("quantity", quantity)
 			return false
