@@ -12,11 +12,9 @@
   tempJob.rewardCount = 1                               --how many items should the player get
   tempJob.repReward = 80                                --how much reputation should be awarded for completion
   tempJob.categories = {"mutantkilleasy"}               --table of category identifiers, used for when npc gets tasks
+  tempJob.moneyReward = {2000,4000} OR 3000             --for adding money to the player, can technically be done through itemreward as well
 
   ix.jobs.register(tempJob, "TestJob")                  --If item delivery quest, the final part of the quest identifier should read "_<uniqueid>" for proper operation
-
-  candidates for adding:
-  tempJob.moneyReward = {2000,4000} OR 3000             --for adding money to the player, can technically be done through itemreward as well
 
 ]]--
 
@@ -35,9 +33,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_blinddog"
   tempJob.numberRec = 4
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 10
+  tempJob.moneyReward = {350, 650}
   tempJob.categories = {"mutantmeateasy"}
 
   ix.jobs.register(tempJob, "ItemJob1_meat_blinddog")
@@ -52,9 +51,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_blinddog"
   tempJob.numberRec = 8
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"762x25"}, {"22lr"}, {"9x18"}, {"9x19"}, {"45acp"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 20
+  tempJob.moneyReward = {550, 850}
   tempJob.categories = {"mutantmeateasy"}
 
   ix.jobs.register(tempJob, "ItemJob2_meat_blinddog")
@@ -69,9 +69,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_bloodsucker"
   tempJob.numberRec = 2
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"762x25"}, {"22lr"}, {"9x18"}, {"9x19"}, {"45acp"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 35
+  tempJob.moneyReward = {800, 1000}
   tempJob.categories = {"mutantmeatmedium"}
 
   ix.jobs.register(tempJob, "ItemJob1_meat_bloodsucker")
@@ -86,9 +87,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_bloodsucker"
   tempJob.numberRec = 4
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"762x25"}, {"22lr"}, {"9x18"}, {"9x19"}, {"45acp"}}
+  tempJob.rewardCount = 2
+  tempJob.repReward = 55
+  tempJob.moneyReward = {1600, 1900}
   tempJob.categories = {"mutantmeatmedium"}
 
   ix.jobs.register(tempJob, "ItemJob2_meat_bloodsucker")
@@ -104,9 +106,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_boar"
   tempJob.numberRec = 2
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
+  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
+  tempJob.rewardCount = 1
   tempJob.repReward = 15
+  tempJob.moneyReward = {350, 550}
   tempJob.categories = {"mutantmeateasy"}
 
   ix.jobs.register(tempJob, "ItemJob1_meat_boar")
@@ -121,9 +124,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_boar"
   tempJob.numberRec = 5
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"762x25"}, {"22lr"}, {"9x18"}, {"9x19"}, {"45acp"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 35
+  tempJob.moneyReward = {650, 850}
   tempJob.categories = {"mutantmeateasy"}
 
   ix.jobs.register(tempJob, "ItemJob2_meat_boar")
@@ -157,9 +161,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_cat"
   tempJob.numberRec = 2
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
+  tempJob.rewardCount = 2
+  tempJob.repReward = 30
+  tempJob.moneyReward = {900, 1100}
   tempJob.categories = {"mutantmeateasy"}
 
   ix.jobs.register(tempJob, "ItemJob1_meat_cat")
@@ -173,10 +178,11 @@ do
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_cat"
-  tempJob.numberRec = 2
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.numberRec = 4
+  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
+  tempJob.rewardCount = 3
+  tempJob.repReward = 45
+  tempJob.moneyReward = {1300, 1600}
   tempJob.categories = {"mutantmeateasy"}
 
   ix.jobs.register(tempJob, "ItemJob2_meat_cat")
@@ -192,9 +198,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_flesh"
   tempJob.numberRec = 3
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 20
+  tempJob.moneyReward = {150, 250}
   tempJob.categories = {"mutantmeateasy"}
 
   ix.jobs.register(tempJob, "ItemJob1_meat_flesh")
@@ -209,15 +216,19 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_flesh"
   tempJob.numberRec = 6
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 40
+  tempJob.moneyReward = {250, 300}
   tempJob.categories = {"mutantmeateasy"}
 
   ix.jobs.register(tempJob, "ItemJob2_meat_flesh")
 
   tempJob = nil
 
+
+-- Currently commented out as hellhound meat is unobtainable at the moment
+--[[
   local tempJob = {}
 
   tempJob.name = "Hand over %d pieces of hellhound meat."
@@ -251,6 +262,7 @@ do
   ix.jobs.register(tempJob, "ItemJob2_meat_hellhound")
 
   tempJob = nil
+]]
 
   local tempJob = {}
 
@@ -260,9 +272,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_human"
   tempJob.numberRec = 4
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
+  tempJob.rewardCount = 2
+  tempJob.repReward = 25
+  tempJob.moneyReward = {500, 1000}
   tempJob.categories = {"mutantmeatmedium"}
 
   ix.jobs.register(tempJob, "ItemJob1_meat_human")
@@ -277,9 +290,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_human"
   tempJob.numberRec = 8
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
+  tempJob.rewardCount = 4
+  tempJob.repReward = 45
+  tempJob.moneyReward = {800, 1200}
   tempJob.categories = {"mutantmeatmedium"}
 
   ix.jobs.register(tempJob, "ItemJob2_meat_human")
@@ -294,9 +308,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_pseudodog"
   tempJob.numberRec = 2
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"toz34short", {["durability"] = 50}}, {"toz34", {["durability"] = 50}}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 25
+  tempJob.moneyReward = {800, 1200}
   tempJob.categories = {"mutantmeateasy"}
 
   ix.jobs.register(tempJob, "ItemJob1_meat_pseudodog")
@@ -310,10 +325,11 @@ do
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_pseudodog"
-  tempJob.numberRec = 4
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.numberRec = 5
+  tempJob.reward = {{"toz34short", {["durability"] = 50}}, {"toz34", {["durability"] = 50}}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 45
+  tempJob.moneyReward = {1000, 1300}
   tempJob.categories = {"mutantmeateasy"}
 
   ix.jobs.register(tempJob, "ItemJob2_meat_pseudodog")
@@ -328,9 +344,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_sprig"
   tempJob.numberRec = 1
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"kit_mixed_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 30
+  tempJob.moneyReward = {750, 1000}
   tempJob.categories = {"mutantmeatmedium"}
 
   ix.jobs.register(tempJob, "ItemJob1_meat_sprig")
@@ -345,9 +362,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_sprig"
   tempJob.numberRec = 3
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"kit_mixed_med"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 45
+  tempJob.moneyReward = {900, 1200}
   tempJob.categories = {"mutantmeatmedium"}
 
   ix.jobs.register(tempJob, "ItemJob2_meat_sprig")
@@ -362,9 +380,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_snork"
   tempJob.numberRec = 1
-  tempJob.reward = {{"m1911"}}
+  tempJob.reward = {{"kit_aid_low"}}
   tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.repReward = 20
+  tempJob.moneyReward = {300, 600}
   tempJob.categories = {"mutantmeatmedium"}
 
   ix.jobs.register(tempJob, "ItemJob1_meat_snork")
@@ -379,9 +398,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_snork"
   tempJob.numberRec = 3
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"kit_mixed_m_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 35
+  tempJob.moneyReward = {300, 600}
   tempJob.categories = {"mutantmeatmedium"}
 
   ix.jobs.register(tempJob, "ItemJob2_meat_snork")
@@ -397,9 +417,9 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_tushkano"
   tempJob.numberRec = 4
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.rewardCount = 0
+  tempJob.repReward = 5
+  tempJob.moneyReward = {100, 300}
   tempJob.categories = {"mutantmeateasy"}
 
   ix.jobs.register(tempJob, "ItemJob1_meat_tushkano")
@@ -414,9 +434,9 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_tushkano"
   tempJob.numberRec = 8
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
+  tempJob.rewardCount = 0
   tempJob.repReward = 15
+  tempJob.moneyReward = {300, 600}
   tempJob.categories = {"mutantmeateasy"}
 
   ix.jobs.register(tempJob, "ItemJob2_meat_tushkano")

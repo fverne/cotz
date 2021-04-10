@@ -207,6 +207,18 @@ if SERVER then
         self:addReputation(ix.jobs.list[identifier].repReward)
         ix.dialogue.notifyReputationReceive(self, ix.jobs.list[identifier].repReward)
 
+        if (ix.jobs.list[identifier].moneyReward) then
+          if(type(ix.jobs.list[identifier].moneyReward) == "table")then
+            local mreward = math.random(ix.jobs.list[identifier].moneyReward[1], ix.jobs.list[identifier].moneyReward[2])
+            self:GetCharacter():GiveMoney(mreward)
+            ix.dialogue.notifyMoneyReceive(self, mreward)
+          else
+            self:GetCharacter():GiveMoney(ix.jobs.list[identifier].moneyReward)
+            ix.dialogue.notifyMoneyReceive(self, ix.jobs.list[identifier].moneyReward)
+          end
+        end
+
+
         --Remove job from player
         curJobs[npcidentifier] = nil
 

@@ -12,11 +12,9 @@
   tempJob.rewardCount = 1                               --how many items should the player get
   tempJob.repReward = 80                                --how much reputation should be awarded for completion
   tempJob.categories = {"mutantkilleasy"}               --table of category identifiers, used for when npc gets tasks
+  tempJob.moneyReward = {2000,4000} OR 3000             --for adding money to the player, can technically be done through itemreward as well
 
   ix.jobs.register(tempJob, "TestJob")                  --If item delivery quest, the final part of the quest identifier should read "_<uniqueid>" for proper operation
-
-  candidates for adding:
-  tempJob.moneyReward = {2000,4000} OR 3000             --for adding money to the player, can technically be done through itemreward as well
 
 ]]--
 
@@ -32,9 +30,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "mutantKilled"
   tempJob.numberRec = 12
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
+  tempJob.rewardCount = 2
+  tempJob.repReward = 25
+  tempJob.moneyReward = {1500, 1800}
   tempJob.categories = {"mutantkillgroupeasy"}
 
   ix.jobs.register(tempJob, "killMutantsLow")
@@ -49,9 +48,10 @@ do
   tempJob.tier = 2
   tempJob.listenTrigger = "mutantKilled"
   tempJob.numberRec = 24
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 20
+  tempJob.reward = {{"skorpion", {["durability"] = 60}}, "kit_ammo_m_low"}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 35
+  tempJob.moneyReward = {2800, 3200}
   tempJob.categories = {"mutantkillgroupeasy"}
 
   ix.jobs.register(tempJob, "killMutantsMid")
@@ -66,9 +66,10 @@ do
   tempJob.tier = 2
   tempJob.listenTrigger = "mutantKilled"
   tempJob.numberRec = 40
-  tempJob.reward = {{"skorpion"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 20
+  tempJob.reward = {{"mp153", {["durability"] = 60}}, "kit_ammo_med"}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 50
+  tempJob.moneyReward = {5000, 5800}
   tempJob.categories = {"mutantkillgroupeasy"}
 
   ix.jobs.register(tempJob, "killMutantsHigh")
@@ -85,9 +86,10 @@ do
   tempJob.tier = 2
   tempJob.listenTrigger = "groupHumanoidKilled"
   tempJob.numberRec = 5
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"kit_ammo_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 20
+  tempJob.moneyReward = {800, 1200}
   tempJob.categories = {"mutantkillgroupeasy"}
 
   ix.jobs.register(tempJob, "killHumanoidsLow")
@@ -102,9 +104,10 @@ do
   tempJob.tier = 2
   tempJob.listenTrigger = "groupHumanoidKilled"
   tempJob.numberRec = 9
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 20
+  tempJob.reward = {{"kit_ammo_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 35
+  tempJob.moneyReward = {1200, 1600}
   tempJob.categories = {"mutantkillgroupeasy"}
 
   ix.jobs.register(tempJob, "killHumanoidsMid")
@@ -119,9 +122,10 @@ do
   tempJob.tier = 2
   tempJob.listenTrigger = "groupHumanoidKilled"
   tempJob.numberRec = 15
-  tempJob.reward = {{"skorpion"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 25
+  tempJob.reward = {{"kit_ammo_med"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 50
+  tempJob.moneyReward = {1600, 2000}
   tempJob.categories = {"mutantkillgroupeasy"}
 
   ix.jobs.register(tempJob, "killHumanoidsHigh")

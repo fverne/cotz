@@ -333,7 +333,7 @@ net.Receive("ixDialogueNotify", function()
 		"Lost item: ",
 		"New task: ",
 		"Completed task: ",
-		"Received money: ",
+		"Money wired to account: ",
 		"Lost money: ",
 		"Received reputation: ",
 		"Lost reputation: "
