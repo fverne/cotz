@@ -5,16 +5,10 @@ if(CLIENT) then
 	local questbackground = ix.util.GetMaterial("cotz/panels/loot_interface.png")
 
 	function PANEL:Init()
-		if (IsValid(ix.gui.journal)) then
-			ix.gui.journal:Remove()
-		end
 
 		self:Dock(FILL)
 		self:InvalidateParent(true)
 		self:DockMargin(0, 0, self:GetWide()*0.025, 0)
-
-		ix.gui.journal = self
-
 
 		local client = LocalPlayer()
 		local character = client:GetCharacter()
@@ -25,15 +19,6 @@ if(CLIENT) then
 
 		local color = ix.config.Get("color", Color(255, 255, 255))
 
-		self.title = self:Add("DLabel")
-		self.title:SetText("Current Tasks:")
-		self.title:Dock(TOP)
-		self.title:DockMargin(0, self:GetTall()*0.015, 0, 0)
-		self.title:SetFont("stalkerregularbigfont")
-		self.title:SetColor(Color(255, 255, 255))
-		self.title:SizeToContents()
-		self.title:SetContentAlignment(5)
-
 		self.index = {}
 
 		for index, v in pairs(jobs) do
@@ -42,9 +27,8 @@ if(CLIENT) then
 			self.index = self:Add("DFrame")
 			self.index:Dock(TOP)
 			self.index:SetHeight(100)
-			self.index:InvalidateParent(true)
-			self.index:DockMargin(self:GetParent():GetWide()*0.02, self:GetParent():GetTall()*0.05, self:GetParent():GetWide()*0.02, 0)
-			self.index:DockPadding(self:GetWide()*0.01, self:GetTall()*0.01, self:GetWide()*0.01, self:GetTall()*0.01)
+			self.index:DockMargin(self.index:GetWide()*0.02, self.index:GetTall()*0.15, self.index:GetWide()*0.02, 0)
+			self.index:DockPadding(self.index:GetWide()*0.05, self.index:GetTall()*0.05, self.index:GetWide()*0.05, self.index:GetTall()*0.05)
 			self.index:SetTitle("")
 			self.index:SetDraggable(false)
 			self.index:ShowCloseButton(false)
@@ -57,13 +41,13 @@ if(CLIENT) then
 			self.index.icon = self.index:Add("DImage")
 			self.index.icon:SetMaterial(job.icon or "propic/event/area")
 			self.index.icon:Dock(LEFT)
-			self.index.icon:DockMargin(self:GetWide()*0.01, self:GetTall()*0.01, 0, self:GetTall()*0.01)
+			self.index.icon:DockMargin(self.index:GetWide()*0.25, self.index:GetTall()*0.05, 0, self.index:GetTall()*0.05)
 			self.index.icon:SetSize(96, 48)
 
 			self.index.description = self.index:Add("DLabel")
 			self.index.description:SetText(string.format(job.name or "%d Unknown", job.numberRec))
 			self.index.description:Dock(TOP)
-			self.index.description:DockMargin(self:GetWide()*0.01, self:GetTall()*0.005, 0, self:GetTall()*0.005)
+			self.index.description:DockMargin(self.index:GetWide()*0.01, self.index:GetTall()*0.05, 0, self.index:GetTall()*0.05)
 			self.index.description:SetFont("ixGenericFont")
 			self.index.description:SetColor(Color(255, 255, 255))
 
@@ -71,7 +55,7 @@ if(CLIENT) then
 			self.index.description:SetText(string.format("Progress: ".." %d / %d", v.progress, v.numberRec))
 			self.index.description:Dock(TOP)
 			self.index.description:SetFont("ixGenericFont")
-			self.index.description:DockMargin(self:GetWide()*0.01, self:GetTall()*0.005, 0, self:GetTall()*0.005)
+			self.index.description:DockMargin(self.index:GetWide()*0.01, self.index:GetTall()*0.05, 0, self.index:GetTall()*0.05)
 			if v.progress == v.numberRec then
 				self.index.description:SetText("Objective completed.")
 				self.index.description:SetColor(Color(180, 255, 180))
@@ -80,7 +64,7 @@ if(CLIENT) then
 			self.index.taskgiver = self.index:Add("DLabel")
 			self.index.taskgiver:SetText("Task Giver: "..index)
 			self.index.taskgiver:Dock(TOP)
-			self.index.taskgiver:DockMargin(self:GetWide()*0.01, self:GetTall()*0.005, 0, 0)
+			self.index.taskgiver:DockMargin(self.index:GetWide()*0.01, self.index:GetTall()*0.05, 0, 0)
 			self.index.taskgiver:SetFont("ixGenericFont")
 			self.index.taskgiver:SetColor(Color(255, 255, 255))
 
@@ -182,14 +166,34 @@ if(CLIENT) then
 		end
 	end
 
+	vgui.Register("ixCharacterJournal", PANEL, "DScrollPanel")
+
+	local PANEL = {}
+
+	function PANEL:Init()
+
+		self:DockPadding(self:GetWide()*0.25, self:GetTall()*0.25, self:GetWide()*0.25, self:GetTall()*0.85)
+
+		self.title = self:Add("DLabel")
+		self.title:SetText("Current Tasks:")
+		self.title:Dock(TOP)
+		self.title:DockMargin(0, self:GetTall()*0.025, 0, 0)
+		self.title:SetFont("stalkerregularbigfont")
+		self.title:SetColor(Color(255, 255, 255))
+		self.title:SizeToContents()
+		self.title:SetContentAlignment(5)
+
+		self.journal = self:Add("ixCharacterJournal")
+		self:InvalidateChildren(true)
+	end
+
 	function PANEL:Paint(width, height)
 		surface.SetMaterial(background)
 		surface.SetDrawColor(255, 255, 255, 255)
 		surface.DrawTexturedRect(0, 0, width, height)
 	end
 
-	vgui.Register("ixCharacterJournal", PANEL, "DScrollPanel")
-
+	vgui.Register("ixCharacterJournalPanel", PANEL, "DPanel")
 
 -- ------------------------------------------------------------------------------ --
 

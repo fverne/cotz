@@ -430,10 +430,12 @@ hook.Add("CreateMenuButtons", "ixCharInfo", function(tabs)
 		buttonColor = team.GetColor(LocalPlayer():Team()),
 		Create = function(info, container)
 			local inventory = container:Add("ixStalkerInventoryPanel")
-			local tasks = container:Add("ixCharacterJournal")
+			local tasks = container:Add("ixCharacterJournalPanel")
 			--inventory:SetPos(container:GetWide() - inventory:GetWide() - container:GetWide()*0.01, 0)
 			inventory:Dock(RIGHT)
 			tasks:Dock(FILL)
+			tasks:DockMargin(0,0,14,0)
+
 			
 		end,
 		OnSelected = function(info, container)
