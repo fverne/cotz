@@ -51,17 +51,17 @@ if (CLIENT) then
 			local allowMoney = ix.config.Get("safeEnableMoney")
 
 			if (localInventory) then
-				panel:SetLocalInventory(localInventory)
+				--panel:SetLocalInventory(localInventory)
 
 				if (allowMoney) then
-					panel:SetLocalMoney(character:GetMoney())
+				--	panel:SetLocalMoney(character:GetMoney())
 				end
 			end
 
 			panel:SetStorageID(index)
 			panel:SetStorageInventory(inventory)
 
-			if (allowMoney) then
+			--[[if (allowMoney) then
 				panel:SetStorageMoney(character:GetData("safeboxMoney", 0))
 
 				panel.storageMoney.OnTransfer = function(_, amount)
@@ -89,7 +89,7 @@ if (CLIENT) then
 						this.storageMoney:SetMoney(money)
 					end
 				end
-			end
+			end]]--
 		end
 	end)
 end
