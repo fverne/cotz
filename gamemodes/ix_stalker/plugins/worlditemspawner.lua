@@ -39,7 +39,7 @@ if SERVER then
 			end
 
 			if (numitems > ix.config.Get("worldSpawnerThreshold",75)) then return end
-			if ( self:IsClear(j[1]) ) then continue end
+			if ( !self:IsClear(j[1]) ) then continue end
 	
 			local data = {}
 			data.start = j[1]
