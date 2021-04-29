@@ -27,7 +27,7 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 
     if class == "npc_mutant_classiczombie" or class == "npc_mutant_classiczombie_babka" or class == "npc_mutant_classiczombie_radio" or class == "npc_mutant_classiczombie_volatile" then
       CalculateCredit(entity, attacker, "zombieKilled")
-      CalculateCredit(entity, attacker, "grouphumanoidKilled")
+      CalculateCredit(entity, attacker, "groupHumanoidKilled")
     end
 
     if class == "npc_mutant_rodent" then
