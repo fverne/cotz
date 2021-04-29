@@ -13,7 +13,6 @@ if (SERVER) then
 end
 
 hook.Add("StormFox.PostEntity", "IXSF_MODIFYCLOUDY", function()
-	print("lutz")
 	local Cloudy = StormFox.GetWeatherType( "cloudy" )
 	Cloudy.TimeDependentData.Fogdensity = {
 		TIME_SUNRISE = 0.9,
