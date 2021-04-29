@@ -33,7 +33,7 @@ if SERVER then
 
 		local numitems = self:GetNumSpawnedItems()
 
-		for i, j in pairs(self.itempoints) do
+		for i, j in RandomPairs(self.itempoints) do
 			if (!j) then
 				return
 			end
