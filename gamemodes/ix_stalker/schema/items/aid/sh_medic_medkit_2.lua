@@ -10,7 +10,7 @@ ITEM.height = 1
 ITEM.price = 740
 
 ITEM.quantity = 2
-ITEM.restore = 50
+ITEM.restore = 60
 
 ITEM.weight = 0.025
 ITEM.flatweight = 0.045
