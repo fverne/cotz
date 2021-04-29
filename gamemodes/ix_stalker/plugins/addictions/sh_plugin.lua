@@ -152,3 +152,15 @@ function playerMeta:RemoveAddiction(addictionname)
 		char:SetAddictions(addictions)
 	end
 end
+
+local charMeta = ix.meta.character or {}
+
+function charMeta:SatisfyAddictions(addictionname)
+	if( self:GetPlayer() ) then self:GetPlayer():SatisfyAddictions(addictionname) end
+end
+
+function charMeta:GetAddictionLevel(addictionname)
+	if( self:GetPlayer() ) then return self:GetPlayer():GetAddictionLevel() end
+
+	return 0
+end
