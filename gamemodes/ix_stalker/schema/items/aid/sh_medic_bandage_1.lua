@@ -5,8 +5,8 @@ ITEM.model = "models/kek1ch/dev_bandage.mdl"
 ITEM.width = 1
 ITEM.height = 1
 
-ITEM.restore = 4
-ITEM.quantity = 5 -- Total of 20 health recovered over 20s
+ITEM.restore = 16
+ITEM.quantity = 5
 
 ITEM.sound = "stalkersound/inv_bandage_2p9.mp3"
 ITEM.price = 40

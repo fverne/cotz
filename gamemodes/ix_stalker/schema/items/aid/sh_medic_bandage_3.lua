@@ -5,8 +5,8 @@ ITEM.model = "models/lostsignalproject/items/medical/army_bandage.mdl"
 ITEM.width = 1
 ITEM.height = 1
 
-ITEM.restore = 16
-ITEM.quantity = 4 -- Total of 64 health recovered over 16s
+ITEM.restore = 28
+ITEM.quantity = 5
 
 ITEM.sound = "stalkersound/inv_bandage_2p9.mp3"
 ITEM.price = 140
