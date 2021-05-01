@@ -62,7 +62,7 @@ ix.randomitems.tables["reward_generic_valuable"] = {
   {15,  {"pbssuppressor"}},
   {15,  {"sakersuppressor"}},
   {15,  {"tundrasuppressor"}},
-  {200, {"hidestash1"}},
-  {100, {"hidestash2"}},
-  {25,  {"hidestash3"}},
+  {200, {"hidestash_1"}},
+  {100, {"hidestash_2"}},
+  {25,  {"hidestash_3"}},
 }
