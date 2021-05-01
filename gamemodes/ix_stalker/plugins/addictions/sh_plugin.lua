@@ -116,7 +116,7 @@ function playerMeta:SatisfyAddictions(satisfyString)
 				if v > ADDICTION_STATE_OK then
 					for _, satstruct in pairs(PLUGIN.addictionDefinitions[addictionName].satisfyStruct) do
 						if satstruct[1] == satisfyString and satstruct[2] > math.random(1,100) then
-							PLUGIN.addictionDefinitions[addictionName].updateFunction(ply, v, v-(satstruct[3] or 1))
+							PLUGIN.addictionDefinitions[addictionName].updateFunction(self, v, v-(satstruct[3] or 1))
 
 							addictions[addictionName] = math.Clamp(v-(satstruct[3] or 1), ADDICTION_STATE_OK, ADDICTION_STATE_WORSTWITHDRAWAL)
 						end
