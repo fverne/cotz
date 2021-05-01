@@ -44,7 +44,7 @@ if (CLIENT) then
 end
 
 function ITEM:PopulateTooltip(tooltip)
-    if (!self.entity and self.thirst > 0) then
+    if (!self.entity and (self.thirst > 0 or ITEM.isDrink)) then
         ix.util.PropertyDesc(tooltip, "Drink", Color(64, 224, 208))
     elseif (!self.entity and self.hunger > 0) then
         ix.util.PropertyDesc(tooltip, "Food", Color(64, 224, 208))
@@ -58,7 +58,7 @@ function ITEM:PopulateTooltip(tooltip)
 end
 
 function ITEM:DecideFunction()
-	if ITEM.thirst > 0 then
+	if ITEM.thirst > 0 or ITEM.isDrink then
 		ITEM.functions.use = {
 			name = "Drink",
 			icon = "icon16/stalker/drink.png",

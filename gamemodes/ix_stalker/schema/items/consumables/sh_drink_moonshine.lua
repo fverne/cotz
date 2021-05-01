@@ -12,6 +12,8 @@ ITEM.flatweight = 0.140
 ITEM.thirst = -9
 ITEM.quantity = 1
 
+ITEM.isDrink = true
+
 ITEM.addictionStrongAlcohol = true
 
 ITEM.sound = "stalkersound/inv_flask.mp3"
