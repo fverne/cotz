@@ -166,19 +166,19 @@ function PANEL:Init()
 	self.name:DockMargin(4, 1, 0, 0)
 	self.name:Dock(TOP)
 	self.name:SetTextColor(color_white)
-	self.name:SetFont("stalkerregularsmallfont2")
+	self.name:SetFont("stalkerregularfont2")
 
 	self.rep = self:Add("DLabel")
 	self.rep:DockMargin(5, 0, 0, 0)
 	self.rep:Dock(TOP)
 	self.rep:SetTextColor(Color(138, 43, 226))
-	self.rep:SetFont("stalkerregularsmallfont")
+	self.rep:SetFont("stalkerregularinvfont")
 
 	self.description = self:Add("DLabel")
 	self.description:DockMargin(5, 0, 0, 0)
 	self.description:Dock(TOP)
 	self.description:SetTextColor(color_white)
-	self.description:SetFont("stalkerregularsmallfont")
+	self.description:SetFont("stalkerregularinvfont")
 
 	self.paintFunction = rowPaintFunctions[1]
 	self.nextThink = CurTime() + 1
