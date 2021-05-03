@@ -44,7 +44,7 @@ if (CLIENT) then
 end
 
 function ITEM:PopulateTooltip(tooltip)
-    if (!self.entity and (self.thirst > 0 or ITEM.isDrink)) then
+    if (!self.entity and (self.thirst > 0 or self.isDrink)) then
         ix.util.PropertyDesc(tooltip, "Drink", Color(64, 224, 208))
     elseif (!self.entity and self.hunger > 0) then
         ix.util.PropertyDesc(tooltip, "Food", Color(64, 224, 208))
