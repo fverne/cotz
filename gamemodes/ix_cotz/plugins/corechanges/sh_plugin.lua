@@ -44,6 +44,10 @@ function PLUGIN:PostGamemodeLoaded()
 	concommand.Remove( "ix_togglethirdperson" ) -- needs testing...
 end
 
+function PLUGIN:GetGameDescription()
+	return (Schema and Schema.name or "Unknown")
+end
+
 if (SERVER) then
 	-- Stamina drain on jump
 	function PLUGIN:KeyPress(client, key)
