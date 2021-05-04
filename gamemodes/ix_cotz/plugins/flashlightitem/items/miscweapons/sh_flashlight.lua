@@ -22,8 +22,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(-21.944, 90.808, -173.845),
-						["Position"] = Vector(-1.907, -11.458, -11.853),
+						["Angles"] = Angle(-80.599, 89.923, 13.682),
+						["Position"] = Vector(-6.875, 2.55, 4.088),
 						["Model"] = "models/weapons/w_flashlight_zm.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

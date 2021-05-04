@@ -66,7 +66,7 @@ local function CalcStaminaChange(client)
 				client:SetRunSpeed(walkSpeed)
 				client:SetJumpPower(1)
 				client:SetNetVar("brth", true)
-				client:EmitSound("stalkersound/breath_1.ogg", 30, 100, 1)
+				client:EmitSound("stalkersound/breath_1.ogg", 60, 100, 1)
 
 				character:UpdateAttrib("end", 0.1)
 				character:UpdateAttrib("stm", 0.01)
