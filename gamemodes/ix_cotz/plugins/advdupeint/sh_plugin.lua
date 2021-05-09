@@ -63,6 +63,8 @@ function PLUGIN:SpawnDupe(dupetospawn, uniqueid, offset, specificpos)
 	else
 		print("Failed to decode file:", dupetospawn)
 	end
+
+	self:ItemDummiesToItems()
 end
 
 function PLUGIN:DespawnDupe(dupetodespawn)
@@ -74,6 +76,20 @@ function PLUGIN:DespawnDupe(dupetodespawn)
 
 	ix.AdvDupeIntegration.CreatedEntities[dupetodespawn] = {}
 	ix.AdvDupeIntegration.CreatedEntities[dupetodespawn] = nil
+end
+
+function PLUGIN:ItemDummiesToItems()
+	for _, v in pairs(ents.FindByClass( "ix_dupedummyitem" )) do
+		local item = v:GetRepresentedItem()
+		local shouldunfreeze = v:GetShouldUnfreeze()
+		ix.item.Spawn(item[1], v:GetPos(), function(item, ent) 
+			local physObj = ent:GetPhysicsObject()
+			if (IsValid(physObj)) then
+				physObj:EnableMotion(shouldunfreeze)
+			end
+		end, v:GetAngles(), item[2] or {})
+		v:Remove()
+	end
 end
 
 end
@@ -95,6 +111,13 @@ ix.command.Add("debug_despawndupe", {
 	},
 	OnRun = function(self, client, dupetodespawn)
 		PLUGIN:DespawnDupe(dupetodespawn)
+	end,
+})
+
+ix.command.Add("debug_convertdupeitems", {
+	adminOnly = true,
+	OnRun = function(self, client)
+		PLUGIN:ItemDummiesToItems()
 	end,
 })
 

@@ -192,7 +192,9 @@ if (SERVER) then
 	end
 
 	function PLUGIN:PlayerDisconnected(client)
-		ix.chat.Send(nil, "playerleave", string.format("%s has lost connection to STALKERNET.", client:GetCharacter():GetName()))
+		if( client:GetCharacter() ) then
+			ix.chat.Send(nil, "playerleave", string.format("%s has lost connection to STALKERNET.", client:GetCharacter():GetName()))
+		end
 	end
 end
 
