@@ -2,9 +2,9 @@
 -- The shared init file. You'll want to fill out the info for your schema and include any other files that you need.
 
 -- Schema info
-Schema.name = "Call of the Zone"
+Schema.name = "STALKER: Call of the Zone"
 Schema.author = "gumlefar & verne"
-Schema.description = "A multiplayer STALKER experience"
+Schema.description = "A multiplayer STALKER gamemode"
 --Schema.logo = "vgui/background/wallpaper.jpg"
 
 ix.util.Include("libs/thirdparty/sh_netstream2.lua")
