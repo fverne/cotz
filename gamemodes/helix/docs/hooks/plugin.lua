@@ -772,6 +772,10 @@ function PostChatboxDraw(width, height, alpha)
 end
 
 --- @realm client
+function PostDrawHelixModelView(panel, entity)
+end
+
+--- @realm client
 function PostDrawInventory(panel)
 end
 
@@ -799,8 +803,20 @@ end
 function PrePlayerLoadedCharacter(client, character, currentChar)
 end
 
---- @realm server
-function PrePlayerMessageSend(client, chatType, message, anonymous)
+--- Called before a message sent by a player is processed to be sent to other players - i.e this is ran as early as possible
+-- and before things like the auto chat formatting. Can be used to prevent the message from being sent at all.
+-- @realm server
+-- @player client Player sending the message
+-- @string chatType Chat class of the message
+-- @string message Contents of the message
+-- @bool bAnonymous Whether or not the player is sending the message anonymously
+-- @treturn bool Whether or not to prevent the message from being sent
+-- @usage function PLUGIN:PrePlayerMessageSend(client, chatType, message, bAnonymous)
+-- 	if (!client:IsAdmin()) then
+-- 		return false -- only allow admins to talk in chat
+-- 	end
+-- end
+function PrePlayerMessageSend(client, chatType, message, bAnonymous)
 end
 
 --- @realm server
@@ -845,6 +861,22 @@ end
 
 --- @realm client
 function ShouldHideBars()
+end
+
+--- Whether or not a character should be permakilled upon death. This is only called if the `permakill` server config is
+-- enabled.
+-- @realm server
+-- @player client Player to permakill
+-- @char character Player's current character
+-- @entity inflictor Entity that inflicted the killing blow
+-- @entity attacker Other player or entity that killed the player
+-- @treturn bool `false` if the player should not be permakilled
+-- @usage function PLUGIN:ShouldPermakillCharacter(client, character, inflictor, attacker)
+-- 		if (client:IsAdmin()) then
+-- 			return false -- all non-admin players will have their character permakilled
+-- 		end
+-- 	end
+function ShouldPermakillCharacter(client, character, inflictor, attacker)
 end
 
 --- @realm server

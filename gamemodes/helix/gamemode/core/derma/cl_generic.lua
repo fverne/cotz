@@ -760,8 +760,8 @@ function PANEL:DrawKernedText(width, height)
 	local contentWidth, contentHeight = self:GetContentSize()
 	local x, y = self:CalculateAlignment(width, height, contentWidth, contentHeight)
 
-	for i = 1, #self.text do
-		local character = self.text[i]
+	for i = 1, self.text:utf8len() do
+		local character = self.text:utf8sub(i, i)
 		local textWidth, _ = surface.GetTextSize(character)
 		local kerning = i == 1 and 0 or self.kerning
 		local shadowDistance = self.shadowDistance
@@ -857,8 +857,8 @@ function PANEL:GetContentSize(bCalculate)
 		if (self.kerning > 0) then
 			local width = 0
 
-			for i = 1, #self.text do
-				local textWidth, _ = surface.GetTextSize(self.text[i])
+			for i = 1, self.text:utf8len() do
+				local textWidth, _ = surface.GetTextSize(self.text:utf8sub(i, i))
 				width = width + textWidth + self.kerning
 			end
 
@@ -902,7 +902,7 @@ function PANEL:SetIcon(newIcon)
 	self.iconWidth, self.iconHeight = surface.GetTextSize(newIcon)
 	self.icon = newIcon
 
-	self:DockMargin(self.iconWidth + 2, 0, 0, 8)
+	self:DockMargin(self.iconWidth + 4, 0, 0, 8)
 end
 
 function PANEL:Paint(width, height)
@@ -911,12 +911,12 @@ function PANEL:Paint(width, height)
 	-- there's no inset for text entries so we'll have to get creative
 	DisableClipping(true)
 		surface.SetDrawColor(self:GetBackgroundColor())
-		surface.DrawRect(-self.iconWidth - 2, 0, self.iconWidth + 2, height)
+		surface.DrawRect(-self.iconWidth - 4, 0, self.iconWidth + 4, height)
 
 		surface.SetFont("ixSmallTitleIcons")
 		surface.SetTextColor(self.iconColor)
-		surface.SetTextPos(-self.iconWidth, 0)
-		surface.DrawText("V")
+		surface.SetTextPos(-self.iconWidth - 2, 0)
+		surface.DrawText(self:GetIcon())
 	DisableClipping(false)
 end
 

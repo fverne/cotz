@@ -65,7 +65,8 @@ end
 function meta:IsFemale()
 	local model = self:GetModel():lower()
 
-	return model:find("female") or model:find("alyx") or model:find("mossman") or ix.anim.GetModelClass(model) == "citizen_female"
+	return (model:find("female") or model:find("alyx") or model:find("mossman")) != nil or
+		ix.anim.GetModelClass(model) == "citizen_female"
 end
 
 --- Whether or not this player is stuck and cannot move.
@@ -391,6 +392,11 @@ if (SERVER) then
 		entity:SetAngles(self:EyeAngles())
 		entity:SetModel(self:GetModel())
 		entity:SetSkin(self:GetSkin())
+
+		for i = 0, (self:GetNumBodyGroups() - 1) do
+			entity:SetBodygroup(i, self:GetBodygroup(i))
+		end
+
 		entity:Spawn()
 
 		if (!bDontSetPlayer) then

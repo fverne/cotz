@@ -83,7 +83,7 @@ function PANEL:DoRightClick()
 		end
 
 		for k, v in SortedPairs(itemTable.functions) do
-			if (k == "drop" or (v.OnCanRun and v.OnCanRun(itemTable) == false)) then
+			if (k == "drop" or k == "combine" or (v.OnCanRun and v.OnCanRun(itemTable) == false)) then
 				continue
 			end
 
@@ -198,6 +198,19 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 
 		if (oldX != gridX or oldY != gridY or self.inventoryID != inventoryPanel.invID) then
 			self:Move(gridX, gridY, inventoryPanel)
+		end
+	elseif (inventoryPanel.combineItem) then
+		local combineItem = inventoryPanel.combineItem
+		local inventoryID = combineItem.invID
+
+		if (inventoryID) then
+			combineItem.player = LocalPlayer()
+				if (combineItem.functions.combine.sound) then
+					surface.PlaySound(combineItem.functions.combine.sound)
+				end
+
+				InventoryAction("combine", combineItem.id, inventoryID, {item.id})
+			combineItem.player = nil
 		end
 	end
 end
@@ -421,14 +434,6 @@ function PANEL:BuildSlots()
 
 	self.slots = self.slots or {}
 
-	local function PaintSlot(slot, w, h)
-		surface.SetDrawColor(35, 35, 35, 85)
-		surface.DrawRect(1, 1, w - 2, h - 2)
-
-		surface.SetDrawColor(0, 0, 0, 250)
-		surface.DrawOutlinedRect(1, 1, w - 2, h - 2)
-	end
-
 	for _, v in ipairs(self.slots) do
 		for _, v2 in ipairs(v) do
 			v2:Remove()
@@ -447,7 +452,9 @@ function PANEL:BuildSlots()
 			slot.gridY = y
 			slot:SetPos((x - 1) * iconSize + 4, (y - 1) * iconSize + self:GetPadding(2))
 			slot:SetSize(iconSize, iconSize)
-			slot.Paint = PaintSlot
+			slot.Paint = function(panel, width, height)
+				derma.SkinFunc("PaintInventorySlot", panel, width, height)
+			end
 
 			self.slots[x][y] = slot
 		end
@@ -482,6 +489,32 @@ function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
 		local inventory = ix.item.inventories[self.invID]
 		local dropX = math.ceil((mouseX - 4 - (itemPanel.gridW - 1) * 32) / iconSize)
 		local dropY = math.ceil((mouseY - self:GetPadding(2) - (itemPanel.gridH - 1) * 32) / iconSize)
+
+		local hoveredPanel = vgui.GetHoveredPanel()
+
+		if (IsValid(hoveredPanel) and hoveredPanel != itemPanel and hoveredPanel.GetItemTable) then
+			local hoveredItem = hoveredPanel:GetItemTable()
+
+			if (hoveredItem) then
+				local info = hoveredItem.functions.combine
+
+				if (info and info.OnCanRun and info.OnCanRun(hoveredItem, {item.id}) != false) then
+					surface.SetDrawColor(ColorAlpha(derma.GetColor("Info", self, Color(200, 0, 0)), 20))
+					surface.DrawRect(
+						hoveredPanel.x,
+						hoveredPanel.y,
+						hoveredPanel:GetWide(),
+						hoveredPanel:GetTall()
+					)
+
+					self.combineItem = hoveredItem
+
+					return
+				end
+			end
+		end
+
+		self.combineItem = nil
 
 		-- don't draw grid if we're dragging it out of bounds
 		if (inventory) then
