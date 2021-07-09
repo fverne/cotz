@@ -479,24 +479,24 @@ AddSound("Stalker.Chimera.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/
 
 -- Bloodsucker sounds
 ----IDLE
-AddSound("Stalker.Bloodsucker.Idle1",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/bs/idle_1.wav")
-AddSound("Stalker.Bloodsucker.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/bs/idle_2.wav")
-AddSound("Stalker.Bloodsucker.Idle3",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/bs/idle_0.wav")
+AddSound("Stalker.Bloodsucker.Idle1",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/bs/idle_1.mp3")
+AddSound("Stalker.Bloodsucker.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/bs/idle_2.mp3")
+AddSound("Stalker.Bloodsucker.Idle3",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/bs/idle_0.mp3")
 ----CHASE
-AddSound("Stalker.Bloodsucker.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/sucker_growl_1.wav")
-AddSound("Stalker.Bloodsucker.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/sucker_growl_4.wav")
-AddSound("Stalker.Bloodsucker.Chase3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/attack_hit_2")
+AddSound("Stalker.Bloodsucker.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/sucker_growl_1.mp3")
+AddSound("Stalker.Bloodsucker.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/sucker_growl_4.mp3")
+AddSound("Stalker.Bloodsucker.Chase3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/attack_hit_2.mp3")
 ----HIT
-AddSound("Stalker.Bloodsucker.Hit1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/attack_0.wav")
-AddSound("Stalker.Bloodsucker.Hit2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/attack_1.wav")
-AddSound("Stalker.Bloodsucker.Hit3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/attack_2.wav")
-AddSound("Stalker.Bloodsucker.Hit4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/attack_hit_0.wav")
-AddSound("Stalker.Bloodsucker.Hit5",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/attack_hit_1.wav")
+AddSound("Stalker.Bloodsucker.Hit1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/attack_0.mp3")
+AddSound("Stalker.Bloodsucker.Hit2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/attack_1.mp3")
+AddSound("Stalker.Bloodsucker.Hit3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/attack_2.mp3")
+AddSound("Stalker.Bloodsucker.Hit4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/attack_hit_0.mp3")
+AddSound("Stalker.Bloodsucker.Hit5",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/attack_hit_1.mp3")
 ----DEATH
-AddSound("Stalker.Bloodsucker.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/die_0.wav")
-AddSound("Stalker.Bloodsucker.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/die_1.wav")
-AddSound("Stalker.Bloodsucker.Die3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/die_2.wav")
-AddSound("Stalker.Bloodsucker.Die4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/die_3.wav")
+AddSound("Stalker.Bloodsucker.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/die_0.mp3")
+AddSound("Stalker.Bloodsucker.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/die_1.mp3")
+AddSound("Stalker.Bloodsucker.Die3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/die_2.mp3")
+AddSound("Stalker.Bloodsucker.Die4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/die_3.mp3")
 ----FEEDING
 AddSound("Stalker.Bloodsucker.Feed",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/bs/vampire_sucking.wav")
 

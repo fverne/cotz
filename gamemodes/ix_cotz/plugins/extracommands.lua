@@ -188,7 +188,7 @@ ix.command.Add("chartogglehidden", {
 })
 
 function PLUGIN:ShouldShowPlayerOnScoreboard(client)
-	if client:GetCharacter():GetData("scoreboardhidden", false) then
+	if client:GetCharacter():GetData("scoreboardhidden", false) == true then
 		return false
 	end
 end
