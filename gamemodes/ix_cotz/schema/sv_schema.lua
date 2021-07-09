@@ -1,3 +1,3 @@
 -- for serverside functions
 
-resource.AddWorkshop(2299516854)
+resource.AddWorkshop(2259842946)
