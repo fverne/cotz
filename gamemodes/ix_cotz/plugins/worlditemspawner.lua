@@ -16,7 +16,7 @@ ix.config.Add("worldSpawnerThreshold", 75, "How many items the worldspawner shou
 if SERVER then
 	function PLUGIN:IsClear(position)
 		for i,j in pairs (ents.FindInSphere( position, PLUGIN.saferadius )) do
-			if j:IsPlayer() or j.generated then
+			if j:IsPlayer() or j.bTemporary then
 				return false
 			end
 		end
@@ -64,7 +64,7 @@ if SERVER then
 	function PLUGIN:GetNumSpawnedItems()
 		local n = 0
 		for k,v in pairs(ents.FindByClass("ix_item")) do
-			if( v.generated ) then
+			if( v.bTemporary ) then
 				n = n + 1
 			end
 		end
