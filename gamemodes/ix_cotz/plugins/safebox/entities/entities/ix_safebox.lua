@@ -7,7 +7,7 @@ ENT.bNoPersist = true
 
 if (SERVER) then
 	function ENT:Initialize()
-		self:SetModel("models/props_junk/trashdumpster01a.mdl")
+		self:SetModel("models/props_c17/Lockers001a.mdl")
 		self:PhysicsInit(SOLID_VPHYSICS)
 		self:SetSolid(SOLID_VPHYSICS)
 		self:SetUseType(SIMPLE_USE)
