@@ -45,7 +45,6 @@ function ix.jobs.isStructValid(jobstruct)
   if (!jobstruct.name or type(jobstruct.name) != "string") then return false end
   if (!jobstruct.listenTrigger or type(jobstruct.listenTrigger) != "string") then return false end
   if !jobstruct.numberRec then return false end
-  if !jobstruct.reward then return false end
   if !jobstruct.icon then jobstruct.icon = Material("path/to/defaulticon.png") end
 
   return true

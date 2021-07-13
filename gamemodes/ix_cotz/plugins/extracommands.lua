@@ -166,21 +166,19 @@ ix.command.Add("clearinv", {
 	end
 })
 
-ix.command.Add("chartogglehidden", {
-	description = "Hides the given character from being displayed on the scoreboard.",
+ix.command.Add("plytogglehidden", {
+	description = "Hides the given player from being displayed on the scoreboard.",
 	adminOnly = true,
 	arguments = {
-		ix.type.character
+		ix.type.player
 	},	
-	OnRun = function (self, client, character)
-		local target = character
-		
+	OnRun = function (self, client, target)
 		if (target) then
-			if target:GetData("scoreboardhidden", false) then
-				target:SetData("scoreboardhidden", false)
+			if target:GetNetVar("scoreboardhidden", false) then
+				target:SetNetVar("scoreboardhidden", false)
 				client:Notify(target:GetName().." is now displayed on the scoreboard.")
 			else
-				target:SetData("scoreboardhidden", true)
+				target:SetNetVar("scoreboardhidden", true)
 				client:Notify(target:GetName().." has been hidden on the scoreboard.")
 			end
 		end
@@ -188,7 +186,7 @@ ix.command.Add("chartogglehidden", {
 })
 
 function PLUGIN:ShouldShowPlayerOnScoreboard(client)
-	if client:GetCharacter():GetData("scoreboardhidden", false) == true then
+	if client:GetNetVar("scoreboardhidden", false) == true then
 		return false
 	end
 end
