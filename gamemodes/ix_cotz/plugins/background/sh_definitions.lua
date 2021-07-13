@@ -28,7 +28,7 @@ ix.backgrounds["nothing"] = {
 	"\n\nStarting Equipment:"..
 	"\n  Nothing",
 	OnCreated = function(client, character) 
-		character:GetInventory():Add("value_personal_1")
+		--character:GetInventory():Add("value_personal_1")
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  
@@ -50,7 +50,7 @@ ix.backgrounds["alcoholic_light"] = {
 	"\n  1x Damaged Bag with Supplies"..
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
-		character:GetInventory():Add("kit_newchar")
+		--character:GetInventory():Add("kit_newchar")
 		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("g2contender", 1, {["durability"] = 50})
 		character:GetInventory():Add("45acp", 1, {["quantity"] = 15})
@@ -80,7 +80,7 @@ ix.backgrounds["alcoholic_heavy"] = {
 	"\n  1x Damaged Bag with Supplies"..
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
-		character:GetInventory():Add("kit_newchar")
+		--character:GetInventory():Add("kit_newchar")
 		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("cz52", 1, {["durability"] = 50})
 		character:GetInventory():Add("762x25", 1, {["quantity"] = 32})
@@ -107,7 +107,7 @@ ix.backgrounds["smoker"] = {
 	"\n  1x Damaged Bag with Supplies"..
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
-		character:GetInventory():Add("kit_newchar")
+		--character:GetInventory():Add("kit_newchar")
 		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("tokarev", 1, {["durability"] = 50})
 		character:GetInventory():Add("762x25", 1, {["quantity"] = 32})
@@ -133,7 +133,7 @@ ix.backgrounds["druggie"] = {
 	"\n  1x Damaged Bag with Supplies"..
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
-		character:GetInventory():Add("kit_newchar")
+		--character:GetInventory():Add("kit_newchar")
 		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("makarov", 1, {["durability"] = 50})
 		character:GetInventory():Add("9x18", 1, {["quantity"] = 32})

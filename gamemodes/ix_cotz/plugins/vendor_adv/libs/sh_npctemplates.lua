@@ -302,7 +302,7 @@ ix.npctemplates.soundtemplates["TraderHello"] = {
 
 ix.npctemplates.soundtemplates["TutorialNpc"] = {
 	"npc/shram/idle_16.ogg",
-	"npc/shram/idle_17.ogg",
+	"npc/shram/search_13.ogg",
 	"npc/shram/idle_18.ogg",
 	"npc/shram/idle_20.ogg",
 	"npc/shram/idle_4.ogg"

@@ -23,6 +23,7 @@ function ix.jobs.register(jobstruct,identifier)
     end
   else
     print("ERROR IN JOB DEFINITION")
+	PrintTable(jobstruct)
   end
 end
 

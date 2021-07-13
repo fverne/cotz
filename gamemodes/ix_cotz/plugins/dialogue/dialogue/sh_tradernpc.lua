@@ -17,7 +17,7 @@ DIALOGUE.addTopic("GREETING", {
 
 DIALOGUE.addTopic("TradeTopic", {
 	statement = "Want to trade?",
-	response = "Always - You looking for a good meal?",
+	response = "Absolutely, here's what I have in stock.",
 	postCallback = function(self, client, target)
 		if (SERVER) then
 			local character = client:GetCharacter()
@@ -59,31 +59,23 @@ DIALOGUE.addTopic("TradeTopic", {
 
 DIALOGUE.addTopic("BackgroundTopic", {
 	statement = "Tell me about yourself.",
-	response = "Not a whole lot to say - I came here after consolidating with 'Old Timer', as you know him as. We met each other in a city nearby, back in the eighties, under different circumstances than these. I worked at a volunteer at a homeless shelter and... Well maybe the old guy will open up about it at some point. Let's just say we have different reasons for being here. ",
+	response = "I just came here to do a good deal for all of us. Mostly me. ",
 	options = {
 		"BackgroundTopic2",
 	}
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Well, what's your reason?",
-	response = "Things didn't work out back home. I was led by temptations and my wife didn't take so kindly. But who cares, she was kind of on the big side anyways and didn't want to cook for me. Who would have believed, I had to cook by myself! It's her own fault and was definitely something she had coming. Stupid bitch.",
+	statement = "Uh, 'mostly you'?",
+	response = "Yes. I sell you gear, and you don't ask how I get it. You pay the price and don't try to haggle. I do. How's that?",
 	options = {
 		"BackgroundTopic3",
 	}
 })
 
 DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "Right... What made you come here, of all places?",
-	response = "Well, I heard about the artifacts of course, from good oldie! And I met some crazy people through my volunteer work who are interested in astrology or whatever it's called, they want to pay a big extra for whatever supernatural elements I can get out of here. Apparently they have sources who pay big. I don't care if you believe it, just trust the cash when it flows in, alright?",
-	options = {
-		"BackgroundTopic4",
-	}
-})
-
-DIALOGUE.addTopic("BackgroundTopic4", {
-	statement = "I'll keep that in mind.",
-	response = "You're always welcome to trade here. And remember - I do the best meals in town!",
+	statement = "Sure. Is there another way to get gear out here?",
+	response = "Fuck off.",
 	options = {
 		"BackTopic",
 	}

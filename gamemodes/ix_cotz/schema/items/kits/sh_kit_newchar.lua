@@ -9,7 +9,7 @@ ITEM.weight = 9
 
 ITEM.itemsForcedDrop = {
 	{"medic_medkit_1"}, -- medkit
-	{"value_personal_1"}, -- small valuable, mostly for setting, not worth a lot
+	{"skinningknife_1"}, -- skinningknife, for poaching mutants
 }
 
 -- food
