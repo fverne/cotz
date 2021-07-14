@@ -40,7 +40,7 @@ function PLUGIN:PopulateHelpMenu(tabs)
 
         local keys = container:Add("DLabel")
         keys:SetFont("stalkerregularfont")
-        keys:SetText("Some basic starting tips: Don't die, as death resembles ironman mode without deleting your character. Good luck, stalkers, and have fun!")
+        keys:SetText("Don't die, as death resembles ironman mode without deleting your character. Good luck, stalkers, and have fun!")
         keys:Dock(TOP)
         keys:DockMargin(0, 16, 0, 0)
         keys:SetWrap(true)
