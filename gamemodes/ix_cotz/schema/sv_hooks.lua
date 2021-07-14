@@ -9,7 +9,8 @@ function Schema:OnCharacterCreated(client, character)
 	
 		if (character:GetFaction() == FACTION_LONERS) then
 			items = {
-				"kit_newchar",
+				--"kit_newchar",
+				--"skinningknife_1",
 			}
 		end
 		

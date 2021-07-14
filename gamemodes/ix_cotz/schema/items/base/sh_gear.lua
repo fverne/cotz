@@ -261,7 +261,7 @@ end)
 
 -- On player uneqipped the item, Removes a weapon from the player and keep the ammo in the item.
 ITEM.functions.EquipUn = { -- sorry, for name order.
-	name = "Unequip",
+	name = "Take Off",
 	tip = "equipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)
@@ -282,7 +282,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 
 -- On player eqipped the item, Gives a weapon to player and load the ammo data from the item.
 ITEM.functions.Equip = {
-	name = "Equip",
+	name = "Put On",
 	tip = "equipTip",
 	icon = "icon16/stalker/equip.png",
 	OnRun = function(item)

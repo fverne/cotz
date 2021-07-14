@@ -125,6 +125,7 @@ if (CLIENT) then
 	
 	--removes help menu tabs (as its now an encyclopedia)
 	hook.Add("PopulateHelpMenu", "ixHelpRemove", function(tabs)
+		tabs["credits"] = nil
 	    tabs["flags"] = nil
 	    tabs["plugins"] = nil
 	end)

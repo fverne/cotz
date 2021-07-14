@@ -29,7 +29,7 @@ function ITEM:CanTransfer(oldInventory, newInventory)
 end
 
 ITEM.functions.Equip = { -- sorry, for name order.
-	name = "Equip",
+	name = "Attach to Belt",
 	tip = "useTip",
 	icon = "icon16/stalker/equip.png",
 	sound = "stalkersound/inv_dozimetr.ogg",
@@ -85,7 +85,7 @@ ITEM.functions.Equip = { -- sorry, for name order.
 }
 
 ITEM.functions.EquipUn = { -- sorry, for name order.
-	name = "Unequip",
+	name = "Detach from Belt",
 	tip = "equipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)
