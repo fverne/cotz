@@ -8,7 +8,7 @@ DIALOGUE.addTopic("GREETING", {
 		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
-		--"AboutProgression",
+		"AboutProgression",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
@@ -233,59 +233,19 @@ DIALOGUE.addTopic("GetTask", {
 	end,
 })
 
-DIALOGUE.addTopic("ProgressionTestTopic", {
-	statement = "Progression?",
-	response = "ok)",
-	postCallback = function(self, client, target)
-		if (SERVER) then
-			ix.progression.AddProgessionValue("TestProgression", 1, client:Name())
-		end
-	end,
-	options = {
-		"BackTopic",
-	}
-})
-
-/*
-
-
 DIALOGUE.addTopic("ViewProgression", {
 	statement = "",
 	response = "",
+	options = {
+		"BackTopic"
+	},
 	IsDynamicFollowup = true,
 	DynamicPreCallback = function(self, player, target, dyndata)
-		if(dyndata) then
-			if (CLIENT) then
-				self.response = dyndata.description
-			else
-				target.taskid = dyndata.identifier
-			end
+		if (dyndata and CLIENT) then
+			local progstatus 	= ix.progression.status[dyndata.identifier]
+			local progdef 		= ix.progression.definitions[dyndata.identifier]
+			self.response = progdef.BuildResponse(progdef, progstatus)
 		end
-	end,
-	GetDynamicOptions = function(self, client, target)
-		local dynopts = {
-			{statement = "I'll take it", topicID = "ConfirmTask", dyndata = {accepted = true}},
-			{statement = "I'll pass", topicID = "ConfirmTask", dyndata = {accepted = false}},
-		}
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-		if( SERVER and dyndata.accepted ) then
-			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(target.taskid))
-
-			client:ixJobAdd(target.taskid, target:GetDisplayName())
-
-			ix.jobs.setNPCJobTaken(target:GetDisplayName(), target.taskid)
-		end
-		if(SERVER)then
-			target.taskid = nil
-		end
-		-- Return the next topicID
-		return "BackTopic"
 	end,
 })
 
@@ -297,20 +257,23 @@ DIALOGUE.addTopic("AboutProgression", {
 		"BackTopic"
 	},
 	preCallback = function(self, client, target)
-		--if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
-		--	self.response = "I already gave you some work."
-		--end
+		if( CLIENT ) then
+			if #ix.progression.GetActiveProgressions("'Old Timer'") <= 0 then
+				self.response = "Nothing at the moment."
+			end
+
+			net.Start("progression_sync")
+			net.SendToServer()
+		end
 	end,
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
 
-		--for k, v in pairs(ix.progression.GetActiveProgressions("'Old Timer'")) do -- needs the function made first. 
-		--	table.inserts(dynopts, {statement = v.name, topicID = "AboutProgression", dyndata = {identifier = k}})
-		--end
+		for _, progid in pairs(ix.progression.GetActiveProgressions("'Old Timer'")) do
+			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})
+		end
 
-		table.insert(dynopts, {statement = ix.jobs.getFormattedNameInactive(v), topicID = "GetTask", dyndata = {identifier = v}})
-
-		
 		-- Return table of options
 		-- statement : String shown to player
 		-- topicID : should be identical to addTopic id
@@ -320,10 +283,10 @@ DIALOGUE.addTopic("AboutProgression", {
 	ResolveDynamicOption = function(self, client, target, dyndata)
 
 		-- Return the next topicID
-		return "ViewProgression", {}
+		return "ViewProgression", dyndata
 	end,
 })
-*/
+
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
@@ -334,7 +297,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
-		--"AboutProgression",
+		"AboutProgression",
 		"GOODBYE"
 	}
 })

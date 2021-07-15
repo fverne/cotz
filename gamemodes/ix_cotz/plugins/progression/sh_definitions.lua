@@ -11,9 +11,24 @@
 	})
 ]]--
 
-hook.Add("ix_OnJobComplete", "OldTimer_Task1Listener", function(client, npcidentifier, identifer)
-	if npcidentifier == "'Old Timer'" then
-		if ix.progression.GetProgressionValue("TutorialNPCProg1") < 15 then
+hook.Add("ix_OnJobComplete", "OldTimer_Task1Listener", function(client, npcidentifier, identifier)
+	local iscorrecttasktype = false
+
+	local killcategories = {
+		["mutantkillgroupeasy"] = true,
+		["mutantkillgroupmedium"] = true,
+		["mutantkillgrouphard"] = true,
+		["mutantkilleasy"] = true,
+		["mutantkillmedium"] = true,
+		["mutantkillhard"] = true,
+	}
+
+	for k, v in pairs(ix.jobs.list[identifier].categories) do
+		if killcategories[v] then iscorrecttasktype = true end
+	end
+
+	if npcidentifier == "'Old Timer'" and iscorrecttasktype then
+		if ix.progression.IsActive("TutorialNPCProg1") and ix.progression.GetProgressionValue("TutorialNPCProg1") < 15 then
 			ix.progression.AddProgessionValue("TutorialNPCProg1", 1, client:Name())
 		end
 	end
@@ -22,6 +37,21 @@ end)
 ix.progression.Register("TutorialNPCProg1", {
 	name = "Tutorial NPC Kill Mutants 1",
 	description = "First Task",
+	keyNpc = "'Old Timer'",
+	defaultActive = true,
+	BuildResponse = function(self, status)
+		-- Find next treshold
+		local tresh = 0
+
+		for k,v in ipairs( self.progressthresholds ) do
+			if v > status.value then
+				tresh = v
+				break
+			end
+		end
+
+		return string.format("I need you to clear out a couple more mutant nests for me, %d should do.", tresh-status.value)
+	end,
 	progressfunctions = {
 		[1] = {
 			OnRun = function()
@@ -31,10 +61,12 @@ ix.progression.Register("TutorialNPCProg1", {
 					npc:AddItemToList("medic_stimpak_1", nil, 4, "SELLANDBUY", 4, 1, 4)
 				end
 				
-				ix.chat.Send(nil, "npcpdainternal", message, nil, nil, {
+				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = "'Old Timer'",
-					message = "Good job, we've completed all 15 tasks and now have gained a slight foothold in the zone. I invited my good friend here, Technut. He should be in the small hut next to us."
+					message = "Good job, you've lowered the mutant population a bit, and as such we've gained a slight foothold in the zone. I invited my good friend, Technut, here. He should be moving into the small hut next to the building I usually stay in."
 				})
+				
+				-- Spawn Technut npc
 
 				ix.util.SpawnAdvDupe2Dupe( "progressiontest1" )
 			end,
@@ -48,10 +80,12 @@ ix.progression.Register("TutorialNPCProg1", {
 					npc:AddItemToList("medic_medkit_2", nil, 4, "SELLANDBUY", 4, 1, 4)
 				end
 
-				ix.chat.Send(nil, "npcpdainternal", message, nil, nil, {
+				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = "'Old Timer'",
-					message = "Due to our extraoridinary efforts, I have been able to import a syrette kit from some leftover army supplies they don't need anymore."
+					message = "Due to your extraordinary efforts, I have been secured supply lines to import some medical supplies from some leftover army supplies they don't need anymore."
 				})
+
+				ix.progression.SetActive("TutorialNPCProg1", false)
 
 			end,
 			RunOnce = false

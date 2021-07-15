@@ -178,7 +178,7 @@ if SERVER then
         --Check rewards & rewardcount
         local identifier = curJobs[npcidentifier].identifier
 
-        hook.Run("ix_OnJobComplete", client, npcidentifier, identifer)
+        hook.Run("ix_OnJobComplete", self, npcidentifier, identifier)
 
         local rewCount = 0
         if type(ix.jobs.list[identifier].rewardCount) == "table" then

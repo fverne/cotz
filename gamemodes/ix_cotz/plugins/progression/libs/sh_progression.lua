@@ -10,9 +10,19 @@ function ix.progression.SetProgressionValue(progid, amount, playername)
 
 		ix.progression.status[progid].value = amount
 
-		ix.progression.status[progid].contributors = ix.progression.status[progid].contributors or {}
-		ix.progression.status[progid].contributors[playername] = ix.progression.status[progid].contributors[playername] or 0
-		ix.progression.status[progid].contributors[playername] = ix.progression.status[progid].contributors[playername] + amount
+		for level, threshold in pairs(ix.progression.definitions[progid].progressthresholds) do
+			if( preval < threshold && ix.progression.status[progid].value >= threshold) then
+				ix.progression.InvokeProgressionLevel(progid, level) -- If we pass a threshold, run the function
+			end
+		end
+	end
+end
+
+function ix.progression.SetActive(progid, active)
+	if (ix.progression.definitions[progid]) then
+		ix.progression.status[progid] = ix.progression.status[progid] or {}
+
+		ix.progression.status[progid].value = tobool(active)
 
 		for level, threshold in pairs(ix.progression.definitions[progid].progressthresholds) do
 			if( preval < threshold && ix.progression.status[progid].value >= threshold) then
@@ -22,6 +32,17 @@ function ix.progression.SetProgressionValue(progid, amount, playername)
 	end
 end
 
+function ix.progression.IsActive(progid)
+	if (ix.progression.definitions[progid]) then
+		ix.progression.status[progid] = ix.progression.status[progid] or {}
+		ix.progression.status[progid].active = ix.progression.status[progid].active or ix.progression.definitions[progid].defaultActive
+		return ix.progression.status[progid].active
+	else
+		return false
+	end
+end
+
+
 function ix.progression.GetProgressionValue(progid)
 	if (ix.progression.definitions[progid]) then
 		ix.progression.status[progid] = ix.progression.status[progid] or {}
@@ -30,8 +51,28 @@ function ix.progression.GetProgressionValue(progid)
 	end
 end
 
+function ix.progression.GetActiveProgressions(npcidentifier)
+	local ret = {}
+
+	for progid,progstruct in pairs(ix.progression.definitions) do
+		if(progstruct.keyNpc == npcidentifier and ix.progression.IsActive(progid)) then
+			table.insert(ret, progid)
+		end
+	end
+
+	return ret
+end
+
 function ix.progression.AddProgessionValue(progid, amount, playername)
-	ix.progression.SetProgressionValue(progid, ix.progression.GetProgressionValue(progid) + amount, playername)
+	if (ix.progression.definitions[progid]) then
+		ix.progression.SetProgressionValue(progid, ix.progression.GetProgressionValue(progid) + amount, playername)
+
+		ix.progression.status[progid] = ix.progression.status[progid] or {}
+
+		ix.progression.status[progid].contributors = ix.progression.status[progid].contributors or {}
+		ix.progression.status[progid].contributors[playername] = ix.progression.status[progid].contributors[playername] or 0
+		ix.progression.status[progid].contributors[playername] = ix.progression.status[progid].contributors[playername] + amount
+	end
 end
 
 function ix.progression.RemoveProgressionValue(progid, amount, playername)
@@ -89,4 +130,22 @@ function ix.progression.GetNPCFromName(npcname)
 	end
 
 	return nil
+end
+
+if CLIENT then
+	net.Receive("progression_sync_receive", function(len)
+		local tbl = net.ReadTable()
+
+		ix.progression.status = tbl
+	end)
+
+else
+	util.AddNetworkString( "progression_sync" )
+	util.AddNetworkString( "progression_sync_receive" )
+
+	net.Receive("progression_sync", function(len, pl)
+		net.Start("progression_sync_receive")
+			net.WriteTable(ix.progression.status)
+		net.Broadcast()
+	end)
 end
