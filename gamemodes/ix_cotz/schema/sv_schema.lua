@@ -14,12 +14,8 @@ resource.AddWorkshop( '2290889386' ) -- cotz_items
 resource.AddWorkshop( '2290895919' ) -- cotz_ui
 resource.AddWorkshop( '2290874511' ) -- cotz_gmodreplacements
 --resource.AddWorkshop( '1953373229' ) -- Nodegraph Editor (Updated to support larger limits)
-resource.AddWorkshop( '1680890004' ) -- [VJ] Project S.T.A.L.K.E.R. - "MODELS"
-resource.AddWorkshop( '1680884607' ) -- [VJ] Project S.T.A.L.K.E.R. - "SOUNDS"
-resource.AddWorkshop( '1680850503' ) -- [VJ] Project S.T.A.L.K.E.R. - "TEXTURES" 1
-resource.AddWorkshop( '1680859422' ) -- [VJ] Project S.T.A.L.K.E.R. - "TEXTURES" 2
-resource.AddWorkshop( '1680863068' ) -- [VJ] Project S.T.A.L.K.E.R. - "TEXTURES" 3
 resource.AddWorkshop( '1470158687' ) -- Full Integrated Animation P.M. for NPCs HL2
 resource.AddWorkshop( '2315743109' ) -- cotz_temp_humannpc
 resource.AddWorkshop( '2447774443' ) -- StormFox 2
 resource.AddWorkshop( '2259842946' ) -- Great Swamp
+resource.AddWorkshop( '2547569131' ) -- cotz_projectstalker
