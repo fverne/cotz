@@ -1,4 +1,4 @@
-ITEM.name = "Homemade Knife"
+ITEM.name = "Homemade Poaching Knife"
 ITEM.description = "A sharpened piece of iron with a makeshift handle."
 ITEM.model = "models/weapons/w_knife_ct.mdl"
 

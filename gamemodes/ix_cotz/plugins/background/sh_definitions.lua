@@ -48,7 +48,7 @@ ix.backgrounds["alcoholic_light"] = {
 	"\n  1x Ochakovo Beer, 2l (Almost Full)"..
 	"\n  1x Baltika no 7, 900ml"..
 	"\n  1x Damaged Bag with Supplies"..
-	"\n  1x Homemade Knife"..
+	"\n  1x Homemade Poaching Knife"..
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
@@ -76,18 +76,16 @@ ix.backgrounds["alcoholic_heavy"] = {
 	description = "After a traumatic event, you couldn't get back on your feet and started hitting the bottle.".. 
 	"\n\nAddicted to Strong Alcohol"..
 	"\n\nStarting Equipment:"..
-	"\n  1x CZ52 (7.62x25mm) (Damaged)"..
-	"\n  32x rounds of 7.62x25mm"..
+	"\n  1x Bat"..
 	"\n  1x Smirnoff Vodka, 700ml"..
 	"\n  1x Shevkoff Black Ultra Premium Vodka, 500ml (Half-Empty)"..
 	"\n  1x Damaged Bag with Supplies"..
-	"\n  1x Homemade Knife"..
+	"\n  1x Homemade Poaching Knife"..
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
 		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
-		character:GetInventory():Add("cz52", 1, {["durability"] = 50})
-		character:GetInventory():Add("762x25", 1, {["quantity"] = 32})
+		character:GetInventory():Add("bat", 1)
 		character:GetInventory():Add("drink_vodka_5", 1)
 		character:GetInventory():Add("drink_vodka_3", 1, {["quantity"] = 1})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
@@ -107,17 +105,15 @@ ix.backgrounds["smoker"] = {
 	description = "Despite many tries, you could never get rid of the nicotine addiction.".. 
 	"\n\nAddicted to Nicotine"..
 	"\n\nStarting Equipment:"..
-	"\n  1x TT-33 (7.62x25mm) (Damaged)"..
-	"\n  32x rounds of 7.62x25mm"..
+	"\n  1x Lead Pipe"
 	"\n  1x 'Spark' Cigarettes (20pk) (Used)"..
 	"\n  1x Damaged Bag with Supplies"..
-	"\n  1x Homemade Knife"..
+	"\n  1x Homemade Poaching Knife"..
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
 		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
-		character:GetInventory():Add("tokarev", 1, {["durability"] = 50})
-		character:GetInventory():Add("762x25", 1, {["quantity"] = 32})
+		character:GetInventory():Add("leadpipe", 1)
 		character:GetInventory():Add("drug_cigarette_4", 1, {["quantity"] = math.random(13,15)})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
 		character:GetInventory():Add("kit_newchar", 1)
@@ -136,17 +132,15 @@ ix.backgrounds["druggie"] = {
 	description = "You've tried it all, and you're still hooked.".. 
 	"\n\nAddicted to drugs"..
 	"\n\nStarting Equipment:"..
-	"\n  1x Makarov (9x18mm) (Damaged)"..
-	"\n  32x rounds of 9x18mm"..
+	"\n  1x Crowbar"..
 	"\n  1x Painkillers"..
 	"\n  1x Damaged Bag with Supplies"..
-	"\n  1x Homemade Knife"..
+	"\n  1x Homemade Poaching Knife"..
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
 		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
-		character:GetInventory():Add("makarov", 1, {["durability"] = 50})
-		character:GetInventory():Add("9x18", 1, {["quantity"] = 32})
+		character:GetInventory():Add("crowbar", 1)
 		character:GetInventory():Add("drug_painkillers", 1)
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
 		character:GetInventory():Add("kit_newchar", 1)
