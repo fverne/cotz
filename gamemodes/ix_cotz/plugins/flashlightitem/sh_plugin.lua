@@ -5,9 +5,8 @@ PLUGIN.description = "Adds an item allowing players to toggle their flashlight."
 
 function PLUGIN:PlayerSwitchFlashlight(client, bEnabled)
 	local character = client:GetCharacter()
-	local inventory = character and character:GetInventory()
 
-	if (inventory and inventory:HasItem("headlamp")) then
+	if (character:GetData("headlamp", false) == true) then
 		return true
 	end
 end
