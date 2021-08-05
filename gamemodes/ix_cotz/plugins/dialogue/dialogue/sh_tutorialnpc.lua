@@ -4,6 +4,7 @@ DIALOGUE.addTopic("GREETING", {
 	response = "Yes?",
 	options = {
 		"TradeTopic",
+		"TutorialTopic",
 		"BackgroundTopic",
 		"InterestTopic",
 		"AboutWorkTopic",
@@ -90,6 +91,78 @@ DIALOGUE.addTopic("BackgroundTopic4", {
 	}
 })
 
+
+DIALOGUE.addTopic("TutorialTopic", {
+	statement = "Can I ask you something that is useful for a newbie like me?",
+	response = "What do you want to know?",
+	options = {
+		"TutorialTopic1",
+		"TutorialTopic2",
+		"TutorialTopic3",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopicBack", {
+	statement = "Alright, let me ask you something else.",
+	response = "Sure.",
+	options = {
+		"TutorialTopic",
+		"BackTopic",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopic1", {
+	statement = "What is this place?",
+	response = "This is an area near the Chernobyl exclusion zone. More specifically, we're in the great swamps. Until recently, this area was completely abandoned, but me and another local, 'Technut', set up camp here in this shithole. We call it our 'Eastern Haven'. We could definitely use some help getting this place in proper shape.",
+	options = {
+		"TutorialTopic1_1",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopic1_1", {
+	statement = "How can I help out?",
+	response = "If we work together, I'm sure we will get this place in proper shape in no time. Go talk to the other inhabitants, and see if they need anything. You'll be properly rewarded. Both personally by the inhabitant, but as we keep helping each other out, it will unlock more opportunities for us to do, and more people will move here, each with their own agendas. You should ask around to see what people need help with. Both us oldies, but also the younger opportunity seekers like yourself.",
+	options = {
+		"TutorialTopicBack",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopic2", {
+	statement = "How dangerous is this place?",
+	response = "There are two types of people here. The careful people, and the dead people. As you can imagine, a place like this where the laws of science do not apply as anywhere in the world, can be quite unforgiving and dangerous. The dangers are manyfold, but the biggest of your troubles will be the mutants, and the anomalies.",
+	options = {
+		"TutorialTopic2_1",
+		"TutorialTopic2_2",
+		"TutorialTopicBack",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopic2_1", {
+	statement = "Tell me about the anomalies.",
+	response = "The anomalies are a work of a merciless god. I've seen animals being torn apart by sheer gravity, and those are the lucky ones. Luckily, most are static, so if you watch your step and don't fall into one, you should be alright. It should be noted that sometimes, the merciless god seems to be merciful, and he releases a part of scientific wonder near them. They are artifacts that mostly are not dangerous to the wielder, sometimes with benefits, but always worth a lot to the scientific community outside the zone, and hence worth quite a lot on the black market.",
+	options = {
+		"TutorialTopic2_2",
+		"TutorialTopicBack",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopic2_2", {
+	statement = "Tell me about the mutants.",
+	response = "After the first couple of emissions, many of the animals here died, but those that survived had a worse fate. They all turned into dangerous, aggressive, mutated versions of their former selves, and are no longer good for anything but having to be put down, as they will all try to take you down, regardless of your intentions. Due to the mutations, many of the mutants bodyparts have special properties that are valuable to scientists. I suggest poaching the mutants whenever possible, and sell off the dead parts.",
+	options = {
+		"TutorialTopic2_1",
+		"TutorialTopicBack",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopic3", {
+	statement = "What gear do you recommend I get my hands on?",
+	response = "The most neccessary things are a geiger counter, some medical items, and something to defend yourself with. Always carry those three with you. Also, keep your weapons in good condition always if you want them to shoot straight, and remember, we don't have access to many spare parts here, so firearms will not be maintainable forever. 'Technut' can help you out.",
+	options = {
+		"TutorialTopicBack",
+	}
+})
+
 DIALOGUE.addTopic("InterestTopic", {
 	statement = "Can you tell me something interesting?",
 	response = "No.",
@@ -172,8 +245,8 @@ DIALOGUE.addTopic("ConfirmTask", {
 	end,
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {
-			{statement = "I'll take it", topicID = "ConfirmTask", dyndata = {accepted = true}},
-			{statement = "I'll pass", topicID = "ConfirmTask", dyndata = {accepted = false}},
+			{statement = "I'll take it.", topicID = "ConfirmTask", dyndata = {accepted = true}},
+			{statement = "I'll pass.", topicID = "ConfirmTask", dyndata = {accepted = false}},
 		}
 		-- Return table of options
 		-- statement : String shown to player
@@ -293,6 +366,7 @@ DIALOGUE.addTopic("BackTopic", {
 	response = "All right.",
 	options = {
 		"TradeTopic",
+		"TutorialTopic",
 		"BackgroundTopic",
 		"InterestTopic",
 		"AboutWorkTopic",
@@ -304,6 +378,6 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Come back soon, STALKER..."
+	response = "Come back soon, stranger..."
 })
 
