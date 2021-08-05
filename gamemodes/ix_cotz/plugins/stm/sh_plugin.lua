@@ -64,17 +64,15 @@ local function CalcStaminaChange(client)
 
 			if (value == 0 and !client:GetNetVar("brth", false)) then
 				client:SetRunSpeed(walkSpeed)
-				client:SetJumpPower(1)
 				client:SetNetVar("brth", true)
-				client:EmitSound("stalkersound/breath_1.ogg", 60, 100, 1)
+				client:EmitSound("stalkersound/breath_1.ogg", 80, 100, 1)
 
-				character:UpdateAttrib("end", 0.1)
-				character:UpdateAttrib("stm", 0.01)
+				--character:UpdateAttrib("end", 0.1)
+				--character:UpdateAttrib("stm", 0.01)
 
 				hook.Run("PlayerStaminaLost", client)
 			elseif (value >= 50 and client:GetNetVar("brth", false)) then
 				client:SetRunSpeed(runSpeed)
-				client:SetJumpPower(200)
 				client:SetNetVar("brth", nil)
 
 				hook.Run("PlayerStaminaGained", client)
@@ -83,6 +81,21 @@ local function CalcStaminaChange(client)
 	end
 end
 
+if (CLIENT) then
+	-- should disable jumping, needs testing though
+	local function NoJump( cmd )
+		if cmd:GetButtons() & IN_JUMP > 0 then
+			cmd:SetButtons( cmd:GetButtons() - IN_JUMP )
+		end
+	end
+
+	-- if the char is out of breath, disallow jumping
+	function PLUGIN:CreateMove(cmd)
+		if LocalPlayer():GetNetVar("brth", false) then
+			NoJump(cmd)
+		end
+	end
+end
 
 if (SERVER) then
 	function PLUGIN:PostPlayerLoadout(client)
