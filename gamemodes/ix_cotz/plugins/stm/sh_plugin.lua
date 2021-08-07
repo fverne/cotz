@@ -84,7 +84,7 @@ end
 if (CLIENT) then
 	-- should disable jumping, needs testing though
 	local function NoJump( cmd )
-		if cmd:GetButtons() & IN_JUMP > 0 then
+		if bit.band(cmd:GetButtons(), IN_JUMP) > 0 then
 			cmd:SetButtons( cmd:GetButtons() - IN_JUMP )
 		end
 	end

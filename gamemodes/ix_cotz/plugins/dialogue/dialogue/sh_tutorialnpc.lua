@@ -99,6 +99,7 @@ DIALOGUE.addTopic("TutorialTopic", {
 		"TutorialTopic1",
 		"TutorialTopic2",
 		"TutorialTopic3",
+		"BackTopic",
 	}
 })
 
@@ -106,7 +107,9 @@ DIALOGUE.addTopic("TutorialTopicBack", {
 	statement = "Alright, let me ask you something else.",
 	response = "Sure.",
 	options = {
-		"TutorialTopic",
+		"TutorialTopic1",
+		"TutorialTopic2",
+		"TutorialTopic3",
 		"BackTopic",
 	}
 })

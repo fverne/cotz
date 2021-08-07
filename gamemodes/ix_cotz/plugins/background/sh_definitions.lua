@@ -105,7 +105,7 @@ ix.backgrounds["smoker"] = {
 	description = "Despite many tries, you could never get rid of the nicotine addiction.".. 
 	"\n\nAddicted to Nicotine"..
 	"\n\nStarting Equipment:"..
-	"\n  1x Lead Pipe"
+	"\n  1x Lead Pipe"..
 	"\n  1x 'Spark' Cigarettes (20pk) (Used)"..
 	"\n  1x Damaged Bag with Supplies"..
 	"\n  1x Homemade Poaching Knife"..

@@ -6,6 +6,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 1950
 ITEM.weight = 0.310
+ITEM.isHeadLamp = true
 
 ITEM.img = ix.util.GetMaterial("cotz/ui/icons/misc_headlamp.png")
 ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
@@ -52,7 +53,7 @@ ITEM.functions.Equip = { -- sorry, for name order.
 
 					return false
 				else
-					if (itemTable.isPoachKnife and itemTable:GetData("equip")) then
+					if (itemTable.isHeadLamp and itemTable:GetData("equip")) then
 						client:NotifyLocalized("You are already equipping a headlamp.")
 
 						return false
@@ -62,7 +63,7 @@ ITEM.functions.Equip = { -- sorry, for name order.
 		end
 
 		item:SetData("equip", true)
-		item:GetOwner():SetData("headlamp", true)
+		char:SetData("headlamp", true)
 		item.player:EmitSound("stalkersound/inv_slot.mp3", 40)
 
 		return false
@@ -82,7 +83,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	OnRun = function(item)
 		local client = item.player
 		item:SetData("equip", false)
-		item:GetOwner():SetData("headlamp", false)
+		client:GetCharacter():SetData("headlamp", false)
 
 		item.player:EmitSound("stalkersound/inv_slot.mp3", 40)
 
@@ -97,6 +98,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 }
 
 ITEM:Hook("drop", function(item)
+	item:SetData("equip", false)
 	item.player:Flashlight(false)
-	item:GetOwner():SetData("headlamp", false)
+	item.player:GetCharacter():SetData("headlamp", false)
 end)

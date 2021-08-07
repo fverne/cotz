@@ -8,22 +8,36 @@ ix.char.RegisterVar("nickname", {
 	default = nil,
 	bNoDisplay = true,
 	OnSet = function(character, value)
-        local client = character:GetPlayer()
+
+		local client = character:GetPlayer()
+
+		if value == nil then
+			if character.vars.nickname != nil then
+				local name = string.Split(client:GetCharacter():GetName(), " ")
+				string.Split(client:GetCharacter():GetName(), " ")
+				local newName = name[1].." "..name[3]
+				
+				client:GetCharacter():SetName(newName)
+			end
+
+			character.vars.nickname = value
+			return 
+		end
 
         if (!string.find(client:Name(), "'")) then
             local name = string.Split(client:GetCharacter():GetName(), " ")
-            local newName = name[1].." '"..nickname.."' "..name[2]
+            local newName = name[1].." '"..value.."' "..name[2]
             
             client:GetCharacter():SetName(newName)
         else
             local name = string.Split(client:GetCharacter():GetName(), " ")
             string.Split(client:GetCharacter():GetName(), " ")
-            local newName = name[1].." '"..nickname.."' "..name[3]
+            local newName = name[1].." '"..value.."' "..name[3]
             
             client:GetCharacter():SetName(newName)
         end
-        
-        character.vars.nickname = value
+
+		character.vars.nickname = value
     end
 })
 
