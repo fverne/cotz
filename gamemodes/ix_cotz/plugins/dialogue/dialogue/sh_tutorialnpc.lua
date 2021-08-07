@@ -6,7 +6,6 @@ DIALOGUE.addTopic("GREETING", {
 		"TradeTopic",
 		"TutorialTopic",
 		"BackgroundTopic",
-		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
 		"AboutProgression",
@@ -163,14 +162,6 @@ DIALOGUE.addTopic("TutorialTopic3", {
 	response = "The most neccessary things are a geiger counter, some medical items, and something to defend yourself with. Always carry those three with you. Also, keep your weapons in good condition always if you want them to shoot straight, and remember, we don't have access to many spare parts here, so firearms will not be maintainable forever. 'Technut' can help you out.",
 	options = {
 		"TutorialTopicBack",
-	}
-})
-
-DIALOGUE.addTopic("InterestTopic", {
-	statement = "Can you tell me something interesting?",
-	response = "No.",
-	options = {
-		"BackTopic",
 	}
 })
 
@@ -371,7 +362,6 @@ DIALOGUE.addTopic("BackTopic", {
 		"TradeTopic",
 		"TutorialTopic",
 		"BackgroundTopic",
-		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
 		"AboutProgression",
