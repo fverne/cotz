@@ -87,6 +87,7 @@ function PLUGIN:ItemDummiesToItems()
 			if (IsValid(physObj)) then
 				physObj:EnableMotion(shouldunfreeze)
 			end
+			ent.bTemporary = true
 		end, v:GetAngles(), item[2] or {})
 		v:Remove()
 	end
