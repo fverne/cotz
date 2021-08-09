@@ -237,3 +237,40 @@ PLUGIN.eventdefs["ShippingCrate_1"] = {
 			return dat
 		end
 	}
+
+
+	PLUGIN.eventdefs["Jumppuzzle_1"] = {
+		key = "Jumppuzzle_1",
+		allowedPoints = {"jumppuzzle_1"},
+		difficulty = 1,
+		funcPrestart = function(dat)
+			ix.util.SpawnAdvDupe2Dupe("event_jumppuzzle_1", "jumppuzzle")
+
+			return dat
+		end,
+		funcStart = function(dat)
+
+			return dat
+		end,
+		funcUpdate = function(dat) 
+			print("Update")
+			return dat
+		end,
+		funcShouldEnd = function(dat)
+			shouldend = true
+			print("shouldEnd")
+			for i,j in pairs (ents.FindInSphere( dat.eventpoint[1] + Vector(0, 0, 800), 512 )) do
+				if(j:GetClass() == "ix_item" && j.uniqueID == "hidestash_1") then
+					shouldend = false
+					break
+				end
+			end
+
+			return shouldend
+		end,
+		funcEnd = function(dat)
+			print("end")
+			ix.util.DepawnAdvDupe2Dupe("jumppuzzle")
+			return dat
+		end
+	}
