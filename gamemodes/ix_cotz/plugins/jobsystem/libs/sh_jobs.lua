@@ -188,7 +188,7 @@ if SERVER then
         end
 
         for i = 1, rewCount do
-          local reward
+          local reward = 0
           if type(ix.jobs.list[identifier].reward) == "table" then
             reward = table.Random(ix.jobs.list[identifier].reward)
           else 
@@ -196,11 +196,13 @@ if SERVER then
           end
 
           --Give player items
-          if (self:GetCharacter() and !self:GetCharacter():GetInventory():Add(reward[1], 1, reward[2] or {})) then
+          if (reward != 0 and self:GetCharacter() and !self:GetCharacter():GetInventory():Add(reward[1], 1, reward[2] or {})) then
             ix.item.Spawn(reward[1], self:GetItemDropPos(), nil, AngleRand(), reward[2] or {})
           end
 
-          ix.dialogue.notifyItemGet(self, ix.item.list[reward[1]].name)
+          if (reward != 0) then
+            ix.dialogue.notifyItemGet(self, ix.item.list[reward[1]].name)
+          end
         end
 
         self:addReputation(ix.jobs.list[identifier].repReward)
