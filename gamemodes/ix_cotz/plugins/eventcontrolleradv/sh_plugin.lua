@@ -25,6 +25,10 @@ PLUGIN.saferadius = 1000
 
 PLUGIN.currentEvents = {} --To keep track of and update running events
 
+PLUGIN.spawntime = CurTime() + 30
+PLUGIN.updatetime = CurTime() + 30
+PLUGIN.populate = false
+
 local icon = Material("vgui/icons/news.png")
 
 ix.chat.Register("eventpda", {
@@ -79,11 +83,7 @@ ix.chat.Register("eventpdainternal", {
 	end,
 })
 
-if SERVER then
-	local spawntime = CurTime() + 30
-	local updatetime = CurTime() + 30
-	local populate = false
-	
+if SERVER then	
 	local function isClear(position)
 		
 		local currentdefs = {}
@@ -116,11 +116,11 @@ if SERVER then
 	end
 
 	function PLUGIN:setSpawnTime(time)
-		spawntime = time
+		self.spawntime = time
 	end
 	
 	function PLUGIN:setPopulate(bool)
-		populate = bool
+		self.populate = bool
 	end
 
 	function PLUGIN:LoadData()
@@ -132,7 +132,8 @@ if SERVER then
 	end
 	
 	function PLUGIN:Think()
-		if populate then
+
+		if self.populate then
 			for i = 1, self.populateAmount do
 				local spawn = table.Random(self.eventdefs)
 				if (!spawn) then
@@ -151,10 +152,10 @@ if SERVER then
 				self:spawnEvent(eventpoint,spawn)
 			end
 			
-			populate = false
+			self.populate = false
 		end
 		
-		if (updatetime < CurTime() ) then
+		if (self.updatetime < CurTime() ) then
 			for k,v in pairs( self.currentEvents) do
 				local tmpfunc = self.eventdefs[v.eventDef].funcUpdate
 				v = tmpfunc(v)
@@ -169,18 +170,18 @@ if SERVER then
 				end
 			end
 
-			updatetime = CurTime() + self.updaterate
+			self.updatetime = CurTime() + self.updaterate
 		end
 
 
-		if spawntime > CurTime() then return end
+		if self.spawntime > CurTime() then return end
 
 		if #self.currentEvents > ix.config.Get("maxActiveEvents", 5) then 
-			spawntime = CurTime() + self.noSpaceRate
+			self.spawntime = CurTime() + self.noSpaceRate
 			return 
 		end
 
-		spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * #player.GetAll()))
+		self.spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * #player.GetAll()))
 
 		local spawn = table.Random(self.eventdefs)
 		if (!spawn) then
