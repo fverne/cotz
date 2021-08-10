@@ -253,14 +253,12 @@ PLUGIN.eventdefs["ShippingCrate_1"] = {
 			return dat
 		end,
 		funcUpdate = function(dat) 
-			print("Update")
 			return dat
 		end,
 		funcShouldEnd = function(dat)
 			shouldend = true
-			print("shouldEnd")
 			for i,j in pairs (ents.FindInSphere( dat.eventpoint[1] + Vector(0, 0, 800), 512 )) do
-				if(j:GetClass() == "ix_item" && j.uniqueID == "hidestash_1") then
+				if(j:GetClass() == "ix_item") then
 					shouldend = false
 					break
 				end
@@ -269,8 +267,10 @@ PLUGIN.eventdefs["ShippingCrate_1"] = {
 			return shouldend
 		end,
 		funcEnd = function(dat)
-			print("end")
-			ix.util.DepawnAdvDupe2Dupe("jumppuzzle")
+			timer.Simple(300, function() 
+				ix.util.DepawnAdvDupe2Dupe("jumppuzzle")
+			end)
+			
 			return dat
 		end
 	}
