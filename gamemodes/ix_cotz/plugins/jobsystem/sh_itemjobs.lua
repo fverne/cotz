@@ -928,8 +928,6 @@ do
 -----------------------------------------------------
 -----------------------------------------------------
 
--- Give weapons, ammo
-
   local tempJob = {}
 
   tempJob.name = "Hand over %d Household Glue."
@@ -938,9 +936,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_glue_1"
   tempJob.numberRec = 1
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"kit_mixed_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 13
+  tempJob.moneyReward = {600, 960}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob1_value_glue_1")
@@ -955,9 +954,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_glue_1"
   tempJob.numberRec = 2
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 20
+  tempJob.reward = {{"kit_mixed_low"}, {"kit_ammo_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 18
+  tempJob.moneyReward = {900, 1250}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob2_value_glue_1")
@@ -972,9 +972,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_glue_2"
   tempJob.numberRec = 1
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"kit_ammo_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 18
+  tempJob.moneyReward = {750, 850}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob1_value_glue_2")
@@ -989,9 +990,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_glue_2"
   tempJob.numberRec = 2
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 20
+  tempJob.reward = {{"kit_mixed_low"}, {"kit_ammo_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 23
+  tempJob.moneyReward = {900, 1250}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob2_value_glue_2")
@@ -1007,9 +1009,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_glue_3"
   tempJob.numberRec = 1
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"kit_mixed_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 12
+  tempJob.moneyReward = {650, 950}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob1_value_glue_3")
@@ -1024,9 +1027,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_glue_3"
   tempJob.numberRec = 2
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 20
+  tempJob.reward = {{"kit_mixed_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 12
+  tempJob.moneyReward = {850, 1100}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob2_value_glue_3")
@@ -1042,9 +1046,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_glue_4"
   tempJob.numberRec = 1
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"kit_aid_low"}, {"kit_ammo_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 12
+  tempJob.moneyReward = {300, 450}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob1_value_glue_4")
@@ -1059,9 +1064,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_glue_4"
   tempJob.numberRec = 2
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 20
+  tempJob.reward = {{"kit_aid_low"}, {"kit_ammo_low"}, 0}
+  tempJob.rewardCount = 2
+  tempJob.repReward = 12
+  tempJob.moneyReward = {300, 450}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob2_value_glue_4")
@@ -1077,9 +1083,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_guncleaner"
   tempJob.numberRec = 1
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"kit_aid_low"}, {"kit_ammo_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 25
+  tempJob.moneyReward = {300, 450}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob1_value_guncleaner")
@@ -1094,9 +1101,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_guncleaner"
   tempJob.numberRec = 2
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 20
+  tempJob.reward = {{"kit_aid_high"}, {"kit_ammo_low"}}
+  tempJob.rewardCount = 2
+  tempJob.repReward = 25
+  tempJob.moneyReward = {550, 870}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob2_value_guncleaner")
@@ -1112,9 +1120,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_gunoil"
   tempJob.numberRec = 1
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"kit_aid_high"}, {"kit_ammo_med"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 25
+  tempJob.moneyReward = {500, 850}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob1_value_gunoil")
@@ -1129,9 +1138,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_gunoil"
   tempJob.numberRec = 2
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 20
+  tempJob.reward = {{"kit_aid_low"}, {"kit_ammo_med"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 25
+  tempJob.moneyReward = {500, 850}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob2_value_gunoil")
@@ -1147,9 +1157,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_gunspray"
   tempJob.numberRec = 1
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"kit_aid_low"}, {"kit_ammo_med"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 25
+  tempJob.moneyReward = {500, 850}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob1_value_gunspray")
@@ -1164,9 +1175,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_gunspray"
   tempJob.numberRec = 2
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 20
+  tempJob.reward = {{"kit_aid_low"}, {"kit_ammo_rare"}}
+  tempJob.rewardCount = 2
+  tempJob.repReward = 25
+  tempJob.moneyReward = {500, 850}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob2_value_gunspray")
@@ -1182,9 +1194,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_lubricant"
   tempJob.numberRec = 1
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
+  tempJob.reward = {{"kit_ammo_m_low"}, {"kit_ammo_rare"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 25
+  tempJob.moneyReward = {500, 850}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob1_value_lubricant")
@@ -1199,9 +1212,10 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_lubricant"
   tempJob.numberRec = 2
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 20
+  tempJob.reward = {{"kit_ammo_m_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 25
+  tempJob.moneyReward = {300, 450}
   tempJob.categories = {"repair"}
 
   ix.jobs.register(tempJob, "ItemJob2_value_lubricant")
