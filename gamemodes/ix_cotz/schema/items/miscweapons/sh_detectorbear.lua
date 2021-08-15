@@ -3,7 +3,7 @@ ITEM.description = "A mid-tier artifact detector."
 ITEM.longdesc = "This last generation anomalous activity detector can be used to locate anomalous formations and has a color diode panel, which not only indicates the direction of artifacts, but also measures the distance to them. To switch to artifact search mode, open the device's front cover. Unfortunately, the device is programmed with a somewhat outdated list of detectable artifacts."
 ITEM.model = "models/lostsignalproject/items/devices/detector_bear.mdl"
 ITEM.width = 1
-ITEM.height = 1
+ITEM.height = 2
 ITEM.price = 16000
 ITEM.busflag = {"dev"}
 ITEM.class = "detector_bear"
@@ -11,6 +11,14 @@ ITEM.weaponCategory = "misc"
 ITEM.canAttach = false
 ITEM.keepWhenEquipped = true
 ITEM.repairCost = ITEM.price/100*1
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(-1, 0, 20),
+	ang = Angle(90, 0, 0),
+	fov = 15,
+}
+
 ITEM.pacData = {
 [1] = {
 	["children"] = {

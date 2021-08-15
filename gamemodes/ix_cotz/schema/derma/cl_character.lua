@@ -270,7 +270,6 @@ function PANEL:Init()
 	self.loadButton:SetText("re-enter the zone")
 	self.loadButton:SizeToContents()
 	self.loadButton.DoClick = function()
-		print(loadedfirstchar)
 		if (ix.config.Get("charloadremove", true) and bHasCharacter and LocalPlayer().GetCharacter) then
 			net.Start("ixCharacterChoose")
 				-- net.WriteUInt(self.character:GetID(), 32)

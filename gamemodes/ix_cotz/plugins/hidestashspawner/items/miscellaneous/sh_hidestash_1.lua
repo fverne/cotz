@@ -7,6 +7,13 @@ ITEM.price = 500
 ITEM.flag = "A"
 ITEM.hidestashcategory = "tier1"
 
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 0, 19.607843399048),
+	ang = Angle(90, 180, 0),
+	fov = 57.058823529412,
+}
+
 function ITEM:GetDescription()
 	if self:GetData("stashtext", nil) == nil then
 		return self.description
