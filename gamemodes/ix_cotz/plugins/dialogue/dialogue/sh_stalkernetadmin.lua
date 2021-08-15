@@ -118,12 +118,12 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 					ix.dialogue.notifyTaskComplete(client, ix.jobs.getFormattedName(jobs[target:GetDisplayName()]))
 					client:ixJobComplete(target:GetDisplayName()) 
 				end
-				if (CLIENT) then self.response = "Great work on the job, here's your reward." end
+				if (CLIENT) then self.response = " ** He nods, and hands over your reward." end
 			else
-				if (CLIENT) then self.response = string.format("Have you finished %s yet?", ix.jobs.getFormattedName(jobs[target:GetDisplayName()])) end
+				if (CLIENT) then self.response = string.format(" ** He looks at you expectantly about %s.", ix.jobs.getFormattedName(jobs[target:GetDisplayName()])) end
 			end
 		else
-			if (CLIENT) then self.response = "You're not working for me right now." end
+			if (CLIENT) then self.response = " ** He looks confused" end
 		end
 
 	end,

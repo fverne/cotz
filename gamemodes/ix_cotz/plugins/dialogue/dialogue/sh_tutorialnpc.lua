@@ -92,7 +92,7 @@ DIALOGUE.addTopic("BackgroundTopic4", {
 
 
 DIALOGUE.addTopic("TutorialTopic", {
-	statement = "Can I ask you something that is useful for a newbie like me?",
+	statement = "I have a few questions, I just arrived here.",
 	response = "What do you want to know?",
 	options = {
 		"TutorialTopic1",
