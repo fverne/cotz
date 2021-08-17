@@ -10,3 +10,10 @@ ITEM.price = 5500
 ITEM.attachName = "hide_bloodsucker"
 
 ITEM.weight = 1.800
+
+ITEM.exRender = true 
+ITEM.iconCam = {
+	pos = Vector(0, 0, 20),
+	ang = Angle(90, 0, 0),
+	fov = 45,
+}

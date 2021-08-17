@@ -10,3 +10,10 @@ ITEM.price = 1200
 ITEM.attachName = "hide_boar"
 
 ITEM.weight = 2.500
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 0, 32.679737091064),
+	ang = Angle(90, 0, 0),
+	fov = 45,
+}

@@ -10,3 +10,10 @@ ITEM.price = 850
 ITEM.attachName = "hide_blinddog"
 
 ITEM.weight = 1.100
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, -1, 17),
+	ang = Angle(90, 0, 0),
+	fov = 45,
+}

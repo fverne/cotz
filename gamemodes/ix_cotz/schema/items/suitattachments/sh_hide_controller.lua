@@ -10,3 +10,10 @@ ITEM.price = 16100
 ITEM.attachName = "hide_controller"
 
 ITEM.weight = 3.500
+
+ITEM.exRender = true 
+ITEM.iconCam = {
+	pos = Vector(0, 0, 15),
+	ang = Angle(90, 0, 0),
+	fov = 45,
+}

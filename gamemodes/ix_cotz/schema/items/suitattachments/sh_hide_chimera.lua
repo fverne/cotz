@@ -10,3 +10,10 @@ ITEM.price = 8900
 ITEM.attachName = "hide_chimera"
 
 ITEM.weight = 2.150
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 0, 38),
+	ang = Angle(90, 0, 0),
+	fov = 45,
+}

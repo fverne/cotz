@@ -10,3 +10,10 @@ ITEM.price = 500
 ITEM.attachName = "hide_tushkano"
 
 ITEM.weight = 0.700
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 0, 12),
+	ang = Angle(90, 0, 0),
+	fov = 45,
+}

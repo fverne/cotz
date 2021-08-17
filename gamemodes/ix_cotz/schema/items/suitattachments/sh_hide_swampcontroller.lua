@@ -10,3 +10,10 @@ ITEM.price = 12100
 ITEM.attachName = "hide_swampcontroller"
 
 ITEM.weight = 3.000
+
+ITEM.exRender = true 
+ITEM.iconCam = {
+	pos = Vector(0, 0, 15),
+	ang = Angle(90, 0, 0),
+	fov = 45,
+}

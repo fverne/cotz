@@ -10,3 +10,10 @@ ITEM.price = 21000
 ITEM.attachName = "hide_pseudogiant"
 
 ITEM.weight = 5.550
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 0, 50),
+	ang = Angle(90, 0, 0),
+	fov = 45,
+}

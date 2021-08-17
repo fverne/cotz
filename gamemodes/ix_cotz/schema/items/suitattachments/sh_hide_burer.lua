@@ -10,3 +10,10 @@ ITEM.price = 12200
 ITEM.attachName = "hide_burer"
 
 ITEM.weight = 3.000
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 0, 12),
+	ang = Angle(90, 0, 0),
+	fov = 45,
+}
