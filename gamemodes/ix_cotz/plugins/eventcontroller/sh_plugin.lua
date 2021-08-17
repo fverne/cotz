@@ -11,7 +11,7 @@ ix.util.Include("sh_eventdefs.lua")
 PLUGIN.spawnradius = 750
 PLUGIN.populateAmount = 7
 
-PLUGIN.pdachatter = true
+PLUGIN.pdachatter = false 
 PLUGIN.pdachatterchance = 100
 
 PLUGIN.saferadius = 1500
@@ -206,6 +206,12 @@ if SERVER then
 
 		self:spawnEvent(eventpoint, spawn)
 		
+		if ix.progression.GetNPCFromName("'Mute'") then
+			self.pdachatter = true
+		else
+			self.pdachatter = false
+		end
+
 		if self.pdachatter == true then
 			if math.Rand(1,100) <= self.pdachatterchance then
 				for k, ply in pairs( player.GetAll() ) do
