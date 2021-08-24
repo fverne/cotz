@@ -16,6 +16,10 @@ ix.config.Add("deathWeaponDuraDmg", 5, "How much durability damage a weapon will
 	category = "Death"
 })
 
+ix.config.Add("deathDropValuable", false, "If true valuables will drop when player dies.", nil, {
+	category = "Death"
+})
+
 function PLUGIN:DoPlayerDeath( client, attacker, dmg )
 	local character = client:GetCharacter()
 	if (client:GetCharacter()) then
@@ -38,7 +42,7 @@ function PLUGIN:DoPlayerDeath( client, attacker, dmg )
 				end
 			end
 
-			if (item.DropOnDeath ) then
+			if ( ix.config.Get("deathDropValuable") and item.DropOnDeath ) then
 				ix.util.AddItemToDroppedPool(item.uniqueID, item.data)
 				item:Remove()
 			end
