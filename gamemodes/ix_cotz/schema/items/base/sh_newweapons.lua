@@ -256,7 +256,7 @@ ITEM.functions.Unload = {
 		return item:Unload()
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity) && ((item:GetData("equip",false) && item:GetOwner():GetWeapon(item.class):Clip1() > 0) || (!item:GetData("equip",false) && item:GetData("ammo",0) > 0 )))
+		return (!IsValid(item.entity) && ((item:GetData("equip",false) && item:GetOwner():GetWeapon(item.class) && item:GetOwner():GetWeapon(item.class):Clip1() > 0) || (!item:GetData("equip",false) && item:GetData("ammo",0) > 0 )))
 	end
 }
 
