@@ -50,7 +50,7 @@ ix.progression.Register("TutorialNPCProg1", {
 			end
 		end
 
-		return string.format("I need you to clear out a couple more mutant nests for me, %d should do.", tresh-status.value)
+		return string.format("I need you to complete mutant kill tasks for me, %d should do.", tresh-status.value)
 	end,
 	progressfunctions = {
 		[1] = {
@@ -92,8 +92,8 @@ ix.progression.Register("TutorialNPCProg1", {
 		},
 	},
 	progressthresholds = {
-		[1] = 15,
-		[2] = 40,
+		[1] = 2,
+		[2] = 4,
 	}
 })
 

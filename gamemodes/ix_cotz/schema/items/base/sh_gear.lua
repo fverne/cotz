@@ -307,6 +307,10 @@ ITEM.functions.Equip = {
 			end
 		end
 
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 4, function(player) 
+
+		end)
+
 		item:SetData("equip", true)
 		item.player:AddPart(item.uniqueID, item)
 

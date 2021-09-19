@@ -451,6 +451,11 @@ ITEM.functions.Equip = {
 			end
 		end
 
+		
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 6, function(player) 
+
+		end)
+		
 		item:SetData("equip", true)
 		
 		local origbgroups = {}
