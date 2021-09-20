@@ -109,7 +109,10 @@ function PLUGIN:KeyPress(client, key)
 	local Hit = client:GetEyeTraceNoCursor()
 	local npc = Hit.Entity
 	local items = client:GetCharacter():GetInventory():GetItems()
-	local mutant = ix.poaching.MutantTable[npc:GetModel()]
+	local mutant
+	if npc then
+		mutant = ix.poaching.MutantTable[npc:GetModel()]
+	end
 	local knife = nil
 
 	if client:GetCharacter() and client:Alive() then

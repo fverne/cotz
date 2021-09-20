@@ -2,6 +2,10 @@ PLUGIN.name = "ServerGuard Permissions"
 PLUGIN.author = "alexgrist"
 PLUGIN.desc = "Adds CAMI permission compatibility to ServerGuard."
 
+if !serverguard then
+ return
+end
+
 local function OnPrivilegeRegistered(privilege)
     local permission = privilege.Name
     serverguard.permission:Add(permission)
