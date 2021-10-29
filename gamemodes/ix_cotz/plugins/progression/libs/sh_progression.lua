@@ -75,6 +75,20 @@ function ix.progression.AddProgessionValue(progid, amount, playername)
 	end
 end
 
+function ix.progression.GetComplexProgressionValue(progid)
+	if (ix.progression.definitions[progid]) and ix.progression.definitions[progid].fnGetComplexProgression then
+		return ix.progression.definitions[progid].fnGetComplexProgression()
+	end
+end
+
+function ix.progression.AddComplexProgressionValue(progid, dat, playername)
+	if (ix.progression.definitions[progid]) and ix.progression.definitions[progid].fnAddComplexProgression and ix.progression.definitions[progid].fnCheckComplexProgression then
+		 -- In complex progressions, the progression definition is responsible for taking care of everything
+		ix.progression.definitions[progid].fnAddComplexProgression(dat, playername)
+		ix.progression.definitions[progid].fnCheckComplexProgression()
+	end
+end
+
 function ix.progression.RemoveProgressionValue(progid, amount, playername)
   ix.progression.AddProgressionValue(progid, -amount, playername)
 end

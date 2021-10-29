@@ -11,7 +11,7 @@
 	})
 ]]--
 
-hook.Add("ix_OnJobComplete", "OldTimer_Task1Listener", function(client, npcidentifier, identifier)
+hook.Add("ix_OnJobComplete", "OldTimer_oldTimerKillIntro", function(client, npcidentifier, identifier)
 	local iscorrecttasktype = false
 
 	local killcategories = {
@@ -28,15 +28,35 @@ hook.Add("ix_OnJobComplete", "OldTimer_Task1Listener", function(client, npcident
 	end
 
 	if npcidentifier == "'Old Timer'" and iscorrecttasktype then
-		if ix.progression.IsActive("TutorialNPCProg1") and ix.progression.GetProgressionValue("TutorialNPCProg1") < 15 then
-			ix.progression.AddProgessionValue("TutorialNPCProg1", 1, client:Name())
+		if ix.progression.IsActive("oldTimerKillIntro") then
+			ix.progression.AddProgessionValue("oldTimerKillIntro", 1, client:Name())
 		end
 	end
 end)
 
-ix.progression.Register("TutorialNPCProg1", {
-	name = "Tutorial NPC Kill Mutants 1",
-	description = "First Task",
+hook.Add("ix_OnJobComplete", "CookNPC_cookMeatCollect", function(client, npcidentifier, identifier)
+	local iscorrecttasktype = false
+
+	local categories = {
+		["mutantmeateasy"] = true,
+		["mutantmeatmedium"] = true,
+		["mutantmeathard"] = true,
+	}
+
+	for k, v in pairs(ix.jobs.list[identifier].categories) do
+		if categories[v] then iscorrecttasktype = true end
+	end
+
+	if npcidentifier == "'Spicy Lemon'" and iscorrecttasktype then
+		if ix.progression.IsActive("cookMeatCollect") then
+			ix.progression.AddProgessionValue("cookMeatCollect", 1, client:Name())
+		end
+	end
+end)
+
+ix.progression.Register("oldTimerKillIntro", {
+	name = "Old Timer Kill Intro",
+	description = "Cleaning up the zone",
 	keyNpc = "'Old Timer'",
 	defaultActive = true,
 	BuildResponse = function(self, status)
@@ -55,18 +75,14 @@ ix.progression.Register("TutorialNPCProg1", {
 	progressfunctions = {
 		[1] = {
 			OnRun = function()
-				print("Reached level 1 in TutorialNPCProg1")
-				local npc = ix.progression.GetNPCFromName("'Old Timer'")
-				if (npc) then
-					npc:AddItemToList("medic_stimpak_1", nil, 4, "SELLANDBUY", 4, 1, 4)
-				end
+				ix.progression.SetActive("cookMeatCollect")
 				
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = "'Old Timer'",
-					message = "Good job, you've lowered the mutant population a bit, and as such we've gained a slight foothold in the zone. I invited my good friend, Technut, here. He should be moving into the small hut next to the building I usually stay in."
+					message = "Good job, you've lowered the mutant population a bit, and as such we've gained a slight foothold in the zone. I invited my good friend, Spicy Lemon, here. He should be moving into the small hut next to the building I usually stay in."
 				})
 				
-				-- Spawn Technut npc
+				-- Spawn CookNPC
 
 				ix.util.SpawnAdvDupe2Dupe( "progressiontest1" )
 			end,
@@ -74,10 +90,10 @@ ix.progression.Register("TutorialNPCProg1", {
 		},
 		[2] = {
 			OnRun = function()
-				print("Reached level 2 in TutorialNPCProg1 - Added Syrette Kit ")
+
 				local npc = ix.progression.GetNPCFromName("Sorter")
 				if (npc) then
-					npc:AddItemToList("medic_medkit_2", nil, 4, "SELLANDBUY", 4, 1, 4)
+					--Add Old Timer VendorList 2
 				end
 
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
@@ -85,49 +101,142 @@ ix.progression.Register("TutorialNPCProg1", {
 					message = "Due to your extraordinary efforts, I have been secured supply lines to import some medical supplies from some leftover army supplies they don't need anymore."
 				})
 
-				ix.progression.SetActive("TutorialNPCProg1", false)
+			end,
+			RunOnce = false
+		},
+		[3] = {
+			OnRun = function()
+				local npc = ix.progression.GetNPCFromName("Sorter")
+				if (npc) then
+					--Add Old Timer VendorList 3
+				end
+
+				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+					name = "'Old Timer'",
+					message = "Lovely work everyone, thanks to your lovely work one of my associates have agreed to ship in sporting goods to me, feel free to come check my wares."
+				})
+
+				ix.progression.SetActive("oldTimerKillIntro", false)
 
 			end,
 			RunOnce = false
 		},
 	},
 	progressthresholds = {
-		[1] = 2,
-		[2] = 4,
+		[1] = 25,
+		[2] = 60,
+		[3] = 120
 	}
 })
 
-ix.progression.Register("EcologistResearchMutant", {
-	name = "Ecologist Research (Mutants)",
-	description = "Research progress on mutants - Hand in mutant parts to help the ecologists.",
+ix.progression.Register("cookMeatCollect", {
+	name = "CookNPC Meat Collection",
+	description = "Collecting food for the hungry stalkers.",
+	keyNpc = "'Spicy Lemon'",
+	BuildResponse = function(self, status)
+		-- Find next treshold
+		local tresh = 0
+
+		for k,v in ipairs( self.progressthresholds ) do
+			if v > status.value then
+				tresh = v
+				break
+			end
+		end
+
+		return string.format("Just a couple more bundles of meat, %d should be enough.", tresh-status.value)
+	end,
 	progressfunctions = {
 		[1] = {
 			OnRun = function()
-					print("Reached level 1 in Eco Research (Mutants) - Spawn props")
-				end,
-			RunOnce = false, -- Props are not persisted, so we need to spawn them every time server reloads
+				-- ??? XD
+			end,
+			RunOnce = false,
 		},
 		[2] = { 
 			OnRun = function()
-		  	print("Reached level 2 in Eco Research (Mutants) - Add items to vendor")
+		  		ix.progression.SetActive("technutItemDelivery_Main")
 			end,
-			RunOnce = true, -- Item stock is persisted by vendor, so we dont need to run this every time we load
+			RunOnce = true,
 		},
 		[3] = {
 			OnRun = function()
-		  	print("Reached level 3 in Eco Research (Mutants) - Spawn more props")
+		  		-- ??? XD
 			end,
-			RunOnce = false, -- Props are not persisted, so we need to spawn them every time server reloads
+			RunOnce = false,
 		} -- etc...
 	},
 	progressthresholds = {
-		[1] = 1000,
-		[2] = 3000,
-		[3] = 9000, -- etc..
+		[1] = 20,
+		[2] = 45,
+		[3] = 110,
 	}
 })
 
+ix.progression.Register("technutItemDelivery_Main", {
+	name = "Technut Item Collection",
+	description = "Collecting important components for Technut.",
+	BuildResponse = function(self, status)
+		local dat = ix.progression.status["technutItemDelivery_Main"].complexData
+		local itemids = {
+			["value_wirelesstrans"] = 15,
+			["value_wire_heavy"] 	= 30,
+			["value_tape_duct"] 	= 10,
+			["value_capacitors"] 	= 100,
+			["value_sparkplug"] 	= 10,
+			["value_carbattery"] 	= 5,
+		}
 
+		str = "Alright, here's a list of what I need:\n"
+
+		for item, amt in pairs(itemids) do
+			string.format("%s: %d", ix.item.list[item].name, amt - complexData[item])
+		end
+
+		return str
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()
+				-- ??? XD
+			end,
+			RunOnce = false,
+		},
+	},
+	progressthresholds = {
+		[1] = 1,
+	},
+	fnAddComplexProgression = function(dat, playername)
+		ix.progression.status["technutItemDelivery_Main"].complexData[dat] = ix.progression.status["technutItemDelivery_Main"].complexData[dat]+1
+	end,
+	fnGetComplexProgression = function()
+		return ix.progression.status["technutItemDelivery_Main"].complexData[dat]
+	end,
+	fnCheckComplexProgression = function()
+		local finished = {
+			["value_wirelesstrans"] = 15,
+			["value_wire_heavy"] 	= 30,
+			["value_tape_duct"] 	= 10,
+			["value_capacitors"] 	= 100,
+			["value_sparkplug"] 	= 10,
+			["value_carbattery"] 	= 5,
+		}
+
+		local isdone = true
+
+		for item, amt in pairs(ix.progression.status["technutItemDelivery_Main"].complexData) do
+			if amt < finished[item] then isdone = false end
+		end
+
+		if isdone then
+			--Spawn STALKERNETAdmin
+
+			ix.progression.SetActive("technutItemDelivery_Main", false)
+		end
+	end
+})
+
+--[[
 ix.progression.Register("TestProgression", {
 	name = "Test Progression",
 	description = "Progression goal used for testing, talk with Sorter to progress",
@@ -173,3 +282,4 @@ ix.progression.Register("TestProgression", {
 		[3] = 15, -- etc..
 	}
 })
+]]--
