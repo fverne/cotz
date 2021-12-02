@@ -14,6 +14,9 @@ same name but different numerical IDs). You can think of items as the class, whi
 
 local ITEM = ix.meta.item or {}
 
+--- Returns the material of the item.
+-- @realm shared
+-- @treturn string The material of the item
 function ITEM:GetMaterial()
-	return self.material or nil
+	return self.material or ""
 end

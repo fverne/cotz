@@ -267,6 +267,9 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	OnRun = function(item)
 		item:RemovePart(item.player)
 
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 6, function(player) 
+		end)
+
 		item.player:RecalculateResistances()
 		item.player:ReevaluateOverlay()
 
@@ -308,7 +311,6 @@ ITEM.functions.Equip = {
 		end
 
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 4, function(player) 
-
 		end)
 
 		item:SetData("equip", true)
