@@ -234,6 +234,7 @@ else
 					item.width,
 					item.height,
 					item:GetModel(),
+					item.material,
 					item.iconCam
 				)
 				local tmpIcon = ikon:GetIcon(item.uniqueID)

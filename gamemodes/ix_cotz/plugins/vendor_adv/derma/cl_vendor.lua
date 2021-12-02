@@ -314,6 +314,7 @@ function PANEL:Setup(uniqueID, iteminstanceID)
 					item.width,
 					item.height,
 					item:GetModel(),
+					item.material,
 					item.iconCam
 				)
 			end
