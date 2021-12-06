@@ -15,6 +15,9 @@ function ENT:SetupDataTables()
 end
 
 if (SERVER) then
+	local invalidBoundsMin = Vector(-8, -8, -8)
+	local invalidBoundsMax = Vector(8, 8, 8)
+
 	util.AddNetworkString("ixItemEntityAction")
 
 	function ENT:Initialize()
@@ -30,8 +33,6 @@ if (SERVER) then
 			physObj:EnableMotion(true)
 			physObj:Wake()
 		end
-
-		hook.Run("OnItemSpawned", self)
 	end
 
 	function ENT:Use(activator, caller)
@@ -79,10 +80,8 @@ if (SERVER) then
 			local physObj = self:GetPhysicsObject()
 
 			if (!IsValid(physObj)) then
-				local min, max = Vector(-8, -8, -8), Vector(8, 8, 8)
-
-				self:PhysicsInitBox(min, max)
-				self:SetCollisionBounds(min, max)
+				self:PhysicsInitBox(invalidBoundsMin, invalidBoundsMax)
+				self:SetCollisionBounds(invalidBoundsMin, invalidBoundsMax)
 			end
 
 			if (IsValid(physObj)) then
@@ -279,7 +278,7 @@ function ENT:GetEntityMenu(client)
 	itemTable.entity = self
 
 	for k, v in SortedPairs(itemTable.functions) do
-		if (k == "take") then
+		if (k == "take" or k == "combine") then
 			continue
 		end
 

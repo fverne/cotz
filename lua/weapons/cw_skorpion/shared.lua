@@ -67,7 +67,7 @@ SWEP.LuaViewmodelRecoil = true
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -300},  atts = {"md_microt1", "md_aimpoint", "md_reflex"}},
 	[2] = {header = "Barrel", offset = {-400, -300},  atts = {"md_tundra9mm"}},
-	["+reload"] = {header = "Ammo", offset = {-400, 100}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {-400, 100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2", "shoot3"},
 	reload = "fullreload",
@@ -88,18 +88,18 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	
 }
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 5
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "smg"
 SWEP.NormalHoldType = "smg"
-SWEP.RunHoldType = "passive"
-SWEP.FireModes = {"auto"}
+SWEP.RunHoldType = "crossbow"
+SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -112,7 +112,7 @@ SWEP.WorldModel		= "models/weapons/w_smg_skorp.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 20
+SWEP.Primary.ClipSize		= 10
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x18MM"
@@ -120,19 +120,19 @@ SWEP.Primary.Ammo			= "9x18MM"
 SWEP.FireDelay = 0.0705
 SWEP.FireSound = "CW_SKORPION_FIRE"
 SWEP.FireSoundSuppressed = "CW_SKORPION_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.9
+SWEP.Recoil = 2.4
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.09
+SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.15
-SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 5
+SWEP.MaxSpreadInc = 0.55
+SWEP.SpreadPerShot = 0.01
+SWEP.SpreadCooldown = 0.8
 SWEP.Shots = 1
-SWEP.Damage = 75
+SWEP.Damage = 42
 SWEP.DeployTime = 0.5
 
 SWEP.ReloadSpeed = 0.9

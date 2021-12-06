@@ -8,6 +8,8 @@ SWEP.PrintName = "Machete"
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/v_me_machete.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
+SWEP.Slot = 2
+
 SWEP.WorldModel			= "models/weapons/tfa_nmrih/w_me_machete.mdl" --Viewmodel path
 SWEP.HoldType = "melee"
 SWEP.DefaultHoldType = "melee"
@@ -38,15 +40,15 @@ SWEP.Primary.Reach = 60
 SWEP.Primary.RPM = 80
 SWEP.Primary.SoundDelay = 0.1
 SWEP.Primary.Delay = 0.25
-SWEP.Primary.Damage = 30
+SWEP.Primary.Damage = 75
 
 SWEP.Secondary.RPM = 45 -- Delay = 60/RPM, this is only AFTER you release your heavy attack
-SWEP.Secondary.Damage = 60
+SWEP.Secondary.Damage = 140
 SWEP.Secondary.Reach = 55
 SWEP.Secondary.SoundDelay = 0.05
 SWEP.Secondary.Delay = 0.25
 
-SWEP.Secondary.BashDamage = 15
+SWEP.Secondary.BashDamage = 30
 SWEP.Secondary.BashDelay = 0.1
 SWEP.Secondary.BashLength = 54
 SWEP.Secondary.BashDamageType = DMG_GENERIC

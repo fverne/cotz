@@ -104,7 +104,7 @@ SWEP.MagBGs = {main = 4, regular = 0, rpk = 1}
 SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -500},  atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_cmore", "md_reflex", "md_schmidt_shortdot", "md_acog"}},
 	[2] = {header = "Barrel", offset = {300, -500}, atts = {"md_pbs1"}},
 	[4] = {header = "Handguard", offset = {-300, 0}, atts = {"md_foregrip"}},
-	["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"fire1", "fire2", "fire3"},
 	reload = "ak47_reload",
@@ -123,12 +123,12 @@ SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -145,8 +145,8 @@ SWEP.WMAng = Vector(-15, 0, 180)
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.DefaultClip	= 0

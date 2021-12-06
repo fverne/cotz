@@ -85,7 +85,7 @@ SWEP.LuaViewmodelRecoil = false
 SWEP.ADSFireAnim = false
 SWEP.BipodFireAnim = true
 
-SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot_1", "shoot_2"},
 	reload = "reload",
@@ -106,12 +106,12 @@ SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -127,10 +127,10 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 47
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
-SWEP.Primary.Ammo			= "7.62x54MMr"
+SWEP.Primary.Ammo			= "7.62x54MMR"
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.09166666666
 SWEP.FireSound = "CW_DP28_FIRE"

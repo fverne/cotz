@@ -56,7 +56,7 @@ SWEP.ADSFireAnim = true
 SWEP.PreventQuickScoping = true
 SWEP.QuickScopeSpreadIncrease = 0.2
 
-SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 
 SWEP.Animations = {fire = {"shot"},
@@ -88,12 +88,12 @@ SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"bolt"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -115,8 +115,8 @@ SWEP.FireDelay = 1.5
 SWEP.FireSound = "CW_L96_FIRE"
 SWEP.Recoil = 4.8
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.015
 SWEP.AimSpread = 0.005

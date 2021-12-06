@@ -36,7 +36,7 @@ if CLIENT then
 	
     SWEP.MoveType = 1
 	SWEP.ViewModelMovementScale = 0.3
-	SWEP.FullAimViewmodelRecoil = true
+	--SWEP.FullAimViewmodelRecoil = true
 	SWEP.BoltBone = "bolt"
 	SWEP.BoltShootOffset = Vector(-1.3, 0, 0)
 	SWEP.BoltBonePositionRecoverySpeed = 5
@@ -63,7 +63,7 @@ SWEP.LuaViewmodelRecoil = true
 SWEP.LuaViewmodelRecoilOverride = true
 SWEP.CanRestOnObjects = false
 
-SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {500, 200}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {500, 200}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {reload = "reload",
 	fire = {"fire1"},
@@ -76,9 +76,9 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 	[2] = {time = 1.5, sound = "MK3_CLIPIN"},
 	[3] = {time = 2.1, sound = "MK3_SLIDERELEASE"}}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 0
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
@@ -87,7 +87,7 @@ SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -106,21 +106,21 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".22LR"
 
-SWEP.HealthDamage = 0.125
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.125
+SWEP.WearEffect = 0.05
 
-SWEP.FireDelay = 0.15
+SWEP.FireDelay = 0.08
 SWEP.FireSound = "MK3_FIRE"
 SWEP.FireSoundSuppressed = "MK3_FIRE_SUPPRESSED"
-SWEP.Recoil = 1
+SWEP.Recoil = 1.2
 
-SWEP.HipSpread = 0.1
+SWEP.HipSpread = 0.125
 SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
+SWEP.SpreadPerShot = 0.002
 SWEP.SpreadCooldown = 0.4
-SWEP.Damage = 25
+SWEP.Damage = 20
 SWEP.DeployTime = .7
 SWEP.ADSFireAnim = true
 

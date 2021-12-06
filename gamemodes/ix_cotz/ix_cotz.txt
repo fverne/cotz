@@ -1,0 +1,9 @@
+"stalker"
+{
+	"base" 			"helix"
+	"title" 		"Call of the Zone"
+	"author" 		"verne & gumlefar"
+	"menusystem"	"1"
+	"category"		"pve"
+	"workshopid"	"2290918731"
+}

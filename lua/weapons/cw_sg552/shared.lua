@@ -90,7 +90,7 @@ SWEP.LuaViewmodelRecoil = true
 	SWEP.Attachments = {
 		[1] = {header = "Sight", offset = {400, -300},  atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_reflex", "md_cmore","md_schmidt_shortdot", "md_acog"}},
 		[3] = {header = "Silencer", offset = {-400, -200},  atts = {"md_saker"}},
-		["+reload"] = {header = "Ammo", offset = {800, 150}, atts = {"am_zoneloaded", "am_matchgrade"}}
+		["+reload"] = {header = "Ammo", offset = {800, 150}, atts = {"am_hollowpoint", "am_armorpiercing"}}
 	}
 
 	
@@ -120,12 +120,12 @@ SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "3burst" ,"semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -156,8 +156,8 @@ SWEP.FireSound = "CW_SG552_FIRE"
 SWEP.FireSoundSuppressed = "CW_SG552_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.7
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005

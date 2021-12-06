@@ -68,7 +68,7 @@ function ENT:Detonate(ent,data)
 	TEMP_CEffectData:SetAngles(data.Norm:Angle())
 	TEMP_CEffectData:SetNormal(data.Norm)
 	util.Effect( "ThumperDust", TEMP_CEffectData, false, true )
-	self:Fire("kill","",0.1)
+	self:Remove()
 end
 
 function ENT:PhysicsCollide(data)

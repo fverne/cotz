@@ -1,19 +1,17 @@
-local att, wep, dist, mul
+local function CW_EntityTakeDamage(ent, damageInfo)
+	local attacker = damageInfo:GetInflictor()
 
-local function CW_EntityTakeDamage(ent, d)
-	att = d:GetInflictor()
-	
-	if att:IsPlayer() then
-		wep = att:GetActiveWeapon()
+	if attacker:IsPlayer() then
+		local weapon = attacker:GetActiveWeapon()
 
-		if IsValid(wep) and wep.CW20Weapon and not wep.NoDistance and wep.EffectiveRange then
-			dist = ent:GetPos():Distance(att:GetPos())
-			
-			if dist >= wep.EffectiveRange * 0.5 then
-				dist = dist - wep.EffectiveRange * 0.5
-				mul = math.Clamp(dist / wep.EffectiveRange, 0, 1)
+		if IsValid(weapon) and weapon.CW20Weapon and not weapon.NoDistance and weapon.EffectiveRange then
+			local distance = ent:GetPos():Distance(attacker:GetPos())
 
-				d:ScaleDamage(1 - wep.DamageFallOff * mul)
+			if distance >= weapon.EffectiveRange * 0.5 then
+				distance = distance - weapon.EffectiveRange * 0.5
+
+				local mul = math.Clamp(distance / weapon.EffectiveRange, 0, 1)
+				damageInfo:ScaleDamage(1 - weapon.DamageFallOff * mul)
 			end
 		end
 	end

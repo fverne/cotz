@@ -9,6 +9,7 @@ ITEM.height = 2
 ITEM.isWeapon = true
 ITEM.isGrenade = false
 ITEM.weaponCategory = "sidearm"
+ITEM.useSound = "items/ammo_pickup.wav"
 
 -- Inventory drawing
 if (CLIENT) then
@@ -65,7 +66,7 @@ ITEM:Hook("drop", function(item)
 
 			owner:StripWeapon(item.class)
 			owner.carryWeapons[item.weaponCategory] = nil
-			owner:EmitSound("items/ammo_pickup.wav", 80)
+			owner:EmitSound(item.useSound, 80)
 		end
 
 		item:RemovePAC(owner)
@@ -85,7 +86,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 		local client = item.player
 
 		return !IsValid(item.entity) and IsValid(client) and item:GetData("equip") == true and
-			hook.Run("CanPlayerUnequipItem", client, item) != false and item.invID == client:GetCharacter():GetInventory():GetID()
+			hook.Run("CanPlayerUnequipItem", client, item) != false
 	end
 }
 
@@ -102,7 +103,7 @@ ITEM.functions.Equip = {
 		local client = item.player
 
 		return !IsValid(item.entity) and IsValid(client) and item:GetData("equip") != true and
-			hook.Run("CanPlayerEquipItem", client, item) != false and item.invID == client:GetCharacter():GetInventory():GetID()
+			hook.Run("CanPlayerEquipItem", client, item) != false
 	end
 }
 
@@ -118,7 +119,7 @@ function ITEM:RemovePAC(client)
 	end
 end
 
-function ITEM:Equip(client)
+function ITEM:Equip(client, bNoSelect, bNoSound)
 	local items = client:GetCharacter():GetInventory():GetItems()
 
 	client.carryWeapons = client.carryWeapons or {}
@@ -151,8 +152,14 @@ function ITEM:Equip(client)
 		local ammoType = weapon:GetPrimaryAmmoType()
 
 		client.carryWeapons[self.weaponCategory] = weapon
-		client:SelectWeapon(weapon:GetClass())
-		client:EmitSound("items/ammo_pickup.wav", 80)
+
+		if (!bNoSelect) then
+			client:SelectWeapon(weapon:GetClass())
+		end
+
+		if (!bNoSound) then
+			client:EmitSound(self.useSound, 80)
+		end
 
 		-- Remove default given ammo.
 		if (client:GetAmmoCount(ammoType) == weapon:Clip1() and self:GetData("ammo", 0) == 0) then
@@ -203,7 +210,7 @@ function ITEM:Unequip(client, bPlaySound, bRemoveItem)
 	end
 
 	if (bPlaySound) then
-		client:EmitSound("items/ammo_pickup.wav", 80)
+		client:EmitSound(self.useSound, 80)
 	end
 
 	client.carryWeapons[self.weaponCategory] = nil
@@ -246,6 +253,10 @@ function ITEM:OnLoadout()
 
 			weapon.ixItem = self
 			weapon:SetClip1(self:GetData("ammo", 0))
+
+			if (self.OnEquipWeapon) then
+				self:OnEquipWeapon(client, weapon)
+			end
 		else
 			print(Format("[Helix] Cannot give weapon - %s does not exist!", self.class))
 		end

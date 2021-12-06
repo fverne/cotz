@@ -56,7 +56,7 @@ SWEP.LuaViewmodelRecoil = true
 SWEP.CanRestOnObjects = false
 
 SWEP.Attachments = {[1] = {header = "Barrel Extension", offset = {-600, -450}, atts = {"md_tokasup"}},
-["+reload"] = {header = "Ammo", offset = {400, -100}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+["+reload"] = {header = "Ammo", offset = {400, -100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
@@ -70,17 +70,18 @@ SWEP.Sounds = {draw = {{time = 0, sound = "TT_SLIDE"}},
 	[2] = {time = 1.15, sound = "TT_CLIPIN"},
 	[3] = {time = 1.6, sound = "TT_SLIDE"}}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 0
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
+SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"
 SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -99,17 +100,17 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "7.62x25MM"
 
-SWEP.FireDelay = 0.15
+SWEP.FireDelay = 0.08
 SWEP.FireSound = "TT_FIRE"
 SWEP.FireSoundSuppressed = "TT_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.55
 SWEP.FOVPerShot = 0.2
 
-SWEP.HealthDamage = 0.125
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.125
+SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007

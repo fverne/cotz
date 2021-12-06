@@ -36,7 +36,7 @@ function SWEP:Initialize()
 end
 
 function SWEP:Holster()
-	self.Weapon:EmitSound(Sound("ambient/machines/squeak_2.wav"))
+	--self.Weapon:EmitSound(Sound("ambient/machines/squeak_2.wav"))
 	if CLIENT and IsValid(self.Owner) then
 		local vm = self.Owner:GetViewModel()
 		if IsValid(vm) then
@@ -49,7 +49,7 @@ end
 
 function SWEP:OnRemove()
 	self:Holster()
-	end
+end
 
 if CLIENT then
 
@@ -453,10 +453,10 @@ if CLIENT then
 end
 
 if CLIENT then
-SWEP.ViewModelBoneMods = {}
-SWEP.WElements = {
-	["element_name"] = { type = "Model", model = "models/custom/guitar/m_d_45.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "",  pos = Vector(-8.832, 2.596, 1.557), angle = Angle(108.7, 174.156, 5.843), size = Vector(0.899, 0.899, 0.899), color = Color(255, 255, 254, 255), surpresslightning = false, material = "", skin = 1, bodygroup = {} }
-}
+	SWEP.ViewModelBoneMods = {}
+	SWEP.WElements = {
+		["guitar"] = { type = "Model", model = "models/lostsignalproject/items/misc/guitar.mdl", bone = "ValveBiped.Bip01_R_Hand", rel = "", pos = Vector(3.635, 1.557, 1.557), angle = Angle(10.519, 59.61, 122.726), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+	}
 end
 
 SWEP.Base = "weapon_base"
@@ -473,12 +473,12 @@ end
 
 SWEP.Category = "STALKER Misc"
 SWEP.PrintName		= "Guitar"
-SWEP.Slot		= 2
+SWEP.Slot		= 3
 SWEP.SlotPos		= 4
 SWEP.DrawAmmo		= false
 SWEP.ViewModel		= "models/weapons/tayley/v_guitar.mdl"
-SWEP.WorldModel		= "models/custom/guitar/m_d_45.mdl"
-SWEP.HoldType = "crossbow"
+SWEP.WorldModel		= "models/lostsignalproject/items/misc/guitar.mdl"
+SWEP.HoldType = "slam"
 
 SWEP.ViewModelFOV = 70
 SWEP.ViewModelFlip = false
@@ -504,8 +504,8 @@ SWEP.Primary.NumShots			= -1
 SWEP.Primary.Recoil				= 0
 SWEP.Primary.Cone				= 16
 SWEP.Primary.Delay				= 1
-SWEP.Primary.ClipSize			= 999999999
-SWEP.Primary.DefaultClip		= 999999999
+SWEP.Primary.ClipSize			= -1
+SWEP.Primary.DefaultClip		= -1
 SWEP.Primary.Tracer				= -1
 SWEP.Primary.Force				= -1
 SWEP.Primary.TakeAmmoPerBullet	= false
@@ -521,8 +521,8 @@ SWEP.Secondary.NumShots				= 1
 SWEP.Secondary.Recoil				= 1
 SWEP.Secondary.Cone					= 3
 SWEP.Secondary.Delay				= 0.01
-SWEP.Secondary.ClipSize				= 1
-SWEP.Secondary.DefaultClip			= 1
+SWEP.Secondary.ClipSize				= -1
+SWEP.Secondary.DefaultClip			= -1
 SWEP.Secondary.Tracer				= 1
 SWEP.Secondary.Force				= 0
 SWEP.Secondary.TakeAmmoPerBullet	= false
@@ -586,8 +586,8 @@ end
 local reloadmemelyd = 0
 function SWEP:Reload()
 	if reloadmemelyd < CurTime() then
-		self.Weapon:EmitSound(Sound("ambient/machines/squeak_2.wav"))
-		reloadmemelyd = CurTime() + 5
+	 	self.Weapon:EmitSound(Sound("stalkersound/inv_nosound.mp3"))
+	 	reloadmemelyd = CurTime() + 1
 	end
 end
 

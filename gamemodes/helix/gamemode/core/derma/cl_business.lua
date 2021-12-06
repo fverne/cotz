@@ -12,7 +12,7 @@ function PANEL:SetItem(itemTable)
 
 	self.price = self:Add("DLabel")
 	self.price:Dock(BOTTOM)
-	self.price:SetText(itemTable.price and ix.currency.Get(itemTable.price) or L"free":upper())
+	self.price:SetText(itemTable.price and ix.currency.Get(itemTable.price) or L"free":utf8upper())
 	self.price:SetContentAlignment(5)
 	self.price:SetTextColor(color_white)
 	self.price:SetFont("ixSmallFont")
@@ -42,12 +42,15 @@ function PANEL:SetItem(itemTable)
 	end)
 	self.icon.itemTable = itemTable
 	self.icon.DoClick = function(this)
-		if (!IsValid(ix.gui.checkout) and (this.nextClick or 0) < CurTime()) then
-			local parent = ix.gui.business
-			parent:BuyItem(itemTable.uniqueID)
+		if (IsValid(ix.gui.checkout)) then
+			return
+		end
 
+		local parent = ix.gui.business
+		local bAdded = parent:BuyItem(itemTable.uniqueID)
+
+		if (bAdded) then
 			surface.PlaySound("buttons/button14.wav")
-			this.nextClick = CurTime() + 0.5
 		end
 	end
 	self.icon.PaintOver = function(this)
@@ -202,8 +205,16 @@ function PANEL:GetCartCount()
 end
 
 function PANEL:BuyItem(uniqueID)
-	self.cart[uniqueID] = (self.cart[uniqueID] or 0) + 1
+	local currentCount = self.cart[uniqueID] or 0
+
+	if (currentCount >= 10) then
+		return false
+	end
+
+	self.cart[uniqueID] = currentCount + 1
 	self.checkout:SetText(L("checkout", self:GetCartCount()))
+
+	return true
 end
 
 function PANEL:LoadItems(category, search)
@@ -281,7 +292,13 @@ function PANEL:Init()
 		end
 
 		net.Start("ixBusinessBuy")
-			net.WriteTable(self.itemData)
+		net.WriteUInt(table.Count(self.itemData), 8)
+
+		for k, v in pairs(self.itemData) do
+			net.WriteString(k)
+			net.WriteUInt(v, 8)
+		end
+
 		net.SendToServer()
 
 		self.itemData = {}
@@ -365,7 +382,6 @@ function PANEL:Init()
 	self.finalGlow:SetAlpha(0)
 	self.finalGlow:SetTextInset(4, 0)
 
-
 	self:SetFocusTopLevel(true)
 	self.itemData = {}
 	self:OnQuantityChanged()
@@ -385,12 +401,16 @@ function PANEL:OnQuantityChanged()
 		end
 	end
 
-	self.current:SetText(L"currentMoney"..ix.currency.Get(money))
-	self.total:SetText("- "..ix.currency.Get(price))
-	self.final:SetText(L"moneyLeft"..ix.currency.Get(money - price))
+	self.current:SetText(L"currentMoney" .. ix.currency.Get(money))
+	self.total:SetText("- " .. ix.currency.Get(price))
+	self.final:SetText(L"moneyLeft" .. ix.currency.Get(money - price))
 	self.final:SetTextColor((money - price) >= 0 and Color(46, 204, 113) or Color(217, 30, 24))
 
 	self.preventBuy = (money - price) < 0 or valid == 0
+
+	if (IsValid(ix.gui.business)) then
+		ix.gui.business.checkout:SetText(L("checkout", ix.gui.business:GetCartCount()))
+	end
 end
 
 function PANEL:SetCart(items)
@@ -417,7 +437,7 @@ function PANEL:SetCart(items)
 			slot.name:SetText(string.format(
 				"%s (%s)",
 				L(itemTable.GetName and itemTable:GetName() or L(itemTable.name)),
-				itemTable.price and ix.currency.Get(itemTable.price) or L"free":upper()
+				itemTable.price and ix.currency.Get(itemTable.price) or L"free":utf8upper()
 			))
 			slot.name:SetTextColor(color_white)
 			slot.name:SizeToContents()
@@ -435,12 +455,26 @@ function PANEL:SetCart(items)
 			slot.quantity.OnTextChanged = function(this)
 				local value = tonumber(this:GetValue())
 
-				if (value) then
-					items[k] = math.Clamp(math.Round(value), 0, 10)
-					self:OnQuantityChanged()
-				else
+				if (!value) then
 					this:SetValue(1)
+					return
 				end
+
+				value = math.Clamp(math.Round(value), 0, 10)
+
+				if (value == 0) then
+					items[k] = nil
+
+					slot:Remove()
+				else
+					items[k] = value
+				end
+
+				self:OnQuantityChanged()
+			end
+			slot.quantity.OnLoseFocus = function(this)
+				local value = math.Clamp(tonumber(this:GetValue()) or 1, 0, 10)
+				this:SetText(value)
 			end
 		else
 			items[k] = nil

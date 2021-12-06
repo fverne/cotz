@@ -113,7 +113,7 @@ SWEP.MagBGs = {main = 4, regular = 0, rpk = 1}
 SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -500},  atts = {"md_kobra", "md_microt1", "md_eotech", "md_aimpoint", "md_cmore", "md_reflex", "md_schmidt_shortdot", "md_pso1", "md_acog"}},
 	[2] = {header = "Barrel", offset = {300, -500}, atts = {"md_pbs1"}},
 	[3] = {header = "Handguard", offset = {-300, 0}, atts = {"md_foregrip"}},
-	["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"fire1", "fire2", "fire3"},
 	reload = "reload",
@@ -127,18 +127,18 @@ SWEP.Sounds = {	draw = {[1] = {time = 0.1, sound = "CW_FOLEY_MEDIUM"},
 	[2] = {time = 1.13, sound = "CW_AK74_MAGIN"},
 	[3] = {time = 1.9, sound = "CW_AK74_BOLTPULL"}}}
 
-SWEP.SpeedDec = 35
+SWEP.SpeedDec = 15
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -155,8 +155,8 @@ SWEP.WMAng = Vector(-10,0, 180)
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.05
+SWEP.WearEffect = 0.02
 
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.DefaultClip	= 0
@@ -166,16 +166,16 @@ SWEP.Primary.Ammo			= "7.62x39MM"
 SWEP.FireDelay = 0.1
 SWEP.FireSound = "CW_AK74_FIRE"
 SWEP.FireSoundSuppressed = "CW_AK74_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.8
+SWEP.Recoil = 2.4
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.20
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
+SWEP.VelocitySensitivity = 8
+SWEP.MaxSpreadInc = 0.5
+SWEP.SpreadPerShot = 0.03
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 74
+SWEP.Damage = 85
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 0.7

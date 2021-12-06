@@ -27,7 +27,8 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 250
+ENT.hp = 275
+ENT.hpvar = 75
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -37,14 +38,19 @@ ENT.jumping2 = 0
 ENT.NextAbilityTime = 0
 ENT.PackTimer = 0
 
+ENT.NextSpawn = 0
+ENT.CanSpawn = false
+
+ENT.PsiAttackCancel = 0
+
 ENT.MinRangeDist = 800
 ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_IDLE_WANDER 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 function ENT:Initialize()
-	self.Model = "models/jerry/mutants/stalker_anomaly_pseudodog.mdl"
-	self:STALKERNPCInit(Vector(-16,-16,60),MOVETYPE_STEP)
+	self.Model = "models/monsters/psydog.mdl"
+	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
 	self.MaxRangeDist = 1200
@@ -60,8 +66,6 @@ function ENT:Initialize()
 	local TEMP_MeleeMissTable = { "Stalker.Dog.Miss1" }
 						
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
-	
-	
 
 	TEMP_MeleeTable.damage[1] = 45
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
@@ -69,19 +73,21 @@ function ENT:Initialize()
 	TEMP_MeleeTable.radius[1] = 50
 	TEMP_MeleeTable.time[1] = 0.4
 	TEMP_MeleeTable.bone[1] = "bip01_head"
-	self:STALKERNPCSetMeleeParams(1,"attack1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-	
+	self:STALKERNPCSetMeleeParams(1,"stand_attack_0",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+		
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 
 	TEMP_MeleeTable.damage[1] = 45
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
 	TEMP_MeleeTable.distance[1] = 128
 	TEMP_MeleeTable.radius[1] = 75
-	TEMP_MeleeTable.time[1] = 0.4
+	TEMP_MeleeTable.time[1] = 1.1
 	TEMP_MeleeTable.bone[1] = "bip01_head"
-	self:STALKERNPCSetMeleeParams(3,"attack1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(3,"jump_attack_all",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
-	self:SetHealth(self.hp)	
+	self.PsiAttackCancel = CurTime() + 10
+
+	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	self:SetMaxHealth(self:Health())
 	self:SetRenderMode(RENDERMODE_TRANSALPHA)
 end
@@ -91,53 +97,64 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
-	if CurTime() > self.NextSpawn && self.GoingToSpawnThem == false then
-		if !IsValid(self.Clone1) then
-			self.GoingToSpawnThem = true
 
+	if (self.PsiAttackCancel < CurTime() and self.CanSpawn) then
+		self:STALKERNPCClearAnimation()
+
+		if (!IsValid(self.Clone1)) then
 			self.Clone1 = ents.Create("npc_mutant_psydog_phantom")
 			self.Clone1:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*40)
 			self.Clone1:SetAngles(self:GetAngles())
 			self.Clone1:Spawn()
-
-			self.GoingToSpawnThem = false
-			self.NextSpawn = CurTime() + 5
 		end
-		if !IsValid(self.Clone2) then
-			self.GoingToSpawnThem = true
-
+		if (!IsValid(self.Clone2)) then
 			self.Clone2 = ents.Create("npc_mutant_psydog_phantom")
 			self.Clone2:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*-40)
 			self.Clone2:SetAngles(self:GetAngles())
 			self.Clone2:Spawn()
-
-			self.GoingToSpawnThem = false
-			self.NextSpawn = CurTime() + 5
 		end
-		if !IsValid(self.Clone3) then
-			self.GoingToSpawnThem = true
-			
+		if (!IsValid(self.Clone3)) then
 			self.Clone3 = ents.Create("npc_mutant_psydog_phantom")
 			self.Clone3:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*-40)
 			self.Clone3:SetAngles(self:GetAngles())
 			self.Clone3:Spawn()
-
-			self.GoingToSpawnThem = false
-			self.NextSpawn = CurTime() + 5
 		end
-		if !IsValid(self.Clone4) then
-			self.GoingToSpawnThem = true
-
+		if (!IsValid(self.Clone4)) then
 			self.Clone4 = ents.Create("npc_mutant_psydog_phantom")
 			self.Clone4:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*40)
 			self.Clone4:SetAngles(self:GetAngles())
 			self.Clone4:Spawn()
+		end
+		self.CanSpawn = false
+	end
 
-			self.GoingToSpawnThem = false
-			self.NextSpawn = CurTime() + 5
+	if self.NextSpawn < CurTime() then
+		if (!IsValid(self.Clone1)) or (!IsValid(self.Clone2)) or (!IsValid(self.Clone3)) or (!IsValid(self.Clone4)) then
+			self:STALKERNPCPlayAnimation("stand_psi_attack_1")
+			self.PsiAttackCancel = CurTime() + 3
+			self.NextSpawn = CurTime() + 10
+			self.CanSpawn = true
 		end
 	end
 
+
+	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
+		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
+		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,32) + self:OBBCenter()) - (self:GetPos())):GetNormal()
+
+		self:SetVelocity((dirnormal*(distance*3)))
+		
+		self:STALKERNPCPlayAnimation("jump_attack_all",3)
+		self:STALKERNPCMakeMeleeAttack(3)
+		self:EmitSound("Stalker.Pseudodog.Melee1")
+		self.isAttacking = 2
+	end
+	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
+		self:STALKERNPCStopAllTimers()
+		self:STALKERNPCClearAnimation()
+		self.NextAbilityTime = CurTime()+0.5
+		self.isAttacking = 0
+	end
 end
 
 //little aggressive jump
@@ -153,21 +170,6 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 					self.isAttacking = 1
 					self.jumping1 = CurTime()+0.2
 					self.jumping2 = CurTime()+5
-				end
-
-				if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-					self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(12*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
-					self:STALKERNPCPlayAnimation("attack1",2)
-					self:STALKERNPCMakeMeleeAttack(3)
-					self:EmitSound("Stalker.Pseudodog.Melee1")
-					self.isAttacking = 2
-				end
-
-				if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-					self:STALKERNPCStopAllTimers()
-					self:STALKERNPCClearAnimation()
-					self.NextAbilityTime = CurTime()+0.5
-					self.isAttacking = 0
 				end
 			end
 		end

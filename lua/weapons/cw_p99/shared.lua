@@ -17,7 +17,7 @@ if CLIENT then
 	SWEP.ShellOffsetMul = 1
 	SWEP.ShellPosOffset = {x = 2, y = 0, z = 1}
 		
-	SWEP.IronsightPos = Vector(-2.105, -1.469, 0.68)
+	SWEP.IronsightPos = Vector(-2.105, 2.469, 0.68)
 	SWEP.IronsightAng = Vector(0.6, 0, 0)
 
 	SWEP.MicroT1Pos = Vector(-2.135, 0, -0.237)
@@ -29,8 +29,8 @@ if CLIENT then
 	SWEP.RMRPos = Vector(-2.135, 0, -0.12)
 	SWEP.RMRAng = Vector(0, 0, 0)
 	
-	SWEP.SprintPos = Vector(2.526, -9.506, -8.24)
-	SWEP.SprintAng = Vector(70, 0, 0)
+	SWEP.SprintPos = Vector(0.602, 1.202, 1)
+	SWEP.SprintAng = Vector(-21.961, 3.517, 0)
 
 	SWEP.MoveType = 1
 	SWEP.ViewModelMovementScale = 0.8
@@ -80,7 +80,7 @@ SWEP.CanRestOnObjects = false
 SWEP.Attachments = {[1] = {header = "Barrel", offset = {-350, -200}, atts = {"md_tundra9mm"}},
 	[2] = {header = "Sight", offset = {200, -200}, atts = {"md_microt1", "md_eotech", "md_rmr"}},
 	[3] = {header = "Rail", offset = {-350, 200}, atts = {"md_insight_x2"}},
-	["+reload"] = {header = "Ammo", offset = {800, 100}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {800, 100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {reload = "reload",
 	fire = {"fire1", "fire2", "fire3"},
@@ -96,9 +96,9 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 	{time = 2.12, sound = "CW_P99_SLIDEFORWARD"}}
 }
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 0
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
@@ -107,12 +107,12 @@ SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 80
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/cw2/pistols/p99.mdl"
 SWEP.WorldModel		= "models/srp/weapons/w_p99.mdl"
@@ -125,17 +125,17 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "9x19MM"
 
-SWEP.FireDelay = 0.15
+SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_P99_FIRE"
 SWEP.FireSoundSuppressed = "CW_P99_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.67
 
-SWEP.HealthDamage = 0.125
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.125
+SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4

@@ -83,7 +83,7 @@ SWEP.CanRestOnObjects = false
 SWEP.Attachments = {[1] = {header = "Barrel", offset = {-350, -200}, atts = {"md_tundra9mm"}},
 	[2] = {header = "Sight", offset = {400, -300}, atts = {"md_microt1", "md_eotech", "md_rmr"}},
 	[3] = {header = "Rail", offset = {-350, 200}, atts = {"md_insight_x2"}},
-	["+reload"] = {header = "Ammo", offset = {800, 100}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {800, 100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {reload = "reload_cham",
 	reload_empty = "reload",
@@ -102,7 +102,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 
 SWEP.SpeedDec = 10
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
@@ -111,7 +111,7 @@ SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -129,8 +129,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "5.7x28MM"
 
-SWEP.HealthDamage = 0.125
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.125
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_FIVESEVEN_FIRE"

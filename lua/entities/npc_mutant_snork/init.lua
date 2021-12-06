@@ -34,7 +34,13 @@ ENT.isAttacking = 0
 ENT.jumping1 = 0
 ENT.jumping2 = 0
 ENT.CanLongJump = 0
-ENT.hp = 175
+
+ENT.IsLongJumping = 0
+ENT.longjumping1 = 0
+ENT.longjumping2 = 0
+
+ENT.hp = 200
+ENT.hpvar = 50
 
 ENT.NextAbilityTime = 0
 
@@ -44,8 +50,8 @@ ENT.VisibleSchedule = SCHED_RUN_RANDOM
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 function ENT:Initialize()
-	self.Model = "models/stalkertnb/snork1.mdl"
-	self:STALKERNPCInit(Vector(-16,-16,60),MOVETYPE_STEP)
+	self.Model = "models/monsters/snork2.mdl"
+	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
 	
 	
 	self.MinRangeDist = 0
@@ -64,9 +70,9 @@ function ENT:Initialize()
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
 	TEMP_MeleeTable.distance[1] = 21
 	TEMP_MeleeTable.radius[1] = 80
-	TEMP_MeleeTable.time[1] = 1
-	TEMP_MeleeTable.bone[1] = "ValveBiped.Bip01_R_Hand"
-	self:STALKERNPCSetMeleeParams(1,"attackA",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	TEMP_MeleeTable.time[1] = 0.8
+	TEMP_MeleeTable.bone[1] = "bip01_r_foot"
+	self:STALKERNPCSetMeleeParams(1,"stand_attack_0",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
@@ -74,91 +80,44 @@ function ENT:Initialize()
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
 	TEMP_MeleeTable.distance[1] = 21
 	TEMP_MeleeTable.radius[1] = 80
-	TEMP_MeleeTable.time[1] = 1
-	TEMP_MeleeTable.bone[1] = "ValveBiped.Bip01_R_Hand"
-	self:STALKERNPCSetMeleeParams(2,"attackB",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-	
+	TEMP_MeleeTable.time[1] = 0.5
+	TEMP_MeleeTable.bone[1] = "bip01_r_hand"
+	self:STALKERNPCSetMeleeParams(2,"stand_attack_1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
-	TEMP_MeleeTable.damage[1] = 35
+	TEMP_MeleeTable.damage[1] = 25
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[1] = 21
-	TEMP_MeleeTable.radius[1] = 80
-	TEMP_MeleeTable.time[1] = 1
-	TEMP_MeleeTable.bone[1] = "ValveBiped.Bip01_L_Hand"
-	self:STALKERNPCSetMeleeParams(3,"attackC",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-	
-	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
-	
-	TEMP_MeleeTable.damage[1] = 35
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[1] = 21
-	TEMP_MeleeTable.radius[1] = 80
-	TEMP_MeleeTable.time[1] = 1
-	TEMP_MeleeTable.bone[1] = "ValveBiped.Bip01_L_Hand"
-	self:STALKERNPCSetMeleeParams(4,"attackD",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-	
-	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
-	
-	TEMP_MeleeTable.damage[1] = 35
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[1] = 21
-	TEMP_MeleeTable.radius[1] = 80
-	TEMP_MeleeTable.time[1] = 1
-	TEMP_MeleeTable.bone[1] = "ValveBiped.Bip01_L_Hand"
-	TEMP_MeleeTable.damage[2] = 35
+	TEMP_MeleeTable.distance[1] = 64
+	TEMP_MeleeTable.radius[1] = 128
+	TEMP_MeleeTable.time[1] = 0.8
+	TEMP_MeleeTable.bone[1] = "bip01_r_foot"
+	TEMP_MeleeTable.damage[2] = 25
 	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[2] = 21
-	TEMP_MeleeTable.radius[2] = 80
-	TEMP_MeleeTable.time[2] = 1.2
-	TEMP_MeleeTable.bone[2] = "ValveBiped.Bip01_R_Hand"
-	self:STALKERNPCSetMeleeParams(5,"attackE",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-
-	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
-	
-	TEMP_MeleeTable.damage[1] = 35
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[1] = 21
-	TEMP_MeleeTable.radius[1] = 80
-	TEMP_MeleeTable.time[1] = 1
-	TEMP_MeleeTable.bone[1] = "ValveBiped.Bip01_L_Hand"
-	TEMP_MeleeTable.damage[2] = 35
-	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[2] = 21
-	TEMP_MeleeTable.radius[2] = 80
-	TEMP_MeleeTable.time[2] = 1.2
-	TEMP_MeleeTable.bone[2] = "ValveBiped.Bip01_R_Hand"
-	self:STALKERNPCSetMeleeParams(6,"attackF",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-
+	TEMP_MeleeTable.distance[2] = 64
+	TEMP_MeleeTable.radius[2] = 128
+	TEMP_MeleeTable.time[2] = 0.85
+	TEMP_MeleeTable.bone[2] = "bip01_l_foot"
+	self:STALKERNPCSetMeleeParams(4,"attack_run_0",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
 	//Jumping attacks
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 35
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[1] = 100
+	TEMP_MeleeTable.distance[1] = 80
 	TEMP_MeleeTable.radius[1] = 80
-	TEMP_MeleeTable.time[1] = 1
-	TEMP_MeleeTable.bone[1] = "ValveBiped.Bip01_L_Hand"
+	TEMP_MeleeTable.time[1] = 0.9
+	TEMP_MeleeTable.bone[1] = "bip01_r_hand"
 	TEMP_MeleeTable.damage[2] = 35
 	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[2] = 100
+	TEMP_MeleeTable.distance[2] = 80
 	TEMP_MeleeTable.radius[2] = 80
-	TEMP_MeleeTable.time[2] = 1.2
-	TEMP_MeleeTable.bone[2] = "ValveBiped.Bip01_R_Hand"
-	self:STALKERNPCSetMeleeParams(8,"attackF",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	TEMP_MeleeTable.time[2] = 1
+	TEMP_MeleeTable.bone[2] = "bip01_l_hand"
+	self:STALKERNPCSetMeleeParams(5,"stand_attack_3",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 	
-	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
-	
-	TEMP_MeleeTable.damage[1] = 35
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
-	TEMP_MeleeTable.distance[1] = 100
-	TEMP_MeleeTable.radius[1] = 80
-	TEMP_MeleeTable.time[1] = 1
-	TEMP_MeleeTable.bone[1] = "ValveBiped.Bip01_L_Hand"
-	self:STALKERNPCSetMeleeParams(9,"attackC",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
-
-	self:SetHealth(self.hp)	
+	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	
 	self:SetMaxHealth(self:Health())
 
@@ -174,7 +133,51 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- LONGJUMP
+	if self.longjumping1 < CurTime() && self.IsLongJumping == 1 then 
+		if(IsValid(self)&&self!=nil&&self!=NULL) and self:GetEnemy() then
+			self:STALKERNPCClearAnimation()
+			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
+			local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,128) + self:OBBCenter()) - (self:GetPos())):GetNormal()
 
+			self:SetVelocity((dirnormal*(distance*1.5)))
+			self:STALKERNPCPlayAnimation("stand_attack_3",5)
+			self:STALKERNPCMakeMeleeAttack(5)
+			self:EmitSound("Stalker.Snork.Die2")
+			self.IsLongJumping = 2
+		end
+			
+	end
+
+	if self.longjumping2 < CurTime() && self.IsLongJumping == 2 and self:IsOnGround() then 
+		if(IsValid(self)&&self!=nil&&self!=NULL) then
+			self:STALKERNPCStopAllTimers()
+			self:STALKERNPCClearAnimation()
+			self.NextAbilityTime = CurTime()+1.5
+			self.IsLongJumping = 0
+		end
+	end
+	-- LONGJUMP END
+
+
+	-- SMALL JUMP
+	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
+		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
+		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,32) + self:OBBCenter()) - (self:GetPos())):GetNormal()
+
+		self:SetVelocity((dirnormal*(distance*3)))		
+		self:STALKERNPCPlayAnimation("attack_run_0",4)
+		self:STALKERNPCMakeMeleeAttack(4)
+		self:EmitSound("Stalker.Snork.Die2")
+		self.isAttacking = 2		
+	end
+
+	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
+		self:STALKERNPCStopAllTimers()
+		self:STALKERNPCClearAnimation()
+		self.NextAbilityTime = CurTime()+0.5
+		self.isAttacking = 0
+	end
 end
 
 
@@ -184,29 +187,16 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 			local TEMP_Rand = math.random(1,5)
 
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance > 200 then
+			if distance > 200 && distance < 800 then
 				if(TEMP_Rand==1) then		
 					self.CanLongJump = CurTime()+6
-						
-					--self:STALKERNPCPlayAnimation("releasecrab",6)
-					self:STALKERNPCPlayAnimation("Stand_to_crouch",1)
+					self.CanJump = CurTime()+3
 
-					timer.Create("Attack"..tostring(self).."1",0.7,1,function()
-						if(IsValid(self)&&self!=nil&&self!=NULL) then
-							local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-							self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(8*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
-							self:STALKERNPCPlayAnimation("attackF",8)
-							self:STALKERNPCMakeMeleeAttack(8)
-							self:EmitSound("Stalker.Snork.Die2")
-						end
-					end)
-					timer.Create("Attack"..tostring(self).."3",2,1,function()
-						if(IsValid(self)&&self!=nil&&self!=NULL) then
-							self:STALKERNPCStopAllTimers()
-							self:STALKERNPCClearAnimation()
-							self.NextAbilityTime = CurTime()+0.5
-						end
-					end)	
+					self.IsLongJumping = 1
+
+					self.longjumping1 = CurTime()+0.01
+					self.longjumping2 = CurTime()+2
+
 				end
 			end
 		end
@@ -224,21 +214,6 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 					self.isAttacking = 1
 					self.jumping1 = CurTime()+0.2
 					self.jumping2 = CurTime()+5
-				end
-
-				if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-					self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(14*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
-					self:STALKERNPCPlayAnimation("attackC",9)
-					self:STALKERNPCMakeMeleeAttack(9)
-					self:EmitSound("Stalker.Snork.Die2")
-					self.isAttacking = 2
-				end
-
-				if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-					self:STALKERNPCStopAllTimers()
-					self:STALKERNPCClearAnimation()
-					self.NextAbilityTime = CurTime()+0.5
-					self.isAttacking = 0
 				end
 			end
 		end

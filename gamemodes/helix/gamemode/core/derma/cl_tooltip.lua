@@ -117,7 +117,6 @@ function PANEL:SizeToContents()
 		self:SetWrap(true)
 
 		self:SizeToContentsY()
-		self:SetWide(self:GetContentSize())
 	else
 		self:SetSize(contentWidth, contentHeight)
 	end
@@ -195,6 +194,7 @@ function PANEL:Init()
 	self:SetAlpha(0)
 	self:SetSize(0, 0)
 	self:SetDrawOnTop(true)
+	self:SetMouseInputEnabled(false)
 
 	self:CreateAnimation(animationTime, {
 		index = 1,
@@ -379,7 +379,7 @@ function PANEL:Think()
 			max = entity:LocalToWorld(max):ToScreen().x
 
 			self:SetPos(
-				math.Clamp(math.max(min, max), ScrW() * 0.5 + 32, ScrW() * 0.66 - self:GetWide()),
+				math.Clamp(math.max(min, max), ScrW() * 0.5 + 64, ScrW() - self:GetWide()),
 				ScrH() * 0.5 - self:GetTall() * 0.5
 			)
 		end

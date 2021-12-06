@@ -82,7 +82,7 @@ SWEP.LuaViewmodelRecoil = true
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {700, -400}, atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_reflex", "md_cmore"}},
 [2] = {header = "Barrel", offset = {200, -400}, atts = {"md_tundra9mm"}},
-["+reload"] = {header = "Ammo", offset = {700, 0}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+["+reload"] = {header = "Ammo", offset = {700, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
 	reload = "reload",
@@ -95,13 +95,13 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	reload = {[1] = {time = 0.4, sound = "CW_PP2000_MAGOUT"},
 	[2] = {time = 2.8, sound = "CW_MP5_MAGIN"}}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 5
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0
-SWEP.HoldType = "smg"
-SWEP.NormalHoldType = "smg"
-SWEP.RunHoldType = "passive"
+SWEP.HoldType = "revolver"
+SWEP.NormalHoldType = "revolver"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
@@ -118,7 +118,7 @@ SWEP.WorldModel		= "models/weapons/w_bf4_pp2000.mdl"
 
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WM = "models/weapons/w_bf4_pp2000.mdl"
-SWEP.WMPos = Vector(-1, -2, 0)
+SWEP.WMPos = Vector(-1, -3, 0.5)
 SWEP.WMAng = Vector(-10, 0, 180)
 
 SWEP.Spawnable			= true
@@ -134,17 +134,17 @@ SWEP.FireSound = "CW_PP2000_FIRE"
 SWEP.FireSoundSuppressed = "CW_UMP45_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.3
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.05
+SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 6
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 44
+SWEP.Damage = 59
 SWEP.DeployTime = 0.8
 
 SWEP.ReloadSpeed = 1

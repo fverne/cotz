@@ -33,8 +33,8 @@ if CLIENT then
 	SWEP.RMRPos = Vector(2.82, -5, 0.5)
 	SWEP.RMRAng = Vector(0, 0, 0)
 
-	SWEP.SprintPos = Vector(-4.361, -5.829, -8.87)
-	SWEP.SprintAng = Vector(70, 14.774, 0)
+	SWEP.SprintPos = Vector(0.602, -0.202, 0)
+	SWEP.SprintAng = Vector(-21.961, 3.517, 0)
 	
 	SWEP.AlternativePos = Vector(-0.88, 1.325, -0.561)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
@@ -68,7 +68,7 @@ SWEP.CanRestOnObjects = false
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {200, -200}, atts = {"md_microt1", "md_eotech", "md_rmr"}},
 [2] = {header = "Barrel", offset = {-600, -350}, atts = {"md_tundra9mm"}},
-["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"fire"},
 	reload = "reload",
@@ -85,9 +85,9 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 	[2] = {time = 1.5, sound = "CW_fort12_MAGIN"},
 	[3] = {time = 2, sound = "CW_fort12_SLIDEFORWARD"}}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 0
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
@@ -96,7 +96,7 @@ SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -117,14 +117,14 @@ SWEP.Primary.Ammo			= "9x18MM"
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_fort12_FIRE"
 SWEP.FireSoundSuppressed = "CW_DEAGLE_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.6
+SWEP.Recoil = 1.4
 
-SWEP.HealthDamage = 0.125
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.125
+SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 5
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4

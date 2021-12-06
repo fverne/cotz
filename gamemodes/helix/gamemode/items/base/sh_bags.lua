@@ -54,6 +54,26 @@ ITEM.functions.View = {
 		return !IsValid(item.entity) and item:GetData("id") and !IsValid(ix.gui["inv" .. item:GetData("id", "")])
 	end
 }
+ITEM.functions.combine = {
+	OnRun = function(item, data)
+		ix.item.instances[data[1]]:Transfer(item:GetData("id"))
+
+		return false
+	end,
+	OnCanRun = function(item, data)
+		local index = item:GetData("id", "")
+
+		if (index) then
+			local inventory = ix.item.inventories[index]
+
+			if (inventory) then
+				return true
+			end
+		end
+
+		return false
+	end
+}
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, width, height)
@@ -75,7 +95,7 @@ end
 function ITEM:OnInstanced(invID, x, y)
 	local inventory = ix.item.inventories[invID]
 
-	ix.item.NewInv(inventory and inventory.owner or 0, self.uniqueID, function(inv)
+	ix.inventory.New(inventory and inventory.owner or 0, self.uniqueID, function(inv)
 		local client = inv:GetOwner()
 
 		inv.vars.isBag = self.uniqueID
@@ -111,7 +131,7 @@ function ITEM:OnSendData()
 		else
 			local owner = self.player:GetCharacter():GetID()
 
-			ix.item.RestoreInv(self:GetData("id"), self.invWidth, self.invHeight, function(inv)
+			ix.inventory.Restore(self:GetData("id"), self.invWidth, self.invHeight, function(inv)
 				inv.vars.isBag = self.uniqueID
 				inv:SetOwner(owner, true)
 
@@ -128,7 +148,7 @@ function ITEM:OnSendData()
 			end)
 		end
 	else
-		ix.item.NewInv(self.player:GetCharacter():GetID(), self.uniqueID, function(inv)
+		ix.inventory.New(self.player:GetCharacter():GetID(), self.uniqueID, function(inv)
 			self:SetData("id", inv:GetID())
 		end)
 	end
@@ -224,5 +244,5 @@ end
 
 -- Called after the item is registered into the item tables.
 function ITEM:OnRegistered()
-	ix.item.RegisterInv(self.uniqueID, self.invWidth, self.invHeight, true)
+	ix.inventory.Register(self.uniqueID, self.invWidth, self.invHeight, true)
 end

@@ -1,10 +1,24 @@
 
 --[[--
 Chat manipulation and helper functions.
+
+Chat messages are a core part of the framework - it's takes up a good chunk of the gameplay, and is also used to interact with
+the framework. Chat messages can have types or "classes" that describe how the message should be interpreted. All chat messages
+will have some type of class: `ic` for regular in-character speech, `me` for actions, `ooc` for out-of-character, etc. These
+chat classes can affect how the message is displayed in each player's chatbox. See `ix.chat.Register` and `ChatClassStructure`
+to create your own chat classes.
 ]]
 -- @module ix.chat
 
 ix.chat = ix.chat or {}
+
+--- List of all chat classes that have been registered by the framework, where each key is the name of the chat class, and value
+-- is the chat class data. Accessing a chat class's data is useful for when you want to copy some functionality or properties
+-- to use in your own. Note that if you're accessing this table, you should do so inside of the `InitializedChatClasses` hook.
+-- @realm shared
+-- @table ix.chat.classes
+-- @usage print(ix.chat.classes.ic.format)
+-- > "%s says \"%s\""
 ix.chat.classes = ix.chat.classes or {}
 
 if (!ix.command) then
@@ -12,24 +26,89 @@ if (!ix.command) then
 end
 
 CAMI.RegisterPrivilege({
-	Name = "Helix - Bypass OOC Timer",
+Name = "Helix - Bypass OOC Timer",
 	MinAccess = "admin"
 })
 
---- Registers a new chat type with the information provided.
+-- note we can't use commas in the "color" field's default value since the metadata is separated by commas which will break the
+-- formatting for that field
+
+--- Chat messages can have different classes or "types" of messages that have different properties. This can include how the
+-- text is formatted, color, hearing distance, etc.
+-- @realm shared
+-- @table ChatClassStructure
+-- @see ix.chat.Register
+-- @field[type=string] prefix What the player must type before their message in order to use this chat class. For example,
+-- having a prefix of `/Y` will require to type `/Y I am yelling` in order to send a message with this chat class. This can also
+-- be a table of strings if you want to allow multiple prefixes, such as `{"//", "/OOC"}`.
+--
+-- **NOTE:** the prefix should usually start with a `/` to be consistent with the rest of the framework. However, you are able
+-- to use something different like the `LOOC` chat class where the prefixes are `.//`, `[[`, and `/LOOC`.
+-- @field[type=bool,opt=false] noSpaceAfter Whether or not the `prefix` can be used without a space after it. For example, the
+-- `OOC` chat class allows you to type `//my message` instead of `// my message`. **NOTE:** this only works if the last
+-- character in the prefix is non-alphanumeric (i.e `noSpaceAfter` with `/Y` will not work, but `/!` will).
+-- @field[type=string,opt] description Description to show to the user in the chatbox when they're using this chat class
+-- @field[type=string,opt="%s: \"%s\""] format How to format a message with this chat class. The first `%s` will be the speaking
+-- player's name, and the second one will be their message
+-- @field[type=color,opt=Color(242 230 160)] color Color to use when displaying a message with this chat class
+-- @field[type=string,opt="chatTyping"] indicator Language phrase to use when displaying the typing indicator above the
+-- speaking player's head
+-- @field[type=bool,opt=false] bNoIndicator Whether or not to avoid showing the typing indicator above the speaking player's
+-- head
+-- @field[type=string,opt=ixChatFont] font Font to use for displaying a message with this chat class
+-- @field[type=bool,opt=false] deadCanChat Whether or not a dead player can send a message with this chat class
+-- @field[type=number] CanHear This can be either a `number` representing how far away another player can hear this message.
+-- IC messages will use the `chatRange` config, for example. This can also be a function, which returns `true` if the given
+-- listener can hear the message emitted from a speaker.
+-- 	-- message can be heard by any player 1000 units away from the speaking player
+-- 	CanHear = 1000
+-- OR
+-- 	CanHear = function(self, speaker, listener)
+-- 		-- the speaking player will be heard by everyone
+-- 		return true
+-- 	end
+-- @field[type=function,opt] CanSay Function to run to check whether or not a player can send a message with this chat class.
+-- By default, it will return `false` if the player is dead and `deadCanChat` is `false`. Overriding this function will prevent
+-- `deadCanChat` from working, and you must implement this functionality manually.
+-- 	CanSay = function(self, speaker, text)
+-- 		-- the speaker will never be able to send a message with this chat class
+-- 		return false
+-- 	end
+-- @field[type=function,opt] GetColor Function to run to set the color of a message with this chat class. You should generally
+-- stick to using `color`, but this is useful for when you want the color of the message to change with some criteria.
+-- 	GetColor = function(self, speaker, text)
+-- 		-- each message with this chat class will be colored a random shade of red
+-- 		return Color(math.random(120, 200), 0, 0)
+-- 	end
+-- @field[type=function,opt] OnChatAdd Function to run when a message with this chat class should be added to the chatbox. If
+-- using this function, make sure you end the function by calling `chat.AddText` in order for the text to show up.
+--
+-- **NOTE:** using your own `OnChatAdd` function will prevent `color`, `GetColor`, or `format` from being used since you'll be
+-- overriding the base function that uses those properties. In such cases you'll need to add that functionality back in
+-- manually. In general, you should avoid overriding this function where possible. The `data` argument in the function is
+-- whatever is passed into the same `data` argument in `ix.chat.Send`.
+--
+-- 	OnChatAdd = function(self, speaker, text, bAnonymous, data)
+-- 		-- adds white text in the form of "Player Name: Message contents"
+-- 		chat.AddText(color_white, speaker:GetName(), ": ", text)
+-- 	end
+
+--- Registers a new chat type with the information provided. Chat classes should usually be created inside of the
+-- `InitializedChatClasses` hook.
 -- @realm shared
 -- @string chatType Name of the chat type
--- @tab data Table Properties and functions to assign to this chat class. If fields are missing from the table, then it
--- will use a default value
--- @usage ix.chat.Register("me", {
+-- @tparam ChatClassStructure data Properties and functions to assign to this chat class
+-- @usage -- this is the "me" chat class taken straight from the framework as an example
+-- ix.chat.Register("me", {
 -- 	format = "** %s %s",
--- 	GetColor = Color(255, 50, 50),
+-- 	color = Color(255, 50, 50),
 -- 	CanHear = ix.config.Get("chatRange", 280) * 2,
 -- 	prefix = {"/Me", "/Action"},
 -- 	description = "@cmdMe",
 -- 	indicator = "chatPerforming",
 -- 	deadCanChat = true
 -- })
+-- @see ChatClassStructure
 function ix.chat.Register(chatType, data)
 	chatType = string.lower(chatType)
 
@@ -46,7 +125,7 @@ function ix.chat.Register(chatType, data)
 
 		function data:CanHear(speaker, listener)
 			-- Length2DSqr is faster than Length2D, so just check the squares.
-			return (speaker:GetPos() - listener:GetPos()):LengthSqr() <= range
+			return (speaker:GetPos() - listener:GetPos()):LengthSqr() <= self.range
 		end
 	end
 
@@ -88,8 +167,8 @@ function ix.chat.Register(chatType, data)
 	if (CLIENT and data.prefix) then
 		if (istable(data.prefix)) then
 			for _, v in ipairs(data.prefix) do
-				if (v:sub(1, 1) == "/") then
-					ix.command.Add(v:sub(2), {
+				if (v:utf8sub(1, 1) == "/") then
+					ix.command.Add(v:utf8sub(2), {
 						description = data.description,
 						arguments = ix.type.text,
 						indicator = data.indicator,
@@ -101,7 +180,7 @@ function ix.chat.Register(chatType, data)
 				end
 			end
 		else
-			ix.command.Add(isstring(data.prefix) and data.prefix:sub(2) or chatType, {
+			ix.command.Add(isstring(data.prefix) and data.prefix:utf8sub(2) or chatType, {
 				description = data.description,
 				arguments = ix.type.text,
 				indicator = data.indicator,
@@ -113,10 +192,7 @@ function ix.chat.Register(chatType, data)
 		end
 	end
 
-	data.filter = data.filter or "ic"
 	data.uniqueID = chatType
-
-	-- Add the chat type to the list of classes.
 	ix.chat.classes[chatType] = data
 end
 
@@ -141,22 +217,24 @@ function ix.chat.Parse(client, message, bNoSend)
 		-- Check through all prefixes if the chat type has more than one.
 		if (istable(v.prefix)) then
 			for _, prefix in ipairs(v.prefix) do
-				prefix = prefix:lower()
+				prefix = prefix:utf8lower()
+				local fullPrefix = prefix .. (noSpaceAfter and "" or " ")
 
 				-- Checking if the start of the message has the prefix.
-				if (message:sub(1, #prefix + (noSpaceAfter and 0 or 1)):lower() == prefix..(noSpaceAfter and "" or " "):lower()) then
+				if (message:utf8sub(1, prefix:utf8len() + (noSpaceAfter and 0 or 1)):utf8lower() == fullPrefix:utf8lower()) then
 					isChosen = true
-					chosenPrefix = prefix..(v.noSpaceAfter and "" or " ")
+					chosenPrefix = fullPrefix
 
 					break
 				end
 			end
 		-- Otherwise the prefix itself is checked.
 		elseif (isstring(v.prefix)) then
-			local prefix = v.prefix:lower()
+			local prefix = v.prefix:utf8lower()
+			local fullPrefix = prefix .. (noSpaceAfter and "" or " ")
 
-			isChosen = message:sub(1, #prefix + (noSpaceAfter and 0 or 1)):lower() == prefix..(noSpaceAfter and "" or " "):lower()
-			chosenPrefix = prefix..(v.noSpaceAfter and "" or " ")
+			isChosen = message:utf8sub(1, prefix:utf8len() + (noSpaceAfter and 0 or 1)):utf8lower() == fullPrefix:utf8lower()
+			chosenPrefix = fullPrefix
 		end
 
 		-- If the checks say we have the proper chat type, then the chat type is the chosen one!
@@ -166,10 +244,10 @@ function ix.chat.Parse(client, message, bNoSend)
 			-- Set the chat type to the chosen one.
 			chatType = k
 			-- Remove the prefix from the chat type so it does not show in the message.
-			message = message:sub(#chosenPrefix + 1)
+			message = message:utf8sub(chosenPrefix:utf8len() + 1)
 
-			if (ix.chat.classes[k].noSpaceAfter and message:sub(1, 1):match("%s")) then
-				message = message:sub(2)
+			if (ix.chat.classes[k].noSpaceAfter and message:utf8sub(1, 1):match("%s")) then
+				message = message:utf8sub(2)
 			end
 
 			break
@@ -191,6 +269,26 @@ function ix.chat.Parse(client, message, bNoSend)
 	return chatType, message, anonymous
 end
 
+--- Formats a string to fix basic grammar - removing extra spacing at the beginning and end, capitalizing the first character,
+-- and making sure it ends in punctuation.
+-- @realm shared
+-- @string text String to format
+-- @treturn string Formatted string
+-- @usage print(ix.chat.Format("hello"))
+-- > Hello.
+-- @usage print(ix.chat.Format("wow!"))
+-- > Wow!
+function ix.chat.Format(text)
+	text = string.Trim(text)
+	local last = text:utf8sub(-1)
+
+	if (last != "." and last != "?" and last != "!" and last != "-" and last != "\"") then
+		text = text .. "."
+	end
+
+	return text:utf8sub(1, 1):utf8upper() .. text:utf8sub(2)
+end
+
 if (SERVER) then
 	util.AddNetworkString("ixChatMessage")
 
@@ -199,16 +297,20 @@ if (SERVER) then
 	-- @player speaker Player who is speaking
 	-- @string chatType Name of the chat type
 	-- @string text Message to send
-	-- @bool[opt=false] anonymous Whether or not the speaker should be anonymous
+	-- @bool[opt=false] bAnonymous Whether or not the speaker should be anonymous
 	-- @tab[opt=nil] receivers The players to replicate send the message to
 	-- @tab[opt=nil] data Additional data for this chat message
-	function ix.chat.Send(speaker, chatType, text, anonymous, receivers, data)
+	function ix.chat.Send(speaker, chatType, text, bAnonymous, receivers, data)
 		if (!chatType) then
 			return
 		end
 
 		data = data or {}
 		chatType = string.lower(chatType)
+
+		if (IsValid(speaker) and hook.Run("PrePlayerMessageSend", speaker, chatType, text, bAnonymous) == false) then
+			return
+		end
 
 		local class = ix.chat.classes[chatType]
 
@@ -231,27 +333,21 @@ if (SERVER) then
 			local rawText = text
 			local maxLength = ix.config.Get("chatMax")
 
-			if (text:len() > maxLength) then
-				text = text:sub(0, maxLength)
+			if (text:utf8len() > maxLength) then
+				text = text:utf8sub(0, maxLength)
 			end
 
 			if (ix.config.Get("chatAutoFormat") and hook.Run("CanAutoFormatMessage", speaker, chatType, text)) then
-				local last = text:sub(-1)
-
-				if (last != "." and last != "?" and last != "!" and last != "-" and last != "\"") then
-					text = text .. "."
-				end
-
-				text = text:sub(1, 1):upper() .. text:sub(2)
+				text = ix.chat.Format(text)
 			end
 
-			text = hook.Run("PlayerMessageSend", speaker, chatType, text, anonymous, receivers, rawText) or text
+			text = hook.Run("PlayerMessageSend", speaker, chatType, text, bAnonymous, receivers, rawText) or text
 
 			net.Start("ixChatMessage")
 				net.WriteEntity(speaker)
 				net.WriteString(chatType)
 				net.WriteString(text)
-				net.WriteBool(anonymous or false)
+				net.WriteBool(bAnonymous or false)
 				net.WriteTable(data or {})
 			net.Send(receivers)
 
@@ -455,8 +551,11 @@ do
 			CanHear = ix.config.Get("chatRange", 280),
 			deadCanChat = true,
 			OnChatAdd = function(self, speaker, text, bAnonymous, data)
-				chat.AddText(self.color, string.format(self.format,
-					speaker:GetName(), text, data.max or 100
+				local max = data.max or 100
+				local translated = L2(self.uniqueID.."Format", speaker:Name(), text, max)
+
+				chat.AddText(self.color, translated and "** "..translated or string.format(self.format,
+					speaker:Name(), text, max
 				))
 			end
 		})

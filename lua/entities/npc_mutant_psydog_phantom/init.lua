@@ -43,8 +43,8 @@ ENT.VisibleSchedule = SCHED_IDLE_WANDER
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 function ENT:Initialize()
-	self.Model = "models/jerry/mutants/stalker_anomaly_pseudodog.mdl"
-	self:STALKERNPCInit(Vector(-16,-16,60),MOVETYPE_STEP)
+	self.Model = "models/monsters/psydog.mdl"
+	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0
 	self.MaxRangeDist = 1200
@@ -66,7 +66,7 @@ function ENT:Initialize()
 	TEMP_MeleeTable.radius[1] = 50
 	TEMP_MeleeTable.time[1] = 0.4
 	TEMP_MeleeTable.bone[1] = "bip01_head"
-	self:STALKERNPCSetMeleeParams(1,"attack1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(1,"stand_attack_0",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 	
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
@@ -76,7 +76,7 @@ function ENT:Initialize()
 	TEMP_MeleeTable.radius[1] = 75
 	TEMP_MeleeTable.time[1] = 0.4
 	TEMP_MeleeTable.bone[1] = "bip01_head"
-	self:STALKERNPCSetMeleeParams(3,"attack1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
+	self:STALKERNPCSetMeleeParams(3,"jump_attack_all",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
 	self:SetHealth(self.hp)	
 	self:SetMaxHealth(self:Health())
@@ -88,7 +88,23 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	if (self.jumping1 < CurTime()) and self.isAttacking == 1 and self:GetEnemy() then
+		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
+		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,32) + self:OBBCenter()) - (self:GetPos())):GetNormal()
 
+		self:SetVelocity((dirnormal*(distance*3)))
+
+		self:STALKERNPCPlayAnimation("jump_attack_all",3)
+		self:STALKERNPCMakeMeleeAttack(3)
+		self:EmitSound("Stalker.Pseudodog.Melee1")
+		self.isAttacking = 2
+	end
+	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
+		self:STALKERNPCStopAllTimers()
+		self:STALKERNPCClearAnimation()
+		self.NextAbilityTime = CurTime()+0.5
+		self.isAttacking = 0
+	end
 end
 
 //little aggressive jump
@@ -105,21 +121,6 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 					self.jumping1 = CurTime()+0.2
 					self.jumping2 = CurTime()+5
 				end
-
-				if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-					self:SetLocalVelocity(((self:GetEnemy():GetPos() + self:OBBCenter()) -(self:GetPos() + self:OBBCenter())):GetNormal()*400 +self:GetForward()*(12*distance) +self:GetUp()*math.Clamp((0.5 * distance),150,400))
-					self:STALKERNPCPlayAnimation("attack1",2)
-					self:STALKERNPCMakeMeleeAttack(3)
-					self:EmitSound("Stalker.Pseudodog.Melee1")
-					self.isAttacking = 2
-				end
-
-				if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-					self:STALKERNPCStopAllTimers()
-					self:STALKERNPCClearAnimation()
-					self.NextAbilityTime = CurTime()+0.5
-					self.isAttacking = 0
-				end
 			end
 		end
 	end
@@ -127,9 +128,7 @@ end
 
 
 function ENT:STALKERNPCHitSomething()
-	if self.isClone then
-		self:TakeDamage( 5, self, self )
-	end
+	self:TakeDamage( 5, self, self )
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul) 

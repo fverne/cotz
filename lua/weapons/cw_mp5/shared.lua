@@ -80,7 +80,7 @@ SWEP.LuaViewmodelRecoil = true
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {700, -400}, atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_reflex", "md_cmore"}},
 [2] = {header = "Barrel", offset = {200, -400}, atts = {"md_tundra9mm"}},
-["+reload"] = {header = "Ammo", offset = {700, 0}, atts = {"am_zoneloaded", "am_matchgrade"}},
+["+reload"] = {header = "Ammo", offset = {700, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}},
 [3] = {header = "Upgrade1", offset = {700, 0}, atts = {"up_firerate1"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
@@ -99,13 +99,13 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	[3] = {time = 1.8, sound = "CW_MP5_MAGIN"},
 	[4] = {time = 2.6, sound = "CW_MP5_BOLTFORWARD"}}}
 
-SWEP.SpeedDec = 20
+SWEP.SpeedDec = 5
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "3burst", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
@@ -131,19 +131,19 @@ SWEP.Primary.Ammo			= "9x19MM"
 SWEP.FireDelay = 0.075
 SWEP.FireSound = "CW_MP5_FIRE"
 SWEP.FireSoundSuppressed = "CW_MP5_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.2
+SWEP.Recoil = 1.9
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 4
+SWEP.MaxSpreadInc = 0.55
+SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 45
+SWEP.Damage = 57
 SWEP.DeployTime = 0.8
 
 SWEP.ReloadSpeed = 1.3

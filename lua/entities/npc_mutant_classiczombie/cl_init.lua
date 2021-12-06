@@ -1,11 +1,11 @@
 include('shared.lua')
 
 function ENT:Initialize()
-	self.RealModel = "models/stalkertnb/zombie1.mdl"
+	self.RealModel = "models/monsters/zombie.mdl"
 end
 
 function ENT:Draw()
 	
-	self:SetModel("models/stalkertnb/zombie1.mdl")
+	self:SetModel("models/monsters/zombie.mdl")
 	self:DrawModel()
 end

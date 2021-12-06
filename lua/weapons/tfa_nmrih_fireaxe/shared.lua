@@ -8,6 +8,8 @@ SWEP.PrintName = "Fire Axe"
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/v_me_axe_fire.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
+SWEP.Slot = 3
+
 SWEP.WorldModel			= "models/weapons/tfa_nmrih/w_me_axe_fire.mdl" --Viewmodel path
 SWEP.HoldType = "melee2"
 SWEP.DefaultHoldType = "melee2"
@@ -35,8 +37,8 @@ SWEP.InspectPos = Vector(5.5, 1.424, -3.131)
 SWEP.InspectAng = Vector(17.086, 3.938, 14.836)
 
 SWEP.Primary.RPM = 50
-SWEP.Primary.Damage = 60
-SWEP.Secondary.Damage = 90
+SWEP.Primary.Damage = 130
+SWEP.Secondary.Damage = 250
 SWEP.Secondary.BashDelay = 0.3
 SWEP.ViewModelBoneMods = {
 	["ValveBiped.Bip01_R_Finger1"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0.254, 0.09), angle = Angle(15.968, -11.193, 1.437) },

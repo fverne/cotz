@@ -83,7 +83,7 @@ end
 -- On item is dropped, Remove a weapon from the player and keep the ammo in the item.
 ITEM:Hook("drop", function(item)
 	if (item:GetData("equip")) then
-		item:RemovePart(item.player)
+		item:RemovePart(item:GetOwner())
 	end
 end)
 
@@ -101,7 +101,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 		local client = item.player
 
 		return !IsValid(item.entity) and IsValid(client) and item:GetData("equip") == true and
-			hook.Run("CanPlayerUnequipItem", client, item) != false and item.invID == client:GetCharacter():GetInventory():GetID()
+			hook.Run("CanPlayerUnequipItem", client, item) != false
 	end
 }
 
@@ -119,7 +119,7 @@ ITEM.functions.Equip = {
 				local itemTable = ix.item.instances[v.id]
 
 				if (itemTable.pacData and v.outfitCategory == item.outfitCategory and itemTable:GetData("equip")) then
-					item.player:Notify("You're already equipping this kind of outfit")
+					item.player:NotifyLocalized(item.equippedNotify or "outfitAlreadyEquipped")
 
 					return false
 				end
@@ -142,7 +142,7 @@ ITEM.functions.Equip = {
 		local client = item.player
 
 		return !IsValid(item.entity) and IsValid(client) and item:GetData("equip") != true and
-			hook.Run("CanPlayerEquipItem", client, item) != false and item.invID == client:GetCharacter():GetInventory():GetID()
+			hook.Run("CanPlayerEquipItem", client, item) != false
 	end
 }
 

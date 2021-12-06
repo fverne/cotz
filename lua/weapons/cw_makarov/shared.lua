@@ -24,8 +24,8 @@ if CLIENT then
 	SWEP.PBIronsightsPos = Vector(-1.8, -3.067, 0.584)
 	SWEP.PBIronsightsAng = Vector(0.699, 0, 0)
 	
-	SWEP.SprintPos = Vector(3, -9, -8)
-	SWEP.SprintAng = Vector(70, 0, 0)
+	SWEP.SprintPos = Vector(0.602, -0.202, 0)
+	SWEP.SprintAng = Vector(-21.961, 3.517, 0)
 	
 	SWEP.MoveType = 1
 	SWEP.ViewModelMovementScale = 0.8
@@ -40,11 +40,11 @@ if CLIENT then
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/cw2/pistols/w_makarov.mdl"
 	SWEP.WMPos = Vector(-2.5, -1.5, -1.25)
-	SWEP.WMAng = Vector(0, 90, 180)
+	SWEP.WMAng = Vector(-5, 90, 180)
 
 	
 	SWEP.LuaVMRecoilAxisMod = {vert = 0.25, hor = 0.5, roll = 2, forward = 0, pitch = 1}
-	SWEP.FullAimViewmodelRecoil = true
+	--SWEP.FullAimViewmodelRecoil = true
 	SWEP.CustomizationMenuScale = 0.01
 	SWEP.BoltBonePositionRecoverySpeed = 17 -- how fast does the bolt bone move back into it's initial position after the weapon has fired
 	
@@ -56,7 +56,7 @@ end
 SWEP.LuaViewmodelRecoil = true
 SWEP.CanRestOnObjects = false
 
-SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 	
 
 SWEP.Animations = {reload = "reloadfull",
@@ -76,9 +76,9 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 	[4] = {time = 2.39, sound = "CW_MAKAROV_SLIDE"}}
 }
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 0
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
@@ -87,12 +87,12 @@ SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 80
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/cw2/pistols/makarov.mdl"
 SWEP.WorldModel		= "models/cw2/pistols/w_makarov.mdl"
@@ -105,17 +105,17 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "9x18MM"
 
-SWEP.FireDelay = 0.15
+SWEP.FireDelay = 0.1
 SWEP.FireSound = "CW_MAKAROV_FIRE"
 SWEP.FireSoundSuppressed = "CW_MAKAROV_FIRE_SUPPRESSED_PM"
 SWEP.Recoil = 1.5
 
-SWEP.HealthDamage = 0.125
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.125
+SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4

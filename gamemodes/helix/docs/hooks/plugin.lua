@@ -99,6 +99,24 @@ end
 function CanPlayerAccessDoor(client, door, access)
 end
 
+--- Whether or not a player is allowed to create a new character with the given payload.
+-- @realm server
+-- @player client Player attempting to create a new character
+-- @tab payload Data that is going to be used for creating the character
+-- @treturn bool Whether or not the player is allowed to create the character. This function defaults to `true`, so you
+-- should only ever return `false` if you're disallowing creation. Otherwise, don't return anything as you'll prevent any other
+-- calls to this hook from running.
+-- @treturn string Language phrase to use for the error message
+-- @treturn ... Arguments to use for the language phrase
+-- @usage function PLUGIN:CanPlayerCreateCharacter(client, payload)
+-- 	if (!client:IsAdmin()) then
+-- 		return false, "notNow" -- only allow admins to create a character
+-- 	end
+-- end
+-- -- non-admins will see the message "You are not allowed to do this right now!"
+function CanPlayerCreateCharacter(client, payload)
+end
+
 --- Whether or not a player is allowed to drop the given `item`.
 -- @realm server
 -- @player client Player attempting to drop an item
@@ -243,7 +261,7 @@ function CanPlayerTakeItem(client, item)
 end
 
 --- Whether or not the player is allowed to punch with the hands SWEP.
--- @realm server
+-- @realm shared
 -- @player client Player attempting throw a punch
 -- @treturn bool Whether or not to allow the player to punch
 -- @usage function PLUGIN:CanPlayerThrowPunch(client)
@@ -437,7 +455,20 @@ end
 function GetMaxPlayerCharacter(client)
 end
 
---- @realm server
+--- Returns the sound to emit from the player upon death. If nothing is returned then it will use the default male/female death
+-- sounds.
+-- @realm server
+-- @player client Player that died
+-- @treturn[1] string Sound to play
+-- @treturn[2] bool `false` if a sound shouldn't be played at all
+-- @usage function PLUGIN:GetPlayerDeathSound(client)
+-- 	-- play impact sound every time someone dies
+-- 	return "physics/body/body_medium_impact_hard1.wav"
+-- end
+-- @usage function PLUGIN:GetPlayerDeathSound(client)
+-- 	-- don't play a sound at all
+-- 	return false
+-- end
 function GetPlayerDeathSound(client)
 end
 
@@ -465,7 +496,24 @@ end
 function GetTypingIndicator(character, text)
 end
 
---- @realm shared
+--- Registers chat classes after the core framework chat classes have been registered. You should usually create your chat
+-- classes in this hook - especially if you want to reference the properties of a framework chat class.
+-- @realm shared
+-- @usage function PLUGIN:InitializedChatClasses()
+-- 	-- let's say you wanted to reference an existing chat class's color
+-- 	ix.chat.Register("myclass", {
+-- 		format = "%s says \"%s\"",
+-- 		GetColor = function(self, speaker, text)
+-- 			-- make the chat class slightly brighter than the "ic" chat class
+-- 			local color = ix.chat.classes.ic:GetColor(speaker, text)
+--
+-- 			return Color(color.r + 35, color.g + 35, color.b + 35)
+-- 		end,
+-- 		-- etc.
+-- 	})
+-- end
+-- @see ix.chat.Register
+-- @see ix.chat.classes
 function InitializedChatClasses()
 end
 
@@ -533,15 +581,29 @@ end
 function OnCharacterDisconnect(client, character)
 end
 
---- @realm shared
+--- @realm server
 function OnCharacterFallover(client, entity, bFallenOver)
+end
+
+--- Called when a character has gotten up from the ground.
+-- @realm server
+-- @player client Player that has gotten up
+-- @entity ragdoll Ragdoll used to represent the player
+function OnCharacterGetup(client, ragdoll)
 end
 
 --- @realm client
 function OnCharacterMenuCreated(panel)
 end
 
---- @realm shared
+--- Called whenever an item entity has spawned in the world. You can access the entity's item table with
+-- `entity:GetItemTable()`.
+-- @realm server
+-- @entity entity Spawned item entity
+-- @usage function PLUGIN:OnItemSpawned(entity)
+-- 	local item = entity:GetItemTable()
+-- 	-- do something with the item here
+-- end
 function OnItemSpawned(entity)
 end
 
@@ -710,6 +772,10 @@ function PostChatboxDraw(width, height, alpha)
 end
 
 --- @realm client
+function PostDrawHelixModelView(panel, entity)
+end
+
+--- @realm client
 function PostDrawInventory(panel)
 end
 
@@ -737,8 +803,20 @@ end
 function PrePlayerLoadedCharacter(client, character, currentChar)
 end
 
---- @realm server
-function PrePlayerMessageSend(client, chatType, message, anonymous)
+--- Called before a message sent by a player is processed to be sent to other players - i.e this is ran as early as possible
+-- and before things like the auto chat formatting. Can be used to prevent the message from being sent at all.
+-- @realm server
+-- @player client Player sending the message
+-- @string chatType Chat class of the message
+-- @string message Contents of the message
+-- @bool bAnonymous Whether or not the player is sending the message anonymously
+-- @treturn bool Whether or not to prevent the message from being sent
+-- @usage function PLUGIN:PrePlayerMessageSend(client, chatType, message, bAnonymous)
+-- 	if (!client:IsAdmin()) then
+-- 		return false -- only allow admins to talk in chat
+-- 	end
+-- end
+function PrePlayerMessageSend(client, chatType, message, bAnonymous)
 end
 
 --- @realm server
@@ -783,6 +861,22 @@ end
 
 --- @realm client
 function ShouldHideBars()
+end
+
+--- Whether or not a character should be permakilled upon death. This is only called if the `permakill` server config is
+-- enabled.
+-- @realm server
+-- @player client Player to permakill
+-- @char character Player's current character
+-- @entity inflictor Entity that inflicted the killing blow
+-- @entity attacker Other player or entity that killed the player
+-- @treturn bool `false` if the player should not be permakilled
+-- @usage function PLUGIN:ShouldPermakillCharacter(client, character, inflictor, attacker)
+-- 		if (client:IsAdmin()) then
+-- 			return false -- all non-admin players will have their character permakilled
+-- 		end
+-- 	end
+function ShouldPermakillCharacter(client, character, inflictor, attacker)
 end
 
 --- @realm server

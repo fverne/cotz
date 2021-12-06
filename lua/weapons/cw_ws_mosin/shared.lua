@@ -132,7 +132,7 @@ SWEP.LuaViewmodelRecoil = false
 	SWEP.Attachments = {
 		[1] = {header = "Sight", offset = {-500, -300},  atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_reflex", "md_cmore", "md_schmidt_shortdot", "md_pso1", "md_nightforce_nxs", "md_acog"}},
 		[2] = {header = "Barrel", offset = {-500, 150},  atts = {"md_pbs1"}},
-		["+reload"] = {header = "Ammo", offset = {800, 150}, atts = {"am_zoneloaded", "am_matchgrade"}}
+		["+reload"] = {header = "Ammo", offset = {800, 150}, atts = {"am_hollowpoint", "am_armorpiercing"}}
 	}
 
 SWEP.Animations = {
@@ -156,7 +156,7 @@ SWEP.Sounds = {
 	[2] = {time = 0.50, sound = "CW_WS_MOSIN_BOLTFORWORD"}}}
 	
 
-SWEP.SpeedDec = 50
+SWEP.SpeedDec = 15
 
 SWEP.ADSFireAnim = true
 SWEP.BipodFireAnim = true
@@ -167,18 +167,18 @@ SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"bolt"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
@@ -195,7 +195,7 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 5
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= "7.62x54mmR"
+SWEP.Primary.Ammo			= "7.62x54MMR"
 
 SWEP.FireDelay = 1.45
 SWEP.FireSound = "CW_WS_MOSIN_FIRE"
@@ -206,14 +206,14 @@ SWEP.CustomizationMenuScale = 0.018
 SWEP.ForceBackToHipAfterAimedShot = true
 SWEP.GlobalDelayOnShoot = 1.1
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.2
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
+SWEP.VelocitySensitivity = 9
+SWEP.MaxSpreadInc = 0.9
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadCooldown = 1
 SWEP.Shots = 1
-SWEP.Damage = 120
+SWEP.Damage = 185
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1
@@ -228,3 +228,6 @@ SWEP.ReloadFinishWait = 0.6
 SWEP.ShotgunReload = true
 
 SWEP.Chamberable = false
+
+SWEP.UseHands = true
+

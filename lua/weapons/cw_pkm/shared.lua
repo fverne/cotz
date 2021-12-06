@@ -75,7 +75,7 @@ SWEP.BipodFireAnim = true
 SWEP.Attachments = {[1] = {header = "Sight", offset = {300, -400},  atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_acog", "md_cmore", "md_reflex"}},
 	[2] = {header = "Muzzle", offset = {-400, -200}, atts = {"md_pbs1"}},
 	[3] = {header = "Barrel", offset = {-600, 300}, atts = {"md_bipod"}},
-	["+reload"] = {header = "Ammo", offset = {1500, 400}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {1500, 400}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
 	reload = "reload",
@@ -104,12 +104,12 @@ SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -125,15 +125,15 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 200
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
-SWEP.Primary.Ammo			= "7.62x54MMr"
+SWEP.Primary.Ammo			= "7.62x54MMR"
 
 SWEP.FireDelay = 0.0923
 SWEP.FireSound = "CW_PKM_FIRE"
 SWEP.FireSoundSuppressed = "CW_PKM_SUPPRESSED"
 SWEP.Recoil = 2.2
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005

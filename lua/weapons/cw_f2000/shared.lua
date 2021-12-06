@@ -85,7 +85,7 @@ SWEP.LuaViewmodelRecoil = true
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {450, -500}, atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_reflex", "md_cmore","md_schmidt_shortdot", "md_acog"}},
 	[2] = {header = "Barrel", offset = {0, -500}, atts = {"md_saker"}},
-	["+reload"] = {header = "Ammo", offset = {200, 250}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {200, 250}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 	
 	if CustomizableWeaponry_KK_HK416 then
 		table.insert(SWEP.Attachments[1].atts, 2, "md_cod4_reflex")
@@ -108,13 +108,14 @@ SWEP.SpeedDec = 30
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -132,8 +133,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.56x45MM"
 
-SWEP.HealthDamage = 0.15
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.15
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.0705882352941176
 SWEP.FireSound = "CW_F2000_FIRE"

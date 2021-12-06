@@ -28,7 +28,7 @@ if CLIENT then
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/w_uzi.mdl"
 	SWEP.WMPos = Vector(0, -15,0)
-	SWEP.WMAng = Vector(0, 180, 180)
+	SWEP.WMAng = Vector(-5, 180, 180)
 	
 	SWEP.MicroT1Pos = Vector(-2.55, 8, -0.33)
 	SWEP.MicroT1Ang = Vector(0, 0, 0)
@@ -106,7 +106,7 @@ SWEP.LuaViewmodelRecoil = true
 SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -300},  atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_reflex", "md_cmore"}},
 	[2] = {header = "Barrel", offset = {-400, -500},  atts = {"md_tundra9mm"}},
 	[3] = {header = "Handguard", offset = {-500, -200}, atts = {"md_foregrip"}},
-	["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"mac10_fire", "mac10_fire2", "mac10_fire3"},
 	reload = "mac10_reload",
@@ -124,24 +124,24 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	{time = 2.3, sound = "CW_FOLEY_LIGHT"}}
 }
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 5
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "revolver"
 SWEP.NormalHoldType = "revolver"
-SWEP.RunHoldType = "normal"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.02
+SWEP.WearEffect = 0.05
 
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
@@ -161,10 +161,10 @@ SWEP.Chamberable = false
 SWEP.FireDelay = 0.1
 SWEP.FireSound = "CW_MAC11_FIRE"
 SWEP.FireSoundSuppressed = "CW_MAC11_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.2
+SWEP.Recoil = 1.4
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 1
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007

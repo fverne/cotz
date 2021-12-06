@@ -73,7 +73,7 @@ SWEP.LuaViewmodelRecoil = true
 SWEP.Attachments = {[1] = {header = "Sight", offset = {500, -450}, atts = {"md_microt1", "md_cmore", "md_reflex", "md_eotech", "md_aimpoint"}},
 	[2] = {header = "Barrel", offset = {-500, -450}, atts = {"md_tundra9mm"}},
 	[3] = {header = "Rail", offset = {-500, 50}, atts = {"md_anpeq15"}},
-	["+reload"] = {header = "Ammo", offset = {700, 0}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {700, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2", "shoot3"},
 	reload = "reload",
@@ -93,12 +93,12 @@ SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.NormalHoldType = "smg"
 SWEP.HoldType = "smg"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -109,8 +109,8 @@ SWEP.ViewModel		= "models/weapons/therambotnic09/v_cst_p90.mdl"
 SWEP.WorldModel		= "models/weapons/therambotnic09/w_cst_p90.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WM = "models/weapons/therambotnic09/w_cst_p90.mdl"
-SWEP.WMPos = Vector(-1, -1, -1)
-SWEP.WMAng = Vector(0, 0, 180)
+SWEP.WMPos = Vector(-1, 0, -2)
+SWEP.WMAng = Vector(-10, 0, 180)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
@@ -120,8 +120,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.7x28MM"
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.07
 SWEP.FireSound = "CW_P90_FIRE"

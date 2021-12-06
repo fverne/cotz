@@ -98,7 +98,7 @@ SWEP.LuaViewmodelRecoil = true
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -300},  atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_cmore", "md_reflex"}},
 	[2] = {header = "Barrel", offset = {-400, -500},  atts = {"md_tundra9mm"}},
-	["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"mac10_fire", "mac10_fire2", "mac10_fire3"},
 	reload = "mac10_reload",
@@ -116,18 +116,18 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	{time = 2.3, sound = "CW_FOLEY_LIGHT"}}
 }
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 5
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 SWEP.SlotPos = 0
-SWEP.HoldType = "revolver"
+SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"
 SWEP.FireModes = {"auto"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -147,19 +147,19 @@ SWEP.Primary.Ammo			= "9x19MM"
 
 SWEP.Chamberable = false -- MAC-11 is an open-bolt weapon
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.05
 SWEP.FireSound = "CW_MAC11_FIRE"
 SWEP.FireSoundSuppressed = "CW_MAC11_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.85
+SWEP.Recoil = 3.3
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 5
+SWEP.MaxSpreadInc = 0.55
+SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
 SWEP.Damage = 44

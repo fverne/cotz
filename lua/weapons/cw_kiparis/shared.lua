@@ -23,6 +23,11 @@ if CLIENT then
 	SWEP.ForeGripOffsetCycle_Reload_Empty = 0.8
 	SWEP.FireMoveMod = 1
 
+	SWEP.DrawTraditionalWorldModel = false
+	SWEP.WM = "models/dobytchick/weapons/gmzone/deadair/w_kiparis.mdl"
+	SWEP.WMPos = Vector(2, -3, 1)
+	SWEP.WMAng = Vector(-5, 180, 180)
+
 	SWEP.BoltBone = "Bolt"
 	SWEP.BoltShootOffset = Vector(-2, 0, 0)
 
@@ -62,7 +67,7 @@ SWEP.SightBGs = {main = 2, none = 1}
 SWEP.LuaViewmodelRecoil = true
 
 SWEP.Attachments = {[2] = {header = "Barrel", offset = {-400, -300},  atts = {"md_tundra9mm"}},
-	["+reload"] = {header = "Ammo", offset = {-400, 100}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {-400, 100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2", "shoot3"},
 	reload = "reload1",
@@ -77,31 +82,31 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	{time = 2.4, sound = "CW_SKORPION_BOLTBACK"}},
 }
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 5
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 SWEP.SlotPos = 0
-SWEP.HoldType = "smg"
-SWEP.NormalHoldType = "smg"
-SWEP.RunHoldType = "passive"
-SWEP.FireModes = {"auto"}
+SWEP.HoldType = "ar2"
+SWEP.NormalHoldType = "ar2"
+SWEP.RunHoldType = "crossbow"
+SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 90
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/v_notmicro_kiparis.mdl"
-SWEP.WorldModel		= "models/weapons/w_smg_skorp.mdl"
+SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_kiparis.mdl"
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 30
+SWEP.Primary.ClipSize		= 20
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x18MM"
@@ -111,15 +116,15 @@ SWEP.FireSound = "CW_KIPARIS_FIRE"
 SWEP.FireSoundSuppressed = "CW_SKORPION_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.9
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.05
+SWEP.WearEffect = 0.2
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 4
+SWEP.MaxSpreadInc = 0.6
+SWEP.SpreadPerShot = 0.08
+SWEP.SpreadCooldown = 0.95
 SWEP.Shots = 1
 SWEP.Damage = 44
 SWEP.DeployTime = 0.5

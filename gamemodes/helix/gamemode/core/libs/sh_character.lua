@@ -71,7 +71,7 @@ if (SERVER) then
 
 						local w, h = ix.config.Get("inventoryWidth"), ix.config.Get("inventoryHeight")
 						local character = ix.char.New(data, lastID, client, data.steamID)
-						local inventory = ix.item.CreateInv(w, h, invLastID)
+						local inventory = ix.inventory.Create(w, h, invLastID)
 
 						character.vars.inv = {inventory}
 						inventory:SetOwner(lastID)
@@ -177,7 +177,7 @@ if (SERVER) then
 										end
 									end
 
-									ix.item.RestoreInv(inventories, nil, nil, function(inventory)
+									ix.inventory.Restore(inventories, nil, nil, function(inventory)
 										local inventoryType = inventories[inventory:GetID()][3]
 
 										if (inventoryType) then
@@ -194,7 +194,7 @@ if (SERVER) then
 										insertQuery:Insert("character_id", charID)
 										insertQuery:Callback(function(_, status, lastID)
 											local w, h = ix.config.Get("inventoryWidth"), ix.config.Get("inventoryHeight")
-											local inventory = ix.item.CreateInv(w, h, lastID)
+											local inventory = ix.inventory.Create(w, h, lastID)
 											inventory:SetOwner(charID)
 
 											character.vars.inv = {
@@ -234,6 +234,12 @@ if (SERVER) then
 			for _, v in pairs(ix.char.vars) do
 				if (v.field and v.fieldType and !v.bSaveLoadInitialOnly) then
 					data:Select(v.field)
+
+					-- if FilterValues is used, any rows that contain a value in the column that isn't in the valid values table
+					-- will be ignored entirely (i.e the character will not load if it has an invalid value)
+					if (v.FilterValues) then
+						data:WhereIn(v.field, v:FilterValues())
+					end
 				end
 			end
 		else
@@ -309,33 +315,37 @@ do
 	--- Sets this character's name. This is automatically networked.
 	-- @realm server
 	-- @string name New name for the character
-	-- @function :SetName
+	-- @function SetName
 
 	--- Returns this character's name
 	-- @realm shared
 	-- @treturn string This character's current name
-	-- @function :GetName
+	-- @function GetName
 	ix.char.RegisterVar("name", {
 		field = "name",
 		fieldType = ix.type.string,
 		default = "John Doe",
 		index = 1,
 		OnValidate = function(self, value, payload, client)
+			if (!value) then
+				return false, "invalid", "name"
+			end
+
 			value = tostring(value):gsub("\r\n", ""):gsub("\n", "")
 			value = string.Trim(value)
 
 			local minLength = ix.config.Get("minNameLength", 4)
 			local maxLength = ix.config.Get("maxNameLength", 32)
 
-			if (#value < minLength) then
+			if (value:utf8len() < minLength) then
 				return false, "nameMinLen", minLength
 			elseif (!value:find("%S")) then
 				return false, "invalid", "name"
-			elseif (#value:gsub("%s", "") > maxLength) then
+			elseif (value:gsub("%s", ""):utf8len() > maxLength) then
 				return false, "nameMaxLen", maxLength
 			end
 
-			return hook.Run("GetDefaultCharacterName", client, payload.faction) or value:sub(1, 70)
+			return hook.Run("GetDefaultCharacterName", client, payload.faction) or value:utf8sub(1, 70)
 		end,
 		OnPostSetup = function(self, panel, payload)
 			local faction = ix.faction.indices[payload.faction]
@@ -358,12 +368,12 @@ do
 	--- Sets this character's physical description. This is automatically networked.
 	-- @realm server
 	-- @string description New description for this character
-	-- @function :SetDescription
+	-- @function SetDescription
 
 	--- Returns this character's physical description.
 	-- @realm shared
 	-- @treturn string This character's current description
-	-- @function :GetDescription
+	-- @function GetDescription
 	ix.char.RegisterVar("description", {
 		field = "description",
 		fieldType = ix.type.text,
@@ -373,7 +383,7 @@ do
 			value = string.Trim((tostring(value):gsub("\r\n", ""):gsub("\n", "")))
 			local minLength = ix.config.Get("minDescriptionLength", 16)
 
-			if (#value < minLength) then
+			if (value:utf8len() < minLength) then
 				return false, "descMinLen", minLength
 			elseif (!value:find("%s+") or !value:find("%S")) then
 				return false, "invalid", "description"
@@ -398,12 +408,12 @@ do
 	-- It is automatically networked.
 	-- @realm server
 	-- @string model New model for the character
-	-- @function :SetModel
+	-- @function SetModel
 
 	--- Returns this character's model.
 	-- @realm shared
 	-- @treturn string This character's current model
-	-- @function :GetModel
+	-- @function GetModel
 	ix.char.RegisterVar("model", {
 		field = "model",
 		fieldType = ix.type.string,
@@ -495,7 +505,7 @@ do
 					-- save skin/bodygroups to character data
 					local bodygroups = {}
 
-					for i = 1, 9 do
+					for i = 1, #model[3] do
 						bodygroups[i - 1] = tonumber(model[3][i]) or 0
 					end
 
@@ -516,7 +526,7 @@ do
 	--- Returns this character's current class.
 	-- @realm shared
 	-- @treturn number Index of the class this character is in
-	-- @function :GetClass
+	-- @function GetClass
 	ix.char.RegisterVar("class", {
 		bNoDisplay = true,
 	})
@@ -525,17 +535,27 @@ do
 	-- changed, so you'll have to update some character vars manually.
 	-- @realm server
 	-- @number faction Index of the faction to transfer this character to
-	-- @function :SetFaction
+	-- @function SetFaction
 
 	--- Returns this character's faction.
 	-- @realm shared
 	-- @treturn number Index of the faction this character is currently in
-	-- @function :GetFaction
+	-- @function GetFaction
 	ix.char.RegisterVar("faction", {
 		field = "faction",
 		fieldType = ix.type.string,
 		default = "Citizen",
 		bNoDisplay = true,
+		FilterValues = function(self)
+			-- make sequential table of faction unique IDs
+			local values = {}
+
+			for k, v in ipairs(ix.faction.indices) do
+				values[k] = v.uniqueID
+			end
+
+			return values
+		end,
 		OnSet = function(self, value)
 			local client = self:GetPlayer()
 
@@ -578,7 +598,7 @@ do
 		category = "attributes",
 		isLocal = true,
 		OnDisplay = function(self, container, payload)
-			local maximum = hook.Run("GetDefaultAttributePoints", LocalPlayer(), payload) or ix.config.Get("maxAttributes", 30)
+			local maximum = hook.Run("GetDefaultAttributePoints", LocalPlayer(), payload) or 10
 
 			if (maximum < 1) then
 				return
@@ -642,7 +662,7 @@ do
 						count = count + v
 					end
 
-					if (count > (hook.Run("GetDefaultAttributePoints", client, count) or ix.config.Get("maxAttributes", 30))) then
+					if (count > (hook.Run("GetDefaultAttributePoints", client, count) or 10)) then
 						return false, "unknownError"
 					end
 				else
@@ -658,12 +678,12 @@ do
 	--- Sets this character's current money. Money is only networked to the player that owns this character.
 	-- @realm server
 	-- @number money New amount of money this character should have
-	-- @function :SetMoney
+	-- @function SetMoney
 
 	--- Returns this character's money. This is only valid on the server and the owning client.
 	-- @realm shared
 	-- @treturn number Current money of this character
-	-- @function :GetMoney
+	-- @function GetMoney
 	ix.char.RegisterVar("money", {
 		field = "money",
 		fieldType = ix.type.number,
@@ -678,7 +698,7 @@ do
 	-- @realm server
 	-- @string key Name of the field that holds the data
 	-- @param value Any value to store in the field, as long as it's supported by GMod's JSON parser
-	-- @function :SetData
+	-- @function SetData
 
 	--- Returns a data field set on this character. If it doesn't exist, it will return the given default or `nil`. This is only
 	-- valid on the server and the owning client.
@@ -687,7 +707,7 @@ do
 	-- @param default Value to return if the given key doesn't exist, or is `nil`
 	-- @return[1] Data stored in the field
 	-- @treturn[2] nil If the data doesn't exist, or is `nil`
-	-- @function :GetData
+	-- @function GetData
 	ix.char.RegisterVar("data", {
 		default = {},
 		isLocal = true,
@@ -775,7 +795,7 @@ do
 	--- Returns the Unix timestamp of when this character was created (i.e the value of `os.time()` at the time of creation).
 	-- @realm server
 	-- @treturn number Unix timestamp of when this character was created
-	-- @function :GetCreateTime
+	-- @function GetCreateTime
 	ix.char.RegisterVar("createTime", {
 		field = "create_time",
 		fieldType = ix.type.number,
@@ -787,7 +807,7 @@ do
 	--- Returns the Unix timestamp of when this character was last used by its owning player.
 	-- @realm server
 	-- @treturn number Unix timestamp of when this character was last used
-	-- @function :GetLastJoinTime
+	-- @function GetLastJoinTime
 	ix.char.RegisterVar("lastJoinTime", {
 		field = "last_join_time",
 		fieldType = ix.type.number,
@@ -801,7 +821,7 @@ do
 	-- database, and need to differentiate between them.
 	-- @realm server
 	-- @treturn string Schema this character belongs to
-	-- @function :GetSchema
+	-- @function GetSchema
 	ix.char.RegisterVar("schema", {
 		field = "schema",
 		fieldType = ix.type.string,
@@ -814,7 +834,7 @@ do
 	--- Returns the 64-bit Steam ID of the player that owns this character.
 	-- @realm server
 	-- @treturn string Owning player's Steam ID
-	-- @function :GetSteamID
+	-- @function GetSteamID
 	ix.char.RegisterVar("steamID", {
 		field = "steamid",
 		fieldType = ix.type.steamid,
@@ -894,8 +914,9 @@ do
 		end)
 
 		net.Receive("ixCharacterCreate", function(length, client)
-			local payload = net.ReadTable()
-			local newPayload = {}
+			if ((client.ixNextCharacterCreate or 0) > RealTime()) then
+				return
+			end
 
 			local maxChars = hook.Run("GetMaxPlayerCharacter", client) or ix.config.Get("maxCharacters", 5)
 			local charList = client.ixCharList
@@ -906,6 +927,28 @@ do
 					net.WriteString("maxCharacters")
 					net.WriteTable({})
 				net.Send(client)
+
+				return
+			end
+
+			client.ixNextCharacterCreate = RealTime() + 1
+
+			local indicies = net.ReadUInt(8)
+			local payload = {}
+
+			for _ = 1, indicies do
+				payload[net.ReadString()] = net.ReadType()
+			end
+
+			local newPayload = {}
+			local results = {hook.Run("CanPlayerCreateCharacter", client, payload)}
+
+			if (table.remove(results, 1) == false) then
+				net.Start("ixCharacterAuthFailed")
+					net.WriteString(table.remove(results, 1) or "unknownError")
+					net.WriteTable(results)
+				net.Send(client)
+
 				return
 			end
 
@@ -933,6 +976,7 @@ do
 							net.WriteString(fault)
 							net.WriteTable(result)
 						net.Send(client)
+
 						return
 					else
 						if (result[1] != nil) then
@@ -968,7 +1012,6 @@ do
 					hook.Run("OnCharacterCreated", client, ix.char.loaded[id])
 				end
 			end)
-
 		end)
 
 		net.Receive("ixCharacterDelete", function(length, client)

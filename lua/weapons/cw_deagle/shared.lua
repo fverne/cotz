@@ -63,7 +63,7 @@ SWEP.CanRestOnObjects = false
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {450, -350}, atts = {"md_microt1", "md_eotech", "md_rmr"}},
 [2] = {header = "Barrel", offset = {-600, -350}, atts = {"md_cobram2"}},
-["+reload"] = {header = "Ammo", offset = {450, 0}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+["+reload"] = {header = "Ammo", offset = {450, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
 	reload = "reload",
@@ -83,7 +83,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 
 SWEP.SpeedDec = 15
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
@@ -92,7 +92,7 @@ SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -102,6 +102,11 @@ SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/cw2/pistols/deagle.mdl"
 SWEP.WorldModel		= "models/weapons/w_pist_deagle.mdl"
 
+SWEP.DrawTraditionalWorldModel = true --temporarily removing this until we want to update theix item
+SWEP.WM = "models/dobytchick/weapons/gmzone/deadair/w_deagle.mdl"
+SWEP.WMPos = Vector(1, -3, 1.9)
+SWEP.WMAng = Vector(-10, 180, 180)
+
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
@@ -110,8 +115,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".50 AE"
 
-SWEP.HealthDamage = 0.125
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.125
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_DEAGLE_FIRE"

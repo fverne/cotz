@@ -16,24 +16,6 @@ function ENT:SpawnFunction( ply, tr )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
 	ent:Activate()
-	timer.Create(anomalyID, 10800 + math.random(10800), 0, function()
-		if math.random(100) < 20 then
-			local rnd = math.floor(math.Rand(1,101))
-			if rnd > 1 and rnd < 20 then // 20 %
-				nut.item.spawn("wrenched", tr.HitPos+(Vector( math.Rand(350,600), math.Rand(-350,600), 10 )), nil, AngleRand(), {})
-			elseif  rnd > 20 and rnd < 40 then // 20 %
-				nut.item.spawn("stoneblood", tr.HitPos+(Vector( math.Rand(350,600), math.Rand(-350,600), 10 )), nil, AngleRand(), {})
-			elseif rnd > 40 and rnd < 60 then // 20 %
-				nut.item.spawn("meatchunk", tr.HitPos+(Vector( math.Rand(350,600), math.Rand(-350,600), 10 )), nil, AngleRand(), {})
-			elseif rnd > 60 and rnd < 80 then // 20 %
-				nut.item.spawn("soul", tr.HitPos+(Vector( math.Rand(350,600), math.Rand(-350,600), 10 )), nil, AngleRand(), {})
-			elseif rnd > 80 and rnd < 93 then // 13 %
-				nut.item.spawn("gravi", tr.HitPos+(Vector( math.Rand(350,600), math.Rand(-350,600), 10 )), nil, AngleRand(), {})
-			elseif rnd > 93 and rnd < 101 then // 7 %
-				nut.item.spawn("goldfish", tr.HitPos+(Vector( math.Rand(350,600), math.Rand(-350,600), 10 )), nil, AngleRand(), {})
-			end
-		end
-	end )
 
 	return ent
 end

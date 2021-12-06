@@ -34,8 +34,9 @@ SWEP.IronSightsMoveSpeed  = SWEP.MoveSpeed
 SWEP.InspectPos = Vector(4.84, 1.424, -3.131)
 SWEP.InspectAng = Vector(17.086, 3.938, 14.836)
 
+SWEP.Slot = 2
+
 SWEP.Primary.RPM = 50
-SWEP.Primary.Damage = 25
 SWEP.Secondary.BashDelay = 0.3
 SWEP.ViewModelBoneMods = {
 	["ValveBiped.Bip01_R_Finger1"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0.254, 0.09), angle = Angle(15.968, -11.193, 1.437) },
@@ -47,3 +48,10 @@ SWEP.ViewModelBoneMods = {
 
 SWEP.Primary.Blunt = true
 SWEP.Secondary.Blunt = true
+
+SWEP.Primary.Damage = 50
+SWEP.Secondary.Damage = 80
+
+SWEP.Secondary.BashDamage = 70
+SWEP.Secondary.BashDelay = 0.35
+SWEP.Secondary.BashLength = 50

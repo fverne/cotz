@@ -18,7 +18,7 @@ ix.config.Add("containerOpenTime", 0.7, "How long it takes to open a container."
 })
 
 function ix.container.Register(model, data)
-	ix.container.stored[model] = data
+	ix.container.stored[model:lower()] = data
 end
 
 ix.util.Include("sh_definitions.lua")
@@ -39,7 +39,7 @@ if (SERVER) then
 			container:SetModel(model)
 			container:Spawn()
 
-			ix.item.NewInv(0, "container:" .. model, function(inventory)
+			ix.inventory.New(0, "container:" .. model:lower(), function(inventory)
 				-- we'll technically call this a bag since we don't want other bags to go inside
 				inventory.vars.isBag = true
 				inventory.vars.isContainer = true
@@ -72,7 +72,7 @@ if (SERVER) then
 						inventory:GetID(),
 						v:GetModel(),
 						v.password,
-						v.name,
+						v:GetDisplayName(),
 						v:GetMoney()
 					}
 				end
@@ -135,7 +135,6 @@ if (SERVER) then
 					end
 
 					if (v[6]) then
-						entity.name = v[6]
 						entity:SetDisplayName(v[6])
 					end
 
@@ -143,7 +142,7 @@ if (SERVER) then
 						entity:SetMoney(v[7])
 					end
 
-					ix.item.RestoreInv(inventoryID, data2.width, data2.height, function(inventory)
+					ix.inventory.Restore(inventoryID, data2.width, data2.height, function(inventory)
 						inventory.vars.isBag = true
 						inventory.vars.isContainer = true
 
@@ -163,6 +162,10 @@ if (SERVER) then
 	end
 
 	net.Receive("ixContainerPassword", function(length, client)
+		if ((client.ixNextContainerPassword or 0) > RealTime()) then
+			return
+		end
+
 		local entity = net.ReadEntity()
 		local password = net.ReadString()
 		local dist = entity:GetPos():DistToSqr(client:GetPos())
@@ -174,6 +177,8 @@ if (SERVER) then
 				client:NotifyLocalized("wrongPassword")
 			end
 		end
+
+		client.ixNextContainerPassword = RealTime() + 0.5
 	end)
 
 	ix.log.AddType("containerPassword", function(client, ...)
@@ -221,7 +226,7 @@ end
 function PLUGIN:InitializedPlugins()
 	for k, v in pairs(ix.container.stored) do
 		if (v.name and v.width and v.height) then
-			ix.item.RegisterInv("container:" .. k:lower(), v.width, v.height)
+			ix.inventory.Register("container:" .. k:lower(), v.width, v.height)
 		else
 			ErrorNoHalt("[Helix] Container for '"..k.."' is missing all inventory information!\n")
 			ix.container.stored[k] = nil
@@ -311,14 +316,12 @@ properties.Add("container_setname", {
 
 		if (name:len() != 0) then
 			entity:SetDisplayName(name)
-			entity.name = name
 
 			client:NotifyLocalized("containerName", name)
 		else
 			local definition = ix.container.stored[entity:GetModel():lower()]
 
 			entity:SetDisplayName(definition.name)
-			entity.name = nil
 
 			client:NotifyLocalized("containerNameRemove")
 		end

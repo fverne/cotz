@@ -66,7 +66,7 @@ function SWEP:recalculateClumpSpread()
 	if not self.ClumpSpread then
 		return
 	end
-	
+
 	self.ClumpSpread = self.ClumpSpread_Orig * self.ClumpSpreadMult
 end
 
@@ -81,10 +81,10 @@ function SWEP:recalculateStats()
 	self:recalculateDeployTime()
 	self:recalculateReloadSpeed()
 	self:recalculateClumpSpread()
-	
+
 	if CLIENT then
 		self:recalculateMouseSens()
 	end
-	
+
 	self:recalculateMaxSpreadInc()
 end

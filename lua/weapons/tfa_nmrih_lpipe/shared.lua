@@ -8,6 +8,8 @@ SWEP.PrintName = "Lead Pipe"
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/v_me_pipe_lead.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
+SWEP.Slot = 2
+
 SWEP.WorldModel			= "models/weapons/tfa_nmrih/w_me_pipe_lead.mdl" --Viewmodel path
 SWEP.HoldType = "melee"
 SWEP.DefaultHoldType = "melee"
@@ -35,7 +37,7 @@ SWEP.InspectPos = Vector(-3.418, -6.433, 8.241)
 SWEP.InspectAng = Vector(-9.146, 9.145, 17.709)
 
 SWEP.Primary.Blunt = true
-SWEP.Primary.Damage = 20
+SWEP.Primary.Damage = 40
 SWEP.Primary.Reach = 60
 SWEP.Primary.RPM = 90
 SWEP.Primary.SoundDelay = 0
@@ -44,7 +46,7 @@ SWEP.Primary.Window = 0.2
 
 SWEP.Secondary.Blunt = true
 SWEP.Secondary.RPM = 60 -- Delay = 60/RPM, this is only AFTER you release your heavy attack
-SWEP.Secondary.Damage = 40
+SWEP.Secondary.Damage = 65
 SWEP.Secondary.Reach = 60	
 SWEP.Secondary.SoundDelay = 0.1
 SWEP.Secondary.Delay = 0.3

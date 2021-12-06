@@ -96,7 +96,7 @@ SWEP.LuaViewmodelRecoilOverride = false
 SWEP.Attachments = {
 	[1] = {header = "Barrel", offset = {200, -300}, atts = {"md_saker"}}, --offset = {200, -500}
 	[2] = {header = "Handguard", offset = {-400, 0}, atts = {"md_foregrip"}},
-	["+reload"] = {header = "Ammo", offset = {200, 400}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {200, 400}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2", "shoot3"},
 	reload = "reload",
@@ -111,13 +111,14 @@ SWEP.SpeedDec = 30
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -140,8 +141,8 @@ SWEP.FireSound = "CW_l85_FIRE"
 SWEP.FireSoundSuppressed = "CW_G3A3_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.15
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005

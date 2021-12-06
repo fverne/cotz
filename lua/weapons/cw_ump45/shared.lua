@@ -87,7 +87,7 @@ SWEP.LuaViewmodelRecoil = true
 SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -300},  atts = {"md_microt1", "md_eotech", "md_aimpoint", "md_cmore", "md_reflex", "md_schmidt_shortdot", "md_acog"}},
 	[2] = {header = "Barrel", offset = {-400, -300},  atts = {"md_cobram2"}},
 	[3] = {header = "Rail", offset = {800, 150},  atts = {"md_anpeq15"}},
-	["+reload"] = {header = "Ammo", offset = {-400, 100}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {-400, 100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2", "shoot3"},
 	reload = "reload",
@@ -110,29 +110,34 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	{time = 2.8, sound = "CW_UMP45_BOLTFORWARD"},
 	{time = 3, sound = "CW_FOLEY_LIGHT"}}}
 
-SWEP.SpeedDec = 20
+SWEP.SpeedDec = 5
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.HoldType = "smg"
 SWEP.NormalHoldType = "smg"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/cw2/smgs/ump.mdl"
-SWEP.WorldModel		= "models/weapons/w_smg_ump45.mdl"
+SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_ump45.mdl"
+
+SWEP.DrawTraditionalWorldModel = false
+SWEP.WM = "models/dobytchick/weapons/gmzone/deadair/w_ump45.mdl"
+SWEP.WMPos = Vector(1, -3, 0.5)
+SWEP.WMAng = Vector(-10,180,180)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
@@ -145,16 +150,16 @@ SWEP.Primary.Ammo			= ".45 ACP"
 SWEP.FireDelay = 0.1
 SWEP.FireSound = "CW_UMP45_FIRE"
 SWEP.FireSoundSuppressed = "CW_UMP45_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.2
+SWEP.Recoil = 1.8
 
 SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.VelocitySensitivity = 2
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 54
+SWEP.Damage = 71
 SWEP.DeployTime = 0.5
 
 SWEP.ReloadSpeed = 0.9

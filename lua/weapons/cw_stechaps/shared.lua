@@ -62,7 +62,7 @@ SWEP.AttachmentModelsVM = {
 
 SWEP.Attachments = {
 [1] = {header = "Muzzle", offset = {0, 150}, atts = {"md_tundra9mm"}},
-["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_zoneloaded", "am_matchgrade"}}
+["+reload"] = {header = "Ammo", offset = {-400, 330}, atts = {"am_hollowpoint", "am_armorpiercing"}}
 }
 
 SWEP.Animations = {fire = "fire",
@@ -82,11 +82,12 @@ SWEP.Animations = {fire = "fire",
 	[4] = {time = 1.5, sound = "WARFACE_pt10_BOLTFORWARD"}}}
 	
 SWEP.DryFire = true
-SWEP.AimViewModelFOV = 70
-SWEP.SpeedDec = 10
+SWEP.AimViewModelFOV = 90
+SWEP.SpeedDec = 5
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
+SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"
 SWEP.FireModes = {"auto"}
@@ -100,7 +101,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 90
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/v_ma85_wf_pt10.mdl"
 SWEP.WorldModel		= "models/weapons/w_ma85_wf_pt10.mdl"
@@ -118,12 +119,12 @@ SWEP.FireSound = "WARFACE_pt10_FIRE"
 SWEP.FireSoundSuppressed = "WARFACE_pt10_FIRESIL"
 SWEP.Recoil = 1.45
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.1
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 7
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4

@@ -30,6 +30,11 @@ if CLIENT then
 	SWEP.LuaVMRecoilAxisMod = {vert = 1, hor = 1.5, roll = 3, forward = 1, pitch = 4}
 	SWEP.CustomizationMenuScale = 0.01
 	SWEP.DisableSprintViewSimulation = true
+
+	SWEP.DrawTraditionalWorldModel = false
+	SWEP.WM = "models/weapons/w_pist_mr_96s.mdl"
+	SWEP.WMPos = Vector(-1, 0, 0)
+	SWEP.WMAng = Vector(0, 0, 180)
 	
 end
 
@@ -39,7 +44,7 @@ SWEP.LuaViewmodelRecoil = true
 SWEP.CanRestOnObjects = false
 
 
-SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {500, -75}, atts = {"am_matchgrade"}}}
+SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {500, -75}, atts = {"am_armorpiercing", "am_hollowpoint"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
 	reload = "reload",
@@ -53,9 +58,9 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 	[3] = {time = 1.5, sound = "CW_MR96_ROUNDSIN"},
 	[4] = {time = 2.05, sound = "CW_MR96_CYLINDERCLOSE"}}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 0
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
@@ -72,7 +77,7 @@ SWEP.Instructions	= ""
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/cw2/pistols/mr96.mdl"
-SWEP.WorldModel		= "models/weapons/w_357.mdl"
+SWEP.WorldModel		= "models/weapons/w_pist_mr_96s.mdl"
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
@@ -80,14 +85,14 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 6
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= ".44 Magnum"
+SWEP.Primary.Ammo			= ".357 Magnum"
 
 SWEP.FireDelay = 0.15
 SWEP.FireSound = "CW_MR96_FIRE_LONG"
 SWEP.Recoil = 2.6
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.015
@@ -96,7 +101,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 60
+SWEP.Damage = 110
 SWEP.DeployTime = 0.7
 SWEP.Chamberable = false
 

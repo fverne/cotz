@@ -180,7 +180,7 @@ do
 	--- Returns the `ix.type` of the given value.
 	-- @realm shared
 	-- @param value Value to get the type of
-	-- @treturn ixtype Type of value
+	-- @treturn ix.type Type of value
 	-- @see ix.type
 	-- @usage print(ix.util.GetTypeFromValue("hello"))
 	-- > 2 -- i.e the value of ix.type.string
@@ -259,14 +259,14 @@ function ix.util.FindPlayer(identifier, bAllowPatterns)
 end
 
 --- Checks to see if two strings are equivalent using a fuzzy manner. Both strings will be lowered, and will return `true` if
--- the strings are identical, or if `a` is a substring of `b`.
+-- the strings are identical, or if `b` is a substring of `a`.
 -- @realm shared
 -- @string a First string to check
 -- @string b Second string to check
 -- @treturn bool Whether or not the strings are equivalent
 function ix.util.StringMatches(a, b)
 	if (a and b) then
-		local a2, b2 = a:lower(), b:lower()
+		local a2, b2 = a:utf8lower(), b:utf8lower()
 
 		-- Check if the actual letters match.
 		if (a == b) then return true end
@@ -321,7 +321,7 @@ do
 	}
 	--- Returns a string that is the given input with spaces in between each CamelCase word. This function will ignore any words
 	-- that do not begin with a capital letter. The words `ooc`, `looc`, `afk`, and `url` will be automatically transformed
-	-- into uppercase text.
+	-- into uppercase text. This will not capitalize non-ASCII letters due to limitations with Lua's pattern matching.
 	-- @realm shared
 	-- @string input String to expand
 	-- @bool[opt=false] bNoUpperFirst Whether or not to avoid capitalizing the first character. This is useful for lowerCamelCase
@@ -329,12 +329,12 @@ do
 	-- @usage print(ix.util.ExpandCamelCase("HelloWorld"))
 	-- > Hello World
 	function ix.util.ExpandCamelCase(input, bNoUpperFirst)
-		input = bNoUpperFirst and input or input:sub(1, 1):upper() .. input:sub(2)
+		input = bNoUpperFirst and input or input:utf8sub(1, 1):utf8upper() .. input:utf8sub(2)
 
 		-- extra parentheses to select first return value of gsub
 		return string.TrimRight((input:gsub("%u%l+", function(word)
-			if (upperMap[word:lower()]) then
-				word = word:upper()
+			if (upperMap[word:utf8lower()]) then
+				word = word:utf8upper()
 			end
 
 			return word .. " "
@@ -683,18 +683,9 @@ if (CLIENT) then
 		return skin.Colours[name] or default
 	end
 
-	local LAST_WIDTH = ScrW()
-	local LAST_HEIGHT = ScrH()
 
-	timer.Create("ixResolutionMonitor", 1, 0, function()
-		local scrW, scrH = ScrW(), ScrH()
-
-		if (scrW != LAST_WIDTH or scrH != LAST_HEIGHT) then
-			hook.Run("ScreenResolutionChanged", LAST_WIDTH, LAST_HEIGHT)
-
-			LAST_WIDTH = scrW
-			LAST_HEIGHT = scrH
-		end
+	hook.Add("OnScreenSizeChanged", "ix.OnScreenSizeChanged", function(oldWidth, oldHeight)
+		hook.Run("ScreenResolutionChanged", oldWidth, oldHeight)
 	end)
 end
 
@@ -703,9 +694,12 @@ do
 	local R = debug.getregistry()
 	local VECTOR = R.Vector
 	local CrossProduct = VECTOR.Cross
+	local right = Vector(0, -1, 0)
 
 	function VECTOR:Right(vUp)
-		if (self[1] == 0 and self[2] == 0) then return Vector(0, -1, 0) end
+		if (self[1] == 0 and self[2] == 0) then
+			return right
+		end
 
 		if (vUp == nil) then
 			vUp = vector_up
@@ -774,6 +768,8 @@ do
 
 	local NUM_TANGENTS = 8
 	local tangents = {0, 1, 0.57735026919, 0.3639702342, 0.267949192431, 0.1763269807, -0.1763269807, -0.267949192431}
+	local traceMin = Vector(-16, -16, -16)
+	local traceMax = Vector(16, 16, 16)
 
 	function ix.util.FindUseEntity(player, origin, forward)
 		local tr
@@ -809,8 +805,8 @@ do
 				tr = util.TraceHull({
 					start = searchCenter,
 					endpos = searchCenter + down * 72,
-					mins = -Vector(16,16,16),
-					maxs = Vector(16,16,16),
+					mins = traceMin,
+					maxs = traceMax,
 					mask = useableContents,
 					filter = player
 				})

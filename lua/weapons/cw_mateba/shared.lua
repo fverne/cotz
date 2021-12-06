@@ -81,7 +81,7 @@ SWEP.ForegripOverridePos = {
 
 SWEP.Attachments = {[2] = {header = "Barrel", offset = {-750, -200}, atts = {"md_saker"}},
 	[1] = {header = "Sight", offset = {500, -300}, atts = {"md_microt1", "md_rmr"}},
-	["+reload"] = {header = "Ammo", offset = {800, 300}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {800, 300}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
 	reload = "reload",
@@ -114,7 +114,7 @@ SWEP.Sounds = {draw = {{time = 0.0, sound = "CWC_FOLEY_LIGHT"},
 {time = 2.0, sound = "CWC_MATEBA_SPIN"},
 {time = 2.4, sound = "CWC_MAG_DROP_REVOLVER"}}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 0
 
 SWEP.LuaViewmodelRecoil = true
 SWEP.LuaViewmodelRecoilOverride = true
@@ -123,8 +123,9 @@ SWEP.FullAimViewmodelRecoil = true
 SWEP.LuaVMRecoilAxisMod = {vert = -0.1, hor = 1, roll = 4, forward = 1.5, pitch = -0.5} -- modifier for intensity of the recoil on varying axes
 
 
-SWEP.Slot = 1
+SWEP.Slot = 2
 SWEP.SlotPos = 0
+SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "revolver"
 SWEP.RunHoldType = "normal"
 SWEP.FireModes = {"double"}
@@ -155,14 +156,14 @@ SWEP.FireSound = "CWC_MATEBA_FIRE"
 SWEP.FireSoundSuppressed = "CWC_MATEBA_FIRE_SUP"
 SWEP.Recoil = 4
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 60
+SWEP.Damage = 135
 SWEP.DeployTime = 0.7
 SWEP.Chamberable = false
 
@@ -173,5 +174,5 @@ SWEP.ReloadHalt = 2.7
 SWEP.ReloadTime_Empty = 1.6
 SWEP.ReloadHalt_Empty = 2.7
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05

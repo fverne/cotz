@@ -1,146 +1,184 @@
 AddCSLuaFile()
 AddCSLuaFile("sh_sounds.lua")
 include("sh_sounds.lua")
-//SCK name: mosin
+
 if CLIENT then
 	SWEP.DrawCrosshair = false
-	SWEP.PrintName = "Obrez"
+	SWEP.PrintName = "Mosin-Nagant Obrez"
 	SWEP.CSMuzzleFlashes = true
 	SWEP.ViewModelMovementScale = 1.15
 	
-	SWEP.IconLetter = "i"
-	killicon.Add("cw_ws_mosin", "vgui/kills/cw_ws_mosin", Color(255, 80, 0, 150))
-	SWEP.SelectIcon = surface.GetTextureID("vgui/kills/cw_ws_mosin")
+	SWEP.IconLetter = "w"
+	killicon.Add( "khr_mosin", "icons/killicons/khr_mosin", Color(255, 80, 0, 150))
+	SWEP.SelectIcon = surface.GetTextureID("icons/killicons/khr_mosin")
 	
-	SWEP.MuzzleEffect = "muzzleflash_SR25"
-	SWEP.MuzzleAttachmentName = "muzzle"
+	SWEP.DrawTraditionalWorldModel = false
+	SWEP.WM = "models/weapons/w_obrez.mdl"
+	SWEP.WMPos = Vector(-1, -15, 1)
+	SWEP.WMAng = Vector(-3,180, 180)
+
+	
+	SWEP.MuzzleEffect = "muzzleflash_6"
 	SWEP.PosBasedMuz = true
-	SWEP.SnapToGrip = true
-	SWEP.ShellScale = 0.7
-	SWEP.ShellOffsetMul = 2
-	SWEP.ShellPosOffset = {x = 0, y = -200, z = 0}
-	SWEP.ForeGripOffsetCycle_Draw = 0
-	SWEP.ForeGripOffsetCycle_Reload = 0.9
-	SWEP.ForeGripOffsetCycle_Reload_Empty = 0.8
-	SWEP.FireMoveMod = 0.6
-	
-	SWEP.IronsightPos = Vector(-4.4, 15, 2.2)
-	SWEP.IronsightAng = Vector(0.4, 1.6, -5.628)
-	
-	//SWEP.SprintPos = Vector(0, 0, 0)
-	//SWEP.SprintAng = Vector(0, 0, 0)
-	SWEP.SprintPos = Vector(3.029, -0.805, -2.201)
-	SWEP.SprintAng = Vector(-4.926, 38.693, -18.292)
-	
-	SWEP.CustomizePos = Vector(5.519, 0, -1.601)
-	SWEP.CustomizeAng = Vector(21.106, 25.326, 10.553)
-
 	SWEP.SightWithRail = true
-
-	//SWEP.DisableSprintViewSimulation = true
-
-	SWEP.AttachmentModelsVM = {
-	}
+	SWEP.NoDistance = true
+	SWEP.SnapToIdlePostReload = false
+	SWEP.CrosshairEnabled = true
+	SWEP.FOVPerShot = 0.25
+	SWEP.ShellScale = 0.28
+	SWEP.ShellDelay = .75
+	SWEP.NoShells = false
+	SWEP.ShellOffsetMul = 0
+	SWEP.ShellPosOffset = {x = 6, y = -.25, z = .5}
+	SWEP.FireMoveMod = 0.6
+	SWEP.CustomizationMenuScale = 0.03
 	
-	function SWEP:getMuzzlePosition()
-		return self.CW_VM:GetAttachment(self.CW_VM:LookupAttachment(self.MuzzleAttachmentName))
-	end
+	SWEP.IronsightPos = Vector(-2.8155, -1.6667, 1.455)
+	SWEP.IronsightAng = Vector(0, 0.03, 0)
 
-	SWEP.LuaVMRecoilAxisMod = {vert = 0.5, hor = 1, roll = 1, forward = 0.5, pitch = 0.5}
+	SWEP.PUPos = Vector(-2.819, 0, 0.723)
+	SWEP.PUAng = Vector(0, 0, 0)
+	
+	SWEP.SprintPos = Vector(1.786, -1, -1)
+	SWEP.SprintAng = Vector(-10.778, 27.573, 0)
+	
+	SWEP.AlternativePos = Vector(-0.5, 0, -0.25)
+	SWEP.AlternativeAng = Vector(0, 0, 0)
+	
+	SWEP.ACOGPos = Vector(-2.821, -9, -0.2144)
+	SWEP.ACOGAng = Vector(-1, 0, 0)
+
+	SWEP.NXSPos = Vector(-3.648, -4, 1.157)
+	SWEP.NXSAng = Vector(0, 0, 0)
+
+	SWEP.ShortDotPos = Vector(-3.626, -5, 1.28)
+	SWEP.ShortDotAng = Vector(0, 0, 0)
+	
+	SWEP.NXSAlign = {right = 0, up = 0, forward = 0}
+	SWEP.ACOGAxisAlign = {right = 1.1, up = 0, forward = 0}
+	SWEP.PUAxisAlign = {right = 0, up = 0, forward = 0}
+	SWEP.SchmidtShortDotAxisAlign = {right = 180, up = 180, forward = 180}
+	SWEP.LuaVMRecoilAxisMod = {vert = 1, hor = 1, roll = 1, forward = 0, pitch = 1}
 end
 
-SWEP.LuaViewmodelRecoil = false
+SWEP.MuzzleVelocity = 865 -- in meter/s
 
-	SWEP.Attachments = {
-		["+reload"] = {header = "Ammo", offset = {800, 150}, atts = {"am_zoneloaded", "am_matchgrade"}}
-	}
+SWEP.BoltBGs = {main = 1, bent = 1, straight = 0}
+SWEP.SightBGs = {main = 2, scope = 1, none = 0}
+SWEP.StockBGs = {main = 0, full = 0, custom = 1, carbine = 2, obrez = 3}
 
-SWEP.Animations = {
-	fire = {"shoot"}, //base_fire_start
-	reload = "reload",
-	idle = "idle1", //base_idle
-	draw = "draw"}
+SWEP.Attachments = {
+["+reload"] = {header = "Ammo", offset = {-150, 425}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
+
+SWEP.Animations = {fire = "base_fire_start",
+	reload_start = "reload_start",
+	insert = "reload_insert",
+	reload_end = "reload_end",
+	idle = "reload_end",
+	draw = "base_draw"}
 	
-SWEP.Sounds = {
+SWEP.Sounds = {	bent_reload_start = {
+		{time = 4/30, sound = "KHRMOSIN_BOLTRELEASE"},
+		{time = 10/30, sound = "KHRMOSIN_BOLTBACK"},
+	},
 	
-	reload= {[1] = {time = 0.5, sound = "CW_WS_MOSIN_BOLTBACK"},
-	[2] = {time = 1.3, sound = "CW_WS_MOSIN_INSERT"},
-	[3] = {time = 2, sound = "CW_WS_MOSIN_BOLTFORWORD"}
+	reload_start = {
+		{time = 4/30, sound = "KHRMOSIN_BOLTRELEASE"},
+		{time = 10/30, sound = "KHRMOSIN_BOLTBACK"},
 	},
 
-	shoot = {
-	[1] = {time = 0.5, sound = "CW_WS_MOSIN_BOLTBACK"},
-	[2] = {time = 0.8, sound = "CW_WS_MOSIN_BOLTFORWORD"}}}
+		reload_insert = {
+		{time = 8/30, sound = "KHRMOSIN_BULLETIN"},
+	},
 	
+		reload_end = {
+		{time = 7/30, sound = "KHRMOSIN_BOLTFORWARD"},
+		{time = 11/30, sound = "KHRMOSIN_BOLTLATCH"},
+	},
+	
+		bent_reload_end = {
+		{time = 7/30, sound = "KHRMOSIN_BOLTFORWARD"},
+		{time = 11/30, sound = "KHRMOSIN_BOLTLATCH"},
+	},
+	
+		bent_fire_start = {
+		{time = 15/30, sound = "KHRMOSIN_BOLTRELEASE"},
+		{time = 19/30, sound = "KHRMOSIN_BOLTBACK"},
+		{time = 28/30, sound = "KHRMOSIN_BOLTFORWARD"},
+		{time = 35/30, sound = "KHRMOSIN_BOLTLATCH"},
+		
+	},
+		
+		base_fire_start = {
+		{time = 15/30, sound = "KHRMOSIN_BOLTRELEASE"},
+		{time = 19/30, sound = "KHRMOSIN_BOLTBACK"},
+		{time = 28/30, sound = "KHRMOSIN_BOLTFORWARD"},
+		{time = 35/30, sound = "KHRMOSIN_BOLTLATCH"}
+	}}
 
-SWEP.SpeedDec = 20
+SWEP.SpeedDec = 10
 
-SWEP.ADSFireAnim = true
-SWEP.BipodFireAnim = true
-SWEP.AimBreathingIntensity = 1
-
-SWEP.Slot = 3
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"bolt"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "Spy"
+SWEP.Author			= ""
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
 SWEP.ViewModelFOV	= 70
+SWEP.AimViewModelFOV = 60
 SWEP.ViewModelFlip	= false
-SWEP.ViewModel		= "models/weapons/v_obrez.mdl"
+SWEP.ViewModel		= "models/khrcw2/v_khri_mosinm91.mdl"
 SWEP.WorldModel		= "models/weapons/w_obrez.mdl"
-SWEP.DrawTraditionalWorldModel = false
-SWEP.WM = "models/weapons/w_obrez.mdl"
-SWEP.WMPos = Vector(-1, -15, 1)
-SWEP.WMAng = Vector(-3,180, 180)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
+SWEP.ADSFireAnim = true
+SWEP.Chamberable = false
 
+SWEP.LuaViewmodelRecoil = false
+SWEP.ForcedHipWaitTime = 1.4
+
+SWEP.OverallMouseSens = .8
 SWEP.Primary.ClipSize		= 5
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= "7.62x54mmR"
-
-SWEP.FireDelay = 1.45
-SWEP.FireSound = "CW_WS_MOSIN_FIRE"
-SWEP.FireSoundSuppressed = "CW_WS_MOSIN_SUB"
-SWEP.Recoil = 3.5
-SWEP.AimViewModelFOV = 50
-SWEP.CustomizationMenuScale = 0.018
+SWEP.Primary.Ammo			= "7.62x54MMR"
 SWEP.ForceBackToHipAfterAimedShot = true
+
+SWEP.FireDelay = 60/36
+SWEP.FireSound = "KHRMOSIN_FIRE"
+SWEP.Recoil = 6.8
+
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 5
+SWEP.MaxSpreadInc = 0.5
+SWEP.SpreadPerShot = 0.025
+SWEP.SpreadCooldown = 1.75
 SWEP.GlobalDelayOnShoot = 1.1
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.25
+SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 100
-SWEP.DeployTime = 1
+SWEP.Damage = 150
+SWEP.DeployTime = .6
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2
-SWEP.ReloadTime_Empty = 2
-SWEP.ReloadHalt = 1
-SWEP.ReloadHalt_Empty = 1
+SWEP.ReloadStartTime = 1
+SWEP.InsertShellTime = .8
+SWEP.ReloadFinishWait = 1
+SWEP.ShotgunReload = true
 
-SWEP.ReloadStartTime = 0.5
-SWEP.InsertShellTime = 0.7
-SWEP.ReloadFinishWait = 0.6
-SWEP.ShotgunReload = false
 
-SWEP.Chamberable = false
+function SWEP:IndividualInitialize()
+	self:setBodygroup(self.StockBGs.main, self.StockBGs.obrez)
+end

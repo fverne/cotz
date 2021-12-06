@@ -61,6 +61,13 @@ function GM:LoadFonts(font, genericFont)
 		weight = 100
 	})
 
+	surface.CreateFont("ixMenuButtonFontSmall", {
+		font = "Roboto Th",
+		size = ScreenScale(10),
+		extended = true,
+		weight = 100
+	})
+
 	surface.CreateFont("ixMenuButtonFontThick", {
 		font = "Roboto",
 		size = ScreenScale(14),
@@ -390,7 +397,7 @@ function GM:InitPostEntity()
 	ix.joinTime = RealTime() - 0.9716
 	ix.option.Sync()
 
-	LocalPlayer():SetIK(false)
+	ix.gui.bars = vgui.Create("ixInfoBarManager")
 end
 
 function GM:NetworkEntityCreated(entity)
@@ -415,6 +422,7 @@ end
 local vignette = ix.util.GetMaterial("helix/gui/vignette.png")
 local vignetteAlphaGoal = 0
 local vignetteAlphaDelta = 0
+local vignetteTraceHeight = Vector(0, 0, 768)
 local blurGoal = 0
 local blurDelta = 0
 local hasVignetteMaterial = vignette != "___error"
@@ -425,11 +433,12 @@ timer.Create("ixVignetteChecker", 1, 0, function()
 	if (IsValid(client)) then
 		local data = {}
 			data.start = client:GetPos()
-			data.endpos = data.start + Vector(0, 0, 768)
+			data.endpos = data.start + vignetteTraceHeight
 			data.filter = client
 		local trace = util.TraceLine(data)
 
-		if (trace.Hit) then
+		-- this timer could run before InitPostEntity is called, so we have to check for the validity of the trace table
+		if (trace and trace.Hit) then
 			vignetteAlphaGoal = 80
 		else
 			vignetteAlphaGoal = 0
@@ -630,16 +639,16 @@ function GM:PostDrawOpaqueRenderables(bDepth, bSkybox)
 		render.SetStencilZFailOperation(STENCILOPERATION_KEEP)
 		render.SetStencilPassOperation(STENCILOPERATION_REPLACE)
 		render.SetStencilCompareFunction(STENCILCOMPARISONFUNCTION_ALWAYS)
-		render.SetStencilReferenceValue(1)
+		render.SetStencilReferenceValue(27)
 
 		for i = 1, #ix.blurRenderQueue do
 			ix.blurRenderQueue[i]()
 		end
 
-		render.SetStencilReferenceValue(2)
+		render.SetStencilReferenceValue(34)
 		render.SetStencilCompareFunction(STENCILCOMPARISONFUNCTION_EQUAL)
 		render.SetStencilPassOperation(STENCILOPERATION_REPLACE)
-		render.SetStencilReferenceValue(1)
+		render.SetStencilReferenceValue(27)
 
 		cam.Start2D()
 			ix.util.DrawBlurAt(0, 0, ScrW(), ScrH())
@@ -650,11 +659,13 @@ function GM:PostDrawOpaqueRenderables(bDepth, bSkybox)
 end
 
 function GM:PostDrawHUD()
-	ix.hud.DrawAll(true)
+	cam.Start2D()
+		ix.hud.DrawAll(true)
 
-	if (!IsValid(ix.gui.characterMenu) or ix.gui.characterMenu:IsClosing()) then
-		ix.bar.DrawAll()
-	end
+		if (!IsValid(ix.gui.characterMenu) or ix.gui.characterMenu:IsClosing()) then
+			ix.bar.DrawAction()
+		end
+	cam.End2D()
 end
 
 function GM:ShouldPopulateEntityInfo(entity)
@@ -708,7 +719,9 @@ end
 function GM:PopulateCharacterInfo(client, character, container)
 	-- description
 	local descriptionText = character:GetDescription()
-	descriptionText = descriptionText:len() > 128 and string.format("%s...", descriptionText:sub(1, 125)) or descriptionText
+	descriptionText = (descriptionText:utf8len() > 128 and
+		string.format("%s...", descriptionText:utf8sub(1, 125)) or
+		descriptionText)
 
 	if (descriptionText != "") then
 		local description = container:AddRow("description")
@@ -841,9 +854,9 @@ function GM:RenderScreenspaceEffects()
 			render.SuppressEngineLighting(true)
 			cam.IgnoreZ(true)
 				render.SetColorModulation(1, 1, 1)
-				render.SetStencilWriteMask(1)
-				render.SetStencilTestMask(1)
-				render.SetStencilReferenceValue(1)
+				render.SetStencilWriteMask(28)
+				render.SetStencilTestMask(28)
+				render.SetStencilReferenceValue(35)
 
 				render.SetStencilCompareFunction(STENCIL_ALWAYS)
 				render.SetStencilPassOperation(STENCIL_REPLACE)
@@ -930,6 +943,11 @@ function GM:ScreenResolutionChanged(oldW, oldH)
 		ix.gui.notices:Remove()
 		ix.gui.notices = vgui.Create("ixNoticeManager")
 	end
+
+	if (IsValid(ix.gui.bars)) then
+		ix.gui.bars:Remove()
+		ix.gui.bars = vgui.Create("ixInfoBarManager")
+	end
 end
 
 function GM:DrawDeathNotice()
@@ -955,5 +973,6 @@ hook.Add("player_spawn", "ixPlayerSpawn", function(data)
 	if (IsValid(client)) then
 		-- GetBoneName returns __INVALIDBONE__ for everything the first time you use it, so we'll force an update to make them valid
 		client:SetupBones()
+		client:SetIK(false)
 	end
 end)

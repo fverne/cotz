@@ -56,7 +56,7 @@ SWEP.RailBGs = {main = 3, on = 1, off = 0}
 SWEP.MagBGs = {main = 4, round15 = 0, round30 = 1}
 SWEP.LuaViewmodelRecoil = true
 
-SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 
 SWEP.Animations = {fire = "Shoot",
@@ -78,18 +78,18 @@ SWEP.Sounds = {Draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	[4] = {time = 3.6, sound = "CW_PPSH_BOLTFORWARD"}}}
 	
 	
-SWEP.SpeedDec = 20
+SWEP.SpeedDec = 5
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 SWEP.SlotPos = 0
-SWEP.HoldType = "ar2"
-SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.HoldType = "smg"
+SWEP.NormalHoldType = "smg"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "Spy"
+SWEP.Author			= "gumlefar"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -110,16 +110,16 @@ SWEP.Primary.Ammo			= "7.62x25MM"
 SWEP.FireDelay = 0.06315789473
 SWEP.FireSound = "CW_PPSH_FIRE"
 SWEP.FireSoundSuppressed = "CW_MP5_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.9
+SWEP.Recoil = 2.6
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
+SWEP.HipSpread = 0.125
+SWEP.AimSpread = 0.025
+SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
+SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
 SWEP.Damage = 40

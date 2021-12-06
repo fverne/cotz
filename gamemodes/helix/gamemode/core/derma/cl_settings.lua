@@ -282,7 +282,7 @@ function PANEL:SetValue(value, bInitial)
 	self.textEntry:SetValue(value)
 
 	if (bInitial) then
-		self.textEntry:SetCaretPos(value:len())
+		self.textEntry:SetCaretPos(value:utf8len())
 	end
 end
 
@@ -703,8 +703,6 @@ hook.Add("CreateMenuButtons", "ixSettings", function(tabs)
 		end,
 
 		Create = function(info, container)
-			container:SetTitle(L("settings"))
-
 			local panel = container:Add("ixSettings")
 			panel:SetSearchEnabled(true)
 

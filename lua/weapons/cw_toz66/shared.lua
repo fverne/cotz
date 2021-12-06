@@ -37,7 +37,7 @@ SWEP.CanRestOnObjects = false
 SWEP.ADSFireAnim = true
 
 SWEP.Attachments = {
-["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_birdshot", "am_trishot", "am_zoneloaded"}}
+["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds"}}
 }
 	
 SWEP.Animations = {fire = "fire_iron",
@@ -56,29 +56,35 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 	[2] = {time = 2.6, sound = "CW_TOZ_SHELL1"},
 	[3] = {time = 3.6, sound = "CW_TOZ_CLOSE"}}}
 
-SWEP.SpeedDec = 20
+SWEP.SpeedDec = 10
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 SWEP.SlotPos = 0
-SWEP.HoldType = "shotgun"
-SWEP.NormalHoldType = "shotgun"
-SWEP.RunHoldType = "passive"
+SWEP.HoldType = "ar2"
+SWEP.NormalHoldType = "ar2"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"break"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.HealthDamage = 0.5
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.5
+SWEP.WearEffect = 0.05
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 90
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/stalker/toz66.mdl"
-SWEP.WorldModel		= "models/weapons/w_doublebarrel.mdl"
+SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl"
+
+SWEP.DrawTraditionalWorldModel = false
+SWEP.WM = "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl"
+SWEP.WMPos = Vector(1, 0, 0)
+SWEP.WMAng = Vector(-6, 180, 180)
+
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
@@ -88,19 +94,19 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.FireDelay = 0.01
+SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_TOZ_FIRE"
 SWEP.Recoil = 3
 
-SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 0.5
+SWEP.HipSpread = 0.06
+SWEP.AimSpread = 0.006
+SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
-SWEP.ClumpSpread = 0.015
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.ClumpSpread = 0.0095
+SWEP.SpreadPerShot = 0.3
+SWEP.SpreadCooldown = 0.6
 SWEP.Shots = 9
-SWEP.Damage = 14
+SWEP.Damage = 24
 SWEP.DeployTime = 1
 SWEP.Chamberable = false
 

@@ -1,5 +1,5 @@
-CustomizableWeaponry.canDropWeapon = true -- set this to false to disable cw_dropweapon concommand
-CustomizableWeaponry.enableWeaponDrops = true -- set this to false to disable weapon dropping in general (no idea why you would want to do that though)
+CustomizableWeaponry.canDropWeapon = false -- set this to false to disable cw_dropweapon concommand
+CustomizableWeaponry.enableWeaponDrops = false -- set this to false to disable weapon dropping in general (no idea why you would want to do that though)
 
 function CustomizableWeaponry:dropWeapon(ply, wep, velocity, angleVelocity, pos, ang)
 	if not self.enableWeaponDrops then

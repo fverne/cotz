@@ -1,7 +1,0 @@
-"stalker"
-{
-	"base" 			"helix"
-	"title" 		"IX: STALKER"
-	"author" 		"verne"
-	"menusystem"	"1"
-}

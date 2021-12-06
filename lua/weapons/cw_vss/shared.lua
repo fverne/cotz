@@ -25,7 +25,7 @@ if CLIENT then
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/cw2/rifles/w_vss.mdl"
 	SWEP.WMPos = Vector(1, -9, 1.2)
-	SWEP.WMAng = Vector(0, 180, 180)
+	SWEP.WMAng = Vector(-10, 180, 180)
 
 	SWEP.PSOPos = Vector(-2.304, 1.417, 0.402)
 	SWEP.PSOAng = Vector(0, 0, 0)
@@ -128,7 +128,7 @@ SWEP.LuaViewmodelRecoil = true
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -450},  atts = {"md_kobra", "md_microt1", "md_eotech", "md_aimpoint", "md_cmore", "md_reflex", "md_schmidt_shortdot", "md_pso1", "md_acog"}},
 	[6] = {header = "Front", offset = {800, -50}, atts = {"md_foregrip"}},
-	["+reload"] = {header = "Ammo", offset = {1400, 350}, atts = {"am_zoneloaded", "am_matchgrade"}}}
+	["+reload"] = {header = "Ammo", offset = {1400, 350}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"ak47_fire1", "ak47_fire2", "ak47_fire3"},
 	reload = "ak47_reload",
@@ -157,18 +157,19 @@ SWEP.Sounds = {ak47_draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"},
 	{time = 4, sound = "CW_FOLEY_LIGHT"}},
 }
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 10
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.35
+SWEP.WearEffect = 0.002
 
 SWEP.Author			= "Spy"
 SWEP.Contact		= ""
@@ -183,26 +184,26 @@ SWEP.WorldModel		= "models/cw2/rifles/w_vss.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 20
+SWEP.Primary.ClipSize		= 10
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x39MM"
 
-SWEP.FireDelay = 0.1
+SWEP.FireDelay = 60/850
 SWEP.FireSound = "CW_VSS_FIRE"
 SWEP.FireSoundSuppressed = "CW_VSS_FIRE"
-SWEP.Recoil = 1.7
+SWEP.Recoil = 2.3
 
 SWEP.SuppressedOnEquip = true
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 3
+SWEP.VelocitySensitivity = 6
 SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadPerShot = 0.02
+SWEP.SpreadCooldown = 0.6
 SWEP.Shots = 1
-SWEP.Damage = 85
+SWEP.Damage = 125
 SWEP.DeployTime = 1.2
 
 SWEP.ReloadSpeed = 1.2
@@ -212,5 +213,5 @@ SWEP.ReloadHalt = 3.6
 SWEP.ReloadHalt_Empty = 4.7
 
 function SWEP:IndividualInitialize()
-	self:setBodygroup( 4 , 1 )
+	--self:setBodygroup( 4 , 1 )
 end

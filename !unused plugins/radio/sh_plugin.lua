@@ -1,403 +1,315 @@
 PLUGIN.name = "Radio"
-PLUGIN.author = "ZeMysticalTaco"
-PLUGIN.description = "Grs4s style radios."
+PLUGIN.author = "Black Tea"
+PLUGIN.desc = "You can communicate with other people in distance."
 local RADIO_CHATCOLOR = Color(100, 255, 50)
+
 -- This is how initialize Language in Single File.
 local langkey = "english"
+do
+	local langTable = {
+		radioFreq = "Frequency",
+		radioSubmit = "Submit",
+		radioNoRadio = "You don't have any radio to adjust.",
+		radioNoRadioComm = "You don't have any radio to communicate",
+		radioFormat = "%s says in radio: \"%s\"",
+	}
 
-local langTable = {
-	radioFreq = "Frequency",
-	radioSubmit = "Submit",
-	radioNoRadio = "You don't have any radio to adjust.",
-	radioNoRadioComm = "You don't have any radio to communicate",
-	radioFormat = "%s radios in on %s \"%s\""
-}
-
-function PLUGIN:PluginLoaded()
 	table.Merge(ix.lang.stored[langkey], langTable)
 end
 
-ix.chat.Register("radio", {
-	format = "%s radios in on %s: \"%s\"",
-	--font = "nutRadioFont",
-	OnGetColor = function(self, speaker, text)
-		return RADIO_CHATCOLOR
-	end,
-	OnCanHear = function(self, speaker, listener)
-		local listenerInv = listener:GetInventory()
-		local curFreq = speaker:GetNetVar("curfreq", "none") --curfreq is a value assigned to the speaker, who is currently using the radio, which will radio to their assigned frequency.
-		local listenFreq = listener:GetNetVar("freq", {"nope"}) -- two separate values as the default to ensure people can't blind freq
-		local dist = speaker:GetPos():Distance(listener:GetPos())
-		local speakRange = ix.config.Get("chatRange", 280)
+if (CLIENT) then
+	local PANEL = {}
+	function PANEL:Init()
+		self.number = 0
+		self:SetWide(70)
 
-		if (dist <= speakRange) then
-			return true
+		local up = self:Add("DButton")
+		up:SetFont("Marlett")
+		up:SetText("t")
+		up:Dock(TOP)
+		up:DockMargin(2, 2, 2, 2)
+		up.DoClick = function(this)
+			self.number = (self.number + 1)% 10
+			surface.PlaySound("buttons/lightswitch2.wav")
 		end
 
-		--[[--printTable(listenFreq)
-		--print(curFreq)
-
-		if table.HasValue(listenFreq, curFreq) then
-			--return true if the listener frequency table has the value the speaker is radioing on
-			return true
+		local down = self:Add("DButton")
+		down:SetFont("Marlett")
+		down:SetText("u")
+		down:Dock(BOTTOM)
+		down:DockMargin(2, 2, 2, 2)
+		down.DoClick = function(this)
+			self.number = (self.number - 1)% 10
+			surface.PlaySound("buttons/lightswitch2.wav")
 		end
 
-		return false--]]
-		return false
-	end,
-	CanSay = function(self, speaker, text)
-		local char = speaker:GetCharacter()
-		local inv = char:GetInventory()
-		local items = inv:GetItems()
-
-		if table.Count(speaker:GetNetVar("freq", {})) < 1 then
-			return
+		local number = self:Add("Panel")
+		number:Dock(FILL)
+		number.Paint = function(this, w, h)
+			draw.SimpleText(self.number, "nutDialFont", w/2, h/2, color_white, 1, 1)
 		end
+	end
 
-		for k, v in pairs(items) do
-			if speaker:GetNetVar("curfreq") == v:GetData("freq") and v:GetData("power", false) == false then
-				speaker:Notify("Your primary radio is currently off!")
+	vgui.Register("nutRadioDial", PANEL, "DPanel")
 
-				return false
+	PANEL = {}
+
+	function PANEL:Init()
+		self:SetTitle(L("radioFreq"))
+		self:SetSize(330, 220)
+		self:Center()
+		self:MakePopup()
+
+		self.submit = self:Add("DButton")
+		self.submit:Dock(BOTTOM)
+		self.submit:DockMargin(0, 5, 0, 0)
+		self.submit:SetTall(25)
+		self.submit:SetText(L("radioSubmit"))
+		self.submit.DoClick = function()
+			local str = ""
+			for i = 1, 5 do
+				if (i != 4) then
+					str = str .. tostring(self.dial[i].number or 0)
+				else
+					str = str .. "."
+				end
 			end
+			netstream.Start("radioAdjust", str, self.itemID)
 
-			if v.isRadio and v:GetData("power", false) == true then
-				speaker:EmitSound("stalkersound/contact_" .. math.random(2, 7) .. ".wav", 50, 100)
-
-				return true
-			end
+			self:Close()
 		end
 
-		return false
-	end,
-	OnChatAdd = function(self, speaker, text)
-		local schar = speaker:GetCharacter()
-		local freq
-		----print(speaker:GetNetVar("lastfreq"))
-		--speaker.freq = speaker:GetNetVar("lastfreq")
-		local curFreq = speaker:GetNetVar("curfreq", "none") --curfreq is a value assigned to the speaker, who is currently using the radio, which will radio to their assigned frequency.
-		local listenFreq = LocalPlayer():GetNetVar("freq", {"nope"}) -- two separate values as the default to ensure people can't blind freq
-
-		--printTable(listenFreq)
-		--print(curFreq)
-		if table.Count(speaker:GetNetVar("freq", {})) < 1 then
-			return
-		end
-
-		if table.HasValue(listenFreq, curFreq) then
-			if speaker:GetNetVar("curfreq") == LocalPlayer():GetNetVar("curfreq") then
-				RADIO_CHATCOLOR = Color(200, 255, 50)
-				chat.AddText(RADIO_CHATCOLOR, speaker:Name() .. " radios in on *" .. speaker:GetNetVar("curfreq") .. "*: " .. text)
-
-				if speaker ~= LocalPlayer() then
-					LocalPlayer():EmitSound("stalkersound/contact_" .. math.random(2, 7) .. ".wav", 50, 100)
+		self.dial = {}
+		for i = 1, 5 do
+			if (i != 4) then
+				self.dial[i] = self:Add("nutRadioDial")
+				self.dial[i]:Dock(LEFT)
+				if (i != 3) then
+					self.dial[i]:DockMargin(0, 0, 5, 0)
 				end
 			else
-				RADIO_CHATCOLOR = Color(100, 255, 50)
-				chat.AddText(RADIO_CHATCOLOR, speaker:Name() .. " radios in on *" .. speaker:GetNetVar("curfreq") .. "*: " .. text)
-
-				if speaker ~= LocalPlayer() then
-					LocalPlayer():EmitSound("stalkersound/contact_" .. math.random(2, 7) .. ".wav", 50, 100)
+				local dot = self:Add("Panel")
+				dot:Dock(LEFT)
+				dot:SetWide(30)
+				dot.Paint = function(this, w, h)
+					draw.SimpleText(".", "nutDialFont", w/2, h - 10, color_white, 1, 4)
 				end
 			end
-			--return true if the listener frequency table has the value the speaker is radioing on
-		else
-			local dist = speaker:GetPos():Distance(LocalPlayer():GetPos())
-			local speakRange = ix.config.Get("chatRange", 280)
-
-			if (dist <= speakRange) then
-				chat.AddText(Color(175, 255, 150), speaker:Name() .. " uses their radio to say: " .. text)
-			end
 		end
-	end,
-	prefix = {"/r", "/radio"}
-})
+	end
 
---Normal radio functions, main shit goes here, be sure to change command and ooc when you do do stuff
-ix.chat.Register("radiocommand", {
-	format = "%s radios in on %s: \"%s\"",
-	--font = "nutRadioFont",
-	OnGetColor = function(self, speaker, text)
-		return RADIO_CHATCOLOR
-	end,
-	OnCanHear = function(self, speaker, listener)
-		local listenerInv = listener:GetInventory()
-		local curFreq = speaker:GetNetVar("curfreq", "none") --curfreq is a value assigned to the speaker, who is currently using the radio, which will radio to their assigned frequency.
-		local listenFreq = listener:GetNetVar("freq", {"nope"}) -- two separate values as the default to ensure people can't blind freq
-		local dist = speaker:GetPos():Distance(listener:GetPos())
-		local speakRange = ix.config.Get("chatRange", 280)
+	function PANEL:Think()
+		self:MoveToFront()
+	end
 
-		if (dist <= speakRange) then
-			return true
+	vgui.Register("nutRadioMenu", PANEL, "DFrame")
+
+	surface.CreateFont("nutDialFont", {
+		font = "Agency FB",
+		extended = true,
+		size = 100,
+		weight = 1000
+	})
+
+	netstream.Hook("radioAdjust", function(freq, id)
+		local adjust = vgui.Create("nutRadioMenu")
+
+		if (id) then
+			adjust.itemID = id
 		end
 
-		--[[--printTable(listenFreq)
-		--print(curFreq)
-
-		if table.HasValue(listenFreq, curFreq) then
-			--return true if the listener frequency table has the value the speaker is radioing on
-			return true
-		end
-
-		return false--]]
-		return false
-	end,
-	CanSay = function(self, speaker, text)
-		local char = speaker:GetCharacter()
-		local inv = char:GetInventory()
-		local items = inv:GetItems()
-
-		if table.Count(speaker:GetNetVar("freq", {})) < 1 then
-			return
-		end
-
-		for k, v in pairs(items) do
-			if speaker:GetNetVar("curfreq") == v:GetData("freq") and v:GetData("power", false) == false then
-				speaker:Notify("Your primary radio is currently off!")
-
-				return false
-			end
-
-			if v.isRadio and v:GetData("power", false) == true then
-				speaker:EmitSound("stalkersound/contact_" .. math.random(2, 7) .. ".wav", 50, 100)
-
-				return true
-			end
-		end
-
-		return false
-	end,
-	OnChatAdd = function(self, speaker, text)
-		local schar = speaker:GetCharacter()
-		local freq
-		----print(speaker:GetNetVar("lastfreq"))
-		--speaker.freq = speaker:GetNetVar("lastfreq")
-		local curFreq = speaker:GetNetVar("curfreq", "none") --curfreq is a value assigned to the speaker, who is currently using the radio, which will radio to their assigned frequency.
-		local listenFreq = LocalPlayer():GetNetVar("freq", {"nope"}) -- two separate values as the default to ensure people can't blind freq
-
-		--printTable(listenFreq)
-		--print(curFreq)
-		if table.Count(speaker:GetNetVar("freq", {})) < 1 then
-			return
-		end
-
-		if table.HasValue(listenFreq, curFreq) then
-			if speaker:GetNetVar("curfreq") == LocalPlayer():GetNetVar("curfreq") then
-				RADIO_CHATCOLOR = Color(220, 0, 0, 255)
-				chat.AddText(RADIO_CHATCOLOR, speaker:Name() .. " radios in on *" .. speaker:GetNetVar("curfreq") .. "*: " .. text)
-
-				if speaker ~= LocalPlayer() then
-					LocalPlayer():EmitSound("stalkersound/contact_" .. math.random(2, 7) .. ".wav", 50, 100)
+		if (freq) then
+			for i = 1, 5 do
+				if (i != 4) then
+					adjust.dial[i].number = tonumber(freq[i])
 				end
+			end
+		end
+	end)
+else
+	netstream.Hook("radioAdjust", function(client, freq, id)
+		local inv = (client:GetCharacter() and client:GetCharacter():GetInventory() or nil)
+
+		if (inv) then
+			local item
+
+			if (id) then
+				item = ix.item.instances[id]
 			else
-				RADIO_CHATCOLOR = Color(170, 0, 0, 255)
-				chat.AddText(RADIO_CHATCOLOR, speaker:Name() .. " radios in on *" .. speaker:GetNetVar("curfreq") .. "*: " .. text)
+				item = inv:HasItem("radio")
+			end
 
-				if speaker ~= LocalPlayer() then
-					LocalPlayer():EmitSound("stalkersound/contact_" .. math.random(2, 7) .. ".wav", 50, 100)
+			local ent = item:GetEntity()
+
+			if (item and (IsValid(ent) or item:GetOwner() == client)) then
+				(ent or client):EmitSound("buttons/combine_button1.wav", 50, 170)
+
+				item:SetData("freq", freq)
+			else
+				client:Notify(L("radioNoRadio"))
+			end
+		end
+	end)
+
+	/* Do we need it?
+	nut.command.add("freq", {
+		syntax = "<string name> [string flags]",
+		onRun = function(client, arguments)
+			local inv = client:getChar():getInv()
+
+			if (inv) then
+				local detect = {
+					"radio",
+					"sradio",
+					"pager"
+				}
+
+				for k, v in ipairs(detect) do
+					item = inv:hasItem(v)
+				end
+
+				if (item) then
+
+
+					item:setData("freq", arguments[1], nil, nil, true)
+				else
+					client:notify("You do not have any radio to adjust.")
 				end
 			end
-			--return true if the listener frequency table has the value the speaker is radioing on
-		else
-			local dist = speaker:GetPos():Distance(LocalPlayer():GetPos())
-			local speakRange = ix.config.Get("chatRange", 280)
-
-			if (dist <= speakRange) then
-				chat.AddText(Color(175, 255, 150), speaker:Name() .. " uses their radio to say: " .. text)
-			end
 		end
-	end,
-	prefix = {"/rc", "/radioc"}
-})
+	})
+*/
+end
 
-ix.chat.Register("radiooc", {
-	format = "%s radios in on %s: \"%s\"",
-	--font = "nutRadioFont",
-	OnGetColor = function(self, speaker, text)
-		return RADIO_CHATCOLOR
-	end,
-	OnCanHear = function(self, speaker, listener)
-		local listenerInv = listener:GetInventory()
-		local curFreq = speaker:GetNetVar("curfreq", "none") --curfreq is a value assigned to the speaker, who is currently using the radio, which will radio to their assigned frequency.
-		local listenFreq = listener:GetNetVar("freq", {"nope"}) -- two separate values as the default to ensure people can't blind freq
-		local dist = speaker:GetPos():Distance(listener:GetPos())
-		local speakRange = ix.config.Get("chatRange", 280)
-
-		if (dist <= speakRange) then
-			return true
-		end
-
-		--[[--printTable(listenFreq)
-		--print(curFreq)
-
-		if table.HasValue(listenFreq, curFreq) then
-			--return true if the listener frequency table has the value the speaker is radioing on
-			return true
-		end
-
-		return false--]]
-		return false
-	end,
-	CanSay = function(self, speaker, text)
-		local char = speaker:GetCharacter()
-		local inv = char:GetInventory()
-		local items = inv:GetItems()
-
-		if table.Count(speaker:GetNetVar("freq", {})) < 1 then
+-- Yelling out loud.
+local find = {
+	["radio"] = false,
+	["sradio"] = true
+}
+local function endChatter(listener)
+	timer.Simple(1, function()
+		if (!listener:IsValid() or !listener:Alive()) then
 			return false
 		end
 
-		for k, v in pairs(items) do
-			if speaker:GetNetVar("curfreq") == v:GetData("freq") and v:GetData("power", false) == false then
-				speaker:Notify("Your primary radio is currently off!")
+		listener:EmitSound("stalkersound/contact_"..math.random(2, 7)..".wav", math.random(60, 70), math.random(80, 120))
+	end)
+end
 
-				return false
+ix.chat.Register("radio", {
+	format = "%s says in radio: \"%s\"",
+	GetColor = function(speaker, text)
+		return RADIO_CHATCOLOR
+	end,
+	CanHear = function(self, speaker, listener)
+		local dist = speaker:GetPos():Distance(listener:GetPos())
+		local speakRange = ix.config.Get("chatRange", 280)
+		local listenerEnts = ents.FindInSphere(listener:GetPos(), speakRange)
+		local listenerInv = listener:GetCharacter():GetInventory()
+		local freq
+
+		if (!CURFREQ or CURFREQ == "") then
+			return false
+		end
+
+		if (dist <= speakRange) then
+			return true
+		end
+
+		if (listenerInv) then
+			for k, v in pairs(listenerInv:GetItems()) do
+				if (freq) then
+					break
+				end
+
+				for id, far in pairs(find) do
+					if (v.uniqueID == id and v:GetData("power", false) == true) then
+						if (CURFREQ == v:GetData("freq", "000.0")) then
+							endChatter(listener)
+							
+							return true
+						end
+
+						break
+					end
+				end
 			end
+		end
 
-			if v.isRadio and v:GetData("power", false) == true then
-				return true
+		if (!freq) then
+			for k, v in ipairs(listenerEnts) do
+				if (freq) then
+					break
+				end
+
+				if (v:GetClass() == "ix_item") then
+					local itemTable = v:GetItemTable()
+
+					for id, far in pairs(find) do
+						if (far and itemTable.uniqueID == id and v:GetData("power", false) == true) then
+							if (CURFREQ == v:GetData("freq", "000.0")) then
+								endChatter(listener)
+
+								return true
+							end
+						end
+					end
+				end
 			end
 		end
 
 		return false
 	end,
-	OnChatAdd = function(self, speaker, text)
+	CanSay = function(self, speaker, text)
 		local schar = speaker:GetCharacter()
+		local speakRange = ix.config.Get("chatRange", 280)
+		local speakEnts = ents.FindInSphere(speaker:GetPos(), speakRange)
+		local speakerInv = schar:GetInventory()
 		local freq
-		----print(speaker:GetNetVar("lastfreq"))
-		--speaker.freq = speaker:GetNetVar("lastfreq")
-		local curFreq = speaker:GetNetVar("curfreq", "none") --curfreq is a value assigned to the speaker, who is currently using the radio, which will radio to their assigned frequency.
-		local listenFreq = LocalPlayer():GetNetVar("freq", {"nope"}) -- two separate values as the default to ensure people can't blind freq
 
-		--printTable(listenFreq)
-		--print(curFreq)
-		if table.Count(speaker:GetNetVar("freq", {})) < 1 then
-			return
-		end
-
-		if table.HasValue(listenFreq, curFreq) then
-			if speaker:GetNetVar("curfreq") == LocalPlayer():GetNetVar("curfreq") then
-				RADIO_CHATCOLOR = Color(0, 196, 255)
-				chat.AddText(RADIO_CHATCOLOR, "[OOC] " .. speaker:Name() .. " radios in on *" .. speaker:GetNetVar("curfreq") .. "*: " .. text)
-			else
-				RADIO_CHATCOLOR = Color(0, 146, 200)
-				chat.AddText(RADIO_CHATCOLOR, "[OOC] " .. speaker:Name() .. " radios in on *" .. speaker:GetNetVar("curfreq") .. "*: " .. text)
-			end
-			--return true if the listener frequency table has the value the speaker is radioing on
-		else
-			local dist = speaker:GetPos():Distance(LocalPlayer():GetPos())
-			local speakRange = ix.config.Get("chatRange", 280)
-
-			if (dist <= speakRange) then
-				chat.AddText(Color(175, 255, 150), speaker:Name() .. " uses their radio to say: " .. text)
-			end
-		end
-	end,
-	prefix = {"/rad", "/oocradio"}
-})
-
-function PLUGIN:CharacterLoaded(char)
-	if SERVER then
-		if char:GetData("curfreq", false) then
-			char:GetPlayer():SetNetVar("curfreq", char:GetData("curfreq", {}))
-		else
-			char:GetPlayer():SetNetVar("curfreq", nil)
-		end
-
-		if char:GetFaction() == FACTION_MPF or char:GetFaction() == FACTION_OTA then
-			local data = char:GetData("freq", {})
-
-			if not table.HasValue(data, "cp main") then
-				table.insert(data, "cp main")
-				table.insert(data, "cp tactical")
-				char:SetData("freq", data)
-				char:GetPlayer():SetNetVar("freq", data)
-			end
-		end
-
-		if char:GetData("freq", false) then
-			char:GetPlayer():SetNetVar("freq", char:GetData("freq", {}))
-		else
-			char:GetPlayer():SetNetVar("freq", nil)
-		end
-	end
-end
-
-ix.command.Add("SetPrimaryFrequency", {
-	description = "Set your primary frequency. USE QUOTES.",
-	arguments = ix.type.string,
-	OnRun = function(self, client, frequency)
-		local data = client:GetCharacter():GetData("freq", false)
-
-		if data then
-			if table.HasValue(data, frequency) then
-				client:SetNetVar("curfreq", frequency)
-				client:GetCharacter():SetData("curfreq", frequency)
-				client:Notify("You have set your frequency to " .. frequency .. ".")
-			else
-				client:Notify("You do not have that frequency!")
-			end
-		else
-			client:Notify("You do not have any valid frequencies!")
-		end
-	end
-})
-
-ix.command.Add("ToggleFrequency", {
-	description = "Toggle a frequency for a player, use quotes if you have spaces.",
-	arguments = {ix.type.character, ix.type.string},
-	adminOnly = true,
-	OnRun = function(self, client, target, frequency)
-		local data = target:GetData("freq", {})
-
-		if data then
-			if table.HasValue(data, frequency) then
-				table.RemoveByValue(data, frequency)
-				target:SetData("freq", data)
-				target:GetPlayer():SetNetVar("freq", data)
-
-				if target:GetData("curfreq", {}) == frequency then
-					target:SetData("curfreq", nil)
-					target:GetPlayer():SetNetVar("curfreq", nil)
+		if (speakerInv) then
+			for k, v in pairs(speakerInv:GetItems()) do
+				if (freq) then
+					break
 				end
 
-				client:Notify("You have given " .. target:GetName() .. " access to " .. frequency .. ".")
-				target:GetPlayer()
-				Notify(client:Name() .. " has given you access to " .. frequency .. ".")
-			else
-				table.insert(data, frequency)
-				target:SetData("freq", data)
-				target:GetPlayer():SetNetVar("freq", data)
-				client:Notify("You have taken " .. target:GetName() .. "'s access to " .. frequency .. ".")
-				target:GetPlayer():Notify(client:Name() .. " has taken your access to " .. frequency .. ".")
+				for id, far in pairs(find) do
+					if (v.uniqueID == id and v:GetData("power", false) == true) then
+						freq = v:GetData("freq", "000.0")
+
+						break
+					end
+				end
 			end
 		end
-	end
+
+		if (!freq) then
+			for k, v in ipairs(speakEnts) do
+				if (freq) then
+					break
+				end
+
+				if (v:GetClass() == "ix_item") then
+					local itemTable = v:GetItemTable()
+
+					for id, far in pairs(find) do
+						if (far and itemTable.uniqueID == id and v:GetData("power", false) == true) then
+							freq = v:GetData("freq", "000.0")
+
+							break
+						end
+					end
+				end
+			end
+		end
+
+		if (freq) then
+			CURFREQ = freq
+			speaker:EmitSound("stalkersound/contact_"..math.random(2, 7)..".wav", math.random(50, 60), math.random(80, 120))
+		else
+			speaker:Notify("You don't have a radio.")
+			return false
+		end
+	end,
+	prefix = {"/r", "/radio"},
 })
-
-function Schema:CreateCharacterInfo(panel)
-	if LocalPlayer():GetNetVar("freq", false) then
-		panel.freq = panel:Add("ixListRow")
-		panel.freq:SetList(panel.list)
-		panel.freq:Dock(TOP)
-		panel.freq:DockMargin(0, 0, 0, 8)
-	end
-end
-
-function Schema:UpdateCharacterInfo(panel)
-	if LocalPlayer():GetNetVar("freq", false) then
-		local data = LocalPlayer():GetNetVar("freq", {})
-		panel.freq:SetLabelText("Frequencies")
-		panel.freq:SetText(table.concat(data, ", "))
-		panel.freq:SizeToContents()
-	end
-end
-
-function PLUGIN:HUDPaint()
-	local scrw = ScrW()
-
-	if LocalPlayer():GetNetVar("freq", false) then
-		draw.SimpleText("Frequencies: " .. table.concat(LocalPlayer():GetNetVar("freq", {}), ", "), "BudgetLabel", scrw - 50, 0, Color(255, 255, 255, 255), TEXT_ALIGN_RIGHT)
-		draw.SimpleText("Current Frequency: " .. LocalPlayer():GetNetVar("curfreq", "no frequency"), "BudgetLabel", scrw - 50, 12, Color(255, 255, 255, 255), TEXT_ALIGN_RIGHT)
-	end
-end

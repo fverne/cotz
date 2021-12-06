@@ -191,8 +191,8 @@ function PANEL:RemoveTab(id)
 
 	-- add default tab if we don't have any tabs left
 	if (table.IsEmpty(self.tabs)) then
-		self:AddTab(L("Chat"), {})
-		self:SetActiveTab(L("Chat"))
+		self:AddTab(L("chat"), {})
+		self:SetActiveTab(L("chat"))
 	elseif (id == self:GetActiveTabID()) then
 		-- set a different active tab if we've removed a tab that is currently active
 		self:SetActiveTab(next(self.tabs))
@@ -275,11 +275,11 @@ function PANEL:SetVisible(bState)
 end
 
 DEFINE_BASECLASS("DScrollPanel")
-function PANEL:PerformLayout(width, height)
+function PANEL:PerformLayoutInternal()
 	local bar = self:GetVBar()
 	local bScroll = !ix.gui.chat:GetActive() or bar.Scroll == bar.CanvasSize -- only scroll when we're not at the bottom/inactive
 
-	BaseClass.PerformLayout(self, width, height)
+	BaseClass.PerformLayoutInternal(self)
 
 	if (bScroll) then
 		self:ScrollToBottom()
@@ -332,10 +332,10 @@ function PANEL:AddLine(elements, bShouldScroll)
 				v:GetName():gsub("<", "&lt;"):gsub(">", "&gt;"))
 		else
 			buffer[#buffer + 1] = tostring(v):gsub("<", "&lt;"):gsub(">", "&gt;"):gsub("%b**", function(value)
-				local inner = value:sub(2, -2)
+				local inner = value:utf8sub(2, -2)
 
 				if (inner:find("%S")) then
-					return "<font=ixChatFontItalics>" .. value:sub(2, -2) .. "</font>"
+					return "<font=ixChatFontItalics>" .. value:utf8sub(2, -2) .. "</font>"
 				end
 			end)
 		end
@@ -381,11 +381,12 @@ function PANEL:SetFont(font)
 	self:SetTall(height + 8)
 end
 
-function PANEL:AllowInput(newText)
+function PANEL:AllowInput(newCharacter)
 	local text = self:GetText()
 	local maxLength = ix.config.Get("chatMax")
 
-	if (string.len(text .. newText) > maxLength) then
+	-- we can't check for the proper length using utf-8 since AllowInput is called for single bytes instead of full characters
+	if (string.len(text .. newCharacter) > maxLength) then
 		surface.PlaySound("common/talk.wav")
 		return true
 	end
@@ -395,11 +396,11 @@ function PANEL:Think()
 	local text = self:GetText()
 	local maxLength = ix.config.Get("chatMax", 256)
 
-	if (string.len(text) > maxLength) then
-		local newText = string.sub(text, 0, maxLength)
+	if (text:utf8len() > maxLength) then
+		local newText = text:utf8sub(0, maxLength)
 
 		self:SetText(newText)
-		self:SetCaretPos(string.len(newText))
+		self:SetCaretPos(newText:utf8len())
 	end
 end
 
@@ -536,7 +537,7 @@ function PANEL:UpdateArguments(text)
 	end
 
 	local commandName = text:match("(/(%w+)%s)") or self.command -- we could be using a chat class prefix and not a proper command
-	local givenArguments = ix.command.ExtractArgs(text:sub(commandName:len()))
+	local givenArguments = ix.command.ExtractArgs(text:utf8sub(commandName:utf8len()))
 	local commandArguments = self.commandTable.arguments or {}
 	local arguments = {}
 
@@ -703,7 +704,7 @@ function PANEL:Update(text)
 		local panel = self:Add("ixChatboxAutocompleteEntry")
 		panel:SetCommand(v)
 
-		if (!bSelected and text:lower():sub(1, v.uniqueID:len()) == v.uniqueID) then
+		if (!bSelected and text:utf8lower():utf8sub(1, v.uniqueID:utf8len()) == v.uniqueID) then
 			panel:SetHighlighted(true)
 
 			self.commandIndex = i
@@ -924,6 +925,11 @@ function PANEL:SetActive(bActive)
 		hook.Run("StartChat")
 		self.prefix:SetText(hook.Run("GetChatPrefixInfo", ""))
 	else
+		-- make sure we aren't still sizing/dragging anything
+		if (self.bSizing or self.DragOffset) then
+			self:OnMouseReleased(MOUSE_LEFT)
+		end
+
 		self:SetAlpha(0)
 		self:SetMouseInputEnabled(false)
 		self:SetKeyboardInputEnabled(false)
@@ -1068,16 +1074,14 @@ function PANEL:OnMouseReleased()
 end
 
 function PANEL:Think()
-	if (gui.IsGameUIVisible() and self.bActive) then
-		if (self.bSizing or self.DragOffset) then
-			self:OnMouseReleased(MOUSE_LEFT) -- make sure we aren't still sizing/dragging anything
-		end
-
-		self:SetActive(false)
+	if (!self.bActive) then
 		return
 	end
 
-	if (!self.bActive) then
+	if (gui.IsGameUIVisible()) then
+		self:SetActive(false)
+		gui.HideGameUI()
+
 		return
 	end
 
@@ -1140,12 +1144,12 @@ function PANEL:GetTextEntryChatClass(text)
 
 		if (istable(class.prefix)) then
 			for _, v in ipairs(class.prefix) do
-				if (v:sub(1, 1) == "/") then
-					return v:sub(2):lower()
+				if (v:utf8sub(1, 1) == "/") then
+					return v:utf8sub(2):utf8lower()
 				end
 			end
-		elseif (class.prefix:sub(1, 1) == "/") then
-			return class.prefix:sub(2):lower()
+		elseif (class.prefix:utf8sub(1, 1) == "/") then
+			return class.prefix:utf8sub(2):utf8lower()
 		end
 	end
 end
@@ -1171,7 +1175,7 @@ function PANEL:OnTextChanged(text)
 	end
 
 	local start, _, command = text:find("(/(%w+)%s)")
-	command = ix.command.list[tostring(command):sub(2, tostring(command):len() - 1):lower()]
+	command = ix.command.list[tostring(command):utf8sub(2, tostring(command):utf8len() - 1):utf8lower()]
 
 	-- update preview if we've found a command
 	if (start == 1 and command) then
@@ -1183,11 +1187,11 @@ function PANEL:OnTextChanged(text)
 		autocomplete:SetVisible(false)
 		return
 	-- if there's a slash then we're probably going to be (or are currently) typing out a command
-	elseif (text:sub(1, 1) == "/") then
+	elseif (text:utf8sub(1, 1) == "/") then
 		command = text:match("(/(%w+))") or "/"
 
 		preview:SetVisible(false) -- we don't have a valid command yet
-		autocomplete:Update(command:sub(2))
+		autocomplete:Update(command:utf8sub(2))
 		autocomplete:SetVisible(true)
 
 		return
@@ -1210,7 +1214,7 @@ function PANEL:OnKeyCodeTyped(key)
 			local newText = self.autocomplete:SelectNext()
 
 			self.entry:SetText(newText)
-			self.entry:SetCaretPos(newText:len())
+			self.entry:SetCaretPos(newText:utf8len())
 		end
 
 		return true

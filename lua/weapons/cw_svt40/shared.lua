@@ -74,7 +74,7 @@ SWEP.LuaViewmodelRecoil = false
 
 SWEP.Attachments = {[1] = {header = "Sights", offset = {500, 100}, atts = {"md_pso1"}},
 	[2] = {header = "Muzzle", offset = {0, -200}, atts = {"md_pbs1"}},
-	["+reload"] = {header = "Ammo", offset = {-300, 300}, atts = {"am_zoneloaded", "am_matchgrade"}},
+	["+reload"] = {header = "Ammo", offset = {-300, 300}, atts = {"am_hollowpoint", "am_armorpiercing"}},
 	}
 
 SWEP.Animations = {fire = {"shoot", "shoot2"},
@@ -102,17 +102,18 @@ SWEP.Sounds = {first_draw = {{time = 0, sound = "CW_BER_SVT40_DRAW"},
 	{time = 3.65, sound = "CW_BER_SVT40_BOLTFORWARD"},
 	{time = 3.5, sound = "CW_FOLEY_LIGHT"}}}
 
-SWEP.SpeedDec = 50
+SWEP.SpeedDec = 20
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -128,25 +129,25 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 10
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= "7.62x54mmR"
+SWEP.Primary.Ammo			= "7.62x54MMR"
 
-SWEP.FireDelay = 0.1
+SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_BER_SVT40_FIRE"
 SWEP.FireSoundSuppressed = "CW_BER_SVT40_FIRE_SUPPRESSED"
-SWEP.Recoil = 2.5
+SWEP.Recoil = 5
 
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.VelocitySensitivity = 7
+SWEP.MaxSpreadInc = 0.5
+SWEP.SpreadPerShot = 0.3
+SWEP.SpreadCooldown = 0.3
 SWEP.Shots = 1
-SWEP.Damage = 118
+SWEP.Damage = 165
 SWEP.DeployTime = 1.5
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.3
+SWEP.WearEffect = 0.02
 
 SWEP.RecoilToSpread = 0.8 -- the M14 in particular will have 30% more recoil from continuous fire to give a feeling of "oh fuck I should stop firing 7.62x51MM in full auto at 750 RPM"
 

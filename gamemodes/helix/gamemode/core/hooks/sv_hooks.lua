@@ -14,7 +14,7 @@ function GM:PlayerInitialSpawn(client)
 		}, botID, client, client:SteamID64())
 		character.isBot = true
 
-		local inventory = ix.item.CreateInv(ix.config.Get("inventoryWidth"), ix.config.Get("inventoryHeight"), botID)
+		local inventory = ix.inventory.Create(ix.config.Get("inventoryWidth"), ix.config.Get("inventoryHeight"), botID)
 		inventory:SetOwner(botID)
 		inventory.noSave = true
 
@@ -51,15 +51,8 @@ function GM:PlayerInitialSpawn(client)
 
 			MsgN("Loaded (" .. table.concat(charList, ", ") .. ") for " .. client:Name())
 
-			for k, v in ipairs(charList) do
-				local character = ix.char.loaded[v]
-
-				if (ix.faction.indices[character:GetFaction()]) then
-					character:Sync(client)
-				else
-					-- remove characters with an invalid faction
-					table.remove(charList, k)
-				end
+			for _, v in ipairs(charList) do
+				ix.char.loaded[v]:Sync(client)
 			end
 
 			client.ixCharList = charList
@@ -307,14 +300,10 @@ function GM:PlayerSay(client, text)
 		end
 	end
 
-	if (hook.Run("PrePlayerMessageSend", client, chatType, message, anonymous) == false) then
-		return
-	end
-
 	text = ix.chat.Send(client, chatType, message, anonymous)
 
 	if (isstring(text) and chatType != "ic") then
-		ix.log.Add(client, "chat", chatType and chatType:upper() or "??", text)
+		ix.log.Add(client, "chat", chatType and chatType:utf8upper() or "??", text)
 	end
 
 	hook.Run("PostPlayerSay", client, chatType, message, anonymous)
@@ -413,6 +402,8 @@ end
 
 ix.allowedHoldableClasses = {
 	["ix_item"] = true,
+	["ix_money"] = true,
+	["ix_shipment"] = true,
 	["prop_physics"] = true,
 	["prop_physics_override"] = true,
 	["prop_physics_multiplayer"] = true,
@@ -441,6 +432,8 @@ local function CalcPlayerCanHearPlayersVoice(listener)
 end
 
 function GM:InitializedConfig()
+	ix.date.Initialize()
+
 	voiceDistance = ix.config.Get("voiceDistance")
 	voiceDistance = voiceDistance * voiceDistance
 end
@@ -739,6 +732,10 @@ function GM:InitPostEntity()
 	end)
 end
 
+function GM:SaveData()
+	ix.date.Save()
+end
+
 function GM:ShutDown()
 	ix.shuttingDown = true
 	ix.config.Save()
@@ -770,8 +767,6 @@ function GM:PlayerDeathSound()
 end
 
 function GM:InitializedSchema()
-	ix.date.Initialize()
-
 	game.ConsoleCommand("sbox_persist ix_"..Schema.folder.."\n")
 end
 
@@ -837,8 +832,7 @@ function GM:PreCleanupMap()
 end
 
 function GM:PostCleanupMap()
-	hook.Run("LoadData")
-	hook.Run("PostLoadData")
+	ix.plugin.RunLoadData()
 end
 
 function GM:CharacterPreSave(character)
@@ -927,5 +921,5 @@ function GM:DatabaseConnected()
 		mysql:Think()
 	end)
 
-	hook.Run("LoadData")
+	ix.plugin.RunLoadData()
 end

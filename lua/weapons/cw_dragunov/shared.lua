@@ -118,7 +118,7 @@ SWEP.LuaViewmodelRecoil = true
 	SWEP.Attachments = {[1] = {header = "Sight", offset = {300, -300},  atts = {"md_microt1", "md_eotech", "md_kobra", "md_aimpoint", "md_reflex", "md_cmore", "md_schmidt_shortdot", "md_pso1", "md_nightforce_nxs", "md_acog"}},
 		[2] = {header = "Barrel", offset = {-250, -300},  atts = {"md_pbs1"}},
 		[3] = {header = "Handguard", offset = {-250, 150}, atts = {"md_foregrip"}},
-		["+reload"] = {header = "Ammo", offset = {800, 100}, atts = {"am_zoneloaded", "am_matchgrade"}}
+		["+reload"] = {header = "Ammo", offset = {800, 100}, atts = {"am_hollowpoint", "am_armorpiercing"}}
 	}
 	
 SWEP.Animations = {fire = {"shoot", "shoot2"},
@@ -144,8 +144,9 @@ SWEP.AimBreathingEnabled = true
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "passive"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
@@ -172,10 +173,10 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 10
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= "7.62x54mmR"
+SWEP.Primary.Ammo			= "7.62x54MMR"
 
-SWEP.HealthDamage = 0.1
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.2
 SWEP.FireSound = "CW_SVD_FIRE"

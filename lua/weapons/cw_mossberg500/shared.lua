@@ -68,7 +68,7 @@ end
 SWEP.ADSFireAnim = true
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -300}, atts = {"md_microt1", "md_eotech"}},
-["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_birdshot", "am_trishot", "am_zoneloaded"}}
+["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds"}}
 }
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
@@ -87,18 +87,18 @@ SWEP.Sounds = {start_reload = {{time = 0.05, sound = "CW_FOLEY_LIGHT"}},
 	draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"},
 	{time = 0.55, sound = "CW_M3SUPER90_PUMP"}}}
 
-SWEP.SpeedDec = 20
+SWEP.SpeedDec = 10
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
-SWEP.HoldType = "shotgun"
-SWEP.NormalHoldType = "shotgun"
-SWEP.RunHoldType = "passive"
+SWEP.HoldType = "ar2"
+SWEP.NormalHoldType = "ar2"
+SWEP.RunHoldType = "crossbow"
 SWEP.FireModes = {"pump"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.Author			= "some faggot & verne"
+SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
@@ -116,22 +116,22 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.HealthDamage = 0.5
-SWEP.HealthEffect = 0.05
+SWEP.WearDamage = 0.5
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.7
 SWEP.FireSound = "CW_M3SUPER90_FIRE"
-SWEP.Recoil = 3
+SWEP.Recoil = 4.5
 
-SWEP.HipSpread = 0.1
+SWEP.HipSpread = 0.06
 SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 0.5
-SWEP.MaxSpreadInc = 0.4
-SWEP.ClumpSpread = 0.040
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.VelocitySensitivity = 4
+SWEP.MaxSpreadInc = 0.35
+SWEP.ClumpSpread = 0.030
+SWEP.SpreadPerShot = 0.19
+SWEP.SpreadCooldown = 1
 SWEP.Shots = 9
-SWEP.Damage = 15
+SWEP.Damage = 19
 SWEP.DeployTime = 1
 
 SWEP.ReloadStartTime = 0.3
