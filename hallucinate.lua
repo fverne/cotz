@@ -232,7 +232,7 @@ if (SERVER) or (CLIENT) then
                     -- make ragdoll here
                     if (CLIENT) then
 
-                            print(ply:GetAngles())
+                            --print(ply:GetAngles())
                             spook = ents.CreateClientProp()
                             spook:SetModel("models/monsters/poltergeist.mdl")
                             spook:SetPos( ply:GetPos() + ply:GetAimVector() * -100   - Vector(0,0,-50))
