@@ -7,26 +7,41 @@ end
 
 
 function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, callbackfunc)
+
 	net.Start("ix_KillMenu")
 	net.Send(player)
 
 	player:SetAction(actiontext, actiondur)
-	player:Freeze(true) 
-	player:ScreenFade( SCREENFADE.OUT, Color( 0, 0, 0 ), 1, 1 ) 
+	player:Freeze(true)
+	player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 1 )
 	player:SetNetVar("ix_noMenuAllowed", true)
-	timer.Simple(1, function() 
-		player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, actiondur-2 ) --fade in in the last second
+	player:SetNetVar("IsPoaching",true)
+	timer.Simple(1, function()
+	    if player:GetNetVar("IsPoaching") then
+		    player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 0.5, 0.5 ) --fade in in the last second
+	    end
 	end)
+
 	timer.Simple(actiondur, function()
 		player:Freeze(false)
 		player:SetNetVar("ix_noMenuAllowed", false)
 
 
-		if( callbackfunc ) then --Call callback function last, so if it errors, we are not permanently frozen
+		if( callbackfunc && player:GetNetVar("IsPoaching")) then --Call callback function last, so if it errors, we are not permanently frozen
 			callbackfunc(player)
+			player:SetNetVar("IsPoaching",false)
 		end
 		
 	end)
+
+end
+
+function ix.util.PlayerActionInterrupt(player)
+    player:SetAction("Action Cancelled", 1)
+    player:Freeze(false)
+    player:SetNetVar("ix_noMenuAllowed", false)
+    player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 0.2,0 )
+    player:SetNetVar("IsPoaching",false)
 end
 
 if(CLIENT) then
