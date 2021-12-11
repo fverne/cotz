@@ -105,7 +105,23 @@ ix.poaching.MutantParts = {
 
 }
 
-function PLUGIN:KeyPress(client, key)			
+function PLUGIN:PlayerButtonDown(client,key)
+    local Hit = client:GetEyeTraceNoCursor()
+    local npc = Hit.Entity
+    if (client:GetNetVar("IsPoaching") == true && key == 16 ) then
+       ix.util.PlayerActionInterrupt(client)
+       npc:SetNetVar("beingSkinned",false)
+
+    end
+end
+
+function PLUGIN:KeyPress(client, key)
+
+    if (client:GetNetVar("IsPoaching") == true ) then
+       ix.util.PlayerActionInterrupt(client)
+      
+    end
+
 	local Hit = client:GetEyeTraceNoCursor()
 	local npc = Hit.Entity
 	local items = client:GetCharacter():GetInventory():GetItems()
@@ -164,10 +180,10 @@ if SERVER then
 					client:Notify("That mutant is being skinned by someone else!")
 					return
 				end
-				client:ForceSequence("cidle_knife", nil, 5)
+				--client:ForceSequence("cidle_knife", nil, 5)
 				npc:SetNetVar("beingSkinned", true)
 				npc:EmitSound( "stalkersound/inv_mutant_loot_animal.ogg", 60 )
-				ix.util.PlayerPerformBlackScreenAction(client, "Poaching", 5, function(player) 
+				ix.util.PlayerPerformBlackScreenAction(client, "Poaching (Press F to Cancel)", 5, function(player)
 					local position = client:GetItemDropPos()
 					if IsValid(npc) then
 						npc:Remove()
