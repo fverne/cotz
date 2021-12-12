@@ -23,7 +23,7 @@ ITEM.functions.combine = {
 		end
 		local targetItem = ix.item.instances[data[1]]
 
-		if targetItem.uniqueid == item.uniqueid then
+		if targetItem.uniqueID == item.uniqueID then
 			return true
 		else
 			return false

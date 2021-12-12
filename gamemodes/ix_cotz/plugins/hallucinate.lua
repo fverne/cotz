@@ -147,9 +147,11 @@ if (SERVER) or (CLIENT) then
     function PLUGIN:PlayerTick(ply)
 
 
-
+        if (ply != nil) then
         playerpsy = ply:GetPsyHealth()
         -- print (self.stalkernames)
+        end
+
 
         if (playerpsy != nil && playerpsy > 50) then
                     if (CLIENT) then
@@ -168,7 +170,8 @@ if (SERVER) or (CLIENT) then
         --change this for how random you want it to be
         rando = math.random(15)
 
-        if (playerpsy <= 50 && playerpsy > 25 && ticksoundcd > 1800) then
+        if (playerpsy != nil &&  playerpsy <= 50 && playerpsy > 25 && ticksoundcd > 1800) then
+
 
 
             if (SERVER) then
@@ -179,7 +182,8 @@ if (SERVER) or (CLIENT) then
                 ticksoundcd = 0
             end
 
-        elseif (playerpsy <= 25 && playerpsy > 10 && ticksoundcd > 1800) then
+        elseif (playerpsy != nil && playerpsy <= 25 && playerpsy > 10 && ticksoundcd > 1800) then
+
             --local button = ents.Create( "npc_zombie" )
 
             --button:SetPos( Vector( 0, 0, 100 ) )
@@ -204,7 +208,8 @@ if (SERVER) or (CLIENT) then
             ticksoundcd = 0
 
 
-        elseif (playerpsy <= 10 && ticksoundcd > 1800) then
+        elseif (playerpsy != nil && playerpsy <= 10 && ticksoundcd > 1800) then
+
             if (SERVER) then
 
                 filter = RecipientFilter()
@@ -258,12 +263,10 @@ if (SERVER) or (CLIENT) then
     end
 end
 
-function playsound(ply)
-
-end
 
 
 --[[print(ply:GetPsyHealth())
+
 
 
 ix.command.Add("Meme", {

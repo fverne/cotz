@@ -5,7 +5,7 @@ ITEM.model = "models/lostsignalproject/items/repair/glue_e.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 4
+ITEM.price = 180
 
 ITEM.flatweight = 0.003
 

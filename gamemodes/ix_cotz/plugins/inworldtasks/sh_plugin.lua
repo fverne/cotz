@@ -27,7 +27,9 @@ function ix.util.GetRandomTaskPoint()
 	local radpts = ix.plugin.list["radiationcontroller"].radiationpoints
 	local anopts = ix.plugin.list["anomalycontroller"].anomalypoints
 
-	local allpts = table.Add(radpts, anopts)
+	local allpts = {}
+	table.Add(allpts, anopts)
+	table.Add(allpts, radpts)
 
 	return allpts[ math.random( #allpts ) ][1]
 end

@@ -5,7 +5,7 @@ ITEM.longdesc = "The skin of a pseudodog is much tougher than that of its smalle
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 850
+ITEM.price = 2350
 
 ITEM.attachName = "hide_pseudodog"
 
