@@ -420,7 +420,7 @@ if (SERVER) then
 				client:GetCharacter():GiveMoney(price)
 				client:NotifyLocalized("businessSell", name, ix.currency.Get(price))
 				entity:TakeMoney(price)
-				entity:AddStock(uniqueID)
+				--entity:AddStock(uniqueID)
 
 				PLUGIN:SaveData()
 				hook.Run("CharacterVendorTraded", client, entity, uniqueID, isSellingToVendor)
