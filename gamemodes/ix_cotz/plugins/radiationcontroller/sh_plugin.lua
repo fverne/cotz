@@ -68,7 +68,6 @@ if SERVER then
 	end
 
 	function PLUGIN:SaveData()
-		self:SetData({})
 		self:SetData(self.radiationpoints)
 	end
 
