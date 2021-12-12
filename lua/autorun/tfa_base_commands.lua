@@ -1647,7 +1647,7 @@ if SERVER then
 			wep = ply:GetActiveWeapon()
 
 			if IsValid(wep) and wep.ToggleInspect then
-				wep:ToggleInspect()
+				--wep:ToggleInspect()
 			end
 		
 		end
@@ -1704,7 +1704,7 @@ function TFAPlayerBindPress(ply, b, p)
 			end	
 			if wep.ToggleInspect then
 				if b == "+menu_context"  then
-					wep:ToggleInspect()
+					--wep:ToggleInspect()
 					return true
 				end
 			end
