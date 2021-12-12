@@ -90,7 +90,7 @@ function PLUGIN:StashUnhide(client)
 			if dist <= 70 then
 				if distance <= 32 then
 					--local itemdata = v[4]
-					ix.item.Spawn(v[2], v[1] + Vector( 0, 0, mt * 5 ), nil, v[3], v[4])
+					ix.item.Spawn(v[2], v[1] + Vector( 0, 0, 10 + (mt * 5) ), nil, v[3], v[4])
 					PLUGIN.stashpoints[k] = nil
 					mt = mt + 1
 				end
