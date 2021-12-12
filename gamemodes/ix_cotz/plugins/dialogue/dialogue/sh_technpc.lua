@@ -140,7 +140,7 @@ DIALOGUE.addTopic("ConfirmRepair", {
 
 			if (ix.item.instances[target.repairstruct[1]].class) then
 				local wep = client:GetWeapon(ix.item.instances[target.repairstruct[1]].class)
-				if(wep)then
+				if(IsValid(wep))then
 					wep:SetWeaponWear(100)
 				end
 			end
