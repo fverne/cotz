@@ -84,7 +84,7 @@ ix.poaching.MutantParts = {
 	},
 	["sprig"] = {
 		["meattype"] = "meat_sprig",
-		["parts"] = {{"part_sprig", 20}, {"hide_sprig", 3}},
+		["parts"] = {{"part_sprig", 20}, {"hide_sprig", 2}},
 	},
 	["controller"] = {
 		["meattype"] = "meat_controller",
