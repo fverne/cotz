@@ -499,6 +499,16 @@ function SWEP:PrimarySlash()
 	local pain = self.Primary.Damage * math.Rand(0.9,1.1)
 	
 	if self.meleedmgcvar then pain = pain * self.meleedmgcvar:GetFloat() end
+
+	if (ix && ix.plugin.Get("stm")) then
+		local value = self:GetOwner():GetLocalVar("stm", 0) - 20
+
+		if (value < 0) then
+			return
+		elseif (SERVER) then
+			self:GetOwner():ConsumeStamina(staminaUse)
+		end
+	end
 	
 	if game.GetTimeScale()>0.99 then
 		self.Owner:FireBullets({
@@ -614,6 +624,16 @@ function SWEP:SecondarySlash()
 	local pain = self.Secondary.Damage * math.Rand(0.9,1.1)
 	
 	if self.meleedmgcvar then pain = pain * self.meleedmgcvar:GetFloat() end
+
+	if (ix && ix.plugin.Get("stm")) then
+		local value = self:GetOwner():GetLocalVar("stm", 0) - 20
+
+		if (value < 0) then
+			return
+		elseif (SERVER) then
+			self:GetOwner():ConsumeStamina(staminaUse)
+		end
+	end
 	
 	if game.GetTimeScale()>0.99 then
 		self.Owner:FireBullets({
