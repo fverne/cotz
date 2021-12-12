@@ -149,5 +149,5 @@ SWEP.ReloadHalt = 3.6
 SWEP.ReloadHalt_Empty = 3.6
 SWEP.SnapToIdlePostReload = true
 
-SWEP.HealthEffect = 0.1
-SWEP.HealthDamage = 0.05
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05

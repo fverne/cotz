@@ -116,8 +116,8 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.HealthDamage = 0.05
-SWEP.HealthEffect = 0.02
+SWEP.WearDamage = 0.05
+SWEP.WearEffect = 0.02
 
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
