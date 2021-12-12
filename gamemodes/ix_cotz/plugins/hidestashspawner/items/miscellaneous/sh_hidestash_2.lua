@@ -40,7 +40,7 @@ ITEM.functions.use = {
 				stashcontent = stashcontent..", "..loot[i][1]
 			end
 
-			item.player:Notify( "You hid found the location of a stash!" )
+			item.player:Notify( "You found the location of a stash!" )
 			ix.log.Add(item.player, "command", "created a stash from "..item.name.." at x:"..spawnpoint[1].x.." y:"..spawnpoint[1].y.." z:"..spawnpoint[1].z.." with "..stashcontent)
 		else
 			local money = math.random(item.moneyinterval[1], item.moneyinterval[2])
