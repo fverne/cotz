@@ -37,11 +37,13 @@ function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, c
 end
 
 function ix.util.PlayerActionInterrupt(player)
-    player:SetAction("Action Cancelled", 1)
-    player:Freeze(false)
-    player:SetNetVar("ix_noMenuAllowed", false)
-    player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 0.2,0 )
-    player:SetNetVar("IsPoaching",false)
+	if (player:GetNetVar("IsPoaching)) then
+		    player:SetAction("Action Cancelled", 1)
+		    player:Freeze(false)
+		    player:SetNetVar("ix_noMenuAllowed", false)
+		    player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 0.2,0 )
+		    player:SetNetVar("IsPoaching",false)
+	end
 end
 
 if(CLIENT) then
