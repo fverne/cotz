@@ -147,9 +147,10 @@ if (SERVER) or (CLIENT) then
     function PLUGIN:PlayerTick(ply)
 
 
-
+        if (ply != nil) then
         playerpsy = ply:GetPsyHealth()
         -- print (self.stalkernames)
+        end
 
         if (playerpsy != nil && playerpsy > 50) then
                     if (CLIENT) then
