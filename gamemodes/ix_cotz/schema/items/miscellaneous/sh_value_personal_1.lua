@@ -11,6 +11,8 @@ ITEM.flag = "A"
 function ITEM:GetName()
 	local name
 
+	if(not self:GetOwner()) then return self.name end
+
 	if self:GetData("charname", nil) then
 		name = self:GetData("charname", "Anonymous").."'s "..self.name
 	end
