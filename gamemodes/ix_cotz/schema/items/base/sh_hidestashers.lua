@@ -79,6 +79,22 @@ ITEM.functions.hidestash = {
     tip = "equipTip",
     icon = "icon16/stalker/drop.png",
     OnRun = function(item)
+			local trace = client:GetEyeTraceNoCursor()
+			local TextureBlacklist = {
+			"PLASTER/PLASTERWALL013C",
+			"PLASTER/WALLPAPER001B",
+			"PLASTER/WALLPAPER002A",
+			"PLASTER/WALLPAPER002B",
+			"PLASTER/WALLPAPER003A",
+			"PLASTER/WALLPAPER003B",
+			"PLASTER/WALLPAPER005A",
+			}
+
+			if trace.MatType == 74 and not IsValid(trace.Entity) and not table.HasValue(TextureBlacklist, trace.HitTexture) then
+					local texturecheck = true
+			end
+
+			if texturecheck then
         local quantity = item:GetData("quantity", item.quantity)
         ix.chat.Send(item.player, "iteminternal", "takes out their " .. item.name .. ".", false)
         ix.plugin.list["hidestash"]:StashHide(item.player)
@@ -91,6 +107,11 @@ ITEM.functions.hidestash = {
         end
 
         item.player:Notify("Your " .. item.name .. " broke!")
+			end
+
+			if not texturecheck then
+					item.player:Notify("You can not make a stash on this surface!")
+			end
 
         return true
     end,
@@ -102,50 +123,29 @@ ITEM.functions.hidestash = {
 }
 
 ITEM.functions.unhidestash = {
-    name = "Search for a Stash",
-    tip = "equipTip",
-    icon = "icon16/stalker/open.png",
-    OnRun = function(item)
+	name = "Search for a Stash",
+	tip = "equipTip",
+	icon = "icon16/stalker/open.png",
+	OnRun = function(item)
+		local quantity = item:GetData("quantity", item.quantity)
 
-    		local trace = client:GetEyeTraceNoCursor()
-				local TextureBlacklist = {
-				"PLASTER/PLASTERWALL013C",
-				"PLASTER/WALLPAPER001B",
-				"PLASTER/WALLPAPER002A",
-				"PLASTER/WALLPAPER002B",
-				"PLASTER/WALLPAPER003A",
-				"PLASTER/WALLPAPER003B",
-				"PLASTER/WALLPAPER005A",
-				}
+		ix.chat.Send(item.player, "iteminternal", "takes out their "..item.name..".", false)
 
-        if trace.MatType == 74 and not IsValid(trace.Entity) and not table.HasValue(TextureBlacklist, trace.HitTexture) then
-            local texturecheck = true
-        end
+		ix.plugin.list["hidestash"]:StashUnhide(item.player)
 
-        if texturecheck then
-            local quantity = item:GetData("quantity", item.quantity)
-            ix.chat.Send(item.player, "iteminternal", "takes out their " .. item.name .. ".", false)
-            ix.plugin.list["hidestash"]:StashUnhide(item.player)
-            quantity = quantity - 1
+		quantity = quantity - 1
 
-            if (quantity >= 1) then
-                item:SetData("quantity", quantity)
+		if (quantity >= 1) then
+			item:SetData("quantity", quantity)
+			return false
+		end
 
-                return false
-            end
+		item.player:Notify("Your "..item.name.." broke!")
+		return true
+	end,
+	OnCanRun = function(item)
+		local client = item.player
 
-            item.player:Notify("Your " .. item.name .. " broke!")
-        end
-
-        if not texturecheck then
-            item.player:Notify("You can not make a stash on this surface!")
-        end
-
-        return true
-    end,
-    OnCanRun = function(item)
-        local client = item.player
-
-        return not IsValid(item.entity) and IsValid(client) and item.invID == client:GetCharacter():GetInventory():GetID()
-    end
+		return !IsValid(item.entity) and IsValid(client) and item.invID == client:GetCharacter():GetInventory():GetID()
+	end
 }
