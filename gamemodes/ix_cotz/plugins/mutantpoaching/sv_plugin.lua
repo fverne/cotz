@@ -183,6 +183,8 @@ if SERVER then
 				--client:ForceSequence("cidle_knife", nil, 5)
 				npc:SetNetVar("beingSkinned", true)
 				npc:EmitSound( "stalkersound/inv_mutant_loot_animal.ogg", 60 )
+
+				client:SetNetVar("IsPoaching",true)
 				ix.util.PlayerPerformBlackScreenAction(client, "Poaching (Press F to Cancel)", 5, function(player)
 					local position = client:GetItemDropPos()
 					if IsValid(npc) then
@@ -200,6 +202,8 @@ if SERVER then
 								client:Notify("No space in your inventory! Items have been dropped.")
 							end
 						end
+
+						player:SetNetVar("IsPoaching",false)
 					end
 				end)
 			end	

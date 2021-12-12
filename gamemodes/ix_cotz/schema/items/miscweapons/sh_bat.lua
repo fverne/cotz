@@ -13,6 +13,8 @@ ITEM.weaponCategory = "secondary"
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
 
+ITEM.weight = 0.950
+
 ITEM.exRender = true
 ITEM.iconCam = {
 	pos = Vector(-23, 0, 5),

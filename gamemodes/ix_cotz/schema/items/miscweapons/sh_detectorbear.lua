@@ -12,6 +12,8 @@ ITEM.canAttach = false
 ITEM.keepWhenEquipped = true
 ITEM.repairCost = ITEM.price/100*1
 
+ITEM.weight = 0.620
+
 ITEM.exRender = true
 ITEM.iconCam = {
 	pos = Vector(-1, 0, 20),

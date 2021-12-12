@@ -15,11 +15,9 @@ function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, c
 	player:Freeze(true)
 	player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 1 )
 	player:SetNetVar("ix_noMenuAllowed", true)
-	player:SetNetVar("IsPoaching",true)
+	
 	timer.Simple(1, function()
-	    if player:GetNetVar("IsPoaching") then
-		    player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 0.5, 0.5 ) --fade in in the last second
-	    end
+		player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, actiondur-2 ) --fade in in the last second
 	end)
 
 	timer.Simple(actiondur, function()
@@ -27,9 +25,8 @@ function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, c
 		player:SetNetVar("ix_noMenuAllowed", false)
 
 
-		if( callbackfunc && player:GetNetVar("IsPoaching")) then --Call callback function last, so if it errors, we are not permanently frozen
+		if( callbackfunc) then --Call callback function last, so if it errors, we are not permanently frozen
 			callbackfunc(player)
-			player:SetNetVar("IsPoaching",false)
 		end
 		
 	end)
@@ -39,7 +36,7 @@ end
 function ix.util.PlayerActionInterrupt(player)
 	-- just for poaching for now
 
-	if (player:GetNetVar("IsPoaching)) then
+	if (player:GetNetVar("IsPoaching")) then
 		    player:SetAction("Action Cancelled", 1)
 		    player:Freeze(false)
 		    player:SetNetVar("ix_noMenuAllowed", false)
