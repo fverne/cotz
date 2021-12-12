@@ -1,0 +1,11 @@
+ITEM.name = "Slime"
+ITEM.model ="models/lostsignalproject/items/artefacts/sparkler.mdl"
+ITEM.description = "A crumpled up honeycomb-like structure of rock, with a thin layer of slime on the surface."
+ITEM.longdesc = "This artifact originates in the center of Fruit Punch and other chemical anomalies where a very acidic environment is prevalent. It seems as if the slime formed around the rocky core of the artifact is protecting it from exposure to this strong acid. Where this slimy exterior comes from is unclear, as the underlying rock structure does not excrete it, and if it is scraped off, it will not regenerate."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 4200
+ITEM.flag = "A"
+ITEM.rarity = 2
+ITEM.baseweight = 2.600
+ITEM.varweight  = 0.500

@@ -1,0 +1,11 @@
+ITEM.name = "Slug"
+ITEM.model ="models/lostsignalproject/items/artefacts/slug.mdl"
+ITEM.description = "A sphere of gelatinous goo with rocky plates covering most of the surface."
+ITEM.longdesc = "This artifact seems to form in the fringes of chemical anomaly fields, as the outer plates have no defense against the harsh environments present in these fields. The inner jelly-like substance keeps the rocky plates in place, and it almost seems alive as it pulsates and squirms when brought too close to very salty or very acidic areas, and this is where the name 'Slug' comes from."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 8900
+ITEM.flag = "A"
+ITEM.rarity = 4
+ITEM.baseweight = 3.400
+ITEM.varweight  = 0.800

@@ -1,0 +1,11 @@
+ITEM.name = "Droplet"
+ITEM.model ="models/lostsignalproject/items/artefacts/drop.mdl"
+ITEM.description = "A slim, black, teardrop-shaped artifact."
+ITEM.longdesc = "The surface is hot to the touch, as if something is heating it up from the inside. The surface has a luster to it, almost obsidian-like in quality. These two properties, along with the abundance of the artifact, makes Droplets a very lucrative business, as both scientists and private collectors are very interested in it."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 2900
+ITEM.flag = "A"
+ITEM.rarity = 1
+ITEM.baseweight = 0.150
+ITEM.varweight  = 0.100
