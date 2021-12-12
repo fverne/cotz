@@ -152,6 +152,7 @@ if (SERVER) or (CLIENT) then
         -- print (self.stalkernames)
         end
 
+
         if (playerpsy != nil && playerpsy > 50) then
                     if (CLIENT) then
                         for k,v in pairs(ents.FindByClass("class C_PhysPropClientside")) do
@@ -172,6 +173,7 @@ if (SERVER) or (CLIENT) then
         if (playerpsy != nil &&  playerpsy <= 50 && playerpsy > 25 && ticksoundcd > 1800) then
 
 
+
             if (SERVER) then
                 filter = RecipientFilter()
                 filter:AddPlayer(ply)
@@ -181,6 +183,7 @@ if (SERVER) or (CLIENT) then
             end
 
         elseif (playerpsy != nil && playerpsy <= 25 && playerpsy > 10 && ticksoundcd > 1800) then
+
             --local button = ents.Create( "npc_zombie" )
 
             --button:SetPos( Vector( 0, 0, 100 ) )
@@ -206,6 +209,7 @@ if (SERVER) or (CLIENT) then
 
 
         elseif (playerpsy != nil && playerpsy <= 10 && ticksoundcd > 1800) then
+
             if (SERVER) then
 
                 filter = RecipientFilter()
@@ -262,6 +266,9 @@ end
 
 
 --[[print(ply:GetPsyHealth())
+
+
+
 ix.command.Add("Meme", {
 	adminOnly = true,
 	OnRun = function()
