@@ -11,6 +11,8 @@ ITEM.category = "Melee"
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
 
+ITEM.weight = 3.620
+
 ITEM.exRender = true
 ITEM.iconCam = {
 	pos = Vector(0, 23, -2),

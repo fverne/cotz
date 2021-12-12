@@ -12,6 +12,8 @@ ITEM.category = nil
 ITEM.repairCost = ITEM.price/100*1
 ITEM.canAttach = false
 
+ITEM.weight = 4.500
+
 ITEM.exRender = true
 ITEM.iconCam = {
 	ang= Angle(90, 90, 0),
