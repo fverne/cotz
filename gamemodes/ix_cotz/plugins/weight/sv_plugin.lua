@@ -34,6 +34,13 @@ function PLUGIN:CharacterLoaded(character) -- This is just a safety net to make 
 	ix.weight.Update(character)
 end
 
+function PLUGIN:PlayerSpawn(client)
+	local char = client:GetCharacter()
+	if (char) then
+		ix.weight.Update(char)
+	end
+end
+
 function PLUGIN:AmmoCheck(client) -- updates weight after each reload, do we keep this?
 	ix.weight.Update(client:GetCharacter())
 end
