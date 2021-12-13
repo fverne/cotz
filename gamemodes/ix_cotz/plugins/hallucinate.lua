@@ -172,26 +172,45 @@ if (SERVER) or (CLIENT) then
 
         if (playerpsy != nil &&  playerpsy <= 50 && playerpsy > 25 && ticksoundcd > 1800) then
 
-
-
             if (SERVER) then
-                filter = RecipientFilter()
-                filter:AddPlayer(ply)
-                sound = CreateSound(ply,low50[math.random(#low50)])
-                sound:Play()
-                ticksoundcd = 0
+		sound.PlayFile(ply,low50[math.random(#low50)],"3d noplay", function (snd, err, errName)
+		    if not err and (IsValid(snd)) then
+			    snd:SetPos(ply:GetPos() + ply:GetAimVector() * -100 )
+			    snd:Set3DFadeDistance(500, 1000)
+			    snd:SetVolume(1)
+			    snd:EnableLooping(false)
+			    snd:SetPlaybackRate(1)
+			    snd:Play()
+
+		    end
+		end)
+               
             end
+			 ticksoundcd = 0
+			
+			
 
         elseif (playerpsy != nil && playerpsy <= 25 && playerpsy > 10 && ticksoundcd > 1800) then
 
             --local button = ents.Create( "npc_zombie" )
-
             --button:SetPos( Vector( 0, 0, 100 ) )
             if (SERVER) then
-                filter = RecipientFilter()
-                filter:AddPlayer(ply)
-                sound = CreateSound(ply,low25[math.random(#low25)])
-                sound:Play()
+		sound.PlayFile(ply,low25[math.random(#low25)],"3d noplay", function (snd, err, errName)
+		    if not err and (IsValid(snd)) then
+			    snd:SetPos(ply:GetPos() + ply:GetAimVector() * -100 )
+			    snd:Set3DFadeDistance(500, 1000)
+			    snd:SetVolume(1)
+			    snd:EnableLooping(false)
+			    snd:SetPlaybackRate(1)
+			    snd:Play()
+
+		    end
+		end)
+                --filter = RecipientFilter()
+               -- filter:AddPlayer(ply)
+                --sound = CreateSound(ply,low25[math.random(#low25)])
+                --sound:Play()
+				
 
 
                 if (rando < 1) then
@@ -211,11 +230,19 @@ if (SERVER) or (CLIENT) then
         elseif (playerpsy != nil && playerpsy <= 10 && ticksoundcd > 1800) then
 
             if (SERVER) then
+				
+				
+		sound.PlayFile(ply,low10[math.random(#low10)],"3d noplay", function (snd, err, errName)
+		    if not err and (IsValid(snd)) then
+			    snd:SetPos(ply:GetPos() + ply:GetAimVector() * -100 )
+			    snd:Set3DFadeDistance(500, 1000)
+			    snd:SetVolume(1)
+			    snd:EnableLooping(false)
+			    snd:SetPlaybackRate(1)
+			    snd:Play()
 
-                filter = RecipientFilter()
-                filter:AddPlayer(ply)
-                sound = CreateSound(ply,low10[math.random(#low10)])
-                sound:Play()
+		    end
+		end)
 
                 if (rando < 2) then
                     ix.chat.Send(ply,"meme", spooky10[math.random(#spooky10)], false, ply)
