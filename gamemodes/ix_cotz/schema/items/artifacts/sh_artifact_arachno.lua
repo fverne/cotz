@@ -1,0 +1,11 @@
+ITEM.name = "Arachno"
+ITEM.model ="models/lostsignalproject/items/artefacts/black_angel.mdl"
+ITEM.description = "A spindly artifact with many long, twisting 'legs'."
+ITEM.longdesc = "The name 'Arachno' comes from its resemblance to a spider, as well as the fact that some of the ends of the legs are coated in a thin film of a venomous substance. This substance is a strong neuromuscular-blocking agent, able to completely paralyse a horse, let alone a man. There isn't much danger to stabbing yourself with it however, as the material is slightly brittle, and anything harder than bare skin will cause the venom-coated tendril to snap off rather than penetrate the skin."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 10500
+ITEM.flag = "A"
+ITEM.rarity = 5
+ITEM.baseweight = 1.800
+ITEM.varweight  = 0.200

@@ -1,0 +1,11 @@
+ITEM.name = "Capacitor"
+ITEM.model ="models/artefacts/full_empty.mdl"
+ITEM.description = "An elongated obloid shape with two flat circular plates on each side, with an incredible conductance."
+ITEM.longdesc = "When an electrical discharge happens near this artifact, it will conduct and absorb almost all of it up until a certain point. Once it is sated, it needs some time to discharge before it will conduct electricity again. When found, STALKERs often hold on to this artifact, rather than sell it to the scientists, as it is a great help when exploring electric anomaly fields, and has saved peoples lives as they traverse these fields."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 16300
+ITEM.flag = "A"
+ITEM.rarity = 3
+ITEM.baseweight = 1.500
+ITEM.varweight  = 0.550

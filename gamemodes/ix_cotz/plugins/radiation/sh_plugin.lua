@@ -58,8 +58,6 @@ function playerMeta:getRadResist()
 		end
 	end
 
-	--second loop for artifacts
-
 	if ix.plugin.list["buffs"] then
 		if self:HasBuff("buff_radprotect") then
 			res = res + 0.1
@@ -71,7 +69,7 @@ end
 
 function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 	--RADIATION OVERRIDE
-	if ( entity:IsPlayer() and dmgInfo:IsDamageType(DMG_RADIATION)) then
+	if ( entity:IsPlayer() and entity:Alive() and dmgInfo:IsDamageType(DMG_RADIATION)) then
 		local radAmount = (dmgInfo:GetDamage()/10)
 		local radResist = entity:getRadResist()
 		
@@ -82,9 +80,6 @@ end
 
 -- Register HUD Bars.
 if (CLIENT) then
-	local color = Color(39, 174, 96)
-
-	--nut.bar.add(function() return (LocalPlayer():getRadiationPercent()) end, color, nil, "radiation")
 	function PLUGIN:RenderScreenspaceEffects()
 		if (LocalPlayer():getRadiation() > 45 and LocalPlayer():getRadiation() < 75) then
 			DrawMotionBlur(0.1, 0.3, 0.01)
@@ -135,18 +130,19 @@ else
 			thinkTime = CurTime() + .5
 		end
 		
-		--damage meme
+		--damage
 		if (damageTime < CurTime()) then
 			for k, v in ipairs(player.GetAll()) do
-			
-				if (v:GetNetVar("radiation", 0) > 45 and v:GetNetVar("radiation", 0) < 75) then
-					v:addRadiation(-0.5)
-					v:SetHealth(v:Health()-1)
-					if(v:Health() <= 0) then v:Kill() end
-				elseif (v:GetNetVar("radiation", 0) > 75) then
-					v:addRadiation(-0.5)
-					v:SetHealth(v:Health()-2)
-					if(v:Health() <= 0) then v:Kill() end
+				if (v:Alive()) then
+					if (v:GetNetVar("radiation", 0) > 45 and v:GetNetVar("radiation", 0) < 75) then
+						v:addRadiation(-0.5)
+						v:SetHealth(v:Health()-1)
+						if(v:Health() <= 0) then v:Kill() end
+					elseif (v:GetNetVar("radiation", 0) > 75) then
+						v:addRadiation(-0.5)
+						v:SetHealth(v:Health()-2)
+						if(v:Health() <= 0) then v:Kill() end
+					end
 				end
 			end
 			damageTime = CurTime() + 5

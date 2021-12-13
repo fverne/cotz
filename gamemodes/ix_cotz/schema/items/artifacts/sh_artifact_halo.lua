@@ -1,0 +1,11 @@
+ITEM.name = "Halo"
+ITEM.model ="models/lostsignalproject/items/artefacts/ring.mdl"
+ITEM.description = "A glowing ring of a soft, slightly malleable, but still elastic material."
+ITEM.longdesc = "The symbolic value of this artifact needs no introduction, being a staple of many religions. Dubbed the 'Crown of Immortality' by many of a more religious background, some believe it protects one from death itself. There is no proof of this happening, as many a STALKER have been found dead with a Halo in his possession. Nevertheless, the legend of the Halo makes it a popular artifact, especially among STALKERs, however the scientists also have an interest in figuring out why it has that eerie glow."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 11100
+ITEM.flag = "A"
+ITEM.rarity = 5
+ITEM.baseweight = 1.200
+ITEM.varweight  = 0.125

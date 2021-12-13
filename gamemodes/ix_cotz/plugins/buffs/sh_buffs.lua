@@ -164,3 +164,19 @@ PLUGIN.buffs[ "leghurt" ] = {
 	end,
 }
 */
+
+PLUGIN.buffs[ "buff_hijump" ] = {
+	name = "High Jump",
+	desc = "You can jump high.",
+	func = function( player, parameter)
+		
+	end,
+	onbuffed = function( player, parameter )
+		local jumpval = player:GetJumpPower()
+		player:SetJumpPower(jumpval + parameter.amount)
+	end,
+	ondebuffed = function( player, parameter )
+		local jumpval = player:GetJumpPower()
+		player:SetJumpPower(jumpval - parameter.amount)
+	end,
+}

@@ -1,0 +1,11 @@
+ITEM.name = "Blown Capacitor"
+ITEM.model ="models/artefacts/empty.mdl"
+ITEM.description = "An electric artifact."
+ITEM.longdesc = "A physical impossibility. These two circular plates are held at a constant distance to one another, as if something invisible and intangible is keeping them apart. Scientists are still debating where in the lifetime of a Capacitor artifact this specimen is from. It could be a Capacitor that absorbed too much electrical energy and was destroyed by it, or it could be an early stage of it before something further transforms it into a true Capacitor."
+ITEM.width = 1
+ITEM.height = 1
+ITEM.price = 7200
+ITEM.flag = "A"
+ITEM.rarity = 3
+ITEM.baseweight = 1.500
+ITEM.varweight  = 0.550
