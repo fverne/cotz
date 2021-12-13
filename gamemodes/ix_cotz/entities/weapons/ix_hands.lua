@@ -383,6 +383,7 @@ function SWEP:PrimaryAttack()
 		if (value < 0) then
 			return
 		elseif (SERVER) then
+			local staminaUse = ix.config.Get("punchStamina")
 			self:GetOwner():ConsumeStamina(staminaUse)
 		end
 	end

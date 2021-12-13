@@ -22,13 +22,7 @@ function ix.progression.SetActive(progid, active)
 	if (ix.progression.definitions[progid]) then
 		ix.progression.status[progid] = ix.progression.status[progid] or {}
 
-		ix.progression.status[progid].value = tobool(active)
-
-		for level, threshold in pairs(ix.progression.definitions[progid].progressthresholds) do
-			if( preval < threshold && ix.progression.status[progid].value >= threshold) then
-				ix.progression.InvokeProgressionLevel(progid, level) -- If we pass a threshold, run the function
-			end
-		end
+		ix.progression.status[progid].active = tobool(active)
 	end
 end
 
