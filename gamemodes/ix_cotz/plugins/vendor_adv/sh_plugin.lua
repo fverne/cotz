@@ -447,6 +447,7 @@ if (SERVER) then
 
 				if (!client:GetCharacter():GetInventory():Add(uniqueID)) then
 					ix.item.Spawn(uniqueID, client)
+					client:NotifyLocalized("vendorItemDropped")
 				else
 					net.Start("ixVendorAdvAddItem")
 						net.WriteString(uniqueID)
