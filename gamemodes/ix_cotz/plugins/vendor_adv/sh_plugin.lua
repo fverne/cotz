@@ -400,6 +400,9 @@ if (SERVER) then
 
 				for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
 					if (v.uniqueID == uniqueID and v:GetID() != 0 and ix.item.instances[v:GetID()] and v:GetID() == iteminstanceID and v:GetData("equip", false) == false) then
+						timer.Simple(0.1, function()
+						client:SelectWeapon("ix_hands")
+					    end)
 						invOkay = v:Remove()
 						found = true
 						name = L(v.name, client)
