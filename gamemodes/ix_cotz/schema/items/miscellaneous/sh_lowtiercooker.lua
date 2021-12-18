@@ -1,6 +1,6 @@
 ITEM.name = "Wood-Fueled Cooker"
 ITEM.description = "A low tier cooker."
-ITEM.longdesc = "No longer description available."
+ITEM.longdesc = "A small metallic portable pocket stove that allows you to cook up various foods. Some STALKERs like to carry a mini portable cooker around when they camp out. It requires a fuel source to cook with. Those who are experienced STALKERs tend to use the likes of a heat producing artifact to cook their food as it acts as an unlimited fuel source. The rest typically use some wooden branches they find or some charcoal to add a nice smokey flavour."
 ITEM.model = "models/lostsignalproject/items/misc/wood_stove.mdl"
 ITEM.width = 2
 ITEM.height = 2
@@ -11,7 +11,7 @@ ITEM.price = 2500
 
 -- Inventory drawing
 if (CLIENT) then
-	local bar = Material("cotz/panels/hp1.png", "noclamp smooth") 
+	local bar = Material("cotz/panels/hp1.png", "noclamp smooth")
 
 	function ITEM:PaintOver(item, w, h)
 		local cancook = item:GetData("cancook", false)
@@ -19,8 +19,8 @@ if (CLIENT) then
 		surface.SetMaterial(bar)
 		surface.SetDrawColor(Color(120, 120, 120, 255))
 		surface.DrawTexturedRectUV(5, h - 10, 38, 4.6, 0, 0, 0.2, 1)
-    
-    if (cancook) then 
+
+    if (cancook) then
 		  surface.SetMaterial(bar)
 			surface.SetDrawColor(Color(120, 255, 120, 255))
 		  surface.DrawTexturedRectUV(5, h - 10, 38, 4.6, 0, 0, 0.2, 1)
@@ -36,7 +36,7 @@ ITEM.functions.use = {
   multiOptions = function(item, client)
     local targets = {}
     local char = client:GetCharacter()
-    
+
     if (char) then
       local inv = char:GetInventory()
 
@@ -58,7 +58,7 @@ ITEM.functions.use = {
 
     return targets
     end,
-  OnCanRun = function(item)       
+  OnCanRun = function(item)
     return (!IsValid(item.entity))
   end,
   OnRun = function(item, data)
@@ -90,15 +90,15 @@ function ITEM:CookMeat(item, targetID)
 
   if (self:GetData("cancook", false)) then
     local client = self.player or item:GetOwner()
-  
+
     client:SetAction("Cooking", 6)
-    client:Freeze(true) 
-    client:ScreenFade( SCREENFADE.OUT, Color( 0, 0, 0 ), 1, 4 ) 
-    timer.Simple(1, function() 
+    client:Freeze(true)
+    client:ScreenFade( SCREENFADE.OUT, Color( 0, 0, 0 ), 1, 4 )
+    timer.Simple(1, function()
       target:Remove()
-      client:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 4 ) 
+      client:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 4 )
     end)
-    timer.Simple(5, function() 
+    timer.Simple(5, function()
       client:GetCharacter():GetInventory():Add(target.meal, 1, {["weight"] = target:GetWeight()})
       client:Notify(target.name.." successfully cooked.")
       ix.chat.Send(client, "iteminternal", "uses their "..self.name.." to cook some "..target.name..".", false)
