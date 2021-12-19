@@ -36,6 +36,8 @@ ITEM.functions.use = {
 		item.player:AddBuff("buff_slowheal", 5, { amount = item.restore/5 })
 		item.player:AddBuff("buff_psyheal", 60, { amount = item.psyheal/120 })
 
+		ix.chat.Send(item.player, "iteminternal", "takes out a pill from the "..item.name.." and swallows it.", false)
+
 		item.player:GetCharacter():SatisfyAddictions("PrescriptionDrugs")
 
 		quantity = quantity - 1
@@ -45,7 +47,6 @@ ITEM.functions.use = {
 			return false
 		end
 
-		ix.chat.Send(item.player, "iteminternal", "takes out a pill from the "..item.name.." and swallows it.", false)
 
 		return true
 	end,
