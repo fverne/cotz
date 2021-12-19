@@ -32,7 +32,7 @@ ix.poaching.MutantParts = {
 	},
 	["izlom"] = {
 		["meattype"] = "meat_human",
-		["parts"] = {{"part_izlom", 15}, {"hide_izlom", 2}},
+		["parts"] = {{"part_izlom", 15}}, -- {"hide_izlom", 2}},
 	},
 	["classiczombie"] = {
 		["meattype"] = "meat_human",
@@ -119,7 +119,7 @@ function PLUGIN:KeyPress(client, key)
 
     if (client:GetNetVar("IsPoaching") == true ) then
        ix.util.PlayerActionInterrupt(client)
-      
+
     end
 
 	local Hit = client:GetEyeTraceNoCursor()
@@ -139,7 +139,7 @@ function PLUGIN:KeyPress(client, key)
 						knife = ix.item.instances[v.id].id
 					end
 				end
-				
+
 				if (knife != nil) then
 					ix.plugin.list["mutantpoaching"]:OpenPoachMenu(client, mutant, knife)
 				end
@@ -206,7 +206,7 @@ if SERVER then
 						player:SetNetVar("IsPoaching",false)
 					end
 				end)
-			end	
+			end
 		end
 	end)
 end
