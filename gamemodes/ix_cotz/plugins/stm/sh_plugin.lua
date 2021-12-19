@@ -142,7 +142,7 @@ if (SERVER) then
 	end
 
 else
-	
+
 	local predictedStamina = 100
 
 	function PLUGIN:Think()
@@ -163,9 +163,9 @@ else
 	end
 
 	function PLUGIN:HUDPaint()
-		if (!LocalPlayer():GetCharacter() or !LocalPlayer():Alive() or ix.gui.characterMenu:IsVisible()) then return end
-		
-		local Texture2 = Material("cotz/panels/hp1.png", "noclamp smooth") 
+		if (!LocalPlayer():GetCharacter() or !LocalPlayer():Alive() or ix.gui.characterMenu:IsVisible() or ix.option.Get("disablehud", false)) then return end
+
+		local Texture2 = Material("cotz/panels/hp1.png", "noclamp smooth")
 
 		surface.SetMaterial(Texture2)
 		surface.SetDrawColor(Color(170, 170, 255, 255))
