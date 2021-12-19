@@ -10,14 +10,14 @@ nut.command.add("nickset", {
 			if (!string.find(client:Name(), "'")) then
 				local name = string.Split(client:getChar():getName(), " ")
 				local newName = name[1].." '"..arguments[1].."' "..name[2]
-				
+
 				client:getChar():setName(newName)
 				client:ChatPrint("Your name is now "..newName..".")
 			else
 				local name = string.Split(client:getChar():getName(), " ")
 				string.Split(client:getChar():getName(), " ")
 				local newName = name[1].." '"..arguments[1].."' "..name[3]
-				
+
 				client:getChar():setName(newName)
 				client:ChatPrint("Your name is now "..newName..".")
 			end;
@@ -36,7 +36,7 @@ nut.command.add("nickremove", {
 			local name = string.Split(client:getChar():getName(), " ")
 			string.Split(client:getChar():getName(), " ")
 			local newName = name[1].." "..name[3]
-			
+
 			client:getChar():setName(newName)
 			client:ChatPrint("Your name is now "..newName..".")
 		end;
@@ -71,13 +71,13 @@ ix.command.Add("cleannpcs", {
 
 	for k, v in pairs( ents.GetAll( ) ) do
 	if IsValid( v ) and ( v:IsNPC() or baseclass.Get( v:GetClass() ).Base == 'base_nextbot' or baseclass.Get( v:GetClass() ).Base == 'nz_base' or  baseclass.Get( v:GetClass() ).Base == 'nz_risen' ) and !IsFriendEntityName( v:GetClass() ) then
-		
+
 		  v:Remove()
-		
+
 	   end
     end
 	client:Notify("All NPCs and Nextbots have been cleaned up from the map.")
-	
+
 	end
 })
 
@@ -105,12 +105,12 @@ ix.command.Add("spawnitem", {
 				return
 			end
 
-            local aimPos = client:GetEyeTraceNoCursor().HitPos 
+            local aimPos = client:GetEyeTraceNoCursor().HitPos
 
-            aimPos:Add(Vector(0, 0, 10))  
+            aimPos:Add(Vector(0, 0, 10))
 
             ix.item.Spawn(uniqueID, aimPos)
-                        
+
 		end
 	end
 })
@@ -126,7 +126,7 @@ ix.command.Add("setdata", {
 		local trace = client:GetEyeTraceNoCursor()
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local stasheditem = ix.item.instances
-		
+
 		if (!data or !isnumber(data) or data < 0) then
 			return "@invalidArg", 2
 		end
@@ -151,10 +151,10 @@ ix.command.Add("clearinv", {
 	adminOnly = true,
 	arguments = {
 		ix.type.character
-	},	
+	},
 	OnRun = function (self, client, character)
 		local target = character
-		
+
 		if (target) then
 			for k, v in pairs(target:GetInventory():GetItems()) do
 				v:Remove()
@@ -171,7 +171,7 @@ ix.command.Add("plytogglehidden", {
 	adminOnly = true,
 	arguments = {
 		ix.type.player
-	},	
+	},
 	OnRun = function (self, client, target)
 		if (target) then
 			if target:GetNetVar("scoreboardhidden", false) then
@@ -201,3 +201,25 @@ ix.command.Add("coinflip", {
 		end
 	end,
 });
+
+ix.command.Add("content", {
+	OnRun = function(self, client, arguments)
+	client:SendLua([[gui.OpenURL("https://steamcommunity.com/sharedfiles/filedetails/?id=2290918731")]])
+	client:ChatPrint("If you encounter any human NPCs such as Old Timer and they are T-posing, this is caused by model animation overrides, especially pirated CSS content, and is not something we can fix with the workshop.")
+	client:ChatPrint("To fix this, head to the official Call of the Zone discord by typing /discord in-game. Head to the #information channel and follow the instructions on how to fix the T-posing Human NPCs.")
+	end
+})
+
+ix.command.Add("workshop", {
+	OnRun = function(self, client, arguments)
+	client:SendLua([[gui.OpenURL("https://steamcommunity.com/sharedfiles/filedetails/?id=2290918731")]])
+	client:ChatPrint("If you encounter any human NPCs such as Old Timer and they are T-posing, this is caused by model animation overrides, especially pirated CSS content, and is not something we can fix with the workshop.")
+  client:ChatPrint("To fix this, head to the official Call of the Zone discord by typing /discord in-game. Head to the #information channel and follow the instructions on how to fix the T-posing Human NPCs.")
+	end
+})
+
+ix.command.Add("discord", {
+	OnRun = function(self, client, arguments)
+	client:SendLua([[gui.OpenURL("https://discord.gg/n3qW6VdsN3")]])
+	end
+})
