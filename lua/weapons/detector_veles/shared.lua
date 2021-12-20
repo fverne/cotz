@@ -5,7 +5,7 @@ sound.Add({	name		= "V92_Uni_QuickMove",
 	pitch		= { 95, 105 },
 	sound		= "jessev92/weapons/univ/throw_gren.wav",
 })
- 
+
 sound.Add({	name		= "V92_Uni_Draw",
 	channel		= CHAN_BODY,
 	level		= 75,
@@ -23,14 +23,14 @@ sound.Add({	name		= "V92_Uni_Holster",
 })
 
 
-SWEP.PrintName			= "Veles Detector"			
+SWEP.PrintName			= "Veles Detector"
 SWEP.Slot				= 4
 SWEP.SlotPos			= 5
 SWEP.Category = "S.T.A.L.K.E.R. Detector Sweps"
 SWEP.Author	= "Subleader and AirBlack and Hobo_Gus"
 SWEP.Contact = ""
 SWEP.Purpose = ""
-SWEP.Instructions = "Right click to throw a bolt."	
+SWEP.Instructions = "Right click to throw a bolt."
 SWEP.Base	= "base_sweps_detector"
 SWEP.HoldType = "pistol"
 SWEP.ViewModelFOV = 70
@@ -52,7 +52,7 @@ SWEP.Primary.Delay				= 0
 SWEP.Primary.Recoil				= 0
 SWEP.Primary.Damage				= 0
 SWEP.Primary.NumShots			= 0
-SWEP.Primary.Cone				= 0	
+SWEP.Primary.Cone				= 0
 SWEP.Primary.ClipSize			= -1
 SWEP.Primary.DefaultClip		= -1
 SWEP.Primary.Automatic   		= false
@@ -105,26 +105,26 @@ SWEP.WElements = {
 function SWEP:PrimaryAttack()
 	if (self.UseDel < CurTime() and self:Ammo1() > 0) then
 		self.UseDel = CurTime() + 3
-		self.Owner:DoAttackEvent( )	
+		self.Owner:DoAttackEvent( )
 		self.Weapon:SendWeaponAnim(ACT_VM_PULLPIN)
 		self.Owner:ViewPunch( Angle( 10, -10, 0 ) )
 		if (SERVER) then
 			timer.Simple( 0.9, function()
 				self:EmitSound( Sound("weapons/slam/throw.wav", 100, 100 ) )
-				local bolt = ents.Create( "ent_stalker_bolt" )	
+				local bolt = ents.Create( "ent_stalker_bolt" )
 				bolt:SetPos(self.Owner:GetShootPos() + self.Owner:GetAimVector() * 10)
 				bolt:SetAngles(self.Owner:EyeAngles())
 				bolt:Spawn()
 				bolt:SetOwner( self.Owner )
 				bolt:Fire("kill", "", 12)
 				bolt:GetPhysicsObject():ApplyForceCenter( self.Owner:GetVelocity() + self.Owner:GetAimVector() * 5000)
-				bolt:GetPhysicsObject():AddAngleVelocity(Vector(math.random(-500,500),math.random(-500,500),math.random(-500,500)))		
+				bolt:GetPhysicsObject():AddAngleVelocity(Vector(math.random(-500,500),math.random(-500,500),math.random(-500,500)))
 				bolt:GetPhysicsObject():SetMass(1)
 			end)
 			if GetConVarNumber("vnt_stalker_bolt_ammo") != 0 then	self:TakePrimaryAmmo(1)	end
 		end
 		timer.Simple( 0.75, function()
-		self.Weapon:SendWeaponAnim(ACT_VM_DRAW)	
+		self.Weapon:SendWeaponAnim(ACT_VM_DRAW)
 		end)
 	end
 end
@@ -138,33 +138,61 @@ function SWEP:SecondaryAttack()
 		if (SERVER) then
 			timer.Simple( 0.9, function()
 				self:EmitSound( Sound("weapons/slam/throw.wav", 100, 100 ) )
-				local bolt = ents.Create( "ent_stalker_bolt" )	
+				local bolt = ents.Create( "ent_stalker_bolt" )
 				bolt:SetPos(self.Owner:GetShootPos() + self.Owner:GetAimVector() * 10)
 				bolt:SetAngles(self.Owner:EyeAngles())
 				bolt:Spawn()
 				bolt:SetOwner( self.Owner )
 				bolt:Fire("kill", "", 12)
 				bolt:GetPhysicsObject():ApplyForceCenter( self.Owner:GetVelocity() + self.Owner:GetAimVector() * 2500)
-				bolt:GetPhysicsObject():AddAngleVelocity(Vector(math.random(-500,500),math.random(-500,500),math.random(-500,500)))		
+				bolt:GetPhysicsObject():AddAngleVelocity(Vector(math.random(-500,500),math.random(-500,500),math.random(-500,500)))
 				bolt:GetPhysicsObject():SetMass(1)
 			end)
 			if GetConVarNumber("vnt_stalker_bolt_ammo") != 0 then
 				self:TakePrimaryAmmo(1)
 			end
 		end
-		timer.Simple( 0.75, function()	
+		timer.Simple( 0.75, function()
 		self.Weapon:SendWeaponAnim(ACT_VM_DRAW)
 		end)
 	end
 end
 
 function SWEP:Deploy()
-	timer.Simple( 0.75, function()	
+	timer.Simple( 0.75, function()
 	end)
 	return true
 end
 
 local anomalies = {}
+
+anomalies["models/nasca/etherealsrp_artifacts/urchin.mdl"] = true -- Urchin
+anomalies["models/lostsignalproject/items/artefacts/needles.mdl"] = true -- Thorn
+anomalies["models/lostsignalproject/items/artefacts/electra_flash.mdl"] = true -- Sparkler
+anomalies["models/lostsignalproject/items/artefacts/slug.mdl"] = true -- Slug
+anomalies["models/lostsignalproject/items/artefacts/sparkler.mdl"] = true -- Slime
+anomalies["models/lostsignalproject/items/artefacts/kislushka.mdl"] = true -- Mycelia
+anomalies["models/lostsignalproject/items/artefacts/moonlight.mdl"] = true -- Moonlight
+anomalies["models/lostsignalproject/items/artefacts/mica.mdl"] = true -- Mica
+anomalies["models/Gibs/HGIBS.mdl"] = true -- Memento Mori
+anomalies["models/lostsignalproject/items/artefacts/glassbeads.mdl"] = true -- Mama's Beads
+anomalies["models/lostsignalproject/items/artefacts/kolobok.mdl"] = true -- Kolobok
+anomalies["models/lostsignalproject/items/artefacts/ring.mdl"] = true -- Halo
+anomalies["models/lostsignalproject/items/artefacts/chelust.mdl"] = true -- Grandmama's Beads
+anomalies["models/artefacts/atom.mdl"] = true -- Galaxy
+anomalies["models/lostsignalproject/items/artefacts/glass.mdl"] = true -- Flash
+anomalies["models/lostsignalproject/items/artefacts/flame.mdl"] = true -- Flame
+anomalies["models/lostsignalproject/items/artefacts/eye.mdl"] = true -- Eye
+anomalies["models/lostsignalproject/items/artefacts/atom.mdl"] = true -- Dwarf Galaxy
+anomalies["models/lostsignalproject/items/artefacts/drop.mdl"] = true -- Droplet
+anomalies["models/lostsignalproject/items/artefacts/crystal.mdl"] = true -- Crystal
+anomalies["models/artefacts/full_empty.mdl"] = true -- Capacitor
+anomalies["models/lostsignalproject/items/artefacts/cocoon.mdl"] = true -- Bone Cluster
+anomalies["models/artefacts/empty.mdl"] = true -- Blown Capacitor
+anomalies["models/nasca/etherealsrp_artifacts/battery.mdl"] = true -- Battery
+anomalies["models/lostsignalproject/items/artefacts/black_angel.mdl"] = true -- Arachno
+
+--[[
 anomalies["models/nasca/etherealsrp_artifacts/battery.mdl"] = true
 anomalies["models/nasca/etherealsrp_artifacts/wrenched.mdl"] = true
 anomalies["models/nasca/etherealsrp_artifacts/crystal_thorn.mdl"] = true
@@ -201,6 +229,8 @@ anomalies["models/nasca/etherealsrp_artifacts/compass.mdl"] = true
 anomalies["models/nasca/etherealsrp_artifacts/altered_wheel.mdl"] = true
 anomalies["models/kek1ch/psi_field.mdl"] = true
 
+]]--
+
 if CLIENT then
 
 		/*self.VElements["screen"].draw_func = function( weapon )
@@ -221,21 +251,21 @@ end
 function SWEP:Think()
 	if CLIENT then
 			self.VElements["screen"].draw_func = function( weapon )
-			
+
 				local function DrawPointOnThatShit(material, x, y, ang, size )
 					surface.SetMaterial(Material(material))
 					surface.DrawTexturedRectRotated(x, y, size, size, ang )
 				end
-			
+
 				local plypos = self.Owner:GetPos()
 					for k, v in pairs( ents.GetAll() ) do//pairs(shits) do
-						
+
 						if ( v:IsValid() ) then
-						
+
 						local tstdeg = ( (v:GetPos() - self.Owner:GetPos()):Angle().yaw - self.Owner:EyeAngles().yaw ) - 90
 						local dest = self.Owner:GetPos():Distance(v:GetPos())-- plypos.x - v:GetPos().x, plypos.y - v:GetPos().y
 						local x, y = PointOnCircle( tstdeg, dest/30, -2, 21 )
-						
+
 						if dest < 700 then
 							if v:GetClass() == "ix_item" then
 								if anomalies[string.lower(v:GetModel())] then
@@ -246,9 +276,9 @@ function SWEP:Think()
 								end
 							end
 						end
-							
+
 						end
-						
+
 					end
 		end
 		local anoms = {}
