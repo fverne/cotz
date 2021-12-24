@@ -5,10 +5,16 @@ PLUGIN.desc = "Compatible with bad air and localized damage, plus it adds damage
 
 ix.util.Include("cl_plugin.lua")
 
+ix.config.Add("disablePVP", true, "If true, disables player versus player damage.", nil, {
+	category = "pvp"
+})
+
 function PLUGIN:EntityTakeDamage( target, dmginfo )
 	--disable pvp
-	if target:IsPlayer() and dmginfo:GetAttacker():IsPlayer() and (target != dmginfo:GetAttacker()) then
-		return true
+	if (ix.config.Get("disablePVP", true)) then
+		if target:IsPlayer() and dmginfo:GetAttacker():IsPlayer() and (target != dmginfo:GetAttacker()) then
+			return true
+		end
 	end
 
     -- Bullet resistance
