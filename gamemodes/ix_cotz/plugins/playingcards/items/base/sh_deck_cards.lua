@@ -101,8 +101,86 @@ ITEM.functions.Reset = {
     end
 }
 
-ITEM.functions.Put = {
-    name = "Put card into the deck",
+ITEM.functions.Put2 = {
+    name = "Put a card into the deck",
+    tip = "useTip",
+    icon = "icon16/stalker/attach.png",
+    isMulti = true,
+    OnCanRun = function(item)
+      local client = item.player
+      if not PLUGIN:FindCards(client) then return false end
+      if #item:GetData("cards", PLUGIN:FillDeckCards()) >= 54 then return false end
+      if IsValid(item.entity) then return false end
+	end,
+	multiOptions = function(item, client)
+		local targets = {}
+        local char = client:GetCharacter()
+
+        if (char) then
+			local inv = char:GetInventory()
+
+			if (inv) then
+				local items = inv:GetItems()
+
+				for k, v in pairs(items) do
+					if v.isCard then
+						table.insert(targets, {
+							name = v.name,
+							data = {v:GetID()},
+						})
+					else
+						continue
+					end
+				end
+			end
+		end
+
+        return targets
+	end,
+    OnRun = function(item, data)
+		if !data[1] then
+			return false
+		end
+
+		local target = data[1]
+		local items = item.player:GetCharacter():GetInventory():GetItems()
+
+		for k, invItem in pairs(items) do
+			if (data[1]) then
+				if (invItem:GetID() == data[1]) then
+					target = invItem
+
+					break
+				end
+			else
+				client:Notify("No item selected.")
+				return false
+			end
+		end
+
+    local client = item.player
+
+    if not item:GetData("cards") then
+        item:SetData("cards", PLUGIN:FillDeckCards())
+    end
+
+    local cards = item:GetData("cards")
+    cards[#cards + 1] = target.uniqueID
+    item:SetData("cards", cards)
+    client:EmitSound("stalkersound/inv_drop.mp3", 120)
+    ix.chat.Send(item.player, "iteminternal", "places a card into the deck.", false)
+    client:Notify("You have placed a " .. target.name .. " into the deck.")
+    --  ix.log.Add(client, "cardLog", "placed a "..item.name.." into a deck.") -- disabled for the time being
+    target:Remove()
+
+
+		return false
+	end,
+}
+
+
+ITEM.functions.Put1 = {
+    name = "Put a card into the deck",
     icon = "icon16/stalker/split.png",
     OnRun = function(itemTable)
         local client = itemTable.player
@@ -127,6 +205,7 @@ ITEM.functions.Put = {
         local client = itemTable.player
         if not PLUGIN:FindCards(client) then return false end
         if #itemTable:GetData("cards", PLUGIN:FillDeckCards()) >= 54 then return false end
+        if !IsValid(itemTable.entity) then return false end
 
         return true
     end
