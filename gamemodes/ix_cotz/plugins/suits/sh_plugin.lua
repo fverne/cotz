@@ -259,6 +259,23 @@ function playerMeta:UnApplyDSPGasmask()
     self:SetDSP(1)
 end
 
+function PLUGIN:EntityEmitSound(sndTable)
+    local client = sndTable.Entity
+    if (client and IsValid(client) and client:IsPlayer() and client:GetCharacter()) then
+        local gasmaskequip = client:getEquippedGasmask()
+
+        if gasmaskequip then
+            local sndName = sndTable.SoundName:lower()
+
+            if (sndName:find("male") or sndName:find("voice")) then
+                sndTable.DSP = 15
+            end
+
+            return true
+        end
+    end
+end
+
 function PLUGIN:PostPlayerLoadout(client)
 	client:RecalculateResistances()
 	client:ReevaluateOverlay()
