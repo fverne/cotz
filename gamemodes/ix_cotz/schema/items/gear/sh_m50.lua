@@ -1,4 +1,4 @@
-ITEM.name = "M50 Gaskmask"
+ITEM.name = "M50 Gasmask"
 ITEM.description = "Modern tactical gas mask made in USA."
 ITEM.longdesc = "Modern tactical gas mask made in USA, offers brutalpearance, good quality filters and tinted lenses."
 ITEM.model = "models/kek1ch/helm_respirator.mdl"
@@ -196,9 +196,9 @@ ITEM.pacDataBerill1 = {
 		["Name"] = "M50",
 		["EditorExpand"] = true,
 	},
-},	
+},
 }
 
 ITEM.pacDataNBC = {
-	
+
 }
