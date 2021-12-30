@@ -70,3 +70,32 @@ function ix.util.GetMutantMeatWeight(uniqueID, knifetier)
 
 	return item.BaseWeight + math.Rand(-weightvar, weightvar) + (item.WeightPerLevel * knifetier)
 end
+
+function ix.util.SpawnAdvVendor(npctemplate, pos, ang)
+
+	local npc = ents.Create("ix_vendor_adv")
+
+	npc:SetPos(pos)
+	npc:SetAngles(ang)
+	
+	npc:Spawn()
+
+	npc:LoadTemplate(npctemplate)
+
+end
+
+ix.command.Add("spawnadvvendor", {
+	adminOnly = true,
+	arguments = {
+		ix.type.string,
+	},	
+	OnRun = function(self, client, npctemplate)
+		local trace = client:GetEyeTraceNoCursor()
+		local hitpos = trace.HitPos + trace.HitNormal
+
+		print(hitpos)
+		print(client:GetAngles())
+
+		ix.util.SpawnAdvVendor(npctemplate, hitpos, client:GetAngles())
+	end
+})
