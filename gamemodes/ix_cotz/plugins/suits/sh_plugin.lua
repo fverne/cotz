@@ -24,21 +24,21 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		local flatRes = target:GetNWInt("ixflatbulletres")
 		local suitDuraDmg = damage / 100
 		local suit = target:getEquippedBodyArmor()
-		
+
 		if suit != nil then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitDuraDmg, 0, 100))
 		end
 
 		damage = damage - flatRes
 		damage = damage * perRes
-		
+
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
 
 		dmginfo:SetDamage(damage)
-		
+
 	end
-	
+
 	--Anomaly resistance
 	local anomtypes = {}
 	anomtypes[DMG_SHOCK] = true
@@ -58,11 +58,11 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		local flatRes = target:GetNWInt("ixflatanomres")
 		local suitDuraDmg = damage / 50
 		local suit = target:getEquippedBodyArmor()
-		
+
 		if suit != nil then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitDuraDmg, 0, 100))
 		end
-			
+
 		damage = damage - flatRes
 		damage = damage * perRes
 
@@ -93,7 +93,7 @@ function playerMeta:getPercentageBulletRes()
 			res = res * (1 - v.br)
 		end
 	end
-	
+
 	--BUFFS GO HERE
 
 	return res
@@ -117,7 +117,7 @@ function playerMeta:getFlatBulletRes()
 			res = res + v.fbr
 		end
 	end
-	
+
 	--BUFFS GO HERE
 
 	return res
@@ -141,7 +141,7 @@ function playerMeta:getPercentageAnomalyRes()
 			res = res * (1 - v.ar)
 		end
 	end
-	
+
 	--BUFFS GO HERE
 
 	return res
@@ -165,7 +165,7 @@ function playerMeta:getFlatAnomalyRes()
 			res = res + v.far
 		end
 	end
-	
+
 	--BUFFS GO HERE
 
 	return res
@@ -245,7 +245,22 @@ function playerMeta:ReevaluateOverlay()
 	end
 end
 
+function playerMeta:ReevaluateGasmaskDSP()
+    if self:getEquippedGasmask() then
+        self:SetDSP(31)
+    end
+end
+
+function playerMeta:ApplyDSPGasmask()
+    self:SetDSP(31)
+end
+
+function playerMeta:UnApplyDSPGasmask()
+    self:SetDSP(1)
+end
+
 function PLUGIN:PostPlayerLoadout(client)
 	client:RecalculateResistances()
 	client:ReevaluateOverlay()
+	client:ReevaluateGasmaskDSP()
 end
