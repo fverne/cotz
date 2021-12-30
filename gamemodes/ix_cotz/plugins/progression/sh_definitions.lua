@@ -83,10 +83,13 @@ ix.progression.Register("oldTimerKillIntro", {
 				})
 				
 				-- Spawn CookNPC
+				local pos = Vector(-6120.729492, -9750.427734, 4959.031250)
+				local ang = Angle(0,-180,0)
+				ix.util.SpawnAdvVendor("cooknpc", pos, ang)
 
 				ix.util.SpawnAdvDupe2Dupe( "progressiontest1" )
 			end,
-			RunOnce = false
+			RunOnce = true
 		},
 		[2] = {
 			OnRun = function()
@@ -123,8 +126,8 @@ ix.progression.Register("oldTimerKillIntro", {
 		},
 	},
 	progressthresholds = {
-		[1] = 25,
-		[2] = 60,
+		[1] = 2,
+		[2] = 4,
 		[3] = 120
 	}
 })
