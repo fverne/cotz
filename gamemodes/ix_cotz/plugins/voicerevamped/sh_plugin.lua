@@ -3,6 +3,10 @@ PLUGIN.author = "Black Tea + armdupe"
 PLUGIN.desc = "A plugin that revamps voice chat that adds a lot of things such as overlay, voice distance and 3d sound and more."
 ix.util.Include("sv_plugin.lua")
 
+ix.option.Add("permvoicehud", ix.type.bool, false, {
+	category = "_stalkersettings",
+})
+
 -- Start of Voice Overlay
 if (CLIENT) then
     local PANEL = {}
@@ -158,6 +162,10 @@ ixVoice.Ranges = {
 local voiceDistance = 360000
 
 if (SERVER) then
+    for _, v in pairs(ixVoice.Ranges) do
+        resource.AddFile(v.icon)
+    end
+
     function PLUGIN:PlayerCanHearPlayersVoice(listener, speaker)
         local allowVoice = ix.config.Get("allowVoice")
         if (IsValid(listener.ixRagdoll)) then return false, false end
@@ -171,9 +179,8 @@ if (SERVER) then
             --  print(oldrange)
         end
 
-     -- print(listener)
-     -- print(speaker)
-
+        -- print(listener)
+        -- print(speaker)
         if (listener:GetPos():DistToSqr(speaker:GetPos()) > oldrange) then return false, false end
         if (listener:GetPos():DistToSqr(speaker:GetPos()) <= oldrange) then return false, false end
 
@@ -189,7 +196,6 @@ local function ChangeMode(mode)
         client.voiceRange = 1
     end
 end
-
 
 net.Receive("ixVoiceMenu", function(length) -- copied from recognition plugin
     local menu = DermaMenu()
@@ -212,6 +218,24 @@ net.Receive("ixVoiceMenu", function(length) -- copied from recognition plugin
     menu:Center()
 end)
 
+for i, v in pairs( ixVoice.Ranges ) do
+  ixVoice.Ranges[ i ].icon = Material( v.icon, "noclamp smooth" );
+end
+
+if CLIENT then
+    hook.Add("HUDPaint", "ixVoiceModeDisplay", function()
+        local w, h = 45, 42
+        if (not LocalPlayer():IsSpeaking() and not ix.option.Get("permvoicehud", false)) then return end
+        surface.SetMaterial(ixVoice.Ranges[LocalPlayer().voiceRange or 2].icon)
+        surface.SetDrawColor(255, 255, 255, 80)
+        surface.DrawTexturedRect(5, ScrH() / 20 - h - 5, w, h)
+        surface.SetTextColor(255, 255, 255, 80)
+        surface.SetFont("stalkerregularfont2")
+        local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer().voiceRange or 2].name)
+        surface.SetTextPos(15 + w, ScrH() / 20 - 5 - h / 2 - th / 2)
+        surface.DrawText(ixVoice.Ranges[LocalPlayer().voiceRange or 2].name)
+    end)
+end
 
 --[[
 if (CLIENT) then
