@@ -20,6 +20,8 @@ ix.config.Add("deathDropValuable", false, "If true valuables will drop when play
 	category = "Death"
 })
 
+if(SERVER)then
+
 function PLUGIN:DoPlayerDeath( client, attacker, dmg )
 	
 	if(ix.plugin.list["revive"] ~= nil) then return end
@@ -84,3 +86,5 @@ function PLUGIN:DoDeathDrop( client, deathpos )
 end
 
 hook.Add("DeathDrop", "DoDeathDrop", DoDeathDrop)
+
+end
