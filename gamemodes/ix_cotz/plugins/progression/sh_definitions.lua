@@ -179,6 +179,7 @@ ix.progression.Register("cookMeatCollect", {
 ix.progression.Register("technutItemDelivery_Main", {
 	name = "Technut Item Collection",
 	description = "Collecting important components for Technut.",
+	defaultActive = true,
 	BuildResponse = function(self, status)
 		local dat = ix.progression.status["technutItemDelivery_Main"].complexData
 		local itemids = {
@@ -201,7 +202,7 @@ ix.progression.Register("technutItemDelivery_Main", {
 	progressfunctions = {
 		[1] = {
 			OnRun = function()
-				-- ??? XD
+				
 			end,
 			RunOnce = false,
 		},
@@ -233,6 +234,11 @@ ix.progression.Register("technutItemDelivery_Main", {
 
 		if isdone then
 			--Spawn STALKERNETAdmin
+
+			ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+				name = "'Technut'",
+				message = "LUTZ."
+			})
 
 			ix.progression.SetActive("technutItemDelivery_Main", false)
 		end
