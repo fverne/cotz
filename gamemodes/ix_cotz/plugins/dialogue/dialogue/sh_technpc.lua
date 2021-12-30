@@ -8,6 +8,7 @@ DIALOGUE.addTopic("GREETING", {
 		"BackgroundTopic",
 		"AboutWorkTopic",
 		"GetTask",
+		"AboutProgression",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
@@ -293,6 +294,140 @@ DIALOGUE.addTopic("GetTask", {
 	end,
 })
 
+DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	options = {
+		"BackTopic"
+	},
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if (dyndata) then
+			if(CLIENT)then
+				self.response = string.format("Nice work, this %s will help our cause.", ix.item.list[dyndata.itemid].name)
+			else
+				if ix.progression.IsActive("technutItemDelivery_Main") then
+					
+					local item = player:GetCharacter():GetInventory():HasItem(dyndata.itemid)
+
+					if(item)then
+						if(item:GetData("quantity", 0) > 1) then
+							item:SetData("quantity", item:GetData("quantity",0) - 1)
+						else
+							item:Remove()
+						end
+
+						ix.progression.AddComplexProgressionValue("technutItemDelivery_Main", dyndata.itemid, player:Name())
+					end
+				end
+			end	
+		end
+	end,
+} )
+
+DIALOGUE.addTopic("ViewProgression", {
+	statement = "",
+	response = "",
+	options = {
+		"BackTopic"
+	},
+
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		--disgusting
+		--local identifier = player:GetCharacter():GetData("curdialogprog")
+		local identifier 	= self.tmp
+		self.tmp = nil
+		local progstatus 	= ix.progression.GetComplexProgressionValue(identifier)
+		local progdef 		= ix.progression.definitions[identifier]
+		if(progdef.fnAddComplexProgression)then
+			local progitems 	= progdef.GetItemIds()
+			local missingitems  = {}
+
+			for progitem,cnt in pairs(progitems) do
+				local curcnt = 0
+				if(progstatus and progstatus[progitem]) then curcnt = progstatus[progitem] end
+
+				if(curcnt < cnt)then
+					table.insert(missingitems, progitem)
+				end
+			end
+
+			for _, progitem in pairs(missingitems) do
+				table.insert(dynopts, {statement = ix.item.list[progitem].name, topicID = "ViewProgression", dyndata = {itemid = progitem}})
+			end
+		end
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+
+		-- Return the next topicID
+		return "HandInComplexProgressionItemTopic", dyndata
+	end,
+
+	IsDynamicFollowup = true,
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if (dyndata) then
+			if(CLIENT)then
+				local progstatus 	= ix.progression.status[dyndata.identifier]
+				local progdef 		= ix.progression.definitions[dyndata.identifier]
+
+				self.response = progdef.BuildResponse(progdef, progstatus)
+				self.tmp = dyndata.identifier
+			end
+		end
+	end,
+})
+
+
+DIALOGUE.addTopic("AboutProgression", {
+	statement = "What do you need help with?",
+	response = "I have a few things I need done.",
+	options = {
+		"BackTopic"
+	},
+	preCallback = function(self, client, target)
+		if( CLIENT ) then
+			if #ix.progression.GetActiveProgressions("'Technut'") <= 0 then
+				self.response = "Nothing at the moment."
+			end
+
+			net.Start("progression_sync")
+			net.SendToServer()
+		end
+	end,
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		local test = ix.progression.GetActiveProgressions("'Technut'")
+
+		PrintTable(test)
+
+		for _, progid in pairs(ix.progression.GetActiveProgressions("'Technut'")) do
+			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})
+		end
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+
+		-- Return the next topicID
+		return "ViewProgression", dyndata
+	end,
+})
+
 DIALOGUE.addTopic("BackgroundTopic", {
 	statement = "Tell me about yourself.",
 	response = "Hoho! Well, what is there to say? I live here, after... Well, deserting!",
@@ -326,6 +461,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"BackgroundTopic",
 		"AboutWorkTopic",
 		"GetTask",
+		"AboutProgression",
 		"GOODBYE"
 	}
 })

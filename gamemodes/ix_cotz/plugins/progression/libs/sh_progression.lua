@@ -29,7 +29,14 @@ end
 function ix.progression.IsActive(progid)
 	if (ix.progression.definitions[progid]) then
 		ix.progression.status[progid] = ix.progression.status[progid] or {}
-		ix.progression.status[progid].active = ix.progression.status[progid].active or ix.progression.definitions[progid].defaultActive
+		if(ix.progression.status[progid].active == nil) then
+			if(ix.progression.definitions[progid].defaultActive)then
+				ix.progression.status[progid].active = true
+			else
+				ix.progression.status[progid].active = false
+			end
+		end
+
 		return ix.progression.status[progid].active
 	else
 		return false
