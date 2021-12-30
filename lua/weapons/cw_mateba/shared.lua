@@ -20,7 +20,7 @@ if CLIENT then
 	SWEP.PosBasedMuz = false
 	SWEP.NoShells = true
 		
-	SWEP.IronsightPos = Vector(-3.724, -0.376, 1.154)
+	SWEP.IronsightPos = Vector(-3.724, -0.376, 1.175)
 	SWEP.IronsightAng = Vector(0, 0, 0)
 	
 	SWEP.MicroT1Pos = Vector(-3.75, 3.7, -0.301)
@@ -157,7 +157,7 @@ SWEP.FireSoundSuppressed = "CWC_MATEBA_FIRE_SUP"
 SWEP.Recoil = 4
 
 SWEP.HipSpread = 0.125
-SWEP.AimSpread = 0.025
+SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007

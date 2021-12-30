@@ -30,8 +30,8 @@ if CLIENT then
 	SWEP.WMAng = Vector(-10, 0, 180)
 	SWEP.WMPos = Vector(-0.5, 3, 1)
 	
-	SWEP.IronsightPos = Vector(-3.01, -3, 1.96)
-	SWEP.IronsightAng = Vector(0, 0, 0)
+	SWEP.IronsightPos = Vector(-3, -7.321, 1.75)
+	SWEP.IronsightAng = Vector(0.4, 0.05, 0)
 	
 	SWEP.AimpointPos = Vector(-3.03, -3, 0.8)
 	SWEP.AimpointAng = Vector(0, 0, 0)
