@@ -182,35 +182,36 @@ if (SERVER) then
         -- print(listener)
         -- print(speaker)
         if (listener:GetPos():DistToSqr(speaker:GetPos()) > oldrange) then return false, false end
-        if (listener:GetPos():DistToSqr(speaker:GetPos()) <= oldrange) then return false, false end
 
         return true, true
     end
 end
 
-local function ChangeMode(mode)
-    local client = LocalPlayer()
-    client.voiceRange = mode
+netstream.Hook("ChangeMode", function(client, mode)
+    client:SetLocalVar("voiceRange", mode)
 
-    if (client.voiceRange > #ixVoice.Ranges) then
-        client.voiceRange = 1
+    if (client:GetLocalVar("voiceRange") > #ixVoice.Ranges) then
+        client:GetLocalVar("voiceRange", 2)
     end
-end
+end)
 
-net.Receive("ixVoiceMenu", function(length) -- copied from recognition plugin
+-- copied from recognition plugin
+net.Receive("ixVoiceMenu", function(length)
     local menu = DermaMenu()
-    print(LocalPlayer().voiceRange)
 
     menu:AddOption("Change voice mode to Whispering range.", function()
-        ChangeMode(1)
+        netstream.Start("ChangeMode", 1)
+        LocalPlayer():Notify("You have changed your voice mode to Whispering!")
     end)
 
     menu:AddOption("Change voice mode to Talking range.", function()
-        ChangeMode(2)
+        netstream.Start("ChangeMode", 2)
+        LocalPlayer():Notify("You have changed your voice mode to Talking!")
     end)
 
     menu:AddOption("Change voice mode to Yelling range.", function()
-        ChangeMode(3)
+        netstream.Start("ChangeMode", 3)
+        LocalPlayer():Notify("You have changed your voice mode to Yelling!")
     end)
 
     menu:Open()
@@ -218,29 +219,40 @@ net.Receive("ixVoiceMenu", function(length) -- copied from recognition plugin
     menu:Center()
 end)
 
-for i, v in pairs( ixVoice.Ranges ) do
-  ixVoice.Ranges[ i ].icon = Material( v.icon, "noclamp smooth" );
+for i, v in pairs(ixVoice.Ranges) do
+    ixVoice.Ranges[i].icon = Material(v.icon, "noclamp smooth")
 end
 
-if CLIENT then
-    hook.Add("HUDPaint", "ixVoiceModeDisplay", function()
-        local w, h = 45, 42
-        if (not LocalPlayer():IsSpeaking() and not ix.option.Get("permvoicehud", false)) then return end
-        surface.SetMaterial(ixVoice.Ranges[LocalPlayer().voiceRange or 2].icon)
-        surface.SetDrawColor(255, 255, 255, 80)
-        surface.DrawTexturedRect(5, ScrH() / 20 - h - 5, w, h)
-        surface.SetTextColor(255, 255, 255, 80)
-        surface.SetFont("stalkerregularfont2")
-        local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer().voiceRange or 2].name)
-        surface.SetTextPos(15 + w, ScrH() / 20 - 5 - h / 2 - th / 2)
-        surface.DrawText(ixVoice.Ranges[LocalPlayer().voiceRange or 2].name)
-    end)
-end
+hook.Add("HUDPaint", "ixVoiceModeDisplay", function()
+    local w, h = 45, 42
+    if (not LocalPlayer():IsSpeaking() and not ix.option.Get("permvoicehud", false)) then return end
+    surface.SetMaterial(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].icon)
+    surface.SetDrawColor(255, 255, 255, 80)
+    surface.DrawTexturedRect(5, ScrH() / 20 - h - 5, w, h)
+    surface.SetTextColor(255, 255, 255, 80)
+    surface.SetFont("stalkerregularfont2")
+    local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+    surface.SetTextPos(15 + w, ScrH() / 20 - 5 - h / 2 - th / 2)
+    surface.DrawText(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+end)
+
 
 --[[
 if (CLIENT) then
-  concommand.Add("printvoicemode", function()
-    print(LocalPlayer().voiceRange)
-  end)
+    concommand.Add("printvoicemode", function()
+        print(LocalPlayer():GetLocalVar("voiceRange"))
+    end)
 end
+
+concommand.Add("printranges", function()
+    for k, v in pairs(player.GetAll()) do
+        print("Ranges:" .. v:GetLocalVar("voiceRange"))
+    end
+end)
+
+concommand.Add("setranges", function(ply, cmd, args)
+    for k, v in pairs(player.GetAll()) do
+        v:SetLocalVar("voiceRange", tonumber(args[1]))
+    end
+end)
 ]]--
