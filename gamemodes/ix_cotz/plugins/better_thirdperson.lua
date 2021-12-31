@@ -2,6 +2,21 @@ PLUGIN.name = "Override Thirdperson"
 PLUGIN.description = "Override Thirdperson."
 PLUGIN.author = "ZeMysticalTaco / TFA"
 
+if (CLIENT) then
+    local tpcooldown
+
+    function PLUGIN:PlayerButtonDown(me, button)
+        if button == KEY_F4 then
+            if IsFirstTimePredicted() then
+                if (tpcooldown or 0) < CurTime() then
+                    RunConsoleCommand("ix_togglethirdperson")
+                    tpcooldown = CurTime() + 0.1
+                end
+            end
+        end
+    end
+end
+
 if SERVER then
 	AddCSLuaFile()
 	util.AddNetworkString("ThirdOTSPacket")
@@ -220,4 +235,4 @@ hook.Add("CreateMove", "ThirdOTSCreateMove", function(cmd)
 	cmd:SetSideMove(vel.y)
 	cmd:SetForwardMove(vel.x)
 	cmd:SetUpMove(vel.z)
-end)	
+end)
