@@ -236,6 +236,32 @@ hook.Add("HUDPaint", "ixVoiceModeDisplay", function()
     surface.DrawText(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
 end)
 
+hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
+    if ply == LocalPlayer() and GetViewEntity() == LocalPlayer() and (GetConVar('thirdperson') and GetConVar('thirdperson'):GetInt() ~= 0) then return end
+    if not ply:Alive() then return end
+    if not ply:IsSpeaking() then return end
+    local voice_mat = ixVoice.Ranges[ply:GetLocalVar("voiceRange") or 2].icon
+  	-- print(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].icon)
+    -- print(ply)
+    local pos = ply:GetPos() + Vector(0, 0, ply:GetModelRadius() + 15)
+    local attachment = ply:GetAttachment(ply:LookupAttachment('eyes'))
+
+    if attachment then
+        pos = ply:GetAttachment(ply:LookupAttachment('eyes')).Pos + Vector(0, 0, 15)
+    end
+
+    local distance = LocalPlayer():GetPos():Distance(ply:GetPos())
+    local plyrange = ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].range
+
+    if (distance <= plyrange) then
+        render.SetMaterial(voice_mat)
+        local color_var = 255
+        local computed_color = render.ComputeLighting(ply:GetPos(), Vector(0, 0, 1))
+        local max = math.max(computed_color.x, computed_color.y, computed_color.z)
+        color_var = math.Clamp(max * 255 * 1.11, 0, 255)
+        render.DrawSprite(pos, 12, 12, Color(color_var, color_var, color_var, 255))
+    end
+end)
 
 --[[
 if (CLIENT) then
