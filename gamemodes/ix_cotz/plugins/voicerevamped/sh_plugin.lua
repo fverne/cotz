@@ -196,7 +196,7 @@ netstream.Hook("ChangeMode", function(client, mode)
 end)
 
 -- copied from recognition plugin
-net.Receive("ixVoiceMenu", function(length)
+netstream.Hook("ixVoiceMenu", function(client)
     local menu = DermaMenu()
 
     menu:AddOption("Change voice mode to Whispering range.", function()

@@ -12,7 +12,6 @@ end
 
 function PLUGIN:ShowSpare1(client)
     if (client:GetCharacter()) then
-        net.Start("ixVoiceMenu")
-        net.Send(client)
+        netstream.Start(client, "ixVoiceMenu")
     end
 end
