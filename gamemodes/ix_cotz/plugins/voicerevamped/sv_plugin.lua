@@ -1,5 +1,9 @@
 util.AddNetworkString("ixVoiceMenu")
 
+function PLUGIN:InitializedPlugins()
+    RunConsoleCommand("mp_show_voice_icons", "0")
+end
+
 function PLUGIN:PlayerInitialSpawn(client)
     if (IsValid(client)) then
         timer.Simple(0.25, function()
