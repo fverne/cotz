@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 PLUGIN.name = "hidehud"
 PLUGIN.author = "verne"
-PLUGIN.description = "hidet of hud"
+PLUGIN.desc = "hidet of hud"
 
 ix.option.Add("disablehud", ix.type.bool, false, {
 	category = "_stalkersettings",

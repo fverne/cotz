@@ -1,10 +1,10 @@
 PLUGIN.name = "Voice Chat Revamped"
 PLUGIN.author = "Black Tea + armdupe"
-PLUGIN.desc = "A plugin that revamps voice chat that adds a lot of things such as overlay, voice distance and 3d sound and more."
+PLUGIN.desc = "A plugin that revamps voice chat that adds a lot of things such as overlay, voice distance and 3d sound."
 ix.util.Include("sv_plugin.lua")
 
 ix.option.Add("permvoicehud", ix.type.bool, false, {
-	category = "_stalkersettings",
+    category = "_stalkersettings",
 })
 
 -- Start of Voice Overlay
@@ -138,23 +138,25 @@ This has only been semi-tested with a bot and the magic of if statements + print
 I highly suggest anyone who is seeing this message to not commit this part of the plugin (below this warning message)
 to their gamemode until the plugin has this message removed or has been commited to the Master branch.
 You have been warned.
-]]--
-
+]]
+--
 -- Start of Voice Modes
-
 ixVoice = ixVoice or {}
 
 ixVoice.Ranges = {
     {
-        name = "Whispering", -- for a future update/addition to the plugin, you will see soon
+        name = "Whispering",
+        icon = "materials/vgui/hud/misc/voiceicons/whispering.png",
         range = 120
     },
     {
         name = "Talking",
+        icon = "materials/vgui/hud/misc/voiceicons/talking.png",
         range = 300
     },
     {
         name = "Yelling",
+        icon = "materials/vgui/hud/misc/voiceicons/yelling.png",
         range = 600
     }
 }
@@ -162,7 +164,7 @@ ixVoice.Ranges = {
 local voiceDistance = 360000
 
 if (SERVER) then
-    for _, v in pairs(ixVoice.Ranges) do
+    for i, v in pairs(ixVoice.Ranges) do
         resource.AddFile(v.icon)
     end
 
@@ -173,14 +175,12 @@ if (SERVER) then
         if (not allowVoice) then return false, false end
         local oldrange = voiceDistance
 
-        if (speaker.voiceRange) then
-            oldrange = ixVoice.Ranges[speaker.voiceRange].range
+        if (speaker:GetLocalVar("voiceRange")) then
+            oldrange = ixVoice.Ranges[speaker:GetLocalVar("voiceRange")].range
             oldrange = oldrange * oldrange
             --  print(oldrange)
         end
 
-        -- print(listener)
-        -- print(speaker)
         if (listener:GetPos():DistToSqr(speaker:GetPos()) > oldrange) then return false, false end
 
         return true, true
@@ -241,8 +241,8 @@ hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
     if not ply:Alive() then return end
     if not ply:IsSpeaking() then return end
     local voice_mat = ixVoice.Ranges[ply:GetLocalVar("voiceRange") or 2].icon
-  	-- print(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].icon)
-    -- print(ply)
+  --  print(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].icon)
+    --	print(ply)
     local pos = ply:GetPos() + Vector(0, 0, ply:GetModelRadius() + 15)
     local attachment = ply:GetAttachment(ply:LookupAttachment('eyes'))
 
@@ -254,7 +254,7 @@ hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
     local plyrange = ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].range
 
     if (distance <= plyrange) then
-        render.SetMaterial(voice_mat)
+        render.SetMaterial(voice_mat) -- ply:IsSpeaking() and
         local color_var = 255
         local computed_color = render.ComputeLighting(ply:GetPos(), Vector(0, 0, 1))
         local max = math.max(computed_color.x, computed_color.y, computed_color.z)
@@ -263,7 +263,6 @@ hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
     end
 end)
 
---[[
 if (CLIENT) then
     concommand.Add("printvoicemode", function()
         print(LocalPlayer():GetLocalVar("voiceRange"))
@@ -281,4 +280,3 @@ concommand.Add("setranges", function(ply, cmd, args)
         v:SetLocalVar("voiceRange", tonumber(args[1]))
     end
 end)
-]]--
