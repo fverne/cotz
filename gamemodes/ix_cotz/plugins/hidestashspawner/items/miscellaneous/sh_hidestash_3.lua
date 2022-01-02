@@ -9,11 +9,15 @@ ITEM.hidestashcategory = "tier3"
 ITEM.moneyinterval = {400, 800}
 
 function ITEM:GetDescription()
-	if self:GetData("stashtext", nil) == nil then
-		return self.description
-	else
-		return self.description.."\n\nThe pda has a note written on it. It reads:\n"..self:GetData("stashtext", nil)
-	end
+    if self:GetData("stashtext", nil) == nil then
+        return self.description
+    else
+        if self:GetData("moneytaken", false) == true then
+            return self.description .. "\n\n" .. self:GetData("stashtext", nil)
+        else
+            return self.description .. "\n\nThe pda has a note written on it. It reads:\n" .. self:GetData("stashtext", nil)
+        end
+    end
 end
 
 ITEM.functions.use = {

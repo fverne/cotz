@@ -28,6 +28,8 @@ ITEM.functions.use = {
 		local quantity = item:GetData("quantity", item.quantity)
 		item.player:AddBuff("buff_staminarestore", 100, { amount = 2 })
 
+		ix.chat.Send(item.player, "iteminternal", "swallows one of the "..item.name..".", false)
+
 		quantity = quantity - 1
 
 		item.player:GetCharacter():SatisfyAddictions("PrescriptionDrugs")
@@ -36,8 +38,6 @@ ITEM.functions.use = {
 			item:SetData("quantity", quantity)
 			return false
 		end
-		
-		ix.chat.Send(item.player, "iteminternal", "swallows one of the "..item.name..".", false)
 
 		return true
 	end,

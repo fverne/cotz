@@ -1,5 +1,6 @@
 ITEM.name = "Harmonica"
 ITEM.description = "A playable harmonica."
+ITEM.longdesc = "A free reed wind instrument that is used throughout the Zone in which it is featured in many musical genres. The instrument appears to have around 10 holes which the user would blow into to produce a sound. Some STALKERS have mastered the Harmonica and use it over a Guitar for their instrument choice, mostly due to how easy it is to carry around."
 ITEM.model = "models/lostsignalproject/items/misc/harmonica.mdl"
 ITEM.width = 1
 ITEM.height = 1

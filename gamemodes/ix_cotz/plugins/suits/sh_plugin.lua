@@ -5,10 +5,16 @@ PLUGIN.desc = "Compatible with bad air and localized damage, plus it adds damage
 
 ix.util.Include("cl_plugin.lua")
 
+ix.config.Add("disablePVP", true, "If true, disables player versus player damage.", nil, {
+	category = "pvp"
+})
+
 function PLUGIN:EntityTakeDamage( target, dmginfo )
 	--disable pvp
-	if target:IsPlayer() and dmginfo:GetAttacker():IsPlayer() and (target != dmginfo:GetAttacker()) then
-		return true
+	if (ix.config.Get("disablePVP", true)) then
+		if target:IsPlayer() and dmginfo:GetAttacker():IsPlayer() and (target != dmginfo:GetAttacker()) then
+			return true
+		end
 	end
 
     -- Bullet resistance
@@ -18,21 +24,21 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		local flatRes = target:GetNWInt("ixflatbulletres")
 		local suitDuraDmg = damage / 100
 		local suit = target:getEquippedBodyArmor()
-		
+
 		if suit != nil then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitDuraDmg, 0, 100))
 		end
 
 		damage = damage - flatRes
 		damage = damage * perRes
-		
+
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
 
 		dmginfo:SetDamage(damage)
-		
+
 	end
-	
+
 	--Anomaly resistance
 	local anomtypes = {}
 	anomtypes[DMG_SHOCK] = true
@@ -52,11 +58,11 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		local flatRes = target:GetNWInt("ixflatanomres")
 		local suitDuraDmg = damage / 50
 		local suit = target:getEquippedBodyArmor()
-		
+
 		if suit != nil then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitDuraDmg, 0, 100))
 		end
-			
+
 		damage = damage - flatRes
 		damage = damage * perRes
 
@@ -87,7 +93,7 @@ function playerMeta:getPercentageBulletRes()
 			res = res * (1 - v.br)
 		end
 	end
-	
+
 	--BUFFS GO HERE
 
 	return res
@@ -111,7 +117,7 @@ function playerMeta:getFlatBulletRes()
 			res = res + v.fbr
 		end
 	end
-	
+
 	--BUFFS GO HERE
 
 	return res
@@ -135,7 +141,7 @@ function playerMeta:getPercentageAnomalyRes()
 			res = res * (1 - v.ar)
 		end
 	end
-	
+
 	--BUFFS GO HERE
 
 	return res
@@ -159,7 +165,7 @@ function playerMeta:getFlatAnomalyRes()
 			res = res + v.far
 		end
 	end
-	
+
 	--BUFFS GO HERE
 
 	return res
@@ -239,7 +245,39 @@ function playerMeta:ReevaluateOverlay()
 	end
 end
 
+function playerMeta:ReevaluateGasmaskDSP()
+    if self:getEquippedGasmask() then
+        self:SetDSP(31)
+    end
+end
+
+function playerMeta:ApplyDSPGasmask()
+    self:SetDSP(31)
+end
+
+function playerMeta:UnApplyDSPGasmask()
+    self:SetDSP(1)
+end
+
+function PLUGIN:EntityEmitSound(sndTable)
+    local client = sndTable.Entity
+    if (client and IsValid(client) and client:IsPlayer() and client:GetCharacter()) then
+        local gasmaskequip = client:getEquippedGasmask()
+
+        if gasmaskequip then
+            local sndName = sndTable.SoundName:lower()
+
+            if (sndName:find("male") or sndName:find("voice")) then
+                sndTable.DSP = 15
+            end
+
+            return true
+        end
+    end
+end
+
 function PLUGIN:PostPlayerLoadout(client)
 	client:RecalculateResistances()
 	client:ReevaluateOverlay()
+	client:ReevaluateGasmaskDSP()
 end

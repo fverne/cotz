@@ -560,6 +560,7 @@ do
 
   tempJob = nil
 
+--[[
   local tempJob = {}
 
   tempJob.name = "Hand over %d LCD Panel."
@@ -595,6 +596,7 @@ do
   ix.jobs.register(tempJob, "ItemJob2_value_pcpart_lcd")
 
   tempJob = nil
+  ]]--
 
   local tempJob = {}
 
@@ -1220,7 +1222,7 @@ do
 
   ix.jobs.register(tempJob, "ItemJob2_value_lubricant")
 
-  tempJob = nil  
+  tempJob = nil
 
 -----------------------------------------------------
 -----------------------------------------------------

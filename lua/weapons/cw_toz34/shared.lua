@@ -15,7 +15,7 @@ if CLIENT then
 	SWEP.NoShells = true
 		
 	SWEP.IronsightPos = Vector(-1.986, -3.319, 2.009)
-	SWEP.IronsightAng = Vector(0, 0, 0)
+	SWEP.IronsightAng = Vector(0, 0.008, 0)
 	
 	SWEP.SprintPos = Vector(0.256, 0.01, 1.2)
 	SWEP.SprintAng = Vector(-17.778, 0, 0)

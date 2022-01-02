@@ -23,14 +23,14 @@ sound.Add({	name		= "V92_Uni_Holster",
 })
 
 
-SWEP.PrintName			= "Bear Detector"			
+SWEP.PrintName			= "Bear Detector"
 SWEP.Slot				= 4
 SWEP.SlotPos			= 1
 SWEP.Category = "S.T.A.L.K.E.R. Detector Sweps"
 SWEP.Author	= "Subleader and AirBlack"
 SWEP.Contact = ""
 SWEP.Purpose = ""
-SWEP.Instructions = "Right click for throw a bolt."	
+SWEP.Instructions = "Right click for throw a bolt."
 SWEP.Base	= "base_sweps_detector"
 SWEP.HoldType = "pistol"
 SWEP.ViewModelFOV = 70
@@ -52,7 +52,7 @@ SWEP.Primary.Delay				= 0
 SWEP.Primary.Recoil				= 0
 SWEP.Primary.Damage				= 0
 SWEP.Primary.NumShots			= 0
-SWEP.Primary.Cone				= 0	
+SWEP.Primary.Cone				= 0
 SWEP.Primary.ClipSize			= -1
 SWEP.Primary.DefaultClip		= -1
 SWEP.Primary.Automatic   		= false
@@ -99,26 +99,26 @@ SWEP.VElements = {
 function SWEP:PrimaryAttack()
 	if (self.UseDel < CurTime() and self:Ammo1() > 0) then
 		self.UseDel = CurTime() + 3
-		self.Owner:DoAttackEvent( )	
+		self.Owner:DoAttackEvent( )
 		self.Weapon:SendWeaponAnim(ACT_VM_PULLPIN)
 		self.Owner:ViewPunch( Angle( 10, -10, 0 ) )
 		if (SERVER) then
 			timer.Simple( 0.9, function()
 				self:EmitSound( Sound("weapons/slam/throw.wav", 100, 100 ) )
-				local bolt = ents.Create( "ent_stalker_bolt" )	
+				local bolt = ents.Create( "ent_stalker_bolt" )
 				bolt:SetPos(self.Owner:GetShootPos() + self.Owner:GetAimVector() * 10)
 				bolt:SetAngles(self.Owner:EyeAngles())
 				bolt:Spawn()
 				bolt:SetOwner( self.Owner )
 				bolt:Fire("kill", "", 12)
 				bolt:GetPhysicsObject():ApplyForceCenter( self.Owner:GetVelocity() + self.Owner:GetAimVector() * 5000)
-				bolt:GetPhysicsObject():AddAngleVelocity(Vector(math.random(-500,500),math.random(-500,500),math.random(-500,500)))		
+				bolt:GetPhysicsObject():AddAngleVelocity(Vector(math.random(-500,500),math.random(-500,500),math.random(-500,500)))
 				bolt:GetPhysicsObject():SetMass(1)
 			end)
 			if GetConVarNumber("vnt_stalker_bolt_ammo") != 0 then	self:TakePrimaryAmmo(1)	end
 		end
 		timer.Simple( 0.75, function()
-		self.Weapon:SendWeaponAnim(ACT_VM_DRAW)	
+		self.Weapon:SendWeaponAnim(ACT_VM_DRAW)
 		end)
 	end
 end
@@ -132,33 +132,61 @@ function SWEP:SecondaryAttack()
 		if (SERVER) then
 			timer.Simple( 0.9, function()
 				self:EmitSound( Sound("weapons/slam/throw.wav", 100, 100 ) )
-				local bolt = ents.Create( "ent_stalker_bolt" )	
+				local bolt = ents.Create( "ent_stalker_bolt" )
 				bolt:SetPos(self.Owner:GetShootPos() + self.Owner:GetAimVector() * 10)
 				bolt:SetAngles(self.Owner:EyeAngles())
 				bolt:Spawn()
 				bolt:SetOwner( self.Owner )
 				bolt:Fire("kill", "", 12)
 				bolt:GetPhysicsObject():ApplyForceCenter( self.Owner:GetVelocity() + self.Owner:GetAimVector() * 2500)
-				bolt:GetPhysicsObject():AddAngleVelocity(Vector(math.random(-500,500),math.random(-500,500),math.random(-500,500)))		
+				bolt:GetPhysicsObject():AddAngleVelocity(Vector(math.random(-500,500),math.random(-500,500),math.random(-500,500)))
 				bolt:GetPhysicsObject():SetMass(1)
 			end)
 			if GetConVarNumber("vnt_stalker_bolt_ammo") != 0 then
 				self:TakePrimaryAmmo(1)
 			end
 		end
-		timer.Simple( 0.75, function()	
+		timer.Simple( 0.75, function()
 		self.Weapon:SendWeaponAnim(ACT_VM_DRAW)
 		end)
 	end
 end
 
 function SWEP:Deploy()
-	timer.Simple( 0.75, function()	
+	timer.Simple( 0.75, function()
 	end)
 	return true
 end
 
 local anomalies = {}
+
+anomalies["models/nasca/etherealsrp_artifacts/urchin.mdl"] = true -- Urchin
+anomalies["models/lostsignalproject/items/artefacts/needles.mdl"] = true -- Thorn
+anomalies["models/lostsignalproject/items/artefacts/electra_flash.mdl"] = true -- Sparkler
+anomalies["models/lostsignalproject/items/artefacts/slug.mdl"] = true -- Slug
+anomalies["models/lostsignalproject/items/artefacts/sparkler.mdl"] = true -- Slime
+anomalies["models/lostsignalproject/items/artefacts/kislushka.mdl"] = true -- Mycelia
+anomalies["models/lostsignalproject/items/artefacts/moonlight.mdl"] = true -- Moonlight
+anomalies["models/lostsignalproject/items/artefacts/mica.mdl"] = true -- Mica
+anomalies["models/Gibs/HGIBS.mdl"] = true -- Memento Mori
+anomalies["models/lostsignalproject/items/artefacts/glassbeads.mdl"] = true -- Mama's Beads
+anomalies["models/lostsignalproject/items/artefacts/kolobok.mdl"] = true -- Kolobok
+anomalies["models/lostsignalproject/items/artefacts/ring.mdl"] = true -- Halo
+anomalies["models/lostsignalproject/items/artefacts/chelust.mdl"] = true -- Grandmama's Beads
+anomalies["models/artefacts/atom.mdl"] = true -- Galaxy
+anomalies["models/lostsignalproject/items/artefacts/glass.mdl"] = true -- Flash
+anomalies["models/lostsignalproject/items/artefacts/flame.mdl"] = true -- Flame
+anomalies["models/lostsignalproject/items/artefacts/eye.mdl"] = true -- Eye
+anomalies["models/lostsignalproject/items/artefacts/atom.mdl"] = true -- Dwarf Galaxy
+anomalies["models/lostsignalproject/items/artefacts/drop.mdl"] = true -- Droplet
+anomalies["models/lostsignalproject/items/artefacts/crystal.mdl"] = true -- Crystal
+anomalies["models/artefacts/full_empty.mdl"] = true -- Capacitor
+anomalies["models/lostsignalproject/items/artefacts/cocoon.mdl"] = true -- Bone Cluster
+anomalies["models/artefacts/empty.mdl"] = true -- Blown Capacitor
+anomalies["models/nasca/etherealsrp_artifacts/battery.mdl"] = true -- Battery
+anomalies["models/lostsignalproject/items/artefacts/black_angel.mdl"] = true -- Arachno
+
+--[[
 anomalies["models/nasca/etherealsrp_artifacts/battery.mdl"] = true
 anomalies["models/nasca/etherealsrp_artifacts/wrenched.mdl"] = true
 anomalies["models/nasca/etherealsrp_artifacts/crystal_thorn.mdl"] = true
@@ -190,10 +218,11 @@ anomalies["models/nasca/etherealsrp_artifacts/kolobok.mdl"] = true
 anomalies["models/nasca/etherealsrp_artifacts/mica.mdl"] = true
 anomalies["models/nasca/etherealsrp_artifacts/snowflake.mdl"] = true
 anomalies["models/nasca/etherealsrp_artifacts/urchin.mdl"] = true
+]]--
 
 if CLIENT then
-	local matScreen = Material("models/kali/miscstuff/stalker/detectors/detector_bear_c"); // Текстура, которую ищем
-	local RTTexture = GetRenderTarget("DTC_BEAR", 512, 512); // Любое название
+	local matScreen = Material("models/kali/miscstuff/stalker/detectors/detector_bear_c"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+	local RTTexture = GetRenderTarget("DTC_BEAR", 512, 512); // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 	local dot = surface.GetTextureID("models/kali/miscstuff/stalker/detectors/detector_bear_segment_copy");
 	local bg = surface.GetTextureID("models/kali/miscstuff/stalker/detectors/detector_bear_copy");
@@ -206,7 +235,7 @@ if CLIENT then
 		local ply = LocalPlayer();
 
 		matScreen:SetTexture( "$basetexture", NewRT);
-	
+
 		local OldRT = render.GetRenderTarget();
 		render.SetRenderTarget(NewRT);
 		render.SetViewPort( 0, 0, 512, 512);
@@ -220,8 +249,8 @@ if CLIENT then
 			surface.DrawTexturedRect( 0, 0, 512, 512);
 
 			surface.SetTexture(dot);
-		
-		
+
+
 			local anoms = {}
 			for k,v in pairs(ents.GetAll()) do
 				if v:GetClass() == "ix_item" then
@@ -244,7 +273,7 @@ if CLIENT then
 				surface.SetDrawColor(255, 255, 255, 255)
 				pos:Rotate(Angle(0, -1*ang.Yaw, 0));
 				if (math.abs(pos.z)<2000) then
-					surface.DrawTexturedRectRotated( 131, 118, 150, 150, ((pos:Angle().y % 15) / 15 < 0.5 and pos:Angle().y - (pos:Angle().y % 15) or (pos:Angle().y % 15) / 15 >= 0.5 and pos:Angle().y - (pos:Angle().y % 15)  + 15) + 30  )//Поясняю. Мы находим остаток деления угла на 15(В детекторе 24 деления. 360/24 = 15) и если остаток меньше половины 15, то из угла вычитаем остаток, а если остаток больше половины 15, то из угла вычитаем остаток и прибавляем 15. Это такой баланс. Таким образом мы получаем угол, кратный 15. Спасибо 'Black Pheonix'у за совет.
+					surface.DrawTexturedRectRotated( 131, 118, 150, 150, ((pos:Angle().y % 15) / 15 < 0.5 and pos:Angle().y - (pos:Angle().y % 15) or (pos:Angle().y % 15) / 15 >= 0.5 and pos:Angle().y - (pos:Angle().y % 15)  + 15) + 30  )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ 15(пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 24 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. 360/24 = 15) пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 15, пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 15, пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 15. пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 15. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 'Black Pheonix'пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 				end
 			end
 

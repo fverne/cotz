@@ -43,13 +43,95 @@ function PANEL:Init()
 end
 
 function PANEL:OnMousePressed(code)
-	if (code == MOUSE_LEFT and self:IsDraggable()) then
-		self:MouseCapture(true)
-		self:DragMousePress(code)
+  if (code == MOUSE_MIDDLE) then
+    self:DoMiddleClick()
+	elseif (code == MOUSE_LEFT and self:IsDraggable()) then
+		if (!input.IsShiftDown()) then
+			self:MouseCapture(true)
+			self:DragMousePress(code)
 
-		self.clickX, self.clickY = input.GetCursorPos()
+			self.clickX, self.clickY = input.GetCursorPos()
+		else
+			local itemTable = self.itemTable
+			local inventory = ix.item.inventories[self.inventoryID]
+
+			if (itemTable and inventory) then
+				hook.Run("ItemPressedLeftShift", self, itemTable, inventory)
+			end
+		end
 	elseif (code == MOUSE_RIGHT and self.DoRightClick) then
-		self:DoRightClick()
+		if (!input.IsShiftDown()) then
+			self:DoRightClick()
+		else
+			self:DoRightShiftClick() -- quick use items
+		end
+	end
+end
+
+function PANEL:DoRightShiftClick()
+	if (self.nextClickTime or 0) > CurTime() then return end
+	self.nextClickTime = CurTime() + 0.5
+
+	local itemTable = self.itemTable
+	local invID = self.inventoryID
+	local inventory = ix.item.inventories[invID]
+
+	if (itemTable and inventory) then
+		itemTable.player = LocalPlayer()
+
+		local info, action = hook.Run("ItemPressedRightShift", self, itemTable, inventory)
+
+		if !(info and action) then
+			if (itemTable:GetData("equip")) then
+				info = itemTable.functions.EquipUn
+				action = "EquipUn"
+			else
+				info = itemTable.functions.Equip
+				action = "Equip"
+			end
+		end
+
+		if (info and info.OnCanRun and info.OnCanRun(itemTable) != false) then
+			net.Start("ixInventoryAction")
+				net.WriteString(action)
+				net.WriteUInt(itemTable.id, 32)
+				net.WriteUInt(invID, 32)
+				net.WriteTable({})
+			net.SendToServer()
+		end
+
+		itemTable.player = nil
+	end
+end
+
+function PANEL:DoMiddleClick()
+	if (self.nextMiddleClickTime or 0) > CurTime() then return end
+	self.nextMiddleClickTime = CurTime() + 0.5
+
+	local itemTable = self.itemTable
+	local invID = self.inventoryID
+	local inventory = ix.item.inventories[invID]
+
+	if (itemTable and inventory) then
+		itemTable.player = LocalPlayer()
+
+		local info, action = hook.Run("ItemPressedMiddle", self, itemTable, inventory)
+
+		if !(info and action) then
+				info = itemTable.functions.drop
+				action = "drop"
+		end
+
+		if (info and info.OnCanRun and info.OnCanRun(itemTable) != false) then
+			net.Start("ixInventoryAction")
+				net.WriteString(action)
+				net.WriteUInt(itemTable.id, 32)
+				net.WriteUInt(invID, 32)
+				net.WriteTable({})
+			net.SendToServer()
+		end
+
+		itemTable.player = nil
 	end
 end
 

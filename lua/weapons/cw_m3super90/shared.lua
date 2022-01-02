@@ -32,8 +32,8 @@ if CLIENT then
 	
 	SWEP.SightWithRail = true
 		
-	SWEP.IronsightPos = Vector(-2.603, -3, 1.088)
-	SWEP.IronsightAng = Vector(0.026, 0.079, 0)
+	SWEP.IronsightPos = Vector(-2.596, -3.201, 1.039)
+	SWEP.IronsightAng = Vector(0.2, 0.119, 0)
 	
 	SWEP.MicroT1Pos = Vector(-2.618, 0, 0.25)
 	SWEP.MicroT1Ang = Vector(0, 0, 0)

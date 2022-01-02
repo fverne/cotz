@@ -361,7 +361,7 @@ if (SERVER) then
 		local entity = client.ixVendorAdv
 
 		local templatename = net.ReadString()
-		
+
 		if (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil)) then
 			entity:LoadTemplate(templatename)
 		end
@@ -369,9 +369,9 @@ if (SERVER) then
 
 	net.Receive("ixVendorAdvTrade", function(length, client)
 		if ((client.ixVendorAdvTry or 0) < CurTime()) then
-			client.ixVendorAdvTry = CurTime() + 0.33
+			client.ixVendorAdvTry = CurTime() + 0.5
 		else
-			return
+			return client:NotifyLocalized("vendorBuyCooldown")
 		end
 
 		local entity = client.ixVendorAdv
@@ -400,6 +400,9 @@ if (SERVER) then
 
 				for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
 					if (v.uniqueID == uniqueID and v:GetID() != 0 and ix.item.instances[v:GetID()] and v:GetID() == iteminstanceID and v:GetData("equip", false) == false) then
+						timer.Simple(0.1, function()
+						client:SelectWeapon("ix_hands")
+					  end)
 						invOkay = v:Remove()
 						found = true
 						name = L(v.name, client)
@@ -444,6 +447,7 @@ if (SERVER) then
 
 				if (!client:GetCharacter():GetInventory():Add(uniqueID)) then
 					ix.item.Spawn(uniqueID, client)
+					client:NotifyLocalized("vendorItemDropped")
 				else
 					net.Start("ixVendorAdvAddItem")
 						net.WriteString(uniqueID)

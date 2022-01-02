@@ -271,6 +271,9 @@ function ix.hud.DrawDeath()
 
 	if (owner:GetCharacter()) then
 		if (!owner:Alive()) then
+	      if (IsValid(ix.gui.menu)) then
+	            ix.gui.menu:Remove()
+            end
 			if (IsValid(ix.gui.characterMenu) and ix.gui.characterMenu:IsVisible() or !owner:GetCharacter()) then
 				return
 			end
@@ -286,5 +289,6 @@ function ix.hud.DrawDeath()
 				"Hold [E] to bleed out and respawn", w/2, (h/5) * 4, Color(220, 220, 220), 1, 1, "stalkerregularfont", 255
 			)
 		end
-	end	
+	end
 end
+

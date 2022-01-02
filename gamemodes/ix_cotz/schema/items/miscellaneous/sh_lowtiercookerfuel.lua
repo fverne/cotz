@@ -1,6 +1,6 @@
 ITEM.name = "Charcoal"
 ITEM.description = "Low tier cooking fuel."
-ITEM.longdesc = "No longer description available."
+ITEM.longdesc = "Some odorless, tasteless, clump of fine black powder that is a low tier of a cooking fuel source within the Zone. Charcoal is one of the main sources STALKERs used to cook with, though it tends to run out pretty fast after a couple uses."
 ITEM.model = "models/lostsignalproject/items/misc/charcoal.mdl"
 ITEM.width = 2
 ITEM.height = 2
@@ -64,7 +64,7 @@ ITEM.functions.split = {
     multiOptions = function(item, client)
 		local targets = {}
         local quantity = item:GetData("quantity", item.quantity)
-		
+
         for i=1,#item.splitSize-1 do
 			if quantity > item.splitSize[i] then
 				table.insert(targets, {
@@ -78,23 +78,23 @@ ITEM.functions.split = {
 	OnCanRun = function(item)
 		if item:GetData("quantity", item.quantity) == 1 then
 			return false
-		end			
-		
+		end
+
 		return (!IsValid(item.entity))
 	end,
     OnRun = function(item, data)
 		if data[1] then
 			local quantity = item:GetData("quantity", item.quantity)
 			local client = item.player
-			
+
 			client:GetCharacter():GetInventory():Add(item.uniqueID, 1, {["quantity"] = data[1]})
-			
+
 			quantity = quantity - data[1]
 
 			item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
-			
+
 			item:SetData("quantity", quantity)
-			
+
 		end
 		return false
 	end,
@@ -108,8 +108,8 @@ ITEM.functions.use = {
 	isMulti = true,
 	multiOptions = function(item, client)
 		local targets = {}
-		local char = client:GetCharacter()         
-		
+		local char = client:GetCharacter()
+
 		if (char) then
 			local inv = char:GetInventory()
 
@@ -129,13 +129,13 @@ ITEM.functions.use = {
 
 		return targets
 		end,
-	OnCanRun = function(item)				
+	OnCanRun = function(item)
 		return (!IsValid(item.entity))
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
 		if (!targetItem) then return false end
-		
+
 		if ( targetItem.cookertier and targetItem.cookertier <= item.fueltier and !targetItem:GetData("cancook", false) ) then
 			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
 			targetItem:SetData("cancook", true)

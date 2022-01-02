@@ -136,7 +136,7 @@ SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "crossbow"
-SWEP.FireModes = {"2burst", "semi"}
+SWEP.FireModes = {"2burst", "semi", "auto"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
@@ -182,3 +182,15 @@ SWEP.ReloadTime_Empty = 2.6
 SWEP.ReloadHalt = 2.3
 SWEP.ReloadHalt_Empty = 2.7
 SWEP.SnapToIdlePostReload = true
+
+function SWEP:IndividualThink()
+	
+	if self.FireMode == "2burst" then
+		self.FireDelay = 0.03333333
+		self.Recoil = 0.8
+	else
+		self.FireDelay = 0.1
+		self.Recoil = 1.6
+	end
+
+end

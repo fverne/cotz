@@ -83,10 +83,13 @@ ix.progression.Register("oldTimerKillIntro", {
 				})
 				
 				-- Spawn CookNPC
+				local pos = Vector(-6120.729492, -9750.427734, 4959.031250)
+				local ang = Angle(0,-180,0)
+				ix.util.SpawnAdvVendor("cooknpc", pos, ang)
 
 				ix.util.SpawnAdvDupe2Dupe( "progressiontest1" )
 			end,
-			RunOnce = false
+			RunOnce = true
 		},
 		[2] = {
 			OnRun = function()
@@ -123,8 +126,8 @@ ix.progression.Register("oldTimerKillIntro", {
 		},
 	},
 	progressthresholds = {
-		[1] = 25,
-		[2] = 60,
+		[1] = 2,
+		[2] = 4,
 		[3] = 120
 	}
 })
@@ -176,8 +179,23 @@ ix.progression.Register("cookMeatCollect", {
 ix.progression.Register("technutItemDelivery_Main", {
 	name = "Technut Item Collection",
 	description = "Collecting important components for Technut.",
+	keyNpc = "'Technut'",
+	defaultActive = true,
 	BuildResponse = function(self, status)
 		local dat = ix.progression.status["technutItemDelivery_Main"].complexData
+		local itemids = self:GetItemIds()
+
+		str = "Alright, here's a list of what I need:\n"
+
+		for item, amt in pairs(itemids) do
+			local tmp = 0
+			if (dat and dat[item]) then tmp = dat[item] end
+			str = str..string.format("\n%s: %d", ix.item.list[item].name, amt - tmp)
+		end
+
+		return str
+	end,
+	GetItemIds = function()
 		local itemids = {
 			["value_wirelesstrans"] = 15,
 			["value_wire_heavy"] 	= 30,
@@ -187,18 +205,12 @@ ix.progression.Register("technutItemDelivery_Main", {
 			["value_carbattery"] 	= 5,
 		}
 
-		str = "Alright, here's a list of what I need:\n"
-
-		for item, amt in pairs(itemids) do
-			string.format("%s: %d", ix.item.list[item].name, amt - complexData[item])
-		end
-
-		return str
+		return itemids
 	end,
 	progressfunctions = {
 		[1] = {
 			OnRun = function()
-				-- ??? XD
+				
 			end,
 			RunOnce = false,
 		},
@@ -207,20 +219,15 @@ ix.progression.Register("technutItemDelivery_Main", {
 		[1] = 1,
 	},
 	fnAddComplexProgression = function(dat, playername)
+		ix.progression.status["technutItemDelivery_Main"].complexData = ix.progression.status["technutItemDelivery_Main"].complexData or {}
+		ix.progression.status["technutItemDelivery_Main"].complexData[dat] = ix.progression.status["technutItemDelivery_Main"].complexData[dat] or 0
 		ix.progression.status["technutItemDelivery_Main"].complexData[dat] = ix.progression.status["technutItemDelivery_Main"].complexData[dat]+1
 	end,
 	fnGetComplexProgression = function()
-		return ix.progression.status["technutItemDelivery_Main"].complexData[dat]
+		return ix.progression.status["technutItemDelivery_Main"].complexData
 	end,
 	fnCheckComplexProgression = function()
-		local finished = {
-			["value_wirelesstrans"] = 15,
-			["value_wire_heavy"] 	= 30,
-			["value_tape_duct"] 	= 10,
-			["value_capacitors"] 	= 100,
-			["value_sparkplug"] 	= 10,
-			["value_carbattery"] 	= 5,
-		}
+		local finished = self:GetItemIds()
 
 		local isdone = true
 
@@ -230,6 +237,11 @@ ix.progression.Register("technutItemDelivery_Main", {
 
 		if isdone then
 			--Spawn STALKERNETAdmin
+
+			ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+				name = "'Technut'",
+				message = "LUTZ."
+			})
 
 			ix.progression.SetActive("technutItemDelivery_Main", false)
 		end

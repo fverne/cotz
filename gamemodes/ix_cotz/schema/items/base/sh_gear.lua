@@ -45,7 +45,7 @@ end
 
 -- Inventory drawing
 if (CLIENT) then
-	local Texture2 = Material("cotz/panels/hp1.png", "noclamp smooth") 
+	local Texture2 = Material("cotz/panels/hp1.png", "noclamp smooth")
 
 	function ITEM:PaintOver(item, w, h)
 		if (item:GetData("equip")) then
@@ -69,16 +69,16 @@ if (CLIENT) then
 		surface.DrawTexturedRectUV(5, h - 10, 38, 4.6, 0, 0, 0.2, 1)
 
 		surface.SetMaterial(Texture2)
-		if (dura >= 80) then 
+		if (dura >= 80) then
 			surface.SetDrawColor(Color(120, 255, 120, 255))
-		elseif (dura >= 60) then 
+		elseif (dura >= 60) then
 			surface.SetDrawColor(Color(180, 255, 120, 255))
-		elseif (dura >= 40) then 
+		elseif (dura >= 40) then
 			surface.SetDrawColor(Color(255, 255, 120, 255))
-		elseif (dura >= 20) then 
+		elseif (dura >= 20) then
 			surface.SetDrawColor(Color(255, 180, 120, 255))
-		elseif (dura > 0) then 
-			surface.SetDrawColor(Color(255, 120, 120, 255))	
+		elseif (dura > 0) then
+			surface.SetDrawColor(Color(255, 120, 120, 255))
 		end
 		surface.DrawTexturedRectUV(5, h - 10, math.Clamp(dura/100, 0, 1)*38, 4.6, 0, 0, math.Clamp(dura/100, 0, 1)*0.2, 1)
 	end
@@ -89,7 +89,7 @@ if (CLIENT) then
 			ballistictitle:SetText("\nBALLISTIC PROTECTION LEVELS:")
 			ballistictitle:SizeToContents()
 
-			for i = 1, #self.ballisticlevels do				
+			for i = 1, #self.ballisticlevels do
 				local ballisticdesc = tooltip:AddRowAfter("ballistictitle", "ballisticdesc")
 				ballisticdesc:SetText(self.ballisticareas[i])
 				ballisticdesc:SizeToContents()
@@ -183,7 +183,7 @@ if (CLIENT) then
 			if self.isGasmask then
 	        	ix.util.PropertyDesc2(tooltip, "Gasmask", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 	        end
-	        
+
 	        if self.isHelmet then
 	        	ix.util.PropertyDesc2(tooltip, "Helmet", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 	        end
@@ -191,7 +191,7 @@ if (CLIENT) then
 	        if (self.PopulateTooltipIndividual) then
 		      self:PopulateTooltipIndividual(tooltip)
 		    end
-		end   
+		end
 	end
 end
 
@@ -267,7 +267,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	OnRun = function(item)
 		item:RemovePart(item.player)
 
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 6, function(player) 
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 6, function(player)
 		end)
 
 		item.player:RecalculateResistances()
@@ -310,7 +310,7 @@ ITEM.functions.Equip = {
 			end
 		end
 
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 4, function(player) 
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 4, function(player)
 		end)
 
 		item:SetData("equip", true)
@@ -356,6 +356,7 @@ end
 
 function ITEM:OnEquipped()
 	if self.isGasmask == true then
+		self.player:ApplyDSPGasmask()
 		self.player:EmitSound("stalkersound/gasmask_on.ogg")
 		return
 	end
@@ -363,42 +364,43 @@ end
 
 function ITEM:OnUnequipped()
 	if self.isGasmask == true then
+		self.player:UnApplyDSPGasmask()
 		self.player:EmitSound("stalkersound/gasmask_off.ogg")
 		return
 	end
 end
 
 
-function ITEM:getBR() 
+function ITEM:getBR()
 	local res = self.br
 	local upgrades = self:GetData("upgrades", {})
-	
+
 	for k,v in pairs(upgrades) do
 		if upgrades[v].br ~= nil then
 			res = res + upgrades[v].br
 		end
 	end
-	
+
 	return res
 end
 
-function ITEM:getFBR() 
+function ITEM:getFBR()
 	local res = self.fbr
 	local upgrades = self:GetData("upgrades", {})
-	
+
 	for k,v in pairs(upgrades) do
 		if upgrades[v].fbr ~= nil then
 			res = res + upgrades[v].fbr
 		end
 	end
-	
+
 	return res
 end
 
 function ITEM:getAR()
 	local res = self.ar
 	local upgrades = self:GetData("upgrades", {})
-	
+
 	for k,v in pairs(upgrades) do
 		if v.ar ~= nil then
 			res = res + upgrades[v].ar
@@ -408,21 +410,21 @@ function ITEM:getAR()
 	return res
 end
 
-function ITEM:getFAR() 
+function ITEM:getFAR()
 	local res = self.far
 	local upgrades = self:GetData("upgrades", {})
-	
+
 	for k,v in pairs(upgrades) do
 		if upgrades[v].far ~= nil then
 			res = res + upgrades[v].far
 		end
 	end
-	
+
 	return res
 end
 
 function ITEM:pacAdjust(pacdata, client)
-	
+
 	if (client:GetModel() == "models/nasca/stalker/male_berill1.mdl") then
     	return self.pacDataBerill1
 	elseif (client:GetModel() == "models/nasca/stalker/male_expedition.mdl") then

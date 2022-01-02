@@ -1,5 +1,6 @@
 ITEM.name = "Cup of dice"
 ITEM.description = "A cup of dice"
+ITEM.longdesc = "A plastic container with a blue lid on the top that contains a total of 6 dices inside. The dices appear to have circles representing numbers on each face of an individual die. Many STALKERS tend to keep a cup of dice on them just in case they wish to entertain themselves, gamble with them or settle a dispute with a good game of dice."
 ITEM.model = "models/lostsignalproject/items/misc/jar.mdl"
 
 ITEM.width = 1
@@ -35,11 +36,11 @@ ITEM.functions.Roll = {
 				end
 			end
 		end
-		
+
 		if item:GetData("diecount", 1) > 1 then
 			resultstr = resultstr.." for a total of "..resultsum
 		end
-		
+
 		ix.chat.Send(client, "iteminternal", "rolls the dice and gets a"..resultstr.."." , false)
 		return false
 	end,
@@ -66,7 +67,7 @@ ITEM.functions.Amount = {
 
 		return targets
 	end,
-	OnCanRun = function(item)				
+	OnCanRun = function(item)
 		return (!IsValid(item.entity))
 	end,
 	OnRun = function(item, data)

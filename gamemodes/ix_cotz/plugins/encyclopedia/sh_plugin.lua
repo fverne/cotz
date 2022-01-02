@@ -1,3 +1,15 @@
+
+if (CLIENT) then
+    function PLUGIN:PlayerButtonDown(client, key)
+        if (key == KEY_F1) then -- Quick help menu
+            if (client:GetCharacter() and not hook.Run("ShouldSuppressMenu", client) and not IsValid(ix.gui.menu)) then
+							local quickhelp = vgui.Create("ixMenu")
+							quickhelp.tabs.buttons[5]:SetSelected(true)
+            end
+        end
+    end
+end
+
 function PLUGIN:PopulateHelpMenu(tabs)
 	tabs["readme"] = function(container)
 

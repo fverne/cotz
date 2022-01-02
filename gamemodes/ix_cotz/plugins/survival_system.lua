@@ -12,7 +12,7 @@ if SERVER then
 		timer.Simple(0.25, function()
 			client:SetLocalVar("hunger", character:GetData("hunger", 100))
 			client:SetLocalVar("thirst", character:GetData("thirst", 100))
-			
+
 		end)
 
 		timer.Simple(1, function()
@@ -149,7 +149,7 @@ end
 function PLUGIN:AdjustStaminaOffset(client, offset)
 	if (client:GetHunger() <= 0) or (client:GetThirst() <= 0) then
 		return offset-1.7
-	elseif (client:GetHunger() <= 30 and client:GetHunger() > 0) or (client:GetThirst() <= 30 and client:GetThirst() > 0) then 
+	elseif (client:GetHunger() <= 30 and client:GetHunger() > 0) or (client:GetThirst() <= 30 and client:GetThirst() > 0) then
 		return offset-1.3
 	elseif (client:GetHunger() <= 60 and client:GetHunger() > 30) or (client:GetThirst() <= 60 and client:GetThirst() > 30) then
 		return offset-0.9
@@ -159,17 +159,17 @@ function PLUGIN:AdjustStaminaOffset(client, offset)
 end
 
 function PLUGIN:HUDPaint()
-	local hunger = Material("vgui/hud/hunger.png", "noclamp smooth") 
-	local hunger2 = Material("vgui/hud/hunger2.png", "noclamp smooth") 
-	local hunger3 = Material("vgui/hud/hunger3.png", "noclamp smooth") 
-	local hunger4 = Material("vgui/hud/hunger4.png", "noclamp smooth") 
-	local thirst = Material("vgui/hud/thirst.png", "noclamp smooth") 
-	local thirst2 = Material("vgui/hud/thirst2.png", "noclamp smooth") 
-	local thirst3 = Material("vgui/hud/thirst3.png", "noclamp smooth") 
-	local thirst4 = Material("vgui/hud/thirst4.png", "noclamp smooth") 
+	local hunger = Material("vgui/hud/hunger.png", "noclamp smooth")
+	local hunger2 = Material("vgui/hud/hunger2.png", "noclamp smooth")
+	local hunger3 = Material("vgui/hud/hunger3.png", "noclamp smooth")
+	local hunger4 = Material("vgui/hud/hunger4.png", "noclamp smooth")
+	local thirst = Material("vgui/hud/thirst.png", "noclamp smooth")
+	local thirst2 = Material("vgui/hud/thirst2.png", "noclamp smooth")
+	local thirst3 = Material("vgui/hud/thirst3.png", "noclamp smooth")
+	local thirst4 = Material("vgui/hud/thirst4.png", "noclamp smooth")
 	local lp = LocalPlayer()
 	local char = lp:GetCharacter()
-	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible()) then return end
+	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible() or ix.option.Get("disablehud", false)) then return end
 
 	surface.SetMaterial(thirst)
 	if LocalPlayer():GetThirst() > 60 then
@@ -220,7 +220,7 @@ ix.command.Add("charsetthirst", {
 	OnRun = function(self, client, target, thirst)
 		local target = ix.util.FindPlayer(target)
 		local thirst = tonumber(thirst)
-		
+
 		if !target then
 			client:Notify("Invalid Target!")
 			return

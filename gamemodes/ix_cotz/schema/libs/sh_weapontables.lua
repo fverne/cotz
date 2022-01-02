@@ -10,7 +10,7 @@ ix.weapontables.ammotypes["7.62x54MM"] = {uID = "762x54"}
 ix.weapontables.ammotypes["5.45x39MM"] = {uID = "545x39"}
 ix.weapontables.ammotypes["5.56x45MM"] = {uID = "556x45"}
 ix.weapontables.ammotypes["5.7x28MM"] = {uID = "57x28"}
-ix.weapontables.ammotypes["14.5x144MM"] = {uID = "145x114"}
+ix.weapontables.ammotypes["14.5x114MM"] = {uID = "145x114"}
 ix.weapontables.ammotypes[".22LR"] = {uID = "22lr"}
 ix.weapontables.ammotypes[".338 Lapua"] = {uID = "338lapua"}
 ix.weapontables.ammotypes[".357 Magnum"] = {uID = "357magnum"}
@@ -60,9 +60,9 @@ ix.armortables.attachments = {} -- Artifacts, kevlar plates, mutant hides etc.
 
 -- ATTACHMENTS --
 -- EXAMPLE:
---ix.armortables.attachments["steelplate_1"] = { 
+--ix.armortables.attachments["steelplate_1"] = {
 --	name = "Well Worn Steel Plate",
---	br = 0.05, 
+--	br = 0.05,
 --	ar = -0.10,
 --	weight = 0.950,
 --	uID = "attachment_steelplate_1",
@@ -71,91 +71,91 @@ ix.armortables.attachments = {} -- Artifacts, kevlar plates, mutant hides etc.
 --	onThink  = function(player) print("Ran onThink with playername: ", player:GetName()) end,
 --}
 
-ix.armortables.attachments["steelplate_1"] = { 
+ix.armortables.attachments["steelplate_1"] = {
 	name = "Well Worn Steel Plate",
-	br = 0.05, 
+	br = 0.05,
 	ar = -0.10,
 	weight = 0.950,
 	uID = "attachment_steelplate_1",
 }
 
-ix.armortables.attachments["steelplate_2"] = { 
+ix.armortables.attachments["steelplate_2"] = {
 	name = "Steel Plate",
-	br = 0.09, 
+	br = 0.09,
 	ar = -0.10,
 	weight = 1.150,
 	uID = "attachment_steelplate_2",
 }
 
-ix.armortables.attachments["steelplate_3"] = { 
+ix.armortables.attachments["steelplate_3"] = {
 	name = "Galvanized Steel Plate",
-	br = 0.13, 
+	br = 0.13,
 	ar = -0.10,
 	weight = 1.550,
 	uID = "attachment_steelplate_3",
 }
 
-ix.armortables.attachments["steelplate_4"] = { 
+ix.armortables.attachments["steelplate_4"] = {
 	name = "Anomalous Steel Plate",
-	br = 0.17, 
+	br = 0.17,
 	ar = -0.10,
 	weight = 1.950,
 	uID = "attachment_steelplate_4",
 }
 
-ix.armortables.attachments["kevlar_1"] = { 
+ix.armortables.attachments["kevlar_1"] = {
 	name = "Kevlar K119 Plates",
-	br = 0.02, 
+	br = 0.02,
 	ar = 0.05,
 	weight = 0.550,
 	uID = "attachment_kevlar_1",
 }
 
-ix.armortables.attachments["kevlar_2"] = { 
+ix.armortables.attachments["kevlar_2"] = {
 	name = "Kevlar K29 Plates",
-	br = 0.07, 
+	br = 0.07,
 	ar = 0.10,
 	weight = 0.650,
 	uID = "attachment_kevlar_2",
 }
 
-ix.armortables.attachments["carbonfibre"] = { 
+ix.armortables.attachments["carbonfibre"] = {
 	name = "Carbon Fibre Layers",
-	br = 0.01, 
+	br = 0.01,
 	ar = 0.15,
 	weight = 0.200,
 	uID = "attachment_carbonfibre",
 }
 
-ix.armortables.attachments["ceramicplate_1"] = { 
+ix.armortables.attachments["ceramicplate_1"] = {
 	name = "Old Ceramic Plate",
 	br = 0.03,
 	weight = 1.400,
 	uID = "attachment_ceramicplate_1",
 }
 
-ix.armortables.attachments["ceramicplate_2"] = { 
+ix.armortables.attachments["ceramicplate_2"] = {
 	name = "Ceramic Plate",
-	br = 0.06, 
+	br = 0.06,
 	weight = 1.250,
 	uID = "attachment_ceramicplate_2",
 }
 
-ix.armortables.attachments["ceramicplate_3"] = { 
+ix.armortables.attachments["ceramicplate_3"] = {
 	name = "Modern Ceramic Plate",
-	br = 0.09, 
+	br = 0.09,
 	weight = 1.650,
 	uID = "attachment_ceramicplate_3",
 }
 
-ix.armortables.attachments["ceramicplate_4"] = { 
+ix.armortables.attachments["ceramicplate_4"] = {
 	name = "Glowing Ceramic Plate",
-	br = 0.13, 
+	br = 0.13,
 	weight = 2.650,
 	uID = "attachment_ceramicplate_4",
 }
 
-ix.armortables.attachments["steelframe"] = { 
+ix.armortables.attachments["steelframe"] = {
 	name = "Steel Frame",
 	weight = 2.500,
 	ar = -0.30,
@@ -174,122 +174,122 @@ ix.armortables.attachments["steelframe"] = {
 	end,
 }
 
-ix.armortables.attachments["fabric_1"] = { 
-	name = "Insulating Fabrics", 
+ix.armortables.attachments["fabric_1"] = {
+	name = "Insulating Fabrics",
 	ar = 0.10,
 	weight = 1.200,
 	uID = "attachment_fabric_1",
 }
 
-ix.armortables.attachments["fabric_2"] = { 
+ix.armortables.attachments["fabric_2"] = {
 	name = "Thick Insulating Fabrics",
-	br = 0.02, 
+	br = 0.02,
 	ar = 0.20,
 	weight = 3.400,
 	uID = "attachment_fabric_2",
 }
 
 -- HIDES --
-ix.armortables.attachments["hide_blinddog"] = { 
+ix.armortables.attachments["hide_blinddog"] = {
 	name = "Blind Dog Hide",
-	br = 0.01, 
+	br = 0.01,
 	ar = 0.07,
 	weight = 1.100,
 	uID = "hide_blinddog",
 }
 
-ix.armortables.attachments["hide_tushkano"] = { 
+ix.armortables.attachments["hide_tushkano"] = {
 	name = "Tushkano Hide",
-	br = 0.02, 
+	br = 0.02,
 	ar = 0.04,
 	weight = 0.700,
 	uID = "hide_tushkano",
 }
 
-ix.armortables.attachments["hide_pseudodog"] = { 
+ix.armortables.attachments["hide_pseudodog"] = {
 	name = "Pseudodog Hide",
-	br = 0.06, 
+	br = 0.06,
 	ar = 0.11,
 	weight = 1.650,
 	uID = "hide_pseudodog",
 }
 
-ix.armortables.attachments["hide_bloodsucker"] = { 
+ix.armortables.attachments["hide_bloodsucker"] = {
 	name = "Bloodsucker Hide",
-	br = 0.11, 
+	br = 0.11,
 	ar = 0.03,
 	weight = 1.800,
 	uID = "hide_bloodsucker",
 }
 
-ix.armortables.attachments["hide_boar"] = { 
+ix.armortables.attachments["hide_boar"] = {
 	name = "Boar Hide",
-	br = 0.08, 
+	br = 0.08,
 	ar = 0.02,
 	weight = 2.500,
 	uID = "hide_boar",
 }
 
-ix.armortables.attachments["hide_burer"] = { 
+ix.armortables.attachments["hide_burer"] = {
 	name = "Burer Scalp",
-	br = 0.10, 
+	br = 0.10,
 	weight = 3.000,
 	uID = "hide_burer",
 	onAttach = function(player) --[[add 15psyprot]] end,
 	onDetach = function(player) --[[remove 15psyprot]] end,
 }
 
-ix.armortables.attachments["hide_cat"] = { 
+ix.armortables.attachments["hide_cat"] = {
 	name = "Cat Hide",
-	br = 0.08, 
+	br = 0.08,
 	ar = 0.09,
 	weight = 1.250,
 	uID = "hide_cat",
 }
 
-ix.armortables.attachments["hide_chimera"] = { 
+ix.armortables.attachments["hide_chimera"] = {
 	name = "Chimera Hide",
-	br = 0.15, 
+	br = 0.15,
 	ar = 0.12,
 	weight = 2.150,
 	uID = "hide_chimera",
 }
 
-ix.armortables.attachments["hide_sprig"] = { 
+ix.armortables.attachments["hide_sprig"] = {
 	name = "Sprig Leg",
 	weight = 0.500,
 	uID = "hide_sprig",
 }
 
-ix.armortables.attachments["hide_flesh"] = { 
+ix.armortables.attachments["hide_flesh"] = {
 	name = "Flesh Hide",
-	br = 0.07, 
+	br = 0.07,
 	ar = 0.01,
 	weight = 1.800,
 	uID = "hide_flesh",
 }
 
-ix.armortables.attachments["hide_controller"] = { 
+ix.armortables.attachments["hide_controller"] = {
 	name = "Controller Scalp",
-	br = 0.12, 
+	br = 0.12,
 	weight = 3.500,
 	uID = "hide_controller",
 	onAttach = function(player) --[[add 35psyprot]] end,
 	onDetach = function(player) --[[remove 35psyprot]] end,
 }
 
-ix.armortables.attachments["hide_swampcontroller"] = { 
+ix.armortables.attachments["hide_swampcontroller"] = {
 	name = "Swampcontroller Scalp",
-	br = 0.05, 
+	br = 0.05,
 	weight = 3.000,
 	uID = "hide_swampcontroller",
 	onAttach = function(player) --[[add 10psyprot]] end,
 	onDetach = function(player) --[[remove 10psyprot]] end,
 }
 
-ix.armortables.attachments["hide_pseudogiant"] = { 
+ix.armortables.attachments["hide_pseudogiant"] = {
 	name = "Pseudogiant Hide",
-	br = 0.30, 
+	br = 0.30,
 	ar = 0.30,
 	weight = 5.550,
 	uID = "hide_pseudogiant",
@@ -297,18 +297,18 @@ ix.armortables.attachments["hide_pseudogiant"] = {
 
 
 -- ARMOR UPGRADES --
-ix.armortables.upgrades = {} 
-ix.armortables.upgrades["integratedceramics"] = { 
+ix.armortables.upgrades = {}
+ix.armortables.upgrades["integratedceramics"] = {
 	name = "Integrated Ceramic Plates",
 	description = "Better bullet resistance at the cost of anomaly resistance",
-	br = 0.03, 
+	br = 0.03,
 	ar = -0.03,
 	weight = 0.500,
 }
-ix.armortables.upgrades["lightercomponents"] = { 
+ix.armortables.upgrades["lightercomponents"] = {
 	name = "Lighter Components",
 	description = "Lighter, but less effective internals",
-	br = -0.02, 
+	br = -0.02,
 	ar = -0.02,
 	weight = -1.500,
 }
