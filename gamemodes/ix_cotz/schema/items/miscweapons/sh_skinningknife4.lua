@@ -1,12 +1,12 @@
-ITEM.name = "knife2"
-ITEM.description = "X"
-ITEM.model = "models/weapons/tfa_nmrih/w_me_bat_metal.mdl"
+ITEM.name = "Combat Knife (unused)"
+ITEM.description = "(needs proper world model)"
+ITEM.model = "models/weapons/arccw_go/v_knife_bayonet.mdl"
 ITEM.longdesc = "X"
 ITEM.category = "Melee"
 
-ITEM.price = 450
+ITEM.price = 5550
 ITEM.height = 1
-ITEM.width = 3
+ITEM.width = 2
 
 ITEM.class = "tfa_nmrih_combatknife"
 ITEM.weaponCategory = "secondary"
@@ -14,6 +14,11 @@ ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.weight = 0.950
+
+ITEM.meattickets = 0
+ITEM.parttickets = 0
+ITEM.knifetier = 4
+ITEM.isPoachKnife = true
 
 ITEM.exRender = true
 ITEM.iconCam = {

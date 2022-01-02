@@ -1,19 +1,24 @@
-ITEM.name = "knife3"
-ITEM.description = "X"
-ITEM.model = "models/weapons/tfa_nmrih/w_me_bat_metal.mdl"
-ITEM.longdesc = "X"
-ITEM.category = "Melee"
+ITEM.name = "Old Knife"
+ITEM.description = "An old knife."
+ITEM.model = "models/splatolivia/knife/knife.mdl"
+ITEM.longdesc = "This old knife is in quite bad shape. The handle is rotten, and the knife rattles when you shake it."
+ITEM.category = "Knife"
 
-ITEM.price = 450
+ITEM.price = 1250
 ITEM.height = 1
-ITEM.width = 3
+ITEM.width = 2
 
-ITEM.class = "tfa_nmrih_shankknife"
+ITEM.class = "tfa_nmrih_oldknife"
 ITEM.weaponCategory = "secondary"
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.weight = 0.950
+
+ITEM.meattickets = 0
+ITEM.parttickets = 0
+ITEM.knifetier = 1
+ITEM.isPoachKnife = true
 
 ITEM.exRender = true
 ITEM.iconCam = {

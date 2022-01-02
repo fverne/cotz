@@ -1,19 +1,24 @@
-ITEM.name = "knife4"
-ITEM.description = "X"
-ITEM.model = "models/weapons/tfa_nmrih/w_me_bat_metal.mdl"
-ITEM.longdesc = "X"
+ITEM.name = "Improvised Knife"
+ITEM.description = "A Homemade Knife"
+ITEM.model = "models/bf4_sweps/w_knife_shank.mdl"
+ITEM.longdesc = "The knife seems to be in poor condition, and doesn't offer much in terms of cutting capabilites, but one of the sides have been sharpened slightly to compensate."
 ITEM.category = "Melee"
 
 ITEM.price = 450
 ITEM.height = 1
-ITEM.width = 3
+ITEM.width = 2
 
-ITEM.class = "tfa_nmrih_survivalknife"
+ITEM.class = "tfa_nmrih_shankknife"
 ITEM.weaponCategory = "secondary"
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.weight = 0.950
+
+ITEM.meattickets = 0
+ITEM.parttickets = 0
+ITEM.knifetier = 0
+ITEM.isPoachKnife = true
 
 ITEM.exRender = true
 ITEM.iconCam = {

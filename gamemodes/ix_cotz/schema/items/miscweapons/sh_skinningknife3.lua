@@ -1,19 +1,24 @@
-ITEM.name = "knife1"
-ITEM.description = "X"
-ITEM.model = "models/weapons/tfa_nmrih/w_me_bat_metal.mdl"
-ITEM.longdesc = "X"
+ITEM.name = "Survival Knife"
+ITEM.description = "A survival knife with a plastic handle."
+ITEM.model = "models/bf4_sweps/w_knife_dive.mdl"
+ITEM.longdesc = "This knife offers better poaching capabilities than most other knives, as it's meant for survival but lacks effect when used in combat."
 ITEM.category = "Melee"
 
-ITEM.price = 450
+ITEM.price = 2950
 ITEM.height = 1
-ITEM.width = 3
+ITEM.width = 2
 
-ITEM.class = "tfa_nmrih_oldknife"
+ITEM.class = "tfa_nmrih_survivalknife"
 ITEM.weaponCategory = "secondary"
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.weight = 0.950
+
+ITEM.meattickets = 0
+ITEM.parttickets = 0
+ITEM.knifetier = 3
+ITEM.isPoachKnife = true
 
 ITEM.exRender = true
 ITEM.iconCam = {
