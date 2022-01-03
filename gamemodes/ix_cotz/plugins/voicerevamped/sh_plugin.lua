@@ -253,6 +253,7 @@ end)
 hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
     if ply == LocalPlayer() and GetViewEntity() == LocalPlayer() and (GetConVar('thirdperson') and GetConVar('thirdperson'):GetInt() ~= 0) then return end
     if not ply:Alive() then return end
+    if (IsValid(ix.gui.menu)) then return end
     if not ply:IsSpeaking() then return end
     local voice_mat = ixVoice.Ranges[ply:GetLocalVar("voiceRange") or 2].icon
   --  print(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].icon)
