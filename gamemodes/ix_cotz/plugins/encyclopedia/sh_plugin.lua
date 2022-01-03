@@ -3,8 +3,13 @@ if (CLIENT) then
         -- Quick help menu
         if (key == KEY_F1) then
             if (client:GetCharacter() and not hook.Run("ShouldSuppressMenu", client) and not IsValid(ix.gui.menu)) then
-                local quickhelp = vgui.Create("ixMenu")
-                quickhelp.tabs.buttons[4]:SetSelected(true)
+                if client:IsSuperAdmin() then
+                    local quickhelp = vgui.Create("ixMenu")
+                    quickhelp.tabs.buttons[5]:SetSelected(true)
+                elseif not client:IsSuperAdmin() then
+                    local quickhelp = vgui.Create("ixMenu")
+                    quickhelp.tabs.buttons[3]:SetSelected(true)
+                end
             end
         end
     end
