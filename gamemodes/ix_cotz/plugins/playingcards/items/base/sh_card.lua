@@ -7,6 +7,7 @@ ITEM.price = 0
 ITEM.description = ""
 ITEM.longdesc = ""
 ITEM.category = "Cards"
+ITEM.isCard = true
 
 function ITEM:GetDescription()
     local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
