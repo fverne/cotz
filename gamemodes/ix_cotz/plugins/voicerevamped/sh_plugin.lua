@@ -263,6 +263,7 @@ hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
     end
 end)
 
+--[[
 if (CLIENT) then
     concommand.Add("printvoicemode", function()
         print(LocalPlayer():GetLocalVar("voiceRange"))
@@ -280,3 +281,4 @@ concommand.Add("setranges", function(ply, cmd, args)
         v:SetLocalVar("voiceRange", tonumber(args[1]))
     end
 end)
+]]--
