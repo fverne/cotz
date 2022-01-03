@@ -226,14 +226,28 @@ end
 hook.Add("HUDPaint", "ixVoiceModeDisplay", function()
     local w, h = 45, 42
     if (not LocalPlayer():IsSpeaking() and not ix.option.Get("permvoicehud", false)) then return end
-    surface.SetMaterial(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].icon)
-    surface.SetDrawColor(255, 255, 255, 80)
-    surface.DrawTexturedRect(5, ScrH() / 20 - h - 5, w, h)
-    surface.SetTextColor(255, 255, 255, 80)
-    surface.SetFont("stalkerregularfont2")
-    local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
-    surface.SetTextPos(15 + w, ScrH() / 20 - 5 - h / 2 - th / 2)
-    surface.DrawText(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+
+    if (LocalPlayer():IsSpeaking()) then
+        surface.SetMaterial(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].icon)
+        surface.SetDrawColor(255, 255, 255, 255)
+        surface.DrawTexturedRect(5, ScrH() / 20 - h - 5, w, h)
+        surface.SetTextColor(255, 255, 255, 255)
+        surface.SetFont("stalkerregularfont2")
+        local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+        surface.SetTextPos(15 + w, ScrH() / 20 - 5 - h / 2 - th / 2)
+        surface.DrawText(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+    else
+        if (not LocalPlayer():IsSpeaking()) then
+            surface.SetMaterial(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].icon)
+            surface.SetDrawColor(255, 255, 255, 80)
+            surface.DrawTexturedRect(5, ScrH() / 20 - h - 5, w, h)
+            surface.SetTextColor(255, 255, 255, 80)
+            surface.SetFont("stalkerregularfont2")
+            local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+            surface.SetTextPos(15 + w, ScrH() / 20 - 5 - h / 2 - th / 2)
+            surface.DrawText(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+        end
+    end
 end)
 
 hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
