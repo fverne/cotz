@@ -81,7 +81,7 @@ if (CLIENT) then
 				local selectedOffset = i == self.index and 15 or 5
 
 				ix.util.DrawText(weaponName, /*ScrW() - (tx) - 10 - +*/ selectedOffset, ScrH()/3 + (ty * 1.5 * i), color, 0, 1, "ixWeaponSelectFont")
-				
+
 			end
 
 			if (self.fadeTime < CurTime() and self.alpha > 0) then
@@ -98,6 +98,7 @@ if (CLIENT) then
 		local source, pitch = hook.Run("WeaponCycleSound")
 		LocalPlayer():EmitSound(source or "common/talk.wav", 50, pitch or 180)
 	end
+
 
 	function PLUGIN:PlayerBindPress(client, bind, pressed)
 		bind = bind:lower()
@@ -162,12 +163,13 @@ if (CLIENT) then
 
 			return true
 		elseif (bind:find("attack") and !(self.alpha > 0)) then --If M1/M2 is pressed but wepselection isn't active; then we want to raise our weapon!
-			if(!client:IsWepRaised() and client:GetActiveWeapon():GetClass() != "ix_hands")then
+		if (!client:Alive()) then return end
+			 elseif (!client:IsWepRaised() and client:GetActiveWeapon():GetClass() != "ix_hands" and !client:Alive()) then
 				net.Start("ixRequestWeaponRaise")
 				net.SendToServer()
 			end
 		end
-	end
+
 
 	function PLUGIN:Think()
 		local client = LocalPlayer()
