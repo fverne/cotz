@@ -13,6 +13,14 @@ surface.CreateFont("stalkermainmenufont", {
 	antialias = true
 })
 
+surface.CreateFont("stalkerregulartipfont", {
+	font = "alsina",
+	size = ScreenScale(5),
+	extended = true,
+	weight = 500,
+	antialias = true
+})
+
 surface.CreateFont("stalkerregularsmallfont", {
 	font = "alsina",
 	size = ScreenScale(6),
@@ -34,6 +42,14 @@ surface.CreateFont("stalkerregularinvfont", {
 	size = 16,
 	extended = true,
 	weight = 1,
+	antialias = true
+})
+
+surface.CreateFont("stalkerregularfontcategory", {
+	font = "alsina",
+	size = ScreenScale(7),
+	extended = true,
+	weight = 500,
 	antialias = true
 })
 
