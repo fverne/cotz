@@ -3,6 +3,8 @@ PLUGIN.name = "Stormfox Compatibility"
 PLUGIN.author = "verne"
 PLUGIN.description = "Adds basic stormfox functionality for the server."
 
+if not StormFox then return end
+
 if (SERVER) then
 	hook.Add("StormFox - NewWeather", "IXSF_AVOIDCLOUDY", function(weather,old_weather)
 		if weather == "clear" then
