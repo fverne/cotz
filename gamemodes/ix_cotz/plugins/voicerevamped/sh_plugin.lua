@@ -256,8 +256,6 @@ hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
     if (IsValid(ix.gui.menu)) then return end
     if not ply:IsSpeaking() then return end
     local voice_mat = ixVoice.Ranges[ply:GetLocalVar("voiceRange") or 2].icon
-  --  print(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].icon)
-    --	print(ply)
     local pos = ply:GetPos() + Vector(0, 0, ply:GetModelRadius() + 15)
     local attachment = ply:GetAttachment(ply:LookupAttachment('eyes'))
 
@@ -269,7 +267,7 @@ hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
     local plyrange = ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].range
 
     if (distance <= plyrange) then
-        render.SetMaterial(voice_mat) -- ply:IsSpeaking() and
+        render.SetMaterial(ply:IsSpeaking() and voice_mat)
         local color_var = 255
         local computed_color = render.ComputeLighting(ply:GetPos(), Vector(0, 0, 1))
         local max = math.max(computed_color.x, computed_color.y, computed_color.z)
