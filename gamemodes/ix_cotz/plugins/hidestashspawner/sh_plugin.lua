@@ -21,10 +21,17 @@ if SERVER then
 		self:SetData(self.stashspawnpoints)
 	end
 
+	--[[
 	function PLUGIN:GetPointFromCategory(category)
 		if(!isstring(category)) then return end
 		self.stashspawnpoints[category] = self.stashspawnpoints[category] or {}
 		return table.Random(self.stashspawnpoints[category])
+	end
+	]]--
+
+	function PLUGIN:GetPoint()
+		self.stashspawnpoints = self.stashspawnpoints or {}
+		return table.Random(self.stashspawnpoints)
 	end
 
 else
@@ -92,17 +99,14 @@ ix.command.Add("stashspawntest", {
 ix.command.Add("stashspawneradd", {
 	superAdminOnly = true,
 	arguments = {
-		ix.type.string,
 		ix.type.text,
 	},
-	OnRun = function(self, client, category, text)
+	OnRun = function(self, client, text)
 		local trace = client:GetEyeTraceNoCursor()
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local text = text
-		local category = category or "default"
         PLUGIN.stashspawnpoints = PLUGIN.stashspawnpoints or {}
-        PLUGIN.stashspawnpoints[category] = PLUGIN.stashspawnpoints[category] or {}
-		table.insert( PLUGIN.stashspawnpoints[category], {hitpos, text} )
+		table.insert( PLUGIN.stashspawnpoints, {hitpos, text} )
 		client:Notify( "You added a hidden stash spawner." )
 	end
 })
@@ -118,12 +122,10 @@ ix.command.Add("stashspawnerremove", {
 		local range = radius or 128
 		local mt = 0
 		for k, v in pairs( PLUGIN.stashspawnpoints ) do
-			for k2, v2 in pairs(v) do
-				local distance = v2[1]:Distance( hitpos )
-				if distance <= tonumber(range) then
-					PLUGIN.stashspawnpoints[k][k2] = nil
-					mt = mt + 1
-				end
+			local distance = v[1]:Distance( hitpos )
+			if distance <= tonumber(range) then
+				PLUGIN.stashspawnpoints[k] = nil
+				mt = mt + 1
 			end
 		end
 		client:Notify( "You have removed "..mt.." stash spawners." )
@@ -137,9 +139,7 @@ ix.command.Add("stashspawnerdisplay", {
 			local data = {}
 
 			for k, v in pairs(PLUGIN.stashspawnpoints) do
-				for k1, v1 in pairs(v) do
-					table.insert(data, v1[1])
-				end
+				table.insert(data, v[1])
 			end	
 
 			netstream.Start(client, "nut_DisplayStashSpawnPoints", data)

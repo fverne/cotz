@@ -25,7 +25,7 @@ ITEM.functions.use = {
 	icon = "icon16/stalker/unlock.png",
 	OnRun = function(item)
 		local loot = table.Random(ix.plugin.list["hidestashspawner"].StashItems[item.hidestashcategory])
-		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPointFromCategory(item.hidestashcategory)
+		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPoint()
 		local stashcontent = "CONTENT: "
 
 		if !spawnpoint then
