@@ -79,7 +79,7 @@ ITEM.functions.hidestash = {
     tip = "equipTip",
     icon = "icon16/stalker/drop.png",
     OnRun = function(item)
-			local trace = client:GetEyeTraceNoCursor()
+			local trace = item.player:GetEyeTraceNoCursor()
 			local TextureBlacklist = {
 			"PLASTER/PLASTERWALL013C",
 			"PLASTER/WALLPAPER001B",
