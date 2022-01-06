@@ -145,6 +145,39 @@ ix.command.Add("setdata", {
 	end
 })
 
+ix.command.Add("CharResetValues", {
+    adminOnly = true,
+    description = "Resets the specified characters values such as hunger, thirst, psyhealth, hp, etc.",
+    arguments = {ix.type.string,},
+    OnRun = function(self, client, target)
+        local target = ix.util.FindPlayer(target)
+
+        if not target then
+            client:Notify("Invalid Target!")
+
+            return
+        end
+
+        target:SetPsyHealth(100)
+        target:SetHunger(100)
+        target:SetThirst(100)
+        target:setRadiation(0)
+        target:SetHealth(100)
+        target:SetLocalVar("stm", 100)
+
+        if client == target then
+            client:Notify("You have reset your character values")
+        else
+            client:Notify("You have reset " .. target:Name() .. "'s character values")
+            target:Notify(client:Name() .. " has reset your character values")
+        end
+
+        target:UpdatePsyHealthState(target)
+        target:UpdateHungerState(target)
+        target:UpdateThirstState(target)
+    end
+})
+
 -- Credit goes to SmithyStanley
 ix.command.Add("clearinv", {
 	description = "Removes all the items in the target characters inventory.",
