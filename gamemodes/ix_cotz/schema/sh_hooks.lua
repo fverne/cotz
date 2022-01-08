@@ -157,12 +157,15 @@ function Schema:PlayerWeaponChanged(client, weapon)
 end
 
 function Schema:PlayerSwitchWeapon(client, oldWeapon, weapon)
-	if (!IsFirstTimePredicted()) then
-		return
-	end
-	if (SERVER) then
-		client:SetNetVar("keepraised", client:IsWepRaised())
-	end
+    if (not IsFirstTimePredicted()) then return end
+
+    if (SERVER) then
+        if client:GetActiveWeapon():GetClass() == "ix_hands" then
+            client:SetWepRaised(true, weapon)
+        end
+
+        client:SetNetVar("keepraised", client:IsWepRaised())
+    end
 end
 
 -- To make sure suit attachments get their detach function run when character disconnects
