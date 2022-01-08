@@ -160,11 +160,13 @@ function Schema:PlayerSwitchWeapon(client, oldWeapon, weapon)
     if (not IsFirstTimePredicted()) then return end
 
     if (SERVER) then
-        if client:GetActiveWeapon():GetClass() == "ix_hands" then
-            client:SetWepRaised(true, weapon)
-        end
+        if IsValid(client:GetActiveWeapon()) then
+            if client:Alive() and client:GetActiveWeapon():GetClass() == "ix_hands" then
+                client:SetWepRaised(true, weapon)
+            end
 
-        client:SetNetVar("keepraised", client:IsWepRaised())
+            client:SetNetVar("keepraised", client:IsWepRaised())
+        end
     end
 end
 
