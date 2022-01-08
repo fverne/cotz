@@ -113,7 +113,7 @@ function SWEP:PrimaryAttack()
         if (SERVER) then
             timer.Simple(0.9, function()
                 local item = self.Owner:GetCharacter():GetInventory():HasItem("value_bolts")
-							  if !item then return end
+                if not item then return end
 
                 if (item.quantity) then
                     item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
@@ -159,7 +159,7 @@ function SWEP:SecondaryAttack()
         if (SERVER) then
             timer.Simple(0.9, function()
                 local item = self.Owner:GetCharacter():GetInventory():HasItem("value_bolts")
-							  if !item then return end
+                if not item then return end
 
                 if (item.quantity) then
                     item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
