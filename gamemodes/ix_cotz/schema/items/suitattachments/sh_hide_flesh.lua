@@ -1,7 +1,7 @@
 ITEM.name = "Flesh Hide"
 ITEM.model ="models/lostsignalproject/items/parts/hide_flesh.mdl"
 ITEM.description = "A smooth hide from a flesh."
-ITEM.longdesc = "PLACEHOLDER."
+ITEM.longdesc = "Comparable to pig hide, it is smooth and does not have a lot of rough details to it. Some of the hide has visible scarring on it."
 
 ITEM.width = 1
 ITEM.height = 1
