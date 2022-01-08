@@ -154,6 +154,16 @@ end
 
 if SERVER then
     netstream.Hook("doPoach", function(client, knife, mutant)
+			local weapon = client:GetActiveWeapon()
+
+			if (weapon and weapon:IsValid()) then
+					local class = weapon:GetClass()
+
+					if class:find("cw_") then
+							if weapon:isReloading() then return client:Notify("You can not poach while you are reloading a weapon!") end
+					end
+			end
+
         local char = client:GetCharacter()
         local inv = char:GetInventory()
 
