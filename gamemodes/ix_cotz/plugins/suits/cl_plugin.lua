@@ -39,18 +39,18 @@ function PLUGIN:HUDPaint()
 	local lp = LocalPlayer()
 	local wep = LocalPlayer():GetActiveWeapon()
 	local char = lp:GetCharacter()
-	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible()) then return end
+	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible() or ix.option.Get("disablehud", false)) then return end
 	local equippedgasmask = LocalPlayer():getEquippedGasmask()
-	local equippedhelmet = LocalPlayer():getEquippedHelmet() 
+	local equippedhelmet = LocalPlayer():getEquippedHelmet()
 	local equippedarmor = LocalPlayer():getEquippedBodyArmor()
 	local equippedpartdura = 100
 	local equippedpartdurafinal = 100
-	local armor = Material("vgui/hud/bron.png", "noclamp smooth") 
-	local armor2 = Material("vgui/hud/bron2.png", "noclamp smooth") 
-	local armor3 = Material("vgui/hud/bron3.png", "noclamp smooth") 
-	local armor4 = Material("vgui/hud/bron4.png", "noclamp smooth") 
+	local armor = Material("vgui/hud/bron.png", "noclamp smooth")
+	local armor2 = Material("vgui/hud/bron2.png", "noclamp smooth")
+	local armor3 = Material("vgui/hud/bron3.png", "noclamp smooth")
+	local armor4 = Material("vgui/hud/bron4.png", "noclamp smooth")
 
-	
+
 	if equippedgasmask then
 		if equippedgasmask:GetData("durability") and equippedgasmask:GetData("durability") < equippedpartdura then
 			equippedpartdura = equippedgasmask:GetData("durability")

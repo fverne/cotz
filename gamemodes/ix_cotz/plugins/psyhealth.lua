@@ -23,7 +23,7 @@ if SERVER then
 	function PLUGIN:PlayerLoadedCharacter(client, character)
 		timer.Simple(0.25, function()
 			client:SetLocalVar("psyhealth", character:GetPsyHP())
-			
+
 		end)
 
 		timer.Simple(1, function()
@@ -150,24 +150,24 @@ function PLUGIN:PreDrawHUD()
 		}
 
 		DrawColorModify( tab )
-				
+
 		DrawMotionBlur( 0.3, 0.9*(psydmg*2), 0.001 )
 
 		if psydmgPre > 75 then
 			local shakeval = ix.util.mapValueToRange(psydmg,0.75,1,0,1)
 			util.ScreenShake( LocalPlayer():GetPos(), shakeval*7, shakeval*2, 0.2, 5 )
 		end
-				
+
 		local TEMP_BLUR = Material("pp/blurscreen")
 		cam.Start2D()
-			
-			
+
+
 
 			local x, y = 0, 0
 			local scrW, scrH = ScrW(), ScrH()
 			surface.SetDrawColor(255, 255, 255)
 			surface.SetMaterial( TEMP_BLUR )
-					
+
 			for i = 1, 3 do
 				TEMP_BLUR:SetFloat("$blur", (psydmg*3)*i)
 				TEMP_BLUR:Recompute()
@@ -187,7 +187,7 @@ ix.command.Add("CharSetPsyHealth", {
 	OnRun = function(self, client, target, psyhealth)
 		local target = ix.util.FindPlayer(target)
 		local psyhealth = tonumber(psyhealth)
-		
+
 		if !target then
 			client:Notify("Invalid Target!")
 			return
@@ -209,7 +209,7 @@ function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 	if ( entity:IsPlayer() and dmgInfo:IsDamageType(DMG_SONIC)) then
 		local dmgAmount = dmgInfo:GetDamage()
 		local psyResist = entity:GetPsyResist()
-		
+
 		entity:DamagePsyHealth(math.Clamp(dmgAmount *((100-psyResist)/100) ,0, 100))
 		dmgInfo:SetDamage(0)
 
@@ -231,12 +231,12 @@ if (SERVER) then
 end
 
 function PLUGIN:HUDPaint()
-	local psy1 = Material("vgui/hud/psyz.png", "noclamp smooth") 
-	local psy2 = Material("vgui/hud/psyz2.png", "noclamp smooth") 
-	local psy3 = Material("vgui/hud/psyz3.png", "noclamp smooth") 
-	local psy4 = Material("vgui/hud/psyz4.png", "noclamp smooth") 
+	local psy1 = Material("vgui/hud/psyz.png", "noclamp smooth")
+	local psy2 = Material("vgui/hud/psyz2.png", "noclamp smooth")
+	local psy3 = Material("vgui/hud/psyz3.png", "noclamp smooth")
+	local psy4 = Material("vgui/hud/psyz4.png", "noclamp smooth")
 	local lp = LocalPlayer()
-	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible()) then return end
+	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible() or ix.option.Get("disablehud", false)) then return end
 
 	surface.SetDrawColor(Color(200, 200, 200, 0))
 	if (lp:GetPsyHealth() <= 70) then

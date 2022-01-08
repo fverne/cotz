@@ -36,7 +36,7 @@ end
 function ix.weight.BaseWeight(character) -- gets total carry cap, not the base carry cap
 	local base = ix.config.Get("maxWeight", 30)
 	local carryinc = character:GetTotalExtraCarry()
-	
+
 	return base + carryinc
 end
 
@@ -60,7 +60,7 @@ if (CLIENT) then
 				ix.util.PropertyDesc2(tooltip, "Carry Capacity Increase: "..ix.weight.WeightString(carryinc, ix.option.Get("imperial", false)), Color(255, 255, 255), Material("vgui/ui/stalker/armorupgrades/carryweightinc.png"))
 			end
 		end
-		
+
 		if (weight) then
 			ix.util.PropertyDesc3(tooltip, "Weight: "..ix.weight.WeightString(weight, ix.option.Get("imperial", false)), Color(255, 255, 255), Material("vgui/ui/stalker/weaponupgrades/weight.png"), 999)
 		end
@@ -68,13 +68,13 @@ if (CLIENT) then
 end
 
 function PLUGIN:HUDPaint()
-	local weight = Material("vgui/hud/gruz.png", "noclamp smooth") 
-	local weight2 = Material("vgui/hud/gruz2.png", "noclamp smooth") 
-	local weight3 = Material("vgui/hud/gruz3.png", "noclamp smooth") 
-	local weight4 = Material("vgui/hud/gruz4.png", "noclamp smooth") 
+	local weight = Material("vgui/hud/gruz.png", "noclamp smooth")
+	local weight2 = Material("vgui/hud/gruz2.png", "noclamp smooth")
+	local weight3 = Material("vgui/hud/gruz3.png", "noclamp smooth")
+	local weight4 = Material("vgui/hud/gruz4.png", "noclamp smooth")
 	local lp = LocalPlayer()
 	local char = lp:GetCharacter()
-	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible()) then return end
+	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible() or ix.option.Get("disablehud", false)) then return end
 
 	surface.SetMaterial(weight)
 	if (ix.weight.BaseWeight(char) - char:GetData("carry", 0)) >= 5 then

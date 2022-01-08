@@ -1,13 +1,13 @@
-local rad = Material("daui/rad_icon_v6.png") 
+local rad = Material("daui/rad_icon_v6.png")
 
 function PLUGIN:HUDPaint()
 	local lp = LocalPlayer()
 	local wep = LocalPlayer():GetActiveWeapon()
 	local char = lp:GetCharacter()
-	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible()) then return end
+	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible() or ix.option.Get("disablehud", false)) then return end
 	local rad = Material("vgui/hud/rad.png", "noclamp smooth") 
-	local rad2 = Material("vgui/hud/rad2.png", "noclamp smooth") 
-	local rad3 = Material("vgui/hud/rad3.png", "noclamp smooth") 
+	local rad2 = Material("vgui/hud/rad2.png", "noclamp smooth")
+	local rad3 = Material("vgui/hud/rad3.png", "noclamp smooth")
 	local rad4 = Material("vgui/hud/rad4.png", "noclamp smooth")
 
 	surface.SetMaterial(rad)
