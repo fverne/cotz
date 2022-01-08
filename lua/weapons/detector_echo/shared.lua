@@ -97,59 +97,93 @@ SWEP.WElements = {
 }
 
 function SWEP:PrimaryAttack()
-	if (self.UseDel < CurTime() and self:Ammo1() > 0) then
-		self.UseDel = CurTime() + 3
-		self.Owner:DoAttackEvent( )
-		self.Weapon:SendWeaponAnim(ACT_VM_PULLPIN)
-		self.Owner:ViewPunch( Angle( 10, -10, 0 ) )
-		if (SERVER) then
-			timer.Simple( 0.9, function()
-				self:EmitSound( Sound("weapons/slam/throw.wav", 100, 100 ) )
-				local bolt = ents.Create( "ent_stalker_bolt" )
-				bolt:SetPos(self.Owner:GetShootPos() + self.Owner:GetAimVector() * 10)
-				bolt:SetAngles(self.Owner:EyeAngles())
-				bolt:Spawn()
-				bolt:SetOwner( self.Owner )
-				bolt:Fire("kill", "", 12)
-				bolt:GetPhysicsObject():ApplyForceCenter( self.Owner:GetVelocity() + self.Owner:GetAimVector() * 5000)
-				bolt:GetPhysicsObject():AddAngleVelocity(Vector(math.random(-500,500),math.random(-500,500),math.random(-500,500)))
-				bolt:GetPhysicsObject():SetMass(1)
-			end)
-			if GetConVarNumber("vnt_stalker_bolt_ammo") != 0 then	self:TakePrimaryAmmo(1)	end
-		end
-		timer.Simple( 0.75, function()
-		self.Weapon:SendWeaponAnim(ACT_VM_DRAW)
-		end)
-	end
+    if (self.UseDel < CurTime() and self.Owner:GetCharacter():GetInventory():HasItem("value_bolts")) then
+        local noremove = false
+        self.UseDel = CurTime() + 3
+        self.Owner:DoAttackEvent()
+        self.Weapon:SendWeaponAnim(ACT_VM_PULLPIN)
+        self.Owner:ViewPunch(Angle(10, -10, 0))
+
+        if (SERVER) then
+            timer.Simple(0.9, function()
+                local item = self.Owner:GetCharacter():GetInventory():HasItem("value_bolts")
+
+                if (item.quantity) then
+                    item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
+                    noremove = (item:GetData("quantity", item.quantity) > 0)
+                    break
+                end
+
+                if (not noremove) then
+                    item:Remove()
+                end
+
+                self:EmitSound(Sound("weapons/slam/throw.wav", 100, 100))
+                local bolt = ents.Create("ent_stalker_bolt")
+                bolt:SetPos(self.Owner:GetShootPos() + self.Owner:GetAimVector() * 10)
+                bolt:SetAngles(self.Owner:EyeAngles())
+                bolt:Spawn()
+                bolt:SetOwner(self.Owner)
+                bolt:Fire("kill", "", 12)
+                bolt:GetPhysicsObject():ApplyForceCenter(self.Owner:GetVelocity() + self.Owner:GetAimVector() * 5000)
+                bolt:GetPhysicsObject():AddAngleVelocity(Vector(math.random(-500, 500), math.random(-500, 500), math.random(-500, 500)))
+                bolt:GetPhysicsObject():SetMass(1)
+            end)
+
+            if GetConVarNumber("vnt_stalker_bolt_ammo") ~= 0 then
+                self:TakePrimaryAmmo(1)
+            end
+        end
+
+        timer.Simple(0.75, function()
+            self.Weapon:SendWeaponAnim(ACT_VM_DRAW)
+        end)
+    end
 end
 
-function SWEP:SecondaryAttack()
-	if (self.UseDel < CurTime() and self:Ammo1() > 0) then
-		self.UseDel = CurTime() + 3
-		self.Owner:DoAttackEvent( )
-		self.Weapon:SendWeaponAnim(ACT_VM_PULLPIN)
-		self.Owner:ViewPunch( Angle( -2, 0, 0 ) )
-		if (SERVER) then
-			timer.Simple( 0.9, function()
-				self:EmitSound( Sound("weapons/slam/throw.wav", 100, 100 ) )
-				local bolt = ents.Create( "ent_stalker_bolt" )
-				bolt:SetPos(self.Owner:GetShootPos() + self.Owner:GetAimVector() * 10)
-				bolt:SetAngles(self.Owner:EyeAngles())
-				bolt:Spawn()
-				bolt:SetOwner( self.Owner )
-				bolt:Fire("kill", "", 12)
-				bolt:GetPhysicsObject():ApplyForceCenter( self.Owner:GetVelocity() + self.Owner:GetAimVector() * 2500)
-				bolt:GetPhysicsObject():AddAngleVelocity(Vector(math.random(-500,500),math.random(-500,500),math.random(-500,500)))
-				bolt:GetPhysicsObject():SetMass(1)
-			end)
-			if GetConVarNumber("vnt_stalker_bolt_ammo") != 0 then
-				self:TakePrimaryAmmo(1)
-			end
-		end
-		timer.Simple( 0.75, function()
-		self.Weapon:SendWeaponAnim(ACT_VM_DRAW)
-		end)
-	end
+function SWEP:PrimaryAttack()
+    if (self.UseDel < CurTime() and self.Owner:GetCharacter():GetInventory():HasItem("value_bolts")) then
+        local noremove = false
+        self.UseDel = CurTime() + 3
+        self.Owner:DoAttackEvent()
+        self.Weapon:SendWeaponAnim(ACT_VM_PULLPIN)
+        self.Owner:ViewPunch(Angle(-2, 0, 0))
+
+        if (SERVER) then
+            timer.Simple(0.9, function()
+                local item = self.Owner:GetCharacter():GetInventory():HasItem("value_bolts")
+
+                if (item.quantity) then
+                    item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
+                    noremove = (item:GetData("quantity", item.quantity) > 0)
+                    break
+                end
+
+                if (not noremove) then
+                    item:Remove()
+                end
+
+                self:EmitSound(Sound("weapons/slam/throw.wav", 100, 100))
+                local bolt = ents.Create("ent_stalker_bolt")
+                bolt:SetPos(self.Owner:GetShootPos() + self.Owner:GetAimVector() * 10)
+                bolt:SetAngles(self.Owner:EyeAngles())
+                bolt:Spawn()
+                bolt:SetOwner(self.Owner)
+                bolt:Fire("kill", "", 12)
+                bolt:GetPhysicsObject():ApplyForceCenter(self.Owner:GetVelocity() + self.Owner:GetAimVector() * 2500)
+                bolt:GetPhysicsObject():AddAngleVelocity(Vector(math.random(-500, 500), math.random(-500, 500), math.random(-500, 500)))
+                bolt:GetPhysicsObject():SetMass(1)
+            end)
+
+            if GetConVarNumber("vnt_stalker_bolt_ammo") ~= 0 then
+                self:TakePrimaryAmmo(1)
+            end
+        end
+
+        timer.Simple(0.75, function()
+            self.Weapon:SendWeaponAnim(ACT_VM_DRAW)
+        end)
+    end
 end
 
 function SWEP:Deploy()
