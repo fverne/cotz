@@ -34,21 +34,23 @@ function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, c
 end
 
 function ix.util.PlayerActionInterrupt(player)
-	-- just for poaching for now
+    -- just for poaching for now
+    if (player:GetNetVar("IsPoaching")) then
+        player:SetAction("Action Cancelled", 1)
+        player:Freeze(false)
+        player:SetNetVar("ix_noMenuAllowed", false)
 
-	if (player:GetNetVar("IsPoaching")) then
-		    player:SetAction("Action Cancelled", 1)
-		    player:Freeze(false)
-		    player:SetNetVar("ix_noMenuAllowed", false)
-                    if timer.Exists("ixBlackScreenAction" .. player:SteamID()) then
-                        timer.Remove("ixBlackScreenAction" .. player:SteamID())
-                        player:ScreenFade( SCREENFADE.PURGE, Color( 0, 0, 0 ), 0.1, 0 )
-                    end
-                    player:ScreenFade( SCREENFADE.PURGE, Color( 0, 0, 0 ), 0.1, 0 )
-                    player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 0.2, 0 )
-		    player:SetNetVar("IsPoaching",false)
-	end
+        if timer.Exists("ixBlackScreenAction" .. player:SteamID()) then
+            timer.Remove("ixBlackScreenAction" .. player:SteamID())
+            player:ScreenFade(SCREENFADE.PURGE, Color(0, 0, 0), 0.1, 0)
+        end
+
+        player:ScreenFade(SCREENFADE.PURGE, Color(0, 0, 0), 0.1, 0)
+        player:ScreenFade(SCREENFADE.IN, Color(0, 0, 0), 0.2, 0)
+        player:SetNetVar("IsPoaching", false)
+    end
 end
+
 
 if(CLIENT) then
 	hook.Add("ShouldSuppressMenu", "ix_noMenuAllowed", function(client)
