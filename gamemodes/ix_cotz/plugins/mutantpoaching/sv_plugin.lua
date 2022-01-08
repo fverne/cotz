@@ -154,15 +154,15 @@ end
 
 if SERVER then
     netstream.Hook("doPoach", function(client, knife, mutant)
-			local weapon = client:GetActiveWeapon()
+        local weapon = client:GetActiveWeapon()
 
-			if (weapon and weapon:IsValid()) then
-					local class = weapon:GetClass()
+        if (weapon and weapon:IsValid()) then
+            local class = weapon:GetClass()
 
-					if class:find("cw_") then
-							if weapon:isReloading() then return client:Notify("You can not poach while you are reloading a weapon!") end
-					end
-			end
+            if class:find("cw_") then
+                if weapon:isReloading() then return client:Notify("You can not poach while you are reloading a weapon!") end
+            end
+        end
 
         local char = client:GetCharacter()
         local inv = char:GetInventory()
@@ -200,7 +200,6 @@ if SERVER then
                 client:SetNetVar("IsPoaching", true)
 
                 ix.util.PlayerPerformBlackScreenAction(client, "Poaching (Press F to Cancel)", 5, function(player)
-
                     if not player:GetNetVar("IsPoaching") then
                         npc:SetNetVar("beingSkinned", false)
                         npc:StopSound("stalkersound/inv_mutant_loot_animal.ogg")
