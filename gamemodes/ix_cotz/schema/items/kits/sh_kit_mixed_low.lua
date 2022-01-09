@@ -1,6 +1,6 @@
 ITEM.name = "Old Backpack"
 ITEM.description= "An old backpack, well worn and tattered. Its weight betrays its contents."
-ITEM.model = "models/lostsignalproject/items/misc/box_paper.mdl"
+ITEM.model = "models/kek1ch/sumka1.mdl"
 
 ITEM.width = 2
 ITEM.height = 2
