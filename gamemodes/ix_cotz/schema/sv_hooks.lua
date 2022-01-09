@@ -1,6 +1,3 @@
-
--- Here is where all of your serverside hooks should go.
-
 function Schema:OnCharacterCreated(client, character)
 	local inventory = character:GetInventory()
 
@@ -22,13 +19,6 @@ function Schema:OnCharacterCreated(client, character)
 		end
 	end
 end
-
--- this is in the suits plugin, but leaving it commented here as its nice to have if the plugin is removed
--- function Schema:EntityTakeDamage(target, dmg)
--- 	if (target:IsPlayer() and dmg:GetAttacker():IsPlayer()) then
--- 		return true
--- 	end
--- end
 
 function Schema:PlayerSpray(client)
 	return true
