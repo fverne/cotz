@@ -1,6 +1,6 @@
 ITEM.name = "Large Ammo Crate"
 ITEM.description= "A large crate containing a variety of ammunition seperated into different compartments."
-ITEM.model = "models/lostsignalproject/items/misc/box_paper.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/damaged_ammo.mdl"
 
 ITEM.width = 2
 ITEM.height = 2
