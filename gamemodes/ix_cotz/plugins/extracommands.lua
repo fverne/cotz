@@ -53,7 +53,7 @@ ix.command.Add("Event", {
 	end
 })
 
-ix.command.Add("cleanitems", {
+ix.command.Add("clearitems", {
 	adminOnly = true,
 	OnRun = function(self, client, arguments)
 
@@ -65,7 +65,7 @@ ix.command.Add("cleanitems", {
 	end
 })
 
-ix.command.Add("cleannpcs", {
+ix.command.Add("clearnpcs", {
 	adminOnly = true,
 	OnRun = function(self, client, arguments)
 
