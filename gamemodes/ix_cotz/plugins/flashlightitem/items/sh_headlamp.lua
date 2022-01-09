@@ -9,7 +9,7 @@ ITEM.weight = 0.310
 ITEM.isHeadLamp = true
 
 ITEM.img = ix.util.GetMaterial("cotz/ui/icons/misc_headlamp.png")
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
+ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
 
 /* exrender for "models/lostsignalproject/items/devices/tactical_torch.mdl"

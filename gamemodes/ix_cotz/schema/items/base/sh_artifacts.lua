@@ -7,7 +7,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 0
 
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
+ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
 ITEM.baseweight = 1.000
 ITEM.varweight  = 0.500

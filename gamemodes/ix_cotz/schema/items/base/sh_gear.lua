@@ -9,7 +9,7 @@ ITEM.height = 2
 ITEM.price = 0
 
 ITEM.pacData = {}
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
+ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 ITEM.ballisticlevels = {"0"}
 ITEM.ballisticareas = {"  Head:"}
 ITEM.br = 0
