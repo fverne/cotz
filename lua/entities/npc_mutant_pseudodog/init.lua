@@ -44,7 +44,7 @@ ENT.VisibleSchedule = SCHED_IDLE_WANDER
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 ENT.flatbulletresistance = 2
-ENT.percentbulletresistance = 0
+ENT.percentbulletresistance = 10
 
 function ENT:Initialize()
 	self.Model = "models/monsters/psydog2.mdl"

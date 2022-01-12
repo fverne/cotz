@@ -28,6 +28,9 @@ ENT.CanWarp = 0
 ENT.hp = 900
 ENT.hpvar = 200
 
+ENT.flatbulletresistance = 4
+ENT.percentbulletresistance = 20
+
 ENT.WantToWarp = false
 ENT.IsWarping = 0
 ENT.warpdelay = 0
@@ -263,6 +266,12 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul)
+	if(dmginfo:GetDamageType() == DMG_BULLET) then
+		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
+		dmginfo:SubtractDamage(self.flatbulletresistance)
+		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
+	end
+
 	if(self.CanWarp < CurTime()) then
 		local TEMP_Rand = math.random(1,3)
 		

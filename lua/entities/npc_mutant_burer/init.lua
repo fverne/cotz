@@ -30,6 +30,9 @@ ENT.CanPush = 0
 ENT.hp = 1300
 ENT.hpvar = 450
 
+ENT.flatbulletresistance = 3
+ENT.percentbulletresistance = 15
+
 ENT.MustShield = 0
 ENT.IsShielding = 0
 
@@ -232,6 +235,12 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul)
+	if(dmginfo:GetDamageType() == DMG_BULLET) then
+		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
+		dmginfo:SubtractDamage(self.flatbulletresistance)
+		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
+	end
+
 	if(self.CanShield<CurTime()) then
 		local TEMP_Rand = math.random(1,3)
 		

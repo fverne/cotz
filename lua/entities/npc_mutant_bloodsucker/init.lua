@@ -35,6 +35,9 @@ ENT.CanSuck = 0
 ENT.hp = 400
 ENT.hpvar = 125
 
+ENT.flatbulletresistance = 4
+ENT.percentbulletresistance = 10
+
 ENT.NextAbilityTime = 0
 
 ENT.MinRangeDist = 0
@@ -273,5 +276,13 @@ end
 function ENT:STALKERNPCRemove() 
 	if self.SuccVictim then
 		self.SuccVictim:Freeze(false)
+	end
+end
+
+function ENT:STALKERNPCDamageTake(dmginfo,mul)
+	if(dmginfo:GetDamageType() == DMG_BULLET) then
+		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
+		dmginfo:SubtractDamage(self.flatbulletresistance)
+		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 end

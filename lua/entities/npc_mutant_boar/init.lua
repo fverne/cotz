@@ -30,6 +30,9 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 ENT.hp = 225
 ENT.hpvar = 50
 
+ENT.flatbulletresistance = 1
+ENT.percentbulletresistance = 5
+
 ENT.NextAbilityTime = 0
 
 ENT.MinRangeDist = 800
@@ -102,6 +105,12 @@ end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul) 
 	TEMP_Mul = mul
+
+	if(dmginfo:GetDamageType() == DMG_BULLET) then
+		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
+		dmginfo:SubtractDamage(self.flatbulletresistance)
+		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
+	end
 
 	--hacky shit code for checking for headshots
 	local pos = dmginfo:GetDamagePosition()
