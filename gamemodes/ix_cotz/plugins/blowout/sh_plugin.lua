@@ -271,6 +271,19 @@ end
 ix.command.Add("blowouttrigger", {
     adminOnly = true,
     OnRun = function(self, client)
+        if not ix.config.Get("blowoutEnabled") then
+            if client:IsSuperAdmin() then
+                client:Notify("Blowouts are currently disabled on the server! - You can enable it in the TAB menu config.")
+            else
+                if not client:IsSuperAdmin() then
+                    client:Notify("Blowouts are currently disabled on the server!")
+                end
+            end
+
+            return
+        end
+
         PLUGIN.NextBlowout = CurTime()
+        client:Notify("You have triggered a blowout to happen any moment now!")
     end
 })
