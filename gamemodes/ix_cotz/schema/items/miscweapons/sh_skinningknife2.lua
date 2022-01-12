@@ -9,7 +9,7 @@ ITEM.height = 1
 ITEM.width = 2
 
 ITEM.class = "tfa_nmrih_oldknife"
-ITEM.weaponCategory = "secondary"
+ITEM.weaponCategory = "knife"
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
 
