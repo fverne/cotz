@@ -257,7 +257,7 @@ ix.command.Add("discord", {
 	end
 })
 
-ix.command.Add("suicide" {
+ix.command.Add("suicide", {
 	alias = {"unstuck", "respawn"},
 	description = "Kill yourself, use if stuck somewhere.",
 	OnRun = function(self, client)
