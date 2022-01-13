@@ -5,6 +5,7 @@ ITEM.model = "models/lostsignalproject/items/misc/jar.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
+
 ITEM.price = 300
 
 ITEM.maxDie = 6
