@@ -100,7 +100,7 @@ ix.npctemplates.templates["tutorialnpc"] = {
 		["food_can_tushonka"] 	= { 110, 2, SELLANDBUY, 2, 4, 2 },
 		["food_can_sprats"] 	= { 130, 2, SELLANDBUY, 2, 4, 2 },
 
-		["skinningknife_1"] 	= { nil, 6, SELLANDBUY, 6, 8, 3 },
+		["knife_1"] 	= { nil, 6, SELLANDBUY, 6, 8, 3 },
 		["hidestasher_cutlery"] 	= { nil, 6, SELLANDBUY, 6, 8, 3 },
 		["lowtiercooker"] 	= { nil, 3, SELLANDBUY, 3, 8, 3 },
 

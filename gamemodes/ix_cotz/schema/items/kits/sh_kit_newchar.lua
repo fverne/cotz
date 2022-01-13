@@ -31,7 +31,7 @@ ITEM.items = {
 /*
 ITEM.items = {
 	{
-		{1, "skinningknife_1"},
+		{1, "knife_1"},
 	},
 	{
 		{1, "medic_medkit_1"},
