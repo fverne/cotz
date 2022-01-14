@@ -5,6 +5,10 @@ PLUGIN.name = "Crosshair"
 PLUGIN.author = "Black Tea"
 PLUGIN.description = "A Crosshair."
 
+ix.option.Add("disableCrosshair", ix.type.bool, false, {
+	category = "_stalkersettings"
+})
+
 if (CLIENT) then
 	local crosshairmat = Material("stalker/crosshair.vtf")
 
@@ -27,7 +31,7 @@ if (CLIENT) then
 		distance = trace.StartPos:DistToSqr(trace.HitPos)
 		scaleFraction = 1 - math.Clamp(distance / maxDistance, 0, .5)
 		crossSize = math.Clamp( 35 * scaleFraction, 25, 65)
-		
+
 		drawdot( {math_round(screen.x), math_round(screen.y)}, crossSize)
 	end
 
@@ -40,6 +44,10 @@ if (CLIENT) then
 			return
 		end
 
+		if (ix.option.Get("disableCrosshair", false)) then
+			return
+		end
+
 		local entity = Entity(client:GetLocalVar("ragdoll", 0))
 
 		if (entity:IsValid()) then
@@ -49,7 +57,7 @@ if (CLIENT) then
 		local wep = client:GetActiveWeapon()
 		local bShouldDraw = hook.Run("ShouldDrawCrosshair", client, wep)
 
-		if (client:KeyDown(IN_ATTACK2)) then
+		if (client:KeyDown(IN_ATTACK2) and client:GetActiveWeapon():GetClass() ~= "ix_hands") then
 			return
 		end
 
