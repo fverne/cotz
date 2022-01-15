@@ -270,6 +270,7 @@ end
 
 ix.command.Add("blowouttrigger", {
     adminOnly = true,
+    description = "Triggers an instant blowout. Use /blowouttriggerdelay for a delayed blowout.",
     OnRun = function(self, client)
         if not ix.config.Get("blowoutEnabled") then
             if client:IsSuperAdmin() then
@@ -285,5 +286,52 @@ ix.command.Add("blowouttrigger", {
 
         PLUGIN.NextBlowout = CurTime()
         client:Notify("You have triggered a blowout to happen any moment now!")
+    end
+})
+
+ix.command.Add("blowouttriggerdelay", {
+    adminOnly = true,
+    description = "Triggers a blowout with a delay until it starts. Delay is in seconds.",
+    arguments = bit.bor(ix.type.number, ix.type.optional),
+    OnRun = function(self, client, delay)
+        if not ix.config.Get("blowoutEnabled") then
+            if client:IsSuperAdmin() then
+                client:Notify("Blowouts are currently disabled on the server! - You can enable it in the TAB menu config.")
+            else
+                if not client:IsSuperAdmin() then
+                    client:Notify("Blowouts are currently disabled on the server!")
+                end
+            end
+
+            return
+        end
+
+        if not delay then
+            delay = 10
+        end
+
+        PLUGIN.NextBlowout = CurTime() + delay
+        client:Notify("You have triggered a blowout to happen in " .. delay .. " seconds!")
+    end
+})
+
+ix.command.Add("blowoutresetcycle", {
+    adminOnly = true,
+    description = "Resets the blowout rate cycle back to its original set time.",
+    OnRun = function(self, client, delay)
+        if not ix.config.Get("blowoutEnabled") then
+            if client:IsSuperAdmin() then
+                client:Notify("Blowouts are currently disabled on the server! - You can enable it in the TAB menu config.")
+            else
+                if not client:IsSuperAdmin() then
+                    client:Notify("Blowouts are currently disabled on the server!")
+                end
+            end
+
+            return
+        end
+
+        PLUGIN.NextBlowout = CurTime() + (ix.config.Get("blowoutRateCycle", 120) * 60)
+        client:Notify("You have reset the blowout cycle! The next one will happen in " .. ix.config.Get("blowoutRateCycle", 120) .. " minutes!")
     end
 })
