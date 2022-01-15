@@ -163,7 +163,6 @@ function SWEP:SecondaryAttack()
                 if (item.quantity) then
                     item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
                     noremove = (item:GetData("quantity", item.quantity) > 0)
-                    break
                 end
 
                 if (not noremove) then
