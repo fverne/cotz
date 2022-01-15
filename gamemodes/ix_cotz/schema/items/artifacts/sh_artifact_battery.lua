@@ -5,6 +5,7 @@ ITEM.longdesc = "A heavy artifact with a unique geometrical shape, consisting of
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 8400
+ITEM.JumpPower = 7000
 ITEM.flag = "A"
 ITEM.rarity = 4
 ITEM.baseweight = 6.000

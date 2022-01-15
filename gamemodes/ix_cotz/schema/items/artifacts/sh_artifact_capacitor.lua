@@ -5,6 +5,7 @@ ITEM.longdesc = "When an electrical discharge happens near this artifact, it wil
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 16300
+ITEM.JumpPower = 300
 ITEM.flag = "A"
 ITEM.rarity = 3
 ITEM.baseweight = 1.500

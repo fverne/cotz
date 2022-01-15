@@ -5,6 +5,7 @@ ITEM.longdesc = "A physical impossibility. These two circular plates are held at
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 7200
+ITEM.JumpPower = 300
 ITEM.flag = "A"
 ITEM.rarity = 3
 ITEM.baseweight = 1.500

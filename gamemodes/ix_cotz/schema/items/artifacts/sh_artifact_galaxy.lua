@@ -5,6 +5,7 @@ ITEM.longdesc = "It is unnaturally light for its size. When held it seems to red
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 38700
+ITEM.JumpPower = 500
 ITEM.flag = "A"
 ITEM.rarity = 9
 ITEM.baseweight = 0.025
@@ -17,7 +18,7 @@ ITEM.functions.use = {
     OnRun = function(item)
         if(item:GetData("cooldown",0) < os.time())then
         	item:SetData("cooldown", os.time() + 15 )
-            
+
             item.player:AddBuff("buff_hijump", 10, { amount = 300 })
         end
 

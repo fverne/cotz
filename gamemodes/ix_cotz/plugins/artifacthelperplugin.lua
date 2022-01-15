@@ -28,3 +28,28 @@ if SERVER then
         end
     end
 end
+
+local thinkTime = CurTime()
+
+function PLUGIN:Think()
+    if (thinkTime < CurTime()) then
+        for k, v in ipairs(player.GetAll()) do
+            for k2, v2 in ipairs(ents.FindByClass("ix_item")) do
+                if (IsValid(v2) and v2.ixItemID) then
+                    local itm = ix.item.instances[v2.ixItemID]
+
+                    if (itm and itm.base == "base_artifacts") then
+                        if v:GetPos():Distance(v2:GetPos()) < 192 then
+                            v2:GetPhysicsObject():EnableMotion(true)
+                            v2:GetPhysicsObject():ApplyForceCenter(Vector(0, 0, itm.JumpPower or v2:GetPhysicsObject():GetMass() * 90))
+                        else
+                            v2:GetPhysicsObject():EnableMotion(false)
+                        end
+                    end
+                end
+            end
+
+            thinkTime = CurTime() + math.Rand(0.5, 0.8)
+        end
+    end
+end
