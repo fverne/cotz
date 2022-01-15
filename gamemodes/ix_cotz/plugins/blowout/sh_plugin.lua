@@ -284,6 +284,8 @@ ix.command.Add("blowouttrigger", {
             return
         end
 
+        if PLUGIN.BlowoutVars.BlowoutStarted then return client:Notify("A blowout is already active! You can not trigger another blowout until the active blowout has finished.") end
+
         PLUGIN.NextBlowout = CurTime()
         client:Notify("You have triggered a blowout to happen any moment now!")
     end
@@ -305,6 +307,8 @@ ix.command.Add("blowouttriggerdelay", {
 
             return
         end
+
+        if PLUGIN.BlowoutVars.BlowoutStarted then return client:Notify("A blowout is already active! You can not trigger another blowout until the active blowout has finished.") end
 
         if not delay then
             delay = 10
@@ -330,6 +334,8 @@ ix.command.Add("blowoutresetcycle", {
 
             return
         end
+
+        if PLUGIN.BlowoutVars.BlowoutStarted then return client:Notify("A blowout is already active! You can not reset its cycle until the blowout has finished.") end
 
         PLUGIN.NextBlowout = CurTime() + (ix.config.Get("blowoutRateCycle", 120) * 60)
         client:Notify("You have reset the blowout cycle! The next one will happen in " .. ix.config.Get("blowoutRateCycle", 120) .. " minutes!")
