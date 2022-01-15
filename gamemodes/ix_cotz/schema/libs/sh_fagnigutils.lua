@@ -60,7 +60,9 @@ if(CLIENT) then
 	end)
 
 	net.Receive("ix_KillMenu", function()
-		ix.gui.menu:Remove()
+		if IsValid(ix.gui.menu) then
+			ix.gui.menu:Remove()
+		end
 	end)
 
 end

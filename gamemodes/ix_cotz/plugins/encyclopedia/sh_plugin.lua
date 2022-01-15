@@ -1,3 +1,4 @@
+/*
 if (CLIENT) then
     function PLUGIN:PlayerButtonDown(client, key)
         -- Quick help menu
@@ -14,6 +15,7 @@ if (CLIENT) then
         end
     end
 end
+*/
 
 function PLUGIN:PopulateHelpMenu(tabs)
     tabs["readme"] = function(container)
@@ -81,27 +83,27 @@ function PLUGIN:PopulateHelpMenu(tabs)
         local function1 = container:Add("DLabel")
         function1:SetWrap(true)
         function1:SetFont("stalkerregularfont")
-        function1:SetText("F1  -  Quick Help Menu")
+        function1:SetText(string.upper(input.LookupBinding("gm_showhelp", true)) .. " -  Use Hotkey 1 (gm_showhelp)")
         function1:Dock(TOP)
         function1:DockMargin(0, 16, 0, 0)
         function1:SetAutoStretchVertical(true)
         local function2 = container:Add("DLabel")
         function2:SetFont("stalkerregularfont")
-        function2:SetText("F2  -  Toggles HUD")
+        function2:SetText(string.upper(input.LookupBinding("gm_showteam", true)) .. " -  Use Hotkey 2 (gm_showteam)")
         function2:Dock(TOP)
         function2:DockMargin(0, 16, 0, 0)
         function2:SetWrap(true)
         function2:SetAutoStretchVertical(true)
         local function3 = container:Add("DLabel")
         function3:SetFont("stalkerregularfont")
-        function3:SetText(string.upper(input.LookupBinding("gm_showspare1", true)) .. "  -  Voice Mode Menu")
+        function3:SetText(string.upper(input.LookupBinding("gm_showspare1", true)) .. " -  Use Hotkey 3 (gm_showspare1)")
         function3:Dock(TOP)
         function3:DockMargin(0, 16, 0, 0)
         function3:SetWrap(true)
         function3:SetAutoStretchVertical(true)
         local function4 = container:Add("DLabel")
         function4:SetFont("stalkerregularfont")
-        function4:SetText("F4  -  Toggles Thirdperson")
+        function4:SetText(string.upper(input.LookupBinding("gm_showspare2", true)) .. " -  Use Hotkey 4 (gm_showspare2)")
         function4:Dock(TOP)
         function4:DockMargin(0, 16, 0, 0)
         function4:SetWrap(true)

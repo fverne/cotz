@@ -7,6 +7,13 @@ ix.option.Add("permvoicehud", ix.type.bool, false, {
     category = "_stalkersettings",
 })
 
+ix.command.Add("voicemode", {
+    description = "Changes the range at which people can hear your voice.",
+    OnRun = function(self, client)
+        netstream.Start(client, "ixVoiceMenu")
+    end
+})
+
 -- Start of Voice Overlay
 if (CLIENT) then
     local PANEL = {}

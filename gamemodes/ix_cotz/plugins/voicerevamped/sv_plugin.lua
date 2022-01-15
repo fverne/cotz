@@ -10,8 +10,10 @@ function PLUGIN:PlayerLoadedCharacter(client, character)
     end)
 end
 
+/*
 function PLUGIN:ShowSpare1(client)
     if (client:GetCharacter()) then
         netstream.Start(client, "ixVoiceMenu")
     end
 end
+*/

@@ -13,6 +13,7 @@ function PLUGIN:HUDPaint()
 	end
 end
 
+/*
 if (CLIENT) then
     function PLUGIN:PlayerButtonDown(client, key)
         if (key == KEY_F2 and client:GetCharacter() and IsFirstTimePredicted()) then
@@ -24,3 +25,4 @@ if (CLIENT) then
         end
     end
 end
+*/
