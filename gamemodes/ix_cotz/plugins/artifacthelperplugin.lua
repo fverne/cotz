@@ -38,7 +38,7 @@ function PLUGIN:Think()
                 if (IsValid(v2) and v2.ixItemID) then
                     local itm = ix.item.instances[v2.ixItemID]
 
-                    if (itm and itm.base == "base_artifacts") then
+                    if (itm and itm.base == "base_artifacts" and !itm.NoJump) then
                         if v:GetPos():Distance(v2:GetPos()) < 192 then
                             v2:GetPhysicsObject():EnableMotion(true)
                             v2:GetPhysicsObject():ApplyForceCenter(Vector(0, 0, itm.JumpPower or v2:GetPhysicsObject():GetMass() * 90))

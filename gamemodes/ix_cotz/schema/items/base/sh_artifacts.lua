@@ -8,6 +8,7 @@ ITEM.height = 1
 ITEM.price = 0
 
 ITEM.JumpPower = 900
+ITEM.NoJump = false
 
 ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
