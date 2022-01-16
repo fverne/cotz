@@ -168,6 +168,10 @@ function PANEL:Init()
 	self.name:SetTextColor(color_white)
 	self.name:SetFont("stalkerregularfont2")
 
+	self.mute = self:Add("DImageButton")
+	self.mute:DockMargin(5, 0, 0, 0)
+	self.mute:Dock(RIGHT)
+
 	self.rep = self:Add("DLabel")
 	self.rep:DockMargin(5, 0, 0, 0)
 	self.rep:Dock(TOP)
@@ -221,6 +225,25 @@ function PANEL:Update()
 		self.name:SetText(name)
 		self.name:SizeToContents()
 	end
+
+    if (client != LocalPlayer()) then
+        if (client:IsMuted()) then
+            self.mute:SetImage("icon32/muted.png")
+            --  self.mute:SizeToContents()
+            self.mute:SetSize(30, 1)
+
+            self.mute.DoClick = function()
+                client:SetMuted(false)
+            end
+        else
+            self.mute:SetImage("icon32/unmuted.png")
+            self.mute:SetSize(30, 1)
+
+            self.mute.DoClick = function()
+                client:SetMuted(true)
+            end
+        end
+    end
 
 	if (self.rep:GetText() != rep) then
 		self.rep:SetText(rep)
