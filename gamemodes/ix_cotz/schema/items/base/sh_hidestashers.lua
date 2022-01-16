@@ -79,39 +79,55 @@ ITEM.functions.hidestash = {
     tip = "equipTip",
     icon = "icon16/stalker/drop.png",
     OnRun = function(item)
-			local trace = client:GetEyeTraceNoCursor()
-			local TextureBlacklist = {
-			"PLASTER/PLASTERWALL013C",
-			"PLASTER/WALLPAPER001B",
-			"PLASTER/WALLPAPER002A",
-			"PLASTER/WALLPAPER002B",
-			"PLASTER/WALLPAPER003A",
-			"PLASTER/WALLPAPER003B",
-			"PLASTER/WALLPAPER005A",
-			}
+        local trace = item.player:GetEyeTraceNoCursor()
+        local texturecheck = false
 
-			if trace.MatType == 74 and not IsValid(trace.Entity) and not table.HasValue(TextureBlacklist, trace.HitTexture) then
-					local texturecheck = true
-			end
+    local TextureBlacklist = {
+		"PLASTER/PLASTERWALL013C",
+		"PLASTER/WALLPAPER001B",
+		"PLASTER/WALLPAPER002A",
+		"PLASTER/WALLPAPER002B",
+		"PLASTER/WALLPAPER003A",
+		"PLASTER/WALLPAPER003B",
+		"PLASTER/WALLPAPER005A",
+		}
 
-			if texturecheck then
-        local quantity = item:GetData("quantity", item.quantity)
-        ix.chat.Send(item.player, "iteminternal", "takes out their " .. item.name .. ".", false)
-        ix.plugin.list["hidestash"]:StashHide(item.player)
-        quantity = quantity - 1
-
-        if (quantity >= 1) then
-            item:SetData("quantity", quantity)
+        if IsValid(trace.Entity) and trace.Entity:GetClass() == "ix_item" then
+            item.player:Notify("Do not look at an item when making a stash, look at the ground just next to it.")
 
             return false
         end
 
-        item.player:Notify("Your " .. item.name .. " broke!")
-			end
+        if IsValid(trace.Entity) and trace.Entity:GetClass() == "ix_vendor_adv" or trace.Entity:GetClass() == "player" then
+            item.player:Notify("You can not make a stash inside a fellow STALKER, it is rude to do so. Seriously, what did you expect?")
 
-			if not texturecheck then
-					item.player:Notify("You can not make a stash on this surface!")
-			end
+            return false
+        end
+
+        if trace.MatType == 68 and not IsValid(trace.Entity) and not table.HasValue(TextureBlacklist, trace.HitTexture) then
+            texturecheck = true
+        end
+
+        if not texturecheck then
+            item.player:Notify("You can not make a stash on this surface!")
+
+            return false
+        end
+
+        if texturecheck then
+            local quantity = item:GetData("quantity", item.quantity)
+            ix.chat.Send(item.player, "iteminternal", "takes out their " .. item.name .. ".", false)
+            ix.plugin.list["hidestash"]:StashHide(item.player)
+            quantity = quantity - 1
+
+            if (quantity >= 1) then
+                item:SetData("quantity", quantity)
+
+                return false
+            end
+        end
+
+        item.player:Notify("Your " .. item.name .. " broke!")
 
         return true
     end,
@@ -123,29 +139,28 @@ ITEM.functions.hidestash = {
 }
 
 ITEM.functions.unhidestash = {
-	name = "Search for a Stash",
-	tip = "equipTip",
-	icon = "icon16/stalker/open.png",
-	OnRun = function(item)
-		local quantity = item:GetData("quantity", item.quantity)
+    name = "Search for a Stash",
+    tip = "equipTip",
+    icon = "icon16/stalker/open.png",
+    OnRun = function(item)
+        local quantity = item:GetData("quantity", item.quantity)
+        ix.chat.Send(item.player, "iteminternal", "takes out their " .. item.name .. ".", false)
+        ix.plugin.list["hidestash"]:StashUnhide(item.player)
+        quantity = quantity - 1
 
-		ix.chat.Send(item.player, "iteminternal", "takes out their "..item.name..".", false)
+        if (quantity >= 1) then
+            item:SetData("quantity", quantity)
 
-		ix.plugin.list["hidestash"]:StashUnhide(item.player)
+            return false
+        end
 
-		quantity = quantity - 1
+        item.player:Notify("Your " .. item.name .. " broke!")
 
-		if (quantity >= 1) then
-			item:SetData("quantity", quantity)
-			return false
-		end
+        return true
+    end,
+    OnCanRun = function(item)
+        local client = item.player
 
-		item.player:Notify("Your "..item.name.." broke!")
-		return true
-	end,
-	OnCanRun = function(item)
-		local client = item.player
-
-		return !IsValid(item.entity) and IsValid(client) and item.invID == client:GetCharacter():GetInventory():GetID()
-	end
+        return not IsValid(item.entity) and IsValid(client) and item.invID == client:GetCharacter():GetInventory():GetID()
+    end
 }
