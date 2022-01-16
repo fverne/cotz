@@ -82,21 +82,6 @@ function PLUGIN:ShowSpare2(client)
 	client:ActivateHotkey(4)
 end
 
-ix.command.Add("debugusehotkey", {
-	arguments = {
-		ix.type.number
-	},
-	OnRun = function(self, client, hotkey)
-		client:GetCharacter():ActivateHotkey(hotkey)
-	end
-})
-
-ix.command.Add("debugclearhotkeys", {
-	OnRun = function(self, client)
-		client:GetCharacter():ClearHotkeys()
-	end
-})
-
 ix.option.Add("Hotkey1", ix.type.array, "nil", {
 	category = "_hotkeys",
 	bNetworked = true,
