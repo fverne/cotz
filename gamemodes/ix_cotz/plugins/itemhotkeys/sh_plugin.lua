@@ -1,24 +1,13 @@
 local PLUGIN = PLUGIN
 PLUGIN.name = "Item Hotkeys"
 PLUGIN.author = "verne"
-PLUGIN.desc = "Allows for use of F1-F4 to be used for pre-defined item usage."
+PLUGIN.desc = "Allows for use of hotkeys to be used for pre-defined item usage."
 
 ix.util.Include("cl_plugin.lua")
 ix.util.Include("sh_hotkeyitems.lua")
 
 local playerMeta = FindMetaTable("Player")
 local charMeta = ix.meta.character or {}
-
-PLUGIN.hotkeydefualt = {
-	["nil"] = "None"
-}
-
-local hotkeytrans = {
-	["F1"] = 1,
-	["F2"] = 2,
-	["F3"] = 3,
-	["F4"] = 4,
-}
 
 ix.char.RegisterVar("hotkeys", {
 	field = "hotkeys",
@@ -42,7 +31,6 @@ function charMeta:SetHotkey(hotkeyindex, item)
 
 	hotkeys[hotkeyindex] = item
 
-	PrintTable(hotkeys)
 	self:SetHotkeys(hotkeys)
 end
 
