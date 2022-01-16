@@ -349,3 +349,25 @@ ix.command.Add("blowoutresetcycle", {
         client:Notify("You have reset the blowout cycle! The next one will happen in " .. ix.config.Get("blowoutRateCycle", 120) .. " minutes!")
     end
 })
+
+ix.command.Add("blowoutgetnexttime", {
+    adminOnly = true,
+    description = "Notifies yourself the time until the next automated blowout.",
+    OnRun = function(self, client, delay)
+        if not ix.config.Get("blowoutEnabled") then
+            if client:IsSuperAdmin() then
+                client:Notify("Blowouts are currently disabled on the server! - You can enable it in the TAB menu config.")
+            else
+                if not client:IsSuperAdmin() then
+                    client:Notify("Blowouts are currently disabled on the server!")
+                end
+            end
+
+            return
+        end
+
+        if PLUGIN.BlowoutVars.BlowoutStarted then return client:Notify("A blowout is already active! You can not get the next time until a blowout until after the blowout has finished.") end
+
+        client:Notify("Time until the next automated blowout: " .. math.Round(PLUGIN.NextBlowout - CurTime()) .. " seconds (" .. math.Round((PLUGIN.NextBlowout - CurTime()) / 60, 2) .. " minutes).")
+    end
+})
