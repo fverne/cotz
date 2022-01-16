@@ -60,6 +60,14 @@ if (SERVER) then
         local CT = CurTime()
         if CT < self.NextThink then return end
 
+        if self.NextBlowout == CurTime() + 60 then
+            for k, v in pairs(player.GetAll()) do
+                if v:IsAdmin() then
+                    v:Notify("[ADMIN] A blowout is going to happen in 60 seconds. You can stop this if you wish by typing /blowoutresetcycle in chat.")
+                end
+            end
+        end
+
         if self.NextBlowout < CurTime() and (not self.BlowoutVars.BlowoutStarted) then
             self.BlowoutVars.BlowoutStarted = true
             local dur = 30 --time until blowout hits - 60-90s probably
