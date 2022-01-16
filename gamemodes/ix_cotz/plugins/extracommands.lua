@@ -150,8 +150,12 @@ ix.command.Add("setdata", {
 ix.command.Add("CharResetValues", {
     adminOnly = true,
     description = "Resets the specified characters values such as hunger, thirst, psyhealth, hp, etc.",
-    arguments = {ix.type.string,},
+    arguments = {bit.bor(ix.type.string, ix.type.optional)},
     OnRun = function(self, client, target)
+        if not target or target == "" then
+            target = client:GetCharacter():GetName()
+        end
+
         local target = ix.util.FindPlayer(target)
 
         if not target then
