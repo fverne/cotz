@@ -22,7 +22,13 @@ end)
 
 if (CLIENT) then
 	netstream.Hook("ixHotkeyItemUpdate", function(hotkeyindex)
-		ix.option.Set("Hotkey" .. hotkeyindex, "nil")
+		local hotkeyitem = ix.option.Get("Hotkey" .. hotkeyindex, "nil")
+
+		for i = 1, 4 do
+			if ix.option.Get("Hotkey" .. i, "nil") == hotkeyitem then
+				ix.option.Set("Hotkey" .. i, "nil")
+			end
+		end
 	end)
 end
 

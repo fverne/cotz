@@ -12,9 +12,8 @@ function PLUGIN:HUDPaint()
     local itemboxwidth
     local itemboxheight
 
-    local itemname1 = lp:GetCharacter():GetHotkeyItemName(1)
-    if itemname1 != "nil" then
-        itemname = itemname1
+    itemname = lp:GetCharacter():GetHotkeyItemName(1)
+    if itemname != "nil" then
         item = ix.item.list[itemname]
         icon = ix.util.GetItemIcon(item)
 
@@ -36,9 +35,8 @@ function PLUGIN:HUDPaint()
         draw.DrawText(string.upper(input.LookupBinding("gm_showhelp", true)), "stalkerregularsmallfont2", ScrW()*0.055, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
     end
 
-    local itemname2 = lp:GetCharacter():GetHotkeyItemName(2)
-    if itemname2 != "nil" then
-        itemname = itemname2
+    itemname = lp:GetCharacter():GetHotkeyItemName(2)
+    if itemname != "nil" then
         item = ix.item.list[itemname]
         icon = ix.util.GetItemIcon(item)
 
@@ -60,9 +58,8 @@ function PLUGIN:HUDPaint()
         draw.DrawText(string.upper(input.LookupBinding("gm_showteam", true)), "stalkerregularsmallfont2", ScrW()*0.095, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
     end
 
-    local itemname3 = lp:GetCharacter():GetHotkeyItemName(3)
-    if itemname3 != "nil" then
-        itemname = itemname3
+    itemname = lp:GetCharacter():GetHotkeyItemName(3)
+    if itemname != "nil" then
         item = ix.item.list[itemname]
         icon = ix.util.GetItemIcon(item)
 
@@ -84,9 +81,8 @@ function PLUGIN:HUDPaint()
         draw.DrawText(string.upper(input.LookupBinding("gm_showspare1", true)), "stalkerregularsmallfont2", ScrW()*0.135, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
     end
 
-    local itemname4 = lp:GetCharacter():GetHotkeyItemName(4)
-    if itemname4 != "nil" then
-        itemname = itemname4
+    itemname = lp:GetCharacter():GetHotkeyItemName(4)
+    if itemname != "nil" then
         item = ix.item.list[itemname]
         icon = ix.util.GetItemIcon(item)
 
