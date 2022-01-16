@@ -20,6 +20,12 @@ netstream.Hook("ixHotkeyChange", function(client, hotkey, value)
 	client:GetCharacter():SetHotkey(hotkey, value)
 end)
 
+if (CLIENT) then
+	netstream.Hook("ixHotkeyItemUpdate", function(hotkeyindex)
+		ix.option.Set("Hotkey" .. hotkeyindex, "nil")
+	end)
+end
+
 function charMeta:GetHotkeyItemName(hotkeyindex)
 	local hotkeys = self:GetHotkeys()
 
@@ -63,6 +69,10 @@ function playerMeta:ActivateHotkey(hotkeyindex)
 
 	if (info and info.OnCanRun and info.OnCanRun(item) != false) then
 		ix.item.PerformInventoryAction(client, action, item.id, inv.id)
+
+		if !inv:HasItem(char:GetHotkeyItemName(hotkeyindex)) then
+			netstream.Start(client, "ixHotkeyItemUpdate", hotkeyindex)
+		end
 	end
 end
 
