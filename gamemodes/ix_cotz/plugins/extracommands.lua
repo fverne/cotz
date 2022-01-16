@@ -55,6 +55,7 @@ ix.command.Add("Event", {
 
 ix.command.Add("clearitems", {
 	adminOnly = true,
+	alias = {"removeitems", "cleanitems"},
 	OnRun = function(self, client, arguments)
 
 		for k, v in pairs(ents.FindByClass("ix_item")) do
@@ -67,6 +68,7 @@ ix.command.Add("clearitems", {
 
 ix.command.Add("clearnpcs", {
 	adminOnly = true,
+	alias = {"removenpcs", "cleannpcs"},
 	OnRun = function(self, client, arguments)
 
 	for k, v in pairs( ents.GetAll( ) ) do
