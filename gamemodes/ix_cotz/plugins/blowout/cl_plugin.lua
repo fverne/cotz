@@ -56,7 +56,7 @@ ix.blowout.Duration = 0
 ix.blowout.BlowoutPhase = 0
 ix.blowout.LastContrast = 0
 ix.blowout.BlowoutSounds = {}
-ix.blowout.BlowoutSounds[1] = "blowout_announce1"
+ix.blowout.BlowoutSounds[1] = ""
 ix.blowout.BlowoutSounds[2] = "blowout_announce2"
 ix.blowout.BlowoutSounds[3] = "blowout_prehit"
 ix.blowout.BlowoutSounds[4] = "blowout_ambient1"
@@ -70,8 +70,8 @@ ix.blowout.BlowoutSounds[11] = "blowout_hit1"
 ix.blowout.BlowoutSounds[12] = "blowout_hit2"
 ix.blowout.BlowoutSounds[13] = "blowout_hit3"
 ix.blowout.BlowoutSounds[14] = "blowout_end"
-ix.blowout.BlowoutSounds[15] = "blowout_posthit"
-ix.blowout.BlowoutSounds[16] = "blowout_posthit"
+ix.blowout.BlowoutSounds[15] = ""
+ix.blowout.BlowoutSounds[16] = ""
 
 net.Receive("BlowoutPlaySound", function()
 	local sndtoplay = net.ReadUInt(8)
