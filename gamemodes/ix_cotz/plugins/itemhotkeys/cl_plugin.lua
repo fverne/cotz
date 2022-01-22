@@ -13,7 +13,7 @@ function PLUGIN:HUDPaint()
     local itemboxheight
 
     itemname = lp:GetCharacter():GetHotkeyItemName(1)
-    if itemname != "nil" then
+    if itemname != "nil" and itemname then
         item = ix.item.list[itemname]
         icon = ix.util.GetItemIcon(item)
 
@@ -36,7 +36,7 @@ function PLUGIN:HUDPaint()
     end
 
     itemname = lp:GetCharacter():GetHotkeyItemName(2)
-    if itemname != "nil" then
+    if itemname != "nil" and itemname then
         item = ix.item.list[itemname]
         icon = ix.util.GetItemIcon(item)
 
@@ -59,7 +59,7 @@ function PLUGIN:HUDPaint()
     end
 
     itemname = lp:GetCharacter():GetHotkeyItemName(3)
-    if itemname != "nil" then
+    if itemname != "nil" and itemname then
         item = ix.item.list[itemname]
         icon = ix.util.GetItemIcon(item)
 
@@ -82,7 +82,7 @@ function PLUGIN:HUDPaint()
     end
 
     itemname = lp:GetCharacter():GetHotkeyItemName(4)
-    if itemname != "nil" then
+    if itemname != "nil" and itemname then
         item = ix.item.list[itemname]
         icon = ix.util.GetItemIcon(item)
 
