@@ -232,6 +232,7 @@ end
 
 hook.Add("HUDPaint", "ixVoiceModeDisplay", function()
     local w, h = 45, 42
+    if not ix.config.Get("allowVoice") then return end
     if (not LocalPlayer():IsSpeaking() and not ix.option.Get("permvoicehud", false)) then return end
 
     if (LocalPlayer():IsSpeaking()) then
@@ -260,6 +261,7 @@ end)
 hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
     if ply == LocalPlayer() and GetViewEntity() == LocalPlayer() and (GetConVar('thirdperson') and GetConVar('thirdperson'):GetInt() ~= 0) then return end
     if not ply:Alive() then return end
+    if not ix.config.Get("allowVoice", false) then return end
     if (IsValid(ix.gui.menu)) then return end
     if not ply:IsSpeaking() then return end
     local voice_mat = ixVoice.Ranges[ply:GetLocalVar("voiceRange") or 2].icon

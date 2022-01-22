@@ -168,9 +168,11 @@ function PANEL:Init()
 	self.name:SetTextColor(color_white)
 	self.name:SetFont("stalkerregularfont2")
 
+if ix.config.Get("allowVoice") then
 	self.mute = self:Add("DImageButton")
 	self.mute:DockMargin(5, 0, 0, 0)
 	self.mute:Dock(RIGHT)
+end
 
 	self.rep = self:Add("DLabel")
 	self.rep:DockMargin(5, 0, 0, 0)
@@ -226,7 +228,7 @@ function PANEL:Update()
 		self.name:SizeToContents()
 	end
 
-    if (client != LocalPlayer()) then
+    if (client != LocalPlayer() and IsValid(self.mute)) then
         if (client:IsMuted()) then
             self.mute:SetImage("icon32/muted.png")
             --  self.mute:SizeToContents()
