@@ -1,5 +1,5 @@
-ITEM.name = "Improvised Knife"
-ITEM.description = "A Homemade Knife"
+ITEM.name = "Sharpened Rebar"
+ITEM.description = "A homemade stabbing tool."
 ITEM.model = "models/bf4_sweps/w_knife_shank.mdl"
 ITEM.longdesc = "The knife seems to be in poor condition, and doesn't offer much in terms of cutting capabilites, but one of the sides have been sharpened slightly to compensate."
 ITEM.category = "Melee"
@@ -13,10 +13,8 @@ ITEM.weaponCategory = "knife"
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
 
-ITEM.weight = 0.950
+ITEM.weight = 0.850
 
-ITEM.meattickets = 0
-ITEM.parttickets = 0
 ITEM.knifetier = 0
 ITEM.isPoachKnife = true
 
@@ -37,11 +35,11 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0.719, 93.188, -174.281),
 						["Position"] = Vector(-7.366, 6.884, 6.301),
-						["Model"] = "models/weapons/tfa_nmrih/w_me_bat_metal.mdl",
+						["Model"] = "models/bf4_sweps/w_knife_shank.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
-						["UniqueID"] = "7777994673",
-						["Bone"] = "chest",
+						["UniqueID"] = "shankknife_1",
+						["Bone"] = "pelvis",
 						["Name"] = "bat",
 					},
 				},
@@ -49,22 +47,23 @@ ITEM.pacData = {
 			["self"] = {
 				["AffectChildrenOnly"] = true,
 				["ClassName"] = "event",
-				["UniqueID"] = "1237770522",
+				["UniqueID"] = "shankknife_2",
 				["Event"] = "weapon_class",
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
-				["Arguments"] = "tfa_nmrih_bat@@0",
+				["Arguments"] = "tfa_nmrih_shankknife@@0",
 			},
 		},
 	},
 	["self"] = {
 		["ClassName"] = "group",
-		["UniqueID"] = "2789376348",
+		["UniqueID"] = "shankknife_3",
 		["EditorExpand"] = true,
 	},
 },
 }
 
 function ITEM:PopulateTooltipIndividual(tooltip)
-    ix.util.PropertyDesc(tooltip, "Melee", Color(64, 224, 208))
+	ix.util.PropertyDesc(tooltip, "Melee", Color(64, 224, 208))
+	ix.util.PropertyDesc(tooltip, "Poaching Tool", Color(64, 224, 208))
 end

@@ -1,10 +1,10 @@
-ITEM.name = "Old Knife"
-ITEM.description = "An old knife."
+ITEM.name = "Kitchen Knife"
+ITEM.description = "An unsharpened cooking tool."
 ITEM.model = "models/splatolivia/knife/knife.mdl"
-ITEM.longdesc = "This old knife is in quite bad shape. The handle is rotten, and the knife rattles when you shake it."
+ITEM.longdesc = "This old knife is in quite bad shape. The handle is rotten, and it rattles when you shake it."
 ITEM.category = "Knife"
 
-ITEM.price = 1250
+ITEM.price = 4250
 ITEM.height = 1
 ITEM.width = 2
 
@@ -13,10 +13,8 @@ ITEM.weaponCategory = "knife"
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
 
-ITEM.weight = 0.950
+ITEM.weight = 0.450
 
-ITEM.meattickets = 0
-ITEM.parttickets = 0
 ITEM.knifetier = 1
 ITEM.isPoachKnife = true
 
@@ -37,11 +35,11 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0.719, 93.188, -174.281),
 						["Position"] = Vector(-7.366, 6.884, 6.301),
-						["Model"] = "models/weapons/tfa_nmrih/w_me_bat_metal.mdl",
+						["Model"] = "models/splatolivia/knife/knife.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
-						["UniqueID"] = "7777994673",
-						["Bone"] = "chest",
+						["UniqueID"] = "oldknife_1",
+						["Bone"] = "pelvis",
 						["Name"] = "bat",
 					},
 				},
@@ -49,17 +47,17 @@ ITEM.pacData = {
 			["self"] = {
 				["AffectChildrenOnly"] = true,
 				["ClassName"] = "event",
-				["UniqueID"] = "1237770522",
+				["UniqueID"] = "oldknife_2",
 				["Event"] = "weapon_class",
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
-				["Arguments"] = "tfa_nmrih_bat@@0",
+				["Arguments"] = "tfa_nmrih_oldknife@@0",
 			},
 		},
 	},
 	["self"] = {
 		["ClassName"] = "group",
-		["UniqueID"] = "2789376348",
+		["UniqueID"] = "oldknife_3",
 		["EditorExpand"] = true,
 	},
 },
@@ -67,4 +65,5 @@ ITEM.pacData = {
 
 function ITEM:PopulateTooltipIndividual(tooltip)
     ix.util.PropertyDesc(tooltip, "Melee", Color(64, 224, 208))
+	ix.util.PropertyDesc(tooltip, "Poaching Tool", Color(64, 224, 208))
 end
