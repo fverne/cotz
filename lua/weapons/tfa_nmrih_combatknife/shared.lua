@@ -3,12 +3,12 @@ SWEP.Category = "TFA NMRIH - CotZ"
 SWEP.Spawnable = true
 SWEP.AdminSpawnable = true
 
-SWEP.PrintName = "Combat Knife"
+SWEP.PrintName = "Battered Bayonet"
 
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/me_combatknife/v_me_combatknife.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.WorldModel			= "models/weapons/w_csgo_bayonet.mdl" --Viewmodel path
 

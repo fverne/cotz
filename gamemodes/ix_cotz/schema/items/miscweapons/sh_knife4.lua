@@ -20,9 +20,9 @@ ITEM.isPoachKnife = true
 
 ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(-23, 0, 5),
-	ang = Angle(0, -0, -90),
-	fov = 70
+	pos = Vector(5, 20, 2),
+	ang = Angle(0, 270, -120),
+	fov = 45,
 }
 ITEM.pacData = {
 [1] = {

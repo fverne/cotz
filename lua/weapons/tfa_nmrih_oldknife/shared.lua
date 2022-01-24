@@ -3,12 +3,12 @@ SWEP.Category = "TFA NMRIH - CotZ"
 SWEP.Spawnable = true
 SWEP.AdminSpawnable = true
 
-SWEP.PrintName = "Old Knife"
+SWEP.PrintName = "Kitchen Knife"
 
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/me_msknife/v_me_msknife.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.WorldModel			= "models/splatolivia/knife/knife.mdl" --Viewmodel path
 SWEP.HoldType = "knife"

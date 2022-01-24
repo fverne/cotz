@@ -3,12 +3,12 @@ SWEP.Category = "TFA NMRIH - CotZ"
 SWEP.Spawnable = true
 SWEP.AdminSpawnable = true
 
-SWEP.PrintName = "Improvised Knife"
+SWEP.PrintName = "Sharpened Rebar"
 
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/me_shankknife/v_me_shankknife.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.WorldModel			= "models/bf4_sweps/w_knife_shank.mdl" --Viewmodel path
 SWEP.HoldType = "knife"
