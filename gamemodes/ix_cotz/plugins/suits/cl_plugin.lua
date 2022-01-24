@@ -37,64 +37,29 @@ end
 
 function PLUGIN:HUDPaint()
 	local lp = LocalPlayer()
-	local wep = LocalPlayer():GetActiveWeapon()
-	local char = lp:GetCharacter()
 	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible() or ix.option.Get("disablehud", false)) then return end
 	local equippedgasmask = LocalPlayer():getEquippedGasmask()
 	local equippedhelmet = LocalPlayer():getEquippedHelmet()
 	local equippedarmor = LocalPlayer():getEquippedBodyArmor()
 	local equippedpartdura = 100
-	local equippedpartdurafinal = 100
-	local armor = Material("vgui/hud/bron.png", "noclamp smooth")
-	local armor2 = Material("vgui/hud/bron2.png", "noclamp smooth")
-	local armor3 = Material("vgui/hud/bron3.png", "noclamp smooth")
-	local armor4 = Material("vgui/hud/bron4.png", "noclamp smooth")
 
 
 	if equippedgasmask then
 		if equippedgasmask:GetData("durability") and equippedgasmask:GetData("durability") < equippedpartdura then
 			equippedpartdura = equippedgasmask:GetData("durability")
-			if equippedpartdurafinal > equippedpartdura then
-				equippedpartdurafinal = equippedpartdura
-			end
+			ix.util.DrawStatusIcon("stalker/ui/gas.png", equippedpartdura, ScrW()*0.88, ScrH()*0.79, 0)
 		end
 	end
 	if equippedhelmet then
 		if equippedhelmet:GetData("durability") and equippedhelmet:GetData("durability") < equippedpartdura then
 			equippedpartdura = equippedhelmet:GetData("durability")
-			if equippedpartdurafinal > equippedpartdura then
-				equippedpartdurafinal = equippedpartdura
-			end
+			ix.util.DrawStatusIcon("stalker/ui/helmet.png", equippedpartdura, ScrW()*0.88, ScrH()*0.79)
 		end
 	end
 	if equippedarmor then
 		if equippedarmor:GetData("durability") and equippedarmor:GetData("durability") < equippedpartdura then
 			equippedpartdura = equippedarmor:GetData("durability")
-			if equippedpartdurafinal > equippedpartdura then
-				equippedpartdurafinal = equippedpartdura
-			end
+			ix.util.DrawStatusIcon("stalker/ui/armor.png", equippedpartdura, ScrW()*0.88, ScrH()*0.79)
 		end
 	end
-
-	if equippedpartdura then
-	surface.SetMaterial(armor)
-		if equippedpartdurafinal >= 80 then
-			surface.SetDrawColor(Color(0, 0, 0, 0))
-		elseif equippedpartdurafinal < 80 and equippedpartdurafinal >= 60 then
-			surface.SetMaterial(armor)
-			surface.SetDrawColor(Color(200, 200, 200, 255))
-		elseif equippedpartdurafinal < 60 and equippedpartdurafinal >= 40 then
-			surface.SetMaterial(armor2)
-			surface.SetDrawColor(Color(200, 200, 200, 255))
-		elseif equippedpartdurafinal < 40 and equippedpartdurafinal >= 20 then
-			surface.SetMaterial(armor3)
-			surface.SetDrawColor(Color(200, 200, 200, 255))
-		elseif equippedpartdurafinal < 20 and equippedpartdurafinal >= 0 then
-			surface.SetMaterial(armor4)
-			surface.SetDrawColor(Color(200, 200, 200, 255))
-		end
-	else
-		surface.SetDrawColor(Color(0, 0, 0, 0))
-	end
-	surface.DrawTexturedRect(ScrW()*0.88, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
 end

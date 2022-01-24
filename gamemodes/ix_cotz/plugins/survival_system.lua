@@ -159,56 +159,11 @@ function PLUGIN:AdjustStaminaOffset(client, offset)
 end
 
 function PLUGIN:HUDPaint()
-	local hunger = Material("vgui/hud/hunger.png", "noclamp smooth")
-	local hunger2 = Material("vgui/hud/hunger2.png", "noclamp smooth")
-	local hunger3 = Material("vgui/hud/hunger3.png", "noclamp smooth")
-	local hunger4 = Material("vgui/hud/hunger4.png", "noclamp smooth")
-	local thirst = Material("vgui/hud/thirst.png", "noclamp smooth")
-	local thirst2 = Material("vgui/hud/thirst2.png", "noclamp smooth")
-	local thirst3 = Material("vgui/hud/thirst3.png", "noclamp smooth")
-	local thirst4 = Material("vgui/hud/thirst4.png", "noclamp smooth")
 	local lp = LocalPlayer()
-	local char = lp:GetCharacter()
 	if (!lp:GetCharacter() or !lp:Alive() or ix.gui.characterMenu:IsVisible() or ix.option.Get("disablehud", false)) then return end
 
-	surface.SetMaterial(thirst)
-	if LocalPlayer():GetThirst() > 60 then
-		surface.SetMaterial(thirst)
-		surface.SetDrawColor(Color(0, 0, 0, 0))
-	elseif LocalPlayer():GetThirst() <= 60 and LocalPlayer():GetThirst() > 45 then
-		surface.SetMaterial(thirst)
-		surface.SetDrawColor(Color(200, 200, 200, 255))
-	elseif LocalPlayer():GetThirst() <= 45 and LocalPlayer():GetThirst() > 30 then
-		surface.SetMaterial(thirst2)
-		surface.SetDrawColor(Color(200, 200, 200, 255))
-	elseif LocalPlayer():GetThirst() <= 30 and LocalPlayer():GetThirst() > 15 then
-		surface.SetMaterial(thirst3)
-		surface.SetDrawColor(Color(200, 200, 200, 255))
-	elseif LocalPlayer():GetThirst() <= 15 then
-		surface.SetMaterial(thirst4)
-		surface.SetDrawColor(Color(200, 200, 200, 255))
-	end
-	surface.DrawTexturedRect(ScrW()*0.84, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
-
-	surface.SetMaterial(hunger)
-	if LocalPlayer():GetHunger() > 60 then
-		surface.SetMaterial(hunger)
-		surface.SetDrawColor(Color(0, 0, 0, 0))
-	elseif LocalPlayer():GetHunger() <= 60 and LocalPlayer():GetHunger() > 45 then
-		surface.SetMaterial(hunger)
-		surface.SetDrawColor(Color(200, 200, 200, 255))
-	elseif LocalPlayer():GetHunger() <= 45 and LocalPlayer():GetHunger() > 30 then
-		surface.SetMaterial(hunger2)
-		surface.SetDrawColor(Color(200, 200, 200, 255))
-	elseif LocalPlayer():GetHunger() <= 30 and LocalPlayer():GetHunger() > 15 then
-		surface.SetMaterial(hunger3)
-		surface.SetDrawColor(Color(200, 200, 200, 255))
-	elseif LocalPlayer():GetHunger() <= 15 then
-		surface.SetMaterial(hunger4)
-		surface.SetDrawColor(Color(200, 200, 200, 255))
-	end
-	surface.DrawTexturedRect(ScrW()*0.82, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
-
+	ix.util.DrawStatusIcon("stalker/ui/thirst.png", LocalPlayer():GetThirst(), ScrW()*0.84, ScrH()*0.79)
+	ix.util.DrawStatusIcon("stalker/ui/hunger.png", LocalPlayer():GetHunger(), ScrW()*0.82, ScrH()*0.79)
 end
 
 ix.command.Add("charsetthirst", {
