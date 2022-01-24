@@ -191,6 +191,7 @@ if (CLIENT) then
 	function PLUGIN:GetWeaponTable(weapontable)
 		local weapons = {}
 
+		local KNIFESLOT = 1
 		local SECONDARYSLOT = 2
 		local PRIMARYSLOT = 3
 		local MISCSLOT = 4
@@ -202,7 +203,7 @@ if (CLIENT) then
 				weapons[1] = weapontable[i]
 			elseif (weapontable[i].Slot == SECONDARYSLOT) then
 				weapons[2] = weapontable[i]
-			elseif (weapontable[i]:GetClass() == "ix_hands") then
+			elseif (weapontable[i].Slot == KNIFESLOT or weapontable[i]:GetClass() == "ix_hands") then
 				weapons[3] = weapontable[i]
 			elseif (weapontable[i].Slot == MISCSLOT) then
 				weapons[4] = weapontable[i]
