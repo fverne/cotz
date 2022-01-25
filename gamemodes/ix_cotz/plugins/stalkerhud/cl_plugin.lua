@@ -1,8 +1,4 @@
 local Texture2 = Material("cotz/panels/hp1.png", "noclamp smooth")
-local gun = Material("vgui/hud/gun.png", "noclamp smooth")
-local gun2 = Material("vgui/hud/gun2.png", "noclamp smooth")
-local gun3 = Material("vgui/hud/gun3.png", "noclamp smooth")
-local gun4 = Material("vgui/hud/gun4.png", "noclamp smooth")
 local Ammo = Material("stalker/ui/ammo.png", "noclamp smooth")
 
 surface.CreateFont("stalkermainmenufont", {
@@ -253,29 +249,9 @@ function PLUGIN:HUDPaint()
 	surface.SetDrawColor(Color(255, 120, 120, 255))
 	surface.DrawTexturedRectUV(ScrW()*0.05, ScrH()*0.905, math.Clamp(LocalPlayer():Health()/LocalPlayer():GetMaxHealth(), 0, 1)*ScrW()*0.15, ScrH()*0.008, 0, 0, math.Clamp(LocalPlayer():Health()/LocalPlayer():GetMaxHealth(), 0, 1), 1)
 
-	surface.SetMaterial(gun)
-	if IsValid( wep ) then
-		if string.sub(wep:GetClass(),1,3) == "cw_" then
-			if LocalPlayer():GetActiveWeapon():GetWeaponWear() > 80 then
-				surface.SetDrawColor(Color(0, 0, 0, 0))
-			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 60 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 80 then
-				surface.SetMaterial(gun)
-				surface.SetDrawColor(Color(200, 200, 200, 255))
-			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 40 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 60 then
-				surface.SetMaterial(gun2)
-				surface.SetDrawColor(Color(200, 200, 200, 255))
-			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 20 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 40 then
-				surface.SetMaterial(gun3)
-				surface.SetDrawColor(Color(200, 200, 200, 255))
-			elseif LocalPlayer():GetActiveWeapon():GetWeaponWear() > 0 and LocalPlayer():GetActiveWeapon():GetWeaponWear() <= 20 then
-				surface.SetMaterial(gun4)
-				surface.SetDrawColor(Color(200, 200, 200, 255))
-			end
-		else
-			surface.SetDrawColor(Color(0, 0, 0, 0))
-		end
+	if IsValid( wep ) && string.sub(wep:GetClass(),1,3) == "cw_" then
+		ix.util.DrawStatusIcon("stalker/ui/pistol.png", LocalPlayer():GetActiveWeapon():GetWeaponWear(), ScrW()*0.9, ScrH()*0.79)
 	end
-	surface.DrawTexturedRect(ScrW()*0.9, ScrH()*0.79, ScrW()*0.018, ScrH()*0.032)
 end
 
 
