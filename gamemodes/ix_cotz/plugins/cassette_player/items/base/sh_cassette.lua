@@ -74,6 +74,7 @@ ITEM.functions.insert = {
 		else
 			return false
 		end
+		return false
 	end,
 	OnCanRun = function(item)
 		return (!IsValid(item.entity))

@@ -1,7 +1,7 @@
 ﻿ITEM.name = "Firelake Cassette Tape"
 ITEM.description = "An old cassette tape."
 ITEM.longdesc = "This cassette tape only features three songs, all by the band Firelake."
-ITEM.price = 51490
+ITEM.price = 5149
 ITEM.model = "models/kek1ch/cassette_white.mdl"
 
 ITEM.cassette_options = {}

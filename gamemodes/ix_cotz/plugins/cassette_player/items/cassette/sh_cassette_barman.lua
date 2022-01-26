@@ -1,7 +1,7 @@
 ﻿ITEM.name = "Barman's Cassette Tape"
 ITEM.description = "A weathered cassette tape."
 ITEM.longdesc = "The cassette tape is signed by a deceased, and famous, barman from the zone. The tracklist reveals most of the songs are relaxed, and therefor fit for crowded places."
-ITEM.price = 76940
+ITEM.price = 7694
 ITEM.model = "models/kek1ch/cassette_droda.mdl"
 
 ITEM.cassette_options = {}

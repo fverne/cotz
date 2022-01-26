@@ -1,7 +1,7 @@
 ﻿ITEM.name = "'True' Cassette Tape"
 ITEM.description = "A bashed cassette tape."
 ITEM.longdesc = "This cassette tape has a signature on the back, but it's a name you don't recognize."
-ITEM.price = 176940
+ITEM.price = 1769
 ITEM.model = "models/kek1ch/cassette_taksin.mdl"
 
 ITEM.cassette_options = {}
