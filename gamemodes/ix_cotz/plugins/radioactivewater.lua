@@ -26,7 +26,7 @@ if SERVER then
 				if(player:WaterLevel() > 0) then
 					local TEMP_TargetDamage = DamageInfo()
 									
-					TEMP_TargetDamage:SetDamage(player:WaterLevel())
+					TEMP_TargetDamage:SetDamage(player:WaterLevel() * 2)
 					TEMP_TargetDamage:SetInflictor(player)
 					TEMP_TargetDamage:SetDamageType(DMG_RADIATION)
 					TEMP_TargetDamage:SetAttacker(player)

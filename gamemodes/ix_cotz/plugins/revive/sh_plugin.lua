@@ -22,7 +22,7 @@ function PLUGIN:PlayerDisconnected(ply)
 		end
 	end
 
-	if (points) then 
+	if (points) then
 		for k, v in ipairs(nut.class.list) do
 			if (class == v.index) then
 				className = v.uniqueID
@@ -97,8 +97,8 @@ if (CLIENT) then
 else
 	function PLUGIN:PlayerSpawn( client )
 		client:UnSpectate()
-		if not client:GetCharacter() then 
-			return 
+		if not client:GetCharacter() then
+			return
 		end
 
 		if IsValid(ix.temp.Corpses[client]) then
@@ -119,8 +119,8 @@ else
   ix.temp.Corpses = ix.temp.Corpses or {}
 
   function PLUGIN:DoPlayerDeath( client, attacker, dmg )
-		if not client:GetCharacter() then 
-			return 
+		if not client:GetCharacter() then
+			return
 		end
 
 		ix.temp.Corpses[client] = ents.Create("prop_ragdoll")
@@ -176,3 +176,35 @@ else
 	end)
 end
 
+ix.command.Add("charrevive", {
+    adminOnly = true,
+    alias = {"revive", "resurrect"},
+    description = "Revives the player who is in dead body state and set their HP. Default: 100 HP.",
+    arguments = {ix.type.string, bit.bor(ix.type.number, ix.type.optional)},
+    OnRun = function(self, client, target, health)
+        local target = ix.util.FindPlayer(target)
+        if not target then return client:Notify("Target can not be found!") end
+        if not health then health = 100 end
+        if health < 1 then return client:Notify("The health reset value must be greater than 1!") end
+
+        if health then
+            health = math.Round(health)
+        end
+
+        if not ix.temp.Corpses[target].isDeadBody then return client:Notify("The target is not dead, they can't be revived!") end
+        target:UnSpectate()
+        target:SetNetVar("resurrected", true)
+        target:Spawn()
+        target:SetHealth(health or 100)
+        target:SetPos(ix.temp.Corpses[target]:GetPos())
+
+        if target ~= client then
+            client:Notify("You revived " .. target:GetName())
+            target:Notify("You were revived by " .. client:GetName())
+        else
+            if target == client then
+                client:Notify("You revived yourself")
+            end
+        end
+    end
+})

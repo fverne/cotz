@@ -3,12 +3,12 @@ SWEP.Category = "TFA NMRIH - CotZ"
 SWEP.Spawnable = true
 SWEP.AdminSpawnable = true
 
-SWEP.PrintName = "Improvised Knife"
+SWEP.PrintName = "Sharpened Rebar"
 
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/me_shankknife/v_me_shankknife.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.WorldModel			= "models/bf4_sweps/w_knife_shank.mdl" --Viewmodel path
 SWEP.HoldType = "knife"
@@ -40,10 +40,10 @@ SWEP.Primary.Reach = 40
 SWEP.Primary.RPM = 85
 SWEP.Primary.SoundDelay = 0.1
 SWEP.Primary.Delay = 0.25
-SWEP.Primary.Damage = 60
+SWEP.Primary.Damage = 50
 
 SWEP.Secondary.RPM = 60 -- Delay = 60/RPM, this is only AFTER you release your heavy attack
-SWEP.Secondary.Damage = 90
+SWEP.Secondary.Damage = 70
 SWEP.Secondary.Reach = 40
 SWEP.Secondary.SoundDelay = 0.05
 SWEP.Secondary.Delay = 0.25

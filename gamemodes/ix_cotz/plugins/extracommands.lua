@@ -53,8 +53,9 @@ ix.command.Add("Event", {
 	end
 })
 
-ix.command.Add("cleanitems", {
+ix.command.Add("clearitems", {
 	adminOnly = true,
+	alias = {"removeitems", "cleanitems"},
 	OnRun = function(self, client, arguments)
 
 		for k, v in pairs(ents.FindByClass("ix_item")) do
@@ -65,8 +66,9 @@ ix.command.Add("cleanitems", {
 	end
 })
 
-ix.command.Add("cleannpcs", {
+ix.command.Add("clearnpcs", {
 	adminOnly = true,
+	alias = {"removenpcs", "cleannpcs"},
 	OnRun = function(self, client, arguments)
 
 	for k, v in pairs( ents.GetAll( ) ) do
@@ -145,6 +147,43 @@ ix.command.Add("setdata", {
 	end
 })
 
+ix.command.Add("CharResetValues", {
+    adminOnly = true,
+    description = "Resets the specified characters values such as hunger, thirst, psyhealth, hp, etc.",
+    arguments = {bit.bor(ix.type.string, ix.type.optional)},
+    OnRun = function(self, client, target)
+        if not target or target == "" then
+            target = client:GetCharacter():GetName()
+        end
+
+        local target = ix.util.FindPlayer(target)
+
+        if not target then
+            client:Notify("Invalid Target!")
+
+            return
+        end
+
+        target:SetPsyHealth(100)
+        target:SetHunger(100)
+        target:SetThirst(100)
+        target:setRadiation(0)
+        target:SetHealth(100)
+        target:SetLocalVar("stm", 100)
+
+        if client == target then
+            client:Notify("You have reset your character values")
+        else
+            client:Notify("You have reset " .. target:Name() .. "'s character values")
+            target:Notify(client:Name() .. " has reset your character values")
+        end
+
+        target:UpdatePsyHealthState(target)
+        target:UpdateHungerState(target)
+        target:UpdateThirstState(target)
+    end
+})
+
 -- Credit goes to SmithyStanley
 ix.command.Add("clearinv", {
 	description = "Removes all the items in the target characters inventory.",
@@ -221,5 +260,13 @@ ix.command.Add("workshop", {
 ix.command.Add("discord", {
 	OnRun = function(self, client, arguments)
 	client:SendLua([[gui.OpenURL("https://discord.gg/n3qW6VdsN3")]])
+	end
+})
+
+ix.command.Add("suicide", {
+	alias = {"unstuck", "respawn"},
+	description = "Kill yourself, use if stuck somewhere.",
+	OnRun = function(self, client)
+		client:Kill()
 	end
 })

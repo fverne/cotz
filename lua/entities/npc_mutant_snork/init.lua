@@ -42,6 +42,9 @@ ENT.longjumping2 = 0
 ENT.hp = 200
 ENT.hpvar = 50
 
+ENT.flatbulletresistance = 2
+ENT.percentbulletresistance = 15
+
 ENT.NextAbilityTime = 0
 
 ENT.MinRangeDist = 0
@@ -217,5 +220,13 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 				end
 			end
 		end
+	end
+end
+
+function ENT:STALKERNPCDamageTake(dmginfo,mul) 
+	if(dmginfo:GetDamageType() == DMG_BULLET) then
+		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
+		dmginfo:SubtractDamage(self.flatbulletresistance)
+		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 end

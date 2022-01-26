@@ -1,7 +1,7 @@
 ﻿ITEM.name = "Mercenary Cassette Tape"
 ITEM.description = "A battered cassette tape."
 ITEM.longdesc = "This cassette tape features tracks that the local guns for hire seems to adore."
-ITEM.price = 87940
+ITEM.price = 8794
 ITEM.model = "models/kek1ch/cassette_backkek.mdl"
 
 ITEM.cassette_options = {}

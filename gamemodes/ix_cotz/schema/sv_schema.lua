@@ -12,10 +12,11 @@ resource.AddWorkshop( '2290960561' ) -- cotz_wepmats2
 resource.AddWorkshop( '2290872628' ) -- cotz_playermodels
 resource.AddWorkshop( '2290889386' ) -- cotz_items
 resource.AddWorkshop( '2290895919' ) -- cotz_ui
-resource.AddWorkshop( '2290874511' ) -- cotz_gmodreplacements
---resource.AddWorkshop( '1953373229' ) -- Nodegraph Editor (Updated to support larger limits)
-resource.AddWorkshop( '1470158687' ) -- Full Integrated Animation P.M. for NPCs HL2
+resource.AddWorkshop( '2547569131' ) -- cotz_projectstalker
 resource.AddWorkshop( '2315743109' ) -- cotz_temp_humannpc
+
+resource.AddWorkshop( '2290874511' ) -- cotz_gmodreplacements
+resource.AddWorkshop( '1470158687' ) -- Full Integrated Animation P.M. for NPCs HL2
+
 resource.AddWorkshop( '2447774443' ) -- StormFox 2
 resource.AddWorkshop( '2259842946' ) -- Great Swamp
-resource.AddWorkshop( '2547569131' ) -- cotz_projectstalker

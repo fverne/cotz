@@ -58,7 +58,7 @@ function ENT:STALKERNPCIsFriendlyClass(NPC)
 	if(NPC.SNPCClass==self.SNPCClass) then
 		return true
 	end
-	
+
 	return false
 end
 
@@ -67,27 +67,27 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 	if(!CAPS) then
 		CAPS = {}
 	end
-	
+
 	self:SetModel( self.Model )
-	
-	
+
+
 	--self:SetCustomCollisionCheck()
-	
+
 	self:SetHullSizeNormal()
 	if(isvector(VEC)) then
 		VEC = Vector(math.abs(VEC.x),math.abs(VEC.y),math.abs(VEC.z))
-		
+
 		self:SetCollisionBounds(Vector(-VEC.x,-VEC.y,0),Vector(VEC.x,VEC.y,VEC.z))
 	elseif(istable(VEC)) then
 		self:SetCollisionBounds(VEC[1],VEC[2])
 	end
-	
+
 	self:SetSolid(SOLID_BBOX)
-	
+
 	self:SetCollisionGroup(COLLISION_GROUP_NPC)
 
 	self:SetUseType(SIMPLE_USE)
-	
+
 	self:SetMoveType( MTYPE )
 	self:CapabilitiesAdd( bit.bor(CAP_MOVE_GROUND, CAP_AUTO_DOORS, CAP_USE, CAP_OPEN_DOORS, CAP_SQUAD, CAP_SKIP_NAV_GROUND_CHECK) )
 	if(#CAPS>0) then
@@ -95,34 +95,34 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 			self:CapabilitiesAdd( bit.bor(CAPS[C]) )
 		end
 	end
-	
+
 	self:SetBloodColor(BLOOD_COLOR_RED)
-	
+
 	self:SetSkin(math.random(0,self:SkinCount()-1))
-	
+
 	self:AddEFlags(EFL_NO_DISSOLVE)
 
 	if(IsValid(self:GetActiveWeapon())) then
 		self:GetActiveWeapon():Remove()
 	end
-	
+
 	self:SetEnemy(nil)
-	
+
 	self:DropToFloor()
-	
+
 	--LAG COMP ATTEMPT
 	self:SetLagCompensated(true)
 	--END LAG COMP ATTEMPT
 
 	self:Activate()
-	
-	
-	
+
+
+
 	duplicator.RegisterEntityClass( self:GetClass(), function( ply, data )
 		duplicator.GenericDuplicatorFunction( ply, data )
 	end, "Data" )
-	
-	
+
+
 	if(self.SNPCClass=="C_ZOMBIE") then
 		function self:STALKERNPCIsFriendlyClass(NPC)
 
@@ -130,7 +130,7 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 			NPC:Classify()==CLASS_ZOMBIE||NPC:Classify()==CLASS_HEADCRAB) then
 				return true
 			end
-				
+
 			return false
 		end
 	elseif(self.SNPCClass=="C_MONSTER_SAVAGE") then
@@ -141,7 +141,7 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 			NPC:Classify()==CLASS_ZOMBIE||NPC:Classify()==CLASS_HEADCRAB) then
 				return true
 			end
-				
+
 			return false
 		end
 	elseif(self.SNPCClass=="C_MONSTER_CAT") then
@@ -152,7 +152,7 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 			NPC:Classify()==CLASS_ZOMBIE||NPC:Classify()==CLASS_HEADCRAB) then
 				return true
 			end
-				
+
 			return false
 		end
 	elseif(self.SNPCClass=="C_MONSTER_DOG") then
@@ -163,7 +163,7 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 			NPC:Classify()==CLASS_ZOMBIE||NPC:Classify()==CLASS_HEADCRAB) then
 				return true
 			end
-				
+
 			return false
 		end
 	elseif(self.SNPCClass=="C_MONSTER_BOAR") then
@@ -174,7 +174,7 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 			NPC:Classify()==CLASS_ZOMBIE||NPC:Classify()==CLASS_HEADCRAB) then
 				return true
 			end
-				
+
 			return false
 		end
 	elseif(self.SNPCClass=="C_MONSTER_RAT") then
@@ -185,7 +185,7 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 			NPC:Classify()==CLASS_ZOMBIE||NPC:Classify()==CLASS_HEADCRAB) then
 				return true
 			end
-				
+
 			return false
 		end
 	elseif(self.SNPCClass=="C_MONSTER_BIG") then
@@ -195,7 +195,7 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 			NPC:Classify()==CLASS_ZOMBIE||NPC:Classify()==CLASS_HEADCRAB) then
 				return true
 			end
-				
+
 			return false
 		end
 	elseif(self.SNPCClass=="C_MONSTER_CONTROLLER") then
@@ -205,12 +205,12 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 			NPC.SNPCClass=="C_MONSTER_LAB"||NPC.SNPCClass=="C_MONSTER_SAVAGE"||NPC:Classify()==CLASS_HEADCRAB) then
 				return true
 			end*/
-			
+
 			if(NPC:Classify()==CLASS_ZOMBIE||
 			NPC:Classify()==CLASS_HEADCRAB) then
 				return true
 			end
-				
+
 			return false
 		end
 	elseif(self.SNPCClass=="C_MONSTER_PLAYERFOCUS") then
@@ -231,15 +231,21 @@ function ENT:STALKERNPCIsEnemyNPC(ENT2)
 	(ENT2==self:GetEnemy()||self==ENT2:GetEnemy()))) then
 		return true
 	end
-	
+
 	return false
 end
-	
+
 function ENT:STALKERNPCIsEnemyPlayer(ENT2)
-	if(ENT2:IsPlayer()&&ENT2:Alive()&&GetConVar("ai_ignoreplayers"):GetInt()==0) then
+
+    local isObservering = {
+        [MOVETYPE_OBSERVER] = true,
+        [MOVETYPE_NOCLIP] = true
+    }
+
+	if(ENT2:IsPlayer()&&ENT2:Alive()&&GetConVar("ai_ignoreplayers"):GetInt()==0&&!isObservering[ENT2:GetMoveType()]) then
 		return true
 	end
-	
+
 	return false
 end
 
@@ -264,16 +270,16 @@ function ENT:STALKERNPCTryToFindEnemy()
 	local TEMP_VisibleTargets = {}
 	local TEMP_NearEnemyCount = 0
 	local TEMP_PossibleTarget = NULL
-	
+
 	local TEMP_NearestNpcDistance = 1500
 	local TEMP_NearestNpc = self
 
 	local TEMP_MyNearbyTargets = ents.FindInSphere(self:GetPos(),TEMP_NearestNpcDistance)
-		
-	if (#TEMP_MyNearbyTargets>0) then 
+
+	if (#TEMP_MyNearbyTargets>0) then
 		for T=1, #TEMP_MyNearbyTargets do
 			local TEMP_NPC = TEMP_MyNearbyTargets[T]
-			
+
 			if(IsValid(TEMP_NPC)&&TEMP_NPC!=nil&&TEMP_NPC!=NULL&&TEMP_NPC!=self&&TEMP_NPC:GetClass()!="bullseye_strider_focus") then
 				if((TEMP_NPC:IsNPC()||TEMP_NPC:IsPlayer())) then
 					if(TEMP_NPC:IsNPC()||self:STALKERNPCIsEnemyPlayer(TEMP_NPC)) then
@@ -284,15 +290,15 @@ function ENT:STALKERNPCTryToFindEnemy()
 								TEMP_NPC:AddEntityRelationship(self,D_HT,self.Hate)
 							end
 						end
-						
+
 						if(TEMP_NPC:IsNPC()) then
 							self:STALKERNPCCheckingNPCOnEnemyFind(TEMP_NPC,TEMP_NPC:Disposition(self))
 						end
-							
+
 						local TEMP_Ang = (TEMP_NPC:GetPos()-self:GetPos()):Angle().Yaw-self:GetAngles().Yaw
 
 						if(math.abs(TEMP_Ang)<90) then
-						
+
 							if(TEMP_NPC:IsPlayer()||TEMP_NPC:Disposition(self)==D_HT) then
 								if(T==1) then
 									TEMP_NearestNpcDistance = self:GetPos():Distance(TEMP_NPC:GetPos())
@@ -303,7 +309,7 @@ function ENT:STALKERNPCTryToFindEnemy()
 										TEMP_NearestNpc = TEMP_NPC
 									end
 								end
-								
+
 								if(self.NearestEnemyFindDistance>0) then
 									if(Tyrant_EnemyInMeleeRange(TEMP_NPC,0,self.NearestEnemyFindDistance)==2) then
 										TEMP_NearEnemyCount = TEMP_NearEnemyCount+1
@@ -316,22 +322,22 @@ function ENT:STALKERNPCTryToFindEnemy()
 			end
 		end
 	end
-	
-	
-	
+
+
+
 	if(IsValid(TEMP_NearestNpc)&&TEMP_NearestNpc!=nil&&TEMP_NearestNpc!=NULL&&TEMP_NearestNpc!=self) then
 		if(self.PlayingAnimation==false) then
 			if(TEMP_NearestNpc!=self:GetEnemy()) then
 				self:AddEntityRelationship( TEMP_NearestNpc, D_HT, 1 )
 				self:SetEnemy(TEMP_NearestNpc)
 				self:UpdateEnemyMemory(TEMP_NearestNpc,TEMP_NearestNpc:GetPos())
-				
+
 				//self:SetSchedule(SCHED_CHASE_ENEMY)
 				self:SelectSchedule()
 			end
 		end
 	end
-	
+
 	return TEMP_NearEnemyCount
 end
 
@@ -353,16 +359,16 @@ end
 
 
 function ENT:STALKERNPCKill(dmginfo)
-	
+
 	if(self.IsAlive==true) then
 		self.IsAlive = false
-		
+
 		self:STALKERNPCStopAllTimers()
 		self.Animation = ""
 		self.AttackIndex = 0
-		
+
 		local TEMP_KillTime = 2
-		
+
 		if(self.DieSoundEnabled==true) then
 			self:STALKERNPCStopPreviousSound()
 			self:STALKERNPCPlaySoundRandom(100,self.DieSound.name,self.DieSound.min,self.DieSound.max)
@@ -370,14 +376,14 @@ function ENT:STALKERNPCKill(dmginfo)
 
 		local TEMP_ATTACKER = dmginfo:GetAttacker()
 		local TEMP_INFLICTOR = dmginfo:GetInflictor()
-		
-		
+
+
 		local TEMP_OWNERVEL = self:GetVelocity()
 
 		self:SetMaterial("")
 		self:ClearSchedule()
 		self:SetNPCState(NPC_STATE_DEAD)
-		
+
 
 		if(!(IsValid(TEMP_ATTACKER)&&TEMP_ATTACKER!=nil&&TEMP_ATTACKER!=NULL&&TEMP_ATTACKER:GetClass()=="npc_barnacle")&&!self.noRagdoll) then
 			if(false/*GetConVar("ai_serverragdolls"):GetInt()==0*/) then
@@ -391,14 +397,14 @@ function ENT:STALKERNPCKill(dmginfo)
 				TEMP_Ragdoll:SetAngles(self:GetAngles())
 				TEMP_Ragdoll:SetSkin(self:GetSkin())
 				TEMP_Ragdoll:Spawn()
-				
+
 				TEMP_Ragdoll:SetMaterial(self:GetMaterial())
 				TEMP_Ragdoll:SetColor(self:GetColor())
 				TEMP_Ragdoll:SetCollisionGroup(COLLISION_GROUP_WEAPON)
-				
+
 				for P=0, TEMP_Ragdoll:GetPhysicsObjectCount()-1 do
 					local TEMP_Phys = TEMP_Ragdoll:GetPhysicsObjectNum(P)
-					
+
 					if(IsValid(TEMP_Phys)) then
 						local TEMP_BoneMat = self:GetBoneMatrix(TEMP_Ragdoll:TranslatePhysBoneToBone(P))
 						local TEMP_BonePos, TEMP_BoneAng = TEMP_BoneMat:GetTranslation(), TEMP_BoneMat:GetAngles()
@@ -407,7 +413,7 @@ function ENT:STALKERNPCKill(dmginfo)
 						TEMP_Phys:SetAngles(TEMP_BoneAng)
 					end
 				end
-				
+
 				for B=0, self:GetBoneCount()-1 do
 					TEMP_Ragdoll:ManipulateBoneScale(B,self:GetManipulateBoneScale(B))
 					TEMP_Ragdoll:ManipulateBonePosition(B,self:GetManipulateBonePosition(B))
@@ -418,7 +424,7 @@ function ENT:STALKERNPCKill(dmginfo)
 						TEMP_Ragdoll:SetVelocity(TEMP_OWNERVEL)
 					end
 				end)
-				
+
 				TEMP_Ragdoll:TakeDamageInfo(dmginfo)
 
 				TEMP_Ragdoll:Fire("kill","",180)
@@ -427,23 +433,23 @@ function ENT:STALKERNPCKill(dmginfo)
 		else
 			TEMP_KillTime = 0.1
 		end
-		
+
 		if(self:IsOnFire()) then
 			self:Extinguish()
 		end
-		
+
 		self:SetNoDraw(true)
 		self:DrawShadow(false)
-			
+
 		self:STALKERNPCStopAllTimers()
-		
+
 		self:SetCondition(67)
 		self:SetNPCState(NPC_STATE_DEAD)
 		self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
 		self:SetCollisionBounds(Vector(0,0,0),Vector(0,0,0))
-		
+
 		self:Fire("kill","",TEMP_KillTime)
-		
+
 		gamemode.Call( "OnNPCKilled",  self, dmginfo:GetAttacker(), dmginfo:GetInflictor() )
 	end
 end
@@ -464,7 +470,7 @@ function ENT:STALKERNPCCreateMeleeTable()
 	TBL.radius = {}
 	TBL.time = {}
 	TBL.bone = {}
-	
+
 	return TBL
 end
 
@@ -475,7 +481,7 @@ function ENT:STALKERNPCRemoveMeleeTable(IND)
 	self.MeleeDamageDistance[IND] = {}
 	self.MeleeDamageBone[IND] = {}
 	self.MeleeDamageRadius[IND] = {}
-	
+
 	self.MeleeAttackSequence[IND] = nil
 	self.MeleeAttackGesture[IND] = nil
 	self.MeleeDamageCount[IND] = nil
@@ -484,15 +490,15 @@ end
 function ENT:STALKERNPCSetMeleeParams(NUM,SEQ,CNT,TBL,TBLH,TBLM)
 	self.MeleeAttackSequence[NUM] = SEQ
 	self.MeleeDamageCount[NUM] = CNT
-	
+
 	if(!self.MeleeHitSound[NUM]) then
 		self.MeleeHitSound[NUM] = {}
 	end
-	
+
 	if(!self.MeleeMissSound[NUM]) then
 		self.MeleeMissSound[NUM] = {}
 	end
-	
+
 	table.Add(self.MeleeHitSound[NUM],TBLH)
 	table.Add(self.MeleeMissSound[NUM],TBLM)
 
@@ -515,7 +521,7 @@ function ENT:STALKERNPCSetMeleeParams(NUM,SEQ,CNT,TBL,TBLH,TBLM)
 		if(!self.MeleeDamageBone[NUM]) then
 			self.MeleeDamageBone[NUM] = {}
 		end
-		
+
 		self.MeleeDamageTime[NUM][N] = TBL.time[N]
 		self.MeleeDamageDamage[NUM][N] = TBL.damage[N]
 		self.MeleeDamageType[NUM][N] = TBL.damagetype[N]
@@ -529,18 +535,18 @@ function ENT:STALKERNPCSetMeleeParamsGesture(NUM,SEQ,CNT,TBL,TBLH,TBLM)
 	self.MeleeAttackSequence[NUM] = SEQ
 	self.MeleeAttackGesture[NUM] = true
 	self.MeleeDamageCount[NUM] = CNT
-	
+
 	if(!self.MeleeHitSound[NUM]) then
 		self.MeleeHitSound[NUM] = {}
 	end
-	
+
 	if(!self.MeleeMissSound[NUM]) then
 		self.MeleeMissSound[NUM] = {}
 	end
-	
+
 	table.Add(self.MeleeHitSound[NUM],TBLH)
 	table.Add(self.MeleeMissSound[NUM],TBLM)
-	
+
 	for N=1,CNT do
 		if(!self.MeleeDamageTime[NUM]) then
 			self.MeleeDamageTime[NUM] = {}
@@ -560,7 +566,7 @@ function ENT:STALKERNPCSetMeleeParamsGesture(NUM,SEQ,CNT,TBL,TBLH,TBLM)
 		if(!self.MeleeDamageBone[NUM]) then
 			self.MeleeDamageBone[NUM] = {}
 		end
-		
+
 		self.MeleeDamageTime[NUM][N] = TBL.time[N]
 		self.MeleeDamageDamage[NUM][N] = TBL.damage[N]
 		self.MeleeDamageType[NUM][N] = TBL.damagetype[N]
@@ -575,7 +581,7 @@ function ENT:STALKERNPCProcessMeleeAttacks()
 		if !v[1] && v[2] < CurTime() then
 			v[1] = true
 			v[3]()
-		end 
+		end
 	end
 end
 
@@ -584,9 +590,9 @@ function ENT:STALKERNPCMakeMeleeAttack(IND)
 
 		local TEMP_MeleeAttackSequenceName = self.Animation
 
-		if (!TEMP_MeleeAttackSequenceName or !self.MeleeDamageCount[IND]) then 
-			self.PlayingAnimation = false 
-			return 
+		if (!TEMP_MeleeAttackSequenceName or !self.MeleeDamageCount[IND]) then
+			self.PlayingAnimation = false
+			return
 		end
 
 		local TEMP_TargetTakeDamage = false
@@ -594,7 +600,7 @@ function ENT:STALKERNPCMakeMeleeAttack(IND)
 		local TEMP_DamagesCount = 0
 
 		self.meleeAttackTimers = {}
-		
+
 		for i=1, self.MeleeDamageCount[IND] do
 			self.meleeAttackTimers[i] = {false, CurTime() + self.MeleeDamageTime[IND][i]-0.2, function()
 				if(IsValid(self)&&self!=nil&&self!=NULL) then
@@ -602,18 +608,18 @@ function ENT:STALKERNPCMakeMeleeAttack(IND)
 						local TEMP_TARGETDMG, TEMP_SOMEONEDMG, TEMP_DMGCNT = self:STALKERNPCDoMeleeDamage(self.MeleeDamageDamage[IND][i],
 						self.MeleeDamageType[IND][i],self.MeleeDamageDistance[IND][i]+7,self.MeleeDamageRadius[IND][i],
 						self.MeleeDamageBone[IND][i],self.MeleeHitSound[IND],self.MeleeMissSound[IND])
-					
-					
+
+
 						if(TEMP_TARGETDMG==true) then
 							TEMP_TargetTakeDamage = true
 						end
-						
+
 						if(TEMP_SOMEONEDMG==true) then
 							TEMP_SomeoneTakeDamage = true
 						end
-						
+
 						TEMP_DamagesCount = TEMP_DamagesCount+TEMP_DMGCNT
-						
+
 						if(i==self.MeleeDamageCount[IND]) then
 							self:STALKERNPCMeleeDamagesEnd(TEMP_TargetTakeDamage,TEMP_SomeoneTakeDamage,TEMP_DamagesCount==self.MeleeDamageCount[IND])
 						end
@@ -621,9 +627,9 @@ function ENT:STALKERNPCMakeMeleeAttack(IND)
 				end
 			end }  -- {hasrun, Time, function}
 		end
-		
+
 		TEMP_AnimDur = self:SequenceDuration(self:LookupSequence(self.Animation))
-		
+
 		if(self.PlayingGesture==true) then
 			TEMP_AnimDur = (self:SequenceDuration(self:LookupSequence(self.Animation))/2)
 		end
@@ -634,8 +640,8 @@ function ENT:STALKERNPCMakeMeleeAttack(IND)
 				self:STALKERNPCClearAnimation()
 			end
 		end}
-		
-		
+
+
 	end
 
 end
@@ -644,7 +650,7 @@ function ENT:STALKERNPCDoMeleeDamage(DMG,TYPE,DIST,RAD,BONE,HITSND,MISSSND)
 	local TEMP_TargetTakeDamage = false
 	local TEMP_SomeoneTakeDamage = false
 	local TEMP_DamagesCount = 0
-	
+
 	if(DIST!=nil) then
 		local TEMP_OBBSize = (Vector(math.abs(self:OBBMins().x),math.abs(self:OBBMins().y),0)+
 		Vector(math.abs(self:OBBMaxs().x),math.abs(self:OBBMaxs().y),0))/2
@@ -657,7 +663,7 @@ function ENT:STALKERNPCDoMeleeDamage(DMG,TYPE,DIST,RAD,BONE,HITSND,MISSSND)
 			TEMP_DMGPOS, TEMP_DMGANG = TEMP_DMGMAT:GetTranslation(), TEMP_DMGMAT:GetAngles()
 		end
 		local TEMP_DamageApplied = false
-			
+
 		if(#TEMP_PossibleDamageTargets>0) then
 			for _,v in pairs(TEMP_PossibleDamageTargets) do
 				if(self:STALKERNPCCanAttackThis(v)&&self:Visible(v)&&v!=self) then
@@ -669,20 +675,20 @@ function ENT:STALKERNPCDoMeleeDamage(DMG,TYPE,DIST,RAD,BONE,HITSND,MISSSND)
 					end
 
 					local TEMP_DistanceForMelee = self:STALKERNPCEnemyInMeleeRange(v,0,DIST)
-					
+
 					local TEMP_DotVector = v:GetPos()
 					local TEMP_DotDir = TEMP_DotVector - self:GetPos()
 					TEMP_DotDir:Normalize()
 					local TEMP_Dot = Vector(self:GetForward().x,self:GetForward().y,0):Dot(Vector(TEMP_DotDir.x,TEMP_DotDir.y,0))
-					
+
 					if(TEMP_DistanceForMelee==2&&(TEMP_Dot>math.cos(RAD)||RAD==360)) then
 						TEMP_DamageApplied = true
 
 						local TEMP_DAMAGEPOSITION = v:NearestPoint(TEMP_DMGPOS)
 						local TEMP_DAMAGEFORCE = (TEMP_DAMAGEPOSITION-TEMP_DMGPOS):GetNormalized()
-						
+
 						local TEMP_TargetDamage = DamageInfo()
-						
+
 						TEMP_TargetDamage:SetDamage(DMG*self:STALKERNPCMeleeAttackDamageMultiple())
 						TEMP_TargetDamage:SetInflictor(self)
 						TEMP_TargetDamage:SetDamageType(TYPE)
@@ -690,38 +696,38 @@ function ENT:STALKERNPCDoMeleeDamage(DMG,TYPE,DIST,RAD,BONE,HITSND,MISSSND)
 						TEMP_TargetDamage:SetDamagePosition(TEMP_DAMAGEPOSITION)
 						TEMP_TargetDamage:SetDamageForce(TEMP_DAMAGEFORCE)
 						v:TakeDamageInfo(TEMP_TargetDamage)
-						
+
 						if(v==self:GetEnemy()) then
 							TEMP_TargetTakeDamage = true
 						end
-						
+
 						if(v:IsNPC()||v:IsPlayer()) then
 							TEMP_SomeoneTakeDamage = true
 							TEMP_DamagesCount = 1
 							self:STALKERNPCMakeDamageToCreature(v)
 						end
-						
-						
+
+
 						if(v:IsPlayer()) then
 							v:ViewPunch(Angle(math.random(-10,10),math.random(-10,10),math.random(-10,10)))
 						end
-						
+
 					end
 				end
 			end
 		end
-		
+
 		if(TEMP_DamageApplied==true) then
 			self:STALKERNPCHitSomething()
-			
+
 			sound.Play( table.Random(HITSND),TEMP_DMGPOS)
 		else
 			sound.Play( table.Random(MISSSND),self:GetPos())
 		end
 	end
-	
-	
-	
+
+
+
 	return TEMP_TargetTakeDamage,TEMP_SomeoneTakeDamage,TEMP_DamagesCount
 end
 
@@ -745,7 +751,7 @@ function ENT:STALKERNPCEnemyInMeleeRange(ENT2,DIST1,DIST2)
 				end
 			end
 		end
-		
+
 		return 0, TEMP_DistanceBetween
 	end
 
@@ -756,11 +762,11 @@ function ENT:STALKERNPCMeleePlay(TEMP_RandomMelee,ROT)
 	if(!isnumber(ROT)) then
 		ROT = 1
 	end
-	
+
 	if(self.MeleeSoundEnabled==true) then
 		self:STALKERNPCPlaySoundRandom(60,self.MeleeSound.name,self.MeleeSound.min,self.MeleeSound.max)
 	end
-	
+
 	if(!isnumber(TEMP_RandomMelee)) then
 		TEMP_RandomMelee = math.random(1,#self.MeleeAttackSequence)
 	end
@@ -772,7 +778,7 @@ function ENT:STALKERNPCMeleePlay(TEMP_RandomMelee,ROT)
 		self:STALKERNPCPlayGesture(self.MeleeAttackSequence[TEMP_RandomMelee],ROT)
 		self:STALKERNPCMakeMeleeAttack(TEMP_RandomMelee)
 	end
-	
+
 	self:STALKERNPCMeleeAttackEvent()
 end
 
@@ -783,11 +789,11 @@ function ENT:STALKERNPCPlaySoundRandom(CH,SNDNM,IMIN,IMAX,CHAN)
 	if(self.NextSoundCanPlayTime<CurTime() and (self.ShouldEmitSound or true)) then
 
 		local TEMP_SoundChance = math.random(1,100)
-	
+
 		if(TEMP_SoundChance<CH) then
-			
+
 			local TEMP_SND = SNDNM..math.random(IMIN,IMAX)
-				
+
 			self:EmitSound( TEMP_SND )
 			self.NextSoundCanPlayTime = CurTime()+SoundDuration(TEMP_SND)+4.5
 			self.LastPlayedSound = TEMP_SND
@@ -800,7 +806,7 @@ function ENT:STALKERNPCStopPreviousSound()
 	self.LastPlayedSound = ""
 	self.NextSoundCanPlayTime = -1
 end
-	
+
 
 
 
@@ -810,12 +816,12 @@ function ENT:STALKERNPCPlayAnimation(ANM,IND,RESETCYCLE)
 	self.PlayingGesture = false
 	self.AttackIndex = IND
 	self:ClearSchedule()
-	
+
 	if(RESETCYCLE==nil||RESETCYCLE==true) then
 		self:ResetSequenceInfo()
 		self:SetCycle(0)
 	end
-	
+
 	self.Animation = ANM
 	self:StopMoving()
 	self:SetNPCState(NPC_STATE_NONE)
@@ -835,13 +841,13 @@ function ENT:STALKERNPCPlayGesture(ANM,IND,PRIOR)
 	self:SetLayerPriority(TEMP_Gesture,PRIOR)
 	self:SetLayerPlaybackRate(TEMP_Gesture,1)
 	self:SetLayerCycle(TEMP_Gesture,0)
-	
+
 	if(ANM==self.FlinchSequence) then
 		self.FlinchGestureIndex = TEMP_Gesture
 	else
 		self.AttackGestureIndex = TEMP_Gesture
 	end
-	
+
 	self.Animation = ANM
 	self.AttackIndex = IND
 	self.PlayingAnimation = true
@@ -851,7 +857,7 @@ end
 function ENT:STALKERNPCClearAnimation()
 	self.Animation = ""
 	self.AttackIndex = 0
-	
+
 	if(self.PlayingGesture==false) then
 		self:ClearSchedule()
 		self:ResetSequenceInfo()
@@ -859,20 +865,20 @@ function ENT:STALKERNPCClearAnimation()
 		if(self.AttackGestureIndex!=nil&&self:IsValidLayer(self.AttackGestureIndex)) then
 			self:SetLayerCycle(self.AttackGestureIndex,1)
 		end
-		
+
 		if(self.FlinchGestureIndex!=nil&&self:IsValidLayer(self.FlinchGestureIndex)) then
 			self:SetLayerCycle(self.FlinchGestureIndex,1)
 		end
-		
+
 		self.AttackGestureIndex = nil
 		self.FlinchGestureIndex = nil
 	end
-	
+
 	self:SetNPCState(NPC_STATE_COMBAT)
 	self.PlayingGesture = false
 	self.PlayingAnimation = false
 
-		
+
 	if(GetConVar("ai_disabled"):GetInt()==1) then
 		self:ResetSequence(self:LookupSequence(self.IdleSequence))
 	end
@@ -895,7 +901,7 @@ function ENT:STALKERNPCStopAllTimers(ALL)
 	for i=1, 10 do
 		timer.Remove("DamageAttack"..tostring(self)..i)
 	end
-	
+
 	if(ALL==true) then
 		timer.Remove("AllowAttack"..tostring(self))
 	end
@@ -940,11 +946,11 @@ function ENT:Think()
 	if(GetConVar("ai_disabled"):GetInt()==0&&self.IsAlive==true) then
 
 		self:STALKERNPCThink()
-		
+
 		if(self.PlayingAnimation==true) then
 			self:STALKERNPCAnimationIsPlaying()
 		end
-		
+
 		if(self.NextTryingFindEnemy<CurTime()) then
 			self.NextTryingFindEnemy = CurTime()+2
 			local TEMP_NearEnemyCount = self:STALKERNPCTryToFindEnemy()
@@ -952,15 +958,15 @@ function ENT:Think()
 		end
 
 		self:STALKERNPCProcessMeleeAttacks()
-		
+
 		if(self:GetEnemy()&&IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL&&
 		(self:STALKERNPCIsEnemyNPC(self:GetEnemy())||self:STALKERNPCIsEnemyPlayer(self:GetEnemy()))) then
 			if(self:IsOnGround()) then
 				if(self.PlayingAnimation==false) then
-					
+
 					if(self:GetEnemy():Visible(self)) then
 						local TEMP_MaxMeleeDistance = self.MeleeAttackDistance
-						
+
 						if(self:IsMoving()) then
 							TEMP_MaxMeleeDistance = self.MeleeAttackDistance+5
 						end
@@ -977,16 +983,16 @@ function ENT:Think()
 						end
 					end
 				end
-				
+
 				self:STALKERNPCThinkEnemyValidNoAnimCheck()
-				
+
 				if(self.PlayingAnimation==false) then
 					self:STALKERNPCThinkEnemyValid()
-					
+
 					if(self.ChasingSoundEnabled==true&&self:IsCurrentSchedule(SCHED_CHASE_ENEMY)) then
 						self:STALKERNPCPlaySoundRandom(self.ChasingSound.chance,self.ChasingSound.name,self.ChasingSound.min,self.ChasingSound.max,"Chase")
 					end
-						
+
 				else
 					self:STALKERNPCAnimEnemyIsValid()
 				end
@@ -995,7 +1001,7 @@ function ENT:Think()
 			if(self.IdlingSoundEnabled==true&&self.PlayingAnimation==false&&self:IsCurrentSchedule(SCHED_IDLE_WANDER)) then
 				self:STALKERNPCPlaySoundRandom(15,self.IdlingSound.name,self.IdlingSound.min,self.IdlingSound.max)
 			end
-			
+
 			self:STALKERNPCThinkNoEnemy()
 		end
 	end
@@ -1007,27 +1013,27 @@ end
 
 function ENT:OnTakeDamage(dmginfo)
 	if(self.IsAlive==false) then return end
-	
+
 	local TEMP_DMGMUL = 1
-	
+
 	local TEMP_RealAttacker = dmginfo:GetAttacker()
 	local TEMP_RealInflictor = dmginfo:GetInflictor()
-	
-		
-			
+
+
+
 	if(!IsValid(TEMP_RealAttacker)&&IsValid(TEMP_RealInflictor)) then
 		TEMP_RealAttacker = TEMP_RealInflictor
 	end
-	
+
 	if(IsValid(TEMP_RealAttacker)&&!IsValid(TEMP_RealInflictor)) then
 		TEMP_RealInflictor = TEMP_RealAttacker
 	end
-	
+
 	if(IsValid(TEMP_RealAttacker)&&TEMP_RealAttacker:IsVehicle()&&IsValid(TEMP_RealAttacker:GetDriver())) then
 		TEMP_RealAttacker = TEMP_RealAttacker:GetDriver()
 	end
 
-	
+
 	if(IsValid(TEMP_RealInflictor)&&IsValid(TEMP_RealAttacker)&&TEMP_RealAttacker==TEMP_RealInflictor&&
 	(TEMP_RealInflictor:IsPlayer()||TEMP_RealInflictor:IsNPC())) then
 		if(IsValid(TEMP_RealInflictor:GetActiveWeapon())) then
@@ -1035,19 +1041,19 @@ function ENT:OnTakeDamage(dmginfo)
 			TEMP_RealInflictor = TEMP_RealInflictor:GetActiveWeapon()
 		end
 	end
-	
+
 	if(!IsValid(TEMP_RealInflictor)&&!IsValid(TEMP_RealAttacker)) then
 		TEMP_RealInflictor = self
 		TEMP_RealAttacker = self
 	end
-	
+
 	dmginfo:SetInflictor(TEMP_RealInflictor)
 	dmginfo:SetAttacker(TEMP_RealAttacker)
-	
-	
+
+
 	if(self.LastDamageHitgroup==-1||self.LastDamageHitgroup==0) then
 		local TEMP_NearestPoint = self:NearestPoint(dmginfo:GetDamagePosition())
-		
+
 		local TEMP_HitTracer = util.TraceHull( {
 			start = TEMP_NearestPoint,
 			endpos = TEMP_NearestPoint,
@@ -1056,31 +1062,31 @@ function ENT:OnTakeDamage(dmginfo)
 			maxs = Vector(100,100,100),
 			filter = function( ent ) if ( ent==self ) then return true end end
 		} )
-		
+
 		if(TEMP_HitTracer.Hit) then
 			self.LastDamageHitgroup = TEMP_HitTracer.HitGroup
 		end
 	end
 
 	if(self.LastDamageHitgroup==-1||self.LastDamageHitgroup==0) then
-		
+
 		local TEMP_HitTracer = util.TraceLine( {
 			start = dmginfo:GetDamagePosition(),
 			endpos = dmginfo:GetDamagePosition()+(dmginfo:GetDamageForce()*100),
 			ignoreworld = true,
 			filter = function( ent ) if ( ent==self ) then return true end end
 		} )
-	
-		
+
+
 		if(TEMP_HitTracer.Hit) then
 			self.LastDamageHitgroup = TEMP_HitTracer.HitGroup
 		end
 	end
-	
+
 	if(self.LastDamageHitgroup==-1||self.LastDamageHitgroup==0) then
 		if(IsValid(TEMP_RealInflictor)&&isentity(TEMP_RealInflictor)&&!TEMP_RealInflictor:IsWeapon()) then
 			local TEMP_InflictorHullMin, TEMP_InflictorHullMax = TEMP_RealInflictor:GetCollisionBounds()
-			
+
 			local TEMP_HitTracer = util.TraceHull( {
 				start = TEMP_RealInflictor:GetPos(),
 				endpos = TEMP_RealInflictor:GetPos()+(TEMP_RealInflictor:GetForward()*100),
@@ -1089,13 +1095,13 @@ function ENT:OnTakeDamage(dmginfo)
 				maxs = TEMP_InflictorHullMax*1.3,
 				filter = function( ent ) if ( ent==self ) then return true end end
 			} )
-		
+
 			if(TEMP_HitTracer.Hit) then
 				self.LastDamageHitgroup = TEMP_HitTracer.HitGroup
 			end
 		end
 	end
-		
+
 	if(self.LastDamageHitgroup==8) then
 		TEMP_DMGMUL = TEMP_DMGMUL*1.25
 	end
@@ -1107,13 +1113,13 @@ function ENT:OnTakeDamage(dmginfo)
 	if TEMP_DMGMUL == nil then
 		TEMP_DMGMUL = prenpc
 	end
-	
+
 	self:SetHealth(self:Health()-(dmginfo:GetDamage()*TEMP_DMGMUL))
-	
+
 	if(dmginfo:GetDamageType()!=DMG_SONIC and dmginfo:GetDamageType()!=DMG_POISON ) then
 		STALKERNPCBleed(self,dmginfo:GetDamage()/4,dmginfo:GetDamagePosition(),Angle(math.random(1,360),math.random(1,360),math.random(1,360)))
 	end
-	
+
 	if(self:Health()>0) then
 		if(self.PainSoundEnabled==true) then
 			self:STALKERNPCPlaySoundRandom(33,self.PainSound.name,self.PainSound.min,self.PainSound.max)
@@ -1122,7 +1128,7 @@ function ENT:OnTakeDamage(dmginfo)
 		self:STALKERNPCKill(dmginfo)
 		self:STALKERNPCOnDeath()
 	end
-	
+
 	if(self.PlayingAnimation==false) then
 		if(TEMP_RealAttacker!=game.GetWorld()&&IsValid(TEMP_RealAttacker)&&TEMP_RealAttacker!=nil&&TEMP_RealAttacker!=NULL&&
 		TEMP_RealAttacker!=self&&(!IsValid(self:GetEnemy())||self:GetEnemy()==nil||self:GetEnemy()==NULL||
@@ -1135,7 +1141,7 @@ function ENT:OnTakeDamage(dmginfo)
 			end
 		end
 	end
-	
+
 	self.LastDamageHitgroup = -1
 end
 

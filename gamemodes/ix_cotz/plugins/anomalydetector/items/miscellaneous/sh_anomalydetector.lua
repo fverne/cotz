@@ -11,7 +11,7 @@ ITEM.weight = 0.720
 
 ITEM.isAnomalydetector = true
 
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
+ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
 ITEM.exRender = true
 ITEM.iconCam = {

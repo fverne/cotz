@@ -1,5 +1,5 @@
-ITEM.name = "Medical Crate"
-ITEM.description= "A crate containing a few items usually used by doctors."
+ITEM.name = "Medical Box"
+ITEM.description= "A box containing a few items usually used by doctors."
 ITEM.model = "models/lostsignalproject/items/misc/box_paper.mdl"
 
 ITEM.width = 2

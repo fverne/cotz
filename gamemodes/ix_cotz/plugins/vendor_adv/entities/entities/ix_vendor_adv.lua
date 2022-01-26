@@ -31,7 +31,8 @@ function ENT:Initialize()
 		self:DrawShadow(true)
 		self:SetSolid(SOLID_BBOX)
 		self:PhysicsInit(SOLID_BBOX)
-
+		self:SetNWBool("NoDrag", true)
+		
 		self.items = {}
 		self.messages = {}
 		self.factions = {}

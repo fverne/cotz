@@ -1,15 +1,17 @@
 ITEM.name = "Charcoal"
 ITEM.description = "Low tier cooking fuel."
 ITEM.longdesc = "Some odorless, tasteless, clump of fine black powder that is a low tier of a cooking fuel source within the Zone. Charcoal is one of the main sources STALKERs used to cook with, though it tends to run out pretty fast after a couple uses."
+ITEM.quantdesc = "This bag has enough charcoal for another %d refills."
 ITEM.model = "models/lostsignalproject/items/misc/charcoal.mdl"
+
 ITEM.width = 2
 ITEM.height = 2
+
+ITEM.price = 500
+
 ITEM.fueltier = 1
 ITEM.quantity = 3
 ITEM.splitSize = {1, 2}
-ITEM.quantdesc = "This bag has enough charcoal for another %d refills."
-
-ITEM.price = 500
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)

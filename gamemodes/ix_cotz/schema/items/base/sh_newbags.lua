@@ -10,7 +10,7 @@ ITEM.price = 0
 ITEM.isNewBag = true
 ITEM.outfitCategory = "backpack"
 ITEM.pacData = {}
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
+ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
 ITEM.weight = 1
 ITEM.carryinc = 10

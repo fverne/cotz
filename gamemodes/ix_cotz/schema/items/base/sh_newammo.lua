@@ -1,7 +1,8 @@
 ITEM.name = "Ammo Base"
 ITEM.model = "models/Items/BoxSRounds.mdl"
-ITEM.description = "A box with %s rounds of ammunition."
+ITEM.description = "no desc"
 ITEM.category = "Ammunition"
+ITEM.quantdesc = "A box with %d rounds of ammunition."
 
 ITEM.width = 1
 ITEM.height = 1
@@ -16,19 +17,20 @@ ITEM.weight = 0
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
+	local quantdesc = ""
 	local invdesc = ""
 	if self.longdesc then
 		invdesc = "\n\n"..(self.longdesc)
 	end
 
-	if self.description then
-		self.description = Format(self.description, quant)
+	if self.quantdesc then
+		quantdesc = Format(self.quantdesc, quant)
 	end
 
 	if (self.entity) then
-		return (self.description)
+		return (Format(self.quantdesc, quant))
 	else
-        return (self.description..invdesc)
+        return (quantdesc..invdesc)
 	end
 end
 
@@ -57,7 +59,7 @@ function ITEM:GetPrice()
 end
 
 function ITEM:OnInstanced(invID, x, y)
-	
+
 	if !self:GetData("quantity") then
 		self:SetData("quantity", self.ammoAmount)
 	end
@@ -71,7 +73,7 @@ ITEM.functions.split = {
     multiOptions = function(item, client)
 		local targets = {}
         local quantity = item:GetData("quantity", item.ammoAmount)
-		
+
         for i=1,#item.loadSize-1 do
 			if quantity > item.loadSize[i] then
 				table.insert(targets, {
@@ -85,7 +87,7 @@ ITEM.functions.split = {
 	OnCanRun = function(item)
 		if item:GetData("quantity", item.ammoAmount) == 1 then
 			return false
-		end	
+		end
 
 		return (!IsValid(item.entity))
 	end,
@@ -93,15 +95,15 @@ ITEM.functions.split = {
 		if data[1] then
 			local quantity = item:GetData("quantity", item.ammoAmount)
 			local client = item.player
-			
+
 			client:GetCharacter():GetInventory():Add(item.uniqueID, 1, {["quantity"] = data[1]})
-			
+
 			quantity = quantity - data[1]
 
 			item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
-			
+
 			item:SetData("quantity", quantity)
-			
+
 		end
 		return false
 	end,

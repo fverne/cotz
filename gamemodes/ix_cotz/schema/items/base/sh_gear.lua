@@ -9,7 +9,7 @@ ITEM.height = 2
 ITEM.price = 0
 
 ITEM.pacData = {}
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
+ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 ITEM.ballisticlevels = {"0"}
 ITEM.ballisticareas = {"  Head:"}
 ITEM.br = 0
@@ -267,7 +267,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	OnRun = function(item)
 		item:RemovePart(item.player)
 
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 6, function(player)
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 4, function(player)
 		end)
 
 		item.player:RecalculateResistances()

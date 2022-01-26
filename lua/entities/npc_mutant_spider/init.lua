@@ -30,6 +30,9 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 ENT.hp = 270
 ENT.hpvar = 50
 
+ENT.flatbulletresistance = 2
+ENT.percentbulletresistance = 10
+
 ENT.CanJump = 0
 ENT.isAttacking = 0
 ENT.jumping1 = 0
@@ -196,6 +199,12 @@ function ENT:STALKERNPCOnDeath()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul)
+
+	if(dmginfo:GetDamageType() == DMG_BULLET) then
+		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
+		dmginfo:SubtractDamage(self.flatbulletresistance)
+		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
+	end
 
 	if( math.random(100) > 70) and self.CanTeleportTimer < CurTime() then
 		self.IsTeleporting = 1

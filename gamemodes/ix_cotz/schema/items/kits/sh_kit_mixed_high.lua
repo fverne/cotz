@@ -1,6 +1,6 @@
 ITEM.name = "Hiking Backpack"
 ITEM.description= "The high quality of this backpack speaks about the wealth of its previous owner. The fine worksmanship did not protect it from the harsh conditions of the zone however, and it has almost completely disintegrated."
-ITEM.model = "models/lostsignalproject/items/misc/box_paper.mdl"
+ITEM.model = "models/kek1ch/sumka4.mdl"
 
 ITEM.width = 2
 ITEM.height = 2

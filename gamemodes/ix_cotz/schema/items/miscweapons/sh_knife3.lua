@@ -1,30 +1,28 @@
-ITEM.name = "Old Knife"
-ITEM.description = "An old knife."
-ITEM.model = "models/splatolivia/knife/knife.mdl"
-ITEM.longdesc = "This old knife is in quite bad shape. The handle is rotten, and the knife rattles when you shake it."
-ITEM.category = "Knife"
+ITEM.name = "Survival Knife"
+ITEM.description = "A survival knife with a plastic handle."
+ITEM.model = "models/bf4_sweps/w_knife_dive.mdl"
+ITEM.longdesc = "This knife offers better poaching capabilities than most other knives, as it's meant for survival but lacks effect when used in combat."
+ITEM.category = "Melee"
 
-ITEM.price = 1250
+ITEM.price = 53950
 ITEM.height = 1
 ITEM.width = 2
 
-ITEM.class = "tfa_nmrih_oldknife"
-ITEM.weaponCategory = "secondary"
+ITEM.class = "tfa_nmrih_survivalknife"
+ITEM.weaponCategory = "knife"
 ITEM.canAttach = false
 ITEM.repairCost = ITEM.price/100*1
 
-ITEM.weight = 0.950
+ITEM.weight = 1.150
 
-ITEM.meattickets = 0
-ITEM.parttickets = 0
-ITEM.knifetier = 1
+ITEM.knifetier = 4
 ITEM.isPoachKnife = true
 
 ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(-23, 0, 5),
-	ang = Angle(0, -0, -90),
-	fov = 70
+	pos = Vector(-1, 19.607843399048, 4),
+	ang = Angle(0, 270, -115.29412078857),
+	fov = 45,
 }
 ITEM.pacData = {
 [1] = {
@@ -37,11 +35,11 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0.719, 93.188, -174.281),
 						["Position"] = Vector(-7.366, 6.884, 6.301),
-						["Model"] = "models/weapons/tfa_nmrih/w_me_bat_metal.mdl",
+						["Model"] = "models/bf4_sweps/w_knife_dive.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
-						["UniqueID"] = "7777994673",
-						["Bone"] = "chest",
+						["UniqueID"] = "survivalknife_1",
+						["Bone"] = "pelvis",
 						["Name"] = "bat",
 					},
 				},
@@ -49,17 +47,17 @@ ITEM.pacData = {
 			["self"] = {
 				["AffectChildrenOnly"] = true,
 				["ClassName"] = "event",
-				["UniqueID"] = "1237770522",
+				["UniqueID"] = "survivalknife_1",
 				["Event"] = "weapon_class",
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
-				["Arguments"] = "tfa_nmrih_bat@@0",
+				["Arguments"] = "tfa_nmrih_survivalknife@@0",
 			},
 		},
 	},
 	["self"] = {
 		["ClassName"] = "group",
-		["UniqueID"] = "2789376348",
+		["UniqueID"] = "survivalknife_1",
 		["EditorExpand"] = true,
 	},
 },
@@ -67,4 +65,5 @@ ITEM.pacData = {
 
 function ITEM:PopulateTooltipIndividual(tooltip)
     ix.util.PropertyDesc(tooltip, "Melee", Color(64, 224, 208))
+	ix.util.PropertyDesc(tooltip, "Poaching Tool", Color(64, 224, 208))
 end

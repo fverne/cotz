@@ -17,7 +17,7 @@ ITEM.iconCam = {
 	fov = 2.1,
 }
 
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
+ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)

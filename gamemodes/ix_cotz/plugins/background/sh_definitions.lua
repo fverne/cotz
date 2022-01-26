@@ -60,7 +60,7 @@ ix.backgrounds["alcoholic_light"] = {
 		character:GetInventory():Add("drink_canbeer_5", 1)
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
 		character:GetInventory():Add("kit_newchar", 1)
-		character:GetInventory():Add("skinningknife_1", 1)
+		character:GetInventory():Add("knife_1", 1)
 		character:GetPlayer():AddAddiction("LightAlcoholic")
 	end,
 	OnLoaded = function(character)
@@ -90,7 +90,7 @@ ix.backgrounds["alcoholic_heavy"] = {
 		character:GetInventory():Add("drink_vodka_3", 1, {["quantity"] = 1})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
 		character:GetInventory():Add("kit_newchar", 1)
-		character:GetInventory():Add("skinningknife_1", 1)
+		character:GetInventory():Add("knife_1", 1)
 		character:GetPlayer():AddAddiction("StrongAlcoholic")
 	end,
 	OnLoaded = function(character)
@@ -117,7 +117,7 @@ ix.backgrounds["smoker"] = {
 		character:GetInventory():Add("drug_cigarette_4", 1, {["quantity"] = math.random(13,15)})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
 		character:GetInventory():Add("kit_newchar", 1)
-		character:GetInventory():Add("skinningknife_1", 1)
+		character:GetInventory():Add("knife_1", 1)
 		character:GetPlayer():AddAddiction("StrongSmoker")
 	end,
 	OnLoaded = function(character)
@@ -144,7 +144,7 @@ ix.backgrounds["druggie"] = {
 		character:GetInventory():Add("drug_painkillers", 1)
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
 		character:GetInventory():Add("kit_newchar", 1)
-		character:GetInventory():Add("skinningknife_1", 1)
+		character:GetInventory():Add("knife_1", 1)
 		character:GetPlayer():AddAddiction("DrugUser")
 	end,
 	OnLoaded = function(character)

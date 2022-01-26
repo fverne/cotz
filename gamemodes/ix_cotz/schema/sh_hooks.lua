@@ -1,6 +1,3 @@
-
--- Here is where all of your shared hooks should go.
-
 -- Disable entity driving.
 function Schema:CanDrive(client, entity)
 	return false
@@ -157,12 +154,17 @@ function Schema:PlayerWeaponChanged(client, weapon)
 end
 
 function Schema:PlayerSwitchWeapon(client, oldWeapon, weapon)
-	if (!IsFirstTimePredicted()) then
-		return
-	end
-	if (SERVER) then
-		client:SetNetVar("keepraised", client:IsWepRaised())
-	end
+    if (not IsFirstTimePredicted()) then return end
+
+    if (SERVER) then
+        if IsValid(client:GetActiveWeapon()) then
+            if client:Alive() and client:GetActiveWeapon():GetClass() == "ix_hands" then
+                client:SetWepRaised(true, weapon)
+            end
+
+            client:SetNetVar("keepraised", client:IsWepRaised())
+        end
+    end
 end
 
 -- To make sure suit attachments get their detach function run when character disconnects

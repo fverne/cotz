@@ -8,7 +8,7 @@ SWEP.PrintName = "Survival Knife"
 SWEP.ViewModel			= "models/weapons/tfa_nmrih/me_survivalknife/v_me_survivalknife.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.WorldModel			= "models/bf4_sweps/w_knife_dive.mdl" --Viewmodel path
 SWEP.HoldType = "knife"

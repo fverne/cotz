@@ -7,6 +7,13 @@ ix.option.Add("permvoicehud", ix.type.bool, false, {
     category = "_stalkersettings",
 })
 
+ix.command.Add("voicemode", {
+    description = "Changes the range at which people can hear your voice.",
+    OnRun = function(self, client)
+        netstream.Start(client, "ixVoiceMenu")
+    end
+})
+
 -- Start of Voice Overlay
 if (CLIENT) then
     local PANEL = {}
@@ -225,24 +232,39 @@ end
 
 hook.Add("HUDPaint", "ixVoiceModeDisplay", function()
     local w, h = 45, 42
+    if not ix.config.Get("allowVoice") then return end
     if (not LocalPlayer():IsSpeaking() and not ix.option.Get("permvoicehud", false)) then return end
-    surface.SetMaterial(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].icon)
-    surface.SetDrawColor(255, 255, 255, 80)
-    surface.DrawTexturedRect(5, ScrH() / 20 - h - 5, w, h)
-    surface.SetTextColor(255, 255, 255, 80)
-    surface.SetFont("stalkerregularfont2")
-    local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
-    surface.SetTextPos(15 + w, ScrH() / 20 - 5 - h / 2 - th / 2)
-    surface.DrawText(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+
+    if (LocalPlayer():IsSpeaking()) then
+        surface.SetMaterial(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].icon)
+        surface.SetDrawColor(255, 255, 255, 255)
+        surface.DrawTexturedRect(5, ScrH() / 20 - h - 5, w, h)
+        surface.SetTextColor(255, 255, 255, 255)
+        surface.SetFont("stalkerregularfont2")
+        local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+        surface.SetTextPos(15 + w, ScrH() / 20 - 5 - h / 2 - th / 2)
+        surface.DrawText(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+    else
+        if (not LocalPlayer():IsSpeaking()) then
+            surface.SetMaterial(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].icon)
+            surface.SetDrawColor(255, 255, 255, 80)
+            surface.DrawTexturedRect(5, ScrH() / 20 - h - 5, w, h)
+            surface.SetTextColor(255, 255, 255, 80)
+            surface.SetFont("stalkerregularfont2")
+            local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+            surface.SetTextPos(15 + w, ScrH() / 20 - 5 - h / 2 - th / 2)
+            surface.DrawText(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+        end
+    end
 end)
 
 hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
     if ply == LocalPlayer() and GetViewEntity() == LocalPlayer() and (GetConVar('thirdperson') and GetConVar('thirdperson'):GetInt() ~= 0) then return end
     if not ply:Alive() then return end
+    if not ix.config.Get("allowVoice", false) then return end
+    if (IsValid(ix.gui.menu)) then return end
     if not ply:IsSpeaking() then return end
     local voice_mat = ixVoice.Ranges[ply:GetLocalVar("voiceRange") or 2].icon
-  --  print(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].icon)
-    --	print(ply)
     local pos = ply:GetPos() + Vector(0, 0, ply:GetModelRadius() + 15)
     local attachment = ply:GetAttachment(ply:LookupAttachment('eyes'))
 
@@ -254,7 +276,7 @@ hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
     local plyrange = ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].range
 
     if (distance <= plyrange) then
-        render.SetMaterial(voice_mat) -- ply:IsSpeaking() and
+        render.SetMaterial(ply:IsSpeaking() and voice_mat)
         local color_var = 255
         local computed_color = render.ComputeLighting(ply:GetPos(), Vector(0, 0, 1))
         local max = math.max(computed_color.x, computed_color.y, computed_color.z)
@@ -263,6 +285,7 @@ hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
     end
 end)
 
+--[[
 if (CLIENT) then
     concommand.Add("printvoicemode", function()
         print(LocalPlayer():GetLocalVar("voiceRange"))
@@ -280,3 +303,4 @@ concommand.Add("setranges", function(ply, cmd, args)
         v:SetLocalVar("voiceRange", tonumber(args[1]))
     end
 end)
+]]--

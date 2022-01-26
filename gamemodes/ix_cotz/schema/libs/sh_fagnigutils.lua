@@ -15,8 +15,8 @@ function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, c
 	player:Freeze(true)
 	player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 1 )
 	player:SetNetVar("ix_noMenuAllowed", true)
-	
-	timer.Simple(1, function()
+
+	timer.Create("ixBlackScreenAction" .. player:SteamID(), 1, 1, function()
 		player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, actiondur-2 ) --fade in in the last second
 	end)
 
@@ -28,32 +28,41 @@ function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, c
 		if( callbackfunc) then --Call callback function last, so if it errors, we are not permanently frozen
 			callbackfunc(player)
 		end
-		
+
 	end)
 
 end
 
 function ix.util.PlayerActionInterrupt(player)
-	-- just for poaching for now
+    -- just for poaching for now
+    if (player:GetNetVar("IsPoaching")) then
+        player:SetAction("Action Cancelled", 1)
+        player:Freeze(false)
+        player:SetNetVar("ix_noMenuAllowed", false)
 
-	if (player:GetNetVar("IsPoaching")) then
-		    player:SetAction("Action Cancelled", 1)
-		    player:Freeze(false)
-		    player:SetNetVar("ix_noMenuAllowed", false)
-		    player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 0.2,0 )
-		    player:SetNetVar("IsPoaching",false)
-	end
+        if timer.Exists("ixBlackScreenAction" .. player:SteamID()) then
+            timer.Remove("ixBlackScreenAction" .. player:SteamID())
+            player:ScreenFade(SCREENFADE.PURGE, Color(0, 0, 0), 0.1, 0)
+        end
+
+        player:ScreenFade(SCREENFADE.PURGE, Color(0, 0, 0), 0.1, 0)
+        player:ScreenFade(SCREENFADE.IN, Color(0, 0, 0), 0.2, 0)
+        player:SetNetVar("IsPoaching", false)
+    end
 end
 
+
 if(CLIENT) then
-	hook.Add("ShouldSuppressMenu", "ix_noMenuAllowed", function(client) 
+	hook.Add("ShouldSuppressMenu", "ix_noMenuAllowed", function(client)
 		if(client:GetNetVar("ix_noMenuAllowed")) then
 			return true
 		end
 	end)
 
 	net.Receive("ix_KillMenu", function()
-		ix.gui.menu:Remove()
+		if IsValid(ix.gui.menu) then
+			ix.gui.menu:Remove()
+		end
 	end)
 
 end
@@ -77,7 +86,7 @@ function ix.util.SpawnAdvVendor(npctemplate, pos, ang)
 
 	npc:SetPos(pos)
 	npc:SetAngles(ang)
-	
+
 	npc:Spawn()
 
 	npc:LoadTemplate(npctemplate)
@@ -88,7 +97,7 @@ ix.command.Add("spawnadvvendor", {
 	adminOnly = true,
 	arguments = {
 		ix.type.string,
-	},	
+	},
 	OnRun = function(self, client, npctemplate)
 		local trace = client:GetEyeTraceNoCursor()
 		local hitpos = trace.HitPos + trace.HitNormal

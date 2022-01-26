@@ -11,7 +11,7 @@ ITEM.class = "weapon_pistol"
 ITEM.isWeapon = true
 ITEM.isGrenade = false
 ITEM.weaponCategory = "sidearm"
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
+ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 ITEM.exRender = true
 ITEM.canRepair = true
 
@@ -156,7 +156,7 @@ function ITEM:PopulateTooltip(tooltip)
 end
 
 function ITEM:GetRepairCost()
-	return ((self.price * 0.00125) * self.repair_PartsComplexity) + ((self.price * 0.00125) * self.repair_PartsRarity)
+	return ((self.price * 0.0025) * self.repair_PartsComplexity) + ((self.price * 0.0025) * self.repair_PartsRarity)
 end
 
 -- On item is dropped, Remove a weapon from the player and keep the ammo in the item.

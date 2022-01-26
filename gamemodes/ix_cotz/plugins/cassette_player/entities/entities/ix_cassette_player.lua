@@ -26,7 +26,6 @@ if (SERVER) then
 			self.sound:Stop()
 			self:EmitSound("stalkersound/inv_slot.mp3", 40)
 		end
-		activator:GetCharacter():GetInventory():Add(self.PutCassette)
 		self.PutCassette = nil
 	end
 
@@ -65,7 +64,7 @@ else
 		name:SetImportant()
 		name:SetText("Old Cassette Player")
 		name:SizeToContents()
-		local descriptionText = self:GetNetVar("Description", "This cassette player accepts a various amount of tapes. Press E to take the tape from the machine.")
+		local descriptionText = self:GetNetVar("Description", "This cassette player accepts a various amount of tapes.")
 		if (descriptionText != nil) then
 			local description = container:AddRow("Description")
 			description:SetText(descriptionText)

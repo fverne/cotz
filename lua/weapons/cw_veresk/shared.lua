@@ -139,7 +139,7 @@ SWEP.VelocitySensitivity = 1
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.0915
-SWEP.Damage = 75
+SWEP.Damage = 56
 SWEP.DeployTime = 1.5
 SWEP.ADSFireAnim = false
 

@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 PLUGIN.name = "hidehud"
 PLUGIN.author = "verne"
-PLUGIN.desc = "hidet of hud"
+PLUGIN.desc = "hider of hud"
 
 ix.option.Add("disablehud", ix.type.bool, false, {
 	category = "_stalkersettings",
@@ -13,6 +13,7 @@ function PLUGIN:HUDPaint()
 	end
 end
 
+/*
 if (CLIENT) then
     function PLUGIN:PlayerButtonDown(client, key)
         if (key == KEY_F2 and client:GetCharacter() and IsFirstTimePredicted()) then
@@ -24,3 +25,4 @@ if (CLIENT) then
         end
     end
 end
+*/

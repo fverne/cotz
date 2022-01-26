@@ -5,6 +5,7 @@ ITEM.longdesc = "An extremely spiky artifact, almost resembling a sea urchin, fr
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 7500
+ITEM.JumpPower = 100
 ITEM.flag = "A"
 ITEM.rarity = 3
 ITEM.baseweight = 0.750
@@ -17,7 +18,7 @@ ITEM.functions.use = {
     OnRun = function(item)
     	local TEMP_TargetDamage = DamageInfo()
 
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Stabbing self with Urchin", 4, function(player) 
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Stabbing self with Urchin", 4, function(player)
             TEMP_TargetDamage:SetDamage(75)
 			TEMP_TargetDamage:SetAttacker(player)
 			TEMP_TargetDamage:SetDamageType(DMG_BULLET)

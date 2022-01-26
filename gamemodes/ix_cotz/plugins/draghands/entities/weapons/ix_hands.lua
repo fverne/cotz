@@ -44,12 +44,17 @@ end
 function SWEP:Initialize()
     self:SetHoldType(self.HoldType)
     self.Time = 0
-    self.Range = 150
+    self.Range = 75
+    self.HoldRange = 100
     self.LastHand = 0
 end
 
 function SWEP:Think()
     if self.Drag and (not self.Owner:KeyDown(IN_ATTACK) or not IsValid(self.Drag.Entity)) then
+        self.Drag = nil
+    end
+
+    if self.Drag and self.Drag.Entity:GetPos():Distance(self:GetOwner():GetShootPos()) > self.HoldRange then
         self.Drag = nil
     end
 
@@ -67,9 +72,10 @@ function SWEP:Think()
 end
 
 function SWEP:PrimaryAttack()
-	if SERVER then
-	  self.Owner:SetWepRaised(false)
-	end
+    if SERVER then
+        self.Owner:SetWepRaised(false)
+    end
+
     self:SetHoldType("normal")
     --self.Owner:DrawViewModel(false)
     local Pos = self.Owner:GetShootPos()
@@ -109,6 +115,7 @@ function SWEP:PrimaryAttack()
         local Nom3 = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 130 - Phys:GetVelocity()) * (Phys:GetMass())
         local Nom4 = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 200 - Phys:GetVelocity()) * (Phys:GetMass())
         local PhysRagdollMass = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 200 - Phys:GetVelocity()) * (Phys:GetMass())
+
         if Phys:GetMass() >= 200 and Phys:GetMass() < 1000 and not HitEnt:IsRagdoll() then
             Phys:ApplyForceOffset(Nom2, OffPos)
             Phys:AddAngleVelocity(-Phys:GetAngleVelocity() / 4)
@@ -137,9 +144,10 @@ function SWEP:PrimaryAttack()
 end
 
 function SWEP:SecondaryAttack()
-	if SERVER then
-	  self.Owner:SetWepRaised(true)
-	end
+    if SERVER then
+        self.Owner:SetWepRaised(true)
+    end
+
     self:SetHoldType("fist")
     self.Owner:DrawViewModel(true)
     if CLIENT then return end

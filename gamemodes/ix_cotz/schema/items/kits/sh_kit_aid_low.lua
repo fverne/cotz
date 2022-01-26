@@ -1,6 +1,6 @@
 ITEM.name = "Small Doctors Bag"
 ITEM.description= "A bag containing some medical supplies."
-ITEM.model = "models/lostsignalproject/items/misc/box_paper.mdl"
+ITEM.model = "models/illusion/eftcontainers/docbag.mdl"
 
 ITEM.width = 2
 ITEM.height = 2

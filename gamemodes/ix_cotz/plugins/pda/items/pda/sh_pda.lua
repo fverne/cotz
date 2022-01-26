@@ -5,7 +5,7 @@ ITEM.height = 1
 ITEM.category = "Communication"
 ITEM.price = 1000
 ITEM.busflag = {"hardware"}
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
+ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 ITEM.img = ix.util.GetMaterial("vgui/hud/pda1.png")
 ITEM.repairCost = ITEM.price/100*1
 

@@ -2,6 +2,7 @@ PLUGIN.name = "Override Thirdperson"
 PLUGIN.description = "Override Thirdperson."
 PLUGIN.author = "ZeMysticalTaco / TFA"
 
+/*
 if (CLIENT) then
     local tpcooldown
 
@@ -16,6 +17,7 @@ if (CLIENT) then
         end
     end
 end
+*/
 
 if SERVER then
 	AddCSLuaFile()

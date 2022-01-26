@@ -18,7 +18,7 @@ ITEM.functions.use = {
         if(item:GetData("cooldown",0) < os.time())then
         	item:SetData("cooldown", os.time()+(3600*2) ) --2 hours
 
-            ix.chat.Send(item.player, "iteminternal", " scrapes some mold off their "..item.name.." and eats it.", false)
+            ix.chat.Send(item.player, "iteminternal", "scrapes some mold off their "..item.name.." and eats it.", false)
 
             local hunger = item.player:GetCharacter():GetData("hunger", 100)
             ix.util.PlayerPerformBlackScreenAction(item.player, "Scraping off mold and eating it...", 8, function(player)

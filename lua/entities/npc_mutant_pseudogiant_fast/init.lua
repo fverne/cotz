@@ -47,8 +47,8 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_IDLE_WANDER 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
-ENT.flatbulletresistance = 2
-ENT.percentbulletresistance = 10
+ENT.flatbulletresistance = 3
+ENT.percentbulletresistance = 25
 
 function ENT:Initialize()
 	self.Model = "models/monsters/gigant.mdl"

@@ -1,6 +1,6 @@
 ITEM.name = "Stalkers Backpack"
 ITEM.description= "A backpack that most likely belonged to a prowler of the zone. It's almost falling apart, rendering it useless, but there still seems to be something inside."
-ITEM.model = "models/lostsignalproject/items/misc/box_paper.mdl"
+ITEM.model = "models/kek1ch/sumka5.mdl"
 
 ITEM.width = 2
 ITEM.height = 2

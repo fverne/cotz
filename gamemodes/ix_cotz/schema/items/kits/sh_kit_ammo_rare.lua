@@ -1,6 +1,6 @@
 ITEM.name = "Foreign Ammunition Box"
 ITEM.description= "A box containing some less common types of ammunition, mostly of foreign origin."
-ITEM.model = "models/lostsignalproject/items/misc/box_paper.mdl"
+ITEM.model = "models/illusion/eftcontainers/magbox.mdl"
 
 ITEM.width = 2
 ITEM.height = 2

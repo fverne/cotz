@@ -1,6 +1,6 @@
 ITEM.name = "Small Ammo Box"
 ITEM.description= "A small box containing some ammunition. It seems to mostly be smaller calibers."
-ITEM.model = "models/lostsignalproject/items/misc/box_paper.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 2
 ITEM.height = 2

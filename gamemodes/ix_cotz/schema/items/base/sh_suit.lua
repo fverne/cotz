@@ -19,7 +19,7 @@ ITEM.fbr = 0
 ITEM.ar = 0
 ITEM.far = 0
 ITEM.radProt = 0
-ITEM.equipIcon = Material("materials/vgui/ui/stalker/misc/equip.png")
+ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
 ITEM.canRepair = true
 
@@ -41,7 +41,7 @@ ITEM.bodyGroups = {
 ]]--
 
 function ITEM:GetRepairCost()
-	return self.price * 0.001 -- 0.1% of price per %
+	return self.price * 0.0015 -- 0.15% of price per %
 end
 
 function ITEM:GetDescription()

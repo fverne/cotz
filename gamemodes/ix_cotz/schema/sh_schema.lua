@@ -1,6 +1,3 @@
-
--- The shared init file. You'll want to fill out the info for your schema and include any other files that you need.
-
 -- Schema info
 Schema.name = "STALKER: Call of the Zone"
 Schema.author = "gumlefar, verne, the cotz community"

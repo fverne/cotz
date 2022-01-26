@@ -86,6 +86,7 @@ ITEM.functions.Reset = {
             itemTable:SetData("cards", PLUGIN:FillDeckCards())
         end
 
+        local cards = itemTable:GetData("cards")
         ix.chat.Send(itemTable.player, "iteminternal", "begins to reset the deck order.", false)
         client:EmitSound("stalkersound/money_1.mp3", 120)
         if #cards <= 0 then return end

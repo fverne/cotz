@@ -1,7 +1,7 @@
 ﻿ITEM.name = "Orange Cassette Tape"
 ITEM.description = "A cassette tape has blood on it."
 ITEM.longdesc = "This cassette tape has a signature on the back. It reads 'Wicked Rabbit'."
-ITEM.price = 236940
+ITEM.price = 2369
 ITEM.model = "models/kek1ch/cassette_wicked.mdl"
 
 ITEM.cassette_options = {}

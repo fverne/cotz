@@ -30,6 +30,9 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 ENT.hp = 90
 ENT.hpvar = 30
 
+ENT.flatbulletresistance = 1
+ENT.percentbulletresistance = 0
+
 ENT.FleeTime = 0
 ENT.MustFlee = false
 ENT.CanJump = 0
@@ -154,5 +157,13 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 				end
 			end
 		end
+	end
+end
+
+function ENT:STALKERNPCDamageTake(dmginfo,mul)
+	if(dmginfo:GetDamageType() == DMG_BULLET) then
+		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
+		dmginfo:SubtractDamage(self.flatbulletresistance)
+		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 end
