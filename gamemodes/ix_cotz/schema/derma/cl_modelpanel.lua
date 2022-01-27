@@ -80,10 +80,12 @@ local PANEL = {}
 
 		render.SetModelLighting(5, fraction, fraction, fraction)
 
-		self.Entity:GetActiveWeapon():DrawModel()
-		
+		if IsValid(self.Entity:GetActiveWeapon()) then
+			self.Entity:GetActiveWeapon():DrawModel()
+		end
+
 		self.Entity:DrawModel()
-		
+	
 		if (self.enableHook) then
 			hook.Run("PostDrawHelixModelView", self, self.Entity)
 		end
