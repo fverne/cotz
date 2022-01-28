@@ -10,15 +10,15 @@ function PLUGIN:HUDPaint()
 	end
 
 	if LocalPlayer():HasBuff("buff_radprotect") then
-		ix.util.DrawBuffIcon("stalker/ui/radiation.png", ScrW()*0.86, ScrH()*0.715, ScrW()*0.016, ScrH()*0.032, Color(0, 255, 190))
+		ix.util.DrawBuffIcon("stalker/ui/art.png", ScrW()*0.86, ScrH()*0.715, ScrW()*0.016, ScrH()*0.032, Color(0, 255, 190))
 	end
 
 	if LocalPlayer():HasBuff("buff_radiationremoval") then
-		ix.util.DrawBuffIcon("stalker/ui/radiation.png", ScrW()*0.86, ScrH()*0.75, ScrW()*0.016, ScrH()*0.032)
+		ix.util.DrawBuffIcon("stalker/ui/art.png", ScrW()*0.86, ScrH()*0.75, ScrW()*0.016, ScrH()*0.032)
 	end
 
 	if LocalPlayer():HasBuff("debuff_radiation") then
-		ix.util.DrawBuffIcon("stalker/ui/radiation.png", ScrW()*0.86, ScrH()*0.75, ScrW()*0.016, ScrH()*0.032, Color(255, 0, 0, 255))
+		ix.util.DrawBuffIcon("stalker/ui/art.png", ScrW()*0.86, ScrH()*0.75, ScrW()*0.016, ScrH()*0.032, Color(255, 0, 0, 255))
 	end
 
 	if LocalPlayer():HasBuff("buff_psysuppress") then
