@@ -392,7 +392,6 @@ ITEM:Hook("drop", function(item)
 		item.player:RecalculateResistances()
 		item.player:ReevaluateOverlay()
 		item:RemoveOutfit(item:GetOwner())
-		item.player:RunAllAttachmentDetach()
 	end
 end)
 
