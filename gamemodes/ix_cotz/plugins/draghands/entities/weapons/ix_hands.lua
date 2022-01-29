@@ -114,7 +114,7 @@ function SWEP:PrimaryAttack()
         local Nom2 = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 10 - Phys:GetVelocity()) * (Phys:GetMass())
         local Nom3 = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 130 - Phys:GetVelocity()) * (Phys:GetMass())
         local Nom4 = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 200 - Phys:GetVelocity()) * (Phys:GetMass())
-        local PhysRagdollMass = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 200 - Phys:GetVelocity()) * (Phys:GetMass())
+        local PhysRagdollMass = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 800 - Phys:GetVelocity()) * (Phys:GetMass())
 
         if Phys:GetMass() >= 200 and Phys:GetMass() < 1000 and not HitEnt:IsRagdoll() then
             Phys:ApplyForceOffset(Nom2, OffPos)
