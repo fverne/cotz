@@ -616,7 +616,7 @@ function ITEM:getBR()
 	local upgrades = self:GetData("upgrades", {})
 
 	if self:GetData("durability",100) < 80 then
-		res = 1 - (self.br * (v:GetData("durability",0)/80))
+		res = 1 - (self.br * (self:GetData("durability",0)/80))
 	else
 		res = 1 - self.br
 	end
