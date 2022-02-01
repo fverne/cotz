@@ -118,7 +118,7 @@ SWEP.Sounds = {	bent_reload_start = {
 
 SWEP.SpeedDec = 10
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"

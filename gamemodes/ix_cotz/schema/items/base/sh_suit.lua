@@ -392,7 +392,6 @@ ITEM:Hook("drop", function(item)
 		item.player:RecalculateResistances()
 		item.player:ReevaluateOverlay()
 		item:RemoveOutfit(item:GetOwner())
-		item.player:RunAllAttachmentDetach()
 	end
 end)
 
@@ -613,8 +612,14 @@ function ITEM:OnUnequipped()
 end
 
 function ITEM:getBR() 
-	local res = (1 - self.br)
+	local res = 1
 	local upgrades = self:GetData("upgrades", {})
+
+	if self:GetData("durability",100) < 80 then
+		res = 1 - (self.br * (self:GetData("durability",0)/80))
+	else
+		res = 1 - self.br
+	end
 	
 	for k,v in pairs(upgrades) do
 		if (!ix.armortables.upgrades[v]) then continue end
@@ -639,6 +644,12 @@ end
 function ITEM:getFBR() 
 	local res = self.fbr
 	local upgrades = self:GetData("upgrades", {})
+
+	if self:GetData("durability",100) < 80 then
+		res = self.fbr * (v:GetData("durability",0)/80)
+	else
+		res = self.fbr
+	end
 	
 	for k,v in pairs(upgrades) do
 		if (!ix.armortables.upgrades[v]) then continue end
@@ -651,8 +662,14 @@ function ITEM:getFBR()
 end
 
 function ITEM:getAR()
-	local res = (1 - self.ar)
+	local res = 1
 	local upgrades = self:GetData("upgrades", {})
+
+	if self:GetData("durability",100) < 80 then
+		res = 1 - (self.ar * (v:GetData("durability",0)/80))
+	else
+		res = 1 - self.ar
+	end
 	
 	for k,v in pairs(upgrades) do
 		if (!ix.armortables.upgrades[v]) then continue end
@@ -677,6 +694,12 @@ end
 function ITEM:getFAR() 
 	local res = self.far
 	local upgrades = self:GetData("upgrades", {})
+
+	if self:GetData("durability",100) < 80 then
+		res = self.far * (v:GetData("durability",0)/80)
+	else
+		res = self.far
+	end
 	
 	for k,v in pairs(upgrades) do
 		if (!ix.armortables.upgrades[v]) then continue end

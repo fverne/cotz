@@ -19,7 +19,7 @@ SWEP.Secondary.Ammo = "none"
 SWEP.Secondary.Delay = 0.75
 SWEP.FireWhenLowered = true
 SWEP.UseHands = false
-SWEP.HoldType = "passive"
+SWEP.HoldType = "normal"
 SWEP.LowerAngles = Angle(0, 5, -14)
 SWEP.LowerAngles2 = Angle(0, 5, -22)
 SWEP.ViewModelFOV = 45
@@ -114,7 +114,7 @@ function SWEP:PrimaryAttack()
         local Nom2 = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 10 - Phys:GetVelocity()) * (Phys:GetMass())
         local Nom3 = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 130 - Phys:GetVelocity()) * (Phys:GetMass())
         local Nom4 = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 200 - Phys:GetVelocity()) * (Phys:GetMass())
-        local PhysRagdollMass = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 200 - Phys:GetVelocity()) * (Phys:GetMass())
+        local PhysRagdollMass = (Dif:GetNormal() * math.min(1, Dif:Length() / 100) * 800 - Phys:GetVelocity()) * (Phys:GetMass())
 
         if Phys:GetMass() >= 200 and Phys:GetMass() < 1000 and not HitEnt:IsRagdoll() then
             Phys:ApplyForceOffset(Nom2, OffPos)

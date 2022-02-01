@@ -82,11 +82,7 @@ function playerMeta:getPercentageBulletRes()
 
 	for k, v in pairs(items) do
 		if (v.isBodyArmor and v:GetData("equip")) then
-			if v:GetData("durability",100) < 80 then
-				res = v:getBR(v) * (v:GetData("durability",0)/80)
-			else
-				res = v:getBR(v)
-			end
+			res = v:getBR(v)
 		end
 
 		if (v.br ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
@@ -106,11 +102,7 @@ function playerMeta:getFlatBulletRes()
 
 	for k, v in pairs(items) do
 		if (v.isBodyArmor and v:GetData("equip")) then
-			if v:GetData("durability",100) < 80 then
-				res = res + v:getFBR(v) * (v:GetData("durability",0)/80)
-			else
-				res = res + v:getFBR(v)
-			end
+			res = res + v:getFBR(v)
 		end
 
 		if (v.fbr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
@@ -130,11 +122,7 @@ function playerMeta:getPercentageAnomalyRes()
 
 	for k, v in pairs(items) do
 		if (v.isBodyArmor and v:GetData("equip")) then
-			if v:GetData("durability",100) < 80 then
-				res = v:getAR(v) * (v:GetData("durability",0)/80)
-			else
-				res = v:getAR(v)
-			end
+			res = v:getAR(v)
 		end
 
 		if (v.ar ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
@@ -154,11 +142,7 @@ function playerMeta:getFlatAnomalyRes()
 
 	for k, v in pairs(items) do
 		if (v.isBodyArmor and v:GetData("equip")) then
-			if v:GetData("durability",100) < 80 then
-				res = res + v:getFAR(v) * (v:GetData("durability",0)/80)
-			else
-				res = res + v:getFAR(v)
-			end
+			res = res + v:getFAR(v)
 		end
 
 		if (v.far ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then

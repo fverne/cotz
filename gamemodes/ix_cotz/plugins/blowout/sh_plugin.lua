@@ -145,7 +145,9 @@ if (SERVER) then
 
                 if ix.config.Get("blowoutRemoveItems", false) then
                     for k, v in pairs(ents.FindByClass("ix_item")) do
-                        v:Remove()
+                      if (v.bTemporary) then
+                            v:Remove()
+                        end
                     end
                 end
 

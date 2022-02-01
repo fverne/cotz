@@ -14,6 +14,8 @@ ITEM.quantity = 1
 
 ITEM.isDrink = true
 
+ITEM.alcohol = 20
+
 ITEM.addictionStrongAlcohol = true
 
 ITEM.sound = "stalkersound/inv_flask.mp3"
