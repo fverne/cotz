@@ -87,7 +87,7 @@ ix.progression.Register("oldTimerKillIntro", {
 				local ang = Angle(0,-180,0)
 				ix.util.SpawnAdvVendor("cooknpc", pos, ang)
 
-				ix.util.SpawnAdvDupe2Dupe( "progressiontest1" )
+				ix.util.SpawnAdvDupe2Dupe( "prog_oldtimer_1" )
 			end,
 			RunOnce = true
 		},
@@ -104,6 +104,7 @@ ix.progression.Register("oldTimerKillIntro", {
 					message = "Due to your extraordinary efforts, I have been secured supply lines to import some medical supplies from some leftover army supplies they don't need anymore."
 				})
 
+				ix.util.SpawnAdvDupe2Dupe( "prog_oldtimer_2" )
 			end,
 			RunOnce = false
 		},
