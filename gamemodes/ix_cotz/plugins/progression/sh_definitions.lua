@@ -55,7 +55,7 @@ hook.Add("ix_OnJobComplete", "CookNPC_cookMeatCollect", function(client, npciden
 end)
 
 ix.progression.Register("oldTimerKillIntro", {
-	name = "Old Timer Kill Intro",
+	name = "Cleaning up the Zone",
 	description = "Cleaning up the zone",
 	keyNpc = "'Old Timer'",
 	defaultActive = true,
@@ -70,33 +70,41 @@ ix.progression.Register("oldTimerKillIntro", {
 			end
 		end
 
-		return string.format("I need you to complete mutant kill tasks for me, %d should do.", tresh-status.value)
+		return string.format("I need you to complete mutant kill tasks for me, %d should do. This will allow us to get better supply lines, and maybe have a friend of mine move in if we clear enough of it.", tresh-status.value)
 	end,
 	progressfunctions = {
 		[1] = {
-			OnRun = function()
-				ix.progression.SetActive("cookMeatCollect")
-				
+			OnRun = function()			
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = "'Old Timer'",
-					message = "Good job, you've lowered the mutant population a bit, and as such we've gained a slight foothold in the zone. I invited my good friend, Spicy Lemon, here. He should be moving into the small hut next to the building I usually stay in."
+					message = "Good job, you've lowered the mutant population a bit, and as such we've gained a slight foothold in the zone. I invited my good friend, Technut, here. He should be moving into the small hut next to the building I usually stay in."
 				})
 				
-				-- Spawn CookNPC
-				local pos = Vector(-6120.729492, -9750.427734, 4959.031250)
-				local ang = Angle(0,-180,0)
-				ix.util.SpawnAdvVendor("cooknpc", pos, ang)
-
-				ix.util.SpawnAdvDupe2Dupe( "prog_oldtimer_1" )
+				-- Spawn TechNPC
+				local pos = Vector(-6006.653809, -11071.930664, 5026.031250)
+				local ang = Angle(0,-177.793,0)
+				ix.util.SpawnAdvVendor("technpc", pos, ang)
 			end,
 			RunOnce = true
 		},
-		[2] = {
+		[2] = { -- runs at the same time as [1]
+			OnRun = function()
+				local npc = ix.progression.GetNPCFromName("'Old Timer'")
+				if (npc) then
+				end
+
+				ix.util.SpawnAdvDupe2Dupe( "prog_oldtimer_1" )
+			end,
+			RunOnce = false
+		},
+		[3] = {
 			OnRun = function()
 
-				local npc = ix.progression.GetNPCFromName("Sorter")
+				local npc = ix.progression.GetNPCFromName("'Old Timer'")
 				if (npc) then
-					--Add Old Timer VendorList 2
+					npc:AddItemToList("medic_medkit_1", nil, 4, "SELLANDBUY", 4, 1, 4)
+					npc:AddItemToList("medic_medkit_2", nil, 4, "SELLANDBUY", 4, 1, 4)
+					npc:AddItemToList("medic_bandage_2", nil, 4, "SELLANDBUY", 4, 1, 4)
 				end
 
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
@@ -108,28 +116,31 @@ ix.progression.Register("oldTimerKillIntro", {
 			end,
 			RunOnce = false
 		},
-		[3] = {
+		[4] = {
 			OnRun = function()
-				local npc = ix.progression.GetNPCFromName("Sorter")
+				local npc = ix.progression.GetNPCFromName("'Old Timer'")
 				if (npc) then
-					--Add Old Timer VendorList 3
+					npc:AddItemToList("medic_medkit_3", nil, 4, "SELLANDBUY", 4, 1, 4)
+					npc:AddItemToList("medic_bandage_3", nil, 4, "SELLANDBUY", 4, 1, 4)
 				end
 
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = "'Old Timer'",
-					message = "Lovely work everyone, thanks to your lovely work one of my associates have agreed to ship in sporting goods to me, feel free to come check my wares."
+					message = "Lovely work everyone, thanks to your lovely work one of my associates have agreed to ship in a wider variety of medical supplies, feel free to come check my wares."
 				})
 
 				ix.progression.SetActive("oldTimerKillIntro", false)
 
+				ix.util.SpawnAdvDupe2Dupe( "prog_oldtimer_3" )
 			end,
 			RunOnce = false
 		},
 	},
 	progressthresholds = {
-		[1] = 2,
-		[2] = 4,
-		[3] = 120
+		[1] = 1,
+		[2] = 1, -- just for the dupe spawning
+		[3] = 2,
+		[4] = 3
 	}
 })
 
