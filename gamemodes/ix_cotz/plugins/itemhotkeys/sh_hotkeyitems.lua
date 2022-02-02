@@ -24,4 +24,9 @@ PLUGIN.hotkeyitems = {
 
     ["medic_psyheal_1"] = "use",
     ["medic_psyheal_2"] = "use",
+    
+    ["drug_adrenaline"] = "use",
+    ["drug_morphine"] = "use",
+    ["drug_painkillers"] = "use",
+    ["drug_caffeine"] = "use",
 }
