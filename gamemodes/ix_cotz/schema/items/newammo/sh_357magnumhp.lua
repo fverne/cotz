@@ -1,4 +1,4 @@
-ITEM.name = ".357 Magnum Hollow-Point"
+ITEM.name = ".357 Magnum JHP"
 ITEM.model = "models/lostsignalproject/items/ammo/357.mdl"
 ITEM.ammo = ".357 Magnum -HP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo

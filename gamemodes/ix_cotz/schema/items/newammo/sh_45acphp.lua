@@ -1,4 +1,4 @@
-ITEM.name = ".45 ACP Hollow-Point"
+ITEM.name = ".45 ACP Hydro-Shok"
 ITEM.model = "models/lostsignalproject/items/ammo/45cal.mdl"
 ITEM.ammo = ".45 ACP -HP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo

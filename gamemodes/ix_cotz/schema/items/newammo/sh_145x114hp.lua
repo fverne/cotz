@@ -1,4 +1,4 @@
-ITEM.name = "14.5x114mm Hollow-Point"
+ITEM.name = "14.5x114mm BZT"
 ITEM.model = "models/lostsignalproject/items/ammo/127x55.mdl"
 ITEM.ammo = "14.5x114MM -HP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo

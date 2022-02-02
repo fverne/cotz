@@ -1,4 +1,4 @@
-ITEM.name = "9x18mm Armor-Piercing"
+ITEM.name = "9x18mm JSP-AP"
 ITEM.model = "models/lostsignalproject/items/ammo/9x18.mdl"
 ITEM.ammo = "9x18MM -AP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo

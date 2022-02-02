@@ -1,4 +1,4 @@
-ITEM.name = "9x39mm Armor-Piercing"
+ITEM.name = "9x39mm SP-6"
 ITEM.model = "models/lostsignalproject/items/ammo/9x39.mdl"
 ITEM.width = 2
 ITEM.height = 1

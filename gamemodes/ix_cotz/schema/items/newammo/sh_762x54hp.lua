@@ -1,4 +1,4 @@
-ITEM.name = "7.62x54mm Hollow-Point"
+ITEM.name = "7.62x54mm HPBT"
 ITEM.model = "models/lostsignalproject/items/ammo/762x54.mdl"
 ITEM.width = 2
 ITEM.height = 1

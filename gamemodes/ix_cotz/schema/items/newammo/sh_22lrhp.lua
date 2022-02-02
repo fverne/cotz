@@ -1,4 +1,4 @@
-ITEM.name = ".22LR Hollow-Point"
+ITEM.name = ".22LR Subsonic 40 gr Hollow-Point"
 ITEM.model = "models/lostsignalproject/items/ammo/9x19.mdl"
 ITEM.ammo = ".22LR -HP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo

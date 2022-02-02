@@ -1,4 +1,4 @@
-ITEM.name = ".44 Magnum Hollow-Point"
+ITEM.name = ".44 Magnum Black Talon HP"
 ITEM.model = "models/items/ammo_44mag.mdl"
 ITEM.ammo = ".44 Magnum -HP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo

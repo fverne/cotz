@@ -1,4 +1,4 @@
-ITEM.name = "7.62x39mm Armor-Piercing"
+ITEM.name = "7.62x39mm MAI AP"
 ITEM.model = "models/lostsignalproject/items/ammo/762x39.mdl"
 ITEM.width = 2
 ITEM.height = 1
