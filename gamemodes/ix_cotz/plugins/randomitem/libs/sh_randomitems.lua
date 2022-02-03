@@ -87,3 +87,4 @@ ix.util.Include("reward_consumable.lua","shared")
 ix.util.Include("reward_generic_valuable.lua","shared")
 
 ix.util.Include("event_anomaly_burner.lua","shared")
+ix.util.Include("event_anomaly_razortree.lua","shared")
