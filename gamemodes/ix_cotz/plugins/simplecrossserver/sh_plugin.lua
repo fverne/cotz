@@ -215,26 +215,6 @@ if (CLIENT) then
 	end)
 end
 
-function PLUGIN:PostPlayerLoadout(client)
-	if IsValid(client) then
-		timer.Simple(0, function()
-			local position = client:GetCharacter():GetData("custompos", nil)
-			local curmap = client:GetCharacter():GetData("curmap")
-
-			PrintTable(position)
-
-			if (position and curmap and curmap:lower() == game.GetMap():lower()) then
-				-- Restore the player to that position.
-				client:SetPos(position[1].x and position[1] or client:GetPos())
-				client:SetEyeAngles(position[2].p and position[2] or angle_zero)
-
-				-- Removes the custompos used for transferrign to the new map.
-				client:GetCharacter():SetData("custompos", {})
-			end
-		end)
-	end
-end
-
 /*
 function PLUGIN:ShouldMenuButtonShow(buttonid)
 	if buttonid == "create" then
