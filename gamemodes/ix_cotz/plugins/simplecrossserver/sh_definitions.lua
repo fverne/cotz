@@ -110,6 +110,29 @@ PLUGIN.mapdata["arp_raspad_ep4_1"].loadzones["tocordon"] = {
 	desc = "The area ahead leads into garbage."
 }
 
+
+PLUGIN.mapdata["rp_marsh_cs"] = {}
+PLUGIN.mapdata["rp_marsh_cs"].name = "Great Marsh"
+PLUGIN.mapdata["rp_marsh_cs"].serverip = "176.23.99.100:27015"
+PLUGIN.mapdata["rp_marsh_cs"].loadzones = PLUGIN.mapdata["rp_marsh_cs"].loadzones or {}
+
+PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromcrossroads"] = {
+	pos = Vector(-5971.089844, 12849.424805, 166.377884), --edit me
+	ang = Angle(4.891924, -91.519882, 0.000000), --edit me
+	desc = "The area ahead leads next to the broken bridge."
+}
+
+PLUGIN.mapdata["rp_crossroads_v1b"] = {}
+PLUGIN.mapdata["rp_crossroads_v1b"].name = "Crossroads"
+PLUGIN.mapdata["rp_crossroads_v1b"].serverip = "176.23.99.100:27016"
+PLUGIN.mapdata["rp_crossroads_v1b"].loadzones = PLUGIN.mapdata["rp_crossroads_v1b"].loadzones or {}
+
+PLUGIN.mapdata["rp_crossroads_v1b"].loadzones["frommarsh"] = {
+	pos = Vector(-10694.031250, 12306.247070, -176.112823), --edit me
+	ang = Angle(2.013443, -57.336006, 0.000000), --edit me
+	desc = "This takes you to the crossroads."
+}
+
 --[[
 
 	PLUGIN.mapdata[mapname] = {
