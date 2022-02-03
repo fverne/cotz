@@ -91,13 +91,11 @@ function PLUGIN:Think()
 						v.inmenu = true
 						v:requestQuery("Move Zones", "Do you wish to move to "..self.mapdata[c[2]].name.."?\n"..self.mapdata[c[2]].loadzones[c[3]].desc,
 						function(response)
-							print(response)
-
 							if response then
-								v.inmenu = nil
+								timer.Simple(12, function() v.inmenu = nil end)
 								self:RedirectPlayer(v,c[2],c[3])
 							else
-								timer.Simple(6, function() v.inmenu = nil end)
+								timer.Simple(12, function() v.inmenu = nil end)
 							end
 						end)
 					end
@@ -182,7 +180,6 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 	if mapdata[map] != nil then
 		local tempip = mapdata[map].serverip
 		if mapdata[map].loadzones[loadzone] != nil then
-			
 			local position = character:GetData("pos",{})
 
 			position[map] = {
@@ -195,15 +192,23 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 
 			--client:SendLua("RunConsoleCommand('connect', '".. tempip .."')")
 			client:Notify(character:GetName().." has been sent to "..map)
-			client:SendLua("LocalPlayer():ConCommand('connect ".. tempip .."')")
+			netstream.Start(client, "ixPlayerAskConnect", client, tempip)
 		else
 			character:SetData("curmap", map)
-			client:Notify(character:GetName().." has been sent to "..map)
-			client:SendLua("LocalPlayer():ConCommand('connect ".. tempip .."')")		
+			--client:Notify(character:GetName().." has been sent to "..map)
+			--client:SendLua("LocalPlayer():ConCommand('connect ".. tempip .."')")
+			netstream.Start(client, "ixPlayerAskConnect", client, tempip)
 		end
 	else
 		client:Notify("Invalid map")
 	end
+end
+
+
+if (CLIENT) then
+	netstream.Hook("ixPlayerAskConnect", function(client, address)
+		permissions.AskToConnect(address)
+	end)
 end
 
 /*
