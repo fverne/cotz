@@ -1,4 +1,4 @@
-ITEM.name = "9x18mm Hollow-Point"
+ITEM.name = "9x18mm +P"
 ITEM.model = "models/lostsignalproject/items/ammo/9x18.mdl"
 ITEM.ammo = "9x18MM -HP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo

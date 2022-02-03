@@ -85,3 +85,5 @@ ix.util.Include("reward_ammo_rare.lua","shared")
 ix.util.Include("reward_consumable.lua","shared")
 
 ix.util.Include("reward_generic_valuable.lua","shared")
+
+ix.util.Include("event_anomaly_burner.lua","shared")

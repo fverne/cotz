@@ -1,4 +1,4 @@
-ITEM.name = "5.7x28mm Hollow-Point"
+ITEM.name = "5.7x28mm FN R37.F"
 ITEM.model = "models/lostsignalproject/items/ammo/57x28.mdl"
 ITEM.ammo = "5.7x28MM -HP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo

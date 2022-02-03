@@ -1,4 +1,4 @@
-ITEM.name = ".50AE Hollow-Point"
+ITEM.name = ".50AE 300gr XTP HP"
 ITEM.model = "models/lostsignalproject/items/ammo/50cal_hs.mdl"
 ITEM.ammo = ".50 AE -HP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo

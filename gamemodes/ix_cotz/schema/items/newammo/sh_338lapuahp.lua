@@ -1,4 +1,4 @@
-ITEM.name = ".338 Lapua Hollow-Point"
+ITEM.name = ".338 Lapua TAC-X"
 ITEM.model = "models/kek1ch/ammo_86x70_fmj.mdl"
 ITEM.width = 2
 ITEM.height = 1

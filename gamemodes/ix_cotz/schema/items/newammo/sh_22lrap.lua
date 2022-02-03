@@ -1,4 +1,4 @@
-ITEM.name = ".22LR Armor-Piercing"
+ITEM.name = ".22LR FMJ"
 ITEM.model = "models/lostsignalproject/items/ammo/9x19.mdl"
 ITEM.ammo = ".22LR -AP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo

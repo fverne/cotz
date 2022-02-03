@@ -13,6 +13,13 @@ PLUGIN.thinkTimer = 0
 
 PLUGIN.geigerLight = {"geiger/light/geiger_light_1.wav", "geiger/light/geiger_light_2.wav", "geiger/light/geiger_light_3.wav", "geiger/light/geiger_light_4.wav", "geiger/light/geiger_light_5.wav", }
 
+local movetypes = {
+		[MOVETYPE_NONE] = true,
+		[MOVETYPE_FLYGRAVITY] = true,
+		[MOVETYPE_NOCLIP] = true,
+		[MOVETYPE_OBSERVER] = true
+}
+
 if SERVER then
 
 	function PLUGIN:Think( )
@@ -23,7 +30,7 @@ if SERVER then
 	
 		if(self.thinkTimer < CurTime()) then
 			for _, player in pairs(player.GetAll()) do
-				if(player:WaterLevel() > 0) then
+				if(player:WaterLevel() > 0 and not movetypes[player:GetMoveType()]) then
 					local TEMP_TargetDamage = DamageInfo()
 									
 					TEMP_TargetDamage:SetDamage(player:WaterLevel() * 2)
