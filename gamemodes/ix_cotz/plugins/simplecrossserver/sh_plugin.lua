@@ -94,13 +94,13 @@ function PLUGIN:Think()
 							if response then
 								self:RedirectPlayer(v,c[2],c[3])
 								timer.Simple(12, function() 
-									if v then
+									if v and v:GetCharacter() then
 										v:GetCharacter().inmenu = nil
 									end
 								end)
 							else
 								timer.Simple(6, function() 
-									if v then
+									if v and v:GetCharacter() then
 										v:GetCharacter().inmenu = nil
 									end
 								end)
