@@ -119,7 +119,7 @@ PLUGIN.mapdata["rp_marsh_cs"].loadzones = PLUGIN.mapdata["rp_marsh_cs"].loadzone
 PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromcrossroads"] = {
 	pos = Vector(-5971.089844, 12849.424805, 166.377884), --edit me
 	ang = Angle(4.891924, -91.519882, 0.000000), --edit me
-	desc = "The area ahead leads next to the broken bridge."
+	desc = "The area ahead leads through the tunnel."
 }
 
 PLUGIN.mapdata["rp_crossroads_v1b"] = {}
@@ -130,7 +130,7 @@ PLUGIN.mapdata["rp_crossroads_v1b"].loadzones = PLUGIN.mapdata["rp_crossroads_v1
 PLUGIN.mapdata["rp_crossroads_v1b"].loadzones["frommarsh"] = {
 	pos = Vector(-10694.031250, 12306.247070, -176.112823), --edit me
 	ang = Angle(2.013443, -57.336006, 0.000000), --edit me
-	desc = "This takes you to the crossroads."
+	desc = "The area ahead leads through the tunnel."
 }
 
 --[[
