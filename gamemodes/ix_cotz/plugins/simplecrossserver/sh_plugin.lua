@@ -25,7 +25,7 @@ function PLUGIN:CanPlayerUseCharacter(client, char)
 	end
 
 	if (curmap != game.GetMap() ) then
-		return false, "Character not in this map. Try another server."
+		return false, "Character not in this map. Character is only loadable on '"..curmap.."'." 
 	end
 end
 
@@ -113,42 +113,6 @@ function PLUGIN:Think()
 	end
 end
 
---[[
-nut.command.add("gotomap", {
-	adminOnly = true,
-	syntax = "[string map] [string loadzone]",
-	onRun = function(client, arguments)
-		
-		local map = arguments[1]
-		local loadzone = arguments[2]
-
-		local character = client:getChar()
-
-		local mapdata = PLUGIN.mapdata
-
-		--sanity check
-		if mapdata[map] != nil then
-			if mapdata[map].loadzones[loadzone] != nil then
-
-				local position = character:getData("pos")
-
-				position[map] = {
-					pos = mapdata[map].loadzones[loadzone].pos,
-					ang = mapdata[map].loadzones[loadzone].ang
-				}
-
-				character:setData("pos", position)
-				character:setData("curmap", map)
-			else
-				client:notify("Invalid zone")
-			end
-		else
-			client:notify("Invalid map")
-		end
-	end
-})
---]]
-
 ix.command.Add("gotomap", {
 	adminOnly = true,
 	arguments = {
@@ -197,16 +161,17 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 			}
 
 			character:SetData("newpos", position)
-
-			ix.log.Add(client, "serverTransfer", map, tempip)
-			client:Notify(character:GetName().." has been asked to be sent to "..map)
-			netstream.Start(client, "ixPlayerAskConnect", client, tempip)
-		else
-			character:SetData("curmap", map)
-			ix.log.Add(client, "serverTransfer", map, tempip)
-			client:Notify(character:GetName().." has been asked to be sent to "..map)
-			netstream.Start(client, "ixPlayerAskConnect", client, tempip)
 		end
+
+		character:SetData("curmap", map)
+
+		-- If RedirectPlayer has been called, the character has been moved to the new map, and should no longer be usable
+		character:Save()
+		character:Kick()
+
+		ix.log.Add(client, "serverTransfer", map, tempip)
+		client:Notify(character:GetName().." has been asked to be sent to "..map)
+		netstream.Start(client, "ixPlayerAskConnect", client, tempip)
 	else
 		client:Notify("Invalid map")
 	end
@@ -219,26 +184,11 @@ if (CLIENT) then
 	end)
 end
 
-function PLUGIN:CharacterPreSave(character)
-	if character then
-		print("character exists")
-		local newpos = character:GetData("newpos", nil)
-		if newpos then
-			PrintTable(newpos)
-			PrintTable(character:GetData("pos", {"no pos"}))
-			character:SetData("pos", newpos)
-			character:SetData("newpos", nil)
-			character:SetData("curmap", newpos[3])
-			PrintTable(character:GetData("pos", {"still no pos"}))
-		end
-	end
-end
-
 ix.log.AddType("serverTransfer", function(client, map, ip)
 	return string.format("%s is moving to map %s with ip %s.", client:Name(), map, ip)
 end)
 
-/*
+
 function PLUGIN:ShouldMenuButtonShow(buttonid)
 	if buttonid == "create" then
 		if game.GetMap() == self.homemap then
@@ -247,7 +197,7 @@ function PLUGIN:ShouldMenuButtonShow(buttonid)
 			return false
 		end
 	end
-end*/
+end
 
 function PLUGIN:LoadData()
 	self.loadpoints = self:GetData() or {}
@@ -269,4 +219,4 @@ hook.Add("HUDPaint", "nut_DrawLoadZones", function()
 			draw.SimpleText("Move to "..v[2], "ReviveText", Pos.x, Pos.y - 20, Color(249, 255, 239), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		end
 	end
-end)
+end) */
