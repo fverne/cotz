@@ -167,8 +167,7 @@ if SERVER then
 				if tmpfunc(v) then
 					tmpfunc = self.eventdefs[v.eventDef].funcEnd
 					v = tmpfunc(v)
-					self.currentEvents[k] = v
-					table.remove(self.currentEvents, k)
+					self.currentEvents[k] = nil
 				end
 			end
 
