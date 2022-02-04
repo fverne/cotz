@@ -87,17 +87,17 @@ function PLUGIN:Think()
 		for k, v in pairs(player.GetAll()) do
 			for j, c in pairs(self.loadpoints) do
 				if v:GetPos():Distance(c[1]) < 128 then
-					if !v.inmenu then
+					if !v.inmenu and !v:GetCharacter().isConnectQueried then
 						v.inmenu = true
 						v:requestQuery("Move Zones", "Do you wish to move to "..self.mapdata[c[2]].name.."?\n"..self.mapdata[c[2]].loadzones[c[3]].desc,
 						function(response)
 							if response then
-								timer.Simple(12, function() 
-									if IsValid(v) then
-										v.inmenu = nil 
-									end
-								end)
+								v:GetCharacter().isConnectQueried = true
 								self:RedirectPlayer(v,c[2],c[3])
+								timer.Simple(12, function() 
+									v.isConnectQueried = nil
+									v.inmenu = nil
+								end)
 							else
 								timer.Simple(6, function() v.inmenu = nil end)
 							end
@@ -184,23 +184,23 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 	if mapdata[map] != nil then
 		local tempip = mapdata[map].serverip
 		if mapdata[map].loadzones[loadzone] != nil then
-			local position = character:GetData("custompos",{})
+			local position = character:GetData("newpos",{})
 
-			position[map] = {
-				pos = mapdata[map].loadzones[loadzone].pos,
-				ang = mapdata[map].loadzones[loadzone].ang
+			position = {
+				mapdata[map].loadzones[loadzone].pos,
+				mapdata[map].loadzones[loadzone].ang,
+				map
 			}
 
-			character:SetData("custompos", position)
-			character:SetData("curmap", map)
+			character:SetData("newpos", position)
 
-			--client:SendLua("RunConsoleCommand('connect', '".. tempip .."')")
+			ix.log.Add(client, "serverTransfer", map, tempip)
 			client:Notify(character:GetName().." has been asked to be sent to "..map)
 			netstream.Start(client, "ixPlayerAskConnect", client, tempip)
 		else
 			character:SetData("curmap", map)
+			ix.log.Add(client, "serverTransfer", map, tempip)
 			client:Notify(character:GetName().." has been asked to be sent to "..map)
-			--client:SendLua("LocalPlayer():ConCommand('connect ".. tempip .."')")
 			netstream.Start(client, "ixPlayerAskConnect", client, tempip)
 		end
 	else
@@ -215,25 +215,20 @@ if (CLIENT) then
 	end)
 end
 
-function PLUGIN:PostPlayerLoadout(client)
-	if IsValid(client) then
-		timer.Simple(0, function()
-			local position = client:GetCharacter():GetData("custompos", nil)
-			local curmap = client:GetCharacter():GetData("curmap")
-
-			PrintTable(position)
-
-			if (position and curmap and curmap:lower() == game.GetMap():lower()) then
-				-- Restore the player to that position.
-				client:SetPos(position[1].x and position[1] or client:GetPos())
-				client:SetEyeAngles(position[2].p and position[2] or angle_zero)
-
-				-- Removes the custompos used for transferrign to the new map.
-				client:GetCharacter():SetData("custompos", {})
-			end
-		end)
+function PLUGIN:CharacterPostSave(character)
+	if character and character.isConnectQueried then
+		local newpos = character:GetData("newpos", nil)
+		if newpos then
+			character:SetData("pos", newpos)
+			character:SetData("newpos", nil)
+			character:SetData("curmap", newpos[3])
+		end
 	end
 end
+
+ix.log.AddType("serverTransfer", function(client, map, ip)
+	return string.format("%s is moving to map %s with ip %s.", client:Name(), map, ip)
+end)
 
 /*
 function PLUGIN:ShouldMenuButtonShow(buttonid)
