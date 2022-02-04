@@ -94,10 +94,16 @@ function PLUGIN:Think()
 							if response then
 								self:RedirectPlayer(v,c[2],c[3])
 								timer.Simple(12, function() 
-									v:GetCharacter().inmenu = nil
+									if v then
+										v:GetCharacter().inmenu = nil
+									end
 								end)
 							else
-								timer.Simple(6, function() v:GetCharacter().inmenu = nil end)
+								timer.Simple(6, function() 
+									if v then
+										v:GetCharacter().inmenu = nil
+									end
+								end)
 							end
 						end)
 					end
@@ -219,11 +225,11 @@ function PLUGIN:CharacterPreSave(character)
 		local newpos = character:GetData("newpos", nil)
 		if newpos then
 			PrintTable(newpos)
-			PrintTable(character:GetData("pos", nil))
+			PrintTable(character:GetData("pos", {"no pos"}))
 			character:SetData("pos", newpos)
 			character:SetData("newpos", nil)
 			character:SetData("curmap", newpos[3])
-			PrintTable(character:GetData("pos", nil))
+			PrintTable(character:GetData("pos", {"still no pos"}))
 		end
 	end
 end
