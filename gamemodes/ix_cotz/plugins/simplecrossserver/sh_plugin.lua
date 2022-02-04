@@ -87,19 +87,17 @@ function PLUGIN:Think()
 		for k, v in pairs(player.GetAll()) do
 			for j, c in pairs(self.loadpoints) do
 				if v:GetPos():Distance(c[1]) < 128 then
-					if !v.inmenu and !v:GetCharacter().isConnectQueried then
-						v.inmenu = true
+					if !v:GetCharacter().inmenu then
+						v.GetCharacter().inmenu = true
 						v:requestQuery("Move Zones", "Do you wish to move to "..self.mapdata[c[2]].name.."?\n"..self.mapdata[c[2]].loadzones[c[3]].desc,
 						function(response)
 							if response then
-								v:GetCharacter().isConnectQueried = true
 								self:RedirectPlayer(v,c[2],c[3])
 								timer.Simple(12, function() 
-									v.isConnectQueried = nil
-									v.inmenu = nil
+									v.GetCharacter().inmenu = nil
 								end)
 							else
-								timer.Simple(6, function() v.inmenu = nil end)
+								timer.Simple(6, function() v.GetCharacter().inmenu = nil end)
 							end
 						end)
 					end
@@ -216,12 +214,17 @@ if (CLIENT) then
 end
 
 function PLUGIN:CharacterPostSave(character)
-	if character and character.isConnectQueried then
+	if character then
+		print("character exists")
 		local newpos = character:GetData("newpos", nil)
 		if newpos then
+			PrintTable(newpos)
+			PrintTable(character:GetData("pos", nil))
 			character:SetData("pos", newpos)
 			character:SetData("newpos", nil)
 			character:SetData("curmap", newpos[3])
+			PrintTable(character:GetData("pos", nil))
+
 		end
 	end
 end
