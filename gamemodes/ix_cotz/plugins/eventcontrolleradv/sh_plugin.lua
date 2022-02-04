@@ -100,7 +100,7 @@ if SERVER then
 	function PLUGIN:spawnEvent(eventpoint, spawn)
 		if isClear(eventpoint[1]) then
 			key = spawn.key
-			if(!self.currentEvents[key])
+			if(!self.currentEvents[key]) then
 				self.currentEvents[key] = {}
 				self.currentEvents[key].data = {}
 				self.currentEvents[key].eventpoint = eventpoint
