@@ -19,7 +19,9 @@ SWEP.Secondary.Ammo = "none"
 SWEP.Secondary.Delay = 0.75
 SWEP.FireWhenLowered = true
 SWEP.UseHands = false
-SWEP.HoldType = "normal"
+SWEP.HoldType = "passive"
+SWEP.NormalHoldType = "passive"
+SWEP.RunHoldType = "passive"
 SWEP.LowerAngles = Angle(0, 5, -14)
 SWEP.LowerAngles2 = Angle(0, 5, -22)
 SWEP.ViewModelFOV = 45
@@ -76,7 +78,7 @@ function SWEP:PrimaryAttack()
         self.Owner:SetWepRaised(false)
     end
 
-    self:SetHoldType("normal")
+    --self:SetHoldType("passive")
     --self.Owner:DrawViewModel(false)
     local Pos = self.Owner:GetShootPos()
     local Aim = self.Owner:GetAimVector()
