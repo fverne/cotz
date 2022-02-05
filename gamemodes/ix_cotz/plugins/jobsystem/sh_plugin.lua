@@ -29,7 +29,7 @@ end
 
 ix.char.RegisterVar("jobs", {
 	field = "jobs",
-	fieldType = ix.type.string,
+	fieldType = ix.type.text,
 	default = {},
 	bNoDisplay = true,
 })
