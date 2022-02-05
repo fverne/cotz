@@ -105,7 +105,7 @@ function SWEP:DrawHUD()
 			surface.SetTextColor( 255, 255, 0, 255 )
 		end
 		
-		surface.SetFont( "rangefindernvg" )
+		surface.SetFont( "stalkertitlefont" )
 		surface.SetTextPos( (w*0.165), (h/2) + 16 )
 		surface.DrawText( "RANGE: "..range )
 		

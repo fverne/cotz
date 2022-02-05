@@ -20,7 +20,7 @@ surface.CreateFont( "rangefinder", {
 	outline = false,
 } )
 
-SWEP.PrintName 				= "Binoculars"
+SWEP.PrintName 				= "Rangefinder Binoculars"
 SWEP.Slot 					= 0
 SWEP.SlotPos 				= 1
 SWEP.DrawAmmo 				= false
@@ -51,7 +51,7 @@ function SWEP:DrawHUD()
 			range = range.."m"
 		end
 		
-		surface.SetFont( "rangefinder" )
+		surface.SetFont( "stalkertitlefont" )
 		surface.SetTextColor( 255, 255, 255, 255 )
 		surface.SetTextPos( (w*0.165), (h/2) + 16 )
 		surface.DrawText( "Range: "..range )
