@@ -99,19 +99,21 @@ if SERVER then
 	
 	function PLUGIN:spawnEvent(eventpoint, spawn)
 		if isClear(eventpoint[1]) then
-			key = #self.currentEvents+1
-			self.currentEvents[key] = {}
-			self.currentEvents[key].data = {}
-			self.currentEvents[key].eventpoint = eventpoint
-			self.currentEvents[key].eventDef = spawn.key
+			key = spawn.key
+			if(!self.currentEvents[key]) then
+				self.currentEvents[key] = {}
+				self.currentEvents[key].data = {}
+				self.currentEvents[key].eventpoint = eventpoint
+				self.currentEvents[key].eventDef = spawn.key
 
 
-			local tmpfunc = self.eventdefs[spawn.key].funcPrestart
-			local data = tmpfunc(self.currentEvents[key])
-			self.currentEvents[key] = data
-			tmpfunc = self.eventdefs[spawn.key].funcStart
-			data = tmpfunc(self.currentEvents[key])
-			self.currentEvents[key] = data
+				local tmpfunc = self.eventdefs[spawn.key].funcPrestart
+				local data = tmpfunc(self.currentEvents[key])
+				self.currentEvents[key] = data
+				tmpfunc = self.eventdefs[spawn.key].funcStart
+				data = tmpfunc(self.currentEvents[key])
+				self.currentEvents[key] = data
+			end
 		end
 	end
 
@@ -165,8 +167,7 @@ if SERVER then
 				if tmpfunc(v) then
 					tmpfunc = self.eventdefs[v.eventDef].funcEnd
 					v = tmpfunc(v)
-					self.currentEvents[k] = v
-					table.remove(self.currentEvents, k)
+					self.currentEvents[k] = nil
 				end
 			end
 

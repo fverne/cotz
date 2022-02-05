@@ -17,15 +17,17 @@ function ix.weight.Update(character) -- Updates the specified character's curren
 
 	timer.Simple(0.5, function() 
 		local client = character:GetPlayer()
-		if character:HeavilyOverweight() then
-			client:SetWalkSpeed(1)
-			client:SetRunSpeed(1)
-		elseif character:Overweight() then
-			client:SetWalkSpeed(ix.config.Get("walkSpeed") * 0.5)
-			client:SetRunSpeed(ix.config.Get("walkSpeed"))
-		else
-			client:SetWalkSpeed(ix.config.Get("walkSpeed"))
-			client:SetRunSpeed(ix.config.Get("runSpeed"))
+		if character and client then
+			if character:HeavilyOverweight() then
+				client:SetWalkSpeed(1)
+				client:SetRunSpeed(1)
+			elseif character:Overweight() then
+				client:SetWalkSpeed(ix.config.Get("walkSpeed") * 0.5)
+				client:SetRunSpeed(ix.config.Get("walkSpeed"))
+			else
+				client:SetWalkSpeed(ix.config.Get("walkSpeed"))
+				client:SetRunSpeed(ix.config.Get("runSpeed"))
+			end
 		end
 	end)
 end

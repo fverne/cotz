@@ -95,7 +95,7 @@ SWEP.Sounds = {draw = {{time = 0.45, sound = "VERESK_FOREGRIP"}},
 
 SWEP.SpeedDec = 5
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.NormalHoldType = "smg"
 SWEP.RunHoldType = "normal"

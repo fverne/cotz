@@ -1,6 +1,6 @@
 include( "shared.lua" )
 
-language.Add("weapon_rpw_binoculars_scout", "Scout Binoculars")
+language.Add("weapon_rpw_binoculars_scout", "Scouting Binoculars")
 
 surface.CreateFont( "rangefinderscout", {														
 	font = "Arial",
@@ -55,7 +55,7 @@ function SWEP:DrawHUD()
 		
 		draw.Text({
 			text = "Target: "..man,
-			font = "rangefinderscout",
+			font = "stalkertitlefont",
 			pos = {w/2, h/2},
 			xalign = TEXT_ALIGN_CENTER,
 			yalign = TEXT_ALIGN_TOP,

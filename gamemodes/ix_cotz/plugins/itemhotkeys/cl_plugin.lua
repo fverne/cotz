@@ -12,6 +12,10 @@ function PLUGIN:HUDPaint()
     local itemboxwidth
     local itemboxheight
 
+    -- Hotkey 1
+    surface.SetDrawColor(Color(83, 83, 83, 100))
+    surface.DrawRect(ScrW()*0.05, ScrH()*0.835, boxwidth, boxheight)
+
     itemname = lp:GetCharacter():GetHotkeyItemName(1)
     if itemname != "nil" and itemname then
         item = ix.item.list[itemname]
@@ -25,15 +29,15 @@ function PLUGIN:HUDPaint()
             itemboxheight = boxheight
         end
 
-        surface.SetDrawColor(Color(83, 83, 83, 100))
-        surface.DrawRect(ScrW()*0.05, ScrH()*0.835, boxwidth, boxheight)
-
         surface.SetDrawColor(Color(255, 255, 255, 255))
         surface.SetMaterial(icon)
         surface.DrawTexturedRect(ScrW()*0.05 + ((boxwidth * 0.5) - (itemboxwidth * 0.5)), ScrH()*0.835 + ((boxheight * 0.5) - (itemboxheight * 0.5)), itemboxwidth, itemboxheight)
-
-        draw.DrawText(string.upper(input.LookupBinding("gm_showhelp", true)), "stalkerregularsmallfont2", ScrW()*0.055, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
     end
+    draw.DrawText(string.upper(input.LookupBinding("gm_showhelp", true)), "stalkerregularsmallfont2", ScrW()*0.055, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+
+    -- Hotkey 2
+    surface.SetDrawColor(Color(83, 83, 83, 100))
+    surface.DrawRect(ScrW()*0.09, ScrH()*0.835, ScrW()*0.03, ScrH()*0.05)
 
     itemname = lp:GetCharacter():GetHotkeyItemName(2)
     if itemname != "nil" and itemname then
@@ -48,15 +52,15 @@ function PLUGIN:HUDPaint()
             itemboxheight = boxheight
         end
 
-        surface.SetDrawColor(Color(83, 83, 83, 100))
-        surface.DrawRect(ScrW()*0.09, ScrH()*0.835, ScrW()*0.03, ScrH()*0.05)
-
         surface.SetDrawColor(Color(255, 255, 255, 255))
         surface.SetMaterial(icon)
         surface.DrawTexturedRect(ScrW()*0.09 + ((boxwidth * 0.5) - (itemboxwidth * 0.5)), ScrH()*0.835 + ((boxheight * 0.5) - (itemboxheight * 0.5)), itemboxwidth, itemboxheight)
-
-        draw.DrawText(string.upper(input.LookupBinding("gm_showteam", true)), "stalkerregularsmallfont2", ScrW()*0.095, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
     end
+    draw.DrawText(string.upper(input.LookupBinding("gm_showteam", true)), "stalkerregularsmallfont2", ScrW()*0.095, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+
+    -- Hotkey 3
+    surface.SetDrawColor(Color(83, 83, 83, 100))
+    surface.DrawRect(ScrW()*0.13, ScrH()*0.835, ScrW()*0.03, ScrH()*0.05)
 
     itemname = lp:GetCharacter():GetHotkeyItemName(3)
     if itemname != "nil" and itemname then
@@ -71,15 +75,15 @@ function PLUGIN:HUDPaint()
             itemboxheight = boxheight
         end
 
-        surface.SetDrawColor(Color(83, 83, 83, 100))
-        surface.DrawRect(ScrW()*0.13, ScrH()*0.835, ScrW()*0.03, ScrH()*0.05)
-
         surface.SetDrawColor(Color(255, 255, 255, 255))
         surface.SetMaterial(icon)
         surface.DrawTexturedRect(ScrW()*0.13 + ((boxwidth * 0.5) - (itemboxwidth * 0.5)), ScrH()*0.835 + ((boxheight * 0.5) - (itemboxheight * 0.5)), itemboxwidth, itemboxheight)
-
-        draw.DrawText(string.upper(input.LookupBinding("gm_showspare1", true)), "stalkerregularsmallfont2", ScrW()*0.135, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
     end
+    draw.DrawText(string.upper(input.LookupBinding("gm_showspare1", true)), "stalkerregularsmallfont2", ScrW()*0.135, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+
+    -- Hotkey 4
+    surface.SetDrawColor(Color(83, 83, 83, 100))
+    surface.DrawRect(ScrW()*0.17, ScrH()*0.835, ScrW()*0.03, ScrH()*0.05)
 
     itemname = lp:GetCharacter():GetHotkeyItemName(4)
     if itemname != "nil" and itemname then
@@ -94,13 +98,10 @@ function PLUGIN:HUDPaint()
             itemboxheight = boxheight
         end
 
-        surface.SetDrawColor(Color(83, 83, 83, 100))
-        surface.DrawRect(ScrW()*0.17, ScrH()*0.835, ScrW()*0.03, ScrH()*0.05)
-
         surface.SetDrawColor(Color(255, 255, 255, 255))
         surface.SetMaterial(icon)
         surface.DrawTexturedRect(ScrW()*0.17 + ((boxwidth * 0.5) - (itemboxwidth * 0.5)), ScrH()*0.835 + ((boxheight * 0.5) - (itemboxheight * 0.5)), itemboxwidth, itemboxheight)
-
-        draw.DrawText(string.upper(input.LookupBinding("gm_showspare2", true)), "stalkerregularsmallfont2", ScrW()*0.175, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
     end
+    draw.DrawText(string.upper(input.LookupBinding("gm_showspare2", true)), "stalkerregularsmallfont2", ScrW()*0.175, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+
 end

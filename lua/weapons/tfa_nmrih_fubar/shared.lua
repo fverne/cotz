@@ -1,5 +1,5 @@
 SWEP.Base = "tfa_nmrimelee_base"
-SWEP.Category = "TFA NMRIH"
+SWEP.Category = "TFA NMRIH - CotZ"
 SWEP.Spawnable = true
 SWEP.AdminSpawnable = true
 

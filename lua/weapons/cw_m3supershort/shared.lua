@@ -92,7 +92,7 @@ SWEP.Sounds = {start_reload = {{time = 0.05, sound = "CW_FOLEY_LIGHT"}},
 
 SWEP.SpeedDec = 5
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.HoldType = "smg"
 SWEP.NormalHoldType = "smg"
