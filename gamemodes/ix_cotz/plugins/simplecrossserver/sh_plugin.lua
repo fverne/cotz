@@ -182,12 +182,11 @@ if (CLIENT) then
 	netstream.Hook("ixPlayerAskConnect", function(client, address)
 		permissions.AskToConnect(address)
 	end)
+else
+	ix.log.AddType("serverTransfer", function(client, map, ip)
+		return string.format("%s is moving to map %s with ip %s.", client:Name(), map, ip)
+	end)
 end
-
-ix.log.AddType("serverTransfer", function(client, map, ip)
-	return string.format("%s is moving to map %s with ip %s.", client:Name(), map, ip)
-end)
-
 
 function PLUGIN:ShouldMenuButtonShow(buttonid)
 	if buttonid == "create" then
