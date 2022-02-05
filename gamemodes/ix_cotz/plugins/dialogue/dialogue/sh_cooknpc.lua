@@ -243,7 +243,10 @@ DIALOGUE.addTopic("BackTopic", {
 		"AboutWorkTopic",
 		"GetTask",
 		"GOODBYE"
-	}
+	},
+	preCallback = function(self, client, target)
+		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantmeateasy", "mutantkillgroupeasy", "mutantmeatmedium"}, 4)
+	end
 })
 
 DIALOGUE.addTopic("GOODBYE", {

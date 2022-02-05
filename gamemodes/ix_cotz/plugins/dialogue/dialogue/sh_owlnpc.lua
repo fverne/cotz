@@ -233,7 +233,10 @@ DIALOGUE.addTopic("BackTopic", {
 		"GetTask",
 		--"ProgressionTestTopic",
 		"GOODBYE"
-	}
+	},
+	preCallback = function(self, client, target)
+		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"information", "riches"}, 2)
+	end
 })
 
 DIALOGUE.addTopic("GOODBYE", {
