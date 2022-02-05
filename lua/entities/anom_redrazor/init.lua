@@ -16,16 +16,18 @@ function ENT:SpawnFunction(ply, tr)
 end
 
 function ENT:Initialize()
-    self.Entity:SetModel("models/z-o-m-b-i-e/st/trees/st_bush_02.mdl") --Set its model.
-    --self.Entity:PhysicsInit( SOLID_NONE )      -- Make us work with physics,
-    self.Entity:SetMoveType(MOVETYPE_NONE) -- after all, gmod is a physics
-    self.Entity:SetSolid(SOLID_NONE) -- Toolbox
+    self.Entity:SetModel("models/z-o-m-b-i-e/st/trees/st_bush_11.mdl") --Set its model.
+    self.Entity:PhysicsInit(SOLID_VPHYSICS)
+    self.Entity:SetMoveType(MOVETYPE_VPHYSICS) -- after all, gmod is a physics
+    self.Entity:SetSolid(SOLID_VPHYSICS) -- Toolbox
+    self.Entity:SetCollisionGroup(COLLISION_GROUP_WORLD)
     self.Entity:SetSkin(13)
     self.Entity:SetColor(Color(255, 0, 0, 255))
     local phys = self.Entity:GetPhysicsObject()
 
     if (phys:IsValid()) then
-        phys:Wake()
+        phys:Sleep()
+        phys:EnableMotion(false)
     end
 
     self.Entity:ResetSequenceInfo()
@@ -34,9 +36,9 @@ end
 function ENT:Think()
     if delayTime < CurTime() then
         delayTime = CurTime() + 0.3
-        local min, max = self:GetModelBounds()
+        local min, max = self.Entity:GetModelBounds()
 
-        for k, v in pairs(ents.FindInBox(self:GetPos() + Vector(-80, -80, -10), self:GetPos() + Vector(80, 80, max.z - 50))) do
+        for k, v in ipairs(ents.FindInBox(self:GetPos() + Vector(min.x + 100, min.y + 100, -10), self:GetPos() + Vector(max.x - 100, max.y - 100, max.z - 100))) do
             if v:IsPlayer() and v:Alive() and v:IsValid() then
                 local b = DamageInfo()
                 b:SetDamage(5)
@@ -44,7 +46,7 @@ function ENT:Think()
                 b:SetAttacker(self.Entity)
                 b:SetInflictor(self.Entity)
                 v:TakeDamageInfo(b)
-                self:EmitSound("weapons/blades/slash.mp3")
+                v:EmitSound("weapons/blades/slash.mp3")
             end
         end
     end
