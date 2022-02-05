@@ -8,6 +8,6 @@ ix.randomitems.tables["event_anomaly_burner"] = {
   {200,   {"value_phone_new"}},
   {100,   {"anomalydetector"}},
   {100,   {"geigercounter"}},
-  {50,    {"artifact_droplet"}},
+  -- {50,    {"artifact_droplet"}}, we dont have a droplet x
   {20,    {"detectorecho"}},
 }
