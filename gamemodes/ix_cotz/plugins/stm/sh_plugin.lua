@@ -72,7 +72,11 @@ local function CalcStaminaChange(client)
 
 				hook.Run("PlayerStaminaLost", client)
 			elseif (value >= 50 and client:GetNetVar("brth", false)) then
-				client:SetRunSpeed(runSpeed)
+				if client:GetCharacter():Overweight() then
+					client:SetRunSpeed(walkspeed)
+				else
+					client:SetRunSpeed(runSpeed)
+				end
 				client:SetNetVar("brth", nil)
 
 				hook.Run("PlayerStaminaGained", client)
