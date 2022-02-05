@@ -11,7 +11,7 @@ ITEM.price = 200
 function ITEM:GetName()
 	local name
 
-	if(not self:GetOwner()) then return self.name end
+	if(not self:GetOwner()) then return "Personal Belongings" end
 
 	if self:GetData("charname", nil) then
 		name = self:GetData("charname", "Anonymous").."'s "..self.name

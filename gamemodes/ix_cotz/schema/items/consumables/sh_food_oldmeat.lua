@@ -18,7 +18,7 @@ ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
 	--item.player:TakeDamage(7)
-	item.player:DamagePsyHealth(8)
+	item.player:AddBuff("debuff_psy", 10, {amount = 7/20})
 	item.player:AddBuff("debuff_radiation", 10, { amount = 0.25 })
 	ix.chat.Send(item.player, "iteminternal", "eats a bit of their "..item.name..".", false)
 end)

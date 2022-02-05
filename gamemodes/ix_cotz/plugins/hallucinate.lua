@@ -1,6 +1,7 @@
 PLUGIN.name = "Hallucinations"
 PLUGIN.author = "SpicyLemones"
 PLUGIN.description = "Woo crazy."
+/*
 
 
 --include("psyhealth.lua")
@@ -302,3 +303,5 @@ ix.command.Add("Meme", {
 	    print("lol")
 	end
 })]]--
+
+*/

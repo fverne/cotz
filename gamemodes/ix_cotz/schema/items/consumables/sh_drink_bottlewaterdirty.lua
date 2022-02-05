@@ -12,7 +12,7 @@ ITEM.flatweight = 0.025
 ITEM.thirst = 17
 ITEM.quantity = 2
 
-ITEM.sound = "stalkersound/inv_drink_beak.ogg"
+ITEM.sound = "stalkersound/inv_drink_beak.mp3"
 ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/bottlewaterdirty.png")
 
 ITEM:Hook("use", function(item)
