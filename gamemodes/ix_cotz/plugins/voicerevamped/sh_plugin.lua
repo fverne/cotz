@@ -230,7 +230,7 @@ for i, v in pairs(ixVoice.Ranges) do
     ixVoice.Ranges[i].icon = Material(v.icon, "noclamp smooth")
 end
 
-hook.Add("HUDPaint", "ixVoiceModeDisplay", function()
+function PLUGIN:HUDPaint()
     local w, h = 45, 42
     if not ix.config.Get("allowVoice") then return end
     if (not LocalPlayer():IsSpeaking() and not ix.option.Get("permvoicehud", false)) then return end
@@ -256,34 +256,42 @@ hook.Add("HUDPaint", "ixVoiceModeDisplay", function()
             surface.DrawText(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
         end
     end
-end)
+end
 
-hook.Add('PostPlayerDraw', 'ixVoiceIconDisplay', function(ply)
-    if ply == LocalPlayer() and GetViewEntity() == LocalPlayer() and (GetConVar('thirdperson') and GetConVar('thirdperson'):GetInt() ~= 0) then return end
-    if not ply:Alive() then return end
-    if not ix.config.Get("allowVoice", false) then return end
-    if (IsValid(ix.gui.menu)) then return end
-    if not ply:IsSpeaking() then return end
-    local voice_mat = ixVoice.Ranges[ply:GetLocalVar("voiceRange") or 2].icon
-    local pos = ply:GetPos() + Vector(0, 0, ply:GetModelRadius() + 15)
-    local attachment = ply:GetAttachment(ply:LookupAttachment('eyes'))
+function PLUGIN:PostDrawTranslucentRenderables()
+    local ply = LocalPlayer()
 
-    if attachment then
-        pos = ply:GetAttachment(ply:LookupAttachment('eyes')).Pos + Vector(0, 0, 15)
+    for _, v in ipairs(player.GetAll()) do
+        if (v == ply) then
+            continue
+        end
+    
+        if ply == LocalPlayer() and GetViewEntity() == LocalPlayer() and (GetConVar('thirdperson') and GetConVar('thirdperson'):GetInt() ~= 0) then return end
+        if not ply:Alive() then return end
+        if not ix.config.Get("allowVoice", false) then return end
+        if (IsValid(ix.gui.menu)) then return end
+        if not ply:IsSpeaking() then return end
+        local voice_mat = ixVoice.Ranges[ply:GetLocalVar("voiceRange") or 2].icon
+        local pos = ply:GetPos() + Vector(0, 0, ply:GetModelRadius() + 15)
+        local attachment = ply:GetAttachment(ply:LookupAttachment('eyes'))
+
+        if attachment then
+            pos = ply:GetAttachment(ply:LookupAttachment('eyes')).Pos + Vector(0, 0, 15)
+        end
+
+        local distance = LocalPlayer():GetPos():Distance(ply:GetPos())
+        local plyrange = ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].range
+
+        if (distance <= plyrange) then
+            render.SetMaterial(ply:IsSpeaking() and voice_mat)
+            local color_var = 255
+            local computed_color = render.ComputeLighting(ply:GetPos(), Vector(0, 0, 1))
+            local max = math.max(computed_color.x, computed_color.y, computed_color.z)
+            color_var = math.Clamp(max * 255 * 1.11, 0, 255)
+            render.DrawSprite(pos, 12, 12, Color(color_var, color_var, color_var, 255))
+        end
     end
-
-    local distance = LocalPlayer():GetPos():Distance(ply:GetPos())
-    local plyrange = ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].range
-
-    if (distance <= plyrange) then
-        render.SetMaterial(ply:IsSpeaking() and voice_mat)
-        local color_var = 255
-        local computed_color = render.ComputeLighting(ply:GetPos(), Vector(0, 0, 1))
-        local max = math.max(computed_color.x, computed_color.y, computed_color.z)
-        color_var = math.Clamp(max * 255 * 1.11, 0, 255)
-        render.DrawSprite(pos, 12, 12, Color(color_var, color_var, color_var, 255))
-    end
-end)
+end
 
 --[[
 if (CLIENT) then
