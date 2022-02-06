@@ -84,7 +84,7 @@ if (SERVER) then
             if (self.BlowoutVars.PrehitTime < CT and self.BlowoutVars.BlowoutStep < 2) then
                 self.BlowoutVars.BlowoutStep = 2
                 self:PlaySoundOnClient("prehit")
-                print("Prehit - phase 2")
+                --print("Prehit - phase 2")
             end
 
             if (self.BlowoutVars.BlastTime < CT and self.BlowoutVars.BlowoutStep < 3) then
@@ -94,7 +94,7 @@ if (SERVER) then
                 self.BlowoutVars.FinalSoundTime = CT + 17.25
                 self:PlaySoundOnClient("start")
                 self:ChangePhase(2, 0)
-                print("Start - phase 3")
+                --print("Start - phase 3")
                 local e = ents.Create("env_shake") --Shake the world a little
                 e:SetKeyValue("amplitude", "1")
                 e:SetKeyValue("frequency", "100.0")
@@ -106,27 +106,27 @@ if (SERVER) then
             if (self.BlowoutVars.BuildupTime < CT and self.BlowoutVars.BlowoutStep == 3) then
                 self.BlowoutVars.BlowoutStep = 4
                 self:PlaySoundOnClient("buildup")
-                print("buildup - phase 4")
+                --print("buildup - phase 4")
             end
 
             if (self.BlowoutVars.FinalSoundTime < CT and self.BlowoutVars.BlowoutStep == 4) then
                 self.BlowoutVars.BlowoutStep = 5
                 self:PlaySoundOnClient("end")
-                print("end - phase 5")
+                --print("end - phase 5")
             end
 
             if (self.BlowoutVars.BlowoutHitTime < CT and self.BlowoutVars.BlowoutStep == 5) then
                 self.BlowoutVars.BlowoutStep = 6
 
                 local movetypes = {
-                    [MOVETYPE_NONE] = true,
-                    [MOVETYPE_FLYGRAVITY] = true,
+                    --[MOVETYPE_NONE] = true,
+                    --[MOVETYPE_FLYGRAVITY] = true,
                     [MOVETYPE_NOCLIP] = true,
                     [MOVETYPE_OBSERVER] = true
                 }
 
                 for _, v in pairs(player.GetAll()) do
-                    if (not self:IsPosSafe(v:GetShootPos()) and not movetypes[v:GetMoveType()]) then
+                    if (not self:IsPosSafe(v:GetShootPos(), v) and not movetypes[v:GetMoveType()]) then
                         v:Kill()
                     end
                 end
@@ -151,7 +151,7 @@ if (SERVER) then
                     end
                 end
 
-                print("killing - phase 6")
+                --print("killing - phase 6")
                 self.BlowoutVars.PostHitActionTime = CT + 1
             end
 
@@ -159,27 +159,27 @@ if (SERVER) then
                 if (self.BlowoutVars.BlowoutStep < 7) then
                     self.BlowoutVars.BlowoutStep = 7
                     self.BlowoutVars.PostHitActionTime = CT + 6
-                    print("waiting - phase 7")
+                    --print("waiting - phase 7")
                 elseif (self.BlowoutVars.BlowoutStep < 8) then
                     self.BlowoutVars.BlowoutStep = 8
                     self.BlowoutVars.PostHitActionTime = CT + 3.5
                     self:ChangePhase(4, 3.5)
-                    print("clearing up - phase 8")
+                    --print("clearing up - phase 8")
                 elseif (self.BlowoutVars.BlowoutStep < 9) then
                     self.BlowoutVars.BlowoutStep = 9
                     self.BlowoutVars.PostHitActionTime = CT + 8
                     self:ChangePhase(5, CurTime() + 20)
-                    print("finishing - phase 9")
+                    --print("finishing - phase 9")
                 elseif (self.BlowoutVars.BlowoutStep < 10) then
                     self.BlowoutVars.BlowoutStep = 10
                     self:PlaySoundOnClient("posthit")
                     self.BlowoutVars.PostHitActionTime = CT + 12
-                    print("announce - phase 10")
+                    --print("announce - phase 10")
                     self:ResetBlowoutVars()
                 elseif (self.BlowoutVars.BlowoutStep < 11) then
                     self:ChangePhase(0, 0)
                     self:ResetBlowoutVars()
-                    print("done - phase 11")
+                    --print("done - phase 11")
                 end
             end
 
@@ -240,11 +240,12 @@ if (SERVER) then
         net.Broadcast()
     end
 
-    function PLUGIN:IsPosSafe(pos)
+    function PLUGIN:IsPosSafe(pos, client)
         local tracedata_up = {}
         tracedata_up.start = pos
         tracedata_up.endpos = pos + Vector(0, 0, 999999)
         tracedata_up.mask = MASK_SOLID + MASK_WATER
+        tracedata_up.filter = client
         local trace_up = util.TraceLine(tracedata_up) --Can the entity see the sky?
 
         if trace_up.HitSky then
@@ -253,6 +254,7 @@ if (SERVER) then
             tracedata_down.start = Pos_up
             tracedata_down.endpos = pos
             tracedata_down.mask = MASK_SOLID + MASK_WATER
+            tracedata_down.filter = client
             local trace_down = util.TraceLine(tracedata_down) --Can the sky see the entity? (excludes entities that are below displacements or inside brushes)
             if (not trace_down.Hit) then return false end
 
