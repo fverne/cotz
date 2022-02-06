@@ -2,7 +2,7 @@ ITEM.name = "Sharpened Rebar"
 ITEM.description = "A homemade stabbing tool."
 ITEM.model = "models/bf4_sweps/w_knife_shank.mdl"
 ITEM.longdesc = "The knife seems to be in poor condition, and doesn't offer much in terms of cutting capabilites, but one of the sides have been sharpened slightly to compensate."
-ITEM.category = "Melee"
+ITEM.category = "Knife"
 
 ITEM.price = 450
 ITEM.height = 1

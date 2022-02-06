@@ -2,7 +2,7 @@ ITEM.name = "Survival Knife"
 ITEM.description = "A survival knife with a plastic handle."
 ITEM.model = "models/bf4_sweps/w_knife_dive.mdl"
 ITEM.longdesc = "This knife offers better poaching capabilities than most other knives, as it's meant for survival but lacks effect when used in combat."
-ITEM.category = "Melee"
+ITEM.category = "Knife"
 
 ITEM.price = 53950
 ITEM.height = 1
