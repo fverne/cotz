@@ -33,14 +33,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0.719, 93.188, -174.281),
-						["Position"] = Vector(-7.366, 6.884, 6.301),
+						["Angles"] = Angle(7.2459273338318, 74.650802612305, 92.232429504395),
+						["Position"] = Vector(5.11865234375, -4.373046875, -4.71630859375),
 						["Model"] = "models/weapons/w_csgo_bayonet.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "combatknife_1",
-						["Bone"] = "pelvis",
-						["Name"] = "bat",
+						["Bone"] = "right thigh",
+						["Name"] = "combat knife",
 					},
 				},
 			},

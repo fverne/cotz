@@ -33,14 +33,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0.719, 93.188, -174.281),
-						["Position"] = Vector(-7.366, 6.884, 6.301),
+						["Angles"] = Angle(-77.919311523438, -0.00019300662097521, -74.558158874512),
+						["Position"] = Vector(5.06103515625, -0.376953125, -4.6669921875),
 						["Model"] = "models/splatolivia/knife/knife.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "oldknife_1",
-						["Bone"] = "pelvis",
-						["Name"] = "bat",
+						["Bone"] = "right thigh",
+						["Name"] = "kitchen knife",
 					},
 				},
 			},
@@ -64,6 +64,6 @@ ITEM.pacData = {
 }
 
 function ITEM:PopulateTooltipIndividual(tooltip)
-    ix.util.PropertyDesc(tooltip, "Melee", Color(64, 224, 208))
+  ix.util.PropertyDesc(tooltip, "Melee", Color(64, 224, 208))
 	ix.util.PropertyDesc(tooltip, "Poaching Tool", Color(64, 224, 208))
 end
