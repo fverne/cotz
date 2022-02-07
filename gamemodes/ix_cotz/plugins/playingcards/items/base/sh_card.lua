@@ -1,3 +1,4 @@
+local PLUGIN = PLUGIN
 ITEM.name = "Cards Base"
 ITEM.model = "models/lostsignalproject/items/quest/keycard.mdl"
 ITEM.material = "models/debug/debugwhite"
@@ -57,7 +58,10 @@ ITEM.functions.Flip = {
 
         ix.item.Instance(0, "cards_deck_cards", nil, 0, 0, function(item)
             item:Spawn(tr.HitPos, ang)
-            item:SetData("cards", {[1] = itemTable.uniqueID})
+
+            item:SetData("cards", {
+                [1] = itemTable.uniqueID
+            })
         end)
     end
 }
@@ -82,7 +86,22 @@ ITEM.functions.combine = {
             targetItem:SetData("cards", PLUGIN:FillDeckCards())
         end
 
+        local duplicateFound = false
         local cards = targetItem:GetData("cards")
+
+        for k, v in pairs(cards) do
+            if v == item.uniqueID then
+                duplicateFound = true
+                break
+            end
+        end
+
+        if duplicateFound then
+            item.player:Notify("You can not put the card in the deck as the same type already is in there!")
+
+            return false
+        end
+
         cards[#cards + 1] = item.uniqueID
         targetItem:SetData("cards", cards)
         item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
