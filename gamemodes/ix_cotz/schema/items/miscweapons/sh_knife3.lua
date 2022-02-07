@@ -2,7 +2,7 @@ ITEM.name = "Survival Knife"
 ITEM.description = "A survival knife with a plastic handle."
 ITEM.model = "models/bf4_sweps/w_knife_dive.mdl"
 ITEM.longdesc = "This knife offers better poaching capabilities than most other knives, as it's meant for survival but lacks effect when used in combat."
-ITEM.category = "Melee"
+ITEM.category = "Knife"
 
 ITEM.price = 53950
 ITEM.height = 1
@@ -33,21 +33,21 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0.719, 93.188, -174.281),
-						["Position"] = Vector(-7.366, 6.884, 6.301),
+						["Angles"] = Angle(17.872457504272, 79.804008483887, 87.52286529541),
+						["Position"] = Vector(4.77294921875, 0.873046875, -5.71826171875),
 						["Model"] = "models/bf4_sweps/w_knife_dive.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "survivalknife_1",
-						["Bone"] = "pelvis",
-						["Name"] = "bat",
+						["Bone"] = "right thigh",
+						["Name"] = "survival knife",
 					},
 				},
 			},
 			["self"] = {
 				["AffectChildrenOnly"] = true,
 				["ClassName"] = "event",
-				["UniqueID"] = "survivalknife_1",
+				["UniqueID"] = "survivalknife_2",
 				["Event"] = "weapon_class",
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
@@ -57,7 +57,7 @@ ITEM.pacData = {
 	},
 	["self"] = {
 		["ClassName"] = "group",
-		["UniqueID"] = "survivalknife_1",
+		["UniqueID"] = "survivalknife_3",
 		["EditorExpand"] = true,
 	},
 },

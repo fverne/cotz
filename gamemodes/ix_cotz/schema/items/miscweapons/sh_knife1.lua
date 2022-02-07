@@ -2,7 +2,7 @@ ITEM.name = "Sharpened Rebar"
 ITEM.description = "A homemade stabbing tool."
 ITEM.model = "models/bf4_sweps/w_knife_shank.mdl"
 ITEM.longdesc = "The knife seems to be in poor condition, and doesn't offer much in terms of cutting capabilites, but one of the sides have been sharpened slightly to compensate."
-ITEM.category = "Melee"
+ITEM.category = "Knife"
 
 ITEM.price = 450
 ITEM.height = 1
@@ -24,7 +24,7 @@ ITEM.iconCam = {
 	ang = Angle(0, 270, -115.29412078857),
 	fov = 45,
 }
-ITEM.pacData = {
+ITEM.pacData = {	
 [1] = {
 	["children"] = {
 		[1] = {
@@ -33,14 +33,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0.719, 93.188, -174.281),
-						["Position"] = Vector(-7.366, 6.884, 6.301),
+						["Angles"] = Angle(0.68343126773834, 77.647407531738, 93.750434875488),
+						["Position"] = Vector(4.8173828125, 0.873046875, -4.857421875),
 						["Model"] = "models/bf4_sweps/w_knife_shank.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "shankknife_1",
-						["Bone"] = "pelvis",
-						["Name"] = "bat",
+						["Bone"] = "right thigh",
+						["Name"] = "shank knife",
 					},
 				},
 			},

@@ -2,7 +2,7 @@ ITEM.name = "Battered Bayonet"
 ITEM.description = "A knife for close quarter combat."
 ITEM.model = "models/weapons/w_csgo_bayonet.mdl"
 ITEM.longdesc = "A battered bayonet which has seen military use. While it's use in survival scenarios is questionable, it has seen combat beyond many other types of knives. So much, that the attachment section has broken off."
-ITEM.category = "Melee"
+ITEM.category = "Knife"
 
 ITEM.price = 31550
 ITEM.height = 1
@@ -33,14 +33,14 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0.719, 93.188, -174.281),
-						["Position"] = Vector(-7.366, 6.884, 6.301),
+						["Angles"] = Angle(7.2459273338318, 74.650802612305, 92.232429504395),
+						["Position"] = Vector(5.11865234375, -4.373046875, -4.71630859375),
 						["Model"] = "models/weapons/w_csgo_bayonet.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "combatknife_1",
-						["Bone"] = "pelvis",
-						["Name"] = "bat",
+						["Bone"] = "right thigh",
+						["Name"] = "combat knife",
 					},
 				},
 			},
