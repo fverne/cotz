@@ -33,7 +33,7 @@ function PLUGIN:HUDPaint()
         surface.SetMaterial(icon)
         surface.DrawTexturedRect(ScrW()*0.05 + ((boxwidth * 0.5) - (itemboxwidth * 0.5)), ScrH()*0.835 + ((boxheight * 0.5) - (itemboxheight * 0.5)), itemboxwidth, itemboxheight)
     end
-    draw.DrawText(string.upper(input.LookupBinding("gm_showhelp", true)), "stalkerregularsmallfont2", ScrW()*0.055, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+    draw.DrawText(string.upper(input.LookupBinding("gm_showhelp", true) or "N/A"), "stalkerregularsmallfont2", ScrW()*0.055, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
 
     -- Hotkey 2
     surface.SetDrawColor(Color(83, 83, 83, 100))
@@ -56,7 +56,7 @@ function PLUGIN:HUDPaint()
         surface.SetMaterial(icon)
         surface.DrawTexturedRect(ScrW()*0.09 + ((boxwidth * 0.5) - (itemboxwidth * 0.5)), ScrH()*0.835 + ((boxheight * 0.5) - (itemboxheight * 0.5)), itemboxwidth, itemboxheight)
     end
-    draw.DrawText(string.upper(input.LookupBinding("gm_showteam", true)), "stalkerregularsmallfont2", ScrW()*0.095, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+    draw.DrawText(string.upper(input.LookupBinding("gm_showteam", true) or "N/A"), "stalkerregularsmallfont2", ScrW()*0.095, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
 
     -- Hotkey 3
     surface.SetDrawColor(Color(83, 83, 83, 100))
@@ -79,7 +79,7 @@ function PLUGIN:HUDPaint()
         surface.SetMaterial(icon)
         surface.DrawTexturedRect(ScrW()*0.13 + ((boxwidth * 0.5) - (itemboxwidth * 0.5)), ScrH()*0.835 + ((boxheight * 0.5) - (itemboxheight * 0.5)), itemboxwidth, itemboxheight)
     end
-    draw.DrawText(string.upper(input.LookupBinding("gm_showspare1", true)), "stalkerregularsmallfont2", ScrW()*0.135, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+    draw.DrawText(string.upper(input.LookupBinding("gm_showspare1", true) or "N/A"), "stalkerregularsmallfont2", ScrW()*0.135, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
 
     -- Hotkey 4
     surface.SetDrawColor(Color(83, 83, 83, 100))
@@ -102,6 +102,6 @@ function PLUGIN:HUDPaint()
         surface.SetMaterial(icon)
         surface.DrawTexturedRect(ScrW()*0.17 + ((boxwidth * 0.5) - (itemboxwidth * 0.5)), ScrH()*0.835 + ((boxheight * 0.5) - (itemboxheight * 0.5)), itemboxwidth, itemboxheight)
     end
-    draw.DrawText(string.upper(input.LookupBinding("gm_showspare2", true)), "stalkerregularsmallfont2", ScrW()*0.175, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
+    draw.DrawText(string.upper(input.LookupBinding("gm_showspare2", true) or "N/A"), "stalkerregularsmallfont2", ScrW()*0.175, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
 
 end
