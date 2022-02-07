@@ -61,3 +61,30 @@ ITEM.functions.Flip = {
         end)
     end
 }
+
+ITEM.functions.combine = {
+    OnCanRun = function(item, data)
+        if not data then return false end
+        local targetItem = ix.item.instances[data[1]]
+
+        if targetItem.uniqueID == "cards_deck_cards" and PLUGIN:FindCards(item.player) then
+            if #targetItem:GetData("cards", PLUGIN:FillDeckCards()) ~= 54 then
+                return true
+            else
+                return false
+            end
+        end
+    end,
+    OnRun = function(item, data)
+        local targetItem = ix.item.instances[data[1]]
+
+        if not targetItem:GetData("cards") then
+            targetItem:SetData("cards", PLUGIN:FillDeckCards())
+        end
+
+        local cards = targetItem:GetData("cards")
+        cards[#cards + 1] = item.uniqueID
+        targetItem:SetData("cards", cards)
+        item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
+    end,
+}
