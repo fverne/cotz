@@ -73,6 +73,9 @@ ITEM.functions.PickUp = {
         if #cards <= 0 then return end
 
         return false
+    end,
+    OnCanRun = function(itemTable) 
+        return true 
     end
 }
 
