@@ -135,7 +135,7 @@ if (SERVER) then
                 ix.plugin.list["anomalycontroller"]:cleanAnomalies()
                 ix.plugin.list["anomalycontroller"]:spawnAnomalies()
 
-                if ix.config.Get("blowoutKillNPCs", false) then
+                if ix.config.Get("blowoutRemoveNPCs", false) then
                     for k, v in pairs(ents.GetAll()) do
                         if IsValid(v) and (v:IsNPC() or baseclass.Get(v:GetClass()).Base == 'base_nextbot' or baseclass.Get(v:GetClass()).Base == 'nz_base' or baseclass.Get(v:GetClass()).Base == 'nz_risen') and not IsFriendEntityName(v:GetClass()) then
                             v:Remove()
