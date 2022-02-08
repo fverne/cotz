@@ -69,11 +69,10 @@ function PLUGIN:FillDeckCards()
 end
 
 function PLUGIN:ItemPressedRightShift(icon, item)
-  if (item.base == "base_deck_cards") then
+  if (item.uniqueID == "cards_deck_cards") then
     return item.functions.PickUp, "PickUp"
   end
 end
-
 
 function PLUGIN:LoadedCards()
     self.cards = {}
