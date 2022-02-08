@@ -259,14 +259,8 @@ function PLUGIN:HUDPaint()
 end
 
 function PLUGIN:PostDrawTranslucentRenderables()
-    local ply = LocalPlayer()
-
-    for _, v in ipairs(player.GetAll()) do
-        if (v == ply) then
-            continue
-        end
-    
-        if ply == LocalPlayer() and GetViewEntity() == LocalPlayer() and (GetConVar('thirdperson') and GetConVar('thirdperson'):GetInt() ~= 0) then return end
+    for _, ply in ipairs(player.GetAll()) do    
+        if ply == LocalPlayer() or (GetViewEntity() == LocalPlayer() and (GetConVar('thirdperson') and GetConVar('thirdperson'):GetInt() ~= 0)) then return end
         if not ply:Alive() then return end
         if not ix.config.Get("allowVoice", false) then return end
         if (IsValid(ix.gui.menu)) then return end
