@@ -60,6 +60,7 @@ if (SERVER) then
 
 		if (itemTable) then
 			local material = itemTable:GetMaterial(self)
+			local color = itemTable:GetColor(self)
 			local model = nil
 			local customData = itemTable:GetData("custom", {})
 
@@ -74,6 +75,10 @@ if (SERVER) then
 
 			if (material) then
 				self:SetMaterial(material)
+			end
+
+			if (color) then
+				self:SetColor(color)
 			end
 
 			self:PhysicsInit(SOLID_VPHYSICS)
