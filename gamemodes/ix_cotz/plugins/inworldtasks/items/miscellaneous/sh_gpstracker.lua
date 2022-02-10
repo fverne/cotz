@@ -16,7 +16,8 @@ ITEM.iconCam = {
 
 function ITEM:GetDescription()
 	if(self.entity) then return self.description end
-	if(!self:GetOwner()) then return self.description end
+	local success, owner = pcall(self.GetOwner, self)
+	if success and (not owner) then return self.description end
 
 	local desc = self.description.."\n\n"
 	local ppos = ix.util.GetLongLatFromVector(self:GetOwner():GetPos())
