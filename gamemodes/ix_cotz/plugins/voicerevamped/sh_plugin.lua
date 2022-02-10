@@ -7,6 +7,10 @@ ix.option.Add("permvoicehud", ix.type.bool, false, {
     category = "_stalkersettings",
 })
 
+ix.option.Add("voicemodehudtip", ix.type.bool, true, {
+    category = "_stalkersettings",
+})
+
 ix.command.Add("voicemode", {
     description = "Changes the range at which people can hear your voice.",
     OnRun = function(self, client)
@@ -244,6 +248,13 @@ function PLUGIN:HUDPaint()
         local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
         surface.SetTextPos(15 + w, ScrH() / 20 - 5 - h / 2 - th / 2)
         surface.DrawText(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+
+        if ix.option.Get("voicemodehudtip") then
+            surface.SetTextPos(8, ScrH() / 20 + 25 - h / 2 - th / 2)
+            surface.SetTextColor(255, 255, 255, 180)
+            surface.SetFont("stalkerregularfont3")
+            surface.DrawText("type /voicemode to change modes")
+        end
     else
         if (not LocalPlayer():IsSpeaking()) then
             surface.SetMaterial(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].icon)
