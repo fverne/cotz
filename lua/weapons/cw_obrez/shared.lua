@@ -13,9 +13,9 @@ if CLIENT then
 	SWEP.SelectIcon = surface.GetTextureID("icons/killicons/khr_mosin")
 	
 	SWEP.DrawTraditionalWorldModel = false
-	SWEP.WM = "models/weapons/w_obrez.mdl"
-	SWEP.WMPos = Vector(-1, -15, 1)
-	SWEP.WMAng = Vector(-3,180, 180)
+	SWEP.WM = "models/weapons3/mosina.mdl"
+	SWEP.WMPos = Vector(-2,5,13)
+	SWEP.WMAng = Vector(0,10, 270)
 
 	
 	SWEP.MuzzleEffect = "muzzleflash_6"
@@ -136,7 +136,7 @@ SWEP.ViewModelFOV	= 70
 SWEP.AimViewModelFOV = 60
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/khrcw2/v_khri_mosinm91.mdl"
-SWEP.WorldModel		= "models/weapons/w_obrez.mdl"
+SWEP.WorldModel		= "models/weapons3/mosina.mdl"
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
