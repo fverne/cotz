@@ -20,3 +20,7 @@ local ITEM = ix.meta.item or {}
 function ITEM:GetMaterial()
 	return self.material or ""
 end
+
+function ITEM:GetColor()
+	return self.color or Color(255, 255, 255, 255)
+end

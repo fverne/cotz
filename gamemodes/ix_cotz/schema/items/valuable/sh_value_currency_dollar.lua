@@ -7,10 +7,10 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 38 -- lower than real conversion rate, intended
 
-ITEM.quantity = 5000000
+ITEM.quantity = 5000
 
 ITEM.flatweight = 0
-ITEM.weight = 0.010
+ITEM.weight = 0.001
 
 ITEM.exRender = true
 ITEM.iconCam = {
