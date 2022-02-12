@@ -75,6 +75,9 @@ ix.util.Include("ix_wood_entbox_drops.lua","shared")
 ix.util.Include("worldspawn_1.lua","shared")
 ix.util.Include("worldspawn_2.lua","shared")
 
+ix.util.Include("worldspawn_3.lua","shared")
+ix.util.Include("worldspawn_4.lua","shared")
+
 ix.util.Include("reward_aid_low.lua","shared")
 ix.util.Include("reward_aid_high.lua","shared")
 
