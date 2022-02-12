@@ -311,6 +311,11 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 					local item = player:GetCharacter():GetInventory():HasItem(dyndata.itemid)
 
 					if(item)then
+						--Adds reward
+						repReward = ix.util.GetValueFromProgressionTurnin(item)
+						player:addReputation(repReward)
+						ix.dialogue.notifyReputationReceive(player, repReward)
+
 						if(item:GetData("quantity", 0) > 1) then
 							item:SetData("quantity", item:GetData("quantity",0) - 1)
 						else

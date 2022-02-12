@@ -239,7 +239,7 @@ ix.progression.Register("technutItemDelivery_Main", {
 		return ix.progression.status["technutItemDelivery_Main"].complexData
 	end,
 	fnCheckComplexProgression = function()
-		local finished = self:GetItemIds()
+		local finished =  ix.progression.definitions["technutItemDelivery_Main"]:GetItemIds()
 
 		local isdone = true
 
