@@ -646,7 +646,7 @@ function ITEM:getFBR()
 	local upgrades = self:GetData("upgrades", {})
 
 	if self:GetData("durability",100) < 80 then
-		res = self.fbr * (v:GetData("durability",0)/80)
+		res = self.fbr * (self:GetData("durability",0)/80)
 	else
 		res = self.fbr
 	end
@@ -666,7 +666,7 @@ function ITEM:getAR()
 	local upgrades = self:GetData("upgrades", {})
 
 	if self:GetData("durability",100) < 80 then
-		res = 1 - (self.ar * (v:GetData("durability",0)/80))
+		res = 1 - (self.ar * (self:GetData("durability",0)/80))
 	else
 		res = 1 - self.ar
 	end
@@ -696,7 +696,7 @@ function ITEM:getFAR()
 	local upgrades = self:GetData("upgrades", {})
 
 	if self:GetData("durability",100) < 80 then
-		res = self.far * (v:GetData("durability",0)/80)
+		res = self.far * (self:GetData("durability",0)/80)
 	else
 		res = self.far
 	end
