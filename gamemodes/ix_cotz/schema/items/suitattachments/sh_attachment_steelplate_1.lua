@@ -5,7 +5,7 @@ ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.upgradeIcon = Material("materials/vgui/ui/stalker/weaponupgrades/grip.png")
-ITEM.price = 10000
+ITEM.price = 7500
 
 ITEM.attachName = "steelplate_1"
 
