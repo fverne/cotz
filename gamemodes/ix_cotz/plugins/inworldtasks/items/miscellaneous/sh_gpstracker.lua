@@ -16,6 +16,7 @@ ITEM.iconCam = {
 
 function ITEM:GetDescription()
 	if(self.entity) then return self.description end
+	if(self:GetID() == 0) then return self.description end
 	if(!self:GetOwner()) then return self.description end
 
 	local desc = self.description.."\n\n"
