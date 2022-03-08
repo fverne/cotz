@@ -118,7 +118,7 @@ PLUGIN.buffs[ "debuff_radiation" ] = {
 	func = function( player, parameter)
 		player.timeNextTickRad = player.timeNextTickRad or CurTime()
 		if player.timeNextTickRad < CurTime() then
-			player:DamagePsyHealth(parameter.amount)
+			player:addRadiation(parameter.amount)
 
 			player.timeNextTickRad = CurTime() + 0.5
 		end
@@ -131,7 +131,7 @@ PLUGIN.buffs[ "debuff_psy" ] = {
 	func = function( player, parameter)
 		player.timeNextTickPsyDmg = player.timeNextTickPsyDmg or CurTime()
 		if player.timeNextTickPsyDmg < CurTime() then
-			player:addRadiation(parameter.amount)
+			player:DamagePsyHealth(parameter.amount)
 
 			player.timeNextTickPsyDmg = CurTime() + 0.5
 		end
