@@ -86,7 +86,7 @@ function ITEM:Equip(client)
 				return false
 			else
 				if (itemTable.isGeiger == true and itemTable:GetData("equip")) then
-					client:NotifyLocalized("You are already equipping a gieger counter detector.")
+					client:NotifyLocalized("You are already equipping a geiger counter detector.")
 
 					return false
 				end

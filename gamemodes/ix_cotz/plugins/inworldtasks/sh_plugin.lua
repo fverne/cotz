@@ -60,25 +60,25 @@ function ix.util.GetHeadingFromAngle(ang)
 		return "S"
 	end
 	if( tmp > 112.5 and tmp <= 157.5 ) then
-		return "SE"
+		return "SW"
 	end
 	if( tmp > 67.5 and tmp <= 112.5 ) then
-		return "E"
+		return "W"
 	end
 	if( tmp > 22.5 and tmp <= 67.5 ) then
-		return "NE"
+		return "NW"
 	end
 	if( tmp > -22.5 and tmp <= 22.5 ) then
 		return "N"
 	end
 	if( tmp > -67.5 and tmp <= -22.5 ) then
-		return "NW"
+		return "NE"
 	end
 	if( tmp > -112.5 and tmp <= -67.5 ) then
-		return "W"
+		return "E"
 	end
 	if( tmp > -157.5 and tmp <= -112.5 ) then
-		return "SW"
+		return "SE"
 	end
 
 	return str
