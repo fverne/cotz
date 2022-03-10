@@ -29,5 +29,5 @@ function ITEM:GetDescription()
 end
 
 function ITEM:GetWeight()
-  return self.flatweight + (self.weight * self:GetData("quantity", self.quantity))
+  return self.flatweight + (self.weight * self:GetData("quantity", self.quantity or 1))
 end

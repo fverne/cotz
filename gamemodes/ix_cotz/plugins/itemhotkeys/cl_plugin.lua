@@ -21,6 +21,10 @@ function PLUGIN:HUDPaint()
         item = ix.item.list[itemname]
         icon = ix.util.GetItemIcon(item)
 
+        if !icon then
+            return
+        end
+
         if item then
             itemboxwidth = boxwidth / item.height
             itemboxheight = boxheight / item.width
@@ -43,6 +47,10 @@ function PLUGIN:HUDPaint()
     if itemname != "nil" and itemname then
         item = ix.item.list[itemname]
         icon = ix.util.GetItemIcon(item)
+
+        if !icon then
+            return
+        end
 
         if item then
             itemboxwidth = boxwidth / item.height
@@ -67,6 +75,10 @@ function PLUGIN:HUDPaint()
         item = ix.item.list[itemname]
         icon = ix.util.GetItemIcon(item)
 
+        if !icon then
+            return
+        end
+
         if item then
             itemboxwidth = boxwidth / item.height
             itemboxheight = boxheight / item.width
@@ -89,6 +101,10 @@ function PLUGIN:HUDPaint()
     if itemname != "nil" and itemname then
         item = ix.item.list[itemname]
         icon = ix.util.GetItemIcon(item)
+
+        if !icon then
+            return
+        end
 
         if item then
             itemboxwidth = boxwidth / item.height

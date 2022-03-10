@@ -565,7 +565,7 @@ function ITEM:OnLoadout()
 	if (self:GetData("equip")) then
 		local client = self.player
 
-		if self:GetData("setSkin", nil) then
+		if self:GetData("setSkin", self.newSkin) then
 			client:SetSkin( self:GetData("setSkin", self.newSkin) )
 		end
 

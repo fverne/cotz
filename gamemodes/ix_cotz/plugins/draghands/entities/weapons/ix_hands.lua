@@ -19,7 +19,7 @@ SWEP.Secondary.Ammo = "none"
 SWEP.Secondary.Delay = 0.75
 SWEP.FireWhenLowered = true
 SWEP.UseHands = false
-SWEP.HoldType = "passive"
+SWEP.HoldType = "fist"
 SWEP.NormalHoldType = "passive"
 SWEP.RunHoldType = "passive"
 SWEP.LowerAngles = Angle(0, 5, -14)
@@ -150,7 +150,7 @@ function SWEP:SecondaryAttack()
         self.Owner:SetWepRaised(true)
     end
 
-    self:SetHoldType("fist")
+    --self:SetHoldType("fist")
     self.Owner:DrawViewModel(true)
     if CLIENT then return end
     if IsValid(self.Owner:GetVehicle()) then return end
