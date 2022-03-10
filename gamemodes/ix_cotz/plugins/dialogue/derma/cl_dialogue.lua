@@ -23,7 +23,7 @@ function PANEL:Init()
 
 	self.options = self:Add("DScrollPanel")
 	self.options:Dock(FILL)
-	self.options:DockMargin(ScrW()*0.024, ScrH()*0.03, ScrW()*0.024, ScrH()*0.02)
+	self.options:DockMargin(ScrW()*0.024, ScrH()*0.03, ScrW()*0.024, ScrH()*0.063)
 end
 
 function PANEL:Think()
