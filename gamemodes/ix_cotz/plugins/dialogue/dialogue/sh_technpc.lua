@@ -5,6 +5,7 @@ DIALOGUE.addTopic("GREETING", {
 	options = {
 		"TradeTopic", 
 		"RepairItems",
+		"PaintSuit",
 		"BackgroundTopic",
 		"AboutWorkTopic",
 		"GetTask",
@@ -158,6 +159,95 @@ DIALOGUE.addTopic("ConfirmRepair", {
 DIALOGUE.addTopic("NotEnoughMoneyRepair", {
 	statement = "",
 	response = "Oh no... You don't have enough money to repair that..",
+	options = {
+		"BackTopic"
+	}
+})
+
+DIALOGUE.addTopic("PaintSuit", {
+	statement = "Can you paint my equipped suit?",
+	response = "Absolutely! Which color would you like it to be?",
+	IsDynamic = true,
+	options = {
+		"BackTopic"
+	},
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		local items = client:GetCharacter():GetInventory():GetItems()
+
+		for k,v in pairs(items) do
+			local paintcost = 100 -- Change to taking from an item maybe?
+
+			if v:GetData("equip") and v.isBodyArmor and v.skincustom then
+				for k2, v2 in pairs(v.skincustom) do
+					table.insert(dynopts, {statement = v:GetName().." ( Current Skin: "..v:GetData("setSkin", 0)..", New Skin: "..v2.skingroup.." ) - "..ix.currency.Get(paintcost), topicID = "PaintSuit", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = paintcost, skin = v2.skingroup}})
+				end
+			end
+		end
+		
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+
+		-- Return the next topicID
+		if( !client:GetCharacter():HasMoney(dyndata.cost)) then
+			return "NotEnoughMoneyPaint"
+		end
+		return "ConfirmPaint", dyndata
+	end,
+})
+
+DIALOGUE.addTopic("ConfirmPaint", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	IsDynamic = true,
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if(dyndata) then
+			if (CLIENT) then
+				self.response = string.format("Alright friend, painting that %s will cost you %s, is that a a-okay?", ix.item.list[dyndata.itemuid].name ,ix.currency.Get(dyndata.cost))
+			else
+				target.paintstruct = { dyndata.itemid, dyndata.cost, dyndata.skin }
+			end
+		end
+	end,
+	GetDynamicOptions = function(self, client, target)
+
+		local dynopts = {
+			{statement = "That's okay, paint it.", topicID = "ConfirmPaint", dyndata = {accepted = true}},
+			{statement = "On second thought...", topicID = "ConfirmPaint", dyndata = {accepted = false}},
+		}
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if( SERVER and dyndata.accepted ) then
+			ix.dialogue.notifyMoneyLost(client, target.paintstruct[2])
+			client:GetCharacter():TakeMoney(target.paintstruct[2])
+
+			client:SetSkin(target.paintstruct[3])
+			ix.item.instances[target.paintstruct[1]]:SetData("setSkin", target.paintstruct[3])
+		end
+		if(SERVER)then
+			target.paintstruct = nil
+		end
+		-- Return the next topicID
+		return "BackTopic"
+	end,
+})
+
+DIALOGUE.addTopic("NotEnoughMoneyPaint", {
+	statement = "",
+	response = "My painting services are not free, you know?",
 	options = {
 		"BackTopic"
 	}
@@ -463,6 +553,7 @@ DIALOGUE.addTopic("BackTopic", {
 	options = {
 		"TradeTopic", 
 		"RepairItems",
+		"PaintSuit",
 		"BackgroundTopic",
 		"AboutWorkTopic",
 		"GetTask",
