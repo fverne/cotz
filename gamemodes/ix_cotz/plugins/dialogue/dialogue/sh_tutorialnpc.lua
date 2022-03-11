@@ -76,17 +76,17 @@ DIALOGUE.addTopic("StorageTopic", {
 		local basecost = 225
 		local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3))
 		local bankH = client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
-		local heightcost = math.Round(math.pow(basecost + 100, 1+bankH/4))
-		local widthcost = math.Round(math.pow(basecost, 1+bankW/4))
+		local heightcost = math.Round(math.pow(basecost + 300, 1+(bankH/4.5)))
+		local widthcost = math.Round(math.pow(basecost, 1+(bankW/4.5)))
 
 		if ix.progression.GetNPCFromName("'Mute'") then
 			table.insert(dynopts, {statement = "Can I please see my storage?", topicID = "StorageTopic", dyndata = {option = "use"}})
 
 			if bankW < ix.config.Get("bankWMax") then
-				table.insert(dynopts, {statement = "I want to upgrade the width. ("..ix.currency.Get(widthcost)..")", topicID = "StorageTopic", dyndata = {direction = "vertically", cost = widthcost}})
+				table.insert(dynopts, {statement = "I want to upgrade the width. ("..ix.currency.Get(widthcost)..")", topicID = "StorageTopic", dyndata = {direction = "horizontally", cost = widthcost}})
 			end
 			if bankH < ix.config.Get("bankHMax") then
-				table.insert(dynopts, {statement = "I want to upgrade the height. ("..ix.currency.Get(heightcost)..")", topicID = "StorageTopic", dyndata = {direction = "horizontally", cost = heightcost}})
+				table.insert(dynopts, {statement = "I want to upgrade the height. ("..ix.currency.Get(heightcost)..")", topicID = "StorageTopic", dyndata = {direction = "vertically", cost = heightcost}})
 			end
 		end
 		
@@ -184,7 +184,7 @@ DIALOGUE.addTopic("ConfirmStorageUpgrade", {
 			local bankH = client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
 			local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3))
 
-			if target.upgradestruct[1] == "horizontally" then
+			if target.upgradestruct[1] == "vertically" then
 				if bankH < ix.config.Get("bankHMax", 2) then
 					client:GetCharacter():SetData("bankH", bankH+1)
 					client:Notify("Updated your storage to height: "..client:GetCharacter():GetData("bankH"))
@@ -195,7 +195,7 @@ DIALOGUE.addTopic("ConfirmStorageUpgrade", {
 				else
 					client:Notify("Cannot update storage! It's height maxed, which is "..client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2)))
 				end
-			elseif target.upgradestruct[1] == "vertically" then
+			elseif target.upgradestruct[1] == "horizontally" then
 				if bankW < ix.config.Get("bankWMax", 2) then
 					client:GetCharacter():SetData("bankW", bankW+1)
 					client:Notify("Updated your storage to width: "..client:GetCharacter():GetData("bankW"))
