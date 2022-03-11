@@ -4,6 +4,7 @@ DIALOGUE.addTopic("GREETING", {
 	response = "Yes?",
 	options = {
 		"TradeTopic",
+		"StorageTopic",
 		"TutorialTopic",
 		"BackgroundTopic",
 		"AboutWorkTopic",
@@ -55,6 +56,169 @@ DIALOGUE.addTopic("TradeTopic", {
 	end,
 	options = {
 		"BackTopic",
+	}
+})
+
+DIALOGUE.addTopic("StorageTopic", {
+	statement = "Do you have room to store my items?",
+	response = "Yes.",
+	options = {
+		"BackTopic"
+	},
+	preCallback = function(self, client, target)
+		if !ix.progression.GetNPCFromName("'Mute'") and CLIENT then
+			self.response = "No, not for the moment."
+		end
+	end,
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+		local basecost = 325
+		local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3))
+		local bankH = client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
+		local heightcost = math.Round(math.pow(basecost + 150, bankH/2))
+		local widthcost = math.Round(math.pow(basecost, bankW/2))
+
+		if ix.progression.GetNPCFromName("'Mute'") then
+			table.insert(dynopts, {statement = "Can I please see my storage?", topicID = "StorageTopic", dyndata = {option = "use"}})
+
+			if bankW < ix.config.Get("bankWMax") then
+				table.insert(dynopts, {statement = "I want to upgrade the width. ("..ix.currency.Get(widthcost)..")", topicID = "StorageTopic", dyndata = {direction = "vertically", cost = widthcost}})
+			end
+			if bankH < ix.config.Get("bankHMax") then
+				table.insert(dynopts, {statement = "I want to upgrade the height. ("..ix.currency.Get(heightcost)..")", topicID = "StorageTopic", dyndata = {direction = "horizontally", cost = heightcost}})
+			end
+		end
+		
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if (dyndata.option == "use") then
+			return "OpenStorage"
+		end
+
+		if( !client:GetCharacter():HasMoney(dyndata.cost)) then
+			return "NotEnoughMoneyStorage"
+		end
+
+		-- Return the next topicID
+		return "ConfirmStorageUpgrade", {direction = dyndata.direction, cost = dyndata.cost}
+	end,
+})
+
+DIALOGUE.addTopic("OpenStorage", {
+	statement = "",
+	response = "Here's your items I've been storing for you.",
+	postCallback = function(self, client, target)
+		if SERVER then
+			local character = client:GetCharacter()
+			if !character:GetData("bankID") then
+				character:SetData("bankID", os.time())
+			end
+			
+			local ID = character:GetData("bankID", os.time())
+
+			local bankstruct = {}
+			bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 3)), character:GetData("bankH", ix.config.Get("bankH", 2))}
+		
+			if ID then
+				ix.inventory.Restore(bankstruct, ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), function(inventory)
+					inventory:SetOwner(character:GetID())
+					bank = inventory
+				end)
+			else
+				bank = ix.inventory.Create(ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), os.time())
+				bank:SetOwner(character:GetID())
+				bank:Sync(client)
+		
+				character:SetData("bankID", bank:GetID())
+			end
+
+			ix.storage.Open(client, bank, {
+				entity = client,
+				name = "Personal Storage",
+				searchText = "Accessing personal storage...",
+				searchTime = ix.config.Get("containerOpenTime", 1)
+			})
+		end
+	end,
+	options = {
+		"BackTopic"
+	}
+})
+
+DIALOGUE.addTopic("ConfirmStorageUpgrade", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	IsDynamic = true,
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if(dyndata) then
+			if (CLIENT) then
+				self.response = string.format("Upgrading your stash %s will cost you %s.", dyndata.direction, ix.currency.Get(dyndata.cost))
+			else
+				target.upgradestruct = { dyndata.direction, dyndata.cost }
+			end
+		end
+	end,
+	GetDynamicOptions = function(self, client, target)
+
+		local dynopts = {
+			{statement = "Expensive, but alright. Upgrade my stash.", topicID = "ConfirmStorageUpgrade", dyndata = {accepted = true}},
+			{statement = "Eh, what's with that price? No thanks.", topicID = "ConfirmStorageUpgrade", dyndata = {accepted = false}},
+		}
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if( SERVER and dyndata.accepted ) then
+
+			local bankH = client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
+			local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3))
+
+			if target.upgradestruct[1] == "horizontally" then
+				if bankH < ix.config.Get("bankHMax", 2) then
+					client:GetCharacter():SetData("bankH", bankH+1)
+					client:Notify("Updated your storage to height: "..client:GetCharacter():GetData("bankH"))
+					client:GetCharacter():TakeMoney(target.upgradestruct[2])
+					ix.dialogue.notifyMoneyLost(client, target.upgradestruct[2])
+
+
+				else
+					client:Notify("Cannot update storage! It's height maxed, which is "..client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2)))
+				end
+			elseif target.upgradestruct[1] == "vertically" then
+				if bankW < ix.config.Get("bankWMax", 2) then
+					client:GetCharacter():SetData("bankW", bankW+1)
+					client:Notify("Updated your storage to width: "..client:GetCharacter():GetData("bankW"))
+					client:GetCharacter():TakeMoney(target.upgradestruct[2])
+					ix.dialogue.notifyMoneyLost(client, target.upgradestruct[2])
+				else
+					client:Notify("Cannot update storage! It's width is maxed, which is "..client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3)))
+				end
+			end
+		end
+		if(SERVER)then
+			target.upgradestruct = nil
+		end
+		-- Return the next topicID
+		return "BackTopic"
+	end,
+})
+
+DIALOGUE.addTopic("NotEnoughMoneyStorage", {
+	statement = "",
+	response = "You lack the funds to upgrade your stash. Return to me once you get more funds.",
+	options = {
+		"BackTopic"
 	}
 })
 
@@ -360,6 +524,7 @@ DIALOGUE.addTopic("BackTopic", {
 	response = "All right.",
 	options = {
 		"TradeTopic",
+		"StorageTopic",
 		"TutorialTopic",
 		"BackgroundTopic",
 		"AboutWorkTopic",
