@@ -73,11 +73,11 @@ DIALOGUE.addTopic("StorageTopic", {
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
-		local basecost = 325
+		local basecost = 225
 		local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3))
 		local bankH = client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
-		local heightcost = math.Round(math.pow(basecost + 150, bankH/2))
-		local widthcost = math.Round(math.pow(basecost, bankW/2))
+		local heightcost = math.Round(math.pow(basecost + 100, 1+bankH/4))
+		local widthcost = math.Round(math.pow(basecost, 1+bankW/4))
 
 		if ix.progression.GetNPCFromName("'Mute'") then
 			table.insert(dynopts, {statement = "Can I please see my storage?", topicID = "StorageTopic", dyndata = {option = "use"}})
