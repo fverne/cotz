@@ -270,7 +270,7 @@ function PANEL:Init()
 	self.loadButton:SetText("re-enter the zone")
 	self.loadButton:SizeToContents()
 	self.loadButton.DoClick = function()
-		if (ix.config.Get("charloadremove", true) and bHasCharacter and LocalPlayer().GetCharacter) then
+		if (ix.config.Get("charloadremove", false) and bHasCharacter and LocalPlayer().GetCharacter) then
 			net.Start("ixCharacterChoose")
 				-- net.WriteUInt(self.character:GetID(), 32)
 				net.WriteUInt(firstchar, 32)
@@ -282,7 +282,7 @@ function PANEL:Init()
 		parent.loadCharacterPanel:SlideUp()
 	end
 
-	if (!bHasCharacter or (ix.config.Get("charloadremove", true) and bHasCharacter and LocalPlayer().GetCharacter)) then
+	if (!bHasCharacter or (ix.config.Get("charloadremove", false) and bHasCharacter and LocalPlayer().GetCharacter)) then
 		--self.loadButton:SetDisabled(true)
 		self.loadButton:Hide()
 	end
