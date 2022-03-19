@@ -20,7 +20,9 @@ function PLUGIN:OnItemTransferred(item, curInv, inventory)
 
 	if inventory:GetID() == 0 then
 		local client = curInv:GetOwner()
-		ix.chat.Send(client, "iteminternal", Format("drops their %s.", item.name), false)
+		if client then
+			ix.chat.Send(client, "iteminternal", Format("drops their %s.", item.name), false)
+		end
 	end
 end
 
