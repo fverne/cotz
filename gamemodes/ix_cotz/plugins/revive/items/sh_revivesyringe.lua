@@ -35,6 +35,6 @@ ITEM.functions.use = {
 		return true
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and (item:GetData("stashcoordinates", nil) == nil)
+		return (!IsValid(item.entity)) and (item:GetData("stashcoordinates", nil) == nil) and item.invID == client:GetCharacter():GetInventory():GetID()
 	end
 }

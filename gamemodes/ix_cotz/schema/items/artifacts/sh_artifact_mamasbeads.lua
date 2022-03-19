@@ -25,6 +25,6 @@ ITEM.functions.use = {
         return false
     end,
     OnCanRun = function(item)
-        return !IsValid(item.entity)
+        return !IsValid(item.entity) and item.invID == client:GetCharacter():GetInventory():GetID()
     end
 }
