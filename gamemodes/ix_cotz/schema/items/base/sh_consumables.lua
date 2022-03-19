@@ -64,7 +64,7 @@ function ITEM:DecideFunction()
 			icon = "icon16/stalker/drink.png",
 			OnCanRun = function(item)
 
-				return (!IsValid(item.entity)) and item.invID == client:GetCharacter():GetInventory():GetID()
+				return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 			end,
 			OnRun = function(item)
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
@@ -98,7 +98,7 @@ function ITEM:DecideFunction()
 			icon = "icon16/stalker/eat.png",
 			OnCanRun = function(item)
 
-				return (!IsValid(item.entity)) and item.invID == client:GetCharacter():GetInventory():GetID()
+				return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 			end,
 			OnRun = function(item)
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
@@ -131,7 +131,7 @@ function ITEM:DecideFunction()
 			icon = "icon16/stalker/eat.png",
 			OnCanRun = function(item)
 
-				return (!IsValid(item.entity)) and item.invID == client:GetCharacter():GetInventory():GetID()
+				return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 			end,
 			OnRun = function(item)
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)

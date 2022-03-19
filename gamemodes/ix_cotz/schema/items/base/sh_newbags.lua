@@ -95,7 +95,7 @@ ITEM.functions.Equip = {
 		local client = item.player
 
 		return !IsValid(item.entity) and IsValid(client) and item:GetData("equip") != true and
-			hook.Run("CanPlayerEquipItem", client, item) != false and item.invID == client:GetCharacter():GetInventory():GetID()
+			hook.Run("CanPlayerEquipItem", client, item) != false and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
 

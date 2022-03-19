@@ -30,6 +30,6 @@ ITEM.functions.use = {
         return false
     end,
     OnCanRun = function(item)
-        return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == client:GetCharacter():GetInventory():GetID()
+        return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
