@@ -44,7 +44,7 @@ if (CLIENT) then
 		local wear = 0
 
 		if item:GetData("wear") then --checks if we are in the business menu
-			if (item:GetOwner():GetWeapon( item.class )) and (item:GetData("equip")) then
+			if item:GetOwner() and (item:GetOwner():GetWeapon( item.class )) and (item:GetData("equip")) then
 				local weapon = item:GetOwner():GetWeapon( item.class )
 				if IsValid(weapon) then
 					dura = weapon:GetWeaponDurability()
