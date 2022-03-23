@@ -267,6 +267,78 @@ ix.npctemplates.templates["stalkernetnpc"] = {
 	},
 }
 
+ix.npctemplates.templates["ecologistnpc"] = {
+	name 		= "'Egghead'",
+	description = "The coat-clad scientist looks at you with respite.",
+	model 		= "models/legends/ozerskiy.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.7,
+	dialogueid 	= "stalkernetadmin",
+	soundgroup 	= "nosound",
+	idleanim 	= "bandit_idle2",
+	--animgroup 	= 4,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["anomalydetector"] 	= { nil, 12, SELLANDBUY, 12, 8, 12 },
+		["geigercounter"] 	= { nil, 12, SELLANDBUY, 12, 8, 12 },
+		["compass"] 	= { nil, 12, SELLANDBUY, 12, 8, 12 },
+		["medic_psyheal_1"] 	= { nil, 6, SELLANDBUY, 6, 8, 6 },
+		["medic_antirad_1"] 	= { nil, 6, SELLANDBUY, 6, 8, 6 },
+		["medic_medkit_5"] 	= { 4500, 3, SELLANDBUY, 3, 8, 3 },
+		["medic_medkit_6"] 	= { 6500, 3, SELLANDBUY, 3, 8, 3 },
+		["halfmask"] 	= { nil, 5, SELLANDBUY, 5, 4, 2 },
+		["sr2"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["pp2000"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["9x21"] 	= { nil, 5, SELLANDBUY, 5, 8, 5 },
+		["ssp99"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
+		["gp5"] 	= { nil, 3, SELLANDBUY, 3, 8, 3 },
+	},
+}
+
+ix.npctemplates.templates["bodyguardnpc"] = {
+	name 		= "'Quartermaster'",
+	description = "Looking at the man in front of you makes you want to break eye contact.",
+	model 		= "models/legends/garyk.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.7,
+	dialogueid 	= "stalkernetadmin",
+	soundgroup 	= "nosound",
+	idleanim 	= "trader_idle",
+	--animgroup 	= 4,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["9x18hp"] 	= { nil, 4, SELLANDBUY, 4, 8, 4 },
+		["9x19"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
+		["9x19hp"] 	= { nil, 4, SELLANDBUY, 4, 8, 4 },
+		["45acp"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
+		["357magnum"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
+		["44magnum"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
+		["762x39"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
+		["556x45"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
+		["545x39"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
+		["762x51"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
+		["762x54"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
+		["12gauge"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
+		["12gaugesg"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
+		["12gaugetr"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
+		["aks74u"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["mp9a1"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["sks"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["pp1901vityaz"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["brhp"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["fort12"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["mp153"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["kiparis"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["m1911"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["stoegerdd"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["taurusjudge"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["swr8"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["io7a"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+	},
+}
+
 -- No sounds emitted
 ix.npctemplates.soundtemplates["nosound"] = {
 	"stalkersound/inv_nosound.mp3",
@@ -324,6 +396,10 @@ ix.npctemplates.animtemplates["TestAnimations"] = {
 
 ix.npctemplates.animtemplates["Bartrader"] = {
 	"trader_idle2",
+}
+
+ix.npctemplates.animtemplates["ecotrader"] = {
+	"bandit_idle2",
 }
 
 ix.npctemplates.animtemplates["Guard"] = {
