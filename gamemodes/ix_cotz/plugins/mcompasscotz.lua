@@ -1,5 +1,5 @@
 PLUGIN.name = "mCompass"
-PLUGIN.author = "mCompass - ported by verne"
+PLUGIN.author = "mCompass - ported to ix by verne"
 PLUGIN.description = "Adds a compass to the top of the HUD"
 
 local playerMeta = FindMetaTable("Player")
