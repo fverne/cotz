@@ -13,6 +13,7 @@ ix.npctemplates.animtemplatestranslation[2] = "Bartrader"
 ix.npctemplates.animtemplatestranslation[3] = "Guard"
 ix.npctemplates.animtemplatestranslation[4] = "sitchair"
 ix.npctemplates.animtemplatestranslation[5] = "banditidle"
+ix.npctemplates.animtemplatestranslation[6] = "monolithidle"
 
 ix.npctemplates.templates["owlnpc"] = {
 	name 		= "'Cleaner'",
@@ -63,6 +64,9 @@ ix.npctemplates.templates["technpc"] = {
 
 		["food_nuts_1"] 	= { nil, 20, SELLANDBUY, 20, 12, 5 },
 
+		["steelplate_1"] 	= { nil, 1, SELLANDBUY, 1, 3, 1 },
+		["ceramicplate_1"] 	= { nil, 1, SELLANDBUY, 1, 3, 1 },
+		["fabricplate_1"] 	= { nil, 1, SELLANDBUY, 1, 3, 1 },
 	},
 }
 
@@ -103,6 +107,13 @@ ix.npctemplates.templates["tutorialnpc"] = {
 		["knife1"] 	= { nil, 6, SELLANDBUY, 6, 8, 3 },
 		["hidestasher_cutlery"] 	= { nil, 6, SELLANDBUY, 6, 8, 3 },
 		["lowtiercooker"] 	= { nil, 3, SELLANDBUY, 3, 8, 3 },
+
+		["ruger1022"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
+		["rugermk3"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
+		["w9422"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
+
+		["trenchcoat"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
+		["mailjacket"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
 
 		["part_bear"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_blinddog"] 	= { 1, nil, BUYONLY, nil, nil, nil },
@@ -222,24 +233,23 @@ ix.npctemplates.templates["tradernpc"] = {
 	animgroup 	= 5,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["762x25"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 1 },
-		["9x18"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 1 },
-		["12gauge"] = { nil, 10, SELLANDBUY, 10, 0.5, 1 },
-		["762x54"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 1 },
+		["762x25"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
+		["9x18"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
+		["12gauge"] = { nil, 10, SELLANDBUY, 10, 0.5, 3 },
+		["762x54"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
+		["22lr"] 	= { nil, 10, SELLANDBUY, 15, 0.5, 6 },
+		["45acp"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
 
-		["toz34"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["toz34short"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["toz66short"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["c96"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["cz52"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["g2contender"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["makarov"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
-		["ruger1022"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
-		["rugermk3"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["tokarev"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["m1917"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
-		["w9422"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["skorpion"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
+		["obrez"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 	},
 }
 
@@ -259,9 +269,8 @@ ix.npctemplates.templates["stalkernetnpc"] = {
 		["flashlight"] 	= { nil, 10, SELLANDBUY, 10, 0.1, 2 },
 		["headlamp"] 	= { nil, 10, SELLANDBUY, 10, 1, 1 },
 		["geigercounter"] 	= { nil, 5, SELLANDBUY, 5, 1, 1 },
-		["food_nuts_2"] 	= { nil, 50, SELLANDBUY, 50, 12, 50 },
 		["anomalydetector"] 	= { nil, 6, SELLANDBUY, 6, 1, 1 },
-		["binoculars_3"] 	= { nil, 4, SELLANDBUY, 4, 1, 1 },
+		["binoculars_2"] 	= { nil, 4, SELLANDBUY, 4, 1, 1 },
 		["compass"] 	= { nil, 6, SELLANDBUY, 6, 1, 1 },
 		["gpstracker"] 	= { nil, 6, SELLANDBUY, 6, 1, 1 },
 	},
@@ -275,7 +284,7 @@ ix.npctemplates.templates["ecologistnpc"] = {
 	bubble 		= 0,
 	scale 		= 0.7,
 	dialogueid 	= "stalkernetadmin",
-	soundgroup 	= "nosound",
+	soundgroup 	= "ecologistnpc",
 	idleanim 	= "bandit_idle2",
 	--animgroup 	= 4,
 	items = {
@@ -304,7 +313,7 @@ ix.npctemplates.templates["bodyguardnpc"] = {
 	bubble 		= 0,
 	scale 		= 0.7,
 	dialogueid 	= "stalkernetadmin",
-	soundgroup 	= "nosound",
+	soundgroup 	= "bodyguardnpc",
 	idleanim 	= "trader_idle",
 	--animgroup 	= 4,
 	items = {
@@ -336,6 +345,31 @@ ix.npctemplates.templates["bodyguardnpc"] = {
 		["taurusjudge"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
 		["swr8"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
 		["io7a"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+	},
+}
+
+ix.npctemplates.templates["raritynpc"] = {
+	name 		= "'Hoarder'",
+	description = "The person moves in complete silence.",
+	model 		= "models/legends/black3.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.7,
+	dialogueid 	= "stalkernetadmin",
+	soundgroup 	= "nosound",
+	idleanim 	= "trans_idle2",
+	animgroup 	= 6,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["aek971"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
+		["asval"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
+		["f2000"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
+		["famas"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
+		["g36c"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
+		["m16a4"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
+		["saiga12"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
+		["svd"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
+		["ragingbull"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
 	},
 }
 
@@ -389,6 +423,23 @@ ix.npctemplates.soundtemplates["CookNpc"] = {
     "npc/lesnik/red_forester_hello_bye_1.ogg",
 }
 
+ix.npctemplates.soundtemplates["ecologistnpc"] = {
+	"npc/doctor/idle_12.ogg",
+	"npc/doctor/idle_13.ogg",
+	"npc/doctor/idle_14.ogg",
+	"npc/doctor/idle_15.ogg",
+	"npc/doctor/idle_16.ogg",
+	"npc/doctor/idle_17.ogg",
+	"npc/doctor/idle_18.ogg",
+	"npc/doctor/idle_19.ogg",
+}
+
+ix.npctemplates.soundtemplates["bodyguardnpc"] = {
+	"npc/garyk/bar_guard_prohodi_1.ogg",
+	"npc/garyk/bar_guard_stop_1.ogg",
+	"npc/garyk/bar_guard_stop_3.ogg",
+}
+
 ix.npctemplates.animtemplates["TestAnimations"] = {
 	"bandit2_idle1",
 	"bandit2_idle3",
@@ -413,4 +464,8 @@ ix.npctemplates.animtemplates["sitchair"] = {
 ix.npctemplates.animtemplates["banditidle"] = {
 	"bandit2_idle1",
 	"bandit2_idle3"
+}
+
+ix.npctemplates.animtemplates["monolithidle"] = {
+	"trans_idle3",
 }
