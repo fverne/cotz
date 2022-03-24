@@ -36,8 +36,8 @@ function ITEM:GetDescription()
 end
 
 ITEM.functions.usetarget = {
-	name = "Unlock Target",
-	icon = "icon16/stalker/heal.png",
+	name = "Unlock Ecobunker Door",
+	icon = "icon16/stalker/unlock.png",
 	OnRun = function(item)
 		local data = {}
 			data.start = item.player:GetShootPos()
