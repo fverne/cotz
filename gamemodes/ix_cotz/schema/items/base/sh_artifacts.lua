@@ -40,7 +40,7 @@ if (CLIENT) then
             entity:SetMaterial("models/shadertest/predator.vmt")
             entity:DrawShadow(false)
         else
-            entity:SetMaterial(entity:GetData("material"))
+            entity:SetMaterial(self:GetMaterial())
             entity:DrawShadow(true)
         end
 
