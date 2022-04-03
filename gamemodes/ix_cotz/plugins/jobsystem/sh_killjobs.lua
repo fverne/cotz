@@ -359,7 +359,7 @@ do
 
   tempJob.name = "Kill %d rodents."
   tempJob.desc = "%d rodents."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/tushkandead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "rodentKilled"
   tempJob.numberRec = 4
@@ -377,7 +377,7 @@ do
 
   tempJob.name = "Kill %d rodents."
   tempJob.desc = "%d rodents."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/tushkandead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "rodentKilled"
   tempJob.numberRec = 8
@@ -395,7 +395,7 @@ do
 
   tempJob.name = "Kill %d rodents."
   tempJob.desc = "%d rodents."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/tushkandead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "rodentKilled"
   tempJob.numberRec = 13
@@ -415,7 +415,7 @@ do
 
   tempJob.name = "Kill %d zombies."
   tempJob.desc = "%d zombies."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/face_42.png"
   tempJob.tier = 2
   tempJob.listenTrigger = "zombieKilled"
   tempJob.numberRec = 3
@@ -433,7 +433,7 @@ do
 
   tempJob.name = "Kill %d zombies."
   tempJob.desc = "%d zombies."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/face_42.png"
   tempJob.tier = 2
   tempJob.listenTrigger = "zombieKilled"
   tempJob.numberRec = 7
@@ -451,7 +451,7 @@ do
 
   tempJob.name = "Kill %d zombies."
   tempJob.desc = "%d zombies."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/face_42.png"
   tempJob.tier = 2
   tempJob.listenTrigger = "zombieKilled"
   tempJob.numberRec = 12
@@ -527,7 +527,7 @@ do
 
   tempJob.name = "Kill %d bloodsuckers."
   tempJob.desc = "%d bloodsuckers."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/sosdead.png"
   tempJob.tier = 2
   tempJob.listenTrigger = "bloodsuckerKilled"
   tempJob.numberRec = 1
@@ -545,7 +545,7 @@ do
 
   tempJob.name = "Kill %d bloodsuckers."
   tempJob.desc = "%d bloodsuckers."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/sosdead.png"
   tempJob.tier = 2
   tempJob.listenTrigger = "bloodsuckerKilled"
   tempJob.numberRec = 2
@@ -563,7 +563,7 @@ do
 
   tempJob.name = "Kill %d bloodsuckers."
   tempJob.desc = "%d bloodsuckers."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/sosdead.png"
   tempJob.tier = 2
   tempJob.listenTrigger = "bloodsuckerKilled"
   tempJob.numberRec = 4
@@ -583,7 +583,7 @@ do
 
   tempJob.name = "Kill %d boars."
   tempJob.desc = "%d boars."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/kabandead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "boarKilled"
   tempJob.numberRec = 1
@@ -601,7 +601,7 @@ do
 
   tempJob.name = "Kill %d boars."
   tempJob.desc = "%d boars."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/kabandead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "boarKilled"
   tempJob.numberRec = 3
@@ -619,7 +619,7 @@ do
 
   tempJob.name = "Kill %d boars."
   tempJob.desc = "%d boars."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/kabandead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "boarKilled"
   tempJob.numberRec = 6
@@ -744,7 +744,7 @@ do
 
   tempJob.name = "Kill %d blind dogs."
   tempJob.desc = "%d blind dogs."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/dogdead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "blinddogKilled"
   tempJob.numberRec = 3
@@ -762,7 +762,7 @@ do
 
   tempJob.name = "Kill %d blind dogs."
   tempJob.desc = "%d blind dogs."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/dogdead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "blinddogKilled"
   tempJob.numberRec = 6
@@ -780,7 +780,7 @@ do
 
   tempJob.name = "Kill %d blind dogs."
   tempJob.desc = "%d blind dogs."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/dogdead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "blinddogKilled"
   tempJob.numberRec = 12
@@ -800,7 +800,7 @@ do
 
   tempJob.name = "Kill %d fleshes."
   tempJob.desc = "%d fleshes."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/plotdead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "fleshKilled"
   tempJob.numberRec = 2
@@ -818,7 +818,7 @@ do
 
   tempJob.name = "Kill %d fleshes."
   tempJob.desc = "%d fleshes."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/plotdead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "fleshKilled"
   tempJob.numberRec = 5
@@ -836,7 +836,7 @@ do
 
   tempJob.name = "Kill %d fleshes."
   tempJob.desc = "%d fleshes."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/plotdead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "fleshKilled"
   tempJob.numberRec = 10
@@ -856,7 +856,7 @@ do
 
   tempJob.name = "Kill %d pseudodogs."
   tempJob.desc = "%d pseudodogs."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/psi-dogdead.png"
   tempJob.tier = 1
   tempJob.listenTrigger = "pseudodogKilled"
   tempJob.numberRec = 1
@@ -874,7 +874,7 @@ do
 
   tempJob.name = "Kill %d pseudodogs."
   tempJob.desc = "%d pseudodogs."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/psi-dogdead.png"
   tempJob.tier = 2
   tempJob.listenTrigger = "pseudodogKilled"
   tempJob.numberRec = 2
@@ -892,7 +892,7 @@ do
 
   tempJob.name = "Kill %d pseudodogs."
   tempJob.desc = "%d pseudodogs."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/psi-dogdead.png"
   tempJob.tier = 2
   tempJob.listenTrigger = "pseudodogKilled"
   tempJob.numberRec = 3
@@ -911,7 +911,7 @@ do
 
   tempJob.name = "Kill %d snorks."
   tempJob.desc = "%d snorks."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/snorkdead.png"
   tempJob.tier = 2
   tempJob.listenTrigger = "snorkKilled"
   tempJob.numberRec = 1
@@ -929,7 +929,7 @@ do
 
   tempJob.name = "Kill %d snorks."
   tempJob.desc = "%d snorks."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/snorkdead.png"
   tempJob.tier = 2
   tempJob.listenTrigger = "snorkKilled"
   tempJob.numberRec = 2
@@ -947,7 +947,7 @@ do
 
   tempJob.name = "Kill %d snorks."
   tempJob.desc = "%d snorks."
-  tempJob.icon = "propic/event/mutanthunt"
+  tempJob.icon = "vgui/icons/snorkdead.png"
   tempJob.tier = 2
   tempJob.listenTrigger = "snorkKilled"
   tempJob.numberRec = 4
