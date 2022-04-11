@@ -536,7 +536,12 @@ ITEM.functions.detach = {
 	OnRun = function(item, data)
 		if data[1] then
 
-			item.player:GetCharacter():GetInventory():Add(ix.armortables.attachments[data[1]].uID)
+			if not item.player:GetCharacter():GetInventory():Add(ix.armortables.attachments[data[1]].uID) then
+				local position = item.player:GetItemDropPos()
+				ix.item.Spawn(ix.armortables.attachments[data[1]].uID, position, nil, AngleRand())
+				position = position + Vector(0, 0, 5)
+				item.player:Notify("No space in your inventory! Items have been dropped.")
+			end
 
 			local curattach = item:GetData("attachments") or {}
 			local iterator = 0
