@@ -2,23 +2,6 @@ PLUGIN.name = "Container Item Spawner"
 PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Spawns items in containers."
 
-PLUGIN.itemspawngroups = {
-	["default"] = {
-		{"medic_medkit_2"},
-	},
-	["small"] = {
-		{"makarov", {["ammo"] = 3}, {["durability"] = 15}},
-		{"toz66short", {["durability"] = 10}},
-	},
-}
-
-PLUGIN.moneyspawngroups = {
-	["default"] = {0,0},
-	["small"] = {10,90},
-	["cashregister"] = {100,750}
-}
-
-
 ix.config.Add("containerSpawnChanceFlat", 1, "How many percent to spawn with zero players on the server.", nil, {
 	data = {min = 0, max = 100},
 	category = "Containers"
@@ -58,12 +41,10 @@ if SERVER then
 			if spawncnt >= ix.config.Get("containerSpawnMaxItemsPerRun", 10) then break end
 			if v.spawnCategory != nil then
 				if math.random(101) <= ix.config.Get("containerSpawnChanceFlat", 1) + (ix.config.Get("containerSpawnChanceScaling", 0.5) * player.GetCount()) then
-					local idat = table.Random(self.itemspawngroups[v.spawnCategory] or self.itemspawngroups["default"])
-					local mdat = self.moneyspawngroups[v.spawnCategory] or self.moneyspawngroups["default"]
+					local idat = ix.util.GetRandomItemFromPool(v.spawnCategory)
 
 					if ix.item.inventories[v:GetID()]:GetItemCountNonSpecific(true) < ix.config.Get("containerSpawnMaxItems", 1) then
 						v:GetInventory():Add(idat[1], 1, idat[2] or {})
-						v:SetMoney(v:GetMoney()+math.random(mdat[1],mdat[2]))
 						spawncnt = spawncnt + 1
 					end
 				end

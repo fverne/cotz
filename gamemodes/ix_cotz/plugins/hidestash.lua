@@ -55,7 +55,7 @@ function PLUGIN:StashHide(client)
 		if dist <= 70 then
 			for k, v in pairs( stasheditem ) do
 				if v:GetClass() == "ix_item" then
-					table.insert( PLUGIN.stashpoints, { hitpos, v.uniqueID, v:GetEntity():GetAngles(), v.data } )
+					table.insert( PLUGIN.stashpoints, { hitpos, v.uniqueID, v:GetAngles(), v.data } )
 					ix.log.Add(client, "command", "created a stash at x:"..hitpos.x.." y:"..hitpos.y.." z:"..hitpos.z.." containing: "..v.name)
 
 					v:Remove()

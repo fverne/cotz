@@ -5,7 +5,7 @@ ITEM.model = ("models/weapons/w_ro2_dp28.mdl")
 ITEM.class = "cw_dp28"
 ITEM.weaponCategory = "primary"
 ITEM.price = 35600
-ITEM.width = 8
+ITEM.width = 7
 ITEM.height = 3
 
 ITEM.canAttach = false

@@ -33,7 +33,7 @@ ITEM.functions.use = {
 		ix.chat.Send(item.player, "iteminternal", "counts up some rubles and puts them in their wallet.", false)
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity))
+		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
 

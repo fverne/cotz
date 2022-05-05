@@ -270,8 +270,9 @@ function ix.hud.DrawDeath()
 				return
 			end
 
-			surface.SetDrawColor(0, 0, 0, 255)
-			surface.DrawRect(-1, -1, w+2, h+2)
+			--disabled blackscreen for now
+			--surface.SetDrawColor(0, 0, 0, 255)
+			--surface.DrawRect(-1, -1, w+2, h+2)
 
 			ix.util.DrawText(
 				string.upper("Lost to the Zone"), w/2, h/2, Color(255, 0, 0), 1, 1, "stalkerregularbigfont", 255

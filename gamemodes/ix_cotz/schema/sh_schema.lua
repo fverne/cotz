@@ -64,6 +64,7 @@ local stalker_models = {
 	["models/nasca/stalker/male_gagarin.mdl"]= true,
 	["models/nasca/stalker/male_jupiter_duty.mdl"]= true,
 	["models/nasca/stalker/male_jupiter_eco.mdl"]= true,
+	["models/nasca/stalker/male_nbc_lone.mdl"] = true,
 }
 
 for k, v in pairs(stalker_models) do

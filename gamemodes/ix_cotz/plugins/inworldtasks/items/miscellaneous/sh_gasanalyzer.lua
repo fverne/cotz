@@ -50,7 +50,7 @@ ITEM.functions.use = {
 		return false
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and (!item:GetData("finished"))
+		return (!IsValid(item.entity)) and (!item:GetData("finished")) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
 
@@ -66,7 +66,7 @@ ITEM.functions.zCheck = {
 		return false
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and (!item:GetData("finished"))
+		return (!IsValid(item.entity)) and (!item:GetData("finished")) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
 

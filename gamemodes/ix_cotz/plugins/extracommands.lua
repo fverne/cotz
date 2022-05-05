@@ -259,7 +259,8 @@ ix.command.Add("workshop", {
 
 ix.command.Add("discord", {
 	OnRun = function(self, client, arguments)
-	client:SendLua([[gui.OpenURL("https://discord.gg/n3qW6VdsN3")]])
+	local url = ix.config.Get("communityURL")
+	client:SendLua("gui.OpenURL("..url..")")
 	end
 })
 

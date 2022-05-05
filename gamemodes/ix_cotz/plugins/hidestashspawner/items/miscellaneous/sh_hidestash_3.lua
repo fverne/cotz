@@ -57,7 +57,7 @@ ITEM.functions.use = {
 		return false
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and (item:GetData("stashcoordinates", nil) == nil) and (item:GetData("moneytaken", nil) != true)
+		return (!IsValid(item.entity)) and (item:GetData("stashcoordinates", nil) == nil) and (item:GetData("moneytaken", nil) != true) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
 
@@ -74,6 +74,6 @@ ITEM.functions.stashpointer = {
 		return false
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and (item:GetData("stashcoordinates", nil) != nil) and (item:GetData("moneytaken", nil) != true)
+		return (!IsValid(item.entity)) and (item:GetData("stashcoordinates", nil) != nil) and (item:GetData("moneytaken", nil) != true) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
