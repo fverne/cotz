@@ -1,7 +1,7 @@
 DIALOGUE.name = "Ecologist NPC"
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Ahh, hello.",
+	response = "Hello.",
 	options = {
 		"TradeTopic",
 		"BackgroundTopic",
