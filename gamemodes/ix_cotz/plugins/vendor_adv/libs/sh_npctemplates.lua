@@ -283,7 +283,7 @@ ix.npctemplates.templates["ecologistnpc"] = {
 	skin 		= 0,
 	bubble 		= 0,
 	scale 		= 0.7,
-	dialogueid 	= "stalkernetadmin",
+	dialogueid 	= "ecologistnpc",
 	soundgroup 	= "ecologistnpc",
 	idleanim 	= "bandit_idle2",
 	--animgroup 	= 4,
@@ -307,7 +307,7 @@ ix.npctemplates.templates["ecologistnpc"] = {
 
 ix.npctemplates.templates["bodyguardnpc"] = {
 	name 		= "'Quartermaster'",
-	description = "Looking at the man in front of you makes you want to break eye contact.",
+	description = "Looking at the stern gaze from the man in front of you makes you want to break eye contact.",
 	model 		= "models/legends/garyk.mdl",
 	skin 		= 0,
 	bubble 		= 0,
