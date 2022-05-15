@@ -1,9 +1,9 @@
-DIALOGUE.name = "Ecologist NPC"
+DIALOGUE.name = "Bodyguard NPC"
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Hello.",
+	response = "Yes?",
 	options = {
-		"TradeTopic",
+		"TradeTopic", 
 		"BackgroundTopic",
 		"AboutWorkTopic",
 		"GetTask",
@@ -11,13 +11,13 @@ DIALOGUE.addTopic("GREETING", {
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"electronics", "information"}, 4)
+		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"repair", "mechanical", "electronics"}, 4)
 	end
 })
 
 DIALOGUE.addTopic("TradeTopic", {
 	statement = "Want to trade?",
-	response = "Keep it down!",
+	response = "I have some spare equipment laying around, yes.",
 	postCallback = function(self, client, target)
 		if (SERVER) then
 			local character = client:GetCharacter()
@@ -57,39 +57,6 @@ DIALOGUE.addTopic("TradeTopic", {
 	}
 })
 
-DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
-	response = "Sure. Overly intelligent, physics and nanotechnology PhD student from Kiev, got tired of the older professors stealing all my hard-earned work.",
-	options = {
-		"BackgroundTopic2",
-	}
-})
-
-DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Yeah? But how did you end up here then?",
-	response = "They told me I was entitled, and after complaining to the university dean, they evicted me to this hellhole, to 'gather my own research'. And guess what - they don't even fund me!",
-	options = {
-		"BackgroundTopic3",
-	}
-})
-
-DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "How do you make a living if you don't get any funding?",
-	response = "I guess they do fund me, in terms of rations, but they are so tasteless. Hey, listen, here's a deal. If you want to buy some shitty supplies from kiev, let me know. I want to fuck the professors over as much as possible.",
-	options = {
-		"BackgroundTopic4",
-	}
-})
-
-DIALOGUE.addTopic("BackgroundTopic4", {
-	statement = "Thanks I guess, won't they be mad if they know?",
-	response = "Hypothetically, they would, but who would tell them? If I hear anything, I'll have 'Quartermaster' evict you into an anomaly. Take care!",
-	options = {
-		"BackTopic",
-	}
-})
-
-
 DIALOGUE.addTopic("AboutWorkTopic", {
 	statement = "About work...",
 	response = "",
@@ -127,12 +94,12 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 					ix.dialogue.notifyTaskComplete(client, ix.jobs.getFormattedName(jobs[target:GetDisplayName()]))
 					client:ixJobComplete(target:GetDisplayName()) 
 				end
-				if (CLIENT) then self.response = "Good job. This is from me to you." end
+				if (CLIENT) then self.response = "As promised, here's your reward." end
 			else
-				if (CLIENT) then self.response = string.format("Is your contract on %s complete yet?", ix.jobs.getFormattedName(jobs[target:GetDisplayName()])) end
+				if (CLIENT) then self.response = string.format("What's the status on %s?", ix.jobs.getFormattedName(jobs[target:GetDisplayName()])) end
 			end
 		else
-			if (CLIENT) then self.response = "I don't think you are on a contract for me right now." end
+			if (CLIENT) then self.response = "What are you talking about? We haven't planned anything." end
 		end
 
 	end,
@@ -142,10 +109,6 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 		-- Return the next topicID
 		return "BackTopic"
 	end,
-
-
-
-	--
 } )
 
 DIALOGUE.addTopic("ConfirmTask", {
@@ -164,8 +127,8 @@ DIALOGUE.addTopic("ConfirmTask", {
 	end,
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {
-			{statement = "I'll take it.", topicID = "ConfirmTask", dyndata = {accepted = true}},
-			{statement = "I'll pass.", topicID = "ConfirmTask", dyndata = {accepted = false}},
+			{statement = "I'll take it", topicID = "ConfirmTask", dyndata = {accepted = true}},
+			{statement = "I'll pass", topicID = "ConfirmTask", dyndata = {accepted = false}},
 		}
 		-- Return table of options
 		-- statement : String shown to player
@@ -191,13 +154,13 @@ DIALOGUE.addTopic("ConfirmTask", {
 
 DIALOGUE.addTopic("GetTask", {
 	statement = "Do you have any work for me?",
-	response = "I have a few contracts available, yes.",
+	response = "I have a few things I need done, yes.",
 	options = {
 		"BackTopic"
 	},
 	preCallback = function(self, client, target)
 		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
-			self.response = "You are already on a contract."
+			self.response = "You already have a task, which isn't completed yet."
 		end
 	end,
 	IsDynamic = true,
@@ -225,18 +188,99 @@ DIALOGUE.addTopic("GetTask", {
 	end,
 })
 
+DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	options = {
+		"BackTopic"
+	},
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if (dyndata) then
+			if(CLIENT)then
+				self.response = string.format("Nice work, this %s will help our cause.", ix.item.list[dyndata.itemid].name)
+			else
+				if ix.progression.IsActive("bodyguardnpcItemDelivery_Main") then --change this
+					
+					local item = player:GetCharacter():GetInventory():HasItem(dyndata.itemid)
+
+					if(item)then
+						--Adds reward
+						repReward = ix.util.GetValueFromProgressionTurnin(item)
+						player:addReputation(repReward)
+						ix.dialogue.notifyReputationReceive(player, repReward)
+
+						if(item:GetData("quantity", 0) > 1) then
+							item:SetData("quantity", item:GetData("quantity",0) - 1)
+						else
+							item:Remove()
+						end
+
+						ix.progression.AddComplexProgressionValue("bodyguardnpcItemDelivery_Main", dyndata.itemid, player:Name()) --change this
+					end
+				end
+			end	
+		end
+	end,
+} )
+
 DIALOGUE.addTopic("ViewProgression", {
 	statement = "",
 	response = "",
 	options = {
 		"BackTopic"
 	},
+
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		--disgusting
+		--local identifier = player:GetCharacter():GetData("curdialogprog")
+		local identifier 	= self.tmp
+		self.tmp = nil
+		local progstatus 	= ix.progression.GetComplexProgressionValue(identifier)
+		local progdef 		= ix.progression.definitions[identifier]
+		if(progdef.fnAddComplexProgression)then
+			local progitems 	= progdef.GetItemIds()
+			local missingitems  = {}
+
+			for progitem,cnt in pairs(progitems) do
+				local curcnt = 0
+				if(progstatus and progstatus[progitem]) then curcnt = progstatus[progitem] end
+
+				if(curcnt < cnt)then
+					table.insert(missingitems, progitem)
+				end
+			end
+
+			for _, progitem in pairs(missingitems) do
+				table.insert(dynopts, {statement = ix.item.list[progitem].name, topicID = "ViewProgression", dyndata = {itemid = progitem}})
+			end
+		end
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+
+		-- Return the next topicID
+		return "HandInComplexProgressionItemTopic", dyndata
+	end,
+
 	IsDynamicFollowup = true,
 	DynamicPreCallback = function(self, player, target, dyndata)
-		if (dyndata and CLIENT) then
-			local progstatus 	= ix.progression.status[dyndata.identifier]
-			local progdef 		= ix.progression.definitions[dyndata.identifier]
-			self.response = progdef.BuildResponse(progdef, progstatus)
+		if (dyndata) then
+			if(CLIENT)then
+				local progstatus 	= ix.progression.status[dyndata.identifier]
+				local progdef 		= ix.progression.definitions[dyndata.identifier]
+
+				self.response = progdef.BuildResponse(progdef, progstatus)
+				self.tmp = dyndata.identifier
+			end
 		end
 	end,
 })
@@ -244,13 +288,13 @@ DIALOGUE.addTopic("ViewProgression", {
 
 DIALOGUE.addTopic("AboutProgression", {
 	statement = "What do you need help with?",
-	response = "I'm currently approaching a breakthrough, here's my research focus.",
+	response = "I have a few things I need done.",
 	options = {
 		"BackTopic"
 	},
 	preCallback = function(self, client, target)
 		if( CLIENT ) then
-			if #ix.progression.GetActiveProgressions("'Egghead'") <= 0 then
+			if #ix.progression.GetActiveProgressions("'Bodyguard'") <= 0 then
 				self.response = "Nothing at the moment."
 			end
 
@@ -262,7 +306,11 @@ DIALOGUE.addTopic("AboutProgression", {
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
 
-		for _, progid in pairs(ix.progression.GetActiveProgressions("'Egghead'")) do
+		local test = ix.progression.GetActiveProgressions("'Bodyguard'")
+
+		PrintTable(test)
+
+		for _, progid in pairs(ix.progression.GetActiveProgressions("'Bodyguard'")) do
 			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})
 		end
 
@@ -279,12 +327,19 @@ DIALOGUE.addTopic("AboutProgression", {
 	end,
 })
 
+DIALOGUE.addTopic("BackgroundTopic", {
+	statement = "Tell me about yourself.",
+	response = "No.",
+	options = {
+		"BackTopic",
+	}
+})
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about something else...",
-	response = "What else is there to talk about?",
+	statement = "Let's talk about another topic.",
+	response = "Don't worry about it. Anything else?",
 	options = {
-		"TradeTopic",
+		"TradeTopic", 
 		"BackgroundTopic",
 		"AboutWorkTopic",
 		"GetTask",
@@ -292,12 +347,11 @@ DIALOGUE.addTopic("BackTopic", {
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"electronics", "information"}, 4)
+		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"repair", "mechanical", "electronics"}, 4)
 	end
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "See you around.",
-	response = "Don't trip into an anomaly!"
+	statement = "I'll talk to you later.",
+	response = "Hey, come back soon!"
 })
-
