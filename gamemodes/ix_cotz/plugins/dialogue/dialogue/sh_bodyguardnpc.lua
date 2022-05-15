@@ -337,7 +337,7 @@ DIALOGUE.addTopic("BackgroundTopic", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about another topic.",
-	response = "Don't worry about it. Anything else?",
+	response = "Anything else?",
 	options = {
 		"TradeTopic", 
 		"BackgroundTopic",
@@ -353,5 +353,5 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "I'll talk to you later.",
-	response = "Hey, come back soon!"
+	response = "Bye."
 })
