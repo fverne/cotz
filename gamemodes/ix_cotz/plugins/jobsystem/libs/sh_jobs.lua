@@ -135,11 +135,17 @@ if SERVER then
 
   -- Remove job with no reward given
   function playerMeta:ixJobRemove(npcidentifier)
-    curJobs = self:GetCharacter():GetJobs()
+    if self:GetCharacter():GetData("lastTaskAbandon", 0) < os.time() then
+      curJobs = self:GetCharacter():GetJobs()
 
-    curJobs[npcidentifier] = nil
+      curJobs[npcidentifier] = nil
+  
+      self:GetCharacter():SetJobs(curJobs)
 
-    self:GetCharacter():SetJobs(curJobs)
+      self:GetCharacter():SetData("lastTaskAbandon", os.time() + ix.config.Get("taskAbandonCooldown", 3600))
+    else
+      self:Notify("You can't abandon another task so soon!")
+    end
   end
 
   function playerMeta:ixJobEvaluate(trigger)

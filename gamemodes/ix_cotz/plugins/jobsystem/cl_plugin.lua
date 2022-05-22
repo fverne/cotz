@@ -38,6 +38,21 @@ if(CLIENT) then
 				surface.DrawTexturedRect(0, 0, width, height)
 			end
 
+			self.index.dltbtn = self.index:Add("ixStalkerButton")
+			self.index.dltbtn:Dock(RIGHT)
+			self.index.dltbtn:DockMargin(20, 20, 20, 20)
+			self.index.dltbtn:SetWide(100)
+			self.index.dltbtn:SetText("Abandon")
+			function self.index.dltbtn.DoClick() 
+				print(index)
+				if LocalPlayer():GetCharacter():GetData("lastTaskAbandon", 0) < os.time() then
+					netstream.Start("job_removeplayerjob", index)
+					self.index:Close()
+				else
+					LocalPlayer():Notify("You can't abandon another task so soon!")
+				end
+			end
+
 			self.index.icon = self.index:Add("DImage")
 			self.index.icon:SetMaterial(job.icon or "propic/event/area")
 			self.index.icon:Dock(LEFT)
@@ -194,24 +209,4 @@ if(CLIENT) then
 	end
 
 	vgui.Register("ixCharacterJournalPanel", PANEL, "DPanel")
-
--- ------------------------------------------------------------------------------ --
-
-	--[[
-	local PANEL = {}
-
-	
-	function PANEL:Init()
-		if (IsValid(ix.gui.detailsquest)) then
-			ix.gui.detailsquest:Remove()
-		end
-
-		ix.gui.detailsquest = self
-
-
-	end
-
-	vgui.Register("ixDetailsQuest", PANEL, "DFrame")
-	]]
-
-end -- Fin de la condition "CLIENT".
+end
