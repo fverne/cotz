@@ -44,10 +44,9 @@ if(CLIENT) then
 			self.index.dltbtn:SetWide(100)
 			self.index.dltbtn:SetText("Abandon")
 			function self.index.dltbtn.DoClick() 
-				print(index)
 				if LocalPlayer():GetCharacter():GetData("lastTaskAbandon", 0) < os.time() then
 					netstream.Start("job_removeplayerjob", index)
-					self.index:Close()
+					LocalPlayer():Notify("Task abandoned")
 				else
 					LocalPlayer():Notify("You can't abandon another task so soon!")
 				end
