@@ -7,6 +7,7 @@ ITEM.flag = "A"
 ITEM.width = 1
 ITEM.height = 2
 
+ITEM.noDrop = true
 ITEM.weight = 0.100
 
 ITEM.exRender = true
