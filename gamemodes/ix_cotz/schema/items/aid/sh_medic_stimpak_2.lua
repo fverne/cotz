@@ -99,7 +99,7 @@ ITEM.functions.usetarget = {
 				item.player:Notify( "You revived "..target.player:GetName() )
 				target.player:Notify( "You were revived by "..item.player:GetName() )
 
-				target.player:AddBuff("buff_slowheal", 60, { amount = item.restore/60 })
+				target.player:AddBuff("buff_rapidheal", 2, { amount = item.restore/4 })
 				ix.chat.Send(item.player, "iteminternal", "jabs the "..item.name.." in "..target:Name().."'s chest.", false)
 
 				quantity = quantity - 1

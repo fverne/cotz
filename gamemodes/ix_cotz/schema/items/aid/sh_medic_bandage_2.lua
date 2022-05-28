@@ -62,7 +62,7 @@ ITEM.functions.usetarget = {
 		if (IsValid(target) and target:IsPlayer()) then
 			
 			ix.chat.Send(item.player, "iteminternal", "unwraps a "..item.name.." and ties it to "..target:Name().."'s wound.", false)
-			target:AddBuff("buff_rapidheal", 2, { amount = item.restore/4 })
+			target:AddBuff("buff_slowheal", 4, { amount = item.restore/4 })
 			target:SetLocalVar("stm", math.min(target:GetLocalVar("stm", 100) + item.restore, 100))
 			
 			quantity = quantity - 1
@@ -98,7 +98,7 @@ ITEM.functions.usetarget = {
 				item.player:Notify( "You revived "..target.player:GetName() )
 				target.player:Notify( "You were revived by "..item.player:GetName() )
 
-				target.player:AddBuff("buff_slowheal", 60, { amount = item.restore/60 })
+				target.player:AddBuff("buff_slowheal", 4, { amount = item.restore/4 })
 				ix.chat.Send(item.player, "iteminternal", "unwraps a "..item.name.." and ties it to "..target:Name().."'s fatal wound.", false)
 
 				quantity = quantity - 1
