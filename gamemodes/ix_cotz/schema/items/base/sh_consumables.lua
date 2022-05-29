@@ -79,6 +79,11 @@ function ITEM:DecideFunction()
 				local quantity = item:GetData("quantity", item.quantity)
 				
 				item.player:UpdateThirstState(item.player)
+
+				if item.alcohol > 0 then
+					item.player:IncreaseDrunkLevel(item.alcohol)
+				end
+				
 				if item.empty then
 					local inv = item.player:GetCharacter():GetInventory()
 					inv:Add(item.empty)
