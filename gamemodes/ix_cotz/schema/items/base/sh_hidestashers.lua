@@ -161,6 +161,6 @@ ITEM.functions.unhidestash = {
     OnCanRun = function(item)
         local client = item.player
 
-        return not IsValid(item.entity) and IsValid(client) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
+        return not IsValid(item.entity) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
     end
 }
