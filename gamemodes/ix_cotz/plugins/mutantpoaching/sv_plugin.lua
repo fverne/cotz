@@ -115,27 +115,38 @@ ix.poaching.MutantParts = {
 		["meattype"] = "meat_skeleton",
 		["parts"] = {{"part_skeleton", 20}, {"hide_skeleton", 3}},
 	},
-	["pseudogigant"] = {
-		["meattype"] = "meat_pseudogigant",
-		["parts"] = {{"part_pseudogigant", 20}, {"hide_pseudogigant", 3}},
+	["pseudogiant"] = {
+		["meattype"] = "meat_pseudogiant",
+		["parts"] = {{"part_pseudogiant", 20}, {"hide_pseudogiant", 3}},
 	},
-	["skeleton"] = {
-		["meattype"] = "meat_skeleton",
-		["parts"] = {{"part_skeleton", 20}, {"hide_skeleton", 3}},
+	["pseudogiantfast"] = {
+		["meattype"] = "meat_pseudogiantfast",
+		["parts"] = {{"part_pseudogiantfast", 20}, {"hide_pseudogiantfast", 3}},
 	},
-	["skeleton"] = {
-		["meattype"] = "meat_skeleton",
-		["parts"] = {{"part_skeleton", 20}, {"hide_skeleton", 3}},
+	["hellhound"] = {
+		["meattype"] = "meat_hellhound",
+		["parts"] = {{"part_hellhound", 20}, {"hide_hellhound", 3}},
 	},
-	["skeleton"] = {
-		["meattype"] = "meat_skeleton",
-		["parts"] = {{"part_skeleton", 20}, {"hide_skeleton", 3}},
+	["electrochimera"] = {
+		["meattype"] = "meat_electrochimera",
+		["parts"] = {{"part_electrochimera", 20}, {"hide_electrochimera", 3}},
 	},
-	["skeleton"] = {
-		["meattype"] = "meat_skeleton",
-		["parts"] = {{"part_skeleton", 20}, {"hide_skeleton", 3}},
+	["fastcontroller"] = {
+		["meattype"] = "meat_fastcontroller",
+		["parts"] = {{"part_fastcontroller", 20}, {"hide_fastcontroller", 3}},
 	},
-	
+	["tark"] = {
+		["meattype"] = "meat_tark",
+		["parts"] = {{"part_tark", 20}, {"hide_tark", 3}},
+	},
+	["vareshka"] = {
+		["meattype"] = "meat_vareshka",
+		["parts"] = {{"part_vareshka", 20}, {"hide_vareshka", 3}},
+	},
+	["spider"] = {
+		["meattype"] = "meat_spider",
+		["parts"] = {{"part_spider", 20}, {"hide_spider", 3}},
+	},
 
 }
 
