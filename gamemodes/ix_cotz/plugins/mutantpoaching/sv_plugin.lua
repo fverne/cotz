@@ -13,8 +13,10 @@ ix.poaching.MutantTable = {
 	["models/monsters/krovosos.mdl"] = "bloodsucker",
 	["models/monsters/plot.mdl"] = "flesh",
 	["models/monsters/slep_dog2.mdl"] = "dog",
+	["models/monsters/slep_dog.mdl"] = "hellhound",
 	["models/monsters/boar.mdl"] = "boar",
 	["models/monsters/chimera2.mdl"] = "chimera",
+	["models/monsters/chimera.mdl"] = "electrochimera",
 	["models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl"] = "burer",
 	["models/monsters/cat.mdl"] = "cat",
 	["models/maver1k_XVII/Stalker/mutants/karlik.mdl"] = "karlik",
@@ -22,7 +24,14 @@ ix.poaching.MutantTable = {
 	["models/monsters/controler.mdl"] = "controller",
 	["models/monsters/tibet.mdl"] = "swampcontroller",
 	["models/monsters/controler_big.mdl"] = "electrocontroller",
+	["models/monsters/controler_fast.mdl"] = "fastcontroller",
 	["models/monsters/bear.mdl"] = "bear",
+	["models/monsters/skelet.mdl"] = "skeleton",
+	["models/monsters/gigant3.mdl"] = "pseudogiant",
+	["models/monsters/gigant.mdl"] = "pseudogiantfast",
+	["models/monsters/tark.mdl"] = "tark",
+	["models/monsters/vareshka.mdl"] = "vareshka",
+	["models/darkmessiah/spider_regular.mdl"] = "spider",
 }
 
 ix.poaching.MutantParts = {
@@ -101,7 +110,32 @@ ix.poaching.MutantParts = {
 	["bear"] = {
 		["meattype"] = "meat_bear",
 		["parts"] = {{"part_bear", 20}, {"hide_bear", 3}},
-	}
+	},
+	["skeleton"] = {
+		["meattype"] = "meat_skeleton",
+		["parts"] = {{"part_skeleton", 20}, {"hide_skeleton", 3}},
+	},
+	["pseudogigant"] = {
+		["meattype"] = "meat_pseudogigant",
+		["parts"] = {{"part_pseudogigant", 20}, {"hide_pseudogigant", 3}},
+	},
+	["skeleton"] = {
+		["meattype"] = "meat_skeleton",
+		["parts"] = {{"part_skeleton", 20}, {"hide_skeleton", 3}},
+	},
+	["skeleton"] = {
+		["meattype"] = "meat_skeleton",
+		["parts"] = {{"part_skeleton", 20}, {"hide_skeleton", 3}},
+	},
+	["skeleton"] = {
+		["meattype"] = "meat_skeleton",
+		["parts"] = {{"part_skeleton", 20}, {"hide_skeleton", 3}},
+	},
+	["skeleton"] = {
+		["meattype"] = "meat_skeleton",
+		["parts"] = {{"part_skeleton", 20}, {"hide_skeleton", 3}},
+	},
+	
 
 }
 
