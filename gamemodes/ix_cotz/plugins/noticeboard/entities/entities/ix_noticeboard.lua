@@ -30,4 +30,20 @@ if (SERVER) then
 	function ENT:OnRemove()
 
 	end
+else
+    ENT.PopulateEntityInfo = true
+
+    function ENT:OnPopulateEntityInfo(container)
+        local name = container:AddRow("name")
+        name:SetImportant()
+        name:SetText("Noticeboard")
+        name:SizeToContents()
+        local descriptionText = self:GetNetVar("Description", "An old wooden noticeboard used to display notices. (Press E to interact)")
+
+        if descriptionText ~= nil then
+            local description = container:AddRow("Description")
+            description:SetText(descriptionText)
+            description:SizeToContents()
+        end
+    end
 end
