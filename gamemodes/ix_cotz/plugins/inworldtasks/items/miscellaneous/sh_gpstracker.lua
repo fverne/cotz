@@ -57,7 +57,7 @@ ITEM.functions.Equip = { -- sorry, for name order.
 		local client = item.player
 
 		return !IsValid(item.entity) and IsValid(client) and item:GetData("equip") != true and
-			hook.Run("CanPlayerUnequipItem", client, item) != false and item.invID == item.player:GetCharacter():GetInventory():GetID()
+			hook.Run("CanPlayerUnequipItem", client, item) != false and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
 	end
 }
 
@@ -74,7 +74,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 		local client = item.player
 
 		return !IsValid(item.entity) and IsValid(client) and item:GetData("equip") == true and
-			hook.Run("CanPlayerUnequipItem", client, item) != false and item.invID == item.player:GetCharacter():GetInventory():GetID()
+			hook.Run("CanPlayerUnequipItem", client, item) != false and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
 	end
 }
 

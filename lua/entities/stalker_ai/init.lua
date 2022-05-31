@@ -392,7 +392,7 @@ function ENT:STALKERNPCKill(dmginfo)
 				net.Broadcast()
 			else
 				local TEMP_Ragdoll = ents.Create("prop_ragdoll")
-				TEMP_Ragdoll:SetModel(self:GetModel())
+				TEMP_Ragdoll:SetModel(self.ragdollModel or self:GetModel())
 				TEMP_Ragdoll:SetPos(self:GetPos())
 				TEMP_Ragdoll:SetAngles(self:GetAngles())
 				TEMP_Ragdoll:SetSkin(self:GetSkin())

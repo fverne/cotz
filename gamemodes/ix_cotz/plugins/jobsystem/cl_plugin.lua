@@ -38,16 +38,30 @@ if(CLIENT) then
 				surface.DrawTexturedRect(0, 0, width, height)
 			end
 
+			self.index.dltbtn = self.index:Add("ixStalkerButton")
+			self.index.dltbtn:Dock(RIGHT)
+			self.index.dltbtn:DockMargin(20, 20, 20, 20)
+			self.index.dltbtn:SetWide(100)
+			self.index.dltbtn:SetText("Abandon")
+			function self.index.dltbtn.DoClick() 
+				if LocalPlayer():GetCharacter():GetData("lastTaskAbandon", 0) < os.time() then
+					netstream.Start("job_removeplayerjob", index)
+					LocalPlayer():Notify("Task abandoned")
+				else
+					LocalPlayer():Notify("You can't abandon another task so soon!")
+				end
+			end
+
 			self.index.icon = self.index:Add("DImage")
 			self.index.icon:SetMaterial(job.icon or "propic/event/area")
 			self.index.icon:Dock(LEFT)
 			self.index.icon:DockMargin(self.index:GetWide()*0.25, self.index:GetTall()*0.05, 0, self.index:GetTall()*0.05)
-			self.index.icon:SetSize(96, 48)
+			self.index.icon:SetSize(128, 48)
 
 			self.index.description = self.index:Add("DLabel")
 			self.index.description:SetText(string.format(job.name or "%d Unknown", job.numberRec))
 			self.index.description:Dock(TOP)
-			self.index.description:DockMargin(self.index:GetWide()*0.01, self.index:GetTall()*0.05, 0, self.index:GetTall()*0.05)
+			self.index.description:DockMargin(self.index:GetWide()*0.1, self.index:GetTall()*0.05, 0, self.index:GetTall()*0.05)
 			self.index.description:SetFont("ixGenericFont")
 			self.index.description:SetColor(Color(255, 255, 255))
 
@@ -55,7 +69,7 @@ if(CLIENT) then
 			self.index.description:SetText(string.format("Progress: ".." %d / %d", v.progress, v.numberRec))
 			self.index.description:Dock(TOP)
 			self.index.description:SetFont("ixGenericFont")
-			self.index.description:DockMargin(self.index:GetWide()*0.01, self.index:GetTall()*0.05, 0, self.index:GetTall()*0.05)
+			self.index.description:DockMargin(self.index:GetWide()*0.1, self.index:GetTall()*0.05, 0, self.index:GetTall()*0.05)
 			if v.progress == v.numberRec then
 				self.index.description:SetText("Objective completed.")
 				self.index.description:SetColor(Color(180, 255, 180))
@@ -64,7 +78,7 @@ if(CLIENT) then
 			self.index.taskgiver = self.index:Add("DLabel")
 			self.index.taskgiver:SetText("Task Giver: "..index)
 			self.index.taskgiver:Dock(TOP)
-			self.index.taskgiver:DockMargin(self.index:GetWide()*0.01, self.index:GetTall()*0.05, 0, 0)
+			self.index.taskgiver:DockMargin(self.index:GetWide()*0.1, self.index:GetTall()*0.05, 0, 0)
 			self.index.taskgiver:SetFont("ixGenericFont")
 			self.index.taskgiver:SetColor(Color(255, 255, 255))
 
@@ -194,24 +208,4 @@ if(CLIENT) then
 	end
 
 	vgui.Register("ixCharacterJournalPanel", PANEL, "DPanel")
-
--- ------------------------------------------------------------------------------ --
-
-	--[[
-	local PANEL = {}
-
-	
-	function PANEL:Init()
-		if (IsValid(ix.gui.detailsquest)) then
-			ix.gui.detailsquest:Remove()
-		end
-
-		ix.gui.detailsquest = self
-
-
-	end
-
-	vgui.Register("ixDetailsQuest", PANEL, "DFrame")
-	]]
-
-end -- Fin de la condition "CLIENT".
+end

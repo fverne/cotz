@@ -196,7 +196,19 @@ ix.command.Add("charrevive", {
         target:SetNetVar("resurrected", true)
         target:Spawn()
         target:SetHealth(health or 100)
+
         target:SetPos(ix.temp.Corpses[target]:GetPos())
+
+        if target:IsStuck() then
+            target:SetPos(ix.temp.Corpses[target]:GetPos() + Vector(0, 0, 16))
+
+            local positions = ix.util.FindEmptySpace(target, {ix.temp.Corpses[target], target})
+
+            for _, v in ipairs(positions) do
+                target:SetPos(v)
+                if not target:IsStuck() then return end
+            end
+        end
 
         if target ~= client then
             client:Notify("You revived " .. target:GetName())
