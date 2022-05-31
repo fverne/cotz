@@ -61,6 +61,8 @@ sound.Add( {
 
 function ENT:Initialize()
 	self.Model = "models/monsters/chimera2.mdl"
+	self.ragdollModel = "models/monsters/chimera.mdl" -- skins dont overlap, will anyone notice? x
+
 	self:STALKERNPCInit(Vector(-48,-48,70),MOVETYPE_STEP)
 	
 	
