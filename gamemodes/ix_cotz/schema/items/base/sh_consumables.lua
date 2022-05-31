@@ -7,6 +7,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 0
 
+ITEM.alcohol = 0
 ITEM.hunger = 0
 ITEM.thirst = 0
 ITEM.empty = false
