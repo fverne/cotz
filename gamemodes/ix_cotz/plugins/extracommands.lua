@@ -170,6 +170,7 @@ ix.command.Add("CharResetValues", {
         target:setRadiation(0)
         target:SetHealth(100)
         target:SetLocalVar("stm", 100)
+        target:ResetDrunkLevel()
 
         if client == target then
             client:Notify("You have reset your character values")
