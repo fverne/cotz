@@ -232,28 +232,21 @@ end
 
 ix.command.Add("coinflip", {
 	OnRun = function(self, client, arguments)
-		local coinSide = math.random(0, 1);
+		local coinSide = math.random(0, 1)
 		if (coinSide > 0) then
-			ix.chat.Send(client, "iteminternal", "flips a coin, and it lands on heads.");
+			ix.chat.Send(client, "iteminternal", "flips a coin, and it lands on heads.")
 		else
-			ix.chat.Send(client, "iteminternal", "flips a coin, and it lands on tails.");
+			ix.chat.Send(client, "iteminternal", "flips a coin, and it lands on tails.")
 		end
 	end,
-});
+})
 
 ix.command.Add("content", {
+	alias = {"workshop", "help"},
 	OnRun = function(self, client, arguments)
 	client:SendLua([[gui.OpenURL("https://steamcommunity.com/sharedfiles/filedetails/?id=2290918731")]])
 	client:ChatPrint("If you encounter any human NPCs such as Old Timer and they are T-posing, this is caused by model animation overrides, especially pirated CSS content, and is not something we can fix with the workshop.")
 	client:ChatPrint("To fix this, head to the official Call of the Zone discord by typing /discord in-game. Head to the #information channel and follow the instructions on how to fix the T-posing Human NPCs.")
-	end
-})
-
-ix.command.Add("workshop", {
-	OnRun = function(self, client, arguments)
-	client:SendLua([[gui.OpenURL("https://steamcommunity.com/sharedfiles/filedetails/?id=2290918731")]])
-	client:ChatPrint("If you encounter any human NPCs such as Old Timer and they are T-posing, this is caused by model animation overrides, especially pirated CSS content, and is not something we can fix with the workshop.")
-  client:ChatPrint("To fix this, head to the official Call of the Zone discord by typing /discord in-game. Head to the #information channel and follow the instructions on how to fix the T-posing Human NPCs.")
 	end
 })
 
