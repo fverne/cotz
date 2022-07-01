@@ -180,7 +180,8 @@ local PANEL = {}
 			newNotice:SetText("New Notice")
 			newNotice.DoClick = function()
 				Derma_StringRequest("Notice Name", "What would you like to title your notice?", "", function(titleLabel)
-					if (string.len(titleLabel) < 6) then return end
+					if (string.len(titleLabel) < 6) then LocalPlayer():Notify("The title is too short!") return end
+					if (string.len(titleLabel) > 23) then LocalPlayer():Notify("The title is too long!") return end
 					table.insert(notices, {owner = LocalPlayer():GetCharacter():GetID(), label = titleLabel, text = ""})
 					self:populate(notices)
 					self:editText(#notices)
