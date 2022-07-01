@@ -572,7 +572,7 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("PaintView", {
-    statement = "",
+    statement = "Can I see what the different paints look like?",
     response = "Sure, sure! Take a look.",
     options = {
     	"PaintSuit",
