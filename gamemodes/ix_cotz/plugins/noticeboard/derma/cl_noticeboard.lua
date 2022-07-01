@@ -83,10 +83,10 @@ local PANEL = {}
 
 						s2:AlphaTo(0, 0.3)
 						s1:AlphaTo(0, 0.3, 0, function()
-							print(notices)
+						--[[print(notices)
 							if(notices and table.Count(notices)) then
 								print(table.Count(notices))
-							end
+						  	end]]--
 							self:populate()
 							s2:AlphaTo(255, 0.3)
 							s1:AlphaTo(255, 0.3)
