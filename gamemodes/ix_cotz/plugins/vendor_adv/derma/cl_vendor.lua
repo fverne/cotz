@@ -160,7 +160,9 @@ function PANEL:Setup(entity)
 	end
 
 	for _, v in SortedPairs(LocalPlayer():GetCharacter():GetInventory():GetItems()) do
-		self:addItem(v.uniqueID, "buying", v:GetID())
+		if !v.noDrop then
+			self:addItem(v.uniqueID, "buying", v:GetID())
+		end
 	end
 
 	self:PostLayoutUpdate()
