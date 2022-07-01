@@ -123,6 +123,16 @@ local PANEL = {}
 				if(notices[index]) then
 					noticeEdit:SetText(notices[index]["text"])
 				end
+
+				function noticeEdit:AllowInput(character)
+					local text = self:GetText()
+					local maxLength = 800
+					if (string.len(text .. character) > maxLength) then
+						surface.PlaySound("common/talk.wav")
+						return true
+					end
+				end
+
 			saveText = s2:Add("DButton")
 				saveText:Dock(BOTTOM)
 				saveText:SetHeight(24)
