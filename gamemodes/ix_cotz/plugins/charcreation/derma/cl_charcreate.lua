@@ -1,4 +1,4 @@
-
+local PLUGIN = PLUGIN
 local padding = ScreenScale(32)
 
 -- create character panel
@@ -215,6 +215,11 @@ function PANEL:Init()
 			net.Start("ixCharacterChoose")
 				net.WriteUInt(id, 32)
 			net.SendToServer()
+
+		if game.GetMap() == "rp_marsh_cs" then
+			PLUGIN.PlayIntro()
+		end
+			
 		else
 			self:SlideDown()
 		end
