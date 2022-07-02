@@ -216,7 +216,7 @@ function PANEL:Init()
 				net.WriteUInt(id, 32)
 			net.SendToServer()
 
-		if game.GetMap() == "rp_marsh_cs" then
+		if game.GetMap() == "rp_marsh_cs" and ix.config.Get("cotzintro", true) then
 			PLUGIN.RequestContinue()
 		end
 			
