@@ -119,12 +119,12 @@ DIALOGUE.addTopic("OpenStorage", {
 			local ID = character:GetData("bankID")
 			local bank
 
-			--local bankstruct = {}
-			--bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 3)), character:GetData("bankH", ix.config.Get("bankH", 2))}
+			local bankstruct = {}
+			bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 3)), character:GetData("bankH", ix.config.Get("bankH", 2))}
 		
 			if ID then
 				print("ID is "..ID)
-				ix.inventory.Restore(ID, ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), function(inventory)
+				ix.inventory.Restore(bankstruct, ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), function(inventory)
 					bank = inventory
 					bank:SetOwner(character:GetID())
 				end)
@@ -137,12 +137,14 @@ DIALOGUE.addTopic("OpenStorage", {
 				character:SetData("bankID", bank:GetID())
 			end
 
-			ix.storage.Open(client, bank, {
-				entity = client,
-				name = "Personal Storage",
-				searchText = "Accessing personal storage...",
-				searchTime = ix.config.Get("containerOpenTime", 1)
-			})
+			timer.Simple(0.1, function()
+				ix.storage.Open(client, bank, {
+					entity = client,
+					name = "Personal Storage",
+					searchText = "Accessing personal storage...",
+					searchTime = ix.config.Get("containerOpenTime", 1)
+				})
+			end)
 		end
 	end,
 	options = {

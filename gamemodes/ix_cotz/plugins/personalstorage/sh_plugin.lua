@@ -4,8 +4,6 @@ PLUGIN.name = "Personal Storage"
 PLUGIN.author = "gm1003 ツ - modified by verne"
 PLUGIN.description = "Adds upgradable personal storage to characters."
 
---ix.util.Include("sv_hooks.lua")
-
 ix.config.Add("bankW", 3, "How many slots in a row there is by default in the bank inventory.", nil, {
 	data = {min = 0, max = 20},
 	category = "Bank"
@@ -24,7 +22,7 @@ ix.config.Add("bankHMax", 4, "How many slots in a column there is by default in 
 })
 
 function PLUGIN:OnCharacterCreated(client, character)
-    ix.inventory.New(character:GetID(), "bankStorage", function(inventory)
+    ix.inventory.New(character:GetID(), "bankInvType", function(inventory)
         character:SetData("bankID", inventory:GetID())
     end)
 end
