@@ -58,7 +58,6 @@ if (SERVER) then
 
 	function PLUGIN:OpenNoticeBoard(client)
 		local notices = ix.data.Get("noticeBoardNotes") or {}
-		PrintTable(notices)
 
 		netstream.Start(client, "openNoticeUI", notices)
 	end
