@@ -117,16 +117,19 @@ DIALOGUE.addTopic("OpenStorage", {
 		if SERVER then
 			local character = client:GetCharacter()			
 			local ID = character:GetData("bankID")
+			local bank
 
-			local bankstruct = {}
-			bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 3)), character:GetData("bankH", ix.config.Get("bankH", 2))}
+			--local bankstruct = {}
+			--bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 3)), character:GetData("bankH", ix.config.Get("bankH", 2))}
 		
 			if ID then
-				ix.inventory.Restore(bankstruct, ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), function(inventory)
-					inventory:SetOwner(character:GetID())
+				print("ID is "..ID)
+				ix.inventory.Restore(ID, ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), function(inventory)
 					bank = inventory
+					bank:SetOwner(character:GetID())
 				end)
 			else
+				print("second branch")
 				bank = ix.inventory.Create(ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), os.time())
 				bank:SetOwner(character:GetID())
 				bank:Sync(client)
