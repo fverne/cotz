@@ -19,6 +19,23 @@ ITEM.img = ix.util.GetMaterial("vgui/hud/outfit_anorak1.png")
 ITEM.weight = 0.760
 ITEM.miscslots = 1
 
+ITEM.functions.Lift = {
+	name = "Lift Hood",
+	tip = "equipTip",
+	icon = "icon16/stalker/customize.png",
+	OnRun = function(item)
+	if item.player:GetBodygroup(1) != 1 then
+		item.player:SetBodygroup(1, 1)
+	else
+		item.player:SetBodygroup(1, 0)
+	end
+		return false
+	end,
+	OnCanRun = function(item)
+		return !IsValid(item.entity) and IsValid(item.player) and item:GetData("equip") == true
+	end
+}
+
 ITEM.skincustom[1] = {
 	name = "Skin 0",
 	skingroup = 0,

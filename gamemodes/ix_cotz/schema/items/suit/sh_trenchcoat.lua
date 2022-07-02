@@ -23,6 +23,22 @@ ITEM.bodyGroups = {
 	["torso"] = 2,
 }
 
+ITEM.functions.Lift = {
+	name = "Lift Hood",
+	tip = "equipTip",
+	icon = "icon16/stalker/customize.png",
+	OnRun = function(item)
+	if item.player:GetBodygroup(1) != 3 then
+		item.player:SetBodygroup(1, 3)
+	else
+		item.player:SetBodygroup(1, 2)
+	end
+		return false
+	end,
+	OnCanRun = function(item)
+		return !IsValid(item.entity) and IsValid(item.player) and item:GetData("equip") == true
+	end
+}
 
 ITEM.skincustom[1] = {
 	name = "Skin 0",
