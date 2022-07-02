@@ -115,11 +115,7 @@ DIALOGUE.addTopic("OpenStorage", {
 	response = "Here's your items I've been storing for you.",
 	postCallback = function(self, client, target)
 		if SERVER then
-			local character = client:GetCharacter()
-			if !character:GetData("bankID") then
-				character:SetData("bankID", os.time())
-			end
-			
+			local character = client:GetCharacter()			
 			local ID = character:GetData("bankID", os.time())
 
 			local bankstruct = {}

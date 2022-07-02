@@ -37,6 +37,13 @@ local PANEL = {}
 				self:panelExit()
 			end
 
+			exitButton.Paint = function()
+				surface.SetDrawColor(255,255,255,255)
+				surface.SetMaterial(Material("stalker/buttontab.png"))
+				surface.DrawTexturedRect(0,0,exitButton:GetWide(),exitButton:GetTall())
+			end
+
+
 		title = self:Add("DLabel")
 			title:SetSize(768, 48)
 			title:SetText("Notice Board")
@@ -119,10 +126,26 @@ local PANEL = {}
 			noticeEdit = s2:Add("DTextEntry")
 				noticeEdit:Dock(FILL)
 				noticeEdit:SetMultiline(true)
-				noticeEdit:SetFont("ixMediumFont")
+				noticeEdit:SetFont("stalkerregularchatfont")
 				if(notices[index]) then
 					noticeEdit:SetText(notices[index]["text"])
 				end
+				noticeEdit.Paint = function()
+					surface.SetDrawColor(255,255,255,255)
+					surface.SetMaterial(Material("stalker/questpaper.png"))
+					surface.DrawTexturedRect(-10,-10,noticeEdit:GetWide() + 10, noticeEdit:GetTall() + 10)
+					noticeEdit:DrawTextEntryText(Color(255, 255, 255), Color(30, 130, 255), Color(255, 255, 255))
+				end
+
+				function noticeEdit:AllowInput(character)
+					local text = self:GetText()
+					local maxLength = 800
+					if (string.len(text .. character) > maxLength) then
+						surface.PlaySound("common/talk.wav")
+						return true
+					end
+				end
+
 			saveText = s2:Add("DButton")
 				saveText:Dock(BOTTOM)
 				saveText:SetHeight(24)
@@ -157,11 +180,18 @@ local PANEL = {}
 			newNotice:SetText("New Notice")
 			newNotice.DoClick = function()
 				Derma_StringRequest("Notice Name", "What would you like to title your notice?", "", function(titleLabel)
-					if (string.len(titleLabel) < 6) then return end
+					if (string.len(titleLabel) < 6) then LocalPlayer():Notify("The title is too short!") return end
+					if (string.len(titleLabel) > 23) then LocalPlayer():Notify("The title is too long!") return end
 					table.insert(notices, {owner = LocalPlayer():GetCharacter():GetID(), label = titleLabel, text = ""})
 					self:populate(notices)
 					self:editText(#notices)
 				end)
+			end
+
+			newNotice.Paint = function()
+				surface.SetDrawColor(255,255,255,255)
+				surface.SetMaterial(Material("stalker/buttontab.png"))
+				surface.DrawTexturedRect(0,0,newNotice:GetWide(),newNotice:GetTall())
 			end
 
 		for i, v in ipairs(notices) do
@@ -192,9 +222,11 @@ local PANEL = {}
 
 	function PANEL:Paint(w, h)
 		ix.util.DrawBlur(self, 5)
+		surface.SetDrawColor(255,255,255,255)
+		surface.SetMaterial(Material("stalker/questboard.png"))
+		surface.DrawTexturedRect(0,0,w,h)
 		surface.SetDrawColor(10, 10, 10, 150)
-		surface.DrawRect(0, 0, w, h)
-		surface.DrawRect(0, (ScrH() * 0.5) - 256, w, 512)
+		surface.DrawRect(w/32, (ScrH() * 0.5) - 256, w * 0.94, 512)
 	end
 
 vgui.Register("noticeBoard", PANEL, "EditablePanel")
