@@ -179,6 +179,17 @@ local PANEL = {}
 			newNotice:Dock(BOTTOM)
 			newNotice:SetText("New Notice")
 			newNotice.DoClick = function()
+			
+				local noticeCheck = 0
+				for i, v in ipairs(notices) do
+					if (v["owner"] == LocalPlayer():GetCharacter():GetID()) then
+					noticeCheck = noticeCheck + 1
+					if noticeCheck >= 5 then 
+							return LocalPlayer():Notify("You can only have 5 notices up at once!")
+						end
+					end
+				end
+
 				Derma_StringRequest("Notice Name", "What would you like to title your notice?", "", function(titleLabel)
 					if (string.len(titleLabel) < 6) then LocalPlayer():Notify("The title is too short!") return end
 					if (string.len(titleLabel) > 23) then LocalPlayer():Notify("The title is too long!") return end
