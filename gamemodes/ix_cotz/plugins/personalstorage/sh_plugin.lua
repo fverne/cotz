@@ -23,6 +23,12 @@ ix.config.Add("bankHMax", 4, "How many slots in a column there is by default in 
 	category = "Bank"
 })
 
+function PLUGIN:OnCharacterCreated(client, character)
+    if !character:GetData("bankID") then
+        character:SetData("bankID", os.time())
+    end
+end
+
 ix.command.Add("debugupgradesafewidth", {
 	adminOnly = true,
 	arguments = {
