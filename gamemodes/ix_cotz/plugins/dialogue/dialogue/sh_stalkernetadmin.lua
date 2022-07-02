@@ -1,7 +1,7 @@
 DIALOGUE.name = "Stalkernet Admin"
 
 DIALOGUE.addTopic("GREETING", {
-	response = " ** The man in front of you seems not even to aknowledge your presence, and stares at some object on the table *",
+	response = " ** The man in front of you seems not even to aknowledge your presence, and stares at some object on the table **",
 	options = {
 		"TradeTopic",
 		"BackgroundTopic",
