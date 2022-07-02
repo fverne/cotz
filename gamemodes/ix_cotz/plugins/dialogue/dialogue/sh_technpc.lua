@@ -600,7 +600,7 @@ DIALOGUE.addTopic("PaintView", {
             end
 
             local playermodel = LocalPlayer():GetModel()
-            local skincount = LocalPlayer():SkinCount() - 1
+            local skincount = LocalPlayer():SkinCount() - 2
             local bodygroups = LocalPlayer():GetBodyGroups()
             local mdl = previewSkins:Add("DModelPanel")
             mdl:Dock(FILL)
@@ -629,7 +629,7 @@ DIALOGUE.addTopic("PaintView", {
                 skinslider:Dock(TOP)
                 skinslider:DockMargin(0, 0, 0, 5)
                 skinslider:SetText("Skin")
-                skinslider:SetMin(1)
+                skinslider:SetMin(0)
                 skinslider:SetMax(skincount + 1)
                 skinslider:SetDecimals(0)
                 skinslider:SetValue(curskin)
