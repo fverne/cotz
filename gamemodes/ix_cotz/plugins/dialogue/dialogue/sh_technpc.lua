@@ -172,10 +172,7 @@ DIALOGUE.addTopic("PaintSuit", {
 		"BackTopic",
 	},
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {
-			{statement = "Can I see what the different paints look like?", topicID = "PaintSuit", dyndata = {preview = true}},
-		}
-
+		local dynopts = {}
 		local items = client:GetCharacter():GetInventory():GetItems()
 
 		for k,v in pairs(items) do
@@ -186,6 +183,10 @@ DIALOGUE.addTopic("PaintSuit", {
 					table.insert(dynopts, {statement = v:GetName().." ( Current Skin: "..v:GetData("setSkin", 0)..", New Skin: "..v2.skingroup.." ) - "..ix.currency.Get(paintcost), topicID = "PaintSuit", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = paintcost, skin = v2.skingroup, preview = false}})
 				end
 			end
+		end
+
+		if dynopts != {} then
+			table.insert(dynopts, {statement = "Can I see what the different paints look like?", topicID = "PaintSuit", dyndata = {preview = true}})
 		end
 		
 		-- Return table of options
