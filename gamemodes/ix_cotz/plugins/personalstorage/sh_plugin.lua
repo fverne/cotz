@@ -24,9 +24,9 @@ ix.config.Add("bankHMax", 4, "How many slots in a column there is by default in 
 })
 
 function PLUGIN:OnCharacterCreated(client, character)
-    if !character:GetData("bankID") then
-        character:SetData("bankID", os.time())
-    end
+    ix.inventory.New(character:GetID(), "bankStorage", function(inventory)
+        character:SetData("bankID", inventory:GetID())
+    end)
 end
 
 ix.command.Add("debugupgradesafewidth", {
@@ -79,11 +79,7 @@ ix.command.Add("debugupgradesafeopen", {
 		ix.type.player,
 	},
 	OnRun = function(self, client, target)
-        local character = target:GetCharacter()
-        if !character:GetData("bankID") then
-            character:SetData("bankID", os.time())
-        end
-        
+        local character = client:GetCharacter()			
         local ID = character:GetData("bankID")
 
         local bankstruct = {}
@@ -97,13 +93,13 @@ ix.command.Add("debugupgradesafeopen", {
         else
             bank = ix.inventory.Create(ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), os.time())
             bank:SetOwner(character:GetID())
-            bank:Sync(target)
+            bank:Sync(client)
     
             character:SetData("bankID", bank:GetID())
         end
 
-        ix.storage.Open(target, bank, {
-            entity = target,
+        ix.storage.Open(client, bank, {
+            entity = client,
             name = "Personal Storage",
             searchText = "Accessing personal storage...",
             searchTime = ix.config.Get("containerOpenTime", 1)

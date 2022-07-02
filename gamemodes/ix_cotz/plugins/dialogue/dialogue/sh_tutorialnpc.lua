@@ -116,7 +116,7 @@ DIALOGUE.addTopic("OpenStorage", {
 	postCallback = function(self, client, target)
 		if SERVER then
 			local character = client:GetCharacter()			
-			local ID = character:GetData("bankID", os.time())
+			local ID = character:GetData("bankID")
 
 			local bankstruct = {}
 			bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 3)), character:GetData("bankH", ix.config.Get("bankH", 2))}
