@@ -186,7 +186,7 @@ DIALOGUE.addTopic("PaintSuit", {
 		end
 
 		if dynopts != {} then
-			table.insert(dynopts, {statement = "Can I see what the different paints look like?", topicID = "PaintSuit", dyndata = {preview = true}})
+			table.insert(dynopts, 1, {statement = "Can I see what the different paints look like?", topicID = "PaintSuit", dyndata = {preview = true}})
 		end
 		
 		-- Return table of options
