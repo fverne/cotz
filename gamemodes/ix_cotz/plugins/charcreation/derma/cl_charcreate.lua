@@ -217,7 +217,7 @@ function PANEL:Init()
 			net.SendToServer()
 
 		if game.GetMap() == "rp_marsh_cs" then
-			PLUGIN.PlayIntro()
+			PLUGIN.RequestContinue()
 		end
 			
 		else

@@ -1,3 +1,4 @@
+local PLUGIN = PLUGIN
 -- hard-coded + badly made intro sequence, sorry in advance to whoever views this.
 surface.CreateFont("stalkerregularfont8", {
     font = "alsina",
@@ -22,6 +23,56 @@ surface.CreateFont("stalkerregularfont6", {
     weight = 500,
     antialias = true
 })
+
+function PLUGIN.RequestContinue()
+    requestBackgroundFrame = vgui.Create("DFrame")
+    requestBackgroundFrame:SetTitle("")
+    requestBackgroundFrame:SetSize(ScrW(), ScrH())
+    requestBackgroundFrame:SetPos(0, 0)
+    requestBackgroundFrame:MakePopup()
+    requestBackgroundFrame:ShowCloseButton(false)
+    requestBackgroundFrame:SetDraggable(false)
+
+    requestBackgroundFrame.Paint = function(pnl, w, h)
+        draw.RoundedBox(0, 0, 0, w, h, Color(0, 0, 0, 255))
+    end
+
+    requestFrame = vgui.Create("DFrame", requestBackgroundFrame)
+    requestFrame:SetTitle("")
+    requestFrame:SetPos(ScrW() / 2 - 205, ScrH() / 2 - 100) 
+    requestFrame:SetSize(413, 150) 
+    requestFrame:ShowCloseButton(false)
+    requestFrame:SetDraggable(false)
+    requestFrame.Paint = function(pnl, w, h) end
+
+    requestLabel = vgui.Create("DLabel", requestFrame)
+    requestLabel:SetPos(12, 25)
+    requestLabel:SetTextColor( Color( 255, 255, 255) )
+    requestLabel:SetFont("stalkertitlefont")
+    requestLabel:SetText("Do you wish to see the intro sequence?")
+    requestLabel:SizeToContents()
+    
+    local requestSizeX, requestSizeY = requestFrame:GetSize()
+
+    requestButtonY = vgui.Create("DButton", requestFrame)
+    requestButtonY:SetText("Yes")
+    requestButtonY:SetPos(requestSizeX/2 - 120, requestSizeY/2 + 10)
+    requestButtonY:SetSize(100, 30)
+
+    requestButtonY.DoClick = function()
+        PLUGIN.PlayIntro()
+        requestBackgroundFrame:Close()
+    end
+    
+    requestButtonN = vgui.Create("DButton", requestFrame)
+    requestButtonN:SetText("No")
+    requestButtonN:SetPos(requestSizeX/2 + 20, requestSizeY/2 + 10)
+    requestButtonN:SetSize(100, 30)
+
+    requestButtonN.DoClick = function()
+        requestBackgroundFrame:Close()
+    end
+end
 
 function PLUGIN.PlayIntro()
     sound.PlayFile("sound/stalkersound/blowout_siren.wav", "mono", function(station, errCode, errStr)
