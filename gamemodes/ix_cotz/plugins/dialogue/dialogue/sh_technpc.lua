@@ -640,6 +640,11 @@ DIALOGUE.addTopic("PaintView", {
                 end
             end
 
+			for _, v in ipairs(bodygroups) do
+					local curbg = LocalPlayer():GetBodygroup( v.id )
+
+					ent:SetBodygroup( v.id, curbg )
+			end
 
             local bgtab = sheet:AddSheet("Inspect Skins", bgpanel, "icon16/cog.png")
 
