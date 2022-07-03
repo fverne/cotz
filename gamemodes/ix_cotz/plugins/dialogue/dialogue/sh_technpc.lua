@@ -409,9 +409,11 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 
 					if(item)then
 						--Adds reward
-						repReward = ix.util.GetValueFromProgressionTurnin(item)
+						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item)
 						player:addReputation(repReward)
 						ix.dialogue.notifyReputationReceive(player, repReward)
+						player:GetCharacter():GiveMoney(monReward)
+						ix.dialogue.notifyMoneyReceive(player, monReward)
 
 						if(item:GetData("quantity", 0) > 1) then
 							item:SetData("quantity", item:GetData("quantity",0) - 1)
