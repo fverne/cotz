@@ -287,7 +287,7 @@ function PLUGIN.PlayIntro()
         continuetext:SetTall(ScrH() * 0.05)
         continuetext:SetWide(ScrW() * 0.25)
         continuetext:SetHeight(120)
-        continuetext:SetText("Press [ENTER] to begin the experience.")
+        continuetext:SetText("Press [ENTER] to trespass into the zone.")
         continuetext:SetTextColor(Color(255, 255, 255, 180))
         continuetext:SetFont("stalkerregularfont8")
 
