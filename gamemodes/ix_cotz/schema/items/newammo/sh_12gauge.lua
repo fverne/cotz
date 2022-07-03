@@ -7,7 +7,7 @@ ITEM.ammoAmount = 30 // amount of the ammo
 ITEM.description = ""
 ITEM.quantdesc =  "A box that contains %s 12 gauge shells. "
 ITEM.longdesc = "Standard 12 gauge shell filled with 6 mm shot. Highly lethal at close range. Only suitable for use with smoothbore weapons."
-ITEM.price = 600
+ITEM.price = 800
 ITEM.busflag = {"ammo2"}
 ITEM.img = ix.util.GetMaterial("cotz/icons/ammo/ammo_long_22_2.png")
 
