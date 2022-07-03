@@ -77,6 +77,12 @@ local PANEL = {}
 					noticeText:SetText(notices[index]["text"])
 				end
 				noticeText:SetContentAlignment(7)
+				noticeText.Paint = function()
+					surface.SetDrawColor(255,255,255,255)
+					surface.SetMaterial(Material("stalker/questpaper.png"))
+					surface.DrawTexturedRect(-10,-10,noticeText:GetWide() + 10, noticeText:GetTall() + 10)
+					noticeText:DrawTextEntryText(Color(255, 255, 255), Color(30, 130, 255), Color(255, 255, 255))
+				end
 			removeText = s2:Add("DButton")
 				removeText:Dock(BOTTOM)
 				removeText:SetHeight(24)
