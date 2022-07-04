@@ -59,7 +59,7 @@ DIALOGUE.addTopic("TradeTopic", {
 
 DIALOGUE.addTopic("BackgroundTopic", {
 	statement = "Well... What's that on the table?",
-	response = " ** The man hides the object behind his hands, shielding it from your view.",
+	response = " ** The man hides the object behind his hands, shielding it from your view. **",
 	options = {
 		"BackgroundTopic2",
 	}
@@ -118,12 +118,12 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 					ix.dialogue.notifyTaskComplete(client, ix.jobs.getFormattedName(jobs[target:GetDisplayName()]))
 					client:ixJobComplete(target:GetDisplayName()) 
 				end
-				if (CLIENT) then self.response = " ** He nods, and hands over your reward." end
+				if (CLIENT) then self.response = " ** He nods, and hands over your reward. **" end
 			else
-				if (CLIENT) then self.response = string.format(" ** He looks at you expectantly about %s.", ix.jobs.getFormattedName(jobs[target:GetDisplayName()])) end
+				if (CLIENT) then self.response = string.format(" ** He looks at you expectantly about %s. **", ix.jobs.getFormattedName(jobs[target:GetDisplayName()])) end
 			end
 		else
-			if (CLIENT) then self.response = " ** He looks confused" end
+			if (CLIENT) then self.response = " ** He has a confused look on his face. **" end
 		end
 
 	end,
@@ -188,7 +188,7 @@ DIALOGUE.addTopic("GetTask", {
 	},
 	preCallback = function(self, client, target)
 		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
-			self.response = "I already gave you some work."
+			self.response = "** He looks at you with a confused look on his face. **"
 		end
 	end,
 	IsDynamic = true,
