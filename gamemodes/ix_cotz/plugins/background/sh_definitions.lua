@@ -156,7 +156,10 @@ ix.backgrounds["druggie"] = {
 
 ix.backgrounds["addict_light"] = {
 	name = "Addict (Light)",
-	description = "After a traumatic event, you couldn't get back on your feet and started hitting the bottle.".. 
+	description = "You lived a luxury life, but a sudden turn of events made you go to the zone.".. 
+	"\n\nAddicted to Light Alcohol"..
+	"\n\nAddicted to Nicotine"..
+	"\n\nStarting Equipment:"..
 	"\n  1x Contender (.45 ACP, .410 Magnum Buck) (Damaged)"..
 	"\n  15x rounds of .45 ACP"..
 	"\n  10x rounds of .410 Magnum Buck"..

@@ -186,7 +186,7 @@ DIALOGUE.addTopic("PaintSuit", {
 		end
 
 		if dynopts != {} then
-			table.insert(dynopts, {statement = "Can I see what the different paints look like?", topicID = "PaintSuit", dyndata = {preview = true}})
+			table.insert(dynopts, 1, {statement = "Can I see what the different paints look like?", topicID = "PaintSuit", dyndata = {preview = true}})
 		end
 		
 		-- Return table of options
@@ -409,9 +409,11 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 
 					if(item)then
 						--Adds reward
-						repReward = ix.util.GetValueFromProgressionTurnin(item)
+						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item)
 						player:addReputation(repReward)
 						ix.dialogue.notifyReputationReceive(player, repReward)
+						player:GetCharacter():GiveMoney(monReward)
+						ix.dialogue.notifyMoneyReceive(player, monReward)
 
 						if(item:GetData("quantity", 0) > 1) then
 							item:SetData("quantity", item:GetData("quantity",0) - 1)
@@ -600,7 +602,7 @@ DIALOGUE.addTopic("PaintView", {
             end
 
             local playermodel = LocalPlayer():GetModel()
-            local skincount = LocalPlayer():SkinCount() - 1
+            local skincount = LocalPlayer():SkinCount() - 2
             local bodygroups = LocalPlayer():GetBodyGroups()
             local mdl = previewSkins:Add("DModelPanel")
             mdl:Dock(FILL)
@@ -629,7 +631,7 @@ DIALOGUE.addTopic("PaintView", {
                 skinslider:Dock(TOP)
                 skinslider:DockMargin(0, 0, 0, 5)
                 skinslider:SetText("Skin")
-                skinslider:SetMin(1)
+                skinslider:SetMin(0)
                 skinslider:SetMax(skincount + 1)
                 skinslider:SetDecimals(0)
                 skinslider:SetValue(curskin)
@@ -640,6 +642,11 @@ DIALOGUE.addTopic("PaintView", {
                 end
             end
 
+			for _, v in ipairs(bodygroups) do
+					local curbg = LocalPlayer():GetBodygroup( v.id )
+
+					ent:SetBodygroup( v.id, curbg )
+			end
 
             local bgtab = sheet:AddSheet("Inspect Skins", bgpanel, "icon16/cog.png")
 

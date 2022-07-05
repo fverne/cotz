@@ -6,6 +6,9 @@ PLUGIN.desc = "New Character Creation"
 
 ix.util.Include("sh_defs.lua")
 
+ix.config.Add("cotzintro", true, "If enabled, the cotz intro sequence will play when a player creates their character.", nil, {
+	category = "1development"
+})
 
 PLUGIN.currentEvents = {} --To keep track of and update running events
 

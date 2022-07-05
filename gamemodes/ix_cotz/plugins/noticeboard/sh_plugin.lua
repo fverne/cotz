@@ -35,6 +35,21 @@ if (SERVER) then
 		end
 	end
 
+    local cooldown = 604800 -- 1 week
+
+    function PLUGIN:NoticeWipeCheck()
+        local nextWipe = cookie.GetNumber("ixNoticesTimeUntilWipe", 0)
+        local time = os.time()
+
+        if not (time < nextWipe) then
+            print("Notices have been wiped! - " .. os.date("%Y/%m/%d - %H:%M:%S"))
+            local notices = ix.data.Get("noticeBoardNotes") or {}
+            table.remove(notices)
+            ix.data.Set("noticeBoardNotes", {})
+            cookie.Set("ixNoticesTimeUntilWipe", time + cooldown)
+        end
+    end
+
 	netstream.Hook("noticeUpdateEntry", function(client, index, txt, id, tag)
 		local notices = ix.data.Get("noticeBoardNotes") or {}
 
@@ -58,8 +73,9 @@ if (SERVER) then
 
 	function PLUGIN:OpenNoticeBoard(client)
 		local notices = ix.data.Get("noticeBoardNotes") or {}
-		PrintTable(notices)
 
+		PLUGIN:NoticeWipeCheck()
+		
 		netstream.Start(client, "openNoticeUI", notices)
 	end
 else

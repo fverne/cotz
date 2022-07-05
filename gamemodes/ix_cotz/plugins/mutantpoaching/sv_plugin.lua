@@ -52,7 +52,7 @@ ix.poaching.MutantParts = {
 		["parts"] = {{"part_tushkano", 45}, {"hide_tushkano", 8}},
 	},
 	["snork"] = {
-		["meattype"] = "meat_human",
+		["meattype"] = "meat_snork",
 		["parts"] = {{"part_snork_1", 35}, {"part_snork_2", 4}},
 	},
 	["pseudodog"] = {

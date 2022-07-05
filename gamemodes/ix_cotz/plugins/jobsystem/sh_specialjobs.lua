@@ -24,11 +24,11 @@
 
 do
 
-  --Scan 2 areas
+  --Scan 1 areas
   local tempJob = {}
 
-  tempJob.name = "Scan 2 areas."
-  tempJob.desc = "2 areas."
+  tempJob.name = "Scan 1 areas."
+  tempJob.desc = "1 areas."
   tempJob.icon = "propic/event/area"
   tempJob.tier = 1
   tempJob.listenTrigger = "scanAreaEasyComplete"
@@ -43,7 +43,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaEasyComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete"} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -56,7 +56,7 @@ do
         for k,v in pairs(inv:GetItems()) do
           if v.uniqueID == "gasanalyzer" then
             -- Check that everything matches
-            if ((v:GetData("npoints", -1) == 2) and (v:GetData("finishedtrigger", "error") == "scanAreaEasyComplete") and v:GetData("finished", false)) then
+            if ((v:GetData("npoints", -1) == 1) and (v:GetData("finishedtrigger", "error") == "scanAreaEasyComplete") and v:GetData("finished", false)) then
               v:Remove()
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
@@ -71,11 +71,11 @@ do
 
   tempJob = nil
 
-  --Scan 2 areas
+  --Scan 1 areas
   local tempJob = {}
 
-  tempJob.name = "Scan 2 areas."
-  tempJob.desc = "2 areas."
+  tempJob.name = "Scan 1 areas."
+  tempJob.desc = "1 areas."
   tempJob.icon = "propic/event/area"
   tempJob.tier = 1
   tempJob.listenTrigger = "scanAreaEasyComplete"
@@ -90,7 +90,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaEasyComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete"} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -103,7 +103,7 @@ do
         for k,v in pairs(inv:GetItems()) do
           if v.uniqueID == "gasanalyzer" then
             -- Check that everything matches
-            if ((v:GetData("npoints", -1) == 2) and (v:GetData("finishedtrigger", "error") == "scanAreaEasyComplete") and v:GetData("finished", false)) then
+            if ((v:GetData("npoints", -1) == 1) and (v:GetData("finishedtrigger", "error") == "scanAreaEasyComplete") and v:GetData("finished", false)) then
               v:Remove()
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
@@ -118,11 +118,11 @@ do
 
   tempJob = nil
 
-  --Scan 4 areas
+  --Scan 2 areas
   local tempJob = {}
 
-  tempJob.name = "Scan 4 areas."
-  tempJob.desc = "4 areas."
+  tempJob.name = "Scan 2 areas."
+  tempJob.desc = "2 areas."
   tempJob.icon = "propic/event/area"
   tempJob.tier = 2
   tempJob.listenTrigger = "scanAreaMedComplete"
@@ -137,7 +137,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaMedComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete"} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -150,7 +150,7 @@ do
         for k,v in pairs(inv:GetItems()) do
           if v.uniqueID == "gasanalyzer" then
             -- Check that everything matches
-            if ((v:GetData("npoints", -1) == 4) and (v:GetData("finishedtrigger", "error") == "scanAreaMedComplete") and v:GetData("finished", false)) then
+            if ((v:GetData("npoints", -1) == 2) and (v:GetData("finishedtrigger", "error") == "scanAreaMedComplete") and v:GetData("finished", false)) then
               v:Remove()
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
@@ -165,11 +165,11 @@ do
 
   tempJob = nil
 
-  --Scan 4 areas
+  --Scan 2 areas
   local tempJob = {}
 
-  tempJob.name = "Scan 4 areas."
-  tempJob.desc = "4 areas."
+  tempJob.name = "Scan 2 areas."
+  tempJob.desc = "2 areas."
   tempJob.icon = "propic/event/area"
   tempJob.tier = 2
   tempJob.listenTrigger = "scanAreaMedComplete"
@@ -184,7 +184,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaMedComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete"} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -197,7 +197,7 @@ do
         for k,v in pairs(inv:GetItems()) do
           if v.uniqueID == "gasanalyzer" then
             -- Check that everything matches
-            if ((v:GetData("npoints", -1) == 4) and (v:GetData("finishedtrigger", "error") == "scanAreaMedComplete") and v:GetData("finished", false)) then
+            if ((v:GetData("npoints", -1) == 2) and (v:GetData("finishedtrigger", "error") == "scanAreaMedComplete") and v:GetData("finished", false)) then
               v:Remove()
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
@@ -212,11 +212,11 @@ do
 
   tempJob = nil
 
-  --Scan 6 areas
+  --Scan 4 areas
   local tempJob = {}
 
-  tempJob.name = "Scan 6 areas."
-  tempJob.desc = "6 areas."
+  tempJob.name = "Scan 4 areas."
+  tempJob.desc = "4 areas."
   tempJob.icon = "propic/event/area"
   tempJob.tier = 3
   tempJob.listenTrigger = "scanAreaHighComplete"
@@ -231,7 +231,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 6, ["finishedtrigger"] = "scanAreaHighComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete"} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -244,7 +244,7 @@ do
         for k,v in pairs(inv:GetItems()) do
           if v.uniqueID == "gasanalyzer" then
             -- Check that everything matches
-            if ((v:GetData("npoints", -1) == 6) and (v:GetData("finishedtrigger", "error") == "scanAreaHighComplete") and v:GetData("finished", false)) then
+            if ((v:GetData("npoints", -1) == 4) and (v:GetData("finishedtrigger", "error") == "scanAreaHighComplete") and v:GetData("finished", false)) then
               v:Remove()
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
@@ -259,11 +259,11 @@ do
 
   tempJob = nil
 
-  --Scan 6 areas
+  --Scan 4 areas
   local tempJob = {}
 
-  tempJob.name = "Scan 6 areas."
-  tempJob.desc = "6 areas."
+  tempJob.name = "Scan 4 areas."
+  tempJob.desc = "4 areas."
   tempJob.icon = "propic/event/area"
   tempJob.tier = 3
   tempJob.listenTrigger = "scanAreaHighComplete"
@@ -278,7 +278,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 6, ["finishedtrigger"] = "scanAreaHighComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete"} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -291,7 +291,7 @@ do
         for k,v in pairs(inv:GetItems()) do
           if v.uniqueID == "gasanalyzer" then
             -- Check that everything matches
-            if ((v:GetData("npoints", -1) == 6) and (v:GetData("finishedtrigger", "error") == "scanAreaHighComplete") and v:GetData("finished", false)) then
+            if ((v:GetData("npoints", -1) == 4) and (v:GetData("finishedtrigger", "error") == "scanAreaHighComplete") and v:GetData("finished", false)) then
               v:Remove()
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
