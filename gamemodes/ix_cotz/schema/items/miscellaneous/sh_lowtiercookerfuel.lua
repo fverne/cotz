@@ -13,6 +13,14 @@ ITEM.fueltier = 1
 ITEM.quantity = 3
 ITEM.splitSize = {1, 2}
 
+ITEM.exRender = true
+
+ITEM.iconCam = {
+	pos = Vector(0, 0, 222.22222900391),
+	ang = Angle(90, 180, 0),
+	fov = 4.1176470588235,
+}
+
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
 		draw.SimpleText(

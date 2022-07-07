@@ -12,6 +12,14 @@ ITEM.varweight  = 0.100
 
 ITEM.fueltier = 1
 
+ITEM.exRender = true
+
+ITEM.iconCam = {
+	pos = Vector(77.54, 117.58, -24.42),
+	ang = Angle(-9.81, 236.01, 37.647060394287),
+	fov = 3.7
+}
+
 ITEM:Hook("take", function(item)
 	if(item.player)then
 
