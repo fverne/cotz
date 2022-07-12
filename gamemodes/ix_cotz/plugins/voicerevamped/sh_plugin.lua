@@ -277,11 +277,11 @@ function PLUGIN:PostDrawTranslucentRenderables()
         if (IsValid(ix.gui.menu)) then return end
         if not ply:IsSpeaking() then return end
         local voice_mat = ixVoice.Ranges[ply:GetLocalVar("voiceRange") or 2].icon
-        local pos = ply:GetPos() + Vector(0, 0, ply:GetModelRadius() + 15)
+        local pos = ply:GetPos() + Vector(0, 0, ply:GetModelRadius() + 10)
         local attachment = ply:GetAttachment(ply:LookupAttachment('eyes'))
 
         if attachment then
-            pos = ply:GetAttachment(ply:LookupAttachment('eyes')).Pos + Vector(0, 0, 15)
+            pos = ply:GetAttachment(ply:LookupAttachment('eyes')).Pos + Vector(2, -5, 10)
         end
 
         local distance = LocalPlayer():GetPos():Distance(ply:GetPos())
@@ -293,7 +293,7 @@ function PLUGIN:PostDrawTranslucentRenderables()
             local computed_color = render.ComputeLighting(ply:GetPos(), Vector(0, 0, 1))
             local max = math.max(computed_color.x, computed_color.y, computed_color.z)
             color_var = math.Clamp(max * 255 * 1.11, 0, 255)
-            render.DrawSprite(pos, 12, 12, Color(color_var, color_var, color_var, 255))
+            render.DrawSprite(pos, 8, 8, Color(color_var, color_var, color_var, 255))
         end
     end
 end
