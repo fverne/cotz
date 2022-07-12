@@ -156,7 +156,6 @@ function PLUGIN:PlayerButtonDown(client,key)
     if (client:GetNetVar("IsPoaching") == true && key == 16 ) then
        ix.util.PlayerActionInterrupt(client)
        npc:SetNetVar("beingSkinned",false)
-
     end
 end
 
@@ -164,14 +163,13 @@ function PLUGIN:KeyPress(client, key)
 
     if (client:GetNetVar("IsPoaching") == true ) then
        ix.util.PlayerActionInterrupt(client)
-
     end
 
 	local Hit = client:GetEyeTraceNoCursor()
 	local npc = Hit.Entity
 	local items = client:GetCharacter():GetInventory():GetItems()
 	local mutant
-	if npc then
+	if IsValid(npc) then
 		mutant = ix.poaching.MutantTable[npc:GetModel()]
 	end
 	local knife = nil
