@@ -271,7 +271,7 @@ end
 
 function PLUGIN:PostDrawTranslucentRenderables()
     for _, ply in ipairs(player.GetAll()) do    
-        if ply == LocalPlayer() or (GetViewEntity() == LocalPlayer() and (GetConVar('thirdperson') and GetConVar('thirdperson'):GetInt() ~= 0)) then return end
+        if ply == LocalPlayer() or (GetViewEntity() == LocalPlayer()) then return end
         if not ply:Alive() then return end
         if not ix.config.Get("allowVoice", false) then return end
         if (IsValid(ix.gui.menu)) then return end
