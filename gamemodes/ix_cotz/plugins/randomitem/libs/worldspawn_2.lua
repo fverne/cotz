@@ -40,7 +40,6 @@ ix.randomitems.tables["worldspawn_2"] = {
   {100, {"mp40", {["durability"] = 15, ["ammo"] = 9}}},
   {100, {"obrez", {["durability"] = 35, ["ammo"] = 2}}},
   {100, {"ppsh", {["durability"] = 45, ["ammo"] = 12}}},
-  {100, {"stechaps", {["durability"] = 19, ["ammo"] = 9}}},
   {100, {"stoegerdd", {["durability"] = 65, ["ammo"] = 2}}},
   {100, {"stoegerddshort", {["durability"] = 75, ["ammo"] = 2}}},
   {100, {"swr8", {["durability"] = 35, ["ammo"] = 4}}},

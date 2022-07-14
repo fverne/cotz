@@ -169,11 +169,10 @@ DIALOGUE.addTopic("PaintSuit", {
 	response = "Absolutely! Which color would you like it to be?",
 	IsDynamic = true,
 	options = {
-		"BackTopic"
+		"BackTopic",
 	},
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
-
 		local items = client:GetCharacter():GetInventory():GetItems()
 
 		for k,v in pairs(items) do
@@ -181,9 +180,13 @@ DIALOGUE.addTopic("PaintSuit", {
 
 			if v:GetData("equip") and v.isBodyArmor and v.skincustom then
 				for k2, v2 in pairs(v.skincustom) do
-					table.insert(dynopts, {statement = v:GetName().." ( Current Skin: "..v:GetData("setSkin", 0)..", New Skin: "..v2.skingroup.." ) - "..ix.currency.Get(paintcost), topicID = "PaintSuit", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = paintcost, skin = v2.skingroup}})
+					table.insert(dynopts, {statement = v:GetName().." ( Current Skin: "..v:GetData("setSkin", 0)..", New Skin: "..v2.skingroup.." ) - "..ix.currency.Get(paintcost), topicID = "PaintSuit", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = paintcost, skin = v2.skingroup, preview = false}})
 				end
 			end
+		end
+
+		if dynopts != {} then
+			table.insert(dynopts, 1, {statement = "Can I see what the different paints look like?", topicID = "PaintSuit", dyndata = {preview = true}})
 		end
 		
 		-- Return table of options
@@ -193,6 +196,10 @@ DIALOGUE.addTopic("PaintSuit", {
 		return dynopts
 	end,
 	ResolveDynamicOption = function(self, client, target, dyndata)
+
+		if dyndata.preview then
+			return "PaintView"
+		end
 
 		-- Return the next topicID
 		if( !client:GetCharacter():HasMoney(dyndata.cost)) then
@@ -402,9 +409,11 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 
 					if(item)then
 						--Adds reward
-						repReward = ix.util.GetValueFromProgressionTurnin(item)
+						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item)
 						player:addReputation(repReward)
 						ix.dialogue.notifyReputationReceive(player, repReward)
+						player:GetCharacter():GiveMoney(monReward)
+						ix.dialogue.notifyMoneyReceive(player, monReward)
 
 						if(item:GetData("quantity", 0) > 1) then
 							item:SetData("quantity", item:GetData("quantity",0) - 1)
@@ -564,6 +573,109 @@ DIALOGUE.addTopic("BackTopic", {
 		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"repair", "mechanical", "electronics"}, 4)
 	end
 })
+
+DIALOGUE.addTopic("PaintView", {
+    statement = "Can I see what the different paints look like?",
+    response = "Sure, sure! Take a look.",
+    options = {
+    	"PaintSuit",
+    	"BackTopic"
+    },
+    postCallback = function(self, client, target)
+        if CLIENT then
+        	previewBackground = vgui.Create("DFrame")
+        	previewBackground:SetSize(ScrW(), ScrH())
+			previewBackground:SetTitle("")
+			previewBackground:ShowCloseButton(false)
+
+        	previewBackground.Paint = function(panel, w, h)
+        		ix.util.DrawBlur(panel, 10)
+        	end
+
+            previewSkins = vgui.Create("DFrame")
+            previewSkins:SetSize(500, 900)
+            previewSkins:SetPos(ScrW()/2 - 250, ScrH()/2 - 450)
+            previewSkins:SetTitle("")
+
+            function previewSkins:OnClose()
+            	previewBackground:Close()
+            end
+
+            local playermodel = LocalPlayer():GetModel()
+            local skincount = LocalPlayer():SkinCount() - 2
+            local bodygroups = LocalPlayer():GetBodyGroups()
+            local mdl = previewSkins:Add("DModelPanel")
+            mdl:Dock(FILL)
+            mdl:SetFOV(36)
+            mdl:SetCamPos(Vector(95, 0, 60))
+            mdl:SetDirectionalLight(BOX_RIGHT, Color(255, 160, 80, 255))
+            mdl:SetDirectionalLight(BOX_LEFT, Color(80, 160, 255, 255))
+            mdl:SetAmbientLight(Vector(-64, -64, -64))
+            mdl:SetAnimated(true)
+            mdl:SetLookAt(Vector(-100, 0, 10))
+            mdl:SetModel(playermodel)
+            local ent = mdl:GetEntity()
+            mdl.Angles = Angle(0, 0, 0)
+            local sheet = previewSkins:Add("DPropertySheet")
+            sheet:Dock(BOTTOM)
+            sheet:SetSize(0, 200)
+            local bgpanel = previewSkins:Add("DPanel")
+            bgpanel:DockPadding(8, 8, 8, 8)
+            local bgpanelcontrols = bgpanel:Add("DScrollPanel")
+            bgpanelcontrols:Dock(FILL)
+
+            if skincount > 0 then
+                local skinslider = bgpanelcontrols:Add("DNumSlider")
+                local curskin = LocalPlayer():GetSkin()
+                ent:SetSkin(curskin)
+                skinslider:Dock(TOP)
+                skinslider:DockMargin(0, 0, 0, 5)
+                skinslider:SetText("Skin")
+                skinslider:SetMin(0)
+                skinslider:SetMax(skincount + 1)
+                skinslider:SetDecimals(0)
+                skinslider:SetValue(curskin)
+
+                function skinslider:OnValueChanged(value)
+                    local val = math.Round(value)
+                    ent:SetSkin(val)
+                end
+            end
+
+			for _, v in ipairs(bodygroups) do
+					local curbg = LocalPlayer():GetBodygroup( v.id )
+
+					ent:SetBodygroup( v.id, curbg )
+			end
+
+            local bgtab = sheet:AddSheet("Inspect Skins", bgpanel, "icon16/cog.png")
+
+            function mdl:DragMousePress()
+                self.PressX, self.PressY = gui.MousePos()
+                self.Pressed = true
+            end
+
+            function mdl:DragMouseRelease()
+                self.Pressed = false
+            end
+
+            function mdl:LayoutEntity(ent)
+                if self.bAnimated then
+                    self:RunAnimation()
+                end
+
+                if self.Pressed then
+                    local mx, my = gui.MousePos()
+                    self.Angles = self.Angles - Angle(0, (self.PressX or mx) - mx, 0)
+                    self.PressX, self.PressY = gui.MousePos()
+                end
+
+                ent:SetAngles(self.Angles)
+            end
+        end
+    end,
+})
+
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "I'll talk to you later.",

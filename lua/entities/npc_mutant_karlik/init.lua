@@ -58,6 +58,8 @@ ENT.RangeSchedule = SCHED_IDLE_STAND
 
 function ENT:Initialize()
 	self.Model = "models/maver1k_XVII/Stalker/mutants/karlik.mdl"
+	self.ragdollModel = "models/monsters/karlik.mdl"
+
 	self:STALKERNPCInit(Vector(-32,-32,40),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 800

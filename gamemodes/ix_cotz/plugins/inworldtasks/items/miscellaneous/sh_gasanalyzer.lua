@@ -7,6 +7,7 @@ ITEM.flag = "A"
 ITEM.width = 1
 ITEM.height = 2
 
+ITEM.noDrop = true
 ITEM.weight = 0.100
 
 ITEM.exRender = true
@@ -50,7 +51,7 @@ ITEM.functions.use = {
 		return false
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and (!item:GetData("finished")) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+		return (!IsValid(item.entity)) and (!item:GetData("finished")) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
 	end
 }
 
@@ -66,7 +67,7 @@ ITEM.functions.zCheck = {
 		return false
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and (!item:GetData("finished")) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+		return (!IsValid(item.entity)) and (!item:GetData("finished")) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
 	end
 }
 

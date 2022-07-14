@@ -7,6 +7,7 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 0
 
+ITEM.alcohol = 0
 ITEM.hunger = 0
 ITEM.thirst = 0
 ITEM.empty = false
@@ -64,7 +65,7 @@ function ITEM:DecideFunction()
 			icon = "icon16/stalker/drink.png",
 			OnCanRun = function(item)
 
-				return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+				return (!IsValid(item.entity)) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
 			end,
 			OnRun = function(item)
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
@@ -79,6 +80,11 @@ function ITEM:DecideFunction()
 				local quantity = item:GetData("quantity", item.quantity)
 				
 				item.player:UpdateThirstState(item.player)
+
+				if item.alcohol > 0 then
+					item.player:IncreaseDrunkLevel(item.alcohol)
+				end
+				
 				if item.empty then
 					local inv = item.player:GetCharacter():GetInventory()
 					inv:Add(item.empty)
@@ -98,7 +104,7 @@ function ITEM:DecideFunction()
 			icon = "icon16/stalker/eat.png",
 			OnCanRun = function(item)
 
-				return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+				return (!IsValid(item.entity)) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
 			end,
 			OnRun = function(item)
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
@@ -131,7 +137,7 @@ function ITEM:DecideFunction()
 			icon = "icon16/stalker/eat.png",
 			OnCanRun = function(item)
 
-				return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+				return (!IsValid(item.entity)) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
 			end,
 			OnRun = function(item)
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)

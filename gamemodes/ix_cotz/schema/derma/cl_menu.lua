@@ -101,7 +101,9 @@ end
 
 function PANEL:OnOpened()
 	self:SetAlpha(0)
+	if !IsValid(ix.gui.pdaMap) then
 	surface.PlaySound("stalkersound/inv_pda_on.ogg")
+	end
 
 	self:PlayStaticPDASound()
 
@@ -488,7 +490,9 @@ function PANEL:Remove()
 	self:SetMouseInputEnabled(false)
 	self:SetKeyboardInputEnabled(false)
 	self:SetCharacterOverview(false, animationTime * 0.5)
+	if (!IsValid(ix.gui.pdaMap)) then
 	surface.PlaySound("stalkersound/inv_pda_off.ogg")
+	end
 
 	-- remove input from opened child panels since they grab focus
 	if (IsValid(ix.gui.inv1) and ix.gui.inv1.childPanels) then

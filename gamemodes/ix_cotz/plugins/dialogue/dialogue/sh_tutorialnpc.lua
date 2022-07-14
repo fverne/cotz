@@ -115,20 +115,17 @@ DIALOGUE.addTopic("OpenStorage", {
 	response = "Here's your items I've been storing for you.",
 	postCallback = function(self, client, target)
 		if SERVER then
-			local character = client:GetCharacter()
-			if !character:GetData("bankID") then
-				character:SetData("bankID", os.time())
-			end
-			
-			local ID = character:GetData("bankID", os.time())
+			local character = client:GetCharacter()			
+			local ID = character:GetData("bankID")
+			local bank
 
 			local bankstruct = {}
 			bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 3)), character:GetData("bankH", ix.config.Get("bankH", 2))}
 		
 			if ID then
 				ix.inventory.Restore(bankstruct, ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), function(inventory)
-					inventory:SetOwner(character:GetID())
 					bank = inventory
+					bank:SetOwner(character:GetID())
 				end)
 			else
 				bank = ix.inventory.Create(ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), os.time())
@@ -138,12 +135,14 @@ DIALOGUE.addTopic("OpenStorage", {
 				character:SetData("bankID", bank:GetID())
 			end
 
-			ix.storage.Open(client, bank, {
-				entity = client,
-				name = "Personal Storage",
-				searchText = "Accessing personal storage...",
-				searchTime = ix.config.Get("containerOpenTime", 1)
-			})
+			timer.Simple(0.1, function()
+				ix.storage.Open(client, bank, {
+					entity = client,
+					name = "Personal Storage",
+					searchText = "Accessing personal storage...",
+					searchTime = ix.config.Get("containerOpenTime", 1)
+				})
+			end)
 		end
 	end,
 	options = {

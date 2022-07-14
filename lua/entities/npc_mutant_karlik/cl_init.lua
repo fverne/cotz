@@ -5,11 +5,6 @@ function ENT:Initialize()
 end
 
 function ENT:Draw()
-
-	self:SetModel("models/maver1k_XVII/Stalker/mutants/karlik.mdl")
-	self:DrawModel()
-
-
 	if self.Entity:GetNWBool( "Teleport", false ) then
 		local TEMP_Emitter = ParticleEmitter(self:GetPos(), false)
 	
@@ -55,4 +50,7 @@ function ENT:Draw()
 			self.Entity:SetNWBool( "Knocking", false )
 		end
 	end
+
+	self:SetModel("models/maver1k_XVII/Stalker/mutants/karlik.mdl")
+	self:DrawModel()
 end

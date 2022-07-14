@@ -1,7 +1,7 @@
 ITEM.name = "mutantpart"
 ITEM.description = "mutantpart item."
 ITEM.longdesc = "No Longer Description Available"
-ITEM.category = "trinket"
+ITEM.category = "Mutant Parts"
 ITEM.model = "models/Gibs/HGIBS.mdl"
 
 ITEM.width = 1
@@ -46,7 +46,7 @@ end
 
 function ITEM:OnInstanced(invID, x, y)
     if(!self:GetData("weight")) then
-        self:SetData("weight", self.baseweight + math.random(-self.varweight, self.varweight))
+        self:SetData("weight", self.baseweight + math.Rand(-self.varweight, self.varweight))
     end
 end
 

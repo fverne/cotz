@@ -2,7 +2,7 @@ PLUGIN.name = "PDA chatting system"
 PLUGIN.author = "verne"
 PLUGIN.description = "PDA chatting system, supporting avatars and nicknames"
 
-ix.config.Add("pdaWiringEnabled", true, "If true, PDA Wiring will be enabled.", nil, {
+ix.config.Add("pdaWiringEnabled", false, "If true, PDA Wiring will be enabled.", nil, {
 	category = "PDA Wiring"
 })
 

@@ -49,7 +49,7 @@ ITEM.functions.use = {
 		return true
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+		return (!IsValid(item.entity)) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
 	end
 }
 
@@ -90,6 +90,18 @@ ITEM.functions.usetarget = {
 				target.player:Spawn()
 				target.player:SetHealth( 1 ) 
 				target.player:SetPos(target:GetPos())
+
+                if target.player:IsStuck() then
+                    target.player:SetPos(target:GetPos() + Vector(0, 0, 16))
+
+                    local positions = ix.util.FindEmptySpace(target.player, {target, target.player})
+
+                    for _, v in ipairs(positions) do
+                        target.player:SetPos(v)
+                        if not target.player:IsStuck() then return end
+                    end
+                end
+				
 				item.player:Notify( "You revived "..target.player:GetName() )
 				target.player:Notify( "You were revived by "..item.player:GetName() )
 
@@ -110,6 +122,6 @@ ITEM.functions.usetarget = {
 		return true
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+		return (!IsValid(item.entity)) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
 	end
 }

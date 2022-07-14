@@ -13,6 +13,14 @@ ITEM.fueltier = 1
 ITEM.quantity = 3
 ITEM.splitSize = {1, 2}
 
+ITEM.exRender = true
+
+ITEM.iconCam = {
+	pos = Vector(0, 0, 222.22222900391),
+	ang = Angle(90, 180, 0),
+	fov = 4.1176470588235,
+}
+
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
 		draw.SimpleText(
@@ -132,7 +140,7 @@ ITEM.functions.use = {
 		return targets
 		end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+		return (!IsValid(item.entity)) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]

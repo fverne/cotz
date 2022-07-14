@@ -13,8 +13,10 @@ ix.poaching.MutantTable = {
 	["models/monsters/krovosos.mdl"] = "bloodsucker",
 	["models/monsters/plot.mdl"] = "flesh",
 	["models/monsters/slep_dog2.mdl"] = "dog",
+	["models/monsters/slep_dog.mdl"] = "hellhound",
 	["models/monsters/boar.mdl"] = "boar",
 	["models/monsters/chimera2.mdl"] = "chimera",
+	["models/monsters/chimera.mdl"] = "electrochimera",
 	["models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl"] = "burer",
 	["models/monsters/cat.mdl"] = "cat",
 	["models/maver1k_XVII/Stalker/mutants/karlik.mdl"] = "karlik",
@@ -22,7 +24,14 @@ ix.poaching.MutantTable = {
 	["models/monsters/controler.mdl"] = "controller",
 	["models/monsters/tibet.mdl"] = "swampcontroller",
 	["models/monsters/controler_big.mdl"] = "electrocontroller",
+	["models/monsters/controler_fast.mdl"] = "fastcontroller",
 	["models/monsters/bear.mdl"] = "bear",
+	["models/monsters/skelet.mdl"] = "skeleton",
+	["models/monsters/gigant3.mdl"] = "pseudogiant",
+	["models/monsters/gigant.mdl"] = "pseudogiantfast",
+	["models/monsters/tark.mdl"] = "tark",
+	["models/monsters/vareshka.mdl"] = "vareshka",
+	["models/darkmessiah/spider_regular.mdl"] = "spider",
 }
 
 ix.poaching.MutantParts = {
@@ -43,7 +52,7 @@ ix.poaching.MutantParts = {
 		["parts"] = {{"part_tushkano", 45}, {"hide_tushkano", 8}},
 	},
 	["snork"] = {
-		["meattype"] = "meat_human",
+		["meattype"] = "meat_snork",
 		["parts"] = {{"part_snork_1", 35}, {"part_snork_2", 4}},
 	},
 	["pseudodog"] = {
@@ -101,7 +110,43 @@ ix.poaching.MutantParts = {
 	["bear"] = {
 		["meattype"] = "meat_bear",
 		["parts"] = {{"part_bear", 20}, {"hide_bear", 3}},
-	}
+	},
+	["skeleton"] = {
+		["meattype"] = "meat_skeleton",
+		["parts"] = {{"part_skeleton", 20}, {"hide_skeleton", 3}},
+	},
+	["pseudogiant"] = {
+		["meattype"] = "meat_pseudogiant",
+		["parts"] = {{"part_pseudogiant", 20}, {"hide_pseudogiant", 3}},
+	},
+	["pseudogiantfast"] = {
+		["meattype"] = "meat_pseudogiantfast",
+		["parts"] = {{"part_pseudogiantfast", 20}, {"hide_pseudogiantfast", 3}},
+	},
+	["hellhound"] = {
+		["meattype"] = "meat_hellhound",
+		["parts"] = {{"part_hellhound", 20}, {"hide_hellhound", 3}},
+	},
+	["electrochimera"] = {
+		["meattype"] = "meat_electrochimera",
+		["parts"] = {{"part_electrochimera", 20}, {"hide_electrochimera", 3}},
+	},
+	["fastcontroller"] = {
+		["meattype"] = "meat_fastcontroller",
+		["parts"] = {{"part_fastcontroller", 20}, {"hide_fastcontroller", 3}},
+	},
+	["tark"] = {
+		["meattype"] = "meat_tark",
+		["parts"] = {{"part_tark", 20}, {"hide_tark", 3}},
+	},
+	["vareshka"] = {
+		["meattype"] = "meat_vareshka",
+		["parts"] = {{"part_vareshka", 20}, {"hide_vareshka", 3}},
+	},
+	["spider"] = {
+		["meattype"] = "meat_spider",
+		["parts"] = {{"part_spider", 20}, {"hide_spider", 3}},
+	},
 
 }
 
@@ -111,7 +156,6 @@ function PLUGIN:PlayerButtonDown(client,key)
     if (client:GetNetVar("IsPoaching") == true && key == 16 ) then
        ix.util.PlayerActionInterrupt(client)
        npc:SetNetVar("beingSkinned",false)
-
     end
 end
 
@@ -119,14 +163,13 @@ function PLUGIN:KeyPress(client, key)
 
     if (client:GetNetVar("IsPoaching") == true ) then
        ix.util.PlayerActionInterrupt(client)
-
     end
 
 	local Hit = client:GetEyeTraceNoCursor()
 	local npc = Hit.Entity
 	local items = client:GetCharacter():GetInventory():GetItems()
 	local mutant
-	if npc then
+	if IsValid(npc) then
 		mutant = ix.poaching.MutantTable[npc:GetModel()]
 	end
 	local knife = nil

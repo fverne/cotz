@@ -50,6 +50,8 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 function ENT:Initialize()
 	self.Model = "models/monsters/slep_dog2.mdl"
+	self.ragdollModel = "models/monsters/slep_dog.mdl"
+
 	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
 	
 	self.MinRangeDist = 0

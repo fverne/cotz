@@ -14,3 +14,10 @@ ITEM.JumpPower = 400
 
 ITEM.material = "models/lostsignalproject/items/artefacts/electra_glow"
 
+ITEM.exRender = true
+
+ITEM.iconCam = {
+	pos = Vector(84.158218383789, 70.649002075195, 55.674198150635),
+	ang = Angle(25, 220, 28.235294342041),
+	fov = 2.2,
+}

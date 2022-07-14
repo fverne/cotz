@@ -9,3 +9,11 @@ ITEM.flag = "A"
 ITEM.rarity = 5
 ITEM.baseweight = 9.500
 ITEM.varweight  = 0.550
+
+ITEM.exRender = true
+
+ITEM.iconCam = {
+	pos = Vector(157.72, 138.99, 100.13),
+	ang = Angle(24.91, 220.28, 0),
+	fov = 3.29
+}

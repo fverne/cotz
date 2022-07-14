@@ -4,8 +4,6 @@ PLUGIN.name = "Personal Storage"
 PLUGIN.author = "gm1003 ツ - modified by verne"
 PLUGIN.description = "Adds upgradable personal storage to characters."
 
---ix.util.Include("sv_hooks.lua")
-
 ix.config.Add("bankW", 3, "How many slots in a row there is by default in the bank inventory.", nil, {
 	data = {min = 0, max = 20},
 	category = "Bank"
@@ -22,6 +20,12 @@ ix.config.Add("bankHMax", 4, "How many slots in a column there is by default in 
 	data = {min = 0, max = 20},
 	category = "Bank"
 })
+
+function PLUGIN:OnCharacterCreated(client, character)
+    ix.inventory.New(character:GetID(), "bankInvType", function(inventory)
+        character:SetData("bankID", inventory:GetID())
+    end)
+end
 
 ix.command.Add("debugupgradesafewidth", {
 	adminOnly = true,
@@ -73,34 +77,33 @@ ix.command.Add("debugupgradesafeopen", {
 		ix.type.player,
 	},
 	OnRun = function(self, client, target)
-        local character = target:GetCharacter()
-        if !character:GetData("bankID") then
-            character:SetData("bankID", os.time())
-        end
-        
+        local character = client:GetCharacter()			
         local ID = character:GetData("bankID")
+        local bank
 
         local bankstruct = {}
         bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 3)), character:GetData("bankH", ix.config.Get("bankH", 2))}
     
         if ID then
             ix.inventory.Restore(bankstruct, ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), function(inventory)
-                inventory:SetOwner(character:GetID())
                 bank = inventory
+                bank:SetOwner(character:GetID())
             end)
         else
             bank = ix.inventory.Create(ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), os.time())
             bank:SetOwner(character:GetID())
-            bank:Sync(target)
+            bank:Sync(client)
     
             character:SetData("bankID", bank:GetID())
         end
 
-        ix.storage.Open(target, bank, {
-            entity = target,
-            name = "Personal Storage",
-            searchText = "Accessing personal storage...",
-            searchTime = ix.config.Get("containerOpenTime", 1)
-        })
+        timer.Simple(0.1, function()
+            ix.storage.Open(client, bank, {
+                entity = client,
+                name = "Personal Storage",
+                searchText = "Accessing personal storage...",
+                searchTime = ix.config.Get("containerOpenTime", 1)
+            })
+        end)
     end,
 })

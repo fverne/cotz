@@ -9,7 +9,7 @@ local ADDICTION_STATE_WITHDRAWAL = 4
 local ADDICTION_STATE_HEAVYWITHDRAWAL = 8
 local ADDICTION_STATE_WORSTWITHDRAWAL = 11
 
-PLUGIN.addictionInterval = 600
+PLUGIN.addictionInterval = 300
 PLUGIN.addictionTickInterval = 30
 
 PLUGIN.addictionDefinitions = PLUGIN.addictionDefinitions or {}

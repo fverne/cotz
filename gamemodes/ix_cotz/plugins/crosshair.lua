@@ -57,7 +57,7 @@ if (CLIENT) then
 		local wep = client:GetActiveWeapon()
 		local bShouldDraw = hook.Run("ShouldDrawCrosshair", client, wep)
 
-		if (client:KeyDown(IN_ATTACK2) and wep and wep:GetClass() ~= "ix_hands") then
+		if (client:KeyDown(IN_ATTACK2) and IsValid(wep) and wep:GetClass() ~= "ix_hands") then
 			return
 		end
 

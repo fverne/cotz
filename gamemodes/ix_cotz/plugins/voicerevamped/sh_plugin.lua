@@ -271,17 +271,17 @@ end
 
 function PLUGIN:PostDrawTranslucentRenderables()
     for _, ply in ipairs(player.GetAll()) do    
-        if ply == LocalPlayer() or (GetViewEntity() == LocalPlayer() and (GetConVar('thirdperson') and GetConVar('thirdperson'):GetInt() ~= 0)) then return end
+        if ply == LocalPlayer() or (GetViewEntity() == LocalPlayer()) then return end
         if not ply:Alive() then return end
         if not ix.config.Get("allowVoice", false) then return end
         if (IsValid(ix.gui.menu)) then return end
         if not ply:IsSpeaking() then return end
         local voice_mat = ixVoice.Ranges[ply:GetLocalVar("voiceRange") or 2].icon
-        local pos = ply:GetPos() + Vector(0, 0, ply:GetModelRadius() + 15)
+        local pos = ply:GetPos() + Vector(0, 0, ply:GetModelRadius() + 10)
         local attachment = ply:GetAttachment(ply:LookupAttachment('eyes'))
 
         if attachment then
-            pos = ply:GetAttachment(ply:LookupAttachment('eyes')).Pos + Vector(0, 0, 15)
+            pos = ply:GetAttachment(ply:LookupAttachment('eyes')).Pos + Vector(2, -5, 10)
         end
 
         local distance = LocalPlayer():GetPos():Distance(ply:GetPos())
@@ -293,7 +293,7 @@ function PLUGIN:PostDrawTranslucentRenderables()
             local computed_color = render.ComputeLighting(ply:GetPos(), Vector(0, 0, 1))
             local max = math.max(computed_color.x, computed_color.y, computed_color.z)
             color_var = math.Clamp(max * 255 * 1.11, 0, 255)
-            render.DrawSprite(pos, 12, 12, Color(color_var, color_var, color_var, 255))
+            render.DrawSprite(pos, 8, 8, Color(color_var, color_var, color_var, 255))
         end
     end
 end
