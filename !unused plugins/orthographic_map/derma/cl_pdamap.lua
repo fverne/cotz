@@ -2,10 +2,21 @@ local PANEL = {}
 PANEL.View = {}
 local scale = 1.8
 local x, y = nil
+local distSqr = 30 * 30
+
+ix.markers = {}
+
+ix.markers.icons = {
+    [1] = "vgui/icons/stash.png",
+    [2] = "vgui/icons/quester.png",
+    [3] = "vgui/icons/quest.png",
+    [4] = "vgui/icons/quest2.png"
+}
 
 function PANEL:Init()
     hook.Add("ShouldDrawCrosshair", "pdaMapHideCrosshair", function() return false end)
     ix.gui.pdaMap = self
+    ix.markerEdit = ix.markerEdit or 1
     self.delayTime = 0
     self:SetTitle("")
     self:SetSize(1333, 750)
@@ -13,6 +24,8 @@ function PANEL:Init()
     self:MakePopup()
     self.mousePosX, self.mousePosY = gui.MousePos()
     self:ShowCloseButton(false)
+    self:MoveToFront()
+    self.IsHovered = false
 
     if not x then
         x = LocalPlayer():GetPos().x
@@ -75,8 +88,17 @@ function PANEL:Paint(w, h)
     surface.SetDrawColor(255, 255, 255, 255)
     surface.SetMaterial(playerIcon)
     surface.DrawTexturedRect(w / 2 + (y - LocalPlayer():GetPos().y) / scale * 0.5 - 12, h / 2 + (x - LocalPlayer():GetPos().x) / scale * 0.5 - 20, 24, 24)
+
+    for _, v in ipairs(ix.markers) do
+    	surface.SetDrawColor(255, 255, 255, 255)
+    	surface.SetMaterial(Material(v[4]))
+    	surface.DrawTexturedRect(w / 2 + (y - v[2]) / scale * 0.5 - 12, h / 2 + (x - v[3]) / scale * 0.5 - 20, 24, 24)
+    	draw.SimpleTextOutlined(v[1], "stalkerregularsmallfont2", w / 2 + (y - v[2]) / scale * 0.5 - 2, h / 2 + (x - v[3]) / scale * 0.5 - 40, Color(v[5].r, v[5].g, v[5].b, v[5].a), TEXT_ALIGN_CENTER, nil, 1, Color(0, 0, 0, 255))
+	end
+
     render.SetScissorRect(0, 0, 0, 0, false)
     draw.SimpleText("PRESS [TAB] TO CLOSE", "stalkerregulartitlefont", 82, h - 120, Color(255, 255, 255), TEXT_ALIGN_LEFT)
+
 
     if input.IsKeyDown(KEY_ESCAPE) then
         self:PreRemove()
@@ -88,13 +110,50 @@ function PANEL:OnMouseWheeled(delta)
     scale = math.Clamp(scale - delta * 0.1, 1.8, 5)
 end
 
-function PANEL:OnMousePressed(lmb)
-    self.mousePosX, self.mousePosY = gui.MousePos()
-    self.cachedPosX, self.cachedPosY = gui.MousePos()
+function PANEL:OnMousePressed(code)
+    if code == MOUSE_RIGHT then
+
+        self.IsHovered = true
+        local curx, cury = 0, 0
+
+        ix.gui.MapInteract = DermaMenu()
+        curx, cury = self:CursorPos()
+
+        ix.gui.MapInteract:AddOption("Add marker at player position", function()
+
+            surface.PlaySound("stalkersound/pda/pda_objective.wav")
+
+            ix.markers[#ix.markers + 1] = {"Marker", LocalPlayer():GetPos().y, LocalPlayer():GetPos().x, ix.markers.icons[1], {r = 255, g = 255, b = 255, a = 255}}
+
+            self.IsHovered = false
+        end)
+        local subMenu, main = ix.gui.MapInteract:AddSubMenu("Markers")
+        main:SetIcon("icon16/user_red.png")
+
+        for k, v in ipairs(ix.markers) do
+
+        local markerList = subMenu:AddOption("Marker " .. k, function() 
+            ix.markerEdit = k
+            ix.gui.MapEdit = vgui.Create("ixPDAMapMarkerEdit")
+            self.IsHovered = true
+        end)
+
+        markerList:SetIcon("icon16/accept.png")
+    end
+        ix.gui.MapInteract:Open()
+    end
+
+    if not self.IsHovered then
+        self.mousePosX, self.mousePosY = gui.MousePos()
+        self.cachedPosX, self.cachedPosY = gui.MousePos()
+    end
 end
 
 function PANEL:OnMouseReleased()
+    self.current_index = nil
+    if !self.IsHovered then
     self.mousePosX, self.mousePosY = gui.MousePos()
+    end
 end
 
 function PANEL:ComputeDragDelta(diff)
@@ -128,15 +187,18 @@ function PANEL:OnKeyCodePressed(key)
 end
 
 function PANEL:Think()
-    self:MoveToFront()
-
-    if input.IsButtonDown(MOUSE_LEFT) then
+    if input.IsButtonDown(MOUSE_LEFT) and !self.IsHovered then
         local mousePosX, mousePosY = gui.MousePos()
         local deltaX = self:ComputeDragDelta(self.mousePosX - mousePosX)
         local deltaY = self:ComputeDragDelta(self.mousePosY - mousePosY)
         self:AddOriginX(deltaX)
         self:AddOriginY(deltaY)
         self.mousePosX, self.mousePosY = gui.MousePos()
+    end
+    if IsValid(ix.gui.MapInteract) or IsValid(ix.gui.MapEdit) then
+        self.IsHovered = true
+    else
+        self.IsHovered = false
     end
 end
 
@@ -164,4 +226,4 @@ function PANEL:OnRemove()
     end
 end
 
-vgui.Register("pdaMap", PANEL, "DFrame")
+vgui.Register("ixPDAMap", PANEL, "DFrame")
