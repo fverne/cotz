@@ -1,3 +1,5 @@
+local PLUGIN = PLUGIN
+
 PLUGIN.name = "Nicknames"
 PLUGIN.author = "verne"
 PLUGIN.description = "Nicknames for characters"
@@ -13,11 +15,16 @@ ix.char.RegisterVar("nickname", {
 
 		if value == nil then
 			if character.vars.nickname != nil then
-				local name = string.Split(client:GetCharacter():GetName(), " ")
+			--[[local name = string.Split(client:GetCharacter():GetName(), " ")
 				string.Split(client:GetCharacter():GetName(), " ")
 				local newName = name[1].." "..name[3]
 				
-				client:GetCharacter():SetName(newName)
+				client:GetCharacter():SetName(newName)]]--
+				local plugin = ix.plugin.Get("charcreation")
+				local firstname = plugin:GetFirstNameBySteamID(client)
+				local lastname = plugin:GetLastNameBySteamID(client)
+
+				client:GetCharacter():SetName(firstname.." "..lastname)
 			end
 
 			character.vars.nickname = value
@@ -48,6 +55,7 @@ ix.command.Add("charnicknameset", {
 		ix.type.string
 	},
 	OnRun = function(self, client, target, nickname)
+		target:SetNickname(nil)
 		target:SetNickname(nickname)
 	end
 })
@@ -61,4 +69,3 @@ ix.command.Add("charnicknameremove", {
 		target:SetNickname(nil)
 	end
 })
-
