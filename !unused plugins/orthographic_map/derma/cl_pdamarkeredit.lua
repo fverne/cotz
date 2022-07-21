@@ -1,6 +1,6 @@
 local PANEL = {}
 
-ix.markers.icons = {
+ix.mapicons = {
     [1] = "vgui/icons/stash.png",
     [2] = "vgui/icons/quester.png",
     [3] = "vgui/icons/quest.png",
@@ -38,7 +38,7 @@ function PANEL:Init()
 	self.scroll:Dock(LEFT)
 	self.scroll:SetSize(100,100)
 
-	for k, v in ipairs(ix.markers.icons) do
+	for k, v in ipairs(ix.mapicons) do
 		if (k) then
 			local btnMat = Material(v)
 			local btn = self.scroll:Add("DButton")

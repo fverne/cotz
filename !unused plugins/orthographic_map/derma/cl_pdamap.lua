@@ -4,9 +4,9 @@ local scale = 1.8
 local x, y = nil
 local distSqr = 30 * 30
 
-ix.markers = {}
+ix.markers = ix.data.Get("mapmarkers", {})
 
-ix.markers.icons = {
+ix.mapicons = {
     [1] = "vgui/icons/stash.png",
     [2] = "vgui/icons/quester.png",
     [3] = "vgui/icons/quest.png",
@@ -126,7 +126,7 @@ function PANEL:OnMousePressed(code)
 
             surface.PlaySound("stalkersound/pda/pda_objective.wav")
 
-            ix.markers[#ix.markers + 1] = {"Marker", LocalPlayer():GetPos().y, LocalPlayer():GetPos().x, ix.markers.icons[1], {r = 255, g = 255, b = 255, a = 255}}
+            ix.markers[#ix.markers + 1] = {"Marker", LocalPlayer():GetPos().y, LocalPlayer():GetPos().x, ix.mapicons[1], {r = 255, g = 255, b = 255, a = 255}}
 
             self.IsHovered = false
         end)
@@ -209,6 +209,7 @@ function PANEL:OnClose()
 end
 
 function PANEL:PreRemove()
+    ix.data.Set("mapmarkers", ix.markers)
     ix.gui.lastHelpMenuTab = "readme"
 
     if IsValid(ix.gui.menu) then
