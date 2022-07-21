@@ -130,6 +130,13 @@ function PANEL:OnMousePressed(code)
 
             self.IsHovered = false
         end)
+
+        ix.gui.MapInteract:AddOption("Bring camera to player position", function()
+            x = LocalPlayer():GetPos().x
+            y = LocalPlayer():GetPos().y
+            self.IsHovered = false
+        end)
+
         local subMenu, main = ix.gui.MapInteract:AddSubMenu("Markers")
         main:SetIcon("icon16/user_red.png")
 
