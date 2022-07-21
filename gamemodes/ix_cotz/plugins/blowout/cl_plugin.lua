@@ -94,12 +94,67 @@ net.Receive("BlowoutChangePhase", function()
 	ix.blowout.StartTime = CurTime()
 	ix.blowout.Duration = duration
 
+	if phasechange == 1 then
+		if ix.config.Get("blowoutSkybox", true) then
+			timer.Simple(25, function()
+				DrawBlowoutSkybox()
+			end)
+		end
+	end
+
 	if phasechange == 5 then
+		ix.skyboxColor.a = Lerp(FrameTime() * 0.5, ix.skyboxColor.a, 0)
 		ix.blowout.StartTime = duration -- ???????? for what purpose
 		ix.blowout.Duration = math.max(ix.blowout.StartTime - CurTime(), 0.01)
 	end
 end)
 
+function DrawBlowoutSkybox()
+	if ix.blowout.BlowoutPhase <= 0 then return end
+    ix.skyboxColor = Color(255, 255, 255, 0)
+    local skybox = "materials/cotz/blowout_skybox/blowout_"
+
+    local blowoutMats = {
+    	skybox .. "1.png",
+    	skybox .. "2.png",
+    	skybox .. "3.png",
+    	skybox .. "4.png",
+    	skybox .. "5.png",
+    	skybox .. "6.png",
+    }
+
+
+    hook.Add("PostDraw2DSkyBox", "BlowoutSkybox", function()
+        local mat = Matrix()
+        mat:SetAngles(Angle(0, 270, 0))
+        mat:SetTranslation(EyePos())
+        if ix.blowout.BlowoutPhase >= 5 then
+    		ix.skyboxColor.a = Lerp(FrameTime() * 0.1, ix.skyboxColor.a, 0)
+    		if ix.skyboxColor.a <= 5 then
+    			hook.Remove("PostDraw2DSkyBox", "BlowoutSkybox")
+    		end
+		else
+			ix.skyboxColor.a = Lerp(FrameTime() * 0.3, ix.skyboxColor.a, 255)
+    	end
+        cam.Start3D(EyePos(), RenderAngles())
+        cam.PushModelMatrix(mat)
+        render.SetMaterial(Material(blowoutMats[1]), "smooth")
+        render.DrawQuadEasy(Vector(1, 0, 0) * 16, Vector(-1, 0, 0), 16 * 2, 16 * 2, ix.skyboxColor, 180)
+        render.SetMaterial(Material(blowoutMats[4]), "smooth")
+        render.DrawQuadEasy(Vector(0, -1, 0) * 16, Vector(0, 1, 0), 16 * 2, 16 * 2, ix.skyboxColor, 180)
+        render.SetMaterial(Material(blowoutMats[3]), "smooth")
+        render.DrawQuadEasy(Vector(-1, 0, 0) * 16, Vector(1, 0, 0), 16 * 2, 16 * 2, ix.skyboxColor, 180)
+        render.SetMaterial(Material(blowoutMats[2]), "smooth")
+        render.DrawQuadEasy(Vector(0, 1, 0) * 16, Vector(0, -1, 0), 16 * 2, 16 * 2, ix.skyboxColor, 180)
+        render.SetMaterial(Material(blowoutMats[5]), "smooth")
+        render.DrawQuadEasy(Vector(0, 0, 1) * 16, Vector(0, 0, -1), 16 * 2, 16 * 2, ix.skyboxColor, 270)
+        render.SetMaterial(Material(blowoutMats[6]), "smooth")
+        render.DrawQuadEasy(Vector(0, 0, -1) * 16, Vector(0, 0, 1), 16 * 2, 16 * 2, ix.skyboxColor, 90)
+        render.OverrideDepthEnable(false, false)
+        cam.PopModelMatrix()
+        cam.End3D()
+    end)
+end
 
 local function BlowoutPostProcess()
 	if ix.blowout.BlowoutPhase <= 0 then return end
