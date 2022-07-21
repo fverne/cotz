@@ -10,7 +10,10 @@ ix.markers.icons = {
     [1] = "vgui/icons/stash.png",
     [2] = "vgui/icons/quester.png",
     [3] = "vgui/icons/quest.png",
-    [4] = "vgui/icons/quest2.png"
+    [4] = "vgui/icons/quest2.png",
+    [5] = "vgui/icons/guide.png",
+    [6] = "vgui/icons/storage2.png",
+    [7] = "vgui/icons/art.png",
 }
 
 function PANEL:Init()
@@ -84,17 +87,17 @@ function PANEL:Paint(w, h)
         end
     end
 
-    local playerIcon = Material("vgui/icons/quest.png") -- temporary icon
+    local playerIcon = Material("vgui/icons/mark.png")
     surface.SetDrawColor(255, 255, 255, 255)
     surface.SetMaterial(playerIcon)
-    surface.DrawTexturedRect(w / 2 + (y - LocalPlayer():GetPos().y) / scale * 0.5 - 12, h / 2 + (x - LocalPlayer():GetPos().x) / scale * 0.5 - 20, 24, 24)
+    surface.DrawTexturedRect(w / 2 + (y - LocalPlayer():GetPos().y) / scale * 0.5 - 12, h / 2 + (x - LocalPlayer():GetPos().x) / scale * 0.5 - 20, 25, 33)
 
     for _, v in ipairs(ix.markers) do
-    	surface.SetDrawColor(255, 255, 255, 255)
-    	surface.SetMaterial(Material(v[4]))
-    	surface.DrawTexturedRect(w / 2 + (y - v[2]) / scale * 0.5 - 12, h / 2 + (x - v[3]) / scale * 0.5 - 20, 24, 24)
-    	draw.SimpleTextOutlined(v[1], "stalkerregularsmallfont2", w / 2 + (y - v[2]) / scale * 0.5 - 2, h / 2 + (x - v[3]) / scale * 0.5 - 40, Color(v[5].r, v[5].g, v[5].b, v[5].a), TEXT_ALIGN_CENTER, nil, 1, Color(0, 0, 0, 255))
-	end
+        surface.SetDrawColor(255, 255, 255, 255)
+        surface.SetMaterial(Material(v[4]))
+        surface.DrawTexturedRect(w / 2 + (y - v[2]) / scale * 0.5 - 12, h / 2 + (x - v[3]) / scale * 0.5 - 20, 24, 24)
+        draw.SimpleTextOutlined(v[1], "stalkerregularsmallfont2", w / 2 + (y - v[2]) / scale * 0.5 - 2, h / 2 + (x - v[3]) / scale * 0.5 - 40, Color(v[5].r, v[5].g, v[5].b, v[5].a), TEXT_ALIGN_CENTER, nil, 1, Color(0, 0, 0, 255))
+    end
 
     render.SetScissorRect(0, 0, 0, 0, false)
     draw.SimpleText("PRESS [TAB] TO CLOSE", "stalkerregulartitlefont", 82, h - 120, Color(255, 255, 255), TEXT_ALIGN_LEFT)

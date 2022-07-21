@@ -1,10 +1,13 @@
 local PANEL = {}
 
 ix.markers.icons = {
-	[1] = "vgui/icons/stash.png",
-	[2] = "vgui/icons/quester.png",
-	[3] = "vgui/icons/quest.png",
-	[4] = "vgui/icons/quest2.png"
+    [1] = "vgui/icons/stash.png",
+    [2] = "vgui/icons/quester.png",
+    [3] = "vgui/icons/quest.png",
+    [4] = "vgui/icons/quest2.png",
+    [5] = "vgui/icons/guide.png",
+    [6] = "vgui/icons/storage2.png",
+    [7] = "vgui/icons/art.png",
 }
 
 function PANEL:Init()
