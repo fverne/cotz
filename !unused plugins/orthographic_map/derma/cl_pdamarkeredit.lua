@@ -5,9 +5,9 @@ ix.mapicons = {
     [2] = "vgui/icons/quester.png",
     [3] = "vgui/icons/quest.png",
     [4] = "vgui/icons/quest2.png",
-    [5] = "vgui/icons/guide.png",
-    [6] = "vgui/icons/storage2.png",
-    [7] = "vgui/icons/art.png",
+    [5] = "cyanide/pda/vgui/icons/guide.png",
+    [6] = "cyanide/pda/vgui/icons/storage2.png",
+    [7] = "cyanide/pda/vgui/icons/art.png",
 }
 
 function PANEL:Init()

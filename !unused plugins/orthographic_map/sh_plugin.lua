@@ -9,6 +9,21 @@ ix.config.Add("PDAOrthographicMap", true, "If true, the pda map will appear in t
     category = "1development"
 })
 
+ix.mapscales = {
+    ["rp_marsh_cs"] = {
+        ["min"] = 2.5,
+        ["max"] = 4.6,
+    },
+    ["rp_waystation"] = {
+        ["min"] = 1.8,
+        ["max"] = 3.1,
+    },
+    ["rp_salvation_2_haven"] = {
+        ["min"] = 1.8,
+        ["max"] = 5,
+    },    
+}
+
 function PLUGIN:PopulateHelpMenu(tabs)
     if ix.config.Get("PDAOrthographicMap", true) then
         tabs["map"] = function(container)

@@ -1,6 +1,8 @@
 local PANEL = {}
 PANEL.View = {}
 local scale = 1.8
+local scalemin = 1.8
+local scalemax = 5
 local x, y = nil
 local distSqr = 30 * 30
 
@@ -109,8 +111,19 @@ function PANEL:Paint(w, h)
     end
 end
 
+function PANEL:DecideMapScaleBounds()
+    for k, v in pairs(ix.mapscales) do
+        if k == game.GetMap() then
+            scalemin = ix.mapscales[k].min
+            scalemax = ix.mapscales[k].max
+            scale = ix.mapscales[k].min
+            break
+        end
+    end
+end
+
 function PANEL:OnMouseWheeled(delta)
-    scale = math.Clamp(scale - delta * 0.1, 1.8, 5)
+    scale = math.Clamp(scale - delta * 0.1, scalemin, scalemax)
 end
 
 function PANEL:OnMousePressed(code)
