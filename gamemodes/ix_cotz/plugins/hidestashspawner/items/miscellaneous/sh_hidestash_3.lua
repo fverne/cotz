@@ -24,7 +24,7 @@ ITEM.functions.use = {
 	name = "Check for information",
 	icon = "icon16/stalker/unlock.png",
 	OnRun = function(item)
-		local loot = ix.util.GetRandomItemFromPool(item.CustomSpawngroup or "ix_entbox_drops")
+		local loot = { ix.util.GetRandomItemFromPool(item.CustomSpawngroup or "ix_entbox_drops") }
 		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPoint()
 		local stashcontent = "CONTENT: "
 
