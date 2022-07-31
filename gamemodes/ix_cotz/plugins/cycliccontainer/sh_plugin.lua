@@ -31,13 +31,17 @@ if SERVER then
 		containerent.cyclicalAppearTime = nil
 	end
 
-	function PLUGIN:DisappearContainer(containerent)
+	function PLUGIN:DisappearContainer(containerent, firstspawn)
 		containerent:SetNoDraw(true)
 		containerent:SetCollisionGroup(COLLISION_GROUP_WORLD)
 
 		local disTime = self.categoryDefs[containerent:GetCyclicalCategory()].disappearTime
 
-		containerent.cyclicalAppearTime = os.time() + disTime + math.random(-disTime/10, disTime/10)
+		if firstspawn then
+			containerent.cyclicalAppearTime = os.time() + math.random(0, disTime*2)
+		else
+			containerent.cyclicalAppearTime = os.time() + disTime + math.random(-disTime/10, disTime/10)
+		end
 		containerent.cyclicalDisappearTime = nil
 	end
 
@@ -55,12 +59,7 @@ if SERVER then
 			if v:GetCyclicalCategory() != "" then
 				-- First time this container has been hit
 				if (v.cyclicalAppearTime == nil and v.cyclicalDisappearTime == nil) then
-					-- 50/50 if it starts present or not
-					if (math.random(101) <= 50) then
-						self:AppearContainer(v)
-					else
-						self:DisappearContainer(v)
-					end
+					self:DisappearContainer(v, true)
 				end
 
 				-- It's time for the stash to appear
