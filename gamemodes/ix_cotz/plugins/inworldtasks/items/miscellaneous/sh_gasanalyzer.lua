@@ -51,7 +51,7 @@ ITEM.functions.use = {
 		return false
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and (!item:GetData("finished")) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
+		return (!IsValid(item.entity)) and (!item:GetData("finished")) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID() and item:GetData("map", "") == game.GetMap()
 	end
 }
 
@@ -59,10 +59,14 @@ ITEM.functions.zCheck = {
 	name = "Check Assigned Points",
 	icon = "icon16/stalker/repair.png",
 	OnRun = function(item)
-		ix.chat.Send(item.player, "iteminternal", "looks at their gas analyzer.", false)
+		if (item:GetData("map", "") == game.GetMap()) then
+			ix.chat.Send(item.player, "iteminternal", "looks at their gas analyzer.", false)
 		
-		local pointtbl = item:GetData("points", {})
-		netstream.Start(item.player, "ix_ShowTaskPositions", item:GetData("points", {}))
+			local pointtbl = item:GetData("points", {})
+			netstream.Start(item.player, "ix_ShowTaskPositions", item:GetData("points", {}))
+		else
+			item.player:Notify("This isn't the right area for this task")
+		end
 
 		return false
 	end,

@@ -43,7 +43,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete", ["map"] = game.GetMap()} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -90,7 +90,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete", ["map"] = game.GetMap()} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -137,7 +137,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete", ["map"] = game.GetMap()} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -184,7 +184,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete", ["map"] = game.GetMap()} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -231,7 +231,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = game.GetMap()} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -278,7 +278,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = game.GetMap()} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
