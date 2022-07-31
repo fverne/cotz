@@ -74,7 +74,8 @@ if (SERVER) then
 						v.password,
 						v:GetDisplayName(),
 						v:GetMoney(),
-						v.spawnCategory
+						v:GetSpawnCategory(),
+						v:GetCyclicalCategory()
 					}
 				end
 			else
@@ -144,7 +145,11 @@ if (SERVER) then
 					end
 
 					if (v[8]) then
-						entity.spawnCategory = v[8]
+						entity:SetSpawnCategory(v[8])
+					end
+
+					if (v[9]) then
+						entity:SetCyclicalCategory(v[9])
 					end
 
 					ix.inventory.Restore(inventoryID, data2.width, data2.height, function(inventory)
@@ -159,7 +164,8 @@ if (SERVER) then
 					local physObject = entity:GetPhysicsObject()
 
 					if (IsValid(physObject)) then
-						physObject:EnableMotion()
+						physObject:Sleep()
+						physObject:EnableMotion(false)
 					end
 				end
 			end

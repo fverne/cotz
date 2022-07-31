@@ -124,3 +124,11 @@ ix.container.Register("models/props_c17/cashregister01a.mdl", {
 	width = 2,
 	height = 1
 })
+
+ix.container.Register("models/lostsignalproject/items/misc/damaged_ammo.mdl", {
+	name = "Hidden Cache",
+	description = "A hidden cache of goods.",
+	width = 6,
+	height = 6
+})
+
