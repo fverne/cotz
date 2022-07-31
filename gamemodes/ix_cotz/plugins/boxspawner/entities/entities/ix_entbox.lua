@@ -79,7 +79,9 @@ end
 
 if (CLIENT) then
 	function ENT:Draw()
-		self:DrawModel()
+		if LocalPlayer():GetPos():Distance(self:GetPos()) < 2048 then
+            self:DrawModel()
+        end
 	end
 
 	ENT.PopulateEntityInfo = true
