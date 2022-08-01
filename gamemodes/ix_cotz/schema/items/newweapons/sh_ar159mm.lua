@@ -7,7 +7,7 @@ ITEM.weaponCategory = "primary"
 ITEM.price = 18000
 ITEM.width = 3
 ITEM.height = 2
-ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_tundra9mm"}
+ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot", "md_reflex","md_tundra9mm"}
 
 ITEM.bulletweight = 0.008
 ITEM.unloadedweight = 2.9

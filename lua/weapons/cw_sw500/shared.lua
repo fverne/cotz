@@ -23,6 +23,10 @@ if CLIENT then
 	SWEP.IronsightPos = Vector(-2.018, 0, 0.1)
 	SWEP.IronsightAng = Vector(-0.4, -0.01, 4.5)
 	
+	SWEP.ShortDotPos = Vector(-1.995, -5, -0.675)
+	SWEP.ShortDotAng = Vector(-0.4, -0.01, 4.5)
+	SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
+
 	SWEP.RMRPos = Vector(-1.99, 0, -0.275)
 	SWEP.RMRAng = Vector(-0.4, -0.01, 4.5)
 	
@@ -59,6 +63,7 @@ end
 SWEP.AttachmentModelsVM = {
 	["md_saker"] = {model = "models/cw2/attachments/556suppressor.mdl", bone = "sw500-gun",  pos = Vector(0, 3.8, -0.75), angle = Angle(0, 180, 0), size = Vector(0.6, 0.6, 0.6)},
 	["md_rmr"] = {model = "models/cw2/attachments/pistolholo.mdl", bone = "sw500-gun", pos = Vector(0.25, 4.5, -2.35), angle = Angle(0, 90, 0), size = Vector(0.7, 0.7, 0.7)},
+	["md_schmidt_shortdot"] = {model = "models/cw2/attachments/schmidt.mdl", bone = "sw500-gun", pos = Vector(0.3, 5.019, -2.875), angle = Angle(0, 90, 0), size = Vector(0.8, 0.8, 0.8)},
 }
 
 
@@ -74,7 +79,7 @@ SWEP.ForegripOverridePos = {
 }	
 
 SWEP.Attachments = {[2] = {header = "Barrel", offset = {-750, -200}, atts = {"md_saker"}},
-	[1] = {header = "Sight", offset = {500, -300}, atts = {"md_microt1", "md_rmr"}},
+	[1] = {header = "Sight", offset = {500, -300}, atts = {"md_microt1", "md_rmr", "md_schmidt_shortdot"}},
 	["+reload"] = {header = "Ammo", offset = {800, 300}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
@@ -129,13 +134,13 @@ SWEP.FireSoundSuppressed = "CWC_MATEBA_FIRE_SUP"
 SWEP.Recoil = 8
 
 SWEP.HipSpread = 0.125
-SWEP.AimSpread = 0.025
+SWEP.AimSpread = 0.00001
 SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 195
+SWEP.Damage = 245
 SWEP.DeployTime = 0.7
 SWEP.Chamberable = false
 

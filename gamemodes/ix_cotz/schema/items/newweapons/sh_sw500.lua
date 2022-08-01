@@ -7,7 +7,7 @@ ITEM.weaponCategory = "secondary"
 ITEM.price = 19000
 ITEM.width = 3
 ITEM.height = 1
-ITEM.validAttachments = {"md_rmr","md_saker"}
+ITEM.validAttachments = {"md_rmr","md_saker", "md_schmidt_shortdot"}
 
 ITEM.exRender = false
 ITEM.img = ix.util.GetMaterial("vgui/hud/weapons/sw500.png")
