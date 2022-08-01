@@ -1,7 +1,7 @@
 ITEM.name = "Anomalous Bolt"
 ITEM.model ="models/jessev92/stalker/weapons/bolt_w.mdl"
 ITEM.description = "A bolt with anomalous properties."
-ITEM.longdesc = "While bolts are a dime a dozen in the zone, this one appears to be different. As you hold it in your hand, it seems to apply little clockwise fashion, as if it was trying to tighten itself."
+ITEM.longdesc = "While bolts are a dime a dozen in the zone, this one appears to be different. As you hold it in your hand, it seems to apply a constant small clockwise force, as if it was trying to tighten itself."
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 350
