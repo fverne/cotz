@@ -5,7 +5,7 @@ ITEM.model = "models/illusion/eftcontainers/graphicscard.mdl"
 
 ITEM.width = 2
 ITEM.height = 1
-ITEM.price = 6130
+ITEM.price = 26000
 
 ITEM.flatweight = 1.100
 
