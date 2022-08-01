@@ -22,10 +22,30 @@ PLUGIN.stashTypes =
 		"cache_weapons_shotgun_tier1",
 		"cache_ammo_shotgun_tier1",
 		"cache_ammo_shotgun_tier2",
+		"reward_consumable"
+	},
+	["shotgun_hi"] = {
+		"cache_weapons_shotgun_tier2",
+		"cache_ammo_shotgun_tier2",
+		"cache_ammo_shotgun_tier2",
 		"reward_consumable",
 		"reward_generic_valuable"
 	},
-	["consumable_low_stash"] = {
+	["assorted_cache_1"] = {
+		"reward_generic_valuable",
+		"reward_generic_valuable",
+		"reward_generic_valuable",
+		"reward_generic_valuable",
+		"reward_consumable",
+		"reward_consumable",
+		"reward_consumable",
+		"cache_ammo_rifle_tier1",
+		"cache_ammo_shotgun_tier2",
+		"cache_ammo_pistol_tier2",
+		"cache_ammo_pistol_tier2"
+	},
+
+	["consumable_low_cache"] = {
 		"reward_consumable",
 		"reward_consumable",
 		"reward_consumable",
