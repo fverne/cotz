@@ -53,6 +53,7 @@ CustomizableWeaponry:registerAmmo("Flash Grenades", "Flash Grenades", 0, 0)
 CustomizableWeaponry:registerAmmo("12 Gauge -SG-", "12 Gauge Slug Shells", 5, 10)
 CustomizableWeaponry:registerAmmo("12 Gauge -TR-", "12 Gauge Tri Rounds", 5, 10)
 CustomizableWeaponry:registerAmmo("12 Gauge -DT-", "12 Gauge Dart Shells", 5, 10,DMG_AIRBOAT)
+CustomizableWeaponry:registerAmmo("12 Gauge -MG-", "12 Gauge Magnum Buckshot", 5, 10)
 
 --Armor Piercing
 CustomizableWeaponry:registerAmmo("7.62x25MM -AP-", "7.62x25MM Rounds - Armor Piercing", 7.62, 25,DMG_AIRBOAT)

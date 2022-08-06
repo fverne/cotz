@@ -100,7 +100,7 @@ SWEP.ADSFireAnim = true
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -300}, atts = {"md_microt1", "md_eotech", "md_aimpoint"}},
 [3] = {header = "Handguard", offset = {-500, -200}, atts = {"md_foregrip"}},
-["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds"}}
+["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds", "am_magnumbuck"}}
 }
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},

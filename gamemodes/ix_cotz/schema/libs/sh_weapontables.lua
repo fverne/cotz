@@ -48,6 +48,8 @@ ix.weapontables.ammosubtypes = {}
 
 ix.weapontables.ammosubtypes["SG"] = {uID = "am_slugrounds"}
 ix.weapontables.ammosubtypes["TR"] = {uID = "am_trishot"}
+ix.weapontables.ammosubtypes["DT"] = {uID = "am_dartrounds"}
+ix.weapontables.ammosubtypes["MG"] = {uID = "am_magnumbuck"}
 ix.weapontables.ammosubtypes["AP"] = {uID = "am_armorpiercing"}
 ix.weapontables.ammosubtypes["HP"] = {uID = "am_hollowpoint"}
 ix.weapontables.ammosubtypes["41"] = {uID = "am_410buck"}

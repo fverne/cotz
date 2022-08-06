@@ -84,7 +84,7 @@ SWEP.LuaViewmodelRecoilOverride = true
 SWEP.ADSFireAnim = true
 
 SWEP.Attachments = {--[1] = {header = "Sight", offset = {600, -250},  atts = {"md_microt1kh", "odec3d_cmore_kry", "md_fas2_eotech", "md_fas2_aimpoint", "md_schmidt_shortdot", "md_uecw_csgo_acog"}},
-	["+reload"] = {header = "Ammo", offset = {-400, 50}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds"}}}
+	["+reload"] = {header = "Ammo", offset = {-400, 50}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds", "am_magnumbuck"}}}
 
 SWEP.Animations = {fire = {"shoot1"},
 	reload_start = "start_reload",
