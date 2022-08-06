@@ -19,14 +19,16 @@ PLUGIN.anomalydefs[1] = {
 	entityname = "anom_jarka",
 	interval = 128,
 	commonArtifacts = {
-		"droplet",
-		"jellyfish",
+		"artifact_droplet",
+		"artifact_bolt",
+		"artifact_bonecluster"
 	},
 	rareArtifacts = {
-		"crystal",
+		"artifact_crystal",
+		"artifact_eye"
 	},
 	veryRareArtifacts = {
-		"fireball",
+		"artifact_fireball",
 	},
 }
 
@@ -35,14 +37,16 @@ PLUGIN.anomalydefs[2] = {
 	entityname = "anom_par",
 	interval = 128,
 	commonArtifacts = {
-		"droplet",
-		"jellyfish",
+		"artifact_droplet",
+		"artifact_bolt",
+		"artifact_bonecluster"
 	},
 	rareArtifacts = {
-		"crystal",
+		"artifact_crystal",
+		"artifact_eye"
 	},
 	veryRareArtifacts = {
-		"fireball",
+		"artifact_fireball",
 	},
 }
 
@@ -51,15 +55,18 @@ PLUGIN.anomalydefs[3] = {
 	entityname = "anom_electra_anomaly",
 	interval = 128,
 	commonArtifacts = {
-		"battery",
-		"jellyfish",
+		"artifact_battery",
+		"artifact_blowncap",
+		"artifact_bolt",
+		"artifact_bonecluster"
 	},
 	rareArtifacts = {
-		"sparkler",
-		"flash",
+		"artifact_sparkler",
+		"artifact_flash",
+		"artifact_capacitor"
 	},
 	veryRareArtifacts = {
-		"snowflake",
+		"arifact_halo",
 	},
 }
 
@@ -68,15 +75,17 @@ PLUGIN.anomalydefs[4] = {
 	entityname = "anom_electra_anomaly_type2",
 	interval = 128,
 	commonArtifacts = {
-		"battery",
-		"jellyfish",
+		"artifact_battery",
+		"artifact_blowncap",
+		"artifact_bolt",
+		"artifact_bonecluster"
 	},
 	rareArtifacts = {
-		"sparkler",
-		"flash",
+		"arifact_sparkler",
+		"arifact_flash",
 	},
 	veryRareArtifacts = {
-		"snowflake",
+		"artifact_moonlight",
 	},
 }
 
@@ -85,15 +94,17 @@ PLUGIN.anomalydefs[5] = {
 	entityname = "anom_maysorubka_anomaly",
 	interval = 128,	
 	commonArtifacts = {
-		"jellyfish",
+		"artifact_mementomori",
 		"nightstar",
+		"artifact_bolt",
+		"artifact_bonecluster"
 	},
 	rareArtifacts = {
-		"stoneflower",
-		"shell",
+		"artifact_dwarfgalaxy",
+		"artifact_panacea",
 	},
 	veryRareArtifacts = {
-		"meatchunk",
+		"artifact_galaxy",
 	},
 }
 
@@ -102,15 +113,16 @@ PLUGIN.anomalydefs[6] = {
 	entityname = "anom_maysorubka_anomaly_type2",
 	interval = 128,	
 	commonArtifacts = {
-		"jellyfish",
-		"nightstar",
+		"artifact_mementomori",
+		"artifact_bolt",
+		"artifact_bonecluster"
 	},
 	rareArtifacts = {
-		"stoneflower",
-		"shell",
+		"artifact_mamasbeads",
+		"artifact_gaia",
 	},
 	veryRareArtifacts = {
-		"meatchunk",
+		"artifact_gmamasbeads",
 	},
 }
 
@@ -119,16 +131,17 @@ PLUGIN.anomalydefs[7] = {
 	entityname = "anom_voronka_anomaly",
 	interval = 256,
 	commonArtifacts = {
-		"wrenched",
-		"jellyfish",
-		"stoneblood",
+		"artifact_mementomori",
+		"artifact_thorn",
+		"artifact_bolt",
+		"artifact_bonecluster"
 	},
 	rareArtifacts = {
-		"meatchunk",
-		"shell",
+		"artifact_urchin",
+		"artifact_kolobok",
 	},
 	veryRareArtifacts = {
-		"soul",
+		"artifact_arachno",
 	},
 }
 
@@ -137,15 +150,17 @@ PLUGIN.anomalydefs[8] = {
 	entityname = "anom_gazirovka_anomaly",
 	interval = 128,
 	commonArtifacts = {
-		"slime",
-		"stoneblood",
+		"artifact_mycelia",
+		"artifact_slime",
+		"artifact_bolt",
+		"artifact_bonecluster"
 	},
 	rareArtifacts = {
-		"meatchunk",
-		"slug",
+		"artifact_slug",
+		"artifact_cell",
 	},
 	veryRareArtifacts = {
-		"urchin",
+		"artifact_mica",
 	},
 }
 
@@ -154,15 +169,17 @@ PLUGIN.anomalydefs[9] = {
 	entityname = "anom_kisel_anomaly",
 	interval = 128,
 	commonArtifacts = {
-		"slime",
-		"stoneblood",
+		"artifact_cell",
+		"artifact_mementomori",
+		"artifact_bolt",
+		"artifact_bonecluster"
 	},
 	rareArtifacts = {
-		"meatchunk",
-		"slug",
+		"artifact_slug",
+		"artifact_cell",
 	},
 	veryRareArtifacts = {
-		"urchin",
+		"artifact_mica",
 	},
 }
 
@@ -171,17 +188,19 @@ PLUGIN.anomalydefs[10] = {
 	entityname = "anom_tramplin_anomaly",
 	interval = 1024,
 	commonArtifacts = {
-		"wrenched",
-		"stoneblood",
-		"meatchunk",
-		"sparkler",
+		"artifact_cell",
+		"artifact_mementomori",
+		"artifact_sparkler",
+		"artifact_bolt",
+		"artifact_bonecluster"
 	},
 	rareArtifacts = {
-		"soul",
-		"gravi",
-		"shell",
+		"artifact_slug",
+		"artifact_flash",
+		"artifact_slug",
 	},
 	veryRareArtifacts = {
-		"goldfish",
+		"artifact_mica",
+		"artifact_arachno",
 	},
 }
