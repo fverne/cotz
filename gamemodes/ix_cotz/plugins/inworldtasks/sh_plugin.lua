@@ -66,11 +66,19 @@ function ix.util.GetLongLatFromVector(pos)
 	--Zone: 51.1621 LAT 29.9575 LONG
 	--      51.4026 LAT 30.2735 LONG
 
+	local offsettable = {
+		["rp_marsh_cs"] 			= {0.0, 0.0},
+		["rp_waystation"] 			= {0.75, -1.2},
+		["rp_salvation_2_haven"] 	= {0.85, 0.8}
+	}
+
 	local xpos = pos[1]
 	local ypos = -pos[2]
 
-	local xposconv = ix.util.mapValueToRange(xpos, -8192, 8192, 51.1621, 51.4026)
-	local yposconv = ix.util.mapValueToRange(ypos, -8192, 8192, 29.9575, 30.2735)
+	local offset = offsettable[game.GetMap()] or {0.0, 0.0}
+
+	local xposconv = ix.util.mapValueToRange(xpos, -8192, 8192, 51.1621 + offset[1], 51.4026 + offset[1])
+	local yposconv = ix.util.mapValueToRange(ypos, -8192, 8192, 29.9575 + offset[2], 30.2735 + offset[2])
 
 	return {xposconv, yposconv}
 end
