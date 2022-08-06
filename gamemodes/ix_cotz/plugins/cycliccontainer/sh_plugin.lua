@@ -146,15 +146,15 @@ ix.command.Add("containercyclicaldisplay", {
 
 ix.command.Add("containercyclicalmakenocollide", {
 	adminOnly = true,
-	arguments = {
-		ix.type.string
-	},
 	OnRun = function(self, client, cyclgroup)
 		local trace = client:GetEyeTraceNoCursor()
 		local ent = trace.Entity
 
 		if (ent and ent:IsValid() and ent:GetClass() == "ix_container") then
-			ent:SetCollisionGroup(COLLISION_GROUP_IN_VEHICLE)
+			ent:SetCollisionGroup( COLLISION_GROUP_WORLD )
+        	ent.CollisionGroup = COLLISION_GROUP_WORLD
+			ent:GetPhysicsObject():EnableCollisions(false)
+
 			client:Notify("Storage made no-collide")
 			ix.plugin.list["containers"]:SaveContainer()
 		else

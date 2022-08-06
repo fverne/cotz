@@ -132,7 +132,7 @@ ix.container.Register("models/lostsignalproject/items/misc/damaged_ammo.mdl", {
 	height = 6
 })
 
-ix.container.Register("models/lostsignalproject/items/misc/damaged_ammo.mdl", {
+ix.container.Register("models/props_borealis/bluebarrel001.mdl", {
 	name = "Buried Barrel Cache",
 	description = "A barrel hidden in the ground.",
 	width = 6,
