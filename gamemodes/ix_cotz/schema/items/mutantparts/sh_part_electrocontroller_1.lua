@@ -5,7 +5,7 @@ ITEM.longdesc = "It seems like the fingerbones are a room-temperature supercondu
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 14500
-ITEM.pricepertier = 2500
+ITEM.price = 15500
+ITEM.pricepertier = 3500
 ITEM.baseweight = 0.600
 ITEM.varweight = 0.050

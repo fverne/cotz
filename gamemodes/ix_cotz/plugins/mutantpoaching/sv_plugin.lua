@@ -81,7 +81,7 @@ ix.poaching.MutantParts = {
 	},
 	["burer"] = {
 		["meattype"] = "meat_burer",
-		["parts"] = {{"part_burer_1", 45}, {"part_burer_2", 5}, {"hide_chimera", 2}},
+		["parts"] = {{"part_burer_1", 45}, {"part_burer_2", 5}, {"hide_burer", 2}},
 	},
 	["cat"] = {
 		["meattype"] = "meat_cat",
@@ -97,43 +97,43 @@ ix.poaching.MutantParts = {
 	},
 	["controller"] = {
 		["meattype"] = "meat_controller",
-		["parts"] = {{"part_controller", 20}, {"hide_controller", 3}},
+		["parts"] = {{"part_controller_1", 20}, {"part_controller_2", 4}, {"hide_controller", 3}},
 	},
 	["swampcontroller"] = {
-		["meattype"] = "meat_swampcontroller",
-		["parts"] = {{"part_swampcontroller", 20}, {"hide_swampcontroller", 3}},
+		["meattype"] = "meat_controller",
+		["parts"] = {{"part_swampcontroller_1", 20}, {"part_swampcontroller_2", 5}, {"hide_swampcontroller", 3}},
 	},
 	["electrocontroller"] = {
 		["meattype"] = "meat_controller",
-		["parts"] = {{"part_electrocontroller", 20}, {"hide_controller", 3}},
+		["parts"] = {{"part_electrocontroller_1", 20}, {"part_electrocontroller_2", 5}, {"hide_electrocontroller", 1}},
 	},
 	["bear"] = {
 		["meattype"] = "meat_bear",
 		["parts"] = {{"part_bear", 20}, {"hide_bear", 3}},
 	},
 	["skeleton"] = {
-		["meattype"] = "meat_skeleton",
-		["parts"] = {{"part_skeleton", 20}, {"hide_skeleton", 3}},
+		["meattype"] = "artifact_bonecluster",
+		["parts"] = {{"part_skeleton", 40}},
 	},
 	["pseudogiant"] = {
 		["meattype"] = "meat_pseudogiant",
 		["parts"] = {{"part_pseudogiant", 20}, {"hide_pseudogiant", 3}},
 	},
 	["pseudogiantfast"] = {
-		["meattype"] = "meat_pseudogiantfast",
-		["parts"] = {{"part_pseudogiantfast", 20}, {"hide_pseudogiantfast", 3}},
+		["meattype"] = "meat_pseudogiant",
+		["parts"] = {{"part_pseudogiant", 25}, {"hide_pseudogiant", 5}},
 	},
-	["hellhound"] = {
-		["meattype"] = "meat_hellhound",
-		["parts"] = {{"part_hellhound", 20}, {"hide_hellhound", 3}},
-	},
+	--["hellhound"] = { -- Commented out as hellhounds are 1:1 with dogs - not too smooth
+	--	["meattype"] = "meat_hellhound",
+	--	["parts"] = {{"part_hellhound", 20}, {"hide_hellhound", 3}},
+	--},
 	["electrochimera"] = {
-		["meattype"] = "meat_electrochimera",
-		["parts"] = {{"part_electrochimera", 20}, {"hide_electrochimera", 3}},
+		["meattype"] = "meat_chimera",
+		["parts"] = {{"part_chimera", 20}, {"artifact_moonlight", 45}, {"artifact_moonlight", 45}, {"artifact_moonlight", 45}, {"artifact_moonlight", 45}, {"hide_chimera", 3}},
 	},
 	["fastcontroller"] = {
-		["meattype"] = "meat_fastcontroller",
-		["parts"] = {{"part_fastcontroller", 20}, {"hide_fastcontroller", 3}},
+		["meattype"] = "meat_controller",
+		["parts"] = {{"part_controller_1", 20}, {"part_controller_2", 4}, {"hide_controller", 3}},
 	},
 	["tark"] = {
 		["meattype"] = "meat_tark",
@@ -145,7 +145,7 @@ ix.poaching.MutantParts = {
 	},
 	["spider"] = {
 		["meattype"] = "meat_spider",
-		["parts"] = {{"part_spider", 20}, {"hide_spider", 3}},
+		["parts"] = {{"part_spider", 20}, {"hide_spider", 8}},
 	},
 
 }
@@ -259,12 +259,10 @@ if SERVER then
                             local weight = ix.util.GetMutantMeatWeight(v, knifetier)
                             local dat = {}
 
-                            if (weight) then
-                                dat = {
-                                    ["weight"] = weight,
-                                    ["tier"] = knifetier
-                                }
-                            end
+                            dat = {
+                               	["weight"] = weight,
+                                ["tier"] = knifetier
+                            }
 
                             if (IsValid(client) and client:GetCharacter() and not inv:Add(v, 1, dat)) then
                                 ix.item.Spawn(v, position, nil, AngleRand(), dat)
