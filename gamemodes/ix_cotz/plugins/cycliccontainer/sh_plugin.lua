@@ -143,3 +143,22 @@ ix.command.Add("containercyclicaldisplay", {
 		end
 	end
 })
+
+ix.command.Add("containercyclicalmakenocollide", {
+	adminOnly = true,
+	arguments = {
+		ix.type.string
+	},
+	OnRun = function(self, client, cyclgroup)
+		local trace = client:GetEyeTraceNoCursor()
+		local ent = trace.Entity
+
+		if (ent and ent:IsValid() and ent:GetClass() == "ix_container") then
+			ent:SetCollisionGroup(COLLISION_GROUP_IN_VEHICLE)
+			client:Notify("Storage made no-collide")
+			ix.plugin.list["containers"]:SaveContainer()
+		else
+			client:NotifyLocalized("invalid", "Entity")
+		end
+	end
+})
