@@ -9,7 +9,7 @@ ix.randomitems.tables["cache_ammo_shotgun_tier2"] = {
   {500,  {"12gaugedt"}},
   {1000, {"12gaugesg"}},
   {750,  {"12gaugetr"}},
-  {750,  {"12gaugemg"}},
+  {500,  {"12gaugemg"}},
 }
 
 ix.randomitems.tables["cache_ammo_pistol_tier1"] = {
