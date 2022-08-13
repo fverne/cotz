@@ -215,7 +215,7 @@ function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 		entity:DamagePsyHealth(math.Clamp(dmgAmount *((100-psyResist)/100) ,0, 100))
 		dmgInfo:SetDamage(0)
 
-		if(entity:GetPsyHealth() < 0) then entity:Kill() end
+		if(entity:GetPsyHealth() < 0 and entity:Alive()) then entity:Kill() end
 	end
 end
 
