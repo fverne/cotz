@@ -2,7 +2,7 @@ PLUGIN.categoryDefs =
 {
 	["barrel_easy"] = {
 		appearTime = 600, -- Will be present for 600 +/- 10% of time
-		disappearTime = 10800, -- Will then be missing for 1800 +/- 10%
+		disappearTime = 10800, -- Will then be missing for 10800 +/- 10%
 		allowedStashTypes = {
 			"pistol_lo",
 			"pistol_mi",
@@ -38,7 +38,7 @@ PLUGIN.categoryDefs =
 		}
 	},
 	["cache_easy"] = {
-		appearTime = 1200,
+		appearTime = 600,
 		disappearTime = 15600,
 		allowedStashTypes = {
 			"weapons_cache_1",
@@ -50,7 +50,6 @@ PLUGIN.categoryDefs =
 			"consumable_cache",
 			"consumable_valueable_cache",
 			"valueable_cache_1",
-			"valueable_cache_artifact_1",
 			"valueable_cache_artifact_2",
 			"valueable_cache_artifact_3",
 			"contender"
@@ -77,7 +76,7 @@ PLUGIN.categoryDefs =
 		}
 	},
 	["cache_cbt"] = {
-		appearTime = 180,
+		appearTime = 300,
 		disappearTime = 25000,
 		allowedStashTypes = {
 			"weapons_cache_1",
