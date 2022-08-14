@@ -39,7 +39,7 @@ if SERVER then
 
 		for k, v in pairs( ents.FindByClass( "ix_container" ) ) do
 			if spawncnt >= ix.config.Get("containerSpawnMaxItemsPerRun", 10) then break end
-			if v:GetSpawnCategory() != nil then
+			if v:GetSpawnCategory() != "" then
 				if math.random(101) <= ix.config.Get("containerSpawnChanceFlat", 1) + (ix.config.Get("containerSpawnChanceScaling", 0.5) * player.GetCount()) then
 					local idat = ix.util.GetRandomItemFromPool(v:GetSpawnCategory())
 
