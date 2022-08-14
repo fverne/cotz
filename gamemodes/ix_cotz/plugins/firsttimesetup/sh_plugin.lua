@@ -91,6 +91,22 @@ ix.command.Add("FTSRunFirstTimeSetup", {
 	end
 })
 
+ix.command.Add("FTSShowContainerSpawns", {
+	adminOnly = true,
+	arguments = bit.bor(ix.type.bool, ix.type.optional),
+	OnRun = function(self, client, override)
+		if SERVER then
+			local containers = {}
+			for k, v in pairs( ix.plugin.list["firsttimesetup"].map_presets["rp_marsh_cs"].containers ) do
+				table.insert(containers, v.position)
+			end
+
+			netstream.Start(client, "ix_DisplayFTSContainers", containers)
+			client:Notify( "Displayed All Points for 10 secs." )
+		end
+	end
+})
+
 if (CLIENT) then
 	netstream.Hook("ix_clientSidePrintContainerVars", function(data)
 		print("-----------------CONTAINER VARS START-----------------")
@@ -102,5 +118,20 @@ if (CLIENT) then
 		print("      cyclicalCategory = \""..data.cyclicalCategory.."\",")
 		print("    },")
 		print("-----------------CONTAINER VARS END-----------------")
+	end)
+
+	netstream.Hook("ix_DisplayFTSContainers", function(data)
+		for k, v in pairs(data) do
+			local emitter = ParticleEmitter( v )
+			local smoke = emitter:Add( "sprites/glow04_noz", v )
+			smoke:SetVelocity( Vector( 0, 0, 1 ) )
+			smoke:SetDieTime(10)
+			smoke:SetStartAlpha(255)
+			smoke:SetEndAlpha(255)
+			smoke:SetStartSize(64)
+			smoke:SetEndSize(64)
+			smoke:SetColor(255,186,50)
+			smoke:SetAirResistance(300)
+		end
 	end)
 end
