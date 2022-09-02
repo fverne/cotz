@@ -1495,7 +1495,11 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
     -- Misc end
   },
   vendors = {
-
+    {
+      template = "technpc",
+      position = Vector(-6006.653809, -11071.930664, 5026.031250),
+      angles = Angle(0,-177.793,0)
+    }
   },
 }
 
