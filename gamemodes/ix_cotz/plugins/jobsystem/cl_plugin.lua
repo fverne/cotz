@@ -59,7 +59,7 @@ if(CLIENT) then
 			self.index.icon:SetSize(128, 48)
 
 			self.index.description = self.index:Add("DLabel")
-			self.index.description:SetText(string.format(job.name or "%d Unknown", job.numberRec))
+			self.index.description:SetText(string.format(job.name or "%d Unknown", v.numberRec))
 			self.index.description:Dock(TOP)
 			self.index.description:DockMargin(self.index:GetWide()*0.1, self.index:GetTall()*0.05, 0, self.index:GetTall()*0.05)
 			self.index.description:SetFont("ixGenericFont")
@@ -208,4 +208,16 @@ if(CLIENT) then
 	end
 
 	vgui.Register("ixCharacterJournalPanel", PANEL, "DPanel")
+
+	netstream.Hook("ix_COTZPlayPDASound", function(data)
+		if (data) then
+			if data == 1 then -- Completed Job
+				surface.PlaySound( "stalkersound/pda/pda.wav" )
+			end
+			if data == 2 then -- Got/Update Job
+				surface.PlaySound( "stalkersound/pda/pda_update.wav" )
+			end
+		end
+
+	end)
 end

@@ -164,9 +164,11 @@ if SERVER then
           curJobs[k].progress = curJobs[k].progress + 1
           if curProgress+1 == curMax then
             curJobs[k].isCompleted = true
+            netstream.Start(self, "ix_COTZPlayPDASound", 2)
           end
         else
           curJobs[k].isCompleted = true
+          netstream.Start(self, "ix_COTZPlayPDASound", 2)
         end
       end
     end
@@ -232,6 +234,7 @@ if SERVER then
         if(ix.jobs.list[identifier].OnTaskComplete)then
           ix.jobs.list[identifier].OnTaskComplete(self)
         end
+        netstream.Start(self, "ix_COTZPlayPDASound", 1)
 
         self:GetCharacter():SetJobs(curJobs)
       end
@@ -266,6 +269,8 @@ if SERVER then
     if(ix.jobs.list[identifier].OnTaskGet)then
       ix.jobs.list[identifier].OnTaskGet(self)
     end
+
+    netstream.Start(self, "ix_COTZPlayPDASound", 2)
 
     self:GetCharacter():SetJobs(curJobs)
   end
