@@ -403,7 +403,7 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 			if(CLIENT)then
 				self.response = string.format("Nice work, this %s will help our cause.", ix.item.list[dyndata.itemid].name)
 			else
-				if ix.progression.IsActive("technutItemDelivery_Main") then
+				if ix.progression.IsActive(dyndata.progid) then
 					
 					local item = player:GetCharacter():GetInventory():HasItem(dyndata.itemid)
 
@@ -421,7 +421,7 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 							item:Remove()
 						end
 
-						ix.progression.AddComplexProgressionValue("technutItemDelivery_Main", dyndata.itemid, player:Name())
+						ix.progression.AddComplexProgressionValue(dyndata.progid, dyndata.itemid, player:Name())
 					end
 				end
 			end	
@@ -454,13 +454,13 @@ DIALOGUE.addTopic("ViewProgression", {
 				local curcnt = 0
 				if(progstatus and progstatus[progitem]) then curcnt = progstatus[progitem] end
 
-				if(curcnt < cnt)then
+				if(curcnt < cnt and client:GetCharacter():GetInventory():HasItem(progitem))then
 					table.insert(missingitems, progitem)
 				end
 			end
 
 			for _, progitem in pairs(missingitems) do
-				table.insert(dynopts, {statement = ix.item.list[progitem].name, topicID = "ViewProgression", dyndata = {itemid = progitem}})
+				table.insert(dynopts, {statement = "Hand over "..ix.item.list[progitem].name, topicID = "ViewProgression", dyndata = {progid = identifier, itemid = progitem}})
 			end
 		end
 
@@ -490,7 +490,6 @@ DIALOGUE.addTopic("ViewProgression", {
 	end,
 })
 
-
 DIALOGUE.addTopic("AboutProgression", {
 	statement = "What do you need help with?",
 	response = "I have a few things I need done.",
@@ -510,10 +509,6 @@ DIALOGUE.addTopic("AboutProgression", {
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
-
-		local test = ix.progression.GetActiveProgressions("'Technut'")
-
-		PrintTable(test)
 
 		for _, progid in pairs(ix.progression.GetActiveProgressions("'Technut'")) do
 			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})

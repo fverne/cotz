@@ -469,16 +469,98 @@ DIALOGUE.addTopic("ViewProgression", {
 	options = {
 		"BackTopic"
 	},
+
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		--disgusting
+		--local identifier = player:GetCharacter():GetData("curdialogprog")
+		local identifier 	= self.tmp
+		self.tmp = nil
+		local progstatus 	= ix.progression.GetComplexProgressionValue(identifier)
+		local progdef 		= ix.progression.definitions[identifier]
+		if(progdef.fnAddComplexProgression)then
+			local progitems 	= progdef.GetItemIds()
+			local missingitems  = {}
+
+			for progitem,cnt in pairs(progitems) do
+				local curcnt = 0
+				if(progstatus and progstatus[progitem]) then curcnt = progstatus[progitem] end
+
+				if(curcnt < cnt and client:GetCharacter():GetInventory():HasItem(progitem))then
+					table.insert(missingitems, progitem)
+				end
+			end
+
+			for _, progitem in pairs(missingitems) do
+				table.insert(dynopts, {statement = "Hand over "..ix.item.list[progitem].name, topicID = "ViewProgression", dyndata = {progid = identifier, itemid = progitem}})
+			end
+		end
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+
+		-- Return the next topicID
+		return "HandInComplexProgressionItemTopic", dyndata
+	end,
+
 	IsDynamicFollowup = true,
 	DynamicPreCallback = function(self, player, target, dyndata)
-		if (dyndata and CLIENT) then
-			local progstatus 	= ix.progression.status[dyndata.identifier]
-			local progdef 		= ix.progression.definitions[dyndata.identifier]
-			self.response = progdef.BuildResponse(progdef, progstatus)
+		if (dyndata) then
+			if(CLIENT)then
+				local progstatus 	= ix.progression.status[dyndata.identifier]
+				local progdef 		= ix.progression.definitions[dyndata.identifier]
+
+				self.response = progdef.BuildResponse(progdef, progstatus)
+				self.tmp = dyndata.identifier
+			end
 		end
 	end,
 })
 
+DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	options = {
+		"BackTopic"
+	},
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if (dyndata) then
+			if(CLIENT)then
+				self.response = string.format("Nice work, this %s will help our cause.", ix.item.list[dyndata.itemid].name)
+			else
+				if ix.progression.IsActive(dyndata.progid) then
+					
+					local item = player:GetCharacter():GetInventory():HasItem(dyndata.itemid)
+
+					if(item)then
+						--Adds reward
+						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item)
+						player:addReputation(repReward)
+						ix.dialogue.notifyReputationReceive(player, repReward)
+						player:GetCharacter():GiveMoney(monReward)
+						ix.dialogue.notifyMoneyReceive(player, monReward)
+
+						if(item:GetData("quantity", 0) > 1) then
+							item:SetData("quantity", item:GetData("quantity",0) - 1)
+						else
+							item:Remove()
+						end
+
+						ix.progression.AddComplexProgressionValue(dyndata.progid, dyndata.itemid, player:Name())
+					end
+				end
+			end	
+		end
+	end,
+} )
 
 DIALOGUE.addTopic("AboutProgression", {
 	statement = "What do you need help with?",
