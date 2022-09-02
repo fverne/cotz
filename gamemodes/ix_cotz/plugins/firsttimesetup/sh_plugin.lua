@@ -18,7 +18,7 @@ if SERVER then
 
 		-- Spawn vendors
 		for _, vendordata in pairs(self.map_presets[game.GetMap()].vendors) do
-			self:SpawnContainer(vendordata)
+			self:SpawnVendor(vendordata)
 		end
 	end
 
@@ -43,7 +43,7 @@ if SERVER then
 	end
 
 	function PLUGIN:SpawnVendor(vendordata)
-
+		ix.util.SpawnAdvVendor(vendordata.template, vendordata.position, vendordata.angles)
 	end
 
 	function PLUGIN:SaveData()
