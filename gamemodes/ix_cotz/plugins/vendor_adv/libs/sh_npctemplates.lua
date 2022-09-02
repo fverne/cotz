@@ -63,10 +63,6 @@ ix.npctemplates.templates["technpc"] = {
 		["binoculars_5"] 	= { nil, 5, SELLANDBUY, 5, 3, 1 },
 
 		["food_nuts_1"] 	= { nil, 20, SELLANDBUY, 20, 12, 5 },
-
-		["steelplate_1"] 	= { nil, 1, SELLANDBUY, 1, 3, 1 },
-		["ceramicplate_1"] 	= { nil, 1, SELLANDBUY, 1, 3, 1 },
-		["fabricplate_1"] 	= { nil, 1, SELLANDBUY, 1, 3, 1 },
 	},
 }
 
