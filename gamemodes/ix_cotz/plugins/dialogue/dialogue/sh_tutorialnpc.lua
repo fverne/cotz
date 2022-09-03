@@ -6,6 +6,7 @@ DIALOGUE.addTopic("GREETING", {
 		"TradeTopic",
 		"StorageTopic",
 		"TutorialTopic",
+		"NicknameTopic",
 		"BackgroundTopic",
 		"AboutWorkTopic",
 		"GetTask",
@@ -219,6 +220,29 @@ DIALOGUE.addTopic("NotEnoughMoneyStorage", {
 	options = {
 		"BackTopic"
 	}
+})
+
+DIALOGUE.addTopic("NicknameTopic", {
+	statement = "I'd like to change my nickname.",
+	response = "What would you like your nickname to be?",
+	options = {
+		"BackTopic",
+	},
+	preCallback = function(self, client, target)
+		if CLIENT then
+			Derma_StringRequest(
+				"Edit Nickname", 
+				"Edit your nickname. Length must be between 4 and 16 characters.",
+				"",
+				function(text) netstream.Start("ix_requestNicknameChange", text) end,
+				function(text) client:Notify("Nickname change cancelled.") end
+			)
+
+		end
+	end,
+	ShouldAdd = function()
+		return LocalPlayer():getReputation() >= 1943
+	end
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
@@ -607,6 +631,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"TradeTopic",
 		"StorageTopic",
 		"TutorialTopic",
+		"NicknameTopic",
 		"BackgroundTopic",
 		"AboutWorkTopic",
 		"GetTask",

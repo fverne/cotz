@@ -56,6 +56,21 @@ if (SERVER) then
 
 		topic.DynamicPreCallback(topic, client, target, dyndata)
 	end)
+
+	netstream.Hook("ix_requestNicknameChange", function(client, requestedNickname)
+		if client and client:getReputation() >= 1943 then
+			if string.len(requestedNickname) == 0 then
+				client:GetCharacter():SetNickname(nil)
+				client:Notify("Nickname removed.")
+			elseif string.len(requestedNickname) <= 16 and string.len(requestedNickname) >= 4 then
+				client:GetCharacter():SetNickname(nil)
+				client:GetCharacter():SetNickname(requestedNickname)
+				client:Notify("Nickname changed to "..requestedNickname)
+			else 
+				client:Notify("Invalid nickname length.")
+			end
+		end
+	end)
 end
 
 local playerMeta = FindMetaTable("Player")
