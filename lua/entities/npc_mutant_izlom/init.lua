@@ -131,7 +131,7 @@ function ENT:STALKERNPCThink()
 	if (self.pulling1 < CurTime()) and self.isAttacking == 1 and self:GetEnemy() then
 		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
 		local dirnormal =((self:GetPos() + self:OBBCenter()) - (self:GetEnemy():GetPos())):GetNormal()
-		dirnormal[3] = 0.25
+		dirnormal[3] = 0.38
 
 		self:GetEnemy():SetVelocity((dirnormal*(distance*1.5)))
 
