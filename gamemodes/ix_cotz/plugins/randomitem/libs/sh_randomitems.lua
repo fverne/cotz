@@ -99,3 +99,6 @@ ix.util.Include("stash_tier_3.lua","shared")
 ix.util.Include("cache_ammo.lua","shared")
 ix.util.Include("cache_weapons.lua","shared")
 ix.util.Include("cache_misc.lua","shared")
+
+ix.util.Include("specialsale_raritynpc.lua","shared")
+ix.util.Include("specialsale_owlnpc.lua","shared")

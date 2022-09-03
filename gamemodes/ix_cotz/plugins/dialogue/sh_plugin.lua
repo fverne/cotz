@@ -88,3 +88,8 @@ if(CLIENT) then
 		end
 	end)
 end
+
+ix.config.Add("specialSaleCooldown", 21600, "The cooldown for various specialsales to refresh their stocks.", nil, {
+	data = {min = 0, max = 604800},
+	category = "Town NPCs",
+})
