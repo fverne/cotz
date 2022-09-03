@@ -194,7 +194,7 @@ function PANEL:prepareOptions(options)
 	self.buttonList = {}
 	for k, topicID in ipairs(options) do
 		topic = self.tree[topicID]
-		if (topic.statement != "") then
+		if (topic.statement != "" and topic:ShouldAdd()) then
 			self.buttonList[k] = self.options:Add("DLabel")
 			self.buttonList[k]:Dock(TOP)
 			self.buttonList[k]:DockMargin(4, 0, 4, 4)
@@ -246,22 +246,25 @@ function PANEL:prepareDynamicOptions(dynopts, normalopts)
 	for k, topicID in ipairs(normalopts) do
 		local index = nButs + k
 		topic = self.tree[topicID]
-		self.buttonList[index] = self.options:Add("DLabel")
-		self.buttonList[index]:Dock(TOP)
-		self.buttonList[index]:DockMargin(4, 0, 4, 4)
-		self.buttonList[index]:SetText(topic.statement)
-		self.buttonList[index]:SetTextColor(Color(20, 20, 20, 255))
-		self.buttonList[index]:SetFont("ixSmallFont")
-		self.buttonList[index]:SetMouseInputEnabled(true)
-		self.buttonList[index].Think = function()
-			if self.buttonList[index]:IsHovered() then
-				self.buttonList[index]:SetTextColor(Color(255, 255, 255))
-			else
-				self.buttonList[index]:SetTextColor(Color(220, 220, 220))
+		if(topic:ShouldAdd())then
+			self.buttonList[index] = self.options:Add("DLabel")
+			self.buttonList[index]:Dock(TOP)
+			self.buttonList[index]:DockMargin(4, 0, 4, 4)
+			self.buttonList[index]:SetText(topic.statement)
+			self.buttonList[index]:SetTextColor(Color(20, 20, 20, 255))
+			self.buttonList[index]:SetFont("ixSmallFont")
+			self.buttonList[index]:SetMouseInputEnabled(true)
+			self.buttonList[index].Think = function()
+				if self.buttonList[index]:IsHovered() then
+					self.buttonList[index]:SetTextColor(Color(255, 255, 255))
+				else
+					self.buttonList[index]:SetTextColor(Color(220, 220, 220))
+				end
 			end
-		end
-		self.buttonList[index].DoClick = function()
-			self:startTopic(topicID)
+
+			self.buttonList[index].DoClick = function()
+				self:startTopic(topicID)
+			end
 		end
 	end
 end

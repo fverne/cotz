@@ -22,7 +22,8 @@ function ix.dialogue.LoadFromDir(directory)
 					GetDynamicOptions = data.GetDynamicOptions,
 					ResolveDynamicOption = data.ResolveDynamicOption,
 					IsDynamicFollowup = data.IsDynamicFollowup or false,
-					DynamicPreCallback = data.DynamicPreCallback
+					DynamicPreCallback = data.DynamicPreCallback,
+					ShouldAdd = data.ShouldAdd or function() return true end
 				}
 
 				DIALOGUE.tree[topicID] = topicData

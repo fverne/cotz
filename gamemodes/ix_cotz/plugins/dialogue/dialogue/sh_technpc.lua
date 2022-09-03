@@ -66,6 +66,7 @@ DIALOGUE.addTopic("RepairItems", {
 	options = {
 		"BackTopic"
 	},
+	--ShouldAdd = function() return ix.GetProgression("funy") end,
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
 
