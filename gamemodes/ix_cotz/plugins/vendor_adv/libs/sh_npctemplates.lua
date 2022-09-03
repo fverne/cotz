@@ -274,7 +274,7 @@ ix.npctemplates.templates["stalkernetnpc"] = {
 
 ix.npctemplates.templates["ecologistnpc"] = {
 	name 		= "'Egghead'",
-	description = "The coat-clad scientist looks at you with respite.",
+	description = "The coat-clad scientist looks at you with a relaxed look.",
 	model 		= "models/legends/ozerskiy.mdl",
 	skin 		= 0,
 	bubble 		= 0,

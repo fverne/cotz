@@ -11,7 +11,7 @@ DIALOGUE.addTopic("GREETING", {
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"scanareaeasy", "scanareamed", "electronics"}, 4)
+		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"scanarea", "electronics"}, 4)
 	end
 })
 
@@ -364,7 +364,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"scanareaeasy", "scanareamed", "electronics"}, 4)
+		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"scanarea", "electronics"}, 4)
 	end
 })
 

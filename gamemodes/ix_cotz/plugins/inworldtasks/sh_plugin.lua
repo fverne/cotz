@@ -59,6 +59,18 @@ function ix.util.GetRandomTaskPoint()
 	return allpts[ math.random( #allpts ) ][1]
 end
 
+function ix.util.GetDataSearchColors(n)
+	local colors = {"green", "blue", "red", "yellow", "purple", "orange"}
+	local ret = {}
+
+	table.Shuffle(colors)
+
+	if (n > 6) then n = 6 end
+	for i = 1,n do
+		ret[i] = colors[i]
+	end
+
+	return ret
 end
 
 function ix.util.GetLongLatFromVector(pos)
@@ -115,4 +127,38 @@ function ix.util.GetHeadingFromAngle(ang)
 	end
 
 	return str
+end
+
+function PLUGIN:SaveData()
+		local pcs = {}
+
+		for _, entity in ipairs(ents.FindByClass("ix_dataextractpc")) do
+			pcs[#pcs + 1] = {
+				pos = entity:GetPos(),
+				angles = entity:GetAngles(),
+			}
+		end
+
+		local data = {}
+		data.pcs = pcs
+
+		self:SetData(data)
+	end
+
+	function PLUGIN:LoadData()
+		for _, v in ipairs(self:GetData().pcs or {}) do
+			local entity = ents.Create("ix_dataextractpc")
+			entity:SetPos(v.pos)
+			entity:SetAngles(v.angles)
+			entity:Spawn()
+
+			local physObj = entity:GetPhysicsObject()
+
+			if (IsValid(physObj)) then
+				physObj:EnableMotion(false)
+				physObj:Sleep()
+			end
+		end
+	end
+
 end
