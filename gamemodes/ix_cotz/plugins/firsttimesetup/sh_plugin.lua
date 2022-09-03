@@ -29,7 +29,15 @@ if SERVER then
 		container:SetModel(containerdata.model)
 		container:SetSpawnCategory(containerdata.spawnCategory)
 		container:SetCyclicalCategory(containerdata.cyclicalCategory)
+
 		container:Spawn()
+
+		local physObject = container:GetPhysicsObject()
+
+		if (IsValid(physObject)) then
+			physObject:Sleep()
+			physObject:EnableMotion(false)
+		end
 
 		ix.inventory.New(0, "container:" .. containerdata.model:lower(), function(inventory)
 			-- we'll technically call this a bag since we don't want other bags to go inside
@@ -40,6 +48,12 @@ if SERVER then
 				container:SetInventory(inventory)
 			end
 		end)
+
+		if(containerdata.model == "models/props_borealis/bluebarrel001.mdl")then
+			container:SetCollisionGroup( COLLISION_GROUP_WORLD )
+        	container.CollisionGroup = COLLISION_GROUP_WORLD
+			container:GetPhysicsObject():EnableCollisions(false)
+		end
 	end
 
 	function PLUGIN:SpawnVendor(vendordata)

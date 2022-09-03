@@ -75,7 +75,8 @@ if (SERVER) then
 						v:GetDisplayName(),
 						v:GetMoney(),
 						v:GetSpawnCategory(),
-						v:GetCyclicalCategory()
+						v:GetCyclicalCategory(),
+						v:GetPhysicsObject():IsCollisionEnabled()
 					}
 				end
 			else
@@ -150,6 +151,12 @@ if (SERVER) then
 
 					if (v[9]) then
 						entity:SetCyclicalCategory(v[9])
+					end
+
+					if (v[10]) then
+						entity:SetCollisionGroup( COLLISION_GROUP_WORLD )
+        				entity.CollisionGroup = COLLISION_GROUP_WORLD
+						entity:GetPhysicsObject():EnableCollisions(false)
 					end
 
 					ix.inventory.Restore(inventoryID, data2.width, data2.height, function(inventory)
