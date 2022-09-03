@@ -142,7 +142,7 @@ PLUGIN.eventdefs["bloodsucker3"] = {
 	},
 	
 	pdabroadcast = "A group of stalkers %s has been massacred by a small pack of bloodsuckers, be careful, stalkers.",
-	difficulty = {3, 4},
+	difficulty = {4, 5},
 	lootChance = 15, 
 }
 
@@ -538,7 +538,7 @@ PLUGIN.eventdefs["burer1"] = {
 		{"npc_mutant_burer", 1}, 
 	},
 	pdabroadcast = "A burer has been spotted %s! Watch out for any figure in a trenchcoat, stalker.",
-	difficulty = {2, 4, 6},
+	difficulty = {3, 4, 6},
 	lootChance = 10, 
 }
 
@@ -548,7 +548,7 @@ PLUGIN.eventdefs["burer2"] = {
 		{"npc_mutant_classiczombie", 2}, 
 	},
 	pdabroadcast =  "A burer has been spotted %s! Watch out for any figure in a trenchcoat, stalker.",
-	difficulty = {4, 6},
+	difficulty = {3, 6},
 	lootChance = 15, 
 }
 
@@ -557,7 +557,7 @@ PLUGIN.eventdefs["burer3"] = {
 		{"npc_mutant_burer", 3}, 
 	},
 	pdabroadcast = "A trio of burers has been spotted %s! Avoid any hooded figures, stalkers.",
-	difficulty = {6},
+	difficulty = {5},
 	lootChance = 20, 
 }
 
