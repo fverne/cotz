@@ -5,7 +5,7 @@ ITEM.model = "models/lostsignalproject/items/quest/keycard.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 0
+ITEM.price = 15000
 ITEM.weight = 0.01
 
 ITEM.exRender = true
