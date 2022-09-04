@@ -92,9 +92,9 @@ ix.util.Include("reward_generic_valuable.lua","shared")
 ix.util.Include("event_anomaly_burner.lua","shared")
 ix.util.Include("event_anomaly_redrazor.lua","shared")
 
-ix.util.Include("hidestash_tier_1.lua","shared")
-ix.util.Include("hidestash_tier_2.lua","shared")
-ix.util.Include("hidestash_tier_3.lua","shared")
+ix.util.Include("stash_tier_1.lua","shared")
+ix.util.Include("stash_tier_2.lua","shared")
+ix.util.Include("stash_tier_3.lua","shared")
 
 ix.util.Include("cache_ammo.lua","shared")
 ix.util.Include("cache_weapons.lua","shared")

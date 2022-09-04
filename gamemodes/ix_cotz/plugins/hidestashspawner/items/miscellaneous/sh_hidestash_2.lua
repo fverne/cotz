@@ -5,7 +5,7 @@ ITEM.height = 1
 ITEM.description = "The PDA of a lost stalker. It looks new, and did probably belong to a rookie STALKER."
 ITEM.price = 2500
 ITEM.flag = "A"
-ITEM.CustomSpawngroup = "hidestash_tier_2"
+ITEM.CustomSpawngroup = "stash_tier_2"
 ITEM.moneyinterval = {200, 400}
 
 function ITEM:GetDescription()
