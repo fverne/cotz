@@ -1,30 +1,40 @@
-ITEM.name = "kit_hidestash_1"
-ITEM.description= "test item"
-ITEM.model = "models/lostsignalproject/items/misc/kithunt.mdl"
+ITEM.name = "Tourist Stalkers Backpack"
+ITEM.description= "A small rugged backpack."
+ITEM.model = "models/lostsignalproject/items/misc/backpack.mdl"
 
 ITEM.width = 3
 ITEM.height = 2
 
 ITEM.weight = 4
 
+ITEM.exRender = true 
+ITEM.iconCam = {
+	pos = Vector(0, 0, 200),
+	ang = Angle(90, 90, 0),
+	fov = 8.8235294117647,
+}
+
 ITEM.items = {
 	{
 		{1, "reward_consumable"},
 	},
 	{
-		{1, "reward_consumable"},
-	},
-	{
-		{1, "reward_consumable"},
-	},
-	{
-		{1, "reward_consumable"},
+		{2, "cache_ammo_pistol_tier1"},
+		{1, "cache_ammo_shotgun_tier1"},
 	},
 	{
 		{1, "reward_aid_low"},
 	},
 	{
+		{2, "reward_consumable"},
 		{1, "reward_aid_low"},
+	},
+	{
+		{4, "worldspawn_1"},
+		{1, "cache_artifact_tier1"},
+	},
+	{
+		{1, "worldspawn_1"},
 	},
 }
 
