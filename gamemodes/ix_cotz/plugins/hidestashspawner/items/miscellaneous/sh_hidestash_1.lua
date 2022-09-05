@@ -5,7 +5,7 @@ ITEM.height = 1
 ITEM.description = "The note looks crumbled and dirty."
 ITEM.price = 500
 ITEM.flag = "A"
-ITEM.CustomSpawngroup = "stash_tier_1"
+ITEM.CustomSpawngroup = "hidestash_tier_1"
 
 ITEM.exRender = true
 ITEM.iconCam = {
