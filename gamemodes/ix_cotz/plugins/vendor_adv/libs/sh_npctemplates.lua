@@ -14,6 +14,7 @@ ix.npctemplates.animtemplatestranslation[3] = "Guard"
 ix.npctemplates.animtemplatestranslation[4] = "sitchair"
 ix.npctemplates.animtemplatestranslation[5] = "banditidle"
 ix.npctemplates.animtemplatestranslation[6] = "monolithidle"
+ix.npctemplates.animtemplatestranslation[7] = "idle_idle"
 
 ix.npctemplates.templates["owlnpc"] = {
 	name 		= "'Cleaner'",
@@ -369,6 +370,21 @@ ix.npctemplates.templates["raritynpc"] = {
 	},
 }
 
+ix.npctemplates.templates["computernpc"] = {
+	name 		= "'Computer'",
+	description = "The computer buzzes and beeps intermittently.",
+	model 		= "models/props_lab/servers.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.4,
+	dialogueid 	= "computernpc",
+	soundgroup 	= "computer_beep",
+	idleanim 	= "idle",
+	animgroup 	= 7,
+	items = {
+	},
+}
+
 -- No sounds emitted
 ix.npctemplates.soundtemplates["nosound"] = {
 	"stalkersound/inv_nosound.mp3",
@@ -436,6 +452,11 @@ ix.npctemplates.soundtemplates["bodyguardnpc"] = {
 	"npc/garyk/bar_guard_stop_3.ogg",
 }
 
+ix.npctemplates.soundtemplates["computer_beep"] = {
+	"ambient/levels/labs/equipment_beep_loop1.wav",
+	"ambient/levels/canals/generator_ambience_loop1.wav",
+}
+
 ix.npctemplates.animtemplates["TestAnimations"] = {
 	"bandit2_idle1",
 	"bandit2_idle3",
@@ -464,4 +485,8 @@ ix.npctemplates.animtemplates["banditidle"] = {
 
 ix.npctemplates.animtemplates["monolithidle"] = {
 	"trans_idle3",
+}
+
+ix.npctemplates.animtemplates["idle_idle"] = {
+	"idle",
 }
