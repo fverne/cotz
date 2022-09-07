@@ -24,10 +24,13 @@ function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
 	timer.Simple(0, function()
 		if (IsValid(client)) then
 
+			-- simplecrossserver
 			local xserverpos = character:GetData("newpos")
 			if(xserverpos) then
 				if (xserverpos[3] and xserverpos[3]:lower() == game.GetMap():lower()) then
-					-- Restore the player to that position.
+					-- Restore the player to that position
+					-- height reduced slightly to account for getpos offset
+					xserverpos[1].z = xserverpos[1].z-16
 					client:SetPos(xserverpos[1].x and xserverpos[1] or client:GetPos())
 					client:SetEyeAngles(xserverpos[2].p and xserverpos[2] or angle_zero)
 				end
