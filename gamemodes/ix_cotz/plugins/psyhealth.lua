@@ -2,7 +2,7 @@ PLUGIN.name = "PsyHealth System"
 PLUGIN.author = "gumlefar"
 PLUGIN.description = "A PsyHealth system akin to the STALKER games."
 
-ix.config.Add("PsyHealthRecoverTime", 600, "How many seconds it takes to restore 1 percent PsyHealth.", nil, {
+ix.config.Add("PsyHealthRecoverTime", 30, "How many seconds it takes to restore 1 percent PsyHealth.", nil, {
 	data = {min = 30, max = 3600},
 	category = "Player"
 })
@@ -83,7 +83,7 @@ if SERVER then
 
 	function PLUGIN:PlayerTick(ply)
 		if ply:GetNetVar("psyhealthtick", 0) <= CurTime() then
-			ply:SetNetVar("psyhealthtick", ix.config.Get("PsyHealthRecoverTime", 600) + CurTime())
+			ply:SetNetVar("psyhealthtick", ix.config.Get("PsyHealthRecoverTime", 30) + CurTime())
 			ply:TickPsyHealth(1)
 		end
 	end
@@ -146,12 +146,14 @@ function PLUGIN:PreDrawHUD()
 			[ "$pp_colour_addb" ] = 0.3*(psydmg*2),
 			[ "$pp_colour_brightness" ] = -0.33*(psydmg*2),
 			[ "$pp_colour_contrast" ] = 1-(0.22*(psydmg*2)),
-			[ "$pp_colour_colour" ] = 1-(0.7*(psydmg*2)),
+			[ "$pp_colour_colour" ] = 1-(0.5*(psydmg*2)),
 		}
 
 		DrawColorModify( tab )
 
-		DrawMotionBlur( 0.3, 0.9*(psydmg*2), 0.001 )
+		DrawMotionBlur( 0.3, 0.3*(psydmg*2), 0.001 )
+
+		DrawMaterialOverlay( "effects/water_warp01", math.sin(CurTime()) * psydmg * 0.1 )
 
 		if psydmgPre > 75 then
 			local shakeval = ix.util.mapValueToRange(psydmg,0.75,1,0,1)
@@ -169,7 +171,7 @@ function PLUGIN:PreDrawHUD()
 			surface.SetMaterial( TEMP_BLUR )
 
 			for i = 1, 3 do
-				TEMP_BLUR:SetFloat("$blur", (psydmg*3)*i)
+				TEMP_BLUR:SetFloat("$blur", (psydmg*1.5)*i)
 				TEMP_BLUR:Recompute()
 				render.UpdateScreenEffectTexture()
 				surface.DrawTexturedRect(x * -1, y * -1, scrW, scrH)
@@ -213,7 +215,7 @@ function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 		entity:DamagePsyHealth(math.Clamp(dmgAmount *((100-psyResist)/100) ,0, 100))
 		dmgInfo:SetDamage(0)
 
-		if(entity:GetPsyHealth() < 0) then entity:Kill() end
+		if(entity:GetPsyHealth() < 0 and entity:Alive()) then entity:Kill() end
 	end
 end
 

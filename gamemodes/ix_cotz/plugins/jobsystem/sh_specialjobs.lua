@@ -37,13 +37,13 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 35
   tempJob.moneyReward = { 4000, 6000 }
-  tempJob.categories = {"scanareaeasy"}
+  tempJob.categories = {"scanarea"}
   tempJob.OnTaskGet = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete", ["map"] = game.GetMap()} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -84,13 +84,13 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 35
   tempJob.moneyReward = { 4000, 6000 }
-  tempJob.categories = {"scanareaeasy"}
+  tempJob.categories = {"scanarea"}
   tempJob.OnTaskGet = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete", ["map"] = game.GetMap()} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -131,13 +131,13 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 50
   tempJob.moneyReward = { 7000, 9000 }
-  tempJob.categories = {"scanareamed"}
+  tempJob.categories = {"scanarea"}
   tempJob.OnTaskGet = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete", ["map"] = game.GetMap()} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -178,13 +178,13 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 50
   tempJob.moneyReward = { 7000, 9000 }
-  tempJob.categories = {"scanareamed"}
+  tempJob.categories = {"scanarea"}
   tempJob.OnTaskGet = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete", ["map"] = game.GetMap()} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -225,13 +225,13 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 75
   tempJob.moneyReward = { 10000, 15000 }
-  tempJob.categories = {"scanareahigh"}
+  tempJob.categories = {"scanarea"}
   tempJob.OnTaskGet = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = game.GetMap()} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -272,13 +272,13 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 75
   tempJob.moneyReward = { 10000, 15000 }
-  tempJob.categories = {"scanareahigh"}
+  tempJob.categories = {"scanarea"}
   tempJob.OnTaskGet = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete"} )
+        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = game.GetMap()} )
         ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
       end
     end
@@ -306,6 +306,146 @@ do
 
   tempJob = nil
 
+  --Extract data from 2 PCs
+  local tempJob = {}
+
+  tempJob.name = "Extract data from 2 PCs."
+  tempJob.desc = "2 PCs."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "dataExtractEasy"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_ammo_med"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 20
+  tempJob.moneyReward = { 2500, 4500 }
+  tempJob.categories = {"dataextract"}
+  tempJob.OnTaskGet = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        inv:Add("dataextractor", 1, { ["ntypes"] = 2, ["finishedtrigger"] = "dataExtractEasy"} )
+        ix.dialogue.notifyItemGet(client, ix.item.list["dataextractor"].name)
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "dataextractor" then
+            -- Check that everything matches
+            if ((v:GetData("ntypes", -1) == 2) and (v:GetData("finishedtrigger", "error") == "dataExtractEasy") and v:GetData("finished", false)) then
+              v:Remove()
+              ix.dialogue.notifyItemLost(client, ix.item.list["dataextractor"].name)
+              break
+            end
+          end
+        end
+      end
+    end
+  end
+
+  ix.jobs.register(tempJob, "dataExtractEasy")
+
+  tempJob = nil
+
+  --Extract data from 3 PCs
+  local tempJob = {}
+
+  tempJob.name = "Extract data from 3 PCs."
+  tempJob.desc = "3 PCs."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "dataExtractMedium"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_aid_high"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 35
+  tempJob.moneyReward = { 4000, 6000 }
+  tempJob.categories = {"dataextract"}
+  tempJob.OnTaskGet = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        inv:Add("dataextractor", 1, { ["ntypes"] = 3, ["finishedtrigger"] = "dataExtractMedium"} )
+        ix.dialogue.notifyItemGet(client, ix.item.list["dataextractor"].name)
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "dataextractor" then
+            -- Check that everything matches
+            if ((v:GetData("ntypes", -1) == 3) and (v:GetData("finishedtrigger", "error") == "dataExtractMedium") and v:GetData("finished", false)) then
+              v:Remove()
+              ix.dialogue.notifyItemLost(client, ix.item.list["dataextractor"].name)
+              break
+            end
+          end
+        end
+      end
+    end
+  end
+
+  ix.jobs.register(tempJob, "dataExtractMedium")
+
+  tempJob = nil
+
+  --Extract data from 5 PCs
+  local tempJob = {}
+
+  tempJob.name = "Extract data from 5 PCs."
+  tempJob.desc = "5 PCs."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "dataExtractHard"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_aid_large"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 50
+  tempJob.moneyReward = { 8500, 11500 }
+  tempJob.categories = {"dataextract"}
+  tempJob.OnTaskGet = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        inv:Add("dataextractor", 1, { ["ntypes"] = 5, ["finishedtrigger"] = "dataExtractHard"} )
+        ix.dialogue.notifyItemGet(client, ix.item.list["dataextractor"].name)
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "dataextractor" then
+            -- Check that everything matches
+            if ((v:GetData("ntypes", -1) == 5) and (v:GetData("finishedtrigger", "error") == "dataExtractHard") and v:GetData("finished", false)) then
+              v:Remove()
+              ix.dialogue.notifyItemLost(client, ix.item.list["dataextractor"].name)
+              break
+            end
+          end
+        end
+      end
+    end
+  end
+
+  ix.jobs.register(tempJob, "dataExtractHard")
+
+  tempJob = nil
 
 end
 

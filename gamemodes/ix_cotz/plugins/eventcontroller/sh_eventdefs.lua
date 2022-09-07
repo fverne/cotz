@@ -38,9 +38,6 @@ PLUGIN.eventdefs["Dog1"] = {
 	entities = {
 		{"npc_mutant_dog", 3},
 	},
-	loot = {
-		{"kitevent_dog", 1}, 
-	},
 	pdabroadcast = "A small pack of dogs have been spotted %s.",
 	difficulty = {1},
 	lootChance = 10,
@@ -51,9 +48,6 @@ PLUGIN.eventdefs["Dog2"] = {
 		{"npc_mutant_dog", 3},
 		{"npc_mutant_pseudodog", 1},
 	},
-	loot = {
-		{"kitevent_dog", 1}, 
-	},
 	pdabroadcast = "A small pack of dogs have been spotted %s.",
 	difficulty = {1},
 	lootChance = 15,
@@ -62,9 +56,6 @@ PLUGIN.eventdefs["Dog2"] = {
 PLUGIN.eventdefs["Dog3"] = {
 	entities = {
 		{"npc_mutant_dog", 4},
-	},
-	loot = {
-		{"kitevent_dog", 1}, 
 	},
 	pdabroadcast = "A pack of dogs have been seen wandering %s aimlessly, be alert, stalker.",
 	difficulty = {1,3},
@@ -76,9 +67,6 @@ PLUGIN.eventdefs["Dog4"] = {
 		{"npc_mutant_dog", 4},
 		{"npc_mutant_pseudodog", 1},
 	},
-	loot = {
-		{"kitevent_dog", 1}, 
-	},
 	pdabroadcast = "A pack of dogs have been seen wandering %s aimlessly, be alert, stalker.",
 	difficulty = {1,3},
 	lootChance = 20,
@@ -87,9 +75,6 @@ PLUGIN.eventdefs["Dog4"] = {
 PLUGIN.eventdefs["Dog5"] = {
 	entities = {
 		{"npc_mutant_dog", 5},
-	},
-	loot = {
-		{"kitevent_dog", 1}, 
 	},
 	pdabroadcast = "There are reports of dogs attacking stalkers %s, be careful, stalker.",
 	difficulty = {3},
@@ -101,9 +86,6 @@ PLUGIN.eventdefs["Dog6"] = {
 		{"npc_mutant_dog", 5},
 		{"npc_mutant_pseudodog", 1},
 	},
-	loot = {
-		{"kitevent_dog", 1}, 
-	},
 	pdabroadcast = "There are reports of dogs attacking stalkers %s, be careful, stalker.",
 	difficulty = {3},
 	lootChance = 25,
@@ -112,9 +94,6 @@ PLUGIN.eventdefs["Dog6"] = {
 PLUGIN.eventdefs["Dog6"] = {
 	entities = {
 		{"npc_mutant_dog", 6},
-	},
-	loot = {
-		{"kitevent_dog", 1}, 
 	},
 	pdabroadcast = "A huge pack of dogs are occupying %s! Stay away from there, stalker.",
 	difficulty = {3},
@@ -125,9 +104,6 @@ PLUGIN.eventdefs["Dog7"] = {
 	entities = {
 		{"npc_mutant_dog", 6},
 		{"npc_mutant_pseudodog", 1},
-	},
-	loot = {
-		{"kitevent_dog", 1}, 
 	},
 	pdabroadcast = "A huge pack of dogs are occupying %s! Stay away from there, stalker.",
 	difficulty = {3},
@@ -142,9 +118,6 @@ PLUGIN.eventdefs["bloodsucker1"] = {
 	entities = {
 		{"npc_mutant_bloodsucker", 1}, 
 	},
-	loot = {
-		{"kitevent_bloodsucker", 1}, 
-	},
 	pdabroadcast = "There's been sightings of a bloodsucker %s, any stalkers brave enough to take them out?",
 	difficulty = {2, 3, 4},
 	lootChance = 10,
@@ -153,9 +126,6 @@ PLUGIN.eventdefs["bloodsucker1"] = {
 PLUGIN.eventdefs["bloodsucker2"] = {
 	entities = {
 		{"npc_mutant_bloodsucker", 2}, 
-	},
-	loot = {
-		{"kitevent_bloodsucker", 1}, 
 	},
 	pdabroadcast = "There's been sightings of a couple bloodsuckers %s, any stalkers brave enough to take them out?",
 	difficulty = {3, 4},
@@ -170,11 +140,9 @@ PLUGIN.eventdefs["bloodsucker3"] = {
 		{"models/Gibs/HGIBS.mdl", 1}, 
 		{"models/Gibs/HGIBS_spine.mdl", 1},
 	},
-	loot = {
-		{"kitevent_bloodsucker", 1},
-	},
+	
 	pdabroadcast = "A group of stalkers %s has been massacred by a small pack of bloodsuckers, be careful, stalkers.",
-	difficulty = {3, 4},
+	difficulty = {4, 5},
 	lootChance = 15, 
 }
 
@@ -186,9 +154,7 @@ PLUGIN.eventdefs["bloodsucker4"] = {
 		{"models/Gibs/HGIBS.mdl", 1}, 
 		{"models/Gibs/HGIBS_spine.mdl", 2},
 	},
-	loot = {
-		{"kitevent_bloodsucker", 1},
-	},
+	
 	pdabroadcast = "A pack of bloodsuckers has been sighted %s, proceed with caution, stalker.",
 	difficulty = {3, 4},
 	lootChance = 20, 
@@ -203,9 +169,7 @@ PLUGIN.eventdefs["bloodsucker5"] = {
 		{"models/Gibs/HGIBS.mdl", 1}, 
 		{"models/Gibs/HGIBS_spine.mdl", 2},
 	},
-	loot = {
-		{"kitevent_bloodsucker", 1},
-	},
+	
 	pdabroadcast = "A pack of bloodsuckers has been sighted %s, proceed with caution, stalker.",
 	difficulty = {5},
 	lootChance = 20, 
@@ -219,9 +183,7 @@ PLUGIN.eventdefs["bloodsucker6"] = {
 		{"models/Gibs/HGIBS.mdl", 1}, 
 		{"models/Gibs/HGIBS_spine.mdl", 2},
 	},
-	loot = {
-		{"kitevent_bloodsucker", 1},
-	},
+	
 	pdabroadcast = "A huge pack of vicious bloodsuckers are moving towards %s, stay away at all cost, if you value your life, stalker.",
 	difficulty = {5},
 	lootChance = 25, 
@@ -234,9 +196,6 @@ PLUGIN.eventdefs["rodent1"] = {
 	entities = {
 		{"npc_mutant_rodent", 4},
 	},
-	loot = {
-		{"kitevent_rodent", 1}, 
-	},
 	pdabroadcast = "There is a bit of a mice problem %s, exterminate them stalker.",
 	difficulty = {1, 2, 4, 6},
 	lootChance = 10,
@@ -245,9 +204,6 @@ PLUGIN.eventdefs["rodent1"] = {
 PLUGIN.eventdefs["rodent2"] = {
 	entities = {
 		{"npc_mutant_rodent", 5},
-	},
-	loot = {
-		{"kitevent_rodent", 1}, 
 	},
 	pdabroadcast = "There is a bit of a mice problem %s, exterminate them stalker.",
 	difficulty = {1, 2, 4, 6},
@@ -258,9 +214,6 @@ PLUGIN.eventdefs["rodent3"] = {
 	entities = {
 		{"npc_mutant_rodent", 6},
 	},
-	loot = {
-		{"kitevent_rodent", 1}, 
-	},
 	pdabroadcast = "Rodents are being a menace %s, deal with them with caution, stalker.",
 	difficulty = {1, 2, 4, 6},
 	lootChance = 15,
@@ -269,9 +222,6 @@ PLUGIN.eventdefs["rodent3"] = {
 PLUGIN.eventdefs["rodent4"] = {
 	entities = {
 		{"npc_mutant_rodent", 7},
-	},
-	loot = {
-		{"kitevent_rodent", 1}, 
 	},
 	pdabroadcast = "Rodents are being a menace %s, deal with them with caution, stalker.",
 	difficulty = {1, 2, 4, 6},
@@ -282,9 +232,6 @@ PLUGIN.eventdefs["rodent5"] = {
 	entities = {
 		{"npc_mutant_rodent", 8},
 	},
-	loot = {
-		{"kitevent_rodent", 1}, 
-	},
 	pdabroadcast = "Rodents are overrunning %s, proceed with caution, stalker.",
 	difficulty = {1, 2, 4, 6},
 	lootChance = 20,
@@ -293,9 +240,6 @@ PLUGIN.eventdefs["rodent5"] = {
 PLUGIN.eventdefs["rodent6"] = {
 	entities = {
 		{"npc_mutant_rodent", 9},
-	},
-	loot = {
-		{"kitevent_rodent", 1}, 
 	},
 	pdabroadcast = "It seems %s is completely infested with swarms of rodents! Stay away, stalker!",
 	difficulty = {1, 2, 4, 6},
@@ -313,15 +257,13 @@ PLUGIN.eventdefs["pseudogiant1"] = {
 		{"models/Gibs/HGIBS.mdl", 3}, 
 		{"models/Gibs/HGIBS_spine.mdl", 2},
 	},
-	loot = {
-		{"kitevent_pseudogiant", 1},
-	},
+	
 	pdabroadcast = "A pseudogiant has been spotted %s! Stay away from there, stalker.",
 	difficulty = {5},
 	lootChance = 20, 
 }
 
-	PLUGIN.eventdefs["pseudogiant2"] = {
+PLUGIN.eventdefs["pseudogiant2"] = {
 	entities = {
 		{"npc_mutant_pseudogiant_slow", 1},
 		{"npc_mutant_rodent", 3}, 
@@ -330,15 +272,13 @@ PLUGIN.eventdefs["pseudogiant1"] = {
 		{"models/Gibs/HGIBS.mdl", 3}, 
 		{"models/Gibs/HGIBS_spine.mdl", 2},
 	},
-	loot = {
-		{"kitevent_pseudogiant", 1},
-	},
+	
 	pdabroadcast = "A pseudogiant has been spotted %s! Stay away from there, stalker.",
 	difficulty = {5, 6},
 	lootChance = 20, 
 }
 
-	PLUGIN.eventdefs["pseudogiant3"] = {
+PLUGIN.eventdefs["pseudogiant3"] = {
 	entities = {
 		{"npc_mutant_pseudogiant_slow", 2} 
 	},
@@ -346,11 +286,18 @@ PLUGIN.eventdefs["pseudogiant1"] = {
 		{"models/Gibs/HGIBS.mdl", 3}, 
 		{"models/Gibs/HGIBS_spine.mdl", 3},
 	},
-	loot = {
-		{"kitevent_pseudogiant", 1},
-	},
+	
 	pdabroadcast = "Pseudogiants have been spotted %s! Evacuate the area for your safety, stalker.",
 	difficulty = {6},
+	lootChance = 30, 
+}
+
+PLUGIN.eventdefs["pseudogiant4"] = {
+	entities = {
+		{"npc_mutant_pseudogiant_fast", 1} 
+	},
+	pdabroadcast = "A hulking mass has been spotted leaping through the air %s! Get out of there if you value your lives.",
+	difficulty = {5},
 	lootChance = 30, 
 }
 
@@ -363,9 +310,6 @@ PLUGIN.eventdefs["boar1"] = {
 	entities = {
 		{"npc_mutant_boar", 2},
 	},
-	loot = {
-		{"kitevent_boar", 1}, 
-	},
 	pdabroadcast = "A pair of boars are spotted %s, any stalkers up for boar stew should deal with them.",
 	difficulty = {1},
 	lootChance = 10,
@@ -374,9 +318,6 @@ PLUGIN.eventdefs["boar1"] = {
 PLUGIN.eventdefs["boar2"] = {
 	entities = {
 		{"npc_mutant_boar", 3},
-	},
-	loot = {
-		{"kitevent_boar", 1}, 
 	},
 	pdabroadcast = "Wild boars have been disrupting stalker activity %s, try to wipe them out, stalker.",
 	difficulty = {1},
@@ -387,9 +328,6 @@ PLUGIN.eventdefs["boar3"] = {
 	entities = {
 		{"npc_mutant_boar", 4},
 	},
-	loot = {
-		{"kitevent_boar", 1}, 
-	},
 	pdabroadcast = "A pack of boars are running rampant %s, proceed with caution, stalker.",
 	difficulty = {1, 3},
 	lootChance = 20,
@@ -398,9 +336,6 @@ PLUGIN.eventdefs["boar3"] = {
 PLUGIN.eventdefs["boar4"] = {
 	entities = {
 		{"npc_mutant_boar", 5},
-	},
-	loot = {
-		{"kitevent_boar", 1}, 
 	},
 	pdabroadcast = "A group of boars are frenzied and are killing everyone %s! Stay clear of the stampede, stalker.",
 	difficulty = {1, 3},
@@ -419,11 +354,8 @@ PLUGIN.eventdefs["chimera1"] = {
 		{"models/Gibs/HGIBS.mdl", 1}, 
 		{"models/Gibs/HGIBS_spine.mdl", 1},
 	},
-	loot = {
-		{"kitevent_pseudogiant", 1},
-	},
 	pdabroadcast = "Stalkers has reported a Chimera %s! Avoid them, stalkers.",
-	difficulty = {5},
+	difficulty = {3},
 	lootChance = 20, 
 }
 
@@ -436,10 +368,17 @@ PLUGIN.eventdefs["chimera2"] = {
 		{"models/Gibs/HGIBS.mdl", 1}, 
 		{"models/Gibs/HGIBS_spine.mdl", 2},
 	},
-	loot = {
-		{"kitevent_chimera", 1},
-	},
+	
 	pdabroadcast = "Stalkers has reported a Chimera %s! Avoid them, stalkers.",
+	difficulty = {5},
+	lootChance = 20, 
+}
+
+PLUGIN.eventdefs["electrochimera1"] = {
+	entities = {
+		{"npc_mutant_chimera_electro", 1},
+	},
+	pdabroadcast = "We have sightings of an electrically charged Chimera %s! Make sure you're properly prepared if you're taking it on, stalkers.",
 	difficulty = {5},
 	lootChance = 20, 
 }
@@ -452,9 +391,7 @@ PLUGIN.eventdefs["cat1"] = {
 	entities = {
 		{"npc_mutant_cat", 1} 
 	},
-	loot = {
-		{"kitevent_cat", 1},
-	},
+	
 	pdabroadcast = "A cat has been spotted %s just now. Be careful, stalker.",
 	difficulty = {3},
 	lootChance = 10, 
@@ -467,9 +404,7 @@ PLUGIN.eventdefs["cat2"] = {
 	ragdolls = {
 		{"models/crow.mdl", 2, 0, "000000000"},
 	},
-	loot = {
-		{"kitevent_cat", 1},
-	},
+	
 	pdabroadcast = "A cat has been spotted %s just now, chasing some birds. Take care, stalker.",
 	difficulty = {3},
 	lootChance = 10, 
@@ -482,9 +417,7 @@ PLUGIN.eventdefs["cat3"] = {
 	ragdolls = {
 		{"models/crow.mdl", 2, 0, "000000000"},
 	},
-	loot = {
-		{"kitevent_cat", 1},
-	},
+	
 	pdabroadcast = "A pair of cats have been spotted %s just now, playing around. Don't mistake them for pettable, stalker.",
 	difficulty = {3, 5},
 	lootChance = 15, 
@@ -499,8 +432,7 @@ PLUGIN.eventdefs["hoverstones1"] = {
 		{"anom_hoverstone", 2}, 
 	},
 	loot = {
-		{"jellyfish", 1},
-		{"droplet", 1},
+		{"artifact_droplet", 1},
 	},
 	pdabroadcast = "Hoverstones has been spotted %s, don't bump your head walking into one.",
 	difficulty = {0, 1},
@@ -513,8 +445,7 @@ PLUGIN.eventdefs["hoverstones2"] = {
 		{"npc_mutant_classiczombie", 2}, 
 	},
 	loot = {
-		{"jellyfish", 1},
-		{"droplet", 1},
+		{"artifact_droplet", 1},
 	},
 	pdabroadcast = "Hoverstones has been spotted %s, don't bump your head walking into one.",
 	difficulty = {0, 1},
@@ -528,8 +459,7 @@ PLUGIN.eventdefs["hoverstones3"] = {
 		{"npc_mutant_dog", 2}, 
 	},
 	loot = {
-		{"jellyfish", 1},
-		{"droplet", 1},
+		{"artifact_droplet", 1},
 	},
 	pdabroadcast = "Hoverstones has been spotted %s, don't bump your head walking into one.",
 	difficulty = {0, 1},
@@ -543,9 +473,6 @@ PLUGIN.eventdefs["izlom1"] = {
 	entities = {
 		{"npc_mutant_izlom", 1}, 
 	},
-	loot = {
-		{"kitevent_izlom", 1},
-	},
 	pdabroadcast = "One of those long-limbed Izloms has been seen %s.",
 	difficulty = {3},
 	lootChance = 10, 
@@ -554,9 +481,6 @@ PLUGIN.eventdefs["izlom1"] = {
 PLUGIN.eventdefs["izlom2"] = {
 	entities = {
 		{"npc_mutant_izlom", 2}, 
-	},
-	loot = {
-		{"kitevent_izlom", 1},
 	},
 	pdabroadcast = "A pair of Izloms have just been seen %s.",
 	difficulty = {3},
@@ -570,9 +494,6 @@ PLUGIN.eventdefs["izlom2"] = {
 	ragdolls = {
 		{"models/crow.mdl", 1, 0, "000000000"},
 	},
-	loot = {
-		{"kitevent_izlom", 1},
-	},
 	pdabroadcast = "Just saw a pair of those hunchbacked izloms eat a crow %s.",
 	difficulty = {3},
 	lootChance = 15, 
@@ -585,20 +506,14 @@ PLUGIN.eventdefs["psydog1"] = {
 	entities = {
 		{"npc_mutant_psydog", 1}, 
 	},
-	loot = {
-		{"kitevent_psydog", 1},
-	},
 	pdabroadcast = "A psydog has been reported deceiving stalkers %s, don't get too close, stalker.",
-	difficulty = {3, 5},
+	difficulty = {1, 3},
 	lootChance = 10, 
 }
 
 PLUGIN.eventdefs["psydog2"] = {
 	entities = {
-		{"npc_mutant_psydog", 1}, 
-	},
-	loot = {
-		{"kitevent_psydog", 1},
+		{"npc_mutant_psydog", 2}, 
 	},
 	pdabroadcast = "A psydog has been reported feasting on a dead stalker %s, don't add a body for it to eat, stalker",
 	difficulty = {3, 5},
@@ -608,11 +523,7 @@ PLUGIN.eventdefs["psydog2"] = {
 PLUGIN.eventdefs["psydog3"] = {
 	entities = {
 		{"npc_mutant_psydog", 1}, 
-		{"npc_mutant_pseudodog", 2}, 
-	},
-
-	loot = {
-		{"kitevent_psydog", 1},
+		{"npc_mutant_pseudodog", 4}, 
 	},
 	pdabroadcast = "A psydog has been reported feasting on a dead stalker %s, don't let it feast on another, stalker",
 	difficulty = {5},
@@ -626,11 +537,8 @@ PLUGIN.eventdefs["burer1"] = {
 	entities = {
 		{"npc_mutant_burer", 1}, 
 	},
-	loot = {
-		{"kitevent_burer", 1},
-	},
 	pdabroadcast = "A burer has been spotted %s! Watch out for any figure in a trenchcoat, stalker.",
-	difficulty = {2, 4, 6},
+	difficulty = {3, 4, 6},
 	lootChance = 10, 
 }
 
@@ -639,11 +547,8 @@ PLUGIN.eventdefs["burer2"] = {
 		{"npc_mutant_burer", 1}, 
 		{"npc_mutant_classiczombie", 2}, 
 	},
-	loot = {
-		{"kitevent_controller", 1},
-	},
 	pdabroadcast =  "A burer has been spotted %s! Watch out for any figure in a trenchcoat, stalker.",
-	difficulty = {4, 6},
+	difficulty = {3, 6},
 	lootChance = 15, 
 }
 
@@ -651,12 +556,8 @@ PLUGIN.eventdefs["burer3"] = {
 	entities = {
 		{"npc_mutant_burer", 3}, 
 	},
-
-	loot = {
-		{"kitevent_burer", 1},
-	},
 	pdabroadcast = "A trio of burers has been spotted %s! Avoid any hooded figures, stalkers.",
-	difficulty = {6},
+	difficulty = {5},
 	lootChance = 20, 
 }
 
@@ -667,9 +568,6 @@ PLUGIN.eventdefs["flesh2"] = {
 	entities = {
 		{"npc_mutant_flesh", 2}, 
 	},
-	loot = {
-		{"kitevent_flesh", 1},
-	},
 	pdabroadcast = "A few flesh were spotted %s, up for an easy hunt, stalker?.",
 	difficulty = {1},
 	lootChance = 10, 
@@ -678,9 +576,6 @@ PLUGIN.eventdefs["flesh2"] = {
 PLUGIN.eventdefs["flesh2"] = {
 	entities = {
 		{"npc_mutant_flesh", 3}, 
-	},
-	loot = {
-		{"kitevent_flesh", 1},
 	},
 	pdabroadcast = "A few flesh were spotted %s, up for an easy hunt, stalker?.",
 	difficulty = {1},
@@ -691,9 +586,7 @@ PLUGIN.eventdefs["flesh3"] = {
 	entities = {
 		{"npc_mutant_flesh", 4}, 
 	},
-	loot = {
-		{"kitevent_flesh", 1},
-	},
+
 	pdabroadcast = "A small pack of flesh are wandering %s, we could always use more food, stalker.",
 	difficulty = {1},
 	lootChance = 15, 
@@ -703,9 +596,7 @@ PLUGIN.eventdefs["flesh4"] = {
 	entities = {
 		{"npc_mutant_flesh", 5}, 
 	},
-	loot = {
-		{"kitevent_flesh", 1},
-	},
+
 	pdabroadcast = "A small pack of flesh are wandering %s, we could always use more food, stalker.",
 	difficulty = {1},
 	lootChance = 15, 
@@ -715,9 +606,7 @@ PLUGIN.eventdefs["flesh5"] = {
 	entities = {
 		{"npc_mutant_flesh", 5}, 
 	},
-	loot = {
-		{"kitevent_flesh", 1},
-	},
+
 	pdabroadcast = "There has been sightings of aggressive fleshes %s, somebody put them down.",
 	difficulty = {1},
 	lootChance = 20, 
@@ -728,9 +617,7 @@ PLUGIN.eventdefs["flesh6"] = {
 		{"npc_mutant_flesh", 5}, 
 		{"npc_mutant_boar", 1},
 	},
-	loot = {
-		{"kitevent_flesh", 1},
-	},
+
 	pdabroadcast = "There has been sightings of aggressive fleshes %s, somebody put them down.",
 	difficulty = {1},
 	lootChance = 20, 
@@ -740,9 +627,6 @@ PLUGIN.eventdefs["flesh7"] = {
 	entities = {
 		{"npc_mutant_flesh", 6}, 
 		{"npc_mutant_boar", 1},
-	},
-	loot = {
-		{"kitevent_flesh", 1},
 	},
 	pdabroadcast = "A big pack of fleshes are being quite violent %s, be on the lookout, stalker.",
 	difficulty = {1},
@@ -758,9 +642,6 @@ PLUGIN.eventdefs["snork1"] = {
 	entities = {
 		{"npc_mutant_snork", 1}, 
 	},
-	loot = {
-		{"kitevent_snork", 1},
-	},
 	pdabroadcast = "A snork has been sneaking about %s, careful stalker.",
 	difficulty = {2, 3},
 	lootChance = 10, 
@@ -769,9 +650,6 @@ PLUGIN.eventdefs["snork1"] = {
 PLUGIN.eventdefs["snork2"] = {
 	entities = {
 		{"npc_mutant_snork", 2}, 
-	},
-	loot = {
-		{"kitevent_snork", 1},
 	},
 	pdabroadcast = "A couple of snorks have been heard growling %s, careful stalker.",
 	difficulty = {3, 4, 6},
@@ -782,9 +660,6 @@ PLUGIN.eventdefs["snork3"] = {
 	entities = {
 		{"npc_mutant_snork", 3}, 
 	},
-	loot = {
-		{"kitevent_snork", 1},
-	},
 	pdabroadcast = "A small group of snorks have been seen prowling %s, careful stalker.",
 	difficulty = {3, 4, 6},
 	lootChance = 20, 
@@ -793,9 +668,6 @@ PLUGIN.eventdefs["snork3"] = {
 PLUGIN.eventdefs["snork4"] = {
 	entities = {
 		{"npc_mutant_snork", 4}, 
-	},
-	loot = {
-		{"kitevent_snork", 1},
 	},
 	pdabroadcast = "A small group of snorks have been seen watching over a dead stalker, %s, careful stalker.",
 	difficulty = {4, 5, 6},
@@ -810,9 +682,6 @@ PLUGIN.eventdefs["zombies1"] = {
 		{"npc_mutant_classiczombie_babka", 1},
 		{"npc_mutant_classiczombie", 3}, 
 	},
-	loot = {
-		{"kitevent_zombie", 1},
-	},
 	pdabroadcast = "There has been sightings of a few zombies %s, put them out of their misery, stalker.",
 	difficulty = {1},
 	lootChance = 10, 
@@ -822,9 +691,6 @@ PLUGIN.eventdefs["zombies2"] = {
 	entities = {
 		{"npc_mutant_classiczombie_babka", 1},
 		{"npc_mutant_classiczombie", 4}, 
-	},
-	loot = {
-		{"kitevent_zombie", 1},
 	},
 	pdabroadcast = "A small group of zombies have appeared %s, watch yourself, stalker.",
 	difficulty = {1},
@@ -836,9 +702,6 @@ PLUGIN.eventdefs["zombies3"] = {
 		{"npc_mutant_classiczombie_babka", 1},
 		{"npc_mutant_classiczombie", 5}, 
 	},
-	loot = {
-		{"kitevent_zombie", 1},
-	},
 	pdabroadcast = "A small group of zombies have appeared %s, watch yourself, stalker.",
 	difficulty = {1},
 	lootChance = 15, 
@@ -848,9 +711,6 @@ PLUGIN.eventdefs["zombies4"] = {
 	entities = {
 		{"npc_mutant_classiczombie_babka", 2},
 		{"npc_mutant_classiczombie", 6}, 
-	},
-	loot = {
-		{"kitevent_zombie", 1},
 	},
 	pdabroadcast = "There is a group of zombies %s, and has occupied it. Tread with caution, stalker.",
 	difficulty = {2},
@@ -862,9 +722,6 @@ PLUGIN.eventdefs["zombies5"] = {
 		{"npc_mutant_classiczombie_babka", 2},
 		{"npc_mutant_classiczombie", 7}, 
 	},
-	loot = {
-		{"kitevent_zombie", 1},
-	},
 	pdabroadcast = "There is a group of zombies %s, and has occupied it. Tread with caution, stalker.",
 	difficulty = {3},
 	lootChance = 20, 
@@ -875,27 +732,10 @@ PLUGIN.eventdefs["zombies6"] = {
 		{"npc_mutant_classiczombie_babka", 2},
 		{"npc_mutant_classiczombie", 8}, 
 	},
-	loot = {
-		{"kitevent_zombie", 1},
-	},
 	pdabroadcast = "A horde of zombies are overrunning %s! Stay away, stalker.",
 	difficulty = {3},
 	lootChance = 25, 
 }
-
---[[-------------------------------------------------------------------------
-Supplyboxes and kits spawn here
----------------------------------------------------------------------------]]
-/*
-PLUGIN.eventdefs["crate1"] = {
-	loot = {
-		{"kit_weaponcrate003", 1},
-	},
-	pdabroadcast = "I saw this suspicious looking crate %s!",
-	difficulty = {1},
-	lootChance = 75, 
-}
-*/
 
 --[[-------------------------------------------------------------------------
 Tarks
@@ -1034,7 +874,7 @@ PLUGIN.eventdefs["controller2"] = {
 		{"npc_mutant_controller", 2},
 	},
 	pdabroadcast = "Getting multiple strange readings %s... Be very cautious, stalker.",
-	difficulty = {2, 4},
+	difficulty = {2, 3, 4, 5},
 }
 
 --[[-------------------------------------------------------------------------
@@ -1064,7 +904,7 @@ PLUGIN.eventdefs["karlik1"] = {
 		{"npc_mutant_karlik", 1},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {5},
+	difficulty = {3},
 }
 
 PLUGIN.eventdefs["karlik2"] = {
@@ -1147,11 +987,21 @@ PLUGIN.eventdefs["zombievolatile1"] = {
 
 PLUGIN.eventdefs["skeleton1"] = {
 	entities = {
-		{"npc_mutant_skeleton", 1},
+		{"npc_mutant_skeleton", 2},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
 	difficulty = {4, 6},
 }
+
+PLUGIN.eventdefs["skeleton2"] = {
+	entities = {
+		{"npc_mutant_skeleton", 4},
+		{"npc_mutant_classiczombie", 7},
+	},
+	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
+	difficulty = {5},
+}
+
 
 PLUGIN.eventdefs["hellhound1"] = {
 	entities = {
@@ -1159,5 +1009,5 @@ PLUGIN.eventdefs["hellhound1"] = {
 		{"npc_mutant_dog", 3}
 	},
 	pdabroadcast = "A small pack of dogs have been spotted %s. I'm also getting increased heat signatures - strange.",
-	difficulty = {4, 6},
+	difficulty = {1, 3, 5},
 }

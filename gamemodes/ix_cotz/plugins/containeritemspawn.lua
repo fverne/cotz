@@ -39,9 +39,9 @@ if SERVER then
 
 		for k, v in pairs( ents.FindByClass( "ix_container" ) ) do
 			if spawncnt >= ix.config.Get("containerSpawnMaxItemsPerRun", 10) then break end
-			if v.spawnCategory != nil then
+			if v:GetSpawnCategory() != "" then
 				if math.random(101) <= ix.config.Get("containerSpawnChanceFlat", 1) + (ix.config.Get("containerSpawnChanceScaling", 0.5) * player.GetCount()) then
-					local idat = ix.util.GetRandomItemFromPool(v.spawnCategory)
+					local idat = ix.util.GetRandomItemFromPool(v:GetSpawnCategory())
 
 					if ix.item.inventories[v:GetID()]:GetItemCountNonSpecific(true) < ix.config.Get("containerSpawnMaxItems", 1) then
 						v:GetInventory():Add(idat[1], 1, idat[2] or {})
@@ -66,7 +66,7 @@ ix.command.Add("containerspawnadd", {
 		if (ent and ent:IsValid() and ent:GetClass() == "ix_container") then
 			local spawnCat = spawngroup
 
-			ent.spawnCategory = spawnCat
+			ent:SetSpawnCategory(spawnCat)
 			client:Notify("Storage spawngroup set to "..spawnCat)
 		else
 			client:NotifyLocalized("invalid", "Entity")
@@ -82,7 +82,7 @@ ix.command.Add("containerspawnremove", {
 
 		if (ent and ent:IsValid() and ent:GetClass() == "ix_container") then
 
-			ent.spawnCategory = nil
+			ent:SetSpawnCategory(nil)
 			client:Notify("Storage will no longer spawn items")
 		else
 			client:NotifyLocalized("invalid", "Entity")

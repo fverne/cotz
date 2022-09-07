@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 PLUGIN.name = "EventController"
 PLUGIN.author = "gumlefar"
-PLUGIN.desc = "Makes events occur randomly on your server"
+PLUGIN.desc = "Makes events occur randomly on your server - used more like a monster spawner now, more complex and intricate events are possible in eventcontrolleradv"
 
 PLUGIN.eventdefs = PLUGIN.eventdefs or {}
 PLUGIN.eventpoints = PLUGIN.eventpoints or {} -- EVENTPOINT STRUCTURE table.insert( PLUGIN.eventpoints, { position, name, difficulty } )

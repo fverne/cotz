@@ -7,7 +7,7 @@ PLUGIN.anomalydefs = PLUGIN.anomalydefs or {}
 PLUGIN.anomalypoints = PLUGIN.anomalypoints or {} -- ANOMALYPOINTS STRUCTURE table.insert( PLUGIN.eventpoints, { position, radius, anoms } )
 
 PLUGIN.spawnrate = 900
-PLUGIN.spawnchance = 1
+PLUGIN.spawnchance = 5
 
 ix.util.Include("sh_anomalydefs.lua")
 
@@ -16,7 +16,7 @@ if SERVER then
 
 	function PLUGIN:Think()
 		if spawntime > CurTime() then return end
-		spawntime = CurTime() + self.spawnrate - #player.GetAll()*5
+		spawntime = CurTime() + self.spawnrate
 
 		for i, j in pairs(self.anomalypoints) do
 			
@@ -24,7 +24,7 @@ if SERVER then
 				return
 			end
 
-			if math.random(1001) > self.spawnchance then
+			if math.random(100) > self.spawnchance then
 				return
 			end
 

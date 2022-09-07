@@ -647,6 +647,12 @@ function PANEL:OnTransfer(oldX, oldY, x, y, oldInventory, noSend)
 	if (inventory) then
 		item = inventory:GetItemAt(oldX, oldY)
 
+		if IsValid(ix.gui.openedStorage) then
+			if !inventory2:CanItemFit(x, y, item.width, item.height) then
+				return false
+			end
+		end
+		
 		if (!item) then
 			return false
 		end

@@ -9,6 +9,8 @@ function ENT:SetupDataTables()
 	self:NetworkVar("Int", 0, "ID")
 	self:NetworkVar("Bool", 0, "Locked")
 	self:NetworkVar("String", 0, "DisplayName")
+	self:NetworkVar("String", 1, "SpawnCategory")
+	self:NetworkVar("String", 2, "CyclicalCategory")
 end
 
 if (SERVER) then
@@ -93,6 +95,7 @@ if (SERVER) then
 	end
 
 	function ENT:Use(activator)
+		if self:GetNoDraw() then return end
 		local inventory = self:GetInventory()
 
 		if (inventory and (activator.ixNextOpen or 0) < CurTime()) then
@@ -118,12 +121,21 @@ if (SERVER) then
 		end
 	end
 else
+
+	function ENT:Draw(flags)
+        if LocalPlayer():GetPos():Distance(self:GetPos()) < 2048 then
+            self:DrawModel()
+        end
+    end
+
+
 	ENT.PopulateEntityInfo = true
 
 	local COLOR_LOCKED = Color(200, 38, 19, 200)
 	local COLOR_UNLOCKED = Color(135, 211, 124, 200)
 
 	function ENT:OnPopulateEntityInfo(tooltip)
+		if self:GetNoDraw() then return end
 		local definition = ix.container.stored[self:GetModel():lower()]
 		local bLocked = self:GetLocked()
 

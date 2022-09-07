@@ -5,7 +5,7 @@ ITEM.height = 1
 ITEM.description = "The note looks crumbled and dirty."
 ITEM.price = 500
 ITEM.flag = "A"
-ITEM.hidestashcategory = "tier1"
+ITEM.CustomSpawngroup = "hidestash_tier_1"
 
 ITEM.exRender = true
 ITEM.iconCam = {
@@ -26,7 +26,7 @@ ITEM.functions.use = {
 	name = "Check for information",
 	icon = "icon16/stalker/unlock.png",
 	OnRun = function(item)
-		local loot = table.Random(ix.plugin.list["hidestashspawner"].StashItems[item.hidestashcategory])
+		local loot = { ix.util.GetRandomItemFromPool(item.CustomSpawngroup or "ix_entbox_drops") }
 		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPoint()
 		local stashcontent = "CONTENT: "
 
@@ -36,7 +36,7 @@ ITEM.functions.use = {
 			return false
 		end
 
-		ix.plugin.list["hidestash"]:SpawnStash(spawnpoint[1], { loot[1], loot[2], loot[3] })
+		ix.plugin.list["hidestash"]:SpawnStash(spawnpoint[1], { loot[1], loot[2] })
 		item:SetData("stashcoordinates", spawnpoint[1])
 		item:SetData("stashtext", spawnpoint[2])
 		item:SetData("map", game.GetMap())

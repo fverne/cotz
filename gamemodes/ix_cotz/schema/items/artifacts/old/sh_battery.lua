@@ -7,6 +7,14 @@ ITEM.height = 1
 ITEM.price = 9000
 ITEM.flag = "A"
 ITEM.value = ITEM.price*0.5
+
+ITEM.exRender = true
+ITEM.iconCam = {
+    pos = Vector(-35.45, 57.14, 4.42),
+    ang = Angle(-1.48, 302.09, 0),
+    fov = 10.48
+}
+
 /*
 -- On player uneqipped the item, Removes a weapon from the player and keep the ammo in the item.
 ITEM.functions.EquipUn = { -- sorry, for name order.

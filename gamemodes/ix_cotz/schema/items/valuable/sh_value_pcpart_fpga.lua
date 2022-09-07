@@ -5,7 +5,7 @@ ITEM.model = "models/illusion/eftcontainers/virtex.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 11250
+ITEM.price = 16250
 
 ITEM.flatweight = 0.280
 

@@ -59,6 +59,18 @@ function ix.util.GetRandomTaskPoint()
 	return allpts[ math.random( #allpts ) ][1]
 end
 
+function ix.util.GetDataSearchColors(n)
+	local colors = {"green", "blue", "red", "yellow", "purple", "orange"}
+	local ret = {}
+
+	table.Shuffle(colors)
+
+	if (n > 6) then n = 6 end
+	for i = 1,n do
+		ret[i] = colors[i]
+	end
+
+	return ret
 end
 
 function ix.util.GetLongLatFromVector(pos)
@@ -66,11 +78,19 @@ function ix.util.GetLongLatFromVector(pos)
 	--Zone: 51.1621 LAT 29.9575 LONG
 	--      51.4026 LAT 30.2735 LONG
 
+	local offsettable = {
+		["rp_marsh_cs"] 			= {0.0, 0.0},
+		["rp_waystation"] 			= {0.75, -1.2},
+		["rp_salvation_2_haven"] 	= {0.85, 0.8}
+	}
+
 	local xpos = pos[1]
 	local ypos = -pos[2]
 
-	local xposconv = ix.util.mapValueToRange(xpos, -8192, 8192, 51.1621, 51.4026)
-	local yposconv = ix.util.mapValueToRange(ypos, -8192, 8192, 29.9575, 30.2735)
+	local offset = offsettable[game.GetMap()] or {0.0, 0.0}
+
+	local xposconv = ix.util.mapValueToRange(xpos, -8192, 8192, 51.1621 + offset[1], 51.4026 + offset[1])
+	local yposconv = ix.util.mapValueToRange(ypos, -8192, 8192, 29.9575 + offset[2], 30.2735 + offset[2])
 
 	return {xposconv, yposconv}
 end
@@ -107,4 +127,38 @@ function ix.util.GetHeadingFromAngle(ang)
 	end
 
 	return str
+end
+
+function PLUGIN:SaveData()
+		local pcs = {}
+
+		for _, entity in ipairs(ents.FindByClass("ix_dataextractpc")) do
+			pcs[#pcs + 1] = {
+				pos = entity:GetPos(),
+				angles = entity:GetAngles(),
+			}
+		end
+
+		local data = {}
+		data.pcs = pcs
+
+		self:SetData(data)
+	end
+
+	function PLUGIN:LoadData()
+		for _, v in ipairs(self:GetData().pcs or {}) do
+			local entity = ents.Create("ix_dataextractpc")
+			entity:SetPos(v.pos)
+			entity:SetAngles(v.angles)
+			entity:Spawn()
+
+			local physObj = entity:GetPhysicsObject()
+
+			if (IsValid(physObj)) then
+				physObj:EnableMotion(false)
+				physObj:Sleep()
+			end
+		end
+	end
+
 end

@@ -44,7 +44,7 @@ ix.jobs.activejobs = {}
 
 ix.config.Add("taskAbandonCooldown", 3600, "The cooldown for abandoning a task, in seconds.", nil, {
 	data = {min = 0, max = 604800},
-	category = "Tasks"
+	category = "Town NPCs"
 })
 
 if SERVER then

@@ -104,13 +104,6 @@ ix.container.Register("models/items/ammocrate_smg1.mdl", {
 	end
 })
 
-ix.container.Register("models/props_forest/footlocker01_closed.mdl", {
-	name = "Footlocker",
-	description = "A small chest to store belongings in.",
-	width = 5,
-	height = 3
-})
-
 ix.container.Register("models/Items/item_item_crate.mdl", {
 	name = "Item Crate",
 	description = "A crate to store some belongings in.",
@@ -123,4 +116,25 @@ ix.container.Register("models/props_c17/cashregister01a.mdl", {
 	description = "A register with some buttons and a drawer.",
 	width = 2,
 	height = 1
+})
+
+ix.container.Register("models/lostsignalproject/items/misc/damaged_ammo.mdl", {
+	name = "Hidden Cache",
+	description = "A hidden cache of goods.",
+	width = 6,
+	height = 6
+})
+
+ix.container.Register("models/props_borealis/bluebarrel001.mdl", {
+	name = "Buried Barrel Cache",
+	description = "A barrel hidden in the ground.",
+	width = 6,
+	height = 6
+})
+
+ix.container.Register("models/props_forest/footlocker01_closed.mdl", {
+	name = "Community Chest",
+	description = "A chest for sharing items.",
+	width = 19,
+	height = 13
 })

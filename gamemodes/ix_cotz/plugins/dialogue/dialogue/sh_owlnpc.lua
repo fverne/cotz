@@ -4,15 +4,45 @@ DIALOGUE.addTopic("GREETING", {
 	response = "What is it?",
 	options = {
 		"TradeTopic",
+		"SpecialSaleTopic",
 		"BackgroundTopic",
 		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
-		--"ProgressionTestTopic",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
+		-- Tasks
 		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"information", "riches"}, 2)
+
+		-- Special Sale
+		if SERVER then
+			local cooldown = target:GetNetVar("lastSpecialSale", 0)
+			if cooldown < os.time() then
+				local randomItems = {}
+				local randomItemCategories = {
+					{itemCategory = "specialsale_owlnpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_rifle_1", dialogue = "I'm looking weapons that can deal with a bit of everything.", reqRep = 282},
+					{itemCategory = "specialsale_owlnpc_longrifle_1", dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 765},
+					{itemCategory = "specialsale_owlnpc_heavy_1", dialogue = "I like to keep shooting until there is nothing left to shoot at.", reqRep = 9338},
+					{itemCategory = "specialsale_owlnpc_shotgun_1", dialogue = "I want to fill mutants with pellets of lead.", reqRep = 1943},
+					{itemCategory = "specialsale_owlnpc_br_1", dialogue = "I'm looking for better protection against mutants.", reqRep = 50},
+					{itemCategory = "specialsale_owlnpc_headgear_1", dialogue = "I'm looking for better headwear.", reqRep = 50},
+					{itemCategory = "specialsale_owlnpc_ar_1", dialogue = "I'm the clumsy type, and often stumble into anomalous zones. I'm looking for protection.", reqRep = 4254},
+				}
+
+				for k,v in pairs(randomItemCategories) do
+					local idat = ix.util.GetRandomItemFromPool(v.itemCategory)
+					-- ensure the character has a reputation level high enough
+					if client:getReputation() >= v.reqRep then
+						table.insert(randomItems, {idat[1], idat[2], v.dialogue})
+					end
+				end
+
+				target:SetNetVar("specialSaleItems", randomItems)
+				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
+			end
+		end
 	end
 })
 
@@ -55,6 +85,91 @@ DIALOGUE.addTopic("TradeTopic", {
 	end,
 	options = {
 		"BackTopic",
+	}
+})
+
+
+DIALOGUE.addTopic("SpecialSaleTopic", {
+	statement = "Do you take special orders?",
+	response = "Yes. Here's what I can get you.",
+	IsDynamic = true,
+	options = {
+		"BackTopic",
+	},
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+		local randomItems = target:GetNetVar("specialSaleItems")
+		
+		for k,v in pairs(randomItems) do
+			local item = ix.item.list[v[1]]
+			local itemdata = ix.item.list[v[2]]
+			local dialogue = v[3]
+			table.insert(dynopts, {statement = dialogue.. " (Price: " .. item.price*0.95 .. ")", topicID = "SpecialSaleTopic", dyndata = {itemuid = item.uniqueID, cost = item.price, itemdata = itemdata}})
+		end
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		-- Return the next topicID
+		if( !client:GetCharacter():HasMoney(dyndata.cost)) then
+			return "NotEnoughMoneyBuy"
+		end
+
+		return "ConfirmSpecialSale", dyndata
+	end,
+})
+
+
+DIALOGUE.addTopic("ConfirmSpecialSale", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	IsDynamic = true,
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if(dyndata) then
+			if (CLIENT) then
+				self.response = string.format("That order will cost you %s.", dyndata.cost)
+			else
+				target.specialsalestruct = { dyndata.itemuid, dyndata.cost, dyndata.itemdata }
+			end
+		end
+	end,
+	GetDynamicOptions = function(self, client, target)
+
+		local dynopts = {
+			{statement = "Sure, here.", topicID = "ConfirmSpecialSale", dyndata = {accepted = true}},
+			{statement = "That's too expensive for me.", topicID = "ConfirmSpecialSale", dyndata = {accepted = false}},
+		}
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if( SERVER and dyndata.accepted and client:GetCharacter():GetInventory():Add(target.specialsalestruct[1], 1, target.specialsalestruct[3] or {})) then
+			ix.dialogue.notifyItemGet(client, ix.item.list[target.specialsalestruct[1]].name)
+			ix.dialogue.notifyMoneyLost(client, target.specialsalestruct[2])
+			client:GetCharacter():TakeMoney(target.specialsalestruct[2])
+		end
+		if(SERVER)then
+			target.specialsalestruct = nil
+		end
+		-- Return the next topicID
+		return "BackTopic"
+	end,
+})
+
+DIALOGUE.addTopic("NotEnoughMoneyBuy", {
+	statement = "",
+	response = "Come back once you're serious and can pay the cash.",
+	options = {
+		"BackTopic"
 	}
 })
 
@@ -227,15 +342,45 @@ DIALOGUE.addTopic("BackTopic", {
 	response = "All right.",
 	options = {
 		"TradeTopic",
+		"SpecialSaleTopic",
 		"BackgroundTopic",
 		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
-		--"ProgressionTestTopic",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
+		-- Tasks
 		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"information", "riches"}, 2)
+
+		-- Special Sale
+		if SERVER then
+			local cooldown = target:GetNetVar("lastSpecialSale", 0)
+			if cooldown < os.time() then
+				local randomItems = {}
+				local randomItemCategories = {
+					{itemCategory = "specialsale_owlnpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_rifle_1", dialogue = "I'm looking weapons that can deal with a bit of everything.", reqRep = 282},
+					{itemCategory = "specialsale_owlnpc_longrifle_1", dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 765},
+					{itemCategory = "specialsale_owlnpc_heavy_1", dialogue = "I like to keep shooting until there is nothing left to shoot at.", reqRep = 9338},
+					{itemCategory = "specialsale_owlnpc_shotgun_1", dialogue = "I want to fill mutants with pellets of lead.", reqRep = 1943},
+					{itemCategory = "specialsale_owlnpc_br_1", dialogue = "I'm looking for better protection against mutants.", reqRep = 50},
+					{itemCategory = "specialsale_owlnpc_headgear_1", dialogue = "I'm looking for better headwear.", reqRep = 50},
+					{itemCategory = "specialsale_owlnpc_ar_1", dialogue = "I'm the clumsy type, and often stumble into anomalous zones. I'm looking for protection.", reqRep = 4254},
+				}
+
+				for k,v in pairs(randomItemCategories) do
+					local idat = ix.util.GetRandomItemFromPool(v.itemCategory)
+					-- ensure the character has a reputation level high
+					if client:getReputation() >= v.reqRep then
+						table.insert(randomItems, {idat[1], idat[2], v.dialogue})
+					end
+				end
+
+				target:SetNetVar("specialSaleItems", randomItems)
+				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
+			end
+		end
 	end
 })
 

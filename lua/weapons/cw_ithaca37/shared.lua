@@ -78,7 +78,7 @@ SWEP.FullAimViewmodelRecoil = false
 SWEP.CanRestOnObjects = true
 
 SWEP.Attachments = {
-["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds"}}
+["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds", "am_magnumbuck"}}
 }
 
 

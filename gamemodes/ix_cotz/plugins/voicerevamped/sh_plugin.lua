@@ -19,7 +19,7 @@ ix.command.Add("voicemode", {
 })
 
 -- Start of Voice Overlay
-if (CLIENT) then
+if CLIENT then
     local PANEL = {}
     local ixVoicePanels = {}
 
@@ -51,7 +51,7 @@ if (CLIENT) then
     end
 
     function PANEL:Paint(w, h)
-        if (not IsValid(self.client)) then return end
+        if not IsValid(self.client) then return end
         ix.util.DrawBlur(self, 1, 2)
         surface.SetDrawColor(0, 0, 0, 50 + self.client:VoiceVolume() * 50)
         surface.DrawRect(0, 0, w, h)
@@ -60,18 +60,18 @@ if (CLIENT) then
     end
 
     function PANEL:Think()
-        if (IsValid(self.client)) then
+        if IsValid(self.client) then
             self.LabelName:SetText(self.name)
         end
 
-        if (self.fadeAnim) then
+        if self.fadeAnim then
             self.fadeAnim:Run()
         end
     end
 
     function PANEL:FadeOut(anim, delta, data)
-        if (anim.Finished) then
-            if (IsValid(ixVoicePanels[self.client])) then
+        if anim.Finished then
+            if IsValid(ixVoicePanels[self.client]) then
                 ixVoicePanels[self.client]:Remove()
                 ixVoicePanels[self.client] = nil
 
@@ -87,11 +87,11 @@ if (CLIENT) then
     vgui.Register("VoicePanel", PANEL, "DPanel")
 
     function PLUGIN:PlayerStartVoice(client)
-        if (not IsValid(g_VoicePanelList) or not ix.config.Get("allowVoice", false)) then return end
+        if not IsValid(g_VoicePanelList) or not ix.config.Get("allowVoice", false) then return end
         hook.Run("PlayerEndVoice", client)
 
-        if (IsValid(ixVoicePanels[client])) then
-            if (ixVoicePanels[client].fadeAnim) then
+        if IsValid(ixVoicePanels[client]) then
+            if ixVoicePanels[client].fadeAnim then
                 ixVoicePanels[client].fadeAnim:Stop()
                 ixVoicePanels[client].fadeAnim = nil
             end
@@ -101,7 +101,7 @@ if (CLIENT) then
             return
         end
 
-        if (not IsValid(client)) then return end
+        if not IsValid(client) then return end
         local pnl = g_VoicePanelList:Add("VoicePanel")
         pnl:Setup(client)
         ixVoicePanels[client] = pnl
@@ -109,7 +109,7 @@ if (CLIENT) then
 
     local function VoiceClean()
         for k, v in pairs(ixVoicePanels) do
-            if (not IsValid(k)) then
+            if not IsValid(k) then
                 hook.Run("PlayerEndVoice", k)
             end
         end
@@ -118,8 +118,8 @@ if (CLIENT) then
     timer.Create("VoiceClean", 10, 0, VoiceClean)
 
     function PLUGIN:PlayerEndVoice(client)
-        if (IsValid(ixVoicePanels[client])) then
-            if (ixVoicePanels[client].fadeAnim) then return end
+        if IsValid(ixVoicePanels[client]) then
+            if ixVoicePanels[client].fadeAnim then return end
             ixVoicePanels[client].fadeAnim = Derma_Anim("FadeOut", ixVoicePanels[client], ixVoicePanels[client].FadeOut)
             ixVoicePanels[client].fadeAnim:Start(2)
         end
@@ -129,7 +129,7 @@ if (CLIENT) then
         gmod.GetGamemode().PlayerStartVoice = function() end
         gmod.GetGamemode().PlayerEndVoice = function() end
 
-        if (IsValid(g_VoicePanelList)) then
+        if IsValid(g_VoicePanelList) then
             g_VoicePanelList:Remove()
         end
 
@@ -174,35 +174,35 @@ ixVoice.Ranges = {
 
 local voiceDistance = 360000
 
-if (SERVER) then
+if SERVER then
     for i, v in pairs(ixVoice.Ranges) do
         resource.AddFile(v.icon)
     end
 
     function PLUGIN:PlayerCanHearPlayersVoice(listener, speaker)
         local allowVoice = ix.config.Get("allowVoice")
-        if (IsValid(listener.ixRagdoll)) then return false, false end
-        if (listener == speaker) then return true, true end
-        if (not allowVoice) then return false, false end
+        if IsValid(listener.ixRagdoll) then return false, false end
+        if listener == speaker then return true, true end
+        if not allowVoice then return false, false end
         local oldrange = voiceDistance
 
-        if (speaker:GetLocalVar("voiceRange")) then
-            oldrange = ixVoice.Ranges[speaker:GetLocalVar("voiceRange")].range
+        if speaker:GetNetVar("voiceRange") then
+            oldrange = ixVoice.Ranges[speaker:GetNetVar("voiceRange", 2)].range
             oldrange = oldrange * oldrange
             --  print(oldrange)
         end
 
-        if (listener:GetPos():DistToSqr(speaker:GetPos()) > oldrange) then return false, false end
+        if listener:GetPos():DistToSqr(speaker:GetPos()) > oldrange then return false, false end
 
         return true, true
     end
 end
 
 netstream.Hook("ChangeMode", function(client, mode)
-    client:SetLocalVar("voiceRange", mode)
+    client:SetNetVar("voiceRange", mode)
 
-    if (client:GetLocalVar("voiceRange") > #ixVoice.Ranges) then
-        client:GetLocalVar("voiceRange", 2)
+    if client:GetNetVar("voiceRange") > #ixVoice.Ranges then
+        client:SetNetVar("voiceRange", 2)
     end
 end)
 
@@ -237,17 +237,17 @@ end
 function PLUGIN:HUDPaint()
     local w, h = 45, 42
     if not ix.config.Get("allowVoice") then return end
-    if (not LocalPlayer():IsSpeaking() and not ix.option.Get("permvoicehud", false)) then return end
+    if not LocalPlayer():IsSpeaking() and not ix.option.Get("permvoicehud", false) then return end
 
-    if (LocalPlayer():IsSpeaking()) then
-        surface.SetMaterial(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].icon)
+    if LocalPlayer():IsSpeaking() then
+        surface.SetMaterial(ixVoice.Ranges[LocalPlayer():GetNetVar("voiceRange", 2)].icon)
         surface.SetDrawColor(255, 255, 255, 255)
         surface.DrawTexturedRect(5, ScrH() / 20 - h - 5, w, h)
         surface.SetTextColor(255, 255, 255, 255)
         surface.SetFont("stalkerregularfont2")
-        local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+        local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer():GetNetVar("voiceRange", 2)].name)
         surface.SetTextPos(15 + w, ScrH() / 20 - 5 - h / 2 - th / 2)
-        surface.DrawText(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+        surface.DrawText(ixVoice.Ranges[LocalPlayer():GetNetVar("voiceRange") or 2].name)
 
         if ix.option.Get("voicemodehudtip") then
             surface.SetTextPos(8, ScrH() / 20 + 25 - h / 2 - th / 2)
@@ -256,64 +256,63 @@ function PLUGIN:HUDPaint()
             surface.DrawText("type /voicemode to change modes")
         end
     else
-        if (not LocalPlayer():IsSpeaking()) then
-            surface.SetMaterial(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].icon)
+        if not LocalPlayer():IsSpeaking() then
+            surface.SetMaterial(ixVoice.Ranges[LocalPlayer():GetNetVar("voiceRange", 2)].icon)
             surface.SetDrawColor(255, 255, 255, 80)
             surface.DrawTexturedRect(5, ScrH() / 20 - h - 5, w, h)
             surface.SetTextColor(255, 255, 255, 80)
             surface.SetFont("stalkerregularfont2")
-            local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+            local tw, th = surface.GetTextSize(ixVoice.Ranges[LocalPlayer():GetNetVar("voiceRange", 2)].name)
             surface.SetTextPos(15 + w, ScrH() / 20 - 5 - h / 2 - th / 2)
-            surface.DrawText(ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange") or 2].name)
+            surface.DrawText(ixVoice.Ranges[LocalPlayer():GetNetVar("voiceRange", 2)].name)
         end
     end
 end
 
 function PLUGIN:PostDrawTranslucentRenderables()
-    for _, ply in ipairs(player.GetAll()) do    
-        if ply == LocalPlayer() or (GetViewEntity() == LocalPlayer() and (GetConVar('thirdperson') and GetConVar('thirdperson'):GetInt() ~= 0)) then return end
+    for _, ply in ipairs(player.GetAll()) do
+        if ply == LocalPlayer() or (GetViewEntity() == LocalPlayer()) then return end
         if not ply:Alive() then return end
         if not ix.config.Get("allowVoice", false) then return end
-        if (IsValid(ix.gui.menu)) then return end
+        if IsValid(ix.gui.menu) then return end
         if not ply:IsSpeaking() then return end
-        local voice_mat = ixVoice.Ranges[ply:GetLocalVar("voiceRange") or 2].icon
-        local pos = ply:GetPos() + Vector(0, 0, ply:GetModelRadius() + 15)
-        local attachment = ply:GetAttachment(ply:LookupAttachment('eyes'))
+        local voice_mat = ixVoice.Ranges[ply:GetNetVar("voiceRange", 2)].icon
+        local pos = ply:GetPos() + Vector(0, 0, ply:GetModelRadius() + 10)
+        local attachment = ply:LookupBone('ValveBiped.Bip01_Head1')
 
         if attachment then
-            pos = ply:GetAttachment(ply:LookupAttachment('eyes')).Pos + Vector(0, 0, 15)
+            pos = ply:GetBonePosition(ply:LookupBone('ValveBiped.Bip01_Head1')) + Vector(0, 0, 12)
         end
 
         local distance = LocalPlayer():GetPos():Distance(ply:GetPos())
-        local plyrange = ixVoice.Ranges[LocalPlayer():GetLocalVar("voiceRange")].range
+        local plyrange = ixVoice.Ranges[ply:GetNetVar("voiceRange", 2)].range
 
-        if (distance <= plyrange) then
+        if distance <= plyrange then
             render.SetMaterial(ply:IsSpeaking() and voice_mat)
             local color_var = 255
             local computed_color = render.ComputeLighting(ply:GetPos(), Vector(0, 0, 1))
             local max = math.max(computed_color.x, computed_color.y, computed_color.z)
             color_var = math.Clamp(max * 255 * 1.11, 0, 255)
-            render.DrawSprite(pos, 12, 12, Color(color_var, color_var, color_var, 255))
+            render.DrawSprite(pos, 8, 8, Color(color_var, color_var, color_var, 255))
         end
     end
 end
-
 --[[
 if (CLIENT) then
     concommand.Add("printvoicemode", function()
-        print(LocalPlayer():GetLocalVar("voiceRange"))
+        print(LocalPlayer():GetNetVar("voiceRange"))
     end)
 end
 
 concommand.Add("printranges", function()
     for k, v in pairs(player.GetAll()) do
-        print("Ranges:" .. v:GetLocalVar("voiceRange"))
+        print("Ranges:" .. v:GetNetVar("voiceRange"))
     end
 end)
 
 concommand.Add("setranges", function(ply, cmd, args)
     for k, v in pairs(player.GetAll()) do
-        v:SetLocalVar("voiceRange", tonumber(args[1]))
+        v:SetNetVar("voiceRange", tonumber(args[1]))
     end
 end)
 ]]--

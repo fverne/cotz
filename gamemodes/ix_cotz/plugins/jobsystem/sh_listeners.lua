@@ -69,6 +69,10 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
       CalculateCredit(entity, attacker, "chimeraKilled")
     end
 
+    if class == "npc_mutant_chimera_electro" then
+      CalculateCredit(entity, attacker, "electrochimeraKilled")
+    end
+
     if class == "npc_mutant_controller" or class == "npc_mutant_controller_swamp" or class == "npc_mutant_controller_electro" or class == "npc_mutant_controller_fast" then
       CalculateCredit(entity, attacker, "controllerKilled")
       CalculateCredit(entity, attacker, "groupHumanoidKilled")
@@ -101,7 +105,7 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
       CalculateCredit(entity, attacker, "groupPsyKilled")
     end 
 
-    if class == "npc_mutant_pseudogiant" then
+    if class == "npc_mutant_pseudogiant_fast" or class == "npc_mutant_pseudogiant_slow" then
       CalculateCredit(entity, attacker, "pseudogiantKilled")
     end
 
@@ -123,6 +127,19 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
     if class == "npc_mutant_tark" then
       CalculateCredit(entity, attacker, "tarkKilled")
       CalculateCredit(entity, attacker, "groupMeatKilled")
+    end
+
+    if class == "npc_mutant_bear" then
+      CalculateCredit(entity, attacker, "bearKilled")
+      CalculateCredit(entity, attacker, "groupPredatorKilled")
+    end
+
+    if class == "npc_mutant_vareshka" then
+      CalculateCredit(entity, attacker, "vareshkaKilled")
+    end
+
+    if class == "npc_mutant_skeleton" then
+      CalculateCredit(entity, attacker, "skeletonKilled")
     end
   end
 end

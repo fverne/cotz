@@ -14,6 +14,10 @@ end, {
     category = "Blowout"
 })
 
+ix.config.Add("blowoutSkybox", true, "If true, the blowout skybox will draw.", nil, {
+    category = "Blowout"
+})
+
 ix.config.Add("blowoutRateCycle", 120, "How many minutes between the next blowout cycle. Default = 120 minutes (2 hours)", function()
     if (SERVER) then
         timer.Simple(0.01, function()
