@@ -57,19 +57,55 @@ end)
 hook.Add("ix_OnJobComplete", "Mute_scanTasks", function(client, npcidentifier, identifier)
 	local iscorrecttasktype = false
 
-	local killcategories = {
+	local categories = {
 		["scanareaeasy"] = true,
 		["scanareamed"] = true,
 		["scanareahigh"] = true,
 	}
 
 	for k, v in pairs(ix.jobs.list[identifier].categories) do
-		if killcategories[v] then iscorrecttasktype = true end
+		if categories[v] then iscorrecttasktype = true end
 	end
 
 	if npcidentifier == "'Mute'" and iscorrecttasktype then
 		if ix.progression.IsActive("stalkerNetAdmin_AreaTasks") then
 			ix.progression.AddProgessionValue("stalkerNetAdmin_AreaTasks", 1, client:Name())
+		end
+	end
+end)
+
+hook.Add("ix_OnJobComplete", "Egghead_dataTasks", function(client, npcidentifier, identifier)
+	local iscorrecttasktype = false
+
+	local categories = {
+		["dataextract"] = true,
+	}
+
+	for k, v in pairs(ix.jobs.list[identifier].categories) do
+		if categories[v] then iscorrecttasktype = true end
+	end
+
+	if npcidentifier == "'Mute'" and iscorrecttasktype then
+		if ix.progression.IsActive("egghead_dataTasks") then
+			ix.progression.AddProgessionValue("egghead_dataTasks", 1, client:Name())
+		end
+	end
+end)
+
+hook.Add("ix_OnJobComplete", "Computer_artifactTasks", function(client, npcidentifier, identifier)
+	local iscorrecttasktype = false
+
+	local categories = {
+		["artifactcollect_computer"] = true,
+	}
+
+	for k, v in pairs(ix.jobs.list[identifier].categories) do
+		if categories[v] then iscorrecttasktype = true end
+	end
+
+	if npcidentifier == "'Mute'" and iscorrecttasktype then
+		if ix.progression.IsActive("computer_artifactTasks") then
+			ix.progression.AddProgessionValue("computer_artifactTasks", 1, client:Name())
 		end
 	end
 end)
@@ -587,7 +623,7 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 	name = "Making Connections",
 	description = "Bring the flash drive to Quartermaster.",
 	keyNpc = "'Quartermaster'",
-	defaultActive = false,
+	defaultActive = true,
 	BuildResponse = function(self, status)
 		return "I chatted with a guy, what was his name, Mute? He should have a flash drive with information for me. I ain't budging 'till I get that.\n"
 	end,
@@ -752,7 +788,170 @@ ix.progression.Register("egghead_dataTasks", {
 					message = "Good work stalkers, you've gotten me a lot of interesting information, I think I might have an idea what has happened here, please come to the bunker for further jobs."
 				})
 
-				-- Add computer activation item to vendorlist here
+				local npc = ix.progression.GetNPCFromName("'Egghead'")
+				if (npc) then
+					npc:AddItemToList("quest_computeraccess", nil, 2, "SELLANDBUY", 2, 6, 2) -- Main Progression
+				end
+			end,
+			RunOnce = true
+		},
+	},
+	progressthresholds = {
+		[1] = 100,
+	}
+})
+
+
+ix.progression.Register("computerDelivery_activateItem", {
+	name = "Getting Access",
+	description = "Bring the secured container to the computer.",
+	keyNpc = "'Computer'",
+	defaultActive = true,
+	BuildResponse = function(self, status)
+		return "** 'ACCESS DENIED' is written in bold letters on the screen **"
+	end,
+	GetItemIds = function()
+		local itemids = {
+			["quest_computeraccess"] 	= 1,
+		}
+
+		return itemids
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()
+				
+			end,
+			RunOnce = false,
+		},
+	},
+	progressthresholds = {
+		[1] = 1,
+	},
+	fnAddComplexProgression = function(dat, playername)
+		ix.progression.status["computerDelivery_activateItem"].complexData = ix.progression.status["computerDelivery_activateItem"].complexData or {}
+		ix.progression.status["computerDelivery_activateItem"].complexData[dat] = ix.progression.status["computerDelivery_activateItem"].complexData[dat] or 0
+		ix.progression.status["computerDelivery_activateItem"].complexData[dat] = ix.progression.status["computerDelivery_activateItem"].complexData[dat]+1
+	end,
+	fnGetComplexProgression = function()
+		return ix.progression.status["computerDelivery_activateItem"].complexData
+	end,
+	fnCheckComplexProgression = function()
+		local finished =  ix.progression.definitions["computerDelivery_activateItem"]:GetItemIds()
+
+		local isdone = true
+
+		for item, amt in pairs(ix.progression.status["computerDelivery_activateItem"].complexData) do
+			if amt < finished[item] then isdone = false end
+		end
+
+		if isdone then
+			ix.progression.SetActive("computerDelivery_activateItem", false)
+
+			ix.progression.SetActive("computerDelivery_main", true) -- Main Progression
+		end
+	end
+})
+
+ix.progression.Register("computerDelivery_main", {
+	name = "Getting up and running",
+	description = "Set up the supercomputer with components.",
+	keyNpc = "'Computer'",
+	defaultActive = false,
+	BuildResponse = function(self, status)
+		ix.progression.status["computerDelivery_main"] = ix.progression.status["computerDelivery_main"] or {}
+		local dat = ix.progression.status["computerDelivery_main"].complexData
+		local itemids = self:GetItemIds()
+
+		local str = "** The computer prints a list of items on the screen, and blinks some indicator lights in the area where it would like these components placed **\n"
+
+		for item, amt in pairs(itemids) do
+			local tmp = 0
+			if (dat and dat[item]) then tmp = dat[item] end
+			str = str..string.format("\n[%s : %d]", ix.item.list[item].name, amt - tmp)
+		end
+
+		return str
+	end,
+	GetItemIds = function()
+		local itemids = {
+			["value_memorymodule"] 		= 10,
+			["value_calculationunit"] 	= 5,
+			["value_monitoringunit"] 	= 3,
+			["value_frequencymodulator"]= 7,
+			["value_motorclean"] 		= 20,
+			["value_engine"] 			= 5,
+			["value_gasoline"] 			= 50,
+		}
+
+		return itemids
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()
+				
+			end,
+			RunOnce = false,
+		},
+	},
+	progressthresholds = {
+		[1] = 1,
+	},
+	fnAddComplexProgression = function(dat, playername)
+		ix.progression.status["computerDelivery_main"].complexData = ix.progression.status["computerDelivery_main"].complexData or {}
+		ix.progression.status["computerDelivery_main"].complexData[dat] = ix.progression.status["computerDelivery_main"].complexData[dat] or 0
+		ix.progression.status["computerDelivery_main"].complexData[dat] = ix.progression.status["computerDelivery_main"].complexData[dat]+1
+	end,
+	fnGetComplexProgression = function()
+		return ix.progression.status["computerDelivery_main"].complexData
+	end,
+	fnCheckComplexProgression = function()
+		local finished =  ix.progression.definitions["computerDelivery_main"]:GetItemIds()
+
+		local isdone = true
+
+		for item, amt in pairs(ix.progression.status["computerDelivery_main"].complexData) do
+			if amt < finished[item] then isdone = false end
+		end
+
+		if isdone then
+			ix.progression.SetActive("computerDelivery_main", false)
+
+			ix.progression.SetActive("computerArtifactTasks_main", true) -- Main Progression
+		end
+	end
+})
+
+ix.progression.Register("computer_artifactTasks", {
+	name = "Analyzing Artifacts",
+	description = "Scanning the Zone",
+	keyNpc = "'Computer'",
+	defaultActive = true,
+	BuildResponse = function(self, status)
+		-- Find next treshold
+		local tresh = 0
+
+		for k,v in ipairs( self.progressthresholds ) do
+			if v > status.value then
+				tresh = v
+				break
+			end
+		end
+
+		return string.format("** A message is on the screen: '%d batches of anomalous objects are needed' **", tresh-status.value)
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()
+				timer.Simple(5, function()
+					ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+						name = "'Egghead'",
+						message = "Stalkers, my readings are going crazy, a large release of energy was just detected at the waystation. Please be careful, I can't ."
+					})
+				end)
+
+				-- Spawn CCon NPC on waystation
+				-- Spawn Hoarder NPC on waystation
 			end,
 			RunOnce = true
 		},
