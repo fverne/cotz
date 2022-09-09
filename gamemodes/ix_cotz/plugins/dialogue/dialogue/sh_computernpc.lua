@@ -10,7 +10,7 @@ DIALOGUE.addTopic("GREETING", {
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkilleasy", "mutantkillmedium", "town"}, 4)
+		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"artifactcollect_computer"}, 2)
 		if(CLIENT)then
 			surface.PlaySound("buttons/button18.wav")
 		end
@@ -22,7 +22,10 @@ DIALOGUE.addTopic("BackgroundTopic", {
 	response = "Temp",
 	options = {
 		"BackgroundTopic2",
-	}
+	},
+	ShouldAdd = function()
+		return not ix.progression.IsActive("computerDelivery_activateItem")
+	end,
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
@@ -56,6 +59,9 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 	options = {
 		"BackTopic"
 	},
+	ShouldAdd = function()
+		return not ix.progression.IsActive("computerDelivery_activateItem")
+	end,
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
 
@@ -163,6 +169,9 @@ DIALOGUE.addTopic("GetTask", {
 	options = {
 		"BackTopic"
 	},
+	ShouldAdd = function()
+		return not ix.progression.IsActive("computerDelivery_activateItem")
+	end,
 	preCallback = function(self, client, target)
 		if CLIENT then
 			if client:ixHasJobFromNPC(target:GetDisplayName()) then
@@ -267,7 +276,12 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 	DynamicPreCallback = function(self, player, target, dyndata)
 		if (dyndata) then
 			if(CLIENT)then
-				self.response = string.format("** The computer whirrs as the %s turns on.", ix.item.list[dyndata.itemid].name)
+				if dyndata.itemid == "quest_computeraccess" then
+					self.response = "** The computer beeps as the component is inserted. **"
+					surface.PlaySound("buttons/button18.wav")
+				else
+					self.response = string.format("** The computer whirrs as the %s turns on. **", ix.item.list[dyndata.itemid].name)
+				end
 			else
 				if ix.progression.IsActive(dyndata.progid) then
 					
@@ -297,7 +311,7 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 
 DIALOGUE.addTopic("AboutProgression", {
 	statement = "** Inspect the screen **",
-	response = "** The computer shows a list **",
+	response = "** The computer shows a list on the screen **",
 	options = {
 		"BackTopic"
 	},
@@ -344,7 +358,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkilleasy", "mutantkillmedium", "town"}, 4)
+		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"artifactcollect_computer"}, 2)
 		if CLIENT then
 			surface.PlaySound("buttons/button18.wav")
 		end
