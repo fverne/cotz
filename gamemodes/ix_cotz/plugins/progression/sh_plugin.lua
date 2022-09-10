@@ -23,3 +23,9 @@ end
 function PLUGIN:SaveData()
 	self:SetData(ix.progression.status)
 end
+
+function PLUGIN:PlayerSpawn(client, transition)
+	net.Start("progression_sync_receive")
+	net.WriteTable(ix.progression.status)
+	net.Send(client)
+end
