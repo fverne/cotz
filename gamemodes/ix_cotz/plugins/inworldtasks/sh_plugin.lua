@@ -15,6 +15,62 @@ function PLUGIN:PostPlayerLoadout(client)
 	end
 end
 
+function ix.util.GetLongLatFromVector(pos)
+
+	--Zone: 51.1621 LAT 29.9575 LONG
+	--      51.4026 LAT 30.2735 LONG
+
+	local offsettable = {
+		["rp_marsh_cs"] 			= {0.0, 0.0},
+		["rp_waystation"] 			= {0.75, -1.2},
+		["rp_salvation_2_haven"] 	= {0.85, 0.8}
+	}
+
+	local xpos = pos[1]
+	local ypos = -pos[2]
+
+	local offset = offsettable[game.GetMap()] or {0.0, 0.0}
+
+	local xposconv = ix.util.mapValueToRange(xpos, -8192, 8192, 51.1621 + offset[1], 51.4026 + offset[1])
+	local yposconv = ix.util.mapValueToRange(ypos, -8192, 8192, 29.9575 + offset[2], 30.2735 + offset[2])
+
+	return {xposconv, yposconv}
+end
+
+function ix.util.GetHeadingFromAngle(ang)
+	local tmp = ang[2]
+
+	local str = "The compass is spinning wildly"
+
+	--nice code
+	if( tmp < -157.5 or tmp > 157.5 ) then
+		return "S"
+	end
+	if( tmp > 112.5 and tmp <= 157.5 ) then
+		return "SW"
+	end
+	if( tmp > 67.5 and tmp <= 112.5 ) then
+		return "W"
+	end
+	if( tmp > 22.5 and tmp <= 67.5 ) then
+		return "NW"
+	end
+	if( tmp > -22.5 and tmp <= 22.5 ) then
+		return "N"
+	end
+	if( tmp > -67.5 and tmp <= -22.5 ) then
+		return "NE"
+	end
+	if( tmp > -112.5 and tmp <= -67.5 ) then
+		return "E"
+	end
+	if( tmp > -157.5 and tmp <= -112.5 ) then
+		return "SE"
+	end
+
+	return str
+end
+
 if CLIENT then
 	netstream.Hook("ix_ShowTaskPositions", function(data)
 		local stashmaterial = Material("vgui/icons/quest2.png", "smooth noclamp")
@@ -71,62 +127,6 @@ function ix.util.GetDataSearchColors(n)
 	end
 
 	return ret
-end
-
-function ix.util.GetLongLatFromVector(pos)
-
-	--Zone: 51.1621 LAT 29.9575 LONG
-	--      51.4026 LAT 30.2735 LONG
-
-	local offsettable = {
-		["rp_marsh_cs"] 			= {0.0, 0.0},
-		["rp_waystation"] 			= {0.75, -1.2},
-		["rp_salvation_2_haven"] 	= {0.85, 0.8}
-	}
-
-	local xpos = pos[1]
-	local ypos = -pos[2]
-
-	local offset = offsettable[game.GetMap()] or {0.0, 0.0}
-
-	local xposconv = ix.util.mapValueToRange(xpos, -8192, 8192, 51.1621 + offset[1], 51.4026 + offset[1])
-	local yposconv = ix.util.mapValueToRange(ypos, -8192, 8192, 29.9575 + offset[2], 30.2735 + offset[2])
-
-	return {xposconv, yposconv}
-end
-
-function ix.util.GetHeadingFromAngle(ang)
-	local tmp = ang[2]
-
-	local str = "The compass is spinning wildly"
-
-	--nice code
-	if( tmp < -157.5 or tmp > 157.5 ) then
-		return "S"
-	end
-	if( tmp > 112.5 and tmp <= 157.5 ) then
-		return "SW"
-	end
-	if( tmp > 67.5 and tmp <= 112.5 ) then
-		return "W"
-	end
-	if( tmp > 22.5 and tmp <= 67.5 ) then
-		return "NW"
-	end
-	if( tmp > -22.5 and tmp <= 22.5 ) then
-		return "N"
-	end
-	if( tmp > -67.5 and tmp <= -22.5 ) then
-		return "NE"
-	end
-	if( tmp > -112.5 and tmp <= -67.5 ) then
-		return "E"
-	end
-	if( tmp > -157.5 and tmp <= -112.5 ) then
-		return "SE"
-	end
-
-	return str
 end
 
 function PLUGIN:SaveData()
