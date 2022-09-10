@@ -159,7 +159,7 @@ ix.chat.Register("playerjoin", {
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text)
-		chat.AddText(Color(0,191,255), "[GPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
+		chat.AddText(Color(0,191,255), "[LPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
 	end,
 	prefix = {},
 	CanHear = function(self, speaker, listener)
@@ -177,7 +177,7 @@ ix.chat.Register("playerleave", {
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text)
-		chat.AddText(Color(0,191,255), "[GPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
+		chat.AddText(Color(0,191,255), "[LPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
 	end,
 	prefix = {},
 	CanHear = function(self, speaker, listener)

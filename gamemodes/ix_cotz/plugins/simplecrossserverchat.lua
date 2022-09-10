@@ -15,6 +15,21 @@ ix = ix or {}
 ix.crossserverchat = ix.crossserverchat or {}
 ix.crossserverchat.queue = ix.crossserverchat.queue or {}
 
+ix.chat.Register("gpdainternal", {
+	CanSay = function(self, speaker, text)
+
+		return true
+	end,
+	OnChatAdd = function(self, speaker, text, bAnonymous, data)
+		chat.AddText(Color(180,61,61), "[GPDA-"..data.name.."] ", Color(0,241,255), Material(data.icon), ": "..data.message)
+	end,
+	prefix = {},
+	CanHear = function(self, speaker, listener)
+		listener:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO )
+
+		return true
+	end,
+})
 
 if (SERVER) then
 	function PLUGIN:Think()
@@ -36,6 +51,7 @@ if (SERVER) then
 		query = mysql:Create("ix_xserverchat")
 		query:Create("id", "INT(11) UNSIGNED NOT NULL AUTO_INCREMENT")
 		query:Create("name", "VARCHAR(60)")
+		query:Create("icon", "VARCHAR(60)")
 		query:Create("text", "TEXT")
 		query:Create("sourcemap", "VARCHAR(60)")
 
@@ -44,10 +60,10 @@ if (SERVER) then
 	end
 
 	function PLUGIN:CheckForNewData()
-		print(ix.plugin.list["simplecrossserverchat"].lastSeenId)
 		local query = mysql:Select("ix_xserverchat")
 		query:Select("id")
 		query:Select("name")
+		query:Select("icon")
 		query:Select("text")
 		query:WhereGT("id", self.lastSeenId)
 		query:WhereNotEqual("sourcemap", game.GetMap())
@@ -59,12 +75,13 @@ if (SERVER) then
 						local id = tonumber(v.id)
 						local name = v.name or "Unknown"
 						local text = v.text or "<corrupted message>"
+						local icon = v.icon or "vgui/icons/news.png"
 
 						if (id > ix.plugin.list["simplecrossserverchat"].lastSeenId) then
 							ix.plugin.list["simplecrossserverchat"].lastSeenId = id
 						end
 
-						table.insert(ix.crossserverchat.queue, {name, text})
+						table.insert(ix.crossserverchat.queue, {name, text, icon})
 					end
 				end
 			end
@@ -79,14 +96,15 @@ if (SERVER) then
 			local msg = ix.crossserverchat.queue[1]
 			table.remove(ix.crossserverchat.queue, 1)
 
-			ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+			ix.chat.Send(nil, "gpdainternal", "", nil, nil, {
 				name = msg[1],
-				message = msg[2]
+				message = msg[2],
+				icon = msg[3]
 			})
 		end
 	end
 
-	function PLUGIN:PostMessage(name, text)
+	function PLUGIN:PostMessage(name, text, icon)
 
 		local datatoinsert = {}
 		if(not istable(data))then
@@ -98,6 +116,7 @@ if (SERVER) then
 		local query = mysql:InsertIgnore("ix_xserverchat")
 			query:Insert("name", name)
 			query:Insert("text", text)
+			query:Insert("icon", icon)
 			query:Insert("sourcemap", game.GetMap())
 		query:Execute()
 		
@@ -123,6 +142,6 @@ ix.command.Add("xserverchat", {
 		ix.type.text,
 	},
 	OnRun = function(self, client, msg)
-		PLUGIN:PostMessage(client:GetName(), msg)
+		PLUGIN:PostMessage(client:GetName(), msg, client:GetPdaavatar())
 	end
 })

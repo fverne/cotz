@@ -50,9 +50,9 @@ hook.Add("InitializedChatClasses", "ixChatRemoval2", function()
 			return true
 		end,
 		OnChatAdd = function(self, speaker, text, bAnonymous, data)
-			chat.AddText(Color(0,191,255), "[GPDA-"..speaker:GetCharacter():GetData("pdanickname", speaker:GetCharacter():GetName()).."] ", Material(speaker:GetCharacter():GetPdaavatar()), color_white, ": "..text)
+			chat.AddText(Color(0,191,255), "[LPDA-"..speaker:GetCharacter():GetData("pdanickname", speaker:GetCharacter():GetName()).."] ", Material(speaker:GetCharacter():GetPdaavatar()), color_white, ": "..text)
 		end,
-		prefix = {"//", "/OOC", "/gpda"},
+		prefix = {"//", "/OOC", "/lpda"},
 		description = "Send a message over the Global PDA network",
 		CanHear = function(self, speaker, listener)
 			/*local pda = speaker:GetCharacter():GetData("pdaequipped", false)
