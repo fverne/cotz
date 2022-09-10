@@ -12,7 +12,7 @@ ITEM.varweight = 1.275
 
 ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(0, -1.5, 20),
-	ang = Angle(90, 0, 0),
-	fov = 45,
+	pos = Vector(1, -1, 200),
+	ang = Angle(90, 0, -135),
+	fov = 4.5,
 }

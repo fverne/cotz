@@ -36,6 +36,7 @@ ix.char.RegisterVar("jobs", {
 
 ix.util.Include("sh_killjobs.lua")
 ix.util.Include("sh_itemjobs.lua")
+ix.util.Include("sh_artifactjobs.lua")
 ix.util.Include("sh_specialjobs.lua")
 ix.util.Include("sh_listeners.lua")
 ix.util.Include("cl_plugin.lua")

@@ -104,7 +104,7 @@ DIALOGUE.addTopic("SpecialSaleTopic", {
 			local item = ix.item.list[v[1]]
 			local itemdata = ix.item.list[v[2]]
 			local dialogue = v[3]
-			table.insert(dynopts, {statement = dialogue.. " (Price: " .. item.price*0.95 .. ")", topicID = "SpecialSaleTopic", dyndata = {itemuid = item.uniqueID, cost = item.price, itemdata = itemdata}})
+			table.insert(dynopts, {statement = dialogue.. " (Price: " .. item.price*3.00 .. ")", topicID = "SpecialSaleTopic", dyndata = {itemuid = item.uniqueID, cost = item.price*3.00, itemdata = itemdata}})
 		end
 
 		-- Return table of options

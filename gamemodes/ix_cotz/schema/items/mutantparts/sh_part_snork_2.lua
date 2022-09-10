@@ -10,3 +10,9 @@ ITEM.pricepertier = 125
 ITEM.baseweight = 0.800
 ITEM.varweight = 0.120
 
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(211.87261962891, 178.59944152832, 134.23004150391),
+	ang = Angle(25, 220, -40),
+	fov = 3,
+}
