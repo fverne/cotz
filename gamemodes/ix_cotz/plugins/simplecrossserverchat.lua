@@ -19,7 +19,7 @@ ix.crossserverchat.queue = ix.crossserverchat.queue or {}
 if (SERVER) then
 	function PLUGIN:Think()
 		if self.checktime < CurTime() then 
-			self.checktime = CurTime() + 2
+			self.checktime = CurTime() + 5
 
 			self:CheckForNewData()
 		end
@@ -44,6 +44,7 @@ if (SERVER) then
 	end
 
 	function PLUGIN:CheckForNewData()
+		print(ix.plugin.list["simplecrossserverchat"].lastSeenId)
 		local query = mysql:Select("ix_xserverchat")
 		query:Select("id")
 		query:Select("name")
@@ -59,8 +60,8 @@ if (SERVER) then
 						local name = v.name or "Unknown"
 						local text = v.text or "<corrupted message>"
 
-						if (id > ix.plugin.list["simplecrossserverdata"].lastSeenId) then
-							ix.plugin.list["simplecrossserverdata"].lastSeenId = id
+						if (id > ix.plugin.list["simplecrossserverchat"].lastSeenId) then
+							ix.plugin.list["simplecrossserverchat"].lastSeenId = id
 						end
 
 						table.insert(ix.crossserverchat.queue, {name, text})
@@ -73,6 +74,7 @@ if (SERVER) then
 
 
 	function PLUGIN:ProcessTopOfQueue()
+		PrintTable(ix.crossserverchat.queue)
 		if(#ix.crossserverchat.queue > 0)then
 			local msg = ix.crossserverchat.queue[1]
 			table.remove(ix.crossserverchat.queue, 1)
@@ -118,7 +120,7 @@ end
 ix.command.Add("xserverchat", {
 	adminOnly = true,
 	arguments = {
-		ix.type.string,
+		ix.type.text,
 	},
 	OnRun = function(self, client, msg)
 		PLUGIN:PostMessage(client:GetName(), msg)
