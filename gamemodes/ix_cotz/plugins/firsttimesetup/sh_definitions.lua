@@ -5,6 +5,13 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
     -- STALKER Base
     {
       model = "models/lostsignalproject/items/misc/damaged_ammo.mdl",
+      position = Vector(-8113.8520507813,-11556.828125,5451.2143554688),
+      angles = Angle(17.743101119995,140.1837310791,-10.768218994141),
+      spawnCategory = "",
+      cyclicalCategory = "cache_hard",
+    },
+    {
+      model = "models/lostsignalproject/items/misc/damaged_ammo.mdl",
       position = Vector(-7312.314453125,-9755.439453125,5153.2197265625),
       angles = Angle(-0.94225317239761,-166.12088012695,-16.168579101563),
       spawnCategory = "",
