@@ -115,4 +115,12 @@ if (SERVER) then
 	end
 end
 
-
+ix.command.Add("xserverchat", {
+	adminOnly = true,
+	arguments = {
+		ix.type.string,
+	},
+	OnRun = function(self, client, msg)
+		PLUGIN:PostMessage(client:GetName(), msg)
+	end
+})
