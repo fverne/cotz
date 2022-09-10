@@ -33,6 +33,22 @@ if ix.bar then
 	end
 end
 
+PLUGIN.invalidDamagetypes = {
+	[DMG_SONIC] = true,
+	[DMG_RADIATION] = true
+}
+if SERVER then
+	util.AddNetworkString( "cotz_ShotInd" )
+	hook.Add("EntityTakeDamage","StalkerHitIndicator_damage", function( victim, dmginfo )
+		local attacker = dmginfo:GetAttacker()
+		if not PLUGIN.invalidDamagetypes[dmginfo:GetDamageType()] and IsValid(attacker) and IsValid(victim) and victim:IsPlayer() then 
+			net.Start("cotz_ShotInd")
+			net.WriteEntity( attacker )
+			net.Send( victim )
+		end
+	end) 
+end
+
 ix.option.Add("cursor", ix.type.bool, true, {
 	category = "_stalkersettings",
 })
