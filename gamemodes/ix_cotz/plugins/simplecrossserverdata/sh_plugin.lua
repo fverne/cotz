@@ -47,8 +47,6 @@ if (SERVER) then
 						local data = util.JSONToTable(v.json_data or "[]")
 						local timestamp = tonumber(v.timestamp)
 
-						print(timestamp)
-
 						if (timestamp > ix.plugin.list["simplecrossserverdata"].lastSeenData) then
 							ix.plugin.list["simplecrossserverdata"].lastSeenData = timestamp
 						end
