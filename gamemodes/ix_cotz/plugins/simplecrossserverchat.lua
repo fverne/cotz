@@ -91,7 +91,6 @@ if (SERVER) then
 
 
 	function PLUGIN:ProcessTopOfQueue()
-		PrintTable(ix.crossserverchat.queue)
 		if(#ix.crossserverchat.queue > 0)then
 			local msg = ix.crossserverchat.queue[1]
 			table.remove(ix.crossserverchat.queue, 1)
@@ -122,6 +121,8 @@ if (SERVER) then
 		
 	end
 
+	ix.crossserverchat.PostMessage = PLUGIN.PostMessage
+
 	function PLUGIN:SaveData()
 		self:SetData({["lastseen"] = self.lastSeenId})
 	end
@@ -135,13 +136,3 @@ if (SERVER) then
 		end
 	end
 end
-
-ix.command.Add("xserverchat", {
-	adminOnly = true,
-	arguments = {
-		ix.type.text,
-	},
-	OnRun = function(self, client, msg)
-		PLUGIN:PostMessage(client:GetName(), msg, client:GetCharacter():GetPdaavatar())
-	end
-})

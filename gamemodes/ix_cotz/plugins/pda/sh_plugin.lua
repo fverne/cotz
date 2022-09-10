@@ -41,27 +41,14 @@ hook.Add("InitializedChatClasses", "ixChatRemoval2", function()
 
 	ix.chat.Register("ooc", {
 		CanSay = function(self, speaker, text)
-			/*local pda = speaker:GetCharacter():GetData("pdaequipped", false)
-			if pda then
-				return true
-			else
-				return false
-			end*/
 			return true
 		end,
 		OnChatAdd = function(self, speaker, text, bAnonymous, data)
 			chat.AddText(Color(0,191,255), "[LPDA-"..speaker:GetCharacter():GetData("pdanickname", speaker:GetCharacter():GetName()).."] ", Material(speaker:GetCharacter():GetPdaavatar()), color_white, ": "..text)
 		end,
 		prefix = {"//", "/OOC", "/lpda"},
-		description = "Send a message over the Global PDA network",
+		description = "Send a message over the local PDA network",
 		CanHear = function(self, speaker, listener)
-			/*local pda = speaker:GetCharacter():GetData("pdaequipped", false)
-			if pda then
-				listener:EmitSound( "stalkersound/da-2_beep1.ogg", 90, 100, 1, CHAN_AUTO )
-				return true
-			else
-				return false
-			end*/
 			listener:EmitSound( "stalkersound/da-2_beep1.ogg", 90, 100, 1, CHAN_AUTO )
 			return true
 		end,
@@ -79,6 +66,32 @@ hook.Add("InitializedChatClasses", "ixChatRemoval2", function()
 		end
 	})
 end)
+
+ix.chat.Register("gpda", {
+		CanSay = function(self, speaker, text)
+			return true
+		end,
+		OnChatAdd = function(self, speaker, text, bAnonymous, data)
+			chat.AddText(Color(0,191,255), "[GPDA-"..speaker:GetCharacter():GetName().."] ", Material(speaker:GetCharacter():GetPdaavatar()), color_white, ": "..text)
+		end,
+		description = "Send a message over the Global PDA network",
+		CanHear = function(self, speaker, listener)
+			listener:EmitSound( "stalkersound/da-2_beep1.ogg", 90, 100, 1, CHAN_AUTO )
+			return true
+		end,
+	})
+
+ix.command.Add("gpda", {
+	description = "Send a message over the Global PDA network",
+	arguments = {
+		ix.type.text
+	},
+	OnRun = function(self, client, message)
+		ix.chat.Send(client, "gpda", message)
+
+		ix.crossserverchat.PostMessage(client:GetName(), message, client:GetCharacter():GetPdaavatar())
+	end
+})
 
 -- Overwrites defualt PM Command
 function PLUGIN:InitializedPlugins()
