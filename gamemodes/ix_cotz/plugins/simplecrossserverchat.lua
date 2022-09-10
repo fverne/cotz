@@ -44,7 +44,6 @@ if (SERVER) then
 	end
 
 	function PLUGIN:CheckForNewData()
-		print(ix.plugin.list["simplecrossserverchat"].lastSeenId)
 		local query = mysql:Select("ix_xserverchat")
 		query:Select("id")
 		query:Select("name")
