@@ -142,6 +142,6 @@ ix.command.Add("xserverchat", {
 		ix.type.text,
 	},
 	OnRun = function(self, client, msg)
-		PLUGIN:PostMessage(client:GetName(), msg, client:GetPdaavatar())
+		PLUGIN:PostMessage(client:GetName(), msg, client:GetCharacter():GetPdaavatar())
 	end
 })
