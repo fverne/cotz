@@ -18,8 +18,8 @@ if CLIENT then
 	
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/w_revolver_r8.mdl"
-	SWEP.WMPos = Vector(-1, 0, 0)
-	SWEP.WMAng = Vector(-10, 0, 180)
+	SWEP.WMPos = Vector(-1, 0, -1.2)
+	SWEP.WMAng = Vector(-20, 0, 180)
 	
 	SWEP.EffectiveRange_Orig = 51.3 * 39.37
 	SWEP.DamageFallOff_Orig = .37

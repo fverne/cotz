@@ -39,6 +39,11 @@ if CLIENT then
 	SWEP.AlternativePos = Vector(0, -0.55, 0)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
 
+	SWEP.DrawTraditionalWorldModel = false
+	SWEP.WM = "models/weapons/w_taurus_327p.mdl"
+	SWEP.WMPos = Vector(-1, 0, -2)
+	SWEP.WMAng = Vector(-30, 0, 180)
+
 	SWEP.ViewModelMovementScale = 1
 	SWEP.BoltBone = "hammer"
 	SWEP.BoltShootOffset = Vector(0, 0, -.25)
