@@ -89,7 +89,7 @@ ix.command.Add("gpda", {
 	OnRun = function(self, client, message)
 		ix.chat.Send(client, "gpda", message)
 
-		ix.crossserverchat.PostMessage(client:GetName(), message, client:GetCharacter():GetPdaavatar())
+		ix.crossserverchat.PostMessage(nil, client:GetName(), message, client:GetCharacter():GetPdaavatar())
 	end
 })
 
