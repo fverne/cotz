@@ -1,11 +1,11 @@
-ITEM.name = "Henry Lever Action X Model .410"
+ITEM.name = "Henry Lever Action X Model .410 Short"
 ITEM.description= "A lever-operated shotgun, chambered in .410."
-ITEM.longdesc = "A fairly modern lever action shotgun, made in America. Chambered in .410 gauge, it is mostly designed for hunting small game. It is also capable of chambering and firing .45 ACP, however the lack of rifling in the barrel makes it inaccurate.\n\nAmmo: .410 Gauge \nMagazine Capacity: 5"
-ITEM.model = ("models/weapons/w_bocw_ironhide.mdl")
-ITEM.class = "cw_lax410"
-ITEM.weaponCategory = "primary"
+ITEM.longdesc = "A crudely cut down lever action shotgun. Chambered in .410 gauge, it is mostly designed for hunting small game. It is also capable of chambering and firing .45 ACP, however the lack of rifling in the barrel makes it inaccurate. The extremly short barrel and unergonomic handle makes this weapon hard to use at range.\n\nAmmo: .410 Gauge \nMagazine Capacity: 3"
+ITEM.model = ("models/weapons/w_bocw_ironhides.mdl")
+ITEM.class = "cw_lax410s"
+ITEM.weaponCategory = "secondary"
 ITEM.price = 11000
-ITEM.width = 6
+ITEM.width = 3
 ITEM.height = 1
 ITEM.canAttach = false
 
@@ -21,7 +21,7 @@ end
 
 ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(50, 7, -1),
+	pos = Vector(24, 6, 0),
 	ang = Angle(0, 180, 0),
 	fov = 45,
 }
@@ -38,29 +38,29 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, -90, 180),
 						["Position"] = Vector(11.98, -4.153, -3.575),
-						["Model"] = "models/weapons/w_bocw_ironhide.mdl",
+						["Model"] = "models/weapons/w_bocw_ironhides.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
-						["UniqueID"] = "15513215",
+						["UniqueID"] = "623677124",
 						["Bone"] = "spine 2",
-						["Name"] = "lax410",
+						["Name"] = "lax410s",
 					},
 				},
 			},
 			["self"] = {
 				["AffectChildrenOnly"] = true,
 				["ClassName"] = "event",
-				["UniqueID"] = "1534252",
+				["UniqueID"] = "123521345213",
 				["Event"] = "weapon_class",
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
-				["Arguments"] = "cw_lax410@@0",
+				["Arguments"] = "cw_lax410s@@0",
 			},
 		},
 	},
 	["self"] = {
 		["ClassName"] = "group",
-		["UniqueID"] = "12452313",
+		["UniqueID"] = "123515135123",
 		["EditorExpand"] = true,
 	},
 },

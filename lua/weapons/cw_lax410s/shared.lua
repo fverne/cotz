@@ -4,7 +4,7 @@ include("sh_sounds.lua")
 
 if CLIENT then
 	SWEP.DrawCrosshair = false
-	SWEP.PrintName = "Lever Action X Model .410"
+	SWEP.PrintName = "Lever Action X Model .410 Short"
 	SWEP.CSMuzzleFlashes = true
 	SWEP.ViewModelMovementScale = 1
 	
@@ -67,7 +67,7 @@ if CLIENT then
 	}
 
 	SWEP.DrawTraditionalWorldModel = false
-	SWEP.WM = "models/weapons/w_bocw_ironhide.mdl"
+	SWEP.WM = "models/weapons/w_bocw_ironhides.mdl"
 	SWEP.WMPos = Vector(-1, -2, 2)
 	SWEP.WMAng = Vector(0, 90, 180)
 
@@ -133,14 +133,14 @@ SWEP.Instructions	= ""
 
 SWEP.ViewModelFOV	= 75
 SWEP.ViewModelFlip	= false
-SWEP.ViewModel		= "models/weapons/v_bocw_ironhide.mdl"
-SWEP.WorldModel		= "models/weapons/w_bocw_ironhide.mdl"
+SWEP.ViewModel		= "models/weapons/v_bocw_ironhides.mdl"
+SWEP.WorldModel		= "models/weapons/w_bocw_ironhides.mdl"
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 5
-SWEP.Primary.DefaultClip	= 5
+SWEP.Primary.ClipSize		= 3
+SWEP.Primary.DefaultClip	= 3
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".45 ACP"
 
@@ -148,15 +148,15 @@ SWEP.FireDelay = 1.5
 SWEP.FireSound = "LAX410_FIRE"
 SWEP.Recoil = 5.5
 
-SWEP.HipSpread = 0.06
-SWEP.AimSpread = 0.03
+SWEP.HipSpread = 0.12
+SWEP.AimSpread = 0.06
 SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.55
---SWEP.ClumpSpread = 0.01
+--SWEP.ClumpSpread = 0.0425
 SWEP.SpreadPerShot = 0.012
 SWEP.SpreadCooldown = 0.7
 SWEP.Shots = 1
-SWEP.Damage = 99
+SWEP.Damage = 85
 SWEP.DeployTime = .5
 
 SWEP.ReloadSpeed = 0.8
