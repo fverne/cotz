@@ -13,7 +13,7 @@ function PLUGIN:HUDPaint()
     local itemboxheight
 
     -- Hotkey 1
-    surface.SetDrawColor(Color(83, 83, 83, 100))
+    surface.SetDrawColor(Color(142, 142, 142, 5))
     surface.DrawRect(ScrW()*0.05, ScrH()*0.835, boxwidth, boxheight)
 
     itemname = lp:GetCharacter():GetHotkeyItemName(1)
@@ -40,7 +40,7 @@ function PLUGIN:HUDPaint()
     draw.DrawText(string.upper(input.LookupBinding("gm_showhelp", true) or "N/A"), "stalkerregularsmallfont2", ScrW()*0.055, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
 
     -- Hotkey 2
-    surface.SetDrawColor(Color(83, 83, 83, 100))
+    surface.SetDrawColor(Color(142, 142, 142, 5))
     surface.DrawRect(ScrW()*0.09, ScrH()*0.835, ScrW()*0.03, ScrH()*0.05)
 
     itemname = lp:GetCharacter():GetHotkeyItemName(2)
@@ -67,7 +67,7 @@ function PLUGIN:HUDPaint()
     draw.DrawText(string.upper(input.LookupBinding("gm_showteam", true) or "N/A"), "stalkerregularsmallfont2", ScrW()*0.095, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
 
     -- Hotkey 3
-    surface.SetDrawColor(Color(83, 83, 83, 100))
+    surface.SetDrawColor(Color(142, 142, 142, 5))
     surface.DrawRect(ScrW()*0.13, ScrH()*0.835, ScrW()*0.03, ScrH()*0.05)
 
     itemname = lp:GetCharacter():GetHotkeyItemName(3)
@@ -94,7 +94,7 @@ function PLUGIN:HUDPaint()
     draw.DrawText(string.upper(input.LookupBinding("gm_showspare1", true) or "N/A"), "stalkerregularsmallfont2", ScrW()*0.135, ScrH()*0.835, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
 
     -- Hotkey 4
-    surface.SetDrawColor(Color(83, 83, 83, 100))
+    surface.SetDrawColor(Color(142, 142, 142, 5))
     surface.DrawRect(ScrW()*0.17, ScrH()*0.835, ScrW()*0.03, ScrH()*0.05)
 
     itemname = lp:GetCharacter():GetHotkeyItemName(4)
