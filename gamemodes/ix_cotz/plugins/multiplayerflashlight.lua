@@ -74,6 +74,21 @@ if (CLIENT) then
 
 			client.pxvs = client.pxvs or util.GetPixelVisibleHandle()
 			local isVisible = util.PixelVisible( pos, 16, client.pxvs )
+
+			local dist = client:GetPos():Distance(LocalPlayer():GetPos())
+			if ( dist > 512 ) then isVisible = 0 end
+
+			local plyang = LocalPlayer():EyeAngles()
+			local cliang = client:EyeAngles()
+
+			cliang:Sub(Angle(0,180,0))
+			cliang:Sub(plyang)
+			cliang:Normalize()
+			local cp, cy, cr = cliang:Unpack()
+			if ( cp > 45 or cp < -45 or cy > 45 or cy < -45 or cr > 45 or cr < -45 ) then
+				isVisible = 0
+			end
+
 			if ( isVisible == 0 ) then return end
 			local size = 8 * isVisible
 
