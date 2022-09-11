@@ -14,7 +14,7 @@ if (CLIENT) then
 	end
 
 	local flashType = {
-		{"effects/flashlight001", 512, 1},
+		{"effects/flashlight001", 1024, 3},
 		{"effects/flashlight001", 512, 3},
 		{"effects/flashlight/flight04", 600, 2},
 		{"effects/flashlight/hard", 512, 1},
@@ -50,6 +50,8 @@ if (CLIENT) then
 		end
 
 		if (!client.flash) then return end
+
+		
 
 		local pos, ang = client:EyePos(), client:EyeAngles()
 		pos = pos + ang:Forward() * 5
@@ -92,15 +94,22 @@ if (CLIENT) then
 			if ( isVisible == 0 ) then return end
 			local size = 8 * isVisible
 
+			local spritepos, spriteang = client:GetBonePosition(client:LookupBone("ValveBiped.Bip01_Head1") or 1)
+
+			spriteang[1] = spriteang[1]+75
+			--spritepos = spritepos + spriteang:Forward() * 5
+			spritepos = spritepos + spriteang:Up() * 3.5
+			spritepos = spritepos + spriteang:Right() * -2.8
+
 			render.SetMaterial( matLight )
-			render.DrawSprite( pos, size, size, Color( 255, 255, 255, 20 ) )
+			render.DrawSprite( spritepos, size, size, Color( 255, 255, 255, 20 ) )
 									
 			render.SetMaterial( matBeam )
 
 			render.StartBeam( 3 )
-				render.AddBeam( pos + ang:Forward() * 1, size, 0.0, Color( 255, 255, 255, 20 * isVisible ) )
-				render.AddBeam( pos + ang:Forward() * 10, size, 0.5, Color( 255, 255, 255, 10 * isVisible ) )
-				render.AddBeam( pos + ang:Forward() * 20, size, 1, Color( 255, 255, 255, 10 * isVisible) )
+				render.AddBeam( spritepos + spriteang:Forward() * 1, size, 0.0, Color( 255, 255, 255, 20 * isVisible ) )
+				render.AddBeam( spritepos + spriteang:Forward() * 10, size, 0.5, Color( 255, 255, 255, 10 * isVisible ) )
+				render.AddBeam( spritepos + spriteang:Forward() * 20, size, 1, Color( 255, 255, 255, 10 * isVisible) )
 			render.EndBeam()
 		end
 	end
