@@ -172,6 +172,7 @@ end;
 
 hook.Add("PostRenderVGUI", "Draw_Cursor_Function_FGSHAR", cursorDraw) -- PostRenderVGUI makes our custom cursor be drawn after the UI elements, this will make it work properly.
 hook.Add("Think", "Cursor_Think_Function_FGSHAR", cursorThink)
+hook.Add("HUDShouldDraw", "Damage_Direction_Suppressor", function(name) if (name == "CHudDamageIndicator") then return false end end)
 
 function PLUGIN:HUDPaint()
 	--// HUD Code exported by verne using Exho's HUD Designer //--
@@ -284,3 +285,32 @@ function ix.hud.DrawDeath()
 		end
 	end
 end
+
+
+ix.hud.attackers = {}
+net.Receive( "cotz_ShotInd", function( len )
+	local attacker = net.ReadEntity()
+	ix.hud.attackers[attacker] = { UnPredictedCurTime() + 2, attacker:GetPos() }
+end )
+
+local HitIndicatorMat = Material("stalker/hit_ind.png", "noclamp smooth")
+local function shotIndicatorDrawHUD()
+	surface.SetMaterial( HitIndicatorMat )
+	local scalefactor = 2.5
+		
+	for ent,data in pairs( ix.hud.attackers ) do
+		if data then 
+			local fade = ( ( data[1] - UnPredictedCurTime() ) * 90 ) + 45
+			if not IsValid(ent) or fade <= 46 or ent == LocalPlayer() then 
+				ix.hud.attackers[ent] = nil
+			else
+				--if fade > 180 then fade = 180 end
+				local rotate = ((EyePos() - data[2]):Angle().y - EyeAngles().y) + 180
+					
+				surface.SetDrawColor( 255, 255, 255, fade )
+				surface.DrawTexturedRectRotated( ScrW()/2, ScrH()/2, 50*scalefactor, 250*scalefactor, rotate )
+			end
+		end
+	end
+end
+hook.Add("HUDPaint","StalkerHitIndicator", shotIndicatorDrawHUD )

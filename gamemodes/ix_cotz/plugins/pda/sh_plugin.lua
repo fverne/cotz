@@ -72,7 +72,7 @@ ix.chat.Register("gpda", {
 			return true
 		end,
 		OnChatAdd = function(self, speaker, text, bAnonymous, data)
-			chat.AddText(Color(0,191,255), "[GPDA-"..speaker:GetCharacter():GetName().."] ", Material(speaker:GetCharacter():GetPdaavatar()), color_white, ": "..text)
+			chat.AddText(Color(180,61,61), "[GPDA-"..speaker:GetCharacter():GetName().."] ", Material(speaker:GetCharacter():GetPdaavatar()), color_white, ": "..text)
 		end,
 		description = "Send a message over the Global PDA network",
 		CanHear = function(self, speaker, listener)

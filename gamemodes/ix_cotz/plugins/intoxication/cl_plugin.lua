@@ -1,9 +1,9 @@
 local PLUGIN = PLUGIN
 
 function PLUGIN:RenderScreenspaceEffects()
-    if LocalPlayer():GetDrunkLevel() > 0 then
+    if LocalPlayer():GetDrunkLevel() > 10 then
       --  DrawMotionBlur(ix.config.Get("intoxicationEffectAlphaRate", 0.03), LocalPlayer():GetDrunkLevel() / 100, ix.config.Get("intoxicationEffectDelay", 0))
-        DrawSharpen( 1.5, LocalPlayer():GetDrunkLevel() / 10)
+        DrawSharpen( 1.5, (LocalPlayer():GetDrunkLevel() - 10) / 10)
     end
 end
 

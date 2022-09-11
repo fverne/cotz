@@ -12,6 +12,13 @@ include( "tasks.lua" )
 ENT.m_fMaxYawSpeed = 240
 ENT.m_iClass = CLASS_NONE
 
+ENT.IsSTALKERNPC = true
+hook.Add( "ShouldCollide", "npc_nocollide", function( ent1, ent2 )
+
+    -- If players are about to collide with each other, then they won't collide.
+    if ( ent1.IsSTALKERNPC and ent2.IsSTALKERNPC ) then return false end
+
+end )
 
 
 ENT.meleeAttackTimers = {}
@@ -85,6 +92,8 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 	self:SetSolid(SOLID_BBOX)
 
 	self:SetCollisionGroup(COLLISION_GROUP_NPC)
+
+	self:SetCustomCollisionCheck(true)
 
 	self:SetUseType(SIMPLE_USE)
 
