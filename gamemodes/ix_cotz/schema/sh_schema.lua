@@ -1,6 +1,6 @@
 -- Schema info
 Schema.name = "STALKER: Call of the Zone"
-Schema.author = "gumlefar, verne, the cotz community"
+Schema.author = "gumlefar, verne, cyanide, the cotz community"
 Schema.description = "A multiplayer STALKER gamemode"
 --Schema.logo = "vgui/background/wallpaper.jpg"
 
