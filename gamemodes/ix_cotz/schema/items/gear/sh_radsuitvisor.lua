@@ -1,12 +1,12 @@
-ITEM.name = "Exohelm"
+ITEM.name = "Exohelm with Respirator"
 ITEM.description = "A high-end helmet."
 ITEM.longdesc = "This helmet resembles that of an ordinary exoskeleton, but differs sightly from its standard counterpart and has differing protective characteristics. Good protection from gunfire and high calibre rounds in combination with anomaly protection make this helmet one of the best in its category."
 ITEM.model = "models/kek1ch/helm_tactic.mdl"
 ITEM.price = 150000
 --ITEM.busflag = {"ARMOR4", "SPECIAL6_1"}
 ITEM.busflag = {"headgear1_1_1"}
-ITEM.br = 0.25
-ITEM.fbr = 0
+ITEM.br = 0.18
+ITEM.fbr = 1
 ITEM.ar = 0.2
 ITEM.far = 0
 ITEM.radProt = 0.2
