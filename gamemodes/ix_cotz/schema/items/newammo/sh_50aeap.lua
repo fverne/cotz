@@ -8,6 +8,9 @@ ITEM.longdesc = "The .50 Action Express is a large caliber handgun cartridge. De
 ITEM.price = 1750
 ITEM.img = ix.util.GetMaterial("cotz/icons/ammo/ammo_long_37_1.png")
 
+ITEM.width = 2
+ITEM.height = 1
+
 ITEM.weight = 0.27
 ITEM.flatweight = 0.05
 
