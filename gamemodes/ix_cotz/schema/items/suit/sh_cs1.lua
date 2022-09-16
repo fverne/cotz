@@ -7,9 +7,9 @@ ITEM.width = 2
 ITEM.height = 3
 ITEM.price = 22000
 ITEM.busflag = "dev"
-ITEM.br = 0.18
-ITEM.fbr = 1
-ITEM.ar = 0.15
+ITEM.br = 0.22
+ITEM.fbr = 2
+ITEM.ar = 0.22
 ITEM.far = 1
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","ll","ll","0","0"}
@@ -22,6 +22,9 @@ ITEM.newSkin = 1
 ITEM.bodygroup = {0}
 ITEM.bodygroupsub = {0}
 
+ITEM.bodyGroups = {
+	["gloves"] = 1,
+}
 
 ITEM.skincustom[1] = {
 	name = "Skin 0",

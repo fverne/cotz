@@ -479,29 +479,6 @@ ITEM.functions.Equip = {
 			end
 		end
 
-		if (item.bodyGroups) then
-			local groups = {}
-
-			for k, value in pairs(item.bodyGroups) do
-				local index = item.player:FindBodygroupByName(k)
-
-				if (index > -1) then
-					groups[index] = value
-				end
-			end
-
-			local newGroups = char:GetData("groups", {})
-
-			for index, value in pairs(groups) do
-				newGroups[index] = value
-				item.player:SetBodygroup(index, value)
-			end
-
-			if (table.Count(newGroups) > 0) then
-				char:SetData("groups", newGroups)
-			end
-		end
-
 		item:OnEquipped()
 		return false
 	end,
@@ -584,6 +561,29 @@ function ITEM:OnLoadout()
 			end
 		end
 
+		if (self.bodyGroups) then
+			local groups = {}
+
+			for k, value in pairs(self.bodyGroups) do
+				local index = client:FindBodygroupByName(k)
+
+				if (index > -1) then
+					groups[index] = value
+				end
+			end
+
+			local newGroups = client:GetCharacter():GetData("groups", {})
+
+			for index, value in pairs(groups) do
+				newGroups[index] = value
+				client:SetBodygroup(index, value)
+			end
+
+			if (table.Count(newGroups) > 0) then
+				client:GetCharacter():SetData("groups", newGroups)
+			end
+		end
+
 		self:RunAllAttachmentAttach()
 	end
 end
@@ -607,8 +607,8 @@ function ITEM:OnRemoved()
 end
 
 function ITEM:OnEquipped()
-	self:RunAllAttachmentAttach()
 	self.player:EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
+	self:OnLoadout()
 end
 
 function ITEM:OnUnequipped()
