@@ -253,9 +253,12 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 		[1] = 1,
 	},
 	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
 		ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData = ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData or {}
-		ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData[dat] = ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData[dat] or 0
-		ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData[dat] = ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData[dat]+1
+		ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData[item] = ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData[item] or 0
+		ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData[item] = ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData[item]+amt
 	end,
 	fnGetComplexProgression = function()
 		return ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData
@@ -353,9 +356,12 @@ ix.progression.Register("technutItemDelivery_Main", {
 		[1] = 1,
 	},
 	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
 		ix.progression.status["technutItemDelivery_Main"].complexData = ix.progression.status["technutItemDelivery_Main"].complexData or {}
-		ix.progression.status["technutItemDelivery_Main"].complexData[dat] = ix.progression.status["technutItemDelivery_Main"].complexData[dat] or 0
-		ix.progression.status["technutItemDelivery_Main"].complexData[dat] = ix.progression.status["technutItemDelivery_Main"].complexData[dat]+1
+		ix.progression.status["technutItemDelivery_Main"].complexData[item] = ix.progression.status["technutItemDelivery_Main"].complexData[item] or 0
+		ix.progression.status["technutItemDelivery_Main"].complexData[item] = ix.progression.status["technutItemDelivery_Main"].complexData[item]+amt
 	end,
 	fnGetComplexProgression = function()
 		return ix.progression.status["technutItemDelivery_Main"].complexData
@@ -442,9 +448,12 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 		[1] = 1,
 	},
 	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
 		ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData = ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData or {}
-		ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData[dat] = ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData[dat] or 0
-		ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData[dat] = ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData[dat]+1
+		ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData[item] = ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData[item] or 0
+		ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData[item] = ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData[item]+amt
 	end,
 	fnGetComplexProgression = function()
 		return ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData
@@ -570,9 +579,12 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 		[1] = 1,
 	},
 	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
 		ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData or {}
-		ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData[dat] = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData[dat] or 0
-		ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData[dat] = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData[dat]+1
+		ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData[item] = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData[item] or 0
+		ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData[item] = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData[item]+amt
 	end,
 	fnGetComplexProgression = function()
 		return ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData
@@ -646,9 +658,12 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 		[1] = 1,
 	},
 	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
 		ix.progression.status["quarterMasterDelivery_activateItem"].complexData = ix.progression.status["quarterMasterDelivery_activateItem"].complexData or {}
-		ix.progression.status["quarterMasterDelivery_activateItem"].complexData[dat] = ix.progression.status["quarterMasterDelivery_activateItem"].complexData[dat] or 0
-		ix.progression.status["quarterMasterDelivery_activateItem"].complexData[dat] = ix.progression.status["quarterMasterDelivery_activateItem"].complexData[dat]+1
+		ix.progression.status["quarterMasterDelivery_activateItem"].complexData[item] = ix.progression.status["quarterMasterDelivery_activateItem"].complexData[item] or 0
+		ix.progression.status["quarterMasterDelivery_activateItem"].complexData[item] = ix.progression.status["quarterMasterDelivery_activateItem"].complexData[item]+amt
 	end,
 	fnGetComplexProgression = function()
 		return ix.progression.status["quarterMasterDelivery_activateItem"].complexData
@@ -725,9 +740,12 @@ ix.progression.Register("quarterMasterDelivery_main", {
 		[1] = 1,
 	},
 	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
 		ix.progression.status["quarterMasterDelivery_main"].complexData = ix.progression.status["quarterMasterDelivery_main"].complexData or {}
-		ix.progression.status["quarterMasterDelivery_main"].complexData[dat] = ix.progression.status["quarterMasterDelivery_main"].complexData[dat] or 0
-		ix.progression.status["quarterMasterDelivery_main"].complexData[dat] = ix.progression.status["quarterMasterDelivery_main"].complexData[dat]+1
+		ix.progression.status["quarterMasterDelivery_main"].complexData[item] = ix.progression.status["quarterMasterDelivery_main"].complexData[item] or 0
+		ix.progression.status["quarterMasterDelivery_main"].complexData[item] = ix.progression.status["quarterMasterDelivery_main"].complexData[item]+amt
 	end,
 	fnGetComplexProgression = function()
 		return ix.progression.status["quarterMasterDelivery_main"].complexData
@@ -829,9 +847,12 @@ ix.progression.Register("computerDelivery_activateItem", {
 		[1] = 1,
 	},
 	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
 		ix.progression.status["computerDelivery_activateItem"].complexData = ix.progression.status["computerDelivery_activateItem"].complexData or {}
-		ix.progression.status["computerDelivery_activateItem"].complexData[dat] = ix.progression.status["computerDelivery_activateItem"].complexData[dat] or 0
-		ix.progression.status["computerDelivery_activateItem"].complexData[dat] = ix.progression.status["computerDelivery_activateItem"].complexData[dat]+1
+		ix.progression.status["computerDelivery_activateItem"].complexData[item] = ix.progression.status["computerDelivery_activateItem"].complexData[item] or 0
+		ix.progression.status["computerDelivery_activateItem"].complexData[item] = ix.progression.status["computerDelivery_activateItem"].complexData[item]+amt
 	end,
 	fnGetComplexProgression = function()
 		return ix.progression.status["computerDelivery_activateItem"].complexData
@@ -898,9 +919,12 @@ ix.progression.Register("computerDelivery_main", {
 		[1] = 1,
 	},
 	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
 		ix.progression.status["computerDelivery_main"].complexData = ix.progression.status["computerDelivery_main"].complexData or {}
-		ix.progression.status["computerDelivery_main"].complexData[dat] = ix.progression.status["computerDelivery_main"].complexData[dat] or 0
-		ix.progression.status["computerDelivery_main"].complexData[dat] = ix.progression.status["computerDelivery_main"].complexData[dat]+1
+		ix.progression.status["computerDelivery_main"].complexData[item] = ix.progression.status["computerDelivery_main"].complexData[item] or 0
+		ix.progression.status["computerDelivery_main"].complexData[item] = ix.progression.status["computerDelivery_main"].complexData[item]+amt
 	end,
 	fnGetComplexProgression = function()
 		return ix.progression.status["computerDelivery_main"].complexData

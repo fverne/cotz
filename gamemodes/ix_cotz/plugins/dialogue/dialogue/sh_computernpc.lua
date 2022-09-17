@@ -287,21 +287,33 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 					
 					local item = player:GetCharacter():GetInventory():HasItem(dyndata.itemid)
 
+					local dat = ix.progression.status[dyndata.progid].complexData
+					dat = dat or {}
+					local amtcur = dat[dyndata.itemid] or 0
+
+					local reqitems = ix.progression.GetComplexProgressionReqs(dyndata.progid)
+					local amtreq = reqitems[dyndata.itemid]
+
+					local amtneed = amtreq - amtcur
+
 					if(item)then
+						local amtavailable = item:GetData("quantity", 1)
+						local amtfinal = amtavailable >= amtneed and amtneed or amtavailable
+
+						item:SetData("quantity", item:GetData("quantity",0) - amtfinal)
+						
+						if(item:GetData("quantity", 0) < 1)then
+							item:Remove()
+						end
+
 						--Adds reward
-						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item)
+						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item, amtfinal)
 						player:addReputation(repReward)
 						ix.dialogue.notifyReputationReceive(player, repReward)
 						player:GetCharacter():GiveMoney(monReward)
 						ix.dialogue.notifyMoneyReceive(player, monReward)
 
-						if(item:GetData("quantity", 0) > 1) then
-							item:SetData("quantity", item:GetData("quantity",0) - 1)
-						else
-							item:Remove()
-						end
-
-						ix.progression.AddComplexProgressionValue(dyndata.progid, dyndata.itemid, player:Name())
+						ix.progression.AddComplexProgressionValue(dyndata.progid, {dyndata.itemid, amtfinal}, player:Name())
 					end
 				end
 			end	
