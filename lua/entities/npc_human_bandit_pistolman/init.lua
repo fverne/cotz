@@ -8,55 +8,40 @@ ENT.StartHealth = 100
 ENT.PlayerFriendly = false
 
 ENT.alertsounds  = {
-                      "german/ger_enemyahead.wav"
+                      "npc/bandit/enemy_1.ogg",
+                      "npc/bandit/enemy_2.ogg",
+                      "npc/bandit/enemy_3.ogg",
+                      "npc/bandit/enemy_4.ogg",
+                      "npc/bandit/enemy_5.ogg",
+                      "npc/bandit/enemy_6.ogg",
+                      "npc/bandit/enemy_7.ogg",
                     }
 
-ENT.idlesounds   = {
-                      "german/ger_sticktogether.wav",
-                      "german/ger_spreadout.wav",
-                      "german/ger_attack.wav"
-                    }
-
-ENT.attacksounds = {  "german/ger_moveupmg.wav", 
-                      "german/ger_moveupmg2.wav",
-                      "german/ger_moveupmg3.wav",
-                      "german/ger_coveringfire.wav",
-                      "german/ger_coverflanks.wav",
-                      "german/ger_gogogo.wav"
+ENT.attacksounds = {  "npc/bandit/attack_1.ogg", 
+                      "npc/bandit/attack_2.ogg",
+                      "npc/bandit/attack_3.ogg",
+                      "npc/bandit/attack_4.ogg",
+                      "npc/bandit/attack_5.ogg",
+                      "npc/bandit/attack_6.ogg"
                     }
 
 ENT.hurtsounds   = {
-                      "stalkersound/pain1.wav",
-                      "stalkersound/pain2.wav",
-                      "stalkersound/pain3.wav",
-                      "stalkersound/pain4.wav",
-                      "stalkersound/pain5.wav",
-                      "stalkersound/pain6.wav",
-                      "stalkersound/pain7.wav",
-                      "stalkersound/pain8.wav",
-                      "stalkersound/pain9.wav",
-                      "stalkersound/pain10.wav",
-                      "stalkersound/pain11.wav",
-                      "stalkersound/pain12.wav",
-                      "stalkersound/pain13.wav",
-                      "stalkersound/pain14.wav"
+                      "npc/bandit/hit_1.ogg",
+                      "npc/bandit/hit_2.ogg",
+                      "npc/bandit/hit_3.ogg",
+                      "npc/bandit/hit_4.ogg",
+                      "npc/bandit/hit_5.ogg",
+                      "npc/bandit/hit_6.ogg",
+                      "npc/bandit/hit_7.ogg"
                     }
 
 ENT.diesounds    = {
-                      "stalkersound/die1.wav",
-                      "stalkersound/die2.wav",
-                      "stalkersound/die3.wav",
-                      "stalkersound/die4.wav"
-                    }
-
-ENT.coversounds  = {
-                      "german/ger_takecover.wav"
-                    }
-
-ENT.grenadesounds= {
-                      "german/ger_grenadein",
-                      "german/ger_grenadein2",
-                      "german/ger_grenadein3"
+                      "npc/bandit/death_1.ogg",
+                      "npc/bandit/death_2.ogg",
+                      "npc/bandit/death_3.ogg",
+                      "npc/bandit/death_4.ogg",
+                      "npc/bandit/death_5.ogg",
+                      "npc/bandit/death_6.ogg"
                     }
 
 ENT.models       = {
@@ -71,22 +56,17 @@ ENT.weapons      = {
 
 -- Live vars
 ENT.Alerted     = false
-ENT.Grenades    = 2
 ENT.MeleeAttacking = false
-ENT.seen_grenade = true
 ENT.TakingCover = false
 ENT.FindingLOS  = false
 ENT.CanSeeEnemy = false
 ENT.TimeToTakeCover = 0
-ENT.OutOfAmmo = false
 ENT.GotACloseOne = false
 ENT.dead = false
 ENT.speaktime = 0
 ENT.FireBurst = 0
 ENT.NextAttack = 0
-ENT.CoverTime = 0
-
-
+   
 function ENT:Initialize()
 
   self:Give(self.weapons[math.random(#self.weapons)])
@@ -119,35 +99,23 @@ function ENT:Initialize()
   self:AddRelationship("player D_HT 10")
   self:InitEnemies()
 
-  self.CoverTime = CurTime() + 500
   self:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_VERY_GOOD )
 end
    
 function ENT:OnTakeDamage(dmg)
-  if ((self.NextFlinch or 0) < CurTime()) then
-    //self:SetSchedule(SCHED_SMALL_FLINCH)
-    self.NextFlinch = CurTime() + 3
-  end
 
   self:SpawnBlood(dmg)
   self:SetHealth(self:Health() - dmg:GetDamage())
   
-  if math.random(4) == 1 then
+  if math.random(2) == 1 then
     self:StopSpeechSounds()
     self:PlayRandomSound(self.hurtsounds)
-    --self:SetSchedule(SCHED_ALERT_FACE)
   end
 
   if (dmg:GetAttacker():GetClass() != self:GetClass() ) then
     self:AddEntityRelationship( dmg:GetAttacker(), 1, 10 )
     self:SetEnemy(dmg:GetAttacker())
   end
-
-  --if (self.TakingCover == false) || self.Alerted == false then
-    --self.TakingCover = true
-    --print( "Take Cover, they shot me!" );
-    --self:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY)
-  --end
 
   self.Alerted = true
   if self:Health() <= 0 && self.dead == false then
@@ -182,18 +150,6 @@ function ENT:Think()
       self.RecheckEnemyTimer = CurTime() + 8
       self:InitEnemies()
     end
-
-    if self.TakingCover == false then
-      self:GetBoomers()//grenades are top priority.
-      if(math.random(1,20) == 1) then
-        self:FindCloseEnemies()//get guys close to me
-      end
-    end
-
-    if( self.CoverTime < CurTime()) then
-      self.NextAttack = CurTime() + 4
-      self.CoverTime = CurTime() + 500
-    end
   end
 end
 
@@ -215,40 +171,30 @@ function ENT:SelectSchedule()
       self:FindEnemyDan()
       -- If there's still no enemy after looking for one, we patrol
       if( self:GetEnemy() == nil) then
-        --print("SCHED_PATROL_WALK")
         self:SetSchedule(SCHED_PATROL_WALK)
         self.TakingCover = false
         return
       end
-      
-      if math.random(1,100) < 5 then
-        self:StopSpeechSounds()
-        self:EmitSound( self.idlesounds[math.random(1,#self.idlesounds)], 400, 100)
-      end
     else
+
+      if self.speaktime < CurTime() then
+        self.speaktime = CurTime() + 8
+        if math.random(1,100) < 30 then
+          self:StopSpeechSounds()
+          self:PlayRandomSound(self.attacksounds)
+        end
+      end
+
       enemy_pos = self:GetEnemy():GetPos()
       distance = self:GetPos():Distance(enemy_pos)
       if distance > 750 then
-        --print("SCHED_CHASE_ENEMY")
         self:SetSchedule(SCHED_CHASE_ENEMY)
       elseif (distance < 750 && distance > 200) then
-        --if damaged > 75% and not in cover
-        if self:Health() < (self.StartHealth*0.25) then
-          if self.speaktime < CurTime() then
-            self.speaktime = CurTime() + 6
-            if math.random(1,100) < 5 then
-              self:StopSpeechSounds()
-              self:PlayRandomSound(self.attacksounds)
-            end
-          end
-        end
         if (!haslos) then
-          ----print("SCHED_ESTABLISH_LINE_OF_FIRE")
           self:SetSchedule(SCHED_ESTABLISH_LINE_OF_FIRE) --move to shoot enemy
         else
-          if(self.NextAttack < CurTime()) then
+          if (self.NextAttack < CurTime() and self:HasLOS()) then
             self:StartSchedule(schedd)
-            self.CoverTime = CurTime() + 4
           else
             self:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY)
           end
@@ -258,7 +204,6 @@ function ENT:SelectSchedule()
         self.NextAttack = CurTime() + 2
       else
         self.TakingCover = false
-        --print("SCHED_CHASE_ENEMY")
         self:SetSchedule(SCHED_CHASE_ENEMY)//move to shoot enemy
       end
     end
@@ -267,33 +212,23 @@ end
 
 function ENT:FindEnemyDan()
   local MyNearbyTargets = ents.FindInCone(self:GetPos(),self:GetForward(),7000,45)
-  //local ClosestDistance = 3000
-  if (!MyNearbyTargets) then print( "No Targets!" ); return end
+
   for k,v in pairs(MyNearbyTargets) do
     if v:Disposition(self) == D_HT || v:IsPlayer() then
 
-    self:StopSpeechSounds()
-    self:ResetEnemy()
-    self:AddEntityRelationship( v, D_HT, 10 )
-    self:SetEnemy(v)
-    local distance = self:GetPos():Distance(v:GetPos())
-    local randomsound = math.random(1,5)
-    //self:SetSchedule(SCHED_ALERT_FACE)
-    //alerted
-    if self.Alerted == false then
-    if (distance > 270) then
-      if randomsound == 1 then
-            self:EmitSound( self.alert1, 400, 100)
+      self:StopSpeechSounds()
+      self:ResetEnemy()
+      self:AddEntityRelationship( v, D_HT, 10 )
+      self:SetEnemy(v)
+      local distance = self:GetPos():Distance(v:GetPos())
+      local randomsound = math.random(1,5)
+
+      if self.Alerted == false then
+        self:EmitSound( self.alertsounds[math.random(#self.alertsounds)], 400, 100)
       end
+      self.Alerted = true
     end
-    end
-    self.Alerted = true
-          return
-      end
   end
-  //if ClosestDistance == 4000 then
-  self:SetEnemy(NULL)
-  //end
 end
 
 function ENT:StopSpeechSounds()
@@ -301,16 +236,8 @@ function ENT:StopSpeechSounds()
     self:StopSound(self.alertsounds[i])
   end
 
-  for i = 1, #self.idlesounds do
-    self:StopSound(self.idlesounds[i])
-  end
-
   for i = 1, #self.attacksounds do
     self:StopSound(self.attacksounds[i])
-  end
-
-  for i = 1, #self.coversounds do
-    self:StopSound(self.coversounds[i])
   end
 end
 
@@ -329,30 +256,6 @@ function ENT:SpawnBlood(dmg)
     bloodeffect:Activate() 
     bloodeffect:Fire( "Start", "", 0 )
     bloodeffect:Fire( "Kill", "", 0.1 )
-  end
-end
-
-function ENT:GetBoomers()
-  local nearbygrenades = ents.FindByClass("npc_grenade_frag")
-  for k,v in pairs(nearbygrenades) do
-      if self:GetPos():Distance(v:GetPos()) < 400 then
-    self:StopSpeechSounds()
-    self:ResetEnemy()
-      self:AddEntityRelationship( v, 3, 10 )
-          //self:SetEnemy(v)
-          local randomsound = math.random(1,3)
-    if randomsound == 1 then
-          self:EmitSound( self.grenade1, 400, 100)
-    elseif randomsound == 2 then
-          self:EmitSound( self.grenade2, 400, 100)
-    else
-          self:EmitSound( self.grenade3, 400, 100)
-    end
-    self.seen_grenade = true
-    self.TakingCover = true
-    self:SetSchedule(SCHED_HIDE_AND_RELOAD)
-    return
-      end
   end
 end
 
@@ -386,10 +289,13 @@ function ENT:KilledDan()
       bone:SetAngles( boneang )
     end
   end
-  if( GetConVarNumber("ai_keepragdolls") == 0 ) then
-    ragdoll:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
-    ragdoll:Fire( "FadeAndRemove", "", 7 )
+
+  -- Helix specific drops
+  if(ix)then
+    local item = ix.util.GetRandomItemFromPool("bandit_pistol_drops")
+    ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), nil, AngleRand(), item[2] or {} )
   end
+
   self:Remove()
 end
 
@@ -397,30 +303,6 @@ function ENT:ResetEnemy()
   if( self:GetEnemy() ) then
     self:SetEnemy(nil)
   end
-end
-
-function ENT:FindCloseEnemies()
---  local MyNearbyTargets = ents.FindInCone(self:GetPos(),self:GetForward(),300,85)
---  
---  if (!MyNearbyTargets) then print( "No Targets!" ); return end
---  for k,v in pairs(MyNearbyTargets) do
---    if v:Disposition(self) == 1 || v:IsPlayer() then
---      print(v:GetClass())
---
---      self:StopSpeechSounds()
---      self:ResetEnemy()
---      self:AddEntityRelationship( v, 1, 10 )
---      self:SetEnemy(v)
---
---      if (self.TakingCover == false) || self.Alerted == false then
---        self.TakingCover = true
---        self:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY)
---      end
---
---      self.Alerted = true
---      return
---    end
---  end
 end
 
 function ENT:OnRemove()
