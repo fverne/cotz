@@ -27,8 +27,8 @@ if CLIENT then
 	
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/w_tfa_mn14_classic_hd.mdl"
-	SWEP.WMAng = Vector(-10, 180, 180)
-	SWEP.WMPos = Vector(1, -2, 1)
+	SWEP.WMAng = Vector(-22, 180, 180)
+	SWEP.WMPos = Vector(1, -15, 0)
 	
 	SWEP.IronsightPos = Vector(-7.224, -9, 0.887)
 	SWEP.IronsightAng = Vector(0, 0, 0)

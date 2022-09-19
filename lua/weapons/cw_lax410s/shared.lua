@@ -68,8 +68,8 @@ if CLIENT then
 
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/w_bocw_ironhides.mdl"
-	SWEP.WMPos = Vector(-1, -2, 2)
-	SWEP.WMAng = Vector(0, 90, 180)
+	SWEP.WMPos = Vector(-1, -1.5, 1)
+	SWEP.WMAng = Vector(0, 90, 190)
 
 	SWEP.LuaVMRecoilAxisMod = {vert = 1, hor = 1, roll = 1, forward = 1, pitch = .5}
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}

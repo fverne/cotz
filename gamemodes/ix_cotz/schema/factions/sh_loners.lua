@@ -7,39 +7,39 @@ FACTION.description = "Regular inhabitants of the zone."
 FACTION.isDefault = true
 FACTION.color = Color(142, 142, 142)
 FACTION.models = {
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 0, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 1, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 2, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 3, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 4, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 5, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 6, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 7, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 8, "000002010"},
---	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 9, "000002010"}, -- clear sky
---	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 10, "000002010"}, -- duty
---	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 11, "000002010"}, -- freedom
---	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 12, "000002010"}, -- merc
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 13, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 14, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 15, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 16, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 17, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 18, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 19, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 20, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 21, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 22, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 23, "000002010"},
---	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 24, "000002010"}, -- nazi
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 25, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 26, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 27, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 28, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 29, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 30, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 31, "000002010"},
-	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 32, "000002010"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 0, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 1, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 2, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 3, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 4, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 5, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 6, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 7, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 8, "000000000"},
+--	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 9, "000000000"}, -- clear sky
+--	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 10, "000000000"}, -- duty
+--	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 11, "000000000"}, -- freedom
+--	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 12, "000000000"}, -- merc
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 13, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 14, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 15, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 16, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 17, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 18, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 19, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 20, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 21, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 22, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 23, "000000000"},
+--	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 24, "000000000"}, -- nazi
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 25, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 26, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 27, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 28, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 29, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 30, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 31, "000000000"},
+	{"models/stalkerisaac/playermodel/male_01_anorak.mdl", 32, "000000000"},
 }
 
 
