@@ -295,6 +295,8 @@ function ENT:KilledDan()
     ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), nil, AngleRand(), item[2] or {} )
   end
 
+  ragdoll.lootGroup = "bandit_shotgun_loot"
+
   self:Remove()
 end
 

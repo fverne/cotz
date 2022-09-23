@@ -275,6 +275,8 @@ function ENT:KilledDan()
   ragdoll:SetColor( self:GetColor() )
   ragdoll:SetMaterial( self:GetMaterial() )
 
+  
+
   cleanup.ReplaceEntity(self,ragdoll)
   undo.ReplaceEntity(self,ragdoll)
 
@@ -295,6 +297,8 @@ function ENT:KilledDan()
     local item = ix.util.GetRandomItemFromPool("bandit_pistol_drops")
     ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), nil, AngleRand(), item[2] or {} )
   end
+
+  ragdoll.lootGroup = "bandit_pistol_loot"
 
   self:Remove()
 end
