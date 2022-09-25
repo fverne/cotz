@@ -276,6 +276,7 @@ function ENT:KilledDan()
   ragdoll:SetSkin( self:GetSkin() )
   ragdoll:SetColor( self:GetColor() )
   ragdoll:SetMaterial( self:GetMaterial() )
+  ragdoll:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 
   cleanup.ReplaceEntity(self,ragdoll)
   undo.ReplaceEntity(self,ragdoll)
@@ -292,10 +293,10 @@ function ENT:KilledDan()
   -- Helix specific drops
   if(ix)then
     local item = ix.util.GetRandomItemFromPool("bandit_shotgun_drops")
-    ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), nil, AngleRand(), item[2] or {} )
+    ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), function(item, ent) ent.bTemporary = true end, AngleRand(), item[2] or {} )
   end
 
-  ragdoll.lootGroup = "bandit_shotgun_loot"
+  ragdoll:SetNetVar("loot", "bandit_shotgun_loot")
 
   self:Remove()
 end
