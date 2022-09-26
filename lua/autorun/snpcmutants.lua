@@ -466,15 +466,15 @@ AddSound("Stalker.Cat.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/crea
 
 -- Chimera sounds
 ----IDLE
-AddSound("Stalker.Chimera.Idle1",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/chimera/chimera_idle_1.wav")
-AddSound("Stalker.Chimera.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/chimera/chimera_idle_2.wav")
+AddSound("Stalker.Chimera.Idle1",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/chimera/chimera_idle_1.mp3")
+AddSound("Stalker.Chimera.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/chimera/chimera_idle_2.mp3")
 ----HIT
-AddSound("Stalker.Chimera.Hit1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/chimera/chimera_attack_1.wav")
-AddSound("Stalker.Chimera.Hit2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/chimera/chimera_attack_2.wav")
-AddSound("Stalker.Chimera.Hit3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/chimera/chimera_attack_hit_1.wav")
-AddSound("Stalker.Chimera.Hit4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/chimera/chimera_attack_hit_2.wav")
+AddSound("Stalker.Chimera.Hit1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/chimera/chimera_attack_1.mp3")
+AddSound("Stalker.Chimera.Hit2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/chimera/chimera_attack_2.mp3")
+AddSound("Stalker.Chimera.Hit3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/chimera/chimera_attack_hit_1.mp3")
+AddSound("Stalker.Chimera.Hit4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/chimera/chimera_attack_hit_2.mp3")
 ----DEATH
-AddSound("Stalker.Chimera.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/chimera/chimera_death_1.wav")
+AddSound("Stalker.Chimera.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/chimera/chimera_death_1.mp3")
 
 
 -- Bloodsucker sounds
@@ -526,10 +526,8 @@ AddSound("Stalker.Rodent.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/c
 AddSound("Stalker.Rodent.Idle3",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/rodent/tushkano_idle_2.wav")
 AddSound("Stalker.Rodent.Idle4",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/rodent/tushkano_idle_3.wav")
 ----HIT
-AddSound("Stalker.Rodent.Melee1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/attack_hit_0.mp3")
-AddSound("Stalker.Rodent.Melee2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/attack_hit_1.mp3")
-AddSound("Stalker.Rodent.Melee3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/attack_hit_2.mp3")
-AddSound("Stalker.Rodent.Melee4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/attack_0.mp3")
+AddSound("Stalker.Rodent.Melee2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_attack_1.mp3")
+AddSound("Stalker.Rodent.Melee4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_attack_0.mp3")
 ----Chase
 AddSound("Stalker.Rodent.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_aggressive_0.wav")
 AddSound("Stalker.Rodent.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_aggressive_1.wav")
