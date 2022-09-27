@@ -24,7 +24,7 @@ if SERVER then
 			for k, v in pairs(self.radiationpoints) do
 				local selectedRadiation = {}
 				for i=1, #self.radiationdefs do
-					if string.sub(v[3],i,i) == "1" then
+					if string.sub(v[2],i,i) == "1" then
 						table.insert( selectedRadiation, self.radiationdefs[i])
 					end
 				end
@@ -97,11 +97,10 @@ ix.command.Add("radiationadd", {
 	OnRun = function(self, client, radiation)
 		local trace = client:GetEyeTraceNoCursor()
 		local hitpos = trace.HitPos + trace.HitNormal*5
-		local radius = 0
 		local radiation = radiation or 11111
 
 		
-		table.insert( PLUGIN.radiationpoints, { hitpos, radius, radiation } )
+		table.insert( PLUGIN.radiationpoints, { hitpos, radiation } )
 		client:Notify( "Radiation point successfully added" )
 	end
 })

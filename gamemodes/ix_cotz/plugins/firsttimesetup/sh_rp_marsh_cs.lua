@@ -1,4 +1,4 @@
--- Presets for different maps
+-- Presets for rp_marsh_cs
 
 PLUGIN.map_presets["rp_marsh_cs"] = {
   containers = {
@@ -1508,26 +1508,34 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
       angles = Angle(0,-177.793,0)
     }
   },
+
+  plugindata = {
+    ["anomalycontroller"] = {
+
+    },
+    ["boxspawner"] = {
+
+    },
+    ["eventcontroller"] = {
+
+    },
+    ["eventcontrolleradv"] = {
+
+    },
+    ["hidestashspawner"] = {
+
+    },
+    ["radiationcontroller"] = {
+
+    },
+    ["simplecrossserver"] = {
+
+    },
+    ["worlditemspawner"] = {
+
+    },
+  }
 }
 
 
 
-PLUGIN.map_presets["rp_salvation_2_haven"] = {
-  containers = {
-
-  },
-  vendors = {
-
-  },
-}
-
-
-
-PLUGIN.map_presets["rp_waystation"] = {
-  containers = {
-
-  },
-  vendors = {
-
-  },
-}
