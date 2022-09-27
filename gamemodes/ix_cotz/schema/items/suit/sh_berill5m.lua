@@ -23,10 +23,6 @@ ITEM.newSkin = 0
 ITEM.bodygroup = {0}
 ITEM.bodygroupsub = {0}
 
-ITEM.bodyGroups = {
-	["gloves"] = 1,
-}
-
 ITEM.skincustom[1] = {
 	name = "Skin 0",
 	skingroup = 0,

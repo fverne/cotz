@@ -18,13 +18,9 @@ ITEM.img = ix.util.GetMaterial("vgui/hud/cs1.png")
 ITEM.weight = 6.500
 ITEM.miscslots = 2
 
-ITEM.newSkin = 1
+ITEM.newSkin = 0
 ITEM.bodygroup = {0}
 ITEM.bodygroupsub = {0}
-
-ITEM.bodyGroups = {
-	["gloves"] = 1,
-}
 
 ITEM.skincustom[1] = {
 	name = "Skin 0",
@@ -37,4 +33,8 @@ ITEM.skincustom[2] = {
 ITEM.skincustom[3] = {
 	name = "Skin 2",
 	skingroup = 2,
+}
+ITEM.skincustom[4] = {
+	name = "Skin 3",
+	skingroup = 3,
 }

@@ -20,11 +20,6 @@ ITEM.weight = 14.400
 ITEM.miscslots = 4
 
 ITEM.newSkin = 0
-ITEM.bodyGroups = {
-	["masks"] = 2,
-}
-
-
 
 ITEM.skincustom[1] = {
 	name = "Skin 0",
