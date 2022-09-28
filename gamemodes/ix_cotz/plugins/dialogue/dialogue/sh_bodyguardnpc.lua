@@ -200,23 +200,37 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 			if(CLIENT)then
 				self.response = string.format("Nice work, this %s will help our cause.", ix.item.list[dyndata.itemid].name)
 			else
-				if ix.progression.IsActive("bodyguardnpcItemDelivery_Main") then --change this
+				if ix.progression.IsActive(dyndata.progid) then
 					
 					local item = player:GetCharacter():GetInventory():HasItem(dyndata.itemid)
 
-					if(item)then
-						--Adds reward
-						repReward = ix.util.GetValueFromProgressionTurnin(item)
-						player:addReputation(repReward)
-						ix.dialogue.notifyReputationReceive(player, repReward)
+					local dat = ix.progression.status[dyndata.progid].complexData
+					dat = dat or {}
+					local amtcur = dat[dyndata.itemid] or 0
 
-						if(item:GetData("quantity", 0) > 1) then
-							item:SetData("quantity", item:GetData("quantity",0) - 1)
-						else
+					local reqitems = ix.progression.GetComplexProgressionReqs(dyndata.progid)
+					local amtreq = reqitems[dyndata.itemid]
+
+					local amtneed = amtreq - amtcur
+
+					if(item)then
+						local amtavailable = item:GetData("quantity", 1)
+						local amtfinal = amtavailable >= amtneed and amtneed or amtavailable
+
+						item:SetData("quantity", item:GetData("quantity",0) - amtfinal)
+						
+						if(item:GetData("quantity", 0) < 1)then
 							item:Remove()
 						end
 
-						ix.progression.AddComplexProgressionValue("bodyguardnpcItemDelivery_Main", dyndata.itemid, player:Name()) --change this
+						--Adds reward
+						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item, amtfinal)
+						player:addReputation(repReward)
+						ix.dialogue.notifyReputationReceive(player, repReward)
+						player:GetCharacter():GiveMoney(monReward)
+						ix.dialogue.notifyMoneyReceive(player, monReward)
+
+						ix.progression.AddComplexProgressionValue(dyndata.progid, {dyndata.itemid, amtfinal}, player:Name())
 					end
 				end
 			end	
@@ -255,7 +269,7 @@ DIALOGUE.addTopic("ViewProgression", {
 			end
 
 			for _, progitem in pairs(missingitems) do
-				table.insert(dynopts, {statement = ix.item.list[progitem].name, topicID = "ViewProgression", dyndata = {itemid = progitem}})
+				table.insert(dynopts, {statement = ix.item.list[progitem].name, topicID = "ViewProgression", dyndata = {progid = identifier, itemid = progitem}})
 			end
 		end
 

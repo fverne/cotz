@@ -65,4 +65,7 @@ ix.randomitems.tables["reward_generic_valuable"] = {
   {200, {"hidestash_1"}},
   {100, {"hidestash_2"}},
   {25,  {"hidestash_3"}},
+  {1, {"cassette_wickedrabbit"}},
+  {5, {"value_techtool_2"}},
+  {1, {"value_techtool_3"}}
 }

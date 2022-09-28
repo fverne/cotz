@@ -56,5 +56,11 @@ ix.randomitems.tables["reward_consumable"] = {
   {30,  {"food_mre_ukraine"}},
   {20,  {"food_mre_russia"}},
   {300, {"food_raisins"}},
-  {500, {"food_oldmeat"}}
+  {500, {"food_oldmeat"}},
+  {120, {"drug_cigarette_1"}},
+  {120, {"drug_cigarette_2"}},
+  {120, {"drug_cigarette_3"}},
+  {120, {"drug_cigarette_4"}},
+  {120, {"drug_cigarette_5"}},
+  {120, {"drug_cigarette_6"}},
 }

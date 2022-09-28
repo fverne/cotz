@@ -1,6 +1,6 @@
 ITEM.name = "Henry Lever Action X Model .410"
 ITEM.description= "A lever-operated shotgun, chambered in .410."
-ITEM.longdesc = "TEMP.\n\nAmmo: .410 Gauge \nMagazine Capacity: 5"
+ITEM.longdesc = "A fairly modern lever action shotgun, made in America. Chambered in .410 gauge, it is mostly designed for hunting small game. It is also capable of chambering and firing .45 ACP, however the lack of rifling in the barrel makes it inaccurate.\n\nAmmo: .410 Gauge \nMagazine Capacity: 5"
 ITEM.model = ("models/weapons/w_bocw_ironhide.mdl")
 ITEM.class = "cw_lax410"
 ITEM.weaponCategory = "primary"

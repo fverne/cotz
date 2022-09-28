@@ -86,7 +86,7 @@ SWEP.SpeedDec = 15
 SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.HoldType = "pistol"
-SWEP.NormalHoldType = "revolver"
+SWEP.NormalHoldType = "pistol"
 SWEP.RunHoldType = "normal"
 SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_base"
@@ -130,7 +130,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 65
+SWEP.Damage = 220
 SWEP.DeployTime = 1
 --SWEP.Chamberable = false
 

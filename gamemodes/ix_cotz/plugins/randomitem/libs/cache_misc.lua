@@ -69,4 +69,8 @@ ix.randomitems.tables["cache_valuable"] = {
   { 900, {"artifact_gaia"}},
   { 900, {"artifact_halo"}},
   { 900, {"artifact_gmamasbeads"}},
+  {1, {"cassette_firelake"}},
+  {1, {"cassette_freedom"}},
+  {1, {"cassette_standart"}},
+  {1, {"cassette_true"}},
 }

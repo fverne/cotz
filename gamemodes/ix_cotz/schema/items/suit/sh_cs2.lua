@@ -8,9 +8,9 @@ ITEM.height = 3
 ITEM.price = 50000
 ITEM.busflag = "dev"
 ITEM.br = 0.28
-ITEM.fbr = 8
-ITEM.ar = 0.20
-ITEM.far = 3
+ITEM.fbr = 3
+ITEM.ar = 0.28
+ITEM.far = 1
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","lll-a","lll-a","0","0"}
 ITEM.img = ix.util.GetMaterial("vgui/hud/cs2.png")
@@ -18,10 +18,9 @@ ITEM.img = ix.util.GetMaterial("vgui/hud/cs2.png")
 ITEM.weight = 6.900
 ITEM.miscslots = 2
 
-ITEM.newSkin = 1
+ITEM.newSkin = 0
 ITEM.bodygroup = {0}
 ITEM.bodygroupsub = {0}
-
 
 ITEM.skincustom[1] = {
 	name = "Skin 0",
@@ -34,4 +33,8 @@ ITEM.skincustom[2] = {
 ITEM.skincustom[3] = {
 	name = "Skin 2",
 	skingroup = 2,
+}
+ITEM.skincustom[4] = {
+	name = "Skin 3",
+	skingroup = 3,
 }

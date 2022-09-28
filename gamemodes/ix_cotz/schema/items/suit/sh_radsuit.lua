@@ -7,10 +7,10 @@ ITEM.width = 2
 ITEM.height = 3
 ITEM.price = 150000
 ITEM.busflag = "dev"
-ITEM.br = 0.6
-ITEM.fbr = 11
-ITEM.ar = 0.2
-ITEM.far = 3
+ITEM.br = 0.60
+ITEM.fbr = 8
+ITEM.ar = 0.35
+ITEM.far = 1
 ITEM.repairCost = ITEM.price/100*1
 ITEM.ballisticlevels = {"0","lV","lV","lll-a","lll-a"}
 ITEM.img = ix.util.GetMaterial("vgui/hud/radsuit.png")
@@ -20,11 +20,6 @@ ITEM.weight = 14.400
 ITEM.miscslots = 4
 
 ITEM.newSkin = 0
-ITEM.bodyGroups = {
-	["masks"] = 2,
-}
-
-
 
 ITEM.skincustom[1] = {
 	name = "Skin 0",

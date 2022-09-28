@@ -68,18 +68,18 @@ hook.Add("InitializedChatClasses", "ixChatRemoval2", function()
 end)
 
 ix.chat.Register("gpda", {
-		CanSay = function(self, speaker, text)
-			return true
-		end,
-		OnChatAdd = function(self, speaker, text, bAnonymous, data)
-			chat.AddText(Color(180,61,61), "[GPDA-"..speaker:GetCharacter():GetName().."] ", Material(speaker:GetCharacter():GetPdaavatar()), color_white, ": "..text)
-		end,
-		description = "Send a message over the Global PDA network",
-		CanHear = function(self, speaker, listener)
-			listener:EmitSound( "stalkersound/da-2_beep1.ogg", 90, 100, 1, CHAN_AUTO )
-			return true
-		end,
-	})
+	CanSay = function(self, speaker, text)
+		return true
+	end,
+	OnChatAdd = function(self, speaker, text, bAnonymous, data)
+		chat.AddText(Color(180,61,61), "[GPDA-"..speaker:GetCharacter():GetName().."] ", Material(speaker:GetCharacter():GetPdaavatar()), color_white, ": "..text)
+	end,
+	description = "Send a message over the Global PDA network",
+	CanHear = function(self, speaker, listener)
+		listener:EmitSound( "stalkersound/da-2_beep1.ogg", 90, 100, 1, CHAN_AUTO )
+		return true
+	end,
+})
 
 ix.command.Add("gpda", {
 	description = "Send a message over the Global PDA network",

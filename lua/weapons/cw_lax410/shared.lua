@@ -68,8 +68,8 @@ if CLIENT then
 
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/w_bocw_ironhide.mdl"
-	SWEP.WMPos = Vector(-1, -2, 2)
-	SWEP.WMAng = Vector(0, 90, 180)
+	SWEP.WMPos = Vector(-1, -1.5, 1)
+	SWEP.WMAng = Vector(0, 90, 190)
 
 	SWEP.LuaVMRecoilAxisMod = {vert = 1, hor = 1, roll = 1, forward = 1, pitch = .5}
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
@@ -84,7 +84,9 @@ SWEP.LuaViewmodelRecoilOverride = true
 SWEP.ADSFireAnim = true
 SWEP.UseHands = true
 
-SWEP.Attachments = {}
+SWEP.Attachments = {
+	["+reload"] = {header = "Ammo", offset = {800, -200}, atts = {"am_hollowpoint", "am_armorpiercing", "am_410buck"}}
+}
 
 SWEP.Animations = {fire = {"fire"},
 	reload_start = "reload_in",
@@ -119,7 +121,7 @@ SWEP.SpeedDec = 10
 SWEP.Slot = 3
 SWEP.SlotPos = 0
 SWEP.NormalHoldType = "ar2"
-SWEP.RunHoldType = "crossbow"
+SWEP.RunHoldType = "passive"
 SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
@@ -140,21 +142,21 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 5
 SWEP.Primary.DefaultClip	= 5
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= ".45 ACP -41-"
+SWEP.Primary.Ammo			= ".45 ACP"
 
 SWEP.FireDelay = 1.5
 SWEP.FireSound = "LAX410_FIRE"
 SWEP.Recoil = 5.5
 
 SWEP.HipSpread = 0.06
-SWEP.AimSpread = 0.015
+SWEP.AimSpread = 0.03
 SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.55
-SWEP.ClumpSpread = 0.01
+--SWEP.ClumpSpread = 0.01
 SWEP.SpreadPerShot = 0.012
 SWEP.SpreadCooldown = 0.7
-SWEP.Shots = 5
-SWEP.Damage = 15
+SWEP.Shots = 1
+SWEP.Damage = 99
 SWEP.DeployTime = .5
 
 SWEP.ReloadSpeed = 0.8

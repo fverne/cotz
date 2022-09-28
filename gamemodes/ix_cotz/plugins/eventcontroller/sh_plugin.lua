@@ -54,7 +54,7 @@ if SERVER then
 					data.start = position
 					data.endpos = position
 					data.mins = Vector(-42, -42, 0)
-					data.maxs = Vector(42, 42, 71)
+					data.maxs = Vector(42, 42, 42)
 					local trace = util.TraceHull(data)
 							
 					if trace.Entity:IsValid() then

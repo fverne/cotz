@@ -82,6 +82,12 @@ function ix.progression.GetComplexProgressionValue(progid)
 	end
 end
 
+function ix.progression.GetComplexProgressionReqs(progid)
+	if (ix.progression.definitions[progid]) and ix.progression.definitions[progid].GetItemIds then
+		return ix.progression.definitions[progid].GetItemIds()
+	end
+end
+
 function ix.progression.AddComplexProgressionValue(progid, dat, playername)
 	if (ix.progression.definitions[progid]) and ix.progression.definitions[progid].fnAddComplexProgression and ix.progression.definitions[progid].fnCheckComplexProgression then
 		 -- In complex progressions, the progression definition is responsible for taking care of everything

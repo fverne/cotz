@@ -42,7 +42,7 @@ if CLIENT then
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/w_taurus_327p.mdl"
 	SWEP.WMPos = Vector(-1, 0, -2)
-	SWEP.WMAng = Vector(-30, 0, 180)
+	SWEP.WMAng = Vector(-10, 0, 180)
 
 	SWEP.ViewModelMovementScale = 1
 	SWEP.BoltBone = "hammer"

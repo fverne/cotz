@@ -5,14 +5,14 @@ ITEM.model = "models/kek1ch/helm_hardhat.mdl"
 ITEM.price = 10000
 --ITEM.busflag = {"ARMOR4", "SPECIAL6_1"}
 ITEM.busflag = {"headgear1"}
-ITEM.br = 0.1
-ITEM.fbr = 0
+ITEM.br = 0.15
+ITEM.fbr = 1
 ITEM.ar = 0
 ITEM.far = 0
 ITEM.radProt = 0
 ITEM.isGasmask = false
 ITEM.isHelmet = true
-ITEM.ballisticlevels = {"ll-a"}
+ITEM.ballisticlevels = {"lll-a"}
 ITEM.repairCost = ITEM.price/100*1
 
 ITEM.weight = 3.500

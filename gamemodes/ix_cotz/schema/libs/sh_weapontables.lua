@@ -360,8 +360,8 @@ ix.armortables.attachments["hide_electrocontroller"] = {
 
 ix.armortables.attachments["hide_pseudogiant"] = {
 	name = "Pseudogiant Hide",
-	br = 0.30,
-	ar = 0.30,
+	br = 0.20,
+	ar = 0.20,
 	weight = 5.550,
 	uID = "hide_pseudogiant",
 }
