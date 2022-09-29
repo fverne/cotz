@@ -69,6 +69,8 @@ if SERVER then
         local position = client:GetItemDropPos()
         local idat = ix.util.GetRandomItemFromPool(lootclass)
 
+        client:Notify("You found "..ix.item.list[idat[1]]:GetName())
+
         if (IsValid(client) and client:GetCharacter() and not client:GetCharacter():GetInventory():Add(idat[1], 1, idat[2])) then
             ix.item.Spawn(idat[1], position, nil, AngleRand(), idat[2])
             position = position + Vector(0, 0, 5)
