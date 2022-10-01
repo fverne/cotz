@@ -23,6 +23,7 @@ ix.randomitems.tables["specialsale_raritynpc_smg_1"] = {
   {100, {"pp2000"}},
   {100, {"stechaps"}},
   {100, {"glock18"}},
+  {100,  {"m1911chic"}},
 }
 
 ix.randomitems.tables["specialsale_raritynpc_rifle_1"] = {
