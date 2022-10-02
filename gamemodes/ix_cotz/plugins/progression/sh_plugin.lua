@@ -12,6 +12,9 @@ end
 
 ix.util.Include("sh_definitions.lua")
 
+
+ix.util.Include("sh_technutprog.lua")
+
 function PLUGIN:LoadData()
 	ix.progression.status = self:GetData() or {}
 
