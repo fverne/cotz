@@ -111,8 +111,8 @@ if CustomizableWeaponry then
 
 	SWEP.Slot = 2
 	SWEP.SlotPos = 0
-	SWEP.HoldType = "pistol"
-	SWEP.NormalHoldType = "smg"
+	SWEP.HoldType = "smg"
+	SWEP.NormalHoldType = "pistol"
 	SWEP.RunHoldType = "passive"
 	SWEP.FireModes = {"auto"}
 	SWEP.Base = "cw_base"
