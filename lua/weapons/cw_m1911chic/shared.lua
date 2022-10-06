@@ -112,8 +112,8 @@ if CustomizableWeaponry then
 	SWEP.Slot = 2
 	SWEP.SlotPos = 0
 	SWEP.HoldType = "pistol"
-	SWEP.NormalHoldType = "pistol"
-	SWEP.RunHoldType = "normal"
+	SWEP.NormalHoldType = "smg"
+	SWEP.RunHoldType = "passive"
 	SWEP.FireModes = {"auto"}
 	SWEP.Base = "cw_base"
 	SWEP.Category = "STALKER Weapons"			--Which spawn menu/weapons category this is in
@@ -129,8 +129,8 @@ if CustomizableWeaponry then
 	SWEP.WorldModel		= "models/weapons/w_silverballer.mdl"
 	SWEP.DrawTraditionalWorldModel = false	--Whether to use world model's embedded/compiled origin
 	SWEP.WM = "models/weapons/w_silverballer.mdl"
-	SWEP.WMPos = Vector(1.3,-5.2,3.2)		--world model origin X,Y,Z
-	SWEP.WMAng = Vector(0,180,180)			--world model angles X,Y,Z
+	SWEP.WMPos = Vector(1.3,-5.2,2.8)		--world model origin X,Y,Z
+	SWEP.WMAng = Vector(-10,180,180)			--world model angles X,Y,Z
 
 	SWEP.Spawnable			= true
 	SWEP.AdminSpawnable		= true
