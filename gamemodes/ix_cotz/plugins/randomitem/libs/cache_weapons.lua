@@ -48,6 +48,7 @@ ix.randomitems.tables["cache_weapons_pistol_tier2"] = {
   {500,  {"p99",              {["durability"] = 95}}},
   {500,  {"m1911",            {["durability"] = 80, ["attachments"] = { "md_cobram2", "md_rmr" }}}},
   {300,  {"taurusragingbull", {["durability"] = 80}}},
+  {150,  {"m1911chic",        {["durability"] = 80}}},
 }
 
 ix.randomitems.tables["cache_weapons_pistol_tier3"] = {
@@ -73,6 +74,7 @@ ix.randomitems.tables["cache_weapons_smg_tier1"] = {
   {750,  {"mp5k",                 {["durability"] = 95}}},
   {500,  {"mp5k",                 {["durability"] = 80, ["attachments"] = { "md_tundra9mm" }}}},
   {500,  {"mp9a1",                {["durability"] = 90, ["attachments"] = { "md_tundra9mm" }}}},
+  {150,  {"m1911chic",            {["durability"] = 80}}},
 }
 
 ix.randomitems.tables["cache_weapons_smg_tier2"] = {
