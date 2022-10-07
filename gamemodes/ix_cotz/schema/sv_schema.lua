@@ -10,13 +10,12 @@ resource.AddWorkshop( '2290960561' ) -- cotz_wepmats2
 resource.AddWorkshop( '2290872628' ) -- cotz_playermodels
 resource.AddWorkshop( '2290889386' ) -- cotz_items
 resource.AddWorkshop( '2290895919' ) -- cotz_ui
-resource.AddWorkshop( '2290874511' ) -- cotz_gmodreplacements
-resource.AddWorkshop( '1470158687' ) -- Full Integrated Animation P.M. for NPCs HL2
 resource.AddWorkshop( '2547569131' ) -- cotz_projectstalker
-
+resource.AddWorkshop( '2315743109' ) -- cotz_humannpc
+resource.AddWorkshop( '2299516854' ) -- cotz_map_marsh
+resource.AddWorkshop( '2808595164' ) -- cotz_map_haven
+resource.AddWorkshop( '2290874511' ) -- cotz_gmodreplacements
 resource.AddWorkshop( '2447979470' ) -- StormFox 2 Content
-
-resource.AddWorkshop( '2143558752' ) -- xdReanimsBase (GMod)
+resource.AddWorkshop( '1470158687' ) -- Full Integrated Animation P.M. for NPCs HL2
+resource.AddWorkshop( '2143558752' ) -- xdReanimsBase (GMod) Anim Mods base
 resource.AddWorkshop( '2411672781' ) -- [xdR] Left 4 Dead animations
-
-resource.AddWorkshop( '2259842946' ) -- Great Swamp
