@@ -52,6 +52,7 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
     if class == "npc_mutant_bloodsucker" then
       CalculateCredit(entity, attacker, "bloodsuckerKilled")
       CalculateCredit(entity, attacker, "groupPredatorKilled")
+      CalculateCredit(entity, attacker, "groupHumanoidKilled")
     end
 
     if class == "npc_mutant_boar" then
