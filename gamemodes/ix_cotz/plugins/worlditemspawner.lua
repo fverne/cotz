@@ -4,9 +4,9 @@ PLUGIN.author = "Black Tea (NS 1.0), Neon (NS 1.1), ported to ix by verne"
 PLUGIN.desc = "World Item Spawner."
 PLUGIN.itempoints = PLUGIN.itempoints or {}
 
-PLUGIN.spawnrate = 30
+PLUGIN.spawnrate = 300
 PLUGIN.spawntime = 0
-PLUGIN.saferadius = 256
+PLUGIN.saferadius = 512
 
 ix.config.Add("worldSpawnerThreshold", 75, "How many items the worldspawner should keep the map populated with.", nil, {
 	data = {min = 10, max = 200},
