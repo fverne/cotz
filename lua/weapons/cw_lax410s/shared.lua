@@ -118,7 +118,7 @@ SWEP.Sounds = {reload_in = {{time = 0.05, sound = "LAX410_OPEN"}},
 
 SWEP.SpeedDec = 10
 
-SWEP.Slot = 3
+SWEP.Slot = 2
 SWEP.SlotPos = 0
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "passive"
