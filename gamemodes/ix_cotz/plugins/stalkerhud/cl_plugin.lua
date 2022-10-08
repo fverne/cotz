@@ -290,7 +290,9 @@ end
 ix.hud.attackers = {}
 net.Receive( "cotz_ShotInd", function( len )
 	local attacker = net.ReadEntity()
-	ix.hud.attackers[attacker] = { UnPredictedCurTime() + 2, attacker:GetPos() }
+	if attacker then
+		ix.hud.attackers[attacker] = { UnPredictedCurTime() + 2, attacker:GetPos() }
+	end
 end )
 
 local HitIndicatorMat = Material("stalker/hit_ind.png", "noclamp smooth")
