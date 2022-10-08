@@ -50,3 +50,10 @@ ix.randomitems.tables["specialsale_raritynpc_shotgun_1"] = {
   {100, {"striker"}},
   {100, {"mp153"}},
 }
+
+ix.randomitems.tables["specialsale_raritynpc_backpack_1"] = {
+  {100, {"backpack_4"}}, 
+  {100, {"backpack_4_large"}},
+  {100, {"backpack_5"}},
+  {100, {"backpack_5_large"}},
+}
