@@ -11,7 +11,7 @@ ITEM.WeightPerHunger = 0.100
 ITEM.BaseWeight = 8.144
 ITEM.WeightPerLevel = 2.843
 
-ITEM.meal = "meal_chimera"
+ITEM.meal = "meal_pseudogiant"
 
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)
