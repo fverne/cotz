@@ -69,7 +69,7 @@ if CLIENT then
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/wick/weapons/stalker/stcopwep/w_mp153_model.mdl"
 	SWEP.WMPos = Vector(1.7, -4, 2)
-	SWEP.WMAng = Vector(0, 180, 180)
+	SWEP.WMAng = Vector(-10, 180, 180)
 
 	SWEP.LuaVMRecoilAxisMod = {vert = 1, hor = 1, roll = 1, forward = 1, pitch = .5}
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
