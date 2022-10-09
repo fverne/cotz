@@ -2,13 +2,25 @@ PLUGIN.name = "NPC Looting"
 PLUGIN.desc = "Looting dead npcs - uses randomitemlib"
 PLUGIN.author = "fverne"
 
+PLUGIN.HumanModels = {
+    "models/bandit/bandit_regulare.mdl",
+    "models/bandit/bandit_veteran.mdl",
+    "models/bandit/bandit_novice.mdl",
+}
+
+
 if CLIENT then
     function PLUGIN:KeyPress(client, key)
         local hit = client:GetEyeTraceNoCursor()
         local ragdoll = hit.Entity
 
         if client:GetCharacter() and client:Alive() and key == IN_USE then
-            if ragdoll:IsRagdoll() and ragdoll:GetPos():Distance( client:GetPos() ) <= 55 then
+            if IsFirstTimePredicted() and ragdoll:IsRagdoll() and ragdoll:GetPos():Distance( client:GetPos() ) <= 55 then
+
+                if !table.HasValue(self.HumanModels, ragdoll:GetModel()) then
+                    return
+                end
+
                 local lootclass
                 if ragdoll:GetNetVar("loot") then
                     lootclass = ragdoll:GetNetVar("loot")
