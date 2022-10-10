@@ -317,7 +317,6 @@ function ITEM:Unload()
 
 		if addbox then
 			if(!client:GetCharacter():GetInventory():Add(ammoBox, 1, {["quantity"] = ammoAmount})) then
-				ix.item.Spawn(ammoBox, client:GetItemDropPos(), nil, AngleRand(), {["quantity"] = ammoAmount})
 				client:Notify("No space in inventory for unloaded ammo")
 				return false
 			end
