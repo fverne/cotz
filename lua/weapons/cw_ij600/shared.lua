@@ -4,7 +4,7 @@ include("sh_sounds.lua")
 
 if CLIENT then
 	SWEP.DrawCrosshair = false
-	SWEP.PrintName = "TOZ-34"
+	SWEP.PrintName = "Iver Johnson I600"
 	SWEP.CSMuzzleFlashes = true
 	
 	SWEP.SelectIcon = surface.GetTextureID("weaponicons/mr96")
@@ -37,7 +37,7 @@ SWEP.CanRestOnObjects = false
 SWEP.ADSFireAnim = false
 
 SWEP.Attachments = {
-["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds", "am_magnumbuck"}}
+--["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds", "am_magnumbuck"}}
 }
 	
 SWEP.Animations = {fire = "fire01",
@@ -81,7 +81,7 @@ SWEP.Instructions	= ""
 
 SWEP.ViewModelFOV	= 80
 SWEP.ViewModelFlip	= false
-SWEP.ViewModel		= "models/weapons/view/shotguns/toz34.mdl"
+SWEP.ViewModel		= "models/weapons/view/shotguns/IverJohnsonIJ600.mdl"
 SWEP.WorldModel		= "models/weapons/w_sv10.mdl"
 
 SWEP.Spawnable			= true
@@ -90,7 +90,7 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 2
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= "12 Gauge"
+SWEP.Primary.Ammo			= ".45 ACP -41-"
 
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_TOZ_FIRE"
@@ -105,15 +105,17 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.ClumpSpread = 0.008
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
-SWEP.Shots = 9
-SWEP.Damage = 22
+SWEP.Shots = 5
+SWEP.Damage = 45
 SWEP.DeployTime = 0.5
 
-SWEP.ReloadSpeed = 1.2
-SWEP.ReloadTime = 3.2
+SWEP.ReloadSpeed = 1.35
+SWEP.ReloadTime = 6.0
 SWEP.ReloadTime_Empty = 3.2
-SWEP.ReloadHalt = 6.5
-SWEP.ReloadHalt_Empty = 6.5
+SWEP.ReloadHalt = 6.0
+SWEP.ReloadHalt_Empty = 6.0
+
+SWEP.SnapToIdlePostReload = true
 
 function SWEP:IndividualInitialize()
 	self:setBodygroup( 1 , 1 )
