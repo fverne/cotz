@@ -112,6 +112,11 @@ ix.npctemplates.templates["tutorialnpc"] = {
 		["trenchcoat"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
 		["mailjacket"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
 
+		["backpack_1"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
+		["backpack_1_large"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 }, -- make me progression unlock?
+		["backpack_3"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
+		["backpack_3_large"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 }, -- make me progression unlock?
+
 		["part_bear"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_blinddog"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_bloodsucker"] 	= { 1, nil, BUYONLY, nil, nil, nil },
@@ -342,6 +347,9 @@ ix.npctemplates.templates["bodyguardnpc"] = {
 		["taurusjudge"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
 		["swr8"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
 		["io7a"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+
+		["backpack_2"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
+		["backpack_2_large"] 	= { nil, 1, SELLANDBUY, 1, 1, 1 }, -- make me progression unlock?
 	},
 }
 
