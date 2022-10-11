@@ -25,6 +25,11 @@ function PLUGIN:WeaponReloadFinished(entity, isShotgunReload)
 			end
 		end
 
+		--Cheeky
+		if ( #ammo == 0 ) then
+			timer.Simple(0.5, function() wep:SetClip1(0) end)
+		end
+
 		if not isShotgunReload then 
 			local ammoInMag = wep:Clip1()
 			local maxAmmoInMag = wep:GetMaxClip1()
