@@ -1,10 +1,10 @@
-ITEM.name = "Five-Seven"
+ITEM.name = "Five-seveN"
 ITEM.description= "A polymer-framed pistol chambered for 5.7x28mm."
-ITEM.longdesc = "The FiveSeven and its iconic cartridge, the FN 5.7x28mm, was designed to replace the aging 9x19mm cartridge.\nThe cartridge sports excellent penetration power and impressively tight groupings.\nThe FiveSeven pistol has a staggering magazine capacity of 20 rounds, however acquiring it in the Zone is fairly tough and will cost you dearly, as will supplying the pistol with ammunition.\n\nAmmo: 5.7x28mm\nMagazine Capacity: 20"
+ITEM.longdesc = "The Five-seveN and its iconic cartridge, the FN 5.7x28mm, was designed to replace the aging 9x19mm cartridge.\nThe cartridge sports excellent penetration power and impressively tight groupings.\nThe FiveseveN pistol has a staggering magazine capacity of 20 rounds, however acquiring it in the Zone is fairly tough and will cost you dearly, as will supplying the pistol with ammunition.\n\nAmmo: 5.7x28mm\nMagazine Capacity: 20"
 ITEM.model = "models/weapons/w_pist_fiveseven.mdl"
 ITEM.class = "cw_fiveseven"
 ITEM.weaponCategory = "secondary"
-ITEM.price = 6900
+ITEM.price = 17500
 ITEM.width = 2
 ITEM.height = 1
 ITEM.validAttachments = {"md_microt1","md_eotech","md_rmr","md_tundra9mm"}
