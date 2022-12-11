@@ -84,7 +84,7 @@ ix.progression.Register("hagglerItemDelivery_11", {
 	name = "Kitting Up 1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_11"] = ix.progression.status["hagglerItemDelivery_11"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_11"].complexData
@@ -165,7 +165,7 @@ ix.progression.Register("hagglerItemDelivery_111", {
 	name = "Kitting Up 1.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_111"] = ix.progression.status["hagglerItemDelivery_111"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_111"].complexData
@@ -244,7 +244,7 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 	name = "Kitting Up 1.1.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_1111"] = ix.progression.status["hagglerItemDelivery_1111"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_1111"].complexData
@@ -323,7 +323,7 @@ ix.progression.Register("hagglerItemDelivery_112", {
 	name = "Kitting Up 1.1.2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_112"] = ix.progression.status["hagglerItemDelivery_112"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_112"].complexData
@@ -400,7 +400,7 @@ ix.progression.Register("hagglerItemDelivery_12", {
 	name = "Kitting Up 1.2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_12"] = ix.progression.status["hagglerItemDelivery_12"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_12"].complexData
@@ -479,7 +479,7 @@ ix.progression.Register("hagglerItemDelivery_121", {
 	name = "Kitting Up 1.2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_121"] = ix.progression.status["hagglerItemDelivery_121"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_121"].complexData
@@ -558,7 +558,7 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 	name = "Kitting Up 1.2.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_1211"] = ix.progression.status["hagglerItemDelivery_1211"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_1211"].complexData
@@ -636,7 +636,7 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 	name = "Kitting Up 1.2.1.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_12111"] = ix.progression.status["hagglerItemDelivery_12111"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_12111"].complexData
@@ -715,7 +715,7 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 	name = "Kitting Up 1.2.1.1.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_121111"] = ix.progression.status["hagglerItemDelivery_121111"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_121111"].complexData
@@ -793,7 +793,7 @@ ix.progression.Register("hagglerItemDelivery_122", {
 	name = "Kitting Up 1.2.2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_122"] = ix.progression.status["hagglerItemDelivery_122"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_122"].complexData
@@ -872,7 +872,7 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 	name = "Kitting Up 1.2.2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_1221"] = ix.progression.status["hagglerItemDelivery_1221"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_1221"].complexData
@@ -950,7 +950,7 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 	name = "Kitting Up 1.2.2.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_12211"] = ix.progression.status["hagglerItemDelivery_12211"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_12211"].complexData
@@ -1107,7 +1107,7 @@ ix.progression.Register("hagglerItemDelivery_21", {
 	name = "Kitting Up 2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_21"] = ix.progression.status["hagglerItemDelivery_21"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_21"].complexData
@@ -1187,7 +1187,7 @@ ix.progression.Register("hagglerItemDelivery_211", {
 	name = "Kitting Up 2.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_211"] = ix.progression.status["hagglerItemDelivery_211"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_211"].complexData
@@ -1265,7 +1265,7 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 	name = "Kitting Up 2.1.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_2111"] = ix.progression.status["hagglerItemDelivery_2111"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_2111"].complexData
@@ -1343,7 +1343,7 @@ ix.progression.Register("hagglerItemDelivery_212", {
 	name = "Kitting Up 2.1.2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_212"] = ix.progression.status["hagglerItemDelivery_212"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_212"].complexData
@@ -1421,7 +1421,7 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 	name = "Kitting Up 2.1.2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_2121"] = ix.progression.status["hagglerItemDelivery_2121"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_2121"].complexData
@@ -1499,7 +1499,7 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 	name = "Kitting Up 2.1.2.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_21211"] = ix.progression.status["hagglerItemDelivery_21211"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_21211"].complexData
@@ -1576,7 +1576,7 @@ ix.progression.Register("hagglerItemDelivery_22", {
 	name = "Kitting Up 2.2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_22"] = ix.progression.status["hagglerItemDelivery_22"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_22"].complexData
@@ -1657,7 +1657,7 @@ ix.progression.Register("hagglerItemDelivery_221", {
 	name = "Kitting Up 2.2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_221"] = ix.progression.status["hagglerItemDelivery_221"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_221"].complexData
@@ -1736,7 +1736,7 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 	name = "Kitting Up 2.2.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_2211"] = ix.progression.status["hagglerItemDelivery_2211"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_2211"].complexData
@@ -1814,7 +1814,7 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 	name = "Kitting Up 2.2.1.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_22111"] = ix.progression.status["hagglerItemDelivery_22111"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_22111"].complexData
@@ -1891,7 +1891,7 @@ ix.progression.Register("hagglerItemDelivery_222", {
 	name = "Kitting Up 2.2.2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_222"] = ix.progression.status["hagglerItemDelivery_222"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_222"].complexData
@@ -1969,7 +1969,7 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 	name = "Kitting Up 2.2.2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_2221"] = ix.progression.status["hagglerItemDelivery_2221"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_2221"].complexData
@@ -2047,7 +2047,7 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 	name = "Kitting Up 2.2.2.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["hagglerItemDelivery_22211"] = ix.progression.status["hagglerItemDelivery_22211"] or {}
 		local dat = ix.progression.status["hagglerItemDelivery_22211"].complexData

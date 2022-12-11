@@ -82,7 +82,7 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 	name = "Gearing Up 1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_11"] = ix.progression.status["quartermasterItemDelivery_11"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_11"].complexData
@@ -164,7 +164,7 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 	name = "Gearing Up 1.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_111"] = ix.progression.status["quartermasterItemDelivery_111"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_111"].complexData
@@ -244,7 +244,7 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 	name = "Gearing Up 1.1.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_1111"] = ix.progression.status["quartermasterItemDelivery_1111"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_1111"].complexData
@@ -322,7 +322,7 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 	name = "Gearing Up 1.1.2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_112"] = ix.progression.status["quartermasterItemDelivery_112"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_112"].complexData
@@ -402,7 +402,7 @@ ix.progression.Register("quartermasterItemDelivery_1121", {
 	name = "Gearing Up 1.1.2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_1121"] = ix.progression.status["quartermasterItemDelivery_1121"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_1121"].complexData
@@ -481,7 +481,7 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 	name = "Gearing Up 1.1.2.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_11211"] = ix.progression.status["quartermasterItemDelivery_11211"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_11211"].complexData
@@ -558,7 +558,7 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 	name = "Gearing Up 1.2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_12"] = ix.progression.status["quartermasterItemDelivery_12"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_12"].complexData
@@ -639,7 +639,7 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 	name = "Gearing Up 1.2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_121"] = ix.progression.status["quartermasterItemDelivery_121"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_121"].complexData
@@ -717,7 +717,7 @@ ix.progression.Register("quartermasterItemDelivery_122", {
 	name = "Gearing Up 1.2.2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_122"] = ix.progression.status["quartermasterItemDelivery_122"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_122"].complexData
@@ -796,7 +796,7 @@ ix.progression.Register("quartermasterItemDelivery_1221", {
 	name = "Gearing Up 1.2.2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_1221"] = ix.progression.status["quartermasterItemDelivery_1221"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_1221"].complexData
@@ -875,7 +875,7 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 	name = "Gearing Up 1.2.2.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_12211"] = ix.progression.status["quartermasterItemDelivery_12211"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_12211"].complexData
@@ -1032,7 +1032,7 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 	name = "Gearing Up 2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_21"] = ix.progression.status["quartermasterItemDelivery_21"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_21"].complexData
@@ -1113,7 +1113,7 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 	name = "Gearing Up 2.1.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_211"] = ix.progression.status["quartermasterItemDelivery_211"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_211"].complexData
@@ -1191,7 +1191,7 @@ ix.progression.Register("quartermasterItemDelivery_212", {
 	name = "Gearing Up 2.1.2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_212"] = ix.progression.status["quartermasterItemDelivery_212"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_212"].complexData
@@ -1270,7 +1270,7 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 	name = "Gearing Up 2.1.2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_2121"] = ix.progression.status["quartermasterItemDelivery_2121"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_2121"].complexData
@@ -1347,7 +1347,7 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 	name = "Gearing Up 2.2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_22"] = ix.progression.status["quartermasterItemDelivery_22"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_22"].complexData
@@ -1428,7 +1428,7 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 	name = "Gearing Up 2.2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_221"] = ix.progression.status["quartermasterItemDelivery_221"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_221"].complexData
@@ -1505,7 +1505,7 @@ ix.progression.Register("quartermasterItemDelivery_222", {
 	name = "Gearing Up 2.2.2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_222"] = ix.progression.status["quartermasterItemDelivery_222"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_222"].complexData
@@ -1583,7 +1583,7 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 	name = "Gearing Up 2.2.2.1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_2221"] = ix.progression.status["quartermasterItemDelivery_2221"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_2221"].complexData
