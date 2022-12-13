@@ -72,7 +72,7 @@ ix.progression.Register("hagglerItemDelivery_1", {
 				npc:AddItemToList("brhp", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_1", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_1", true)
 			ix.progression.SetActive("hagglerItemDelivery_11", true) 
 			ix.progression.SetActive("hagglerItemDelivery_12", true) 
 
@@ -153,7 +153,7 @@ ix.progression.Register("hagglerItemDelivery_11", {
 				npc:AddItemToList("sten", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_11", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_11", true)
 			ix.progression.SetActive("hagglerItemDelivery_111", true) 
 			ix.progression.SetActive("hagglerItemDelivery_112", true) 
 
@@ -233,7 +233,7 @@ ix.progression.Register("hagglerItemDelivery_111", {
 				npc:AddItemToList("lax410", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_111", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_111", true)
 			ix.progression.SetActive("hagglerItemDelivery_1111", true) 
 
 		end
@@ -312,7 +312,7 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 				npc:AddItemToList("swmodel29", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_1111", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_1111", true)
 
 		end
 	end
@@ -391,7 +391,7 @@ ix.progression.Register("hagglerItemDelivery_112", {
 				npc:AddItemToList("sterling", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_112", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_112", true)
 		end
 	end
 })
@@ -468,7 +468,7 @@ ix.progression.Register("hagglerItemDelivery_12", {
 				npc:AddItemToList("toz66", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_12", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_12", true)
 			ix.progression.SetActive("hagglerItemDelivery_121", true)
 			ix.progression.SetActive("hagglerItemDelivery_1221", true)
 		end
@@ -548,7 +548,7 @@ ix.progression.Register("hagglerItemDelivery_121", {
 				npc:AddItemToList("rugermini14", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_121", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_121", true)
 			ix.progression.SetActive("hagglerItemDelivery_1211", true)
 		end
 	end
@@ -626,7 +626,7 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 				npc:AddItemToList("saigasemi", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_1211", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_1211", true)
 			ix.progression.SetActive("hagglerItemDelivery_12111", true)
 		end
 	end
@@ -705,7 +705,7 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 				npc:AddItemToList("357magnum", nil, 15, "SELLANDBUY", 15, 1, 15)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_12111", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_12111", true)
 			ix.progression.SetActive("hagglerItemDelivery_121111", true)
 		end
 	end
@@ -784,7 +784,7 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 				npc:AddItemToList("500magnum", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_121111", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_121111", true)
 		end
 	end
 })
@@ -862,7 +862,7 @@ ix.progression.Register("hagglerItemDelivery_122", {
 				npc:AddItemToList("kp31", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_122", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_122", true)
 			ix.progression.SetActive("hagglerItemDelivery_1221", true)
 		end
 	end
@@ -940,7 +940,7 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 				npc:AddItemToList("mac11", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_1221", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_1221", true)
 			ix.progression.SetActive("hagglerItemDelivery_12211", true)
 		end
 	end
@@ -1018,7 +1018,7 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 				npc:AddItemToList("m1911chic", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_12211", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_12211", true)
 		end
 	end
 })
@@ -1095,7 +1095,7 @@ ix.progression.Register("hagglerItemDelivery_2", {
 				npc:AddItemToList("toz34", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_2", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_2", true)
 			ix.progression.SetActive("hagglerItemDelivery_21", true) 
 			ix.progression.SetActive("hagglerItemDelivery_22", true) 
 
@@ -1175,7 +1175,7 @@ ix.progression.Register("hagglerItemDelivery_21", {
 				npc:AddItemToList("sako85nato", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_21", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_21", true)
 			ix.progression.SetActive("hagglerItemDelivery_211", true) 
 			ix.progression.SetActive("hagglerItemDelivery_212", true) 
 
@@ -1255,7 +1255,7 @@ ix.progression.Register("hagglerItemDelivery_211", {
 				npc:AddItemToList("c96carbine", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_211", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_211", true)
 			ix.progression.SetActive("hagglerItemDelivery_2111", true) 
 		end
 	end
@@ -1333,7 +1333,7 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 				npc:AddItemToList("ppsh", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_2111", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_2111", true)
 
 		end
 	end
@@ -1411,7 +1411,7 @@ ix.progression.Register("hagglerItemDelivery_212", {
 				npc:AddItemToList("toz194", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_212", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_212", true)
 			ix.progression.SetActive("hagglerItemDelivery_2121", true) 
 		end
 	end
@@ -1489,7 +1489,7 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 				npc:AddItemToList("m1887", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_2121", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_2121", true)
 			ix.progression.SetActive("hagglerItemDelivery_21211", true) 
 		end
 	end
@@ -1567,7 +1567,7 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 				npc:AddItemToList("ithaca37", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_21211", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_21211", true)
 		end
 	end
 })
@@ -1645,7 +1645,7 @@ ix.progression.Register("hagglerItemDelivery_22", {
 				npc:AddItemToList("mp34", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_22", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_22", true)
 			ix.progression.SetActive("hagglerItemDelivery_221", true) 
 			ix.progression.SetActive("hagglerItemDelivery_222", true) 
 
@@ -1726,7 +1726,7 @@ ix.progression.Register("hagglerItemDelivery_221", {
 				npc:AddItemToList("w1895", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_221", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_221", true)
 			ix.progression.SetActive("hagglerItemDelivery_2211", true) 
 		end
 	end
@@ -1804,7 +1804,7 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 				npc:AddItemToList("mosinnagant", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_2211", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_2211", true)
 			ix.progression.SetActive("hagglerItemDelivery_22111", true) 
 		end
 	end
@@ -1882,7 +1882,7 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 				npc:AddItemToList("svt40", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_22111", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_22111", true)
 		end
 	end
 })
@@ -1959,7 +1959,7 @@ ix.progression.Register("hagglerItemDelivery_222", {
 				npc:AddItemToList("mp40", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_222", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_222", true)
 			ix.progression.SetActive("hagglerItemDelivery_2221", true) 
 		end
 	end
@@ -2037,7 +2037,7 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 				npc:AddItemToList("aks74u", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_2221", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_2221", true)
 			ix.progression.SetActive("hagglerItemDelivery_22211", true) 
 		end
 	end
@@ -2115,7 +2115,7 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 				npc:AddItemToList("akm", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("hagglerItemDelivery_22211", false)
+			ix.progression.SetCompleted("hagglerItemDelivery_22211", true)
 			ix.progression.SetActive("hagglerItemDelivery_222111", true) 
 		end
 	end

@@ -184,7 +184,7 @@ ix.progression.Register("oldTimerKillIntro", {
 					name = "'Old Timer'",
 					message = "Lovely work everyone, thanks to your dilligence in clearing out the swamps, one of my associates have agreed to ship in a wider variety of medical supplies, feel free to come check my wares."
 				})
-				ix.progression.SetActive("oldTimerKillIntro", false)
+				ix.progression.SetCompleted("oldTimerKillIntro", true)
 			end,
 			RunOnce = true
 		},
@@ -301,7 +301,7 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 			ix.util.SpawnAdvVendor("cooknpc", pos, ang)
 
 
-			ix.progression.SetActive("oldTimerItemDelivery_mainMeat", false)
+			ix.progression.SetCompleted("oldTimerItemDelivery_mainMeat", true)
 			ix.progression.SetActive("technutItemDelivery_Main", true) -- Main progression
 
 			ix.progression.SetActive("spicyLemon_cookMeatCollect", true) -- Side Progression
@@ -398,7 +398,7 @@ ix.progression.Register("technutItemDelivery_Main", {
 				npc:AddItemToList("fabricplate_1", nil, 1, "SELLANDBUY", 1, 3, 1)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Main", false)
+			ix.progression.SetCompleted("technutItemDelivery_Main", true)
 
 			ix.progression.SetActive("oldTimerItemDelivery_mainStatue", true) -- Main Progression
 		end
@@ -491,7 +491,7 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 			--local ang = Angle(0.000, -178.989, 0.000)
 			--ix.util.SpawnAdvVendor("stalkernetadmin", pos, ang)
 
-			ix.progression.SetActive("oldTimerItemDelivery_mainStatue", false)
+			ix.progression.SetCompleted("oldTimerItemDelivery_mainStatue", true)
 
 			ix.progression.SetActive("stalkerNetAdmin_AreaTasks", true) -- Main Progression
 		end
@@ -524,7 +524,7 @@ ix.progression.Register("stalkerNetAdmin_AreaTasks", {
 					message = "Thanks for the help with the scanning, please keep it up. Come talk to me, I'll instruct you in what I will need in the future. -Mute"
 				})
 				
-				ix.progression.SetActive("stalkerNetAdmin_AreaTasks", false)
+				ix.progression.SetCompleted("stalkerNetAdmin_AreaTasks", true)
 
 				ix.progression.SetActive("oldTimerItemDelivery_mainMeat", true) -- Main Progression
 			end,
@@ -624,7 +624,7 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 			--local ang = Angle(0.000, -178.989, 0.000)
 			--ix.util.SpawnAdvVendor("tradernpc", pos, ang)
 
-			ix.progression.SetActive("stalkerNetAdminDelivery_mainRadioTower", false)
+			ix.progression.SetCompleted("stalkerNetAdminDelivery_mainRadioTower", true)
 
 			
 		end
@@ -686,7 +686,7 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 				})
 			end)
 
-			ix.progression.SetActive("quarterMasterDelivery_activateItem", false)
+			ix.progression.SetCompleted("quarterMasterDelivery_activateItem", true)
 
 			ix.progression.SetActive("quarterMasterDelivery_main", true) -- Main Progression
 		end
@@ -773,7 +773,7 @@ ix.progression.Register("quarterMasterDelivery_main", {
 				npc:AddItemToList("accesscard_ecologists", nil, 5, "SELLANDBUY", 5, 3, 5) -- Main Progression
 			end
 
-			ix.progression.SetActive("quarterMasterDelivery_main", false)
+			ix.progression.SetCompleted("quarterMasterDelivery_main", true)
 
 			ix.progression.SetActive("egghead_dataTasks", true) -- Main Progression
 		end
@@ -867,7 +867,7 @@ ix.progression.Register("computerDelivery_activateItem", {
 		end
 
 		if isdone then
-			ix.progression.SetActive("computerDelivery_activateItem", false)
+			ix.progression.SetCompleted("computerDelivery_activateItem", true)
 
 			ix.progression.SetActive("computerDelivery_main", true) -- Main Progression
 		end
@@ -939,7 +939,7 @@ ix.progression.Register("computerDelivery_main", {
 		end
 
 		if isdone then
-			ix.progression.SetActive("computerDelivery_main", false)
+			ix.progression.SetCompleted("computerDelivery_main", true)
 
 			ix.progression.SetActive("computerArtifactTasks_main", true) -- Main Progression
 		end

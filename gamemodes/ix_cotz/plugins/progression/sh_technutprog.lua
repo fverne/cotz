@@ -75,7 +75,7 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 				npc:AddItemToList("mailjacket", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Suit1", false)
+			ix.progression.SetCompleted("technutItemDelivery_Suit1", true)
 			ix.progression.SetActive("technutItemDelivery_Suit2", true) 
 
 		end
@@ -154,7 +154,7 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 				npc:AddItemToList("trenchcoat", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Suit2", false)
+			ix.progression.SetCompleted("technutItemDelivery_Suit2", true)
 			ix.progression.SetActive("technutItemDelivery_Suit3", true) 
 
 		end
@@ -233,7 +233,7 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 				npc:AddItemToList("sunrise", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Suit3", false)
+			ix.progression.SetCompleted("technutItemDelivery_Suit3", true)
 			ix.progression.SetActive("technutItemDelivery_Suit4", true) 
 
 		end
@@ -312,7 +312,7 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 				npc:AddItemToList("cs1", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Suit4", false)
+			ix.progression.SetCompleted("technutItemDelivery_Suit4", true)
 			ix.progression.SetActive("technutItemDelivery_Suit5", true) 
 
 		end
@@ -391,7 +391,7 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 				npc:AddItemToList("cs2", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Suit5", false)
+			ix.progression.SetCompleted("technutItemDelivery_Suit5", true)
 			ix.progression.SetActive("technutItemDelivery_Suit6", true) 
 
 		end
@@ -470,7 +470,7 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 				npc:AddItemToList("cs3", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Suit6", false)
+			ix.progression.SetCompleted("technutItemDelivery_Suit6", true)
 			ix.progression.SetActive("technutItemDelivery_Suit7", true) 
 
 		end
@@ -549,7 +549,7 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 				npc:AddItemToList("wind", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Suit7", false)
+			ix.progression.SetCompleted("technutItemDelivery_Suit7", true)
 
 		end
 	end
@@ -627,7 +627,7 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 				})
 			end)
 
-			ix.progression.SetActive("technutItemDelivery_SuitPainting", false)
+			ix.progression.SetCompleted("technutItemDelivery_SuitPainting", true)
 
 		end
 	end
@@ -713,7 +713,7 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 				npc:AddItemToList("steelhelmetrussian", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Helmet1", false)
+			ix.progression.SetCompleted("technutItemDelivery_Helmet1", true)
 			ix.progression.SetActive("technutItemDelivery_Helmet2", true) 
 
 		end
@@ -794,7 +794,7 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 				npc:AddItemToList("flighthelmetvisor", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Helmet2", false)
+			ix.progression.SetCompleted("technutItemDelivery_Helmet2", true)
 			ix.progression.SetActive("technutItemDelivery_Helmet3", true) 
 
 		end
@@ -874,7 +874,7 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 				npc:AddItemToList("pasgt", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Helmet3", false)
+			ix.progression.SetCompleted("technutItemDelivery_Helmet3", true)
 			ix.progression.SetActive("technutItemDelivery_Helmet4", true) 
 
 		end
@@ -954,7 +954,7 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 				npc:AddItemToList("fraghelmet", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Helmet4", false)
+			ix.progression.SetCompleted("technutItemDelivery_Helmet4", true)
 			ix.progression.SetActive("technutItemDelivery_Helmet5", true) 
 
 		end
@@ -1034,7 +1034,7 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 				npc:AddItemToList("sphere08", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Helmet5", false)
+			ix.progression.SetCompleted("technutItemDelivery_Helmet5", true)
 			ix.progression.SetActive("technutItemDelivery_Helmet6", true) 
 
 		end
@@ -1114,7 +1114,7 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 				npc:AddItemToList("ach", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Helmet6", false)
+			ix.progression.SetCompleted("technutItemDelivery_Helmet6", true)
 			ix.progression.SetActive("technutItemDelivery_Helmet7", true) 
 
 		end
@@ -1194,7 +1194,7 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 				npc:AddItemToList("sphere12", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Helmet7", false)
+			ix.progression.SetCompleted("technutItemDelivery_Helmet7", true)
 
 		end
 	end
@@ -1279,7 +1279,7 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 				npc:AddItemToList("halfmask", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Mask1", false)
+			ix.progression.SetCompleted("technutItemDelivery_Mask1", true)
 			ix.progression.SetActive("technutItemDelivery_Mask2", true) 
 
 		end
@@ -1359,7 +1359,7 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 				npc:AddItemToList("gp5", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Mask2", false)
+			ix.progression.SetCompleted("technutItemDelivery_Mask2", true)
 			ix.progression.SetActive("technutItemDelivery_Mask3", true) 
 
 		end
@@ -1440,7 +1440,7 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 				npc:AddItemToList("eo20old", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Mask3", false)
+			ix.progression.SetCompleted("technutItemDelivery_Mask3", true)
 		end
 	end
 })
@@ -1526,7 +1526,7 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 				npc:AddItemToList("attachment_ceramicplate_1", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Attachment1", false)
+			ix.progression.SetCompleted("technutItemDelivery_Attachment1", true)
 			ix.progression.SetActive("technutItemDelivery_Attachment2", true) 
 
 		end
@@ -1607,7 +1607,7 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 				npc:AddItemToList("attachment_ceramicplate_2", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Attachment2", false)
+			ix.progression.SetCompleted("technutItemDelivery_Attachment2", true)
 			ix.progression.SetActive("technutItemDelivery_Attachment3", true) 
 
 		end
@@ -1688,7 +1688,7 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 				npc:AddItemToList("attachment_ceramicplate_3", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_Attachment3", false)
+			ix.progression.SetCompleted("technutItemDelivery_Attachment3", true)
 		end
 	end
 })
@@ -1766,7 +1766,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 				npc:AddItemToList("attachment_fabric_1", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_AttachmentFabric1", false)
+			ix.progression.SetCompleted("technutItemDelivery_AttachmentFabric1", true)
 			ix.progression.SetActive("technutItemDelivery_AttachmentFabric2", true) 
 
 		end
@@ -1846,7 +1846,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 				npc:AddItemToList("attachment_fabric_2", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_AttachmentFabric2", false)
+			ix.progression.SetCompleted("technutItemDelivery_AttachmentFabric2", true)
 
 		end
 	end
@@ -1925,7 +1925,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 				npc:AddItemToList("attachment_aluframe", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_AttachmentFrame1", false)
+			ix.progression.SetCompleted("technutItemDelivery_AttachmentFrame1", true)
 			ix.progression.SetActive("technutItemDelivery_AttachmentFrame2", true)
 
 		end
@@ -2005,7 +2005,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 				npc:AddItemToList("attachment_steelframe", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_AttachmentFrame2", false)
+			ix.progression.SetCompleted("technutItemDelivery_AttachmentFrame2", true)
 
 		end
 	end
@@ -2085,7 +2085,7 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 				npc:AddItemToList("attachment_carbonfibre", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_AttachmentCarbon", false)
+			ix.progression.SetCompleted("technutItemDelivery_AttachmentCarbon", true)
 
 		end
 	end
@@ -2165,7 +2165,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 				npc:AddItemToList("attachment_kevlar_1", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_AttachmentKevlar1", false)
+			ix.progression.SetCompleted("technutItemDelivery_AttachmentKevlar1", true)
 			ix.progression.SetActive("technutItemDelivery_AttachmentKevlar2", true)
 
 		end
@@ -2246,7 +2246,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 				npc:AddItemToList("attachment_kevlar_2", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("technutItemDelivery_AttachmentKevlar2", false)
+			ix.progression.SetCompleted("technutItemDelivery_AttachmentKevlar2", true)
 
 		end
 	end

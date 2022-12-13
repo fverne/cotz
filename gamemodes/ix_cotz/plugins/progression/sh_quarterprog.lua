@@ -70,7 +70,7 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 				npc:AddItemToList("mp5", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_1", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_1", true)
 			ix.progression.SetActive("quartermasterItemDelivery_11", true) 
 			ix.progression.SetActive("quartermasterItemDelivery_12", true) 
 
@@ -152,7 +152,7 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 				npc:AddItemToList("l85", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_11", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_11", true)
 			ix.progression.SetActive("quartermasterItemDelivery_111", true) 
 			ix.progression.SetActive("quartermasterItemDelivery_112", true) 
 
@@ -233,7 +233,7 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 				npc:AddItemToList("g36c", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_111", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_111", true)
 			ix.progression.SetActive("quartermasterItemDelivery_1111", true) 
 
 		end
@@ -312,7 +312,7 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 				npc:AddItemToList("sg552", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_1111", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_1111", true)
 
 		end
 	end
@@ -391,7 +391,7 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 				npc:AddItemToList("an94k", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_112", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_112", true)
 			ix.progression.SetActive("quartermasterItemDelivery_1121", true) 
 
 		end
@@ -470,7 +470,7 @@ ix.progression.Register("quartermasterItemDelivery_1121", {
 				npc:AddItemToList("rk95", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_1121", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_1121", true)
 			ix.progression.SetActive("quartermasterItemDelivery_11211", true) 
 
 		end
@@ -549,7 +549,7 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 				npc:AddItemToList("ak12", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_11211", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_11211", true)
 		end
 	end
 })
@@ -627,7 +627,7 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 				npc:AddItemToList("fiveseven", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_12", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_12", true)
 			ix.progression.SetActive("quartermasterItemDelivery_121", true) 
 			ix.progression.SetActive("quartermasterItemDelivery_122", true) 
 
@@ -708,7 +708,7 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 				npc:AddItemToList("ump45", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_121", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_121", true)
 		end
 	end
 })
@@ -785,7 +785,7 @@ ix.progression.Register("quartermasterItemDelivery_122", {
 				npc:AddItemToList("lr300", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_122", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_122", true)
 			ix.progression.SetActive("quartermasterItemDelivery_1221", true) 
 
 		end
@@ -864,7 +864,7 @@ ix.progression.Register("quartermasterItemDelivery_1221", {
 				npc:AddItemToList("m16a4", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_1221", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_1221", true)
 			ix.progression.SetActive("quartermasterItemDelivery_12211", true) 
 
 		end
@@ -943,7 +943,7 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 				npc:AddItemToList("fnfal", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_12211", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_12211", true)
 		end
 	end
 })
@@ -1020,7 +1020,7 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 				npc:AddItemToList("swr8", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_2", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_2", true)
 			ix.progression.SetActive("quartermasterItemDelivery_21", true) 
 			ix.progression.SetActive("quartermasterItemDelivery_22", true) 
 
@@ -1101,7 +1101,7 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 				npc:AddItemToList("mp9a1", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_21", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_21", true)
 			ix.progression.SetActive("quartermasterItemDelivery_211", true) 
 			ix.progression.SetActive("quartermasterItemDelivery_212", true) 
 
@@ -1182,7 +1182,7 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 				npc:AddItemToList("pp1901vityaz", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_211", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_211", true)
 		end
 	end
 })
@@ -1259,7 +1259,7 @@ ix.progression.Register("quartermasterItemDelivery_212", {
 				npc:AddItemToList("famas", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_212", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_212", true)
 			ix.progression.SetActive("quartermasterItemDelivery_2121", true) 
 
 		end
@@ -1338,7 +1338,7 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 				npc:AddItemToList("aug", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_2121", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_2121", true)
 		end
 	end
 })
@@ -1416,7 +1416,7 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 				npc:AddItemToList("mr96", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_22", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_22", true)
 			ix.progression.SetActive("quartermasterItemDelivery_221", true) 
 			ix.progression.SetActive("quartermasterItemDelivery_222", true) 
 
@@ -1496,7 +1496,7 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 				npc:AddItemToList("mp153", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_221", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_221", true)
 		end
 	end
 })
@@ -1573,7 +1573,7 @@ ix.progression.Register("quartermasterItemDelivery_222", {
 				npc:AddItemToList("sv98", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_222", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_222", true)
 			ix.progression.SetActive("quartermasterItemDelivery_2221", true) 
 		end
 	end
@@ -1651,7 +1651,7 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 				npc:AddItemToList("svd", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
-			ix.progression.SetActive("quartermasterItemDelivery_2221", false)
+			ix.progression.SetCompleted("quartermasterItemDelivery_2221", true)
 		end
 	end
 })
