@@ -43,6 +43,16 @@ function ix.progression.IsActive(progid)
 	end
 end
 
+-- Marks progression as completed and inactive.
+function ix.progression.SetCompleted(progid)
+	if (ix.progression.definitions[progid]) then
+		ix.progression.status[progid] = ix.progression.status[progid] or {}
+		
+		ix.progression.status[progid].active = false
+		ix.progression.status[progid].completed = true
+	end
+end
+
 
 function ix.progression.GetProgressionValue(progid)
 	if (ix.progression.definitions[progid]) then
