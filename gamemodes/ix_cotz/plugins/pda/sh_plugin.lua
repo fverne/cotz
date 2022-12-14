@@ -130,6 +130,7 @@ ix.chat.Register("npcpdainternal", {
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text, bAnonymous, data)
+		ix.util.DoHttpPost(data.name, data.message) -- move to hook later
 		chat.AddText(Color(180,61,61), "[GPDA-"..data.name.."] ", Color(0,241,255), icon, ": "..data.message)
 	end,
 	prefix = {},
