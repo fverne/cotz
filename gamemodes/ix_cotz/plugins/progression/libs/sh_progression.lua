@@ -53,6 +53,16 @@ function ix.progression.SetCompleted(progid)
 	end
 end
 
+-- Returns if progression is completed, otherwise false.
+function ix.progression.IsCompleted(progid)
+	if (ix.progression.definitions[progid]) then
+		ix.progression.status[progid] = ix.progression.status[progid] or {}
+
+		return ix.progression.status[progid].completed
+	else
+		return false
+	end
+end
 
 function ix.progression.GetProgressionValue(progid)
 	if (ix.progression.definitions[progid]) then
