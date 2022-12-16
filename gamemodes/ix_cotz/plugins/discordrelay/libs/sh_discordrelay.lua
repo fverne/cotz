@@ -9,10 +9,10 @@ function ix.util.DoHttpPost(name, text)
 	HTTP({
 		url = ix.config.Get("webUrl"),
 		method = "POST",
-		body = {
+		body = util.TableToJSON({
 			content = text,
 			charname = name
-		},
+		}),
 		headers = {
 			['Content-Type'] = 'application/json',
 			['accept'] = '*/*'
