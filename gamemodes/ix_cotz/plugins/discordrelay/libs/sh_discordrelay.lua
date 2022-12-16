@@ -17,7 +17,12 @@ function ix.util.DoHttpPost(name, text)
 			['Content-Type'] = 'application/json',
 			['accept'] = '*/*'
 		},
-		success = function (code, body, headers) end,
-		failed = function (reason) Msg(reason) end
+		type = "application/json; charset=utf-8",
+		success = function (code, body, headers)
+			print("IT WORKED " .. body)
+		 end,
+		failed = function( err ) 
+            print("IT DIDNT WORK " .. err)
+        end
 	})
 end
