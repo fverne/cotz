@@ -17,3 +17,17 @@ function ix.util.GetValueFromProgressionTurnin(item, cnt)
 
     return rep, currency
 end
+
+-- Performs various extra features based around chat messages in a single helper function
+function ix.util.HandleChat(name, message, chattype)
+    // Relay to other servers
+	if (ix.crossserverchat) then
+		local icon = Material("vgui/icons/news.png")
+		ix.crossserverchat.PostMessage(nil, name, message, icon)
+	end
+
+    // Relay to discord
+    if (ix.discordrelay) then
+	    ix.discordrelay.RelayChatToDiscord(name, message)
+    end
+end

@@ -148,8 +148,10 @@ ix.command.Add("npcpda", {
 			ix.type.text
 		},
 	OnRun = function(self, client, npcname, message)
-		ix.util.DoHttpPost(npcname, message)
+		// Relay to discord + xserverchat
+		ix.util.HandleChat(npcname, message)
 
+		// Send the message for each player
 		ix.chat.Send(client, "npcpdainternal", message, nil, nil, {
 			name = npcname,
 			message = message

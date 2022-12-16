@@ -143,9 +143,12 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = "Come on over, I got some freshly finished trenchcoats for you all, for a price of course."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = "Come on over, I got some freshly finished trenchcoats for you all, for a price of course."
+					name = name,
+					message = message
 				})
 			end)
 
