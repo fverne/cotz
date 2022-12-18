@@ -19,10 +19,10 @@ function ix.util.GetValueFromProgressionTurnin(item, cnt)
 end
 
 -- Performs various extra features based around chat messages in a single helper function
-function ix.util.HandleChat(name, message, chattype)
+function ix.util.HandleChat(name, message)
     // Relay to other servers
 	if (ix.crossserverchat) then
-		local icon = Material("vgui/icons/news.png")
+		local icon = ix.util.GetMaterial("vgui/icons/news.png")
 		ix.crossserverchat.PostMessage(nil, name, message, icon)
 	end
 
