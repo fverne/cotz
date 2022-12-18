@@ -131,9 +131,12 @@ ix.progression.Register("oldTimerKillIntro", {
 	progressfunctions = {
 		[1] = {
 			OnRun = function()			
+				local name = "'Old Timer'"
+				local message = "Good job, you've lowered the mutant population a bit, and as such we've gained a slight foothold in the zone. Come have a chat, I have a new task for you all."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "Good job, you've lowered the mutant population a bit, and as such we've gained a slight foothold in the zone. Come have a chat, I have a new task for you all."
+					name = name,
+					message = message
 				})
 				
 				-- Unlock next step in progression
@@ -159,9 +162,12 @@ ix.progression.Register("oldTimerKillIntro", {
 
 				
 
+				local name = "'Old Timer'"
+				local message = "Due to your extraordinary efforts in killing mutants, I have secured some supply lines to import medical supplies from leftover army supplies they don't need anymore."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "Due to your extraordinary efforts in killing mutants, I have secured some supply lines to import medical supplies from leftover army supplies they don't need anymore."
+					name = name,
+					message = message
 				})
 			end,
 			RunOnce = true
@@ -180,9 +186,12 @@ ix.progression.Register("oldTimerKillIntro", {
 					npc:AddItemToList("medic_bandage_3", nil, 4, "SELLANDBUY", 4, 1, 4)
 				end
 
+				local name = "'Old Timer'"
+				local message = "Lovely work everyone, thanks to your dilligence in clearing out the swamps, one of my associates have agreed to ship in a wider variety of medical supplies, feel free to come check my wares."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "Lovely work everyone, thanks to your dilligence in clearing out the swamps, one of my associates have agreed to ship in a wider variety of medical supplies, feel free to come check my wares."
+					name = name,
+					message = message
 				})
 				ix.progression.SetCompleted("oldTimerKillIntro", true)
 			end,
@@ -275,23 +284,32 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 		if isdone then
 
 			timer.Simple(5, function()
+				local name = "'Old Timer'"
+				local message = "We're good on food, for now. To everyone that contributed, great work. Go say hi to my old friend 'Spicy Lemon', he's here to help cook all the food you've worked so hard for."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "We're good on food, for now. To everyone that contributed, great work. Go say hi to my old friend 'Spicy Lemon', he's here to help cook all the food you've worked so hard for."
+					name = name,
+					message = message
 				})
 			end)
 
 			timer.Simple(15, function()
+				local name = "'Spicy Lemon'"
+				local message = "Hello everyone, please bring me all your food, I'll cook you the finest delicacies."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Spicy Lemon'",
-					message = "Hello everyone, please bring me all your food, I'll cook you the finest delicacies."
+					name = name,
+					message = message
 				})
 			end)
 
 			timer.Simple(30, function()
+				local name = "'Technut'"
+				local message = "Everyone, come in. I need some help with one of my projects, find me in my cabin."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = "Everyone, come in. I need some help with one of my projects, find me in my cabin."
+					name = name,
+					message = message
 				})
 
 			end)
@@ -378,16 +396,22 @@ ix.progression.Register("technutItemDelivery_Main", {
 		if isdone then
 			--Spawn STALKERNETAdmin
 			timer.Simple(15, function()
+				local name = "'Technut'"
+				local message = "Thank you all for your help with my radio project, my messages are finally getting through. I managed to strike a deal with some people I know, and they'll supply me with military grade fabrics and plates."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = "Thank you all for your help with my radio project, my messages are finally getting through. I managed to strike a deal with some people I know, and they'll supply me with military grade fabrics and plates."
+					name = name,
+					message = message
 				})
 			end)
 
 			timer.Simple(45, function()
+				local name = "'Old Timer'"
+				local message = "Hello everyone, the new radio equipment gave me an idea. Come see me, maybe we can work something out."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "Hello everyone, the new radio equipment gave me an idea. Come see me, maybe we can work something out."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -470,16 +494,22 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 		if isdone then
 			
 			timer.Simple(15, function()
+				local name = "'Old Timer'"
+				local message = "Arrangements have been made, and my good friend, you can call him 'Mute', has arrived. He's a bit eccentric, so keep that in mind."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "Arrangements have been made, and my good friend, you can call him 'Mute', has arrived. He's a bit eccentric, so keep that in mind."
+					name = name,
+					message = message
 				})
 			end)
 
 			timer.Simple(45, function()
+				local name = "'Mute'"
+				local message = "Come see me. I need help with something."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Mute'",
-					message = "Come see me. I need help with something. -Mute"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -519,9 +549,12 @@ ix.progression.Register("stalkerNetAdmin_AreaTasks", {
 	progressfunctions = {
 		[1] = {
 			OnRun = function()			
+				local name = "'Mute'"
+				local message = "Thanks for the help with the scanning, please keep it up. Come talk to me, I'll instruct you in what I will need in the future."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Mute'",
-					message = "Thanks for the help with the scanning, please keep it up. Come talk to me, I'll instruct you in what I will need in the future. -Mute"
+					name = name,
+					message = message
 				})
 				
 				ix.progression.SetCompleted("stalkerNetAdmin_AreaTasks", true)
@@ -601,9 +634,12 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 		if isdone then
 			
 			timer.Simple(45, function()
+				local name = "'Mute'"
+				local message = "I got some correspondence with a guy in a deeper territory, he calls himself 'Quartermaster'. We need his help arming ourselves. Please go see what he needs before he'll help us."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Mute'",
-					message = "I got some correspondence with a guy in a deeper territory, he calls himself 'Quartermaster'. We need his help arming ourselves. Please go see what he needs before he'll help us. -Mute"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -614,9 +650,12 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 			end
 
 			timer.Simple(90, function()
+				local name = "'Haggler'"
+				local message = "Hello everyone! I see you're all doing quite well for yourselves. I have some wares if you got the cash."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Hello everyone! I see you're all doing quite well for yourselves. I have some wares if you got the cash."
+					name = name,
+					message = message
 				})
 			end)
 			-- Needs correct pos/ang set
@@ -680,9 +719,12 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 		if isdone then
 			
 			timer.Simple(5, function()
+				local name = "'Quartermaster'"
+				local message = "Alright, we can talk business, come over here."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Alright, we can talk business, come over here."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -762,9 +804,12 @@ ix.progression.Register("quarterMasterDelivery_main", {
 		if isdone then
 			
 			timer.Simple(5, function()
+				local name = "'Quartermaster'"
+				local message = "Thanks for the booze, I got keycards for the bunker for sale, if you got the cash for it."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Thanks for the booze, I got keycards for the bunker for sale, if you got the cash for it."
+					name = name,
+					message = messsage
 				})
 			end)
 
@@ -801,9 +846,12 @@ ix.progression.Register("egghead_dataTasks", {
 	progressfunctions = {
 		[1] = {
 			OnRun = function()			
+				local name = "'Egghead'"
+				local message = "Good work stalkers, you've gotten me a lot of interesting information, I think I might have an idea what has happened here, please come to the bunker for further jobs."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Egghead'",
-					message = "Good work stalkers, you've gotten me a lot of interesting information, I think I might have an idea what has happened here, please come to the bunker for further jobs."
+					name = name,
+					message = message
 				})
 
 				local npc = ix.progression.GetNPCFromName("'Egghead'")
@@ -968,9 +1016,12 @@ ix.progression.Register("computer_artifactTasks", {
 		[1] = {
 			OnRun = function()
 				timer.Simple(5, function()
+					local name = "'Egghead'"
+					local message = "Stalkers, my readings are going crazy, a large release of energy was just detected at the waystation. Please be careful, I can't ."
+					ix.util.HandleChat(name, message)
 					ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-						name = "'Egghead'",
-						message = "Stalkers, my readings are going crazy, a large release of energy was just detected at the waystation. Please be careful, I can't ."
+						name = name,
+						message = message
 					})
 				end)
 

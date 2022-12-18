@@ -59,9 +59,12 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: MP5."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: MP5."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -139,9 +142,12 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: Mateba Unica, AK-74, L85."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: Mateba Unica, AK-74, L85."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -221,9 +227,12 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: Henry Lever Action X Model .44, G36c."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: Henry Lever Action X Model .44, G36c."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -301,9 +310,12 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: SG552."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: SG552."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -379,9 +391,12 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: AEK-971, AN94k."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: AEK-971, AN94k."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -459,9 +474,12 @@ ix.progression.Register("quartermasterItemDelivery_1121", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: SAKO RK 95."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: SAKO RK 95."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -538,9 +556,12 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: AK-12."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: AK-12."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -615,9 +636,12 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: M3 Super 90, FN FiveseveN."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: M3 Super 90, FN FiveseveN."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -696,9 +720,12 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: FN P90, UMP-45."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: FN P90, UMP-45."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -774,9 +801,12 @@ ix.progression.Register("quartermasterItemDelivery_122", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: LR 300."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: LR 300."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -853,9 +883,12 @@ ix.progression.Register("quartermasterItemDelivery_1221", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: M16A4."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: M16A4."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -932,9 +965,12 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: FN FAL."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: FN FAL."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1009,9 +1045,12 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: S&W R8."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: S&W R8."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1089,9 +1128,12 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: Taurus Raging Bull, MP9a1."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: Taurus Raging Bull, MP9a1."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1170,9 +1212,12 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: IMI Uzi, PP-19-01 'Vityaz'."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: IMI Uzi, PP-19-01 'Vityaz'."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1248,9 +1293,12 @@ ix.progression.Register("quartermasterItemDelivery_212", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: FAMAS."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: FAMAS."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1327,9 +1375,12 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: Steyr AUG."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: Steyr AUG."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1404,9 +1455,12 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: Remington 870AE, MR96."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: Remington 870AE, MR96."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1485,9 +1539,12 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: Baikal MP-153."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: Baikal MP-153."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1562,9 +1619,12 @@ ix.progression.Register("quartermasterItemDelivery_222", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: SV-98."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: SV-98."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1640,9 +1700,12 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Quartermaster'"
+				local message = "Now available in my shop: SVD."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Quartermaster'",
-					message = "Now available in my shop: SVD."
+					name = name,
+					message = message
 				})
 			end)
 

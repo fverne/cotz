@@ -59,9 +59,12 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Old Timer'"
+				local message = "Now available in my shop: Kitchen Knife."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "Now available in my shop: Kitchen Knife."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -138,9 +141,12 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Old Timer'"
+				local message = "Now available in my shop: Survival Knife."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "Now available in my shop: Survival Knife."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -217,9 +223,12 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Old Timer'"
+				local message = "Now available in my shop: Battered Bayonet."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "Now available in my shop: Battered Bayonet."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -296,9 +305,12 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Old Timer'"
+				local message = "Now available in my shop: Unlocks Bat, Fireaxe, Fubar, Hatchet, Machete."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "Now available in my shop: Unlocks Bat, Fireaxe, Fubar, Hatchet, Machete."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -379,9 +391,12 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Old Timer'"
+				local message = "Now available in my shop: Cleaning Kit."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "Now available in my shop: Cleaning Kit."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -459,9 +474,12 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Old Timer'"
+				local message = "Now available in my shop: Shovel."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "Now available in my shop: Shovel."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -538,9 +556,12 @@ ix.progression.Register("oldtimerItemDelivery_Nickname", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Old Timer'"
+				local message = "Stalkers worth their weight can now get a nickname from me."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Old Timer'",
-					message = "Stalkers worth their weight can now get a nickname from me."
+					name = name,
+					message = message
 				})
 			end)
 

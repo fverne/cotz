@@ -64,9 +64,12 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = "The first product of our combined efforts are ready, come by and buy a mail jacket."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = "The first product of our combined efforts are ready, come by and buy a mail jacket."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -225,9 +228,12 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = "Stalkers, I've got some fresh suit prototypes, ready for purchase."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = "Stalkers, I've got some fresh suit prototypes, ready for purchase."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -304,9 +310,12 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = "I just finished a batch of armored suits, they're ready for purchase."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = "I just finished a batch of armored suits, they're ready for purchase."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -383,9 +392,12 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = "I just finished my work on the new iteration of the CS type suits, they're ready for purchase now."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = "I just finished my work on the new iteration of the CS type suits, they're ready for purchase now."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -462,9 +474,12 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = "I just finished a batch of heavily armored suits, the CS3's, they're ready for purchase now."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = "I just finished a batch of heavily armored suits, the CS3's, they're ready for purchase now."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -541,9 +556,12 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = "I just finished a batch of suits, they're ready for purchase now."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = "I just finished a batch of suits, they're ready for purchase now."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -624,9 +642,12 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = "I just finished a batch of suits, they're ready for purchase now."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = "I just finished a batch of suits, they're ready for purchase now."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -704,9 +725,12 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks Steel Helmets, german and russian"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks Steel Helmets, german and russian"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -785,9 +809,12 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks flighthelmet, flighthelmetvisor"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks flighthelmet, flighthelmetvisor"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -866,9 +893,12 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks pasgt"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks pasgt"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -946,9 +976,12 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks fraghelmet"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks fraghelmet"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1026,9 +1059,12 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks sphere08"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks sphere08"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1106,9 +1142,12 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks ach"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks ach"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1186,9 +1225,12 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks sphere12"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks sphere12"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1271,9 +1313,12 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks halfmask"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks halfmask"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1351,9 +1396,12 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks gp5"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks gp5"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1431,9 +1479,12 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks eo20, eo20old"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks eo20, eo20old"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1517,9 +1568,12 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks attachment_steelplate_1, attachment_ceramicplate_1"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks attachment_steelplate_1, attachment_ceramicplate_1"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1598,9 +1652,12 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks attachment_steelplate_2, attachment_ceramicplate_2"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks attachment_steelplate_2, attachment_ceramicplate_2"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1679,9 +1736,12 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks attachment_steelplate_3, attachment_ceramicplate_3"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks attachment_steelplate_3, attachment_ceramicplate_3"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1758,9 +1818,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks attachment_fabric_1"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks attachment_fabric_1"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1838,9 +1901,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks attachment_fabric_2"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks attachment_fabric_2"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1917,9 +1983,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks attachment_aluframe"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks attachment_aluframe"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1997,9 +2066,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message =  " ## PLACEHOLDER ## - Unlocks attachment_steelframe"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks attachment_steelframe"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -2077,9 +2149,12 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks attachment_carbonfibre"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks attachment_carbonfibre"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -2157,9 +2232,12 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks attachment_kevlar_1"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks attachment_kevlar_1"
+					name = name,
+					message = message
 				})
 			end)
 
@@ -2238,9 +2316,12 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = " ## PLACEHOLDER ## - Unlocks attachment_kevlar_2"
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Technut'",
-					message = " ## PLACEHOLDER ## - Unlocks attachment_kevlar_2"
+					name = name,
+					message = message
 				})
 			end)
 

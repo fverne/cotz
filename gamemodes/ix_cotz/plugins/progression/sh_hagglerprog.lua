@@ -59,9 +59,12 @@ ix.progression.Register("hagglerItemDelivery_1", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: Fort-12, M1911, Browning Hi-Power."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: Fort-12, M1911, Browning Hi-Power."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -141,9 +144,12 @@ ix.progression.Register("hagglerItemDelivery_11", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: LA-X 410 Short, Sten."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: LA-X 410 Short, Sten."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -222,9 +228,12 @@ ix.progression.Register("hagglerItemDelivery_111", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: LA-X 410."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: LA-X 410."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -301,9 +310,12 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: S&W Model 29."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: S&W Model 29."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -380,9 +392,12 @@ ix.progression.Register("hagglerItemDelivery_112", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: Sterling."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: Sterling."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -457,9 +472,12 @@ ix.progression.Register("hagglerItemDelivery_12", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: TOZ-66."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: TOZ-66."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -536,9 +554,12 @@ ix.progression.Register("hagglerItemDelivery_121", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: SKS, Ruger Mini-14."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: SKS, Ruger Mini-14."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -615,9 +636,12 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: Saiga Semi."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: Saiga Semi."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -693,9 +717,12 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: Marlin 1894C .357 Magnum."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: Marlin 1894C .357 Magnum."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -772,9 +799,12 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: G2 Contender (.500 Magnum), .500 Magnum."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: G2 Contender (.500 Magnum), .500 Magnum."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -850,9 +880,12 @@ ix.progression.Register("hagglerItemDelivery_122", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: Kiparis, KP31."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: Kiparis, KP31."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -929,9 +962,12 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: Mac-11."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: Mac-11."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1007,9 +1043,12 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: Colt Chicago."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: Colt Chicago."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1084,9 +1123,12 @@ ix.progression.Register("hagglerItemDelivery_2", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: TOZ-34."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: TOZ-34."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1164,9 +1206,12 @@ ix.progression.Register("hagglerItemDelivery_21", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: SAKO 85 (5.56 NATO)."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: SAKO 85 (5.56 NATO)."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1244,9 +1289,12 @@ ix.progression.Register("hagglerItemDelivery_211", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: Mauser C96 Carbine."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: Mauser C96 Carbine."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1322,9 +1370,12 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: PPSh."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: PPSh."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1400,9 +1451,12 @@ ix.progression.Register("hagglerItemDelivery_212", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: TOZ-194."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: TOZ-194."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1478,9 +1532,12 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: M1887."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: M1887."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1556,9 +1613,12 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: Ithaca 37."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: Ithaca 37."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1633,9 +1693,12 @@ ix.progression.Register("hagglerItemDelivery_22", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: Saiga Semi (5.45x39mm), MP34."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: Saiga Semi (5.45x39mm), MP34."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1714,9 +1777,12 @@ ix.progression.Register("hagglerItemDelivery_221", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: SAKO 85, Winchester 1895."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: SAKO 85, Winchester 1895."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1793,9 +1859,12 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: Mosin Nagant."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: Mosin Nagant."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1871,9 +1940,12 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: SVT40."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: SVT40."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -1948,9 +2020,12 @@ ix.progression.Register("hagglerItemDelivery_222", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: MP40."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: MP40."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -2026,9 +2101,12 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: AKS-74u."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: AKS-74u."
+					name = name,
+					message = message
 				})
 			end)
 
@@ -2104,9 +2182,12 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 		if isdone then
 
 			timer.Simple(60, function()
+				local name = "'Haggler'"
+				local message = "Now available in my shop: AKM."
+				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = "'Haggler'",
-					message = "Now available in my shop: AKM."
+					name = name,
+					message = message
 				})
 			end)
 
