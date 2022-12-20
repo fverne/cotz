@@ -206,7 +206,7 @@ if SERVER then
 
 		self:spawnEvent(eventpoint, spawn)
 		
-		if ix.progression.GetNPCFromName("'Mute'") then
+		if ix.progression.IsCompleted("muteItemDelivery_Broadcast") then
 			self.pdachatter = true
 		else
 			self.pdachatter = false
