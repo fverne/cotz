@@ -585,7 +585,7 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 	name = "Colourful Fashion",
 	description = "Get Technut to paint your suits.",
 	keyNpc = "'Technut'",
-	defaultActive = false,
+	defaultActive = true,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_SuitPainting"] = ix.progression.status["technutItemDelivery_SuitPainting"] or {}
 		local dat = ix.progression.status["technutItemDelivery_SuitPainting"].complexData

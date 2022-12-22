@@ -208,6 +208,11 @@ DIALOGUE.addTopic("PaintSuit", {
 		end
 		return "ConfirmPaint", dyndata
 	end,
+	ShouldAdd = function()
+		if (ix.progression.IsCompleted("technutItemDelivery_SuitPainting")) then
+			return true
+		end
+	end,
 })
 
 DIALOGUE.addTopic("ConfirmPaint", {
