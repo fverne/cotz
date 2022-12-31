@@ -210,7 +210,7 @@ end)
 if(SERVER)then
 	function PLUGIN:PlayerSpawn(client)
 		if client then
-			timer.Simple(1, function() 
+			timer.Simple(0.25, function() 
 				if client then
 					client:SetWepRaised(false)
 				end
