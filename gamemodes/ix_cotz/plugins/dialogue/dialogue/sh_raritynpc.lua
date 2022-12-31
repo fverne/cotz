@@ -31,7 +31,7 @@ DIALOGUE.addTopic("GREETING", {
 					end
 				end
 
-				target:SetNetVar("specialSaleItems", randomItems)
+				client:SetNetVar("specialSaleItems", randomItems)
 				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
 			end
 		end
@@ -89,7 +89,7 @@ DIALOGUE.addTopic("SpecialSaleTopic", {
 	},
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
-		local randomItems = target:GetNetVar("specialSaleItems")
+		local randomItems = client:GetNetVar("specialSaleItems")
 		
 		for k,v in pairs(randomItems) do
 			local item = ix.item.list[v[1]]
@@ -196,7 +196,7 @@ DIALOGUE.addTopic("BackTopic", {
 				end
 
 			
-				target:SetNetVar("specialSaleItems", randomItems)
+				client:SetNetVar("specialSaleItems", randomItems)
 				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
 			end
 		end
