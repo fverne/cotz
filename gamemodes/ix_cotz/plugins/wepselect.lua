@@ -104,7 +104,7 @@ if (CLIENT) then
 		bind = bind:lower()
 
 		if (!pressed or !bind:find("invprev") and !bind:find("invnext")
-		and !bind:find("slot") and !bind:find("attack")) then
+			and !bind:find("slot") and !bind:find("attack")) then
 			return
 		end
 
@@ -163,12 +163,12 @@ if (CLIENT) then
 
 			return true
 		elseif (bind:find("attack") and !(self.alpha > 0)) then --If M1/M2 is pressed but wepselection isn't active; then we want to raise our weapon!
-		if (!client:Alive()) then return end
-			 elseif (!client:IsWepRaised() and client:GetActiveWeapon():GetClass() != "ix_hands" and !client:Alive()) then
+			if (client:Alive() and !client:IsWepRaised() and client:GetActiveWeapon():GetClass() != "ix_hands") then
 				net.Start("ixRequestWeaponRaise")
 				net.SendToServer()
 			end
 		end
+	end
 
 
 	function PLUGIN:Think()
