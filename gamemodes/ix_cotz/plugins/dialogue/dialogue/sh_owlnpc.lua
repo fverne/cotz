@@ -223,6 +223,11 @@ DIALOGUE.addTopic("StorageTopic", {
 		-- Return the next topicID
 		return "ConfirmStorageUpgrade", {direction = dyndata.direction, cost = dyndata.cost}
 	end,
+	ShouldAdd = function()
+		if (ix.progression.IsCompleted("cleanerItemDelivery_Storage")) then
+			return true
+		end
+	end
 })
 
 DIALOGUE.addTopic("OpenStorage", {
@@ -404,11 +409,12 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 		-- Return the next topicID
 		return "BackTopic"
 	end,
-
-
-
-	--
-} )
+	ShouldAdd = function()
+		if (LocalPlayer():GetCharacter():GetJobs()["'Cleaner'"]) then
+			return true
+		end
+	end
+})
 
 DIALOGUE.addTopic("ConfirmTask", {
 	statement = "",
@@ -485,19 +491,11 @@ DIALOGUE.addTopic("GetTask", {
 		-- Return the next topicID
 		return "ConfirmTask", {description = ix.jobs.getFormattedDescInactive(dyndata.identifier), identifier = dyndata.identifier}
 	end,
-})
-
-DIALOGUE.addTopic("ProgressionTestTopic", {
-	statement = "Progression?",
-	response = "ok)",
-	postCallback = function(self, client, target)
-		if (SERVER) then
-			ix.progression.AddProgessionValue("TestProgression", 1, client:Name())
+	ShouldAdd = function()
+		if (!LocalPlayer():GetCharacter():GetJobs()["'Cleaner'"]) then
+			return true
 		end
-	end,
-	options = {
-		"BackTopic",
-	}
+	end
 })
 
 DIALOGUE.addTopic("BackTopic", {
