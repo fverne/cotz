@@ -13,8 +13,8 @@ end
 hook.Add("PlayerSpawn", "CustomizableWeaponry.PlayerSpawn", CustomizableWeaponry.PlayerSpawn)
 
 function CustomizableWeaponry.AllowPlayerPickup(ply, ent)
-	wep = ply:GetActiveWeapon()
-	
+	local wep = ply:GetActiveWeapon()
+
 	if wep.CW20Weapon then
 		return false
 	end
