@@ -181,7 +181,7 @@ DIALOGUE.addTopic("StorageTopic", {
 		"BackTopic"
 	},
 	preCallback = function(self, client, target)
-		if !ix.progression.GetNPCFromName("'Mute'") and CLIENT then
+		if !ix.progression.IsCompleted("cleanerItemDelivery_Storage") and CLIENT then
 			self.response = "No, not for the moment."
 		end
 	end,
