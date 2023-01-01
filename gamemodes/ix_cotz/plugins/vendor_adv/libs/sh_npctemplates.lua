@@ -28,6 +28,15 @@ ix.npctemplates.templates["owlnpc"] = {
 	--animgroup 	= 2,
 	idleanim = "bandit2_idle2",
 	buyAll 		= true,
+	items = {
+		["12gauge"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
+		["9x18"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
+		["9x19"] 	= { nil, 3, SELLANDBUY, 3, 1, 2 },
+		["762x25"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
+		["22lr"] 	= { nil, 6, SELLANDBUY, 6, 1, 2 },
+		["45acp"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
+		["45acp410"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
+	},
 }
 
 ix.npctemplates.templates["technpc"] = {
@@ -43,25 +52,26 @@ ix.npctemplates.templates["technpc"] = {
 	--animgroup 	= 4,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["12gauge"] 	= { nil, 4, SELLANDBUY, 4, 1, 1 },
-		["9x18"] 	= { nil, 4, SELLANDBUY, 4, 1, 1 },
-		["9x19"] 	= { nil, 3, SELLANDBUY, 3, 1, 1 },
-		["762x25"] 	= { nil, 4, SELLANDBUY, 4, 1, 1 },
-		["22lr"] 	= { nil, 6, SELLANDBUY, 6, 1, 1 },
-		["45acp"] 	= { nil, 4, SELLANDBUY, 4, 1, 1 },
-		["45acp410"] 	= { nil, 4, SELLANDBUY, 4, 1, 1 },
+		-- ["12gauge"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
+		-- ["9x18"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
+		-- ["9x19"] 	= { nil, 3, SELLANDBUY, 3, 1, 2 },
+		-- ["762x25"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
+		["22lr"] 	= { nil, 15, SELLANDBUY, 15, 1, 6 },
+		["45acp"] 	= { nil, 10, SELLANDBUY, 10, 1, 3 },
+		["45acp410"] 	= { nil, 10, SELLANDBUY, 10, 1, 6 },
+
+		["ruger1022"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
+		["rugermk3"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
+		["w9422"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
+		["sako85varmint"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
+		["ij600"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
+		["g2contender"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 
 		["crowbar"] 	= { nil, 4, SELLANDBUY, 4, 0.5, 2 },
 		["leadpipe"] 	= { nil, 4, SELLANDBUY, 4, 0.5, 2 },
 		["sledgehammer"] 	= { nil, 4, SELLANDBUY, 4, 0.5, 2 },
 
-		["backpack_1"] 	= { nil, 2, SELLANDBUY, 2, 3, 1 },
-		["backpack_3"] 	= { nil, 2, SELLANDBUY, 2, 3, 1 },
-
 		["anorak"] 	= { nil, 6, SELLANDBUY, 6, 3, 2 },
-
-		["binoculars_2"] 	= { nil, 5, SELLANDBUY, 5, 3, 1 },
-		["binoculars_5"] 	= { nil, 5, SELLANDBUY, 5, 3, 1 },
 
 		["food_nuts_1"] 	= { nil, 20, SELLANDBUY, 20, 12, 5 },
 	},
@@ -104,18 +114,10 @@ ix.npctemplates.templates["tutorialnpc"] = {
 		["knife1"] 	= { nil, 6, SELLANDBUY, 6, 8, 3 },
 		["hidestasher_cutlery"] 	= { nil, 6, SELLANDBUY, 6, 8, 3 },
 		["lowtiercooker"] 	= { nil, 3, SELLANDBUY, 3, 8, 3 },
-
-		["ruger1022"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
-		["rugermk3"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
-		["w9422"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
-
-		["trenchcoat"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
-		["mailjacket"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
+		["lowtiercookerfuel"] 	= { nil, 20, SELLANDBUY, 20, 2, 15 },
 
 		["backpack_1"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
-		["backpack_1_large"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 }, -- make me progression unlock?
 		["backpack_3"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
-		["backpack_3_large"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 }, -- make me progression unlock?
 
 		["part_bear"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_blinddog"] 	= { 1, nil, BUYONLY, nil, nil, nil },
@@ -171,13 +173,16 @@ ix.npctemplates.templates["cooknpc"] = {
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 		["lowtiercooker"] 	= { nil, 2, SELLANDBUY, 2, 1, 2 },
-		["lowtiercookerfuel"] 	= { nil, 10, SELLANDBUY, 10, 1, 5 },
+		["lowtiercookerfuel"] 	= { nil, 40, SELLANDBUY, 40, 1, 20 },
 
 		["drug_cigarette_1"] 	= { nil, 15, SELLANDBUY, 15, 1, 6 },
 		["drug_cigarette_2"] 	= { nil, 12, SELLANDBUY, 12, 1, 5 },
 		["drug_cigarette_3"] 	= { nil, 8, SELLANDBUY, 8, 1, 4 },
 
 		["drink_bottlebeer_1"] 	= { nil, 16, SELLANDBUY, 16, 0.5, 6 },
+
+		["drink_canbeer_1"] 	= { nil, 3, SELLANDBUY, 3, 1, 3 },
+		["drink_canbeer_2"] 	= { nil, 3, SELLANDBUY, 3, 1, 3 },
 
 		["drink_bottletea"] 	= { nil, 6, SELLANDBUY, 6, 1, 4 },
 		["drink_bottlewater"] 	= { nil, 24, SELLANDBUY, 24, 0.5, 6 },
@@ -239,14 +244,14 @@ ix.npctemplates.templates["tradernpc"] = {
 		["9x18"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
 		["12gauge"] = { nil, 10, SELLANDBUY, 10, 0.5, 3 },
 		["762x54"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
-		["22lr"] 	= { nil, 10, SELLANDBUY, 15, 0.5, 6 },
+		["22lr"] 	= { nil, 15, SELLANDBUY, 15, 0.5, 6 },
 		["45acp"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
+		["45acp410"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 6 },
 
 		["toz34short"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["toz66short"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["c96"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["cz52"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
-		["g2contender"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["makarov"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["tokarev"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["m1917"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
@@ -271,10 +276,11 @@ ix.npctemplates.templates["stalkernetnpc"] = {
 		["flashlight"] 	= { nil, 10, SELLANDBUY, 10, 0.1, 2 },
 		["headlamp"] 	= { nil, 10, SELLANDBUY, 10, 1, 1 },
 		["geigercounter"] 	= { nil, 5, SELLANDBUY, 5, 1, 1 },
-		["anomalydetector"] 	= { nil, 6, SELLANDBUY, 6, 1, 1 },
-		["binoculars_2"] 	= { nil, 4, SELLANDBUY, 4, 1, 1 },
+		["binoculars_5"] 	= { nil, 4, SELLANDBUY, 4, 1, 1 },
 		["compass"] 	= { nil, 6, SELLANDBUY, 6, 1, 1 },
 		["gpstracker"] 	= { nil, 6, SELLANDBUY, 6, 1, 1 },
+		["harmonica"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
+		["guitar"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
 	},
 }
 
@@ -304,6 +310,8 @@ ix.npctemplates.templates["ecologistnpc"] = {
 		["9x21"] 	= { nil, 5, SELLANDBUY, 5, 8, 5 },
 		["ssp99"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
 		["gp5"] 	= { nil, 3, SELLANDBUY, 3, 8, 3 },
+		["drug_morphine"] 	= { nil, 5, SELLANDBUY, 5, 8, 5 },
+		["medic_antipsychotic_1"] 	= { nil, 6, SELLANDBUY, 6, 8, 6 },
 	},
 }
 
@@ -334,22 +342,24 @@ ix.npctemplates.templates["bodyguardnpc"] = {
 		["12gauge"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
 		["12gaugesg"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
 		["12gaugetr"] 	= { nil, 8, SELLANDBUY, 8, 8, 8 },
-		["aks74u"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
-		["mp9a1"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
-		["sks"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
-		["pp1901vityaz"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
-		["brhp"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
-		["fort12"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
-		["mp153"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
-		["kiparis"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
-		["m1911"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["vss"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["glock17"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["ar159mm"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["mp5k"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["pp2000"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["mossberg500"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
 		["stoegerdd"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["stoegerddshort"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["m3supershort"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
 		["taurusjudge"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
-		["swr8"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["beretta92"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["p99"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
 		["io7a"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
 
 		["backpack_2"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
-		["backpack_2_large"] 	= { nil, 1, SELLANDBUY, 1, 1, 1 }, -- make me progression unlock?
+		["backpack_2_large"] 	= { nil, 1, SELLANDBUY, 1, 1, 1 },
+		["backpack_1_large"] 	= { nil, 1, SELLANDBUY, 1, 1, 1 },
+		["backpack_3_large"] 	= { nil, 1, SELLANDBUY, 1, 1, 1 },
 	},
 }
 
@@ -366,15 +376,21 @@ ix.npctemplates.templates["raritynpc"] = {
 	animgroup 	= 6,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["aek971"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
-		["asval"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
-		["f2000"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
-		["famas"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
-		["g36c"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
-		["m16a4"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
-		["saiga12"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
-		["svd"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
-		["ragingbull"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
+		["500magnum"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["500magnumap"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["500magnumhp"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["50ae"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["50aeap"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["50aehp"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["57x28mm"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["57x28mmap"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["57x28mmhp"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["9x21ap"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["9x21hp"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["338lapua"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["338lapuaap"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["338lapuahp"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["12gaugemg"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
 	},
 }
 
