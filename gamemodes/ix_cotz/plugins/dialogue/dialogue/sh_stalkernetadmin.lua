@@ -8,6 +8,7 @@ DIALOGUE.addTopic("GREETING", {
 		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
+		"AboutProgression",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
@@ -364,6 +365,43 @@ DIALOGUE.addTopic("AboutProgression", {
 	end,
 })
 
+DIALOGUE.addTopic("AboutProgression", {
+	statement = "What do you need help with?",
+	response = "I have a few things I need done.",
+	options = {
+		"BackTopic"
+	},
+	preCallback = function(self, client, target)
+		if( CLIENT ) then
+			if #ix.progression.GetActiveProgressions("'Mute'") <= 0 then
+				self.response = "Nothing at the moment."
+			end
+
+			net.Start("progression_sync")
+			net.SendToServer()
+		end
+	end,
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		for _, progid in pairs(ix.progression.GetActiveProgressions("'Mute'")) do
+			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})
+		end
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+
+		-- Return the next topicID
+		return "ViewProgression", dyndata
+	end,
+})
+
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's uhh, try something else.",
 	response = "...",
@@ -373,6 +411,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"InterestTopic",
 		"AboutWorkTopic",
 		"GetTask",
+		"AboutProgression",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
