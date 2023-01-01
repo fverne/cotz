@@ -116,11 +116,12 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 		-- Return the next topicID
 		return "BackTopic"
 	end,
-
-
-
-	--
-} )
+	ShouldAdd = function()
+		if (LocalPlayer():GetCharacter():GetJobs()["'Computer'"]) then
+			return true
+		end
+	end,
+})
 
 DIALOGUE.addTopic("ConfirmTask", {
 	statement = "",
@@ -204,6 +205,11 @@ DIALOGUE.addTopic("GetTask", {
 
 		-- Return the next topicID
 		return "ConfirmTask", {description = ix.jobs.getFormattedDescInactive(dyndata.identifier), identifier = dyndata.identifier}
+	end,
+	ShouldAdd = function()
+		if (!LocalPlayer():GetCharacter():GetJobs()["'Computer'"]) then
+			return true
+		end
 	end,
 })
 
