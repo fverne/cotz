@@ -35,7 +35,7 @@ ix.npctemplates.templates["owlnpc"] = {
 		["762x25"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
 		["22lr"] 	= { nil, 6, SELLANDBUY, 6, 1, 2 },
 		["45acp"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
-		["45acp410"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
+		["45acp41"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
 	},
 }
 
@@ -58,7 +58,7 @@ ix.npctemplates.templates["technpc"] = {
 		-- ["762x25"] 	= { nil, 4, SELLANDBUY, 4, 1, 2 },
 		["22lr"] 	= { nil, 15, SELLANDBUY, 15, 1, 6 },
 		["45acp"] 	= { nil, 10, SELLANDBUY, 10, 1, 3 },
-		["45acp410"] 	= { nil, 10, SELLANDBUY, 10, 1, 6 },
+		["45acp41"] 	= { nil, 10, SELLANDBUY, 10, 1, 6 },
 
 		["ruger1022"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["rugermk3"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
@@ -246,7 +246,7 @@ ix.npctemplates.templates["tradernpc"] = {
 		["762x54"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
 		["22lr"] 	= { nil, 15, SELLANDBUY, 15, 0.5, 6 },
 		["45acp"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
-		["45acp410"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 6 },
+		["45acp41"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 6 },
 
 		["toz34short"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["toz66short"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
