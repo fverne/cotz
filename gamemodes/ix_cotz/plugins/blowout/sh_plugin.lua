@@ -129,8 +129,15 @@ if (SERVER) then
                     [MOVETYPE_OBSERVER] = true
                 }
 
+                local tracefilter = {}
+                local blacklistents = ents.FindByClass("ix_item")
+
+                for _, ent in pairs(blacklistents) do
+                    table.insert(tracefilter, ent)
+                end
+
                 for _, v in pairs(player.GetAll()) do
-                    if (not self:IsPosSafe(v:GetShootPos(), v) and not movetypes[v:GetMoveType()]) then
+                    if (not self:IsPosSafe(v:GetShootPos(), v, tracefilter) and not movetypes[v:GetMoveType()]) then
                         v:Kill()
                     end
                 end
@@ -244,12 +251,14 @@ if (SERVER) then
         net.Broadcast()
     end
 
-    function PLUGIN:IsPosSafe(pos, client)
+    function PLUGIN:IsPosSafe(pos, client, blacklist)
+        -- Add the client to the filter table
+        table.insert(blacklist, client)
         local tracedata_up = {}
         tracedata_up.start = pos
         tracedata_up.endpos = pos + Vector(0, 0, 999999)
         tracedata_up.mask = MASK_SOLID + MASK_WATER
-        tracedata_up.filter = client
+        tracedata_up.filter = blacklist
         local trace_up = util.TraceLine(tracedata_up) --Can the entity see the sky?
 
         if trace_up.HitSky then
@@ -258,7 +267,7 @@ if (SERVER) then
             tracedata_down.start = Pos_up
             tracedata_down.endpos = pos
             tracedata_down.mask = MASK_SOLID + MASK_WATER
-            tracedata_down.filter = client
+            tracedata_down.filter = blacklist
             local trace_down = util.TraceLine(tracedata_down) --Can the sky see the entity? (excludes entities that are below displacements or inside brushes)
             if (not trace_down.Hit) then return false end
 
