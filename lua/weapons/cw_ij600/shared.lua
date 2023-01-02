@@ -106,14 +106,14 @@ SWEP.ClumpSpread = 0.008
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 5
-SWEP.Damage = 45
+SWEP.Damage = 36
 SWEP.DeployTime = 0.5
 
-SWEP.ReloadSpeed = 1.35
-SWEP.ReloadTime = 6.0
+SWEP.ReloadSpeed = 1.2
+SWEP.ReloadTime = 3.2
 SWEP.ReloadTime_Empty = 3.2
-SWEP.ReloadHalt = 6.0
-SWEP.ReloadHalt_Empty = 6.0
+SWEP.ReloadHalt = 6.5
+SWEP.ReloadHalt_Empty = 6.5
 
 SWEP.SnapToIdlePostReload = true
 
