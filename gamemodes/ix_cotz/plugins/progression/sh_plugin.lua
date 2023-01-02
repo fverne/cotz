@@ -12,8 +12,13 @@ end
 
 ix.util.Include("sh_definitions.lua")
 
-
 ix.util.Include("sh_technutprog.lua")
+ix.util.Include("sh_cleanerprog.lua")
+ix.util.Include("sh_hagglerprog.lua")
+ix.util.Include("sh_muteprog.lua")
+ix.util.Include("sh_oldtimerprog.lua")
+ix.util.Include("sh_quarterprog.lua")
+ix.util.Include("sh_spicylemonprog.lua")
 
 function PLUGIN:LoadData()
 	ix.progression.status = self:GetData() or {}
