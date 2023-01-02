@@ -42,6 +42,9 @@ function ENT:StartTouch(ent)
 	timer.Create("par_activated_once"..self:EntIndex(), 0.01, 1, function()
 		self:EmitSound("par_blast");
 		ParticleEffectAttach( "par_anomaly", PATTACH_ABSORIGIN_FOLLOW, self, 1 )
+		if IsValid(ent) and ent:IsRagdoll() then
+			ent:Remove()
+		end
 		--util.BlastDamage( self, self, self:GetPos(), 100, 50)
 		--ent:TakeDamage(50, self, self)
 	end)

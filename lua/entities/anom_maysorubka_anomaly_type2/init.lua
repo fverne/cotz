@@ -43,6 +43,9 @@ function ENT:StartTouch(ent)
 		ParticleEffect( "myasorubka_activated", self:GetPos() + Vector( 0, 0, 41 ), Angle( 0, 0, 0 ) )
 		--util.BlastDamage( self, self, self:GetPos(), 150, 150)
 		ent:TakeDamage(75, self, self)
+		if IsValid(ent) and ent:IsRagdoll() then
+			ent:Remove()
+		end
 		self:StopParticles()
 		self:SetNWBool("StopParticle", true)
 	end)	
@@ -51,6 +54,9 @@ function ENT:StartTouch(ent)
 		ParticleEffect( "myasorubka_activated", self:GetPos() + Vector( 0, 0, 41 ), Angle( 0, 0, 0 ) )
 		--util.BlastDamage( self, self, self:GetPos(), 150, 150)
 		ent:TakeDamage(75, self, self)
+		if IsValid(ent) and ent:IsRagdoll() then
+			ent:Remove()
+		end
 		self:StopParticles()
 		self:SetNWBool("StopParticle", true)
 	end)

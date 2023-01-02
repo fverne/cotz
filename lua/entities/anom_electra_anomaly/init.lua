@@ -51,6 +51,9 @@ function ENT:StartTouch(ent)
 		ParticleEffect( "electra_activated", self:GetPos(), Angle( 0, 0, 0 ) )
 		--util.BlastDamage( self, self, self:GetPos(), 200, 110)
 		ent:TakeDamage(70, self, self)
+		if IsValid(ent) and ent:IsRagdoll() then
+			ent:Remove()
+		end
 		self:StopParticles()
 		self:SetNWBool("StopParticle", true)
 		self:StopSound("electra_idle")
@@ -64,6 +67,9 @@ function ENT:StartTouch(ent)
 		ParticleEffect( "electra_activated", self:GetPos(), Angle( 0, 0, 0 ) )
 		--util.BlastDamage( self, self, self:GetPos(), 200, 110)
 		ent:TakeDamage(70, self, self)
+		if IsValid(ent) and ent:IsRagdoll() then
+			ent:Remove()
+		end
 		self:SetNWBool("StopParticle", true)
 		self:StopParticles()
 	end)

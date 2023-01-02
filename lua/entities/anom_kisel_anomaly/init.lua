@@ -50,6 +50,9 @@ function ENT:StartTouch(ent)
 		self:EmitSound("bfuzz_hit");
 		--util.BlastDamage( self, self, self:GetPos(), 100, 70)
 		ent:TakeDamage(70, self, self)
+		if IsValid(ent) and ent:IsRagdoll() then
+			ent:Remove()
+		end
 	end)	
 	timer.Create("kisel_recharge", 0.5, 0, function()
 		self:SetNWBool("Activated", false)
@@ -59,6 +62,9 @@ function ENT:StartTouch(ent)
 		self:EmitSound("bfuzz_hit");
 		--util.BlastDamage( self, self, self:GetPos(), 100, 70)
 		ent:TakeDamage(70, self, self)
+		if IsValid(ent) and ent:IsRagdoll() then
+			ent:Remove()
+		end
 	end)
 end
 

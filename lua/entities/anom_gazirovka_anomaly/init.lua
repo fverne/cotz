@@ -52,6 +52,9 @@ function ENT:StartTouch(ent)
 		ParticleEffect( "gazirovka_activated", self:GetPos(), Angle( 0, 0, 0 ) )
 		--util.BlastDamage( self, self, self:GetPos(), 100, 110)
 		ent:TakeDamage(70, self, self)
+		if IsValid(ent) and ent:IsRagdoll() then
+			ent:Remove()
+		end
 		self:StopParticles()
 		self:SetNWBool("StopParticle", true)
 	end)	
@@ -64,6 +67,9 @@ function ENT:StartTouch(ent)
 		ParticleEffect( "gazirovka_activated", self:GetPos(), Angle( 0, 0, 0 ) )
 		--util.BlastDamage( self, self, self:GetPos(), 100, 110)
 		ent:TakeDamage(70, self, self)
+		if IsValid(ent) and ent:IsRagdoll() then
+			ent:Remove()
+		end
 		self:StopParticles()
 		self:SetNWBool("StopParticle", true)
 	end)
