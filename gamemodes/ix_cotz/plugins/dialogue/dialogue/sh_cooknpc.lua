@@ -239,6 +239,22 @@ DIALOGUE.addTopic("GetTask", {
 	end,
 })
 
+DIALOGUE.addTopic("ViewProgression", {
+	statement = "",
+	response = "",
+	options = {
+		"BackTopic"
+	},
+	IsDynamicFollowup = true,
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if (dyndata and CLIENT) then
+			local progstatus 	= ix.progression.status[dyndata.identifier]
+			local progdef 		= ix.progression.definitions[dyndata.identifier]
+			self.response = progdef.BuildResponse(progdef, progstatus)
+		end
+	end,
+})
+
 DIALOGUE.addTopic("AboutProgression", {
 	statement = "What do you need help with?",
 	response = "I have a few things I need done.",
