@@ -351,9 +351,9 @@ function ITEM:Equip(client)
 					--client:NotifyLocalized("weaponSlotFilled", self.weaponCategory)
 
 					--return false
-
-					itemTable:Unequip(client)
-
+					if (itemTable.weaponCategory == self.weaponCategory) then
+						itemTable:Unequip(client)
+					end
 				end
 			end
 		end
