@@ -103,9 +103,11 @@ function ITEM:Equip(client)
 end
 
 function ITEM:UnEquip(client)
-	self:SetData("equip", false)
-	self.player:SetNetVar("ixhascompass", false)
-	self.player:SetData("ixhascompass", false)
+	if self:GetData("equip", false) then
+		self:SetData("equip", false)
+		self.player:SetNetVar("ixhascompass", false)
+		self.player:SetData("ixhascompass", false)
+	end
 end
 
 ITEM:Hook("drop", function(item)

@@ -104,9 +104,11 @@ function ITEM:Equip(client)
 end
 
 function ITEM:UnEquip(client)
-	self:SetData("equip", false)
-	self.player:SetNetVar("ixhasgpstracker", false)
-	self.player:SetData("ixhasgpstracker", false)
+	if self:GetData("equip", false) then
+		self:SetData("equip", false)
+		self.player:SetNetVar("ixhasgpstracker", false)
+		self.player:SetData("ixhasgpstracker", false)
+	end
 end
 
 ITEM:Hook("drop", function(item)
