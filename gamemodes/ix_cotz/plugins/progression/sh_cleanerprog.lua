@@ -2,7 +2,7 @@ ix.progression.Register("cleanerItemDelivery_Storage", {
 	name = "Storage",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Cleaner'",
-	defaultActive = false,
+	defaultActive = true,
 	BuildResponse = function(self, status)
 		ix.progression.status["cleanerItemDelivery_Storage"] = ix.progression.status["cleanerItemDelivery_Storage"] or {}
 		local dat = ix.progression.status["cleanerItemDelivery_Storage"].complexData
