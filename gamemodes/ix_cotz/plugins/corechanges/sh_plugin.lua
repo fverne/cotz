@@ -136,6 +136,11 @@ if (CLIENT) then
 	    tabs["flags"] = nil
 	    tabs["plugins"] = nil
 	end)
+
+	-- removes default helix intro, as we have our own cotzintro
+	function PLUGIN:LoadIntro()
+		return true
+	end
 end
 
 --removal of helix commands we dont use
