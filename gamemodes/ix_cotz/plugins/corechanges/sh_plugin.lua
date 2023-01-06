@@ -50,12 +50,6 @@ function PLUGIN:GetGameDescription()
 	return (Schema and Schema.name or "Unknown")
 end
 
-function PLUGIN:ShouldCollide(ent1, ent2)
-    if ent1:GetClass() == 'ix_item' && ent2:GetClass() == 'ix_item' then
-        return false
-    end
-end
-
 if (SERVER) then
 	-- Stamina drain on jump
 	function PLUGIN:KeyPress(client, key)

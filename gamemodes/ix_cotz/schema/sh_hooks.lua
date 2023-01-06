@@ -18,7 +18,7 @@ function Schema:PlayerNoClip(client)
 end
 
 function Schema:OnItemSpawned(entity)
-	entity:SetCollisionGroup( COLLISION_GROUP_WEAPON )
+	entity:SetCollisionGroup( COLLISION_GROUP_DEBRIS_TRIGGER )
 	entity.OnTakeDamage = nil
 end
 
