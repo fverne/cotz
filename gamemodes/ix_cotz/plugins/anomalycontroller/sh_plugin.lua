@@ -18,6 +18,10 @@ if SERVER then
 		if spawntime > CurTime() then return end
 		spawntime = CurTime() + self.spawnrate
 
+		trySpawnArtifacts()
+	end
+
+	function PLUGIN:trySpawnArtifacts()
 		for i, j in pairs(self.anomalypoints) do
 			
 			if (!j) then
@@ -42,44 +46,48 @@ if SERVER then
 				end
 			end
 			
-			local rand = math.random(101)
-			local rarityselector = 0
-			local anomalyselector = 0
+			spawnArtifacts(j)
+		end
+	end
 
-			if rand <= 70 then
-				rarityselector = 0
-			elseif rand <= 90 then
-				rarityselector = 1
-			elseif rand <= 100 then
-				rarityselector = 2
-			else return end
+	function PLUGIN:spawnArtifacts(point)
+		local rand = math.random(101)
+		local rarityselector = 0
+		local anomalyselector = 0
 
-			for k,v in pairs(ents.FindInSphere(j[1], 400)) do
-				if (string.sub(v:GetClass(), 1, 5) == "anom_") then
-					for i=1,5 do
-						if self.anomalydefs[i].entityname == v:GetClass() then
-							anomalyselector = i
-							break
-						end
+		if rand <= 70 then
+			rarityselector = 0
+		elseif rand <= 90 then
+			rarityselector = 1
+		elseif rand <= 100 then
+			rarityselector = 2
+		else return end
+
+		for k,v in pairs(ents.FindInSphere(point[1], 1024)) do
+			if (string.sub(v:GetClass(), 1, 5) == "anom_") then
+				for i=1,#self.anomalydefs do
+					if self.anomalydefs[i].entityname == v:GetClass() then
+						anomalyselector = i
+						break
 					end
 				end
 			end
-
-			if anomalyselector == 0 then return end
-
-			local idat = 0
-
-			if rarityselector == 0 then
-				idat = table.Random(self.anomalydefs[anomalyselector].commonArtifacts)
-			elseif rarityselector == 1 then
-				idat = table.Random(self.anomalydefs[anomalyselector].rareArtifacts)
-			else
-				idat = table.Random(self.anomalydefs[anomalyselector].veryRareArtifacts)
-			end
-
-			ix.item.Spawn(idat, j[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), function(item, ent) ent.bTemporary = true end, AngleRand(), {})
-
 		end
+
+		if anomalyselector == 0 then return end
+
+		local idat = 0
+
+		if rarityselector == 0 then
+			idat = table.Random(self.anomalydefs[anomalyselector].commonArtifacts)
+		elseif rarityselector == 1 then
+			idat = table.Random(self.anomalydefs[anomalyselector].rareArtifacts)
+		else
+			idat = table.Random(self.anomalydefs[anomalyselector].veryRareArtifacts)
+		end
+
+		ix.item.Spawn(idat, point[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), function(item, ent) ent.bTemporary = true end, AngleRand(), {})
+
 	end
 
 	-- Function that cleans up all anomalies (Entities with names starting with "anom_")
