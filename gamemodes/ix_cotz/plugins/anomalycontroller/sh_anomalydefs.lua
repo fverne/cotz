@@ -28,7 +28,7 @@ PLUGIN.anomalydefs[1] = {
 		"artifact_eye"
 	},
 	veryRareArtifacts = {
-		"artifact_fireball",
+		"artifact_flame",
 	},
 }
 
@@ -46,7 +46,7 @@ PLUGIN.anomalydefs[2] = {
 		"artifact_eye"
 	},
 	veryRareArtifacts = {
-		"artifact_fireball",
+		"artifact_flame",
 	},
 }
 

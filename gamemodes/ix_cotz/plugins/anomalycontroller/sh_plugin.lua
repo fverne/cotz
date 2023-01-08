@@ -7,7 +7,7 @@ PLUGIN.anomalydefs = PLUGIN.anomalydefs or {}
 PLUGIN.anomalypoints = PLUGIN.anomalypoints or {} -- ANOMALYPOINTS STRUCTURE table.insert( PLUGIN.eventpoints, { position, radius, anoms } )
 
 PLUGIN.spawnrate = 900
-PLUGIN.spawnchance = 5
+PLUGIN.spawnchance = 12
 
 ix.util.Include("sh_anomalydefs.lua")
 
@@ -77,7 +77,7 @@ if SERVER then
 				idat = table.Random(self.anomalydefs[anomalyselector].veryRareArtifacts)
 			end
 
-			ix.item.Spawn(idat, j[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), nil, AngleRand(), {})
+			ix.item.Spawn(idat, j[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), function(item, ent) ent.bTemporary = true end, AngleRand(), {})
 
 		end
 	end
