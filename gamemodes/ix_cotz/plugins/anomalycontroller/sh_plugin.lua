@@ -18,7 +18,7 @@ if SERVER then
 		if spawntime > CurTime() then return end
 		spawntime = CurTime() + self.spawnrate
 
-		trySpawnArtifacts()
+		self:trySpawnArtifacts()
 	end
 
 	function PLUGIN:trySpawnArtifacts()
