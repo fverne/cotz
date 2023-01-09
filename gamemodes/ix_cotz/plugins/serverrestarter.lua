@@ -62,9 +62,9 @@ if (SERVER) then
         local timeNowStruct
 
         if (temp.hour > ix.config.Get("serverRestartHour")) then
-            timeNowStruct = os.date("*t") + (24 * 60 * 60) -- we add a day this way, to account for date cancer
+            timeNowStruct = os.date("*t", os.time() + (24 * 60 * 60)) -- we add a day this way, to account for date cancer
         else
-            timeNowStruct = os.time("*t")
+            timeNowStruct = os.date("*t")
         end
         timeNowStruct.hour = ix.config.Get("serverRestartHour") -- restart on the hour given in config
         timeNowStruct.min = 0 -- restart on the same minute
