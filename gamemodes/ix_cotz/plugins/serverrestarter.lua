@@ -61,7 +61,7 @@ if (SERVER) then
         local temp = os.date("*t")
         local timeNowStruct
 
-        if (temp.hour > ix.config.Get("serverRestartHour")) then
+        if (temp.hour >= ix.config.Get("serverRestartHour")) then
             timeNowStruct = os.date("*t", os.time() + (24 * 60 * 60)) -- we add a day this way, to account for date cancer
         else
             timeNowStruct = os.date("*t")
