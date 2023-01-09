@@ -58,7 +58,14 @@ if (SERVER) then
     end
 
     function PLUGIN:GetInitialRestartTime()
-        local timeNowStruct = os.date("*t", os.time() + (24 * 60 * 60)) -- we add a day this way, to account for date cancer
+        local temp = os.date("*t")
+        local timeNowStruct
+
+        if (temp.hour > ix.config.Get("serverRestartHour")) then
+            timeNowStruct = os.date("*t") + (24 * 60 * 60) -- we add a day this way, to account for date cancer
+        else
+            timeNowStruct = os.time("*t")
+        end
         timeNowStruct.hour = ix.config.Get("serverRestartHour") -- restart on the hour given in config
         timeNowStruct.min = 0 -- restart on the same minute
         timeNowStruct.sec = 0 -- restart on the same second
