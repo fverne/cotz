@@ -46,7 +46,7 @@ if SERVER then
 				end
 			end
 			
-			spawnArtifacts(j)
+			self:spawnArtifacts(j)
 		end
 	end
 
