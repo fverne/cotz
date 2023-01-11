@@ -536,6 +536,9 @@ ITEM.functions.detach = {
 
 			item:SetData("attachments", curattach)
 
+			-- Recalc resistances
+			item.player:RecalculateResistances()
+
 		else
 			item.player:Notify("No attachment selected.")
 		end

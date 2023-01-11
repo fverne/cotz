@@ -109,6 +109,9 @@ ITEM.functions.use = {
 		target:SetData("attachments", targetAttach)
 		client:Notify("Installed "..item.name.." on "..target.name)
 
+		-- Recalc resistances
+		client:RecalculateResistances()
+
 		return true
 	end,
 }
