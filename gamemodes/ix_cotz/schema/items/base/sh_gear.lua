@@ -356,7 +356,7 @@ end
 
 function ITEM:OnEquipped()
 	if self.isGasmask == true then
-		self.player:ApplyDSPGasmask()
+		-- self.player:ApplyDSPGasmask()
 		self.player:EmitSound("stalkersound/gasmask_on.ogg")
 		return
 	end
@@ -364,7 +364,7 @@ end
 
 function ITEM:OnUnequipped()
 	if self.isGasmask == true then
-		self.player:UnApplyDSPGasmask()
+		-- self.player:UnApplyDSPGasmask()
 		self.player:EmitSound("stalkersound/gasmask_off.ogg")
 		return
 	end

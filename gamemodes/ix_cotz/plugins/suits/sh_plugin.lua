@@ -229,19 +229,19 @@ function playerMeta:ReevaluateOverlay()
 	end
 end
 
-function playerMeta:ReevaluateGasmaskDSP()
-    if self:getEquippedGasmask() then
-        self:SetDSP(31)
-    end
-end
+-- function playerMeta:ReevaluateGasmaskDSP()
+--     if self:getEquippedGasmask() then
+--         self:SetDSP(31)
+--     end
+-- end
 
-function playerMeta:ApplyDSPGasmask()
-    self:SetDSP(31)
-end
+-- function playerMeta:ApplyDSPGasmask()
+--     self:SetDSP(31)
+-- end
 
-function playerMeta:UnApplyDSPGasmask()
-    self:SetDSP(1)
-end
+-- function playerMeta:UnApplyDSPGasmask()
+--     self:SetDSP(1)
+-- end
 
 function PLUGIN:EntityEmitSound(sndTable)
     local client = sndTable.Entity
@@ -263,5 +263,5 @@ end
 function PLUGIN:PostPlayerLoadout(client)
 	client:RecalculateResistances()
 	client:ReevaluateOverlay()
-	client:ReevaluateGasmaskDSP()
+	-- client:ReevaluateGasmaskDSP()
 end
