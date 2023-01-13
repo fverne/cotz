@@ -18,30 +18,32 @@ DIALOGUE.addTopic("GREETING", {
 		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"information", "riches"}, 2)
 
 		-- Special Sale
-		local cooldown = target:GetNetVar("lastSpecialSale", 0)
-		if cooldown < os.time() then
-			local randomItems = {}
-			local randomItemCategories = {
-				{itemCategory = "specialsale_owlnpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
-				{itemCategory = "specialsale_owlnpc_rifle_1", dialogue = "I'm looking weapons that can deal with a bit of everything.", reqRep = 282},
-				{itemCategory = "specialsale_owlnpc_longrifle_1", dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 765},
-				{itemCategory = "specialsale_owlnpc_heavy_1", dialogue = "I like to keep shooting until there is nothing left to shoot at.", reqRep = 9338},
-				{itemCategory = "specialsale_owlnpc_shotgun_1", dialogue = "I want to fill mutants with pellets of lead.", reqRep = 1943},
-				{itemCategory = "specialsale_owlnpc_br_1", dialogue = "I'm looking for better protection against mutants.", reqRep = 50},
-				{itemCategory = "specialsale_owlnpc_headgear_1", dialogue = "I'm looking for better headwear.", reqRep = 50},
-				{itemCategory = "specialsale_owlnpc_ar_1", dialogue = "I'm the clumsy type, and often stumble into anomalous zones. I'm looking for protection.", reqRep = 4254},
-			}
+		if (SERVER) then
+			local cooldown = target:GetNetVar("lastSpecialSale", 0)
+			if cooldown < os.time() or !client:GetData("specialSaleItems") then
+				local randomItems = {}
+				local randomItemCategories = {
+					{itemCategory = "specialsale_owlnpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_rifle_1", dialogue = "I'm looking weapons that can deal with a bit of everything.", reqRep = 282},
+					{itemCategory = "specialsale_owlnpc_longrifle_1", dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 765},
+					{itemCategory = "specialsale_owlnpc_heavy_1", dialogue = "I like to keep shooting until there is nothing left to shoot at.", reqRep = 9338},
+					{itemCategory = "specialsale_owlnpc_shotgun_1", dialogue = "I want to fill mutants with pellets of lead.", reqRep = 1943},
+					{itemCategory = "specialsale_owlnpc_br_1", dialogue = "I'm looking for better protection against mutants.", reqRep = 50},
+					{itemCategory = "specialsale_owlnpc_headgear_1", dialogue = "I'm looking for better headwear.", reqRep = 50},
+					{itemCategory = "specialsale_owlnpc_ar_1", dialogue = "I'm the clumsy type, and often stumble into anomalous zones. I'm looking for protection.", reqRep = 4254},
+				}
 
-			for k,v in pairs(randomItemCategories) do
-				local idat = ix.util.GetRandomItemFromPool(v.itemCategory)
-				-- ensure the character has a reputation level high enough
-				if client:getReputation() >= v.reqRep then
-					table.insert(randomItems, {idat[1], idat[2], v.dialogue})
+				for k,v in pairs(randomItemCategories) do
+					local idat = ix.util.GetRandomItemFromPool(v.itemCategory)
+					-- ensure the character has a reputation level high enough
+					if client:getReputation() >= v.reqRep then
+						table.insert(randomItems, {idat[1], idat[2], v.dialogue})
+					end
 				end
-			end
 
-			client:SetNetVar("specialSaleItems", randomItems)
-			target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
+				client:SetData("specialSaleItems", randomItems)
+				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
+			end
 		end
 	end
 })
@@ -98,7 +100,7 @@ DIALOGUE.addTopic("SpecialSaleTopic", {
 	},
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
-		local randomItems = client:GetNetVar("specialSaleItems")
+		local randomItems = client:GetData("specialSaleItems", {})
 		
 		for k,v in pairs(randomItems) do
 			local item = ix.item.list[v[1]]
@@ -569,9 +571,9 @@ DIALOGUE.addTopic("BackTopic", {
 		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"information", "riches"}, 2)
 
 		-- Special Sale
-		if SERVER then
+		if (SERVER) then
 			local cooldown = target:GetNetVar("lastSpecialSale", 0)
-			if cooldown < os.time() then
+			if cooldown < os.time() or !client:GetData("specialSaleItems") then
 				local randomItems = {}
 				local randomItemCategories = {
 					{itemCategory = "specialsale_owlnpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
@@ -586,13 +588,13 @@ DIALOGUE.addTopic("BackTopic", {
 
 				for k,v in pairs(randomItemCategories) do
 					local idat = ix.util.GetRandomItemFromPool(v.itemCategory)
-					-- ensure the character has a reputation level high
+					-- ensure the character has a reputation level high enough
 					if client:getReputation() >= v.reqRep then
 						table.insert(randomItems, {idat[1], idat[2], v.dialogue})
 					end
 				end
 
-				client:SetNetVar("specialSaleItems", randomItems)
+				client:SetData("specialSaleItems", randomItems)
 				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
 			end
 		end
