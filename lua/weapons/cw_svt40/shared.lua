@@ -14,7 +14,7 @@ if CLIENT then
 	SWEP.IconLetter = "w"
 	killicon.Add("cw_ber_svt40", "weaponicons/svt40-k", Color(255, 80, 0, 150))
 	
-	SWEP.MuzzleEffect = "ber_rifle_med"
+	SWEP.MuzzleEffect = "muzzleflash_g3"
 	SWEP.PosBasedMuz = true
 	SWEP.SnapToGrip = true
 	SWEP.ShellScale = 0.5
