@@ -123,10 +123,10 @@ ix.poaching.MutantParts = {
 		["meattype"] = "meat_pseudogiant",
 		["parts"] = {{"part_pseudogiant", 25}, {"hide_pseudogiant", 5}},
 	},
-	--["hellhound"] = { -- Commented out as hellhounds are 1:1 with dogs - not too smooth
-	--	["meattype"] = "meat_hellhound",
-	--	["parts"] = {{"part_hellhound", 20}, {"hide_hellhound", 3}},
-	--},
+	["hellhound"] = {
+		["meattype"] = "meat_hellhound",
+		["parts"] = {{"part_hellhound", 20}, {"hide_hellhound", 3}},
+	},
 	["electrochimera"] = {
 		["meattype"] = "meat_chimera",
 		["parts"] = {{"part_chimera", 20}, {"artifact_moonlight", 45}, {"artifact_moonlight", 45}, {"artifact_moonlight", 45}, {"artifact_moonlight", 45}, {"hide_chimera", 3}},
