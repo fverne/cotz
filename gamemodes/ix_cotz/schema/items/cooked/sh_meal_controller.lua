@@ -1,5 +1,5 @@
-ITEM.name = "Cooked Karlik Meat"
-ITEM.description = "A meal made from karliks, cooked in the zone."
+ITEM.name = "Cooked Controller Meat"
+ITEM.description = "A meal made from controllers, cooked in the zone."
 ITEM.longdesc = "A small stew made from meat of a Controller. Even cooked, the meat still carries powerful psychic energies."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_flesh.mdl"
 
