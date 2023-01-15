@@ -583,9 +583,9 @@ do
 				return
 			end
 
-			if invID != client:GetCharacter():GetInventory():GetID() then
-				return
-			end
+			-- if invID != client:GetCharacter():GetInventory():GetID() then
+			-- 	return
+			-- end
 			
 			local inventory = ix.item.inventories[invID or 0]
 
