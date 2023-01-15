@@ -86,13 +86,13 @@ end
 function ENT:STALKERNPCThink()
 
 	if (self.farttimer < CurTime()) then
-		for _,v in pairs(ents.FindInSphere(self:GetPos(),512)) do
+		for _,v in pairs(ents.FindInSphere(self:GetPos(),256)) do
 			if v:IsPlayer() then
 				local distance = self:GetPos():Distance(v:GetPos())
 
 				local TEMP_TargetDamage = DamageInfo()
 
-				TEMP_TargetDamage:SetDamage(2 * ((512-distance)/512))
+				TEMP_TargetDamage:SetDamage(20 * ((256-distance)/256))
 				TEMP_TargetDamage:SetInflictor(self)
 				TEMP_TargetDamage:SetDamageType(DMG_SONIC)
 				TEMP_TargetDamage:SetAttacker(self)

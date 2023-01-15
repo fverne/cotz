@@ -77,6 +77,24 @@ end
 function ENT:STALKERNPCThink()
 
 	if (self.farttimer < CurTime()) then
+		for _,v in pairs(ents.FindInSphere(self:GetPos(),512)) do
+			if v:IsPlayer() then
+				local distance = self:GetPos():Distance(v:GetPos())
+
+				local TEMP_TargetDamage = DamageInfo()
+
+				TEMP_TargetDamage:SetDamage(4 * ((512-distance)/512))
+				TEMP_TargetDamage:SetInflictor(self)
+				TEMP_TargetDamage:SetDamageType(DMG_SONIC)
+				TEMP_TargetDamage:SetAttacker(self)
+				TEMP_TargetDamage:SetDamagePosition(v:NearestPoint(self:GetPos()+self:OBBCenter()))
+				TEMP_TargetDamage:SetDamageForce(self:GetForward()*1000)
+			
+				v:TakeDamageInfo(TEMP_TargetDamage)
+				if v.hasGeiger and v:hasGeiger() then v:EmitSound(table.Random(self.sndGeigerHeavy)) end
+			end
+		end
+
 		for _,v in pairs(ents.FindInSphere(self:GetPos(),1024)) do
 			if v:IsPlayer() then
 				local distance = self:GetPos():Distance(v:GetPos())
