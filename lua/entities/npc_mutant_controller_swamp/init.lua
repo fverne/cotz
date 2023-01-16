@@ -34,6 +34,8 @@ ENT.MaxRangeDist = 1500
 ENT.VisibleSchedule = SCHED_RUN_FROM_ENEMY_FALLBACK
 ENT.RangeSchedule = SCHED_RUN_RANDOM
 
+ENT.farttimer = 0
+
 function ENT:Initialize()
 	self.Model = "models/monsters/tibet.mdl"
 	self:STALKERNPCInit(Vector(-16,-16,70),MOVETYPE_STEP)
@@ -82,6 +84,28 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	if (self.farttimer < CurTime()) then
+		for _,v in pairs(ents.FindInSphere(self:GetPos(),256)) do
+			if v:IsPlayer() then
+				local distance = self:GetPos():Distance(v:GetPos())
+
+				local TEMP_TargetDamage = DamageInfo()
+
+				TEMP_TargetDamage:SetDamage(5 * ((256-distance)/256))
+				TEMP_TargetDamage:SetInflictor(self)
+				TEMP_TargetDamage:SetDamageType(DMG_SONIC)
+				TEMP_TargetDamage:SetAttacker(self)
+				TEMP_TargetDamage:SetDamagePosition(v:NearestPoint(self:GetPos()+self:OBBCenter()))
+				TEMP_TargetDamage:SetDamageForce(self:GetForward()*1000)
+			
+				v:TakeDamageInfo(TEMP_TargetDamage)
+				if v.hasGeiger and v:hasGeiger() then v:EmitSound(table.Random(self.sndGeigerHeavy)) end
+			end
+		end
+
+		self.farttimer = CurTime() + 0.5
+	end
+
 
 	if(self.CanSpecialTimer < CurTime()) then
 		self.CanSpecial = true

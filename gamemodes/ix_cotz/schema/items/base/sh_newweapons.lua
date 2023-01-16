@@ -317,8 +317,8 @@ function ITEM:Unload()
 
 		if addbox then
 			if(!client:GetCharacter():GetInventory():Add(ammoBox, 1, {["quantity"] = ammoAmount})) then
-				client:Notify("No space in inventory for unloaded ammo")
-				return false
+				client:Notify("No space in inventory for unloaded ammo, dropping to floor.")
+				ix.item.Spawn(ammoBox, client:GetItemDropPos(), nil, AngleRand(), {["quantity"] = ammoAmount})
 			end
 		end
 
@@ -360,12 +360,27 @@ function ITEM:Equip(client)
 	end
 
 	if self.canAttach == true then
+		local hasrun = false
+
 		timer.Simple(0.1,function()
 			local attachments = self:GetData("attachments") or {}
 			local weapon1 = client:GetActiveWeapon()
+			if(weapon1:GetClass() == self.class and weapon1.attachSpecificAttachment)then
+				for k = 1, #attachments do
+					weapon1:attachSpecificAttachment(attachments[k])
+				end
+				hasrun = true
+			end
+		end)
+
+		timer.Simple(1,function() -- To make up for lag, holstering - etc
+			local attachments = self:GetData("attachments") or {}
+			local weapon1 = client:GetActiveWeapon()
 			
-			for k = 1, #attachments do
-				weapon1:attachSpecificAttachment(attachments[k])
+			if(weapon1:GetClass() == self.class and not hasrun)then
+				for k = 1, #attachments do
+					weapon1:attachSpecificAttachment(attachments[k])
+				end
 			end
 		end)
 	end

@@ -586,8 +586,6 @@ function ITEM:OnLoadout()
 				client:GetCharacter():SetData("groups", newGroups)
 			end
 		end
-
-		self:RunAllAttachmentAttach()
 	end
 end
 

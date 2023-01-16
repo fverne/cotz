@@ -44,19 +44,13 @@ PLUGIN.stashTypes =
 		"cache_weapons_rifle_tier3"
 	},
 	["ammo_cache_pistol_1"] = {
+		"cache_weapon_pistol_tier1",
 		"cache_ammo_pistol_tier1",
 		"cache_ammo_pistol_tier1",
 		"cache_ammo_pistol_tier1",
 		"cache_ammo_pistol_tier1",
 		"cache_ammo_pistol_tier1",
 		"cache_ammo_pistol_tier1",
-		"cache_ammo_pistol_tier1",
-		"cache_ammo_pistol_tier1",
-		"cache_ammo_pistol_tier1",
-		"cache_ammo_pistol_tier1",
-		"cache_ammo_pistol_tier1",
-		"cache_ammo_pistol_tier1",
-		"cache_ammo_pistol_tier1"
 	},
 	["ammo_cache_pistol_2"] = {
 		"cache_ammo_pistol_tier1",
@@ -69,11 +63,11 @@ PLUGIN.stashTypes =
 		"cache_ammo_pistol_tier2"
 	},
 	["ammo_cache_pistol_3"] = {
-		"cache_ammo_pistol_tier1",
-		"cache_ammo_pistol_tier1",
-		"cache_ammo_pistol_tier1",
-		"cache_ammo_pistol_tier1",
-		"cache_ammo_pistol_tier1",
+		"cache_ammo_pistol_tier2",
+		"cache_ammo_pistol_tier2",
+		"cache_ammo_pistol_tier3",
+		"cache_ammo_pistol_tier3",
+		"cache_ammo_pistol_tier3",
 	},
 	["ammo_cache_rifle_1"] = {
 		"cache_ammo_rifle_tier1",
@@ -91,28 +85,25 @@ PLUGIN.stashTypes =
 	},
 	["ammo_cache_shotgun_1"] = {
 		"cache_weapons_shotgun_tier1",
-		"cache_weapons_shotgun_tier1",
-		"cache_weapons_shotgun_tier1",
-		"cache_weapons_shotgun_tier1",
-		"cache_weapons_shotgun_tier1"
+		"cache_ammo_shotgun_tier1",
+		"cache_ammo_shotgun_tier1",
+		"cache_ammo_shotgun_tier1",
+		"cache_ammo_shotgun_tier1"
 	},
 	["ammo_cache_shotgun_2"] = {
 		"cache_weapons_shotgun_tier2",
-		"cache_weapons_shotgun_tier2",
-		"cache_weapons_shotgun_tier2",
-		"cache_weapons_shotgun_tier2",
-		"cache_weapons_shotgun_tier2",
-		"cache_weapons_shotgun_tier2",
-		"cache_weapons_shotgun_tier2",
-		"cache_weapons_shotgun_tier2",
-		"cache_weapons_shotgun_tier2"
+		"cache_ammo_shotgun_tier2",
+		"cache_ammo_shotgun_tier2",
+		"cache_ammo_shotgun_tier2",
+		"cache_ammo_shotgun_tier2",
 	},
 	["ammo_cache_assorted"] = {
 		"cache_ammo_rifle_tier1",
 		"cache_ammo_rifle_tier2",
-		"cache_weapons_shotgun_tier2",
-		"cache_weapons_shotgun_tier2",
-		"cache_weapons_shotgun_tier2",
+		"cache_ammo_shotgun_tier2",
+		"cache_ammo_shotgun_tier2",
+		"reward_generic_valuable",
+		"reward_generic_valuable",
 		"cache_ammo_pistol_tier2",
 		"cache_ammo_pistol_tier2",
 		"cache_ammo_pistol_tier2",
