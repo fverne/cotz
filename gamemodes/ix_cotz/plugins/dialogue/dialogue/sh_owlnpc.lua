@@ -18,9 +18,9 @@ DIALOGUE.addTopic("GREETING", {
 		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"information", "riches"}, 2)
 
 		-- Special Sale
-		if (SERVER) then
+		if SERVER then
 			local cooldown = target:GetNetVar("lastSpecialSale", 0)
-			if cooldown < os.time() or !client:GetData("specialSaleItems") then
+			if cooldown < os.time() then
 				local randomItems = {}
 				local randomItemCategories = {
 					{itemCategory = "specialsale_owlnpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
@@ -41,7 +41,7 @@ DIALOGUE.addTopic("GREETING", {
 					end
 				end
 
-				client:SetData("specialSaleItems", randomItems)
+				client:SetNetVar("specialSaleItems", randomItems)
 				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
 			end
 		end
@@ -100,7 +100,7 @@ DIALOGUE.addTopic("SpecialSaleTopic", {
 	},
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
-		local randomItems = client:GetData("specialSaleItems", {})
+		local randomItems = client:GetNetVar("specialSaleItems")
 		
 		for k,v in pairs(randomItems) do
 			local item = ix.item.list[v[1]]
@@ -195,13 +195,15 @@ DIALOGUE.addTopic("StorageTopic", {
 		local heightcost = math.Round(math.pow(basecost + 300, 1+(bankH/4.5)))
 		local widthcost = math.Round(math.pow(basecost, 1+(bankW/4.5)))
 
-		table.insert(dynopts, {statement = "Can I please see my storage?", topicID = "StorageTopic", dyndata = {option = "use"}})
+		if ix.progression.GetNPCFromName("'Mute'") then
+			table.insert(dynopts, {statement = "Can I please see my storage?", topicID = "StorageTopic", dyndata = {option = "use"}})
 
-		if bankW < ix.config.Get("bankWMax") then
-			table.insert(dynopts, {statement = "I want to upgrade the width. ("..ix.currency.Get(widthcost)..")", topicID = "StorageTopic", dyndata = {direction = "horizontally", cost = widthcost}})
-		end
-		if bankH < ix.config.Get("bankHMax") then
-			table.insert(dynopts, {statement = "I want to upgrade the height. ("..ix.currency.Get(heightcost)..")", topicID = "StorageTopic", dyndata = {direction = "vertically", cost = heightcost}})
+			if bankW < ix.config.Get("bankWMax") then
+				table.insert(dynopts, {statement = "I want to upgrade the width. ("..ix.currency.Get(widthcost)..")", topicID = "StorageTopic", dyndata = {direction = "horizontally", cost = widthcost}})
+			end
+			if bankH < ix.config.Get("bankHMax") then
+				table.insert(dynopts, {statement = "I want to upgrade the height. ("..ix.currency.Get(heightcost)..")", topicID = "StorageTopic", dyndata = {direction = "vertically", cost = heightcost}})
+			end
 		end
 		
 		-- Return table of options
@@ -503,18 +505,62 @@ DIALOGUE.addTopic("ViewProgression", {
 	options = {
 		"BackTopic"
 	},
+
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		--disgusting
+		--local identifier = player:GetCharacter():GetData("curdialogprog")
+		local identifier 	= self.tmp
+		self.tmp = nil
+		local progstatus 	= ix.progression.GetComplexProgressionValue(identifier)
+		local progdef 		= ix.progression.definitions[identifier]
+		if(progdef.fnAddComplexProgression)then
+			local progitems 	= progdef.GetItemIds()
+			local missingitems  = {}
+
+			for progitem,cnt in pairs(progitems) do
+				local curcnt = 0
+				if(progstatus and progstatus[progitem]) then curcnt = progstatus[progitem] end
+
+				if(curcnt < cnt and client:GetCharacter():GetInventory():HasItem(progitem))then
+					table.insert(missingitems, progitem)
+				end
+			end
+
+			for _, progitem in pairs(missingitems) do
+				table.insert(dynopts, {statement = "Hand over "..ix.item.list[progitem].name, topicID = "ViewProgression", dyndata = {progid = identifier, itemid = progitem}})
+			end
+		end
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+
+		-- Return the next topicID
+		return "HandInComplexProgressionItemTopic", dyndata
+	end,
+
 	IsDynamicFollowup = true,
 	DynamicPreCallback = function(self, player, target, dyndata)
-		if (dyndata and CLIENT) then
-			local progstatus 	= ix.progression.status[dyndata.identifier]
-			local progdef 		= ix.progression.definitions[dyndata.identifier]
-			self.response = progdef.BuildResponse(progdef, progstatus)
+		if (dyndata) then
+			if(CLIENT)then
+				local progstatus 	= ix.progression.status[dyndata.identifier]
+				local progdef 		= ix.progression.definitions[dyndata.identifier]
+
+				self.response = progdef.BuildResponse(progdef, progstatus)
+				self.tmp = dyndata.identifier
+			end
 		end
 	end,
 })
-
 DIALOGUE.addTopic("AboutProgression", {
-	statement = "What do you need help with?",
+	statement = "Do you need help with anything?",
 	response = "I have a few things I need done.",
 	options = {
 		"BackTopic"
@@ -569,9 +615,9 @@ DIALOGUE.addTopic("BackTopic", {
 		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"information", "riches"}, 2)
 
 		-- Special Sale
-		if (SERVER) then
+		if SERVER then
 			local cooldown = target:GetNetVar("lastSpecialSale", 0)
-			if cooldown < os.time() or !client:GetData("specialSaleItems") then
+			if cooldown < os.time() then
 				local randomItems = {}
 				local randomItemCategories = {
 					{itemCategory = "specialsale_owlnpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
@@ -586,13 +632,13 @@ DIALOGUE.addTopic("BackTopic", {
 
 				for k,v in pairs(randomItemCategories) do
 					local idat = ix.util.GetRandomItemFromPool(v.itemCategory)
-					-- ensure the character has a reputation level high enough
+					-- ensure the character has a reputation level high
 					if client:getReputation() >= v.reqRep then
 						table.insert(randomItems, {idat[1], idat[2], v.dialogue})
 					end
 				end
 
-				client:SetData("specialSaleItems", randomItems)
+				client:SetNetVar("specialSaleItems", randomItems)
 				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
 			end
 		end
@@ -604,3 +650,52 @@ DIALOGUE.addTopic("GOODBYE", {
 	response = "Come back soon, STALKER..."
 })
 
+DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	options = {
+		"BackTopic"
+	},
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if (dyndata) then
+			if(CLIENT)then
+				self.response = string.format("Great, the %s fits nicely in my pocket.", ix.item.list[dyndata.itemid].name)
+			else
+				if ix.progression.IsActive(dyndata.progid) then
+					
+					local item = player:GetCharacter():GetInventory():HasItem(dyndata.itemid)
+
+					local dat = ix.progression.status[dyndata.progid].complexData
+					dat = dat or {}
+					local amtcur = dat[dyndata.itemid] or 0
+
+					local reqitems = ix.progression.GetComplexProgressionReqs(dyndata.progid)
+					local amtreq = reqitems[dyndata.itemid]
+
+					local amtneed = amtreq - amtcur
+
+					if(item)then
+						local amtavailable = item:GetData("quantity", 1)
+						local amtfinal = amtavailable >= amtneed and amtneed or amtavailable
+
+						item:SetData("quantity", item:GetData("quantity",0) - amtfinal)
+						
+						if(item:GetData("quantity", 0) < 1)then
+							item:Remove()
+						end
+
+						--Adds reward
+						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item, amtfinal)
+						player:addReputation(repReward)
+						ix.dialogue.notifyReputationReceive(player, repReward)
+						player:GetCharacter():GiveMoney(monReward)
+						ix.dialogue.notifyMoneyReceive(player, monReward)
+
+						ix.progression.AddComplexProgressionValue(dyndata.progid, {dyndata.itemid, amtfinal}, player:Name())
+					end
+				end
+			end	
+		end
+	end,
+} )
