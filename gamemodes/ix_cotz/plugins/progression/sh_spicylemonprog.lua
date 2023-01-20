@@ -921,7 +921,7 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 
 			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
 			if (npc) then
-				npc:AddItemToList("drink_miscaid_swampbrew", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("miscaid_swampbrew", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Brew", true)
