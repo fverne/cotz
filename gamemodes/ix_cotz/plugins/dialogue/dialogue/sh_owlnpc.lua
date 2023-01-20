@@ -664,9 +664,9 @@ DIALOGUE.addTopic("BackTopic", {
 		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"information", "riches"}, 2)
 
 		-- Special Sale
-		if SERVER then
+		if (SERVER) then
 			local cooldown = target:GetNetVar("lastSpecialSale", 0)
-			if cooldown < os.time() then
+			if cooldown < os.time() or !client:GetData("specialSaleItems") then
 				local randomItems = {}
 				local randomItemCategories = {
 					{itemCategory = "specialsale_owlnpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
@@ -681,18 +681,19 @@ DIALOGUE.addTopic("BackTopic", {
 
 				for k,v in pairs(randomItemCategories) do
 					local idat = ix.util.GetRandomItemFromPool(v.itemCategory)
-					-- ensure the character has a reputation level high
+					-- ensure the character has a reputation level high enough
 					if client:getReputation() >= v.reqRep then
 						table.insert(randomItems, {idat[1], idat[2], v.dialogue})
 					end
 				end
 
-				client:SetNetVar("specialSaleItems", randomItems)
+				client:SetData("specialSaleItems", randomItems)
 				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
 			end
 		end
 	end
 })
+
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
