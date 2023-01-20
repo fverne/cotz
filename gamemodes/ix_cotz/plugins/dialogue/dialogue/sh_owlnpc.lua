@@ -18,9 +18,9 @@ DIALOGUE.addTopic("GREETING", {
 		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"information", "riches"}, 2)
 
 		-- Special Sale
-		if SERVER then
+		if (SERVER) then
 			local cooldown = target:GetNetVar("lastSpecialSale", 0)
-			if cooldown < os.time() then
+			if cooldown < os.time() or !client:GetData("specialSaleItems") then
 				local randomItems = {}
 				local randomItemCategories = {
 					{itemCategory = "specialsale_owlnpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
@@ -41,7 +41,7 @@ DIALOGUE.addTopic("GREETING", {
 					end
 				end
 
-				client:SetNetVar("specialSaleItems", randomItems)
+				client:SetData("specialSaleItems", randomItems)
 				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
 			end
 		end
@@ -100,7 +100,7 @@ DIALOGUE.addTopic("SpecialSaleTopic", {
 	},
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
-		local randomItems = client:GetNetVar("specialSaleItems")
+		local randomItems = client:GetData("specialSaleItems", {})
 		
 		for k,v in pairs(randomItems) do
 			local item = ix.item.list[v[1]]
@@ -195,15 +195,13 @@ DIALOGUE.addTopic("StorageTopic", {
 		local heightcost = math.Round(math.pow(basecost + 300, 1+(bankH/4.5)))
 		local widthcost = math.Round(math.pow(basecost, 1+(bankW/4.5)))
 
-		if ix.progression.GetNPCFromName("'Mute'") then
-			table.insert(dynopts, {statement = "Can I please see my storage?", topicID = "StorageTopic", dyndata = {option = "use"}})
+		table.insert(dynopts, {statement = "Can I please see my storage?", topicID = "StorageTopic", dyndata = {option = "use"}})
 
-			if bankW < ix.config.Get("bankWMax") then
-				table.insert(dynopts, {statement = "I want to upgrade the width. ("..ix.currency.Get(widthcost)..")", topicID = "StorageTopic", dyndata = {direction = "horizontally", cost = widthcost}})
-			end
-			if bankH < ix.config.Get("bankHMax") then
-				table.insert(dynopts, {statement = "I want to upgrade the height. ("..ix.currency.Get(heightcost)..")", topicID = "StorageTopic", dyndata = {direction = "vertically", cost = heightcost}})
-			end
+		if bankW < ix.config.Get("bankWMax") then
+			table.insert(dynopts, {statement = "I want to upgrade the width. ("..ix.currency.Get(widthcost)..")", topicID = "StorageTopic", dyndata = {direction = "horizontally", cost = widthcost}})
+		end
+		if bankH < ix.config.Get("bankHMax") then
+			table.insert(dynopts, {statement = "I want to upgrade the height. ("..ix.currency.Get(heightcost)..")", topicID = "StorageTopic", dyndata = {direction = "vertically", cost = heightcost}})
 		end
 		
 		-- Return table of options
