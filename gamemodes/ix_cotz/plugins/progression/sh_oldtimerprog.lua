@@ -402,7 +402,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 
 			local npc = ix.progression.GetNPCFromName("'Old Timer'")
 			if (npc) then
-				npc:AddItemToList("hidestash_cleaningkit", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("hidestasher_cleaningkit", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("oldtimerItemDelivery_Hidestash1", true)
@@ -485,7 +485,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 
 			local npc = ix.progression.GetNPCFromName("'Old Timer'")
 			if (npc) then
-				npc:AddItemToList("hidestash_shovel", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("hidestasher_shovel", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("oldtimerItemDelivery_Hidestash2", true)
