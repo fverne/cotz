@@ -1,6 +1,6 @@
 ITEM.name = "Plastic Hose"
 ITEM.description = "A plastic hose, useful for many applications."
-ITEM.longdesc = ""
+ITEM.longdesc = "Plastic hoses come in many shapes and sizes and are capable of being fitted with threading and adapters to match any job. In the Zone, they are most often used as fuel siphons for generators."
 ITEM.model = "models/illusion/eftcontainers/hose.mdl"
 
 ITEM.width = 2
