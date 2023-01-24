@@ -1,6 +1,6 @@
 ITEM.name = "Household Glue"
 ITEM.description = "A small plastic container with glue."
-ITEM.longdesc = ""
+ITEM.longdesc = "Household glue is ubiquitous and all purpose and is best suited for crafts and minor repairs. Some technicians could find a use for this."
 ITEM.model = "models/lostsignalproject/items/repair/gun_oil_ru.mdl"
 
 ITEM.width = 1
