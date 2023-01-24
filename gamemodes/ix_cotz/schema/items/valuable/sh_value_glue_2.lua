@@ -1,6 +1,6 @@
 ITEM.name = "Superglue"
 ITEM.description = "A small plastic container with glue."
-ITEM.longdesc = ""
+ITEM.longdesc = "Heavy duty glue often used to bind plastic, metal, vinyl, and wood. Stickier and sturdier than regular household glue."
 ITEM.model = "models/lostsignalproject/items/repair/glue_e.mdl"
 
 ITEM.width = 1

@@ -1,6 +1,6 @@
 ITEM.name = "Firearm Lubricant"
 ITEM.description = "The small container is filled with lubricant for firearms."
-ITEM.longdesc = ""
+ITEM.longdesc = "Higher end civilian gun oil used to clean weapons. Offers better corrosion protection and cleaning properties than standard issue military oil."
 ITEM.model = "models/lostsignalproject/items/repair/grease.mdl"
 
 ITEM.width = 1

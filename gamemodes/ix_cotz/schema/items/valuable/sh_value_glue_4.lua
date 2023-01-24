@@ -1,6 +1,6 @@
 ITEM.name = "Universal Glue"
 ITEM.description = "A long thin container with glue."
-ITEM.longdesc = ""
+ITEM.longdesc = "A true master of none, universal glue is used to bind anything from cloth to wood. Useful for all kinds of crafts and sought by traders and technicians."
 ITEM.model = "models/lostsignalproject/items/repair/glue_a.mdl"
 
 ITEM.width = 1

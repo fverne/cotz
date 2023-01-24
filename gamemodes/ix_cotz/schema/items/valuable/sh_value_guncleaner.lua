@@ -1,6 +1,6 @@
 ITEM.name = "Military-Grade Weapon Cleaner"
 ITEM.description = "A small plastic container that contains cleaning materials for firearms."
-ITEM.longdesc = ""
+ITEM.longdesc = "An inexpensive, mass-produced gun oil to keep weapons clean and prevent corrosion. Not exactly top shelf stuff, but if it worked for the Red Army it will work for you."
 ITEM.model = "models/lostsignalproject/items/repair/solvent.mdl"
 
 ITEM.width = 1

@@ -1,6 +1,6 @@
 ITEM.name = "Civilian-Grade Gun Oil"
 ITEM.description = "A small metal container with oil for firearms."
-ITEM.longdesc = ""
+ITEM.longdesc = "Cheap civilian firearm lubricant. Best suited to clean plinkers and pop guns and not much else, but useful in a pinch."
 ITEM.model = "models/lostsignalproject/items/repair/gun_oil_ru_d.mdl"
 
 ITEM.width = 1
