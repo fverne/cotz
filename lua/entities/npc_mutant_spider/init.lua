@@ -125,7 +125,7 @@ function ENT:STALKERNPCThink()
 
 		self:STALKERNPCPlayAnimation("attack_2",4)
 		self:STALKERNPCMakeMeleeAttack(4)
-		self:EmitSound("Stalker.Rodent.Melee1")
+		self:EmitSound("Stalker.Rodent.Melee2")
 		self.isAttacking = 2
 	end
 

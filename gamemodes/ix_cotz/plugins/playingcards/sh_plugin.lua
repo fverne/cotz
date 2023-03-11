@@ -33,7 +33,7 @@ PLUGIN.CardMisc = {
 }
 
 PLUGIN.CardProperties = {
-  ["models/cotzcards/card1.mdl"] = {
+  ["models/cards/card1.mdl"] = {
     "A_clubs",
     "A_hearts",
     "A_diamonds",
@@ -66,7 +66,7 @@ PLUGIN.CardProperties = {
     "8_spades"
   },
 
-  ["models/cotzcards/card2.mdl"] = {
+  ["models/cards/card2.mdl"] = {
     "8_hearts",
     "8_diamonds",
     "9_clubs",
@@ -153,7 +153,7 @@ function PLUGIN:LoadedCards()
             end
         end
 
-        return "models/cotzcards/card1.mdl", 0, "models/props_pipes/GutterMetal01a", Color(0, 0, 0, 255)
+        return "models/cards/card1.mdl", 0, "models/props_pipes/GutterMetal01a", Color(0, 0, 0, 255)
     end
 
     for k, v in pairs(self.cards or {}) do

@@ -441,16 +441,22 @@ DIALOGUE.addTopic("ConfirmTask", {
 		return dynopts
 	end,
 	ResolveDynamicOption = function(self, client, target, dyndata)
-		if( SERVER and dyndata.accepted ) then
-			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(target.taskid))
-
-			client:ixJobAdd(target.taskid, target:GetDisplayName())
-
-			ix.jobs.setNPCJobTaken(target:GetDisplayName(), target.taskid)
-		end
-		if(SERVER)then
+		if (SERVER) then
+			if (dyndata.accepted) then
+				if (!ix.jobs.NPCHasJob(target:GetDisplayName(), target.taskid)) then
+					client:Notify("Task was taken by somebody else!")
+				else
+					ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(target.taskid))
+		
+					client:ixJobAdd(target.taskid, target:GetDisplayName())
+		
+					ix.jobs.setNPCJobTaken(target:GetDisplayName(), target.taskid)
+				end
+			end
+			
 			target.taskid = nil
 		end
+		
 		-- Return the next topicID
 		return "BackTopic"
 	end,

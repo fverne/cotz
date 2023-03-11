@@ -8,9 +8,10 @@ DIALOGUE.addTopic("GREETING", {
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		if SERVER then
+		-- Special Sale
+		if (SERVER) then
 			local cooldown = target:GetNetVar("lastSpecialSale", 0)
-			if cooldown < os.time() then
+			if cooldown < os.time() or !client:GetData("specialSaleItemsRarity") then
 				local randomItems = {}
 				local randomItemCategories = {
 					{itemCategory = "specialsale_raritynpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
@@ -25,13 +26,13 @@ DIALOGUE.addTopic("GREETING", {
 
 				for k,v in pairs(randomItemCategories) do
 					local idat = ix.util.GetRandomItemFromPool(v.itemCategory)
-					-- ensure the character has a reputation level high
+					-- ensure the character has a reputation level high enough
 					if client:getReputation() >= v.reqRep then
 						table.insert(randomItems, {idat[1], idat[2], v.dialogue})
 					end
 				end
 
-				client:SetNetVar("specialSaleItems", randomItems)
+				client:SetData("specialSaleItemsRarity", randomItems)
 				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
 			end
 		end
@@ -89,13 +90,13 @@ DIALOGUE.addTopic("SpecialSaleTopic", {
 	},
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
-		local randomItems = client:GetNetVar("specialSaleItems")
+		local randomItems = client:GetData("specialSaleItemsRarity", {})
 		
 		for k,v in pairs(randomItems) do
 			local item = ix.item.list[v[1]]
 			local itemdata = ix.item.list[v[2]]
 			local dialogue = v[3]
-			table.insert(dynopts, {statement = "I'd like to purchase a " ..item.name.. " (Price: " .. item.price.. ")", topicID = "SpecialSaleTopic", dyndata = {itemuid = item.uniqueID, cost = item.price, itemdata = itemdata}})
+			table.insert(dynopts, {statement = dialogue.. " (Price: " .. item.price*4.00 .. ")", topicID = "SpecialSaleTopic", dyndata = {itemuid = item.uniqueID, cost = item.price*4.00, itemdata = itemdata}})
 		end
 
 		-- Return table of options
@@ -172,9 +173,10 @@ DIALOGUE.addTopic("BackTopic", {
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		if SERVER then
+		if (SERVER) then
 			local cooldown = target:GetNetVar("lastSpecialSale", 0)
-			if cooldown < os.time() then
+			if cooldown < os.time() or !client:GetData("specialSaleItemsRarity") then
+				local randomItems = {}
 				local randomItemCategories = {
 					{itemCategory = "specialsale_raritynpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
 					{itemCategory = "specialsale_raritynpc_rifle_1", dialogue = "I'm looking weapons that can deal with a bit of everything.", reqRep = 282},
@@ -185,18 +187,16 @@ DIALOGUE.addTopic("BackTopic", {
 					{itemCategory = "specialsale_raritynpc_headgear_1", dialogue = "I'm looking for better headwear.", reqRep = 50},
 					{itemCategory = "specialsale_raritynpc_ar_1", dialogue = "I'm the clumsy type, and often stumble into anomalous zones. I'm looking for protection.", reqRep = 4254},
 				}
-				local randomItems = {}
 
 				for k,v in pairs(randomItemCategories) do
 					local idat = ix.util.GetRandomItemFromPool(v.itemCategory)
-					-- ensure the character has a reputation level high
+					-- ensure the character has a reputation level high enough
 					if client:getReputation() >= v.reqRep then
 						table.insert(randomItems, {idat[1], idat[2], v.dialogue})
 					end
 				end
 
-			
-				client:SetNetVar("specialSaleItems", randomItems)
+				client:SetData("specialSaleItemsRarity", randomItems)
 				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
 			end
 		end

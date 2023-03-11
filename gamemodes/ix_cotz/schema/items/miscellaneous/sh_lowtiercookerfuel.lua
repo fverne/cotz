@@ -140,7 +140,7 @@ ITEM.functions.use = {
 		return targets
 		end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
+		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]

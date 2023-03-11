@@ -305,13 +305,13 @@ AddSound("Stalker.Zombie.Idle9",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/zombie/zo
 AddSound("Stalker.Zombie.Idle10",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/zombie/zombie_idle_10.ogg")
 ----CHASE
 AddSound("Stalker.Zombie.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombie/zombie_take_damage_1.ogg")
-AddSound("Stalker.Zombie.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombie/zombie_idle_11.ogg")
-AddSound("Stalker.Zombie.Chase3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombie/zombie_idle_12.ogg")
-AddSound("Stalker.Zombie.Chase4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombie/zombie_idle_13.ogg")
-AddSound("Stalker.Zombie.Chase5",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombie/zombie_idle_14.ogg")
-AddSound("Stalker.Zombie.Chase6",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombie/zombie_idle_15.ogg")
-AddSound("Stalker.Zombie.Chase7",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombie/zombie_idle_16.ogg")
-AddSound("Stalker.Zombie.Chase8",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombie/zombie_idle_17.ogg")
+AddSound("Stalker.Zombie.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombied/idle_11.mp3")
+AddSound("Stalker.Zombie.Chase3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombied/idle_12.mp3")
+AddSound("Stalker.Zombie.Chase4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombied/idle_13.mp3")
+AddSound("Stalker.Zombie.Chase5",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombied/idle_14.mp3")
+AddSound("Stalker.Zombie.Chase6",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombied/idle_15.mp3")
+AddSound("Stalker.Zombie.Chase7",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombied/idle_16.mp3")
+AddSound("Stalker.Zombie.Chase8",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombied/idle_17.mp3")
 ----HIT
 AddSound("Stalker.Zombie.Hit1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombie/zombie_attack_1.ogg")
 AddSound("Stalker.Zombie.Hit2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombie/zombie_attack_2.ogg")
@@ -521,22 +521,22 @@ AddSound("Stalker.Pseudodog.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalke
 
 -- Tushkano sounds
 ----IDLE
-AddSound("Stalker.Rodent.Idle1",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/rodent/tushkano_idle_0.wav")
-AddSound("Stalker.Rodent.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/rodent/tushkano_idle_1.wav")
-AddSound("Stalker.Rodent.Idle3",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/rodent/tushkano_idle_2.wav")
-AddSound("Stalker.Rodent.Idle4",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/rodent/tushkano_idle_3.wav")
+AddSound("Stalker.Rodent.Idle1",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/tushkan/tushkano_idle_0.ogg")
+AddSound("Stalker.Rodent.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/tushkan/tushkano_idle_1.ogg")
+AddSound("Stalker.Rodent.Idle3",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/tushkan/tushkano_idle_2.ogg")
+AddSound("Stalker.Rodent.Idle4",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"npc/tushkan/tushkano_idle_3.ogg")
 ----HIT
-AddSound("Stalker.Rodent.Melee2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_attack_1.mp3")
-AddSound("Stalker.Rodent.Melee4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_attack_0.mp3")
+AddSound("Stalker.Rodent.Melee2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tushkan/tushkano_attack_1.ogg")
+AddSound("Stalker.Rodent.Melee4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tushkan/tushkano_attack_0.ogg")
 ----Chase
-AddSound("Stalker.Rodent.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_aggressive_0.wav")
-AddSound("Stalker.Rodent.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_aggressive_1.wav")
-AddSound("Stalker.Rodent.Chase3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_aggressive_2.wav")
-AddSound("Stalker.Rodent.Chase4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_aggressive_3.wav")
+AddSound("Stalker.Rodent.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tushkan/tushkano_aggressive_0.ogg")
+AddSound("Stalker.Rodent.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tushkan/tushkano_aggressive_1.ogg")
+AddSound("Stalker.Rodent.Chase3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tushkan/tushkano_aggressive_2.ogg")
+AddSound("Stalker.Rodent.Chase4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tushkan/tushkano_aggressive_3.ogg")
 ----DEATH
-AddSound("Stalker.Rodent.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_death_0.wav")
-AddSound("Stalker.Rodent.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_death_1.wav")
-AddSound("Stalker.Rodent.Die3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/rodent/tushkano_death_2.wav")
+AddSound("Stalker.Rodent.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tushkan/tushkano_death_0.ogg")
+AddSound("Stalker.Rodent.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tushkan/tushkano_death_1.ogg")
+AddSound("Stalker.Rodent.Die3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/tushkan/tushkano_death_2.ogg")
 
 -- Sprig sounds
 ----IDLE

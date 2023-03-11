@@ -131,6 +131,9 @@ SWEP.FireSoundSuppressed = "CW_G18_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.7
 SWEP.RecoilToSpread = 0.5
 
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
+
 SWEP.HipSpread = 0.125
 SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 1.5

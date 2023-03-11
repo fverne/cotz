@@ -21,7 +21,7 @@ ix.chat.Register("gpdainternal", {
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text, bAnonymous, data)
-		chat.AddText(Color(180,61,61), "[GPDA-"..data.name.."] ", color_white, Material(data.icon), ": "..data.message)
+		chat.AddText(Color(180,61,61), "[GPDA-"..data.name.."] ", color_white, ix.util.GetMaterial(data.icon), ": "..data.message)
 	end,
 	prefix = {},
 	CanHear = function(self, speaker, listener)

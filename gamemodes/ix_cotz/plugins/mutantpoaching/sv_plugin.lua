@@ -17,9 +17,9 @@ ix.poaching.MutantTable = {
 	["models/monsters/boar.mdl"] = "boar",
 	["models/monsters/chimera2.mdl"] = "chimera",
 	["models/monsters/chimera.mdl"] = "electrochimera",
-	["models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl"] = "burer",
+	["models/gsc/s.t.a.l.k.e.r/monsters/burer.mdl"] = "burer",
 	["models/monsters/cat.mdl"] = "cat",
-	["models/maver1k_XVII/Stalker/mutants/karlik.mdl"] = "karlik",
+	["models/monsters/karlik.mdl"] = "karlik",
 	["models/monsters/zanoza.mdl"] = "sprig",
 	["models/monsters/controler.mdl"] = "controller",
 	["models/monsters/tibet.mdl"] = "swampcontroller",
@@ -265,7 +265,7 @@ if SERVER then
                             }
 
                             if (IsValid(client) and client:GetCharacter() and not inv:Add(v, 1, dat)) then
-                                ix.item.Spawn(v, position, nil, AngleRand(), dat)
+                                ix.item.Spawn(v, position, function(item, ent) ent.bTemporary = true end, AngleRand(), dat)
                                 position = position + Vector(0, 0, 5)
                                 client:Notify("No space in your inventory! Items have been dropped.")
                             end

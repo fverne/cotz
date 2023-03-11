@@ -48,6 +48,6 @@ ITEM.functions.use = {
 		return true
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
+		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }

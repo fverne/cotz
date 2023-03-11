@@ -68,7 +68,7 @@ ix.randomitems.tables["cache_weapons_smg_tier1"] = {
   {500,  {"ar159mm",              {["durability"] = 80, ["attachments"] = { "md_eotech" }}}},
   {500,  {"c96carbine",           {["durability"] = 90, ["attachments"] = { "md_rmr" }}}},
   {250,  {"c96carbine",           {["durability"] = 90, ["attachments"] = { "md_tundra9mm" }}}},
-  {300,  {"pp1901vityaz",         {["durability"] = 85, ["attachments"] = { "md_kingarmsmr" }}}},
+  {300,  {"pp1901vityaz",         {["durability"] = 85, ["attachments"] = { "md_reflex" }}}},
   {300,  {"pp1901vityaz",         {["durability"] = 85, ["attachments"] = { "md_tundra9mm" }}}},
   {700,  {"mac11",                {["durability"] = 95, ["attachments"] = { "md_microt1" }}}},
   {750,  {"mp5k",                 {["durability"] = 95}}},
@@ -92,7 +92,7 @@ ix.randomitems.tables["cache_weapons_smg_tier2"] = {
   {100,  {"pp2000",               {["durability"] = 85, ["attachments"] = { "md_tundra9mm" }}}},
   { 50,  {"sr2",                  {["durability"] = 75, ["attachments"] = { "md_cmore" }}}},
   { 50,  {"sr2",                  {["durability"] = 75, ["attachments"] = { "md_tundra9mm" }}}},
-  { 50,  {"p90",                  {["durability"] = 85, ["attachments"] = { "md_kingarmsmr" }}}},
+  { 50,  {"p90",                  {["durability"] = 85, ["attachments"] = { "md_reflex" }}}},
 }
 
 -----------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ ix.randomitems.tables["cache_weapons_rifle_tier1"] = {
   {800,  {"fnfal",               {["durability"] = 95 }}},
   {400,  {"g36c",                {["durability"] = 80, ["attachments"] = { "md_foregrip", "md_aimpoint" }}}},
   {400,  {"g36c",                {["durability"] = 80, ["attachments"] = { "md_foregrip", "md_eotech" }}}},
-  {600,  {"g36c",                {["durability"] = 85, ["attachments"] = { "md_kingarmsmr" }}}},
+  {600,  {"g36c",                {["durability"] = 85, ["attachments"] = { "md_reflex" }}}},
   {800,  {"g36c",                {["durability"] = 85 }}},
   {600,  {"l85",                 {["durability"] = 85, ["attachments"] = { "md_foregrip" }}}},
   {600,  {"l85",                 {["durability"] = 90 }}},

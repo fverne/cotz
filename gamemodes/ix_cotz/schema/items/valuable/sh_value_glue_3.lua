@@ -1,4 +1,4 @@
-ITEM.name = "Texture Glue"
+ITEM.name = "Textile Glue"
 ITEM.description = "A long thin container with glue."
 ITEM.longdesc = "A special subtype of glue best used to bind fabrics together. Useful for armour repairs and as an ad hoc way to attach patches to suits."
 ITEM.model = "models/lostsignalproject/items/repair/glue_b.mdl"

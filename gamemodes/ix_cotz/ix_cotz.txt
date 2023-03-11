@@ -2,7 +2,7 @@
 {
 	"base" 			"helix"
 	"title" 		"Call of the Zone"
-	"author" 		"verne & gumlefar"
+	"author" 		"verne, gumlefar & cyanide"
 	"menusystem"	"1"
 	"category"		"pve"
 	"workshopid"	"2290918731"

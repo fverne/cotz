@@ -133,6 +133,9 @@ SWEP.FireSound = "VERESK_FIRE"
 SWEP.FireSoundSuppressed = "VERESK_SUPFIRE"
 SWEP.Recoil = 2.2
 
+SWEP.WearDamage = 0.1
+SWEP.WearEffect = 0.05
+
 SWEP.HipSpread = 0.125
 SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 1

@@ -115,6 +115,16 @@ if SERVER then
 		return ret
 	end
 
+	function ix.jobs.NPCHasJob(npcidentifier, jobidentifier)
+		for k,v in pairs(ix.jobs.activejobs[npcidentifier]) do
+			if (v.identifier == jobidentifier) then
+				return true
+			end
+		end
+
+		return false
+	end
+
 	function ix.jobs.setNPCJobTaken(npcidentifier, jobidentifier)
 		ix.jobs.activejobs[npcidentifier] = ix.jobs.activejobs[npcidentifier] or {}
 

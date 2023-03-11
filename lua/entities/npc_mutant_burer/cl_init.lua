@@ -1,7 +1,7 @@
 include('shared.lua')
 
 function ENT:Initialize()
-	self.RealModel = "models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl"
+	self.RealModel = "models/gsc/s.t.a.l.k.e.r/monsters/burer.mdl"
 end
 
 function ENT:Draw()
@@ -34,6 +34,6 @@ function ENT:Draw()
 		return
 	end
 
-	self:SetModel("models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl")
+	self:SetModel("models/gsc/s.t.a.l.k.e.r/monsters/burer.mdl")
 	self:DrawModel()
 end

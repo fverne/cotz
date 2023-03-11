@@ -403,7 +403,7 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 
 			local npc = ix.progression.GetNPCFromName("'Mute'")
 			if (npc) then
-				npc:AddItemToList("anomalydecector", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("anomalydetector", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("muteItemDelivery_Anomaly", true)
@@ -487,7 +487,7 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 
 			-- local npc = ix.progression.GetNPCFromName("'Mute'")
 			-- if (npc) then
-			-- 	npc:AddItemToList("anomalydecector", nil, 5, "SELLANDBUY", 5, 1, 5)
+			-- 	npc:AddItemToList("anomalydetector", nil, 5, "SELLANDBUY", 5, 1, 5)
 			-- end
 
 			ix.progression.SetCompleted("muteItemDelivery_Broadcast", true)

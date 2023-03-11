@@ -582,10 +582,6 @@ do
 			if (!character) then
 				return
 			end
-
-			-- if invID != client:GetCharacter():GetInventory():GetID() then
-			-- 	return
-			-- end
 			
 			local inventory = ix.item.inventories[invID or 0]
 
@@ -713,8 +709,7 @@ do
 					inventory:Sync(client)
 				end
 
-				if ((!inventory.owner or (inventory.owner and inventory.owner == character:GetID())) and
-					inventory:OnCheckAccess(client)) then
+				if ((inventory.owner and inventory.owner == character:GetID()) or inventory:OnCheckAccess(client)) then
 					local item = inventory:GetItemAt(oldX, oldY)
 
 					if (item) then

@@ -82,7 +82,10 @@ function PANEL:DoRightShiftClick()
 		local info, action = hook.Run("ItemPressedRightShift", self, itemTable, inventory)
 
 		if !(info and action) then
-			if (itemTable:GetData("equip")) then
+			if (itemTable.functions.use) then
+				info = itemTable.functions.use
+				action = "use"
+			elseif (itemTable:GetData("equip")) then
 				info = itemTable.functions.EquipUn
 				action = "EquipUn"
 			else
@@ -646,12 +649,6 @@ function PANEL:OnTransfer(oldX, oldY, x, y, oldInventory, noSend)
 
 	if (inventory) then
 		item = inventory:GetItemAt(oldX, oldY)
-
-		if IsValid(ix.gui.openedStorage) then
-			if !inventory2:CanItemFit(x, y, item.width, item.height) then
-				return false
-			end
-		end
 		
 		if (!item) then
 			return false

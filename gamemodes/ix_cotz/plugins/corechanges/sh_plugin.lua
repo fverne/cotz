@@ -223,3 +223,17 @@ if(SERVER)then
 		end
 	end
 end
+
+function PLUGIN:CanTransferItem(item, oldInventory, newInventory)
+	if (newInventory and item:GetData("equip")) then
+		local owner = item:GetOwner()
+
+		if (IsValid(owner)) then
+			owner:Notify("You can't transfer equipped items!")
+		end
+
+		return false
+	end
+
+	return true
+end

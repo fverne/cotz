@@ -29,7 +29,7 @@ PLUGIN.spawntime = CurTime() + 30
 PLUGIN.updatetime = CurTime() + 30
 PLUGIN.populate = false
 
-local icon = Material("vgui/icons/news.png")
+local icon = "vgui/icons/news.png"
 
 ix.chat.Register("eventpda", {
 	CanSay = function(self, speaker, text)
@@ -44,7 +44,7 @@ ix.chat.Register("eventpda", {
 		end
 	end,
 	OnChatAdd = function(self, speaker, text)
-		chat.AddText(Color(0,191,255), "[LPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
+		chat.AddText(Color(0,191,255), "[LPDA-SYSTEM] ", Color(0,241,255), ix.util.GetMaterial(icon), ": "..text)
 	end,
 	prefix = {"/eventpda"},
 	CanHear = function(self, speaker, listener)
@@ -69,7 +69,7 @@ ix.chat.Register("eventpdainternal", {
 		return false*/
 	end,
 	OnChatAdd = function(self, speaker, text)
-		chat.AddText(Color(0,191,255), "[LPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
+		chat.AddText(Color(0,191,255), "[LPDA-SYSTEM] ", Color(0,241,255), ix.util.GetMaterial(icon), ": "..text)
 	end,
 	prefix = {},
 	CanHear = function(self, speaker, listener)

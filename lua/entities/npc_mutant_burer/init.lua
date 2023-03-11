@@ -56,7 +56,7 @@ ENT.VisibleSchedule = SCHED_RUN_FROM_ENEMY_FALLBACK
 ENT.RangeSchedule = SCHED_RUN_RANDOM
 
 function ENT:Initialize()
-	self.Model = "models/GSC/S.T.A.L.K.E.R/Monsters/Burer.mdl"
+	self.Model = "models/gsc/s.t.a.l.k.e.r/monsters/burer.mdl"
 	self:STALKERNPCInit(Vector(-32,-32,70),MOVETYPE_STEP)
 	
 	
