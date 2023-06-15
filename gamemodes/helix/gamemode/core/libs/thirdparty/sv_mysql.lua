@@ -555,8 +555,7 @@ function mysql:RawQuery(query, callback, flags, ...)
 		end
 
 		queryObj.onError = function(queryObj, errorText)
-			ErrorNoHalt(string.format("[mysql] MySQL Query Error!\nQuery: %s\n", query))
-			ErrorNoHalt(string.format("[mysql] MySQL Query Error!\nError: %s\n", errorText))
+			ErrorNoHalt(string.format("[mysql] MySQL Query Error!\nQuery: %s\n%s\n", query, errorText))
 		end
 
 		queryObj:start()

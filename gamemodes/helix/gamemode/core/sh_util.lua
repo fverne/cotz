@@ -229,10 +229,10 @@ end
 -- @string materialPath Path to the material
 -- @treturn[1] material The cached material
 -- @treturn[2] nil If the material doesn't exist in the filesystem
-function ix.util.GetMaterial(materialPath, materialArguments)
+function ix.util.GetMaterial(materialPath)
 	-- Cache the material.
 	ix.util.cachedMaterials = ix.util.cachedMaterials or {}
-	ix.util.cachedMaterials[materialPath] = ix.util.cachedMaterials[materialPath] or Material(materialPath, materialArguments)
+	ix.util.cachedMaterials[materialPath] = ix.util.cachedMaterials[materialPath] or Material(materialPath)
 
 	return ix.util.cachedMaterials[materialPath]
 end
@@ -521,7 +521,7 @@ if (CLIENT) then
 			if (wordWidth > maxWidth) then
 				local newWidth
 
-				for i2 = 1, string.len(word) do
+				for i2 = 1, word:utf8len() do
 					local character = word[i2]
 					newWidth = surface.GetTextSize(line .. character)
 
@@ -538,7 +538,8 @@ if (CLIENT) then
 				continue
 			end
 
-			local newLine = line .. " " .. word
+			local space = (i == 1) and "" or " "
+			local newLine = line .. space .. word
 			local newWidth = surface.GetTextSize(newLine)
 
 			if (newWidth > maxWidth) then
@@ -935,7 +936,7 @@ function ix.util.FindEmptySpace(entity, filter, spacing, size, height, tolerance
 	end
 
 	table.sort(output, function(a, b)
-		return a:Distance(position) < b:Distance(position)
+		return a:DistToSqr(position) < b:DistToSqr(position)
 	end)
 
 	return output
@@ -1138,6 +1139,25 @@ function ix.util.EmitQueuedSounds(entity, sounds, delay, spacing, volume, pitch)
 
 	-- Return how long it took for the whole thing.
 	return delay
+end
+
+--- Merges the contents of the second table with the content in the first one. The destination table will be modified.
+--- If element is table but not metatable object, value's elements will be changed only.
+-- @realm shared
+-- @tab destination The table you want the source table to merge with
+-- @tab source The table you want to merge with the destination table
+-- @return table
+function ix.util.MetatableSafeTableMerge(destination, source)
+	for k, v in pairs(source) do
+		if (istable(v) and istable(destination[k]) and getmetatable(v) == nil) then
+			-- don't overwrite one table with another
+			-- instead merge them recurisvely
+			ix.util.MetatableSafeTableMerge(destination[k], v);
+		else
+			destination[ k ] = v;
+		end
+	end
+	return destination;
 end
 
 ix.util.Include("helix/gamemode/core/meta/sh_entity.lua")

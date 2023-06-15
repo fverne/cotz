@@ -160,6 +160,7 @@ LANGUAGE = {
 	moneyTaken = "You were given %s.",
 	moneyGiven = "You have given %s.",
 	insufficientMoney = "You do not have enough to do this!",
+	belowMinMoneyDrop = "You cannot drop less than %s.",
 	businessPurchase = "You purchased %s for %s.",
 	businessSell = "You sold %s for %s.",
 	businessTooFast = "Please wait before purchasing another item!",
@@ -307,6 +308,7 @@ LANGUAGE = {
 	containerNameRemove = "You have removed this container's name.",
 	containerInvalid = "You need to be looking at a container to do this!",
 	wrongPassword = "You have entered an incorrect password!",
+	passwordAttemptLimit = "You have made too many incorrect password attempts!",
 	respawning = "Respawning...",
 	tellAdmin = "Inform a staff member of this error: %s",
 
@@ -445,5 +447,15 @@ LANGUAGE = {
 	cmdY = "Yell something to the people around you.",
 	cmdEvent = "Make something perform an action that everyone can see.",
 	cmdOOC = "Sends a message in global out-of-character chat.",
-	cmdLOOC = "Sends a message in local out-of-character chat."
+	cmdLOOC = "Sends a message in local out-of-character chat.",
+
+	iconEditorAlignBest = "Best Guess",
+	iconEditorWidth = "Width",
+	iconEditorHeight = "Height",
+	iconEditorCopy = "Copy to Clipboard",
+	iconEditorCopied = "Copied Item Model Data to Clipboard.",
+	iconEditorAlignFront = "Align from Front",
+	iconEditorAlignAbove = "Align from Above",
+	iconEditorAlignRight = "Align from Right",
+	iconEditorAlignCenter = "Align from Center"
 }

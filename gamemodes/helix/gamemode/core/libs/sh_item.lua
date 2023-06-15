@@ -58,6 +58,8 @@ end
 
 function ix.item.Instance(index, uniqueID, itemData, x, y, callback, characterID, playerID)
 	if (!uniqueID or ix.item.list[uniqueID]) then
+		itemData = istable(itemData) and itemData or {}
+
 		local query = mysql:Insert("ix_items")
 			query:Insert("inventory_id", index)
 			query:Insert("unique_id", uniqueID)
@@ -77,7 +79,7 @@ function ix.item.Instance(index, uniqueID, itemData, x, y, callback, characterID
 				local item = ix.item.New(uniqueID, lastID)
 
 				if (item) then
-					item.data = istable(itemData) and table.Copy(itemData) or {}
+					item.data = table.Copy(itemData)
 					item.invID = index
 					item.characterID = characterID
 					item.playerID = playerID
@@ -239,7 +241,7 @@ function ix.item.Register(uniqueID, baseID, isBaseItem, path, luaGenerated)
 				-- we don't know which item was actually edited, so we'll refresh all of them
 				for _, v in pairs(ix.item.instances) do
 					if (v.uniqueID == uniqueID) then
-						table.Merge(v, ITEM)
+						ix.util.MetatableSafeTableMerge(v, ITEM)
 					end
 				end
 			end
@@ -583,10 +585,6 @@ do
 				return
 			end
 
-			-- if invID != client:GetCharacter():GetInventory():GetID() then
-			-- 	return
-			-- end
-			
 			local inventory = ix.item.inventories[invID or 0]
 
 			if (hook.Run("CanPlayerInteractItem", client, action, item, data) == false) then
@@ -713,8 +711,7 @@ do
 					inventory:Sync(client)
 				end
 
-				if ((!inventory.owner or (inventory.owner and inventory.owner == character:GetID())) and
-					inventory:OnCheckAccess(client)) then
+				if ((inventory.owner and inventory.owner == character:GetID()) or inventory:OnCheckAccess(client)) then
 					local item = inventory:GetItemAt(oldX, oldY)
 
 					if (item) then

@@ -226,7 +226,7 @@ function SKIN:PaintButton(panel)
 			alpha = 75
 		end
 
-		if (panel:GetParent():GetName() == "DListView_Column") then
+		if (panel:GetParent() and panel:GetParent():GetName() == "DListView_Column") then
 			surface.SetDrawColor(color_white)
 			surface.DrawRect(0, 0, w, h)
 		end
@@ -511,12 +511,33 @@ function SKIN:PaintInfoBar(panel, width, height, color)
 	surface.DrawTexturedRect(0, 0, width, height)
 end
 
+function SKIN:PaintInfoBarBackground(panel, width, height)
+	surface.SetDrawColor(230, 230, 230, 15)
+	surface.DrawRect(0, 0, width, height)
+	surface.DrawOutlinedRect(0, 0, width, height)
+
+	panel.bar:PaintManual()
+
+	DisableClipping(true)
+		panel.label:PaintManual()
+	DisableClipping(false)
+end
+
 function SKIN:PaintInventorySlot(panel, width, height)
 	surface.SetDrawColor(35, 35, 35, 85)
 	surface.DrawRect(1, 1, width - 2, height - 2)
 
 	surface.SetDrawColor(0, 0, 0, 250)
 	surface.DrawOutlinedRect(1, 1, width - 2, height - 2)
+end
+
+function SKIN:PaintDeathScreenBackground(panel, width, height, progress)
+	surface.SetDrawColor(0, 0, 0, (progress / 0.3) * 255)
+	surface.DrawRect(0, 0, width, height)
+end
+
+function SKIN:PaintDeathScreen(panel, width, height, progress)
+	ix.bar.DrawAction()
 end
 
 do
