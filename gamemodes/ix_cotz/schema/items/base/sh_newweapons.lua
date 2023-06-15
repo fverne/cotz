@@ -364,7 +364,7 @@ function ITEM:Equip(client)
 
 		timer.Simple(0.1,function()
 			local attachments = self:GetData("attachments") or {}
-			local weapon1 = client:GetActiveWeapon()
+			local weapon1 = client:GetWeapon(self.class)
 			if(weapon1:GetClass() == self.class and weapon1.attachSpecificAttachment)then
 				for k = 1, #attachments do
 					weapon1:attachSpecificAttachment(attachments[k])
@@ -373,9 +373,9 @@ function ITEM:Equip(client)
 			end
 		end)
 
-		timer.Simple(1,function() -- To make up for lag, holstering - etc
+		timer.Simple(1,function() -- To make up for lag
 			local attachments = self:GetData("attachments") or {}
-			local weapon1 = client:GetActiveWeapon()
+			local weapon1 = client:GetWeapon(self.class)
 			
 			if(weapon1:GetClass() == self.class and not hasrun)then
 				for k = 1, #attachments do
@@ -418,7 +418,7 @@ function ITEM:Equip(client)
 		self:SetData("equip", true)
 		if self:GetData("ammoType") ~= nil then
 			timer.Simple(0.1,function()
-				local weapon1 = client:GetActiveWeapon()
+				local weapon1 = client:GetWeapon(self.class)
 
 				weapon1:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
 

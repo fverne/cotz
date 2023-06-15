@@ -963,7 +963,7 @@ Purpose:  Standard SWEP Function
 ]]--
 
 function SWEP:Deploy()
-
+	debug.Trace()
 	if self.Callback.Deploy then
 		local val = self.Callback.Deploy(self)
 		if val then return val end
@@ -1306,18 +1306,7 @@ function SWEP:Holster( switchtowep )
 	end
 		
 	self.PenetrationCounter = 0
-	
-	if self==switchtowep then
-		return
-	end
-	
-	if !IsValid(switchtowep) then
-		switchtowep = self.Owner
-	end
-	
-	if switchtowep then
-		self:SetNWEntity("SwitchToWep",switchtowep)
-	end
+
 	
 	self:SetReloading(false)
 	self:SetDrawing(false)
@@ -1331,90 +1320,10 @@ function SWEP:Holster( switchtowep )
 	if (CurTime()<self:GetReloadingEnd()) then
 		self:SetReloadingEnd(CurTime()-1)
 	end
+
 	local hasholsteringanim = self.SequenceEnabled[ACT_VM_HOLSTER] or self.SequenceEnabled[ACT_VM_HOLSTER_EMPTY]
-	if self:GetCanHolster()==false then
-		if hasholsteringanim then
-			if !( self:GetHolstering() and CurTime()<self:GetHolsteringEnd() ) then
-				local holstertimerstring=(self.SequenceEnabled[ACT_VM_HOLSTER] and 1 or 0)..","..(self.SequenceEnabled[ACT_VM_HOLSTER_EMPTY] and 1 or 0)
-				self:InitHolsterCode(holstertimerstring)
-			else
-				if self:GetHolsteringEnd()-CurTime()<0.05 and self:GetHolstering() then
-					self:SetCanHolster(true)
-					self:Holster(self:GetNWEntity("SwitchToWep",switchtowep))
-					if self.ResetBonePositions then
-						self:ResetBonePositions()
-					end
-					return true
-				end
-			end
-		else
-			if !( self:GetHolstering() and CurTime()<self:GetHolsteringEnd() ) then
-				self:InitHolsterCodeProcedural()
-			else
-				if self:GetHolsteringEnd()-CurTime()<0.05 and self:GetHolstering() then
-					self:SetCanHolster(true)
-					self:Holster(self:GetNWEntity("SwitchToWep",switchtowep))
-					if self.ResetBonePositions then
-						self:ResetBonePositions()
-					end
-					return true
-				end
-			end		
-		end
-	else
-		self.DrawCrosshair = self.DrawCrosshairDefault or self.DrawCrosshair
-		self:SendWeaponAnim( 0 )
-		dholdt = self.DefaultHoldType and self.DefaultHoldType or self.HoldType
-		self:SetHoldType( dholdt )
-		self:SetHolstering(false)
-		self:SetHolsteringEnd(CurTime()-0.1)
-		local wep=self:GetNWEntity("SwitchToWep",switchtowep)
-		--print(wep)
-		if wep==self.Owner then
-			--local pickuptrace = util.QuickTrace(self.Owner:GetShootPos(),self.Owner:GetAimVector()*92,function(ent) if ent==self.Owner or ent==self or ent:IsWorld() then return false end return true end)
-			--if pickuptrace.Hit and pickuptrace.Fraction<1 and IsValid(pickuptrace.Entity) then
-			local lhe = self.Owner:GetNWEntity("LastHeldEntity")
-			if IsValid(lhe) then
-				--[[
-				local itspos = lhe:GetPos()
-				local ang1 = self.Owner:EyeAngles()
-				local ang2 = (lhe:GetPos()-self.Owner:GetShootPos()):Angle()
-				local angdif = ang1-ang2
-				local dist = lhe:GetPos():Distance(self.Owner:GetShootPos())
-				if math.abs(math.NormalizeAngle(angdif.p))<=90-dist/4 and math.abs(math.NormalizeAngle(angdif.y))<=90-dist/4 and dist<100 then
-				]]--
-				--if self:CanPickup(lhe) then
-					self.Owner:ConCommand("+use")
-					self.IsHolding = true
-					self:CallOnClient("SelfSetHolding","true")
-					timer.Simple(0.1,function()
-						if IsValid(self) and IsValid(self.Owner) then
-							self.Owner:ConCommand("-use")
-							if !IsValid(lhe) or ( lhe.IsPlayerHolding and !lhe:IsPlayerHolding() ) then
-								self:Deploy()
-								self.IsHolding = false
-								self:CallOnClient("SelfSetHolding","")
-							end	
-						end
-					end)
-				--end
-			else
-				self:Deploy()
-			end
-		elseif IsValid( wep ) and IsValid(self.Owner) and self.Owner:HasWeapon( wep:GetClass() ) then
-			if CLIENT or game.SinglePlayer() then
-				
-				if self.ResetBonePositions then
-					self:ResetBonePositions()
-				end
-				
-				self:ResetVMBodyGroups()
-				
-				self.Owner:ConCommand("use " .. wep:GetClass())
-			end
-		end
-		return true
-	end
+
+	return true
 end
 
 --[[ 
