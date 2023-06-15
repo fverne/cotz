@@ -963,7 +963,6 @@ Purpose:  Standard SWEP Function
 ]]--
 
 function SWEP:Deploy()
-	debug.Trace()
 	if self.Callback.Deploy then
 		local val = self.Callback.Deploy(self)
 		if val then return val end

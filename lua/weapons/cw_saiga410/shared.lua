@@ -1,10 +1,8 @@
 AddCSLuaFile()
-AddCSLuaFile("sh_sounds.lua")
-include("sh_sounds.lua")
 
 if CLIENT then
 	SWEP.DrawCrosshair = false
-	SWEP.PrintName = "Saiga-12"
+	SWEP.PrintName = "Saiga-410"
 	SWEP.CSMuzzleFlashes = true
 	SWEP.ViewModelMovementScale = 1
 	
@@ -55,7 +53,7 @@ end
 SWEP.SightBGs = {main = 2, none = 1}
 SWEP.ADSFireAnim = true
 
-SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds", "am_magnumbuck"}}}
+SWEP.Attachments = {}
 
 SWEP.Animations = {fire = {"shoot1", "shoot2"},
 	reload = "reload",
@@ -93,10 +91,10 @@ SWEP.WorldModel		= "models/cw2/weapons/w_saiga_chan.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 5
+SWEP.Primary.ClipSize		= 9
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= "12 Gauge"
+SWEP.Primary.Ammo			= ".45 ACP -41-"
 
 SWEP.FireDelay = 0.2
 SWEP.FireSound = "CW_STRIKER_FIRE"
@@ -112,8 +110,8 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.ClumpSpread = 0.014
 SWEP.SpreadPerShot = 0.4
 SWEP.SpreadCooldown = 0.5
-SWEP.Shots = 9
-SWEP.Damage = 15
+SWEP.Shots = 5
+SWEP.Damage = 33
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1.2
