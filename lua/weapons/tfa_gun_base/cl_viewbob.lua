@@ -26,6 +26,8 @@ function SWEP:CalcView(ply, pos, ang, fov)
 	local viewbobintensity = 0.2 * GetConVarNumber("cl_tfa_viewbob_intensity",1)
 	
 	pos, ang = self:CalculateBob( pos, ang, -viewbobintensity, true )
+
+	if not IsValid(pos) and not IsValid(ang) then return end
 	
 	if self.CameraAngCache then
 		ang:RotateAroundAxis(ang:Right(),self.CameraAngCache.p*viewbobintensity*5)
