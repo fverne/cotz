@@ -16,8 +16,6 @@ ITEM.isDrink = true
 
 ITEM.alcohol = 20
 
-ITEM.addictionStrongAlcohol = true
-
 ITEM.sound = "stalkersound/inv_flask.mp3"
 ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/vodka_6.png")
 
@@ -29,8 +27,6 @@ ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
 	item.player:AddBuff("buff_radiationremoval", 10, { amount = 0.75 })
 	item.player:AddBuff("buff_staminarestore", 50, { amount = 0.5 })
-
-	item.player:GetCharacter():SatisfyAddictions("MediumAlcohol")
 
 	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
 end)

@@ -40,7 +40,6 @@ ix.backgrounds["nothing"] = {
 ix.backgrounds["alcoholic_light"] = {
 	name = "Alcoholic (Light)",
 	description = "You started drinking when you were young and could never kick the habit.".. 
-	"\n\nAddicted to Light Alcohol"..
 	"\n\nStarting Equipment:"..
 	"\n  1x Contender (.45 ACP, .410 Magnum Buck) (Damaged)"..
 	"\n  15x rounds of .45 ACP"..
@@ -61,7 +60,6 @@ ix.backgrounds["alcoholic_light"] = {
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("knife_1", 1)
-		character:GetPlayer():AddAddiction("LightAlcoholic")
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  
@@ -74,7 +72,6 @@ ix.backgrounds["alcoholic_light"] = {
 ix.backgrounds["alcoholic_heavy"] = {
 	name = "Alcoholic (Strong)",
 	description = "After a traumatic event, you couldn't get back on your feet and started hitting the bottle.".. 
-	"\n\nAddicted to Strong Alcohol"..
 	"\n\nStarting Equipment:"..
 	"\n  1x Bat"..
 	"\n  1x Smirnoff Vodka, 700ml"..
@@ -91,7 +88,6 @@ ix.backgrounds["alcoholic_heavy"] = {
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("knife_1", 1)
-		character:GetPlayer():AddAddiction("StrongAlcoholic")
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  
@@ -103,7 +99,6 @@ ix.backgrounds["alcoholic_heavy"] = {
 ix.backgrounds["smoker"] = {
 	name = "Smoker",
 	description = "Despite many tries, you could never get rid of the nicotine addiction.".. 
-	"\n\nAddicted to Nicotine"..
 	"\n\nStarting Equipment:"..
 	"\n  1x Lead Pipe"..
 	"\n  1x 'Spark' Cigarettes (20pk) (Used)"..
@@ -118,7 +113,6 @@ ix.backgrounds["smoker"] = {
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("knife_1", 1)
-		character:GetPlayer():AddAddiction("StrongSmoker")
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  
@@ -130,7 +124,6 @@ ix.backgrounds["smoker"] = {
 ix.backgrounds["druggie"] = {
 	name = "Druggie",
 	description = "You've tried it all, and you're still hooked.".. 
-	"\n\nAddicted to drugs"..
 	"\n\nStarting Equipment:"..
 	"\n  1x Crowbar"..
 	"\n  1x Painkillers"..
@@ -145,7 +138,6 @@ ix.backgrounds["druggie"] = {
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("knife_1", 1)
-		character:GetPlayer():AddAddiction("DrugUser")
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  
@@ -157,8 +149,6 @@ ix.backgrounds["druggie"] = {
 ix.backgrounds["addict_light"] = {
 	name = "Addict (Light)",
 	description = "You lived a luxury life, but a sudden turn of events made you go to the zone.".. 
-	"\n\nAddicted to Light Alcohol"..
-	"\n\nAddicted to Nicotine"..
 	"\n\nStarting Equipment:"..
 	"\n  1x Contender (.45 ACP, .410 Magnum Buck) (Damaged)"..
 	"\n  15x rounds of .45 ACP"..
@@ -182,8 +172,6 @@ ix.backgrounds["addict_light"] = {
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("knife_1", 1)
 		character:GetInventory():Add("drug_cigarette_4", 1, {["quantity"] = math.random(13,15)})
-		character:GetPlayer():AddAddiction("LightAlcoholic")
-		character:GetPlayer():AddAddiction("LightSmoker")
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  

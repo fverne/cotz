@@ -38,8 +38,6 @@ ITEM.functions.use = {
 
 		ix.chat.Send(item.player, "iteminternal", "takes out a pill from the "..item.name.." and swallows it.", false)
 
-		item.player:GetCharacter():SatisfyAddictions("PrescriptionDrugs")
-
 		quantity = quantity - 1
 
 		if (quantity >= 1) then

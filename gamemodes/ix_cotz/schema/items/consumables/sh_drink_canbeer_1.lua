@@ -15,8 +15,6 @@ ITEM.quantity = 1
 
 ITEM.alcohol = 10
 
-ITEM.addictionLightAlcohol = true
-
 ITEM.sound = "stalkersound/inv_drink_can.mp3"
 ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/canbeer_1.png")
 
@@ -27,8 +25,6 @@ end
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
 	item.player:AddBuff("buff_radiationremoval", 10, { amount = 0.4 })
-
-	item.player:GetCharacter():SatisfyAddictions("CheapAlcohol")
 
 	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
 end)
