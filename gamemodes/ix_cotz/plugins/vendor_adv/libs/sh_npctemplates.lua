@@ -279,7 +279,6 @@ ix.npctemplates.templates["stalkernetnpc"] = {
 		["binoculars_5"] 	= { nil, 4, SELLANDBUY, 4, 1, 1 },
 		["compass"] 	= { nil, 6, SELLANDBUY, 6, 1, 1 },
 		["gpstracker"] 	= { nil, 6, SELLANDBUY, 6, 1, 1 },
-		["harmonica"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
 		["guitar"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
 	},
 }
