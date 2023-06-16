@@ -166,7 +166,7 @@ SWEP.Primary.Ammo			= "7.62x54MMR"
 SWEP.FireDelay = 0.05
 SWEP.FireSound = "CW_MP18_FIRE"
 SWEP.FireSoundSuppressed = "CW_WS_MOSIN_SUB"
-SWEP.Recoil = 2.2
+SWEP.Recoil = 7.2
 SWEP.AimViewModelFOV = 50
 SWEP.CustomizationMenuScale = 0.018
 

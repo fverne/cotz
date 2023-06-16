@@ -161,7 +161,7 @@ SWEP.SpeedDec = 15
 SWEP.ADSFireAnim = true
 SWEP.BipodFireAnim = true
 SWEP.AimBreathingIntensity = 1
-SWEP.AimBreathingEnabled = true
+SWEP.AimBreathingEnabled = false
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
