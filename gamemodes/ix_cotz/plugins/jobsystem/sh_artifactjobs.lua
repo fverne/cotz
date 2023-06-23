@@ -893,7 +893,7 @@ do
   tempJob.moneyReward = {100, 900}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_bolt_1")
+  ix.jobs.register(tempJob, "ItemJob1eco_artifact_bolt")
 
   tempJob = nil
 
@@ -911,7 +911,7 @@ do
   tempJob.moneyReward = {300, 2100}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_bolt_2")
+  ix.jobs.register(tempJob, "ItemJob2eco_artifact_bolt")
 
   tempJob = nil
 
@@ -929,7 +929,7 @@ do
   tempJob.moneyReward = {1000, 6000}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_bolt_5")
+  ix.jobs.register(tempJob, "ItemJob3eco_artifact_bolt")
 
   tempJob = nil
 
@@ -947,7 +947,7 @@ do
   tempJob.moneyReward = {2000, 4500}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_bonecluster_1")
+  ix.jobs.register(tempJob, "ItemJob1eco_artifact_bonecluster")
 
   tempJob = nil
 
@@ -965,7 +965,7 @@ do
   tempJob.moneyReward = {5000, 8000}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_bonecluster_2")
+  ix.jobs.register(tempJob, "ItemJob2eco_artifact_bonecluster")
 
   tempJob = nil
 
@@ -1055,7 +1055,7 @@ do
   tempJob.moneyReward = {2000, 4000}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_dwarfgalaxy_ammo")
+  ix.jobs.register(tempJob, "ItemJob1eco_artifact_dwarfgalaxy")
 
   tempJob = nil
 
@@ -1073,7 +1073,7 @@ do
   tempJob.moneyReward = {10000, 16000}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_dwarfgalaxy_money")
+  ix.jobs.register(tempJob, "ItemJob2eco_artifact_dwarfgalaxy")
 
   tempJob = nil
 
@@ -1361,7 +1361,7 @@ do
   tempJob.moneyReward = {500, 1000}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_slime_1")
+  ix.jobs.register(tempJob, "ItemJob1eco_artifact_slime")
 
   tempJob = nil
 
@@ -1379,7 +1379,7 @@ do
   tempJob.moneyReward = {2500, 3500}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_slime_2")
+  ix.jobs.register(tempJob, "ItemJob2eco_artifact_slime")
 
   tempJob = nil
 
@@ -1415,7 +1415,7 @@ do
   tempJob.moneyReward = {500, 1000}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_sparkler_1")
+  ix.jobs.register(tempJob, "ItemJob1eco_artifact_sparkler")
 
   tempJob = nil
 
@@ -1433,7 +1433,7 @@ do
   tempJob.moneyReward = {1500, 3000}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_sparkler_2")
+  ix.jobs.register(tempJob, "ItemJob2eco_artifact_sparkler")
 
   tempJob = nil
 
@@ -1451,7 +1451,7 @@ do
   tempJob.moneyReward = {500, 1000}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_thorn_1")
+  ix.jobs.register(tempJob, "ItemJob1eco_artifact_thorn")
 
   tempJob = nil
 
@@ -1469,7 +1469,7 @@ do
   tempJob.moneyReward = {1500, 3000}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_thorn_2")
+  ix.jobs.register(tempJob, "ItemJob2eco_artifact_thorn")
 
   tempJob = nil
 

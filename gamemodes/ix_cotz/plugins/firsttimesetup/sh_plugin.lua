@@ -101,6 +101,11 @@ if SERVER then
 			self:SpawnContainer(containerdata)
 		end
 
+		-- Spawn generic entities ; Another plugin needs to persist them
+		for _, entitydata in pairs(self.map_presets[game.GetMap()].entities) do
+			self:SpawnEntity(entitydata)
+		end
+
 		ix.plugin.list["containers"]:SaveContainer()
 
 		-- Spawn vendors
@@ -154,6 +159,19 @@ if SERVER then
 		ix.util.SpawnAdvVendor(vendordata.template, vendordata.position, vendordata.angles)
 	end
 
+	function PLUGIN:SpawnEntity(entitydata)
+		local ent = ents.Create(entitydata.class)
+		ent:SetPos(entitydata.position)
+		ent:SetAngles(entitydata.angles)
+		ent:Spawn()
+
+		local physObject = ent:GetPhysicsObject()
+
+		if (IsValid(physObject)) then
+			physObject:Sleep()
+			physObject:EnableMotion(false)
+		end
+
 	function PLUGIN:SaveData()
 		self:SetData({self.firstTimeSetupRun} or {false})
 	end
@@ -163,7 +181,25 @@ if SERVER then
 	end
 end
 
+ix.command.Add("FTSGetEntityVars", {
+	adminOnly = true,
+	OnRun = function(self, client)
+		local trace = client:GetEyeTraceNoCursor()
+		local ent = trace.Entity
 
+		if (ent and ent:IsValid()) then
+
+			local entitydata = {}
+			entitydata.class = ent:GetClass()
+			entitydata.position = ent:GetPos()
+			entitydata.angles = ent:GetAngles()
+
+			netstream.Start(client, "ix_clientSidePrintEntityVars", entitydata)
+		else
+			client:Notify("Not looking at an entity.")
+		end
+	end
+})
 
 ix.command.Add("FTSGetContainerVars", {
 	adminOnly = true,
@@ -251,6 +287,16 @@ if (CLIENT) then
 		print("      cyclicalCategory = \""..data.cyclicalCategory.."\",")
 		print("    },")
 		print("-----------------CONTAINER VARS END-----------------")
+	end)
+
+	netstream.Hook("ix_clientSidePrintEntityVars", function(data)
+		print("-----------------ENTITY VARS START-----------------")
+		print("    {")
+		print("      class = \""..data.class.."\",")
+		print("      position = Vector("..data.position.x..","..data.position.y..","..data.position.z.."),")
+		print("      angles = Angle("..data.angles.x..","..data.angles.y..","..data.angles.z.."),")
+		print("    },")
+		print("-----------------ENTITY VARS END-----------------")
 	end)
 
 	netstream.Hook("ix_DisplayFTSContainers", function(data)
