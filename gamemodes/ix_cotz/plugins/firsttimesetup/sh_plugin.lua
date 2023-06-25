@@ -171,6 +171,7 @@ if SERVER then
 			physObject:Sleep()
 			physObject:EnableMotion(false)
 		end
+	end
 
 	function PLUGIN:SaveData()
 		self:SetData({self.firstTimeSetupRun} or {false})
