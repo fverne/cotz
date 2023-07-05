@@ -248,7 +248,7 @@ ix.backgrounds["mobpawn"] = {
 		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 		character:GetInventory():Add("kit_newchar", 1)
-		character:GetInventory():Add("toz106", 1)
+		character:GetInventory():Add("toz106", 1, {["durability"] = 35})
 		character:GetInventory():Add("45acp41", 1, {["quantity"] = 30})
 	end,
 	OnLoaded = function(character)
@@ -380,7 +380,7 @@ ix.backgrounds["mobhitman"] = {
 		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 		character:GetInventory():Add("kit_newchar", 1)
-		character:GetInventory():Add("mp18", 1)
+		character:GetInventory():Add("mp18", 1, {["durability"] = 25})
 		character:GetInventory():Add("762x54", 1, {["quantity"] = 15})
 	end,
 	OnLoaded = function(character)
