@@ -74,69 +74,69 @@ function ITEM:PopulateTooltip(tooltip)
     end
 end
 
-ITEM.functions.hidestash = {
-    name = "Hide the Stash",
-    tip = "equipTip",
-    icon = "icon16/stalker/drop.png",
-    OnRun = function(item)
-        local trace = item.player:GetEyeTraceNoCursor()
-        local texturecheck = false
+-- ITEM.functions.hidestash = {
+--     name = "Hide the Stash",
+--     tip = "equipTip",
+--     icon = "icon16/stalker/drop.png",
+--     OnRun = function(item)
+--         local trace = item.player:GetEyeTraceNoCursor()
+--         local texturecheck = false
 
-    local TextureBlacklist = {
-		"PLASTER/PLASTERWALL013C",
-		"PLASTER/WALLPAPER001B",
-		"PLASTER/WALLPAPER002A",
-		"PLASTER/WALLPAPER002B",
-		"PLASTER/WALLPAPER003A",
-		"PLASTER/WALLPAPER003B",
-		"PLASTER/WALLPAPER005A",
-		}
+--     local TextureBlacklist = {
+-- 		"PLASTER/PLASTERWALL013C",
+-- 		"PLASTER/WALLPAPER001B",
+-- 		"PLASTER/WALLPAPER002A",
+-- 		"PLASTER/WALLPAPER002B",
+-- 		"PLASTER/WALLPAPER003A",
+-- 		"PLASTER/WALLPAPER003B",
+-- 		"PLASTER/WALLPAPER005A",
+-- 		}
 
-        if IsValid(trace.Entity) and trace.Entity:GetClass() == "ix_item" then
-            item.player:Notify("Do not look at an item when making a stash, look at the ground just next to it.")
+--         if IsValid(trace.Entity) and trace.Entity:GetClass() == "ix_item" then
+--             item.player:Notify("Do not look at an item when making a stash, look at the ground just next to it.")
 
-            return false
-        end
+--             return false
+--         end
 
-        if IsValid(trace.Entity) and trace.Entity:GetClass() == "ix_vendor_adv" or trace.Entity:GetClass() == "player" then
-            item.player:Notify("You can not make a stash inside a fellow STALKER, it is rude to do so. Seriously, what did you expect?")
+--         if IsValid(trace.Entity) and trace.Entity:GetClass() == "ix_vendor_adv" or trace.Entity:GetClass() == "player" then
+--             item.player:Notify("You can not make a stash inside a fellow STALKER, it is rude to do so. Seriously, what did you expect?")
 
-            return false
-        end
+--             return false
+--         end
 
-        if trace.MatType == 68 and not IsValid(trace.Entity) and not table.HasValue(TextureBlacklist, trace.HitTexture) then
-            texturecheck = true
-        end
+--         if trace.MatType == 68 and not IsValid(trace.Entity) and not table.HasValue(TextureBlacklist, trace.HitTexture) then
+--             texturecheck = true
+--         end
 
-        if not texturecheck then
-            item.player:Notify("You can not make a stash on this surface!")
+--         if not texturecheck then
+--             item.player:Notify("You can not make a stash on this surface!")
 
-            return false
-        end
+--             return false
+--         end
 
-        if texturecheck then
-            local quantity = item:GetData("quantity", item.quantity)
-            ix.chat.Send(item.player, "iteminternal", "takes out their " .. item.name .. ".", false)
-            ix.plugin.list["hidestash"]:StashHide(item.player)
-            quantity = quantity - 1
+--         if texturecheck then
+--             local quantity = item:GetData("quantity", item.quantity)
+--             ix.chat.Send(item.player, "iteminternal", "takes out their " .. item.name .. ".", false)
+--             ix.plugin.list["hidestash"]:StashHide(item.player)
+--             quantity = quantity - 1
 
-            if (quantity >= 1) then
-                item:SetData("quantity", quantity)
+--             if (quantity >= 1) then
+--                 item:SetData("quantity", quantity)
 
-                return false
-            end
-        end
+--                 return false
+--             end
+--         end
 
-        item.player:Notify("Your " .. item.name .. " broke!")
+--         item.player:Notify("Your " .. item.name .. " broke!")
 
-        return true
-    end,
-    OnCanRun = function(item)
-        local client = item.player
+--         return true
+--     end,
+--     OnCanRun = function(item)
+--         local client = item.player
 
-        return not IsValid(item.entity) and IsValid(client) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
-    end
-}
+--         return not IsValid(item.entity) and IsValid(client) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
+--     end
+-- }
 
 ITEM.functions.unhidestash = {
     name = "Search for a Stash",
