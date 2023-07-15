@@ -58,7 +58,7 @@ end
 SWEP.ADSFireAnim = true
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -300}, atts = {"md_microt1", "md_eotech"}},
-["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds", "am_magnumbuck"}}
+	["+reload"] = {header = "Ammo", offset = {800, -200}, atts = {"am_hollowpoint", "am_armorpiercing", "am_410buck"}}
 }
 
 SWEP.Animations = {fire = "cycle0",
@@ -113,7 +113,7 @@ SWEP.AdminSpawnable		= true
 SWEP.Primary.ClipSize		= 2
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo			= ".45 ACP -41-"
+SWEP.Primary.Ammo			= ".45 ACP"
 
 SWEP.WearDamage = 0.5
 SWEP.WearEffect = 0.05
@@ -128,11 +128,11 @@ SWEP.HipSpread = 0.06
 SWEP.AimSpread = 0.015
 SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.35
-SWEP.ClumpSpread = 0.025
+--SWEP.ClumpSpread = 0.025
 SWEP.SpreadPerShot = 0.19
 SWEP.SpreadCooldown = 1
 SWEP.Shots = 5
-SWEP.Damage = 36
+SWEP.Damage = 85
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1

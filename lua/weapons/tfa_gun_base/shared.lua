@@ -932,7 +932,7 @@ function SWEP:Initialize()
 	self.canholster=false
 	
 	self:DetectValidAnimations()
-	self:SetDeploySpeed(self.SequenceLength[ACT_VM_DRAW])
+	--self:SetDeploySpeed(self.SequenceLength[ACT_VM_DRAW])
 	
 	if !self.Primary.ClipMax then
 		self.Primary.ClipMax = self.Primary.ClipSize * 3
@@ -1005,7 +1005,7 @@ function SWEP:Deploy()
 	end
 	
 	if self.isfirstdraw then
-		self:SetDeploySpeed(self.SequenceLength[ACT_VM_DRAW])
+		--self:SetDeploySpeed(self.SequenceLength[ACT_VM_DRAW])
 	end
 	
 	self:ResetSightsProgress()
