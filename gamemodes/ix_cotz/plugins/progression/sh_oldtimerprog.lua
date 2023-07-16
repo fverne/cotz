@@ -20,10 +20,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["hide_dog"] = 10,
+			["hide_blinddog"] = 10,
 			["hide_flesh"] = 10,
 			["hide_tushkano"] = 10,
-			["part_zombie"] = 40,
+			["part_zombie_1"] = 40,
 			["part_swampcontroller_2"] = 5,
 		}	
 

@@ -278,7 +278,7 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 		local itemids = {
 			["hide_pseudodog"] = 5,
 			["hide_cat"] = 10,
-			["hide_dog"] = 10,
+			["hide_blinddog"] = 10,
 		}
 
 		return itemids

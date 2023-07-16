@@ -113,7 +113,7 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 	GetItemIds = function()
 		local itemids = {
 			["value_paracord"] = 15,
-			["hide_dog"] = 8,
+			["hide_blinddog"] = 8,
 		}	
 
 		return itemids
