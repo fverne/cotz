@@ -25,7 +25,12 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["fireaxe"] = 10,
+			["crowbar"] = 10,
+			["hatchet"] = 10,
+			["machete"] = 10,
+			["leadpipe"] = 10,
+			["sledgehammer"] = 10,
 		}	
 
 		return itemids
@@ -107,7 +112,8 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["value_paracord"] = 15,
+			["hide_dog"] = 8,
 		}	
 
 		return itemids
@@ -189,7 +195,10 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["value_techtool_1"] = 5,
+			["artifact_bolt"] = 20,
+			["artifact_bonecluster"] = 15,
+			["artifact_mementomori"] = 10,
 		}	
 
 		return itemids
@@ -271,7 +280,7 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["drug_cigarette_4"] = 200,
 		}	
 
 		return itemids
@@ -353,7 +362,8 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["drug_tobacco_1"] = 160,
+			["drug_tobacco_2"] = 160,
 		}	
 
 		return itemids
@@ -435,7 +445,10 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["drink_spirit_3"] = 70,
+			["drink_canbeer_3"] = 120,
+			["drink_canbeer_4"] = 120,
+			["drink_canbeer_5"] = 120,
 		}	
 
 		return itemids
@@ -517,7 +530,7 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["drink_wine"] = 100,
 		}	
 
 		return itemids
@@ -557,7 +570,7 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = "I just finished a batch of suits, they're ready for purchase now."
+				local message = "I just finished a batch of lightweight Wind suits, they're ready for purchase now."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -603,7 +616,7 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["value_glue_2"] = 10,
 		}	
 
 		return itemids
@@ -643,7 +656,7 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = "I just finished a batch of suits, they're ready for purchase now."
+				local message = "You've gotta pimp your suits, different patches and camouflages are now available."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -674,7 +687,7 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 		local dat = ix.progression.status["technutItemDelivery_Helmet1"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks Steel Helmets, german and russian :\n"
+		local str = "Fancy vests is good and all, but protected body won't save you from a bullet in your face. I have an idea for some simple headgear, but I need some items to make them.\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -686,7 +699,7 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["artifact_bolt"] = 5, --Placeholder?
 		}	
 
 		return itemids
@@ -726,7 +739,7 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks Steel Helmets, german and russian"
+				local message = "Steel helmets are up and available for purchase."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -758,7 +771,7 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 		local dat = ix.progression.status["technutItemDelivery_Helmet2"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks flighthelmet, flighthelmetvisor :\n"
+		local str = "Well, I agree, a simple steel cap is not a good option. I've recovered some schematic for aviation helmets. They are light, comfy, and won't block your vision.\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -770,7 +783,12 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["value_carbattery"] = 3,
+			["value_wire_heavy"] = 10,
+			["value_tape_electric"] = 45,
+			["value_tape_duct"] = 25,
+			["value_motorclean"] = 15,
+			["value_gasoline"] = 5,
 		}	
 
 		return itemids
@@ -810,7 +828,7 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks flighthelmet, flighthelmetvisor"
+				local message = "Prepare to fly through the Zone with the new headgear!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -842,7 +860,7 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 		local dat = ix.progression.status["technutItemDelivery_Helmet3"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks pasgt :\n"
+		local str = "Flight helmets are good, but looks like we need more down-to-earth headgear. I can make some Ukraine military helmets, but I need soom items.\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -854,7 +872,7 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["artifact_droplet"] = 50,
 		}	
 
 		return itemids
@@ -925,7 +943,7 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 		local dat = ix.progression.status["technutItemDelivery_Helmet4"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks fraghelmet :\n"
+		local str = "You know what? Why don't I just combine a decent helmet and a respirator together? The creator of this schematic though the same, and I can recreate it. \n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -937,7 +955,8 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["artifact_droplet"] = 20,
+			["artifact_crystal"] = 20,
 		}	
 
 		return itemids
@@ -977,7 +996,7 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks fraghelmet"
+				local message = "Frag helmets with respirator are now available, come and buy!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1008,7 +1027,7 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 		local dat = ix.progression.status["technutItemDelivery_Helmet5"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks sphere08 :\n"
+		local str = "Hey! So, the PASGT is all well and good, but it isn't giving the kind of protection people like against bullets. Interested in helping me put together something a little better?\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1020,7 +1039,8 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["artifact_bonecluster"] = 50,
+			["artifact_arachno"] = 5,
 		}	
 
 		return itemids
@@ -1060,7 +1080,7 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks sphere08"
+				local message = "I've figured out how to reproduce Sphere-08 helmets! Come grab some noggin protection!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1091,7 +1111,7 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 		local dat = ix.progression.status["technutItemDelivery_Helmet6"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks ach :\n"
+		local str = "So, the Sphere-08 project is going alright, but it's really friggin' heavy. I've got a few ideas to lighten it and improve on the PASGT design! What do you say?\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1103,7 +1123,8 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["artifact_slug"] = 40,
+			["artifact_mica"] = 15,
 		}	
 
 		return itemids
@@ -1143,7 +1164,7 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks ach"
+				local message = "I now carry ACH helmets! These babies from the West are both protective and lightweight!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1174,7 +1195,7 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 		local dat = ix.progression.status["technutItemDelivery_Helmet7"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks sphere12 :\n"
+		local str = "I've gotten a good look at one of the Spetsnaz Sphere-12 helmets and I'm pretty sure I can upgrade them, but I'm gonna need some special materials. Care to help me out?\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1186,7 +1207,8 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["artifact_mamasbeads"] = 35,
+			["artifact_gmamasbeads"] = 5,
 		}	
 
 		return itemids
@@ -1226,7 +1248,7 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks sphere12"
+				local message = "I've now got Sphere-12 heavy helmets! These things are the best of the best!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1262,7 +1284,7 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 		local dat = ix.progression.status["technutItemDelivery_Mask1"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks halfmask :\n"
+		local str = "So, the Swamps are pretty toxic... before we go much further into the Zone, we're gonna need some kind of radioprotectant. I have an idea, but I'm going to need some materials to make them.\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1274,7 +1296,10 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["value_engine"] = 5,
+			["value_waterfilter"] = 18,
+			["value_tape_heavy"] = 6,
+			["value_tape_duct"] = 12,
 		}	
 
 		return itemids
@@ -1314,7 +1339,7 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks halfmask"
+				local message = "I've managed to whip up a batch of respirators! Come grab one to keep yourself safe from radiation!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1345,7 +1370,7 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 		local dat = ix.progression.status["technutItemDelivery_Mask2"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks gp5 :\n"
+		local str = "So, respirators are nice, but they don't protect your eyes and ears! I'm busy refitting some GP-5 gas mask filters to not use asbestos, because we want the masks to avoid cancer, not get it! Want to help me out?\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1357,7 +1382,7 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["value_gasoline"] = 15,
 		}	
 
 		return itemids
@@ -1397,7 +1422,7 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks gp5"
+				local message = "GP-5 gas masks have been refit and are now safe for use! No asbestos for us!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1428,7 +1453,7 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 		local dat = ix.progression.status["technutItemDelivery_Mask3"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks eo20, eo20old :\n"
+		local str = "I don't know if you've noticed, but the filters on the PBF gas mask are a bit of a pain to find. I think I've figured out a way to refit them to accept 40mm filters and to trim some weight to boot! Can you grab me a few things to get the job done?\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1440,7 +1465,7 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["value_gasoline"] = 15,
 		}	
 
 		return itemids
@@ -1480,7 +1505,7 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks eo20, eo20old"
+				local message = "I've managed to refit the EO-20 to take 40mm external filters! Come and grab one!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1517,7 +1542,7 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 		local dat = ix.progression.status["technutItemDelivery_Attachment1"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks attachment_steelplate_1, attachment_ceramicplate_1 :\n"
+		local str = "So, a lot of these suits have plate carriers, but we kinda need the plates to get the job done. I'm gonna make them, but I need the stuff to do it!\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1529,7 +1554,8 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["cmore"] = 15,
+			["foregrip"] = 20,
 		}	
 
 		return itemids
@@ -1569,7 +1595,7 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks attachment_steelplate_1, attachment_ceramicplate_1"
+				local message = "I've managed to put together some basic steel and ceramic armour plates!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1601,7 +1627,7 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 		local dat = ix.progression.status["technutItemDelivery_Attachment2"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks attachment_steelplate_2, attachment_ceramicplate_2 :\n"
+		local str = "The handmade plates are okay, but they fold pretty quickly in a firefight. I know someone willing to sell me the plans for better ones, but he's got a steep shopping list for the components...\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1613,7 +1639,8 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["cobrasuppressor"] = 15,
+			["tundrasuppressor"] = 10,
 		}	
 
 		return itemids
@@ -1653,7 +1680,7 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks attachment_steelplate_2, attachment_ceramicplate_2"
+				local message = "I've managed to fabricate some better quality plates! Come grab them!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1685,7 +1712,7 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 		local dat = ix.progression.status["technutItemDelivery_Attachment3"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks attachment_steelplate_3, attachment_ceramicplate_3 :\n"
+		local str = "As we're pushing further north, we're gonna need better steel and ceramic to help keep you guys alive. Interested in helping me make the best stuff money can buy?\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1697,7 +1724,8 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["pbssuppressor"] = 15,
+			["sakersuppressor"] = 10,
 		}	
 
 		return itemids
@@ -1737,7 +1765,7 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks attachment_steelplate_3, attachment_ceramicplate_3"
+				local message = "High quality ballistic inserts are now available for purchase!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1767,7 +1795,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 		local dat = ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks attachment_fabric_1:\n"
+		local str = "If you're interested in going artefact hunting, you're gonna need proper protection. We don't exactly have SEVA suits sitting around right now, so I think instead I can get some thermal lining into your suits! I just need materials for the prototypes.\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1779,7 +1807,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["anorak"] = 100,
 		}	
 
 		return itemids
@@ -1819,7 +1847,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks attachment_fabric_1"
+				local message = "Insulating fabrics are now available! No burning to death if I can help it!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1850,7 +1878,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 		local dat = ix.progression.status["technutItemDelivery_AttachmentFabric2"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks attachment_fabric_2:\n"
+		local str = "How's the insulating fabric treating you? I managed to get my hands on plans for a heavier duty set, but I need more stuff to stitch them together! Wanna help me out?!:\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1862,7 +1890,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["part_zombie_1"] = 500,
 		}	
 
 		return itemids
@@ -1902,7 +1930,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks attachment_fabric_2"
+				local message = "Heavy insulating fabric layers are now available! Come hit me up!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1932,7 +1960,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 		local dat = ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks attachment_aluframe:\n"
+		local str = "Even with big backpacks, have you noticed how damn heavy they can get when you pack them up kinda funky? So have I! I've taken some inspiration from the old ALICE backpacks and I think I can put together some frames that'll help take a load off!\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1944,7 +1972,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["food_can_sprats"] = 200,
 		}	
 
 		return itemids
@@ -1984,7 +2012,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks attachment_aluframe"
+				local message = "Aluminium backpack frames are now available for sale! Come save your back some pain! Just be careful around anomalies, though..."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -2015,7 +2043,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 		local dat = ix.progression.status["technutItemDelivery_AttachmentFrame2"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks attachment_steelframe:\n"
+		local str = "So, the aluminium frame is all well and good, but then it hit me; why get something decent from aluminium when you can get something great from steel! Bring me what I need and I'll make it happen!\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -2027,7 +2055,8 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["value_techtool_1"] = 20,
+			["value_techtool_2"] = 10,
 		}	
 
 		return itemids
@@ -2067,7 +2096,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message =  " ## PLACEHOLDER ## - Unlocks attachment_steelframe"
+				local message =  "Steel backpack frames are now available! Be extra careful around anomalies, though!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -2098,7 +2127,7 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 		local dat = ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks attachment_carbonfibre:\n"
+		local str = "I got my hands on some plans for a lining even better than the insulating kind! It'll be very expensive to make, but I think I can do it! I just need prototype materials...\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -2110,7 +2139,7 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["value_toiletpaper"] = 750,
 		}	
 
 		return itemids
@@ -2150,7 +2179,7 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks attachment_carbonfibre"
+				local message = "Carbon fibre inserts are now available! They're really expensive, but you can find nothing better for anomaly protection!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -2181,7 +2210,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 		local dat = ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks attachment_kevlar_1:\n"
+		local str = "So, steel and ceramic plates are good, but they're also really heavy. We're in the 2000s, we're well past the point of super heavy body armour! I think I can piece together something out of kevlar, but the prototypes so far haven't come out great. Wanna help me find materials?\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -2193,7 +2222,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["value_battery"] = 600,
 		}	
 
 		return itemids
@@ -2233,7 +2262,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks attachment_kevlar_1"
+				local message = "K119 Kevlar plates are here to help keep you in the fight!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -2265,7 +2294,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 		local dat = ix.progression.status["technutItemDelivery_AttachmentKevlar2"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks attachment_kevlar_2:\n"
+		local str = "The K119 seems to be doing the job well, but there's always room for improvement! Want to help me make them better? Bring me new materials to work with!\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -2277,7 +2306,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["value_9vbattery"] = 450,
 		}	
 
 		return itemids
@@ -2317,7 +2346,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks attachment_kevlar_2"
+				local message = "K29 Kevlar plates are now in production! They're lightweight, comfortable, and have the bonus of keeping you alive!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,

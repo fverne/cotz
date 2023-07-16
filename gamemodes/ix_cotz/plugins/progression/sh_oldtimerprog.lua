@@ -1,6 +1,6 @@
 ix.progression.Register("oldtimerItemDelivery_Knife1", {
 	name = "Backstabbing 1",
-	description = "## PLACEHOLDER ##",
+	description = "Prove your worth as a small game hunter to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = true,
 	BuildResponse = function(self, status)
@@ -8,7 +8,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 		local dat = ix.progression.status["oldtimerItemDelivery_Knife1"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks Kitchen Knife:\n"
+		local str = "You are still new to the Zone, stalker. You may have been out on a few trips, but you are still completely unprepared for what it can and will throw at you. If you are interested in proving your worth as a hunter, then get out there and show me what you can do with little more than a piece of rebar and your instincts.\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -20,7 +20,11 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["hide_dog"] = 10,
+			["hide_flesh"] = 10,
+			["hide_tushkano"] = 10,
+			["part_zombie"] = 40,
+			["part_swampcontroller_2"] = 5,
 		}	
 
 		return itemids
@@ -60,7 +64,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 
 			timer.Simple(60, function()
 				local name = "'Old Timer'"
-				local message = "Now available in my shop: Kitchen Knife."
+				local message = "You all seem ready for tougher game. I now have proper knives available for purchase."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -82,7 +86,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 
 ix.progression.Register("oldtimerItemDelivery_Knife2", {
 	name = "Backstabbing 2",
-	description = "## PLACEHOLDER ##",
+	description = "Prove your worth as a big game hunter to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
 	BuildResponse = function(self, status)
@@ -90,7 +94,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 		local dat = ix.progression.status["oldtimerItemDelivery_Knife2"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks Survival Knife:\n"
+		local str = "You may have seen some of the game the Zone has to offer, but have you taken on a chimera? A pseudogiant? Multiple of them at once? i have a test for you and other would be hunters. Enter the Zone and bring me back proof that you have been to hell and back again.\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -102,7 +106,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["hide_spider"] = 5,
+			["hide_controller"] = 5,
+			["hide_vareshka"] = 5,
+			["part_controller_2"] = 10,
 		}	
 
 		return itemids
@@ -142,7 +149,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 
 			timer.Simple(60, function()
 				local name = "'Old Timer'"
-				local message = "Now available in my shop: Survival Knife."
+				local message = "You are ready. To those passionate hunters among you, I now offer my best knives for sale."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -164,7 +171,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 
 ix.progression.Register("oldtimerItemDelivery_Knife3", {
 	name = "Backstabbing 3",
-	description = "## PLACEHOLDER ##",
+	description = "Prove your worth as a knife fighter to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
 	BuildResponse = function(self, status)
@@ -172,7 +179,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 		local dat = ix.progression.status["oldtimerItemDelivery_Knife3"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks Battered Bayonet:\n"
+		local str = "You and yours are seasoned fighters; I can see it in your eyes. The way you carry yourselves, the way you walk... the cues are obvious to those well-versed enough to look for them. If you are searching for a blade better suited to combat than hunting, you must prove yourself worthy of bearing your steel. Show me what you are capable of.\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -184,7 +191,11 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["hide_pseudogiant"] = 4,
+			["hide_chimera"] = 4,
+			["hide_karlik"] = 4,
+			["part_electrocontroller_2"] = 10,
+			["part_karlik_2"] = 10,
 		}	
 
 		return itemids
@@ -224,7 +235,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 
 			timer.Simple(60, function()
 				local name = "'Old Timer'"
-				local message = "Now available in my shop: Battered Bayonet."
+				local message = "There are true knife fighters among you. I now offer bayonets more suited to combat than hunting to those fond of the dance of blades."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -246,7 +257,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 
 ix.progression.Register("oldtimerItemDelivery_Melee", {
 	name = "Clubbing",
-	description = "## PLACEHOLDER ##",
+	description = "Prove your worth as a warrior to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = true,
 	BuildResponse = function(self, status)
@@ -254,7 +265,7 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 		local dat = ix.progression.status["oldtimerItemDelivery_Melee"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks Bat, Fireaxe, Fubar, Hatchet, Machete:\n"
+		local str = "Do you carry a melee weapon with you, stalker? They are both economic solutions for poorer stalkers and useful kit to those who are able to dance in and out of battle with the claws of mutants. A well aimed blow with such weapons can instantly kill some threats. Take to the field of battle, stalker, and prove your worth.\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -266,7 +277,7 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["artifact_bolt"] = 5,
 		}	
 
 		return itemids
@@ -306,7 +317,7 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 
 			timer.Simple(60, function()
 				local name = "'Old Timer'"
-				local message = "Now available in my shop: Unlocks Bat, Fireaxe, Fubar, Hatchet, Machete."
+				local message = "Though the middle ages are long behind us, I see within you all a warrior's spirit. I now carry new melee weapons that are a cut above what you previously had."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -332,7 +343,7 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 
 ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 	name = "Hiding Secrets 1",
-	description = "## PLACEHOLDER ##",
+	description = "Prove your worth as a seeker to Old Timer",
 	keyNpc = "'Old Timer'",
 	defaultActive = true,
 	BuildResponse = function(self, status)
@@ -340,7 +351,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 		local dat = ix.progression.status["oldtimerItemDelivery_Hidestash1"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks Cleaning Kit:\n"
+		local str = "Have you found some of the hidden secrets of the Zone, stalker? Not all of them are figuratively buried; some stashes are literally hidden underground. If you are interested in moving on from digging in the dirt with spoons, you must first demonstrate mastery.\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -352,7 +363,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["artifact_bolt"] = 15,
 		}	
 
 		return itemids
@@ -392,7 +403,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 
 			timer.Simple(60, function()
 				local name = "'Old Timer'"
-				local message = "Now available in my shop: Cleaning Kit."
+				local message = "I see in you the eyes of seekers and hands stained with dirt from a long dig, yet the rewards speak for themselves. I now offer sturdier tools for digging."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -415,7 +426,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 
 ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 	name = "Hiding Secrets 2",
-	description = "## PLACEHOLDER ##",
+	description = "Prove your worth as a treasure hunter to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
 	BuildResponse = function(self, status)
@@ -423,7 +434,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 		local dat = ix.progression.status["oldtimerItemDelivery_Hidestash2"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "## PLACEHOLDER ## - Unlocks Shovel:\n"
+		local str = "Have you grown tired of using small hand tools in your searches, stalker? Before man mastered gunpowder and the rifle, he mastered the sword with the riddle of steel, and before the sword came the stone. You must become a master with the stone before you may pick up the sword. Show me your skill.\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -435,7 +446,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 1,
+			["artifact_bolt"] = 50,
 		}	
 
 		return itemids
@@ -475,7 +486,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 
 			timer.Simple(60, function()
 				local name = "'Old Timer'"
-				local message = "Now available in my shop: Shovel."
+				local message = "You are ready to move on from smaller tools. For those of you who are proud excavators, I now offer entrenching tools."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
