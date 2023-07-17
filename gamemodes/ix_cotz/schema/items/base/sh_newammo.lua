@@ -89,16 +89,20 @@ ITEM.functions.split = {
 			return false
 		end
 
-		return (!IsValid(item.entity))
+		return (!IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID())
 	end,
     OnRun = function(item, data)
 		if data[1] then
 			local quantity = item:GetData("quantity", item.ammoAmount)
 			local client = item.player
 
-			client:GetCharacter():GetInventory():Add(item.uniqueID, 1, {["quantity"] = data[1]})
-
 			quantity = quantity - data[1]
+
+			if quantity <= 0 then
+				return false
+			end
+
+			client:GetCharacter():GetInventory():Add(item.uniqueID, 1, {["quantity"] = data[1]})
 
 			item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
 

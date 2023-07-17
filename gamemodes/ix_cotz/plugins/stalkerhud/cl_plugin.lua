@@ -290,7 +290,7 @@ end
 ix.hud.attackers = {}
 net.Receive( "cotz_ShotInd", function( len )
 	local attacker = net.ReadEntity()
-	if attacker then
+	if IsValid(attacker) then
 		ix.hud.attackers[attacker] = { UnPredictedCurTime() + 2, attacker:GetPos() }
 	end
 end )

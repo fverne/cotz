@@ -102,7 +102,7 @@ ix.command.Add("debugupgradesafeopen", {
                 entity = client,
                 name = "Personal Storage",
                 searchText = "Accessing personal storage...",
-                searchTime = ix.config.Get("containerOpenTime", 1)
+                searchTime = 0
             })
         end)
     end,

@@ -71,7 +71,7 @@ ITEM.functions.use = {
 		return targets
 		end,
 	OnCanRun = function(item)				
-		return (!IsValid(item.entity)) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
+		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end,
 	OnRun = function(item, data)
 		local client = item.player
@@ -102,7 +102,7 @@ ITEM.functions.use = {
 		end
 
 		if( isfunction(ix.armortables.attachments[item.attachName].onAttach) ) then
-			ix.armortables.attachments[item.attachName].onAttach(client)
+			ix.armortables.attachments[item.attachName].onAttach(client, target)
 		end
 
 		table.insert(targetAttach,item.attachName)

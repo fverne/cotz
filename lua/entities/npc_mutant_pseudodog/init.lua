@@ -11,7 +11,7 @@ ENT.DieSound.max = 2
 ENT.MeleeSoundEnabled = true
 ENT.MeleeSound.name = "Stalker.Pseudodog.Melee"
 ENT.MeleeSound.min = 1
-ENT.MeleeSound.max = 4
+ENT.MeleeSound.max = 3
 
 ENT.IdlingSoundEnabled = true
 ENT.IdlingSound.name = "Stalker.Pseudodog.Idle"

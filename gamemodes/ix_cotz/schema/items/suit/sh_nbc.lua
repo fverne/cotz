@@ -37,23 +37,23 @@ ITEM.skincustom[2] = {
 	skingroup = 1,
 	modelOverride = "models/nasca/stalker/male_nbc_lone.mdl",
 }
-ITEM.skincustom[3] = {
-	name = "Duty",
-	skingroup = 0,
-	modelOverride = "models/nasca/stalker/male_nbc_duty.mdl",
-}
-ITEM.skincustom[4] = {
-	name = "Freedom",
-	skingroup = 0,
-	modelOverride = "models/nasca/stalker/male_nbc_free.mdl",
-}
-ITEM.skincustom[5] = {
-	name = "Ecologist",
-	skingroup = 0,
-	modelOverride = "models/nasca/stalker/male_nbc_mono.mdl",
-}
-ITEM.skincustom[6] = {
-	name = "Monolith",
-	skingroup = 0,
-	modelOverride = "models/nasca/stalker/male_nbc_mono.mdl",
-}
+-- ITEM.skincustom[3] = {
+-- 	name = "Duty",
+-- 	skingroup = 0,
+-- 	modelOverride = "models/nasca/stalker/male_nbc_duty.mdl",
+-- }
+-- ITEM.skincustom[4] = {
+-- 	name = "Freedom",
+-- 	skingroup = 0,
+-- 	modelOverride = "models/nasca/stalker/male_nbc_free.mdl",
+-- }
+-- ITEM.skincustom[5] = {
+-- 	name = "Ecologist",
+-- 	skingroup = 0,
+-- 	modelOverride = "models/nasca/stalker/male_nbc_mono.mdl",
+-- }
+-- ITEM.skincustom[6] = {
+-- 	name = "Monolith",
+-- 	skingroup = 0,
+-- 	modelOverride = "models/nasca/stalker/male_nbc_mono.mdl",
+-- }

@@ -115,6 +115,7 @@ SWEP.ReloadTime_Empty = 2.7
 SWEP.ReloadHalt = 5.5
 SWEP.ReloadHalt_Empty = 4.5
 
+
 function SWEP:IndividualInitialize()
 	self:setBodygroup( 1 , 1 )
 end

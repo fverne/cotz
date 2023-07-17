@@ -71,13 +71,19 @@ function playerMeta:ActivateHotkey(hotkeyindex)
 				action = v
 			end
 		end
-	end
 
-	if (info and info.OnCanRun and info.OnCanRun(item) != false) then
-		ix.item.PerformInventoryAction(client, action, item.id, inv.id)
-
-		if !inv:HasItem(char:GetHotkeyItemName(hotkeyindex)) then
-			netstream.Start(client, "ixHotkeyItemUpdate", hotkeyindex)
+		if (IsValid(client) and client:GetCharacter()) then
+			item.player = client
+	
+			if (info and info.OnCanRun and info.OnCanRun(item) != false) then
+				ix.item.PerformInventoryAction(client, action, item, inv.id)
+	
+				if !inv:HasItem(char:GetHotkeyItemName(hotkeyindex)) then
+					netstream.Start(client, "ixHotkeyItemUpdate", hotkeyindex)
+				end
+			end
+			
+			item.player = nil
 		end
 	end
 end

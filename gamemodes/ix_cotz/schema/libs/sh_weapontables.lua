@@ -163,14 +163,12 @@ ix.armortables.attachments["steelframe"] = {
 	weight = 2.500,
 	ar = -0.20,
 	uID = "attachment_steelframe",
-	onAttach = function(player)
-		local armor = player:getEquippedBodyArmor()
+	onAttach = function(player, armor)
 		if armor then
 			armor:SetData("carryinc", armor:GetData("carryinc", 0) + 25)
 		end
 	end,
-	onDetach = function(player)
-		local armor = player:getEquippedBodyArmor()
+	onDetach = function(player, armor)
 		if armor then
 			armor:SetData("carryinc", armor:GetData("carryinc", 0) - 25)
 		end
@@ -182,14 +180,12 @@ ix.armortables.attachments["aluframe"] = {
 	weight = 0.800,
 	ar = -0.15,
 	uID = "attachment_aluframe",
-	onAttach = function(player)
-		local armor = player:getEquippedBodyArmor()
+	onAttach = function(player, armor)
 		if armor then
 			armor:SetData("carryinc", armor:GetData("carryinc", 0) + 15)
 		end
 	end,
-	onDetach = function(player)
-		local armor = player:getEquippedBodyArmor()
+	onDetach = function(player, armor)
 		if armor then
 			armor:SetData("carryinc", armor:GetData("carryinc", 0) - 15)
 		end

@@ -134,9 +134,9 @@ function PANEL:OnChildAdded(panel)
 end
 
 function PANEL:SetLocalInventory(inventory)
-	if (IsValid(ix.gui.inv1) and !IsValid(ix.gui.menu)) then
-		ix.gui.inv1:SetInventory(inventory)
-		ix.gui.frame:SetPos(self:GetWide() / 2 + self:GetFrameMargin() / 2, self:GetTall() / 2 - ix.gui.inv1:GetTall() / 2)
+	if (!IsValid(ix.gui.menu)) then
+		-- ix.gui.inv1:SetInventory(inventory)
+		ix.gui.frame:SetPos(self:GetWide() / 2 + self:GetFrameMargin() / 2, self:GetTall() / 2 - ix.gui.frame:GetTall() / 2)
 	end
 end
 

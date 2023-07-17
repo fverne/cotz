@@ -416,7 +416,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 		local client = item.player
 
 		return !IsValid(item.entity) and IsValid(client) and item:GetData("equip") == true and
-			hook.Run("CanPlayerUnequipItem", client, item) != false and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
+			hook.Run("CanPlayerUnequipItem", client, item) != false and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
 
@@ -486,7 +486,7 @@ ITEM.functions.Equip = {
 		local client = item.player
 
 		return !IsValid(item.entity) and IsValid(client) and item:GetData("equip") != true and
-			hook.Run("CanPlayerEquipItem", client, item) != false and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
+			hook.Run("CanPlayerEquipItem", client, item) != false and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
 
@@ -513,13 +513,6 @@ ITEM.functions.detach = {
 	OnRun = function(item, data)
 		if data[1] then
 
-			if not item.player:GetCharacter():GetInventory():Add(ix.armortables.attachments[data[1]].uID) then
-				local position = item.player:GetItemDropPos()
-				ix.item.Spawn(ix.armortables.attachments[data[1]].uID, position, nil, AngleRand())
-				position = position + Vector(0, 0, 5)
-				item.player:Notify("No space in your inventory! Items have been dropped.")
-			end
-
 			local curattach = item:GetData("attachments") or {}
 			local iterator = 0
 			for i = 1, #curattach do
@@ -528,10 +521,20 @@ ITEM.functions.detach = {
 					break
 				end
 			end
-			table.remove(curattach,iterator)
+
+			if table.remove(curattach,iterator) == nil then
+				return false
+			end
+
+			if not item.player:GetCharacter():GetInventory():Add(ix.armortables.attachments[data[1]].uID) then
+				local position = item.player:GetItemDropPos()
+				ix.item.Spawn(ix.armortables.attachments[data[1]].uID, position, nil, AngleRand())
+				position = position + Vector(0, 0, 5)
+				item.player:Notify("No space in your inventory! Items have been dropped.")
+			end			
 
 			if( isfunction(ix.armortables.attachments[data[1]].onDetach) ) then
-				ix.armortables.attachments[data[1]].onDetach(item.player)
+				ix.armortables.attachments[data[1]].onDetach(item.player, item)
 			end
 
 			item:SetData("attachments", curattach)
@@ -748,7 +751,7 @@ function ITEM:RunAllAttachmentAttach()
 	for k,v in pairs(attachments) do
 		if (!ix.armortables.attachments[v]) then continue end
 		if ix.armortables.attachments[v].onAttach then
-			ix.armortables.attachments[v].onAttach(self:GetOwner())
+			ix.armortables.attachments[v].onAttach(self:GetOwner(), self)
 		end
 	end
 end
@@ -759,7 +762,7 @@ function ITEM:RunAllAttachmentDetach()
 	for k,v in pairs(attachments) do
 		if (!ix.armortables.attachments[v]) then continue end
 		if ix.armortables.attachments[v].onDetach then
-			ix.armortables.attachments[v].onDetach(self:GetOwner())
+			ix.armortables.attachments[v].onDetach(self:GetOwner(), self)
 		end
 	end
 end

@@ -138,6 +138,7 @@ end
 --     end
 -- }
 
+
 ITEM.functions.unhidestash = {
     name = "Search for a Stash",
     tip = "equipTip",
@@ -161,6 +162,6 @@ ITEM.functions.unhidestash = {
     OnCanRun = function(item)
         local client = item.player
 
-        return not IsValid(item.entity) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
+        return not IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }

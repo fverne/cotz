@@ -62,7 +62,7 @@ ITEM.functions.use = {
     return targets
     end,
   OnCanRun = function(item)
-    return (!IsValid(item.entity)) and item.invID == item:GetOwner():GetCharacter():GetInventory():GetID()
+    return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
   end,
   OnRun = function(item, data)
     if(!data[1]) then return false end

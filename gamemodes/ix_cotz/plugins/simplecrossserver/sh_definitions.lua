@@ -14,7 +14,7 @@
 
 
 PLUGIN.mapdata["rp_marsh_cs"] = {}
-PLUGIN.mapdata["rp_marsh_cs"].name = "Great Marsh"
+PLUGIN.mapdata["rp_marsh_cs"].name = "Swamps"
 PLUGIN.mapdata["rp_marsh_cs"].serverip = "176.23.99.100:27015"
 PLUGIN.mapdata["rp_marsh_cs"].loadzones = PLUGIN.mapdata["rp_marsh_cs"].loadzones or {}
 
@@ -25,19 +25,19 @@ PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromoutskirts"] = {
 }
 
 PLUGIN.mapdata["rp_salvation_2_haven"] = {}
-PLUGIN.mapdata["rp_salvation_2_haven"].name = "Outskirts"
+PLUGIN.mapdata["rp_salvation_2_haven"].name = "Farmlands"
 PLUGIN.mapdata["rp_salvation_2_haven"].serverip = "176.23.99.100:27016"
 PLUGIN.mapdata["rp_salvation_2_haven"].loadzones = PLUGIN.mapdata["rp_salvation_2_haven"].loadzones or {}
 
 PLUGIN.mapdata["rp_salvation_2_haven"].loadzones["fromwaystation"] = {
 	pos = Vector(2308.856201, 10894.163086, 197.129257), --edit me
 	ang = Angle(3.531969, -144.119522, 0.000000), --edit me
-	desc = "The area ahead leads to the Outskirts."
+	desc = "The area ahead leads to the Farmlands."
 }
 PLUGIN.mapdata["rp_salvation_2_haven"].loadzones["frommarsh"] = {
 	pos = Vector(-10179.993164, -6402.410645, -7.968750), --edit me
 	ang = Angle(5.907976, -33.262821, 0.000000), --edit me
-	desc = "The area ahead leads to the Outskirts."
+	desc = "The area ahead leads to the Farmlands."
 }
 
 

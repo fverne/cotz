@@ -92,7 +92,7 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
-	if self:Health() < self:GetMaxHealth()/2 then
+	if self:Health() < self:GetMaxHealth() then
 		self.RangeSchedule = SCHED_CHASE_ENEMY
 	end
 end
@@ -109,9 +109,9 @@ function ENT:STALKERNPCDamageTake(dmginfo,mul)
 		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 
-	if self:Health() < self:GetMaxHealth()/2 then
-		return mul * 0.33
-	else
-		return mul
-	end
+	-- if self:Health() < self:GetMaxHealth()/2 then
+	-- 	return mul * 0.33
+	-- else
+	-- 	return mul
+	-- end
 end
