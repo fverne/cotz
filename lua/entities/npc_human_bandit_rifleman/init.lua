@@ -54,7 +54,7 @@ ENT.models       = {
 }
 
 ENT.weapons      = {
-  "weapon_npc_aksu"
+  "weapon_npc_mp5"
 }
 
 -- Live vars
