@@ -2,7 +2,7 @@ SWEP.Base = "weapon_base"
 
 if ( SERVER ) then
   AddCSLuaFile( "shared.lua" )
-  SWEP.HoldType     = "shotgun"
+  SWEP.HoldType     = "smg"
 end
 
 -- Visual/sound settings
@@ -17,7 +17,7 @@ SWEP.ViewModelFOV = 64
 SWEP.ViewModel    = "models/weapons/v_rif_ak47.mdl"
 SWEP.WorldModel   = "models/weapons/w_sawnoff.mdl"
 SWEP.ReloadSound  = "weapons/pistol/pistol_reload1.wav"
-SWEP.HoldType   = "shotgun"
+SWEP.HoldType   = "smg"
 
 -- Other settings
 SWEP.Weight     = 5

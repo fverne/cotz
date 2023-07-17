@@ -6,56 +6,62 @@ include('shared.lua')
 ENT.bleeds      = true
 ENT.StartHealth = 100
 ENT.PlayerFriendly = false
-ENT.flatbulletresistance = 2 -- 2 times values of trenchcoat, to simulate attachments
-ENT.percentbulletresistance = 20 -- 2 times values of trenchcoat, to simulate attachments
+ENT.flatbulletresistance = 3 -- 2 times values of trenchcoat, to simulate attachments
+ENT.percentbulletresistance = 37 -- 2 times values of trenchcoat, to simulate attachments
 
 ENT.alertsounds  = {
-  "npc/bandit/enemy_1.ogg",
-  "npc/bandit/enemy_2.ogg",
-  "npc/bandit/enemy_3.ogg",
-  "npc/bandit/enemy_4.ogg",
-  "npc/bandit/enemy_5.ogg",
-  "npc/bandit/enemy_6.ogg",
-  "npc/bandit/enemy_7.ogg",
+  "npc/killer/enemy_1.ogg",
+  "npc/killer/enemy_2.ogg",
+  "npc/killer/enemy_3.ogg",
+  "npc/killer/enemy_4.ogg",
+  "npc/killer/enemy_5.ogg",
+  "npc/killer/enemy_6.ogg",
+  "npc/killer/enemy_7.ogg",
+  "npc/killer/enemy_8.ogg",
+  "npc/killer/enemy_9.ogg",
+  "npc/killer/enemy_10.ogg",
 }
 
 ENT.attacksounds = {  
-  "npc/bandit/attack_1.ogg", 
-  "npc/bandit/attack_2.ogg",
-  "npc/bandit/attack_3.ogg",
-  "npc/bandit/attack_4.ogg",
-  "npc/bandit/attack_5.ogg",
-  "npc/bandit/attack_6.ogg"
+  "npc/killer/attack_1.ogg", 
+  "npc/killer/attack_2.ogg",
+  "npc/killer/attack_3.ogg",
+  "npc/killer/attack_4.ogg",
+  "npc/killer/attack_5.ogg",
+  "npc/killer/attack_6.ogg",
+  "npc/killer/attack_7.ogg",
+  "npc/killer/attack_8.ogg",
+
 }
 
 ENT.hurtsounds   = {
-  "npc/bandit/hit_1.ogg",
-  "npc/bandit/hit_2.ogg",
-  "npc/bandit/hit_3.ogg",
-  "npc/bandit/hit_4.ogg",
-  "npc/bandit/hit_5.ogg",
-  "npc/bandit/hit_6.ogg",
-  "npc/bandit/hit_7.ogg"
+  "npc/killer/hit_1.ogg",
+  "npc/killer/hit_2.ogg",
+  "npc/killer/hit_3.ogg",
+  "npc/killer/hit_4.ogg",
+  "npc/killer/hit_5.ogg",
+  "npc/killer/hit_6.ogg",
+  "npc/killer/hit_7.ogg",
+  "npc/killer/hit_8.ogg",
 }
 
 ENT.diesounds    = {
-  "npc/bandit/death_1.ogg",
-  "npc/bandit/death_2.ogg",
-  "npc/bandit/death_3.ogg",
-  "npc/bandit/death_4.ogg",
-  "npc/bandit/death_5.ogg",
-  "npc/bandit/death_6.ogg"
+  "npc/killer/death_1.ogg",
+  "npc/killer/death_2.ogg",
+  "npc/killer/death_3.ogg",
+  "npc/killer/death_4.ogg",
+  "npc/killer/death_5.ogg",
+  "npc/killer/death_6.ogg",
+  "npc/killer/death_7.ogg",
 }
 
 ENT.models       = {
-  "models/bandit/bandit_regulare.mdl",
-  "models/bandit/bandit_veteran.mdl",
-  "models/bandit/bandit_novice.mdl",
+  "models/killer/killer.mdl",
+  "models/killer/mask.mdl",
 }
 
 ENT.weapons      = {
-  "weapon_npc_sawnoff",
-  "weapon_npc_toz34"
+  "weapon_npc_makarov"
 }
 
 -- Live vars
@@ -112,7 +118,7 @@ function ENT:OnTakeDamage(dmg)
 		dmg:SubtractDamage(self.flatbulletresistance)
 		dmg:SetDamage(math.max(0,dmg:GetDamage())) --So he can't heal from our attacks
 	end
-  
+
   self:SpawnBlood(dmg)
   self:SetHealth(self:Health() - dmg:GetDamage())
   
@@ -150,13 +156,13 @@ function ENT:InitEnemies()
   end
 
   for _, x in pairs(bandittable) do
-    x:AddEntityRelationship( self, D_LI, 10 )
-    self:AddEntityRelationship( x, D_LI, 10 )
+    x:AddEntityRelationship( self, D_HT, 10 )
+    self:AddEntityRelationship( x, D_HT, 10 )
   end
 
   for _, x in pairs(merctable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_LI, 10 )
+    self:AddEntityRelationship( x, D_LI, 10 )
   end
 
   for _, x in pairs(militable) do
@@ -222,7 +228,6 @@ function ENT:SelectSchedule()
         else
           if (self.NextAttack < CurTime() and self:HasLOS()) then
             self:StartSchedule(schedd)
-            self.NextAttack = CurTime() + 2
           else
             self:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY)
           end
@@ -303,11 +308,14 @@ function ENT:KilledDan()
   ragdoll:SetColor( self:GetColor() )
   ragdoll:SetMaterial( self:GetMaterial() )
   ragdoll:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+  
 
   cleanup.ReplaceEntity(self,ragdoll)
   undo.ReplaceEntity(self,ragdoll)
 
   if self:IsOnFire() then ragdoll:Ignite( math.Rand( 8, 10 ), 0 ) end
+
+
     for i=1,128 do
     local bone = ragdoll:GetPhysicsObjectNum( i )
     if IsValid( bone ) then
@@ -316,13 +324,14 @@ function ENT:KilledDan()
       bone:SetAngles( boneang )
     end
   end
+
   -- Helix specific drops
   if(ix)then
-    local item = ix.util.GetRandomItemFromPool("bandit_shotgun_drops")
+    local item = ix.util.GetRandomItemFromPool("bandit_pistol_drops")
     ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), function(item, ent) ent.bTemporary = true end, AngleRand(), item[2] or {} )
   end
 
-  ragdoll:SetNetVar("loot", "bandit_shotgun_loot")
+  ragdoll:SetNetVar("loot", "bandit_pistol_loot")
 
   self:Remove()
 end

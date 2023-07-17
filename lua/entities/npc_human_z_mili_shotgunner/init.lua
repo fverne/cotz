@@ -4,53 +4,49 @@ include('shared.lua')
 
 -- Preset
 ENT.bleeds      = true
-ENT.StartHealth = 100
+ENT.StartHealth = 150
 ENT.PlayerFriendly = false
-ENT.flatbulletresistance = 2 -- 2 times values of trenchcoat, to simulate attachments
-ENT.percentbulletresistance = 20 -- 2 times values of trenchcoat, to simulate attachments
+ENT.flatbulletresistance = 6 -- 1.5 times values of berill, to simulate attachments
+ENT.percentbulletresistance = 50 -- 1.5 times values of berill, to simulate attachments
 
 ENT.alertsounds  = {
-  "npc/bandit/enemy_1.ogg",
-  "npc/bandit/enemy_2.ogg",
-  "npc/bandit/enemy_3.ogg",
-  "npc/bandit/enemy_4.ogg",
-  "npc/bandit/enemy_5.ogg",
-  "npc/bandit/enemy_6.ogg",
-  "npc/bandit/enemy_7.ogg",
+  "npc/zombied/enemy_1.mp3",
+  "npc/zombied/enemy_2.mp3",
+  "npc/zombied/enemy_3.mp3",
+  "npc/zombied/enemy_4.mp3",
+  "npc/zombied/enemy_5.mp3",
 }
 
 ENT.attacksounds = {  
-  "npc/bandit/attack_1.ogg", 
-  "npc/bandit/attack_2.ogg",
-  "npc/bandit/attack_3.ogg",
-  "npc/bandit/attack_4.ogg",
-  "npc/bandit/attack_5.ogg",
-  "npc/bandit/attack_6.ogg"
+  "npc/zombied/attack_1.mp3", 
+  "npc/zombied/attack_2.mp3",
+  "npc/zombied/attack_3.mp3",
+  "npc/zombied/attack_4.mp3",
+  "npc/zombied/attack_5.mp3",
+  "npc/zombied/attack_6.mp3",
+  "npc/zombied/attack_7.mp3",
+  "npc/zombied/attack_7.mp3",
 }
 
 ENT.hurtsounds   = {
-  "npc/bandit/hit_1.ogg",
-  "npc/bandit/hit_2.ogg",
-  "npc/bandit/hit_3.ogg",
-  "npc/bandit/hit_4.ogg",
-  "npc/bandit/hit_5.ogg",
-  "npc/bandit/hit_6.ogg",
-  "npc/bandit/hit_7.ogg"
+  "npc/zombied/hit_1.mp3",
+  "npc/zombied/hit_2.mp3",
+  "npc/zombied/hit_3.mp3",
 }
 
 ENT.diesounds    = {
-  "npc/bandit/death_1.ogg",
-  "npc/bandit/death_2.ogg",
-  "npc/bandit/death_3.ogg",
-  "npc/bandit/death_4.ogg",
-  "npc/bandit/death_5.ogg",
-  "npc/bandit/death_6.ogg"
+  "npc/zombied/death_1.mp3",
+  "npc/zombied/death_2.mp3",
+  "npc/zombied/death_3.mp3",
+  "npc/zombied/death_4.mp3",
+  "npc/zombied/death_5.mp3",
+  "npc/zombied/death_6.mp3"
 }
 
 ENT.models       = {
-  "models/bandit/bandit_regulare.mdl",
-  "models/bandit/bandit_veteran.mdl",
-  "models/bandit/bandit_novice.mdl",
+  "models/zombied/berillzombie.mdl",
+  "models/zombied/zombi_spec.mdl",
+  "models/zombied/zombi_skat.mdl",
 }
 
 ENT.weapons      = {
@@ -145,13 +141,13 @@ function ENT:InitEnemies()
   local mutanttable = ents.FindByClass("npc_mutant_*")
 
   for _, x in pairs(zombifiedtable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_NU, 10 )
+    self:AddEntityRelationship( x, D_NU, 10 )
   end
 
   for _, x in pairs(bandittable) do
-    x:AddEntityRelationship( self, D_LI, 10 )
-    self:AddEntityRelationship( x, D_LI, 10 )
+    x:AddEntityRelationship( self, D_HT, 10 )
+    self:AddEntityRelationship( x, D_HT, 10 )
   end
 
   for _, x in pairs(merctable) do
@@ -223,8 +219,8 @@ function ENT:SelectSchedule()
           if (self.NextAttack < CurTime() and self:HasLOS()) then
             self:StartSchedule(schedd)
             self.NextAttack = CurTime() + 2
-          else
-            self:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY)
+          -- else
+          --   self:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY) --zombified shouldnt take cover from enemy
           end
         end
       elseif ( haslos and distance < 200 and (self.NextAttack or 0) < CurTime()) then

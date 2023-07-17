@@ -4,58 +4,51 @@ include('shared.lua')
 
 -- Preset
 ENT.bleeds      = true
-ENT.StartHealth = 100
+ENT.StartHealth = 150
 ENT.PlayerFriendly = false
-ENT.flatbulletresistance = 2 -- 2 times values of trenchcoat, to simulate attachments
-ENT.percentbulletresistance = 20 -- 2 times values of trenchcoat, to simulate attachments
+ENT.flatbulletresistance = 3 -- 1.5 times values of io7a, to simulate attachments
+ENT.percentbulletresistance = 37 -- 1.5 times values of io7a, to simulate attachments
 
 ENT.alertsounds  = {
-  "npc/bandit/enemy_1.ogg",
-  "npc/bandit/enemy_2.ogg",
-  "npc/bandit/enemy_3.ogg",
-  "npc/bandit/enemy_4.ogg",
-  "npc/bandit/enemy_5.ogg",
-  "npc/bandit/enemy_6.ogg",
-  "npc/bandit/enemy_7.ogg",
+  "npc/zombied/enemy_1.mp3",
+  "npc/zombied/enemy_2.mp3",
+  "npc/zombied/enemy_3.mp3",
+  "npc/zombied/enemy_4.mp3",
+  "npc/zombied/enemy_5.mp3",
 }
 
 ENT.attacksounds = {  
-  "npc/bandit/attack_1.ogg", 
-  "npc/bandit/attack_2.ogg",
-  "npc/bandit/attack_3.ogg",
-  "npc/bandit/attack_4.ogg",
-  "npc/bandit/attack_5.ogg",
-  "npc/bandit/attack_6.ogg"
+  "npc/zombied/attack_1.mp3", 
+  "npc/zombied/attack_2.mp3",
+  "npc/zombied/attack_3.mp3",
+  "npc/zombied/attack_4.mp3",
+  "npc/zombied/attack_5.mp3",
+  "npc/zombied/attack_6.mp3",
+  "npc/zombied/attack_7.mp3",
+  "npc/zombied/attack_7.mp3",
 }
 
 ENT.hurtsounds   = {
-  "npc/bandit/hit_1.ogg",
-  "npc/bandit/hit_2.ogg",
-  "npc/bandit/hit_3.ogg",
-  "npc/bandit/hit_4.ogg",
-  "npc/bandit/hit_5.ogg",
-  "npc/bandit/hit_6.ogg",
-  "npc/bandit/hit_7.ogg"
+  "npc/zombied/hit_1.mp3",
+  "npc/zombied/hit_2.mp3",
+  "npc/zombied/hit_3.mp3",
 }
 
 ENT.diesounds    = {
-  "npc/bandit/death_1.ogg",
-  "npc/bandit/death_2.ogg",
-  "npc/bandit/death_3.ogg",
-  "npc/bandit/death_4.ogg",
-  "npc/bandit/death_5.ogg",
-  "npc/bandit/death_6.ogg"
+  "npc/zombied/death_1.mp3",
+  "npc/zombied/death_2.mp3",
+  "npc/zombied/death_3.mp3",
+  "npc/zombied/death_4.mp3",
+  "npc/zombied/death_5.mp3",
+  "npc/zombied/death_6.mp3"
 }
 
 ENT.models       = {
-  "models/bandit/bandit_regulare.mdl",
-  "models/bandit/bandit_veteran.mdl",
-  "models/bandit/bandit_novice.mdl",
+  "models/zombied/zombifiedstalker3.mdl",
 }
 
 ENT.weapons      = {
-  "weapon_npc_sawnoff",
-  "weapon_npc_toz34"
+  "weapon_npc_aksu"
 }
 
 -- Live vars
@@ -145,13 +138,13 @@ function ENT:InitEnemies()
   local mutanttable = ents.FindByClass("npc_mutant_*")
 
   for _, x in pairs(zombifiedtable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_NU, 10 )
+    self:AddEntityRelationship( x, D_NU, 10 )
   end
 
   for _, x in pairs(bandittable) do
-    x:AddEntityRelationship( self, D_LI, 10 )
-    self:AddEntityRelationship( x, D_LI, 10 )
+    x:AddEntityRelationship( self, D_HT, 10 )
+    self:AddEntityRelationship( x, D_HT, 10 )
   end
 
   for _, x in pairs(merctable) do
@@ -214,22 +207,22 @@ function ENT:SelectSchedule()
 
       enemy_pos = self:GetEnemy():GetPos()
       distance = self:GetPos():Distance(enemy_pos)
-      if distance > 750 then
+      if distance > 2000 then
         self:SetSchedule(SCHED_CHASE_ENEMY)
-      elseif (distance < 750 && distance > 200) then
+      elseif (distance < 2000 && distance > 600) then
         if (!haslos) then
           self:SetSchedule(SCHED_ESTABLISH_LINE_OF_FIRE) --move to shoot enemy
         else
           if (self.NextAttack < CurTime() and self:HasLOS()) then
             self:StartSchedule(schedd)
-            self.NextAttack = CurTime() + 2
-          else
-            self:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY)
+            return
           end
         end
-      elseif ( haslos and distance < 200 and (self.NextAttack or 0) < CurTime()) then
-        self:StartSchedule(schedd)
-        self.NextAttack = CurTime() + 2
+      -- elseif ( haslos and distance < 600) then -- zombified shouldnt take cover from enemy
+      --   if self.TakingCover == false then
+      --     self.TakingCover = true
+      --     self:SetSchedule( SCHED_TAKE_COVER_FROM_ENEMY )
+      --   end
       else
         self.TakingCover = false
         self:SetSchedule(SCHED_CHASE_ENEMY)//move to shoot enemy
@@ -302,12 +295,13 @@ function ENT:KilledDan()
   ragdoll:SetSkin( self:GetSkin() )
   ragdoll:SetColor( self:GetColor() )
   ragdoll:SetMaterial( self:GetMaterial() )
-  ragdoll:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 
   cleanup.ReplaceEntity(self,ragdoll)
   undo.ReplaceEntity(self,ragdoll)
 
   if self:IsOnFire() then ragdoll:Ignite( math.Rand( 8, 10 ), 0 ) end
+
+
     for i=1,128 do
     local bone = ragdoll:GetPhysicsObjectNum( i )
     if IsValid( bone ) then
@@ -316,14 +310,7 @@ function ENT:KilledDan()
       bone:SetAngles( boneang )
     end
   end
-  -- Helix specific drops
-  if(ix)then
-    local item = ix.util.GetRandomItemFromPool("bandit_shotgun_drops")
-    ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), function(item, ent) ent.bTemporary = true end, AngleRand(), item[2] or {} )
-  end
-
-  ragdoll:SetNetVar("loot", "bandit_shotgun_loot")
-
+  
   self:Remove()
 end
 

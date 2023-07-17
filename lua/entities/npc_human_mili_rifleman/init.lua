@@ -6,56 +6,58 @@ include('shared.lua')
 ENT.bleeds      = true
 ENT.StartHealth = 100
 ENT.PlayerFriendly = false
-ENT.flatbulletresistance = 2 -- 2 times values of trenchcoat, to simulate attachments
-ENT.percentbulletresistance = 20 -- 2 times values of trenchcoat, to simulate attachments
+ENT.flatbulletresistance = 6 -- 2 times values of trenchcoat, to simulate attachments
+ENT.percentbulletresistance = 50 -- 2 times values of trenchcoat, to simulate attachments
 
 ENT.alertsounds  = {
-  "npc/bandit/enemy_1.ogg",
-  "npc/bandit/enemy_2.ogg",
-  "npc/bandit/enemy_3.ogg",
-  "npc/bandit/enemy_4.ogg",
-  "npc/bandit/enemy_5.ogg",
-  "npc/bandit/enemy_6.ogg",
-  "npc/bandit/enemy_7.ogg",
+  "npc/military/enemy_1.ogg",
+  "npc/military/enemy_2.ogg",
+  "npc/military/enemy_3.ogg",
+  "npc/military/enemy_4.ogg",
+  "npc/military/enemy_5.ogg",
+  "npc/military/enemy_6.ogg",
 }
 
 ENT.attacksounds = {  
-  "npc/bandit/attack_1.ogg", 
-  "npc/bandit/attack_2.ogg",
-  "npc/bandit/attack_3.ogg",
-  "npc/bandit/attack_4.ogg",
-  "npc/bandit/attack_5.ogg",
-  "npc/bandit/attack_6.ogg"
+  "npc/military/attack_1.ogg", 
+  "npc/military/attack_2.ogg",
+  "npc/military/attack_many_1.ogg",
+  "npc/military/attack_many_2.ogg",
+  "npc/military/attack_many_3.ogg",
+  "npc/military/attack_many_4.ogg",
+  "npc/military/attack_many_5.ogg",
+  "npc/military/attack_many_6.ogg",
+  "npc/military/attack_one_1.ogg",
+  "npc/military/attack_one_2.ogg",
+  "npc/military/attack_one_3.ogg",
+  "npc/military/attack_one_4.ogg",
+  "npc/military/attack_one_5.ogg",
 }
 
 ENT.hurtsounds   = {
-  "npc/bandit/hit_1.ogg",
-  "npc/bandit/hit_2.ogg",
-  "npc/bandit/hit_3.ogg",
-  "npc/bandit/hit_4.ogg",
-  "npc/bandit/hit_5.ogg",
-  "npc/bandit/hit_6.ogg",
-  "npc/bandit/hit_7.ogg"
+  "npc/military/hit_1.ogg",
+  "npc/military/hit_2.ogg",
+  "npc/military/hit_3.ogg",
+  "npc/military/hit_4.ogg",
+  "npc/military/hit_5.ogg",
+  "npc/military/hit_6.ogg",
 }
 
 ENT.diesounds    = {
-  "npc/bandit/death_1.ogg",
-  "npc/bandit/death_2.ogg",
-  "npc/bandit/death_3.ogg",
-  "npc/bandit/death_4.ogg",
-  "npc/bandit/death_5.ogg",
-  "npc/bandit/death_6.ogg"
+  "npc/military/death_1.ogg",
+  "npc/military/death_2.ogg",
+  "npc/military/death_3.ogg",
+  "npc/military/death_4.ogg",
+  "npc/military/death_5.ogg",
 }
 
 ENT.models       = {
-  "models/bandit/bandit_regulare.mdl",
-  "models/bandit/bandit_veteran.mdl",
-  "models/bandit/bandit_novice.mdl",
+  "models/military/soldier.mdl",
+  "models/military/elita.mdl",
 }
 
 ENT.weapons      = {
-  "weapon_npc_sawnoff",
-  "weapon_npc_toz34"
+  "weapon_npc_aksu"
 }
 
 -- Live vars
@@ -150,8 +152,8 @@ function ENT:InitEnemies()
   end
 
   for _, x in pairs(bandittable) do
-    x:AddEntityRelationship( self, D_LI, 10 )
-    self:AddEntityRelationship( x, D_LI, 10 )
+    x:AddEntityRelationship( self, D_HT, 10 )
+    self:AddEntityRelationship( x, D_HT, 10 )
   end
 
   for _, x in pairs(merctable) do
@@ -160,8 +162,8 @@ function ENT:InitEnemies()
   end
 
   for _, x in pairs(militable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_LI, 10 )
+    self:AddEntityRelationship( x, D_LI, 10 )
   end
 
   for _, x in pairs(mutanttable) do
@@ -214,22 +216,22 @@ function ENT:SelectSchedule()
 
       enemy_pos = self:GetEnemy():GetPos()
       distance = self:GetPos():Distance(enemy_pos)
-      if distance > 750 then
+      if distance > 2000 then
         self:SetSchedule(SCHED_CHASE_ENEMY)
-      elseif (distance < 750 && distance > 200) then
+      elseif (distance < 2000 && distance > 600) then
         if (!haslos) then
           self:SetSchedule(SCHED_ESTABLISH_LINE_OF_FIRE) --move to shoot enemy
         else
           if (self.NextAttack < CurTime() and self:HasLOS()) then
             self:StartSchedule(schedd)
-            self.NextAttack = CurTime() + 2
-          else
-            self:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY)
+            return
           end
         end
-      elseif ( haslos and distance < 200 and (self.NextAttack or 0) < CurTime()) then
-        self:StartSchedule(schedd)
-        self.NextAttack = CurTime() + 2
+      elseif ( haslos and distance < 600) then
+        if self.TakingCover == false then
+          self.TakingCover = true
+          self:SetSchedule( SCHED_TAKE_COVER_FROM_ENEMY )
+        end
       else
         self.TakingCover = false
         self:SetSchedule(SCHED_CHASE_ENEMY)//move to shoot enemy
@@ -308,6 +310,8 @@ function ENT:KilledDan()
   undo.ReplaceEntity(self,ragdoll)
 
   if self:IsOnFire() then ragdoll:Ignite( math.Rand( 8, 10 ), 0 ) end
+
+
     for i=1,128 do
     local bone = ragdoll:GetPhysicsObjectNum( i )
     if IsValid( bone ) then
@@ -316,14 +320,7 @@ function ENT:KilledDan()
       bone:SetAngles( boneang )
     end
   end
-  -- Helix specific drops
-  if(ix)then
-    local item = ix.util.GetRandomItemFromPool("bandit_shotgun_drops")
-    ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), function(item, ent) ent.bTemporary = true end, AngleRand(), item[2] or {} )
-  end
-
-  ragdoll:SetNetVar("loot", "bandit_shotgun_loot")
-
+  
   self:Remove()
 end
 
