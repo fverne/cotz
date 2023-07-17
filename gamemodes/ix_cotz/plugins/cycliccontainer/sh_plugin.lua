@@ -61,8 +61,9 @@ if SERVER then
 				if (v.cyclicalAppearTime == nil and v.cyclicalDisappearTime == nil) then
 					self:DisappearContainer(v, true)
 				end
+
 				-- Container waking up after not being ticked for a long time (5min)
-				if(v.cyclicalAppearTime and (os.time() - v.cyclicalAppearTime) > 300)) then
+				if (v.cyclicalAppearTime and (os.time() - v.cyclicalAppearTime) > 300) then
 					self:DisappearContainer(v)
 				end
 
