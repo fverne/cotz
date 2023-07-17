@@ -160,7 +160,7 @@ SWEP.Chamberable = true
 SWEP.ShotgunReload = true
 SWEP.PreventQuickScoping = false
 
-SWEP.ReloadSpeed = 1.3
+SWEP.ReloadSpeed = 1
 SWEP.ReloadStartTime = 0.5
 SWEP.InsertShellTime = .85
 SWEP.ReloadFinishWait = 1

@@ -19,6 +19,21 @@ function SWEP:detachSpecificAttachment(attachmentName)
 		end
 	end
 end
+
+function SWEP:hasAttachmentInCategory(category)
+
+	local cur = self.Attachments[category].atts
+
+	for _, v in pairs(cur) do
+		if( self.ActiveAttachments[v] ) then
+			return true
+		end
+	end
+
+
+	return false
+end
+
 function SWEP:attach(category, desiredPos, isPreset)
 	-- reset the last preset entry in case what we're attaching isn't a preset
 	if not isPreset then

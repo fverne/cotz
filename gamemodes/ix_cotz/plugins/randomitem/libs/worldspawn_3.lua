@@ -6,7 +6,6 @@ ix.randomitems.tables["worldspawn_3"] = {
   {400, {"medic_medkit_3"}},
   {400, {"medic_medkit_4"}},
   {25, {"value_pcpart_ssd"}},
-  {25, {"value_pcpart_gpu"}},
   {50, {"value_pcpart_hdd"}},
   {50, {"value_pcpart_fpga"}},
   {50, {"value_pcpart_psu"}},

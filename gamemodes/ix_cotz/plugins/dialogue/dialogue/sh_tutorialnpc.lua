@@ -10,6 +10,7 @@ DIALOGUE.addTopic("GREETING", {
 		"AboutWorkTopic",
 		"GetTask",
 		"AboutProgression",
+		"StartBarter",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
@@ -484,6 +485,65 @@ DIALOGUE.addTopic("AboutProgression", {
 	end,
 })
 
+DIALOGUE.addTopic("StartBarter", {
+	statement = "Exchange?",
+	response = "Sure.",
+	options = {
+		"BackTopic"
+	},
+	preCallback = function(self, client, target)
+		if( CLIENT ) then
+			local barters = ix.npcbarter.GetActiveBartersForNPC("'Old Timer'")
+
+			if #barters <= 0 then
+				self.response = "Nothing at the moment."
+
+				net.Start("npcbarter_sync")
+				net.SendToServer()
+			else
+				self.response = "I have the following things up for barter:"
+
+				for _, barter in pairs(barters) do
+					self.response = self.response.."\n    "..ix.npcbarter.barterdict["'Old Timer'"][barter].description
+				end
+			end
+
+		end
+	end,
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		for _, barterid in pairs(ix.npcbarter.GetActiveBartersForNPC("'Old Timer'")) do
+			local barterstruct = ix.npcbarter.barterdict["'Old Timer'"][barterid]
+
+			local barterItem = barterstruct.barterItem
+			local barterCnt = barterItem[2] or 1
+
+			for _, reqitem in pairs(barterstruct.reqItem) do
+				local reqItemCnt = reqitem[2] or 1
+
+				table.insert(dynopts, {statement = reqItemCnt.."x "..ix.item.list[reqitem[1]].name.." for "..barterCnt.."x "..ix.item.list[barterItem[1]].name, topicID = "StartBarter", dyndata = {npcname = "'Old Timer'", identifier = barterid, reqitem = reqitem[1]}})
+			end
+		end
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+
+		if CLIENT then
+			ix.npcbarter.TryExecuteBarter(dyndata.npcname, dyndata.identifier, dyndata.reqitem)
+		end
+
+		-- Return the next topicID
+		return "BackTopic", dyndata
+	end,
+})
+
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
@@ -496,6 +556,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"AboutWorkTopic",
 		"GetTask",
 		"AboutProgression",
+		"StartBarter",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)

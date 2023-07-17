@@ -6,49 +6,57 @@ include('shared.lua')
 ENT.bleeds      = true
 ENT.StartHealth = 100
 ENT.PlayerFriendly = false
+ENT.flatbulletresistance = 2 -- 2 times values of trenchcoat, to simulate attachments
+ENT.percentbulletresistance = 20 -- 2 times values of trenchcoat, to simulate attachments
 
 ENT.alertsounds  = {
-                      "npc/bandit/enemy_1.ogg",
-                      "npc/bandit/enemy_2.ogg",
-                      "npc/bandit/enemy_3.ogg",
-                      "npc/bandit/enemy_4.ogg",
-                      "npc/bandit/enemy_5.ogg",
-                      "npc/bandit/enemy_6.ogg",
-                      "npc/bandit/enemy_7.ogg",
-                    }
+  "npc/bandit/enemy_1.ogg",
+  "npc/bandit/enemy_2.ogg",
+  "npc/bandit/enemy_3.ogg",
+  "npc/bandit/enemy_4.ogg",
+  "npc/bandit/enemy_5.ogg",
+  "npc/bandit/enemy_6.ogg",
+  "npc/bandit/enemy_7.ogg",
+}
 
-ENT.attacksounds = {  "npc/bandit/attack_1.ogg", 
-                      "npc/bandit/attack_2.ogg",
-                      "npc/bandit/attack_3.ogg",
-                      "npc/bandit/attack_4.ogg",
-                      "npc/bandit/attack_5.ogg",
-                      "npc/bandit/attack_6.ogg"
-                    }
+ENT.attacksounds = {  
+  "npc/bandit/attack_1.ogg", 
+  "npc/bandit/attack_2.ogg",
+  "npc/bandit/attack_3.ogg",
+  "npc/bandit/attack_4.ogg",
+  "npc/bandit/attack_5.ogg",
+  "npc/bandit/attack_6.ogg"
+}
 
 ENT.hurtsounds   = {
-                      "npc/bandit/hit_1.ogg",
-                      "npc/bandit/hit_2.ogg",
-                      "npc/bandit/hit_3.ogg",
-                      "npc/bandit/hit_4.ogg",
-                      "npc/bandit/hit_5.ogg",
-                      "npc/bandit/hit_6.ogg",
-                      "npc/bandit/hit_7.ogg"
-                    }
+  "npc/bandit/hit_1.ogg",
+  "npc/bandit/hit_2.ogg",
+  "npc/bandit/hit_3.ogg",
+  "npc/bandit/hit_4.ogg",
+  "npc/bandit/hit_5.ogg",
+  "npc/bandit/hit_6.ogg",
+  "npc/bandit/hit_7.ogg"
+}
 
 ENT.diesounds    = {
-                      "npc/bandit/death_1.ogg",
-                      "npc/bandit/death_2.ogg",
-                      "npc/bandit/death_3.ogg",
-                      "npc/bandit/death_4.ogg",
-                      "npc/bandit/death_5.ogg",
-                      "npc/bandit/death_6.ogg"
-                    }
+  "npc/bandit/death_1.ogg",
+  "npc/bandit/death_2.ogg",
+  "npc/bandit/death_3.ogg",
+  "npc/bandit/death_4.ogg",
+  "npc/bandit/death_5.ogg",
+  "npc/bandit/death_6.ogg"
+}
 
 ENT.models       = {
-                      "models/bandit/bandit_regulare.mdl",
-                      "models/bandit/bandit_veteran.mdl",
-                      "models/bandit/bandit_novice.mdl",
-                    }
+  "models/bandit/bandit_regulare.mdl",
+  "models/bandit/bandit_veteran.mdl",
+  "models/bandit/bandit_novice.mdl",
+}
+
+ENT.weapons      = {
+  "weapon_npc_mp5"
+}
+
 -- Live vars
 ENT.Alerted     = false
 ENT.MeleeAttacking = false
@@ -64,7 +72,7 @@ ENT.NextAttack = 0
    
 function ENT:Initialize()
 
-  self:Give("weapon_npc_aksu")
+  self:Give(self.weapons[math.random(#self.weapons)])
 
   self:SetModel(self.models[math.random(1,#self.models)])
 
@@ -98,7 +106,12 @@ function ENT:Initialize()
 end
    
 function ENT:OnTakeDamage(dmg)
-
+  if(dmg:IsDamageType(DMG_BULLET)) then
+		dmg:SetDamage(dmg:GetDamage()*(1 - (self.percentbulletresistance/100)))
+		dmg:SubtractDamage(self.flatbulletresistance)
+		dmg:SetDamage(math.max(0,dmg:GetDamage())) --So he can't heal from our attacks
+	end
+  
   self:SpawnBlood(dmg)
   self:SetHealth(self:Health() - dmg:GetDamage())
   
@@ -124,12 +137,30 @@ schedd:EngTask( "TASK_FACE_ENEMY",       0 )
 schedd:EngTask( "TASK_RANGE_ATTACK1",    0 )
 
 function ENT:InitEnemies()
+  local zombifiedtable = ents.FindByClass("npc_human_z_*")
   local bandittable = ents.FindByClass("npc_human_bandit_*")
+  local merctable = ents.FindByClass("npc_human_merc_*")
+  local militable = ents.FindByClass("npc_human_mili_*")
   local mutanttable = ents.FindByClass("npc_mutant_*")
 
+  for _, x in pairs(zombifiedtable) do
+    x:AddEntityRelationship( self, D_HT, 10 )
+    self:AddEntityRelationship( x, D_HT, 10 )
+  end
+
   for _, x in pairs(bandittable) do
-    x:AddEntityRelationship( self, D_NU, 10 )
-    self:AddEntityRelationship( x, D_NU, 10 )
+    x:AddEntityRelationship( self, D_LI, 10 )
+    self:AddEntityRelationship( x, D_LI, 10 )
+  end
+
+  for _, x in pairs(merctable) do
+    x:AddEntityRelationship( self, D_HT, 10 )
+    self:AddEntityRelationship( x, D_HT, 10 )
+  end
+
+  for _, x in pairs(militable) do
+    x:AddEntityRelationship( self, D_HT, 10 )
+    self:AddEntityRelationship( x, D_HT, 10 )
   end
 
   for _, x in pairs(mutanttable) do
@@ -270,6 +301,7 @@ function ENT:KilledDan()
   ragdoll:SetSkin( self:GetSkin() )
   ragdoll:SetColor( self:GetColor() )
   ragdoll:SetMaterial( self:GetMaterial() )
+  ragdoll:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 
   cleanup.ReplaceEntity(self,ragdoll)
   undo.ReplaceEntity(self,ragdoll)

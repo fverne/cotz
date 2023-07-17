@@ -85,7 +85,7 @@ SWEP.ADSFireAnim = true
 SWEP.UseHands = true
 
 SWEP.Attachments = {
-	["+reload"] = {header = "Ammo", offset = {800, -200}, atts = {"am_hollowpoint", "am_armorpiercing", "am_410buck"}}
+	["+reload"] = {header = "Ammo", offset = {800, -200}, atts = {"am_hollowpoint", "am_armorpiercing"}}
 }
 
 SWEP.Animations = {fire = {"fire"},

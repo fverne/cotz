@@ -41,7 +41,7 @@ if CLIENT then
 	SWEP.AlternativePos = Vector(0.2, 0, -1)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
 	
-	SWEP.AimBreathingEnabled = true
+	SWEP.AimBreathingEnabled = false
 	SWEP.CrosshairEnabled = false
 	SWEP.AimViewModelFOV = 40
 	

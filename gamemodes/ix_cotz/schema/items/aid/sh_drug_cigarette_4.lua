@@ -16,8 +16,6 @@ ITEM.psyheal = 3
 ITEM.flatweight = 0.010
 ITEM.weight = 0.001
 
-ITEM.addictionNicotine = true
-
 ITEM.exRender = true
 ITEM.iconCam = {
 	pos = Vector(0, 0, 200),

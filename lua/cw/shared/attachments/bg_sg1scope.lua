@@ -108,7 +108,7 @@ function att:attachFunc()
 	self.ZoomTextures = att.zoomTextures
 	
 	self:setBodygroup(self.SightBGs.main, self.SightBGs.sg1)
-	self.AimBreathingEnabled = true
+	self.AimBreathingEnabled = false
 end
 
 function att:detachFunc()

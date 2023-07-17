@@ -15,8 +15,6 @@ ITEM.quantity = 2
 
 ITEM.alcohol = 10
 
-ITEM.addictionLightAlcohol = true
-
 ITEM.sound = "stalkersound/inv_drink_can.mp3"
 ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/energydrink_2.png")
 

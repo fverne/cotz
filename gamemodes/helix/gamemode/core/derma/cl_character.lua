@@ -295,11 +295,11 @@ function PANEL:Init()
 end
 
 function PANEL:UpdateReturnButton(bValue)
-	if (bValue == nil) then
-		bValue = self.bUsingCharacter
+	if (bValue != nil) then
+		self.bUsingCharacter = bValue
 	end
 
-	self.returnButton:SetText(bValue and "return" or "leave")
+	self.returnButton:SetText(self.bUsingCharacter and "return" or "leave")
 	self.returnButton:SizeToContents()
 end
 
@@ -389,7 +389,7 @@ function PANEL:PlayMusic()
 	path = url and url or path
 
 	play(path, "noplay", function(channel, error, message)
-		if (!IsValid(channel)) then
+		if (!IsValid(self) or !IsValid(channel)) then
 			return
 		end
 
@@ -528,6 +528,13 @@ function PANEL:PaintOver(width, height)
 	if (self.bClosing and self.bFromMenu) then
 		surface.SetDrawColor(color_black)
 		surface.DrawRect(0, 0, width, height)
+	end
+end
+
+function PANEL:OnRemove()
+	if (self.channel) then
+		self.channel:Stop()
+		self.channel = nil
 	end
 end
 

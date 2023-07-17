@@ -1544,6 +1544,16 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
     ["worlditemspawner"] = {
 
     },
+  },
+
+  -- For setting up generic entities to spawn
+  entities = {
+    --{
+    --  class = "sanom_burntfuzz",
+    --  position = Vector(0,0,0),
+    --  angles = Angle(0,0,0)
+    --},
+
   }
 }
 

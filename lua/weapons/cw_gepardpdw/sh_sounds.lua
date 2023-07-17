@@ -1,0 +1,1 @@
+CustomizableWeaponry:addFireSound("CW_GEPPDW_FIRE", "weapons/gepard/gepardshoot.wav", 1, 100, CHAN_STATIC)

@@ -78,6 +78,9 @@ ix.util.Include("worldspawn_2.lua","shared")
 ix.util.Include("worldspawn_3.lua","shared")
 ix.util.Include("worldspawn_4.lua","shared")
 
+ix.util.Include("worldspawn_5.lua","shared")
+ix.util.Include("worldspawn_6.lua","shared")
+
 ix.util.Include("reward_aid_low.lua","shared")
 ix.util.Include("reward_aid_high.lua","shared")
 
