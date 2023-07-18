@@ -690,7 +690,8 @@ PLUGIN.eventdefs["zombies1"] = {
 PLUGIN.eventdefs["zombies2"] = {
 	entities = {
 		{"npc_mutant_classiczombie_babka", 1},
-		{"npc_mutant_classiczombie", 4}, 
+		{"npc_mutant_classiczombie", 3}, 
+		{"npc_human_z_rookie_pistolman", 2},
 	},
 	pdabroadcast = "A small group of zombies have appeared %s, watch yourself, stalker.",
 	difficulty = {1},
@@ -710,7 +711,9 @@ PLUGIN.eventdefs["zombies3"] = {
 PLUGIN.eventdefs["zombies4"] = {
 	entities = {
 		{"npc_mutant_classiczombie_babka", 2},
-		{"npc_mutant_classiczombie", 6}, 
+		{"npc_mutant_classiczombie", 5}, 
+		{"npc_human_z_rookie_pistolman", 1},
+		{"npc_human_z_rookie_rifleman", 1},
 	},
 	pdabroadcast = "There is a group of zombies %s, and has occupied it. Tread with caution, stalker.",
 	difficulty = {2},
@@ -730,7 +733,9 @@ PLUGIN.eventdefs["zombies5"] = {
 PLUGIN.eventdefs["zombies6"] = {
 	entities = {
 		{"npc_mutant_classiczombie_babka", 2},
-		{"npc_mutant_classiczombie", 8}, 
+		{"npc_mutant_classiczombie", 7}, 
+		{"npc_human_z_rookie_pistolman", 2},
+		{"npc_human_z_rookie_rifleman", 1},
 	},
 	pdabroadcast = "A horde of zombies are overrunning %s! Stay away, stalker.",
 	difficulty = {3},
@@ -838,6 +843,26 @@ PLUGIN.eventdefs["controllerswamp2"] = {
 	difficulty = {1},
 }
 
+PLUGIN.eventdefs["controllerswamp3"] = {
+	entities = {
+		{"npc_mutant_controller_swamp", 1},
+		{"npc_human_z_rookie_pistolman", 2},
+		{"npc_human_z_rookie_rifleman", 2},
+	},
+	pdabroadcast = "Getting multiple strange readings %s... Be very cautious, stalker.",
+	difficulty = {1},
+}
+
+PLUGIN.eventdefs["controllerswamp4"] = {
+	entities = {
+		{"npc_mutant_controller_swamp", 2},
+		{"npc_human_z_rookie_shotgunner", 1},
+		{"npc_human_z_rookie_rifleman", 2},
+	},
+	pdabroadcast = "Getting multiple strange readings %s... Be very cautious, stalker.",
+	difficulty = {1},
+}
+
 --[[-------------------------------------------------------------------------
 Fast Controller
 ---------------------------------------------------------------------------]]
@@ -864,6 +889,8 @@ Regular Controller
 PLUGIN.eventdefs["controller1"] = {
 	entities = {
 		{"npc_mutant_controller", 1},
+		{"npc_human_z_rookie_pistolman", 2},
+		{"npc_human_z_rookie_rifleman", 2},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
 	difficulty = {2},
@@ -872,6 +899,8 @@ PLUGIN.eventdefs["controller1"] = {
 PLUGIN.eventdefs["controller2"] = {
 	entities = {
 		{"npc_mutant_controller", 2},
+		{"npc_human_z_rookie_shotgunner", 2},
+		{"npc_human_z_rookie_rifleman", 2},
 	},
 	pdabroadcast = "Getting multiple strange readings %s... Be very cautious, stalker.",
 	difficulty = {2, 3, 4, 5},
@@ -1010,4 +1039,66 @@ PLUGIN.eventdefs["hellhound1"] = {
 	},
 	pdabroadcast = "A small pack of dogs have been spotted %s. I'm also getting increased heat signatures - strange.",
 	difficulty = {1, 3, 5},
+}
+
+
+--[[-------------------------------------------------------------------------
+Human
+---------------------------------------------------------------------------]]
+
+PLUGIN.eventdefs["bandit1"] = {
+	entities = {
+		{"npc_human_bandit_pistolman", 2},
+		{"npc_human_bandit_shotgunner", 1}
+	},
+	pdabroadcast = "Bandits spotted %s. Take care.",
+	difficulty = {1, 2},
+}
+
+PLUGIN.eventdefs["bandit2"] = {
+	entities = {
+		{"npc_human_bandit_pistolman", 1},
+		{"npc_human_bandit_shotgunner", 1},
+		{"npc_human_bandit_rifleman", 2},		
+	},
+	pdabroadcast = "Bandits spotted %s. Take care.",
+	difficulty = {1, 2},
+}
+
+PLUGIN.eventdefs["merc1"] = {
+	entities = {
+		{"npc_human_merc_shotgunner", 1},
+		{"npc_human_merc_rifleman", 1},	
+	},
+	pdabroadcast = "Mercenaries spotted %s. Take care.",
+	difficulty = {3, 4},
+}
+
+PLUGIN.eventdefs["merc2"] = {
+	entities = {
+		{"npc_human_merc_pistolman", 1},
+		{"npc_human_merc_shotgunner", 1},
+		{"npc_human_merc_rifleman", 2},	
+	},
+	pdabroadcast = "Mercenaries spotted %s. Take care.",
+	difficulty = {3, 4},
+}
+
+PLUGIN.eventdefs["mili1"] = {
+	entities = {
+		{"npc_human_mili_shotgunner", 1},
+		{"npc_human_mili_rifleman", 1},	
+	},
+	pdabroadcast = "Military patrol spotted %s. Take good care.",
+	difficulty = {5, 6},
+}
+
+PLUGIN.eventdefs["mili2"] = {
+	entities = {
+		{"npc_human_mili_pistolman", 1},
+		{"npc_human_mili_shotgunner", 1},
+		{"npc_human_mili_rifleman", 2},	
+	},
+	pdabroadcast = "Military patrol spotted %s. Take good care.",
+	difficulty = {5, 6},
 }

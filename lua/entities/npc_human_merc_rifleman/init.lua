@@ -138,6 +138,7 @@ function ENT:OnTakeDamage(dmg)
   if self:Health() <= 0 && self.dead == false then
     self.dead = true;
     self:KilledDan()
+    gamemode.Call( "OnNPCKilled",  self, dmg:GetAttacker(), dmg:GetInflictor() )
   end
 end
 

@@ -1422,4 +1422,125 @@ do
   ix.jobs.register(tempJob, "killSkeleton")
 
   tempJob = nil
+
+
+-- Bandits
+
+local tempJob = {}
+
+tempJob.name = "Kill %d bandits."
+tempJob.desc = "%d bandits."
+tempJob.icon = "propic/bandits/bandit11"
+tempJob.tier = 1
+tempJob.listenTrigger = "banditKilled"
+tempJob.numberRec = 2
+tempJob.reward = {{"kit_ammo_med"}}
+tempJob.rewardCount = 1
+tempJob.repReward = 15
+tempJob.moneyReward = {650, 900}
+tempJob.categories = {"bandits"}
+
+ix.jobs.register(tempJob, "killBanditsLow")
+
+tempJob = nil
+
+
+local tempJob = {}
+
+tempJob.name = "Kill %d bandits."
+tempJob.desc = "%d bandits."
+tempJob.icon = "propic/bandits/bandit11"
+tempJob.tier = 1
+tempJob.listenTrigger = "banditKilled"
+tempJob.numberRec = 5
+tempJob.reward = {{"kit_ammo_med"}}
+tempJob.rewardCount = 2
+tempJob.repReward = 25
+tempJob.moneyReward = {1150, 1400}
+tempJob.categories = {"bandits"}
+
+ix.jobs.register(tempJob, "killBanditsHigh")
+
+tempJob = nil
+
+
+-- Mercs
+
+local tempJob = {}
+
+tempJob.name = "Kill %d mercenaries."
+tempJob.desc = "%d mercenaries."
+tempJob.icon = "propic/merc/merc7"
+tempJob.tier = 1
+tempJob.listenTrigger = "mercKilled"
+tempJob.numberRec = 2
+tempJob.reward = {{"kit_ammo_high"}}
+tempJob.rewardCount = 1
+tempJob.repReward = 30
+tempJob.moneyReward = {650, 900}
+tempJob.categories = {"mercs"}
+
+ix.jobs.register(tempJob, "killMercsLow")
+
+tempJob = nil
+
+
+local tempJob = {}
+
+tempJob.name = "Kill %d mercs."
+tempJob.desc = "%d mercs."
+tempJob.icon = "propic/merc/merc7"
+tempJob.tier = 1
+tempJob.listenTrigger = "mercKilled"
+tempJob.numberRec = 5
+tempJob.reward = {{"kit_ammo_high"}}
+tempJob.rewardCount = 2
+tempJob.repReward = 40
+tempJob.moneyReward = {1150, 1400}
+tempJob.categories = {"mercs"}
+
+ix.jobs.register(tempJob, "killMercsHigh")
+
+tempJob = nil
+
+
+-- Mili
+
+local tempJob = {}
+
+tempJob.name = "Kill %d military."
+tempJob.desc = "%d military."
+tempJob.icon = "propic/mili/mili11"
+tempJob.tier = 1
+tempJob.listenTrigger = "miliKilled"
+tempJob.numberRec = 2
+tempJob.reward = {{"kit_ammo_high"}}
+tempJob.rewardCount = 1
+tempJob.repReward = 45
+tempJob.moneyReward = {1650, 1900}
+tempJob.categories = {"mili"}
+
+ix.jobs.register(tempJob, "killMiliLow")
+
+tempJob = nil
+
+
+local tempJob = {}
+
+tempJob.name = "Kill %d mili."
+tempJob.desc = "%d mili."
+tempJob.icon = "propic/mili/mili11"
+tempJob.tier = 1
+tempJob.listenTrigger = "miliKilled"
+tempJob.numberRec = 5
+tempJob.reward = {{"kit_ammo_high"}}
+tempJob.rewardCount = 2
+tempJob.repReward = 55
+tempJob.moneyReward = {2050, 2300}
+tempJob.categories = {"mili"}
+
+ix.jobs.register(tempJob, "killMiliHigh")
+
+tempJob = nil
+
 end

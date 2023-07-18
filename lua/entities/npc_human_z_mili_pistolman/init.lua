@@ -125,6 +125,7 @@ function ENT:OnTakeDamage(dmg)
   if self:Health() <= 0 && self.dead == false then
     self.dead = true;
     self:KilledDan()
+    gamemode.Call( "OnNPCKilled",  self, dmg:GetAttacker(), dmg:GetInflictor() )
   end
 end
 
@@ -160,8 +161,8 @@ function ENT:InitEnemies()
   end
 
   for _, x in pairs(mutanttable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_NU, 10 )
+    self:AddEntityRelationship( x, D_NU, 10 )
   end
 end
 
