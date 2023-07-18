@@ -15,7 +15,7 @@ DIALOGUE.addTopic("GREETING", {
 	},
 	preCallback = function(self, client, target)
 		-- Tasks
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"information", "riches"}, 2)
+		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"information", "riches", "bandits"}, 4)
 
 		-- Special Sale
 		if (SERVER) then
