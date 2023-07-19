@@ -322,6 +322,7 @@ function ENT:KilledDan()
   end
 
   ragdoll:SetNetVar("loot", "bandit_pistol_loot")
+  ragdoll:Fire("kill","",180)
 
   self:Remove()
 end

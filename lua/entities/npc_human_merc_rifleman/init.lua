@@ -327,7 +327,16 @@ function ENT:KilledDan()
       bone:SetAngles( boneang )
     end
   end
-  
+
+  -- Helix specific drops
+  if(ix)then
+    local item = ix.util.GetRandomItemFromPool("bandit_pistol_drops")
+    ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), function(item, ent) ent.bTemporary = true end, AngleRand(), item[2] or {} )
+  end
+
+  ragdoll:SetNetVar("loot", "bandit_pistol_loot")
+  ragdoll:Fire("kill","",180)
+
   self:Remove()
 end
 

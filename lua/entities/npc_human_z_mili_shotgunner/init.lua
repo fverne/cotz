@@ -313,6 +313,7 @@ function ENT:KilledDan()
       bone:SetAngles( boneang )
     end
   end
+
   -- Helix specific drops
   if(ix)then
     local item = ix.util.GetRandomItemFromPool("bandit_shotgun_drops")
@@ -320,6 +321,7 @@ function ENT:KilledDan()
   end
 
   ragdoll:SetNetVar("loot", "bandit_shotgun_loot")
+  ragdoll:Fire("kill","",180)
 
   self:Remove()
 end
