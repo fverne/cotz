@@ -515,9 +515,9 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 			--ix.util.SpawnAdvDupe2Dupe( "prog_mute_1" ) 
 
 			-- Needs correct pos/ang set
-			--local pos = Vector(-6126.198730, -9746.725586, 4959.031250)
-			--local ang = Angle(0.000, -178.989, 0.000)
-			--ix.util.SpawnAdvVendor("stalkernetadmin", pos, ang)
+			local pos = Vector(-7499.309570, -9437.489258, 5036.031250)
+			local ang = Angle(0.000, -116.989, 0.000)
+			ix.util.SpawnAdvVendor("stalkernetadmin", pos, ang)
 
 			ix.progression.SetCompleted("oldTimerItemDelivery_mainStatue", true)
 
@@ -657,9 +657,9 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 				})
 			end)
 			-- Needs correct pos/ang set
-			--local pos = Vector(-6126.198730, -9746.725586, 4959.031250)
-			--local ang = Angle(0.000, -178.989, 0.000)
-			--ix.util.SpawnAdvVendor("tradernpc", pos, ang)
+			local pos = Vector(-8259.732422, -11667.531250, 5007.531250)
+			local ang = Angle(0.000, 90, 0.000)
+			ix.util.SpawnAdvVendor("tradernpc", pos, ang)
 
 			ix.progression.SetCompleted("stalkerNetAdminDelivery_mainRadioTower", true)
 
