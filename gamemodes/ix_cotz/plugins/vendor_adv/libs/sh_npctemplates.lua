@@ -135,6 +135,7 @@ ix.npctemplates.templates["tutorialnpc"] = {
 		["part_pseudodog"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_pseudogigant"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_psydog"] 	= { 1, nil, BUYONLY, nil, nil, nil },
+		["part_skeleton"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_snork_1"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_snork_2"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_sprig"] 	= { 1, nil, BUYONLY, nil, nil, nil },
@@ -156,6 +157,7 @@ ix.npctemplates.templates["tutorialnpc"] = {
 		["hide_sprig"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["hide_swampcontroller"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["hide_tushkano"] 	= { 1, nil, BUYONLY, nil, nil, nil },
+		
 	},
 }
 
