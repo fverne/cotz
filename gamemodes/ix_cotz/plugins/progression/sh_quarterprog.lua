@@ -1146,7 +1146,7 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 
 			timer.Simple(60, function()
 				local name = "'Quartermaster'"
-				local message = "!I now offer the Taurus Raging Bull; a .44 hand cannon that should give any mutants a bad day. As a bonus, I've opened up my stock of MP9 machine pistols for purchase."
+				local message = "I now offer the Taurus Raging Bull; a .44 hand cannon that should give any mutants a bad day. As a bonus, I've opened up my stock of MP9 machine pistols for purchase."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1563,7 +1563,7 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 
 			timer.Simple(60, function()
 				local name = "'Quartermaster'"
-				local message = "!You spoke and I listened; the MP-153 semi automatic shotgun is up for grabs."
+				local message = "You spoke and I listened; the MP-153 semi automatic shotgun is up for grabs."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
