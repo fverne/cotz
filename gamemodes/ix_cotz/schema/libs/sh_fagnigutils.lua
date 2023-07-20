@@ -59,6 +59,14 @@ if(CLIENT) then
 		end
 	end)
 
+	hook.Add("ShouldSuppressMenu", "ix_reloadNoMenuAllowed", function(client)
+		local weapon = client:GetActiveWeapon()
+
+		if(weapon.ReloadDelay or weapon.dt.State == CW_ACTION) then
+			return true
+		end
+	end)
+
 	net.Receive("ix_KillMenu", function()
 		if IsValid(ix.gui.menu) then
 			ix.gui.menu:Remove()
