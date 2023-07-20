@@ -2146,8 +2146,8 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "Hand over %d Empty Noteblock."
-  tempJob.desc = "%d Empty Noteblock."
+  tempJob.name = "Hand over %d Empty Notebook."
+  tempJob.desc = "%d Empty Notebook."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_value_documents_1"
