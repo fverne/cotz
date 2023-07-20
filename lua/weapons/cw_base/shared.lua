@@ -749,6 +749,12 @@ end
 function SWEP:beginReload()
 	local mag = self:Clip1()
 
+	if (SERVER) then
+		-- Kill the menu when we start a reload, in case it's up
+		net.Start("ix_KillMenu")
+		net.Send(self.Owner)
+	end
+
 	if self.ShotgunReload then
 		local time = CurTime() + self.ReloadStartTime / self.ReloadSpeed
 

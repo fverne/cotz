@@ -62,7 +62,7 @@ if(CLIENT) then
 	hook.Add("ShouldSuppressMenu", "ix_reloadNoMenuAllowed", function(client)
 		local weapon = client:GetActiveWeapon()
 
-		if(weapon.ReloadDelay or weapon.dt.State == CW_ACTION) then
+		if(weapon.ReloadDelay or ((weapon.dt and weapon.dt.State and weapon.dt.State == CW_ACTION))) then
 			return true
 		end
 	end)
