@@ -157,13 +157,17 @@ ix.npctemplates.templates["tutorialnpc"] = {
 		["hide_cat"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["hide_chimera"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["hide_controller"] 	= { 1, nil, BUYONLY, nil, nil, nil },
+		["hide_electrocontroller"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["hide_flesh"] 	= { 1, nil, BUYONLY, nil, nil, nil },
+		["hide_karlik"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["hide_pseudodog"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["hide_pseudogiant"] 	= { 1, nil, BUYONLY, nil, nil, nil },
+		["hide_spider"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["hide_sprig"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["hide_swampcontroller"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["hide_tushkano"] 	= { 1, nil, BUYONLY, nil, nil, nil },
-		
+		["hide_tark"] 	= { 1, nil, BUYONLY, nil, nil, nil },
+		["hide_vareshka"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 	},
 }
 
