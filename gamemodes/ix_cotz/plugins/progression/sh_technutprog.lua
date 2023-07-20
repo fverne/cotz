@@ -168,6 +168,7 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit2", true)
 			ix.progression.SetActive("technutItemDelivery_Suit3", true) 
+			ix.progression.SetACtive("technutItemDelivery_Mask1", true)
 
 		end
 	end
@@ -253,6 +254,7 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit3", true)
 			ix.progression.SetActive("technutItemDelivery_Suit4", true) 
+			ix.progression.SetActive("technutItemDelivery_Helmet1", true) 
 
 		end
 	end
@@ -335,6 +337,7 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit4", true)
 			ix.progression.SetActive("technutItemDelivery_Suit5", true) 
+			ix.progression.SetActive("technutItemDelivery_Attachment1", true) 
 
 		end
 	end
@@ -418,6 +421,7 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit5", true)
 			ix.progression.SetActive("technutItemDelivery_Suit6", true) 
+			ix.progression.SetActive("technutItemDelivery_AttachmentFabric1", true) 
 
 		end
 	end
@@ -503,6 +507,7 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit6", true)
 			ix.progression.SetActive("technutItemDelivery_Suit7", true) 
+			ix.progression.SetActive("technutItemDelivery_AttachmentKevlar1", true) 
 
 		end
 	end
@@ -584,6 +589,8 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit7", true)
+			ix.progression.SetActive("technutItemDelivery_AttachmentFrame1", true) 
+			ix.progression.SetActive("technutItemDelivery_AttachmentCarbon", true) 
 
 		end
 	end
@@ -681,7 +688,7 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 	name = "Wear Protection Pt. 1",
 	description = "Help Technut get his hands on helmets.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_Helmet1"] = ix.progression.status["technutItemDelivery_Helmet1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Helmet1"].complexData
@@ -1278,7 +1285,7 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 	name = "Don't breathe this Pt. 1",
 	description = "Help technut provide gasmasks.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_Mask1"] = ix.progression.status["technutItemDelivery_Mask1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Mask1"].complexData
@@ -1536,7 +1543,7 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 	name = "Plating up Pt. 1",
 	description = "Provide technut with materials for suit plates.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_Attachment1"] = ix.progression.status["technutItemDelivery_Attachment1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Attachment1"].complexData
@@ -1789,7 +1796,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 	name = "Patching Pt. 1",
 	description = "Provide technut with materials for suit fabrics.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_AttachmentFabric1"] = ix.progression.status["technutItemDelivery_AttachmentFabric1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData
@@ -1954,7 +1961,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 	name = "Framing Pt. 1",
 	description = "Provide technut with materials for suit frames.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_AttachmentFrame1"] = ix.progression.status["technutItemDelivery_AttachmentFrame1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData
@@ -2121,7 +2128,7 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 	name = "Carbon Cabrón",
 	description = "Provide technut with materials for suit carbon fibre.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_AttachmentCarbon"] = ix.progression.status["technutItemDelivery_AttachmentCarbon"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData
@@ -2204,7 +2211,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 	name = "Armoring up Pt. 1",
 	description = "Provide technut with materials for suit kevlar.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_AttachmentKevlar1"] = ix.progression.status["technutItemDelivery_AttachmentKevlar1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData

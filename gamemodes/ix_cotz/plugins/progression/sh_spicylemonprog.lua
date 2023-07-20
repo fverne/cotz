@@ -161,6 +161,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Medical2", true)
 			ix.progression.SetActive("spicylemonItemDelivery_Medical3", true) 
+			ix.progression.SetActive("technutItemDelivery_Food", true) 
 
 		end
 	end
@@ -244,6 +245,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Medical3", true)
 			ix.progression.SetActive("spicylemonItemDelivery_Medical4", true) 
+			ix.progression.SetActive("technutItemDelivery_Vodka", true) 
 
 		end
 	end
@@ -411,6 +413,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Medical5", true)
 			ix.progression.SetActive("spicylemonItemDelivery_Medical6", true) 
+			ix.progression.SetActive("technutItemDelivery_Spirits", true) 
 
 		end
 	end
@@ -577,6 +580,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 			end
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Medical7", true)
+			ix.progression.SetActive("technutItemDelivery_Brew", true) 
 
 		end
 	end
@@ -591,7 +595,7 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 	name = "Food for the poor",
 	description = "Spicy Lemon is interested in importing some food.",
 	keyNpc = "'Spicy Lemon'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["spicylemonItemDelivery_Food"] = ix.progression.status["spicylemonItemDelivery_Food"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Food"].complexData
@@ -681,7 +685,7 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 	name = "Drinks for the poor",
 	description = "Spicy Lemon has a discerning eye for new customers...",
 	keyNpc = "'Spicy Lemon'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["spicylemonItemDelivery_Vodka"] = ix.progression.status["spicylemonItemDelivery_Vodka"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Vodka"].complexData
@@ -766,7 +770,7 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 	name = "Drinks for the rich",
 	description = "Spicy Lemon would like to expand his vodka stocks.",
 	keyNpc = "'Spicy Lemon'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["spicylemonItemDelivery_Spirits"] = ix.progression.status["spicylemonItemDelivery_Spirits"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Spirits"].complexData
@@ -853,7 +857,7 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 	name = "Drinks for the smart",
 	description = "Spicy Lemon is interested in medicinal brews.",
 	keyNpc = "'Spicy Lemon'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["spicylemonItemDelivery_Brew"] = ix.progression.status["spicylemonItemDelivery_Brew"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Brew"].complexData

@@ -79,6 +79,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 
 			ix.progression.SetCompleted("oldtimerItemDelivery_Knife1", true)
 			ix.progression.SetActive("oldtimerItemDelivery_Knife2", true) 
+			ix.progression.SetActive("oldtimerItemDelivery_Hidestash1", true) 
 
 		end
 	end
@@ -345,7 +346,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 	name = "Hiding Secrets 1",
 	description = "Prove your worth as a seeker to Old Timer",
 	keyNpc = "'Old Timer'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["oldtimerItemDelivery_Hidestash1"] = ix.progression.status["oldtimerItemDelivery_Hidestash1"] or {}
 		local dat = ix.progression.status["oldtimerItemDelivery_Hidestash1"].complexData

@@ -77,6 +77,7 @@ ix.progression.Register("muteItemDelivery_Binoc1", {
 
 			ix.progression.SetCompleted("muteItemDelivery_Binoc1", true)
 			ix.progression.SetActive("muteItemDelivery_Binoc2", true) 
+			ix.progression.SetActive("muteItemDelivery_Anomaly", true)
 
 		end
 	end
@@ -159,6 +160,7 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 
 			ix.progression.SetCompleted("muteItemDelivery_Binoc2", true)
 			ix.progression.SetActive("muteItemDelivery_Binoc3", true) 
+			ix.progression.SetActive("muteItemDelivery_Broadcast", true)
 
 		end
 	end
@@ -340,7 +342,7 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 	name = "Anomaly Detector",
 	description = "Mute is busy drawing pictures of anomalies.",
 	keyNpc = "'Mute'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["muteItemDelivery_Anomaly"] = ix.progression.status["muteItemDelivery_Anomaly"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Anomaly"].complexData
@@ -508,7 +510,7 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 	name = "Keeping tabs",
 	description = "Mute is working on a server box.",
 	keyNpc = "'Mute'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["muteItemDelivery_Broadcast"] = ix.progression.status["muteItemDelivery_Broadcast"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Broadcast"].complexData
