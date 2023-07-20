@@ -58,9 +58,7 @@ hook.Add("ix_OnJobComplete", "Mute_scanTasks", function(client, npcidentifier, i
 	local iscorrecttasktype = false
 
 	local categories = {
-		["scanareaeasy"] = true,
-		["scanareamed"] = true,
-		["scanareahigh"] = true,
+		["scanarea"] = true,
 	}
 
 	for k, v in pairs(ix.jobs.list[identifier].categories) do
