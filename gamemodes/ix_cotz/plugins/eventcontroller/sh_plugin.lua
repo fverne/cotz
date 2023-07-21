@@ -37,7 +37,7 @@ if SERVER then
 		for i,j in pairs (currentents) do
 			if j:IsPlayer() then
 				return false
-			elseif (string.sub(j:GetClass(), 1, 10) == "npc_mutant") then
+			elseif (string.sub(j:GetClass(), 1, 4) == "npc_") then
 				return false
 			end
 		end
