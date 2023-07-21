@@ -176,9 +176,13 @@ if SERVER then
 					return
 				end
 
-				while table.Random(spawn.difficulty) != eventpoint[3] do
+				local n = 0
+				while table.Random(spawn.difficulty) != eventpoint[3] and n<15 do
 					spawn = table.Random(self.eventdefs)
+					n = n + 1
 				end
+
+				if( n == 15 ) then return end
 				
 				self:spawnEvent(eventpoint,spawn)
 			end
@@ -204,6 +208,8 @@ if SERVER then
 			n = n + 1
 		end
 
+		if( n == 15 ) then return end
+
 		self:spawnEvent(eventpoint, spawn)
 		
 		if ix.progression.IsCompleted("muteItemDelivery_Broadcast") then
@@ -224,7 +230,7 @@ if SERVER then
 	end	
 
 	function PLUGIN:GetNumMutants()
-		return #ents.FindByClass("npc_mutant_*")
+		return #ents.FindByClass("npc_*")
 	end
 else
 	netstream.Hook("nut_DisplaySpawnPoints", function(data)
