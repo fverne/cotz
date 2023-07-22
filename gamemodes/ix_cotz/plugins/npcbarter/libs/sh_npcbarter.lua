@@ -122,7 +122,7 @@ else
 
 					pl:GetCharacter():GetInventory():Add(rewardItem[1], rewardCnt, rewardItem[3] or {})
 
-					out = "Successfully bartered "..cnt.."x "..ix.item.list[item].name.." for "..rewardCnt.."x "..ix.item.list[rewardItem[1]].name.."."
+					out = "Successfully bartered "..cnt.."x "..ix.item.list[item].name.." to "..rewardCnt.."x "..ix.item.list[rewardItem[1]].name.."."
 				else
 					out = "Not enough "..ix.item.list[item].name.." in inventory."
 				end

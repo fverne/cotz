@@ -373,7 +373,7 @@ function ITEM:Equip(client)
 			end
 		end)
 
-		timer.Simple(1,function() -- To make up for lag
+		timer.Simple(0.5,function() -- To make up for lag
 			local attachments = self:GetData("attachments") or {}
 			local weapon1 = client:GetWeapon(self.class)
 			

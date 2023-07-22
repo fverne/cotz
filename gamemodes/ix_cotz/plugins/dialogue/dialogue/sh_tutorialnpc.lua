@@ -523,7 +523,7 @@ DIALOGUE.addTopic("StartBarter", {
 			for _, reqitem in pairs(barterstruct.reqItem) do
 				local reqItemCnt = reqitem[2] or 1
 
-				table.insert(dynopts, {statement = reqItemCnt.."x "..ix.item.list[reqitem[1]].name.." for "..barterCnt.."x "..ix.item.list[barterItem[1]].name, topicID = "StartBarter", dyndata = {npcname = "'Old Timer'", identifier = barterid, reqitem = reqitem[1]}})
+				table.insert(dynopts, {statement = reqItemCnt.."x "..ix.item.list[reqitem[1]].name.." to "..barterCnt.."x "..ix.item.list[barterItem[1]].name, topicID = "StartBarter", dyndata = {npcname = "'Old Timer'", identifier = barterid, reqitem = reqitem[1]}})
 			end
 		end
 
