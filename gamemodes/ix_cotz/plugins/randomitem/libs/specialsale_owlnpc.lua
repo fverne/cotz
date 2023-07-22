@@ -25,23 +25,32 @@ ix.randomitems.tables["specialsale_owlnpc_headgear"] = {
 }
 
 ix.randomitems.tables["specialsale_owlnpc_weapon_pistol"] = {
-  {100, {"ump45"}},
-  {100, {"p90"}},
-  {50, {"sr2"}},
-  {100, {"pp2000"}},
   {100, {"stechaps"}},
   {100, {"glock18"}},
   {100,  {"m1911chic"}},
+  {100,  {"deagle"}},
+  {100,  {"fiveseven"}},
+  {100,  {"g2contender500"}},
+  {100,  {"mateba"}},
+  {100,  {"glock17"}},
+  {100,  {"p99"}},
+  {100,  {"sw500"}},
+  {100,  {"swmodel29"}},
+  {100,  {"swr8"}},
+  {100,  {"taurusragingbull"}},
 }
 
 ix.randomitems.tables["specialsale_owlnpc_weapon_smg"] = {
   {100, {"ump45"}},
   {100, {"p90"}},
-  {50, {"sr2"}},
+  {100, {"sr2"}},
   {100, {"pp2000"}},
-  {100, {"stechaps"}},
-  {100, {"glock18"}},
-  {100,  {"m1911chic"}},
+  {100, {"uzi50ae"}},
+  {100, {"pp19"}},
+  {100, {"mp9a1"}},
+  {100, {"mp5"}},
+  {100, {"m1928"}},
+  {100, {"gepardpdw"}},
 }
 
 ix.randomitems.tables["specialsale_owlnpc_weapon_rifle"] = {
