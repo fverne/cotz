@@ -35,8 +35,8 @@ PLUGIN.mapdata["rp_salvation_2_haven"].loadzones["fromwaystation"] = {
 	desc = "The area ahead leads to the Farmlands."
 }
 PLUGIN.mapdata["rp_salvation_2_haven"].loadzones["frommarsh"] = {
-	pos = Vector(-10179.993164, -6402.410645, -7.968750), --edit me
-	ang = Angle(5.907976, -33.262821, 0.000000), --edit me
+	pos = Vector(-10784.875000, -10971.215820, 81.031250), --edit me
+	ang = Angle(0.000000, 180.0000, 0.000000), --edit me
 	desc = "The area ahead leads to the Farmlands."
 }
 
