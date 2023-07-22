@@ -29,8 +29,8 @@ DIALOGUE.addTopic("GREETING", {
 					{itemCategory = "specialsale_owlnpc_weapon_rifle", price = 40000, dialogue = "I like to keep shooting until there is nothing left to shoot at.", reqRep = 9338},
 					{itemCategory = "specialsale_owlnpc_weapon_shotgun", price = 50000, dialogue = "I want to fill mutants with pellets of lead.", reqRep = 1943},
 					{itemCategory = "specialsale_owlnpc_weapon_sniper", price = 60000, dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 765},
-					{itemCategory = "specialsale_owlnpc_headgear", price = 70000, dialogue = "I'm looking for better headwear.", reqRep = 50},
-					{itemCategory = "specialsale_owlnpc_suit", price = 80000, dialogue = "I'm the clumsy type, and often stumble into anomalous zones. I'm looking for protection.", reqRep = 4254},
+					{itemCategory = "specialsale_owlnpc_headgear", price = 30000, dialogue = "I'm looking for better headwear.", reqRep = 50},
+					{itemCategory = "specialsale_owlnpc_suit", price = 50000, dialogue = "I'm the clumsy type, and often stumble into anomalous zones. I'm looking for protection.", reqRep = 4254},
 				}
 
 				for k,v in pairs(randomItemCategories) do
