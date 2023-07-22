@@ -30,7 +30,7 @@ function ENT:Initialize()
 	self.Entity:SetKeyValue("rendercolor", "150 255 150")
 	self.Entity:SetKeyValue("renderamt", "0")
 	self.Entity:SetMaterial("models/props_combine/portalball001_sheet")
-	self.Entity:SetPersistent(true)
+	
         local phys = self.Entity:GetPhysicsObject()
 	if (phys:IsValid()) then
 		phys:Wake()
