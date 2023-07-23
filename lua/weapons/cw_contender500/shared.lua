@@ -73,7 +73,7 @@ SWEP.CustomizationMenuScale = 0.012
 
 SWEP.Attachments = {[1] = {header = "Sight", offset = {0, -500},  atts = {"md_aimpoint", "md_eotech", "md_microt1"}},
 	[2] = {header = "Barrel", offset = {-450, -300}, atts = {"md_saker"}},
-	["+reload"] = {header = "Ammo", offset = {400, -100}, atts = {"am_hollowpoint", "am_armorpiercing", "am_410buck"}}}
+	["+reload"] = {header = "Ammo", offset = {400, -100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = "shoot1",
 	fireDry = "shoot1",
