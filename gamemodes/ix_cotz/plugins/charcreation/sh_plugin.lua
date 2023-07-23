@@ -74,7 +74,7 @@ function PLUGIN:GetPDAAvatar(client)
 
 	avatar = steamid % #self.pdaavatars
 	
-	return self.pdaavatars[avatar]
+	return self.pdaavatars[avatar + 1]
 end
 
 function PLUGIN:OnCharacterCreated(client, character)
