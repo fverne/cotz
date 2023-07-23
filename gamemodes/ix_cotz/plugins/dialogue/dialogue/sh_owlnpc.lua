@@ -241,10 +241,9 @@ DIALOGUE.addTopic("OpenStorage", {
 			local ID = character:GetData("bankID")
 			local bank
 
-			local bankstruct = {}
-			bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 3)), character:GetData("bankH", ix.config.Get("bankH", 2))}
-		
 			if ID then
+				local bankstruct = {}
+				bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 3)), character:GetData("bankH", ix.config.Get("bankH", 2))}
 				ix.inventory.Restore(bankstruct, ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), function(inventory)
 					bank = inventory
 					bank:SetOwner(character:GetID())
