@@ -83,7 +83,7 @@ hook.Add("ix_OnJobComplete", "Egghead_dataTasks", function(client, npcidentifier
 		if categories[v] then iscorrecttasktype = true end
 	end
 
-	if npcidentifier == "'Mute'" and iscorrecttasktype then
+	if npcidentifier == "'Egghead'" and iscorrecttasktype then
 		if ix.progression.IsActive("egghead_dataTasks") then
 			ix.progression.AddProgessionValue("egghead_dataTasks", 1, client:Name())
 		end
