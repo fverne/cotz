@@ -229,10 +229,10 @@ end
 -- @string materialPath Path to the material
 -- @treturn[1] material The cached material
 -- @treturn[2] nil If the material doesn't exist in the filesystem
-function ix.util.GetMaterial(materialPath)
+function ix.util.GetMaterial(materialPath, materialArguments)
 	-- Cache the material.
 	ix.util.cachedMaterials = ix.util.cachedMaterials or {}
-	ix.util.cachedMaterials[materialPath] = ix.util.cachedMaterials[materialPath] or Material(materialPath)
+	ix.util.cachedMaterials[materialPath] = ix.util.cachedMaterials[materialPath] or Material(materialPath, materialArguments)
 
 	return ix.util.cachedMaterials[materialPath]
 end
