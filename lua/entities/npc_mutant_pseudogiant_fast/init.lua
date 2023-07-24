@@ -27,8 +27,8 @@ ENT.ChasingSound.chance = 5
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 5000
-ENT.hpvar = 1250
+ENT.hp = 2000
+ENT.hpvar = 250
 
 ENT.CanJump = 0
 ENT.isAttacking = 0

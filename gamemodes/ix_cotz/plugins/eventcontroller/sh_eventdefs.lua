@@ -237,13 +237,9 @@ PLUGIN.eventdefs["pseudogiant1"] = {
 	entities = {
 		{"npc_mutant_pseudogiant_slow", 1}, 
 	},
-	props = {
-		{"models/Gibs/HGIBS.mdl", 3}, 
-		{"models/Gibs/HGIBS_spine.mdl", 2},
-	},
-	
+
 	pdabroadcast = "A pseudogiant has been spotted %s! Stay away from there, stalker.",
-	difficulty = {31},
+	difficulty = {21},
 	lootChance = 20, 
 }
 
@@ -251,10 +247,6 @@ PLUGIN.eventdefs["pseudogiant2"] = {
 	entities = {
 		{"npc_mutant_pseudogiant_slow", 1},
 		{"npc_mutant_rodent", 3}, 
-	},
-	props = {
-		{"models/Gibs/HGIBS.mdl", 3}, 
-		{"models/Gibs/HGIBS_spine.mdl", 2},
 	},
 	
 	pdabroadcast = "A pseudogiant has been spotted %s! Stay away from there, stalker.",
@@ -532,7 +524,7 @@ PLUGIN.eventdefs["burer2"] = {
 		{"npc_mutant_classiczombie", 2}, 
 	},
 	pdabroadcast =  "A burer has been spotted %s! Watch out for any figure in a trenchcoat, stalker.",
-	difficulty = {21, 32},
+	difficulty = {21, 22, 32},
 	lootChance = 15, 
 }
 
@@ -777,7 +769,7 @@ PLUGIN.eventdefs["spider2"] = {
 		{"npc_mutant_spider", 2},
 	},
 	pdabroadcast = "Arachnid creatures spotted %s. Take care, stalker.",
-	difficulty = {31},
+	difficulty = {21},
 }
 
 PLUGIN.eventdefs["spider3"] = {
@@ -785,7 +777,7 @@ PLUGIN.eventdefs["spider3"] = {
 		{"npc_mutant_spider", 3},
 	},
 	pdabroadcast = "A hunting pack of arachnid creatures spotted %s. Take care, stalker.",
-	difficulty = {31},
+	difficulty = {21},
 }
 
 
@@ -829,7 +821,7 @@ PLUGIN.eventdefs["controllerfast1"] = {
 		{"npc_mutant_controller_fast", 1},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {31},
+	difficulty = {21},
 }
 
 PLUGIN.eventdefs["controllerfast2"] = {
@@ -861,7 +853,7 @@ PLUGIN.eventdefs["controller2"] = {
 		{"npc_human_z_rookie_rifleman", 2},
 	},
 	pdabroadcast = "Getting multiple strange readings %s... Be very cautious, stalker.",
-	difficulty = {12, 21, 22, 31},
+	difficulty = {21, 22, 31, 32},
 }
 
 --[[-------------------------------------------------------------------------
@@ -910,7 +902,7 @@ PLUGIN.eventdefs["vareshka1"] = {
 		{"npc_mutant_vareshka", 1},
 	},
 	pdabroadcast = "Vareshka detected %s... Take care, stalker.",
-	difficulty = {31},
+	difficulty = {21},
 }
 
 PLUGIN.eventdefs["vareshka2"] = {
@@ -938,7 +930,7 @@ PLUGIN.eventdefs["bear1"] = {
 		{"npc_mutant_bear", 1},
 	},
 	pdabroadcast = "Huge Bear detected %s, don't get too close, stalker.",
-	difficulty = {31},
+	difficulty = {21},
 }
 
 PLUGIN.eventdefs["bear2"] = {
@@ -1036,7 +1028,7 @@ PLUGIN.eventdefs["banditsniper"] = {
 	entities = {
 		{"npc_human_bandit_rifleman", 1},		
 	},
-	pdabroadcast = "Bandits sniper spotted %s. Take care.",
+	pdabroadcast = "Bandit sniper spotted %s. Take care.",
 	difficulty = {13},
 }
 
