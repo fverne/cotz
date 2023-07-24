@@ -737,13 +737,13 @@ DIALOGUE.addTopic("BackTopic", {
 			if cooldown < os.time() or !client:GetData("specialSaleItemCategories") then
 				local categoriesToShow = {}
 				local randomItemCategories = {
-					{itemCategory = "specialsale_owlnpc_weapon_pistol", dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 765},
-					{itemCategory = "specialsale_owlnpc_weapon_smg", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
-					{itemCategory = "specialsale_owlnpc_weapon_rifle", dialogue = "I like to keep shooting until there is nothing left to shoot at.", reqRep = 9338},
-					{itemCategory = "specialsale_owlnpc_weapon_shotgun", dialogue = "I want to fill mutants with pellets of lead.", reqRep = 1943},
-					{itemCategory = "specialsale_owlnpc_weapon_sniper", dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 765},
-					{itemCategory = "specialsale_owlnpc_headgear", dialogue = "I'm looking for better headwear.", reqRep = 50},
-					{itemCategory = "specialsale_owlnpc_suit", dialogue = "I'm the clumsy type, and often stumble into anomalous zones. I'm looking for protection.", reqRep = 4254},
+					{itemCategory = "specialsale_owlnpc_weapon_pistol", price = 20000, dialogue = "I'm looking for a sidearm.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_weapon_smg", price = 30000, dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_weapon_rifle", price = 40000, dialogue = "I like to keep shooting until there is nothing left to shoot at.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_weapon_shotgun", price = 50000, dialogue = "I want to fill mutants with pellets of lead.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_weapon_sniper", price = 60000, dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_headgear", price = 30000, dialogue = "I'm looking for better headwear.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_suit", price = 50000, dialogue = "I'm looking for a new suit.", reqRep = 0},
 				}
 
 				for k,v in pairs(randomItemCategories) do
