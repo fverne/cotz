@@ -73,7 +73,7 @@ ix.npcbarter.Register("'Old Timer'", "newbiebarter1", {
 
 ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner1", {
 	name = "Eurofunny",
-	description = "I'll give you a box of .22lr Buckshot for 10 Euros.",
+	description = "I'll give you a box of .22lr for 10 Euros.",
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
@@ -82,5 +82,33 @@ ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner1", {
 	-- Only one type of item can be required at a time
 	reqItem = {
 		{"value_currency_euro", 10},
+	}
+})
+
+ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner2", {
+	name = "Eurofunny 2",
+	description = "I'll give you a box of 12 Gauge Buckshot for 35 Euros.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"12gauge", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"value_currency_euro", 35},
+	}
+})
+
+ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner3", {
+	name = "Eurofunny 3",
+	description = "I'll give you a box of .410 Buckshot for 20 Euros.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"45acp410", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"value_currency_euro", 20},
 	}
 })
