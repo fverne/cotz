@@ -192,7 +192,7 @@ DIALOGUE.addTopic("StorageTopic", {
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
-		local basecost = 225
+		local basecost = 120
 		local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3))
 		local bankH = client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
 		local heightcost = math.Round(math.pow(basecost + 300, 1+(bankH/4.5)))
