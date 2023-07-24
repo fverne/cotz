@@ -10,8 +10,8 @@ function ix.util.GetValueFromProgressionTurnin(item, cnt)
     local rep = (math.sqrt(math.sqrt(value * 0.1 * cnt))) 
     rep = math.Round(baseRep + rep)
 
-    -- Calculate Currency - left out for now
-    local buyBackRate = 0.4 -- Slightly less than cleaner
+    -- Calculate Currency
+    local buyBackRate = 0.6 -- Same as selling to the good vendor
     local currency = value * buyBackRate
     currency = currency * cnt
 
