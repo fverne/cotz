@@ -58,7 +58,7 @@ if (SERVER) then
 	end)
 
 	netstream.Hook("ix_requestNicknameChange", function(client, requestedNickname)
-		if client and client:getReputation() >= 1943 then
+		if client and client:getReputation() >= 4100 then --Professional
 			if string.len(requestedNickname) == 0 then
 				client:GetCharacter():SetNickname(nil)
 				client:Notify("Nickname removed.")

@@ -79,7 +79,7 @@ DIALOGUE.addTopic("NicknameTopic", {
 		end
 	end,
 	ShouldAdd = function()
-		return ix.progression.IsCompleted("oldtimerItemDelivery_Nickname") and LocalPlayer():getReputation() >= 1943
+		return ix.progression.IsCompleted("oldtimerItemDelivery_Nickname") and LocalPlayer():getReputation() >= 4100 --Professional
 	end
 })
 
