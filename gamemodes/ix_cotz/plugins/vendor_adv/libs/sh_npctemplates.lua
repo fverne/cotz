@@ -380,6 +380,7 @@ ix.npctemplates.templates["ecologistnpc"] = {
 		["artifact_battery"] = { 1, nil, BUYONLY, nil, nil, nil },
 		["artifact_blowncap"] = { 1, nil, BUYONLY, nil, nil, nil },
 		["artifact_bolt"] = { 1, nil, BUYONLY, nil, nil, nil },
+		["artifact_bonecluster"] = { 1, nil, BUYONLY, nil, nil, nil },
 		["artifact_capacitor"] = { 1, nil, BUYONLY, nil, nil, nil },
 		["artifact_cell"] = { 1, nil, BUYONLY, nil, nil, nil },
 		["artifact_crystal"] = { 1, nil, BUYONLY, nil, nil, nil },
