@@ -105,7 +105,7 @@ ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner3", {
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
-	barterItem = {"45acp410", 1},
+	barterItem = {"45acp41", 1},
 
 	-- Only one type of item can be required at a time
 	reqItem = {
