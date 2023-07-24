@@ -324,7 +324,7 @@ DIALOGUE.addTopic("AboutProgression", {
 	},
 	preCallback = function(self, client, target)
 		if( CLIENT ) then
-			if #ix.progression.GetActiveProgressions("'Bodyguard'") <= 0 then
+			if #ix.progression.GetActiveProgressions("'Quartermaster'") <= 0 then
 				self.response = "Nothing at the moment."
 			end
 
@@ -336,11 +336,11 @@ DIALOGUE.addTopic("AboutProgression", {
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
 
-		local test = ix.progression.GetActiveProgressions("'Bodyguard'")
+		local test = ix.progression.GetActiveProgressions("'Quartermaster'")
 
 		PrintTable(test)
 
-		for _, progid in pairs(ix.progression.GetActiveProgressions("'Bodyguard'")) do
+		for _, progid in pairs(ix.progression.GetActiveProgressions("'Quartermaster'")) do
 			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})
 		end
 
