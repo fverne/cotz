@@ -34,25 +34,22 @@ ITEM.functions.use = {
 			return false
 		end
 
-		local chance = math.random(1,2)
-		if chance == 1 then
-			ix.plugin.list["hidestash"]:SpawnStash(spawnpoint[1], { loot[1], loot[2] })
-			item:SetData("stashcoordinates", spawnpoint[1])
-			item:SetData("stashtext", spawnpoint[2])
-			item:SetData("map", game.GetMap())
-			for i = 1, #loot[1] do
-				stashcontent = stashcontent..", "..loot[i][1]
-			end
-
-			item.player:Notify( "You found the location of a stash!" )
-			ix.log.Add(item.player, "command", "created a stash from "..item.name.." at x:"..spawnpoint[1].x.." y:"..spawnpoint[1].y.." z:"..spawnpoint[1].z.." with "..stashcontent)
-		else
-			local money = math.random(item.moneyinterval[1], item.moneyinterval[2])
-			item.player:GetCharacter():GiveMoney(money)
-			item.player:Notify( "You found "..money.." rubles and wired them to your account!" )
-			item:SetData("stashtext", "There was some money on this PDA, but it's gone now.")
-			item:SetData("moneytaken", true)
+		ix.plugin.list["hidestash"]:SpawnStash(spawnpoint[1], { loot[1], loot[2] })
+		item:SetData("stashcoordinates", spawnpoint[1])
+		item:SetData("stashtext", spawnpoint[2])
+		item:SetData("map", game.GetMap())
+		for i = 1, #loot[1] do
+			stashcontent = stashcontent..", "..loot[i][1]
 		end
+
+		item.player:Notify( "You found the location of a stash!" )
+		ix.log.Add(item.player, "command", "created a stash from "..item.name.." at x:"..spawnpoint[1].x.." y:"..spawnpoint[1].y.." z:"..spawnpoint[1].z.." with "..stashcontent)
+
+		local money = math.random(item.moneyinterval[1], item.moneyinterval[2])
+		item.player:GetCharacter():GiveMoney(money)
+		item.player:Notify( "You found "..money.." rubles and wired them to your account!" )
+		item:SetData("stashtext", "There was some money on this PDA, but it's gone now.")
+		item:SetData("moneytaken", true)
 
 		return false
 	end,
