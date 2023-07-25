@@ -3,7 +3,7 @@ ITEM.description = "A meal made from a spider, cooked in the zone."
 ITEM.longdesc = "A skewer of cooked, cubed Spider on a spit. The meat is tough and sinewy with a slightly sour taste, practically begging to be washed down with a swig of vodka or a can of beer."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_tushkano.mdl"
 
-ITEM.price = 260
+ITEM.price = 560
 ITEM.width = 1
 ITEM.height = 1
 

@@ -3,7 +3,7 @@ ITEM.description = "A meal made from a pseudogiant, cooked in the zone."
 ITEM.longdesc = "A seared roast cut from a pseudogiant. It is pretty tender, with just a slight off taste. If you close your eyes while eating, you can almost convince yourself you're eating a nice cut of beef."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_chimera.mdl"
 
-ITEM.price = 14500
+ITEM.price = 4500
 ITEM.width = 1
 ITEM.height = 1
 

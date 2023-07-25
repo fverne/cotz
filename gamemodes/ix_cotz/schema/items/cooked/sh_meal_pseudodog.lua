@@ -3,7 +3,7 @@ ITEM.description = "A meal made from a pseudodog, cooked in the zone."
 ITEM.longdesc = "A thick stew made primarily from Pseudodog meat. Surprisingly tasty, if you take into consideration where the meat comes from."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_pseudodog.mdl"
 
-ITEM.price = 455
+ITEM.price = 655
 ITEM.width = 1
 ITEM.height = 1
 

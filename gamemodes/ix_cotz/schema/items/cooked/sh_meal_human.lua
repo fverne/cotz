@@ -3,7 +3,7 @@ ITEM.description = "A meal made from decomposing humans, cooked in the zone."
 ITEM.longdesc = "Not even the finest chefs could save this meal. Smells awful, but it would probably fill you up as a last resort."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_flesh.mdl"
 
-ITEM.price = 10
+ITEM.price = 250
 ITEM.width = 1
 ITEM.height = 1
 

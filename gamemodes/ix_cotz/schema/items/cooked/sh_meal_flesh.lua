@@ -3,7 +3,7 @@ ITEM.description = "A meal made from a flesh, cooked in the zone."
 ITEM.longdesc = "Strips of Flesh meat boiled until juicy and tender. Should keep your stomach full for a good while, although the taste is nothing special."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_flesh.mdl"
 
-ITEM.price = 390
+ITEM.price = 490
 ITEM.width = 1
 ITEM.height = 1
 

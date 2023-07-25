@@ -3,7 +3,7 @@ ITEM.description = "A meal made from a boar, cooked in the zone."
 ITEM.longdesc = "A nicely seared pork chop from a wild boar. A little more gamey than the stuff you'd find outside the zone, but still pretty tasty."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_boar.mdl"
 
-ITEM.price = 320
+ITEM.price = 520
 ITEM.width = 1
 ITEM.height = 1
 

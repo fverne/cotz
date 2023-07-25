@@ -3,7 +3,7 @@ ITEM.description = "A meal made from a cat, cooked in the zone."
 ITEM.longdesc = "Thin cuts of Cat meat, cut across the grain to make the meat as tender as possible, although it's still quite tough and chewy."
 ITEM.model = "models/lostsignalproject/items/consumable/food_chimera.mdl"
 
-ITEM.price = 340
+ITEM.price = 540
 ITEM.width = 1
 ITEM.height = 1
 
