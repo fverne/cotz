@@ -278,7 +278,7 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 5,
+			["artifact_bolt"] = 2,
 		}	
 
 		return itemids
