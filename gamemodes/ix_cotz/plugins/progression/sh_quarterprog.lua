@@ -20,7 +20,7 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["part_chimera"] = 10,
+			["part_snork"] = 10,
 		}	
 
 		return itemids
@@ -71,6 +71,7 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
 			if (npc) then
 				npc:AddItemToList("mp5", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mossberg500", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("quartermasterItemDelivery_1", true)
