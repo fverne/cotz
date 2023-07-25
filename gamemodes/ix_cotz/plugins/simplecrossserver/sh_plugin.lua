@@ -183,6 +183,7 @@ if (CLIENT) then
 		permissions.AskToConnect(address)
 	end)
 else
+	ix.chat.Send(nil, "playerjoin", string.format("%s has switched area.", character:GetName()))
 	ix.log.AddType("serverTransfer", function(client, map, ip)
 		return string.format("%s is moving to map %s with ip %s.", client:Name(), map, ip)
 	end)
