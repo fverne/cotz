@@ -130,7 +130,7 @@ if (SERVER) then
 	function PLUGIN:LoadData()
 		local data = self:GetData()
 
-		self.lastSeenId = data["lastseen"] or 0
+		self.lastSeenId = data[1]["lastseen"] or 0
 		if(SERVER)then
 			self:LoadTables()
 		end
