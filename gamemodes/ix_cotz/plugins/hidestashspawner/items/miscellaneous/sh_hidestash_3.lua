@@ -48,7 +48,6 @@ ITEM.functions.use = {
 		local money = math.random(item.moneyinterval[1], item.moneyinterval[2])
 		item.player:GetCharacter():GiveMoney(money)
 		item.player:Notify( "You found "..money.." rubles and wired them to your account!" )
-		item:SetData("stashtext", "There was some money on this PDA, but it's gone now.")
 		item:SetData("moneytaken", true)
 
 		return false
