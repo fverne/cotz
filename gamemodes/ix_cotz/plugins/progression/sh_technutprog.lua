@@ -25,12 +25,12 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["fireaxe"] = 10,
-			["crowbar"] = 10,
-			["hatchet"] = 10,
-			["machete"] = 10,
-			["leadpipe"] = 10,
-			["sledgehammer"] = 10,
+			["fireaxe"] = 5,
+			["crowbar"] = 5,
+			["hatchet"] = 5,
+			["machete"] = 5,
+			["leadpipe"] = 5,
+			["sledgehammer"] = 5,
 		}	
 
 		return itemids
@@ -168,7 +168,6 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit2", true)
 			ix.progression.SetActive("technutItemDelivery_Suit3", true) 
-			ix.progression.SetACtive("technutItemDelivery_Mask1", true)
 
 		end
 	end
@@ -197,9 +196,8 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 	GetItemIds = function()
 		local itemids = {
 			["value_techtool_1"] = 5,
-			["artifact_bolt"] = 20,
-			["artifact_bonecluster"] = 15,
-			["artifact_mementomori"] = 10,
+			["artifact_bolt"] = 5,
+			["artifact_bonecluster"] = 10,
 		}	
 
 		return itemids
@@ -1285,7 +1283,7 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 	name = "Don't breathe this Pt. 1",
 	description = "Help technut provide gasmasks.",
 	keyNpc = "'Technut'",
-	defaultActive = false,
+	defaultActive = true,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_Mask1"] = ix.progression.status["technutItemDelivery_Mask1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Mask1"].complexData
