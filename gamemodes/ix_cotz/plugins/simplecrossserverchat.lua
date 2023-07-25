@@ -124,13 +124,11 @@ if (SERVER) then
 	ix.crossserverchat.PostMessage = PLUGIN.PostMessage
 
 	function PLUGIN:SaveData()
-		self:SetData({["lastseen"] = self.lastSeenId})
+		self:SetData(self.lastSeenId)
 	end
 
 	function PLUGIN:LoadData()
-		local data = self:GetData()
-
-		self.lastSeenId = data[1]["lastseen"] or 0
+		self.lastSeenId = self:GetData()
 		if(SERVER)then
 			self:LoadTables()
 		end
