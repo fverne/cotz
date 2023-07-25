@@ -165,6 +165,8 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 
 		character:SetData("curmap", map)
 
+		ix.chat.Send(nil, "playerjoin", string.format("%s has switched area.", character:GetName()))
+
 		-- If RedirectPlayer has been called, the character has been moved to the new map, and should no longer be usable
 		character:Save()
 		character:Kick()
@@ -183,7 +185,6 @@ if (CLIENT) then
 		permissions.AskToConnect(address)
 	end)
 else
-	ix.chat.Send(nil, "playerjoin", string.format("%s has switched area.", character:GetName()))
 	ix.log.AddType("serverTransfer", function(client, map, ip)
 		return string.format("%s is moving to map %s with ip %s.", client:Name(), map, ip)
 	end)
