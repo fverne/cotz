@@ -115,7 +115,6 @@ function playerMeta:GetPsyResist()
 	for j, i in pairs(items) do
 		if (i.psyProt and i:GetData("equip") == true) then
 			res = res + i.psyProt
-			break
 		end
 	end
 

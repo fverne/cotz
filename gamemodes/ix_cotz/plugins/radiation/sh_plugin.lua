@@ -54,7 +54,6 @@ function playerMeta:getRadResist()
 	for j, i in pairs(items) do
 		if (i.radProt and i:GetData("equip") == true) then
 			res = res + i.radProt
-			break
 		end
 	end
 
