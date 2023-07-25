@@ -3,7 +3,7 @@ ITEM.description = "Uncooked meat from a Spider."
 ITEM.longdesc = "A small portion of a giant mutated spider. Not much meat can be extracted from the corpse, as much of the carcass is poisonous. Can be sold to the scientists."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_tushkano.mdl"
 
-ITEM.price = 260
+ITEM.price = 360
 ITEM.width = 1
 ITEM.height = 1
 

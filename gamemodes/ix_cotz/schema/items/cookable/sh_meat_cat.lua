@@ -3,7 +3,7 @@ ITEM.description = "Uncooked meat from a Cat."
 ITEM.longdesc = "The texture of the flesh is very smooth compared to other types of mutant meat. This type of meat is not very popular within the zone, as it is said to make you feel nauseous for a few hours while digesting it."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_pseudodog.mdl"
 
-ITEM.price = 280
+ITEM.price = 380
 ITEM.width = 1
 ITEM.height = 1
 

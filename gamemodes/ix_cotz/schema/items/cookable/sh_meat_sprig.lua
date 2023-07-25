@@ -3,7 +3,7 @@ ITEM.description = "Uncooked meat from a Sprig."
 ITEM.longdesc = "A small portion of strangely soft wood. Can be cooked and eaten, but has an odd taste. Scientists seem interested in this."
 ITEM.model = "models/lostsignalproject/items/consumable/salmon.mdl"
 
-ITEM.price = 300
+ITEM.price = 400
 ITEM.width = 1
 ITEM.height = 1
 

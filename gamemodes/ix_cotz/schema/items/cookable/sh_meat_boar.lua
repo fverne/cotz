@@ -3,7 +3,7 @@ ITEM.description = "Uncooked meat from a Boar."
 ITEM.longdesc = "The most popular meat in the Zone. Nutritious and hardly contaminated. The scientists have enough samples already, which limits its use as a commodity. However, it can also serve as a source of animal fat for gun lubrication."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_boar.mdl"
 
-ITEM.price = 140
+ITEM.price = 340
 ITEM.width = 1
 ITEM.height = 1
 
