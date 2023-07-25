@@ -55,5 +55,5 @@ PLUGIN.mapdata["rp_waystation"].loadzones = PLUGIN.mapdata["rp_waystation"].load
 PLUGIN.mapdata["rp_waystation"].loadzones["fromoutskirts"] = {
 	pos = Vector(-8569.341797, 483.034058, 328.446228), --edit me
 	ang = Angle(89.000000, 39.314655, 0.000000), --edit me
-	desc = "The area ahead leads to the waystation."
+	desc = "You geigercounter goes crazy as you approach. The area ahead is clearly irradiated."
 }
