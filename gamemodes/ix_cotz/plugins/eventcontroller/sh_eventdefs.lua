@@ -843,7 +843,7 @@ PLUGIN.eventdefs["controller1"] = {
 		{"npc_human_z_rookie_rifleman", 2},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {12},
+	difficulty = {21},
 }
 
 PLUGIN.eventdefs["controller2"] = {
