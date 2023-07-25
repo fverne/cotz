@@ -120,6 +120,7 @@ SWEP.SpeedDec = 10
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "passive"
 SWEP.FireModes = {"semi"}
