@@ -128,7 +128,7 @@ if (SERVER) then
 	end
 
 	function PLUGIN:LoadData()
-		self.lastSeenId = self:GetData()
+		self.lastSeenId = self:GetData() or 0
 		if(SERVER)then
 			self:LoadTables()
 		end
