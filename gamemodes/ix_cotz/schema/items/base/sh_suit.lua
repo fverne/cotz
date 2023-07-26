@@ -41,7 +41,7 @@ ITEM.bodyGroups = {
 ]]--
 
 function ITEM:GetRepairCost()
-	return self.price * 0.0015 -- 0.15% of price per %
+	return 100 + self.price * 0.0015 -- 0.15% of price per %
 end
 
 function ITEM:GetDescription()

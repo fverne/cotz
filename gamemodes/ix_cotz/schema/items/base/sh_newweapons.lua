@@ -156,7 +156,7 @@ function ITEM:PopulateTooltip(tooltip)
 end
 
 function ITEM:GetRepairCost()
-	return ((self.price * 0.0025) * self.repair_PartsComplexity) + ((self.price * 0.0025) * self.repair_PartsRarity)
+	return 100 + ((self.price * 0.00125) * self.repair_PartsComplexity) + ((self.price * 0.00125) * self.repair_PartsRarity)
 end
 
 -- On item is dropped, Remove a weapon from the player and keep the ammo in the item.
