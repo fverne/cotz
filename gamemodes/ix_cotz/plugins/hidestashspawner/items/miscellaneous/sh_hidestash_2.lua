@@ -12,11 +12,7 @@ function ITEM:GetDescription()
     if self:GetData("stashtext", nil) == nil then
         return self.description
     else
-        if self:GetData("moneytaken", false) == true then
-            return self.description .. "\n\n" .. self:GetData("stashtext", nil)
-        else
-            return self.description .. "\n\nThe pda has a note written on it. It reads:\n" .. self:GetData("stashtext", nil)
-        end
+		return self.description .. "\n\nThe pda has a note written on it. It reads:\n" .. self:GetData("stashtext", nil)
     end
 end
 
@@ -47,12 +43,11 @@ ITEM.functions.use = {
 		local money = math.random(item.moneyinterval[1], item.moneyinterval[2])
 		item.player:GetCharacter():GiveMoney(money)
 		item.player:Notify( "You found "..money.." rubles and wired them to your account!" )
-		item:SetData("moneytaken", true)
 
 		return false
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and (item:GetData("stashcoordinates", nil) == nil) and (item:GetData("moneytaken", nil) != true) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+		return (!IsValid(item.entity)) and (item:GetData("stashcoordinates", nil) == nil) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
 
@@ -69,6 +64,6 @@ ITEM.functions.stashpointer = {
 		return false
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and (item:GetData("stashcoordinates", nil) != nil) and (item:GetData("moneytaken", nil) != true) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+		return (!IsValid(item.entity)) and (item:GetData("stashcoordinates", nil) != nil) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
