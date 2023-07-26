@@ -28,7 +28,7 @@ DIALOGUE.addTopic("GREETING", {
 					{itemCategory = "specialsale_owlnpc_weapon_smg", price = 60000, dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
 					{itemCategory = "specialsale_owlnpc_weapon_rifle", price = 80000, dialogue = "I like to keep shooting until there is nothing left to shoot at.", reqRep = 0},
 					{itemCategory = "specialsale_owlnpc_weapon_shotgun", price = 100000, dialogue = "I want to fill mutants with pellets of lead.", reqRep = 0},
-					{itemCategory = "specialsale_owlnpc_weapon_sniper", price = 1200000, dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_weapon_sniper", price = 120000, dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 0},
 					-- {itemCategory = "specialsale_owlnpc_headgear", price = 60000, dialogue = "I'm looking for better headwear.", reqRep = 0},
 					-- {itemCategory = "specialsale_owlnpc_suit", price = 100000, dialogue = "I'm looking for a new suit.", reqRep = 0},
 				}
