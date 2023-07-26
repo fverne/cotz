@@ -72,7 +72,7 @@ ix.npctemplates.templates["technpc"] = {
 		["sledgehammer"] 	= { nil, 4, SELLANDBUY, 4, 0.5, 2 },
 
 		["anorak"] 	= { nil, 6, SELLANDBUY, 6, 3, 2 },
-		["gp5"] 	= { 20000, 10, SELLONLY, 10, 1, 10 }, -- expensive on purpose
+		["gp5"] 	= { 10000, 10, SELLONLY, 10, 1, 10 }, -- expensive on purpose
 
 		["food_nuts_1"] 	= { nil, 20, SELLANDBUY, 20, 12, 5 },
 	},
