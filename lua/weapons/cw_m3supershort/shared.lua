@@ -119,7 +119,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.WearDamage = 0.5
+SWEP.WearDamage = 0.125
 SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.7

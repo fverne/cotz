@@ -100,7 +100,7 @@ SWEP.FireDelay = 0.2
 SWEP.FireSound = "CW_STRIKER_FIRE"
 SWEP.Recoil = 3
 
-SWEP.WearDamage = 0.5
+SWEP.WearDamage = 0.125
 SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.1
