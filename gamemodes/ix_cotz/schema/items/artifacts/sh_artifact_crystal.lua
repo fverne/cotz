@@ -7,7 +7,7 @@ ITEM.height = 1
 ITEM.price = 11400
 ITEM.flag = "A"
 ITEM.rarity = 5
-ITEM.baseweight = 9.500
+ITEM.baseweight = 6.500
 ITEM.varweight  = 0.550
 
 ITEM.exRender = true
