@@ -4,57 +4,69 @@ include('shared.lua')
 
 -- Preset
 ENT.bleeds      = true
-ENT.StartHealth = 150
+ENT.StartHealth = 100
 ENT.PlayerFriendly = false
-ENT.flatbulletresistance = 8 -- 2 times values of berill, to simulate attachments
-ENT.percentbulletresistance = 60 -- 2 times values of berill, to simulate attachments
+ENT.flatbulletresistance = 5 -- 2 times values of io7a, to simulate attachments
+ENT.percentbulletresistance = 45 -- 2 times values of io7a, to simulate attachments
 ENT.lootChance = 33
 ENT.selectedWeaponItem = nil 
 ENT.selectedWeaponSWEP = nil
 
 ENT.alertsounds  = {
-  "npc/zombied/enemy_1.mp3",
-  "npc/zombied/enemy_2.mp3",
-  "npc/zombied/enemy_3.mp3",
-  "npc/zombied/enemy_4.mp3",
-  "npc/zombied/enemy_5.mp3",
+  "npc/killer/enemy_1.ogg",
+  "npc/killer/enemy_2.ogg",
+  "npc/killer/enemy_3.ogg",
+  "npc/killer/enemy_4.ogg",
+  "npc/killer/enemy_5.ogg",
+  "npc/killer/enemy_6.ogg",
+  "npc/killer/enemy_7.ogg",
+  "npc/killer/enemy_8.ogg",
+  "npc/killer/enemy_9.ogg",
+  "npc/killer/enemy_10.ogg",
 }
 
 ENT.attacksounds = {  
-  "npc/zombied/attack_1.mp3", 
-  "npc/zombied/attack_2.mp3",
-  "npc/zombied/attack_3.mp3",
-  "npc/zombied/attack_4.mp3",
-  "npc/zombied/attack_5.mp3",
-  "npc/zombied/attack_6.mp3",
-  "npc/zombied/attack_7.mp3",
-  "npc/zombied/attack_7.mp3",
+  "npc/killer/attack_1.ogg", 
+  "npc/killer/attack_2.ogg",
+  "npc/killer/attack_3.ogg",
+  "npc/killer/attack_4.ogg",
+  "npc/killer/attack_5.ogg",
+  "npc/killer/attack_6.ogg",
+  "npc/killer/attack_7.ogg",
+  "npc/killer/attack_8.ogg",
+
 }
 
 ENT.hurtsounds   = {
-  "npc/zombied/hit_1.mp3",
-  "npc/zombied/hit_2.mp3",
-  "npc/zombied/hit_3.mp3",
+  "npc/killer/hit_1.ogg",
+  "npc/killer/hit_2.ogg",
+  "npc/killer/hit_3.ogg",
+  "npc/killer/hit_4.ogg",
+  "npc/killer/hit_5.ogg",
+  "npc/killer/hit_6.ogg",
+  "npc/killer/hit_7.ogg",
+  "npc/killer/hit_8.ogg",
 }
 
 ENT.diesounds    = {
-  "npc/zombied/death_1.mp3",
-  "npc/zombied/death_2.mp3",
-  "npc/zombied/death_3.mp3",
-  "npc/zombied/death_4.mp3",
-  "npc/zombied/death_5.mp3",
-  "npc/zombied/death_6.mp3"
+  "npc/killer/death_1.ogg",
+  "npc/killer/death_2.ogg",
+  "npc/killer/death_3.ogg",
+  "npc/killer/death_4.ogg",
+  "npc/killer/death_5.ogg",
+  "npc/killer/death_6.ogg",
+  "npc/killer/death_7.ogg",
 }
 
 ENT.models       = {
-  "models/zombied/berillzombie.mdl",
-  "models/zombied/zombi_spec.mdl",
-  "models/zombied/zombi_skat.mdl",
+  "models/killer/killer.mdl",
+  "models/killer/mask.mdl",
 }
 
 ENT.weapons      = {
-  "weapon_npc_sawnoff",
-  "weapon_npc_toz34"
+  {{"sako85", { ["durability"] = 5, ["wear"] = 10, ["ammo"] = 2 }}, "weapon_npc_sv98"},
+  {{"sv98", { ["durability"] = 5, ["wear"] = 10, ["ammo"] = 2 }}, "weapon_npc_sv98"},
+  {{"sako85nato", { ["durability"] = 5, ["wear"] = 10, ["ammo"] = 4 }}, "weapon_npc_sv98"},
 }
 
 -- Live vars
@@ -119,7 +131,7 @@ function ENT:OnTakeDamage(dmg)
 		dmg:SubtractDamage(self.flatbulletresistance)
 		dmg:SetDamage(math.max(0,dmg:GetDamage())) --So he can't heal from our attacks
 	end
-  
+
   self:SpawnBlood(dmg)
   self:SetHealth(self:Health() - dmg:GetDamage())
   
@@ -153,8 +165,8 @@ function ENT:InitEnemies()
   local mutanttable = ents.FindByClass("npc_mutant_*")
 
   for _, x in pairs(zombifiedtable) do
-    x:AddEntityRelationship( self, D_NU, 10 )
-    self:AddEntityRelationship( x, D_NU, 10 )
+    x:AddEntityRelationship( self, D_HT, 10 )
+    self:AddEntityRelationship( x, D_HT, 10 )
   end
 
   for _, x in pairs(bandittable) do
@@ -163,8 +175,8 @@ function ENT:InitEnemies()
   end
 
   for _, x in pairs(merctable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_LI, 10 )
+    self:AddEntityRelationship( x, D_LI, 10 )
   end
 
   for _, x in pairs(militable) do
@@ -222,22 +234,20 @@ function ENT:SelectSchedule()
 
       enemy_pos = self:GetEnemy():GetPos()
       distance = self:GetPos():Distance(enemy_pos)
-      if distance > 750 then
-        self:SetSchedule(SCHED_CHASE_ENEMY)
-      elseif (distance < 750 && distance > 200) then
+      if (distance < 4000 && distance > 600) then
         if (!haslos) then
           self:SetSchedule(SCHED_ESTABLISH_LINE_OF_FIRE) --move to shoot enemy
         else
           if (self.NextAttack < CurTime() and self:HasLOS()) then
             self:StartSchedule(schedd)
-            self.NextAttack = CurTime() + 2
-          -- else
-          --   self:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY) --zombified shouldnt take cover from enemy
+            return
           end
         end
-      elseif ( haslos and distance < 200 and (self.NextAttack or 0) < CurTime()) then
-        self:StartSchedule(schedd)
-        self.NextAttack = CurTime() + 2
+      elseif ( haslos and distance < 600) then
+        if self.TakingCover == false then
+          self.TakingCover = true
+          self:SetSchedule( SCHED_TAKE_COVER_FROM_ENEMY )
+        end
       else
         self.TakingCover = false
         self:SetSchedule(SCHED_CHASE_ENEMY)//move to shoot enemy
@@ -247,7 +257,7 @@ function ENT:SelectSchedule()
 end
 
 function ENT:FindEnemyDan()
-  local MyNearbyTargets = ents.FindInCone(self:GetPos(),self:GetForward(),7000,45)
+  local MyNearbyTargets = ents.FindInCone(self:GetPos(),self:GetForward(),7000,90)
 
   for k,v in pairs(MyNearbyTargets) do
     if v:Disposition(self) == D_HT || v:IsPlayer() then
@@ -311,11 +321,14 @@ function ENT:KilledDan()
   ragdoll:SetColor( self:GetColor() )
   ragdoll:SetMaterial( self:GetMaterial() )
   ragdoll:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+  
 
   cleanup.ReplaceEntity(self,ragdoll)
   undo.ReplaceEntity(self,ragdoll)
 
   if self:IsOnFire() then ragdoll:Ignite( math.Rand( 8, 10 ), 0 ) end
+
+
     for i=1,128 do
     local bone = ragdoll:GetPhysicsObjectNum( i )
     if IsValid( bone ) then
@@ -332,7 +345,7 @@ function ENT:KilledDan()
   end
 
   if math.random(1, 100) <= self.lootChance then
-    ragdoll:SetNetVar("loot", "bandit_shotgun_loot")
+    ragdoll:SetNetVar("loot", "bandit_pistol_loot")
   end
 
   ragdoll:Fire("kill","",180)
@@ -355,7 +368,7 @@ function ENT:HasLOS()
   if self:GetEnemy() then
     local tracedata = {}
 
-    tracedata.start = self:GetShootPos()
+    tracedata.start = self:GetShootPos() + Vector(0, 0, 64)
     tracedata.endpos = self:GetEnemy():GetShootPos()
     tracedata.filter = self
 

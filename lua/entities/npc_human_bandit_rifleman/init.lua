@@ -8,6 +8,9 @@ ENT.StartHealth = 100
 ENT.PlayerFriendly = false
 ENT.flatbulletresistance = 2 -- 2 times values of trenchcoat, to simulate attachments
 ENT.percentbulletresistance = 20 -- 2 times values of trenchcoat, to simulate attachments
+ENT.lootChance = 33
+ENT.selectedWeaponItem = nil 
+ENT.selectedWeaponSWEP = nil
 
 ENT.alertsounds  = {
   "npc/bandit/enemy_1.ogg",
@@ -54,7 +57,10 @@ ENT.models       = {
 }
 
 ENT.weapons      = {
-  "weapon_npc_mp5"
+  {{"ppsh", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 7 }}, "weapon_npc_ppsh"},
+  {{"skorpion", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_skorpion"},
+  {{"saigasemi545", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_rugermini14"},
+  {{"ruger1022", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_rugermini14"},
 }
 
 -- Live vars
@@ -72,7 +78,15 @@ ENT.NextAttack = 0
    
 function ENT:Initialize()
 
-  self:Give(self.weapons[math.random(#self.weapons)])
+  local selectedWeaponIndex = math.random(#self.weapons)
+  for i=1, #self.weapons do
+    if selectedWeaponIndex == i then
+      self.selectedWeaponItem = self.weapons[i][1]
+      self.selectedWeaponSWEP = self.weapons[i][2]
+    end
+  end
+
+  self:Give(self.selectedWeaponSWEP)
 
   self:SetModel(self.models[math.random(1,#self.models)])
 
@@ -321,11 +335,14 @@ function ENT:KilledDan()
 
   -- Helix specific drops
   if(ix)then
-    local item = ix.util.GetRandomItemFromPool("bandit_pistol_drops")
+    local item = self.selectedWeaponItem
     ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), function(item, ent) ent.bTemporary = true end, AngleRand(), item[2] or {} )
   end
 
-  ragdoll:SetNetVar("loot", "bandit_pistol_loot")
+  if math.random(1, 100) <= self.lootChance then
+    ragdoll:SetNetVar("loot", "bandit_pistol_loot")
+  end
+
   ragdoll:Fire("kill","",180)
 
   self:Remove()
@@ -346,7 +363,7 @@ function ENT:HasLOS()
   if self:GetEnemy() then
     local tracedata = {}
 
-    tracedata.start = self:GetShootPos()
+    tracedata.start = self:GetShootPos() + Vector(0,0,32)
     tracedata.endpos = self:GetEnemy():GetShootPos()
     tracedata.filter = self
 

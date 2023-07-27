@@ -6,8 +6,11 @@ include('shared.lua')
 ENT.bleeds      = true
 ENT.StartHealth = 150
 ENT.PlayerFriendly = false
-ENT.flatbulletresistance = 3 -- 1.5 times values of io7a, to simulate attachments
-ENT.percentbulletresistance = 37 -- 1.5 times values of io7a, to simulate attachments
+ENT.flatbulletresistance = 5 -- 2 times values of io7a, to simulate attachments
+ENT.percentbulletresistance = 45 -- 2 times values of io7a, to simulate attachments
+ENT.lootChance = 33
+ENT.selectedWeaponItem = nil 
+ENT.selectedWeaponSWEP = nil
 
 ENT.alertsounds  = {
   "npc/zombied/enemy_1.mp3",
@@ -48,8 +51,9 @@ ENT.models       = {
 }
 
 ENT.weapons      = {
-  "weapon_npc_aksu",
-  "weapon_npc_mp5",
+  {{"mp5k", { ["durability"] = 3, ["wear"] = 6, ["ammo"] = 5 }}, "weapon_npc_mp5"},
+  {{"uzi", { ["durability"] = 3, ["wear"] = 6, ["ammo"] = 7 }}, "weapon_npc_skorpion"},
+  {{"lr300", { ["durability"] = 2, ["wear"] = 3, ["ammo"] = 2 }}, "weapon_npc_lr300"},
 }
 
 -- Live vars
@@ -67,7 +71,15 @@ ENT.NextAttack = 0
    
 function ENT:Initialize()
 
-  self:Give(self.weapons[math.random(#self.weapons)])
+  local selectedWeaponIndex = math.random(#self.weapons)
+  for i=1, #self.weapons do
+    if selectedWeaponIndex == i then
+      self.selectedWeaponItem = self.weapons[i][1]
+      self.selectedWeaponSWEP = self.weapons[i][2]
+    end
+  end
+
+  self:Give(self.selectedWeaponSWEP)
 
   self:SetModel(self.models[math.random(1,#self.models)])
 
@@ -316,11 +328,14 @@ function ENT:KilledDan()
   
   -- Helix specific drops
   if(ix)then
-    local item = ix.util.GetRandomItemFromPool("bandit_pistol_drops")
+    local item = self.selectedWeaponItem
     ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), function(item, ent) ent.bTemporary = true end, AngleRand(), item[2] or {} )
   end
 
-  ragdoll:SetNetVar("loot", "bandit_pistol_loot")
+  if math.random(1, 100) <= self.lootChance then
+    ragdoll:SetNetVar("loot", "bandit_pistol_loot")
+  end
+
   ragdoll:Fire("kill","",180)
 
   self:Remove()

@@ -1,6 +1,6 @@
 PLUGIN.name = "mapedits"
 PLUGIN.author = "verne"
-PLUGIN.description = "mapedits - primarily for rp_salvation_2_haven"
+PLUGIN.description = "mapedits for various maps"
 
 function PLUGIN:EntityKeyValue(ent, key, value)
     if game.GetMap() == "rp_salvation_2_haven" then

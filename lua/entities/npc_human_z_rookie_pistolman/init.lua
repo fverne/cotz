@@ -8,50 +8,56 @@ ENT.StartHealth = 150
 ENT.PlayerFriendly = false
 ENT.flatbulletresistance = 2 -- 2 times values of trenchcoat, to simulate attachments
 ENT.percentbulletresistance = 20 -- 2 times values of trenchcoat, to simulate attachments
+ENT.lootChance = 33
+ENT.selectedWeaponItem = nil 
+ENT.selectedWeaponSWEP = nil
 
 ENT.alertsounds  = {
-                      "npc/zombied/enemy_1.mp3",
-                      "npc/zombied/enemy_2.mp3",
-                      "npc/zombied/enemy_3.mp3",
-                      "npc/zombied/enemy_4.mp3",
-                      "npc/zombied/enemy_5.mp3",
-                    }
+  "npc/zombied/enemy_1.mp3",
+  "npc/zombied/enemy_2.mp3",
+  "npc/zombied/enemy_3.mp3",
+  "npc/zombied/enemy_4.mp3",
+  "npc/zombied/enemy_5.mp3",
+}
 
 ENT.attacksounds = {  "npc/zombied/attack_1.mp3", 
-                      "npc/zombied/attack_2.mp3",
-                      "npc/zombied/attack_3.mp3",
-                      "npc/zombied/attack_4.mp3",
-                      "npc/zombied/attack_5.mp3",
-                      "npc/zombied/attack_6.mp3",
-                      "npc/zombied/attack_7.mp3",
-                      "npc/zombied/attack_7.mp3",
-                    }
+  "npc/zombied/attack_2.mp3",
+  "npc/zombied/attack_3.mp3",
+  "npc/zombied/attack_4.mp3",
+  "npc/zombied/attack_5.mp3",
+  "npc/zombied/attack_6.mp3",
+  "npc/zombied/attack_7.mp3",
+  "npc/zombied/attack_7.mp3",
+}
 
 ENT.hurtsounds   = {
-                      "npc/zombied/hit_1.mp3",
-                      "npc/zombied/hit_2.mp3",
-                      "npc/zombied/hit_3.mp3",
-                    }
+  "npc/zombied/hit_1.mp3",
+  "npc/zombied/hit_2.mp3",
+  "npc/zombied/hit_3.mp3",
+}
 
 ENT.diesounds    = {
-                      "npc/zombied/death_1.mp3",
-                      "npc/zombied/death_2.mp3",
-                      "npc/zombied/death_3.mp3",
-                      "npc/zombied/death_4.mp3",
-                      "npc/zombied/death_5.mp3",
-                      "npc/zombied/death_6.mp3"
-                    }
+  "npc/zombied/death_1.mp3",
+  "npc/zombied/death_2.mp3",
+  "npc/zombied/death_3.mp3",
+  "npc/zombied/death_4.mp3",
+  "npc/zombied/death_5.mp3",
+  "npc/zombied/death_6.mp3"
+}
 
 ENT.models       = {
-                      "models/zombied/zombi_novice.mdl",
-                      "models/zombied/zombi_novice2.mdl",
-                      "models/zombied/zombiestalker2a.mdl",
-                      "models/zombied/zombiestalker2.mdl",
-                    }
+  "models/zombied/zombi_novice.mdl",
+  "models/zombied/zombi_novice2.mdl",
+  "models/zombied/zombiestalker2a.mdl",
+  "models/zombied/zombiestalker2.mdl",
+}
 
 ENT.weapons      = {
-                      "weapon_npc_makarov"
-                    }
+  {{"makarov", { ["durability"] = 4, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_makarov"},
+  {{"tokarev", { ["durability"] = 4, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_tokarev"},
+  {{"brhp", { ["durability"] = 4, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_brhp"},
+  {{"rugermk3", { ["durability"] = 4, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_rugermk3"},
+}
 
 -- Live vars
 ENT.Alerted     = false
@@ -68,7 +74,15 @@ ENT.NextAttack = 0
    
 function ENT:Initialize()
 
-  self:Give(self.weapons[math.random(#self.weapons)])
+  local selectedWeaponIndex = math.random(#self.weapons)
+  for i=1, #self.weapons do
+    if selectedWeaponIndex == i then
+      self.selectedWeaponItem = self.weapons[i][1]
+      self.selectedWeaponSWEP = self.weapons[i][2]
+    end
+  end
+
+  self:Give(self.selectedWeaponSWEP)
 
   self:SetModel(self.models[math.random(1,#self.models)])
 
@@ -317,11 +331,14 @@ function ENT:KilledDan()
 
   -- Helix specific drops
   if(ix)then
-    local item = ix.util.GetRandomItemFromPool("bandit_pistol_drops")
+    local item = self.selectedWeaponItem
     ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), function(item, ent) ent.bTemporary = true end, AngleRand(), item[2] or {} )
   end
 
-  ragdoll:SetNetVar("loot", "bandit_pistol_loot")
+  if math.random(1, 100) <= self.lootChance then
+    ragdoll:SetNetVar("loot", "bandit_pistol_loot")
+  end
+
   ragdoll:Fire("kill","",180)
 
   self:Remove()

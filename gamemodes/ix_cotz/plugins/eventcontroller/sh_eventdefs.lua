@@ -1026,7 +1026,7 @@ PLUGIN.eventdefs["bandit3"] = {
 
 PLUGIN.eventdefs["banditsniper"] = {
 	entities = {
-		{"npc_human_bandit_rifleman", 1},		
+		{"npc_human_bandit_sniper", 1},		
 	},
 	pdabroadcast = "Bandit sniper spotted %s. Take care.",
 	difficulty = {13},
@@ -1062,7 +1062,7 @@ PLUGIN.eventdefs["merc3"] = {
 
 PLUGIN.eventdefs["mercsniper"] = {
 	entities = {
-		{"npc_human_merc_rifleman", 1},	
+		{"npc_human_merc_sniper", 1},	
 	},
 	pdabroadcast = "Mercenary sniper %s. Take care.",
 	difficulty = {23},
