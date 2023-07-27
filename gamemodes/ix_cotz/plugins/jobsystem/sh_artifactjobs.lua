@@ -196,7 +196,7 @@ do
   tempJob.desc = "** The computer shows an image of an artifact, consisting of two plates at a fixed distance from one another. A strange substance is present between them. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_capicator"
+  tempJob.listenTrigger = "itemDeliver_artifact_capacitor"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -975,7 +975,7 @@ do
   tempJob.desc = "1 Capacitor."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_capicator"
+  tempJob.listenTrigger = "itemDeliver_artifact_capacitor"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_rare"}}
   tempJob.rewardCount = 1
@@ -983,7 +983,7 @@ do
   tempJob.moneyReward = {27000, 32000}
   tempJob.categories = {"artifactcollect_eco"}
 
-  ix.jobs.register(tempJob, "ItemJob1eco_artifact_capicator")
+  ix.jobs.register(tempJob, "ItemJob1eco_artifact_capacitor")
 
   tempJob = nil
 
