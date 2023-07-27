@@ -292,7 +292,7 @@ function SWEP:Think()
 				end
 
 				local plypos = self.Owner:GetPos()
-					for k, v in pairs( ents.GetAll() ) do//pairs(shits) do
+					for k, v in pairs( ents.FindInSphere(self:GetOwner():GetPos(), 701) ) do//pairs(shits) do
 
 						if ( v:IsValid() ) then
 

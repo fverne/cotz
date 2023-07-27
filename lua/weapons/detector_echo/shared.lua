@@ -247,7 +247,7 @@ SWEP.LastBeep = 0
 function SWEP:Think()
 	if CLIENT then
 		local anoms = {}
-		for k,v in pairs(ents.GetAll()) do
+		for k,v in pairs(ents.FindInSphere(self:GetOwner():GetPos(), 300)) do
 			if v:GetClass() == "ix_item" then
 				if anomalies[string.lower(v:GetModel())] then
 					table.insert(anoms, v)

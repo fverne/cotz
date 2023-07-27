@@ -255,8 +255,8 @@ anomalies["models/nasca/etherealsrp_artifacts/urchin.mdl"] = true
 ]]--
 
 if CLIENT then
-	local matScreen = Material("models/kali/miscstuff/stalker/detectors/detector_bear_c"); // ��������, ������� ����
-	local RTTexture = GetRenderTarget("DTC_BEAR", 512, 512); // ����� ��������
+	local matScreen = Material("models/kali/miscstuff/stalker/detectors/detector_bear_c"); 
+	local RTTexture = GetRenderTarget("DTC_BEAR", 512, 512); 
 
 	local dot = surface.GetTextureID("models/kali/miscstuff/stalker/detectors/detector_bear_segment_copy");
 	local bg = surface.GetTextureID("models/kali/miscstuff/stalker/detectors/detector_bear_copy");
@@ -286,7 +286,7 @@ if CLIENT then
 
 
 			local anoms = {}
-			for k,v in pairs(ents.GetAll()) do
+			for k,v in pairs(ents.FindInSphere(self:GetOwner():GetPos(), 301)) do
 				if v:GetClass() == "ix_item" then
 					if anomalies[string.lower(v:GetModel())] then
 						table.insert(anoms, v)
