@@ -103,7 +103,7 @@ else
 
 		if IsValid(ix.temp.Corpses[client]) then
 			if (!client:GetNetVar("resurrected")) then
-				hook.Run("DeathDrop",client,ix.temp.Corpses[client]:GetPos())
+				hook.Run("DoDeathDrop",client,ix.temp.Corpses[client]:GetPos())
 			end
 			ix.temp.Corpses[client]:Remove()
 			client:SetNetVar("resurrected", false)
