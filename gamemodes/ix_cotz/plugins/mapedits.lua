@@ -9,4 +9,11 @@ function PLUGIN:EntityKeyValue(ent, key, value)
             ent:SetKeyValue("wait", 5)
         end
     end
+
+    if game.GetMap() == "rp_waystation" then
+        -- keeps elevatordoors open, regardless of the underground power switches
+        if IsValid(ent) and ent:GetClass() == "func_door" and ent:GetName() == "lift_door" then
+            ent:SetKeyValue("spawnpos", 1)
+        end
+    end
 end
