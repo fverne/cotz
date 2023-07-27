@@ -604,7 +604,7 @@ function ITEM:OnRemoved()
 end
 
 function ITEM:GetPrice()
-    return self.price * (math.Clamp(self:GetData("durability",100), 15, 100)/100)
+    return self.price * (math.Clamp(self:GetData("durability",100), 5, 100)/100)
 end
 
 ITEM.functions.detach = {
