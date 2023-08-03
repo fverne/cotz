@@ -7,7 +7,7 @@ PLUGIN.anomalydefs = PLUGIN.anomalydefs or {}
 PLUGIN.anomalypoints = PLUGIN.anomalypoints or {} -- ANOMALYPOINTS STRUCTURE table.insert( PLUGIN.eventpoints, { position, radius, anoms } )
 
 PLUGIN.spawnrate = 900
-PLUGIN.spawnchance = 12
+PLUGIN.spawnchance = 3
 
 ix.util.Include("sh_anomalydefs.lua")
 
