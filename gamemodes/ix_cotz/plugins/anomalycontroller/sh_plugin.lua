@@ -25,11 +25,11 @@ if SERVER then
 		for i, j in pairs(self.anomalypoints) do
 			
 			if (!j) then
-				return
+				continue
 			end
 
 			if math.random(100) > self.spawnchance then
-				return
+				continue
 			end
 
 			local data = {}
