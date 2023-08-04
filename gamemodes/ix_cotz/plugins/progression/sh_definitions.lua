@@ -517,7 +517,7 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 			-- Needs correct pos/ang set
 			local pos = Vector(-7499.309570, -9437.489258, 5036.031250)
 			local ang = Angle(0.000, -116.989, 0.000)
-			ix.util.SpawnAdvVendor("stalkernetadmin", pos, ang)
+			ix.util.SpawnAdvVendor("stalkernetnpc", pos, ang)
 
 			ix.progression.SetCompleted("oldTimerItemDelivery_mainStatue", true)
 
