@@ -55,9 +55,9 @@ if SERVER then
 		local rarityselector = 0
 		local anomalyselector = 0
 
-		if rand <= 70 then
+		if rand <= 80 then
 			rarityselector = 0
-		elseif rand <= 90 then
+		elseif rand <= 98 then
 			rarityselector = 1
 		elseif rand <= 100 then
 			rarityselector = 2
