@@ -95,7 +95,7 @@ PLUGIN.anomalydefs[5] = {
 	interval = 128,	
 	commonArtifacts = {
 		"artifact_mementomori",
-		"nightstar",
+		-- "nightstar",
 		"artifact_bolt",
 		"artifact_bonecluster"
 	},
