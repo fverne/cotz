@@ -95,6 +95,12 @@ if (CLIENT) then
 		end
 	end
 else
+	function PLUGIN:PlayerDisconnected(ply)
+		if IsValid(ix.temp.Corpses[ply]) then
+			ply:Spawn()
+		end
+	end
+
 	function PLUGIN:PlayerSpawn( client )
 		client:UnSpectate()
 		if not client:GetCharacter() then
