@@ -522,7 +522,7 @@ ITEM.functions.detach = {
 				end
 			end
 
-			if table.remove(curattach,iterator) == nil then
+			if table.remove(curattach,iterator) != data[1] then
 				return false
 			end
 
