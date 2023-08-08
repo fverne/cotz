@@ -35,6 +35,7 @@ end
 hook.Add( "OnEntityCreated", "R_Optimisation.OnEntityCreated", function(ply)
     if ply != LocalPlayer() then return end
     RunConsoleCommand("gmod_mcore_test", "1")
+	RunConsoleCommand("pac_render_projected_texture", "1") -- so equipment isnt dark even when flashlighting
 end)
 
 function Schema:ScoreboardShow()
