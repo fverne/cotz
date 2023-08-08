@@ -1,18 +1,25 @@
-ITEM.name = "Wood-Fueled Cooker"
-ITEM.description = "A low tier cooker."
-ITEM.longdesc = "A small metallic portable pocket stove that allows you to cook up various foods. Some STALKERs like to carry a mini portable cooker around when they camp out. It requires a fuel source to cook with. Those who are experienced STALKERs tend to use the likes of a heat producing artifact to cook their food as it acts as an unlimited fuel source. The rest typically use some wooden branches they find or some charcoal to add a nice smokey flavour."
-ITEM.model = "models/lostsignalproject/items/misc/wood_stove.mdl"
+ITEM.name = "Multi-Fuel Cooker"
+ITEM.description = "A high tier cooker."
+ITEM.longdesc = "A stainless steel cooker that accepts a various amounts of fuel. Easy to clean, this is the best cooker found in a place like the zone. Experienced STALKERs tend to use various types of heat-related artifacts to fuel the cooker."
+ITEM.model = "models/lostsignalproject/items/misc/multi_fuel_stove.mdl"
 
-ITEM.width = 1
+ITEM.width = 2
 ITEM.height = 1
 
-ITEM.flatweight = 0.920
+ITEM.flatweight = 1.520
 
 ITEM.price = 2500
 
-ITEM.cookertier = 1
+ITEM.cookertier = 2
 
-ITEM.sound = "stalkersound/inv_cooking2.ogg"
+ITEM.sound = "stalkersound/inv_cooking_cooker.ogg"
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(215.46, 58.46, 231.87),
+	ang = Angle(45.76, 196.1, 0),
+	fov = 4.08
+}
 
 -- Inventory drawing
 if (CLIENT) then

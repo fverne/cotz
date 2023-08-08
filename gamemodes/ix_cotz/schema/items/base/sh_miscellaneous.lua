@@ -27,3 +27,17 @@ function ITEM:GetDescription()
         return (self.description..quantdesc..invdesc)
 	end
 end
+
+function ITEM:PopulateTooltip(tooltip)
+    if (self.PopulateTooltipIndividual) then
+      self:PopulateTooltipIndividual(tooltip)
+    end
+end
+
+function ITEM:GetWeight()
+	if (self.quantity) then
+		return self.flatweight + (self.weight * self:GetData("quantity", self.quantity))
+	else
+		return self.flatweight
+	end
+end

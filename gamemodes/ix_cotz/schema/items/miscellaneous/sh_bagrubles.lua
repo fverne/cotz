@@ -7,6 +7,9 @@ ITEM.model = "models/kek1ch/money_ukraina.mdl"
 ITEM.width = 1
 ITEM.height = 1
 
+ITEM.flatweight = 0
+ITEM.weight = 0
+
 ITEM.quantity = 5000000
 ITEM.exRender = true
 ITEM.iconCam = {

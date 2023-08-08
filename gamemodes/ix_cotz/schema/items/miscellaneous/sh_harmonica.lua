@@ -6,6 +6,8 @@ ITEM.model = "models/lostsignalproject/items/misc/harmonica.mdl"
 ITEM.width = 1
 ITEM.height = 1
 
+ITEM.flatweight = 0.150
+
 ITEM.price = 400
 
 ITEM.img = ix.util.GetMaterial("vgui/hud/harmonica.png")
