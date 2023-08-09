@@ -155,10 +155,10 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.45x39MM"
 
-SWEP.FireDelay = 0.0923076923
+SWEP.FireDelay = 0.0666666
 SWEP.FireSound = "CW_AEK971_FIRE"
 SWEP.FireSoundSuppressed = "CW_AK74_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.7
+SWEP.Recoil = 1.5
 
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005

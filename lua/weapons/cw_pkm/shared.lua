@@ -122,7 +122,7 @@ SWEP.WorldModel		= "models/weapons/w_mach_pkmbenis.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 200
+SWEP.Primary.ClipSize		= 100
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "7.62x54MMR"

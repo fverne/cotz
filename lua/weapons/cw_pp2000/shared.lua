@@ -124,7 +124,7 @@ SWEP.WMAng = Vector(-10, 0, 180)
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 20
+SWEP.Primary.ClipSize		= 44
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x19MM"

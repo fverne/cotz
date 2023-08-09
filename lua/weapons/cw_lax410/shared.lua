@@ -140,8 +140,8 @@ SWEP.WorldModel		= "models/weapons/w_bocw_ironhide.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 5
-SWEP.Primary.DefaultClip	= 5
+SWEP.Primary.ClipSize		= 4
+SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".45 ACP"
 

@@ -152,8 +152,8 @@ SWEP.WMAng = Vector(-9,1,180)
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 10
-SWEP.Primary.DefaultClip	= 10
+SWEP.Primary.ClipSize		= 5
+SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".22LR"
 

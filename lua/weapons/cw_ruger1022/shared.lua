@@ -152,7 +152,7 @@ SWEP.WorldModel		= "models/weapons/tfa_nmrih/w_fa_ruger1022.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 5
+SWEP.Primary.ClipSize		= 10
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".22LR"
