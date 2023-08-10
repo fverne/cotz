@@ -20,8 +20,6 @@ ITEM.canAttach = true
 
 ITEM.unloadedweight = 0
 
-ITEM.repair_PartsComplexity = 1
-ITEM.repair_PartsRarity = 1
 
 -- Inventory drawing
 if (CLIENT) then

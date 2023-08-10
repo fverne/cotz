@@ -15,8 +15,8 @@ ITEM.img = ix.util.GetMaterial("vgui/hud/weapons/mateba.png")
 ITEM.bulletweight = 0.019
 ITEM.unloadedweight = 1.35
 
-ITEM.repair_PartsComplexity = 5
-ITEM.repair_PartsRarity = 2
+
+
 
 function ITEM:GetWeight()
   return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))

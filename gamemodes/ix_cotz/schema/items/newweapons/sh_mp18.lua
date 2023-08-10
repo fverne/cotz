@@ -12,8 +12,8 @@ ITEM.canAttach = false
 ITEM.bulletweight = 0.022
 ITEM.unloadedweight = 3.5
 
-ITEM.repair_PartsComplexity = 0
-ITEM.repair_PartsRarity = 1
+
+
 
 function ITEM:GetWeight()
   return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))

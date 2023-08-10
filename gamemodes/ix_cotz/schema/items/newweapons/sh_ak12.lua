@@ -12,8 +12,8 @@ ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_s
 ITEM.bulletweight = 0.011
 ITEM.unloadedweight = 3.3
 
-ITEM.repair_PartsComplexity = 2
-ITEM.repair_PartsRarity = 3
+
+
 
 ITEM.exRender = false
 ITEM.img = ix.util.GetMaterial("vgui/hud/weapons/ak12.png")
