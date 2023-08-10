@@ -75,6 +75,19 @@ ITEM.functions.zCheck = {
 	end
 }
 
+
+ITEM.functions.zzDestroy = {
+	name = "Destroy Item",
+	icon = "icon16/stalker/drop.png",
+	OnRun = function(item)
+		return true
+	end,
+	OnCanRun = function(item)
+		return (!IsValid(item.entity))  item.invID == item.player:GetCharacter():GetInventory():GetID()
+	end
+}
+
+
 function ITEM:GetDescription()
 	if(self.entity) then return self.description end
 
