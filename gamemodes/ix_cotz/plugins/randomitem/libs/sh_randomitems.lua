@@ -124,3 +124,5 @@ ix.util.Include("specialsale_raritynpc.lua","shared")
 ix.util.Include("specialsale_owlnpc.lua","shared")
 
 ix.util.Include("human_npc_drops.lua", "shared")
+
+ix.util.Include("money.lua", "shared")
