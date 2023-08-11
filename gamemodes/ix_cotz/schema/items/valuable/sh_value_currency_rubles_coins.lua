@@ -21,6 +21,22 @@ if (CLIENT) then
 	end
 end
 
+ITEM.functions.use = {
+	name = "Put in Wallet",
+	icon = "icon16/stalker/sell.png",
+	sound = "stalkersound/money_1.mp3",
+	OnRun = function(item)
+		local position = item.player:GetItemDropPos()
+		local client = item.player
+		local quant = item:GetData("quantity", 0)
+		client:GetCharacter():GiveMoney(quant)
+		ix.chat.Send(item.player, "iteminternal", "counts up some rubles and puts them in their wallet.", false)
+	end,
+	OnCanRun = function(item)
+		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+	end
+}
+
 function ITEM:GetPrice()
 	return self:GetData("quantity", self.quantity)
 end
