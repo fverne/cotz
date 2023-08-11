@@ -158,6 +158,8 @@ if (CLIENT) then
 
 			if (client:GetNWBool("customFlashlight") != true) then
 				if (client.flash and client.flash.Remove) then
+					client.flash:SetBrightness(0)
+					client.flash:Update()
 					client.flash:Remove()
 				end
 
