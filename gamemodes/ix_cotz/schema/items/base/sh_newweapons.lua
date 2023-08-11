@@ -20,8 +20,6 @@ ITEM.canAttach = true
 
 ITEM.unloadedweight = 0
 
-ITEM.repair_PartsComplexity = 1
-ITEM.repair_PartsRarity = 1
 
 -- Inventory drawing
 if (CLIENT) then
@@ -156,7 +154,7 @@ function ITEM:PopulateTooltip(tooltip)
 end
 
 function ITEM:GetRepairCost()
-	return 100 + ((self.price * 0.00125) * self.repair_PartsComplexity) + ((self.price * 0.00125) * self.repair_PartsRarity)
+	return math.pow(self.price, 1/3) - 3
 end
 
 -- On item is dropped, Remove a weapon from the player and keep the ammo in the item.

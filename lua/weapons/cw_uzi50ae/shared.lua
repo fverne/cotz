@@ -151,7 +151,7 @@ SWEP.WorldModel		= "models/weapons/w_uzi.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 20
+SWEP.Primary.ClipSize		= 18
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= ".50 AE"
@@ -159,8 +159,8 @@ SWEP.Primary.Ammo			= ".50 AE"
 SWEP.Chamberable = false
 
 SWEP.FireDelay = 0.1
-SWEP.FireSound = "CW_MAC11_FIRE"
-SWEP.FireSoundSuppressed = "CW_MAC11_FIRE_SUPPRESSED"
+SWEP.FireSound = "CW_DEAGLE_FIRE"
+SWEP.FireSoundSuppressed = "CW_DEAGLE_FIRE_SUPPRESSED"
 SWEP.Recoil = 2.6
 
 SWEP.HipSpread = 0.125
