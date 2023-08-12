@@ -154,7 +154,7 @@ function ITEM:PopulateTooltip(tooltip)
 end
 
 function ITEM:GetRepairCost()
-	return math.pow(self.price, 1/3) - 3
+	return math.pow(self.price, 1/2) - 3
 end
 
 -- On item is dropped, Remove a weapon from the player and keep the ammo in the item.
