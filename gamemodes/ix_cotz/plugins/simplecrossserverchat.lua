@@ -77,8 +77,8 @@ if (SERVER) then
 						local text = v.text or "<corrupted message>"
 						local icon = v.icon or "vgui/icons/news.png"
 
-						if (id > ix.plugin.list["simplecrossserverchat"].lastSeenId) then
-							ix.plugin.list["simplecrossserverchat"].lastSeenId = id
+						if (id > tonumber(ix.plugin.list["simplecrossserverchat"].lastSeenId)) then
+							ix.plugin.list["simplecrossserverchat"].lastSeenId = tonumber(id)
 						end
 
 						table.insert(ix.crossserverchat.queue, {name, text, icon})
@@ -124,11 +124,11 @@ if (SERVER) then
 	ix.crossserverchat.PostMessage = PLUGIN.PostMessage
 
 	function PLUGIN:SaveData()
-		self:SetData(self.lastSeenId)
+		self:SetData(tonumber(self.lastSeenId))
 	end
 
 	function PLUGIN:LoadData()
-		self.lastSeenId = self:GetData() or 0
+		self.lastSeenId = tonumber(self:GetData()) or 0
 		if(SERVER)then
 			self:LoadTables()
 		end
