@@ -170,7 +170,7 @@ ix.armortables.attachments["steelframe"] = {
 	end,
 	onDetach = function(player, armor)
 		if armor then
-			armor:SetData("carryinc", armor:GetData("carryinc", 0) - 25)
+			armor:SetData("carryinc", armor:GetData("carryinc", 25) - 25)
 		end
 	end,
 }
@@ -187,7 +187,7 @@ ix.armortables.attachments["aluframe"] = {
 	end,
 	onDetach = function(player, armor)
 		if armor then
-			armor:SetData("carryinc", armor:GetData("carryinc", 0) - 15)
+			armor:SetData("carryinc", armor:GetData("carryinc", 15) - 15)
 		end
 	end,
 }
