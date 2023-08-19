@@ -309,7 +309,7 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 					local amtneed = amtreq - amtcur
 
 					if(item)then
-						local amtavailable = item:GetData("quantity", 1)
+						local amtavailable = item:GetData("quantity", item.quantity or 1)
 						local amtfinal = amtavailable >= amtneed and amtneed or amtavailable
 
 						item:SetData("quantity", item:GetData("quantity",0) - amtfinal)
