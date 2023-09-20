@@ -13,7 +13,11 @@ local reg = debug.getregistry()
 local GetShootPos = reg.Player.GetShootPos
 
 SWEP.bulletCallback = function(ply, traceResult, dmgInfo) -- create the callback function once, to avoid function spam
-	CustomizableWeaponry.callbacks.processCategory(ply:GetActiveWeapon(), "bulletCallback", ply, traceResult, dmgInfo)
+	local wep = ply:GetActiveWeapon()
+	CustomizableWeaponry.callbacks.processCategory(wep, "bulletCallback", ply, traceResult, dmgInfo)
+
+	dmgInfo:SetDamageType(game.GetAmmoDamageType(wep:GetPrimaryAmmoType()))
+
 end
 
 function SWEP:canPenetrate(traceData, direction)
