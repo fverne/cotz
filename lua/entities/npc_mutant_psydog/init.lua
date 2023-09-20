@@ -27,11 +27,12 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 275
-ENT.hpvar = 75
+ENT.hp = 150
+ENT.hpvar = 20
 
-ENT.flatbulletresistance = 3
-ENT.percentbulletresistance = 25
+ENT.FBR = 2
+ENT.FBRAP = 8
+ENT.BR = 60
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -189,15 +190,6 @@ function ENT:STALKERNPCRemove()
 	if IsValid(self.Clone4) then self.Clone4:TakeDamage( 5, self, self ) end
 
 	
-end
-
-
-function ENT:STALKERNPCDamageTake(dmginfo,mul) 
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
-	end
 end
 
 function ENT:STALKERNPCOnDeath()							

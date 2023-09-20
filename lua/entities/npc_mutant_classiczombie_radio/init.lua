@@ -40,6 +40,10 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 ENT.hp = 550
 ENT.hpvar = 150
 
+ENT.FBR = 5
+ENT.FBRAP = 0
+ENT.BR = 5
+
 ENT.CanFakeDeath = true
 ENT.FakeDeath = 0
 ENT.FakeDeathTimer = 0

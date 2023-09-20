@@ -27,11 +27,12 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 500
-ENT.hpvar = 100
+ENT.hp = 150
+ENT.hpvar = 20
 
-ENT.flatbulletresistance = 2
-ENT.percentbulletresistance = 10
+ENT.FBR = 2
+ENT.FBRAP = 4
+ENT.BR = 20
 
 ENT.IgniteTime = 0
 
@@ -204,12 +205,6 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul) 
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
-	end
-
 	if dmginfo:IsDamageType(DMG_BURN) then
 		return 0
 	end

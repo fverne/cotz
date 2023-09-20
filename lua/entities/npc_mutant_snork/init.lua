@@ -42,8 +42,9 @@ ENT.longjumping2 = 0
 ENT.hp = 200
 ENT.hpvar = 50
 
-ENT.flatbulletresistance = 2
-ENT.percentbulletresistance = 15
+ENT.FBR = 5
+ENT.FBRAP = 3
+ENT.BR = 15
 
 ENT.NextAbilityTime = 0
 

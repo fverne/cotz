@@ -32,11 +32,12 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 ENT.CanJump = 0
 ENT.CanSuck = 0
 
-ENT.hp = 400
-ENT.hpvar = 125
+ENT.hp = 300
+ENT.hpvar = 75
 
-ENT.flatbulletresistance = 4
-ENT.percentbulletresistance = 10
+ENT.FBR = 7
+ENT.FBRAP = 30
+ENT.BR = 20
 
 ENT.NextAbilityTime = 0
 
@@ -276,13 +277,5 @@ end
 function ENT:STALKERNPCRemove() 
 	if self.SuccVictim then
 		self.SuccVictim:Freeze(false)
-	end
-end
-
-function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 end
