@@ -1179,11 +1179,9 @@ function ENT:STALKERBulletDamageTake( dmginfo, isArmorPiercing)
 	damagetotake = damagetotake - FBR
 
 	if(not isArmorPiercing) then
-		print("not armor piercing")
 		damagetotake = damagetotake - FBRAP
 		damagetotake = damagetotake * (1 - (BR/100))
 	else
-		print("armor piercing")
 		damagetotake = damagetotake * (1 - ((BR/2)/100))
 	end
 
