@@ -1,4 +1,4 @@
-ITEM.name = "Tourist Reward Small"
+ITEM.name = "Veteran Reward Small"
 ITEM.description= ""
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
@@ -15,12 +15,13 @@ ITEM.iconCam = {
 
 ITEM.items = {
 	{
-		{1, "task_reward_weapon_00"},
+		{3, "task_reward_weapon_06_low"},
+		{1, "task_reward_weapon_06_high"},
 	},
 	{
-		{1, "task_reward_ammo_01_small"},
+		{1, "task_reward_ammo_03_aphp"},
 	},
 	{
-		{1, "task_reward_medical_01"},
+		{1, "task_reward_medical_05"},
 	},
 }

@@ -316,5 +316,4 @@ ix.randomitems.tables["task_reward_weapon_08_high"] = {
     {250, {"nitro", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"ptrs", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"remmsr", {["durability"] = 100, ["wear"] = 80}}},
-
 }
