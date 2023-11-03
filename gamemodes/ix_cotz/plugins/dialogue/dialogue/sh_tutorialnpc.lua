@@ -8,13 +8,25 @@ DIALOGUE.addTopic("GREETING", {
 		"NicknameTopic",
 		"BackgroundTopic",
 		"AboutWorkTopic",
-		"GetTask",
+		-- "GetTask",
+		"GetTaskByDifficulty",
 		"AboutProgression",
 		"StartBarter",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkilleasy", "mutantkillmedium", "town"}, 4)
+		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkilleasy", "mutantkillmedium", "town"}, 4)
+
+		if (SERVER) then
+			if target:GetNetVar("possibleJobs") == nil then
+				local possibleJobs = {}
+				possibleJobs["easy"] = {"mutantkilleasy"} -- TODO: Make sure these are updated
+				possibleJobs["medium"] = {"mutantkillmedium"}
+				possibleJobs["hard"] = {"mutantkillhard"}			
+	
+				target:SetNetVar("possibleJobs", possibleJobs)
+			end
+		end
 	end
 })
 
@@ -337,6 +349,54 @@ DIALOGUE.addTopic("GetTask", {
 	end,
 })
 
+DIALOGUE.addTopic("GetTaskByDifficulty", {
+	statement = "Do you have any work for me?",
+	response = "Yes, what difficulty task are you looking for?.",
+	options = {
+		"BackTopic"
+	},
+	preCallback = function(self, client, target)
+		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
+			self.response = "I already gave you some work."
+		end
+	end,
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+		
+		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
+			table.insert(dynopts, {statement = "A trivial task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "easy"}})
+			table.insert(dynopts, {statement = "A challenging task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "medium"}})
+			table.insert(dynopts, {statement = "A hard task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "hard"}})
+		end
+		
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if (SERVER) then
+			local possibleJobs = target:GetNetVar("possibleJobs")
+			local jobCategories = possibleJobs[dyndata.difficulty]
+			local jobid = ix.jobs.getJobFromCategory(jobCategories)
+
+			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(jobid))
+			client:ixJobAdd(jobid, target:GetDisplayName())
+			ix.jobs.setNPCJobTaken(target:GetDisplayName(), jobid)
+		end		
+
+		-- Return the next topicID
+		return "BackTopic", dynopts
+	end,
+	ShouldAdd = function()
+		if (!LocalPlayer():GetCharacter():GetJobs()["'Old Timer'"]) then
+			return true
+		end
+	end,
+})
+
 DIALOGUE.addTopic("ViewProgression", {
 	statement = "",
 	response = "",
@@ -554,13 +614,25 @@ DIALOGUE.addTopic("BackTopic", {
 		"NicknameTopic",
 		"BackgroundTopic",
 		"AboutWorkTopic",
-		"GetTask",
+		-- "GetTask",
+		"GetTaskByDifficulty",
 		"AboutProgression",
 		"StartBarter",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkilleasy", "mutantkillmedium", "town"}, 4)
+		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkilleasy", "mutantkillmedium", "town"}, 4)
+		
+		if (SERVER) then
+			if target:GetNetVar("possibleJobs") == nil then
+				local possibleJobs = {}
+				possibleJobs["easy"] = {"mutantkilleasy"}
+				possibleJobs["medium"] = {"mutantkillmedium"}
+				possibleJobs["hard"] = {"mutantkillhard"}			
+	
+				target:SetNetVar("possibleJobs", possibleJobs)
+			end
+		end
 	end
 })
 

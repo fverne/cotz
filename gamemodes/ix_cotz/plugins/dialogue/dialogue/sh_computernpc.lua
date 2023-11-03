@@ -5,12 +5,24 @@ DIALOGUE.addTopic("GREETING", {
 	options = {
 		"BackgroundTopic",
 		"AboutWorkTopic",
-		"GetTask",
+		-- "GetTask",
+		"GetTaskByDifficulty",
 		"AboutProgression",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"artifactcollect_computer"}, 2)
+		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"artifactcollect_computer"}, 2)
+		if (SERVER) then
+			if target:GetNetVar("possibleJobs") == nil then
+				local possibleJobs = {}
+				possibleJobs["easy"] = {"mutantkilleasy"} -- TODO: Make sure these are updated
+				possibleJobs["medium"] = {"mutantkillmedium"}
+				possibleJobs["hard"] = {"mutantkillhard"}			
+	
+				target:SetNetVar("possibleJobs", possibleJobs)
+			end
+		end
+		
 		if(CLIENT)then
 			surface.PlaySound("buttons/button18.wav")
 		end
@@ -219,6 +231,7 @@ DIALOGUE.addTopic("GetTask", {
 	end,
 })
 
+
 DIALOGUE.addTopic("ViewProgression", {
 	statement = "",
 	response = "",
@@ -377,7 +390,8 @@ DIALOGUE.addTopic("BackTopic", {
 	options = {
 		"BackgroundTopic",
 		"AboutWorkTopic",
-		"GetTask",
+		-- "GetTask",
+		"GetTaskByDifficulty",
 		"AboutProgression",
 		"GOODBYE"
 	},

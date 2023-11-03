@@ -8,12 +8,23 @@ DIALOGUE.addTopic("GREETING", {
 		"PaintSuit",
 		"BackgroundTopic",
 		"AboutWorkTopic",
-		"GetTask",
+		-- "GetTask",
+		"GetTaskByDifficulty",
 		"AboutProgression",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"repair", "mechanical", "electronics"}, 4)
+		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"repair", "mechanical", "electronics"}, 4)
+		if (SERVER) then
+			if target:GetNetVar("possibleJobs") == nil then
+				local possibleJobs = {}
+				possibleJobs["easy"] = {"mutantkilleasy"} -- TODO: Make sure these are updated
+				possibleJobs["medium"] = {"mutantkillmedium"}
+				possibleJobs["hard"] = {"mutantkillhard"}			
+	
+				target:SetNetVar("possibleJobs", possibleJobs)
+			end
+		end
 	end
 })
 
@@ -594,12 +605,23 @@ DIALOGUE.addTopic("BackTopic", {
 		"PaintSuit",
 		"BackgroundTopic",
 		"AboutWorkTopic",
-		"GetTask",
+		-- "GetTask",
+		"GetTaskByDifficulty",
 		"AboutProgression",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"repair", "mechanical", "electronics"}, 4)
+		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"repair", "mechanical", "electronics"}, 4)
+		if (SERVER) then
+			if target:GetNetVar("possibleJobs") == nil then
+				local possibleJobs = {}
+				possibleJobs["easy"] = {"mutantkilleasy"} -- TODO: Make sure these are updated
+				possibleJobs["medium"] = {"mutantkillmedium"}
+				possibleJobs["hard"] = {"mutantkillhard"}			
+	
+				target:SetNetVar("possibleJobs", possibleJobs)
+			end
+		end
 	end
 })
 
