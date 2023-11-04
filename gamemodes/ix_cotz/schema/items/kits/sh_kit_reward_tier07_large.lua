@@ -15,8 +15,9 @@ ITEM.iconCam = {
 
 ITEM.items = {
 	{
-		{3, "task_reward_weapon_07_low"},
-		{1, "task_reward_weapon_07_high"},
+		{15, "task_reward_weapon_07_low"},
+		{5, "task_reward_weapon_07_high"},
+		{80, "task_reward_ammo_04_small"},
 	},
 	{
 		{1, "task_reward_ammo_04_small"},
