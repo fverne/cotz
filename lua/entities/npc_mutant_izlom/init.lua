@@ -27,11 +27,12 @@ ENT.ChasingSound.chance = 15
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 600
-ENT.hpvar = 100
+ENT.hp = 450
+ENT.hpvar = 30
 
-ENT.flatbulletresistance = 3
-ENT.percentbulletresistance = 12
+ENT.FBR = 3
+ENT.FBRAP = 3
+ENT.BR = 8
 
 ENT.FleeTime = 0
 ENT.MustFlee = false
@@ -225,14 +226,6 @@ end
 function ENT:STALKERNPCOnKilled()
 	if self.GrabTarget then
 		self.GrabTarget:Freeze(false)
-	end
-end
-
-function ENT:STALKERNPCDamageTake(dmginfo,mul) 
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 end
 

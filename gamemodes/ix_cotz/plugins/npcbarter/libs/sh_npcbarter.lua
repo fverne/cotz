@@ -21,7 +21,7 @@ if SERVER then
 
 		for k,v in pairs(ply:GetCharacter():GetInventory():GetItems()) do
 			if (v.uniqueID == item) then
-				local itemquant = v:GetData("quantity", 1)
+				local itemquant = v:GetData("quantity", v.quantity or 1)
 				local itemquantdif = itemquant - (cnt - itemsfound)
 				if(itemquantdif > 0) then -- item has enough quant to satisfy condition, break
 					v:SetData("quantity", itemquant - (cnt - itemsfound))

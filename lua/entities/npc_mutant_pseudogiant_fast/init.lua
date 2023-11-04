@@ -27,8 +27,8 @@ ENT.ChasingSound.chance = 5
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 2000
-ENT.hpvar = 250
+ENT.hp = 800
+ENT.hpvar = 100
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -47,8 +47,9 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_IDLE_WANDER 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
-ENT.flatbulletresistance = 3
-ENT.percentbulletresistance = 25
+ENT.FBR = 50
+ENT.FBRAP = 80
+ENT.BR = 12
 
 function ENT:Initialize()
 	self.Model = "models/monsters/gigant.mdl"
@@ -229,13 +230,5 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 				end
 			end
 		end
-	end
-end
-
-function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 end

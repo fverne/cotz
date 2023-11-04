@@ -21,8 +21,12 @@ ENT.ChasingSoundEnabled = false
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 800
-ENT.hpvar = 150
+ENT.hp = 50
+ENT.hpvar = 5
+
+ENT.FBR = 5
+ENT.FBRAP = 80
+ENT.BR = 0
 
 ENT.CanFakeDeath = true
 ENT.FakeDeath = 0
@@ -199,8 +203,6 @@ function ENT:STALKERNPCOnDeath()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	TEMP_Mul = mul
-	TEMP_Mul = 0.8
 
 	--fakedeath
 	if ( ((self:Health() - dmginfo:GetDamage()) < 30) and self.CanFakeDeath ) then
@@ -212,7 +214,7 @@ function ENT:STALKERNPCDamageTake(dmginfo,mul)
 		self:SetHealth(self:GetMaxHealth())
 	end
 
-	return TEMP_Mul
+	return mul
 end
 
 function ENT:STALKERNPCDistanceForMeleeTooBig() 

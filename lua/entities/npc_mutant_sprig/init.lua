@@ -27,8 +27,8 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 350
-ENT.hpvar = 75
+ENT.hp = 200
+ENT.hpvar = 25
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -44,7 +44,9 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_CHASE_ENEMY 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
-ENT.flatbulletresistance = 14
+ENT.FBR = 5
+ENT.FBRAP = 23
+ENT.BR = 0
 
 function ENT:Initialize()
 	self.Model = "models/monsters/zanoza.mdl"
@@ -156,11 +158,6 @@ function ENT:STALKERNPCOnDeath()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul) 
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
-	end
-
 	if (self.passive != 0) then self.passive = 1 end
 end
 

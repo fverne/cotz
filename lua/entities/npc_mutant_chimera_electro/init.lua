@@ -34,8 +34,12 @@ ENT.isAttacking = 0
 ENT.jumping1 = 0
 ENT.jumping2 = 0
 
-ENT.hp = 5800
-ENT.hpvar = 800
+ENT.hp = 750
+ENT.hpvar = 20
+
+ENT.FBR = 0
+ENT.FBRAP = 30
+ENT.BR = 55
 
 ENT.CanBlast = 0
 

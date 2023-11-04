@@ -1111,7 +1111,7 @@ function ENT:OnTakeDamage(dmginfo)
 		end
 	end
 
-	if(self.LastDamageHitgroup==8) then
+	if(self.LastDamageHitgroup==1) then
 		TEMP_DMGMUL = TEMP_DMGMUL*1.25
 	end
 
@@ -1123,7 +1123,15 @@ function ENT:OnTakeDamage(dmginfo)
 		TEMP_DMGMUL = prenpc
 	end
 
-	self:SetHealth(self:Health()-(dmginfo:GetDamage()*TEMP_DMGMUL))
+	dmginfo:SetDamage(dmginfo:GetDamage()*TEMP_DMGMUL)
+
+	print(dmginfo:GetDamageType())
+
+	if(dmginfo:IsDamageType(DMG_BULLET) or dmginfo:IsDamageType(DMG_AIRBOAT))then
+		self:STALKERBulletDamageTake(dmginfo, dmginfo:IsDamageType(DMG_AIRBOAT))
+	end
+
+	self:SetHealth(self:Health()-dmginfo:GetDamage())
 
 	if(dmginfo:GetDamageType()!=DMG_SONIC and dmginfo:GetDamageType()!=DMG_POISON ) then
 		STALKERNPCBleed(self,dmginfo:GetDamage()/4,dmginfo:GetDamagePosition(),Angle(math.random(1,360),math.random(1,360),math.random(1,360)))
@@ -1156,4 +1164,28 @@ end
 
 function ENT:GetAttackSpread( Weapon, Target )
 	return 0.1
+end
+
+function ENT:STALKERBulletDamageTake( dmginfo, isArmorPiercing)
+	
+	local FBR = self.FBR or 0
+	local FBRAP = self.FBRAP or 0
+	local BR = self.BR or 0
+
+	local damagetotake = dmginfo:GetDamage()
+
+	print("Preres", damagetotake)
+
+	damagetotake = damagetotake - FBR
+
+	if(not isArmorPiercing) then
+		damagetotake = damagetotake - FBRAP
+		damagetotake = damagetotake * (1 - (BR/100))
+	else
+		damagetotake = damagetotake * (1 - ((BR/2)/100))
+	end
+
+	print("Postres", damagetotake)
+
+	dmginfo:SetDamage(math.max(3,damagetotake))
 end

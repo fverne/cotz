@@ -27,8 +27,12 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 275
-ENT.hpvar = 75
+ENT.hp = 150
+ENT.hpvar = 20
+
+ENT.FBR = 2
+ENT.FBRAP = 8
+ENT.BR = 60
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -42,9 +46,6 @@ ENT.MinRangeDist = 800
 ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_IDLE_WANDER 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
-
-ENT.flatbulletresistance = 2
-ENT.percentbulletresistance = 10
 
 function ENT:Initialize()
 	self.Model = "models/monsters/psydog2.mdl"
@@ -158,10 +159,3 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 	end
 end
 
-function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
-	end
-end
