@@ -447,5 +447,37 @@ do
 
   tempJob = nil
 
+    --Scan 1 areas
+  local tempJob = {}
+
+  tempJob.name = "Stash package."
+  tempJob.desc = "Package."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "stashPackageNpc"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_ammo_med"}}
+  tempJob.rewardCount = 5
+  tempJob.repReward = 99999999
+  tempJob.moneyReward = { 9999, 99999 }
+  tempJob.categories = {"stashpackagenpc"}
+  tempJob.OnTaskGet = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        inv:Add("stashpackage", 1, { ["finishedtrigger"] = "stashPackageNpc", ["map"] = game.GetMap()} )
+        ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage"].name)
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+  end
+
+  ix.jobs.register(tempJob, "stashPackageNpc")
+
+  tempJob = nil
+
+
 end
 

@@ -72,11 +72,11 @@ function ix.util.GetHeadingFromAngle(ang)
 end
 
 if CLIENT then
-	netstream.Hook("ix_ShowTaskPositions", function(data)
-		local stashmaterial = Material("vgui/icons/quest2.png", "smooth noclamp")
+	netstream.Hook("ix_ShowTaskPositions", function(data, icon)
+		local stashmaterial = Material("vgui/icons/quest2.png", "noclamp")
 		for k,v in pairs(data) do
 			local emitter = ParticleEmitter( v )
-			local icon = emitter:Add( stashmaterial, v )
+			local icon = emitter:Add( Material(icon, "noclamp") or stashmaterial, v + Vector(0,0,32) )
 			icon:SetVelocity( Vector( 0, 0, 1 ) )
 			icon:SetDieTime(10)
 			icon:SetStartAlpha(255)
@@ -85,6 +85,7 @@ if CLIENT then
 			icon:SetEndSize(8)
 			icon:SetColor(255,255,255)
 			icon:SetAirResistance(300)
+			emitter:Finish()
 		end
 	end)
 
@@ -113,6 +114,14 @@ function ix.util.GetRandomTaskPoint()
 	table.Add(allpts, radpts)
 
 	return allpts[ math.random( #allpts ) ][1]
+end
+
+function ix.util.GetRandomStashTaskData()
+	local stashpts = ix.plugin.list["hidestashspawner"].stashspawnpoints
+
+	local tmpstashdata = stashpts[ math.random( #stashpts ) ]
+
+	return {tmpstashdata[2], tmpstashdata[1]}
 end
 
 function ix.util.GetDataSearchColors(n)
