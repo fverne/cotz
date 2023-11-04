@@ -188,13 +188,12 @@ if SERVER then
 
         for k,v in pairs(reward) do
           if IsValid(v) then
-            local rew = ix.util.GetRandomItemFromPool(v)
             --Give player items
-            if (and self:GetCharacter() and !self:GetCharacter():GetInventory():Add(rew[1], 1, rew[2] or {})) then
-              ix.item.Spawn(rew[1], self:GetItemDropPos(), nil, AngleRand(), rew[2] or {})
+            if (and self:GetCharacter() and !self:GetCharacter():GetInventory():Add(v[1], 1, v[2] or {})) then
+              ix.item.Spawn(v[1], self:GetItemDropPos(), nil, AngleRand(), v[2] or {})
             end
 
-            ix.dialogue.notifyItemGet(self, ix.item.list[rew[1]].name)
+            ix.dialogue.notifyItemGet(self, ix.item.list[v[1]].name)
           end
         end
 
