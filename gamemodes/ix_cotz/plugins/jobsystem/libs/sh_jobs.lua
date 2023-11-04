@@ -180,28 +180,21 @@ if SERVER then
 
         hook.Run("ix_OnJobComplete", self, npcidentifier, identifier)
 
-        local rewCount = 0
-        if type(ix.jobs.list[identifier].rewardCount) == "table" then
-          rewCount = math.random(ix.jobs.list[identifier].rewardCount[1],ix.jobs.list[identifier].rewardCount[2])
-        else 
-          rewCount = ix.jobs.list[identifier].rewardCount
+        local reward = ix.jobs.list[identifier].reward
+
+        if(not type(reward) == "table")then
+          reward = {reward}
         end
 
-        for i = 1, rewCount do
-          local reward = 0
-          if type(ix.jobs.list[identifier].reward) == "table" then
-            reward = table.Random(ix.jobs.list[identifier].reward)
-          else 
-            reward = ix.jobs.list[identifier].reward
-          end
+        for k,v in pairs(reward) do
+          if IsValid(v) then
+            local rew = ix.util.GetRandomItemFromPool(v)
+            --Give player items
+            if (and self:GetCharacter() and !self:GetCharacter():GetInventory():Add(rew[1], 1, rew[2] or {})) then
+              ix.item.Spawn(rew[1], self:GetItemDropPos(), nil, AngleRand(), rew[2] or {})
+            end
 
-          --Give player items
-          if (reward != 0 and self:GetCharacter() and !self:GetCharacter():GetInventory():Add(reward[1], 1, reward[2] or {})) then
-            ix.item.Spawn(reward[1], self:GetItemDropPos(), nil, AngleRand(), reward[2] or {})
-          end
-
-          if (reward != 0) then
-            ix.dialogue.notifyItemGet(self, ix.item.list[reward[1]].name)
+            ix.dialogue.notifyItemGet(self, ix.item.list[rew[1]].name)
           end
         end
 
