@@ -508,6 +508,45 @@ ix.npctemplates.templates["computernpc"] = {
 	},
 }
 
+ix.npctemplates.templates["medicnpc"] = {
+	name 		= "'Jitters'",
+	description = "He jitters a bit.",
+	model 		= "models/legends/feldsher.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.3,
+	dialogueid 	= "medicnpc",
+	soundgroup 	= "medicnpc",
+	idleanim 	= "sidit",
+	buyAll 		= false,
+	--animgroup 	= 4,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["medic_bandage_1"] 	= { nil, 4, SELLANDBUY, 4, 2, 4 },
+
+	},
+}
+
+
+ix.npctemplates.templates["tech2npc"] = {
+	name 		= "'Tinker'",
+	description = "A free man.",
+	model 		= "models/legends/freeman.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.3,
+	dialogueid 	= "tech2npc",
+	soundgroup 	= "tech2npc",
+	idleanim 	= "trader_idle",
+	buyAll 		= false,
+	--animgroup 	= 4,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["value_nuts"] 	= { nil, 4, SELLANDBUY, 4, 2, 4 },
+
+	},
+}
+
 -- No sounds emitted
 ix.npctemplates.soundtemplates["nosound"] = {
 	"stalkersound/inv_nosound.mp3",
@@ -573,6 +612,19 @@ ix.npctemplates.soundtemplates["bodyguardnpc"] = {
 	"npc/garyk/bar_guard_prohodi_1.ogg",
 	"npc/garyk/bar_guard_stop_1.ogg",
 	"npc/garyk/bar_guard_stop_3.ogg",
+}
+
+ix.npctemplates.soundtemplates["medicnpc"] = {
+	"npc/suslov/mar_csky_doctor_hello_dialog_0.ogg",
+	"npc/suslov/mar_csky_doctor_meet_greet_1.ogg",
+	"npc/suslov/mar_csky_doctor_meet_greet_2.ogg",
+	"npc/suslov/mar_csky_doctor_meet_greet_3.ogg",
+}
+
+ix.npctemplates.soundtemplates["tech2npc"] = {
+	"npc/suslov/mar_csky_tech_meet_greet_1.ogg",
+	"npc/suslov/mar_csky_tech_meet_greet_2.ogg",
+	"npc/suslov/mar_csky_tech_meet_greet_3.ogg",
 }
 
 ix.npctemplates.soundtemplates["computer_beep"] = {
