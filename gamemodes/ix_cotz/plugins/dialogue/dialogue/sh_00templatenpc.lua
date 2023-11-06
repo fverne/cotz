@@ -217,7 +217,7 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 	ResolveDynamicOption = function(self, client, target, dyndata)
 		if (SERVER) then
 			local possibleJobs = target:GetNetVar("possibleJobs")
-			local jobCategories = possibleJobs[dyndata.difficulty]
+			local jobCategories = table.Random(possibleJobs[dyndata.difficulty])
 			local jobid = ix.jobs.getJobFromCategory(jobCategories)
 
 			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(jobid))

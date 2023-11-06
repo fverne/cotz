@@ -20,7 +20,7 @@ DIALOGUE.addTopic("GREETING", {
 		if (SERVER) then
 			if target:GetNetVar("possibleJobs") == nil then
 				local possibleJobs = {}
-				possibleJobs["easy"] = {"mutantkilleasy"} -- TODO: Make sure these are updated
+				possibleJobs["easy"] = {"mutantkilleasy", "town"} -- TODO: Make sure these are updated
 				possibleJobs["medium"] = {"mutantkillmedium"}
 				possibleJobs["hard"] = {"mutantkillhard"}			
 	
@@ -379,7 +379,7 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 	ResolveDynamicOption = function(self, client, target, dyndata)
 		if (SERVER) then
 			local possibleJobs = target:GetNetVar("possibleJobs")
-			local jobCategories = possibleJobs[dyndata.difficulty]
+			local jobCategories = table.Random(possibleJobs[dyndata.difficulty])
 			local jobid = ix.jobs.getJobFromCategory(jobCategories)
 
 			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(jobid))

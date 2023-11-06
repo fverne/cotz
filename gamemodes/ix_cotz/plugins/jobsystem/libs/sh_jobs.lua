@@ -189,7 +189,7 @@ if SERVER then
         for k,v in pairs(reward) do
           if IsValid(v) then
             --Give player items
-            if (and self:GetCharacter() and !self:GetCharacter():GetInventory():Add(v[1], 1, v[2] or {})) then
+            if (self:GetCharacter() and !self:GetCharacter():GetInventory():Add(v[1], 1, v[2] or {})) then
               ix.item.Spawn(v[1], self:GetItemDropPos(), nil, AngleRand(), v[2] or {})
             end
 
