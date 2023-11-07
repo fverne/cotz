@@ -11,6 +11,8 @@ ITEM.WeightPerHunger = 0.140
 ITEM.BaseWeight = 2.028
 ITEM.WeightPerLevel = 0.665
 
+ITEM.meal = "meal_tark"
+
 ITEM.img = ix.util.GetMaterial("cotz/ui/icons/food_17.png")
 
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
