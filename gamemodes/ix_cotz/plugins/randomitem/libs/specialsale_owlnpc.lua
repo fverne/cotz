@@ -12,16 +12,15 @@ ix.randomitems.tables["specialsale_owlnpc_suit"] = {
 }
 
 ix.randomitems.tables["specialsale_owlnpc_headgear"] = {
-  {100, {"altyn"}},
-  {100, {"altynvisor"}},
-  {100, {"ach"}},
-  {100, {"sphere08"}},
-  {100, {"sphere12"}},
-  {100, {"m50"}},
-  {100, {"xm40"}},
-  {100, {"fsbhelmet"}},
+  {100, {"helm_altyn"}},
+  {100, {"helm_operator_nato"}},
+  {100, {"helm_sphere08"}},
+  {100, {"helm_sphere12"}},
+  {100, {"mask_m50"}},
+  {100, {"mask_xm40"}},
+  {100, {"headwear_cs4"}},
   {100, {"radsuithelmet"}},
-  {100, {"radsuitvisor"}},
+  {100, {"headwear_rad"}},
 }
 
 ix.randomitems.tables["specialsale_owlnpc_weapon_pistol"] = {

@@ -1,22 +1,27 @@
-ITEM.name = "Sphere-M12"
-ITEM.description = "A newer steel helmet."
-ITEM.longdesc = "A titanium helmet with cloth camouflage. Comes with pockets that can be filled with additional armor. Custom design, presumably never entered mass-production. M12 is the heaviest combat helmet available in the Zone, where it is normally used as a part of a set that includes also PSZ-series Spetsnaz body armor. The purpose of this helmet is clear: provide maximum head protection at the cost of increased weight."
-ITEM.model = "models/kek1ch/helm_battle.mdl"
-ITEM.price = 35000
---ITEM.busflag = {"ARMOR4", "SPECIAL6_1"}
-ITEM.busflag = {"headgear1_1"}
-ITEM.br = 0.15
-ITEM.fbr = 1
+ITEM.name = "XM-40"
+ITEM.description = "A newer gasmask."
+ITEM.longdesc = "A regular plastic and rubber respirator, used to protect the wearer from inhaling harmful dusts, fumes, vapours or gases. Widely used by rookies and veterans of all factions due to its universal functionality. Does not provide any physical protection."
+ITEM.model = "models/shtokerbox/ground_mask_xm40.mdl"
+
+ITEM.price = 30000
+ITEM.weight = 1
+
+ITEM.isGasmask = true
+ITEM.isHelmet = false
+-- ITEM.ballisticlevels = {"ll-a"}
+
+ITEM.br = 0.00
+ITEM.fbr = 0
 ITEM.ar = 0
 ITEM.far = 0
 ITEM.radProt = 0
-ITEM.isGasmask = false
-ITEM.isHelmet = true
-ITEM.ballisticlevels = {"lll-a"}
-ITEM.repairCost = ITEM.price/100*1
-ITEM.img = ix.util.GetMaterial("cotz/ui/icons/headgear_sphere12.png")
 
-ITEM.weight = 6.200
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(0, 0, 200),
+	ang = Angle(90, 90, 0),
+	fov = 3.85
+}
 
 ITEM.pacData = {
 [1] = {
@@ -43,7 +48,7 @@ ITEM.pacData = {
 				["EyeAngles"] = false,
 				["DrawOrder"] = 0,
 				["TintColor"] = Vector(0, 0, 0),
-				["UniqueID"] = "m12_body",
+				["UniqueID"] = "xm40_body",
 				["Translucent"] = false,
 				["LodOverride"] = -1,
 				["BlurSpacing"] = 0,
@@ -57,7 +62,7 @@ ITEM.pacData = {
 				["Brightness"] = 1,
 				["BoneMerge"] = false,
 				["BlurLength"] = 0,
-				["Position"] = Vector(-72.400001525879, -21.180000305176, 0),
+				["Position"] = Vector(-77.764999389648, -18.541999816895, -0.17399999499321),
 				["AngleOffset"] = Angle(0, 0, 0),
 				["AlternativeScaling"] = false,
 				["Hide"] = false,
@@ -65,25 +70,25 @@ ITEM.pacData = {
 				["Scale"] = Vector(1, 1, 1),
 				["ClassName"] = "model",
 				["EditorExpand"] = true,
-				["Size"] = 1.1599999666214,
+				["Size"] = 1.2200000286102,
 				["ModelFallback"] = "",
-				["Angles"] = Angle(-1.2999999523163, -74.300003051758, -90),
+				["Angles"] = Angle(-1.2999999523163, -76.300003051758, -90),
 				["TextureFilter"] = 3,
-				["Model"] = "models/projectpt/headwear_sphere12.mdl",
+				["Model"] = "models/projectpt/mask_io7a.mdl",
 				["BlendMode"] = "",
 			},
 		},
 	},
 	["self"] = {
 		["DrawOrder"] = 0,
-		["UniqueID"] = "m12_outfit",
+		["UniqueID"] = "xm40_outfit",
 		["AimPartUID"] = "",
 		["Hide"] = false,
 		["Duplicate"] = false,
 		["ClassName"] = "group",
 		["OwnerName"] = "self",
 		["IsDisturbing"] = false,
-		["Name"] = "sphere12",
+		["Name"] = "xm40",
 		["EditorExpand"] = false,
 	},
 },
@@ -114,7 +119,7 @@ ITEM.pacDataExpedition = {
 				["EyeAngles"] = false,
 				["DrawOrder"] = 0,
 				["TintColor"] = Vector(0, 0, 0),
-				["UniqueID"] = "m12_body",
+				["UniqueID"] = "xm40_body",
 				["Translucent"] = false,
 				["LodOverride"] = -1,
 				["BlurSpacing"] = 0,
@@ -128,7 +133,7 @@ ITEM.pacDataExpedition = {
 				["Brightness"] = 1,
 				["BoneMerge"] = false,
 				["BlurLength"] = 0,
-				["Position"] = Vector(-68.599998474121, -22.780000686646, 0),
+				["Position"] = Vector(-64.724998474121, -22.238000869751, -0.17379760742188),
 				["AngleOffset"] = Angle(0, 0, 0),
 				["AlternativeScaling"] = false,
 				["Hide"] = false,
@@ -136,25 +141,25 @@ ITEM.pacDataExpedition = {
 				["Scale"] = Vector(1, 1, 1),
 				["ClassName"] = "model",
 				["EditorExpand"] = true,
-				["Size"] = 1.1150000095367,
+				["Size"] = 1.0499999523163,
 				["ModelFallback"] = "",
-				["Angles"] = Angle(-1.2999999523163, -72.099998474121, -90),
+				["Angles"] = Angle(-1.2999999523163, -72.300003051758, -90),
 				["TextureFilter"] = 3,
-				["Model"] = "models/projectpt/headwear_sphere12.mdl",
+				["Model"] = "models/projectpt/mask_io7a.mdl",
 				["BlendMode"] = "",
 			},
 		},
 	},
 	["self"] = {
 		["DrawOrder"] = 0,
-		["UniqueID"] = "m12_outfit",
+		["UniqueID"] = "xm40_outfit",
 		["AimPartUID"] = "",
 		["Hide"] = true,
 		["Duplicate"] = false,
 		["ClassName"] = "group",
 		["OwnerName"] = "self",
 		["IsDisturbing"] = false,
-		["Name"] = "sphere12",
+		["Name"] = "xm40",
 		["EditorExpand"] = false,
 	},
 },
@@ -185,7 +190,7 @@ ITEM.pacDataBerill1 = {
 				["EyeAngles"] = false,
 				["DrawOrder"] = 0,
 				["TintColor"] = Vector(0, 0, 0),
-				["UniqueID"] = "m12_body",
+				["UniqueID"] = "xm40_body",
 				["Translucent"] = false,
 				["LodOverride"] = -1,
 				["BlurSpacing"] = 0,
@@ -199,7 +204,7 @@ ITEM.pacDataBerill1 = {
 				["Brightness"] = 1,
 				["BoneMerge"] = false,
 				["BlurLength"] = 0,
-				["Position"] = Vector(-62.400001525879, -19.079999923706, 0),
+				["Position"] = Vector(-69.964996337891, -17.312000274658, -0.17399999499321),
 				["AngleOffset"] = Angle(0, 0, 0),
 				["AlternativeScaling"] = false,
 				["Hide"] = false,
@@ -207,97 +212,30 @@ ITEM.pacDataBerill1 = {
 				["Scale"] = Vector(1, 1, 1),
 				["ClassName"] = "model",
 				["EditorExpand"] = true,
-				["Size"] = 1,
+				["Size"] = 1.1,
 				["ModelFallback"] = "",
-				["Angles"] = Angle(-1.2999999523163, -74.300003051758, -90),
+				["Angles"] = Angle(-1.2999999523163, -76.300003051758, -90),
 				["TextureFilter"] = 3,
-				["Model"] = "models/projectpt/headwear_sphere12.mdl",
+				["Model"] = "models/projectpt/mask_io7a.mdl",
 				["BlendMode"] = "",
 			},
 		},
 	},
 	["self"] = {
 		["DrawOrder"] = 0,
-		["UniqueID"] = "m12_outfit",
+		["UniqueID"] = "xm40_outfit",
 		["AimPartUID"] = "",
 		["Hide"] = false,
 		["Duplicate"] = false,
 		["ClassName"] = "group",
 		["OwnerName"] = "self",
 		["IsDisturbing"] = false,
-		["Name"] = "sphere12",
+		["Name"] = "xm40",
 		["EditorExpand"] = false,
 	},
 },	
 }
 
 ITEM.pacDataNBC = {
-[1] = {
-	["children"] = {
-		[1] = {
-			["children"] = {
-			},
-			["self"] = {
-				["Skin"] = 0,
-				["Invert"] = false,
-				["LightBlend"] = 1,
-				["CellShade"] = 0,
-				["OwnerName"] = "self",
-				["AimPartName"] = "",
-				["IgnoreZ"] = false,
-				["AimPartUID"] = "",
-				["Passes"] = 1,
-				["Name"] = "",
-				["NoTextureFiltering"] = false,
-				["DoubleFace"] = false,
-				["PositionOffset"] = Vector(0, 0, 0),
-				["IsDisturbing"] = false,
-				["Fullbright"] = false,
-				["EyeAngles"] = false,
-				["DrawOrder"] = 0,
-				["TintColor"] = Vector(0, 0, 0),
-				["UniqueID"] = "m12_body",
-				["Translucent"] = false,
-				["LodOverride"] = -1,
-				["BlurSpacing"] = 0,
-				["Alpha"] = 1,
-				["Material"] = "",
-				["UseWeaponColor"] = false,
-				["UsePlayerColor"] = false,
-				["UseLegacyScale"] = false,
-				["Bone"] = "head",
-				["Color"] = Vector(255, 255, 255),
-				["Brightness"] = 1,
-				["BoneMerge"] = false,
-				["BlurLength"] = 0,
-				["Position"] = Vector(-72.400001525879, -19.280000686646, 0),
-				["AngleOffset"] = Angle(0, 0, 0),
-				["AlternativeScaling"] = false,
-				["Hide"] = false,
-				["OwnerEntity"] = false,
-				["Scale"] = Vector(1, 1, 1),
-				["ClassName"] = "model",
-				["EditorExpand"] = true,
-				["Size"] = 1.1599999666214,
-				["ModelFallback"] = "",
-				["Angles"] = Angle(-1.2999999523163, -74.300003051758, -90),
-				["TextureFilter"] = 3,
-				["Model"] = "models/projectpt/headwear_sphere12.mdl",
-				["BlendMode"] = "",
-			},
-		},
-	},
-	["self"] = {
-		["DrawOrder"] = 0,
-		["UniqueID"] = "m12_outfit",
-		["AimPartUID"] = "",
-		["Hide"] = false,
-		["Duplicate"] = false,
-		["ClassName"] = "group",
-		["OwnerName"] = "self",
-		["IsDisturbing"] = false,
-		["Name"] = "sphere12",
-		["EditorExpand"] = true,
-	},
-},	
+	
 }

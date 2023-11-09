@@ -754,8 +754,9 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("steelhelmetgerman", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("steelhelmetrussian", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_steel_ger", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_steel_rus", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_steel_arab", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet1", true)
@@ -843,8 +844,7 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("flighthelmet", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("flighthelmetvisor", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("headwear_cs1", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet2", true)
@@ -917,7 +917,7 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks pasgt"
+				local message = " ## PLACEHOLDER ## - Unlocks helm_operator_rus_1"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -927,7 +927,7 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("pasgt", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_operator_rus_1", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet3", true)
@@ -1011,7 +1011,7 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("fraghelmet", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("headwear_cs2", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet4", true)
@@ -1095,7 +1095,7 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("sphere08", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_sphere08", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet5", true)
@@ -1179,7 +1179,7 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("ach", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_operator_nato", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet6", true)
@@ -1263,7 +1263,7 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("sphere12", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_sphere12", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet7", true)
@@ -1354,7 +1354,7 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("halfmask", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_halfmask", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Mask1", true)
@@ -1437,7 +1437,7 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("gp5", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_gp5", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Mask2", true)
@@ -1520,8 +1520,7 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("eo20", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("eo20old", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_eo20", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Mask3", true)
