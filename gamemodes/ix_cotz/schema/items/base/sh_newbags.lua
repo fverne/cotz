@@ -8,7 +8,7 @@ ITEM.height = 2
 ITEM.price = 0
 
 ITEM.isNewBag = true
-ITEM.outfitCategory = "backpack"
+ITEM.outfitCategory = "Backpack"
 ITEM.pacData = {}
 ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
@@ -50,7 +50,7 @@ end
 
 function ITEM:PopulateTooltip(tooltip)
     if (!self.entity) then
-        ix.util.PropertyDesc2(tooltip, "Backpack", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
+        ix.util.PropertyDesc2(tooltip, self.outfitCategory, Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
     end
 
     if (self.PopulateTooltipIndividual) then
