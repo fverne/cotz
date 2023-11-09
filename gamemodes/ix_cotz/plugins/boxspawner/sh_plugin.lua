@@ -13,6 +13,7 @@ PLUGIN.boxchance = 10
 PLUGIN.boxtypes = {
 	"ix_entbox",
 	"ix_wood_entbox",
+	"ix_paper_entbox",
 }
 
 ix.config.Add("boxSpawnerThreshold", 50, "How many boxes should the controller keep on the map.", nil, {
