@@ -1,12 +1,12 @@
 ITEM.name = "Altyn Helmet"
-ITEM.description = "A helmet."
+ITEM.description = "A steel helmet."
 ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_headgear_atlyn.mdl"
 
 ITEM.price = 30000
 ITEM.weight = 1
 
-ITEM.isGasmask = false
+ITEM.isGasmask = true
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
