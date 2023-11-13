@@ -6,12 +6,12 @@ ITEM.width = 2
 ITEM.height = 2
 ITEM.flag = "A"
 
--- ITEM.exRender = true
--- ITEM.iconCam = {
--- 	pos = Vector(277.58795166016, 232.89892578125, 177.14739990234),
--- 	ang = Angle(25, 220, 0),
--- 	fov = 5.0663454801178,
--- }
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(-190.5, 5.85, -708.84),
+	ang = Angle(285.05, -1.75, 0),
+	fov = 0.81
+}
 
 ITEM.items = {
 	{
