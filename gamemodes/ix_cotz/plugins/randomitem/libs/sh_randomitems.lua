@@ -88,6 +88,7 @@ ix.randomitems.tables["default"] = {
 
 ix.util.Include("ix_entbox_drops.lua","shared")
 ix.util.Include("ix_wood_entbox_drops.lua","shared")
+ix.util.Include("ix_paper_entbox_drops.lua","shared")
 
 ix.util.Include("worldspawn_1.lua","shared")
 ix.util.Include("worldspawn_2.lua","shared")
