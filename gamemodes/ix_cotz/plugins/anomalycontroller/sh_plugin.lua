@@ -6,29 +6,43 @@ PLUGIN.desc = "Allows for randomly spawning anomaly entities"
 PLUGIN.anomalydefs = PLUGIN.anomalydefs or {}
 PLUGIN.anomalypoints = PLUGIN.anomalypoints or {} -- ANOMALYPOINTS STRUCTURE table.insert( PLUGIN.eventpoints, { position, radius, anoms } )
 
-PLUGIN.spawnrate = 900
-PLUGIN.spawnchance = 3
-
 ix.util.Include("sh_anomalydefs.lua")
+
+ix.config.Add("artifactSpawnerThreshold", 5, "How many artifacts the anomalyspawner should keep the map populated with.", nil, {
+	data = {min = 0, max = 50},
+	category = "Spawning"
+})
+
+ix.config.Add("artifactSpawnerRate", 900, "The time it takes for artifacts to be attempted to spawn.", nil, {
+	data = {min = 15, max = 3000},
+	category = "Spawning"
+})
+
+ix.config.Add("artifactSpawnerChance", 3, "Chance for artifacts per anomalyfield to spawn when the time is up.", nil, {
+	data = {min = 0, max = 100},
+	category = "Spawning"
+})
 
 if SERVER then
 	local spawntime = 1
 
 	function PLUGIN:Think()
 		if spawntime > CurTime() then return end
-		spawntime = CurTime() + self.spawnrate
+		spawntime = CurTime() + ix.config.Get("artifactSpawnerRate", 900)
 
 		self:trySpawnArtifacts()
 	end
 
 	function PLUGIN:trySpawnArtifacts()
 		for i, j in pairs(self.anomalypoints) do
-			
+			local numartifacts = self:GetNumSpawnedArtifacts()
+			if (numartifacts >= ix.config.Get("artifactSpawnerThreshold",5)) then return end
+
 			if (!j) then
 				continue
 			end
 
-			if math.random(100) > self.spawnchance then
+			if math.random(100) > ix.config.Get("artifactSpawnerChance",3) then
 				continue
 			end
 
@@ -86,7 +100,7 @@ if SERVER then
 			idat = table.Random(self.anomalydefs[anomalyselector].veryRareArtifacts)
 		end
 
-		ix.item.Spawn(idat, point[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), function(item, ent) ent.bTemporary = true end, AngleRand(), {})
+		ix.item.Spawn(idat, point[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), function(item, ent) ent.bTemporary = true ent.bArtifact = true end, AngleRand(), {})
 
 	end
 
@@ -97,6 +111,17 @@ if SERVER then
 				v:Remove()
 			end
 		end
+	end
+
+	function PLUGIN:GetNumSpawnedArtifacts()
+		local n = 0
+		for k,v in pairs(ents.FindByClass("ix_item")) do
+			if( v.bTemporary and v.bArtifact ) then
+				n = n + 1
+			end
+		end
+
+		return n
 	end
 
 	-- Function that will spawn anomalies
