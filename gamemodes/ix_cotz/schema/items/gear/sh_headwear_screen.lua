@@ -18,9 +18,9 @@ ITEM.radProt = 0
 
 ITEM.exRender = true
 ITEM.iconCam = {
-    pos = Vector(0, -182.33, 3),
-    ang = Angle(0, 90, 0),
-    fov = 4
+	pos = Vector(0, 0, 200),
+	ang = Angle(90, -90, 0),
+	fov = 3.85
 }
 
 ITEM.pacData = {
