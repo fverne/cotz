@@ -53,11 +53,12 @@ if SERVER then
 		local jobidentifier = client:GetCharacter():GetJobs()[npcidentifier].identifier
 		if client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier)) then
 			local item = client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier))
+			local trigger = ix.jobs.list[jobidentifier].listenTrigger
 			local noremove = false
 			local n = 0
 			if(item.quantity) then
 				for i=1, item:GetData("quantity", item.quantity) do
-					hook.Run("ix_JobTrigger", client, "itemDeliver_"..ix.jobs.isItemJob(jobidentifier))
+					hook.Run("ix_JobTrigger", client, trigger)
 					n = n + 1
 					if (client:GetCharacter():GetJobs()[npcidentifier].isCompleted) then 
 						item:SetData("quantity", item:GetData("quantity", item.quantity)-n)
@@ -66,7 +67,7 @@ if SERVER then
 					end
 				end
 			else
-				hook.Run("ix_JobTrigger", client, "itemDeliver_"..ix.jobs.isItemJob(jobidentifier))
+				hook.Run("ix_JobTrigger", client, trigger)
 			end
 			if(!noremove) then item:Remove() end
 			ix.dialogue.notifyItemLost(client, ix.item.list[ix.jobs.isItemJob(jobidentifier)].name)

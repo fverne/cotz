@@ -79,9 +79,8 @@ function ix.jobs.getFormattedDescInactive(identifier)
 end
 
 function ix.jobs.isItemJob(jobname)
-  local underscorepos = string.find(jobname, "_")
-  if underscorepos then
-    return string.sub(jobname, underscorepos + 1)
+  if ix.jobs.list[jobname].requiredItem then
+    return ix.jobs.list[jobname].requiredItem
   else
     return false
   end

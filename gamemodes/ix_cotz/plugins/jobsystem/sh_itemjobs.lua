@@ -16,6 +16,8 @@
 
   ix.jobs.register(tempJob, "TestJob")                  --If item delivery quest, the final part of the quest identifier should read "_<uniqueid>" for proper operation
 
+  tempJob.requiredItem = "part_boar" --special member for items
+
 ]]--
 
 
@@ -32,6 +34,7 @@ do
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
   tempJob.listenTrigger = "itemDeliver_meat_blinddog"
+  tempJob.requiredItem = "meat_blinddog"
   tempJob.numberRec = 4
   tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
   tempJob.rewardCount = 1
