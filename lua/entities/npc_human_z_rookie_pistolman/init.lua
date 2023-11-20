@@ -57,6 +57,7 @@ ENT.weapons      = {
   {{"tokarev", { ["durability"] = 4, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_tokarev"},
   {{"brhp", { ["durability"] = 4, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_brhp"},
   {{"rugermk3", { ["durability"] = 4, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_rugermk3"},
+  {{"nagantrev", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_brhp"},
 }
 
 -- Live vars

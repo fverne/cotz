@@ -77,6 +77,7 @@ CustomizableWeaponry:registerAmmo("9x18MM -AP-", "9x18MM Rounds - Armor Piercing
 CustomizableWeaponry:registerAmmo("9x19MM -AP-", "9x19MM Rounds - Armor Piercing", 9, 19,DMG_AIRBOAT)
 CustomizableWeaponry:registerAmmo("9x21MM -AP-", "9x21MM Gyurza - Armor Piercing", 9, 21,DMG_AIRBOAT)
 CustomizableWeaponry:registerAmmo("9x39MM -AP-", "9x39MM Rounds - Armor Piercing", 9, 39,DMG_AIRBOAT)
+CustomizableWeaponry:registerAmmo("12.7x55mm", "12.7x55mm STs-130", 12.7, 55,DMG_AIRBOAT)
 
 --HOLLOWPOINT AMMO
 CustomizableWeaponry:registerAmmo("7.62x25MM -HP-", "7.62x25MM Rounds - Hollow Point", 7.62, 25)

@@ -68,6 +68,7 @@ ENT.weapons      = {
   {{"fort12", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_tokarev"},
   {{"beretta92", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_brhp"},
   {{"swr8", { ["durability"] = 4, ["wear"] = 10, ["ammo"] = 2 }}, "weapon_npc_brhp"},
+  {{"nagantrev", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_brhp"},
 }
 
 -- Live vars

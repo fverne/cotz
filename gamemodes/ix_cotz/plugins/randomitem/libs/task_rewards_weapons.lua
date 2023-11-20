@@ -19,6 +19,7 @@ ix.randomitems.tables["task_reward_weapon_01_low"] = {
     {250, {"ruger1022", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"sako85varmint", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"mp18", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"nagantrev", {["durability"] = 50, ["wear"] = 80}}},
 }
 
 -- high durability
@@ -33,6 +34,7 @@ ix.randomitems.tables["task_reward_weapon_01_high"] = {
     {250, {"ruger1022", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"sako85varmint", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"mp18", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"nagantrev", {["durability"] = 100, ["wear"] = 80}}},
 }
 
 
@@ -46,6 +48,7 @@ ix.randomitems.tables["task_reward_weapon_02_low"] = {
     {250, {"mac11", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"lax410s", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"ij600", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"mp27", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"saigasemi545", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"obrez", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"sako85nato", {["durability"] = 50, ["wear"] = 80}}},
@@ -61,6 +64,7 @@ ix.randomitems.tables["task_reward_weapon_02_high"] = {
     {250, {"mac11", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"lax410s", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"ij600", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"mp27", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"saigasemi545", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"obrez", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"sako85nato", {["durability"] = 100, ["wear"] = 80}}},
@@ -294,6 +298,7 @@ ix.randomitems.tables["task_reward_weapon_08_low"] = {
     {250, {"nitro", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"ptrs", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"remmsr", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"vssk", {["durability"] = 50, ["wear"] = 80}}},
 }
 
 -- high durability
@@ -316,4 +321,5 @@ ix.randomitems.tables["task_reward_weapon_08_high"] = {
     {250, {"nitro", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"ptrs", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"remmsr", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"vssk", {["durability"] = 100, ["wear"] = 80}}},
 }

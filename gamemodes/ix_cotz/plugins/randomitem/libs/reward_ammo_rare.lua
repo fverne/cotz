@@ -17,4 +17,5 @@ ix.randomitems.tables["reward_ammo_rare"] = {
   {300,   {"338lapua"}},
   {200,   {"338lapuahp"}},
   {200,   {"338lapuaap"}},
+  {200,   {"127x55"}
 }

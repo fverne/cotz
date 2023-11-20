@@ -1215,6 +1215,15 @@ function SWEP:Think()
 					self:SetNextSecondaryFire(time)
 					self.ReloadWait = time
 					self.ReloadDelay = nil
+					if self.AlwaysPlayReloadEnd then
+						self:sendWeaponAnim("reload_end", self.ReloadSpeed)
+						self.ShotgunReloadState = 0
+						local waitTime = self.ReloadFinishWait
+						local time = CT + waitTime / self.ReloadSpeed
+						self:SetNextPrimaryFire(time)
+						self:SetNextSecondaryFire(time)
+						self.ReloadWait = time
+					end
 				else
 					local canInsertMore = false
 					local waitTime = self.ReloadFinishWait

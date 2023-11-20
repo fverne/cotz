@@ -65,6 +65,7 @@ ix.npctemplates.templates["technpc"] = {
 		["w9422"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["sako85varmint"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["ij600"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
+		["mp27"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["g2contender"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 
 		["crowbar"] 	= { nil, 4, SELLANDBUY, 4, 0.5, 2 },

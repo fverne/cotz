@@ -57,6 +57,7 @@ ENT.models       = {
 }
 
 ENT.weapons      = {
+  {{"nagantrev", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_brhp"},
   {{"m1917", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_brhp"},
   {{"tokarev", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_tokarev"},
   {{"brhp", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_brhp"},

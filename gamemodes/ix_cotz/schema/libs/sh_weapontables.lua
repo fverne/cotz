@@ -24,6 +24,7 @@ ix.weapontables.ammotypes["9x21MM"] = {uID = "9x21"}
 ix.weapontables.ammotypes["9x39MM"] = {uID = "9x39"}
 ix.weapontables.ammotypes["12 Gauge"] = {uID = "12gauge"}
 ix.weapontables.ammotypes[".700 Nitro Express"] = {uID = "700nitro"}
+ix.weapontables.ammotypes["12.7x55mm"] = {uID = "127x55"}
 
 ix.weapontables.attachments = {}
 
