@@ -1125,8 +1125,6 @@ function ENT:OnTakeDamage(dmginfo)
 
 	dmginfo:SetDamage(dmginfo:GetDamage()*TEMP_DMGMUL)
 
-	print(dmginfo:GetDamageType())
-
 	if(dmginfo:IsDamageType(DMG_BULLET) or dmginfo:IsDamageType(DMG_AIRBOAT))then
 		self:STALKERBulletDamageTake(dmginfo, dmginfo:IsDamageType(DMG_AIRBOAT))
 	end
@@ -1173,9 +1171,6 @@ function ENT:STALKERBulletDamageTake( dmginfo, isArmorPiercing)
 	local BR = self.BR or 0
 
 	local damagetotake = dmginfo:GetDamage()
-
-	print("Preres", damagetotake)
-
 	damagetotake = damagetotake - FBR
 
 	if(not isArmorPiercing) then
@@ -1184,8 +1179,6 @@ function ENT:STALKERBulletDamageTake( dmginfo, isArmorPiercing)
 	else
 		damagetotake = damagetotake * (1 - ((BR/2)/100))
 	end
-
-	print("Postres", damagetotake)
 
 	dmginfo:SetDamage(math.max(3,damagetotake))
 end
