@@ -13,6 +13,11 @@ if CLIENT then
 	SWEP.MuzzleEffect = "muzzleflash_6"
 	SWEP.PosBasedMuz = false
 	SWEP.NoShells = true
+
+	SWEP.DrawTraditionalWorldModel = false
+	SWEP.WM = "models/weapons/tfa_ins2/wpn_mp27_w.mdl"
+	SWEP.WMPos = Vector(-1.2, 3.5, -2.5)
+	SWEP.WMAng = Vector(-12, 0, 180)
 		
 	SWEP.IronsightPos = Vector(-10.30, -9.50, 3.55)
 	SWEP.IronsightAng = Vector(0, 0, 0)
