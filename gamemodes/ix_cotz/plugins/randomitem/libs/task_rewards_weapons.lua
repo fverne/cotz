@@ -251,6 +251,7 @@ ix.randomitems.tables["task_reward_weapon_07_low"] = {
     {250, {"rpk", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"g3a3", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"asval", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"9a91", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"hk416", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"svd", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"l115", {["durability"] = 50, ["wear"] = 80}}},
@@ -271,6 +272,7 @@ ix.randomitems.tables["task_reward_weapon_07_high"] = {
     {250, {"rpk", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"g3a3", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"asval", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"9a91", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"hk416", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"svd", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"l115", {["durability"] = 100, ["wear"] = 80}}},
@@ -299,6 +301,7 @@ ix.randomitems.tables["task_reward_weapon_08_low"] = {
     {250, {"ptrs", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"remmsr", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"vssk", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"tkpd", {["durability"] = 50, ["wear"] = 80}}},
 }
 
 -- high durability
@@ -322,4 +325,5 @@ ix.randomitems.tables["task_reward_weapon_08_high"] = {
     {250, {"ptrs", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"remmsr", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"vssk", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"tkpd", {["durability"] = 100, ["wear"] = 80}}},
 }

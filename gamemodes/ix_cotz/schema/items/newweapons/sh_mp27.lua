@@ -1,7 +1,7 @@
 ITEM.name = "MP-27"
 ITEM.description= "An MP-27 .410 Bore O/U Break Action Shotgun."
 ITEM.longdesc = "A classic shotgun design, firing .410 buckshot. \n\nAmmo: .410 Gauge \nMagazine Capacity: 2"
-ITEM.model = ("models/weapons/tfa_ins2/wpn_mp27_hud_v.mdl")
+ITEM.model = ("models/weapons/tfa_ins2/wpn_mp27_w.mdl")
 ITEM.class = "cw_mp27"
 ITEM.weaponCategory = "primary"
 ITEM.price = 5800
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
 						["Position"] = Vector(0.066, -5.077, -3.147),
-						["Model"] = "models/weapons/tfa_ins2/wpn_mp27_hud_v.mdl",
+						["Model"] = "models/weapons/tfa_ins2/wpn_mp27_w.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "2352355232",

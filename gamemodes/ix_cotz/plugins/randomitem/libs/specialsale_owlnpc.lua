@@ -63,6 +63,7 @@ ix.randomitems.tables["specialsale_owlnpc_weapon_rifle"] = {
   {100, {"vss"}},
   {100, {"asval"}},
   {100, {"sr3m"}}, 
+  {100, {"9a91"}},
   {100, {"aug"}},
   {100, {"famas"}},
   {100, {"fnfal"}},
@@ -97,4 +98,6 @@ ix.randomitems.tables["specialsale_owlnpc_weapon_sniper"] = {
   {100, {"lax44"}},
   {100, {"svt40"}},
   {100, {"w9422357"}},
+  {100, {"vssk"}},
+  {100, {"tkpd"}},
 }

@@ -62,6 +62,7 @@ ix.npctemplates.templates["technpc"] = {
 
 		["ruger1022"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["rugermk3"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
+		["nagantrev"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["w9422"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["sako85varmint"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },
 		["ij600"] 	= { nil, 4, SELLANDBUY, 4, 2, 1 },

@@ -167,7 +167,7 @@ ix.randomitems.tables["cache_weapons_rifle_tier3"] = {
   {200,  {"sr3m",              {["durability"] = 80 }}},
   {200,  {"vss",               {["durability"] = 80, ["attachments"] = { "md_pso1" }}}},
   {400,  {"vss",               {["durability"] = 80 }}},
-
+  {300,  {"9a91",              {["durability"] = 80 }}},
 }
 
 -----------------------------------------------------------------------------------

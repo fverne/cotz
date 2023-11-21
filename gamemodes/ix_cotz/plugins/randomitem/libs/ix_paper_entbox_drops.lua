@@ -83,6 +83,7 @@ ix.randomitems.tables["ix_paper_entbox_drops"] = {
   {250, {"sledgehammer"}},
   {250, {"w9422", {["durability"] = 10, ["ammo"] = 13}}},
   {250, {"rugermk3", {["durability"] = 10, ["ammo"] = 8}}},
+  {250, {"nagantrev", {["durability"] = 10, ["ammo"] = 4}}},
   {250, {"ruger1022", {["durability"] = 10, ["ammo"] = 4}}},
   {250, {"g2contender", {["durability"] = 10, ["ammo"] = 1}}},
   {250, {"cz52", {["durability"] = 10, ["ammo"] = 6}}},
