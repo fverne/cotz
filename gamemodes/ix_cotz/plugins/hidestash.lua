@@ -7,10 +7,6 @@ PLUGIN.stashpoints = PLUGIN.stashpoints or {}
 if SERVER then
 	local spawntime = 1
 
-	function PLUGIN:ItemShouldSave(entity)
-		return (!entity.generated)
-	end
-
 	function PLUGIN:LoadData()
 		self.stashpoints = self:GetData() or {}
 	end
@@ -19,9 +15,9 @@ if SERVER then
 		self:SetData(self.stashpoints)
 	end
 
-	function PLUGIN:SpawnStash(pos, item)
+	function PLUGIN:SpawnStash(pos, item, charid)
   		for k, v in pairs( item ) do
-    		table.insert( PLUGIN.stashpoints, { pos, v[1], Angle(), v[2] } )
+    		table.insert( PLUGIN.stashpoints, { pos, v[1], Angle(), v[2], charid } )
   		end
 	end
 
@@ -44,7 +40,8 @@ else
 
 end
 
-function PLUGIN:StashHide(client)
+--[[
+function PLUGIN:StashHide(client) -- No longer used, kept around commented for posterity
 	ix.util.PlayerPerformBlackScreenAction(client, "Hiding the stash...", 3, function(client) 
 		local trace = client:GetEyeTraceNoCursor()
 		local hitpos = trace.HitPos + trace.HitNormal*5
@@ -69,6 +66,7 @@ function PLUGIN:StashHide(client)
 		end
 	end)
 end
+]]--
 
 function PLUGIN:StashUnhide(client)
 	ix.util.PlayerPerformBlackScreenAction(client, "Searching for a stash...", 8, function(client) 
@@ -79,6 +77,7 @@ function PLUGIN:StashUnhide(client)
 		
 		if dist <= 70 then
 			for k, v in pairs( PLUGIN.stashpoints ) do
+				if not (v[5] == client:GetCharacter():GetID()) then continue end
 				local distance = v[1]:Distance( hitpos )
 				if distance <= 32 then
 					ix.item.Spawn(v[2], v[1] + Vector( 0, 0, 10 + (mt * 5) ), nil, v[3], v[4])

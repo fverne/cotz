@@ -11,47 +11,57 @@ ix.util.Include("sh_rp_waystation.lua")
 if SERVER then
 
 	PLUGIN.PluginDataDeployFunctions = {
-		["anomalycontroller"] = function(payload)
-			ix.plugin.list["anomalycontroller"].anomalypoints = payload
+		["anomalycontroller"] = function(payload, map)
+			ix.plugin.list["anomalycontroller"].anomalypoints[map] = payload
 		end,
-		["boxspawner"] = function(payload)
+		["boxspawner"] = function(payload, map)
+			if not(map == game.GetMap()) then return end
+
 			ix.plugin.list["boxspawner"].boxpoints = payload
 		end,
-		["eventcontroller"] = function(payload)
-			ix.plugin.list["eventcontroller"].eventpoints = payload
+		["eventcontroller"] = function(payload, map)
+			ix.plugin.list["eventcontroller"].eventpoints[map] = payload
 		end,
-		["eventcontrolleradv"] = function(payload)
+		["eventcontrolleradv"] = function(payload, map)
+			if not(map == game.GetMap()) then return end
+
 			ix.plugin.list["eventcontrolleradv"].eventpoints = payload
 		end,
-		["hidestashspawner"] = function(payload)
-			ix.plugin.list["hidestashspawner"].stashspawnpoints = payload
+		["hidestashspawner"] = function(payload, map)
+			ix.plugin.list["hidestashspawner"].stashspawnpoints[map] = payload
 		end,
-		["radiationcontroller"] = function(payload)
+		["radiationcontroller"] = function(payload, map)
+			if not(map == game.GetMap()) then return end
+
 			ix.plugin.list["radiationcontroller"].radiationpoints = payload
 		end,
-		["simplecrossserver"] = function(payload)
+		["simplecrossserver"] = function(payload, map)
+			if not(map == game.GetMap()) then return end
+
 			ix.plugin.list["simplecrossserver"].loadpoints = payload
 		end,
-		["worlditemspawner"] = function(payload)
+		["worlditemspawner"] = function(payload, map)
+			if not(map == game.GetMap()) then return end
+
 			ix.plugin.list["worlditemspawner"].itempoints = payload
 		end,
 	}
 
 	PLUGIN.PluginDataGetFunctions = {
 		["anomalycontroller"] = function()
-			return ix.plugin.list["anomalycontroller"].anomalypoints
+			return ix.plugin.list["anomalycontroller"].anomalypoints[game.GetMap()]
 		end,
 		["boxspawner"] = function()
 			return ix.plugin.list["boxspawner"].boxpoints
 		end,
 		["eventcontroller"] = function()
-			return ix.plugin.list["eventcontroller"].eventpoints
+			return ix.plugin.list["eventcontroller"].eventpoints[game.GetMap()]
 		end,
 		["eventcontrolleradv"] = function()
 			return ix.plugin.list["eventcontrolleradv"].eventpoints
 		end,
 		["hidestashspawner"] = function()
-			return ix.plugin.list["hidestashspawner"].stashspawnpoints
+			return ix.plugin.list["hidestashspawner"].stashspawnpoints[game.GetMap()]
 		end,
 		["radiationcontroller"] = function()
 			return ix.plugin.list["radiationcontroller"].radiationpoints
@@ -113,9 +123,11 @@ if SERVER then
 			self:SpawnVendor(vendordata)
 		end
 
-		-- Init all plugin data
+		-- Init all plugin data; NOTE: plugins can get data from all maps as this might be needed (hidestashspawner etc.)
 		for pluginid, func in pairs(self.PluginDataDeployFunctions) do
-			func(self.map_presets[game.GetMap].plugindata[pluginid])
+			for map, _ in pairs(self.map_presets) do
+				func(self.map_presets[map].plugindata[pluginid], map)
+			end
 		end
 
 		self.firstTimeSetupRun = true

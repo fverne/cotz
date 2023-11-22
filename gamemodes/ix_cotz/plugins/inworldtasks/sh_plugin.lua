@@ -15,21 +15,23 @@ function PLUGIN:PostPlayerLoadout(client)
 	end
 end
 
-function ix.util.GetLongLatFromVector(pos)
+function ix.util.GetLongLatFromVector(pos, map)
 
 	--Zone: 51.1621 LAT 29.9575 LONG
 	--      51.4026 LAT 30.2735 LONG
 
+	if not(map) then map = game.GetMap() end
+
 	local offsettable = {
 		["rp_marsh_cs"] 			= {0.0, 0.0},
 		["rp_waystation"] 			= {0.75, -1.2},
-		["rp_salvation_2_haven"] 	= {0.85, 0.8}
+		["rp_pripyat_remaster"] 	= {0.85, 0.8}
 	}
 
 	local xpos = pos[1]
 	local ypos = -pos[2]
 
-	local offset = offsettable[game.GetMap()] or {0.0, 0.0}
+	local offset = offsettable[map] or {0.0, 0.0}
 
 	local xposconv = ix.util.mapValueToRange(xpos, -8192, 8192, 51.1621 + offset[1], 51.4026 + offset[1])
 	local yposconv = ix.util.mapValueToRange(ypos, -8192, 8192, 29.9575 + offset[2], 30.2735 + offset[2])
@@ -105,9 +107,11 @@ end
 
 if SERVER then
 
-function ix.util.GetRandomTaskPoint()
-	local radpts = ix.plugin.list["radiationcontroller"].radiationpoints
-	local anopts = ix.plugin.list["anomalycontroller"].anomalypoints
+function ix.util.GetRandomTaskPoint(map)
+	map = map or game.GetMap()
+
+	local radpts = ix.plugin.list["radiationcontroller"].radiationpoints[map]
+	local anopts = ix.plugin.list["anomalycontroller"].anomalypoints[map]
 
 	local allpts = {}
 	table.Add(allpts, anopts)
@@ -116,8 +120,10 @@ function ix.util.GetRandomTaskPoint()
 	return allpts[ math.random( #allpts ) ][1]
 end
 
-function ix.util.GetRandomStashTaskData()
-	local stashpts = ix.plugin.list["hidestashspawner"].stashspawnpoints
+function ix.util.GetRandomStashTaskData(map)
+	map = map or game.GetMap()
+
+	local stashpts = ix.plugin.list["hidestashspawner"].stashspawnpoints[map]
 
 	local tmpstashdata = stashpts[ math.random( #stashpts ) ]
 

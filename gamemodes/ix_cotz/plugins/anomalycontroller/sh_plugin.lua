@@ -34,7 +34,7 @@ if SERVER then
 	end
 
 	function PLUGIN:trySpawnArtifacts()
-		for i, j in pairs(self.anomalypoints) do
+		for i, j in pairs(self.anomalypoints[game.GetMap()]) do
 			local numartifacts = self:GetNumSpawnedArtifacts()
 			if (numartifacts >= ix.config.Get("artifactSpawnerThreshold",5)) then return end
 
@@ -131,7 +131,7 @@ if SERVER then
 			spawntime = 1
 		end
 			
-		for k, v in pairs(self.anomalypoints) do
+		for k, v in pairs(self.anomalypoints[game.GetMap()]) do
 			local selectedAnoms = {}
 			for i=1, #self.anomalydefs do
 				if string.sub(v[3],i,i) == "1" then
@@ -163,6 +163,8 @@ if SERVER then
 
 	function PLUGIN:LoadData()
 		self.anomalypoints = self:GetData() or {}
+
+		self.anomalypoints[game.GetMap()] = self.anomalypoints[game.GetMap()] or {}
 
 		self:cleanAnomalies()
 		self:spawnAnomalies()
@@ -252,7 +254,7 @@ ix.command.Add("anomalyadd", {
 		end
 
 		
-		table.insert( PLUGIN.anomalypoints, { hitpos, radius, anomalies } )
+		table.insert( PLUGIN.anomalypoints[game.GetMap()], { hitpos, radius, anomalies } )
 		client:Notify( "Anomaly point successfully added" )
 	end
 })
@@ -272,10 +274,10 @@ ix.command.Add("anomalyremove", {
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local range = range or 128
 		local mt = 0
-		for k, v in pairs( PLUGIN.anomalypoints ) do
+		for k, v in pairs( PLUGIN.anomalypoints[game.GetMap()] ) do
 			local distance = v[1]:Distance( hitpos )
 			if distance <= tonumber(range) then
-				PLUGIN.anomalypoints[k] = nil
+				PLUGIN.anomalypoints[game.GetMap()][k] = nil
 				mt = mt + 1
 			end
 		end

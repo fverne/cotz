@@ -120,6 +120,8 @@ if SERVER then
 
 	function PLUGIN:LoadData()
 		self.eventpoints = self:GetData() or {}
+
+		self.eventpoints[game.GetMap()] = self.eventpoints[game.GetMap()] or {}
 	end
 
 	function PLUGIN:SaveData()
@@ -169,7 +171,7 @@ if SERVER then
 	function PLUGIN:Think()
 		if populate then
 			for i = 1, self.populateAmount do
-				local eventpoint = table.Random(self.eventpoints)
+				local eventpoint = table.Random(self.eventpoints[game.GetMap()])
 				local spawn = table.Random(self.eventdefs)
 
 				if (!eventpoint) then
@@ -195,7 +197,7 @@ if SERVER then
 
 		if( self:GetNumMutants() > ix.config.Get("eventControllerThreshold",35)) then return end
 
-		local eventpoint = table.Random(self.eventpoints)
+		local eventpoint = table.Random(self.eventpoints[game.GetMap()])
 		if (!eventpoint) then
 			return
 		end
@@ -263,7 +265,7 @@ ix.command.Add("eventadd", {
 		local difficulty = difficulty or 1
 
 		if isnumber(difficulty) then
-			table.insert( PLUGIN.eventpoints, { hitpos, name, difficulty } )
+			table.insert( PLUGIN.eventpoints[game.GetMap()], { hitpos, name, difficulty } )
 			client:Notify( "Event area named '"..name.."' with difficulty "..difficulty.." succesfully added"  )
 		else
 			client:ChatPrint("Difficulty must be a number.")
@@ -278,10 +280,10 @@ ix.command.Add("eventremove", {
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local range = arguments[1] or 128
 		local mt = 0
-		for k, v in pairs( PLUGIN.eventpoints ) do
+		for k, v in pairs( PLUGIN.eventpoints[game.GetMap()] ) do
 			local distance = v[1]:Distance( hitpos )
 			if distance <= tonumber(range) then
-				PLUGIN.eventpoints[k] = nil
+				PLUGIN.eventpoints[game.GetMap()][k] = nil
 				mt = mt + 1
 			end
 		end
@@ -293,7 +295,7 @@ ix.command.Add("eventdisplay", {
 	adminOnly = true,
 	OnRun = function(self, client, arguments)
 		if SERVER then
-			netstream.Start(client, "nut_DisplaySpawnPoints", PLUGIN.eventpoints)
+			netstream.Start(client, "nut_DisplaySpawnPoints", PLUGIN.eventpoints[game.GetMap()])
 			client:Notify( "Displayed All Points for 10 secs." )
 		end
 	end
