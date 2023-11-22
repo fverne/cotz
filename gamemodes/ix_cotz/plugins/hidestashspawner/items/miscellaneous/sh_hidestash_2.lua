@@ -24,8 +24,14 @@ ITEM.functions.use = {
 	icon = "icon16/stalker/unlock.png",
 	OnRun = function(item)
 		local loot = { ix.util.GetRandomItemFromPool(item.CustomSpawngroup or "ix_entbox_drops") }
-		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPoint(mapToGenerateStashOn)
+		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPoint(item.mapToGenerateStashOn)
 		local stashcontent = "CONTENT: "
+
+		if( game.GetMap() != item.mapToGenerateStashOn) then 
+			item.player:Notify("You can't seem to make sense of what you read, maybe this would make more sense on: "..item.mapToGenerateStashOn)
+
+			return false 
+		end
 
 		if !spawnpoint then
 			item.player:Notify("No hidestash spawn points defined for this map, contact the developers.")

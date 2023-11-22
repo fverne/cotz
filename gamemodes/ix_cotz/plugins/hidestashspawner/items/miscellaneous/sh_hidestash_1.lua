@@ -33,6 +33,12 @@ ITEM.functions.use = {
 		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPoint(mapToGenerateStashOn)
 		local stashcontent = "CONTENT: "
 
+		if( game.GetMap() != item.mapToGenerateStashOn) then 
+			item.player:Notify("You can't seem to make sense of what you read, maybe this would make more sense on: "..item.mapToGenerateStashOn)
+
+			return false 
+		end
+
 		if !spawnpoint then
 			item.player:Notify("No hidestash spawn points defined for this map, contact the developers.")
 			print("a hidestash item was used, but there are no points on the map to spawn it in!")
