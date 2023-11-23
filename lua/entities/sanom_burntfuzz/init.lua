@@ -4,57 +4,58 @@ AddCSLuaFile( "shared.lua" )
 include('shared.lua')
 
 ENT.AutomaticFrameAdvance = true 
-local delayTime = 0
-local anomalyID = tostring(math.Rand(1,2))
 
-function ENT:SpawnFunction( ply, tr )
-	if ( !tr.Hit ) then return end
-	local SpawnPos = tr.HitPos + Vector(0,-30,-95)
-	local ent = ents.Create( self.ClassName )
-	ent:SetPos( SpawnPos )
-	ent:Spawn()
-	ent:Activate()
-	--timer.Create(anomalyID, 14400, 0, function()
-	timer.Create(anomalyID, 7200 + math.random(7200), 0, function()
-		if math.random(100) < 20 then
-			local rnd = math.floor(math.Rand(1,101))
-			if rnd > 1 and rnd < 50 then // 50 %
-				nut.item.spawn("thorn", tr.HitPos+(Vector( math.Rand(-160,160), math.Rand(-160,160), 10 )), nil, AngleRand(), {})
-			elseif  rnd > 50 and rnd < 85 then // 35 %
-				nut.item.spawn("crystalthorn", tr.HitPos+(Vector( math.Rand(-160,160), math.Rand(-160,160), 10 )), nil, AngleRand(), {})
-			elseif rnd > 85 and rnd < 101 then // 15 %
-				nut.item.spawn("urchin", tr.HitPos+(Vector( math.Rand(-160,160), math.Rand(-160,160), 10 )), nil, AngleRand(), {})
-			end
+ENT.damageCooldown = 0
+ENT.shouldResetSequence = true
+
+--Wake variables
+ENT.WakeRange = 600
+ENT.SleepTimer = 0
+ENT.IsSleeping = true --starts the anomaly out sleeping so it doesn't use a ton of server assets
+
+
+function ENT:ShouldWake( range )
+	local entities = ents.FindInSphere(self:GetPos(), range)
+	for _, v in pairs(entities) do
+		if v:IsPlayer() then
+			return true
 		end
-	end )	return ent
-	
-end
+	end
 
-function ENT:OnRemove()
-	timer.Destroy(anomalyID)
+	return false
 end
-
 
 function ENT:Initialize()
-
-	self.Entity:SetModel( "models/tnb/props/cloth.mdl" ) --Set its model.
-	//self.Entity:PhysicsInit( SOLID_NONE )      -- Make us work with physics,
-	self.Entity:SetMoveType( MOVETYPE_NONE )   -- after all, gmod is a physics
-	self.Entity:SetSolid( SOLID_NONE ) 	-- Toolbox
-	
-    local phys = self.Entity:GetPhysicsObject()
-	if (phys:IsValid()) then
-		phys:Wake()
-	end
+	self.Entity:SetModel( "models/comrade/anomalies/puh.mdl" ) --Set its model
 	self.Entity:ResetSequenceInfo() 
 end
 
 function ENT:Think()
-	self.Entity:SetSequence("light_wind")
-//	self.Entity:SetSequence("strong_wind")
-	if delayTime < CurTime() then
-		delayTime = CurTime() + 0.3
-		for k, v in pairs( ents.FindInBox( self:GetPos() + Vector(-32,-32,0), self:GetPos() + Vector(32,32,-220))) do
+	if self.SleepTimer < CurTime() then
+		if self:ShouldWake(self.WakeRange) then
+			self.IsSleeping = false
+			self.SleepTimer = CurTime() + 5
+		else
+			self.IsSleeping = true
+			self.SleepTimer = CurTime() + 5
+		end
+	end
+	
+	if self.IsSleeping then return end
+
+	if self.shouldResetSequence then
+		self.shouldResetSequence = false
+		timer.Simple(self:SequenceDuration(), function() 
+			if IsValid(self.Entity) then
+				self:ResetSequence("idle") 
+				self.shouldResetSequence = true
+			end
+		end)
+	end
+
+	if self.damageCooldown < CurTime() then
+		self.damageCooldown = CurTime() + 0.3
+		for k, v in pairs( ents.FindInBox( self:GetPos() + Vector(-32,-32,0), self:GetPos() + Vector(32,32,180))) do
 			
 			if v:IsPlayer() and v:Alive() and v:IsValid() then
 				local b = DamageInfo()
@@ -67,27 +68,9 @@ function ENT:Think()
 			
 			self:EmitSound("ambient/levels/canals/toxic_slime_sizzle3.wav")
 			end
+		end
 	end
-	end
+	
 	self:NextThink(CurTime())
 	return true
 end
-
-function ENT:Use( activator, caller, type, value )
-end
-
-function ENT:KeyValue( key, value )
-end
-
-function ENT:OnTakeDamage( dmginfo )
-end
-
-function ENT:StartTouch( entity )
-end
-
-function ENT:EndTouch( entity )
-end
-
-function ENT:Touch( entity )
-end
-
