@@ -3,8 +3,8 @@ ITEM.description = "A very old helmet."
 ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_headgear_tanker.mdl"
 
-ITEM.price = 30000
-ITEM.weight = 1
+ITEM.price = 2500
+ITEM.weight = 1.5
 
 ITEM.isGasmask = false
 ITEM.isHelmet = true

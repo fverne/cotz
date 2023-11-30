@@ -3,8 +3,8 @@ ITEM.description = "A newer gasmask."
 ITEM.longdesc = "A regular plastic and rubber respirator, used to protect the wearer from inhaling harmful dusts, fumes, vapours or gases. Widely used by rookies and veterans of all factions due to its universal functionality. Does not provide any physical protection."
 ITEM.model = "models/shtokerbox/ground_mask_xm40.mdl"
 
-ITEM.price = 30000
-ITEM.weight = 1
+ITEM.price = 45000
+ITEM.weight = 0.55
 
 ITEM.isGasmask = true
 ITEM.isHelmet = false
@@ -14,7 +14,7 @@ ITEM.br = 0.00
 ITEM.fbr = 0
 ITEM.ar = 0
 ITEM.far = 0
-ITEM.radProt = 0
+ITEM.radProt = 0.39
 
 ITEM.exRender = true
 ITEM.iconCam = {

@@ -3,14 +3,14 @@ ITEM.description = "A riot helmet"
 ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_headgear_riothelmet2.mdl"
 
-ITEM.price = 30000
-ITEM.weight = 1
+ITEM.price = 6500
+ITEM.weight = 2
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.00
+ITEM.br = 0.01
 ITEM.fbr = 0
 ITEM.ar = 0
 ITEM.far = 0

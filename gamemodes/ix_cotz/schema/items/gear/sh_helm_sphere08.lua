@@ -3,14 +3,14 @@ ITEM.description = "An older helmet."
 ITEM.longdesc = "A modern, high quality Western style helmet. The design consists of several layers of Kevlar to protect the wearer from severe physical harm. The helmet is also made of composite dielectric materials, thereby protecting the wearer fromtric shocks."
 ITEM.model = "models/shtokerbox/ground_headgear_sphere8.mdl"
 
-ITEM.price = 30000
-ITEM.weight = 1
+ITEM.price = 45000
+ITEM.weight = 2.8
 
 ITEM.isGasmask = false
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.00
+ITEM.br = 0.04
 ITEM.fbr = 0
 ITEM.ar = 0
 ITEM.far = 0

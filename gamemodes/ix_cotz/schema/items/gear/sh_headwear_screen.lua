@@ -3,18 +3,18 @@ ITEM.description = "A screen helmet."
 ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_seva_visor.mdl"
 
-ITEM.price = 30000
-ITEM.weight = 1
+ITEM.price = 60000
+ITEM.weight = 4
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.00
+ITEM.br = 0.01
 ITEM.fbr = 0
 ITEM.ar = 0
 ITEM.far = 0
-ITEM.radProt = 0
+ITEM.radProt = 0.60
 
 ITEM.exRender = true
 ITEM.iconCam = {

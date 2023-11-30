@@ -3,14 +3,14 @@ ITEM.description = "A piece of cloth to wrap your face with."
 ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_mask_arab.mdl"
 
-ITEM.price = 30000
-ITEM.weight = 1
+ITEM.price = 500
+ITEM.weight = 0.3
 
 ITEM.isGasmask = true
 ITEM.isHelmet = false
 -- ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.00
+ITEM.br = 0.01
 ITEM.fbr = 0
 ITEM.ar = 0
 ITEM.far = 0

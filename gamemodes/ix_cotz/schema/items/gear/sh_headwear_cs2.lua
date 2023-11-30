@@ -4,17 +4,17 @@ ITEM.longdesc = "Late production Soviet steel helmet paired with a respirator an
 ITEM.model = "models/shtokerbox/ground_headgear_cs2.mdl"
 
 ITEM.price = 30000
-ITEM.weight = 1
+ITEM.weight = 2.6
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.00
+ITEM.br = 0.03
 ITEM.fbr = 0
 ITEM.ar = 0
 ITEM.far = 0
-ITEM.radProt = 0
+ITEM.radProt = 0.30
 
 ITEM.exRender = true
 ITEM.iconCam = {
