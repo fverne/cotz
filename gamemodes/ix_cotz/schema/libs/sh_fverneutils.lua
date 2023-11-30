@@ -31,3 +31,11 @@ function ix.util.HandleChat(name, message)
 	    ix.discordrelay.RelayChatToDiscord(name, message)
     end
 end
+
+function ix.util.GetMaterial(materialPath, materialArguments)
+    -- Cache the material.
+    ix.util.cachedMaterials = ix.util.cachedMaterials or {}
+    ix.util.cachedMaterials[materialPath] = ix.util.cachedMaterials[materialPath] or Material(materialPath, materialArguments)
+
+    return ix.util.cachedMaterials[materialPath]
+end
