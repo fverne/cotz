@@ -66,7 +66,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 55
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 100
 	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.8
@@ -74,13 +74,13 @@ function ENT:Initialize()
 	self:STALKERNPCSetMeleeParams(1,"stand_attack_0",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
 	TEMP_MeleeTable.damage[1] = 35
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 100
 	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.6
 	TEMP_MeleeTable.bone[1] = "bip01_l_forearm"
 	TEMP_MeleeTable.damage[2] = 35
-	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[2] = 100
 	TEMP_MeleeTable.radius[2] = 64
 	TEMP_MeleeTable.time[2] = 0.7
@@ -90,7 +90,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 50
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 50
 	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.9

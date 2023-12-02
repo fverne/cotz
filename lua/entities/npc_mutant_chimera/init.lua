@@ -67,13 +67,13 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 60
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 50
 	TEMP_MeleeTable.radius[1] = 100
 	TEMP_MeleeTable.time[1] = 0.6
 	TEMP_MeleeTable.bone[1] = "head_boss"
 	TEMP_MeleeTable.damage[2] = 60
-	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[2] = 50
 	TEMP_MeleeTable.radius[2] = 100
 	TEMP_MeleeTable.time[2] = 1
