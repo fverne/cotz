@@ -198,17 +198,17 @@ end
 function ITEM:RadProtTranslator(value)
 	if value == 0 then
 		return "None"
-	elseif value <= 0.1 then
+	elseif value <= 0.05 then
 		return "Negligible"
-	elseif value <= 0.2 then
+	elseif value <= 0.1 then
 		return "Bad"
-	elseif value <= 0.3 then
+	elseif value <= 0.2 then
 		return "Decent"
 	elseif value <= 0.4 then
 		return "Good"
-	elseif value < 0.8 then
+	elseif value < 0.6 then
 		return "Very Good"
-	elseif value >= 0.8 then
+	elseif value >= 0.6 then
 		return "Excellent"
 	end
 end

@@ -36,7 +36,27 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		damage = math.max(damage,0)
 
 		dmginfo:SetDamage(damage)
+	end
 
+    -- Slash (Mutant) resistance
+	if ( target:IsPlayer() and dmginfo:IsDamageType(DMG_SLASH)) then
+		local damage = dmginfo:GetDamage()
+		local perRes = target:GetNWFloat("ixperslashres")
+		local flatRes = target:GetNWInt("ixflatslashres")
+		local suitDuraDmg = damage / 100
+		local suit = target:getEquippedBodyArmor()
+
+		if suit != nil then
+			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitDuraDmg, 0, 100))
+		end
+
+		damage = damage - flatRes
+		damage = damage * perRes
+
+		--Make sure we dont heal the player
+		damage = math.max(damage,0)
+
+		dmginfo:SetDamage(damage)
 	end
 
 	--Anomaly resistance
@@ -107,6 +127,46 @@ function playerMeta:getFlatBulletRes()
 
 		if (v.fbr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
 			res = res + v.fbr
+		end
+	end
+
+	--BUFFS GO HERE
+
+	return res
+end
+
+function playerMeta:getPercentageSlashRes()
+	local res = 1
+	local char = self:GetCharacter()
+	local items = char:GetInventory():GetItems()
+
+	for k, v in pairs(items) do
+		if (v.isBodyArmor and v:GetData("equip")) then
+			res = v:getSR(v)
+		end
+
+		if (v.sr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+			res = res * (1 - v.sr)
+		end
+	end
+
+	--BUFFS GO HERE
+
+	return res
+end
+
+function playerMeta:getFlatSlashRes()
+	local res = 0
+	local char = self:GetCharacter()
+	local items = char:GetInventory():GetItems()
+
+	for k, v in pairs(items) do
+		if (v.isBodyArmor and v:GetData("equip")) then
+			res = res + v:getFSR(v)
+		end
+
+		if (v.fsr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+			res = res + v.fsr
 		end
 	end
 
@@ -209,6 +269,8 @@ end
 function playerMeta:RecalculateResistances()
 	self:SetNWFloat("ixperbulletres", self:getPercentageBulletRes())
 	self:SetNWInt("ixflatbulletres", self:getFlatBulletRes())
+	self:SetNWFloat("ixperslashres", self:getPercentageSlashRes())
+	self:SetNWInt("ixflatslashres", self:getFlatSlashRes())
 	self:SetNWFloat("ixperanomres", self:getPercentageAnomalyRes())
 	self:SetNWInt("ixflatanomres", self:getFlatAnomalyRes())
 end

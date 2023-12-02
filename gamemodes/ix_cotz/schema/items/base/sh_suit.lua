@@ -16,6 +16,8 @@ ITEM.bgcustom = {}
 
 ITEM.br = 0
 ITEM.fbr = 0
+ITEM.sr = 0
+ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
 ITEM.radProt = 0
@@ -73,17 +75,17 @@ end
 function ITEM:RadProtTranslator(value)
 	if value == 0 then
 		return "None"
-	elseif value <= 0.1 then
+	elseif value <= 0.05 then
 		return "Negligible"
-	elseif value <= 0.2 then
+	elseif value <= 0.1 then
 		return "Bad"
-	elseif value <= 0.3 then
+	elseif value <= 0.2 then
 		return "Decent"
 	elseif value <= 0.4 then
 		return "Good"
-	elseif value < 0.8 then
+	elseif value < 0.6 then
 		return "Very Good"
-	elseif value >= 0.8 then
+	elseif value >= 0.6 then
 		return "Excellent"
 	end
 end
@@ -664,6 +666,56 @@ function ITEM:getFBR()
 		if (!ix.armortables.upgrades[v]) then continue end
 		if ix.armortables.upgrades[v].fbr then
 			res = res + ix.armortables.upgrades[v].fbr
+		end
+	end
+	
+	return res
+end
+
+function ITEM:getSR() 
+	local res = 1
+	local upgrades = self:GetData("upgrades", {})
+
+	if self:GetData("durability",100) < 80 then
+		res = 1 - (self.sr * (self:GetData("durability",0)/80))
+	else
+		res = 1 - self.sr
+	end
+	
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].sr then
+			res = res - ix.armortables.upgrades[v].sr
+		end
+	end
+	
+	--For artifacts, kevlarplates, mutant hides, etc..
+	local attachments = self:GetData("attachments", {})
+	
+	for k,v in pairs(attachments) do
+		if (!ix.armortables.attachments[v]) then continue end
+		if ix.armortables.attachments[v].sr then
+			res = res * (1 - ix.armortables.attachments[v].sr)
+		end
+	end
+
+	return res
+end
+
+function ITEM:getFSR() 
+	local res = self.fsr
+	local upgrades = self:GetData("upgrades", {})
+
+	if self:GetData("durability",100) < 80 then
+		res = self.fsr * (self:GetData("durability",0)/80)
+	else
+		res = self.fsr
+	end
+	
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].fsr then
+			res = res + ix.armortables.upgrades[v].fsr
 		end
 	end
 	
