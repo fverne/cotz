@@ -32,10 +32,11 @@ function ix.util.HandleChat(name, message)
     end
 end
 
+--overwrites the original helix one
 function ix.util.GetMaterial(materialPath, materialArguments)
     -- Cache the material.
     ix.util.cachedMaterials = ix.util.cachedMaterials or {}
-    ix.util.cachedMaterials[materialPath] = ix.util.cachedMaterials[materialPath] or Material(materialPath, materialArguments)
+    ix.util.cachedMaterials[materialPath] = ix.util.cachedMaterials[materialPath] or Material(materialPath, materialArguments or "noclamp smooth")
 
     return ix.util.cachedMaterials[materialPath]
 end
