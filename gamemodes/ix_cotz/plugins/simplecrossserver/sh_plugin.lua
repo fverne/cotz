@@ -179,6 +179,32 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 	end
 end
 
+-- Used to redirect player to another map, but leaves setting the position to the caller
+function PLUGIN:RedirectPlayerNoLoadZone(client, map)
+	local character = client:GetCharacter()
+
+	local mapdata = self.mapdata
+
+	--sanity check
+	if mapdata[map] != nil then
+		local tempip = mapdata[map].serverip
+
+		character:SetData("curmap", map)
+
+		ix.chat.Send(nil, "playerjoin", string.format("%s has switched area.", character:GetName()))
+
+		-- If RedirectPlayerNoLoadZone has been called, the character has been moved to the new map, and should no longer be usable
+		character:Save()
+		character:Kick()
+
+		ix.log.Add(client, "serverTransfer", map, tempip)
+		client:Notify(character:GetName().." has been asked to be sent to "..map)
+		netstream.Start(client, "ixPlayerAskConnect", client, tempip)
+	else
+		client:Notify("Invalid map")
+	end
+end
+
 
 if (CLIENT) then
 	netstream.Hook("ixPlayerAskConnect", function(client, address)
