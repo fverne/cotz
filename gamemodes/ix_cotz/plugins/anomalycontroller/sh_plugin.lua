@@ -27,7 +27,9 @@ if SERVER then
 	local spawntime = 1
 
 	function PLUGIN:Think()
+		if table.IsEmpty(self.anomalypoints) then return end
 		if spawntime > CurTime() then return end
+
 		spawntime = CurTime() + ix.config.Get("artifactSpawnerRate", 900)
 
 		self:trySpawnArtifacts()

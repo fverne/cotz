@@ -169,6 +169,8 @@ if SERVER then
 	end
 	
 	function PLUGIN:Think()
+		if table.IsEmpty(self.eventpoints) then return end
+
 		if populate then
 			for i = 1, self.populateAmount do
 				local eventpoint = table.Random(self.eventpoints[game.GetMap()])
