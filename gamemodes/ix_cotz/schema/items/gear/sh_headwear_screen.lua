@@ -1,5 +1,5 @@
 ITEM.name = "Screen Helmet"
-ITEM.description = "A screen helmet."
+ITEM.description = "A screen helmet with closed respiratory system."
 ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_seva_visor.mdl"
 
@@ -8,6 +8,7 @@ ITEM.weight = 4
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
+ITEM.outfitCategory = "Backpack"
 ITEM.ballisticlevels = {"ll-a"}
 
 ITEM.br = 0.01
@@ -22,6 +23,10 @@ ITEM.iconCam = {
 	ang = Angle(90, -90, 0),
 	fov = 3.85
 }
+
+function ITEM:PopulateTooltipIndividual(tooltip)
+    ix.util.PropertyDesc2(tooltip, self.outfitCategory, Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
+end
 
 ITEM.pacData = {
         [1] = {
