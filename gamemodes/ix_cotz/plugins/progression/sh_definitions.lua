@@ -109,7 +109,7 @@ hook.Add("ix_OnJobComplete", "Computer_artifactTasks", function(client, npcident
 end)
 
 ix.progression.Register("oldTimerKillIntro", {
-	name = "Cleaning up the Zone",
+	name = "STORY: Cleaning up the Zone",
 	description = "Cleaning up the zone",
 	keyNpc = "'Old Timer'",
 	defaultActive = true,
@@ -213,7 +213,7 @@ ix.progression.Register("oldTimerKillIntro", {
 })
 
 ix.progression.Register("oldTimerItemDelivery_mainMeat", {
-	name = "Feeding the Hungry",
+	name = "STORY: Feeding the Hungry",
 	description = "Collecting lots of meat for the Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
@@ -327,7 +327,7 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 
 
 ix.progression.Register("technutItemDelivery_Main", {
-	name = "Technut's Radio Project",
+	name = "STORY: Technut's Radio Project",
 	description = "Collecting important components for Technut.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
@@ -428,7 +428,7 @@ ix.progression.Register("technutItemDelivery_Main", {
 })
 
 ix.progression.Register("oldTimerItemDelivery_mainStatue", {
-	name = "Enticing the Specialist",
+	name = "STORY: Enticing the Specialist",
 	description = "Collecting statues for Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
@@ -527,7 +527,7 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 })
 
 ix.progression.Register("stalkerNetAdmin_AreaTasks", {
-	name = "Scanning the Zone",
+	name = "STORY: Scanning the Zone",
 	description = "Scanning the Zone",
 	keyNpc = "'Mute'",
 	defaultActive = true,
@@ -568,7 +568,7 @@ ix.progression.Register("stalkerNetAdmin_AreaTasks", {
 })
 
 ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
-	name = "Proper Radio Tower",
+	name = "STORY: Proper Radio Tower",
 	description = "Helping to build a true radiocommunications center.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
@@ -669,7 +669,7 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 })
 
 ix.progression.Register("quarterMasterDelivery_activateItem", {
-	name = "Making Connections",
+	name = "STORY: Making Connections",
 	description = "Bring the flash drive to Quartermaster.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = true,
@@ -734,7 +734,7 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 })
 
 ix.progression.Register("quarterMasterDelivery_main", {
-	name = "Whetting the Whistle",
+	name = "STORY: Whetting the Whistle",
 	description = "Bring Quartermaster something to drink.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
@@ -824,7 +824,7 @@ ix.progression.Register("quarterMasterDelivery_main", {
 })
 
 ix.progression.Register("egghead_dataTasks", {
-	name = "Extracting Information",
+	name = "STORY: Extracting Information",
 	description = "Scanning the Zone",
 	keyNpc = "'Egghead'",
 	defaultActive = true,
@@ -867,7 +867,7 @@ ix.progression.Register("egghead_dataTasks", {
 
 
 ix.progression.Register("computerDelivery_activateItem", {
-	name = "Getting Access",
+	name = "STORY: Getting Access",
 	description = "Bring the secured container to the computer.",
 	keyNpc = "'Computer'",
 	defaultActive = true,
@@ -921,7 +921,7 @@ ix.progression.Register("computerDelivery_activateItem", {
 })
 
 ix.progression.Register("computerDelivery_main", {
-	name = "Getting up and running",
+	name = "STORY: Getting up and running",
 	description = "Set up the supercomputer with components.",
 	keyNpc = "'Computer'",
 	defaultActive = false,
@@ -993,7 +993,7 @@ ix.progression.Register("computerDelivery_main", {
 })
 
 ix.progression.Register("computer_artifactTasks", {
-	name = "Analyzing Artifacts",
+	name = "STORY: Analyzing Artifacts",
 	description = "Scanning the Zone",
 	keyNpc = "'Computer'",
 	defaultActive = true,
