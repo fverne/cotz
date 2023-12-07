@@ -275,8 +275,9 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["oldTimerItemDelivery_mainMeat"].finished) do
+			ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData[item] = ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData[item] or 0
+			if amt > ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -387,8 +388,9 @@ ix.progression.Register("technutItemDelivery_Main", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Main"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["technutItemDelivery_Main"].finished) do
+			ix.progression.status["technutItemDelivery_Main"].complexData[item] = ix.progression.status["technutItemDelivery_Main"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Main"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -485,8 +487,9 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["oldTimerItemDelivery_mainStatue"].finished) do
+			ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData[item] = ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData[item] or 0
+			if amt > ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -625,8 +628,9 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].finished) do
+			ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData[item] = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData[item] or 0
+			if amt > ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -710,8 +714,9 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quarterMasterDelivery_activateItem"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["quarterMasterDelivery_activateItem"].finished) do
+			ix.progression.status["quarterMasterDelivery_activateItem"].complexData[item] = ix.progression.status["quarterMasterDelivery_activateItem"].complexData[item] or 0
+			if amt > ix.progression.status["quarterMasterDelivery_activateItem"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -795,8 +800,9 @@ ix.progression.Register("quarterMasterDelivery_main", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quarterMasterDelivery_main"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["quarterMasterDelivery_main"].finished) do
+			ix.progression.status["quarterMasterDelivery_main"].complexData[item] = ix.progression.status["quarterMasterDelivery_main"].complexData[item] or 0
+			if amt > ix.progression.status["quarterMasterDelivery_main"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -908,8 +914,9 @@ ix.progression.Register("computerDelivery_activateItem", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["computerDelivery_activateItem"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["computerDelivery_activateItem"].finished) do
+			ix.progression.status["computerDelivery_activateItem"].complexData[item] = ix.progression.status["computerDelivery_activateItem"].complexData[item] or 0
+			if amt > ix.progression.status["computerDelivery_activateItem"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -980,8 +987,9 @@ ix.progression.Register("computerDelivery_main", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["computerDelivery_main"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["computerDelivery_main"].finished) do
+			ix.progression.status["computerDelivery_main"].complexData[item] = ix.progression.status["computerDelivery_main"].complexData[item] or 0
+			if amt > ix.progression.status["computerDelivery_main"].complexData[item] then isdone = false end
 		end
 
 		if isdone then

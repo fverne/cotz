@@ -56,8 +56,9 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["oldtimerItemDelivery_Knife1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["oldtimerItemDelivery_Knife1"].finished) do
+			ix.progression.status["oldtimerItemDelivery_Knife1"].complexData[item] = ix.progression.status["oldtimerItemDelivery_Knife1"].complexData[item] or 0
+			if amt > ix.progression.status["oldtimerItemDelivery_Knife1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -142,8 +143,9 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["oldtimerItemDelivery_Knife2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["oldtimerItemDelivery_Knife2"].finished) do
+			ix.progression.status["oldtimerItemDelivery_Knife2"].complexData[item] = ix.progression.status["oldtimerItemDelivery_Knife2"].complexData[item] or 0
+			if amt > ix.progression.status["oldtimerItemDelivery_Knife2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -228,8 +230,9 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["oldtimerItemDelivery_Knife3"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["oldtimerItemDelivery_Knife3"].finished) do
+			ix.progression.status["oldtimerItemDelivery_Knife3"].complexData[item] = ix.progression.status["oldtimerItemDelivery_Knife3"].complexData[item] or 0
+			if amt > ix.progression.status["oldtimerItemDelivery_Knife3"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -310,8 +313,9 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["oldtimerItemDelivery_Melee"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["oldtimerItemDelivery_Melee"].finished) do
+			ix.progression.status["oldtimerItemDelivery_Melee"].complexData[item] = ix.progression.status["oldtimerItemDelivery_Melee"].complexData[item] or 0
+			if amt > ix.progression.status["oldtimerItemDelivery_Melee"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -396,8 +400,9 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["oldtimerItemDelivery_Hidestash1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["oldtimerItemDelivery_Hidestash1"].finished) do
+			ix.progression.status["oldtimerItemDelivery_Hidestash1"].complexData[item] = ix.progression.status["oldtimerItemDelivery_Hidestash1"].complexData[item] or 0
+			if amt > ix.progression.status["oldtimerItemDelivery_Hidestash1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -479,8 +484,9 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["oldtimerItemDelivery_Hidestash2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(ix.progression.status["oldtimerItemDelivery_Hidestash2"].finished) do
+			ix.progression.status["oldtimerItemDelivery_Hidestash2"].complexData[item] = ix.progression.status["oldtimerItemDelivery_Hidestash2"].complexData[item] or 0
+			if amt > ix.progression.status["oldtimerItemDelivery_Hidestash2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
