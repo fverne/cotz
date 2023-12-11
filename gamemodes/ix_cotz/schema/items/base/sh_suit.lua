@@ -20,6 +20,8 @@ ITEM.sr = 0
 ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
+ITEM.pr = 0
+ITEM.fpr = 0
 ITEM.radProt = 0
 ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
@@ -716,6 +718,54 @@ function ITEM:getFSR()
 		if (!ix.armortables.upgrades[v]) then continue end
 		if ix.armortables.upgrades[v].fsr then
 			res = res + ix.armortables.upgrades[v].fsr
+		end
+	end
+	
+	return res
+end
+
+function ITEM:getPR() 
+	local res = 1
+	local upgrades = self:GetData("upgrades", {})
+	
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].pr then
+			res = res - ix.armortables.upgrades[v].pr
+		end
+	end
+
+	--For artifacts, kevlarplates, mutant hides, etc..
+	local attachments = self:GetData("attachments", {})
+	
+	for k,v in pairs(attachments) do
+		if (!ix.armortables.attachments[v]) then continue end
+		if ix.armortables.attachments[v].pr then
+			res = res * (1 - ix.armortables.attachments[v].pr)
+		end
+	end
+
+	return res
+end
+
+function ITEM:getFPR() 
+	local res = self.fpr
+	local upgrades = self:GetData("upgrades", {})
+	
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].fpr then
+			res = res + ix.armortables.upgrades[v].fpr
+		end
+	end
+
+	--For artifacts, kevlarplates, mutant hides, etc..
+	local attachments = self:GetData("attachments", {})
+
+	for k,v in pairs(attachments) do
+		if (!ix.armortables.attachments[v]) then continue end
+		if ix.armortables.attachments[v].fpr then
+			res = res + ix.armortables.attachments[v].fpr
 		end
 	end
 	

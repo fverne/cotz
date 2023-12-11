@@ -65,7 +65,6 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 	anomtypes[DMG_BURN] = true
 	anomtypes[DMG_ACID] = true
 	anomtypes[DMG_BLAST] = true
-	anomtypes[DMG_SONIC] = true
 	anomtypes[DMG_DROWN] = true
 	anomtypes[DMG_POISON] = true
 	anomtypes[DMG_NERVEGAS] = true
@@ -215,6 +214,47 @@ function playerMeta:getFlatAnomalyRes()
 	return res
 end
 
+
+function playerMeta:getPercentagePsyRes()
+	local res = 1
+	local char = self:GetCharacter()
+	local items = char:GetInventory():GetItems()
+
+	for k, v in pairs(items) do
+		if (v.isBodyArmor and v:GetData("equip")) then
+			res = v:getPR(v)
+		end
+
+		if (v.pr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+			res = res * (1 - v.pr)
+		end
+	end
+
+	--BUFFS GO HERE
+
+	return res
+end
+
+function playerMeta:getFlatPsyRes()
+	local res = 0
+	local char = self:GetCharacter()
+	local items = char:GetInventory():GetItems()
+
+	for k, v in pairs(items) do
+		if (v.isBodyArmor and v:GetData("equip")) then
+			res = res + v:getFPR(v)
+		end
+
+		if (v.fpr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+			res = res + v.fpr
+		end
+	end
+
+	--BUFFS GO HERE
+
+	return res
+end
+
 function playerMeta:getEquippedBodyArmor()
 	local char = self:GetCharacter()
 	local inventory = char:GetInventory()
@@ -273,6 +313,8 @@ function playerMeta:RecalculateResistances()
 	self:SetNWInt("ixflatslashres", self:getFlatSlashRes())
 	self:SetNWFloat("ixperanomres", self:getPercentageAnomalyRes())
 	self:SetNWInt("ixflatanomres", self:getFlatAnomalyRes())
+	self:SetNWFloat("ixperpsyres", self:getPercentagePsyRes())
+	self:SetNWInt("ixflatpsyres", self:getFlatPsyRes())
 end
 
 function playerMeta:ReevaluateOverlay()

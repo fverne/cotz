@@ -253,19 +253,17 @@ ix.armortables.attachments["hide_boar"] = {
 ix.armortables.attachments["hide_burer"] = {
 	name = "Burer Scalp",
 	br = 0.10,
+	pr = 0.15,
 	weight = 3.000,
 	uID = "hide_burer",
-	onAttach = function(player) --[[add 15psyprot]] end,
-	onDetach = function(player) --[[remove 15psyprot]] end,
 }
 
 ix.armortables.attachments["hide_karlik"] = {
 	name = "Karlik Scalp",
 	br = 0.09,
+	pr = 0.15,
 	weight = 1.200,
 	uID = "hide_karlik",
-	onAttach = function(player) --[[add 15psyprot]] end,
-	onDetach = function(player) --[[remove 15psyprot]] end,
 }
 
 ix.armortables.attachments["hide_cat"] = {
@@ -332,29 +330,26 @@ ix.armortables.attachments["hide_flesh"] = {
 ix.armortables.attachments["hide_controller"] = {
 	name = "Controller Scalp",
 	br = 0.12,
+	pr = 0.35,
 	weight = 3.500,
 	uID = "hide_controller",
-	onAttach = function(player) --[[add 35psyprot]] end,
-	onDetach = function(player) --[[remove 35psyprot]] end,
 }
 
 ix.armortables.attachments["hide_swampcontroller"] = {
 	name = "Swampcontroller Scalp",
 	br = 0.05,
+	pr = 0.10,
 	weight = 3.000,
 	uID = "hide_swampcontroller",
-	onAttach = function(player) --[[add 10psyprot]] end,
-	onDetach = function(player) --[[remove 10psyprot]] end,
 }
 
 ix.armortables.attachments["hide_electrocontroller"] = {
 	name = "Controller Scalp",
 	br = 0.08,
+	pr = 0.15,
 	ar = 0.16,
 	weight = 3.500,
-	uID = "hide_electrocontroller",
-	onAttach = function(player) --[[add 15psyprot]] end,
-	onDetach = function(player) --[[remove 15psyprot]] end,
+	uID = "hide_electrocontroller"
 }
 
 ix.armortables.attachments["hide_pseudogiant"] = {

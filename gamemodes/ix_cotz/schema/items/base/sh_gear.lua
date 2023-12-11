@@ -14,8 +14,12 @@ ITEM.ballisticlevels = {"0"}
 ITEM.ballisticareas = {"  Head:"}
 ITEM.br = 0
 ITEM.fbr = 0
+ITEM.sr = 0
+ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
+ITEM.pr = 0
+ITEM.fpr = 0
 ITEM.radProt = 0
 ITEM.resistance = true
 ITEM.isHelmet = nil
@@ -397,6 +401,34 @@ function ITEM:getFBR()
 	return res
 end
 
+function ITEM:getSR() 
+	local res = 1
+	local upgrades = self:GetData("upgrades", {})
+	
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].sr then
+			res = res - ix.armortables.upgrades[v].sr
+		end
+	end
+
+	return res
+end
+
+function ITEM:getFSR() 
+	local res = self.fsr
+	local upgrades = self:GetData("upgrades", {})
+	
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].fsr then
+			res = res + ix.armortables.upgrades[v].fsr
+		end
+	end
+	
+	return res
+end
+
 function ITEM:getAR()
 	local res = self.ar
 	local upgrades = self:GetData("upgrades", {})
@@ -420,6 +452,35 @@ function ITEM:getFAR()
 		end
 	end
 
+	return res
+end
+
+
+function ITEM:getPR() 
+	local res = 1
+	local upgrades = self:GetData("upgrades", {})
+	
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].pr then
+			res = res - ix.armortables.upgrades[v].pr
+		end
+	end
+
+	return res
+end
+
+function ITEM:getFPR() 
+	local res = self.fpr
+	local upgrades = self:GetData("upgrades", {})
+	
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].fpr then
+			res = res + ix.armortables.upgrades[v].fpr
+		end
+	end
+	
 	return res
 end
 

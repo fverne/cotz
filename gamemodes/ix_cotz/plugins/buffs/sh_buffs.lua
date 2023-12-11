@@ -105,10 +105,10 @@ PLUGIN.buffs[ "buff_psyblock" ] = {
 		
 	end,
 	onbuffed = function( player, parameter )
-		player:SetNWFloat("ix_psyblock", player:GetNWFloat("ix_psyblock",0) + parameter.amount )
+		player:SetNWFloat("ixflatpsyres", player:GetNWFloat("ixflatpsyres",0) + parameter.amount )
 	end,
 	ondebuffed = function( player, parameter )
-		player:SetNWFloat("ix_psyblock", player:GetNWFloat("ix_psyblock",0) - parameter.amount )
+		player:SetNWFloat("ixflatpsyres", player:GetNWFloat("ixflatpsyres",0) - parameter.amount )
 	end,
 }
 

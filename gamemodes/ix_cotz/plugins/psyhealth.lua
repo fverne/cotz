@@ -107,22 +107,6 @@ function playerMeta:GetPsyHealth()
 	end
 end
 
-function playerMeta:GetPsyResist()
-	local res = 0
-	local char = self:GetCharacter()
-	local items = char:GetInventory():GetItems(true)
-
-	for j, i in pairs(items) do
-		if (i.psyProt and i:GetData("equip") == true) then
-			res = res + i.psyProt
-		end
-	end
-
-	res = res + self:GetNetVar("ix_psyblock",0)
-
-	return res
-end
-
 function PLUGIN:PreDrawHUD()
 	local lp = LocalPlayer()
 	local wep = LocalPlayer():GetActiveWeapon()
@@ -208,10 +192,18 @@ ix.command.Add("CharSetPsyHealth", {
 function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 	--SONIC OVERRIDE
 	if ( entity:IsPlayer() and dmgInfo:IsDamageType(DMG_SONIC)) then
-		local dmgAmount = dmgInfo:GetDamage()
-		local psyResist = entity:GetPsyResist()
+		local damage = dmgInfo:GetDamage()
+		local perRes = entity:GetNWFloat("ixperpsyres")
+		local flatRes = entity:GetNWInt("ixflatpsyres")
 
-		entity:DamagePsyHealth(math.Clamp(dmgAmount *((100-psyResist)/100) ,0, 100))
+		damage = damage - flatRes
+		damage = damage * perRes
+
+		print(damage)
+
+		damage = math.max(damage,0)
+
+		entity:DamagePsyHealth(damage)
 		dmgInfo:SetDamage(0)
 
 		if(entity:GetPsyHealth() < 0 and entity:Alive()) then entity:Kill() end
