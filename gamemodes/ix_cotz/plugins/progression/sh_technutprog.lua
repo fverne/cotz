@@ -62,7 +62,7 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit1"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Suit1"].complexData[item] = ix.progression.status["technutItemDelivery_Suit1"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Suit1"].complexData[item] then isdone = false end
 		end
@@ -146,7 +146,7 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit2"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Suit2"].complexData[item] = ix.progression.status["technutItemDelivery_Suit2"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Suit2"].complexData[item] then isdone = false end
 		end
@@ -231,7 +231,7 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit3"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Suit3"].complexData[item] = ix.progression.status["technutItemDelivery_Suit3"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Suit3"].complexData[item] then isdone = false end
 		end
@@ -315,7 +315,7 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit4"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Suit4"].complexData[item] = ix.progression.status["technutItemDelivery_Suit4"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Suit4"].complexData[item] then isdone = false end
 		end
@@ -400,7 +400,7 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit5"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Suit5"].complexData[item] = ix.progression.status["technutItemDelivery_Suit5"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Suit5"].complexData[item] then isdone = false end
 		end
@@ -487,7 +487,7 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit6"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Suit6"].complexData[item] = ix.progression.status["technutItemDelivery_Suit6"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Suit6"].complexData[item] then isdone = false end
 		end
@@ -571,7 +571,7 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit7"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Suit7"].complexData[item] = ix.progression.status["technutItemDelivery_Suit7"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Suit7"].complexData[item] then isdone = false end
 		end
@@ -660,7 +660,7 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_SuitPainting"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_SuitPainting"].complexData[item] = ix.progression.status["technutItemDelivery_SuitPainting"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_SuitPainting"].complexData[item] then isdone = false end
 		end
@@ -744,7 +744,7 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet1"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Helmet1"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet1"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Helmet1"].complexData[item] then isdone = false end
 		end
@@ -835,7 +835,7 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet2"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Helmet2"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet2"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Helmet2"].complexData[item] then isdone = false end
 		end
@@ -919,7 +919,7 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet3"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Helmet3"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet3"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Helmet3"].complexData[item] then isdone = false end
 		end
@@ -1004,7 +1004,7 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet4"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Helmet4"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet4"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Helmet4"].complexData[item] then isdone = false end
 		end
@@ -1089,7 +1089,7 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet5"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Helmet5"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet5"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Helmet5"].complexData[item] then isdone = false end
 		end
@@ -1174,7 +1174,7 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet6"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Helmet6"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet6"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Helmet6"].complexData[item] then isdone = false end
 		end
@@ -1259,7 +1259,7 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet7"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Helmet7"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet7"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Helmet7"].complexData[item] then isdone = false end
 		end
@@ -1351,7 +1351,7 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Mask1"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Mask1"].complexData[item] = ix.progression.status["technutItemDelivery_Mask1"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Mask1"].complexData[item] then isdone = false end
 		end
@@ -1435,7 +1435,7 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Mask2"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Mask2"].complexData[item] = ix.progression.status["technutItemDelivery_Mask2"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Mask2"].complexData[item] then isdone = false end
 		end
@@ -1519,7 +1519,7 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Mask3"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Mask3"].complexData[item] = ix.progression.status["technutItemDelivery_Mask3"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Mask3"].complexData[item] then isdone = false end
 		end
@@ -1609,7 +1609,7 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Attachment1"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Attachment1"].complexData[item] = ix.progression.status["technutItemDelivery_Attachment1"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Attachment1"].complexData[item] then isdone = false end
 		end
@@ -1695,7 +1695,7 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Attachment2"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Attachment2"].complexData[item] = ix.progression.status["technutItemDelivery_Attachment2"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Attachment2"].complexData[item] then isdone = false end
 		end
@@ -1781,7 +1781,7 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Attachment3"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_Attachment3"].complexData[item] = ix.progression.status["technutItemDelivery_Attachment3"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_Attachment3"].complexData[item] then isdone = false end
 		end
@@ -1864,7 +1864,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentFabric1"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData[item] then isdone = false end
 		end
@@ -1948,7 +1948,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentFabric2"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_AttachmentFabric2"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentFabric2"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_AttachmentFabric2"].complexData[item] then isdone = false end
 		end
@@ -2031,7 +2031,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentFrame1"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData[item] then isdone = false end
 		end
@@ -2116,7 +2116,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentFrame2"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_AttachmentFrame2"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentFrame2"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_AttachmentFrame2"].complexData[item] then isdone = false end
 		end
@@ -2200,7 +2200,7 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentCarbon"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData[item] then isdone = false end
 		end
@@ -2284,7 +2284,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentKevlar1"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData[item] then isdone = false end
 		end
@@ -2369,7 +2369,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentKevlar2"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["technutItemDelivery_AttachmentKevlar2"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentKevlar2"].complexData[item] or 0
 			if amt > ix.progression.status["technutItemDelivery_AttachmentKevlar2"].complexData[item] then isdone = false end
 		end

@@ -53,7 +53,7 @@ ix.progression.Register("hagglerItemDelivery_1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_1"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_1"].complexData[item] = ix.progression.status["hagglerItemDelivery_1"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_1"].complexData[item] then isdone = false end
 		end
@@ -140,7 +140,7 @@ ix.progression.Register("hagglerItemDelivery_11", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_11"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_11"].complexData[item] = ix.progression.status["hagglerItemDelivery_11"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_11"].complexData[item] then isdone = false end
 		end
@@ -227,7 +227,7 @@ ix.progression.Register("hagglerItemDelivery_111", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_111"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_111"].complexData[item] = ix.progression.status["hagglerItemDelivery_111"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_111"].complexData[item] then isdone = false end
 		end
@@ -311,7 +311,7 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_1111"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_1111"].complexData[item] = ix.progression.status["hagglerItemDelivery_1111"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_1111"].complexData[item] then isdone = false end
 		end
@@ -395,7 +395,7 @@ ix.progression.Register("hagglerItemDelivery_112", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_112"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_112"].complexData[item] = ix.progression.status["hagglerItemDelivery_112"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_112"].complexData[item] then isdone = false end
 		end
@@ -477,7 +477,7 @@ ix.progression.Register("hagglerItemDelivery_12", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_12"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_12"].complexData[item] = ix.progression.status["hagglerItemDelivery_12"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_12"].complexData[item] then isdone = false end
 		end
@@ -561,7 +561,7 @@ ix.progression.Register("hagglerItemDelivery_121", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_121"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_121"].complexData[item] = ix.progression.status["hagglerItemDelivery_121"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_121"].complexData[item] then isdone = false end
 		end
@@ -645,7 +645,7 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_1211"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_1211"].complexData[item] = ix.progression.status["hagglerItemDelivery_1211"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_1211"].complexData[item] then isdone = false end
 		end
@@ -727,7 +727,7 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_12111"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_12111"].complexData[item] = ix.progression.status["hagglerItemDelivery_12111"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_12111"].complexData[item] then isdone = false end
 		end
@@ -811,7 +811,7 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_121111"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_121111"].complexData[item] = ix.progression.status["hagglerItemDelivery_121111"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_121111"].complexData[item] then isdone = false end
 		end
@@ -894,7 +894,7 @@ ix.progression.Register("hagglerItemDelivery_122", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_122"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_122"].complexData[item] = ix.progression.status["hagglerItemDelivery_122"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_122"].complexData[item] then isdone = false end
 		end
@@ -978,7 +978,7 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_1221"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_1221"].complexData[item] = ix.progression.status["hagglerItemDelivery_1221"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_1221"].complexData[item] then isdone = false end
 		end
@@ -1061,7 +1061,7 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_12211"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_12211"].complexData[item] = ix.progression.status["hagglerItemDelivery_12211"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_12211"].complexData[item] then isdone = false end
 		end
@@ -1143,7 +1143,7 @@ ix.progression.Register("hagglerItemDelivery_2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_2"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_2"].complexData[item] = ix.progression.status["hagglerItemDelivery_2"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_2"].complexData[item] then isdone = false end
 		end
@@ -1227,7 +1227,7 @@ ix.progression.Register("hagglerItemDelivery_21", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_21"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_21"].complexData[item] = ix.progression.status["hagglerItemDelivery_21"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_21"].complexData[item] then isdone = false end
 		end
@@ -1311,7 +1311,7 @@ ix.progression.Register("hagglerItemDelivery_211", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_211"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_211"].complexData[item] = ix.progression.status["hagglerItemDelivery_211"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_211"].complexData[item] then isdone = false end
 		end
@@ -1393,7 +1393,7 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_2111"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_2111"].complexData[item] = ix.progression.status["hagglerItemDelivery_2111"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_2111"].complexData[item] then isdone = false end
 		end
@@ -1476,7 +1476,7 @@ ix.progression.Register("hagglerItemDelivery_212", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_212"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_212"].complexData[item] = ix.progression.status["hagglerItemDelivery_212"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_212"].complexData[item] then isdone = false end
 		end
@@ -1558,7 +1558,7 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_2121"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_2121"].complexData[item] = ix.progression.status["hagglerItemDelivery_2121"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_2121"].complexData[item] then isdone = false end
 		end
@@ -1641,7 +1641,7 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_21211"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_21211"].complexData[item] = ix.progression.status["hagglerItemDelivery_21211"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_21211"].complexData[item] then isdone = false end
 		end
@@ -1723,7 +1723,7 @@ ix.progression.Register("hagglerItemDelivery_22", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_22"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_22"].complexData[item] = ix.progression.status["hagglerItemDelivery_22"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_22"].complexData[item] then isdone = false end
 		end
@@ -1810,7 +1810,7 @@ ix.progression.Register("hagglerItemDelivery_221", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_221"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_221"].complexData[item] = ix.progression.status["hagglerItemDelivery_221"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_221"].complexData[item] then isdone = false end
 		end
@@ -1894,7 +1894,7 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_2211"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_2211"].complexData[item] = ix.progression.status["hagglerItemDelivery_2211"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_2211"].complexData[item] then isdone = false end
 		end
@@ -1976,7 +1976,7 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_22111"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_22111"].complexData[item] = ix.progression.status["hagglerItemDelivery_22111"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_22111"].complexData[item] then isdone = false end
 		end
@@ -2058,7 +2058,7 @@ ix.progression.Register("hagglerItemDelivery_222", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_222"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_222"].complexData[item] = ix.progression.status["hagglerItemDelivery_222"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_222"].complexData[item] then isdone = false end
 		end
@@ -2142,7 +2142,7 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_2221"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_2221"].complexData[item] = ix.progression.status["hagglerItemDelivery_2221"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_2221"].complexData[item] then isdone = false end
 		end
@@ -2226,7 +2226,7 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["hagglerItemDelivery_22211"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["hagglerItemDelivery_22211"].complexData[item] = ix.progression.status["hagglerItemDelivery_22211"].complexData[item] or 0
 			if amt > ix.progression.status["hagglerItemDelivery_22211"].complexData[item] then isdone = false end
 		end

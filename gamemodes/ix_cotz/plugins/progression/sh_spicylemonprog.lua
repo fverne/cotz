@@ -56,7 +56,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical1"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item] or 0
 			if amt > ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item] then isdone = false end
 		end
@@ -139,7 +139,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical2"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item] or 0
 			if amt > ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item] then isdone = false end
 		end
@@ -224,7 +224,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical3"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item] or 0
 			if amt > ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item] then isdone = false end
 		end
@@ -309,7 +309,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical4", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical4"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item] or 0
 			if amt > ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item] then isdone = false end
 		end
@@ -394,7 +394,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical5"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item] or 0
 			if amt > ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item] then isdone = false end
 		end
@@ -480,7 +480,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical6", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical6"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item] or 0
 			if amt > ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item] then isdone = false end
 		end
@@ -564,7 +564,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical7"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item] or 0
 			if amt > ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item] then isdone = false end
 		end
@@ -652,7 +652,7 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Food"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["spicylemonItemDelivery_Food"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Food"].complexData[item] or 0
 			if amt > ix.progression.status["spicylemonItemDelivery_Food"].complexData[item] then isdone = false end
 		end
@@ -743,7 +743,7 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Vodka"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item] or 0
 			if amt > ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item] then isdone = false end
 		end
@@ -829,7 +829,7 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Spirits"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item] or 0
 			if amt > ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item] then isdone = false end
 		end
@@ -920,7 +920,7 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Brew"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item] or 0
 			if amt > ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item] then isdone = false end
 		end

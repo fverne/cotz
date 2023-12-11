@@ -52,7 +52,7 @@ ix.progression.Register("cleanerItemDelivery_Storage", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["cleanerItemDelivery_Storage"].finished) do
+		for item, amt in pairs(finished) do
 			ix.progression.status["cleanerItemDelivery_Storage"].complexData[item] = ix.progression.status["cleanerItemDelivery_Storage"].complexData[item] or 0
 			if amt > ix.progression.status["cleanerItemDelivery_Storage"].complexData[item] then isdone = false end
 		end
