@@ -4,7 +4,7 @@ local SegmentedBarTexture = ix.util.GetMaterial("cotz/panels/hp1.png", "noclamp 
 
 function ix.util.GetColorFromValue(value, minVal, maxVal)
     local hue = math.Remap(value, minVal, maxVal, 0, 210)
-    local color = HSVToColor(hue, 0.8, 1)
+    local color = HSVToColor(math.max(hue, 0), 0.8, 1)
     
     return color
 end
