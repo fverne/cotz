@@ -484,7 +484,6 @@ function ITEM:OnRemoved()
 		client:RecalculateResistances()
 		client:ReevaluateOverlay()
 		self:RemoveOutfit(self:GetOwner())
-		self:RunAllAttachmentDetach()
 	end
 end
 
@@ -494,7 +493,6 @@ function ITEM:OnEquipped()
 end
 
 function ITEM:OnUnequipped()
-	self:RunAllAttachmentDetach()
 	self.player:EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
 end
 

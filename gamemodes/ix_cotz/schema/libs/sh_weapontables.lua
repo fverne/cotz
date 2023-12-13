@@ -167,29 +167,29 @@ ix.armortables.attachments["steelframe"] = {
 	uID = "attachment_steelframe",
 	onAttach = function(player, armor)
 		if armor then
-			armor:SetData("carryinc", armor:GetData("carryinc", 0) + 25)
+			armor:SetData("carryinc", armor:GetCarryInc() + 25)
 		end
 	end,
 	onDetach = function(player, armor)
 		if armor then
-			armor:SetData("carryinc", armor:GetData("carryinc", 25) - 25)
+			armor:SetData("carryinc", armor:GetCarryInc() - 25)
 		end
 	end,
 }
 
 ix.armortables.attachments["aluframe"] = {
-	name = "Steel Frame",
+	name = "Aluminium Frame",
 	weight = 0.800,
 	ar = -0.15,
 	uID = "attachment_aluframe",
 	onAttach = function(player, armor)
 		if armor then
-			armor:SetData("carryinc", armor:GetData("carryinc", 0) + 15)
+			armor:SetData("carryinc", armor:GetCarryInc() + 15)
 		end
 	end,
 	onDetach = function(player, armor)
 		if armor then
-			armor:SetData("carryinc", armor:GetData("carryinc", 15) - 15)
+			armor:SetData("carryinc", armor:GetCarryInc() - 15)
 		end
 	end,
 }

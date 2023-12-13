@@ -56,7 +56,7 @@ if (CLIENT) then
 		local carryinc = item:GetCarryInc()
 
 		if !item.entity then
-			if (carryinc) then
+			if (carryinc && carryinc != 0) then
 				ix.util.PropertyDesc2(tooltip, "Carry Capacity Increase: "..ix.weight.WeightString(carryinc, ix.option.Get("imperial", false)), Color(255, 255, 255), Material("vgui/ui/stalker/armorupgrades/carryweightinc.png"))
 			end
 		end
