@@ -6,8 +6,8 @@ ITEM.longdesc = "No Longer Description Available"
 
 ITEM.width = 1
 ITEM.height = 1
+ITEM.price = 0
 
-ITEM.ballisticareas = {"  Head:", "  Torso:", "  Abdomen:", "  Arms:", "  Legs:", "  Anomaly:", "  Radiation:"}
 ITEM.outfitCategory = "model"
 ITEM.isBodyArmor = true
 ITEM.skincustom = {}
@@ -22,6 +22,7 @@ ITEM.far = 0
 ITEM.pr = nil
 ITEM.fpr = 0
 ITEM.radProt = nil
+
 ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
 ITEM.canRepair = true
@@ -118,7 +119,7 @@ if (CLIENT) then
 
 	function ITEM:PopulateTooltip(tooltip)
 		if !self.entity then
-			ix.util.DrawResistances(tooltip, self)
+			ix.util.DrawSuitResistances(tooltip, self)
 
 			if((self.miscslots or 0) > 0) then
 				local attachmenttitle = tooltip:AddRow("attachments")

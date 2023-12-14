@@ -11,6 +11,7 @@ end
 
 function ix.util.ProtectionTranslator(value, minVal, maxVal)
     local mappedValue = math.Remap(value, minVal, maxVal, 0, 100)
+    local mappedValue = math.max(mappedValue, 0)
 
     if mappedValue <= 5 then
         return "None"
@@ -65,7 +66,7 @@ function ix.util.DrawResistance(parentTooltip, resistanceName, value, minVal, ma
 end
 
 
-function ix.util.DrawResistances(parentTooltip, item)
+function ix.util.DrawSuitResistances(parentTooltip, item)
     if !parentTooltip:GetRow("resistances") then
         local descheader = parentTooltip:AddRow("resistances")
 		descheader:SetText("\nPROTECTION LEVELS:")
@@ -87,6 +88,33 @@ function ix.util.DrawResistances(parentTooltip, item)
     end
     if item.radProt then
         ix.util.DrawResistance(parentTooltip, "Radiation: ", item.radProt, 1 - 0.00, 1 - 1)
+    end
+
+    parentTooltip:GetParent():SizeToContents()
+end
+
+function ix.util.DrawGearResistances(parentTooltip, item)
+    if !parentTooltip:GetRow("resistances") then
+        local descheader = parentTooltip:AddRow("resistances")
+		descheader:SetText("\nPROTECTION LEVELS:")
+		descheader:SizeToContents()
+		descheader:SetContentAlignment(4)
+    end
+
+    if item:getBR() then
+        ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), 0.00, 0.20)
+    end
+    if item:getSR() then
+        ix.util.DrawResistance(parentTooltip, "Rupture: ", item:getSR(), 0.00, 0.10)
+    end
+    if item:getPR() != 1 then
+        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), 0.00, 0.50)
+    end
+    if item:getAR() then
+        ix.util.DrawResistance(parentTooltip, "Anomalous: ", item:getAR(), 0.00, 0.10)
+    end
+    if item.radProt then
+        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.radProt, 0.00, 0.60)
     end
 
     parentTooltip:GetParent():SizeToContents()

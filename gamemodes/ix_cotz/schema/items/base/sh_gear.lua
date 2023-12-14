@@ -9,21 +9,22 @@ ITEM.height = 2
 ITEM.price = 0
 
 ITEM.pacData = {}
-ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
-ITEM.ballisticlevels = {"0"}
-ITEM.ballisticareas = {"  Head:"}
+
+ITEM.isHelmet = nil
+ITEM.isGasmask = nil
+
 ITEM.br = 0
 ITEM.fbr = 0
 ITEM.sr = 0
 ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
-ITEM.pr = 0
+ITEM.pr = nil
 ITEM.fpr = 0
-ITEM.radProt = 0
+ITEM.radProt = nil
 ITEM.resistance = true
-ITEM.isHelmet = nil
-ITEM.isGasmask = nil
+
+ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
 ITEM.weight = 0
 
@@ -89,96 +90,7 @@ if (CLIENT) then
 
 	function ITEM:PopulateTooltip(tooltip)
 		if !self.entity then
-			local ballistictitle = tooltip:AddRowAfter("description", "ballistictitle")
-			ballistictitle:SetText("\nBALLISTIC PROTECTION LEVELS:")
-			ballistictitle:SizeToContents()
-
-			for i = 1, #self.ballisticlevels do
-				local ballisticdesc = tooltip:AddRowAfter("ballistictitle", "ballisticdesc")
-				ballisticdesc:SetText(self.ballisticareas[i])
-				ballisticdesc:SizeToContents()
-
-				local brighttext = ballisticdesc:Add("DLabel")
-				brighttext:MoveRightOf(ballisticdesc)
-				brighttext:SetText(self.ballisticlevels[i])
-				brighttext:SetContentAlignment(1)
-				if self.ballisticlevels[i] == "0" then
-					brighttext:SetTextColor(Color(255, 0, 0))
-				elseif self.ballisticlevels[i] == "l" then
-					brighttext:SetTextColor(Color(255, 80, 0))
-				elseif self.ballisticlevels[i] == "ll-a" then
-					brighttext:SetTextColor(Color(255, 160, 0))
-				elseif self.ballisticlevels[i] == "ll" then
-					brighttext:SetTextColor(Color(255, 255, 0))
-				elseif self.ballisticlevels[i] == "lll-a" then
-					brighttext:SetTextColor(Color(130, 255, 0))
-				elseif self.ballisticlevels[i] == "lll" then
-					brighttext:SetTextColor(Color(0, 255, 0))
-				elseif self.ballisticlevels[i] == "lll+" then
-					brighttext:SetTextColor(Color(0, 255, 130))
-				elseif self.ballisticlevels[i] == "lV" then
-					brighttext:SetTextColor(Color(0, 255, 255))
-				elseif self.ballisticlevels[i] == "V" then
-					brighttext:SetTextColor(Color(0, 135, 255))
-				end
-				brighttext:SetFont("ixSmallFont")
-			end
-
-			local envirotitle = tooltip:AddRowAfter("ballisticdesc", "envirotitle")
-			envirotitle:SetText("\nENVIRONMENTAL PROTECTION LEVELS:")
-			envirotitle:SizeToContents()
-
-			local anomalytitle = tooltip:AddRowAfter("envirotitle", "anomalytitle")
-			anomalytitle:SetText("  Anomaly:")
-			anomalytitle:SizeToContents()
-
-			local arighttext = anomalytitle:Add("DLabel")
-			arighttext:MoveRightOf(anomalytitle)
-			arighttext:SetText(self:AnomProtTranslator(self.ar or 0))
-			arighttext:SetContentAlignment(4)
-			arighttext:SetSize(anomalytitle:GetWide(), anomalytitle:GetTall())
-			if self:AnomProtTranslator(self.ar or 0) == "None" then
-				arighttext:SetTextColor(Color(255, 0, 0))
-			elseif self:AnomProtTranslator(self.ar or 0) == "Negligible" then
-				arighttext:SetTextColor(Color(255, 80, 0))
-			elseif self:AnomProtTranslator(self.ar or 0) == "Bad" then
-				arighttext:SetTextColor(Color(255, 160, 0))
-			elseif self:AnomProtTranslator(self.ar or 0) == "Decent" then
-				arighttext:SetTextColor(Color(255, 255, 0))
-			elseif self:AnomProtTranslator(self.ar or 0) == "Good" then
-				arighttext:SetTextColor(Color(130, 255, 0))
-			elseif self:AnomProtTranslator(self.ar or 0) == "Very Good" then
-				arighttext:SetTextColor(Color(0, 255, 0))
-			elseif self:AnomProtTranslator(self.ar or 0) == "Excellent" then
-				arighttext:SetTextColor(Color(0, 135, 255))
-			end
-			arighttext:SetFont("ixSmallFont")
-
-			local radtitle = tooltip:AddRowAfter("anomalytitle", "radtitle")
-			radtitle:SetText("  Radiation:")
-			radtitle:SizeToContents()
-
-			local rrighttext = radtitle:Add("DLabel")
-			rrighttext:MoveRightOf(radtitle)
-			rrighttext:SetText(self:RadProtTranslator(self.radProt or 0))
-			rrighttext:SetContentAlignment(4)
-			rrighttext:SetSize(radtitle:GetWide(), radtitle:GetTall())
-			rrighttext:SetFont("ixSmallFont")
-			if self:RadProtTranslator(self.radProt or 0) == "None" then
-				rrighttext:SetTextColor(Color(255, 0, 0))
-			elseif self:RadProtTranslator(self.radProt or 0) == "Negligible" then
-				rrighttext:SetTextColor(Color(255, 80, 0))
-			elseif self:RadProtTranslator(self.radProt or 0) == "Bad" then
-				rrighttext:SetTextColor(Color(255, 160, 0))
-			elseif self:RadProtTranslator(self.radProt or 0) == "Decent" then
-				rrighttext:SetTextColor(Color(255, 255, 0))
-			elseif self:RadProtTranslator(self.radProt or 0) == "Good" then
-				rrighttext:SetTextColor(Color(130, 255, 0))
-			elseif self:RadProtTranslator(self.radProt or 0) == "Very Good" then
-				rrighttext:SetTextColor(Color(0, 255, 0))
-			elseif self:RadProtTranslator(self.radProt or 0) == "Excellent" then
-				rrighttext:SetTextColor(Color(0, 135, 255))
-			end
+			ix.util.DrawGearResistances(tooltip, self)
 
 			local duratitle = tooltip:AddRow("duratitle")
 			duratitle:SetText("\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
@@ -196,42 +108,6 @@ if (CLIENT) then
 		      self:PopulateTooltipIndividual(tooltip)
 		    end
 		end
-	end
-end
-
-function ITEM:RadProtTranslator(value)
-	if value == 0 then
-		return "None"
-	elseif value <= 0.05 then
-		return "Negligible"
-	elseif value <= 0.1 then
-		return "Bad"
-	elseif value <= 0.2 then
-		return "Decent"
-	elseif value <= 0.4 then
-		return "Good"
-	elseif value < 0.6 then
-		return "Very Good"
-	elseif value >= 0.6 then
-		return "Excellent"
-	end
-end
-
-function ITEM:AnomProtTranslator(value)
-	if value == 0 then
-		return "None"
-	elseif value <= 0.02 then
-		return "Negligible"
-	elseif value <= 0.04 then
-		return "Bad"
-	elseif value <= 0.06 then
-		return "Decent"
-	elseif value <= 0.08 then
-		return "Good"
-	elseif value <= 0.10 then
-		return "Very Good"
-	elseif value > 0.10 then
-		return "Excellent"
 	end
 end
 
@@ -402,13 +278,12 @@ function ITEM:getFBR()
 end
 
 function ITEM:getSR() 
-	local res = 1
+	local res = self.sr
 	local upgrades = self:GetData("upgrades", {})
-	
+
 	for k,v in pairs(upgrades) do
-		if (!ix.armortables.upgrades[v]) then continue end
-		if ix.armortables.upgrades[v].sr then
-			res = res - ix.armortables.upgrades[v].sr
+		if upgrades[v].sr ~= nil then
+			res = res + upgrades[v].sr
 		end
 	end
 
