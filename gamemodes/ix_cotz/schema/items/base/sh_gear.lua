@@ -19,9 +19,9 @@ ITEM.sr = 0
 ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
-ITEM.pr = nil
+ITEM.pr = 0
 ITEM.fpr = 0
-ITEM.radProt = nil
+ITEM.radProt = 0
 ITEM.resistance = true
 
 ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
@@ -104,6 +104,10 @@ if (CLIENT) then
 	        	ix.util.PropertyDesc2(tooltip, "Helmet", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 	        end
 
+			if self.isBackPack then
+	        	ix.util.PropertyDesc2(tooltip, "Backpack", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
+	        end
+
 	        if (self.PopulateTooltipIndividual) then
 		      self:PopulateTooltipIndividual(tooltip)
 		    end
@@ -184,6 +188,12 @@ ITEM.functions.Equip = {
 
 				if (v.isGasmask == true and item.isGasmask == true and itemTable:GetData("equip")) then
 					item.player:Notify("You are already equipping a gasmask!")
+
+					return false
+				end
+
+				if (v.isBackpack == true and item.isBackpack == true and itemTable:GetData("equip")) then
+					item.player:Notify("You are already equipping a backpack!")
 
 					return false
 				end
@@ -332,13 +342,13 @@ end
 
 
 function ITEM:getPR() 
-	local res = 1
+	local res = self.pr
 	local upgrades = self:GetData("upgrades", {})
 	
 	for k,v in pairs(upgrades) do
 		if (!ix.armortables.upgrades[v]) then continue end
 		if ix.armortables.upgrades[v].pr then
-			res = res - ix.armortables.upgrades[v].pr
+			res = res + ix.armortables.upgrades[v].pr
 		end
 	end
 
@@ -359,19 +369,19 @@ function ITEM:getFPR()
 	return res
 end
 
-function ITEM:pacAdjust(pacdata, client)
 
-	if (client:GetModel() == "models/nasca/stalker/male_berill1.mdl") then
-    	return self.pacDataBerill1
-	elseif (client:GetModel() == "models/nasca/stalker/male_expedition.mdl") then
-	   	return self.pacDataExpedition
-	elseif (client:GetModel() == "models/nasca/stalker/male_nbc_lone.mdl" or client:GetModel() == "models/nasca/stalker/male_nbc_mono.mdl" or client:GetModel() == "models/nasca/stalker/male_nbc_free.mdl" or client:GetModel() == "models/nasca/stalker/male_nbc_duty.mdl") then
-	   	return self.pacDataNBC
-    /*elseif (client:GetModel() == "models/nasca/stalker/male_eagle_lone.mdl" or client:GetModel() == "models/nasca/stalker/male_eagle_bandit.mdl" or client:GetModel() == "models/nasca/stalker/male_eagle_duty.mdl" or client:GetModel() == "models/nasca/stalker/male_eagle_free.mdl" or client:GetModel() == "models/nasca/stalker/male_eagle_merc.mdl") then
-    	print(client:GetModel())
-    	client:Notify("eagle")
-    	return self.pacDataEagle*/
-    else
-    	return self.pacData
-	end
-end
+-- function ITEM:pacAdjust(pacdata, client)
+-- 	if (client:GetModel() == "models/nasca/stalker/male_berill1.mdl") then
+--     	return self.pacDataBerill1
+-- 	elseif (client:GetModel() == "models/nasca/stalker/male_expedition.mdl") then
+-- 	   	return self.pacDataExpedition
+-- 	elseif (client:GetModel() == "models/nasca/stalker/male_nbc_lone.mdl" or client:GetModel() == "models/nasca/stalker/male_nbc_mono.mdl" or client:GetModel() == "models/nasca/stalker/male_nbc_free.mdl" or client:GetModel() == "models/nasca/stalker/male_nbc_duty.mdl") then
+-- 	   	return self.pacDataNBC
+--     /*elseif (client:GetModel() == "models/nasca/stalker/male_eagle_lone.mdl" or client:GetModel() == "models/nasca/stalker/male_eagle_bandit.mdl" or client:GetModel() == "models/nasca/stalker/male_eagle_duty.mdl" or client:GetModel() == "models/nasca/stalker/male_eagle_free.mdl" or client:GetModel() == "models/nasca/stalker/male_eagle_merc.mdl") then
+--     	print(client:GetModel())
+--     	client:Notify("eagle")
+--     	return self.pacDataEagle*/
+--     else
+--     	return self.pacData
+-- 	end
+-- end

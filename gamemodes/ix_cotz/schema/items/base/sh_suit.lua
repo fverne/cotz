@@ -19,9 +19,9 @@ ITEM.sr = 0
 ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
-ITEM.pr = nil
+ITEM.pr = 0
 ITEM.fpr = 0
-ITEM.radProt = nil
+ITEM.radProt = 0
 
 ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
@@ -167,6 +167,10 @@ if (CLIENT) then
 	        
 	        if self.isHelmet then
 	        	ix.util.PropertyDesc2(tooltip, "Helmet", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
+	        end
+
+			if self.isBackpack then
+	        	ix.util.PropertyDesc2(tooltip, "Backpack", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 	        end
 
 	        if (self.PopulateTooltipIndividual) then
@@ -326,6 +330,12 @@ ITEM.functions.Equip = {
 
 				if (v.isGasmask == true and item.isGasmask == true and itemTable:GetData("equip")) then
 					item.player:Notify("You are already equipping a gasmask!")
+
+					return false
+				end
+
+				if (v.isBackpack == true and item.isBackpack == true and itemTable:GetData("equip")) then
+					item.player:Notify("You are already equipping a backpack!")
 
 					return false
 				end
@@ -601,6 +611,12 @@ function ITEM:getPR()
 	local res = 1
 	local upgrades = self:GetData("upgrades", {})
 	
+	if self:GetData("durability",100) < 80 then
+		res = 1 - (self.pr * (self:GetData("durability",0)/80))
+	else
+		res = 1 - self.pr
+	end
+
 	for k,v in pairs(upgrades) do
 		if (!ix.armortables.upgrades[v]) then continue end
 		if ix.armortables.upgrades[v].pr then

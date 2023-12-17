@@ -3,22 +3,34 @@ ix.util = ix.util or {}
 local SegmentedBarTexture = ix.util.GetMaterial("cotz/panels/hp1.png", "noclamp smooth") 
 
 function ix.util.GetColorFromValue(value, minVal, maxVal)
-    local hue = math.Remap(value, minVal, maxVal, 0, 210)
-    local color = HSVToColor(math.max(hue, 0), 0.8, 1)
+    local minHue, maxHue = 0, 210
+    local saturation = 0.6
+    local hue = math.Remap(value, minVal, maxVal, minHue, maxHue)
+
+    if hue < minHue or hue > maxHue then -- in case values go outside bounds, with attachments for instance
+        saturation = 1
+    end
+
+    local color = HSVToColor(math.Clamp(hue, minHue, maxHue), saturation, 1)
     
     return color
 end
 
 function ix.util.ProtectionTranslator(value, minVal, maxVal)
     local mappedValue = math.Remap(value, minVal, maxVal, 0, 100)
-    local mappedValue = math.max(mappedValue, 0)
 
-    if mappedValue <= 5 then
+    if mappedValue < 0 then
+        return "Drawback"
+    elseif mappedValue == 0 then
         return "None"
-    elseif mappedValue <= 10 then
+    elseif mappedValue <= 5 then
         return "Negligible"
-    elseif mappedValue <= 20 then
+    elseif mappedValue <= 10 then
+        return "Trivial"
+    elseif mappedValue <= 15 then
         return "Bad"
+    elseif mappedValue <= 20 then
+        return "Minor"
     elseif mappedValue <= 30 then
         return "Weak"
     elseif mappedValue <= 40 then
@@ -26,15 +38,17 @@ function ix.util.ProtectionTranslator(value, minVal, maxVal)
     elseif mappedValue <= 50 then
         return "Good"
     elseif mappedValue <= 60 then
-        return "Thick"
-    elseif mappedValue <= 70 then
         return "Strong"
-    elseif mappedValue <= 80 then
+    elseif mappedValue <= 70 then
         return "Excellent"
+    elseif mappedValue <= 80 then
+        return "Incredible"
     elseif mappedValue <= 90 then
-        return "Impenetrable"
-    elseif mappedValue > 90 then
+        return "Supreme"
+    elseif mappedValue <= 100 then
         return "Perfect"
+    elseif mappedValue > 100 then
+        return "Anomalous"
     end
 end
 
@@ -75,19 +89,19 @@ function ix.util.DrawSuitResistances(parentTooltip, item)
     end
 
     if item:getBR() then
-        ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), 1 - 0.00, 1 - 0.48)
+        ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), 1 - 0.00, 1 - 0.95)
     end
     if item:getSR() then
-        ix.util.DrawResistance(parentTooltip, "Rupture: ", item:getSR(), 1 - 0.00, 1 - 0.86)
-    end
-    if item:getPR() != 1 then
-        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), 1 - 0.00, 1 - 0.50)
+        ix.util.DrawResistance(parentTooltip, "Rupture: ", item:getSR(), 1 - 0.00, 1 - 0.95)
     end
     if item:getAR() then
-        ix.util.DrawResistance(parentTooltip, "Anomalous: ", item:getAR(), 1 -  0.00, 1 - 0.80)
+        ix.util.DrawResistance(parentTooltip, "Anomalous: ", item:getAR(), 1 -  0.00, 1 - 0.95)
     end
-    if item.radProt then
-        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.radProt, 1 - 0.00, 1 - 1)
+    if item:getPR() != 1 then
+        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), 1 - 0.00, 1 - 0.95)
+    end
+    if item.radProt > 0 then
+        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.radProt, 0.00, 1)
     end
 
     parentTooltip:GetParent():SizeToContents()
@@ -107,13 +121,13 @@ function ix.util.DrawGearResistances(parentTooltip, item)
     if item:getSR() then
         ix.util.DrawResistance(parentTooltip, "Rupture: ", item:getSR(), 0.00, 0.10)
     end
-    if item:getPR() != 1 then
-        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), 0.00, 0.50)
-    end
     if item:getAR() then
         ix.util.DrawResistance(parentTooltip, "Anomalous: ", item:getAR(), 0.00, 0.10)
     end
-    if item.radProt then
+    if item:getPR() > 0 then
+        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), 0.00, 0.50)
+    end
+    if item.radProt > 0  then
         ix.util.DrawResistance(parentTooltip, "Radiation: ", item.radProt, 0.00, 0.60)
     end
 

@@ -8,6 +8,7 @@ ITEM.weight = 4
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
+ITEM.isBackpack = true
 ITEM.outfitCategory = "Backpack"
 ITEM.ballisticlevels = {"ll-a"}
 

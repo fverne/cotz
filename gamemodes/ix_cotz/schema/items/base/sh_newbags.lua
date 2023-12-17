@@ -7,7 +7,7 @@ ITEM.width = 2
 ITEM.height = 2
 ITEM.price = 0
 
-ITEM.isNewBag = true
+ITEM.isBackpack = true
 ITEM.outfitCategory = "Backpack"
 ITEM.pacData = {}
 ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
@@ -70,8 +70,8 @@ ITEM.functions.Equip = {
 			if (v.id != item.id) then
 				local itemTable = ix.item.instances[v.id]
 
-				if (itemTable.pacData and v.outfitCategory == item.outfitCategory and itemTable:GetData("equip")) then
-					item.player:Notify("You're already equipping this kind of outfit")
+				if (v.isBackpack == true and item.isBackpack == true and itemTable:GetData("equip")) then
+					item.player:Notify("You are already equipping a backpack!")
 
 					return false
 				end
@@ -89,6 +89,10 @@ ITEM.functions.Equip = {
 		end
 
 		item:OnEquipped()
+
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 4, function(player) 
+		end)
+
 		return false
 	end,
 	OnCanRun = function(item)
@@ -113,6 +117,9 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 
 		item:RemovePart(item.player)
 		char:UpdateWeight()
+
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 4, function(player) 
+		end)
 
 		return false
 	end,
