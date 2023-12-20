@@ -12,8 +12,12 @@ ITEM.ballisticlevels = {"ll-a"}
 
 ITEM.br = 0.00
 ITEM.fbr = 0
+ITEM.sr = 0.01
+ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
+ITEM.pr = 0.05
+ITEM.fpr = 0
 ITEM.radProt = 0
 
 ITEM.exRender = true

@@ -3,17 +3,21 @@ ITEM.description = "A high-end helmet with gasmask."
 ITEM.longdesc = "This helmet resembles that of an ordinary exoskeleton, but differs sightly from its standard counterpart and has differing protective characteristics. Good protection from gunfire and high calibre rounds in combination with anomaly protection make this helmet one of the best in its category."
 ITEM.model = "models/shtokerbox/ground_headgear_radsuit.mdl"
 
-ITEM.price = 140000
+ITEM.price = 400000
 ITEM.weight = 3
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.09
+ITEM.br = 0.18
 ITEM.fbr = 0
+ITEM.sr = 0.09
+ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
+ITEM.pr = 0.40
+ITEM.fpr = 0
 ITEM.radProt = 0.59
 
 ITEM.exRender = true

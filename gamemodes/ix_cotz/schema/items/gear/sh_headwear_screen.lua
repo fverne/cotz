@@ -3,7 +3,7 @@ ITEM.description = "A screen helmet with closed respiratory system."
 ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_seva_visor.mdl"
 
-ITEM.price = 60000
+ITEM.price = 100000
 ITEM.weight = 4
 
 ITEM.isGasmask = true
@@ -14,8 +14,12 @@ ITEM.ballisticlevels = {"ll-a"}
 
 ITEM.br = 0.01
 ITEM.fbr = 0
+ITEM.sr = 0.01
+ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
+ITEM.pr = 0.45
+ITEM.fpr = 0
 ITEM.radProt = 0.60
 
 ITEM.exRender = true

@@ -3,17 +3,21 @@ ITEM.description = "A newer steel helmet"
 ITEM.longdesc = "Heavy assault helmet of Russian make, favored by FSB assault teams. Small respirator helps against tear gas and short exposure to NBC threats, while tactical goggles protect the eyes of the user."
 ITEM.model = "models/shtokerbox/ground_headgear_cs4.mdl"
 
-ITEM.price = 42500
+ITEM.price = 110000
 ITEM.weight = 2.75
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.04
+ITEM.br = 0.08
 ITEM.fbr = 0
+ITEM.sr = 0.04
+ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
+ITEM.pr = 0.25
+ITEM.fpr = 0
 ITEM.radProt = 0.40
 
 ITEM.exRender = true

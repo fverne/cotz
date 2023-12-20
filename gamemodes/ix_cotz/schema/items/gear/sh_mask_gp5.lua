@@ -3,7 +3,7 @@ ITEM.description = "An old gasmask"
 ITEM.longdesc = "Cheap rubber gas mask of soviet origin, paired with a modern non-asbestos filter. Due to odd shape, it doesn't fit with all types of helmets."
 ITEM.model = "models/shtokerbox/ground_mask_gp5.mdl"
 
-ITEM.price = 7000
+ITEM.price = 21000
 ITEM.weight = 0.6
 
 ITEM.isGasmask = true

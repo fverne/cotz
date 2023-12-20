@@ -3,17 +3,21 @@ ITEM.description = "Heavy assault helmet of Russian make."
 ITEM.longdesc = "Heavy assault helmet of Russian make, favored by FSB assault teams."
 ITEM.model = "models/shtokerbox/ground_headgear_cs1.mdl"
 
-ITEM.price = 22500
+ITEM.price = 75000
 ITEM.weight = 2.5
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.02
+ITEM.br = 0.04
 ITEM.fbr = 0
+ITEM.sr = 0.02
+ITEM.fsr = 0
 ITEM.ar = 0.00
 ITEM.far = 0
+ITEM.pr = 0.20
+ITEM.fpr = 0
 ITEM.radProt = 0.20
 
 ITEM.exRender = true

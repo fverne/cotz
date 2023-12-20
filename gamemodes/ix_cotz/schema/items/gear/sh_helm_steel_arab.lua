@@ -3,17 +3,21 @@ ITEM.description = "A very old helmet."
 ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_headgear_arab_helmet.mdl"
 
-ITEM.price = 11000
+ITEM.price = 15000
 ITEM.weight = 3
 
 ITEM.isGasmask = false
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.01
+ITEM.br = 0.02
 ITEM.fbr = 0
+ITEM.sr = 0.01
+ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
+ITEM.pr = 0.10
+ITEM.fpr = 0
 ITEM.radProt = 0
 
 ITEM.exRender = true

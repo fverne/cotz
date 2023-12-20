@@ -3,17 +3,21 @@ ITEM.description = "Late production Soviet steel helmet."
 ITEM.longdesc = "Late production Soviet steel helmet paired with a respirator and protective goggles. Despite it's age, it seems to still be able to stop a pistol bullet."
 ITEM.model = "models/shtokerbox/ground_headgear_cs2.mdl"
 
-ITEM.price = 30000
+ITEM.price = 90000
 ITEM.weight = 2.6
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.03
+ITEM.br = 0.06
 ITEM.fbr = 0
+ITEM.sr = 0.03
+ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
+ITEM.pr = 0.23
+ITEM.fpr = 0
 ITEM.radProt = 0.30
 
 ITEM.exRender = true

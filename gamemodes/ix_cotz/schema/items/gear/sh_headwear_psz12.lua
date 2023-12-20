@@ -3,17 +3,21 @@ ITEM.description = "A high-end helmet with gasmask."
 ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_headgear_psz12.mdl"
 
-ITEM.price = 110000
+ITEM.price = 315000
 ITEM.weight = 2.65
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.07
+ITEM.br = 0.14
 ITEM.fbr = 0
+ITEM.sr = 0.07
+ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
+ITEM.pr = 0.35
+ITEM.fpr = 0
 ITEM.radProt = 0.55
 
 ITEM.exRender = true

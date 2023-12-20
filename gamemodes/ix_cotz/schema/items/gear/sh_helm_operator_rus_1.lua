@@ -3,17 +3,21 @@ ITEM.description = "A modern helmet."
 ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_headgear_rus_helmet1c.mdl"
 
-ITEM.price = 35000
+ITEM.price = 100000
 ITEM.weight = 2.1
 
 ITEM.isGasmask = false
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.03
+ITEM.br = 0.06
 ITEM.fbr = 0
+ITEM.sr = 0.03
+ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
+ITEM.pr = 0.25
+ITEM.fpr = 0
 ITEM.radProt = 0
 
 ITEM.exRender = true

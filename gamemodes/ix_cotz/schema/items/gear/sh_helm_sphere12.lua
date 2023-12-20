@@ -3,17 +3,21 @@ ITEM.description = "A newer helmet."
 ITEM.longdesc = "A titanium helmet with cloth camouflage. Comes with pockets that can be filled with additional armor. Custom design, presumably never entered mass-production. M12 is the heaviest combat helmet available in the Zone, where it is normally used as a part of a set that includes also PSZ-series Spetsnaz body armor. The purpose of this helmet is clear: provide maximum head protection at the cost of increased weight."
 ITEM.model = "models/shtokerbox/ground_headgear_sphere12.mdl"
 
-ITEM.price = 60000
+ITEM.price = 180000
 ITEM.weight = 2.9
 
 ITEM.isGasmask = false
 ITEM.isHelmet = true
 ITEM.ballisticlevels = {"ll-a"}
 
-ITEM.br = 0.05
+ITEM.br = 0.10
 ITEM.fbr = 0
+ITEM.sr = 0.05
+ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
+ITEM.pr = 0.30
+ITEM.fpr = 0
 ITEM.radProt = 0
 
 ITEM.exRender = true

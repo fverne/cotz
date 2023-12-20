@@ -4,7 +4,7 @@ ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_mask_respirator.mdl"
 ITEM.skin = 1
 
-ITEM.price = 4500
+ITEM.price = 13500
 ITEM.weight = 0.4
 
 ITEM.isGasmask = true

@@ -3,7 +3,7 @@ ITEM.description = "A modern gasmask"
 ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_mask_sunrise2.mdl"
 
-ITEM.price = 10000
+ITEM.price = 30000
 ITEM.weight = 0.5
 
 ITEM.isGasmask = true
