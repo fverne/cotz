@@ -8,7 +8,6 @@ ITEM.weight = 2.65
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
-ITEM.ballisticlevels = {"ll-a"}
 
 ITEM.br = 0.14
 ITEM.fbr = 0
