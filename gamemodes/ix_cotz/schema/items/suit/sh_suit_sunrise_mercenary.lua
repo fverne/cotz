@@ -1,4 +1,4 @@
-ITEM.name = "Sunrise STALKER Suit"
+ITEM.name = "Twilight STALKER Suit"
 ITEM.model = "models/kek1ch/stalker_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_sunrise.mdl"
 ITEM.description= "A STALKER suit."
@@ -7,8 +7,8 @@ ITEM.longdesc = "This DIY stalker bodysuit is a combination of twin-layered rubb
 ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/sunrise.png")
-ITEM.weight = 6.200
-ITEM.newSkin = 0
+ITEM.weight = 6.350
+ITEM.newSkin = 2
 
 ITEM.price = 37290
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
@@ -16,8 +16,8 @@ ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.09
-ITEM.fbr = 1
+ITEM.br = 0.11
+ITEM.fbr = 2
 ITEM.sr = 0.16
 ITEM.fsr = 1
 ITEM.ar = 0.08
