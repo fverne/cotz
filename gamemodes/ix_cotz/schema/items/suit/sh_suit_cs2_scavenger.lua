@@ -1,4 +1,4 @@
-ITEM.name = "Sky-2 Suit"
+ITEM.name = "Sky-2a Suit"
 ITEM.model = "models/kek1ch/cs_heavy_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_cs2.mdl"
 ITEM.description = "A Sky-2 suit"
@@ -8,7 +8,7 @@ ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/cs2.png")
 ITEM.weight = 10.000
-ITEM.newSkin = 0
+ITEM.newSkin = 1
 
 ITEM.price = 85280
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
@@ -16,14 +16,14 @@ ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 ITEM.isGasmask = false
 ITEM.isHelmet = true
 
-ITEM.br = 0.15
+ITEM.br = 0.17
 ITEM.fbr = 1
-ITEM.sr = 0.18
+ITEM.sr = 0.19
 ITEM.fsr = 1
-ITEM.ar = 0.09
+ITEM.ar = 0.10
 ITEM.far = 1
 
-ITEM.carryinc = 9.000
+ITEM.carryinc = 16.000
 ITEM.miscslots = 2
 
 
