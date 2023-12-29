@@ -73,7 +73,7 @@ if SERVER then
 
 else
 
-	netstream.Hook("ix_DisplaySpawnPoints", function(data)
+	netstream.Hook("ix_DisplayRadiationPoints", function(data)
 	 	for k, v in pairs(data) do
 	 		local emitter = ParticleEmitter( v[1] )
 	 		local smoke = emitter:Add( "sprites/glow04_noz", v[1] )
@@ -134,7 +134,7 @@ ix.command.Add("radiationdisplay", {
 	adminOnly = true,
 	OnRun = function(self, client, arguments)
 		if SERVER then
-			netstream.Start(client, "ix_DisplaySpawnPoints", PLUGIN.radiationpoints)
+			netstream.Start(client, "ix_DisplayRadiationPoints", PLUGIN.radiationpoints)
 			client:Notify( "Displayed All Points for 10 secs." )
 		end
 	end

@@ -219,7 +219,7 @@ if SERVER then
 else
 
 	-- Simple hook to display points
-	netstream.Hook("ix_DisplaySpawnPoints", function(data)
+	netstream.Hook("ix_DisplayAnomalyPoints", function(data)
 	 	for k, v in pairs(data) do
 	 		local emitter = ParticleEmitter( v[1] )
 	 		local smoke = emitter:Add( "sprites/glow04_noz", v[1] )
@@ -296,7 +296,7 @@ ix.command.Add("anomalydisplay", {
 	adminOnly = true,
 	OnRun = function(self, client, arguments)
 		if SERVER then
-			netstream.Start(client, "ix_DisplaySpawnPoints", PLUGIN.anomalypoints)
+			netstream.Start(client, "ix_DisplayAnomalyPoints", PLUGIN.anomalypoints[game.GetMap()])
 			client:Notify( "Displayed All Points for 10 secs." )
 		end
 	end
