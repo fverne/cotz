@@ -5,11 +5,11 @@ PLUGIN.name = "Simple Cross Server Chat"
 PLUGIN.author = "gumlefar"
 PLUGIN.description = "A simple system for sharing chat messages over multiple servers."
 
-
-
 PLUGIN.lastSeenId = PLUGIN.lastSeenId or 0
 PLUGIN.checktime = PLUGIN.checktime or 0
 PLUGIN.postTime = PLUGIN.postTime or 0
+
+PLUGIN.firstTimeLoaded = false
 
 ix = ix or {}
 ix.crossserverchat = ix.crossserverchat or {}
@@ -33,16 +33,18 @@ ix.chat.Register("gpdainternal", {
 
 if (SERVER) then
 	function PLUGIN:Think()
-		if self.checktime < CurTime() then 
-			self.checktime = CurTime() + 5
+		if self.firstTimeLoaded then
+			if self.checktime < CurTime() then 
+				self.checktime = CurTime() + 5
 
-			self:CheckForNewData()
-		end
+				self:CheckForNewData()
+			end
 
-		if self.postTime < CurTime() then 
-			self.postTime = CurTime() + 1
+			if self.postTime < CurTime() then 
+				self.postTime = CurTime() + 1
 
-			self:ProcessTopOfQueue()
+				self:ProcessTopOfQueue()
+			end
 		end
 	end
 
@@ -132,5 +134,7 @@ if (SERVER) then
 		if(SERVER)then
 			self:LoadTables()
 		end
+
+		self.firstTimeLoaded = true
 	end
 end
