@@ -39,9 +39,10 @@ if (SERVER) then
 		
 		if (character) then
 			if !character:GetData("DiedRecently") then
-				character:SetData("DiedRecently", nil)
 				return
 			end
+			
+			character:SetData("DiedRecently", nil)
 
 			local spawndata = character:GetData("savedspawn", nil)
 
