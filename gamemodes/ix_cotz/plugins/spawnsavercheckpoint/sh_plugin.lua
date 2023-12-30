@@ -37,8 +37,8 @@ if (SERVER) then
 	function PLUGIN:PlayerLoadout(client)
 		local character = client:GetCharacter()
 		
-		if !client:GetNWBool("ix_DiedRecently") then
-			client:SetNWBool("ix_DiedRecently", nil)
+		if !client:GetCharacter():GetData("DiedRecently") then
+			client:GetCharacter():SetData("DiedRecently", nil)
 			return
 		end
 
@@ -58,6 +58,6 @@ if (SERVER) then
 	end
 
 	function PLUGIN:DoDeathDrop(client, deathpos)
-		client:SetNWBool("ix_DiedRecently", true) -- to support spawnsaver
+		client:GetCharacter():SetData("DiedRecently", true)
 	end
 end
