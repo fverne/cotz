@@ -37,12 +37,12 @@ if (SERVER) then
 	function PLUGIN:PlayerLoadout(client)
 		local character = client:GetCharacter()
 		
-		if !client:GetCharacter():GetData("DiedRecently") then
-			client:GetCharacter():SetData("DiedRecently", nil)
-			return
-		end
-
 		if (character) then
+			if !character:GetData("DiedRecently") then
+				character:SetData("DiedRecently", nil)
+				return
+			end
+
 			local spawndata = character:GetData("savedspawn", nil)
 
 			if !spawndata then return end
