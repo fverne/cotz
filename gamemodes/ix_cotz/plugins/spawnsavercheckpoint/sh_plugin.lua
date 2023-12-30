@@ -36,7 +36,12 @@ if (SERVER) then
 
 	function PLUGIN:PlayerLoadout(client)
 		local character = client:GetCharacter()
-	
+		
+		if !client:GetNWBool("ix_DiedRecently") then
+			client:SetNWBool("ix_DiedRecently", nil)
+			return
+		end
+
 		if (character) then
 			local spawndata = character:GetData("savedspawn", nil)
 
@@ -50,5 +55,9 @@ if (SERVER) then
 
 			client:SetPos(spawndata[1])
 		end
+	end
+
+	function PLUGIN:DoDeathDrop(client, deathpos)
+		client:SetNWBool("ix_DiedRecently", true) -- to support spawnsaver
 	end
 end
