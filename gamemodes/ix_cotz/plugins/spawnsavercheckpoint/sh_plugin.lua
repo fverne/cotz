@@ -41,7 +41,7 @@ if (SERVER) then
 			if !character:GetData("DiedRecently") then
 				return
 			end
-			
+
 			character:SetData("DiedRecently", nil)
 
 			local spawndata = character:GetData("savedspawn", nil)
@@ -49,8 +49,8 @@ if (SERVER) then
 			if !spawndata then return end
 
 			if not (spawndata[3] == game.GetMap())then
-				ix.plugin.list["simplecrossserver"]:RedirectPlayerNoLoadZone(client, spawndata[3])
 				character:SetData("newpos", spawndata)
+				ix.plugin.list["simplecrossserver"]:RedirectPlayerNoLoadZone(client, spawndata[3])
 				return
 			end
 
