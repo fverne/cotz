@@ -30,6 +30,12 @@ PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromtraintracks"] = {
 	desc = "The area ahead leads to the swamps."
 }
 
+PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromtrainbridge"] = {
+	pos = Vector(-7737.101074, 12312.310547, 152.593567), --edit me
+	ang = Angle(0, 0, 0.000000), --edit me
+	desc = "The area ahead leads to the swamps."
+}
+
 PLUGIN.mapdata["rp_salvation_2_haven"] = {}
 PLUGIN.mapdata["rp_salvation_2_haven"].name = "Farmlands"
 PLUGIN.mapdata["rp_salvation_2_haven"].serverip = "176.23.99.100:27016"
