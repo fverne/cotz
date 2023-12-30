@@ -332,7 +332,7 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 
 			local npc = ix.progression.GetNPCFromName("'Egghead'")
 			if (npc) then
-				npc:AddItemToList("ssp99", nil, 10, "SELLANDBUY", 10, 1, 10)
+				npc:AddItemToList("suit_ssp99", nil, 10, "SELLANDBUY", 10, 1, 10)
 			end
 
 			ix.progression.SetCompleted("eggheadItemDelivery_Suit1", true)
@@ -417,7 +417,7 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 
 			local npc = ix.progression.GetNPCFromName("'Egghead'")
 			if (npc) then
-				npc:AddItemToList("ssp99m", nil, 10, "SELLANDBUY", 10, 1, 10)
+				npc:AddItemToList("suit_ssp99m", nil, 10, "SELLANDBUY", 10, 1, 10)
 			end
 
 			ix.progression.SetCompleted("eggheadItemDelivery_Suit2", true)
@@ -501,7 +501,7 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 
 			local npc = ix.progression.GetNPCFromName("'Egghead'")
 			if (npc) then
-				npc:AddItemToList("seva", nil, 10, "SELLANDBUY", 10, 1, 10)
+				npc:AddItemToList("suit_seva", nil, 10, "SELLANDBUY", 10, 1, 10)
 			end
 
 			ix.progression.SetCompleted("eggheadItemDelivery_Suit3", true)

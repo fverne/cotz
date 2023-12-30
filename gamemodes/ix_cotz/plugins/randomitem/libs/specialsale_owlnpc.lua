@@ -1,14 +1,13 @@
 ix.randomitems.tables["specialsale_owlnpc_suit"] = {
-  {75, {"io7a"}},
-  {75, {"nbc"}},
-  {75, {"ps5m"}},
-  {50, {"berill5m"}},
-  {20, {"ssp99"}},
-  {10, {"seva"}},
-  {5, {"ssp99m"}},
-  {5, {"skat9"}},
-  {1, {"gagarin"}},
-  {1, {"radsuit"}},
+  {75, {"suit_io7a"}},
+  {75, {"suit_nbc"}},
+  {75, {"suit_ps5m"}},
+  {50, {"suit_berill"}},
+  {20, {"suit_ssp99"}},
+  {10, {"suit_seva"}},
+  {5, {"suit_ssp99m"}},
+  {5, {"suit_skat9"}},
+  {1, {"suit_radsuit"}},
 }
 
 ix.randomitems.tables["specialsale_owlnpc_headgear"] = {

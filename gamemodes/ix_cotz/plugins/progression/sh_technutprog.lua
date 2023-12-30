@@ -81,7 +81,7 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("mailjacket", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_mailjacket", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit1", true)
@@ -165,7 +165,10 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("trenchcoat", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_trenchcoat_black", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_trenchcoat_brown", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_trenchcoat_green", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_trenchcoat_tan", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit2", true)
@@ -250,7 +253,7 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("sunrise", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_sunrise", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit3", true)
@@ -334,7 +337,7 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("cs1", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_cs1", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit4", true)
@@ -419,7 +422,7 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("cs2", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_cs2", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit5", true)
@@ -506,7 +509,7 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("cs3", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_cs3", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit6", true)
@@ -590,7 +593,7 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("wind", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_wind", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit7", true)
@@ -1832,7 +1835,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["anorak"] = 100,
+			["suit_anorak"] = 100,
 		}	
 
 		return itemids

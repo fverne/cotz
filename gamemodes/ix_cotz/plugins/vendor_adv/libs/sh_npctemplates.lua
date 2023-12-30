@@ -73,7 +73,7 @@ ix.npctemplates.templates["technpc"] = {
 		["leadpipe"] 	= { nil, 4, SELLANDBUY, 4, 0.5, 2 },
 		["sledgehammer"] 	= { nil, 4, SELLANDBUY, 4, 0.5, 2 },
 
-		["anorak"] 	= { nil, 6, SELLANDBUY, 6, 3, 2 },
+		["suit_anorak"] 	= { nil, 6, SELLANDBUY, 6, 3, 2 },
 
 		["food_nuts_1"] 	= { nil, 20, SELLANDBUY, 20, 12, 5 },
 	},
@@ -455,7 +455,7 @@ ix.npctemplates.templates["bodyguardnpc"] = {
 		-- ["taurusjudge"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
 		["beretta92"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
 		["p99"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
-		["io7a"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
+		["suit_io7a"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
 
 		["backpack_2"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
 		["backpack_2_large"] 	= { nil, 1, SELLANDBUY, 1, 1, 1 },
