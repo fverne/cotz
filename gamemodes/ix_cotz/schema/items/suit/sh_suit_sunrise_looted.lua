@@ -8,7 +8,7 @@ ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/sunrise.png")
 ITEM.weight = 7.100
-ITEM.newSkin = 5
+ITEM.newSkin = 7
 
 ITEM.price = 9323
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
@@ -27,11 +27,7 @@ ITEM.carryinc = 6.000
 ITEM.miscslots = 1
 
 
-ITEM.skincustom[1] = {
-	name = "Skin 0",
-	skingroup = 0,
-}
-ITEM.skincustom[2] = {
-	name = "Skin 1",
-	skingroup = 1,
+ITEM.skincustom[8] = {
+	name = "Skin 7",
+	skingroup = 7,
 }

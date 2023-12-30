@@ -82,22 +82,22 @@ ITEM.skincustom[9] = {
 	name = "Skin 8",
 	skingroup = 8,
 }
-ITEM.skincustom[10] = {
-	name = "Skin 9",
-	skingroup = 9,
-}
-ITEM.skincustom[11] = {
-	name = "Skin 10",
-	skingroup = 10,
-}
-ITEM.skincustom[12] = {
-	name = "Skin 11",
-	skingroup = 11,
-}
-ITEM.skincustom[13] = {
-	name = "Skin 12",
-	skingroup = 12,
-}
+-- ITEM.skincustom[10] = {
+-- 	name = "Skin 9",
+-- 	skingroup = 9,
+-- }
+-- ITEM.skincustom[11] = {
+-- 	name = "Skin 10",
+-- 	skingroup = 10,
+-- }
+-- ITEM.skincustom[12] = {
+-- 	name = "Skin 11",
+-- 	skingroup = 11,
+-- }
+-- ITEM.skincustom[13] = {
+-- 	name = "Skin 12",
+-- 	skingroup = 12,
+-- }
 ITEM.skincustom[14] = {
 	name = "Skin 13",
 	skingroup = 13,
@@ -110,22 +110,22 @@ ITEM.skincustom[16] = {
 	name = "Skin 15",
 	skingroup = 15,
 }
-ITEM.skincustom[17] = {
-	name = "Skin 16",
-	skingroup = 16,
-}
-ITEM.skincustom[18] = {
-	name = "Skin 17",
-	skingroup = 17,
-}
-ITEM.skincustom[19] = {
-	name = "Skin 18",
-	skingroup = 18,
-}
-ITEM.skincustom[20] = {
-	name = "Skin 19",
-	skingroup = 19,
-}
+-- ITEM.skincustom[17] = {
+-- 	name = "Skin 16",
+-- 	skingroup = 16,
+-- }
+-- ITEM.skincustom[18] = {
+-- 	name = "Skin 17",
+-- 	skingroup = 17,
+-- }
+-- ITEM.skincustom[19] = {
+-- 	name = "Skin 18",
+-- 	skingroup = 18,
+-- }
+-- ITEM.skincustom[20] = {
+-- 	name = "Skin 19",
+-- 	skingroup = 19,
+-- }
 ITEM.skincustom[21] = {
 	name = "Skin 20",
 	skingroup = 20,
@@ -142,10 +142,10 @@ ITEM.skincustom[24] = {
 	name = "Skin 23",
 	skingroup = 23,
 }
-ITEM.skincustom[25] = {
-	name = "Skin 24",
-	skingroup = 24,
-}
+-- ITEM.skincustom[25] = { -- nazi
+-- 	name = "Skin 24",
+-- 	skingroup = 24,
+-- }
 ITEM.skincustom[26] = {
 	name = "Skin 25",
 	skingroup = 25,
