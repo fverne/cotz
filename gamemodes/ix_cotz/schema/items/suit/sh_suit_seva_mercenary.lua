@@ -1,6 +1,6 @@
-ITEM.name = "SEVA Suit"
+ITEM.name = "MTS-C Scientific Suit"
 ITEM.model = "models/kek1ch/scientific_outfit.mdl"
-ITEM.newModel = "models/nasca/stalker/male_seva_lone.mdl"
+ITEM.newModel = "models/nasca/stalker/male_seva_merc.mdl"
 ITEM.description= "A SEVA Suit."
 ITEM.longdesc = "This suit was produced by one of Kiev's Defence Research institutes and represents a phenomenal alternative to stalker hand-made suits. It is an excellent combination of a bulletproof vest, a closed cycle breathing system and an integrated system of anomalous field suppression. Due to the perfect choice of materials, the suit is highly efficient and is often regarded as an excellent choice for veterans."
 
@@ -16,8 +16,8 @@ ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 ITEM.isGasmask = true
 ITEM.isHelmet = true
 
-ITEM.br = 0.22
-ITEM.fbr = 1
+ITEM.br = 0.24
+ITEM.fbr = 2
 ITEM.sr = 0.32
 ITEM.fsr = 2
 ITEM.ar = 0.41

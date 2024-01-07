@@ -27,11 +27,11 @@ ITEM.carryinc = 15.000
 ITEM.miscslots = 4
 
 
-ITEM.skincustom[1] = {
-	name = "Skin 0",
-	skingroup = 0,
-}
-ITEM.skincustom[2] = {
-	name = "Skin 1",
-	skingroup = 1,
+-- ITEM.skincustom[1] = {
+-- 	name = "Skin 0",
+-- 	skingroup = 0,
+-- }
+ITEM.skincustom[3] = {
+	name = "Skin 2",
+	skingroup = 2,
 }
