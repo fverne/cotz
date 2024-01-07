@@ -16,6 +16,15 @@ PLUGIN.boxtypes = {
 	"ix_paper_entbox",
 }
 
+PLUGIN.smallboxtypes = {
+	"ix_entbox",
+}
+
+PLUGIN.bigboxes = {
+	"ix_wood_entbox",
+	"ix_paper_entbox",
+}
+
 ix.config.Add("boxSpawnerThreshold", 50, "How many boxes should the controller keep on the map.", nil, {
 	data = {min = 0, max = 200},
 	category = "Spawning"
@@ -50,7 +59,12 @@ if SERVER then
 			if (n_boxes > max_boxes) then return end
 
 			local pos = v[1]
-			local boxtype = self.boxtypes[v[2]]
+			local boxtype
+			if self.boxtypes[v[2]] == 2 then -- spawn big boxes
+				boxtype = math.random(#self.bigboxtypes)
+			else
+				boxtype = math.random(#self.smallboxtypes)
+			end
 			local customgroup = v[3] or nil
 			if(isClear(v[1])) then
 				local box = ents.Create(boxtype)
