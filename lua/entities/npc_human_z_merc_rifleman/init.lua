@@ -157,18 +157,18 @@ function ENT:InitEnemies()
   end
 
   for _, x in pairs(bandittable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_LI, 10 )
+    self:AddEntityRelationship( x, D_LI, 10 )
   end
 
   for _, x in pairs(merctable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_LI, 10 )
+    self:AddEntityRelationship( x, D_LI, 10 )
   end
 
   for _, x in pairs(militable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_LI, 10 )
+    self:AddEntityRelationship( x, D_LI, 10 )
   end
 
   for _, x in pairs(mutanttable) do
@@ -249,11 +249,11 @@ function ENT:FindEnemyDan()
   local MyNearbyTargets = ents.FindInCone(self:GetPos(),self:GetForward(),7000,45)
 
   for k,v in pairs(MyNearbyTargets) do
-    if v:Disposition(self) == D_HT || v:IsPlayer() then
+    if v:Disposition(self) == D_LI || v:IsPlayer() then
 
       self:StopSpeechSounds()
       self:ResetEnemy()
-      self:AddEntityRelationship( v, D_HT, 10 )
+      self:AddEntityRelationship( v, D_LI, 10 )
       self:SetEnemy(v)
       local distance = self:GetPos():Distance(v:GetPos())
       local randomsound = math.random(1,5)
