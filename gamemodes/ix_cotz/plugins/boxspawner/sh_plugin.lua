@@ -60,10 +60,10 @@ if SERVER then
 
 			local pos = v[1]
 			local boxtype
-			if self.boxtypes[v[2]] == 2 then -- spawn big boxes
-				boxtype = math.random(#self.bigboxtypes)
-			else
-				boxtype = math.random(#self.smallboxtypes)
+			if v[2] == 2 then -- spawn big boxes
+				boxtype = self.boxtypes[math.random(#self.bigboxtypes)]
+			else --spawn small boxes
+				boxtype = self.boxtypes[math.random(#self.smallboxtypes)]
 			end
 			local customgroup = v[3] or nil
 			if(isClear(v[1])) then
