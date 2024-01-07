@@ -20,7 +20,7 @@ PLUGIN.smallboxtypes = {
 	"ix_entbox",
 }
 
-PLUGIN.bigboxes = {
+PLUGIN.bigboxtypes = {
 	"ix_wood_entbox",
 	"ix_paper_entbox",
 }
