@@ -186,14 +186,12 @@ if SERVER then
         end
 
         for k,v in pairs(reward) do
-          if IsValid(v) then
-            --Give player items
-            if (self:GetCharacter() and !self:GetCharacter():GetInventory():Add(v[1], 1, v[2] or {})) then
-              ix.item.Spawn(v[1], self:GetItemDropPos(), nil, AngleRand(), v[2] or {})
-            end
-
-            ix.dialogue.notifyItemGet(self, ix.item.list[v[1]].name)
+          --Give player items
+          if (self:GetCharacter() and !self:GetCharacter():GetInventory():Add(v[1], 1, v[2] or {})) then
+            ix.item.Spawn(v[1], self:GetItemDropPos(), nil, AngleRand(), v[2] or {})
           end
+
+          ix.dialogue.notifyItemGet(self, ix.item.list[v[1]].name)
         end
 
         self:addReputation(ix.jobs.list[identifier].repReward)
