@@ -138,3 +138,39 @@ ix.container.Register("models/props_forest/footlocker01_closed.mdl", {
 	width = 19,
 	height = 13
 })
+
+ix.container.Register("models/lostsignalproject/items/misc/instrument_1.mdl", {
+	name = "Toolbox",
+	description = "A box normally used for storing tools",
+	width = 6,
+	height = 6
+})
+
+ix.container.Register("models/lostsignalproject/items/misc/kithunt.mdl", {
+	name = "Small backpack",
+	description = "A small backpack.",
+	width = 6,
+	height = 6
+})
+
+ix.container.Register("models/lostsignalproject/items/outfit_parts/ballistic9.mdl", {
+	name = "Small Box",
+	description = "A small box.",
+	width = 6,
+	height = 6
+})
+
+ix.container.Register("models/lostsignalproject/items/repair/exo_repair_kit.mdl", {
+	name = "High Security Container",
+	description = "A small, armored box.",
+	width = 6,
+	height = 6
+})
+
+ix.container.Register("models/lostsignalproject/items/misc/grooming.mdl", {
+	name = "Small Black Case",
+	description = "A small, black case.",
+	width = 6,
+	height = 6
+})
+

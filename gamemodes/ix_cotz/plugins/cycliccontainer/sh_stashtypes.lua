@@ -208,4 +208,85 @@ PLUGIN.stashTypes =
 		"cache_artifact_tier1",
 		"cache_artifact_tier2",
 	},
+
+	-- Less valuable stuff below this line
+	-- map1 
+	["normal_cache_assorted_map1_1"] = {
+		"task_reward_ammo_01_aphp",
+		"reward_consumable"
+	}
+	["normal_cache_assorted_map1_2"] = {
+		"task_reward_ammo_02_small",
+	}
+	["normal_cache_assorted_map1_3"] = {
+		"worldspawn_1",
+		"worldspawn_1"
+	}
+	["normal_cache_assorted_map1_4"] = {
+		"reward_consumable",
+		"reward_consumable"
+	}
+	["normal_cache_assorted_map1_5"] = {
+		"worldspawn_1",
+		"reward_consumable"
+	}
+	["normal_cache_assorted_map1_6"] = {
+		"reward_ammo_low",
+		"reward_consumable"
+	}
+	["normal_cache_assorted_map1_7"] = {
+		"worldspawn_3"
+	}
+
+	-- map2
+	["normal_cache_assorted_map2_1"] = {
+		"cache_ammo_pistol_tier2",
+		"reward_consumable"
+	}
+	["normal_cache_assorted_map2_2"] = {
+		"task_reward_ammo_03_small",
+	}
+	["normal_cache_assorted_map2_3"] = {
+		"worldspawn_2",
+		"worldspawn_2"
+	}
+	["normal_cache_assorted_map2_4"] = {
+		"reward_consumable",
+		"reward_consumable",
+		"reward_consumable"
+	}
+	["normal_cache_assorted_map2_5"] = {
+		"worldspawn_4",
+		"reward_consumable"
+	}
+	["normal_cache_assorted_map2_6"] = {
+		"reward_ammo_low",
+		"reward_consumable"
+	}
+
+	-- map2
+	["normal_cache_assorted_map3_1"] = {
+		"cache_ammo_rifle_tier1",
+		"reward_consumable"
+	}
+	["normal_cache_assorted_map3_2"] = {
+		"task_reward_ammo_04",
+	}
+	["normal_cache_assorted_map3_3"] = {
+		"worldspawn_5",
+		"worldspawn_5"
+	}
+	["normal_cache_assorted_map3_4"] = {
+		"reward_consumable",
+		"reward_consumable",
+		"reward_generic_valuable"
+	}
+	["normal_cache_assorted_map3_5"] = {
+		"worldspawn_6",
+		"reward_consumable"
+	}
+	["normal_cache_assorted_map3_6"] = {
+		"reward_generic_valuable",
+		"reward_consumable"
+	}
 }
