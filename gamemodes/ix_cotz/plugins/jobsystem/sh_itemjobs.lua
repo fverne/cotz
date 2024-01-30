@@ -23,428 +23,6 @@
 
 
 do
-------------------------------------------------
-------------- ITEM RETRIEVAL - MEAT ------------
-------------------------------------------------
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of blind dog meat."
-  tempJob.desc = "%d pieces of blind dog meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_blinddog"
-  tempJob.requiredItem = "meat_blinddog"
-  tempJob.numberRec = 4
-  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
-  tempJob.rewardCount = 1
-  tempJob.repReward = 5
-  tempJob.moneyReward = {175, 325}
-  tempJob.categories = {"mutantmeateasy"}
-
-  ix.jobs.register(tempJob, "ItemJob1_meat_blinddog")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of blind dog meat."
-  tempJob.desc = "%d pieces of blind dog meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_blinddog"
-  tempJob.numberRec = 8
-  tempJob.reward = {{"762x25"}, {"22lr"}, {"9x18"}, {"9x19"}, {"45acp"}}
-  tempJob.rewardCount = 1
-  tempJob.repReward = 10
-  tempJob.moneyReward = {275, 425}
-  tempJob.categories = {"mutantmeateasy"}
-
-  ix.jobs.register(tempJob, "ItemJob2_meat_blinddog")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of bloodsucker meat."
-  tempJob.desc = "%d pieces of bloodsucker meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_bloodsucker"
-  tempJob.numberRec = 2
-  tempJob.reward = {{"762x25"}, {"22lr"}, {"9x18"}, {"9x19"}, {"45acp"}}
-  tempJob.rewardCount = 1
-  tempJob.repReward = 35
-  tempJob.moneyReward = {400, 500}
-  tempJob.categories = {"mutantmeatmedium"}
-
-  ix.jobs.register(tempJob, "ItemJob1_meat_bloodsucker")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of bloodsucker meat."
-  tempJob.desc = "%d pieces of bloodsucker meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_bloodsucker"
-  tempJob.numberRec = 4
-  tempJob.reward = {{"762x25"}, {"22lr"}, {"9x18"}, {"9x19"}, {"45acp"}}
-  tempJob.rewardCount = 2
-  tempJob.repReward = 55
-  tempJob.moneyReward = {800, 950}
-  tempJob.categories = {"mutantmeatmedium"}
-
-  ix.jobs.register(tempJob, "ItemJob2_meat_bloodsucker")
-
-  tempJob = nil
-
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of boar meat."
-  tempJob.desc = "%d pieces of boar meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_boar"
-  tempJob.numberRec = 2
-  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
-  tempJob.rewardCount = 1
-  tempJob.repReward = 5
-  tempJob.moneyReward = {175, 275}
-  tempJob.categories = {"mutantmeateasy"}
-
-  ix.jobs.register(tempJob, "ItemJob1_meat_boar")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of boar meat."
-  tempJob.desc = "%d pieces of boar meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_boar"
-  tempJob.numberRec = 5
-  tempJob.reward = {{"762x25"}, {"22lr"}, {"9x18"}, {"9x19"}, {"45acp"}}
-  tempJob.rewardCount = 1
-  tempJob.repReward = 15
-  tempJob.moneyReward = {325, 425}
-  tempJob.categories = {"mutantmeateasy"}
-
-  ix.jobs.register(tempJob, "ItemJob2_meat_boar")
-
-  tempJob = nil
-
---[[
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of burer meat."
-  tempJob.desc = "%d pieces of burer meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_burer"
-  tempJob.numberRec = 2
-  tempJob.reward = {{"tokarev"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
-  tempJob.categories = {"mutantmeatmedium"}
-
-  ix.jobs.register(tempJob, "ItemJob1_meat_burer")
-
-  tempJob = nil
-]]--
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of cat meat."
-  tempJob.desc = "%d pieces of cat meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_cat"
-  tempJob.numberRec = 2
-  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
-  tempJob.rewardCount = 2
-  tempJob.repReward = 9
-  tempJob.moneyReward = {450, 550}
-  tempJob.categories = {"mutantmeateasy"}
-
-  ix.jobs.register(tempJob, "ItemJob1_meat_cat")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of cat meat."
-  tempJob.desc = "%d pieces of cat meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_cat"
-  tempJob.numberRec = 4
-  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
-  tempJob.rewardCount = 3
-  tempJob.repReward = 20
-  tempJob.moneyReward = {650, 800}
-  tempJob.categories = {"mutantmeateasy"}
-
-  ix.jobs.register(tempJob, "ItemJob2_meat_cat")
-
-  tempJob = nil
-    --needs chimera
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of flesh meat."
-  tempJob.desc = "%d pieces of flesh meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_flesh"
-  tempJob.numberRec = 3
-  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
-  tempJob.rewardCount = 1
-  tempJob.repReward = 6
-  tempJob.moneyReward = {75, 200}
-  tempJob.categories = {"mutantmeateasy"}
-
-  ix.jobs.register(tempJob, "ItemJob1_meat_flesh")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of flesh meat."
-  tempJob.desc = "%d pieces of flesh meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_flesh"
-  tempJob.numberRec = 6
-  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
-  tempJob.rewardCount = 1
-  tempJob.repReward = 14
-  tempJob.moneyReward = {175, 250}
-  tempJob.categories = {"mutantmeateasy"}
-
-  ix.jobs.register(tempJob, "ItemJob2_meat_flesh")
-
-  tempJob = nil
-
-
--- Currently commented out as hellhound meat is unobtainable at the moment
---[[
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of hellhound meat."
-  tempJob.desc = "%d pieces of hellhound meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_hellhound"
-  tempJob.numberRec = 1
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
-  tempJob.categories = {"mutantmeatmedium"}
-
-  ix.jobs.register(tempJob, "ItemJob1_meat_hellhound")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of hellhound meat."
-  tempJob.desc = "%d pieces of hellhound meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_hellhound"
-  tempJob.numberRec = 3
-  tempJob.reward = {{"m1911"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 15
-  tempJob.categories = {"mutantmeatmedium"}
-
-  ix.jobs.register(tempJob, "ItemJob2_meat_hellhound")
-
-  tempJob = nil
-]]
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of decomposing meat."
-  tempJob.desc = "%d pieces of decomposing meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_human"
-  tempJob.numberRec = 4
-  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
-  tempJob.rewardCount = 2
-  tempJob.repReward = 3
-  tempJob.moneyReward = {250, 500}
-  tempJob.categories = {"mutantmeatmedium"}
-
-  ix.jobs.register(tempJob, "ItemJob1_meat_human")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of decomposing meat."
-  tempJob.desc = "%d pieces of decomposing meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_human"
-  tempJob.numberRec = 8
-  tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
-  tempJob.rewardCount = 4
-  tempJob.repReward = 7
-  tempJob.moneyReward = {400, 600}
-  tempJob.categories = {"mutantmeatmedium"}
-
-  ix.jobs.register(tempJob, "ItemJob2_meat_human")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of pseudodog meat."
-  tempJob.desc = "%d pieces of pseudodog meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_pseudodog"
-  tempJob.numberRec = 2
-  tempJob.reward = {{"toz34short", {["durability"] = 50}}, {"toz34", {["durability"] = 50}}}
-  tempJob.rewardCount = 1
-  tempJob.repReward = 4
-  tempJob.moneyReward = {400, 600}
-  tempJob.categories = {"mutantmeateasy"}
-
-  ix.jobs.register(tempJob, "ItemJob1_meat_pseudodog")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of pseudodog meat."
-  tempJob.desc = "%d pieces of pseudodog meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_pseudodog"
-  tempJob.numberRec = 5
-  tempJob.reward = {{"toz34short", {["durability"] = 50}}, {"toz34", {["durability"] = 50}}}
-  tempJob.rewardCount = 1
-  tempJob.repReward = 10
-  tempJob.moneyReward = {500, 650}
-  tempJob.categories = {"mutantmeateasy"}
-
-  ix.jobs.register(tempJob, "ItemJob2_meat_pseudodog")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of sprig meat."
-  tempJob.desc = "%d pieces of sprig meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_sprig"
-  tempJob.numberRec = 1
-  tempJob.reward = {{"kit_mixed_low"}}
-  tempJob.rewardCount = 1
-  tempJob.repReward = 10
-  tempJob.moneyReward = {375, 500}
-  tempJob.categories = {"mutantmeatmedium"}
-
-  ix.jobs.register(tempJob, "ItemJob1_meat_sprig")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of sprig meat."
-  tempJob.desc = "%d pieces of sprig meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_sprig"
-  tempJob.numberRec = 3
-  tempJob.reward = {{"kit_mixed_med"}}
-  tempJob.rewardCount = 1
-  tempJob.repReward = 22
-  tempJob.moneyReward = {450, 600}
-  tempJob.categories = {"mutantmeatmedium"}
-
-  ix.jobs.register(tempJob, "ItemJob2_meat_sprig")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d snork hands."
-  tempJob.desc = "%d snork hands."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_snork"
-  tempJob.numberRec = 2
-  tempJob.reward = {{"kit_aid_low"}}
-  tempJob.rewardCount = {1,1}
-  tempJob.repReward = 11
-  tempJob.moneyReward = {150, 300}
-  tempJob.categories = {"mutantmeatmedium"}
-
-  ix.jobs.register(tempJob, "ItemJob1_meat_snork")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d snork hands."
-  tempJob.desc = "%d snork hands."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_snork"
-  tempJob.numberRec = 3
-  tempJob.reward = {{"kit_mixed_m_low"}}
-  tempJob.rewardCount = 1
-  tempJob.repReward = 20
-  tempJob.moneyReward = {150, 300}
-  tempJob.categories = {"mutantmeatmedium"}
-
-  ix.jobs.register(tempJob, "ItemJob2_meat_snork")
-
-  tempJob = nil
-
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of tushkano meat."
-  tempJob.desc = "%d pieces of tushkano meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_tushkano"
-  tempJob.numberRec = 4
-  tempJob.rewardCount = 0
-  tempJob.repReward = 1
-  tempJob.moneyReward = {50, 150}
-  tempJob.categories = {"mutantmeateasy"}
-
-  ix.jobs.register(tempJob, "ItemJob1_meat_tushkano")
-
-  tempJob = nil
-
-  local tempJob = {}
-
-  tempJob.name = "Hand over %d pieces of tushkano meat."
-  tempJob.desc = "%d pieces of tushkano meat."
-  tempJob.icon = "propic/event/loot"
-  tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_meat_tushkano"
-  tempJob.numberRec = 8
-  tempJob.rewardCount = 0
-  tempJob.repReward = 7
-  tempJob.moneyReward = {150, 300}
-  tempJob.categories = {"mutantmeateasy"}
-
-  ix.jobs.register(tempJob, "ItemJob2_meat_tushkano")
-
-  tempJob = nil
 
 
 -----------------------------------------------------
@@ -461,7 +39,7 @@ do
   tempJob.desc = "%d SSD."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_pcpart_ssd"
+  tempJob.requiredItem = "value_pcpart_ssd"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -479,7 +57,7 @@ do
   tempJob.desc = "%d SSDs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_pcpart_ssd"
+  tempJob.requiredItem = "value_pcpart_ssd"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_med"}}
   tempJob.rewardCount = 1
@@ -497,7 +75,7 @@ do
   tempJob.desc = "%d HDD."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_pcpart_hdd"
+  tempJob.requiredItem = "value_pcpart_hdd"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -515,7 +93,7 @@ do
   tempJob.desc = "%d HDDs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_pcpart_hdd"
+  tempJob.requiredItem = "value_pcpart_hdd"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 2
@@ -533,7 +111,7 @@ do
   tempJob.desc = "%d PSU."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_pcpart_psu"
+  tempJob.requiredItem = "value_pcpart_psu"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -551,7 +129,7 @@ do
   tempJob.desc = "%d PSUs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_pcpart_psu"
+  tempJob.requiredItem = "value_pcpart_psu"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -570,7 +148,7 @@ do
   tempJob.desc = "%d LCD Panel."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_pcpart_lcd"
+  tempJob.requiredItem = "value_pcpart_lcd"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -588,7 +166,7 @@ do
   tempJob.desc = "%d LCD Panels."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_pcpart_lcd"
+  tempJob.requiredItem = "value_pcpart_lcd"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_med"}}
   tempJob.rewardCount = 1
@@ -607,7 +185,7 @@ do
   tempJob.desc = "%d GPU."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_pcpart_gpu"
+  tempJob.requiredItem = "value_pcpart_gpu"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = 1
@@ -625,7 +203,7 @@ do
   tempJob.desc = "%d GPUs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_pcpart_gpu"
+  tempJob.requiredItem = "value_pcpart_gpu"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = 1
@@ -644,7 +222,7 @@ do
   tempJob.desc = "%d FPGAs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_pcpart_fpga"
+  tempJob.requiredItem = "value_pcpart_fpga"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_med"}}
   tempJob.rewardCount = 1
@@ -662,7 +240,7 @@ do
   tempJob.desc = "%d FPGAs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_pcpart_fpga"
+  tempJob.requiredItem = "value_pcpart_fpga"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_med"}, {"kit_mixed_med"}, 0}
   tempJob.rewardCount = 2
@@ -680,7 +258,7 @@ do
   tempJob.desc = "%d Powerbank."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_powerbank"
+  tempJob.requiredItem = "value_powerbank"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -698,7 +276,7 @@ do
   tempJob.desc = "%d Powerbanks."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_powerbank"
+  tempJob.requiredItem = "value_powerbank"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -716,7 +294,7 @@ do
   tempJob.desc = "%d Wireless Transmitter Module."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_wirelesstrans"
+  tempJob.requiredItem = "value_wirelesstrans"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -735,7 +313,7 @@ do
   tempJob.desc = "%d Wireless Transmitter Modules."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_wirelesstrans"
+  tempJob.requiredItem = "value_wirelesstrans"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_med"}}
   tempJob.rewardCount = 1
@@ -753,7 +331,7 @@ do
   tempJob.desc = "%d Capacitors."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_capacitors"
+  tempJob.requiredItem = "value_capacitors"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -771,7 +349,7 @@ do
   tempJob.desc = "%d Capacitors."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_capacitors"
+  tempJob.requiredItem = "value_capacitors"
   tempJob.numberRec = 10
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -789,7 +367,7 @@ do
   tempJob.desc = "%d Electric Tape."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_tape_electric"
+  tempJob.requiredItem = "value_tape_electric"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -807,7 +385,7 @@ do
   tempJob.desc = "%d Electric Tapes."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_tape_electric"
+  tempJob.requiredItem = "value_tape_electric"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -825,7 +403,7 @@ do
   tempJob.desc = "%d Electrical Wire."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_wire_light"
+  tempJob.requiredItem = "value_wire_light"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -843,7 +421,7 @@ do
   tempJob.desc = "%d Electrical Wires."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_wire_light"
+  tempJob.requiredItem = "value_wire_light"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -861,7 +439,7 @@ do
   tempJob.desc = "%d 1.5 Volt Batteries."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_battery"
+  tempJob.requiredItem = "value_battery"
   tempJob.numberRec = 3
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -879,7 +457,7 @@ do
   tempJob.desc = "%d 1.5 Volt Batteries."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_battery"
+  tempJob.requiredItem = "value_battery"
   tempJob.numberRec = 20
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = 1
@@ -897,7 +475,7 @@ do
   tempJob.desc = "%d 9 Volt Batteries."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_9vbattery"
+  tempJob.requiredItem = "value_9vbattery"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -915,7 +493,7 @@ do
   tempJob.desc = "%d 9 Volt Batteries."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_9vbattery"
+  tempJob.requiredItem = "value_9vbattery"
   tempJob.numberRec = 4
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -939,7 +517,7 @@ do
   tempJob.desc = "%d Household Glue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_glue_1"
+  tempJob.requiredItem = "value_glue_1"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -957,7 +535,7 @@ do
   tempJob.desc = "%d Household Glue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_glue_1"
+  tempJob.requiredItem = "value_glue_1"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}, {"kit_ammo_low"}}
   tempJob.rewardCount = 1
@@ -975,7 +553,7 @@ do
   tempJob.desc = "%d Superglue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_glue_2"
+  tempJob.requiredItem = "value_glue_2"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_low"}}
   tempJob.rewardCount = 1
@@ -993,7 +571,7 @@ do
   tempJob.desc = "%d Superglue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_glue_2"
+  tempJob.requiredItem = "value_glue_2"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}, {"kit_ammo_low"}}
   tempJob.rewardCount = 1
@@ -1012,7 +590,7 @@ do
   tempJob.desc = "%d Texture Glue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_glue_3"
+  tempJob.requiredItem = "value_glue_3"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -1030,7 +608,7 @@ do
   tempJob.desc = "%d Texture Glue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_glue_3"
+  tempJob.requiredItem = "value_glue_3"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -1049,7 +627,7 @@ do
   tempJob.desc = "%d Universal Glue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_glue_4"
+  tempJob.requiredItem = "value_glue_4"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_low"}, {"kit_ammo_low"}}
   tempJob.rewardCount = 1
@@ -1067,7 +645,7 @@ do
   tempJob.desc = "%d Universal Glue."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_glue_4"
+  tempJob.requiredItem = "value_glue_4"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_aid_low"}, {"kit_ammo_low"}, 0}
   tempJob.rewardCount = 2
@@ -1086,7 +664,7 @@ do
   tempJob.desc = "%d Military-Grade Weapon Cleaner."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_guncleaner"
+  tempJob.requiredItem = "value_guncleaner"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_low"}, {"kit_ammo_low"}}
   tempJob.rewardCount = 1
@@ -1104,7 +682,7 @@ do
   tempJob.desc = "%d Military-Grade Weapon Cleaner."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_guncleaner"
+  tempJob.requiredItem = "value_guncleaner"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_aid_high"}, {"kit_ammo_low"}}
   tempJob.rewardCount = 2
@@ -1123,7 +701,7 @@ do
   tempJob.desc = "%d Civilian-Grade Gun Oil."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_gunoil"
+  tempJob.requiredItem = "value_gunoil"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_high"}, {"kit_ammo_med"}}
   tempJob.rewardCount = 1
@@ -1141,7 +719,7 @@ do
   tempJob.desc = "%d Civilian-Grade Gun Oil."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_gunoil"
+  tempJob.requiredItem = "value_gunoil"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_aid_low"}, {"kit_ammo_med"}}
   tempJob.rewardCount = 1
@@ -1160,7 +738,7 @@ do
   tempJob.desc = "%d Weapon Lubricant Spray."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_gunspray"
+  tempJob.requiredItem = "value_gunspray"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_low"}, {"kit_ammo_med"}}
   tempJob.rewardCount = 1
@@ -1178,7 +756,7 @@ do
   tempJob.desc = "%d Weapon Lubricant Spray."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_gunspray"
+  tempJob.requiredItem = "value_gunspray"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_aid_low"}, {"kit_ammo_rare"}}
   tempJob.rewardCount = 2
@@ -1197,7 +775,7 @@ do
   tempJob.desc = "%d Firearm Lubricant."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_lubricant"
+  tempJob.requiredItem = "value_lubricant"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_m_low"}, {"kit_ammo_rare"}}
   tempJob.rewardCount = 1
@@ -1215,7 +793,7 @@ do
   tempJob.desc = "%d Firearm Lubricant."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_lubricant"
+  tempJob.requiredItem = "value_lubricant"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_ammo_m_low"}}
   tempJob.rewardCount = 1
@@ -1241,7 +819,7 @@ do
   tempJob.desc = "%d Bolts."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_bolts"
+  tempJob.requiredItem = "value_bolts"
   tempJob.numberRec = 4
   tempJob.reward = {{"762x25", { ["quantity"] = 15 }}, {"22lr", { ["quantity"] = 20 }}, {"9x18", { ["quantity"] = 15 }}, {"9x19", { ["quantity"] = 12 }}, {"45acp", { ["quantity"] = 10 }}}
   tempJob.rewardCount = 1
@@ -1259,7 +837,7 @@ do
   tempJob.desc = "%d Bolts."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_bolts"
+  tempJob.requiredItem = "value_bolts"
   tempJob.numberRec = 20
   tempJob.reward = {{"762x25"}, {"22lr"}, {"9x18"}, {"9x19"}, {"45acp"}}
   tempJob.rewardCount = {1,2}
@@ -1278,7 +856,7 @@ do
   tempJob.desc = "%d Nuts."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_nuts"
+  tempJob.requiredItem = "value_nuts"
   tempJob.numberRec = 4
   tempJob.reward = {{"762x25", { ["quantity"] = 15 }}, {"22lr", { ["quantity"] = 20 }}, {"9x18", { ["quantity"] = 15 }}, {"9x19", { ["quantity"] = 12 }}, {"45acp", { ["quantity"] = 10 }}}
   tempJob.rewardCount = 1
@@ -1296,7 +874,7 @@ do
   tempJob.desc = "%d Nuts."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_nuts"
+  tempJob.requiredItem = "value_nuts"
   tempJob.numberRec = 20
   tempJob.reward = {{"762x25"}, {"22lr"}, {"9x18"}, {"9x19"}, {"45acp"}}
   tempJob.rewardCount = {1,2}
@@ -1315,7 +893,7 @@ do
   tempJob.desc = "%d Propane Tank."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_propanetank"
+  tempJob.requiredItem = "value_propanetank"
   tempJob.numberRec = 1
   tempJob.reward = {{"12gauge"}}
   tempJob.rewardCount = 1
@@ -1333,7 +911,7 @@ do
   tempJob.desc = "%d Propane Tanks."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_propanetank"
+  tempJob.requiredItem = "value_propanetank"
   tempJob.numberRec = 2
   tempJob.reward = {{"12gauge"}, {"12gaugesg"}, {"12gaugetr"}}
   tempJob.rewardCount = {1,2}
@@ -1352,7 +930,7 @@ do
   tempJob.desc = "%d Gasoline Can."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_gasoline"
+  tempJob.requiredItem = "value_gasoline"
   tempJob.numberRec = 1
   tempJob.reward = {{"762x39", { ["quantity"] = 30 }}}
   tempJob.rewardCount = 1
@@ -1370,7 +948,7 @@ do
   tempJob.desc = "%d Gasoline Cans."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_gasoline"
+  tempJob.requiredItem = "value_gasoline"
   tempJob.numberRec = 2
   tempJob.reward = {{"762x39", { ["quantity"] = 40 }}}
   tempJob.rewardCount = 2
@@ -1389,7 +967,7 @@ do
   tempJob.desc = "%d Kerosene Can."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_kerosene"
+  tempJob.requiredItem = "value_kerosene"
   tempJob.numberRec = 1
   tempJob.reward = {{"762x54", { ["quantity"] = 20 }}}
   tempJob.rewardCount = 1
@@ -1407,7 +985,7 @@ do
   tempJob.desc = "%d Kerosene Cans."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_kerosene"
+  tempJob.requiredItem = "value_kerosene"
   tempJob.numberRec = 2
   tempJob.reward = {{"762x54"}}
   tempJob.rewardCount = 1
@@ -1426,7 +1004,7 @@ do
   tempJob.desc = "%d Diesel Motor Conditioner."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_motorclean"
+  tempJob.requiredItem = "value_motorclean"
   tempJob.numberRec = 1
   tempJob.reward = {{"45acp"}, {"45acpap"}, {"45acphp"}}
   tempJob.rewardCount = 1
@@ -1444,7 +1022,7 @@ do
   tempJob.desc = "%d Diesel Motor Conditioners."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_motorclean"
+  tempJob.requiredItem = "value_motorclean"
   tempJob.numberRec = 2
   tempJob.reward = {{"45acp"}, {"45acpap"}, {"45acphp"}}
   tempJob.rewardCount = 2
@@ -1463,7 +1041,7 @@ do
   tempJob.desc = "%d Spark Plugs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_sparkplug"
+  tempJob.requiredItem = "value_sparkplug"
   tempJob.numberRec = 2
   tempJob.reward = {{"9x19hp", { ["quantity"] = 30 }}}
   tempJob.rewardCount = 1
@@ -1481,7 +1059,7 @@ do
   tempJob.desc = "%d Spark Plugs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_sparkplug"
+  tempJob.requiredItem = "value_sparkplug"
   tempJob.numberRec = 5
   tempJob.reward = {{"9x19hp", { ["quantity"] = 30 }}}
   tempJob.rewardCount = 2
@@ -1500,7 +1078,7 @@ do
   tempJob.desc = "%d Light Bulb."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_lightbulb"
+  tempJob.requiredItem = "value_lightbulb"
   tempJob.numberRec = 1
   tempJob.reward = {{"762x25", { ["quantity"] = 15 }}, {"22lr", { ["quantity"] = 20 }}, {"9x18", { ["quantity"] = 15 }}, {"9x19", { ["quantity"] = 12 }}, {"45acp", { ["quantity"] = 10 }}}
   tempJob.rewardCount = 1
@@ -1518,7 +1096,7 @@ do
   tempJob.desc = "%d Light Bulbs."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_lightbulb"
+  tempJob.requiredItem = "value_lightbulb"
   tempJob.numberRec = 2
   tempJob.reward = {{"762x25", { ["quantity"] = 15 }}, {"22lr", { ["quantity"] = 20 }}, {"9x18", { ["quantity"] = 15 }}, {"9x19", { ["quantity"] = 12 }}, {"45acp", { ["quantity"] = 10 }}}
   tempJob.rewardCount = 2
@@ -1537,7 +1115,7 @@ do
   tempJob.desc = "%d Car Battery."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_carbattery"
+  tempJob.requiredItem = "value_carbattery"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_m_low"}}
   tempJob.rewardCount = 1
@@ -1555,7 +1133,7 @@ do
   tempJob.desc = "%d Car Batteries."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_carbattery"
+  tempJob.requiredItem = "value_carbattery"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = 1
@@ -1574,7 +1152,7 @@ do
   tempJob.desc = "%d Duct Tape."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_tape_duct"
+  tempJob.requiredItem = "value_tape_duct"
   tempJob.numberRec = 1
   tempJob.reward = {{"762x25", { ["quantity"] = 15 }}, {"22lr", { ["quantity"] = 20 }}, {"9x18", { ["quantity"] = 15 }}, {"9x19", { ["quantity"] = 12 }}, {"45acp", { ["quantity"] = 10 }}}
   tempJob.rewardCount = {1,1}
@@ -1592,7 +1170,7 @@ do
   tempJob.desc = "%d Duct Tapes."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_tape_duct"
+  tempJob.requiredItem = "value_tape_duct"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_ammo_low"}}
   tempJob.rewardCount = 1
@@ -1611,7 +1189,7 @@ do
   tempJob.desc = "%d Military-Grade Adhesive Tape."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_tape_heavy"
+  tempJob.requiredItem = "value_tape_heavy"
   tempJob.numberRec = 1
   tempJob.reward = {{"338lapua", { ["quantity"] = 15 }}, {"9x21", { ["quantity"] = 30 }}, {"57x28", { ["quantity"] = 30 }}}
   tempJob.rewardCount = 1
@@ -1629,7 +1207,7 @@ do
   tempJob.desc = "%d Military-Grade Adhesive Tape."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_tape_heavy"
+  tempJob.requiredItem = "value_tape_heavy"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_ammo_m_rare"}}
   tempJob.rewardCount = 1
@@ -1648,7 +1226,7 @@ do
   tempJob.desc = "%d Diesel Engine."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_engine"
+  tempJob.requiredItem = "value_engine"
   tempJob.numberRec = 1
   tempJob.reward = {{"44magnum"}}
   tempJob.rewardCount = {1,1}
@@ -1666,7 +1244,7 @@ do
   tempJob.desc = "%d Diesel Engines."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_engine"
+  tempJob.requiredItem = "value_engine"
   tempJob.numberRec = 2
   tempJob.reward = {{"44magnum"}, {"44magnumap"}, {"44magnumhp"}}
   tempJob.rewardCount = 2
@@ -1685,7 +1263,7 @@ do
   tempJob.desc = "%d Water Filter."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_waterfilter"
+  tempJob.requiredItem = "value_waterfilter"
   tempJob.numberRec = 1
   tempJob.reward = {{"hidestash_1"}}
   tempJob.rewardCount = 1
@@ -1703,7 +1281,7 @@ do
   tempJob.desc = "%d Water Filters."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_waterfilter"
+  tempJob.requiredItem = "value_waterfilter"
   tempJob.numberRec = 2
   tempJob.reward = {{"hidestash_2"}}
   tempJob.rewardCount = 1
@@ -1722,7 +1300,7 @@ do
   tempJob.desc = "%d Pack of Nails."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_nails"
+  tempJob.requiredItem = "value_nails"
   tempJob.numberRec = 1
   tempJob.reward = {{"762x25", { ["quantity"] = 15 }}, {"22lr", { ["quantity"] = 20 }}, {"9x18", { ["quantity"] = 15 }}, {"9x19", { ["quantity"] = 12 }}, {"45acp", { ["quantity"] = 10 }}}
   tempJob.rewardCount = 1
@@ -1740,7 +1318,7 @@ do
   tempJob.desc = "%d Packs of Nails."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_nails"
+  tempJob.requiredItem = "value_nails"
   tempJob.numberRec = 2
   tempJob.reward = {{"762x25", { ["quantity"] = 30 }}, {"22lr", { ["quantity"] = 40 }}, {"9x18", { ["quantity"] = 30 }}, {"9x19", { ["quantity"] = 24 }}, {"45acp", { ["quantity"] = 20 }}}
   tempJob.rewardCount = 1
@@ -1758,7 +1336,7 @@ do
   tempJob.desc = "%d Copper Wire."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_wire_copper"
+  tempJob.requiredItem = "value_wire_copper"
   tempJob.numberRec = 1
   tempJob.reward = {{"762x25"}}
   tempJob.rewardCount = {1,1}
@@ -1776,7 +1354,7 @@ do
   tempJob.desc = "%d Copper Wire."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_wire_copper"
+  tempJob.requiredItem = "value_wire_copper"
   tempJob.numberRec = 2
   tempJob.reward = {{"c96", { ["durability"] = 70 }}}
   tempJob.rewardCount = {1,1}
@@ -1794,7 +1372,7 @@ do
   tempJob.desc = "%d Heavy Duty Cabling."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_wire_heavy"
+  tempJob.requiredItem = "value_wire_heavy"
   tempJob.numberRec = 1
   tempJob.reward = {{"9x19hp"}}
   tempJob.rewardCount = 1
@@ -1812,7 +1390,7 @@ do
   tempJob.desc = "%d Heavy Duty Cabling."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_wire_heavy"
+  tempJob.requiredItem = "value_wire_heavy"
   tempJob.numberRec = 2
   tempJob.reward = {{"p99", { ["durability"] = 70 }}}
   tempJob.rewardCount = 1
@@ -1831,7 +1409,7 @@ do
   tempJob.desc = "%d Plastic Hose."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_hose"
+  tempJob.requiredItem = "value_hose"
   tempJob.numberRec = 1
   tempJob.reward = {{"357magnum", { ["quantity"] = 24 }}}
   tempJob.rewardCount = {1,1}
@@ -1849,7 +1427,7 @@ do
   tempJob.desc = "%d Plastic Hoses."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_hose"
+  tempJob.requiredItem = "value_hose"
   tempJob.numberRec = 2
   tempJob.reward = {{"swr8", { ["durability"] = 65 }}}
   tempJob.rewardCount = 1
@@ -1868,7 +1446,7 @@ do
   tempJob.desc = "%d Paracord."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_paracord"
+  tempJob.requiredItem = "value_paracord"
   tempJob.numberRec = 1
   tempJob.reward = {{"binoculars_2"}}
   tempJob.rewardCount = 1
@@ -1886,7 +1464,7 @@ do
   tempJob.desc = "%d Paracord."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_paracord"
+  tempJob.requiredItem = "value_paracord"
   tempJob.numberRec = 2
   tempJob.reward = {{"22lr"}}
   tempJob.rewardCount = 1
@@ -1904,7 +1482,7 @@ do
   tempJob.desc = "%d Alkaline Booster."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_detergent"
+  tempJob.requiredItem = "value_detergent"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -1922,7 +1500,7 @@ do
   tempJob.desc = "%d Alkaline Booster."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_detergent"
+  tempJob.requiredItem = "value_detergent"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 2
@@ -1941,7 +1519,7 @@ do
   tempJob.desc = "%d Toothpaste."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_toothpaste"
+  tempJob.requiredItem = "value_toothpaste"
   tempJob.numberRec = 1
   tempJob.reward = {{"9x19", { ["quantity"] = 15 }}}
   tempJob.rewardCount = 1
@@ -1959,7 +1537,7 @@ do
   tempJob.desc = "%d Toothpaste."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_toothpaste"
+  tempJob.requiredItem = "value_toothpaste"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_ammo_low"}}
   tempJob.rewardCount = 1
@@ -1978,7 +1556,7 @@ do
   tempJob.desc = "%d Toilet Paper."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_toiletpaper"
+  tempJob.requiredItem = "value_toiletpaper"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_low"}}
   tempJob.rewardCount = {1,1}
@@ -1996,7 +1574,7 @@ do
   tempJob.desc = "%d Toilet Papers."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_toiletpaper"
+  tempJob.requiredItem = "value_toiletpaper"
   tempJob.numberRec = 2
   tempJob.reward = {{"value_statue_horse"}}
   tempJob.rewardCount = 1
@@ -2024,7 +1602,7 @@ do
   tempJob.desc = "%d Cat Statuette."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_statue_cat"
+  tempJob.requiredItem = "value_statue_cat"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}
@@ -2042,7 +1620,7 @@ do
   tempJob.desc = "%d Horse Statuette."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_statue_horse"
+  tempJob.requiredItem = "value_statue_horse"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}
@@ -2060,7 +1638,7 @@ do
   tempJob.desc = "%d Lion Statuette."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_statue_lion"
+  tempJob.requiredItem = "value_statue_lion"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}
@@ -2078,7 +1656,7 @@ do
   tempJob.desc = "%d Watch."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_watch"
+  tempJob.requiredItem = "value_watch"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}
@@ -2097,7 +1675,7 @@ do
   tempJob.desc = "%d Gold Chain."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_goldchain"
+  tempJob.requiredItem = "value_goldchain"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = 2
@@ -2116,7 +1694,7 @@ do
   tempJob.desc = "%d Old Smartphone (Broken)."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_phone_old"
+  tempJob.requiredItem = "value_phone_old"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}
@@ -2134,7 +1712,7 @@ do
   tempJob.desc = "%d New Smartphone (Broken)."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_phone_new"
+  tempJob.requiredItem = "value_phone_new"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}
@@ -2153,7 +1731,7 @@ do
   tempJob.desc = "%d Empty Notebook."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_1"
+  tempJob.requiredItem = "value_documents_1"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}
@@ -2171,7 +1749,7 @@ do
   tempJob.desc = "%d Trading Ledger."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_2"
+  tempJob.requiredItem = "value_documents_2"
   tempJob.numberRec = 1
   tempJob.reward = {{"sr3m", { ["durability"] = 70 }}}
   tempJob.rewardCount = 1
@@ -2189,7 +1767,7 @@ do
   tempJob.desc = "%d Scientist Curriculum Vitae."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_3"
+  tempJob.requiredItem = "value_documents_3"
   tempJob.numberRec = 1
   tempJob.reward = {{"taurusjudge", { ["durability"] = 70 }}}
   tempJob.rewardCount = {1,1}
@@ -2207,7 +1785,7 @@ do
   tempJob.desc = "%d Scribbled Scientific Notes."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_4"
+  tempJob.requiredItem = "value_documents_4"
   tempJob.numberRec = 1
   tempJob.reward = {{"mp153", { ["durability"] = 70 }}}
   tempJob.rewardCount = 1
@@ -2225,7 +1803,7 @@ do
   tempJob.desc = "%d Handdrawn Anomaly Map."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_5"
+  tempJob.requiredItem = "value_documents_5"
   tempJob.numberRec = 1
   tempJob.reward = {{"pp1901vityaz", { ["durability"] = 70 }}}
   tempJob.rewardCount = {1,1}
@@ -2243,7 +1821,7 @@ do
   tempJob.desc = "%d Pump Station Checklist."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_6"
+  tempJob.requiredItem = "value_documents_6"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}
@@ -2261,7 +1839,7 @@ do
   tempJob.desc = "%d Firearm Assembly Illustration."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_7"
+  tempJob.requiredItem = "value_documents_7"
   tempJob.numberRec = 1
   tempJob.reward = {{"c96carbine", { ["durability"] = 70 }}}
   tempJob.rewardCount = {1,1}
@@ -2279,7 +1857,7 @@ do
   tempJob.desc = "%d Unreadable Torn Note."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_8"
+  tempJob.requiredItem = "value_documents_8"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}
@@ -2297,7 +1875,7 @@ do
   tempJob.desc = "%d Swamps Research Documents."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_9"
+  tempJob.requiredItem = "value_documents_9"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}
@@ -2316,7 +1894,7 @@ do
   tempJob.desc = "%d Anomalous Material Report."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_10"
+  tempJob.requiredItem = "value_documents_10"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}
@@ -2334,7 +1912,7 @@ do
   tempJob.desc = "%d Artifact Research Ledger."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_11"
+  tempJob.requiredItem = "value_documents_11"
   tempJob.numberRec = 1
   tempJob.reward = {{"mateba", { ["durability"] = 70 }}}
   tempJob.rewardCount = {1,1}
@@ -2352,7 +1930,7 @@ do
   tempJob.desc = "%d Soviet Manual of Arms."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_12"
+  tempJob.requiredItem = "value_documents_12"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}
@@ -2370,7 +1948,7 @@ do
   tempJob.desc = "%d Manufacture of Gear Wheels."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_13"
+  tempJob.requiredItem = "value_documents_13"
   tempJob.numberRec = 1
   tempJob.reward = {{"pp2000", { ["durability"] = 70 }}}
   tempJob.rewardCount = {1,1}
@@ -2388,7 +1966,7 @@ do
   tempJob.desc = "%d Kevlar Sewing Manual."
   tempJob.icon = "propic/event/loot"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_value_documents_14"
+  tempJob.requiredItem = "value_documents_14"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = {1,1}

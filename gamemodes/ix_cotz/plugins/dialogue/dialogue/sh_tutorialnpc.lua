@@ -20,9 +20,9 @@ DIALOGUE.addTopic("GREETING", {
 		if (SERVER) then
 			if target:GetNetVar("possibleJobs") == nil then
 				local possibleJobs = {}
-				possibleJobs["easy"] = {"mutantkilleasy", "town"} -- TODO: Make sure these are updated
-				possibleJobs["medium"] = {"mutantkillmedium"}
-				possibleJobs["hard"] = {"mutantkillhard"}			
+				possibleJobs["easy"] = {"mutantkilleasy", "item_rare_meal_NPC_easy"} -- TODO: Make sure these are updated
+				possibleJobs["medium"] = {"mutantkillmedium", "item_rare_meal_NPC_medium"}
+				possibleJobs["hard"] = {"mutantkillhard", "item_rare_meal_NPC_hard"}			
 	
 				target:SetNetVar("possibleJobs", possibleJobs)
 			end
@@ -626,9 +626,9 @@ DIALOGUE.addTopic("BackTopic", {
 		if (SERVER) then
 			if target:GetNetVar("possibleJobs") == nil then
 				local possibleJobs = {}
-				possibleJobs["easy"] = {"mutantkilleasy"}
-				possibleJobs["medium"] = {"mutantkillmedium"}
-				possibleJobs["hard"] = {"mutantkillhard"}			
+				possibleJobs["easy"] = {"mutantkilleasy", "item_rare_meal_NPC_easy"} -- TODO: Make sure these are updated
+				possibleJobs["medium"] = {"mutantkillmedium", "item_rare_meal_NPC_medium"}
+				possibleJobs["hard"] = {"mutantkillhard", "item_rare_meal_NPC_hard"}			
 	
 				target:SetNetVar("possibleJobs", possibleJobs)
 			end
