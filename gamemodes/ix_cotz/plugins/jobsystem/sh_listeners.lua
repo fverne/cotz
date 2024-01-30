@@ -22,19 +22,20 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
   local class = string.lower(entity:GetClass())
   if attacker:IsPlayer() then
 
+    if string.find( class, "npc_human" ) then
+      CalculateCredit(entity, attacker, "groupHumanoidKilled")
+    end
+
     if string.find( class, "npc_human_bandit" ) then
       CalculateCredit(entity, attacker, "banditKilled")
-      CalculateCredit(entity, attacker, "groupHumanoidKilled")
     end
 
     if string.find( class, "npc_human_merc" ) then
       CalculateCredit(entity, attacker, "mercKilled")
-      CalculateCredit(entity, attacker, "groupHumanoidKilled")
     end
 
     if string.find( class, "npc_human_mili" ) then
       CalculateCredit(entity, attacker, "miliKilled")
-      CalculateCredit(entity, attacker, "groupHumanoidKilled")
     end
 
     if(string.find( class, "npc_mutant" )) then
