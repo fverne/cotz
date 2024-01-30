@@ -43,7 +43,7 @@ ix.jobs.jobsbycategory = ix.jobs.jobsbycategory or {}
 
 function ix.jobs.isStructValid(jobstruct)
   if (!jobstruct.name or type(jobstruct.name) != "string") then return false end
-  if (!jobstruct.listenTrigger or type(jobstruct.listenTrigger) != "string") then return false end
+  -- if (!jobstruct.listenTrigger or type(jobstruct.listenTrigger) != "string") then return false end -- not needed for item jobs
   if !jobstruct.numberRec then return false end
   if !jobstruct.icon then jobstruct.icon = Material("path/to/defaulticon.png") end
 
@@ -157,9 +157,8 @@ if SERVER then
             curJobs[k].isCompleted = true
             netstream.Start(self, "ix_COTZPlayPDASound", 2)
           end
-        else
+        elseif (curProgress == curMax) then
           curJobs[k].isCompleted = true
-          netstream.Start(self, "ix_COTZPlayPDASound", 2)
         end
       end
     end
