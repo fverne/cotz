@@ -104,8 +104,8 @@ ix.randomitems.tables["task_reward_ammo_04"] = {
 }
 
 ix.randomitems.tables["task_reward_ammo_04_small"] = { 
-    {250, {"12gaugetr", {["quantity"] = 15}},
-    {250, {"9x39", {["quantity"] = 30}}}},
+    {250, {"12gaugetr", {["quantity"] = 15}}},
+    {250, {"9x39", {["quantity"] = 30}}},
     {250, {"50ae", {["quantity"] = 30}}},
     {250, {"57x28", {["quantity"] = 30}}},
     {250, {"338lapua", {["quantity"] = 30}}},
@@ -114,8 +114,8 @@ ix.randomitems.tables["task_reward_ammo_04_small"] = {
 }
 
 ix.randomitems.tables["task_reward_ammo_04_aphp"] = { 
-    {250, {"12gaugetr", {["quantity"] = 15}}, -- doesnt have ap or hp
-    {250, {"9x39ap", {["quantity"] = 30}}}},
+    {250, {"12gaugetr", {["quantity"] = 15}}}, -- doesnt have ap or hp
+    {250, {"9x39ap", {["quantity"] = 30}}},
     {250, {"9x39hp", {["quantity"] = 30}}},
     {250, {"50aeap", {["quantity"] = 30}}},
     {250, {"50aehp", {["quantity"] = 30}}},
