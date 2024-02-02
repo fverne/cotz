@@ -447,7 +447,8 @@ do
 
   tempJob = nil
 
-    --Scan 1 areas
+
+
   local tempJob = {}
 
   tempJob.name = "Stash package."
@@ -456,11 +457,11 @@ do
   tempJob.tier = 1
   tempJob.listenTrigger = "stashPackageNpc"
   tempJob.numberRec = 1
-  tempJob.reward = {{"kit_ammo_med"}}
-  tempJob.rewardCount = 5
-  tempJob.repReward = 99999999
-  tempJob.moneyReward = { 9999, 99999 }
-  tempJob.categories = {"stashpackagenpc"}
+  tempJob.reward = {}
+  tempJob.rewardCount = 0
+  tempJob.repReward = 30
+  tempJob.moneyReward = { 4500, 5500 }
+  tempJob.categories = {"stashpackagenpc_easy"}
   tempJob.OnTaskGet = function(client) 
     local char = client:GetCharacter()
     if(char)then
@@ -474,10 +475,72 @@ do
   tempJob.OnTaskComplete = function(client) 
   end
 
-  ix.jobs.register(tempJob, "stashPackageNpc")
+  ix.jobs.register(tempJob, "stashPackageNpc_easy")
 
   tempJob = nil
 
+
+  local tempJob = {}
+
+  tempJob.name = "Stash Heavy Package."
+  tempJob.desc = "Package."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "stashPackageNpc_heavy"
+  tempJob.numberRec = 1
+  tempJob.reward = {}
+  tempJob.rewardCount = 0
+  tempJob.repReward = 40
+  tempJob.moneyReward = { 11500, 12500 }
+  tempJob.categories = {"stashpackagenpc_medium"}
+  tempJob.OnTaskGet = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        inv:Add("stashpackage_heavy", 1, { ["finishedtrigger"] = "stashPackageNpc_heavy", ["map"] = game.GetMap()} )
+        ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage_heavy"].name)
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+  end
+
+  ix.jobs.register(tempJob, "stashPackageNpc_medium")
+
+  tempJob = nil
+
+
+
+  local tempJob = {}
+
+  tempJob.name = "Stash package."
+  tempJob.desc = "Package."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "stashPackageNpc_vheavy"
+  tempJob.numberRec = 1
+  tempJob.reward = {}
+  tempJob.rewardCount = 0
+  tempJob.repReward = 50
+  tempJob.moneyReward = { 18500, 19500 }
+  tempJob.categories = {"stashpackagenpc_hard"}
+  tempJob.OnTaskGet = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        inv:Add("stashpackage_veryheavy", 1, { ["finishedtrigger"] = "stashPackageNpc_vheavy", ["map"] = game.GetMap()} )
+        ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage_veryheavy"].name)
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+  end
+
+  ix.jobs.register(tempJob, "stashPackageNpc_hard")
+
+  tempJob = nil
 
 end
 
