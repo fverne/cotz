@@ -47,8 +47,8 @@ tempJob.icon = "propic/event/mutanthunt"
 tempJob.tier = 2
 tempJob.listenTrigger = "mutantKilled"
 tempJob.numberRec = 24
-tempJob.reward = {{"skorpion", {["durability"] = 60}}, "kit_ammo_m_low"}
-tempJob.rewardCount = 1
+tempJob.reward = {"kit_ammo_m_low"}
+tempJob.rewardCount = 2
 tempJob.repReward = 21
 tempJob.moneyReward = {1250, 1650}
 tempJob.categories = {"mutantkillgroupeasy"}
@@ -65,8 +65,8 @@ tempJob.icon = "propic/event/mutanthunt"
 tempJob.tier = 2
 tempJob.listenTrigger = "mutantKilled"
 tempJob.numberRec = 40
-tempJob.reward = {{"mp153", {["durability"] = 60}}, "kit_ammo_med"}
-tempJob.rewardCount = 1
+tempJob.reward = {"kit_ammo_med"}
+tempJob.rewardCount = 2
 tempJob.repReward = 34
 tempJob.moneyReward = {2500, 2900}
 tempJob.categories = {"mutantkillgroupeasy"}
