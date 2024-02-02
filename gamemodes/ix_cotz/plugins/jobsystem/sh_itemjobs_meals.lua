@@ -343,7 +343,6 @@ tempJob.tier = 1
 tempJob.requiredItem = "meal_vareshka"
 tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier_04_small"}}
-tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
 tempJob.rewardCount = 1
 tempJob.repReward = 9
 tempJob.moneyReward = {1650, 1850}
