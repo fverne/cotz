@@ -788,20 +788,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"StartBarter",
 		"GOODBYE"
 	},
-	preCallback = function(self, client, target)
-		-- Tasks
-		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"information", "riches", "bandits"}, 4)
-		if (SERVER) then
-			if target:GetNetVar("possibleJobs") == nil then
-				local possibleJobs = {}
-				possibleJobs["easy"] = {"mutantkilleasy"} -- TODO: Make sure these are updated
-				possibleJobs["medium"] = {"mutantkillmedium"}
-				possibleJobs["hard"] = {"mutantkillhard"}			
-	
-				target:SetNetVar("possibleJobs", possibleJobs)
-			end
-		end
-		
+	preCallback = function(self, client, target)		
 		-- Special Sale
 		if (SERVER) then
 			local cooldown = target:GetNetVar("lastSpecialSale", 0)

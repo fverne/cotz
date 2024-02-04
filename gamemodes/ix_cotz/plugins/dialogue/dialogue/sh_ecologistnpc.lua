@@ -455,7 +455,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"electronics", "information", "dataextract", "artifactcollect_eco"}, 4)
+
 	end
 })
 

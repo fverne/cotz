@@ -487,17 +487,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"scanarea", "electronics"}, 4)
-		if (SERVER) then
-			if target:GetNetVar("possibleJobs") == nil then
-				local possibleJobs = {}
-				possibleJobs["easy"] = {"mutantkilleasy"} -- TODO: Make sure these are updated
-				possibleJobs["medium"] = {"mutantkillmedium"}
-				possibleJobs["hard"] = {"mutantkillhard"}			
-	
-				target:SetNetVar("possibleJobs", possibleJobs)
-			end
-		end
+
 	end
 })
 

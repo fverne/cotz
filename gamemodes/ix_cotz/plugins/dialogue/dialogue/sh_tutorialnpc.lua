@@ -20,9 +20,9 @@ DIALOGUE.addTopic("GREETING", {
 		if (SERVER) then
 			if target:GetNetVar("possibleJobs") == nil then
 				local possibleJobs = {}
-				possibleJobs["easy"] = {"mutantkilleasy", "item_rare_meal_NPC_easy"} -- TODO: Make sure these are updated
-				possibleJobs["medium"] = {"mutantkillmedium", "item_rare_meal_NPC_medium"}
-				possibleJobs["hard"] = {"mutantkillhard", "item_rare_meal_NPC_hard"}			
+				possibleJobs["easy"] = {"mutantkilleasy", "item_rare_meal_NPC_easy", "item_part_NPC_easy"} -- TODO: Make sure these are updated
+				possibleJobs["medium"] = {"mutantkillmedium", "item_rare_meal_NPC_medium", "item_part_NPC_medium"}
+				possibleJobs["hard"] = {"mutantkillhard", "item_rare_meal_NPC_hard", "item_part_NPC_hard"}			
 	
 				target:SetNetVar("possibleJobs", possibleJobs)
 			end
@@ -621,18 +621,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkilleasy", "mutantkillmedium", "town"}, 4)
-		
-		if (SERVER) then
-			if target:GetNetVar("possibleJobs") == nil then
-				local possibleJobs = {}
-				possibleJobs["easy"] = {"mutantkilleasy", "item_rare_meal_NPC_easy"}
-				possibleJobs["medium"] = {"mutantkillmedium", "item_rare_meal_NPC_medium"}
-				possibleJobs["hard"] = {"mutantkillhard", "item_rare_meal_NPC_hard"}			
-	
-				target:SetNetVar("possibleJobs", possibleJobs)
-			end
-		end
+				
 	end
 })
 
