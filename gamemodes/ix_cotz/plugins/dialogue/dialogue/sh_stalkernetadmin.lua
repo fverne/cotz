@@ -17,9 +17,9 @@ DIALOGUE.addTopic("GREETING", {
 		if (SERVER) then
 			if target:GetNetVar("possibleJobs") == nil then
 				local possibleJobs = {}
-				possibleJobs["easy"] = {"mutantkilleasy"} -- TODO: Make sure these are updated
-				possibleJobs["medium"] = {"mutantkillmedium"}
-				possibleJobs["hard"] = {"mutantkillhard"}			
+				possibleJobs["easy"] = {"scanarea"} -- TODO: Make sure these are updated
+				possibleJobs["medium"] = {"scanarea"}
+				possibleJobs["hard"] = {"scanarea"}			
 	
 				target:SetNetVar("possibleJobs", possibleJobs)
 			end

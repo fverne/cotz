@@ -837,7 +837,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {10000, 13000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_hard"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_arachno")
 
@@ -855,7 +855,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 30
   tempJob.moneyReward = {16500, 18400}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_hard"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_battery")
 
@@ -873,7 +873,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 15
   tempJob.moneyReward = {7000, 9500}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_blowncap")
 
@@ -891,7 +891,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 15
   tempJob.moneyReward = {100, 900}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_bolt")
 
@@ -909,7 +909,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 25
   tempJob.moneyReward = {300, 2100}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob2eco_artifact_bolt")
 
@@ -927,7 +927,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 40
   tempJob.moneyReward = {1000, 6000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob3eco_artifact_bolt")
 
@@ -945,7 +945,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 15
   tempJob.moneyReward = {2000, 4500}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_bonecluster")
 
@@ -963,7 +963,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 25
   tempJob.moneyReward = {5000, 8000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob2eco_artifact_bonecluster")
 
@@ -981,7 +981,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 15
   tempJob.moneyReward = {27000, 32000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_capacitor")
 
@@ -999,7 +999,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {6200, 8600}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_cell")
 
@@ -1017,7 +1017,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {10000, 13000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_crystal")
 
@@ -1035,7 +1035,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {2500, 3800}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_droplet")
 
@@ -1053,7 +1053,7 @@ do
   tempJob.rewardCount = 3
   tempJob.repReward = 20
   tempJob.moneyReward = {2000, 4000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_dwarfgalaxy")
 
@@ -1071,7 +1071,7 @@ do
   tempJob.rewardCount = 0
   tempJob.repReward = 20
   tempJob.moneyReward = {10000, 16000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob2eco_artifact_dwarfgalaxy")
 
@@ -1089,7 +1089,7 @@ do
   tempJob.rewardCount = 0
   tempJob.repReward = 20
   tempJob.moneyReward = {15000, 19000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_eye")
 
@@ -1107,7 +1107,7 @@ do
   tempJob.rewardCount = 2
   tempJob.repReward = 20
   tempJob.moneyReward = {24000, 29000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_hard"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_flame")
 
@@ -1125,7 +1125,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {3000, 5500}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_flash")
 
@@ -1143,7 +1143,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {3000, 5500}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_gaia")
 
@@ -1161,7 +1161,7 @@ do
   tempJob.rewardCount = 2
   tempJob.repReward = 20
   tempJob.moneyReward = {18000, 23000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_hard"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_galaxy")
 
@@ -1179,7 +1179,7 @@ do
   tempJob.rewardCount = 0
   tempJob.repReward = 20
   tempJob.moneyReward = {26000, 30000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_hard"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_galaxy")
 
@@ -1197,7 +1197,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {2000, 4000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_hard"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_halo")
 
@@ -1215,7 +1215,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {6500, 8400}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_kolobok")
 
@@ -1233,7 +1233,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {6000, 9000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_mamasbeads")
 
@@ -1251,7 +1251,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {3000, 5500}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_mementomori")
 
@@ -1269,7 +1269,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {10000, 13000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_hard"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_mica")
 
@@ -1287,7 +1287,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {8500, 11000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_hard"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_moonlight")
 
@@ -1305,7 +1305,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {8500, 11000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_hard"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_moonlight")
 
@@ -1323,7 +1323,7 @@ do
   tempJob.rewardCount = 0
   tempJob.repReward = 20
   tempJob.moneyReward = {9000, 15000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_mycelia")
 
@@ -1341,7 +1341,7 @@ do
   tempJob.rewardCount = 2
   tempJob.repReward = 20
   tempJob.moneyReward = {1000, 2000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_panacea")
 
@@ -1359,7 +1359,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {500, 1000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_slime")
 
@@ -1377,7 +1377,7 @@ do
   tempJob.rewardCount = 2
   tempJob.repReward = 20
   tempJob.moneyReward = {2500, 3500}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob2eco_artifact_slime")
 
@@ -1395,7 +1395,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {4000, 5000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_slug")
 
@@ -1413,7 +1413,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {500, 1000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_sparkler")
 
@@ -1431,7 +1431,7 @@ do
   tempJob.rewardCount = 2
   tempJob.repReward = 20
   tempJob.moneyReward = {1500, 3000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob2eco_artifact_sparkler")
 
@@ -1449,7 +1449,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {500, 1000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_thorn")
 
@@ -1467,7 +1467,7 @@ do
   tempJob.rewardCount = 2
   tempJob.repReward = 20
   tempJob.moneyReward = {1500, 3000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_easy"}
 
   ix.jobs.register(tempJob, "ItemJob2eco_artifact_thorn")
 
@@ -1485,7 +1485,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = {3000, 4000}
-  tempJob.categories = {"artifactcollect_eco"}
+  tempJob.categories = {"artifactcollect_NPC_medium"}
 
   ix.jobs.register(tempJob, "ItemJob1eco_artifact_urchin")
 
