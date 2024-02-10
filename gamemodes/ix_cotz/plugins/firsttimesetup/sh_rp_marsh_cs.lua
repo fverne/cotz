@@ -39,7 +39,12 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
       template = "owlnpc",
       position = Vector(-6728.806152, -9394.196289, 4962.929199),
       angles = Angle(0.000, -89.888, 0.000)
-    }
+    },
+    {
+      template = "medicnpc",
+      position = Vector(-7328.550293, -9329.122070, 4973.031250),
+      angles = Angle(0.000, -90, 0.000)
+    },
   },
 
   plugindata = {
