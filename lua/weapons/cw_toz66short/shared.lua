@@ -75,7 +75,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 50
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/tayley/v_bm16.mdl"
 SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_toz66_obrez.mdl"
@@ -114,7 +114,7 @@ SWEP.Chamberable = false
 
 
 SWEP.ReloadSpeed = 1.2
-SWEP.ReloadTime = 3.2
-SWEP.ReloadTime_Empty = 3.2
-SWEP.ReloadHalt = 3.5
-SWEP.ReloadHalt_Empty = 3.5
+SWEP.ReloadTime = 3.4
+SWEP.ReloadTime_Empty = 3.4
+SWEP.ReloadHalt = 3.7
+SWEP.ReloadHalt_Empty = 3.7

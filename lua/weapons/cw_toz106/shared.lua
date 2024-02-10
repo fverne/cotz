@@ -138,7 +138,7 @@ SWEP.DeployTime = 1
 SWEP.ReloadSpeed = 1
 SWEP.ReloadTime = 2.8
 SWEP.ReloadTime_Empty = 3
-SWEP.ReloadHalt = 4.5
+SWEP.ReloadHalt = 3.4
 SWEP.ReloadHalt_Empty = 4.7
 
 SWEP.Chamberable = true

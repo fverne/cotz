@@ -136,7 +136,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "7.62x54MMR"
 
-SWEP.FireDelay = 1.45
+SWEP.FireDelay = 1.25
 SWEP.FireSound = "CW_W9422_FIRE"
 SWEP.FireSoundSuppressed = "CW_WS_MOSIN_SUB"
 SWEP.Recoil = 3.1

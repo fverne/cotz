@@ -157,14 +157,14 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".22LR"
 
-SWEP.FireDelay = 1.45
+SWEP.FireDelay = 1.6
 SWEP.FireSound = "CW_SAKO85_FIRE"
 SWEP.FireSoundSuppressed = "CW_WS_MOSIN_SUB"
 SWEP.Recoil = 0.7
 SWEP.AimViewModelFOV = 50
 SWEP.CustomizationMenuScale = 0.018
 SWEP.ForceBackToHipAfterAimedShot = true
-SWEP.GlobalDelayOnShoot = 1.1
+SWEP.GlobalDelayOnShoot = 1.5
 
 SWEP.HipSpread = 0.2
 SWEP.AimSpread = 0.005

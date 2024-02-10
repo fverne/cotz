@@ -143,11 +143,11 @@ SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 42
 SWEP.DeployTime = 0.2
---SWEP.Chamberable = false
+SWEP.Chamberable = false
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2.1
-SWEP.ReloadHalt = 2.1
+SWEP.ReloadTime = 2.4
+SWEP.ReloadHalt = 2.5
 
-SWEP.ReloadTime_Empty = 1.69
-SWEP.ReloadHalt_Empty = 2.3
+SWEP.ReloadTime_Empty = 2.4
+SWEP.ReloadHalt_Empty = 2.5

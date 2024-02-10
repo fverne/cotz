@@ -112,8 +112,8 @@ SWEP.DeployTime = 0.5
 SWEP.ReloadSpeed = 1.2
 SWEP.ReloadTime = 3.5
 SWEP.ReloadTime_Empty = 2.7
-SWEP.ReloadHalt = 5.5
-SWEP.ReloadHalt_Empty = 4.5
+SWEP.ReloadHalt = 5.75
+SWEP.ReloadHalt_Empty = 4.85
 
 
 function SWEP:IndividualInitialize()

@@ -168,7 +168,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".338 Lapua"
 
-SWEP.FireDelay = 1.45
+SWEP.FireDelay = 1.9
 SWEP.FireSound = "CW_RMSR_FIRE"
 SWEP.FireSoundSuppressed = "CW_RMSR_SUB"
 SWEP.Recoil = 7.2

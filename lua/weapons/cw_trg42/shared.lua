@@ -189,8 +189,8 @@ SWEP.Damage = 290
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2
-SWEP.ReloadTime_Empty = 2
-SWEP.ReloadHalt = 0
-SWEP.ReloadHalt_Empty = 0
+SWEP.ReloadTime = 2.2
+SWEP.ReloadTime_Empty = 3.0
+SWEP.ReloadHalt = 2.4
+SWEP.ReloadHalt_Empty = 3.1
 SWEP.Chamberable = false
