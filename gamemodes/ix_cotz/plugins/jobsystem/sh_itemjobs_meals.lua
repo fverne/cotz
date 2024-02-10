@@ -1,6 +1,6 @@
-------------------------------------------------------
-------------- ITEM RETRIEVAL - COMMON MEAT -----------
-------------------------------------------------------
+-------------------------------------------------------
+------------- ITEM RETRIEVAL - COMMON MEALS -----------
+-------------------------------------------------------
 
 local tempJob = {}
 
@@ -13,7 +13,6 @@ tempJob.numberRec = 4
 tempJob.reward = {{"kit_reward_tier00_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 325}
 tempJob.categories = {"item_common_meal_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_meal_blinddog")
@@ -31,7 +30,6 @@ tempJob.numberRec = 8
 tempJob.reward = {{"kit_reward_tier00_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {275, 425}
 tempJob.categories = {"item_common_meal_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_meal_blinddog")
@@ -52,7 +50,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier01_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 275}
 tempJob.categories = {"item_common_meal_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_meal_boar")
@@ -70,7 +67,6 @@ tempJob.numberRec = 5
 tempJob.reward = {{"kit_reward_tier01_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 15
-tempJob.moneyReward = {325, 425}
 tempJob.categories = {"item_common_meal_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_meal_boar")
@@ -125,7 +121,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier06_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 38
-tempJob.moneyReward = {4500, 5500}
 tempJob.chimeraegories = {"item_common_meal_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob1_meal_chimera")
@@ -143,7 +138,6 @@ tempJob.numberRec = 3
 tempJob.reward = {{"kit_reward_tier06_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 45
-tempJob.moneyReward = {6500, 8000}
 tempJob.chimeraegories = {"item_common_meal_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob2_meal_chimera")
@@ -162,7 +156,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier03_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 9
-tempJob.moneyReward = {950, 1250}
 tempJob.tarkegories = {"item_common_meal_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_meal_tark")
@@ -180,7 +173,6 @@ tempJob.numberRec = 3
 tempJob.reward = {{"kit_reward_tier03_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 20
-tempJob.moneyReward = {1150, 1300}
 tempJob.tarkegories = {"item_common_meal_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_meal_tark")
@@ -200,7 +192,6 @@ tempJob.numberRec = 3
 tempJob.reward = {{"kit_reward_tier00_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 6
-tempJob.moneyReward = {75, 200}
 tempJob.categories = {"item_common_meal_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_meal_flesh")
@@ -218,7 +209,6 @@ tempJob.numberRec = 6
 tempJob.reward = {{"kit_reward_tier00_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 14
-tempJob.moneyReward = {175, 250}
 tempJob.categories = {"item_common_meal_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_meal_flesh")
@@ -273,7 +263,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier01_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 4
-tempJob.moneyReward = {400, 600}
 tempJob.categories = {"item_common_meal_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_meal_pseudodog")
@@ -291,7 +280,6 @@ tempJob.numberRec = 5
 tempJob.reward = {{"kit_reward_tier01_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {500, 650}
 tempJob.categories = {"item_common_meal_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_meal_pseudodog")
@@ -309,7 +297,6 @@ tempJob.requiredItem = "meal_tushkano"
 tempJob.numberRec = 4
 tempJob.rewardCount = 0
 tempJob.repReward = 1
-tempJob.moneyReward = {50, 150}
 tempJob.categories = {"item_common_meal_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_meal_tushkano")
@@ -326,7 +313,6 @@ tempJob.requiredItem = "meal_tushkano"
 tempJob.numberRec = 8
 tempJob.rewardCount = 0
 tempJob.repReward = 7
-tempJob.moneyReward = {150, 300}
 tempJob.categories = {"item_common_meal_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_meal_tushkano")
@@ -345,7 +331,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier04_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 9
-tempJob.moneyReward = {1650, 1850}
 tempJob.vareshkaegories = {"item_common_meal_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_meal_vareshka")
@@ -363,7 +348,6 @@ tempJob.numberRec = 4
 tempJob.reward = {{"kit_reward_tier04_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 20
-tempJob.moneyReward = {2150, 2300}
 tempJob.vareshkaegories = {"item_common_meal_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_meal_vareshka")
@@ -381,7 +365,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier07_small"}}
 tempJob.rewardCount = 2
 tempJob.repReward = 9
-tempJob.moneyReward = {2450, 2550}
 tempJob.pseudogiantegories = {"item_common_meal_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob1_meal_pseudogiant")
@@ -399,7 +382,6 @@ tempJob.numberRec = 3
 tempJob.reward = {{"kit_reward_tier07_large"}}
 tempJob.rewardCount = 3
 tempJob.repReward = 20
-tempJob.moneyReward = {2650, 2800}
 tempJob.pseudogiantegories = {"item_common_meal_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob2_meal_pseudogiant")

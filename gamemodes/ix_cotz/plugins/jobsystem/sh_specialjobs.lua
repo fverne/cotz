@@ -482,7 +482,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "Stash Heavy Package."
+  tempJob.name = "Stash heavy package."
   tempJob.desc = "Package."
   tempJob.icon = "propic/event/area"
   tempJob.tier = 1
@@ -514,7 +514,7 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "Stash package."
+  tempJob.name = "Stash very heavy package."
   tempJob.desc = "Package."
   tempJob.icon = "propic/event/area"
   tempJob.tier = 1

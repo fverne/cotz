@@ -19,3 +19,57 @@ ix.randomitems.tables["coins"] = {
   {1000, {"value_currency_rubles_coins", {["quantity"] = 50}}},
   { 500, {"value_currency_rubles_coins", {["quantity"] = 75}}},
 }
+
+ix.randomitems.tables["task_reward_money_00"] = {
+  { 100, {"bagrubles", {["quantity"] = 210}}},
+  { 50, {"value_currency_euro", {["quantity"] = 2}}},
+  { 50, {"value_currency_dollar", {["quantity"] = 3}}},
+}
+
+ix.randomitems.tables["task_reward_money_01"] = {
+  { 100, {"bagrubles", {["quantity"] = 320}}},
+  { 50, {"value_currency_euro", {["quantity"] = 3}}},
+  { 50, {"value_currency_dollar", {["quantity"] = 4}}},
+}
+
+ix.randomitems.tables["task_reward_money_02"] = {
+  { 100, {"bagrubles", {["quantity"] = 450}}},
+  { 50, {"value_currency_euro", {["quantity"] = 4}}},
+  { 50, {"value_currency_dollar", {["quantity"] = 5}}},
+}
+
+ix.randomitems.tables["task_reward_money_03"] = {
+  { 100, {"bagrubles", {["quantity"] = 750}}},
+  { 50, {"value_currency_euro", {["quantity"] = 5}}},
+  { 50, {"value_currency_dollar", {["quantity"] = 6}}},
+}
+
+ix.randomitems.tables["task_reward_money_04"] = {
+  { 100, {"bagrubles", {["quantity"] = 1250}}},
+  { 50, {"value_currency_euro", {["quantity"] = 6}}},
+  { 50, {"value_currency_dollar", {["quantity"] = 7}}},
+}
+
+ix.randomitems.tables["task_reward_money_05"] = {
+  { 100, {"bagrubles", {["quantity"] = 2050}}},
+  { 50, {"value_currency_euro", {["quantity"] = 6}}},
+  { 50, {"value_currency_dollar", {["quantity"] = 7}}},
+}
+
+ix.randomitems.tables["task_reward_money_06"] = {
+  { 100, {"bagrubles", {["quantity"] = 3150}}},
+  { 50, {"value_currency_euro", {["quantity"] = 7}}},
+  { 50, {"value_currency_dollar", {["quantity"] = 8}}},
+}
+
+ix.randomitems.tables["task_reward_money_07"] = {
+  { 100, {"bagrubles", {["quantity"] = 4250}}},
+  { 50, {"value_currency_euro", {["quantity"] = 8}}},
+  { 50, {"value_currency_dollar", {["quantity"] = 9}}},
+}
+
+ix.randomitems.tables["task_reward_money_08"] = {
+  { 100, {"bagrubles", {["quantity"] = 5000}}},
+  { 50, {"value_currency_euro", {["quantity"] = 9}}},
+  { 50, {"value_currency_dollar", {["quantity"] = 10}}},
+}

@@ -32,7 +32,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier00_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 15
-tempJob.moneyReward = {450, 600}
 tempJob.categories = {"kill_human_NPC_easy"}
 
 ix.jobs.register(tempJob, "kill_bandits_low")
@@ -51,7 +50,6 @@ tempJob.numberRec = 5
 tempJob.reward = {{"kit_reward_tier00_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 15
-tempJob.moneyReward = {650, 800}
 tempJob.categories = {"kill_human_NPC_easy"}
 
 ix.jobs.register(tempJob, "kill_bandits_mid")
@@ -70,7 +68,6 @@ tempJob.numberRec = 8
 tempJob.reward = {{"kit_reward_tier01_large"}}
 tempJob.rewardCount = 2
 tempJob.repReward = 25
-tempJob.moneyReward = {1150, 1400}
 tempJob.categories = {"kill_human_NPC_easy"}
 
 ix.jobs.register(tempJob, "kill_bandits_high")
@@ -91,7 +88,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier03_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 30
-tempJob.moneyReward = {650, 900}
 tempJob.categories = {"kill_human_NPC_medium"}
 
 ix.jobs.register(tempJob, "kill_mercenaries_low")
@@ -110,7 +106,6 @@ tempJob.numberRec = 5
 tempJob.reward = {{"kit_reward_tier03_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 30
-tempJob.moneyReward = {850, 1100}
 tempJob.categories = {"kill_human_NPC_medium"}
 
 ix.jobs.register(tempJob, "kill_mercenaries_mid")
@@ -129,7 +124,6 @@ tempJob.numberRec = 8
 tempJob.reward = {{"kit_reward_tier04_small"}}
 tempJob.rewardCount = 2
 tempJob.repReward = 40
-tempJob.moneyReward = {1150, 1400}
 tempJob.categories = {"kill_human_NPC_medium"}
 
 ix.jobs.register(tempJob, "kill_mercenaries_high")
@@ -150,7 +144,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier06_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 45
-tempJob.moneyReward = {1650, 1900}
 tempJob.categories = {"kill_human_NPC_hard"}
 
 ix.jobs.register(tempJob, "kill_military_low")
@@ -169,7 +162,6 @@ tempJob.numberRec = 5
 tempJob.reward = {{"kit_reward_tier06_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 45
-tempJob.moneyReward = {1650, 1900}
 tempJob.categories = {"kill_human_NPC_hard"}
 
 ix.jobs.register(tempJob, "kill_military_mid")
@@ -188,7 +180,6 @@ tempJob.numberRec = 8
 tempJob.reward = {{"kit_reward_tier07_small"}}
 tempJob.rewardCount = 2
 tempJob.repReward = 55
-tempJob.moneyReward = {2050, 2300}
 tempJob.categories = {"kill_human_NPC_hard"}
 
 ix.jobs.register(tempJob, "kill_military_high")

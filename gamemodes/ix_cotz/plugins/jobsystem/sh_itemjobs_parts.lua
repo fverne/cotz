@@ -9,7 +9,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier00_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 325}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_blinddog")
@@ -27,7 +26,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier00_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {275, 425}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_blinddog")
@@ -46,7 +44,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier01_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_boar")
@@ -64,7 +61,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier01_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_boar")
@@ -83,7 +79,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier01_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_flesh")
@@ -101,7 +96,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier01_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_flesh")
@@ -120,7 +114,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier01_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_zombie_1")
@@ -138,7 +131,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier01_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_zombie_1")
@@ -156,7 +148,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier01_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_pseudodog")
@@ -174,7 +165,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier01_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_pseudodog")
@@ -193,7 +183,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier01_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_tushkano")
@@ -211,7 +200,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier01_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_tushkano")
@@ -231,7 +219,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier02_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_izlom")
@@ -249,7 +236,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier02_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_izlom")
@@ -267,7 +253,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier02_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_izlom")
@@ -285,7 +270,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier02_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_izlom")
@@ -304,7 +288,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier03_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_skeleton")
@@ -322,7 +305,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier03_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_skeleton")
@@ -341,7 +323,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier03_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_spider")
@@ -359,7 +340,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier03_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_spider")
@@ -378,7 +358,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier02_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_tark")
@@ -396,7 +375,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier02_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_tark")
@@ -415,7 +393,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier04_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_vareshka")
@@ -433,7 +410,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier04_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_vareshka")
@@ -452,7 +428,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier05_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_burer")
@@ -470,7 +445,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier05_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_burer")
@@ -489,7 +463,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier06_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_chimera")
@@ -507,7 +480,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier06_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_chimera")
@@ -526,7 +498,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier07_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {375, 525}
 tempJob.categories = {"item_part_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_pseudogiant")
@@ -544,7 +515,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier07_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {475, 625}
 tempJob.categories = {"item_part_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_pseudogiant")
@@ -564,7 +534,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier01_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 325}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_cat")
@@ -582,7 +551,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier01_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {275, 425}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_cat")
@@ -601,7 +569,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier02_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 325}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_partcontrollerswamp")
@@ -619,7 +586,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier02_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {275, 425}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_partcontrollerswamp")
@@ -638,7 +604,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier01_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 325}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_snork")
@@ -656,7 +621,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier01_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {275, 425}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_snork")
@@ -664,12 +628,10 @@ ix.jobs.register(tempJob, "ItemJob2_part_snork")
 tempJob = nil
 
 
-
-
 local tempJob = {}
 
-tempJob.name = "Hand over %d sprig leg(s)."
-tempJob.desc = "%d sprig leg(s)."
+tempJob.name = "Hand over %d sprig eye(s)."
+tempJob.desc = "%d sprig eye(s)."
 tempJob.icon = "propic/event/loot"
 tempJob.tier = 1
 tempJob.requiredItem = "part_sprig"
@@ -677,7 +639,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier02_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 325}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_sprig")
@@ -686,8 +647,8 @@ tempJob = nil
 
 local tempJob = {}
 
-tempJob.name = "Hand over %d sprig leg(s)."
-tempJob.desc = "%d sprig leg(s)."
+tempJob.name = "Hand over %d sprig eye(s)."
+tempJob.desc = "%d sprig eye(s)."
 tempJob.icon = "propic/event/loot"
 tempJob.tier = 1
 tempJob.requiredItem = "part_sprig"
@@ -695,14 +656,11 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier02_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {275, 425}
 tempJob.categories = {"item_part_NPC_easy"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_sprig")
 
 tempJob = nil
-
-
 
 
 local tempJob = {}
@@ -716,7 +674,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier05_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 325}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_bear")
@@ -734,7 +691,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier05_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {275, 425}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_bear")
@@ -753,7 +709,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier03_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 325}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_bloodsucker")
@@ -771,7 +726,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier03_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {275, 425}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_bloodsucker")
@@ -790,7 +744,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier03_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 325}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_controller")
@@ -808,7 +761,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier03_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {275, 425}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_controller")
@@ -828,7 +780,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier04_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 325}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_hellhound")
@@ -846,7 +797,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier04_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {275, 425}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_hellhound")
@@ -865,7 +815,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier04_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 325}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_psydog")
@@ -883,7 +832,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier04_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {275, 425}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_psydog")
@@ -904,7 +852,6 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier06_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.moneyReward = {175, 325}
 tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_karlik")
@@ -922,7 +869,6 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier06_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.moneyReward = {275, 425}
 tempJob.categories = {"item_part_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_karlik")

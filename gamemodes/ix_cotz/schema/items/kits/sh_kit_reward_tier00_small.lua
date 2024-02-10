@@ -23,4 +23,7 @@ ITEM.items = {
 	{
 		{1, "task_reward_medical_01"},
 	},
+	{
+		{1, "task_reward_money_00"},
+	},
 }
