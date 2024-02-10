@@ -12,8 +12,8 @@ DIALOGUE.name = "Tinker NPC"
 DIALOGUE.addTopic("GREETING", {
 	response = "Welcome!",
 	options = {
-		"InterestTopic",
 		"TradeTopic", 
+		"InterestTopic",
 		"RepairItems",
 		"AboutWorkTopic",
 		"GetTaskByDifficulty",
@@ -29,9 +29,9 @@ DIALOGUE.addTopic("GREETING", {
 		if (SERVER) then
 			if target:GetNetVar("possibleJobs") == nil then
 				local possibleJobs = {}
-				possibleJobs["easy"] = {"mutantkilleasy"}
-				possibleJobs["medium"] = {"mutantkillmedium"}
-				possibleJobs["hard"] = {"mutantkillhard"}			
+				possibleJobs["easy"] = {"dataextract"}
+				possibleJobs["medium"] = {"dataextract"}
+				possibleJobs["hard"] = {"dataextract"}			
 	
 				target:SetNetVar("possibleJobs", possibleJobs)
 			end
@@ -43,8 +43,8 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
 	response = "What would you like to know?",
 	options = {
-		"InterestTopic",
 		"TradeTopic", 
+		"InterestTopic",
 		"RepairItems",
 		"AboutWorkTopic",
 		"GetTaskByDifficulty",
