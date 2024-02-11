@@ -57,7 +57,7 @@ ITEM.pacData = {
                                         ["AngleOffset"] = Angle(0, 0, 0),
                                         ["BoneMerge"] = false,
                                         ["Color"] = Vector(1, 1, 1),
-                                        ["Position"] = Vector(-65.3681640625, -21.128999710083, 0),
+                                        ["Position"] = Vector(-66.619995117188, -21.294921875, -0.001953125),
                                         ["ClassName"] = "model2",
                                         ["Brightness"] = 1,
                                         ["Hide"] = false,
@@ -65,7 +65,7 @@ ITEM.pacData = {
                                         ["Scale"] = Vector(1, 1, 1),
                                         ["LegacyTransform"] = false,
                                         ["EditorExpand"] = false,
-                                        ["Size"] = 1.06,
+                                        ["Size"] = 1.08,
                                         ["ModelModifiers"] = "",
                                         ["Translucent"] = false,
                                         ["BlendMode"] = "",
@@ -87,4 +87,5 @@ ITEM.pacData = {
                         ["ClassName"] = "group",
                 },
         },
+
 }
