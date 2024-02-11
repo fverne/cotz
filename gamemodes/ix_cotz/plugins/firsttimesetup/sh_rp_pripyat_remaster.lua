@@ -1,4 +1,4 @@
-PLUGIN.map_presets["rp_salvation_2_haven"] = {
+PLUGIN.map_presets["rp_pripyat_remaster"] = {
   containers = {
 
   },

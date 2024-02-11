@@ -5,7 +5,7 @@ PLUGIN.description = "A plugin that lets you spawn in a map preset of containers
 PLUGIN.map_presets = {}
 
 ix.util.Include("sh_rp_marsh_cs.lua")
-ix.util.Include("sh_rp_salvation_2_haven.lua")
+ix.util.Include("sh_rp_pripyat_remaster.lua")
 ix.util.Include("sh_rp_waystation.lua")
 
 if SERVER then
