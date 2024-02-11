@@ -119,7 +119,7 @@ SWEP.Primary.Ammo			= "12 Gauge"
 SWEP.WearDamage = 0.125
 SWEP.WearEffect = 0.05
 
-SWEP.FireDelay = 0.7
+SWEP.FireDelay = 1.0
 SWEP.FireSound = "CW_M3SUPER90_FIRE"
 SWEP.Recoil = 4.5
 

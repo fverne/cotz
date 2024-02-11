@@ -108,7 +108,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.FireDelay = 0.7
+SWEP.FireDelay = 1.0
 SWEP.FireSound = "CW_M3SUPER90_FIRE"
 SWEP.Recoil = 3
 
@@ -130,5 +130,6 @@ SWEP.ReloadStartTime = 0.3
 SWEP.InsertShellTime = 0.7
 SWEP.ReloadFinishWait = 2
 SWEP.ShotgunReload = true
+SWEP.ForceBackToHipAfterAimedShot = true
 
 SWEP.Chamberable = false

@@ -123,6 +123,7 @@ SWEP.SpreadCooldown = 0.4
 SWEP.Damage = 20
 SWEP.DeployTime = .7
 SWEP.ADSFireAnim = true
+SWEP.Chamberable = false
 
 SWEP.ReloadSpeed = 1.1
 SWEP.ReloadTime = 2.9

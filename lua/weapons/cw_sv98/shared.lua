@@ -183,6 +183,6 @@ SWEP.ReloadSpeed = 1
 SWEP.ReloadTime = 2.4
 SWEP.ReloadTime_Empty = 2.4
 SWEP.ReloadHalt = 2.5
-SWEP.ReloadHalt_Empty = 3
+SWEP.ReloadHalt_Empty = 3.4
 SWEP.Chamberable = true
 SWEP.SnapToIdlePostReload = true

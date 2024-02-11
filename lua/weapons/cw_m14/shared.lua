@@ -187,7 +187,7 @@ SWEP.RecoilToSpread = 0.8 -- the M14 in particular will have 30% more recoil fro
 SWEP.ReloadSpeed = 1
 SWEP.ReloadTime = 2.5
 SWEP.ReloadTime_Empty = 3.3
-SWEP.ReloadHalt = 3.05
-SWEP.ReloadHalt_Empty = 4.85
+SWEP.ReloadHalt = 2.6
+SWEP.ReloadHalt_Empty = 4.2
 
 SWEP.SnapToIdlePostReload = true

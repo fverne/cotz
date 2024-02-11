@@ -110,8 +110,8 @@ SWEP.DeployTime = 0.5
 SWEP.ReloadSpeed = 1.2
 SWEP.ReloadTime = 3.2
 SWEP.ReloadTime_Empty = 3.2
-SWEP.ReloadHalt = 4.8
-SWEP.ReloadHalt_Empty = 3.9
+SWEP.ReloadHalt = 5.75
+SWEP.ReloadHalt_Empty = 4.85
 
 function SWEP:IndividualInitialize()
 	self:setBodygroup( 1 , 1 )

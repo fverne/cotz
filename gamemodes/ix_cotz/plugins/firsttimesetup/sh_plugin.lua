@@ -105,6 +105,18 @@ if SERVER then
 		end,
 	}
 
+	PLUGIN.FormatCyclicContainers = function(data)
+		local str = "    {\n"
+		str = str.."      model = \""..data.model.."\",\n"
+		str = str.."      position = Vector("..data.position.x..","..data.position.y..","..data.position.z.."),\n"
+		str = str.."      angles = Angle("..data.angles.x..","..data.angles.y..","..data.angles.z.."),\n"
+		str = str.."      spawnCategory = \""..data.spawnCategory.."\",\n"
+		str = str.."      cyclicalCategory = \""..data.cyclicalCategory.."\",\n"
+		str = str.."    },\n"
+
+		return str
+	end
+
 	function PLUGIN:RunFirstTimeSetup()
 		-- Spawn containers
 		for _, containerdata in pairs(self.map_presets[game.GetMap()].containers) do
@@ -260,6 +272,37 @@ ix.command.Add("FTSShowContainerSpawns", {
 
 			netstream.Start(client, "ix_DisplayFTSContainers", containers)
 			client:Notify( "Displayed All Points for 10 secs." )
+		end
+	end
+})
+
+ix.command.Add("FTSDumpCyclicContainerData", {
+	adminOnly = true,
+	OnRun = function(self, client, override)
+		if SERVER then
+
+			file.CreateDir("FTSDump")
+
+			local filename = "FTSDump/cycliccontainers.txt"
+			print(filename)
+
+			if (file.Exists(filename, "DATA" )) then
+				file.Delete(filename)
+			end
+			file.Write(filename, "cyclic containers\n")
+
+			for k, v in ipairs(ents.FindByClass("ix_container")) do
+				if(v:GetCyclicalCategory() != "") then
+					local data = {}
+
+					data.model = v:GetModel()
+					data.position = v:GetPos()
+					data.angles = v:GetAngles()
+					data.spawnCategory = v:GetSpawnCategory()
+					data.cyclicalCategory = v:GetCyclicalCategory()
+					file.Append(filename, ix.plugin.list["firsttimesetup"].FormatCyclicContainers(data))
+				end
+			end
 		end
 	end
 })

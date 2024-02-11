@@ -119,6 +119,7 @@ SWEP.Shots = 1
 SWEP.Damage = 39
 SWEP.DeployTime = .7
 SWEP.ADSFireAnim = false
+SWEP.Chamberable = false
 
 SWEP.ReloadSpeed = 1.5
 SWEP.ReloadTime = 2.5

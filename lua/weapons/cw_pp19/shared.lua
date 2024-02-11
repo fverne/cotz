@@ -144,3 +144,4 @@ SWEP.ReloadTime = 2
 SWEP.ReloadTime_Empty = 2.2
 SWEP.ReloadHalt = 2.6
 SWEP.ReloadHalt_Empty = 3.5
+SWEP.SnapToIdlePostReload = true

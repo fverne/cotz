@@ -111,7 +111,7 @@ SWEP.Primary.Ammo			= "12 Gauge"
 SWEP.WearDamage = 0.1
 SWEP.WearEffect = 0.05
 
-SWEP.FireDelay = 0.7
+SWEP.FireDelay = 1.1
 SWEP.FireSound = "CW_M1887_FIRE"
 SWEP.Recoil = 5
 
@@ -126,7 +126,8 @@ SWEP.Shots = 9
 SWEP.Damage = 20
 SWEP.DeployTime = 1
 
-SWEP.SnapToIdlePostReload = true
+SWEP.SnapToIdlePostReload = false
+SWEP.AlwaysPlayReloadEnd = true
 
 SWEP.ReloadSpeed = 0.65
 SWEP.ReloadStartTime = 0.7

@@ -164,7 +164,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 50
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/view/rifles/sks.mdl"
 SWEP.WorldModel		= "models/weapons/world/rifles/sks.mdl"

@@ -180,9 +180,9 @@ SWEP.RecoilToSpreadAuto = 0.1
 
 SWEP.ReloadSpeed = 1.15
 SWEP.ReloadTime = 2.6
-SWEP.ReloadTime_Empty = 3.8
+SWEP.ReloadTime_Empty = 4.2
 SWEP.ReloadHalt = 2.6
-SWEP.ReloadHalt_Empty = 3.8
+SWEP.ReloadHalt_Empty = 4.4
 SWEP.SnapToIdlePostReload = true
 
 -- SWEP.PenMod = 1
