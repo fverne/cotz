@@ -158,10 +158,13 @@ if (SERVER) then
                     for k, v in pairs(ents.FindByClass("ix_item")) do
                         if (v.bTemporary) then
                             v:Remove()
+                            continue
                         end
 
-                        if (v.isWeapon and v:GetData("durability") < 20 and v:GetData("ammo") == 0) then
+                        local itm = ix.item.instances[v.ixItemID]
+                        if (itm.isWeapon and itm:GetData("durability", 0) <= 10) then
                             v:Remove()
+                            continue
                         end
                     end
                 end
