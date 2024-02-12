@@ -65,13 +65,13 @@ PLUGIN.mapdata["rp_waystation"].loadzones["fromoutskirts"] = {
 }
 
 PLUGIN.mapdata["rp_waystation"].loadzones["frommarsh"] = {
-	pos = Vector(-11556.629883, -13154.640625, 96.031250), --edit me
+	pos = Vector(-11186.428711, -13153.819336, 96.097687), --edit me
 	ang = Angle(0, 0, 0), --edit me
 	desc = "Your geigercounter lights up as you approach. The area ahead is clearly irradiated."
 }
 
 PLUGIN.mapdata["rp_waystation"].loadzones["frompripyat"] = {
-	pos = Vector(3341.026611, 13212.584961, 800.866943), --edit me
+	pos = Vector(3106.721680, 12968.596680, 716.388306), --edit me
 	ang = Angle(10.465063, -122.256470, 0.000000), --edit me
 	desc = "Your geigercounter tones down a little as you approach. The area ahead is clearly irradiated."
 }

@@ -87,7 +87,7 @@ function PLUGIN:Think()
 		for k, v in pairs(player.GetAll()) do
 			for j, c in pairs(self.loadpoints) do
 				if v:GetPos():Distance(c[1]) < 128 then
-					if !v:GetCharacter().inmenu then
+					if v:GetCharacter() and !v:GetCharacter().inmenu then
 						v:GetCharacter().inmenu = true
 						v:requestQuery("Move Zones", "Do you wish to move to "..self.mapdata[c[2]].name.."?\n"..self.mapdata[c[2]].loadzones[c[3]].desc,
 						function(response)
