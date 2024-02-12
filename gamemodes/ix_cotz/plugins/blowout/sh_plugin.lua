@@ -156,7 +156,11 @@ if (SERVER) then
 
                 if ix.config.Get("blowoutRemoveItems", false) then
                     for k, v in pairs(ents.FindByClass("ix_item")) do
-                      if (v.bTemporary) then
+                        if (v.bTemporary) then
+                            v:Remove()
+                        end
+
+                        if (v.isWeapon and v:GetData("durability") < 20 and v:GetData("ammo") == 0) then
                             v:Remove()
                         end
                     end
