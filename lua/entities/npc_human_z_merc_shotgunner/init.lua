@@ -353,7 +353,11 @@ function ENT:HasLOS()
     local tracedata = {}
 
     tracedata.start = self:GetShootPos()
-    tracedata.endpos = self:GetEnemy():GetShootPos()
+    if self:GetEnemy():GetShootPos() then
+      tracedata.endpos = self:GetEnemy():GetShootPos()
+    else
+      tracedata.endpos = self:GetEnemy():GetPos() + Vector(0, 0, 8)
+    end
     tracedata.filter = self
 
     local trace = util.TraceLine(tracedata)
