@@ -60,7 +60,8 @@ ENT.models       = {
 }
 
 ENT.weapons      = {
-  {{"ppsh", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 7 }}, "weapon_npc_ppsh"},
+  {{"mp153", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 2 }}, "weapon_npc_spas12"},
+  {{"saiga410", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 2 }}, "weapon_npc_spas12"},
 }
 
 -- Live vars

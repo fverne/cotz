@@ -53,8 +53,8 @@ ENT.models       = {
 }
 
 ENT.weapons      = {
-  "weapon_npc_aksu",
-  "weapon_npc_ak74",
+  {{"aks74u", { ["durability"] = 3, ["wear"] = 6, ["ammo"] = 5 }}, "weapon_npc_aksu"},
+  {{"ak74", { ["durability"] = 3, ["wear"] = 6, ["ammo"] = 5 }}, "weapon_npc_ak74"},
 }
 
 -- Live vars

@@ -53,8 +53,8 @@ ENT.models       = {
 }
 
 ENT.weapons      = {
-  "weapon_npc_sawnoff",
-  "weapon_npc_toz34"
+  {{"mp153", { ["durability"] = 3, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_spas12"},
+  {{"saiga410", { ["durability"] = 2, ["wear"] = 5, ["ammo"] = 1 }}, "weapon_npc_spas12"},
 }
 
 -- Live vars

@@ -53,7 +53,7 @@ ENT.models       = {
 }
 
 ENT.weapons      = {
-  "weapon_npc_makarov"
+  {{"makarov", { ["durability"] = 3, ["wear"] = 6, ["ammo"] = 5 }}, "weapon_npc_makarov"},
 }
 
 -- Live vars

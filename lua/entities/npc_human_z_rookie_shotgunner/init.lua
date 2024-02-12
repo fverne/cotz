@@ -54,9 +54,14 @@ ENT.models       = {
 }
 
 ENT.weapons      = {
-  "weapon_npc_sawnoff",
-  "weapon_npc_toz34"
+  "weapon_npc_sawnoff"
 }
+
+ENT.weapons      = {
+  {{"toz34short", { ["durability"] = 3, ["wear"] = 5, ["ammo"] = 1 }}, "weapon_npc_sawnoff"},
+  {{"toz66short", { ["durability"] = 3, ["wear"] = 5, ["ammo"] = 1 }}, "weapon_npc_sawnoff"},
+}
+
 
 -- Live vars
 ENT.Alerted     = false
