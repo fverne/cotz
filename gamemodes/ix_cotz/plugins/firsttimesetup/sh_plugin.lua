@@ -101,7 +101,7 @@ if SERVER then
 			return "{ Vector("..data[1].x..","..data[1].y..","..data[1].z..") , \""..data[2].."\" , \""..data[3].."\" }, \n"
 		end,
 		["worlditemspawner"] = function(id, data)
-			return "{ Vector("..data[1].x..","..data[1].y..","..data[1].z..") , \""..data[2].."\" ), \n"
+			return "{ Vector("..data[1].x..","..data[1].y..","..data[1].z..") , \""..data[2].."\" }, \n"
 		end,
 	}
 
