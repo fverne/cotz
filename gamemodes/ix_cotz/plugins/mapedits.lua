@@ -15,5 +15,10 @@ function PLUGIN:EntityKeyValue(ent, key, value)
         if IsValid(ent) and ent:GetClass() == "func_door" and ent:GetName() == "lift_door" then
             ent:SetKeyValue("spawnpos", 1)
         end
+
+        --removes BTR with missing textures
+        if IsValid(ent) and ent:MapCreationID() == 1627 then
+            ent:Remove()
+        end
     end
 end
