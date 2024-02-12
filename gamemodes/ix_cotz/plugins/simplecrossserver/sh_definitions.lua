@@ -15,7 +15,7 @@
 
 PLUGIN.mapdata["rp_marsh_cs"] = {}
 PLUGIN.mapdata["rp_marsh_cs"].name = "Swamps"
-PLUGIN.mapdata["rp_marsh_cs"].serverip = "176.23.99.100:27015"
+PLUGIN.mapdata["rp_marsh_cs"].serverip = "80.161.55.20:27015"
 PLUGIN.mapdata["rp_marsh_cs"].loadzones = PLUGIN.mapdata["rp_marsh_cs"].loadzones or {}
 
 PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromoutskirts"] = {
@@ -38,7 +38,7 @@ PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromtrainbridge"] = {
 
 PLUGIN.mapdata["rp_salvation_2_haven"] = {}
 PLUGIN.mapdata["rp_salvation_2_haven"].name = "Farmlands"
-PLUGIN.mapdata["rp_salvation_2_haven"].serverip = "176.23.99.100:27016"
+PLUGIN.mapdata["rp_salvation_2_haven"].serverip = "80.161.55.20:27016"
 PLUGIN.mapdata["rp_salvation_2_haven"].loadzones = PLUGIN.mapdata["rp_salvation_2_haven"].loadzones or {}
 
 PLUGIN.mapdata["rp_salvation_2_haven"].loadzones["fromwaystation"] = {
@@ -55,11 +55,23 @@ PLUGIN.mapdata["rp_salvation_2_haven"].loadzones["frommarsh"] = {
 
 PLUGIN.mapdata["rp_waystation"] = {}
 PLUGIN.mapdata["rp_waystation"].name = "Waystation"
-PLUGIN.mapdata["rp_waystation"].serverip = "176.23.99.100:27017"
+PLUGIN.mapdata["rp_waystation"].serverip = "80.161.55.20:27017"
 PLUGIN.mapdata["rp_waystation"].loadzones = PLUGIN.mapdata["rp_waystation"].loadzones or {}
 
 PLUGIN.mapdata["rp_waystation"].loadzones["fromoutskirts"] = {
 	pos = Vector(-8569.341797, 483.034058, 328.446228), --edit me
 	ang = Angle(89.000000, 39.314655, 0.000000), --edit me
 	desc = "Your geigercounter goes crazy as you approach. The area ahead is clearly irradiated."
+}
+
+PLUGIN.mapdata["rp_waystation"].loadzones["frommarsh"] = {
+	pos = Vector(-11556.629883, -13154.640625, 96.031250), --edit me
+	ang = Angle(0, 0, 0), --edit me
+	desc = "Your geigercounter lights up as you approach. The area ahead is clearly irradiated."
+}
+
+PLUGIN.mapdata["rp_waystation"].loadzones["frompripyat"] = {
+	pos = Vector(3341.026611, 13212.584961, 800.866943), --edit me
+	ang = Angle(10.465063, -122.256470, 0.000000), --edit me
+	desc = "Your geigercounter tones down a little as you approach. The area ahead is clearly irradiated."
 }
