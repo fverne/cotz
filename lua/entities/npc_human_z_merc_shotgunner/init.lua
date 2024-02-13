@@ -349,7 +349,7 @@ function ENT:OnRemove()
 end
 
 function ENT:HasLOS()
-  if self:GetEnemy() then
+  if IsValid(self:GetEnemy()) then
     local tracedata = {}
 
     tracedata.start = self:GetShootPos()
