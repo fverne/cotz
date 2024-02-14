@@ -142,73 +142,73 @@ ix.progression.Register("oldTimerKillIntro", {
 			end,
 			RunOnce = true
 		},
-		[2] = { -- runs at the same time as [1]
-			OnRun = function()
-				ix.util.SpawnAdvDupe2Dupe( "prog_oldtimer_1" )
-			end,
-			RunOnce = false
-		},
-		[3] = {
-			OnRun = function()
+		-- [2] = { -- runs at the same time as [1]
+		-- 	OnRun = function()
+		-- 		ix.util.SpawnAdvDupe2Dupe( "prog_oldtimer_1" )
+		-- 	end,
+		-- 	RunOnce = false
+		-- },
+		-- [3] = {
+		-- 	OnRun = function()
 
-				local npc = ix.progression.GetNPCFromName("'Old Timer'")
-				if (npc) then
-					npc:AddItemToList("medic_medkit_1", nil, 4, "SELLANDBUY", 4, 1, 4)
-					npc:AddItemToList("medic_medkit_2", nil, 4, "SELLANDBUY", 4, 1, 4)
-					npc:AddItemToList("medic_bandage_2", nil, 8, "SELLANDBUY", 4, 1, 4)
-				end
+		-- 		local npc = ix.progression.GetNPCFromName("'Old Timer'")
+		-- 		if (npc) then
+		-- 			npc:AddItemToList("medic_medkit_1", nil, 4, "SELLANDBUY", 4, 1, 4)
+		-- 			npc:AddItemToList("medic_medkit_2", nil, 4, "SELLANDBUY", 4, 1, 4)
+		-- 			npc:AddItemToList("medic_bandage_2", nil, 8, "SELLANDBUY", 4, 1, 4)
+		-- 		end
 
 				
 
-				local name = "'Old Timer'"
-				local message = "Due to your extraordinary efforts in killing mutants, I have secured some supply lines to import medical supplies from leftover army supplies they don't need anymore."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end,
-			RunOnce = true
-		},
-		[4] = { -- runs at the same time as [3]
-			OnRun = function()
-				ix.util.SpawnAdvDupe2Dupe( "prog_oldtimer_2" )
-			end,
-			RunOnce = false
-		},
-		[5] = {
-			OnRun = function()
-				local npc = ix.progression.GetNPCFromName("'Old Timer'")
-				if (npc) then
-					npc:AddItemToList("medic_medkit_3", nil, 4, "SELLANDBUY", 4, 1, 4)
-					npc:AddItemToList("medic_bandage_3", nil, 4, "SELLANDBUY", 4, 1, 4)
-				end
+		-- 		local name = "'Old Timer'"
+		-- 		local message = "Due to your extraordinary efforts in killing mutants, I have secured some supply lines to import medical supplies from leftover army supplies they don't need anymore."
+		-- 		ix.util.HandleChat(name, message)
+		-- 		ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+		-- 			name = name,
+		-- 			message = message
+		-- 		})
+		-- 	end,
+		-- 	RunOnce = true
+		-- },
+		-- [4] = { -- runs at the same time as [3]
+		-- 	OnRun = function()
+		-- 		ix.util.SpawnAdvDupe2Dupe( "prog_oldtimer_2" )
+		-- 	end,
+		-- 	RunOnce = false
+		-- },
+		-- [5] = {
+		-- 	OnRun = function()
+		-- 		local npc = ix.progression.GetNPCFromName("'Old Timer'")
+		-- 		if (npc) then
+		-- 			npc:AddItemToList("medic_medkit_3", nil, 4, "SELLANDBUY", 4, 1, 4)
+		-- 			npc:AddItemToList("medic_bandage_3", nil, 4, "SELLANDBUY", 4, 1, 4)
+		-- 		end
 
-				local name = "'Old Timer'"
-				local message = "Lovely work everyone, thanks to your dilligence in clearing out the swamps, one of my associates have agreed to ship in a wider variety of medical supplies, feel free to come check my wares."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-				ix.progression.SetCompleted("oldTimerKillIntro", true)
-			end,
-			RunOnce = true
-		},
-		[6] = { -- runs at the same time as [5]
-			OnRun = function()
-				ix.util.SpawnAdvDupe2Dupe( "prog_oldtimer_3" )
-			end,
-			RunOnce = false
-		},
+		-- 		local name = "'Old Timer'"
+		-- 		local message = "Lovely work everyone, thanks to your dilligence in clearing out the swamps, one of my associates have agreed to ship in a wider variety of medical supplies, feel free to come check my wares."
+		-- 		ix.util.HandleChat(name, message)
+		-- 		ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+		-- 			name = name,
+		-- 			message = message
+		-- 		})
+		-- 		ix.progression.SetCompleted("oldTimerKillIntro", true)
+		-- 	end,
+		-- 	RunOnce = true
+		-- },
+		-- [6] = { -- runs at the same time as [5]
+		-- 	OnRun = function()
+		-- 		ix.util.SpawnAdvDupe2Dupe( "prog_oldtimer_3" )
+		-- 	end,
+		-- 	RunOnce = false
+		-- },
 	},
 	progressthresholds = {
 		[1] = 30,
-		[2] = 30, -- just for the dupe spawning
-		[3] = 55,
-		[4] = 55,
-		[5] = 110,
-		[6] = 110
+		-- [2] = 30, -- just for the dupe spawning
+		-- [3] = 55,
+		-- [4] = 55,
+		-- [5] = 110,
+		-- [6] = 110
 	}
 })
 
