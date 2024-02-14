@@ -122,9 +122,6 @@ ix.npctemplates.templates["tutorialnpc"] = {
 		["lowtiercooker"] 	= { nil, 3, SELLANDBUY, 3, 8, 3 },
 		["lowtiercookerfuel"] 	= { nil, 20, SELLANDBUY, 20, 2, 15 },
 
-		["backpack_1"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
-		["backpack_3"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
-
 		["part_bear"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_blinddog"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_bloodsucker"] 	= { 1, nil, BUYONLY, nil, nil, nil },
@@ -457,11 +454,6 @@ ix.npctemplates.templates["bodyguardnpc"] = {
 		["beretta92"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
 		["p99"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
 		["suit_io7a"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
-
-		["backpack_2"] 	= { nil, 1, SELLANDBUY, 1, 2, 1 },
-		["backpack_2_large"] 	= { nil, 1, SELLANDBUY, 1, 1, 1 },
-		["backpack_1_large"] 	= { nil, 1, SELLANDBUY, 1, 1, 1 },
-		["backpack_3_large"] 	= { nil, 1, SELLANDBUY, 1, 1, 1 },
 	},
 }
 

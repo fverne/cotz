@@ -430,7 +430,7 @@ ix.backgrounds["urbanexplorer"] = {
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("leadpipe", 1)
-		character:GetInventory():Add("backpack_1", 1)
+		character:GetInventory():Add("backpack_tourist", 1)
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  
