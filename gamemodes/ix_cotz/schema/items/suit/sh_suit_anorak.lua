@@ -8,6 +8,7 @@ ITEM.width = 2
 ITEM.height = 2
 ITEM.img = ix.util.GetMaterial("vgui/hud/outfit_anorak1.png")
 ITEM.weight = 3.860
+ITEM.baseSuit = "suit_anorak"
 
 ITEM.price = 6690
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability

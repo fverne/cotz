@@ -9,6 +9,7 @@ ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/nbc.png")
 ITEM.overlayPath = "vgui/overlays/hud_gas"
 ITEM.weight = 8.100
+ITEM.baseSuit = "suit_nbc"
 
 ITEM.price = 89000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability

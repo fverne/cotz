@@ -9,6 +9,7 @@ ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/skat.png")
 ITEM.weight = 21.60
 ITEM.newSkin = 17
+ITEM.baseSuit = "suit_skat9"
 
 ITEM.price = 490000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
