@@ -83,7 +83,7 @@ PLUGIN.mapdata["rp_pripyat_remaster"].serverip = "80.161.55.20:27016"
 PLUGIN.mapdata["rp_pripyat_remaster"].loadzones = PLUGIN.mapdata["rp_pripyat_remaster"].loadzones or {}
 
 PLUGIN.mapdata["rp_pripyat_remaster"].loadzones["fromwaystation"] = {
-	pos = Vector(6177.515137, -6266.703125, 64.031250), --edit me
+	pos = Vector(6236.606445, -6545.129395, 64.031204), --edit me
 	ang = Angle(0, 180, 0), --edit me
 	desc = "Your geigercounter lights up a lot more as you approach. The area ahead is clearly very irradiated."
 }
