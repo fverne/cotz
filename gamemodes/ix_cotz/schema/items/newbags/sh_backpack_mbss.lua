@@ -7,7 +7,7 @@ ITEM.width = 2
 ITEM.height = 3
 ITEM.weight = 0.950
 
-ITEM.carryinc = 20
+ITEM.carryinc = 18
 ITEM.outfitCategory = "Backpack"
 
 ITEM.exRender = true
