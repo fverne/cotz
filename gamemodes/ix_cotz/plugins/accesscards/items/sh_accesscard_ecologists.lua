@@ -45,7 +45,7 @@ ITEM.functions.usetarget = {
 			data.filter = item.player
 		local target = util.TraceLine(data).Entity
         
-		if (IsValid(target) and target:GetClass() == "func_door_rotating") and target:GetName() == "ecoundergrounddoor" then
+		if IsValid(target) and target:MapCreationID() == 1402 then
 			ix.chat.Send(item.player, "iteminternal", "takes out their "..item.name.." and uses it on the door.", false)
 
             target:Input("Unlock")

@@ -10,6 +10,14 @@ function PLUGIN:EntityKeyValue(ent, key, value)
         end
     end
 
+    if game.GetMap() == "rp_marsh_cs" then
+        -- locks the underground bunker door, openable with accesscard_ecologists
+        if IsValid(ent) and ent:MapCreationID() == 1402 then
+            ent:Input("Lock")
+            ent:SetKeyValue("dmg", 0)
+        end
+    end
+
     if game.GetMap() == "rp_waystation" then
         -- keeps elevatordoors open, regardless of the underground power switches
         if IsValid(ent) and ent:GetClass() == "func_door" and ent:GetName() == "lift_door" then
