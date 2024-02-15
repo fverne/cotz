@@ -514,7 +514,7 @@ AddSound("Stalker.Pseudodog.Melee4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stal
 AddSound("Stalker.Pseudodog.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/pseudodog/pdog_aggression_0.mp3")
 AddSound("Stalker.Pseudodog.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/pseudodog/pdog_aggression_1.mp3")
 AddSound("Stalker.Pseudodog.Chase3",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/pseudodog/pdog_aggression_2.mp3")
-AddSound("Stalker.Pseudodog.Chase4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/pseudodog/pdog_idle_2.mp3.wav")
+AddSound("Stalker.Pseudodog.Chase4",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/pseudodog/pdog_idle_2.mp3")
 ----DEATH
 AddSound("Stalker.Pseudodog.Die1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/pseudodog/pdog_death_0.mp3")
 AddSound("Stalker.Pseudodog.Die2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/pseudodog/pdog_death_1.mp3")
