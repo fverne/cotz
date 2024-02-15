@@ -56,6 +56,20 @@ Sound("stalkersound/pain13.wav"),
 Sound("stalkersound/pain14.wav"),
 }
 
+function Schema:PlayerSay(client, text)
+	local chatType, message, anonymous = ix.chat.Parse(client, text, true)
+	
+	if (chatType == "ic") then
+		if (ix.command.Parse(client, message)) then
+			return ""
+		end
+	end
+
+	if (isstring(text) and chatType == "ic") then
+		ix.log.Add(client, "chat", chatType and chatType:utf8upper() or "??", text)
+	end
+end
+
 function Schema:GetPlayerPainSound(client)
 	return table.Random(painSounds)
 end
