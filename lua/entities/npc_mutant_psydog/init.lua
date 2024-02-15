@@ -107,25 +107,25 @@ function ENT:STALKERNPCThink()
 
 		if (!IsValid(self.Clone1)) then
 			self.Clone1 = ents.Create("npc_mutant_psydog_phantom")
-			self.Clone1:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*40)
+			self.Clone1:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*40 + self:GetUp()*100)
 			self.Clone1:SetAngles(self:GetAngles())
 			self.Clone1:Spawn()
 		end
 		if (!IsValid(self.Clone2)) then
 			self.Clone2 = ents.Create("npc_mutant_psydog_phantom")
-			self.Clone2:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*-40)
+			self.Clone2:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*-40 + self:GetUp()*100)
 			self.Clone2:SetAngles(self:GetAngles())
 			self.Clone2:Spawn()
 		end
 		if (!IsValid(self.Clone3)) then
 			self.Clone3 = ents.Create("npc_mutant_psydog_phantom")
-			self.Clone3:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*-40)
+			self.Clone3:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*-40 + self:GetUp()*100)
 			self.Clone3:SetAngles(self:GetAngles())
 			self.Clone3:Spawn()
 		end
 		if (!IsValid(self.Clone4)) then
 			self.Clone4 = ents.Create("npc_mutant_psydog_phantom")
-			self.Clone4:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*40)
+			self.Clone4:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*40 + self:GetUp()*100)
 			self.Clone4:SetAngles(self:GetAngles())
 			self.Clone4:Spawn()
 		end
