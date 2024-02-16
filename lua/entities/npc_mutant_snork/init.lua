@@ -53,6 +53,9 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_RUN_RANDOM
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
+ENT.flatbulletresistance = 3
+ENT.percentbulletresistance = 10
+
 function ENT:Initialize()
 	self.Model = "models/monsters/snork2.mdl"
 	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
