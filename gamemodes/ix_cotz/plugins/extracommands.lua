@@ -118,7 +118,7 @@ ix.command.Add("spawnitem", {
 })
 
 ix.command.Add("setdata", {
-	description = "sets data on the items you look at",
+	description = "sets number data on the items you look at",
 	adminOnly = true,
 	arguments = {
 		ix.type.string,
@@ -129,11 +129,41 @@ ix.command.Add("setdata", {
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local stasheditem = ix.item.instances
 
-		if (!data or !isnumber(data) or data < 0) then
+		if (!data or !isnumber(data)) then
 			return "@invalidArg", 2
 		end
 
 		for k, v in pairs( stasheditem ) do
+			if v:GetEntity() then
+			local dist = hitpos:Distance(client:GetPos())
+			local distance = v:GetEntity():GetPos():Distance( hitpos )
+				if distance <= 32 then
+					v:SetData(key, data)
+
+					client:Notify( "Data set successfully.")
+				end
+			end
+		end
+	end
+})
+
+ix.command.Add("setdatastring", {
+	description = "sets string data on the items you look at",
+	adminOnly = true,
+	arguments = {
+		ix.type.string,
+		ix.type.text
+	},
+	OnRun = function(self, client, key, data)
+		local trace = client:GetEyeTraceNoCursor()
+		local hitpos = trace.HitPos + trace.HitNormal*5
+		local items = ix.item.instances
+
+		if (!data or !isstring(data)) then
+			return "@invalidArg", 2
+		end
+
+		for k, v in pairs( items ) do
 			if v:GetEntity() then
 			local dist = hitpos:Distance(client:GetPos())
 			local distance = v:GetEntity():GetPos():Distance( hitpos )
