@@ -8,7 +8,7 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.noDrop = true
-ITEM.weight = 0.100
+ITEM.flatweight = 0.100
 
 ITEM.exRender = true
 ITEM.iconCam = {
