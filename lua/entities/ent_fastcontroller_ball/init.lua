@@ -4,7 +4,7 @@ include("shared.lua")
 
 
 ENT.Exploding = false
-ENT.TouchDamage = 80
+ENT.TouchDamage = 50
 
 function ENT:Initialize()
 	self:SetModel( "models/props_phx/misc/smallcannonball.mdl" )
