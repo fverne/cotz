@@ -86,6 +86,11 @@ function Schema:PostPlayerLoadout(client)
 	end
 end
 
+function Schema:PostPlayerLoadout(client)
+	-- sets low hp for whenever they spawn in / die
+	client:SetHealth( 15 )
+end
+
 function Schema:Initialize()
 	game.ConsoleCommand("net_maxfilesize 64");
 	game.ConsoleCommand("sv_kickerrornum 0");
