@@ -140,7 +140,7 @@ function ENT:OnTakeDamage(dmg)
     self:PlayRandomSound(self.hurtsounds)
   end
 
-  if (dmg:GetAttacker():GetClass() != self:GetClass() ) then
+  if (dmg:GetAttacker():GetClass() != self:GetClass() && dmg:IsDamageType(DMG_BULLET)) then
     self:AddEntityRelationship( dmg:GetAttacker(), 1, 10 )
     self:SetEnemy(dmg:GetAttacker())
   end
@@ -369,7 +369,7 @@ function ENT:HasLOS()
     local tracedata = {}
 
     tracedata.start = self:GetShootPos() + Vector(0, 0, 64)
-    if self:GetEnemy():GetShootPos() then
+    if IsValid(self:GetEnemy():GetShootPos()) then
       tracedata.endpos = self:GetEnemy():GetShootPos()
     else
       tracedata.endpos = self:GetEnemy():GetPos() + Vector(0, 0, 8)
