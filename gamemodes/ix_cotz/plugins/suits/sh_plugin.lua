@@ -22,18 +22,17 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		local damage = dmginfo:GetDamage()
 		local perRes = target:GetNWFloat("ixperbulletres")
 		local flatRes = target:GetNWInt("ixflatbulletres")
-		local suitDuraDmg = damage / 100
 		local suit = target:getEquippedBodyArmor()
-
-		if suit != nil then
-			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitDuraDmg, 0, 100))
-		end
 
 		damage = damage - flatRes
 		damage = damage * perRes
 
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
+
+		if suit != nil then
+			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
+		end
 
 		dmginfo:SetDamage(damage)
 	end
@@ -43,18 +42,17 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		local damage = dmginfo:GetDamage()
 		local perRes = target:GetNWFloat("ixperslashres")
 		local flatRes = target:GetNWInt("ixflatslashres")
-		local suitDuraDmg = damage / 100
 		local suit = target:getEquippedBodyArmor()
-
-		if suit != nil then
-			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitDuraDmg, 0, 100))
-		end
 
 		damage = damage - flatRes
 		damage = damage * perRes
 
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
+
+		if suit != nil then
+			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
+		end
 
 		dmginfo:SetDamage(damage)
 	end
@@ -75,18 +73,17 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		local damage = dmginfo:GetDamage()
 		local perRes = target:GetNWFloat("ixperanomres")
 		local flatRes = target:GetNWInt("ixflatanomres")
-		local suitDuraDmg = damage / 50
 		local suit = target:getEquippedBodyArmor()
-
-		if suit != nil then
-			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitDuraDmg, 0, 100))
-		end
 
 		damage = damage - flatRes
 		damage = damage * perRes
 
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
+
+		if suit != nil then
+			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 50, 0, 100))
+		end
 
 		dmginfo:SetDamage(damage)
 	end
