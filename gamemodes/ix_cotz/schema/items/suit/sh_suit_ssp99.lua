@@ -6,7 +6,7 @@ ITEM.longdesc = "A SSP-99 Scientific Research suit specially designed for the Zo
 
 ITEM.width = 2
 ITEM.height = 3
-ITEM.img = ix.util.GetMaterial("vgui/hud/seva.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/ssp99.png")
 ITEM.overlayPath = "vgui/overlays/hud_sci"
 ITEM.weight = 7.90
 ITEM.newSkin = 0

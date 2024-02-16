@@ -6,7 +6,7 @@ ITEM.longdesc = "High quality modified SSP-99 Scientific Research Suit. It provi
 
 ITEM.width = 2
 ITEM.height = 3
-ITEM.img = ix.util.GetMaterial("vgui/hud/seva.png")
+ITEM.img = ix.util.GetMaterial("vgui/hud/ssp99m.png")
 ITEM.overlayPath = "vgui/overlays/hud_sci"
 ITEM.weight = 9.90
 ITEM.newSkin = 1
