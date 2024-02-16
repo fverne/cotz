@@ -37,6 +37,8 @@ ENT.RangeSchedule = SCHED_RUN_RANDOM
 
 ENT.farttimer = 0
 
+ENT.sndGeigerHeavy = {"geiger/heavy/geiger_heavy_1.wav", "geiger/heavy/geiger_heavy_2.wav", "geiger/heavy/geiger_heavy_3.wav", "geiger/heavy/geiger_heavy_4.wav", "geiger/heavy/geiger_heavy_5.wav" }
+
 function ENT:Initialize()
 	self.Model = "models/monsters/tibet.mdl"
 	self:STALKERNPCInit(Vector(-16,-16,70),MOVETYPE_STEP)
