@@ -42,7 +42,10 @@ if (SERVER) then
 				return
 			end
 
-			character:SetData("DiedRecently", nil)
+			character:SetData("health", 15)
+			client:SetHealth( 15 ) 
+
+			client:SetData("DiedRecently", nil)
 
 			local spawndata = character:GetData("savedspawn", nil)
 
