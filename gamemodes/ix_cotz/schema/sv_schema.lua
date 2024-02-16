@@ -15,6 +15,7 @@ resource.AddWorkshop( '2315743109' ) -- cotz_humannpc
 resource.AddWorkshop( '2299516854' ) -- cotz_map_marsh
 resource.AddWorkshop( '2808595164' ) -- cotz_map_haven
 resource.AddWorkshop( '2872269374' ) -- cotz_map_waystation
+resource.AddWorkshop( '3161868673' ) -- cotz_map_pripyat
 resource.AddWorkshop( '2290874511' ) -- cotz_gmodreplacements
 resource.AddWorkshop( '2447979470' ) -- StormFox 2 Content
 resource.AddWorkshop( '1470158687' ) -- Full Integrated Animation P.M. for NPCs HL2
