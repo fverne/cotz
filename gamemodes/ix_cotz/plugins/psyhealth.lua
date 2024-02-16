@@ -199,8 +199,6 @@ function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 		damage = damage - flatRes
 		damage = damage * perRes
 
-		print(damage)
-
 		damage = math.max(damage,0)
 
 		entity:DamagePsyHealth(damage)
