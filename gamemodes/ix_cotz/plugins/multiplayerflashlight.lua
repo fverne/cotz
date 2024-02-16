@@ -181,8 +181,8 @@ else
 		if (character and character:GetData("headlamp", false) == true) then
 		 	client:SetNWBool("customFlashlight", not client:GetNWBool("customFlashlight"))
 		 	client:EmitSound("items/flashlight1.wav")
-			return false
 		end
+		return false
 	end
 end
 
