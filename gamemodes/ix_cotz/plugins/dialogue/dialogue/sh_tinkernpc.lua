@@ -18,6 +18,7 @@ DIALOGUE.addTopic("GREETING", {
 		"RepairItems",
 		"AboutWorkTopic",
 		"GetTaskByDifficulty",
+		"ChangeSuitVariant",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
@@ -50,6 +51,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"RepairItems",
 		"AboutWorkTopic",
 		"GetTaskByDifficulty",
+		"ChangeSuitVariant",
 		"GOODBYE"
 	} --Should be identical to GREETING's options
 })
@@ -391,109 +393,6 @@ DIALOGUE.addTopic("NotEnoughMoneyRepair", {
 
 ----------------------------------------------------------------
 ----------------------END-TECHNICIAN-END------------------------
-----------------------------------------------------------------
-
-
-----------------------------------------------------------------
---------------------START-SUITCHANGE-START----------------------
-----------------------------------------------------------------
-
-DIALOGUE.addTopic("ChangeSuitVariant", {
-	statement = "Can you exchange my suit to another variant?",
-	response = "Which unequipped suit would you like to exchange?",
-	IsDynamic = true,
-	options = {
-		"BackTopic"
-	},
-	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
-		local items = client:GetCharacter():GetInventory():GetItems()
-
-		for k,v in pairs(items) do
-			if v.baseSuit and !v:GetData("equip") then
-				local convertcost = math.Round(v.price / 10)
-				table.insert(dynopts, {statement = v:GetName().." - "..ix.currency.Get(convertcost), topicID = "ChangeSuitVariant", dyndata = {itemuid = v.uniqueID, itemid = v:GetID(), cost = convertcost, baseSuit = v.baseSuit}})
-			end
-		end
-		
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-
-		-- Return the next topicID
-		if( !client:GetCharacter():HasMoney(dyndata.cost)) then
-			return "NotEnoughMoneySuitVariantChange"
-		end
-		return "ChangeSuitVariantP2", dyndata
-	end,
-})
-
-DIALOGUE.addTopic("ChangeSuitVariantP2", {
-	statement = "",
-	response = "",
-	IsDynamicFollowup = true,
-	IsDynamic = true,
-	DynamicPreCallback = function(self, player, target, dyndata)
-		if(dyndata) then
-			if (CLIENT) then
-				self.response = string.format("Which suit would you like instead? It will cost you %s. Be sure to remove attachments beforehand!", ix.currency.Get(dyndata.cost))
-			end
-
-			target.selectedsuitstruct = { dyndata.itemid, dyndata.itemuid, dyndata.cost, dyndata.baseSuit }
-		end
-	end,
-	GetDynamicOptions = function(self, client, target)
-
-		local suitVariants = {}
-		for _, v in pairs(ix.item.list) do
-			if target.selectedsuitstruct[4] == v.baseSuit then
-				table.insert(suitVariants, {uniqueID = v.uniqueID, name = v.name})
-			end
-		end
-
-		local dynopts = {}
-		for _, v in pairs(suitVariants) do
-			if v.uniqueID == target.selectedsuitstruct[2] then
-				continue
-			end
-
-			table.insert(dynopts, {statement = v.name.." with cost "..ix.currency.Get(target.selectedsuitstruct[3]), topicID = "ChangeSuitVariantP2", dyndata = {suitVariantUID = v.uniqueID, accepted = true}})
-		end
-
-		table.insert(dynopts, {statement = "Actually, nevermind...", topicID = "ChangeSuitVariantP2", dyndata = {accepted = false}})
-
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-		if( SERVER and dyndata.accepted ) then
-			ix.dialogue.notifyMoneyLost(client, ix.currency.Get(target.selectedsuitstruct[3]))
-			client:GetCharacter():TakeMoney(target.selectedsuitstruct[3])
-
-			ix.item.instances[target.selectedsuitstruct[1]]:Remove()
-			client:GetCharacter():GetInventory():Add(dyndata.suitVariantUID)
-		end
-		if(SERVER)then
-			target.selectedsuitstruct = nil
-		end
-		-- Return the next topicID
-		return "BackTopic"
-	end,
-})
-
-DIALOGUE.addTopic("NotEnoughMoneySuitVariantChange", {
-	statement = "",
-	response = "Not enough money for that.",
-	options = {
-		"BackTopic"
-	}
-})
-
-----------------------------------------------------------------
-----------------------END-SUITCHANGE-END------------------------
 ----------------------------------------------------------------
 
 ----------------------------------------------------------------
