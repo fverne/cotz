@@ -116,3 +116,19 @@ ix.command.Add("spawnadvvendor", {
 		ix.util.SpawnAdvVendor(npctemplate, hitpos, client:GetAngles())
 	end
 })
+
+ix.command.Add("GetEntitiesInSphere", {
+	description = "Dump all entities in sphere",
+	adminOnly = true,
+	arguments = {
+		ix.type.number
+	},
+	OnRun = function(self, client, radius)
+
+		local aimPos = client:GetEyeTraceNoCursor().HitPos
+		
+		for k,v in ipairs(ents.FindInSphere(aimPos, radius)) do
+			print("Entity: (", v:GetClass(), v:GetName(), v:MapCreationID(), ")")
+		end
+	end
+})

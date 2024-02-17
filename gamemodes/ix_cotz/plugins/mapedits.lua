@@ -29,4 +29,15 @@ function PLUGIN:EntityKeyValue(ent, key, value)
             ent:Remove()
         end
     end
+
+    if game.GetMap() == "rp_pripyat_remaster" then
+        local kometaIDs = {
+            [1523] = true,
+            [1524] = true
+        }
+
+        if IsValid(ent) and kometaIDs[ent:MapCreationID()] then
+            ent:Remove()
+        end
+    end
 end
