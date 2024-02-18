@@ -12,7 +12,7 @@ ix.randomitems.tables["task_reward_medical_03"] = {
 }
 
 ix.randomitems.tables["task_reward_medical_04"] = { 
-    {250, {"kit_medical_afak"}},
+    {250, {"kit_medical_defib"}},
 }
 
 ix.randomitems.tables["task_reward_medical_05"] = { 
