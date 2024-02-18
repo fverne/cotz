@@ -168,7 +168,11 @@ if (CLIENT) then
 		end
 	end
 else
-	function PLUGIN:PlayerDeath(client)
+	function PLUGIN:DoPlayerDeath(client)
+		client:SetNWBool("customFlashlight", false)
+	end
+
+	function PLUGIN:PlayerLoadout(client)
 		client:SetNWBool("customFlashlight", false)
 	end
 		
