@@ -8,6 +8,12 @@ PLUGIN.loadpoints = PLUGIN.loadpoints or {}
 PLUGIN.mapdata = PLUGIN.mapdata or {}
 PLUGIN.homemap = "rp_marsh_cs"
 
+PLUGIN.activemaps = {
+	"rp_marsh_cs",
+	"rp_waystation",
+	"rp_pripyat_remaster",
+}
+
 local DEBUGSETUP = true
 local checktime = 0
 

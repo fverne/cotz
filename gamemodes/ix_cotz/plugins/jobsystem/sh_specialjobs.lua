@@ -38,14 +38,14 @@ do
   tempJob.reward = {{"kit_ammo_med"}}
   tempJob.rewardCount = 1
   tempJob.repReward = 35
-  tempJob.moneyReward = { 4000, 6000 }
+  tempJob.moneyReward = { 2000, 2500 }
   tempJob.categories = {"scanarea"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete", ["map"] = game.GetMap()} ) then
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete", ["map"] = "rp_marsh_cs"} ) then
           ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
           return true
         else
@@ -91,26 +91,26 @@ do
 
   tempJob = nil
 
-  --Scan 1 areas
+  --Scan 2 areas
   local tempJob = {}
 
-  tempJob.name = "Scan 1 areas."
-  tempJob.desc = "1 areas."
+  tempJob.name = "Scan 2 areas."
+  tempJob.desc = "2 areas."
   tempJob.icon = "propic/event/area"
-  tempJob.tier = 1
+  tempJob.tier = 2
   tempJob.listenTrigger = "scanAreaEasyComplete"
   tempJob.numberRec = 1
-  tempJob.reward = {{"kit_ammo_m_low"}}
+  tempJob.reward = {{"kit_aid_high"}}
   tempJob.rewardCount = 1
-  tempJob.repReward = 35
-  tempJob.moneyReward = { 4000, 6000 }
+  tempJob.repReward = 50
+  tempJob.moneyReward = { 3000, 3500 }
   tempJob.categories = {"scanarea"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete", ["map"] = game.GetMap()} ) then
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaEasyComplete", ["map"] = "rp_marsh_cs"} ) then
           ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
           return true
         else
@@ -127,7 +127,7 @@ do
         for k,v in pairs(inv:GetItems()) do
           if v.uniqueID == "gasanalyzer" then
             -- Check that everything matches
-            if ((v:GetData("npoints", -1) == 1) and (v:GetData("finishedtrigger", "error") == "scanAreaEasyComplete") and v:GetData("finished", false)) then
+            if ((v:GetData("npoints", -1) == 2) and (v:GetData("finishedtrigger", "error") == "scanAreaEasyComplete") and v:GetData("finished", false)) then
               v:Remove()
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
@@ -156,26 +156,26 @@ do
 
   tempJob = nil
 
-  --Scan 2 areas
+  --Scan 1 areas
   local tempJob = {}
 
-  tempJob.name = "Scan 2 areas."
-  tempJob.desc = "2 areas."
+  tempJob.name = "Scan 1 areas."
+  tempJob.desc = "1 areas."
   tempJob.icon = "propic/event/area"
-  tempJob.tier = 2
+  tempJob.tier = 1
   tempJob.listenTrigger = "scanAreaMedComplete"
   tempJob.numberRec = 1
-  tempJob.reward = {{"kit_ammo_rare"}}
+  tempJob.reward = {{"kit_ammo_m_low"}}
   tempJob.rewardCount = 1
-  tempJob.repReward = 50
-  tempJob.moneyReward = { 7000, 9000 }
+  tempJob.repReward = 35
+  tempJob.moneyReward = { 3500, 4000 }
   tempJob.categories = {"scanarea"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete", ["map"] = game.GetMap()} ) then
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaMedComplete", ["map"] = "rp_waystation"} ) then
           ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
           return true
         else
@@ -192,7 +192,7 @@ do
         for k,v in pairs(inv:GetItems()) do
           if v.uniqueID == "gasanalyzer" then
             -- Check that everything matches
-            if ((v:GetData("npoints", -1) == 2) and (v:GetData("finishedtrigger", "error") == "scanAreaMedComplete") and v:GetData("finished", false)) then
+            if ((v:GetData("npoints", -1) == 1) and (v:GetData("finishedtrigger", "error") == "scanAreaMedComplete") and v:GetData("finished", false)) then
               v:Remove()
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
@@ -230,17 +230,17 @@ do
   tempJob.tier = 2
   tempJob.listenTrigger = "scanAreaMedComplete"
   tempJob.numberRec = 1
-  tempJob.reward = {{"kit_aid_high"}}
+  tempJob.reward = {{"kit_ammo_rare"}}
   tempJob.rewardCount = 1
   tempJob.repReward = 50
-  tempJob.moneyReward = { 7000, 9000 }
+  tempJob.moneyReward = { 4500, 5000 }
   tempJob.categories = {"scanarea"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete", ["map"] = game.GetMap()} ) then
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete", ["map"] = "rp_waystation"} ) then
           ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
           return true
         else
@@ -298,14 +298,14 @@ do
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = 1
   tempJob.repReward = 75
-  tempJob.moneyReward = { 10000, 15000 }
+  tempJob.moneyReward = { 8000, 9000 }
   tempJob.categories = {"scanarea"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = game.GetMap()} ) then
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = ix.util.GetRandomMap()} ) then
           ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
           return true
         else
@@ -363,14 +363,14 @@ do
   tempJob.reward = {{"kit_ammo_m_rare"}}
   tempJob.rewardCount = 1
   tempJob.repReward = 75
-  tempJob.moneyReward = { 10000, 15000 }
+  tempJob.moneyReward = { 9500, 10000 }
   tempJob.categories = {"scanarea"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = game.GetMap()} ) then
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = ix.util.GetRandomMap()} ) then
           ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
           return true
         else
@@ -624,14 +624,14 @@ do
   tempJob.reward = {}
   tempJob.rewardCount = 0
   tempJob.repReward = 30
-  tempJob.moneyReward = { 4500, 5500 }
+  tempJob.moneyReward = { 3500, 4500 }
   tempJob.categories = {"stashpackagenpc_easy"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("stashpackage", 1, { ["finishedtrigger"] = "stashPackageNpc", ["map"] = game.GetMap()} ) then
+        if inv:Add("stashpackage", 1, { ["finishedtrigger"] = "stashPackageNpc", ["map"] = "rp_marsh_cs"} ) then
           ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage"].name)
           return true
         else
@@ -673,14 +673,14 @@ do
   tempJob.reward = {}
   tempJob.rewardCount = 0
   tempJob.repReward = 40
-  tempJob.moneyReward = { 11500, 12500 }
+  tempJob.moneyReward = { 5000, 5500 }
   tempJob.categories = {"stashpackagenpc_medium"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("stashpackage_heavy", 1, { ["finishedtrigger"] = "stashPackageNpc_heavy", ["map"] = game.GetMap()} ) then
+        if inv:Add("stashpackage_heavy", 1, { ["finishedtrigger"] = "stashPackageNpc_heavy", ["map"] = "rp_waystation"} ) then
           ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage_heavy"].name)
           return true
         else
@@ -714,24 +714,24 @@ do
 
   local tempJob = {}
 
-  tempJob.name = "Stash very heavy package."
+  tempJob.name = "Stash heavy package."
   tempJob.desc = "Package."
   tempJob.icon = "propic/event/area"
   tempJob.tier = 1
-  tempJob.listenTrigger = "stashPackageNpc_vheavy"
+  tempJob.listenTrigger = "stashPackageNpc_heavy"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
   tempJob.repReward = 50
-  tempJob.moneyReward = { 18500, 19500 }
+  tempJob.moneyReward = { 7500, 8500 }
   tempJob.categories = {"stashpackagenpc_hard"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("stashpackage_veryheavy", 1, { ["finishedtrigger"] = "stashPackageNpc_vheavy", ["map"] = game.GetMap()} ) then
-          ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage_veryheavy"].name)
+        if inv:Add("stashpackage_heavy", 1, { ["finishedtrigger"] = "stashPackageNpc_heavy", ["map"] = "rp_pripyat_remaster"} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage_heavy"].name)
           return true
         else
           client:Notify("Not enough space in inventory! Retake the task.")
@@ -747,7 +747,7 @@ do
       local inv = char:GetInventory()
       if(inv)then
         for k,v in pairs(inv:GetItems()) do
-          if v.uniqueID == "stashpackage_veryheavy" then
+          if v.uniqueID == "stashpackage_heavy" then
             v:Remove()
             break
           end

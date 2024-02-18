@@ -40,3 +40,25 @@ function ix.util.GetMaterial(materialPath, materialArguments)
 
     return ix.util.cachedMaterials[materialPath]
 end
+
+function ix.util.GetRandomMap()
+    local activeMaps = ix.plugin.list["simplecrossserver"].activemaps
+    local selectedMap = activeMaps[math.random(#activeMaps)]
+
+    return selectedMap
+end
+
+function ix.util.GetDifferentRandomMap(mapToAvoid)
+    mapToAvoid = mapToAvoid or game.GetMap()
+
+	local activeMaps = ix.plugin.list["simplecrossserver"].activemaps
+    local selectedMap = activeMaps[math.random(#activeMaps)]
+
+	for k,v in pairs(tempMaps) do
+		if v == mapToAvoid then
+			continue
+		else
+			return v
+		end
+	end
+end

@@ -104,7 +104,7 @@ end
 
 function ITEM:OnInstanced(invID, x, y)
 	if (!self:GetData("stashdata")) then
-		local stashdata = ix.util.GetRandomStashTaskData()
+		local stashdata = ix.util.GetRandomStashTaskData(self:GetData("map", nil))
 
 		self:SetData("stashdata", stashdata)
 	end
