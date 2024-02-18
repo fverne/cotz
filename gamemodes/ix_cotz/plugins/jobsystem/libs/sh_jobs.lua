@@ -129,16 +129,16 @@ if SERVER then
     if self:GetCharacter():GetData("lastTaskAbandon", 0) < os.time() then
       curJobs = self:GetCharacter():GetJobs()
 
+      local identifier = curJobs[npcidentifier].identifier
+      if(ix.jobs.list[identifier].OnTaskAbandon)then
+        ix.jobs.list[identifier].OnTaskAbandon(self)
+      end
+
       curJobs[npcidentifier] = nil
   
       self:GetCharacter():SetJobs(curJobs)
 
       self:GetCharacter():SetData("lastTaskAbandon", os.time() + ix.config.Get("taskAbandonCooldown", 3600))
-      
-      local identifier = curJobs[npcidentifier].identifier
-      if(ix.jobs.list[identifier].OnTaskAbandon)then
-        ix.jobs.list[identifier].OnTaskAbandon(self)
-      end
     else
       self:Notify("You can't abandon another task so soon!")
     end
