@@ -40,7 +40,7 @@ end
 
 function ix.util.PlayerActionInterrupt(player)
     if (player:GetNetVar("ix_hasBlackScreen")) then
-        player:SetAction("Action Cancelled", 1)
+        player:SetAction("Action Cancelled", 0)
         player:Freeze(false)
         player:SetNetVar("ix_noMenuAllowed", false)
 		player:SetNetVar("ix_hasBlackScreen", nil)
