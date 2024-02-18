@@ -174,3 +174,9 @@ ix.container.Register("models/lostsignalproject/items/misc/grooming.mdl", {
 	height = 6
 })
 
+ix.container.Register("models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl", {
+	name = "Blue Footlocker",
+	description = "A handy box for storing gear.",
+	width = 6,
+	height = 6
+})
