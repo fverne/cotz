@@ -134,6 +134,11 @@ if SERVER then
       self:GetCharacter():SetJobs(curJobs)
 
       self:GetCharacter():SetData("lastTaskAbandon", os.time() + ix.config.Get("taskAbandonCooldown", 3600))
+      
+      local identifier = curJobs[npcidentifier].identifier
+      if(ix.jobs.list[identifier].OnTaskAbandon)then
+        ix.jobs.list[identifier].OnTaskAbandon(self)
+      end
     else
       self:Notify("You can't abandon another task so soon!")
     end
@@ -227,6 +232,13 @@ if SERVER then
 
     --Check if player already has a job from this npc
     if curJobs[npcidentifier] then return false end
+
+    if(ix.jobs.list[identifier].CanAcceptTask)then
+      if !ix.jobs.list[identifier].CanAcceptTask(self) then
+        return
+      end
+    end
+
     --Evaluate job parameters | numberRec, listenTrigger, progress=0, isCompleted=false |
     temp = {}
 

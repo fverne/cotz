@@ -13,6 +13,8 @@
   tempJob.repReward = 80                                --how much reputation should be awarded for completion
   tempJob.categories = {"mutantkilleasy"}               --table of category identifiers, used for when npc gets tasks
   tempJob.OnTaskGet = function(client)                  --function to run when task is given
+  tempJob.CanAcceptTask = function(client)              --function to run before task is given
+  tempJob.OnTaskAbandon = function(client)              --function to run when task is abandoned
   tempJob.OnTaskComplete = function(client)             --function to run when task is handed in
   tempJob.moneyReward = {2000,4000} OR 3000             --for adding money to the player, can technically be done through itemreward as well
 
@@ -38,13 +40,17 @@ do
   tempJob.repReward = 35
   tempJob.moneyReward = { 4000, 6000 }
   tempJob.categories = {"scanarea"}
-  tempJob.OnTaskGet = function(client) 
+  tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete", ["map"] = game.GetMap()} )
-        ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete", ["map"] = game.GetMap()} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
       end
     end
   end
@@ -61,6 +67,20 @@ do
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
             end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "gasanalyzer" then
+            v:Remove()
+            break
           end
         end
       end
@@ -85,13 +105,17 @@ do
   tempJob.repReward = 35
   tempJob.moneyReward = { 4000, 6000 }
   tempJob.categories = {"scanarea"}
-  tempJob.OnTaskGet = function(client) 
+  tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete", ["map"] = game.GetMap()} )
-        ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanAreaEasyComplete", ["map"] = game.GetMap()} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
       end
     end
   end
@@ -108,6 +132,20 @@ do
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
             end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "gasanalyzer" then
+            v:Remove()
+            break
           end
         end
       end
@@ -132,13 +170,17 @@ do
   tempJob.repReward = 50
   tempJob.moneyReward = { 7000, 9000 }
   tempJob.categories = {"scanarea"}
-  tempJob.OnTaskGet = function(client) 
+  tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete", ["map"] = game.GetMap()} )
-        ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete", ["map"] = game.GetMap()} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
       end
     end
   end
@@ -155,6 +197,20 @@ do
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
             end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "gasanalyzer" then
+            v:Remove()
+            break
           end
         end
       end
@@ -179,13 +235,17 @@ do
   tempJob.repReward = 50
   tempJob.moneyReward = { 7000, 9000 }
   tempJob.categories = {"scanarea"}
-  tempJob.OnTaskGet = function(client) 
+  tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete", ["map"] = game.GetMap()} )
-        ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanAreaMedComplete", ["map"] = game.GetMap()} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
       end
     end
   end
@@ -202,6 +262,20 @@ do
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
             end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "gasanalyzer" then
+            v:Remove()
+            break
           end
         end
       end
@@ -226,13 +300,17 @@ do
   tempJob.repReward = 75
   tempJob.moneyReward = { 10000, 15000 }
   tempJob.categories = {"scanarea"}
-  tempJob.OnTaskGet = function(client) 
+  tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = game.GetMap()} )
-        ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = game.GetMap()} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
       end
     end
   end
@@ -249,6 +327,20 @@ do
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
             end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "gasanalyzer" then
+            v:Remove()
+            break
           end
         end
       end
@@ -273,13 +365,17 @@ do
   tempJob.repReward = 75
   tempJob.moneyReward = { 10000, 15000 }
   tempJob.categories = {"scanarea"}
-  tempJob.OnTaskGet = function(client) 
+  tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = game.GetMap()} )
-        ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = game.GetMap()} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
       end
     end
   end
@@ -296,6 +392,20 @@ do
               ix.dialogue.notifyItemLost(client, ix.item.list["gasanalyzer"].name)
               break
             end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "gasanalyzer" then
+            v:Remove()
+            break
           end
         end
       end
@@ -320,13 +430,17 @@ do
   tempJob.repReward = 20
   tempJob.moneyReward = { 2500, 4500 }
   tempJob.categories = {"dataextract"}
-  tempJob.OnTaskGet = function(client) 
+  tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("dataextractor", 1, { ["ntypes"] = 2, ["finishedtrigger"] = "dataExtractEasy"} )
-        ix.dialogue.notifyItemGet(client, ix.item.list["dataextractor"].name)
+        if inv:Add("dataextractor", 1, { ["ntypes"] = 2, ["finishedtrigger"] = "dataExtractEasy"} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["dataextractor"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
       end
     end
   end
@@ -343,6 +457,20 @@ do
               ix.dialogue.notifyItemLost(client, ix.item.list["dataextractor"].name)
               break
             end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "dataextractor" then
+            v:Remove()
+            break
           end
         end
       end
@@ -367,13 +495,17 @@ do
   tempJob.repReward = 35
   tempJob.moneyReward = { 4000, 6000 }
   tempJob.categories = {"dataextract"}
-  tempJob.OnTaskGet = function(client) 
+  tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("dataextractor", 1, { ["ntypes"] = 3, ["finishedtrigger"] = "dataExtractMedium"} )
-        ix.dialogue.notifyItemGet(client, ix.item.list["dataextractor"].name)
+        if inv:Add("dataextractor", 1, { ["ntypes"] = 3, ["finishedtrigger"] = "dataExtractMedium"} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["dataextractor"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
       end
     end
   end
@@ -390,6 +522,20 @@ do
               ix.dialogue.notifyItemLost(client, ix.item.list["dataextractor"].name)
               break
             end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "dataextractor" then
+            v:Remove()
+            break
           end
         end
       end
@@ -414,13 +560,17 @@ do
   tempJob.repReward = 50
   tempJob.moneyReward = { 8500, 11500 }
   tempJob.categories = {"dataextract"}
-  tempJob.OnTaskGet = function(client) 
+  tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
-      if(inv)then
-        inv:Add("dataextractor", 1, { ["ntypes"] = 5, ["finishedtrigger"] = "dataExtractHard"} )
-        ix.dialogue.notifyItemGet(client, ix.item.list["dataextractor"].name)
+      if(inv)then 
+        if inv:Add("dataextractor", 1, { ["ntypes"] = 5, ["finishedtrigger"] = "dataExtractHard"} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["dataextractor"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
       end
     end
   end
@@ -437,6 +587,20 @@ do
               ix.dialogue.notifyItemLost(client, ix.item.list["dataextractor"].name)
               break
             end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "dataextractor" then
+            v:Remove()
+            break
           end
         end
       end
@@ -462,17 +626,35 @@ do
   tempJob.repReward = 30
   tempJob.moneyReward = { 4500, 5500 }
   tempJob.categories = {"stashpackagenpc_easy"}
-  tempJob.OnTaskGet = function(client) 
+  tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("stashpackage", 1, { ["finishedtrigger"] = "stashPackageNpc", ["map"] = game.GetMap()} )
-        ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage"].name)
+        if inv:Add("stashpackage", 1, { ["finishedtrigger"] = "stashPackageNpc", ["map"] = game.GetMap()} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
       end
     end
   end
   tempJob.OnTaskComplete = function(client) 
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "stashpackage" then
+            v:Remove()
+            break
+          end
+        end
+      end
+    end
   end
 
   ix.jobs.register(tempJob, "stashPackageNpc_easy")
@@ -493,17 +675,35 @@ do
   tempJob.repReward = 40
   tempJob.moneyReward = { 11500, 12500 }
   tempJob.categories = {"stashpackagenpc_medium"}
-  tempJob.OnTaskGet = function(client) 
+  tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("stashpackage_heavy", 1, { ["finishedtrigger"] = "stashPackageNpc_heavy", ["map"] = game.GetMap()} )
-        ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage_heavy"].name)
+        if inv:Add("stashpackage_heavy", 1, { ["finishedtrigger"] = "stashPackageNpc_heavy", ["map"] = game.GetMap()} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage_heavy"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")          
+        end
       end
     end
   end
   tempJob.OnTaskComplete = function(client) 
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "stashpackage_heavy" then
+            v:Remove()
+            break
+          end
+        end
+      end
+    end
   end
 
   ix.jobs.register(tempJob, "stashPackageNpc_medium")
@@ -525,17 +725,35 @@ do
   tempJob.repReward = 50
   tempJob.moneyReward = { 18500, 19500 }
   tempJob.categories = {"stashpackagenpc_hard"}
-  tempJob.OnTaskGet = function(client) 
+  tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        inv:Add("stashpackage_veryheavy", 1, { ["finishedtrigger"] = "stashPackageNpc_vheavy", ["map"] = game.GetMap()} )
-        ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage_veryheavy"].name)
+        if inv:Add("stashpackage_veryheavy", 1, { ["finishedtrigger"] = "stashPackageNpc_vheavy", ["map"] = game.GetMap()} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["stashpackage_veryheavy"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
       end
     end
   end
   tempJob.OnTaskComplete = function(client) 
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "stashpackage_veryheavy" then
+            v:Remove()
+            break
+          end
+        end
+      end
+    end
   end
 
   ix.jobs.register(tempJob, "stashPackageNpc_hard")
