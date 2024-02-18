@@ -153,7 +153,7 @@ ix.poaching.MutantParts = {
 function PLUGIN:PlayerButtonDown(client,key)
     local Hit = client:GetEyeTraceNoCursor()
     local npc = Hit.Entity
-    if (client:GetNetVar("IsPoaching") == true && key == 16 ) then
+    if (client:GetNetVar("IsPoaching") == true && key == 15 ) then
        ix.util.PlayerActionInterrupt(client)
        npc:SetNetVar("beingSkinned",false)
     end
@@ -242,7 +242,7 @@ if SERVER then
                 npc:EmitSound("stalkersound/inv_mutant_loot_animal.ogg", 60)
                 client:SetNetVar("IsPoaching", true)
 
-                ix.util.PlayerPerformBlackScreenAction(client, "Poaching (Press F to Cancel)", 5, function(player)
+                ix.util.PlayerPerformBlackScreenAction(client, "Poaching", 5, function(player)
                     if not player:GetNetVar("IsPoaching") then
                         npc:SetNetVar("beingSkinned", false)
                         npc:StopSound("stalkersound/inv_mutant_loot_animal.ogg")

@@ -121,8 +121,6 @@ end
 
 function ITEM:RemovePart(client)
 	local char = client:GetCharacter()
-
-	self:SetData("equip", false)
 	client:RemovePart(self.uniqueID)
 
 	if (self.attribBoosts) then
@@ -130,8 +128,6 @@ function ITEM:RemovePart(client)
 			char:RemoveBoost(self.uniqueID, k)
 		end
 	end
-
-	self:OnUnequipped()
 end
 
 -- On item is dropped, Remove a weapon from the player and keep the ammo in the item.
@@ -149,13 +145,14 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	tip = "equipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)
-		item:RemovePart(item.player)
-
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 4, function(player)
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 4, function(ply)
+			item:SetData("equip", false)
+			item:RemovePart(ply)
+			ply:RecalculateResistances()
+			ply:ReevaluateOverlay()
 		end)
 
-		item.player:RecalculateResistances()
-		item.player:ReevaluateOverlay()
+		item:OnUnequipped()
 
 		return false
 	end,
@@ -200,22 +197,22 @@ ITEM.functions.Equip = {
 			end
 		end
 
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 4, function(player)
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 4, function(ply)
+			item:SetData("equip", true)
+			ply:AddPart(item.uniqueID, item)
+
+			if (item.attribBoosts) then
+				for k, v in pairs(item.attribBoosts) do
+					char:AddBoost(item.uniqueID, k, v)
+				end
+			end
+
+			ply:RecalculateResistances()
+			ply:ReevaluateOverlay()
 		end)
 
-		item:SetData("equip", true)
-		item.player:AddPart(item.uniqueID, item)
-
-		if (item.attribBoosts) then
-			for k, v in pairs(item.attribBoosts) do
-				char:AddBoost(item.uniqueID, k, v)
-			end
-		end
-
-		item.player:RecalculateResistances()
-		item.player:ReevaluateOverlay()
-
 		item:OnEquipped()
+
 		return false
 	end,
 	OnCanRun = function(item)
@@ -247,7 +244,7 @@ end
 function ITEM:OnEquipped()
 	if self.isGasmask == true then
 		-- self.player:ApplyDSPGasmask()
-		self.player:EmitSound("stalkersound/gasmask_on.ogg")
+		self:GetOwner():EmitSound("stalkersound/gasmask_on.ogg")
 		return
 	end
 end
@@ -255,7 +252,7 @@ end
 function ITEM:OnUnequipped()
 	if self.isGasmask == true then
 		-- self.player:UnApplyDSPGasmask()
-		self.player:EmitSound("stalkersound/gasmask_off.ogg")
+		self:GetOwner():EmitSound("stalkersound/gasmask_off.ogg")
 		return
 	end
 end

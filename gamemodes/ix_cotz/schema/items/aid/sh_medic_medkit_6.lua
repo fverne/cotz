@@ -72,7 +72,6 @@ ITEM.functions.usetarget = {
 				player:AddBuff("buff_radiationremoval", 10, { amount = item.radrem/20 })
 			end)
 			
-			ix.util.PlayerPerformBlackScreenAction(target, "Being treated by "..item.player:Name()..".", 1.5)
 			
 			quantity = quantity - 1
 

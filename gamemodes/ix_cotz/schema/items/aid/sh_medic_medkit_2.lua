@@ -68,7 +68,6 @@ ITEM.functions.usetarget = {
 				target:AddBuff("buff_rapidheal", 20, { amount = item.restore/20 })
 			end)
 			
-			ix.util.PlayerPerformBlackScreenAction(target, "Being treated by "..item.player:Name()..".", 1.5)
 			
 			
 			quantity = quantity - 1

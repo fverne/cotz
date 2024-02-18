@@ -95,3 +95,10 @@ function Schema:Initialize()
 	game.ConsoleCommand("sv_allowdownload 0");
 	game.ConsoleCommand("sv_allowcslua 0");
 end
+
+-- Interrupts blackscreen
+function Schema:PlayerButtonDown(client,key)
+    if (client:GetNetVar("ix_hasBlackScreen") && key == 15 ) then
+       ix.util.PlayerActionInterrupt(client)
+    end
+end

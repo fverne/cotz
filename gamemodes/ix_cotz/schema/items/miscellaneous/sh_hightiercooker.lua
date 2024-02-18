@@ -103,13 +103,12 @@ function ITEM:CookMeat(item, targetID)
   if (self:GetData("cancook", false)) then
     local client = self.player or item:GetOwner()
     
-    target:Remove()
-
     ix.util.PlayerPerformBlackScreenAction(client, "Cooking...", 6, function(player) 
-        client:GetCharacter():GetInventory():Add(target.meal, 1, {["weight"] = target:GetWeight()})
-        player:Notify(target.name.." successfully cooked.")
-        ix.chat.Send(player, "iteminternal", "uses their "..self.name.." to cook some "..target.name..".", false)
-      end)
+      target:Remove()
+      client:GetCharacter():GetInventory():Add(target.meal, 1, {["weight"] = target:GetWeight()})
+      player:Notify(target.name.." successfully cooked.")
+      ix.chat.Send(player, "iteminternal", "uses their "..self.name.." to cook some "..target.name..".", false)
+    end)
     
     client:EmitSound(self.sound or "items/battery_pickup.wav")
     self:SetData("cancook", false)

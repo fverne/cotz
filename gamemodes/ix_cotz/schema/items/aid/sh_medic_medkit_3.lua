@@ -70,7 +70,6 @@ ITEM.functions.usetarget = {
 				target:AddBuff("buff_slowheal", 60, { amount = item.restore/60 })
 			end)
 			
-			ix.util.PlayerPerformBlackScreenAction(target, "Being treated by "..item.player:Name()..".", 4)
 
 			quantity = quantity - 1
 

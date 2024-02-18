@@ -217,13 +217,11 @@ function ITEM:RemoveOutfit(client)
 	end
 
 	for k, v in pairs( self:GetData("origgroups", {})) do
-		self.player:SetBodygroup( k, v )
+		self:GetOwner():SetBodygroup( k, v )
 		bgroups[k] = v
 	end
 
-	self.player:GetCharacter():SetData("groups", bgroups)
-
-	self:OnUnequipped()
+	self:GetOwner():GetCharacter():SetData("groups", bgroups)
 end
 
 function ITEM:OnInstanced()
@@ -282,17 +280,15 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	name = "Take Off",
 	tip = "equipTip",
 	icon = "icon16/stalker/unequip.png",
-	OnRun = function(item)
-		local client = item.player
-				
-		item:RemoveOutfit(item.player)
-
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 6, function(player) 
+	OnRun = function(item)		
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 6, function(ply) 
+			item:RemoveOutfit(ply)
+			ply:RecalculateResistances()
+			ply:ReevaluateOverlay()
 		end)
 
-		item.player:RecalculateResistances()
-		item.player:ReevaluateOverlay()
-		
+		item:OnUnequipped()
+
 		return false
 	end,
 	OnCanRun = function(item)
@@ -343,32 +339,35 @@ ITEM.functions.Equip = {
 		end
 
 		
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 6, function(player) 
-		end)
-		
-		item:SetData("equip", true)
-		
-		local origbgroups = {}
-		for k, v in ipairs(client:GetBodyGroups()) do
-			origbgroups[v.id] = client:GetBodygroup(v.id)
-		end
-		item:SetData("origgroups", origbgroups)
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 6, function(ply) 
 
-		item.player:RecalculateResistances()
-		item.player:ReevaluateOverlay()
-
-		char:SetData("oldModel" .. item.outfitCategory, char:GetData("oldModel" .. item.outfitCategory, item.player:GetModel()))
-		char:SetModel(item.newModel)
-
-		if (item.newSkin) then
-			char:SetData("oldSkin" .. item.outfitCategory, item.player:GetSkin())
-			item.player:SetSkin(item.newSkin)
-			if item:GetData("setSkin", nil) != nil then
-				client:SetSkin( item:GetData("setSkin", item.newSkin) )
+			item:SetData("equip", true)
+			
+			local origbgroups = {}
+			for k, v in ipairs(client:GetBodyGroups()) do
+				origbgroups[v.id] = client:GetBodygroup(v.id)
 			end
-		end
+			item:SetData("origgroups", origbgroups)
+
+			ply:RecalculateResistances()
+			ply:ReevaluateOverlay()
+
+			char:SetData("oldModel" .. item.outfitCategory, char:GetData("oldModel" .. item.outfitCategory, ply:GetModel()))
+			char:SetModel(item.newModel)
+
+			if (item.newSkin) then
+				char:SetData("oldSkin" .. item.outfitCategory, ply:GetSkin())
+				ply:SetSkin(item.newSkin)
+				if item:GetData("setSkin", nil) != nil then
+					client:SetSkin( item:GetData("setSkin", item.newSkin) )
+				end
+			end
+
+			item:OnLoadout()
+		end)
 
 		item:OnEquipped()
+
 		return false
 	end,
 	OnCanRun = function(item)
@@ -440,7 +439,7 @@ ITEM.functions.detach = {
 
 function ITEM:OnLoadout()
 	if (self:GetData("equip")) then
-		local client = self.player
+		local client = self:GetOwner()
 
 		if self:GetData("setSkin", self.newSkin) then
 			client:SetSkin( self:GetData("setSkin", self.newSkin) )
@@ -499,12 +498,11 @@ function ITEM:OnRemoved()
 end
 
 function ITEM:OnEquipped()
-	self.player:EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
-	self:OnLoadout()
+	self:GetOwner():EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
 end
 
 function ITEM:OnUnequipped()
-	self.player:EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
+	self:GetOwner():EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
 end
 
 function ITEM:getBR() 
