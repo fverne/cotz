@@ -16,6 +16,7 @@ ix.randomitems.tables["worldspawn_1"] = {
   {130, {"value_carbattery"}},
   {200, {"value_motorclean"}},
   {400, {"value_tape_electric"}},
+  {100, {"value_tape_heavy"}},
   {200, {"value_kerosene"}},
   {75, {"value_waterfilter"}},
   {75, {"value_engine"}},
