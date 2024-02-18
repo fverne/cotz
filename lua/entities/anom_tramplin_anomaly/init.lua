@@ -82,7 +82,7 @@ function ENT:StartTouch( ply )
 	timer.Create("tramplin_activated"..self:EntIndex(), 6, 1, function()
 		ParticleEffect( "tramplin_blast", self:GetPos(), Angle( 0, 0, 0 ) )
 		util.BlastDamage( self, self, self:GetPos()+Vector(50,50,300), 250, 400)
-		if IsValid(ent) and ent:IsRagdoll() then
+		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			ent:Remove()
 		end
 		--ply:TakeDamage(99999, self, self)

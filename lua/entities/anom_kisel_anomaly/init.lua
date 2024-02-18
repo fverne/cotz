@@ -50,7 +50,7 @@ function ENT:StartTouch(ent)
 		self:EmitSound("bfuzz_hit");
 		--util.BlastDamage( self, self, self:GetPos(), 100, 70)
 		ent:TakeDamage(70, self, self)
-		if IsValid(ent) and ent:IsRagdoll() then
+		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			ent:Remove()
 		end
 	end)	
@@ -62,7 +62,7 @@ function ENT:StartTouch(ent)
 		self:EmitSound("bfuzz_hit");
 		--util.BlastDamage( self, self, self:GetPos(), 100, 70)
 		ent:TakeDamage(70, self, self)
-		if IsValid(ent) and ent:IsRagdoll() then
+		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			ent:Remove()
 		end
 	end)
