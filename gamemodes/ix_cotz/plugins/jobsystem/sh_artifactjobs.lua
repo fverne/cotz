@@ -16,7 +16,7 @@ do
   tempJob.desc = "** The computer shows an image of a spindly artifact, loosely reminiscent of a spider. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_arachno"
+  tempJob.requiredItem = "artifact_arachno"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -34,7 +34,7 @@ do
   tempJob.desc = "** The computer shows an image of a spindly artifact, loosely reminiscent of a spider.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_arachno"
+  tempJob.requiredItem = "artifact_arachno"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -52,7 +52,7 @@ do
   tempJob.desc = "** The computer shows an image of an artifact, consisting of three bars connected at either end with an electric current running between them. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_battery"
+  tempJob.requiredItem = "artifact_battery"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -70,7 +70,7 @@ do
   tempJob.desc = "** The computer shows an image of an artifact, consisting of three bars connected at either end with an electric current running between them.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_battery"
+  tempJob.requiredItem = "artifact_battery"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -88,7 +88,7 @@ do
   tempJob.desc = "** The computer shows an image of an artifact, consisting of two plates at a fixed distance from one another. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_blowncap"
+  tempJob.requiredItem = "artifact_blowncap"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -106,7 +106,7 @@ do
   tempJob.desc = "** The computer shows an image of an artifact, consisting of two plates at a fixed distance from one another.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_blowncap"
+  tempJob.requiredItem = "artifact_blowncap"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -124,7 +124,7 @@ do
   tempJob.desc = "** The computer shows an image of a small glowing bolt.\nIt also shows a number: '4' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_bolt"
+  tempJob.requiredItem = "artifact_bolt"
   tempJob.numberRec = 4
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -142,7 +142,7 @@ do
   tempJob.desc = "** The computer shows an image of a small glowing bolt.\nIt also shows a number: '6' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_bolt"
+  tempJob.requiredItem = "artifact_bolt"
   tempJob.numberRec = 6
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -160,7 +160,7 @@ do
   tempJob.desc = "** The computer shows an image of a small knotted bone.\nIt also shows a number: '3' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_bonecluster"
+  tempJob.requiredItem = "artifact_bonecluster"
   tempJob.numberRec = 3
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -178,7 +178,7 @@ do
   tempJob.desc = "** The computer shows an image of a small knotted bone.\nIt also shows a number: '5' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_bonecluster"
+  tempJob.requiredItem = "artifact_bonecluster"
   tempJob.numberRec = 5
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -196,7 +196,7 @@ do
   tempJob.desc = "** The computer shows an image of an artifact, consisting of two plates at a fixed distance from one another. A strange substance is present between them. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_capacitor"
+  tempJob.requiredItem = "artifact_capacitor"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -214,7 +214,7 @@ do
   tempJob.desc = "** The computer shows an image of a spherical artifact. You can make out some sort of mass inside the sphere. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_cell"
+  tempJob.requiredItem = "artifact_cell"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -232,7 +232,7 @@ do
   tempJob.desc = "** The computer shows an image of a spherical artifact. You can make out some sort of mass inside the sphere.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_cell"
+  tempJob.requiredItem = "artifact_cell"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -250,7 +250,7 @@ do
   tempJob.desc = "** The computer shows an image of a crystalline artifact. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_crystal"
+  tempJob.requiredItem = "artifact_crystal"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -268,7 +268,7 @@ do
   tempJob.desc = "** The computer shows an image of a crystalline artifact.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_crystal"
+  tempJob.requiredItem = "artifact_crystal"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -286,7 +286,7 @@ do
   tempJob.desc = "** The computer shows an image of a small teardrop shaped artifact. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_droplet"
+  tempJob.requiredItem = "artifact_droplet"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -304,7 +304,7 @@ do
   tempJob.desc = "** The computer shows an image of a small teardrop shaped artifact.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_droplet"
+  tempJob.requiredItem = "artifact_droplet"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -322,7 +322,7 @@ do
   tempJob.desc = "** The computer shows an image of a small sphere with smaller spheres locked in orbit around it. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_dwarfgalaxy"
+  tempJob.requiredItem = "artifact_dwarfgalaxy"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -340,7 +340,7 @@ do
   tempJob.desc = "** The computer shows an image of a teardrop shaped artifact. A readout in the corner shows high temperatures. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_eye"
+  tempJob.requiredItem = "artifact_eye"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -358,7 +358,7 @@ do
   tempJob.desc = "** The computer shows an image of a spherical. A readout in the corner shows extreme temperatures. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_flame"
+  tempJob.requiredItem = "artifact_flame"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -376,7 +376,7 @@ do
   tempJob.desc = "** The computer shows an image of a small shining ball of an artifact. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_flash"
+  tempJob.requiredItem = "artifact_flash"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -394,7 +394,7 @@ do
   tempJob.desc = "** The computer shows an image of a small shining ball of an artifact.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_flash"
+  tempJob.requiredItem = "artifact_flash"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -412,7 +412,7 @@ do
   tempJob.desc = "** The computer shows an image of a spherical artifact encased in a wing-like shroud. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_gaia"
+  tempJob.requiredItem = "artifact_gaia"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -430,7 +430,7 @@ do
   tempJob.desc = "** The computer shows an image of a sphere with smaller spheres locked in orbit around it. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_galaxy"
+  tempJob.requiredItem = "artifact_galaxy"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -448,7 +448,7 @@ do
   tempJob.desc = "** The computer shows an image of an artifact consisting of a string of spheres. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_gmamasbeads"
+  tempJob.requiredItem = "artifact_gmamasbeads"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -466,7 +466,7 @@ do
   tempJob.desc = "** The computer shows an image of a halo-shaped object. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_halo"
+  tempJob.requiredItem = "artifact_halo"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -484,7 +484,7 @@ do
   tempJob.desc = "** The computer shows an image of a small, spiky artifact. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_kolobok"
+  tempJob.requiredItem = "artifact_kolobok"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -502,7 +502,7 @@ do
   tempJob.desc = "** The computer shows an image of a ladder-like structure of beads. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_mamasbeads"
+  tempJob.requiredItem = "artifact_mamasbeads"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -520,7 +520,7 @@ do
   tempJob.desc = "** The computer shows an image of a skull shaped artifact. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_mementomori"
+  tempJob.requiredItem = "artifact_mementomori"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -538,7 +538,7 @@ do
   tempJob.desc = "** The computer shows an image of a skull shaped artifact.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_mementomori"
+  tempJob.requiredItem = "artifact_mementomori"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -556,7 +556,7 @@ do
   tempJob.desc = "** The computer shows an image of a rock shaped artifact. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_mica"
+  tempJob.requiredItem = "artifact_mica"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -574,7 +574,7 @@ do
   tempJob.desc = "** The computer shows an image of a rock shaped artifact.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_mica"
+  tempJob.requiredItem = "artifact_mica"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -592,7 +592,7 @@ do
   tempJob.desc = "** The computer shows an image of a reflective artifact shaped like a dotted sphere. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_midas"
+  tempJob.requiredItem = "artifact_midas"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -610,7 +610,7 @@ do
   tempJob.desc = "** The computer shows an image of a small glowing orb. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_moonlight"
+  tempJob.requiredItem = "artifact_moonlight"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -628,7 +628,7 @@ do
   tempJob.desc = "** The computer shows an image of a lumpy rock.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_mycelia"
+  tempJob.requiredItem = "artifact_mycelia"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -646,7 +646,7 @@ do
   tempJob.desc = "** The computer shows an image of a small bracelet. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_panacea"
+  tempJob.requiredItem = "artifact_panacea"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -664,7 +664,7 @@ do
   tempJob.desc = "** The computer shows an image of a porous rock. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_slime"
+  tempJob.requiredItem = "artifact_slime"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -682,7 +682,7 @@ do
   tempJob.desc = "** The computer shows an image of a porous rock.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_slime"
+  tempJob.requiredItem = "artifact_slime"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -700,7 +700,7 @@ do
   tempJob.desc = "** The computer shows an image of a jelly-like artifact covered in stone plates. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_slug"
+  tempJob.requiredItem = "artifact_slug"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -718,7 +718,7 @@ do
   tempJob.desc = "** The computer shows an image of a jelly-like artifact covered in stone plates.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_slug"
+  tempJob.requiredItem = "artifact_slug"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -736,7 +736,7 @@ do
   tempJob.desc = "** The computer shows an image of a small glowing orb. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_sparkler"
+  tempJob.requiredItem = "artifact_sparkler"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -754,7 +754,7 @@ do
   tempJob.desc = "** The computer shows an image of a small glowing orb.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_sparkler"
+  tempJob.requiredItem = "artifact_sparkler"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -772,7 +772,7 @@ do
   tempJob.desc = "** The computer shows an image of a small thorny artifact. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_thorn"
+  tempJob.requiredItem = "artifact_thorn"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -790,7 +790,7 @@ do
   tempJob.desc = "** The computer shows an image of a small thorny artifact.\nIt also shows a number: '2' **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_thorn"
+  tempJob.requiredItem = "artifact_thorn"
   tempJob.numberRec = 2
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -808,7 +808,7 @@ do
   tempJob.desc = "** The computer shows an image of a spiky artifact. **"
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_urchin"
+  tempJob.requiredItem = "artifact_urchin"
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
@@ -831,7 +831,7 @@ do
   tempJob.desc = "1 Arachno."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_arachno"
+  tempJob.requiredItem = "artifact_arachno"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_high"}}
   tempJob.rewardCount = 1
@@ -849,7 +849,7 @@ do
   tempJob.desc = "2 Batteries."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_battery"
+  tempJob.requiredItem = "artifact_battery"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -867,7 +867,7 @@ do
   tempJob.desc = "1 Blown Capacitor."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_blowncap"
+  tempJob.requiredItem = "artifact_blowncap"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_m_low"}}
   tempJob.rewardCount = 1
@@ -885,7 +885,7 @@ do
   tempJob.desc = "1 Anomalous Bolt."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_bolt"
+  tempJob.requiredItem = "artifact_bolt"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_low"}}
   tempJob.rewardCount = 1
@@ -903,7 +903,7 @@ do
   tempJob.desc = "2 Anomalous Bolts."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_bolt"
+  tempJob.requiredItem = "artifact_bolt"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_ammo_low"}}
   tempJob.rewardCount = 1
@@ -921,7 +921,7 @@ do
   tempJob.desc = "5 Anomalous Bolts."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_bolt"
+  tempJob.requiredItem = "artifact_bolt"
   tempJob.numberRec = 5
   tempJob.reward = {{"kit_ammo_high"}}
   tempJob.rewardCount = 1
@@ -939,7 +939,7 @@ do
   tempJob.desc = "1 Bone Cluster."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_bonecluster"
+  tempJob.requiredItem = "artifact_bonecluster"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_low"}}
   tempJob.rewardCount = 1
@@ -957,7 +957,7 @@ do
   tempJob.desc = "2 Bone Clusters."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_bonecluster"
+  tempJob.requiredItem = "artifact_bonecluster"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_aid_low"}}
   tempJob.rewardCount = 1
@@ -975,7 +975,7 @@ do
   tempJob.desc = "1 Capacitor."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_capacitor"
+  tempJob.requiredItem = "artifact_capacitor"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_rare"}}
   tempJob.rewardCount = 1
@@ -993,7 +993,7 @@ do
   tempJob.desc = "1 Cell."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_cell"
+  tempJob.requiredItem = "artifact_cell"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_m_low"}}
   tempJob.rewardCount = 1
@@ -1011,7 +1011,7 @@ do
   tempJob.desc = "1 Crystal."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_crystal"
+  tempJob.requiredItem = "artifact_crystal"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_high"}}
   tempJob.rewardCount = 1
@@ -1029,7 +1029,7 @@ do
   tempJob.desc = "1 Droplet."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_droplet"
+  tempJob.requiredItem = "artifact_droplet"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_low"}}
   tempJob.rewardCount = 1
@@ -1047,7 +1047,7 @@ do
   tempJob.desc = "1 Dwarf Galaxy."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_dwarfgalaxy"
+  tempJob.requiredItem = "artifact_dwarfgalaxy"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_low"}}
   tempJob.rewardCount = 3
@@ -1065,7 +1065,7 @@ do
   tempJob.desc = "1 Dwarf Galaxy."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_dwarfgalaxy"
+  tempJob.requiredItem = "artifact_dwarfgalaxy"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_low"}}
   tempJob.rewardCount = 0
@@ -1083,7 +1083,7 @@ do
   tempJob.desc = "1 Eye."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_eye"
+  tempJob.requiredItem = "artifact_eye"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_low"}}
   tempJob.rewardCount = 0
@@ -1101,7 +1101,7 @@ do
   tempJob.desc = "1 Flame."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_flame"
+  tempJob.requiredItem = "artifact_flame"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_m_rare"}}
   tempJob.rewardCount = 2
@@ -1119,7 +1119,7 @@ do
   tempJob.desc = "1 Flash."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_flash"
+  tempJob.requiredItem = "artifact_flash"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -1137,7 +1137,7 @@ do
   tempJob.desc = "1 Gaia."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_gaia"
+  tempJob.requiredItem = "artifact_gaia"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -1155,7 +1155,7 @@ do
   tempJob.desc = "1 Galaxy."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_galaxy"
+  tempJob.requiredItem = "artifact_galaxy"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = 2
@@ -1173,7 +1173,7 @@ do
   tempJob.desc = "1 Grandmamas Beads."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_gmamasbeads"
+  tempJob.requiredItem = "artifact_gmamasbeads"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = 0
@@ -1191,7 +1191,7 @@ do
   tempJob.desc = "1 Halo."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_halo"
+  tempJob.requiredItem = "artifact_halo"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_med"}}
   tempJob.rewardCount = 1
@@ -1209,7 +1209,7 @@ do
   tempJob.desc = "1 Kolobok."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_kolobok"
+  tempJob.requiredItem = "artifact_kolobok"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_med"}}
   tempJob.rewardCount = 1
@@ -1227,7 +1227,7 @@ do
   tempJob.desc = "1 Mama's Beads."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_mamasbeads"
+  tempJob.requiredItem = "artifact_mamasbeads"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
   tempJob.rewardCount = 1
@@ -1245,7 +1245,7 @@ do
   tempJob.desc = "1 Memento Mori."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_mementomori"
+  tempJob.requiredItem = "artifact_mementomori"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_med"}}
   tempJob.rewardCount = 1
@@ -1263,7 +1263,7 @@ do
   tempJob.desc = "1 Mica."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_mica"
+  tempJob.requiredItem = "artifact_mica"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_low"}}
   tempJob.rewardCount = 1
@@ -1281,7 +1281,7 @@ do
   tempJob.desc = "1 Moonlight."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_moonlight"
+  tempJob.requiredItem = "artifact_moonlight"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_med"}}
   tempJob.rewardCount = 1
@@ -1299,7 +1299,7 @@ do
   tempJob.desc = "1 Moonlight."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_moonlight"
+  tempJob.requiredItem = "artifact_moonlight"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_med"}}
   tempJob.rewardCount = 1
@@ -1317,7 +1317,7 @@ do
   tempJob.desc = "1 Mycelia."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_mycelia"
+  tempJob.requiredItem = "artifact_mycelia"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_med"}}
   tempJob.rewardCount = 0
@@ -1335,7 +1335,7 @@ do
   tempJob.desc = "1 Panacea."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_panacea"
+  tempJob.requiredItem = "artifact_panacea"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_large"}}
   tempJob.rewardCount = 2
@@ -1353,7 +1353,7 @@ do
   tempJob.desc = "1 Slime."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_slime"
+  tempJob.requiredItem = "artifact_slime"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 1
@@ -1371,7 +1371,7 @@ do
   tempJob.desc = "2 Slimes."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_slime"
+  tempJob.requiredItem = "artifact_slime"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_mixed_low"}}
   tempJob.rewardCount = 2
@@ -1389,7 +1389,7 @@ do
   tempJob.desc = "1 Slug."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_slug"
+  tempJob.requiredItem = "artifact_slug"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_med"}}
   tempJob.rewardCount = 1
@@ -1407,7 +1407,7 @@ do
   tempJob.desc = "1 Sparkler."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_sparkler"
+  tempJob.requiredItem = "artifact_sparkler"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_low"}}
   tempJob.rewardCount = 1
@@ -1425,7 +1425,7 @@ do
   tempJob.desc = "2 Sparklers."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_sparkler"
+  tempJob.requiredItem = "artifact_sparkler"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_ammo_low"}}
   tempJob.rewardCount = 2
@@ -1443,7 +1443,7 @@ do
   tempJob.desc = "1 Thorn."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_thorn"
+  tempJob.requiredItem = "artifact_thorn"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_low"}}
   tempJob.rewardCount = 1
@@ -1461,7 +1461,7 @@ do
   tempJob.desc = "2 Thorns."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_thorn"
+  tempJob.requiredItem = "artifact_thorn"
   tempJob.numberRec = 2
   tempJob.reward = {{"kit_aid_low"}}
   tempJob.rewardCount = 2
@@ -1479,7 +1479,7 @@ do
   tempJob.desc = "1 Urchin."
   tempJob.icon = "propic/event/artifact"
   tempJob.tier = 1
-  tempJob.listenTrigger = "itemDeliver_artifact_urchin"
+  tempJob.requiredItem = "artifact_urchin"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_m_low"}}
   tempJob.rewardCount = 1
