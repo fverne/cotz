@@ -819,7 +819,7 @@ ix.progression.Register("quarterMasterDelivery_main", {
 
 			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
 			if (npc) then
-				npc:AddItemToList("accesscard_ecologists", nil, 5, "SELLANDBUY", 5, 3, 5) -- Main Progression
+				npc:AddItemToList("accesscard_bunker", nil, 5, "SELLANDBUY", 5, 3, 5) -- Main Progression
 			end
 
 			ix.progression.SetCompleted("quarterMasterDelivery_main", true)

@@ -11,7 +11,7 @@ function PLUGIN:EntityKeyValue(ent, key, value)
     end
 
     if game.GetMap() == "rp_marsh_cs" then
-        -- locks the underground bunker door, openable with accesscard_ecologists
+        -- locks the underground bunker door, openable with accesscard_bunker
         if IsValid(ent) and ent:MapCreationID() == 1402 then
             ent:Input("Lock")
             ent:SetKeyValue("dmg", 0)
@@ -31,13 +31,22 @@ function PLUGIN:EntityKeyValue(ent, key, value)
     end
 
     if game.GetMap() == "rp_pripyat_remaster" then
+        -- removes kometa from apartments
         local kometaIDs = {
             [1523] = true,
             [1524] = true
         }
-
         if IsValid(ent) and kometaIDs[ent:MapCreationID()] then
             ent:Remove()
+        end
+
+        -- locks elevator to lab, openable with accesscard_laboratory
+        local elevatorButtonIDs = {
+            [1617] = true,
+            [1623] = true,
+        }
+        if IsValid(ent) and elevatorButtonIDs[ent:MapCreationID()] then
+            ent:SetKeyValue("spawnflags", 33) -- disables UseActivates flag
         end
     end
 end
