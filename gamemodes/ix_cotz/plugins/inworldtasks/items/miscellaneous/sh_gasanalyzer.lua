@@ -63,7 +63,7 @@ ITEM.functions.zCheck = {
 			ix.chat.Send(item.player, "iteminternal", "looks at their gas analyzer.", false)
 		
 			local pointtbl = item:GetData("points", {})
-			netstream.Start(item.player, "ix_ShowTaskPositions", item:GetData("points", {}))
+			netstream.Start(item.player, "ix_ShowTaskPositions", item:GetData("points", {}), "vgui/icons/stash.png")
 		else
 			item.player:Notify("This isn't the right area for this task")
 		end
