@@ -457,8 +457,10 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 			local jobCategories = table.Random(possibleJobs[dyndata.difficulty])
 			local jobid = ix.jobs.getJobFromCategory(jobCategories)
 
+			if !client:ixJobAdd(jobid, target:GetDisplayName()) then
+				return "BackTopic", dynopts
+			end
 			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(jobid))
-			client:ixJobAdd(jobid, target:GetDisplayName())
 			ix.jobs.setNPCJobTaken(target:GetDisplayName(), jobid)
 		end		
 
