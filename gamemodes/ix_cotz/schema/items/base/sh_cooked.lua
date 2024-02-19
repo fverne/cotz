@@ -70,5 +70,5 @@ ITEM.functions.use = {
 }
 
 function ITEM:GetPrice()
-    return self.price * self:GetWeight()
+    return self.price * self:GetWeight() * 2
 end

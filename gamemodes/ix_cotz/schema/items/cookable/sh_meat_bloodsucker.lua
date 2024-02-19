@@ -8,8 +8,8 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.190
-ITEM.BaseWeight = 3.436
-ITEM.WeightPerLevel = 1.284
+ITEM.BaseWeight = 1.436
+ITEM.WeightPerLevel = 0.184
 
 ITEM.meal = "meal_bloodsucker"
 

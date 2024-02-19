@@ -8,7 +8,7 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.120
-ITEM.BaseWeight = 0.387
+ITEM.BaseWeight = 0.287
 ITEM.WeightPerLevel = 0.129
 
 ITEM.meal = "meal_snork"

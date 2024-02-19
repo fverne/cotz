@@ -8,8 +8,8 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.040
-ITEM.BaseWeight = 0.688
-ITEM.WeightPerLevel = 0.276
+ITEM.BaseWeight = 0.388
+ITEM.WeightPerLevel = 0.176
 
 ITEM.meal = "meal_hellhound"
 

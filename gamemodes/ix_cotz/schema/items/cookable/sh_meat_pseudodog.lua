@@ -8,8 +8,8 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.110
-ITEM.BaseWeight = 1.441
-ITEM.WeightPerLevel = 0.433
+ITEM.BaseWeight = 0.741
+ITEM.WeightPerLevel = 0.133
 
 ITEM.meal = "meal_pseudodog"
 

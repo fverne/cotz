@@ -8,7 +8,7 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.070
-ITEM.BaseWeight = 0.423
+ITEM.BaseWeight = 0.223
 ITEM.WeightPerLevel = 0.112
 
 ITEM.meal = "meal_tushkano"

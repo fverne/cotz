@@ -8,8 +8,8 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.080
-ITEM.BaseWeight = 0.642
-ITEM.WeightPerLevel = 0.231
+ITEM.BaseWeight = 0.342
+ITEM.WeightPerLevel = 0.131
 
 ITEM.meal = "meal_blinddog"
 

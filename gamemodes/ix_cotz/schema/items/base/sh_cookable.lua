@@ -13,7 +13,7 @@ ITEM.WeightPerHunger = 0.5
 ITEM.cookable = true
 
 ITEM.BaseWeight = 1
-ITEM.WeightPerLevel = 0.5
+ITEM.WeightPerLevel = 0.10
 
 ITEM.DropOnDeath = true
 
@@ -114,5 +114,5 @@ function ITEM:SetWeight(knifetier)
 end
 
 function ITEM:GetPrice()
-	return self.price * self:GetWeight()
+	return self.price * self:GetWeight() * 2
 end

@@ -8,8 +8,8 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.030
-ITEM.BaseWeight = 2.761
-ITEM.WeightPerLevel = 0.449
+ITEM.BaseWeight = 1.761
+ITEM.WeightPerLevel = 0.149
 
 ITEM.meal = "meal_controller"
 

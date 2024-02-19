@@ -8,7 +8,7 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.040
-ITEM.BaseWeight = 0.376
+ITEM.BaseWeight = 0.276
 ITEM.WeightPerLevel = 0.126
 
 ITEM.exRender = true 
