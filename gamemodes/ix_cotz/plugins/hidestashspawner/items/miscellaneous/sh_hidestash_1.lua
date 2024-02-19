@@ -30,7 +30,7 @@ ITEM.functions.use = {
 	icon = "icon16/stalker/unlock.png",
 	OnRun = function(item)
 		local loot = { ix.util.GetRandomItemFromPool(item.CustomSpawngroup or "ix_entbox_drops") }
-		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPoint(mapToGenerateStashOn)
+		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPoint(item.mapToGenerateStashOn)
 		local stashcontent = "CONTENT: "
 
 		if( game.GetMap() != item.mapToGenerateStashOn) then 
