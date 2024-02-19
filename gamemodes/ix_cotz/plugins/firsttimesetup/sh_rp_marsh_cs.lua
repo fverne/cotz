@@ -1011,6 +1011,22 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
       position = Vector(-7328.550293, -9329.122070, 4973.031250),
       angles = Angle(0.000, -90, 0.000)
     },
+    {
+      template = "ecologistnpc",
+      position = Vector(4341.8876953125,8572.70703125,-1084.96875),
+      angles = Angle(0,-131.54287719727,0),
+    },
+
+    {
+      template = "ecologistnpc2",
+      position = Vector(3295.4357910156,7937.0366210938,-1084.96875),
+      angles = Angle(0,95.927917480469,0),
+    },
+    {
+      template = "ecologistnpc3",
+      position = Vector(3950.6247558594,8041.3276367188,-1084.96875),
+      angles = Angle(0,178.52531433105,0),
+    },
   },
 
   plugindata = {
