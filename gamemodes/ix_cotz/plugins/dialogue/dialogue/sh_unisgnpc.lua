@@ -1,7 +1,7 @@
-DIALOGUE.name = "Bodyguard NPC"
+DIALOGUE.name = "Quartermaster NPC"
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Yes?",
+	response = "Did you just crawl out of the underground?",
 	options = {
 		"TradeTopic", 
 		"BackgroundTopic",
@@ -17,9 +17,9 @@ DIALOGUE.addTopic("GREETING", {
 		if (SERVER) then
 			if target:GetNetVar("possibleJobs") == nil then
 				local possibleJobs = {}
-				possibleJobs["easy"] = {"mutantkilleasy", "kill_human_NPC_easy"}
-				possibleJobs["medium"] = {"mutantkillmedium", "kill_human_NPC_medium"}
-				possibleJobs["hard"] = {"mutantkillhard", "kill_human_NPC_hard"}			
+				possibleJobs["easy"] = {"item_world_NPC_easy"}
+				possibleJobs["medium"] = {"item_world_NPC_medium"}
+				possibleJobs["hard"] = {"item_world_NPC_hard"}			
 	
 				target:SetNetVar("possibleJobs", possibleJobs)
 			end
@@ -261,7 +261,7 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 		return "BackTopic", dynopts
 	end,
 	ShouldAdd = function()
-		if (!LocalPlayer():GetCharacter():GetJobs()["'Old Timer'"]) then
+		if (!LocalPlayer():GetCharacter():GetJobs()["'Quartermaster'"]) then
 			return true
 		end
 	end,

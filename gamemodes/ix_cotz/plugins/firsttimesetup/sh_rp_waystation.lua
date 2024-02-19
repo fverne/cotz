@@ -1108,7 +1108,21 @@ PLUGIN.map_presets["rp_waystation"] = {
     },
   },
   vendors = {
-
+    {
+      template = "unisgnpc",
+      position = Vector(-5321.9467773438,6335.0239257813,145.03125),
+      angles = Angle(0,-179.55767822266,0),
+    },
+    {
+      template = "unisgnpc2",
+      position = Vector(-5560.6064453125,6935.759765625,145.03125),
+      angles = Angle(0,-93.920608520508,0),
+    },
+    {
+      template = "unisgnpc3",
+      position = Vector(-5602.5830078125,6653.1323242188,183.27456665039),
+      angles = Angle(0,92.002418518066,0),
+    },
   },
   plugindata = {
     ["anomalycontroller"] = {

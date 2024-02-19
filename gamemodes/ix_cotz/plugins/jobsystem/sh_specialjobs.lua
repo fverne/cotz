@@ -419,8 +419,8 @@ do
   --Extract data from 2 PCs
   local tempJob = {}
 
-  tempJob.name = "Extract data from 2 PCs."
-  tempJob.desc = "2 PCs."
+  tempJob.name = "Extract data from 1 PCs."
+  tempJob.desc = "1 PCs."
   tempJob.icon = "propic/event/area"
   tempJob.tier = 1
   tempJob.listenTrigger = "dataExtractEasy"
@@ -429,13 +429,13 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 20
   tempJob.moneyReward = { 2500, 4500 }
-  tempJob.categories = {"dataextract"}
+  tempJob.categories = {"dataextracteasy"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("dataextractor", 1, { ["ntypes"] = 2, ["finishedtrigger"] = "dataExtractEasy"} ) then
+        if inv:Add("dataextractor", 1, { ["ntypes"] = 1, ["finishedtrigger"] = "dataExtractEasy"} ) then
           ix.dialogue.notifyItemGet(client, ix.item.list["dataextractor"].name)
           return true
         else
@@ -484,8 +484,8 @@ do
   --Extract data from 3 PCs
   local tempJob = {}
 
-  tempJob.name = "Extract data from 3 PCs."
-  tempJob.desc = "3 PCs."
+  tempJob.name = "Extract data from 2 PCs."
+  tempJob.desc = "2 PCs."
   tempJob.icon = "propic/event/area"
   tempJob.tier = 1
   tempJob.listenTrigger = "dataExtractMedium"
@@ -494,13 +494,13 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 35
   tempJob.moneyReward = { 4000, 6000 }
-  tempJob.categories = {"dataextract"}
+  tempJob.categories = {"dataextractmedium"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("dataextractor", 1, { ["ntypes"] = 3, ["finishedtrigger"] = "dataExtractMedium"} ) then
+        if inv:Add("dataextractor", 1, { ["ntypes"] = 2, ["finishedtrigger"] = "dataExtractMedium"} ) then
           ix.dialogue.notifyItemGet(client, ix.item.list["dataextractor"].name)
           return true
         else
@@ -559,7 +559,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 50
   tempJob.moneyReward = { 8500, 11500 }
-  tempJob.categories = {"dataextract"}
+  tempJob.categories = {"dataextracthard"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
