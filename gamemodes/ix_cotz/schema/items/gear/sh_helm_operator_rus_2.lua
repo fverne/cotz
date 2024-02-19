@@ -26,34 +26,6 @@ ITEM.iconCam = {
     fov = 4
 }
 
-ITEM.name = "Russian Operator Helmet (old)"
-ITEM.description = "An older helmet."
-ITEM.longdesc = "TODO"
-ITEM.model = "models/shtokerbox/ground_headgear_rus_helmet2.mdl"
-
-ITEM.price = 60000
-ITEM.weight = 2.25
-
-ITEM.isGasmask = false
-ITEM.isHelmet = true
-
-ITEM.br = 0.04
-ITEM.fbr = 0
-ITEM.sr = 0.02
-ITEM.fsr = 0
-ITEM.ar = 0
-ITEM.far = 0
-ITEM.pr = 0.15
-ITEM.fpr = 0
-ITEM.radProt = 0
-
-ITEM.exRender = true
-ITEM.iconCam = {
-    pos = Vector(0, -182.33, 5),
-    ang = Angle(0, 90, 0),
-    fov = 4
-}
-
 ITEM.pacData = {
         [1] = {
                 ["children"] = {
