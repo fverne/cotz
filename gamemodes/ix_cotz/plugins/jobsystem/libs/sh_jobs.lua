@@ -235,7 +235,7 @@ if SERVER then
 
     if(ix.jobs.list[identifier].CanAcceptTask)then
       if !ix.jobs.list[identifier].CanAcceptTask(self) then
-        return
+        return false
       end
     end
 
@@ -265,6 +265,8 @@ if SERVER then
     netstream.Start(self, "ix_COTZPlayPDASound", 2)
 
     self:GetCharacter():SetJobs(curJobs)
+
+    return true -- job successfully added
   end
 
 end
