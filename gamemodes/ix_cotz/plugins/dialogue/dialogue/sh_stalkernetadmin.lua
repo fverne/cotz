@@ -6,9 +6,9 @@ DIALOGUE.addTopic("GREETING", {
 		"TradeTopic",
 		"BackgroundTopic",
 		"InterestTopic",
-		"AboutWorkTopic",
+		-- "AboutWorkTopic",
 		-- "GetTask",
-		"GetTaskByDifficulty",
+		-- "GetTaskByDifficulty",
 		"AboutProgression",
 		"GOODBYE"
 	},
@@ -17,9 +17,9 @@ DIALOGUE.addTopic("GREETING", {
 		if (SERVER) then
 			if target:GetNetVar("possibleJobs") == nil then
 				local possibleJobs = {}
-				possibleJobs["easy"] = {"scanarea"} -- TODO: Make sure these are updated
-				possibleJobs["medium"] = {"scanarea"}
-				possibleJobs["hard"] = {"scanarea"}			
+				-- possibleJobs["easy"] = {"scanarea"} -- TODO: Make sure these are updated
+				-- possibleJobs["medium"] = {"scanarea"}
+				-- possibleJobs["hard"] = {"scanarea"}			
 	
 				target:SetNetVar("possibleJobs", possibleJobs)
 			end
@@ -482,9 +482,9 @@ DIALOGUE.addTopic("BackTopic", {
 		"TradeTopic",
 		"BackgroundTopic",
 		"InterestTopic",
-		"AboutWorkTopic",
+		-- "AboutWorkTopic",
 		-- "GetTask",
-		"GetTaskByDifficulty",
+		-- "GetTaskByDifficulty",
 		"AboutProgression",
 		"GOODBYE"
 	},

@@ -1,4 +1,4 @@
-DIALOGUE.name = "Ecologist NPC"
+DIALOGUE.name = "Beanstalk NPC"
 
 DIALOGUE.addTopic("GREETING", {
 	response = "Hello.",
@@ -8,7 +8,7 @@ DIALOGUE.addTopic("GREETING", {
 		"AboutWorkTopic",
 		-- "GetTask",
 		"GetTaskByDifficulty",
-		"AboutProgression",
+		-- "AboutProgression",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
@@ -16,9 +16,9 @@ DIALOGUE.addTopic("GREETING", {
 		if (SERVER) then
 			if target:GetNetVar("possibleJobs") == nil then
 				local possibleJobs = {}
-				possibleJobs["easy"] = {"artifactcollect_NPC_easy"} 
-				possibleJobs["medium"] = {"artifactcollect_NPC_medium"}
-				possibleJobs["hard"] = {"artifactcollect_NPC_hard"}			
+				possibleJobs["easy"] = {"item_world_NPC_easy"} 
+				possibleJobs["medium"] = {"item_world_NPC_medium"}
+				possibleJobs["hard"] = {"item_world_NPC_hard"}			
 	
 				target:SetNetVar("possibleJobs", possibleJobs)
 			end
@@ -28,7 +28,7 @@ DIALOGUE.addTopic("GREETING", {
 
 DIALOGUE.addTopic("TradeTopic", {
 	statement = "Want to trade?",
-	response = "Show me the goods.",
+	response = "Keep it down!",
 	postCallback = function(self, client, target)
 		if (SERVER) then
 			local character = client:GetCharacter()
@@ -69,32 +69,16 @@ DIALOGUE.addTopic("TradeTopic", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
-	response = "Sure. Overly intelligent, physics and nanotechnology PhD student from Kiev, got tired of the older professors stealing all my hard-earned work.",
+	statement = "What is this place?",
+	response = "Classified. But since you are acting nice, you get to stay.",
 	options = {
 		"BackgroundTopic2",
 	}
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Yeah? But how did you end up here then?",
-	response = "They told me I was entitled, and after complaining to the university dean, they evicted me to this hellhole, to 'gather my own research'. And guess what - they don't even fund me!",
-	options = {
-		"BackgroundTopic3",
-	}
-})
-
-DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "How do you make a living if you don't get any funding?",
-	response = "I guess they do fund me, in terms of rations, but they are so tasteless. Hey, listen, here's a deal. If you want to buy some shitty supplies from Kiev, let me know. I want to fuck the professors over as much as possible.",
-	options = {
-		"BackgroundTopic4",
-	}
-})
-
-DIALOGUE.addTopic("BackgroundTopic4", {
-	statement = "Thanks I guess, won't they be mad if they know?",
-	response = "Hypothetically, they would, but who would tell them? If I hear anything, I'll have you evicted into an anomaly. Take care!",
+	statement = "Alright, I'll behave.",
+	response = "Good dog. Remember we have the military on hotline.",
 	options = {
 		"BackTopic",
 	}
@@ -154,7 +138,7 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 		return "BackTopic"
 	end,
 	ShouldAdd = function()
-		if (LocalPlayer():GetCharacter():GetJobs()["'Egghead'"]) then
+		if (LocalPlayer():GetCharacter():GetJobs()["'Beanstalk'"]) then
 			return true
 		end
 	end,
@@ -242,7 +226,7 @@ DIALOGUE.addTopic("GetTask", {
 		return "ConfirmTask", {description = ix.jobs.getFormattedDescInactive(dyndata.identifier), identifier = dyndata.identifier}
 	end,
 	ShouldAdd = function()
-		if (!LocalPlayer():GetCharacter():GetJobs()["'Egghead'"]) then
+		if (!LocalPlayer():GetCharacter():GetJobs()["'Beanstalk'"]) then
 			return true
 		end
 	end,
@@ -292,7 +276,7 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 		return "BackTopic", dynopts
 	end,
 	ShouldAdd = function()
-		if (!LocalPlayer():GetCharacter():GetJobs()["'Egghead'"]) then
+		if (!LocalPlayer():GetCharacter():GetJobs()["'Beanstalk'"]) then
 			return true
 		end
 	end,
@@ -415,7 +399,7 @@ DIALOGUE.addTopic("AboutProgression", {
 	},
 	preCallback = function(self, client, target)
 		if( CLIENT ) then
-			if #ix.progression.GetActiveProgressions("'Egghead'") <= 0 then
+			if #ix.progression.GetActiveProgressions("'Beanstalk'") <= 0 then
 				self.response = "Nothing at the moment."
 			end
 
@@ -427,7 +411,7 @@ DIALOGUE.addTopic("AboutProgression", {
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
 
-		for _, progid in pairs(ix.progression.GetActiveProgressions("'Egghead'")) do
+		for _, progid in pairs(ix.progression.GetActiveProgressions("'Beanstalk'")) do
 			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})
 		end
 
@@ -446,14 +430,14 @@ DIALOGUE.addTopic("AboutProgression", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
-	response = "What else is there to talk about?",
+	response = "Yes, spill the beans.",
 	options = {
 		"TradeTopic",
 		"BackgroundTopic",
 		"AboutWorkTopic",
 		-- "GetTask",
 		"GetTaskByDifficulty",
-		"AboutProgression",
+		-- "AboutProgression",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
@@ -463,6 +447,6 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Don't trip into an anomaly!"
+	response = "See you soon."
 })
 

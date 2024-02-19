@@ -312,22 +312,6 @@ ix.npctemplates.templates["ecologistnpc"] = {
 	--animgroup 	= 4,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["anomalydetector"] 	= { nil, 12, SELLANDBUY, 12, 8, 12 },
-		["geigercounter"] 	= { nil, 12, SELLANDBUY, 12, 8, 12 },
-		["compass"] 	= { nil, 12, SELLANDBUY, 12, 8, 12 },
-		["medic_psyheal_1"] 	= { nil, 6, SELLANDBUY, 6, 8, 6 },
-		["medic_antirad_1"] 	= { nil, 6, SELLANDBUY, 6, 8, 6 },
-		["medic_medkit_5"] 	= { 4500, 3, SELLANDBUY, 3, 8, 3 },
-		["medic_medkit_6"] 	= { 6500, 3, SELLANDBUY, 3, 8, 3 },
-		["mask_halfmask"] 	= { nil, 5, SELLANDBUY, 5, 4, 2 },
-		["sr2"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
-		["pp2000"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
-		["9x21"] 	= { nil, 5, SELLANDBUY, 5, 8, 5 },
-		["ssp99"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
-		-- ["gp5"] 	= { nil, 3, SELLANDBUY, 3, 8, 3 },
-		["drug_morphine"] 	= { nil, 5, SELLANDBUY, 5, 8, 5 },
-		["medic_antipsychotic_1"] 	= { nil, 6, SELLANDBUY, 6, 8, 6 },
-
 		["part_bear"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_blinddog"] 	= { 1, nil, BUYONLY, nil, nil, nil },
 		["part_bloodsucker"] 	= { 1, nil, BUYONLY, nil, nil, nil },
@@ -410,6 +394,51 @@ ix.npctemplates.templates["ecologistnpc"] = {
 		["artifact_sparkler"] = { 1, nil, BUYONLY, nil, nil, nil },
 		["artifact_thorn"] = { 1, nil, BUYONLY, nil, nil, nil },
 		["artifact_urchin"] = { 1, nil, BUYONLY, nil, nil, nil },
+	},
+}
+
+ix.npctemplates.templates["ecologistnpc2"] = {
+	name 		= "'Beanstalk'",
+	description = "The figure gives you a concerned look.",
+	model 		= "models/legends/sokolov2.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.5,
+	dialogueid 	= "ecologistnpc2",
+	soundgroup 	= "ecologistnpc2",
+	idleanim 	= "idle_lider",
+	--animgroup 	= 4,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["headwear_screen"] 	= { nil, 5, SELLANDBUY, 5, 4, 2 },
+		["sr2"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["pp2000"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+		["9x21"] 	= { nil, 5, SELLANDBUY, 5, 8, 5 },
+		["ssp99"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
+	},
+}
+
+ix.npctemplates.templates["ecologistnpc3"] = {
+	name 		= "'Intern'",
+	description = "You cannot make out what he looks like underneath the visor.",
+	model 		= "models/legends/vasilev.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.5,
+	dialogueid 	= "ecologistnpc3",
+	soundgroup 	= "ecologistnpc3",
+	idleanim 	= "lineidle01",
+	--animgroup 	= 4,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["anomalydetector"] 	= { nil, 12, SELLANDBUY, 12, 8, 12 },
+		["geigercounter"] 	= { nil, 12, SELLANDBUY, 12, 8, 12 },
+		["medic_psyheal_1"] 	= { nil, 6, SELLANDBUY, 6, 8, 6 },
+		["medic_antirad_1"] 	= { nil, 6, SELLANDBUY, 6, 8, 6 },
+		["medic_medkit_5"] 	= { 4500, 3, SELLANDBUY, 3, 8, 3 },
+		["medic_medkit_6"] 	= { 6500, 3, SELLANDBUY, 3, 8, 3 },
+		["medic_antipsychotic_1"] 	= { nil, 6, SELLANDBUY, 6, 8, 6 },
+
 	},
 }
 
@@ -523,7 +552,7 @@ ix.npctemplates.templates["medicnpc"] = {
 }
 
 
-ix.npctemplates.templates["tech2npc"] = {
+ix.npctemplates.templates["technpc2"] = {
 	name 		= "'Tinker'",
 	description = "A free man.",
 	model 		= "models/legends/freeman.mdl",
@@ -531,7 +560,7 @@ ix.npctemplates.templates["tech2npc"] = {
 	bubble 		= 0,
 	scale 		= 0.3,
 	dialogueid 	= "tinkernpc",
-	soundgroup 	= "tech2npc",
+	soundgroup 	= "technpc2",
 	idleanim 	= "trader_idle",
 	buyAll 		= false,
 	--animgroup 	= 4,
@@ -603,6 +632,22 @@ ix.npctemplates.soundtemplates["ecologistnpc"] = {
 	"npc/doctor/idle_19.ogg",
 }
 
+ix.npctemplates.soundtemplates["ecologistnpc2"] = {
+	"npc/lebed/mar_csky_leader_meet_greet_1.ogg",
+	"npc/lebed/mar_csky_leader_meet_greet_2.ogg",
+	"npc/lebed/mar_csky_leader_meet_greet_3.ogg",
+	"npc/lebed/mar_csky_leader_meet_greet_4.ogg",
+}
+
+ix.npctemplates.soundtemplates["ecologistnpc3"] = {
+	"npc/ecolog/idle_2.ogg",
+	"npc/ecolog/idle_3.ogg",
+	"npc/ecolog/idle_4.ogg",
+	"npc/ecolog/idle_5.ogg",
+	"npc/ecolog/idle_6.ogg",
+	"npc/ecolog/idle_7.ogg",
+}
+
 ix.npctemplates.soundtemplates["bodyguardnpc"] = {
 	"npc/garyk/bar_guard_prohodi_1.ogg",
 	"npc/garyk/bar_guard_stop_1.ogg",
@@ -616,7 +661,7 @@ ix.npctemplates.soundtemplates["medicnpc"] = {
 	"npc/suslov/mar_csky_doctor_meet_greet_3.ogg",
 }
 
-ix.npctemplates.soundtemplates["tech2npc"] = {
+ix.npctemplates.soundtemplates["technpc2"] = {
 	"npc/suslov/mar_csky_tech_meet_greet_1.ogg",
 	"npc/suslov/mar_csky_tech_meet_greet_2.ogg",
 	"npc/suslov/mar_csky_tech_meet_greet_3.ogg",

@@ -39,7 +39,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 35
   tempJob.moneyReward = { 2000, 2500 }
-  tempJob.categories = {"scanarea"}
+  tempJob.categories = {"scanareaeasy"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
@@ -104,7 +104,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 50
   tempJob.moneyReward = { 3000, 3500 }
-  tempJob.categories = {"scanarea"}
+  tempJob.categories = {"scanareaeasy"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
@@ -169,7 +169,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 35
   tempJob.moneyReward = { 3500, 4000 }
-  tempJob.categories = {"scanarea"}
+  tempJob.categories = {"scanareamedium"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
@@ -234,7 +234,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 50
   tempJob.moneyReward = { 4500, 5000 }
-  tempJob.categories = {"scanarea"}
+  tempJob.categories = {"scanareamedium"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
@@ -299,7 +299,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 75
   tempJob.moneyReward = { 8000, 9000 }
-  tempJob.categories = {"scanarea"}
+  tempJob.categories = {"scanareahard"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
@@ -364,7 +364,7 @@ do
   tempJob.rewardCount = 1
   tempJob.repReward = 75
   tempJob.moneyReward = { 9500, 10000 }
-  tempJob.categories = {"scanarea"}
+  tempJob.categories = {"scanareahard"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
     if(char)then
