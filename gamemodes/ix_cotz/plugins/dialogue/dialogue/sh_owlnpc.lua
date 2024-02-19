@@ -535,9 +535,6 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 			ix.item.instances[target.selectedsuitstruct[1]]:Remove()
 			client:GetCharacter():GetInventory():Add(dyndata.suitVariantUID)
 		end
-		if(SERVER)then
-			target.selectedsuitstruct = nil
-		end
 		-- Return the next topicID
 		return "BackTopic"
 	end,

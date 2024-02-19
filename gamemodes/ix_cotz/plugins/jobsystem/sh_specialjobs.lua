@@ -623,8 +623,8 @@ do
   tempJob.numberRec = 1
   tempJob.reward = {}
   tempJob.rewardCount = 0
-  tempJob.repReward = 30
-  tempJob.moneyReward = { 3500, 4500 }
+  tempJob.repReward = 15
+  tempJob.moneyReward = { 1500, 2000 }
   tempJob.categories = {"stashpackagenpc_easy"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
@@ -673,7 +673,7 @@ do
   tempJob.reward = {}
   tempJob.rewardCount = 0
   tempJob.repReward = 40
-  tempJob.moneyReward = { 5000, 5500 }
+  tempJob.moneyReward = { 4000, 4500 }
   tempJob.categories = {"stashpackagenpc_medium"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
@@ -723,7 +723,7 @@ do
   tempJob.reward = {}
   tempJob.rewardCount = 0
   tempJob.repReward = 50
-  tempJob.moneyReward = { 7500, 8500 }
+  tempJob.moneyReward = { 6500, 7500 }
   tempJob.categories = {"stashpackagenpc_hard"}
   tempJob.CanAcceptTask = function(client) 
     local char = client:GetCharacter()
