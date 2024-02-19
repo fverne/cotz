@@ -678,7 +678,7 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = true,
 	BuildResponse = function(self, status)
-		return "I chatted with a guy, what was his name, Mute? He should have a flash drive with information for me. I ain't budging 'till I get that.\n"
+		return "I chatted with a guy, what was his name, Mute? He should have a flash drive with information for me. I ain't budging 'till I get that."
 	end,
 	GetItemIds = function()
 		local itemids = {
@@ -762,7 +762,7 @@ ix.progression.Register("quarterMasterDelivery_main", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["drink_spirits_3"] 	= 10,
+			["drink_spirit_3"] 	= 10,
 			["drink_vodka_5"] 		= 10,
 			["drink_vodka_6"] 		= 10,
 			["drug_cigar"] 			= 40,
@@ -809,7 +809,7 @@ ix.progression.Register("quarterMasterDelivery_main", {
 			
 			timer.Simple(5, function()
 				local name = "'Quartermaster'"
-				local message = "Thanks for the booze, I got keycards for the bunker for sale, if you got the cash for it."
+				local message = "Thanks for the booze, you earned my trust. Go talk to Boss, he might have some juicy information for you."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -817,23 +817,18 @@ ix.progression.Register("quarterMasterDelivery_main", {
 				})
 			end)
 
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("accesscard_bunker", nil, 5, "SELLANDBUY", 5, 3, 5) -- Main Progression
-			end
-
 			ix.progression.SetCompleted("quarterMasterDelivery_main", true)
 
-			ix.progression.SetActive("egghead_dataTasks", true) -- Main Progression
+			ix.progression.SetActive("boss_dataTasks", true) -- Main Progression
 		end
 	end
 })
 
-ix.progression.Register("egghead_dataTasks", {
+ix.progression.Register("boss_dataTasks", {
 	name = "STORY: Extracting Information",
 	description = "Scanning the Zone",
-	keyNpc = "'Egghead'",
-	defaultActive = true,
+	keyNpc = "'Boss'",
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		-- Find next treshold
 		local tresh = 0
@@ -850,14 +845,20 @@ ix.progression.Register("egghead_dataTasks", {
 	progressfunctions = {
 		[1] = {
 			OnRun = function()			
-				local name = "'Egghead'"
-				local message = "Good work stalkers, you've gotten me a lot of interesting information, I think I might have an idea what has happened here, please come to the bunker for further jobs."
+				local name = "'Boss'"
+				local message = "Good work stalkers, you've gotten me a lot of interesting information, I think I might have an idea what has happened here, please come to the research station for further jobs. Oh - and I'm now also willing to sell you these old plastic cards we found."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
 					message = message
 				})
 
+				local npc = ix.progression.GetNPCFromName("'Boss'")
+				if (npc) then
+					npc:AddItemToList("accesscard_bunker", nil, 5, "SELLANDBUY", 5, 3, 5) -- Main Progression
+				end
+
+				-- tie this together somehow
 				local npc = ix.progression.GetNPCFromName("'Egghead'")
 				if (npc) then
 					npc:AddItemToList("quest_computeraccess", nil, 2, "SELLANDBUY", 2, 6, 2) -- Main Progression
