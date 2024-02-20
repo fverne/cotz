@@ -6,8 +6,8 @@ include('shared.lua')
 ENT.bleeds      = true
 ENT.StartHealth = 100
 ENT.PlayerFriendly = false
-ENT.flatbulletresistance = 8 -- 2 times values of berill, to simulate attachments
-ENT.percentbulletresistance = 60 -- 2 times values of berill, to simulate attachments
+ENT.flatbulletresistance = 30
+ENT.percentbulletresistance = 20
 ENT.lootChance = 33
 ENT.selectedWeaponItem = nil 
 ENT.selectedWeaponSWEP = nil

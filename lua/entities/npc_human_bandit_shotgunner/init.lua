@@ -6,8 +6,8 @@ include('shared.lua')
 ENT.bleeds      = true
 ENT.StartHealth = 100
 ENT.PlayerFriendly = false
-ENT.flatbulletresistance = 2 -- 2 times values of trenchcoat, to simulate attachments
-ENT.percentbulletresistance = 20 -- 2 times values of trenchcoat, to simulate attachments
+ENT.flatbulletresistance = 10
+ENT.percentbulletresistance = 20
 ENT.lootChance = 33
 ENT.selectedWeaponItem = nil 
 ENT.selectedWeaponSWEP = nil
