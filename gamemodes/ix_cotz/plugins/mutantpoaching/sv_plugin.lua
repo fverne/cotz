@@ -242,9 +242,12 @@ if SERVER then
                 npc:EmitSound("stalkersound/inv_mutant_loot_animal.ogg", 60)
                 client:SetNetVar("IsPoaching", true)
 
+				timer.Simple(5, function(ply)                         
+					npc:SetNetVar("beingSkinned", false)
+				end)
+
                 ix.util.PlayerPerformBlackScreenAction(client, "Poaching", 5, function(player)
                     if not player:GetNetVar("IsPoaching") then
-                        npc:SetNetVar("beingSkinned", false)
                         npc:StopSound("stalkersound/inv_mutant_loot_animal.ogg")
 
                         return
