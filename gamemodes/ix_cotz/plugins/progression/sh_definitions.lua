@@ -136,6 +136,22 @@ ix.progression.Register("oldTimerKillIntro", {
 					name = name,
 					message = message
 				})
+
+				timer.Simple(15, function()
+					local name = "'Haggler'"
+					local message = "Hello everyone! I see you're all doing quite well for yourselves. I have some wares if you got the cash."
+					ix.util.HandleChat(name, message)
+					ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+						name = name,
+						message = message
+					})
+				end)
+
+				-- Needs correct pos/ang set
+				local pos = Vector(-8259.732422, -11667.531250, 5007.531250)
+				local ang = Angle(0.000, 90, 0.000)
+				ix.util.SpawnAdvVendor("tradernpc", pos, ang)
+
 				
 				-- Unlock next step in progression
 				ix.progression.SetActive("oldTimerItemDelivery_mainMeat", true)
@@ -650,20 +666,6 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 			if (npc) then
 				npc:AddItemToList("quest_flashdrive", nil, 1, "SELLANDBUY", 1, 3, 1) -- Main Progression
 			end
-
-			timer.Simple(90, function()
-				local name = "'Haggler'"
-				local message = "Hello everyone! I see you're all doing quite well for yourselves. I have some wares if you got the cash."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-			-- Needs correct pos/ang set
-			local pos = Vector(-8259.732422, -11667.531250, 5007.531250)
-			local ang = Angle(0.000, 90, 0.000)
-			ix.util.SpawnAdvVendor("tradernpc", pos, ang)
 
 			ix.progression.SetCompleted("stalkerNetAdminDelivery_mainRadioTower", true)
 
