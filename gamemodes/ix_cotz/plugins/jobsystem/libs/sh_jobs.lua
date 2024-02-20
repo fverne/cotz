@@ -258,8 +258,6 @@ if SERVER then
       temp.listenTrigger = identifier
     end
 
-    print("triggeradded: "..temp.listenTrigger)
-
     temp.progress = 0
 
     temp.isCompleted = false
