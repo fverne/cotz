@@ -149,10 +149,8 @@ if SERVER then
 
     --Check if player has quest
     local curJobs = self:GetCharacter():GetJobs()
-    PrintTable(curJobs)
     for k,v in pairs(curJobs) do
       if v.listenTrigger == trigger or v.identifier == trigger then
-        print("evaluate: "..trigger)
 
         --Progress quest for player OR mark as completed
         local curProgress = curJobs[k].progress
