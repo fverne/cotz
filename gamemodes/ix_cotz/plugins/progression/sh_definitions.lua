@@ -152,7 +152,7 @@ ix.progression.Register("oldTimerKillIntro", {
 				local ang = Angle(0.000, 90, 0.000)
 				ix.util.SpawnAdvVendor("tradernpc", pos, ang)
 
-				
+
 				-- Unlock next step in progression
 				ix.progression.SetActive("oldTimerItemDelivery_mainMeat", true)
 			end,
@@ -219,7 +219,7 @@ ix.progression.Register("oldTimerKillIntro", {
 		-- },
 	},
 	progressthresholds = {
-		[1] = 30,
+		[1] = 15,
 		-- [2] = 30, -- just for the dupe spawning
 		-- [3] = 55,
 		-- [4] = 55,
