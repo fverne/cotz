@@ -148,8 +148,8 @@ SWEP.FireSound = "CW_MAC11_FIRE"
 SWEP.FireSoundSuppressed = "CW_MAC11_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.9
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.015
@@ -158,7 +158,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 45
+SWEP.Damage = 58
 SWEP.DeployTime = 0.45
 
 SWEP.ReloadSpeed = 1

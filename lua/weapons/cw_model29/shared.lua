@@ -123,7 +123,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.02
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 130
+SWEP.Damage = 140
 SWEP.DeployTime = .8
 SWEP.Chamberable = false
 SWEP.ADSFireAnim = false
@@ -135,5 +135,5 @@ SWEP.ReloadHalt = 3.4
 SWEP.ReloadTime_Empty = 3.4
 SWEP.ReloadHalt_Empty = 3.4
 
-SWEP.WearDamage = 0.1
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05

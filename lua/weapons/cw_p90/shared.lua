@@ -120,8 +120,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.7x28MM"
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.FireDelay = 0.07
 SWEP.FireSound = "CW_P90_FIRE"
@@ -135,7 +135,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 47
+SWEP.Damage = 80
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 0.93

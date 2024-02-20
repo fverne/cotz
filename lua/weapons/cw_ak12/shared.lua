@@ -145,8 +145,8 @@ SWEP.WMAng = Vector(-15, 0, 180)
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.DefaultClip	= 0
@@ -165,7 +165,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 70
+SWEP.Damage = 81
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 0.7

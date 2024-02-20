@@ -131,8 +131,8 @@ SWEP.FireSound = "ContenderLB.Shoot"
 SWEP.FireSoundSuppressed = "ContenderSD.Shoot"
 SWEP.Recoil = 3.5
 
-SWEP.WearDamage = 0.05
-SWEP.WearEffect = 0.001
+SWEP.WearDamage = 0.45
+SWEP.WearEffect = 0.15
 
 SWEP.HipSpread = 0.075
 SWEP.AimSpread = 0.0125
@@ -141,7 +141,7 @@ SWEP.MaxSpreadInc = 0.5
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.5
 SWEP.Shots = 1
-SWEP.Damage = 85
+SWEP.Damage = 95
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 1

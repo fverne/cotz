@@ -121,7 +121,7 @@ SWEP.WorldModel		= "models/weapons/w_M92f_p228.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.WearDamage = 0.125
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05
 
 SWEP.Primary.ClipSize		= 15
@@ -141,7 +141,7 @@ SWEP.MaxSpreadInc = 0.5
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 42
+SWEP.Damage = 58
 SWEP.DeployTime = 0.2
 SWEP.Chamberable = false
 

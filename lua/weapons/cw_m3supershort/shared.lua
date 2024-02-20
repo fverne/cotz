@@ -114,13 +114,13 @@ SWEP.WorldModel		= "models/weapons/w_shot_shortygun.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 4
+SWEP.Primary.ClipSize		= 3
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.WearDamage = 0.125
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.FireDelay = 0.7
 SWEP.FireSound = "CW_M3SUPER90_FIRE"
@@ -134,7 +134,7 @@ SWEP.ClumpSpread = 0.045
 SWEP.SpreadPerShot = 0.22
 SWEP.SpreadCooldown = 0.9
 SWEP.Shots = 9
-SWEP.Damage = 18
+SWEP.Damage = 35
 SWEP.DeployTime = 1
 
 SWEP.ReloadStartTime = 0.3
@@ -142,7 +142,7 @@ SWEP.InsertShellTime = 0.5
 SWEP.ReloadFinishWait = 1
 SWEP.ShotgunReload = true
 
-SWEP.Chamberable = false
+SWEP.Chamberable = true
 
 function SWEP:IndividualInitialize()
 	self:setBodygroup( 1 , 1 )

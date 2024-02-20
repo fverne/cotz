@@ -208,8 +208,8 @@ end
 	SWEP.FireDelay = 0.066666666666667
 	SWEP.Recoil = 1.05
 
-	SWEP.WearDamage = 0.1
-	SWEP.WearEffect = 0.05
+	SWEP.WearDamage = 0.11
+	SWEP.WearEffect = 0.015
 
 	SWEP.HipSpread = 0.045
 	SWEP.AimSpread = 0.003
@@ -218,7 +218,7 @@ end
 	SWEP.SpreadPerShot = 0.007
 	SWEP.SpreadCooldown = 0.13
 	SWEP.Shots = 1
-	SWEP.Damage = 72
+	SWEP.Damage = 86
 	SWEP.DeployTime = 0.6
 
 	SWEP.ReloadSpeed = 1

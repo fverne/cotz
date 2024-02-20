@@ -142,7 +142,7 @@ SWEP.MaxSpreadInc = 0.55
 SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.7
 SWEP.Shots = 1
-SWEP.Damage = 39
+SWEP.Damage = 52
 SWEP.DeployTime = .53
 SWEP.HolsterTime = .6
 
@@ -156,8 +156,8 @@ SWEP.ReloadHalt = 2.3
 SWEP.ReloadTime_Empty = 3.1
 SWEP.ReloadHalt_Empty = 3.8
 
-SWEP.WearDamage = 0.08
-SWEP.WearEffect = 0.12
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 function SWEP:IndividualThink()
 

@@ -104,12 +104,12 @@ SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
 SWEP.Primary.ClipSize		= 6
-SWEP.Primary.DefaultClip	= 7
+SWEP.Primary.DefaultClip	= 6
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.FireDelay = 1.1
 SWEP.FireSound = "CW_M1887_FIRE"
@@ -123,7 +123,7 @@ SWEP.ClumpSpread = 0.03
 SWEP.SpreadPerShot = 0.25
 SWEP.SpreadCooldown = 1.1
 SWEP.Shots = 9
-SWEP.Damage = 20
+SWEP.Damage = 42
 SWEP.DeployTime = 1
 
 SWEP.SnapToIdlePostReload = false

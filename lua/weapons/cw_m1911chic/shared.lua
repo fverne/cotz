@@ -146,7 +146,7 @@ if CustomizableWeaponry then
 	SWEP.FireSoundSuppressed = "CW_SILVERBALLER_FIRE_SD"
 	SWEP.Recoil = 2.0
 
-	SWEP.WearDamage = 0.1
+	SWEP.WearDamage = 0.22
 	SWEP.WearEffect = 0.05
 
 	SWEP.HipSpread = 0.025
@@ -156,7 +156,7 @@ if CustomizableWeaponry then
 	SWEP.SpreadPerShot = 0.02
 	SWEP.SpreadCooldown = 0.32
 	SWEP.Shots = 1
-	SWEP.Damage = 65
+	SWEP.Damage = 70
 	SWEP.DeployTime = 1
 
 	SWEP.ReloadSpeed = 1

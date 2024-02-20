@@ -134,8 +134,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x19MM"
 
-SWEP.WearDamage = 0.25
-SWEP.WearEffect = 0.4
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.FireDelay = 60/937
 SWEP.FireSound = "CW_M49MM_FIRE"
@@ -149,7 +149,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.006
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 34
+SWEP.Damage = 43
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 1.3

@@ -172,8 +172,8 @@ SWEP.FireSoundSuppressed = "DOITHOM1928_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.45
 SWEP.FOVPerShot = 0.1 -- = .62
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.HipSpread = 0.056
 SWEP.AimSpread = 0.016
@@ -182,7 +182,7 @@ SWEP.MaxSpreadInc = 0.05
 SWEP.SpreadPerShot = 0.013
 SWEP.SpreadCooldown = 0.175
 SWEP.Shots = 1
-SWEP.Damage = 51
+SWEP.Damage = 70
 SWEP.DeployTime = .462
 SWEP.HolsterTime = .6
 

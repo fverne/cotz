@@ -127,8 +127,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".45 ACP"
 
-SWEP.WearDamage = 0.125
-SWEP.WearEffect = 0.02
+SWEP.WearDamage = 0.22
+SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_M1911_FIRE"
@@ -142,7 +142,7 @@ SWEP.MaxSpreadInc = 0.5
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 65
+SWEP.Damage = 68
 SWEP.DrawSpeed = 1.4
 SWEP.DeployTime = 1.1
 --SWEP.Chamberable = false

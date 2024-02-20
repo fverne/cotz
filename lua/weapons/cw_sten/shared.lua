@@ -123,8 +123,8 @@ SWEP.FireSound = "CW_MP5_FIRE"
 SWEP.FireSoundSuppressed = "CW_STEN_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.4
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.0005
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.HipSpread = 0.125
 SWEP.AimSpread = 0.025

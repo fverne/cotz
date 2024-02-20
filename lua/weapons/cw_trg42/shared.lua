@@ -148,8 +148,8 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.ViewModelFOV	= 75
 SWEP.ViewModelFlip	= true
@@ -185,7 +185,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 290
+SWEP.Damage = 450
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1

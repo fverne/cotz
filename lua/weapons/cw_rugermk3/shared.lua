@@ -106,7 +106,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".22LR"
 
-SWEP.WearDamage = 0.125
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.08
@@ -120,7 +120,7 @@ SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.002
 SWEP.SpreadCooldown = 0.4
-SWEP.Damage = 20
+SWEP.Damage = 28
 SWEP.DeployTime = .7
 SWEP.ADSFireAnim = true
 SWEP.Chamberable = false

@@ -138,8 +138,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "9.3x64MM"
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.FireDelay = 0.2
 SWEP.FireSound = "CW_TKPD_FIRE"

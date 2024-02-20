@@ -116,8 +116,8 @@ SWEP.FireDelay = 1.5
 SWEP.FireSound = "CW_VSSK_FIRE"
 SWEP.Recoil = 2.8
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.HipSpread = 0.015
 SWEP.AimSpread = 0.005

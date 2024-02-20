@@ -70,8 +70,8 @@ SWEP.FireModes = {"break"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.WearDamage = 0.5
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
@@ -109,7 +109,7 @@ SWEP.ClumpSpread = 0.0095
 SWEP.SpreadPerShot = 0.3
 SWEP.SpreadCooldown = 0.6
 SWEP.Shots = 9
-SWEP.Damage = 24
+SWEP.Damage = 35
 SWEP.DeployTime = 1
 SWEP.Chamberable = false
 

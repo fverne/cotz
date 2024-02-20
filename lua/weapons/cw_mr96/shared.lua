@@ -91,7 +91,7 @@ SWEP.FireDelay = 0.15
 SWEP.FireSound = "CW_MR96_FIRE_LONG"
 SWEP.Recoil = 2.6
 
-SWEP.WearDamage = 0.1
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.1

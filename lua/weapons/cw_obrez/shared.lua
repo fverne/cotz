@@ -165,11 +165,11 @@ SWEP.SpreadPerShot = 0.025
 SWEP.SpreadCooldown = 1.75
 SWEP.GlobalDelayOnShoot = 1.1
 
-SWEP.WearDamage = 0.25
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.Shots = 1
-SWEP.Damage = 150
+SWEP.Damage = 160
 SWEP.DeployTime = .6
 
 SWEP.ReloadSpeed = 1

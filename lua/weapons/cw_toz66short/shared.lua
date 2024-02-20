@@ -97,8 +97,8 @@ SWEP.FireDelay = 0.01
 SWEP.FireSound = "CW_TOZ_FIRE"
 SWEP.Recoil = 4.7
 
-SWEP.WearDamage = 0.5
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.HipSpread = 0.06
 SWEP.AimSpread = 0.006
@@ -108,7 +108,7 @@ SWEP.ClumpSpread = 0.0425
 SWEP.SpreadPerShot = 0.3
 SWEP.SpreadCooldown = 0.5
 SWEP.Shots = 9
-SWEP.Damage = 21
+SWEP.Damage = 35
 SWEP.DeployTime = 1
 SWEP.Chamberable = false
 

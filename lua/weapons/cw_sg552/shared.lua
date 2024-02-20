@@ -156,8 +156,8 @@ SWEP.FireSound = "CW_SG552_FIRE"
 SWEP.FireSoundSuppressed = "CW_SG552_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.7
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005

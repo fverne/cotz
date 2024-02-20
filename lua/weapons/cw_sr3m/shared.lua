@@ -194,8 +194,8 @@ SWEP.Recoil = 1.8
 
 SWEP.SuppressedOnEquip = false
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005
@@ -204,7 +204,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 85
+SWEP.Damage = 200
 SWEP.DeployTime = 1.2
 
 SWEP.ReloadSpeed = 1.2

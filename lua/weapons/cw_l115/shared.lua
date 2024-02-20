@@ -115,8 +115,8 @@ SWEP.FireDelay = 1.5
 SWEP.FireSound = "CW_L96_FIRE"
 SWEP.Recoil = 4.8
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.HipSpread = 0.015
 SWEP.AimSpread = 0.005
@@ -125,7 +125,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 145
+SWEP.Damage = 450
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1

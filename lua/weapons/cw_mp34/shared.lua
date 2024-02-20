@@ -141,8 +141,8 @@ SWEP.FireSoundSuppressed = "DOIMP40_FIRE_SUPPRESSED"
 SWEP.Recoil = 2.75
 SWEP.FOVPerShot = 0.05 -- = .6
 
-SWEP.WearDamage = 0.075
-SWEP.WearEffect = 0.2
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.HipSpread = 0.125
 SWEP.AimSpread = 0.025
@@ -151,7 +151,7 @@ SWEP.MaxSpreadInc = 0.55
 SWEP.SpreadPerShot = 0.012
 SWEP.SpreadCooldown = 0.7
 SWEP.Shots = 1
-SWEP.Damage = 41
+SWEP.Damage = 46
 SWEP.DeployTime = .4
 SWEP.HolsterTime = .5
 SWEP.ADSFireAnim = true

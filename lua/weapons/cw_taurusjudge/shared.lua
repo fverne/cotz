@@ -144,7 +144,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 72
+SWEP.Damage = 95
 SWEP.DeployTime = 0.5
 SWEP.Chamberable = false
 
@@ -155,8 +155,8 @@ SWEP.ReloadHalt = 4
 SWEP.ReloadTime_Empty = 2.7
 SWEP.ReloadHalt_Empty = 4
 
-SWEP.WearDamage = 0.35
-SWEP.WearEffect = 0.04
+SWEP.WearDamage = 0.22
+SWEP.WearEffect = 0.05
 
 SWEP.SoundLayer1 = Sound("CWC_JUDGE_CLICK")
 SWEP.SoundLayer2 = Sound("CWC_JUDGE_IN")

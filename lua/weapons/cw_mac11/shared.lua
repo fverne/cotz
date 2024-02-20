@@ -147,8 +147,8 @@ SWEP.Primary.Ammo			= "9x19MM"
 
 SWEP.Chamberable = false -- MAC-11 is an open-bolt weapon
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.FireDelay = 0.05
 SWEP.FireSound = "CW_MAC11_FIRE"
@@ -162,7 +162,7 @@ SWEP.MaxSpreadInc = 0.55
 SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 33
+SWEP.Damage = 39
 SWEP.DeployTime = 0.45
 
 SWEP.ReloadSpeed = 1

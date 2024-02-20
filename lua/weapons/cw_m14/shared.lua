@@ -164,8 +164,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "7.62x51MM"
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_M14_FIRE"
@@ -179,7 +179,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.07
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 102
+SWEP.Damage = 140
 SWEP.DeployTime = 1.7
 
 SWEP.RecoilToSpread = 0.8 -- the M14 in particular will have 30% more recoil from continuous fire to give a feeling of "oh fuck I should stop firing 7.62x51MM in full auto at 750 RPM"

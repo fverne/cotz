@@ -141,8 +141,8 @@ SWEP.FireSound = "CW_l85_FIRE"
 SWEP.FireSoundSuppressed = "CW_G3A3_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.15
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005
@@ -151,7 +151,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 75
+SWEP.Damage = 80
 SWEP.DeployTime = 0.7
 SWEP.DrawSpeed = 0.98
 

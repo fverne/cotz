@@ -143,8 +143,8 @@ SWEP.FireSoundSuppressed = "CW_M1911_FIRE_SUPPRESSED"
 SWEP.Recoil = 2.9
 SWEP.FOVPerShot = 0.25 -- = .5
 
-SWEP.WearDamage = 0.095
-SWEP.WearEffect = 0.01
+SWEP.WearDamage = 0.22
+SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.125
 SWEP.AimSpread = 0.025
@@ -155,7 +155,7 @@ SWEP.ClumpSpread = nil
 SWEP.SpreadPerShot = 0.015
 SWEP.SpreadCooldown = 0.58
 SWEP.Shots = 1
-SWEP.Damage = 70
+SWEP.Damage = 68
 SWEP.DeployTime = .375
 SWEP.HolsterTime = .35
 

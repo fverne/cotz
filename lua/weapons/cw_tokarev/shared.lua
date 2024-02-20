@@ -106,7 +106,7 @@ SWEP.FireSoundSuppressed = "TT_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.55
 SWEP.FOVPerShot = 0.2
 
-SWEP.WearDamage = 0.125
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.125
@@ -116,7 +116,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 39
+SWEP.Damage = 43
 SWEP.DeployTime = .7
 SWEP.ADSFireAnim = false
 SWEP.Chamberable = false

@@ -125,8 +125,8 @@ SWEP.WorldModel		= "models/wick/weapons/stalker/stcopwep/w_mp153_model.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 3
-SWEP.Primary.DefaultClip	= 3
+SWEP.Primary.ClipSize		= 7
+SWEP.Primary.DefaultClip	= 7
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
@@ -142,7 +142,7 @@ SWEP.ClumpSpread = 0.01
 SWEP.SpreadPerShot = 0.012
 SWEP.SpreadCooldown = 0.7
 SWEP.Shots = 9
-SWEP.Damage = 19
+SWEP.Damage = 40
 SWEP.DeployTime = .5
 
 SWEP.ReloadSpeed = 0.8
@@ -153,5 +153,5 @@ SWEP.ShotgunReload = true
 
 SWEP.Chamberable = false
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005

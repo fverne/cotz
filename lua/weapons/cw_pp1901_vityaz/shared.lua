@@ -129,8 +129,8 @@ SWEP.FireSound = "Weapon_PP19V"
 SWEP.FireSoundSuppressed = "CW_PP19V_SUPPRESSED"
 SWEP.Recoil = 1.25
 
-SWEP.WearDamage = 0.008
-SWEP.WearEffect = 0.30
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.HipSpread = 0.125
 SWEP.AimSpread = 0.025
@@ -139,7 +139,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.6
 SWEP.Shots = 1
-SWEP.Damage = 41
+SWEP.Damage = 53
 SWEP.DeployTime = 1.5
 
 SWEP.ReloadSpeed = 1.0

@@ -119,8 +119,8 @@ SWEP.FireSound = "CW_PTRS_FIRE"
 SWEP.FireSoundSuppressed = "CW_M14_FIRE_SUPPRESSED"
 SWEP.Recoil = 18
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005
@@ -129,7 +129,7 @@ SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.4
 SWEP.Shots = 1
-SWEP.Damage = 400
+SWEP.Damage = 1750
 SWEP.DeployTime = 1.5
 
 SWEP.ReloadSpeed = 1
