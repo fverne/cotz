@@ -56,7 +56,7 @@ if SERVER then
 		local jobidentifier = client:GetCharacter():GetJobs()[npcidentifier].identifier
 		if client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier)) then
 			local item = client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier))
-			local trigger = ix.jobs.list[jobidentifier].listenTrigger
+			local trigger = jobidentifier
 			local noremove = false
 			local n = 0
 			if(item.quantity) then

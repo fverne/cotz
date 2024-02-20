@@ -150,7 +150,7 @@ if SERVER then
     --Check if player has quest
     local curJobs = self:GetCharacter():GetJobs()
     for k,v in pairs(curJobs) do
-      if v.listenTrigger == trigger then
+      if v.identifier == trigger then
 
         --Progress quest for player OR mark as completed
         local curProgress = curJobs[k].progress
@@ -250,7 +250,7 @@ if SERVER then
       temp.numberRec = ix.jobs.list[identifier].numberRec
     end
 
-    temp.listenTrigger = ix.jobs.list[identifier].listenTrigger
+    temp.listenTrigger = identifier
 
     temp.progress = 0
 
