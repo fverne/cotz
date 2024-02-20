@@ -59,7 +59,7 @@
 
 ix.npcbarter.Register("'Old Timer'", "newbiebarter1", {
 	name = "Decomposing Bullets",
-	description = "I'll give you a box of .410 Buckshot for 2 pieces of Decomposing Meat.",
+	description = "I'll give you a box of .410 Buckshot for 4 pieces of Decomposing Meat.",
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
@@ -71,9 +71,9 @@ ix.npcbarter.Register("'Old Timer'", "newbiebarter1", {
 	}
 })
 
-ix.npcbarter.Register("'Old Timer'", "newbiebarter1", {
+ix.npcbarter.Register("'Old Timer'", "newbiebarter2", {
 	name = "Decomposing Bullets",
-	description = "I'll give you a box of .410 Buckshot for 2 pieces of Decomposing Meat.",
+	description = "I'll give you a box of 22LR for 2 pieces of Decomposing Meat.",
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
@@ -85,9 +85,9 @@ ix.npcbarter.Register("'Old Timer'", "newbiebarter1", {
 	}
 })
 
-ix.npcbarter.Register("'Old Timer'", "newbiebarter1", {
+ix.npcbarter.Register("'Old Timer'", "newbiebarter3", {
 	name = "Decomposing Bullets",
-	description = "I'll give you a box of .410 Buckshot for 2 pieces of Decomposing Meat.",
+	description = "I'll give you a box of .45ACP for 3 pieces of Decomposing Meat.",
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
@@ -99,9 +99,9 @@ ix.npcbarter.Register("'Old Timer'", "newbiebarter1", {
 	}
 })
 
-ix.npcbarter.Register("'Old Timer'", "newbiebarter1", {
+ix.npcbarter.Register("'Old Timer'", "newbiebarter4", {
 	name = "Decomposing Bullets",
-	description = "I'll give you a box of .410 Buckshot for 2 pieces of Decomposing Meat.",
+	description = "I'll give you a box of 9x18mm for 2 pieces of Decomposing Meat.",
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
