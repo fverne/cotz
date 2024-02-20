@@ -6,7 +6,7 @@ include('shared.lua')
 ENT.bleeds      = true
 ENT.StartHealth = 150
 ENT.PlayerFriendly = false
-ENT.flatbulletresistance = 10
+ENT.flatbulletresistance = 5
 ENT.percentbulletresistance = 20
 ENT.lootChance = 33
 ENT.selectedWeaponItem = nil 
