@@ -67,9 +67,52 @@ ix.npcbarter.Register("'Old Timer'", "newbiebarter1", {
 
 	-- Only one type of item can be required at a time
 	reqItem = {
+		{"meat_human", 4},
+	}
+})
+
+ix.npcbarter.Register("'Old Timer'", "newbiebarter1", {
+	name = "Decomposing Bullets",
+	description = "I'll give you a box of .410 Buckshot for 2 pieces of Decomposing Meat.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"22lr", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
 		{"meat_human", 2},
 	}
 })
+
+ix.npcbarter.Register("'Old Timer'", "newbiebarter1", {
+	name = "Decomposing Bullets",
+	description = "I'll give you a box of .410 Buckshot for 2 pieces of Decomposing Meat.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"45acp", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"meat_human", 3},
+	}
+})
+
+ix.npcbarter.Register("'Old Timer'", "newbiebarter1", {
+	name = "Decomposing Bullets",
+	description = "I'll give you a box of .410 Buckshot for 2 pieces of Decomposing Meat.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"9x18", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"meat_human", 2},
+	}
+})
+
 
 ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner1", {
 	name = "Eurofunny",
