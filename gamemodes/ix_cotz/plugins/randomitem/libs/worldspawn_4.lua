@@ -30,7 +30,7 @@ ix.randomitems.tables["worldspawn_4"] = {
   {80, {"value_documents_12"}},
   {60, {"value_documents_13"}},
   {50, {"svt40", {["durability"] = 60, ["ammo"] = 5}}},
-  {50, {"sw500", {["durability"] = 50, ["ammo"] = 0}}},
+  {50, {"mr96", {["durability"] = 50, ["ammo"] = 0}}},
   {20, {"food_mre_usa"}},
   {20, {"food_mre_ukraine"}},
   {20, {"food_mre_russia"}},
