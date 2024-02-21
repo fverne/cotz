@@ -163,7 +163,7 @@ SWEP.ADSFireAnim = true
 SWEP.ShootWhileProne = true
 SWEP.ShotgunReload = true
 SWEP.HolsterOnLadder = false
-SWEP.SprintingEnabled = false
+SWEP.SprintingEnabled = true
 
 SWEP.ReloadStartTime = 2.25
 SWEP.InsertShellTime = .95
