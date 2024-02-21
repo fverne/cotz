@@ -60,6 +60,14 @@ ix.randomitems.tables["worldspawn_4"] = {
   {200, {"value_motorclean"}},
   {400, {"value_tape_electric"}},
 
+  {100, {"lax410", {["durability"] = 25, ["ammo"] = 2}}},
+  {100, {"toz34short", {["durability"] = 25, ["ammo"] = 1}}},
+  {100, {"toz66short", {["durability"] = 25, ["ammo"] = 1}}},
+  {100, {"stoegerddshort", {["durability"] = 25, ["ammo"] = 1}}},
+  {100, {"aks74u", {["durability"] = 25, ["ammo"] = 4}}},
+  {100, {"rugermini14", {["durability"] = 25, ["ammo"] = 2}}},
+  {100, {"w1895", {["durability"] = 25, ["ammo"] = 2}}},
+
   {800, {"9x18", {["quantity"] = 20}}},
   {800, {"762x25", {["quantity"] = 20}}},
   {600, {"45acp", {["quantity"] = 15}}},

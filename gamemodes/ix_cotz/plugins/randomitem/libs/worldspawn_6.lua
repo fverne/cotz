@@ -48,6 +48,16 @@ ix.randomitems.tables["worldspawn_6"] = {
  {130, {"value_carbattery"}},
  {200, {"value_motorclean"}},
  {400, {"value_tape_electric"}},
+ 
+ {100, {"sks", {["durability"] = 25, ["ammo"] = 2}}},
+ {100, {"famas", {["durability"] = 25, ["ammo"] = 2}}},
+ {100, {"ak74", {["durability"] = 25, ["ammo"] = 2}}},
+ {100, {"sg552", {["durability"] = 25, ["ammo"] = 2}}},
+ {100, {"an94k", {["durability"] = 25, ["ammo"] = 2}}},
+ {100, {"aug", {["durability"] = 25, ["ammo"] = 2}}},
+ {100, {"mosin", {["durability"] = 25, ["ammo"] = 2}}},
+ {100, {"w9422357", {["durability"] = 25, ["ammo"] = 2}}},
+
  {800, {"45acpap", {["quantity"] = 25}}},
  {600, {"556x45hp", {["quantity"] = 33}}},
  {800, {"9x19hp", {["quantity"] = 28}}},

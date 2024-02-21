@@ -72,6 +72,15 @@ ix.randomitems.tables["worldspawn_3"] = {
   {200, {"hidestash_1"}},
   {100, {"hidestash_2"}},
   {25, {"hidestash_3"}},
+
+  {150, {"fort12", {["durability"] = 25, ["ammo"] = 5}}},
+  {150, {"lugerp08", {["durability"] = 25, ["ammo"] = 3}}},
+  {150, {"m1911", {["durability"] = 25, ["ammo"] = 4}}},
+  {150, {"ar159mm", {["durability"] = 25, ["ammo"] = 3}}},
+  {150, {"sten", {["durability"] = 25, ["ammo"] = 7}}},
+  {150, {"ppsh", {["durability"] = 25, ["ammo"] = 6}}},
+  {150, {"lax410", {["durability"] = 25, ["ammo"] = 2}}},
+
   {800, {"9x18", {["quantity"] = 10}}},
   {800, {"22lrhp", {["quantity"] = 18}}},
   {800, {"762x25", {["quantity"] = 8}}},
