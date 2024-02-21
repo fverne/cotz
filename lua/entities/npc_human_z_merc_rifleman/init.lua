@@ -249,11 +249,11 @@ function ENT:FindEnemyDan()
   local MyNearbyTargets = ents.FindInCone(self:GetPos(),self:GetForward(),7000,45)
 
   for k,v in pairs(MyNearbyTargets) do
-    if v:Disposition(self) == D_LI || v:IsPlayer() then
+    if v:Disposition(self) == D_HT || v:IsPlayer() then
 
       self:StopSpeechSounds()
       self:ResetEnemy()
-      self:AddEntityRelationship( v, D_LI, 10 )
+      self:AddEntityRelationship( v, D_HT, 10 )
       self:SetEnemy(v)
       local distance = self:GetPos():Distance(v:GetPos())
       local randomsound = math.random(1,5)
