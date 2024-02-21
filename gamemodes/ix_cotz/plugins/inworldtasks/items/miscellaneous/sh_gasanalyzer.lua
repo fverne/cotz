@@ -108,7 +108,7 @@ function ITEM:OnInstanced(invID, x, y)
 		local tmptbl = {}
 
 		for i = 1, self:GetData("npoints", 3) do
-			table.insert(tmptbl,ix.util.GetRandomTaskPoint())
+			table.insert(tmptbl,ix.util.GetRandomTaskPoint(self:GetData("map")))
 		end
 
 		self:SetData("points", tmptbl)
