@@ -50,7 +50,7 @@ function ENT:Think()
 	
 		if self.DustTimer < CurTime() then
 		
-			self.DustTimer = CurTime() + 0.1
+			self.DustTimer = CurTime() + 0.5
 		
 			local vec = Vector( math.random( self.Right.x, self.Left.x ), math.random( self.Right.y, self.Left.y ), self.Entity:GetPos().z )
 			
