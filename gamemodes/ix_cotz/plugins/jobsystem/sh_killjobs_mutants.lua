@@ -361,7 +361,7 @@ tempJob.desc = "%d rodents."
 tempJob.icon = "vgui/icons/tushkandead.png"
 tempJob.tier = 1
 tempJob.listenTrigger = "rodentKilled"
-tempJob.numberRec = 4
+tempJob.numberRec = 2
 tempJob.reward = {{"kit_ammo_low"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 2
@@ -379,7 +379,7 @@ tempJob.desc = "%d rodents."
 tempJob.icon = "vgui/icons/tushkandead.png"
 tempJob.tier = 1
 tempJob.listenTrigger = "rodentKilled"
-tempJob.numberRec = 8
+tempJob.numberRec = 5
 tempJob.reward = {{"kit_ammo_low"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 6
@@ -397,7 +397,7 @@ tempJob.desc = "%d rodents."
 tempJob.icon = "vgui/icons/tushkandead.png"
 tempJob.tier = 1
 tempJob.listenTrigger = "rodentKilled"
-tempJob.numberRec = 13
+tempJob.numberRec = 8
 tempJob.reward = {{"kit_ammo_low"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 9
@@ -408,7 +408,7 @@ ix.jobs.register(tempJob, "killRodentsHigh")
 
 tempJob = nil
 
---rodents
+--hellhounds
 
 local tempJob = {}
 
