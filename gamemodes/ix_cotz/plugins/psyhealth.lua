@@ -191,7 +191,7 @@ ix.command.Add("CharSetPsyHealth", {
 
 function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 	--SONIC OVERRIDE
-	if ( entity:IsPlayer() and dmgInfo:IsDamageType(DMG_SONIC)) then
+	if ( entity:IsPlayer() and entity:GetCharacter() and dmgInfo:IsDamageType(DMG_SONIC)) then
 		local damage = dmgInfo:GetDamage()
 		local perRes = entity:GetNWFloat("ixperpsyres")
 		local flatRes = entity:GetNWInt("ixflatpsyres")
