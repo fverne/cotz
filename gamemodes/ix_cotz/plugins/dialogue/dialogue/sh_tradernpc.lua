@@ -5,6 +5,7 @@ DIALOGUE.addTopic("GREETING", {
 	options = {
 		"TradeTopic",
 		"BackgroundTopic",
+		"UpgradeTaskReward",
 		--"InterestTopic",
 		"AboutWorkTopic",
 		-- "GetTask",
@@ -100,6 +101,85 @@ DIALOGUE.addTopic("InterestTopic", {
 		"BackTopic",
 	}
 })
+
+DIALOGUE.addTopic("UpgradeTaskReward", {
+	statement = "Can you upgrade my task reward to a higher tier?",
+	response = "Which task reward do you wish to exchange?",
+	IsDynamic = true,
+	options = {
+		"BackTopic"
+	},
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+		local items = client:GetCharacter():GetInventory():GetItems()
+
+		for k,v in pairs(items) do
+			if v.upgradeItem and v.upgradeCost then
+				table.insert(dynopts, {statement = v:GetName().." - "..ix.currency.Get(v.upgradeCost), topicID = "UpgradeTaskReward", dyndata = {itemuid = v.uniqueID, itemid = v:GetID(), cost = v.upgradeCost, upgradeItem = v.upgradeItem}})
+			end
+		end
+		
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+
+		-- Return the next topicID
+		if( !client:GetCharacter():HasMoney(dyndata.cost)) then
+			return "NotEnoughMoney"
+		end
+		return "ConfirmUpgradeTaskReward", dyndata
+	end,
+})
+
+
+DIALOGUE.addTopic("ConfirmUpgradeTaskReward", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	IsDynamic = true,
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if(dyndata) then
+			if (CLIENT) then
+				self.response = string.format("Are you sure you want to upgrade that? It will cost you %s.", ix.currency.Get(dyndata.cost))
+			end
+
+			target.selectedtaskrewardstruct = { dyndata.itemid, dyndata.itemuid, dyndata.cost, dyndata.upgradeItem }
+		end
+	end,
+	GetDynamicOptions = function(self, client, target)
+
+		local dynopts = {
+			{statement = "Yes, upgrade it.", topicID = "ConfirmUpgradeTaskReward", dyndata = {accepted = true}},
+			{statement = "Actually, hold on.", topicID = "ConfirmUpgradeTaskReward", dyndata = {accepted = false}},
+		}
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if( SERVER and dyndata.accepted ) then
+			ix.dialogue.notifyMoneyLost(client, ix.currency.Get(target.selectedtaskrewardstruct[3]))
+			client:GetCharacter():TakeMoney(target.selectedtaskrewardstruct[3])
+
+			ix.item.instances[target.selectedtaskrewardstruct[1]]:Remove()
+			client:GetCharacter():GetInventory():Add(target.selectedtaskrewardstruct[4])
+		end
+		-- Return the next topicID
+		return "BackTopic"
+	end,
+})
+
+DIALOGUE.addTopic("NotEnoughMoney", {
+	statement = "",
+	response = "Not enough money for that.",
+	options = {
+		"BackTopic"
+	}
+})
+
 
 DIALOGUE.addTopic("AboutWorkTopic", {
 	statement = "About work...",
@@ -357,6 +437,7 @@ DIALOGUE.addTopic("BackTopic", {
 	options = {
 		"TradeTopic",
 		"BackgroundTopic",
+		"UpgradeTaskReward",
 		--"InterestTopic",
 		"AboutWorkTopic",
 		-- "GetTask",

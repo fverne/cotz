@@ -1,5 +1,5 @@
 ITEM.name = "Rookie Reward Small"
-ITEM.description= ""
+ITEM.description= "A big wooden box."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4
@@ -12,6 +12,9 @@ ITEM.iconCam = {
 	ang = Angle(449.8, 90.22, 0),
 	fov = 13.55
 }
+
+ITEM.upgradeItem = "kit_reward_tier02_small"
+ITEM.upgradeCost = 2000
 
 ITEM.items = {
 	{
