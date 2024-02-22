@@ -151,7 +151,6 @@ if SERVER then
 			tracecnt = tracecnt + 1
 
 			if tracecnt > 50 then
-				print("tracebad")
 				tracegood = true
 				teleres = pos + Vector(0,0,16) -- Teleport to original position if we cant find a position
 			end
