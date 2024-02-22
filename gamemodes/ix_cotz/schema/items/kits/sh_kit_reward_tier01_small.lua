@@ -1,5 +1,5 @@
 ITEM.name = "Rookie Reward Small"
-ITEM.description= "A big wooden box."
+ITEM.description= ""
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4
