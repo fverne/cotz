@@ -89,6 +89,16 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 	end
 end
 
+-- pvp disable blood decals
+function PLUGIN:ScalePlayerDamage(ply, hitgroup, dmginfo)
+	--disable pvp
+	if (ix.config.Get("disablePVP", true)) then
+		if ply:IsPlayer() and dmginfo:GetAttacker():IsPlayer() and (ply != dmginfo:GetAttacker()) then
+			return true
+		end
+	end
+end
+
 local playerMeta = FindMetaTable("Player")
 
 function playerMeta:getPercentageBulletRes()
