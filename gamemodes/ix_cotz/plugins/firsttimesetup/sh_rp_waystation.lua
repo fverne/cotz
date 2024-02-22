@@ -1752,5 +1752,8 @@ PLUGIN.map_presets["rp_waystation"] = {
       { Vector(1063.3754882812,-6074.419921875,67.53099822998) , "worldspawn_3" }, 
       { Vector(1121.7894287109,-6069.1186523438,67.540802001953) , "worldspawn_3" },
     },
-  }
+  },
+  entities = {
+    
+  },
 }
