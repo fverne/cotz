@@ -124,32 +124,32 @@ function ENT:STALKERNPCThink()
 			self.GoingToSpawnThem = true
 			
 			self.Zombie1 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie1:SetPos(self:GetPos() +self:GetRight()*90 + self:GetUp()*100)
+			self.Zombie1:SetPos(self:GetPos() +self:GetRight()*90 + self:GetUp()*16)
 			self.Zombie1:SetAngles(self:GetAngles())
 			self.Zombie1:Spawn()
 			
 			self.Zombie2 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie2:SetPos(self:GetPos() +self:GetRight()*-90 + self:GetUp()*100)
+			self.Zombie2:SetPos(self:GetPos() +self:GetRight()*-90 + self:GetUp()*16)
 			self.Zombie2:SetAngles(self:GetAngles())
 			self.Zombie2:Spawn()
 			
 			self.Zombie3 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie3:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*40 + self:GetUp()*100)
+			self.Zombie3:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*40 + self:GetUp()*16)
 			self.Zombie3:SetAngles(self:GetAngles())
 			self.Zombie3:Spawn()
 			
 			self.Zombie4 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie4:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*-40 + self:GetUp()*100)
+			self.Zombie4:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*-40 + self:GetUp()*16)
 			self.Zombie4:SetAngles(self:GetAngles())
 			self.Zombie4:Spawn()
 			
 			self.Zombie5 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie5:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*-40 + self:GetUp()*100)
+			self.Zombie5:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*-40 + self:GetUp()*16)
 			self.Zombie5:SetAngles(self:GetAngles())
 			self.Zombie5:Spawn()
 			
 			self.Zombie6 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie6:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*40 + self:GetUp()*100)
+			self.Zombie6:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*40 + self:GetUp()*16)
 			self.Zombie6:SetAngles(self:GetAngles())
 			self.Zombie6:Spawn()
 		

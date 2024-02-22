@@ -69,6 +69,7 @@ ENT.dead = false
 ENT.speaktime = 0
 ENT.FireBurst = 0
 ENT.NextAttack = 0
+ENT.IsSTALKERNPC = true
    
 function ENT:Initialize()
 
@@ -85,6 +86,7 @@ function ENT:Initialize()
   self:SetModel(self.models[math.random(1,#self.models)])
 
   self:SetSkin(math.random(1,self:SkinCount()))
+  self:SetCollisionGroup(COLLISION_GROUP_NPC)
    
   self:SetHullType( HULL_HUMAN )
   self:SetHullSizeNormal();

@@ -53,13 +53,13 @@ if SERVER then
 					local data = {}
 					data.start = position
 					data.endpos = position
-					data.mins = Vector(-42, -42, 0)
-					data.maxs = Vector(42, 42, 80)
-					local trace = util.TraceHull(data)
-							
-					if trace.Entity:IsValid() then
-						continue
-					end
+					data.mins = Vector(-96, -96, 0)
+					data.maxs = Vector(96, 96, 256)
+
+					-- local trace = util.TraceHull(data)		
+					-- if trace.Hit then
+					-- 	continue
+					-- end
 
 					local newNPC = ents.Create(spawn.entities[k][1])
 					newNPC:SetPos(position)
@@ -133,24 +133,17 @@ if SERVER then
 		local teleres
 		local tracecnt = 0
 
-		local firstTrace = util.TraceLine( {
-				start = pos + Vector(0,0,64),
-				endpos = pos + Vector(0,0,512),
-				mask = MASK_ALL,
-				ignoreworld = false
-			} )
-
 		repeat
 			local trace = util.TraceHull( {
-				start = firstTrace.HitPos - Vector(0,0,64),
-				endpos = pos + Vector(math.random(-PLUGIN.spawnradius,PLUGIN.spawnradius),math.random(-PLUGIN.spawnradius,PLUGIN.spawnradius),-400),
-				mins = Vector( -32, -32, 0 ),
-				maxs = Vector( 32, 32, 64 ),
+				start = pos + Vector(0,0,16),
+				endpos = pos + Vector(math.random(-PLUGIN.spawnradius,PLUGIN.spawnradius),math.random(-PLUGIN.spawnradius,PLUGIN.spawnradius),0),
+				mins = Vector(-96, -96, 0),
+				maxs = Vector(96, 96, 256),
 				mask = MASK_ALL,
 				ignoreworld = false
 			} )
 
-			if not trace.HitSky then
+			if not trace.Hit then
 				tracegood = true
 				teleres = trace.HitPos + ( trace.HitNormal * 32 )
 			end
@@ -158,8 +151,9 @@ if SERVER then
 			tracecnt = tracecnt + 1
 
 			if tracecnt > 50 then
+				print("tracebad")
 				tracegood = true
-				teleres = pos + Vector(0,0,64) -- Teleport to original position if we cant find a position
+				teleres = pos + Vector(0,0,16) -- Teleport to original position if we cant find a position
 			end
 
 		until tracegood
