@@ -42,8 +42,8 @@ ENT.longjumping2 = 0
 ENT.hp = 400
 ENT.hpvar = 50
 
-ENT.FBR = 0
-ENT.FBRAP = 45
+ENT.FBR = 10
+ENT.FBRAP = 15
 ENT.BR = 15
 
 ENT.NextAbilityTime = 0
@@ -81,7 +81,7 @@ function ENT:Initialize()
 	//Jumping attack
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
-	TEMP_MeleeTable.damage[1] = 85
+	TEMP_MeleeTable.damage[1] = 65
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 80
 	TEMP_MeleeTable.radius[1] = 80
@@ -132,7 +132,7 @@ function ENT:STALKERNPCThink()
 				if(v == self) then continue end
 				local distance = self:GetPos():Distance(v:GetPos())
 
-				local fulldamage = 80
+				local fulldamage = 25
 				TEMP_TargetDamage = DamageInfo()
 									
 				TEMP_TargetDamage:SetDamage(fulldamage * ((512-distance)/512))

@@ -34,11 +34,11 @@ ENT.isAttacking = 0
 ENT.jumping1 = 0
 ENT.jumping2 = 0
 
-ENT.hp = 750
+ENT.hp = 850
 ENT.hpvar = 20
 
-ENT.FBR = 0
-ENT.FBRAP = 30
+ENT.FBR = 7
+ENT.FBRAP = 15
 ENT.BR = 55
 
 ENT.CanBlast = 0
@@ -82,13 +82,13 @@ function ENT:Initialize()
 
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
-	TEMP_MeleeTable.damage[1] = 60
+	TEMP_MeleeTable.damage[1] = 10
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 120
 	TEMP_MeleeTable.radius[1] = 400
 	TEMP_MeleeTable.time[1] = 0.6
 	TEMP_MeleeTable.bone[1] = "bone21"
-	TEMP_MeleeTable.damage[2] = 60
+	TEMP_MeleeTable.damage[2] = 10
 	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[2] = 120
 	TEMP_MeleeTable.radius[2] = 400

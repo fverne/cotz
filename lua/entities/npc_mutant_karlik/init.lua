@@ -25,11 +25,11 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
 ENT.CanWarp = 0
 
-ENT.hp = 400
+ENT.hp = 1200
 ENT.hpvar = 50
 
-ENT.FBR = 25
-ENT.FBRAP = 12
+ENT.FBR = 10
+ENT.FBRAP = 15
 ENT.BR = 10
 
 ENT.WantToWarp = false

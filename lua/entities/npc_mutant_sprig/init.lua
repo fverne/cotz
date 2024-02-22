@@ -27,7 +27,7 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 200
+ENT.hp = 150
 ENT.hpvar = 25
 
 ENT.CanJump = 0
@@ -45,7 +45,7 @@ ENT.VisibleSchedule = SCHED_CHASE_ENEMY
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 ENT.FBR = 5
-ENT.FBRAP = 23
+ENT.FBRAP = 30
 ENT.BR = 0
 
 function ENT:Initialize()

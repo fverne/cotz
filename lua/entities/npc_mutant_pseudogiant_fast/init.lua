@@ -27,7 +27,7 @@ ENT.ChasingSound.chance = 5
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 800
+ENT.hp = 2500
 ENT.hpvar = 100
 
 ENT.CanJump = 0
@@ -47,8 +47,8 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_IDLE_WANDER 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
-ENT.FBR = 50
-ENT.FBRAP = 80
+ENT.FBR = 15
+ENT.FBRAP = 5
 ENT.BR = 12
 
 function ENT:Initialize()
@@ -97,7 +97,7 @@ function ENT:Initialize()
 
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
-	TEMP_MeleeTable.damage[1] = 50
+	TEMP_MeleeTable.damage[1] = 60
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 128
 	TEMP_MeleeTable.radius[1] = 128
@@ -157,7 +157,7 @@ function ENT:STALKERNPCThink()
 			if(v == self) then continue end
 			local distance = self:GetPos():Distance(v:GetPos())
 
-			local fulldamage = 150
+			local fulldamage = 60
 			TEMP_TargetDamage = DamageInfo()
 									
 			TEMP_TargetDamage:SetDamage(fulldamage * ((512-distance)/512))

@@ -21,8 +21,8 @@ ENT.ChasingSoundEnabled = false
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 50
-ENT.hpvar = 5
+ENT.hp = 120
+ENT.hpvar = 10
 
 ENT.FBR = 5
 ENT.FBRAP = 80

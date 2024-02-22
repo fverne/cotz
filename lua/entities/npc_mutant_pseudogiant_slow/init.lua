@@ -27,7 +27,7 @@ ENT.ChasingSound.chance = 5
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 1300
+ENT.hp = 4000
 ENT.hpvar = 100
 
 ENT.CanSlam = 0
@@ -42,9 +42,9 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_IDLE_WANDER 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
-ENT.FBR = 75
-ENT.FBRAP = 200
-ENT.BR = 20
+ENT.FBR = 15
+ENT.FBRAP = 5
+ENT.BR = 12
 
 function ENT:Initialize()
 	self.Model = "models/monsters/gigant3.mdl"

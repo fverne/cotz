@@ -17,8 +17,8 @@ ENT.DieSound.max = 2
 ENT.hp = 750
 ENT.hpvar = 100
 
-ENT.FBR = 15
-ENT.FBRAP = 25
+ENT.FBR = 5
+ENT.FBRAP = 12
 ENT.BR = 15
 
 ENT.CanSpecial = true

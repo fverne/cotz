@@ -14,11 +14,11 @@ ENT.DieSound.name = "Stalker.Controller.Die"
 ENT.DieSound.min = 1
 ENT.DieSound.max = 2
 
-ENT.hp = 1500
-ENT.hpvar = 100
+ENT.hp = 1100
+ENT.hpvar = 75
 
 ENT.FBR = 15
-ENT.FBRAP = 60
+ENT.FBRAP = 20
 ENT.BR = 20
 
 ENT.CanSpecial = true
@@ -155,7 +155,7 @@ function ENT:STALKERNPCThink()
 				ParticleEffect( "electra_activated", TEMP_ShootPoint, Angle( 0, 0, 0 ) )
 
 				local dmg = DamageInfo()
-				dmg:SetDamage(75)
+				dmg:SetDamage(105)
 				dmg:SetAttacker(self)
 				dmg:SetDamageType(DMG_SHOCK)
 				dmg:SetInflictor(self)

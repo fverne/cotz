@@ -79,63 +79,63 @@ function ENT:Initialize()
 
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
-	TEMP_MeleeTable.damage[1] = 15
+	TEMP_MeleeTable.damage[1] = 12
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BURN)
 	TEMP_MeleeTable.distance[1] = 256
 	TEMP_MeleeTable.radius[1] = 128
 	TEMP_MeleeTable.time[1] = 0.2
 	TEMP_MeleeTable.bone[1] = "bip01_head"
 
-	TEMP_MeleeTable.damage[2] = 15
+	TEMP_MeleeTable.damage[2] = 12
 	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BURN)
 	TEMP_MeleeTable.distance[2] = 384
 	TEMP_MeleeTable.radius[2] = 128
 	TEMP_MeleeTable.time[2] = 0.3
 	TEMP_MeleeTable.bone[2] = "bip01_head"
 
-	TEMP_MeleeTable.damage[3] = 15
+	TEMP_MeleeTable.damage[3] = 12
 	TEMP_MeleeTable.damagetype[3] = bit.bor(DMG_BURN)
 	TEMP_MeleeTable.distance[3] = 384
 	TEMP_MeleeTable.radius[3] = 128
 	TEMP_MeleeTable.time[3] = 0.4
 	TEMP_MeleeTable.bone[3] = "bip01_head"
 
-	TEMP_MeleeTable.damage[4] = 15
+	TEMP_MeleeTable.damage[4] = 12
 	TEMP_MeleeTable.damagetype[4] = bit.bor(DMG_BURN)
 	TEMP_MeleeTable.distance[4] = 256
 	TEMP_MeleeTable.radius[4] = 128
 	TEMP_MeleeTable.time[4] = 0.5
 	TEMP_MeleeTable.bone[4] = "bip01_head"
 
-	TEMP_MeleeTable.damage[5] = 15
+	TEMP_MeleeTable.damage[5] = 12
 	TEMP_MeleeTable.damagetype[5] = bit.bor(DMG_BURN)
 	TEMP_MeleeTable.distance[5] = 384
 	TEMP_MeleeTable.radius[5] = 128
 	TEMP_MeleeTable.time[5] = 0.6
 	TEMP_MeleeTable.bone[5] = "bip01_head"
 
-	TEMP_MeleeTable.damage[6] = 15
+	TEMP_MeleeTable.damage[6] = 12
 	TEMP_MeleeTable.damagetype[6] = bit.bor(DMG_BURN)
 	TEMP_MeleeTable.distance[6] = 384
 	TEMP_MeleeTable.radius[6] = 128
 	TEMP_MeleeTable.time[6] = 0.7
 	TEMP_MeleeTable.bone[6] = "bip01_head"
 
-	TEMP_MeleeTable.damage[7] = 15
+	TEMP_MeleeTable.damage[7] = 12
 	TEMP_MeleeTable.damagetype[7] = bit.bor(DMG_BURN)
 	TEMP_MeleeTable.distance[7] = 256
 	TEMP_MeleeTable.radius[7] = 128
 	TEMP_MeleeTable.time[7] = 0.8
 	TEMP_MeleeTable.bone[7] = "bip01_head"
 
-	TEMP_MeleeTable.damage[8] = 15
+	TEMP_MeleeTable.damage[8] = 12
 	TEMP_MeleeTable.damagetype[8] = bit.bor(DMG_BURN)
 	TEMP_MeleeTable.distance[8] = 384
 	TEMP_MeleeTable.radius[8] = 128
 	TEMP_MeleeTable.time[8] = 0.9
 	TEMP_MeleeTable.bone[8] = "bip01_head"
 
-	TEMP_MeleeTable.damage[9] = 15
+	TEMP_MeleeTable.damage[9] = 12
 	TEMP_MeleeTable.damagetype[9] = bit.bor(DMG_BURN)
 	TEMP_MeleeTable.distance[9] = 384
 	TEMP_MeleeTable.radius[9] = 128

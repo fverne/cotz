@@ -4,7 +4,7 @@ include("shared.lua")
 
 
 ENT.Exploding = false
-ENT.TouchDamage = 73
+ENT.TouchDamage = 95
 
 function ENT:Initialize()
 	self:SetModel( "models/props_phx/misc/smallcannonball.mdl" )
@@ -58,7 +58,7 @@ function ENT:Detonate(ent,data)
 		TEMP_Own = self:GetOwner()
 	end
 	
-	util.BlastDamageInfo( TEMP_TargetDamage, data.Pos, 20)
+	-- util.BlastDamageInfo( TEMP_TargetDamage, data.Pos, 20)
 	
 	sound.Play("Stalker.BurerWave.Collide",self:GetPos())
 	
@@ -94,7 +94,7 @@ function ENT:StartTouch(ent)
 end
 		
 function ENT:Think()
-	self.TouchDamage = self.TouchDamage-0.5
+	self.TouchDamage = self.TouchDamage-5.5
 	
 	if(self.TouchDamage<10) then
 		self:Remove()

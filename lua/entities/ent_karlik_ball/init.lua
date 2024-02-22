@@ -4,7 +4,7 @@ include("shared.lua")
 
 
 ENT.Exploding = false
-ENT.TouchDamage = 55
+ENT.TouchDamage = 75
 
 function ENT:Initialize()
 	self:SetModel( "models/props_phx/misc/smallcannonball.mdl" )
@@ -58,7 +58,7 @@ function ENT:Detonate(ent,data)
 		TEMP_Own = self:GetOwner()
 	end
 	
-	util.BlastDamageInfo( TEMP_TargetDamage, data.Pos, 20)
+	-- util.BlastDamageInfo( TEMP_TargetDamage, data.Pos, 20)
 	
 	sound.Play("Stalker.BurerWave.Collide",self:GetPos())
 	
