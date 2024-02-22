@@ -1111,10 +1111,6 @@ function ENT:OnTakeDamage(dmginfo)
 		end
 	end
 
-	if(self.LastDamageHitgroup==1) then
-		TEMP_DMGMUL = TEMP_DMGMUL*1.25
-	end
-
 	local prenpc = TEMP_DMGMUL
 
 	TEMP_DMGMUL = self:STALKERNPCDamageTake(dmginfo,TEMP_DMGMUL)

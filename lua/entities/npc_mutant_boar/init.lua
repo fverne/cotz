@@ -106,9 +106,27 @@ end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul) 
 	TEMP_Mul = mul
+	local headMultiplier = 0.75 // thick skull
+	local torsoMultiplier = 1 // boar is more vulnerable in torso
+	local limbMultiplier = 1
 
-	if(self.LastDamageHitgroup == 1)then
-		TEMP_Mul = 0.4
+	local torsoHitGroups = {
+		[2] = true,
+		[3] = true,
+	}
+	local limbHitgroups = {
+		[4] = true,
+		[5] = true,
+		[6] = true,
+		[7] = true,
+	}
+
+	if(self.LastDamageHitgroup == 1)then // head
+		TEMP_Mul = 0.50 * headMultiplier 
+	elseif (torsoHitGroups[self.LastDamageHitgroup]) then // chest + stomach
+		TEMP_Mul = 1 * torsoMultiplier 
+	elseif (limbHitgroups[self.LastDamageHitgroup]) then // limb
+		TEMP_Mul = 4 * limbMultiplier
 	end
 
 	return TEMP_Mul
