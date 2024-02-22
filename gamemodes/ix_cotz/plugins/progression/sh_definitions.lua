@@ -152,6 +152,7 @@ ix.progression.Register("oldTimerKillIntro", {
 				local ang = Angle(0.000, 90, 0.000)
 				ix.util.SpawnAdvVendor("tradernpc", pos, ang)
 
+				ix.progression.SetCompleted("oldTimerKillIntro", true)
 
 				-- Unlock next step in progression
 				ix.progression.SetActive("oldTimerItemDelivery_mainMeat", true)
@@ -858,12 +859,6 @@ ix.progression.Register("boss_dataTasks", {
 				local npc = ix.progression.GetNPCFromName("'Boss'")
 				if (npc) then
 					npc:AddItemToList("accesscard_bunker", nil, 5, "SELLANDBUY", 5, 3, 5) -- Main Progression
-				end
-
-				-- tie this together somehow
-				local npc = ix.progression.GetNPCFromName("'Egghead'")
-				if (npc) then
-					npc:AddItemToList("quest_computeraccess", nil, 2, "SELLANDBUY", 2, 6, 2) -- Main Progression
 				end
 			end,
 			RunOnce = true
