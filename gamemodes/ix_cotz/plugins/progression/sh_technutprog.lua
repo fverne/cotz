@@ -1320,7 +1320,7 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 	GetItemIds = function()
 		local itemids = {
 			["value_engine"] = 5,
-			["value_waterfilter"] = 18,
+			["value_waterfilter"] = 2,
 			["value_tape_heavy"] = 6,
 			["value_tape_duct"] = 12,
 		}	
