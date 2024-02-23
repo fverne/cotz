@@ -131,6 +131,8 @@ function PANEL:Init()
 	if hook.Run("ShouldSuppressMenu", LocalPlayer()) then
 		if (IsValid(ix.gui.openedStorage)) then
 			ix.gui.openedStorage:Remove()
+			net.Start("ixStorageClose")
+			net.SendToServer()
 		end
 	end
 end
