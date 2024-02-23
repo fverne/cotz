@@ -72,7 +72,7 @@ hook.Add("ix_OnJobComplete", "Mute_scanTasks", function(client, npcidentifier, i
 	end
 end)
 
-hook.Add("ix_OnJobComplete", "Egghead_dataTasks", function(client, npcidentifier, identifier)
+hook.Add("ix_OnJobComplete", "Boss_dataTasks", function(client, npcidentifier, identifier)
 	local iscorrecttasktype = false
 
 	local categories = {
@@ -83,9 +83,9 @@ hook.Add("ix_OnJobComplete", "Egghead_dataTasks", function(client, npcidentifier
 		if categories[v] then iscorrecttasktype = true end
 	end
 
-	if npcidentifier == "'Egghead'" and iscorrecttasktype then
-		if ix.progression.IsActive("egghead_dataTasks") then
-			ix.progression.AddProgessionValue("egghead_dataTasks", 1, client:Name())
+	if npcidentifier == "'Boss'" and iscorrecttasktype then
+		if ix.progression.IsActive("boss_dataTasks") then
+			ix.progression.AddProgessionValue("boss_dataTasks", 1, client:Name())
 		end
 	end
 end)
