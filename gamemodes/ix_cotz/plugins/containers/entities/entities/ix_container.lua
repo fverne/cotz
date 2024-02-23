@@ -96,6 +96,7 @@ if (SERVER) then
 
 	function ENT:Use(activator)
 		if self:GetNoDraw() then return end
+		if hook.Run("ShouldSuppressMenu", activator) then return end
 		local inventory = self:GetInventory()
 
 		if (inventory and (activator.ixNextOpen or 0) < CurTime()) then

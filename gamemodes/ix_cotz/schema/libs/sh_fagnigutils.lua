@@ -64,21 +64,28 @@ if(CLIENT) then
 		end
 	end)
 
-	hook.Add("ShouldSuppressMenu", "ix_reloadNoMenuAllowed", function(client)
-		local weapon = client:GetActiveWeapon()
-
-		if(weapon.ReloadDelay or ((weapon.dt and weapon.dt.State and weapon.dt.State == CW_ACTION))) then
-			return true
-		end
-	end)
+	
 
 	net.Receive("ix_KillMenu", function()
 		if IsValid(ix.gui.menu) then
 			ix.gui.menu:Remove()
 		end
+
+		if (IsValid(ix.gui.openedStorage)) then
+			ix.gui.openedStorage:Remove()
+		end
+
 	end)
 
 end
+
+hook.Add("ShouldSuppressMenu", "ix_reloadNoMenuAllowed", function(client)
+	local weapon = client:GetActiveWeapon()
+
+	if(weapon.ReloadDelay or ((weapon.dt and weapon.dt.State and weapon.dt.State == CW_ACTION))) then
+		return true
+	end
+end)
 
 if (SERVER) then
 	util.AddNetworkString("ix_KillMenu")

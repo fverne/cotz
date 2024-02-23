@@ -127,6 +127,12 @@ function PANEL:Init()
 
 	self.storageInventory:MakePopup()
 	ix.gui.frame:MakePopup()
+
+	if hook.Run("ShouldSuppressMenu", LocalPlayer()) then
+		if (IsValid(ix.gui.openedStorage)) then
+			ix.gui.openedStorage:Remove()
+		end
+	end
 end
 
 function PANEL:OnChildAdded(panel)
