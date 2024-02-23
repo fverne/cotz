@@ -113,6 +113,35 @@ ix.npcbarter.Register("'Old Timer'", "newbiebarter4", {
 	}
 })
 
+ix.npcbarter.Register("'Old Timer'", "newbiebarter5", {
+	name = "Decomposing Gear",
+	description = "I'll give you a bandage for 1 pieces of Decomposing Meat.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"medic_bandage_1", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"meat_human", 2},
+	}
+})
+
+ix.npcbarter.Register("'Old Timer'", "newbiebarter6", {
+	name = "Decomposing Gear",
+	description = "I'll give you a bottle of dirty water for 1 piece of Decomposing Meat.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"drink_bottlewaterdirty", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"meat_human", 1},
+	}
+})
+
+
 
 ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner1", {
 	name = "Eurofunny",
@@ -153,5 +182,89 @@ ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner3", {
 	-- Only one type of item can be required at a time
 	reqItem = {
 		{"value_currency_euro", 20},
+	}
+})
+
+ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner4", {
+	name = "Eurofunny",
+	description = "I'll give you 10 Euro for a lost note.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"value_currency_euro", 1, {["quantity"] = 10}},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"hidestash_1", 1},
+	}
+})
+
+ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner5", {
+	name = "Eurofunny",
+	description = "I'll give you 15 Euro for a lost rookie PDA.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"value_currency_euro", 1, {["quantity"] = 15}},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"hidestash_2", 1},
+	}
+})
+
+ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner6", {
+	name = "Eurofunny",
+	description = "I'll give you 20 Euro for a lost veteran PDA.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"value_currency_euro", 1, {["quantity"] = 20}},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"hidestash_3", 1},
+	}
+})
+
+ix.npcbarter.Register("'Haggler'", "newbiebarterhaggler1", {
+	name = "Ammo",
+	description = "I'll give you a box of low tier ammo for some red gunpowder.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"reward_ammo_tier01", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"value_gunpowder_red", 1},
+	}
+})
+
+ix.npcbarter.Register("'Haggler'", "newbiebarterhaggler2", {
+	name = "Ammo",
+	description = "I'll give you a box of mid tier ammo for some green gunpowder.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"reward_ammo_tier02", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"value_gunpowder_green", 1},
+	}
+})
+
+ix.npcbarter.Register("'Haggler'", "newbiebarterhaggler3", {
+	name = "Ammo",
+	description = "I'll give you a box of high tier ammo for some blue gunpowder.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"reward_ammo_tier03", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"value_gunpowder_blue", 1},
 	}
 })
