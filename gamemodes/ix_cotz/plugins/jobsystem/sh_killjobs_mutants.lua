@@ -784,41 +784,41 @@ ix.jobs.register(tempJob, "killChimerasHigh")
 tempJob = nil
 
 -- Bear
-local tempJob = {}
+-- local tempJob = {}
 
-tempJob.name = "Kill %d bears."
-tempJob.desc = "%d bears."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 3
-tempJob.listenTrigger = "bearKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_mixed_high"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 30
-tempJob.moneyReward = {3500, 6500}
-tempJob.categories = {"mutantkillhard"}
+-- tempJob.name = "Kill %d bears."
+-- tempJob.desc = "%d bears."
+-- tempJob.icon = "propic/event/mutanthunt"
+-- tempJob.tier = 3
+-- tempJob.listenTrigger = "bearKilled"
+-- tempJob.numberRec = 1
+-- tempJob.reward = {{"kit_mixed_high"}}
+-- tempJob.rewardCount = 1
+-- tempJob.repReward = 30
+-- tempJob.moneyReward = {3500, 6500}
+-- tempJob.categories = {"mutantkillhard"}
 
-ix.jobs.register(tempJob, "killBearLow")
+-- ix.jobs.register(tempJob, "killBearLow")
 
-tempJob = nil
+-- tempJob = nil
 
-local tempJob = {}
+-- local tempJob = {}
 
-tempJob.name = "Kill %d bears."
-tempJob.desc = "%d bears."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 4
-tempJob.listenTrigger = "bearKilled"
-tempJob.numberRec = 3
-tempJob.reward = {{"kit_ammo_med"}, {"kit_mixed_high"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 55
-tempJob.moneyReward = {7000, 12000}
-tempJob.categories = {"mutantkillhard"}
+-- tempJob.name = "Kill %d bears."
+-- tempJob.desc = "%d bears."
+-- tempJob.icon = "propic/event/mutanthunt"
+-- tempJob.tier = 4
+-- tempJob.listenTrigger = "bearKilled"
+-- tempJob.numberRec = 3
+-- tempJob.reward = {{"kit_ammo_med"}, {"kit_mixed_high"}}
+-- tempJob.rewardCount = 1
+-- tempJob.repReward = 55
+-- tempJob.moneyReward = {7000, 12000}
+-- tempJob.categories = {"mutantkillhard"}
 
-ix.jobs.register(tempJob, "killBearHigh")
+-- ix.jobs.register(tempJob, "killBearHigh")
 
-tempJob = nil
+-- tempJob = nil
 
 -- Controllers
 

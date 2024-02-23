@@ -822,21 +822,21 @@ PLUGIN.eventdefs["vareshka3"] = {
 --[[-------------------------------------------------------------------------
 Bear
 ---------------------------------------------------------------------------]]
-PLUGIN.eventdefs["bear1"] = {
-	entities = {
-		{"npc_mutant_bear", 1},
-	},
-	pdabroadcast = "Huge Bear detected %s, don't get too close, stalker.",
-	difficulty = {22, 31},
-}
+-- PLUGIN.eventdefs["bear1"] = {
+-- 	entities = {
+-- 		{"npc_mutant_bear", 1},
+-- 	},
+-- 	pdabroadcast = "Huge Bear detected %s, don't get too close, stalker.",
+-- 	difficulty = {22, 31},
+-- }
 
-PLUGIN.eventdefs["bear2"] = {
-	entities = {
-		{"npc_mutant_bear", 2},
-	},
-	pdabroadcast = "A pair of Bears has been detected %s, I suggest legging it out of there, stalker.",
-	difficulty = {31, 32},
-}
+-- PLUGIN.eventdefs["bear2"] = {
+-- 	entities = {
+-- 		{"npc_mutant_bear", 2},
+-- 	},
+-- 	pdabroadcast = "A pair of Bears has been detected %s, I suggest legging it out of there, stalker.",
+-- 	difficulty = {31, 32},
+-- }
 
 
 --[[-------------------------------------------------------------------------

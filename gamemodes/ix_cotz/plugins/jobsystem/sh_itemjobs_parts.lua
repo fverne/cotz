@@ -663,39 +663,39 @@ ix.jobs.register(tempJob, "ItemJob2_part_sprig")
 tempJob = nil
 
 
-local tempJob = {}
+-- local tempJob = {}
 
-tempJob.name = "Hand over %d bear claw(s)."
-tempJob.desc = "%d bear claw(s)."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "part_bear"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_tier05_small"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 5
-tempJob.categories = {"item_part_NPC_medium"}
+-- tempJob.name = "Hand over %d bear claw(s)."
+-- tempJob.desc = "%d bear claw(s)."
+-- tempJob.icon = "propic/event/loot"
+-- tempJob.tier = 1
+-- tempJob.requiredItem = "part_bear"
+-- tempJob.numberRec = 1
+-- tempJob.reward = {{"kit_reward_tier05_small"}}
+-- tempJob.rewardCount = 1
+-- tempJob.repReward = 5
+-- tempJob.categories = {"item_part_NPC_medium"}
 
-ix.jobs.register(tempJob, "ItemJob1_part_bear")
+-- ix.jobs.register(tempJob, "ItemJob1_part_bear")
 
-tempJob = nil
+-- tempJob = nil
 
-local tempJob = {}
+-- local tempJob = {}
 
-tempJob.name = "Hand over %d bear claw(s)."
-tempJob.desc = "%d bear claw(s)."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "part_bear"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_tier05_large"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 10
-tempJob.categories = {"item_part_NPC_medium"}
+-- tempJob.name = "Hand over %d bear claw(s)."
+-- tempJob.desc = "%d bear claw(s)."
+-- tempJob.icon = "propic/event/loot"
+-- tempJob.tier = 1
+-- tempJob.requiredItem = "part_bear"
+-- tempJob.numberRec = 2
+-- tempJob.reward = {{"kit_reward_tier05_large"}}
+-- tempJob.rewardCount = 1
+-- tempJob.repReward = 10
+-- tempJob.categories = {"item_part_NPC_medium"}
 
-ix.jobs.register(tempJob, "ItemJob2_part_bear")
+-- ix.jobs.register(tempJob, "ItemJob2_part_bear")
 
-tempJob = nil
+-- tempJob = nil
 
 
 local tempJob = {}
