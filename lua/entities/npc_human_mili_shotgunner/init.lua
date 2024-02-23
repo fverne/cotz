@@ -9,6 +9,7 @@ ENT.PlayerFriendly = false
 ENT.flatbulletresistance = 30
 ENT.percentbulletresistance = 20
 ENT.lootChance = 33
+ENT.lootGroup = "bandit_shotgun_loot"
 ENT.selectedWeaponItem = nil 
 ENT.selectedWeaponSWEP = nil
 
@@ -340,7 +341,7 @@ function ENT:KilledDan()
   end
 
   if math.random(1, 100) <= self.lootChance then
-    ragdoll:SetNetVar("loot", "bandit_shotgun_loot")
+    ragdoll:SetNetVar("loot", self.lootGroup)
   end
 
   ragdoll:Fire("kill","",180)
