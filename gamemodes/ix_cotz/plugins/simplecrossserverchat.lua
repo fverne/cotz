@@ -123,6 +123,13 @@ if (SERVER) then
 		
 	end
 
+	function PLUGIN:OnWipeTables()
+		local query
+
+		query = mysql:Drop("ix_xserverchat")
+		query:Execute()
+	end
+
 	ix.crossserverchat.PostMessage = PLUGIN.PostMessage
 
 	function PLUGIN:SaveData()

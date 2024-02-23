@@ -99,6 +99,13 @@ if (SERVER) then
 		local selectresult = selectquery:Execute()
 	end
 
+	function PLUGIN:OnWipeTables()
+		local query
+
+		query = mysql:Drop("ix_xserverdata")
+		query:Execute()
+	end
+
 	function PLUGIN:SaveData()
 		self:SetData({["lastseen"] = self.lastSeenData})
 	end
