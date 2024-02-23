@@ -956,6 +956,16 @@ PLUGIN.map_presets["rp_pripyat_remaster"] = {
       { Vector(9274.625,12707.2421875,53.031200408936) , "at the Pripyat pier" , 33 }, 
       { Vector(8474.6162109375,11533.791992188,5.0311999320984) , "at the Pripyat pier" , 32 }, 
       { Vector(7748.1499023438,8426.9423828125,11.999899864197) , "at the Pripyat pier" , 32 }, 
+      { Vector(-2312.9577636719,-12573.200195312,-482.96875) , "somewhere underground" , 33 }, 
+      { Vector(-1311.2976074219,-11853.72265625,-482.96875) , "somewhere underground" , 33 }, 
+      { Vector(-735.68395996094,-10749.080078125,-530.96875) , "somewhere underground" , 33 }, 
+      { Vector(-522.52789306641,-9596.80078125,-530.96875) , "somewhere underground" , 33 }, 
+      { Vector(-1107.7185058594,-8910.4375,-578.96875) , "somewhere underground" , 33 }, 
+      { Vector(-3057.0551757812,-9411.517578125,-482.96875) , "somewhere underground" , 33 }, 
+      { Vector(-5144.6459960938,-8449.1767578125,-482.96875) , "somewhere underground" , 33 }, 
+      { Vector(-6080.00390625,-7937.9794921875,-482.96875) , "somewhere underground" , 33 }, 
+      { Vector(70.953353881836,-9138.994140625,-482.96875) , "somewhere underground" , 33 }, 
+      { Vector(1254.365234375,-8336.5380859375,-482.96875) , "somewhere underground" , 33 }, 
     },
     ["eventcontrolleradv"] = {
 
@@ -1571,6 +1581,42 @@ PLUGIN.map_presets["rp_pripyat_remaster"] = {
     },
   },
   entities = {
+    --computers
+    {
+      class = "ix_dataextractpc",
+      position = Vector(-6217.8266601563,-7678.4853515625,-477.85906982422),
+      angles = Angle(0,181.27124023438,0),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(-4853.103515625,-8538.474609375,-477.59704589844),
+      angles = Angle(-0.6046000123024,14.696104049683,0.44606456160545),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(-997.11547851563,-8840.5283203125,-573.87487792969),
+      angles = Angle(0,338.5915222168,0),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(1098.2399902344,-8299.3837890625,-477.85903930664),
+      angles = Angle(0,41.95133972168,0),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(-821.76000976563,-10651.446289063,-525.85906982422),
+      angles = Angle(0,18.161010742188,0),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(-1064.7619628906,-11177.36328125,-477.88116455078),
+      angles = Angle(0,322.91906738281,0),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(-3177.8264160156,-12494.030273438,-427.39254760742),
+      angles = Angle(-75.145706176758,-57.943565368652,-43.269550323486),
+    },
 
   }
 }

@@ -1754,6 +1754,52 @@ PLUGIN.map_presets["rp_waystation"] = {
     },
   },
   entities = {
-    
+    --computers
+    {
+      class = "ix_dataextractpc",
+      position = Vector(2498.2395019531,-7912.349609375,-562.97863769531),
+      angles = Angle(0.63561403751373,86.493019104004,89.59171295166),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(2254.00390625,-6220.1674804688,-811.99835205078),
+      angles = Angle(0,-6.6784515380859,0),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(3018.1948242188,-3502.6745605469,-721.73492431641),
+      angles = Angle(0,204.59375,0),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(2026.2399902344,1224.7672119141,-628.72808837891),
+      angles = Angle(0,87.114181518555,0),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(623.85345458984,2037.7331542969,-708.79681396484),
+      angles = Angle(0,88.152046203613,0),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(-985.82666015625,3220.0495605469,-629.27319335938),
+      angles = Angle(0,147.23449707031,0),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(-2506.9606933594,3600.8566894531,-792.54425048828),
+      angles = Angle(0,64.699089050293,0),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(-3059.4953613281,5379.7065429688,-565.11572265625),
+      angles = Angle(0,269.82275390625,0),
+    },
+    {
+      class = "ix_dataextractpc",
+      position = Vector(-5920.8764648438,6390.943359375,-617.08093261719),
+      angles = Angle(0,177.94421386719,0),
+    },
+
   },
 }
