@@ -216,7 +216,7 @@ end
 	SWEP.VelocitySensitivity = 1.8
 	SWEP.MaxSpreadInc = 0.04
 	SWEP.SpreadPerShot = 0.007
-	SWEP.SpreadCooldown = 0.13
+	SWEP.SpreadCooldown = 0.2
 	SWEP.Shots = 1
 	SWEP.Damage = 86
 	SWEP.DeployTime = 0.6

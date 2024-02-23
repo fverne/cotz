@@ -162,7 +162,7 @@ SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 5
 SWEP.MaxSpreadInc = 0.5
 SWEP.SpreadPerShot = 0.025
-SWEP.SpreadCooldown = 1.75
+SWEP.SpreadCooldown = 0.2
 SWEP.GlobalDelayOnShoot = 1.1
 
 SWEP.WearDamage = 0.33

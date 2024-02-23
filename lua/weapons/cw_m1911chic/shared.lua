@@ -154,7 +154,7 @@ if CustomizableWeaponry then
 	SWEP.VelocitySensitivity = 1.2
 	SWEP.MaxSpreadInc = 0.06
 	SWEP.SpreadPerShot = 0.02
-	SWEP.SpreadCooldown = 0.32
+	SWEP.SpreadCooldown = 0.2
 	SWEP.Shots = 1
 	SWEP.Damage = 70
 	SWEP.DeployTime = 1
