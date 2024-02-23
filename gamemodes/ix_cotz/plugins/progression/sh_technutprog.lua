@@ -25,12 +25,8 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["fireaxe"] = 5,
-			["crowbar"] = 5,
-			["hatchet"] = 5,
-			["machete"] = 5,
-			["leadpipe"] = 5,
-			["sledgehammer"] = 5,
+			["value_nuts"] = 50,
+			["value_bolts"] = 50,
 		}	
 
 		return itemids
@@ -200,9 +196,7 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_techtool_1"] = 5,
-			["artifact_bolt"] = 5,
-			["artifact_bonecluster"] = 10,
+			["value_documents_14"] = 8,
 		}	
 
 		return itemids
@@ -542,7 +536,7 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["drink_wine"] = 100,
+			["drink_wine"] = 20,
 		}	
 
 		return itemids
@@ -715,7 +709,7 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 5, --Placeholder?
+			["value_glue_3"] = 5, --Placeholder?
 		}	
 
 		return itemids
@@ -1321,7 +1315,7 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 		local itemids = {
 			["value_engine"] = 5,
 			["value_waterfilter"] = 2,
-			["value_tape_heavy"] = 6,
+			["value_tape_heavy"] = 4,
 			["value_tape_duct"] = 12,
 		}	
 

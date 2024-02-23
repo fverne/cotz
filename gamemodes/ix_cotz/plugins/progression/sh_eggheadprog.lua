@@ -20,9 +20,9 @@ ix.progression.Register("eggheadItemDelivery_Detector1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 20,
-			["artifact_bonecluster"] = 20,
-			["artifact_mementomori"] = 20,
+			["artifact_bolt"] = 5,
+			["artifact_bonecluster"] = 1,
+			["artifact_mementomori"] = 1,
 		}	
 
 		return itemids

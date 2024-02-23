@@ -22,7 +22,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 		local itemids = {
 			["hide_blinddog"] = 10,
 			["hide_flesh"] = 10,
-			["hide_tushkano"] = 10,
+			["hide_tushkano"] = 5,
 			["part_zombie_1"] = 40,
 			["part_swampcontroller_2"] = 5,
 		}	
@@ -281,7 +281,12 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 5,
+			["fireaxe"] = 5,
+			["crowbar"] = 5,
+			["hatchet"] = 5,
+			["machete"] = 5,
+			["leadpipe"] = 5,
+			["sledgehammer"] = 5,
 		}	
 
 		return itemids

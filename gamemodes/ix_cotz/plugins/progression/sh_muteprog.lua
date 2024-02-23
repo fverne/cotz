@@ -277,7 +277,7 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_techtool_3"] = 5,
+			["value_techtool_2"] = 5,
 			["value_frequencymodulator"] = 3,
 			["value_wire_heavy"] = 180,
 		}	
@@ -364,8 +364,8 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_techtool_2"] = 1,
-			["artifact_bolt"] = 10,
+			["value_techtool_1"] = 1,
+			["value_wire_copper"] = 10,
 		}	
 
 		return itemids
@@ -536,7 +536,7 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 		local itemids = {
 			["value_frequencymodulator"] = 1,
 			["value_techtool_3"] = 1,
-			["value_wirelesstrans"] = 25,
+			["value_wirelesstrans"] = 15,
 		}	
 
 		return itemids

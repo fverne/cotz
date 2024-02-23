@@ -253,13 +253,13 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["meat_blinddog"] = 50,
-			["part_blinddog"] 	= 15,
-			["meat_cat"] 	= 20,
+			["meat_blinddog"] = 30,
+			["part_blinddog"] 	= 10,
+			["meat_cat"] 	= 10,
 			["part_cat"] 	= 5,
-			["meat_tushkano"] 	= 80,
-			["part_tushkano"] 	= 30,
-			["meat_boar"] = 40,
+			["meat_tushkano"] 	= 30,
+			["part_tushkano"] 	= 10,
+			["meat_boar"] = 20,
 			["part_boar"] = 10
 		}	
 
@@ -368,8 +368,8 @@ ix.progression.Register("technutItemDelivery_Main", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_wirelesstrans"] = 15,
-			["value_wire_heavy"] 	= 30,
+			["value_tape_electric"] = 15,
+			["value_wire_heavy"] 	= 10,
 			["value_tape_duct"] 	= 10,
 			["value_capacitors"] 	= 100,
 			["value_sparkplug"] 	= 10,
@@ -470,9 +470,9 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_statue_cat"] = 20,
-			["value_statue_lion"] 	= 15,
-			["value_statue_horse"] 	= 10,
+			["value_statue_cat"] = 10,
+			["value_statue_lion"] 	= 7,
+			["value_statue_horse"] 	= 5,
 		}
 
 		return itemids
@@ -523,7 +523,7 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 
 			timer.Simple(45, function()
 				local name = "'Mute'"
-				local message = "Come see me. I need help with something."
+				local message = "Come."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -541,51 +541,51 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 
 			ix.progression.SetCompleted("oldTimerItemDelivery_mainStatue", true)
 
-			ix.progression.SetActive("stalkerNetAdmin_AreaTasks", true) -- Main Progression
+			ix.progression.SetActive("stalkerNetAdminDelivery_mainRadioTower", true) -- Main Progression
 		end
 	end
 })
 
-ix.progression.Register("stalkerNetAdmin_AreaTasks", {
-	name = "STORY: Scanning the Zone",
-	description = "Scanning the Zone",
-	keyNpc = "'Mute'",
-	defaultActive = true,
-	BuildResponse = function(self, status)
-		-- Find next treshold
-		local tresh = 0
+-- ix.progression.Register("stalkerNetAdmin_AreaTasks", {
+-- 	name = "STORY: Scanning the Zone",
+-- 	description = "Scanning the Zone",
+-- 	keyNpc = "'Mute'",
+-- 	defaultActive = true,
+-- 	BuildResponse = function(self, status)
+-- 		-- Find next treshold
+-- 		local tresh = 0
 
-		for k,v in ipairs( self.progressthresholds ) do
-			if v > status.value then
-				tresh = v
-				break
-			end
-		end
+-- 		for k,v in ipairs( self.progressthresholds ) do
+-- 			if v > status.value then
+-- 				tresh = v
+-- 				break
+-- 			end
+-- 		end
 
-		return string.format("** The man gestures at a scanning device behind him, and writes down the number %d on a piece of paper. **.", tresh-status.value)
-	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()			
-				local name = "'Mute'"
-				local message = "Thanks for the help with the scanning, please keep it up. Come talk to me, I'll instruct you in what I will need in the future."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
+-- 		return string.format("** The man gestures at a scanning device behind him, and writes down the number %d on a piece of paper. **.", tresh-status.value)
+-- 	end,
+-- 	progressfunctions = {
+-- 		[1] = {
+-- 			OnRun = function()			
+-- 				local name = "'Mute'"
+-- 				local message = "Thanks for the help with the scanning, please keep it up. Come talk to me, I'll instruct you in what I will need in the future."
+-- 				ix.util.HandleChat(name, message)
+-- 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+-- 					name = name,
+-- 					message = message
+-- 				})
 				
-				ix.progression.SetCompleted("stalkerNetAdmin_AreaTasks", true)
+-- 				ix.progression.SetCompleted("stalkerNetAdmin_AreaTasks", true)
 
-				ix.progression.SetActive("oldTimerItemDelivery_mainMeat", true) -- Main Progression
-			end,
-			RunOnce = true
-		},
-	},
-	progressthresholds = {
-		[1] = 40,
-	}
-})
+-- 				ix.progression.SetActive("stalkerNetAdminDelivery_mainRadioTower", true) -- Main Progression
+-- 			end,
+-- 			RunOnce = true
+-- 		},
+-- 	},
+-- 	progressthresholds = {
+-- 		[1] = 40,
+-- 	}
+-- })
 
 ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	name = "STORY: Proper Radio Tower",
@@ -609,11 +609,11 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_pcpart_fpga"] 	= 10,
-			["value_tape_electric"] = 80,
-			["value_pcpart_gpu"] 	= 5,
-			["value_pcpart_psu"] 	= 10,
-			["value_wire_light"]	= 120
+			["value_wirelesstrans"] 	= 10,
+			["value_tape_electric"] = 40,
+			["value_phone_new"] 	= 5,
+			["value_phone_old"] 	= 10,
+			["value_wire_light"]	= 60
 		}
 
 		return itemids
@@ -765,10 +765,10 @@ ix.progression.Register("quarterMasterDelivery_main", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["drink_spirit_3"] 	= 10,
-			["drink_vodka_5"] 		= 10,
-			["drink_vodka_6"] 		= 10,
-			["drug_cigar"] 			= 40,
+			["drink_spirit_3"] 	= 5,
+			["drink_vodka_5"] 		= 5,
+			["drink_vodka_6"] 		= 5,
+			["drug_cigar"] 			= 20,
 			["drug_cocaine"] 		= 5,
 			["drug_cigarette_5"] 	= 30,
 			["drug_cigarette_6"] 	= 30,

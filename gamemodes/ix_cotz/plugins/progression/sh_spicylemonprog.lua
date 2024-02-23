@@ -24,7 +24,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["meal_tushkano"] = 35,
+			["meal_tushkano"] = 15,
 		}	
 
 		return itemids
