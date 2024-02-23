@@ -123,7 +123,7 @@ function ENT:OnTakeDamage(dmg)
   if(dmg:IsDamageType(DMG_BULLET)) then
 		dmg:SubtractDamage(self.flatbulletresistance)
 		dmg:SetDamage(dmg:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmg:SetDamage(math.max(0,dmg:GetDamage())) --So he can't heal from our attacks
+		dmg:SetDamage(math.max(3,dmg:GetDamage())) --So he can't heal from our attacks
 	end
   
   self:SpawnBlood(dmg)

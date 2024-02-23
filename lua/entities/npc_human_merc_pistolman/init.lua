@@ -6,7 +6,7 @@ include('shared.lua')
 ENT.bleeds      = true
 ENT.StartHealth = 100
 ENT.PlayerFriendly = false
-ENT.flatbulletresistance = 20
+ENT.flatbulletresistance = 25
 ENT.percentbulletresistance = 20
 ENT.lootChance = 33
 ENT.lootGroup = "bandit_pistol_loot"
@@ -133,7 +133,7 @@ function ENT:OnTakeDamage(dmg)
   if(dmg:IsDamageType(DMG_BULLET)) then
 		dmg:SubtractDamage(self.flatbulletresistance)
 		dmg:SetDamage(dmg:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmg:SetDamage(math.max(0,dmg:GetDamage())) --So he can't heal from our attacks
+		dmg:SetDamage(math.max(3,dmg:GetDamage())) --So he can't heal from our attacks
 	end
 
   self:SpawnBlood(dmg)
