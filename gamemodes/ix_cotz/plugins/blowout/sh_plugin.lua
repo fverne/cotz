@@ -162,7 +162,7 @@ if (SERVER) then
                         end
 
                         local itm = ix.item.instances[v.ixItemID]
-                        if (itm.isWeapon and itm:GetData("durability", 0) <= 10) then
+                        if (itm.isWeapon and itm:GetData("durability", 0) <= 10) or itm.cookable then
                             v:Remove()
                             continue
                         end
