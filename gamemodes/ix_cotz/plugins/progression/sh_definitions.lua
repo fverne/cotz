@@ -90,6 +90,24 @@ hook.Add("ix_OnJobComplete", "Boss_dataTasks", function(client, npcidentifier, i
 	end
 end)
 
+hook.Add("ix_OnJobComplete", "smartass_rfTasks", function(client, npcidentifier, identifier)
+	local iscorrecttasktype = false
+
+	local categories = {
+		["rfanalyzer"] = true,
+	}
+
+	for k, v in pairs(ix.jobs.list[identifier].categories) do
+		if categories[v] then iscorrecttasktype = true end
+	end
+
+	if npcidentifier == "'Smartass'" and iscorrecttasktype then
+		if ix.progression.IsActive("smartass_rfTasks") then
+			ix.progression.AddProgessionValue("smartass_rfTasks", 1, client:Name())
+		end
+	end
+end)
+
 hook.Add("ix_OnJobComplete", "Computer_artifactTasks", function(client, npcidentifier, identifier)
 	local iscorrecttasktype = false
 
@@ -830,7 +848,7 @@ ix.progression.Register("quarterMasterDelivery_main", {
 
 ix.progression.Register("boss_dataTasks", {
 	name = "STORY: Extracting Information",
-	description = "Scanning the Zone",
+	description = "Extract data from various computers",
 	keyNpc = "'Boss'",
 	defaultActive = false,
 	BuildResponse = function(self, status)
@@ -850,17 +868,85 @@ ix.progression.Register("boss_dataTasks", {
 		[1] = {
 			OnRun = function()			
 				local name = "'Boss'"
-				local message = "Good work stalkers, you've gotten me a lot of interesting information, I think I might have an idea what has happened here, please come to the research station for further jobs. Oh - and I'm now also willing to sell you these old plastic cards we found."
+				local message = "Good work stalkers, you've gotten me a lot of interesting information."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
 					message = message
 				})
 
+				timer.Simple(10, function()
+					local name = "'Smartass'"
+					local message = "Come see me."
+					ix.util.HandleChat(name, message)
+					ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+						name = name,
+						message = message
+					})
+				end)
+
+
+				ix.progression.SetCompleted("boss_dataTasks", true)
+
+				ix.progression.SetActive("smartass_rfTasks", true) -- Main Progression
+			end,
+			RunOnce = true
+		},
+	},
+	progressthresholds = {
+		[1] = 50,
+	}
+})
+
+
+ix.progression.Register("smartass_rfTasks", {
+	name = "STORY: Scanning the Zone",
+	description = "Scanning the Zone",
+	keyNpc = "'Smartass'",
+	defaultActive = false,
+	BuildResponse = function(self, status)
+		-- Find next treshold
+		local tresh = 0
+
+		for k,v in ipairs( self.progressthresholds ) do
+			if v > status.value then
+				tresh = v
+				break
+			end
+		end
+
+		return string.format("Boss might think you're hot shit, and I know you gave Quartermaster those bottles of booze. How about you help me out, and gather some information about the nearby areas? %d times, to be exact.", tresh-status.value)
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()			
+				local name = "'Smartass'"
+				local message = "I'm rarely surprised, but that was quicker than I thought. Good job."
+				ix.util.HandleChat(name, message)
+				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+					name = name,
+					message = message
+				})
+
+
+				timer.Simple(10, function()
+					local name = "'Boss'"
+					local message = "You've been helping us out a lot, so thank you for that. Listen, don't tell anyone, but I can sell you some unmarked access cards we got while scavenging the underground. We have plenty, so it's not a big deal for us to give something back to you."
+					ix.util.HandleChat(name, message)
+					ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+						name = name,
+						message = message
+					})
+				end)
+				
 				local npc = ix.progression.GetNPCFromName("'Boss'")
 				if (npc) then
-					npc:AddItemToList("accesscard_bunker", nil, 5, "SELLANDBUY", 5, 3, 5) -- Main Progression
+					npc:AddItemToList("accesscard_bunker", nil, 5, "SELLANDBUY", 5, 1, 5) -- Main Progression
 				end
+
+				ix.progression.SetCompleted("smartass_rfTasks", true)
+
+				-- No progression SetActive here, as its on another map.
 			end,
 			RunOnce = true
 		},
@@ -869,6 +955,222 @@ ix.progression.Register("boss_dataTasks", {
 		[1] = 100,
 	}
 })
+
+
+ix.progression.Register("beanstalkItemDelivery_Documents", {
+	name = "STORY: Well Documented",
+	description = "Beanstalk wants documents.",
+	keyNpc = "'Beanstalk'",
+	defaultActive = true,
+	BuildResponse = function(self, status)
+		ix.progression.status["beanstalkItemDelivery_Documents"] = ix.progression.status["beanstalkItemDelivery_Documents"] or {}
+		local dat = ix.progression.status["beanstalkItemDelivery_Documents"].complexData
+		local itemids = self:GetItemIds()
+
+		local str = "Greetings. I won't ask how you got down here, who you are. You come from the outside, and we don't have the resources to leave the safety of the bunker. I need you to gather the following of various documents to aid our research:\n"
+
+		for item, amt in pairs(itemids) do
+			local tmp = 0
+			if (dat and dat[item]) then tmp = dat[item] end
+			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		end
+
+		str = str.."\n\nNow get going!"
+
+		return str	end,
+	GetItemIds = function()
+		local itemids = {
+			["value_documents_14"] 	= 1, -- TODO add more of these
+		}
+
+		return itemids
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()
+				local name = "'Beanstalk'"
+				local message = "Thank you. These documents will provide a good basis for further research. Go seek out Egghead."
+				ix.util.HandleChat(name, message)
+				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+					name = name,
+					message = message
+				})
+			end,
+			RunOnce = false,
+		},
+	},
+	progressthresholds = {
+		[1] = 1,
+	},
+	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
+		ix.progression.status["beanstalkItemDelivery_Documents"].complexData = ix.progression.status["beanstalkItemDelivery_Documents"].complexData or {}
+		ix.progression.status["beanstalkItemDelivery_Documents"].complexData[item] = ix.progression.status["beanstalkItemDelivery_Documents"].complexData[item] or 0
+		ix.progression.status["beanstalkItemDelivery_Documents"].complexData[item] = ix.progression.status["beanstalkItemDelivery_Documents"].complexData[item]+amt
+	end,
+	fnGetComplexProgression = function()
+		return ix.progression.status["beanstalkItemDelivery_Documents"].complexData
+	end,
+	fnCheckComplexProgression = function()
+		local finished =  ix.progression.definitions["beanstalkItemDelivery_Documents"]:GetItemIds()
+
+		local isdone = true
+
+		for item, amt in pairs(finished) do
+			ix.progression.status["beanstalkItemDelivery_Documents"].complexData[item] = ix.progression.status["beanstalkItemDelivery_Documents"].complexData[item] or 0
+			if amt > ix.progression.status["beanstalkItemDelivery_Documents"].complexData[item] then isdone = false end
+		end
+
+		if isdone then
+			ix.progression.SetCompleted("beanstalkItemDelivery_Documents", true)
+
+			ix.progression.SetActive("eggheadItemDelivery_artifacts", true) -- Main Progression
+		end
+	end
+})
+
+ix.progression.Register("eggheadItemDelivery_artifacts", {
+	name = "STORY: Ecstatic Artifacts",
+	description = "Egghead wants artifacts.",
+	keyNpc = "'Egghead'",
+	defaultActive = false,
+	BuildResponse = function(self, status)
+		ix.progression.status["eggheadItemDelivery_artifacts"] = ix.progression.status["eggheadItemDelivery_artifacts"] or {}
+		local dat = ix.progression.status["eggheadItemDelivery_artifacts"].complexData
+		local itemids = self:GetItemIds()
+
+		local str = "Hello. I have discovered some strange phenomena deep within the depths of the zone. If my calculations are correct, I need to melt certain artifacts together to achieve our goal. Find me the following artifacts:\n"
+
+		for item, amt in pairs(itemids) do
+			local tmp = 0
+			if (dat and dat[item]) then tmp = dat[item] end
+			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		end
+
+		str = str.."\n\nApparently they can be found mostly in electrical anomalies, but you already know this, don't you?"
+
+		return str	end,	end,
+	GetItemIds = function()
+		local itemids = {
+			["artifact_battery"] 	= 30,
+			["artifact_blowncap"] 	= 30,
+			["artifact_capacitor"] 	= 10,
+			["artifact_sparkler"] 	= 10,
+			["artifact_flash"] 	= 10,
+			["artifact_moonlight"] 	= 3,
+		}
+
+		return itemids
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()
+				local name = "'Egghead'"
+				local message = "Nicely done stalkers, this will keep me busy for a while. Go help out our poor Intern while I get the apparatus ready."
+				ix.util.HandleChat(name, message)
+				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+					name = name,
+					message = message
+				})
+			end,
+			RunOnce = false,
+		},
+	},
+	progressthresholds = {
+		[1] = 1,
+	},
+	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
+		ix.progression.status["eggheadItemDelivery_artifacts"].complexData = ix.progression.status["eggheadItemDelivery_artifacts"].complexData or {}
+		ix.progression.status["eggheadItemDelivery_artifacts"].complexData[item] = ix.progression.status["eggheadItemDelivery_artifacts"].complexData[item] or 0
+		ix.progression.status["eggheadItemDelivery_artifacts"].complexData[item] = ix.progression.status["eggheadItemDelivery_artifacts"].complexData[item]+amt
+	end,
+	fnGetComplexProgression = function()
+		return ix.progression.status["eggheadItemDelivery_artifacts"].complexData
+	end,
+	fnCheckComplexProgression = function()
+		local finished =  ix.progression.definitions["eggheadItemDelivery_artifacts"]:GetItemIds()
+
+		local isdone = true
+
+		for item, amt in pairs(finished) do
+			ix.progression.status["eggheadItemDelivery_artifacts"].complexData[item] = ix.progression.status["eggheadItemDelivery_artifacts"].complexData[item] or 0
+			if amt > ix.progression.status["eggheadItemDelivery_artifacts"].complexData[item] then isdone = false end
+		end
+
+		if isdone then
+			ix.progression.SetCompleted("eggheadItemDelivery_artifacts", true)
+
+			ix.progression.SetActive("intern_GasAnalyzerReadings", true) -- Main Progression
+		end
+	end
+})
+
+
+
+ix.progression.Register("intern_gasAnalyzerReadings", {
+	name = "STORY: Analyzing Pripyat",
+	description = "Scanning Pripyat",
+	keyNpc = "'Intern'",
+	defaultActive = false,
+	BuildResponse = function(self, status)
+		-- Find next treshold
+		local tresh = 0
+
+		for k,v in ipairs( self.progressthresholds ) do
+			if v > status.value then
+				tresh = v
+				break
+			end
+		end
+
+		return string.format("Hello! Glad you're here to help me out. They want me to take scannings of various locations in Pripyat, but truth be told, I can't even hold a gun, and I've never been out of the swamps! Can you help me out? I need to get %d orders done.", tresh-status.value)
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()			
+				local name = "'Intern'"
+				local message = "Thanks for 'accompanying' me to Pripyat. I'm very grateful for your help."
+				ix.util.HandleChat(name, message)
+				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+					name = name,
+					message = message
+				})
+
+
+				timer.Simple(10, function()
+					local name = "'Egghead'"
+					local message = "The apparatus is assembled and ready for use, I pinpointed the location of the phenomena to be in a laboratory underneath Pripyat. Hence, I have a keycard for the laboratory available as well. Best of luck."
+					ix.util.HandleChat(name, message)
+					ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+						name = name,
+						message = message
+					})
+				end)
+			
+				
+				local npc = ix.progression.GetNPCFromName("'Egghead'")
+				if (npc) then
+					npc:AddItemToList("quest_computeraccess", nil, 5, "SELLANDBUY", 5, 1, 5) -- Main Progression
+					npc:AddItemToList("accesscard_laboratory", nil, 5, "SELLANDBUY", 5, 1, 5) -- Main Progression
+				end
+
+				ix.progression.SetCompleted("intern_gasAnalyzerReadings", true)
+
+				-- No progression SetActive here, as its on another map.
+			end,
+			RunOnce = true
+		},
+	},
+	progressthresholds = {
+		[1] = 150,
+	}
+})
+
 
 
 ix.progression.Register("computerDelivery_activateItem", {
@@ -1001,7 +1303,7 @@ ix.progression.Register("computerDelivery_main", {
 
 ix.progression.Register("computer_artifactTasks", {
 	name = "STORY: Analyzing Artifacts",
-	description = "Scanning the Zone",
+	description = "Analyzing Artifacts",
 	keyNpc = "'Computer'",
 	defaultActive = true,
 	BuildResponse = function(self, status)
