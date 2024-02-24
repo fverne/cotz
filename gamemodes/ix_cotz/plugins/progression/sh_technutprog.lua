@@ -251,9 +251,92 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit3", true)
+			ix.progression.SetActive("technutItemDelivery_SuitNBC", true)
 			ix.progression.SetActive("technutItemDelivery_Suit4", true) 
 			ix.progression.SetActive("technutItemDelivery_Helmet1", true) 
 
+		end
+	end
+})
+
+ix.progression.Register("technutItemDelivery_SuitNBC", {
+	name = "Closed Respiratory Upgrade",
+	description = "Get Technut to help you make suits.",
+	keyNpc = "'Technut'",
+	defaultActive = false,
+	BuildResponse = function(self, status)
+		ix.progression.status["technutItemDelivery_SuitNBC"] = ix.progression.status["technutItemDelivery_SuitNBC"] or {}
+		local dat = ix.progression.status["technutItemDelivery_SuitNBC"].complexData
+		local itemids = self:GetItemIds()
+
+		local str = "I have an idea for the sunrise that should make it more protective in radioactive areas. We can seal off many of the areas that allow for breathing, making it more uncomfortable to wear, but atleast you don't get irradiated as much. Here's what I need:\n"
+
+		for item, amt in pairs(itemids) do
+			local tmp = 0
+			if (dat and dat[item]) then tmp = dat[item] end
+			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		end
+
+		return str
+	end,
+	GetItemIds = function()
+		local itemids = {
+			["value_waterfilter"] = 15,
+			["medic_antirad_1"] = 15,
+		}	
+
+		return itemids
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()
+				
+			end,
+			RunOnce = false,
+		},
+	},
+	progressthresholds = {
+		[1] = 1,
+	},
+	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
+		ix.progression.status["technutItemDelivery_SuitNBC"].complexData = ix.progression.status["technutItemDelivery_SuitNBC"].complexData or {}
+		ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item] = ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item] or 0
+		ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item] = ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item]+amt
+	end,
+	fnGetComplexProgression = function()
+		return ix.progression.status["technutItemDelivery_SuitNBC"].complexData
+	end,
+	fnCheckComplexProgression = function()
+		local finished =  ix.progression.definitions["technutItemDelivery_SuitNBC"]:GetItemIds()
+
+		local isdone = true
+
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item] = ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item] then isdone = false end
+		end
+		
+		if isdone then
+
+			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = "I finished the prototype of the closed respiratory variant of the sunrise suit. They're ready for purchase."
+				ix.util.HandleChat(name, message)
+				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+					name = name,
+					message = message
+				})
+			end)
+
+			local npc = ix.progression.GetNPCFromName("'Technut'")
+			if (npc) then
+				npc:AddItemToList("suit_nbc", nil, 5, "SELLANDBUY", 5, 1, 5)
+			end
+
+			ix.progression.SetCompleted("technutItemDelivery_SuitNBC", true)
 		end
 	end
 })
