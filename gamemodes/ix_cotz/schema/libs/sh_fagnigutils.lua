@@ -72,6 +72,8 @@ if(CLIENT) then
 		end
 
 		if (IsValid(ix.gui.openedStorage)) then
+			net.Start("ixStorageClose")
+			net.SendToServer()
 			ix.gui.openedStorage:Remove()
 		end
 
