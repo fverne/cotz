@@ -99,6 +99,9 @@ end
 if(CLIENT) then
 	hook.Add("ShouldSuppressMenu", "DialogMenuSuppress", function(client) 
 		if(ix.gui.dialogue) then
+			if IsValid(ix.gui.openedStorage) then -- needs to have contianer open time set to 0
+				return false
+			end
 			return true
 		end
 	end)
