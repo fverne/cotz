@@ -1051,7 +1051,7 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 
 		str = str.."\n\nApparently they can be found mostly in electrical anomalies, but you already know this, don't you?"
 
-		return str	end,	end,
+		return str	end,
 	GetItemIds = function()
 		local itemids = {
 			["artifact_battery"] 	= 30,
