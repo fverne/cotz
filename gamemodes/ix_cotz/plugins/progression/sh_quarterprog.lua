@@ -2,7 +2,7 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 	name = "Gearing Up 1",
 	description = "Introduce yourself to Quartermaster.",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_1"] = ix.progression.status["quartermasterItemDelivery_1"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_1"].complexData
@@ -1017,13 +1017,13 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 	name = "Gearing Up 2",
 	description = "Help Quartermaster with his hand cannon problem.",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_2"] = ix.progression.status["quartermasterItemDelivery_2"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_2"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "Time for another data gathering mission. I've been getting complaints about the lack of heavy sidearms for sale, and I don't really know what would be most useful out there. Get out there, get me some more intel, and I'll tailor my stock accordingly. Try taking out some of the burer population.\n\n"
+		local str = "Time for a data gathering mission. I've been getting complaints about the lack of heavy sidearms for sale, and I don't really know what would be most useful out there. Get out there, get me some more intel, and I'll tailor my stock accordingly. Try taking out some of the burer population.\n\n"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0

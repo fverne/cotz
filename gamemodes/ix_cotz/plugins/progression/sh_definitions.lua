@@ -337,8 +337,6 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 
 			ix.progression.SetCompleted("oldTimerItemDelivery_mainMeat", true)
 			ix.progression.SetActive("technutItemDelivery_Main", true) -- Main progression
-
-			ix.progression.SetActive("spicyLemon_cookMeatCollect", true) -- Side Progression
 		end
 	end
 })
@@ -737,6 +735,9 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 			ix.progression.SetCompleted("quarterMasterDelivery_activateItem", true)
 
 			ix.progression.SetActive("quarterMasterDelivery_main", true) -- Main Progression
+
+			ix.progression.SetActive("quartermasterItemDelivery_1", true) -- Side Progression
+			ix.progression.SetActive("quartermasterItemDelivery_2", true) -- Side Progression
 		end
 	end
 })
