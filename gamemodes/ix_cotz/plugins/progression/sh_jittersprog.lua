@@ -22,7 +22,7 @@ ix.progression.Register("jittersItemDelivery_medical1", {
 		local itemids = {
             ["drug_cigarette_1"] = 30,
 			["drug_cigarette_2"] = 30,
-            ["drug_tobacco_2"] = 30,
+            ["drug_tobacco_1"] = 30,
 
             ["drug_caffeine"] = 10,
 			["drug_painkillers"] = 10,
@@ -168,7 +168,7 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 			if (npc) then
                 npc:AddItemToList("medic_bandage_2", nil, 10, "SELLANDBUY", 10, 1, 10)
 				npc:AddItemToList("medic_medkit_3", nil, 10, "SELLANDBUY", 10, 1, 10)
-				-- npc:AddItemToList("medic_medkit_4", nil, 10, "SELLANDBUY", 10, 1, 10)
+				npc:AddItemToList("medic_antirad_1", nil, 10, "SELLANDBUY", 10, 1, 10)
 			end
 
 			ix.progression.SetCompleted("jittersItemDelivery_medical2", true)
@@ -205,7 +205,6 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 			["drug_cigarette_6"] = 30,
 
 			["drug_marijuana"] = 10,
-			-- ["drug_cocaine"] = 10,
 		}	
 
 		return itemids
@@ -344,6 +343,7 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 			if (npc) then
                 npc:AddItemToList("medic_medkit_5", nil, 10, "SELLANDBUY", 10, 1, 10)
 				npc:AddItemToList("medic_medkit_6", nil, 10, "SELLANDBUY", 10, 1, 10)
+				npc:AddItemToList("medic_antirad_2", nil, 10, "SELLANDBUY", 10, 1, 10)
 			end
 
 			ix.progression.SetCompleted("jittersItemDelivery_medical4", true)
