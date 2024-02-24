@@ -32,7 +32,7 @@ function ix.discordrelay.RelayChatToDiscord(name, text)
     local t_struct = {
         failed = function( err ) MsgC( Color(255,0,0), "HTTP error: " .. err ) end,
         method = "post",
-        url = WebhookURL,
+        url = ix.config.Get("webUrl"),
         parameters = t_post,
         type = "application/json; charset=utf-8" --JSON Request type, because I'm a good boy.
     }
