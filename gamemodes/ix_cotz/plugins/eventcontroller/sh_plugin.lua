@@ -139,7 +139,7 @@ if SERVER then
 				endpos = pos + Vector(math.random(-PLUGIN.spawnradius,PLUGIN.spawnradius),math.random(-PLUGIN.spawnradius,PLUGIN.spawnradius),0),
 				mins = Vector(-96, -96, 0),
 				maxs = Vector(96, 96, 256),
-				mask = MASK_ALL,
+				mask = MASK_SOLID,
 				ignoreworld = false
 			} )
 
@@ -152,7 +152,7 @@ if SERVER then
 
 			if tracecnt > 50 then
 				tracegood = true
-				teleres = pos + Vector(0,0,16) -- Teleport to original position if we cant find a position
+				teleres = pos -- Teleport to original position if we cant find a position
 			end
 
 		until tracegood
