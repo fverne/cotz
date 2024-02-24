@@ -1324,7 +1324,7 @@ ix.progression.Register("computer_artifactTasks", {
 			OnRun = function()
 				timer.Simple(5, function()
 					local name = "'Egghead'"
-					local message = "Stalkers, my readings are going crazy, a large release of energy was just detected at the waystation. Please be careful, I can't ."
+					local message = "Stalkers, my readings are going crazy, a large release of energy was just detected at the laboratory. What's going on?"
 					ix.util.HandleChat(name, message)
 					ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 						name = name,
