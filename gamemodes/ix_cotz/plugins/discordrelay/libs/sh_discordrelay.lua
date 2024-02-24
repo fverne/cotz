@@ -19,6 +19,6 @@ function ix.discordrelay.RelayChatToDiscord(name, text)
 		},
 		type = "application/json; charset=utf-8",
 		success = function (code, body, headers) end,
-		failed = function( err ) end
+		failed = function( err ) print("Failed to post to Discord, reason: ", err) end
 	})
 end
