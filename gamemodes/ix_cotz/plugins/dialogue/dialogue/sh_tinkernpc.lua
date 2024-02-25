@@ -13,12 +13,10 @@ DIALOGUE.addTopic("GREETING", {
 	response = "Welcome!",
 	options = {
 		"TradeTopic", 
-		"ChangeSuitVariant",
 		"InterestTopic",
 		"RepairItems",
 		"AboutWorkTopic",
 		"GetTaskByDifficulty",
-		"ChangeSuitVariant",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
@@ -46,12 +44,10 @@ DIALOGUE.addTopic("BackTopic", {
 	response = "What would you like to know?",
 	options = {
 		"TradeTopic", 
-		"ChangeSuitVariant",
 		"InterestTopic",
 		"RepairItems",
 		"AboutWorkTopic",
 		"GetTaskByDifficulty",
-		"ChangeSuitVariant",
 		"GOODBYE"
 	} --Should be identical to GREETING's options
 })
