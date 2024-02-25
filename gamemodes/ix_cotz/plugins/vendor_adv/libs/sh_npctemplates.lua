@@ -844,6 +844,8 @@ ix.npctemplates.soundtemplates["cconnpc"] = {
 	"monolith/monolith_call_4.ogg",
 	"monolith/monolith_call_5.ogg",
 	"monolith/monolith_call_6.ogg",
+	"monolith/monolith_call_7.ogg",
+	"monolith/monolith_call_8.ogg",
 }
 
 ix.npctemplates.animtemplates["TestAnimations"] = {
