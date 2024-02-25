@@ -9,7 +9,11 @@ PLUGIN.map_presets["rp_pripyat_remaster"] = {
     },
   },
   vendors = {
-
+    {
+      template = "computernpc",
+      position = Vector(-490.257141, -9985.369141, -1694.968750),
+      angles = Angle(0.000, -90, 0.000)
+    },
   },
   plugindata = {
     ["anomalycontroller"] = {

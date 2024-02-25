@@ -703,6 +703,24 @@ ix.npctemplates.templates["technpc2"] = {
 	},
 }
 
+ix.npctemplates.templates["cconnpc"] = {
+	name 		= "'???'",
+	description = "An entity of the noosphere.",
+	model 		= "models/legends/klikoso.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.3,
+	dialogueid 	= "cconnpc",
+	soundgroup 	= "cconnpc",
+	idleanim 	= "trader_idle",
+	buyAll 		= false,
+	--animgroup 	= 4,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+
+	},
+}
+
 -- No sounds emitted
 ix.npctemplates.soundtemplates["nosound"] = {
 	"stalkersound/inv_nosound.mp3",
@@ -817,6 +835,15 @@ ix.npctemplates.soundtemplates["technpc2"] = {
 ix.npctemplates.soundtemplates["computer_beep"] = {
 	"ambient/levels/labs/equipment_beep_loop1.wav",
 	"ambient/levels/canals/generator_ambience_loop1.wav",
+}
+
+ix.npctemplates.soundtemplates["cconnpc"] = {
+	"monolith/monolith_call_1.ogg",
+	"monolith/monolith_call_2.ogg",
+	"monolith/monolith_call_3.ogg",
+	"monolith/monolith_call_4.ogg",
+	"monolith/monolith_call_5.ogg",
+	"monolith/monolith_call_6.ogg",
 }
 
 ix.npctemplates.animtemplates["TestAnimations"] = {

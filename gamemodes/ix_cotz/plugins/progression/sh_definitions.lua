@@ -1332,8 +1332,10 @@ ix.progression.Register("computer_artifactTasks", {
 					})
 				end)
 
-				-- Spawn CCon NPC on waystation
-				-- Spawn Hoarder NPC on waystation
+				local pos = Vector(-908.852905, -10473.121094, -1822.968750)
+				local ang = Angle(0.000, 0, 0.000)
+				ix.util.SpawnAdvVendor("cconnpc", pos, ang)
+
 			end,
 			RunOnce = true
 		},
