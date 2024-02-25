@@ -152,7 +152,7 @@ if SERVER then
 
 			if tracecnt > 50 then
 				tracegood = true
-				teleres = pos -- Teleport to original position if we cant find a position
+				teleres = pos + Vector(0, 0, 16) -- Teleport to original position if we cant find a position
 			end
 
 		until tracegood
