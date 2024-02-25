@@ -12,6 +12,7 @@ ITEM.ammo = "pistol" -- type of the ammo
 ITEM.ammoAmount = 30 -- amount of the ammo
 ITEM.isAmmo = true
 ITEM.loadSize = {1,5,15, ITEM.ammoAmount}
+ITEM.maxStack = 300
 
 ITEM.weight = 0
 
@@ -37,7 +38,7 @@ end
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
 		draw.SimpleText(
-			item:GetData("quantity", item.ammoAmount).."/"..item.ammoAmount, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black
+			item:GetData("quantity", item.ammoAmount).."/"..item.maxStack, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black
 		)
 	end
 end
@@ -129,7 +130,7 @@ ITEM.functions.combine = {
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		local targetAmmoDiff = targetItem.ammoAmount - targetItem:GetData("quantity", targetItem.ammoAmount)
+		local targetAmmoDiff = targetItem.maxStack - targetItem:GetData("quantity", targetItem.ammoAmount)
 		local localQuant = item:GetData("quantity", item.ammoAmount)
 		local targetQuant = targetItem:GetData("quantity", targetItem.ammoAmount)
 		item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
@@ -138,7 +139,7 @@ ITEM.functions.combine = {
 			return true
 		else
 			item:SetData("quantity", localQuant - targetAmmoDiff)
-			targetItem:SetData("quantity", targetItem.ammoAmount)
+			targetItem:SetData("quantity", targetItem.maxStack)
 			return false
 		end
 	end,
