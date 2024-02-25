@@ -229,7 +229,7 @@ anomalies["models/artefacts/sandstone.mdl"] = true --midas
 anomalies["models/lostsignalproject/items/artefacts/cell.mdl"] = true -- cell
 anomalies["models/lostsignalproject/items/artefacts/bracelet.mdl"] = true -- panacea
 anomalies["models/lostsignalproject/items/artefacts/bat.mdl"] = true --gaia
-anomalies["models/jessev92/stalker/weapons/bolt_w.mdl"] -- bolt
+anomalies["models/jessev92/stalker/weapons/bolt_w.mdl"] = true-- bolt
 
 --[[
 anomalies["models/nasca/etherealsrp_artifacts/battery.mdl"] = true
