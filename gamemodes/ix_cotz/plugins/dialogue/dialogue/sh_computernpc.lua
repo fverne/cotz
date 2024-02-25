@@ -232,8 +232,8 @@ DIALOGUE.addTopic("GetTask", {
 })
 
 DIALOGUE.addTopic("GetTaskByDifficulty", {
-	statement = "Do you have any work for me?",
-	response = "Yes, what difficulty task are you looking for?.",
+	statement = "** Query the computer about work **",
+	response = "",
 	options = {
 		"BackTopic"
 	},
@@ -247,9 +247,9 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 		local dynopts = {}
 		
 		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
-			table.insert(dynopts, {statement = "A trivial task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "easy"}})
-			table.insert(dynopts, {statement = "A challenging task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "medium"}})
-			table.insert(dynopts, {statement = "A hard task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "hard"}})
+			table.insert(dynopts, {statement = "** Press the green button **", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "easy"}})
+			table.insert(dynopts, {statement = "** Press the yellow button **", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "medium"}})
+			table.insert(dynopts, {statement = "** Press the red button **", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "hard"}})
 		end
 		
 		-- Return table of options

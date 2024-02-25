@@ -107,11 +107,23 @@ end
 
 if SERVER then
 
-function ix.util.GetRandomTaskPoint(map)
+function ix.util.GetRandomGasAnalyzerPoint(map)
 	map = map or game.GetMap()
 
 	local radpts = ix.plugin.list["radiationcontroller"].radiationpoints[map]
 	local anopts = ix.plugin.list["anomalycontroller"].anomalypoints[map]
+
+	local allpts = {}
+	table.Add(allpts, anopts)
+	table.Add(allpts, radpts)
+
+	return allpts[ math.random( #allpts ) ][1]
+end
+
+function ix.util.GetRandomRFPoint(map)
+	map = map or game.GetMap()
+
+	local radpts = ix.plugin.list["eventcontroller"].eventpoints[map]
 
 	local allpts = {}
 	table.Add(allpts, anopts)

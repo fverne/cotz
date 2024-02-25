@@ -1,6 +1,6 @@
-ITEM.name = "Gas Analyzer"
-ITEM.description = "A small device for measuring fluctuations in pressure, as well as gaseous impurities. The internal memory can store a couple of GPS-positions, letting the research team know where to go."
-ITEM.model = "models/illusion/eftcontainers/gasanalyser.mdl"
+ITEM.name = "RF Receiver"
+ITEM.description = "A device for detecting radio frequencies. Often used to find emitters of various nature. Has special use in the zone, as radioactive frequencies often take anomalous form."
+ITEM.model = "models/lostsignalproject/items/devices/receiver2.mdl"
 ITEM.price = 0
 ITEM.flag = "A"
 
@@ -12,9 +12,9 @@ ITEM.flatweight = 0.100
 
 ITEM.exRender = true
 ITEM.iconCam = {
-	pos = Vector(-2.5, 0, 7.5),
-	ang = Angle(90, 180, 0),
-	fov = 64,
+	pos = Vector(-14.04, 0.03, 162.5),
+	ang = Angle(94.28, 179.87, 0),
+	fov = 2
 }
 
 --disabled for testing
@@ -26,7 +26,7 @@ ITEM.functions.use = {
 	name = "Take Measurement",
 	icon = "icon16/stalker/repair.png",
 	OnRun = function(item)
-		ix.chat.Send(item.player, "iteminternal", "holds out their gas analyzer, taking some measurements.", false)
+		ix.chat.Send(item.player, "iteminternal", "holds out their RF receiver, taking some measurements.", false)
 
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking Measurements", 5, function(player) 
 			local ppos = player:GetPos()
@@ -60,7 +60,7 @@ ITEM.functions.zCheck = {
 	icon = "icon16/stalker/repair.png",
 	OnRun = function(item)
 		if (item:GetData("map", "") == game.GetMap()) then
-			ix.chat.Send(item.player, "iteminternal", "looks at their gas analyzer.", false)
+			ix.chat.Send(item.player, "iteminternal", "looks at their RF receiver.", false)
 		
 			local pointtbl = item:GetData("points", {})
 			netstream.Start(item.player, "ix_ShowTaskPositions", item:GetData("points", {}), "vgui/icons/quest2.png")
@@ -108,7 +108,7 @@ function ITEM:OnInstanced(invID, x, y)
 		local tmptbl = {}
 
 		for i = 1, self:GetData("npoints", 3) do
-			table.insert(tmptbl,ix.util.GetRandomGasAnalyzerPoint(self:GetData("map")))
+			table.insert(tmptbl,ix.util.GetRandomRFPoint(self:GetData("map")))
 		end
 
 		self:SetData("points", tmptbl)

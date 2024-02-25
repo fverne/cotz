@@ -305,7 +305,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = ix.util.GetRandomMap()} ) then
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = "rp_pripyat_remaster"} ) then
           ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
           return true
         else
@@ -370,7 +370,7 @@ do
     if(char)then
       local inv = char:GetInventory()
       if(inv)then
-        if inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = ix.util.GetRandomMap()} ) then
+        if inv:Add("gasanalyzer", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanAreaHighComplete", ["map"] = "rp_pripyat_remaster"} ) then
           ix.dialogue.notifyItemGet(client, ix.item.list["gasanalyzer"].name)
           return true
         else
@@ -416,6 +416,11 @@ do
 
   tempJob = nil
 
+
+
+
+
+  
   --Extract data from 2 PCs
   local tempJob = {}
 
@@ -760,5 +765,395 @@ do
 
   tempJob = nil
 
+
+  --Scan 1 areas
+  local tempJob = {}
+
+  tempJob.name = "Scan 1 areas."
+  tempJob.desc = "1 areas."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "scanRFEasyComplete"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_ammo_med"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 35
+  tempJob.moneyReward = { 2000, 2500 }
+  tempJob.categories = {"scanRFeasy"}
+  tempJob.CanAcceptTask = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        if inv:Add("rfreceiver", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanRFEasyComplete", ["map"] = "rp_marsh_cs"} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["rfreceiver"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "rfreceiver" then
+            -- Check that everything matches
+            if ((v:GetData("npoints", -1) == 1) and (v:GetData("finishedtrigger", "error") == "scanRFEasyComplete") and v:GetData("finished", false)) then
+              v:Remove()
+              ix.dialogue.notifyItemLost(client, ix.item.list["rfreceiver"].name)
+              break
+            end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "rfreceiver" then
+            v:Remove()
+            break
+          end
+        end
+      end
+    end
+  end
+
+  ix.jobs.register(tempJob, "scanRFEasy1")
+
+  tempJob = nil
+
+  --Scan 2 areas
+  local tempJob = {}
+
+  tempJob.name = "Scan 2 areas."
+  tempJob.desc = "2 areas."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "scanRFEasyComplete"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_aid_high"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 50
+  tempJob.moneyReward = { 3000, 3500 }
+  tempJob.categories = {"scanRFeasy"}
+  tempJob.CanAcceptTask = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        if inv:Add("rfreceiver", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanRFEasyComplete", ["map"] = "rp_marsh_cs"} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["rfreceiver"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "rfreceiver" then
+            -- Check that everything matches
+            if ((v:GetData("npoints", -1) == 2) and (v:GetData("finishedtrigger", "error") == "scanRFEasyComplete") and v:GetData("finished", false)) then
+              v:Remove()
+              ix.dialogue.notifyItemLost(client, ix.item.list["rfreceiver"].name)
+              break
+            end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "rfreceiver" then
+            v:Remove()
+            break
+          end
+        end
+      end
+    end
+  end
+
+  ix.jobs.register(tempJob, "scanRFEasy2")
+
+  tempJob = nil
+
+  --Scan 1 areas
+  local tempJob = {}
+
+  tempJob.name = "Scan 1 areas."
+  tempJob.desc = "1 areas."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 1
+  tempJob.listenTrigger = "scanRFMedComplete"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_ammo_m_low"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 35
+  tempJob.moneyReward = { 3500, 4000 }
+  tempJob.categories = {"scanRFmedium"}
+  tempJob.CanAcceptTask = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        if inv:Add("rfreceiver", 1, { ["npoints"] = 1, ["finishedtrigger"] = "scanRFMedComplete", ["map"] = "rp_waystation"} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["rfreceiver"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "rfreceiver" then
+            -- Check that everything matches
+            if ((v:GetData("npoints", -1) == 1) and (v:GetData("finishedtrigger", "error") == "scanRFMedComplete") and v:GetData("finished", false)) then
+              v:Remove()
+              ix.dialogue.notifyItemLost(client, ix.item.list["rfreceiver"].name)
+              break
+            end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "rfreceiver" then
+            v:Remove()
+            break
+          end
+        end
+      end
+    end
+  end
+
+  ix.jobs.register(tempJob, "scanRFMed1")
+
+  tempJob = nil
+
+  --Scan 2 areas
+  local tempJob = {}
+
+  tempJob.name = "Scan 2 areas."
+  tempJob.desc = "2 areas."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 2
+  tempJob.listenTrigger = "scanRFMedComplete"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_ammo_rare"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 50
+  tempJob.moneyReward = { 4500, 5000 }
+  tempJob.categories = {"scanRFmedium"}
+  tempJob.CanAcceptTask = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        if inv:Add("rfreceiver", 1, { ["npoints"] = 2, ["finishedtrigger"] = "scanRFMedComplete", ["map"] = "rp_waystation"} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["rfreceiver"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "rfreceiver" then
+            -- Check that everything matches
+            if ((v:GetData("npoints", -1) == 2) and (v:GetData("finishedtrigger", "error") == "scanRFMedComplete") and v:GetData("finished", false)) then
+              v:Remove()
+              ix.dialogue.notifyItemLost(client, ix.item.list["rfreceiver"].name)
+              break
+            end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "rfreceiver" then
+            v:Remove()
+            break
+          end
+        end
+      end
+    end
+  end
+
+  ix.jobs.register(tempJob, "scanRFMed2")
+
+  tempJob = nil
+
+  --Scan 4 areas
+  local tempJob = {}
+
+  tempJob.name = "Scan 4 areas."
+  tempJob.desc = "4 areas."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 3
+  tempJob.listenTrigger = "scanRFHighComplete"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_mixed_high"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 75
+  tempJob.moneyReward = { 8000, 9000 }
+  tempJob.categories = {"scanRFhard"}
+  tempJob.CanAcceptTask = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        if inv:Add("rfreceiver", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanRFHighComplete", ["map"] = "rp_pripyat_remaster"} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["rfreceiver"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "rfreceiver" then
+            -- Check that everything matches
+            if ((v:GetData("npoints", -1) == 4) and (v:GetData("finishedtrigger", "error") == "scanRFHighComplete") and v:GetData("finished", false)) then
+              v:Remove()
+              ix.dialogue.notifyItemLost(client, ix.item.list["rfreceiver"].name)
+              break
+            end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "rfreceiver" then
+            v:Remove()
+            break
+          end
+        end
+      end
+    end
+  end
+
+  ix.jobs.register(tempJob, "scanRFHigh1")
+
+  tempJob = nil
+
+  --Scan 4 areas
+  local tempJob = {}
+
+  tempJob.name = "Scan 4 areas."
+  tempJob.desc = "4 areas."
+  tempJob.icon = "propic/event/area"
+  tempJob.tier = 3
+  tempJob.listenTrigger = "scanRFHighComplete"
+  tempJob.numberRec = 1
+  tempJob.reward = {{"kit_ammo_m_rare"}}
+  tempJob.rewardCount = 1
+  tempJob.repReward = 75
+  tempJob.moneyReward = { 9500, 10000 }
+  tempJob.categories = {"scanRFhard"}
+  tempJob.CanAcceptTask = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        if inv:Add("rfreceiver", 1, { ["npoints"] = 4, ["finishedtrigger"] = "scanRFHighComplete", ["map"] = "rp_pripyat_remaster"} ) then
+          ix.dialogue.notifyItemGet(client, ix.item.list["rfreceiver"].name)
+          return true
+        else
+          client:Notify("Not enough space in inventory! Retake the task.")
+        end
+      end
+    end
+  end
+  tempJob.OnTaskComplete = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "rfreceiver" then
+            -- Check that everything matches
+            if ((v:GetData("npoints", -1) == 4) and (v:GetData("finishedtrigger", "error") == "scanRFHighComplete") and v:GetData("finished", false)) then
+              v:Remove()
+              ix.dialogue.notifyItemLost(client, ix.item.list["rfreceiver"].name)
+              break
+            end
+          end
+        end
+      end
+    end
+  end
+  tempJob.OnTaskAbandon = function(client) 
+    local char = client:GetCharacter()
+    if(char)then
+      local inv = char:GetInventory()
+      if(inv)then
+        for k,v in pairs(inv:GetItems()) do
+          if v.uniqueID == "rfreceiver" then
+            v:Remove()
+            break
+          end
+        end
+      end
+    end
+  end
+
+  ix.jobs.register(tempJob, "scanRFHigh2")
+
+  tempJob = nil
 end
 

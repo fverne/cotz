@@ -54,29 +54,31 @@ hook.Add("ix_OnJobComplete", "CookNPC_cookMeatCollect", function(client, npciden
 	end
 end)
 
-hook.Add("ix_OnJobComplete", "Mute_scanTasks", function(client, npcidentifier, identifier)
-	local iscorrecttasktype = false
+-- hook.Add("ix_OnJobComplete", "Mute_scanTasks", function(client, npcidentifier, identifier)
+-- 	local iscorrecttasktype = false
 
-	local categories = {
-		["scanarea"] = true,
-	}
+-- 	local categories = {
+-- 		["scanarea"] = true,
+-- 	}
 
-	for k, v in pairs(ix.jobs.list[identifier].categories) do
-		if categories[v] then iscorrecttasktype = true end
-	end
+-- 	for k, v in pairs(ix.jobs.list[identifier].categories) do
+-- 		if categories[v] then iscorrecttasktype = true end
+-- 	end
 
-	if npcidentifier == "'Mute'" and iscorrecttasktype then
-		if ix.progression.IsActive("stalkerNetAdmin_AreaTasks") then
-			ix.progression.AddProgessionValue("stalkerNetAdmin_AreaTasks", 1, client:Name())
-		end
-	end
-end)
+-- 	if npcidentifier == "'Mute'" and iscorrecttasktype then
+-- 		if ix.progression.IsActive("stalkerNetAdmin_AreaTasks") then
+-- 			ix.progression.AddProgessionValue("stalkerNetAdmin_AreaTasks", 1, client:Name())
+-- 		end
+-- 	end
+-- end)
 
 hook.Add("ix_OnJobComplete", "Boss_dataTasks", function(client, npcidentifier, identifier)
 	local iscorrecttasktype = false
 
 	local categories = {
-		["dataextract"] = true,
+		["dataextracteasy"] = true,
+		["dataextractmedium"] = true,
+		["dataextracthard"] = true,
 	}
 
 	for k, v in pairs(ix.jobs.list[identifier].categories) do
@@ -94,7 +96,9 @@ hook.Add("ix_OnJobComplete", "smartass_rfTasks", function(client, npcidentifier,
 	local iscorrecttasktype = false
 
 	local categories = {
-		["rfanalyzer"] = true,
+		["scanRFeasy"] = true,
+		["scanRFmedium"] = true,
+		["scanRFhard"] = true,
 	}
 
 	for k, v in pairs(ix.jobs.list[identifier].categories) do
@@ -125,6 +129,26 @@ hook.Add("ix_OnJobComplete", "Computer_artifactTasks", function(client, npcident
 		end
 	end
 end)
+
+hook.Add("ix_OnJobComplete", "intern_gasAnalyzerReadings", function(client, npcidentifier, identifier)
+	local iscorrecttasktype = false
+
+	local categories = {
+		["scanareahard"] = true, --pripyat only
+	}
+
+	for k, v in pairs(ix.jobs.list[identifier].categories) do
+		if categories[v] then iscorrecttasktype = true end
+	end
+
+	if npcidentifier == "'Intern'" and iscorrecttasktype then
+		if ix.progression.IsActive("intern_gasAnalyzerReadings") then
+			ix.progression.AddProgessionValue("intern_gasAnalyzerReadings", 1, client:Name())
+		end
+	end
+end)
+
+
 
 ix.progression.Register("oldTimerKillIntro", {
 	name = "STORY: Cleaning up the Zone",

@@ -26,16 +26,16 @@ DIALOGUE.addTopic("GREETING", {
 		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkillgroupeasy"}, 4)
 
 		-- alternative npc task giving by difficulty
-		if (SERVER) then
-			if target:GetNetVar("possibleJobs") == nil then
-				local possibleJobs = {}
-				possibleJobs["easy"] = {"dataextract"}
-				possibleJobs["medium"] = {"dataextract"}
-				possibleJobs["hard"] = {"dataextract"}			
+		-- if (SERVER) then
+		-- 	if target:GetNetVar("possibleJobs") == nil then
+		-- 		local possibleJobs = {}
+		-- 		possibleJobs["easy"] = {"dataextract"}
+		-- 		possibleJobs["medium"] = {"dataextract"}
+		-- 		possibleJobs["hard"] = {"dataextract"}			
 	
-				target:SetNetVar("possibleJobs", possibleJobs)
-			end
-		end
+		-- 		target:SetNetVar("possibleJobs", possibleJobs)
+		-- 	end
+		-- end
 	end
 })
 
