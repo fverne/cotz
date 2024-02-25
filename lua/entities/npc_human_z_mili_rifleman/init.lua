@@ -88,6 +88,7 @@ function ENT:Initialize()
 
   self:SetSkin(math.random(1,self:SkinCount()))
   self:SetCollisionGroup(COLLISION_GROUP_NPC)
+  self:SetCustomCollisionCheck( true )
    
   self:SetHullType( HULL_HUMAN )
   self:SetHullSizeNormal();
