@@ -525,7 +525,7 @@ ix.progression.Register("bossItemDelivery_7", {
 		local dat = ix.progression.status["bossItemDelivery_7"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "I have one last suit in my repository - the exoskeleton. And also protoype Spartan helmets.\n\nREQUIRED ITEMS:"
+		local str = "I have one last suit in my repository - the exoskeleton. \n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -579,7 +579,7 @@ ix.progression.Register("bossItemDelivery_7", {
 
 			timer.Simple(15, function()
 				local name = "'Boss'"
-				local message = "Exoskeletons are now available for purchase."
+				local message = "Exoskeletons and protoype Spartan helmets are now available for purchase."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
