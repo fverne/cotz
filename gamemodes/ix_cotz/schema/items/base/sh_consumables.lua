@@ -171,3 +171,7 @@ end
 function ITEM:GetWeight()
   return self.flatweight + (self.weight * self:GetData("quantity", self.quantity))
 end
+
+function ITEM:GetPrice()
+	return math.Round(self.price * self:GetData("quantity", self.quantity) / self.quantity)
+end

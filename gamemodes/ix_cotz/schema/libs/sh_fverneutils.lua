@@ -2,18 +2,22 @@ ix.util = ix.util or {}
 
 -- Gives a reputation and currency reward from turning in an item
 function ix.util.GetValueFromProgressionTurnin(item, cnt)
-    if not (cnt) then cnt = 1 end
-    local value = item.price
+
+    if item.GetPrice then
+        value = item:GetPrice()
+    else
+        value = item.price
+    end
 
     -- Calculate Reputation
     local baseRep = 5
-    local rep = (math.sqrt(math.sqrt(value * 0.1 * cnt))) 
+    local rep = (math.sqrt(math.sqrt(value * 0.1))) 
     rep = math.Round(baseRep + rep)
 
     -- Calculate Currency
     local buyBackRate = 0.6 -- Same as selling to the good vendor
     local currency = value * buyBackRate
-    currency = currency * cnt
+    currency = math.Round(currency)
 
     return rep, currency
 end
