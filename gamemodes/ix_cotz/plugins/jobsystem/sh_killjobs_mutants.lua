@@ -684,7 +684,7 @@ tempJob.reward = {{"kit_mixed_high"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 35
 tempJob.moneyReward = {2500, 5000}
-tempJob.categories = {"mutantkillhard"}
+tempJob.categories = {"mutantkillmedium"}
 
 ix.jobs.register(tempJob, "killBurersLow")
 
@@ -702,7 +702,7 @@ tempJob.reward = {{"kit_ammo_rare"}, {"kit_mixed_high"}}
 tempJob.rewardCount = 2
 tempJob.repReward = 75
 tempJob.moneyReward = {6000, 8500}
-tempJob.categories = {"mutantkillhard"}
+tempJob.categories = {"mutantkillmedium"}
 
 ix.jobs.register(tempJob, "killBurersHigh")
 
@@ -759,7 +759,7 @@ tempJob.reward = {{"kit_mixed_high"}}
 tempJob.rewardCount = 2
 tempJob.repReward = 79
 tempJob.moneyReward = {8000, 11000}
-tempJob.categories = {"mutantkillinsane"}
+tempJob.categories = {"mutantkillhard"}
 
 ix.jobs.register(tempJob, "killChimerasLow")
 
@@ -777,7 +777,7 @@ tempJob.reward = {{"kit_ammo_high"}, {"kit_mixed_high"}}
 tempJob.rewardCount = 3
 tempJob.repReward = 120
 tempJob.moneyReward = {15500, 19600}
-tempJob.categories = {"mutantkillinsane"}
+tempJob.categories = {"mutantkillhard"}
 
 ix.jobs.register(tempJob, "killChimerasHigh")
 
@@ -1132,7 +1132,7 @@ tempJob.reward = {{"kit_ammo_m_low"}, {"kit_ammo_m_rare"}}
 tempJob.rewardCount = 2
 tempJob.repReward = 75
 tempJob.moneyReward = {8000, 9500}
-tempJob.categories = {"mutantkillinsane"}
+tempJob.categories = {"mutantkillhard"}
 
 ix.jobs.register(tempJob, "killPseudogiantsLow")
 
@@ -1150,7 +1150,7 @@ tempJob.reward = {{"kit_ammo_m_low"}, {"kit_ammo_m_rare"}}
 tempJob.rewardCount = 3
 tempJob.repReward = 150
 tempJob.moneyReward = {12000, 14000}
-tempJob.categories = {"mutantkillinsane"}
+tempJob.categories = {"mutantkillhard"}
 
 ix.jobs.register(tempJob, "killPseudogiantsHigh")
 
