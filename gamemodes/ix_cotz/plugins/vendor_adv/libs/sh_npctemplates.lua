@@ -73,6 +73,8 @@ ix.npctemplates.templates["technpc"] = {
 		["leadpipe"] 	= { nil, 4, SELLANDBUY, 4, 0.5, 2 },
 		["sledgehammer"] 	= { nil, 4, SELLANDBUY, 4, 0.5, 2 },
 
+		["headwear_riot"] 	= { nil, 6, SELLANDBUY, 6, 3, 2 },
+		["helm_tanker"] 	= { nil, 6, SELLANDBUY, 6, 3, 2 },
 		["suit_anorak"] 	= { nil, 6, SELLANDBUY, 6, 3, 2 },
 
 		["food_nuts_1"] 	= { nil, 20, SELLANDBUY, 20, 12, 5 },
@@ -494,7 +496,7 @@ ix.npctemplates.templates["unisgnpc2"] = {
 	model 		= "models/mirotvor/mirotvor7.mdl",
 	skin 		= 0,
 	bubble 		= 0,
-	scale 		= 0.4,
+	scale 		= 0.3,
 	dialogueid 	= "unisgnpc2",
 	soundgroup 	= "unisgnpc2",
 	idleanim 	= "idle_lider",
@@ -515,8 +517,8 @@ ix.npctemplates.templates["unisgnpc2"] = {
 		["12gauge"] 	= { nil, 8, SELLANDBUY, 8, 2, 8 },
 		["12gaugesg"] 	= { nil, 8, SELLANDBUY, 8, 2, 8 },
 		["12gaugetr"] 	= { nil, 8, SELLANDBUY, 8, 2, 8 },
-		["suit_io7a"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
-		["helm_operator_rus_2"] = { nil, 2, SELLANDBUY, 2, 2, 1 },
+		-- ["suit_io7a"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
+		["headwear_altyn"] 	= { nil, 6, SELLANDBUY, 6, 3, 2 },
 	},
 }
 

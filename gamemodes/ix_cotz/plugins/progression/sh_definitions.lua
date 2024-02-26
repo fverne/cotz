@@ -780,6 +780,8 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 
 			ix.progression.SetActive("quartermasterItemDelivery_1", true) -- Side Progression
 			ix.progression.SetActive("quartermasterItemDelivery_2", true) -- Side Progression
+
+			ix.progression.SetActive("bossItemDelivery_1", true) -- Side Progression
 		end
 	end
 })

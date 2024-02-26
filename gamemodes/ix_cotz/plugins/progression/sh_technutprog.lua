@@ -1008,7 +1008,7 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks helm_operator_rus_1"
+				local message = "Operator helmets now in store. Get them while they are hot!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1019,6 +1019,7 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
 				npc:AddItemToList("helm_operator_rus_1", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_operator_rus_2", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet3", true)
@@ -1104,6 +1105,7 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
 				npc:AddItemToList("headwear_cs2", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("headwear_cs4", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet4", true)
@@ -1209,7 +1211,7 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 		local dat = ix.progression.status["technutItemDelivery_Helmet6"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "So, the Sphere-08 project is going alright, but it's really friggin' heavy. I've got a few ideas to lighten it and improve on the PASGT design! What do you say?\n\nREQUIRED ITEMS:"
+		local str = "I've gotten a good look at one of the Spetsnaz Sphere-12 helmets and I'm pretty sure I can upgrade them, but I'm gonna need some special materials. Care to help me out?\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1260,10 +1262,9 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 		end
 
 		if isdone then
-
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = "I now carry ACH helmets! These babies from the West are both protective and lightweight!"
+				local message = "I've now got Sphere-12 heavy helmets, and PSZ12's as an added bonus!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1273,7 +1274,8 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("helm_operator_nato", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_sphere12", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("headwear_psz12", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet6", true)
@@ -1294,7 +1296,7 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 		local dat = ix.progression.status["technutItemDelivery_Helmet7"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "I've gotten a good look at one of the Spetsnaz Sphere-12 helmets and I'm pretty sure I can upgrade them, but I'm gonna need some special materials. Care to help me out?\n\nREQUIRED ITEMS:"
+		local str = "So, the Sphere-08 project is going alright, but it's really friggin' heavy. I've got a few ideas to lighten it and improve on the PASGT design! What do you say?\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1348,7 +1350,7 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = "I've now got Sphere-12 heavy helmets! These things are the best of the best!"
+				local message = "I now carry ACH helmets! These babies from the West are both protective and lightweight!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1356,9 +1358,10 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 				})
 			end)
 
+
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("helm_sphere12", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_operator_nato", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet7", true)
@@ -1451,6 +1454,7 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
 				npc:AddItemToList("mask_halfmask", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_respirator", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Mask1", true)
@@ -1524,7 +1528,7 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = "GP-5 gas masks have been refit and are now safe for use! No asbestos for us!"
+				local message = "GP-5 and EO20 gas masks have been refit and are now safe for use! No asbestos for us!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1535,6 +1539,7 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
 				npc:AddItemToList("mask_gp5", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_eo20", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Mask2", true)
@@ -1618,15 +1623,100 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("mask_eo20", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_pmk3", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_xm40", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
+			ix.progression.SetActive("technutItemDelivery_Mask4", true) 
 			ix.progression.SetCompleted("technutItemDelivery_Mask3", true)
 		end
 	end
 })
 
 
+
+
+ix.progression.Register("technutItemDelivery_Mask4", {
+	name = "Don't breathe this Pt. 4",
+	description = "Help technut provide gasmasks.",
+	keyNpc = "'Technut'",
+	defaultActive = false,
+	BuildResponse = function(self, status)
+		ix.progression.status["technutItemDelivery_Mask4"] = ix.progression.status["technutItemDelivery_Mask4"] or {}
+		local dat = ix.progression.status["technutItemDelivery_Mask4"].complexData
+		local itemids = self:GetItemIds()
+
+		local str = "I got my hands on new tools. I've been trying my best to clean up some prototype gasmasks. I need a few more things though.\n\nREQUIRED ITEMS:"
+
+		for item, amt in pairs(itemids) do
+			local tmp = 0
+			if (dat and dat[item]) then tmp = dat[item] end
+			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		end
+
+		return str
+	end,
+	GetItemIds = function()
+		local itemids = {
+			["value_techtool_3"] = 5,
+		}	
+
+		return itemids
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()
+				
+			end,
+			RunOnce = false,
+		},
+	},
+	progressthresholds = {
+		[1] = 1,
+	},
+	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
+		ix.progression.status["technutItemDelivery_Mask4"].complexData = ix.progression.status["technutItemDelivery_Mask4"].complexData or {}
+		ix.progression.status["technutItemDelivery_Mask4"].complexData[item] = ix.progression.status["technutItemDelivery_Mask4"].complexData[item] or 0
+		ix.progression.status["technutItemDelivery_Mask4"].complexData[item] = ix.progression.status["technutItemDelivery_Mask4"].complexData[item]+amt
+	end,
+	fnGetComplexProgression = function()
+		return ix.progression.status["technutItemDelivery_Mask4"].complexData
+	end,
+	fnCheckComplexProgression = function()
+		local finished =  ix.progression.definitions["technutItemDelivery_Mask4"]:GetItemIds()
+
+		local isdone = true
+
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Mask4"].complexData[item] = ix.progression.status["technutItemDelivery_Mask4"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Mask4"].complexData[item] then isdone = false end
+		end
+
+		if isdone then
+
+			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = "I've got my hands on the best of the best, come get em!"
+				ix.util.HandleChat(name, message)
+				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+					name = name,
+					message = message
+				})
+			end)
+
+			local npc = ix.progression.GetNPCFromName("'Technut'")
+			if (npc) then
+				npc:AddItemToList("mask_m40", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_m50", nil, 5, "SELLANDBUY", 5, 1, 5)
+			end
+
+			ix.progression.SetCompleted("technutItemDelivery_Mask4", true)
+		end
+	end
+})
 
 
 --
