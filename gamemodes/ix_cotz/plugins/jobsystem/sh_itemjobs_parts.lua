@@ -428,7 +428,7 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_tier05_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.categories = {"item_part_NPC_hard"}
+tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_burer")
 
@@ -445,7 +445,7 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_tier05_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
-tempJob.categories = {"item_part_NPC_hard"}
+tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob2_part_burer")
 
@@ -460,7 +460,7 @@ tempJob.icon = "propic/event/loot"
 tempJob.tier = 1
 tempJob.requiredItem = "part_chimera"
 tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_tier06_small"}}
+tempJob.reward = {{"kit_reward_tier05_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
 tempJob.categories = {"item_part_NPC_hard"}
@@ -495,7 +495,7 @@ tempJob.icon = "propic/event/loot"
 tempJob.tier = 1
 tempJob.requiredItem = "part_pseudogiant"
 tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_tier07_small"}}
+tempJob.reward = {{"kit_reward_tier06_small"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
 tempJob.categories = {"item_part_NPC_hard"}
@@ -512,7 +512,7 @@ tempJob.icon = "propic/event/loot"
 tempJob.tier = 1
 tempJob.requiredItem = "part_pseudogiant"
 tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_tier07_large"}}
+tempJob.reward = {{"kit_reward_tier06_large"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 10
 tempJob.categories = {"item_part_NPC_hard"}
