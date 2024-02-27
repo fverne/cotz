@@ -262,6 +262,9 @@ ix.npctemplates.templates["tradernpc"] = {
 		["9x18"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
 		["12gauge"] = { nil, 10, SELLANDBUY, 10, 0.5, 3 },
 		["762x54"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
+		["762x39"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
+		["556x45"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
+		["545x39"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
 		["22lr"] 	= { nil, 15, SELLANDBUY, 15, 0.5, 6 },
 		["45acp"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 3 },
 		["45acp41"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 6 },
@@ -415,10 +418,9 @@ ix.npctemplates.templates["ecologistnpc2"] = {
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 		["headwear_screen"] 	= { nil, 5, SELLANDBUY, 5, 4, 2 },
-		["sr2"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
+
 		["pp2000"] 	= { nil, 2, SELLANDBUY, 2, 8, 1 },
 		["9x21"] 	= { nil, 5, SELLANDBUY, 5, 8, 5 },
-		["ssp99"] 	= { nil, 1, SELLANDBUY, 1, 8, 1 },
 	},
 }
 
@@ -461,9 +463,11 @@ ix.npctemplates.templates["unisgnpc"] = {
 	--animgroup 	= 4,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["9x18"] 	= { nil, 4, SELLANDBUY, 4, 2, 4 },
 		["9x18hp"] 	= { nil, 4, SELLANDBUY, 4, 2, 4 },
 		["9x19"] 	= { nil, 8, SELLANDBUY, 8, 2, 8 },
 		["9x19hp"] 	= { nil, 4, SELLANDBUY, 4, 2, 4 },
+		["9x21"] 	= { nil, 4, SELLANDBUY, 4, 2, 4 },
 		["45acp"] 	= { nil, 8, SELLANDBUY, 8, 2, 8 },
 		["357magnum"] 	= { nil, 8, SELLANDBUY, 8, 2, 8 },
 		["44magnum"] 	= { nil, 8, SELLANDBUY, 8, 2, 8 },
@@ -474,17 +478,20 @@ ix.npctemplates.templates["unisgnpc"] = {
 		["762x54"] 	= { nil, 8, SELLANDBUY, 8, 2, 8 },
 		["12gauge"] 	= { nil, 8, SELLANDBUY, 8, 2, 8 },
 		["12gaugesg"] 	= { nil, 8, SELLANDBUY, 8, 2, 8 },
-		["12gaugetr"] 	= { nil, 8, SELLANDBUY, 8, 2, 8 },
-		-- ["vss"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
+		["9x39"] 	= { nil, 4, SELLANDBUY, 4, 2, 4 },
+		["57x28"] 	= { nil, 4, SELLANDBUY, 4, 2, 4 },
+		["50ae"] 	= { nil, 4, SELLANDBUY, 4, 2, 4 },
+
+
 		["glock17"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
 		["ar159mm"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
 		["mp5k"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
 		["pp2000"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
-		-- ["mossberg500"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
+
 		["stoegerdd"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
 		["stoegerddshort"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
 		["m3supershort"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
-		-- ["taurusjudge"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
+		
 		["beretta92"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
 		["p99"] 	= { nil, 2, SELLANDBUY, 2, 2, 1 },
 	},

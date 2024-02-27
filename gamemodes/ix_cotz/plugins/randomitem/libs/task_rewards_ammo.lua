@@ -63,7 +63,7 @@ ix.randomitems.tables["task_reward_ammo_02_aphp"] = {
 }
 
 ix.randomitems.tables["task_reward_ammo_03"] = { 
-    {250, {"12gaugemg"}},
+    {250, {"12gaugetr"}},
     {250, {"12gaugedt"}},
     {250, {"9x21"}},
     {250, {"44magnum"}},
@@ -72,7 +72,7 @@ ix.randomitems.tables["task_reward_ammo_03"] = {
 }
 
 ix.randomitems.tables["task_reward_ammo_03_small"] = { 
-    {250, {"12gaugemg", {["quantity"] = 15}}},
+    {250, {"12gaugetr", {["quantity"] = 15}}},
     {250,  {"12gaugedt", {["quantity"] = 15}}},
     {250,  {"9x21", {["quantity"] = 30}}},
     {250,  {"44magnum", {["quantity"] = 30}}},
@@ -81,7 +81,7 @@ ix.randomitems.tables["task_reward_ammo_03_small"] = {
 }
 
 ix.randomitems.tables["task_reward_ammo_03_aphp"] = { 
-    {250, {"12gaugemg", {["quantity"] = 15}}}, -- doesnt have ap or hp
+    {250, {"12gaugetr", {["quantity"] = 15}}}, -- doesnt have ap or hp
     {250, {"12gaugedt", {["quantity"] = 15}}}, -- doesnt have ap or hp
     {250, {"9x21ap", {["quantity"] = 30}}},
     {250, {"9x21hp", {["quantity"] = 30}}},
@@ -94,7 +94,7 @@ ix.randomitems.tables["task_reward_ammo_03_aphp"] = {
 }
 
 ix.randomitems.tables["task_reward_ammo_04"] = { 
-    {250, {"12gaugetr"}},
+    {250, {"12gaugemg"}},
     {250, {"9x39"}},
     {250, {"50ae"}},
     {250, {"57x28"}},
@@ -104,7 +104,7 @@ ix.randomitems.tables["task_reward_ammo_04"] = {
 }
 
 ix.randomitems.tables["task_reward_ammo_04_small"] = { 
-    {250, {"12gaugetr", {["quantity"] = 15}}},
+    {250, {"12gaugemg", {["quantity"] = 15}}},
     {250, {"9x39", {["quantity"] = 30}}},
     {250, {"50ae", {["quantity"] = 30}}},
     {250, {"57x28", {["quantity"] = 30}}},
@@ -114,7 +114,7 @@ ix.randomitems.tables["task_reward_ammo_04_small"] = {
 }
 
 ix.randomitems.tables["task_reward_ammo_04_aphp"] = { 
-    {250, {"12gaugetr", {["quantity"] = 15}}}, -- doesnt have ap or hp
+    {250, {"12gaugemg", {["quantity"] = 15}}}, -- doesnt have ap or hp
     {250, {"9x39ap", {["quantity"] = 30}}},
     {250, {"9x39hp", {["quantity"] = 30}}},
     {250, {"50aeap", {["quantity"] = 30}}},
@@ -126,4 +126,7 @@ ix.randomitems.tables["task_reward_ammo_04_aphp"] = {
     {250, {"500magnumap", {["quantity"] = 30}}},
     {250, {"500magnumhp", {["quantity"] = 30}}},
     {250, {"700nitro", {["quantity"] = 4}}}, -- doesnt have ap or hp
+    {250, {"127x55", {["quantity"] = 30}}}, -- doesnt have ap or hp
+    {250, {"93x64", {["quantity"] = 30}}}, -- doesnt have ap or hp
+    {250, {"145x114", {["quantity"] = 30}}},
 }
