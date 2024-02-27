@@ -18,9 +18,9 @@ DIALOGUE.addTopic("GREETING", {
 		if (SERVER) then
 			if target:GetNetVar("possibleJobs") == nil then
 				local possibleJobs = {}
-				possibleJobs["easy"] = {"kill_human_NPC_easy", "item_world_NPC_easy"}
-				possibleJobs["medium"] = {"kill_human_NPC_medium", "item_world_NPC_medium"}
-				possibleJobs["hard"] = {"kill_human_NPC_hard", "item_world_NPC_hard"}			
+				possibleJobs["easy"] = {"kill_human_NPC_easy"}
+				possibleJobs["medium"] = {"kill_human_NPC_medium"}
+				possibleJobs["hard"] = {"kill_human_NPC_hard"}			
 	
 				target:SetNetVar("possibleJobs", possibleJobs)
 			end
