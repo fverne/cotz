@@ -1,5 +1,6 @@
 PLUGIN.map_presets["rp_pripyat_remaster"] = {
   containers = {
+    --community chests
     {
       model = "models/props_forest/footlocker01_closed.mdl",
       position = Vector(3927.447265625,8532.623046875,1100.4028320313),
@@ -7,6 +8,9 @@ PLUGIN.map_presets["rp_pripyat_remaster"] = {
       spawnCategory = "",
       cyclicalCategory = "",
     },
+
+    -- cycliccontainers
+    --TODO place cycliccontainers here
   },
   vendors = {
     {
@@ -1585,6 +1589,13 @@ PLUGIN.map_presets["rp_pripyat_remaster"] = {
     },
   },
   entities = {
+    --cassette player
+    {
+      class = "ix_cassette_player",
+      position = Vector(3938.7573242188,8532.806640625,1112.7260742188),
+      angles = Angle(0,128.30337524414,0),
+    },
+
     --computers
     {
       class = "ix_dataextractpc",

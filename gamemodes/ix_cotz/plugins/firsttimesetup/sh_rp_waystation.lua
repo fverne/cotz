@@ -1,5 +1,22 @@
 PLUGIN.map_presets["rp_waystation"] = {
   containers = {
+    --community chests
+    {
+      model = "models/props_forest/footlocker01_closed.mdl",
+      position = Vector(-5499.607421875,6951.73828125,166.34353637695),
+      angles = Angle(0.070593528449535,-88.865600585938,0.016916075721383),
+      spawnCategory = "",
+      cyclicalCategory = "",
+    },
+    {
+      model = "models/props_forest/footlocker01_closed.mdl",
+      position = Vector(-5387.7651367188,6954.0419921875,166.33666992188),
+      angles = Angle(0.050399996340275,-88.662200927734,-0.098907470703125),
+      spawnCategory = "",
+      cyclicalCategory = "",
+    },
+
+    --cycliccontainers
     {
       model = "models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
       position = Vector(-7223.2529296875,-12746.249023438,374.43417358398),
@@ -1588,7 +1605,7 @@ PLUGIN.map_presets["rp_waystation"] = {
       { Vector(3470.5681152344,-1386.6888427734,-51.07799911499) , "000011" },       
     },
     ["simplecrossserver"] = {
-      { Vector(-11498.03515625,-13150.655273438,37) , "rp_marsh_cs" , "fromoutskirts" }, 
+      { Vector(-11703.11328125,-13160.6171875,37) , "rp_marsh_cs" , "fromoutskirts" }, 
       { Vector(3537.8415527344,13412.779296875,797.72137451172) , "rp_pripyat_remaster" , "fromwaystation" },       
     },
     ["worlditemspawner"] = {
@@ -1754,6 +1771,14 @@ PLUGIN.map_presets["rp_waystation"] = {
     },
   },
   entities = {
+    --cassette player
+    {
+      class = "ix_cassette_player",
+      position = Vector(-5362.9951171875,6817.455078125,182.96192932129),
+      angles = Angle(0,136.11776733398,0),
+    },
+
+
     --computers
     {
       class = "ix_dataextractpc",

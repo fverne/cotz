@@ -2,6 +2,7 @@
 
 PLUGIN.map_presets["rp_marsh_cs"] = {
   containers = {
+    --communitychests
     {
       model = "models/props_forest/footlocker01_closed.mdl",
       position = Vector(-6159.7724609375,-9435.3583984375,4970.3862304688),
@@ -23,6 +24,8 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
       spawnCategory = "",
       cyclicalCategory = "",
     },
+
+    --cyclic containers
     {
       model = "models/lostsignalproject/items/misc/grooming.mdl",
       position = Vector(-2576.5571289063,-10737.194335938,58.390300750732),
@@ -2534,12 +2537,19 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
 
   -- For setting up generic entities to spawn
   entities = {
+    --Noticeboard
     {
       class = "ix_noticeboard",
       position = Vector(-6149.0317382813,-9549.83203125,5056.4912109375),
       angles = Angle(89.976348876953,-0.002155341906473,180),
     },
 
+    --Cassette Player
+    {
+      class = "ix_cassette_player",
+      position = Vector(-6705.63671875,-9597.8876953125,5009.2309570313),
+      angles = Angle(0,264.47961425781,0),
+    },
 
   }
 }
