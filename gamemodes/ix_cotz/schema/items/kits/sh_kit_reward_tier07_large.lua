@@ -14,7 +14,7 @@ ITEM.iconCam = {
 }
 
 ITEM.upgradeItem = "kit_reward_tier08_large"
-ITEM.upgradeCost = 120000
+ITEM.upgradeCost = 180000
 
 ITEM.items = {
 	{
