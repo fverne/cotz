@@ -1363,8 +1363,8 @@ ix.progression.Register("computer_artifactTasks", {
 					})
 				end)
 
-				local pos = Vector(-908.852905, -10473.121094, -1822.968750)
-				local ang = Angle(0.000, 0, 0.000)
+				local pos = Vector(847.604797, -10214.238281, -1478.968750)
+				local ang = Angle(0.000, -110, 0.000)
 				ix.util.SpawnAdvVendor("cconnpc", pos, ang)
 
 			end,
