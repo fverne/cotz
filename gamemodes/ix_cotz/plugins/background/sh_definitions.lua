@@ -381,7 +381,7 @@ ix.backgrounds["mobhitman"] = {
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("sako85varmint", 1, {["durability"] = 55})
-		character:GetInventory():Add("22lr", 1, {["quantity"] = 15})
+		character:GetInventory():Add("22lr", 1, {["quantity"] = 25})
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  
