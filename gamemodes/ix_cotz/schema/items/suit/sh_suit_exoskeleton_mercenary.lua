@@ -120,3 +120,26 @@ ITEM.skincustom[20] = {
 -- 	name = "Skin 22",
 -- 	skingroup = 22,
 -- }
+
+ITEM.pacData = {
+	[1] = {
+		["children"] = {
+			[1] = {
+				["children"] = {
+				},
+				["self"] = {
+					["UniqueID"] = "exoskeleton1_1",
+					["Skin"] = 11,
+					["BoneMerge"] = true,
+					["Model"] = "models/shtokerbox/outfits/male_outfit_sunrise_overlay_exo.mdl",
+					["ClassName"] = "model",
+				},
+			},
+		},
+		["self"] = {
+			["ClassName"] = "group",
+			["UniqueID"] = "exoskeleton1",
+			["EditorExpand"] = true,
+		},
+	},
+}

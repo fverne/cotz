@@ -186,6 +186,8 @@ function ITEM:RemoveOutfit(client)
 	local character = client:GetCharacter()
 	local bgroups = {}
 
+	client:RemovePart(self.uniqueID)
+
 	self:SetData("equip", false)
 	if (character:GetData("oldModel" .. self.outfitCategory)) then
 		character:SetModel(character:GetData("oldModel" .. self.outfitCategory))
@@ -342,7 +344,8 @@ ITEM.functions.Equip = {
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 6, function(ply) 
 
 			item:SetData("equip", true)
-			
+			ply:AddPart(item.uniqueID, item)
+
 			local origbgroups = {}
 			for k, v in ipairs(client:GetBodyGroups()) do
 				origbgroups[v.id] = client:GetBodygroup(v.id)
