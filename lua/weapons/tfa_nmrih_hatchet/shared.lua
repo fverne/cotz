@@ -19,8 +19,8 @@ SWEP.ViewModel			= "models/weapons/tfa_nmrih/v_me_hatchet.mdl" --Viewmodel path
 SWEP.ViewModelFOV = 50
 
 SWEP.WorldModel			= "models/weapons/tfa_nmrih/w_me_hatchet.mdl" --Viewmodel path
-SWEP.HoldType = "melee"
-SWEP.DefaultHoldType = "melee"
+SWEP.HoldType = "melee2"
+SWEP.DefaultHoldType = "melee2"
 SWEP.Offset = { --Procedural world model animation, defaulted for CS:S purposes.
         Pos = {
         Up = -5,
