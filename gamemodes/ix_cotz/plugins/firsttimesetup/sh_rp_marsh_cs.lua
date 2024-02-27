@@ -1922,7 +1922,7 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
       { Vector(11391.901367188,-7519.21484375,69) , "000111" },       
     },
     ["simplecrossserver"] = {
-      { Vector(-6080.720703125,12969.395507812,88.721343994141) , "rp_waystation" , "frommarsh" }, 
+      { Vector(-4691.28515625,12790.76953125,6.0024814605713) , "rp_waystation" , "frommarsh" }, 
     },
     ["worlditemspawner"] = {
       { Vector(-2241.15234375,-10812.286132812,125.63130187988) , "worldspawn_1" }, 
