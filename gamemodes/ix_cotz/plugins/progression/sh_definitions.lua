@@ -1006,7 +1006,12 @@ ix.progression.Register("beanstalkItemDelivery_Documents", {
 		return str	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_documents_14"] 	= 1, -- TODO add more of these
+			["value_documents_14"] 	= 40,
+			["value_documents_7"] 	= 40,
+			["value_documents_12"] 	= 40,
+			["value_documents_13"] 	= 40,
+			["value_documents_11"] 	= 40,
+			["value_documents_10"] 	= 40,
 		}
 
 		return itemids
