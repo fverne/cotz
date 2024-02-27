@@ -215,7 +215,7 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_ammo_tier03"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 12
-tempJob.moneyReward = {900, 2100}
+tempJob.moneyReward = {1900, 2100}
 tempJob.categories = {"item_world_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob1_value_pcpart_fpga")
@@ -233,7 +233,7 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_ammo_tier03"}}
 tempJob.rewardcount = 1
 tempJob.repReward = 29
-tempJob.moneyReward = {900, 2100}
+tempJob.moneyReward = {4900, 5100}
 tempJob.categories = {"item_world_NPC_hard"}
 
 ix.jobs.register(tempJob, "ItemJob2_value_pcpart_fpga")
