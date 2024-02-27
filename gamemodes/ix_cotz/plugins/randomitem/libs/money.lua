@@ -21,14 +21,14 @@ ix.randomitems.tables["coins"] = {
 }
 
 ix.randomitems.tables["task_reward_money_00"] = {
-  { 100, {"bagrubles", {["quantity"] = 210}}},
+  { 200, {"bagrubles", {["quantity"] = 210}}},
   { 50, {"value_currency_euro", {["quantity"] = 2}}},
   { 50, {"value_currency_dollar", {["quantity"] = 3}}},
   { 10, {"backpack_sling"}},
 }
 
 ix.randomitems.tables["task_reward_money_01"] = {
-  { 100, {"bagrubles", {["quantity"] = 320}}},
+  { 200, {"bagrubles", {["quantity"] = 320}}},
   { 50, {"value_currency_euro", {["quantity"] = 3}}},
   { 50, {"value_currency_dollar", {["quantity"] = 4}}},
   { 10, {"backpack_sanitar"}},
@@ -36,7 +36,7 @@ ix.randomitems.tables["task_reward_money_01"] = {
 }
 
 ix.randomitems.tables["task_reward_money_02"] = {
-  { 100, {"bagrubles", {["quantity"] = 450}}},
+  { 200, {"bagrubles", {["quantity"] = 450}}},
   { 50, {"value_currency_euro", {["quantity"] = 4}}},
   { 50, {"value_currency_dollar", {["quantity"] = 5}}},
   { 10, {"backpack_tourist"}},
@@ -44,7 +44,7 @@ ix.randomitems.tables["task_reward_money_02"] = {
 }
 
 ix.randomitems.tables["task_reward_money_03"] = {
-  { 100, {"bagrubles", {["quantity"] = 750}}},
+  { 200, {"bagrubles", {["quantity"] = 750}}},
   { 50, {"value_currency_euro", {["quantity"] = 5}}},
   { 50, {"value_currency_dollar", {["quantity"] = 6}}},
   { 10, {"backpack_takedown_1"}},
@@ -52,45 +52,85 @@ ix.randomitems.tables["task_reward_money_03"] = {
 }
 
 ix.randomitems.tables["task_reward_money_04"] = {
-  { 100, {"bagrubles", {["quantity"] = 1250}}},
+  { 200, {"bagrubles", {["quantity"] = 1250}}},
   { 50, {"value_currency_euro", {["quantity"] = 6}}},
   { 50, {"value_currency_dollar", {["quantity"] = 7}}},
   { 10, {"backpack_vkbo"}},
   { 10, {"backpack_mbss"}},
+  { 1, {"cassette_bandits"}},
+  { 1, {"cassette_barman"}},
+  { 1, {"cassette_firelake"}},
+  { 1, {"cassette_freedom"}},
+  { 1, {"cassette_merc"}},
+  { 1, {"cassette_standart"}},
+  { 1, {"cassette_true"}},
+  { 1, {"cassette_wickedrabbit"}},
 }
 
 ix.randomitems.tables["task_reward_money_05"] = {
-  { 100, {"bagrubles", {["quantity"] = 2050}}},
+  { 200, {"bagrubles", {["quantity"] = 2050}}},
   { 50, {"value_currency_euro", {["quantity"] = 6}}},
   { 50, {"value_currency_dollar", {["quantity"] = 7}}},
   { 10, {"backpack_pilgrim"}},
   { 10, {"backpack_scavbackpack"}},
+  { 1, {"cassette_bandits"}},
+  { 1, {"cassette_barman"}},
+  { 1, {"cassette_firelake"}},
+  { 1, {"cassette_freedom"}},
+  { 1, {"cassette_merc"}},
+  { 1, {"cassette_standart"}},
+  { 1, {"cassette_true"}},
+  { 1, {"cassette_wickedrabbit"}},
 }
 
 ix.randomitems.tables["task_reward_money_06"] = {
-  { 100, {"bagrubles", {["quantity"] = 3150}}},
+  { 200, {"bagrubles", {["quantity"] = 3150}}},
   { 50, {"value_currency_euro", {["quantity"] = 7}}},
   { 50, {"value_currency_dollar", {["quantity"] = 8}}},
   { 10, {"backpack_1"}},
   { 10, {"backpack_2"}},
   { 10, {"backpack_3"}},
+  { 1, {"cassette_bandits"}},
+  { 1, {"cassette_barman"}},
+  { 1, {"cassette_firelake"}},
+  { 1, {"cassette_freedom"}},
+  { 1, {"cassette_merc"}},
+  { 1, {"cassette_standart"}},
+  { 1, {"cassette_true"}},
+  { 1, {"cassette_wickedrabbit"}},
 }
 
 ix.randomitems.tables["task_reward_money_07"] = {
-  { 100, {"bagrubles", {["quantity"] = 4250}}},
+  { 200, {"bagrubles", {["quantity"] = 4250}}},
   { 50, {"value_currency_euro", {["quantity"] = 8}}},
   { 50, {"value_currency_dollar", {["quantity"] = 9}}},
   { 10, {"backpack_1_large"}},
   { 10, {"backpack_2_large"}},
   { 10, {"backpack_3_large"}},
+  { 1, {"cassette_bandits"}},
+  { 1, {"cassette_barman"}},
+  { 1, {"cassette_firelake"}},
+  { 1, {"cassette_freedom"}},
+  { 1, {"cassette_merc"}},
+  { 1, {"cassette_standart"}},
+  { 1, {"cassette_true"}},
+  { 1, {"cassette_wickedrabbit"}},
 }
 
 ix.randomitems.tables["task_reward_money_08"] = {
-  { 100, {"bagrubles", {["quantity"] = 5000}}},
+  { 200, {"bagrubles", {["quantity"] = 5000}}},
   { 50, {"value_currency_euro", {["quantity"] = 9}}},
   { 50, {"value_currency_dollar", {["quantity"] = 10}}},
   { 10, {"backpack_4"}},
   { 10, {"backpack_5"}},
   { 2, {"backpack_4_large"}},
   { 2, {"backpack_5_large"}},
+  { 1, {"cassette_bandits"}},
+  { 1, {"cassette_barman"}},
+  { 1, {"cassette_firelake"}},
+  { 1, {"cassette_freedom"}},
+  { 1, {"cassette_merc"}},
+  { 1, {"cassette_standart"}},
+  { 1, {"cassette_true"}},
+  { 1, {"cassette_wickedrabbit"}},
 }
