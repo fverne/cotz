@@ -193,9 +193,9 @@ ix.npctemplates.templates["cooknpc"] = {
 		["lowtiercooker"] 	= { nil, 2, SELLANDBUY, 2, 1, 2 },
 		["lowtiercookerfuel"] 	= { nil, 40, SELLANDBUY, 40, 1, 20 },
 
-		["drug_cigarette_1"] 	= { nil, 15, SELLANDBUY, 15, 1, 6 },
-		["drug_cigarette_2"] 	= { nil, 12, SELLANDBUY, 12, 1, 5 },
-		["drug_cigarette_3"] 	= { nil, 8, SELLANDBUY, 8, 1, 4 },
+		["drug_cigarette_1"] 	= { nil, 5, SELLANDBUY, 5, 1, 5 },
+		["drug_cigarette_2"] 	= { nil, 4, SELLANDBUY, 4, 1, 4 },
+		-- ["drug_cigarette_3"] 	= { nil, 3, SELLANDBUY, 3, 1, 3 },
 
 		["drink_bottlebeer_1"] 	= { nil, 16, SELLANDBUY, 16, 0.5, 6 },
 

@@ -20,8 +20,6 @@ ix.progression.Register("jittersItemDelivery_medical1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-            ["drug_cigarette_1"] = 30,
-			["drug_cigarette_2"] = 30,
             ["drug_tobacco_1"] = 30,
 
             ["drug_caffeine"] = 10,
@@ -114,7 +112,7 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 			["drug_cigarette_3"] = 30,
             ["drug_tobacco_2"] = 30,
 
-			["drug_mints"] = 10,
+			["drug_mints"] = 200,
 			["drug_morphine"] = 10,
 		}	
 

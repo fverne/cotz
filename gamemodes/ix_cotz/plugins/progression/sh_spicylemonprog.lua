@@ -75,7 +75,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 
 			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
 			if (npc) then
-				npc:AddItemToList("drug_mints", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("drug_mints", nil, 1, "SELLANDBUY", 1, 4, 1)
 			end
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Medical1", true)
@@ -763,8 +763,8 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
 			if (npc) then
 				npc:AddItemToList("drink_vodka_4", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("drink_vodka_5", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("drink_vodka_6", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("drink_vodka_5", nil, 1, "SELLANDBUY", 1, 6, 1)
+				npc:AddItemToList("drink_vodka_6", nil, 1, "SELLANDBUY", 1, 6, 1)
 			end
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Vodka", true)
@@ -848,10 +848,10 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 
 			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
 			if (npc) then
-				npc:AddItemToList("drink_spirit_1", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("drink_spirit_2", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("drink_spirit_3", nil, 5, "SELLANDBUY", 5, 1, 5)
-                npc:AddItemToList("drink_wine", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("drink_spirit_1", nil, 1, "SELLANDBUY", 1, 6, 1)
+				npc:AddItemToList("drink_spirit_2", nil, 1, "SELLANDBUY", 1, 6, 1)
+				npc:AddItemToList("drink_spirit_3", nil, 1, "SELLANDBUY", 1, 6, 1)
+                npc:AddItemToList("drink_wine", nil, 1, "SELLANDBUY", 1, 6, 1)
 			end
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Spirits", true)
