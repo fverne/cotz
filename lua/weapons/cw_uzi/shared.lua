@@ -163,10 +163,10 @@ SWEP.FireSound = "CW_MAC11_FIRE"
 SWEP.FireSoundSuppressed = "CW_MAC11_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.4
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.085
 SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 1
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.07
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1

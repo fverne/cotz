@@ -120,15 +120,15 @@ SWEP.Primary.Ammo			= "9x18MM"
 SWEP.FireDelay = 0.0705
 SWEP.FireSound = "CW_SKORPION_FIRE"
 SWEP.FireSoundSuppressed = "CW_SKORPION_FIRE_SUPPRESSED"
-SWEP.Recoil = 2.4
+SWEP.Recoil = 1.4
 
 SWEP.WearDamage = 0.11
 SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.06
 SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 5
-SWEP.MaxSpreadInc = 0.55
+SWEP.MaxSpreadInc = 0.05
 SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1

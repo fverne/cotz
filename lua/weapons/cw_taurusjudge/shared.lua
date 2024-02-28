@@ -137,11 +137,11 @@ SWEP.FireDelay = 0.08
 SWEP.FireSound = "CWC_JUDGE_FIRE"
 SWEP.Recoil = 3.5
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.075
 SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.01
+SWEP.MaxSpreadInc = 0.1
+SWEP.SpreadPerShot = 0.04
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 95

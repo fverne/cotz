@@ -137,7 +137,7 @@ SWEP.Primary.DefaultClip	= 2
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".700 Nitro Express"
 
-SWEP.FireDelay = 0.15
+SWEP.FireDelay = 1.75
 SWEP.FireSound = "CW_700nitro_FIRE"
 
 SWEP.Recoil = 35.5

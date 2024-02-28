@@ -164,11 +164,11 @@ SWEP.FOVPerShot = 0.25
 SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.06
 SWEP.AimSpread = 0.025
-SWEP.VelocitySensitivity = 4
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.0085
+SWEP.VelocitySensitivity = 3
+SWEP.MaxSpreadInc = 0.16
+SWEP.SpreadPerShot = 0.02
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 38

@@ -164,12 +164,12 @@ SWEP.Primary.Ammo			= "5.45x39MM"
 SWEP.FireDelay = 0.03333333
 SWEP.FireSound = "CW_AK74_FIRE"
 SWEP.FireSoundSuppressed = "CW_AK74_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.6
+SWEP.Recoil = 1.1
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.14
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.8
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1

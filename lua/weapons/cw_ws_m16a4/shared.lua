@@ -179,13 +179,13 @@ SWEP.Chamberable = true
 SWEP.FireDelay = 0.075
 SWEP.FireSound = "CW_WS_M16A4_FIRE"
 SWEP.FireSoundSuppressed = "CW_WS_M16A4_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.7
+SWEP.Recoil = 1.4
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.11
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
+SWEP.MaxSpreadInc = 0.1
+SWEP.SpreadPerShot = 0.009
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 83

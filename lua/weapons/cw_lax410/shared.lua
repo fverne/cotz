@@ -147,7 +147,7 @@ SWEP.Primary.Ammo			= ".45 ACP"
 
 SWEP.FireDelay = 1.5
 SWEP.FireSound = "LAX410_FIRE"
-SWEP.Recoil = 5.5
+SWEP.Recoil = 7.5
 
 SWEP.HipSpread = 0.06
 SWEP.AimSpread = 0.03

@@ -109,13 +109,13 @@ SWEP.Primary.DefaultClip	= 6
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".44 Magnum"
 
-SWEP.FireDelay = 0.25
+SWEP.FireDelay = 0.35
 SWEP.FireSound = "29_FIRE"
 SWEP.Recoil = 4
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.065
 SWEP.AimSpread = 0.009
-SWEP.VelocitySensitivity = 4
+SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.02
 SWEP.SpreadCooldown = 0.2

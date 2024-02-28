@@ -131,15 +131,15 @@ SWEP.Primary.Ammo			= "9x21MM"
 SWEP.FireDelay = 60/900
 SWEP.FireSound = "VERESK_FIRE"
 SWEP.FireSoundSuppressed = "VERESK_SUPFIRE"
-SWEP.Recoil = 2.2
+SWEP.Recoil = 1.6
 
 SWEP.WearDamage = 0.11
 SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.085
 SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 1
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.06
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.2
 SWEP.Damage = 95

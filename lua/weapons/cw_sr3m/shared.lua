@@ -190,17 +190,17 @@ SWEP.Primary.Ammo			= "9x39MM"
 SWEP.FireDelay = 0.066
 SWEP.FireSound = "CW_SR3M_FIRE"
 SWEP.FireSoundSuppressed = "CW_SR3M_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.8
+SWEP.Recoil = 1.4
 
 SWEP.SuppressedOnEquip = false
 
 SWEP.WearDamage = 0.11
 SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.11
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.1
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1

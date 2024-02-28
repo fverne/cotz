@@ -146,11 +146,11 @@ SWEP.FireSound = "CW_TKPD_FIRE"
 SWEP.FireSoundSuppressed = "CW_VSSK_FIRE"
 SWEP.Recoil = 2.2
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.12
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
+SWEP.VelocitySensitivity = 16
+SWEP.MaxSpreadInc = 0.1
+SWEP.SpreadPerShot = 0.03
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 425

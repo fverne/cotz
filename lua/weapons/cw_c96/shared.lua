@@ -203,11 +203,11 @@ SWEP.FireSoundSuppressed = "TT_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.1
 SWEP.FOVPerShot = 0 -- = .6
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.07
 SWEP.AimSpread = 0.025
-SWEP.VelocitySensitivity = 6
-SWEP.MaxSpreadInc = 0.5
-SWEP.SpreadPerShot = 0.007
+SWEP.VelocitySensitivity = 3
+SWEP.MaxSpreadInc = 0.075
+SWEP.SpreadPerShot = 0.02
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 43

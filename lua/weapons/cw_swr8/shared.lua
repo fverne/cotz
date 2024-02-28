@@ -115,11 +115,11 @@ SWEP.FireDelay = 0.2
 SWEP.FireSound = "R8_FIRE"
 SWEP.Recoil = 3
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.075
 SWEP.AimSpread = 0.0094
 SWEP.VelocitySensitivity = 4
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.02
+SWEP.MaxSpreadInc = 0.07
+SWEP.SpreadPerShot = 0.04
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 115

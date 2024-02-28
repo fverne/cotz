@@ -175,11 +175,11 @@ SWEP.Recoil = 7.2
 SWEP.AimViewModelFOV = 50
 SWEP.CustomizationMenuScale = 0.018
 SWEP.ForceBackToHipAfterAimedShot = true
-SWEP.GlobalDelayOnShoot = 1.3
+SWEP.GlobalDelayOnShoot = 1.4
 
-SWEP.HipSpread = 0.2
+SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 9
+SWEP.VelocitySensitivity = 18
 SWEP.MaxSpreadInc = 0.9
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.2
@@ -210,7 +210,7 @@ end
 function SWEP:postPrimaryAttack()
 	if CLIENT then
 		timer.Simple(0.6, function() 
-			self:sendWeaponAnim("bolt", 0.7, 0)
+			self:sendWeaponAnim("bolt", 0.8, 0)
 		end)
 	end
 end

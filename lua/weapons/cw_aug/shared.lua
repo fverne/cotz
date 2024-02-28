@@ -141,13 +141,13 @@ SWEP.WearEffect = 0.015
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_GSM_AUG_FIRE"
 SWEP.FireSoundSuppressed = "CW_GSM_AUG_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.6
+SWEP.Recoil = 1.1
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.09
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
+SWEP.MaxSpreadInc = 0.10
+SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 78

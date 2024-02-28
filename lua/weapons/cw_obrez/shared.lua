@@ -157,7 +157,7 @@ SWEP.FireDelay = 60/36
 SWEP.FireSound = "KHRMOSIN_FIRE"
 SWEP.Recoil = 6.8
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.055
 SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 5
 SWEP.MaxSpreadInc = 0.5

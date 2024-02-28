@@ -116,11 +116,11 @@ SWEP.FireDelay = 0.275
 SWEP.FireSound = "29_FIRE"
 SWEP.Recoil = 4
 
-SWEP.HipSpread = 0.125
-SWEP.AimSpread = 0.016
+SWEP.HipSpread = 0.060
+SWEP.AimSpread = 0.012
 SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.02
+SWEP.SpreadPerShot = 0.057
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 140

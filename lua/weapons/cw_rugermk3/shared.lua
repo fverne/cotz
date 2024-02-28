@@ -114,9 +114,9 @@ SWEP.FireSound = "MK3_FIRE"
 SWEP.FireSoundSuppressed = "MK3_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.2
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.065
 SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 3
+SWEP.VelocitySensitivity = 2
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.002
 SWEP.SpreadCooldown = 0.2
