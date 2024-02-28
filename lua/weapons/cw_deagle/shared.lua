@@ -124,11 +124,11 @@ SWEP.FireSoundSuppressed = "CW_DEAGLE_FIRE_SUPPRESSED"
 SWEP.Recoil = 2.8
 
 SWEP.HipSpread = 0.07
-SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.2
+SWEP.AimSpread = 0.008
+SWEP.VelocitySensitivity = 2
+SWEP.MaxSpreadInc = 0.15
+SWEP.SpreadPerShot = 0.06
+SWEP.SpreadCooldown = 0.25
 SWEP.Shots = 1
 SWEP.Damage = 180
 SWEP.DeployTime = 1

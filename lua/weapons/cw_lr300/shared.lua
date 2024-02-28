@@ -146,24 +146,24 @@ SWEP.Primary.Ammo			= "5.56x45MM"
 SWEP.WearDamage = 0.11
 SWEP.WearEffect = 0.015
 
-SWEP.FireDelay = 0.1
+SWEP.FireDelay = 0.075
 SWEP.FireSound = "CW_LR300_FIRE"
 SWEP.FireSoundSuppressed = "CW_LR300_FIRE_SILENCED"
-SWEP.Recoil = 1.7
+SWEP.Recoil = 1.4
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
+SWEP.MaxSpreadInc = 0.1
+SWEP.SpreadPerShot = 0.008
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 83
 SWEP.DeployTime = 0.5
 
 SWEP.ReloadSpeed = 1.15
-SWEP.ReloadTime = 2.4
-SWEP.ReloadTime_Empty = 2.4
+SWEP.ReloadTime = 2.6
+SWEP.ReloadTime_Empty = 2.8
 SWEP.ReloadHalt = 1.9
-SWEP.ReloadHalt_Empty = 3.1
+SWEP.ReloadHalt_Empty = 2.4
 SWEP.SnapToIdlePostReload = true

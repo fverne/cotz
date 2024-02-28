@@ -135,10 +135,10 @@ SWEP.FireSoundSuppressed = "DOIMP40_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.2
 SWEP.FOVPerShot = .05 -- = .6
 
-SWEP.HipSpread = 0.125
-SWEP.AimSpread = 0.025
+SWEP.HipSpread = 0.07
+SWEP.AimSpread = 0.020
 SWEP.VelocitySensitivity = 2
-SWEP.MaxSpreadInc = 0.55
+SWEP.MaxSpreadInc = 0.07
 SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1

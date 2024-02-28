@@ -169,13 +169,13 @@ SWEP.FireDelayAuto = 60/750
 SWEP.FireDelaySemi = 60/700
 SWEP.FireSound = "DOITHOM1928_FIRE"
 SWEP.FireSoundSuppressed = "DOITHOM1928_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.45
+SWEP.Recoil = 1.15
 SWEP.FOVPerShot = 0.1 -- = .62
 
 SWEP.WearDamage = 0.11
 SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.056
+SWEP.HipSpread = 0.046
 SWEP.AimSpread = 0.016
 SWEP.VelocitySensitivity = .4
 SWEP.MaxSpreadInc = 0.05
