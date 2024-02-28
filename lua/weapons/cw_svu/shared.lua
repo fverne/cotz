@@ -164,10 +164,10 @@ SWEP.FireSound = "CW_SVU_FIRE"
 SWEP.FireSoundSuppressed = "CW_AR15_FIRE_SUPPRESSED"
 SWEP.Recoil = 2.8
 
-SWEP.HipSpread = 0.250
+SWEP.HipSpread = 0.170
 SWEP.AimSpread = 0.0015
 SWEP.VelocitySensitivity = 1.6
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.1
 SWEP.SpreadPerShot = 0.01
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1

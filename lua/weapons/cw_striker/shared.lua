@@ -101,7 +101,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.FireDelay = 0.2
+SWEP.FireDelay = 0.18
 SWEP.FireSound = "CW_STRIKER_FIRE"
 SWEP.Recoil = 3
 
@@ -120,8 +120,8 @@ SWEP.Damage = 42
 SWEP.DeployTime = 1
 
 SWEP.ReloadStartTime = 0.3
-SWEP.InsertShellTime = 0.8
-SWEP.ReloadFinishWait = 1.3
+SWEP.InsertShellTime = 0.6
+SWEP.ReloadFinishWait = 1
 SWEP.ShotgunReload = true
 
 SWEP.Chamberable = false

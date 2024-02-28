@@ -146,15 +146,15 @@ SWEP.Chamberable = true
 SWEP.FireDelay = 0.05
 SWEP.FireSound = "CW_MAC11_FIRE"
 SWEP.FireSoundSuppressed = "CW_MAC11_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.9
+SWEP.Recoil = 1.3
 
 SWEP.WearDamage = 0.11
 SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.1
+SWEP.HipSpread = 0.065
 SWEP.AimSpread = 0.015
 SWEP.VelocitySensitivity = 1
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.07
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1

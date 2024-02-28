@@ -126,10 +126,10 @@ SWEP.Recoil = 1.4
 SWEP.WearDamage = 0.11
 SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.08
 SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.05
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1

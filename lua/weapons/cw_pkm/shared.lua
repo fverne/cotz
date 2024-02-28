@@ -130,15 +130,15 @@ SWEP.Primary.Ammo			= "7.62x54MMR"
 SWEP.FireDelay = 0.0923
 SWEP.FireSound = "CW_PKM_FIRE"
 SWEP.FireSoundSuppressed = "CW_PKM_SUPPRESSED"
-SWEP.Recoil = 2.2
+SWEP.Recoil = 1.6
 
 SWEP.WearDamage = 0.11
 SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.14
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.07
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1

@@ -107,9 +107,9 @@ SWEP.FireDelay = 1.2
 SWEP.FireSound = "CW_NAGANT_FIRE"
 SWEP.Recoil = 1.1
 
-SWEP.HipSpread = 0.06
+SWEP.HipSpread = 0.03
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 4
+SWEP.VelocitySensitivity = 2
 SWEP.MaxSpreadInc = 0.35
 SWEP.SpreadPerShot = 0.18
 SWEP.SpreadCooldown = 0.2

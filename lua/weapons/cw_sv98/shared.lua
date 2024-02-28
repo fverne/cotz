@@ -169,9 +169,9 @@ SWEP.GlobalDelayOnShoot = 1.1
 SWEP.WearDamage = 0.1
 SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 3
+SWEP.VelocitySensitivity = 12
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.2
