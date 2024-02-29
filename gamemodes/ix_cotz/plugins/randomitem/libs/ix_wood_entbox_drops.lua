@@ -104,7 +104,6 @@ ix.randomitems.tables["ix_wood_entbox_drops"] = {
   {800, {"hidestasher_cutlery"}},
   {200, {"hidestash_1"}},
   {100, {"hidestash_2"}},
-  {25, {"hidestash_3"}},
   {800, {"flashlight"}},
   {800, {"compass"}},
   {800, {"gpstracker"}},

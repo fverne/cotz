@@ -620,8 +620,8 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["hidestash_2"] = 15,
-			["hidestash_3"] = 20,
+			["hidestash_1"] = 10,
+			["hidestash_2"] = 5,
 		}	
 
 		return itemids

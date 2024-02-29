@@ -48,7 +48,7 @@ ix.randomitems.tables["worldspawn_2"] = {
   {250, {"obrez", {["durability"] = 25, ["ammo"] = 2}}},
   {250, {"sako85nato", {["durability"] = 25, ["ammo"] = 2}}},
   
-  {50, {"backpack_sling"}},
-  {50, {"backpack_duffle"}},
-  {50, {"backpack_sanitar"}},
+  {75, {"backpack_sling"}},
+  {25, {"backpack_duffle"}},
+  {25, {"backpack_sanitar"}},
 }

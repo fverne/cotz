@@ -1,5 +1,5 @@
-ITEM.name = "Veteran Stalkers Backpack"
-ITEM.description= "A small rugged backpack."
+ITEM.name = "Veteran Stalkers Stash"
+ITEM.description= "A rugged stash, contains the belongings of another stalker."
 ITEM.model = "models/lostsignalproject/items/misc/backpack.mdl"
 
 ITEM.width = 3
@@ -27,13 +27,16 @@ ITEM.items = {
 		{1, "reward_aid_high"},
 	},
 	{
-		{1, "reward_consumable"},
-		{1, "reward_aid_high"},
+		{100, "task_reward_money_04"},
+		{40, "task_reward_money_05"},
+		{12, "task_reward_money_06"},
+		{4, "task_reward_money_07"},
+		{1, "task_reward_money_08"},
 	},
 	{
-		{4, "worldspawn_4"},
+		{2, "reward_generic_valuable"},
 		{1, "cache_artifact_tier1"},
-		{4, "worldspawn_3"},
+		{4, "worldspawn_4"},
 	},
 	{
 		{1, "worldspawn_3"},

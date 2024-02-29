@@ -36,7 +36,7 @@ do
   tempJob.listenTrigger = "scanAreaEasyComplete"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_med"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 35
   tempJob.moneyReward = { 2000, 2500 }
   tempJob.categories = {"scanareaeasy"}
@@ -101,7 +101,7 @@ do
   tempJob.listenTrigger = "scanAreaEasyComplete"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_high"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 50
   tempJob.moneyReward = { 3000, 3500 }
   tempJob.categories = {"scanareaeasy"}
@@ -166,7 +166,7 @@ do
   tempJob.listenTrigger = "scanAreaMedComplete"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_m_low"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 35
   tempJob.moneyReward = { 3500, 4000 }
   tempJob.categories = {"scanareamedium"}
@@ -231,7 +231,7 @@ do
   tempJob.listenTrigger = "scanAreaMedComplete"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_rare"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 50
   tempJob.moneyReward = { 4500, 5000 }
   tempJob.categories = {"scanareamedium"}
@@ -296,7 +296,7 @@ do
   tempJob.listenTrigger = "scanAreaHighComplete"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 75
   tempJob.moneyReward = { 8000, 9000 }
   tempJob.categories = {"scanareahard"}
@@ -361,7 +361,7 @@ do
   tempJob.listenTrigger = "scanAreaHighComplete"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_m_rare"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 75
   tempJob.moneyReward = { 9500, 10000 }
   tempJob.categories = {"scanareahard"}
@@ -431,7 +431,7 @@ do
   tempJob.listenTrigger = "dataExtractEasy"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_med"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 20
   tempJob.moneyReward = { 2500, 4500 }
   tempJob.categories = {"dataextracteasy"}
@@ -496,7 +496,7 @@ do
   tempJob.listenTrigger = "dataExtractMedium"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_high"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 35
   tempJob.moneyReward = { 4000, 6000 }
   tempJob.categories = {"dataextractmedium"}
@@ -561,7 +561,7 @@ do
   tempJob.listenTrigger = "dataExtractHard"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_large"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 50
   tempJob.moneyReward = { 8500, 11500 }
   tempJob.categories = {"dataextracthard"}
@@ -776,7 +776,7 @@ do
   tempJob.listenTrigger = "scanRFEasyComplete"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_med"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 35
   tempJob.moneyReward = { 2000, 2500 }
   tempJob.categories = {"scanRFeasy"}
@@ -841,7 +841,7 @@ do
   tempJob.listenTrigger = "scanRFEasyComplete"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_aid_high"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 50
   tempJob.moneyReward = { 3000, 3500 }
   tempJob.categories = {"scanRFeasy"}
@@ -906,7 +906,7 @@ do
   tempJob.listenTrigger = "scanRFMedComplete"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_m_low"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 35
   tempJob.moneyReward = { 3500, 4000 }
   tempJob.categories = {"scanRFmedium"}
@@ -971,7 +971,7 @@ do
   tempJob.listenTrigger = "scanRFMedComplete"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_rare"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 50
   tempJob.moneyReward = { 4500, 5000 }
   tempJob.categories = {"scanRFmedium"}
@@ -1036,7 +1036,7 @@ do
   tempJob.listenTrigger = "scanRFHighComplete"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_mixed_high"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 75
   tempJob.moneyReward = { 8000, 9000 }
   tempJob.categories = {"scanRFhard"}
@@ -1101,7 +1101,7 @@ do
   tempJob.listenTrigger = "scanRFHighComplete"
   tempJob.numberRec = 1
   tempJob.reward = {{"kit_ammo_m_rare"}}
-  tempJob.rewardCount = 1
+  tempJob.rewardCount = 0
   tempJob.repReward = 75
   tempJob.moneyReward = { 9500, 10000 }
   tempJob.categories = {"scanRFhard"}

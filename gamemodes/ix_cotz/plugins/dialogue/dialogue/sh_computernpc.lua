@@ -15,9 +15,7 @@ DIALOGUE.addTopic("GREETING", {
 		if (SERVER) then
 			if target:GetNetVar("possibleJobs") == nil then
 				local possibleJobs = {}
-				possibleJobs["easy"] = {""} 
-				possibleJobs["medium"] = {""}
-				possibleJobs["hard"] = {""}			
+				possibleJobs["any"] = {"artifactcollect_computer"}		
 	
 				target:SetNetVar("possibleJobs", possibleJobs)
 			end
@@ -247,9 +245,7 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 		local dynopts = {}
 		
 		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
-			table.insert(dynopts, {statement = "** Press the green button **", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "easy"}})
-			table.insert(dynopts, {statement = "** Press the yellow button **", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "medium"}})
-			table.insert(dynopts, {statement = "** Press the red button **", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "hard"}})
+			table.insert(dynopts, {statement = "** Press the 'A' button **", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "any"}})
 		end
 		
 		-- Return table of options

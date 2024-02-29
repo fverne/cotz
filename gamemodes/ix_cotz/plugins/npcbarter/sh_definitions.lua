@@ -205,7 +205,7 @@ ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner5", {
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
-	barterItem = {"value_currency_euro", 1, {["quantity"] = 15}},
+	barterItem = {"value_currency_euro", 1, {["quantity"] = 25}},
 
 	-- Only one type of item can be required at a time
 	reqItem = {
@@ -219,7 +219,7 @@ ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner6", {
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
-	barterItem = {"value_currency_euro", 1, {["quantity"] = 20}},
+	barterItem = {"value_currency_euro", 1, {["quantity"] = 50}},
 
 	-- Only one type of item can be required at a time
 	reqItem = {

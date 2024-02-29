@@ -1,5 +1,5 @@
-ITEM.name = "Professional Ammo Box"
-ITEM.description= "The box rattles when you shake it."
+ITEM.name = "Experienced Weapon Box"
+ITEM.description= "Feels heavy, has something inside."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4
@@ -13,15 +13,12 @@ ITEM.iconCam = {
 	fov = 13.55
 }
 
-ITEM.upgradeItem = "kit_reward_ammo_tier04"
+ITEM.upgradeItem = "kit_reward_weapon_tier05"
 ITEM.upgradeCost = 45000
 
 ITEM.items = {
 	{
-		{2, "task_reward_ammo_03_small"},
-		{1, "task_reward_ammo_03_aphp"},
-	},
-	{
-		{1, "task_reward_ammo_03"},
+		{3, "task_reward_weapon_04_low"},
+		{1, "task_reward_weapon_04_high"},
 	},
 }

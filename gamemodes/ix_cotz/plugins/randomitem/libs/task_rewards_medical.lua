@@ -61,3 +61,12 @@ ix.randomitems.tables["medical_psy_tier02"] = {
     {250, {"medic_psyheal_2"}},
     {50, {"medic_antipsychotic_3"}},
 }
+
+----Radiation
+ix.randomitems.tables["medical_rad_tier01"] = { 
+    {250, {"medic_antirad_1"}},
+}
+
+ix.randomitems.tables["medical_rad_tier02"] = { 
+    {250, {"medic_antirad_2"}},
+}
