@@ -1,6 +1,5 @@
 ITEM.name = "Cloth Mask"
 ITEM.description = "A piece of cloth to wrap your face with."
-ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_mask_arab.mdl"
 
 ITEM.price = 1000

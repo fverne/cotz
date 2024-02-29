@@ -1,6 +1,5 @@
 ITEM.name = "Arab Steel Helmet"
 ITEM.description = "A very old helmet."
-ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_headgear_arab_helmet.mdl"
 
 ITEM.price = 15000

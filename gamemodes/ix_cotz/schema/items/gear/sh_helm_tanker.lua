@@ -1,6 +1,5 @@
 ITEM.name = "Russian Tank Helmet"
 ITEM.description = "A very old helmet."
-ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_headgear_tanker.mdl"
 
 ITEM.price = 2500

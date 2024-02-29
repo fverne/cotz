@@ -1,6 +1,5 @@
 ITEM.name = "Spartan Helmet"
 ITEM.description = "A high-end helmet with gasmask."
-ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_headgear_sam.mdl"
 
 ITEM.price = 600000

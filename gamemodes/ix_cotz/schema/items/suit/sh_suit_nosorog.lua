@@ -2,7 +2,6 @@ ITEM.name = "Nosorog"
 ITEM.model = "models/kek1ch/exolight_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_radsuit.mdl"
 ITEM.description= "A behemoth exoskeleton suit"
-ITEM.longdesc = "TODO"
 
 ITEM.width = 2
 ITEM.height = 3

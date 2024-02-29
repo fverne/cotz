@@ -1,6 +1,5 @@
 ITEM.name = "PSZ-12"
 ITEM.description = "A high-end helmet with gasmask."
-ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_headgear_psz12.mdl"
 
 ITEM.price = 315000

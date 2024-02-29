@@ -1,6 +1,5 @@
 ITEM.name = "PASGT"
 ITEM.description = "A modern helmet."
-ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_headgear_rus_helmet1c.mdl"
 
 ITEM.price = 100000

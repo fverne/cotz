@@ -1,6 +1,5 @@
 ITEM.name = "Riot Helmet"
 ITEM.description = "A riot helmet"
-ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_headgear_riothelmet2.mdl"
 
 ITEM.price = 18000

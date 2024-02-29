@@ -1,6 +1,5 @@
 ITEM.name = "M50 Gasmask"
 ITEM.description = "A modern gasmask"
-ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_mask_m50.mdl"
 
 ITEM.price = 270000

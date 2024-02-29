@@ -1,6 +1,5 @@
 ITEM.name = "Respirator"
 ITEM.description = "An old gasmask"
-ITEM.longdesc = "TODO"
 ITEM.model = "models/shtokerbox/ground_mask_respirator.mdl"
 ITEM.skin = 1
 
