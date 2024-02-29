@@ -34,6 +34,7 @@ ix.char.RegisterVar("jobs", {
 	bNoDisplay = true,
 })
 
+ix.util.Include("sh_itemjobs_artifacts_pc.lua")
 ix.util.Include("sh_itemjobs_artifacts.lua")
 ix.util.Include("sh_itemjobs_meals.lua")
 ix.util.Include("sh_itemjobs_parts.lua")
