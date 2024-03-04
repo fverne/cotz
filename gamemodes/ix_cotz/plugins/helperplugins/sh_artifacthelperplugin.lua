@@ -1,6 +1,6 @@
-PLUGIN.name = "Artifact Helper Plugin"
-PLUGIN.author = "gumlefar"
-PLUGIN.desc = "Helper functions and hooks for artifacts"
+-- PLUGIN.name = "Artifact Helper Plugin"
+-- PLUGIN.author = "gumlefar"
+-- PLUGIN.desc = "Helper functions and hooks for artifacts"
 
 function PLUGIN:EntityTakeDamage(target, dmginfo)
     -- Capacitor

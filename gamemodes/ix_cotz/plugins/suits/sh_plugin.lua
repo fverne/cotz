@@ -30,7 +30,8 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
 
-		if suit != nil then
+		-- wishes
+		if suit != nil and !target:GetCharacter():GetData("wishes", {})["suit"] then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
 		end
 
@@ -50,7 +51,8 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
 
-		if suit != nil then
+		-- wishes
+		if suit != nil and !target:GetCharacter():GetData("wishes", {})["suit"] then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
 		end
 
@@ -81,7 +83,8 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
 
-		if suit != nil then
+		-- wishes
+		if suit != nil and !target:GetCharacter():GetData("wishes", {})["suit"] then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 50, 0, 100))
 		end
 
@@ -136,6 +139,11 @@ function playerMeta:getFlatBulletRes()
 		end
 	end
 
+	--Wishes adds +2 fbr
+	if char:GetData("wishes", {})["fbsr"] then
+		res = res + 2
+	end
+
 	--BUFFS GO HERE
 
 	return res
@@ -176,6 +184,11 @@ function playerMeta:getFlatSlashRes()
 		end
 	end
 
+	--Wishes adds +2 fbr
+	if char:GetData("wishes", {})["fbsr"] then
+		res = res + 2
+	end
+
 	--BUFFS GO HERE
 
 	return res
@@ -214,6 +227,11 @@ function playerMeta:getFlatAnomalyRes()
 		if (v.far ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
 			res = res + v.far
 		end
+	end
+
+	--Wishes adds +5 far
+	if char:GetData("wishes", {})["far"] then
+		res = res + 5
 	end
 
 	--BUFFS GO HERE

@@ -10,18 +10,20 @@ DIALOGUE.name = "CCON NPC"
 -- to react to progression levels
 
 DIALOGUE.addTopic("GREETING", {
-	response = "What is your wish?",
+	response = "What do you want?",
 	options = {
-		-- "TradeTopic", 
 		"InterestTopic",
-		-- "RepairItems",
-		-- "AboutWorkTopic",
-		-- "GetTaskByDifficulty",
+		"WishTopic",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-
-
+		local char = client:GetCharacter()
+		if (SERVER) then
+			local wishes = char:GetData("wishes", nil)
+			if wishes == nil then
+				char:SetData("wishes", {})
+			end
+		end
 	end
 })
 
@@ -31,16 +33,14 @@ DIALOGUE.addTopic("BackTopic", {
 	options = {
 		-- "TradeTopic", 
 		"InterestTopic",
-		-- "RepairItems",
-		-- "AboutWorkTopic",
-		-- "GetTaskByDifficulty",
+		"WishTopic",
 		"GOODBYE"
 	} --Should be identical to GREETING's options
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "See you!",
-	response = "Take care, STALKER..."
+	statement = "I'll be back.",
+	response = "Take care."
 })
 
 ----------------------------------------------------------------
@@ -48,49 +48,163 @@ DIALOGUE.addTopic("GOODBYE", {
 ----------------------------------------------------------------
 
 DIALOGUE.addTopic("InterestTopic", {
-    statement = "Can you tell me something interesting?",
-    response = "",
+    statement = "Who are you?",
+    response = "Some call me the wishgranter.",
     options = {
-    	"InterestMoreTopic",
         "BackTopic"
     },
     preCallback = function(self, client, target)
         if (CLIENT) then
-            local tbl = {	"The Zone is a dangerous place. Anomalies are everywhere, and all the mutants here are out to get you, I swear.",
-							"Did you know people stash their stuff everywhere? If you have a keen eye, you can find some interesting things.",
-							"We STALKERS, as we call ourselves, are incredibly creative. I don't think any other place in the world has our level of craftiness and ability to survive even the harshest conditions. Who would have thought of using cutlery as makeshift digging tools, for instance?",
-							"I've heard rumours of creatures out there, who can mess you up. Not in the sense that they gnaw and tear you apart, but that they send even the strongest willed men into the deepest hole - if they can make it away. I'm not going out there...",
-							"The mutants in here are, to nobodys surprise, very irradiated. If you ever do plan to eat them, I suggest cooking them first, as it takes away a lot of their radiation.",
-							"I'm still having trouble believing this place is not more well known, but I assume it's because everyone in the surrounding areas are being told not to say a word, and the military are not too keen on rulebreakers around here.",
-							"If you ever encounter something that shakes you up, I suggest smoking a couple of cigarettes. They calm the mind, and help you think clearer."}
-
-            self.response = table.Random(tbl)
-        end
-    end,
-} )
-
-DIALOGUE.addTopic("InterestMoreTopic", {
-    statement = "Very nice, more?",
-    response = "",
-    options = {
-    	"InterestMoreTopic",
-        "BackTopic"
-    },
-    preCallback = function(self, client, target)
-        if (CLIENT) then
-          	local tbl = {	"The Zone is a dangerous place. Anomalies are everywhere, and all the mutants here are out to get you, I swear.",
-							"Did you know people stash their stuff everywhere? If you have a keen eye, you can find some interesting things.",
-							"We STALKERS, as we call ourselves, are incredibly creative. I don't think any other place in the world has our level of craftiness and ability to survive even the harshest conditions. Who would have thought of using cutlery as makeshift digging tools, for instance?",
-							"I've heard rumours of creatures out there, who can mess you up. Not in the sense that they gnaw and tear you apart, but that they send even the strongest willed men into the deepest hole - if they can make it away. I'm not going out there...",
-							"The mutants in here are, to nobodys surprise, very irradiated. If you ever do plan to eat them, I suggest cooking them first, as it takes away a lot of their radiation.",
-							"I'm still having trouble believing this place is not more well known, but I assume it's because everyone in the surrounding areas are being told not to say a word, and the military are not too keen on rulebreakers around here.",
-							"If you ever encounter something that shakes you up, I suggest smoking a couple of cigarettes. They calm the mind, and help you think clearer."}
-
-            self.response = table.Random(tbl)
+            self.response = "..."
         end
     end,
 } )
 
 ----------------------------------------------------------------
 -----------------------END-INTEREST-END-------------------------
+----------------------------------------------------------------
+
+
+----------------------------------------------------------------
+-----------------------START-WISH-START-------------------------
+----------------------------------------------------------------
+
+DIALOGUE.addTopic("WishTopic", {
+	statement = "I want to make a wish.",
+	response = "What is your wish?",
+	IsDynamic = true,
+	options = {
+		"BackTopic"
+	},
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		local items = client:GetCharacter():GetInventory():GetItems()
+		local wishes = client:GetCharacter():GetData("wishes", {})
+		local basecost = 1000000
+		local finalcost = 0
+		
+		if !table.IsEmpty(wishes) then
+			finalcost = table.Count(wishes) * basecost
+		end
+
+        table.insert(dynopts, {statement = "I wish to carry more of the riches of the zone.", topicID = "WishTopic", dyndata = {cost = finalcost, type="carryinc"}})
+		table.insert(dynopts, {statement = "I wish for anomalous skin.", topicID = "WishTopic", dyndata = {cost = finalcost, type="far"}})
+        table.insert(dynopts, {statement = "I wish for kevlar in my skin.", topicID = "WishTopic", dyndata = {cost = finalcost, type="fbsr"}})
+        table.insert(dynopts, {statement = "I wish for my health to improve.", topicID = "WishTopic", dyndata = {cost = finalcost, type="hp"}})
+		table.insert(dynopts, {statement = "I wish for my weapon never to deteriorate ", topicID = "WishTopic", dyndata = {cost = finalcost, type="weapon"}})
+		table.insert(dynopts, {statement = "I wish for my suit never to deteriorate.", topicID = "WishTopic", dyndata = {cost = finalcost, type="suit"}})
+		
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if (client:GetCharacter():GetData("wishes", {})[dyndata.type]) then
+			return "HasWish"
+		end
+
+		-- Return the next topicID
+		if( !client:GetCharacter():HasMoney(dyndata.cost)) then
+			return "NotEnoughMoneyWish"
+		end
+
+		return "ConfirmWish", dyndata
+	end,
+})
+
+
+DIALOGUE.addTopic("ConfirmWish", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	IsDynamic = true,
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if(dyndata) then
+			if (CLIENT) then
+				self.response = string.format("Blessing you with your wish will cost you %s.", ix.currency.Get(dyndata.cost))
+			else
+				target.wishstruct = { dyndata.cost, dyndata.type }
+			end
+		end
+	end,
+	GetDynamicOptions = function(self, client, target)
+
+		local dynopts = {
+			{statement = "Go ahead, bless me.", topicID = "ConfirmWish", dyndata = {accepted = true}},
+			{statement = "Actually, wait.", topicID = "ConfirmWish", dyndata = {accepted = false}},
+		}
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if( SERVER and dyndata.accepted ) then
+			ix.dialogue.notifyMoneyLost(client, target.wishstruct[1])
+			client:GetCharacter():TakeMoney(target.wishstruct[1])
+			local wishes = client:GetCharacter():GetData("wishes", {})
+
+			if table.IsEmpty(wishes) then
+				client:GetCharacter():SetData("wishes", {})
+			end
+
+
+            if target.wishstruct[2] == "carryinc" then
+                -- increase char carryinc by 15
+				wishes["carryinc"] = true
+				-- this auto updates thanks to the weight plugin
+            elseif target.wishstruct[2] == "far" then
+				-- increase far by +5
+				wishes["far"] = true
+				client:RecalculateResistances()
+			elseif target.wishstruct[2] == "fbsr" then
+                -- increase fbr and fsr by +2
+				wishes["fbsr"] = true
+				client:RecalculateResistances()
+            elseif target.wishstruct[2] == "hp" then
+				-- increase maxhp to 125
+				wishes["hp"] = true
+				client:SetMaxHealth(125)
+			elseif target.wishstruct[2] == "weapon" then
+				-- set weapon durability and wear to never decrease
+				wishes["weapon"] = true
+			elseif target.wishstruct[2] == "suit" then
+				-- set suit durability and wear to never decrease     
+				wishes["suit"] = true
+			end
+
+			client:GetCharacter():SetData("wishes", wishes)
+		end
+		if(SERVER)then
+			target.wishstruct = nil
+		end
+		-- Return the next topicID
+		return "BackTopic"
+	end,
+})
+
+
+DIALOGUE.addTopic("NotEnoughMoneyWish", {
+	statement = "",
+	response = "You do not possess the currency for me to bless you with my wish.",
+	options = {
+		"BackTopic"
+	}
+})
+
+
+DIALOGUE.addTopic("HasWish", {
+	statement = "",
+	response = "You have already wished for that.",
+	options = {
+		"BackTopic"
+	}
+})
+----------------------------------------------------------------
+-----------------------END-WISH-END-------------------------
 ----------------------------------------------------------------

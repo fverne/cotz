@@ -35,6 +35,10 @@ function CHAR:GetTotalExtraCarry()
 		end
 	end
 
+	if self:GetData("wishes", {})["carryinc"] then
+		result = result + 15
+	end
+
 	return result
 end
 
