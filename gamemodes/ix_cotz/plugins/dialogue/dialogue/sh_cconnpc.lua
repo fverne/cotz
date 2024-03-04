@@ -85,16 +85,24 @@ DIALOGUE.addTopic("WishTopic", {
 		local finalcost = 0
 		
 		if !table.IsEmpty(wishes) then
-			finalcost = table.Count(wishes) * basecost
+			finalcost = math.Clamp(table.Count(wishes) * basecost, 0, 4000000)
 		end
 
         table.insert(dynopts, {statement = "I wish to carry more of the riches of the zone.", topicID = "WishTopic", dyndata = {cost = finalcost, type="carryinc"}})
 		table.insert(dynopts, {statement = "I wish for anomalous skin.", topicID = "WishTopic", dyndata = {cost = finalcost, type="far"}})
         table.insert(dynopts, {statement = "I wish for kevlar in my skin.", topicID = "WishTopic", dyndata = {cost = finalcost, type="fbsr"}})
         table.insert(dynopts, {statement = "I wish for my health to improve.", topicID = "WishTopic", dyndata = {cost = finalcost, type="hp"}})
-		table.insert(dynopts, {statement = "I wish for my weapon never to deteriorate ", topicID = "WishTopic", dyndata = {cost = finalcost, type="weapon"}})
-		table.insert(dynopts, {statement = "I wish for my suit never to deteriorate.", topicID = "WishTopic", dyndata = {cost = finalcost, type="suit"}})
-		
+
+		local items = client:GetCharacter():GetInventory():GetItems()
+		for k,v in pairs(items) do
+			if v.canRepair and v.isWeapon then
+				table.insert(dynopts, {statement = "I wish for my "..v:GetName().." to never deteriorate.", topicID = "WishTopic", dyndata = {cost = finalcost, type="weapon", itemid = v:GetID()}})
+			end
+			if v.canRepair and v.isBodyArmor then
+				table.insert(dynopts, {statement = "I wish for my "..v:GetName().." never to deteriorate.", topicID = "WishTopic", dyndata = {cost = finalcost, type="suit", itemid = v:GetID()}})
+			end
+		end
+
 		-- Return table of options
 		-- statement : String shown to player
 		-- topicID : should be identical to addTopic id
@@ -126,7 +134,7 @@ DIALOGUE.addTopic("ConfirmWish", {
 			if (CLIENT) then
 				self.response = string.format("Blessing you with your wish will cost you %s.", ix.currency.Get(dyndata.cost))
 			else
-				target.wishstruct = { dyndata.cost, dyndata.type }
+				target.wishstruct = { dyndata.cost, dyndata.type, dyndata.itemid }
 			end
 		end
 	end,
@@ -170,12 +178,15 @@ DIALOGUE.addTopic("ConfirmWish", {
 				-- increase maxhp to 125
 				wishes["hp"] = true
 				client:SetMaxHealth(125)
-			elseif target.wishstruct[2] == "weapon" then
+			elseif target.wishstruct[2] == "weapon" and target.wishstruct[3] then
 				-- set weapon durability and wear to never decrease
-				wishes["weapon"] = true
-			elseif target.wishstruct[2] == "suit" then
-				-- set suit durability and wear to never decrease     
-				wishes["suit"] = true
+				local item = ix.item.instances[target.wishstruct[3]]
+				item:SetData("unlimitedDurability", true)
+			elseif target.wishstruct[2] == "suit" and target.wishstruct[3] then
+				-- set suit durability and wear to never decrease    
+				local item = ix.item.instances[target.wishstruct[3]] 
+				item:SetData("unlimitedDurability", true)
+				-- wishes["suit"] = true
 			end
 
 			client:GetCharacter():SetData("wishes", wishes)

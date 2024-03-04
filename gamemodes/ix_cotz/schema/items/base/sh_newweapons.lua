@@ -392,6 +392,12 @@ function ITEM:Equip(client)
 	if (IsValid(weapon)) then
 		local ammoType = weapon:GetPrimaryAmmoType()
 
+		-- if wish granted
+		if self:GetData("unlimitedDurability", nil) then
+			weapon.WearDamage = 0
+			weapon.DurabilityDamageChance = 0
+		end
+
 		client.carryWeapons[self.weaponCategory] = weapon
 		client:SelectWeapon(weapon:GetClass())
 		client:EmitSound("stalkersound/items/inv_items_wpn_1.ogg")
