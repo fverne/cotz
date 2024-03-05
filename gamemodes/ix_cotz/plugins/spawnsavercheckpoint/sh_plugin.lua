@@ -34,6 +34,13 @@ if (SERVER) then
 		end
 	end
 
+	function PLUGIN:OnCharacterCreated(client, character)
+		-- set savedspawn on charcreate, so people get sent here when they die
+		if ix.plugin.list["simplecrossserver"].homemap == "rp_marsh_cs" then
+			character:SetData("savedspawn", {Vector(-7182.672852, -10445.850586, 4972.751465), Angle(0,0,0), "rp_marsh_cs"})
+		end
+	end
+
 	function PLUGIN:PlayerLoadout(client)
 		local character = client:GetCharacter()
 		
