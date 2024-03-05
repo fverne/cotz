@@ -33,7 +33,7 @@ function PLUGIN:DoPlayerDeath( client, attacker, dmg )
 		local counter = 0
 
 	    for k, item in pairs( items ) do
-			if ix.config.Get("deathWeaponDura") then
+			if ix.config.Get("deathWeaponDura") and !item:GetData("unlimitedDurability") then
 				if item.canRepair and item.isWeapon then
 					item:SetData("durability", math.Clamp( item:GetData("durability") - ix.config.Get("deathWeaponDuraDmg", 5), 0, 100 ) )
 					item:SetData("wear", math.Clamp( item:GetData("wear") - ix.config.Get("deathWeaponWearDmg", 35), 0, 100 ) )
@@ -63,7 +63,7 @@ function PLUGIN:DoDeathDrop( client, deathpos )
 		local counter = 0
 
 	    for k, item in pairs( items ) do
-			if ix.config.Get("deathWeaponDura") then
+			if ix.config.Get("deathWeaponDura") and !item:GetData("unlimitedDurability") then
 				if item.canRepair and item.isWeapon then
 					item:SetData("durability", math.Clamp( item:GetData("durability") - ix.config.Get("deathWeaponDuraDmg", 5), 0, 100 ) )
 					item:SetData("wear", math.Clamp( item:GetData("wear") - ix.config.Get("deathWeaponWearDmg", 35), 0, 100 ) )

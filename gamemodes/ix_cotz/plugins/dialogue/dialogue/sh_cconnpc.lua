@@ -183,10 +183,9 @@ DIALOGUE.addTopic("ConfirmWish", {
 				local item = ix.item.instances[target.wishstruct[3]]
 				item:SetData("unlimitedDurability", true)
 			elseif target.wishstruct[2] == "suit" and target.wishstruct[3] then
-				-- set suit durability and wear to never decrease    
+				-- set suit durability to never decrease    
 				local item = ix.item.instances[target.wishstruct[3]] 
 				item:SetData("unlimitedDurability", true)
-				-- wishes["suit"] = true
 			end
 
 			client:GetCharacter():SetData("wishes", wishes)
