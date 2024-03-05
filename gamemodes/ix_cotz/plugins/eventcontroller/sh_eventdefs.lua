@@ -163,14 +163,14 @@ PLUGIN.eventdefs["rodent1"] = {
 }
 
 
--- PLUGIN.eventdefs["rodent2"] = {
--- 	entities = {
--- 		{"npc_mutant_rodent", 6},
--- 	},
--- 	pdabroadcast = "Rodents are being a menace %s, deal with them with caution, stalker.",
--- 	difficulty = {11, 12, 13},
--- 	lootChance = 15,
--- }
+PLUGIN.eventdefs["rodent2"] = {
+	entities = {
+		{"npc_mutant_rodent", 5},
+	},
+	pdabroadcast = "Rodents are being a menace %s, deal with them with caution, stalker.",
+	difficulty = {11, 12, 13, 21, 22, 23, 31, 32, 33},
+	lootChance = 15,
+}
 
 -- PLUGIN.eventdefs["rodent3"] = {
 -- 	entities = {
@@ -436,7 +436,7 @@ PLUGIN.eventdefs["izlom2"] = {
 	lootChance = 15, 
 }
 
-PLUGIN.eventdefs["izlom2"] = {
+PLUGIN.eventdefs["izlom3"] = {
 	entities = {
 		{"npc_mutant_izlom", 2}, 
 	},
