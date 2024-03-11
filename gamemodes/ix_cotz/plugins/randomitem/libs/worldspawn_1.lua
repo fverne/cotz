@@ -114,7 +114,7 @@ ix.randomitems.tables["worldspawn_1"] = {
   {200, {"hidestash_1"}},
   -- {100, {"hidestash_2"}},
   -- {25, {"hidestash_3"}},
-  {800, {"flashlight"}},
+  -- {800, {"flashlight"}},
   {800, {"compass"}},
   {800, {"gpstracker"}},
   {800, {"geigercounter"}},

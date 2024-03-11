@@ -98,7 +98,7 @@ ix.npctemplates.templates["tutorialnpc"] = {
 	--animgroup 	= 4,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["flashlight"] 	= { nil, 8, SELLANDBUY, 8, 0.10, 2 },
+		-- ["flashlight"] 	= { nil, 8, SELLANDBUY, 8, 0.10, 2 },
 		["headlamp"] 	= { nil, 3, SELLANDBUY, 3, 1, 1 },
 		["geigercounter"] 	= { nil, 5, SELLANDBUY, 5, 1, 1 },
 
@@ -295,7 +295,7 @@ ix.npctemplates.templates["stalkernetnpc"] = {
 	--animgroup 	= 4,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["flashlight"] 	= { nil, 10, SELLANDBUY, 10, 0.1, 2 },
+		-- ["flashlight"] 	= { nil, 10, SELLANDBUY, 10, 0.1, 2 },
 		["headlamp"] 	= { nil, 10, SELLANDBUY, 10, 1, 1 },
 		["geigercounter"] 	= { nil, 5, SELLANDBUY, 5, 1, 1 },
 		["binoculars_5"] 	= { nil, 4, SELLANDBUY, 4, 1, 1 },
