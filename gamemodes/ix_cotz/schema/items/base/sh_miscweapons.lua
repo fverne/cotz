@@ -147,7 +147,9 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	tip = "equipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)
-		item:Unequip(item.player, true)
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Unequipping...", 4, function(ply) 
+			item:Unequip(ply, true)
+		end)
 		return false
 	end,
 	OnCanRun = function(item)
@@ -164,7 +166,9 @@ ITEM.functions.Equip = {
 	tip = "equipTip",
 	icon = "icon16/stalker/equip.png",
 	OnRun = function(item)
-		item:Equip(item.player)
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Unequipping...", 4, function(ply) 
+			item:Equip(ply)
+		end)
 		return false
 	end,
 	OnCanRun = function(item)
