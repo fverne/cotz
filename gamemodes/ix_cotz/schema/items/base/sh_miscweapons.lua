@@ -166,7 +166,7 @@ ITEM.functions.Equip = {
 	tip = "equipTip",
 	icon = "icon16/stalker/equip.png",
 	OnRun = function(item)
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Unequipping...", 4, function(ply) 
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Equipping...", 4, function(ply) 
 			item:Equip(ply)
 		end)
 		return false
