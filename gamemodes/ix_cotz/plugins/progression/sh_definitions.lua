@@ -190,7 +190,7 @@ ix.progression.Register("oldTimerKillIntro", {
 				end)
 
 				-- Needs correct pos/ang set
-				local pos = Vector(-8259.732422, -11667.531250, 5007.531250)
+				local pos = Vector(-8224.509766, -11681.111328, 4944.531250)
 				local ang = Angle(0.000, 90, 0.000)
 				ix.util.SpawnAdvVendor("tradernpc", pos, ang)
 
