@@ -126,6 +126,10 @@ function ix.util.SpawnAdvDupe2Dupe( dupetospawn, uniqueid, offset )
 	ix.plugin.list["advdupeint"]:SpawnDupe(dupetospawn, uniqueid, offset)
 end
 
+function ix.util.SpawnAdvDupe2Dupe( dupetospawn, uniqueid, offset, specificpos )
+	ix.plugin.list["advdupeint"]:SpawnDupe(dupetospawn, uniqueid, offset, specificpos)
+end
+
 function ix.util.DepawnAdvDupe2Dupe( dupetodespawn )
 	ix.plugin.list["advdupeint"]:DespawnDupe(dupetodespawn)
 end

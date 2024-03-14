@@ -16,7 +16,7 @@ ix.config.Add("eventControllerAdvThreshold", 5, "How many events can be active a
 PLUGIN.updaterate = 5
 PLUGIN.noSpaceRate = 450
 
-PLUGIN.spawnratebase = 900
+PLUGIN.spawnratebase = 5400
 PLUGIN.spawnrateplayer = 30
 PLUGIN.spawnradius = 128
 PLUGIN.populateAmount = 5
@@ -191,6 +191,7 @@ if SERVER then
 		local eventpoint = self.eventpoints[table.Random(spawn.allowedPoints)]
 
 		if (!eventpoint) then
+			self.spawntime = CurTime() + self.noSpaceRate
 			return
 		end
 
