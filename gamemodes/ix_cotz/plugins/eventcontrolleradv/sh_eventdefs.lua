@@ -205,7 +205,7 @@
 
 PLUGIN.eventdefs["ShippingCrate_1"] = {
 		key = "ShippingCrate_1",
-		allowedPoints = {"shippingcrate_1"},
+		allowedPoints = {"map1_event_jumppuzzle2", "map1_event_jumppuzzle3", "map1_event_jumppuzzle4", "map1_event_jumppuzzle5"},
 		difficulty = 1,
 		funcPrestart = function(dat)
 			ix.util.SpawnAdvDupe2Dupe("event_shippingcrate_1", "shippingcrate")
@@ -241,10 +241,10 @@ PLUGIN.eventdefs["ShippingCrate_1"] = {
 
 	PLUGIN.eventdefs["Jumppuzzle_1"] = {
 		key = "Jumppuzzle_1",
-		allowedPoints = {"jumppuzzle_1"},
+		allowedPoints = {"map1_event_jumppuzzle1", "map1_event_jumppuzzle2", "map1_event_jumppuzzle3", "map1_event_jumppuzzle4", "map1_event_jumppuzzle5"},
 		difficulty = 1,
 		funcPrestart = function(dat)
-			ix.util.SpawnAdvDupe2Dupe("event_jumppuzzle_1", "jumppuzzle")
+			ix.util.SpawnAdvDupe2Dupe("event_jumppuzzle_1", "jumppuzzle_1", dat.eventpoint[1])
 
 			return dat
 		end,
@@ -268,9 +268,149 @@ PLUGIN.eventdefs["ShippingCrate_1"] = {
 		end,
 		funcEnd = function(dat)
 			timer.Simple(300, function() 
-				ix.util.DepawnAdvDupe2Dupe("jumppuzzle")
+				ix.util.DepawnAdvDupe2Dupe("jumppuzzle_1")
 			end)
 			
+			return dat
+		end
+	}
+
+	PLUGIN.eventdefs["Jumppuzzle_2"] = {
+		key = "Jumppuzzle_2",
+		allowedPoints = {"map1_event_jumppuzzle1", "map1_event_jumppuzzle2", "map1_event_jumppuzzle3", "map1_event_jumppuzzle4", "map1_event_jumppuzzle5"},
+		difficulty = 1,
+		funcPrestart = function(dat)
+			ix.util.SpawnAdvDupe2Dupe("event_jumppuzzle_2", "jumppuzzle_2", dat.eventpoint[1])
+
+			return dat
+		end,
+		funcStart = function(dat)
+
+			return dat
+		end,
+		funcUpdate = function(dat) 
+			return dat
+		end,
+		funcShouldEnd = function(dat)
+			shouldend = true
+			for i,j in pairs (ents.FindInSphere( dat.eventpoint[1] + Vector(0, 0, 400), 512 )) do
+				if(j:GetClass() == "ix_item") then
+					shouldend = false
+					break
+				end
+			end
+
+			return shouldend
+		end,
+		funcEnd = function(dat)
+			timer.Simple(300, function() 
+				ix.util.DepawnAdvDupe2Dupe("jumppuzzle_2")
+			end)
+			
+			return dat
+		end
+	}
+
+	PLUGIN.eventdefs["Jumppuzzle_2"] = {
+		key = "Jumppuzzle_2",
+		allowedPoints = {"map_event_redrazor"},
+		difficulty = 1,
+		funcPrestart = function(dat)
+			ix.util.SpawnAdvDupe2Dupe("event_anomaly_redrazortree", "redrazor_tree")
+			ix.util.SpawnAdvDupe2Dupe("event_anomaly_redrazoranomaly", "redrazor_anomaly")
+
+			return dat
+		end,
+		funcStart = function(dat)
+
+			return dat
+		end,
+		funcUpdate = function(dat) 
+			return dat
+		end,
+		funcShouldEnd = function(dat)
+			shouldend = true
+			for i,j in pairs (ents.FindInSphere( dat.eventpoint[1] + Vector(0, 0, 400), 512 )) do
+				if(j:GetClass() == "ix_item") then
+					shouldend = false
+					break
+				end
+			end
+
+			return shouldend
+		end,
+		funcEnd = function(dat)
+			timer.Simple(300, function() 
+				ix.util.DepawnAdvDupe2Dupe("redrazor_tree")
+				ix.util.DepawnAdvDupe2Dupe("redrazor_anomaly")
+			end)
+			
+			return dat
+		end
+	}
+
+	PLUGIN.eventdefs["map1_event_guardtower"] = {
+		key = "map1_event_guardtower", --Should be identical to the actual key
+		allowedPoints = {"map1_event_guardtower"}
+		difficulty = 1,
+		funcPrestart = function(dat) 
+			ix.util.SpawnAdvDupe2Dupe("map1_event_guardtower", "map1_event_guardtower")
+			return dat
+		end,
+		funcStart = function(dat) 
+			return dat
+		end,
+		funcUpdate = function(dat) 
+			return dat
+		end,
+		funcShouldEnd = function(dat)
+			shouldend = true
+
+			for i,j in pairs (ents.FindInSphere( dat.eventpoint[1], 512 )) do
+				if(j:GetClass() == "ix_item") then
+					shouldend = false
+					break
+				end
+			end
+			return dat
+		end,
+		funcEnd = function(dat)
+			timer.Simple(300, function() 
+				ix.util.DepawnAdvDupe2Dupe("map1_event_guardtower")
+			end)
+			return dat
+		end
+	}
+
+		PLUGIN.eventdefs["map1_event_burner"] = {
+		key = "map1_event_burner", --Should be identical to the actual key
+		allowedPoints = {"map1_event_burner"}
+		difficulty = 1,
+		funcPrestart = function(dat) 
+			ix.util.SpawnAdvDupe2Dupe("event_anomaly_burner", "anomaly_burner")
+			return dat
+		end,
+		funcStart = function(dat) 
+			return dat
+		end,
+		funcUpdate = function(dat) 
+			return dat
+		end,
+		funcShouldEnd = function(dat)
+			shouldend = true
+
+			for i,j in pairs (ents.FindInSphere( dat.eventpoint[1], 512 )) do
+				if(j:GetClass() == "ix_item") then
+					shouldend = false
+					break
+				end
+			end
+			return dat
+		end,
+		funcEnd = function(dat)
+			timer.Simple(300, function() 
+				ix.util.DepawnAdvDupe2Dupe("event_anomaly_burner")
+			end)
 			return dat
 		end
 	}
