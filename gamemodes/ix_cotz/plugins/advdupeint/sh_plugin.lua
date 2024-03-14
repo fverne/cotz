@@ -40,7 +40,7 @@ function PLUGIN:SpawnDupe(dupetospawn, uniqueid, offset, specificpos)
 		ix.AdvDupeIntegration.Constraints = dupe["Constraints"]
 		ix.AdvDupeIntegration.HeadEnt = dupe["HeadEnt"]
 
-		local ents = AdvDupe2.duplicator.Paste( nil, ix.AdvDupeIntegration.Entities, ix.AdvDupeIntegration.Constraints, nil, nil, specificpos or ix.AdvDupeIntegration.HeadEnt.Pos + (offset or Vector(0,0,0)), true )
+		local ents = AdvDupe2.duplicator.Paste( nil, ix.AdvDupeIntegration.Entities, ix.AdvDupeIntegration.Constraints, nil, nil, specificpos + offset or ix.AdvDupeIntegration.HeadEnt.Pos + (offset or Vector(0,0,0)), true )
 
 		local PhysObj
 		for k,v in pairs(ents) do -- Enable motion
