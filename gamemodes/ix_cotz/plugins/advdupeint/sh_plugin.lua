@@ -30,7 +30,7 @@ function PLUGIN:SpawnDupe(dupetospawn, uniqueid, offset, specificpos)
 	if(success)then --This is where the magic happens
 		if (not uniqueid) then uniqueid = dupetospawn end
 
-		if specificpos and offset then specificpos = specificpos + offset
+		if specificpos and offset then specificpos = specificpos + offset end
 
 		ix.AdvDupeIntegration.CreatedEntities[uniqueid] = {}
 
