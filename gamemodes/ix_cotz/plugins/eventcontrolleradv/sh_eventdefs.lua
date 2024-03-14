@@ -557,8 +557,8 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 	}
 
 	PLUGIN.eventdefs["map2_event_blowouttrigger"] = {
-		key = "map2_event_hoarder", --Should be identical to the actual key
-		allowedPoints = {"map2_event_blowout"},
+		key = "map2_event_blowouttrigger", --Should be identical to the actual key
+		allowedPoints = {"map2_event_blowouttrigger"},
 		difficulty = 2,
 		funcPrestart = function(dat) 
 			ix.util.SpawnAdvDupe2Dupe("map2_event_blowouttrigger", "blowouttrigger")
