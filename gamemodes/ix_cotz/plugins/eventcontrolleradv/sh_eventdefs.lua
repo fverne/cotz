@@ -279,7 +279,7 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 		allowedPoints = {"map1_event_jumppuzzle1", "map1_event_jumppuzzle2", "map1_event_jumppuzzle3", "map1_event_jumppuzzle4", "map1_event_jumppuzzle5"},
 		difficulty = 1,
 		funcPrestart = function(dat)
-			ix.util.SpawnAdvDupe2Dupe("event_jumppuzzle_1", "jumppuzzle_1", Vector(0,0,800), dat.eventpoint[1])
+			ix.util.SpawnAdvDupe2Dupe("event_jumppuzzle_1", "jumppuzzle_1", Vector(0,0,400), dat.eventpoint[1])
 
 			return dat
 		end,
