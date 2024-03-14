@@ -31,6 +31,12 @@ PLUGIN.populate = false
 
 local icon = "vgui/icons/news.png"
 
+PLUGIN.MapToDifficultyMap = {
+	["rp_marsh_cs"] = 1,
+	["rp_waystation"] = 2,
+	["rp_pripyat_remaster"] = 3
+}
+
 ix.chat.Register("eventpda", {
 	CanSay = function(self, speaker, text)
 		if IsValid(speaker) then
@@ -177,7 +183,7 @@ if SERVER then
 
 		if self.spawntime > CurTime() then return end
 
-		if #self.currentEvents > ix.config.Get("maxActiveEvents", 5) then 
+		if #self.currentEvents >= ix.config.Get("maxActiveEvents", 5) then 
 			self.spawntime = CurTime() + self.noSpaceRate
 			return 
 		end
@@ -185,9 +191,17 @@ if SERVER then
 		self.spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * #player.GetAll()))
 
 		local spawn = table.Random(self.eventdefs)
-		if (!spawn) then
-			return
+		local n = 0
+		while spawn.difficulty != self.MapToDifficultyMap[game.GetMap()] and n<15 do
+			spawn = table.Random(self.eventdefs)
+			n = n + 1
 		end
+
+		if( n == 15 ) then 
+			self.spawntime = CurTime() + self.noSpaceRate
+			return 
+		end
+
 		local eventpoint = self.eventpoints[table.Random(spawn.allowedPoints)]
 
 		if (!eventpoint) then
