@@ -144,10 +144,13 @@ if SERVER then
 		if self.populate then
 			for i = 1, self.populateAmount do
 				local spawn = table.Random(self.eventdefs)
-				if (!spawn) then
-					print("No spawn found")
-					return
+				local n = 0
+				while spawn.difficulty != self.MapToDifficultyMap[game.GetMap()] and n<15 do
+					spawn = table.Random(self.eventdefs)
+					n = n + 1
 				end
+				if( n == 15 ) then return end
+
 				--if !table.IsEmpty(self.eventpoints) then return end
 				local eventpoint = self.eventpoints[table.Random(spawn.allowedPoints)]
 
