@@ -240,7 +240,7 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 
 	PLUGIN.eventdefs["map2_event_shippingcrate"] = {
 		key = "map2_event_shippingcrate",
-		allowedPoints = {"map2_event_crashedheli1", "map2_event_crashedheli2", "map2_event_crashedheli3", "map2_event_crashedheli4", "map2_event_crashedheli5", "map2_event_crashedheli6"},
+		allowedPoints = {"map2_event_helicrash1", "map2_event_helicrash2", "map2_event_helicrash3", "map2_event_helicrash4", "map2_event_helicrash5", "map2_event_helicrash6"},
 		difficulty = 2,
 		funcPrestart = function(dat)
 			ix.util.SpawnAdvDupe2Dupe("event_shippingcrate_1", "shippingcrate", Vector(0,0,0), dat.eventpoint[1])
@@ -312,7 +312,7 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 
 	PLUGIN.eventdefs["map2_event_jumppuzzle_1"] = {
 		key = "map2_event_jumppuzzle_1",
-		allowedPoints = {"map2_event_crashedheli1", "map2_event_crashedheli2", "map2_event_crashedheli3", "map2_event_crashedheli4", "map2_event_crashedheli5", "map2_event_crashedheli6"},
+		allowedPoints = {"map2_event_helicrash1", "map2_event_helicrash2", "map2_event_helicrash3", "map2_event_helicrash4", "map2_event_helicrash5", "map2_event_helicrash6"},
 		difficulty = 2,
 		funcPrestart = function(dat)
 			ix.util.SpawnAdvDupe2Dupe("event_jumppuzzle_1", "jumppuzzle_1", Vector(0,0,1024), dat.eventpoint[1])
@@ -384,7 +384,7 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 
 	PLUGIN.eventdefs["map2_event_jumppuzzle_2"] = {
 		key = "map2_event_jumppuzzle_2",
-		allowedPoints = {"map2_event_crashedheli1", "map2_event_crashedheli2", "map2_event_crashedheli3", "map2_event_crashedheli4", "map2_event_crashedheli5", "map2_event_crashedheli6"},
+		allowedPoints = {"map2_event_helicrash1", "map2_event_helicrash2", "map2_event_helicrash3", "map2_event_helicrash4", "map2_event_helicrash5", "map2_event_helicrash6"},
 		difficulty = 2,
 		funcPrestart = function(dat)
 			ix.util.SpawnAdvDupe2Dupe("event_jumppuzzle_2", "jumppuzzle_2", Vector(0,0,0), dat.eventpoint[1])
@@ -611,7 +611,7 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 
 	PLUGIN.eventdefs["map2_event_crashedtruck"] = {
 		key = "map2_event_crashedtruck", --Should be identical to the actual key
-		allowedPoints = {"map2_event_crashedheli1", "map2_event_crashedheli2", "map2_event_crashedheli3", "map2_event_crashedheli4", "map2_event_crashedheli5", "map2_event_crashedheli6"},
+		allowedPoints = {"map2_event_helicrash1", "map2_event_helicrash2", "map2_event_helicrash3", "map2_event_helicrash4", "map2_event_helicrash5", "map2_event_helicrash6"},
 		difficulty = 2,
 		funcPrestart = function(dat) 
 			ix.util.SpawnAdvDupe2Dupe("map2_event_crashedtruck", "crashedtruck", Vector(0,0,0), dat.eventpoint[1])
@@ -642,12 +642,12 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 		end
 	}
 
-	PLUGIN.eventdefs["map2_event_crashedheli"] = {
-		key = "map2_event_crashedheli", --Should be identical to the actual key
-		allowedPoints = {"map2_event_crashedheli1", "map2_event_crashedheli2", "map2_event_crashedheli3", "map2_event_crashedheli4", "map2_event_crashedheli5", "map2_event_crashedheli6"},
+	PLUGIN.eventdefs["map2_event_helicrash"] = {
+		key = "map2_event_helicrash", --Should be identical to the actual key
+		allowedPoints = {"map2_event_helicrash1", "map2_event_helicrash2", "map2_event_helicrash3", "map2_event_helicrash4", "map2_event_helicrash5", "map2_event_helicrash6"},
 		difficulty = 2,
 		funcPrestart = function(dat) 
-			ix.util.SpawnAdvDupe2Dupe("map2_event_crashedheli", "crashedheli", Vector(0,0,0), dat.eventpoint[1])
+			ix.util.SpawnAdvDupe2Dupe("map2_event_helicrash", "crashedheli", Vector(0,0,0), dat.eventpoint[1])
 			return dat
 		end,
 		funcStart = function(dat) 
