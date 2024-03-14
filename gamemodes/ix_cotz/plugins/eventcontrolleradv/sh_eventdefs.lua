@@ -589,7 +589,7 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 
 			for i,j in pairs (ents.FindInSphere( dat.eventpoint[1], 512 )) do
 				if(j:GetClass() == "ix_item") then
-					blowouttime = false
+					shouldend = false
 					break
 				end
 			end
@@ -598,11 +598,9 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 		end,
 		funcEnd = function(dat)
 			
-			for k, v in pairs(ents.FindInSphere(dat.eventpoint[1], 500)) do
-				if(v:GetClass() == "ix_vendor_adv")then
-					v:Remove()
-				end
-			end
+			timer.Simple(300, function() 
+				ix.util.DepawnAdvDupe2Dupe("blowouttrigger")
+			end)
 
 			return dat
 		end
