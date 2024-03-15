@@ -41,7 +41,7 @@ function ENT:Think()
         for k, v in ipairs(ents.FindInBox(self:GetPos() + Vector(min.x + 100, min.y + 100, -10), self:GetPos() + Vector(max.x - 100, max.y - 100, max.z - 100))) do
             if v:IsPlayer() and v:Alive() and v:IsValid() then
                 local b = DamageInfo()
-                b:SetDamage(5)
+                b:SetDamage(3)
                 b:SetDamageType(DMG_ACID)
                 b:SetAttacker(self.Entity)
                 b:SetInflictor(self.Entity)

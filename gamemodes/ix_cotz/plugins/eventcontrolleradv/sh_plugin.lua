@@ -16,7 +16,7 @@ ix.config.Add("eventControllerAdvThreshold", 5, "How many events can be active a
 PLUGIN.updaterate = 5
 PLUGIN.noSpaceRate = 450
 
-PLUGIN.spawnratebase = 900
+PLUGIN.spawnratebase = 5400
 PLUGIN.spawnrateplayer = 30
 PLUGIN.spawnradius = 128
 PLUGIN.populateAmount = 5
@@ -30,6 +30,12 @@ PLUGIN.updatetime = CurTime() + 30
 PLUGIN.populate = false
 
 local icon = "vgui/icons/news.png"
+
+PLUGIN.MapToDifficultyMap = {
+	["rp_marsh_cs"] = 1,
+	["rp_waystation"] = 2,
+	["rp_pripyat_remaster"] = 3
+}
 
 ix.chat.Register("eventpda", {
 	CanSay = function(self, speaker, text)
@@ -138,10 +144,13 @@ if SERVER then
 		if self.populate then
 			for i = 1, self.populateAmount do
 				local spawn = table.Random(self.eventdefs)
-				if (!spawn) then
-					print("No spawn found")
-					return
+				local n = 0
+				while spawn.difficulty != self.MapToDifficultyMap[game.GetMap()] and n<15 do
+					spawn = table.Random(self.eventdefs)
+					n = n + 1
 				end
+				if( n == 15 ) then return end
+
 				--if !table.IsEmpty(self.eventpoints) then return end
 				local eventpoint = self.eventpoints[table.Random(spawn.allowedPoints)]
 
@@ -177,7 +186,7 @@ if SERVER then
 
 		if self.spawntime > CurTime() then return end
 
-		if #self.currentEvents > ix.config.Get("maxActiveEvents", 5) then 
+		if #self.currentEvents >= ix.config.Get("maxActiveEvents", 5) then 
 			self.spawntime = CurTime() + self.noSpaceRate
 			return 
 		end
@@ -185,12 +194,21 @@ if SERVER then
 		self.spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * #player.GetAll()))
 
 		local spawn = table.Random(self.eventdefs)
-		if (!spawn) then
-			return
+		local n = 0
+		while spawn.difficulty != self.MapToDifficultyMap[game.GetMap()] and n<15 do
+			spawn = table.Random(self.eventdefs)
+			n = n + 1
 		end
+
+		if( n == 15 ) then 
+			self.spawntime = CurTime() + self.noSpaceRate
+			return 
+		end
+
 		local eventpoint = self.eventpoints[table.Random(spawn.allowedPoints)]
 
 		if (!eventpoint) then
+			self.spawntime = CurTime() + self.noSpaceRate
 			return
 		end
 
