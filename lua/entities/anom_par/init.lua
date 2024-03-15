@@ -47,6 +47,8 @@ function ENT:StartTouch(ent)
 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
 			ParticleEffect("wick_gore_bloodsplash_new" , ent:GetPos(), Angle( 0, 0, 0 ) )
 			ent:Remove()
+		elseif ent.ixItemID and ix.item.instances[ent.ixItemID].isWeapon then
+			ent:Remove()
 		end
 		--util.BlastDamage( self, self, self:GetPos(), 100, 50)
 		--ent:TakeDamage(50, self, self)

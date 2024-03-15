@@ -55,6 +55,8 @@ function ENT:StartTouch(ent)
 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
 			ParticleEffect("wick_gore_bloodsplash_new" , ent:GetPos(), Angle( 0, 0, 0 ) )
 			ent:Remove()
+		elseif ent.ixItemID and ix.item.instances[ent.ixItemID].isWeapon then
+			ent:Remove()
 		end
 	end)	
 	timer.Create("kisel_recharge", 0.5, 0, function()
