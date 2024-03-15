@@ -68,6 +68,9 @@ function ENT:StartTouch(ent)
 		--util.BlastDamage( self, self, self:GetPos(), 100, 110)
 		ent:TakeDamage(70, self, self)
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
+			local bodyexplodesounds = {"anomaly/anomaly_body_tear_1.wav", "anomaly/anomaly_body_tear_2.wav"}
+			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
+			ParticleEffect("wick_gore_bloodsplash_new" , ent:GetPos(), Angle( 0, 0, 0 ) )
 			ent:Remove()
 		end
 		self:StopParticles()

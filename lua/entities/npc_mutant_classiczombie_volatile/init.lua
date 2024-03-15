@@ -171,15 +171,7 @@ function ENT:STALKERNPCOnDeath()
 	self:EmitSound("npc/antlion_grub/squashed.wav")
 	self:EmitSound("weapons/mortar/mortar_explode1.wav")
 
-	local effectdata = EffectData()
-	effectdata:SetOrigin( self:GetPos() + Vector(0,0,32) )
-	effectdata:SetAngles( self:GetUp():Angle() )
-	effectdata:SetMagnitude( 1 )
-	effectdata:SetScale( 4 )
-	effectdata:SetRadius( 2 )
-	effectdata:SetColor( 0 )
-	effectdata:SetFlags( 0 )
-	util.Effect( "StriderBlood", effectdata, true, true )
+	ParticleEffect("wick_gore_bloodsplash_new" , self:GetPos(), Angle( 0, 0, 0 ) )
 
 	for _,v in pairs(ents.FindInSphere(self:GetPos(),256)) do
 		if (v == self or (!v:IsNPC() and !v:IsPlayer()) or !v:Alive()) then continue end
