@@ -23,7 +23,7 @@ if (SERVER) then
 	end
 
 	function ENT:Use(activator)
-		activator:GetCharacter():SetData("savedspawn", {self:GetPos() + Vector(0,0,24), Angle(), game.GetMap()})
+		activator:GetCharacter():SetData("savedspawn", {self:GetPos() + Vector(0,0,20), Angle(), game.GetMap()})
         activator:Notify("Spawn Set")
 	end
 

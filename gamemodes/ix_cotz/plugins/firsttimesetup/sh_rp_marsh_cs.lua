@@ -1814,7 +1814,10 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
       { Vector(-2121.7707519531,3706.2978515625,69.000061035156) , "at the pumping station" , 12 }, 
       { Vector(-1512.5050048828,4916.8037109375,69) , "near the pumping station" , 12 }, 
       { Vector(-2144.01171875,5321.3637695312,48.663089752197) , "near the pumping station" , 12 }, 
-
+      { Vector(2076.9938964844,-9048.3740234375,319.12362670898) , "at the southeastern watchtower" , 14 }, 
+      { Vector(2162.9873046875,-9162.0751953125,639.03649902344) , "at the southeastern watchtower" , 14 }, 
+      { Vector(-7585.8173828125,-190.15098571777,328.37362670898) , "at the southern guardtower" , 14 }, 
+      { Vector(-7705.2236328125,-66.400329589844,615.28649902344) , "at the southern guardtower" , 14 }, 
     },
     ["eventcontrolleradv"] = {
 
@@ -2551,6 +2554,27 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
       angles = Angle(0,264.47961425781,0),
     },
 
+    --Bedrolls
+    {-- Town
+      class = "ix_spawnsaver",
+      position = Vector(-6992.7690429688,-10443.810546875,4940.2446289063),
+      angles = Angle(0,-178.87800598145,0),
+    },
+    { -- To Waystation
+      class = "ix_spawnsaver",
+      position = Vector(-4802.91015625,12965.918945313,7.9792728424072),
+      angles = Angle(0,61.895454406738,0),
+    },
+    { -- Bunker
+      class = "ix_spawnsaver",
+      position = Vector(3049.0524902344,9019.1806640625,-1084.7053222656),
+      angles = Angle(0,270.71881103516,0),
+    },
+    { -- Pumping Station
+      class = "ix_spawnsaver",
+      position = Vector(570.5302734375,1211.6409912109,222.2946472168),
+      angles = Angle(0,268.24621582031,0),
+    },
   }
 }
 

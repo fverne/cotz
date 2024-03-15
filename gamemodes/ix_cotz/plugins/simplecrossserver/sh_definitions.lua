@@ -19,8 +19,8 @@ PLUGIN.mapdata["rp_marsh_cs"].serverip = "80.161.55.20:27015"
 PLUGIN.mapdata["rp_marsh_cs"].loadzones = PLUGIN.mapdata["rp_marsh_cs"].loadzones or {}
 
 PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromoutskirts"] = {
-	pos = Vector(-4881.565918, 12782.575195, 71.436020), --edit me
-	ang = Angle(0, -180, 0.000000), --edit me
+	pos = Vector(-4887.388184, 12867.651367, 68.928833), --edit me
+	ang = Angle(0, -90, 0.000000), --edit me
 	desc = "The area ahead leads to the swamps."
 }
 

@@ -1246,7 +1246,7 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_ammo_tier01"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 15
-tempJob.moneyReward = {500, 700}
+tempJob.moneyReward = {600, 800}
 tempJob.categories = {"mutantkilleasy"}
 
 ix.jobs.register(tempJob, "killTarksLow")
@@ -1264,7 +1264,7 @@ tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_ammo_tier01"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 20
-tempJob.moneyReward = {1200, 1500}
+tempJob.moneyReward = {1500, 1700}
 tempJob.categories = {"mutantkilleasy"}
 
 ix.jobs.register(tempJob, "killTarksMid")
@@ -1278,11 +1278,11 @@ tempJob.desc = "%d tarks."
 tempJob.icon = "propic/event/mutanthunt"
 tempJob.tier = 1
 tempJob.listenTrigger = "tarkKilled"
-tempJob.numberRec = 4
+tempJob.numberRec = 3
 tempJob.reward = {{"kit_reward_ammo_tier01"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 25
-tempJob.moneyReward = {1900, 2500}
+tempJob.moneyReward = {2400, 2700}
 tempJob.categories = {"mutantkilleasy"}
 
 ix.jobs.register(tempJob, "killTarksHigh")

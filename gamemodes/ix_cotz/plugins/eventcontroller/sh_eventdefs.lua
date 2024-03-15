@@ -31,6 +31,24 @@
 --loot: like items, except each item has a chance to spawn
 
 
+-- Explananation for difficulties:
+-- First integer = Map
+-- 1 = Swamps
+-- 2 = Waystation
+-- 3 = Pripyat
+-- Second integer = location on map
+-- 1 = Close to spawn in wilderness
+-- 2 = Far from spawn in wilderness
+-- 3 = In previous populated areas, such as buildings, intended for humanoid npcs
+-- 4 = Sniper spots
+-- 5 = Underground
+-- Examples:
+-- 12 - Swamps, far from spawn
+-- 14 - Swamps, sniper spot (guard tower for instance)
+-- 23 - Waystation, inside a building
+-- 33 - Pripyat, inside a building
+-- 35 - Pripyat, underground
+
 --[[-------------------------------------------------------------------------
 dogs
 ---------------------------------------------------------------------------]]
@@ -91,7 +109,7 @@ PLUGIN.eventdefs["bloodsucker1"] = {
 		{"npc_mutant_bloodsucker", 1}, 
 	},
 	pdabroadcast = "There's been sightings of a bloodsucker %s, any stalkers brave enough to take them out?",
-	difficulty = {12, 13, 21, 23},
+	difficulty = {12, 13, 21, 23, 25},
 	lootChance = 10,
 }
 
@@ -100,7 +118,7 @@ PLUGIN.eventdefs["bloodsucker2"] = {
 		{"npc_mutant_bloodsucker", 2}, 
 	},
 	pdabroadcast = "There's been sightings of a couple bloodsuckers %s, any stalkers brave enough to take them out?",
-	difficulty = {21, 22, 23},
+	difficulty = {21, 22, 23, 25},
 	lootChance = 10, 
 }
 
@@ -114,7 +132,7 @@ PLUGIN.eventdefs["bloodsucker3"] = {
 	},
 	
 	pdabroadcast = "A group of stalkers %s has been massacred by a small pack of bloodsuckers, be careful, stalkers.",
-	difficulty = {23, 31},
+	difficulty = {23, 25, 31, 33, 35},
 	lootChance = 15, 
 }
 
@@ -128,7 +146,7 @@ PLUGIN.eventdefs["bloodsucker4"] = {
 	},
 	
 	pdabroadcast = "A pack of bloodsuckers has been sighted %s, proceed with caution, stalker.",
-	difficulty = {31, 32},
+	difficulty = {32, 33, 35},
 	lootChance = 20, 
 }
 
@@ -140,19 +158,19 @@ PLUGIN.eventdefs["rodent1"] = {
 		{"npc_mutant_rodent", 4},
 	},
 	pdabroadcast = "There is a bit of a mice problem %s, exterminate them stalker.",
-	difficulty = {11, 12, 13, 23, 31},
+	difficulty = {11, 12, 13, 21, 22, 23, 31, 32, 33},
 	lootChance = 10,
 }
 
 
--- PLUGIN.eventdefs["rodent2"] = {
--- 	entities = {
--- 		{"npc_mutant_rodent", 6},
--- 	},
--- 	pdabroadcast = "Rodents are being a menace %s, deal with them with caution, stalker.",
--- 	difficulty = {11, 12, 13},
--- 	lootChance = 15,
--- }
+PLUGIN.eventdefs["rodent2"] = {
+	entities = {
+		{"npc_mutant_rodent", 5},
+	},
+	pdabroadcast = "Rodents are being a menace %s, deal with them with caution, stalker.",
+	difficulty = {11, 12, 13, 21, 22, 23, 31, 32, 33},
+	lootChance = 15,
+}
 
 -- PLUGIN.eventdefs["rodent3"] = {
 -- 	entities = {
@@ -418,7 +436,7 @@ PLUGIN.eventdefs["izlom2"] = {
 	lootChance = 15, 
 }
 
-PLUGIN.eventdefs["izlom2"] = {
+PLUGIN.eventdefs["izlom3"] = {
 	entities = {
 		{"npc_mutant_izlom", 2}, 
 	},
@@ -469,7 +487,7 @@ PLUGIN.eventdefs["burer1"] = {
 		{"npc_mutant_burer", 1}, 
 	},
 	pdabroadcast = "A burer has been spotted %s! Watch out for any figure in a trenchcoat, stalker.",
-	difficulty = {23, 33},
+	difficulty = {25, 35},
 	lootChance = 10, 
 }
 
@@ -479,7 +497,7 @@ PLUGIN.eventdefs["burer2"] = {
 		{"npc_mutant_classiczombie", 2}, 
 	},
 	pdabroadcast =  "A burer has been spotted %s! Watch out for any figure in a trenchcoat, stalker.",
-	difficulty = {23, 33},
+	difficulty = {25, 35},
 	lootChance = 15, 
 }
 
@@ -488,7 +506,7 @@ PLUGIN.eventdefs["burer3"] = {
 		{"npc_mutant_burer", 3}, 
 	},
 	pdabroadcast = "A trio of burers has been spotted %s! Avoid any hooded figures, stalkers.",
-	difficulty = {33},
+	difficulty = {35},
 	lootChance = 20, 
 }
 
@@ -566,7 +584,7 @@ PLUGIN.eventdefs["snork1"] = {
 		{"npc_mutant_snork", 1}, 
 	},
 	pdabroadcast = "A snork has been sneaking about %s, careful stalker.",
-	difficulty = {13},
+	difficulty = {13, 23, 25, 33},
 	lootChance = 10, 
 }
 
@@ -575,7 +593,7 @@ PLUGIN.eventdefs["snork2"] = {
 		{"npc_mutant_snork", 2}, 
 	},
 	pdabroadcast = "A couple of snorks have been heard growling %s, careful stalker.",
-	difficulty = {23, 33},
+	difficulty = {23, 25, 33, 35},
 	lootChance = 15, 
 }
 
@@ -584,7 +602,7 @@ PLUGIN.eventdefs["snork3"] = {
 		{"npc_mutant_snork", 3}, 
 	},
 	pdabroadcast = "A small group of snorks have been seen prowling %s, careful stalker.",
-	difficulty = {23, 33},
+	difficulty = {23, 25, 33, 35},
 	lootChance = 20, 
 }
 
@@ -626,7 +644,7 @@ PLUGIN.eventdefs["zombies3"] = {
 		{"npc_mutant_classiczombie", 3}, 
 	},
 	pdabroadcast = "A small group of zombies have appeared %s, watch yourself, stalker.",
-	difficulty = {12, 13},
+	difficulty = {12, 13, 25},
 	lootChance = 15, 
 }
 
@@ -638,7 +656,7 @@ PLUGIN.eventdefs["zombies4"] = {
 		{"npc_human_z_rookie_rifleman", 1},
 	},
 	pdabroadcast = "There is a group of zombies %s, and has occupied it. Tread with caution, stalker.",
-	difficulty = {21, 23},
+	difficulty = {21, 23, 25},
 	lootChance = 20, 
 }
 
@@ -677,7 +695,7 @@ PLUGIN.eventdefs["spider1"] = {
 		{"npc_mutant_spider", 1},
 	},
 	pdabroadcast = "Arachnid has been detected %s.",
-	difficulty = {12},
+	difficulty = {12, 21, 23, 25},
 }
 
 PLUGIN.eventdefs["spider2"] = {
@@ -685,7 +703,7 @@ PLUGIN.eventdefs["spider2"] = {
 		{"npc_mutant_spider", 2},
 	},
 	pdabroadcast = "Arachnid creatures spotted %s. Take care, stalker.",
-	difficulty = {21, 22},
+	difficulty = {21, 22, 23, 25},
 }
 
 PLUGIN.eventdefs["spider3"] = {
@@ -693,7 +711,7 @@ PLUGIN.eventdefs["spider3"] = {
 		{"npc_mutant_spider", 3},
 	},
 	pdabroadcast = "A hunting pack of arachnid creatures spotted %s. Take care, stalker.",
-	difficulty = {21, 22, 33},
+	difficulty = {21, 22, 32, 33, 35},
 }
 
 --[[-------------------------------------------------------------------------
@@ -736,7 +754,7 @@ PLUGIN.eventdefs["controllerfast1"] = {
 		{"npc_mutant_controller_fast", 1},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {21, 22, 23, 31},
+	difficulty = {21, 22, 23, 25, 31, 33, 35},
 }
 
 PLUGIN.eventdefs["controllerfast2"] = {
@@ -744,7 +762,7 @@ PLUGIN.eventdefs["controllerfast2"] = {
 		{"npc_mutant_controller_fast", 2},
 	},
 	pdabroadcast = "Getting multiple strange readings %s... Be very cautious, stalker.",
-	difficulty = {23, 31, 32, 33},
+	difficulty = {23, 31, 32, 33, 35},
 }
 
 
@@ -758,7 +776,7 @@ PLUGIN.eventdefs["controller1"] = {
 		{"npc_human_z_rookie_rifleman", 2},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {23, 33},
+	difficulty = {25, 33, 35},
 }
 
 --[[-------------------------------------------------------------------------
@@ -769,7 +787,7 @@ PLUGIN.eventdefs["controllerelectric1"] = {
 		{"npc_mutant_controller_electro", 1},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {32, 33},
+	difficulty = {32, 33, 35},
 }
 
 --[[-------------------------------------------------------------------------
@@ -780,7 +798,7 @@ PLUGIN.eventdefs["karlik1"] = {
 		{"npc_mutant_karlik", 1},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {32, 33},
+	difficulty = {32},
 }
 
 PLUGIN.eventdefs["karlik2"] = {
@@ -788,7 +806,7 @@ PLUGIN.eventdefs["karlik2"] = {
 		{"npc_mutant_karlik", 2},
 	},
 	pdabroadcast = "Getting multiple strange readings %s... Be very cautious, stalker.",
-	difficulty = {32, 33},
+	difficulty = {32},
 }
 
 --[[-------------------------------------------------------------------------
@@ -849,7 +867,7 @@ PLUGIN.eventdefs["zombieradio1"] = {
 		{"npc_mutant_classiczombie", 3},
 	},
 	pdabroadcast = "Zombies detected %s... Getting some high radiation readings too. Be careful, stalker.",
-	difficulty = {12, 13, 21, 23, 31, 33},
+	difficulty = {12, 13, 21, 23, 25, 31, 33, 35},
 }
 
 PLUGIN.eventdefs["zombievolatile1"] = {
@@ -858,7 +876,7 @@ PLUGIN.eventdefs["zombievolatile1"] = {
 		{"npc_mutant_classiczombie", 3},
 	},
 	pdabroadcast = "Zombies detected %s... Getting some high radiation readings too. Be careful, stalker.",
-	difficulty = {21, 22, 23, 31, 33},
+	difficulty = {21, 22, 23, 25, 31, 33, 35},
 }
 
 PLUGIN.eventdefs["skeleton1"] = {
@@ -866,7 +884,7 @@ PLUGIN.eventdefs["skeleton1"] = {
 		{"npc_mutant_skeleton", 2},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {23, 33},
+	difficulty = {23, 25, 33, 35},
 }
 
 PLUGIN.eventdefs["skeleton2"] = {
@@ -875,7 +893,7 @@ PLUGIN.eventdefs["skeleton2"] = {
 		{"npc_mutant_classiczombie", 3},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {23, 33},
+	difficulty = {23, 25, 33, 35},
 }
 
 
@@ -907,7 +925,7 @@ PLUGIN.eventdefs["bandit1"] = {
 		{"npc_human_bandit_shotgunner", 1}
 	},
 	pdabroadcast = "Bandits spotted %s. Take care.",
-	difficulty = {12, 13},
+	difficulty = {12, 13, 21, 22, 23},
 }
 
 PLUGIN.eventdefs["bandit2"] = {
@@ -917,7 +935,7 @@ PLUGIN.eventdefs["bandit2"] = {
 		{"npc_human_bandit_rifleman", 2},
 	},
 	pdabroadcast = "Bandits spotted %s. Take care.",
-	difficulty = {12, 13},
+	difficulty = {12, 13, 21, 22, 23},
 }
 
 PLUGIN.eventdefs["bandit3"] = {
@@ -926,7 +944,7 @@ PLUGIN.eventdefs["bandit3"] = {
 		{"npc_human_bandit_rifleman", 2},
 	},
 	pdabroadcast = "Bandits spotted %s. Take care.",
-	difficulty = {12, 13},
+	difficulty = {12, 13, 21, 22, 23, 25},
 }
 
 PLUGIN.eventdefs["banditsniper"] = {
@@ -934,7 +952,7 @@ PLUGIN.eventdefs["banditsniper"] = {
 		{"npc_human_bandit_sniper", 1},		
 	},
 	pdabroadcast = "Bandit sniper spotted %s. Take care.",
-	difficulty = {12},
+	difficulty = {14, 24},
 }
 
 PLUGIN.eventdefs["merc1"] = {
@@ -943,7 +961,7 @@ PLUGIN.eventdefs["merc1"] = {
 		{"npc_human_merc_rifleman", 1},	
 	},
 	pdabroadcast = "Mercenaries spotted %s. Take care.",
-	difficulty = {21, 22, 23},
+	difficulty = {21, 22, 23, 25, 31, 33},
 }
 
 PLUGIN.eventdefs["merc2"] = {
@@ -953,7 +971,7 @@ PLUGIN.eventdefs["merc2"] = {
 		{"npc_human_merc_rifleman", 2},	
 	},
 	pdabroadcast = "Mercenaries spotted %s. Take care.",
-	difficulty = {21, 22, 23},
+	difficulty = {21, 22, 23, 25, 31, 33},
 }
 
 PLUGIN.eventdefs["merc3"] = {
@@ -962,15 +980,15 @@ PLUGIN.eventdefs["merc3"] = {
 		{"npc_human_merc_rifleman", 2},	
 	},
 	pdabroadcast = "Mercenaries spotted %s. Take care.",
-	difficulty = {21, 22, 23},
+	difficulty = {21, 22, 23, 25, 31, 33},
 }
 
 PLUGIN.eventdefs["mercsniper"] = {
 	entities = {
 		{"npc_human_merc_sniper", 1},	
 	},
-	pdabroadcast = "Mercenary sniper %s. Take care.",
-	difficulty = {22},
+	pdabroadcast = "Mercenary sniper spotted %s. Take care.",
+	difficulty = {24},
 }
 
 PLUGIN.eventdefs["mili1"] = {
@@ -979,7 +997,7 @@ PLUGIN.eventdefs["mili1"] = {
 		{"npc_human_mili_pistolman", 1},	
 	},
 	pdabroadcast = "Military patrol spotted %s. Take good care.",
-	difficulty = {23, 31, 32, 33},
+	difficulty = {31, 32, 33, 35},
 }
 
 PLUGIN.eventdefs["mili2"] = {
@@ -989,7 +1007,7 @@ PLUGIN.eventdefs["mili2"] = {
 		{"npc_human_mili_rifleman", 2},	
 	},
 	pdabroadcast = "Military patrol spotted %s. Take good care.",
-	difficulty = {31, 32, 33},
+	difficulty = {31, 32, 33, 35},
 }
 
 PLUGIN.eventdefs["mili3"] = {
@@ -998,13 +1016,13 @@ PLUGIN.eventdefs["mili3"] = {
 		{"npc_human_mili_rifleman", 2},	
 	},
 	pdabroadcast = "Military patrol spotted %s. Take good care.",
-	difficulty = {31, 32, 33},
+	difficulty = {31, 32, 33, 35},
 }
 
 -- PLUGIN.eventdefs["milisniper"] = {
 -- 	entities = {
--- 		{"npc_human_mili_rifleman", 1},	
+-- 		{"npc_human_mili_rifleman", 1}, -- Create real entity.
 -- 	},
 -- 	pdabroadcast = "Military sniper spotted %s. Take good care.",
--- 	difficulty = {32},
+-- 	difficulty = {34}, --??
 -- }
