@@ -145,6 +145,7 @@ if (SERVER) then
                 self:ChangePhase(3, 0)
                 ix.plugin.list["anomalycontroller"]:cleanAnomalies()
                 ix.plugin.list["anomalycontroller"]:spawnAnomalies()
+                ix.plugin.list["anomalycontroller"]:trySpawnArtifacts()
 
                 if ix.config.Get("blowoutRemoveNPCs", false) then
                     for k, v in pairs(ents.GetAll()) do
@@ -213,7 +214,7 @@ if (SERVER) then
             end
 
             if self.BlowoutVars.NextAmbientSound == 0 then
-                self.BlowoutVars.NextAmbientSound = CT + 5
+                self.BlowoutVars.NextAmbientSound = CT + 15
             elseif CT > self.BlowoutVars.NextAmbientSound then
                 self.BlowoutVars.NextAmbientSound = CT + math.random(15, 20)
                 self:PlaySoundOnClient("ambient")
