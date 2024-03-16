@@ -1820,7 +1820,14 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
       { Vector(-7705.2236328125,-66.400329589844,615.28649902344) , "at the southern guardtower" , 14 }, 
     },
     ["eventcontrolleradv"] = {
-
+      ["map1_event_guardtower"] = { Vector(6563.697265625,960.68572998047,297.20001220703) , "at the guardtower in the burnt out village" }, 
+      ["map1_event_jumppuzzle5"] = { Vector(-320.43939208984,8878.845703125,69.15470123291) , "near the fishing hamlet" }, 
+      ["map1_event_jumppuzzle1"] = { Vector(-1276.5749511719,2024.9798583984,43.126598358154) , "near the pumping station" }, 
+      ["map1_event_redrazor"] = { Vector(-2830.9836425781,-1976.6026611328,222.30819702148) , "in the grove" }, 
+      ["map1_event_jumppuzzle2"] = { Vector(-4742.4301757812,-5266.2670898438,69) , "southern wilderness" }, 
+      ["map1_event_jumppuzzle4"] = { Vector(8653.44140625,7428.4145507812,69) , "near the burnt village" }, 
+      ["map1_event_jumppuzzle3"] = { Vector(7855.7890625,-2530.90625,67.775001525879) , "near the church hill" }, 
+      ["map1_event_burner"] = { Vector(12700.614257812,-2585.1296386719,146.27520751953) , "at the claw anomaly" },       
     },
     ["hidestashspawner"] = {
       { Vector(-683.80651855469,-11031.477539063,84.522201538086) , "behind the old stove in the southeastern village" }, 
