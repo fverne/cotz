@@ -799,7 +799,7 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 		allowedPoints = {"map3_event_open1", "map3_event_open2", "map3_event_open3", "map3_event_open4", "map3_event_open5"},
 		difficulty = 3,
 		funcPrestart = function(dat) 
-			ix.util.SpawnAdvDupe2Dupe("map2_event_helicrash", "helicrash")
+			ix.util.SpawnAdvDupe2Dupe("map2_event_helicrash", "helicrash", Vector(0,0,48), dat.eventpoint[1])
 
 			dat.timeout = os.time() + 900
 
