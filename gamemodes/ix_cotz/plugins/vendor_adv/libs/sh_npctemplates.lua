@@ -642,20 +642,15 @@ ix.npctemplates.templates["raritynpc"] = {
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 		["500magnum"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
-		["500magnumap"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
-		["500magnumhp"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
 		["50ae"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
-		["50aeap"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
-		["50aehp"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
 		["57x28mm"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
-		["57x28mmap"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
-		["57x28mmhp"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
-		["9x21ap"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
-		["9x21hp"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["93x64"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["127x55"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["145x114"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["700nitro"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
 		["338lapua"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
-		["338lapuaap"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
-		["338lapuahp"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
 		["12gaugemg"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
+		["12gaugedt"] 	= { nil, 6, SELLANDBUY, 6, 2, 6 },
 	},
 }
 
