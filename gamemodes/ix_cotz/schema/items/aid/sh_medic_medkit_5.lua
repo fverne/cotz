@@ -37,8 +37,8 @@ ITEM.functions.use = {
 		ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it.", false)
 
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Treating Wounds", 8, function(player) 
-			player:AddBuff("buff_slowheal", 60, { amount = item.restore/60 })
-			player:AddBuff("buff_radiationremoval", 60, { amount = item.radrem/120 })
+			player:AddBuff("buff_slowheal", 60*5, { amount = item.restore/60 })
+			player:AddBuff("buff_radiationremoval", 60*5, { amount = item.radrem/120 })
 			--player:HealBleeding(80)
 		end)
 
@@ -69,8 +69,8 @@ ITEM.functions.usetarget = {
 		if (IsValid(target) and target:IsPlayer()) then
 			ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it on "..target:Name()..".", false)
 			ix.util.PlayerPerformBlackScreenAction(item.player, "Treating "..target:Name().."'s Wounds", 4, function(player) 
-				target:AddBuff("buff_slowheal", 60, { amount = item.restore/60 })
-				target:AddBuff("buff_radiationremoval", 60, { amount = item.radrem/120 })
+				target:AddBuff("buff_slowheal", 60*5, { amount = item.restore/60 })
+				target:AddBuff("buff_radiationremoval", 60*5, { amount = item.radrem/120 })
 			end)
 			
 			
@@ -107,8 +107,8 @@ ITEM.functions.usetarget = {
 				item.player:Notify( "You revived "..target.player:GetName() )
 				target.player:Notify( "You were revived by "..item.player:GetName() )
 
-				target.player:AddBuff("buff_slowheal", 60, { amount = item.restore/60 })
-				target.player:AddBuff("buff_radiationremoval", 60, { amount = item.radrem/120 })
+				target.player:AddBuff("buff_slowheal", 60*5, { amount = item.restore/60 })
+				target.player:AddBuff("buff_radiationremoval", 60*5, { amount = item.radrem/120 })
 				ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it on "..target.player:Name()..".", false)
 				
 				quantity = quantity - 1
