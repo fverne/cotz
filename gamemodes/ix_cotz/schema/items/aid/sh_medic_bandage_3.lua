@@ -6,7 +6,7 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.restore = 28
-ITEM.quantity = 5
+ITEM.quantity = 3
 
 ITEM.sound = "stalkersound/inv_bandage_2p9.mp3"
 ITEM.price = 140
