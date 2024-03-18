@@ -402,8 +402,6 @@ DIALOGUE.addTopic("AboutProgression", {
 
 		local test = ix.progression.GetActiveProgressions("'Smartass'")
 
-		PrintTable(test)
-
 		for _, progid in pairs(ix.progression.GetActiveProgressions("'Smartass'")) do
 			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})
 		end
