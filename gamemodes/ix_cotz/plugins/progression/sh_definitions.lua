@@ -1336,7 +1336,7 @@ ix.progression.Register("computer_artifactTasks", {
 	name = "STORY: Analyzing Artifacts",
 	description = "Analyzing Artifacts",
 	keyNpc = "'Computer'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		-- Find next treshold
 		local tresh = 0
