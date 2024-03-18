@@ -13,7 +13,7 @@ if (SERVER) then
 		self:PhysicsInit(SOLID_VPHYSICS)
 		self:SetUseType(SIMPLE_USE)
 		self:SetAngles(self:GetAngles() - Angle(0, 0, 0))
-		self:DropToFloor()
+		-- self:DropToFloor()
 
 		if (IsValid(self:GetPhysicsObject())) then
 			self:GetPhysicsObject():EnableMotion(false)
