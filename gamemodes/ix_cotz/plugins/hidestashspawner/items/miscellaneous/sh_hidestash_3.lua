@@ -10,6 +10,13 @@ ITEM.moneyinterval = {400, 800}
 
 ITEM.mapToGenerateStashOn = "rp_pripyat_remaster"
 
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(1.72, 1.34, 199.99),
+	ang = Angle(90.63, 37.9, 0),
+	fov = 2.07
+}
+
 function ITEM:GetDescription()
 	if self:GetData("stashtext", nil) == nil then
 		return self.description
