@@ -10,6 +10,7 @@ ITEM.img = ix.util.GetMaterial("vgui/hud/radsuit.png")
 ITEM.weight = 22.600
 ITEM.newSkin = 4
 ITEM.baseSuit = "suit_radsuit"
+ITEM.suitVariant = "ecologist"
 
 ITEM.price = 900920
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
