@@ -25,7 +25,7 @@ PLUGIN.saferadius = 1000
 
 PLUGIN.currentEvents = {} --To keep track of and update running events
 
-PLUGIN.spawntime = CurTime() + 30
+PLUGIN.spawntime = CurTime() + math.random(3600, 7200)
 PLUGIN.updatetime = CurTime() + 30
 PLUGIN.populate = false
 
