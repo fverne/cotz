@@ -112,7 +112,7 @@ function PANEL:Init()
 
 	local container = self:Add("ixStalkerInventory")
 	self:SetSize(container:GetWide() + 100, container:GetTall() + 100)
-	self:DockPadding(12, 112, 12, 42)
+	self:DockPadding(12, 108, 12, 52)
 
 	self.charbackground = self:Add("DImage")
 	self.charbackground:SetSize(container:GetWide() + 100, container:GetTall() + 100)
