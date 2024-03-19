@@ -318,7 +318,7 @@ ix.npctemplates.templates["ecologistnpc"] = {
 	--animgroup 	= 4,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["quest_computeraccess"] 	= { nil, 2, SELLANDBUY, 2, 6, 2 },
+		-- ["quest_computeraccess"] 	= { nil, 2, SELLANDBUY, 2, 6, 2 },
 
 		["part_bear"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 		["part_blinddog"] 	= { nil, nil, BUYONLY, nil, nil, nil },
