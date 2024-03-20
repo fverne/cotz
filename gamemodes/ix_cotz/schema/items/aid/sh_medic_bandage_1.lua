@@ -6,7 +6,7 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.restore = 16
-ITEM.quantity = 5
+ITEM.quantity = 3
 
 ITEM.sound = "stalkersound/inv_bandage_2p9.mp3"
 ITEM.price = 40
@@ -31,7 +31,7 @@ ITEM.functions.use = {
 		
 		ix.chat.Send(item.player, "iteminternal", "unwraps and ties a "..item.name.." to their wound.", false)
 
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Wrapping Bandages", 4, function(player) 
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Wrapping Bandages", 10, function(player) 
 			player:AddBuff("buff_slowheal", 4, { amount = item.restore/4 })
 			--player:HealBleeding(20)
 		end)
@@ -72,42 +72,6 @@ ITEM.functions.usetarget = {
 			if (quantity >= 1) then
 				item:SetData("quantity", quantity)
 				return false
-			end
-		elseif ( IsValid( target ) and target:GetClass( ) == "prop_ragdoll" ) then
-			if ( target.isDeadBody ) then
-				if not ( IsValid( target.player ) ) then
-					item.player:Notify( "You cannot revive a disconnected player's body." )
-					return false
-				end
-
-				target.player:UnSpectate()
-				target.player:SetNetVar("resurrected", true)
-				target.player:Spawn()
-				target.player:SetHealth( 1 ) 
-				target.player:SetPos(target:GetPos())
-
-                if target.player:IsStuck() then
-                    target.player:SetPos(target:GetPos() + Vector(0, 0, 16))
-
-                    local positions = ix.util.FindEmptySpace(target.player, {target, target.player})
-
-                    for _, v in ipairs(positions) do
-                        target.player:SetPos(v)
-                        if not target.player:IsStuck() then return end
-                    end
-                end
-				
-				item.player:Notify( "You revived "..target.player:GetName() )
-				target.player:Notify( "You were revived by "..item.player:GetName() )
-
-				target.player:AddBuff("buff_slowheal", 4, { amount = item.restore/4 })
-				ix.chat.Send(item.player, "iteminternal", "unwraps a "..item.name.." and ties it to "..target:Name().."'s fatal wound.", false)
-
-				quantity = quantity - 1
-				if (quantity >= 1) then
-					item:SetData("quantity", quantity)
-					return false
-				end
 			end
 		else
 			item.player:Notify("Not looking at a player!")

@@ -93,8 +93,8 @@ PLUGIN.categoryDefs =
 	},
 
 	["stash_map1"] = {
-		appearTime = 1800,
-		disappearTime = 2400,
+		appearTime = 1200,
+		disappearTime = 3600,
 		allowedStashTypes = {
 			"normal_cache_assorted_map1_1",
 			"normal_cache_assorted_map1_2",
@@ -107,8 +107,8 @@ PLUGIN.categoryDefs =
 	},
 
 	["stash_map2"] = {
-		appearTime = 1800,
-		disappearTime = 2400,
+		appearTime = 1200,
+		disappearTime = 3600,
 		allowedStashTypes = {
 			"normal_cache_assorted_map2_1",
 			"normal_cache_assorted_map2_2",
@@ -120,8 +120,8 @@ PLUGIN.categoryDefs =
 	},
 
 	["stash_map3"] = {
-		appearTime = 1800,
-		disappearTime = 2400,
+		appearTime = 1200,
+		disappearTime = 3600,
 		allowedStashTypes = {
 			"normal_cache_assorted_map3_1",
 			"normal_cache_assorted_map3_2",

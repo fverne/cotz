@@ -82,7 +82,7 @@ if SERVER then
 
 	function PLUGIN:PlayerTick(ply)
 		if ply:GetNetVar("hungertick", 0) <= CurTime() then
-			ply:SetNetVar("hungertick", 600 + CurTime())
+			ply:SetNetVar("hungertick", 200 + CurTime())
 			ply:TickHunger(1)
 		end
 

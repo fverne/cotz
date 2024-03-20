@@ -3,7 +3,7 @@ DIALOGUE.name = "Computer NPC"
 DIALOGUE.addTopic("GREETING", {
 	response = "** The computer beeps as it detects you **",
 	options = {
-		"BackgroundTopic",
+		-- "BackgroundTopic",
 		"AboutWorkTopic",
 		-- "GetTask",
 		"GetTaskByDifficulty",
@@ -433,7 +433,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "** Press 'Q' **",
 	response = "** The computer beeps in confirmation **",
 	options = {
-		"BackgroundTopic",
+		-- "BackgroundTopic",
 		"AboutWorkTopic",
 		-- "GetTask",
 		"GetTaskByDifficulty",

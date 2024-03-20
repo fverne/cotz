@@ -21,3 +21,4 @@ resource.AddWorkshop( '2290874511' ) -- cotz_gmodreplacements
 resource.AddWorkshop( '1470158687' ) -- Full Integrated Animation P.M. for NPCs HL2
 resource.AddWorkshop( '2143558752' ) -- xdReanimsBase (GMod) Anim Mods base
 resource.AddWorkshop( '2411672781' ) -- [xdR] Left 4 Dead animations
+resource.AddWorkshop( '531458635' ) -- simpleweather

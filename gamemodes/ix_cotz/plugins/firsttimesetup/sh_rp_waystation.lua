@@ -1555,7 +1555,16 @@ PLUGIN.map_presets["rp_waystation"] = {
       { Vector(-25.709690093994,729.35858154297,444.03125) , "on the railway bridge" , 24 }, 
     },
     ["eventcontrolleradv"] = {
-
+      ["map2_event_cave1"] = { Vector(6241.2299804688,9757.525390625,-72.995399475098) , "in the cave" }, 
+      ["map2_event_helicrash6"] = { Vector(4717.3784179688,-4248.90625,105.03119659424) , "in the swamps" }, 
+      ["map2_event_helicrash4"] = { Vector(-7518.32421875,7489.0522460938,5) , "in the swamps" }, 
+      ["map2_event_helicrash5"] = { Vector(-6060.052734375,3464.1352539062,34.285499572754) , "in the swamps" }, 
+      ["map2_event_helicrash2"] = { Vector(-2995.2521972656,4395.8374023438,-1.0801999568939) , "in the swamps" }, 
+      ["map2_event_helicrash3"] = { Vector(-5556.3754882812,9782.376953125,12.597200393677) , "in the swamps" }, 
+      ["map2_event_hoarder3"] = { Vector(-1937.0385742188,3281.9331054688,-612.96881103516) , "in the underground" }, 
+      ["map2_event_blowouttrigger"] = { Vector(-7537.9760742188,478.98880004883,437.03118896484) , "on the railway bridge" }, 
+      ["map2_event_helicrash1"] = { Vector(-2248.3513183594,9044.7314453125,8.4216995239258) , "in the swamps" }, 
+      ["map2_event_hoarder2"] = { Vector(6534.8139648438,9807.7041015625,52.992099761963) , "in the cave" },       
     },
     ["hidestashspawner"] = {
       { Vector(690.91650390625,-4410.6044921875,5.0312576293945) , "Under the fuel tank in the military base" }, 

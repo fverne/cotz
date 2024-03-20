@@ -402,8 +402,6 @@ DIALOGUE.addTopic("AboutProgression", {
 
 		local test = ix.progression.GetActiveProgressions("'Smartass'")
 
-		PrintTable(test)
-
 		for _, progid in pairs(ix.progression.GetActiveProgressions("'Smartass'")) do
 			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})
 		end
@@ -479,10 +477,14 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 		end
 	end,
 	GetDynamicOptions = function(self, client, target)
+		local blacklistedVariants = {
+			["ecologist"] = true,
+			["scavenger"] = true,
+		}
 
 		local suitVariants = {}
 		for _, v in pairs(ix.item.list) do
-			if target.selectedsuitstruct[4] == v.baseSuit then
+			if target.selectedsuitstruct[4] == v.baseSuit and !blacklistedVariants[v.suitVariant] then
 				table.insert(suitVariants, {uniqueID = v.uniqueID, name = v.name})
 			end
 		end

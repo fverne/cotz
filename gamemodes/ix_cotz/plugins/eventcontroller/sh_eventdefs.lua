@@ -57,7 +57,7 @@ PLUGIN.eventdefs["Dog1"] = {
 		{"npc_mutant_dog", 2},
 	},
 	pdabroadcast = "A small pack of dogs have been spotted %s.",
-	difficulty = {11},
+	difficulty = {11, 12, 21, 22, 31, 32},
 	lootChance = 10,
 }
 
@@ -66,7 +66,7 @@ PLUGIN.eventdefs["Dog2"] = {
 		{"npc_mutant_dog", 3},
 	},
 	pdabroadcast = "A small pack of dogs have been spotted %s.",
-	difficulty = {12, 21},
+	difficulty = {12, 21, 22, 31, 32},
 	lootChance = 10,
 }
 
@@ -76,7 +76,7 @@ PLUGIN.eventdefs["Dog3"] = {
 		{"npc_mutant_pseudodog", 1},
 	},
 	pdabroadcast = "A small pack of dogs have been spotted %s.",
-	difficulty = {12, 21, 22},
+	difficulty = {12, 21, 22, 31, 32},
 	lootChance = 15,
 }
 

@@ -672,3 +672,154 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 			return dat
 		end
 	}
+
+
+	PLUGIN.eventdefs["map3_event_mercbase1"] = {
+		key = "map3_event_mercbase1", --Should be identical to the actual key
+		allowedPoints = {"map3_event_mercbase1"},
+		difficulty = 3,
+		funcPrestart = function(dat) 
+			ix.util.SpawnAdvDupe2Dupe("map3_event_mercbase1", "mercbase1")
+
+			dat.timeout = os.time() + 900
+
+			return dat
+		end,
+		funcStart = function(dat) 
+			return dat
+		end,
+		funcUpdate = function(dat) 
+			return dat
+		end,
+		funcShouldEnd = function(dat)
+			local shouldend = os.time() > dat.timeout
+
+			return shouldend
+		end,
+		funcEnd = function(dat)
+			
+			ix.util.DepawnAdvDupe2Dupe("mercbase1")
+
+			return dat
+		end
+	}
+
+	PLUGIN.eventdefs["map3_event_mercbase2"] = {
+		key = "map3_event_mercbase2", --Should be identical to the actual key
+		allowedPoints = {"map3_event_mercbase2"},
+		difficulty = 3,
+		funcPrestart = function(dat) 
+			ix.util.SpawnAdvDupe2Dupe("map3_event_mercbase2", "mercbase2")
+
+			dat.timeout = os.time() + 900
+
+			return dat
+		end,
+		funcStart = function(dat) 
+			return dat
+		end,
+		funcUpdate = function(dat) 
+			return dat
+		end,
+		funcShouldEnd = function(dat)
+			local shouldend = os.time() > dat.timeout
+
+			return shouldend
+		end,
+		funcEnd = function(dat)
+			
+			ix.util.DepawnAdvDupe2Dupe("mercbase2")
+
+			return dat
+		end
+	}
+
+	PLUGIN.eventdefs["map3_event_banditbase1"] = {
+		key = "map3_event_banditbase1", --Should be identical to the actual key
+		allowedPoints = {"map3_event_banditbase1"},
+		difficulty = 3,
+		funcPrestart = function(dat) 
+			ix.util.SpawnAdvDupe2Dupe("map3_event_banditbase1", "banditbase1")
+
+			dat.timeout = os.time() + 900
+
+			return dat
+		end,
+		funcStart = function(dat) 
+			return dat
+		end,
+		funcUpdate = function(dat) 
+			return dat
+		end,
+		funcShouldEnd = function(dat)
+			local shouldend = os.time() > dat.timeout
+
+			return shouldend
+		end,
+		funcEnd = function(dat)
+			
+			ix.util.DepawnAdvDupe2Dupe("banditbase1")
+
+			return dat
+		end
+	}
+
+	PLUGIN.eventdefs["map3_event_deadstalker1"] = {
+		key = "map3_event_deadstalker1", --Should be identical to the actual key
+		allowedPoints = {"map3_event_deadstalker1"},
+		difficulty = 3,
+		funcPrestart = function(dat) 
+			ix.util.SpawnAdvDupe2Dupe("map3_event_deadstalker1", "deadstalker1")
+
+			dat.timeout = os.time() + 900
+
+			return dat
+		end,
+		funcStart = function(dat) 
+			return dat
+		end,
+		funcUpdate = function(dat) 
+			return dat
+		end,
+		funcShouldEnd = function(dat)
+			local shouldend = os.time() > dat.timeout
+
+			return shouldend
+		end,
+		funcEnd = function(dat)
+			
+			ix.util.DepawnAdvDupe2Dupe("deadstalker1")
+
+			return dat
+		end
+	}
+
+	PLUGIN.eventdefs["map3_event_helicrash"] = {
+		key = "map3_event_helicrash", --Should be identical to the actual key
+		allowedPoints = {"map3_event_open1", "map3_event_open2", "map3_event_open3", "map3_event_open4", "map3_event_open5"},
+		difficulty = 3,
+		funcPrestart = function(dat) 
+			ix.util.SpawnAdvDupe2Dupe("map2_event_helicrash", "helicrash", Vector(0,0,48), dat.eventpoint[1])
+
+			dat.timeout = os.time() + 900
+
+			return dat
+		end,
+		funcStart = function(dat) 
+			return dat
+		end,
+		funcUpdate = function(dat) 
+			return dat
+		end,
+		funcShouldEnd = function(dat)
+			local shouldend = os.time() > dat.timeout
+
+			return shouldend
+		end,
+		funcEnd = function(dat)
+			
+			ix.util.DepawnAdvDupe2Dupe("helicrash")
+
+			return dat
+		end
+	}

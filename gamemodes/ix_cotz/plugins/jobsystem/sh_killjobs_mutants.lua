@@ -508,7 +508,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d cats."
 tempJob.desc = "%d cats."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_cat3.png"
 tempJob.tier = 1
 tempJob.listenTrigger = "catKilled"
 tempJob.numberRec = 1
@@ -526,7 +526,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d cats."
 tempJob.desc = "%d cats."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_cat3.png"
 tempJob.tier = 2
 tempJob.listenTrigger = "catKilled"
 tempJob.numberRec = 2
@@ -544,7 +544,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d cats."
 tempJob.desc = "%d cats."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_cat3.png"
 tempJob.tier = 2
 tempJob.listenTrigger = "catKilled"
 tempJob.numberRec = 4
@@ -676,7 +676,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d burers."
 tempJob.desc = "%d burers."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_burer.png"
 tempJob.tier = 3
 tempJob.listenTrigger = "burerKilled"
 tempJob.numberRec = 1
@@ -694,7 +694,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d burers."
 tempJob.desc = "%d burers."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_burer.png"
 tempJob.tier = 3
 tempJob.listenTrigger = "burerKilled"
 tempJob.numberRec = 3
@@ -714,7 +714,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d chimeras."
 tempJob.desc = "%d chimeras."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_chimera.png"
 tempJob.tier = 3
 tempJob.listenTrigger = "chimeraKilled"
 tempJob.numberRec = 1
@@ -732,7 +732,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d chimeras."
 tempJob.desc = "%d chimeras."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_chimera.png"
 tempJob.tier = 4
 tempJob.listenTrigger = "chimeraKilled"
 tempJob.numberRec = 3
@@ -751,7 +751,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d electro-chimeras."
 tempJob.desc = "%d electro-chimeras."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_chimera5.png"
 tempJob.tier = 3
 tempJob.listenTrigger = "electrochimeraKilled"
 tempJob.numberRec = 1
@@ -769,7 +769,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d electro-chimeras."
 tempJob.desc = "%d electro-chimeras."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_chimera5.png"
 tempJob.tier = 4
 tempJob.listenTrigger = "electrochimeraKilled"
 tempJob.numberRec = 2
@@ -826,7 +826,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d controllers."
 tempJob.desc = "%d controllers."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_controler.png"
 tempJob.tier = 2
 tempJob.listenTrigger = "controllerKilled"
 tempJob.numberRec = 1
@@ -844,7 +844,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d controllers."
 tempJob.desc = "%d controllers."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_controler.png"
 tempJob.tier = 3
 tempJob.listenTrigger = "controllerKilled"
 tempJob.numberRec = {2,3}
@@ -1086,7 +1086,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d psydogs."
 tempJob.desc = "%d psydogs."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_psydog.png"
 tempJob.tier = 2
 tempJob.listenTrigger = "psydogKilled"
 tempJob.numberRec = {1,1}
@@ -1104,7 +1104,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d psydogs."
 tempJob.desc = "%d psydogs."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_psydog.png"
 tempJob.tier = 3
 tempJob.listenTrigger = "psydogKilled"
 tempJob.numberRec = {2,3}
@@ -1124,7 +1124,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d pseudogiants."
 tempJob.desc = "%d pseudogiants."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_pseudogiant.png"
 tempJob.tier = 3
 tempJob.listenTrigger = "pseudogiantKilled"
 tempJob.numberRec = 1
@@ -1142,7 +1142,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d pseudogiants."
 tempJob.desc = "%d pseudogiants."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_pseudogiant.png"
 tempJob.tier = 4
 tempJob.listenTrigger = "pseudogiantKilled"
 tempJob.numberRec = {2,3}
@@ -1161,7 +1161,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d izloms."
 tempJob.desc = "%d izloms."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_izlom4.png"
 tempJob.tier = 1
 tempJob.listenTrigger = "izlomKilled"
 tempJob.numberRec = 2
@@ -1184,7 +1184,7 @@ tempJob.desc = "%d spiders."
 tempJob.icon = "propic/event/mutanthunt"
 tempJob.tier = 1
 tempJob.listenTrigger = "spiderKilled"
-tempJob.numberRec = 2
+tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_ammo_tier02"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 12
@@ -1203,7 +1203,7 @@ tempJob.desc = "%d spiders."
 tempJob.icon = "propic/event/mutanthunt"
 tempJob.tier = 1
 tempJob.listenTrigger = "spiderKilled"
-tempJob.numberRec = 3
+tempJob.numberRec = 2
 tempJob.reward = {{"kit_reward_ammo_tier02"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 18
@@ -1222,7 +1222,7 @@ tempJob.desc = "%d spiders."
 tempJob.icon = "propic/event/mutanthunt"
 tempJob.tier = 1
 tempJob.listenTrigger = "spiderKilled"
-tempJob.numberRec = 6
+tempJob.numberRec = 4
 tempJob.reward = {{"kit_reward_ammo_tier02"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 30
@@ -1239,7 +1239,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d tarks."
 tempJob.desc = "%d tarks."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_tark.png"
 tempJob.tier = 1
 tempJob.listenTrigger = "tarkKilled"
 tempJob.numberRec = 1
@@ -1257,7 +1257,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d tarks."
 tempJob.desc = "%d tarks."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_tark.png"
 tempJob.tier = 1
 tempJob.listenTrigger = "tarkKilled"
 tempJob.numberRec = 2
@@ -1275,7 +1275,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d tarks."
 tempJob.desc = "%d tarks."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_tark.png"
 tempJob.tier = 1
 tempJob.listenTrigger = "tarkKilled"
 tempJob.numberRec = 3
@@ -1294,7 +1294,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d sprigs."
 tempJob.desc = "%d sprigs."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_zanoza.png"
 tempJob.tier = 1
 tempJob.listenTrigger = "sprigKilled"
 tempJob.numberRec = 1
@@ -1312,7 +1312,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d sprigs."
 tempJob.desc = "%d sprigs."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_zanoza.png"
 tempJob.tier = 1
 tempJob.listenTrigger = "sprigKilled"
 tempJob.numberRec = 2
@@ -1332,7 +1332,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d vareshkas."
 tempJob.desc = "%d vareshkas."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_borya.png"
 tempJob.tier = 3
 tempJob.listenTrigger = "vareshkaKilled"
 tempJob.numberRec = 1
@@ -1350,7 +1350,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d vareshkas."
 tempJob.desc = "%d vareshkas."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_borya.png"
 tempJob.tier = 3
 tempJob.listenTrigger = "vareshkaKilled"
 tempJob.numberRec = 2
@@ -1370,7 +1370,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d karliks."
 tempJob.desc = "%d karliks."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_karlik2.png"
 tempJob.tier = 3
 tempJob.listenTrigger = "karlikKilled"
 tempJob.numberRec = 1
@@ -1388,7 +1388,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d karliks."
 tempJob.desc = "%d karliks."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_karlik2.png"
 tempJob.tier = 3
 tempJob.listenTrigger = "karlikKilled"
 tempJob.numberRec = 3
@@ -1408,7 +1408,7 @@ local tempJob = {}
 
 tempJob.name = "Kill %d skeletons."
 tempJob.desc = "%d skeletons."
-tempJob.icon = "propic/event/mutanthunt"
+tempJob.icon = "entities/vj_mutant_zombi3.png"
 tempJob.tier = 3
 tempJob.listenTrigger = "skeletonKilled"
 tempJob.numberRec = 8
