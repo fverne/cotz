@@ -52,6 +52,22 @@ ix.config.Add("taskAbandonCooldown", 3600, "The cooldown for abandoning a task, 
 	category = "Town NPCs"
 })
 
+ix.command.Add("CharResetJobs", {
+	adminOnly = true,
+	arguments = {
+		ix.type.character,
+	},
+	OnRun = function(self, client, character)
+		if character then
+			local target = character
+		
+			target:SetJobs({})
+			client:Notify("Reset the jobs of "..character:GetName())
+			target:GetPlayer():Notify("Jobs have been reset")
+	    end
+	end
+})
+
 if SERVER then
 	netstream.Hook("job_deliveritem", function(client, npcidentifier)
 		local jobidentifier = client:GetCharacter():GetJobs()[npcidentifier].identifier
