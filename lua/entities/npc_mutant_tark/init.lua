@@ -93,7 +93,7 @@ function ENT:Initialize()
 	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 50
 	TEMP_MeleeTable.radius[1] = 64
-	TEMP_MeleeTable.time[1] = 0.9
+	TEMP_MeleeTable.time[1] = 0.6
 	TEMP_MeleeTable.bone[1] = "bip01_head"
 	self:STALKERNPCSetMeleeParams(4,"jump_attack_1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
