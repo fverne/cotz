@@ -99,8 +99,8 @@ ix.npctemplates.templates["tutorialnpc"] = {
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 		-- ["flashlight"] 	= { nil, 8, SELLANDBUY, 8, 0.10, 2 },
-		["headlamp"] 	= { nil, 3, SELLANDBUY, 3, 1, 1 },
-		["geigercounter"] 	= { nil, 5, SELLANDBUY, 5, 1, 1 },
+		["headlamp"] 	= { nil, 6, SELLANDBUY, 6, 1, 1 },
+		["geigercounter"] 	= { nil, 8, SELLANDBUY, 8, 1, 1 },
 
 		["medic_bandage_1"] = { nil, 12, SELLANDBUY, 12, 1, 1 },
 		["medic_bandage_2"] = { nil, 6, SELLANDBUY, 6, 1, 1 },
@@ -119,10 +119,10 @@ ix.npctemplates.templates["tutorialnpc"] = {
 		["food_can_tushonka"] 	= { 110, 2, SELLANDBUY, 2, 4, 2 },
 		["food_can_sprats"] 	= { 130, 2, SELLANDBUY, 2, 4, 2 },
 
-		["knife1"] 	= { nil, 6, SELLANDBUY, 6, 8, 3 },
-		["hidestasher_cutlery"] 	= { nil, 6, SELLANDBUY, 6, 8, 3 },
-		["lowtiercooker"] 	= { nil, 3, SELLANDBUY, 3, 8, 3 },
-		["lowtiercookerfuel"] 	= { nil, 20, SELLANDBUY, 20, 2, 15 },
+		["knife1"] 	= { nil, 12, SELLANDBUY, 12, 2, 3 },
+		["hidestasher_cutlery"] 	= { nil, 6, SELLANDBUY, 6, 2, 3 },
+		["lowtiercooker"] 	= { nil, 3, SELLANDBUY, 3, 2, 3 },
+		["lowtiercookerfuel"] 	= { nil, 20, SELLANDBUY, 20, 1, 15 },
 
 		["part_bear"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 		["part_blinddog"] 	= { nil, nil, BUYONLY, nil, nil, nil },
