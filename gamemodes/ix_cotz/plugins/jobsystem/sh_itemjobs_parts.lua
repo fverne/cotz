@@ -281,8 +281,8 @@ tempJob = nil
 
 local tempJob = {}
 
-tempJob.name = "Hand over %d  Swamp Controller Brain(s)."
-tempJob.desc = "%d  Swamp Controller Brain(s)."
+tempJob.name = "Hand over %d  Swamp Controller Hand(s)."
+tempJob.desc = "%d  Swamp Controller Hand(s)."
 tempJob.icon = "propic/event/loot"
 tempJob.tier = 1
 tempJob.requiredItem = "part_swampcontroller_1"
