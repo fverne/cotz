@@ -98,7 +98,7 @@ end
 
 -- Interrupts blackscreen
 function Schema:PlayerButtonDown(client,key)
-    if (client:GetNetVar("ix_hasBlackScreen") && key == 15 ) then
+    if (client:GetNetVar("ix_hasBlackScreen") && key == KEY_F ) then
        ix.util.PlayerActionInterrupt(client)
     end
 end

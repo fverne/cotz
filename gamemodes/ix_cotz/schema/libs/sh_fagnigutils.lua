@@ -12,7 +12,7 @@ function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, c
 	net.Send(player)
 
 	player:SetNetVar("ix_hasBlackScreen", true)
-	player:SetAction(actiontext, actiondur)
+	player:SetAction(actiontext.." (Press F to cancel)", actiondur)
 	player:Freeze(true)
 	player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 1 )
 	player:SetNetVar("ix_noMenuAllowed", true)

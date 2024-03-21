@@ -153,7 +153,7 @@ ix.poaching.MutantParts = {
 function PLUGIN:PlayerButtonDown(client,key)
     local Hit = client:GetEyeTraceNoCursor()
     local npc = Hit.Entity
-    if (client:GetNetVar("IsPoaching") == true && key == 15 ) then
+    if (client:GetNetVar("IsPoaching") == true && key == KEY_F ) then
        ix.util.PlayerActionInterrupt(client)
        npc:SetNetVar("beingSkinned",false)
     end
