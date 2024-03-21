@@ -27,11 +27,12 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 225
-ENT.hpvar = 50
+ENT.hp = 180
+ENT.hpvar = 20
 
-ENT.flatbulletresistance = 1
-ENT.percentbulletresistance = 5
+ENT.FBR = 0
+ENT.FBRAP = 5
+ENT.BR = 5
 
 ENT.NextAbilityTime = 0
 
@@ -57,7 +58,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 60
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 100
 	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 1
@@ -66,7 +67,7 @@ function ENT:Initialize()
 
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	TEMP_MeleeTable.damage[1] = 30
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 125
 	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.85
@@ -76,7 +77,7 @@ function ENT:Initialize()
 
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	TEMP_MeleeTable.damage[1] = 30
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 100
 	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.65
@@ -105,31 +106,28 @@ end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul) 
 	TEMP_Mul = mul
+	local headMultiplier = 0.75 // thick skull
+	local torsoMultiplier = 1 // boar is more vulnerable in torso
+	local limbMultiplier = 1
 
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
+	local torsoHitGroups = {
+		[2] = true,
+		[3] = true,
+	}
+	local limbHitgroups = {
+		[4] = true,
+		[5] = true,
+		[6] = true,
+		[7] = true,
+	}
+
+	if(self.LastDamageHitgroup == 1)then // head
+		TEMP_Mul = 0.50 * headMultiplier 
+	elseif (torsoHitGroups[self.LastDamageHitgroup]) then // chest + stomach
+		TEMP_Mul = 1 * torsoMultiplier 
+	elseif (limbHitgroups[self.LastDamageHitgroup]) then // limb
+		TEMP_Mul = 4 * limbMultiplier
 	end
-
-	--hacky shit code for checking for headshots
-	local pos = dmginfo:GetDamagePosition()
-	local hitgroup = 0
-
-	headbonepos, headboneang = self:GetBonePosition(self:GetHitBoxBone( 10, 0 ))
-	chestbonepos, chestboneang = self:GetBonePosition(self:GetHitBoxBone( 9, 0 ))
-
-	headbonepos = headbonepos + Vector (0,0,4)
-	
-	local distancetohead = pos - headbonepos
-	local distancetochest = pos - chestbonepos
-	
-	if  math.abs(distancetohead.x) + math.abs(distancetohead.y) + math.abs(distancetohead.z) < math.abs(distancetochest.x) + math.abs(distancetochest.y) + math.abs(distancetochest.z) then
-		TEMP_Mul = 0.4
-	else
-		TEMP_Mul = 1
-	end
-	--hacky shit code end
 
 	return TEMP_Mul
 end

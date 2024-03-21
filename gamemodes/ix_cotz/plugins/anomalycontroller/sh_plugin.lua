@@ -6,30 +6,46 @@ PLUGIN.desc = "Allows for randomly spawning anomaly entities"
 PLUGIN.anomalydefs = PLUGIN.anomalydefs or {}
 PLUGIN.anomalypoints = PLUGIN.anomalypoints or {} -- ANOMALYPOINTS STRUCTURE table.insert( PLUGIN.eventpoints, { position, radius, anoms } )
 
-PLUGIN.spawnrate = 900
-PLUGIN.spawnchance = 12
-
 ix.util.Include("sh_anomalydefs.lua")
+
+ix.config.Add("artifactSpawnerThreshold", 5, "How many artifacts the anomalyspawner should keep the map populated with.", nil, {
+	data = {min = 0, max = 50},
+	category = "Spawning"
+})
+
+ix.config.Add("artifactSpawnerRate", 900, "The time it takes for artifacts to be attempted to spawn.", nil, {
+	data = {min = 15, max = 3000},
+	category = "Spawning"
+})
+
+ix.config.Add("artifactSpawnerChance", 3, "Chance for artifacts per anomalyfield to spawn when the time is up.", nil, {
+	data = {min = 0, max = 100},
+	category = "Spawning"
+})
 
 if SERVER then
 	local spawntime = 1
 
 	function PLUGIN:Think()
+		if table.IsEmpty(self.anomalypoints) then return end
 		if spawntime > CurTime() then return end
-		spawntime = CurTime() + self.spawnrate
+
+		spawntime = CurTime() + ix.config.Get("artifactSpawnerRate", 900)
 
 		self:trySpawnArtifacts()
 	end
 
 	function PLUGIN:trySpawnArtifacts()
-		for i, j in pairs(self.anomalypoints) do
-			
+		for i, j in pairs(self.anomalypoints[game.GetMap()]) do
+			local numartifacts = self:GetNumSpawnedArtifacts()
+			if (numartifacts >= ix.config.Get("artifactSpawnerThreshold",5)) then return end
+
 			if (!j) then
-				return
+				continue
 			end
 
-			if math.random(100) > self.spawnchance then
-				return
+			if math.random(100) > ix.config.Get("artifactSpawnerChance",3) then
+				continue
 			end
 
 			local data = {}
@@ -55,9 +71,9 @@ if SERVER then
 		local rarityselector = 0
 		local anomalyselector = 0
 
-		if rand <= 70 then
+		if rand <= 80 then
 			rarityselector = 0
-		elseif rand <= 90 then
+		elseif rand <= 98 then
 			rarityselector = 1
 		elseif rand <= 100 then
 			rarityselector = 2
@@ -86,7 +102,7 @@ if SERVER then
 			idat = table.Random(self.anomalydefs[anomalyselector].veryRareArtifacts)
 		end
 
-		ix.item.Spawn(idat, point[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), function(item, ent) ent.bTemporary = true end, AngleRand(), {})
+		ix.item.Spawn(idat, point[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), function(item, ent) ent.bTemporary = true ent.bArtifact = true end, AngleRand(), {})
 
 	end
 
@@ -99,6 +115,17 @@ if SERVER then
 		end
 	end
 
+	function PLUGIN:GetNumSpawnedArtifacts()
+		local n = 0
+		for k,v in pairs(ents.FindByClass("ix_item")) do
+			if( v.bTemporary and v.bArtifact ) then
+				n = n + 1
+			end
+		end
+
+		return n
+	end
+
 	-- Function that will spawn anomalies
 	-- It will populate all spawnpoints with valid anomalies
 	function PLUGIN:spawnAnomalies()
@@ -106,7 +133,7 @@ if SERVER then
 			spawntime = 1
 		end
 			
-		for k, v in pairs(self.anomalypoints) do
+		for k, v in pairs(self.anomalypoints[game.GetMap()]) do
 			local selectedAnoms = {}
 			for i=1, #self.anomalydefs do
 				if string.sub(v[3],i,i) == "1" then
@@ -138,6 +165,8 @@ if SERVER then
 
 	function PLUGIN:LoadData()
 		self.anomalypoints = self:GetData() or {}
+
+		self.anomalypoints[game.GetMap()] = self.anomalypoints[game.GetMap()] or {}
 
 		self:cleanAnomalies()
 		self:spawnAnomalies()
@@ -190,7 +219,7 @@ if SERVER then
 else
 
 	-- Simple hook to display points
-	netstream.Hook("ix_DisplaySpawnPoints", function(data)
+	netstream.Hook("ix_DisplayAnomalyPoints", function(data)
 	 	for k, v in pairs(data) do
 	 		local emitter = ParticleEmitter( v[1] )
 	 		local smoke = emitter:Add( "sprites/glow04_noz", v[1] )
@@ -227,7 +256,7 @@ ix.command.Add("anomalyadd", {
 		end
 
 		
-		table.insert( PLUGIN.anomalypoints, { hitpos, radius, anomalies } )
+		table.insert( PLUGIN.anomalypoints[game.GetMap()], { hitpos, radius, anomalies } )
 		client:Notify( "Anomaly point successfully added" )
 	end
 })
@@ -247,10 +276,10 @@ ix.command.Add("anomalyremove", {
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local range = range or 128
 		local mt = 0
-		for k, v in pairs( PLUGIN.anomalypoints ) do
+		for k, v in pairs( PLUGIN.anomalypoints[game.GetMap()] ) do
 			local distance = v[1]:Distance( hitpos )
 			if distance <= tonumber(range) then
-				PLUGIN.anomalypoints[k] = nil
+				PLUGIN.anomalypoints[game.GetMap()][k] = nil
 				mt = mt + 1
 			end
 		end
@@ -267,7 +296,7 @@ ix.command.Add("anomalydisplay", {
 	adminOnly = true,
 	OnRun = function(self, client, arguments)
 		if SERVER then
-			netstream.Start(client, "ix_DisplaySpawnPoints", PLUGIN.anomalypoints)
+			netstream.Start(client, "ix_DisplayAnomalyPoints", PLUGIN.anomalypoints[game.GetMap()])
 			client:Notify( "Displayed All Points for 10 secs." )
 		end
 	end

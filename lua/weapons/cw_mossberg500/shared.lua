@@ -111,15 +111,15 @@ SWEP.WorldModel		= "models/weapons/w_shot_mossberg5.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 6
+SWEP.Primary.ClipSize		= 5
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.WearDamage = 0.5
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
-SWEP.FireDelay = 0.7
+SWEP.FireDelay = 1.0
 SWEP.FireSound = "CW_M3SUPER90_FIRE"
 SWEP.Recoil = 4.5
 
@@ -129,9 +129,9 @@ SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.35
 SWEP.ClumpSpread = 0.030
 SWEP.SpreadPerShot = 0.19
-SWEP.SpreadCooldown = 1
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 9
-SWEP.Damage = 19
+SWEP.Damage = 38
 SWEP.DeployTime = 1
 
 SWEP.ReloadStartTime = 0.3

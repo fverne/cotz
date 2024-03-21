@@ -3,7 +3,7 @@ ITEM.description = "A small sensor that keeps track of its own position. Moving 
 ITEM.model = "models/lostsignalproject/items/devices/sensor_b.mdl"
 ITEM.price = 1800
 ITEM.flag = "A"
-ITEM.weight = 0.100
+ITEM.flatweight = 0.100
 
 ITEM.isGpstracker = true
 

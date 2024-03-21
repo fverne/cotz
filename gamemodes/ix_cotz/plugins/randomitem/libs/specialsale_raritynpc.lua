@@ -10,9 +10,6 @@ ix.randomitems.tables["specialsale_raritynpc_br_1"] = {
 }
 
 ix.randomitems.tables["specialsale_raritynpc_headgear_1"] = { 
-  {100, {"radsuithelmet"}},
-  {100, {"radsuitvisor"}},
-  {100, {"xm40"}},
   {100, {"fsbhelmet"}},
 }
 

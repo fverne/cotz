@@ -177,19 +177,19 @@ SWEP.Primary.Ammo			= "7.62x39MM"
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_RK95_FIRE"
 SWEP.FireSoundSuppressed = "CW_RK95_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.7
+SWEP.Recoil = 1.4
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.09
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 75
+SWEP.Damage = 87
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 1

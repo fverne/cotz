@@ -21,7 +21,7 @@ if SERVER then
 
 		for k,v in pairs(ply:GetCharacter():GetInventory():GetItems()) do
 			if (v.uniqueID == item) then
-				local itemquant = v:GetData("quantity", 1)
+				local itemquant = v:GetData("quantity", v.quantity or 1)
 				local itemquantdif = itemquant - (cnt - itemsfound)
 				if(itemquantdif > 0) then -- item has enough quant to satisfy condition, break
 					v:SetData("quantity", itemquant - (cnt - itemsfound))
@@ -122,7 +122,7 @@ else
 
 					pl:GetCharacter():GetInventory():Add(rewardItem[1], rewardCnt, rewardItem[3] or {})
 
-					out = "Successfully bartered "..cnt.."x "..ix.item.list[item].name.." for "..rewardCnt.."x "..ix.item.list[rewardItem[1]].name.."."
+					out = "Successfully bartered "..cnt.."x "..ix.item.list[item].name.." to "..rewardCnt.."x "..ix.item.list[rewardItem[1]].name.."."
 				else
 					out = "Not enough "..ix.item.list[item].name.." in inventory."
 				end

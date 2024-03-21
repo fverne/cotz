@@ -145,6 +145,7 @@ if (SERVER) then
                 self:ChangePhase(3, 0)
                 ix.plugin.list["anomalycontroller"]:cleanAnomalies()
                 ix.plugin.list["anomalycontroller"]:spawnAnomalies()
+                ix.plugin.list["anomalycontroller"]:trySpawnArtifacts()
 
                 if ix.config.Get("blowoutRemoveNPCs", false) then
                     for k, v in pairs(ents.GetAll()) do
@@ -156,8 +157,15 @@ if (SERVER) then
 
                 if ix.config.Get("blowoutRemoveItems", false) then
                     for k, v in pairs(ents.FindByClass("ix_item")) do
-                      if (v.bTemporary) then
+                        if (v.bTemporary) then
                             v:Remove()
+                            continue
+                        end
+
+                        local itm = ix.item.instances[v.ixItemID]
+                        if (itm.isWeapon and itm:GetData("durability", 0) <= 10) or itm.cookable then
+                            v:Remove()
+                            continue
                         end
                     end
                 end
@@ -206,7 +214,7 @@ if (SERVER) then
             end
 
             if self.BlowoutVars.NextAmbientSound == 0 then
-                self.BlowoutVars.NextAmbientSound = CT + 5
+                self.BlowoutVars.NextAmbientSound = CT + 15
             elseif CT > self.BlowoutVars.NextAmbientSound then
                 self.BlowoutVars.NextAmbientSound = CT + math.random(15, 20)
                 self:PlaySoundOnClient("ambient")

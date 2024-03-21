@@ -3,11 +3,13 @@ ITEM.description = "A meal made from controllers, cooked in the zone."
 ITEM.longdesc = "A small stew made from meat of a Controller. Even cooked, the meat still carries powerful psychic energies."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_flesh.mdl"
 
-ITEM.price = 2100
+ITEM.price = 2300
 ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.020
+
+ITEM.img = ix.util.GetMaterial("cotz/ui/icons/food_9.png")
 
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)

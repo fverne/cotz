@@ -152,7 +152,7 @@ SWEP.WorldModel		= "models/weapons/tfa_nmrih/w_fa_ruger1022.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 5
+SWEP.Primary.ClipSize		= 10
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".22LR"
@@ -162,25 +162,25 @@ SWEP.FireSound = "CW_R1022_FIRE"
 SWEP.FireSoundSuppressed = "CW_M14_FIRE_SUPPRESSED"
 SWEP.Recoil = 1
 
-SWEP.WearDamage = 0.05
-SWEP.WearEffect = 0.01
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.002
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 35
 SWEP.DeployTime = 0.6
 
 
 SWEP.ReloadSpeed = 1.5
-SWEP.ReloadTime = 2
-SWEP.ReloadTime_Empty = 3
-SWEP.ReloadHalt = 2.2
-SWEP.ReloadHalt_Empty = 3.2
+SWEP.ReloadTime = 2.3
+SWEP.ReloadTime_Empty = 3.75
+SWEP.ReloadHalt = 2.5
+SWEP.ReloadHalt_Empty = 3.9
 
 SWEP.SnapToIdlePostReload = true
 

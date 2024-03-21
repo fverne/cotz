@@ -116,8 +116,8 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.05
-SWEP.WearEffect = 0.02
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
@@ -136,7 +136,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "7.62x54MMR"
 
-SWEP.FireDelay = 1.45
+SWEP.FireDelay = 1.25
 SWEP.FireSound = "CW_W9422_FIRE"
 SWEP.FireSoundSuppressed = "CW_WS_MOSIN_SUB"
 SWEP.Recoil = 3.1
@@ -145,14 +145,14 @@ SWEP.CustomizationMenuScale = 0.018
 SWEP.ForceBackToHipAfterAimedShot = true
 SWEP.GlobalDelayOnShoot = 1.1
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.12
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 5
+SWEP.VelocitySensitivity = 6
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.3
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 158
+SWEP.Damage = 170
 SWEP.DeployTime = 1
 /*
 SWEP.ReloadSpeed = 1

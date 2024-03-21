@@ -11,7 +11,8 @@ function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, c
 	net.Start("ix_KillMenu")
 	net.Send(player)
 
-	player:SetAction(actiontext, actiondur)
+	player:SetNetVar("ix_hasBlackScreen", true)
+	player:SetAction(actiontext.." (Press F to cancel)", actiondur)
 	player:Freeze(true)
 	player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 1 )
 	player:SetNetVar("ix_noMenuAllowed", true)
@@ -24,21 +25,25 @@ function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, c
 		player:Freeze(false)
 		player:SetNetVar("ix_noMenuAllowed", false)
 
-
-		if( callbackfunc) then --Call callback function last, so if it errors, we are not permanently frozen
-			callbackfunc(player)
+		-- in case we cancel, dont do the callback function
+		if !player:GetNetVar("ix_hasBlackScreen") then
+			return
 		end
 
-	end)
+		player:SetNetVar("ix_hasBlackScreen", nil)
 
+		if(callbackfunc) then --Call callback function last, so if it errors, we are not permanently frozen
+			callbackfunc(player)
+		end
+	end)
 end
 
 function ix.util.PlayerActionInterrupt(player)
-    -- just for poaching for now
-    if (player:GetNetVar("IsPoaching")) then
-        player:SetAction("Action Cancelled", 1)
+    if (player:GetNetVar("ix_hasBlackScreen")) then
+        player:SetAction("Action Cancelled", 0.2)
         player:Freeze(false)
         player:SetNetVar("ix_noMenuAllowed", false)
+		player:SetNetVar("ix_hasBlackScreen", nil)
 
         if timer.Exists("ixBlackScreenAction" .. player:SteamID()) then
             timer.Remove("ixBlackScreenAction" .. player:SteamID())
@@ -47,7 +52,7 @@ function ix.util.PlayerActionInterrupt(player)
 
         player:ScreenFade(SCREENFADE.PURGE, Color(0, 0, 0), 0.1, 0)
         player:ScreenFade(SCREENFADE.IN, Color(0, 0, 0), 0.2, 0)
-        player:SetNetVar("IsPoaching", false)
+        player:SetNetVar("IsPoaching", false) -- in case we poach
     end
 end
 
@@ -59,13 +64,30 @@ if(CLIENT) then
 		end
 	end)
 
+	
+
 	net.Receive("ix_KillMenu", function()
 		if IsValid(ix.gui.menu) then
 			ix.gui.menu:Remove()
 		end
+
+		if (IsValid(ix.gui.openedStorage)) then
+			net.Start("ixStorageClose")
+			net.SendToServer()
+			ix.gui.openedStorage:Remove()
+		end
+
 	end)
 
 end
+
+hook.Add("ShouldSuppressMenu", "ix_reloadNoMenuAllowed", function(client)
+	local weapon = client:GetActiveWeapon()
+
+	if(weapon.ReloadDelay or ((weapon.dt and weapon.dt.State and weapon.dt.State == CW_ACTION))) then
+		return true
+	end
+end)
 
 if (SERVER) then
 	util.AddNetworkString("ix_KillMenu")
@@ -106,5 +128,21 @@ ix.command.Add("spawnadvvendor", {
 		print(client:GetAngles())
 
 		ix.util.SpawnAdvVendor(npctemplate, hitpos, client:GetAngles())
+	end
+})
+
+ix.command.Add("GetEntitiesInSphere", {
+	description = "Dump all entities in sphere",
+	adminOnly = true,
+	arguments = {
+		ix.type.number
+	},
+	OnRun = function(self, client, radius)
+
+		local aimPos = client:GetEyeTraceNoCursor().HitPos
+		
+		for k,v in ipairs(ents.FindInSphere(aimPos, radius)) do
+			print("Entity: (", v:GetClass(), v:GetName(), v:MapCreationID(), ")")
+		end
 	end
 })

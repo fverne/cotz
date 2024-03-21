@@ -137,7 +137,7 @@ SWEP.Primary.DefaultClip	= 2
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".700 Nitro Express"
 
-SWEP.FireDelay = 0.15
+SWEP.FireDelay = 1.75
 SWEP.FireSound = "CW_700nitro_FIRE"
 
 SWEP.Recoil = 35.5
@@ -148,10 +148,13 @@ SWEP.AimSpread = 0.001
 SWEP.VelocitySensitivity = 8
 SWEP.MaxSpreadInc = 0.06
 SWEP.SpreadPerShot = 0.01
-SWEP.SpreadCooldown = 0.17
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 2400
+SWEP.Damage = 2500
 SWEP.DeployTime = 0.8
+
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.ReloadSpeed = 0.6
 SWEP.ReloadTime = 3

@@ -130,17 +130,17 @@ SWEP.FireSound = "CW_P99_FIRE"
 SWEP.FireSoundSuppressed = "CW_P99_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.67
 
-SWEP.WearDamage = 0.125
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.055
 SWEP.AimSpread = 0.025
-SWEP.VelocitySensitivity = 4
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.VelocitySensitivity = 2
+SWEP.MaxSpreadInc = 0.16
+SWEP.SpreadPerShot = 0.02
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 42
+SWEP.Damage = 60
 SWEP.DeployTime = 0.4
 --SWEP.Chamberable = false
 

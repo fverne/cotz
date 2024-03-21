@@ -27,8 +27,8 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 350
-ENT.hpvar = 75
+ENT.hp = 150
+ENT.hpvar = 25
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -44,7 +44,9 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_CHASE_ENEMY 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
-ENT.flatbulletresistance = 14
+ENT.FBR = 5
+ENT.FBRAP = 30
+ENT.BR = 0
 
 function ENT:Initialize()
 	self.Model = "models/monsters/zanoza.mdl"
@@ -63,7 +65,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 80
 	TEMP_MeleeTable.radius[1] = 60
 	TEMP_MeleeTable.time[1] = 0.6
@@ -73,13 +75,13 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 80
 	TEMP_MeleeTable.radius[1] = 60
 	TEMP_MeleeTable.time[1] = 0.8
 	TEMP_MeleeTable.bone[1] = "bip01_l_hand"
 	TEMP_MeleeTable.damage[2] = 25
-	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[2] = 80
 	TEMP_MeleeTable.radius[2] = 60
 	TEMP_MeleeTable.time[2] = 0.9
@@ -87,13 +89,13 @@ function ENT:Initialize()
 	self:STALKERNPCSetMeleeParams(2,"stand_attack_1",2, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 80
 	TEMP_MeleeTable.radius[1] = 60
 	TEMP_MeleeTable.time[1] = 0.8
 	TEMP_MeleeTable.bone[1] = "bip01_l_hand"
 	TEMP_MeleeTable.damage[2] = 25
-	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[2] = 80
 	TEMP_MeleeTable.radius[2] = 60
 	TEMP_MeleeTable.time[2] = 0.9
@@ -156,11 +158,6 @@ function ENT:STALKERNPCOnDeath()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul) 
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
-	end
-
 	if (self.passive != 0) then self.passive = 1 end
 end
 

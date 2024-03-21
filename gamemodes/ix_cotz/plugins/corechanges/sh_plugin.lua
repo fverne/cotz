@@ -26,6 +26,10 @@ function PLUGIN:OnItemTransferred(item, curInv, inventory)
 	end
 end
 
+function PLUGIN:ShouldCollide(ent1, ent2)
+	if ( ent1.IsSTALKERNPC and ent2.IsSTALKERNPC ) then return false end
+end
+
 -- removes plugins we dont need
 ix.plugin.SetUnloaded("stamina", true)
 ix.plugin.SetUnloaded("strength", true)
@@ -214,9 +218,9 @@ end)
 
 if(SERVER)then
 	function PLUGIN:PlayerSpawn(client)
-		if client then
+		if client:GetCharacter() then
 			timer.Simple(0.25, function() 
-				if client then
+				if client:GetCharacter() then
 					client:SetWepRaised(false)
 				end
 			end)

@@ -134,20 +134,20 @@ SWEP.Primary.Ammo			= "7.62x54MMR"
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_BER_SVT40_FIRE"
 SWEP.FireSoundSuppressed = "CW_BER_SVT40_FIRE_SUPPRESSED"
-SWEP.Recoil = 5
+SWEP.Recoil = 2.5
 
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 7
-SWEP.MaxSpreadInc = 0.5
-SWEP.SpreadPerShot = 0.3
-SWEP.SpreadCooldown = 0.3
+SWEP.MaxSpreadInc = 0.1
+SWEP.SpreadPerShot = 0.033
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 165
+SWEP.Damage = 140
 SWEP.DeployTime = 1.5
 
-SWEP.WearDamage = 0.3
-SWEP.WearEffect = 0.02
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.RecoilToSpread = 0.8 -- the M14 in particular will have 30% more recoil from continuous fire to give a feeling of "oh fuck I should stop firing 7.62x51MM in full auto at 750 RPM"
 

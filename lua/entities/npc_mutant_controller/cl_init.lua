@@ -17,7 +17,7 @@ function ENT:Draw()
 	local TEMP_RealAng = self:GetAngles()
 	local TEMP_RandVec = Vector(0,0,0)
 	
-	if( ix and LocalPlayer():GetPsyHealth() < 75 and !LocalPlayer():GetNWBool("ix_psysuppressed") and LocalPlayer():Alive()) then
+	if( ix and LocalPlayer():GetCharacter() and LocalPlayer():Alive() and LocalPlayer():GetPsyHealth() < 75 and !LocalPlayer():GetNWBool("ix_psysuppressed")) then
 		if(!istable(self.RandPoses)) then
 			self:ChooseRandPoses()
 		end

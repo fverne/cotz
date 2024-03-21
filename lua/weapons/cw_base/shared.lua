@@ -749,6 +749,12 @@ end
 function SWEP:beginReload()
 	local mag = self:Clip1()
 
+	if (SERVER) then
+		-- Kill the menu when we start a reload, in case it's up
+		net.Start("ix_KillMenu")
+		net.Send(self.Owner)
+	end
+
 	if self.ShotgunReload then
 		local time = CurTime() + self.ReloadStartTime / self.ReloadSpeed
 
@@ -1209,6 +1215,15 @@ function SWEP:Think()
 					self:SetNextSecondaryFire(time)
 					self.ReloadWait = time
 					self.ReloadDelay = nil
+					if self.AlwaysPlayReloadEnd then
+						self:sendWeaponAnim("reload_end", self.ReloadSpeed)
+						self.ShotgunReloadState = 0
+						local waitTime = self.ReloadFinishWait
+						local time = CT + waitTime / self.ReloadSpeed
+						self:SetNextPrimaryFire(time)
+						self:SetNextSecondaryFire(time)
+						self.ReloadWait = time
+					end
 				else
 					local canInsertMore = false
 					local waitTime = self.ReloadFinishWait

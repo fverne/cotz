@@ -21,8 +21,12 @@ ENT.ChasingSoundEnabled = false
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 800
-ENT.hpvar = 150
+ENT.hp = 120
+ENT.hpvar = 10
+
+ENT.FBR = 5
+ENT.FBRAP = 80
+ENT.BR = 0
 
 ENT.CanFakeDeath = true
 ENT.FakeDeath = 0
@@ -61,7 +65,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 30
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 0.7
@@ -71,7 +75,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 30
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 0.7
@@ -81,7 +85,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 30
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 0.7
@@ -89,7 +93,7 @@ function ENT:Initialize()
 	self:STALKERNPCSetMeleeParams(3,"stand_attack_2",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 	
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 30
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 0.7
@@ -97,13 +101,13 @@ function ENT:Initialize()
 	self:STALKERNPCSetMeleeParams(4,"stand_attack_3",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 30
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 1.2
 	TEMP_MeleeTable.bone[1] = "bip01_l_hand"
 	TEMP_MeleeTable.damage[2] = 25
-	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[2] = 30
 	TEMP_MeleeTable.radius[2] = 80
 	TEMP_MeleeTable.time[2] = 1.9
@@ -199,8 +203,6 @@ function ENT:STALKERNPCOnDeath()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	TEMP_Mul = mul
-	TEMP_Mul = 0.8
 
 	--fakedeath
 	if ( ((self:Health() - dmginfo:GetDamage()) < 30) and self.CanFakeDeath ) then
@@ -212,7 +214,7 @@ function ENT:STALKERNPCDamageTake(dmginfo,mul)
 		self:SetHealth(self:GetMaxHealth())
 	end
 
-	return TEMP_Mul
+	return mul
 end
 
 function ENT:STALKERNPCDistanceForMeleeTooBig() 

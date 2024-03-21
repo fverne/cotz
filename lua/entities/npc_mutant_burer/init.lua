@@ -27,11 +27,12 @@ ENT.CanShield = 0
 ENT.CanGrab = 0
 ENT.CanPush = 0
 
-ENT.hp = 1300
-ENT.hpvar = 450
+ENT.hp = 600
+ENT.hpvar = 50
 
-ENT.flatbulletresistance = 3
-ENT.percentbulletresistance = 15
+ENT.FBR = 6
+ENT.FBRAP = 10
+ENT.BR = 30
 
 ENT.MustShield = 0
 ENT.IsShielding = 0
@@ -73,13 +74,13 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 19
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 21
 	TEMP_MeleeTable.radius[1] = 60
 	TEMP_MeleeTable.time[1] = 0.6
 	TEMP_MeleeTable.bone[1] = "right_hand"
 	TEMP_MeleeTable.damage[2] = 19
-	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET, DMG_BULLET)
+	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[2] = 21
 	TEMP_MeleeTable.radius[2] = 60
 	TEMP_MeleeTable.time[2] = 1.3
@@ -235,12 +236,6 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
-	end
-
 	if(self.CanShield<CurTime()) then
 		local TEMP_Rand = math.random(1,3)
 		
@@ -263,7 +258,11 @@ function ENT:STALKERNPCDamageTake(dmginfo,mul)
 		TEMP_Effect:SetScale(5)
 		util.Effect("cball_bounce", TEMP_Effect,false,true)
 		
-		return 0
+		if(dmginfo:GetDamageType() == DMG_AIRBOAT) then
+			return 0.5
+		end
+
+		return 0.1
 	end
 	
 	return mul

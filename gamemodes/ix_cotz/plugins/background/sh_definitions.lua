@@ -51,7 +51,7 @@ ix.backgrounds["alcoholic_light"] = {
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("g2contender", 1, {["durability"] = 50})
 		character:GetInventory():Add("45acp", 1, {["quantity"] = 15})
 		character:GetInventory():Add("45acp41", 1, {["quantity"] = 10})
@@ -81,7 +81,7 @@ ix.backgrounds["alcoholic_heavy"] = {
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("bat", 1)
 		character:GetInventory():Add("drink_vodka_5", 1)
 		character:GetInventory():Add("drink_vodka_3", 1, {["quantity"] = 1})
@@ -107,7 +107,7 @@ ix.backgrounds["smoker"] = {
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("leadpipe", 1)
 		character:GetInventory():Add("drug_cigarette_4", 1, {["quantity"] = math.random(13,15)})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
@@ -132,7 +132,7 @@ ix.backgrounds["druggie"] = {
 	"\n  500 Rubles",
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("crowbar", 1)
 		character:GetInventory():Add("drug_painkillers", 1)
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 500})
@@ -162,7 +162,7 @@ ix.backgrounds["addict_light"] = {
 
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("g2contender", 1, {["durability"] = 50})
 		character:GetInventory():Add("45acp", 1, {["quantity"] = 20})
 		character:GetInventory():Add("45acp41", 1, {["quantity"] = 20})
@@ -183,28 +183,28 @@ ix.backgrounds["addict_light"] = {
 ]]--
 
 
-ix.backgrounds["chef"] = {
-	name = "Chef",
-	description = "Being a chef at a promising restaurant has eventually grown boring to you. You decide to head to the Zone, to get a taste for various different kinds of cooking opportunities there. Armed only with your trusty kitchen knife, you head off to a place of endless culinary opportunities.".. 
-	"\n\nStarting Equipment:"..
-	"\n  1x Anorak"..
-	"\n  1x Damaged Bag with Supplies"..
-	"\n  1x Kitchen Knife"..
-	"\n  1000 Rubles",
+-- ix.backgrounds["chef"] = {
+-- 	name = "Chef",
+-- 	description = "Being a chef at a promising restaurant has eventually grown boring to you. You decide to head to the Zone, to get a taste for various different kinds of cooking opportunities there. Armed only with your trusty kitchen knife, you head off to a place of endless culinary opportunities.".. 
+-- 	"\n\nStarting Equipment:"..
+-- 	"\n  1x Anorak"..
+-- 	"\n  1x Damaged Bag with Supplies"..
+-- 	"\n  1x Kitchen Knife"..
+-- 	"\n  1000 Rubles",
 
-	OnCreated = function(client, character) 
-		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
-		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
-		character:GetInventory():Add("kit_newchar", 1)
-		character:GetInventory():Add("knife2", 1)
-	end,
-	OnLoaded = function(character)
-		--local client = character:GetPlayer()  
-		--client:SetRunSpeed(400) -- These things dont actually work, they're overridden by the stamina plugin almost instantly
-		--client:SetWalkSpeed(200)
-	end,
-}
+-- 	OnCreated = function(client, character) 
+-- 		--character:GetInventory():Add("kit_newchar")
+-- 		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
+-- 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
+-- 		character:GetInventory():Add("kit_newchar", 1)
+-- 		character:GetInventory():Add("knife2", 1)
+-- 	end,
+-- 	OnLoaded = function(character)
+-- 		--local client = character:GetPlayer()  
+-- 		--client:SetRunSpeed(400) -- These things dont actually work, they're overridden by the stamina plugin almost instantly
+-- 		--client:SetWalkSpeed(200)
+-- 	end,
+-- }
 
 ix.backgrounds["outdoorsman"] = {
 	name = "Outdoorsman",
@@ -219,7 +219,7 @@ ix.backgrounds["outdoorsman"] = {
 
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("hatchet", 1)
@@ -239,16 +239,16 @@ ix.backgrounds["mobpawn"] = {
 	"\n\nStarting Equipment:"..
 	"\n  1x Anorak"..
 	"\n  1x Damaged Bag with Supplies"..
-	"\n  1x TOZ-106"..
+	"\n  1x G2 Contender"..
 	"\n  30x .410 Magnum Buck"..
 	"\n  1000 Rubles",
 
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 		character:GetInventory():Add("kit_newchar", 1)
-		character:GetInventory():Add("toz106", 1, {["durability"] = 35})
+		character:GetInventory():Add("g2contender", 1, {["durability"] = 35})
 		character:GetInventory():Add("45acp41", 1, {["quantity"] = 30})
 	end,
 	OnLoaded = function(character)
@@ -269,7 +269,7 @@ ix.backgrounds["constructionworker"] = {
 
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("fubar", 1)
@@ -294,7 +294,7 @@ ix.backgrounds["alcoholic"] = {
 
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("leadpipe", 1)
@@ -323,7 +323,7 @@ ix.backgrounds["doctor"] = {
 
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("leadpipe", 1)
@@ -351,7 +351,7 @@ ix.backgrounds["gambler"] = {
 
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("machete", 1)
@@ -371,17 +371,17 @@ ix.backgrounds["mobhitman"] = {
 	"\n\nStarting Equipment:"..
 	"\n  1x Anorak"..
 	"\n  1x Damaged Bag with Supplies"..
-	"\n  1x MP18"..
-	"\n  15x 7.62x54mm"..
+	"\n  1x Sako 85 Varmint"..
+	"\n  25x .22LR"..
 	"\n  1000 Rubles",
 
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 		character:GetInventory():Add("kit_newchar", 1)
-		character:GetInventory():Add("mp18", 1, {["durability"] = 25})
-		character:GetInventory():Add("762x54", 1, {["quantity"] = 15})
+		character:GetInventory():Add("sako85varmint", 1, {["durability"] = 55})
+		character:GetInventory():Add("22lr", 1, {["quantity"] = 25})
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  
@@ -402,7 +402,7 @@ ix.backgrounds["athlete"] = {
 
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 2000})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("bat", 1)
@@ -426,11 +426,11 @@ ix.backgrounds["urbanexplorer"] = {
 
 	OnCreated = function(client, character) 
 		--character:GetInventory():Add("kit_newchar")
-		character:GetInventory():Add("anorak", 1, {["durability"] = 85})
+		character:GetInventory():Add("suit_anorak", 1, {["durability"] = 85})
 		character:GetInventory():Add("bagrubles", 1, {["quantity"] = 1000})
 		character:GetInventory():Add("kit_newchar", 1)
 		character:GetInventory():Add("leadpipe", 1)
-		character:GetInventory():Add("backpack_1", 1)
+		character:GetInventory():Add("backpack_tourist", 1)
 	end,
 	OnLoaded = function(character)
 		--local client = character:GetPlayer()  

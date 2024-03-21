@@ -141,22 +141,22 @@ if CustomizableWeaponry then
 	SWEP.Primary.Automatic		= true
 	SWEP.Primary.Ammo			= ".45 ACP" --Ammo box entity to use
 
-	SWEP.FireDelay = 0.07
+	SWEP.FireDelay = 0.085
 	SWEP.FireSound = "CW_SILVERBALLER_FIRE"
 	SWEP.FireSoundSuppressed = "CW_SILVERBALLER_FIRE_SD"
-	SWEP.Recoil = 2.0
+	SWEP.Recoil = 1.7
 
-	SWEP.WearDamage = 0.1
+	SWEP.WearDamage = 0.22
 	SWEP.WearEffect = 0.05
 
-	SWEP.HipSpread = 0.025
-	SWEP.AimSpread = 0.005
+	SWEP.HipSpread = 0.035
+	SWEP.AimSpread = 0.017
 	SWEP.VelocitySensitivity = 1.2
 	SWEP.MaxSpreadInc = 0.06
 	SWEP.SpreadPerShot = 0.02
-	SWEP.SpreadCooldown = 0.32
+	SWEP.SpreadCooldown = 0.2
 	SWEP.Shots = 1
-	SWEP.Damage = 65
+	SWEP.Damage = 70
 	SWEP.DeployTime = 1
 
 	SWEP.ReloadSpeed = 1

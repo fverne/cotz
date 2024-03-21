@@ -12,8 +12,8 @@ ITEM.validAttachments = {"md_tundra9mm"}
 ITEM.bulletweight = 0.011
 ITEM.unloadedweight = 1.22
 
-ITEM.repair_PartsComplexity = 3
-ITEM.repair_PartsRarity = 1
+
+
 
 function ITEM:GetWeight()
   return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))

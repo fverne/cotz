@@ -127,14 +127,14 @@ SWEP.AimSpread = 0.006
 SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 44
+SWEP.Damage = 55
 SWEP.DeployTime = .2
 SWEP.HolsterTime = .30
 
-SWEP.WearDamage = 0.15
-SWEP.WearEffect = 0.15
+SWEP.WearDamage = 0.22
+SWEP.WearEffect = 0.05
 
 SWEP.ADSFireAnim = true
 SWEP.ShootWhileProne = true

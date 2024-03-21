@@ -25,12 +25,8 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["fireaxe"] = 10,
-			["crowbar"] = 10,
-			["hatchet"] = 10,
-			["machete"] = 10,
-			["leadpipe"] = 10,
-			["sledgehammer"] = 10,
+			["value_nuts"] = 50,
+			["value_bolts"] = 50,
 		}	
 
 		return itemids
@@ -62,8 +58,9 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Suit1"].complexData[item] = ix.progression.status["technutItemDelivery_Suit1"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Suit1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -80,7 +77,7 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("mailjacket", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_mailjacket", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit1", true)
@@ -145,8 +142,9 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Suit2"].complexData[item] = ix.progression.status["technutItemDelivery_Suit2"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Suit2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -163,7 +161,10 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("trenchcoat", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_trenchcoat_black", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_trenchcoat_brown", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_trenchcoat_green", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_trenchcoat_tan", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit2", true)
@@ -195,10 +196,7 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_techtool_1"] = 5,
-			["artifact_bolt"] = 20,
-			["artifact_bonecluster"] = 15,
-			["artifact_mementomori"] = 10,
+			["value_documents_14"] = 8,
 		}	
 
 		return itemids
@@ -230,8 +228,9 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit3"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Suit3"].complexData[item] = ix.progression.status["technutItemDelivery_Suit3"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Suit3"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -248,12 +247,96 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("sunrise", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_sunrise", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit3", true)
+			ix.progression.SetActive("technutItemDelivery_SuitNBC", true)
 			ix.progression.SetActive("technutItemDelivery_Suit4", true) 
+			ix.progression.SetActive("technutItemDelivery_Helmet1", true) 
 
+		end
+	end
+})
+
+ix.progression.Register("technutItemDelivery_SuitNBC", {
+	name = "Closed Respiratory Upgrade",
+	description = "Get Technut to help you make suits.",
+	keyNpc = "'Technut'",
+	defaultActive = false,
+	BuildResponse = function(self, status)
+		ix.progression.status["technutItemDelivery_SuitNBC"] = ix.progression.status["technutItemDelivery_SuitNBC"] or {}
+		local dat = ix.progression.status["technutItemDelivery_SuitNBC"].complexData
+		local itemids = self:GetItemIds()
+
+		local str = "I have an idea for the sunrise that should make it more protective in radioactive areas. We can seal off many of the areas that allow for breathing, making it more uncomfortable to wear, but atleast you don't get irradiated as much. Here's what I need:\n"
+
+		for item, amt in pairs(itemids) do
+			local tmp = 0
+			if (dat and dat[item]) then tmp = dat[item] end
+			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		end
+
+		return str
+	end,
+	GetItemIds = function()
+		local itemids = {
+			["value_waterfilter"] = 15,
+			["medic_antirad_1"] = 15,
+		}	
+
+		return itemids
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()
+				
+			end,
+			RunOnce = false,
+		},
+	},
+	progressthresholds = {
+		[1] = 1,
+	},
+	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
+		ix.progression.status["technutItemDelivery_SuitNBC"].complexData = ix.progression.status["technutItemDelivery_SuitNBC"].complexData or {}
+		ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item] = ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item] or 0
+		ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item] = ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item]+amt
+	end,
+	fnGetComplexProgression = function()
+		return ix.progression.status["technutItemDelivery_SuitNBC"].complexData
+	end,
+	fnCheckComplexProgression = function()
+		local finished =  ix.progression.definitions["technutItemDelivery_SuitNBC"]:GetItemIds()
+
+		local isdone = true
+
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item] = ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_SuitNBC"].complexData[item] then isdone = false end
+		end
+		
+		if isdone then
+
+			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = "I finished the prototype of the closed respiratory variant of the sunrise suit. They're ready for purchase."
+				ix.util.HandleChat(name, message)
+				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+					name = name,
+					message = message
+				})
+			end)
+
+			local npc = ix.progression.GetNPCFromName("'Technut'")
+			if (npc) then
+				npc:AddItemToList("suit_nbc", nil, 5, "SELLANDBUY", 5, 1, 5)
+			end
+
+			ix.progression.SetCompleted("technutItemDelivery_SuitNBC", true)
 		end
 	end
 })
@@ -312,10 +395,11 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit4"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Suit4"].complexData[item] = ix.progression.status["technutItemDelivery_Suit4"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Suit4"].complexData[item] then isdone = false end
 		end
-
+		
 		if isdone then
 
 			timer.Simple(60, function()
@@ -330,11 +414,12 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("cs1", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_cs1", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit4", true)
 			ix.progression.SetActive("technutItemDelivery_Suit5", true) 
+			ix.progression.SetActive("technutItemDelivery_Attachment1", true) 
 
 		end
 	end
@@ -395,8 +480,9 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit5"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Suit5"].complexData[item] = ix.progression.status["technutItemDelivery_Suit5"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Suit5"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -413,11 +499,12 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("cs2", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_cs2", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit5", true)
 			ix.progression.SetActive("technutItemDelivery_Suit6", true) 
+			ix.progression.SetActive("technutItemDelivery_AttachmentFabric1", true) 
 
 		end
 	end
@@ -480,8 +567,9 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit6"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Suit6"].complexData[item] = ix.progression.status["technutItemDelivery_Suit6"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Suit6"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -498,11 +586,12 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("cs3", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_cs3", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit6", true)
 			ix.progression.SetActive("technutItemDelivery_Suit7", true) 
+			ix.progression.SetActive("technutItemDelivery_AttachmentKevlar1", true) 
 
 		end
 	end
@@ -530,7 +619,7 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["drink_wine"] = 100,
+			["drink_wine"] = 20,
 		}	
 
 		return itemids
@@ -562,8 +651,9 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Suit7"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Suit7"].complexData[item] = ix.progression.status["technutItemDelivery_Suit7"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Suit7"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -580,10 +670,12 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("wind", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_wind", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit7", true)
+			ix.progression.SetActive("technutItemDelivery_AttachmentFrame1", true) 
+			ix.progression.SetActive("technutItemDelivery_AttachmentCarbon", true) 
 
 		end
 	end
@@ -648,8 +740,9 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_SuitPainting"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_SuitPainting"].complexData[item] = ix.progression.status["technutItemDelivery_SuitPainting"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_SuitPainting"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -681,7 +774,7 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 	name = "Wear Protection Pt. 1",
 	description = "Help Technut get his hands on helmets.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_Helmet1"] = ix.progression.status["technutItemDelivery_Helmet1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Helmet1"].complexData
@@ -699,7 +792,7 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 5, --Placeholder?
+			["value_glue_3"] = 5, --Placeholder?
 		}	
 
 		return itemids
@@ -731,8 +824,9 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Helmet1"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet1"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Helmet1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -749,8 +843,9 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("steelhelmetgerman", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("steelhelmetrussian", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_steel_ger", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_steel_rus", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_steel_arab", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet1", true)
@@ -820,8 +915,9 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Helmet2"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet2"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Helmet2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -838,8 +934,7 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("flighthelmet", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("flighthelmetvisor", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("headwear_cs1", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet2", true)
@@ -904,15 +999,16 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet3"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Helmet3"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet3"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Helmet3"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = " ## PLACEHOLDER ## - Unlocks pasgt"
+				local message = "Operator helmets now in store. Get them while they are hot!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -922,7 +1018,8 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("pasgt", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_operator_rus_1", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_operator_rus_2", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet3", true)
@@ -988,8 +1085,9 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet4"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Helmet4"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet4"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Helmet4"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1006,7 +1104,8 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("fraghelmet", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("headwear_cs2", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("headwear_cs4", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet4", true)
@@ -1072,8 +1171,9 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet5"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Helmet5"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet5"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Helmet5"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1090,7 +1190,7 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("sphere08", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_sphere08", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet5", true)
@@ -1111,7 +1211,7 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 		local dat = ix.progression.status["technutItemDelivery_Helmet6"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "So, the Sphere-08 project is going alright, but it's really friggin' heavy. I've got a few ideas to lighten it and improve on the PASGT design! What do you say?\n\nREQUIRED ITEMS:"
+		local str = "I've gotten a good look at one of the Spetsnaz Sphere-12 helmets and I'm pretty sure I can upgrade them, but I'm gonna need some special materials. Care to help me out?\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1156,15 +1256,15 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet6"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Helmet6"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet6"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Helmet6"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
-
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = "I now carry ACH helmets! These babies from the West are both protective and lightweight!"
+				local message = "I've now got Sphere-12 heavy helmets, and PSZ12's as an added bonus!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1174,7 +1274,8 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("ach", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_sphere12", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("headwear_psz12", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet6", true)
@@ -1195,7 +1296,7 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 		local dat = ix.progression.status["technutItemDelivery_Helmet7"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "I've gotten a good look at one of the Spetsnaz Sphere-12 helmets and I'm pretty sure I can upgrade them, but I'm gonna need some special materials. Care to help me out?\n\nREQUIRED ITEMS:"
+		local str = "So, the Sphere-08 project is going alright, but it's really friggin' heavy. I've got a few ideas to lighten it and improve on the PASGT design! What do you say?\n\nREQUIRED ITEMS:"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1240,15 +1341,16 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Helmet7"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Helmet7"].complexData[item] = ix.progression.status["technutItemDelivery_Helmet7"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Helmet7"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = "I've now got Sphere-12 heavy helmets! These things are the best of the best!"
+				local message = "I now carry ACH helmets! These babies from the West are both protective and lightweight!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1256,9 +1358,10 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 				})
 			end)
 
+
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("sphere12", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("helm_operator_nato", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Helmet7", true)
@@ -1297,8 +1400,8 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 	GetItemIds = function()
 		local itemids = {
 			["value_engine"] = 5,
-			["value_waterfilter"] = 18,
-			["value_tape_heavy"] = 6,
+			["value_waterfilter"] = 2,
+			["value_tape_heavy"] = 4,
 			["value_tape_duct"] = 12,
 		}	
 
@@ -1331,8 +1434,9 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Mask1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Mask1"].complexData[item] = ix.progression.status["technutItemDelivery_Mask1"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Mask1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1349,7 +1453,8 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("halfmask", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_halfmask", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_respirator", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Mask1", true)
@@ -1414,15 +1519,16 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Mask2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Mask2"].complexData[item] = ix.progression.status["technutItemDelivery_Mask2"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Mask2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = "GP-5 gas masks have been refit and are now safe for use! No asbestos for us!"
+				local message = "GP-5 and EO20 gas masks have been refit and are now safe for use! No asbestos for us!"
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1432,7 +1538,8 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("gp5", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_gp5", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_eo20", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Mask2", true)
@@ -1497,8 +1604,9 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Mask3"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Mask3"].complexData[item] = ix.progression.status["technutItemDelivery_Mask3"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Mask3"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1515,16 +1623,100 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("eo20", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("eo20old", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_pmk3", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_xm40", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
+			ix.progression.SetActive("technutItemDelivery_Mask4", true) 
 			ix.progression.SetCompleted("technutItemDelivery_Mask3", true)
 		end
 	end
 })
 
 
+
+
+ix.progression.Register("technutItemDelivery_Mask4", {
+	name = "Don't breathe this Pt. 4",
+	description = "Help technut provide gasmasks.",
+	keyNpc = "'Technut'",
+	defaultActive = false,
+	BuildResponse = function(self, status)
+		ix.progression.status["technutItemDelivery_Mask4"] = ix.progression.status["technutItemDelivery_Mask4"] or {}
+		local dat = ix.progression.status["technutItemDelivery_Mask4"].complexData
+		local itemids = self:GetItemIds()
+
+		local str = "I got my hands on new tools. I've been trying my best to clean up some prototype gasmasks. I need a few more things though.\n\nREQUIRED ITEMS:"
+
+		for item, amt in pairs(itemids) do
+			local tmp = 0
+			if (dat and dat[item]) then tmp = dat[item] end
+			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		end
+
+		return str
+	end,
+	GetItemIds = function()
+		local itemids = {
+			["value_techtool_3"] = 5,
+		}	
+
+		return itemids
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()
+				
+			end,
+			RunOnce = false,
+		},
+	},
+	progressthresholds = {
+		[1] = 1,
+	},
+	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
+		ix.progression.status["technutItemDelivery_Mask4"].complexData = ix.progression.status["technutItemDelivery_Mask4"].complexData or {}
+		ix.progression.status["technutItemDelivery_Mask4"].complexData[item] = ix.progression.status["technutItemDelivery_Mask4"].complexData[item] or 0
+		ix.progression.status["technutItemDelivery_Mask4"].complexData[item] = ix.progression.status["technutItemDelivery_Mask4"].complexData[item]+amt
+	end,
+	fnGetComplexProgression = function()
+		return ix.progression.status["technutItemDelivery_Mask4"].complexData
+	end,
+	fnCheckComplexProgression = function()
+		local finished =  ix.progression.definitions["technutItemDelivery_Mask4"]:GetItemIds()
+
+		local isdone = true
+
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Mask4"].complexData[item] = ix.progression.status["technutItemDelivery_Mask4"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Mask4"].complexData[item] then isdone = false end
+		end
+
+		if isdone then
+
+			timer.Simple(60, function()
+				local name = "'Technut'"
+				local message = "I've got my hands on the best of the best, come get em!"
+				ix.util.HandleChat(name, message)
+				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+					name = name,
+					message = message
+				})
+			end)
+
+			local npc = ix.progression.GetNPCFromName("'Technut'")
+			if (npc) then
+				npc:AddItemToList("mask_m40", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mask_m50", nil, 5, "SELLANDBUY", 5, 1, 5)
+			end
+
+			ix.progression.SetCompleted("technutItemDelivery_Mask4", true)
+		end
+	end
+})
 
 
 --
@@ -1536,7 +1728,7 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 	name = "Plating up Pt. 1",
 	description = "Provide technut with materials for suit plates.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_Attachment1"] = ix.progression.status["technutItemDelivery_Attachment1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Attachment1"].complexData
@@ -1587,8 +1779,9 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Attachment1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Attachment1"].complexData[item] = ix.progression.status["technutItemDelivery_Attachment1"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Attachment1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1672,8 +1865,9 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Attachment2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Attachment2"].complexData[item] = ix.progression.status["technutItemDelivery_Attachment2"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Attachment2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1757,8 +1951,9 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_Attachment3"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_Attachment3"].complexData[item] = ix.progression.status["technutItemDelivery_Attachment3"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_Attachment3"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1789,7 +1984,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 	name = "Patching Pt. 1",
 	description = "Provide technut with materials for suit fabrics.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_AttachmentFabric1"] = ix.progression.status["technutItemDelivery_AttachmentFabric1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData
@@ -1807,7 +2002,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["anorak"] = 100,
+			["suit_anorak"] = 100,
 		}	
 
 		return itemids
@@ -1839,8 +2034,9 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1922,8 +2118,9 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentFabric2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_AttachmentFabric2"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentFabric2"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_AttachmentFabric2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1954,7 +2151,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 	name = "Framing Pt. 1",
 	description = "Provide technut with materials for suit frames.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_AttachmentFrame1"] = ix.progression.status["technutItemDelivery_AttachmentFrame1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData
@@ -2004,8 +2201,9 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -2088,8 +2286,9 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentFrame2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_AttachmentFrame2"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentFrame2"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_AttachmentFrame2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -2121,7 +2320,7 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 	name = "Carbon Cabrón",
 	description = "Provide technut with materials for suit carbon fibre.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_AttachmentCarbon"] = ix.progression.status["technutItemDelivery_AttachmentCarbon"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData
@@ -2171,8 +2370,9 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -2204,7 +2404,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 	name = "Armoring up Pt. 1",
 	description = "Provide technut with materials for suit kevlar.",
 	keyNpc = "'Technut'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["technutItemDelivery_AttachmentKevlar1"] = ix.progression.status["technutItemDelivery_AttachmentKevlar1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData
@@ -2254,8 +2454,9 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -2338,8 +2539,9 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["technutItemDelivery_AttachmentKevlar2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["technutItemDelivery_AttachmentKevlar2"].complexData[item] = ix.progression.status["technutItemDelivery_AttachmentKevlar2"].complexData[item] or 0
+			if amt > ix.progression.status["technutItemDelivery_AttachmentKevlar2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then

@@ -120,6 +120,7 @@ SWEP.SpeedDec = 10
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "passive"
 SWEP.FireModes = {"semi"}
@@ -154,9 +155,9 @@ SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.55
 --SWEP.ClumpSpread = 0.0425
 SWEP.SpreadPerShot = 0.012
-SWEP.SpreadCooldown = 0.7
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 85
+SWEP.Damage = 75
 SWEP.DeployTime = .5
 
 SWEP.ReloadSpeed = 0.8
@@ -167,5 +168,5 @@ SWEP.ShotgunReload = true
 
 SWEP.Chamberable = true
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005

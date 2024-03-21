@@ -8,13 +8,25 @@ DIALOGUE.addTopic("GREETING", {
 		"NicknameTopic",
 		"BackgroundTopic",
 		"AboutWorkTopic",
-		"GetTask",
+		-- "GetTask",
+		"GetTaskByDifficulty",
 		"AboutProgression",
 		"StartBarter",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkilleasy", "mutantkillmedium", "town"}, 4)
+		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkilleasy", "mutantkillmedium", "town"}, 4)
+
+		if (SERVER) then
+			if target:GetNetVar("possibleJobs") == nil then
+				local possibleJobs = {}
+				possibleJobs["easy"] = {"mutantkilleasy", "item_part_NPC_easy"} -- TODO: Make sure these are updated
+				possibleJobs["medium"] = {"mutantkillmedium", "item_part_NPC_medium"}
+				possibleJobs["hard"] = {"mutantkillhard", "item_part_NPC_hard"}			
+	
+				target:SetNetVar("possibleJobs", possibleJobs)
+			end
+		end
 	end
 })
 
@@ -79,7 +91,7 @@ DIALOGUE.addTopic("NicknameTopic", {
 		end
 	end,
 	ShouldAdd = function()
-		return ix.progression.IsCompleted("oldtimerItemDelivery_Nickname") and LocalPlayer():getReputation() >= 1943
+		return ix.progression.IsCompleted("oldtimerItemDelivery_Nickname") and LocalPlayer():getReputation() >= 4100 --Professional
 	end
 })
 
@@ -337,6 +349,56 @@ DIALOGUE.addTopic("GetTask", {
 	end,
 })
 
+DIALOGUE.addTopic("GetTaskByDifficulty", {
+	statement = "Do you have any work for me?",
+	response = "Yes, what difficulty task are you looking for?.",
+	options = {
+		"BackTopic"
+	},
+	preCallback = function(self, client, target)
+		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
+			self.response = "I already gave you some work."
+		end
+	end,
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+		
+		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
+			table.insert(dynopts, {statement = "A trivial task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "easy"}})
+			table.insert(dynopts, {statement = "A challenging task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "medium"}})
+			table.insert(dynopts, {statement = "A hard task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "hard"}})
+		end
+		
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if (SERVER) then
+			local possibleJobs = target:GetNetVar("possibleJobs")
+			local jobCategories = table.Random(possibleJobs[dyndata.difficulty])
+			local jobid = ix.jobs.getJobFromCategory(jobCategories)
+
+			if !client:ixJobAdd(jobid, target:GetDisplayName()) then
+				return "BackTopic", dynopts
+			end
+			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(jobid))
+			ix.jobs.setNPCJobTaken(target:GetDisplayName(), jobid)
+		end		
+
+		-- Return the next topicID
+		return "BackTopic", dynopts
+	end,
+	ShouldAdd = function()
+		if (!LocalPlayer():GetCharacter():GetJobs()["'Old Timer'"]) then
+			return true
+		end
+	end,
+})
+
 DIALOGUE.addTopic("ViewProgression", {
 	statement = "",
 	response = "",
@@ -424,14 +486,8 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 					local amtneed = amtreq - amtcur
 
 					if(item)then
-						local amtavailable = item:GetData("quantity", 1)
+						local amtavailable = item:GetData("quantity", item.quantity or 1)
 						local amtfinal = amtavailable >= amtneed and amtneed or amtavailable
-
-						item:SetData("quantity", item:GetData("quantity",0) - amtfinal)
-						
-						if(item:GetData("quantity", 0) < 1)then
-							item:Remove()
-						end
 
 						--Adds reward
 						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item, amtfinal)
@@ -439,6 +495,12 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 						ix.dialogue.notifyReputationReceive(player, repReward)
 						player:GetCharacter():GiveMoney(monReward)
 						ix.dialogue.notifyMoneyReceive(player, monReward)
+						
+						item:SetData("quantity", item:GetData("quantity",0) - amtfinal)
+						
+						if(item:GetData("quantity", 0) < 1)then
+							item:Remove()
+						end
 
 						ix.progression.AddComplexProgressionValue(dyndata.progid, {dyndata.itemid, amtfinal}, player:Name())
 					end
@@ -523,7 +585,7 @@ DIALOGUE.addTopic("StartBarter", {
 			for _, reqitem in pairs(barterstruct.reqItem) do
 				local reqItemCnt = reqitem[2] or 1
 
-				table.insert(dynopts, {statement = reqItemCnt.."x "..ix.item.list[reqitem[1]].name.." for "..barterCnt.."x "..ix.item.list[barterItem[1]].name, topicID = "StartBarter", dyndata = {npcname = "'Old Timer'", identifier = barterid, reqitem = reqitem[1]}})
+				table.insert(dynopts, {statement = reqItemCnt.."x "..ix.item.list[reqitem[1]].name.." to "..barterCnt.."x "..ix.item.list[barterItem[1]].name, topicID = "StartBarter", dyndata = {npcname = "'Old Timer'", identifier = barterid, reqitem = reqitem[1]}})
 			end
 		end
 
@@ -554,13 +616,14 @@ DIALOGUE.addTopic("BackTopic", {
 		"NicknameTopic",
 		"BackgroundTopic",
 		"AboutWorkTopic",
-		"GetTask",
+		-- "GetTask",
+		"GetTaskByDifficulty",
 		"AboutProgression",
 		"StartBarter",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkilleasy", "mutantkillmedium", "town"}, 4)
+				
 	end
 })
 

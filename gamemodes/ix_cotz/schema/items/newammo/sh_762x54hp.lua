@@ -5,7 +5,7 @@ ITEM.height = 1
 ITEM.ammo = "7.62x54MMR -HP-" // type of the ammo
 ITEM.ammoAmount = 60 // amount of the ammo
 ITEM.description = ""
-ITEM.quantdesc =  "A box that contains %s rounds of Hollow-Point 7.62x54mm ammo. "
+ITEM.quantdesc =  "A box that contains %s rounds of Overpressure 7.62x54mm ammo. "
 ITEM.longdesc = "Cheap 7.62 PP (also known as 7.62 R) is a dated rifle caliber introduced in the Soviet Empire at the turn of the 19th century and was still used by the USSR after World War II. It was originally designed for the Mosin-Nagant standard-issue infantry rifle and is quite common in the Zone due to the popularity of the rifle. The round is relatively cheap but has surprisingly good penetrative capabilities, even in comparison to more modern ammo types. It can also be used as a cheaper solution in the PKM machine gun."
 ITEM.price = 2100
 ITEM.width = 2
@@ -17,4 +17,10 @@ ITEM.flatweight = 0.05
 
 function ITEM:GetWeight()
   return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
+end
+
+function ITEM:PopulateTooltip(tooltip)
+  if (!self.entity) then
+      ix.util.PropertyDesc(tooltip, "Overpressure Ammunition", Color(64, 224, 208))
+  end
 end

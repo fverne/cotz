@@ -7,6 +7,8 @@ ITEM.price = 500
 ITEM.flag = "A"
 ITEM.CustomSpawngroup = "hidestash_tier_1"
 
+ITEM.mapToGenerateStashOn = "rp_marsh_cs"
+
 ITEM.exRender = true
 ITEM.iconCam = {
 	pos = Vector(0, 0, 19.607843399048),
@@ -18,7 +20,8 @@ function ITEM:GetDescription()
 	if self:GetData("stashtext", nil) == nil then
 		return self.description
 	else
-		return self.description.."\n\nThe note has a stash location. It reads:\n"..self:GetData("stashtext", nil)
+		local longlat = ix.util.GetLongLatFromVector(self:GetData("stashcoordinates", Vector(0,0,0)), self:GetData("map"))
+		return self.description.."\n\nThe note has a stash location. It reads: "..self:GetData("stashtext", nil).."\n\nA set of coordinates are also present:\n"..math.Round(longlat[1],4).." Latitude, "..math.Round(longlat[2],4).." Longtitude"
 	end
 end
 
@@ -27,8 +30,14 @@ ITEM.functions.use = {
 	icon = "icon16/stalker/unlock.png",
 	OnRun = function(item)
 		local loot = { ix.util.GetRandomItemFromPool(item.CustomSpawngroup or "ix_entbox_drops") }
-		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPoint()
+		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPoint(item.mapToGenerateStashOn)
 		local stashcontent = "CONTENT: "
+
+		if( game.GetMap() != item.mapToGenerateStashOn) then 
+			item.player:Notify("You can't seem to make sense of what you read, maybe this would make more sense on: "..item.mapToGenerateStashOn)
+
+			return false 
+		end
 
 		if !spawnpoint then
 			item.player:Notify("No hidestash spawn points defined for this map, contact the developers.")
@@ -36,10 +45,10 @@ ITEM.functions.use = {
 			return false
 		end
 
-		ix.plugin.list["hidestash"]:SpawnStash(spawnpoint[1], { loot[1], loot[2] })
+		ix.plugin.list["hidestash"]:SpawnStash(spawnpoint[1], { loot[1], loot[2] }, item.player:GetCharacter():GetID())
 		item:SetData("stashcoordinates", spawnpoint[1])
 		item:SetData("stashtext", spawnpoint[2])
-		item:SetData("map", game.GetMap())
+		item:SetData("map", item.mapToGenerateStashOn)
 
 		for i = 1, #loot[1] do
 			stashcontent = stashcontent..", "..loot[i][1]

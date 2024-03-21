@@ -98,8 +98,8 @@ if CLIENT then
 	SWEP.CustomizePos = Vector(-5.54, 2.516, -0.764)
 	SWEP.CustomizeAng = Vector(21.302, -28.997, -18.444)
 	
-	SWEP.SprintPos = Vector(-2.161, -0.621, -1.081)
-	SWEP.SprintAng = Vector(-15.775, -42.013, 26.052)
+	SWEP.SprintPos = Vector(-2.161, -1.621, -1.081)
+	SWEP.SprintAng = Vector(-17.775, -22.013, 26.052)
 
 	SWEP.DrawCrosshair = false
 	SWEP.AimSwayIntensity = 0.6
@@ -208,17 +208,17 @@ end
 	SWEP.FireDelay = 0.066666666666667
 	SWEP.Recoil = 1.05
 
-	SWEP.WearDamage = 0.1
-	SWEP.WearEffect = 0.05
+	SWEP.WearDamage = 0.11
+	SWEP.WearEffect = 0.015
 
 	SWEP.HipSpread = 0.045
-	SWEP.AimSpread = 0.003
+	SWEP.AimSpread = 0.004
 	SWEP.VelocitySensitivity = 1.8
-	SWEP.MaxSpreadInc = 0.04
+	SWEP.MaxSpreadInc = 0.08
 	SWEP.SpreadPerShot = 0.007
-	SWEP.SpreadCooldown = 0.13
+	SWEP.SpreadCooldown = 0.2
 	SWEP.Shots = 1
-	SWEP.Damage = 72
+	SWEP.Damage = 86
 	SWEP.DeployTime = 0.6
 
 	SWEP.ReloadSpeed = 1

@@ -30,7 +30,7 @@ function ENT:Initialize()
 	self.Entity:SetKeyValue("rendercolor", "150 255 150")
 	self.Entity:SetKeyValue("renderamt", "0")
 	self.Entity:SetMaterial("models/props_combine/portalball001_sheet")
-	self.Entity:SetPersistent(true)
+	
         local phys = self.Entity:GetPhysicsObject()
 	if (phys:IsValid()) then
 		phys:Wake()
@@ -40,7 +40,7 @@ end
 function ENT:Think()
 	if self.delayTime < CurTime() then
 		self.delayTime = CurTime() + 0.2
-		for k, v in pairs( ents.FindInSphere( self.Entity:GetPos(), 2560 )  ) do
+		for k, v in pairs( ents.FindInSphere( self.Entity:GetPos(), 9999999 )  ) do
 			if (v:IsPlayer() and v:GetCharacter() and v:GetMoveType() != MOVETYPE_NOCLIP) then
 				if v:GetPos( ):Distance( self:GetPos( ) ) <= self.range then
 				

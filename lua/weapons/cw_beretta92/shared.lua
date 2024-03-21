@@ -121,7 +121,7 @@ SWEP.WorldModel		= "models/weapons/w_M92f_p228.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.WearDamage = 0.125
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05
 
 SWEP.Primary.ClipSize		= 15
@@ -132,22 +132,22 @@ SWEP.Primary.Ammo			= "9x19MM"
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_BERETTA92_FIRE"
 SWEP.FireSoundSuppressed = "CW_BERETTA92_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.9
+SWEP.Recoil = 1.1
 
-SWEP.HipSpread = 0.125
-SWEP.AimSpread = 0.025
-SWEP.VelocitySensitivity = 6
-SWEP.MaxSpreadInc = 0.5
-SWEP.SpreadPerShot = 0.007
+SWEP.HipSpread = 0.05
+SWEP.AimSpread = 0.02
+SWEP.VelocitySensitivity = 2
+SWEP.MaxSpreadInc = 0.075
+SWEP.SpreadPerShot = 0.02
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 42
+SWEP.Damage = 58
 SWEP.DeployTime = 0.2
---SWEP.Chamberable = false
+SWEP.Chamberable = false
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2.1
-SWEP.ReloadHalt = 2.1
+SWEP.ReloadTime = 2.4
+SWEP.ReloadHalt = 2.5
 
-SWEP.ReloadTime_Empty = 1.69
-SWEP.ReloadHalt_Empty = 2.3
+SWEP.ReloadTime_Empty = 2.4
+SWEP.ReloadHalt_Empty = 2.5

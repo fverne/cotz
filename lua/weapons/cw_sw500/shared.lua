@@ -36,8 +36,8 @@ if CLIENT then
 	SWEP.CustomizePos = Vector(1, -5, -5)
 	SWEP.CustomizeAng = Vector(40, 15, 10)
 	
-	SWEP.AlternativePos = Vector(-2.2, 2.0, -0.3)
-	SWEP.AlternativeAng = Vector(0, 0, 0)
+	SWEP.AlternativePos = Vector(-1.95, 2.0, -0.6)
+	SWEP.AlternativeAng = Vector(0, 0, 4)
 
 	SWEP.ViewModelMovementScale = 1
 	SWEP.FullAimViewmodelRecoil = true
@@ -133,23 +133,23 @@ SWEP.FireSound = "CW_SW500_FIRE"
 SWEP.FireSoundSuppressed = "CWC_MATEBA_FIRE_SUP"
 SWEP.Recoil = 8
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.07
 SWEP.AimSpread = 0.00001
 SWEP.VelocitySensitivity = 4
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.MaxSpreadInc = 0.07
+SWEP.SpreadPerShot = 0.07
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 245
+SWEP.Damage = 200
 SWEP.DeployTime = 0.7
 SWEP.Chamberable = false
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 1.6
-SWEP.ReloadHalt = 2.7
+SWEP.ReloadTime = 3.4
+SWEP.ReloadHalt = 3.5
 
-SWEP.ReloadTime_Empty = 1.6
-SWEP.ReloadHalt_Empty = 2.7
+SWEP.ReloadTime_Empty = 3.4
+SWEP.ReloadHalt_Empty = 3.5
 
-SWEP.WearDamage = 0.1
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05

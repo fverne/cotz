@@ -40,6 +40,10 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 ENT.hp = 600
 ENT.hpvar = 100
 
+ENT.FBR = 5
+ENT.FBRAP = 0
+ENT.BR = 5
+
 ENT.CanFakeDeath = true
 ENT.FakeDeath = 0
 ENT.FakeDeathTimer = 0
@@ -77,7 +81,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 30
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 0.7
@@ -87,7 +91,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 30
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 0.7
@@ -97,7 +101,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 30
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 0.7
@@ -105,7 +109,7 @@ function ENT:Initialize()
 	self:STALKERNPCSetMeleeParams(3,"stand_attack_2",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 	
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 30
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 0.7
@@ -167,15 +171,7 @@ function ENT:STALKERNPCOnDeath()
 	self:EmitSound("npc/antlion_grub/squashed.wav")
 	self:EmitSound("weapons/mortar/mortar_explode1.wav")
 
-	local effectdata = EffectData()
-	effectdata:SetOrigin( self:GetPos() + Vector(0,0,32) )
-	effectdata:SetAngles( self:GetUp():Angle() )
-	effectdata:SetMagnitude( 1 )
-	effectdata:SetScale( 4 )
-	effectdata:SetRadius( 2 )
-	effectdata:SetColor( 0 )
-	effectdata:SetFlags( 0 )
-	util.Effect( "StriderBlood", effectdata, true, true )
+	ParticleEffect("wick_gore_bloodsplash_new" , self:GetPos(), Angle( 0, 0, 0 ) )
 
 	for _,v in pairs(ents.FindInSphere(self:GetPos(),256)) do
 		if (v == self or (!v:IsNPC() and !v:IsPlayer()) or !v:Alive()) then continue end

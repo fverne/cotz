@@ -20,8 +20,6 @@ ITEM.canAttach = true
 
 ITEM.unloadedweight = 0
 
-ITEM.repair_PartsComplexity = 1
-ITEM.repair_PartsRarity = 1
 
 -- Inventory drawing
 if (CLIENT) then
@@ -156,7 +154,7 @@ function ITEM:PopulateTooltip(tooltip)
 end
 
 function ITEM:GetRepairCost()
-	return ((self.price * 0.0025) * self.repair_PartsComplexity) + ((self.price * 0.0025) * self.repair_PartsRarity)
+	return math.pow(self.price, 0.4)
 end
 
 -- On item is dropped, Remove a weapon from the player and keep the ammo in the item.
@@ -222,7 +220,9 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	tip = "equipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)
-		item:Unequip(item.player, true)
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Unequipping...", 4, function(ply) 
+			item:Unequip(ply, true)
+		end)
 		return false
 	end,
 	OnCanRun = function(item)
@@ -239,7 +239,9 @@ ITEM.functions.Equip = {
 	tip = "equipTip",
 	icon = "icon16/stalker/equip.png",
 	OnRun = function(item)
-		item:Equip(item.player)
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Equipping...", 4, function(ply) 
+			item:Equip(ply)
+		end)
 		return false
 	end,
 	OnCanRun = function(item)
@@ -373,7 +375,7 @@ function ITEM:Equip(client)
 			end
 		end)
 
-		timer.Simple(1,function() -- To make up for lag
+		timer.Simple(0.5,function() -- To make up for lag
 			local attachments = self:GetData("attachments") or {}
 			local weapon1 = client:GetWeapon(self.class)
 			
@@ -393,6 +395,12 @@ function ITEM:Equip(client)
 
 	if (IsValid(weapon)) then
 		local ammoType = weapon:GetPrimaryAmmoType()
+
+		-- if wish granted
+		if self:GetData("unlimitedDurability", nil) then
+			weapon.WearDamage = 0
+			weapon.DurabilityDamageChance = 0
+		end
 
 		client.carryWeapons[self.weaponCategory] = weapon
 		client:SelectWeapon(weapon:GetClass())
@@ -604,7 +612,7 @@ function ITEM:OnRemoved()
 end
 
 function ITEM:GetPrice()
-    return self.price * (math.Clamp(self:GetData("durability",100), 15, 100)/100)
+    return self.price * (math.Clamp(self:GetData("durability",100), 5, 100)/100)
 end
 
 ITEM.functions.detach = {
@@ -641,7 +649,7 @@ ITEM.functions.detach = {
 				end
 			end
 			
-			if table.remove(curattach,iterator) == nil then
+			if table.remove(curattach,iterator) != data[1] then
 				return false
 			end
 

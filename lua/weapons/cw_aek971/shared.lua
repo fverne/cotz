@@ -135,8 +135,8 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
@@ -155,19 +155,19 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.45x39MM"
 
-SWEP.FireDelay = 0.0923076923
+SWEP.FireDelay = 0.0666666
 SWEP.FireSound = "CW_AEK971_FIRE"
 SWEP.FireSoundSuppressed = "CW_AK74_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.7
+SWEP.Recoil = 1.2
 
-SWEP.HipSpread = 0.15
-SWEP.AimSpread = 0.005
+SWEP.HipSpread = 0.09
+SWEP.AimSpread = 0.008
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.MaxSpreadInc = 0.10
+SWEP.SpreadPerShot = 0.012
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 70
+SWEP.Damage = 78
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 0.7

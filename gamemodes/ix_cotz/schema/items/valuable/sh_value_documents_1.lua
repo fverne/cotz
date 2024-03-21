@@ -1,6 +1,6 @@
-ITEM.name = "Empty Noteblock"
-ITEM.description = "A Noteblock. All the pages are empty."
-ITEM.longdesc = "This Noteblock has none of it's pages written on. It's worth very little, as paper rarely has any value in the zone, as many messages are done digitally. Some old fashioned people might find use for it however, but you most likely won't net a large sum of money."
+ITEM.name = "Empty Notebook"
+ITEM.description = "A Notebook. All the pages are empty."
+ITEM.longdesc = "This Notebook has none of it's pages written on. It's worth very little, as paper rarely has any value in the zone, as many messages are done digitally. Some old fashioned people might find use for it however, but you most likely won't net a large sum of money."
 ITEM.model = "models/lostsignalproject/items/quest/notes_writing_book_2.mdl"
 
 ITEM.width = 1

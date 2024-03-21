@@ -114,25 +114,25 @@ SWEP.Primary.Ammo			= "9x18MM"
 SWEP.FireDelay = 0.0705
 SWEP.FireSound = "CW_KIPARIS_FIRE"
 SWEP.FireSoundSuppressed = "CW_SKORPION_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.9
+SWEP.Recoil = 0.9
 
-SWEP.WearDamage = 0.05
-SWEP.WearEffect = 0.2
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.125
-SWEP.AimSpread = 0.025
+SWEP.HipSpread = 0.05
+SWEP.AimSpread = 0.02
 SWEP.VelocitySensitivity = 4
-SWEP.MaxSpreadInc = 0.6
-SWEP.SpreadPerShot = 0.08
-SWEP.SpreadCooldown = 0.95
+SWEP.MaxSpreadInc = 0.05
+SWEP.SpreadPerShot = 0.009
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 33
+SWEP.Damage = 40
 SWEP.DeployTime = 0.5
 
 SWEP.ReloadSpeed = 1
 SWEP.ReloadTime = 1.85
 SWEP.ReloadTime_Empty = 3
-SWEP.ReloadHalt = 1.85
+SWEP.ReloadHalt = 1.86
 SWEP.ReloadHalt_Empty = 3
 
-SWEP.SnapToIdlePostReload = false
+SWEP.SnapToIdlePostReload = true

@@ -8,8 +8,8 @@ ITEM.width = 2
 ITEM.height = 2
 
 ITEM.WeightPerHunger = 0.100
-ITEM.BaseWeight = 8.144
-ITEM.WeightPerLevel = 2.843
+ITEM.BaseWeight = 3.144
+ITEM.WeightPerLevel = 0.143
 
 ITEM.meal = "meal_pseudogiant"
 

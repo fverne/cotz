@@ -14,8 +14,8 @@ if CLIENT then
 	SWEP.PosBasedMuz = false
 	SWEP.NoShells = true
 		
-	SWEP.IronsightPos = Vector(-1.961, -2.721, 1.12)
-	SWEP.IronsightAng = Vector(1.899, -0.101, 0)
+	SWEP.IronsightPos = Vector(-5.78, -6.50, 3.05)
+	SWEP.IronsightAng = Vector(0, 0, 0)
 	
 	SWEP.SprintPos = Vector(0.256, 0.01, 1.2)
 	SWEP.SprintAng = Vector(-17.778, 0, 0)
@@ -35,14 +35,15 @@ SWEP.BarrelBGs = {main = 1, regular = 1, long = 2, short = 0}
 SWEP.LuaViewmodelRecoil = false
 SWEP.CanRestOnObjects = false
 SWEP.ADSFireAnim = true
+SWEP.UseHands = true
 
 SWEP.Attachments = {
 ["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds", "am_magnumbuck"}}
 }
 	
-SWEP.Animations = {fire = "fire_iron",
+SWEP.Animations = {fire = "shoot",
 	reload = "reload",
-	reload_empty = "reload_empty",
+	reload_empty = "anm_reload_empty",
 	idle = "idle",
 	draw = "draw"}
 	
@@ -52,9 +53,11 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 	[2] = {time = 3.2, sound = "CW_TOZ_SHELL1"},
 	[3] = {time = 4.5, sound = "CW_TOZ_CLOSE"}},
 	
-	reload_empty = {[1] = {time = 0.4, sound = "CW_TOZ_OPEN"},
-	[2] = {time = 2.6, sound = "CW_TOZ_SHELL1"},
-	[3] = {time = 3.6, sound = "CW_TOZ_CLOSE"}}}
+	anm_reload_empty = {[1] = {time = 0.4, sound = "CW_TOZ_OPEN"},
+	[2] = {time = 3.2, sound = "CW_TOZ_SHELL1"},
+	[3] = {time = 3.9, sound = "CW_TOZ_SHELL1"},
+	[4] = {time = 4.7, sound = "CW_TOZ_CLOSE"},
+	[5] = {time = 5.5, sound = "CW_TOZ_HAMMER"}}}
 
 SWEP.SpeedDec = 10
 
@@ -67,17 +70,17 @@ SWEP.FireModes = {"break"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.WearDamage = 0.5
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 90
+SWEP.ViewModelFOV	= 40
 SWEP.ViewModelFlip	= false
-SWEP.ViewModel		= "models/weapons/stalker/toz66.mdl"
+SWEP.ViewModel		= "models/weapons/tfa_ins2/wpn_bm16_full_hud_v.mdl"
 SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl"
 
 SWEP.DrawTraditionalWorldModel = false
@@ -104,9 +107,9 @@ SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
 SWEP.ClumpSpread = 0.0095
 SWEP.SpreadPerShot = 0.3
-SWEP.SpreadCooldown = 0.6
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 9
-SWEP.Damage = 24
+SWEP.Damage = 35
 SWEP.DeployTime = 1
 SWEP.Chamberable = false
 
@@ -114,8 +117,8 @@ SWEP.Chamberable = false
 SWEP.ReloadSpeed = 1.2
 SWEP.ReloadTime = 3.2
 SWEP.ReloadTime_Empty = 3.2
-SWEP.ReloadHalt = 4.8
-SWEP.ReloadHalt_Empty = 3.9
+SWEP.ReloadHalt = 5.8
+SWEP.ReloadHalt_Empty = 6.6
 
 function SWEP:IndividualInitialize()
 	self:setBodygroup( 1 , 1 )

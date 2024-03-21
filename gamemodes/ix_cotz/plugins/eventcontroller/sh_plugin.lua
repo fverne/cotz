@@ -37,7 +37,7 @@ if SERVER then
 		for i,j in pairs (currentents) do
 			if j:IsPlayer() then
 				return false
-			elseif (string.sub(j:GetClass(), 1, 10) == "npc_mutant") then
+			elseif (string.sub(j:GetClass(), 1, 4) == "npc_") then
 				return false
 			end
 		end
@@ -53,13 +53,13 @@ if SERVER then
 					local data = {}
 					data.start = position
 					data.endpos = position
-					data.mins = Vector(-42, -42, 0)
-					data.maxs = Vector(42, 42, 42)
-					local trace = util.TraceHull(data)
-							
-					if trace.Entity:IsValid() then
-						continue
-					end
+					data.mins = Vector(-96, -96, 0)
+					data.maxs = Vector(96, 96, 256)
+
+					-- local trace = util.TraceHull(data)		
+					-- if trace.Hit then
+					-- 	continue
+					-- end
 
 					local newNPC = ents.Create(spawn.entities[k][1])
 					newNPC:SetPos(position)
@@ -120,6 +120,8 @@ if SERVER then
 
 	function PLUGIN:LoadData()
 		self.eventpoints = self:GetData() or {}
+
+		self.eventpoints[game.GetMap()] = self.eventpoints[game.GetMap()] or {}
 	end
 
 	function PLUGIN:SaveData()
@@ -131,24 +133,17 @@ if SERVER then
 		local teleres
 		local tracecnt = 0
 
-		local firstTrace = util.TraceLine( {
-				start = pos + Vector(0,0,64),
-				endpos = pos + Vector(0,0,512),
-				mask = MASK_ALL,
-				ignoreworld = false
-			} )
-
 		repeat
 			local trace = util.TraceHull( {
-				start = firstTrace.HitPos - Vector(0,0,64),
-				endpos = pos + Vector(math.random(-PLUGIN.spawnradius,PLUGIN.spawnradius),math.random(-PLUGIN.spawnradius,PLUGIN.spawnradius),-400),
-				mins = Vector( -32, -32, 0 ),
-				maxs = Vector( 32, 32, 64 ),
-				mask = MASK_ALL,
+				start = pos + Vector(0,0,16),
+				endpos = pos + Vector(math.random(-PLUGIN.spawnradius,PLUGIN.spawnradius),math.random(-PLUGIN.spawnradius,PLUGIN.spawnradius),0),
+				mins = Vector(-96, -96, 0),
+				maxs = Vector(96, 96, 256),
+				mask = MASK_SOLID,
 				ignoreworld = false
 			} )
 
-			if not trace.HitSky then
+			if not trace.Hit then
 				tracegood = true
 				teleres = trace.HitPos + ( trace.HitNormal * 32 )
 			end
@@ -157,7 +152,7 @@ if SERVER then
 
 			if tracecnt > 50 then
 				tracegood = true
-				teleres = pos + Vector(0,0,64) -- Teleport to original position if we cant find a position
+				teleres = pos + Vector(0, 0, 16) -- Teleport to original position if we cant find a position
 			end
 
 		until tracegood
@@ -167,18 +162,24 @@ if SERVER then
 	end
 	
 	function PLUGIN:Think()
+		if table.IsEmpty(self.eventpoints) then return end
+
 		if populate then
 			for i = 1, self.populateAmount do
-				local eventpoint = table.Random(self.eventpoints)
+				local eventpoint = table.Random(self.eventpoints[game.GetMap()])
 				local spawn = table.Random(self.eventdefs)
 
 				if (!eventpoint) then
 					return
 				end
 
-				while table.Random(spawn.difficulty) != eventpoint[3] do
+				local n = 0
+				while table.Random(spawn.difficulty) != eventpoint[3] and n<15 do
 					spawn = table.Random(self.eventdefs)
+					n = n + 1
 				end
+
+				if( n == 15 ) then return end
 				
 				self:spawnEvent(eventpoint,spawn)
 			end
@@ -191,7 +192,7 @@ if SERVER then
 
 		if( self:GetNumMutants() > ix.config.Get("eventControllerThreshold",35)) then return end
 
-		local eventpoint = table.Random(self.eventpoints)
+		local eventpoint = table.Random(self.eventpoints[game.GetMap()])
 		if (!eventpoint) then
 			return
 		end
@@ -203,6 +204,8 @@ if SERVER then
 			spawn = table.Random(self.eventdefs)
 			n = n + 1
 		end
+
+		if( n == 15 ) then return end
 
 		self:spawnEvent(eventpoint, spawn)
 		
@@ -224,7 +227,7 @@ if SERVER then
 	end	
 
 	function PLUGIN:GetNumMutants()
-		return #ents.FindByClass("npc_mutant_*")
+		return #ents.FindByClass("npc_*")
 	end
 else
 	netstream.Hook("nut_DisplaySpawnPoints", function(data)
@@ -257,7 +260,7 @@ ix.command.Add("eventadd", {
 		local difficulty = difficulty or 1
 
 		if isnumber(difficulty) then
-			table.insert( PLUGIN.eventpoints, { hitpos, name, difficulty } )
+			table.insert( PLUGIN.eventpoints[game.GetMap()], { hitpos, name, difficulty } )
 			client:Notify( "Event area named '"..name.."' with difficulty "..difficulty.." succesfully added"  )
 		else
 			client:ChatPrint("Difficulty must be a number.")
@@ -272,10 +275,10 @@ ix.command.Add("eventremove", {
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local range = arguments[1] or 128
 		local mt = 0
-		for k, v in pairs( PLUGIN.eventpoints ) do
+		for k, v in pairs( PLUGIN.eventpoints[game.GetMap()] ) do
 			local distance = v[1]:Distance( hitpos )
 			if distance <= tonumber(range) then
-				PLUGIN.eventpoints[k] = nil
+				PLUGIN.eventpoints[game.GetMap()][k] = nil
 				mt = mt + 1
 			end
 		end
@@ -287,7 +290,7 @@ ix.command.Add("eventdisplay", {
 	adminOnly = true,
 	OnRun = function(self, client, arguments)
 		if SERVER then
-			netstream.Start(client, "nut_DisplaySpawnPoints", PLUGIN.eventpoints)
+			netstream.Start(client, "nut_DisplaySpawnPoints", PLUGIN.eventpoints[game.GetMap()])
 			client:Notify( "Displayed All Points for 10 secs." )
 		end
 	end

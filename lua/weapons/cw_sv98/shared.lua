@@ -169,20 +169,20 @@ SWEP.GlobalDelayOnShoot = 1.1
 SWEP.WearDamage = 0.1
 SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 3
+SWEP.VelocitySensitivity = 12
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 120
+SWEP.Damage = 210
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1
 SWEP.ReloadTime = 2.4
 SWEP.ReloadTime_Empty = 2.4
 SWEP.ReloadHalt = 2.5
-SWEP.ReloadHalt_Empty = 3
+SWEP.ReloadHalt_Empty = 3.4
 SWEP.Chamberable = true
 SWEP.SnapToIdlePostReload = true

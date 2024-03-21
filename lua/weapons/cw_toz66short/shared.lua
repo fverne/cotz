@@ -75,7 +75,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 50
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/tayley/v_bm16.mdl"
 SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_toz66_obrez.mdl"
@@ -97,8 +97,8 @@ SWEP.FireDelay = 0.01
 SWEP.FireSound = "CW_TOZ_FIRE"
 SWEP.Recoil = 4.7
 
-SWEP.WearDamage = 0.5
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.HipSpread = 0.06
 SWEP.AimSpread = 0.006
@@ -106,15 +106,15 @@ SWEP.VelocitySensitivity = 6
 SWEP.MaxSpreadInc = 0.4
 SWEP.ClumpSpread = 0.0425
 SWEP.SpreadPerShot = 0.3
-SWEP.SpreadCooldown = 0.5
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 9
-SWEP.Damage = 21
+SWEP.Damage = 35
 SWEP.DeployTime = 1
 SWEP.Chamberable = false
 
 
 SWEP.ReloadSpeed = 1.2
-SWEP.ReloadTime = 3.2
-SWEP.ReloadTime_Empty = 3.2
-SWEP.ReloadHalt = 3.5
-SWEP.ReloadHalt_Empty = 3.5
+SWEP.ReloadTime = 3.4
+SWEP.ReloadTime_Empty = 3.4
+SWEP.ReloadHalt = 3.7
+SWEP.ReloadHalt_Empty = 3.7

@@ -4,19 +4,19 @@ local Emitter = ParticleEmitter(Vector(0,0,0))
 
 function ENT:Initialize()
 
-	
-	self.Timer = CurTime() + 3
+	self.Duration = 10
+	self.Timer = CurTime() + self.Duration
 	self.DustTimer = 0
 	self.Distance = 1200
 	self.SpawnTable = {}
 	
 	local trace = {}
 	trace.start = self.Entity:GetPos()
-	trace.endpos = trace.start + Vector(1200,1200,0)
+	trace.endpos = trace.start + Vector(self.Distance,self.Distance,0)
 	trace.ignoreworld = true 
 	local tr = util.TraceLine( trace )
 	
-	self.Left = trace.start + Vector(1200,1200,0)
+	self.Left = trace.start + Vector(self.Distance,self.Distance,0)
 	
 	if tr.Hit then
 	
@@ -26,11 +26,11 @@ function ENT:Initialize()
 	
 	trace = {}
 	trace.start = self.Entity:GetPos()
-	trace.endpos = trace.start + Vector(-1200,-1200,0)
+	trace.endpos = trace.start + Vector(-self.Distance,-self.Distance,0)
 	trace.ignoreworld = true 
 	tr = util.TraceLine( trace )
 	
-	self.Right = trace.start + Vector(-1200,-1200,0)
+	self.Right = trace.start + Vector(-self.Distance,-self.Distance,0)
 	
 	if tr.Hit then
 	
@@ -48,11 +48,11 @@ function ENT:Think()
 	local mypos = self:GetPos()
 	local dist = LocalPlayer():GetPos():Distance(mypos)
 	
-	if(dist < 3000) then
+	if(dist < 4000) then
 	
 		if self.DustTimer < CurTime() then
 		
-			self.DustTimer = CurTime() + 0.1
+			self.DustTimer = CurTime() + 0.5
 		
 			local vec = Vector( math.random( self.Right.x, self.Left.x ), math.random( self.Right.y, self.Left.y ), self.Entity:GetPos().z )
 			
@@ -66,7 +66,7 @@ function ENT:Think()
 			local roll = math.random( -360, 360 )
 		
 			local particle = Emitter:Add( "particle/particle_smokegrenade", tr.HitPos )
-			particle:SetDieTime( 10 )
+			particle:SetDieTime( self.Duration )
 			particle:SetStartAlpha( 0 )
 			particle:SetEndAlpha( 150 )
 			particle:SetStartSize( math.random( 400, 800 ) )
@@ -74,7 +74,7 @@ function ENT:Think()
 			particle:SetRoll( roll )
 			particle:SetColor( 150, 150, 100 )
 			
-			table.insert( self.SpawnTable, { CurTime() + 10, tr.HitPos, roll } )
+			table.insert( self.SpawnTable, { CurTime() + self.Duration, tr.HitPos, roll } )
 		
 		end
 		
@@ -84,7 +84,7 @@ function ENT:Think()
 			
 				local particle = Emitter:Add( "particle/particle_smokegrenade", v[2] )
 				particle:SetVelocity( Vector( 0, 0, math.random( -10, 10 ) ) )
-				particle:SetDieTime( 10 )
+				particle:SetDieTime( self.Duration )
 				particle:SetStartAlpha( 150 )
 				particle:SetEndAlpha( 0 )
 				particle:SetStartSize( 600 )

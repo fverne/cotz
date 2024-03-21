@@ -14,11 +14,12 @@ ENT.DieSound.name = "Stalker.Controller.Die"
 ENT.DieSound.min = 1
 ENT.DieSound.max = 2
 
-ENT.hp = 1500
+ENT.hp = 500
 ENT.hpvar = 100
 
-ENT.flatbulletresistance = 2
-ENT.percentbulletresistance = 5
+ENT.FBR = 5
+ENT.FBRAP = 5
+ENT.BR = 10
 
 ENT.CanSpecial = true
 
@@ -35,6 +36,8 @@ ENT.VisibleSchedule = SCHED_RUN_FROM_ENEMY_FALLBACK
 ENT.RangeSchedule = SCHED_RUN_RANDOM
 
 ENT.farttimer = 0
+
+ENT.sndGeigerHeavy = {"geiger/heavy/geiger_heavy_1.wav", "geiger/heavy/geiger_heavy_2.wav", "geiger/heavy/geiger_heavy_3.wav", "geiger/heavy/geiger_heavy_4.wav", "geiger/heavy/geiger_heavy_5.wav" }
 
 function ENT:Initialize()
 	self.Model = "models/monsters/tibet.mdl"
@@ -166,14 +169,6 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 
 		self.CanSpecial = false
 		self.CanSpecialTimer = CurTime()+9
-	end
-end
-
-function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 end
 

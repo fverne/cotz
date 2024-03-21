@@ -14,11 +14,12 @@ ENT.DieSound.name = "Stalker.Controller.Die"
 ENT.DieSound.min = 1
 ENT.DieSound.max = 2
 
-ENT.hp = 900
-ENT.hpvar = 300
+ENT.hp = 750
+ENT.hpvar = 50
 
-ENT.flatbulletresistance = 2
-ENT.percentbulletresistance = 5
+ENT.FBR = 3
+ENT.FBRAP = 10
+ENT.BR = 5
 
 ENT.CanSpecial = true
 
@@ -33,6 +34,8 @@ ENT.special1 = 0
 ENT.special2 = 0
 
 ENT.farttimer = 0
+
+ENT.sndGeigerHeavy = {"geiger/heavy/geiger_heavy_1.wav", "geiger/heavy/geiger_heavy_2.wav", "geiger/heavy/geiger_heavy_3.wav", "geiger/heavy/geiger_heavy_4.wav", "geiger/heavy/geiger_heavy_5.wav" }
 
 function ENT:Initialize()
 	self.Model = "models/monsters/controler.mdl"
@@ -121,32 +124,32 @@ function ENT:STALKERNPCThink()
 			self.GoingToSpawnThem = true
 			
 			self.Zombie1 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie1:SetPos(self:GetPos() +self:GetRight()*90)
+			self.Zombie1:SetPos(self:GetPos() +self:GetRight()*90 + self:GetUp()*16)
 			self.Zombie1:SetAngles(self:GetAngles())
 			self.Zombie1:Spawn()
 			
 			self.Zombie2 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie2:SetPos(self:GetPos() +self:GetRight()*-90)
+			self.Zombie2:SetPos(self:GetPos() +self:GetRight()*-90 + self:GetUp()*16)
 			self.Zombie2:SetAngles(self:GetAngles())
 			self.Zombie2:Spawn()
 			
 			self.Zombie3 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie3:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*40)
+			self.Zombie3:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*40 + self:GetUp()*16)
 			self.Zombie3:SetAngles(self:GetAngles())
 			self.Zombie3:Spawn()
 			
 			self.Zombie4 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie4:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*-40)
+			self.Zombie4:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*-40 + self:GetUp()*16)
 			self.Zombie4:SetAngles(self:GetAngles())
 			self.Zombie4:Spawn()
 			
 			self.Zombie5 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie5:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*-40)
+			self.Zombie5:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*-40 + self:GetUp()*16)
 			self.Zombie5:SetAngles(self:GetAngles())
 			self.Zombie5:Spawn()
 			
 			self.Zombie6 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie6:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*40)
+			self.Zombie6:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*40 + self:GetUp()*16)
 			self.Zombie6:SetAngles(self:GetAngles())
 			self.Zombie6:Spawn()
 		
@@ -224,14 +227,6 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 
 		self.CanSpecial = false
 		self.CanSpecialTimer = CurTime()+5
-	end
-end
-
-function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 end
 

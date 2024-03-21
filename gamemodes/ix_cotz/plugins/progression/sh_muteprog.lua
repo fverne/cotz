@@ -54,8 +54,9 @@ ix.progression.Register("muteItemDelivery_Binoc1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["muteItemDelivery_Binoc1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["muteItemDelivery_Binoc1"].complexData[item] = ix.progression.status["muteItemDelivery_Binoc1"].complexData[item] or 0
+			if amt > ix.progression.status["muteItemDelivery_Binoc1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -77,6 +78,7 @@ ix.progression.Register("muteItemDelivery_Binoc1", {
 
 			ix.progression.SetCompleted("muteItemDelivery_Binoc1", true)
 			ix.progression.SetActive("muteItemDelivery_Binoc2", true) 
+			ix.progression.SetActive("muteItemDelivery_Anomaly", true)
 
 		end
 	end
@@ -136,8 +138,9 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["muteItemDelivery_Binoc2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["muteItemDelivery_Binoc2"].complexData[item] = ix.progression.status["muteItemDelivery_Binoc2"].complexData[item] or 0
+			if amt > ix.progression.status["muteItemDelivery_Binoc2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -159,6 +162,7 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 
 			ix.progression.SetCompleted("muteItemDelivery_Binoc2", true)
 			ix.progression.SetActive("muteItemDelivery_Binoc3", true) 
+			ix.progression.SetActive("muteItemDelivery_Broadcast", true)
 
 		end
 	end
@@ -220,8 +224,9 @@ ix.progression.Register("muteItemDelivery_Binoc3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["muteItemDelivery_Binoc3"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["muteItemDelivery_Binoc3"].complexData[item] = ix.progression.status["muteItemDelivery_Binoc3"].complexData[item] or 0
+			if amt > ix.progression.status["muteItemDelivery_Binoc3"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -272,7 +277,7 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_techtool_3"] = 5,
+			["value_techtool_2"] = 5,
 			["value_frequencymodulator"] = 3,
 			["value_wire_heavy"] = 180,
 		}	
@@ -306,8 +311,9 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["muteItemDelivery_Binoc4"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["muteItemDelivery_Binoc4"].complexData[item] = ix.progression.status["muteItemDelivery_Binoc4"].complexData[item] or 0
+			if amt > ix.progression.status["muteItemDelivery_Binoc4"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -340,7 +346,7 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 	name = "Anomaly Detector",
 	description = "Mute is busy drawing pictures of anomalies.",
 	keyNpc = "'Mute'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["muteItemDelivery_Anomaly"] = ix.progression.status["muteItemDelivery_Anomaly"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Anomaly"].complexData
@@ -358,8 +364,8 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_techtool_2"] = 1,
-			["artifact_bolt"] = 10,
+			["value_techtool_1"] = 1,
+			["value_wire_copper"] = 10,
 		}	
 
 		return itemids
@@ -391,8 +397,9 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["muteItemDelivery_Anomaly"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["muteItemDelivery_Anomaly"].complexData[item] = ix.progression.status["muteItemDelivery_Anomaly"].complexData[item] or 0
+			if amt > ix.progression.status["muteItemDelivery_Anomaly"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -474,8 +481,9 @@ ix.progression.Register("muteItemDelivery_Detector", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["muteItemDelivery_Detector"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["muteItemDelivery_Detector"].complexData[item] = ix.progression.status["muteItemDelivery_Detector"].complexData[item] or 0
+			if amt > ix.progression.status["muteItemDelivery_Detector"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -508,7 +516,7 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 	name = "Keeping tabs",
 	description = "Mute is working on a server box.",
 	keyNpc = "'Mute'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["muteItemDelivery_Broadcast"] = ix.progression.status["muteItemDelivery_Broadcast"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Broadcast"].complexData
@@ -528,7 +536,7 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 		local itemids = {
 			["value_frequencymodulator"] = 1,
 			["value_techtool_3"] = 1,
-			["value_wirelesstrans"] = 25,
+			["value_wirelesstrans"] = 15,
 		}	
 
 		return itemids
@@ -560,8 +568,9 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["muteItemDelivery_Broadcast"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["muteItemDelivery_Broadcast"].complexData[item] = ix.progression.status["muteItemDelivery_Broadcast"].complexData[item] or 0
+			if amt > ix.progression.status["muteItemDelivery_Broadcast"].complexData[item] then isdone = false end
 		end
 
 		if isdone then

@@ -8,7 +8,7 @@ ITEM.height = 2
 
 ITEM.price = 12500
 
-ITEM.weight = 8.000
+ITEM.flatweight = 8.000
 
 ITEM.exRender = true
 ITEM.iconCam = {

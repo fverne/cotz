@@ -140,8 +140,8 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.02
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
@@ -151,7 +151,7 @@ SWEP.WorldModel		= "models/weapons/w_uzi.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 20
+SWEP.Primary.ClipSize		= 18
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= ".50 AE"
@@ -159,18 +159,18 @@ SWEP.Primary.Ammo			= ".50 AE"
 SWEP.Chamberable = false
 
 SWEP.FireDelay = 0.1
-SWEP.FireSound = "CW_MAC11_FIRE"
-SWEP.FireSoundSuppressed = "CW_MAC11_FIRE_SUPPRESSED"
+SWEP.FireSound = "CW_DEAGLE_FIRE"
+SWEP.FireSoundSuppressed = "CW_DEAGLE_FIRE_SUPPRESSED"
 SWEP.Recoil = 2.6
 
-SWEP.HipSpread = 0.125
-SWEP.AimSpread = 0.025
+SWEP.HipSpread = 0.085
+SWEP.AimSpread = 0.02
 SWEP.VelocitySensitivity = 1
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.MaxSpreadInc = 0.08
+SWEP.SpreadPerShot = 0.07
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 190
+SWEP.Damage = 150
 SWEP.DeployTime = 0.45
 
 SWEP.ReloadSpeed = 1

@@ -103,16 +103,16 @@ SWEP.WorldModel		= "models/weapons/w_shot_remington.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 8
+SWEP.Primary.ClipSize		= 5
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.FireDelay = 0.7
+SWEP.FireDelay = 1.0
 SWEP.FireSound = "CW_M3SUPER90_FIRE"
 SWEP.Recoil = 3
 
-SWEP.WearDamage = 0.5
+SWEP.WearDamage = 0.33
 SWEP.WearEffect = 0.005
 
 SWEP.HipSpread = 0.06
@@ -121,14 +121,15 @@ SWEP.VelocitySensitivity = 0.5
 SWEP.MaxSpreadInc = 0.4
 SWEP.ClumpSpread = 0.018
 SWEP.SpreadPerShot = 0.2
-SWEP.SpreadCooldown = 0.9
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 9
-SWEP.Damage = 23
+SWEP.Damage = 38
 SWEP.DeployTime = 1
 
 SWEP.ReloadStartTime = 0.3
 SWEP.InsertShellTime = 0.7
 SWEP.ReloadFinishWait = 2
 SWEP.ShotgunReload = true
+SWEP.ForceBackToHipAfterAimedShot = true
 
 SWEP.Chamberable = false

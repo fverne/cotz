@@ -148,8 +148,8 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.ViewModelFOV	= 75
 SWEP.ViewModelFlip	= true
@@ -172,25 +172,25 @@ SWEP.magType = "srMag"
 SWEP.FireDelay = 1
 SWEP.FireSound = "CW_TRG_FIRE"
 SWEP.FireSoundSuppressed = "CW_TRG_SUB"
-SWEP.Recoil = 2.2
+SWEP.Recoil = 4.2
 SWEP.AimViewModelFOV = 55
 SWEP.CustomizationMenuScale = 0.02
 SWEP.ForceBackToHipAfterAimedShot = true
 SWEP.GlobalDelayOnShoot = 1.1
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.12
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 3
+SWEP.VelocitySensitivity = 15
 SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadPerShot = 0.1
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 290
+SWEP.Damage = 450
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2
-SWEP.ReloadTime_Empty = 2
-SWEP.ReloadHalt = 0
-SWEP.ReloadHalt_Empty = 0
+SWEP.ReloadTime = 2.2
+SWEP.ReloadTime_Empty = 3.0
+SWEP.ReloadHalt = 2.4
+SWEP.ReloadHalt_Empty = 3.1
 SWEP.Chamberable = false

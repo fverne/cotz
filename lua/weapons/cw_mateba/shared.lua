@@ -156,14 +156,14 @@ SWEP.FireSound = "CWC_MATEBA_FIRE"
 SWEP.FireSoundSuppressed = "CWC_MATEBA_FIRE_SUP"
 SWEP.Recoil = 4
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.065
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 4
+SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadPerShot = 0.077
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 135
+SWEP.Damage = 150
 SWEP.DeployTime = 0.7
 SWEP.Chamberable = false
 
@@ -174,5 +174,5 @@ SWEP.ReloadHalt = 2.7
 SWEP.ReloadTime_Empty = 1.6
 SWEP.ReloadHalt_Empty = 2.7
 
-SWEP.WearDamage = 0.1
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05

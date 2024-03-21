@@ -96,6 +96,7 @@ SWEP.SpeedDec = 10
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "passive"
 SWEP.FireModes = {"pump"}
@@ -115,8 +116,8 @@ SWEP.WorldModel		= "models/khrcw2/w_khri_khrtoz194.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 3
-SWEP.Primary.DefaultClip	= 3
+SWEP.Primary.ClipSize		= 4
+SWEP.Primary.DefaultClip	= 4
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
@@ -129,10 +130,10 @@ SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.4
 SWEP.ClumpSpread = 0.018
-SWEP.SpreadPerShot = 0.3
-SWEP.SpreadCooldown = 0.75
+SWEP.SpreadPerShot = 0.16
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 9
-SWEP.Damage = 21
+SWEP.Damage = 35
 SWEP.DeployTime = 1.5
 
 SWEP.ReloadSpeed = .7
@@ -183,5 +184,5 @@ function SWEP:DrawWorldModel( )
 end
 
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005

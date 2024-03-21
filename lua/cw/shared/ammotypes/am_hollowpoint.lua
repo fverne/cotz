@@ -1,9 +1,9 @@
 local att = {}
 att.name = "am_hollowpoint"
-att.displayName = "Hollow Point rounds"
-att.displayNameShort = "Hollow Point"
+att.displayName = "Overpressure rounds"
+att.displayNameShort = "Overpressure"
 
-att.statModifiers = {DamageMult = 1.3}
+att.statModifiers = {DamageMult = 0.3}
 
 if CLIENT then
 	att.displayIcon = surface.GetTextureID("atts/matchgradeammo")

@@ -8,6 +8,8 @@ ITEM.height = 1
 
 ITEM.price = 4200
 
+ITEM.flatweight = 0.010
+
 ITEM.exRender = true
 ITEM.iconCam = {
 	pos = Vector(0.40000000596046, 0, 50),

@@ -27,11 +27,12 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 270
+ENT.hp = 370
 ENT.hpvar = 50
 
-ENT.flatbulletresistance = 2
-ENT.percentbulletresistance = 10
+ENT.FBR = 8
+ENT.FBRAP = 8
+ENT.BR = 20
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -69,7 +70,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 35
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 40
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 0.8
@@ -199,12 +200,6 @@ function ENT:STALKERNPCOnDeath()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul)
-
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
-	end
 
 	if( math.random(100) > 70) and self.CanTeleportTimer < CurTime() then
 		self.IsTeleporting = 1

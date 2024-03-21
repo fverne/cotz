@@ -17,7 +17,7 @@ local SoundNames = {
 }
 
 local SoundPaths = {
-	"hgn/stalker/blowout/barman2.mp3",
+	"blowout/crows.mp3",
 	"blowout/announce2.wav",
 	"stalkersound/blowout_siren.wav",
 	"blowout/ambient1.wav",
@@ -56,7 +56,7 @@ ix.blowout.Duration = 0
 ix.blowout.BlowoutPhase = 0
 ix.blowout.LastContrast = 0
 ix.blowout.BlowoutSounds = {}
-ix.blowout.BlowoutSounds[1] = ""
+ix.blowout.BlowoutSounds[1] = "blowout_announce1"
 ix.blowout.BlowoutSounds[2] = "blowout_announce2"
 ix.blowout.BlowoutSounds[3] = "blowout_prehit"
 ix.blowout.BlowoutSounds[4] = "blowout_ambient1"

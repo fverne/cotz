@@ -106,7 +106,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".22LR"
 
-SWEP.WearDamage = 0.125
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.08
@@ -114,15 +114,16 @@ SWEP.FireSound = "MK3_FIRE"
 SWEP.FireSoundSuppressed = "MK3_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.2
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.065
 SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 3
+SWEP.VelocitySensitivity = 2
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.002
-SWEP.SpreadCooldown = 0.4
-SWEP.Damage = 20
+SWEP.SpreadCooldown = 0.2
+SWEP.Damage = 28
 SWEP.DeployTime = .7
 SWEP.ADSFireAnim = true
+SWEP.Chamberable = false
 
 SWEP.ReloadSpeed = 1.1
 SWEP.ReloadTime = 2.9

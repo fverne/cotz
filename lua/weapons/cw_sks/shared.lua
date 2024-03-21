@@ -164,7 +164,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 50
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/view/rifles/sks.mdl"
 SWEP.WorldModel		= "models/weapons/world/rifles/sks.mdl"
@@ -180,19 +180,19 @@ SWEP.Primary.Ammo			= "7.62x39MM"
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_SAIGA308_FIRE"
 SWEP.FireSoundSuppressed = "CW_M14_FIRE_SUPPRESSED"
-SWEP.Recoil = 2.9
+SWEP.Recoil = 1.9
 
-SWEP.WearDamage = 0.14
-SWEP.WearEffect = 0.07
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.11
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 4
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.08
 SWEP.SpreadPerShot = 0.03
-SWEP.SpreadCooldown = 0.8
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 74
+SWEP.Damage = 82
 SWEP.DeployTime = 0.6
 
 

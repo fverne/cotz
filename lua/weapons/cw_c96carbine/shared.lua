@@ -142,8 +142,8 @@ SWEP.Chamberable			= true
 
 SWEP.Primary.Ammo			= "7.62x25MM"
 
-SWEP.WearDamage = 0.075
-SWEP.WearEffect = 0.25
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.FireDelay = 60/1100
 SWEP.FireDelayAuto = 60/1100
@@ -154,13 +154,13 @@ SWEP.Recoil = 1.3
 SWEP.FOVPerShot = .15 -- = .5
 
 SWEP.HipSpread = 0.1
-SWEP.AimSpread = 0.025
+SWEP.AimSpread = 0.010
 SWEP.VelocitySensitivity = 8
-SWEP.MaxSpreadInc = 0.5
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.MaxSpreadInc = 0.1
+SWEP.SpreadPerShot = 0.012
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 30
+SWEP.Damage = 33
 SWEP.DeployTime = .5
 SWEP.HolsterTime = .5
 

@@ -5,53 +5,63 @@ PLUGIN.description = "A plugin that lets you spawn in a map preset of containers
 PLUGIN.map_presets = {}
 
 ix.util.Include("sh_rp_marsh_cs.lua")
-ix.util.Include("sh_rp_salvation_2_haven.lua")
+ix.util.Include("sh_rp_pripyat_remaster.lua")
 ix.util.Include("sh_rp_waystation.lua")
 
 if SERVER then
 
 	PLUGIN.PluginDataDeployFunctions = {
-		["anomalycontroller"] = function(payload)
-			ix.plugin.list["anomalycontroller"].anomalypoints = payload
+		["anomalycontroller"] = function(payload, map)
+			ix.plugin.list["anomalycontroller"].anomalypoints[map] = payload
 		end,
-		["boxspawner"] = function(payload)
+		["boxspawner"] = function(payload, map)
+			if not(map == game.GetMap()) then return end
+
 			ix.plugin.list["boxspawner"].boxpoints = payload
 		end,
-		["eventcontroller"] = function(payload)
-			ix.plugin.list["eventcontroller"].eventpoints = payload
+		["eventcontroller"] = function(payload, map)
+			ix.plugin.list["eventcontroller"].eventpoints[map] = payload
 		end,
-		["eventcontrolleradv"] = function(payload)
+		["eventcontrolleradv"] = function(payload, map)
+			if not(map == game.GetMap()) then return end
+
 			ix.plugin.list["eventcontrolleradv"].eventpoints = payload
 		end,
-		["hidestashspawner"] = function(payload)
-			ix.plugin.list["hidestashspawner"].stashspawnpoints = payload
+		["hidestashspawner"] = function(payload, map)
+			ix.plugin.list["hidestashspawner"].stashspawnpoints[map] = payload
 		end,
-		["radiationcontroller"] = function(payload)
+		["radiationcontroller"] = function(payload, map)
+			if not(map == game.GetMap()) then return end
+
 			ix.plugin.list["radiationcontroller"].radiationpoints = payload
 		end,
-		["simplecrossserver"] = function(payload)
+		["simplecrossserver"] = function(payload, map)
+			if not(map == game.GetMap()) then return end
+
 			ix.plugin.list["simplecrossserver"].loadpoints = payload
 		end,
-		["worlditemspawner"] = function(payload)
+		["worlditemspawner"] = function(payload, map)
+			if not(map == game.GetMap()) then return end
+
 			ix.plugin.list["worlditemspawner"].itempoints = payload
 		end,
 	}
 
 	PLUGIN.PluginDataGetFunctions = {
 		["anomalycontroller"] = function()
-			return ix.plugin.list["anomalycontroller"].anomalypoints
+			return ix.plugin.list["anomalycontroller"].anomalypoints[game.GetMap()]
 		end,
 		["boxspawner"] = function()
 			return ix.plugin.list["boxspawner"].boxpoints
 		end,
 		["eventcontroller"] = function()
-			return ix.plugin.list["eventcontroller"].eventpoints
+			return ix.plugin.list["eventcontroller"].eventpoints[game.GetMap()]
 		end,
 		["eventcontrolleradv"] = function()
 			return ix.plugin.list["eventcontrolleradv"].eventpoints
 		end,
 		["hidestashspawner"] = function()
-			return ix.plugin.list["hidestashspawner"].stashspawnpoints
+			return ix.plugin.list["hidestashspawner"].stashspawnpoints[game.GetMap()]
 		end,
 		["radiationcontroller"] = function()
 			return ix.plugin.list["radiationcontroller"].radiationpoints
@@ -91,9 +101,21 @@ if SERVER then
 			return "{ Vector("..data[1].x..","..data[1].y..","..data[1].z..") , \""..data[2].."\" , \""..data[3].."\" }, \n"
 		end,
 		["worlditemspawner"] = function(id, data)
-			return "{ Vector("..data[1].x..","..data[1].y..","..data[1].z..") , \""..data[2].."\" ), \n"
+			return "{ Vector("..data[1].x..","..data[1].y..","..data[1].z..") , \""..data[2].."\" }, \n"
 		end,
 	}
+
+	PLUGIN.FormatCyclicContainers = function(data)
+		local str = "    {\n"
+		str = str.."      model = \""..data.model.."\",\n"
+		str = str.."      position = Vector("..data.position.x..","..data.position.y..","..data.position.z.."),\n"
+		str = str.."      angles = Angle("..data.angles.x..","..data.angles.y..","..data.angles.z.."),\n"
+		str = str.."      spawnCategory = \""..data.spawnCategory.."\",\n"
+		str = str.."      cyclicalCategory = \""..data.cyclicalCategory.."\",\n"
+		str = str.."    },\n"
+
+		return str
+	end
 
 	function PLUGIN:RunFirstTimeSetup()
 		-- Spawn containers
@@ -113,9 +135,11 @@ if SERVER then
 			self:SpawnVendor(vendordata)
 		end
 
-		-- Init all plugin data
+		-- Init all plugin data; NOTE: plugins can get data from all maps as this might be needed (hidestashspawner etc.)
 		for pluginid, func in pairs(self.PluginDataDeployFunctions) do
-			func(self.map_presets[game.GetMap].plugindata[pluginid])
+			for map, _ in pairs(self.map_presets) do
+				func(self.map_presets[map].plugindata[pluginid], map)
+			end
 		end
 
 		self.firstTimeSetupRun = true
@@ -248,6 +272,37 @@ ix.command.Add("FTSShowContainerSpawns", {
 
 			netstream.Start(client, "ix_DisplayFTSContainers", containers)
 			client:Notify( "Displayed All Points for 10 secs." )
+		end
+	end
+})
+
+ix.command.Add("FTSDumpCyclicContainerData", {
+	adminOnly = true,
+	OnRun = function(self, client, override)
+		if SERVER then
+
+			file.CreateDir("FTSDump")
+
+			local filename = "FTSDump/cycliccontainers.txt"
+			print(filename)
+
+			if (file.Exists(filename, "DATA" )) then
+				file.Delete(filename)
+			end
+			file.Write(filename, "cyclic containers\n")
+
+			for k, v in ipairs(ents.FindByClass("ix_container")) do
+				if(v:GetCyclicalCategory() != "") then
+					local data = {}
+
+					data.model = v:GetModel()
+					data.position = v:GetPos()
+					data.angles = v:GetAngles()
+					data.spawnCategory = v:GetSpawnCategory()
+					data.cyclicalCategory = v:GetCyclicalCategory()
+					file.Append(filename, ix.plugin.list["firsttimesetup"].FormatCyclicContainers(data))
+				end
+			end
 		end
 	end
 })

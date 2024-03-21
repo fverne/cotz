@@ -135,8 +135,8 @@ SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
@@ -163,16 +163,16 @@ SWEP.Primary.Ammo			= "5.45x39MM"
 SWEP.FireDelay = 0.092307692307692
 SWEP.FireSound = "CW_AK74_FIRE"
 SWEP.FireSoundSuppressed = "CW_AK74_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.9
+SWEP.Recoil = 1.4
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.10
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 8
-SWEP.MaxSpreadInc = 0.5
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.MaxSpreadInc = 0.11
+SWEP.SpreadPerShot = 0.011
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 70
+SWEP.Damage = 78
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 0.7

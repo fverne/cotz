@@ -15,6 +15,8 @@ if SERVER then
 
 	function PLUGIN:LoadData()
 		self.stashspawnpoints = self:GetData() or {}
+
+		self.stashspawnpoints[game.GetMap()] = self.stashspawnpoints[game.GetMap()] or {}
 	end
 
 	function PLUGIN:SaveData()
@@ -29,9 +31,10 @@ if SERVER then
 	end
 	]]--
 
-	function PLUGIN:GetPoint()
+	function PLUGIN:GetPoint(map)
+		map = map or game.GetMap()
 		self.stashspawnpoints = self.stashspawnpoints or {}
-		return table.Random(self.stashspawnpoints)
+		return table.Random(self.stashspawnpoints[map])
 	end
 
 else
@@ -106,7 +109,8 @@ ix.command.Add("stashspawneradd", {
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local text = text
         PLUGIN.stashspawnpoints = PLUGIN.stashspawnpoints or {}
-		table.insert( PLUGIN.stashspawnpoints, {hitpos, text} )
+        PLUGIN.stashspawnpoints[game.GetMap()] = PLUGIN.stashspawnpoints[game.GetMap()] or {}
+		table.insert( PLUGIN.stashspawnpoints[game.GetMap()], {hitpos, text} )
 		client:Notify( "You added a hidden stash spawner." )
 	end
 })
@@ -121,10 +125,10 @@ ix.command.Add("stashspawnerremove", {
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local range = radius or 128
 		local mt = 0
-		for k, v in pairs( PLUGIN.stashspawnpoints ) do
+		for k, v in pairs( PLUGIN.stashspawnpoints[game.GetMap()] ) do
 			local distance = v[1]:Distance( hitpos )
 			if distance <= tonumber(range) then
-				PLUGIN.stashspawnpoints[k] = nil
+				PLUGIN.stashspawnpoints[game.GetMap()][k] = nil
 				mt = mt + 1
 			end
 		end
@@ -138,7 +142,7 @@ ix.command.Add("stashspawnerdisplay", {
 		if SERVER then
 			local data = {}
 
-			for k, v in pairs(PLUGIN.stashspawnpoints) do
+			for k, v in pairs(PLUGIN.stashspawnpoints[game.GetMap()]) do
 				table.insert(data, v[1])
 			end	
 

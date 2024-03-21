@@ -8,6 +8,12 @@ PLUGIN.loadpoints = PLUGIN.loadpoints or {}
 PLUGIN.mapdata = PLUGIN.mapdata or {}
 PLUGIN.homemap = "rp_marsh_cs"
 
+PLUGIN.activemaps = {
+	"rp_marsh_cs",
+	"rp_waystation",
+	"rp_pripyat_remaster",
+}
+
 local DEBUGSETUP = true
 local checktime = 0
 
@@ -87,7 +93,7 @@ function PLUGIN:Think()
 		for k, v in pairs(player.GetAll()) do
 			for j, c in pairs(self.loadpoints) do
 				if v:GetPos():Distance(c[1]) < 128 then
-					if !v:GetCharacter().inmenu then
+					if v:GetCharacter() and !v:GetCharacter().inmenu then
 						v:GetCharacter().inmenu = true
 						v:requestQuery("Move Zones", "Do you wish to move to "..self.mapdata[c[2]].name.."?\n"..self.mapdata[c[2]].loadzones[c[3]].desc,
 						function(response)
@@ -165,7 +171,35 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 
 		character:SetData("curmap", map)
 
+		ix.chat.Send(nil, "playerjoin", string.format("%s has switched area.", character:GetName()))
+
 		-- If RedirectPlayer has been called, the character has been moved to the new map, and should no longer be usable
+		character:Save()
+		character:Kick()
+
+		ix.log.Add(client, "serverTransfer", map, tempip)
+		client:Notify(character:GetName().." has been asked to be sent to "..map)
+		netstream.Start(client, "ixPlayerAskConnect", client, tempip)
+	else
+		client:Notify("Invalid map")
+	end
+end
+
+-- Used to redirect player to another map, but leaves setting the position to the caller
+function PLUGIN:RedirectPlayerNoLoadZone(client, map)
+	local character = client:GetCharacter()
+
+	local mapdata = self.mapdata
+
+	--sanity check
+	if mapdata[map] != nil then
+		local tempip = mapdata[map].serverip
+
+		character:SetData("curmap", map)
+
+		ix.chat.Send(nil, "playerjoin", string.format("%s has switched area.", character:GetName()))
+
+		-- If RedirectPlayerNoLoadZone has been called, the character has been moved to the new map, and should no longer be usable
 		character:Save()
 		character:Kick()
 

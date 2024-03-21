@@ -5,11 +5,11 @@ PLUGIN.name = "Simple Cross Server Chat"
 PLUGIN.author = "gumlefar"
 PLUGIN.description = "A simple system for sharing chat messages over multiple servers."
 
-
-
 PLUGIN.lastSeenId = PLUGIN.lastSeenId or 0
 PLUGIN.checktime = PLUGIN.checktime or 0
 PLUGIN.postTime = PLUGIN.postTime or 0
+
+PLUGIN.firstTimeLoaded = false
 
 ix = ix or {}
 ix.crossserverchat = ix.crossserverchat or {}
@@ -33,16 +33,18 @@ ix.chat.Register("gpdainternal", {
 
 if (SERVER) then
 	function PLUGIN:Think()
-		if self.checktime < CurTime() then 
-			self.checktime = CurTime() + 5
+		if self.firstTimeLoaded then
+			if self.checktime < CurTime() then 
+				self.checktime = CurTime() + 5
 
-			self:CheckForNewData()
-		end
+				self:CheckForNewData()
+			end
 
-		if self.postTime < CurTime() then 
-			self.postTime = CurTime() + 1
+			if self.postTime < CurTime() then 
+				self.postTime = CurTime() + 1
 
-			self:ProcessTopOfQueue()
+				self:ProcessTopOfQueue()
+			end
 		end
 	end
 
@@ -77,8 +79,8 @@ if (SERVER) then
 						local text = v.text or "<corrupted message>"
 						local icon = v.icon or "vgui/icons/news.png"
 
-						if (id > ix.plugin.list["simplecrossserverchat"].lastSeenId) then
-							ix.plugin.list["simplecrossserverchat"].lastSeenId = id
+						if (id > tonumber(ix.plugin.list["simplecrossserverchat"].lastSeenId)) then
+							ix.plugin.list["simplecrossserverchat"].lastSeenId = tonumber(id)
 						end
 
 						table.insert(ix.crossserverchat.queue, {name, text, icon})
@@ -121,18 +123,25 @@ if (SERVER) then
 		
 	end
 
+	function PLUGIN:OnWipeTables()
+		local query
+
+		query = mysql:Drop("ix_xserverchat")
+		query:Execute()
+	end
+
 	ix.crossserverchat.PostMessage = PLUGIN.PostMessage
 
 	function PLUGIN:SaveData()
-		self:SetData({["lastseen"] = self.lastSeenId})
+		self:SetData(tonumber(self.lastSeenId))
 	end
 
 	function PLUGIN:LoadData()
-		local data = self:GetData()
-
-		self.lastSeenId = data["lastseen"] or 0
+		self.lastSeenId = tonumber(self:GetData()) or 0
 		if(SERVER)then
 			self:LoadTables()
 		end
+
+		self.firstTimeLoaded = true
 	end
 end

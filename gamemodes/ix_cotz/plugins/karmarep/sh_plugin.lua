@@ -5,13 +5,15 @@ PLUGIN.desc = "Karma & Reputation System"
 
 PLUGIN.repDefs = {
 	{"Tourist", 0},
-	{"Rookie", 50},
-	{"Regular", 282},
-	{"Experienced", 765},
-	{"Veteran", 1943},
-	{"Expert", 4254},
-	{"Master", 9338},
-	{"Legendary", 20943},
+	{"Rookie", 25},
+	{"Novice", 250},
+	{"Regular", 750},
+	{"Experienced", 1600},
+	{"Professional", 4100},
+	{"Veteran", 8300},
+	{"Expert", 16000},
+	{"Master", 24000},
+	{"Legend", 32000},
 }
 
 PLUGIN.karmaDefs = {

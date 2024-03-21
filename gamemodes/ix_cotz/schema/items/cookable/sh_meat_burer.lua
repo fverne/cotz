@@ -8,8 +8,8 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.070
-ITEM.BaseWeight = 1.722
-ITEM.WeightPerLevel = 0.486
+ITEM.BaseWeight = 0.822
+ITEM.WeightPerLevel = 0.186
 
 ITEM.meal = "meal_burer"
 

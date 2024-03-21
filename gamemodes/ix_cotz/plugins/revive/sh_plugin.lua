@@ -95,6 +95,12 @@ if (CLIENT) then
 		end
 	end
 else
+	function PLUGIN:PlayerDisconnected(ply)
+		if IsValid(ix.temp.Corpses[ply]) then
+			ply:Spawn()
+		end
+	end
+
 	function PLUGIN:PlayerSpawn( client )
 		client:UnSpectate()
 		if not client:GetCharacter() then
@@ -103,7 +109,7 @@ else
 
 		if IsValid(ix.temp.Corpses[client]) then
 			if (!client:GetNetVar("resurrected")) then
-				hook.Run("DeathDrop",client,ix.temp.Corpses[client]:GetPos())
+				hook.Run("DoDeathDrop",client,ix.temp.Corpses[client]:GetPos())
 			end
 			ix.temp.Corpses[client]:Remove()
 			client:SetNetVar("resurrected", false)

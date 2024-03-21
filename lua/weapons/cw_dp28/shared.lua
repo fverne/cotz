@@ -129,22 +129,21 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "7.62x54MMR"
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.FireDelay = 0.09166666666
 SWEP.FireSound = "CW_DP28_FIRE"
 SWEP.FireSoundSuppressed = "CW_PKM_SUPPRESSED"
-SWEP.Recoil = 1.9
-
+SWEP.Recoil = 0
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.MaxSpreadInc = 0.1
+SWEP.SpreadPerShot = 0.006
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 108
+SWEP.Damage = 190
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 1.0

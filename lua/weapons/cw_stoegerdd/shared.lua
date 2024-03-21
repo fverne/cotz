@@ -165,13 +165,13 @@ SWEP.AimSpread = 0.006
 SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.035
 SWEP.SpreadPerShot = 0.2
-SWEP.SpreadCooldown = 0.5
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 9
-SWEP.Damage = 22
+SWEP.Damage = 35
 SWEP.DeployTime = 0.4
 SWEP.Chamberable = false
 
-SWEP.WearDamage = 0.4
+SWEP.WearDamage = 0.33
 SWEP.WearEffect = 0.005
 
 SWEP.ReloadSpeed = 1.2

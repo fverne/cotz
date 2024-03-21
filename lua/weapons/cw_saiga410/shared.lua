@@ -91,7 +91,7 @@ SWEP.WorldModel		= "models/cw2/weapons/w_saiga_chan.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 9
+SWEP.Primary.ClipSize		= 8
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".45 ACP -41-"
@@ -100,25 +100,25 @@ SWEP.FireDelay = 0.2
 SWEP.FireSound = "CW_STRIKER_FIRE"
 SWEP.Recoil = 3
 
-SWEP.WearDamage = 0.5
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.1
+SWEP.HipSpread = 0.08
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 0.5
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.1
 SWEP.ClumpSpread = 0.014
-SWEP.SpreadPerShot = 0.4
-SWEP.SpreadCooldown = 0.5
+SWEP.SpreadPerShot = 0.06
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 5
-SWEP.Damage = 33
+SWEP.Damage = 32
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1.2
 SWEP.ReloadTime = 1.8
-SWEP.ReloadTime_Empty = 1.9
+SWEP.ReloadTime_Empty = 2.8
 SWEP.ReloadHalt = 1.9
-SWEP.ReloadHalt_Empty = 2
+SWEP.ReloadHalt_Empty = 2.9
 SWEP.SnapToIdlePostReload = true
 
 SWEP.Chamberable = true

@@ -9,6 +9,8 @@ ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.080
 
+ITEM.img = ix.util.GetMaterial("cotz/ui/icons/food_8.png")
+
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)
 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")

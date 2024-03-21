@@ -6,6 +6,8 @@ ITEM.model = "models/lostsignalproject/items/misc/jar.mdl"
 ITEM.width = 1
 ITEM.height = 1
 
+ITEM.flatweight = 0.110
+
 ITEM.price = 300
 
 ITEM.maxDie = 6

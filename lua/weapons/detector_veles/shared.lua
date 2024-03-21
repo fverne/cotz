@@ -225,6 +225,11 @@ anomalies["models/lostsignalproject/items/artefacts/cocoon.mdl"] = true -- Bone 
 anomalies["models/artefacts/empty.mdl"] = true -- Blown Capacitor
 anomalies["models/nasca/etherealsrp_artifacts/battery.mdl"] = true -- Battery
 anomalies["models/lostsignalproject/items/artefacts/black_angel.mdl"] = true -- Arachno
+anomalies["models/artefacts/sandstone.mdl"] = true --midas
+anomalies["models/lostsignalproject/items/artefacts/cell.mdl"] = true -- cell
+anomalies["models/lostsignalproject/items/artefacts/bracelet.mdl"] = true -- panacea
+anomalies["models/lostsignalproject/items/artefacts/bat.mdl"] = true --gaia
+anomalies["models/jessev92/stalker/weapons/bolt_w.mdl"] = true-- bolt
 
 --[[
 anomalies["models/nasca/etherealsrp_artifacts/battery.mdl"] = true
@@ -292,7 +297,7 @@ function SWEP:Think()
 				end
 
 				local plypos = self.Owner:GetPos()
-					for k, v in pairs( ents.GetAll() ) do//pairs(shits) do
+					for k, v in pairs( ents.FindInSphere(self:GetOwner():GetPos(), 701) ) do//pairs(shits) do
 
 						if ( v:IsValid() ) then
 

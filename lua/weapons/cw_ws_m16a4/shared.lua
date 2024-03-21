@@ -153,8 +153,8 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.ViewModelFOV	= 70
 SWEP.AimViewModelFOV = 60
@@ -179,22 +179,22 @@ SWEP.Chamberable = true
 SWEP.FireDelay = 0.075
 SWEP.FireSound = "CW_WS_M16A4_FIRE"
 SWEP.FireSoundSuppressed = "CW_WS_M16A4_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.7
+SWEP.Recoil = 1.4
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.11
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.MaxSpreadInc = 0.1
+SWEP.SpreadPerShot = 0.009
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 75
+SWEP.Damage = 83
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 1.25
 SWEP.ReloadTime = 2.35
 SWEP.ReloadTime_Empty = 3.7
-SWEP.ReloadHalt = 0.1
+SWEP.ReloadHalt = 2.8
 SWEP.ReloadHalt_Empty = 0.1
 SWEP.SnapToIdlePostReload = false
 SWEP.BulletDiameter = 5.70 

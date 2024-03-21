@@ -124,7 +124,7 @@ SWEP.WMAng = Vector(-10, 0, 180)
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 20
+SWEP.Primary.ClipSize		= 44
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x19MM"
@@ -134,23 +134,23 @@ SWEP.FireSound = "CW_PP2000_FIRE"
 SWEP.FireSoundSuppressed = "CW_UMP45_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.3
 
-SWEP.WearDamage = 0.05
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.065
 SWEP.AimSpread = 0.025
-SWEP.VelocitySensitivity = 6
-SWEP.MaxSpreadInc = 0.4
+SWEP.VelocitySensitivity = 2
+SWEP.MaxSpreadInc = 0.05
 SWEP.SpreadPerShot = 0.007
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 44
+SWEP.Damage = 48
 SWEP.DeployTime = 0.8
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2.9
-SWEP.ReloadTime_Empty = 2.9
-SWEP.ReloadHalt = 3
-SWEP.ReloadHalt_Empty = 3
+SWEP.ReloadTime = 3.4
+SWEP.ReloadTime_Empty = 3.4
+SWEP.ReloadHalt = 3.6
+SWEP.ReloadHalt_Empty = 3.6
 
 SWEP.Chamberable = false

@@ -7,8 +7,8 @@ ITEM.width = 2
 ITEM.height = 2
 ITEM.price = 0
 
-ITEM.isNewBag = true
-ITEM.outfitCategory = "backpack"
+ITEM.isBackpack = true
+ITEM.outfitCategory = "Backpack"
 ITEM.pacData = {}
 ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
@@ -50,7 +50,7 @@ end
 
 function ITEM:PopulateTooltip(tooltip)
     if (!self.entity) then
-        ix.util.PropertyDesc2(tooltip, "Backpack", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
+        ix.util.PropertyDesc2(tooltip, self.outfitCategory, Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
     end
 
     if (self.PopulateTooltipIndividual) then
@@ -70,25 +70,28 @@ ITEM.functions.Equip = {
 			if (v.id != item.id) then
 				local itemTable = ix.item.instances[v.id]
 
-				if (itemTable.pacData and v.outfitCategory == item.outfitCategory and itemTable:GetData("equip")) then
-					item.player:Notify("You're already equipping this kind of outfit")
+				if (v.isBackpack == true and item.isBackpack == true and itemTable:GetData("equip")) then
+					item.player:Notify("You are already equipping a backpack!")
 
 					return false
 				end
 			end
 		end
 
-		item:SetData("equip", true)
-		item.player:AddPart(item.uniqueID, item)
-		char:UpdateWeight()
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 4, function(ply) 
+			item:SetData("equip", true)
+			ply:AddPart(item.uniqueID, item)
+			char:UpdateWeight()
 
-		if (item.attribBoosts) then
-			for k, v in pairs(item.attribBoosts) do
-				char:AddBoost(item.uniqueID, k, v)
+			if (item.attribBoosts) then
+				for k, v in pairs(item.attribBoosts) do
+					char:AddBoost(item.uniqueID, k, v)
+				end
 			end
-		end
+		end)
 
-		item:OnEquipped()
+		item:OnEquipped()			
+
 		return false
 	end,
 	OnCanRun = function(item)
@@ -110,9 +113,12 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 			item.player:Notify("Removing this item would make you heavily overweight.")
 			return false
 		end
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 4, function(ply) 
+			item:RemovePart(ply)
+			char:UpdateWeight()
+		end)
 
-		item:RemovePart(item.player)
-		char:UpdateWeight()
+		item:OnUnequipped()
 
 		return false
 	end,
@@ -142,7 +148,6 @@ function ITEM:RemovePart(client)
 		end
 	end
 
-	self:OnUnequipped()
 end
 
 -- Called before the item is permanently deleted.
@@ -155,10 +160,10 @@ function ITEM:OnRemoved()
 end
 
 function ITEM:OnEquipped()
-	self.player:EmitSound("stalkersound/inv_slot.mp3")
+	self:GetOwner():EmitSound("stalkersound/inv_slot.mp3")
 end
 
 function ITEM:OnUnequipped()
-	self.player:EmitSound("stalkersound/inv_slot.mp3")
+	self:GetOwner():EmitSound("stalkersound/inv_slot.mp3")
 end
 

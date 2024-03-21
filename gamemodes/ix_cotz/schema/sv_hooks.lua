@@ -60,6 +60,20 @@ function Schema:GetPlayerPainSound(client)
 	return table.Random(painSounds)
 end
 
+function Schema:PlayerSay(client, text)
+	local chatType, message, anonymous = ix.chat.Parse(client, text, true)
+	
+	if (chatType == "ic") then
+		if (ix.command.Parse(client, message)) then
+			return ""
+		end
+	end
+
+	if (isstring(text) and chatType == "ic") then
+		ix.log.Add(client, "chat", chatType and chatType:utf8upper() or "??", text)
+	end
+end
+
 function Schema:PlayerSpawnEffect(client, weapon, info)
 	return client:IsAdmin() or client:GetCharacter():HasFlags("N")
 end
@@ -72,6 +86,7 @@ function Schema:PostPlayerLoadout(client)
 	end
 end
 
+
 function Schema:Initialize()
 	game.ConsoleCommand("net_maxfilesize 64");
 	game.ConsoleCommand("sv_kickerrornum 0");
@@ -79,4 +94,11 @@ function Schema:Initialize()
 	game.ConsoleCommand("sv_allowupload 0");
 	game.ConsoleCommand("sv_allowdownload 0");
 	game.ConsoleCommand("sv_allowcslua 0");
+end
+
+-- Interrupts blackscreen
+function Schema:PlayerButtonDown(client,key)
+    if (client:GetNetVar("ix_hasBlackScreen") && key == KEY_F ) then
+       ix.util.PlayerActionInterrupt(client)
+    end
 end

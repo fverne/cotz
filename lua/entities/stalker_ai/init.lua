@@ -13,13 +13,6 @@ ENT.m_fMaxYawSpeed = 240
 ENT.m_iClass = CLASS_NONE
 
 ENT.IsSTALKERNPC = true
-hook.Add( "ShouldCollide", "npc_nocollide", function( ent1, ent2 )
-
-    -- If players are about to collide with each other, then they won't collide.
-    if ( ent1.IsSTALKERNPC and ent2.IsSTALKERNPC ) then return false end
-
-end )
-
 
 ENT.meleeAttackTimers = {}
 
@@ -1111,10 +1104,6 @@ function ENT:OnTakeDamage(dmginfo)
 		end
 	end
 
-	if(self.LastDamageHitgroup==8) then
-		TEMP_DMGMUL = TEMP_DMGMUL*1.25
-	end
-
 	local prenpc = TEMP_DMGMUL
 
 	TEMP_DMGMUL = self:STALKERNPCDamageTake(dmginfo,TEMP_DMGMUL)
@@ -1123,7 +1112,13 @@ function ENT:OnTakeDamage(dmginfo)
 		TEMP_DMGMUL = prenpc
 	end
 
-	self:SetHealth(self:Health()-(dmginfo:GetDamage()*TEMP_DMGMUL))
+	dmginfo:SetDamage(dmginfo:GetDamage()*TEMP_DMGMUL)
+
+	if(dmginfo:IsDamageType(DMG_BULLET) or dmginfo:IsDamageType(DMG_AIRBOAT))then
+		self:STALKERBulletDamageTake(dmginfo, dmginfo:IsDamageType(DMG_AIRBOAT))
+	end
+
+	self:SetHealth(self:Health()-dmginfo:GetDamage())
 
 	if(dmginfo:GetDamageType()!=DMG_SONIC and dmginfo:GetDamageType()!=DMG_POISON ) then
 		STALKERNPCBleed(self,dmginfo:GetDamage()/4,dmginfo:GetDamagePosition(),Angle(math.random(1,360),math.random(1,360),math.random(1,360)))
@@ -1156,4 +1151,23 @@ end
 
 function ENT:GetAttackSpread( Weapon, Target )
 	return 0.1
+end
+
+function ENT:STALKERBulletDamageTake( dmginfo, isArmorPiercing)
+	
+	local FBR = self.FBR or 0
+	local FBRAP = self.FBRAP or 0
+	local BR = self.BR or 0
+
+	local damagetotake = dmginfo:GetDamage()
+	damagetotake = damagetotake - FBR
+
+	if(not isArmorPiercing) then
+		damagetotake = damagetotake - FBRAP
+		damagetotake = damagetotake * (1 - (BR/100))
+	else
+		damagetotake = damagetotake * (1 - ((BR/2)/100))
+	end
+
+	dmginfo:SetDamage(math.max(3,damagetotake))
 end

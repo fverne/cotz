@@ -110,17 +110,17 @@ SWEP.FireSound = "CW_MAKAROV_FIRE"
 SWEP.FireSoundSuppressed = "CW_MAKAROV_FIRE_SUPPRESSED_PM"
 SWEP.Recoil = 1.5
 
-SWEP.WearDamage = 0.125
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.045
 SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadPerShot = 0.013
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 41
+SWEP.Damage = 47
 SWEP.DeployTime = 1
 --SWEP.Chamberable = false
 

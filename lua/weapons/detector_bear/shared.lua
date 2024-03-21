@@ -219,6 +219,11 @@ anomalies["models/lostsignalproject/items/artefacts/cocoon.mdl"] = true -- Bone 
 anomalies["models/artefacts/empty.mdl"] = true -- Blown Capacitor
 anomalies["models/nasca/etherealsrp_artifacts/battery.mdl"] = true -- Battery
 anomalies["models/lostsignalproject/items/artefacts/black_angel.mdl"] = true -- Arachno
+anomalies["models/artefacts/sandstone.mdl"] = true --midas
+anomalies["models/lostsignalproject/items/artefacts/cell.mdl"] = true -- cell
+anomalies["models/lostsignalproject/items/artefacts/bracelet.mdl"] = true -- panacea
+anomalies["models/lostsignalproject/items/artefacts/bat.mdl"] = true --gaia
+anomalies["models/jessev92/stalker/weapons/bolt_w.mdl"] = true -- bolt
 
 --[[
 anomalies["models/nasca/etherealsrp_artifacts/battery.mdl"] = true
@@ -255,8 +260,8 @@ anomalies["models/nasca/etherealsrp_artifacts/urchin.mdl"] = true
 ]]--
 
 if CLIENT then
-	local matScreen = Material("models/kali/miscstuff/stalker/detectors/detector_bear_c"); // ��������, ������� ����
-	local RTTexture = GetRenderTarget("DTC_BEAR", 512, 512); // ����� ��������
+	local matScreen = Material("models/kali/miscstuff/stalker/detectors/detector_bear_c"); 
+	local RTTexture = GetRenderTarget("DTC_BEAR", 512, 512); 
 
 	local dot = surface.GetTextureID("models/kali/miscstuff/stalker/detectors/detector_bear_segment_copy");
 	local bg = surface.GetTextureID("models/kali/miscstuff/stalker/detectors/detector_bear_copy");
@@ -286,7 +291,7 @@ if CLIENT then
 
 
 			local anoms = {}
-			for k,v in pairs(ents.GetAll()) do
+			for k,v in pairs(ents.FindInSphere(self:GetOwner():GetPos(), 301)) do
 				if v:GetClass() == "ix_item" then
 					if anomalies[string.lower(v:GetModel())] then
 						table.insert(anoms, v)

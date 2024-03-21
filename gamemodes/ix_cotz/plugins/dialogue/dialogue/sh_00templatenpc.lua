@@ -16,14 +16,54 @@ DIALOGUE.addTopic("GREETING", {
 		"TradeTopic", 
 		"RepairItems",
 		"AboutWorkTopic",
-		"GetTask",
+		-- "GetTask",
+		"GetTaskByDifficulty",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
 		-- Only needed if NPC offers tasks
 		-- 4th argument is the categories to grab tasks from
 		-- 5th argument is the amount of tasks to grab
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkillgroupeasy"}, 4)
+		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkillgroupeasy"}, 4)
+
+		-- alternative npc task giving by difficulty
+		if (SERVER) then
+			if target:GetNetVar("possibleJobs") == nil then
+				local possibleJobs = {}
+				possibleJobs["easy"] = {"mutantkilleasy"}
+				possibleJobs["medium"] = {"mutantkillmedium"}
+				possibleJobs["hard"] = {"mutantkillhard"}			
+	
+				target:SetNetVar("possibleJobs", possibleJobs)
+			end
+		end
+
+		-- Special Sale
+		if (SERVER) then
+			local cooldown = target:GetNetVar("lastSpecialSale", 0)
+			if cooldown < os.time() or !client:GetData("specialSaleItemCategories") then
+				local categoriesToShow = {}
+				local randomItemCategories = {
+					{itemCategory = "specialsale_owlnpc_weapon_pistol", price = 40000, dialogue = "I'm looking for a sidearm.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_weapon_smg", price = 60000, dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_weapon_rifle", price = 80000, dialogue = "I like to keep shooting until there is nothing left to shoot at.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_weapon_shotgun", price = 100000, dialogue = "I want to fill mutants with pellets of lead.", reqRep = 0},
+					{itemCategory = "specialsale_owlnpc_weapon_sniper", price = 120000, dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 0},
+					-- {itemCategory = "specialsale_owlnpc_headgear", price = 60000, dialogue = "I'm looking for better headwear.", reqRep = 0},
+					-- {itemCategory = "specialsale_owlnpc_suit", price = 100000, dialogue = "I'm looking for a new suit.", reqRep = 0},
+				}
+
+				for k,v in pairs(randomItemCategories) do
+					-- ensure the character has a reputation level high enough
+					if client:getReputation() >= v.reqRep then
+						table.insert(categoriesToShow, v)
+					end
+				end
+				
+				client:SetData("specialSaleItemCategories", categoriesToShow)
+				target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
+			end
+		end
 	end
 })
 
@@ -173,6 +213,57 @@ DIALOGUE.addTopic("ConfirmTask", {
 	end,
 })
 
+-- alternative based on difficulty
+DIALOGUE.addTopic("GetTaskByDifficulty", {
+	statement = "Do you have any work for me?",
+	response = "Yes, what difficulty task are you looking for?.",
+	options = {
+		"BackTopic"
+	},
+	preCallback = function(self, client, target)
+		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
+			self.response = "I already gave you some work."
+		end
+	end,
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+		
+		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
+			table.insert(dynopts, {statement = "A trivial task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "easy"}})
+			table.insert(dynopts, {statement = "A challenging task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "medium"}})
+			table.insert(dynopts, {statement = "A hard task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "hard"}})
+		end
+		
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if (SERVER) then
+			local possibleJobs = target:GetNetVar("possibleJobs")
+			local jobCategories = table.Random(possibleJobs[dyndata.difficulty])
+			local jobid = ix.jobs.getJobFromCategory(jobCategories)
+
+			if !client:ixJobAdd(jobid, target:GetDisplayName()) then
+				return "BackTopic", dynopts
+			end
+			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(jobid))
+			ix.jobs.setNPCJobTaken(target:GetDisplayName(), jobid)
+		end		
+
+		-- Return the next topicID
+		return "BackTopic", dynopts
+	end,
+	ShouldAdd = function()
+		if (!LocalPlayer():GetCharacter():GetJobs()["'Old Timer'"]) then
+			return true
+		end
+	end,
+})
+
 DIALOGUE.addTopic("AboutWorkTopic", {
 	statement = "About work...",
 	response = "",
@@ -226,6 +317,102 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 
 ----------------------------------------------------------------
 ---------------------END--TASKGIVER--END------------------------
+----------------------------------------------------------------
+
+----------------------------------------------------------------
+---------------------START--SPECIALSALE--START------------------
+----------------------------------------------------------------
+
+DIALOGUE.addTopic("SpecialSaleTopic", {
+	statement = "Do you take special orders?",
+	response = "Yes. Here's what I can get you.",
+	IsDynamic = true,
+	options = {
+		"BackTopic",
+	},
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+		local randomItemCategories = client:GetData("specialSaleItemCategories", {})
+
+		for k,v in pairs(randomItemCategories) do
+			local categoryId = v.itemCategory
+			local gamblePrice = v.price
+			local dialogue = v.dialogue
+			table.insert(dynopts, {statement = dialogue.. " (Price: " .. gamblePrice .. ")", topicID = "SpecialSaleTopic", dyndata = {categoryid = categoryId, cost = gamblePrice}})
+		end
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		-- Return the next topicID
+		if( !client:GetCharacter():HasMoney(dyndata.cost)) then
+			return "NotEnoughMoneyBuy"
+		end
+
+		return "ConfirmSpecialSale", dyndata
+	end,
+})
+
+
+DIALOGUE.addTopic("ConfirmSpecialSale", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	IsDynamic = true,
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if(dyndata) then
+			if (CLIENT) then
+				self.response = string.format("That order will cost you %s.", dyndata.cost)
+			else
+				target.specialsalestruct = { dyndata.categoryid, dyndata.cost}
+			end
+		end
+	end,
+	GetDynamicOptions = function(self, client, target)
+
+		local dynopts = {
+			{statement = "Sure, here.", topicID = "ConfirmSpecialSale", dyndata = {accepted = true}},
+			{statement = "That's too expensive for me.", topicID = "ConfirmSpecialSale", dyndata = {accepted = false}},
+		}
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if SERVER then
+			PrintTable(target.specialsalestruct)
+
+			local idat = ix.util.GetRandomItemFromPool(target.specialsalestruct[1])
+			if( dyndata.accepted and client:GetCharacter():GetInventory():Add(idat[1], 1, idat[3] or {})) then
+				ix.dialogue.notifyItemGet(client, ix.item.list[idat[1]].name)
+				ix.dialogue.notifyMoneyLost(client, target.specialsalestruct[2])
+				client:GetCharacter():TakeMoney(target.specialsalestruct[2])
+			end
+
+			target.specialsalestruct = nil
+		end
+		-- Return the next topicID
+		return "BackTopic"
+	end,
+})
+
+DIALOGUE.addTopic("NotEnoughMoneyBuy", {
+	statement = "",
+	response = "Come back once you're serious and can pay the cash.",
+	options = {
+		"BackTopic"
+	}
+})
+
+----------------------------------------------------------------
+---------------------END--SPECIALSALE--END----------------------
 ----------------------------------------------------------------
 
 ----------------------------------------------------------------

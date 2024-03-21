@@ -148,8 +148,8 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.3
-SWEP.WearEffect = 0.0001
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
@@ -168,30 +168,30 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".338 Lapua"
 
-SWEP.FireDelay = 1.45
+SWEP.FireDelay = 1.6
 SWEP.FireSound = "CW_M98B_FIRE"
 SWEP.FireSoundSuppressed = "CW_M98B_SUB"
 SWEP.Recoil = 7.2
 SWEP.AimViewModelFOV = 50
 SWEP.CustomizationMenuScale = 0.018
 SWEP.ForceBackToHipAfterAimedShot = true
-SWEP.GlobalDelayOnShoot = 1.3
+SWEP.GlobalDelayOnShoot = 1.5
 
-SWEP.HipSpread = 0.2
-SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 9
+SWEP.HipSpread = 0.08
+SWEP.AimSpread = 0.003
+SWEP.VelocitySensitivity = 18
 SWEP.MaxSpreadInc = 0.9
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 1
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 380
+SWEP.Damage = 450
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2
-SWEP.ReloadTime_Empty = 2.75
-SWEP.ReloadHalt = 2.3
-SWEP.ReloadHalt_Empty = 3.1
+SWEP.ReloadTime = 2.7
+SWEP.ReloadTime_Empty = 4.0
+SWEP.ReloadHalt = 3.0
+SWEP.ReloadHalt_Empty = 4.5
 
 SWEP.Chamberable = true
 

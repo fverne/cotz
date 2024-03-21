@@ -6,9 +6,8 @@ ITEM.longdesc = "No Longer Description Available"
 
 ITEM.width = 1
 ITEM.height = 1
+ITEM.price = 0
 
-ITEM.ballisticlevels = {"1", "1", "1", "1", "1", "1", "1"}
-ITEM.ballisticareas = {"  Head:", "  Torso:", "  Abdomen:", "  Arms:", "  Legs:", "  Anomaly:", "  Radiation:"}
 ITEM.outfitCategory = "model"
 ITEM.isBodyArmor = true
 ITEM.skincustom = {}
@@ -16,9 +15,14 @@ ITEM.bgcustom = {}
 
 ITEM.br = 0
 ITEM.fbr = 0
+ITEM.sr = 0
+ITEM.fsr = 0
 ITEM.ar = 0
 ITEM.far = 0
+ITEM.pr = 0
+ITEM.fpr = 0
 ITEM.radProt = 0
+
 ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
 ITEM.canRepair = true
@@ -41,7 +45,7 @@ ITEM.bodyGroups = {
 ]]--
 
 function ITEM:GetRepairCost()
-	return self.price * 0.0015 -- 0.15% of price per %
+	return math.pow(self.price, 1/3)
 end
 
 function ITEM:GetDescription()
@@ -67,42 +71,6 @@ function ITEM:GetDescription()
 		return (self.description..duradesc)
 	else
         return (self.description..quantdesc..invdesc)
-	end
-end
-
-function ITEM:RadProtTranslator(value)
-	if value == 0 then
-		return "None"
-	elseif value <= 0.1 then
-		return "Negligible"
-	elseif value <= 0.2 then
-		return "Bad"
-	elseif value <= 0.3 then
-		return "Decent"
-	elseif value <= 0.4 then
-		return "Good"
-	elseif value < 0.8 then
-		return "Very Good"
-	elseif value >= 0.8 then
-		return "Excellent"
-	end
-end
-
-function ITEM:AnomProtTranslator(value)
-	if value == 0 then
-		return "None"
-	elseif value <= 0.05 then
-		return "Negligible"
-	elseif value <= 0.15 then
-		return "Bad"
-	elseif value <= 0.25 then
-		return "Decent"
-	elseif value <= 0.35 then
-		return "Good"
-	elseif value <= 0.45 then
-		return "Very Good"
-	elseif value > 0.45 then
-		return "Excellent"
 	end
 end
 
@@ -151,96 +119,7 @@ if (CLIENT) then
 
 	function ITEM:PopulateTooltip(tooltip)
 		if !self.entity then
-			local ballistictitle = tooltip:AddRowAfter("description", "ballistictitle")
-			ballistictitle:SetText("\nBALLISTIC PROTECTION LEVELS:")
-			ballistictitle:SizeToContents()
-
-			for i = 1, #self.ballisticlevels do				
-				local ballisticdesc = tooltip:AddRowAfter("ballistictitle", "ballisticdesc")
-				ballisticdesc:SetText(self.ballisticareas[i])
-				ballisticdesc:SizeToContents()
-
-				local brighttext = ballisticdesc:Add("DLabel")
-				brighttext:MoveRightOf(ballisticdesc)
-				brighttext:SetText(self.ballisticlevels[i])
-				brighttext:SetContentAlignment(1)
-				if self.ballisticlevels[i] == "0" then
-					brighttext:SetTextColor(Color(255, 0, 0))
-				elseif self.ballisticlevels[i] == "l" then
-					brighttext:SetTextColor(Color(255, 80, 0))
-				elseif self.ballisticlevels[i] == "ll-a" then
-					brighttext:SetTextColor(Color(255, 160, 0))
-				elseif self.ballisticlevels[i] == "ll" then
-					brighttext:SetTextColor(Color(255, 255, 0))
-				elseif self.ballisticlevels[i] == "lll-a" then
-					brighttext:SetTextColor(Color(130, 255, 0))
-				elseif self.ballisticlevels[i] == "lll" then
-					brighttext:SetTextColor(Color(0, 255, 0))
-				elseif self.ballisticlevels[i] == "lll+" then
-					brighttext:SetTextColor(Color(0, 255, 130))
-				elseif self.ballisticlevels[i] == "lV" then
-					brighttext:SetTextColor(Color(0, 255, 255))
-				elseif self.ballisticlevels[i] == "V" then
-					brighttext:SetTextColor(Color(0, 135, 255))
-				end
-				brighttext:SetFont("ixSmallFont")
-			end
-
-			local envirotitle = tooltip:AddRowAfter("ballisticdesc", "envirotitle")
-			envirotitle:SetText("\nENVIRONMENTAL PROTECTION LEVELS:")
-			envirotitle:SizeToContents()
-
-			local anomalytitle = tooltip:AddRowAfter("envirotitle", "anomalytitle")
-			anomalytitle:SetText("  Anomaly:")
-			anomalytitle:SizeToContents()
-
-			local arighttext = anomalytitle:Add("DLabel")
-			arighttext:MoveRightOf(anomalytitle)
-			arighttext:SetText(self:AnomProtTranslator(self.ar or 0))
-			arighttext:SetContentAlignment(4)
-			arighttext:SetSize(anomalytitle:GetWide(), anomalytitle:GetTall())
-			if self:AnomProtTranslator(self.ar or 0) == "None" then
-				arighttext:SetTextColor(Color(255, 0, 0))
-			elseif self:AnomProtTranslator(self.ar or 0) == "Negligible" then
-				arighttext:SetTextColor(Color(255, 80, 0))
-			elseif self:AnomProtTranslator(self.ar or 0) == "Bad" then
-				arighttext:SetTextColor(Color(255, 160, 0))
-			elseif self:AnomProtTranslator(self.ar or 0) == "Decent" then
-				arighttext:SetTextColor(Color(255, 255, 0))
-			elseif self:AnomProtTranslator(self.ar or 0) == "Good" then
-				arighttext:SetTextColor(Color(130, 255, 0))
-			elseif self:AnomProtTranslator(self.ar or 0) == "Very Good" then
-				arighttext:SetTextColor(Color(0, 255, 0))
-			elseif self:AnomProtTranslator(self.ar or 0) == "Excellent" then
-				arighttext:SetTextColor(Color(0, 135, 255))
-			end
-			arighttext:SetFont("ixSmallFont")
-
-			local radtitle = tooltip:AddRowAfter("anomalytitle", "radtitle")
-			radtitle:SetText("  Radiation:")
-			radtitle:SizeToContents()
-
-			local rrighttext = radtitle:Add("DLabel")
-			rrighttext:MoveRightOf(radtitle)
-			rrighttext:SetText(self:RadProtTranslator(self.radProt or 0))
-			rrighttext:SetContentAlignment(4)
-			rrighttext:SetSize(radtitle:GetWide(), radtitle:GetTall())
-			if self:RadProtTranslator(self.radProt or 0) == "None" then
-				rrighttext:SetTextColor(Color(255, 0, 0))
-			elseif self:RadProtTranslator(self.radProt or 0) == "Negligible" then
-				rrighttext:SetTextColor(Color(255, 80, 0))
-			elseif self:RadProtTranslator(self.radProt or 0) == "Bad" then
-				rrighttext:SetTextColor(Color(255, 160, 0))
-			elseif self:RadProtTranslator(self.radProt or 0) == "Decent" then
-				rrighttext:SetTextColor(Color(255, 255, 0))
-			elseif self:RadProtTranslator(self.radProt or 0) == "Good" then
-				rrighttext:SetTextColor(Color(130, 255, 0))
-			elseif self:RadProtTranslator(self.radProt or 0) == "Very Good" then
-				rrighttext:SetTextColor(Color(0, 255, 0))
-			elseif self:RadProtTranslator(self.radProt or 0) == "Excellent" then
-				rrighttext:SetTextColor(Color(0, 135, 255))
-			end
-			rrighttext:SetFont("ixSmallFont")
+			ix.util.DrawSuitResistances(tooltip, self)
 
 			if((self.miscslots or 0) > 0) then
 				local attachmenttitle = tooltip:AddRow("attachments")
@@ -277,7 +156,7 @@ if (CLIENT) then
 			end
 
 			local duratitle = tooltip:AddRowAfter("skintitle", "duratitle")
-			duratitle:SetText("Durability: " .. math.floor(self:GetData("durability", 100)) .. "%")
+			duratitle:SetText("\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 			duratitle:SizeToContents()
 
 			ix.util.PropertyDesc2(tooltip, "Protective Suit", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
@@ -288,6 +167,10 @@ if (CLIENT) then
 	        
 	        if self.isHelmet then
 	        	ix.util.PropertyDesc2(tooltip, "Helmet", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
+	        end
+
+			if self.isBackpack then
+	        	ix.util.PropertyDesc2(tooltip, "Backpack", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 	        end
 
 	        if (self.PopulateTooltipIndividual) then
@@ -302,6 +185,8 @@ end
 function ITEM:RemoveOutfit(client)
 	local character = client:GetCharacter()
 	local bgroups = {}
+
+	client:RemovePart(self.uniqueID)
 
 	self:SetData("equip", false)
 	if (character:GetData("oldModel" .. self.outfitCategory)) then
@@ -334,13 +219,11 @@ function ITEM:RemoveOutfit(client)
 	end
 
 	for k, v in pairs( self:GetData("origgroups", {})) do
-		self.player:SetBodygroup( k, v )
+		self:GetOwner():SetBodygroup( k, v )
 		bgroups[k] = v
 	end
 
-	self.player:GetCharacter():SetData("groups", bgroups)
-
-	self:OnUnequipped()
+	self:GetOwner():GetCharacter():SetData("groups", bgroups)
 end
 
 function ITEM:OnInstanced()
@@ -399,17 +282,15 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	name = "Take Off",
 	tip = "equipTip",
 	icon = "icon16/stalker/unequip.png",
-	OnRun = function(item)
-		local client = item.player
-				
-		item:RemoveOutfit(item.player)
-
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 6, function(player) 
+	OnRun = function(item)		
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 6, function(ply) 
+			item:RemoveOutfit(ply)
+			ply:RecalculateResistances()
+			ply:ReevaluateOverlay()
 		end)
 
-		item.player:RecalculateResistances()
-		item.player:ReevaluateOverlay()
-		
+		item:OnUnequipped()
+
 		return false
 	end,
 	OnCanRun = function(item)
@@ -450,36 +331,46 @@ ITEM.functions.Equip = {
 
 					return false
 				end
+
+				if (v.isBackpack == true and item.isBackpack == true and itemTable:GetData("equip")) then
+					item.player:Notify("You are already equipping a backpack!")
+
+					return false
+				end
 			end
 		end
 
 		
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 6, function(player) 
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 6, function(ply) 
+
+			item:SetData("equip", true)
+			ply:AddPart(item.uniqueID, item)
+
+			local origbgroups = {}
+			for k, v in ipairs(client:GetBodyGroups()) do
+				origbgroups[v.id] = client:GetBodygroup(v.id)
+			end
+			item:SetData("origgroups", origbgroups)
+
+			ply:RecalculateResistances()
+			ply:ReevaluateOverlay()
+
+			char:SetData("oldModel" .. item.outfitCategory, char:GetData("oldModel" .. item.outfitCategory, ply:GetModel()))
+			char:SetModel(item.newModel)
+
+			if (item.newSkin) then
+				char:SetData("oldSkin" .. item.outfitCategory, ply:GetSkin())
+				ply:SetSkin(item.newSkin)
+				if item:GetData("setSkin", nil) != nil then
+					client:SetSkin( item:GetData("setSkin", item.newSkin) )
+				end
+			end
+
+			item:OnLoadout()
 		end)
-		
-		item:SetData("equip", true)
-		
-		local origbgroups = {}
-		for k, v in ipairs(client:GetBodyGroups()) do
-			origbgroups[v.id] = client:GetBodygroup(v.id)
-		end
-		item:SetData("origgroups", origbgroups)
-
-		item.player:RecalculateResistances()
-		item.player:ReevaluateOverlay()
-
-		char:SetData("oldModel" .. item.outfitCategory, char:GetData("oldModel" .. item.outfitCategory, item.player:GetModel()))
-		char:SetModel(item.newModel)
-
-		if (item.newSkin) then
-			char:SetData("oldSkin" .. item.outfitCategory, item.player:GetSkin())
-			item.player:SetSkin(item.newSkin)
-			if item:GetData("setSkin", nil) != nil then
-				client:SetSkin( item:GetData("setSkin", item.newSkin) )
-			end
-		end
 
 		item:OnEquipped()
+
 		return false
 	end,
 	OnCanRun = function(item)
@@ -522,7 +413,7 @@ ITEM.functions.detach = {
 				end
 			end
 
-			if table.remove(curattach,iterator) == nil then
+			if table.remove(curattach,iterator) != data[1] then
 				return false
 			end
 
@@ -551,7 +442,7 @@ ITEM.functions.detach = {
 
 function ITEM:OnLoadout()
 	if (self:GetData("equip")) then
-		local client = self.player
+		local client = self:GetOwner()
 
 		if self:GetData("setSkin", self.newSkin) then
 			client:SetSkin( self:GetData("setSkin", self.newSkin) )
@@ -606,18 +497,15 @@ function ITEM:OnRemoved()
 		client:RecalculateResistances()
 		client:ReevaluateOverlay()
 		self:RemoveOutfit(self:GetOwner())
-		self:RunAllAttachmentDetach()
 	end
 end
 
 function ITEM:OnEquipped()
-	self.player:EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
-	self:OnLoadout()
+	self:GetOwner():EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
 end
 
 function ITEM:OnUnequipped()
-	self:RunAllAttachmentDetach()
-	self.player:EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
+	self:GetOwner():EmitSound("stalkersound/inv_slot.mp3", 50, 100, 1)
 end
 
 function ITEM:getBR() 
@@ -664,6 +552,110 @@ function ITEM:getFBR()
 		if (!ix.armortables.upgrades[v]) then continue end
 		if ix.armortables.upgrades[v].fbr then
 			res = res + ix.armortables.upgrades[v].fbr
+		end
+	end
+	
+	return res
+end
+
+function ITEM:getSR() 
+	local res = 1
+	local upgrades = self:GetData("upgrades", {})
+
+	if self:GetData("durability",100) < 80 then
+		res = 1 - (self.sr * (self:GetData("durability",0)/80))
+	else
+		res = 1 - self.sr
+	end
+	
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].sr then
+			res = res - ix.armortables.upgrades[v].sr
+		end
+	end
+	
+	--For artifacts, kevlarplates, mutant hides, etc..
+	local attachments = self:GetData("attachments", {})
+	
+	for k,v in pairs(attachments) do
+		if (!ix.armortables.attachments[v]) then continue end
+		if ix.armortables.attachments[v].sr then
+			res = res * (1 - ix.armortables.attachments[v].sr)
+		end
+	end
+
+	return res
+end
+
+function ITEM:getFSR() 
+	local res = self.fsr
+	local upgrades = self:GetData("upgrades", {})
+
+	if self:GetData("durability",100) < 80 then
+		res = self.fsr * (self:GetData("durability",0)/80)
+	else
+		res = self.fsr
+	end
+	
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].fsr then
+			res = res + ix.armortables.upgrades[v].fsr
+		end
+	end
+	
+	return res
+end
+
+function ITEM:getPR() 
+	local res = 1
+	local upgrades = self:GetData("upgrades", {})
+	
+	if self:GetData("durability",100) < 80 then
+		res = 1 - (self.pr * (self:GetData("durability",0)/80))
+	else
+		res = 1 - self.pr
+	end
+
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].pr then
+			res = res - ix.armortables.upgrades[v].pr
+		end
+	end
+
+	--For artifacts, kevlarplates, mutant hides, etc..
+	local attachments = self:GetData("attachments", {})
+	
+	for k,v in pairs(attachments) do
+		if (!ix.armortables.attachments[v]) then continue end
+		if ix.armortables.attachments[v].pr then
+			res = res * (1 - ix.armortables.attachments[v].pr)
+		end
+	end
+
+	return res
+end
+
+function ITEM:getFPR() 
+	local res = self.fpr
+	local upgrades = self:GetData("upgrades", {})
+	
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].fpr then
+			res = res + ix.armortables.upgrades[v].fpr
+		end
+	end
+
+	--For artifacts, kevlarplates, mutant hides, etc..
+	local attachments = self:GetData("attachments", {})
+
+	for k,v in pairs(attachments) do
+		if (!ix.armortables.attachments[v]) then continue end
+		if ix.armortables.attachments[v].fpr then
+			res = res + ix.armortables.attachments[v].fpr
 		end
 	end
 	

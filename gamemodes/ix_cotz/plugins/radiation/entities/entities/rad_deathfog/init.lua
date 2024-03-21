@@ -13,7 +13,7 @@ ENT.Coughs = { "ambient/voices/cough1.wav",
 "ambient/voices/citizen_beaten4.wav" }
 
 ENT.WaitTime = 5
-ENT.KillRadius = 1200
+ENT.KillRadius = 1000
 ENT.Damage = 5
 
 function ENT:Initialize()

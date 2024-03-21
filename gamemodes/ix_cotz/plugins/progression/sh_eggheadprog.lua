@@ -20,9 +20,9 @@ ix.progression.Register("eggheadItemDelivery_Detector1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 20,
-			["artifact_bonecluster"] = 20,
-			["artifact_mementomori"] = 20,
+			["artifact_bolt"] = 5,
+			["artifact_bonecluster"] = 1,
+			["artifact_mementomori"] = 1,
 		}	
 
 		return itemids
@@ -54,8 +54,9 @@ ix.progression.Register("eggheadItemDelivery_Detector1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["eggheadItemDelivery_Detector1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["eggheadItemDelivery_Detector1"].complexData[item] = ix.progression.status["eggheadItemDelivery_Detector1"].complexData[item] or 0
+			if amt > ix.progression.status["eggheadItemDelivery_Detector1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -142,8 +143,9 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["eggheadItemDelivery_Detector2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["eggheadItemDelivery_Detector2"].complexData[item] = ix.progression.status["eggheadItemDelivery_Detector2"].complexData[item] or 0
+			if amt > ix.progression.status["eggheadItemDelivery_Detector2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -229,8 +231,9 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["eggheadItemDelivery_Detector3"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["eggheadItemDelivery_Detector3"].complexData[item] = ix.progression.status["eggheadItemDelivery_Detector3"].complexData[item] or 0
+			if amt > ix.progression.status["eggheadItemDelivery_Detector3"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -310,8 +313,9 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["eggheadItemDelivery_Suit1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["eggheadItemDelivery_Suit1"].complexData[item] = ix.progression.status["eggheadItemDelivery_Suit1"].complexData[item] or 0
+			if amt > ix.progression.status["eggheadItemDelivery_Suit1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -328,7 +332,7 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 
 			local npc = ix.progression.GetNPCFromName("'Egghead'")
 			if (npc) then
-				npc:AddItemToList("ssp99", nil, 10, "SELLANDBUY", 10, 1, 10)
+				npc:AddItemToList("suit_ssp99", nil, 10, "SELLANDBUY", 10, 1, 10)
 			end
 
 			ix.progression.SetCompleted("eggheadItemDelivery_Suit1", true)
@@ -393,9 +397,10 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 		local finished =  ix.progression.definitions["eggheadItemDelivery_Suit2"]:GetItemIds()
 
 		local isdone = true
-
-		for item, amt in pairs(ix.progression.status["eggheadItemDelivery_Suit2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		
+		for item, amt in pairs(finished) do
+			ix.progression.status["eggheadItemDelivery_Suit2"].complexData[item] = ix.progression.status["eggheadItemDelivery_Suit2"].complexData[item] or 0
+			if amt > ix.progression.status["eggheadItemDelivery_Suit2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -412,7 +417,7 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 
 			local npc = ix.progression.GetNPCFromName("'Egghead'")
 			if (npc) then
-				npc:AddItemToList("ssp99m", nil, 10, "SELLANDBUY", 10, 1, 10)
+				npc:AddItemToList("suit_ssp99m", nil, 10, "SELLANDBUY", 10, 1, 10)
 			end
 
 			ix.progression.SetCompleted("eggheadItemDelivery_Suit2", true)
@@ -477,8 +482,9 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["eggheadItemDelivery_Suit3"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["eggheadItemDelivery_Suit3"].complexData[item] = ix.progression.status["eggheadItemDelivery_Suit3"].complexData[item] or 0
+			if amt > ix.progression.status["eggheadItemDelivery_Suit3"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -495,7 +501,7 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 
 			local npc = ix.progression.GetNPCFromName("'Egghead'")
 			if (npc) then
-				npc:AddItemToList("seva", nil, 10, "SELLANDBUY", 10, 1, 10)
+				npc:AddItemToList("suit_seva", nil, 10, "SELLANDBUY", 10, 1, 10)
 			end
 
 			ix.progression.SetCompleted("eggheadItemDelivery_Suit3", true)
@@ -561,8 +567,9 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["eggheadItemDelivery_Aid1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["eggheadItemDelivery_Aid1"].complexData[item] = ix.progression.status["eggheadItemDelivery_Aid1"].complexData[item] or 0
+			if amt > ix.progression.status["eggheadItemDelivery_Aid1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -649,8 +656,9 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["eggheadItemDelivery_Aid2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["eggheadItemDelivery_Aid2"].complexData[item] = ix.progression.status["eggheadItemDelivery_Aid2"].complexData[item] or 0
+			if amt > ix.progression.status["eggheadItemDelivery_Aid2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -733,8 +741,9 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["eggheadItemDelivery_Aid3"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["eggheadItemDelivery_Aid3"].complexData[item] = ix.progression.status["eggheadItemDelivery_Aid3"].complexData[item] or 0
+			if amt > ix.progression.status["eggheadItemDelivery_Aid3"].complexData[item] then isdone = false end
 		end
 
 		if isdone then

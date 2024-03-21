@@ -8,8 +8,8 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.120
-ITEM.BaseWeight = 4.144
-ITEM.WeightPerLevel = 1.843
+ITEM.BaseWeight = 2.144
+ITEM.WeightPerLevel = 0.143
 
 ITEM.meal = "meal_chimera"
 

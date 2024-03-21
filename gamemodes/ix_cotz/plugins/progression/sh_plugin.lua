@@ -19,6 +19,8 @@ ix.util.Include("sh_muteprog.lua")
 ix.util.Include("sh_oldtimerprog.lua")
 ix.util.Include("sh_quarterprog.lua")
 ix.util.Include("sh_spicylemonprog.lua")
+ix.util.Include("sh_jittersprog.lua")
+ix.util.Include("sh_eggheadprog.lua")
 
 function PLUGIN:LoadData()
 	ix.progression.status = self:GetData() or {}

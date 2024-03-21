@@ -143,13 +143,13 @@ SWEP.WorldModel		= "models/weapons/w_cstm_m3super90.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 8
+SWEP.Primary.ClipSize		= 6
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.WearDamage = 0.5
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.FireDelay = 0.7
 SWEP.FireSound = "CW_M3SUPER90_FIRE"
@@ -161,9 +161,9 @@ SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.35
 SWEP.ClumpSpread = 0.025
 SWEP.SpreadPerShot = 0.18
-SWEP.SpreadCooldown = 1.1
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 9
-SWEP.Damage = 15
+SWEP.Damage = 42
 SWEP.DeployTime = 1
 
 SWEP.ReloadStartTime = 0.3

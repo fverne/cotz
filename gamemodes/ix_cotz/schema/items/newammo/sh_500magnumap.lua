@@ -16,3 +16,9 @@ ITEM.flatweight = 0.03
 function ITEM:GetWeight()
   return self.flatweight + (self.weight * self:GetData("quantity", self.ammoAmount))
 end
+
+function ITEM:PopulateTooltip(tooltip)
+  if (!self.entity) then
+      ix.util.PropertyDesc(tooltip, "Armor-Piercing Ammunition", Color(64, 224, 208))
+  end
+end

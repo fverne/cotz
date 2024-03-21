@@ -13,7 +13,7 @@ ITEM.WeightPerHunger = 0.5
 ITEM.cookable = true
 
 ITEM.BaseWeight = 1
-ITEM.WeightPerLevel = 0.5
+ITEM.WeightPerLevel = 0.10
 
 ITEM.DropOnDeath = true
 
@@ -94,9 +94,8 @@ ITEM.functions.use = {
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
 			player:SetHunger(hunger + item:GetHunger())
 			player:SetThirst(thirst + item:GetThirst())
+			player:UpdateHungerState(item.player)
 		end)
-
-		item.player:UpdateHungerState(item.player)
 
 		return true
 	end
@@ -115,5 +114,5 @@ function ITEM:SetWeight(knifetier)
 end
 
 function ITEM:GetPrice()
-	return self.price * self:GetWeight()
+	return self.price * self:GetWeight() * 2
 end

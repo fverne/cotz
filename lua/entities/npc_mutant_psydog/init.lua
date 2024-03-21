@@ -27,11 +27,12 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 275
-ENT.hpvar = 75
+ENT.hp = 250
+ENT.hpvar = 20
 
-ENT.flatbulletresistance = 3
-ENT.percentbulletresistance = 25
+ENT.FBR = 2
+ENT.FBRAP = 8
+ENT.BR = 60
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -71,7 +72,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 
 	TEMP_MeleeTable.damage[1] = 45
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 90
 	TEMP_MeleeTable.radius[1] = 50
 	TEMP_MeleeTable.time[1] = 0.4
@@ -81,7 +82,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 
 	TEMP_MeleeTable.damage[1] = 45
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 128
 	TEMP_MeleeTable.radius[1] = 75
 	TEMP_MeleeTable.time[1] = 1.1
@@ -106,25 +107,25 @@ function ENT:STALKERNPCThink()
 
 		if (!IsValid(self.Clone1)) then
 			self.Clone1 = ents.Create("npc_mutant_psydog_phantom")
-			self.Clone1:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*40)
+			self.Clone1:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*40 + self:GetUp()*100)
 			self.Clone1:SetAngles(self:GetAngles())
 			self.Clone1:Spawn()
 		end
 		if (!IsValid(self.Clone2)) then
 			self.Clone2 = ents.Create("npc_mutant_psydog_phantom")
-			self.Clone2:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*-40)
+			self.Clone2:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*-40 + self:GetUp()*100)
 			self.Clone2:SetAngles(self:GetAngles())
 			self.Clone2:Spawn()
 		end
 		if (!IsValid(self.Clone3)) then
 			self.Clone3 = ents.Create("npc_mutant_psydog_phantom")
-			self.Clone3:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*-40)
+			self.Clone3:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*-40 + self:GetUp()*100)
 			self.Clone3:SetAngles(self:GetAngles())
 			self.Clone3:Spawn()
 		end
 		if (!IsValid(self.Clone4)) then
 			self.Clone4 = ents.Create("npc_mutant_psydog_phantom")
-			self.Clone4:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*40)
+			self.Clone4:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*40 + self:GetUp()*100)
 			self.Clone4:SetAngles(self:GetAngles())
 			self.Clone4:Spawn()
 		end
@@ -189,15 +190,6 @@ function ENT:STALKERNPCRemove()
 	if IsValid(self.Clone4) then self.Clone4:TakeDamage( 5, self, self ) end
 
 	
-end
-
-
-function ENT:STALKERNPCDamageTake(dmginfo,mul) 
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
-	end
 end
 
 function ENT:STALKERNPCOnDeath()							

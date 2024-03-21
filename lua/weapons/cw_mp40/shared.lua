@@ -145,8 +145,8 @@ SWEP.Chamberable			= false
 
 SWEP.Primary.Ammo			= "9x19MM"
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.175
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.FireDelay = 60/535
 SWEP.FireSound = "DOIMP40_FIRE"
@@ -159,9 +159,9 @@ SWEP.AimSpread = 0.025
 SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.55
 SWEP.SpreadPerShot = 0.011
-SWEP.SpreadCooldown = 0.6
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 42
+SWEP.Damage = 46
 SWEP.DeployTime = .5
 SWEP.HolsterTime = .5
 

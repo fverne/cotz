@@ -115,8 +115,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".45 ACP"
 
-SWEP.WearDamage = 0.5
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.FireDelay = 0.7
 SWEP.FireSound = "CW_TOZ106_FIRE"
@@ -130,15 +130,15 @@ SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.35
 --SWEP.ClumpSpread = 0.025
 SWEP.SpreadPerShot = 0.19
-SWEP.SpreadCooldown = 1
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 85
+SWEP.Damage = 75
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1
 SWEP.ReloadTime = 2.8
 SWEP.ReloadTime_Empty = 3
-SWEP.ReloadHalt = 4.5
+SWEP.ReloadHalt = 3.4
 SWEP.ReloadHalt_Empty = 4.7
 
 SWEP.Chamberable = true

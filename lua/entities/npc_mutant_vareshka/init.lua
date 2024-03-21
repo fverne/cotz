@@ -39,11 +39,12 @@ ENT.IsLongJumping = 0
 ENT.longjumping1 = 0
 ENT.longjumping2 = 0
 
-ENT.hp = 1200
-ENT.hpvar = 200
+ENT.hp = 400
+ENT.hpvar = 50
 
-ENT.flatbulletresistance = 3
-ENT.percentbulletresistance = 15
+ENT.FBR = 10
+ENT.FBRAP = 15
+ENT.BR = 15
 
 ENT.NextAbilityTime = 0
 
@@ -70,7 +71,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 65
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 21
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 0.8
@@ -80,8 +81,8 @@ function ENT:Initialize()
 	//Jumping attack
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
-	TEMP_MeleeTable.damage[1] = 85
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damage[1] = 65
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 80
 	TEMP_MeleeTable.radius[1] = 80
 	TEMP_MeleeTable.time[1] = 0.9
@@ -131,7 +132,7 @@ function ENT:STALKERNPCThink()
 				if(v == self) then continue end
 				local distance = self:GetPos():Distance(v:GetPos())
 
-				local fulldamage = 80
+				local fulldamage = 25
 				TEMP_TargetDamage = DamageInfo()
 									
 				TEMP_TargetDamage:SetDamage(fulldamage * ((512-distance)/512))
@@ -215,14 +216,5 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 				end
 			end
 		end
-	end
-end
-
-function ENT:STALKERNPCDamageTake(dmginfo,mul)
-
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 end

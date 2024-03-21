@@ -27,11 +27,12 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 250
-ENT.hpvar = 150
+ENT.hp = 150
+ENT.hpvar = 25
 
-ENT.flatbulletresistance = 1
-ENT.percentbulletresistance = 0
+ENT.FBR = 0
+ENT.FBRAP = 0
+ENT.BR = 40
 
 ENT.MustFlee = false
 
@@ -58,7 +59,7 @@ function ENT:Initialize()
 						
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 80
 	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.6
@@ -67,13 +68,13 @@ function ENT:Initialize()
 
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	TEMP_MeleeTable.damage[1] = 25
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 80
 	TEMP_MeleeTable.radius[1] = 64
 	TEMP_MeleeTable.time[1] = 0.9
 	TEMP_MeleeTable.bone[1] = "bip01_r_hand"
 	TEMP_MeleeTable.damage[2] = 25
-	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[2] = 80
 	TEMP_MeleeTable.radius[2] = 64
 	TEMP_MeleeTable.time[2] = 1
@@ -99,19 +100,4 @@ end
 
 function ENT:STALKERNPCOnDeath()
 
-end
-
-function ENT:STALKERNPCDamageTake(dmginfo,mul) 
-
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
-	end
-
-	-- if self:Health() < self:GetMaxHealth()/2 then
-	-- 	return mul * 0.33
-	-- else
-	-- 	return mul
-	-- end
 end

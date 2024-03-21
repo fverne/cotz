@@ -55,6 +55,8 @@ ix.randomitems.tables["cache_ammo_rifle_tier1"] = {
   {1500, {"762x39"}},
   {1200, {"762x51"}},
   {1200, {"762x54"}},
+  { 700, {"93x64"}},
+  { 550, {"338lapua"}},
 }
 
 ix.randomitems.tables["cache_ammo_rifle_tier2"] = {
@@ -70,4 +72,5 @@ ix.randomitems.tables["cache_ammo_rifle_tier2"] = {
   { 250, {"9x39hp"}},
   { 550, {"338lapua"}},
   { 250, {"338lapuahp"}},
+  { 700, {"93x64"}},
 }

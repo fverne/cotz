@@ -91,4 +91,44 @@ PLUGIN.categoryDefs =
 			"valueable_cache_artifact_2"
 		}
 	},
+
+	["stash_map1"] = {
+		appearTime = 1200,
+		disappearTime = 3600,
+		allowedStashTypes = {
+			"normal_cache_assorted_map1_1",
+			"normal_cache_assorted_map1_2",
+			"normal_cache_assorted_map1_3",
+			"normal_cache_assorted_map1_4",
+			"normal_cache_assorted_map1_5",
+			"normal_cache_assorted_map1_6",
+			"normal_cache_assorted_map1_7"
+		}
+	},
+
+	["stash_map2"] = {
+		appearTime = 1200,
+		disappearTime = 3600,
+		allowedStashTypes = {
+			"normal_cache_assorted_map2_1",
+			"normal_cache_assorted_map2_2",
+			"normal_cache_assorted_map2_3",
+			"normal_cache_assorted_map2_4",
+			"normal_cache_assorted_map2_5",
+			"normal_cache_assorted_map2_6"
+		}
+	},
+
+	["stash_map3"] = {
+		appearTime = 1200,
+		disappearTime = 3600,
+		allowedStashTypes = {
+			"normal_cache_assorted_map3_1",
+			"normal_cache_assorted_map3_2",
+			"normal_cache_assorted_map3_3",
+			"normal_cache_assorted_map3_4",
+			"normal_cache_assorted_map3_5",
+			"normal_cache_assorted_map3_6"
+		}
+	},
 }

@@ -60,7 +60,7 @@ if (SERVER) then
 
 			self.sound = CreateSound( self, table.Random(options))
 			self.sound:Play()
-			self.sound:SetSoundLevel(45)
+			self.sound:SetSoundLevel(35)
 			self:Repeat(data)
 		end)
 	end

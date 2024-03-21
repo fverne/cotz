@@ -3,13 +3,15 @@ ITEM.description = "Uncooked meat from a Tark."
 ITEM.longdesc = "A lean flank of flesh. This lean piece of meat is very rough in texture, indicating it's origin from a Tark, a mutated horse. The meat starts cooking wherever you hold it, resulting in most pieces of tark meat not being cookable at stoves, unless one wants an overcooked meal."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_dog.mdl"
 
-ITEM.price = 150
+ITEM.price = 350
 ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.140
-ITEM.BaseWeight = 2.028
-ITEM.WeightPerLevel = 0.665
+ITEM.BaseWeight = 1.028
+ITEM.WeightPerLevel = 0.165
+
+ITEM.meal = "meal_tark"
 
 ITEM.img = ix.util.GetMaterial("cotz/ui/icons/food_17.png")
 

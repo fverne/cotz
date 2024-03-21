@@ -8,7 +8,7 @@ ITEM.width = 1
 ITEM.height = 2
 
 ITEM.noDrop = true
-ITEM.weight = 0.100
+ITEM.flatweight = 0.100
 
 ITEM.exRender = true
 ITEM.iconCam = {
@@ -63,7 +63,7 @@ ITEM.functions.zCheck = {
 			ix.chat.Send(item.player, "iteminternal", "looks at their gas analyzer.", false)
 		
 			local pointtbl = item:GetData("points", {})
-			netstream.Start(item.player, "ix_ShowTaskPositions", item:GetData("points", {}))
+			netstream.Start(item.player, "ix_ShowTaskPositions", item:GetData("points", {}), "vgui/icons/quest2.png")
 		else
 			item.player:Notify("This isn't the right area for this task")
 		end
@@ -74,6 +74,19 @@ ITEM.functions.zCheck = {
 		return (!IsValid(item.entity)) and (!item:GetData("finished")) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
+
+
+-- ITEM.functions.zzDestroy = {
+-- 	name = "Destroy Item",
+-- 	icon = "icon16/stalker/drop.png",
+-- 	OnRun = function(item)
+-- 		return true
+-- 	end,
+-- 	OnCanRun = function(item)
+-- 		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+-- 	end
+-- }
+
 
 function ITEM:GetDescription()
 	if(self.entity) then return self.description end
@@ -95,7 +108,7 @@ function ITEM:OnInstanced(invID, x, y)
 		local tmptbl = {}
 
 		for i = 1, self:GetData("npoints", 3) do
-			table.insert(tmptbl,ix.util.GetRandomTaskPoint())
+			table.insert(tmptbl,ix.util.GetRandomGasAnalyzerPoint(self:GetData("map")))
 		end
 
 		self:SetData("points", tmptbl)

@@ -30,6 +30,8 @@ function PLUGIN:SpawnDupe(dupetospawn, uniqueid, offset, specificpos)
 	if(success)then --This is where the magic happens
 		if (not uniqueid) then uniqueid = dupetospawn end
 
+		if specificpos and offset then specificpos = specificpos + offset end
+
 		ix.AdvDupeIntegration.CreatedEntities[uniqueid] = {}
 
 		ix.AdvDupeIntegration.Entities = {}
@@ -124,6 +126,10 @@ ix.command.Add("debug_convertdupeitems", {
 
 function ix.util.SpawnAdvDupe2Dupe( dupetospawn, uniqueid, offset )
 	ix.plugin.list["advdupeint"]:SpawnDupe(dupetospawn, uniqueid, offset)
+end
+
+function ix.util.SpawnAdvDupe2Dupe( dupetospawn, uniqueid, offset, specificpos )
+	ix.plugin.list["advdupeint"]:SpawnDupe(dupetospawn, uniqueid, offset, specificpos)
 end
 
 function ix.util.DepawnAdvDupe2Dupe( dupetodespawn )

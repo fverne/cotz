@@ -6,7 +6,7 @@ ITEM.category = "Electronics"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 650
-ITEM.weight = 0.460
+ITEM.flatweight = 0.460
 
 ITEM.isGeiger = true
 

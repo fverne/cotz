@@ -6,18 +6,29 @@ DIALOGUE.addTopic("GREETING", {
 		"TradeTopic",
 		"BackgroundTopic",
 		"AboutWorkTopic",
-		"GetTask",
+		-- "GetTask",
+		"GetTaskByDifficulty",
 		"AboutProgression",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"electronics", "information", "dataextract", "artifactcollect_eco"}, 4)
+		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"electronics", "information", "dataextract", "artifactcollect_eco"}, 4)
+		if (SERVER) then
+			if target:GetNetVar("possibleJobs") == nil then
+				local possibleJobs = {}
+				possibleJobs["easy"] = {"artifactcollect_NPC_easy"} 
+				possibleJobs["medium"] = {"artifactcollect_NPC_medium"}
+				possibleJobs["hard"] = {"artifactcollect_NPC_hard"}			
+	
+				target:SetNetVar("possibleJobs", possibleJobs)
+			end
+		end
 	end
 })
 
 DIALOGUE.addTopic("TradeTopic", {
 	statement = "Want to trade?",
-	response = "Keep it down!",
+	response = "Show me the goods.",
 	postCallback = function(self, client, target)
 		if (SERVER) then
 			local character = client:GetCharacter()
@@ -75,7 +86,7 @@ DIALOGUE.addTopic("BackgroundTopic2", {
 
 DIALOGUE.addTopic("BackgroundTopic3", {
 	statement = "How do you make a living if you don't get any funding?",
-	response = "I guess they do fund me, in terms of rations, but they are so tasteless. Hey, listen, here's a deal. If you want to buy some shitty supplies from kiev, let me know. I want to fuck the professors over as much as possible.",
+	response = "I guess they do fund me, in terms of rations, but they are so tasteless. Hey, listen, here's a deal. If you want to buy some shitty supplies from Kiev, let me know. I want to fuck the professors over as much as possible.",
 	options = {
 		"BackgroundTopic4",
 	}
@@ -83,7 +94,7 @@ DIALOGUE.addTopic("BackgroundTopic3", {
 
 DIALOGUE.addTopic("BackgroundTopic4", {
 	statement = "Thanks I guess, won't they be mad if they know?",
-	response = "Hypothetically, they would, but who would tell them? If I hear anything, I'll have 'Quartermaster' evict you into an anomaly. Take care!",
+	response = "Hypothetically, they would, but who would tell them? If I hear anything, I'll have you evicted into an anomaly. Take care!",
 	options = {
 		"BackTopic",
 	}
@@ -236,6 +247,57 @@ DIALOGUE.addTopic("GetTask", {
 		end
 	end,
 })
+
+DIALOGUE.addTopic("GetTaskByDifficulty", {
+	statement = "Do you have any work for me?",
+	response = "I have a few contracts available, what difficulty task are you looking for?.",
+	options = {
+		"BackTopic"
+	},
+	preCallback = function(self, client, target)
+		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
+			self.response = "I already gave you some work."
+		end
+	end,
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+		
+		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
+			table.insert(dynopts, {statement = "A trivial task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "easy"}})
+			table.insert(dynopts, {statement = "A challenging task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "medium"}})
+			table.insert(dynopts, {statement = "A hard task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "hard"}})
+		end
+		
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if (SERVER) then
+			local possibleJobs = target:GetNetVar("possibleJobs")
+			local jobCategories = table.Random(possibleJobs[dyndata.difficulty])
+			local jobid = ix.jobs.getJobFromCategory(jobCategories)
+
+			if !client:ixJobAdd(jobid, target:GetDisplayName()) then
+				return "BackTopic", dynopts
+			end
+			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(jobid))
+			ix.jobs.setNPCJobTaken(target:GetDisplayName(), jobid)
+		end		
+
+		-- Return the next topicID
+		return "BackTopic", dynopts
+	end,
+	ShouldAdd = function()
+		if (!LocalPlayer():GetCharacter():GetJobs()["'Egghead'"]) then
+			return true
+		end
+	end,
+})
+
 DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 	statement = "",
 	response = "",
@@ -262,14 +324,8 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 					local amtneed = amtreq - amtcur
 
 					if(item)then
-						local amtavailable = item:GetData("quantity", 1)
+						local amtavailable = item:GetData("quantity", item.quantity or 1)
 						local amtfinal = amtavailable >= amtneed and amtneed or amtavailable
-
-						item:SetData("quantity", item:GetData("quantity",0) - amtfinal)
-						
-						if(item:GetData("quantity", 0) < 1)then
-							item:Remove()
-						end
 
 						--Adds reward
 						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item, amtfinal)
@@ -277,6 +333,12 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 						ix.dialogue.notifyReputationReceive(player, repReward)
 						player:GetCharacter():GiveMoney(monReward)
 						ix.dialogue.notifyMoneyReceive(player, monReward)
+						
+						item:SetData("quantity", item:GetData("quantity",0) - amtfinal)
+						
+						if(item:GetData("quantity", 0) < 1)then
+							item:Remove()
+						end
 
 						ix.progression.AddComplexProgressionValue(dyndata.progid, {dyndata.itemid, amtfinal}, player:Name())
 					end
@@ -389,12 +451,13 @@ DIALOGUE.addTopic("BackTopic", {
 		"TradeTopic",
 		"BackgroundTopic",
 		"AboutWorkTopic",
-		"GetTask",
+		-- "GetTask",
+		"GetTaskByDifficulty",
 		"AboutProgression",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"electronics", "information", "dataextract", "artifactcollect_eco"}, 4)
+
 	end
 })
 

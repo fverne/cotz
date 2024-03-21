@@ -3,12 +3,12 @@ ITEM.description = "Uncooked meat from a snork."
 ITEM.longdesc = "An uncooked snork hand. Legend has that they bring luck when you eat them, albeit veterans tend to cook them first."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_snork.mdl"
 
-ITEM.price = 450
+ITEM.price = 1250
 ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.120
-ITEM.BaseWeight = 0.387
+ITEM.BaseWeight = 0.287
 ITEM.WeightPerLevel = 0.129
 
 ITEM.meal = "meal_snork"

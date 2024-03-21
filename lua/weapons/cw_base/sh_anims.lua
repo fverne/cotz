@@ -96,6 +96,7 @@ function SWEP:setCurSoundTable(animTable, speed, cycle, origAnim)
 
 	if cycle ~= 0 then
 		-- get the length of the animation and relative time to animation
+		if(not self.CW_WM) then return end
 		local animLen = self.CW_VM:SequenceDuration()
 		local timeRel = animLen * cycle
 		local foundInTable = false

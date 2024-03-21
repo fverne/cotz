@@ -175,29 +175,29 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "7.62x54MMR"
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.FireDelay = 0.2
 SWEP.FireSound = "CW_SVD_FIRE"
 SWEP.FireSoundSuppressed = "CW_AK74_FIRE_SUPPRESSED"
-SWEP.Recoil = 2.2
+SWEP.Recoil = 1.8
 
-SWEP.HipSpread = 0.15
-SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.HipSpread = 0.12
+SWEP.AimSpread = 0.003
+SWEP.VelocitySensitivity = 6
+SWEP.MaxSpreadInc = 0.1
+SWEP.SpreadPerShot = 0.02
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 120
+SWEP.Damage = 190
 SWEP.DeployTime = 1
 
 SWEP.RecoilToSpread = 0.8 -- the M14 in particular will have 30% more recoil from continuous fire to give a feeling of "oh fuck I should stop firing 7.62x51MM in full auto at 750 RPM"
 
 SWEP.ReloadSpeed = 1.10
-SWEP.ReloadTime = 2.35
+SWEP.ReloadTime = 3.8
 SWEP.ReloadTime_Empty = 3.8
-SWEP.ReloadHalt = 0.1
-SWEP.ReloadHalt_Empty = 0.1
+SWEP.ReloadHalt = 3.9
+SWEP.ReloadHalt_Empty = 3.9
 SWEP.SnapToIdlePostReload = true

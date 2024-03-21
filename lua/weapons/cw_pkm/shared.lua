@@ -122,7 +122,7 @@ SWEP.WorldModel		= "models/weapons/w_mach_pkmbenis.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 200
+SWEP.Primary.ClipSize		= 100
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "7.62x54MMR"
@@ -130,24 +130,24 @@ SWEP.Primary.Ammo			= "7.62x54MMR"
 SWEP.FireDelay = 0.0923
 SWEP.FireSound = "CW_PKM_FIRE"
 SWEP.FireSoundSuppressed = "CW_PKM_SUPPRESSED"
-SWEP.Recoil = 2.2
+SWEP.Recoil = 1.6
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.14
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.07
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 110
+SWEP.Damage = 180
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 1.0
-SWEP.ReloadTime = 6.0
-SWEP.ReloadTime_Empty = 6.0
-SWEP.ReloadHalt = 6.2
-SWEP.ReloadHalt_Empty = 6.2
+SWEP.ReloadTime = 6.8
+SWEP.ReloadTime_Empty = 6.8
+SWEP.ReloadHalt = 7.0
+SWEP.ReloadHalt_Empty = 7.0
 SWEP.SnapToIdlePostReload = false

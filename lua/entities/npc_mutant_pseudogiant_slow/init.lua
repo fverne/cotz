@@ -27,8 +27,8 @@ ENT.ChasingSound.chance = 5
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 7500
-ENT.hpvar = 2500
+ENT.hp = 4000
+ENT.hpvar = 100
 
 ENT.CanSlam = 0
 ENT.isSlamming = 0
@@ -42,8 +42,9 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_IDLE_WANDER 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
-ENT.flatbulletresistance = 6
-ENT.percentbulletresistance = 35
+ENT.FBR = 15
+ENT.FBRAP = 5
+ENT.BR = 12
 
 function ENT:Initialize()
 	self.Model = "models/monsters/gigant3.mdl"
@@ -62,7 +63,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 85
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 128
 	TEMP_MeleeTable.radius[1] = 128
 	TEMP_MeleeTable.time[1] = 0.75
@@ -72,7 +73,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 
 	TEMP_MeleeTable.damage[1] = 70
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 128
 	TEMP_MeleeTable.radius[1] = 128
 	TEMP_MeleeTable.time[1] = 0.75
@@ -80,7 +81,7 @@ function ENT:Initialize()
 	self:STALKERNPCSetMeleeParams(2,"stand_attack_1",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
 	TEMP_MeleeTable.damage[1] = 110
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 128
 	TEMP_MeleeTable.radius[1] = 128
 	TEMP_MeleeTable.time[1] = 0.5
@@ -92,7 +93,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 70
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 128
 	TEMP_MeleeTable.radius[1] = 128
 	TEMP_MeleeTable.time[1] = 1.5
@@ -191,10 +192,30 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 	end
 end
 
-function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
+function ENT:STALKERNPCDamageTake(dmginfo,mul) 
+	TEMP_Mul = mul
+	local headMultiplier = 1.5 // head is weakpoint for pseudogiant
+	local torsoMultiplier = 1 
+	local limbMultiplier = 1
+
+	local torsoHitGroups = {
+		[2] = true,
+		[3] = true,
+	}
+	local limbHitgroups = {
+		[4] = true,
+		[5] = true,
+		[6] = true,
+		[7] = true,
+	}
+
+	if(self.LastDamageHitgroup == 1)then // head
+		TEMP_Mul = 0.50 * headMultiplier 
+	elseif (torsoHitGroups[self.LastDamageHitgroup]) then // chest + stomach
+		TEMP_Mul = 1 * torsoMultiplier 
+	elseif (limbHitgroups[self.LastDamageHitgroup]) then // limb
+		TEMP_Mul = 4 * limbMultiplier
 	end
+
+	return TEMP_Mul
 end

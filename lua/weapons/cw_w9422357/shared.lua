@@ -126,7 +126,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.002
+SWEP.WearDamage = 0.33
 SWEP.WearEffect = 0.005
 
 SWEP.ViewModelFOV	= 70
@@ -155,14 +155,14 @@ SWEP.CustomizationMenuScale = 0.018
 SWEP.ForceBackToHipAfterAimedShot = true
 SWEP.GlobalDelayOnShoot = 1.1
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.13
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
 SWEP.MaxSpreadInc = 0.4
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.3
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 115
+SWEP.Damage = 160
 SWEP.DeployTime = 1
 /*
 SWEP.ReloadSpeed = 1

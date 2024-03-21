@@ -133,22 +133,22 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.56x45MM"
 
-SWEP.WearDamage = 0.15
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.FireDelay = 0.0705882352941176
 SWEP.FireSound = "CW_F2000_FIRE"
 SWEP.FireSoundSuppressed = "CW_F2000_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.55
+SWEP.Recoil = 1
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.MaxSpreadInc = 0.09
+SWEP.SpreadPerShot = 0.008
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 75
+SWEP.Damage = 80
 SWEP.DeployTime = 0.4
 
 SWEP.ReloadSpeed = 1.25

@@ -3,9 +3,32 @@ PLUGIN.desc = "Looting dead npcs - uses randomitemlib"
 PLUGIN.author = "fverne"
 
 PLUGIN.HumanModels = {
+    --bandit
     "models/bandit/bandit_regulare.mdl",
     "models/bandit/bandit_veteran.mdl",
     "models/bandit/bandit_novice.mdl",
+
+    --zombifiedbandit
+    "models/zombied/zombi_novice.mdl",
+    "models/zombied/zombi_novice2.mdl",
+    "models/zombied/zombiestalker2a.mdl",
+    "models/zombied/zombiestalker2.mdl",
+
+    --mercs
+    "models/killer/killer.mdl",
+    "models/killer/mask.mdl",
+
+    --zombified mercs
+    "models/zombied/zombifiedstalker3.mdl",
+
+    --military
+    "models/military/soldier.mdl",
+    "models/military/elita.mdl",
+
+    --zombified military
+    "models/zombied/berillzombie.mdl",
+    "models/zombied/zombi_spec.mdl",
+    "models/zombied/zombi_skat.mdl",
 }
 
 

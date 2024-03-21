@@ -14,11 +14,12 @@ ENT.DieSound.name = "Stalker.Controller.Die"
 ENT.DieSound.min = 1
 ENT.DieSound.max = 2
 
-ENT.hp = 1800
-ENT.hpvar = 200
+ENT.hp = 1100
+ENT.hpvar = 75
 
-ENT.flatbulletresistance = 2
-ENT.percentbulletresistance = 5
+ENT.FBR = 15
+ENT.FBRAP = 20
+ENT.BR = 20
 
 ENT.CanSpecial = true
 
@@ -154,7 +155,7 @@ function ENT:STALKERNPCThink()
 				ParticleEffect( "electra_activated", TEMP_ShootPoint, Angle( 0, 0, 0 ) )
 
 				local dmg = DamageInfo()
-				dmg:SetDamage(75)
+				dmg:SetDamage(105)
 				dmg:SetAttacker(self)
 				dmg:SetDamageType(DMG_SHOCK)
 				dmg:SetInflictor(self)
@@ -217,14 +218,6 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 
 		self.CanSpecial = false
 		self.CanSpecialTimer = CurTime()+9
-	end
-end
-
-function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 end
 

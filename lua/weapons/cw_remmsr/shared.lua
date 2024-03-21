@@ -148,8 +148,8 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.3
-SWEP.WearEffect = 0.0001
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
@@ -168,23 +168,23 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".338 Lapua"
 
-SWEP.FireDelay = 1.45
+SWEP.FireDelay = 1.9
 SWEP.FireSound = "CW_RMSR_FIRE"
 SWEP.FireSoundSuppressed = "CW_RMSR_SUB"
 SWEP.Recoil = 7.2
 SWEP.AimViewModelFOV = 50
 SWEP.CustomizationMenuScale = 0.018
 SWEP.ForceBackToHipAfterAimedShot = true
-SWEP.GlobalDelayOnShoot = 1.3
+SWEP.GlobalDelayOnShoot = 1.4
 
-SWEP.HipSpread = 0.2
+SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 9
+SWEP.VelocitySensitivity = 18
 SWEP.MaxSpreadInc = 0.9
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 1
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 380
+SWEP.Damage = 550
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1
@@ -210,7 +210,7 @@ end
 function SWEP:postPrimaryAttack()
 	if CLIENT then
 		timer.Simple(0.6, function() 
-			self:sendWeaponAnim("bolt", 0.7, 0)
+			self:sendWeaponAnim("bolt", 0.8, 0)
 		end)
 	end
 end

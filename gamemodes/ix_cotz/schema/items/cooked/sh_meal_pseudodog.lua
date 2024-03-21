@@ -3,11 +3,13 @@ ITEM.description = "A meal made from a pseudodog, cooked in the zone."
 ITEM.longdesc = "A thick stew made primarily from Pseudodog meat. Surprisingly tasty, if you take into consideration where the meat comes from."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_pseudodog.mdl"
 
-ITEM.price = 455
+ITEM.price = 655
 ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.055
+
+ITEM.img = ix.util.GetMaterial("cotz/ui/icons/food_5.png")
 
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)

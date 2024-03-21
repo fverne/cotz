@@ -153,8 +153,8 @@ SWEP.WorldModel		= "models/srp/weapons/w_abakan.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.DefaultClip	= 0
@@ -164,23 +164,23 @@ SWEP.Primary.Ammo			= "5.45x39MM"
 SWEP.FireDelay = 0.03333333
 SWEP.FireSound = "CW_AK74_FIRE"
 SWEP.FireSoundSuppressed = "CW_AK74_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.6
+SWEP.Recoil = 1.1
 
-SWEP.HipSpread = 0.15
+SWEP.HipSpread = 0.14
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.8
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 70
+SWEP.Damage = 75
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 1
 SWEP.ReloadTime = 2.2
-SWEP.ReloadTime_Empty = 2.6
+SWEP.ReloadTime_Empty = 3.2
 SWEP.ReloadHalt = 2.3
-SWEP.ReloadHalt_Empty = 2.7
+SWEP.ReloadHalt_Empty = 3.4
 SWEP.SnapToIdlePostReload = true
 
 function SWEP:IndividualThink()

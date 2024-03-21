@@ -129,22 +129,22 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "5.7x28MM"
 
-SWEP.WearDamage = 0.125
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_FIVESEVEN_FIRE"
 SWEP.FireSoundSuppressed = "CW_FIVESEVEN_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.6
+SWEP.Recoil = 0.9
 
-SWEP.HipSpread = 0.1
+SWEP.HipSpread = 0.06
 SWEP.AimSpread = 0.015
-SWEP.VelocitySensitivity = 1
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 0.4
+SWEP.VelocitySensitivity = 2
+SWEP.MaxSpreadInc = 0.1
+SWEP.SpreadPerShot = 0.02
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 45
+SWEP.Damage = 75
 SWEP.DeployTime = 0.4
 --SWEP.Chamberable = false
 

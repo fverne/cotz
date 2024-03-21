@@ -2,7 +2,7 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 	name = "Gearing Up 1",
 	description = "Introduce yourself to Quartermaster.",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_1"] = ix.progression.status["quartermasterItemDelivery_1"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_1"].complexData
@@ -20,7 +20,7 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["part_chimera"] = 10,
+			["part_snork_1"] = 10,
 		}	
 
 		return itemids
@@ -52,8 +52,9 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_1"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -71,6 +72,7 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
 			if (npc) then
 				npc:AddItemToList("mp5", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mossberg500", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("quartermasterItemDelivery_1", true)
@@ -137,8 +139,9 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_11"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_11"].complexData[item] = ix.progression.status["quartermasterItemDelivery_11"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_11"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -225,8 +228,9 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_111"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_111"].complexData[item] = ix.progression.status["quartermasterItemDelivery_111"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_111"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -308,8 +312,9 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_1111"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_1111"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1111"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_1111"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -394,8 +399,9 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_112"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_112"].complexData[item] = ix.progression.status["quartermasterItemDelivery_112"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_112"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -480,8 +486,9 @@ ix.progression.Register("quartermasterItemDelivery_1121", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_1121"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_1121"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1121"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_1121"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -564,8 +571,9 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_11211"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_11211"].complexData[item] = ix.progression.status["quartermasterItemDelivery_11211"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_11211"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -612,8 +620,8 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["hidestash_2"] = 15,
-			["hidestash_3"] = 20,
+			["hidestash_1"] = 10,
+			["hidestash_2"] = 5,
 		}	
 
 		return itemids
@@ -645,8 +653,9 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_12"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_12"].complexData[item] = ix.progression.status["quartermasterItemDelivery_12"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_12"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -729,8 +738,9 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_121"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_121"].complexData[item] = ix.progression.status["quartermasterItemDelivery_121"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_121"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -810,8 +820,9 @@ ix.progression.Register("quartermasterItemDelivery_122", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_122"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_122"].complexData[item] = ix.progression.status["quartermasterItemDelivery_122"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_122"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -892,8 +903,9 @@ ix.progression.Register("quartermasterItemDelivery_1221", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_1221"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_1221"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1221"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_1221"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -974,8 +986,9 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_12211"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_12211"].complexData[item] = ix.progression.status["quartermasterItemDelivery_12211"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_12211"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1004,13 +1017,13 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 	name = "Gearing Up 2",
 	description = "Help Quartermaster with his hand cannon problem.",
 	keyNpc = "'Quartermaster'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["quartermasterItemDelivery_2"] = ix.progression.status["quartermasterItemDelivery_2"] or {}
 		local dat = ix.progression.status["quartermasterItemDelivery_2"].complexData
 		local itemids = self:GetItemIds()
 
-		local str = "Time for another data gathering mission. I've been getting complaints about the lack of heavy sidearms for sale, and I don't really know what would be most useful out there. Get out there, get me some more intel, and I'll tailor my stock accordingly. Try taking out some of the burer population.\n\n"
+		local str = "Time for a data gathering mission. I've been getting complaints about the lack of heavy sidearms for sale, and I don't really know what would be most useful out there. Get out there, get me some more intel, and I'll tailor my stock accordingly. Try taking out some of the burer population.\n\n"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -1054,8 +1067,9 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_2"].complexData[item] = ix.progression.status["quartermasterItemDelivery_2"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1138,15 +1152,16 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_21"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_21"].complexData[item] = ix.progression.status["quartermasterItemDelivery_21"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_21"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
 
 			timer.Simple(60, function()
 				local name = "'Quartermaster'"
-				local message = "!I now offer the Taurus Raging Bull; a .44 hand cannon that should give any mutants a bad day. As a bonus, I've opened up my stock of MP9 machine pistols for purchase."
+				local message = "I now offer the Taurus Raging Bull; a .44 hand cannon that should give any mutants a bad day. As a bonus, I've opened up my stock of MP9 machine pistols for purchase."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1222,8 +1237,9 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_211"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_211"].complexData[item] = ix.progression.status["quartermasterItemDelivery_211"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_211"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1304,8 +1320,9 @@ ix.progression.Register("quartermasterItemDelivery_212", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_212"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_212"].complexData[item] = ix.progression.status["quartermasterItemDelivery_212"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_212"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1389,8 +1406,9 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_2121"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_2121"].complexData[item] = ix.progression.status["quartermasterItemDelivery_2121"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_2121"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1470,8 +1488,9 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_22"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_22"].complexData[item] = ix.progression.status["quartermasterItemDelivery_22"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_22"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1555,15 +1574,16 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_221"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_221"].complexData[item] = ix.progression.status["quartermasterItemDelivery_221"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_221"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
 
 			timer.Simple(60, function()
 				local name = "'Quartermaster'"
-				local message = "!You spoke and I listened; the MP-153 semi automatic shotgun is up for grabs."
+				local message = "You spoke and I listened; the MP-153 semi automatic shotgun is up for grabs."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -1635,8 +1655,9 @@ ix.progression.Register("quartermasterItemDelivery_222", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_222"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_222"].complexData[item] = ix.progression.status["quartermasterItemDelivery_222"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_222"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -1716,8 +1737,9 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["quartermasterItemDelivery_2221"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["quartermasterItemDelivery_2221"].complexData[item] = ix.progression.status["quartermasterItemDelivery_2221"].complexData[item] or 0
+			if amt > ix.progression.status["quartermasterItemDelivery_2221"].complexData[item] then isdone = false end
 		end
 
 		if isdone then

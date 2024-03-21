@@ -3,13 +3,13 @@ ITEM.description = "Uncooked meat from a Humanoid creature."
 ITEM.longdesc = "Meat from a human. It's very frowned upon to eat by stalkers, even though it originates from creatures that are no longer classified as humans."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_flesh.mdl"
 
-ITEM.price = 10
+ITEM.price = 200
 ITEM.width = 1
 ITEM.height = 1
 
 ITEM.WeightPerHunger = 0.060
-ITEM.BaseWeight = 1.661
-ITEM.WeightPerLevel = 0.349
+ITEM.BaseWeight = 0.861
+ITEM.WeightPerLevel = 0.149
 
 ITEM.meal = "meal_human"
 

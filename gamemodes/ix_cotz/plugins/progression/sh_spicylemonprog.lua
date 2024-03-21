@@ -24,7 +24,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["meal_tushkano"] = 35,
+			["meal_tushkano"] = 15,
 		}	
 
 		return itemids
@@ -56,8 +56,9 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical1"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item] or 0
+			if amt > ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -74,7 +75,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 
 			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
 			if (npc) then
-				npc:AddItemToList("drug_mints", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("drug_mints", nil, 1, "SELLANDBUY", 1, 4, 1)
 			end
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Medical1", true)
@@ -138,8 +139,9 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical2"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item] or 0
+			if amt > ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -161,6 +163,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Medical2", true)
 			ix.progression.SetActive("spicylemonItemDelivery_Medical3", true) 
+			ix.progression.SetActive("technutItemDelivery_Food", true) 
 
 		end
 	end
@@ -221,8 +224,9 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical3"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item] or 0
+			if amt > ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -244,6 +248,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Medical3", true)
 			ix.progression.SetActive("spicylemonItemDelivery_Medical4", true) 
+			ix.progression.SetActive("technutItemDelivery_Vodka", true) 
 
 		end
 	end
@@ -304,8 +309,9 @@ ix.progression.Register("spicylemonItemDelivery_Medical4", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical4"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item] or 0
+			if amt > ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -388,8 +394,9 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical5"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item] or 0
+			if amt > ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -411,6 +418,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Medical5", true)
 			ix.progression.SetActive("spicylemonItemDelivery_Medical6", true) 
+			ix.progression.SetActive("technutItemDelivery_Spirits", true) 
 
 		end
 	end
@@ -472,8 +480,9 @@ ix.progression.Register("spicylemonItemDelivery_Medical6", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical6"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item] or 0
+			if amt > ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -555,8 +564,9 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Medical7"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item] or 0
+			if amt > ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -577,6 +587,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 			end
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Medical7", true)
+			ix.progression.SetActive("technutItemDelivery_Brew", true) 
 
 		end
 	end
@@ -591,7 +602,7 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 	name = "Food for the poor",
 	description = "Spicy Lemon is interested in importing some food.",
 	keyNpc = "'Spicy Lemon'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["spicylemonItemDelivery_Food"] = ix.progression.status["spicylemonItemDelivery_Food"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Food"].complexData
@@ -641,8 +652,9 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Food"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["spicylemonItemDelivery_Food"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Food"].complexData[item] or 0
+			if amt > ix.progression.status["spicylemonItemDelivery_Food"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -681,7 +693,7 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 	name = "Drinks for the poor",
 	description = "Spicy Lemon has a discerning eye for new customers...",
 	keyNpc = "'Spicy Lemon'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["spicylemonItemDelivery_Vodka"] = ix.progression.status["spicylemonItemDelivery_Vodka"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Vodka"].complexData
@@ -731,8 +743,9 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Vodka"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item] or 0
+			if amt > ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -750,8 +763,8 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
 			if (npc) then
 				npc:AddItemToList("drink_vodka_4", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("drink_vodka_5", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("drink_vodka_6", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("drink_vodka_5", nil, 1, "SELLANDBUY", 1, 6, 1)
+				npc:AddItemToList("drink_vodka_6", nil, 1, "SELLANDBUY", 1, 6, 1)
 			end
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Vodka", true)
@@ -766,7 +779,7 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 	name = "Drinks for the rich",
 	description = "Spicy Lemon would like to expand his vodka stocks.",
 	keyNpc = "'Spicy Lemon'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["spicylemonItemDelivery_Spirits"] = ix.progression.status["spicylemonItemDelivery_Spirits"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Spirits"].complexData
@@ -816,8 +829,9 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Spirits"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item] or 0
+			if amt > ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item] then isdone = false end
 		end
 
 		if isdone then
@@ -834,10 +848,10 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 
 			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
 			if (npc) then
-				npc:AddItemToList("drink_spirit_1", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("drink_spirit_2", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("drink_spirit_3", nil, 5, "SELLANDBUY", 5, 1, 5)
-                npc:AddItemToList("drink_wine", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("drink_spirit_1", nil, 1, "SELLANDBUY", 1, 6, 1)
+				npc:AddItemToList("drink_spirit_2", nil, 1, "SELLANDBUY", 1, 6, 1)
+				npc:AddItemToList("drink_spirit_3", nil, 1, "SELLANDBUY", 1, 6, 1)
+                npc:AddItemToList("drink_wine", nil, 1, "SELLANDBUY", 1, 6, 1)
 			end
 
 			ix.progression.SetCompleted("spicylemonItemDelivery_Spirits", true)
@@ -853,7 +867,7 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 	name = "Drinks for the smart",
 	description = "Spicy Lemon is interested in medicinal brews.",
 	keyNpc = "'Spicy Lemon'",
-	defaultActive = true,
+	defaultActive = false,
 	BuildResponse = function(self, status)
 		ix.progression.status["spicylemonItemDelivery_Brew"] = ix.progression.status["spicylemonItemDelivery_Brew"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Brew"].complexData
@@ -906,8 +920,9 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 
 		local isdone = true
 
-		for item, amt in pairs(ix.progression.status["spicylemonItemDelivery_Brew"].complexData) do
-			if amt < finished[item] then isdone = false end
+		for item, amt in pairs(finished) do
+			ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item] or 0
+			if amt > ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item] then isdone = false end
 		end
 
 		if isdone then

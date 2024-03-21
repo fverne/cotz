@@ -7,8 +7,8 @@ ITEM.width = 2
 ITEM.height = 2
 ITEM.weight = 1.270
 
-ITEM.carryinc = 20
-ITEM.outfitCategory = "backpack"
+ITEM.carryinc = 25
+ITEM.outfitCategory = "Backpack"
 
 ITEM.exRender = true
 ITEM.iconCam = {

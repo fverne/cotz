@@ -3,8 +3,10 @@ ITEM.description = "A low tier cooker."
 ITEM.longdesc = "A small metallic portable pocket stove that allows you to cook up various foods. Some STALKERs like to carry a mini portable cooker around when they camp out. It requires a fuel source to cook with. Those who are experienced STALKERs tend to use the likes of a heat producing artifact to cook their food as it acts as an unlimited fuel source. The rest typically use some wooden branches they find or some charcoal to add a nice smokey flavour."
 ITEM.model = "models/lostsignalproject/items/misc/wood_stove.mdl"
 
-ITEM.width = 2
-ITEM.height = 2
+ITEM.width = 1
+ITEM.height = 1
+
+ITEM.flatweight = 0.920
 
 ITEM.price = 2500
 
@@ -94,20 +96,13 @@ function ITEM:CookMeat(item, targetID)
   if (self:GetData("cancook", false)) then
     local client = self.player or item:GetOwner()
 
-    client:SetAction("Cooking", 6)
-    client:Freeze(true)
-    client:ScreenFade( SCREENFADE.OUT, Color( 0, 0, 0 ), 1, 4 )
-    timer.Simple(1, function()
+    ix.util.PlayerPerformBlackScreenAction(client, "Cooking...", 6, function(player) 
       target:Remove()
-      client:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, 4 )
-    end)
-    timer.Simple(5, function()
       client:GetCharacter():GetInventory():Add(target.meal, 1, {["weight"] = target:GetWeight()})
-      client:Notify(target.name.." successfully cooked.")
-      ix.chat.Send(client, "iteminternal", "uses their "..self.name.." to cook some "..target.name..".", false)
-      client:Freeze(false)
+      player:Notify(target.name.." successfully cooked.")
+      ix.chat.Send(player, "iteminternal", "uses their "..self.name.." to cook some "..target.name..".", false)
     end)
-
+    
     client:EmitSound(self.sound or "items/battery_pickup.wav")
     self:SetData("cancook", false)
 

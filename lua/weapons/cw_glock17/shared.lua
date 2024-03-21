@@ -128,20 +128,20 @@ SWEP.Primary.Ammo			= "9x19MM"
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_G18_FIRE"
 SWEP.FireSoundSuppressed = "CW_G18_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.7
+SWEP.Recoil = 1
 SWEP.RecoilToSpread = 0.5
 
-SWEP.WearDamage = 0.125
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05
 
-SWEP.HipSpread = 0.125
-SWEP.AimSpread = 0.025
-SWEP.VelocitySensitivity = 1.5
+SWEP.HipSpread = 0.05
+SWEP.AimSpread = 0.02
+SWEP.VelocitySensitivity = 2
 SWEP.MaxSpreadInc = 0.08
-SWEP.SpreadPerShot = 0.008
-SWEP.SpreadCooldown = 0.13
+SWEP.SpreadPerShot = 0.02
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 42
+SWEP.Damage = 63
 SWEP.DeployTime = 0.1
 SWEP.Chamberable = true
 

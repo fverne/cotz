@@ -120,6 +120,7 @@ SWEP.SpeedDec = 10
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "passive"
 SWEP.FireModes = {"semi"}
@@ -139,14 +140,14 @@ SWEP.WorldModel		= "models/weapons/w_bocw_ironhide.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 5
-SWEP.Primary.DefaultClip	= 5
+SWEP.Primary.ClipSize		= 4
+SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".45 ACP"
 
 SWEP.FireDelay = 1.5
 SWEP.FireSound = "LAX410_FIRE"
-SWEP.Recoil = 5.5
+SWEP.Recoil = 7.5
 
 SWEP.HipSpread = 0.06
 SWEP.AimSpread = 0.03
@@ -154,9 +155,9 @@ SWEP.VelocitySensitivity = 4
 SWEP.MaxSpreadInc = 0.55
 --SWEP.ClumpSpread = 0.01
 SWEP.SpreadPerShot = 0.012
-SWEP.SpreadCooldown = 0.7
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 99
+SWEP.Damage = 75
 SWEP.DeployTime = .5
 
 SWEP.ReloadSpeed = 0.8
@@ -167,5 +168,5 @@ SWEP.ShotgunReload = true
 
 SWEP.Chamberable = true
 
-SWEP.WearDamage = 0.1
-SWEP.WearEffect = 0.05
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005

@@ -3,7 +3,7 @@ ITEM.description = "A small device that keeps track of its heading."
 ITEM.model = "models/lostsignalproject/items/quest/gps.mdl"
 ITEM.price = 700
 ITEM.flag = "A"
-ITEM.weight = 0.075
+ITEM.flatweight = 0.075
 
 ITEM.isCompass = true
 

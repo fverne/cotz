@@ -4,7 +4,7 @@ include("shared.lua")
 
 
 ENT.Exploding = false
-ENT.TouchDamage = 80
+ENT.TouchDamage = 50
 
 function ENT:Initialize()
 	self:SetModel( "models/props_phx/misc/smallcannonball.mdl" )
@@ -47,6 +47,9 @@ function ENT:Detonate(ent,data)
 	TEMP_TargetDamage:SetInflictor(self)
 	TEMP_TargetDamage:SetDamagePosition(ent:NearestPoint(self:GetPos()))
 	TEMP_TargetDamage:SetDamageForce(self:GetForward()*10000)
+	ent:TakeDamageInfo(TEMP_TargetDamage)
+
+	TEMP_TargetDamage:SetDamageType(DMG_ACID)
 	ent:TakeDamageInfo(TEMP_TargetDamage)
 	
 	sound.Play("Stalker.Controller.Control.4",self:GetPos())

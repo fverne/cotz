@@ -12,7 +12,10 @@ local NPC = { 	Name = "Bandit (Pistols)",
 				Class = "npc_human_bandit_pistolman",
 				Category = Category	}
 list.Set( "NPC", NPC.Class, NPC )
-
+local NPC = { 	Name = "Bandit (Sniper)", 
+				Class = "npc_human_bandit_sniper",
+				Category = Category	}
+list.Set( "NPC", NPC.Class, NPC )
 
 
 local NPC = { 	Name = "Mercenary (Rifles)", 
@@ -27,7 +30,10 @@ local NPC = { 	Name = "Mercenary (Pistols)",
 				Class = "npc_human_merc_pistolman",
 				Category = Category	}
 list.Set( "NPC", NPC.Class, NPC )
-
+local NPC = { 	Name = "Mercenary (Sniper)", 
+				Class = "npc_human_merc_sniper",
+				Category = Category	}
+list.Set( "NPC", NPC.Class, NPC )
 
 
 local NPC = { 	Name = "Military (Rifles)", 

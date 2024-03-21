@@ -115,12 +115,12 @@ SWEP.FireDelay = 0.2
 SWEP.FireSound = "R8_FIRE"
 SWEP.Recoil = 3
 
-SWEP.HipSpread = 0.125
+SWEP.HipSpread = 0.075
 SWEP.AimSpread = 0.0094
 SWEP.VelocitySensitivity = 4
-SWEP.MaxSpreadInc = 0.4
-SWEP.SpreadPerShot = 0.02
-SWEP.SpreadCooldown = 0.4
+SWEP.MaxSpreadInc = 0.07
+SWEP.SpreadPerShot = 0.04
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 115
 SWEP.DeployTime = 0.4
@@ -142,5 +142,5 @@ function SWEP:IndividualThink()
 	self:setBodygroup(self.BarrelBGs.main,self.BarrelBGs.rail)
 end
 
-SWEP.WearDamage = 0.1
+SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05

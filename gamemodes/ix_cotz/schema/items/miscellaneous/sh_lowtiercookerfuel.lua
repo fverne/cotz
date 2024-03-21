@@ -1,5 +1,5 @@
 ITEM.name = "Charcoal"
-ITEM.description = "Low tier cooking fuel."
+ITEM.description = "A paper bag with slowburning charcoal."
 ITEM.longdesc = "Some odorless, tasteless, clump of fine black powder that is a low tier of a cooking fuel source within the Zone. Charcoal is one of the main sources STALKERs used to cook with, though it tends to run out pretty fast after a couple uses."
 ITEM.quantdesc = "This bag has enough charcoal for another %d refills."
 ITEM.model = "models/lostsignalproject/items/misc/charcoal.mdl"
@@ -13,6 +13,9 @@ ITEM.fueltier = 1
 ITEM.quantity = 3
 ITEM.splitSize = {1, 2}
 
+ITEM.flatweight = 0.250
+ITEM.weight = 0.450
+
 ITEM.exRender = true
 
 ITEM.iconCam = {
@@ -20,6 +23,10 @@ ITEM.iconCam = {
 	ang = Angle(90, 180, 0),
 	fov = 4.1176470588235,
 }
+
+function ITEM:PopulateTooltipIndividual(tooltip)
+    ix.util.PropertyDesc(tooltip, "Low Tier Cooking Fuel", Color(64, 224, 208))
+end
 
 if (CLIENT) then
 	function ITEM:PaintOver(item, w, h)
@@ -55,7 +62,7 @@ ITEM.functions.combine = {
 				targetItem:SetData("quantity", targetItem.quantity)
 				return false
 			end
-		elseif ( targetItem.cookertier and targetItem.cookertier <= item.fueltier and !targetItem:GetData("cancook", false) ) then
+		elseif ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and !targetItem:GetData("cancook", false) ) then
 			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
 			targetItem:SetData("cancook", true)
 
@@ -127,7 +134,7 @@ ITEM.functions.use = {
 				local items = inv:GetItems()
 
 				for k, v in pairs(items) do
-					if (v.cookertier and v.cookertier <= item.fueltier and !v:GetData("cancook", false)) then
+					if (v.cookertier and v.cookertier >= item.fueltier and !v:GetData("cancook", false)) then
 						table.insert(targets, {
 							name = L(v.name),
 							data = {v:GetID()},
@@ -146,7 +153,7 @@ ITEM.functions.use = {
 		local targetItem = ix.item.instances[data[1]]
 		if (!targetItem) then return false end
 
-		if ( targetItem.cookertier and targetItem.cookertier <= item.fueltier and !targetItem:GetData("cancook", false) ) then
+		if ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and !targetItem:GetData("cancook", false) ) then
 			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
 			targetItem:SetData("cancook", true)
 

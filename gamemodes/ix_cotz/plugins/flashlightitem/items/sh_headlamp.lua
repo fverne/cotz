@@ -84,6 +84,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 		local client = item.player
 		item:SetData("equip", false)
 		client:GetCharacter():SetData("headlamp", false)
+		client:SetNWBool("customFlashlight", false)
 		item.player:Flashlight(false)
 
 		item.player:EmitSound("stalkersound/inv_slot.mp3", 40)
@@ -101,5 +102,6 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 ITEM:Hook("drop", function(item)
 	item:SetData("equip", false)
 	item.player:Flashlight(false)
+	item.player:SetNWBool("customFlashlight", false)
 	item.player:GetCharacter():SetData("headlamp", false)
 end)

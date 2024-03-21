@@ -6,8 +6,12 @@ include('shared.lua')
 ENT.bleeds      = true
 ENT.StartHealth = 100
 ENT.PlayerFriendly = false
-ENT.flatbulletresistance = 3 -- 2 times values of trenchcoat, to simulate attachments
-ENT.percentbulletresistance = 37 -- 2 times values of trenchcoat, to simulate attachments
+ENT.flatbulletresistance = 25
+ENT.percentbulletresistance = 20
+ENT.lootChance = 33
+ENT.lootGroup = "bandit_shotgun_loot"
+ENT.selectedWeaponItem = nil 
+ENT.selectedWeaponSWEP = nil
 
 ENT.alertsounds  = {
   "npc/killer/enemy_1.ogg",
@@ -61,7 +65,8 @@ ENT.models       = {
 }
 
 ENT.weapons      = {
-  "weapon_npc_spas12"
+  {{"toz194", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 2 }}, "weapon_npc_spas12"},
+  {{"m3supershort", { ["durability"] = 10, ["wear"] = 15, ["ammo"] = 2 }}, "weapon_npc_spas12"},
 }
 
 -- Live vars
@@ -76,14 +81,25 @@ ENT.dead = false
 ENT.speaktime = 0
 ENT.FireBurst = 0
 ENT.NextAttack = 0
+ENT.IsSTALKERNPC = true
    
 function ENT:Initialize()
 
-  self:Give(self.weapons[math.random(#self.weapons)])
+  local selectedWeaponIndex = math.random(#self.weapons)
+  for i=1, #self.weapons do
+    if selectedWeaponIndex == i then
+      self.selectedWeaponItem = self.weapons[i][1]
+      self.selectedWeaponSWEP = self.weapons[i][2]
+    end
+  end
+
+  self:Give(self.selectedWeaponSWEP)
 
   self:SetModel(self.models[math.random(1,#self.models)])
 
   self:SetSkin(math.random(1,self:SkinCount()))
+  self:SetCollisionGroup(COLLISION_GROUP_NPC)
+  self:SetCustomCollisionCheck( true )
    
   self:SetHullType( HULL_HUMAN )
   self:SetHullSizeNormal();
@@ -114,9 +130,9 @@ end
    
 function ENT:OnTakeDamage(dmg)
   if(dmg:IsDamageType(DMG_BULLET)) then
-		dmg:SetDamage(dmg:GetDamage()*(1 - (self.percentbulletresistance/100)))
 		dmg:SubtractDamage(self.flatbulletresistance)
-		dmg:SetDamage(math.max(0,dmg:GetDamage())) --So he can't heal from our attacks
+		dmg:SetDamage(dmg:GetDamage()*(1 - (self.percentbulletresistance/100)))
+		dmg:SetDamage(math.max(3,dmg:GetDamage())) --So he can't heal from our attacks
 	end
   
   self:SpawnBlood(dmg)
@@ -127,7 +143,7 @@ function ENT:OnTakeDamage(dmg)
     self:PlayRandomSound(self.hurtsounds)
   end
 
-  if (dmg:GetAttacker():GetClass() != self:GetClass() ) then
+  if (dmg:GetAttacker():GetClass() != self:GetClass() && dmg:IsDamageType(DMG_BULLET)) then
     self:AddEntityRelationship( dmg:GetAttacker(), 1, 10 )
     self:SetEnemy(dmg:GetAttacker())
   end
@@ -152,13 +168,13 @@ function ENT:InitEnemies()
   local mutanttable = ents.FindByClass("npc_mutant_*")
 
   for _, x in pairs(zombifiedtable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_LI, 10 )
+    self:AddEntityRelationship( x, D_LI, 10 )
   end
 
   for _, x in pairs(bandittable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_LI, 10 )
+    self:AddEntityRelationship( x, D_LI, 10 )
   end
 
   for _, x in pairs(merctable) do
@@ -167,13 +183,13 @@ function ENT:InitEnemies()
   end
 
   for _, x in pairs(militable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_LI, 10 )
+    self:AddEntityRelationship( x, D_LI, 10 )
   end
 
   for _, x in pairs(mutanttable) do
-    x:AddEntityRelationship( self, D_HT, 10 )
-    self:AddEntityRelationship( x, D_HT, 10 )
+    x:AddEntityRelationship( self, D_LI, 10 )
+    self:AddEntityRelationship( x, D_LI, 10 )
   end
 end
 
@@ -325,11 +341,15 @@ function ENT:KilledDan()
   end
   -- Helix specific drops
   if(ix)then
-    local item = ix.util.GetRandomItemFromPool("bandit_shotgun_drops")
+    local item = self.selectedWeaponItem
     ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), function(item, ent) ent.bTemporary = true end, AngleRand(), item[2] or {} )
   end
 
-  ragdoll:SetNetVar("loot", "bandit_shotgun_loot")
+  if math.random(1, 100) <= self.lootChance then
+    ragdoll:SetNetVar("loot", self.lootGroup)
+  end
+
+  ragdoll:Fire("kill","",180)
 
   self:Remove()
 end
@@ -346,11 +366,15 @@ function ENT:OnRemove()
 end
 
 function ENT:HasLOS()
-  if self:GetEnemy() then
+  if IsValid(self:GetEnemy()) then
     local tracedata = {}
 
     tracedata.start = self:GetShootPos()
-    tracedata.endpos = self:GetEnemy():GetShootPos()
+    if IsValid(self:GetEnemy():GetShootPos()) then
+      tracedata.endpos = self:GetEnemy():GetShootPos()
+    else
+      tracedata.endpos = self:GetEnemy():GetPos() + Vector(0, 0, 8)
+    end
     tracedata.filter = self
 
     local trace = util.TraceLine(tracedata)

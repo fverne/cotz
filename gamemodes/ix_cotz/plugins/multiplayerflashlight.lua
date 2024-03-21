@@ -158,6 +158,8 @@ if (CLIENT) then
 
 			if (client:GetNWBool("customFlashlight") != true) then
 				if (client.flash and client.flash.Remove) then
+					client.flash:SetBrightness(0)
+					client.flash:Update()
 					client.flash:Remove()
 				end
 
@@ -166,7 +168,11 @@ if (CLIENT) then
 		end
 	end
 else
-	function PLUGIN:PlayerDeath(client)
+	function PLUGIN:DoPlayerDeath(client)
+		client:SetNWBool("customFlashlight", false)
+	end
+
+	function PLUGIN:PlayerLoadout(client)
 		client:SetNWBool("customFlashlight", false)
 	end
 		
@@ -179,8 +185,8 @@ else
 		if (character and character:GetData("headlamp", false) == true) then
 		 	client:SetNWBool("customFlashlight", not client:GetNWBool("customFlashlight"))
 		 	client:EmitSound("items/flashlight1.wav")
-			return false
 		end
+		return false
 	end
 end
 

@@ -62,6 +62,23 @@ function ix.util.GetRandomItemFromPool(itempool)
   return itemtoreturn
 end
 
+-- Function for getting all items in a pool, used in Owls Specialsale
+-- Will return a table with all items from a pool, where:
+-- v[1] = uniqueid (string)
+-- v[2] = data (table) <optional>
+function ix.util.GetItemIdsFromPool(itempool)
+  if (itempool == nil || !isstring(itempool) || ix.randomitems.tables[itempool] == nil) then 
+    itempool = "default" 
+  end
+
+  local itemsToReturn = {}
+  for _,tableentry in pairs(ix.randomitems.tables[itempool]) do
+    table.insert(itemsToReturn, tableentry[2][1])
+  end
+
+  return itemsToReturn
+end
+
 -- Example and default/fallback item table
 ix.randomitems.tables["default"] = {
   {2000, {"food_bread"}},
@@ -71,6 +88,7 @@ ix.randomitems.tables["default"] = {
 
 ix.util.Include("ix_entbox_drops.lua","shared")
 ix.util.Include("ix_wood_entbox_drops.lua","shared")
+ix.util.Include("ix_paper_entbox_drops.lua","shared")
 
 ix.util.Include("worldspawn_1.lua","shared")
 ix.util.Include("worldspawn_2.lua","shared")
@@ -107,3 +125,9 @@ ix.util.Include("specialsale_raritynpc.lua","shared")
 ix.util.Include("specialsale_owlnpc.lua","shared")
 
 ix.util.Include("human_npc_drops.lua", "shared")
+
+ix.util.Include("money.lua", "shared")
+
+ix.util.Include("task_rewards_ammo.lua", "shared")
+ix.util.Include("task_rewards_medical.lua", "shared")
+ix.util.Include("task_rewards_weapons.lua", "shared")

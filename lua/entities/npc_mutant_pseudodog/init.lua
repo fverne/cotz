@@ -27,8 +27,12 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 275
-ENT.hpvar = 75
+ENT.hp = 150
+ENT.hpvar = 20
+
+ENT.FBR = 2
+ENT.FBRAP = 8
+ENT.BR = 60
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -42,9 +46,6 @@ ENT.MinRangeDist = 800
 ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_IDLE_WANDER 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
-
-ENT.flatbulletresistance = 2
-ENT.percentbulletresistance = 10
 
 function ENT:Initialize()
 	self.Model = "models/monsters/psydog2.mdl"
@@ -63,7 +64,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 45
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 90
 	TEMP_MeleeTable.radius[1] = 50
 	TEMP_MeleeTable.time[1] = 0.4
@@ -73,7 +74,7 @@ function ENT:Initialize()
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
 	TEMP_MeleeTable.damage[1] = 45
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 128
 	TEMP_MeleeTable.radius[1] = 256
 	TEMP_MeleeTable.time[1] = 1.1
@@ -158,10 +159,3 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 	end
 end
 
-function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
-	end
-end

@@ -34,8 +34,12 @@ ENT.isAttacking = 0
 ENT.jumping1 = 0
 ENT.jumping2 = 0
 
-ENT.hp = 2100
-ENT.hpvar = 500
+ENT.hp = 850
+ENT.hpvar = 20
+
+ENT.FBR = 5
+ENT.FBRAP = 10
+ENT.BR = 45
 
 ENT.NextAbilityTime = 0
 
@@ -43,9 +47,6 @@ ENT.MinRangeDist = 0
 ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_RUN_RANDOM
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
-
-ENT.flatbulletresistance = 8
-ENT.percentbulletresistance = 20
 
 
 function ENT:Initialize()
@@ -65,14 +66,14 @@ function ENT:Initialize()
 
 	local TEMP_MeleeTable = self:STALKERNPCCreateMeleeTable()
 	
-	TEMP_MeleeTable.damage[1] = 60
-	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damage[1] = 100
+	TEMP_MeleeTable.damagetype[1] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[1] = 50
 	TEMP_MeleeTable.radius[1] = 100
 	TEMP_MeleeTable.time[1] = 0.6
 	TEMP_MeleeTable.bone[1] = "head_boss"
-	TEMP_MeleeTable.damage[2] = 60
-	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_BULLET)
+	TEMP_MeleeTable.damage[2] = 100
+	TEMP_MeleeTable.damagetype[2] = bit.bor(DMG_SLASH)
 	TEMP_MeleeTable.distance[2] = 50
 	TEMP_MeleeTable.radius[2] = 100
 	TEMP_MeleeTable.time[2] = 1
@@ -132,13 +133,5 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 				end
 			end
 		end
-	end
-end
-
-function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	if(dmginfo:GetDamageType() == DMG_BULLET) then
-		dmginfo:SetDamage(dmginfo:GetDamage()*(1 - (self.percentbulletresistance/100)))
-		dmginfo:SubtractDamage(self.flatbulletresistance)
-		dmginfo:SetDamage(math.max(0,dmginfo:GetDamage())) --So he can't heal from our attacks
 	end
 end

@@ -40,7 +40,7 @@ if SERVER then
 	
 					player:TakeDamageInfo(TEMP_TargetDamage)
 					if player.hasGeiger && player:hasGeiger() then
-						player:EmitSound(table.Random(self.geigerLight))
+						player:EmitSound(table.Random(self.geigerLight), 75, math.random( 90 , 110 ) , 0.3)
 					end
 				end
 			end

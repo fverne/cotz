@@ -43,7 +43,7 @@ ix.jobs.jobsbycategory = ix.jobs.jobsbycategory or {}
 
 function ix.jobs.isStructValid(jobstruct)
   if (!jobstruct.name or type(jobstruct.name) != "string") then return false end
-  if (!jobstruct.listenTrigger or type(jobstruct.listenTrigger) != "string") then return false end
+  -- if (!jobstruct.listenTrigger or type(jobstruct.listenTrigger) != "string") then return false end -- not needed for item jobs
   if !jobstruct.numberRec then return false end
   if !jobstruct.icon then jobstruct.icon = Material("path/to/defaulticon.png") end
 
@@ -79,9 +79,8 @@ function ix.jobs.getFormattedDescInactive(identifier)
 end
 
 function ix.jobs.isItemJob(jobname)
-  local underscorepos = string.find(jobname, "_")
-  if underscorepos then
-    return string.sub(jobname, underscorepos + 1)
+  if ix.jobs.list[jobname].requiredItem then
+    return ix.jobs.list[jobname].requiredItem
   else
     return false
   end
@@ -130,6 +129,11 @@ if SERVER then
     if self:GetCharacter():GetData("lastTaskAbandon", 0) < os.time() then
       curJobs = self:GetCharacter():GetJobs()
 
+      local identifier = curJobs[npcidentifier].identifier
+      if(ix.jobs.list[identifier].OnTaskAbandon)then
+        ix.jobs.list[identifier].OnTaskAbandon(self)
+      end
+
       curJobs[npcidentifier] = nil
   
       self:GetCharacter():SetJobs(curJobs)
@@ -146,7 +150,7 @@ if SERVER then
     --Check if player has quest
     local curJobs = self:GetCharacter():GetJobs()
     for k,v in pairs(curJobs) do
-      if v.listenTrigger == trigger then
+      if v.listenTrigger == trigger or v.identifier == trigger then
 
         --Progress quest for player OR mark as completed
         local curProgress = curJobs[k].progress
@@ -158,9 +162,8 @@ if SERVER then
             curJobs[k].isCompleted = true
             netstream.Start(self, "ix_COTZPlayPDASound", 2)
           end
-        else
+        elseif (curProgress == curMax) then
           curJobs[k].isCompleted = true
-          netstream.Start(self, "ix_COTZPlayPDASound", 2)
         end
       end
     end
@@ -180,29 +183,19 @@ if SERVER then
 
         hook.Run("ix_OnJobComplete", self, npcidentifier, identifier)
 
-        local rewCount = 0
-        if type(ix.jobs.list[identifier].rewardCount) == "table" then
-          rewCount = math.random(ix.jobs.list[identifier].rewardCount[1],ix.jobs.list[identifier].rewardCount[2])
-        else 
-          rewCount = ix.jobs.list[identifier].rewardCount
+        local reward = ix.jobs.list[identifier].reward
+
+        if(not type(reward) == "table")then
+          reward = {reward}
         end
 
-        for i = 1, rewCount do
-          local reward = 0
-          if type(ix.jobs.list[identifier].reward) == "table" then
-            reward = table.Random(ix.jobs.list[identifier].reward)
-          else 
-            reward = ix.jobs.list[identifier].reward
-          end
-
+        for k,v in pairs(reward) do
           --Give player items
-          if (reward != 0 and self:GetCharacter() and !self:GetCharacter():GetInventory():Add(reward[1], 1, reward[2] or {})) then
-            ix.item.Spawn(reward[1], self:GetItemDropPos(), nil, AngleRand(), reward[2] or {})
+          if (self:GetCharacter() and !self:GetCharacter():GetInventory():Add(v[1], 1, v[2] or {})) then
+            ix.item.Spawn(v[1], self:GetItemDropPos(), nil, AngleRand(), v[2] or {})
           end
 
-          if (reward != 0) then
-            ix.dialogue.notifyItemGet(self, ix.item.list[reward[1]].name)
-          end
+          ix.dialogue.notifyItemGet(self, ix.item.list[v[1]].name)
         end
 
         self:addReputation(ix.jobs.list[identifier].repReward)
@@ -239,6 +232,13 @@ if SERVER then
 
     --Check if player already has a job from this npc
     if curJobs[npcidentifier] then return false end
+
+    if(ix.jobs.list[identifier].CanAcceptTask)then
+      if !ix.jobs.list[identifier].CanAcceptTask(self) then
+        return false
+      end
+    end
+
     --Evaluate job parameters | numberRec, listenTrigger, progress=0, isCompleted=false |
     temp = {}
 
@@ -250,7 +250,11 @@ if SERVER then
       temp.numberRec = ix.jobs.list[identifier].numberRec
     end
 
-    temp.listenTrigger = ix.jobs.list[identifier].listenTrigger
+    if ix.jobs.list[identifier].listenTrigger then
+      temp.listenTrigger = ix.jobs.list[identifier].listenTrigger
+    else
+      temp.listenTrigger = identifier
+    end
 
     temp.progress = 0
 
@@ -265,6 +269,8 @@ if SERVER then
     netstream.Start(self, "ix_COTZPlayPDASound", 2)
 
     self:GetCharacter():SetJobs(curJobs)
+
+    return true -- job successfully added
   end
 
 end

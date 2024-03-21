@@ -137,8 +137,8 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.3
-SWEP.WearEffect = 0.0001
+SWEP.WearDamage = 0.33
+SWEP.WearEffect = 0.005
 
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
@@ -157,23 +157,23 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "7.62x51MM"
 
-SWEP.FireDelay = 1.45
+SWEP.FireDelay = 1.6
 SWEP.FireSound = "CW_SAKO85_FIRE"
 SWEP.FireSoundSuppressed = "CW_WS_MOSIN_SUB"
 SWEP.Recoil = 2.2
 SWEP.AimViewModelFOV = 50
 SWEP.CustomizationMenuScale = 0.018
 SWEP.ForceBackToHipAfterAimedShot = true
-SWEP.GlobalDelayOnShoot = 1.1
+SWEP.GlobalDelayOnShoot = 1.5
 
-SWEP.HipSpread = 0.2
+SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005
-SWEP.VelocitySensitivity = 9
+SWEP.VelocitySensitivity = 12
 SWEP.MaxSpreadInc = 0.9
 SWEP.SpreadPerShot = 0.007
-SWEP.SpreadCooldown = 1
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 175
+SWEP.Damage = 220
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1

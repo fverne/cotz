@@ -50,7 +50,12 @@ function ENT:StartTouch(ent)
 		self:EmitSound("bfuzz_hit");
 		--util.BlastDamage( self, self, self:GetPos(), 100, 70)
 		ent:TakeDamage(70, self, self)
-		if IsValid(ent) and ent:IsRagdoll() then
+		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
+			local bodyexplodesounds = {"anomaly/anomaly_body_tear_1.wav", "anomaly/anomaly_body_tear_2.wav"}
+			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
+			ParticleEffect("wick_gore_bloodsplash_new" , ent:GetPos(), Angle( 0, 0, 0 ) )
+			ent:Remove()
+		elseif ent.ixItemID and ix.item.instances[ent.ixItemID].isWeapon then
 			ent:Remove()
 		end
 	end)	
@@ -62,7 +67,7 @@ function ENT:StartTouch(ent)
 		self:EmitSound("bfuzz_hit");
 		--util.BlastDamage( self, self, self:GetPos(), 100, 70)
 		ent:TakeDamage(70, self, self)
-		if IsValid(ent) and ent:IsRagdoll() then
+		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			ent:Remove()
 		end
 	end)

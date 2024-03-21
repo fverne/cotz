@@ -133,6 +133,7 @@ SWEP.SpeedDec = 30
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
+SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "passive"
 SWEP.FireModes = {"auto", "semi"}
@@ -163,15 +164,18 @@ SWEP.FireSound = "CW_SVU_FIRE"
 SWEP.FireSoundSuppressed = "CW_AR15_FIRE_SUPPRESSED"
 SWEP.Recoil = 2.8
 
-SWEP.HipSpread = 0.250
+SWEP.HipSpread = 0.170
 SWEP.AimSpread = 0.0015
 SWEP.VelocitySensitivity = 1.6
-SWEP.MaxSpreadInc = 0.4
+SWEP.MaxSpreadInc = 0.1
 SWEP.SpreadPerShot = 0.01
-SWEP.SpreadCooldown = 0.15
+SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 225
+SWEP.Damage = 200
 SWEP.DeployTime = 1.3
+
+SWEP.WearDamage = 0.11
+SWEP.WearEffect = 0.015
 
 -- SWEP.RecoilToSpread = .75
 
@@ -179,9 +183,9 @@ SWEP.RecoilToSpreadAuto = 0.1
 
 SWEP.ReloadSpeed = 1.15
 SWEP.ReloadTime = 2.6
-SWEP.ReloadTime_Empty = 3.8
+SWEP.ReloadTime_Empty = 4.2
 SWEP.ReloadHalt = 2.6
-SWEP.ReloadHalt_Empty = 3.8
+SWEP.ReloadHalt_Empty = 4.4
 SWEP.SnapToIdlePostReload = true
 
 -- SWEP.PenMod = 1
