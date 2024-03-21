@@ -9,7 +9,7 @@ ENT.Author			= "ThatYellowPicturePony"
 ENT.AutomaticFrameAdvance = true
 
 --Wake variables
-ENT.WakeRange = 600
+ENT.WakeRange = 900
 ENT.SleepTimer = 0
 ENT.IsSleeping = true --starts the anomaly out sleeping so it doesn't use a ton of server assets
 ENT.PlayingSound = false
