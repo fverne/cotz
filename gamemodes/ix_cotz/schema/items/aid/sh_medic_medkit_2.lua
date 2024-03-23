@@ -86,7 +86,7 @@ ITEM.functions.usetarget = {
 				target.player:UnSpectate()
 				target.player:SetNetVar("resurrected", true)
 				target.player:Spawn()
-				target.player:SetHealth( 1 ) 
+				target.player:SetHealth(math.min((quantity / item.quantity) * 50, 1))
 				target.player:SetPos(target:GetPos())
 
                 if target.player:IsStuck() then
