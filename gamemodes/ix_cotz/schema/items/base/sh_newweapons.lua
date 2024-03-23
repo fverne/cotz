@@ -255,7 +255,7 @@ ITEM.functions.Equip = {
 ITEM.functions.Unload = {
 	icon = "icon16/stalker/unload2.png",
 	OnRun = function(item)
-		return item:Unload()
+		return item:Unload(item.player)
 	end,
 	OnCanRun = function(item)
 		return (!IsValid(item.entity) && ((item:GetData("equip",false) && IsValid(item:GetOwner():GetWeapon(item.class)) && item:GetOwner():GetWeapon(item.class):Clip1() > 0) || (!item:GetData("equip",false) && item:GetData("ammo",0) > 0 )))
@@ -274,8 +274,8 @@ function ITEM:RemovePAC(client)
 	end
 end
 
-function ITEM:Unload()
-	local client = self:GetOwner()
+function ITEM:Unload(player)
+	local client = self:GetOwner() or player
 	local isEquipped = self:GetData("equip", false)
 	local weapon = client:GetWeapon(self.class)
 	local ammoType
