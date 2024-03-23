@@ -24,6 +24,7 @@ ITEM.iconCam = {
 
 function ITEM:PopulateTooltipIndividual(tooltip)
     ix.util.PropertyDesc(tooltip, "Medical", Color(64, 224, 208))
+    ix.util.PropertyDesc(tooltip, "Revive Item", Color(64, 224, 208))
 end
 
 ITEM.functions.use = {
