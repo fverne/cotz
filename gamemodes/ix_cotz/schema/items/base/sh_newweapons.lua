@@ -670,13 +670,15 @@ ITEM.functions.detach = {
 hook.Add("PlayerDeath", "ixStripClip", function(client)
 	client.carryWeapons = {}
 
-	for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
-		if (v.isWeapon and v:GetData("equip")) then
-			v:SetData("ammo", nil)
-			--v:SetData("equip", nil)
+	if client:GetCharacter() then
+		for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
+			if (v.isWeapon and v:GetData("equip")) then
+				v:SetData("ammo", nil)
+				--v:SetData("equip", nil)
 
-			if (v.pacData) then
-				v:RemovePAC(client)
+				if (v.pacData) then
+					v:RemovePAC(client)
+				end
 			end
 		end
 	end
