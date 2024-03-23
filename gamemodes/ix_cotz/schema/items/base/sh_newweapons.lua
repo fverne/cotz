@@ -539,18 +539,22 @@ function ITEM:OnLoadout()
 			end
 
 			timer.Simple(0.1,function()
-				if self:GetData("ammoType") then
-					weapon:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
+				if IsValid(weapon) then
+					if self:GetData("ammoType") then
+						weapon:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
+					end
+					weapon:SetClip1(self:GetData("ammo", 0))
 				end
-				weapon:SetClip1(self:GetData("ammo", 0))
 			end)
 
 			if self.canAttach == true then
 				timer.Simple(0.1,function()
-					local attachments = self:GetData("attachments") or {}
-					
-					for k = 1, #attachments do
-						weapon:attachSpecificAttachment(attachments[k])
+					if IsValid(weapon) then
+						local attachments = self:GetData("attachments") or {}
+
+						for k = 1, #attachments do
+							weapon:attachSpecificAttachment(attachments[k])
+						end
 					end
 				end)
 			end
