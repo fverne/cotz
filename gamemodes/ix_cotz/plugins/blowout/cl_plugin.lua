@@ -103,6 +103,9 @@ net.Receive("BlowoutChangePhase", function()
 	end
 
 	if phasechange == 5 then
+		if not ix.skyboxColor then
+			ix.skyboxColor = Color(255, 255, 255, 255)
+		end
 		ix.skyboxColor.a = Lerp(FrameTime() * 0.5, ix.skyboxColor.a, 0)
 		ix.blowout.StartTime = duration -- ???????? for what purpose
 		ix.blowout.Duration = math.max(ix.blowout.StartTime - CurTime(), 0.01)
