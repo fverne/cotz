@@ -79,7 +79,7 @@ function SWEP:GetTracerOrigin()
 		return self.CenterPos
 	end
 
-	return self:getMuzzlePosition().Pos
+	return self:getMuzzlePosition() and self:getMuzzlePosition().Pos or vector_origin
 end
 
 function SWEP:FireAnimationEvent(pos, ang, event, name)
