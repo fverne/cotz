@@ -98,7 +98,7 @@ ITEM.functions.usetarget = {
 
                     for _, v in ipairs(positions) do
                         target.player:SetPos(v)
-                        if not target.player:IsStuck() then return end
+                        if not target.player:IsStuck() then break end
                     end
                 end
 
