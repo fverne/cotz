@@ -31,7 +31,7 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		damage = math.max(damage,0)
 
 		-- wishes
-		if suit != nil and !suit:GetData("unlimitedDurability", nil) then
+		if suit != nil and !suit:GetData("unlimitedDurability", nil) and !ix.temp.Corpses[target].isDeadBody then -- revive plugin
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
 		end
 
@@ -52,7 +52,7 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		damage = math.max(damage,0)
 
 		-- wishes
-		if suit != nil and !suit:GetData("unlimitedDurability", nil) then
+		if suit != nil and !suit:GetData("unlimitedDurability", nil) and !ix.temp.Corpses[target].isDeadBody then -- revive plugin
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
 		end
 
