@@ -90,7 +90,7 @@ SWEP.Sounds = {start_reload = {{time = 0.05, sound = "CW_FOLEY_LIGHT"}},
 	draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"},
 	{time = 0.55, sound = "CW_M3SUPER90_PUMP"}}}
 
-SWEP.SpeedDec = 5
+SWEP.SpeedDec = 0
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

@@ -83,7 +83,7 @@ SWEP.Animations = {fire = "fire",
 	
 SWEP.DryFire = true
 SWEP.AimViewModelFOV = 90
-SWEP.SpeedDec = 5
+SWEP.SpeedDec = 0
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0

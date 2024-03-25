@@ -101,7 +101,7 @@ SWEP.Sounds = {start_reload = {{time = 0.05, sound = "CW_FOLEY_LIGHT"}},
 	draw = {{time = 0.1, sound = "CW_FOLEY_MEDIUM"}}}
 	
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 20
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

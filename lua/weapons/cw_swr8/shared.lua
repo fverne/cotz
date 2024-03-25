@@ -80,7 +80,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "RB_DRAW"}},
 	[3] = {time = 1.6, sound = "CWC_MATEBA_ROUNDS_IN"},
 	[4] = {time = 1.85, sound = "CWC_MATEBA_CHAMBER_IN"}}}
 
-SWEP.SpeedDec = 15
+SWEP.SpeedDec = 10
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0

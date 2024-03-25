@@ -87,7 +87,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_P90_DRAW"}},
 	[3] = {time = 1.75, sound = "CW_P90_MAGIN"},
 	[4] = {time = 2.6, sound = "CW_P90_BOLT"}}}
 
-SWEP.SpeedDec = 20
+SWEP.SpeedDec = 5
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

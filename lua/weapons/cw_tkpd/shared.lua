@@ -99,7 +99,7 @@ SWEP.Sounds = {
 	[1] = {time = 0.0, sound = "CW_TKPD_RELOAD"}}
 }
 
-SWEP.SpeedDec = 50
+SWEP.SpeedDec = 30
 
 SWEP.BipodFireAnim = true
 SWEP.AimBreathingIntensity = 1

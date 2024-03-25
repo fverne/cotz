@@ -107,7 +107,7 @@ SWEP.Sounds = {reload = {[1] = {time = 0.35, sound = "CW_l85_MAGOUT"},
 	[2] = {time = 1.2, sound = "CW_l85_MAGIN"},
 	[3] = {time = 1.9, sound = "CW_l85_BOLT"}}}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 20
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

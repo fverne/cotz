@@ -116,7 +116,7 @@ SWEP.Sounds = {	bent_reload_start = {
 		{time = 35/30, sound = "KHRMOSIN_BOLTLATCH"}
 	}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 5
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

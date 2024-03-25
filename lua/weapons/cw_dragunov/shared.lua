@@ -136,7 +136,7 @@ SWEP.Sounds = {
 	[3] = {time = 1.85, sound = "CW_SVD_MAGIN"},
 	[4] = {time = 2.35, sound = "CW_SVD_BOLTBACK"}}}
 
-SWEP.SpeedDec = 50
+SWEP.SpeedDec = 30
 
 SWEP.BipodFireAnim = true
 SWEP.AimBreathingIntensity = 1

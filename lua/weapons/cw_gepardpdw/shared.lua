@@ -124,7 +124,7 @@ SWEP.Sounds = {deploy = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	{time = 2.3, sound = "CW_FOLEY_LIGHT"}}
 }
 
-SWEP.SpeedDec = 5
+SWEP.SpeedDec =0
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

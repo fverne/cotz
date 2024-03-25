@@ -96,7 +96,7 @@ SWEP.Sounds = {
 	[2] = {time = 0.8, sound = "CW_W9422_BOLTFORWORD"}}}
 	
 
-SWEP.SpeedDec = 20
+SWEP.SpeedDec = 30
 
 SWEP.ADSFireAnim = true
 SWEP.BipodFireAnim = true

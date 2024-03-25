@@ -102,7 +102,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CWC_JUDGE_DRAW"},
 	{time = 3.7, sound = "CWC_FOLEY_TOSS"},
 	{time = 3.8, sound = "CWC_MAG_DROP_REVOLVER"}}}
 
-SWEP.SpeedDec = 15
+SWEP.SpeedDec = 10
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0
