@@ -4,7 +4,7 @@ att.displayName = "Slug rounds"
 att.displayNameShort = "Slug"
 
 att.statModifiers = {DamageMult = 4,
-	AimSpreadMult = 4}
+	AimSpreadMult = 2}
 
 if CLIENT then
 	att.displayIcon = surface.GetTextureID("atts/slugrounds")

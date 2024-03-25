@@ -3,8 +3,8 @@ att.name = "am_dartrounds"
 att.displayName = "Dart rounds"
 att.displayNameShort = "Dart"
 
-att.statModifiers = {DamageMult = 6,
-	AimSpreadMult = 4}
+att.statModifiers = {DamageMult = 4,
+	AimSpreadMult = 2}
 
 if CLIENT then
 	att.displayIcon = surface.GetTextureID("atts/slugrounds")
