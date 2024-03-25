@@ -33,6 +33,13 @@ ITEM.items = {
 		{1, "task_reward_money_04"},
 	},
 	{
+		{100, "task_reward_backpacks_00"},
+		{40, "task_reward_backpacks_01"},
+		{12, "task_reward_backpacks_02"},
+		{4, "task_reward_backpacks_03"},
+		{1, "task_reward_backpacks_04"},
+	},
+	{
 		{6, "worldspawn_1"},
 		{1, "cache_artifact_tier1"},
 	},

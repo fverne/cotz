@@ -30,8 +30,12 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
 
+		if ix.temp.Corpses[target] then
+			damage = 0
+		end
+
 		-- wishes
-		if suit != nil and !suit:GetData("unlimitedDurability", nil) and !ix.temp.Corpses[target].isDeadBody then -- revive plugin
+		if suit != nil and !suit:GetData("unlimitedDurability", nil) then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
 		end
 
@@ -50,6 +54,10 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
+
+		if ix.temp.Corpses[target] then
+			damage = 0
+		end
 
 		-- wishes
 		if suit != nil and !suit:GetData("unlimitedDurability", nil) and !ix.temp.Corpses[target].isDeadBody then -- revive plugin
