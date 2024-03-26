@@ -293,5 +293,6 @@ ix.command.Add("suicide", {
 	description = "Kill yourself, use if stuck somewhere.",
 	OnRun = function(self, client)
 		client:Kill()
+		client:SetNetVar("deathTime", CurTime())
 	end
 })
