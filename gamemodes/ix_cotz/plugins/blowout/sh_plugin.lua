@@ -137,7 +137,7 @@ if (SERVER) then
                 end
 
                 for _, v in pairs(player.GetAll()) do
-                    if (not self:IsPosSafe(v:GetShootPos(), v, tracefilter) and not movetypes[v:GetMoveType()]) then
+                    if (not self:IsPosSafe(v:GetShootPos(), v, tracefilter) and not movetypes[v:GetMoveType()] and v:GetCharacter() and v:Alive()) then
                         v:Kill()
                     end
                 end
