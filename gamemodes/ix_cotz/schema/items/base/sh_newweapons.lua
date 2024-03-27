@@ -304,7 +304,7 @@ function ITEM:Unload(player)
 
 		for k,v in pairs(client:GetCharacter():GetInventory():GetItemsByUniqueID(ammoBox,true)) do
 			local ammoamt = v:GetData("quantity", v.ammoAmount)
-			local ammomax = v.ammoAmount
+			local ammomax = v.maxStack
 			local ammodiff = ammomax - ammoamt
 
 			if (ammodiff >= ammoAmount) then
