@@ -111,7 +111,7 @@ SWEP.Sounds = {
 	}
 }
 	
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 20
 
 SWEP.ADSFireAnim = false
 SWEP.BipodFireAnim = true

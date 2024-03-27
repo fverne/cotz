@@ -109,7 +109,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	[5] = {time = 2.1, sound = "CW_FOLEY_MEDIUM"},
 	[6] = {time = 2.2, sound = "CW_G3A3_BOLTFORWARD"}}}
 
-SWEP.SpeedDec = 50
+SWEP.SpeedDec = 30
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

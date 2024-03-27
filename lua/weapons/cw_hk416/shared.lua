@@ -170,7 +170,7 @@ end
 	SWEP.FireSound = "CW_KK_HK416_FIRE"
 	SWEP.FireSoundSuppressed = "CW_KK_HK416_FIRE_SUPPRESSED"
 
-	SWEP.SpeedDec = 30
+	SWEP.SpeedDec = 20
 
 	SWEP.Slot = 3
 	SWEP.SlotPos = 0

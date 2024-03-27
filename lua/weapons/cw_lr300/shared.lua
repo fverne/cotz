@@ -111,7 +111,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_LR300_Deploy"}},
 	reload = {[1] = {time = 0.20, sound = "CW_LR300_MAGOUT"},
 	[2] = {time = 1.6, sound = "CW_LR300_MAGIN"}}}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 25
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

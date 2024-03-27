@@ -134,7 +134,7 @@ SWEP.Sounds = {
 	[6] = {time = 2.6, sound = "CW_WS_M16A4_BOLTBACK2"},}
 	}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 20
 
 SWEP.ADSFireAnim = false
 SWEP.BipodFireAnim = true

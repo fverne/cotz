@@ -106,7 +106,7 @@ SWEP.Sounds = {reload = {[1] = {time = 0.8, sound = "CW_GSM_AUG_MAGOUT"},
 	
 	draw = {[1] = {time = 0.6, sound = "CW_GSM_AUG_DRAW"}}}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 25
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

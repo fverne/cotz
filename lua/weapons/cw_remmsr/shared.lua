@@ -126,7 +126,7 @@ SWEP.Sounds = {
 	[4] = {time = 0.7, sound = "CW_RMSR_BOLTDOWN"}}}
 	
 
-SWEP.SpeedDec = 15
+SWEP.SpeedDec = 35
 
 SWEP.ADSFireAnim = true
 SWEP.BipodFireAnim = true

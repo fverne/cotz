@@ -112,7 +112,7 @@ SWEP.WorldModel		= "models/weapons/w_smg_skorp.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.Primary.ClipSize		= 10
+SWEP.Primary.ClipSize		= 15
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x18MM"

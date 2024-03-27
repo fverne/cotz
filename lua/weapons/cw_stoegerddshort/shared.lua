@@ -122,7 +122,7 @@ SWEP.Sounds = {
 	[10] = {time = 2.4, sound = "CW_LYNXDB_OUT1"},
 	[11] = {time = 3.01, sound = "CW_LYNXDB_CLOSE"}}}
 
-SWEP.SpeedDec = 5
+SWEP.SpeedDec = 0
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

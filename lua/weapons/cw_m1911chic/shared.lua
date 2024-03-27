@@ -107,7 +107,7 @@ if CustomizableWeaponry then
 		[6] = {time = 2.00, sound = "Silverballer.SlideForward"}}}
 
 
-	SWEP.SpeedDec = 10
+	SWEP.SpeedDec = 5
 
 	SWEP.Slot = 2
 	SWEP.SlotPos = 0

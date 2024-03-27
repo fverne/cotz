@@ -112,7 +112,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FAMAS_DRAW"}},
 	[3] = {time = 2.3, sound = "CW_FAMAS_BOLTPULL"},
 	[4] = {time = 2.5, sound = "CW_FAMAS_BOLTRELEASE"}}}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 25
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
