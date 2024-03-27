@@ -111,6 +111,8 @@ function ENT:Initialize()
   self:SetHealth(self.StartHealth)
   self:SetEnemy(NULL)
 
+  self:SetLagCompensated(true)
+
   self:AddRelationship("player D_HT 10")
   self:InitEnemies()
 
