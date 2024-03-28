@@ -329,7 +329,7 @@ tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_weapon_tier02"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
-tempJob.categories = {"item_part_NPC_easy"}
+tempJob.categories = {"item_part_NPC_medium"}
 
 ix.jobs.register(tempJob, "ItemJob1_part_sprig")
 
