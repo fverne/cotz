@@ -160,6 +160,22 @@ end
 function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
   local class = string.lower(entity:GetClass())
 	if attacker:IsPlayer() then
+	  if string.find( class, "npc_human_z" ) then
+		attacker:addReputation(0.5)
+	  end
+
+	  if string.find( class, "npc_human_bandit" ) then
+		attacker:addReputation(1)
+	  end
+
+	  if string.find( class, "npc_human_merc" ) then
+		attacker:addReputation(1.5)
+	  end
+
+	  if string.find( class, "npc_human_mili" ) then
+		attacker:addReputation(2)
+	  end
+
 	  if class == "npc_mutant_classiczombie" then
 	    attacker:addReputation(0.5)
 	  end
