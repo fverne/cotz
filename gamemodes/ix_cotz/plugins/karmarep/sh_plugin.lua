@@ -216,6 +216,10 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 	    attacker:addReputation(1)
 	  end
 
+	  if class == "npc_mutant_hellhound" then
+	    attacker:addReputation(3)
+	  end
+
 	  if class == "npc_mutant_flesh" then
 	    attacker:addReputation(0.5)
 	  end
@@ -230,6 +234,34 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 
 	  if class == "npc_mutant_pseudogiant" then
 	    attacker:addReputation(4)
+	  end
+
+	  if class == "npc_mutant_sprig" then
+	    attacker:addReputation(2)
+	  end
+
+	  if class == "npc_mutant_karlik" then
+	    attacker:addReputation(4)
+	  end
+
+	  if class == "npc_mutant_izlom" then
+	    attacker:addReputation(2)
+	  end
+
+	  if class == "npc_mutant_vareshka" then
+	    attacker:addReputation(2.5)
+	  end
+
+	  if class == "npc_mutant_burer" then
+	    attacker:addReputation(3.5)
+	  end
+
+	  if class == "npc_mutant_skeleton" then
+	    attacker:addReputation(2)
+	  end
+
+	  if class == "npc_mutant_tark" then
+	    attacker:addReputation(2)
 	  end
 	end
 end
