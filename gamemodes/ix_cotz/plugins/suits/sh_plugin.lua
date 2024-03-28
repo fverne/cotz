@@ -30,7 +30,7 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
 
-		if ix.temp.Corpses[target] then
+		if IsValid(ix.temp.Corpses[target]) then
 			damage = 0
 		end
 
@@ -55,7 +55,7 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
 
-		if ix.temp.Corpses[target] then
+		if IsValid(ix.temp.Corpses[target]) then
 			damage = 0
 		end
 
