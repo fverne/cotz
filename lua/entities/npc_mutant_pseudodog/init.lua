@@ -32,7 +32,7 @@ ENT.hpvar = 20
 
 ENT.FBR = 2
 ENT.FBRAP = 8
-ENT.BR = 60
+ENT.BR = 20
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
