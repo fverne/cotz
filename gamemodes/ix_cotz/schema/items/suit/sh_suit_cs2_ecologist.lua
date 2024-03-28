@@ -25,7 +25,7 @@ ITEM.fsr = 1
 ITEM.ar = 0.11
 ITEM.far = 1
 
-ITEM.carryinc = 17.000
+ITEM.carryinc = 9.000
 ITEM.miscslots = 3
 
 
