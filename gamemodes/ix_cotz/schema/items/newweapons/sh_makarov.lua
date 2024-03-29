@@ -1,6 +1,6 @@
 ITEM.name = "Makarov"
 ITEM.description= "A Russian steel-framed police pistol that fires 9x18 rounds."
-ITEM.longdesc = "The Makarov is the replacement for the Tokarev pistol.\nIt's a cheap, compact and reliable choice, but it's not very comfortable and has a smaller magazine than other handguns of same weight category.\n\nAmmo: 9x18mm\nMagazine Capacity: 8"
+ITEM.longdesc = "The Makarov is the replacement for the Tokarev pistol.\nIt's a cheap, compact and reliable choice, but it's not very comfortable and has a smaller magazine than other handguns of same weight category.\n\nAmmo: 9x18mm\nMagazine Capacity: 8+1"
 ITEM.model = "models/weapons/w_makarov_pm_fixed.mdl"
 ITEM.class = "cw_makarov"
 ITEM.weaponCategory = "secondary"

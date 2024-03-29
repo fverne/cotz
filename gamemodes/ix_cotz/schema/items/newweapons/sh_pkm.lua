@@ -1,6 +1,6 @@
 ITEM.name = "PKM"
 ITEM.description= "A large machinegun. Fires 7.62x54mm."
-ITEM.longdesc = "The PK is a 7.62x54mm general-purpose machine gun designed in the Soviet Union and currently in production in Russia.\nThe original PK machine gun was introduced in 1961 and then the improved PKM in 1969 to replace the SGM and RP-46 machine guns in Soviet service.\nIt remains in use as a front-line infantry and vehicle-mounted weapon with Russia's armed forces.\nThe PK has been exported extensively and produced in several other countries under license.\n\nAmmo: 7.62x54mm \nMagazine Capacity: 200"
+ITEM.longdesc = "The PK is a 7.62x54mm general-purpose machine gun designed in the Soviet Union and currently in production in Russia.\nThe original PK machine gun was introduced in 1961 and then the improved PKM in 1969 to replace the SGM and RP-46 machine guns in Soviet service.\nIt remains in use as a front-line infantry and vehicle-mounted weapon with Russia's armed forces.\nThe PK has been exported extensively and produced in several other countries under license.\n\nAmmo: 7.62x54mm \nMagazine Capacity: 100+1"
 ITEM.model = ("models/weapons/w_mach_pkmbenis.mdl")
 ITEM.class = "cw_pkm"
 ITEM.weaponCategory = "primary"

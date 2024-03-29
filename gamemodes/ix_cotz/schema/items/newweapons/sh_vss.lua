@@ -1,6 +1,6 @@
 ITEM.name = "VSS Vintorez"
 ITEM.description= "A special forces sniper rifle chambered for 9x39mm."
-ITEM.longdesc = "The VSS 'Vintorez' is issued primarily to Spetsnaz units for undercover or clandestine operations, a role made evident by its ability to be stripped down for transport in a specially fitted briefcase.\nFor this reason, it is hard to get ahold of in the Zone.\nThe weapon has an integral suppressor which wraps around the barrel.\nThe barrel itself has a series of small ports drilled in the rifling grooves, leading into the suppressor which slows and cools the exhaust gases.\nIt uses a subsonic 9x39 mm SP-5 cartridge to avoid a sonic boom.\n\nAmmo: 9x39mm\nMagazine Capacity: 10"
+ITEM.longdesc = "The VSS 'Vintorez' is issued primarily to Spetsnaz units for undercover or clandestine operations, a role made evident by its ability to be stripped down for transport in a specially fitted briefcase.\nFor this reason, it is hard to get ahold of in the Zone.\nThe weapon has an integral suppressor which wraps around the barrel.\nThe barrel itself has a series of small ports drilled in the rifling grooves, leading into the suppressor which slows and cools the exhaust gases.\nIt uses a subsonic 9x39 mm SP-5 cartridge to avoid a sonic boom.\n\nAmmo: 9x39mm\nMagazine Capacity: 10+1"
 ITEM.model = ("models/cw2/rifles/w_vss.mdl")
 ITEM.class = "cw_vss"
 ITEM.weaponCategory = "primary"

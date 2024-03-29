@@ -1,6 +1,6 @@
 ITEM.name = "TKPD"
 ITEM.description= "A sharpshooter rifle based on the SVDK sniper rifle. Fires 9.3x64mm."
-ITEM.longdesc = "The TKPD is based on the Dragunov SVDK large caliber sniper rifle. The high power cartridge allows users of this weapon to engage with targets wearing heavy body armor, or lighter armored targets hiding behind cover.\n\nAmmo: 9.3x64mm \nMagazine Capacity: 10"
+ITEM.longdesc = "The TKPD is based on the Dragunov SVDK large caliber sniper rifle. The high power cartridge allows users of this weapon to engage with targets wearing heavy body armor, or lighter armored targets hiding behind cover.\n\nAmmo: 9.3x64mm \nMagazine Capacity: 10+1"
 ITEM.model = ("models/weapons/tfa_ins2/wpn_tkpd_w.mdl")
 ITEM.class = "cw_tkpd"
 ITEM.weaponCategory = "primary"

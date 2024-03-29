@@ -1,6 +1,6 @@
 ITEM.name = "TOZ-106"
 ITEM.description= "A russian bolt action shotgun."
-ITEM.longdesc = "The TOZ-106 is a small, lightweight bolt-action shotgun produced and sold by Tulsky Oruzheiny Zavod. It features a metal stock that folds underneath the weapon in order to make it more compact, and a pistol grip. The rest of the stock is wooden. This shotgun was officially marketed as a hunting shotgun, but became popular among farmers, adventurers, travelers, campers, truck drivers and of course STALKERs, as a compact personal defense weapon. This version has been modified to fire .410 gauge buckshot.\n\nAmmo: .410 Gauge\nMagazine Capacity: 2"
+ITEM.longdesc = "The TOZ-106 is a small, lightweight bolt-action shotgun produced and sold by Tulsky Oruzheiny Zavod. It features a metal stock that folds underneath the weapon in order to make it more compact, and a pistol grip. The rest of the stock is wooden. This shotgun was officially marketed as a hunting shotgun, but became popular among farmers, adventurers, travelers, campers, truck drivers and of course STALKERs, as a compact personal defense weapon. This version has been modified to fire .410 gauge buckshot.\n\nAmmo: .410 Gauge\nMagazine Capacity: 2+1"
 ITEM.model = "models/weapons/arc9/darsu_eft/w_toz106.mdl"
 ITEM.class = "cw_toz106"
 ITEM.weaponCategory = "primary"

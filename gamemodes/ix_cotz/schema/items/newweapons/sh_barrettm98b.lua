@@ -1,6 +1,6 @@
 ITEM.name = "Barrett M98b"
 ITEM.description= "PLACEHOLDER."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: .338 Lapua Magnum \nMagazine Capacity: 5"
+ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: .338 Lapua Magnum \nMagazine Capacity: 5+1"
 ITEM.model = "models/weapons/w_ins2_warface_barret_m98b.mdl"
 ITEM.class = "cw_barrettm98b"
 ITEM.weaponCategory = "primary"

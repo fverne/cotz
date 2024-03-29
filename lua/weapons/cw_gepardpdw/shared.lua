@@ -156,7 +156,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x21MM"
 
-SWEP.Chamberable = true
+SWEP.Chamberable = false
 
 SWEP.UseHands = true
 

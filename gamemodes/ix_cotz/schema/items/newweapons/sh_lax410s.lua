@@ -1,6 +1,6 @@
 ITEM.name = "Henry Lever Action X Model .410 Short"
 ITEM.description= "A lever-operated shotgun, chambered in .410."
-ITEM.longdesc = "A crudely cut down lever action shotgun. Chambered in .410 gauge, it is mostly designed for hunting small game. It is also capable of chambering and firing .45 ACP, however the lack of rifling in the barrel makes it inaccurate. The extremly short barrel and unergonomic handle makes this weapon hard to use at range.\n\nAmmo: .410 Gauge \nMagazine Capacity: 3"
+ITEM.longdesc = "A crudely cut down lever action shotgun. Chambered in .410 gauge, it is mostly designed for hunting small game. It is also capable of chambering and firing .45 ACP, however the lack of rifling in the barrel makes it inaccurate. The extremly short barrel and unergonomic handle makes this weapon hard to use at range.\n\nAmmo: .410 Gauge \nMagazine Capacity: 3+1"
 ITEM.model = ("models/weapons/w_bocw_ironhides.mdl")
 ITEM.class = "cw_lax410s"
 ITEM.weaponCategory = "secondary"

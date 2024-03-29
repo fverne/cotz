@@ -1,6 +1,6 @@
 ITEM.name = "SVU-A"
 ITEM.description= "PLACEHOLDER."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: 7.62x54mm \nMagazine Capacity: 20"
+ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: 7.62x54mm \nMagazine Capacity: 20+1"
 ITEM.model = ("models/weapons/w_snip_svu.mdl")
 ITEM.class = "cw_svu"
 ITEM.weaponCategory = "primary"

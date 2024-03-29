@@ -1,6 +1,6 @@
 ITEM.name = "M3 Super 90"
 ITEM.description= "A pump-action shotgun. Fires 12 Gauge rounds."
-ITEM.longdesc = "The Benelli M3 (Super 90) is a dual-mode shotgun designed and manufactured by Italian firearms manufacturer Benelli.\nThe M3 holds a maximum of eight rounds and uses the proprietary Benelli semi-automatic system first showcased in the M1.\nThe M3 is notable for allowing the user the choice of semi-automatic or pump-action operation. It is reliable and versatile, and popular with military and police forces as well as civilians.\n\nAmmo: 12 Gauge \nMagazine Capacity: 8"
+ITEM.longdesc = "The Benelli M3 (Super 90) is a dual-mode shotgun designed and manufactured by Italian firearms manufacturer Benelli.\nThe M3 holds a maximum of eight rounds and uses the proprietary Benelli semi-automatic system first showcased in the M1.\nThe M3 is notable for allowing the user the choice of semi-automatic or pump-action operation. It is reliable and versatile, and popular with military and police forces as well as civilians.\n\nAmmo: 12 Gauge \nMagazine Capacity: 6"
 ITEM.model = "models/weapons/w_cstm_m3super90.mdl"
 ITEM.class = "cw_m3super90"
 ITEM.weaponCategory = "primary"

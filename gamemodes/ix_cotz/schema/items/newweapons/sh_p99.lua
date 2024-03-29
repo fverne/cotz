@@ -1,6 +1,6 @@
 ITEM.name = "P99"
 ITEM.description= "A German handgun, firing the 9x19mm cartridge."
-ITEM.longdesc = "The Walther P99 is a semi-automatic pistol developed by the German company Carl Walther GmbH Sportwaffen of Ulm.\nIt is designed for law enforcement, security forces and the civilian shooting market as a replacement for the Walther P5 and the P88.\n\nAmmo: 9x19mm\nMagazine Capacity: 15"
+ITEM.longdesc = "The Walther P99 is a semi-automatic pistol developed by the German company Carl Walther GmbH Sportwaffen of Ulm.\nIt is designed for law enforcement, security forces and the civilian shooting market as a replacement for the Walther P5 and the P88.\n\nAmmo: 9x19mm\nMagazine Capacity: 15+1"
 ITEM.model = ("models/srp/weapons/w_p99.mdl")
 ITEM.class = "cw_p99"
 ITEM.weaponCategory = "secondary"

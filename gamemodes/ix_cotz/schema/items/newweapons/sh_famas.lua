@@ -1,6 +1,6 @@
 ITEM.name = "FAMAS"
 ITEM.description= "A black bull-pup assault rifle. Fires 5.56x45mm."
-ITEM.longdesc = "The FAMAS is the French army's service rifle, one of the more well-known bullpup designs. It has a large carrying handle with scope attachment slots. \nThis one is the older F1 variant, denoted by the straight magazine and a lack of an extended handguard. It's a very fast rifle at 1000 RPM and has thus found it's use in close quarters faction combat.\n\nAmmo: 5.56x45mm \nMagazine Capacity: 25"
+ITEM.longdesc = "The FAMAS is the French army's service rifle, one of the more well-known bullpup designs. It has a large carrying handle with scope attachment slots. \nThis one is the older F1 variant, denoted by the straight magazine and a lack of an extended handguard. It's a very fast rifle at 1000 RPM and has thus found it's use in close quarters faction combat.\n\nAmmo: 5.56x45mm \nMagazine Capacity: 25+1"
 ITEM.model = "models/weapons/w_rif_famas.mdl"
 ITEM.class = "cw_famas"
 ITEM.weaponCategory = "primary"

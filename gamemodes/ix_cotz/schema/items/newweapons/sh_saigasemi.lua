@@ -1,6 +1,6 @@
 ITEM.name = "Saiga Semi-Automatic Rifle"
 ITEM.description= "A civillian semi-automatic rifle. Fires 7.62x39mm."
-ITEM.longdesc = "The Saiga semi-automatic rifles are a family of Russian semi-automatic rifles manufactured by Kalashnikov Concern (formerly Izhmash).\nThey also manufacture the original AK-47 and its variants, Saiga-12 shotguns and the Dragunov sniper rifle.\nSaiga rifles are a sport version of the AK-series rifles, and are marketed for hunting and civilian use.\nThey are sometimes referred to as 'Saiga Sporters'.\n\nAmmo: 7.62x39mm \nMagazine Capacity: 20"
+ITEM.longdesc = "The Saiga semi-automatic rifles are a family of Russian semi-automatic rifles manufactured by Kalashnikov Concern (formerly Izhmash).\nThey also manufacture the original AK-47 and its variants, Saiga-12 shotguns and the Dragunov sniper rifle.\nSaiga rifles are a sport version of the AK-series rifles, and are marketed for hunting and civilian use.\nThey are sometimes referred to as 'Saiga Sporters'.\n\nAmmo: 7.62x39mm \nMagazine Capacity: 20+1"
 ITEM.model = "models/weapons/w_bfh_saiga308.mdl"
 ITEM.class = "cw_saigasport"
 ITEM.weaponCategory = "primary"

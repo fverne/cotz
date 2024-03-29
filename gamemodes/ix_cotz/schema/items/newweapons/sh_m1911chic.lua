@@ -1,6 +1,6 @@
 ITEM.name = "Colt Chicago"
 ITEM.description= "An American military surplus semi-automatic pistol chambered for .45 ACP."
-ITEM.longdesc = "The M1911 first came into service in the American army in 1911 and has yet to be phased out of production.\nThis customized version has an extended magazine, longer barrel and slide, and a small foregrip has been affixed in front of the trigger. It has also had its trigger group altered to allow fully automatic fire. The extreme fire rate makes it very hard to control.\n\nAmmo: .45ACP\nMagazine Capacity: 13"
+ITEM.longdesc = "The M1911 first came into service in the American army in 1911 and has yet to be phased out of production.\nThis customized version has an extended magazine, longer barrel and slide, and a small foregrip has been affixed in front of the trigger. It has also had its trigger group altered to allow fully automatic fire. The extreme fire rate makes it very hard to control.\n\nAmmo: .45ACP\nMagazine Capacity: 13+1"
 ITEM.model = "models/weapons/w_silverballer.mdl"
 ITEM.class = "cw_m1911chic"
 ITEM.weaponCategory = "secondary"
