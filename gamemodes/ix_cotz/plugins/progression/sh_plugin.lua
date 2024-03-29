@@ -5,6 +5,9 @@ PLUGIN.desc = "System for tracking serverwide progression and performing actions
 ix.progression = ix.progression or {}
 ix.progression.status = ix.progression.status or {}
 ix.progression.definitions = ix.progression.definitions or {}
+ix.progression.foreignstatus = ix.progression.foreignstatus or {}
+
+PLUGIN.checktime = 0
 
 function ix.progression.Register(progid, data)
 	ix.progression.definitions[progid] = data
@@ -38,6 +41,42 @@ function PLUGIN:PlayerSpawn(client, transition)
 	net.Start("progression_sync_receive")
 	net.WriteTable(ix.progression.status)
 	net.Send(client)
+end
+
+if(SERVER)then
+
+	function PLUGIN:Think()
+		if self.checktime > CurTime() then return end
+		self.checktime = CurTime() + 15
+
+		self:GetForeignProgression()
+		self:DumpOwnProgression()
+	end
+
+	function PLUGIN:GetForeignProgression()
+		ix.progression.foreignstatus = {}
+
+		ix.plugin.list["simplecrossserverdata"]:GetXServerData("%_progression", function(result)
+			if (istable(result) and #result > 0) then
+				for _, v in pairs(result) do
+					if (istable(v)) then
+						local key = v.key
+						local data = util.JSONToTable(v.json_data or "[]")
+
+						if not string.StartsWith(key,game.GetMap()) then
+							table.insert(ix.progression.foreignstatus, data)
+						end
+					end
+				end
+			end
+		end)
+	end
+
+	function PLUGIN:DumpOwnProgression()
+		local key = game.GetMap().."_progression"
+
+		ix.plugin.list["simplecrossserverdata"]:SetXServerData(key, ix.progression.status)
+	end
 end
 
 function PLUGIN:PopulateHelpMenu(tabs)

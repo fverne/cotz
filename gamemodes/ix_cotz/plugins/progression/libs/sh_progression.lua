@@ -1,5 +1,6 @@
 ix.progression = ix.progression or {}
 ix.progression.status = ix.progression.status or {}
+ix.progression.foreignstatus = ix.progression.foreignstatus or {}
 
 
 function ix.progression.SetProgressionValue(progid, amount, playername)
@@ -37,6 +38,12 @@ function ix.progression.IsActive(progid)
 			end
 		end
 
+		local foreignactive = false
+
+		for _,foreign in pairs(ix.progression.foreignstatus) do
+			foreignactive = foreignactive or foreign[progid].active
+		end
+
 		return ix.progression.status[progid].active
 	else
 		return false
@@ -58,7 +65,13 @@ function ix.progression.IsCompleted(progid)
 	if (ix.progression.definitions[progid]) then
 		ix.progression.status[progid] = ix.progression.status[progid] or {}
 
-		return ix.progression.status[progid].completed
+		local foreigncompleted = false
+
+		for _,foreign in pairs(ix.progression.foreignstatus) do
+			foreigncompleted = foreigncompleted or foreign[progid].completed
+		end
+
+		return ix.progression.status[progid].completed or foreigncompleted
 	else
 		return false
 	end
