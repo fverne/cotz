@@ -8,7 +8,7 @@ DIALOGUE.addTopic("GREETING", {
 		"AboutWorkTopic",
 		-- "GetTask",
 		"GetTaskByDifficulty",
-		-- "AboutProgression",
+		"AboutProgression",
 		"ChangeSuitVariant",
 		"GOODBYE"
 	},
@@ -539,7 +539,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"AboutWorkTopic",
 		-- "GetTask",
 		"GetTaskByDifficulty",
-		-- "AboutProgression",
+		"AboutProgression",
 		"ChangeSuitVariant",
 		"GOODBYE"
 	},
