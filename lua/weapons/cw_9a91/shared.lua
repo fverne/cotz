@@ -110,6 +110,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x39MM"
 
+SWEP.Chamberable = false
+
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_SR3M_FIRE"
 SWEP.FireSoundSuppressed = "CW_SR3M_FIRE_SUPPRESSED"
@@ -132,6 +134,6 @@ SWEP.DeployTime = 1.2
 
 SWEP.ReloadSpeed = 1.2
 SWEP.ReloadTime = 2.63
-SWEP.ReloadTime_Empty = 3.92
-SWEP.ReloadHalt = 3.6
-SWEP.ReloadHalt_Empty = 4.7
+SWEP.ReloadTime_Empty = 2.63
+SWEP.ReloadHalt = 3.4
+SWEP.ReloadHalt_Empty = 3.4

@@ -1,6 +1,6 @@
 ITEM.name = "SAKO RK 95"
 ITEM.description= "A grey assault rifle. Fires 7.62x39mm."
-ITEM.longdesc = "The RK 95 TP is the Finnish answer to the Kalashnikov rifles.\nIt's as reliable as the AK rifles as well as having a number of improvements of its own.\nIt fires the large 7.62x39mm intermediate cartridge, meaning it packs quite a punch.\n\nAmmo: 7.62x39mm \nMagazine Capacity: 30"
+ITEM.longdesc = "The RK 95 TP is the Finnish answer to the Kalashnikov rifles.\nIt's as reliable as the AK rifles as well as having a number of improvements of its own.\nIt fires the large 7.62x39mm intermediate cartridge, meaning it packs quite a punch.\n\nAmmo: 7.62x39mm \nMagazine Capacity: 30+1"
 ITEM.model = "models/weapons/world/rifles/rk95.mdl"
 ITEM.class = "cw_rk95"
 ITEM.weaponCategory = "primary"

@@ -1,6 +1,6 @@
 ITEM.name = "RPK"
 ITEM.description= "A long-barreled AK with a heavy stock. Fires 5.45x39mm."
-ITEM.longdesc = "A modification of the AK rifle, fit with a more supporting stock, a heavier and longer barrel and a bipod. \nIt can mount any of the AK's attachments apart from a grenade launcher. \nIt lacks the high ammo capacity of most machineguns, but it makes up for this in accuracy and reliability.\n\nAmmo: 5.45x39mm\nMagazine Capacity: 45"
+ITEM.longdesc = "A modification of the AK rifle, fit with a more supporting stock, a heavier and longer barrel and a bipod. \nIt can mount any of the AK's attachments apart from a grenade launcher. \nIt lacks the high ammo capacity of most machineguns, but it makes up for this in accuracy and reliability.\n\nAmmo: 5.45x39mm\nMagazine Capacity: 45+1"
 ITEM.model = ("models/weapons/w_rif_rpkm.mdl")
 ITEM.class = "cw_rpk"
 ITEM.weaponCategory = "primary"

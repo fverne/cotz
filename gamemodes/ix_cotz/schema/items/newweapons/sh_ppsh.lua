@@ -1,6 +1,6 @@
 ITEM.name = "PPSh-41"
 ITEM.description= "A heavy submachinegun with a wooden stock. Fires 7.62x25mm."
-ITEM.longdesc = "The PPSh is a Soviet submachinegun that gained a fearful reputation in World War II as a fast and effective weapon. \nIt's weight of 4.3 kilograms coupled with a gas compensator grants it low recoil in bursts and automatic fire. It fires from the open bolt. \nThese have been a popular choice with rookies compared to western, newer submachineguns because of the price and ammunition accessibility.\n\nAmmo: 7.62x25mm \nMagazine Capacity: 35"
+ITEM.longdesc = "The PPSh is a Soviet submachinegun that gained a fearful reputation in World War II as a fast and effective weapon. \nIt's weight of 4.3 kilograms coupled with a gas compensator grants it low recoil in bursts and automatic fire. It fires from the open bolt. \nThese have been a popular choice with rookies compared to western, newer submachineguns because of the price and ammunition accessibility.\n\nAmmo: 7.62x25mm \nMagazine Capacity: 35+1"
 ITEM.model = "models/weapons/w_grub_ppsh_stick.mdl"
 ITEM.class = "cw_ppsh"
 ITEM.weaponCategory = "primary"

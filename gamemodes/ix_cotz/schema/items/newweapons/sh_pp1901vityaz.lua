@@ -1,6 +1,6 @@
 ITEM.name = "PP-19-01 'Vityaz'"
 ITEM.description= "A folding-stock sub machine gun chambered for 9x19mm."
-ITEM.longdesc = "The Vityaz-SN is a 9×19mm Parabellum submachine gun developed in 2004 by Izhmash (now Kalashnikov). It is based on the AK-74 and offers a high degree of parts commonality with the AK-74. The gun is directly developed from the PP-19 Bizon.\n\nAmmo: 9x19mm\nMagazine Capacity: 30"
+ITEM.longdesc = "The Vityaz-SN is a 9×19mm Parabellum submachine gun developed in 2004 by Izhmash (now Kalashnikov). It is based on the AK-74 and offers a high degree of parts commonality with the AK-74. The gun is directly developed from the PP-19 Bizon.\n\nAmmo: 9x19mm\nMagazine Capacity: 30+1"
 ITEM.model = ("models/weapons/w_smg_pp19vityaz.mdl")
 ITEM.class = "cw_pp1901_vityaz"
 ITEM.weaponCategory = "primary"

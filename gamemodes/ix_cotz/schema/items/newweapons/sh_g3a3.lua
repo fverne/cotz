@@ -1,6 +1,6 @@
 ITEM.name = "G3A3"
 ITEM.description= "A battle rifle that fires 7.62x51mm rounds."
-ITEM.longdesc = "The G3 was Germany's response to the more expensive FAL rifle, based on the CETME design.\nWhile made out of mostly plastic furniture, the rifle remains a heavy but reliable choice.\n\nAmmo: 7.62x51mm\nMagazine Capacity: 20"
+ITEM.longdesc = "The G3 was Germany's response to the more expensive FAL rifle, based on the CETME design.\nWhile made out of mostly plastic furniture, the rifle remains a heavy but reliable choice.\n\nAmmo: 7.62x51mm\nMagazine Capacity: 20+1"
 ITEM.model = "models/weapons/w_hk_g3.mdl"
 ITEM.class = "cw_g3a3"
 ITEM.weaponCategory = "primary"

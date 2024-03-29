@@ -1,6 +1,6 @@
 ITEM.name = "Sten Gun MKII"
 ITEM.description= "An old pipe-like submachinegun. Fires 9x19mm."
-ITEM.longdesc = "The Sten Gun was introduced when the British army was facing a shortage of submachineguns from the US.\nIt was made with stamped metal and minimal welding to minimize price, this naturally brought some side effects onto the table.\nThe gun is uncomfortable to hold and has a rather unsafe safety.\nHowever, it's a formidable cheap weapon that shoots bullets where you point it.\nThis one is a Mark 2 model, it weighs about 3.2 kilograms unloaded and is all metal. It fires 600 rounds per minute.\n\nAmmo: 9x19mm\nMagazine Capacity: 32"
+ITEM.longdesc = "The Sten Gun was introduced when the British army was facing a shortage of submachineguns from the US.\nIt was made with stamped metal and minimal welding to minimize price, this naturally brought some side effects onto the table.\nThe gun is uncomfortable to hold and has a rather unsafe safety.\nHowever, it's a formidable cheap weapon that shoots bullets where you point it.\nThis one is a Mark 2 model, it weighs about 3.2 kilograms unloaded and is all metal. It fires 600 rounds per minute.\n\nAmmo: 9x19mm\nMagazine Capacity: 32+1"
 ITEM.model = ("models/weapons/w_smg_ste.mdl")
 ITEM.class = "cw_sten"
 ITEM.weaponCategory = "primary"

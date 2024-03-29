@@ -1,6 +1,6 @@
 ITEM.name = "Mossberg 500"
 ITEM.description= "A 12 gauge pump-action shotgun. Seems modern."
-ITEM.longdesc = "The Mossberg 500 is one of the most popular smooth-bore pump action shotguns in the world.\nA low price and an inherently reliable design makes it a good choice for hunters and police officers alike.\n\nAmmo: 12 Gauge\nMagazine Capacity: 6"
+ITEM.longdesc = "The Mossberg 500 is one of the most popular smooth-bore pump action shotguns in the world.\nA low price and an inherently reliable design makes it a good choice for hunters and police officers alike.\n\nAmmo: 12 Gauge\nMagazine Capacity: 5"
 ITEM.model = "models/weapons/w_shot_mossberg5.mdl"
 ITEM.class = "cw_mossberg500"
 ITEM.weaponCategory = "primary"

@@ -1,6 +1,6 @@
 ITEM.name = "Remington MSR"
 ITEM.description= "PLACEHOLDER."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: .338 Lapua Magnum \nMagazine Capacity: 5"
+ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: .338 Lapua Magnum \nMagazine Capacity: 5+1"
 ITEM.model = "models/weapons/w_ins2_pd2_msr.mdl"
 ITEM.class = "cw_remmsr"
 ITEM.weaponCategory = "primary"

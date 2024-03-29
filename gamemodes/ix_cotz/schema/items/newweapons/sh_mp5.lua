@@ -1,6 +1,6 @@
 ITEM.name = "HK MP5"
 ITEM.description= "A black submachinegun. Fires 9x19mm."
-ITEM.longdesc = "The MP5 is an iconic German submachinegun developed in the 1960s, known for it's reliability and effectiveness.\nThe MP5 differentiates from other submachineguns because it fires from a closed bolt.\nIt uses the same operating mechanism as the G3 rifle which has made it one of the most accurate submachineguns in the world.\n\nAmmo: 9x19mm\nMagazine Capacity: 30"
+ITEM.longdesc = "The MP5 is an iconic German submachinegun developed in the 1960s, known for it's reliability and effectiveness.\nThe MP5 differentiates from other submachineguns because it fires from a closed bolt.\nIt uses the same operating mechanism as the G3 rifle which has made it one of the most accurate submachineguns in the world.\n\nAmmo: 9x19mm\nMagazine Capacity: 30+1"
 ITEM.model = "models/srp/weapons/w_mp5.mdl"
 ITEM.class = "cw_mp5"
 ITEM.weaponCategory = "primary"

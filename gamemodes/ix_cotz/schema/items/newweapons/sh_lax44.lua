@@ -1,6 +1,6 @@
 ITEM.name = "Henry Lever Action X Model .44"
 ITEM.description= "A lever-operated shotgun, chambered in .44 Magnum."
-ITEM.longdesc = "A fairly modern lever action rifle, made in America. Chambered in .44 Magnum, it is mostly designed for hunting medium game.\n\nAmmo: .44 Magnum \nMagazine Capacity: 6"
+ITEM.longdesc = "A fairly modern lever action rifle, made in America. Chambered in .44 Magnum, it is mostly designed for hunting medium game.\n\nAmmo: .44 Magnum \nMagazine Capacity: 6+1"
 ITEM.model = ("models/weapons/w_bocw_ironhide.mdl")
 ITEM.class = "cw_lax44"
 ITEM.weaponCategory = "primary"

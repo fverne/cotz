@@ -1,6 +1,6 @@
 ITEM.name = "Ruger 10/22"
 ITEM.description= "A semi-automatic rifle chambered for .22LR."
-ITEM.longdesc = "The Ruger 10/22 is a semi-automatic rifle produced in America, chambered for the .22 Long Rifle rimfire cartridge. It uses a patented 10-round rotary magazine. The standard Carbine version of the Ruger 10/22 has been in production continuously since 1964, making it one of, if not the, most successful rimfire rifle design in history, with numerous third party manufacturers making parts and accessories for upgrading and customization. In fact, the 10/22's aftermarket is so prolific, that a 10/22 can be built with completely non-Ruger made components.\n\nAmmo: .22LR\nMagazine Capacity: 5"
+ITEM.longdesc = "The Ruger 10/22 is a semi-automatic rifle produced in America, chambered for the .22 Long Rifle rimfire cartridge. It uses a patented 10-round rotary magazine. The standard Carbine version of the Ruger 10/22 has been in production continuously since 1964, making it one of, if not the, most successful rimfire rifle design in history, with numerous third party manufacturers making parts and accessories for upgrading and customization. In fact, the 10/22's aftermarket is so prolific, that a 10/22 can be built with completely non-Ruger made components.\n\nAmmo: .22LR\nMagazine Capacity: 10+1"
 ITEM.model = ("models/weapons/tfa_nmrih/w_fa_ruger1022.mdl")
 ITEM.class = "cw_ruger1022"
 ITEM.weaponCategory = "primary"

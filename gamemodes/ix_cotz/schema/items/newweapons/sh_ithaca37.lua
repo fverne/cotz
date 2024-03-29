@@ -1,6 +1,6 @@
 ITEM.name = "Ithaca 37"
 ITEM.description= "A 12 gauge pump-action shotgun."
-ITEM.longdesc = "As one of the only pre-World War II shotguns still being produced, the Ithaca 37 is a well designed, well tested shotgun made for both the military, police and civilian markets. The loading and ejection port is situated on the bottom, leading to both left and right handed users being able to use it equally. It gained a great reputation during the Vietnam War, where the hostile jungle environment caused many other weapon platforms to jam and misfire, however the well protected mechanism of the Ithaca 37 was more or less unaffected. This reliability makes it a sought after weapon for use in the Zone.\n\nAmmo: 12 Gauge\nMagazine Capacity: 7"
+ITEM.longdesc = "As one of the only pre-World War II shotguns still being produced, the Ithaca 37 is a well designed, well tested shotgun made for both the military, police and civilian markets. The loading and ejection port is situated on the bottom, leading to both left and right handed users being able to use it equally. It gained a great reputation during the Vietnam War, where the hostile jungle environment caused many other weapon platforms to jam and misfire, however the well protected mechanism of the Ithaca 37 was more or less unaffected. This reliability makes it a sought after weapon for use in the Zone.\n\nAmmo: 12 Gauge\nMagazine Capacity: 7+1"
 ITEM.model = "models/khrcw2/doipack/w_ithaca37.mdl"
 ITEM.class = "cw_ithaca37"
 ITEM.weaponCategory = "primary"

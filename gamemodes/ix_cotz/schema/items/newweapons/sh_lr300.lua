@@ -1,6 +1,6 @@
 ITEM.name = "LR-300"
 ITEM.description= "A modern assault rifle. Fires 5.56x45mm."
-ITEM.longdesc = "When one is looking for an M4 in the Zone, chances are he'll settle for the LR-300 carbine instead. While there are some differences in design and build, the LR-300 was imported in much greater quantities than any other automatic rifle of this caliber. \nIt's well-used in close-quarters combat with the fire-rate of 950 rounds a minute and 91 centimeter length. \nIt's bolt is placed further forward in the weapon, allowing the use of a foldable stock.\n\nAmmo: 5.56x45mm \nMagazine Capacity: 30"
+ITEM.longdesc = "When one is looking for an M4 in the Zone, chances are he'll settle for the LR-300 carbine instead. While there are some differences in design and build, the LR-300 was imported in much greater quantities than any other automatic rifle of this caliber. \nIt's well-used in close-quarters combat with the fire-rate of 950 rounds a minute and 91 centimeter length. \nIt's bolt is placed further forward in the weapon, allowing the use of a foldable stock.\n\nAmmo: 5.56x45mm \nMagazine Capacity: 30+1"
 ITEM.model = "models/weapons/w_lr300.mdl"
 ITEM.class = "cw_lr300"
 ITEM.weaponCategory = "primary"
