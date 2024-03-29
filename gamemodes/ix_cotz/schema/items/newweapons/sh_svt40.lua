@@ -1,6 +1,6 @@
 ITEM.name = "SVT 40"
 ITEM.description= "A semi-automatic battle rifle that fires 7.62x54mm rounds."
-ITEM.longdesc = "The SVT-40 is a Soviet semi-automatic battle rifle.\nThe SVT-40 saw widespread service during and after World War II.\nAfter the war, SVTs were mostly withdrawn from service and refurbished in arsenals, then stored.\nMany of these storages have since then been found, and black market operatives have ensured a steady influx of SVT-40's to the zone.\n\nAmmo: 7.62x54mm\nMagazine Capacity: 10"
+ITEM.longdesc = "The SVT-40 is a Soviet semi-automatic battle rifle.\nThe SVT-40 saw widespread service during and after World War II.\nAfter the war, SVTs were mostly withdrawn from service and refurbished in arsenals, then stored.\nMany of these storages have since then been found, and black market operatives have ensured a steady influx of SVT-40's to the zone.\n\nAmmo: 7.62x54mm\nMagazine Capacity: 10+1"
 ITEM.model = ("models/weapons/w_svt40.mdl")
 ITEM.class = "cw_svt40"
 ITEM.weaponCategory = "primary"

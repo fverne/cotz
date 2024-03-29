@@ -1,6 +1,6 @@
 ITEM.name = "MP34"
 ITEM.description= "A submachinegun chambered for 9x19mm."
-ITEM.longdesc = "The MP34 is a submachine gun that was manufactured by Waffenfabrik Steyr as Steyr-Solothurn S1-100 and used by the Austrian Gendarmerie and subsequently by units of the German Army and the Waffen SS, in World War II. An exceptionally well-made weapon, it was used by some forces well into the 1970s.\n\nAmmo: 9x19mm \nMagazine Capacity: 20"
+ITEM.longdesc = "The MP34 is a submachine gun that was manufactured by Waffenfabrik Steyr as Steyr-Solothurn S1-100 and used by the Austrian Gendarmerie and subsequently by units of the German Army and the Waffen SS, in World War II. An exceptionally well-made weapon, it was used by some forces well into the 1970s.\n\nAmmo: 9x19mm \nMagazine Capacity: 20+1"
 ITEM.model = ("models/khrcw2/doipack/w_mp34.mdl")
 ITEM.class = "cw_mp34"
 ITEM.weaponCategory = "primary"

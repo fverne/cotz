@@ -1,6 +1,6 @@
 ITEM.name = "Sako 85 Varmint"
 ITEM.description= "A bolt-action sniper rifle intended for hunting small game. Fires .22LR."
-ITEM.longdesc = "The Sako 85 is a Finnish bolt-action sniper rifle designed for hunting. It can be fitted with various telescopic sights.\n\nAmmo: .22LR\nMagazine Capacity: 10"
+ITEM.longdesc = "The Sako 85 is a Finnish bolt-action sniper rifle designed for hunting. It can be fitted with various telescopic sights.\n\nAmmo: .22LR\nMagazine Capacity: 5"
 ITEM.model = ("models/weapons/tfa_nmrih/w_fa_sako85_ironsights.mdl")
 ITEM.class = "cw_sako85varmint"
 ITEM.weaponCategory = "primary"

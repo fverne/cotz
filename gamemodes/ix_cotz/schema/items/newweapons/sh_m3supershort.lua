@@ -1,6 +1,6 @@
 ITEM.name = "Serbu Super Shorty"
 ITEM.description= "An extremely short shotgun. Fires 12 Gauge rounds."
-ITEM.longdesc = "The Super-Shorty is a compact, stockless, pump-action AOW chambered in 12-gauge. The basic architecture of most of the production models is based on the Mossberg Maverick 88 shotgun.\nAs the weapon is originally manufactured without a shoulder stock, it is considered a smooth-bore handgun, and thus an AOW, rather than a short-barrelled shotgun.\n\nAmmo: 12 Gauge \nMagazine Capacity: 4"
+ITEM.longdesc = "The Super-Shorty is a compact, stockless, pump-action AOW chambered in 12-gauge. The basic architecture of most of the production models is based on the Mossberg Maverick 88 shotgun.\nAs the weapon is originally manufactured without a shoulder stock, it is considered a smooth-bore handgun, and thus an AOW, rather than a short-barrelled shotgun.\n\nAmmo: 12 Gauge \nMagazine Capacity: 3+1"
 ITEM.model = "models/weapons/w_shot_shortygun.mdl"
 ITEM.class = "cw_m3supershort"
 ITEM.weaponCategory = "primary"

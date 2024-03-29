@@ -1,6 +1,6 @@
 ITEM.name = "SV-98"
 ITEM.description= "A Russian sniper rifle. Fires 7.62x54mm."
-ITEM.longdesc = "The SV-98 is a Russian-made sniper rifle that was based on a civillian sport shooting rifle by Izhmash. \nAccording to the manufacturer, the rifle can be used to engage targets up to 1000 meters. But that requires match ammunition, which is hard to find in the Zone. \nIt weighs about 5.8 kilograms without a sight or suppressor.\n\nAmmo: 7.62x54mm \nMagazine Capacity: 10"
+ITEM.longdesc = "The SV-98 is a Russian-made sniper rifle that was based on a civillian sport shooting rifle by Izhmash. \nAccording to the manufacturer, the rifle can be used to engage targets up to 1000 meters. But that requires match ammunition, which is hard to find in the Zone. \nIt weighs about 5.8 kilograms without a sight or suppressor.\n\nAmmo: 7.62x54mm \nMagazine Capacity: 10+1"
 ITEM.model = ("models/weapons/w_sv98_scopeless.mdl")
 ITEM.class = "cw_sv98"
 ITEM.weaponCategory = "primary"

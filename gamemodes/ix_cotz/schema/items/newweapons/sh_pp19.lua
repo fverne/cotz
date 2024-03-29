@@ -1,6 +1,6 @@
 ITEM.name = "PP19 'Bizon'"
 ITEM.description= "A folding-stock sub machine gun chambered for 9x18mm."
-ITEM.longdesc = "The Bizon is a submachinegun that features an uncommon large helical magazine, doubling as a grip.\nIt's very similiar to the AK74 rifles and 60 percent of the parts for the weapons are interchangable.\nAn effective submachinegun for police and security purposes.\n\nAmmo: 9x18mm\nMagazine Capacity: 64"
+ITEM.longdesc = "The Bizon is a submachinegun that features an uncommon large helical magazine, doubling as a grip.\nIt's very similiar to the AK74 rifles and 60 percent of the parts for the weapons are interchangable.\nAn effective submachinegun for police and security purposes.\n\nAmmo: 9x18mm\nMagazine Capacity: 64+1"
 ITEM.model = ("models/weapons/w_smg_biz.mdl")
 ITEM.class = "cw_pp19"
 ITEM.weaponCategory = "primary"

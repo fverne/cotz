@@ -1,6 +1,6 @@
 ITEM.name = "Ruger Mini-14"
 ITEM.description= "A new semi-automatic self-loading rifle. Fires 5.56x45mm."
-ITEM.longdesc = "The Mini-14 is a lightweight semi-automatic rifle manufactured by Sturm, Ruger & Co.\nIntroduced in 1973, it is based on the M14 rifle and is essentially a scaled-down version chambered in 5.56×45mm NATO.\n\nAmmo: 5.56x45mm \nMagazine Capacity: 15"
+ITEM.longdesc = "The Mini-14 is a lightweight semi-automatic rifle manufactured by Sturm, Ruger & Co.\nIntroduced in 1973, it is based on the M14 rifle and is essentially a scaled-down version chambered in 5.56×45mm NATO.\n\nAmmo: 5.56x45mm \nMagazine Capacity: 15+1"
 ITEM.model = "models/weapons/w_tfa_mn14_classic_hd.mdl"
 ITEM.class = "cw_rugermini14"
 ITEM.weaponCategory = "primary"

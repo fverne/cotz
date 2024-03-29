@@ -1,6 +1,6 @@
 ﻿ITEM.name = "M14 EBR"
 ITEM.description= "A modernized M14 battle rifle. Fires 7.62x51mm."
-ITEM.longdesc = "The Mk 14 Enhanced Battle Rifle (EBR) is an American selective fire military designated marksman rifle chambered for the 7.62×51mm NATO cartridge.\nIt is a variant of the M14 battle rifle and was originally built for use with units of the United States Special Operations Command, such as the United States Navy SEALs, Delta Force, and task specific ODA units.\nThe EBRs are made with the intention of carrying out both designated marksman and CQB roles in combat.\n\nAmmo: 7.62x51mm \nMagazine Capacity: 20"
+ITEM.longdesc = "The Mk 14 Enhanced Battle Rifle (EBR) is an American selective fire military designated marksman rifle chambered for the 7.62×51mm NATO cartridge.\nIt is a variant of the M14 battle rifle and was originally built for use with units of the United States Special Operations Command, such as the United States Navy SEALs, Delta Force, and task specific ODA units.\nThe EBRs are made with the intention of carrying out both designated marksman and CQB roles in combat.\n\nAmmo: 7.62x51mm \nMagazine Capacity: 20+1"
 ITEM.model = "models/weapons/w_cstm_m14.mdl"
 ITEM.class = "cw_m14"
 ITEM.weaponCategory = "primary"

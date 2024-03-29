@@ -1,12 +1,12 @@
 ITEM.name = "9A-91"
 ITEM.description= "A special forces assault rifle chambered for 9x39mm."
-ITEM.longdesc = "The 9A-91 is a gas operated, rotating bolt weapon, which utilizes a long stroke gas piston, located above the barrel, and a rotating bolt with 4 lugs. The receiver is made from steel stampings; the forend and pistol grip are made from polymer. The steel buttstock folds up and above the receiver when not in use.\nThe iron sights have also been relocated to the upper front handguard as opposed to being located on the suppressor, apparently for when the gun is used without the suppressor attached.\n\nAmmo: 9x39mm\nMagazine Capacity: 30"
+ITEM.longdesc = "The 9A-91 is a gas operated, rotating bolt weapon, which utilizes a long stroke gas piston, located above the barrel, and a rotating bolt with 4 lugs. The receiver is made from steel stampings; the forend and pistol grip are made from polymer. The steel buttstock folds up and above the receiver when not in use.\nThe iron sights have also been relocated to the upper front handguard as opposed to being located on the suppressor, apparently for when the gun is used without the suppressor attached.\n\nAmmo: 9x39mm\nMagazine Capacity: 20"
 ITEM.model = ("models/flaymi/anomaly/weapons/w_models/9a91.mdl")
 ITEM.class = "cw_9a91"
 ITEM.weaponCategory = "primary"
 ITEM.price = 35000
 ITEM.width = 4
-ITEM.height = 2
+ITEM.height  	= 2
 ITEM.validAttachments = {"md_pbs1"}
 
 ITEM.bulletweight = 0.023

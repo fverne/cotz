@@ -1,6 +1,6 @@
 ITEM.name = "H&K UMP"
 ITEM.description= "A German submachine gun, firing the .45ACP cartridge."
-ITEM.longdesc = "The UMP is a blowback operated, magazine-fed submachine gun firing from a closed bolt.\nAs originally designed, the UMP is chambered for larger cartridges than other submachine guns like the MP5, to provide more stopping power against unarmored targets.\n\nAmmo: .45ACP \nMagazine Capacity: 25"
+ITEM.longdesc = "The UMP is a blowback operated, magazine-fed submachine gun firing from a closed bolt.\nAs originally designed, the UMP is chambered for larger cartridges than other submachine guns like the MP5, to provide more stopping power against unarmored targets.\n\nAmmo: .45ACP \nMagazine Capacity: 25+1"
 ITEM.model = ("models/weapons/w_smg_ump45.mdl")
 ITEM.class = "cw_ump45"
 ITEM.weaponCategory = "primary"

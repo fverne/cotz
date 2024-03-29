@@ -1,6 +1,6 @@
 ITEM.name = "Luger P08"
 ITEM.description= "A German handgun, firing the 9x19mm cartridge."
-ITEM.longdesc = "The Pistole Parabellum—or Parabellum-Pistole, commonly known as just Luger—is a toggle-locked recoil-operated semi-automatic pistol which was produced in several models and by several nations from 1898 to 1948.\n\nAmmo: 9x19mm\nMagazine Capacity: 8"
+ITEM.longdesc = "The Pistole Parabellum—or Parabellum-Pistole, commonly known as just Luger—is a toggle-locked recoil-operated semi-automatic pistol which was produced in several models and by several nations from 1898 to 1948.\n\nAmmo: 9x19mm\nMagazine Capacity: 8+1"
 ITEM.model = ("models/khrcw2/doipack/w_lugerp08.mdl")
 ITEM.class = "cw_p08"
 ITEM.weaponCategory = "secondary"

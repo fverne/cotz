@@ -1,6 +1,6 @@
 ITEM.name = "TOZ-194"
 ITEM.description= "A pump-action shotgun. Fires 12 gauge."
-ITEM.longdesc = "A classic 90's russian civilian shotgun, used in much of Europe as a hunting weapon. It is fairly long and unweildy, as to be legal for the civilian market in its country of origin, Russia, it had to have an overall legnth of 80cm's.\n\nAmmo: 12 Gauge \nMagazine Capacity: 3"
+ITEM.longdesc = "A classic 90's russian civilian shotgun, used in much of Europe as a hunting weapon. It is fairly long and unweildy, as to be legal for the civilian market in its country of origin, Russia, it had to have an overall legnth of 80cm's.\n\nAmmo: 12 Gauge \nMagazine Capacity: 4+1"
 ITEM.model = ("models/khrcw2/w_khri_khrtoz194.mdl")
 ITEM.class = "cw_toz194"
 ITEM.weaponCategory = "primary"

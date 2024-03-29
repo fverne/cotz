@@ -1,6 +1,6 @@
 ITEM.name = "Sterling"
 ITEM.description= "A submachinegun chambered for 9x19mm."
-ITEM.longdesc = "The Sterling was taken into service as a replacement for the Sten gun roughly ten years after World War II ended. \nIt's built entirely out of metal and plastic and has a folding stock underneath the reciever. While being a slow weapon with 550 RPM, this helps to fire full-auto with ease and high accuracy. \nA suppressor can be mounted which greatly decreases the sound level.\n\nAmmo: 9x19mm \nMagazine Capacity: 32"
+ITEM.longdesc = "The Sterling was taken into service as a replacement for the Sten gun roughly ten years after World War II ended. \nIt's built entirely out of metal and plastic and has a folding stock underneath the reciever. While being a slow weapon with 550 RPM, this helps to fire full-auto with ease and high accuracy. \nA suppressor can be mounted which greatly decreases the sound level.\n\nAmmo: 9x19mm \nMagazine Capacity: 34+1"
 ITEM.model = ("models/weapons/b_sterling.mdl")
 ITEM.class = "cw_sterling"
 ITEM.weaponCategory = "primary"

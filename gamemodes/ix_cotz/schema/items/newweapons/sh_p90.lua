@@ -1,6 +1,6 @@
 ITEM.name = "FN P90"
 ITEM.description= "A sub machine gun chambered in 5.7x28mm."
-ITEM.longdesc = "The FN P90 is the sister gun to the FN FiveSeven pistol, developed alongside it and its special cartridge, the 5.7x28mm.\nIntending to replace the classic 9x19mm pistol round, it hasn't quite worked out yet, making this a niche weapon.\nThe weapon is rare and so is its ammo.\n\nAmmo: 5.7x28mm \nMagazine Capacity: 50"
+ITEM.longdesc = "The FN P90 is the sister gun to the FN FiveSeven pistol, developed alongside it and its special cartridge, the 5.7x28mm.\nIntending to replace the classic 9x19mm pistol round, it hasn't quite worked out yet, making this a niche weapon.\nThe weapon is rare and so is its ammo.\n\nAmmo: 5.7x28mm \nMagazine Capacity: 50+1"
 ITEM.model = ("models/weapons/therambotnic09/w_cst_p90.mdl")
 ITEM.class = "cw_p90"
 ITEM.weaponCategory = "primary"

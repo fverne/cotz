@@ -1,6 +1,6 @@
 ITEM.name = "MP5k"
 ITEM.description= "A small, black submachinegun. Fires 9x19mm."
-ITEM.longdesc = "A shorter version of the German MP5 submachinegun, mostly identical to the original. It lacks the stock and thus suffers from higher recoil.\nHowever, the gun is very compact and can be easily hidden under most jackets, making it a formidable backup solution.\nThe shorter design means that the bolt is lighter, leading to a higher rate of fire.\n\nAmmo: 9x19mm\nMagazine Capacity: 30"
+ITEM.longdesc = "A shorter version of the German MP5 submachinegun, mostly identical to the original. It lacks the stock and thus suffers from higher recoil.\nHowever, the gun is very compact and can be easily hidden under most jackets, making it a formidable backup solution.\nThe shorter design means that the bolt is lighter, leading to a higher rate of fire.\n\nAmmo: 9x19mm\nMagazine Capacity: 30+1"
 ITEM.model = ("models/weapons/w_tfa_dmm5k.mdl")
 ITEM.class = "cw_mp5k"
 ITEM.weaponCategory = "primary"

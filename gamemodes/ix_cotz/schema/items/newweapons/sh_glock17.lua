@@ -1,6 +1,6 @@
 ITEM.name = "Glock 17"
 ITEM.description= "An Austrian handgun that fires 9x19mm."
-ITEM.longdesc = "The Glock is an Austrian polymer handgun, famous for it's price, reliability and trigger safety mechanism.\nIt's favored by police agencies around the world and comes in many flavors.\n\nAmmo: 9x19mm\nMagazine Capacity: 17"
+ITEM.longdesc = "The Glock is an Austrian polymer handgun, famous for it's price, reliability and trigger safety mechanism.\nIt's favored by police agencies around the world and comes in many flavors.\n\nAmmo: 9x19mm\nMagazine Capacity: 17+1"
 ITEM.model = "models/cw2_g18/w_dmg_glock.mdl"
 ITEM.class = "cw_glock17"
 ITEM.weaponCategory = "secondary"
