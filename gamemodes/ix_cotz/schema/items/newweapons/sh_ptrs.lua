@@ -4,7 +4,7 @@ ITEM.longdesc = "The PTRS-41 is an anti-tank rifle developed during World War II
 ITEM.model = ("models/weapons/w_grub_ptrs.mdl")
 ITEM.class = "cw_ptrs"
 ITEM.weaponCategory = "primary"
-ITEM.width = 6
+ITEM.width = 7
 ITEM.price = 150000
 ITEM.height = 2
 
@@ -21,10 +21,11 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(-24, 117, -7),
-	ang = Angle(0, -90, 0),
-	fov = 45,
+	pos = Vector(-28.99, 199.93, -14.51),
+	ang = Angle(-2.07, 271.39, 0),
+	fov = 28.12
 }
+
 
 ITEM.pacData = {
 [1] = {
