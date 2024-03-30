@@ -84,7 +84,7 @@ if CLIENT then
 	SWEP.OverrideAimMouseSens = 0.8
 	
 	-- what the fuck is the use for this
-	SWEP.ZoomTextures = {{tex = surface.GetTextureID("models/weapons/v_models/l85a2/susat_scopecross"), offset = {0.5, 4}}}
+	SWEP.ZoomTextures = {{tex = surface.GetTextureID("models/weapons/v_models/l85a2/susat_scopecross"), offset = {0.5, 4}, size={1200, 1200}}}
 	SWEP.RTAlign = {right = -0.1, up = 0, forward = 0}
 	
 end
