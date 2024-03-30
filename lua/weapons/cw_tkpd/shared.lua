@@ -25,16 +25,15 @@ if CLIENT then
 	SWEP.ForeGripOffsetCycle_Reload = 0.0
 	SWEP.ForeGripOffsetCycle_Reload_Empty = 0.0
 	SWEP.FireMoveMod = 0.6
-
 	SWEP.OverrideAimMouseSens = 0.2
 	
 	SWEP.IronsightPos = Vector(-11.5, -20.50, 0.73)
-	SWEP.IronsightAng = Vector(0.5, 0, 0)
+	SWEP.IronsightAng = Vector(0.88,0.05,0)
 	
 	SWEP.AlternativePos = Vector(0.319, 1.325, -1.04)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
 
-	SWEP.AimAng = Vector(0.88,0.05,0)
+	--SWEP.AimAng = Vector(0.88,0.05,0)
 	
 	SWEP.SightWithRail = true
 	

@@ -34,7 +34,8 @@ if CLIENT then
 	--SWEP.IronsightAng = Vector(1.251, -0.053, 0)
 	
 	SWEP.IronsightPos = Vector(2.618, -4.148, 0.477) --Vector(2.618, -2.448, 0.307)
-	SWEP.IronsightAng = Vector(-1.000, -0.053, -0.149) --Vector(1.251, -0.053, -0.149)
+	SWEP.IronsightAng = Vector(-1.25,0,0) --Vector(1.251, -0.053, -0.149)
+	--SWEP.AimAng = Vector(-1.25,0,0)
 	
 	SWEP.AlternativePos = Vector(-0.32, 0, -0.64)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
@@ -89,7 +90,7 @@ if CLIENT then
 	
 end
 
-SWEP.BlurOnAim = true
+SWEP.BlurOnAim = false
 
 
 SWEP.LuaViewmodelRecoil = true
@@ -170,7 +171,6 @@ SWEP.WM 	= "models/weapons/w_rif_l852.mdl"
 SWEP.WMPos 	= Vector(0, -6, -1) --Vector(0, 0, -2)
 SWEP.WMAng 	= Vector(0, 0, 180) --Vector(0, 6.565, 180)
 -- I fucking give up. If it looks retarded in-game, that's because the world model is retarded to setup
-SWEP.AimAng = Vector(-1.22,0,0)
 
 if CLIENT then
 	local old, x, y, ang
