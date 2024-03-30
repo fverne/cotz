@@ -12,6 +12,8 @@ if CLIENT then
 	SWEP.SelectIcon = surface.GetTextureID("weaponicons/l85a1")
 	--killicon.AddFont("cw_l85", "CW_KillIcons", SWEP.IconLetter, Color(255, 80, 0, 0))
 	killicon.Add("cw_l85fix", "weaponicons/l85a1", Color(255, 80, 0, 150))
+
+	SWEP.SimpleTelescopicsFOV = 65
 	
 	SWEP.MuzzleEffect = "muzzleflash_6"
 	SWEP.PosBasedMuz = true
@@ -82,7 +84,7 @@ if CLIENT then
 	SWEP.OverrideAimMouseSens = 0.8
 	
 	-- what the fuck is the use for this
-	SWEP.ZoomTextures = {{tex = surface.GetTextureID("models/weapons/v_models/l85a2/susat_scopecross"), offset = {0, 1}}}
+	SWEP.ZoomTextures = {{tex = surface.GetTextureID("models/weapons/v_models/l85a2/susat_scopecross"), offset = {0.5, 4}}}
 	SWEP.RTAlign = {right = -0.1, up = 0, forward = 0}
 	
 end
@@ -168,6 +170,7 @@ SWEP.WM 	= "models/weapons/w_rif_l852.mdl"
 SWEP.WMPos 	= Vector(0, -6, -1) --Vector(0, 0, -2)
 SWEP.WMAng 	= Vector(0, 0, 180) --Vector(0, 6.565, 180)
 -- I fucking give up. If it looks retarded in-game, that's because the world model is retarded to setup
+SWEP.AimAng = Vector(-1.22,0,0)
 
 if CLIENT then
 	local old, x, y, ang
