@@ -13,7 +13,7 @@ if CLIENT then
 	--killicon.AddFont("cw_l85", "CW_KillIcons", SWEP.IconLetter, Color(255, 80, 0, 0))
 	killicon.Add("cw_l85fix", "weaponicons/l85a1", Color(255, 80, 0, 150))
 
-	SWEP.SimpleTelescopicsFOV = 65
+	SWEP.SimpleTelescopicsFOV = 69  -- nice
 	
 	SWEP.MuzzleEffect = "muzzleflash_6"
 	SWEP.PosBasedMuz = true
