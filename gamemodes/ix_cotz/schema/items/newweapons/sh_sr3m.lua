@@ -34,8 +34,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(-6, 0, 180),
-						["Position"] = Vector(-1.724, -4.195, -3.961),
+						["Angles"] = Angle(-12, 0, 180),
+						["Position"] = Vector(-2.7, -4.3, -6.3),
 						["Model"] = "models/weapons/w_dmg_vikhr.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

@@ -34,13 +34,13 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0, -90, -30),
-						["Position"] = Vector(-9.731, 10.516, -1.729),
+						["Angles"] = Angle(0, -180, 180),
+						["Position"] = Vector(17.2, -4.7, 0),
 						["Model"] = "models/weapons/w_cst_mac11.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
 						["UniqueID"] = "79468794673",
-						["Bone"] = "pelvis",
+						["Bone"] = "spine 2",
 						["Name"] = "mac11",
 					},
 				},

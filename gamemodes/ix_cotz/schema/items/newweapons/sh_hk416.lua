@@ -34,8 +34,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(72.219, -177.46875, -98.487),
-						["Position"] = Vector(-6.713, -3.194, 12.803),
+						["Angles"] = Angle(84, 165, -115),
+						["Position"] = Vector(-7, -3.2, 9.8),
 						["Model"] = "models/weapons/w_cwkk_hk416.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

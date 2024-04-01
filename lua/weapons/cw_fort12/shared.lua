@@ -134,10 +134,12 @@ SWEP.DeployTime = 1
 --SWEP.Chamberable = false
 
 SWEP.ReloadSpeed = 1.3
-SWEP.ReloadTime = 2.1
-SWEP.ReloadHalt = 2.7
+SWEP.ReloadTime = 2.8
+SWEP.ReloadHalt = 2.9
 
-SWEP.ReloadTime_Empty = 2.2
-SWEP.ReloadHalt_Empty = 3
+SWEP.Chamberable = false
+
+SWEP.ReloadTime_Empty = 2.8
+SWEP.ReloadHalt_Empty = 2.9
 
 SWEP.SnapToIdlePostReload = true

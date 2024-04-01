@@ -12,6 +12,9 @@ if CLIENT then
 	killicon.Add("cw_dragnov", "vgui/kills/cw_dragnov", Color(255, 80, 0, 150))
 	SWEP.SelectIcon = surface.GetTextureID("vgui/kills/cw_dragnov")
 	
+	SWEP.ZoomTextures = {{tex = surface.GetTextureID("models/joe/tkpd/tkpd_scope"), offset = {0, 1}, size = {1500, 1500}}}
+	SWEP.SimpleTelescopicsFOV = 115
+
 	SWEP.MuzzleEffect = "muzzleflash_g3"
 	SWEP.PosBasedMuz = true
 	SWEP.SnapToGrip = true
@@ -22,14 +25,15 @@ if CLIENT then
 	SWEP.ForeGripOffsetCycle_Reload = 0.0
 	SWEP.ForeGripOffsetCycle_Reload_Empty = 0.0
 	SWEP.FireMoveMod = 0.6
-
 	SWEP.OverrideAimMouseSens = 0.2
 	
 	SWEP.IronsightPos = Vector(-11.5, -20.50, 0.73)
-	SWEP.IronsightAng = Vector(0.5, 0, 0)
+	SWEP.IronsightAng = Vector(0.88,0.05,0)
 	
 	SWEP.AlternativePos = Vector(0.319, 1.325, -1.04)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
+
+	--SWEP.AimAng = Vector(0.88,0.05,0)
 	
 	SWEP.SightWithRail = true
 	
@@ -113,7 +117,7 @@ SWEP.RunHoldType = "passive"
 SWEP.FireModes = {"semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
-SWEP.AimViewModelFOV = 50
+SWEP.AimViewModelFOV = 45
 
 SWEP.Author			= ""
 SWEP.Contact		= ""
@@ -240,7 +244,7 @@ if CLIENT then
 			cam.Start2D()
 				surface.SetDrawColor(255, 255, 255, 255)
 				surface.SetTexture(reticle)
-				surface.DrawTexturedRect(0, 0, size, size)
+				surface.DrawTexturedRect(-40, 0, size+80, size)
 				
 				surface.SetDrawColor(150 * light[1], 150 * light[2], 150 * light[3], 255 * alpha)
 				surface.SetTexture(lens)

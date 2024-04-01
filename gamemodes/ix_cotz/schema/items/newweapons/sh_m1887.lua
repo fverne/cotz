@@ -31,8 +31,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(62.727, 107.588, 8.727),
-						["Position"] = Vector(-10.144, -3.047, -4.744),
+						["Angles"] = Angle(-64, 95, -173),
+						["Position"] = Vector(-8, -1, 9),
 						["Model"] = "models/weapons/w_shot_m1887.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,
