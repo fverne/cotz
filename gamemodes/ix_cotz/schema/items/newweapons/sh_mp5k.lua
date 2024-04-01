@@ -34,8 +34,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-11.724, -4.649, 0.866),
+						["Angles"] = Angle(75, -180, -90),
+						["Position"] = Vector(-8, 1.7, 3),
 						["Model"] = "models/weapons/w_tfa_dmm5k.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

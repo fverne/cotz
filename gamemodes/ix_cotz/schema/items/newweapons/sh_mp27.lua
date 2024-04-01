@@ -34,8 +34,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0, 0, 180),
-						["Position"] = Vector(0.066, -5.077, -3.147),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(11, -5.1, 0.1),
 						["Model"] = "models/weapons/tfa_ins2/wpn_mp27_w.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

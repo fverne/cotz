@@ -26,40 +26,40 @@ ITEM.iconCam = {
 }
 
 ITEM.pacData = {
-[1] = {
-	["children"] = {
-		[1] = {
-			["children"] = {
-				[1] = {
-					["children"] = {
-					},
-					["self"] = {
-						["Angles"] = Angle(1.166, 74.608, -58.069),
-						["Position"] = Vector(4.528, 7.364, -7.2),
-						["Model"] = "models/weapons/w_sv10s.mdl",
-						["ClassName"] = "model",
-						["EditorExpand"] = true,
-						["UniqueID"] = "8592523121",
-						["Bone"] = "pelvis",
-						["Name"] = "toz34s",
+	[1] = {
+		["children"] = {
+			[1] = {
+				["children"] = {
+					[1] = {
+						["children"] = {
+						},
+						["self"] = {
+							["Angles"] = Angle(0, 20, 90),
+							["Position"] = Vector(8.9, 11.7, -2.5),
+							["Model"] = "models/weapons/w_sv10s.mdl",
+							["ClassName"] = "model",
+							["EditorExpand"] = true,
+							["UniqueID"] = "8592523121",
+							["Bone"] = "spine 2",
+							["Name"] = "toz34s",
+						},
 					},
 				},
-			},
-			["self"] = {
-				["AffectChildrenOnly"] = true,
-				["ClassName"] = "event",
-				["UniqueID"] = "1424656542",
-				["Event"] = "weapon_class",
-				["EditorExpand"] = true,
-				["Name"] = "weapon class find simple\"@@1\"",
-				["Arguments"] = "cw_toz34short@@0",
+				["self"] = {
+					["AffectChildrenOnly"] = true,
+					["ClassName"] = "event",
+					["UniqueID"] = "1424656542",
+					["Event"] = "weapon_class",
+					["EditorExpand"] = true,
+					["Name"] = "weapon class find simple\"@@1\"",
+					["Arguments"] = "cw_toz34short@@0",
+				},
 			},
 		},
+		["self"] = {
+			["ClassName"] = "group",
+			["UniqueID"] = "81242563283",
+			["EditorExpand"] = true,
+		},
 	},
-	["self"] = {
-		["ClassName"] = "group",
-		["UniqueID"] = "81242563283",
-		["EditorExpand"] = true,
-	},
-},
 }
