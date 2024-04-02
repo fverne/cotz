@@ -46,8 +46,6 @@ if (SERVER) then
 						if (timestamp > ix.plugin.list["simplecrossserverdata"].lastSeenData) then
 							ix.plugin.list["simplecrossserverdata"].lastSeenData = timestamp
 						end
-
-						ix.crossserverdata.callback(key, data)
 					end
 				end
 			end
