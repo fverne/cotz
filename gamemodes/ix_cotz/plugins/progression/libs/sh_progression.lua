@@ -41,7 +41,9 @@ function ix.progression.IsActive(progid)
 		local foreignactive = false
 
 		for _,foreign in pairs(ix.progression.foreignstatus) do
-			foreignactive = foreignactive or foreign[progid].active
+			if foreign[progid] and foreign[progid].active then
+				foreignactive = foreignactive or foreign[progid].active
+			end
 		end
 
 		return ix.progression.status[progid].active or foreignactive
