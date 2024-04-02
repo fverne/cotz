@@ -41,6 +41,10 @@ function PLUGIN:PlayerSpawn(client, transition)
 	net.Start("progression_sync_receive")
 	net.WriteTable(ix.progression.status)
 	net.Send(client)
+
+	net.Start("progressionforeign_sync_receive")
+	net.WriteTable(ix.progression.foreignstatus)
+	net.Send(client)
 end
 
 if(SERVER)then
@@ -148,14 +152,12 @@ function PLUGIN:PopulateHelpMenu(tabs)
 				progressiontitle:DockMargin(0, 16, 0, 0)
 				progressiontitle:SetAutoStretchVertical(true)
 	
-				if(progdef.fnAddComplexProgression)then
-					local progitems 	= progdef.GetItemIds()
-					local missingitems  = {}
-	
+				if(progdef.fnAddComplexProgression)then	
+					local descriptiontext = progdef:BuildResponse(progdef.keyNpc, progstatus)
 					local progressiondescription = container:Add("DLabel")
 					progressiondescription:SetWrap(true)
 					progressiondescription:SetFont("stalkerregularsmallfont")
-					progressiondescription:SetText(progdef:BuildResponse(progdef.keyNpc, progstatus))
+					progressiondescription:SetText(descriptiontext)
 					progressiondescription:Dock(TOP)
 					progressiondescription:DockMargin(0, 16, 0, 0)
 					progressiondescription:SetAutoStretchVertical(true)

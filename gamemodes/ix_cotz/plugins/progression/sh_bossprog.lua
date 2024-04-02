@@ -3,9 +3,12 @@ ix.progression.Register("bossItemDelivery_1", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_1"] = ix.progression.status["bossItemDelivery_1"] or {}
 		local dat = ix.progression.status["bossItemDelivery_1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I have a ton of stockpile sitting here collecting dust in the research station. I'm willing to sell some to you if you help me out. First off the bat is a mercenary suit.\n\nREQUIRED ITEMS:"
@@ -88,9 +91,12 @@ ix.progression.Register("bossItemDelivery_2", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_2"] = ix.progression.status["bossItemDelivery_2"] or {}
 		local dat = ix.progression.status["bossItemDelivery_2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I have more suits in my stockpile. Next up is a lightweight Universal Protection Suit.\n\nREQUIRED ITEMS:"
@@ -174,9 +180,12 @@ ix.progression.Register("bossItemDelivery_3", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_3"] = ix.progression.status["bossItemDelivery_3"] or {}
 		local dat = ix.progression.status["bossItemDelivery_3"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I have more suits in my stockpile. Next up is the military standard issue Berill-5M.\n\nREQUIRED ITEMS:"
@@ -259,9 +268,12 @@ ix.progression.Register("bossItemDelivery_4", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_4"] = ix.progression.status["bossItemDelivery_4"] or {}
 		local dat = ix.progression.status["bossItemDelivery_4"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I have more suits in my stockpile. Next up is the prototype Skat10.\n\nREQUIRED ITEMS:"
@@ -346,9 +358,12 @@ ix.progression.Register("bossItemDelivery_5", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_5"] = ix.progression.status["bossItemDelivery_5"] or {}
 		local dat = ix.progression.status["bossItemDelivery_5"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I have more suits in my stockpile. Next up is the exclusive Skat9.\n\nREQUIRED ITEMS:"
@@ -432,9 +447,12 @@ ix.progression.Register("bossItemDelivery_6", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_6"] = ix.progression.status["bossItemDelivery_6"] or {}
 		local dat = ix.progression.status["bossItemDelivery_6"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I have more suits in my stockpile. Next up is the Radsuit.\n\nREQUIRED ITEMS:"
@@ -520,9 +538,12 @@ ix.progression.Register("bossItemDelivery_7", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_7"] = ix.progression.status["bossItemDelivery_7"] or {}
 		local dat = ix.progression.status["bossItemDelivery_7"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I have one last suit in my repository - the exoskeleton. \n\nREQUIRED ITEMS:"

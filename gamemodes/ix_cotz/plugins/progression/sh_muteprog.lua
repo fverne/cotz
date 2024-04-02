@@ -3,9 +3,12 @@ ix.progression.Register("muteItemDelivery_Binoc1", {
 	description = "Mute eyes you expectantly.",
 	keyNpc = "'Mute'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Binoc1"] = ix.progression.status["muteItemDelivery_Binoc1"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Binoc1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Mute makes a series of frantic gestures before shoving a drawing of a set of binoculars into your hands.\n\nREQUIRED ITEMS:"
@@ -89,9 +92,12 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 	description = "Mute's eyes haven't left his binoculars since the moment you came in.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Binoc2"] = ix.progression.status["muteItemDelivery_Binoc2"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Binoc2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Mute tries and fails to articulate a concept before pointing to a pair of binoculars with a smiley face on them. It seems he wants to improve them.\n\nREQUIRED ITEMS:"
@@ -174,9 +180,12 @@ ix.progression.Register("muteItemDelivery_Binoc3", {
 	description = "Mute's hands are twitchier as he works on a diagram.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Binoc3"] = ix.progression.status["muteItemDelivery_Binoc3"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Binoc3"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Mute simply points at a drawing on the table beside him. It appears to be the technical specs for a new set of binoculars and the materials list needed for them.\n\nREQUIRED ITEMS:"
@@ -260,9 +269,12 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 	description = "Mute is busy tinkering with a pair of binoculars using some kind of electronic device",
 	keyNpc = "'Mute'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Binoc4"] = ix.progression.status["muteItemDelivery_Binoc4"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Binoc4"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Mute gestures toward his workbench, where a set of binoculars is partially disassembled. It looks like he's making his magnum opus. Maybe you could help him out?\n\nREQUIRED ITEMS:"
@@ -347,9 +359,12 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 	description = "Mute is busy drawing pictures of anomalies.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Anomaly"] = ix.progression.status["muteItemDelivery_Anomaly"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Anomaly"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Mute motions toward a disassembled geiger counter on his desk alongside pictures and crude sketches of various anomalies. Could he be building a detector of some variety?\n\nREQUIRED ITEMS:"
@@ -432,9 +447,12 @@ ix.progression.Register("muteItemDelivery_Detector", {
 	description = "Mute is busy drawing pictures of artifacts.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Detector"] = ix.progression.status["muteItemDelivery_Detector"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Detector"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Apparently the last detector was not enough. Mute is making various gestures on how he would be able to reverse engineer detectors to make his own, in order to detect artifacts.\n\nREQUIRED ITEMS:"
@@ -517,9 +535,12 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 	description = "Mute is working on a server box.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Broadcast"] = ix.progression.status["muteItemDelivery_Broadcast"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Broadcast"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Mute shoves some kind of blueprint in your face. It looks really complicated, but whatever it is might be useful to help him build.\n\nREQUIRED ITEMS:"

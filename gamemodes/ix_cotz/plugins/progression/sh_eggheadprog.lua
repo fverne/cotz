@@ -3,9 +3,12 @@ ix.progression.Register("eggheadItemDelivery_Detector1", {
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Detector1"] = ix.progression.status["eggheadItemDelivery_Detector1"] or {}
 		local dat = ix.progression.status["eggheadItemDelivery_Detector1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "## PLACEHOLDER ## - Unlocks Echo Detector:\n"
@@ -90,9 +93,12 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 	name = "Detecting Anomalous Materials Part 2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Detector2"] = ix.progression.status["eggheadItemDelivery_Detector2"] or {}
 		local dat = ix.progression.status["eggheadItemDelivery_Detector2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "## PLACEHOLDER ## - Unlocks Bear Detector:\n"
@@ -177,9 +183,12 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 	name = "Detecting Anomalous Materials Part 3",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Detector3"] = ix.progression.status["eggheadItemDelivery_Detector3"] or {}
 		local dat = ix.progression.status["eggheadItemDelivery_Detector3"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "## PLACEHOLDER ## - Unlocks Veles Detector:\n"
@@ -262,9 +271,12 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 	name = "Anomalous Protection Part 1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Suit1"] = ix.progression.status["eggheadItemDelivery_Suit1"] or {}
 		local dat = ix.progression.status["eggheadItemDelivery_Suit1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "## PLACEHOLDER ## - Unlocks SSP99:\n"
@@ -346,9 +358,12 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 	name = "Anomalous Protection Part 2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Suit2"] = ix.progression.status["eggheadItemDelivery_Suit2"] or {}
 		local dat = ix.progression.status["eggheadItemDelivery_Suit2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "## PLACEHOLDER ## - Unlocks SSP99m:\n"
@@ -431,9 +446,12 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 	name = "Anomalous Protection Part 3",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Suit3"] = ix.progression.status["eggheadItemDelivery_Suit3"] or {}
 		local dat = ix.progression.status["eggheadItemDelivery_Suit3"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "## PLACEHOLDER ## - Unlocks SEVA:\n"
@@ -513,9 +531,12 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 	name = "Scientific Aid Part 1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Aid1"] = ix.progression.status["eggheadItemDelivery_Aid1"] or {}
 		local dat = ix.progression.status["eggheadItemDelivery_Aid1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "## PLACEHOLDER ## - Unlocks Stimpak MkI, Antiradiation Drugs, Psyheal Drugs:\n"
@@ -602,9 +623,12 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 	name = "Scientific Aid Part 2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Aid2"] = ix.progression.status["eggheadItemDelivery_Aid2"] or {}
 		local dat = ix.progression.status["eggheadItemDelivery_Aid2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "## PLACEHOLDER ## - Unlocks Stimpak MkII, Psyblock Drugs:\n"
@@ -690,9 +714,12 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 	name = "Scientific Aid Part 3",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Aid3"] = ix.progression.status["eggheadItemDelivery_Aid3"] or {}
 		local dat = ix.progression.status["eggheadItemDelivery_Aid3"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "## PLACEHOLDER ## - Unlocks Stimpak MkIII, Psyblock Drugs:\n"

@@ -3,9 +3,12 @@ ix.progression.Register("jittersItemDelivery_medical1", {
 	description = "Jitters take a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["jittersItemDelivery_medical1"] = ix.progression.status["jittersItemDelivery_medical1"] or {}
 		local dat = ix.progression.status["jittersItemDelivery_medical1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Hey uhh, It's pretty tough out here, am I right? How about we help each other out.\n\nREQUIRED ITEMS:"
@@ -91,9 +94,12 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 	description = "Jitters take a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["jittersItemDelivery_medical2"] = ix.progression.status["jittersItemDelivery_medical2"] or {}
 		local dat = ix.progression.status["jittersItemDelivery_medical2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I feel like we are bonding. How about we help each other again?\n\nREQUIRED ITEMS:"
@@ -182,9 +188,12 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 	description = "Jitters take a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["jittersItemDelivery_medical3"] = ix.progression.status["jittersItemDelivery_medical3"] or {}
 		local dat = ix.progression.status["jittersItemDelivery_medical3"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Hello friend! How about we help each other again?\n\nREQUIRED ITEMS:"
@@ -270,9 +279,12 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 	description = "Jitters take a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["jittersItemDelivery_medical4"] = ix.progression.status["jittersItemDelivery_medical4"] or {}
 		local dat = ix.progression.status["jittersItemDelivery_medical4"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Hello friend! How about we help each other again?\n\nREQUIRED ITEMS:"

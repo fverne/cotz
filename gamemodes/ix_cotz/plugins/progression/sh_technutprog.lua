@@ -8,9 +8,12 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 	description = "Get Technut to help you make suits.",
 	keyNpc = "'Technut'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit1"] = ix.progression.status["technutItemDelivery_Suit1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Suit1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I've been thinking about improving these jackets we're wearing, just adding some simple metal inlays should help against mutant bites and scratches. To accomplish this I'll need a couple of things:\n"
@@ -92,9 +95,12 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 	description = "Get Technut to help you make suits.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit2"] = ix.progression.status["technutItemDelivery_Suit2"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Suit2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "You ever notice how tough the skin of some of these mutants are? I bet you we could fashion them into coats. I'll need the following:\n"
@@ -179,9 +185,12 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 	description = "Get Technut to help you make suits.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit3"] = ix.progression.status["technutItemDelivery_Suit3"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Suit3"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "All this suit construction has given me some ideas for outfits. The first one is a fairly lightweight, as the most important thing is being nimble, right? I can start work on the prototype as soon as you bring me these items:\n"
@@ -264,9 +273,12 @@ ix.progression.Register("technutItemDelivery_SuitNBC", {
 	description = "Get Technut to help you make suits.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_SuitNBC"] = ix.progression.status["technutItemDelivery_SuitNBC"] or {}
 		local dat = ix.progression.status["technutItemDelivery_SuitNBC"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I have an idea for the sunrise that should make it more protective in radioactive areas. We can seal off many of the areas that allow for breathing, making it more uncomfortable to wear, but atleast you don't get irradiated as much. Here's what I need:\n"
@@ -346,9 +358,12 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 	description = "Get Technut to help you make suits.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit4"] = ix.progression.status["technutItemDelivery_Suit4"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Suit4"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "The next outfit I have in mind is a bit more heavily armored, mostly around the chest area. Should be able to take a couple of shots to the chest at least. Like before, I'll start working on the prototype as soon as you bring me these items:\n"
@@ -430,9 +445,12 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 	description = "Get Technut to help you make suits.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit5"] = ix.progression.status["technutItemDelivery_Suit5"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Suit5"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "From seeing the previous model, CS1, in action, it's clear that it needs a little bit more oomph. I've got some plans for another model much like the CS1, but this time more armored. Like before, I'll start working on the prototype as soon as you bring me these items:\n"
@@ -515,9 +533,12 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 	description = "Get Technut to help you make suits.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit6"] = ix.progression.status["technutItemDelivery_Suit6"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Suit6"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "The CS2 is an improvement on the CS1, but it doesn't protect quite as well as I would like, so my idea is to make it even more armored. Like before, I'll start working on the prototype as soon as you bring me these items:\n"
@@ -602,9 +623,12 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 	description = "Get Technut to help you make suits.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit7"] = ix.progression.status["technutItemDelivery_Suit7"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Suit7"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I've heard from some of the guys that the CS3 is too heavy, and that moving around in it is too clunky. I've got a schematic for a lightweight, highly modular suit, that I think will be just the thing for you all. Like before, I'll start working on the prototype as soon as you bring me these items:\n"
@@ -691,9 +715,12 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 	description = "Get Technut to paint your suits.",
 	keyNpc = "'Technut'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_SuitPainting"] = ix.progression.status["technutItemDelivery_SuitPainting"] or {}
 		local dat = ix.progression.status["technutItemDelivery_SuitPainting"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "It's a bit hard to tell you all apart with those balaclavas, so I'm thinking of establishing a way for you guys to get patches, other types of camouflage and so on on your suits. We'll need a couple of things for that:\n"
@@ -775,9 +802,12 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 	description = "Help Technut get his hands on helmets.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet1"] = ix.progression.status["technutItemDelivery_Helmet1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Helmet1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Fancy vests is good and all, but protected body won't save you from a bullet in your face. I have an idea for some simple headgear, but I need some items to make them.\n\nREQUIRED ITEMS:"
@@ -861,9 +891,12 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 	description = "Help Technut get his hands on helmets.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet2"] = ix.progression.status["technutItemDelivery_Helmet2"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Helmet2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Well, I agree, a simple steel cap is not a good option. I've recovered some schematic for aviation helmets. They are light, comfy, and won't block your vision.\n\nREQUIRED ITEMS:"
@@ -950,9 +983,12 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 	description = "Help Technut get his hands on helmets.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet3"] = ix.progression.status["technutItemDelivery_Helmet3"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Helmet3"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Flight helmets are good, but looks like we need more down-to-earth headgear. I can make some Ukraine military helmets, but I need soom items.\n\nREQUIRED ITEMS:"
@@ -1035,9 +1071,12 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 	description = "Help Technut get his hands on helmets.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet4"] = ix.progression.status["technutItemDelivery_Helmet4"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Helmet4"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "You know what? Why don't I just combine a decent helmet and a respirator together? The creator of this schematic though the same, and I can recreate it. \n\nREQUIRED ITEMS:"
@@ -1121,9 +1160,12 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 	description = "Help Technut get his hands on helmets.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet5"] = ix.progression.status["technutItemDelivery_Helmet5"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Helmet5"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Hey! So, the PASGT is all well and good, but it isn't giving the kind of protection people like against bullets. Interested in helping me put together something a little better?\n\nREQUIRED ITEMS:"
@@ -1206,9 +1248,12 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 	description = "Help Technut get his hands on helmets.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet6"] = ix.progression.status["technutItemDelivery_Helmet6"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Helmet6"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I've gotten a good look at one of the Spetsnaz Sphere-12 helmets and I'm pretty sure I can upgrade them, but I'm gonna need some special materials. Care to help me out?\n\nREQUIRED ITEMS:"
@@ -1291,9 +1336,12 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 	description = "Help Technut get his hands on helmets.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet7"] = ix.progression.status["technutItemDelivery_Helmet7"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Helmet7"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "So, the Sphere-08 project is going alright, but it's really friggin' heavy. I've got a few ideas to lighten it and improve on the PASGT design! What do you say?\n\nREQUIRED ITEMS:"
@@ -1382,9 +1430,12 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 	description = "Help technut provide gasmasks.",
 	keyNpc = "'Technut'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Mask1"] = ix.progression.status["technutItemDelivery_Mask1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Mask1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "So, the Swamps are pretty toxic... before we go much further into the Zone, we're gonna need some kind of radioprotectant. I have an idea, but I'm going to need some materials to make them.\n\nREQUIRED ITEMS:"
@@ -1470,9 +1521,12 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 	description = "Help technut provide gasmasks.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Mask2"] = ix.progression.status["technutItemDelivery_Mask2"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Mask2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "So, respirators are nice, but they don't protect your eyes and ears! I'm busy refitting some GP-5 gas mask filters to not use asbestos, because we want the masks to avoid cancer, not get it! Want to help me out?\n\nREQUIRED ITEMS:"
@@ -1555,9 +1609,12 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 	description = "Help technut provide gasmasks.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Mask3"] = ix.progression.status["technutItemDelivery_Mask3"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Mask3"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I don't know if you've noticed, but the filters on the PBF gas mask are a bit of a pain to find. I think I've figured out a way to refit them to accept 40mm filters and to trim some weight to boot! Can you grab me a few things to get the job done?\n\nREQUIRED ITEMS:"
@@ -1641,9 +1698,12 @@ ix.progression.Register("technutItemDelivery_Mask4", {
 	description = "Help technut provide gasmasks.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Mask4"] = ix.progression.status["technutItemDelivery_Mask4"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Mask4"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I got my hands on new tools. I've been trying my best to clean up some prototype gasmasks. I need a few more things though.\n\nREQUIRED ITEMS:"
@@ -1729,9 +1789,12 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 	description = "Provide technut with materials for suit plates.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Attachment1"] = ix.progression.status["technutItemDelivery_Attachment1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Attachment1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "So, a lot of these suits have plate carriers, but we kinda need the plates to get the job done. I'm gonna make them, but I need the stuff to do it!\n\nREQUIRED ITEMS:"
@@ -1815,9 +1878,12 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 	description = "Provide technut with materials for suit plates.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Attachment2"] = ix.progression.status["technutItemDelivery_Attachment2"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Attachment2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "The handmade plates are okay, but they fold pretty quickly in a firefight. I know someone willing to sell me the plans for better ones, but he's got a steep shopping list for the components...\n\nREQUIRED ITEMS:"
@@ -1901,9 +1967,12 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 	description = "Provide technut with materials for suit plates.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Attachment3"] = ix.progression.status["technutItemDelivery_Attachment3"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Attachment3"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "As we're pushing further north, we're gonna need better steel and ceramic to help keep you guys alive. Interested in helping me make the best stuff money can buy?\n\nREQUIRED ITEMS:"
@@ -1985,9 +2054,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 	description = "Provide technut with materials for suit fabrics.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentFabric1"] = ix.progression.status["technutItemDelivery_AttachmentFabric1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "If you're interested in going artefact hunting, you're gonna need proper protection. We don't exactly have SEVA suits sitting around right now, so I think instead I can get some thermal lining into your suits! I just need materials for the prototypes.\n\nREQUIRED ITEMS:"
@@ -2069,9 +2141,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 	description = "Provide technut with materials for suit fabrics.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentFabric2"] = ix.progression.status["technutItemDelivery_AttachmentFabric2"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentFabric2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "How's the insulating fabric treating you? I managed to get my hands on plans for a heavier duty set, but I need more stuff to stitch them together! Wanna help me out?!:\n\nREQUIRED ITEMS:"
@@ -2152,9 +2227,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 	description = "Provide technut with materials for suit frames.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentFrame1"] = ix.progression.status["technutItemDelivery_AttachmentFrame1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "Even with big backpacks, have you noticed how damn heavy they can get when you pack them up kinda funky? So have I! I've taken some inspiration from the old ALICE backpacks and I think I can put together some frames that'll help take a load off!\n\nREQUIRED ITEMS:"
@@ -2236,9 +2314,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 	description = "Provide technut with materials for suit frames.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentFrame2"] = ix.progression.status["technutItemDelivery_AttachmentFrame2"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentFrame2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "So, the aluminium frame is all well and good, but then it hit me; why get something decent from aluminium when you can get something great from steel! Bring me what I need and I'll make it happen!\n\nREQUIRED ITEMS:"
@@ -2321,9 +2402,12 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 	description = "Provide technut with materials for suit carbon fibre.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentCarbon"] = ix.progression.status["technutItemDelivery_AttachmentCarbon"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "I got my hands on some plans for a lining even better than the insulating kind! It'll be very expensive to make, but I think I can do it! I just need prototype materials...\n\nREQUIRED ITEMS:"
@@ -2405,9 +2489,12 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 	description = "Provide technut with materials for suit kevlar.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentKevlar1"] = ix.progression.status["technutItemDelivery_AttachmentKevlar1"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "So, steel and ceramic plates are good, but they're also really heavy. We're in the 2000s, we're well past the point of super heavy body armour! I think I can piece together something out of kevlar, but the prototypes so far haven't come out great. Wanna help me find materials?\n\nREQUIRED ITEMS:"
@@ -2490,9 +2577,12 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 	description = "Provide technut with materials for suit kevlar.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentKevlar2"] = ix.progression.status["technutItemDelivery_AttachmentKevlar2"] or {}
 		local dat = ix.progression.status["technutItemDelivery_AttachmentKevlar2"].complexData
+		if status then
+			dat = status
+		end
 		local itemids = self:GetItemIds()
 
 		local str = "The K119 seems to be doing the job well, but there's always room for improvement! Want to help me make them better? Bring me new materials to work with!\n\nREQUIRED ITEMS:"

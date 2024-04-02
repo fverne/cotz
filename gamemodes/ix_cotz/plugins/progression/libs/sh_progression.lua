@@ -44,7 +44,7 @@ function ix.progression.IsActive(progid)
 			foreignactive = foreignactive or foreign[progid].active
 		end
 
-		return ix.progression.status[progid].active
+		return ix.progression.status[progid].active or foreignactive
 	else
 		return false
 	end
@@ -81,7 +81,14 @@ function ix.progression.GetProgressionValue(progid)
 	if (ix.progression.definitions[progid]) then
 		ix.progression.status[progid] = ix.progression.status[progid] or {}
 		ix.progression.status[progid].value = ix.progression.status[progid].value or 0
-		return ix.progression.status[progid].value
+
+		local foreignvalue
+
+		for _,foreign in pairs(ix.progression.foreignstatus) do
+			foreignvalue = foreignvalue or foreign[progid].value or 0
+		end
+		
+		return ix.progression.status[progid].value or foreignvalue
 	end
 end
 
@@ -111,6 +118,12 @@ end
 
 function ix.progression.GetComplexProgressionValue(progid)
 	if (ix.progression.definitions[progid]) and ix.progression.definitions[progid].fnGetComplexProgression then
+		for _,foreign in pairs(ix.progression.foreignstatus) do
+			if foreign and foreign[progid] and foreign[progid].complexData then
+				return foreign[progid].complexData
+			end
+		end
+
 		return ix.progression.definitions[progid].fnGetComplexProgression()
 	end
 end
@@ -193,13 +206,24 @@ if CLIENT then
 		ix.progression.status = tbl
 	end)
 
+	net.Receive("progressionforeign_sync_receive", function(len)
+		local tbl = net.ReadTable()
+
+		ix.progression.foreignstatus = tbl
+	end)
+
 else
 	util.AddNetworkString( "progression_sync" )
 	util.AddNetworkString( "progression_sync_receive" )
+	util.AddNetworkString( "progressionforeign_sync_receive" )
 
 	net.Receive("progression_sync", function(len, pl)
 		net.Start("progression_sync_receive")
 			net.WriteTable(ix.progression.status)
+		net.Broadcast()
+		
+		net.Start("progressionforeign_sync_receive")
+			net.WriteTable(ix.progression.foreignstatus)
 		net.Broadcast()
 	end)
 end
