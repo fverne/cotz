@@ -68,7 +68,9 @@ function ix.progression.IsCompleted(progid)
 		local foreigncompleted = false
 
 		for _,foreign in pairs(ix.progression.foreignstatus) do
-			foreigncompleted = foreigncompleted or foreign[progid].completed
+			if foreign[progid] and foreign[progid].completed then
+				foreigncompleted = foreigncompleted or foreign[progid].completed
+			end
 		end
 
 		return ix.progression.status[progid].completed or foreigncompleted
@@ -85,7 +87,9 @@ function ix.progression.GetProgressionValue(progid)
 		local foreignvalue
 
 		for _,foreign in pairs(ix.progression.foreignstatus) do
-			foreignvalue = foreignvalue or foreign[progid].value or 0
+			if foreign[progid] and foreign[progid].value or 0 then
+				foreignvalue = foreignvalue or foreign[progid].value or 0
+			end
 		end
 		
 		return ix.progression.status[progid].value or foreignvalue
