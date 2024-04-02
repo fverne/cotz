@@ -10,7 +10,7 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
         if (cap and cap:GetData("cooldown", 0) < os.time()) then
             cap:SetData("cooldown", os.time() + 5)
             dmginfo:SetDamage(0)
-            ix.chat.Send(target, "iteminternal", "'s Capactior artifact absorbs the shock.", false)
+            ix.chat.Send(target, "iteminternal", "'s Capacitor artifact absorbs the shock.", false)
         end
     end
 end

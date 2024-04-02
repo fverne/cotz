@@ -9,13 +9,13 @@ PLUGIN.lastSeenData = PLUGIN.lastSeenData or 0
 PLUGIN.checktime = PLUGIN.checktime or 0
 
 if (SERVER) then
-	function PLUGIN:Think()
-		if self.checktime > CurTime() then return end
-		self.checktime = CurTime() + 15
+	--function PLUGIN:Think()
+		--if self.checktime > CurTime() then return end
+		--self.checktime = CurTime() + 15
 
-		self:CheckForNewData()
+		--self:CheckForNewData()
 
-	end
+	--end
 
 	-- Ensures tables exist
 	function PLUGIN:LoadTables()

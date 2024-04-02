@@ -34,8 +34,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0, 180, 0),
-						["Position"] = Vector(-11.007, -2.714, 3.862),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(-3.5, -5.3, -7),
 						["Model"] = "models/weapons/w_smg_skorp.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

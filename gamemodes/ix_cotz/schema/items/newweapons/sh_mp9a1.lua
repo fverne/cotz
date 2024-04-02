@@ -34,8 +34,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0, 180, 0),
-						["Position"] = Vector(-11.714, -2.715, 4.444),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(1.7, -4.8, -7.2),
 						["Model"] = "models/weapons/w_smg_mp9a1.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

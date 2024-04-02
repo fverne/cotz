@@ -16,7 +16,7 @@ ITEM.price = 85280
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
-ITEM.isHelmet = true
+ITEM.isHelmet = false
 
 ITEM.br = 0.15
 ITEM.fbr = 1

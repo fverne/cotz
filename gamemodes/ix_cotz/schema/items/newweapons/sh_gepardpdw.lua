@@ -35,8 +35,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0, 0, 0),
-						["Position"] = Vector(-19.377, -2.721, 2.522),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(4.8, -4, -4),
 						["Model"] = "models/weapons/tfa_l4d2/w_gepard.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

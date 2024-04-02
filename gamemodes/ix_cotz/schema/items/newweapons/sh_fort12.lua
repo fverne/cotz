@@ -1,6 +1,6 @@
 ITEM.name = "Fort-12"
 ITEM.description= "A semi-automatic pistol chambered for 9x18mm."
-ITEM.longdesc = "An Ukranian-made service pistol that has been adopted by many east-block countries.\nAlmost as common as the PMm and is more popular due to its larger magazine capacity.\n\nAmmo: 9x18mm\nMagazine Capacity: 12+1"
+ITEM.longdesc = "An Ukranian-made service pistol that has been adopted by many east-block countries.\nAlmost as common as the PMm and is more popular due to its larger magazine capacity.\n\nAmmo: 9x18mm\nMagazine Capacity: 12"
 ITEM.model = "models/srp/weapons/w_fort12.mdl"
 ITEM.class = "cw_fort12"
 ITEM.weaponCategory = "secondary"
