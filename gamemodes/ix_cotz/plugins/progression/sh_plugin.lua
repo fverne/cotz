@@ -113,6 +113,27 @@ function PLUGIN:PopulateHelpMenu(tabs)
 
 		table.Add(npcidentifiers, initialNpcs)
 
+		if ix.progression.IsCompleted("oldTimerKillIntro") then
+			local tradenpc = {
+				"'Haggler'",
+			}
+			table.Add(npcidentifiers, tradenpc)
+		end
+
+		if ix.progression.IsCompleted("oldTimerItemDelivery_mainMeat") then
+			local cooknpc = {
+				"'Spicy Lemon'",
+			}
+			table.Add(npcidentifiers, cooknpc)
+		end
+
+		if ix.progression.IsCompleted("oldTimerItemDelivery_mainStatue") then
+			local mutenpc = {
+				"'Mute'",
+			}
+			table.Add(npcidentifiers, mutenpc)
+		end
+
 		if ix.progression.IsCompleted("smartass_rfTasks") then
 			local ecologistNpcs = {
 				"'Egghead'",
