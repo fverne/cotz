@@ -8,7 +8,7 @@ DIALOGUE.addTopic("GREETING", {
 		"AboutWorkTopic",
 		-- "GetTask",
 		"GetTaskByDifficulty",
-		-- "AboutProgression",
+		"AboutProgression",
 		"ChangeSuitVariant",
 		"GOODBYE"
 	},
@@ -343,7 +343,7 @@ DIALOGUE.addTopic("ViewProgression", {
 				local curcnt = 0
 				if(progstatus and progstatus[progitem]) then curcnt = progstatus[progitem] end
 
-				if(curcnt < cnt)then
+				if(curcnt < cnt and client:GetCharacter():GetInventory():HasItem(progitem))then
 					table.insert(missingitems, progitem)
 				end
 			end
