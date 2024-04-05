@@ -416,6 +416,9 @@ DIALOGUE.addTopic("AboutProgression", {
 		-- Return the next topicID
 		return "ViewProgression", dyndata
 	end,
+	ShouldAdd = function()
+		return #ix.progression.GetActiveProgressions("'Boss'") > 0
+	end,
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {

@@ -545,6 +545,9 @@ DIALOGUE.addTopic("AboutProgression", {
 		-- Return the next topicID
 		return "ViewProgression", dyndata
 	end,
+	ShouldAdd = function()
+		return #ix.progression.GetActiveProgressions("'Old Timer'") > 0
+	end,
 })
 
 DIALOGUE.addTopic("StartBarter", {
