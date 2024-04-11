@@ -359,15 +359,17 @@ function PANEL:Init()
 	deleteConfirm:DockMargin(ScrW()*0.3, 0, 0, 0)
 	deleteConfirm:SetTextColor(derma.GetColor("Error", deleteConfirm))
 	deleteConfirm.DoClick = function()
-		local id = self.character:GetID()
+		if not ix.config.Get("charloadremove", false) then
+			local id = self.character:GetID()
 
-		parent:ShowNotice(1, L("deleteComplete", self.character:GetName()))
-		self:Populate(id)
-		self:SetActiveSubpanel("main")
+			parent:ShowNotice(1, L("deleteComplete", self.character:GetName()))
+			self:Populate(id)
+			self:SetActiveSubpanel("main")
 
-		net.Start("ixCharacterDelete")
-			net.WriteUInt(id, 32)
-		net.SendToServer()
+			net.Start("ixCharacterDelete")
+				net.WriteUInt(id, 32)
+			net.SendToServer()
+		end
 	end
 
 	self.deleteModel = deleteInfo:Add("ixModelPanel")
