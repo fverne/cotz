@@ -371,7 +371,7 @@ DIALOGUE.addTopic("ViewProgression", {
 				local progstatus 	= ix.progression.status[dyndata.identifier]
 				local progdef 		= ix.progression.definitions[dyndata.identifier]
 
-				self.response = progdef.BuildResponse(progdef, progstatus)
+				self.response = progdef:BuildResponse(progdef, progstatus)
 				self.tmp = dyndata.identifier
 			end
 		end
@@ -398,8 +398,6 @@ DIALOGUE.addTopic("AboutProgression", {
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
-
-		local test = ix.progression.GetActiveProgressions("'Boss'")
 
 		for _, progid in pairs(ix.progression.GetActiveProgressions("'Boss'")) do
 			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})

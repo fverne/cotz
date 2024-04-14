@@ -361,7 +361,7 @@ DIALOGUE.addTopic("ViewProgression", {
 				local progstatus 	= ix.progression.status[dyndata.identifier]
 				local progdef 		= ix.progression.definitions[dyndata.identifier]
 
-				self.response = progdef.BuildResponse(progdef, progstatus)
+				self.response = progdef:BuildResponse(progdef, progstatus)
 				self.tmp = dyndata.identifier
 			end
 		end
