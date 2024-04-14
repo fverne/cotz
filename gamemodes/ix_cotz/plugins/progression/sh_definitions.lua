@@ -279,9 +279,7 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldTimerItemDelivery_mainMeat"] = ix.progression.status["oldTimerItemDelivery_mainMeat"] or {}
 		local dat = ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "So, we're in need of a lot of food if we want to stay alive out here, especially with this many people around. So, here's what we need to feed everyone for a while:\n"
@@ -395,9 +393,7 @@ ix.progression.Register("technutItemDelivery_Main", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Main"] = ix.progression.status["technutItemDelivery_Main"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Main"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "I'm currently working on setting up rudimentary radiocommunications, because I just lost contact with my last runner that I sent off a couple of days ago, and it is simply not sustainable to send people to their deaths over and over again just to deliver a message that could have been transmitted easily through the airwaves. Anyways, here's a list of what I need:\n"
@@ -500,9 +496,7 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldTimerItemDelivery_mainStatue"] = ix.progression.status["oldTimerItemDelivery_mainStatue"] or {}
 		local dat = ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "Great work on Technut's little project, but it got me thinking. No offense to Technut, but he's more of a mechanical guy, his radio system is never going to reach very far. I got an old friend that is extremly knowledgeable in these things, but he's a bit of an oddball. He has a fascination with statuettes of animals made by a certain factory nearby. So, I'm going to need you to collect some of these statues:\n"
@@ -644,9 +638,7 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"] = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"] or {}
 		local dat = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "** The man looks around erratically, points at a schematic of what looks to be a large radio antenna, and then points to a piece of paper with a list: **\n"
@@ -806,9 +798,7 @@ ix.progression.Register("quarterMasterDelivery_main", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quarterMasterDelivery_main"] = ix.progression.status["quarterMasterDelivery_main"] or {}
 		local dat = ix.progression.status["quarterMasterDelivery_main"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "Alright boys, lets see some hands, who likes booze? That's right, I do. I'm gonna need you to find some stuff to drink, and smoke. I made a little list for you so you wont forget:\n"
@@ -1006,9 +996,7 @@ ix.progression.Register("beanstalkItemDelivery_Documents", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["beanstalkItemDelivery_Documents"] = ix.progression.status["beanstalkItemDelivery_Documents"] or {}
 		local dat = ix.progression.status["beanstalkItemDelivery_Documents"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "Greetings. I won't ask how you got down here, who you are. You come from the outside, and we don't have the resources to leave the safety of the bunker. I need you to gather the following of various documents to aid our research:\n"
@@ -1088,9 +1076,7 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_artifacts"] = ix.progression.status["eggheadItemDelivery_artifacts"] or {}
 		local dat = ix.progression.status["eggheadItemDelivery_artifacts"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "Hello. I have discovered some strange phenomena deep within the depths of the zone. If my calculations are correct, I need to melt certain artifacts together to achieve our goal. Find me the following artifacts:\n"
@@ -1288,9 +1274,7 @@ ix.progression.Register("computerDelivery_main", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["computerDelivery_main"] = ix.progression.status["computerDelivery_main"] or {}
 		local dat = ix.progression.status["computerDelivery_main"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "** The computer prints a list of items on the screen, and blinks some indicator lights in the area where it would like these components placed **\n"

@@ -10,9 +10,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical1"] = ix.progression.status["spicylemonItemDelivery_Medical1"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Medical1"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "Hello, stalker. You may not know it, but I am a chemist by trade; a type of chemist, at any rate. Are you interested in my services? If so, I will need your assistance with getting the tools necessary to get mixing. I am in touch with a laboratory with spare equipment, and they are willing to make an exchange. I require your help.\n\nREQUIRED ITEMS:"
@@ -96,9 +94,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical2"] = ix.progression.status["spicylemonItemDelivery_Medical2"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Medical2"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "My new laboratory equipment shows great promise, but it is never a bad time to expand business. I have noticed many stalkers sleeping long hours and not getting as much field time as they would like; I would like to remedy this. Are you interested?\n\nREQUIRED ITEMS:"
@@ -184,9 +180,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical3"] = ix.progression.status["spicylemonItemDelivery_Medical3"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Medical3"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "Good day, stalker. You may have noticed, but the Swamps are home to a special variety of controller; the Swamp Controller. None of the others here carry the kind of medicines necessary to combat them short of smoking entire packs of cigarettes to clear the mind. As you may imagine, I am not interested in my clients becoming zombies. I am willing to help, but I require certain materials to mix.\n\nREQUIRED ITEMS:"
@@ -272,9 +266,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical4", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical4"] = ix.progression.status["spicylemonItemDelivery_Medical4"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Medical4"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "While having Modafine is useful, it is better to avoid harm outright than to treat it. I have received requests for a preventative drug rather than a reactive one, and I am more than happy to serve... provided I am supplied with the appropriate materials.\n\nREQUIRED ITEMS:"
@@ -360,9 +352,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical5"] = ix.progression.status["spicylemonItemDelivery_Medical5"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Medical5"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "Do your wounds ache, stalker? I am saddened to hear it; my heart aches to see you all suffering. I believe it will be best for everyone involved if I help tend your wounds, provided I am furnished with the appropriate materials to facilitate the acquisition of supplies...\n\nREQUIRED ITEMS:"
@@ -449,9 +439,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical6", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical6"] = ix.progression.status["spicylemonItemDelivery_Medical6"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Medical6"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "The mutants out there are not getting easier to deal with, stalker. Between them and hostile stalkers, the dangers are many and the options to fight back few. I should like to step in and help provide something I think you might find quite useful. To purchase the mixing materials, however, I am having to reach deep into my own pockets. That is where you come in.\n\nREQUIRED ITEMS:"
@@ -536,9 +524,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical7"] = ix.progression.status["spicylemonItemDelivery_Medical7"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Medical7"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "Though Codeine is useful after combat, I am looking to furnish stalkers with something a bit stronger for use during combat. The first thing that comes to mind is morphine sulfate. It is both very powerful and very expensive, but if you are all willing to chip in I will arrange a sale.\n\nREQUIRED ITEMS:"
@@ -627,9 +613,7 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Food"] = ix.progression.status["spicylemonItemDelivery_Food"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Food"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "Good day, stalker. You have no doubt encountered mutant meat in your time; most of it is irradiated if not borderline toxic. I have friends outside the Zone who are interested in such samples for research, however, and are willing to exchange purified food and drink for the less pleasant variety we have here. Up to it?\n\nREQUIRED ITEMS:"
@@ -721,9 +705,7 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Vodka"] = ix.progression.status["spicylemonItemDelivery_Vodka"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Vodka"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "One look at you tells me all I need to know, stalker. You are not interested in beers or store bought alcohol; you are looking for something a bit more discerning. Should you provide me with the resources necessary to start making some trades, I can bring in some fine local vodkas.\n\nREQUIRED ITEMS:"
@@ -810,9 +792,7 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Spirits"] = ix.progression.status["spicylemonItemDelivery_Spirits"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Spirits"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "Not satisfied with local vodka? This is no issue; I completely understand the desire for something a bit more... exotic. I have seen some stalkers carrying foreign imported spirits; expensive, difficult to buy... except I have found just the person to buy them from. They would like some proof of my good intentions, however, so now is the time to give them an appetizer of sorts.\n\nREQUIRED ITEMS:"
@@ -901,9 +881,7 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Brew"] = ix.progression.status["spicylemonItemDelivery_Brew"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Brew"].complexData
-		if status then
-			dat = status
-		end
+
 		local itemids = self:GetItemIds()
 
 		local str = "Hello, stalker. My interest does not lie with chemistry and brewing alone; I like to mix the two crafts from time to time, and I believe it may be time for me to start bringing in my own medicinal teas. The Swamps provide everything we need to make a very special kind of brew.\n\nREQUIRED ITEMS:"
