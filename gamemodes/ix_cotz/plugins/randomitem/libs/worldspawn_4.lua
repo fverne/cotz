@@ -55,6 +55,7 @@ ix.randomitems.tables["worldspawn_4"] = {
   {180, {"value_gasoline"}},
   {130, {"value_carbattery"}},
   {200, {"value_motorclean"}},
+  {200, {"value_powerbank"}},
   {400, {"value_tape_electric"}},
 
   {100, {"lax410", {["durability"] = 25, ["ammo"] = 2}}},
