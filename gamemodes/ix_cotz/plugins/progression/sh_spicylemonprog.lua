@@ -609,7 +609,7 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 	name = "Food for the poor",
 	description = "Spicy Lemon is interested in importing some food.",
 	keyNpc = "'Spicy Lemon'",
-	defaultActive = false,
+	defaultActive = true,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Food"] = ix.progression.status["spicylemonItemDelivery_Food"] or {}
 		local dat = ix.progression.status["spicylemonItemDelivery_Food"].complexData
