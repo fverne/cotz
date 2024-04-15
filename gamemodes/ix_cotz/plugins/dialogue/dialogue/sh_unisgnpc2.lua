@@ -4,6 +4,7 @@ DIALOGUE.addTopic("GREETING", {
 	response = "Look what the cat dragged in.",
 	options = {
 		"TradeTopic", 
+		"RepairItems",
 		"BackgroundTopic",
 		"AboutWorkTopic",
 		-- "GetTask",
@@ -267,6 +268,113 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 	end,
 })
 
+DIALOGUE.addTopic("RepairItems", {
+	statement = "Can you repair my items?",
+	response = "What would you like me to look at?",
+	IsDynamic = true,
+	options = {
+		"BackTopic"
+	},
+	--ShouldAdd = function() return ix.GetProgression("funy") end,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		local items = client:GetCharacter():GetInventory():GetItems()
+
+		for k,v in pairs(items) do
+			if v.canRepair then
+				if v.isWeapon then
+					local percenttorepair = (100 - v:GetData("wear", 100))
+					if(percenttorepair < 0.5) then continue end
+					local repaircost = math.Round(percenttorepair * v:GetRepairCost())
+
+					table.insert(dynopts, {statement = v:GetName().." ( "..math.Round(v:GetData("wear", 100)).."% Wear ) - "..ix.currency.Get(repaircost), topicID = "RepairItems", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = repaircost, type="wear"}})
+				else
+					local percenttorepair = (100 - v:GetData("durability", 100))
+					if(percenttorepair < 0.5) then continue end
+					local repaircost = math.Round(percenttorepair * v:GetRepairCost())
+
+					table.insert(dynopts, {statement = v:GetName().." ( "..math.Round(v:GetData("durability", 100)).."% Durability ) - "..ix.currency.Get(repaircost), topicID = "RepairItems", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = repaircost, type="durability"}})
+				end
+			end
+		end
+		
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+
+		-- Return the next topicID
+		if( !client:GetCharacter():HasMoney(dyndata.cost)) then
+			return "NotEnoughMoneyRepair"
+		end
+		return "ConfirmRepair", dyndata
+	end,
+})
+
+DIALOGUE.addTopic("ConfirmRepair", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	IsDynamic = true,
+	DynamicPreCallback = function(self, player, target, dyndata)
+		if(dyndata) then
+			if (CLIENT) then
+				self.response = string.format("Repairing that %s will cost you %s, is that a deal?", ix.item.list[dyndata.itemuid].name ,ix.currency.Get(dyndata.cost))
+			else
+				target.repairstruct = { dyndata.itemid, dyndata.cost, dyndata.type }
+			end
+		end
+	end,
+	GetDynamicOptions = function(self, client, target)
+
+		local dynopts = {
+			{statement = "That's fine, repair it.", topicID = "ConfirmRepair", dyndata = {accepted = true}},
+			{statement = "On second thought...", topicID = "ConfirmRepair", dyndata = {accepted = false}},
+		}
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if( SERVER and dyndata.accepted ) then
+			ix.dialogue.notifyMoneyLost(client, target.repairstruct[2])
+			client:GetCharacter():TakeMoney(target.repairstruct[2])
+
+
+			ix.item.instances[target.repairstruct[1]]:SetData(target.repairstruct[3], 100)
+
+			if (ix.item.instances[target.repairstruct[1]].class) then
+				local wep = client:GetWeapon(ix.item.instances[target.repairstruct[1]].class)
+				if(IsValid(wep))then
+					wep:SetWeaponWear(100)
+				end
+			end
+
+		end
+		if(SERVER)then
+			target.repairstruct = nil
+		end
+		-- Return the next topicID
+		return "BackTopic"
+	end,
+})
+
+DIALOGUE.addTopic("NotEnoughMoneyRepair", {
+	statement = "",
+	response = "You don't have enough money to repair that.",
+	options = {
+		"BackTopic"
+	}
+})
+
+
 DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 	statement = "",
 	response = "",
@@ -440,6 +548,7 @@ DIALOGUE.addTopic("BackTopic", {
 	response = "Anything else?",
 	options = {
 		"TradeTopic", 
+		"RepairItems",
 		"BackgroundTopic",
 		"AboutWorkTopic",
 		-- "GetTask",
