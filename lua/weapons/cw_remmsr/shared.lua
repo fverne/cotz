@@ -168,7 +168,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".338 Lapua"
 
-SWEP.FireDelay = 1.9
+SWEP.FireDelay = 1.4
 SWEP.FireSound = "CW_RMSR_FIRE"
 SWEP.FireSoundSuppressed = "CW_RMSR_SUB"
 SWEP.Recoil = 7.2
@@ -209,7 +209,7 @@ end
 
 function SWEP:postPrimaryAttack()
 	if CLIENT then
-		timer.Simple(0.6, function() 
+		timer.Simple(0.2, function() 
 			self:sendWeaponAnim("bolt", 0.8, 0)
 		end)
 	end
