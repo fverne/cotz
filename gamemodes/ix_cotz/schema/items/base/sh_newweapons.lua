@@ -537,6 +537,12 @@ function ITEM:OnLoadout()
 			if self:GetData("ammoRechamber") then
 				weapon:attachSpecificAttachment(self:GetData("ammoRechamber").attachmentName)
 			end
+			
+			-- if wish granted
+			if self:GetData("unlimitedDurability", nil) then
+				weapon.WearDamage = 0
+				weapon.DurabilityDamageChance = 0
+			end
 
 			timer.Simple(0.1,function()
 				if IsValid(weapon) then
