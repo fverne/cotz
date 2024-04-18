@@ -11,6 +11,7 @@ ITEM.weight = 5.500
 ITEM.newSkin = 4
 ITEM.baseSuit = "suit_wind"
 
+
 ITEM.price = 79700
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
