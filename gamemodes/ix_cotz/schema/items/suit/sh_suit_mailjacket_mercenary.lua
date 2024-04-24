@@ -1,4 +1,4 @@
-aITEM.name = "Mercenary Mail Jacket"
+ITEM.name = "Mercenary Mail Jacket"
 ITEM.model = "models/kek1ch/rookie_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_anorak.mdl"
 ITEM.description= "An armoured anorak."
