@@ -244,7 +244,7 @@ if CLIENT then
 			cam.Start2D()
 				surface.SetDrawColor(255, 255, 255, 255)
 				surface.SetTexture(reticle)
-				surface.DrawTexturedRect(-40, 0, size+80, size)
+				surface.DrawTexturedRect(-30, 0, size+60, size)
 				
 				surface.SetDrawColor(150 * light[1], 150 * light[2], 150 * light[3], 255 * alpha)
 				surface.SetTexture(lens)
