@@ -27,7 +27,7 @@ ITEM.pr = 0.50
 ITEM.fpr = 0
 ITEM.radProt = 1
 
-ITEM.carryinc = 9
+ITEM.carryinc = 18
 ITEM.miscslots = 4
 
 ITEM.skincustom[1] = {
