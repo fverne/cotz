@@ -11,7 +11,7 @@ ITEM.price = 3500
 --ITEM.busflag = "SPECIAL8_1"
 ITEM.img = ix.util.GetMaterial("cotz/ui/icons/long_ammo_8.png")
 
-ITEM.weight = 0.017
+ITEM.weight = 0.036
 ITEM.flatweight = 0.05
 
 function ITEM:GetWeight()
