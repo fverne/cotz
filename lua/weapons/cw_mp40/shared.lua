@@ -145,8 +145,8 @@ SWEP.Chamberable			= false
 
 SWEP.Primary.Ammo			= "9x19MM"
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearEffect = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 60/535
 SWEP.FireSound = "DOIMP40_FIRE"

@@ -132,7 +132,7 @@ SWEP.FireSoundSuppressed = "CWC_MATEBA_FIRE_SUP"
 SWEP.Recoil = 7
 
 SWEP.WearDamage = 0.45
-SWEP.WearEffect = 0.015
+SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.075
 SWEP.AimSpread = 0.0125
