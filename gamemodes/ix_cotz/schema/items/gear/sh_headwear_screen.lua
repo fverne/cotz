@@ -10,6 +10,7 @@ ITEM.isGasmask = true
 ITEM.isHelmet = true
 ITEM.isBackpack = true
 ITEM.outfitCategory = "Backpack"
+ITEM.carryinc = 18
 
 ITEM.br = 0.01
 ITEM.fbr = 0
