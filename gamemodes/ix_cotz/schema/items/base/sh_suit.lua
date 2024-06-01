@@ -337,6 +337,11 @@ ITEM.functions.Equip = {
 
 					return false
 				end
+				if (v.isExoskeleton == true and item.isExoskeleton == true and itemTable:GetData("equip")) then
+					item.player:Notify("You are already equipping an exoskeleton!")
+
+					return false
+				end
 			end
 		end
 

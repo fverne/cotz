@@ -16,6 +16,7 @@ ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
+ITEM.isBackpack = true
 
 ITEM.br = 0.10
 ITEM.fbr = 0
@@ -27,7 +28,7 @@ ITEM.pr = 0.50
 ITEM.fpr = 0
 ITEM.radProt = 1
 
-ITEM.carryinc = 9
+ITEM.carryinc = 30
 ITEM.miscslots = 4
 
 ITEM.skincustom[1] = {

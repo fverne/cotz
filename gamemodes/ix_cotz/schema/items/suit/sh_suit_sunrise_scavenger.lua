@@ -1,4 +1,4 @@
-ITEM.name = "Sunrise STALKER Suit"
+ITEM.name = "Courier STALKER Suit"
 ITEM.model = "models/kek1ch/stalker_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_sunrise.mdl"
 ITEM.description= "A STALKER suit."

@@ -10,6 +10,7 @@ ITEM.img = ix.util.GetMaterial("vgui/hud/wind.png")
 ITEM.weight = 5.100
 ITEM.newSkin = 2
 ITEM.baseSuit = "suit_wind"
+ITEM.suitVariant = "authority"
 
 ITEM.price = 79700
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability

@@ -116,8 +116,8 @@ SWEP.FireSound = "CW_KIPARIS_FIRE"
 SWEP.FireSoundSuppressed = "CW_SKORPION_FIRE_SUPPRESSED"
 SWEP.Recoil = 0.9
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearEffect = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.05
 SWEP.AimSpread = 0.02

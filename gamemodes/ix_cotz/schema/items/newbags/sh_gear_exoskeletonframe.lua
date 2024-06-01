@@ -4,13 +4,15 @@ ITEM.longdesc = "State of the art full body active exoskeleton system, 3rd gener
 ITEM.model = "models/shtokerbox/ground_outfit_exoskeleton.mdl"
 ITEM.skin = 11
 
-ITEM.price = 100000 -- TODO: Put something here
+ITEM.price = 800000 -- TODO: Put something here
 ITEM.width = 3
 ITEM.height = 3
 ITEM.weight = 4.820
 
 ITEM.carryinc = 50
 ITEM.outfitCategory = "Exoskeleton"
+ITEM.isExoskeleton = true
+ITEM.isBackpack = false
 
 ITEM.exRender = true
 ITEM.iconCam = {

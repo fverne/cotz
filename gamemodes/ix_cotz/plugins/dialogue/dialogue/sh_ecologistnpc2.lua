@@ -481,7 +481,12 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 		end
 	end,
 	GetDynamicOptions = function(self, client, target)
-		local blacklistedVariants = {}
+		local blacklistedVariants = {
+			["anarchist"] = true,
+			["authority"] = true,
+			["mercenary"] = true,
+			["looted"] = true,
+		}
 
 		local suitVariants = {}
 		for _, v in pairs(ix.item.list) do

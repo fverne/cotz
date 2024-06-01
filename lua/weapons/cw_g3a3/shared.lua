@@ -169,8 +169,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "7.62x51MM"
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearEffect = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 0.10909090909
 SWEP.FireSound = "CW_G3A3_FIRE"

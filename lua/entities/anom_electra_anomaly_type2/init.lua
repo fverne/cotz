@@ -46,11 +46,16 @@ function ENT:Initialize()
 end
 
 function ENT:StartTouch(ent)
+	local dmg = DamageInfo()
+	dmg:SetDamage(70)
+	dmg:SetAttacker(self)
+	dmg:SetDamageType(DMG_SHOCK)
+	dmg:SetInflictor(self)
 	timer.Create("electra_activated_once_type2"..self:EntIndex(), 0.01, 1, function()
 		self:EmitSound("electra_blast")
 		ParticleEffect( "electra_activated", self:GetPos(), Angle( 0, 0, 0 ) )
 		--util.BlastDamage( self, self, self:GetPos(), 200, 110)
-		ent:TakeDamage(70, self, self)
+		ent:TakeDamageInfo(dmg)
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			local bodyexplodesounds = {"anomaly/anomaly_body_tear_1.wav", "anomaly/anomaly_body_tear_2.wav"}
 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
@@ -71,7 +76,7 @@ function ENT:StartTouch(ent)
 		self:StopSound("electra_idle")
 		ParticleEffect( "electra_activated", self:GetPos(), Angle( 0, 0, 0 ) )
 		--util.BlastDamage( self, self, self:GetPos(), 200, 110)
-		ent:TakeDamage(70, self, self)
+		ent:TakeDamageInfo(dmg)
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			ent:Remove()
 		end

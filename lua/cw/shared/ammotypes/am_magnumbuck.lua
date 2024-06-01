@@ -3,7 +3,7 @@ att.name = "am_magnumbuck"
 att.displayName = "Magnum Buck rounds"
 att.displayNameShort = "Magnum"
 
-att.statModifiers = {DamageMult = 0.75, RecoilMult = 0.5,}
+att.statModifiers = {DamageMult = 0.3, RecoilMult = 0.5,}
 
 if CLIENT then
 	att.displayIcon = surface.GetTextureID("atts/slugrounds")
