@@ -153,8 +153,8 @@ SWEP.WorldModel		= "models/srp/weapons/w_abakan.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearEffect = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.DefaultClip	= 0

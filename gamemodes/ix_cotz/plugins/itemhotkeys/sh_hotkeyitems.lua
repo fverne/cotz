@@ -75,4 +75,16 @@ PLUGIN.hotkeyitems = {
     ["hidestasher_cleaningkit"] = "unhidestash",
     ["hidestasher_cutlery"] = "unhidestash",
     ["hidestasher_shovel"] = "unhidestash",
+
+    --artifacts (yes, please)
+    ["artifact_galaxy"] = "use",
+    ["artifact_sparkler"] = "use",
+    ["artifact_flash"] = "use",
+    ["artifact_moonlight"] = "use",
+    ["artifact_urchin"] = "use",
+    ["artifact_kolobok"] = "use",
+    ["artifact_mementomori"] = "use",
+    ["artifact_mamasbeads"] = "use",
+    ["artifact_gmamasbeads"] = "use",
+    ["artifact_mycelia"] = "use",
 }

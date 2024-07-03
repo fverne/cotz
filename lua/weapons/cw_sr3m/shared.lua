@@ -194,8 +194,8 @@ SWEP.Recoil = 1.4
 
 SWEP.SuppressedOnEquip = false
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearEffect = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.11
 SWEP.AimSpread = 0.005

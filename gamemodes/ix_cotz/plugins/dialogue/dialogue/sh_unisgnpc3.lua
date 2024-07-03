@@ -483,6 +483,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 		local blacklistedVariants = {
 			["ecologist"] = true,
 			["scavenger"] = true,
+			["fanatic"] = true,
 		}
 
 		local suitVariants = {}
