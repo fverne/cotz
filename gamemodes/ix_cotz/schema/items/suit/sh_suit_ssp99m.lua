@@ -31,10 +31,10 @@ ITEM.radProt = 1
 ITEM.carryinc = 30
 ITEM.miscslots = 4
 
-ITEM.skincustom[1] = {
-	name = "Skin 0",
-	skingroup = 0,
-}
+--ITEM.skincustom[1] = {
+--	name = "Skin 0",
+--	skingroup = 0,
+--}
 ITEM.skincustom[2] = {
 	name = "Skin 1",
 	skingroup = 1,
