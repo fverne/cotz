@@ -195,18 +195,20 @@ if (CLIENT) then
 		local SECONDARYSLOT = 2
 		local PRIMARYSLOT = 3
 		local MISCSLOT = 4
-
-		local extraslot = 5
+		local HANDSSLOT = 5
+		local extraslot = 6
 
 		for i = 1, #weapontable do
 			if (weapontable[i].Slot == PRIMARYSLOT) then
 				weapons[1] = weapontable[i]
 			elseif (weapontable[i].Slot == SECONDARYSLOT) then
 				weapons[2] = weapontable[i]
-			elseif (weapontable[i].Slot == KNIFESLOT or weapontable[i]:GetClass() == "ix_hands") then
+			elseif (weapontable[i].Slot == KNIFESLOT) then
 				weapons[3] = weapontable[i]
 			elseif (weapontable[i].Slot == MISCSLOT) then
 				weapons[4] = weapontable[i]
+			elseif (weapontable[i]:GetClass() == "ix_hands") then
+				weapons[5] = weapontable[i]
 			else
 				weapons[extraslot] = weapontable[i]
 				extraslot = extraslot + 1
