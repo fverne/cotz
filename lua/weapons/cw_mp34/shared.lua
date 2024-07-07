@@ -141,7 +141,7 @@ SWEP.FireSoundSuppressed = "DOIMP40_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.4
 SWEP.FOVPerShot = 0.05 -- = .6
 
-SWEP.WearEffect = 0.08
+SWEP.WearDamage = 0.08
 SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.065

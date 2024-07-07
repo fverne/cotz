@@ -208,7 +208,7 @@ end
 	SWEP.FireDelay = 0.066666666666667
 	SWEP.Recoil = 1.05
 
-	SWEP.WearEffect = 0.08
+	SWEP.WearDamage = 0.08
 	SWEP.WearEffect = 0.007
 
 	SWEP.HipSpread = 0.045
