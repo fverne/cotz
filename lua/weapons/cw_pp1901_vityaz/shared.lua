@@ -129,7 +129,7 @@ SWEP.FireSound = "Weapon_PP19V"
 SWEP.FireSoundSuppressed = "CW_PP19V_SUPPRESSED"
 SWEP.Recoil = 1.25
 
-SWEP.WearEffect = 0.08
+SWEP.WearDamage = 0.08
 SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.065

@@ -153,7 +153,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearEffect = 0.08
+SWEP.WearDamage = 0.08
 SWEP.WearEffect = 0.007
 
 SWEP.ViewModelFOV	= 70

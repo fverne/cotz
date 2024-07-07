@@ -132,7 +132,7 @@ SWEP.FireSound = "CW_PKM_FIRE"
 SWEP.FireSoundSuppressed = "CW_PKM_SUPPRESSED"
 SWEP.Recoil = 1.6
 
-SWEP.WearEffect = 0.08
+SWEP.WearDamage = 0.08
 SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.14
