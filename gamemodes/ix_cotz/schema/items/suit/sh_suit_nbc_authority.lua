@@ -10,6 +10,7 @@ ITEM.img = ix.util.GetMaterial("vgui/hud/nbc.png")
 ITEM.overlayPath = "vgui/overlays/hud_gas"
 ITEM.weight = 8.100
 ITEM.baseSuit = "suit_nbc"
+ITEM.suitVariant = "authority"
 
 ITEM.price = 89000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
@@ -27,7 +28,7 @@ ITEM.pr = 0.10
 ITEM.fpr = 0
 ITEM.radProt = 0.4
 
-ITEM.carryinc = 13.000
+ITEM.carryinc = 8.000
 ITEM.miscslots = 3
 
 ITEM.skincustom[1] = {

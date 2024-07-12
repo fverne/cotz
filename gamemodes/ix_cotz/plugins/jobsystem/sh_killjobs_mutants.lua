@@ -1298,11 +1298,11 @@ tempJob.icon = "entities/vj_mutant_zanoza.png"
 tempJob.tier = 1
 tempJob.listenTrigger = "sprigKilled"
 tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
+tempJob.reward = {{"kit_reward_ammo_tier02"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 15
 tempJob.moneyReward = {1000, 1800}
-tempJob.categories = {"mutantkilleasy"}
+tempJob.categories = {"mutantkillmedium"}
 
 ix.jobs.register(tempJob, "killSprigsLow")
 

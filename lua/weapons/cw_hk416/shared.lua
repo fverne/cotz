@@ -170,7 +170,7 @@ end
 	SWEP.FireSound = "CW_KK_HK416_FIRE"
 	SWEP.FireSoundSuppressed = "CW_KK_HK416_FIRE_SUPPRESSED"
 
-	SWEP.SpeedDec = 30
+	SWEP.SpeedDec = 20
 
 	SWEP.Slot = 3
 	SWEP.SlotPos = 0
@@ -208,8 +208,8 @@ end
 	SWEP.FireDelay = 0.066666666666667
 	SWEP.Recoil = 1.05
 
-	SWEP.WearDamage = 0.11
-	SWEP.WearEffect = 0.015
+	SWEP.WearDamage = 0.08
+	SWEP.WearEffect = 0.007
 
 	SWEP.HipSpread = 0.045
 	SWEP.AimSpread = 0.004

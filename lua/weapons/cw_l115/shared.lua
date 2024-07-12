@@ -82,7 +82,7 @@ SWEP.Sounds = {shot = {{time = 0.5, sound = "CW_L96_BOLTUP"},
 	{time = 3.3, sound = "CW_FOLEY_LIGHT"}}
 }
 
-SWEP.SpeedDec = 50
+SWEP.SpeedDec = 35
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -114,6 +114,7 @@ SWEP.Primary.Ammo			= ".338 Lapua"
 SWEP.FireDelay = 1.5
 SWEP.FireSound = "CW_L96_FIRE"
 SWEP.Recoil = 4.8
+SWEP.GlobalDelayOnShoot = 1.4
 
 SWEP.WearDamage = 0.33
 SWEP.WearEffect = 0.005

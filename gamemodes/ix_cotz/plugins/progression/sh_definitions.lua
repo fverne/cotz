@@ -155,7 +155,7 @@ ix.progression.Register("oldTimerKillIntro", {
 	description = "Cleaning up the zone",
 	keyNpc = "'Old Timer'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		-- Find next treshold
 		local tresh = 0
 
@@ -276,9 +276,10 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 	description = "Collecting lots of meat for the Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldTimerItemDelivery_mainMeat"] = ix.progression.status["oldTimerItemDelivery_mainMeat"] or {}
 		local dat = ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "So, we're in need of a lot of food if we want to stay alive out here, especially with this many people around. So, here's what we need to feed everyone for a while:\n"
@@ -389,9 +390,10 @@ ix.progression.Register("technutItemDelivery_Main", {
 	description = "Collecting important components for Technut.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Main"] = ix.progression.status["technutItemDelivery_Main"] or {}
 		local dat = ix.progression.status["technutItemDelivery_Main"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "I'm currently working on setting up rudimentary radiocommunications, because I just lost contact with my last runner that I sent off a couple of days ago, and it is simply not sustainable to send people to their deaths over and over again just to deliver a message that could have been transmitted easily through the airwaves. Anyways, here's a list of what I need:\n"
@@ -491,9 +493,10 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 	description = "Collecting statues for Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldTimerItemDelivery_mainStatue"] = ix.progression.status["oldTimerItemDelivery_mainStatue"] or {}
 		local dat = ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "Great work on Technut's little project, but it got me thinking. No offense to Technut, but he's more of a mechanical guy, his radio system is never going to reach very far. I got an old friend that is extremly knowledgeable in these things, but he's a bit of an oddball. He has a fascination with statuettes of animals made by a certain factory nearby. So, I'm going to need you to collect some of these statues:\n"
@@ -591,7 +594,7 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 -- 	description = "Scanning the Zone",
 -- 	keyNpc = "'Mute'",
 -- 	defaultActive = true,
--- 	BuildResponse = function(self, status)
+-- 	BuildResponse = function(self, npcname, status)
 -- 		-- Find next treshold
 -- 		local tresh = 0
 
@@ -632,9 +635,10 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	description = "Helping to build a true radiocommunications center.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"] = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"] or {}
 		local dat = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "** The man looks around erratically, points at a schematic of what looks to be a large radio antenna, and then points to a piece of paper with a list: **\n"
@@ -720,7 +724,7 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 	description = "Bring the flash drive to Quartermaster.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		return "I chatted with a guy, what was his name, Mute? He should have a flash drive with information for me. I ain't budging 'till I get that."
 	end,
 	GetItemIds = function()
@@ -791,9 +795,10 @@ ix.progression.Register("quarterMasterDelivery_main", {
 	description = "Bring Quartermaster something to drink.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quarterMasterDelivery_main"] = ix.progression.status["quarterMasterDelivery_main"] or {}
 		local dat = ix.progression.status["quarterMasterDelivery_main"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "Alright boys, lets see some hands, who likes booze? That's right, I do. I'm gonna need you to find some stuff to drink, and smoke. I made a little list for you so you wont forget:\n"
@@ -877,7 +882,7 @@ ix.progression.Register("boss_dataTasks", {
 	description = "Extract data from various computers",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		-- Find next treshold
 		local tresh = 0
 
@@ -930,7 +935,7 @@ ix.progression.Register("smartass_rfTasks", {
 	description = "Scanning the Zone",
 	keyNpc = "'Smartass'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		-- Find next treshold
 		local tresh = 0
 
@@ -988,9 +993,10 @@ ix.progression.Register("beanstalkItemDelivery_Documents", {
 	description = "Beanstalk wants documents.",
 	keyNpc = "'Beanstalk'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["beanstalkItemDelivery_Documents"] = ix.progression.status["beanstalkItemDelivery_Documents"] or {}
 		local dat = ix.progression.status["beanstalkItemDelivery_Documents"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "Greetings. I won't ask how you got down here, who you are. You come from the outside, and we don't have the resources to leave the safety of the bunker. I need you to gather the following of various documents to aid our research:\n"
@@ -1067,9 +1073,10 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 	description = "Egghead wants artifacts.",
 	keyNpc = "'Egghead'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_artifacts"] = ix.progression.status["eggheadItemDelivery_artifacts"] or {}
 		local dat = ix.progression.status["eggheadItemDelivery_artifacts"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "Hello. I have discovered some strange phenomena deep within the depths of the zone. If my calculations are correct, I need to melt certain artifacts together to achieve our goal. Find me the following artifacts:\n"
@@ -1148,7 +1155,7 @@ ix.progression.Register("intern_gasAnalyzerReadings", {
 	description = "Scanning Pripyat",
 	keyNpc = "'Intern'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		-- Find next treshold
 		local tresh = 0
 
@@ -1209,7 +1216,7 @@ ix.progression.Register("computerDelivery_activateItem", {
 	description = "Bring the secured container to the computer.",
 	keyNpc = "'Computer'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		return "** 'ACCESS DENIED' is written in bold letters on the screen **"
 	end,
 	GetItemIds = function()
@@ -1264,9 +1271,10 @@ ix.progression.Register("computerDelivery_main", {
 	description = "Set up the supercomputer with components.",
 	keyNpc = "'Computer'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["computerDelivery_main"] = ix.progression.status["computerDelivery_main"] or {}
 		local dat = ix.progression.status["computerDelivery_main"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "** The computer prints a list of items on the screen, and blinks some indicator lights in the area where it would like these components placed **\n"
@@ -1337,7 +1345,7 @@ ix.progression.Register("computer_artifactTasks", {
 	description = "Analyzing Artifacts",
 	keyNpc = "'Computer'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		-- Find next treshold
 		local tresh = 0
 

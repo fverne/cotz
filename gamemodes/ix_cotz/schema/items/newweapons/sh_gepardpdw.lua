@@ -1,6 +1,6 @@
 ITEM.name = "Gepard PDW"
 ITEM.description= "PLACEHOLDER. Fires 9x21mm."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: 9x21mm\nMagazine Capacity: 25"
+ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: 9x21mm\nMagazine Capacity: 22"
 ITEM.model = ("models/weapons/tfa_l4d2/w_gepard.mdl")
 ITEM.class = "cw_gepardpdw"
 ITEM.weaponCategory = "primary"
@@ -35,8 +35,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0, 0, 0),
-						["Position"] = Vector(-19.377, -2.721, 2.522),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(4.8, -4, -4),
 						["Model"] = "models/weapons/tfa_l4d2/w_gepard.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

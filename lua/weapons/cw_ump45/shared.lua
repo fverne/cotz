@@ -126,8 +126,8 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
@@ -150,7 +150,7 @@ SWEP.Primary.Ammo			= ".45 ACP"
 SWEP.FireDelay = 0.1
 SWEP.FireSound = "CW_UMP45_FIRE"
 SWEP.FireSoundSuppressed = "CW_UMP45_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.8
+SWEP.Recoil = 1.3
 
 SWEP.HipSpread = 0.085
 SWEP.AimSpread = 0.015

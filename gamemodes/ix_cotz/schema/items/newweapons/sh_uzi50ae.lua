@@ -1,6 +1,6 @@
 ITEM.name = "IMI Uzi Custom"
 ITEM.description= "A submachinegun with a folded stock. Fires .50 AE."
-ITEM.longdesc = "The Uzi is a name that many know of, remaining one of the most known guns after the AK47 with ten million built.\nThe weapon still remains somewhat rare in the Zone compared to weapons like the MP5 and Mac-11.\nIt was designed in the late 1940's by the Israeli Major Uziel Gal and has been in service since the 1950s.\nIt fires 600 rounds a minute and is useful up to two hundred meters against area targets.\nThis specially zone-modified has been rigged to fire .50 Action Express, purpose-made for taking out the toughest beasts in the zone.\nAmmo: .50 AE\nMagazine Capacity: 20"
+ITEM.longdesc = "The Uzi is a name that many know of, remaining one of the most known guns after the AK47 with ten million built.\nThe weapon still remains somewhat rare in the Zone compared to weapons like the MP5 and Mac-11.\nIt was designed in the late 1940's by the Israeli Major Uziel Gal and has been in service since the 1950s.\nIt fires 600 rounds a minute and is useful up to two hundred meters against area targets.\nThis specially zone-modified has been rigged to fire .50 Action Express, purpose-made for taking out the toughest beasts in the zone.\nAmmo: .50 AE\nMagazine Capacity: 18"
 ITEM.model = ("models/weapons/w_uzi.mdl")
 ITEM.class = "cw_uzi50ae"
 ITEM.weaponCategory = "primary"
@@ -34,8 +34,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0, 0, 0),
-						["Position"] = Vector(-19.377, -2.721, 2.522),
+						["Angles"] = Angle(0, 0, 180),
+						["Position"] = Vector(-7.7, -4.5, -3.3),
 						["Model"] = "models/weapons/w_uzi.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

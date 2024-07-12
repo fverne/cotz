@@ -21,7 +21,7 @@ function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, c
 		player:ScreenFade( SCREENFADE.IN, Color( 0, 0, 0 ), 1, actiondur-2 ) --fade in in the last second
 	end)
 
-	timer.Simple(actiondur, function()
+	timer.Create("ixBlackScreenActionFunction" .. player:SteamID(), actiondur, 1, function()
 		player:Freeze(false)
 		player:SetNetVar("ix_noMenuAllowed", false)
 
@@ -49,7 +49,9 @@ function ix.util.PlayerActionInterrupt(player)
             timer.Remove("ixBlackScreenAction" .. player:SteamID())
             player:ScreenFade(SCREENFADE.PURGE, Color(0, 0, 0), 0.1, 0)
         end
-
+        if timer.Exists("ixBlackScreenActionFunction" .. player:SteamID()) then
+        	timer.Remove("ixBlackScreenActionFunction" .. player:SteamID())
+        end
         player:ScreenFade(SCREENFADE.PURGE, Color(0, 0, 0), 0.1, 0)
         player:ScreenFade(SCREENFADE.IN, Color(0, 0, 0), 0.2, 0)
         player:SetNetVar("IsPoaching", false) -- in case we poach

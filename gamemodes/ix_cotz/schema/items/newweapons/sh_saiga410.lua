@@ -1,6 +1,6 @@
 ITEM.name = "Saiga-410"
 ITEM.description= "A semi-automatic shotgun. Fires .410 gauge."
-ITEM.longdesc = "The Saiga-410 is a shotgun firing .410 gauge available in a wide range of configurations, patterned after the Kalashnikov series of assault rifles and named for the Saiga antelope.\nLike the Kalashnikov rifle variants, it is a rotating bolt, gas-operated gun that feeds from a box magazine. The much slimmer profile of the .410 shell means that a greater amount of shots can be fit in the same size magazine.\n\nAmmo: .410 Gauge \nMagazine Capacity: 9"
+ITEM.longdesc = "The Saiga-410 is a shotgun firing .410 gauge available in a wide range of configurations, patterned after the Kalashnikov series of assault rifles and named for the Saiga antelope.\nLike the Kalashnikov rifle variants, it is a rotating bolt, gas-operated gun that feeds from a box magazine. The much slimmer profile of the .410 shell means that a greater amount of shots can be fit in the same size magazine.\n\nAmmo: .410 Gauge \nMagazine Capacity: 8"
 ITEM.model = "models/cw2/weapons/w_saiga_chan.mdl"
 ITEM.class = "cw_saiga410"
 ITEM.weaponCategory = "primary"

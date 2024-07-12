@@ -148,8 +148,8 @@ SWEP.WorldModel		= "models/weapons/w_smg_aks.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.DefaultClip	= 0

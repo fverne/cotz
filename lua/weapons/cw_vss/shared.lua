@@ -157,7 +157,7 @@ SWEP.Sounds = {ak47_draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"},
 	{time = 4, sound = "CW_FOLEY_LIGHT"}},
 }
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 20
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -168,8 +168,8 @@ SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.Author			= "Spy"
 SWEP.Contact		= ""

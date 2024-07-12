@@ -92,7 +92,7 @@ SWEP.Sounds = {shoot1 = {[1] = {time = 0.0, sound = "TOZ194.PUMPB"},
 	[3] = {time = 0.95, sound = "TOZ194.PUMPF"}}}
 	
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 15
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

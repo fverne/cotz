@@ -85,6 +85,8 @@ SWEP.LuaViewmodelRecoil = false
 SWEP.ADSFireAnim = false
 SWEP.BipodFireAnim = true
 
+SWEP.Chamberable = false
+
 SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {800, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
 SWEP.Animations = {fire = {"shoot_1", "shoot_2"},
@@ -100,7 +102,7 @@ SWEP.Sounds = {	draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 	[4] = {time = 2.53, sound = "CW_DP28_MAGTAP"},
 	[5] = {time = 3.45, sound = "CW_DP28_BOLT"}}}
 
-SWEP.SpeedDec = 50
+SWEP.SpeedDec = 40
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -129,13 +131,13 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "7.62x54MMR"
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 0.09166666666
 SWEP.FireSound = "CW_DP28_FIRE"
 SWEP.FireSoundSuppressed = "CW_PKM_SUPPRESSED"
-SWEP.Recoil = 0
+SWEP.Recoil = 1.1
 SWEP.HipSpread = 0.15
 SWEP.AimSpread = 0.005
 SWEP.VelocitySensitivity = 3

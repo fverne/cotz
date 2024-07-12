@@ -4,7 +4,8 @@ att.displayName = "7.62x25 Suppressor"
 att.displayNameShort = "x25 Supp"
 att.isSuppressor = true
 
-att.statModifiers = {DamageMult = -0.2}
+att.statModifiers = {RecoilMult = -0.15,
+DamageMult = -0.08}
 
 if CLIENT then
 	att.displayIcon = surface.GetTextureID("atts/saker")

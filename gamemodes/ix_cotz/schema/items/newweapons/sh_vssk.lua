@@ -1,6 +1,6 @@
 ITEM.name = "VSSK 'Vykhlop'"
 ITEM.description= "A special forces silent sniper rifle. Fires 12.7x55mm."
-ITEM.longdesc = "The VSSK is a Russian bullpup, straight-pull bolt-action, magazine-fed sniper rifle chambered for the 12.7x55mm STs-130 subsonic round. It is also known as the VKS. The 12.7×55mm VKS silenced sniper rifle is intended for special operations that require silent firing and penetration much superior to that provided by 9×39mm VSS silenced sniper rifle. Typical targets for the VKS are combatants in heavy body armor or behind cover. The weapon uses an integral suppressor.\n\nAmmo: 12.7x55mm\nMagazine Capacity: 5"
+ITEM.longdesc = "The VSSK is a Russian bullpup, straight-pull bolt-action, magazine-fed sniper rifle chambered for the 12.7x55mm STs-130 subsonic round. It is also known as the VKS. The 12.7×55mm VKS silenced sniper rifle is intended for special operations that require silent firing and penetration much superior to that provided by 9×39mm VSS silenced sniper rifle. Typical targets for the VKS are combatants in heavy body armor or behind cover. The weapon uses an integral suppressor.\n\nAmmo: 12.7x55mm\nMagazine Capacity: 5+1"
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_vssk_w.mdl"
 ITEM.class = "cw_vssk"
 ITEM.weaponCategory = "primary"
@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(16.218, -4.315, -2.859),
+						["Position"] = Vector(6.6, -4.3, 1.35),
 						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_vssk_w.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

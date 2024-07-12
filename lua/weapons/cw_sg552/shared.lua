@@ -111,7 +111,7 @@ SWEP.Sounds = {
 	}
 }
 	
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 20
 
 SWEP.ADSFireAnim = false
 SWEP.BipodFireAnim = true
@@ -156,8 +156,8 @@ SWEP.FireSound = "CW_SG552_FIRE"
 SWEP.FireSoundSuppressed = "CW_SG552_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.7
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005

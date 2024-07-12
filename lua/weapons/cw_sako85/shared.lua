@@ -115,7 +115,7 @@ SWEP.Sounds = {
 	[2] = {time = 1, sound = "CW_SAKO85_BOLTFORWORD"}}}
 	
 
-SWEP.SpeedDec = 15
+SWEP.SpeedDec = 25
 
 SWEP.ADSFireAnim = true
 SWEP.BipodFireAnim = true

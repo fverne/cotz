@@ -1,6 +1,6 @@
 ITEM.name = "HK416"
 ITEM.description= "A German combat rifle chambered for 5.56x45mm."
-ITEM.longdesc = "The Heckler & Koch HK416 is a rifle based on the AR-15 class of firearm, specifically the Colt M4 carbine family issued to the U.S. military, however it uses a proprietary short-stroke gas piston system derived from the ArmaLite AR-18 (the same system was also used in Heckler & Koch's earlier G36 family of rifles). It is used by militaries around the world, including the Norwegian and the French. A modified variant is also in use by the United States Marine Corps, under the moniker 'M27 Infantry Automatic Rifle'.\n\nAmmo: 5.56x45mm\nMagazine Capacity: 30"
+ITEM.longdesc = "The Heckler & Koch HK416 is a rifle based on the AR-15 class of firearm, specifically the Colt M4 carbine family issued to the U.S. military, however it uses a proprietary short-stroke gas piston system derived from the ArmaLite AR-18 (the same system was also used in Heckler & Koch's earlier G36 family of rifles). It is used by militaries around the world, including the Norwegian and the French. A modified variant is also in use by the United States Marine Corps, under the moniker 'M27 Infantry Automatic Rifle'.\n\nAmmo: 5.56x45mm\nMagazine Capacity: 30+1"
 ITEM.model = ("models/weapons/w_cwkk_hk416.mdl")
 ITEM.class = "cw_hk416"
 ITEM.weaponCategory = "primary"
@@ -34,8 +34,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(72.219, -177.46875, -98.487),
-						["Position"] = Vector(-6.713, -3.194, 12.803),
+						["Angles"] = Angle(84, 165, -115),
+						["Position"] = Vector(-7, -3.2, 9.8),
 						["Model"] = "models/weapons/w_cwkk_hk416.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

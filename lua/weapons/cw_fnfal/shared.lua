@@ -109,7 +109,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	[5] = {time = 2.1, sound = "CW_FOLEY_MEDIUM"},
 	[6] = {time = 2.2, sound = "CW_G3A3_BOLTFORWARD"}}}
 
-SWEP.SpeedDec = 50
+SWEP.SpeedDec = 30
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -143,8 +143,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "7.62x51MM"
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 0.0923076923
 SWEP.FireSound = "CW_G3A3_FIRE"

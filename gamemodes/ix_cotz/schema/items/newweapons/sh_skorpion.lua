@@ -1,6 +1,6 @@
 ﻿ITEM.name = "Skorpion"
 ITEM.description= "A compact machine pistol. Fires 9x18mm."
-ITEM.longdesc = "The Škorpion vz. 61 is a Czechoslovak machine pistol developed in 1959.\nAlthough it was developed for use with security forces and special forces, the weapon was also accepted into service with the Czechoslovak Army, as a personal sidearm for lower-ranking army staff, vehicle drivers, armoured vehicle personnel and special forces.\nCurrently the weapon is in use with the armed forces of several countries as a sidearm.\n\nAmmo: 9x18mm \nMagazine Capacity: 10"
+ITEM.longdesc = "The Škorpion vz. 61 is a Czechoslovak machine pistol developed in 1959.\nAlthough it was developed for use with security forces and special forces, the weapon was also accepted into service with the Czechoslovak Army, as a personal sidearm for lower-ranking army staff, vehicle drivers, armoured vehicle personnel and special forces.\nCurrently the weapon is in use with the armed forces of several countries as a sidearm.\n\nAmmo: 9x18mm \nMagazine Capacity: 15+1"
 ITEM.model = ("models/weapons/w_smg_skorp.mdl")
 ITEM.class = "cw_skorpion"
 ITEM.weaponCategory = "primary"
@@ -34,8 +34,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(0, 180, 0),
-						["Position"] = Vector(-11.007, -2.714, 3.862),
+						["Angles"] = Angle(0, 180, 180),
+						["Position"] = Vector(-3.5, -5.3, -7),
 						["Model"] = "models/weapons/w_smg_skorp.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

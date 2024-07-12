@@ -158,7 +158,7 @@ SWEP.Sounds = {ak47_draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"},
 	{time = 4, sound = "CW_FOLEY_LIGHT"}},
 }
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 20
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -194,8 +194,8 @@ SWEP.Recoil = 1.4
 
 SWEP.SuppressedOnEquip = false
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.11
 SWEP.AimSpread = 0.005

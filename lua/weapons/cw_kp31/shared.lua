@@ -156,8 +156,8 @@ SWEP.ReloadHalt = 2.3
 SWEP.ReloadTime_Empty = 3.1
 SWEP.ReloadHalt_Empty = 3.8
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 function SWEP:IndividualThink()
 

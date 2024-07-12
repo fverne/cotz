@@ -134,7 +134,7 @@ SWEP.Sounds = {
 	[6] = {time = 2.6, sound = "CW_WS_M16A4_BOLTBACK2"},}
 	}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 20
 
 SWEP.ADSFireAnim = false
 SWEP.BipodFireAnim = true
@@ -153,8 +153,8 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.ViewModelFOV	= 70
 SWEP.AimViewModelFOV = 60

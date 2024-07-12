@@ -132,7 +132,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"},
 	{time = 2.5, sound = "CW_G36C_BOLTFORWARD"},
 	{time = 2, sound = "CW_FOLEY_MEDIUM"}}}
 
-SWEP.SpeedDec = 25
+SWEP.SpeedDec = 20
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -161,8 +161,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.56x45MM"
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 0.08
 SWEP.FireSound = "CW_G36C_FIRE"

@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(10.833, -4.312, -3.803),
+						["Position"] = Vector(5.4, -4.312, -6),
 						["Model"] = "models/khrcw2/doipack/w_thompson1928.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

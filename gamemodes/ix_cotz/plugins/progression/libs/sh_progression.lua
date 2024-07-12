@@ -1,5 +1,6 @@
 ix.progression = ix.progression or {}
 ix.progression.status = ix.progression.status or {}
+ix.progression.foreignstatus = ix.progression.foreignstatus or {}
 
 
 function ix.progression.SetProgressionValue(progid, amount, playername)
@@ -37,7 +38,15 @@ function ix.progression.IsActive(progid)
 			end
 		end
 
-		return ix.progression.status[progid].active
+		local foreignactive = false
+
+		for _,foreign in pairs(ix.progression.foreignstatus) do
+			if foreign[progid] and foreign[progid].active then
+				foreignactive = foreignactive or foreign[progid].active
+			end
+		end
+
+		return ix.progression.status[progid].active or foreignactive
 	else
 		return false
 	end
@@ -58,7 +67,15 @@ function ix.progression.IsCompleted(progid)
 	if (ix.progression.definitions[progid]) then
 		ix.progression.status[progid] = ix.progression.status[progid] or {}
 
-		return ix.progression.status[progid].completed
+		local foreigncompleted = false
+
+		for _,foreign in pairs(ix.progression.foreignstatus) do
+			if foreign[progid] and foreign[progid].completed then
+				foreigncompleted = foreigncompleted or foreign[progid].completed
+			end
+		end
+
+		return ix.progression.status[progid].completed or foreigncompleted
 	else
 		return false
 	end
@@ -68,7 +85,16 @@ function ix.progression.GetProgressionValue(progid)
 	if (ix.progression.definitions[progid]) then
 		ix.progression.status[progid] = ix.progression.status[progid] or {}
 		ix.progression.status[progid].value = ix.progression.status[progid].value or 0
-		return ix.progression.status[progid].value
+
+		local foreignvalue
+
+		for _,foreign in pairs(ix.progression.foreignstatus) do
+			if foreign[progid] and foreign[progid].value or 0 then
+				foreignvalue = foreignvalue or foreign[progid].value or 0
+			end
+		end
+		
+		return ix.progression.status[progid].value or foreignvalue
 	end
 end
 
@@ -98,6 +124,12 @@ end
 
 function ix.progression.GetComplexProgressionValue(progid)
 	if (ix.progression.definitions[progid]) and ix.progression.definitions[progid].fnGetComplexProgression then
+		for _,foreign in pairs(ix.progression.foreignstatus) do
+			if foreign and foreign[progid] and foreign[progid].complexData then
+				return foreign[progid].complexData
+			end
+		end
+
 		return ix.progression.definitions[progid].fnGetComplexProgression()
 	end
 end
@@ -180,13 +212,24 @@ if CLIENT then
 		ix.progression.status = tbl
 	end)
 
+	net.Receive("progressionforeign_sync_receive", function(len)
+		local tbl = net.ReadTable()
+
+		ix.progression.foreignstatus = tbl
+	end)
+
 else
 	util.AddNetworkString( "progression_sync" )
 	util.AddNetworkString( "progression_sync_receive" )
+	util.AddNetworkString( "progressionforeign_sync_receive" )
 
 	net.Receive("progression_sync", function(len, pl)
 		net.Start("progression_sync_receive")
 			net.WriteTable(ix.progression.status)
+		net.Broadcast()
+		
+		net.Start("progressionforeign_sync_receive")
+			net.WriteTable(ix.progression.foreignstatus)
 		net.Broadcast()
 	end)
 end

@@ -116,7 +116,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	{time = 2.3, sound = "CW_FOLEY_LIGHT"}}
 }
 
-SWEP.SpeedDec = 5
+SWEP.SpeedDec = 0
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -147,8 +147,8 @@ SWEP.Primary.Ammo			= "9x19MM"
 
 SWEP.Chamberable = false -- MAC-11 is an open-bolt weapon
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 0.05
 SWEP.FireSound = "CW_MAC11_FIRE"

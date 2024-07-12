@@ -1,4 +1,4 @@
-ITEM.name = "Sunrise STALKER Suit"
+ITEM.name = "Zenith STALKER Suit"
 ITEM.model = "models/kek1ch/stalker_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_sunrise.mdl"
 ITEM.description= "A STALKER suit."
@@ -10,6 +10,7 @@ ITEM.img = ix.util.GetMaterial("vgui/hud/sunrise.png")
 ITEM.weight = 6.400
 ITEM.newSkin = 15
 ITEM.baseSuit = "suit_sunrise"
+ITEM.suitVariant = "anarchist"
 
 ITEM.price = 37290
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability

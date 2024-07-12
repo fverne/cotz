@@ -1,6 +1,6 @@
 ITEM.name = "M16A4"
 ITEM.description= "An American combat rifle chambered for 5.56x45mm."
-ITEM.longdesc = "As a weapon solely issued to the US Marines, the M16A4's origins and quantities in the Zone are unclear.\nThe first model was designed in the 60's and has been constantly modified and upgraded since.\nThis rifle is a very versatile choice, it remains accurate at distances up to 550 meters against small targets and weighs just over 4 kilograms loaded.\n\nAmmo: 5.56x45mm\nMagazine Capacity: 30"
+ITEM.longdesc = "As a weapon solely issued to the US Marines, the M16A4's origins and quantities in the Zone are unclear.\nThe first model was designed in the 60's and has been constantly modified and upgraded since.\nThis rifle is a very versatile choice, it remains accurate at distances up to 550 meters against small targets and weighs just over 4 kilograms loaded.\n\nAmmo: 5.56x45mm\nMagazine Capacity: 30+1"
 ITEM.model = ("models/weapons/m16a4/w_rif_m16a4.mdl")
 ITEM.class = "cw_ws_m16a4"
 ITEM.weaponCategory = "primary"

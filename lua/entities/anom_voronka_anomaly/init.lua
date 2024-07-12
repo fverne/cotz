@@ -29,7 +29,8 @@ function ENT:Initialize()
 	self:SetNWBool("StopParticle", false)
 	self:SetRenderMode( RENDERMODE_TRANSTEXTURE ) 
 	self:SetColor(Color(0,0,0,0))
-
+	self.Power = Vector(4,4,4)
+	
     local phys = self:GetPhysicsObject()
 	if (phys:IsValid()) then
 		phys:Sleep()
@@ -40,7 +41,7 @@ end
 function ENT:Think()
 		for k,v in pairs(ents.FindInSphere(self:GetPos(),100)) do
 			if v:IsPlayer() then
-				v:SetVelocity( (self:GetPos() - v:GetPos()) * 4 )
+				v:SetVelocity( (self:GetPos() - v:GetPos()) * self.Power)
 			else
 				local phys = v:GetPhysicsObject()
 				if IsValid(phys) then
@@ -62,6 +63,7 @@ function ENT:StartTouch(ent)
 	timer.Create("voronka_recharge"..self:EntIndex(), 4, 1, function()
 		self:SetNWBool("StopParticle", false)
 		self.Active = true
+		self.Power = Vector(4,4,4)
 	end)
 	timer.Create("voronka_activated"..self:EntIndex(), 2.0, 1, function()
 		ParticleEffect( "voronka_blast", self:GetPos(), Angle( 0, 0, 0 ) )
@@ -71,6 +73,7 @@ function ENT:StartTouch(ent)
 		end
 		--ent:TakeDamage(1100, self, self)
 		self.Active = false
+		self.Power = Vector(3.5,3.5,1)
 	end)
 	self.Active = false
 end

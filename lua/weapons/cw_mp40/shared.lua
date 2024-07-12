@@ -102,7 +102,7 @@ SWEP.Animations = {fire = {"base_fire"},
 	draw = "base_draw"}
 	
 
-SWEP.SpeedDec = 5
+SWEP.SpeedDec = 10
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -145,8 +145,8 @@ SWEP.Chamberable			= false
 
 SWEP.Primary.Ammo			= "9x19MM"
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 60/535
 SWEP.FireSound = "DOIMP40_FIRE"

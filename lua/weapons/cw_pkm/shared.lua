@@ -98,7 +98,7 @@ SWEP.Sounds = {	draw = {{time = 0, sound = ""}},
 	[12] = {time = 5.8, sound = "CW_PKM_BOLT"},
 	[13] = {time = 6.0, sound = "CW_FOLEY_MEDIUM"}}}
 
-SWEP.SpeedDec = 50
+SWEP.SpeedDec = 40
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -132,8 +132,8 @@ SWEP.FireSound = "CW_PKM_FIRE"
 SWEP.FireSoundSuppressed = "CW_PKM_SUPPRESSED"
 SWEP.Recoil = 1.6
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.14
 SWEP.AimSpread = 0.005

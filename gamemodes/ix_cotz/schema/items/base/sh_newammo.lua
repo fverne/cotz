@@ -9,7 +9,7 @@ ITEM.height = 1
 ITEM.price = 0
 
 ITEM.ammo = "pistol" -- type of the ammo
-ITEM.ammoAmount = 30 -- amount of the ammo
+ITEM.ammoAmount = 300 -- amount of the ammo
 ITEM.isAmmo = true
 ITEM.loadSize = {1,5,15, ITEM.ammoAmount}
 ITEM.maxStack = 300

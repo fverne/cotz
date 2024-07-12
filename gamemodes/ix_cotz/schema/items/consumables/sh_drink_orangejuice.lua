@@ -24,5 +24,3 @@ ITEM:Hook("use", function(item)
 end)
 
 ITEM:DecideFunction()
-
-ITEM.weight = 1.1

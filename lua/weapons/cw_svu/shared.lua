@@ -174,8 +174,8 @@ SWEP.Shots = 1
 SWEP.Damage = 200
 SWEP.DeployTime = 1.3
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 -- SWEP.RecoilToSpread = .75
 

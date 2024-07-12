@@ -255,7 +255,7 @@ ITEM.functions.Equip = {
 ITEM.functions.Unload = {
 	icon = "icon16/stalker/unload2.png",
 	OnRun = function(item)
-		return item:Unload()
+		return item:Unload(item.player)
 	end,
 	OnCanRun = function(item)
 		return (!IsValid(item.entity) && ((item:GetData("equip",false) && IsValid(item:GetOwner():GetWeapon(item.class)) && item:GetOwner():GetWeapon(item.class):Clip1() > 0) || (!item:GetData("equip",false) && item:GetData("ammo",0) > 0 )))
@@ -274,8 +274,8 @@ function ITEM:RemovePAC(client)
 	end
 end
 
-function ITEM:Unload()
-	local client = self:GetOwner()
+function ITEM:Unload(player)
+	local client = self:GetOwner() or player
 	local isEquipped = self:GetData("equip", false)
 	local weapon = client:GetWeapon(self.class)
 	local ammoType
@@ -304,7 +304,7 @@ function ITEM:Unload()
 
 		for k,v in pairs(client:GetCharacter():GetInventory():GetItemsByUniqueID(ammoBox,true)) do
 			local ammoamt = v:GetData("quantity", v.ammoAmount)
-			local ammomax = v.ammoAmount
+			local ammomax = v.maxStack
 			local ammodiff = ammomax - ammoamt
 
 			if (ammodiff >= ammoAmount) then
@@ -537,20 +537,30 @@ function ITEM:OnLoadout()
 			if self:GetData("ammoRechamber") then
 				weapon:attachSpecificAttachment(self:GetData("ammoRechamber").attachmentName)
 			end
+			
+			-- if wish granted
+			if self:GetData("unlimitedDurability", nil) then
+				weapon.WearDamage = 0
+				weapon.DurabilityDamageChance = 0
+			end
 
 			timer.Simple(0.1,function()
-				if self:GetData("ammoType") then
-					weapon:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
+				if IsValid(weapon) then
+					if self:GetData("ammoType") then
+						weapon:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
+					end
+					weapon:SetClip1(self:GetData("ammo", 0))
 				end
-				weapon:SetClip1(self:GetData("ammo", 0))
 			end)
 
 			if self.canAttach == true then
 				timer.Simple(0.1,function()
-					local attachments = self:GetData("attachments") or {}
-					
-					for k = 1, #attachments do
-						weapon:attachSpecificAttachment(attachments[k])
+					if IsValid(weapon) then
+						local attachments = self:GetData("attachments") or {}
+
+						for k = 1, #attachments do
+							weapon:attachSpecificAttachment(attachments[k])
+						end
 					end
 				end)
 			end
@@ -670,13 +680,15 @@ ITEM.functions.detach = {
 hook.Add("PlayerDeath", "ixStripClip", function(client)
 	client.carryWeapons = {}
 
-	for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
-		if (v.isWeapon and v:GetData("equip")) then
-			v:SetData("ammo", nil)
-			--v:SetData("equip", nil)
+	if client:GetCharacter() then
+		for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
+			if (v.isWeapon and v:GetData("equip")) then
+				v:SetData("ammo", nil)
+				--v:SetData("equip", nil)
 
-			if (v.pacData) then
-				v:RemovePAC(client)
+				if (v.pacData) then
+					v:RemovePAC(client)
+				end
 			end
 		end
 	end

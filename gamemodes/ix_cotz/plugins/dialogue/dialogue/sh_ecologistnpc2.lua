@@ -8,7 +8,7 @@ DIALOGUE.addTopic("GREETING", {
 		"AboutWorkTopic",
 		-- "GetTask",
 		"GetTaskByDifficulty",
-		-- "AboutProgression",
+		"AboutProgression",
 		"ChangeSuitVariant",
 		"GOODBYE"
 	},
@@ -386,7 +386,7 @@ DIALOGUE.addTopic("ViewProgression", {
 				local progstatus 	= ix.progression.status[dyndata.identifier]
 				local progdef 		= ix.progression.definitions[dyndata.identifier]
 
-				self.response = progdef.BuildResponse(progdef, progstatus)
+				self.response = progdef:BuildResponse(progdef, progstatus)
 				self.tmp = dyndata.identifier
 			end
 		end
@@ -426,6 +426,9 @@ DIALOGUE.addTopic("AboutProgression", {
 
 		-- Return the next topicID
 		return "ViewProgression", dyndata
+	end,
+	ShouldAdd = function()
+		return #ix.progression.GetActiveProgressions("'Beanstalk'") > 0
 	end,
 })
 
@@ -478,7 +481,12 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 		end
 	end,
 	GetDynamicOptions = function(self, client, target)
-		local blacklistedVariants = {}
+		local blacklistedVariants = {
+			["anarchist"] = true,
+			["authority"] = true,
+			["mercenary"] = true,
+			["looted"] = true,
+		}
 
 		local suitVariants = {}
 		for _, v in pairs(ix.item.list) do
@@ -539,7 +547,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"AboutWorkTopic",
 		-- "GetTask",
 		"GetTaskByDifficulty",
-		-- "AboutProgression",
+		"AboutProgression",
 		"ChangeSuitVariant",
 		"GOODBYE"
 	},

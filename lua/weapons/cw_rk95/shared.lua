@@ -141,7 +141,7 @@ SWEP.Sounds = {
 }
 
 
-SWEP.SpeedDec = 35
+SWEP.SpeedDec = 25
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -179,8 +179,8 @@ SWEP.FireSound = "CW_RK95_FIRE"
 SWEP.FireSoundSuppressed = "CW_RK95_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.4
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005

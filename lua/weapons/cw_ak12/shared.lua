@@ -117,7 +117,7 @@ SWEP.Sounds = {	ak47_draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	[2] = {time = 1.13, sound = "CW_AK74_MAGIN"},
 	[3] = {time = 1.9, sound = "CW_AK74_BOLTPULL"}}}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 25
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -145,8 +145,8 @@ SWEP.WMAng = Vector(-15, 0, 180)
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.Primary.ClipSize		= 30
 SWEP.Primary.DefaultClip	= 0

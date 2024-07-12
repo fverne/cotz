@@ -1,6 +1,6 @@
 ITEM.name = "KP-31"
 ITEM.description= "A submachinegun chambered for 9x19mm."
-ITEM.longdesc = "The Suomi KP-31 is regarded by many as one of the most successful submachine guns of World War II. It also had a profound effect on that conflict beyond Finland as the Soviet authorities, who had been dismissive of sub-machine guns, were persuaded of their deadly efficiency by the Finns after they attacked them in 1939.\n\nAmmo: 9x19mm \nMagazine Capacity: 30"
+ITEM.longdesc = "The Suomi KP-31 is regarded by many as one of the most successful submachine guns of World War II. It also had a profound effect on that conflict beyond Finland as the Soviet authorities, who had been dismissive of sub-machine guns, were persuaded of their deadly efficiency by the Finns after they attacked them in 1939.\n\nAmmo: 9x19mm \nMagazine Capacity: 30+1"
 ITEM.model = ("models/khrcw2/doipack/w_suomi.mdl")
 ITEM.class = "cw_kp31"
 ITEM.weaponCategory = "primary"

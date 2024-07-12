@@ -121,7 +121,7 @@ SWEP.Animations = {fire = {"base_fire_1"},
 	idle = "base_idle",
 	draw = "base_draw"}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 10
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -172,8 +172,8 @@ SWEP.FireSoundSuppressed = "DOITHOM1928_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.15
 SWEP.FOVPerShot = 0.1 -- = .62
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.046
 SWEP.AimSpread = 0.016

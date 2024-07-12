@@ -3,9 +3,10 @@ ix.progression.Register("cleanerItemDelivery_Storage", {
 	description = "Cleaner has an offer for you.",
 	keyNpc = "'Cleaner'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["cleanerItemDelivery_Storage"] = ix.progression.status["cleanerItemDelivery_Storage"] or {}
 		local dat = ix.progression.status["cleanerItemDelivery_Storage"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "Greetings, stalker. If you've noticed, you aren't capble of carrying everything you own; it's simply impossible. Stashes are risky, but I've got a little side business that I'm putting together that I think could be beneficial for you. I'm working on getting together some private storage, but require an investment or two from some willing patrons. Are you interested?\n\nREQUIRED ITEMS:"

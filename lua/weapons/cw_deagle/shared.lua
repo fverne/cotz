@@ -30,7 +30,7 @@ if CLIENT then
 	SWEP.RMRPos = Vector(-2.27, -3, 0.15)
 	SWEP.RMRAng = Vector(0, 0, 0)
 	
-	SWEP.SprintPos = Vector(1.634, -8.28, -8.311)
+	SWEP.SprintPos = Vector(1.634, -9.28, -8.311)
 	SWEP.SprintAng = Vector(70, 0, 0)
 	
 	SWEP.AlternativePos = Vector(-0.88, 1.325, -0.561)
@@ -81,7 +81,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 	[3] = {time = 2.36, sound = "CW_DEAGLE_SLIDEBACK"},
 	[4] = {time = 2.47, sound = "CW_DEAGLE_SLIDEFORWARD"}}}
 
-SWEP.SpeedDec = 15
+SWEP.SpeedDec = 5
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0

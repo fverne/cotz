@@ -4,7 +4,8 @@ att.displayName = "Tundra 9MM"
 att.displayNameShort = "Tundra"
 att.isSuppressor = true
 
-att.statModifiers = {DamageMult = -0.2}
+att.statModifiers = {RecoilMult = -0.15,
+DamageMult = -0.08}
 
 if CLIENT then
 	att.displayIcon = surface.GetTextureID("atts/saker")

@@ -95,7 +95,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"},
     [8] = {time = 2.5, sound = "Weapon_Cloth4"},
 	[9] = {time = 2.55, sound = "Weapon_PP19V_Slideback"}}}
 
-SWEP.SpeedDec = 5
+SWEP.SpeedDec = 0
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -129,8 +129,8 @@ SWEP.FireSound = "Weapon_PP19V"
 SWEP.FireSoundSuppressed = "CW_PP19V_SUPPRESSED"
 SWEP.Recoil = 1.25
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.065
 SWEP.AimSpread = 0.015

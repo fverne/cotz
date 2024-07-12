@@ -457,7 +457,7 @@ do
         for k,v in pairs(inv:GetItems()) do
           if v.uniqueID == "dataextractor" then
             -- Check that everything matches
-            if ((v:GetData("ntypes", -1) == 2) and (v:GetData("finishedtrigger", "error") == "dataExtractEasy") and v:GetData("finished", false)) then
+            if ((v:GetData("ntypes", -1) == 1) and (v:GetData("finishedtrigger", "error") == "dataExtractEasy") and v:GetData("finished", false)) then
               v:Remove()
               ix.dialogue.notifyItemLost(client, ix.item.list["dataextractor"].name)
               break
@@ -522,7 +522,7 @@ do
         for k,v in pairs(inv:GetItems()) do
           if v.uniqueID == "dataextractor" then
             -- Check that everything matches
-            if ((v:GetData("ntypes", -1) == 3) and (v:GetData("finishedtrigger", "error") == "dataExtractMedium") and v:GetData("finished", false)) then
+            if ((v:GetData("ntypes", -1) == 2) and (v:GetData("finishedtrigger", "error") == "dataExtractMedium") and v:GetData("finished", false)) then
               v:Remove()
               ix.dialogue.notifyItemLost(client, ix.item.list["dataextractor"].name)
               break

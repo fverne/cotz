@@ -3,9 +3,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 	description = "Prove your worth as a small game hunter to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldtimerItemDelivery_Knife1"] = ix.progression.status["oldtimerItemDelivery_Knife1"] or {}
 		local dat = ix.progression.status["oldtimerItemDelivery_Knife1"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "You are still new to the Zone, stalker. You may have been out on a few trips, but you are still completely unprepared for what it can and will throw at you. If you are interested in proving your worth as a hunter, then get out there and show me what you can do with little more than a piece of rebar and your instincts.\n\nREQUIRED ITEMS:"
@@ -91,9 +92,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 	description = "Prove your worth as a big game hunter to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldtimerItemDelivery_Knife2"] = ix.progression.status["oldtimerItemDelivery_Knife2"] or {}
 		local dat = ix.progression.status["oldtimerItemDelivery_Knife2"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "You may have seen some of the game the Zone has to offer, but have you taken on a chimera? A pseudogiant? Multiple of them at once? i have a test for you and other would be hunters. Enter the Zone and bring me back proof that you have been to hell and back again.\n\nREQUIRED ITEMS:"
@@ -177,9 +179,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 	description = "Prove your worth as a knife fighter to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldtimerItemDelivery_Knife3"] = ix.progression.status["oldtimerItemDelivery_Knife3"] or {}
 		local dat = ix.progression.status["oldtimerItemDelivery_Knife3"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "You and yours are seasoned fighters; I can see it in your eyes. The way you carry yourselves, the way you walk... the cues are obvious to those well-versed enough to look for them. If you are searching for a blade better suited to combat than hunting, you must prove yourself worthy of bearing your steel. Show me what you are capable of.\n\nREQUIRED ITEMS:"
@@ -264,9 +267,10 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 	description = "Prove your worth as a warrior to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = true,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldtimerItemDelivery_Melee"] = ix.progression.status["oldtimerItemDelivery_Melee"] or {}
 		local dat = ix.progression.status["oldtimerItemDelivery_Melee"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "Do you carry a melee weapon with you, stalker? They are both economic solutions for poorer stalkers and useful kit to those who are able to dance in and out of battle with the claws of mutants. A well aimed blow with such weapons can instantly kill some threats. Take to the field of battle, stalker, and prove your worth.\n\nREQUIRED ITEMS:"
@@ -356,9 +360,10 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 	description = "Prove your worth as a seeker to Old Timer",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldtimerItemDelivery_Hidestash1"] = ix.progression.status["oldtimerItemDelivery_Hidestash1"] or {}
 		local dat = ix.progression.status["oldtimerItemDelivery_Hidestash1"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "Have you found some of the hidden secrets of the Zone, stalker? Not all of them are figuratively buried; some stashes are literally hidden underground. If you are interested in moving on from digging in the dirt with spoons, you must first demonstrate mastery.\n\nREQUIRED ITEMS:"
@@ -440,9 +445,10 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 	description = "Prove your worth as a treasure hunter to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
-	BuildResponse = function(self, status)
+	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldtimerItemDelivery_Hidestash2"] = ix.progression.status["oldtimerItemDelivery_Hidestash2"] or {}
 		local dat = ix.progression.status["oldtimerItemDelivery_Hidestash2"].complexData
+
 		local itemids = self:GetItemIds()
 
 		local str = "Have you grown tired of using small hand tools in your searches, stalker? Before man mastered gunpowder and the rifle, he mastered the sword with the riddle of steel, and before the sword came the stone. You must become a master with the stone before you may pick up the sword. Show me your skill.\n\nREQUIRED ITEMS:"

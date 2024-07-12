@@ -111,7 +111,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_LR300_Deploy"}},
 	reload = {[1] = {time = 0.20, sound = "CW_LR300_MAGOUT"},
 	[2] = {time = 1.6, sound = "CW_LR300_MAGIN"}}}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 25
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -143,8 +143,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.56x45MM"
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 0.075
 SWEP.FireSound = "CW_LR300_FIRE"

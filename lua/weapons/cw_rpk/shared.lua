@@ -125,7 +125,7 @@ SWEP.Sounds = {	draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	[2] = {time = 1.13, sound = "CW_AK74_MAGIN"},
 	[3] = {time = 1.9, sound = "CW_AK74_BOLTPULL"}}}
 
-SWEP.SpeedDec = 45
+SWEP.SpeedDec = 25
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -164,8 +164,8 @@ SWEP.FireSound = "CW_AK74_FIRE"
 SWEP.FireSoundSuppressed = "CW_AK74_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.65
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.12
 SWEP.AimSpread = 0.005

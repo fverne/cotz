@@ -71,7 +71,7 @@ SWEP.Sounds = {open = {{time = 0.05, sound = "CW_NAGANT_OPEN"}},
 	
 	draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}}}
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 5
 
 SWEP.Slot = 2
 SWEP.SlotPos = 0

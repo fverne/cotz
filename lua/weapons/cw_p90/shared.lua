@@ -87,7 +87,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_P90_DRAW"}},
 	[3] = {time = 1.75, sound = "CW_P90_MAGIN"},
 	[4] = {time = 2.6, sound = "CW_P90_BOLT"}}}
 
-SWEP.SpeedDec = 20
+SWEP.SpeedDec = 5
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -120,8 +120,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.7x28MM"
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 0.07
 SWEP.FireSound = "CW_P90_FIRE"

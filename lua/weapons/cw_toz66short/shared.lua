@@ -59,7 +59,7 @@ SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 	[3] = {time = 2, sound = "CW_TOZ_HAMMER"},
 	[4] = {time = 2.8, sound = "CW_TOZ_CLOSE"}}}
 
-SWEP.SpeedDec = 5
+SWEP.SpeedDec = 0
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

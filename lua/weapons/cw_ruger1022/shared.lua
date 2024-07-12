@@ -128,7 +128,7 @@ SWEP.Sounds = {Reload = {[1] = {time = 0.6, sound = "CW_R1022_MAGOUT"},
 	}
 	
 
-SWEP.SpeedDec = 10
+SWEP.SpeedDec = 5
 SWEP.UseHands = true
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -162,8 +162,8 @@ SWEP.FireSound = "CW_R1022_FIRE"
 SWEP.FireSoundSuppressed = "CW_M14_FIRE_SUPPRESSED"
 SWEP.Recoil = 1
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.1
 SWEP.AimSpread = 0.005

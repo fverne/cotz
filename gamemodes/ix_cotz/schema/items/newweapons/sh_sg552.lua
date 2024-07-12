@@ -1,6 +1,6 @@
 ITEM.name = "SIG SG 552"
 ITEM.description= "A Swiss assault rifle. Fires 5.56x45mm."
-ITEM.longdesc = "The Sig 552 is the carbine version of the 550 rifle, often agreed to be one of the best modern assault rifles. It's accurate, reliable and easy to use. \nIt's high price and rather rare match ammunition has put many STALKERs off from using this weapon, instead choosing a more common alternative. It has a 700 round per minute rate of fire.\n\nAmmo: 5.56x45mm \nMagazine Capacity: 30"
+ITEM.longdesc = "The Sig 552 is the carbine version of the 550 rifle, often agreed to be one of the best modern assault rifles. It's accurate, reliable and easy to use. \nIt's high price and rather rare match ammunition has put many STALKERs off from using this weapon, instead choosing a more common alternative. It has a 700 round per minute rate of fire.\n\nAmmo: 5.56x45mm \nMagazine Capacity: 30+1"
 ITEM.model = ("models/weapons/w_rif_tg552.mdl")
 ITEM.class = "cw_sg552"
 ITEM.weaponCategory = "primary"
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_rif_tg552.mdl",
 						["ClassName"] = "model",
-						["Position"] = Vector(15.415, -4.195, -1.495),
+						["Position"] = Vector(12, -4.195, -1.495),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3522668235",
 						["Bone"] = "spine 2",

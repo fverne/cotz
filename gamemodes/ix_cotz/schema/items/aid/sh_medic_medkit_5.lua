@@ -25,6 +25,7 @@ ITEM.iconCam = {
 
 function ITEM:PopulateTooltipIndividual(tooltip)
     ix.util.PropertyDesc(tooltip, "Medical", Color(64, 224, 208))
+    ix.util.PropertyDesc(tooltip, "Revive Item", Color(64, 224, 208))
 end
 
 ITEM.functions.use = {
@@ -90,7 +91,7 @@ ITEM.functions.usetarget = {
 				target.player:UnSpectate()
 				target.player:SetNetVar("resurrected", true)
 				target.player:Spawn()
-				target.player:SetHealth( 1 ) 
+				target.player:SetHealth(math.min((quantity / item.quantity) * 50, 1)) 
 				target.player:SetPos(target:GetPos())
 
                 if target.player:IsStuck() then
@@ -100,7 +101,7 @@ ITEM.functions.usetarget = {
 
                     for _, v in ipairs(positions) do
                         target.player:SetPos(v)
-                        if not target.player:IsStuck() then return end
+                        if not target.player:IsStuck() then break end
                     end
                 end
 

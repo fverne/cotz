@@ -5,21 +5,17 @@ PLUGIN.name = "Simple Cross Server Data"
 PLUGIN.author = "gumlefar"
 PLUGIN.description = "A simple system for sharing data over multiple servers."
 
-
-
 PLUGIN.lastSeenData = PLUGIN.lastSeenData or 0
 PLUGIN.checktime = PLUGIN.checktime or 0
 
-ix.util.Include("sh_callbacks.lua")
-
 if (SERVER) then
-	function PLUGIN:Think()
-		if self.checktime > CurTime() then return end
-		self.checktime = CurTime() + 15
+	--function PLUGIN:Think()
+		--if self.checktime > CurTime() then return end
+		--self.checktime = CurTime() + 15
 
-		self:CheckForNewData()
+		--self:CheckForNewData()
 
-	end
+	--end
 
 	-- Ensures tables exist
 	function PLUGIN:LoadTables()
@@ -50,8 +46,6 @@ if (SERVER) then
 						if (timestamp > ix.plugin.list["simplecrossserverdata"].lastSeenData) then
 							ix.plugin.list["simplecrossserverdata"].lastSeenData = timestamp
 						end
-
-						ix.crossserverdata.callback(key, data)
 					end
 				end
 			end
@@ -70,6 +64,7 @@ if (SERVER) then
 
 		local selectquery = mysql:Select("ix_xserverdata")
 			selectquery:Select("key")
+			selectquery:WhereEqual("key", key)
 			selectquery:Callback(function(result) 
 				if(istable(result) and #result > 0)then
 					-- Update query
@@ -93,6 +88,7 @@ if (SERVER) then
 
 	function PLUGIN:GetXServerData(key, callback)
 		local selectquery = mysql:Select("ix_xserverdata")
+			selectquery:Select("key")
 			selectquery:Select("json_data")
 			selectquery:WhereLike("key", key)
 			selectquery:Callback(callback)

@@ -126,7 +126,7 @@ SWEP.Sounds = {
 	[4] = {time = 0.7, sound = "CW_RMSR_BOLTDOWN"}}}
 	
 
-SWEP.SpeedDec = 15
+SWEP.SpeedDec = 35
 
 SWEP.ADSFireAnim = true
 SWEP.BipodFireAnim = true
@@ -168,7 +168,7 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".338 Lapua"
 
-SWEP.FireDelay = 1.9
+SWEP.FireDelay = 1.4
 SWEP.FireSound = "CW_RMSR_FIRE"
 SWEP.FireSoundSuppressed = "CW_RMSR_SUB"
 SWEP.Recoil = 7.2
@@ -188,10 +188,10 @@ SWEP.Damage = 550
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2
-SWEP.ReloadTime_Empty = 2.75
-SWEP.ReloadHalt = 2.3
-SWEP.ReloadHalt_Empty = 3.1
+SWEP.ReloadTime = 2.8
+SWEP.ReloadTime_Empty = 3.1
+SWEP.ReloadHalt = 3.1
+SWEP.ReloadHalt_Empty = 3.9
 
 SWEP.Chamberable = true
 
@@ -209,7 +209,7 @@ end
 
 function SWEP:postPrimaryAttack()
 	if CLIENT then
-		timer.Simple(0.6, function() 
+		timer.Simple(0.2, function() 
 			self:sendWeaponAnim("bolt", 0.8, 0)
 		end)
 	end

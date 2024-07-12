@@ -5,8 +5,8 @@ ITEM.model = ("models/weapons/w_ro2_dp28.mdl")
 ITEM.class = "cw_dp28"
 ITEM.weaponCategory = "primary"
 ITEM.price = 35600
-ITEM.width = 7
-ITEM.height = 3
+ITEM.width = 6
+ITEM.height = 2
 
 ITEM.canAttach = false
 
@@ -20,11 +20,13 @@ function ITEM:GetWeight()
   return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
 end
 
+
 ITEM.iconCam = {
-	pos = Vector(15, -205, -3),
-	ang = Angle(0, 90, 0),
-	fov = 18,
+	pos = Vector(24.49, -199.41, -10.89),
+	ang = Angle(-2.22, 452.75, 0),
+	fov = 19.62
 }
+
 
 
 ITEM.pacData = {

@@ -34,8 +34,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(74.21875, -177.46875, -96.1875),
-						["Position"] = Vector(-14.65, -0.247, -9.327),
+						["Angles"] = Angle(-70, 90, 180),
+						["Position"] = Vector(-7.7, -5.7, -4.2),
 						["Model"] = "models/weapons/w_rif_win1895.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

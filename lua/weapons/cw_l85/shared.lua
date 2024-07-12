@@ -12,6 +12,8 @@ if CLIENT then
 	SWEP.SelectIcon = surface.GetTextureID("weaponicons/l85a1")
 	--killicon.AddFont("cw_l85", "CW_KillIcons", SWEP.IconLetter, Color(255, 80, 0, 0))
 	killicon.Add("cw_l85fix", "weaponicons/l85a1", Color(255, 80, 0, 150))
+
+	SWEP.SimpleTelescopicsFOV = 69  -- nice
 	
 	SWEP.MuzzleEffect = "muzzleflash_6"
 	SWEP.PosBasedMuz = true
@@ -32,7 +34,8 @@ if CLIENT then
 	--SWEP.IronsightAng = Vector(1.251, -0.053, 0)
 	
 	SWEP.IronsightPos = Vector(2.618, -4.148, 0.477) --Vector(2.618, -2.448, 0.307)
-	SWEP.IronsightAng = Vector(-1.000, -0.053, -0.149) --Vector(1.251, -0.053, -0.149)
+	SWEP.IronsightAng = Vector(-1.25,0,0) --Vector(1.251, -0.053, -0.149)
+	--SWEP.AimAng = Vector(-1.25,0,0)
 	
 	SWEP.AlternativePos = Vector(-0.32, 0, -0.64)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
@@ -82,12 +85,12 @@ if CLIENT then
 	SWEP.OverrideAimMouseSens = 0.8
 	
 	-- what the fuck is the use for this
-	SWEP.ZoomTextures = {{tex = surface.GetTextureID("models/weapons/v_models/l85a2/susat_scopecross"), offset = {0, 1}}}
+	SWEP.ZoomTextures = {{tex = surface.GetTextureID("models/weapons/v_models/l85a2/susat_scopecross"), offset = {0.5, 4}, size={1200, 1200}}}
 	SWEP.RTAlign = {right = -0.1, up = 0, forward = 0}
 	
 end
 
-SWEP.BlurOnAim = true
+SWEP.BlurOnAim = false
 
 
 SWEP.LuaViewmodelRecoil = true
@@ -107,7 +110,7 @@ SWEP.Sounds = {reload = {[1] = {time = 0.35, sound = "CW_l85_MAGOUT"},
 	[2] = {time = 1.2, sound = "CW_l85_MAGIN"},
 	[3] = {time = 1.9, sound = "CW_l85_BOLT"}}}
 
-SWEP.SpeedDec = 30
+SWEP.SpeedDec = 20
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -141,8 +144,8 @@ SWEP.FireSound = "CW_l85_FIRE"
 SWEP.FireSoundSuppressed = "CW_G3A3_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.15
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.10
 SWEP.AimSpread = 0.005

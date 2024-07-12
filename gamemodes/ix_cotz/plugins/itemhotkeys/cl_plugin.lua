@@ -22,7 +22,7 @@ function PLUGIN:HUDPaint()
         icon = ix.util.GetItemIcon(item)
 
         if !icon then
-            return
+            icon = Material("vgui/icons/art.png")
         end
 
         if item then
@@ -49,7 +49,7 @@ function PLUGIN:HUDPaint()
         icon = ix.util.GetItemIcon(item)
 
         if !icon then
-            return
+            icon = Material("vgui/icons/art.png")
         end
 
         if item then
@@ -76,7 +76,7 @@ function PLUGIN:HUDPaint()
         icon = ix.util.GetItemIcon(item)
 
         if !icon then
-            return
+            icon = Material("vgui/icons/art.png")
         end
 
         if item then
@@ -103,7 +103,7 @@ function PLUGIN:HUDPaint()
         icon = ix.util.GetItemIcon(item)
 
         if !icon then
-            return
+            icon = Material("vgui/icons/art.png")
         end
 
         if item then

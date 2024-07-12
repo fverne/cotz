@@ -10,6 +10,7 @@ ITEM.isGasmask = true
 ITEM.isHelmet = true
 ITEM.isBackpack = true
 ITEM.outfitCategory = "Backpack"
+ITEM.carryinc = 18
 
 ITEM.br = 0.01
 ITEM.fbr = 0
@@ -163,7 +164,7 @@ ITEM.pacData = {
                                         ["ClassName"] = "model2",
                                         ["Brightness"] = 1,
                                         ["Hide"] = false,
-                                        ["NoCulling"] = true,
+                                        ["NoCulling"] = false,
                                         ["Scale"] = Vector(1, 1, 1),
                                         ["LegacyTransform"] = false,
                                         ["EditorExpand"] = true,

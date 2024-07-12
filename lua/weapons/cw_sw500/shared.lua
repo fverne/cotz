@@ -91,7 +91,7 @@ SWEP.Sounds = {draw = {{time = 0.0, sound = "CW_SW500_DEPLOY"}},
 
 	reload = {{time = 0.0, sound = "CW_SW500_CLIPOUT"}}}
 
-SWEP.SpeedDec = 5
+SWEP.SpeedDec = 10
 
 SWEP.LuaViewmodelRecoil = true
 SWEP.LuaViewmodelRecoilOverride = true
@@ -140,7 +140,7 @@ SWEP.MaxSpreadInc = 0.07
 SWEP.SpreadPerShot = 0.07
 SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
-SWEP.Damage = 200
+SWEP.Damage = 250
 SWEP.DeployTime = 0.7
 SWEP.Chamberable = false
 

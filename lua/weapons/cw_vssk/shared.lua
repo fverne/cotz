@@ -83,7 +83,7 @@ SWEP.Sounds = {anm_shots = {{time = 0.7, sound = "CW_L96_BOLTUP"},
 	{time = 3.3, sound = "CW_FOLEY_LIGHT"}}
 }
 
-SWEP.SpeedDec = 50
+SWEP.SpeedDec = 35
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0

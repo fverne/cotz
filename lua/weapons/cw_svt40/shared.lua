@@ -102,7 +102,7 @@ SWEP.Sounds = {first_draw = {{time = 0, sound = "CW_BER_SVT40_DRAW"},
 	{time = 3.65, sound = "CW_BER_SVT40_BOLTFORWARD"},
 	{time = 3.5, sound = "CW_FOLEY_LIGHT"}}}
 
-SWEP.SpeedDec = 20
+SWEP.SpeedDec = 25
 
 SWEP.Slot = 3
 SWEP.SlotPos = 0
@@ -146,8 +146,8 @@ SWEP.Shots = 1
 SWEP.Damage = 140
 SWEP.DeployTime = 1.5
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.RecoilToSpread = 0.8 -- the M14 in particular will have 30% more recoil from continuous fire to give a feeling of "oh fuck I should stop firing 7.62x51MM in full auto at 750 RPM"
 

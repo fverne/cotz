@@ -1,6 +1,6 @@
 ITEM.name = "SR-3M 'Vikhr'"
 ITEM.description= "A special forces assault rifle chambered for 9x39mm."
-ITEM.longdesc = "The SR-3M 'Vikhr' is based on the AS 'Val' silenced assault rifle but lacks an integral suppressor and has a newly-designed folding stock and cocking handle for ease of concealed carry.\nThe iron sights have also been relocated to the upper front handguard as opposed to being located on the suppressor, apparently for when the gun is used without the suppressor attached.\n\nAmmo: 9x39mm\nMagazine Capacity: 30"
+ITEM.longdesc = "The SR-3M 'Vikhr' is based on the AS 'Val' silenced assault rifle but lacks an integral suppressor and has a newly-designed folding stock and cocking handle for ease of concealed carry.\nThe iron sights have also been relocated to the upper front handguard as opposed to being located on the suppressor, apparently for when the gun is used without the suppressor attached.\n\nAmmo: 9x39mm\nMagazine Capacity: 30+1"
 ITEM.model = ("models/weapons/w_dmg_vikhr.mdl")
 ITEM.class = "cw_sr3m"
 ITEM.weaponCategory = "primary"
@@ -34,8 +34,8 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Angles"] = Angle(-6, 0, 180),
-						["Position"] = Vector(-1.724, -4.195, -3.961),
+						["Angles"] = Angle(-12, 0, 180),
+						["Position"] = Vector(-2.7, -4.3, -6.3),
 						["Model"] = "models/weapons/w_dmg_vikhr.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

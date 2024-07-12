@@ -40,11 +40,10 @@ ITEM.functions.use = {
 
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Stashing", 5, function(player) 
 			hook.Run("ix_JobTrigger", player, item:GetData("finishedtrigger", "error"))
-
-			item:SetData("points", tmptbl)
+			item:Remove() -- only remove the item if the player successfully stashes it
 		end)
 		
-		return true
+		return false
 	end,
 	OnCanRun = function(item)
 		return (!IsValid(item.entity)) and (!item:GetData("finished")) and item.invID == item.player:GetCharacter():GetInventory():GetID() and item:GetData("map", "") == game.GetMap()

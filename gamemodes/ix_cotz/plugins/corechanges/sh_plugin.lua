@@ -56,16 +56,43 @@ end
 
 if (SERVER) then
 	-- Stamina drain on jump
-	function PLUGIN:KeyPress(client, key)
-		if (key == IN_JUMP) then
-			if (client:OnGround()) then
-				local current = client:GetLocalVar("stm", 0)
-				local value = math.Clamp(current - 20, -5, 100)
+	ix.log.AddType("jumpExploit", function(client, map, pos)
+		return string.format("%s has tried to do the jump exploit on %s! Pos: %s", client:Name(), map, pos)
+	end)
 
-				client:SetLocalVar("stm", value)
-			end
-		end
-	end
+    function PLUGIN:KeyPress(client, key)
+        local char = client:GetCharacter()
+        if not char then return end
+
+        if key == IN_JUMP then
+            if client:OnGround() then
+                local current = client:GetLocalVar("stm", 0)
+                local value = math.Clamp(current - 20, -5, 100)
+                client:SetLocalVar("stm", value)
+                char:SetData("jumppos", client:GetPos())
+            end
+        elseif key == IN_DUCK then
+            if not client:OnGround() and not char:GetData("markedexploiter", false) and char:GetData("jumppos", false) then
+                char:SetData("markedexploiter", game.GetMap():lower()) -- protective measure, no load zone teleport exploit 4 u :)
+            end
+        end
+    end
+
+    function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
+        -- wait for spawnsaver to setpos first
+        timer.Simple(0.5, function()
+            if not IsValid(client) then return end
+            local savedpos = character:GetData("jumppos", false)
+
+            if character:GetData("markedexploiter", false) == game.GetMap():lower() and isvector(savedpos) then
+                client:SetPos(savedpos)
+                client:Notify("Your position was reset! Please stop trying to do the jump exploit. :^)")
+                ix.log.Add(client, "jumpExploit", game.GetMap():lower(), tostring(savedpos))
+                character:SetData("markedexploiter", false)
+                character:SetData("jumppos", false)
+            end
+        end)
+    end
 
 	--funny meme when PostPlayerLoadout breaks in the framework and is never called :)))
 	--[[function PLUGIN:PostPlayerLoadout(client)
@@ -85,6 +112,22 @@ if (SERVER) then
 	--edit fall damage
 	function PLUGIN:OnPlayerHitGround(ply, inWater, onFloater, speed)
 		local damage = math.Clamp(math.pow(speed/100, 2.1),0,1000)
+
+		local char = ply:GetCharacter()
+		local ismarked = char:GetData("markedexploiter", false)
+
+		if char then
+			if ismarked then
+				if ismarked == game.GetMap():lower() then
+					char:SetData("markedexploiter", false)
+				end
+			else
+				if char:GetData("jumppos", false) then
+					char:SetData("jumppos", false)
+				end
+			end
+		end
+
 		if speed > 400 then
 			--ply:EmitSound(FallSound)
 			ply:TakeDamage(damage,game.GetWorld(),game.GetWorld())

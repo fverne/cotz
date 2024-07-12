@@ -1,6 +1,6 @@
 ITEM.name = "SVU-A"
 ITEM.description= "PLACEHOLDER."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: 7.62x54mm \nMagazine Capacity: 20"
+ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: 7.62x54mm \nMagazine Capacity: 20+1"
 ITEM.model = ("models/weapons/w_snip_svu.mdl")
 ITEM.class = "cw_svu"
 ITEM.weaponCategory = "primary"
@@ -37,7 +37,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_snip_svu.mdl",
 						["ClassName"] = "model",
-						["Position"] = Vector(17.784, -5.054, -1.356),
+						["Position"] = Vector(9.2, -4, -2.7),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3859539124",
 						["Bone"] = "spine 2",

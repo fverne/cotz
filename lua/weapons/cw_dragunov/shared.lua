@@ -136,7 +136,7 @@ SWEP.Sounds = {
 	[3] = {time = 1.85, sound = "CW_SVD_MAGIN"},
 	[4] = {time = 2.35, sound = "CW_SVD_BOLTBACK"}}}
 
-SWEP.SpeedDec = 50
+SWEP.SpeedDec = 30
 
 SWEP.BipodFireAnim = true
 SWEP.AimBreathingIntensity = 1
@@ -175,8 +175,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "7.62x54MMR"
 
-SWEP.WearDamage = 0.11
-SWEP.WearEffect = 0.015
+SWEP.WearDamage = 0.08
+SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 0.2
 SWEP.FireSound = "CW_SVD_FIRE"
