@@ -185,6 +185,8 @@ function PLUGIN:KeyPress(client, key)
 
 				if (knife != nil) then
 					ix.plugin.list["mutantpoaching"]:OpenPoachMenu(client, mutant, knife)
+				else
+					client:Notify("You need a knife to poach mutants.")
 				end
 			end
 		end
@@ -257,7 +259,7 @@ if SERVER then
 
                     local position = client:GetItemDropPos()
 
-                    if IsValid(npc) then
+                    if ( IsValid(npc) and ix.poaching.MutantTable[npc:GetModel()] == mutant ) then
                         npc:Remove()
 
                         for _, v in pairs(loot) do
