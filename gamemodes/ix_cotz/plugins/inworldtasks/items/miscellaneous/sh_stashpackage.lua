@@ -60,7 +60,7 @@ ITEM.functions.zCheck = {
 			local stashdata = item:GetData("stashdata", {})
 			netstream.Start(item.player, "ix_ShowTaskPositions", {stashdata[2]}, "vgui/icons/stash.png")
 		else
-			item.player:Notify("This isn't the right area for this task")
+			item.player:Notify("This isn't the right area for this task. Location: " .. item:GetData("map", ""))
 		end
 
 		return false
