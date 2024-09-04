@@ -194,94 +194,88 @@ function PLUGIN:KeyPress(client, key)
 end
 
 function PLUGIN:OpenPoachMenu(client, mutant, knife)
-	netstream.Start(client, "mutantPoachOpen", client, mutant, knife)
-end
+    local weapon = client:GetActiveWeapon()
 
-if SERVER then
-    netstream.Hook("doPoach", function(client, knife, mutant)
-        local weapon = client:GetActiveWeapon()
+    if (weapon and weapon:IsValid()) then
+        local class = weapon:GetClass()
 
-        if (weapon and weapon:IsValid()) then
-            local class = weapon:GetClass()
+        if class:find("cw_") then
+            if weapon:isReloading() then return client:Notify("You can not poach while you are reloading a weapon!") end
+        end
+    end
 
-            if class:find("cw_") then
-                if weapon:isReloading() then return client:Notify("You can not poach while you are reloading a weapon!") end
+    local char = client:GetCharacter()
+    local inv = char:GetInventory()
+
+    if (not inv:HasItem(ix.item.instances[knife].uniqueID)) then
+        client:Notify("Stop cheating, and notify developers")
+    end
+
+    local mutanttable = ix.poaching.MutantParts[mutant]
+    local knifetier = ix.item.instances[knife].knifetier
+    local loot = {}
+    table.insert(loot, mutanttable["meattype"])
+
+    for _, v in pairs(mutanttable["parts"]) do
+        if (math.random(0, 100) < v[2]) then
+            table.insert(loot, v[1])
+        end
+    end
+
+    --Do animation, remove ragdoll and spawn loot
+    local Hit = client:GetEyeTraceNoCursor()
+    local npc = Hit.Entity
+
+    if npc then
+        if (npc:IsRagdoll() and ix.poaching.MutantTable[npc:GetModel()] and npc:GetPos():Distance(client:GetPos()) <= 55) then
+            if npc:GetNetVar("beingSkinned", false) then
+                client:Notify("That mutant is being skinned by someone else!")
+
+                return
             end
-        end
 
-        local char = client:GetCharacter()
-        local inv = char:GetInventory()
+            --client:ForceSequence("cidle_knife", nil, 5)
+            npc:SetNetVar("beingSkinned", true)
+            npc:EmitSound("stalkersound/inv_mutant_loot_animal.ogg", 60)
+            client:SetNetVar("IsPoaching", true)
 
-        if (not inv:HasItem(ix.item.instances[knife].uniqueID)) then
-            client:Notify("Stop cheating, and notify developers")
-        end
+            timer.Simple(5, function()
+              if (IsValid(npc)) then
+                npc:SetNetVar("beingSkinned", false)
+              end
+            end)
 
-        local mutanttable = ix.poaching.MutantParts[mutant]
-        local knifetier = ix.item.instances[knife].knifetier
-        local loot = {}
-        table.insert(loot, mutanttable["meattype"])
-
-        for _, v in pairs(mutanttable["parts"]) do
-            if (math.random(0, 100) < v[2]) then
-                table.insert(loot, v[1])
-            end
-        end
-
-        --Do animation, remove ragdoll and spawn loot
-        local Hit = client:GetEyeTraceNoCursor()
-        local npc = Hit.Entity
-
-        if npc then
-            if (npc:IsRagdoll() and ix.poaching.MutantTable[npc:GetModel()] and npc:GetPos():Distance(client:GetPos()) <= 55) then
-                if npc:GetNetVar("beingSkinned", false) then
-                    client:Notify("That mutant is being skinned by someone else!")
+            ix.util.PlayerPerformBlackScreenAction(client, "Poaching", 5, function(player)
+                if not player:GetNetVar("IsPoaching") then
+                    npc:StopSound("stalkersound/inv_mutant_loot_animal.ogg")
 
                     return
                 end
 
-                --client:ForceSequence("cidle_knife", nil, 5)
-                npc:SetNetVar("beingSkinned", true)
-                npc:EmitSound("stalkersound/inv_mutant_loot_animal.ogg", 60)
-                client:SetNetVar("IsPoaching", true)
+                local position = client:GetItemDropPos()
 
-                timer.Simple(5, function()
-                  if (IsValid(npc)) then
-                    npc:SetNetVar("beingSkinned", false)
-                  end
-                end)
+                if ( IsValid(npc) and ix.poaching.MutantTable[npc:GetModel()] == mutant ) then
+                    npc:Remove()
 
-                ix.util.PlayerPerformBlackScreenAction(client, "Poaching", 5, function(player)
-                    if not player:GetNetVar("IsPoaching") then
-                        npc:StopSound("stalkersound/inv_mutant_loot_animal.ogg")
+                    for _, v in pairs(loot) do
+                        local weight = ix.util.GetMutantMeatWeight(v, knifetier)
+                        local dat = {}
 
-                        return
-                    end
+                        dat = {
+                           	["weight"] = weight,
+                            ["tier"] = knifetier
+                        }
 
-                    local position = client:GetItemDropPos()
-
-                    if ( IsValid(npc) and ix.poaching.MutantTable[npc:GetModel()] == mutant ) then
-                        npc:Remove()
-
-                        for _, v in pairs(loot) do
-                            local weight = ix.util.GetMutantMeatWeight(v, knifetier)
-                            local dat = {}
-
-                            dat = {
-                               	["weight"] = weight,
-                                ["tier"] = knifetier
-                            }
-
-                            if (IsValid(client) and client:GetCharacter() and not inv:Add(v, 1, dat)) then
-                                ix.item.Spawn(v, position, function(item, ent) ent.bTemporary = true end, AngleRand(), dat)
-                                position = position + Vector(0, 0, 5)
-                                client:Notify("No space in your inventory! Items have been dropped.")
-                            end
+                        if (IsValid(client) and client:GetCharacter() and not inv:Add(v, 1, dat)) then
+                            ix.item.Spawn(v, position, function(item, ent) ent.bTemporary = true end, AngleRand(), dat)
+                            position = position + Vector(0, 0, 5)
+                            client:Notify("No space in your inventory! Items have been dropped.")
                         end
-
-                        player:SetNetVar("IsPoaching", false)
                     end
-                end)
-            end
+
+                    player:SetNetVar("IsPoaching", false)
+                end
+            end)
         end
-    end)
+    end
 end
