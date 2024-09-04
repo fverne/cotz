@@ -15,7 +15,7 @@ ITEM.repairCost = ITEM.price/100*1
 
 ITEM.weight = 1.900
 
-ITEM.knifetier = 3
+ITEM.knifetier = 5
 ITEM.isPoachKnife = true
 
 ITEM.exRender = true
