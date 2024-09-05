@@ -18,9 +18,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(-10, -200, -0.5),
+	pos = Vector(10, -200, 10),
 	ang = Angle(0, 90, 0),
-	fov = 14,
+	fov = 14
 }
 
 ITEM.pacData = {

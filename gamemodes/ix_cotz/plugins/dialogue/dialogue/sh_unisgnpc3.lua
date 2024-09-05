@@ -512,6 +512,10 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 	end,
 	ResolveDynamicOption = function(self, client, target, dyndata)
 		if( SERVER and dyndata.accepted ) then
+			if (client:GetCharacter():GetData("carry", 0) >= ix.weight.BaseWeight(client:GetCharacter())) then
+				client:Notify("You are extremely overencumbered and cannot do that!")
+				return "BackTopic"
+			end
 			ix.dialogue.notifyMoneyLost(client, ix.currency.Get(target.selectedsuitstruct[3]))
 			client:GetCharacter():TakeMoney(target.selectedsuitstruct[3])
 
