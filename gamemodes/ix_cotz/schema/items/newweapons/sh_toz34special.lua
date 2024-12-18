@@ -18,11 +18,10 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(10, -200, 10),
+	pos = Vector(4, -200, -0.5),
 	ang = Angle(0, 90, 0),
-	fov = 14
+	fov = 14,
 }
-
 ITEM.pacData = {
 [1] = {
 	["children"] = {
@@ -39,7 +38,7 @@ ITEM.pacData = {
 						["EditorExpand"] = true,
 						["UniqueID"] = "8592523121",
 						["Bone"] = "spine 2",
-						["Name"] = "toz34",
+						["Name"] = "toz34special",
 					},
 				},
 			},
@@ -50,7 +49,7 @@ ITEM.pacData = {
 				["Event"] = "weapon_class",
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
-				["Arguments"] = "cw_toz34@@0",
+				["Arguments"] = "cw_toz34special@@0",
 			},
 		},
 	},
