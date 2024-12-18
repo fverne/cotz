@@ -233,7 +233,7 @@ ix.npcbarter.Register("'Haggler'", "newbiebarterhaggler1", {
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
-	barterItem = {"reward_ammo_tier01", 1},
+	barterItem = {"kit_reward_ammo_tier01", 1},
 
 	-- Only one type of item can be required at a time
 	reqItem = {
@@ -247,7 +247,7 @@ ix.npcbarter.Register("'Haggler'", "newbiebarterhaggler2", {
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
-	barterItem = {"reward_ammo_tier02", 1},
+	barterItem = {"kit_reward_ammo_tier02", 1},
 
 	-- Only one type of item can be required at a time
 	reqItem = {
@@ -261,7 +261,7 @@ ix.npcbarter.Register("'Haggler'", "newbiebarterhaggler3", {
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
-	barterItem = {"reward_ammo_tier03", 1},
+	barterItem = {"kit_reward_ammo_tier03", 1},
 
 	-- Only one type of item can be required at a time
 	reqItem = {
