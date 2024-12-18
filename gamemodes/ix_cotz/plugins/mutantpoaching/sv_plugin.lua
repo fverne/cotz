@@ -274,6 +274,7 @@ function PLUGIN:OpenPoachMenu(client, mutant, knife)
                     end
 
                     player:SetNetVar("IsPoaching", false)
+                    ix.weight.Update(client:GetCharacter())
                 end
             end)
         end
