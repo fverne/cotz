@@ -69,12 +69,12 @@ function SWEP:CalcView(ply, pos, ang, fov)
 	else
 		self.forceFreeAimOffTime = false
 	end
-
+--[[
 	if self.freeAimOn then
 		fov = 90 -- force FOV to 90 when in free aim mode, unfortunately, due to angles getting fucked up when FOV is not 90
 		RunConsoleCommand("fov_desired", 90)
 	end
-
+]]
 	-- if we have free aim on, and we are not using a bipod, or we're using a bipod and we have not run out of "free aim time", then we should simulate free aim
 	if self.freeAimOn and (not self.forceFreeAimOffTime or CurTime() < self.forceFreeAimOffTime) then
 		local aiming = self.dt.State == CW_AIMING
