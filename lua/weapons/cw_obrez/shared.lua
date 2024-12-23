@@ -177,7 +177,7 @@ SWEP.ReloadStartTime = 1
 SWEP.InsertShellTime = .8
 SWEP.ReloadFinishWait = 1
 SWEP.ShotgunReload = true
-
+SWEP.AlwaysPlayReloadEnd = true
 
 function SWEP:IndividualInitialize()
 	self:setBodygroup(self.StockBGs.main, self.StockBGs.obrez)

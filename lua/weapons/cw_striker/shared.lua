@@ -121,7 +121,8 @@ SWEP.DeployTime = 1
 
 SWEP.ReloadStartTime = 0.3
 SWEP.InsertShellTime = 0.6
-SWEP.ReloadFinishWait = 1
+SWEP.ReloadFinishWait = 0.5
 SWEP.ShotgunReload = true
+SWEP.AlwaysPlayReloadEnd = true
 
 SWEP.Chamberable = false

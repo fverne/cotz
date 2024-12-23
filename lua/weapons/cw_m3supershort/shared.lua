@@ -17,7 +17,7 @@ if CLIENT then
 	SWEP.ShellScale = 0.7
 	SWEP.ShellOffsetMul = 1
 	SWEP.Shell = "shotshell"
-	SWEP.ShellDelay = 0.3
+	SWEP.ShellDelay = 0.1
 	
 	SWEP.DrawTraditionalWorldModel = false
 	SWEP.WM = "models/weapons/w_shot_shortygun.mdl"
@@ -137,8 +137,9 @@ SWEP.Shots = 9
 SWEP.Damage = 35
 SWEP.DeployTime = 1
 
+SWEP.ReloadSpeed = 1.5
 SWEP.ReloadStartTime = 0.3
-SWEP.InsertShellTime = 0.5
+SWEP.InsertShellTime = 1
 SWEP.ReloadFinishWait = 1
 SWEP.ShotgunReload = true
 

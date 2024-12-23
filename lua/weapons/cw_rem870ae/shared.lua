@@ -126,9 +126,9 @@ SWEP.Shots = 9
 SWEP.Damage = 38
 SWEP.DeployTime = 1
 
-SWEP.ReloadStartTime = 0.3
+SWEP.ReloadStartTime = 0.42
 SWEP.InsertShellTime = 0.7
-SWEP.ReloadFinishWait = 2
+SWEP.ReloadFinishWait = 1
 SWEP.ShotgunReload = true
 SWEP.ForceBackToHipAfterAimedShot = true
 

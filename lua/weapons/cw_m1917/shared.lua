@@ -164,6 +164,7 @@ SWEP.ShootWhileProne = true
 SWEP.ShotgunReload = true
 SWEP.HolsterOnLadder = false
 SWEP.SprintingEnabled = true
+SWEP.AlwaysPlayReloadEnd = true
 
 SWEP.ReloadStartTime = 2.25
 SWEP.InsertShellTime = .95

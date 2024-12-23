@@ -167,8 +167,8 @@ SWEP.Damage = 42
 SWEP.DeployTime = 1
 
 SWEP.ReloadStartTime = 0.3
-SWEP.InsertShellTime = 0.5
-SWEP.ReloadFinishWait = 1
+SWEP.InsertShellTime = 0.6
+SWEP.ReloadFinishWait = 1.2
 SWEP.ShotgunReload = true
 
-SWEP.Chamberable = false
+SWEP.Chamberable = true
