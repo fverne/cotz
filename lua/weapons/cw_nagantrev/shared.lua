@@ -106,6 +106,7 @@ SWEP.WearEffect = 0.05
 SWEP.FireDelay = 0.85
 SWEP.FireSound = "CW_NAGANT_FIRE"
 SWEP.Recoil = 1.1
+SWEP.ForceBackToHipAfterAimedShot = true
 
 SWEP.HipSpread = 0.03
 SWEP.AimSpread = 0.005
