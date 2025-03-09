@@ -216,6 +216,7 @@ ix.randomitems.tables["task_reward_weapon_06_low"] = {
     {250, {"fnfal", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"svt40", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"trg42", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"obrezmalfunction", {["durability"] = 50, ["wear"] = 80}}},
 }
 
 -- high durability
@@ -236,6 +237,7 @@ ix.randomitems.tables["task_reward_weapon_06_high"] = {
     {250, {"fnfal", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"svt40", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"trg42", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"obrezmalfunction", {["durability"] = 100, ["wear"] = 80}}},
 }
 
 
