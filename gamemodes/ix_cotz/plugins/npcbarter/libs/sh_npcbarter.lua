@@ -122,7 +122,7 @@ else
 					for i=1,rewardCnt do
 						if (pl:GetCharacter() and !pl:GetCharacter():GetInventory():Add(rewardItem[1], 1, rewardItem[3] or {})) then
             				ix.item.Spawn(rewardItem[1], pl:GetItemDropPos(), nil, AngleRand(), rewardItem[3] or {})
-            				pl:Notify("Inventory is full! Item is dropped on the ground!")
+            				pl:Notify("No space in your inventory! Items have been dropped.")
             			end
             			ix.dialogue.notifyItemGet(pl, ix.item.list[rewardItem[1]].name)
           			end
