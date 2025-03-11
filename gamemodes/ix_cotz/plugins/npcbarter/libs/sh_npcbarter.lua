@@ -119,8 +119,14 @@ else
 			if(cnt > 0)then
 				if ix.npcbarter.ConsumeItems(pl, item, cnt) then
 					rewardCnt = rewardItem[2] or 1
-
-					pl:GetCharacter():GetInventory():Add(rewardItem[1], rewardCnt, rewardItem[3] or {})
+					for i=1,rewardCnt do
+						if (pl:GetCharacter() and !pl:GetCharacter():GetInventory():Add(rewardItem[1], 1, rewardItem[3] or {})) then
+            				ix.item.Spawn(rewardItem[1], pl:GetItemDropPos(), nil, AngleRand(), rewardItem[3] or {})
+            				pl:Notify("Inventory is full! Item is dropped on the ground!")
+            			end
+            			ix.dialogue.notifyItemGet(pl, ix.item.list[rewardItem[1]].name)
+          			end
+					--pl:GetCharacter():GetInventory():Add(rewardItem[1], rewardCnt, rewardItem[3] or {}) - old one (items disappear when the inventory is full)
 
 					out = "Successfully bartered "..cnt.."x "..ix.item.list[item].name.." to "..rewardCnt.."x "..ix.item.list[rewardItem[1]].name.."."
 				else
