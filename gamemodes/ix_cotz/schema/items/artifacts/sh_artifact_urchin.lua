@@ -18,8 +18,8 @@ ITEM.functions.use = {
     OnRun = function(item)
     	local TEMP_TargetDamage = DamageInfo()
 
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Stabbing self with Urchin", 4, function(player)
-            TEMP_TargetDamage:SetDamage(75)
+		ix.util.PlayerPerformBlackScreenAction(item.player, "Stabbing self with Urchin", 2, function(player)
+            TEMP_TargetDamage:SetDamage(25)
 			TEMP_TargetDamage:SetAttacker(player)
 			TEMP_TargetDamage:SetDamageType(DMG_BULLET)
 			TEMP_TargetDamage:SetInflictor(player)

@@ -103,9 +103,10 @@ SWEP.Primary.Ammo			= "7.62x25MM"
 SWEP.WearDamage = 0.22
 SWEP.WearEffect = 0.05
 
-SWEP.FireDelay = 1.2
+SWEP.FireDelay = 0.85
 SWEP.FireSound = "CW_NAGANT_FIRE"
 SWEP.Recoil = 1.1
+SWEP.ForceBackToHipAfterAimedShot = true
 
 SWEP.HipSpread = 0.03
 SWEP.AimSpread = 0.005
@@ -113,13 +114,14 @@ SWEP.VelocitySensitivity = 2
 SWEP.MaxSpreadInc = 0.35
 SWEP.SpreadPerShot = 0.18
 SWEP.SpreadCooldown = 0.2
-SWEP.Damage = 35
-SWEP.DeployTime = 1
+SWEP.Damage = 45
+SWEP.DeployTime = 0.7
 
+SWEP.FireAnimSpeed = 1.3
 SWEP.ReloadStartTime = 1.5
 SWEP.InsertShellTime = 3.5
-SWEP.ReloadFinishWait = 2.8
-SWEP.ReloadSpeed = 1.5
+SWEP.ReloadFinishWait = 4.4
+SWEP.ReloadSpeed = 1.8
 SWEP.ShotgunReload = true
 SWEP.AlwaysPlayReloadEnd = true
 SWEP.SnapToIdlePostReload = true

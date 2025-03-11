@@ -10,6 +10,7 @@ ix.randomitems.tables["cache_artifact_tier1"] = {
   { 200, {"artifact_slug"}},
   {1000, {"artifact_thorn"}},
   { 100, {"artifact_cell"}},
+  {  10, {"artifact_midas"}},
 }
 
 ix.randomitems.tables["cache_artifact_tier2"] = {
@@ -25,6 +26,7 @@ ix.randomitems.tables["cache_artifact_tier2"] = {
   { 600, {"artifact_eye"}},
   {1000, {"artifact_cell"}},
   {1000, {"artifact_crystal"}},
+  {  20, {"artifact_midas"}},
 }
 
 ix.randomitems.tables["cache_artifact_tier3"] = {
@@ -39,6 +41,7 @@ ix.randomitems.tables["cache_artifact_tier3"] = {
   {1000, {"artifact_slug"}},
   {1000, {"artifact_eye"}},
   { 600, {"artifact_flame"}},
+  {  30, {"artifact_midas"}},
 }
 
 -- Extremely high value items, should be used sparingly in stashes
@@ -59,12 +62,12 @@ ix.randomitems.tables["cache_valuable"] = {
   {1000, {"value_currency_dollar", {["quantity"] = 750}}},
   { 500, {"value_currency_euro", {["quantity"] = 800}}},
   { 500, {"value_currency_dollar", {["quantity"] = 1000}}},
-  {  30, {"value_memorymodule"}},
-  {  50, {"value_calculationunit"}},
-  {  20, {"value_monitoringunit"}},
-  {   5, {"value_frequencymodulator"}},
+  {  40, {"value_memorymodule"}},
+  {  40, {"value_calculationunit"}},
+  {  40, {"value_monitoringunit"}},
+  {  40, {"value_frequencymodulator"}},
   { 450, {"artifact_galaxy"}},
-  {   2, {"artifact_midas"}},
+  {  20, {"artifact_midas"}},
   { 900, {"artifact_panacea"}},
   { 900, {"artifact_gaia"}},
   { 900, {"artifact_halo"}},
