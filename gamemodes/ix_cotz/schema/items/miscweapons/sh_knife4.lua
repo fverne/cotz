@@ -4,7 +4,7 @@ ITEM.model = "models/weapons/w_csgo_bayonet.mdl"
 ITEM.longdesc = "A battered bayonet which has seen military use. While it's use in survival scenarios is questionable, it has seen combat beyond many other types of knives. So much, that the attachment section has broken off."
 ITEM.category = "Knife"
 
-ITEM.price = 31550
+ITEM.price = 111550
 ITEM.height = 1
 ITEM.width = 2
 
