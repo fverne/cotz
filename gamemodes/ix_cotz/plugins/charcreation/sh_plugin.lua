@@ -16,8 +16,9 @@ PLUGIN.currentEvents = {} --To keep track of and update running events
 function PLUGIN:GetFirstNameBySteamID(client)
 	local steamid = client:AccountID()
 	local firstname
+	local index = steamid % #self.stalkernames
 
-	firstname = steamid % #self.stalkernames
+	firstname = index == 0 and 1 or index
 
 	return self.stalkernames[firstname]
 end
@@ -25,8 +26,9 @@ end
 function PLUGIN:GetLastNameBySteamID(client)
 	local steamid = client:AccountID()
 	local lastname
+	local index = steamid % #self.stalkersnames
 
-	lastname = steamid % #self.stalkersnames
+	lastname = index == 0 and 1 or index
 	
 	return self.stalkersnames[lastname]
 end
