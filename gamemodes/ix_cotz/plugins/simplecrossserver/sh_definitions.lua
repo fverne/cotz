@@ -15,7 +15,7 @@
 
 PLUGIN.mapdata["rp_marsh_cs"] = {}
 PLUGIN.mapdata["rp_marsh_cs"].name = "Swamps"
-PLUGIN.mapdata["rp_marsh_cs"].serverip = "80.161.55.20:27015"
+PLUGIN.mapdata["rp_marsh_cs"].serverip = "80.162.40.39:27015"
 PLUGIN.mapdata["rp_marsh_cs"].loadzones = PLUGIN.mapdata["rp_marsh_cs"].loadzones or {}
 
 PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromoutskirts"] = {
@@ -38,7 +38,7 @@ PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromtrainbridge"] = {
 
 PLUGIN.mapdata["rp_salvation_2_haven"] = {}
 PLUGIN.mapdata["rp_salvation_2_haven"].name = "Farmlands"
-PLUGIN.mapdata["rp_salvation_2_haven"].serverip = "80.161.55.20:27016"
+PLUGIN.mapdata["rp_salvation_2_haven"].serverip = "80.162.40.39:27016"
 PLUGIN.mapdata["rp_salvation_2_haven"].loadzones = PLUGIN.mapdata["rp_salvation_2_haven"].loadzones or {}
 
 PLUGIN.mapdata["rp_salvation_2_haven"].loadzones["fromwaystation"] = {
@@ -55,7 +55,7 @@ PLUGIN.mapdata["rp_salvation_2_haven"].loadzones["frommarsh"] = {
 
 PLUGIN.mapdata["rp_waystation"] = {}
 PLUGIN.mapdata["rp_waystation"].name = "Waystation"
-PLUGIN.mapdata["rp_waystation"].serverip = "80.161.55.20:27017"
+PLUGIN.mapdata["rp_waystation"].serverip = "80.162.40.39:27017"
 PLUGIN.mapdata["rp_waystation"].loadzones = PLUGIN.mapdata["rp_waystation"].loadzones or {}
 
 PLUGIN.mapdata["rp_waystation"].loadzones["fromoutskirts"] = {
@@ -79,7 +79,7 @@ PLUGIN.mapdata["rp_waystation"].loadzones["frompripyat"] = {
 
 PLUGIN.mapdata["rp_pripyat_remaster"] = {}
 PLUGIN.mapdata["rp_pripyat_remaster"].name = "Pripyat"
-PLUGIN.mapdata["rp_pripyat_remaster"].serverip = "80.161.55.20:27016"
+PLUGIN.mapdata["rp_pripyat_remaster"].serverip = "80.162.40.39:27016"
 PLUGIN.mapdata["rp_pripyat_remaster"].loadzones = PLUGIN.mapdata["rp_pripyat_remaster"].loadzones or {}
 
 PLUGIN.mapdata["rp_pripyat_remaster"].loadzones["fromwaystation"] = {
