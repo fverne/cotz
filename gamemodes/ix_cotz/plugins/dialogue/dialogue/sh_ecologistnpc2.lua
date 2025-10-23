@@ -501,7 +501,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 				continue
 			end
 
-			table.insert(dynopts, {statement = v.name.." with cost "..ix.currency.Get(target.selectedsuitstruct[3]), topicID = "ChangeSuitVariantP2", dyndata = {suitVariantUID = v.uniqueID, accepted = true}})
+			table.insert(dynopts, {statement = "["..(v.uniqueID:gsub("^.*_","")):gsub("^%l", string.upper).."] "..v.name.." with cost "..ix.currency.Get(target.selectedsuitstruct[3]), topicID = "ChangeSuitVariantP2", dyndata = {suitVariantUID = v.uniqueID, accepted = true}})
 		end
 
 		table.insert(dynopts, {statement = "Actually, nevermind...", topicID = "ChangeSuitVariantP2", dyndata = {accepted = false}})
