@@ -518,6 +518,10 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 				client:Notify("You are extremely overencumbered and cannot do that!")
 				return "BackTopic"
 			end
+			if !(ix.item.instances[target.selectedsuitstruct[1]]:GetData("attachments",{})[1] == nil) then
+				client:Notify("Can't exchange suit with installed attachments!")
+				return "BackTopic"
+			end
 			ix.dialogue.notifyMoneyLost(client, ix.currency.Get(target.selectedsuitstruct[3]))
 			client:GetCharacter():TakeMoney(target.selectedsuitstruct[3])
 
