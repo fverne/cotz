@@ -513,7 +513,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 	ResolveDynamicOption = function(self, client, target, dyndata)
 		if( SERVER and dyndata.accepted ) then
 			if (client:GetCharacter():GetData("carry", 0) >= ix.weight.BaseWeight(client:GetCharacter())) then
-				client:Notify("You are extremely overencumbered and cannot do that!")
+				client:Notify("You are extremely overencumbered and can't do that!")
 				return "BackTopic"
 			end
 			if !(ix.item.instances[target.selectedsuitstruct[1]]:GetData("attachments",{})[1] == nil) then
@@ -524,6 +524,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 			client:GetCharacter():TakeMoney(target.selectedsuitstruct[3])
 
 			ix.item.instances[target.selectedsuitstruct[1]]:Remove()
+			client:GetCharacter():SetData("carry", ix.weight.CalculateWeight(client:GetCharacter()))
 			client:GetCharacter():GetInventory():Add(dyndata.suitVariantUID)
 		end
 		-- Return the next topicID
