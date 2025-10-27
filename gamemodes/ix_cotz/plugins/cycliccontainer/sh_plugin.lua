@@ -37,7 +37,7 @@ if SERVER then
 		if firstspawn then
 			containerent.cyclicalAppearTime = os.time() + math.random(0, disTime*2)
 		else -- we calculate the timers when container disappears 
-			while containerent.cyclicalAppearTime < os.time() do 
+			while containerent.cyclicalAppearTime + appTime < os.time() do 
 				-- So we don't spend three billion years catching up to the current time
 				containerent.cyclicalAppearTime = containerent.cyclicalAppearTime + disTime + math.random(-disTime/10, disTime/10)
 			end

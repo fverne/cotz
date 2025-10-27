@@ -499,7 +499,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 				continue
 			end
 
-			table.insert(dynopts, {statement = v.name.." with cost "..ix.currency.Get(target.selectedsuitstruct[3]), topicID = "ChangeSuitVariantP2", dyndata = {suitVariantUID = v.uniqueID, accepted = true}})
+			table.insert(dynopts, {statement = "["..(v.uniqueID:gsub("^.*_","")):gsub("^%l", string.upper).."] "..v.name.." with cost "..ix.currency.Get(target.selectedsuitstruct[3]), topicID = "ChangeSuitVariantP2", dyndata = {suitVariantUID = v.uniqueID, accepted = true}})
 		end
 
 		table.insert(dynopts, {statement = "Actually, nevermind...", topicID = "ChangeSuitVariantP2", dyndata = {accepted = false}})
@@ -514,6 +514,10 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 		if( SERVER and dyndata.accepted ) then
 			if (client:GetCharacter():GetData("carry", 0) >= ix.weight.BaseWeight(client:GetCharacter())) then
 				client:Notify("You are extremely overencumbered and cannot do that!")
+				return "BackTopic"
+			end
+			if !(ix.item.instances[target.selectedsuitstruct[1]]:GetData("attachments",{})[1] == nil) then
+				client:Notify("Can't exchange suit with installed attachments!")
 				return "BackTopic"
 			end
 			ix.dialogue.notifyMoneyLost(client, ix.currency.Get(target.selectedsuitstruct[3]))

@@ -216,6 +216,8 @@ ix.npctemplates.templates["cooknpc"] = {
         ["food_sausage_1"] 	= { nil, 10, SELLANDBUY, 10, 1, 5 },
         ["food_can_sprats"] 	= { nil, 3, SELLANDBUY, 3, 1, 3 },
 
+        ["waterflask"] = { nil, 5, SELLANDBUY, 5, 1, 5 },
+
 		--[[
 		["meat_blinddog"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 		["meat_bloodsucker"] 	= { nil, nil, BUYONLY, nil, nil, nil },

@@ -73,6 +73,77 @@ ITEM.functions.use = {
   end,
 }
 
+ITEM.functions.useAll = {
+  name = "Cook All",
+  tip = "useTip",
+  icon = "icon16/stalker/eat.png",
+  OnCanRun = function(item)
+    return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+  end,
+  OnRun = function(item, data)
+    local cookables = {}
+    local fuels = {}
+    local char = item.player:GetCharacter()
+    local infinite = false
+    local fuelcount = item:GetData("cancook", false) and 1 or 0
+    local cookquantity = 0
+    if (char) then
+      local inv = char:GetInventory()
+
+      if (inv) then
+        local items = inv:GetItems()
+
+        for k, v in pairs(items) do
+          if (v.cookable == true  and !v.meatTier == true) then
+            table.insert(cookables, v) -- testo testo
+          elseif (v.fueltier == item.cookertier and v.flag == "A") then
+            infinite = true
+          elseif (v.fueltier == item.cookertier) then
+            table.insert(fuels, v)
+            fuelcount = fuelcount + v:GetData("quantity",v.quantity) -- just to doublecheck
+          else
+            continue
+          end
+        end
+        if (#cookables == 0) then
+          item.player:Notify("No meat to cook.")
+          return false
+        elseif (fuelcount <= 0 and !infinite) then
+          item.player:Notify("No fuel to cook with.")
+          return false
+        end
+        item.player:EmitSound(item.sound or "items/battery_pickup.wav")
+        cookquantity = math.min(#cookables,math.max(fuelcount,(infinite and 1 or 0)*100))
+        ix.chat.Send(item.player, "iteminternal", "uses their "..item.name.." to begin cooking "..cookquantity.." portions of meat.", false)
+        ix.util.PlayerPerformBlackScreenAction(item.player, "Cooking...", math.min(cookquantity*6, 60), function(player) 
+          for k,v in pairs(cookables) do
+            if infinite then 
+            elseif fuelcount <= 0 then
+              break
+            elseif item:GetData("cancook") then
+              item:SetData("cancook", false)
+              fuelcount = fuelcount - 1
+            elseif !(fuels[1] == nil) then
+              fuels[1]:SetData("quantity", fuels[1]:GetData("quantity",fuels[1].quantity) - 1)
+              fuelcount = fuelcount - 1
+              if (fuels[1]:GetData("quantity") <= 0) then
+                fuels[1]:Remove()
+                table.remove(fuels, 1)
+              end
+            else
+              break
+            end
+            v:Remove()
+            char:GetInventory():Add(v.meal, 1, {["weight"] = v:GetWeight()})
+          end
+          ix.chat.Send(player, "iteminternal", "finished cooking "..cookquantity.." portions of meat.", false)
+        end)
+      end
+    end
+    return false
+  end,
+}
+
 function ITEM:CookMeat(item, targetID)
   local client = self.player or item:GetOwner()
   local char = client:GetCharacter()
