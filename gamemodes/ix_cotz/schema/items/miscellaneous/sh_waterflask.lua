@@ -63,7 +63,7 @@ ITEM.functions.fill = {
         return false
     end,
     OnCanRun = function(item)
-        return !IsValid(item.entity) and (item:GetData("quantity",ITEM.quantity)<2 or item:GetData("contains",ITEM.contains)==0) and item.player:WaterLevel()>0 and item.invID == item.player:GetCharacter():GetInventory():GetID()
+        return !IsValid(item.entity) and (item:GetData("quantity",item.quantity)<2 or item:GetData("contains",item.contains)==0) and item.player:WaterLevel()>0 and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
 ITEM.functions.filter ={
