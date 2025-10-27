@@ -120,13 +120,13 @@ ITEM.functions.useAll = {
             if infinite then 
             elseif fuelcount <= 0 then
               break
-            elseif item:GetData("cancook") then
+            elseif item:GetData("cancook", false) then
               item:SetData("cancook", false)
               fuelcount = fuelcount - 1
             elseif !(fuels[1] == nil) then
               fuels[1]:SetData("quantity", fuels[1]:GetData("quantity",fuels[1].quantity) - 1)
               fuelcount = fuelcount - 1
-              if (fuels[1]:GetData("quantity") <= 0) then
+              if (fuels[1]:GetData("quantity", fuels[1].quantity) <= 0) then
                 fuels[1]:Remove()
                 table.remove(fuels, 1)
               end

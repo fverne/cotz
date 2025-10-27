@@ -63,7 +63,7 @@ ITEM.functions.fill = {
         return false
     end,
     OnCanRun = function(item)
-        return !IsValid(item.entity) and item:GetData("quantity")<2 and item.player:WaterLevel()>0 and item.invID == item.player:GetCharacter():GetInventory():GetID()
+        return !IsValid(item.entity) and (item:GetData("quantity",item.quantity)<2 or item:GetData("contains",item.contains)==0) and item.player:WaterLevel()>0 and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
 ITEM.functions.filter ={
@@ -89,7 +89,7 @@ ITEM.functions.filter ={
         return false
     end,
     OnCanRun = function(item)
-        return !IsValid(item.entity) and item:GetData("contains")==2 and item.invID == item.player:GetCharacter():GetInventory():GetID()
+        return !IsValid(item.entity) and item:GetData("contains",ITEM.contains)==2 and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
 
@@ -122,7 +122,7 @@ ITEM.functions.cook = {
 		return targets
 		end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and item:GetData("contains")==1 and item.invID == item.player:GetCharacter():GetInventory():GetID()
+		return (!IsValid(item.entity)) and item:GetData("contains",ITEM.contains)==1 and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
@@ -146,7 +146,7 @@ ITEM.functions.adrink = {
     sound = "stalkersound/inv_flask.mp3",
     OnRun = function(item)
         ix.chat.Send(item.player, "iteminternal", "drinks from their "..item.name, false)
-        local contains = item:GetData("contains")
+        local contains = item:GetData("contains",ITEM.contains)
         local thirst = item.player:GetCharacter():GetData("thirst", 100)
         if contains == 3 then
         	ix.util.PlayerPerformBlackScreenAction(item.player, "Drinking from water flask...", 5, function(player)
@@ -169,6 +169,6 @@ ITEM.functions.adrink = {
         return false
     end,
     OnCanRun = function(item)
-        return !IsValid(item.entity) and item:GetData("contains", 0)>0 and item.invID == item.player:GetCharacter():GetInventory():GetID()
+        return !IsValid(item.entity) and item:GetData("contains", ITEM.contains)>0 and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
