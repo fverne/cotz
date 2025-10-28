@@ -49,7 +49,7 @@ if(CLIENT) then
 					LocalPlayer():Notify("Task abandoned")
 				else
 					LocalPlayer():Notify("You can't abandon another task so soon!")
-					LocalPlayer():Notify("Please wait "..LocalPlayer():GetCharacter():GetData("lastTaskAbandon", 0).." more seconds.")
+					LocalPlayer():Notify("Please wait "..LocalPlayer():GetCharacter():GetData("lastTaskAbandon", 0) - os.time().." more seconds.")
 				end
 			end
 
