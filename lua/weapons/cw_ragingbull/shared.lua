@@ -125,7 +125,7 @@ SWEP.DeployTime = 0.7
 SWEP.Chamberable = false
 SWEP.ADSFireAnim = false
 
-SWEP.WearDamage = 0.22
+SWEP.WearDamage = 0.14
 SWEP.WearEffect = 0.05
 
 SWEP.ReloadSpeed = 1

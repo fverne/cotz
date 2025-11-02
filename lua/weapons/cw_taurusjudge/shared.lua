@@ -155,7 +155,7 @@ SWEP.ReloadHalt = 4
 SWEP.ReloadTime_Empty = 2.7
 SWEP.ReloadHalt_Empty = 4
 
-SWEP.WearDamage = 0.22
+SWEP.WearDamage = 0.14
 SWEP.WearEffect = 0.05
 
 SWEP.SoundLayer1 = Sound("CWC_JUDGE_CLICK")

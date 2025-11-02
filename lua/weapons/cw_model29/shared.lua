@@ -135,5 +135,5 @@ SWEP.ReloadHalt = 3.4
 SWEP.ReloadTime_Empty = 3.4
 SWEP.ReloadHalt_Empty = 3.4
 
-SWEP.WearDamage = 0.22
+SWEP.WearDamage = 0.14
 SWEP.WearEffect = 0.05

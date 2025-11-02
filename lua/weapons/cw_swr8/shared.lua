@@ -142,5 +142,5 @@ function SWEP:IndividualThink()
 	self:setBodygroup(self.BarrelBGs.main,self.BarrelBGs.rail)
 end
 
-SWEP.WearDamage = 0.22
+SWEP.WearDamage = 0.14
 SWEP.WearEffect = 0.05

@@ -155,7 +155,8 @@ SWEP.WMAng = Vector(-10,0, 180)
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.Primary.ClipSize		= 30

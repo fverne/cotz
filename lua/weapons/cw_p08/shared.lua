@@ -133,7 +133,7 @@ SWEP.Damage = 55
 SWEP.DeployTime = .2
 SWEP.HolsterTime = .30
 
-SWEP.WearDamage = 0.22
+SWEP.WearDamage = 0.14
 SWEP.WearEffect = 0.05
 
 SWEP.ADSFireAnim = true

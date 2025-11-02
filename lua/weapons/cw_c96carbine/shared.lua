@@ -142,7 +142,8 @@ SWEP.Chamberable			= true
 
 SWEP.Primary.Ammo			= "7.62x25MM"
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 60/1100
