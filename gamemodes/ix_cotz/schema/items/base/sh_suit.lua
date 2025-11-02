@@ -172,7 +172,9 @@ if (CLIENT) then
 			if self.isBackpack then
 	        	ix.util.PropertyDesc2(tooltip, "Backpack", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 	        end
-
+	        if self.isExoskeleton then
+	        	ix.util.PropertyDesc2(tooltip, "Exoskeleton", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
+	        end
 	        if (self.PopulateTooltipIndividual) then
 		      self:PopulateTooltipIndividual(tooltip)
 		    end
