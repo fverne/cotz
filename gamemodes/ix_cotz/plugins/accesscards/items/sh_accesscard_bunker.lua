@@ -45,9 +45,9 @@ ITEM.functions.usetarget = {
 			data.filter = item.player
 		local target = util.TraceLine(data).Entity
         
-		if IsValid(target) and game.GetMap() == "rp_marsh_cs" and target:MapCreationID() == 1402 then
+		if IsValid(target) and game.GetMap() == "rp_marsh_cs" and (target:MapCreationID() == 1402 or target:MapCreationID() == 1401)  then
 			ix.chat.Send(item.player, "iteminternal", "takes out their "..item.name.." and uses it on the door.", false)
-
+			target = ents.GetMapCreatedEntity(1402)
             target:Input("Unlock")
             target:Input("Open")
             timer.Simple(10, function()
