@@ -176,6 +176,7 @@ ix.armortables.attachments["steelframe"] = {
 	weight = 2.500,
 	ar = -0.20,
 	uID = "attachment_steelframe",
+	tooltip = "Carry Capacity Increase: 25 kg",
 	onAttach = function(player, armor)
 		if armor then
 			armor:SetData("carryinc", armor:GetCarryInc() + 25)
@@ -193,6 +194,7 @@ ix.armortables.attachments["aluframe"] = {
 	weight = 0.800,
 	ar = -0.15,
 	uID = "attachment_aluframe",
+	tooltip = "Carry Capacity Increase: 15 kg",
 	onAttach = function(player, armor)
 		if armor then
 			armor:SetData("carryinc", armor:GetCarryInc() + 15)

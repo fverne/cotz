@@ -106,7 +106,7 @@ SWEP.FireSoundSuppressed = "TT_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.55
 SWEP.FOVPerShot = 0.2
 
-SWEP.WearDamage = 0.22
+SWEP.WearDamage = 0.14
 SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.055

@@ -161,7 +161,7 @@ SWEP.FireSoundSuppressed = "KHRCZ_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.6
 SWEP.FOVPerShot = 0.25
 
-SWEP.WearDamage = 0.22
+SWEP.WearDamage = 0.14
 SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.06
