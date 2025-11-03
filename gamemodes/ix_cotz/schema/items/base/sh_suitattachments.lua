@@ -31,9 +31,29 @@ function ITEM:GetDescription()
 end
 
 function ITEM:PopulateTooltip(tooltip)
-    if (!self.entity) then
-        ix.util.PropertyDesc(tooltip, "Suit Attachment", Color(64, 224, 208))
-    end
+
+    if (ix.armortables.attachments[self.attachName]) then
+		if ix.armortables.attachments[self.attachName].br then
+			ix.util.DrawResistance(tooltip, "Ballistics: ", ix.armortables.attachments[self.attachName].br, 0, 1)
+		end
+		if ix.armortables.attachments[self.attachName].sr then
+			ix.util.DrawResistance(tooltip, "Rupture: ", ix.armortables.attachments[self.attachName].sr, 0, 1)
+		end
+		if ix.armortables.attachments[self.attachName].ar then
+			ix.util.DrawResistance(tooltip, "Anomalous: ", ix.armortables.attachments[self.attachName].ar, 0, 1)
+		end
+		if ix.armortables.attachments[self.attachName].pr then
+			ix.util.DrawResistance(tooltip, "Psychic: ", ix.armortables.attachments[self.attachName].pr, 0, 1)
+		end
+		if (!self.entity) then
+	        ix.util.PropertyDesc(tooltip, "Suit Attachment", Color(64, 224, 208))
+		end
+		if ix.armortables.attachments[self.attachName].tooltip then
+	        ix.util.PropertyDesc(tooltip, ix.armortables.attachments[self.attachName].tooltip, Color(64, 224, 208))
+		end
+		
+	end
+
 
     if (self.PopulateTooltipIndividual) then
       self:PopulateTooltipIndividual(tooltip)

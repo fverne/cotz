@@ -72,7 +72,8 @@ function ix.util.DrawResistance(parentTooltip, resistanceName, value, minVal, ma
 	text:SizeToContents()
 
     local displayedValue = anchor:Add("DLabel")
-    displayedValue:SetText(ix.util.ProtectionTranslator(value, minVal, maxVal))
+--    displayedValue:SetText(ix.util.ProtectionTranslator(value, minVal, maxVal))
+    displayedValue:SetText((math.floor(math.Remap(value, minVal, maxVal, 0, 100)+0.5)).."%")
     displayedValue:SetColor(ix.util.GetColorFromValue(value, minVal, maxVal))
     displayedValue:SetFont("ixSmallFont")
 	displayedValue:SizeToContents()
@@ -89,16 +90,17 @@ function ix.util.DrawSuitResistances(parentTooltip, item)
     end
 
     if item:getBR() then
-        ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), 1 - 0.00, 1 - 0.95)
+        -- ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), 1 - 0.00, 1 - 0.95)
+        ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), 1 - 0.00, 0.00)
     end
     if item:getSR() then
-        ix.util.DrawResistance(parentTooltip, "Rupture: ", item:getSR(), 1 - 0.00, 1 - 0.95)
+        ix.util.DrawResistance(parentTooltip, "Rupture: ", item:getSR(), 1 - 0.00, 0.00)
     end
     if item:getAR() then
-        ix.util.DrawResistance(parentTooltip, "Anomalous: ", item:getAR(), 1 -  0.00, 1 - 0.95)
+        ix.util.DrawResistance(parentTooltip, "Anomalous: ", item:getAR(), 1 -  0.00, 0.00)
     end
     if item:getPR() != 1 then
-        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), 1 - 0.00, 1 - 0.95)
+        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), 1 - 0.00, 0.00)
     end
     if item.radProt > 0 then
         ix.util.DrawResistance(parentTooltip, "Radiation: ", item.radProt, 0.00, 1)
@@ -116,19 +118,19 @@ function ix.util.DrawGearResistances(parentTooltip, item)
     end
 
     if item:getBR() then
-        ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), 0.00, 0.20)
+        ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), 0.00, 1)
     end
     if item:getSR() then
-        ix.util.DrawResistance(parentTooltip, "Rupture: ", item:getSR(), 0.00, 0.10)
+        ix.util.DrawResistance(parentTooltip, "Rupture: ", item:getSR(), 0.00, 1)
     end
     if item:getAR() then
-        ix.util.DrawResistance(parentTooltip, "Anomalous: ", item:getAR(), 0.00, 0.10)
+        ix.util.DrawResistance(parentTooltip, "Anomalous: ", item:getAR(), 0.00, 1)
     end
     if item:getPR() > 0 then
-        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), 0.00, 0.50)
+        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), 0.00, 1)
     end
     if item.radProt > 0  then
-        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.radProt, 0.00, 0.60)
+        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.radProt, 0.00, 1)
     end
 
     parentTooltip:GetParent():SizeToContents()
