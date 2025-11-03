@@ -49,7 +49,7 @@ function ITEM:PopulateTooltip(tooltip)
 end
 
 
-ITEM.functions.fill = {
+ITEM.functions.zFill = {
 	name = "Fill",
     icon = "icon16/stalker/drink.png",
     sound = "stalkersound/inv_properties.mp3",
@@ -66,7 +66,7 @@ ITEM.functions.fill = {
         return !IsValid(item.entity) and (item:GetData("quantity",item.quantity)<2 or item:GetData("contains",item.contains)==0) and item.player:WaterLevel()>0 and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
-ITEM.functions.filter ={
+ITEM.functions.zFilter ={
 	name = "Filter",
     icon = "icon16/help.png",
     sound = "stalkersound/inv_eat_mutant_food.mp3",
@@ -93,7 +93,7 @@ ITEM.functions.filter ={
     end
 }
 
-ITEM.functions.cook = {
+ITEM.functions.zCook = {
 	name = "Boil",
 	tip = "useTip",
 	icon = "icon16/stalker/attach.png",
@@ -140,7 +140,7 @@ ITEM.functions.cook = {
 	end,
 }
 
-ITEM.functions.adrink = {
+ITEM.functions.use = {
 	name = "Drink",
     icon = "icon16/stalker/drink.png",
     sound = "stalkersound/inv_flask.mp3",
