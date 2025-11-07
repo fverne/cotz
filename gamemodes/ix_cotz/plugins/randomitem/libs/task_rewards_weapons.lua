@@ -201,6 +201,7 @@ ix.randomitems.tables["task_reward_weapon_05_high"] = {
 -- low durability
 ix.randomitems.tables["task_reward_weapon_06_low"] = { 
     {250, {"g2contender500", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"deagle44", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"mateba", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"stechaps", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"uzi", {["durability"] = 50, ["wear"] = 80}}},
@@ -222,6 +223,7 @@ ix.randomitems.tables["task_reward_weapon_06_low"] = {
 -- high durability
 ix.randomitems.tables["task_reward_weapon_06_high"] = { 
     {250, {"g2contender500", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"deagle44", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"mateba", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"stechaps", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"uzi", {["durability"] = 100, ["wear"] = 80}}},
@@ -244,6 +246,7 @@ ix.randomitems.tables["task_reward_weapon_06_high"] = {
 -- low durability
 ix.randomitems.tables["task_reward_weapon_07_low"] = { 
     {250, {"taurusragingbull", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"deagle44", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"glock18", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"fiveseven", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"mp9a1", {["durability"] = 50, ["wear"] = 80}}},
@@ -265,6 +268,7 @@ ix.randomitems.tables["task_reward_weapon_07_low"] = {
 -- high durability
 ix.randomitems.tables["task_reward_weapon_07_high"] = { 
     {250, {"taurusragingbull", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"deagle44", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"glock18", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"fiveseven", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"mp9a1", {["durability"] = 100, ["wear"] = 80}}},
