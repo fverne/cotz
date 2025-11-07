@@ -327,11 +327,11 @@ ix.npcbarter.Register("'Quartermaster'", "foreignammobarterquartermaster1", {
 
 ix.npcbarter.Register("'Quartermaster'", "foreignammobarterquartermaster2", {
 	name = "ForeignAmmo",
-	description = "I'll give you a box of foreign ammo for some blue gunpowder.",
+	description = "I'll give you a large box of foreign ammo for some blue gunpowder.",
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
-	barterItem = {"kit_ammo_rare_m", 1},
+	barterItem = {"kit_ammo_m_rare", 1},
 
 	-- Only one type of item can be required at a time
 	reqItem = {
@@ -341,7 +341,7 @@ ix.npcbarter.Register("'Quartermaster'", "foreignammobarterquartermaster2", {
 
 ix.npcbarter.Register("'Quartermaster'", "rareammobarterquartermaster1", {
 	name = "RareAmmo",
-	description = "I'll give you a box of 5.56 SS190 for 20 dollars.",
+	description = "I'll give you a box of 5.56 SS190 for 20 dollar.",
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
@@ -349,13 +349,13 @@ ix.npcbarter.Register("'Quartermaster'", "rareammobarterquartermaster1", {
 
 	-- Only one type of item can be required at a time
 	reqItem = {
-		{"value_currency_dollars", 20},
+		{"value_currency_dollar", 20},
 	}
 })
 
 ix.npcbarter.Register("'Quartermaster'", "rareammobarterquartermaster2", {
 	name = "RareAmmo",
-	description = "I'll give you a box of 5.56 Overpressure for 20 dollars.",
+	description = "I'll give you a box of 5.56 Overpressure for 20 dollar.",
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
@@ -363,13 +363,13 @@ ix.npcbarter.Register("'Quartermaster'", "rareammobarterquartermaster2", {
 
 	-- Only one type of item can be required at a time
 	reqItem = {
-		{"value_currency_dollars", 20},
+		{"value_currency_dollar", 20},
 	}
 })
 
 ix.npcbarter.Register("'Quartermaster'", "rareammobarterquartermaster3", {
 	name = "RareAmmo",
-	description = "I'll give you a box of .44 Magnum AP for 25 dollars.",
+	description = "I'll give you a box of .44 Magnum AP for 25 dollasr.",
 	defaultActive = true,
 
 	-- Item that will awarded when barter is completed
@@ -377,7 +377,7 @@ ix.npcbarter.Register("'Quartermaster'", "rareammobarterquartermaster3", {
 
 	-- Only one type of item can be required at a time
 	reqItem = {
-		{"value_currency_dollars", 25},
+		{"value_currency_dollar", 25},
 	}
 })
 
@@ -391,7 +391,7 @@ ix.npcbarter.Register("'Quartermaster'", "rareammobarterquartermaster4", {
 
 	-- Only one type of item can be required at a time
 	reqItem = {
-		{"value_currency_dollars", 25},
+		{"value_currency_dollar", 25},
 	}
 })
 
@@ -405,7 +405,7 @@ ix.npcbarter.Register("'Quartermaster'", "rareammobarterquartermaster5", {
 
 	-- Only one type of item can be required at a time
 	reqItem = {
-		{"value_currency_dollars", 25},
+		{"value_currency_dollar", 30},
 	}
 })
 
@@ -419,6 +419,90 @@ ix.npcbarter.Register("'Quartermaster'", "rareammobarterquartermaster6", {
 
 	-- Only one type of item can be required at a time
 	reqItem = {
-		{"value_currency_dollars", 25},
+		{"value_currency_dollar", 30},
+	}
+})
+
+ix.npcbarter.Register("'Spicy Lemon'", "spicylemonaidbarter1", {
+	name = "FoodAndDrugs",
+	description = "I'll give you a bottle of medicinal tea for some sprig stew.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"miscaid_swampbrew", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"meal_sprig", 3},
+	}
+})
+
+ix.npcbarter.Register("'Spicy Lemon'", "spicylemonaidbarter2", {
+	name = "FoodAndDrugs",
+	description = "I'll give you a glucose shot for some hellhound chops.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"drug_glucose", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"meal_hellhound", 1},
+	}
+})
+
+ix.npcbarter.Register("'Spicy Lemon'", "spicylemonaidbarter3", {
+	name = "FoodAndDrugs",
+	description = "I'll give you an Ecologist stimpak for some pseudogiant steak.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"medic_stimpak_2", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"meal_pseudogiant", 1},
+	}
+})
+
+ix.npcbarter.Register("'Spicy Lemon'", "spicylemonfoodbarter1", {
+	name = "FoodAndDrugs",
+	description = "I'll give you a Ukrainian MRE for some morphine.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"food_mre_ukraine", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"drug_morphine", 3},
+	}
+})
+
+ix.npcbarter.Register("'Spicy Lemon'", "spicylemonfoodbarter2", {
+	name = "FoodAndDrugs",
+	description = "I'll give you a Russian MRE for some classic Monster.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"food_mre_russia", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"drink_energydrink_5", 1},
+	}
+})
+
+ix.npcbarter.Register("'Spicy Lemon'", "spicylemonfoodbarter3", {
+	name = "FoodAndDrugs",
+	description = "I'll give you an American MRE for some glucose.",
+	defaultActive = true,
+
+	-- Item that will awarded when barter is completed
+	barterItem = {"food_mre_usa", 1},
+
+	-- Only one type of item can be required at a time
+	reqItem = {
+		{"drug_glucose", 1},
 	}
 })
