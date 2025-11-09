@@ -10,8 +10,6 @@ ITEM.height = 1
 ITEM.price = 1450
 
 ITEM.quantity = 1
-ITEM.restore = 15
-ITEM.psyheal = 40
 
 ITEM.weight = 0.035
 ITEM.flatweight = 0.010
@@ -38,9 +36,8 @@ ITEM.functions.use = {
 			local thirst = item.player:GetCharacter():GetData("thirst", 100)
 			local alcohol = item.player:GetCharacter():GetData("alcohol", 100)
             ix.util.PlayerPerformBlackScreenAction(item.player, "Injecting glucose...", 3, function(player)
-                player:SetHunger(hunger + 25)
+                player:SetHunger(hunger + 50)
 				player:SetThirst(thirst - 30)
-				player:SetAlcohol(alcohol + 40)
             end)
 
 		quantity = quantity - 1
