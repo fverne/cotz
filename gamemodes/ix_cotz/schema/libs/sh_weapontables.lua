@@ -326,13 +326,34 @@ ix.armortables.attachments["hide_sprig"] = {
 	name = "Sprig Leg",
 	weight = 0.500,
 	uID = "hide_sprig",
+		tooltip = "Carry Capacity Increase: 18 kg",
+	onAttach = function(player, armor)
+		if armor then
+			armor:SetData("carryinc", armor:GetCarryInc() + 18)
+		end
+	end,
+	onDetach = function(player, armor)
+		if armor then
+			armor:SetData("carryinc", armor:GetCarryInc() - 18)
+		end
+	end,
 }
 
 ix.armortables.attachments["hide_spider"] = {
 	name = "Spider Leg",
 	weight = 0.850,
-	br = 0.05,
 	uID = "hide_spider",
+		tooltip = "Carry Capacity Increase: 12 kg",
+	onAttach = function(player, armor)
+		if armor then
+			armor:SetData("carryinc", armor:GetCarryInc() + 12)
+		end
+	end,
+	onDetach = function(player, armor)
+		if armor then
+			armor:SetData("carryinc", armor:GetCarryInc() - 12)
+		end
+	end,
 }
 
 ix.armortables.attachments["hide_tark"] = {
