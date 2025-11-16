@@ -7,11 +7,9 @@ ITEM.sound = "stalkersound/inv_syringe.mp3"
 
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 1450
+ITEM.price = 2000
 
 ITEM.quantity = 1
-ITEM.restore = 15
-ITEM.psyheal = 40
 
 ITEM.weight = 0.035
 ITEM.flatweight = 0.010
@@ -35,13 +33,7 @@ ITEM.functions.use = {
 		local quantity = item:GetData("quantity", item.quantity)
 		
             local hunger = item.player:GetCharacter():GetData("hunger", 100)
-			local thirst = item.player:GetCharacter():GetData("thirst", 100)
-			local alcohol = item.player:GetCharacter():GetData("alcohol", 100)
-            ix.util.PlayerPerformBlackScreenAction(item.player, "Injecting glucose...", 3, function(player)
-                player:SetHunger(hunger + 25)
-				player:SetThirst(thirst - 30)
-				player:SetAlcohol(alcohol + 40)
-            end)
+                player:SetHunger(hunger + 40)
 
 		quantity = quantity - 1
 
