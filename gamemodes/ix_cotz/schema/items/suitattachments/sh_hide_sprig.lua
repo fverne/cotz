@@ -1,7 +1,7 @@
-ITEM.name = "Sprig Leg"
+ITEM.name = "Sprig Legs"
 ITEM.model ="models/lostsignalproject/items/outfit_parts/wood.mdl"
-ITEM.description = "A long hard branch, originally from the leg of a sprig."
-ITEM.longdesc = "Many STALKERs tend to sell off a Sprig Leg as it is a rarity to find one and it has a lot of interesting properties to it, despite it looking like a tree branch. Some STALKERs even attach it to their armor for extra protection."
+ITEM.description = "Long, tough branches originally from the body of a sprig."
+ITEM.longdesc = "The wood of a sprig's body is far lighter and more durable than ordinary hardwoods. Inside the Zone, stalkers use sprig wood to create backpack frames that lack the electrical conductivity of aluminium or steel."
 
 ITEM.width = 1
 ITEM.height = 1

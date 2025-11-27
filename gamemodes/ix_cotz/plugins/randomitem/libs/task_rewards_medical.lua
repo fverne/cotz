@@ -70,3 +70,16 @@ ix.randomitems.tables["medical_rad_tier01"] = {
 ix.randomitems.tables["medical_rad_tier02"] = { 
     {250, {"medic_antirad_2"}},
 }
+
+----Support/Miscellaneous
+ix.randomitems.tables["medical_support_tier01"] = {
+    {250, {"drug_codeine"}},
+    {250, {"drug_caffeine"}},
+    {250, {"drug_mints"}},
+}
+
+ix.randomitems.tables["medical_support_tier02"] = {
+    {250, {"drug_cocaine"}},
+    {250, {"drug_glucose"}},
+    {250, {"drug_morphine"}},
+}
