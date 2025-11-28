@@ -204,7 +204,7 @@ function PLUGIN:InitializedChatClasses()
 end
 
 
-local icon = Material("vgui/icons/news.png")
+local icon = ix.util.GetMaterial("vgui/icons/news.png")
 
 ix.chat.Register("playerjoin", {
 	CanSay = function(self, speaker, text)

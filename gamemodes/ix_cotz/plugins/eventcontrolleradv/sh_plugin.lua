@@ -29,7 +29,7 @@ PLUGIN.spawntime = CurTime() + math.random(3600, 7200)
 PLUGIN.updatetime = CurTime() + 30
 PLUGIN.populate = false
 
-local icon = "vgui/icons/news.png"
+local icon = ix.util.GetMaterial("vgui/icons/news.png")
 
 PLUGIN.MapToDifficultyMap = {
 	["rp_marsh_cs"] = 1,
@@ -50,7 +50,7 @@ ix.chat.Register("eventpda", {
 		end
 	end,
 	OnChatAdd = function(self, speaker, text)
-		chat.AddText(Color(0,191,255), "[LPDA-SYSTEM] ", Color(0,241,255), ix.util.GetMaterial(icon), ": "..text)
+		chat.AddText(Color(0,191,255), "[LPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
 	end,
 	prefix = {"/eventpda"},
 	CanHear = function(self, speaker, listener)
@@ -75,7 +75,7 @@ ix.chat.Register("eventpdainternal", {
 		return false*/
 	end,
 	OnChatAdd = function(self, speaker, text)
-		chat.AddText(Color(0,191,255), "[LPDA-SYSTEM] ", Color(0,241,255), ix.util.GetMaterial(icon), ": "..text)
+		chat.AddText(Color(0,191,255), "[LPDA-SYSTEM] ", Color(0,241,255), icon, ": "..text)
 	end,
 	prefix = {},
 	CanHear = function(self, speaker, listener)
