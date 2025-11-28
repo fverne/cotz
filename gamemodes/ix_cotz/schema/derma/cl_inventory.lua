@@ -168,7 +168,7 @@ function PANEL:DoRightClick()
 		end
 
 		for k, v in SortedPairs(itemTable.functions) do
-			if (k == "drop" or k == "combine" or (v.OnCanRun and v.OnCanRun(itemTable) == false)) then
+			if (k == "drop" or k == "combine" or k == "throwaway" or (v.OnCanRun and v.OnCanRun(itemTable) == false)) then
 				continue
 			end
 
@@ -241,7 +241,7 @@ function PANEL:DoRightClick()
 		local info = itemTable.functions.drop
 
 		if (info and info.OnCanRun and info.OnCanRun(itemTable) != false) then
-			menu:AddOption(L(info.name or "drop"), function()
+			local subMenu, subMenuOption = menu:AddSubMenu(L(info.name or "drop"), function()
 				itemTable.player = LocalPlayer()
 					local send = true
 
@@ -257,7 +257,29 @@ function PANEL:DoRightClick()
 						InventoryAction("drop", itemTable.id, inventory)
 					end
 				itemTable.player = nil
-			end):SetImage("icon16/stalker/drop.png")
+			end)
+			subMenuOption:SetImage("icon16/stalker/drop.png")
+
+			local throwAwayInfo = itemTable.functions.throwaway
+			local throwAwayOption = subMenu:AddOption("Throw Away", function()
+				itemTable.player = LocalPlayer()
+				local send = true
+
+				if (throwAwayInfo.OnClick) then
+					send = throwAwayInfo.OnClick(itemTable)
+				end
+
+				if (throwAwayInfo.sound) then
+					surface.PlaySound(throwAwayInfo.sound)
+				end
+
+				if (send != false) then
+					InventoryAction("throwaway", itemTable.id, inventory, {bTemporary = true})
+				end
+				itemTable.player = nil
+			end)
+			throwAwayOption:SetImage("icon16/stalker/scrap.png")
+
 		end
 
 		menu:Open()
