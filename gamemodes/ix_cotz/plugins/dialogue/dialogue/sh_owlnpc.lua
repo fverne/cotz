@@ -604,7 +604,7 @@ DIALOGUE.addTopic("AboutProgression", {
 
 
 DIALOGUE.addTopic("StartBarter", {
-	statement = "Exchange?",
+	statement = "I'd like to do some bartering.",
 	response = "Sure.",
 	options = {
 		"BackTopic"
@@ -622,7 +622,8 @@ DIALOGUE.addTopic("StartBarter", {
 				self.response = "I have the following things up for barter:"
 
 				for _, barter in pairs(barters) do
-					self.response = self.response.."\n    "..ix.npcbarter.barterdict["'Cleaner'"][barter].description
+					local barterTable = ix.npcbarter.barterdict["'Cleaner'"][barter]
+					self.response = self.response.."\n    "..string.format(barterTable.description, ix.item.list[barterTable.barterItem[1]].name, barterTable.reqItem[2], ix.item.list[barterTable.reqItem[1]].name)
 				end
 			end
 
@@ -638,11 +639,12 @@ DIALOGUE.addTopic("StartBarter", {
 			local barterItem = barterstruct.barterItem
 			local barterCnt = barterItem[2] or 1
 
-			for _, reqitem in pairs(barterstruct.reqItem) do
+			-- for _, reqitem in pairs(barterstruct.reqItem) do
+				local reqitem = barterstruct.reqItem
 				local reqItemCnt = reqitem[2] or 1
 
-				table.insert(dynopts, {statement = reqItemCnt.."x "..ix.item.list[reqitem[1]].name.." to "..barterCnt.."x "..ix.item.list[barterItem[1]].name, topicID = "StartBarter", dyndata = {npcname = "'Cleaner'", identifier = barterid, reqitem = reqitem[1]}})
-			end
+				table.insert(dynopts, {statement = "I'd like "..barterCnt.."x "..ix.item.list[barterItem[1]].name.." for my "..reqItemCnt.."x "..ix.item.list[reqitem[1]].name, topicID = "StartBarter", dyndata = {npcname = "'Cleaner'", identifier = barterid, reqitem = reqitem[1]}})
+			-- end
 		end
 
 		-- Return table of options

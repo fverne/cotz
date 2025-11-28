@@ -110,14 +110,15 @@ else
 			local cnt = 0
 			local rewardItem = barterdict.barterItem
 
-			for k,v in pairs(barterdict.reqItem)do
-				if v[1] == item then
-					cnt = v[2] or 1
-				end
+			if barterdict.reqItem[1] == item then
+				cnt = barterdict.reqItem[2] or 1
 			end
 
 			if(cnt > 0)then
 				if ix.npcbarter.ConsumeItems(pl, item, cnt) then
+					for i=1,cnt do
+						ix.dialogue.notifyItemLost(pl, ix.item.list[barterdict.reqItem[1]].name)
+					end
 					rewardCnt = rewardItem[2] or 1
 					for i=1,rewardCnt do
 						if (pl:GetCharacter() and !pl:GetCharacter():GetInventory():Add(rewardItem[1], 1, rewardItem[3] or {})) then
