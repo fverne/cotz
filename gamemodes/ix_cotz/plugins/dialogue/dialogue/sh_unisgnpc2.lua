@@ -269,7 +269,7 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 })
 
 DIALOGUE.addTopic("RepairItems", {
-	statement = "Can you repair my items?",
+	statement = "Can you fix my items?",
 	response = "What would you like me to look at?",
 	IsDynamic = true,
 	options = {
@@ -288,7 +288,7 @@ DIALOGUE.addTopic("RepairItems", {
 					if(percenttorepair < 0.5) then continue end
 					local repaircost = math.Round(percenttorepair * v:GetRepairCost())
 
-					table.insert(dynopts, {statement = v:GetName().." ( "..math.Round(v:GetData("wear", 100)).."% Wear ) - "..ix.currency.Get(repaircost), topicID = "RepairItems", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = repaircost, type="wear"}})
+					table.insert(dynopts, {statement = v:GetName().." ( "..math.Round(v:GetData("wear", 100)).."% Cleanliness ) - "..ix.currency.Get(repaircost), topicID = "RepairItems", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = repaircost, type="wear"}})
 				else
 					local percenttorepair = (100 - v:GetData("durability", 100))
 					if(percenttorepair < 0.5) then continue end
@@ -323,7 +323,7 @@ DIALOGUE.addTopic("ConfirmRepair", {
 	DynamicPreCallback = function(self, player, target, dyndata)
 		if(dyndata) then
 			if (CLIENT) then
-				self.response = string.format("Repairing that %s will cost you %s, is that a deal?", ix.item.list[dyndata.itemuid].name ,ix.currency.Get(dyndata.cost))
+				self.response = string.format("Fixing that %s will cost you %s, is that a deal?", ix.item.list[dyndata.itemuid].name ,ix.currency.Get(dyndata.cost))
 			else
 				target.repairstruct = { dyndata.itemid, dyndata.cost, dyndata.type }
 			end
@@ -332,7 +332,7 @@ DIALOGUE.addTopic("ConfirmRepair", {
 	GetDynamicOptions = function(self, client, target)
 
 		local dynopts = {
-			{statement = "That's fine, repair it.", topicID = "ConfirmRepair", dyndata = {accepted = true}},
+			{statement = "That's fine, fix it.", topicID = "ConfirmRepair", dyndata = {accepted = true}},
 			{statement = "On second thought...", topicID = "ConfirmRepair", dyndata = {accepted = false}},
 		}
 
