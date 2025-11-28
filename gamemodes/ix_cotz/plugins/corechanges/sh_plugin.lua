@@ -190,7 +190,7 @@ function PLUGIN:InitializedPlugins()
 	ix.command.list["becomeclass"] = nil
 	ix.command.list["chardesc"] = nil
 	ix.command.list["eventpda"] = nil
-	ix.command.list["looc"] = nil
+	-- ix.command.list["looc"] = nil
 	ix.command.list["charfallover"] = nil
 	ix.command.list["chargetup"] = nil
 	ix.command.list["setvoicemail"] = nil
@@ -198,7 +198,7 @@ end
 
 --needs to be done for both chat class and command
 function PLUGIN:InitializedChatClasses()
-	ix.chat.classes["looc"] = nil
+	-- ix.chat.classes["looc"] = nil
 	ix.chat.classes["connect"] = nil
 	ix.chat.classes["disconnect"] = nil
 end
