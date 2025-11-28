@@ -80,6 +80,7 @@ ix.progression.Register("muteItemDelivery_Binoc1", {
 			ix.progression.SetCompleted("muteItemDelivery_Binoc1", true)
 			ix.progression.SetActive("muteItemDelivery_Binoc2", true) 
 			ix.progression.SetActive("muteItemDelivery_Anomaly", true)
+			ix.progression.SetActive("muteItemDelivery_BlowoutWarning", true)
 
 		end
 	end
@@ -603,3 +604,88 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 	end
 })
 
+
+ix.progression.Register("muteItemDelivery_BlowoutWarning", {
+	name = "Blowout scanning",
+	description = "Mute is working on advanced scanning hardware.",
+	keyNpc = "'Mute'",
+	defaultActive = false,
+	BuildResponse = function(self, npcname, status)
+		ix.progression.status["muteItemDelivery_BlowoutWarning"] = ix.progression.status["muteItemDelivery_BlowoutWarning"] or {}
+		local dat = ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData
+
+		local itemids = self:GetItemIds()
+
+		local str = "Mute shoves some kind of schematics towards you. It looks like some kind of advanced scanner, maybe for blowouts?.\n\nREQUIRED ITEMS:"
+
+		for item, amt in pairs(itemids) do
+			local tmp = 0
+			if (dat and dat[item]) then tmp = dat[item] end
+			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		end
+
+		return str
+	end,
+	GetItemIds = function()
+		local itemids = {
+			["value_frequencymodulator"] = 1,
+			["value_techtool_3"] = 1,
+			["value_wirelesstrans"] = 2,
+		}	
+
+		return itemids
+	end,
+	progressfunctions = {
+		[1] = {
+			OnRun = function()
+				
+			end,
+			RunOnce = false,
+		},
+	},
+	progressthresholds = {
+		[1] = 1,
+	},
+	fnAddComplexProgression = function(dat, playername)
+		local item = dat[1]
+		local amt = dat[2]
+
+		ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData = ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData or {}
+		ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData[item] = ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData[item] or 0
+		ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData[item] = ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData[item]+amt
+	end,
+	fnGetComplexProgression = function()
+		return ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData
+	end,
+	fnCheckComplexProgression = function()
+		local finished =  ix.progression.definitions["muteItemDelivery_BlowoutWarning"]:GetItemIds()
+
+		local isdone = true
+
+		for item, amt in pairs(finished) do
+			ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData[item] = ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData[item] or 0
+			if amt > ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData[item] then isdone = false end
+		end
+
+		if isdone then
+
+			timer.Simple(60, function()
+				local name = "'Mute'"
+				local message = "The Zone blowout warning system is now operational."
+				ix.util.HandleChat(name, message)
+				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+					name = name,
+					message = message
+				})
+			end)
+
+			-- local npc = ix.progression.GetNPCFromName("'Mute'")
+			-- if (npc) then
+			-- 	npc:AddItemToList("anomalydetector", nil, 5, "SELLANDBUY", 5, 1, 5)
+			-- end
+
+			ix.progression.SetCompleted("muteItemDelivery_BlowoutWarning", true)
+
+		end
+	end
+})

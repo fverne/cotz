@@ -58,25 +58,38 @@ if (SERVER) then
     PLUGIN.BlowoutVars.BlowoutStep = 0
     PLUGIN.BlowoutVars.PostHitActionTime = 0
     PLUGIN.BlowoutVars.BlowoutFinishTime = 0
+    PLUGIN.BlowoutVars.AdminWarningUsed = false
+    PLUGIN.BlowoutVars.ProgressionWarningUsed = false
 
     function PLUGIN:Think()
         if not ix.config.Get("blowoutEnabled", true) then return end
         local CT = CurTime()
         if CT < self.NextThink then return end
 
-        if self.NextBlowout == CurTime() + 60 then
+        if math.Round(self.NextBlowout) == math.Round(CurTime() + 60) and self.BlowoutVars.AdminWarningUsed == false then
             for k, v in pairs(player.GetAll()) do
                 if v:IsAdmin() then
                     v:Notify("[ADMIN] A blowout is going to happen in 60 seconds. You can stop this if you wish by typing /blowoutresetcycle in chat.")
                 end
             end
+            self.BlowoutVars.AdminWarningUsed = true
+        end
+
+        if math.Round(self.NextBlowout) == math.Round(CurTime() + 30) and self.BlowoutVars.ProgressionWarningUsed == false then
+            if ix.progression.IsCompleted("muteItemDelivery_BlowoutWarning") then
+                for k, ply in pairs( player.GetAll() ) do
+					ix.chat.Send(ply, "eventpdainternal", "A blowout is about to hit, seek shelter!", true, ply)
+					 // ply:EmitSound( "stalkersound/pda/pda.wav", 50, 100, 1, CHAN_AUTO )
+				end
+                self.BlowoutVars.ProgressionWarningUsed = true
+            end
         end
 
         if self.NextBlowout < CurTime() and (not self.BlowoutVars.BlowoutStarted) then
             self.BlowoutVars.BlowoutStarted = true
-            local dur = 30 --time until blowout hits - 60-90s probably
+            local dur = 35 --time until blowout hits - 60-90s probably
             self:ChangePhase(1, dur)
-            self.BlowoutVars.PrehitTime = CT + dur - 6
+            self.BlowoutVars.PrehitTime = CT + dur - 15
             self.BlowoutVars.BlastTime = CT + dur
             self.BlowoutVars.BlowoutStep = 1
             self:PlaySoundOnClient("announce1")
@@ -298,6 +311,8 @@ if (SERVER) then
         self.BlowoutVars.PostHitActionTime = 0
         self.BlowoutVars.BlowoutFinishTime = 0
         self.NextBlowout = CurTime() + (ix.config.Get("blowoutRateCycle", 120) * 60)
+        self.BlowoutVars.AdminWarningUsed = false
+        self.BlowoutVars.ProgressionWarningUsed = false 
     end
 end
 
