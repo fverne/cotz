@@ -121,8 +121,8 @@ function PANEL:DoMiddleClick()
 		local info, action = hook.Run("ItemPressedMiddle", self, itemTable, inventory)
 
 		if !(info and action) then
-				info = itemTable.functions.drop
-				action = "drop"
+				info = itemTable.functions.throwaway
+				action = "throwaway"
 		end
 
 		if (info and info.OnCanRun and info.OnCanRun(itemTable) != false) then
@@ -238,10 +238,10 @@ function PANEL:DoRightClick()
 		end
 
 		-- we want drop to show up as the last option
-		local info = itemTable.functions.drop
+		local info = itemTable.functions.throwaway
 
 		if (info and info.OnCanRun and info.OnCanRun(itemTable) != false) then
-			local subMenu, subMenuOption = menu:AddSubMenu(L(info.name or "drop"), function()
+			local subMenu, subMenuOption = menu:AddSubMenu("Throw Away", function()
 				itemTable.player = LocalPlayer()
 					local send = true
 
@@ -254,31 +254,31 @@ function PANEL:DoRightClick()
 					end
 
 					if (send != false) then
-						InventoryAction("drop", itemTable.id, inventory)
+						InventoryAction("throwaway", itemTable.id, inventory, {bTemporary = true})
 					end
 				itemTable.player = nil
 			end)
 			subMenuOption:SetImage("icon16/stalker/drop.png")
 
-			local throwAwayInfo = itemTable.functions.throwaway
-			local throwAwayOption = subMenu:AddOption("Throw Away", function()
+			local dropInfo = itemTable.functions.drop
+			local dropOption = subMenu:AddOption("Drop Persistently", function()
 				itemTable.player = LocalPlayer()
 				local send = true
 
-				if (throwAwayInfo.OnClick) then
-					send = throwAwayInfo.OnClick(itemTable)
+				if (dropInfo.OnClick) then
+					send = dropInfo.OnClick(itemTable)
 				end
 
-				if (throwAwayInfo.sound) then
-					surface.PlaySound(throwAwayInfo.sound)
+				if (dropInfo.sound) then
+					surface.PlaySound(dropInfo.sound)
 				end
 
 				if (send != false) then
-					InventoryAction("throwaway", itemTable.id, inventory, {bTemporary = true})
+					InventoryAction("drop", itemTable.id, inventory)
 				end
 				itemTable.player = nil
 			end)
-			throwAwayOption:SetImage("icon16/stalker/scrap.png")
+			dropOption:SetImage("icon16/stalker/drop.png")
 
 		end
 
