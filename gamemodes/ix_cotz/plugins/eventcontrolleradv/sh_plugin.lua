@@ -29,7 +29,7 @@ PLUGIN.spawntime = CurTime() + math.random(3600, 7200)
 PLUGIN.updatetime = CurTime() + 30
 PLUGIN.populate = false
 
-local icon = ix.util.GetMaterial("vgui/icons/news.png")
+local icon = Material("vgui/icons/news.png")
 
 PLUGIN.MapToDifficultyMap = {
 	["rp_marsh_cs"] = 1,
