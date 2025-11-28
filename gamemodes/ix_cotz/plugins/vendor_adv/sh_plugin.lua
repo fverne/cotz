@@ -10,6 +10,11 @@ PLUGIN.description = "Adds NPC vendors that can sell things."
 
 -- PLEASE NOTE: Requires the "dialogue" plugin present in the plugin folder, or this plugin will not function correctly
 
+ix.config.Add("VendorStockMult", 2, "Multiplier for vendor stock.", nil, {
+	data = {min = 1, max = 100},
+	category = "vendor"
+})
+
 CAMI.RegisterPrivilege({
 	Name = "Helix - Manage Vendors",
 	MinAccess = "admin"
