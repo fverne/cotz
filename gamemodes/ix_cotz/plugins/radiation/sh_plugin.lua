@@ -15,6 +15,10 @@ ix.char.RegisterVar("radiation", {
 local playerMeta = FindMetaTable("Player")
 local entityMeta = FindMetaTable("Entity")
 
+local geigerHeavy = {"geiger/heavy/geiger_heavy_1.wav", "geiger/heavy/geiger_heavy_2.wav", "geiger/heavy/geiger_heavy_3.wav", "geiger/heavy/geiger_heavy_4.wav", "geiger/heavy/geiger_heavy_5.wav", }
+local geigerLight = {"geiger/light/geiger_light_1.wav", "geiger/light/geiger_light_2.wav", "geiger/light/geiger_light_3.wav", "geiger/light/geiger_light_4.wav", "geiger/light/geiger_light_5.wav", }
+
+
 function playerMeta:getRadiation()
 	return (self:GetNetVar("radiation")) or 0
 end
@@ -68,11 +72,20 @@ end
 
 function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 	--RADIATION OVERRIDE
-	if ( entity:IsPlayer() and entity:Alive() and dmgInfo:IsDamageType(DMG_RADIATION)) then
+	if (entity:IsPlayer() and entity:Alive() and entity:GetCharacter() and dmgInfo:IsDamageType(DMG_RADIATION) and entity:GetMoveType() != MOVETYPE_NOCLIP) then
 		local radAmount = (dmgInfo:GetDamage()/10)
 		local radResist = entity:getRadResist()
+		local finalRadDamage = radAmount - radResist
+
+		if finalRadDamage > 0 and entity:hasGeiger() then -- taking damage
+			local randomsound = table.Random(geigerHeavy)
+			entity:EmitSound(randomsound)
+		elseif finalRadDamage == 0 and entity:hasGeiger() then -- close to taking dmg
+			local randomsound = table.Random(geigerLight)
+			entity:EmitSound(randomsound)
+		end
 		
-		entity:addRadiation(math.Clamp(radAmount - radResist ,0, 100))
+		entity:addRadiation(math.Clamp(finalRadDamage,0, 100))
 		dmgInfo:SetDamage(0)
 	end
 end

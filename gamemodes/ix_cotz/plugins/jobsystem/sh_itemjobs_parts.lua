@@ -281,7 +281,7 @@ tempJob = nil
 
 local tempJob = {}
 
-tempJob.name = "Hand over %d  Swamp Controller Hand(s)."
+tempJob.name = "Hand over %d Swamp Controller Hand(s)."
 tempJob.desc = "%d  Swamp Controller Hand(s)."
 tempJob.icon = "propic/event/loot"
 tempJob.tier = 1

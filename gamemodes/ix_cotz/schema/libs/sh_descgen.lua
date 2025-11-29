@@ -38,7 +38,7 @@ function ix.util.PropertyDesc(tooltip, text, color) -- property, no image
 	tooltip:SizeToContents()
 end
 
-function ix.util.PropertyDesc2(tooltip, text, color, imagestring) -- property, with image
+function ix.util.PropertyDesc2(tooltip, text, imagecolor, imagestring) -- property, with image
 	if !tooltip:GetRow("propertyheader") then
 		local descheader = tooltip:AddRow("propertyheader")
 		descheader:SetText("\nPROPERTIES:")
@@ -57,6 +57,7 @@ function ix.util.PropertyDesc2(tooltip, text, color, imagestring) -- property, w
 
 	local image = dot:Add("DImage")
 	image:SetMaterial(imagestring)
+	image:SetImageColor(imagecolor or Color(255, 255, 255))
 	image:SetPos(8, 0)
 	image:SetSize(dot:GetTall(), dot:GetTall())
 
@@ -72,7 +73,7 @@ function ix.util.PropertyDesc2(tooltip, text, color, imagestring) -- property, w
 	tooltip:SizeToContents()
 end
 
-function ix.util.PropertyDesc3(tooltip, text, color, imagestring, zpos) -- property, with image and zpos
+function ix.util.PropertyDesc3(tooltip, text, imagecolor, imagestring, zpos) -- property, with image and zpos
 	if !tooltip:GetRow("propertyheader") then
 		local descheader = tooltip:AddRow("propertyheader")
 		descheader:SetText("\nPROPERTIES:")
@@ -91,6 +92,7 @@ function ix.util.PropertyDesc3(tooltip, text, color, imagestring, zpos) -- prope
 
 	local image = dot:Add("DImage")
 	image:SetMaterial(imagestring)
+	image:SetImageColor(imagecolor or Color(255, 255, 255))
 	image:SetPos(8, 0)
 	image:SetSize(dot:GetTall(), dot:GetTall())
 
@@ -108,4 +110,17 @@ function ix.util.PropertyDesc3(tooltip, text, color, imagestring, zpos) -- prope
 	dot:SetWide(image:GetWide() + desctext:GetWide() + 15)
 
 	tooltip:SizeToContents()
+end
+
+function ix.util.MarkedDeletionDesc(tooltip) -- property, with image and zpos
+	local text = "Marked for deletion."
+	local desctext = tooltip:AddRow("markeddeletion")
+	desctext:SetText("\n"..text)
+	desctext:SetTextColor(Color(255, 0, 0))
+	desctext:SetFont("ixSmallFont")
+	desctext:SizeToContents()
+	desctext:SetZPos(10000)
+
+	tooltip:SizeToContents()
+	
 end

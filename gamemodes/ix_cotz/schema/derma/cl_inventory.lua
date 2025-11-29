@@ -121,8 +121,8 @@ function PANEL:DoMiddleClick()
 		local info, action = hook.Run("ItemPressedMiddle", self, itemTable, inventory)
 
 		if !(info and action) then
-				info = itemTable.functions.drop
-				action = "drop"
+				info = itemTable.functions.throwaway
+				action = "throwaway"
 		end
 
 		if (info and info.OnCanRun and info.OnCanRun(itemTable) != false) then
@@ -168,7 +168,7 @@ function PANEL:DoRightClick()
 		end
 
 		for k, v in SortedPairs(itemTable.functions) do
-			if (k == "drop" or k == "combine" or (v.OnCanRun and v.OnCanRun(itemTable) == false)) then
+			if (k == "drop" or k == "combine" or k == "throwaway" or (v.OnCanRun and v.OnCanRun(itemTable) == false)) then
 				continue
 			end
 
@@ -238,10 +238,10 @@ function PANEL:DoRightClick()
 		end
 
 		-- we want drop to show up as the last option
-		local info = itemTable.functions.drop
+		local info = itemTable.functions.throwaway
 
 		if (info and info.OnCanRun and info.OnCanRun(itemTable) != false) then
-			menu:AddOption(L(info.name or "drop"), function()
+			local subMenu, subMenuOption = menu:AddSubMenu("Throw Away", function()
 				itemTable.player = LocalPlayer()
 					local send = true
 
@@ -254,10 +254,32 @@ function PANEL:DoRightClick()
 					end
 
 					if (send != false) then
-						InventoryAction("drop", itemTable.id, inventory)
+						InventoryAction("throwaway", itemTable.id, inventory, {bTemporary = true})
 					end
 				itemTable.player = nil
-			end):SetImage("icon16/stalker/drop.png")
+			end)
+			subMenuOption:SetImage("icon16/stalker/drop.png")
+
+			local dropInfo = itemTable.functions.drop
+			local dropOption = subMenu:AddOption("Drop Persistently", function()
+				itemTable.player = LocalPlayer()
+				local send = true
+
+				if (dropInfo.OnClick) then
+					send = dropInfo.OnClick(itemTable)
+				end
+
+				if (dropInfo.sound) then
+					surface.PlaySound(dropInfo.sound)
+				end
+
+				if (send != false) then
+					InventoryAction("drop", itemTable.id, inventory)
+				end
+				itemTable.player = nil
+			end)
+			dropOption:SetImage("icon16/stalker/drop.png")
+
 		end
 
 		menu:Open()
@@ -276,7 +298,7 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 		local inventoryID = self.inventoryID
 
 		if (inventoryID) then
-			InventoryAction("drop", item.id, inventoryID, {})
+			InventoryAction("throwaway", item.id, inventoryID, {bTemporary = true})
 		end
 	elseif (inventoryPanel:IsAllEmpty(gridX, gridY, item.width, item.height, self)) then
 		local oldX, oldY = self.gridX, self.gridY

@@ -417,7 +417,21 @@ function ENT:LoadTemplate(templatename)
 		local items = {}
 
 		if tmplt.items then
+			local vendorMult = ix.config.Get("VendorStockMult")
+
 			for uniqueID, data in pairs(tmplt.items) do
+				if data[2] != nil then
+					data[2] = data[2] * vendorMult
+				end
+
+				if data[4] != nil then
+					data[4] = data[4] * vendorMult
+				end
+
+				if data[6] != nil then
+					data[6] = data[6] * vendorMult
+				end
+
 				items[tostring(uniqueID)] = data
 			end
 		end
@@ -445,7 +459,7 @@ function ENT:AddItemToList(uniqueID, setprice, stock, mode, maxstock, restockint
 			["BUYONLY"] = 3,
 		}
 
-		self.items[uniqueID] = { setprice, stock, transtable[mode], maxstock, restockinterval, restockamount }
+		self.items[uniqueID] = { setprice, stock * ix.config.Get("VendorStockMult"), transtable[mode], maxstock * ix.config.Get("VendorStockMult"), restockinterval, restockamount * ix.config.Get("VendorStockMult") }
 	end
 end
 

@@ -26,6 +26,19 @@ function PLUGIN:OnItemTransferred(item, curInv, inventory)
 	end
 end
 
+function PLUGIN:OnItemTransferred(item, curInv, inventory)
+	if inventory:GetID() != 0 and item:GetData("bTemporary") then -- if the item goes anywhere but world, and was thrown away
+		item:SetData("bTemporary", false)
+	end
+end
+
+function PLUGIN:PopulateItemTooltip(tooltip, item)
+	if item.entity and item:GetData("bTemporary") then
+		ix.util.MarkedDeletionDesc(tooltip)
+		-- ix.util.PropertyDesc(tooltip, "Marked for Deletion", Color(255, 0, 0), ix.util.GetMaterial("vgui/ui/stalker/armorupgrades/explosion.png"), 1000)
+	end
+end
+
 function PLUGIN:ShouldCollide(ent1, ent2)
 	if ( ent1.IsSTALKERNPC and ent2.IsSTALKERNPC ) then return false end
 end
@@ -190,7 +203,7 @@ function PLUGIN:InitializedPlugins()
 	ix.command.list["becomeclass"] = nil
 	ix.command.list["chardesc"] = nil
 	ix.command.list["eventpda"] = nil
-	ix.command.list["looc"] = nil
+	-- ix.command.list["looc"] = nil
 	ix.command.list["charfallover"] = nil
 	ix.command.list["chargetup"] = nil
 	ix.command.list["setvoicemail"] = nil
@@ -198,7 +211,7 @@ end
 
 --needs to be done for both chat class and command
 function PLUGIN:InitializedChatClasses()
-	ix.chat.classes["looc"] = nil
+	-- ix.chat.classes["looc"] = nil
 	ix.chat.classes["connect"] = nil
 	ix.chat.classes["disconnect"] = nil
 end
