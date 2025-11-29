@@ -24,3 +24,12 @@ end
 function ITEM:GetColor()
 	return self.color or Color(255, 255, 255, 255)
 end
+
+--support for vanity/custom items
+function ITEM:GetName()
+	return self:GetData("name", self.name)
+end
+
+function ITEM:GetDescription()
+	return self:GetData("description", self.description)
+end
