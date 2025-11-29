@@ -298,7 +298,7 @@ function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 		local inventoryID = self.inventoryID
 
 		if (inventoryID) then
-			InventoryAction("drop", item.id, inventoryID, {})
+			InventoryAction("throwaway", item.id, inventoryID, {bTemporary = true})
 		end
 	elseif (inventoryPanel:IsAllEmpty(gridX, gridY, item.width, item.height, self)) then
 		local oldX, oldY = self.gridX, self.gridY
