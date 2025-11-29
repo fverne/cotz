@@ -26,6 +26,19 @@ function PLUGIN:OnItemTransferred(item, curInv, inventory)
 	end
 end
 
+function PLUGIN:OnItemTransferred(item, curInv, inventory)
+	if inventory:GetID() != 0 and item:GetData("bTemporary") then -- if the item goes anywhere but world, and was thrown away
+		item:SetData("bTemporary", false)
+	end
+end
+
+function PLUGIN:PopulateItemTooltip(tooltip, item)
+	if item.entity and item:GetData("bTemporary") then
+		ix.util.MarkedDeletionDesc(tooltip)
+		-- ix.util.PropertyDesc(tooltip, "Marked for Deletion", Color(255, 0, 0), ix.util.GetMaterial("vgui/ui/stalker/armorupgrades/explosion.png"), 1000)
+	end
+end
+
 function PLUGIN:ShouldCollide(ent1, ent2)
 	if ( ent1.IsSTALKERNPC and ent2.IsSTALKERNPC ) then return false end
 end

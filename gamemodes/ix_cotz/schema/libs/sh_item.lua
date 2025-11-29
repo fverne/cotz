@@ -24,6 +24,7 @@ function ix.item.Register(uniqueID, baseID, isBaseItem, path, luaGenerated)
 					end
 
                     item:GetEntity().bTemporary = true
+					item:SetData("bTemporary", true)
 
 					return false
 				end,
