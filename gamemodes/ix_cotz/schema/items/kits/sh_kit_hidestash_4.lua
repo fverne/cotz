@@ -36,9 +36,9 @@ ITEM.items = {
 	{
 		{100, "task_reward_backpacks_04"},
 		{40, "task_reward_backpacks_05"},
-		{12, "task_reward_backpacks_06"},
-		{4, "task_reward_backpacks_07"},
-		{1, "task_reward_backpacks_08"},
+		{30, "task_reward_backpacks_06"},
+		{20, "task_reward_backpacks_07"},
+		{10, "task_reward_backpacks_08"},
 	},
 	{
 		{2, "reward_generic_valuable"},
