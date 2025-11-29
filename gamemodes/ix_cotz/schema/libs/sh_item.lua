@@ -21,10 +21,10 @@ function ix.item.Register(uniqueID, baseID, isBaseItem, path, luaGenerated)
 						item.player:NotifyLocalized(error)
 					else
 						item.player:EmitSound("npc/zombie/foot_slide" .. math.random(1, 3) .. ".wav", 75, math.random(90, 120), 1)
-					end
 
-                    item:GetEntity().bTemporary = true
-					item:SetData("bTemporary", true)
+						item:GetEntity().bTemporary = true
+						item:SetData("bTemporary", true)
+					end
 
 					return false
 				end,
