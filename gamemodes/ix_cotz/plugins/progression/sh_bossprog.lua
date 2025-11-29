@@ -455,7 +455,7 @@ ix.progression.Register("bossItemDelivery_6", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["part_controller_2"] = 30,
+			["part_controller_2"] = 5,
 			["part_pseudogiant"] = 30,
 		}	
 
@@ -544,7 +544,7 @@ ix.progression.Register("bossItemDelivery_7", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["part_electrocontroller_1"] = 35,
+			["part_electrocontroller_1"] = 10,
 			["part_hellhound"] = 35,
 		}	
 

@@ -996,6 +996,11 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
   vendors = {
     {
       template = "tutorialnpc",
+      position = Vector(-8453.006836, -9419.748047, 4973.031250),
+      angles = Angle(0.000, -33, 0.000)
+    },
+    {
+      template = "firststalkernpc",
       position = Vector(-8142.958008, -11082.580078, 4939.861328),
       angles = Angle(0.000, 179.194, 0.000)
     },

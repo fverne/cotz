@@ -10,11 +10,12 @@ DIALOGUE.name = "Tinker NPC"
 -- to react to progression levels
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Welcome!",
+	response = "Hello, I'm the original. The first stalker in the zone. What do you need?",
 	options = {
 		"TradeTopic", 
+		"TutorialTopic",
 		"InterestTopic",
-		"RepairItems",
+		"ChangeSuitVariant",
 		"AboutWorkTopic",
 		"GetTaskByDifficulty",
 		"GOODBYE"
@@ -26,16 +27,16 @@ DIALOGUE.addTopic("GREETING", {
 		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkillgroupeasy"}, 4)
 
 		-- alternative npc task giving by difficulty
-		-- if (SERVER) then
-		-- 	if target:GetNetVar("possibleJobs") == nil then
-		-- 		local possibleJobs = {}
-		-- 		possibleJobs["easy"] = {"dataextract"}
-		-- 		possibleJobs["medium"] = {"dataextract"}
-		-- 		possibleJobs["hard"] = {"dataextract"}			
+		if (SERVER) then
+			if target:GetNetVar("possibleJobs") == nil then
+				local possibleJobs = {}
+				possibleJobs["easy"] = {"item_part_NPC_easy"}
+				possibleJobs["medium"] = {"item_part_NPC_medium"}
+				possibleJobs["hard"] = {"item_part_NPC_hard"}			
 	
-		-- 		target:SetNetVar("possibleJobs", possibleJobs)
-		-- 	end
-		-- end
+				target:SetNetVar("possibleJobs", possibleJobs)
+			end
+		end
 	end
 })
 
@@ -44,8 +45,9 @@ DIALOGUE.addTopic("BackTopic", {
 	response = "What would you like to know?",
 	options = {
 		"TradeTopic", 
+		"TutorialTopic",
 		"InterestTopic",
-		"RepairItems",
+		"ChangeSuitVariant",
 		"AboutWorkTopic",
 		"GetTaskByDifficulty",
 		"GOODBYE"
@@ -104,6 +106,83 @@ DIALOGUE.addTopic("TradeTopic", {
 ----------------------------------------------------------------
 ------------------------END-TRADER-END--------------------------
 ----------------------------------------------------------------
+
+-- Tutorial start
+DIALOGUE.addTopic("TutorialTopic", {
+	statement = "I have a few questions, I just arrived here.",
+	response = "What do you want to know?",
+	options = {
+		"TutorialTopic1",
+		"TutorialTopic2",
+		"TutorialTopic3",
+		"BackTopic",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopicBack", {
+	statement = "Alright, let me ask you something else.",
+	response = "Sure.",
+	options = {
+		"TutorialTopic1",
+		"TutorialTopic2",
+		"TutorialTopic3",
+		"BackTopic",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopic1", {
+	statement = "What is this place?",
+	response = "This is an area near the Chernobyl exclusion zone. More specifically, we're in the great swamps. Until recently, this area was completely abandoned, but me and another local, 'Technut', set up camp here in this shithole. We call it our 'Eastern Haven'. We could definitely use some help getting this place in proper shape.",
+	options = {
+		"TutorialTopic1_1",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopic1_1", {
+	statement = "How can I help out?",
+	response = "If we work together, I'm sure we will get this place in proper shape in no time. Go talk to the other inhabitants, and see if they need anything. You'll be properly rewarded. Both personally by the inhabitant, but as we keep helping each other out, it will unlock more opportunities for us to do, and more people will move here, each with their own agendas. You should ask around to see what people need help with. Both us oldies, but also the younger opportunity seekers like yourself.",
+	options = {
+		"TutorialTopicBack",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopic2", {
+	statement = "How dangerous is this place?",
+	response = "There are two types of people here. The careful people, and the dead people. As you can imagine, a place like this where the laws of science do not apply as anywhere in the world, can be quite unforgiving and dangerous. The dangers are manyfold, but the biggest of your troubles will be the mutants, and the anomalies.",
+	options = {
+		"TutorialTopic2_1",
+		"TutorialTopic2_2",
+		"TutorialTopicBack",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopic2_1", {
+	statement = "Tell me about the anomalies.",
+	response = "The anomalies are a work of a merciless god. I've seen animals being torn apart by sheer gravity, and those are the lucky ones. Luckily, most are static, so if you watch your step and don't fall into one, you should be alright. It should be noted that sometimes, the merciless god seems to be merciful, and he releases a part of scientific wonder near them. They are artifacts that mostly are not dangerous to the wielder, sometimes with benefits, but always worth a lot to the scientific community outside the zone, and hence worth quite a lot on the black market.",
+	options = {
+		"TutorialTopic2_2",
+		"TutorialTopicBack",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopic2_2", {
+	statement = "Tell me about the mutants.",
+	response = "After the first couple of emissions, many of the animals here died, but those that survived had a worse fate. They all turned into dangerous, aggressive, mutated versions of their former selves, and are no longer good for anything but having to be put down, as they will all try to take you down, regardless of your intentions. Due to the mutations, many of the mutants bodyparts have special properties that are valuable to scientists. I suggest poaching the mutants whenever possible, and sell off the dead parts.",
+	options = {
+		"TutorialTopic2_1",
+		"TutorialTopicBack",
+	}
+})
+
+DIALOGUE.addTopic("TutorialTopic3", {
+	statement = "What gear do you recommend I get my hands on?",
+	response = "The most neccessary things are a geiger counter, some medical items, and something to defend yourself with. Always carry those three with you. Also, keep your weapons in good condition always if you want them to shoot straight, and remember, we don't have access to many spare parts here, so firearms will not be maintainable forever. 'Technut' can help you out.",
+	options = {
+		"TutorialTopicBack",
+	}
+})
+
+-- Tutorial end
 
 ----------------------------------------------------------------
 --------------------START-TASKGIVER-START-----------------------
@@ -230,7 +309,7 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 		return "BackTopic", dynopts
 	end,
 	ShouldAdd = function()
-		if (!LocalPlayer():GetCharacter():GetJobs()["'Tinker'"]) then
+		if (!LocalPlayer():GetCharacter():GetJobs()["'The Original'"]) then
 			return true
 		end
 	end,
@@ -284,6 +363,11 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 		-- Return the next topicID
 		return "BackTopic"
 	end,
+	ShouldAdd = function()
+		if (LocalPlayer():GetCharacter():GetJobs()["'The Original'"]) then
+			return true
+		end
+	end,
 } )
 
 
@@ -291,37 +375,26 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 ---------------------END--TASKGIVER--END------------------------
 ----------------------------------------------------------------
 
+
 ----------------------------------------------------------------
---------------------START-TECHNICIAN-START----------------------
+--------------------START-SUITCHANGE-START----------------------
 ----------------------------------------------------------------
 
-DIALOGUE.addTopic("RepairItems", {
-	statement = "Can you fix my items?",
-	response = "What would you like me to look at?",
+DIALOGUE.addTopic("ChangeSuitVariant", {
+	statement = "Can you exchange my suit to another variant?",
+	response = "Which suit would you like to exchange?",
 	IsDynamic = true,
 	options = {
 		"BackTopic"
 	},
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
-
 		local items = client:GetCharacter():GetInventory():GetItems()
 
 		for k,v in pairs(items) do
-			if v.canRepair then
-				if v.isWeapon then
-					local percenttorepair = (100 - v:GetData("wear", 100))
-					if(percenttorepair < 0.5) then continue end
-					local repaircost = math.Round(percenttorepair * v:GetRepairCost())
-
-					table.insert(dynopts, {statement = v:GetName().." ( "..math.Round(v:GetData("wear", 100)).."% Cleanliness ) - "..ix.currency.Get(repaircost), topicID = "RepairItems", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = repaircost, type="wear"}})
-				else
-					local percenttorepair = (100 - v:GetData("durability", 100))
-					if(percenttorepair < 0.5) then continue end
-					local repaircost = math.Round(percenttorepair * v:GetRepairCost())
-
-					table.insert(dynopts, {statement = v:GetName().." ( "..math.Round(v:GetData("durability", 100)).."% Durability ) - "..ix.currency.Get(repaircost), topicID = "RepairItems", dyndata = {itemuid = v.uniqueID , itemid = v:GetID(), cost = repaircost, type="durability"}})
-				end
+			if v.baseSuit and !v:GetData("equip") then
+				local convertcost = math.Round(v.price / 10)
+				table.insert(dynopts, {statement = v:GetName().." - "..ix.currency.Get(convertcost), topicID = "ChangeSuitVariant", dyndata = {itemuid = v.uniqueID, itemid = v:GetID(), cost = convertcost, baseSuit = v.baseSuit}})
 			end
 		end
 		
@@ -331,13 +404,13 @@ DIALOGUE.addTopic("RepairItems", {
 
 		-- Return the next topicID
 		if( !client:GetCharacter():HasMoney(dyndata.cost)) then
-			return "NotEnoughMoneyRepair"
+			return "NotEnoughMoneySuitVariantChange"
 		end
-		return "ConfirmRepair", dyndata
+		return "ChangeSuitVariantP2", dyndata
 	end,
 })
 
-DIALOGUE.addTopic("ConfirmRepair", {
+DIALOGUE.addTopic("ChangeSuitVariantP2", {
 	statement = "",
 	response = "",
 	IsDynamicFollowup = true,
@@ -345,18 +418,40 @@ DIALOGUE.addTopic("ConfirmRepair", {
 	DynamicPreCallback = function(self, player, target, dyndata)
 		if(dyndata) then
 			if (CLIENT) then
-				self.response = string.format("Fixing that %s will cost you %s.", ix.item.list[dyndata.itemuid].name ,ix.currency.Get(dyndata.cost))
-			else
-				target.repairstruct = { dyndata.itemid, dyndata.cost, dyndata.type }
+				self.response = string.format("Which suit would you like instead? It will cost you %s. Be sure to remove attachments beforehand.", ix.currency.Get(dyndata.cost))
 			end
+
+			target.selectedsuitstruct = { dyndata.itemid, dyndata.itemuid, dyndata.cost, dyndata.baseSuit }
 		end
 	end,
 	GetDynamicOptions = function(self, client, target)
-
-		local dynopts = {
-			{statement = "That's fine, fix it.", topicID = "ConfirmRepair", dyndata = {accepted = true}},
-			{statement = "On second thought...", topicID = "ConfirmRepair", dyndata = {accepted = false}},
+		local blacklistedVariants = {
+			["anarchist"] = true,
+			["authority"] = true,
+			["mercenary"] = true,
+			["looted"] = true,
+			["ecologist"] = true,
+			["scavenger"] = true,
+			["fanatic"] = true,
 		}
+
+		local suitVariants = {}
+		for _, v in pairs(ix.item.list) do
+			if target.selectedsuitstruct[4] == v.baseSuit and !blacklistedVariants[v.suitVariant] then
+				table.insert(suitVariants, {uniqueID = v.uniqueID, name = v.name})
+			end
+		end
+
+		local dynopts = {}
+		for _, v in pairs(suitVariants) do
+			if v.uniqueID == target.selectedsuitstruct[2] then
+				continue
+			end
+
+			table.insert(dynopts, {statement = "["..(v.uniqueID:gsub("^.*_","")):gsub("^%l", string.upper).."] "..v.name.." with cost "..ix.currency.Get(target.selectedsuitstruct[3]), topicID = "ChangeSuitVariantP2", dyndata = {suitVariantUID = v.uniqueID, accepted = true}})
+		end
+
+		table.insert(dynopts, {statement = "Actually, nevermind...", topicID = "ChangeSuitVariantP2", dyndata = {accepted = false}})
 
 		-- Return table of options
 		-- statement : String shown to player
@@ -366,22 +461,27 @@ DIALOGUE.addTopic("ConfirmRepair", {
 	end,
 	ResolveDynamicOption = function(self, client, target, dyndata)
 		if( SERVER and dyndata.accepted ) then
-			ix.dialogue.notifyMoneyLost(client, target.repairstruct[2])
-			client:GetCharacter():TakeMoney(target.repairstruct[2])
+			if (client:GetCharacter():GetData("carry", 0) >= ix.weight.BaseWeight(client:GetCharacter())) then
+				client:Notify("You are extremely overencumbered and can't do that!")
+				return "BackTopic"
+			end
+			if !(ix.item.instances[target.selectedsuitstruct[1]]:GetData("attachments",{})[1] == nil) then
+				client:Notify("Can't exchange suit with installed attachments!")
+				return "BackTopic"
+			end
+			ix.dialogue.notifyMoneyLost(client, ix.currency.Get(target.selectedsuitstruct[3]))
+			client:GetCharacter():TakeMoney(target.selectedsuitstruct[3])
 
-
-			ix.item.instances[target.repairstruct[1]]:SetData(target.repairstruct[3], 100)
-
-		end
-		if(SERVER)then
-			target.repairstruct = nil
+			ix.item.instances[target.selectedsuitstruct[1]]:Remove()
+			client:GetCharacter():SetData("carry", ix.weight.CalculateWeight(client:GetCharacter()))
+			client:GetCharacter():GetInventory():Add(dyndata.suitVariantUID)
 		end
 		-- Return the next topicID
 		return "BackTopic"
 	end,
 })
 
-DIALOGUE.addTopic("NotEnoughMoneyRepair", {
+DIALOGUE.addTopic("NotEnoughMoneySuitVariantChange", {
 	statement = "",
 	response = "Not enough money for that.",
 	options = {
@@ -390,7 +490,7 @@ DIALOGUE.addTopic("NotEnoughMoneyRepair", {
 })
 
 ----------------------------------------------------------------
-----------------------END-TECHNICIAN-END------------------------
+----------------------END-SUITCHANGE-END------------------------
 ----------------------------------------------------------------
 
 ----------------------------------------------------------------

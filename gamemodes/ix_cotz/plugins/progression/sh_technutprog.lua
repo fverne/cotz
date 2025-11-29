@@ -199,7 +199,8 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_documents_14"] = 8,
+			["value_documents_14"] = 1,
+			["value_documents_13"] = 1,
 		}	
 
 		return itemids
@@ -285,7 +286,7 @@ ix.progression.Register("technutItemDelivery_SuitNBC", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_waterfilter"] = 15,
+			["value_waterfilter"] = 10,
 			["medic_antirad_1"] = 15,
 		}	
 
@@ -454,7 +455,7 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 	GetItemIds = function()
 		local itemids = {
 			["drug_tobacco_1"] = 160,
-			["drug_tobacco_2"] = 160,
+			["drug_tobacco_2"] = 80,
 		}	
 
 		return itemids
@@ -539,10 +540,10 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["drink_spirit_3"] = 70,
-			["drink_canbeer_3"] = 120,
-			["drink_canbeer_4"] = 120,
-			["drink_canbeer_5"] = 120,
+			["drink_spirit_3"] = 40,
+			["drink_canbeer_3"] = 60,
+			["drink_canbeer_4"] = 70,
+			["drink_canbeer_5"] = 100,
 		}	
 
 		return itemids
@@ -890,10 +891,10 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 	GetItemIds = function()
 		local itemids = {
 			["value_carbattery"] = 3,
-			["value_wire_heavy"] = 10,
-			["value_tape_electric"] = 45,
-			["value_tape_duct"] = 25,
-			["value_motorclean"] = 15,
+			["value_wire_heavy"] = 2,
+			["value_tape_electric"] = 15,
+			["value_tape_duct"] = 10,
+			["value_motorclean"] = 5,
 			["value_gasoline"] = 5,
 		}	
 
@@ -979,7 +980,7 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_droplet"] = 50,
+			["artifact_droplet"] = 5,
 		}	
 
 		return itemids
@@ -1066,7 +1067,7 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 	GetItemIds = function()
 		local itemids = {
 			["artifact_droplet"] = 20,
-			["artifact_crystal"] = 20,
+			["artifact_crystal"] = 12,
 		}	
 
 		return itemids
@@ -1238,8 +1239,8 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_slug"] = 40,
-			["artifact_mica"] = 15,
+			["artifact_slug"] = 25,
+			["artifact_mica"] = 10,
 		}	
 
 		return itemids
@@ -1324,8 +1325,8 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_mamasbeads"] = 35,
-			["artifact_gmamasbeads"] = 5,
+			["artifact_mamasbeads"] = 15,
+			["artifact_gmamasbeads"] = 3,
 		}	
 
 		return itemids
@@ -1678,7 +1679,7 @@ ix.progression.Register("technutItemDelivery_Mask4", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_techtool_3"] = 5,
+			["value_techtool_3"] = 2,
 		}	
 
 		return itemids
@@ -1767,8 +1768,8 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["cmore"] = 15,
-			["foregrip"] = 20,
+			["cmore"] = 5,
+			["foregrip"] = 10,
 		}	
 
 		return itemids
@@ -1854,8 +1855,8 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["cobrasuppressor"] = 15,
-			["tundrasuppressor"] = 10,
+			["cobrasuppressor"] = 5,
+			["tundrasuppressor"] = 8,
 		}	
 
 		return itemids
@@ -1941,8 +1942,8 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["pbssuppressor"] = 15,
-			["sakersuppressor"] = 10,
+			["pbssuppressor"] = 5,
+			["sakersuppressor"] = 4,
 		}	
 
 		return itemids
@@ -2026,7 +2027,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["suit_anorak"] = 100,
+			["suit_anorak"] = 40,
 		}	
 
 		return itemids
@@ -2111,7 +2112,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["part_zombie_1"] = 500,
+			["part_zombie_1"] = 100,
 		}	
 
 		return itemids
@@ -2280,8 +2281,8 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_techtool_1"] = 20,
-			["value_techtool_2"] = 10,
+			["value_techtool_1"] = 10,
+			["value_techtool_2"] = 5,
 		}	
 
 		return itemids
@@ -2366,7 +2367,7 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_toiletpaper"] = 750,
+			["value_toiletpaper"] = 110,
 		}	
 
 		return itemids
@@ -2451,7 +2452,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_battery"] = 600,
+			["value_battery"] = 200,
 		}	
 
 		return itemids
@@ -2537,7 +2538,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_9vbattery"] = 450,
+			["value_9vbattery"] = 250,
 		}	
 
 		return itemids

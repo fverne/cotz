@@ -61,7 +61,7 @@ ix.randomitems.tables["bandit_pistol_loot"] = {
   {20,  {"762x25hp", {["quantity"] = 7}}},
   {50,  {"45acp", {["quantity"] = 6}}},
 
-  {150, {"kit_wallet"}},
+  {450, {"kit_wallet"}},
 }
 
 ix.randomitems.tables["bandit_shotgun_loot"] = {
@@ -107,7 +107,7 @@ ix.randomitems.tables["bandit_shotgun_loot"] = {
   {50,  {"12gaugesg", {["quantity"] = 4}}},
   {50,  {"45acp41", {["quantity"] = 7}}},
 
-  {150, {"kit_wallet"}},
+  {450, {"kit_wallet"}},
 }
 
 ix.randomitems.tables["bandit_rifle_loot"] = {
@@ -157,5 +157,5 @@ ix.randomitems.tables["bandit_rifle_loot"] = {
   {20,  {"762x25hp", {["quantity"] = 7}}},
   {40,  {"545x39", {["quantity"] = 6}}},
 
-  {150, {"kit_wallet"}},
+  {450, {"kit_wallet"}},
 }

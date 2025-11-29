@@ -12,7 +12,7 @@ ITEM.br = 0.00
 ITEM.fbr = 0
 ITEM.ar = 0
 ITEM.far = 0
-ITEM.radProt = 0.20
+ITEM.radProt = 0.25
 
 ITEM.exRender = true
 ITEM.iconCam = {

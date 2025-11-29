@@ -25,7 +25,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 			["hide_flesh"] = 10,
 			["hide_tushkano"] = 5,
 			["part_zombie_1"] = 40,
-			["part_swampcontroller_2"] = 5,
+			["part_swampcontroller_2"] = 1,
 		}	
 
 		return itemids
@@ -110,10 +110,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["hide_spider"] = 5,
+			["hide_spider"] = 3,
 			["hide_controller"] = 5,
 			["hide_vareshka"] = 5,
-			["part_controller_2"] = 10,
+			["part_controller_2"] = 2,
 		}	
 
 		return itemids
@@ -200,8 +200,8 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 			["hide_pseudogiant"] = 4,
 			["hide_chimera"] = 4,
 			["hide_karlik"] = 4,
-			["part_electrocontroller_2"] = 10,
-			["part_karlik_2"] = 10,
+			["part_electrocontroller_2"] = 3,
+			["part_karlik_2"] = 3,
 		}	
 
 		return itemids
@@ -463,7 +463,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 50,
+			["artifact_bolt"] = 40,
 		}	
 
 		return itemids

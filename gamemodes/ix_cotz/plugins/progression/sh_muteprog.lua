@@ -284,7 +284,7 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 		local itemids = {
 			["value_techtool_2"] = 5,
 			["value_frequencymodulator"] = 3,
-			["value_wire_heavy"] = 180,
+			["value_wire_heavy"] = 30,
 		}	
 
 		return itemids
@@ -456,7 +456,7 @@ ix.progression.Register("muteItemDelivery_Detector", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["detectorecho"] = 5,
+			["detectorecho"] = 1,
 		}	
 
 		return itemids
