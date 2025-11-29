@@ -378,16 +378,18 @@ ix.armortables.attachments["hide_controller"] = {
 	name = "Controller Scalp",
 	br = 0.12,
 	sr = 0.02,
+	ar = 0.07,
 	pr = 0.35,
-	weight = 3.500,
+	weight = 1.100,
 	uID = "hide_controller",
 }
 
 ix.armortables.attachments["hide_swampcontroller"] = {
 	name = "Swampcontroller Scalp",
 	br = 0.05,
-	pr = 0.10,
-	weight = 3.000,
+	pr = 0.15,
+	ar = 0.05,
+	weight = 0.800,
 	uID = "hide_swampcontroller",
 }
 
@@ -395,9 +397,9 @@ ix.armortables.attachments["hide_electrocontroller"] = {
 	name = "Electro Controller Scalp",
 	br = 0.08,
 	sr = 0.04,
-	pr = 0.15,
+	pr = 0.25,
 	ar = 0.16,
-	weight = 3.500,
+	weight = 1.350,
 	uID = "hide_electrocontroller"
 }
 
