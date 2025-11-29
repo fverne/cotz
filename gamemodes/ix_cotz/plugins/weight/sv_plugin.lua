@@ -26,7 +26,11 @@ function ix.weight.Update(character) -- Updates the specified character's curren
 				client:SetRunSpeed(ix.config.Get("walkSpeed"))
 			else
 				client:SetWalkSpeed(ix.config.Get("walkSpeed"))
-				client:SetRunSpeed(ix.config.Get("runSpeed"))
+				if !(client:GetNetVar("brth", false)) then
+					client:SetRunSpeed(ix.config.Get("runSpeed"))
+				else
+					client:SetRunSpeed(ix.config.Get("walkSpeed"))
+				end
 			end
 		end
 	end)
