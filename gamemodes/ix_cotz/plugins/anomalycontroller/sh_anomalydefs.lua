@@ -53,7 +53,7 @@ PLUGIN.anomalydefs[2] = {
 PLUGIN.anomalydefs[3] = {
 	name = "Electro",
 	entityname = "anom_electra_anomaly",
-	interval = 128,
+	interval = 256,
 	commonArtifacts = {
 		"artifact_battery",
 		"artifact_blowncap",
@@ -73,7 +73,7 @@ PLUGIN.anomalydefs[3] = {
 PLUGIN.anomalydefs[4] = {
 	name = "Electro 2",
 	entityname = "anom_electra_anomaly_type2",
-	interval = 128,
+	interval = 256,
 	commonArtifacts = {
 		"artifact_battery",
 		"artifact_blowncap",
