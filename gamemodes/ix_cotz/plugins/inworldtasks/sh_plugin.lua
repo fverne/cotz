@@ -125,8 +125,15 @@ function ix.util.GetRandomRFPoint(map)
 
 	local radpts = ix.plugin.list["eventcontroller"].eventpoints[map]
 
+	if map == "rp_pripyat_remaster" then
+		for k, v in pairs(radpts) do
+			if radpts[k][1][3] < -500 then
+				table.remove(radpts, k)
+			end
+		end
+	end
+
 	local allpts = {}
-	table.Add(allpts, anopts)
 	table.Add(allpts, radpts)
 
 	return allpts[ math.random( #allpts ) ][1]
