@@ -215,6 +215,7 @@ function PLUGIN:RedirectPlayerNoLoadZone(client, map)
 end
 
 function PLUGIN:RedirectPlayerToRightMap(client, map)
+	local mapdata = self.mapdata
 	if mapdata[map] != nil then
 		local tempip = mapdata[map].serverip
 		netstream.Start(client, "ixPlayerAskConnect", client, tempip)
