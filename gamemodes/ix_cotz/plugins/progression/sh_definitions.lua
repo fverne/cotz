@@ -298,8 +298,8 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 		local itemids = {
 			["meat_blinddog"] = 30,
 			["part_blinddog"] 	= 10,
-			["meat_cat"] 	= 10,
-			["part_cat"] 	= 5,
+			["meat_flesh"] 	= 30,
+			["part_flesh"] 	= 15,
 			["meat_tushkano"] 	= 30,
 			["part_tushkano"] 	= 10,
 			["meat_boar"] = 20,
@@ -654,10 +654,10 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	GetItemIds = function()
 		local itemids = {
 			["value_wirelesstrans"] 	= 10,
-			["value_tape_electric"] = 40,
+			["value_tape_electric"] = 30,
 			["value_phone_new"] 	= 5,
-			["value_phone_old"] 	= 10,
-			["value_wire_light"]	= 60
+			["value_phone_old"] 	= 5,
+			["value_wire_light"]	= 30
 		}
 
 		return itemids
@@ -818,7 +818,7 @@ ix.progression.Register("quarterMasterDelivery_main", {
 			["drink_spirit_3"] 	= 5,
 			["drink_vodka_5"] 		= 5,
 			["drink_vodka_6"] 		= 5,
-			["drug_cigar"] 			= 20,
+			["drug_cigar"] 			= 10,
 			["drug_cocaine"] 		= 5,
 			["drug_cigarette_5"] 	= 30,
 			["drug_cigarette_6"] 	= 30,
@@ -983,7 +983,7 @@ ix.progression.Register("smartass_rfTasks", {
 		},
 	},
 	progressthresholds = {
-		[1] = 100,
+		[1] = 60,
 	}
 })
 
@@ -1012,12 +1012,12 @@ ix.progression.Register("beanstalkItemDelivery_Documents", {
 		return str	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_documents_14"] 	= 40,
-			["value_documents_7"] 	= 40,
-			["value_documents_12"] 	= 40,
-			["value_documents_13"] 	= 40,
-			["value_documents_11"] 	= 40,
-			["value_documents_10"] 	= 40,
+			["value_documents_14"] 	= 5,
+			["value_documents_7"] 	= 10,
+			["value_documents_12"] 	= 10,
+			["value_documents_13"] 	= 5,
+			["value_documents_11"] 	= 10,
+			["value_documents_10"] 	= 10,
 		}
 
 		return itemids
@@ -1092,11 +1092,11 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 		return str	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_battery"] 	= 30,
-			["artifact_blowncap"] 	= 30,
-			["artifact_capacitor"] 	= 10,
-			["artifact_sparkler"] 	= 10,
-			["artifact_flash"] 	= 10,
+			["artifact_battery"] 	= 10,
+			["artifact_blowncap"] 	= 10,
+			["artifact_capacitor"] 	= 3,
+			["artifact_sparkler"] 	= 5,
+			["artifact_flash"] 	= 5,
 			["artifact_moonlight"] 	= 3,
 		}
 
@@ -1205,7 +1205,7 @@ ix.progression.Register("intern_gasAnalyzerReadings", {
 		},
 	},
 	progressthresholds = {
-		[1] = 150,
+		[1] = 90,
 	}
 })
 

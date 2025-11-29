@@ -109,10 +109,10 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_crystal"] = 10,
-			["artifact_mamasbeads"] = 10,
-			["artifact_capacitor"] = 5,
-			["artifact_panacea"] = 5,
+			["artifact_crystal"] = 5,
+			["artifact_mamasbeads"] = 5,
+			["artifact_capacitor"] = 1,
+			["artifact_panacea"] = 4,
 			["artifact_moonlight"] = 2,
 		}	
 
@@ -197,10 +197,10 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_gmamasbeads"] = 8,
-			["artifact_galaxy"] = 5,
-			["artifact_arachno"] = 5,
-			["artifact_halo"] = 5,
+			["artifact_gmamasbeads"] = 4,
+			["artifact_galaxy"] = 4,
+			["artifact_arachno"] = 4,
+			["artifact_halo"] = 2,
 			["artifact_gaia"] = 3,
 			["artifact_midas"] = 1,
 		}
@@ -537,11 +537,11 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["part_swampcontroller_2"] = 10,
+			["part_swampcontroller_2"] = 3,
 			["part_tark"] = 15,
 			["part_sprig"] = 15,
 			["part_spider"] = 20,
-			["part_snork_2"] = 20,
+			["part_snork_2"] = 5,
 			["part_cat"] = 20,
 		}
 
@@ -627,12 +627,12 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["part_controller_2"] = 15,
+			["part_controller_2"] = 4,
 			["part_vareshka"] = 20,
 			["part_skeleton"] = 20,
-			["part_karlik_2"] = 20,
-			["part_burer_2"] = 20,
-			["part_pseudodog"] = 40,
+			["part_karlik_2"] = 3,
+			["part_burer_2"] = 4,
+			["part_pseudodog"] = 30,
 		}
 
 		return itemids
@@ -717,7 +717,7 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 	GetItemIds = function()
 		local itemids = {
 			["part_pseudogiant"] = 20,
-			["part_electrocontroller_2"] = 15,
+			["part_electrocontroller_2"] = 4,
 			["part_chimera"] = 40,
 		}
 
