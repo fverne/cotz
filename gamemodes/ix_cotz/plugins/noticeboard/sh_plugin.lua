@@ -35,7 +35,7 @@ if (SERVER) then
 		end
 	end
 
-    local cooldown = 604800 -- 1 week
+    local cooldown = 1209600 -- 2 week
 
     function PLUGIN:NoticeWipeCheck()
         local nextWipe = cookie.GetNumber("ixNoticesTimeUntilWipe", 0)
