@@ -19,7 +19,7 @@ ITEM.exRender = false
 ITEM.img = ix.util.GetMaterial("vgui/hud/weapons/ak12.png")
 
 function ITEM:GetWeight()
-  return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
+  return self:GetData("weight", self.unloadedweight) + (self.bulletweight * self:GetData("ammo", 0))
 end
 
 ITEM.iconCam = {
