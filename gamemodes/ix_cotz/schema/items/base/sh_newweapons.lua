@@ -600,7 +600,7 @@ function ITEM:OnSave()
 
 		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
 			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
-		else
+		elseif !self:GetData("ammoType") then
 			self:SetData("ammoType", nil)
 		end
 	end
