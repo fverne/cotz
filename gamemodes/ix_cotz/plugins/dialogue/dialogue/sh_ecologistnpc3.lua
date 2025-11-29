@@ -8,7 +8,7 @@ DIALOGUE.addTopic("GREETING", {
 		"AboutWorkTopic",
 		-- "GetTask",
 		"GetTaskByDifficulty",
-		-- "AboutProgression",
+		"AboutProgression",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
