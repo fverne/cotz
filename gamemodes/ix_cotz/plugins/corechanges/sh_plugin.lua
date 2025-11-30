@@ -15,7 +15,7 @@ ix.chat.Register("iteminternal", {
 function PLUGIN:OnItemTransferred(item, curInv, inventory)
 	if curInv:GetID() == 0 then
 		local client = inventory:GetOwner()
-		ix.chat.Send(client, "iteminternal", Format("picks up the %s.", item.name), false)
+		ix.chat.Send(client, "iteminternal", Format("picks up the %s.", item:GetName()), false)
 
 		if item:GetData("bTemporary") then
 			item:SetData("bTemporary", false)
@@ -25,7 +25,7 @@ function PLUGIN:OnItemTransferred(item, curInv, inventory)
 	if inventory:GetID() == 0 then
 		local client = curInv:GetOwner()
 		if client then
-			ix.chat.Send(client, "iteminternal", Format("drops their %s.", item.name), false)
+			ix.chat.Send(client, "iteminternal", Format("drops their %s.", item:GetName()), false)
 		end
 	end
 end
