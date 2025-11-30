@@ -9,6 +9,9 @@ ITEM.weight = 4
 
 ITEM.items = {
 	{
+		{1, "knife_01"},
+	},
+	{
 		{1, "reward_consumable"},
 	},
 	{

@@ -128,6 +128,7 @@ ix.util.Include("human_npc_drops.lua", "shared")
 
 ix.util.Include("money.lua", "shared")
 ix.util.Include("backpacks.lua", "shared")
+ix.util.Include("newchar.lua","shared")
 
 ix.util.Include("task_rewards_ammo.lua", "shared")
 ix.util.Include("task_rewards_medical.lua", "shared")
