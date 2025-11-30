@@ -105,6 +105,11 @@ if (SERVER) then
 			if (character) then
 				local def = ix.container.stored[self:GetModel():lower()]
 
+				if def["isTouristLocked"] == true and activator:getReputation() < 25 and !activator:IsAdmin() then
+					activator:Notify("Your reputation level is not high enough.")
+					return
+				end
+
 				if (self:GetLocked() and !self.Sessions[character:GetID()]) then
 					self:EmitSound(def.locksound or "doors/default_locked.wav")
 
