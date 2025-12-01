@@ -12,7 +12,7 @@ ITEM.bulletweight = 0.010
 ITEM.unloadedweight = 0.95
 
 function ITEM:GetWeight()
-  return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
+  return self:GetData("weight", self.unloadedweight) + (self.bulletweight * self:GetData("ammo", 0))
 end
 
 ITEM.iconCam = {

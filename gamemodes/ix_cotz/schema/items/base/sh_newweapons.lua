@@ -398,7 +398,7 @@ function ITEM:Equip(client)
 
 		-- if wish granted
 		if self:GetData("unlimitedDurability", nil) then
-			weapon.WearDamage = 0
+			-- weapon.WearDamage = 0
 			weapon.DurabilityDamageChance = 0
 		end
 
@@ -540,7 +540,7 @@ function ITEM:OnLoadout()
 			
 			-- if wish granted
 			if self:GetData("unlimitedDurability", nil) then
-				weapon.WearDamage = 0
+				-- weapon.WearDamage = 0
 				weapon.DurabilityDamageChance = 0
 			end
 

@@ -31,6 +31,9 @@ function PLUGIN:CanPlayerUseCharacter(client, char)
 	end
 
 	if (curmap != game.GetMap() ) then
+		timer.Simple(1, function()
+			self:RedirectPlayerToRightMap(client, curmap)
+		end)
 		return false, "Character not in this map. Character is only loadable on '"..curmap.."'." 
 	end
 end
@@ -211,6 +214,13 @@ function PLUGIN:RedirectPlayerNoLoadZone(client, map)
 	end
 end
 
+function PLUGIN:RedirectPlayerToRightMap(client, map)
+	local mapdata = self.mapdata
+	if mapdata[map] != nil then
+		local tempip = mapdata[map].serverip
+		netstream.Start(client, "ixPlayerAskConnect", client, tempip)
+	end
+end
 
 if (CLIENT) then
 	netstream.Hook("ixPlayerAskConnect", function(client, address)

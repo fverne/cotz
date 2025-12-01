@@ -50,14 +50,28 @@ function PLUGIN:PostPlayerLoadout(client)
 	end
 end
 
-function playerMeta:getRadResist()
+function playerMeta:getPercentageRadResist()
+	local res = 1
+	local char = self:GetCharacter()
+	local items = char:GetInventory():GetItems(true)
+
+	for j, i in pairs(items) do
+		if (i.percentageRadProt and i:GetData("equip") == true) then
+			res = res * (1 - i.percentageRadProt)
+		end
+	end
+
+	return res
+end
+
+function playerMeta:getFlatRadResist()
 	local res = 0
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems(true)
 
 	for j, i in pairs(items) do
-		if (i.radProt and i:GetData("equip") == true) then
-			res = res + i.radProt
+		if (i.flatRadProt and i:GetData("equip") == true) then
+			res = res + i.flatRadProt
 		end
 	end
 
@@ -74,8 +88,10 @@ function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 	--RADIATION OVERRIDE
 	if (entity:IsPlayer() and entity:Alive() and entity:GetCharacter() and dmgInfo:IsDamageType(DMG_RADIATION) and entity:GetMoveType() != MOVETYPE_NOCLIP) then
 		local radAmount = (dmgInfo:GetDamage()/10)
-		local radResist = entity:getRadResist()
-		local finalRadDamage = radAmount - radResist
+		local percentageRadResist = entity:getPercentageRadResist()
+		local flatRadResist = entity:getFlatRadResist()
+		local finalRadDamage = radAmount * percentageRadResist
+		finalRadDamage = finalRadDamage - flatRadResist
 
 		if finalRadDamage > 0 and entity:hasGeiger() then -- taking damage
 			local randomsound = table.Random(geigerHeavy)
