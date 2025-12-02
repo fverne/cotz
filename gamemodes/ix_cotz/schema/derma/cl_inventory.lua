@@ -327,7 +327,7 @@ function PANEL:Move(newX, newY, givenInventory, bNoSend)
 		return
 	end
 
-	local x = (newX - 1) * iconSize + 4
+	local x = (newX - 1) * iconSize + givenInventory:GetWide()*0.002
 	local y = (newY - 1) * iconSize + givenInventory:GetPadding(2)
 
 	self.gridX = newX
@@ -369,7 +369,7 @@ end
 
 function PANEL:Paint(width, height)
 	surface.SetDrawColor(0, 0, 0, 85)
-	surface.DrawRect(2, 2, width - 4, height - 4)
+	surface.DrawRect(2, 2, width - self:GetWide()*0.002, height - self:GetWide()*0.002)
 
 	self:ExtraPaint(width, height)
 end
@@ -383,7 +383,7 @@ AccessorFunc(PANEL, "iconSize", "IconSize", FORCE_NUMBER)
 AccessorFunc(PANEL, "bHighlighted", "Highlighted", FORCE_BOOL)
 
 function PANEL:Init()
-	self:SetIconSize(48)
+	self:SetIconSize(ScrW()*0.0333) --48 pixels on 1920x1080
 	self:ShowCloseButton(false)
 	self:SetDraggable(true)
 	self:SetSizable(true)
@@ -590,7 +590,7 @@ function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
 
 	if (item) then
 		local inventory = ix.item.inventories[self.invID]
-		local dropX = math.ceil((mouseX - 4 - (itemPanel.gridW - 1) * 32) / iconSize)
+		local dropX = math.ceil((mouseX - self:GetWide()*0.002 - (itemPanel.gridW - 1) * 32) / iconSize)
 		local dropY = math.ceil((mouseY - self:GetPadding(2) - (itemPanel.gridH - 1) * 32) / iconSize)
 
 		-- don't draw grid if we're dragging it out of bounds
@@ -811,7 +811,7 @@ function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 		local inventory = ix.item.inventories[self.invID]
 
 		if (inventory and panel.OnDrop) then
-			local dropX = math.ceil((x - 4 - (panel.gridW - 1) * 32) / self.iconSize)
+			local dropX = math.ceil((x - self:GetWide()*0.002 - (panel.gridW - 1) * 32) / self.iconSize)
 			local dropY = math.ceil((y - self:GetPadding(2) - (panel.gridH - 1) * 32) / self.iconSize)
 
 			panel:OnDrop(true, self, inventory, dropX, dropY)

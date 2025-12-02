@@ -41,7 +41,7 @@ if(CLIENT) then
 			self.index.dltbtn = self.index:Add("ixStalkerButton")
 			self.index.dltbtn:Dock(RIGHT)
 			self.index.dltbtn:DockMargin(20, 20, 20, 20)
-			self.index.dltbtn:SetWide(100)
+			self.index.dltbtn:SetWide(self.index:GetWide()*1.2)
 			self.index.dltbtn:SetText("Abandon")
 			function self.index.dltbtn.DoClick() 
 				if LocalPlayer():GetCharacter():GetData("lastTaskAbandon", 0) < os.time() then

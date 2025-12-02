@@ -92,7 +92,7 @@ function PANEL:Init()
 
 	ix.gui.inv1 = panel
 
-	self:SetWide(panel:GetWide() - 48)
+	self:SetWide(panel:GetWide() - ScrW()*0.0333)
 end
 
 vgui.Register("ixStalkerInventory", PANEL, "DScrollPanel")
@@ -112,7 +112,7 @@ function PANEL:Init()
 
 	local container = self:Add("ixStalkerInventory")
 	self:SetSize(container:GetWide() * 1.25, container:GetTall() * 1.0785)
-	self:DockPadding(container:GetWide()*0.024, container:GetTall() * 0.173, container:GetWide()*0.024, container:GetTall() * 0.082)
+	self:DockPadding(container:GetWide()*0.030, container:GetTall() * 0.173, container:GetWide()*0.030, container:GetTall() * 0.082)
 
 	self.charbackground = self:Add("DImage")
 	self.charbackground:SetSize(container:GetWide() * 1.25, container:GetTall() * 1.0785)
@@ -140,7 +140,7 @@ function PANEL:Init()
 
 	self.money = self:Add("DLabel")
 	self.money:SetFont("stalkerregularfont3")
-	self.money:SetPos(container:GetWide() * 0.06, container:GetTall() * 0.1075)
+	self.money:SetPos(container:GetWide() * 0.06, container:GetTall() * 0.11)
 	self.money:SetWide(container:GetWide() * 0.625)
 	self.money:SetContentAlignment(6)
 	self.money:SetText(ix.currency.Get(LocalPlayer():GetCharacter():GetMoney()))
@@ -150,7 +150,7 @@ function PANEL:Init()
 	local maxWeight = ix.config.Get("maxWeight", 30)
 	self.weight = self:Add("DLabel")
 	self.weight:SetFont("stalkerregularfont3")
-	self.weight:SetPos(container:GetWide()*0.4, container:GetTall()*1.035)
+	self.weight:SetPos(container:GetWide()*0.4, container:GetTall()*1.038)
 	self.weight:SetWide(container:GetWide()*0.8)
 	self.weight:SetContentAlignment(6)
 	if (ix.option.Get("imperial", false)) then
