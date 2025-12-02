@@ -383,7 +383,7 @@ AccessorFunc(PANEL, "iconSize", "IconSize", FORCE_NUMBER)
 AccessorFunc(PANEL, "bHighlighted", "Highlighted", FORCE_BOOL)
 
 function PANEL:Init()
-	self:SetIconSize(ScrW()*0.0333) --48 pixels on 1920x1080
+	self:SetIconSize(ScrW()*0.0300)
 	self:ShowCloseButton(false)
 	self:SetDraggable(true)
 	self:SetSizable(true)

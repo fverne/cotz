@@ -92,7 +92,7 @@ function PANEL:Init()
 
 	ix.gui.inv1 = panel
 
-	self:SetWide(panel:GetWide() - ScrW()*0.0333)
+	self:SetWide(panel:GetWide() - ScrW()*0.0277)
 end
 
 vgui.Register("ixStalkerInventory", PANEL, "DScrollPanel")
