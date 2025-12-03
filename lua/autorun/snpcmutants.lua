@@ -419,6 +419,9 @@ AddSound("Stalker.ZombieB.Die18",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombie_
 ----IDLE
 AddSound("Stalker.Boar.Idle1",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/boar/boar_idle_1.wav")
 AddSound("Stalker.Boar.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/boar/boar_idle_2.wav")
+----CHASE
+AddSound("Stalker.Boar.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/boar/boar_aggressive_1.wav")
+AddSound("Stalker.Boar.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/boar/boar_aggressive_2.wav")
 ----HIT
 AddSound("Stalker.Boar.Melee1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/boar/boar_attack_1.wav")
 AddSound("Stalker.Boar.Melee2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/boar/boar_attack_2.wav")
