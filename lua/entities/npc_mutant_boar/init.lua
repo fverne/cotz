@@ -22,7 +22,7 @@ ENT.ChasingSoundEnabled = true
 ENT.ChasingSound.name = "Stalker.Boar.Chase"
 ENT.ChasingSound.min = 1
 ENT.ChasingSound.max = 2
-ENT.ChasingSound.chance = 20
+ENT.ChasingSound.chance = 100
 
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"

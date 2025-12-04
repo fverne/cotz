@@ -992,7 +992,7 @@ function ENT:Think()
 					self:STALKERNPCThinkEnemyValid()
 
 					if(self.ChasingSoundEnabled==true&&self:IsCurrentSchedule(SCHED_CHASE_ENEMY)) then
-						self:STALKERNPCPlaySoundRandom(self.ChasingSound.chance,self.ChasingSound.name,self.ChasingSound.min,self.ChasingSound.max,"Chase")
+						self:STALKERNPCPlaySoundRandom(self.ChasingSound.chance,self.ChasingSound.name,self.ChasingSound.min,self.ChasingSound.max)
 					end
 
 				else
