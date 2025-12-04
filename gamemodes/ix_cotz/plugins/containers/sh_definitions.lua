@@ -136,7 +136,8 @@ ix.container.Register("models/props_forest/footlocker01_closed.mdl", {
 	name = "Community Chest",
 	description = "A chest for sharing items.",
 	width = 19,
-	height = 13
+	height = 13,
+	isTouristLocked = true
 })
 
 ix.container.Register("models/lostsignalproject/items/misc/instrument_1.mdl", {

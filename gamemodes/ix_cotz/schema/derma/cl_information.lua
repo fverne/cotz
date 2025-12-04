@@ -432,6 +432,7 @@ hook.Add("CreateMenuButtons", "ixCharInfo", function(tabs)
 			local inventory = container:Add("ixStalkerInventoryPanel")
 			--inventory:SetPos(container:GetWide() - inventory:GetWide() - container:GetWide()*0.01, 0)
 			inventory:Dock(RIGHT)
+			inventory:InvalidateLayout()
 			
 			-- dont show the jobs panel if there are no jobs taken
 			if !table.IsEmpty(LocalPlayer():GetCharacter():GetJobs()) then

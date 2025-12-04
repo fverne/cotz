@@ -144,7 +144,7 @@ end
 function PANEL:SetLocalInventory(inventory)
 	if (!IsValid(ix.gui.menu)) then
 		-- ix.gui.inv1:SetInventory(inventory)
-		ix.gui.frame:SetPos(self:GetWide() / 2 + self:GetFrameMargin() / 2, self:GetTall() / 2 - ix.gui.frame:GetTall() / 2)
+		ix.gui.frame:SetPos(self:GetWide() / 1.5 + self:GetFrameMargin() / 2, self:GetTall() / 2 - ix.gui.frame:GetTall() / 2)
 	end
 end
 
@@ -164,7 +164,7 @@ end
 function PANEL:SetStorageInventory(inventory)
 	self.storageInventory:SetInventory(inventory)
 	self.storageInventory:SetPos(
-		self:GetWide() / 2 - self.storageInventory:GetWide() - 2,
+		self:GetWide() / 1.5 - self.storageInventory:GetWide() - 2,
 		self:GetTall() / 2 - self.storageInventory:GetTall() / 2
 	)
 

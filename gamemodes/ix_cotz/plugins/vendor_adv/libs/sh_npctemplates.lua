@@ -729,6 +729,23 @@ ix.npctemplates.templates["cconnpc"] = {
 	},
 }
 
+ix.npctemplates.templates["arenanpc"] = {
+	name 		= "'Arena Master'",
+	description = "You are met with a relaxed gaze as you approach.",
+	model 		= "models/legends/garyk.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.3,
+	dialogueid 	= "arenanpc",
+	soundgroup 	= "nosound",
+	idleanim 	= "trader_idle",
+	-- animgroup 	= 3,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["medic_medkit_1"] 	= { nil, 6, SELLONLY, 6, 2, 6 },
+	},
+}
+
 -- No sounds emitted
 ix.npctemplates.soundtemplates["nosound"] = {
 	"stalkersound/inv_nosound.mp3",
