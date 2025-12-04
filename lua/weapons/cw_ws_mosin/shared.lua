@@ -43,12 +43,10 @@ if CLIENT then
 	SWEP.CmorePos = Vector(-2.83, -7, 0.1)
 	SWEP.CmoreAng = Vector(0, 0, 0)
 
-	//SWEP.SprintPos = Vector(0, 0, 0)
-	//SWEP.SprintAng = Vector(0, 0, 0)
 	SWEP.SprintPos = Vector(3.029, -0.805, -2.201)
 	SWEP.SprintAng = Vector(-4.926, 38.693, -18.292)
 
-	SWEP.ShortDotPos = Vector(-2.81, -7, 0.039)
+	SWEP.ShortDotPos = Vector(-2.806, -7, 0.03)
 	SWEP.ShortDotAng = Vector(0, 0, 0)
 	SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
 	
@@ -56,20 +54,23 @@ if CLIENT then
 	SWEP.ACOGAng = Vector(0, 0, 0)
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
 
-	SWEP.PSOPos = Vector(-2.721, -7, 0.079)
+	SWEP.PSOPos = Vector(-2.7, -7, 0.065)
 	SWEP.PSOAng = Vector(0, 0, 0)
 	SWEP.PSO1AxisAlign = {right = 0, up = 0, forward = 0}
 	
-	SWEP.NXSPos = Vector(-2.818, -3.388, 0.1)
+	SWEP.NXSPos = Vector(-2.83, -3.388, 0.15)
 	SWEP.NXSAng = Vector(0, 0, 0)
 	SWEP.NXSAlign = {right = 0, up = 0, forward = 0}
+
+	SWEP.SightBackUpPos = Vector(-5, 1, 0)
+	SWEP.SightBackUpAng = Vector(1, 0, -40)
 
 	SWEP.CustomizePos = Vector(5.519, 0, -1.601)
 	SWEP.CustomizeAng = Vector(21.106, 25.326, 10.553)
 	SWEP.SightWithRail = true
 
 
-	//SWEP.DisableSprintViewSimulation = true
+	--SWEP.DisableSprintViewSimulation = true
 
 	SWEP.AttachmentModelsVM = {
 		["md_pso1"] = { type = "Model", model = "models/cw2/attachments/pso.mdl", bone = "A_Optic", rel = "", pos = Vector(0, -3.25, -2.597), angle = Angle(0, 0, 90), size = Vector(0.8, 0.8, 0.8)},

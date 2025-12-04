@@ -70,6 +70,10 @@ if CLIENT then
 	
 	SWEP.BaseArm = "Bip01 L Clavicle"
 	SWEP.BaseArmBoneOffset = Vector(-50, 0, 0)
+
+
+	SWEP.SightBackUpPos = Vector(-5.5, 1, 0)
+	SWEP.SightBackUpAng = Vector(2, 0, -40)
 	
 	SWEP.BoltBone = "Slide"
 	SWEP.BoltShootOffset = Vector(-3, 0, 0)
@@ -144,7 +148,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 50
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/tfa_nmrih/v_fa_ruger1022.mdl"
 SWEP.WorldModel		= "models/weapons/tfa_nmrih/w_fa_ruger1022.mdl"

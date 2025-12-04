@@ -189,7 +189,7 @@ if CLIENT then
 	cd.y = 0
 	cd.w = 512
 	cd.h = 512
-	cd.fov = 15
+	cd.fov = 8
 	cd.drawviewmodel = false
 	cd.drawhud = false
 	cd.dopostprocess = false

@@ -7,7 +7,7 @@ ITEM.weaponCategory = "primary"
 ITEM.price = 35000
 ITEM.width = 4
 ITEM.height  	= 2
-ITEM.validAttachments = {"md_pbs1"}
+ITEM.validAttachments = {"md_pbs1","md_kobra","md_pso1"}
 
 ITEM.bulletweight = 0.023
 ITEM.unloadedweight = 1.8

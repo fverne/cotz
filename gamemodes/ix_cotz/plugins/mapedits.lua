@@ -26,7 +26,7 @@ function PLUGIN:EntityKeyValue(ent, key, value)
     if game.GetMap() == "rp_waystation" then
         -- keeps elevatordoors open, regardless of the underground power switches
         if IsValid(ent) and ent:GetClass() == "func_door" and ent:GetName() == "lift_door" then
-            ent:SetKeyValue("spawnpos", 1)
+            ent:Remove()
         end
 
         --removes BTR with missing textures

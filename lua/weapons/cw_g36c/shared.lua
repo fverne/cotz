@@ -56,6 +56,9 @@ if CLIENT then
 	SWEP.ACOGAng = Vector(0, 0, 0)
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
 
+	SWEP.SightBackUpPos = Vector(-4.2, 1, 0)
+	SWEP.SightBackUpAng = Vector(1, 0, -30)
+
 	SWEP.SightWithRail = true
 	SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
 	

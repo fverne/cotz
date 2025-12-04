@@ -44,7 +44,10 @@ if CLIENT then
 	
 	SWEP.CmorePos = Vector(-2.53, 1.5, -0.15)
 	SWEP.CmoreAng = Vector(0, 0, 0)
-	
+
+	SWEP.SightBackUpPos = Vector(-4.5, 2, 0)
+	SWEP.SightBackUpAng = Vector(2, 1, -40)
+
 	SWEP.ReflexPos = Vector(-2.53, -3.823, 0.15)
 	SWEP.ReflexAng = Vector(0, 0, 0)
 	

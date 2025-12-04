@@ -59,7 +59,7 @@ if CLIENT then
 	
 	SWEP.PSOPos = Vector(-2.914, 0, 0.449)
 	SWEP.PSOAng = Vector(0, 0.349, 0)
-	
+
 	SWEP.KobraPos = Vector(-3.08, 0, 0.759)
 	SWEP.KobraAng = Vector(-0.532, 0.15, 0)
 	
@@ -68,7 +68,10 @@ if CLIENT then
 	
 	SWEP.AlternativePos = Vector(-0.32, 0, -0.64)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
-	
+
+	SWEP.SightBackUpPos = Vector(-5.5, 5, 0)
+	SWEP.SightBackUpAng = Vector(1, 0.5, -40)
+
 	SWEP.CustomizePos = Vector(4.82, 0, 0)
     SWEP.CustomizeAng = Vector(5.859, 32.592, 0)
 	

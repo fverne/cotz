@@ -31,30 +31,33 @@ if CLIENT then
 	SWEP.EoTechPos = Vector(-2.62, -5, 0.6)
 	SWEP.EoTechAng = Vector(0.25, 0.025, 0)
 	
-	SWEP.AimpointPos = Vector(-2.62, -3, 0.5)
+	SWEP.AimpointPos = Vector(-2.62, -3, 0.6)
 	SWEP.AimpointAng = Vector(0.25, 0.025, 0)
 
 	SWEP.MicroT1Pos = Vector(-2.62, -1, 0.5)
 	SWEP.MicroT1Ang = Vector(0.25, 0.025, 0)
 	
-	SWEP.ReflexPos = Vector(-2.62, -1, 0.55)
+	SWEP.ReflexPos = Vector(-2.62, -1, 0.6)
 	SWEP.ReflexAng = Vector(0.25, 0.025, 0)
 		
-	SWEP.CmorePos = Vector(-2.62, -1, 0.35)
+	SWEP.CmorePos = Vector(-2.62, -1, 0.4)
 	SWEP.CmoreAng = Vector(0.25, 0.025, 0)
 
 	SWEP.SprintPos = Vector(3.029, -0.805, -2.201)
 	SWEP.SprintAng = Vector(-4.926, 38.693, -18.292)
 
-	SWEP.ShortDotPos = Vector(-2.61, -3, 0.5)
+	SWEP.SightBackUpPos = Vector(-4.5, 5, -0.2)
+	SWEP.SightBackUpAng = Vector(0, 0.5, -40)
+
+	SWEP.ShortDotPos = Vector(-2.6, -2.3, 0.49)
 	SWEP.ShortDotAng = Vector(0.25, 0.025, 0)
-	SWEP.SchmidtShortDotAxisAlign = {right = 0.25, up = 0.025, forward = 0}
+	SWEP.SchmidtShortDotAxisAlign = {right = -.15, up = 0.025, forward = 0}
 	
 	SWEP.ACOGPos = Vector(-2.62, -3, 0.25)
 	SWEP.ACOGAng = Vector(0.25, 0.025, 0)
 	SWEP.ACOGAxisAlign = {right = 0.25, up = 0.025, forward = 0}
 
-	SWEP.NXSPos = Vector(-2.62, -0.5, 0.4)
+	SWEP.NXSPos = Vector(-2.60, -0.5, 0.43)
 	SWEP.NXSAng = Vector(0, 0, 0)
 	SWEP.NXSAlign = {right = 0, up = 0, forward = 0}
 
@@ -202,7 +205,7 @@ function SWEP:IndividualThink()
 		end
 
 		if( self.ActiveAttachments.md_rearsight and self:hasAttachmentInCategory(1)) then
-			self:detachSpecificAttachment("md_rearsight")
+			self:detatch(3)
 		end
 	end
 end

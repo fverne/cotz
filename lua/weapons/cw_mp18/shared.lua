@@ -146,7 +146,7 @@ SWEP.Instructions	= ""
 SWEP.WearDamage = 0.33
 SWEP.WearEffect = 0.005
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 50
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/arc9/darsu_eft/c_mp18.mdl"
 SWEP.WorldModel		= "models/weapons/arc9/darsu_eft/w_mp18.mdl"

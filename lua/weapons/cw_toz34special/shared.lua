@@ -26,6 +26,9 @@ if CLIENT then
 	SWEP.AlternativePos = Vector(-0.281, 1.325, -0.52)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
 
+	SWEP.SightBackUpPos = Vector(-3.7, -0.5, 1)
+	SWEP.SightBackUpAng = Vector(2, 0, -40)
+
 	SWEP.ViewModelMovementScale = 0.8
 	SWEP.HUD_MagText = "CYLINDER: "
 	SWEP.NXSAlign = {right = 0, up = 0, forward = 0}

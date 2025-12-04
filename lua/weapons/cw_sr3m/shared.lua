@@ -50,7 +50,10 @@ if CLIENT then
 	
 	SWEP.MicroT1Pos = Vector(-2.55, 1.5, -0.15)
 	SWEP.MicroT1Ang = Vector(0, 0, 0)
-	
+
+	SWEP.SightBackUpPos = Vector(-4.5, 2, 0)
+	SWEP.SightBackUpAng = Vector(2, 1, -40)
+
 	SWEP.AimpointPos = Vector(-2.541, -3.504, -0.233)
 	SWEP.AimpointAng = Vector(0, 0, 0)
 	

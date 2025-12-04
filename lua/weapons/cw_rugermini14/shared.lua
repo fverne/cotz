@@ -30,38 +30,41 @@ if CLIENT then
 	SWEP.WMAng = Vector(-22, 180, 180)
 	SWEP.WMPos = Vector(1, -15, 0)
 	
-	SWEP.IronsightPos = Vector(-7.224, -9, 0.887)
+	SWEP.IronsightPos = Vector(-7.245, -9, 0.887)
 	SWEP.IronsightAng = Vector(0, 0, 0)
 	
-	SWEP.AimpointPos = Vector(-7.224, -16, 0.1)
+	SWEP.AimpointPos = Vector(-7.23, -16, 0.02)
 	SWEP.AimpointAng = Vector(0, 0, 0)
 	
-	SWEP.EoTechPos = Vector(-7.224, -16, 0)
+	SWEP.EoTechPos = Vector(-7.245, -16, 0)
 	SWEP.EoTechAng = Vector(0, 0, 0)
 
-	SWEP.CmorePos = Vector(-7.224, -16, 0.25)
+	SWEP.CmorePos = Vector(-7.245, -16, 0.25)
 	SWEP.CmoreAng = Vector(0, 0, 0)
 	
-	SWEP.MicroT1Pos = Vector(-7.224, 0, 0)
+	SWEP.MicroT1Pos = Vector(-7.245, 0, 0)
 	SWEP.MicroT1Ang = Vector(0, 0, 0)
 	
-	SWEP.ReflexPos = Vector(-7.224, -19, -0.1)
+	SWEP.ReflexPos = Vector(-7.245, -19, -0.1)
 	SWEP.ReflexAng = Vector(0, 0, 0)
 	
-	SWEP.ShortDotPos = Vector(-7.224, -16, 0)
+	SWEP.ShortDotPos = Vector(-7.245, -17, 0.045)
 	SWEP.ShortDotAng = Vector(0, 0, 0)
 
-	SWEP.ACOGPos = Vector(-7.224, -20, -0.25)
+	SWEP.ACOGPos = Vector(-7.224, -17, -0.25)
 	SWEP.ACOGAng = Vector(0, 0, 0)
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
 	
-	SWEP.NXSPos = Vector(-7.224, -20, 0.05)
+	SWEP.NXSPos = Vector(-7.22, -16, 0.09)
 	SWEP.NXSAng = Vector(0, 0, 0)
 	SWEP.NXSAlign = {right = 0, up = 0, forward = 0}
 	
 	SWEP.SprintPos = Vector(2, -4, 0.119)
 	SWEP.SprintAng = Vector(-10.628, 25.478, 0)
-	
+
+	SWEP.SightBackUpPos = Vector(-9.7, -10, -1)
+	SWEP.SightBackUpAng = Vector(3, 0.4, -40)
+
 	SWEP.CustomizePos = Vector(2.68, -1.68, 1)
 	SWEP.CustomizeAng = Vector(1.299, 5.8, 21.299)
 	
@@ -79,7 +82,7 @@ if CLIENT then
 	SWEP.AttachmentModelsVM = {
 		["md_microt1"] = {model = "models/cw2/attachments/microt1.mdl", bone = "mini_14", pos = Vector(6.4, -14, 0), angle = Angle(-90, -10, 0), adjustment = {min = -1.3, max = 0.5, inverseOffsetCalc = true, axis = "y"}, size = Vector(0.5, 0.5, 0.5)},
 		["md_eotech"] = {model = "models/wystan/attachments/2otech557sight.mdl", bone = "mini_14", pos = Vector(-7, -1, 0.25), angle = Angle(180, 260, -90), size = Vector(1, 1, 1)},
-		["md_aimpoint"] = {model = "models/wystan/attachments/aimpoint.mdl", bone = "mini_14", pos = Vector(1.5, -20, 0.23), angle = Angle(-90, -10, 0), size = Vector(1, 1, 1)},
+		["md_aimpoint"] = {model = "models/wystan/attachments/aimpoint.mdl", bone = "mini_14", pos = Vector(-0.9, -6, -0.25), angle = Angle(90, -10, 180), size = Vector(1, 1, 1)},
 		["md_schmidt_shortdot"] = {model = "models/cw2/attachments/schmidt.mdl", bone = "mini_14", pos = Vector(-0.8, -7, -0.4), angle = Angle(180, -100, -90), size = Vector(1, 1, 1)},
 		["md_reflex"] = { type = "Model", model = "models/attachments/kascope.mdl", bone = "mini_14", rel = "", pos = Vector(6.7, -15, -0.025), angle = Angle(90, -10, 180), size = Vector(1, 1, 1), color = Color(255, 255, 255, 0)},
 		["md_cmore"] = { type = "Model", model = "models/attachments/cmore.mdl", bone = "mini_14", rel = "", pos = Vector(5.4, -10, -0.025), angle = Angle(90, -10, 180), size = Vector(0.7, 0.7, 0.7), color = Color(255, 255, 255, 0)},

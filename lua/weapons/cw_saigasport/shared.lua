@@ -56,6 +56,9 @@ if CLIENT then
 	
 	SWEP.ShortDotPos = Vector(-2.33, -1.76, -1.02)
 	SWEP.ShortDotAng = Vector(0, 0, 0)
+
+	SWEP.SightBackUpPos = Vector(-4, 2, 0)
+	SWEP.SightBackUpAng = Vector(2, 0, -40)
 	
 	SWEP.NXSPos = Vector(-2.38, -1.76, -1.12)
 	SWEP.NXSAng = Vector(0, 0, 0)

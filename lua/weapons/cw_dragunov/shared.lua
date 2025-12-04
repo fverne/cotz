@@ -23,8 +23,8 @@ if CLIENT then
 	SWEP.ForeGripOffsetCycle_Reload_Empty = 0.8
 	SWEP.FireMoveMod = 0.6
 	
-	SWEP.IronsightPos = Vector(-3.15, -2.01, 1.56)
-	SWEP.IronsightAng = Vector(-0.15, 0.05, 0)
+	SWEP.IronsightPos = Vector(-3.125, -2.01, 1.56)
+	SWEP.IronsightAng = Vector(-0.15, 0.17, 0)
 	
 	SWEP.EoTechPos = Vector(-3.05, 0, 0.839)
 	SWEP.EoTechAng = Vector(-1.5, 0, 2)
@@ -34,6 +34,9 @@ if CLIENT then
 	
 	SWEP.MicroT1Pos = Vector(-3.15, 0, 1.32)
 	SWEP.MicroT1Ang = Vector(-1.5, 0, 2)
+
+	SWEP.SightBackUpPos = Vector(-4.8, 5, 0)
+	SWEP.SightBackUpAng = Vector(0, 0, -30)
 
 	SWEP.PSOPos = Vector(-3, 0, 0.8)
 	SWEP.PSOAng = Vector(0, 0, 2)
