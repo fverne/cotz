@@ -89,10 +89,10 @@ DIALOGUE.addTopic("StorageTopic", {
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
 		local basecost = 120
-		local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3))
+		local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 2))
 		local bankH = client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
-		local heightcost = math.Round(math.pow(basecost + 300, 1+(bankH/4.5)))
-		local widthcost = math.Round(math.pow(basecost, 1+(bankW/4.5)))
+		local heightcost = math.Round(math.pow(basecost + 200, 1+(bankH/5.5)))
+		local widthcost = math.Round(math.pow(basecost, 1+(bankW/5.5)))
 
 		table.insert(dynopts, {statement = "Can I please see my storage?", topicID = "StorageTopic", dyndata = {option = "use"}})
 
@@ -139,13 +139,13 @@ DIALOGUE.addTopic("OpenStorage", {
 
 			if ID then
 				local bankstruct = {}
-				bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 3)), character:GetData("bankH", ix.config.Get("bankH", 2))}
-				ix.inventory.Restore(bankstruct, ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), function(inventory)
+				bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 2)), character:GetData("bankH", ix.config.Get("bankH", 2))}
+				ix.inventory.Restore(bankstruct, ix.config.Get("bankW", 2), ix.config.Get("bankH", 2), function(inventory)
 					bank = inventory
 					bank:SetOwner(character:GetID())
 				end)
 			else
-				bank = ix.inventory.Create(ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), os.time())
+				bank = ix.inventory.Create(ix.config.Get("bankW", 2), ix.config.Get("bankH", 2), os.time())
 				bank:SetOwner(character:GetID())
 				bank:Sync(client)
 		
@@ -198,7 +198,7 @@ DIALOGUE.addTopic("ConfirmStorageUpgrade", {
 		if( SERVER and dyndata.accepted ) then
 
 			local bankH = client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
-			local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3))
+			local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 2))
 
 			if target.upgradestruct[1] == "vertically" then
 				if bankH < ix.config.Get("bankHMax", 2) then
@@ -218,7 +218,7 @@ DIALOGUE.addTopic("ConfirmStorageUpgrade", {
 					client:GetCharacter():TakeMoney(target.upgradestruct[2])
 					ix.dialogue.notifyMoneyLost(client, target.upgradestruct[2])
 				else
-					client:Notify("Cannot update storage! It's width is maxed, which is "..client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3)))
+					client:Notify("Cannot update storage! It's width is maxed, which is "..client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 2)))
 				end
 			end
 		end
