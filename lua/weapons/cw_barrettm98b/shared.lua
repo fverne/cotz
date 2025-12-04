@@ -46,8 +46,8 @@ if CLIENT then
 	SWEP.SprintPos = Vector(3.029, -0.805, -2.201)
 	SWEP.SprintAng = Vector(-4.926, 38.693, -18.292)
 
-	SWEP.SightBackUpPos = Vector(-3.8, 5, 0)
-	SWEP.SightBackUpAng = Vector(0, 0.5, -30)
+	SWEP.SightBackUpPos = Vector(-4.5, 5, -0.2)
+	SWEP.SightBackUpAng = Vector(0, 0.5, -40)
 
 	SWEP.ShortDotPos = Vector(-2.6, -2.3, 0.49)
 	SWEP.ShortDotAng = Vector(0.25, 0.025, 0)
@@ -205,7 +205,7 @@ function SWEP:IndividualThink()
 		end
 
 		if( self.ActiveAttachments.md_rearsight and self:hasAttachmentInCategory(1)) then
-			self:detachSpecificAttachment("md_rearsight")
+			self:detatch(3)
 		end
 	end
 end
