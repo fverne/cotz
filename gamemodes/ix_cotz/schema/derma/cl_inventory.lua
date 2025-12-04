@@ -383,7 +383,7 @@ AccessorFunc(PANEL, "iconSize", "IconSize", FORCE_NUMBER)
 AccessorFunc(PANEL, "bHighlighted", "Highlighted", FORCE_BOOL)
 
 function PANEL:Init()
-	self:SetIconSize(ScrW()*0.0300)
+	self:SetIconSize(ScrW()*0.0277 * ix.option.Get("inventoryScale", 1))
 	self:ShowCloseButton(false)
 	self:SetDraggable(true)
 	self:SetSizable(true)

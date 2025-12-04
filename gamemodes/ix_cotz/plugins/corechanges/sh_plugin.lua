@@ -158,6 +158,11 @@ if (SERVER) then
 	end
 end
 
+ix.option.Add("inventoryScale", ix.type.number, 1, {
+	category = "appearance", min = 0.1, max = 2, decimals = 1
+})
+
+
 if (CLIENT) then
 	function PLUGIN:CharacterLoaded()
 		-- puts on minimal tooltips by default
