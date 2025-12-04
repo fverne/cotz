@@ -39,6 +39,9 @@ if CLIENT then
 	
 	SWEP.ShortDotPos = Vector(-2.641, 0, -1.325)
 	SWEP.ShortDotAng = Vector(0.4, 0.6, 0)
+
+	SWEP.SightBackUpPos = Vector(-4, 4, 0.5)
+	SWEP.SightBackUpAng = Vector(0.4, 0, -30)
 	
 	SWEP.ACOGPos = Vector(-2.65, 0, -1.525)
 	SWEP.ACOGAng = Vector(0.4, 0.6, 0)
@@ -159,7 +162,7 @@ SWEP.Primary.Ammo			= "5.45x39MM"
 SWEP.FireDelay = 0.0666666
 SWEP.FireSound = "CW_AEK971_FIRE"
 SWEP.FireSoundSuppressed = "CW_AK74_FIRE_SUPPRESSED"
-SWEP.Recoil = 1.2
+SWEP.Recoil = 0.5
 
 SWEP.HipSpread = 0.09
 SWEP.AimSpread = 0.008

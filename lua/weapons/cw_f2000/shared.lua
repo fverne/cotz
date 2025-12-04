@@ -49,7 +49,7 @@ if CLIENT then
 	SWEP.ACOGAng = Vector(0, 0, 0)
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
 	
-	SWEP.SprintPos = Vector(0.925, 0, 2.036)
+	SWEP.SprintPos = Vector(-0.925, 0, 2.036)
 	SWEP.SprintAng = Vector(-23.334, -25.556, 0)
 
 	SWEP.CustomizePos = Vector(-6.091, 0, -3.144)
@@ -57,6 +57,9 @@ if CLIENT then
 	
 	SWEP.AlternativePos = Vector(-0.32, 0, -0.64)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
+
+	SWEP.SightBackUpPos = Vector(5, 1, 1)
+	SWEP.SightBackUpAng = Vector(1, 0, 30)
 	
 	SWEP.BaseArm = "L_Dummy"
 	SWEP.BaseArmBoneOffset = Vector(-50, 0, 0)

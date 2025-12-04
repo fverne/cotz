@@ -53,6 +53,9 @@ if CLIENT then
 	SWEP.NXSPos = Vector(3.6, 0, 1.15)
 	SWEP.NXSAng = Vector(0, 0.6, 0)
 	
+	SWEP.SightBackUpPos = Vector(5.3, 0, 0.5)
+	SWEP.SightBackUpAng = Vector(0, 0.5, 40)
+	
 	SWEP.SprintPos = Vector(-4.444, -1, 0.082)
 	SWEP.SprintAng = Vector(-12.849, -39.23, 0)
 	

@@ -53,6 +53,9 @@ if CLIENT then
 		
 	SWEP.CustomizePos = Vector(7.711, -0.482, -2)
 	SWEP.CustomizeAng = Vector(16.364, 40.741, 15.277)
+
+	SWEP.SightBackUpPos = Vector(-3.5, 1, 0)
+	SWEP.SightBackUpAng = Vector(2, 0, -30)
 	
 	SWEP.SightWithRail = true
 	SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}

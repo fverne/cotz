@@ -38,6 +38,10 @@ if CLIENT then
 	SWEP.AlternativePos = Vector(-0.24, 0, -0.48)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
 
+
+	SWEP.SightBackUpPos = Vector(-4.5, 7, 0)
+	SWEP.SightBackUpAng = Vector(2, 0, -40)
+
 	SWEP.ViewModelMovementScale = 1.15
 	
 	SWEP.IconLetter = "b"

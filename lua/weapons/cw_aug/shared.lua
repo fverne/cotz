@@ -53,6 +53,9 @@ if CLIENT then
 	SWEP.ACOGAng = Vector(0.4, -0.201, 0)
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
 
+	SWEP.SightBackUpPos = Vector(-4, 2, 0)
+	SWEP.SightBackUpAng = Vector(2, 0.5, -40)
+
 	SWEP.ShortDotPos = Vector(-2.165, 0, -0.13)
 	SWEP.ShortDotAng = Vector(0.4, -0.201, 0)
 	SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
@@ -154,7 +157,7 @@ SWEP.Shots = 1
 SWEP.Damage = 78
 SWEP.DeployTime = 0.6
 
-SWEP.ReloadSpeed = 1
+SWEP.ReloadSpeed = 1.3
 SWEP.ReloadTime = 3
 SWEP.ReloadTime_Empty = 3.3
 SWEP.ReloadHalt = 3

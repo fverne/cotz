@@ -29,7 +29,10 @@ if CLIENT then
 	
 	SWEP.IronsightPos = Vector(-11.5, -20.50, 0.73)
 	SWEP.IronsightAng = Vector(0.88,0.05,0)
-	
+
+	SWEP.SightBackUpPos = Vector(-17, -10, 0)
+	SWEP.SightBackUpAng = Vector(2, 0.3, -40)
+
 	SWEP.AlternativePos = Vector(0.319, 1.325, -1.04)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
 
@@ -197,7 +200,7 @@ if CLIENT then
 			return
 		end
 		
-		if self.dt.State == CW_AIMING then
+		if self:canSeeThroughTelescopics("IronsightPos") then
 			alpha = math.Approach(alpha, 0, FrameTime() * 5)
 		else
 			alpha = math.Approach(alpha, 1, FrameTime() * 5)

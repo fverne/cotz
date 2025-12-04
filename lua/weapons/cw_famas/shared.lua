@@ -23,6 +23,9 @@ if CLIENT then
 	
 	SWEP.IronsightPos = Vector(-3.75, -3.623, 0.220)
 	SWEP.IronsightAng = Vector(1, -0.1, 0)
+
+	SWEP.SightBackUpPos = Vector(-4.8, 5, 0)
+	SWEP.SightBackUpAng = Vector(0, 1.1, -30)
 		
 	SWEP.EoTechPos = Vector(-3.725, -6.634, -1.400)
 	SWEP.EoTechAng = Vector(0, 0, 0)
@@ -161,8 +164,8 @@ SWEP.Damage = 78
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 1.15
-SWEP.ReloadTime = 3.6
-SWEP.ReloadTime_Empty = 3.6
-SWEP.ReloadHalt = 3.6
+SWEP.ReloadTime = 2.0
+SWEP.ReloadTime_Empty = 3.0
+SWEP.ReloadHalt = 2.1
 SWEP.ReloadHalt_Empty = 3.6
 SWEP.SnapToIdlePostReload = true

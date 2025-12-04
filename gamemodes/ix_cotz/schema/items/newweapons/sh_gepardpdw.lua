@@ -7,7 +7,7 @@ ITEM.weaponCategory = "primary"
 ITEM.width = 3
 ITEM.price = 14500
 ITEM.height = 2
-ITEM.canAttach = false
+ITEM.validAttachments = {"md_kobra","md_microt1","md_eotech","md_aimpoint","md_cmore", "md_reflex","md_tundra9mm"}
 
 ITEM.bulletweight = 0.008
 ITEM.unloadedweight = 2.0

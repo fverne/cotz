@@ -37,7 +37,7 @@ if CLIENT then
 	SWEP.SprintPos = Vector(1.879, 0, 0.959)
 	SWEP.SprintAng = Vector(-21.107, 30.954, -6.332)	
 	
-	SWEP.ShortDotPos = Vector(-1.9, 0, 0.079)
+	SWEP.ShortDotPos = Vector(-1.9, 0, 0.055)
 	SWEP.ShortDotAng = Vector(0, 0, 0)
 	SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
 	
@@ -53,6 +53,9 @@ if CLIENT then
 
 	SWEP.CustomizePos = Vector(4.88, 0, -2.36)
 	SWEP.CustomizeAng = Vector(17.587, 30.954, 8.442)
+
+	SWEP.SightBackUpPos = Vector(-3.4, 1, 0)
+	SWEP.SightBackUpAng = Vector(2, 0, -35)
 
 	SWEP.SightWithRail = false
 			
@@ -192,12 +195,11 @@ SWEP.Shots = 1
 SWEP.Damage = 83
 SWEP.DeployTime = 0.6
 
-SWEP.ReloadSpeed = 1.25
-SWEP.ReloadTime = 2.35
+SWEP.ReloadSpeed = 1.15
+SWEP.ReloadTime = 2.25
 SWEP.ReloadTime_Empty = 3.7
-SWEP.ReloadHalt = 2.8
+SWEP.ReloadHalt = 2.5
 SWEP.ReloadHalt_Empty = 0.1
-SWEP.SnapToIdlePostReload = false
 SWEP.BulletDiameter = 5.70 
 SWEP.CaseLength = 44.70
 SWEP.SnapToIdlePostReload = true

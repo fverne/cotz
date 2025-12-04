@@ -37,6 +37,9 @@ if CLIENT then
 	SWEP.AlternativePos = Vector(-0.24, 0, -0.48)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
 
+	SWEP.SightBackUpPos = Vector(-1.8, 0, 0.7796)
+	SWEP.SightBackUpAng = Vector(-0.85, 0.2, 0)
+
 	SWEP.ACOGPos = Vector(-1.54, -4.224, -0.64)
 	SWEP.ACOGAng = Vector(0, 0, 0)
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}

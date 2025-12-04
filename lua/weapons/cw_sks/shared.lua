@@ -67,7 +67,10 @@ if CLIENT then
 	
 	SWEP.SprintPos = Vector(2, -4, 0.119)
 	SWEP.SprintAng = Vector(-10.628, 25.478, 0)
-	
+
+	SWEP.SightBackUpPos = Vector(-4.2, 2, 0)
+	SWEP.SightBackUpAng = Vector(2, 0, -40)	
+
 	SWEP.CustomizePos = Vector(2.68, -1.68, 1)
 	SWEP.CustomizeAng = Vector(1.299, 5.8, 21.299)
 	

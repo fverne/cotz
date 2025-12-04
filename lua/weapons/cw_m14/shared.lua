@@ -48,8 +48,11 @@ if CLIENT then
 	SWEP.CmorePos = Vector(-2.241, 0.5, 0.33)
 	SWEP.CmoreAng = Vector(0, 0, 0)
 	
-	SWEP.ShortDotPos = Vector(-2.211, -4.624, 0.221)
+	SWEP.ShortDotPos = Vector(-2.215, -3.624, 0.207)
 	SWEP.ShortDotAng = Vector(0, 0, 0)
+
+	SWEP.SightBackUpPos = Vector(-4, 1, 0)
+	SWEP.SightBackUpAng = Vector(2, 0, -40)
 	
 	SWEP.ACOGPos = Vector(-2.227, -4.624, -0.01)
 	SWEP.ACOGAng = Vector(0, 0, 0)

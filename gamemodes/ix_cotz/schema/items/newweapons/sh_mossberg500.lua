@@ -7,7 +7,7 @@ ITEM.weaponCategory = "primary"
 ITEM.width = 4
 ITEM.price = 10200
 ITEM.height = 1
-ITEM.canAttach = false
+ITEM.validAttachments = {"md_eotech","md_microt1"}
 
 ITEM.bulletweight = 0.031
 ITEM.unloadedweight = 3.1
