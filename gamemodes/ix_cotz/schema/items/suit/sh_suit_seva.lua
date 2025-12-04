@@ -26,7 +26,8 @@ ITEM.ar = 0.41
 ITEM.far = 2
 ITEM.pr = 0.45
 ITEM.fpr = 0
-ITEM.flatRadProt = 0.6
+ITEM.percentageRadProt = 0.97
+ITEM.flatRadProt = 0.02
 
 ITEM.carryinc = 29.000
 ITEM.miscslots = 4
