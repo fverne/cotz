@@ -26,7 +26,7 @@ PLUGIN.Arenas = {
 				},
 			},
 			["spectators"] = {},
-			["dupes"] = {"swampsarena1",},
+			["dupes"] = {"swampsarena1"},
 			["selected_dupe"] = 1,
 			["ents"] = {
 				[1] = {
@@ -96,7 +96,6 @@ PLUGIN.Arenas = {
 					["sequence"] = "idle_all_angry"
 				},
 			} -- i could have just done this via advdupe lib but ah well
-			
 		}
 	}
 }

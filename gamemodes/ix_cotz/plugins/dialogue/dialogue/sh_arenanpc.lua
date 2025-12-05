@@ -122,7 +122,7 @@ DIALOGUE.addTopic("JoinArena", {
 		"BackTopic"
 	},
 	preCallback = function(self, client, target)
-		if( CLIENT ) then
+		if (CLIENT) then
 			local availablePlayers = {}
 
 			for k,v in ipairs(ents.FindInSphere(ix.progression.GetNPCFromName("'Arena Master'"):GetPos(), 512)) do
@@ -130,7 +130,6 @@ DIALOGUE.addTopic("JoinArena", {
 				if v == client then continue end
 				availablePlayers[#availablePlayers + 1] = v
 			end
-			
 
 			if #availablePlayers <= 0 then
 				self.response = "No players to challenge."

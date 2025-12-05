@@ -18,6 +18,29 @@ util.AddNetworkString("ixArenaCutsceneEnded")
 util.AddNetworkString("ixArenaCutsceneLaunch")
 util.AddNetworkString("ixArenaAttachCameraTo")
 util.AddNetworkString("ixArenaResetCamera")
+util.AddNetworkString("ixArenaStopSpectate")
+util.AddNetworkString("ixArenaChangeSpectateTarget")
+
+net.Receive("ixArenaStopSpectate", function(len, ply)
+	if not IsValid(ply) or not ply:IsPlayer() then return end
+	if ply:GetLocalVar("arenaSpectate", false) then
+		PLUGIN:ToggleSpectateArena(ply)
+	end
+end)
+
+net.Receive("ixArenaChangeSpectateTarget", function(len, ply)
+	if not IsValid(ply) or not ply:IsPlayer() then return end
+	if not ply:GetLocalVar("arenaSpectate", false) then return end
+
+	local idx = ply:GetLocalVar("arenaSpectateTargetIndex", 1)
+	idx = (idx == 1) and 2 or 1
+	ply:SetLocalVar("arenaSpectateTargetIndex", idx)
+
+	local target = PLUGIN.Arenas["rp_marsh_cs"]["swampsarena"]["players"][idx].player
+	if IsValid(target) then
+		ply:SpectateEntity(target)
+	end
+end)
 
 net.Receive("ixArenaRequest", function(len, ply)
 	local targetSid = net.ReadString()
@@ -65,7 +88,8 @@ net.Receive("ixArenaRequestResponse", function(len, ply)
 
 	if CurTime() - PLUGIN.PendingRequests[plySid][senderSid].time > 10 then
 		ply:Notify("The request has expired due to timeout.")
-        PLUGIN.PendingRequests[plySid][senderSid] = nil
+		PLUGIN.PendingRequests[plySid][senderSid] = nil
+
 		return
 	end
 
@@ -131,6 +155,17 @@ function PLUGIN:CanStartArena(arenaName)
 	if not arenaData then return false end
 
 	return not arenaData.active
+end
+
+function PLUGIN:GetSpectateTV()
+	local ent
+	for k,v in ipairs(ents.FindInSphere(ix.progression.GetNPCFromName("'Arena Master'"):GetPos(), 512)) do
+		if v:GetClass() ~= "ix_arenaspectate" then continue end
+		ent = v
+		break
+	end
+
+	return IsValid(ent) and ent
 end
 
 function PLUGIN:RequestArenaMatch(arenaName, sender, target)
@@ -207,7 +242,6 @@ function PLUGIN:RequestArenaMatch(arenaName, sender, target)
 		time = now
 	}
 
-
 	PLUGIN.RequestCooldowns[sSid] = now
 
 	local model = sender:GetModel()
@@ -272,7 +306,7 @@ function PLUGIN:PlayerDisconnected(ply)
 		end
 	end
 
-	if ply:GetLocalVar("inArena", false) then
+	if ply:GetLocalVar("inArena", false) or ply:GetLocalVar("arenaSpectate", false) then
 		ply:SetData("arenaPos", true)
 	end
 
@@ -346,6 +380,18 @@ function PLUGIN:CanPlayerUnequipItem(client, item)
 	return not client:GetLocalVar("inArena", false)
 end
 
+function PLUGIN:CanPlayerInteractItem(client, action, item, data)
+	return not client:GetLocalVar("arenaSpectate", false)
+end
+
+function PLUGIN:CanPlayerHoldObject(client, entity)
+	return not client:GetLocalVar("arenaSpectate", false)
+end
+
+function PLUGIN:CanPlayerInteractEntity(client, entity, option, data)
+	return not client:GetLocalVar("arenaSpectate", false)
+end
+
 function PLUGIN:EndArena(arenaName, winner, loser)
 	local arenaData = PLUGIN.Arenas[game.GetMap()][arenaName]
 	timer.Remove("ixArenaDurationTimer_" .. arenaName)
@@ -354,7 +400,7 @@ function PLUGIN:EndArena(arenaName, winner, loser)
 		for k, ply in pairs( player.GetAll() ) do
 			ix.chat.Send(ply, "eventpdainternal", Format("%s has defeated %s in the arena!", winner:GetName(), loser:GetName()), true, ply)
 		end
-		
+
 		winner:Notify("You have won the arena! You will be teleported back in 5 seconds...")
 		winner:SetLocalVar("arenaEndTime", nil)
 
@@ -412,11 +458,16 @@ function PLUGIN:EndArena(arenaName, winner, loser)
 	arenaData.players[1].player = nil
 	arenaData.players[2].player = nil
 
+	local spectateTV = self:GetSpectateTV()
+
+	if spectateTV then
+		spectateTV:SetActive(false)
+	end
+
 	for _, spectator in pairs(arenaData.spectators) do
 		if IsValid(spectator) and spectator:IsPlayer() then
 			spectator:Notify("The arena has ended.")
-			spectator:SetLocalVar("inArena", false)
-			-- spectator:AddMoney(v)
+			self:ToggleSpectateArena(spectator)
 		end
 	end
 
@@ -438,12 +489,19 @@ function PLUGIN:EndArenaDueToTimeout(arenaName)
 
 	local players = {arenaData.players[1].player, arenaData.players[2].player}
 
-	for index, player in ipairs(players) do
-		if IsValid(player) and player:IsPlayer() then
-			player:Notify("The arena has ended due to timeout.")
-			player:SetLocalVar("inArena", false)
-			player:SetLocalVar("arenaEndTime", nil)
-			player:SetPos(index == 1 and Vector(-5633, -10038, 4989) or Vector(-5577, -10038, 4989))
+	for index, ply in ipairs(players) do
+		if IsValid(ply) and ply:IsPlayer() then
+			ply:Notify("The arena has ended due to timeout.")
+			ply:SetLocalVar("inArena", false)
+			ply:SetLocalVar("arenaEndTime", nil)
+			ply:SetPos(index == 1 and Vector(-5633, -10038, 4989) or Vector(-5577, -10038, 4989))
+		end
+	end
+
+	for _, spectator in pairs(arenaData.spectators) do
+		if IsValid(spectator) and spectator:IsPlayer() then
+			spectator:Notify("The arena has ended due to timeout.")
+			self:ToggleSpectateArena(spectator)
 		end
 	end
 
@@ -590,19 +648,17 @@ function PLUGIN:StartArenaFight(arenaName, playerOne, playerTwo)
 		playerOne:Freeze(true)
 		playerTwo:Freeze(true)
 	end)
-	
+
+	local spectateTV = self:GetSpectateTV()
+
+	if spectateTV then
+		spectateTV:SetActive(true)
+	end
+
 	self.ArenaPlayers[arenaName] = {}
 	local recipients = self.ArenaPlayers[arenaName]
 	table.insert(recipients, playerOne)
 	table.insert(recipients, playerTwo)
-
-	for k, v in pairs(arenaData.spectators) do
-		if IsValid(v) and v:IsPlayer() then
-			table.insert(recipients, v)
-			v:SetLocalVar("inArena", "spectator")
-			v:Freeze(true)
-		end
-	end
 
 	local numPlayersFinishedIntro = 0
 	local totalPlayers = #recipients
@@ -670,10 +726,6 @@ function playerMeta:StartCutscene(id, callback, attachData)
 		timer.Simple(attachData.duration, function()
 			self:OnCutsceneEnded()
 		end)
-	else
-		if id ~= "towerqte" then
-			self:ScreenFade(SCREENFADE.IN, Color(0, 0, 0), 1, 1)
-		end
 	end
 
 	self.Callback = function()
@@ -681,7 +733,6 @@ function playerMeta:StartCutscene(id, callback, attachData)
 	end
 
 	timer.Simple(0, function()
-		--self:SetFlags(FL_NOMOVE)
 		self:GodEnable()
 
 		if self:FlashlightIsOn() then
@@ -750,4 +801,45 @@ function playerMeta:ResetCamera()
 	self.Attached = nil
 	net.Start("ixArenaResetCamera")
 	net.Send(self)
+end
+
+function PLUGIN:ToggleSpectateArena(ply)
+	if not IsValid(ply) or not ply:IsPlayer() then return end
+
+	if ply:GetLocalVar("arenaSpectate", false) then
+		for i, v in ipairs(self.Arenas["rp_marsh_cs"]["swampsarena"]["spectators"]) do
+			if v == ply then
+				table.remove(self.Arenas["rp_marsh_cs"]["swampsarena"]["spectators"], i)
+				break
+			end
+		end
+
+		ply:SetLocalVar("arenaSpectate", false)
+		ply:UnSpectate()
+		ply:Spawn()
+		ply:SetPos(Vector(-5711,-10054, 4970))
+		ply:SetNetVar("canShoot", true)
+
+		timer.Simple(0, function()
+			if not IsValid(ply) then return end
+			if ply:IsStuck() then
+				ply:SetPos(ply:GetPos() + Vector(0, 0, 16))
+
+				local positions = ix.util.FindEmptySpace(ply, {ply})
+
+				for _, v in ipairs(positions) do
+					ply:SetPos(v)
+					if not ply:IsStuck() then break end
+				end
+			end
+		end)
+		return
+	end
+
+	table.insert(self.Arenas["rp_marsh_cs"]["swampsarena"]["spectators"], ply)
+	ply:SetLocalVar("arenaSpectate", true)
+	ply:SetLocalVar("arenaSpectateTargetIndex", 1)
+	ply:Spectate(OBS_MODE_CHASE)
+	ply:SpectateEntity(self.Arenas["rp_marsh_cs"]["swampsarena"]["players"][1].player)
+	ply:SetNetVar("canShoot", false)
 end

@@ -456,7 +456,7 @@ g_CurViewbob = curviewbob
 function PLUGIN:GetBobForVelocity(vel, intensity)
 	FT, CT = FrameTime(), CurTime()
 	intensity = (tonumber(intensity) or 2) * 1
-	
+
 	if intensity > 0 and LocalPlayer():GetMoveType() != MOVETYPE_NOCLIP then
 		if LocalPlayer():OnGround() and vel > LocalPlayer():GetWalkSpeed() * 0.3 then
 			if vel < LocalPlayer():GetWalkSpeed() * 1.2 then
@@ -493,6 +493,34 @@ function PLUGIN:HUDPaint()
 		end
 	end
 
+	if localPly:GetLocalVar("arenaSpectate", false) then
+		local scrW, scrH = ScrW(), ScrH()
+		draw.SimpleText("Left Click: Change Player", "stalkertitlefont", scrW * 0.5, (scrH / 1080) * 944, color_white, TEXT_ALIGN_CENTER)
+		draw.SimpleText("Right Click: Exit Spectate", "stalkertitlefont", scrW * 0.5, (scrH / 1080) * 984, color_white, TEXT_ALIGN_CENTER)
+		local vm = localPly:GetViewModel()
+		if IsValid(vm) then vm:SetNoDraw(true) end
+
+		PLUGIN._spectatePrevLeft = PLUGIN._spectatePrevLeft or false
+		PLUGIN._spectatePrevRight = PLUGIN._spectatePrevRight or false
+
+		local leftDown = input.IsMouseDown(MOUSE_LEFT)
+		local rightDown = input.IsMouseDown(MOUSE_RIGHT)
+
+		if leftDown and not PLUGIN._spectatePrevLeft then
+			net.Start("ixArenaChangeSpectateTarget")
+			net.SendToServer()
+		end
+
+		if rightDown and not PLUGIN._spectatePrevRight then
+			net.Start("ixArenaStopSpectate")
+			net.SendToServer()
+			if IsValid(vm) then vm:SetNoDraw(false) end
+		end
+
+		PLUGIN._spectatePrevLeft = leftDown
+		PLUGIN._spectatePrevRight = rightDown
+	end
+
 	local hideFromHUD = not PLUGIN.Cutscenes.Active or not PLUGIN.Cutscenes.breakpoints
 	if PLUGIN.Cutscenes.params[PLUGIN.Cutscenes.activeID] and PLUGIN.Cutscenes.params[PLUGIN.Cutscenes.activeID].no_bars then return end
 	lerp = Lerp(FrameTime() * 5, lerp, hideFromHUD and 0 or 1)
@@ -505,6 +533,7 @@ end
 function PLUGIN:CalcView(ply, origin, angles, fov)
 	local view = {}
 	if ply:Health() <= 0 then return end
+
 	local breakpoints = PLUGIN.Cutscenes.breakpoints
 	local viewmodel = ply:GetViewModel()
 	local ft = math.max(FrameTime(), 0.00001)
