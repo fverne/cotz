@@ -447,6 +447,37 @@ end)
 
 local lerp = 0
 
+local FT, CT, vel, cos1, cos2, intensity
+local Ang0, curviewbob = Angle(0, 0, 0), Angle(0, 0, 0), Angle(0, 0, 0)
+local LerpBackSpeed = 10
+
+g_CurViewbob = curviewbob
+
+function PLUGIN:GetBobForVelocity(vel, intensity)
+	FT, CT = FrameTime(), CurTime()
+	intensity = (tonumber(intensity) or 2) * 1
+	
+	if intensity > 0 and LocalPlayer():GetMoveType() != MOVETYPE_NOCLIP then
+		if LocalPlayer():OnGround() and vel > LocalPlayer():GetWalkSpeed() * 0.3 then
+			if vel < LocalPlayer():GetWalkSpeed() * 1.2 then
+				cos1 = math.cos(CT * 5)
+				cos2 = math.cos(CT * 5)
+				curviewbob.p = cos1 * 0.15 * intensity
+				curviewbob.y = cos2 * 0.1 * intensity
+			else
+				cos1 = math.cos(CT * 15)
+				cos2 = math.cos(CT * 10)
+				curviewbob.p = cos1 * 0.2 * intensity
+				curviewbob.y = cos2 * 0.15 * intensity
+			end
+		else
+			curviewbob = LerpAngle(FT * 10, curviewbob, Ang0)
+		end
+	end
+
+	return curviewbob or Angle(0, 0, 0)
+end
+
 function PLUGIN:HUDPaint()
 	local localPly = LocalPlayer()
 
@@ -484,6 +515,8 @@ function PLUGIN:CalcView(ply, origin, angles, fov)
 
 		return
 	end
+
+	g_CurViewbob = self:GetBobForVelocity(LocalPlayer():GetVelocity():Length(), 2)
 
 	viewmodel:SetNoDraw(true)
 	local endpos, endang
@@ -547,7 +580,7 @@ function PLUGIN:CalcView(ply, origin, angles, fov)
 			i_NextPoint = CurTime() + ft * breakpoints[i_Point].ft / ft
 		end
 
-		headBobbing = GetBobForVelocity(breakpoints[i_Point].vel:Length()) / 6 + LocalPlayer():GetViewPunchVelocity()
+		headBobbing = self:GetBobForVelocity(breakpoints[i_Point].vel:Length()) / 6 + LocalPlayer():GetViewPunchVelocity()
 		local speed = 5
 
 		if PLUGIN.Cutscenes.params[PLUGIN.Cutscenes.activeID] then
@@ -563,11 +596,7 @@ function PLUGIN:CalcView(ply, origin, angles, fov)
 		fracture = FrameTime() * speed
 	end
 
-	-- debug current camera angle
-	-- print(endang - (PLUGIN.Cutscenes.AngleAdjust[PLUGIN.Cutscenes.activeID] or angle_zero))
 	LerpPos = breakpoints and LerpVector(fracture, LerpPos, breakpoints[i_Point].pos) or endpos
-	--LernAngAdditive = Lerp(fracture * 0.1, LernAngAdditive, angle_zero))
-	--print(PLUGIN.Cutscenes.AngleAdjust[PLUGIN.Cutscenes.activeID] or Angle(0,0,0))
 	LerpAng = breakpoints and LerpAngle(fracture, LerpAng, breakpoints[i_Point].ang) + headBobbing or endang - LernAngAdditive
 	view.origin = LerpPos
 	view.angles = LerpAng
