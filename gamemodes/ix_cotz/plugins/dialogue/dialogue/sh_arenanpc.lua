@@ -12,7 +12,7 @@ DIALOGUE.name = "Arena NPC"
 DIALOGUE.addTopic("GREETING", {
 	response = "Greetings, I am the arena master.",
 	options = {
-		"TradeTopic", 
+		-- "TradeTopic", 
 		"HealTopic",
 		"JoinArena",
 		-- "TutorialTopic",
@@ -41,6 +41,79 @@ DIALOGUE.addTopic("GREETING", {
 		-- end
 	end
 })
+
+DIALOGUE.addTopic("BackTopic", {
+	statement = "Let's talk about something else.",
+	response = "What would you like to know?",
+	options = {
+		"TradeTopic", 
+		"HealTopic",
+		"JoinArena",
+		-- "TutorialTopic",
+		-- "InterestTopic",
+		-- "ChangeSuitVariant",
+		-- "AboutWorkTopic",
+		-- "GetTaskByDifficulty",
+		"GOODBYE"
+	} --Should be identical to GREETING's options
+})
+
+DIALOGUE.addTopic("GOODBYE", {
+	statement = "See you!",
+	response = "Take care, STALKER..."
+})
+
+----------------------------------------------------------------
+----------------------START-TRADER-START------------------------
+----------------------------------------------------------------
+
+DIALOGUE.addTopic("TradeTopic", {
+	statement = "Want to trade?",
+	response = "Sure, I have some arena supplies.",
+	postCallback = function(self, client, target)
+		if (SERVER) then
+			local character = client:GetCharacter()
+
+			target.receivers[#target.receivers + 1] = client
+
+			local items = {}
+			-- Only send what is needed.
+			for k, v in pairs(target.items) do
+				if (!table.IsEmpty(v) and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])) then
+					items[k] = v
+				end
+			end
+
+			target.scale = target.scale or 0.5
+			client.ixVendorAdv = target
+
+			-- force sync to prevent outdated inventories while buying/selling
+			if (character) then
+				character:GetInventory():Sync(client, true)
+			end
+
+			net.Start("ixVendorAdvOpen")
+				net.WriteEntity(target)
+				net.WriteUInt(target.money or 0, 16)
+				net.WriteTable(items)
+				net.WriteFloat(target.scale or 0.5)
+			net.Send(client)
+
+			ix.log.Add(client, "vendorUse", target:GetDisplayName())
+		end
+	end,
+	options = {
+		"BackTopic",
+	}
+})
+
+----------------------------------------------------------------
+------------------------END-TRADER-END--------------------------
+----------------------------------------------------------------
+
+----------------------------------------------------------------
+----------------------START-ARENA-START-------------------------
+----------------------------------------------------------------
 
 DIALOGUE.addTopic("JoinArena", {
 	statement = "I would like to join the arena.",
@@ -121,73 +194,9 @@ DIALOGUE.addTopic("JoinArena", {
 	end,
 })
 
-DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about something else.",
-	response = "What would you like to know?",
-	options = {
-		"TradeTopic", 
-		"HealTopic",
-		"JoinArena",
-		-- "TutorialTopic",
-		-- "InterestTopic",
-		-- "ChangeSuitVariant",
-		-- "AboutWorkTopic",
-		-- "GetTaskByDifficulty",
-		"GOODBYE"
-	} --Should be identical to GREETING's options
-})
-
-DIALOGUE.addTopic("GOODBYE", {
-	statement = "See you!",
-	response = "Take care, STALKER..."
-})
 
 ----------------------------------------------------------------
-----------------------START-TRADER-START------------------------
-----------------------------------------------------------------
-
-DIALOGUE.addTopic("TradeTopic", {
-	statement = "Want to trade?",
-	response = "Sure, I have some arena supplies.",
-	postCallback = function(self, client, target)
-		if (SERVER) then
-			local character = client:GetCharacter()
-
-			target.receivers[#target.receivers + 1] = client
-
-			local items = {}
-			-- Only send what is needed.
-			for k, v in pairs(target.items) do
-				if (!table.IsEmpty(v) and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])) then
-					items[k] = v
-				end
-			end
-
-			target.scale = target.scale or 0.5
-			client.ixVendorAdv = target
-
-			-- force sync to prevent outdated inventories while buying/selling
-			if (character) then
-				character:GetInventory():Sync(client, true)
-			end
-
-			net.Start("ixVendorAdvOpen")
-				net.WriteEntity(target)
-				net.WriteUInt(target.money or 0, 16)
-				net.WriteTable(items)
-				net.WriteFloat(target.scale or 0.5)
-			net.Send(client)
-
-			ix.log.Add(client, "vendorUse", target:GetDisplayName())
-		end
-	end,
-	options = {
-		"BackTopic",
-	}
-})
-
-----------------------------------------------------------------
-------------------------END-TRADER-END--------------------------
+------------------------END-ARENA-END---------------------------
 ----------------------------------------------------------------
 
 
@@ -197,7 +206,7 @@ DIALOGUE.addTopic("TradeTopic", {
 
 DIALOGUE.addTopic("HealTopic", {
 	statement = "Can you patch me up?",
-	response = "What would you like me to look at?",
+	response = "I can restore your health, so you can get ready for the arena.",
 	IsDynamic = true,
 	options = {
 		"BackTopic"
@@ -217,9 +226,9 @@ DIALOGUE.addTopic("HealTopic", {
         local psyCost = math.Round(percentPerPsy * pricePerPsy)
 
         table.insert(dynopts, {statement = "My Physical Health ( "..client:Health().."% ) - "..ix.currency.Get(hpCost), topicID = "HealTopic", dyndata = {cost = hpCost, type="hp"}})
-        table.insert(dynopts, {statement = "My Radiation Level ( "..client:getRadiation().."% ) - "..ix.currency.Get(radCost), topicID = "HealTopic", dyndata = {cost = radCost, type="rad"}})
-        table.insert(dynopts, {statement = "My Mental Health ( "..client:GetPsyHealth().."% ) - "..ix.currency.Get(psyCost), topicID = "HealTopic", dyndata = {cost = psyCost, type="psy"}})
-        table.insert(dynopts, {statement = "Everything - "..ix.currency.Get(hpCost + radCost + psyCost), topicID = "HealTopic", dyndata = {cost = hpCost + radCost + psyCost, type="all"}})
+        -- table.insert(dynopts, {statement = "My Radiation Level ( "..client:getRadiation().."% ) - "..ix.currency.Get(radCost), topicID = "HealTopic", dyndata = {cost = radCost, type="rad"}})
+        -- table.insert(dynopts, {statement = "My Mental Health ( "..client:GetPsyHealth().."% ) - "..ix.currency.Get(psyCost), topicID = "HealTopic", dyndata = {cost = psyCost, type="psy"}})
+        -- table.insert(dynopts, {statement = "Everything - "..ix.currency.Get(hpCost + radCost + psyCost), topicID = "HealTopic", dyndata = {cost = hpCost + radCost + psyCost, type="all"}})
 
 		return dynopts
 	end,
@@ -241,7 +250,7 @@ DIALOGUE.addTopic("ConfirmHeal", {
 	DynamicPreCallback = function(self, player, target, dyndata)
 		if(dyndata) then
 			if (CLIENT) then
-				self.response = string.format("Patching you up will cost you %s.", ix.currency.Get(dyndata.cost))
+				self.response = string.format("Healing you up will cost you %s.", ix.currency.Get(dyndata.cost))
 			else
 				target.healstruct = { dyndata.cost, dyndata.type }
 			end
