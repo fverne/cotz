@@ -351,6 +351,9 @@ function PLUGIN:EndArena(arenaName, winner, loser)
 	timer.Remove("ixArenaDurationTimer_" .. arenaName)
 
 	if IsValid(winner) and winner:IsPlayer() then
+
+		ix.chat.Send(ply, "eventpdainternal", Format("%s has defeated %s in the arena!", winner:GetName(), loser:GetName()), true, ply)
+
 		winner:Notify("You have won the arena! You will be teleported back in 5 seconds...")
 		winner:SetLocalVar("arenaEndTime", nil)
 
