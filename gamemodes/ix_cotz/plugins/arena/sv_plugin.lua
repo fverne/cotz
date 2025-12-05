@@ -470,6 +470,8 @@ function PLUGIN:StartArenaDurationTimer(arenaName, playerOne, playerTwo)
 	end)
 end
 
+local invisCol = Color(255,255,255,0)
+
 function PLUGIN:SetupArena(arenaName)
 	local arenaData = self.Arenas[game.GetMap()][arenaName]
 	if not arenaData.ents or #arenaData.ents == 0 then return end
@@ -487,6 +489,7 @@ function PLUGIN:SetupArena(arenaName)
 		end
 
 		if bSoundscape then
+			ent:SetColor(invisCol)
 			ent:SetRenderMode(RENDERMODE_NONE)
 			ent:EmitSound(entData.soundscape, 75, 100, 1)
 			local timerstr = "ixArenaSoundscape_" .. arenaName .. "_" .. entIndex
