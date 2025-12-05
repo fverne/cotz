@@ -14,6 +14,7 @@ DIALOGUE.addTopic("GREETING", {
 	options = {
 		"TradeTopic", 
 		"HealTopic",
+		"JoinArena",
 		-- "TutorialTopic",
 		-- "InterestTopic",
 		-- "ChangeSuitVariant",
@@ -41,12 +42,92 @@ DIALOGUE.addTopic("GREETING", {
 	end
 })
 
+DIALOGUE.addTopic("JoinArena", {
+	statement = "I would like to join the arena.",
+	response = "Sure.",
+	options = {
+		"BackTopic"
+	},
+	preCallback = function(self, client, target)
+		if( CLIENT ) then
+			local availablePlayers = {}
+
+			for k,v in ipairs(ents.FindInSphere(ix.progression.GetNPCFromName("'Arena Master'"):GetPos(), 512)) do
+				if not v:IsPlayer() then continue end
+				if v == client then continue end
+				availablePlayers[#availablePlayers + 1] = v
+			end
+			
+
+			if #availablePlayers <= 0 then
+				self.response = "No players to challenge."
+			else
+				self.response = "Players:"
+
+				for _, player in pairs(availablePlayers) do
+					self.response = self.response.."\n    "..player:GetName()
+				end
+			end
+		end
+	end,
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		for k,v in ipairs(ents.FindInSphere(ix.progression.GetNPCFromName("'Arena Master'"):GetPos(), 512)) do
+			if not v:IsPlayer() then continue end
+			if v == client then continue end
+
+			table.insert(dynopts, {statement = v:GetName(), topicID = "JoinArena", dyndata = {player = v}})
+		end
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+		if SERVER then
+			local arenaPlugin = ix.plugin.Get("arena")
+			if arenaPlugin:CanStartArena("swampsarena") then
+				if IsValid(dyndata.player) and dyndata.player:IsPlayer() and dyndata.player:Alive() then
+					local loadout = {}
+					local char = dyndata.player:GetCharacter()
+					local inv = char:GetInventory()
+
+					for _, item in pairs(inv:GetItems()) do
+					    if item.isWeapon or item.category == "Weapons" and item:GetData("equip", false) then
+					        table.insert(loadout, item:GetName() or "Unknown Item")
+					    end
+					end
+
+					net.Start("ixArenaChallenge")
+						net.WriteString(dyndata.player:Nick())
+						net.WriteString(dyndata.player:SteamID())
+						net.WriteString("swampsarena")
+						net.WriteString(dyndata.player:GetModel())
+						net.WriteString(dyndata.player:getCurrentRankName())
+						net.WriteTable(loadout)
+					net.Send(client)
+				end
+			else
+				client:Notify("The arena is currently occupied!")
+			end
+		end
+
+		-- Return the next topicID
+		return "BackTopic", dyndata
+	end,
+})
+
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
 	response = "What would you like to know?",
 	options = {
 		"TradeTopic", 
 		"HealTopic",
+		"JoinArena",
 		-- "TutorialTopic",
 		-- "InterestTopic",
 		-- "ChangeSuitVariant",
