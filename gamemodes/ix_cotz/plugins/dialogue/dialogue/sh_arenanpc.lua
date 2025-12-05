@@ -46,7 +46,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
 	response = "What would you like to know?",
 	options = {
-		"TradeTopic", 
+		-- "TradeTopic", 
 		"HealTopic",
 		"JoinArena",
 		-- "TutorialTopic",
