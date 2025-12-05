@@ -147,6 +147,33 @@ net.Receive("ixArenaCutsceneEnded", function(len, ply)
 	ply:OnCutsceneEnded(forceStop, true)
 end)
 
+function PLUGIN:SaveData()
+	local data = {}
+	for k, v in ipairs(ents.FindByClass("ix_arenaspectate")) do
+		data[#data + 1] = {v:GetPos(), v:GetAngles()}
+	end
+	self:SetData(data)
+end
+
+function PLUGIN:LoadData()
+	local data = self:GetData()
+	if (data) then
+		for k, v in ipairs(data) do
+			local ent = ents.Create("ix_arenaspectate")
+			ent:SetPos(v[1])
+			ent:SetAngles(v[2])
+			ent:Spawn()
+			ent:SetSolid(SOLID_VPHYSICS)
+			ent:PhysicsInit(SOLID_VPHYSICS)
+
+			local physObject = ent:GetPhysicsObject()
+
+			if (physObject) then
+				physObject:EnableMotion()
+			end
+		end
+	end
+end
 
 function PLUGIN:CanStartArena(arenaName)
 	local arenas = self.Arenas[game.GetMap()]
