@@ -442,7 +442,7 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 
 		local itemids = self:GetItemIds()
 
-		local str = "From seeing the previous model, CS1, in action, it's clear that it needs a little bit more oomph. I've got some plans for another model much like the CS1, but this time more armored. Like before, I'll start working on the prototype as soon as you bring me these items:\n"
+		local str = "I've heard from some of the guys that the CS1 is too heavy, and that moving around in it is too clunky. I've got a schematic for a lightweight, highly modular suit, that I think will be just the thing for you all. Like before, I'll start working on the prototype as soon as you bring me these items:\n"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -496,7 +496,7 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = "I just finished my work on the new iteration of the CS type suits, they're ready for purchase now."
+				local message = "I just finished a batch of lightweight Wind suits, they're ready for purchase now."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -506,7 +506,7 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("suit_cs2", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_wind", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit5", true)
@@ -528,7 +528,7 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 
 		local itemids = self:GetItemIds()
 
-		local str = "The CS2 is an improvement on the CS1, but it doesn't protect quite as well as I would like, so my idea is to make it even more armored. Like before, I'll start working on the prototype as soon as you bring me these items:\n"
+		local str = "From seeing the previous model, CS1, in action, it's clear that it needs a little bit more oomph. I've got some plans for another model much like the CS1, but this time more armored. Like before, I'll start working on the prototype as soon as you bring me these items:\n"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -584,7 +584,7 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = "I just finished a batch of heavily armored suits, the CS3's, they're ready for purchase now."
+				local message = "I just finished my work on the new iteration of the CS type suits, they're ready for purchase now."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -594,7 +594,7 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("suit_cs3", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_cs2", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit6", true)
@@ -616,7 +616,7 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 
 		local itemids = self:GetItemIds()
 
-		local str = "I've heard from some of the guys that the CS3 is too heavy, and that moving around in it is too clunky. I've got a schematic for a lightweight, highly modular suit, that I think will be just the thing for you all. Like before, I'll start working on the prototype as soon as you bring me these items:\n"
+		local str = "The CS2 is an improvement on the CS1, but it doesn't protect quite as well as I would like, so my idea is to make it even more armored. Like before, I'll start working on the prototype as soon as you bring me these items:\n"
 
 		for item, amt in pairs(itemids) do
 			local tmp = 0
@@ -669,7 +669,7 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 
 			timer.Simple(60, function()
 				local name = "'Technut'"
-				local message = "I just finished a batch of lightweight Wind suits, they're ready for purchase now."
+				local message = "I just finished a batch of heavily armored suits, the CS3's, they're ready for purchase now."
 				ix.util.HandleChat(name, message)
 				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 					name = name,
@@ -679,7 +679,7 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 
 			local npc = ix.progression.GetNPCFromName("'Technut'")
 			if (npc) then
-				npc:AddItemToList("suit_wind", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("suit_cs3", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("technutItemDelivery_Suit7", true)
