@@ -15,7 +15,7 @@ DIALOGUE.addTopic("GREETING", {
 		-- "TradeTopic", 
 		"HealTopic",
 		"JoinArena",
-		-- "TutorialTopic",
+		"TutorialTopic",
 		-- "InterestTopic",
 		-- "ChangeSuitVariant",
 		-- "AboutWorkTopic",
@@ -49,7 +49,7 @@ DIALOGUE.addTopic("BackTopic", {
 		-- "TradeTopic", 
 		"HealTopic",
 		"JoinArena",
-		-- "TutorialTopic",
+		"TutorialTopic",
 		-- "InterestTopic",
 		-- "ChangeSuitVariant",
 		-- "AboutWorkTopic",
@@ -312,78 +312,78 @@ DIALOGUE.addTopic("NotEnoughMoneyHeal", {
 
 -- Tutorial start
 DIALOGUE.addTopic("TutorialTopic", {
-	statement = "I have a few questions, I just arrived here.",
-	response = "What do you want to know?",
+	statement = "What do you do?",
+	response = "Well, I'm the arena master. I facilitate fights.",
 	options = {
 		"TutorialTopic1",
 		"TutorialTopic2",
-		"TutorialTopic3",
+		-- "TutorialTopic3",
 		"BackTopic",
 	}
 })
 
 DIALOGUE.addTopic("TutorialTopicBack", {
 	statement = "Alright, let me ask you something else.",
-	response = "Sure.",
+	response = "Hmm?",
 	options = {
 		"TutorialTopic1",
 		"TutorialTopic2",
-		"TutorialTopic3",
+		-- "TutorialTopic3",
 		"BackTopic",
 	}
 })
 
 DIALOGUE.addTopic("TutorialTopic1", {
-	statement = "What is this place?",
-	response = "This is an area near the Chernobyl exclusion zone. More specifically, we're in the great swamps. Until recently, this area was completely abandoned, but me and another local, 'Technut', set up camp here in this shithole. We call it our 'Eastern Haven'. We could definitely use some help getting this place in proper shape.",
-	options = {
-		"TutorialTopic1_1",
-	}
-})
-
-DIALOGUE.addTopic("TutorialTopic1_1", {
-	statement = "How can I help out?",
-	response = "If we work together, I'm sure we will get this place in proper shape in no time. Go talk to the other inhabitants, and see if they need anything. You'll be properly rewarded. Both personally by the inhabitant, but as we keep helping each other out, it will unlock more opportunities for us to do, and more people will move here, each with their own agendas. You should ask around to see what people need help with. Both us oldies, but also the younger opportunity seekers like yourself.",
+	statement = "How do I fight someone?",
+	response = "You can challenge anyone near us, and you both have to confirm the fight after inspecting their gear. If you wait too long, I assume you chicken out and the challenge is no longer valid.",
 	options = {
 		"TutorialTopicBack",
 	}
 })
+
+-- DIALOGUE.addTopic("TutorialTopic1_1", {
+-- 	statement = "How can I help out?",
+-- 	response = "If we work together, I'm sure we will get this place in proper shape in no time. Go talk to the other inhabitants, and see if they need anything. You'll be properly rewarded. Both personally by the inhabitant, but as we keep helping each other out, it will unlock more opportunities for us to do, and more people will move here, each with their own agendas. You should ask around to see what people need help with. Both us oldies, but also the younger opportunity seekers like yourself.",
+-- 	options = {
+-- 		"TutorialTopicBack",
+-- 	}
+-- })
 
 DIALOGUE.addTopic("TutorialTopic2", {
-	statement = "How dangerous is this place?",
-	response = "There are two types of people here. The careful people, and the dead people. As you can imagine, a place like this where the laws of science do not apply as anywhere in the world, can be quite unforgiving and dangerous. The dangers are manyfold, but the biggest of your troubles will be the mutants, and the anomalies.",
+	statement = "What are the rules?",
+	response = "Well, its up to you to decide it. I just facilitate the fights. But there are some basic rules. \n\n - The fight ends when someone dies. \n - You have three minutes before the match ends in a draw. \n - I will make sure your stuff doesn't take damage if you are shot at in the arena. Your guns, however, still get dirty from the shooting you are doing.",
 	options = {
-		"TutorialTopic2_1",
-		"TutorialTopic2_2",
+		-- "TutorialTopic2_1",
+		-- "TutorialTopic2_2",
 		"TutorialTopicBack",
 	}
 })
 
-DIALOGUE.addTopic("TutorialTopic2_1", {
-	statement = "Tell me about the anomalies.",
-	response = "The anomalies are a work of a merciless god. I've seen animals being torn apart by sheer gravity, and those are the lucky ones. Luckily, most are static, so if you watch your step and don't fall into one, you should be alright. It should be noted that sometimes, the merciless god seems to be merciful, and he releases a part of scientific wonder near them. They are artifacts that mostly are not dangerous to the wielder, sometimes with benefits, but always worth a lot to the scientific community outside the zone, and hence worth quite a lot on the black market.",
-	options = {
-		"TutorialTopic2_2",
-		"TutorialTopicBack",
-	}
-})
+-- DIALOGUE.addTopic("TutorialTopic2_1", {
+-- 	statement = "Tell me about the anomalies.",
+-- 	response = "The anomalies are a work of a merciless god. I've seen animals being torn apart by sheer gravity, and those are the lucky ones. Luckily, most are static, so if you watch your step and don't fall into one, you should be alright. It should be noted that sometimes, the merciless god seems to be merciful, and he releases a part of scientific wonder near them. They are artifacts that mostly are not dangerous to the wielder, sometimes with benefits, but always worth a lot to the scientific community outside the zone, and hence worth quite a lot on the black market.",
+-- 	options = {
+-- 		"TutorialTopic2_2",
+-- 		"TutorialTopicBack",
+-- 	}
+-- })
 
-DIALOGUE.addTopic("TutorialTopic2_2", {
-	statement = "Tell me about the mutants.",
-	response = "After the first couple of emissions, many of the animals here died, but those that survived had a worse fate. They all turned into dangerous, aggressive, mutated versions of their former selves, and are no longer good for anything but having to be put down, as they will all try to take you down, regardless of your intentions. Due to the mutations, many of the mutants bodyparts have special properties that are valuable to scientists. I suggest poaching the mutants whenever possible, and sell off the dead parts.",
-	options = {
-		"TutorialTopic2_1",
-		"TutorialTopicBack",
-	}
-})
+-- DIALOGUE.addTopic("TutorialTopic2_2", {
+-- 	statement = "Tell me about the mutants.",
+-- 	response = "After the first couple of emissions, many of the animals here died, but those that survived had a worse fate. They all turned into dangerous, aggressive, mutated versions of their former selves, and are no longer good for anything but having to be put down, as they will all try to take you down, regardless of your intentions. Due to the mutations, many of the mutants bodyparts have special properties that are valuable to scientists. I suggest poaching the mutants whenever possible, and sell off the dead parts.",
+-- 	options = {
+-- 		"TutorialTopic2_1",
+-- 		"TutorialTopicBack",
+-- 	}
+-- })
 
-DIALOGUE.addTopic("TutorialTopic3", {
-	statement = "What gear do you recommend I get my hands on?",
-	response = "The most neccessary things are a geiger counter, some medical items, and something to defend yourself with. Always carry those three with you. Also, keep your weapons in good condition always if you want them to shoot straight, and remember, we don't have access to many spare parts here, so firearms will not be maintainable forever. 'Technut' can help you out.",
-	options = {
-		"TutorialTopicBack",
-	}
-})
+-- DIALOGUE.addTopic("TutorialTopic3", {
+-- 	statement = "What gear do you recommend I get my hands on?",
+-- 	response = "The most neccessary things are a geiger counter, some medical items, and something to defend yourself with. Always carry those three with you. Also, keep your weapons in good condition always if you want them to shoot straight, and remember, we don't have access to many spare parts here, so firearms will not be maintainable forever. 'Technut' can help you out.",
+-- 	options = {
+-- 		"TutorialTopicBack",
+-- 	}
+-- })
 
 -- Tutorial end
 
