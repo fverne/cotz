@@ -1,4 +1,4 @@
-wITEM.name = "'Spark' Cigarettes (20pk)"
+ITEM.name = "'Spark' Cigarettes (20pk)"
 ITEM.description = "A pack of 'Spark' brand cigarettes."
 ITEM.longdesc = "'Spark' (Искра) brand cigarettes is an old USSR brand of cigarettes.\nIt is still popular in the zone, as the 20 pack design along with the decent quality tobacco makes it a good affordable option.\nThis pack is pretty old, and as such much of the tobacco's potency has waned."
 ITEM.model = "models/lostsignalproject/items/consumable/cigarettes_sparkle.mdl"
