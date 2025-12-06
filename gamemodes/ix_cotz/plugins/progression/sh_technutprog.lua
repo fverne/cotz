@@ -895,7 +895,7 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 			["value_tape_electric"] = 15,
 			["value_tape_duct"] = 10,
 			["value_motorclean"] = 5,
-			["value_gasoline"] = 5,
+			["value_gasoline"] = 10,
 		}	
 
 		return itemids
@@ -1506,7 +1506,7 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_gasoline"] = 15,
+			["value_gasoline"] = 20,
 		}	
 
 		return itemids
@@ -1592,7 +1592,7 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_gasoline"] = 15,
+			["value_gasoline"] = 30,
 		}	
 
 		return itemids
