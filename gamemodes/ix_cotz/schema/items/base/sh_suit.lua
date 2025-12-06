@@ -420,11 +420,12 @@ ITEM.functions.detach = {
 					break
 				end
 			end
-
-			if table.remove(curattach,iterator) != data[1] then
+			if curattach[iterator] ~= data[1] then
 				return false
 			end
 
+			table.remove(curattach,iterator)
+			
 			if not item.player:GetCharacter():GetInventory():Add(ix.armortables.attachments[data[1]].uID) then
 				local position = item.player:GetItemDropPos()
 				ix.item.Spawn(ix.armortables.attachments[data[1]].uID, position, nil, AngleRand())

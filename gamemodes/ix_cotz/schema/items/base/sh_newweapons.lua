@@ -648,8 +648,6 @@ ITEM.functions.detach = {
 	OnRun = function(item, data)
 		if data[1] then
 
-			item.player:GetCharacter():GetInventory():Add(ix.weapontables.attachments[data[1]].uID)
-
 			local curattach = item:GetData("attachments") or {}
 			local iterator = 0
 			for i = 1, #curattach do
@@ -659,10 +657,12 @@ ITEM.functions.detach = {
 				end
 			end
 			
-			if table.remove(curattach,iterator) != data[1] then
+			if curattach[iterator] ~= data[1] then
 				return false
 			end
+			table.remove(curattach,iterator)
 
+			item.player:GetCharacter():GetInventory():Add(ix.weapontables.attachments[data[1]].uID)
 			local wepon = item.player:GetWeapon(item.class)
 			-- If you're holding right weapon, just mod it out.
             if (IsValid(wepon) and wepon:GetClass() == item.class) then
