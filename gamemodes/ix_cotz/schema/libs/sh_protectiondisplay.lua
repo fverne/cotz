@@ -53,7 +53,7 @@ function ix.util.ProtectionTranslator(value, minVal, maxVal)
 end
 
 
-function ix.util.DrawResistance(parentTooltip, resistanceName, value, minVal, maxVal)
+function ix.util.DrawResistance(parentTooltip, resistanceName, value, flatValue)
     if !parentTooltip:GetRow("resistances") then
         local descheader = parentTooltip:AddRow("resistances")
 		descheader:SetText("\nRESISTANCES:")
@@ -73,8 +73,10 @@ function ix.util.DrawResistance(parentTooltip, resistanceName, value, minVal, ma
 
     local displayedValue = anchor:Add("DLabel")
 --    displayedValue:SetText(ix.util.ProtectionTranslator(value, minVal, maxVal))
-    displayedValue:SetText((math.floor(math.Remap(value, minVal, maxVal, 0, 100)+0.5)).."%")
-    displayedValue:SetColor(ix.util.GetColorFromValue(value, minVal, maxVal))
+
+    displayedValue:SetText((math.floor(math.Remap(value, 0, 1, 0, 100)+0.5)).."%"..(flatValue == nil and "" or (" + "..flatValue)))
+
+    displayedValue:SetColor(ix.util.GetColorFromValue(value, 0, 1))
     displayedValue:SetFont("ixSmallFont")
 	displayedValue:SizeToContents()
     displayedValue:MoveRightOf(text)
@@ -89,21 +91,21 @@ function ix.util.DrawSuitResistances(parentTooltip, item)
 		descheader:SetContentAlignment(4)
     end
 
-    if item:getBR() then
+    if item:getBR() ~= 1 then
         -- ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), 1 - 0.00, 1 - 0.95)
-        ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), 1 - 0.00, 0.00)
+        ix.util.DrawResistance(parentTooltip, "Ballistics: ", 1-item:getBR(), item:getFBR())
     end
-    if item:getSR() then
-        ix.util.DrawResistance(parentTooltip, "Rupture: ", item:getSR(), 1 - 0.00, 0.00)
+    if item:getSR() ~= 1 then
+        ix.util.DrawResistance(parentTooltip, "Rupture: ", 1-item:getSR(), item:getFSR())
     end
-    if item:getAR() then
-        ix.util.DrawResistance(parentTooltip, "Anomalous: ", item:getAR(), 1 -  0.00, 0.00)
+    if item:getAR() ~= 1 then
+        ix.util.DrawResistance(parentTooltip, "Anomalous: ", 1-item:getAR(), item:getFAR())
     end
-    if item:getPR() != 1 then
-        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), 1 - 0.00, 0.00)
+    if item:getPR() ~= 1 then
+        ix.util.DrawResistance(parentTooltip, "Psychic: ", 1-item:getPR(), item:getFPR())
     end
-    if item.percentageRadProt > 0 then
-        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.percentageRadProt, 0.00, 1)
+    if item.percentageRadProt ~= 0 then
+        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.percentageRadProt, nil)
     end
 
     parentTooltip:GetParent():SizeToContents()
@@ -117,20 +119,20 @@ function ix.util.DrawGearResistances(parentTooltip, item)
 		descheader:SetContentAlignment(4)
     end
 
-    if item:getBR() then
-        ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), 0.00, 1)
+    if item:getBR()~=0 then
+        ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), item:getFBR())
     end
-    if item:getSR() then
-        ix.util.DrawResistance(parentTooltip, "Rupture: ", item:getSR(), 0.00, 1)
+    if item:getSR()~=0 then
+        ix.util.DrawResistance(parentTooltip, "Rupture: ", item:getSR(), item:getFSR())
     end
-    if item:getAR() then
-        ix.util.DrawResistance(parentTooltip, "Anomalous: ", item:getAR(), 0.00, 1)
+    if item:getAR()~=0 then
+        ix.util.DrawResistance(parentTooltip, "Anomalous: ", item:getAR(), item:getFAR())
     end
-    if item:getPR() > 0 then
-        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), 0.00, 1)
+    if item:getPR()~=0 then
+        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), item:getFPR())
     end
-    if item.percentageRadProt > 0  then
-        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.percentageRadProt, 0.00, 1)
+    if item.percentageRadProt ~= 0  then
+        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.percentageRadProt, nil)
     end
 
     parentTooltip:GetParent():SizeToContents()
