@@ -60,7 +60,7 @@ end
 
 function ITEM:OnInstanced(invID, x, y)
     if(!self:GetData("weight")) then
-        self:SetData("weight", self.baseweight + math.random(-self.varweight, self.varweight))
+        self:SetData("weight", self.baseweight + math.Rand(-self.varweight, self.varweight))
     end
 end
 
