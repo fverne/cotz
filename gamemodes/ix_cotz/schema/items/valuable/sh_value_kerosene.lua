@@ -5,7 +5,7 @@ ITEM.model = "models/illusion/eftcontainers/kerosine.mdl"
 
 ITEM.width = 3
 ITEM.height = 3
-ITEM.price = 468
+ITEM.price = 1268
 
 ITEM.flatweight = 5.250
 ITEM.weight = 0.100

@@ -5,7 +5,7 @@ ITEM.model = "models/illusion/eftcontainers/propanetank.mdl"
 
 ITEM.width = 2
 ITEM.height = 3
-ITEM.price = 586
+ITEM.price = 1586
 
 ITEM.flatweight = 6.850
 ITEM.weight = 0.090

@@ -5,7 +5,7 @@ ITEM.model = "models/illusion/eftcontainers/gasoline.mdl"
 
 ITEM.width = 2
 ITEM.height = 3
-ITEM.price = 386
+ITEM.price = 986
 
 ITEM.flatweight = 4.350
 ITEM.weight = 0.110
