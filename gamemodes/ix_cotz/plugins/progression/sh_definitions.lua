@@ -1295,7 +1295,7 @@ ix.progression.Register("computerDelivery_main", {
 			["value_frequencymodulator"]= 7,
 			["value_motorclean"] 		= 20,
 			["value_engine"] 			= 5,
-			["value_gasoline"] 			= 50,
+			["value_gasoline"] 			= 100,
 		}
 
 		return itemids

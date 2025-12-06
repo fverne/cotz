@@ -5,15 +5,19 @@ ITEM.model = "models/illusion/eftcontainers/kerosine.mdl"
 
 ITEM.width = 3
 ITEM.height = 3
-ITEM.price = 3680
+ITEM.price = 468
 
 ITEM.flatweight = 5.250
 ITEM.weight = 0.100
 
 ITEM.fueltier = 2
-ITEM.quantity = 1
+ITEM.quantity = 8
 
 ITEM.img = ix.util.GetMaterial("vgui/hud/valuable/kerosene.png")
+
+function ITEM:GetPrice()
+	return self.price * self:GetData("quantity", self.quantity)
+end
 
 function ITEM:PopulateTooltipIndividual(tooltip)
     ix.util.PropertyDesc(tooltip, "High Tier Cooking Fuel", Color(64, 224, 208))
@@ -53,9 +57,9 @@ ITEM.functions.combine = {
 				targetItem:SetData("quantity", targetItem.quantity)
 				return false
 			end
-		elseif ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and !targetItem:GetData("cancook", false) ) then
+		elseif ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and targetItem:GetData("fuel") != targetItem.maxFuel) then
 			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
-			targetItem:SetData("cancook", true)
+			targetItem:SetData("fuel", targetItem:GetData("fuel", 0) + 1)
 
 			return (item:GetData("quantity", item.quantity) == 0)
 		end
@@ -80,7 +84,7 @@ ITEM.functions.use = {
 				local items = inv:GetItems()
 
 				for k, v in pairs(items) do
-					if (v.cookertier and v.cookertier >= item.fueltier and !v:GetData("cancook", false)) then
+					if (v.cookertier and v.cookertier >= item.fueltier and v:GetData("fuel", false) != v.maxFuel) then
 						table.insert(targets, {
 							name = L(v.name),
 							data = {v:GetID()},
@@ -99,9 +103,9 @@ ITEM.functions.use = {
 		local targetItem = ix.item.instances[data[1]]
 		if (!targetItem) then return false end
 
-		if ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and !targetItem:GetData("cancook", false) ) then
+		if ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and targetItem:GetData("fuel") != targetItem.maxFuel) then
 			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
-			targetItem:SetData("cancook", true)
+			targetItem:SetData("fuel", targetItem:GetData("fuel", 0) + 1)
 
 			return (item:GetData("quantity", item.quantity) == 0)
 		end
@@ -109,3 +113,9 @@ ITEM.functions.use = {
 		return false
 	end,
 }
+
+function ITEM:OnInstanced()
+	if (!self:GetData("quantity")) then
+		self:SetData("quantity", math.random(2,3))
+	end
+end
