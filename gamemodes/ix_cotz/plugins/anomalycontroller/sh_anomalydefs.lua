@@ -134,7 +134,7 @@ PLUGIN.anomalydefs[7] = {
 		"artifact_mementomori",
 		"artifact_thorn",
 		"artifact_bolt",
-		"artifact_bonecluster"
+		"artifact_grapes"
 	},
 	rareArtifacts = {
 		"artifact_urchin",

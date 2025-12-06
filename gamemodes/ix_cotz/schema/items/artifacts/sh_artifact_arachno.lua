@@ -9,3 +9,26 @@ ITEM.flag = "A"
 ITEM.rarity = 5
 ITEM.baseweight = 1.800
 ITEM.varweight  = 0.200
+
+ITEM.functions.use = {
+	name = "Grasp",
+    icon = "icon16/help.png",
+    sound = "physics/metal/chain_impact_soft2.wav",
+    OnRun = function(item)
+    	local player = item.player
+        if ( (item:GetData("cooldown",0) < os.time()) and player:IsOnGround() ) then
+        	local iterator = 0
+        	local pos = player:GetPos()
+
+        	player:SetPos( pos + Vector(0,0,2) )
+        	if player:IsStuck() then player:SetPos(pos) end
+        	player:SetVelocity( player:EyeAngles():Forward()*Vector(400,400,0) + Vector(0,0,350) - player:GetVelocity())
+        	item:SetData("cooldown", os.time() + 4 )
+        end
+
+        return false
+    end,
+    OnCanRun = function(item)
+        return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
+    end
+}

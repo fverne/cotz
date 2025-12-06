@@ -11,6 +11,7 @@ ix.randomitems.tables["cache_artifact_tier1"] = {
   {1000, {"artifact_thorn"}},
   { 100, {"artifact_cell"}},
   {  10, {"artifact_midas"}},
+  { 800, {"artifact_grapes"}},
 }
 
 ix.randomitems.tables["cache_artifact_tier2"] = {
