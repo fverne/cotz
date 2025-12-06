@@ -39,6 +39,8 @@ ITEM.functions.use = {
 			player:AddBuff("buff_psysuppress", 60, { })
 			player:AddBuff("buff_psyblock", 60, { amount = item.psyblock })
 		end)
+		
+		ix.chat.Send(item.player, "iteminternal", "lights his "..item.name.." and inhales deeply.", false)
 
 		quantity = quantity - 1
 
@@ -46,8 +48,6 @@ ITEM.functions.use = {
 			item:SetData("quantity", quantity)
 			return false
 		end
-		
-		ix.chat.Send(item.player, "iteminternal", "lights his "..item.name.." and inhales deeply.", false)
 
 		return true
 	end,

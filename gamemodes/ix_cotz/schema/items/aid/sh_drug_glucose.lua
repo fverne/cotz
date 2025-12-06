@@ -31,19 +31,19 @@ ITEM.functions.use = {
 	icon = "icon16/stalker/swallow.png",
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
+        local hunger = item.player:GetCharacter():GetData("hunger", 100)
+        
+        player:SetHunger(hunger + 40)
 		
-            local hunger = item.player:GetCharacter():GetData("hunger", 100)
-                player:SetHunger(hunger + 40)
-
+		ix.chat.Send(item.player, "iteminternal", "injects himself with the "..item.name..".", false)
+		
 		quantity = quantity - 1
 
 		if (quantity >= 1) then
 			item:SetData("quantity", quantity)
 			return false
 		end
-		
-		ix.chat.Send(item.player, "iteminternal", "injects himself with the "..item.name..".", false)
-		
+
 		return true
 	end,
 	OnCanRun = function(item)

@@ -1,4 +1,4 @@
-ITEM.name = "'Spark' Cigarettes (20pk)"
+wITEM.name = "'Spark' Cigarettes (20pk)"
 ITEM.description = "A pack of 'Spark' brand cigarettes."
 ITEM.longdesc = "'Spark' (Искра) brand cigarettes is an old USSR brand of cigarettes.\nIt is still popular in the zone, as the 20 pack design along with the decent quality tobacco makes it a good affordable option.\nThis pack is pretty old, and as such much of the tobacco's potency has waned."
 ITEM.model = "models/lostsignalproject/items/consumable/cigarettes_sparkle.mdl"
@@ -40,6 +40,8 @@ ITEM.functions.use = {
 			player:AddBuff("buff_psyheal", 15, { amount = item.psyheal/30 })
 			player:SetHunger(hunger + item.hunger)
 		end)
+		
+		ix.chat.Send(item.player, "iteminternal", "pulls out a "..item.name.." and smokes it.", false)
 
 		quantity = quantity - 1
 
@@ -47,8 +49,6 @@ ITEM.functions.use = {
 			item:SetData("quantity", quantity)
 			return false
 		end
-		
-		ix.chat.Send(item.player, "iteminternal", "pulls out a "..item.name.." and smokes it.", false)
 
 		return true
 	end,

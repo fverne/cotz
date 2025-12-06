@@ -35,16 +35,16 @@ ITEM.functions.use = {
 		
 		item.player:AddBuff("buff_slowheal", 5, { amount = item.restore/5 })
 		item.player:AddBuff("buff_psyheal", 60, { amount = item.psyheal/120 })
-
+		
+		ix.chat.Send(item.player, "iteminternal", "injects himself with the "..item.name..".", false)
+		
 		quantity = quantity - 1
 
 		if (quantity >= 1) then
 			item:SetData("quantity", quantity)
 			return false
 		end
-		
-		ix.chat.Send(item.player, "iteminternal", "injects himself with the "..item.name..".", false)
-		
+
 		return true
 	end,
 	OnCanRun = function(item)

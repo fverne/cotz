@@ -35,14 +35,14 @@ ITEM.functions.use = {
 		--item.player:AddBuff("buff_adrenalinerunspeed", 50, { })
 		--item.player:AddBuff("buff_adrenalinepunchdamage", 50, { })
 
+		ix.chat.Send(item.player, "iteminternal", "injects himself with the "..item.name..".", false)
+
 		quantity = quantity - 1
 
 		if (quantity >= 1) then
 			item:SetData("quantity", quantity)
 			return false
 		end
-		
-		ix.chat.Send(item.player, "iteminternal", "injects himself with the "..item.name..".", false)
 		
 		return true
 	end,
