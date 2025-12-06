@@ -11,6 +11,7 @@ ITEM.WeightPerHunger = 0.070
 ITEM.BaseWeight = 1.044
 ITEM.WeightPerLevel = 0.143
 
+ITEM.meattier = 2
 ITEM.meal = "meal_vareshka"
 
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"

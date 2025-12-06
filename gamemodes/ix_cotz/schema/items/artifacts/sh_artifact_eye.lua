@@ -10,7 +10,7 @@ ITEM.rarity = 6
 ITEM.baseweight = 0.180
 ITEM.varweight  = 0.100
 
-ITEM.fueltier = 2
+ITEM.fueltier = 1
 
 ITEM.exRender = true
 

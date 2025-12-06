@@ -10,7 +10,7 @@ ITEM.rarity = 9
 ITEM.baseweight = 1.900
 ITEM.varweight  = 0.300
 
-ITEM.fueltier = 1
+ITEM.fueltier = 2
 
 ITEM:Hook("take", function(item)
 	if(item.player)then

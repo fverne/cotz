@@ -348,7 +348,7 @@ function ENT:KilledDan()
   -- Helix specific drops
   if(ix)then
     local item = self.selectedWeaponItem
-    ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), function(item, ent) ent.bTemporary = true end, AngleRand(), item[2] or {} )
+    ix.item.Spawn(item[1], self:GetShootPos() + Vector(0,0,32), function(item, ent) item:SetData("bTemporary", true) ent.bTemporary = true end, AngleRand(), item[2] or {} )
   end
 
   if math.random(1, 100) <= self.lootChance then

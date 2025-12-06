@@ -11,6 +11,7 @@ ITEM.WeightPerHunger = 0.070
 ITEM.BaseWeight = 1.225
 ITEM.WeightPerLevel = 0.128
 
+ITEM.meattier = 2
 ITEM.meal = "meal_bear"
 
 ITEM.img = ix.util.GetMaterial("cotz/ui/icons/food_16.png")

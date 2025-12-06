@@ -47,7 +47,7 @@ if SERVER then
 			
 			local idat = ix.util.GetRandomItemFromPool(j[2])
 			if math.random(101) <= 25 then -- Spread spawns out
-				ix.item.Spawn(idat[1], j[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), function(item, ent) ent.bTemporary = true end, AngleRand(), idat[2] or {})
+				ix.item.Spawn(idat[1], j[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), function(item, ent) item:SetData("bTemporary", true) ent.bTemporary = true end, AngleRand(), idat[2] or {})
 				numitems = numitems + 1
 			end
 		end

@@ -11,10 +11,11 @@ ITEM.WeightPerHunger = 0.040
 ITEM.BaseWeight = 0.276
 ITEM.WeightPerLevel = 0.126
 
+ITEM.meattier = 2
+ITEM.meal = "meal_sprig"
+
 ITEM.exRender = true 
 ITEM.material = "nickmaps/rostok/trees/trees_bark_a_02"
-
-ITEM.meal = "meal_sprig"
 
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
 ITEM:Hook("use", function(item)

@@ -49,7 +49,7 @@ ITEM.functions.use = {
         local items = inv:GetItems()
 
         for k, v in pairs(items) do
-          if (v.cookable == true  and !v.meatTier == true) then
+          if (v.cookable == true and v.meattier <= item.cookertier) then
             table.insert(targets, {
               name = L(""..v.name.." ("..ix.weight.WeightString(v:GetWeight(), ix.option.Get("imperial", false))..")"),
               data = {v:GetID()},
@@ -94,11 +94,11 @@ ITEM.functions.useAll = {
         local items = inv:GetItems()
 
         for k, v in pairs(items) do
-          if (v.cookable == true  and !v.meatTier == true) then
+          if (v.cookable == true  and v.meattier <= item.cookertier) then
             table.insert(cookables, v) -- testo testo
-          elseif (v.fueltier == item.cookertier and v.flag == "A") then
+          elseif (v.fueltier and v.fueltier == item.cookertier and v.flag == "A") then
             infinite = true
-          elseif (v.fueltier == item.cookertier) then
+          elseif (v.fueltier and v.fueltier == item.cookertier) then
             table.insert(fuels, v)
             fuelcount = fuelcount + v:GetData("quantity",v.quantity) -- just to doublecheck
           else
