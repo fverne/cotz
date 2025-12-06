@@ -29,16 +29,16 @@ ITEM.functions.use = {
 		local quantity = item:GetData("quantity", item.quantity)
 		
 		item.player:AddBuff("buff_psyheal", 20, { amount = item.psyheal/40 })
-
+		
+		ix.chat.Send(item.player, "iteminternal", "takes out a pill from the "..item.name.." and swallows it.", false)
+		
 		quantity = quantity - 1
 
 		if (quantity >= 1) then
 			item:SetData("quantity", quantity)
 			return false
 		end
-		
-		ix.chat.Send(item.player, "iteminternal", "takes out a pill from the "..item.name.." and swallows it.", false)
-		
+
 		return true
 	end,
 	OnCanRun = function(item)

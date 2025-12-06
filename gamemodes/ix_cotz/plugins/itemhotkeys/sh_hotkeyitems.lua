@@ -78,6 +78,8 @@ PLUGIN.hotkeyitems = {
 
     --artifacts (yes, please)
     ["artifact_galaxy"] = "use",
+    ["artifact_arachno"] = "use",
+    ["artifact_grapes"] = "use",
     ["artifact_sparkler"] = "use",
     ["artifact_flash"] = "use",
     ["artifact_moonlight"] = "use",

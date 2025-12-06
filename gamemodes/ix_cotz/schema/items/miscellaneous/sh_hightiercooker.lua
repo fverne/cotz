@@ -139,9 +139,9 @@ ITEM.functions.useAll = {
             if infinite then 
             elseif fuelcount <= 0 then
               break
-            elseif item:GetData("fuel", 0) then
+            elseif item:GetData("fuel", 0) > 0 then
               fuelcount = fuelcount - 1
-              item:SetData("fuel", fuelcount)
+              item:SetData("fuel", item:GetData("fuel", 1) - 1)
             elseif !(fuels[1] == nil) then
               fuels[1]:SetData("quantity", fuels[1]:GetData("quantity",fuels[1].quantity) - 1)
               fuelcount = fuelcount - 1

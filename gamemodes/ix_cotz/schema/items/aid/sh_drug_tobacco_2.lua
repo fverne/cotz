@@ -40,6 +40,8 @@ ITEM.functions.use = {
 			player:SetHunger(hunger + item.hunger)
 			player:AddBuff("buff_psyheal", 30, { amount = item.psyheal/60 })
 		end)
+		
+		ix.chat.Send(item.player, "iteminternal", "lights his "..item.name.." and inhales deeply.", false)
 
 		quantity = quantity - 1
 
@@ -47,8 +49,6 @@ ITEM.functions.use = {
 			item:SetData("quantity", quantity)
 			return false
 		end
-		
-		ix.chat.Send(item.player, "iteminternal", "lights his "..item.name.." and inhales deeply.", false)
 
 		return true
 	end,

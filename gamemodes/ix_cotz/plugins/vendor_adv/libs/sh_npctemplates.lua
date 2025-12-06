@@ -359,6 +359,7 @@ ix.npctemplates.templates["ecologistnpc"] = {
 		["hide_tark"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 		["hide_vareshka"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 
+		["artifact_grapes"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_arachno"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_battery"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_blowncap"] = { nil, nil, BUYONLY, nil, nil, nil },
@@ -585,6 +586,7 @@ ix.npctemplates.templates["unisgnpc3"] = {
 		["hide_tark"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 		["hide_vareshka"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 
+		["artifact_grapes"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_arachno"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_battery"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_blowncap"] = { nil, nil, BUYONLY, nil, nil, nil },

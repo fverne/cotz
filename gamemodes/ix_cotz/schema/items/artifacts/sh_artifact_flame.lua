@@ -16,13 +16,13 @@ ITEM:Hook("take", function(item)
 	if(item.player)then
 
 		local TEMP_TargetDamage = DamageInfo()
-						
+
 		TEMP_TargetDamage:SetDamage(80)
 		TEMP_TargetDamage:SetAttacker(item.player)
 		TEMP_TargetDamage:SetDamageType(DMG_BURN)
 		TEMP_TargetDamage:SetInflictor(item.player)
 		TEMP_TargetDamage:SetDamagePosition(item.player:NearestPoint(item.player:GetPos()))
-		TEMP_TargetDamage:SetDamageForce(item.player:GetForward()*10000)
+		TEMP_TargetDamage:SetDamageForce(item.player:GetForward() * 10000)
 
 		item.player:TakeDamageInfo(TEMP_TargetDamage)
 	end
@@ -35,13 +35,13 @@ ITEM.functions.combine = {
 		end
 
 		local targetItem = ix.item.instances[data[1]]
-		return (targetItem.cookertier and targetItem.cookertier >= item.fueltier)
+		return (targetItem.cookertier and targetItem.cookertier == item.fueltier)
 
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		if ( targetItem.cookertier and targetItem.cookertier <= item.fueltier and !targetItem:GetData("cancook", false) ) then
-			targetItem:SetData("cancook", true)
+		if ( targetItem.cookertier and targetItem.cookertier == item.fueltier ) then
+			targetItem:SetData("fuel", targetItem.maxFuel)
 		end
 
 		return false

@@ -41,6 +41,8 @@ ITEM.functions.use = {
 			player:SetHunger(hunger + item.hunger)
 		end)
 
+		ix.chat.Send(item.player, "iteminternal", "pulls out a "..item.name.." and smokes it.", false)
+
 		quantity = quantity - 1
 
 		if (quantity >= 1) then
@@ -48,8 +50,6 @@ ITEM.functions.use = {
 			return false
 		end
 		
-		ix.chat.Send(item.player, "iteminternal", "pulls out a "..item.name.." and smokes it.", false)
-
 		return true
 	end,
 	OnCanRun = function(item)

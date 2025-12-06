@@ -31,6 +31,8 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 		item.player:AddBuff("buff_staminarestore", 80, { amount = 4 })
+		
+		ix.chat.Send(item.player, "iteminternal", "snorts some "..item.name..".", false)
 
 		quantity = quantity - 1
 
@@ -38,8 +40,6 @@ ITEM.functions.use = {
 			item:SetData("quantity", quantity)
 			return false
 		end
-		
-		ix.chat.Send(item.player, "iteminternal", "snorts some "..item.name..".", false)
 
 		return true
 	end,
