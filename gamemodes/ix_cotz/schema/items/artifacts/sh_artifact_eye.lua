@@ -43,12 +43,12 @@ ITEM.functions.combine = {
 		end
 
 		local targetItem = ix.item.instances[data[1]]
-		return (targetItem.cookertier and targetItem.cookertier >= item.fueltier)
+		return (targetItem.cookertier and targetItem.cookertier == item.fueltier)
 
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		if ( targetItem.cookertier and targetItem.cookertier <= item.fueltier and !targetItem:GetData("cancook", false) ) then
+		if ( targetItem.cookertier and targetItem.cookertier == item.fueltier and !targetItem:GetData("cancook", false) ) then
 			targetItem:SetData("cancook", true)
 		end
 
