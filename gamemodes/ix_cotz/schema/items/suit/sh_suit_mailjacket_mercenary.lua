@@ -21,7 +21,7 @@ ITEM.isHelmet = false
 ITEM.br = 0.09
 ITEM.fbr = 1
 ITEM.sr = 0.15
-ITEM.fsr = 0
+ITEM.fsr = 1
 ITEM.ar = 0.06
 ITEM.far = 2
 

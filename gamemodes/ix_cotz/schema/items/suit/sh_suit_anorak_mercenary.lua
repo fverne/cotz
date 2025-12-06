@@ -19,9 +19,9 @@ ITEM.isGasmask = false
 ITEM.isHelmet = false
 
 ITEM.br = 0.03
-ITEM.fbr = 1
+ITEM.fbr = 2
 ITEM.sr = 0.11
-ITEM.fsr = 0
+ITEM.fsr = 1
 ITEM.ar = 0.05
 ITEM.far = 1
 
