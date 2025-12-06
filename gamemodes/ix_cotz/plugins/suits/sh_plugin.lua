@@ -31,8 +31,8 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		local flatRes = target:GetNWInt("ixflatbulletres")
 		local suit = target:getEquippedBodyArmor()
 
-		damage = damage * perRes
 		damage = damage - flatRes
+		damage = damage * perRes
 
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
@@ -56,8 +56,8 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		local flatRes = target:GetNWInt("ixflatslashres")
 		local suit = target:getEquippedBodyArmor()
 
-		damage = damage * perRes
 		damage = damage - flatRes
+		damage = damage * perRes
 
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
@@ -92,8 +92,8 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		local flatRes = target:GetNWInt("ixflatanomres")
 		local suit = target:getEquippedBodyArmor()
 
-		damage = damage * perRes
 		damage = damage - flatRes
+		damage = damage * perRes
 
 		--Make sure we dont heal the player
 		damage = math.max(damage,0)
