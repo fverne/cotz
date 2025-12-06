@@ -65,11 +65,11 @@ ix.poaching.MutantParts = {
 	},
 	["bloodsucker"] = {
 		["meattype"] = "meat_bloodsucker",
-		["parts"] = {{"part_bloodsucker", 25}, {"hide_bloodsucker", 1}},
+		["parts"] = {{"part_bloodsucker", 25}, {"hide_bloodsucker", 2}},
 	},
 	["flesh"] = {
 		["meattype"] = "meat_flesh",
-		["parts"] = {{"part_flesh", 75}, {"hide_flesh", 1}},
+		["parts"] = {{"part_flesh", 75}, {"hide_flesh", 3}},
 	},
 	["boar"] = {
 		["meattype"] = "meat_boar",
