@@ -662,7 +662,15 @@ ITEM.functions.detach = {
 			end
 			table.remove(curattach,iterator)
 
-			item.player:GetCharacter():GetInventory():Add(ix.weapontables.attachments[data[1]].uID)
+			
+			if not item.player:GetCharacter():GetInventory():Add(ix.weapontables.attachments[data[1]].uID) then
+				local position = item.player:GetItemDropPos()
+				ix.item.Spawn(ix.weapontables.attachments[data[1]].uID, position, nil, AngleRand())
+				position = position + Vector(0, 0, 5)
+				item.player:Notify("No space in your inventory! Items have been dropped.")
+			end	
+
+			
 			local wepon = item.player:GetWeapon(item.class)
 			-- If you're holding right weapon, just mod it out.
             if (IsValid(wepon) and wepon:GetClass() == item.class) then
