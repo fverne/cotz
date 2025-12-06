@@ -40,7 +40,7 @@ ITEM.functions.use = {
             -- Invoking player takes double damage
             local TEMP_TargetDamage = DamageInfo()
                         
-            TEMP_TargetDamage:SetDamage(80)
+            TEMP_TargetDamage:SetDamage(30)
             TEMP_TargetDamage:SetAttacker(item.player)
             TEMP_TargetDamage:SetDamageType(DMG_SHOCK)
             TEMP_TargetDamage:SetInflictor(item.player)
