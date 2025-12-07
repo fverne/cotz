@@ -220,39 +220,15 @@ else
 		local invicon = item.img
 		local exIcon = ikon:GetIcon(item.uniqueID)
 		local iconrow = tooltip:Add("DLabel")
-		local icon
 		iconrow:SetText("")
-		if item.img then
-			icon = iconrow:Add("DImage")
-			if (invicon) then
-				icon:SetMaterial(invicon)
-				icon:SetSize(48 * item.width, 48 * item.height)
-			end
-		elseif item.exRender then
-			icon = iconrow:Add("DImage")			
-			if (exIcon) then
-				icon:SetMaterial(exIcon)
-				icon:SetSize(48 * item.width, 48 * item.height)
-			else
-				ikon:renderIcon(
-					item.uniqueID,
-					item.width,
-					item.height,
-					item:GetModel(),
-					item.material,
-					item.iconCam
-				)
-				local tmpIcon = ikon:GetIcon(item.uniqueID)
-				icon:SetMaterial(tmpIcon)
-				icon:SetSize(48 * item.width, 48 * item.height)
-			end
-		else
-			-- We dont want to end up here...
-			-- USE img OR exRender PLEASE
-			icon = iconrow:Add("SpawnIcon")
-			icon:SetModel(item:GetModel())
-			icon:SetSize(48 * item.width, 48 * item.height)
-		end
+		
+		local icon
+		local iconMaterial = ix.util.GetItemIcon(item)
+
+
+		icon = iconrow:Add("DImage")
+		icon:SetSize(48 * item.width, 48 * item.height)
+		icon:SetMaterial(iconMaterial)
 
 
 		iconrow:Dock(TOP)
