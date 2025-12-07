@@ -28,7 +28,6 @@ ix.config.Add("regenHealRadiusVendorMult", 2048, "The radius multiplier around t
 function PLUGIN:EntityKeyValue(ent, key, value)
 	-- campfires on rp_pripyat_remaster, rp_waystation, rp_marsh_cs
 	if IsValid(ent) and string.find(ent:GetName(), "knopka_zalup") then
-		print(ent:GetCreationID().." name:"..ent:GetName())
 		table.insert(self.healingEntities, ent)
 	end
 end
