@@ -36,6 +36,7 @@ ITEM:Hook("take", function(item)
 	end
 end)
 
+
 ITEM.functions.combine = {
 	OnCanRun = function(item, data)
 		if (!data) or (!data[1]) then
@@ -48,8 +49,8 @@ ITEM.functions.combine = {
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		if ( targetItem.cookertier and targetItem.cookertier == item.fueltier and !targetItem:GetData("cancook", false) ) then
-			targetItem:SetData("cancook", true)
+		if ( targetItem.cookertier and targetItem.cookertier == item.fueltier ) then
+			targetItem:SetData("fuel", targetItem.maxFuel)
 		end
 
 		return false

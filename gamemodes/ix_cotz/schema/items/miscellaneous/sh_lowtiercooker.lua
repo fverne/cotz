@@ -7,30 +7,42 @@ ITEM.width = 1
 ITEM.height = 1
 
 ITEM.flatweight = 0.920
+ITEM.weight  = 0.400
 
 ITEM.price = 2500
 
 ITEM.cookertier = 1
+ITEM.maxFuel = 3
 
 ITEM.sound = "stalkersound/inv_cooking2.ogg"
 
 -- Inventory drawing
 if (CLIENT) then
-	local bar = Material("cotz/panels/hp1.png", "noclamp smooth")
+  local bar = Material("cotz/panels/hp1.png", "noclamp smooth")
 
-	function ITEM:PaintOver(item, w, h)
-		local cancook = item:GetData("cancook", false)
+  function ITEM:PaintOver(item, w, h)
+    local fuelpercent =  item:GetData("fuel", 0) / item.maxFuel * 100
 
-		surface.SetMaterial(bar)
-		surface.SetDrawColor(Color(120, 120, 120, 255))
-		surface.DrawTexturedRectUV(5, h - 10, 38, 4.6, 0, 0, 0.2, 1)
+    //fuelbar
+    surface.SetMaterial(bar)
+    surface.SetDrawColor(Color(120, 120, 120, 255))
+    surface.DrawTexturedRectUV(5, h - 10, 38, 4.6, 0, 0, 0.2, 1)
 
-    if (cancook) then
-		  surface.SetMaterial(bar)
-			surface.SetDrawColor(Color(120, 255, 120, 255))
-		  surface.DrawTexturedRectUV(5, h - 10, 38, 4.6, 0, 0, 0.2, 1)
+    surface.SetMaterial(bar)
+    if (fuelpercent >= 80) then 
+      surface.SetDrawColor(Color(120, 255, 120, 255))
+    elseif (fuelpercent >= 60) then 
+      surface.SetDrawColor(Color(180, 255, 120, 255))
+    elseif (fuelpercent >= 40) then 
+      surface.SetDrawColor(Color(255, 255, 120, 255))
+    elseif (fuelpercent >= 20) then 
+      surface.SetDrawColor(Color(255, 180, 120, 255))
+    elseif (fuelpercent > 0) then 
+      surface.SetDrawColor(Color(255, 120, 120, 255)) 
     end
-	end
+    surface.DrawTexturedRectUV(5, h - 10, math.Clamp(fuelpercent/100, 0, 1)*38, 4.6, 0, 0, math.Clamp(fuelpercent/100, 0, 1)*0.2, 1)
+
+  end
 end
 
 ITEM.functions.use = {
@@ -85,7 +97,7 @@ ITEM.functions.useAll = {
     local fuels = {}
     local char = item.player:GetCharacter()
     local infinite = false
-    local fuelcount = item:GetData("cancook", false) and 1 or 0
+    local fuelcount = item:GetData("fuel", 0)
     local cookquantity = 0
     if (char) then
       local inv = char:GetInventory()
@@ -120,9 +132,9 @@ ITEM.functions.useAll = {
             if infinite then 
             elseif fuelcount <= 0 then
               break
-            elseif item:GetData("cancook", false) then
-              item:SetData("cancook", false)
+            elseif item:GetData("fuel", 0) > 0 then
               fuelcount = fuelcount - 1
+              item:SetData("fuel", item:GetData("fuel", 1) - 1)
             elseif !(fuels[1] == nil) then
               fuels[1]:SetData("quantity", fuels[1]:GetData("quantity",fuels[1].quantity) - 1)
               fuelcount = fuelcount - 1
@@ -164,9 +176,9 @@ function ITEM:CookMeat(item, targetID)
     end
   end
 
-  if (self:GetData("cancook", false)) then
+  if (self:GetData("fuel", 0) > 0) then
     local client = self.player or item:GetOwner()
-
+    
     ix.util.PlayerPerformBlackScreenAction(client, "Cooking...", 6, function(player) 
       target:Remove()
       client:GetCharacter():GetInventory():Add(target.meal, 1, {["weight"] = target:GetWeight()})
@@ -175,7 +187,7 @@ function ITEM:CookMeat(item, targetID)
     end)
     
     client:EmitSound(self.sound or "items/battery_pickup.wav")
-    self:SetData("cancook", false)
+    self:SetData("fuel", self:GetData("fuel", 0) - 1)
 
     return false
   else
@@ -185,7 +197,11 @@ function ITEM:CookMeat(item, targetID)
 end
 
 function ITEM:OnInstanced(invID, x, y)
-    if (!self:GetData("cancook")) then
-        self:SetData("cancook", false)
+    if (!self:GetData("fuel")) then
+        self:SetData("fuel", 0)
     end
+end
+
+function ITEM:GetWeight()
+  return self.flatweight + (self.weight * self:GetData("fuel", 1))
 end
