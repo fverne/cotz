@@ -482,10 +482,13 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 	end,
 	GetDynamicOptions = function(self, client, target)
 		local blacklistedVariants = {
-			["anarchist"] = true,
-			["authority"] = true,
-			["mercenary"] = true,
-			["looted"] = true,
+			-- ["anarchist"] = true,
+			-- ["authority"] = true,
+			-- ["mercenary"] = true,
+			-- ["looted"] = true,
+			-- ["scavenger"] = true,
+			["ecologist"] = true,
+			["fanatic"] = true,
 		}
 
 		local suitVariants = {}
