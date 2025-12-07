@@ -481,7 +481,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 		end
 	end,
 	GetDynamicOptions = function(self, client, target)
-		local blacklistedVariants = {
+		local variants = {
 			-- ["anarchist"] = true,
 			-- ["authority"] = true,
 			-- ["mercenary"] = true,
@@ -493,7 +493,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 
 		local suitVariants = {}
 		for _, v in pairs(ix.item.list) do
-			if target.selectedsuitstruct[4] == v.baseSuit and !blacklistedVariants[v.suitVariant] then
+			if target.selectedsuitstruct[4] == v.baseSuit and variants[v.suitVariant] then
 				table.insert(suitVariants, {uniqueID = v.uniqueID, name = v.name})
 			end
 		end

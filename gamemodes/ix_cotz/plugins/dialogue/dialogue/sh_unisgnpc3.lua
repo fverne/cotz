@@ -480,7 +480,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 		end
 	end,
 	GetDynamicOptions = function(self, client, target)
-		local Variants = {
+		local variants = {
 			["anarchist"] = true,
 			["authority"] = true,
 			["mercenary"] = true,
