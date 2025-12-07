@@ -77,8 +77,6 @@ if CLIENT then
 	
 	SWEP.SprintPos = Vector(4.677, -2.023, -2.2)
     SWEP.SprintAng = Vector(1.069, 46.634, 0)
-	
-	SWEP.BackupSights = {["md_acog"] = {[1] = Vector(-2.211, -4, -0.95), [2] = Vector(-2, 0, 0)}}
 
 	SWEP.ACOGAxisAlign = {right = -0.5, up = 0, forward = 0}
 	SWEP.SchmidtShortDotAxisAlign = {right = -2, up = 0, forward = 0}

@@ -62,9 +62,55 @@ ITEM.functions.combine = {
 				targetItem:SetData("quantity", targetItem.quantity)
 				return false
 			end
-		elseif ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and !targetItem:GetData("cancook", false) ) then
+		elseif ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and targetItem:GetData("fuel") != targetItem.maxFuel) then
 			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
-			targetItem:SetData("cancook", true)
+			targetItem:SetData("fuel", targetItem:GetData("fuel", 0) + 1)
+
+			return (item:GetData("quantity", item.quantity) == 0)
+		end
+
+		return false
+	end,
+}
+
+ITEM.functions.use = {
+	name = "Refuel",
+	tip = "useTip",
+	icon = "icon16/stalker/attach.png",
+	isMulti = true,
+	multiOptions = function(item, client)
+		local targets = {}
+		local char = client:GetCharacter()
+
+		if (char) then
+			local inv = char:GetInventory()
+
+			if (inv) then
+				local items = inv:GetItems()
+
+				for k, v in pairs(items) do
+					if (v.cookertier and v.cookertier >= item.fueltier and v:GetData("fuel", false) != v.maxFuel) then
+						table.insert(targets, {
+							name = L(v.name),
+							data = {v:GetID()},
+						})
+					end
+				end
+			end
+		end
+
+		return targets
+		end,
+	OnCanRun = function(item)
+		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+	end,
+	OnRun = function(item, data)
+		local targetItem = ix.item.instances[data[1]]
+		if (!targetItem) then return false end
+
+		if ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and targetItem:GetData("fuel") != targetItem.maxFuel) then
+			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
+			targetItem:SetData("fuel", targetItem:GetData("fuel", 0) + 1)
 
 			return (item:GetData("quantity", item.quantity) == 0)
 		end
@@ -117,49 +163,3 @@ ITEM.functions.split = {
 	end,
 }
 
-
-ITEM.functions.use = {
-	name = "Refuel",
-	tip = "useTip",
-	icon = "icon16/stalker/attach.png",
-	isMulti = true,
-	multiOptions = function(item, client)
-		local targets = {}
-		local char = client:GetCharacter()
-
-		if (char) then
-			local inv = char:GetInventory()
-
-			if (inv) then
-				local items = inv:GetItems()
-
-				for k, v in pairs(items) do
-					if (v.cookertier and v.cookertier >= item.fueltier and !v:GetData("cancook", false)) then
-						table.insert(targets, {
-							name = L(v.name),
-							data = {v:GetID()},
-						})
-					end
-				end
-			end
-		end
-
-		return targets
-		end,
-	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
-	end,
-	OnRun = function(item, data)
-		local targetItem = ix.item.instances[data[1]]
-		if (!targetItem) then return false end
-
-		if ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and !targetItem:GetData("cancook", false) ) then
-			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
-			targetItem:SetData("cancook", true)
-
-			return (item:GetData("quantity", item.quantity) == 0)
-		end
-
-		return false
-	end,
-}

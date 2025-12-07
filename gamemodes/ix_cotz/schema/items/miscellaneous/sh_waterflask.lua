@@ -109,7 +109,7 @@ ITEM.functions.zCook = {
 				local items = inv:GetItems()
 
 				for k, v in pairs(items) do
-					if (v.cookertier  and v:GetData("cancook", false)) then
+					if (v.cookertier  and v:GetData("fuel", 0) > 0) then
 						table.insert(targets, {
 							name = L(v.name),
 							data = {v:GetID()},
@@ -128,12 +128,12 @@ ITEM.functions.zCook = {
 		local targetItem = ix.item.instances[data[1]]
 		if (!targetItem) then return false end
 
-		if ( targetItem.cookertier and targetItem:GetData("cancook", false) ) then
+		if ( targetItem.cookertier and targetItem:GetData("fuel", 0) > 0 ) then
 			item.player:EmitSound("stalkersound/inv_cooking_cooker.ogg", 110)
         	ix.chat.Send(item.player, "iteminternal", "boils water for their "..item.name..".", false)
 	        ix.util.PlayerPerformBlackScreenAction(item.player, "Boiling water...", 6, function(player)
 				item:SetData("contains", 2)
-				targetItem:SetData("cancook", false)
+				targetItem:SetData("fuel", targetItem:GetData("fuel", 1) - 1)
 	        end)
 		end
 		return false

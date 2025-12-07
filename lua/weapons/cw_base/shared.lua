@@ -1758,7 +1758,7 @@ function SWEP:MakeRecoil(mod)
 	local freeAimOn = self:isFreeAimOn()
 
 	if not freeAimOn or (freeAimOn and self.dt.BipodDeployed) then
-		self.Owner:ViewPunch(Angle(-self.Recoil * 1.25 * mod, 0, 0))
+		self.Owner:ViewPunch(Angle(-self.Recoil * 0.75 * mod, 0, 0))
 	end
 
 	if CLIENT and IFTP then
