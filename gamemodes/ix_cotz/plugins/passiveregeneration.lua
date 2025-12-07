@@ -34,7 +34,7 @@ function PLUGIN:EntityKeyValue(ent, key, value)
 end
 
 function PLUGIN:PostLoadData()
-	-- vendors, bedrolls, storages
+	-- bedrolls, vendors
 	for k,v in pairs(ents.GetAll()) do
 		if v:GetClass() == "ix_spawnsaver" or v:GetClass() == "ix_vendor_adv" then
 			table.insert(self.healingEntities, v)
