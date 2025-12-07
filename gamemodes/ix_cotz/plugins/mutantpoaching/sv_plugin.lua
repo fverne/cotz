@@ -17,6 +17,7 @@ ix.poaching.MutantTable = {
 	["models/monsters/boar.mdl"] = "boar",
 	["models/monsters/chimera2.mdl"] = "chimera",
 	["models/monsters/chimera.mdl"] = "electrochimera",
+	["models/monsters/chimera3.mdl"] = "chimera", -- replace with firechimera
 	["models/gsc/s.t.a.l.k.e.r/monsters/burer.mdl"] = "burer",
 	["models/monsters/cat.mdl"] = "cat",
 	["models/monsters/karlik.mdl"] = "karlik",
