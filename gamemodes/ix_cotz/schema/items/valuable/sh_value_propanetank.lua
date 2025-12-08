@@ -38,7 +38,7 @@ ITEM.functions.combine = {
 		end
 
 		local targetItem = ix.item.instances[data[1]]
-		return (targetItem.uniqueID == item.uniqueID or targetItem.cookertier and targetItem.cookertier >= item.fueltier)
+		return (targetItem.uniqueID == item.uniqueID or targetItem.cookertier and targetItem.cookertier == item.fueltier)
 
 	end,
 	OnRun = function(item, data)
@@ -57,7 +57,7 @@ ITEM.functions.combine = {
 				targetItem:SetData("quantity", targetItem.quantity)
 				return false
 			end
-		elseif ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and targetItem:GetData("fuel") != targetItem.maxFuel) then
+		elseif ( targetItem.cookertier and targetItem.cookertier == item.fueltier and targetItem:GetData("fuel") != targetItem.maxFuel) then
 			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
 			targetItem:SetData("fuel", targetItem:GetData("fuel", 0) + 1)
 
@@ -103,7 +103,7 @@ ITEM.functions.use = {
 		local targetItem = ix.item.instances[data[1]]
 		if (!targetItem) then return false end
 
-		if ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and targetItem:GetData("fuel") != targetItem.maxFuel) then
+		if ( targetItem.cookertier and targetItem.cookertier == item.fueltier and targetItem:GetData("fuel") != targetItem.maxFuel) then
 			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
 			targetItem:SetData("fuel", targetItem:GetData("fuel", 0) + 1)
 
