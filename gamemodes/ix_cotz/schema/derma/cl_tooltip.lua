@@ -68,7 +68,7 @@ function PANEL:Init()
 	self:SetContentAlignment(4)
 	self:Dock(TOP)
 
-	self.maxWidth = ScrW() * 0.3
+	self.maxWidth = ScrW() * 0.2
 	self.bNoMinimal = false
 	self.bMinimal = false
 end

@@ -219,8 +219,8 @@ else
 
 		local invicon = item.img
 		local exIcon = ikon:GetIcon(item.uniqueID)
-		local iconrow = tooltip:Add("DLabel")
-		iconrow:SetText("")
+		local iconrow = tooltip:Add("Panel")
+		-- iconrow:SetText("")
 		
 		local icon
 		local iconMaterial = ix.util.GetItemIcon(item)
@@ -229,7 +229,7 @@ else
 		icon = iconrow:Add("DImage")
 		icon:SetSize(48 * item.width, 48 * item.height)
 		icon:SetMaterial(iconMaterial)
-
+		iconrow:SetWide(ScrW() * 0.3)
 
 		iconrow:Dock(TOP)
 		iconrow:SetTall(item.height * 48)
