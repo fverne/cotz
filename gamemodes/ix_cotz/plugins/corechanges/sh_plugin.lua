@@ -298,5 +298,14 @@ function PLUGIN:CanTransferItem(item, oldInventory, newInventory)
 		return false
 	end
 
+	if item.noDrop then
+		local owner = item:GetOwner()
+		if IsValid(owner) and newInventory != oldInventory then
+			owner:Notify("That item cannot be transferred out of your inventory!")
+
+			return false
+		end
+	end
+
 	return true
 end
