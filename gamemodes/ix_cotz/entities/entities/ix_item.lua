@@ -229,7 +229,7 @@ else
 		icon = iconrow:Add("DImage")
 		icon:SetSize(48 * item.width, 48 * item.height)
 		icon:SetMaterial(iconMaterial)
-		iconrow:SetWide(ScrW() * 0.3)
+		iconrow:SetWide(icon:GetWide())
 
 		iconrow:Dock(TOP)
 		iconrow:SetTall(item.height * 48)
