@@ -21,8 +21,8 @@ ix.progression.Register("hagglerItemDelivery_1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_nuts"] = 180,
-			["value_toiletpaper"] = 25,
+			["value_nuts"] = 90,
+			["value_toiletpaper"] = 15,
 		}	
 
 		return itemids
@@ -110,7 +110,7 @@ ix.progression.Register("hagglerItemDelivery_11", {
 	GetItemIds = function()
 		local itemids = {
 			["value_capacitors"] = 100,
-			["value_glue_1"] = 30,
+			["value_glue_1"] = 20,
 		}	
 
 		return itemids
@@ -196,9 +196,9 @@ ix.progression.Register("hagglerItemDelivery_111", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_nails"] = 150,
-			["value_tape_duct"] = 75,
-			["value_hose"] = 45,
+			["value_nails"] = 40,
+			["value_tape_duct"] = 25,
+			["value_hose"] = 15,
 		}	
 
 		return itemids
@@ -282,8 +282,8 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_tape_electric"] = 80,
-			["value_detergent"] = 80,
+			["value_tape_electric"] = 30,
+			["value_detergent"] = 30,
 		}	
 
 		return itemids
@@ -367,8 +367,8 @@ ix.progression.Register("hagglerItemDelivery_112", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_goldchain"] = 10,
-			["value_wire_light"] = 180,
+			["value_goldchain"] = 4,
+			["value_wire_light"] = 60,
 		}	
 
 		return itemids
@@ -450,7 +450,7 @@ ix.progression.Register("hagglerItemDelivery_12", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_sparkplug"] = 80,
+			["value_sparkplug"] = 30,
 			["value_glue_2"] = 25,
 		}	
 
@@ -536,7 +536,7 @@ ix.progression.Register("hagglerItemDelivery_121", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_toothpaste"] = 120,
+			["value_toothpaste"] = 35,
 			["value_statue_horse"] = 5,
 		}	
 
@@ -621,7 +621,7 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_engine"] = 8,
+			["value_engine"] = 4,
 			["value_nuts"] = 80,
 		}	
 
@@ -705,7 +705,7 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_gunpowder_blue"] = 50,
+			["value_gunpowder_blue"] = 30,
 		}	
 
 		return itemids
@@ -789,8 +789,8 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_phone_new"] = 25,
-			["value_watch"] = 40,
+			["value_phone_new"] = 15,
+			["value_watch"] = 20,
 		}	
 
 		return itemids
@@ -873,7 +873,7 @@ ix.progression.Register("hagglerItemDelivery_122", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_detergent"] = 120,
+			["value_detergent"] = 30,
 			["value_car_battery"] = 5,
 		}	
 
@@ -1125,8 +1125,8 @@ ix.progression.Register("hagglerItemDelivery_2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_bolts"] = 180,
-			["value_sparkplug"] = 20,
+			["value_bolts"] = 130,
+			["value_sparkplug"] = 10,
 		}	
 
 		return itemids
@@ -1212,7 +1212,7 @@ ix.progression.Register("hagglerItemDelivery_21", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_gunpowder_green"] = 25,
+			["value_gunpowder_green"] = 15,
 		}	
 
 		return itemids
@@ -1297,7 +1297,7 @@ ix.progression.Register("hagglerItemDelivery_211", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_carbattery"] = 20,
+			["value_carbattery"] = 8,
 		}	
 
 		return itemids
@@ -1380,7 +1380,7 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_siliconetube"] = 60,
+			["value_siliconetube"] = 40,
 		}	
 
 		return itemids
@@ -1463,8 +1463,8 @@ ix.progression.Register("hagglerItemDelivery_212", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_battery"] = 110,
-			["value_motorclean"] = 20,
+			["value_battery"] = 90,
+			["value_motorclean"] = 15,
 		}	
 
 		return itemids
@@ -1547,7 +1547,7 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_wire_heavy"] = 10,
+			["value_wire_heavy"] = 5,
 		}	
 
 		return itemids
@@ -1630,8 +1630,8 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_wire_copper"] = 60,
-			["value_9vbattery"] = 90,
+			["value_wire_copper"] = 40,
+			["value_9vbattery"] = 70,
 		}	
 
 		return itemids
@@ -1713,8 +1713,8 @@ ix.progression.Register("hagglerItemDelivery_22", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_lightbulb"] = 90,
-			["value_gasoline"] = 30,
+			["value_lightbulb"] = 60,
+			["value_gasoline"] = 20,
 		}	
 
 		return itemids
@@ -1800,9 +1800,9 @@ ix.progression.Register("hagglerItemDelivery_221", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_hose"] = 120,
-			["value_wire_light"] = 80,
-			["value_propanetank"] = 20,
+			["value_hose"] = 90,
+			["value_wire_light"] = 60,
+			["value_propanetank"] = 15,
 		}	
 
 		return itemids
@@ -1886,7 +1886,7 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_paracord"] = 50,
+			["value_paracord"] = 40,
 			["value_wirelesstrans"] = 1,
 		}	
 
@@ -2052,8 +2052,8 @@ ix.progression.Register("hagglerItemDelivery_222", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_techtool_1"] = 10,
-			["value_nails"] = 50,
+			["value_techtool_1"] = 6,
+			["value_nails"] = 40,
 		}	
 
 		return itemids
