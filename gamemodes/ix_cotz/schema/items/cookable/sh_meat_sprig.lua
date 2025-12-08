@@ -11,7 +11,7 @@ ITEM.WeightPerHunger = 0.040
 ITEM.BaseWeight = 0.276
 ITEM.WeightPerLevel = 0.126
 
-ITEM.meattier = 2
+-- ITEM.meattier = 2
 ITEM.meal = "meal_sprig"
 
 ITEM.exRender = true 
