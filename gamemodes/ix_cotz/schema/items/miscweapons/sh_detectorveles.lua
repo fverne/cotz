@@ -45,6 +45,7 @@ ITEM.pacData = {
 				["ClassName"] = "event",
 				["UniqueID"] = "1016144242",
 				["Event"] = "weapon_class",
+				["Invert"] = false,
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
 				["Arguments"] = "detector_veles@@0",
