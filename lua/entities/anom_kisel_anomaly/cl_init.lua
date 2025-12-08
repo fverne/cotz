@@ -95,5 +95,5 @@ end
 
 function ENT:UpdateTransmitState()
 
-	return TRANSMIT_ALWAYS
+	return TRANSMIT_PVS
 end
