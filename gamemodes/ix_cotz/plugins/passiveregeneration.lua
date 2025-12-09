@@ -19,7 +19,7 @@ ix.config.Add("regenHealRadius", 256, "The radius around the entities for which 
 	category = "passive health regeneration"
 })
 
-ix.config.Add("regenHealRadiusVendorMult", 4096, "The radius multiplier around the vendors for which players are healed.", nil, {
+ix.config.Add("regenHealRadiusVendorMult", 2048, "The radius multiplier around the vendors for which players are healed.", nil, {
 	data = {min = 0, max = 10000},
 	category = "passive health regeneration"
 })
@@ -28,13 +28,12 @@ ix.config.Add("regenHealRadiusVendorMult", 4096, "The radius multiplier around t
 function PLUGIN:EntityKeyValue(ent, key, value)
 	-- campfires on rp_pripyat_remaster, rp_waystation, rp_marsh_cs
 	if IsValid(ent) and string.find(ent:GetName(), "knopka_zalup") then
-		print(ent:GetCreationID().." name:"..ent:GetName())
 		table.insert(self.healingEntities, ent)
 	end
 end
 
 function PLUGIN:PostLoadData()
-	-- vendors, bedrolls, storages
+	-- bedrolls, vendors
 	for k,v in pairs(ents.GetAll()) do
 		if v:GetClass() == "ix_spawnsaver" or v:GetClass() == "ix_vendor_adv" then
 			table.insert(self.healingEntities, v)
@@ -52,7 +51,7 @@ if SERVER then
 		for k, v in pairs(self.healingEntities) do
 			local radius = ix.config.Get("regenHealRadius", 256)
 			if v:GetClass() == "ix_vendor_adv" then
-				radius = ix.config.Get("regenHealRadiusVendorMult", ix.config.Get("regenHealRadius", 256) * 4)
+				radius = ix.config.Get("regenHealRadiusVendorMult", ix.config.Get("regenHealRadius", 256) * 8)
 			end
 
 			for _, v2 in pairs(ents.FindInSphere(v:GetPos(), radius)) do

@@ -74,7 +74,7 @@ function ix.util.DrawResistance(parentTooltip, resistanceName, value, flatValue)
     local displayedValue = anchor:Add("DLabel")
 --    displayedValue:SetText(ix.util.ProtectionTranslator(value, minVal, maxVal))
 
-    displayedValue:SetText((math.floor(math.Remap(value, 0, 1, 0, 100)+0.5)).."%"..(flatValue == nil and "" or (" + "..flatValue)))
+    displayedValue:SetText((math.floor(math.Remap(value, 0, 1, 0, 100)+0.5)).."%"..(flatValue == nil and "" or (" + "..math.Round(flatValue, 1))))
 
     displayedValue:SetColor(ix.util.GetColorFromValue(value, 0, 1))
     displayedValue:SetFont("ixSmallFont")

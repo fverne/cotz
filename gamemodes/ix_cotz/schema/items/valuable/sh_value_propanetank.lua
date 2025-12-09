@@ -1,4 +1,4 @@
-ITEM.name = "Propane Tank"
+ITEM.name = "Propane"
 ITEM.description = "A tank of propane, there is still some inside."
 ITEM.longdesc = "Propane is a flammable gas most often used in water heating, cooking, refrigeration, and powering industrial clinic. Most often used for multi-fuel cookers in the Zone."
 ITEM.model = "models/illusion/eftcontainers/propanetank.mdl"

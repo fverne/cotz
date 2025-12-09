@@ -49,6 +49,7 @@ AddNPC("Bear","npc_mutant_bear")
 AddNPC("Skeleton","npc_mutant_skeleton")
 
 AddNPC("Chimera (Electro)","npc_mutant_chimera_electro")
+AddNPC("Chimera (Fire)","npc_mutant_chimera_fire")
 
 AddNPC("Pseudogiant (Fast)","npc_mutant_pseudogiant_fast")
 AddNPC("Pseudogiant (Slow)","npc_mutant_pseudogiant_slow")

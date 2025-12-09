@@ -13,6 +13,7 @@ ITEM.thirst = 17
 ITEM.quantity = 2
 
 ITEM.cookable = true
+ITEM.meattier = 1
 ITEM.meal = "drink_bottlewater"
 
 ITEM.sound = "stalkersound/inv_drink_beak.mp3"

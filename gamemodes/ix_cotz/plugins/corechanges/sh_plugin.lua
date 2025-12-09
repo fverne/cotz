@@ -12,20 +12,20 @@ ix.chat.Register("iteminternal", {
 })
 
 --adds automatic me's when picking up and dropping items
-function PLUGIN:OnItemTransferred(item, curInv, inventory)
+function PLUGIN:OnItemTransferred(item, curInv, targetInv)
 	if curInv:GetID() == 0 then
-		local client = inventory:GetOwner()
-		ix.chat.Send(client, "iteminternal", Format("picks up the %s.", item:GetName()), false)
+		local pickupClient = targetInv:GetOwner()
+		ix.chat.Send(pickupClient, "iteminternal", Format("picks up the %s.", item:GetName()), false)
 
 		if item:GetData("bTemporary") then
 			item:SetData("bTemporary", false)
 		end
 	end
 
-	if inventory:GetID() == 0 then
-		local client = curInv:GetOwner()
-		if client then
-			ix.chat.Send(client, "iteminternal", Format("drops their %s.", item:GetName()), false)
+	if targetInv:GetID() == 0 then
+		local dropClient = curInv:GetOwner()
+		if dropClient then
+			ix.chat.Send(dropClient, "iteminternal", Format("drops their %s.", item:GetName()), false)
 		end
 	end
 end
@@ -296,6 +296,15 @@ function PLUGIN:CanTransferItem(item, oldInventory, newInventory)
 		end
 
 		return false
+	end
+
+	if item.noDrop then
+		local owner = item:GetOwner()
+		if IsValid(owner) and newInventory != oldInventory then
+			owner:Notify("That item cannot be transferred out of your inventory!")
+
+			return false
+		end
 	end
 
 	return true

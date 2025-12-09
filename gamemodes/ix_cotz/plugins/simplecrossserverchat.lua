@@ -15,13 +15,14 @@ ix = ix or {}
 ix.crossserverchat = ix.crossserverchat or {}
 ix.crossserverchat.queue = ix.crossserverchat.queue or {}
 
+local icon =  Material("vgui/icons/news.png")
 ix.chat.Register("gpdainternal", {
 	CanSay = function(self, speaker, text)
 
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text, bAnonymous, data)
-		chat.AddText(Color(180,61,61), "[GPDA-"..data.name.."] ", color_white, ix.util.GetMaterial(data.icon), ": "..data.message)
+		chat.AddText(Color(180,61,61), "[GPDA-"..data.name.."] ", color_white, Material(data.icon) or icon, ": "..data.message)
 	end,
 	prefix = {},
 	CanHear = function(self, speaker, listener)

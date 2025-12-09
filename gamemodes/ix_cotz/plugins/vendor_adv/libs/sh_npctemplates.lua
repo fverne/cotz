@@ -176,7 +176,8 @@ ix.npctemplates.templates["cooknpc"] = {
 	--animgroup 	= 4,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["lowtiercooker"] 	= { nil, 2, SELLANDBUY, 2, 1, 2 },
+		["hightiercooker"] 	= { nil, 3, SELLANDBUY, 3, 1, 3},
+
 		["lowtiercookerfuel"] 	= { nil, 40, SELLANDBUY, 40, 1, 20 },
 
 		["drug_cigarette_1"] 	= { nil, 5, SELLANDBUY, 5, 1, 5 },
@@ -195,11 +196,11 @@ ix.npctemplates.templates["cooknpc"] = {
 		["drink_vodka_2"] 	= { nil, 8, SELLANDBUY, 8, 1, 8 },
 		["drink_vodka_3"] 	= { nil, 4, SELLANDBUY, 4, 1, 3 },
 
-        ["food_bread"] 	= { nil, 20, SELLANDBUY, 20, 1, 5 },
-        ["food_nuts_1"] 	= { nil, 40, SELLANDBUY, 40, 1, 5 },
-        ["food_oldmeat"] 	= { nil, 10, SELLANDBUY, 10, 1, 5 },
-        ["food_sausage_1"] 	= { nil, 10, SELLANDBUY, 10, 1, 5 },
-        ["food_can_sprats"] 	= { nil, 3, SELLANDBUY, 3, 1, 3 },
+        -- ["food_bread"] 	= { nil, 20, SELLANDBUY, 20, 1, 5 },
+        -- ["food_nuts_1"] 	= { nil, 40, SELLANDBUY, 40, 1, 5 },
+        -- ["food_oldmeat"] 	= { nil, 10, SELLANDBUY, 10, 1, 5 },
+        -- ["food_sausage_1"] 	= { nil, 10, SELLANDBUY, 10, 1, 5 },
+        ["food_can_sprats"] 	= { 200, 3, SELLANDBUY, 3, 1, 3 },
 
         ["waterflask"] = { nil, 5, SELLANDBUY, 5, 1, 5 },
 

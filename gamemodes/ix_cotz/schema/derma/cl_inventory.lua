@@ -367,9 +367,41 @@ end
 function PANEL:ExtraPaint(width, height)
 end
 
+local blackCol = Color(0, 0, 0, 85)
+local yellowCol = Color(255, 192, 0, 20)
+local purpleCol = Color(127, 0, 255, 20)
+local gradientMat = Material("vgui/gradient-u")
+local gradientLMat = Material("vgui/gradient-l")
+local gradientRMat = Material("vgui/gradient-r")
+
 function PANEL:Paint(width, height)
-	surface.SetDrawColor(0, 0, 0, 85)
+	surface.SetDrawColor(blackCol)
 	surface.DrawRect(2, 2, width - self:GetWide()*0.002, height - self:GetWide()*0.002)
+
+	local itemTable = self.itemTable
+	local parent = self:GetParent()
+
+	if (itemTable and itemTable.uniqueID) then
+		if parent and parent.highlghtItems and parent.highlghtItems[itemTable.uniqueID] then
+			if parent.highlghtItems[itemTable.uniqueID] == "Quest" then
+				surface.SetDrawColor(yellowCol)
+			elseif parent.highlghtItems[itemTable.uniqueID] == "Progression" then
+				surface.SetDrawColor(purpleCol)
+			end
+
+			if parent.highlghtItems[itemTable.uniqueID] == "Both" then
+				surface.SetDrawColor(yellowCol)
+				surface.SetMaterial(gradientLMat)
+				surface.DrawTexturedRect(2, 2, width * 0.5 - self:GetWide()*0.002, height - self:GetWide()*0.002)
+				surface.SetDrawColor(purpleCol)
+				surface.SetMaterial(gradientRMat)
+				surface.DrawTexturedRect(width * 0.5 + 2, 2, width * 0.5 - self:GetWide()*0.002, height - self:GetWide()*0.002)
+			else
+				surface.SetMaterial(gradientMat)
+				surface.DrawTexturedRect(2, 2, width - self:GetWide()*0.002, height - self:GetWide()*0.002)
+			end
+		end
+	end
 
 	self:ExtraPaint(width, height)
 end
@@ -396,6 +428,81 @@ function PANEL:Init()
 	self.btnMaxim:SetMouseInputEnabled(false)
 
 	self.panels = {}
+
+	self.highlghtItems = {}
+
+	for k, v in pairs(LocalPlayer():GetCharacter():GetJobs()) do
+		local jobDef = ix.jobs.list[v.identifier]
+		if not jobDef or not jobDef.requiredItem then
+			continue
+		end
+
+		self.highlghtItems[jobDef.requiredItem] = "Quest"
+	end
+
+	local npcidentifiers = {}
+	local initialNpcs = {
+		"'Old Timer'",
+		"'Technut'",
+		"'Jitters'",
+		"'Cleaner'",
+		"'Quartermaster'",
+		"'Boss'",
+		"'Smartass'",
+	}
+
+	table.Add(npcidentifiers, initialNpcs)
+
+	if ix.progression.IsCompleted("oldTimerKillIntro") then
+		local tradenpc = {
+			"'Haggler'",
+		}
+		table.Add(npcidentifiers, tradenpc)
+	end
+
+	if ix.progression.IsCompleted("oldTimerItemDelivery_mainMeat") then
+		local cooknpc = {
+			"'Spicy Lemon'",
+		}
+		table.Add(npcidentifiers, cooknpc)
+	end
+
+	if ix.progression.IsCompleted("oldTimerItemDelivery_mainStatue") then
+		local mutenpc = {
+			"'Mute'",
+		}
+		table.Add(npcidentifiers, mutenpc)
+	end
+
+	if ix.progression.IsCompleted("smartass_rfTasks") then
+		local ecologistNpcs = {
+			"'Egghead'",
+			"'Beanstalk'",
+			"'Intern'",
+		}
+		table.Add(npcidentifiers, ecologistNpcs)
+	end
+
+	if ix.progression.IsCompleted("computerDelivery_activateItem") then
+		local pripyatNpcs = {
+			"'Computer'",
+		}
+		table.Add(npcidentifiers, pripyatNpcs)
+	end
+
+	for _, npcidentifier in pairs(npcidentifiers) do
+		for k, v in pairs(ix.progression.GetActiveProgressions(npcidentifier)) do
+			local progDef = ix.progression.definitions[v]
+			if progDef and not progDef.GetItemIds then continue end
+			for itemName, _ in pairs(progDef.GetItemIds()) do
+				if self.highlghtItems[itemName] == nil then
+					self.highlghtItems[itemName] = "Progression"
+				elseif self.highlghtItems[itemName] == "Quest" then
+					self.highlghtItems[itemName] = "Both"
+				end
+			end
+		end
+	end
 end
 
 function PANEL:GetPadding(index)
@@ -464,6 +571,29 @@ function PANEL:ViewOnly()
 	end
 end
 
+local function AddHighlightRow(tooltip, text, color)
+	local row = tooltip:AddRowAfter("name", "quest")
+	row:SetText("")
+
+	local dot = row:Add("DLabel")
+	dot:SetText("•")
+	dot:SetContentAlignment(8)
+	dot:SetTextColor(ColorAlpha(color, 255))
+	dot:SetPos(8, 0)
+	dot:SetSize(row:GetTall(), row:GetTall())
+
+	local label = row:Add("DLabel")
+	label:MoveRightOf(dot)
+	label:SetText("  " .. text)
+	label:SetTextColor(ColorAlpha(color, 255))
+	label:SetFont("ixSmallFont")
+	label:SizeToContents()
+
+	row:SetWide(dot:GetWide() + label:GetWide() + 15)
+
+	return row
+end
+
 function PANEL:SetInventory(inventory, bFitParent)
 	if (inventory.slots) then
 		local invWidth, invHeight = inventory:GetSize()
@@ -496,6 +626,18 @@ function PANEL:SetInventory(inventory, bFitParent)
 					if (IsValid(icon)) then
 						icon:SetHelixTooltip(function(tooltip)
 							ix.hud.PopulateItemTooltip(tooltip, item)
+							local highlightText = self.highlghtItems[item.uniqueID]
+							if highlightText then
+								if highlightText == "Quest" then
+									AddHighlightRow(tooltip, "Quest", yellowCol)
+								elseif highlightText == "Progression" then
+									AddHighlightRow(tooltip, "Progression", purpleCol)
+								elseif highlightText == "Both" then
+									AddHighlightRow(tooltip, "Quest", yellowCol)
+									AddHighlightRow(tooltip, "Progression", purpleCol)
+								end
+							end
+							tooltip:SizeToContents()
 						end)
 
 						self.panels[item.id] = icon
