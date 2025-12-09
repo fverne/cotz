@@ -503,8 +503,6 @@ function PANEL:Init()
 			end
 		end
 	end
-
-	self.highlghtItems["hide_blinddog"] = "Both"
 end
 
 function PANEL:GetPadding(index)
