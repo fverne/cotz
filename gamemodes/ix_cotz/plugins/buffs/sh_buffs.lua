@@ -198,16 +198,11 @@ PLUGIN.buffs[ "buff_lightningsprint" ] = {
 		end
 		player:SetRunSpeed(player.lightningSpeedBuffed)
 		if player.timeNextTickSpdDmg < CurTime() then
-
-			if player:Health() > 10 then
-				player:SetHealth(player:Health() - parameter.dps)
-				player:StopSound("anomaly/electra_blast1.mp3")
-				player:EmitSound("anomaly/electra_blast1.mp3",70, 180)
-				ParticleEffect( "myasorubka_activated", player:GetPos(), Angle( 0, 0, 0 ) )
-				player.timeNextTickSpdDmg = CurTime() + 1
-			else
-				player:RemoveBuff("buff_lightningsprint")
-			end
+			player:SetHealth(player:Health() - parameter.dps)
+			player:StopSound("anomaly/electra_blast1.mp3")
+			player:EmitSound("anomaly/electra_blast1.mp3",70, 180)
+			ParticleEffect( "myasorubka_activated", player:GetPos(), Angle( 0, 0, 0 ) )
+			player.timeNextTickSpdDmg = CurTime() + 1
 		end
 	end,
 	onbuffed = function( player, parameter )
