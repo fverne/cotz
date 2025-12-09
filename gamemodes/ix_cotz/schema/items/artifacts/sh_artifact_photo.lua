@@ -29,19 +29,22 @@ ITEM.functions.use = {
     sound = "icon16/stalker/read.png",
     OnRun = function(item)
         if(item:GetData("cooldown",0) < os.time())then
-        	item:SetData("cooldown", os.time() + 15 )
 
-            local client = item:GetOwner()
-            local character = client:GetCharacter()
+            ix.util.PlayerPerformBlackScreenAction(item.player, "Reminiscing", 15, function(player) 
+                item:SetData("cooldown", os.time() + 15 )
 
-            local spawndata = character:GetData("savedspawn", nil)
+                local client = item:GetOwner()
+                local character = client:GetCharacter()
 
-			if not (spawndata[3] == game.GetMap())then
-				character:SetData("newpos", spawndata)
-				ix.plugin.list["simplecrossserver"]:RedirectPlayerNoLoadZone(client, spawndata[3])
-			end
+                local spawndata = character:GetData("savedspawn", nil)
 
-            client:SetPos(spawndata[1])
+                if not (spawndata[3] == game.GetMap())then
+                    character:SetData("newpos", spawndata)
+                    ix.plugin.list["simplecrossserver"]:RedirectPlayerNoLoadZone(client, spawndata[3])
+                end
+
+                client:SetPos(spawndata[1])
+            end)
         end
 
         return false
