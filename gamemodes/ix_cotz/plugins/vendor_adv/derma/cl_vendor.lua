@@ -262,7 +262,6 @@ end
 
 function PANEL:Setup(uniqueID, iteminstanceID)
 	local item = ix.item.instances[iteminstanceID] or ix.item.list[uniqueID]
-	local invicon = item.img
 	local exIcon = ikon:GetIcon(item.uniqueID)
 	local wmax = 32
 	local hmax = 32

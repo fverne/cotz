@@ -38,6 +38,8 @@ end
 
 --overwrites the original helix one
 function ix.util.GetMaterial(materialPath, materialArguments)
+    if !isstring(materialPath) then return materialPath end
+
     -- Cache the material.
     ix.util.cachedMaterials = ix.util.cachedMaterials or {}
     ix.util.cachedMaterials[materialPath] = ix.util.cachedMaterials[materialPath] or Material(materialPath, materialArguments or "noclamp smooth")

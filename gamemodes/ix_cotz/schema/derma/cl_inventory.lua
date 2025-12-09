@@ -901,10 +901,10 @@ function PANEL:AddIcon(model, x, y, w, h, skin)
 					)
 				end
 			end
-		elseif (itemTable.img) then
+		elseif (itemTable:GetData("img", itemTable.img)) then
 			panel.Icon:SetVisible(false)
 			panel.ExtraPaint = function(this, panelX, panelY)
-				local icon = itemTable.img
+				local icon = ix.util.GetMaterial(itemTable:GetData("img", itemTable.img))
 				if (icon) then
 					surface.SetMaterial(icon)
 					surface.SetDrawColor(color_white)
