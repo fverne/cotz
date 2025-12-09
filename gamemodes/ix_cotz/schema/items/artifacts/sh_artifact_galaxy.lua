@@ -19,6 +19,7 @@ ITEM.functions.use = {
         if(item:GetData("cooldown",0) < os.time())then
         	item:SetData("cooldown", os.time() + 15 )
 
+            item.player:RemoveBuff( "buff_hijump" , {})
             item.player:AddBuff("buff_hijump", 10, { amount = 300 })
         end
 

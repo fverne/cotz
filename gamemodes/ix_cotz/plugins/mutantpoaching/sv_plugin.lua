@@ -98,15 +98,15 @@ ix.poaching.MutantParts = {
 	},
 	["controller"] = {
 		["meattype"] = "meat_controller",
-		["parts"] = {{"part_controller_1", 20}, {"part_controller_2", 4}, {"hide_controller", 3}},
+		["parts"] = {{"part_controller_1", 20}, {"part_controller_2", 4}, {"hide_controller", 3}, {"artifact_compass", 1}, },
 	},
 	["swampcontroller"] = {
 		["meattype"] = "meat_controller",
-		["parts"] = {{"part_swampcontroller_1", 20}, {"part_swampcontroller_2", 5}, {"hide_swampcontroller", 3}},
+		["parts"] = {{"part_swampcontroller_1", 20}, {"part_swampcontroller_2", 5}, {"hide_swampcontroller", 3}, {"artifact_photo", 1}, },
 	},
 	["electrocontroller"] = {
 		["meattype"] = "meat_controller",
-		["parts"] = {{"part_electrocontroller_1", 20}, {"part_electrocontroller_2", 5}, {"hide_electrocontroller", 1}},
+		["parts"] = {{"part_electrocontroller_1", 20}, {"part_electrocontroller_2", 5}, {"hide_electrocontroller", 3}, {"artifact_storm", 1}, },
 	},
 	["bear"] = {
 		["meattype"] = "meat_bear",
@@ -134,7 +134,7 @@ ix.poaching.MutantParts = {
 	},
 	["fastcontroller"] = {
 		["meattype"] = "meat_controller",
-		["parts"] = {{"part_controller_1", 20}, {"part_controller_2", 4}, {"hide_controller", 3}},
+		["parts"] = {{"part_controller_1", 20}, {"part_controller_2", 4}, {"hide_controller", 3}, {"artifact_moon", 1}, },
 	},
 	["tark"] = {
 		["meattype"] = "meat_tark",

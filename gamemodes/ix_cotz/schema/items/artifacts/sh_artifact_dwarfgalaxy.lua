@@ -17,7 +17,7 @@ ITEM.functions.use = {
     OnRun = function(item)
         if(item:GetData("cooldown",0) < os.time())then
         	item:SetData("cooldown", os.time() + 15 )
-
+            item.player:RemoveBuff( "buff_hijump" , {})
             item.player:AddBuff("buff_hijump", 5, { amount = 200 })
         end
 

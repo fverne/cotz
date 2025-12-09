@@ -70,7 +70,7 @@ if CLIENT then
 	SWEP.CustomizePos = Vector(12.121, -4.907, -0.461)
 	SWEP.CustomizeAng = Vector(17.232, 58.485, 19.311)
 		
-	SWEP.BackupSights = {["md_acog"] = {[1] = Vector(-2.021, -4.864, -1.122), [2] = Vector(0, 0, 0)}}
+	-- SWEP.BackupSights = {["md_acog"] = {[1] = Vector(-2.021, -4.864, -1.122), [2] = Vector(0, 0, 0)}}
 
 	SWEP.SightWithRail = true
 	SWEP.PSO1AxisAlign = {right = 0, up = 0, forward = 90}
