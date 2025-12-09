@@ -111,6 +111,14 @@ end, {
 	data = {min = 75, max = 500},
 	category = "characters"
 })
+ix.config.Add("jumpPower", 160, "How fast a player normally runs.", function(oldValue, newValue)
+	for _, v in ipairs(player.GetAll())	do
+		v:SetJumpPower(newValue)
+	end
+end, {
+	data = {min = 75, max = 500},
+	category = "characters"
+})
 ix.config.Add("walkRatio", 0.5, "How fast one goes when holding ALT.", nil, {
 	data = {min = 0, max = 1, decimals = 1},
 	category = "characters"
