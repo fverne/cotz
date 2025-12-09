@@ -58,3 +58,12 @@ function PLUGIN:Think()
         end
     end
 end
+
+ix.config.Add("jumpPower", 160, "How fast a player normally runs.", function(oldValue, newValue)
+    for _, v in ipairs(player.GetAll()) do
+        v:SetJumpPower(newValue)
+    end
+end, {
+    data = {min = 75, max = 500},
+    category = "characters"
+})
