@@ -58,10 +58,10 @@ PLUGIN.anomalydefs[3] = {
 		"artifact_battery",
 		"artifact_blowncap",
 		"artifact_bolt",
-		"artifact_bonecluster"
+		"artifact_bonecluster",
+		"artifact_sparkler",
 	},
 	rareArtifacts = {
-		"artifact_sparkler",
 		"artifact_flash",
 		"artifact_capacitor"
 	},
@@ -78,14 +78,15 @@ PLUGIN.anomalydefs[4] = {
 		"artifact_battery",
 		"artifact_blowncap",
 		"artifact_bolt",
-		"artifact_bonecluster"
+		"artifact_bonecluster",
+		"artifact_sparkler",
 	},
 	rareArtifacts = {
-		"artifact_sparkler",
+		"artifact_moonlight",
 		"artifact_flash",
 	},
 	veryRareArtifacts = {
-		"artifact_moonlight",
+		"artifact_storm",
 	},
 }
 

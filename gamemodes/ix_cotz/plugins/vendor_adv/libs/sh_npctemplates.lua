@@ -391,6 +391,10 @@ ix.npctemplates.templates["ecologistnpc"] = {
 		["artifact_sparkler"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_thorn"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_urchin"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_photo"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_moon"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_compass"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_storm"] = { nil, nil, BUYONLY, nil, nil, nil },
 	},
 }
 
@@ -618,6 +622,10 @@ ix.npctemplates.templates["unisgnpc3"] = {
 		["artifact_sparkler"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_thorn"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_urchin"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_photo"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_moon"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_compass"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_storm"] = { nil, nil, BUYONLY, nil, nil, nil },
 	},
 }
 
