@@ -629,12 +629,12 @@ function PANEL:SetInventory(inventory, bFitParent)
 							local highlightText = self.highlghtItems[item.uniqueID]
 							if highlightText then
 								if highlightText == "Quest" then
-									AddHighlightRow(tooltip, "Quest", yellowCol)
+									ix.util.PropertyDesc(tooltip, "Quest", yellowCol)
 								elseif highlightText == "Progression" then
-									AddHighlightRow(tooltip, "Progression", purpleCol)
+									ix.util.PropertyDesc(tooltip, "Progression", purpleCol)
 								elseif highlightText == "Both" then
-									AddHighlightRow(tooltip, "Quest", yellowCol)
-									AddHighlightRow(tooltip, "Progression", purpleCol)
+									ix.util.PropertyDesc(tooltip, "Quest", yellowCol)
+									ix.util.PropertyDesc(tooltip, "Progression", purpleCol)
 								end
 							end
 							tooltip:SizeToContents()
