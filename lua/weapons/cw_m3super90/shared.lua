@@ -53,7 +53,7 @@ if CLIENT then
 	SWEP.CustomizePos = Vector(7.711, -0.482, -2)
 	SWEP.CustomizeAng = Vector(16.364, 40.741, 15.277)
 		
-	SWEP.BackupSights = {["md_acog"] = {[1] = Vector(-2.593, -4.803, -1.12), [2] = Vector(0, 0, 0)}}
+	-- SWEP.BackupSights = {["md_acog"] = {[1] = Vector(-2.593, -4.803, -1.12), [2] = Vector(0, 0, 0)}}
 
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
 	

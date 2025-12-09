@@ -29,6 +29,7 @@ ix.randomitems.tables["cache_artifact_tier2"] = {
   { 600, {"artifact_eye"}},
   {1000, {"artifact_cell"}},
   {1000, {"artifact_crystal"}},
+  { 600, {"artifact_moon"}},
   {  20, {"artifact_midas"}},
 }
 
@@ -44,6 +45,8 @@ ix.randomitems.tables["cache_artifact_tier3"] = {
   {1000, {"artifact_slug"}},
   {1000, {"artifact_eye"}},
   { 600, {"artifact_flame"}},
+  { 300, {"artifact_compass"}},
+  { 300, {"artifact_storm"}},
   {  30, {"artifact_midas"}},
 }
 

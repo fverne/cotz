@@ -89,4 +89,7 @@ PLUGIN.hotkeyitems = {
     ["artifact_mamasbeads"] = "use",
     ["artifact_gmamasbeads"] = "use",
     ["artifact_mycelia"] = "use",
+    ["artifact_dwarfgalaxy"] = "use",
+    ["artifact_storm"] = "use",
+
 }
