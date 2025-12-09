@@ -30,7 +30,7 @@ ITEM.functions.use = {
     OnRun = function(item)
         if(item:GetData("cooldown",0) < os.time())then
 
-            ix.util.PlayerPerformBlackScreenAction(item.player, "Reminiscing", 15, function(player) 
+            ix.util.PlayerPerformBlackScreenAction(item.player, "Reminiscing", 30, function(player) 
                 item:SetData("cooldown", os.time() + (60*15) )
 
                 local client = item:GetOwner()
