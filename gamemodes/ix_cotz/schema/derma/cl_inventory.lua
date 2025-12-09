@@ -392,13 +392,13 @@ function PANEL:Paint(width, height)
 			if parent.highlghtItems[itemTable.uniqueID] == "Both" then
 				surface.SetDrawColor(yellowCol)
 				surface.SetMaterial(gradientLMat)
-				surface.DrawTexturedRect(2, 2, width * 0.5 - 4, height - 4)
+				surface.DrawTexturedRect(2, 2, width * 0.5 - self:GetWide()*0.002, height - self:GetWide()*0.002)
 				surface.SetDrawColor(purpleCol)
 				surface.SetMaterial(gradientRMat)
-				surface.DrawTexturedRect(width * 0.5 + 2, 2, width * 0.5 - 4, height - 4)
+				surface.DrawTexturedRect(width * 0.5 + 2, 2, width * 0.5 - self:GetWide()*0.002, height - self:GetWide()*0.002)
 			else
 				surface.SetMaterial(gradientMat)
-				surface.DrawTexturedRect(2, 2, width - 4, height - 4)
+				surface.DrawTexturedRect(2, 2, width - self:GetWide()*0.002, height - self:GetWide()*0.002)
 			end
 		end
 	end
