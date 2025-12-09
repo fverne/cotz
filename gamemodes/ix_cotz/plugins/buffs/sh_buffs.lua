@@ -172,11 +172,11 @@ PLUGIN.buffs[ "buff_hijump" ] = {
 		
 	end,
 	onbuffed = function( player, parameter )
-		local jumpval = player:GetJumpPower()
+		local jumpval = ix.config.Get("jumpPower")
 		player:SetJumpPower(jumpval + parameter.amount)
 	end,
 	ondebuffed = function( player, parameter )
-		local jumpval = player:GetJumpPower()
-		player:SetJumpPower(jumpval - parameter.amount)
+		local jumpval = ix.config.Get("jumpPower")
+		player:SetJumpPower(jumpval)
 	end,
 }
