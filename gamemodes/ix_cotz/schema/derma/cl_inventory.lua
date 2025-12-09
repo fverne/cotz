@@ -629,12 +629,12 @@ function PANEL:SetInventory(inventory, bFitParent)
 							local highlightText = self.highlghtItems[item.uniqueID]
 							if highlightText then
 								if highlightText == "Quest" then
-									AddHighlightRow(tooltip, "Quest", yellowCol)
+									ix.util.PropertyDesc(tooltip, "Quest", yellowCol)
 								elseif highlightText == "Progression" then
-									AddHighlightRow(tooltip, "Progression", purpleCol)
+									ix.util.PropertyDesc(tooltip, "Progression", purpleCol)
 								elseif highlightText == "Both" then
-									AddHighlightRow(tooltip, "Quest", yellowCol)
-									AddHighlightRow(tooltip, "Progression", purpleCol)
+									ix.util.PropertyDesc(tooltip, "Quest", yellowCol)
+									ix.util.PropertyDesc(tooltip, "Progression", purpleCol)
 								end
 							end
 							tooltip:SizeToContents()
@@ -901,10 +901,10 @@ function PANEL:AddIcon(model, x, y, w, h, skin)
 					)
 				end
 			end
-		elseif (itemTable.img) then
+		elseif (itemTable:GetData("img", itemTable.img)) then
 			panel.Icon:SetVisible(false)
 			panel.ExtraPaint = function(this, panelX, panelY)
-				local icon = itemTable.img
+				local icon = ix.util.GetMaterial(itemTable:GetData("img", itemTable.img))
 				if (icon) then
 					surface.SetMaterial(icon)
 					surface.SetDrawColor(color_white)

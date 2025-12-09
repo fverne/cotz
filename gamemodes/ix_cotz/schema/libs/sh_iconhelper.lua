@@ -6,8 +6,8 @@ function ix.util.GetItemIcon(item)
     local icon
     local exIcon = ikon:GetIcon(item.uniqueID)
 
-    if item.img then
-        icon = item.img
+    if item:GetData("img", item.img) then
+        icon = ix.util.GetMaterial(item:GetData("img", item.img))
     elseif exIcon then
         icon = exIcon
     else

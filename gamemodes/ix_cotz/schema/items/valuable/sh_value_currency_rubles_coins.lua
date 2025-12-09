@@ -1,7 +1,7 @@
 ITEM.name = "Ruble Coins"
 ITEM.description = "A few coins of Ukranian currency."
 ITEM.longdesc = ""
-ITEM.model = "models/props_lab/box01a.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/sack.mdl"
 
 ITEM.width = 1
 ITEM.height = 1

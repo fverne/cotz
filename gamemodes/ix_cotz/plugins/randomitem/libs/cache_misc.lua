@@ -1,5 +1,6 @@
 ix.randomitems.tables["cache_artifact_tier1"] = {
   {1000, {"artifact_mementomori"}},
+  {100,  {"artifact_photo"}},
   { 750, {"artifact_blowncap"}},
   {2000, {"artifact_bolt"}},
   { 500, {"artifact_battery"}},
@@ -17,6 +18,7 @@ ix.randomitems.tables["cache_artifact_tier1"] = {
 ix.randomitems.tables["cache_artifact_tier2"] = {
   {1000, {"artifact_mementomori"}},
   {1000, {"artifact_blowncap"}},
+  {500,  {"artifact_photo"}},
   { 500, {"artifact_capacitor"}},
   { 750, {"artifact_battery"}},
   { 800, {"artifact_mycelia"}},

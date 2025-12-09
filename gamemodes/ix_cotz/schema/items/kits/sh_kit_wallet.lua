@@ -1,6 +1,6 @@
 ITEM.name = "Wallet"
 ITEM.description= "A place to store money and personal belongings."
-ITEM.model = "models/props_lab/box01a.mdl"
+ITEM.model = "models/lostsignalproject/items/misc/damaged_ammo.mdl"
 
 ITEM.width = 1
 ITEM.height = 1
