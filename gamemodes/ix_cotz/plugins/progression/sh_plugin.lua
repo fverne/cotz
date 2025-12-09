@@ -61,7 +61,7 @@ if(SERVER)then
 	function PLUGIN:GetForeignProgression()
 		ix.progression.foreignstatus = {}
 
-		ix.plugin.list["simplecrossserverdata"]:GetXServerData("%_progression", function(result)
+		ix.plugin.list["simplecrossserverdata"]:GetXServerData("_progression", function(result)
 			if (istable(result) and #result > 0) then
 				for _, v in pairs(result) do
 					if (istable(v)) then

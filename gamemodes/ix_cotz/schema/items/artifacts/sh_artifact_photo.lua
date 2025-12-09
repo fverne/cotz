@@ -30,20 +30,20 @@ ITEM.functions.use = {
     OnRun = function(item)
         if(item:GetData("cooldown",0) < os.time())then
 
-            ix.util.PlayerPerformBlackScreenAction(item.player, "Reminiscing", 15, function(player) 
-                item:SetData("cooldown", os.time() + 15 )
+            ix.util.PlayerPerformBlackScreenAction(item.player, "Reminiscing", 30, function(player) 
+                item:SetData("cooldown", os.time() + (60*15) )
 
                 local client = item:GetOwner()
                 local character = client:GetCharacter()
 
-                local spawndata = character:GetData("savedspawn", nil)
+                local townspawndata = {Vector(-7182.672852, -10445.850586, 4972.751465), Angle(0,0,0), "rp_marsh_cs"}
 
-                if not (spawndata[3] == game.GetMap())then
-                    character:SetData("newpos", spawndata)
-                    ix.plugin.list["simplecrossserver"]:RedirectPlayerNoLoadZone(client, spawndata[3])
+                if not (townspawndata[3] == game.GetMap())then
+                    character:SetData("newpos", townspawndata)
+                    ix.plugin.list["simplecrossserver"]:RedirectPlayerNoLoadZone(client, townspawndata[3])
                 end
 
-                client:SetPos(spawndata[1])
+                client:SetPos(townspawndata[1])
             end)
         end
 
