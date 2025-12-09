@@ -383,7 +383,7 @@ function PANEL:Paint(width, height)
 
 	if (itemTable and itemTable.uniqueID) then
 		if parent and parent.highlghtItems and parent.highlghtItems[itemTable.uniqueID] then
-			if parent.highlghtItems[itemTable.uniqueID] == "Quest" then
+			if parent.highlghtItems[itemTable.uniqueID] == "Task" then
 				surface.SetDrawColor(yellowCol)
 			elseif parent.highlghtItems[itemTable.uniqueID] == "Progression" then
 				surface.SetDrawColor(purpleCol)
@@ -437,7 +437,7 @@ function PANEL:Init()
 			continue
 		end
 
-		self.highlghtItems[jobDef.requiredItem] = "Quest"
+		self.highlghtItems[jobDef.requiredItem] = "Task"
 	end
 
 	local npcidentifiers = {}
@@ -497,7 +497,7 @@ function PANEL:Init()
 			for itemName, _ in pairs(progDef.GetItemIds()) do
 				if self.highlghtItems[itemName] == nil then
 					self.highlghtItems[itemName] = "Progression"
-				elseif self.highlghtItems[itemName] == "Quest" then
+				elseif self.highlghtItems[itemName] == "Task" then
 					self.highlghtItems[itemName] = "Both"
 				end
 			end
@@ -572,7 +572,7 @@ function PANEL:ViewOnly()
 end
 
 local function AddHighlightRow(tooltip, text, color)
-	local row = tooltip:AddRowAfter("name", "quest")
+	local row = tooltip:AddRowAfter("name", "Task")
 	row:SetText("")
 
 	local dot = row:Add("DLabel")
@@ -628,12 +628,12 @@ function PANEL:SetInventory(inventory, bFitParent)
 							ix.hud.PopulateItemTooltip(tooltip, item)
 							local highlightText = self.highlghtItems[item.uniqueID]
 							if highlightText then
-								if highlightText == "Quest" then
-									ix.util.PropertyDesc(tooltip, "Quest", yellowCol)
+								if highlightText == "Task" then
+									ix.util.PropertyDesc(tooltip, "Task", yellowCol)
 								elseif highlightText == "Progression" then
 									ix.util.PropertyDesc(tooltip, "Progression", purpleCol)
 								elseif highlightText == "Both" then
-									ix.util.PropertyDesc(tooltip, "Quest", yellowCol)
+									ix.util.PropertyDesc(tooltip, "Task", yellowCol)
 									ix.util.PropertyDesc(tooltip, "Progression", purpleCol)
 								end
 							end
