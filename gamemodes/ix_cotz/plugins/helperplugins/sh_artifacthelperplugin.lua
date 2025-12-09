@@ -59,7 +59,7 @@ function PLUGIN:Think()
     end
 end
 
-ix.config.Add("jumpPower", 160, "How fast a player normally runs.", function(oldValue, newValue)
+ix.config.Add("jumpPower", 160, "How high a player normally jumps.", function(oldValue, newValue)
     for _, v in ipairs(player.GetAll()) do
         v:SetJumpPower(newValue)
     end
