@@ -49,7 +49,7 @@ if SERVER then
 		if nextHealTime > CurTime() then return end
 		
 		for k, v in pairs(self.healingEntities) do
-			if !v:GetClass() then table.remove(self.healingEntities, v) return end
+			if !IsValid(v:GetClass()) then table.remove(self.healingEntities, v) return end
 			
 			local radius = ix.config.Get("regenHealRadius", 256)
 			if v:GetClass() == "ix_vendor_adv" then
