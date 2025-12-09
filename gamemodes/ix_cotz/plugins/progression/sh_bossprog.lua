@@ -1,8 +1,11 @@
+local map = "rp_waystation"
+
 ix.progression.Register("bossItemDelivery_1", {
 	name = "Cleaning Inventory 1",
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_1"] = ix.progression.status["bossItemDelivery_1"] or {}
 		local dat = ix.progression.status["bossItemDelivery_1"].complexData
@@ -89,6 +92,7 @@ ix.progression.Register("bossItemDelivery_2", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_2"] = ix.progression.status["bossItemDelivery_2"] or {}
 		local dat = ix.progression.status["bossItemDelivery_2"].complexData
@@ -176,6 +180,7 @@ ix.progression.Register("bossItemDelivery_3", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_3"] = ix.progression.status["bossItemDelivery_3"] or {}
 		local dat = ix.progression.status["bossItemDelivery_3"].complexData
@@ -262,6 +267,7 @@ ix.progression.Register("bossItemDelivery_4", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_4"] = ix.progression.status["bossItemDelivery_4"] or {}
 		local dat = ix.progression.status["bossItemDelivery_4"].complexData
@@ -350,6 +356,7 @@ ix.progression.Register("bossItemDelivery_5", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_5"] = ix.progression.status["bossItemDelivery_5"] or {}
 		local dat = ix.progression.status["bossItemDelivery_5"].complexData
@@ -437,6 +444,7 @@ ix.progression.Register("bossItemDelivery_6", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_6"] = ix.progression.status["bossItemDelivery_6"] or {}
 		local dat = ix.progression.status["bossItemDelivery_6"].complexData
@@ -526,6 +534,7 @@ ix.progression.Register("bossItemDelivery_7", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_7"] = ix.progression.status["bossItemDelivery_7"] or {}
 		local dat = ix.progression.status["bossItemDelivery_7"].complexData

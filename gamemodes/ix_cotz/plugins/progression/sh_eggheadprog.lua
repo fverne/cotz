@@ -1,8 +1,11 @@
+local map = "rp_marsh_cs"
+
 ix.progression.Register("eggheadItemDelivery_Detector1", {
 	name = "Detecting Anomalous Materials Part 1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Detector1"] = ix.progression.status["eggheadItemDelivery_Detector1"] or {}
 		local dat = ix.progression.status["eggheadItemDelivery_Detector1"].complexData

@@ -1,8 +1,11 @@
+local map = "rp_marsh_cs"
+
 ix.progression.Register("cleanerItemDelivery_Storage", {
 	name = "Storage",
 	description = "Cleaner has an offer for you.",
 	keyNpc = "'Cleaner'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["cleanerItemDelivery_Storage"] = ix.progression.status["cleanerItemDelivery_Storage"] or {}
 		local dat = ix.progression.status["cleanerItemDelivery_Storage"].complexData
