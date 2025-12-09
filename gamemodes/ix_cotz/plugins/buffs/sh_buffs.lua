@@ -192,7 +192,6 @@ PLUGIN.buffs[ "buff_lightningsprint" ] = {
 		end
 		local runspeed = math.Round(player:GetRunSpeed(), 0)
 		if  runspeed ~= player.lightningSpeedBuffed and runspeed ~= player.lightningSpeedInit then
-			print (runspeed, player.lightningSpeedBuffed, player.lightningSpeedInit)
 			player.lightningSpeedInit = runspeed
 			player.lightningSpeedBuffed = math.Round(player.lightningSpeedInit * parameter.multiplier, 0)
 		end
