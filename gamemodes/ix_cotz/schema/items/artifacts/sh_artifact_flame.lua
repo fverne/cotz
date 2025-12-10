@@ -13,7 +13,7 @@ ITEM.varweight  = 0.300
 ITEM.fueltier = 2
 
 function ITEM:PopulateTooltipIndividual(tooltip)
-    ix.util.PropertyDesc(tooltip, "Low Tier Cooking Fuel", Color(64, 224, 208))
+    ix.util.PropertyDesc(tooltip, "High Tier Cooking Fuel", Color(64, 224, 208))
 end
 
 ITEM:Hook("take", function(item)
