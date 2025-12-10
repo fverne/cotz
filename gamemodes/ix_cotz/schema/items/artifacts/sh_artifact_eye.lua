@@ -20,6 +20,10 @@ ITEM.iconCam = {
 	fov = 3.7
 }
 
+function ITEM:PopulateTooltipIndividual(tooltip)
+    ix.util.PropertyDesc(tooltip, "Low Tier Cooking Fuel", Color(64, 224, 208))
+end
+
 ITEM:Hook("take", function(item)
 	if(item.player)then
 

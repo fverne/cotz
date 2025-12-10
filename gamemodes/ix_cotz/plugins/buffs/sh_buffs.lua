@@ -190,23 +190,19 @@ PLUGIN.buffs[ "buff_lightningsprint" ] = {
 			player:RemoveBuff("buff_lightningsprint")
 			return
 		end
-		local runspeed = math.Round(player:GetRunSpeed(), 0)
-		if  runspeed ~= player.lightningSpeedBuffed and runspeed ~= player.lightningSpeedInit then
-			player.lightningSpeedInit = runspeed
-			player.lightningSpeedBuffed = math.Round(player.lightningSpeedInit * parameter.multiplier, 0)
-		end
-		player:SetRunSpeed(player.lightningSpeedBuffed)
 		if player.timeNextTickSpdDmg < CurTime() then
 			player:SetHealth(player:Health() - parameter.dps)
-			player:StopSound("anomaly/electra_blast1.mp3")
 			player:EmitSound("anomaly/electra_blast1.mp3",70, 180)
 			ParticleEffect( "myasorubka_activated", player:GetPos(), Angle( 0, 0, 0 ) )
 			player.timeNextTickSpdDmg = CurTime() + 1
 		end
 	end,
 	onbuffed = function( player, parameter )
-		player.lightningSpeedInit = math.Round(player:GetRunSpeed())
-		player.lightningSpeedBuffed = math.Round(player.lightningSpeedInit * parameter.multiplier)
+		if player:GetNetVar("brth", false) or player:Health() <= 10 then
+			player:RemoveBuff("buff_lightningsprint")
+			return
+		end
+		ix.weight.Update(player:GetCharacter())
 	end,
 	ondebuffed = function( player, parameter )
 		ix.weight.Update(player:GetCharacter())
