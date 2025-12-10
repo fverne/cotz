@@ -8,7 +8,7 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_1"] = ix.progression.status["quartermasterItemDelivery_1"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_1"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -95,7 +95,7 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_11"] = ix.progression.status["quartermasterItemDelivery_11"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_11"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_11"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -185,7 +185,7 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_111"] = ix.progression.status["quartermasterItemDelivery_111"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_111"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -274,7 +274,7 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_1111"] = ix.progression.status["quartermasterItemDelivery_1111"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_1111"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_1111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -358,7 +358,7 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_112"] = ix.progression.status["quartermasterItemDelivery_112"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_112"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_112"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -449,7 +449,7 @@ ix.progression.Register("quartermasterItemDelivery_1121", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_1121"] = ix.progression.status["quartermasterItemDelivery_1121"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_1121"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_1121"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -537,7 +537,7 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_11211"] = ix.progression.status["quartermasterItemDelivery_11211"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_11211"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_11211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -622,7 +622,7 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_12"] = ix.progression.status["quartermasterItemDelivery_12"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_12"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_12"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -710,7 +710,7 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_121"] = ix.progression.status["quartermasterItemDelivery_121"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_121"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_121"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -794,7 +794,7 @@ ix.progression.Register("quartermasterItemDelivery_122", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_122"] = ix.progression.status["quartermasterItemDelivery_122"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_122"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_122"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -879,7 +879,7 @@ ix.progression.Register("quartermasterItemDelivery_1221", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_1221"] = ix.progression.status["quartermasterItemDelivery_1221"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_1221"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_1221"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -964,7 +964,7 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_12211"] = ix.progression.status["quartermasterItemDelivery_12211"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_12211"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_12211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1047,7 +1047,7 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_2"] = ix.progression.status["quartermasterItemDelivery_2"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_2"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1133,7 +1133,7 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_21"] = ix.progression.status["quartermasterItemDelivery_21"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_21"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_21"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1221,7 +1221,7 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_211"] = ix.progression.status["quartermasterItemDelivery_211"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_211"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1305,7 +1305,7 @@ ix.progression.Register("quartermasterItemDelivery_212", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_212"] = ix.progression.status["quartermasterItemDelivery_212"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_212"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_212"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1391,7 +1391,7 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_2121"] = ix.progression.status["quartermasterItemDelivery_2121"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_2121"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_2121"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1477,7 +1477,7 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_22"] = ix.progression.status["quartermasterItemDelivery_22"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_22"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_22"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1565,7 +1565,7 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_221"] = ix.progression.status["quartermasterItemDelivery_221"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_221"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_221"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1649,7 +1649,7 @@ ix.progression.Register("quartermasterItemDelivery_222", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_222"] = ix.progression.status["quartermasterItemDelivery_222"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_222"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_222"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1733,7 +1733,7 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_2221"] = ix.progression.status["quartermasterItemDelivery_2221"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_2221"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_2221"].complexData
 
 		local itemids = self:GetItemIds()
 

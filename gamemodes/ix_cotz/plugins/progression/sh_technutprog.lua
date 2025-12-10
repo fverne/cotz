@@ -14,7 +14,7 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit1"] = ix.progression.status["technutItemDelivery_Suit1"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Suit1"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Suit1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -100,7 +100,7 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit2"] = ix.progression.status["technutItemDelivery_Suit2"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Suit2"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Suit2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -189,7 +189,7 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit3"] = ix.progression.status["technutItemDelivery_Suit3"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Suit3"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Suit3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -277,7 +277,7 @@ ix.progression.Register("technutItemDelivery_SuitNBC", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_SuitNBC"] = ix.progression.status["technutItemDelivery_SuitNBC"] or {}
-		local dat = ix.progression.status["technutItemDelivery_SuitNBC"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_SuitNBC"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -361,7 +361,7 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit4"] = ix.progression.status["technutItemDelivery_Suit4"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Suit4"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Suit4"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -447,7 +447,7 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit5"] = ix.progression.status["technutItemDelivery_Suit5"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Suit5"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Suit5"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -534,7 +534,7 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit6"] = ix.progression.status["technutItemDelivery_Suit6"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Suit6"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Suit6"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -623,7 +623,7 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Suit7"] = ix.progression.status["technutItemDelivery_Suit7"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Suit7"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Suit7"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -714,7 +714,7 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_SuitPainting"] = ix.progression.status["technutItemDelivery_SuitPainting"] or {}
-		local dat = ix.progression.status["technutItemDelivery_SuitPainting"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_SuitPainting"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -800,7 +800,7 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet1"] = ix.progression.status["technutItemDelivery_Helmet1"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Helmet1"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Helmet1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -888,7 +888,7 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet2"] = ix.progression.status["technutItemDelivery_Helmet2"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Helmet2"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Helmet2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -979,7 +979,7 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet3"] = ix.progression.status["technutItemDelivery_Helmet3"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Helmet3"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Helmet3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1066,7 +1066,7 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet4"] = ix.progression.status["technutItemDelivery_Helmet4"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Helmet4"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Helmet4"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1154,7 +1154,7 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet5"] = ix.progression.status["technutItemDelivery_Helmet5"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Helmet5"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Helmet5"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1241,7 +1241,7 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet6"] = ix.progression.status["technutItemDelivery_Helmet6"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Helmet6"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Helmet6"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1328,7 +1328,7 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Helmet7"] = ix.progression.status["technutItemDelivery_Helmet7"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Helmet7"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Helmet7"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1421,7 +1421,7 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Mask1"] = ix.progression.status["technutItemDelivery_Mask1"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Mask1"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Mask1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1511,7 +1511,7 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Mask2"] = ix.progression.status["technutItemDelivery_Mask2"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Mask2"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Mask2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1598,7 +1598,7 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Mask3"] = ix.progression.status["technutItemDelivery_Mask3"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Mask3"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Mask3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1686,7 +1686,7 @@ ix.progression.Register("technutItemDelivery_Mask4", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Mask4"] = ix.progression.status["technutItemDelivery_Mask4"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Mask4"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Mask4"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1776,7 +1776,7 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Attachment1"] = ix.progression.status["technutItemDelivery_Attachment1"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Attachment1"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Attachment1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1864,7 +1864,7 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Attachment2"] = ix.progression.status["technutItemDelivery_Attachment2"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Attachment2"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Attachment2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1952,7 +1952,7 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Attachment3"] = ix.progression.status["technutItemDelivery_Attachment3"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Attachment3"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Attachment3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2038,7 +2038,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentFabric1"] = ix.progression.status["technutItemDelivery_AttachmentFabric1"] or {}
-		local dat = ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_AttachmentFabric1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2124,7 +2124,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentFabric2"] = ix.progression.status["technutItemDelivery_AttachmentFabric2"] or {}
-		local dat = ix.progression.status["technutItemDelivery_AttachmentFabric2"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_AttachmentFabric2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2209,7 +2209,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentFrame1"] = ix.progression.status["technutItemDelivery_AttachmentFrame1"] or {}
-		local dat = ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_AttachmentFrame1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2295,7 +2295,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentFrame2"] = ix.progression.status["technutItemDelivery_AttachmentFrame2"] or {}
-		local dat = ix.progression.status["technutItemDelivery_AttachmentFrame2"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_AttachmentFrame2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2382,7 +2382,7 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentCarbon"] = ix.progression.status["technutItemDelivery_AttachmentCarbon"] or {}
-		local dat = ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_AttachmentCarbon"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2468,7 +2468,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentKevlar1"] = ix.progression.status["technutItemDelivery_AttachmentKevlar1"] or {}
-		local dat = ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_AttachmentKevlar1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2555,7 +2555,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_AttachmentKevlar2"] = ix.progression.status["technutItemDelivery_AttachmentKevlar2"] or {}
-		local dat = ix.progression.status["technutItemDelivery_AttachmentKevlar2"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_AttachmentKevlar2"].complexData
 
 		local itemids = self:GetItemIds()
 

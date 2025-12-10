@@ -282,7 +282,7 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldTimerItemDelivery_mainMeat"] = ix.progression.status["oldTimerItemDelivery_mainMeat"] or {}
-		local dat = ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData
+		local dat = status or ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -397,7 +397,7 @@ ix.progression.Register("technutItemDelivery_Main", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Main"] = ix.progression.status["technutItemDelivery_Main"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Main"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Main"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -501,7 +501,7 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldTimerItemDelivery_mainStatue"] = ix.progression.status["oldTimerItemDelivery_mainStatue"] or {}
-		local dat = ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData
+		local dat = status or ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -600,7 +600,7 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 -- 	description = "Scanning the Zone",
 -- 	keyNpc = "'Mute'",
 -- 	defaultActive = true,
-	progMap = map,
+	-- progMap = map,
 -- 	BuildResponse = function(self, npcname, status)
 -- 		-- Find next treshold
 -- 		local tresh = 0
@@ -645,7 +645,7 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"] = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"] or {}
-		local dat = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData
+		local dat = status or ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -808,7 +808,7 @@ ix.progression.Register("quarterMasterDelivery_main", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quarterMasterDelivery_main"] = ix.progression.status["quarterMasterDelivery_main"] or {}
-		local dat = ix.progression.status["quarterMasterDelivery_main"].complexData
+		local dat = status or ix.progression.status["quarterMasterDelivery_main"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1010,7 +1010,7 @@ ix.progression.Register("beanstalkItemDelivery_Documents", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["beanstalkItemDelivery_Documents"] = ix.progression.status["beanstalkItemDelivery_Documents"] or {}
-		local dat = ix.progression.status["beanstalkItemDelivery_Documents"].complexData
+		local dat = status or ix.progression.status["beanstalkItemDelivery_Documents"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1091,7 +1091,7 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_artifacts"] = ix.progression.status["eggheadItemDelivery_artifacts"] or {}
-		local dat = ix.progression.status["eggheadItemDelivery_artifacts"].complexData
+		local dat = status or ix.progression.status["eggheadItemDelivery_artifacts"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1293,7 +1293,7 @@ ix.progression.Register("computerDelivery_main", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["computerDelivery_main"] = ix.progression.status["computerDelivery_main"] or {}
-		local dat = ix.progression.status["computerDelivery_main"].complexData
+		local dat = status or ix.progression.status["computerDelivery_main"].complexData
 
 		local itemids = self:GetItemIds()
 

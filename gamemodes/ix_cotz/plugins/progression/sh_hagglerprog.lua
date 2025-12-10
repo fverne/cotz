@@ -8,7 +8,7 @@ ix.progression.Register("hagglerItemDelivery_1", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_1"] = ix.progression.status["hagglerItemDelivery_1"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_1"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -97,7 +97,7 @@ ix.progression.Register("hagglerItemDelivery_11", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_11"] = ix.progression.status["hagglerItemDelivery_11"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_11"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_11"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -185,7 +185,7 @@ ix.progression.Register("hagglerItemDelivery_111", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_111"] = ix.progression.status["hagglerItemDelivery_111"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_111"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -272,7 +272,7 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_1111"] = ix.progression.status["hagglerItemDelivery_1111"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_1111"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_1111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -358,7 +358,7 @@ ix.progression.Register("hagglerItemDelivery_112", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_112"] = ix.progression.status["hagglerItemDelivery_112"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_112"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_112"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -442,7 +442,7 @@ ix.progression.Register("hagglerItemDelivery_12", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_12"] = ix.progression.status["hagglerItemDelivery_12"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_12"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_12"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -529,7 +529,7 @@ ix.progression.Register("hagglerItemDelivery_121", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_121"] = ix.progression.status["hagglerItemDelivery_121"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_121"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_121"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -615,7 +615,7 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_1211"] = ix.progression.status["hagglerItemDelivery_1211"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_1211"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_1211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -700,7 +700,7 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_12111"] = ix.progression.status["hagglerItemDelivery_12111"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_12111"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_12111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -785,7 +785,7 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_121111"] = ix.progression.status["hagglerItemDelivery_121111"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_121111"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_121111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -870,7 +870,7 @@ ix.progression.Register("hagglerItemDelivery_122", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_122"] = ix.progression.status["hagglerItemDelivery_122"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_122"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_122"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -956,7 +956,7 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_1221"] = ix.progression.status["hagglerItemDelivery_1221"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_1221"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_1221"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1041,7 +1041,7 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_12211"] = ix.progression.status["hagglerItemDelivery_12211"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_12211"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_12211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1125,7 +1125,7 @@ ix.progression.Register("hagglerItemDelivery_2", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_2"] = ix.progression.status["hagglerItemDelivery_2"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_2"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1213,7 +1213,7 @@ ix.progression.Register("hagglerItemDelivery_21", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_21"] = ix.progression.status["hagglerItemDelivery_21"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_21"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_21"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1299,7 +1299,7 @@ ix.progression.Register("hagglerItemDelivery_211", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_211"] = ix.progression.status["hagglerItemDelivery_211"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_211"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1383,7 +1383,7 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_2111"] = ix.progression.status["hagglerItemDelivery_2111"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_2111"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_2111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1467,7 +1467,7 @@ ix.progression.Register("hagglerItemDelivery_212", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_212"] = ix.progression.status["hagglerItemDelivery_212"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_212"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_212"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1552,7 +1552,7 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_2121"] = ix.progression.status["hagglerItemDelivery_2121"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_2121"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_2121"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1636,7 +1636,7 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_21211"] = ix.progression.status["hagglerItemDelivery_21211"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_21211"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_21211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1720,7 +1720,7 @@ ix.progression.Register("hagglerItemDelivery_22", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_22"] = ix.progression.status["hagglerItemDelivery_22"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_22"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_22"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1808,7 +1808,7 @@ ix.progression.Register("hagglerItemDelivery_221", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_221"] = ix.progression.status["hagglerItemDelivery_221"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_221"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_221"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1895,7 +1895,7 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_2211"] = ix.progression.status["hagglerItemDelivery_2211"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_2211"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_2211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1980,7 +1980,7 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_22111"] = ix.progression.status["hagglerItemDelivery_22111"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_22111"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_22111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2063,7 +2063,7 @@ ix.progression.Register("hagglerItemDelivery_222", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_222"] = ix.progression.status["hagglerItemDelivery_222"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_222"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_222"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2148,7 +2148,7 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_2221"] = ix.progression.status["hagglerItemDelivery_2221"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_2221"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_2221"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2234,7 +2234,7 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_22211"] = ix.progression.status["hagglerItemDelivery_22211"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_22211"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_22211"].complexData
 
 		local itemids = self:GetItemIds()
 

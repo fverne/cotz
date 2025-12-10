@@ -8,7 +8,7 @@ ix.progression.Register("jittersItemDelivery_medical1", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["jittersItemDelivery_medical1"] = ix.progression.status["jittersItemDelivery_medical1"] or {}
-		local dat = ix.progression.status["jittersItemDelivery_medical1"].complexData
+		local dat = status or ix.progression.status["jittersItemDelivery_medical1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -98,7 +98,7 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["jittersItemDelivery_medical2"] = ix.progression.status["jittersItemDelivery_medical2"] or {}
-		local dat = ix.progression.status["jittersItemDelivery_medical2"].complexData
+		local dat = status or ix.progression.status["jittersItemDelivery_medical2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -191,7 +191,7 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["jittersItemDelivery_medical3"] = ix.progression.status["jittersItemDelivery_medical3"] or {}
-		local dat = ix.progression.status["jittersItemDelivery_medical3"].complexData
+		local dat = status or ix.progression.status["jittersItemDelivery_medical3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -281,7 +281,7 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["jittersItemDelivery_medical4"] = ix.progression.status["jittersItemDelivery_medical4"] or {}
-		local dat = ix.progression.status["jittersItemDelivery_medical4"].complexData
+		local dat = status or ix.progression.status["jittersItemDelivery_medical4"].complexData
 
 		local itemids = self:GetItemIds()
 

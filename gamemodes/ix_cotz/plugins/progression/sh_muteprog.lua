@@ -8,7 +8,7 @@ ix.progression.Register("muteItemDelivery_Binoc1", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Binoc1"] = ix.progression.status["muteItemDelivery_Binoc1"] or {}
-		local dat = ix.progression.status["muteItemDelivery_Binoc1"].complexData
+		local dat = status or ix.progression.status["muteItemDelivery_Binoc1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -97,7 +97,7 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Binoc2"] = ix.progression.status["muteItemDelivery_Binoc2"] or {}
-		local dat = ix.progression.status["muteItemDelivery_Binoc2"].complexData
+		local dat = status or ix.progression.status["muteItemDelivery_Binoc2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -184,7 +184,7 @@ ix.progression.Register("muteItemDelivery_Binoc3", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Binoc3"] = ix.progression.status["muteItemDelivery_Binoc3"] or {}
-		local dat = ix.progression.status["muteItemDelivery_Binoc3"].complexData
+		local dat = status or ix.progression.status["muteItemDelivery_Binoc3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -272,7 +272,7 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Binoc4"] = ix.progression.status["muteItemDelivery_Binoc4"] or {}
-		local dat = ix.progression.status["muteItemDelivery_Binoc4"].complexData
+		local dat = status or ix.progression.status["muteItemDelivery_Binoc4"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -361,7 +361,7 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Anomaly"] = ix.progression.status["muteItemDelivery_Anomaly"] or {}
-		local dat = ix.progression.status["muteItemDelivery_Anomaly"].complexData
+		local dat = status or ix.progression.status["muteItemDelivery_Anomaly"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -448,7 +448,7 @@ ix.progression.Register("muteItemDelivery_Detector", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Detector"] = ix.progression.status["muteItemDelivery_Detector"] or {}
-		local dat = ix.progression.status["muteItemDelivery_Detector"].complexData
+		local dat = status or ix.progression.status["muteItemDelivery_Detector"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -535,7 +535,7 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Broadcast"] = ix.progression.status["muteItemDelivery_Broadcast"] or {}
-		local dat = ix.progression.status["muteItemDelivery_Broadcast"].complexData
+		local dat = status or ix.progression.status["muteItemDelivery_Broadcast"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -622,7 +622,7 @@ ix.progression.Register("muteItemDelivery_BlowoutWarning", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_BlowoutWarning"] = ix.progression.status["muteItemDelivery_BlowoutWarning"] or {}
-		local dat = ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData
+		local dat = status or ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData
 
 		local itemids = self:GetItemIds()
 

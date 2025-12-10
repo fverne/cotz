@@ -8,7 +8,7 @@ ix.progression.Register("cleanerItemDelivery_Storage", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["cleanerItemDelivery_Storage"] = ix.progression.status["cleanerItemDelivery_Storage"] or {}
-		local dat = ix.progression.status["cleanerItemDelivery_Storage"].complexData
+		local dat = status or ix.progression.status["cleanerItemDelivery_Storage"].complexData
 
 		local itemids = self:GetItemIds()
 

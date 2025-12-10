@@ -69,7 +69,7 @@ if(SERVER)then
 						local data = util.JSONToTable(v.json_data or "[]")
 
 						if not string.StartsWith(key,game.GetMap()) then
-							table.insert(ix.progression.foreignstatus, data)
+							ix.progression.foreignstatus[key] = data
 						end
 					end
 				end

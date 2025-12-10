@@ -494,12 +494,16 @@ function PANEL:Init()
 		for k, v in pairs(ix.progression.GetActiveProgressions(npcidentifier)) do
 			local progDef = ix.progression.definitions[v]
 			if progDef and not progDef.GetItemIds then continue end
-			for itemName, _ in pairs(progDef.GetItemIds()) do
-				if self.highlghtItems[itemName] == nil then
-					self.highlghtItems[itemName] = "Progression"
-				elseif self.highlghtItems[itemName] == "Task" then
-					self.highlghtItems[itemName] = "Both"
+			local progstatus = ix.progression.GetComplexProgressionValue(v)
+			for itemName, amt in pairs(progDef.GetItemIds()) do
+				if progstatus and progstatus[itemName] and (amt - progstatus[itemName]) > 0 then
+					if self.highlghtItems[itemName] == nil then
+						self.highlghtItems[itemName] = "Progression"
+					elseif self.highlghtItems[itemName] == "Task" then
+						self.highlghtItems[itemName] = "Both"
+					end
 				end
+				
 			end
 		end
 	end
