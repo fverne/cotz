@@ -173,6 +173,10 @@ function PLUGIN:PopulateHelpMenu(tabs)
 				progressiontitle:Dock(TOP)
 				progressiontitle:DockMargin(0, 16, 0, 0)
 				progressiontitle:SetAutoStretchVertical(true)
+
+				if ix.progression.IsCompleted(v) then
+					continue
+				end
 	
 				if(progdef.fnAddComplexProgression)then	
 					local descriptiontext = progdef:BuildResponse(progdef.keyNpc, progstatus)
