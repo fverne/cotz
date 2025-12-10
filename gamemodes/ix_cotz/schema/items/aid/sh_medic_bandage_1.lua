@@ -5,7 +5,8 @@ ITEM.model = "models/kek1ch/dev_bandage.mdl"
 ITEM.width = 1
 ITEM.height = 1
 
-ITEM.restore = 32
+ITEM.restore = 8
+ITEM.restoreduration = 4
 ITEM.quantity = 3
 
 ITEM.sound = "stalkersound/inv_bandage_2p9.mp3"
@@ -32,7 +33,7 @@ ITEM.functions.use = {
 		ix.chat.Send(item.player, "iteminternal", "unwraps and ties a "..item.name.." to their wound.", false)
 
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Wrapping Bandages", 10, function(player) 
-			player:AddBuff("buff_slowheal", 4, { amount = item.restore/4 })
+			player:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
 			--player:HealBleeding(20)
 		end)
 		
@@ -64,8 +65,8 @@ ITEM.functions.usetarget = {
 		if (IsValid(target) and target:IsPlayer()) then
 			
 			ix.chat.Send(item.player, "iteminternal", "unwraps a "..item.name.." and ties it to "..target:Name().."'s wound.", false)
-			target:AddBuff("buff_slowheal", 4, { amount = item.restore/4 })
-			target:SetLocalVar("stm", math.min(target:GetLocalVar("stm", 100) + item.restore, 100))
+			target:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
+			target:SetLocalVar("stm", math.min(target:GetLocalVar("stm", 100) + item.restore*item.restoreduration, 100))
 			
 			quantity = quantity - 1
 

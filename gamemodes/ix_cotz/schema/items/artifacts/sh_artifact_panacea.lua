@@ -9,8 +9,8 @@ ITEM.flag = "A"
 ITEM.rarity = 6
 ITEM.baseweight = 0.220
 ITEM.varweight  = 0.060
-ITEM.restore = 60
-ITEM.duration = 60
+ITEM.restore = 1
+ITEM.restoreduration = 60
 
 ITEM.JumpPower = 800
 
@@ -25,7 +25,7 @@ ITEM.functions.use = {
 		ix.chat.Send(item.player, "iteminternal", "Charges up a "..item.name.." and activates it.", false)
 
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Activating Panacea", 10, function(player) 
-			player:AddBuff("buff_slowheal", item.duration, { amount =  item.restore/item.duration })
+			player:AddBuff("buff_slowheal", item.restoreduration, { amount =  item.restore })
 		end)
 
 		return false
@@ -49,7 +49,7 @@ ITEM.functions.usetarget = {
 			
 			ix.chat.Send(item.player, "iteminternal", "Charges up a "..item.name.." and uses it on "..target:Name()..".", false)
 			ix.util.PlayerPerformBlackScreenAction(item.player, "Activating Panacea on "..target:Name(), 10, function(player) 
-				target:AddBuff("buff_slowheal", item.duration, { amount = item.restore/item.duration })
+				target:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
 			end)
 			
 		elseif ( IsValid( target ) and target:GetClass( ) == "prop_ragdoll" ) then
@@ -82,7 +82,7 @@ ITEM.functions.usetarget = {
 					player:Notify( "You revived "..target.player:GetName() )
 					target.player:Notify( "You were revived by "..player:GetName() )
 
-					target.player:AddBuff("buff_slowheal", item.duration, { amount = item.restore/item.duration })
+					target.player:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
 					
 
 				end)

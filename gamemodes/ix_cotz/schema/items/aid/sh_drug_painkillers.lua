@@ -10,7 +10,8 @@ ITEM.height = 1
 ITEM.price = 560
 
 ITEM.quantity = 8
-ITEM.restore = 10
+ITEM.restore = 2
+ITEM.restoreduration = 5
 ITEM.psyheal = 12
 
 ITEM.weight = 0.050
@@ -33,7 +34,7 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 
-		item.player:AddBuff("buff_slowheal", 5, { amount = item.restore/5 })
+		item.player:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
 		item.player:AddBuff("buff_psyheal", 60, { amount = item.psyheal/120 })
 
 		ix.chat.Send(item.player, "iteminternal", "takes out a pill from the "..item.name.." and swallows it.", false)
