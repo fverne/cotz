@@ -123,15 +123,14 @@ function ix.progression.AddProgessionValue(progid, amount, playername)
 end
 
 function ix.progression.GetComplexProgressionValue(progid)
-	if (ix.progression.definitions[progid]) and ix.progression.definitions[progid].fnGetComplexProgression then
-		for _,foreign in pairs(ix.progression.foreignstatus) do
-			if foreign and foreign[progid] and foreign[progid].complexData then
-				return foreign[progid].complexData
-			end
-		end
+    if (ix.progression.definitions[progid]) and ix.progression.definitions[progid].fnGetComplexProgression then
+        local foreign = ix.progression.foreignstatus[ix.progression.definitions[progid].progMap.."_progression"]
+        if foreign and foreign[progid] and foreign[progid].complexData then
+            return foreign[progid].complexData
+        end
 
-		return ix.progression.definitions[progid].fnGetComplexProgression()
-	end
+        return ix.progression.definitions[progid].fnGetComplexProgression()
+    end
 end
 
 function ix.progression.GetComplexProgressionReqs(progid)

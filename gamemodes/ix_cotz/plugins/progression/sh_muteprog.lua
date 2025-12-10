@@ -1,8 +1,11 @@
+local map = "rp_marsh_cs"
+
 ix.progression.Register("muteItemDelivery_Binoc1", {
 	name = "Looking ahead 1",
 	description = "Mute eyes you expectantly.",
 	keyNpc = "'Mute'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Binoc1"] = ix.progression.status["muteItemDelivery_Binoc1"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Binoc1"].complexData
@@ -91,6 +94,7 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 	description = "Mute's eyes haven't left his binoculars since the moment you came in.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Binoc2"] = ix.progression.status["muteItemDelivery_Binoc2"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Binoc2"].complexData
@@ -177,6 +181,7 @@ ix.progression.Register("muteItemDelivery_Binoc3", {
 	description = "Mute's hands are twitchier as he works on a diagram.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Binoc3"] = ix.progression.status["muteItemDelivery_Binoc3"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Binoc3"].complexData
@@ -264,6 +269,7 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 	description = "Mute is busy tinkering with a pair of binoculars using some kind of electronic device",
 	keyNpc = "'Mute'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Binoc4"] = ix.progression.status["muteItemDelivery_Binoc4"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Binoc4"].complexData
@@ -352,6 +358,7 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 	description = "Mute is busy drawing pictures of anomalies.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Anomaly"] = ix.progression.status["muteItemDelivery_Anomaly"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Anomaly"].complexData
@@ -438,6 +445,7 @@ ix.progression.Register("muteItemDelivery_Detector", {
 	description = "Mute is busy drawing pictures of artifacts.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Detector"] = ix.progression.status["muteItemDelivery_Detector"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Detector"].complexData
@@ -524,6 +532,7 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 	description = "Mute is working on a server box.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_Broadcast"] = ix.progression.status["muteItemDelivery_Broadcast"] or {}
 		local dat = ix.progression.status["muteItemDelivery_Broadcast"].complexData
@@ -610,6 +619,7 @@ ix.progression.Register("muteItemDelivery_BlowoutWarning", {
 	description = "Mute is working on advanced scanning hardware.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["muteItemDelivery_BlowoutWarning"] = ix.progression.status["muteItemDelivery_BlowoutWarning"] or {}
 		local dat = ix.progression.status["muteItemDelivery_BlowoutWarning"].complexData
