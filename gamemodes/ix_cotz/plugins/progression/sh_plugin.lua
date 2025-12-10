@@ -164,6 +164,11 @@ function PLUGIN:PopulateHelpMenu(tabs)
 			for k, v in pairs(ix.progression.GetActiveProgressions(npcidentifier)) do
 				local progdef = ix.progression.definitions[v]
 				local progstatus = ix.progression.GetComplexProgressionValue(v)
+				
+				if ix.progression.IsCompleted(v) then
+					continue
+				end
+
 				activeProgressions = activeProgressions + 1
 	
 				local progressiontitle = container:Add("DLabel")
@@ -174,9 +179,6 @@ function PLUGIN:PopulateHelpMenu(tabs)
 				progressiontitle:DockMargin(0, 16, 0, 0)
 				progressiontitle:SetAutoStretchVertical(true)
 
-				if ix.progression.IsCompleted(v) then
-					continue
-				end
 	
 				if(progdef.fnAddComplexProgression)then	
 					local descriptiontext = progdef:BuildResponse(progdef.keyNpc, progstatus)
