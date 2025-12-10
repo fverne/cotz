@@ -8,7 +8,7 @@ ix.progression.Register("bossItemDelivery_1", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_1"] = ix.progression.status["bossItemDelivery_1"] or {}
-		local dat = ix.progression.status["bossItemDelivery_1"].complexData
+		local dat = status or ix.progression.status["bossItemDelivery_1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -95,7 +95,7 @@ ix.progression.Register("bossItemDelivery_2", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_2"] = ix.progression.status["bossItemDelivery_2"] or {}
-		local dat = ix.progression.status["bossItemDelivery_2"].complexData
+		local dat = status or ix.progression.status["bossItemDelivery_2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -183,7 +183,7 @@ ix.progression.Register("bossItemDelivery_3", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_3"] = ix.progression.status["bossItemDelivery_3"] or {}
-		local dat = ix.progression.status["bossItemDelivery_3"].complexData
+		local dat = status or ix.progression.status["bossItemDelivery_3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -270,7 +270,7 @@ ix.progression.Register("bossItemDelivery_4", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_4"] = ix.progression.status["bossItemDelivery_4"] or {}
-		local dat = ix.progression.status["bossItemDelivery_4"].complexData
+		local dat = status or ix.progression.status["bossItemDelivery_4"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -359,7 +359,7 @@ ix.progression.Register("bossItemDelivery_5", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_5"] = ix.progression.status["bossItemDelivery_5"] or {}
-		local dat = ix.progression.status["bossItemDelivery_5"].complexData
+		local dat = status or ix.progression.status["bossItemDelivery_5"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -447,7 +447,7 @@ ix.progression.Register("bossItemDelivery_6", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_6"] = ix.progression.status["bossItemDelivery_6"] or {}
-		local dat = ix.progression.status["bossItemDelivery_6"].complexData
+		local dat = status or ix.progression.status["bossItemDelivery_6"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -537,7 +537,7 @@ ix.progression.Register("bossItemDelivery_7", {
 	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["bossItemDelivery_7"] = ix.progression.status["bossItemDelivery_7"] or {}
-		local dat = ix.progression.status["bossItemDelivery_7"].complexData
+		local dat = status or ix.progression.status["bossItemDelivery_7"].complexData
 
 		local itemids = self:GetItemIds()
 

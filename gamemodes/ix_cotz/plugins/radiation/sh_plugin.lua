@@ -56,8 +56,8 @@ function playerMeta:getPercentageRadResist()
 	local items = char:GetInventory():GetItems(true)
 
 	for j, i in pairs(items) do
-		if (i.percentageRadProt and i:GetData("equip") == true) then
-			res = res * (1 - i.percentageRadProt)
+		if (i.radProt and i:GetData("equip") == true) then
+			res = res * (1 - i.radProt)
 		end
 	end
 
