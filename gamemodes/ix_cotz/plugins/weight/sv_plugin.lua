@@ -15,7 +15,7 @@ end
 function ix.weight.Update(character) -- Updates the specified character's current carry weight.
 	character:SetData("carry", ix.weight.CalculateWeight(character))
 
-	timer.Simple(0.5, function() 
+	-- timer.Simple(0.5, function() 
 		local client = character:GetPlayer()
 		if character and client then
 			local sprintMult = 1
@@ -37,7 +37,7 @@ function ix.weight.Update(character) -- Updates the specified character's curren
 				end
 			end
 		end
-	end)
+	-- end)
 end
 
 function PLUGIN:CharacterLoaded(character) -- This is just a safety net to make sure the carry weight data is up-to-date.
