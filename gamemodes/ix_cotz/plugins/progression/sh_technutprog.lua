@@ -2054,7 +2054,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["suit_anorak"] = 40,
+			["suit_io7a"] = 40,
 		}	
 
 		return itemids
