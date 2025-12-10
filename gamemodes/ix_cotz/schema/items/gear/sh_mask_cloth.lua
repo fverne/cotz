@@ -12,7 +12,7 @@ ITEM.br = 0.01
 ITEM.fbr = 0
 ITEM.ar = 0
 ITEM.far = 0
-ITEM.percentageRadProt = 0.01
+ITEM.radProt = 0.20
 ITEM.flatRadProt = 0
 
 ITEM.exRender = true

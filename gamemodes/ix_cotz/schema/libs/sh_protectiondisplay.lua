@@ -104,8 +104,8 @@ function ix.util.DrawSuitResistances(parentTooltip, item)
     if item:getPR() ~= 1 then
         ix.util.DrawResistance(parentTooltip, "Psychic: ", 1-item:getPR(), item:getFPR())
     end
-    if item.percentageRadProt ~= 0 then
-        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.percentageRadProt, nil)
+    if item.radProt ~= 0 then
+        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.radProt, nil)
     end
 
     parentTooltip:GetParent():SizeToContents()
@@ -131,8 +131,8 @@ function ix.util.DrawGearResistances(parentTooltip, item)
     if item:getPR()~=0 then
         ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), item:getFPR())
     end
-    if item.percentageRadProt ~= 0  then
-        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.percentageRadProt, nil)
+    if item.radProt ~= 0  then
+        ix.util.DrawResistance(parentTooltip, "Radiation: ", item.radProt, nil)
     end
 
     parentTooltip:GetParent():SizeToContents()

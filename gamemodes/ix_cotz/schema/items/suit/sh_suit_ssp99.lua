@@ -26,7 +26,7 @@ ITEM.ar = 0.80
 ITEM.far = 5
 ITEM.pr = 0.50
 ITEM.fpr = 0
-ITEM.percentageRadProt = 0.99
+ITEM.radProt = 0.99
 ITEM.flatRadProt = 0.02
 
 ITEM.carryinc = 25
