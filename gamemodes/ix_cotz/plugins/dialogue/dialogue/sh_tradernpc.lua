@@ -430,8 +430,12 @@ DIALOGUE.addTopic("ViewProgression", {
 	DynamicPreCallback = function(self, player, target, dyndata)
 		if (dyndata) then
 			if(CLIENT)then
-				local progstatus 	= ix.progression.status[dyndata.identifier]
 				local progdef 		= ix.progression.definitions[dyndata.identifier]
+				local progstatus 	= ix.progression.status[dyndata.identifier]
+
+				if progdef.fnAddComplexProgression then
+					progstatus = ix.progression.GetComplexProgressionValue(dyndata.identifier)
+				end
 
 				self.response = progdef:BuildResponse(progdef, progstatus)
 				self.tmp = dyndata.identifier
