@@ -47,7 +47,9 @@ end
 function PLUGIN:PlayerSpawn(client)
 	local char = client:GetCharacter()
 	if (char) then
-		ix.weight.Update(char)
+		timer.Simple(0, function() 
+			ix.weight.Update(char)
+		end)
 	end
 end
 
