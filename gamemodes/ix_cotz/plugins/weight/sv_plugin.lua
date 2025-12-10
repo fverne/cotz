@@ -18,16 +18,20 @@ function ix.weight.Update(character) -- Updates the specified character's curren
 	timer.Simple(0.5, function() 
 		local client = character:GetPlayer()
 		if character and client then
+			local sprintMult = 1
+			if client:HasBuff("buff_lightningsprint") then
+				sprintMult = sprintMult * client:HasBuff("buff_lightningsprint")[2].multiplier
+			end
 			if character:HeavilyOverweight() then
 				client:SetWalkSpeed(1)
 				client:SetRunSpeed(1)
 			elseif character:Overweight() then
 				client:SetWalkSpeed(ix.config.Get("walkSpeed") * 0.5)
-				client:SetRunSpeed(ix.config.Get("walkSpeed"))
+				client:SetRunSpeed(ix.config.Get("walkSpeed") * sprintMult) 
 			else
 				client:SetWalkSpeed(ix.config.Get("walkSpeed"))
 				if !(client:GetNetVar("brth", false)) then
-					client:SetRunSpeed(ix.config.Get("runSpeed"))
+					client:SetRunSpeed(ix.config.Get("runSpeed") * sprintMult)
 				else
 					client:SetRunSpeed(ix.config.Get("walkSpeed"))
 				end
