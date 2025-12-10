@@ -12,7 +12,7 @@ ITEM.newSkin = 16
 ITEM.baseSuit = "suit_skat10"
 ITEM.suitVariant = "looted"
 
-ITEM.price = 76550
+ITEM.price = 9999999999
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false

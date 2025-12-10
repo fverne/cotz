@@ -7,25 +7,25 @@ ITEM.longdesc = "A leather jacket with woven armour elements in common use among
 ITEM.width = 2
 ITEM.height = 2
 ITEM.img = ix.util.GetMaterial("vgui/hud/outfit_anorak1.png")
-ITEM.weight = 6.920
+ITEM.weight = 7.058
 ITEM.newSkin = 12
 ITEM.baseSuit = "suit_mailjacket"
 ITEM.suitVariant = "mercenary"
 
-ITEM.price = 17530
+ITEM.price = 19283
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false 
 ITEM.isHelmet = false
 
-ITEM.br = 0.09
-ITEM.fbr = 1
-ITEM.sr = 0.15
+ITEM.br = 0.07
+ITEM.fbr = 2
+ITEM.sr = 0.14
 ITEM.fsr = 1
-ITEM.ar = 0.06
-ITEM.far = 2
+ITEM.ar = 0.05
+ITEM.far = 1
 
-ITEM.carryinc = 4.000
+ITEM.carryinc = 4.890
 ITEM.miscslots = 0
 
 ITEM.bodyGroups = {

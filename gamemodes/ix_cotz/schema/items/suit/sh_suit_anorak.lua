@@ -22,8 +22,9 @@ ITEM.sr = 0.11
 ITEM.fsr = 1
 ITEM.ar = 0.05
 ITEM.far = 1
+ITEM.radProt = 0.05
 
-ITEM.carryinc = 3.000
+ITEM.carryinc = 3.09
 ITEM.miscslots = 0
 
 ITEM.functions.Lift = {

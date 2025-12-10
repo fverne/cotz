@@ -11,20 +11,20 @@ ITEM.weight = 16.000
 ITEM.newSkin = 0
 ITEM.baseSuit = "suit_cs3"
 
-ITEM.price = 178100
+ITEM.price = 278200
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.21
+ITEM.br = 0.28
 ITEM.fbr = 2
-ITEM.sr = 0.30
+ITEM.sr = 0.31
 ITEM.fsr = 2
-ITEM.ar = 0.09
-ITEM.far = 1
+ITEM.ar = 0.26
+ITEM.far = 2
 
-ITEM.carryinc = 15.000
+ITEM.carryinc = 12.800
 ITEM.miscslots = 3
 
 

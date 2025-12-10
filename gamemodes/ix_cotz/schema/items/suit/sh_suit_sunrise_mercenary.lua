@@ -7,26 +7,26 @@ ITEM.longdesc = "This DIY stalker bodysuit is a combination of twin-layered rubb
 ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/sunrise.png")
-ITEM.weight = 6.350
+ITEM.weight = 6.324
 ITEM.newSkin = 2
 ITEM.baseSuit = "suit_sunrise"
 ITEM.suitVariant = "mercenary"
 
-ITEM.price = 37290
+ITEM.price = 52019
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.11
+ITEM.br = 0.12
 ITEM.fbr = 2
-ITEM.sr = 0.16
+ITEM.sr = 0.19
 ITEM.fsr = 1
-ITEM.ar = 0.08
+ITEM.ar = 0.12
 ITEM.far = 1
 
-ITEM.carryinc = 6.000
-ITEM.miscslots = 1
+ITEM.carryinc = 5.010
+ITEM.miscslots = 2
 
 
 ITEM.skincustom[3] = {

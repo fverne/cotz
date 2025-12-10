@@ -7,25 +7,25 @@ ITEM.longdesc = "One of the more common uniforms seen around the zone. The IO7a 
 ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/io7a.png")
-ITEM.weight = 9.100
+ITEM.weight = 5.400
 ITEM.newSkin = 28
 ITEM.baseSuit = "suit_io7a"
 ITEM.suitVariant = "ecologist"
 
-ITEM.price = 38200
+ITEM.price = 53570
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.12
-ITEM.fbr = 1
+ITEM.br = 0.13
+ITEM.fbr = 2
 ITEM.sr = 0.19
 ITEM.fsr = 1
-ITEM.ar = 0.05
-ITEM.far = 1
+ITEM.ar = 0.08
+ITEM.far = 2
 
-ITEM.carryinc = 8.000
+ITEM.carryinc = 6.48
 ITEM.miscslots = 1
 
 

@@ -7,25 +7,25 @@ ITEM.longdesc = "A pair of jeans, a rain jacket and a kevlar vest with lots of p
 ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/cs1.png")
-ITEM.weight = 7.500
+ITEM.weight = 4.200
 ITEM.newSkin = 2
 ITEM.baseSuit = "suit_cs1"
 ITEM.suitVariant = "ecologist"
 
-ITEM.price = 39250
+ITEM.price = 54175
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = true
 
-ITEM.br = 0.11
+ITEM.br = 0.13
 ITEM.fbr = 1
-ITEM.sr = 0.18
+ITEM.sr = 0.19
 ITEM.fsr = 1
-ITEM.ar = 0.11
-ITEM.far = 1
+ITEM.ar = 0.20
+ITEM.far = 2
 
-ITEM.carryinc = 6.000
+ITEM.carryinc = 5.040
 ITEM.miscslots = 2
 
 
