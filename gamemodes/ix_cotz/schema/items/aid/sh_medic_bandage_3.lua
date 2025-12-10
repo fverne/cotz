@@ -5,7 +5,7 @@ ITEM.model = "models/lostsignalproject/items/medical/army_bandage.mdl"
 ITEM.width = 1
 ITEM.height = 1
 
-ITEM.restore = 28
+ITEM.restore = 56
 ITEM.quantity = 3
 
 ITEM.sound = "stalkersound/inv_bandage_2p9.mp3"

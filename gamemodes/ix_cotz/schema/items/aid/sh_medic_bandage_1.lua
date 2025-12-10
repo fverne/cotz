@@ -5,7 +5,7 @@ ITEM.model = "models/kek1ch/dev_bandage.mdl"
 ITEM.width = 1
 ITEM.height = 1
 
-ITEM.restore = 16
+ITEM.restore = 32
 ITEM.quantity = 3
 
 ITEM.sound = "stalkersound/inv_bandage_2p9.mp3"

@@ -10,7 +10,7 @@ ITEM.height = 1
 ITEM.price = 1800
 
 ITEM.quantity = 1
-ITEM.restore  = 450
+ITEM.restore  = 900
 ITEM.psyheal = 300
 ITEM.radrem   = 300
 

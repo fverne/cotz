@@ -10,7 +10,7 @@ ITEM.height = 1
 ITEM.price = 1400
 
 ITEM.quantity = 3
-ITEM.restore  = 90
+ITEM.restore  = 180
 ITEM.radrem   = 50
 
 ITEM.weight = 0.050

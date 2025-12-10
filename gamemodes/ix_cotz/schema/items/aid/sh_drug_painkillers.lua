@@ -10,7 +10,7 @@ ITEM.height = 1
 ITEM.price = 560
 
 ITEM.quantity = 8
-ITEM.restore = 5
+ITEM.restore = 10
 ITEM.psyheal = 12
 
 ITEM.weight = 0.050
