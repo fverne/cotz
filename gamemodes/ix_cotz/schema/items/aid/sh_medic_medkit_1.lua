@@ -10,7 +10,8 @@ ITEM.height = 1
 ITEM.price = 365
 
 ITEM.quantity = 3
-ITEM.restore = 60
+ITEM.restore = 2
+ITEM.restoreduration = 300
 
 ITEM.weight = 0.050
 ITEM.flatweight = 0.150
@@ -36,7 +37,7 @@ ITEM.functions.use = {
 		ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it.", false)
 
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Treating Wounds", 8, function(player) 
-			player:AddBuff("buff_slowheal", 60*5, { amount = item.restore/60 })
+			player:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
 			--player:HealBleeding(40)
 		end)
 
@@ -68,7 +69,7 @@ ITEM.functions.usetarget = {
 			
 			ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it on "..target:Name()..".", false)
 			ix.util.PlayerPerformBlackScreenAction(item.player, "Treating "..target:Name().."'s Wounds", 4, function(player) 
-				target:AddBuff("buff_slowheal", 60*5, { amount = item.restore/60 })
+				target:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
 			end)
 			
 			
@@ -105,7 +106,7 @@ ITEM.functions.usetarget = {
 				item.player:Notify( "You revived "..target.player:GetName() )
 				target.player:Notify( "You were revived by "..item.player:GetName() )
 
-				target.player:AddBuff("buff_slowheal", 60*5, { amount = item.restore/60 })
+				target.player:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
 				ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it on "..target.player:Name()..".", false)
 
 				quantity = quantity - 1
