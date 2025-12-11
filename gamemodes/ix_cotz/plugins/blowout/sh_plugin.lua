@@ -87,6 +87,55 @@ if (SERVER) then
     PLUGIN.BlowoutVars.AdminWarningUsed = false
     PLUGIN.BlowoutVars.ProgressionWarningUsed = false
 
+    function PLUGIN:MarkOutsidePlayersOnBlowout()
+        local movetypes = {
+            --[MOVETYPE_NONE] = true,
+            --[MOVETYPE_FLYGRAVITY] = true,
+            [MOVETYPE_NOCLIP] = true,
+            [MOVETYPE_OBSERVER] = true
+        }
+
+        for _, v in pairs(player.GetAll()) do
+            if !self:IsPosSafe(v:GetShootPos(), v, {}) and not movetypes[v:GetMoveType()] and v:GetCharacter() and v:Alive() then
+                if !v:GetCharacter() then
+                    return
+                end
+                
+                v:GetCharacter():SetData("bInBlowoutWhenStart", true)
+            end
+        end
+    end
+
+    -- function PLUGIN:PlayerDisconnected(client)
+    --     if client:GetCharacter():GetData("bInBlowoutWhenStart", false) then
+    --         client:Spawn()
+    --         client:Notify("Your character disconnected during a blowout, and was killed.")
+    --     end
+    -- end
+
+
+    function PLUGIN:PlayerSpawn(client)
+        if not client:GetCharacter() then
+			return
+		end
+        
+        if client:GetCharacter():GetData("bInBlowoutWhenStart", false) then
+            client:Kill()
+            client:Notify("Your character disconnected during a blowout, and was killed.")
+        end
+
+        client:GetCharacter():SetData("bInBlowoutWhenStart", false)
+    end
+
+    function PLUGIN:ShutDown()
+        for _, v in pairs(player.GetAll()) do
+            if !v:GetCharacter() then
+                return
+            end
+
+            -- v:SetData("bInBlowoutWhenStart", false) -- failsafe if server restarts during blowout.
+        end
+    end
 
 
     function PLUGIN:Think()
@@ -115,6 +164,8 @@ if (SERVER) then
 
         if self.NextBlowout < os.time() and (not self.BlowoutVars.BlowoutStarted) then
             self.BlowoutVars.BlowoutStarted = true
+            self:MarkOutsidePlayersOnBlowout()
+
             local dur = 35 --time until blowout hits - 60-90s probably
             self:ChangePhase(1, dur)
             self.BlowoutVars.PrehitTime = CT + dur - 15
@@ -301,6 +352,15 @@ if (SERVER) then
     end
 
     function PLUGIN:IsPosSafe(pos, client, blacklist)
+        if !blacklist then
+            local tracefilter = {}
+            local blacklistents = ents.FindByClass("ix_item")
+
+            for _, ent in pairs(blacklistents) do
+                table.insert(tracefilter, ent)
+            end
+        end
+        
         -- Add the client to the filter table
         table.insert(blacklist, client)
         local tracedata_up = {}
