@@ -14,14 +14,28 @@ end, {
     category = "Blowout"
 })
 
+ix.config.Add("blowoutSpan", 20, "How many randomised minutes to add or subtract at each blowout cycle.", function()
+    if (SERVER) then
+        timer.Simple(0.01, function()
+            PLUGIN.BlowoutSpan = PLUGIN:GetRandomWithinSpan(ix.config.Get("blowoutSpan", 20))
+        end)
+    end
+end, {
+    data = {
+        min = 1,
+        max = 120
+    },
+    category = "Blowout"
+})
+
 ix.config.Add("blowoutSkybox", true, "If true, the blowout skybox will draw.", nil, {
     category = "Blowout"
 })
 
-ix.config.Add("blowoutRateCycle", 120, "How many minutes between the next blowout cycle. Default = 120 minutes (2 hours)", function()
+ix.config.Add("blowoutRateCycle", 90, "How many minutes between the next blowout cycle. Default = 120 minutes (2 hours)", function()
     if (SERVER) then
         timer.Simple(0.01, function()
-            PLUGIN.NextBlowout = CurTime() + (ix.config.Get("blowoutRateCycle", 120) * 60)
+            PLUGIN.NextBlowout = os.time() + (ix.config.Get("blowoutRateCycle", 90) * 60) + PLUGIN.BlowoutSpan
         end)
     end
 end, {
@@ -44,7 +58,13 @@ ix.config.Add("blowoutRemoveItems", false, "If true, blowouts will remove all th
 if (SERVER) then
     util.AddNetworkString("BlowoutPlaySound")
     util.AddNetworkString("BlowoutChangePhase")
-    PLUGIN.NextBlowout = CurTime() + (ix.config.Get("blowoutRateCycle", 120) * 60)
+    function PLUGIN:GetRandomWithinSpan(span)        
+        return (span + (os.time() % (span - (-span) + 1))) * 60
+    end
+
+
+    PLUGIN.BlowoutSpan = PLUGIN:GetRandomWithinSpan(ix.config.Get("blowoutSpan", 20))
+    PLUGIN.NextBlowout = os.time() + (ix.config.Get("blowoutRateCycle", 90) * 60) + PLUGIN.BlowoutSpan
     PLUGIN.NextThink = 0
     PLUGIN.BlowoutVars = PLUGIN.BlowoutVars or {}
     PLUGIN.BlowoutVars.BlowoutStarted = false
@@ -66,7 +86,7 @@ if (SERVER) then
         local CT = CurTime()
         if CT < self.NextThink then return end
 
-        if math.Round(self.NextBlowout) == math.Round(CurTime() + 60) and self.BlowoutVars.AdminWarningUsed == false then
+        if math.Round(self.NextBlowout) == math.Round(os.time() + 60) and self.BlowoutVars.AdminWarningUsed == false then
             for k, v in pairs(player.GetAll()) do
                 if v:IsAdmin() then
                     v:Notify("[ADMIN] A blowout is going to happen in 60 seconds. You can stop this if you wish by typing /blowoutresetcycle in chat.")
@@ -75,7 +95,7 @@ if (SERVER) then
             self.BlowoutVars.AdminWarningUsed = true
         end
 
-        if math.Round(self.NextBlowout) == math.Round(CurTime() + 30) and self.BlowoutVars.ProgressionWarningUsed == false then
+        if math.Round(self.NextBlowout) == math.Round(os.time() + 30) and self.BlowoutVars.ProgressionWarningUsed == false then
             if ix.progression.IsCompleted("muteItemDelivery_BlowoutWarning") then
                 for k, ply in pairs( player.GetAll() ) do
 					ix.chat.Send(ply, "eventpdainternal", "A blowout is about to hit, seek shelter!", true, ply)
@@ -85,7 +105,7 @@ if (SERVER) then
             end
         end
 
-        if self.NextBlowout < CurTime() and (not self.BlowoutVars.BlowoutStarted) then
+        if self.NextBlowout < os.time() and (not self.BlowoutVars.BlowoutStarted) then
             self.BlowoutVars.BlowoutStarted = true
             local dur = 35 --time until blowout hits - 60-90s probably
             self:ChangePhase(1, dur)
@@ -310,7 +330,7 @@ if (SERVER) then
         self.BlowoutVars.BlowoutStep = 0
         self.BlowoutVars.PostHitActionTime = 0
         self.BlowoutVars.BlowoutFinishTime = 0
-        self.NextBlowout = CurTime() + (ix.config.Get("blowoutRateCycle", 120) * 60)
+        self.NextBlowout = os.time() + (ix.config.Get("blowoutRateCycle", 90) * 60) + self.BlowoutSpan
         self.BlowoutVars.AdminWarningUsed = false
         self.BlowoutVars.ProgressionWarningUsed = false 
     end
@@ -334,7 +354,7 @@ ix.command.Add("blowouttrigger", {
 
         if PLUGIN.BlowoutVars.BlowoutStarted then return client:Notify("A blowout is already active! You can not trigger another blowout until the active blowout has finished.") end
 
-        PLUGIN.NextBlowout = CurTime()
+        PLUGIN.NextBlowout = os.time()
         client:Notify("You have triggered a blowout to happen any moment now!")
     end
 })
@@ -362,7 +382,7 @@ ix.command.Add("blowouttriggerdelay", {
             delay = 10
         end
 
-        PLUGIN.NextBlowout = CurTime() + delay
+        PLUGIN.NextBlowout = os.time() + delay
         client:Notify("You have triggered a blowout to happen in " .. delay .. " seconds!")
     end
 })
@@ -385,8 +405,8 @@ ix.command.Add("blowoutresetcycle", {
 
         if PLUGIN.BlowoutVars.BlowoutStarted then return client:Notify("A blowout is already active! You can not reset its cycle until the blowout has finished.") end
 
-        PLUGIN.NextBlowout = CurTime() + (ix.config.Get("blowoutRateCycle", 120) * 60)
-        client:Notify("You have reset the blowout cycle! The next one will happen in " .. ix.config.Get("blowoutRateCycle", 120) .. " minutes!")
+        PLUGIN.NextBlowout = os.time() + (ix.config.Get("blowoutRateCycle", 90) * 60) + PLUGIN.BlowoutSpan
+        client:Notify("You have reset the blowout cycle! The next one will happen in " .. ix.config.Get("blowoutRateCycle", 90) + PLUGIN.BlowoutSpan .. " minutes!")
     end
 })
 
@@ -408,6 +428,6 @@ ix.command.Add("blowoutgetnexttime", {
 
         if PLUGIN.BlowoutVars.BlowoutStarted then return client:Notify("A blowout is already active! You can not get the next time until a blowout until after the blowout has finished.") end
 
-        client:Notify("Time until the next automated blowout: " .. math.Round(PLUGIN.NextBlowout - CurTime()) .. " seconds (" .. math.Round((PLUGIN.NextBlowout - CurTime()) / 60, 2) .. " minutes).")
+        client:Notify("Time until the next automated blowout: " .. math.Round(PLUGIN.NextBlowout - os.time()) .. " seconds (" .. math.Round((PLUGIN.NextBlowout - os.time()) / 60, 2) .. " minutes).")
     end
 })
