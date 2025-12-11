@@ -61,7 +61,7 @@ if (SERVER) then
     util.AddNetworkString("BlowoutChangePhase")
 
     function PLUGIN:GetRandomWithinSpan(span)
-        return (-span + (os.time() % (span - (-span) + 1))) * 60
+        return (-span + (math.Round(os.time(), -2) % (span - (-span) + 1))) * 60
     end
 
     PLUGIN.BlowoutSpan = PLUGIN:GetRandomWithinSpan(ix.config.Get("blowoutSpan", 20))
