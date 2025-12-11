@@ -173,6 +173,7 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 		end
 
 		character:SetData("curmap", map)
+		character:SetData("bInBlowoutWhenStart", false) -- so players dont get killed if they transition after blowout started.
 
 		ix.chat.Send(nil, "playerjoin", string.format("%s has switched area.", character:GetName()))
 
