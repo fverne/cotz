@@ -158,8 +158,9 @@ if (SERVER) then
                 self:ChangePhase(3, 0)
                 ix.plugin.list["anomalycontroller"]:cleanAnomalies()
                 ix.plugin.list["anomalycontroller"]:spawnAnomalies()
-                ix.plugin.list["anomalycontroller"]:trySpawnArtifacts()
-
+                for i = 1,3 do
+                    ix.plugin.list["anomalycontroller"]:trySpawnArtifacts()
+                end
                 if ix.config.Get("blowoutRemoveNPCs", false) then
                     for k, v in pairs(ents.GetAll()) do
                         if IsValid(v) and (v:IsNPC() or baseclass.Get(v:GetClass()).Base == 'base_nextbot' or baseclass.Get(v:GetClass()).Base == 'nz_base' or baseclass.Get(v:GetClass()).Base == 'nz_risen') and not IsFriendEntityName(v:GetClass()) then
