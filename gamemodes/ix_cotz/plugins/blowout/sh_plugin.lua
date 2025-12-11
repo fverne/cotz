@@ -61,10 +61,16 @@ if (SERVER) then
     util.AddNetworkString("BlowoutChangePhase")
 
     function PLUGIN:GetRandomWithinSpan(span)
-        return (-span + (math.Round(os.time(), -2) % (span - (-span) + 1))) * 60
+        return (-span + (math.Round(os.time(), -3) % (span - (-span) + 1))) * 60
     end
 
-    PLUGIN.BlowoutSpan = PLUGIN:GetRandomWithinSpan(ix.config.Get("blowoutSpan", 20))
+    PLUGIN.BlowoutSpan = 0
+
+    function PLUGIN:OnGamemodeLoaded()
+        self.BlowoutSpan = PLUGIN:GetRandomWithinSpan(ix.config.Get("blowoutSpan", 20))
+        print(self.BlowoutSpan)
+    end
+
     PLUGIN.NextBlowout = os.time() + (ix.config.Get("blowoutRateCycle", 90) * 60) + PLUGIN.BlowoutSpan
     PLUGIN.NextThink = 0
     PLUGIN.BlowoutVars = PLUGIN.BlowoutVars or {}
@@ -81,6 +87,8 @@ if (SERVER) then
     PLUGIN.BlowoutVars.BlowoutFinishTime = 0
     PLUGIN.BlowoutVars.AdminWarningUsed = false
     PLUGIN.BlowoutVars.ProgressionWarningUsed = false
+
+
 
     function PLUGIN:Think()
         if not ix.config.Get("blowoutEnabled", true) then return end
