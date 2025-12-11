@@ -68,7 +68,6 @@ if (SERVER) then
 
     function PLUGIN:OnGamemodeLoaded()
         self.BlowoutSpan = PLUGIN:GetRandomWithinSpan(ix.config.Get("blowoutSpan", 20))
-        print(self.BlowoutSpan)
     end
 
     PLUGIN.NextBlowout = os.time() + (ix.config.Get("blowoutRateCycle", 90) * 60) + PLUGIN.BlowoutSpan
