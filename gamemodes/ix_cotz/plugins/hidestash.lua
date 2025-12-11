@@ -40,7 +40,7 @@ else
 
 end
 
---[[
+
 function PLUGIN:StashHide(client) -- No longer used, kept around commented for posterity
 	ix.util.PlayerPerformBlackScreenAction(client, "Hiding the stash...", 3, function(client) 
 		local trace = client:GetEyeTraceNoCursor()
@@ -66,7 +66,7 @@ function PLUGIN:StashHide(client) -- No longer used, kept around commented for p
 		end
 	end)
 end
-]]--
+
 
 function PLUGIN:StashUnhide(client)
 	ix.util.PlayerPerformBlackScreenAction(client, "Searching for a stash...", 8, function(client) 
