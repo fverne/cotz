@@ -3,9 +3,9 @@ ITEM.description = "A can of kerosene, can be used as fuel."
 ITEM.longdesc = "A big plastic canister of kerosene. Kerosene is used for much of the power generation in the zone."
 ITEM.model = "models/illusion/eftcontainers/kerosine.mdl"
 
-ITEM.width = 3
-ITEM.height = 3
-ITEM.price = 1268
+ITEM.width = 2
+ITEM.height = 2
+ITEM.price = 7468
 
 ITEM.flatweight = 5.250
 ITEM.weight = 0.100
@@ -16,7 +16,9 @@ ITEM.quantity = 8
 ITEM.img = ix.util.GetMaterial("vgui/hud/valuable/kerosene.png")
 
 function ITEM:GetPrice()
-	return self.price * self:GetData("quantity", self.quantity)
+	local base = self.price / self.quantity
+
+	return base * self:GetData("quantity", self.quantity)
 end
 
 function ITEM:PopulateTooltipIndividual(tooltip)
@@ -116,6 +118,6 @@ ITEM.functions.use = {
 
 function ITEM:OnInstanced()
 	if (!self:GetData("quantity")) then
-		self:SetData("quantity", math.random(2,3))
+		self:SetData("quantity", self.quantity)
 	end
 end

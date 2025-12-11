@@ -5,7 +5,7 @@ ITEM.model = "models/illusion/eftcontainers/gasoline.mdl"
 
 ITEM.width = 2
 ITEM.height = 3
-ITEM.price = 986
+ITEM.price = 7598
 
 ITEM.flatweight = 4.350
 ITEM.weight = 0.110
@@ -16,7 +16,9 @@ ITEM.quantity = 9
 ITEM.img = ix.util.GetMaterial("vgui/hud/valuable/gasoline.png")
 
 function ITEM:GetPrice()
-	return self.price * self:GetData("quantity", self.quantity)
+	local base = self.price / self.quantity
+
+	return base * self:GetData("quantity", self.quantity)
 end
 
 function ITEM:PopulateTooltipIndividual(tooltip)
