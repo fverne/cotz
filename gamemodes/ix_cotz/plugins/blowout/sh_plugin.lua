@@ -106,6 +106,12 @@ if (SERVER) then
         end
     end
 
+    function PLUGIN:RemoveBlowoutMarkFromPlayers()
+        for _, v in pairs(player.GetAll()) do            
+            v:GetCharacter():SetData("bInBlowoutWhenStart", false)
+        end
+    end
+
     -- function PLUGIN:PlayerDisconnected(client)
     --     if client:GetCharacter():GetData("bInBlowoutWhenStart", false) then
     --         client:Spawn()
@@ -233,6 +239,8 @@ if (SERVER) then
                         v:Kill()
                     end
                 end
+
+                self:RemoveBlowoutMarkFromPlayers()
 
                 self:ChangePhase(3, 0)
                 ix.plugin.list["anomalycontroller"]:cleanAnomalies()
