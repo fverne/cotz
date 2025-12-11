@@ -18,6 +18,7 @@ ix.config.Add("blowoutSpan", 20, "How many randomised minutes to add or subtract
     if (SERVER) then
         timer.Simple(0.01, function()
             PLUGIN.BlowoutSpan = PLUGIN:GetRandomWithinSpan(ix.config.Get("blowoutSpan", 20))
+            PLUGIN.NextBlowout = os.time() + (ix.config.Get("blowoutRateCycle", 90) * 60) + PLUGIN.BlowoutSpan
         end)
     end
 end, {
