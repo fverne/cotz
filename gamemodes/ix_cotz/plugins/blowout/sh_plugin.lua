@@ -59,10 +59,10 @@ ix.config.Add("blowoutRemoveItems", false, "If true, blowouts will remove all th
 if (SERVER) then
     util.AddNetworkString("BlowoutPlaySound")
     util.AddNetworkString("BlowoutChangePhase")
-    function PLUGIN:GetRandomWithinSpan(span)        
-        return (span + (os.time() % (span - (-span) + 1))) * 60
-    end
 
+    function PLUGIN:GetRandomWithinSpan(span)
+        return (-span + (os.time() % (span - (-span) + 1))) * 60
+    end
 
     PLUGIN.BlowoutSpan = PLUGIN:GetRandomWithinSpan(ix.config.Get("blowoutSpan", 20))
     PLUGIN.NextBlowout = os.time() + (ix.config.Get("blowoutRateCycle", 90) * 60) + PLUGIN.BlowoutSpan
@@ -99,9 +99,9 @@ if (SERVER) then
         if math.Round(self.NextBlowout) == math.Round(os.time() + 30) and self.BlowoutVars.ProgressionWarningUsed == false then
             if ix.progression.IsCompleted("muteItemDelivery_BlowoutWarning") then
                 for k, ply in pairs( player.GetAll() ) do
-					ix.chat.Send(ply, "eventpdainternal", "A blowout is about to hit, seek shelter!", true, ply)
-					 // ply:EmitSound( "stalkersound/pda/pda.wav", 50, 100, 1, CHAN_AUTO )
-				end
+                    ix.chat.Send(ply, "eventpdainternal", "A blowout is about to hit, seek shelter!", true, ply)
+                    // ply:EmitSound( "stalkersound/pda/pda.wav", 50, 100, 1, CHAN_AUTO )
+                end
                 self.BlowoutVars.ProgressionWarningUsed = true
             end
         end
