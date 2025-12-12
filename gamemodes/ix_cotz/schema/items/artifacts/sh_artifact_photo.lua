@@ -12,7 +12,7 @@ ITEM.rarity = 6
 ITEM.baseweight = 0.020
 ITEM.varweight  = 0.006
 
-ITEM.img = ix.util.GetMaterial("propic/rat/rat")
+ITEM.img = ix.util.GetMaterial("propic/femstalkers/femstalker3")
 
 function ITEM:PaintOver(item, w, h)
     surface.SetDrawColor(182, 182, 182)

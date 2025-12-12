@@ -122,6 +122,25 @@ ix.char.RegisterVar("pdaavatar", {
 	bNoDisplay = true,
 })
 
+ix.command.Add("CharPDAAvatarSet", {
+	adminOnly = true,
+	arguments = {
+		ix.type.character,
+		ix.type.string
+	},
+	OnRun = function(self, client, target, materialPath)
+		target:SetPdaavatar(nil)
+		target:SetPdaavatar(materialPath)
+	end
+})
+
+PLUGIN.pdaavatarsUpgrades = {
+	"propic/zonelegends/openthebunkerivan",
+	"propic/zonelegends/cheeki",
+	"propic/zonelegends/killa",
+}
+
+
 -- NPC talker PDA
 local icon = Material("vgui/icons/news.png")
 ix.chat.Register("npcpdainternal", {
