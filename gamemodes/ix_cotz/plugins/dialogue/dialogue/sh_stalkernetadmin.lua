@@ -119,7 +119,7 @@ DIALOGUE.addTopic("RandomizePDAAvatarTopic", {
 		local rareAvatarChance = 25
 		local chosenAvatar
 
-		if math.random(1, 100) <= 20 then
+		if math.random(1, 100) <= 2 then
 			chosenAvatar = rareAvatars[math.random(#rareAvatars)]
 		else
 			chosenAvatar = charCreateAvatars[math.random(#charCreateAvatars)]
