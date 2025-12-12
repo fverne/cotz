@@ -15,8 +15,8 @@ ITEM.functions.use = {
     icon = "icon16/help.png",
     sound = "anomaly/electra_blast1.mp3",
     OnRun = function(item)
-        if(item.player)then
-
+        if  item.player and ( item:GetData("cooldown",0) < os.time() ) then
+            item:SetData("cooldown", os.time() + 0.4 )
             for k, v in pairs(ents.FindInSphere(item.player:GetPos(), 256)) do
                 local dmg = 940
                 local attacker = item.player
@@ -55,6 +55,6 @@ ITEM.functions.use = {
         return false
     end,
     OnCanRun = function(item)
-        return !IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+        return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
