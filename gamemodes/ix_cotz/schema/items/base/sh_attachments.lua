@@ -106,7 +106,7 @@ ITEM.functions.use = {
 
 		for k = 1, #target.validAttachments do
 			if target.validAttachments[k] == item.attachName then
-				ix.weight.Update(client)
+				ix.weight.Update(char)
 				table.Add(targetAttach,{item.attachName})
 				target:SetData("attachments", targetAttach)
 				client:Notify("Installed "..item.name.." on "..target.name)

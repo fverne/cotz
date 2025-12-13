@@ -677,7 +677,7 @@ ITEM.functions.detach = {
                 wepon:detachSpecificAttachment(data[1])
 			end
 			item:SetData("attachments", curattach)
-			ix.weight.Update(item.player)
+			ix.weight.Update(item.player:GetCharacter())
 		else
 			item.player:Notify("No attachment selected.")
 			

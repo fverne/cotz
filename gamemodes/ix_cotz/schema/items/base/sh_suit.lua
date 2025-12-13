@@ -441,7 +441,7 @@ ITEM.functions.detach = {
 
 			-- Recalc resistances
 			item.player:RecalculateResistances()
-			ix.weight.Update(item.player)
+			ix.weight.Update(item.player:GetCharacter())
 
 		else
 			item.player:Notify("No attachment selected.")
