@@ -598,7 +598,7 @@ function ITEM:OnSave()
 
 		local ammoType = weapon:GetPrimaryAmmoType()
 
-		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+		if self.player:GetActiveWeapon() == weapon and string.sub(game.GetAmmoName(ammoType), -1) == "-" then
 			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
 		elseif !self:GetData("ammoType") then
 			self:SetData("ammoType", nil)

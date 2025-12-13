@@ -11,7 +11,7 @@ ITEM.weight = 16.50
 ITEM.newSkin = 0
 ITEM.baseSuit = "suit_skat10"
 
-ITEM.price = 306200
+ITEM.price = 9999999999
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false

@@ -12,25 +12,26 @@ ITEM.weight = 7.900
 ITEM.baseSuit = "suit_nbc"
 ITEM.suitVariant = "fanatic"
 
-ITEM.price = 89000
+ITEM.price = 181500
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
 
-ITEM.br = 0.12
-ITEM.fbr = 2
-ITEM.sr = 0.19
-ITEM.fsr = 2
-ITEM.ar = 0.22
+ITEM.br = 0.10
+ITEM.fbr = 1
+ITEM.sr = 0.18
+ITEM.fsr = 1
+ITEM.ar = 0.21
 ITEM.far = 2
-ITEM.pr = 0.10
+
+ITEM.pr = 0.12
 ITEM.fpr = 0
 ITEM.radProt = 0.90
 ITEM.flatRadProt = 0.02
 
-ITEM.carryinc = 8.000
-ITEM.miscslots = 3
+ITEM.carryinc = 6.260
+ITEM.miscslots = 2
 
 ITEM.skincustom[1] = {
 	name = "Skin 0",

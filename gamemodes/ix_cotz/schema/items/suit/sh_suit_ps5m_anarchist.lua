@@ -7,26 +7,26 @@ ITEM.longdesc = "This modern version of a STALKER bodysuit is better suited for 
 ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/io7a.png")
-ITEM.weight = 11.400
+ITEM.weight = 11.110
 ITEM.newSkin = 5
 ITEM.baseSuit = "suit_ps5m"
 ITEM.suitVariant = "anarchist"
 
-ITEM.price = 88280
+ITEM.price = 119108
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.14
-ITEM.fbr = 1
-ITEM.sr = 0.18
+ITEM.br = 0.17
+ITEM.fbr = 2
+ITEM.sr = 0.23
 ITEM.fsr = 2
-ITEM.ar = 0.08
-ITEM.far = 2
+ITEM.ar = 0.15
+ITEM.far = 1
 
-ITEM.carryinc = 9.000
-ITEM.miscslots = 1
+ITEM.carryinc = 8.62
+ITEM.miscslots = 2
 
 
 -- ITEM.skincustom[1] = {

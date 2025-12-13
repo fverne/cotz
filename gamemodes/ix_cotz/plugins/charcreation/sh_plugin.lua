@@ -70,7 +70,7 @@ do
 end
 
 --pda avatar tied to steam id on char creation
-function PLUGIN:GetPDAAvatar(client)
+function PLUGIN:GetNewCharPDAAvatar(client)
 	local steamid = client:AccountID()
 	local avatar
 
@@ -80,5 +80,5 @@ function PLUGIN:GetPDAAvatar(client)
 end
 
 function PLUGIN:OnCharacterCreated(client, character)
-	character:SetPdaavatar(self:GetPDAAvatar(client))
+	character:SetPdaavatar(self:GetNewCharPDAAvatar(client))
 end

@@ -177,6 +177,7 @@ ix.npctemplates.templates["cooknpc"] = {
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 		["hightiercooker"] 	= { nil, 3, SELLANDBUY, 3, 1, 3},
+		["value_kerosene"]	= { nil, 20, SELLONLY, 20, 1, 15 },
 
 		["lowtiercookerfuel"] 	= { nil, 40, SELLANDBUY, 40, 1, 20 },
 

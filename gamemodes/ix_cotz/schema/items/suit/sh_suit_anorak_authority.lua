@@ -7,12 +7,12 @@ ITEM.longdesc = "A simple polyester-cotton mix anorak. Doesn't provide much prot
 ITEM.width = 2
 ITEM.height = 2
 ITEM.img = ix.util.GetMaterial("vgui/hud/outfit_anorak1.png")
-ITEM.weight = 3.860
+ITEM.weight = 3.937
 ITEM.newSkin = 10
 ITEM.baseSuit = "suit_anorak"
 ITEM.suitVariant = "authority"
 
-ITEM.price = 6690
+ITEM.price = 7539
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false 
@@ -25,7 +25,7 @@ ITEM.fsr = 2
 ITEM.ar = 0.05
 ITEM.far = 1
 
-ITEM.carryinc = 3.000
+ITEM.carryinc = 3.150
 ITEM.miscslots = 0
 
 ITEM.functions.Lift = {

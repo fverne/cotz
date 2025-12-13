@@ -1,7 +1,7 @@
 "stalker"
 {
 	"base" 			"helix"
-	"title" 		"Call of the Zone"
+	"title" 		"STALKER: Call of the Zone"
 	"author" 		"verne, gumlefar & cyanide"
 	"menusystem"	"1"
 	"category"		"pve"

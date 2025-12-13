@@ -7,23 +7,23 @@ ITEM.longdesc = "A pair of jeans, nomex jacket, with Russian class-3 vest and lo
 ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/cs2.png")
-ITEM.weight = 11.100
+ITEM.weight = 6.000
 ITEM.newSkin = 2
 ITEM.baseSuit = "suit_cs2"
 ITEM.suitVariant = "ecologist"
 
-ITEM.price = 85280
+ITEM.price = 148808
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.15
+ITEM.br = 0.23
 ITEM.fbr = 1
-ITEM.sr = 0.18
-ITEM.fsr = 1
-ITEM.ar = 0.11
-ITEM.far = 1
+ITEM.sr = 0.25
+ITEM.fsr = 2
+ITEM.ar = 0.28
+ITEM.far = 2
 
 ITEM.carryinc = 9.000
 ITEM.miscslots = 3

@@ -11,7 +11,7 @@ ITEM.newSkin = 11
 ITEM.baseSuit = "suit_exoskeleton"
 ITEM.suitVariant = "authority"
 
-ITEM.price = 1810200
+ITEM.price = 9999999999
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false

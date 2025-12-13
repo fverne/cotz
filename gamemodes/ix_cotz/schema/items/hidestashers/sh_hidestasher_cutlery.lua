@@ -7,7 +7,7 @@ ITEM.height = 1
 ITEM.flag = "A"
 
 ITEM.weight = 0.550
-ITEM.quantity = 5
+ITEM.quantity = 2
 
 ITEM.price = 200
 

@@ -29,8 +29,8 @@ if (SERVER) then
 				local physObject = ent:GetPhysicsObject()
 
 				if (physObject) then
-					physObj:EnableMotion(false)
-					physObj:Sleep()
+					physObject:EnableMotion(false)
+					physObject:Sleep()
 				end
 			end
 		end

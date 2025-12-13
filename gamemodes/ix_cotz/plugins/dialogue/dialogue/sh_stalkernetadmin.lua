@@ -6,6 +6,7 @@ DIALOGUE.addTopic("GREETING", {
 		"TradeTopic",
 		"BackgroundTopic",
 		"InterestTopic",
+		"PDAAvatarTopic",
 		-- "AboutWorkTopic",
 		-- "GetTask",
 		-- "GetTaskByDifficulty",
@@ -92,6 +93,46 @@ DIALOGUE.addTopic("InterestTopic", {
 		"BackTopic",
 	}
 })
+
+DIALOGUE.addTopic("PDAAvatarTopic", {
+	statement = "I'd like to change my avatar on the PDA Network.",
+	response = " ** Mute fiddles with his own PDA for a bit. He turns it around, and shows you a fee of 5000RU for a random PDA Avatar. He then hover's over a button, looking at you expectantly. ** ",
+	options = {
+		"RandomizePDAAvatarTopic",
+		"BackTopic",
+	},
+	ShouldAdd = function()
+		return LocalPlayer():getReputation() >= 1600 --Experienced
+	end
+})
+
+
+DIALOGUE.addTopic("RandomizePDAAvatarTopic", {
+	statement = "I agree to 5000RU. Go ahead and do it.",
+	response = " ** Presses the button, and nods once.",
+	options = {
+		"BackTopic",
+	},
+	preCallback = function(self, client, target)
+		local charCreateAvatars = ix.plugin.list["charcreation"].pdaavatars
+		local rareAvatars = ix.plugin.list["pda"].pdaavatarsUpgrades
+		local rareAvatarChance = 25
+		local chosenAvatar
+
+		if math.random(1, 100) <= 2 then
+			chosenAvatar = rareAvatars[math.random(#rareAvatars)]
+		else
+			chosenAvatar = charCreateAvatars[math.random(#charCreateAvatars)]
+		end
+
+		if (SERVER) then 
+			client:GetCharacter():SetPdaavatar(chosenAvatar)
+
+			ix.dialogue.notifyMoneyLost(client, 5000)
+		end
+	end
+})
+
 
 DIALOGUE.addTopic("AboutWorkTopic", {
 	statement = "About work...",
@@ -446,12 +487,13 @@ DIALOGUE.addTopic("AboutProgression", {
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's uhh, try something else.",
+	statement = "So, anyways...",
 	response = "...",
 	options = {
 		"TradeTopic",
 		"BackgroundTopic",
 		"InterestTopic",
+		"PDAAvatarTopic",
 		-- "AboutWorkTopic",
 		-- "GetTask",
 		-- "GetTaskByDifficulty",
