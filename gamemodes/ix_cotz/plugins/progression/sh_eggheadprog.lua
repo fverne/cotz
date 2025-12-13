@@ -94,6 +94,7 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 	name = "Detecting Anomalous Materials Part 2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Detector2"] = ix.progression.status["eggheadItemDelivery_Detector2"] or {}
 		local dat = status or ix.progression.status["eggheadItemDelivery_Detector2"].complexData
@@ -182,6 +183,7 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 	name = "Detecting Anomalous Materials Part 3",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Detector3"] = ix.progression.status["eggheadItemDelivery_Detector3"] or {}
 		local dat = status or ix.progression.status["eggheadItemDelivery_Detector3"].complexData
@@ -268,6 +270,7 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 	name = "Anomalous Protection Part 1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Suit1"] = ix.progression.status["eggheadItemDelivery_Suit1"] or {}
 		local dat = status or ix.progression.status["eggheadItemDelivery_Suit1"].complexData
@@ -353,6 +356,7 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 	name = "Anomalous Protection Part 2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Suit2"] = ix.progression.status["eggheadItemDelivery_Suit2"] or {}
 		local dat = status or ix.progression.status["eggheadItemDelivery_Suit2"].complexData
@@ -439,6 +443,7 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 	name = "Anomalous Protection Part 3",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Suit3"] = ix.progression.status["eggheadItemDelivery_Suit3"] or {}
 		local dat = status or ix.progression.status["eggheadItemDelivery_Suit3"].complexData
@@ -522,6 +527,7 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 	name = "Scientific Aid Part 1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Aid1"] = ix.progression.status["eggheadItemDelivery_Aid1"] or {}
 		local dat = status or ix.progression.status["eggheadItemDelivery_Aid1"].complexData
@@ -612,6 +618,7 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 	name = "Scientific Aid Part 2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Aid2"] = ix.progression.status["eggheadItemDelivery_Aid2"] or {}
 		local dat = status or ix.progression.status["eggheadItemDelivery_Aid2"].complexData
@@ -701,6 +708,7 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 	name = "Scientific Aid Part 3",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Aid3"] = ix.progression.status["eggheadItemDelivery_Aid3"] or {}
 		local dat = status or ix.progression.status["eggheadItemDelivery_Aid3"].complexData
