@@ -7,25 +7,25 @@ ITEM.longdesc = "This military armoured suit is designed for assault operations 
 ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/skat.png")
-ITEM.weight = 21.20
+ITEM.weight = 12.600
 ITEM.newSkin = 13
 ITEM.baseSuit = "suit_skat9"
 ITEM.suitVariant = "ecologist"
 
-ITEM.price = 9999999999
+ITEM.price = 1199000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
 ITEM.br = 0.34
-ITEM.fbr = 3
-ITEM.sr = 0.61
+ITEM.fbr = 4
+ITEM.sr = 0.50
 ITEM.fsr = 3
-ITEM.ar = 0.25
-ITEM.far = 2
+ITEM.ar = 0.31
+ITEM.far = 3
 
-ITEM.carryinc = 19.000
+ITEM.carryinc = 15.12
 ITEM.miscslots = 3
 
 

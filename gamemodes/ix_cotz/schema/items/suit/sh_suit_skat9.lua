@@ -11,20 +11,20 @@ ITEM.weight = 21.00
 ITEM.newSkin = 1
 ITEM.baseSuit = "suit_skat9"
 
-ITEM.price = 9999999999
+ITEM.price = 1090000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.34
-ITEM.fbr = 3
-ITEM.sr = 0.61
+ITEM.br = 0.35
+ITEM.fbr = 4
+ITEM.sr = 0.51
 ITEM.fsr = 3
-ITEM.ar = 0.21
+ITEM.ar = 0.22
 ITEM.far = 2
 
-ITEM.carryinc = 19.000
+ITEM.carryinc = 16.80
 ITEM.miscslots = 2
 
 
