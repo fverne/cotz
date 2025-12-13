@@ -245,8 +245,9 @@ if (SERVER) then
                 self:ChangePhase(3, 0)
                 ix.plugin.list["anomalycontroller"]:cleanAnomalies()
                 ix.plugin.list["anomalycontroller"]:spawnAnomalies()
-                ix.plugin.list["anomalycontroller"]:trySpawnArtifacts()
-
+                for i = 1,3 do
+                    ix.plugin.list["anomalycontroller"]:trySpawnArtifacts()
+                end
                 if ix.config.Get("blowoutRemoveNPCs", false) then
                     for k, v in pairs(ents.GetAll()) do
                         if IsValid(v) and (v:IsNPC() or baseclass.Get(v:GetClass()).Base == 'base_nextbot' or baseclass.Get(v:GetClass()).Base == 'nz_base' or baseclass.Get(v:GetClass()).Base == 'nz_risen') and not IsFriendEntityName(v:GetClass()) then
@@ -262,11 +263,11 @@ if (SERVER) then
                             continue
                         end
 
-                        local itm = ix.item.instances[v.ixItemID]
-                        if (itm.isWeapon and itm:GetData("durability", 0) <= 10) or itm.cookable then
-                            v:Remove()
-                            continue
-                        end
+                        -- local itm = ix.item.instances[v.ixItemID]
+                        -- if (itm.isWeapon and itm:GetData("durability", 0) <= 10) or itm.cookable then
+                        --     v:Remove()
+                        --     continue
+                        -- end
                     end
                 end
 

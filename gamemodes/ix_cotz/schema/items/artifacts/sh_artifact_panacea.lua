@@ -62,6 +62,7 @@ ITEM.functions.usetarget = {
 				ix.chat.Send(item.player, "iteminternal", "Charges up a "..item.name.." and uses it on "..target.player:Name()..".", false)
 				ix.util.PlayerPerformBlackScreenAction(item.player, "Activating Panacea on "..target.player:Name(), 10, function(player) 
 					if !(player:Alive()) then return end
+					if !(target.player) then return end
 					target.player:UnSpectate()
 					target.player:SetNetVar("resurrected", true)
 					target.player:Spawn()
