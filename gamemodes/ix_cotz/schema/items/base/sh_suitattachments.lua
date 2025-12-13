@@ -131,7 +131,7 @@ ITEM.functions.use = {
 
 		-- Recalc resistances
 		client:RecalculateResistances()
-
+		ix.weight.Update(client)
 		return true
 	end,
 }
