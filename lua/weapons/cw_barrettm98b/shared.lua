@@ -205,7 +205,7 @@ function SWEP:IndividualThink()
 		end
 
 		if( self.ActiveAttachments.md_rearsight and self:hasAttachmentInCategory(1)) then
-			self:detatch(3)
+			self:detach(3)
 		end
 	end
 end
