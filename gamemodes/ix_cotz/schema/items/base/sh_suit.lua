@@ -362,7 +362,7 @@ ITEM.functions.Equip = {
 
 			ply:RecalculateResistances()
 			ply:ReevaluateOverlay()
-			ix.weight.Update(ply)
+			ix.weight.Update(ply:GetCharacter())
 			char:SetData("oldModel" .. item.outfitCategory, char:GetData("oldModel" .. item.outfitCategory, ply:GetModel()))
 			char:SetModel(item.newModel)
 
@@ -441,7 +441,7 @@ ITEM.functions.detach = {
 
 			-- Recalc resistances
 			item.player:RecalculateResistances()
-			ix.weight.Update(item.player)
+			ix.weight.Update(item.player:GetCharacter())
 
 		else
 			item.player:Notify("No attachment selected.")
