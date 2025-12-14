@@ -182,7 +182,7 @@ PLUGIN.buffs[ "buff_hijump" ] = {
 }
 
 PLUGIN.buffs[ "buff_lightningsprint" ] = {
-	name = "Deadly Sprint",
+	name = "Lightning Sprint",
 	desc = "You move quickly, but at what cost?",
 	func = function( player, parameter)
 		player.timeNextTickSpdDmg = player.timeNextTickSpdDmg or CurTime()
@@ -202,9 +202,14 @@ PLUGIN.buffs[ "buff_lightningsprint" ] = {
 			player:RemoveBuff("buff_lightningsprint")
 			return
 		end
-		ix.weight.Update(player:GetCharacter())
+		timer.Simple(0, function()
+			ix.weight.Update(player:GetCharacter())	
+		end)
+
 	end,
 	ondebuffed = function( player, parameter )
-		ix.weight.Update(player:GetCharacter())
+		timer.Simple(0, function()
+			ix.weight.Update(player:GetCharacter())	
+		end)
 	end,
 }

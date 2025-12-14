@@ -170,4 +170,7 @@ function SWEP:postPrimaryAttack()
 			end
 		end)
 	end
+	if SERVER then
+		self.Owner:SetVelocity(self.Owner:EyeAngles():Forward()*-250)
+	end
 end
