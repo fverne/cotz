@@ -546,7 +546,7 @@ function ITEM:OnLoadout()
 
 			timer.Simple(0.1,function()
 				if IsValid(weapon) then
-					if self:GetData("ammoType") then
+					if self:GetData("ammoType") != nil then
 						weapon:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
 					end
 					weapon:SetClip1(self:GetData("ammo", 0))
@@ -600,7 +600,9 @@ function ITEM:OnSave()
 
 		if self.player:GetActiveWeapon() == weapon and string.sub(game.GetAmmoName(ammoType), -1) == "-" then
 			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
-		elseif !self:GetData("ammoType") then
+		elseif string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
+		else
 			self:SetData("ammoType", nil)
 		end
 	end
