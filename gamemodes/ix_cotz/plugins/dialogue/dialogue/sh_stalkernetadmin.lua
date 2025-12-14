@@ -127,8 +127,8 @@ DIALOGUE.addTopic("RandomizePDAAvatarTopic", {
 
 		if (SERVER) then 
 			client:GetCharacter():SetPdaavatar(chosenAvatar)
-
 			ix.dialogue.notifyMoneyLost(client, 5000)
+			client:GetCharacter():TakeMoney(5000)
 		end
 	end
 })
