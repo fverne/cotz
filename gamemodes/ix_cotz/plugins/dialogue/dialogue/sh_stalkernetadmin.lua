@@ -101,6 +101,12 @@ DIALOGUE.addTopic("PDAAvatarTopic", {
 		"RandomizePDAAvatarTopic",
 		"BackTopic",
 	},
+	preCallback = function(self, client, target)
+			if !client:GetCharacter():HasMoney(5000) then
+				self.response = " ** He shakes his head at your poverty. You need 5000RU. **"
+				return
+			end
+	end,
 	ShouldAdd = function()
 		return LocalPlayer():getReputation() >= 1600 --Experienced
 	end
@@ -125,11 +131,18 @@ DIALOGUE.addTopic("RandomizePDAAvatarTopic", {
 			chosenAvatar = charCreateAvatars[math.random(#charCreateAvatars)]
 		end
 
-		if (SERVER) then 
-			client:GetCharacter():SetPdaavatar(chosenAvatar)
-			ix.dialogue.notifyMoneyLost(client, 5000)
-			client:GetCharacter():TakeMoney(5000)
+		if client:GetCharacter():HasMoney(5000) then
+			if (SERVER) then 
+				client:GetCharacter():TakeMoney(5000)
+				ix.dialogue.notifyMoneyLost(client, 5000)
+				client:GetCharacter():SetPdaavatar(chosenAvatar)
+			end
+		else
+			self.response = " ** The transaction doesn't go through. You don't have enough money. "
 		end
+	end,
+	ShouldAdd = function()
+		return LocalPlayer():GetCharacter():HasMoney(5000)
 	end
 })
 
