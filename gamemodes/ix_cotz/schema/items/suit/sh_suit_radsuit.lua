@@ -11,7 +11,7 @@ ITEM.weight = 22.500
 ITEM.newSkin = 0
 ITEM.baseSuit = "suit_radsuit"
 
-ITEM.price = 9999999999
+ITEM.price = 3000920
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
@@ -19,12 +19,12 @@ ITEM.isHelmet = false
 
 ITEM.br = 0.39
 ITEM.fbr = 4
-ITEM.sr = 0.73
+ITEM.sr = 0.58
 ITEM.fsr = 4
-ITEM.ar = 0.22
+ITEM.ar = 0.30
 ITEM.far = 2
 
-ITEM.carryinc = 21.000
+ITEM.carryinc = 17.64
 ITEM.miscslots = 3
 
 

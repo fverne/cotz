@@ -7,26 +7,26 @@ ITEM.longdesc = "This dated military armoured suit is designed for assault opera
 ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/skat.png")
-ITEM.weight = 16.80
+ITEM.weight = 16.665
 ITEM.newSkin = 10
 ITEM.baseSuit = "suit_skat10"
 ITEM.suitVariant = "anarchist"
 
-ITEM.price = 9999999999
+ITEM.price = 666820
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.28
+ITEM.br = 0.30
 ITEM.fbr = 3
 ITEM.sr = 0.45
 ITEM.fsr = 3
-ITEM.ar = 0.11
-ITEM.far = 3
+ITEM.ar = 0.20
+ITEM.far = 2
 
-ITEM.carryinc = 20.000
-ITEM.miscslots = 2
+ITEM.carryinc = 11.32
+ITEM.miscslots = 3
 
 
 -- ITEM.skincustom[1] = {
