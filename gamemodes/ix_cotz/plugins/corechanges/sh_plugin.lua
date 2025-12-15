@@ -277,7 +277,7 @@ if (SERVER) then
 			mapName = ix.plugin.list["simplecrossserver"].mapdata[game.GetMap()].name		
 		end
 		local message = string.format("%s has connected to STALKERNET at %s.", character:GetName(), mapName)
-		ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+		ix.chat.Send(nil, "gpdainternal", "", nil, nil, {
 			name = "SYSTEM",
 			message = message,
 			icon = newsicon,
@@ -294,7 +294,7 @@ if (SERVER) then
 				mapName = ix.plugin.list["simplecrossserver"].mapdata[game.GetMap()].name		
 			end
 			local message = string.format("%s has disconnected from STALKERNET at %s.", client:GetCharacter():GetName(), mapName)
-			ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+			ix.chat.Send(nil, "gpdainternal", "", nil, nil, {
 				name = "SYSTEM",
 				message = message,
 				icon = newsicon,

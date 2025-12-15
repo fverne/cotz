@@ -21,7 +21,12 @@ ix.chat.Register("gpdainternal", {
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text, bAnonymous, data)
-		chat.AddText(Color(180,61,61), "[GPDA-"..(data.name or speaker:GetName() or "SYSTEM").."] ", color_white, Material(data.icon) or icon, ": "..(data.message) or text)
+		if data.name == "SYSTEM" then
+			chat.AddText(Color(180,61,61), "[GPDA-"..(data.name or speaker:GetName() or "SYSTEM").."] ", Color(0,241,255), Material(data.icon) or icon, ": "..(data.message) or text)
+		else
+			chat.AddText(Color(180,61,61), "[GPDA-"..(data.name or speaker:GetName() or "SYSTEM").."] ", color_white, Material(data.icon) or icon, ": "..(data.message) or text)
+		end
+		
 	end,
 	prefix = {},
 	CanHear = function(self, speaker, listener, data)
