@@ -24,8 +24,16 @@ ITEM.fsr = 1
 ITEM.ar = 0.12
 ITEM.far = 1
 
+ITEM.radProt = 0.05
+
 ITEM.carryinc = 4.960
-ITEM.miscslots = 2
+ITEM.miscslots = 0
+
+ITEM.maxMiscSlots = {
+	["exteriorSlots"] = 1,
+	["interiorSlots"] = 2,
+	["extraSlots"] = 3,
+}
 
 
 ITEM.skincustom[1] = {

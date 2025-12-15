@@ -83,6 +83,7 @@ ix.armortables.attachments["steelplate_1"] = {
 	ar = -0.10,
 	weight = 0.950,
 	uID = "attachment_steelplate_1",
+	slot = "interiorSlots",
 }
 
 ix.armortables.attachments["steelplate_2"] = {
@@ -92,6 +93,7 @@ ix.armortables.attachments["steelplate_2"] = {
 	ar = -0.10,
 	weight = 1.150,
 	uID = "attachment_steelplate_2",
+	slot = "interiorSlots",
 }
 
 ix.armortables.attachments["steelplate_3"] = {
@@ -101,6 +103,7 @@ ix.armortables.attachments["steelplate_3"] = {
 	ar = -0.10,
 	weight = 1.550,
 	uID = "attachment_steelplate_3",
+	slot = "interiorSlots",
 }
 
 ix.armortables.attachments["steelplate_4"] = {
@@ -110,6 +113,7 @@ ix.armortables.attachments["steelplate_4"] = {
 	ar = -0.10,
 	weight = 1.950,
 	uID = "attachment_steelplate_4",
+	slot = "interiorSlots",
 }
 
 ix.armortables.attachments["kevlar_1"] = {
@@ -119,6 +123,7 @@ ix.armortables.attachments["kevlar_1"] = {
 	ar = 0.05,
 	weight = 0.550,
 	uID = "attachment_kevlar_1",
+	slot = "interiorSlots",
 }
 
 ix.armortables.attachments["kevlar_2"] = {
@@ -128,6 +133,7 @@ ix.armortables.attachments["kevlar_2"] = {
 	ar = 0.10,
 	weight = 0.650,
 	uID = "attachment_kevlar_2",
+	slot = "interiorSlots",
 }
 
 ix.armortables.attachments["carbonfibre"] = {
@@ -137,6 +143,7 @@ ix.armortables.attachments["carbonfibre"] = {
 	ar = 0.15,
 	weight = 0.200,
 	uID = "attachment_carbonfibre",
+	slot = "interiorSlots",
 }
 
 ix.armortables.attachments["ceramicplate_1"] = {
@@ -145,6 +152,7 @@ ix.armortables.attachments["ceramicplate_1"] = {
 	sr = 0.05,
 	weight = 1.400,
 	uID = "attachment_ceramicplate_1",
+	slot = "interiorSlots",
 }
 
 ix.armortables.attachments["ceramicplate_2"] = {
@@ -153,6 +161,7 @@ ix.armortables.attachments["ceramicplate_2"] = {
 	sr = 0.09,
 	weight = 1.250,
 	uID = "attachment_ceramicplate_2",
+	slot = "interiorSlots",
 }
 
 ix.armortables.attachments["ceramicplate_3"] = {
@@ -161,6 +170,7 @@ ix.armortables.attachments["ceramicplate_3"] = {
 	sr = 0.14,
 	weight = 1.650,
 	uID = "attachment_ceramicplate_3",
+	slot = "interiorSlots",
 }
 
 ix.armortables.attachments["ceramicplate_4"] = {
@@ -169,6 +179,7 @@ ix.armortables.attachments["ceramicplate_4"] = {
 	sr = 0.15,
 	weight = 2.650,
 	uID = "attachment_ceramicplate_4",
+	slot = "interiorSlots",
 }
 
 ix.armortables.attachments["steelframe"] = {
@@ -187,6 +198,7 @@ ix.armortables.attachments["steelframe"] = {
 			armor:SetData("carryinc", armor:GetCarryInc() - 25)
 		end
 	end,
+	slot = "extraSlots",
 }
 
 ix.armortables.attachments["aluframe"] = {
@@ -205,6 +217,7 @@ ix.armortables.attachments["aluframe"] = {
 			armor:SetData("carryinc", armor:GetCarryInc() - 15)
 		end
 	end,
+	slot = "extraSlots",
 }
 
 ix.armortables.attachments["fabric_1"] = {
@@ -212,6 +225,7 @@ ix.armortables.attachments["fabric_1"] = {
 	ar = 0.10,
 	weight = 1.200,
 	uID = "attachment_fabric_1",
+	slot = "interiorSlots",
 }
 
 ix.armortables.attachments["fabric_2"] = {
@@ -220,6 +234,7 @@ ix.armortables.attachments["fabric_2"] = {
 	ar = 0.20,
 	weight = 3.400,
 	uID = "attachment_fabric_2",
+	slot = "interiorSlots",
 }
 
 -- HIDES --
@@ -230,6 +245,7 @@ ix.armortables.attachments["hide_blinddog"] = {
 	ar = 0.07,
 	weight = 1.100,
 	uID = "hide_blinddog",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_tushkano"] = {
@@ -237,8 +253,10 @@ ix.armortables.attachments["hide_tushkano"] = {
 	br = 0.02,
 	sr = 0.01,
 	ar = 0.04,
+	radProt = 0.05,
 	weight = 0.700,
 	uID = "hide_tushkano",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_pseudodog"] = {
@@ -248,6 +266,7 @@ ix.armortables.attachments["hide_pseudodog"] = {
 	ar = 0.11,
 	weight = 1.650,
 	uID = "hide_pseudodog",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_bloodsucker"] = {
@@ -257,6 +276,7 @@ ix.armortables.attachments["hide_bloodsucker"] = {
 	ar = 0.03,
 	weight = 1.800,
 	uID = "hide_bloodsucker",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_boar"] = {
@@ -266,6 +286,7 @@ ix.armortables.attachments["hide_boar"] = {
 	ar = 0.02,
 	weight = 2.500,
 	uID = "hide_boar",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_burer"] = {
@@ -275,6 +296,7 @@ ix.armortables.attachments["hide_burer"] = {
 	pr = 0.15,
 	weight = 3.000,
 	uID = "hide_burer",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_karlik"] = {
@@ -284,6 +306,7 @@ ix.armortables.attachments["hide_karlik"] = {
 	pr = 0.15,
 	weight = 1.200,
 	uID = "hide_karlik",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_cat"] = {
@@ -293,6 +316,7 @@ ix.armortables.attachments["hide_cat"] = {
 	ar = 0.09,
 	weight = 1.250,
 	uID = "hide_cat",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_bear"] = {
@@ -302,6 +326,7 @@ ix.armortables.attachments["hide_bear"] = {
 	ar = 0.13,
 	weight = 3.550,
 	uID = "hide_bear",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_chimera"] = {
@@ -311,6 +336,7 @@ ix.armortables.attachments["hide_chimera"] = {
 	ar = 0.12,
 	weight = 2.150,
 	uID = "hide_chimera",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_vareshka"] = {
@@ -320,6 +346,7 @@ ix.armortables.attachments["hide_vareshka"] = {
 	ar = 0.03,
 	weight = 1.840,
 	uID = "hide_vareshka",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_sprig"] = {
@@ -337,6 +364,7 @@ ix.armortables.attachments["hide_sprig"] = {
 			armor:SetData("carryinc", armor:GetCarryInc() - 18)
 		end
 	end,
+	slot = "extraSlots",
 }
 
 ix.armortables.attachments["hide_spider"] = {
@@ -354,6 +382,7 @@ ix.armortables.attachments["hide_spider"] = {
 			armor:SetData("carryinc", armor:GetCarryInc() - 12)
 		end
 	end,
+	slot = "extraSlots",
 }
 
 ix.armortables.attachments["hide_tark"] = {
@@ -363,6 +392,7 @@ ix.armortables.attachments["hide_tark"] = {
 	ar = 0.08,
 	weight = 1.600,
 	uID = "hide_tark",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_flesh"] = {
@@ -372,6 +402,7 @@ ix.armortables.attachments["hide_flesh"] = {
 	ar = 0.01,
 	weight = 1.800,
 	uID = "hide_flesh",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_controller"] = {
@@ -382,6 +413,7 @@ ix.armortables.attachments["hide_controller"] = {
 	pr = 0.35,
 	weight = 1.100,
 	uID = "hide_controller",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_swampcontroller"] = {
@@ -391,6 +423,7 @@ ix.armortables.attachments["hide_swampcontroller"] = {
 	ar = 0.05,
 	weight = 0.800,
 	uID = "hide_swampcontroller",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_electrocontroller"] = {
@@ -400,7 +433,8 @@ ix.armortables.attachments["hide_electrocontroller"] = {
 	pr = 0.25,
 	ar = 0.16,
 	weight = 1.350,
-	uID = "hide_electrocontroller"
+	uID = "hide_electrocontroller",
+	slot = "exteriorSlots",
 }
 
 ix.armortables.attachments["hide_pseudogiant"] = {
@@ -410,6 +444,7 @@ ix.armortables.attachments["hide_pseudogiant"] = {
 	ar = 0.20,
 	weight = 5.550,
 	uID = "hide_pseudogiant",
+	slot = "exteriorSlots",
 }
 
 

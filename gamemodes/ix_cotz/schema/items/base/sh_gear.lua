@@ -367,6 +367,19 @@ function ITEM:getFPR()
 	return res
 end
 
+function ITEM:getRadProt()
+	local res = self.radProt
+	local upgrades = self:GetData("upgrades", {})
+
+	for k,v in pairs(upgrades) do
+		if upgrades[v].radProt ~= nil then
+			res = res + upgrades[v].radProt
+		end
+	end
+
+	return res
+end
+
 
 -- function ITEM:pacAdjust(pacdata, client)
 -- 	if (client:GetModel() == "models/nasca/stalker/male_berill1.mdl") then

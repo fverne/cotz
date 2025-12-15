@@ -45,6 +45,9 @@ function ITEM:PopulateTooltip(tooltip)
 		if ix.armortables.attachments[self.attachName].pr then
 			ix.util.DrawResistance(tooltip, "Psychic: ", ix.armortables.attachments[self.attachName].pr, 0)
 		end
+		if ix.armortables.attachments[self.attachName].radProt then
+			ix.util.DrawResistance(tooltip, "Radiation: ", ix.armortables.attachments[self.attachName].radProt, 0)
+		end
 		if (!self.entity) then
 	        ix.util.PropertyDesc(tooltip, "Suit Attachment", Color(64, 224, 208))
 		end
@@ -74,9 +77,10 @@ ITEM.functions.use = {
 
 			if (inv) then
 				local items = inv:GetItems()
-
+				local slot = ix.armortables.attachments[item.attachName].slot
+				
 				for k, v in pairs(items) do
-					if (v.isBodyArmor and (v.miscslots or 0) > 0) then
+					if (v.isBodyArmor and (v.maxMiscSlots[slot] or 0) > 0) then
 						table.insert(targets, {
 							name = L(v.name),
 							data = {v:GetID()},
@@ -113,9 +117,11 @@ ITEM.functions.use = {
 			end
 		end
 		
-		targetAttach = target:GetData("attachments") or {}
-		if targetAttach then
-			if #targetAttach >= target.miscslots then
+		local slot = ix.armortables.attachments[item.attachName].slot
+		local targetAttach = target:GetData("attachments") or {}
+		local targetMiscSlotAttach = targetAttach[slot]
+		if targetMiscSlotAttach then
+			if #targetMiscSlotAttach >= target.maxMiscSlots[slot] then
 				client:Notify("The armor has no free attachment slots.")
 				return false
 			end
@@ -125,7 +131,9 @@ ITEM.functions.use = {
 			ix.armortables.attachments[item.attachName].onAttach(client, target)
 		end
 
-		table.insert(targetAttach,item.attachName)
+		table.insert(targetMiscSlotAttach,item.attachName)
+		targetAttach[slot] = targetMiscSlotAttach
+
 		target:SetData("attachments", targetAttach)
 		client:Notify("Installed "..item.name.." on "..target.name)
 
@@ -146,8 +154,10 @@ hook.Add("PlayerPostThink", "ixSuitAttachThink", function(client)
 	if (!armor) then return end
 
 	for _, v in pairs(armor:GetData("attachments", {})) do
-		if (isfunction(ix.armortables.attachments[v].onThink)) then
-			ix.armortables.attachments[v].onThink(client)
+		for _, v2 in pairs(v) do
+			if (isfunction(ix.armortables.attachments[v2].onThink)) then
+				ix.armortables.attachments[v2].onThink(client)
+			end
 		end
 	end
 end)
