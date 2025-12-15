@@ -27,7 +27,7 @@ function ix.util.HandleChat(name, message)
     // Relay to other servers
 	if (ix.crossserverchat) then
 		local icon = "vgui/icons/news.png"
-		ix.crossserverchat.PostMessage(nil, name, message, icon)
+		ix.crossserverchat.PostMessage(name, message, icon)
 	end
 
     // Relay to discord
