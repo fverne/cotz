@@ -79,12 +79,13 @@ if (SERVER) then
 						local name = v.name or "SYSTEM"
 						local text = v.text or "<corrupted message>"
 						local icon = v.icon or "vgui/icons/news.png"
+						local sound = v.sound or "stalkersound/pda/pda_news.wav"
 
 						if (id > tonumber(ix.plugin.list["simplecrossserverchat"].lastSeenId)) then
 							ix.plugin.list["simplecrossserverchat"].lastSeenId = tonumber(id)
 						end
 
-						table.insert(ix.crossserverchat.queue, {name, text, icon})
+						table.insert(ix.crossserverchat.queue, {name, text, icon, sound})
 					end
 				end
 			end
@@ -101,7 +102,8 @@ if (SERVER) then
 			ix.chat.Send(nil, "gpdainternal", "", nil, nil, {
 				name = msg[1],
 				message = msg[2],
-				icon = msg[3]
+				icon = msg[3],
+				sound = msg[4]
 			})
 		end
 	end
