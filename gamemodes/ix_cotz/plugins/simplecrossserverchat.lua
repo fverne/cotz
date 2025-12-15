@@ -18,7 +18,6 @@ ix.crossserverchat.queue = ix.crossserverchat.queue or {}
 local icon =  Material("vgui/icons/news.png")
 ix.chat.Register("gpdainternal", {
 	CanSay = function(self, speaker, text)
-
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text, bAnonymous, data)
@@ -27,7 +26,7 @@ ix.chat.Register("gpdainternal", {
 	prefix = {},
 	CanHear = function(self, speaker, listener, data)
 		if data.name == "SYSTEM" then
-			listener:EmitSound( data.sound or "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO )
+			listener:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO )
 		else
 			listener:EmitSound( "stalkersound/da-2_beep1.ogg", 90, 100, 1, CHAN_AUTO )
 		end
@@ -107,13 +106,14 @@ if (SERVER) then
 			ix.chat.Send(nil, "gpdainternal", "", nil, nil, {
 				name = msg[1],
 				message = msg[2],
-				icon = msg[3]
+				icon = msg[3],
+				sound = msg[4]
 			})
 		end
 	end
 
 	function PLUGIN:PostMessage(name, text, icon)
-
+		print("firing message: "..text)
 		local datatoinsert = {}
 		if(not istable(data))then
 			data = {data}
