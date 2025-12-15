@@ -185,6 +185,7 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 			icon = newsicon,
 			sound = "stalkersound/pda/pda_news.wav",
 		})
+		ix.crossserverchat.PostMessage("SYSTEM", message, newsicon)
 
 		-- If RedirectPlayer has been called, the character has been moved to the new map, and should no longer be usable
 		character:Save()
@@ -220,6 +221,7 @@ function PLUGIN:RedirectPlayerNoLoadZone(client, map)
 			icon = newsicon,
 			sound = "stalkersound/pda/pda_news.wav",
 		})
+		ix.crossserverchat.PostMessage("SYSTEM", message, newsicon)
 
 		-- If RedirectPlayerNoLoadZone has been called, the character has been moved to the new map, and should no longer be usable
 		character:Save()
