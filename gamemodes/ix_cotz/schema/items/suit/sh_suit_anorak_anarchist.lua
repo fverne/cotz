@@ -27,7 +27,9 @@ ITEM.far = 2
 -- ITEM.radProt = 0.06
 
 ITEM.carryinc = 3.03
-ITEM.miscslots = 0
+ITEM.exteriorSlots = 0
+ITEM.interiorSlots = 0
+ITEM.extraSlots = 0
 
 ITEM.functions.Lift = {
 	name = "Lift Hood",

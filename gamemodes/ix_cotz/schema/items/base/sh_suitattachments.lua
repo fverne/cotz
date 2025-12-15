@@ -80,7 +80,7 @@ ITEM.functions.use = {
 				local slot = ix.armortables.attachments[item.attachName].slot
 				
 				for k, v in pairs(items) do
-					if (v.isBodyArmor and (v.maxMiscSlots[slot] or 0) > 0) then
+					if (v.isBodyArmor and (v:GetData("maxMiscSlots", {})[slot] or 0) > 0) then
 						table.insert(targets, {
 							name = L(v.name),
 							data = {v:GetID()},
@@ -121,7 +121,7 @@ ITEM.functions.use = {
 		local targetAttach = target:GetData("attachments") or {}
 		local targetMiscSlotAttach = targetAttach[slot]
 		if targetMiscSlotAttach then
-			if #targetMiscSlotAttach >= target.maxMiscSlots[slot] then
+			if #targetMiscSlotAttach >= target:GetData("maxMiscSlots", {})[slot] then
 				client:Notify("The armor has no free attachment slots.")
 				return false
 			end

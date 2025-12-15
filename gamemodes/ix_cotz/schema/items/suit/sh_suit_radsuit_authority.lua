@@ -26,7 +26,9 @@ ITEM.ar = 0.29
 ITEM.far = 2
 
 ITEM.carryinc = 18.36
-ITEM.miscslots = 3
+ITEM.exteriorSlots = 1
+ITEM.interiorSlots = 3
+ITEM.extraSlots = 2
 
 
 -- ITEM.skincustom[1] = {

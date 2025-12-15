@@ -26,7 +26,9 @@ ITEM.ar = 0.07
 ITEM.far = 2
 
 ITEM.carryinc = 4.152
-ITEM.miscslots = 0
+ITEM.exteriorSlots = 0
+ITEM.interiorSlots = 0
+ITEM.extraSlots = 0
 
 ITEM.bodyGroups = {
 	["vests"] = 1,

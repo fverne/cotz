@@ -32,7 +32,9 @@ ITEM.radProt = 0.98
 ITEM.flatRadProt = 0.02
 
 ITEM.carryinc = 22.88
-ITEM.miscslots = 4
+ITEM.exteriorSlots = 1
+ITEM.interiorSlots = 2
+ITEM.extraSlots = 2
 
 ITEM.skincustom[1] = {
 	name = "Skin 0",
