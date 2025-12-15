@@ -257,13 +257,42 @@ ix.chat.Register("playerleave", {
 })
 
 if (SERVER) then
+	-- -- LPDA join
+	-- function PLUGIN:CharacterLoaded(character)
+	-- 	ix.chat.Send(nil, "playerjoin", string.format("%s has connected to STALKERNET.", character:GetName()))
+	-- end
+	
+	-- -- LPDA disconnect
+	-- function PLUGIN:PlayerDisconnected(client)
+	-- 	if( client:GetCharacter() ) then
+	-- 		ix.chat.Send(nil, "playerleave", string.format("%s has lost connection to STALKERNET.", client:GetCharacter():GetName()))
+	-- 	end
+	-- end
+	
+	local newsicon = "vgui/icons/news.png"
+	--GPDA join
 	function PLUGIN:CharacterLoaded(character)
-		ix.chat.Send(nil, "playerjoin", string.format("%s has connected to STALKERNET.", character:GetName()))
+		local message = string.format("%s has connected to STALKERNET.", character:GetName())
+		ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+			name = "SYSTEM",
+			message = message,
+			icon = newsicon,
+			sound = "stalkersound/pda/pda_news.wav"
+		})
+		ix.crossserverchat.PostMessage(nil, nil, message, nil)
 	end
 
+	--GPDA disconnect
 	function PLUGIN:PlayerDisconnected(client)
 		if( client:GetCharacter() ) then
-			ix.chat.Send(nil, "playerleave", string.format("%s has lost connection to STALKERNET.", client:GetCharacter():GetName()))
+			local message = string.format("%s has lost connection to STALKERNET.", client:GetCharacter():GetName())
+			ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+				name = "SYSTEM",
+				message = message,
+				icon = newsicon,
+				sound = "stalkersound/pda/pda_news.wav",
+			})
+			ix.crossserverchat.PostMessage(nil, nil, message, nil)
 		end
 	end
 end

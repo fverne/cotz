@@ -160,6 +160,8 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 	--sanity check
 	if mapdata[map] != nil then
 		local tempip = mapdata[map].serverip
+		local newMapName= mapdata[map].name
+
 		if mapdata[map].loadzones[loadzone] != nil then
 			local position = character:GetData("newpos",{})
 
@@ -175,7 +177,14 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 		character:SetData("curmap", map)
 		character:SetData("bInBlowoutWhenStart", false) -- so players dont get killed if they transition after blowout started.
 
-		ix.chat.Send(nil, "playerjoin", string.format("%s has switched area.", character:GetName()))
+		local newsicon = "vgui/icons/news.png"
+		local message = string.format("%s is moving to %s.", character:GetName(), newMapName)
+		ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+			name = "SYSTEM",
+			message = message,
+			icon = newsicon,
+			sound = "stalkersound/pda/pda_news.wav",
+		})
 
 		-- If RedirectPlayer has been called, the character has been moved to the new map, and should no longer be usable
 		character:Save()
@@ -198,11 +207,19 @@ function PLUGIN:RedirectPlayerNoLoadZone(client, map)
 	--sanity check
 	if mapdata[map] != nil then
 		local tempip = mapdata[map].serverip
+		local newMapName = mapdata[map].name
 
 		character:SetData("curmap", map)
 		character:SetData("bInBlowoutWhenStart", false) -- so players dont get killed if they transition after blowout started.
 
-		ix.chat.Send(nil, "playerjoin", string.format("%s has switched area.", character:GetName()))
+		local newsicon = "vgui/icons/news.png"
+		local message = string.format("%s is moving to %s.", character:GetName(), newMapName)
+		ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+			name = "SYSTEM",
+			message = message,
+			icon = newsicon,
+			sound = "stalkersound/pda/pda_news.wav",
+		})
 
 		-- If RedirectPlayerNoLoadZone has been called, the character has been moved to the new map, and should no longer be usable
 		character:Save()

@@ -22,11 +22,11 @@ ix.chat.Register("gpdainternal", {
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text, bAnonymous, data)
-		chat.AddText(Color(180,61,61), "[GPDA-"..data.name.."] ", color_white, Material(data.icon) or icon, ": "..data.message)
+		chat.AddText(Color(180,61,61), "[GPDA-"..(data.name or speaker:GetName() or "SYSTEM").."] ", color_white, Material(data.icon) or icon, ": "..(data.message) or text)
 	end,
 	prefix = {},
-	CanHear = function(self, speaker, listener)
-		listener:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO )
+	CanHear = function(self, speaker, listener, data)
+		listener:EmitSound( data.sound, 55, 100, 0.2, CHAN_AUTO )
 
 		return true
 	end,
@@ -76,7 +76,7 @@ if (SERVER) then
 				for _, v in pairs(result) do
 					if (istable(v)) then
 						local id = tonumber(v.id)
-						local name = v.name or "Unknown"
+						local name = v.name or "SYSTEM"
 						local text = v.text or "<corrupted message>"
 						local icon = v.icon or "vgui/icons/news.png"
 
