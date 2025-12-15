@@ -103,6 +103,8 @@ if (SERVER) then
 			local msg = ix.crossserverchat.queue[1]
 			table.remove(ix.crossserverchat.queue, 1)
 
+			print("sending chat message: "..msg[2])
+
 			ix.chat.Send(nil, "gpdainternal", "", nil, nil, {
 				name = msg[1],
 				message = msg[2],
@@ -114,6 +116,7 @@ if (SERVER) then
 
 	function PLUGIN:PostMessage(name, text, icon)
 		print("firing message: "..text)
+		
 		local datatoinsert = {}
 		if(not istable(data))then
 			data = {data}
