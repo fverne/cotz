@@ -272,7 +272,10 @@ if (SERVER) then
 	local newsicon = "vgui/icons/news.png"
 	--GPDA join
 	function PLUGIN:CharacterLoaded(character)
-		local mapName = ix.plugin.list["simplecrossserver"].mapdata[game.GetMap()].name
+		local mapName = game.GetMap()
+		if ix.plugin.list["simplecrossserver"].mapdata[game.GetMap()] then
+			mapName = ix.plugin.list["simplecrossserver"].mapdata[game.GetMap()].name		
+		end
 		local message = string.format("%s has connected to STALKERNET at %s.", character:GetName(), mapName)
 		ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 			name = "SYSTEM",
@@ -286,7 +289,10 @@ if (SERVER) then
 	--GPDA disconnect
 	function PLUGIN:PlayerDisconnected(client)
 		if( client:GetCharacter() ) then
-			local mapName = ix.plugin.list["simplecrossserver"].mapdata[game.GetMap()].name
+			local mapName = game.GetMap()
+			if ix.plugin.list["simplecrossserver"].mapdata[game.GetMap()] then
+				mapName = ix.plugin.list["simplecrossserver"].mapdata[game.GetMap()].name		
+			end
 			local message = string.format("%s has disconnected from STALKERNET at %s.", client:GetCharacter():GetName(), mapName)
 			ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 				name = "SYSTEM",
