@@ -114,9 +114,9 @@ if (SERVER) then
 		end
 	end
 
-	function PLUGIN:PostMessage(name, text, icon)
+	function ix.crossserverchat.PostMessage(name, text, icon)
 		print("firing message: "..text)
-		
+
 		local datatoinsert = {}
 		if(not istable(data))then
 			data = {data}
@@ -140,7 +140,7 @@ if (SERVER) then
 		query:Execute()
 	end
 
-	ix.crossserverchat.PostMessage = PLUGIN.PostMessage
+	-- ix.crossserverchat.PostMessage = PLUGIN.PostMessage
 
 	function PLUGIN:SaveData()
 		self:SetData(tonumber(self.lastSeenId))
