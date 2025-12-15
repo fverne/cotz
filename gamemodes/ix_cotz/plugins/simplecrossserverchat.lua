@@ -115,7 +115,7 @@ if (SERVER) then
 	end
 
 	function ix.crossserverchat.PostMessage(name, text, icon)
-		print("firing message: "..text)
+		print("Message posted from: "..name.." with text: "..text.." with icon "..icon)
 
 		local datatoinsert = {}
 		if(not istable(data))then
