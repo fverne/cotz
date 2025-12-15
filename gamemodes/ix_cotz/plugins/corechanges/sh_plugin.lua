@@ -279,7 +279,7 @@ if (SERVER) then
 			icon = newsicon,
 			sound = "stalkersound/pda/pda_news.wav"
 		})
-		ix.crossserverchat.PostMessage(nil, nil, message, nil)
+		ix.crossserverchat.PostMessage(nil, "SYSTEM", message, newsicon)
 	end
 
 	--GPDA disconnect
@@ -292,7 +292,7 @@ if (SERVER) then
 				icon = newsicon,
 				sound = "stalkersound/pda/pda_news.wav",
 			})
-			ix.crossserverchat.PostMessage(nil, nil, message, nil)
+			ix.crossserverchat.PostMessage(nil, "SYSTEM", message, newsicon)
 		end
 	end
 end

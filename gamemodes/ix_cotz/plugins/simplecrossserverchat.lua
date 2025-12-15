@@ -26,7 +26,12 @@ ix.chat.Register("gpdainternal", {
 	end,
 	prefix = {},
 	CanHear = function(self, speaker, listener, data)
-		listener:EmitSound( data.sound, 55, 100, 0.2, CHAN_AUTO )
+		if data.name == "SYSTEM" then
+			listener:EmitSound( data.sound or "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO )
+		else
+			listener:EmitSound( "stalkersound/da-2_beep1.ogg", 90, 100, 1, CHAN_AUTO )
+		end
+		
 
 		return true
 	end,
@@ -102,8 +107,7 @@ if (SERVER) then
 			ix.chat.Send(nil, "gpdainternal", "", nil, nil, {
 				name = msg[1],
 				message = msg[2],
-				icon = msg[3],
-				sound = msg[4]
+				icon = msg[3]
 			})
 		end
 	end
