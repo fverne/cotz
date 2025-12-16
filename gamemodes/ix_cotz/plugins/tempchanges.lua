@@ -15,7 +15,10 @@ function PLUGIN:PlayerLoadout(client)
 				if v:GetData("attachments", {}) then
 					PrintTable(v:GetData("attachments", {}))
 					for k2, v2 in pairs(v:GetData("attachments", {})) do
-						print(client:GetCharacter():GetName())
+						if !isstring(v2) then
+							break 	
+						end
+
 						if not client:GetCharacter():GetInventory():Add(ix.armortables.attachments[v2].uID) then
 							print(v2)
 							local position = client:GetItemDropPos()
