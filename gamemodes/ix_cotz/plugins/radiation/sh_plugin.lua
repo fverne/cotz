@@ -60,7 +60,7 @@ function playerMeta:getPercentageRadResist()
 			res = res * (1 - i:getRadProt())
 
 
-			if !v.isBodyArmor then
+			if !i.isBodyArmor then
 				return
 			end
 			
