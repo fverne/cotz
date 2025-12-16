@@ -118,7 +118,7 @@ ITEM.functions.use = {
 		end
 		
 		local slot = ix.armortables.attachments[item.attachName].slot
-		local targetAttach = target:GetData("attachments") or {}
+		local targetAttach = target:GetData("attachments", target.miscSlots) or {}
 		local targetMiscSlotAttach = targetAttach[slot]
 		if targetMiscSlotAttach then
 			if #targetMiscSlotAttach >= target:GetData("maxMiscSlots", {["exteriorSlots"] = target.exteriorSlots,["interiorSlots"] = target.interiorSlots,["extraSlots"] = target.extraSlots})[slot] then

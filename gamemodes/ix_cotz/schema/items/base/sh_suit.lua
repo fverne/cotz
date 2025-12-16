@@ -468,7 +468,7 @@ ITEM.functions.detach = {
 	multiOptions = function(item, client)
 		local targets = {}
 		local curattach = {}
-		for _, v in pairs(item:GetData("attachments")) do
+		for _, v in pairs(item:GetData("attachments", item.miscSlots)) do
 			for _, suitAttachment in pairs(v) do
 				table.insert(curattach, suitAttachment)
 			end
@@ -488,7 +488,7 @@ ITEM.functions.detach = {
 	end,
 	OnRun = function(item, data)
 		if data[1] then
-			local curattach = item:GetData("attachments")
+			local curattach = item:GetData("attachments", item.miscSlots)
 			
 			for _, categories in pairs(curattach) do
 				for _, suitAttachment in pairs(categories) do
