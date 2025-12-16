@@ -3,7 +3,7 @@ PLUGIN.author = "verne"
 PLUGIN.desc = "Will be removed later"
 
 
-function PLUGIN:PlayerLoadout(client)
+function PLUGIN:PostPlayerLoadout(client)
 	if !client:GetCharacter() then
 		return
 	end

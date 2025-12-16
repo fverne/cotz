@@ -299,8 +299,10 @@ function ITEM:OnInstanced()
 		["interiorSlots"] = self.interiorSlots,
 		["extraSlots"] = self.extraSlots,
 	})
-
-	self:SetData("attachments", self.miscSlots)
+	
+	if !self:GetData("attachments") then
+		self:SetData("attachments", self.miscSlots)
+	end
 end
 
 ITEM.functions.zCustomizeSkin = {
