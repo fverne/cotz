@@ -30,7 +30,7 @@ ITEM.radProt = 0.90
 ITEM.flatRadProt = 0.02
 
 ITEM.carryinc = 6.320
-ITEM.exteriorSlots = 1
+ITEM.exteriorSlots = 2
 ITEM.interiorSlots = 1
 ITEM.extraSlots = 0
 

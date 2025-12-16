@@ -26,7 +26,7 @@ ITEM.ar = 0.22
 ITEM.far = 2
 
 ITEM.carryinc = 17.14
-ITEM.exteriorSlots = 1
+ITEM.exteriorSlots = 2
 ITEM.interiorSlots = 3
 ITEM.extraSlots = 1
 
