@@ -61,7 +61,7 @@ function playerMeta:getPercentageRadResist()
 
 
 			if !i.isBodyArmor then
-				return
+				return res
 			end
 			
 			--For artifacts, kevlarplates, mutant hides, etc..
