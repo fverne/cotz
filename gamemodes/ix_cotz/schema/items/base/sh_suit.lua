@@ -185,7 +185,7 @@ if (CLIENT) then
 				end
 			end
 
-			if((self.interiorSlots or 0) > 0) then
+			if((self.extraSlots or 0) > 0) then
 				local attachmenttitle = tooltip:AddRow("attachments3")
 				attachmenttitle:SetText("\nMiscellaneous Attachments: ")
 				attachmenttitle:SizeToContents()
@@ -193,7 +193,7 @@ if (CLIENT) then
 				local lastrow = attachmenttitle
 
 				local attachmentdata = self:GetData("attachments", self.miscSlots)["extraSlots"]
-				for i = 1, (self.interiorSlots or 0) do
+				for i = 1, (self.extraSlots or 0) do
 					local attachmenttmp = tooltip:AddRowAfter("attachments3", "attachment3"..i)
 					local attachmentstr = "  ⬜ None"
 					attachmenttmp:SetTextColor(Color(120,120,120))
