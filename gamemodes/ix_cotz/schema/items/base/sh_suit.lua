@@ -138,7 +138,7 @@ if (CLIENT) then
 
 				local lastrow = attachmenttitle
 
-				local attachmentdata = self:GetData("attachments", {})["exteriorSlots"]
+				local attachmentdata = self:GetData("attachments", self.miscSlots)["exteriorSlots"]
 				for i = 1, (self.exteriorSlots or 0) do
 					local attachmenttmp = tooltip:AddRowAfter("attachments1", "attachment1"..i)
 					local attachmentstr = "  ⬜ None"
@@ -165,7 +165,7 @@ if (CLIENT) then
 
 				local lastrow = attachmenttitle
 
-				local attachmentdata = self:GetData("attachments", {})["interiorSlots"]
+				local attachmentdata = self:GetData("attachments", self.miscSlots)["interiorSlots"]
 				for i = 1, (self.interiorSlots or 0) do
 					local attachmenttmp = tooltip:AddRowAfter("attachments2", "attachment2"..i)
 					local attachmentstr = "  ⬜ None"
@@ -192,7 +192,7 @@ if (CLIENT) then
 
 				local lastrow = attachmenttitle
 
-				local attachmentdata = self:GetData("attachments", {})["extraSlots"]
+				local attachmentdata = self:GetData("attachments", self.miscSlots)["extraSlots"]
 				for i = 1, (self.interiorSlots or 0) do
 					local attachmenttmp = tooltip:AddRowAfter("attachments3", "attachment3"..i)
 					local attachmentstr = "  ⬜ None"
@@ -609,7 +609,7 @@ function ITEM:getBR()
 	end
 	
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
 		for _, attachment in pairs (v) do
@@ -661,7 +661,7 @@ function ITEM:getSR()
 	end
 	
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
 		for _, attachment in pairs (v) do
@@ -713,7 +713,7 @@ function ITEM:getPR()
 	end
 
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
 		for _, attachment in pairs (v) do
@@ -739,7 +739,7 @@ function ITEM:getFPR()
 	end
 
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 
 	for k,v in pairs(attachments) do
 		for _, attachment in pairs (v) do
@@ -771,7 +771,7 @@ function ITEM:getAR()
 	end
 	
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
 		for _, attachment in pairs (v) do
@@ -803,7 +803,7 @@ function ITEM:getRadProt()
 	end
 	
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
 		for _, attachment in pairs (v) do
@@ -850,7 +850,7 @@ function ITEM:GetWeight()
   end
 	
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
 		for _, attachment in pairs (v) do
@@ -865,7 +865,7 @@ function ITEM:GetWeight()
 end
 
 function ITEM:RunAllAttachmentAttach()
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
 		for _, attachment in pairs (v) do
@@ -878,7 +878,7 @@ function ITEM:RunAllAttachmentAttach()
 end
 
 function ITEM:RunAllAttachmentDetach()
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 
 	for k,v in pairs(attachments) do
 		for _, attachment in pairs (v) do

@@ -153,7 +153,7 @@ hook.Add("PlayerPostThink", "ixSuitAttachThink", function(client)
 	local armor = client:getEquippedBodyArmor()
 	if (!armor) then return end
 
-	for _, v in pairs(armor:GetData("attachments", {})) do
+	for _, v in pairs(armor:GetData("attachments", armor.miscSlots)) do
 		for _, v2 in pairs(v) do
 			if (isfunction(ix.armortables.attachments[v2].onThink)) then
 				ix.armortables.attachments[v2].onThink(client)

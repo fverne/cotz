@@ -61,7 +61,7 @@ function playerMeta:getPercentageRadResist()
 
 
 			--For artifacts, kevlarplates, mutant hides, etc..
-			local attachments = i:GetData("attachments", {})
+			local attachments = i:GetData("attachments", i.miscSlots)
 			
 			for k,v in pairs(attachments) do
 				for _, attachment in pairs (v) do
