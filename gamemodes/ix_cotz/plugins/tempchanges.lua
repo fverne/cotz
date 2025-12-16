@@ -14,7 +14,7 @@ function PLUGIN:PostPlayerLoadout(client)
 			if v.isBodyArmor and v:GetData("attachments", {}) then
 				for i = 1, #v:GetData("attachments", {}) do
 					if not client:GetCharacter():GetInventory():Add(ix.armortables.attachments[v:GetData("attachments", {})[i]].uID) then
-						print(client:GetCharacter())
+						print(client:GetCharacter():GetName())
 						print(v:GetData("attachments", {})[i])
 						local position = client:GetItemDropPos()
 						ix.item.Spawn(ix.armortables.attachments[v[i]].uID, position, nil, AngleRand())
