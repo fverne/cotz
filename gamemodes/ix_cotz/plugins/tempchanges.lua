@@ -8,19 +8,16 @@ function PLUGIN:PlayerLoadout(client)
 		return
 	end
 
-	-- untested :)
-	-- if client:GetCharacter():GetData("bRemoveAttachments", true) then
+	if client:GetCharacter():GetData("bRemoveAttachments", true) then
 		for k, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
 			if v.isBodyArmor then
 				if v:GetData("attachments", {}) then
-					PrintTable(v:GetData("attachments", {}))
 					for k2, v2 in pairs(v:GetData("attachments", {})) do
 						if !isstring(v2) then
 							break 	
 						end
 
 						if not client:GetCharacter():GetInventory():Add(ix.armortables.attachments[v2].uID) then
-							print(v2)
 							local position = client:GetItemDropPos()
 							ix.item.Spawn(ix.armortables.attachments[v2].uID, position, nil, AngleRand())
 							position = position + Vector(0, 0, 5)
@@ -33,5 +30,5 @@ function PLUGIN:PlayerLoadout(client)
 		end
 
 		client:GetCharacter():SetData("bRemoveAttachments", false)
-	-- end
+	end
 end
