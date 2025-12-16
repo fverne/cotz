@@ -59,23 +59,20 @@ function playerMeta:getPercentageRadResist()
 		if (i.getRadProt and i:GetData("equip") == true) then
 			res = res * (1 - i:getRadProt())
 
-
-			if !i.isBodyArmor then
-				return res
-			end
 			
 			--For artifacts, kevlarplates, mutant hides, etc..
-			local attachments = i:GetData("attachments", i.miscSlots)
-			
-			for k,v in pairs(attachments) do
-				if !v then
-					continue
-				end
+			if i.isBodyArmor then
+				local attachments = i:GetData("attachments", i.miscSlots)
+				for k,v in pairs(attachments) do
+					if !v then
+						continue
+					end
 
-				for _, attachment in pairs (v) do
-					if (!ix.armortables.attachments[attachment]) then continue end
-					if ix.armortables.attachments[attachment].radProt then
-						res = res * (1 - ix.armortables.attachments[attachment].radProt)
+					for _, attachment in pairs (v) do
+						if (!ix.armortables.attachments[attachment]) then continue end
+						if ix.armortables.attachments[attachment].radProt then
+							res = res * (1 - ix.armortables.attachments[attachment].radProt)
+						end
 					end
 				end
 			end
