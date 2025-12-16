@@ -3,7 +3,7 @@ PLUGIN.author = "verne"
 PLUGIN.desc = "Will be removed later"
 
 
-function PLUGIN:PostPlayerLoadout(client)
+function PLUGIN:PlayerLoadout(client)
 	if !client:GetCharacter() then
 		return
 	end
@@ -15,12 +15,9 @@ function PLUGIN:PostPlayerLoadout(client)
 				if v:GetData("attachments", {}) then
 					PrintTable(v:GetData("attachments", {}))
 					for k2, v2 in pairs(v:GetData("attachments", {})) do
-						PrintTable(k2)
-						print(k2)
-						PrintTable(v2)
+						print(client:GetCharacter():GetName())
 						print(v2)
 						if not client:GetCharacter():GetInventory():Add(ix.armortables.attachments[v2].uID) then
-							print(client:GetCharacter():GetName())
 							print(v2:GetName())
 							local position = client:GetItemDropPos()
 							ix.item.Spawn(ix.armortables.attachments[v2].uID, position, nil, AngleRand())
@@ -28,9 +25,8 @@ function PLUGIN:PostPlayerLoadout(client)
 							client:Notify("No space in your inventory! Items have been dropped.")
 						end	
 					end
+					v:SetData("attachments", v.miscSlots)
 				end
-
-				v:SetData("attachments", v.miscSlots)
 			end
 		end
 
