@@ -64,6 +64,10 @@ function playerMeta:getPercentageRadResist()
 			local attachments = i:GetData("attachments", i.miscSlots)
 			
 			for k,v in pairs(attachments) do
+				if !v then
+					continue
+				end
+
 				for _, attachment in pairs (v) do
 					if (!ix.armortables.attachments[attachment]) then continue end
 					if ix.armortables.attachments[attachment].radProt then
