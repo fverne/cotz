@@ -11,9 +11,14 @@ function PLUGIN:PostPlayerLoadout(client)
 	-- untested :)
 	-- if client:GetCharacter():GetData("bRemoveAttachments", true) then
 		for k, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
-			if v.isBodyArmor  then
+			if v.isBodyArmor then
 				if v:GetData("attachments", {}) then
+					PrintTable(v:GetData("attachments", {}))
 					for k2, v2 in pairs(v:GetData("attachments", {})) do
+						PrintTable(k2)
+						print(k2)
+						PrintTable(v2)
+						print(v2)
 						if not client:GetCharacter():GetInventory():Add(ix.armortables.attachments[v2].uID) then
 							print(client:GetCharacter():GetName())
 							print(v2:GetName())
