@@ -131,7 +131,7 @@ if (CLIENT) then
 		if !self.entity then
 			ix.util.DrawSuitResistances(tooltip, self)
 
-			if((self:GetData("maxMiscSlots")["exteriorSlots"] or 0) > 0) then
+			if((self.exteriorSlots or 0) > 0) then
 				local attachmenttitle = tooltip:AddRow("attachments1")
 				attachmenttitle:SetText("\nExterior Attachments: ")
 				attachmenttitle:SizeToContents()
@@ -139,7 +139,7 @@ if (CLIENT) then
 				local lastrow = attachmenttitle
 
 				local attachmentdata = self:GetData("attachments", {})["exteriorSlots"]
-				for i = 1, (self:GetData("maxMiscSlots")["exteriorSlots"] or 0) do
+				for i = 1, (self.exteriorSlots or 0) do
 					local attachmenttmp = tooltip:AddRowAfter("attachments1", "attachment1"..i)
 					local attachmentstr = "  ⬜ None"
 					attachmenttmp:SetTextColor(Color(120,120,120))
@@ -158,7 +158,7 @@ if (CLIENT) then
 				end
 			end
 
-			if((self:GetData("maxMiscSlots")["interiorSlots"] or 0) > 0) then
+			if((self.interiorSlots or 0) > 0) then
 				local attachmenttitle = tooltip:AddRow("attachments2")
 				attachmenttitle:SetText("\nInterior Attachments: ")
 				attachmenttitle:SizeToContents()
@@ -166,7 +166,7 @@ if (CLIENT) then
 				local lastrow = attachmenttitle
 
 				local attachmentdata = self:GetData("attachments", {})["interiorSlots"]
-				for i = 1, (self:GetData("maxMiscSlots")["interiorSlots"] or 0) do
+				for i = 1, (self.interiorSlots or 0) do
 					local attachmenttmp = tooltip:AddRowAfter("attachments2", "attachment2"..i)
 					local attachmentstr = "  ⬜ None"
 					attachmenttmp:SetTextColor(Color(120,120,120))
@@ -185,7 +185,7 @@ if (CLIENT) then
 				end
 			end
 
-			if((self:GetData("maxMiscSlots")["extraSlots"] or 0) > 0) then
+			if((self.interiorSlots or 0) > 0) then
 				local attachmenttitle = tooltip:AddRow("attachments3")
 				attachmenttitle:SetText("\nMiscellaneous Attachments: ")
 				attachmenttitle:SizeToContents()
@@ -193,7 +193,7 @@ if (CLIENT) then
 				local lastrow = attachmenttitle
 
 				local attachmentdata = self:GetData("attachments", {})["extraSlots"]
-				for i = 1, (self:GetData("maxMiscSlots")["extraSlots"] or 0) do
+				for i = 1, (self.interiorSlots or 0) do
 					local attachmenttmp = tooltip:AddRowAfter("attachments3", "attachment3"..i)
 					local attachmentstr = "  ⬜ None"
 					attachmenttmp:SetTextColor(Color(120,120,120))
