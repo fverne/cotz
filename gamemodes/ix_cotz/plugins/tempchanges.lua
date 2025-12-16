@@ -16,9 +16,8 @@ function PLUGIN:PlayerLoadout(client)
 					PrintTable(v:GetData("attachments", {}))
 					for k2, v2 in pairs(v:GetData("attachments", {})) do
 						print(client:GetCharacter():GetName())
-						print(v2)
 						if not client:GetCharacter():GetInventory():Add(ix.armortables.attachments[v2].uID) then
-							print(v2:GetName())
+							print(v2)
 							local position = client:GetItemDropPos()
 							ix.item.Spawn(ix.armortables.attachments[v2].uID, position, nil, AngleRand())
 							position = position + Vector(0, 0, 5)
