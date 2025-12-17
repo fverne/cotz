@@ -52,12 +52,14 @@ ix.command.Add("CharCheckBankInventory", {
 				-- bank:SetOwner(target:GetID())
 			end)
 
-			ix.storage.Open(client, bankInventory, {
-				entity = target:GetPlayer(),
-				name = "Personal Storage",
-				searchText = "Accessing personal storage...",
-				searchTime = ix.config.Get("containerOpenTime", 0)
-			})
+			timer.Simple(0.1, function()
+				ix.storage.Open(client, bankInventory, {
+					entity = target:GetPlayer(),
+					name = "Personal Storage",
+					searchText = "Accessing personal storage...",
+					searchTime = ix.config.Get("containerOpenTime", 0)
+				})
+			end)
 		
 			if (target and target != client) then
 				bankInventory:Sync(client)
