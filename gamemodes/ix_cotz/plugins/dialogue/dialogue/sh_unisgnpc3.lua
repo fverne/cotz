@@ -524,14 +524,17 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 				client:Notify("You are extremely overencumbered and can't do that!")
 				return "BackTopic"
 			end
-			if !(ix.item.instances[target.selectedsuitstruct[1]]:GetData("attachments",{})[1] == nil) then
+			local originalSuit = ix.item.instances[target.selectedsuitstruct[1]]
+			if !table.IsEmpty((originalSuit:GetData("attachments", originalSuit.miscSlots)["exteriorSlots"])) or 
+			!table.IsEmpty((originalSuit:GetData("attachments", originalSuit.miscSlots)["interiorSlots"])) or 
+			!table.IsEmpty((originalSuit:GetData("attachments", originalSuit.miscSlots)["extraSlots"])) then
 				client:Notify("Can't exchange suit with installed attachments!")
 				return "BackTopic"
 			end
 			ix.dialogue.notifyMoneyLost(client, ix.currency.Get(target.selectedsuitstruct[3]))
 			client:GetCharacter():TakeMoney(target.selectedsuitstruct[3])
 
-			ix.item.instances[target.selectedsuitstruct[1]]:Remove()
+			originalSuit:Remove()
 			client:GetCharacter():SetData("carry", ix.weight.CalculateWeight(client:GetCharacter()))
 			client:GetCharacter():GetInventory():Add(dyndata.suitVariantUID)
 		end
