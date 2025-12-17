@@ -59,18 +59,18 @@ ix.command.Add("CharCheckBankInventory", {
 					searchText = "Accessing personal storage...",
 					searchTime = ix.config.Get("containerOpenTime", 0)
 				})
+			
+				if (target and target != client) then
+					bankInventory:Sync(client)
+					bankInventory:AddReceiver(client)
+					
+					-- netstream.Start(client, "invCheckBank", inventory:GetID())
+				elseif target == client then
+					client:Notify("Can't check yourself")
+				else
+					client:Notify("Player not found")
+				end
 			end)
-		
-			if (target and target != client) then
-				bankInventory:Sync(client)
-				bankInventory:AddReceiver(client)
-				
-				-- netstream.Start(client, "invCheckBank", inventory:GetID())
-	        elseif target == client then
-	        	client:Notify("Can't check yourself")
-	        else
-	            client:Notify("Player not found")
-	        end
 	    end
 	end
 })
