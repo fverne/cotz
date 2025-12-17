@@ -612,6 +612,10 @@ function ITEM:getBR()
 	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
+		if !v then
+			continue
+		end
+
 		for _, attachment in pairs (v) do
 			if (!ix.armortables.attachments[attachment]) then continue end
 			if ix.armortables.attachments[attachment].br then
@@ -664,6 +668,10 @@ function ITEM:getSR()
 	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
+		if !v then
+			continue
+		end
+		
 		for _, attachment in pairs (v) do
 			if (!ix.armortables.attachments[attachment]) then continue end
 			if ix.armortables.attachments[attachment].sr then
@@ -716,6 +724,10 @@ function ITEM:getPR()
 	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
+		if !v then
+			continue
+		end
+		
 		for _, attachment in pairs (v) do
 			if (!ix.armortables.attachments[attachment]) then continue end
 			if ix.armortables.attachments[attachment].pr then
@@ -742,6 +754,10 @@ function ITEM:getFPR()
 	local attachments = self:GetData("attachments", self.miscSlots)
 
 	for k,v in pairs(attachments) do
+		if !v then
+			continue
+		end
+		
 		for _, attachment in pairs (v) do
 			if (!ix.armortables.attachments[attachment]) then continue end
 			if ix.armortables.attachments[attachment].fpr then
@@ -774,6 +790,10 @@ function ITEM:getAR()
 	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
+		if !v then
+			continue
+		end
+		
 		for _, attachment in pairs (v) do
 			if (!ix.armortables.attachments[attachment]) then continue end
 			if ix.armortables.attachments[attachment].ar then
@@ -806,6 +826,10 @@ function ITEM:getRadProt()
 	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
+		if !v then
+			continue
+		end
+		
 		for _, attachment in pairs (v) do
 			if (!ix.armortables.attachments[attachment]) then continue end
 			if ix.armortables.attachments[attachment].radProt then
@@ -853,6 +877,10 @@ function ITEM:GetWeight()
 	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
+		if !v then
+			continue
+		end
+		
 		for _, attachment in pairs (v) do
 			if (!ix.armortables.attachments[attachment]) then continue end
 			if ix.armortables.attachments[attachment].weight then
@@ -868,6 +896,10 @@ function ITEM:RunAllAttachmentAttach()
 	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
+		if !v then
+			continue
+		end
+		
 		for _, attachment in pairs (v) do
 			if (!ix.armortables.attachments[attachment]) then continue end
 			if ix.armortables.attachments[attachment].onAttach then
@@ -881,6 +913,10 @@ function ITEM:RunAllAttachmentDetach()
 	local attachments = self:GetData("attachments", self.miscSlots)
 
 	for k,v in pairs(attachments) do
+		if !v then
+			continue
+		end
+		
 		for _, attachment in pairs (v) do
 			if (!ix.armortables.attachments[attachment]) then continue end
 			if ix.armortables.attachments[attachment].onDetach then
