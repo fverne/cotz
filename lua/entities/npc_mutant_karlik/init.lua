@@ -305,9 +305,11 @@ function ENT:GetTeleportLocation( )
 			ignoreworld = false
 		} )
 
-		if !trace.HitSky && trace.HitPos:Distance(self:GetEnemy():GetPos()) > 600 then
-			tracegood = true
-			teleres = trace.HitPos
+		if IsValid(self:GetEnemy()) then
+			if !trace.HitSky && trace.HitPos:Distance(self:GetEnemy():GetPos()) > 600 then
+				tracegood = true
+				teleres = trace.HitPos
+			end
 		end
 
 		tracecnt = tracecnt + 1
