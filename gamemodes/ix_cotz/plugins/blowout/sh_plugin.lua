@@ -107,8 +107,10 @@ if (SERVER) then
     end
 
     function PLUGIN:RemoveBlowoutMarkFromPlayers()
-        for _, v in pairs(player.GetAll()) do            
-            v:GetCharacter():SetData("bInBlowoutWhenStart", false)
+        for _, v in pairs(player.GetAll()) do
+            if v:GetCharacter() then
+                v:GetCharacter():SetData("bInBlowoutWhenStart", false)
+            end        
         end
     end
 

@@ -49,7 +49,15 @@ function ITEM:PopulateTooltip(tooltip)
 			ix.util.DrawResistance(tooltip, "Radiation: ", ix.armortables.attachments[self.attachName].radProt, 0)
 		end
 		if (!self.entity) then
-	        ix.util.PropertyDesc(tooltip, "Suit Attachment", Color(64, 224, 208))
+			if ix.armortables.attachments[self.attachName].slot == "exteriorSlots" then
+	        	ix.util.PropertyDesc(tooltip, "Exterior Suit Attachment", Color(64, 224, 208))
+			end
+			if ix.armortables.attachments[self.attachName].slot == "interiorSlots" then
+	        	ix.util.PropertyDesc(tooltip, "Interior Suit Attachment", Color(64, 224, 208))
+			end
+			if ix.armortables.attachments[self.attachName].slot == "extraSlots" then
+	        	ix.util.PropertyDesc(tooltip, "Miscellaneous Suit Attachment", Color(64, 224, 208))
+			end
 		end
 		if ix.armortables.attachments[self.attachName].tooltip then
 	        ix.util.PropertyDesc(tooltip, ix.armortables.attachments[self.attachName].tooltip, Color(64, 224, 208))

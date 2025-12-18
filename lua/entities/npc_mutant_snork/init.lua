@@ -41,6 +41,7 @@ ENT.longjumping2 = 0
 
 ENT.hp = 200
 ENT.hpvar = 50
+ENT.injuredact = ACT_RUN_AIM_PISTOL
 
 ENT.FBR = 5
 ENT.FBRAP = 3
@@ -140,6 +141,11 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- npc wounded animation
+	if self:Health() < (self:GetMaxHealth() * 0.33) then
+		self:SetMovementActivity(self.injuredact)
+	end
+
 	-- LONGJUMP
 	if self.longjumping1 < CurTime() && self.IsLongJumping == 1 then 
 		if(IsValid(self)&&self!=nil&&self!=NULL) and self:GetEnemy() then

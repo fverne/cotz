@@ -152,7 +152,7 @@ if (SERVER) then
 
 	--disable damage from trigger_hurt
 	function PLUGIN:EntityTakeDamage( target, dmginfo )
-		if dmginfo:GetAttacker():GetClass() == "trigger_hurt" and dmginfo:GetDamageType() == DMG_GENERIC then
+		if dmginfo:GetAttacker() and dmginfo:GetAttacker():GetClass() == "trigger_hurt" and dmginfo:GetDamageType() == DMG_GENERIC then
 			return true
 		end
 	end

@@ -36,6 +36,7 @@ ENT.jumping2 = 0
 
 ENT.hp = 850
 ENT.hpvar = 20
+ENT.injuredact = ACT_WALK_PISTOL
 
 ENT.FBR = 5
 ENT.FBRAP = 10
@@ -96,6 +97,11 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- npc wounded animation
+	if self:Health() < (self:GetMaxHealth() * 0.33) then
+		self:SetMovementActivity(self.injuredact)
+	end
+
 	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
 		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
 		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,128) + self:OBBCenter()) - (self:GetPos())):GetNormal()
