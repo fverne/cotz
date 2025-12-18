@@ -29,6 +29,7 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
 ENT.hp = 450
 ENT.hpvar = 30
+ENT.injuredact = ACT_RUN_AIM_PISTOL
 
 ENT.FBR = 3
 ENT.FBRAP = 3
@@ -128,6 +129,11 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- npc wounded animation
+	if self:Health() < (self:GetMaxHealth() * 0.33) then
+		self:SetMovementActivity(self.injuredact)
+	end
+
 	-- PULLING
 	if (self.pulling1 < CurTime()) and self.isAttacking == 1 and self:GetEnemy() then
 		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))

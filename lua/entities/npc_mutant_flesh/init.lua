@@ -29,6 +29,7 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
 ENT.hp = 150
 ENT.hpvar = 25
+ENT.injuredact = ACT_DOD_RUN_ZOOM_BOLT
 
 ENT.FBR = 0
 ENT.FBRAP = 0
@@ -93,6 +94,11 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- npc wounded animation
+	if self:Health() < (self:GetMaxHealth() * 0.33) then
+		self:SetMovementActivity(self.injuredact)
+	end
+
 	if self:Health() < self:GetMaxHealth() then
 		self.RangeSchedule = SCHED_CHASE_ENEMY
 	end

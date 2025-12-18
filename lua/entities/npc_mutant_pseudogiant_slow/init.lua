@@ -29,6 +29,7 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
 ENT.hp = 4000
 ENT.hpvar = 100
+ENT.injuredact = ACT_DOD_PRONE_ZOOM_BAZOOKA
 
 ENT.CanSlam = 0
 ENT.isSlamming = 0
@@ -120,6 +121,11 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- npc wounded animation
+	if self:Health() < (self:GetMaxHealth() * 0.33) then
+		self:SetMovementActivity(self.injuredact)
+	end
+
 	-- SLAM 
 	if (self.slamming1 < CurTime() and self.isSlamming == 1 and self:GetEnemy()) then
 		self:EmitSound("Stalker.Pseudogiant.Idle1")

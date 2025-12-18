@@ -29,6 +29,7 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
 ENT.hp = 250
 ENT.hpvar = 20
+-- ENT.injuredact = ACT_RUN_AIM_PISTOL
 
 ENT.FBR = 2
 ENT.FBRAP = 8
@@ -101,6 +102,10 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- npc wounded animation -- no good for this
+	-- if self:Health() < (self:GetMaxHealth() * 0.33) then
+	-- 	self:SetMovementActivity(self.injuredact)
+	-- end
 
 	if (self.PsiAttackCancel < CurTime() and self.CanSpawn) then
 		self:STALKERNPCClearAnimation()

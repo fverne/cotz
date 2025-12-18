@@ -16,6 +16,7 @@ ENT.DieSound.max = 2
 
 ENT.hp = 750
 ENT.hpvar = 100
+ENT.injuredact = ACT_DOD_WALK_AIM_RIFLE
 
 ENT.FBR = 5
 ENT.FBRAP = 12
@@ -85,6 +86,10 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- npc wounded animation
+	if self:Health() < (self:GetMaxHealth() * 0.33) then
+		self:SetMovementActivity(self.injuredact)
+	end
 
 	if (self.farttimer < CurTime()) then
 		for _,v in pairs(ents.FindInSphere(self:GetPos(),256)) do

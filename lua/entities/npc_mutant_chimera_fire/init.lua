@@ -36,6 +36,7 @@ ENT.jumping2 = 0
 
 ENT.hp = 850
 ENT.hpvar = 20
+ENT.injuredact = ACT_WALK_PISTOL
 
 ENT.FBR = 7
 ENT.FBRAP = 15
@@ -115,6 +116,11 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- npc wounded animation
+	if self:Health() < (self:GetMaxHealth() * 0.33) then
+		self:SetMovementActivity(self.injuredact)
+	end
+
 	if self.IgniteTime < CurTime() then
 		self:Ignite(30)
 		self.IgniteTime = CurTime() + 29
