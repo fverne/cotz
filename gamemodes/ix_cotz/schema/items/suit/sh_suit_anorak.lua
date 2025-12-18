@@ -17,14 +17,17 @@ ITEM.isGasmask = false
 ITEM.isHelmet = false
 
 ITEM.br = 0.01
-ITEM.fbr = 0
+ITEM.fbr = 1
 ITEM.sr = 0.11
-ITEM.fsr = 0
+ITEM.fsr = 1
 ITEM.ar = 0.05
 ITEM.far = 1
+ITEM.radProt = 0.05
 
-ITEM.carryinc = 3.000
-ITEM.miscslots = 0
+ITEM.carryinc = 3.09
+ITEM.exteriorSlots = 1
+ITEM.interiorSlots = 0
+ITEM.extraSlots = 0
 
 ITEM.functions.Lift = {
 	name = "Lift Hood",

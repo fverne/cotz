@@ -8,29 +8,34 @@ ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/seva.png")
 ITEM.overlayPath = "vgui/overlays/hud_sci"
-ITEM.weight = 10.90
+ITEM.weight = 10.40
 ITEM.baseSuit = "suit_seva"
 ITEM.suitVariant = "fanatic"
 
-ITEM.price = 239000
+ITEM.price = 588500
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
 ITEM.isBackpack = true
 
-ITEM.br = 0.23
-ITEM.fbr = 2
-ITEM.sr = 0.33
-ITEM.fsr = 3
-ITEM.ar = 0.42
-ITEM.far = 3
-ITEM.pr = 0.45
-ITEM.fpr = 0
-ITEM.radProt = 0.6
+ITEM.br = 0.24
+ITEM.fbr = 1
+ITEM.sr = 0.36
+ITEM.fsr = 2
+ITEM.ar = 0.58
+ITEM.far = 2
 
-ITEM.carryinc = 29.000
-ITEM.miscslots = 4
+ITEM.pr = 0.52
+ITEM.fpr = 0
+
+ITEM.radProt = 0.98
+ITEM.flatRadProt = 0.02
+
+ITEM.carryinc = 22.65
+ITEM.exteriorSlots = 2
+ITEM.interiorSlots = 2
+ITEM.extraSlots = 2
 
 ITEM.skincustom[1] = {
 	name = "Skin 0",

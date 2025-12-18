@@ -11,21 +11,23 @@ ITEM.weight = 10.000
 ITEM.newSkin = 0
 ITEM.baseSuit = "suit_cs2"
 
-ITEM.price = 85280
+ITEM.price = 135280
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.15
+ITEM.br = 0.23
 ITEM.fbr = 1
-ITEM.sr = 0.18
-ITEM.fsr = 1
-ITEM.ar = 0.09
+ITEM.sr = 0.25
+ITEM.fsr = 2
+ITEM.ar = 0.20
 ITEM.far = 1
 
-ITEM.carryinc = 9.000
-ITEM.miscslots = 2
+ITEM.carryinc = 8.000
+ITEM.exteriorSlots = 2
+ITEM.interiorSlots = 2
+ITEM.extraSlots = 1
 
 
 ITEM.skincustom[1] = {

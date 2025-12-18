@@ -4,7 +4,7 @@ PLUGIN.name = "Check Inventory"
 PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Simple command to check inventory of target player"
 
-ix.command.Add("charcheckinv", {
+ix.command.Add("CharCheckInventory", {
 	adminOnly = true,
 	arguments = {
 		ix.type.character,
@@ -18,6 +18,7 @@ ix.command.Add("charcheckinv", {
 				inventory:Sync(client)
 				inventory:AddReceiver(client)
 				
+				client:Notify("Target has "..ix.currency.Get(target:GetMoney()))
 				netstream.Start(client, "invCheck", inventory:GetID())
 	        elseif target == client then
 	        	client:Notify("Can't check yourself")
@@ -28,7 +29,53 @@ ix.command.Add("charcheckinv", {
 	end
 })
 
-ix.command.Add("charcheckmoney", {
+ix.command.Add("CharCheckBankInventory", {
+	adminOnly = true,
+	arguments = {
+		ix.type.character,
+	},
+	OnRun = function(self, client, character)
+		if character then
+			local target = character
+			local bankID = target:GetData("bankID")
+			local bankInventory
+			
+			if bankID == nil then
+				client:Notify("No bank for "..character:GetName().."!")
+			end
+
+
+			local bankstruct = {}
+			bankstruct[bankID] = {target:GetData("bankW", ix.config.Get("bankW", 2)), target:GetData("bankH", ix.config.Get("bankH", 2))}
+			ix.inventory.Restore(bankstruct, ix.config.Get("bankW", 2), ix.config.Get("bankH", 2), function(inventory)
+				bankInventory = inventory
+				-- bank:SetOwner(target:GetID())
+			end)
+
+			timer.Simple(0.1, function()
+				ix.storage.Open(client, bankInventory, {
+					entity = target:GetPlayer(),
+					name = "Personal Storage",
+					searchText = "Accessing personal storage...",
+					searchTime = ix.config.Get("containerOpenTime", 0)
+				})
+			
+				if (target and target != client) then
+					bankInventory:Sync(client)
+					bankInventory:AddReceiver(client)
+					
+					-- netstream.Start(client, "invCheckBank", inventory:GetID())
+				elseif target == client then
+					client:Notify("Can't check yourself")
+				else
+					client:Notify("Player not found")
+				end
+			end)
+	    end
+	end
+})
+
+ix.command.Add("CharCheckMoney", {
 	adminOnly = true,
 	arguments = {
 		ix.type.character,

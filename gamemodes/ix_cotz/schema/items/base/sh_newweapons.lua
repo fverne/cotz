@@ -112,7 +112,7 @@ function ITEM:GetDescription()
 	local str = self.description.." \n\n"..self.longdesc
 
 	if (self.entity) then
-		return (self.description .. "\n \nWear: " .. math.floor(self:GetData("wear", 100)) .. "%\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
+		return (self.description .. "\n \nCleanliness: " .. math.floor(self:GetData("wear", 100)) .. "%\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 	else
 		//Attachments
 		str = str.."\n\nAttachments available:\n"
@@ -133,7 +133,7 @@ function ITEM:GetDescription()
 			str = str.."None\n"
 		end
 
-        return (str .. "\n \nWear: " .. math.floor(self:GetData("wear", 100)) .. "%\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
+        return (str .. "\n \nCleanliness: " .. math.floor(self:GetData("wear", 100)) .. "%\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 	end
 end
 
@@ -398,7 +398,7 @@ function ITEM:Equip(client)
 
 		-- if wish granted
 		if self:GetData("unlimitedDurability", nil) then
-			weapon.WearDamage = 0
+			-- weapon.WearDamage = 0
 			weapon.DurabilityDamageChance = 0
 		end
 
@@ -540,13 +540,13 @@ function ITEM:OnLoadout()
 			
 			-- if wish granted
 			if self:GetData("unlimitedDurability", nil) then
-				weapon.WearDamage = 0
+				-- weapon.WearDamage = 0
 				weapon.DurabilityDamageChance = 0
 			end
 
 			timer.Simple(0.1,function()
 				if IsValid(weapon) then
-					if self:GetData("ammoType") then
+					if self:GetData("ammoType") != nil then
 						weapon:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
 					end
 					weapon:SetClip1(self:GetData("ammo", 0))
@@ -598,7 +598,9 @@ function ITEM:OnSave()
 
 		local ammoType = weapon:GetPrimaryAmmoType()
 
-		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+		if self.player:GetActiveWeapon() == weapon and string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
+		elseif string.sub(game.GetAmmoName(ammoType), -1) == "-" then
 			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
 		else
 			self:SetData("ammoType", nil)
@@ -648,8 +650,6 @@ ITEM.functions.detach = {
 	OnRun = function(item, data)
 		if data[1] then
 
-			item.player:GetCharacter():GetInventory():Add(ix.weapontables.attachments[data[1]].uID)
-
 			local curattach = item:GetData("attachments") or {}
 			local iterator = 0
 			for i = 1, #curattach do
@@ -659,19 +659,30 @@ ITEM.functions.detach = {
 				end
 			end
 			
-			if table.remove(curattach,iterator) != data[1] then
+			if curattach[iterator] ~= data[1] then
 				return false
 			end
+			table.remove(curattach,iterator)
 
+			
+			if not item.player:GetCharacter():GetInventory():Add(ix.weapontables.attachments[data[1]].uID) then
+				local position = item.player:GetItemDropPos()
+				ix.item.Spawn(ix.weapontables.attachments[data[1]].uID, position, nil, AngleRand())
+				position = position + Vector(0, 0, 5)
+				item.player:Notify("No space in your inventory! Items have been dropped.")
+			end	
+
+			
 			local wepon = item.player:GetWeapon(item.class)
 			-- If you're holding right weapon, just mod it out.
             if (IsValid(wepon) and wepon:GetClass() == item.class) then
                 wepon:detachSpecificAttachment(data[1])
 			end
 			item:SetData("attachments", curattach)
-
+			ix.weight.Update(item.player:GetCharacter())
 		else
 			item.player:Notify("No attachment selected.")
+			
 		end
 		return false
 	end,

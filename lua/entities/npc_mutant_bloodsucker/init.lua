@@ -34,6 +34,7 @@ ENT.CanSuck = 0
 
 ENT.hp = 300
 ENT.hpvar = 25
+ENT.injuredact = ACT_RUN_AIM_PISTOL
 
 ENT.FBR = 5
 ENT.FBRAP = 5
@@ -145,6 +146,11 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- npc wounded animation
+	if self:Health() < (self:GetMaxHealth() * 0.33) then
+		self:SetMovementActivity(self.injuredact)
+	end
+
 	if(self.PostSuccRunFinish<CurTime()) then
 		self.RangeSchedule = SCHED_CHASE_ENEMY
 	else

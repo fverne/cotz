@@ -46,12 +46,15 @@ if CLIENT then
 	SWEP.ShortDotPos = Vector(3.51, -3, 1.395)
 	SWEP.ShortDotAng = Vector(0, 0.6, 0)
 	
-	SWEP.ACOGPos = Vector(3.52, -3, 1.1)
+	SWEP.ACOGPos = Vector(3.53, -3.5, 1.45)
 	SWEP.ACOGAng = Vector(0, 0.6, 0)
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
 
 	SWEP.NXSPos = Vector(3.6, 0, 1.15)
 	SWEP.NXSAng = Vector(0, 0.6, 0)
+	
+	SWEP.SightBackUpPos = Vector(5.3, 0, 0.5)
+	SWEP.SightBackUpAng = Vector(0, 0.5, 40)
 	
 	SWEP.SprintPos = Vector(-4.444, -1, 0.082)
 	SWEP.SprintAng = Vector(-12.849, -39.23, 0)

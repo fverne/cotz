@@ -49,6 +49,7 @@ AddNPC("Bear","npc_mutant_bear")
 AddNPC("Skeleton","npc_mutant_skeleton")
 
 AddNPC("Chimera (Electro)","npc_mutant_chimera_electro")
+AddNPC("Chimera (Fire)","npc_mutant_chimera_fire")
 
 AddNPC("Pseudogiant (Fast)","npc_mutant_pseudogiant_fast")
 AddNPC("Pseudogiant (Slow)","npc_mutant_pseudogiant_slow")
@@ -419,6 +420,9 @@ AddSound("Stalker.ZombieB.Die18",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"npc/zombie_
 ----IDLE
 AddSound("Stalker.Boar.Idle1",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/boar/boar_idle_1.wav")
 AddSound("Stalker.Boar.Idle2",CHAN_VOICE,1,TEMP_IDLEDIST,98,102,"hgn/stalker/creature/boar/boar_idle_2.wav")
+----CHASE
+AddSound("Stalker.Boar.Chase1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/boar/boar_aggressive_1.wav")
+AddSound("Stalker.Boar.Chase2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/boar/boar_aggressive_2.wav")
 ----HIT
 AddSound("Stalker.Boar.Melee1",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/boar/boar_attack_1.wav")
 AddSound("Stalker.Boar.Melee2",CHAN_VOICE,1,TEMP_ANGERDIST,98,102,"hgn/stalker/creature/boar/boar_attack_2.wav")

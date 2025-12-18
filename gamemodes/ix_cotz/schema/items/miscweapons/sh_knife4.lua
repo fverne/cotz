@@ -4,7 +4,7 @@ ITEM.model = "models/weapons/w_csgo_bayonet.mdl"
 ITEM.longdesc = "A battered bayonet which has seen military use. While it's use in survival scenarios is questionable, it has seen combat beyond many other types of knives. So much, that the attachment section has broken off."
 ITEM.category = "Knife"
 
-ITEM.price = 31550
+ITEM.price = 111550
 ITEM.height = 1
 ITEM.width = 2
 
@@ -15,7 +15,7 @@ ITEM.repairCost = ITEM.price/100*1
 
 ITEM.weight = 1.900
 
-ITEM.knifetier = 3
+ITEM.knifetier = 5
 ITEM.isPoachKnife = true
 
 ITEM.exRender = true
@@ -49,6 +49,7 @@ ITEM.pacData = {
 				["ClassName"] = "event",
 				["UniqueID"] = "combatknife_2",
 				["Event"] = "weapon_class",
+				["Invert"] = false,
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
 				["Arguments"] = "tfa_nmrih_combatknife@@0",

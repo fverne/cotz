@@ -10,7 +10,8 @@ ITEM.height = 1
 ITEM.price = 1450
 
 ITEM.quantity = 1
-ITEM.restore = 15
+ITEM.restore = 6
+ITEM.restoreduration = 5
 ITEM.psyheal = 40
 
 ITEM.weight = 0.035
@@ -33,18 +34,18 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 		
-		item.player:AddBuff("buff_slowheal", 5, { amount = item.restore/5 })
+		item.player:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
 		item.player:AddBuff("buff_psyheal", 60, { amount = item.psyheal/120 })
-
+		
+		ix.chat.Send(item.player, "iteminternal", "injects himself with the "..item.name..".", false)
+		
 		quantity = quantity - 1
 
 		if (quantity >= 1) then
 			item:SetData("quantity", quantity)
 			return false
 		end
-		
-		ix.chat.Send(item.player, "iteminternal", "injects himself with the "..item.name..".", false)
-		
+
 		return true
 	end,
 	OnCanRun = function(item)

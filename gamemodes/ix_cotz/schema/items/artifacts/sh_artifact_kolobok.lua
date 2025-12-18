@@ -18,7 +18,7 @@ ITEM.functions.use = {
     	local TEMP_TargetDamage = DamageInfo()
 						
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Stabbing self with Kolobok", 4, function(player) 
-            TEMP_TargetDamage:SetDamage(180)
+            TEMP_TargetDamage:SetDamage(99)
 			TEMP_TargetDamage:SetAttacker(player)
 			TEMP_TargetDamage:SetDamageType(DMG_BULLET)
 			TEMP_TargetDamage:SetInflictor(player)

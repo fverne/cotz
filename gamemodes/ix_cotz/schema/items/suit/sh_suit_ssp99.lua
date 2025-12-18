@@ -8,10 +8,10 @@ ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/ssp99.png")
 ITEM.overlayPath = "vgui/overlays/hud_sci"
-ITEM.weight = 7.90
+ITEM.weight = 2.900
 ITEM.newSkin = 0
 
-ITEM.price = 146000
+ITEM.price = 96000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = true
@@ -22,14 +22,19 @@ ITEM.br = 0.01
 ITEM.fbr = 1
 ITEM.sr = 0.01
 ITEM.fsr = 0
-ITEM.ar = 0.80
+ITEM.ar = 0.70
 ITEM.far = 5
+
 ITEM.pr = 0.50
 ITEM.fpr = 0
-ITEM.radProt = 1
 
-ITEM.carryinc = 25
-ITEM.miscslots = 4
+ITEM.radProt = 0.99
+ITEM.flatRadProt = 0.02
+
+ITEM.carryinc = 2.61
+ITEM.exteriorSlots = 1
+ITEM.interiorSlots = 1
+ITEM.extraSlots = 1
 
 ITEM.skincustom[1] = {
 	name = "Skin 0",

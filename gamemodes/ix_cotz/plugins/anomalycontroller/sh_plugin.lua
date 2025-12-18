@@ -102,7 +102,7 @@ if SERVER then
 			idat = table.Random(self.anomalydefs[anomalyselector].veryRareArtifacts)
 		end
 
-		ix.item.Spawn(idat, point[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), function(item, ent) ent.bTemporary = true ent.bArtifact = true end, AngleRand(), {})
+		ix.item.Spawn(idat, point[1] + Vector( math.Rand(-8,8), math.Rand(-8,8), 20 ), function(item, ent) item:SetData("bTemporary", true) ent.bTemporary = true ent.bArtifact = true end, AngleRand(), {})
 
 	end
 

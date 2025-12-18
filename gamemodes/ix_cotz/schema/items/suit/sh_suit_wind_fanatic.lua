@@ -12,21 +12,23 @@ ITEM.newSkin = 6
 ITEM.baseSuit = "suit_wind"
 ITEM.suitVariant = "fanatic"
 
-ITEM.price = 79700
+ITEM.price = 109450
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.13
-ITEM.fbr = 1
-ITEM.sr = 0.18
+ITEM.br = 0.15
+ITEM.fbr = 2
+ITEM.sr = 0.25
 ITEM.fsr = 1
-ITEM.ar = 0.12
+ITEM.ar = 0.18
 ITEM.far = 2
 
-ITEM.carryinc = 15.000
-ITEM.miscslots = 1
+ITEM.carryinc = 4.950
+ITEM.exteriorSlots = 2
+ITEM.interiorSlots = 1
+ITEM.extraSlots = 2
 
 
 -- ITEM.skincustom[1] = {

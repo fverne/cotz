@@ -29,6 +29,7 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
 ENT.hp = 150
 ENT.hpvar = 20
+ENT.injuredact = ACT_RUN_AIM_PISTOL
 
 ENT.FBR = 2
 ENT.FBRAP = 4
@@ -158,6 +159,11 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- npc wounded animation
+	if self:Health() < (self:GetMaxHealth() * 0.33) then
+		self:SetMovementActivity(self.injuredact)
+	end
+
 	if self.IgniteTime < CurTime() then
 		self:Ignite(30)
 		self.IgniteTime = CurTime() + 29

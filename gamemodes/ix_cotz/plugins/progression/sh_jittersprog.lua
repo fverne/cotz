@@ -1,11 +1,14 @@
+local map = "rp_marsh_cs"
+
 ix.progression.Register("jittersItemDelivery_medical1", {
 	name = "Due Treatment 1",
 	description = "Jitters take a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["jittersItemDelivery_medical1"] = ix.progression.status["jittersItemDelivery_medical1"] or {}
-		local dat = ix.progression.status["jittersItemDelivery_medical1"].complexData
+		local dat = status or ix.progression.status["jittersItemDelivery_medical1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -92,9 +95,10 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 	description = "Jitters take a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["jittersItemDelivery_medical2"] = ix.progression.status["jittersItemDelivery_medical2"] or {}
-		local dat = ix.progression.status["jittersItemDelivery_medical2"].complexData
+		local dat = status or ix.progression.status["jittersItemDelivery_medical2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -184,9 +188,10 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 	description = "Jitters take a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["jittersItemDelivery_medical3"] = ix.progression.status["jittersItemDelivery_medical3"] or {}
-		local dat = ix.progression.status["jittersItemDelivery_medical3"].complexData
+		local dat = status or ix.progression.status["jittersItemDelivery_medical3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -273,9 +278,10 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 	description = "Jitters take a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["jittersItemDelivery_medical4"] = ix.progression.status["jittersItemDelivery_medical4"] or {}
-		local dat = ix.progression.status["jittersItemDelivery_medical4"].complexData
+		local dat = status or ix.progression.status["jittersItemDelivery_medical4"].complexData
 
 		local itemids = self:GetItemIds()
 

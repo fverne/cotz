@@ -97,7 +97,7 @@ SWEP.WElements = {
 }
 
 function SWEP:PrimaryAttack()
-    if (self.UseDel < CurTime() and self.Owner:GetCharacter():GetInventory():HasItem("value_bolts")) then
+    if (self.UseDel < CurTime() and (self.Owner:GetCharacter():GetInventory():HasItem("artifact_bolt") or self.Owner:GetCharacter():GetInventory():HasItem("value_bolts"))) then
         local noremove = false
         self.UseDel = CurTime() + 3
         self.Owner:DoAttackEvent()
@@ -106,18 +106,19 @@ function SWEP:PrimaryAttack()
 
         if (SERVER) then
             timer.Simple(0.9, function()
-                local item = self.Owner:GetCharacter():GetInventory():HasItem("value_bolts")
-                if not item then return end
+            	local item = self.Owner:GetCharacter():GetInventory():HasItem("artifact_bolt")
+                if not item then 
+                	local item = self.Owner:GetCharacter():GetInventory():HasItem("value_bolts")
+                	if not item then return end
+	                if (item.quantity) then
+	                    item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
+	                    noremove = (item:GetData("quantity", item.quantity) > 0)
+	                end
 
-                if (item.quantity) then
-                    item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
-                    noremove = (item:GetData("quantity", item.quantity) > 0)
-                end
-
-                if (not noremove) then
-                    item:Remove()
-                end
-
+	                if (not noremove) then
+	                    item:Remove()
+	                end
+	            end
                 self:EmitSound(Sound("weapons/slam/throw.wav", 100, 100))
                 local bolt = ents.Create("ent_stalker_bolt")
                 bolt:SetPos(self.Owner:GetShootPos() + self.Owner:GetAimVector() * 10)
@@ -224,6 +225,7 @@ anomalies["models/lostsignalproject/items/artefacts/cell.mdl"] = true -- cell
 anomalies["models/lostsignalproject/items/artefacts/bracelet.mdl"] = true -- panacea
 anomalies["models/lostsignalproject/items/artefacts/bat.mdl"] = true --gaia
 anomalies["models/jessev92/stalker/weapons/bolt_w.mdl"] = true -- bolt
+anomalies["models/lostsignalproject/items/artefacts/grapes.mdl"] = true -- grapes
 
 --[[
 anomalies["models/nasca/etherealsrp_artifacts/battery.mdl"] = true

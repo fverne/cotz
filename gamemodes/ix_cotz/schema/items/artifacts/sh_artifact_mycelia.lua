@@ -7,7 +7,7 @@ ITEM.height = 1
 ITEM.price = 7900
 ITEM.flag = "A"
 ITEM.rarity = 3
-ITEM.baseweight = 2.500
+ITEM.baseweight = 1.500
 ITEM.varweight  = 0.500
 
 ITEM.functions.use = {
@@ -16,7 +16,7 @@ ITEM.functions.use = {
     sound = "stalkersound/inv_eat_mutant_food.mp3",
     OnRun = function(item)
         if(item:GetData("cooldown",0) < os.time())then
-        	item:SetData("cooldown", os.time()+(3600*2) ) --2 hours
+        	item:SetData("cooldown", os.time()+(60*15) ) --15 minutes
 
             ix.chat.Send(item.player, "iteminternal", "scrapes some mold off their "..item.name.." and eats it.", false)
 

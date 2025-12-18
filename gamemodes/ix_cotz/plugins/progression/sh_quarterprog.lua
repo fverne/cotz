@@ -1,11 +1,14 @@
+local map = "rp_waystation"
+
 ix.progression.Register("quartermasterItemDelivery_1", {
 	name = "Gearing Up 1",
 	description = "Introduce yourself to Quartermaster.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_1"] = ix.progression.status["quartermasterItemDelivery_1"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_1"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -89,9 +92,10 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 	description = "Help Quartermaster secure a weapon shipment.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_11"] = ix.progression.status["quartermasterItemDelivery_11"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_11"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_11"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -178,9 +182,10 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 	description = "Help Quartermaster snatch a shipment.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_111"] = ix.progression.status["quartermasterItemDelivery_111"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_111"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -266,9 +271,10 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 	description = "Help Quartermaster clear his supply lines.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_1111"] = ix.progression.status["quartermasterItemDelivery_1111"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_1111"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_1111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -349,9 +355,10 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 	description = "Help Quartermaster close a sale with some shady customers.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_112"] = ix.progression.status["quartermasterItemDelivery_112"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_112"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_112"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -439,9 +446,10 @@ ix.progression.Register("quartermasterItemDelivery_1121", {
 	description = "Help Quartermaster establish a new supply line.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_1121"] = ix.progression.status["quartermasterItemDelivery_1121"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_1121"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_1121"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -526,9 +534,10 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 	description = "Help Quartermaster get friendly with the Russians.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_11211"] = ix.progression.status["quartermasterItemDelivery_11211"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_11211"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_11211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -610,9 +619,10 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 	description = "Help Quartermaster expand his personal defence arsenal.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_12"] = ix.progression.status["quartermasterItemDelivery_12"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_12"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_12"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -697,9 +707,10 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 	description = "Prove your worth to Quartermaster.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_121"] = ix.progression.status["quartermasterItemDelivery_121"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_121"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_121"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -780,9 +791,10 @@ ix.progression.Register("quartermasterItemDelivery_122", {
 	description = "Help Quartermaster work with his Western supplier.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_122"] = ix.progression.status["quartermasterItemDelivery_122"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_122"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_122"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -864,9 +876,10 @@ ix.progression.Register("quartermasterItemDelivery_1221", {
 	description = "Help Quartermaster expand his Western operation.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_1221"] = ix.progression.status["quartermasterItemDelivery_1221"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_1221"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_1221"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -948,9 +961,10 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 	description = "Help Quartermaster further expand his Western operation.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_12211"] = ix.progression.status["quartermasterItemDelivery_12211"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_12211"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_12211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1030,9 +1044,10 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 	description = "Help Quartermaster with his hand cannon problem.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_2"] = ix.progression.status["quartermasterItemDelivery_2"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_2"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1115,9 +1130,10 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 	description = "Help Quartermaster complete his revolver supply.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_21"] = ix.progression.status["quartermasterItemDelivery_21"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_21"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_21"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1202,9 +1218,10 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 	description = "Help Quartermaster fulfill his SMG stocks.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_211"] = ix.progression.status["quartermasterItemDelivery_211"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_211"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1285,9 +1302,10 @@ ix.progression.Register("quartermasterItemDelivery_212", {
 	description = "Help Quartermaster fulfill a request from the West.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_212"] = ix.progression.status["quartermasterItemDelivery_212"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_212"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_212"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1370,9 +1388,10 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 	description = "Help Quartermaster complete his Western contract.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_2121"] = ix.progression.status["quartermasterItemDelivery_2121"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_2121"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_2121"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1455,9 +1474,10 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 	description = "Help Quartermaster pick out some precision weapons.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_22"] = ix.progression.status["quartermasterItemDelivery_22"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_22"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_22"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1542,9 +1562,10 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 	description = "Help Quartermaster appease the locals.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_221"] = ix.progression.status["quartermasterItemDelivery_221"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_221"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_221"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1625,9 +1646,10 @@ ix.progression.Register("quartermasterItemDelivery_222", {
 	description = "Help Quartermaster expand into the precision rifles market.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_222"] = ix.progression.status["quartermasterItemDelivery_222"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_222"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_222"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1708,9 +1730,10 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 	description = "Help Quartermaster top off his stock.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quartermasterItemDelivery_2221"] = ix.progression.status["quartermasterItemDelivery_2221"] or {}
-		local dat = ix.progression.status["quartermasterItemDelivery_2221"].complexData
+		local dat = status or ix.progression.status["quartermasterItemDelivery_2221"].complexData
 
 		local itemids = self:GetItemIds()
 

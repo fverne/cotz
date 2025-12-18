@@ -25,24 +25,24 @@ if SERVER then
 			inventory:Add(idat[1], 1, idat[2] or {})
 		end
 
-		local appTime = self.categoryDefs[containerent:GetCyclicalCategory()].appearTime
-
-		containerent.cyclicalDisappearTime = os.time() + appTime + math.random(-appTime/10, appTime/10)
-		containerent.cyclicalAppearTime = nil
 	end
 
 	function PLUGIN:DisappearContainer(containerent, firstspawn)
 		containerent:SetNoDraw(true)
 		containerent:SetCollisionGroup(COLLISION_GROUP_WORLD)
 
+		local appTime = self.categoryDefs[containerent:GetCyclicalCategory()].appearTime
 		local disTime = self.categoryDefs[containerent:GetCyclicalCategory()].disappearTime
 
 		if firstspawn then
 			containerent.cyclicalAppearTime = os.time() + math.random(0, disTime*2)
-		else
-			containerent.cyclicalAppearTime = os.time() + disTime + math.random(-disTime/10, disTime/10)
+		else -- we calculate the timers when container disappears 
+			while containerent.cyclicalAppearTime + appTime < os.time() do 
+				-- So we don't spend three billion years catching up to the current time
+				containerent.cyclicalAppearTime = containerent.cyclicalAppearTime + disTime + math.random(-disTime/10, disTime/10)
+			end
 		end
-		containerent.cyclicalDisappearTime = nil
+		containerent.cyclicalDisappearTime = containerent.cyclicalAppearTime + appTime + math.random(-appTime/10, appTime/10)
 	end
 
 
@@ -62,18 +62,12 @@ if SERVER then
 					self:DisappearContainer(v, true)
 				end
 
-				-- Container waking up after not being ticked for a long time (5min)
-				if (v.cyclicalAppearTime and (os.time() - v.cyclicalAppearTime) > 300) then
-					self:DisappearContainer(v)
-				end
-
-				-- It's time for the stash to appear
-				if (v.cyclicalAppearTime and v.cyclicalAppearTime < os.time()) then
-					self:AppearContainer(v)
-				end
-				-- It's time for the stash to disappear
+				-- Normal container cycle
 				if (v.cyclicalDisappearTime and v.cyclicalDisappearTime < os.time()) then
 					self:DisappearContainer(v)
+				-- use v:GetNoDraw() so we can avoid loops and interracting with timers in AppearContainer()
+				elseif (v.cyclicalAppearTime and v.cyclicalAppearTime < os.time() and v:GetNoDraw()) then
+					self:AppearContainer(v)
 				end
 			end
 		end

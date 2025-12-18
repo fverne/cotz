@@ -16,7 +16,7 @@ ITEM.unloadedweight = 2.26
 
 
 function ITEM:GetWeight()
-  return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
+  return self:GetData("weight", self.unloadedweight) + (self.bulletweight * self:GetData("ammo", 0))
 end
 
 ITEM.model = "models/khrcw2/doipack/w_ithaca37.mdl"
@@ -51,6 +51,7 @@ ITEM.pacData = {
 				["ClassName"] = "event",
 				["UniqueID"] = "ithaca37_2",
 				["Event"] = "weapon_class",
+				["Invert"] = false,
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
 				["Arguments"] = "cw_ithaca37@@0",

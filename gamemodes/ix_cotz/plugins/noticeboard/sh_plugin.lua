@@ -29,13 +29,14 @@ if (SERVER) then
 				local physObject = ent:GetPhysicsObject()
 
 				if (physObject) then
-					physObject:EnableMotion()
+					physObject:EnableMotion(false)
+					physObject:Sleep()
 				end
 			end
 		end
 	end
 
-    local cooldown = 604800 -- 1 week
+    local cooldown = 1209600 -- 2 week
 
     function PLUGIN:NoticeWipeCheck()
         local nextWipe = cookie.GetNumber("ixNoticesTimeUntilWipe", 0)

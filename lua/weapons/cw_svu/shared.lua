@@ -59,7 +59,7 @@ if CLIENT then
 	
 	SWEP.PSOPos = Vector(-2.914, 0, 0.449)
 	SWEP.PSOAng = Vector(0, 0.349, 0)
-	
+
 	SWEP.KobraPos = Vector(-3.08, 0, 0.759)
 	SWEP.KobraAng = Vector(-0.532, 0.15, 0)
 	
@@ -68,14 +68,15 @@ if CLIENT then
 	
 	SWEP.AlternativePos = Vector(-0.32, 0, -0.64)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
-	
+
+	SWEP.SightBackUpPos = Vector(-5.5, 5, 0)
+	SWEP.SightBackUpAng = Vector(1, 0.5, -40)
+
 	SWEP.CustomizePos = Vector(4.82, 0, 0)
     SWEP.CustomizeAng = Vector(5.859, 32.592, 0)
 	
 	SWEP.SprintPos = Vector(4.677, -2.023, -2.2)
     SWEP.SprintAng = Vector(1.069, 46.634, 0)
-	
-	SWEP.BackupSights = {["md_acog"] = {[1] = Vector(-2.211, -4, -0.95), [2] = Vector(-2, 0, 0)}}
 
 	SWEP.ACOGAxisAlign = {right = -0.5, up = 0, forward = 0}
 	SWEP.SchmidtShortDotAxisAlign = {right = -2, up = 0, forward = 0}
@@ -174,7 +175,8 @@ SWEP.Shots = 1
 SWEP.Damage = 200
 SWEP.DeployTime = 1.3
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 -- SWEP.RecoilToSpread = .75

@@ -110,17 +110,24 @@ else
 			local cnt = 0
 			local rewardItem = barterdict.barterItem
 
-			for k,v in pairs(barterdict.reqItem)do
-				if v[1] == item then
-					cnt = v[2] or 1
-				end
+			if barterdict.reqItem[1] == item then
+				cnt = barterdict.reqItem[2] or 1
 			end
 
 			if(cnt > 0)then
 				if ix.npcbarter.ConsumeItems(pl, item, cnt) then
+					for i=1,cnt do
+						ix.dialogue.notifyItemLost(pl, ix.item.list[barterdict.reqItem[1]].name)
+					end
 					rewardCnt = rewardItem[2] or 1
-
-					pl:GetCharacter():GetInventory():Add(rewardItem[1], rewardCnt, rewardItem[3] or {})
+					for i=1,rewardCnt do
+						if (pl:GetCharacter() and !pl:GetCharacter():GetInventory():Add(rewardItem[1], 1, rewardItem[3] or {})) then
+            				ix.item.Spawn(rewardItem[1], pl:GetItemDropPos(), nil, AngleRand(), rewardItem[3] or {})
+            				pl:Notify("No space in your inventory! Items have been dropped.")
+            			end
+            			ix.dialogue.notifyItemGet(pl, ix.item.list[rewardItem[1]].name)
+          			end
+					--pl:GetCharacter():GetInventory():Add(rewardItem[1], rewardCnt, rewardItem[3] or {}) - old one (items disappear when the inventory is full)
 
 					out = "Successfully bartered "..cnt.."x "..ix.item.list[item].name.." to "..rewardCnt.."x "..ix.item.list[rewardItem[1]].name.."."
 				else

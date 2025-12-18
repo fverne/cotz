@@ -19,7 +19,7 @@ PLUGIN.buffs[ "buff_slowheal" ] = {
 		if player.timeNextHeal < CurTime() then
 			player:SetHealth(math.Clamp(player:Health() + (parameter.amount or 1), 0, player:GetMaxHealth()))
 
-			player.timeNextHeal = CurTime() + 0.5
+			player.timeNextHeal = CurTime() + 1
 		end
 	end,
 }
@@ -172,11 +172,44 @@ PLUGIN.buffs[ "buff_hijump" ] = {
 		
 	end,
 	onbuffed = function( player, parameter )
-		local jumpval = player:GetJumpPower()
+		local jumpval = ix.config.Get("jumpPower")
 		player:SetJumpPower(jumpval + parameter.amount)
 	end,
 	ondebuffed = function( player, parameter )
-		local jumpval = player:GetJumpPower()
-		player:SetJumpPower(jumpval - parameter.amount)
+		local jumpval = ix.config.Get("jumpPower")
+		player:SetJumpPower(jumpval)
+	end,
+}
+
+PLUGIN.buffs[ "buff_lightningsprint" ] = {
+	name = "Lightning Sprint",
+	desc = "You move quickly, but at what cost?",
+	func = function( player, parameter)
+		player.timeNextTickSpdDmg = player.timeNextTickSpdDmg or CurTime()
+		if player:GetNetVar("brth", false) or player:Health() <= 10 then
+			player:RemoveBuff("buff_lightningsprint")
+			return
+		end
+		if player.timeNextTickSpdDmg < CurTime() then
+			player:SetHealth(player:Health() - parameter.dps)
+			player:EmitSound("anomaly/electra_blast1.mp3",70, 180)
+			ParticleEffect( "myasorubka_activated", player:GetPos(), Angle( 0, 0, 0 ) )
+			player.timeNextTickSpdDmg = CurTime() + 1
+		end
+	end,
+	onbuffed = function( player, parameter )
+		if player:GetNetVar("brth", false) or player:Health() <= 10 then
+			player:RemoveBuff("buff_lightningsprint")
+			return
+		end
+		timer.Simple(0, function()
+			ix.weight.Update(player:GetCharacter())	
+		end)
+
+	end,
+	ondebuffed = function( player, parameter )
+		timer.Simple(0, function()
+			ix.weight.Update(player:GetCharacter())	
+		end)
 	end,
 }

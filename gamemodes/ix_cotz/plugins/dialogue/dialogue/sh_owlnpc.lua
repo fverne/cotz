@@ -89,10 +89,10 @@ DIALOGUE.addTopic("StorageTopic", {
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
 		local basecost = 120
-		local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3))
+		local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 2))
 		local bankH = client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
-		local heightcost = math.Round(math.pow(basecost + 300, 1+(bankH/4.5)))
-		local widthcost = math.Round(math.pow(basecost, 1+(bankW/4.5)))
+		local heightcost = math.Round(math.pow(basecost + 200, 1+(bankH/5.5)))
+		local widthcost = math.Round(math.pow(basecost, 1+(bankW/5.5)))
 
 		table.insert(dynopts, {statement = "Can I please see my storage?", topicID = "StorageTopic", dyndata = {option = "use"}})
 
@@ -139,13 +139,13 @@ DIALOGUE.addTopic("OpenStorage", {
 
 			if ID then
 				local bankstruct = {}
-				bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 3)), character:GetData("bankH", ix.config.Get("bankH", 2))}
-				ix.inventory.Restore(bankstruct, ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), function(inventory)
+				bankstruct[ID] = {character:GetData("bankW", ix.config.Get("bankW", 2)), character:GetData("bankH", ix.config.Get("bankH", 2))}
+				ix.inventory.Restore(bankstruct, ix.config.Get("bankW", 2), ix.config.Get("bankH", 2), function(inventory)
 					bank = inventory
 					bank:SetOwner(character:GetID())
 				end)
 			else
-				bank = ix.inventory.Create(ix.config.Get("bankW", 3), ix.config.Get("bankH", 2), os.time())
+				bank = ix.inventory.Create(ix.config.Get("bankW", 2), ix.config.Get("bankH", 2), os.time())
 				bank:SetOwner(character:GetID())
 				bank:Sync(client)
 		
@@ -157,7 +157,7 @@ DIALOGUE.addTopic("OpenStorage", {
 					entity = client,
 					name = "Personal Storage",
 					searchText = "Accessing personal storage...",
-					searchTime = ix.config.Get("containerOpenTime", 1)
+					searchTime = ix.config.Get("containerOpenTime", 0)
 				})
 			end)
 		end
@@ -198,7 +198,7 @@ DIALOGUE.addTopic("ConfirmStorageUpgrade", {
 		if( SERVER and dyndata.accepted ) then
 
 			local bankH = client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
-			local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3))
+			local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 2))
 
 			if target.upgradestruct[1] == "vertically" then
 				if bankH < ix.config.Get("bankHMax", 2) then
@@ -218,7 +218,7 @@ DIALOGUE.addTopic("ConfirmStorageUpgrade", {
 					client:GetCharacter():TakeMoney(target.upgradestruct[2])
 					ix.dialogue.notifyMoneyLost(client, target.upgradestruct[2])
 				else
-					client:Notify("Cannot update storage! It's width is maxed, which is "..client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 3)))
+					client:Notify("Cannot update storage! It's width is maxed, which is "..client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 2)))
 				end
 			end
 		end
@@ -553,8 +553,12 @@ DIALOGUE.addTopic("ViewProgression", {
 	DynamicPreCallback = function(self, player, target, dyndata)
 		if (dyndata) then
 			if(CLIENT)then
-				local progstatus 	= ix.progression.status[dyndata.identifier]
 				local progdef 		= ix.progression.definitions[dyndata.identifier]
+				local progstatus 	= ix.progression.status[dyndata.identifier]
+
+				if progdef.fnAddComplexProgression then
+					progstatus = ix.progression.GetComplexProgressionValue(dyndata.identifier)
+				end
 
 				self.response = progdef:BuildResponse(progdef, progstatus)
 				self.tmp = dyndata.identifier
@@ -604,7 +608,7 @@ DIALOGUE.addTopic("AboutProgression", {
 
 
 DIALOGUE.addTopic("StartBarter", {
-	statement = "Exchange?",
+	statement = "I'd like to do some bartering.",
 	response = "Sure.",
 	options = {
 		"BackTopic"
@@ -622,7 +626,8 @@ DIALOGUE.addTopic("StartBarter", {
 				self.response = "I have the following things up for barter:"
 
 				for _, barter in pairs(barters) do
-					self.response = self.response.."\n    "..ix.npcbarter.barterdict["'Cleaner'"][barter].description
+					local barterTable = ix.npcbarter.barterdict["'Cleaner'"][barter]
+					self.response = self.response.."\n    "..string.format(barterTable.description, ix.item.list[barterTable.barterItem[1]].name, barterTable.reqItem[2], ix.item.list[barterTable.reqItem[1]].name)
 				end
 			end
 
@@ -638,11 +643,12 @@ DIALOGUE.addTopic("StartBarter", {
 			local barterItem = barterstruct.barterItem
 			local barterCnt = barterItem[2] or 1
 
-			for _, reqitem in pairs(barterstruct.reqItem) do
+			-- for _, reqitem in pairs(barterstruct.reqItem) do
+				local reqitem = barterstruct.reqItem
 				local reqItemCnt = reqitem[2] or 1
 
-				table.insert(dynopts, {statement = reqItemCnt.."x "..ix.item.list[reqitem[1]].name.." to "..barterCnt.."x "..ix.item.list[barterItem[1]].name, topicID = "StartBarter", dyndata = {npcname = "'Cleaner'", identifier = barterid, reqitem = reqitem[1]}})
-			end
+				table.insert(dynopts, {statement = "I'd like "..barterCnt.."x "..ix.item.list[barterItem[1]].name.." for my "..reqItemCnt.."x "..ix.item.list[reqitem[1]].name, topicID = "StartBarter", dyndata = {npcname = "'Cleaner'", identifier = barterid, reqitem = reqitem[1]}})
+			-- end
 		end
 
 		-- Return table of options

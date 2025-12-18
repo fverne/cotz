@@ -44,6 +44,7 @@ ITEM.pacData = {
 				["ClassName"] = "event",
 				["UniqueID"] = "12344865222",
 				["Event"] = "weapon_class",
+				["Invert"] = false,
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
 				["Arguments"] = "weapon_rpw_binoculars_nvg@@0",

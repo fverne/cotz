@@ -21,7 +21,8 @@
 		end,
 	}
 
-
+ ]]--
+ 
 ix.backgrounds["nothing"] = {
 	name = "Nothing",
 	description = "You have no idea how you ended up in this forsaken place, but you are not prepared.".. 
@@ -37,6 +38,7 @@ ix.backgrounds["nothing"] = {
 	end,
 }
 
+--[[
 ix.backgrounds["alcoholic_light"] = {
 	name = "Alcoholic (Light)",
 	description = "You started drinking when you were young and could never kick the habit.".. 

@@ -89,7 +89,7 @@ ix.command.Add("gpda", {
 	OnRun = function(self, client, message)
 		ix.chat.Send(client, "gpda", message)
 
-		ix.crossserverchat.PostMessage(nil, client:GetName(), message, client:GetCharacter() and client:GetCharacter():GetPdaavatar() or "vgui/icons/face_31.png")
+		ix.crossserverchat.PostMessage(client:GetName(), message, client:GetCharacter() and client:GetCharacter():GetPdaavatar() or "vgui/icons/face_31.png")
 	end
 })
 
@@ -121,6 +121,25 @@ ix.char.RegisterVar("pdaavatar", {
 	default = "vgui/icons/face_31.png",
 	bNoDisplay = true,
 })
+
+ix.command.Add("CharPDAAvatarSet", {
+	adminOnly = true,
+	arguments = {
+		ix.type.character,
+		ix.type.string
+	},
+	OnRun = function(self, client, target, materialPath)
+		target:SetPdaavatar(nil)
+		target:SetPdaavatar(materialPath)
+	end
+})
+
+PLUGIN.pdaavatarsUpgrades = {
+	"propic/zonelegends/openthebunkerivan",
+	"propic/zonelegends/cheeki",
+	"propic/zonelegends/killa",
+}
+
 
 -- NPC talker PDA
 local icon = Material("vgui/icons/news.png")

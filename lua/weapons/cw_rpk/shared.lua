@@ -38,6 +38,10 @@ if CLIENT then
 	SWEP.AlternativePos = Vector(-0.24, 0, -0.48)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
 
+
+	SWEP.SightBackUpPos = Vector(-4.5, 7, 0)
+	SWEP.SightBackUpAng = Vector(2, 0, -40)
+
 	SWEP.ViewModelMovementScale = 1.15
 	
 	SWEP.IconLetter = "b"
@@ -164,7 +168,8 @@ SWEP.FireSound = "CW_AK74_FIRE"
 SWEP.FireSoundSuppressed = "CW_AK74_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.65
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.12

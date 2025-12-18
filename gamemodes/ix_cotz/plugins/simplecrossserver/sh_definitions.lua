@@ -15,7 +15,7 @@
 
 PLUGIN.mapdata["rp_marsh_cs"] = {}
 PLUGIN.mapdata["rp_marsh_cs"].name = "Swamps"
-PLUGIN.mapdata["rp_marsh_cs"].serverip = "80.161.55.20:27015"
+PLUGIN.mapdata["rp_marsh_cs"].serverip = "80.162.40.39:27015"
 PLUGIN.mapdata["rp_marsh_cs"].loadzones = PLUGIN.mapdata["rp_marsh_cs"].loadzones or {}
 
 PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromoutskirts"] = {
@@ -36,9 +36,15 @@ PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromtrainbridge"] = {
 	desc = "The area ahead leads to the swamps."
 }
 
+PLUGIN.mapdata["rp_marsh_cs"].loadzones["base"] = {
+	pos = Vector(-7182.672852, -10445.850586, 4972.751465), --edit me
+	ang = Angle(0, 0, 0), --edit me
+	desc = "The area ahead looks like the safe base."
+}
+
 PLUGIN.mapdata["rp_salvation_2_haven"] = {}
 PLUGIN.mapdata["rp_salvation_2_haven"].name = "Farmlands"
-PLUGIN.mapdata["rp_salvation_2_haven"].serverip = "80.161.55.20:27016"
+PLUGIN.mapdata["rp_salvation_2_haven"].serverip = "80.162.40.39:27016"
 PLUGIN.mapdata["rp_salvation_2_haven"].loadzones = PLUGIN.mapdata["rp_salvation_2_haven"].loadzones or {}
 
 PLUGIN.mapdata["rp_salvation_2_haven"].loadzones["fromwaystation"] = {
@@ -55,7 +61,7 @@ PLUGIN.mapdata["rp_salvation_2_haven"].loadzones["frommarsh"] = {
 
 PLUGIN.mapdata["rp_waystation"] = {}
 PLUGIN.mapdata["rp_waystation"].name = "Waystation"
-PLUGIN.mapdata["rp_waystation"].serverip = "80.161.55.20:27017"
+PLUGIN.mapdata["rp_waystation"].serverip = "80.162.40.39:27017"
 PLUGIN.mapdata["rp_waystation"].loadzones = PLUGIN.mapdata["rp_waystation"].loadzones or {}
 
 PLUGIN.mapdata["rp_waystation"].loadzones["fromoutskirts"] = {
@@ -76,14 +82,26 @@ PLUGIN.mapdata["rp_waystation"].loadzones["frompripyat"] = {
 	desc = "Your geigercounter tones down a little as you approach. The area ahead is clearly irradiated."
 }
 
+PLUGIN.mapdata["rp_waystation"].loadzones["base"] = {
+	pos = Vector(-5359.798828, 6875.882812, 289.031250), --edit me
+	ang = Angle(0.000, -100.870, 0.000), --edit me
+	desc = "The area ahead looks like the safe base."
+}
+
 
 PLUGIN.mapdata["rp_pripyat_remaster"] = {}
 PLUGIN.mapdata["rp_pripyat_remaster"].name = "Pripyat"
-PLUGIN.mapdata["rp_pripyat_remaster"].serverip = "80.161.55.20:27016"
+PLUGIN.mapdata["rp_pripyat_remaster"].serverip = "80.162.40.39:27016"
 PLUGIN.mapdata["rp_pripyat_remaster"].loadzones = PLUGIN.mapdata["rp_pripyat_remaster"].loadzones or {}
 
 PLUGIN.mapdata["rp_pripyat_remaster"].loadzones["fromwaystation"] = {
 	pos = Vector(8263.241211, -2926.429443, 64.031250), --edit me
 	ang = Angle(0, 180, 0), --edit me
 	desc = "Your geigercounter lights up a lot more as you approach. The area ahead is clearly very irradiated."
+}
+
+PLUGIN.mapdata["rp_pripyat_remaster"].loadzones["base"] = {
+	pos = Vector(3922.420410, 8734.605469, 1089.031250), --edit me
+	ang = Angle(0.000, -123.432, 0.000), --edit me
+	desc = "The area ahead looks like the safe base."
 }

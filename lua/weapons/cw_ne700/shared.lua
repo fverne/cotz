@@ -48,7 +48,7 @@ if CLIENT then
 	SWEP.ShortDotAng = Vector(0, 0, 0)
 
 	
-	SWEP.BackupSights = {["md_acog"] = {[1] = Vector(-2.461, 0, -0.08), [2] = Vector(0, 0, 0)}}
+	-- SWEP.BackupSights = {["md_acog"] = {[1] = Vector(-2.461, 0, -0.08), [2] = Vector(0, 0, 0)}}
 
 	SWEP.SightWithRail = false
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
@@ -169,5 +169,8 @@ function SWEP:postPrimaryAttack()
 				self:sendWeaponAnim("idle", 1, 0)
 			end
 		end)
+	end
+	if SERVER then
+		self.Owner:SetVelocity(self.Owner:EyeAngles():Forward()*-250)
 	end
 end

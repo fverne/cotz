@@ -143,7 +143,7 @@ SWEP.FireSoundSuppressed = "CW_M1911_FIRE_SUPPRESSED"
 SWEP.Recoil = 2.9
 SWEP.FOVPerShot = 0.25 -- = .5
 
-SWEP.WearDamage = 0.22
+SWEP.WearDamage = 0.14
 SWEP.WearEffect = 0.05
 
 SWEP.HipSpread = 0.035
@@ -164,6 +164,7 @@ SWEP.ShootWhileProne = true
 SWEP.ShotgunReload = true
 SWEP.HolsterOnLadder = false
 SWEP.SprintingEnabled = true
+SWEP.AlwaysPlayReloadEnd = true
 
 SWEP.ReloadStartTime = 2.25
 SWEP.InsertShellTime = .95

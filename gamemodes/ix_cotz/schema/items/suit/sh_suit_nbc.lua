@@ -11,24 +11,28 @@ ITEM.overlayPath = "vgui/overlays/hud_gas"
 ITEM.weight = 7.900
 ITEM.baseSuit = "suit_nbc"
 
-ITEM.price = 89000
+ITEM.price = 165000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = true
 ITEM.isHelmet = true
 
-ITEM.br = 0.11
+ITEM.br = 0.09
 ITEM.fbr = 1
-ITEM.sr = 0.18
+ITEM.sr = 0.17
 ITEM.fsr = 1
-ITEM.ar = 0.21
-ITEM.far = 1
+ITEM.ar = 0.20
+ITEM.far = 2
+
 ITEM.pr = 0.10
 ITEM.fpr = 0
-ITEM.radProt = 0.4
+ITEM.radProt = 0.90
+ITEM.flatRadProt = 0.02
 
-ITEM.carryinc = 8.000
-ITEM.miscslots = 3
+ITEM.carryinc = 6.320
+ITEM.exteriorSlots = 2
+ITEM.interiorSlots = 1
+ITEM.extraSlots = 0
 
 ITEM.skincustom[1] = {
 	name = "Skin 0",

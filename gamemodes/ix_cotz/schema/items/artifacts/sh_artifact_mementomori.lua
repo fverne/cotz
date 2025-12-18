@@ -41,9 +41,8 @@ ITEM.functions.use = {
     icon = "icon16/help.png",
     sound = "physics/metal/chain_impact_soft2.wav",
     OnRun = function(item)
-
-        if(item:GetData("cooldown",0) < os.time())then
-        	item:SetData("cooldown", os.time()+(3600*2) ) --2 hours
+        if(item:GetData("cooldown",0) < os.time()) then
+        	item:SetData("cooldown", os.time()+(60*15) ) --15 minutes
             ix.util.PlayerPerformBlackScreenAction(item.player, "Looking deep into the skull", 3, function(player) 
                 player:HealPsyHealth(15)
             end)
@@ -52,6 +51,6 @@ ITEM.functions.use = {
         return false
     end,
     OnCanRun = function(item)
-        return !IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+        return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }

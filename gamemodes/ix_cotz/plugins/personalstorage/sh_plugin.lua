@@ -4,7 +4,7 @@ PLUGIN.name = "Personal Storage"
 PLUGIN.author = "gm1003 ツ - modified by verne"
 PLUGIN.description = "Adds upgradable personal storage to characters."
 
-ix.config.Add("bankW", 3, "How many slots in a row there is by default in the bank inventory.", nil, {
+ix.config.Add("bankW", 2, "How many slots in a row there is by default in the bank inventory.", nil, {
 	data = {min = 0, max = 20},
 	category = "Bank"
 })
@@ -12,11 +12,11 @@ ix.config.Add("bankH", 2, "How many slots in a column there is by default in the
 	data = {min = 0, max = 20},
 	category = "Bank"
 })
-ix.config.Add("bankWMax", 6, "How many slots in a row there is by default in the bank inventory.", nil, {
+ix.config.Add("bankWMax", 10, "How many slots in a row there is by default in the bank inventory.", nil, {
 	data = {min = 0, max = 20},
 	category = "Bank"
 })
-ix.config.Add("bankHMax", 4, "How many slots in a column there is by default in the bank inventory.", nil, {
+ix.config.Add("bankHMax", 8, "How many slots in a column there is by default in the bank inventory.", nil, {
 	data = {min = 0, max = 20},
 	category = "Bank"
 })

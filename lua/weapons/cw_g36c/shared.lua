@@ -56,6 +56,9 @@ if CLIENT then
 	SWEP.ACOGAng = Vector(0, 0, 0)
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
 
+	SWEP.SightBackUpPos = Vector(-4.2, 1, 0)
+	SWEP.SightBackUpAng = Vector(1, 0, -30)
+
 	SWEP.SightWithRail = true
 	SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
 	
@@ -161,7 +164,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.56x45MM"
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 0.08

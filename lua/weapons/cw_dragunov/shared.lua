@@ -23,8 +23,8 @@ if CLIENT then
 	SWEP.ForeGripOffsetCycle_Reload_Empty = 0.8
 	SWEP.FireMoveMod = 0.6
 	
-	SWEP.IronsightPos = Vector(-3.15, -2.01, 1.56)
-	SWEP.IronsightAng = Vector(-0.15, 0.05, 0)
+	SWEP.IronsightPos = Vector(-3.125, -2.01, 1.56)
+	SWEP.IronsightAng = Vector(-0.15, 0.17, 0)
 	
 	SWEP.EoTechPos = Vector(-3.05, 0, 0.839)
 	SWEP.EoTechAng = Vector(-1.5, 0, 2)
@@ -34,6 +34,9 @@ if CLIENT then
 	
 	SWEP.MicroT1Pos = Vector(-3.15, 0, 1.32)
 	SWEP.MicroT1Ang = Vector(-1.5, 0, 2)
+
+	SWEP.SightBackUpPos = Vector(-4.8, 5, 0)
+	SWEP.SightBackUpAng = Vector(0, 0, -30)
 
 	SWEP.PSOPos = Vector(-3, 0, 0.8)
 	SWEP.PSOAng = Vector(0, 0, 2)
@@ -174,8 +177,10 @@ SWEP.Primary.ClipSize		= 10
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "7.62x54MMR"
+SWEP.Chamberable = false
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 0.2
@@ -195,7 +200,7 @@ SWEP.DeployTime = 1
 
 SWEP.RecoilToSpread = 0.8 -- the M14 in particular will have 30% more recoil from continuous fire to give a feeling of "oh fuck I should stop firing 7.62x51MM in full auto at 750 RPM"
 
-SWEP.ReloadSpeed = 1.10
+SWEP.ReloadSpeed = 1.30
 SWEP.ReloadTime = 3.8
 SWEP.ReloadTime_Empty = 3.8
 SWEP.ReloadHalt = 3.9

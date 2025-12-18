@@ -24,5 +24,6 @@ ITEM.items = {
 		{2, "medical_bandage_tier01"},
 		{1, "medical_psy_tier01"},
 		{1, "medical_rad_tier01"},
+		{1, "medical_support_tier01"},
 	},
 }

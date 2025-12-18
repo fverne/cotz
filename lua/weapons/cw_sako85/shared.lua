@@ -43,6 +43,9 @@ if CLIENT then
 	SWEP.SprintPos = Vector(3.029, -0.805, -2.201)
 	SWEP.SprintAng = Vector(-4.926, 38.693, -18.292)
 
+	SWEP.SightBackUpPos = Vector(-6.5, -3, 0)
+	SWEP.SightBackUpAng = Vector(0, -0.6, -40)
+
 	SWEP.ShortDotPos = Vector(-3.83, -14, 0.47)
 	SWEP.ShortDotAng = Vector(-0.7, 0.03, 0)
 	SWEP.SchmidtShortDotAxisAlign = {right = 0.7, up = -0.03, forward = 0}
@@ -140,7 +143,7 @@ SWEP.Instructions	= ""
 SWEP.WearDamage = 0.33
 SWEP.WearEffect = 0.005
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 50
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/tfa_nmrih/v_fa_sako85_ironsights.mdl"
 SWEP.WorldModel		= "models/weapons/tfa_nmrih/w_fa_sako85_ironsights.mdl"

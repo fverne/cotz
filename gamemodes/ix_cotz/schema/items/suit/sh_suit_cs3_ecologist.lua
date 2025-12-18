@@ -7,26 +7,28 @@ ITEM.longdesc = "A pair of reinforced tactical pants, comfortable nomex jacket a
 ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/cs2.png")
-ITEM.weight = 16.100
+ITEM.weight = 9.600
 ITEM.newSkin = 2
 ITEM.baseSuit = "suit_cs3"
 ITEM.suitVariant = "ecologist"
 
-ITEM.price = 178100
+ITEM.price = 306020
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.21
+ITEM.br = 0.28
 ITEM.fbr = 2
-ITEM.sr = 0.30
+ITEM.sr = 0.31
 ITEM.fsr = 2
-ITEM.ar = 0.12
-ITEM.far = 1
+ITEM.ar = 0.26
+ITEM.far = 3
 
-ITEM.carryinc = 15.000
-ITEM.miscslots = 4
+ITEM.carryinc = 11.520
+ITEM.exteriorSlots = 2
+ITEM.interiorSlots = 2
+ITEM.extraSlots = 2
 
 
 -- ITEM.skincustom[1] = {

@@ -11,13 +11,20 @@ ix.config.Add("disablePVP", true, "If true, disables player versus player damage
 
 function PLUGIN:EntityTakeDamage( target, dmginfo )
 	--disable pvp
+	local attacker = dmginfo:GetAttacker()
 	if (ix.config.Get("disablePVP", true)) then
-		if target:IsPlayer() and dmginfo:GetAttacker():IsPlayer() and (target != dmginfo:GetAttacker()) then
-			return true
+		if target:IsPlayer() and attacker:IsPlayer() and (target != attacker) then
+			return
 		end
 	end
 
-    -- Bullet resistance
+	if target:IsPlayer() and attacker:IsPlayer() and (target != attacker) then
+		if attacker:GetLocalVar("inArena", false) and target:GetLocalVar("inArena", false) then
+			return
+		end
+	end
+
+	-- Bullet resistance
 	if ( target:IsPlayer() and dmginfo:IsDamageType(DMG_BULLET)) then
 		local damage = dmginfo:GetDamage()
 		local perRes = target:GetNWFloat("ixperbulletres")
@@ -102,9 +109,17 @@ end
 
 -- pvp disable blood decals
 function PLUGIN:ScalePlayerDamage(ply, hitgroup, dmginfo)
+	local attacker = dmginfo:GetAttacker()
+	if ply:IsPlayer() and attacker:IsPlayer() and (ply != attacker) then
+		if ply:GetLocalVar("inArena", false) and attacker:GetLocalVar("inArena", false) then
+			return
+		end
+	end
+
 	--disable pvp
 	if (ix.config.Get("disablePVP", true)) then
-		if ply:IsPlayer() and dmginfo:GetAttacker():IsPlayer() and (ply != dmginfo:GetAttacker()) then
+		local attacker = dmginfo:GetAttacker()
+		if ply:IsPlayer() and attacker:IsPlayer() and (ply != attacker) then
 			return true
 		end
 	end

@@ -1,11 +1,14 @@
+local map = "rp_marsh_cs"
+
 ix.progression.Register("hagglerItemDelivery_1", {
 	name = "Kitting Up 1",
 	description = "Help Haggler establish basic supply lines to smugglers inside the Zone.",
 	keyNpc = "'Haggler'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_1"] = ix.progression.status["hagglerItemDelivery_1"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_1"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -21,8 +24,8 @@ ix.progression.Register("hagglerItemDelivery_1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_nuts"] = 180,
-			["value_toiletpaper"] = 25,
+			["value_nuts"] = 90,
+			["value_toiletpaper"] = 15,
 		}	
 
 		return itemids
@@ -91,9 +94,10 @@ ix.progression.Register("hagglerItemDelivery_11", {
 	description = "Help Haggler set up a workshop.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_11"] = ix.progression.status["hagglerItemDelivery_11"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_11"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_11"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -110,7 +114,7 @@ ix.progression.Register("hagglerItemDelivery_11", {
 	GetItemIds = function()
 		local itemids = {
 			["value_capacitors"] = 100,
-			["value_glue_1"] = 30,
+			["value_glue_1"] = 20,
 		}	
 
 		return itemids
@@ -178,9 +182,10 @@ ix.progression.Register("hagglerItemDelivery_111", {
 	description = "Help Haggler upgrade his workshop with a basic lathe.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_111"] = ix.progression.status["hagglerItemDelivery_111"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_111"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -196,9 +201,9 @@ ix.progression.Register("hagglerItemDelivery_111", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_nails"] = 150,
-			["value_tape_duct"] = 75,
-			["value_hose"] = 45,
+			["value_nails"] = 40,
+			["value_tape_duct"] = 25,
+			["value_hose"] = 15,
 		}	
 
 		return itemids
@@ -264,9 +269,10 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 	description = "Help Haggler expand his supply lines.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_1111"] = ix.progression.status["hagglerItemDelivery_1111"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_1111"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_1111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -282,8 +288,8 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_tape_electric"] = 80,
-			["value_detergent"] = 80,
+			["value_tape_electric"] = 30,
+			["value_detergent"] = 30,
 		}	
 
 		return itemids
@@ -349,9 +355,10 @@ ix.progression.Register("hagglerItemDelivery_112", {
 	description = "Help Haggler upgrade his workshop with a rivet gun.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_112"] = ix.progression.status["hagglerItemDelivery_112"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_112"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_112"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -367,8 +374,8 @@ ix.progression.Register("hagglerItemDelivery_112", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_goldchain"] = 10,
-			["value_wire_light"] = 180,
+			["value_goldchain"] = 4,
+			["value_wire_light"] = 60,
 		}	
 
 		return itemids
@@ -432,9 +439,10 @@ ix.progression.Register("hagglerItemDelivery_12", {
 	description = "Help Haggler con a mechanic.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_12"] = ix.progression.status["hagglerItemDelivery_12"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_12"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_12"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -450,7 +458,7 @@ ix.progression.Register("hagglerItemDelivery_12", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_sparkplug"] = 80,
+			["value_sparkplug"] = 30,
 			["value_glue_2"] = 25,
 		}	
 
@@ -518,9 +526,10 @@ ix.progression.Register("hagglerItemDelivery_121", {
 	description = "Help Haggler deal with Quartermaster.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_121"] = ix.progression.status["hagglerItemDelivery_121"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_121"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_121"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -536,7 +545,7 @@ ix.progression.Register("hagglerItemDelivery_121", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_toothpaste"] = 120,
+			["value_toothpaste"] = 35,
 			["value_statue_horse"] = 5,
 		}	
 
@@ -603,9 +612,10 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 	description = "Help Haggler expand his supply lines.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_1211"] = ix.progression.status["hagglerItemDelivery_1211"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_1211"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_1211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -621,7 +631,7 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_engine"] = 8,
+			["value_engine"] = 4,
 			["value_nuts"] = 80,
 		}	
 
@@ -687,9 +697,10 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 	description = "Help Haggler organize a trade with Quartermaster.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_12111"] = ix.progression.status["hagglerItemDelivery_12111"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_12111"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_12111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -705,7 +716,7 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_gunpowder_blue"] = 50,
+			["value_gunpowder_blue"] = 30,
 		}	
 
 		return itemids
@@ -771,9 +782,10 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 	description = "Help Haggler trade with a tourist.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_121111"] = ix.progression.status["hagglerItemDelivery_121111"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_121111"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_121111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -789,8 +801,8 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_phone_new"] = 25,
-			["value_watch"] = 40,
+			["value_phone_new"] = 15,
+			["value_watch"] = 20,
 		}	
 
 		return itemids
@@ -855,9 +867,10 @@ ix.progression.Register("hagglerItemDelivery_122", {
 	description = "Help Haggler make an exchange with his Russian supplier.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_122"] = ix.progression.status["hagglerItemDelivery_122"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_122"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_122"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -873,7 +886,7 @@ ix.progression.Register("hagglerItemDelivery_122", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_detergent"] = 120,
+			["value_detergent"] = 30,
 			["value_car_battery"] = 5,
 		}	
 
@@ -940,9 +953,10 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 	description = "Help Haggler get proper pistol tooling equipment.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_1221"] = ix.progression.status["hagglerItemDelivery_1221"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_1221"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_1221"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1024,9 +1038,10 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 	description = "Help Haggler get some precision components.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_12211"] = ix.progression.status["hagglerItemDelivery_12211"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_12211"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_12211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1107,9 +1122,10 @@ ix.progression.Register("hagglerItemDelivery_2", {
 	description = "Help Haggler import a new type of shotgun.",
 	keyNpc = "'Haggler'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_2"] = ix.progression.status["hagglerItemDelivery_2"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_2"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1125,8 +1141,8 @@ ix.progression.Register("hagglerItemDelivery_2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_bolts"] = 180,
-			["value_sparkplug"] = 20,
+			["value_bolts"] = 130,
+			["value_sparkplug"] = 10,
 		}	
 
 		return itemids
@@ -1194,9 +1210,10 @@ ix.progression.Register("hagglerItemDelivery_21", {
 	description = "Help Haggler rechamber some SAKO rifles.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_21"] = ix.progression.status["hagglerItemDelivery_21"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_21"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_21"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1212,7 +1229,7 @@ ix.progression.Register("hagglerItemDelivery_21", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_gunpowder_green"] = 65,
+			["value_gunpowder_green"] = 15,
 		}	
 
 		return itemids
@@ -1279,9 +1296,10 @@ ix.progression.Register("hagglerItemDelivery_211", {
 	description = "Help Haggler buy some woodworking tools.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_211"] = ix.progression.status["hagglerItemDelivery_211"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_211"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1297,7 +1315,7 @@ ix.progression.Register("hagglerItemDelivery_211", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_carbattery"] = 25,
+			["value_carbattery"] = 8,
 		}	
 
 		return itemids
@@ -1362,9 +1380,10 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 	description = "Help Haggler find a stash of PPSh SMGs.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_2111"] = ix.progression.status["hagglerItemDelivery_2111"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_2111"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_2111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1380,7 +1399,7 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_siliconetube"] = 80,
+			["value_siliconetube"] = 40,
 		}	
 
 		return itemids
@@ -1445,9 +1464,10 @@ ix.progression.Register("hagglerItemDelivery_212", {
 	description = "Help Haggler trade for some pump-action shotguns.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_212"] = ix.progression.status["hagglerItemDelivery_212"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_212"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_212"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1463,8 +1483,8 @@ ix.progression.Register("hagglerItemDelivery_212", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_battery"] = 130,
-			["value_motorclean"] = 40,
+			["value_battery"] = 90,
+			["value_motorclean"] = 15,
 		}	
 
 		return itemids
@@ -1529,9 +1549,10 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 	description = "Help Haggler make another deal with Quartermaster.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_2121"] = ix.progression.status["hagglerItemDelivery_2121"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_2121"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_2121"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1547,7 +1568,7 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_wire_heavy"] = 15,
+			["value_wire_heavy"] = 5,
 		}	
 
 		return itemids
@@ -1612,9 +1633,10 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 	description = "Help Haggler import some western shotguns.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_21211"] = ix.progression.status["hagglerItemDelivery_21211"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_21211"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_21211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1630,8 +1652,8 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_wire_copper"] = 60,
-			["value_9vbattery"] = 90,
+			["value_wire_copper"] = 40,
+			["value_9vbattery"] = 70,
 		}	
 
 		return itemids
@@ -1695,9 +1717,10 @@ ix.progression.Register("hagglerItemDelivery_22", {
 	description = "Help Haggler trade for rifle tooling for future projects.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_22"] = ix.progression.status["hagglerItemDelivery_22"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_22"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_22"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1713,8 +1736,8 @@ ix.progression.Register("hagglerItemDelivery_22", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_lightbulb"] = 120,
-			["value_gasoline"] = 15,
+			["value_lightbulb"] = 60,
+			["value_gasoline"] = 20,
 		}	
 
 		return itemids
@@ -1782,9 +1805,10 @@ ix.progression.Register("hagglerItemDelivery_221", {
 	description = "Help Haggler get some new Finnish hardware.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_221"] = ix.progression.status["hagglerItemDelivery_221"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_221"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_221"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1800,9 +1824,9 @@ ix.progression.Register("hagglerItemDelivery_221", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_hose"] = 120,
-			["value_wire_light"] = 80,
-			["value_propanetank"] = 10,
+			["value_hose"] = 90,
+			["value_wire_light"] = 60,
+			["value_propanetank"] = 15,
 		}	
 
 		return itemids
@@ -1868,9 +1892,10 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 	description = "Help Haggler trade for some old Russian surplus.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_2211"] = ix.progression.status["hagglerItemDelivery_2211"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_2211"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_2211"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1886,7 +1911,7 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_paracord"] = 50,
+			["value_paracord"] = 40,
 			["value_wirelesstrans"] = 1,
 		}	
 
@@ -1952,9 +1977,10 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 	description = "Help Haggler finish his surplus trade.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_22111"] = ix.progression.status["hagglerItemDelivery_22111"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_22111"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_22111"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2034,9 +2060,10 @@ ix.progression.Register("hagglerItemDelivery_222", {
 	description = "Help Haggler refurbish some old SMGs.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_222"] = ix.progression.status["hagglerItemDelivery_222"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_222"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_222"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2052,8 +2079,8 @@ ix.progression.Register("hagglerItemDelivery_222", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_techtool_1"] = 10,
-			["value_nails"] = 50,
+			["value_techtool_1"] = 6,
+			["value_nails"] = 40,
 		}	
 
 		return itemids
@@ -2118,9 +2145,10 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 	description = "Help Haggler make a deal with the Ukrainian Army.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_2221"] = ix.progression.status["hagglerItemDelivery_2221"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_2221"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_2221"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -2203,9 +2231,10 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 	description = "Help Haggler complete his shop.",
 	keyNpc = "'Haggler'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["hagglerItemDelivery_22211"] = ix.progression.status["hagglerItemDelivery_22211"] or {}
-		local dat = ix.progression.status["hagglerItemDelivery_22211"].complexData
+		local dat = status or ix.progression.status["hagglerItemDelivery_22211"].complexData
 
 		local itemids = self:GetItemIds()
 

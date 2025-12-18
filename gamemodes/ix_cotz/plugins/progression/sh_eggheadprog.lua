@@ -1,11 +1,14 @@
+local map = "rp_marsh_cs"
+
 ix.progression.Register("eggheadItemDelivery_Detector1", {
 	name = "Detecting Anomalous Materials Part 1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Detector1"] = ix.progression.status["eggheadItemDelivery_Detector1"] or {}
-		local dat = ix.progression.status["eggheadItemDelivery_Detector1"].complexData
+		local dat = status or ix.progression.status["eggheadItemDelivery_Detector1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -91,9 +94,10 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 	name = "Detecting Anomalous Materials Part 2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Detector2"] = ix.progression.status["eggheadItemDelivery_Detector2"] or {}
-		local dat = ix.progression.status["eggheadItemDelivery_Detector2"].complexData
+		local dat = status or ix.progression.status["eggheadItemDelivery_Detector2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -109,10 +113,10 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_crystal"] = 10,
-			["artifact_mamasbeads"] = 10,
-			["artifact_capacitor"] = 5,
-			["artifact_panacea"] = 5,
+			["artifact_crystal"] = 5,
+			["artifact_mamasbeads"] = 5,
+			["artifact_capacitor"] = 1,
+			["artifact_panacea"] = 4,
 			["artifact_moonlight"] = 2,
 		}	
 
@@ -179,9 +183,10 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 	name = "Detecting Anomalous Materials Part 3",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Detector3"] = ix.progression.status["eggheadItemDelivery_Detector3"] or {}
-		local dat = ix.progression.status["eggheadItemDelivery_Detector3"].complexData
+		local dat = status or ix.progression.status["eggheadItemDelivery_Detector3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -197,10 +202,10 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_gmamasbeads"] = 8,
-			["artifact_galaxy"] = 5,
-			["artifact_arachno"] = 5,
-			["artifact_halo"] = 5,
+			["artifact_gmamasbeads"] = 4,
+			["artifact_galaxy"] = 4,
+			["artifact_arachno"] = 4,
+			["artifact_halo"] = 2,
 			["artifact_gaia"] = 3,
 			["artifact_midas"] = 1,
 		}
@@ -265,9 +270,10 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 	name = "Anomalous Protection Part 1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Suit1"] = ix.progression.status["eggheadItemDelivery_Suit1"] or {}
-		local dat = ix.progression.status["eggheadItemDelivery_Suit1"].complexData
+		local dat = status or ix.progression.status["eggheadItemDelivery_Suit1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -350,9 +356,10 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 	name = "Anomalous Protection Part 2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Suit2"] = ix.progression.status["eggheadItemDelivery_Suit2"] or {}
-		local dat = ix.progression.status["eggheadItemDelivery_Suit2"].complexData
+		local dat = status or ix.progression.status["eggheadItemDelivery_Suit2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -436,9 +443,10 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 	name = "Anomalous Protection Part 3",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Suit3"] = ix.progression.status["eggheadItemDelivery_Suit3"] or {}
-		local dat = ix.progression.status["eggheadItemDelivery_Suit3"].complexData
+		local dat = status or ix.progression.status["eggheadItemDelivery_Suit3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -519,9 +527,10 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 	name = "Scientific Aid Part 1",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Aid1"] = ix.progression.status["eggheadItemDelivery_Aid1"] or {}
-		local dat = ix.progression.status["eggheadItemDelivery_Aid1"].complexData
+		local dat = status or ix.progression.status["eggheadItemDelivery_Aid1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -537,11 +546,11 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["part_swampcontroller_2"] = 10,
+			["part_swampcontroller_2"] = 3,
 			["part_tark"] = 15,
 			["part_sprig"] = 15,
 			["part_spider"] = 20,
-			["part_snork_2"] = 20,
+			["part_snork_2"] = 5,
 			["part_cat"] = 20,
 		}
 
@@ -609,9 +618,10 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 	name = "Scientific Aid Part 2",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Aid2"] = ix.progression.status["eggheadItemDelivery_Aid2"] or {}
-		local dat = ix.progression.status["eggheadItemDelivery_Aid2"].complexData
+		local dat = status or ix.progression.status["eggheadItemDelivery_Aid2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -627,12 +637,12 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["part_controller_2"] = 15,
+			["part_controller_2"] = 4,
 			["part_vareshka"] = 20,
 			["part_skeleton"] = 20,
-			["part_karlik_2"] = 20,
-			["part_burer_2"] = 20,
-			["part_pseudodog"] = 40,
+			["part_karlik_2"] = 3,
+			["part_burer_2"] = 4,
+			["part_pseudodog"] = 30,
 		}
 
 		return itemids
@@ -698,9 +708,10 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 	name = "Scientific Aid Part 3",
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_Aid3"] = ix.progression.status["eggheadItemDelivery_Aid3"] or {}
-		local dat = ix.progression.status["eggheadItemDelivery_Aid3"].complexData
+		local dat = status or ix.progression.status["eggheadItemDelivery_Aid3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -717,7 +728,7 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 	GetItemIds = function()
 		local itemids = {
 			["part_pseudogiant"] = 20,
-			["part_electrocontroller_2"] = 15,
+			["part_electrocontroller_2"] = 4,
 			["part_chimera"] = 40,
 		}
 

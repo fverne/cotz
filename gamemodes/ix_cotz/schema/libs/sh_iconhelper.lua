@@ -6,23 +6,20 @@ function ix.util.GetItemIcon(item)
     local icon
     local exIcon = ikon:GetIcon(item.uniqueID)
 
-    if item.img then
-        icon = item.img
-    elseif item.exRender then
-        if (exIcon) then
-            icon = exIcon
-        else
-            ikon:renderIcon(
-                item.uniqueID,
-                item.width,
-                item.height,
-                item:GetModel(),
-                item.material,
-                item.iconCam
-            )
-            local tmpIcon = ikon:GetIcon(item.uniqueID)
-            item = tmpIcon
-        end
+    if item:GetData("img", item.img) then
+        icon = ix.util.GetMaterial(item:GetData("img", item.img))
+    elseif exIcon then
+        icon = exIcon
+    else
+        ikon:renderIcon(
+            item.uniqueID,
+            item.width,
+            item.height,
+            item:GetModel(),
+            item.material,
+            item.iconCam
+        )
+        icon = ikon:GetIcon(item.uniqueID)
     end
 
     return icon

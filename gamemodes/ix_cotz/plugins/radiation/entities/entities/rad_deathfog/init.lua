@@ -79,8 +79,8 @@ end
 
 function ENT:playerHasGasMask( items )
 	for j, i in pairs(items) do
-		if i.radProt then
-			if ((i.radProt > 0) and i:GetData("equip") == true) then
+		if i.flatRadProt then
+			if ((i.flatRadProt > 0) and i:GetData("equip") == true) then
 				return true
 			end
 		end

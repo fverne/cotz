@@ -48,6 +48,9 @@ if CLIENT then
 
 	SWEP.NXSPos = Vector(-1.6, 0.388, -0.325)
 	SWEP.NXSAng = Vector(0, 0, 0)
+
+	SWEP.SightBackUpPos = Vector(-3.3, 3, 0)
+	SWEP.SightBackUpAng = Vector(1, 0, -40)
 	
 	SWEP.ACOGPos = Vector(-1.612, 0.388, -0.442)
 	SWEP.ACOGAng = Vector(0, 0, 0)
@@ -169,7 +172,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "7.62x51MM"
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 0.10909090909

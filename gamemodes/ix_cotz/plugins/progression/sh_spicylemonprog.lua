@@ -1,3 +1,5 @@
+local map = "rp_marsh_cs"
+
 ----------
 -- Medical
 ----------
@@ -7,9 +9,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 	description = "Spicy Lemon is interested in getting a side project going.",
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical1"] = ix.progression.status["spicylemonItemDelivery_Medical1"] or {}
-		local dat = ix.progression.status["spicylemonItemDelivery_Medical1"].complexData
+		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -91,9 +94,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 	description = "Spicy Lemon wants to expand his business.",
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical2"] = ix.progression.status["spicylemonItemDelivery_Medical2"] or {}
-		local dat = ix.progression.status["spicylemonItemDelivery_Medical2"].complexData
+		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -177,9 +181,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 	description = "Spicy Lemon wants to help him help you stay safe.",
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical3"] = ix.progression.status["spicylemonItemDelivery_Medical3"] or {}
-		local dat = ix.progression.status["spicylemonItemDelivery_Medical3"].complexData
+		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -263,9 +268,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical4", {
 	description = "Spicy Lemon is interested in preventing harm rather than treating it.",
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical4"] = ix.progression.status["spicylemonItemDelivery_Medical4"] or {}
-		local dat = ix.progression.status["spicylemonItemDelivery_Medical4"].complexData
+		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical4"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -349,9 +355,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 	description = "Spicy Lemon is interested in pain control.",
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical5"] = ix.progression.status["spicylemonItemDelivery_Medical5"] or {}
-		local dat = ix.progression.status["spicylemonItemDelivery_Medical5"].complexData
+		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical5"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -436,9 +443,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical6", {
 	description = "Spicy Lemon would like to expand into combat drugs.",
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical6"] = ix.progression.status["spicylemonItemDelivery_Medical6"] or {}
-		local dat = ix.progression.status["spicylemonItemDelivery_Medical6"].complexData
+		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical6"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -521,9 +529,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 	description = "Spicy Lemon would like to complete his stock of combat drugs.",
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Medical7"] = ix.progression.status["spicylemonItemDelivery_Medical7"] or {}
-		local dat = ix.progression.status["spicylemonItemDelivery_Medical7"].complexData
+		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical7"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -610,9 +619,10 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 	description = "Spicy Lemon is interested in importing some food.",
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Food"] = ix.progression.status["spicylemonItemDelivery_Food"] or {}
-		local dat = ix.progression.status["spicylemonItemDelivery_Food"].complexData
+		local dat = status or ix.progression.status["spicylemonItemDelivery_Food"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -702,9 +712,10 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 	description = "Spicy Lemon has a discerning eye for new customers...",
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Vodka"] = ix.progression.status["spicylemonItemDelivery_Vodka"] or {}
-		local dat = ix.progression.status["spicylemonItemDelivery_Vodka"].complexData
+		local dat = status or ix.progression.status["spicylemonItemDelivery_Vodka"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -789,9 +800,10 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 	description = "Spicy Lemon would like to expand his vodka stocks.",
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Spirits"] = ix.progression.status["spicylemonItemDelivery_Spirits"] or {}
-		local dat = ix.progression.status["spicylemonItemDelivery_Spirits"].complexData
+		local dat = status or ix.progression.status["spicylemonItemDelivery_Spirits"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -878,9 +890,10 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 	description = "Spicy Lemon is interested in medicinal brews.",
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["spicylemonItemDelivery_Brew"] = ix.progression.status["spicylemonItemDelivery_Brew"] or {}
-		local dat = ix.progression.status["spicylemonItemDelivery_Brew"].complexData
+		local dat = status or ix.progression.status["spicylemonItemDelivery_Brew"].complexData
 
 		local itemids = self:GetItemIds()
 

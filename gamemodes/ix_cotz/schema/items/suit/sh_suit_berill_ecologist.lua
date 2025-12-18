@@ -7,26 +7,28 @@ ITEM.longdesc = "This modern version of a STALKER bodysuit is better suited for 
 ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/berill7.png")
-ITEM.weight = 12.000
+ITEM.weight = 7.200
 ITEM.newSkin = 7
 ITEM.baseSuit = "suit_berill"
 ITEM.suitVariant = "ecologist"
 
-ITEM.price = 152100
+ITEM.price = 277310
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.21
-ITEM.fbr = 2
-ITEM.sr = 0.30
+ITEM.br = 0.23
+ITEM.fbr = 3
+ITEM.sr = 0.41
 ITEM.fsr = 2
-ITEM.ar = 0.09
-ITEM.far = 2
+ITEM.ar = 0.17
+ITEM.far = 3
 
-ITEM.carryinc = 11.000
-ITEM.miscslots = 2
+ITEM.carryinc = 8.64
+ITEM.exteriorSlots = 2
+ITEM.interiorSlots = 2
+ITEM.extraSlots = 1
 
 
 -- ITEM.skincustom[1] = {

@@ -15,18 +15,22 @@ ITEM.functions.use = {
     icon = "icon16/help.png",
     sound = "anomaly/electra_blast1.mp3",
     OnRun = function(item)
-        if(item.player)then
-
+        if  item.player and ( item:GetData("cooldown",0) < os.time() ) then
+            item:SetData("cooldown", os.time() + 0.4 )
             for k, v in pairs(ents.FindInSphere(item.player:GetPos(), 256)) do
                 local dmg = 200
-                if(v:IsPlayer()) then dmg = 80 end
+                local attacker = item.player
+                if(v:IsPlayer()) then 
+                    dmg = 80 
+                    attacker = v
+                end
 
                 local TEMP_TargetDamage = DamageInfo()
                         
                 TEMP_TargetDamage:SetDamage(dmg)
-                TEMP_TargetDamage:SetAttacker(v)
+                TEMP_TargetDamage:SetAttacker(attacker)
                 TEMP_TargetDamage:SetDamageType(DMG_SHOCK)
-                TEMP_TargetDamage:SetInflictor(v)
+                TEMP_TargetDamage:SetInflictor(attacker)
                 TEMP_TargetDamage:SetDamagePosition(v:NearestPoint(v:GetPos()))
                 TEMP_TargetDamage:SetDamageForce(v:GetForward()*10000)
 
@@ -36,7 +40,7 @@ ITEM.functions.use = {
             -- Invoking player takes double damage
             local TEMP_TargetDamage = DamageInfo()
                         
-            TEMP_TargetDamage:SetDamage(80)
+            TEMP_TargetDamage:SetDamage(30)
             TEMP_TargetDamage:SetAttacker(item.player)
             TEMP_TargetDamage:SetDamageType(DMG_SHOCK)
             TEMP_TargetDamage:SetInflictor(item.player)
@@ -51,6 +55,6 @@ ITEM.functions.use = {
         return false
     end,
     OnCanRun = function(item)
-        return !IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+        return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }

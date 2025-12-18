@@ -1,6 +1,6 @@
 ﻿ITEM.name = "FN F2000"
 ITEM.description= "A polymer-framed rifle chambered for 5.56x45mm."
-ITEM.longdesc = "The FN F2000 is a 5.56×45mm NATO bullpup assault rifle, designed by FN Herstal in Belgium.\nIt is a gas operated, fully automatic and ambidextrous bullpup rifle.\nBoth the safety system and trigger mechanism were adopted from the P90 personal defense weapon; the selector toggle is a rotating disc located below the trigger.\nThe fire selector doubles as the weapon’s manual safety and secures the firearm against accidental discharge (the selector/safety disc has 3 settings: 'S'—safe, '1'—semi-automatic mode, 'A'—fully automatic fire).\nThe 'safe' setting disables the trigger.\nThe hammers, group pins, and springs are steel while all other components are nylon injection molding.\nThe shell of the rifle is made of composite materials.\n\nAmmo: 5.56x45mm \nMagazine Capacity: 30 "
+ITEM.longdesc = "The FN F2000 is a 5.56×45mm NATO bullpup assault rifle, designed by FN Herstal in Belgium.\nIt is a gas operated, fully automatic and ambidextrous bullpup rifle.\nBoth the safety system and trigger mechanism were adopted from the P90 personal defense weapon; the selector toggle is a rotating disc located below the trigger.\nThe fire selector doubles as the weapon’s manual safety and secures the firearm against accidental discharge.\nThe hammers, group pins, and springs are steel while all other components are nylon injection molding.\nThe shell of the rifle is made of composite materials.\n\nAmmo: 5.56x45mm \nMagazine Capacity: 30 "
 ITEM.model = ("models/cw2/weapons/w_cw2_efi.mdl")
 ITEM.class = "cw_f2000"
 ITEM.weaponCategory = "primary"
@@ -16,7 +16,7 @@ ITEM.unloadedweight = 3.6
 
 
 function ITEM:GetWeight()
-  return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
+  return self:GetData("weight", self.unloadedweight) + (self.bulletweight * self:GetData("ammo", 0))
 end
 
 ITEM.iconCam = {
@@ -50,6 +50,7 @@ ITEM.pacData = {
 				["ClassName"] = "event",
 				["UniqueID"] = "7408540013",
 				["Event"] = "weapon_class",
+				["Invert"] = false,
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
 				["Arguments"] = "cw_f2000@@0",

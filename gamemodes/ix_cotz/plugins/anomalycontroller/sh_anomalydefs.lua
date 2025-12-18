@@ -53,15 +53,15 @@ PLUGIN.anomalydefs[2] = {
 PLUGIN.anomalydefs[3] = {
 	name = "Electro",
 	entityname = "anom_electra_anomaly",
-	interval = 128,
+	interval = 256,
 	commonArtifacts = {
 		"artifact_battery",
 		"artifact_blowncap",
 		"artifact_bolt",
-		"artifact_bonecluster"
+		"artifact_bonecluster",
+		"artifact_sparkler",
 	},
 	rareArtifacts = {
-		"artifact_sparkler",
 		"artifact_flash",
 		"artifact_capacitor"
 	},
@@ -73,19 +73,20 @@ PLUGIN.anomalydefs[3] = {
 PLUGIN.anomalydefs[4] = {
 	name = "Electro 2",
 	entityname = "anom_electra_anomaly_type2",
-	interval = 128,
+	interval = 256,
 	commonArtifacts = {
 		"artifact_battery",
 		"artifact_blowncap",
 		"artifact_bolt",
-		"artifact_bonecluster"
+		"artifact_bonecluster",
+		"artifact_sparkler",
 	},
 	rareArtifacts = {
-		"artifact_sparkler",
+		"artifact_moonlight",
 		"artifact_flash",
 	},
 	veryRareArtifacts = {
-		"artifact_moonlight",
+		"artifact_storm",
 	},
 }
 
@@ -134,7 +135,7 @@ PLUGIN.anomalydefs[7] = {
 		"artifact_mementomori",
 		"artifact_thorn",
 		"artifact_bolt",
-		"artifact_bonecluster"
+		"artifact_grapes"
 	},
 	rareArtifacts = {
 		"artifact_urchin",

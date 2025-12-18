@@ -42,10 +42,8 @@ function ENT:Think()
 		self.delayTime = CurTime() + 0.2
 		for k, v in pairs( ents.FindInSphere( self.Entity:GetPos(), 2560 )  ) do
 			if (v:IsPlayer() and v:GetCharacter() and v:GetMoveType() != MOVETYPE_NOCLIP) then
+				local TEMP_TargetDamage = DamageInfo()
 				if v:GetPos( ):Distance( self:GetPos( ) ) <= self.range then
-				
-					local TEMP_TargetDamage = DamageInfo()
-								
 					TEMP_TargetDamage:SetDamage(self.radiationamount)
 					TEMP_TargetDamage:SetInflictor(self)
 					TEMP_TargetDamage:SetDamageType(DMG_RADIATION)
@@ -53,15 +51,13 @@ function ENT:Think()
 
 					v:TakeDamageInfo(TEMP_TargetDamage)
 					
-					if v:hasGeiger() then
-						local randomsound = table.Random(self.geigerHeavy)
-						v:EmitSound(randomsound)
-					end
-				elseif (v:GetPos( ):Distance( self:GetPos( ) ) <= self.range + 256) then
-					if v:hasGeiger() then
-						local randomsound = table.Random(self.geigerLight)
-						v:EmitSound(randomsound)
-					end
+				elseif v:GetPos( ):Distance( self:GetPos( ) ) <= self.range + 256 then
+					TEMP_TargetDamage:SetDamage(0)
+					TEMP_TargetDamage:SetInflictor(self)
+					TEMP_TargetDamage:SetDamageType(DMG_RADIATION)
+					TEMP_TargetDamage:SetAttacker(self)
+
+					v:TakeDamageInfo(TEMP_TargetDamage)
 				end
 			end
 		end

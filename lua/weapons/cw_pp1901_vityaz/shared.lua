@@ -36,6 +36,9 @@ if CLIENT then
 	
 	SWEP.AlternativePos = Vector(-0.24, 0, -0.48)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
+
+	SWEP.SightBackUpPos = Vector(-4.5, 1, 0.5)
+	SWEP.SightBackUpAng = Vector(1, 0, -30)
 	
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
 
@@ -129,7 +132,8 @@ SWEP.FireSound = "Weapon_PP19V"
 SWEP.FireSoundSuppressed = "CW_PP19V_SUPPRESSED"
 SWEP.Recoil = 1.25
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.065

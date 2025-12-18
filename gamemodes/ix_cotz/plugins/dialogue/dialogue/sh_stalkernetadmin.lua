@@ -6,6 +6,7 @@ DIALOGUE.addTopic("GREETING", {
 		"TradeTopic",
 		"BackgroundTopic",
 		"InterestTopic",
+		"PDAAvatarTopic",
 		-- "AboutWorkTopic",
 		-- "GetTask",
 		-- "GetTaskByDifficulty",
@@ -92,6 +93,59 @@ DIALOGUE.addTopic("InterestTopic", {
 		"BackTopic",
 	}
 })
+
+DIALOGUE.addTopic("PDAAvatarTopic", {
+	statement = "I'd like to change my avatar on the PDA Network.",
+	response = " ** Mute fiddles with his own PDA for a bit. He turns it around, and shows you a fee of 5000RU for a random PDA Avatar. He then hover's over a button, looking at you expectantly. ** ",
+	options = {
+		"RandomizePDAAvatarTopic",
+		"BackTopic",
+	},
+	preCallback = function(self, client, target)
+			if !client:GetCharacter():HasMoney(5000) then
+				self.response = " ** He shakes his head at your poverty. You need 5000RU. **"
+				return
+			end
+	end,
+	ShouldAdd = function()
+		return LocalPlayer():getReputation() >= 1600 --Experienced
+	end
+})
+
+
+DIALOGUE.addTopic("RandomizePDAAvatarTopic", {
+	statement = "I agree to 5000RU. Go ahead and do it.",
+	response = " ** Presses the button, and nods once.",
+	options = {
+		"BackTopic",
+	},
+	preCallback = function(self, client, target)
+		local charCreateAvatars = ix.plugin.list["charcreation"].pdaavatars
+		local rareAvatars = ix.plugin.list["pda"].pdaavatarsUpgrades
+		local rareAvatarChance = 25
+		local chosenAvatar
+
+		if math.random(1, 100) <= 2 then
+			chosenAvatar = rareAvatars[math.random(#rareAvatars)]
+		else
+			chosenAvatar = charCreateAvatars[math.random(#charCreateAvatars)]
+		end
+
+		if client:GetCharacter():HasMoney(5000) then
+			if (SERVER) then 
+				client:GetCharacter():TakeMoney(5000)
+				ix.dialogue.notifyMoneyLost(client, 5000)
+				client:GetCharacter():SetPdaavatar(chosenAvatar)
+			end
+		else
+			self.response = " ** The transaction doesn't go through. You don't have enough money. "
+		end
+	end,
+	ShouldAdd = function()
+		return LocalPlayer():GetCharacter():HasMoney(5000)
+	end
+})
+
 
 DIALOGUE.addTopic("AboutWorkTopic", {
 	statement = "About work...",
@@ -391,8 +445,12 @@ DIALOGUE.addTopic("ViewProgression", {
 	DynamicPreCallback = function(self, player, target, dyndata)
 		if (dyndata) then
 			if(CLIENT)then
-				local progstatus 	= ix.progression.status[dyndata.identifier]
 				local progdef 		= ix.progression.definitions[dyndata.identifier]
+				local progstatus 	= ix.progression.status[dyndata.identifier]
+
+				if progdef.fnAddComplexProgression then
+					progstatus = ix.progression.GetComplexProgressionValue(dyndata.identifier)
+				end
 
 				self.response = progdef:BuildResponse(progdef, progstatus)
 				self.tmp = dyndata.identifier
@@ -442,12 +500,13 @@ DIALOGUE.addTopic("AboutProgression", {
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's uhh, try something else.",
+	statement = "So, anyways...",
 	response = "...",
 	options = {
 		"TradeTopic",
 		"BackgroundTopic",
 		"InterestTopic",
+		"PDAAvatarTopic",
 		-- "AboutWorkTopic",
 		-- "GetTask",
 		-- "GetTaskByDifficulty",

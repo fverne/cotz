@@ -46,7 +46,7 @@ if CLIENT then
 	SWEP.SprintPos = Vector(3.029, -0.805, -2.201)
 	SWEP.SprintAng = Vector(-4.926, 38.693, -18.292)
 
-	SWEP.ShortDotPos = Vector(-3.565, -8, 0.75)
+	SWEP.ShortDotPos = Vector(-3.58, -7, 0.74)
 	SWEP.ShortDotAng = Vector(-0.7, 0.03, 0)
 	SWEP.SchmidtShortDotAxisAlign = {right = 0.7, up = -0.03, forward = 0}
 	
@@ -57,6 +57,9 @@ if CLIENT then
 	SWEP.NXSPos = Vector(-3.565, -6, 0.820)
 	SWEP.NXSAng = Vector(-0.7, 0.03, 0)
 	SWEP.NXSAlign = {right = 0.7, up = -0.03, forward = 0}
+
+	SWEP.SightBackUpPos = Vector(-6, 1, 0)
+	SWEP.SightBackUpAng = Vector(2, 0, -40)
 
 	SWEP.CustomizePos = Vector(5.519, 0, -1.601)
 	SWEP.CustomizeAng = Vector(21.106, 25.326, 10.553)
@@ -187,7 +190,7 @@ SWEP.Shots = 1
 SWEP.Damage = 550
 SWEP.DeployTime = 1
 
-SWEP.ReloadSpeed = 1
+SWEP.ReloadSpeed = 1.15
 SWEP.ReloadTime = 2.8
 SWEP.ReloadTime_Empty = 3.1
 SWEP.ReloadHalt = 3.1
@@ -202,7 +205,7 @@ function SWEP:IndividualThink()
 		end
 
 		if( self.ActiveAttachments.md_rearsight and self:hasAttachmentInCategory(1)) then
-			self:detachSpecificAttachment("md_rearsight")
+			self:detach(3)
 		end
 	end
 end

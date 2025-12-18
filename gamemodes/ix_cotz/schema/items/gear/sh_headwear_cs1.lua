@@ -17,7 +17,8 @@ ITEM.ar = 0.00
 ITEM.far = 0
 ITEM.pr = 0.20
 ITEM.fpr = 0
-ITEM.radProt = 0.20
+ITEM.radProt = 0.55
+ITEM.flatRadProt = 0.02
 
 ITEM.exRender = true
 ITEM.iconCam = {

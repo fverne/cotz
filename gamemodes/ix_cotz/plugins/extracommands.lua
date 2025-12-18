@@ -215,6 +215,32 @@ ix.command.Add("CharResetValues", {
     end
 })
 
+
+ix.command.Add("Debug_AttemptWeaponFix", {
+    adminOnly = true,
+    description = "Toggle DrawWeapon on a player",
+    arguments = {bit.bor(ix.type.string, ix.type.optional)},
+    OnRun = function(self, client, target)
+        if not target or target == "" then
+            target = client:GetCharacter():GetName()
+        end
+
+        local target = ix.util.FindPlayer(target)
+
+        if not target then
+            client:Notify("Invalid Target!")
+
+            return
+        end
+
+		target:DrawWorldModel(false)
+		target:DrawWorldModel(true)
+
+		client:Notify("Reset Weapon state of "..target:GetName())
+    end
+})
+
+
 -- Credit goes to SmithyStanley
 ix.command.Add("clearinv", {
 	description = "Removes all the items in the target characters inventory.",

@@ -1,6 +1,6 @@
 ITEM.name = "PP-2000"
 ITEM.description= "A folding-stock submachine gun chambered for 9x19mm."
-ITEM.longdesc = "The PP-2000 is a conventional blowback-operated weapon.\nThe PP-2000 is designed as a close-quarter combat weapon, intended for riot police and special operations forces.\nIn 2008, it was adopted as a standard SMG in the Russian police.\nIts high rate of fire makes it perfect for defending yourself against smaller mutants and bandits.\n\nAmmo: 9x19mm \nMagazine Capacity: 20+1"
+ITEM.longdesc = "The PP-2000 is a conventional blowback-operated weapon.\nThe PP-2000 is designed as a close-quarter combat weapon, intended for riot police and special operations forces.\nIn 2008, it was adopted as a standard SMG in the Russian police.\nIts high rate of fire makes it perfect for defending yourself against smaller mutants and bandits.\n\nAmmo: 9x19mm \nMagazine Capacity: 44"
 ITEM.model = "models/weapons/w_bf4_pp2000.mdl"
 ITEM.class = "cw_pp2000"
 ITEM.weaponCategory = "primary"
@@ -16,7 +16,7 @@ ITEM.unloadedweight = 1.4
 
 
 function ITEM:GetWeight()
-  return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
+  return self:GetData("weight", self.unloadedweight) + (self.bulletweight * self:GetData("ammo", 0))
 end
 
 ITEM.iconCam = {
@@ -50,6 +50,7 @@ ITEM.pacData = {
 				["ClassName"] = "event",
 				["UniqueID"] = "1640844916",
 				["Event"] = "weapon_class",
+				["Invert"] = false,
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
 				["Arguments"] = "cw_pp2000@@0",

@@ -9,37 +9,18 @@ ix.randomitems.tables["task_reward_weapon_00"] = {
 
 -- low durability
 ix.randomitems.tables["task_reward_weapon_01_low"] = { 
-    {250, {"w9422", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"g2contender", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"rugermk3", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"cz52", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"skorpion", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"c96carbine", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"toz106", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"ruger1022", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"sako85varmint", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"mp18", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"nagantrev", {["durability"] = 50, ["wear"] = 80}}},
-}
+    {500, {"w9422", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"g2contender", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"rugermk3", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"cz52", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"skorpion", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"c96carbine", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"toz106", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"ruger1022", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"sako85varmint", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"mp18", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"nagantrev", {["durability"] = 50, ["wear"] = 80}}},
 
--- high durability
-ix.randomitems.tables["task_reward_weapon_01_high"] = { 
-    {250, {"w9422", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"g2contender", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"rugermk3", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"cz52", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"skorpion", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"c96carbine", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"toz106", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"ruger1022", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"sako85varmint", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"mp18", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"nagantrev", {["durability"] = 100, ["wear"] = 80}}},
-}
-
-
--- low durability
-ix.randomitems.tables["task_reward_weapon_02_low"] = { 
     {250, {"tokarev", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"makarov", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"c96", {["durability"] = 50, ["wear"] = 80}}},
@@ -52,10 +33,37 @@ ix.randomitems.tables["task_reward_weapon_02_low"] = {
     {250, {"saigasemi545", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"obrez", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"sako85nato", {["durability"] = 50, ["wear"] = 80}}},
+
+    {100, {"fort12", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"lugerp08", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"m1911", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"ar159mm", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"sten", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"ppsh", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"lax410", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"toz34short", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"toz66short", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"stoegerddshort", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"aks74u", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"saigasemi", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"rugermini14", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"w1895", {["durability"] = 50, ["wear"] = 80}}},
 }
 
 -- high durability
-ix.randomitems.tables["task_reward_weapon_02_high"] = { 
+ix.randomitems.tables["task_reward_weapon_01_high"] = { 
+    {500, {"w9422", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"g2contender", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"rugermk3", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"cz52", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"skorpion", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"c96carbine", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"toz106", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"ruger1022", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"sako85varmint", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"mp18", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"nagantrev", {["durability"] = 100, ["wear"] = 80}}},
+
     {250, {"tokarev", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"makarov", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"c96", {["durability"] = 100, ["wear"] = 80}}},
@@ -68,10 +76,39 @@ ix.randomitems.tables["task_reward_weapon_02_high"] = {
     {250, {"saigasemi545", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"obrez", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"sako85nato", {["durability"] = 100, ["wear"] = 80}}},
+
+    {100, {"fort12", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"lugerp08", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"m1911", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"ar159mm", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"sten", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"ppsh", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"lax410", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"toz34short", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"toz66short", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"stoegerddshort", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"aks74u", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"saigasemi", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"rugermini14", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"w1895", {["durability"] = 100, ["wear"] = 80}}},
 }
 
+
 -- low durability
-ix.randomitems.tables["task_reward_weapon_03_low"] = { 
+ix.randomitems.tables["task_reward_weapon_02_low"] = { 
+    {500, {"tokarev", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"makarov", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"c96", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"m1917", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"kiparis", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"mac11", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"lax410s", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"ij600", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"mp27", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"saigasemi545", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"obrez", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"sako85nato", {["durability"] = 50, ["wear"] = 80}}},
+
     {250, {"fort12", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"lugerp08", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"m1911", {["durability"] = 50, ["wear"] = 80}}},
@@ -86,10 +123,43 @@ ix.randomitems.tables["task_reward_weapon_03_low"] = {
     {250, {"saigasemi", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"rugermini14", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"w1895", {["durability"] = 50, ["wear"] = 80}}},
+
+    {100, {"brhp", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"mr96", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"beretta92", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"p99", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"sterling", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"mp34", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"mp5k", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"mp40", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"toz34", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"toz66", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"stoegerdd", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"sks", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"famas", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"ak74", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"sg552", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"an94k", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"aug", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"mosin", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"w9422357", {["durability"] = 50, ["wear"] = 80}}},
 }
 
 -- high durability
-ix.randomitems.tables["task_reward_weapon_03_high"] = { 
+ix.randomitems.tables["task_reward_weapon_02_high"] = { 
+    {500, {"tokarev", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"makarov", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"c96", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"m1917", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"kiparis", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"mac11", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"lax410s", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"ij600", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"mp27", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"saigasemi545", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"obrez", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"sako85nato", {["durability"] = 100, ["wear"] = 80}}},
+
     {250, {"fort12", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"lugerp08", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"m1911", {["durability"] = 100, ["wear"] = 80}}},
@@ -104,10 +174,45 @@ ix.randomitems.tables["task_reward_weapon_03_high"] = {
     {250, {"saigasemi", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"rugermini14", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"w1895", {["durability"] = 100, ["wear"] = 80}}},
+
+    {100, {"brhp", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"mr96", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"beretta92", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"p99", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"sterling", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"mp34", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"mp5k", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"mp40", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"toz34", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"toz66", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"stoegerdd", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"sks", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"famas", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"ak74", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"sg552", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"an94k", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"aug", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"mosin", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"w9422357", {["durability"] = 100, ["wear"] = 80}}},
 }
 
 -- low durability
-ix.randomitems.tables["task_reward_weapon_04_low"] = { 
+ix.randomitems.tables["task_reward_weapon_03_low"] = { 
+    {500, {"fort12", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"lugerp08", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"m1911", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"ar159mm", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"sten", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"ppsh", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"lax410", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"toz34short", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"toz66short", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"stoegerddshort", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"aks74u", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"saigasemi", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"rugermini14", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"w1895", {["durability"] = 50, ["wear"] = 80}}},
+
     {250, {"brhp", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"mr96", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"beretta92", {["durability"] = 50, ["wear"] = 80}}},
@@ -127,10 +232,45 @@ ix.randomitems.tables["task_reward_weapon_04_low"] = {
     {250, {"aug", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"mosin", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"w9422357", {["durability"] = 50, ["wear"] = 80}}},
+
+    {100, {"glock17", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"swr8", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"swmodel29", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"gepardpdw", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"pp2000", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"kp31", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"pp1901vityaz", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"saiga410", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"m3supershort", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"toz194", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"l85", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"g36c", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"akm", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"aek971", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"f2000", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"vss", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"sako85", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"sv98", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"lax44", {["durability"] = 50, ["wear"] = 80}}},
 }
 
 -- high durability
-ix.randomitems.tables["task_reward_weapon_04_high"] = { 
+ix.randomitems.tables["task_reward_weapon_03_high"] = { 
+    {500, {"fort12", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"lugerp08", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"m1911", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"ar159mm", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"sten", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"ppsh", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"lax410", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"toz34short", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"toz66short", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"stoegerddshort", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"aks74u", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"saigasemi", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"rugermini14", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"w1895", {["durability"] = 100, ["wear"] = 80}}},
+
     {250, {"brhp", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"mr96", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"beretta92", {["durability"] = 100, ["wear"] = 80}}},
@@ -150,10 +290,50 @@ ix.randomitems.tables["task_reward_weapon_04_high"] = {
     {250, {"aug", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"mosin", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"w9422357", {["durability"] = 100, ["wear"] = 80}}},
+
+    {100, {"glock17", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"swr8", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"swmodel29", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"gepardpdw", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"pp2000", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"kp31", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"pp1901vityaz", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"saiga410", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"m3supershort", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"toz194", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"l85", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"g36c", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"akm", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"aek971", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"f2000", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"vss", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"sako85", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"sv98", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"lax44", {["durability"] = 100, ["wear"] = 80}}},
 }
 
 -- low durability
-ix.randomitems.tables["task_reward_weapon_05_low"] = { 
+ix.randomitems.tables["task_reward_weapon_04_low"] = { 
+    {500, {"brhp", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"mr96", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"beretta92", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"p99", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"sterling", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"mp34", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"mp5k", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"mp40", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"toz34", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"toz66", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"stoegerdd", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"sks", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"famas", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"ak74", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"sg552", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"an94k", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"aug", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"mosin", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"w9422357", {["durability"] = 50, ["wear"] = 80}}},
+
     {250, {"glock17", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"swr8", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"swmodel29", {["durability"] = 50, ["wear"] = 80}}},
@@ -173,10 +353,49 @@ ix.randomitems.tables["task_reward_weapon_05_low"] = {
     {250, {"sako85", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"sv98", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"lax44", {["durability"] = 50, ["wear"] = 80}}},
+
+    {100, {"g2contender500", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"deagle44", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"mateba", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"stechaps", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"uzi", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"ump45", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"mp5", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"mossberg500", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"m1887", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"rem870ae", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"m16a4", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"lr300", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"ak12", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"rk95", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"fnfal", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"svt40", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"trg42", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"obrezmalfunction", {["durability"] = 50, ["wear"] = 80}}},
 }
 
 -- high durability
-ix.randomitems.tables["task_reward_weapon_05_high"] = { 
+ix.randomitems.tables["task_reward_weapon_04_high"] = { 
+    {500, {"brhp", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"mr96", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"beretta92", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"p99", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"sterling", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"mp34", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"mp5k", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"mp40", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"toz34", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"toz66", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"stoegerdd", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"sks", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"famas", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"ak74", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"sg552", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"an94k", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"aug", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"mosin", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"w9422357", {["durability"] = 100, ["wear"] = 80}}},
+
     {250, {"glock17", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"swr8", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"swmodel29", {["durability"] = 100, ["wear"] = 80}}},
@@ -196,11 +415,51 @@ ix.randomitems.tables["task_reward_weapon_05_high"] = {
     {250, {"sako85", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"sv98", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"lax44", {["durability"] = 100, ["wear"] = 80}}},
+
+    {100, {"g2contender500", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"deagle44", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"mateba", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"stechaps", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"uzi", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"ump45", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"mp5", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"mossberg500", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"m1887", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"rem870ae", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"m16a4", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"lr300", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"ak12", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"rk95", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"fnfal", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"svt40", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"trg42", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"obrezmalfunction", {["durability"] = 100, ["wear"] = 80}}},
 }
 
 -- low durability
-ix.randomitems.tables["task_reward_weapon_06_low"] = { 
+ix.randomitems.tables["task_reward_weapon_05_low"] = { 
+    {500, {"glock17", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"swr8", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"swmodel29", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"gepardpdw", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"pp2000", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"kp31", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"pp1901vityaz", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"saiga410", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"m3supershort", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"toz194", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"l85", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"g36c", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"akm", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"aek971", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"f2000", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"vss", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"sako85", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"sv98", {["durability"] = 50, ["wear"] = 80}}},
+    {500, {"lax44", {["durability"] = 50, ["wear"] = 80}}},
+    
     {250, {"g2contender500", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"deagle44", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"mateba", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"stechaps", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"uzi", {["durability"] = 50, ["wear"] = 80}}},
@@ -216,11 +475,57 @@ ix.randomitems.tables["task_reward_weapon_06_low"] = {
     {250, {"fnfal", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"svt40", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"trg42", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"obrezmalfunction", {["durability"] = 50, ["wear"] = 80}}},
+
+    {250, {"taurusragingbull", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"deagle44", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"glock18", {["durability"] = 50, ["wear"] = 80}}},
+    {250, {"fiveseven", {["durability"] = 50, ["wear"] = 80}}},
+
+    {100, {"mp9a1", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"pp19", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"m3super90", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"ithaca37", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"mp153", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"rpk", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"g3a3", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"asval", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"9a91", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"hk416", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"svd", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"l115", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"barrettm98b", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"toz34special", {["durability"] = 50, ["wear"] = 80}}},
+
+    {100, {"m1911chic", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"deagle", {["durability"] = 50, ["wear"] = 80}}},
+    {100, {"taurusjudge", {["durability"] = 50, ["wear"] = 80}}},
 }
 
 -- high durability
-ix.randomitems.tables["task_reward_weapon_06_high"] = { 
+ix.randomitems.tables["task_reward_weapon_05_high"] = { 
+    {500, {"glock17", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"swr8", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"swmodel29", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"gepardpdw", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"pp2000", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"kp31", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"pp1901vityaz", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"saiga410", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"m3supershort", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"toz194", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"l85", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"g36c", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"akm", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"aek971", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"f2000", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"vss", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"sako85", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"sv98", {["durability"] = 100, ["wear"] = 80}}},
+    {500, {"lax44", {["durability"] = 100, ["wear"] = 80}}},
+    
     {250, {"g2contender500", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"deagle44", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"mateba", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"stechaps", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"uzi", {["durability"] = 100, ["wear"] = 80}}},
@@ -236,55 +541,35 @@ ix.randomitems.tables["task_reward_weapon_06_high"] = {
     {250, {"fnfal", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"svt40", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"trg42", {["durability"] = 100, ["wear"] = 80}}},
-}
+    {250, {"obrezmalfunction", {["durability"] = 100, ["wear"] = 80}}},
 
-
--- low durability
-ix.randomitems.tables["task_reward_weapon_07_low"] = { 
-    {250, {"taurusragingbull", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"glock18", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"fiveseven", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"mp9a1", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"pp19", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"m3super90", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"ithaca37", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"mp153", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"rpk", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"g3a3", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"asval", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"9a91", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"hk416", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"svd", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"l115", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"barrettm98b", {["durability"] = 50, ["wear"] = 80}}},
-}
-
--- high durability
-ix.randomitems.tables["task_reward_weapon_07_high"] = { 
     {250, {"taurusragingbull", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"deagle44", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"glock18", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"fiveseven", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"mp9a1", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"pp19", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"m3super90", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"ithaca37", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"mp153", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"rpk", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"g3a3", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"asval", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"9a91", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"hk416", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"svd", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"l115", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"barrettm98b", {["durability"] = 100, ["wear"] = 80}}},
+
+    {100, {"mp9a1", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"pp19", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"m3super90", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"ithaca37", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"mp153", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"rpk", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"g3a3", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"asval", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"9a91", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"hk416", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"svd", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"l115", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"barrettm98b", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"toz34special", {["durability"] = 100, ["wear"] = 80}}},
+
+    {100, {"m1911chic", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"deagle", {["durability"] = 100, ["wear"] = 80}}},
+    {100, {"taurusjudge", {["durability"] = 100, ["wear"] = 80}}},
 }
 
-
 -- low durability
-ix.randomitems.tables["task_reward_weapon_08_low"] = { 
-    {250, {"m1911chic", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"deagle", {["durability"] = 50, ["wear"] = 80}}},
-    {250, {"taurusjudge", {["durability"] = 50, ["wear"] = 80}}},
+ix.randomitems.tables["task_reward_weapon_06_low"] = { 
     {250, {"sw500", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"p90", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"sr2", {["durability"] = 50, ["wear"] = 80}}},
@@ -293,6 +578,23 @@ ix.randomitems.tables["task_reward_weapon_08_low"] = {
     {250, {"saiga12", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"striker", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"m14", {["durability"] = 50, ["wear"] = 80}}},
+}
+
+-- high durability
+ix.randomitems.tables["task_reward_weapon_06_high"] = { 
+    {250, {"sw500", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"p90", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"sr2", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"uzi50ae", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"m1928", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"saiga12", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"striker", {["durability"] = 100, ["wear"] = 80}}},
+    {250, {"m14", {["durability"] = 100, ["wear"] = 80}}},
+}
+
+
+-- low durability
+ix.randomitems.tables["task_reward_weapon_07_low"] = { 
     {250, {"sr3m", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"dp28", {["durability"] = 50, ["wear"] = 80}}},
     {250, {"pkm", {["durability"] = 50, ["wear"] = 80}}},
@@ -305,18 +607,7 @@ ix.randomitems.tables["task_reward_weapon_08_low"] = {
 }
 
 -- high durability
-ix.randomitems.tables["task_reward_weapon_08_high"] = { 
-    {250, {"m1911chic", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"deagle", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"taurusjudge", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"sw500", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"p90", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"sr2", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"uzi50ae", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"m1928", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"saiga12", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"striker", {["durability"] = 100, ["wear"] = 80}}},
-    {250, {"m14", {["durability"] = 100, ["wear"] = 80}}},
+ix.randomitems.tables["task_reward_weapon_07_high"] = { 
     {250, {"sr3m", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"dp28", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"pkm", {["durability"] = 100, ["wear"] = 80}}},
@@ -327,3 +618,41 @@ ix.randomitems.tables["task_reward_weapon_08_high"] = {
     {250, {"vssk", {["durability"] = 100, ["wear"] = 80}}},
     {250, {"tkpd", {["durability"] = 100, ["wear"] = 80}}},
 }
+
+
+-- low durability
+-- ix.randomitems.tables["task_reward_weapon_08_low"] = { 
+--     {250, {"sr3m", {["durability"] = 50, ["wear"] = 80}}},
+--     {250, {"dp28", {["durability"] = 50, ["wear"] = 80}}},
+--     {250, {"pkm", {["durability"] = 50, ["wear"] = 80}}},
+--     {250, {"svu", {["durability"] = 50, ["wear"] = 80}}},
+--     {250, {"nitro", {["durability"] = 50, ["wear"] = 80}}},
+--     {250, {"ptrs", {["durability"] = 50, ["wear"] = 80}}},
+--     {250, {"remmsr", {["durability"] = 50, ["wear"] = 80}}},
+--     {250, {"vssk", {["durability"] = 50, ["wear"] = 80}}},
+--     {250, {"tkpd", {["durability"] = 50, ["wear"] = 80}}},
+-- }
+
+-- -- high durability
+-- ix.randomitems.tables["task_reward_weapon_08_high"] = { 
+--     {250, {"m1911chic", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"deagle", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"taurusjudge", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"sw500", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"p90", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"sr2", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"uzi50ae", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"m1928", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"saiga12", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"striker", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"m14", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"sr3m", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"dp28", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"pkm", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"svu", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"nitro", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"ptrs", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"remmsr", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"vssk", {["durability"] = 100, ["wear"] = 80}}},
+--     {250, {"tkpd", {["durability"] = 100, ["wear"] = 80}}},
+-- }

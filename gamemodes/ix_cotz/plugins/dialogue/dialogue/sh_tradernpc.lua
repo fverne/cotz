@@ -11,6 +11,7 @@ DIALOGUE.addTopic("GREETING", {
 		-- "GetTask",
 		"GetTaskByDifficulty",
 		"AboutProgression",
+		"StartBarter",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)
@@ -429,8 +430,12 @@ DIALOGUE.addTopic("ViewProgression", {
 	DynamicPreCallback = function(self, player, target, dyndata)
 		if (dyndata) then
 			if(CLIENT)then
-				local progstatus 	= ix.progression.status[dyndata.identifier]
 				local progdef 		= ix.progression.definitions[dyndata.identifier]
+				local progstatus 	= ix.progression.status[dyndata.identifier]
+
+				if progdef.fnAddComplexProgression then
+					progstatus = ix.progression.GetComplexProgressionValue(dyndata.identifier)
+				end
 
 				self.response = progdef:BuildResponse(progdef, progstatus)
 				self.tmp = dyndata.identifier
@@ -529,6 +534,67 @@ DIALOGUE.addTopic("AboutProgression", {
 	end,
 })
 
+DIALOGUE.addTopic("StartBarter", {
+	statement = "I'd like to do some bartering.",
+	response = "Sure.",
+	options = {
+		"BackTopic"
+	},
+	preCallback = function(self, client, target)
+		if( CLIENT ) then
+			local barters = ix.npcbarter.GetActiveBartersForNPC("'Haggler'")
+
+			if #barters <= 0 then
+				self.response = "Nothing at the moment."
+
+				net.Start("npcbarter_sync")
+				net.SendToServer()
+			else
+				self.response = "I have the following things up for barter:"
+
+				for _, barter in pairs(barters) do
+					local barterTable = ix.npcbarter.barterdict["'Haggler'"][barter]
+					self.response = self.response.."\n    "..string.format(barterTable.description, ix.item.list[barterTable.barterItem[1]].name, barterTable.reqItem[2], ix.item.list[barterTable.reqItem[1]].name)
+				end
+			end
+
+		end
+	end,
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local dynopts = {}
+
+		for _, barterid in pairs(ix.npcbarter.GetActiveBartersForNPC("'Haggler'")) do
+			local barterstruct = ix.npcbarter.barterdict["'Haggler'"][barterid]
+
+			local barterItem = barterstruct.barterItem
+			local barterCnt = barterItem[2] or 1
+
+			-- for _, reqitem in pairs(barterstruct.reqItem) do
+				local reqitem = barterstruct.reqItem
+				local reqItemCnt = reqitem[2] or 1
+
+				table.insert(dynopts, {statement = "I'd like "..barterCnt.."x "..ix.item.list[barterItem[1]].name.." for my "..reqItemCnt.."x "..ix.item.list[reqitem[1]].name, topicID = "StartBarter", dyndata = {npcname = "'Haggler'", identifier = barterid, reqitem = reqitem[1]}})
+			-- end
+		end
+
+		-- Return table of options
+		-- statement : String shown to player
+		-- topicID : should be identical to addTopic id
+		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
+		return dynopts
+	end,
+	ResolveDynamicOption = function(self, client, target, dyndata)
+
+		if CLIENT then
+			ix.npcbarter.TryExecuteBarter(dyndata.npcname, dyndata.identifier, dyndata.reqitem)
+		end
+
+		-- Return the next topicID
+		return "BackTopic", dyndata
+	end,
+})
+
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
 	response = "Very nice...",
@@ -541,6 +607,7 @@ DIALOGUE.addTopic("BackTopic", {
 		-- "GetTask",
 		"GetTaskByDifficulty",
 		"AboutProgression",
+		"StartBarter",
 		"GOODBYE"
 	},
 	preCallback = function(self, client, target)

@@ -1,19 +1,25 @@
-ITEM.name = "Propane Tank"
+ITEM.name = "Propane"
 ITEM.description = "A tank of propane, there is still some inside."
 ITEM.longdesc = "Propane is a flammable gas most often used in water heating, cooking, refrigeration, and powering industrial clinic. Most often used for multi-fuel cookers in the Zone."
 ITEM.model = "models/illusion/eftcontainers/propanetank.mdl"
 
 ITEM.width = 2
 ITEM.height = 3
-ITEM.price = 4860
+ITEM.price = 9986
 
 ITEM.flatweight = 6.850
 ITEM.weight = 0.090
 
 ITEM.fueltier = 2
-ITEM.quantity = 1
+ITEM.quantity = 10
 
 ITEM.img = ix.util.GetMaterial("vgui/hud/valuable/propanetank.png")
+
+function ITEM:GetPrice()
+	local base = self.price / self.quantity
+
+	return base * self:GetData("quantity", self.quantity)
+end
 
 function ITEM:PopulateTooltipIndividual(tooltip)
     ix.util.PropertyDesc(tooltip, "High Tier Cooking Fuel", Color(64, 224, 208))
@@ -34,7 +40,7 @@ ITEM.functions.combine = {
 		end
 
 		local targetItem = ix.item.instances[data[1]]
-		return (targetItem.uniqueID == item.uniqueID or targetItem.cookertier and targetItem.cookertier >= item.fueltier)
+		return (targetItem.uniqueID == item.uniqueID or targetItem.cookertier and targetItem.cookertier == item.fueltier)
 
 	end,
 	OnRun = function(item, data)
@@ -53,9 +59,9 @@ ITEM.functions.combine = {
 				targetItem:SetData("quantity", targetItem.quantity)
 				return false
 			end
-		elseif ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and !targetItem:GetData("cancook", false) ) then
+		elseif ( targetItem.cookertier and targetItem.cookertier == item.fueltier and targetItem:GetData("fuel") != targetItem.maxFuel) then
 			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
-			targetItem:SetData("cancook", true)
+			targetItem:SetData("fuel", targetItem:GetData("fuel", 0) + 1)
 
 			return (item:GetData("quantity", item.quantity) == 0)
 		end
@@ -80,7 +86,7 @@ ITEM.functions.use = {
 				local items = inv:GetItems()
 
 				for k, v in pairs(items) do
-					if (v.cookertier and v.cookertier >= item.fueltier and !v:GetData("cancook", false)) then
+					if (v.cookertier and v.cookertier >= item.fueltier and v:GetData("fuel", false) != v.maxFuel) then
 						table.insert(targets, {
 							name = L(v.name),
 							data = {v:GetID()},
@@ -99,9 +105,9 @@ ITEM.functions.use = {
 		local targetItem = ix.item.instances[data[1]]
 		if (!targetItem) then return false end
 
-		if ( targetItem.cookertier and targetItem.cookertier >= item.fueltier and !targetItem:GetData("cancook", false) ) then
+		if ( targetItem.cookertier and targetItem.cookertier == item.fueltier and targetItem:GetData("fuel") != targetItem.maxFuel) then
 			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
-			targetItem:SetData("cancook", true)
+			targetItem:SetData("fuel", targetItem:GetData("fuel", 0) + 1)
 
 			return (item:GetData("quantity", item.quantity) == 0)
 		end
@@ -109,3 +115,9 @@ ITEM.functions.use = {
 		return false
 	end,
 }
+
+function ITEM:OnInstanced()
+	if (!self:GetData("quantity")) then
+		self:SetData("quantity", math.random(2,3))
+	end
+end

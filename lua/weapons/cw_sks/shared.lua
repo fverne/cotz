@@ -67,7 +67,10 @@ if CLIENT then
 	
 	SWEP.SprintPos = Vector(2, -4, 0.119)
 	SWEP.SprintAng = Vector(-10.628, 25.478, 0)
-	
+
+	SWEP.SightBackUpPos = Vector(-4.2, 2, 0)
+	SWEP.SightBackUpAng = Vector(2, 0, -40)	
+
 	SWEP.CustomizePos = Vector(2.68, -1.68, 1)
 	SWEP.CustomizeAng = Vector(1.299, 5.8, 21.299)
 	
@@ -182,7 +185,8 @@ SWEP.FireSound = "CW_SAIGA308_FIRE"
 SWEP.FireSoundSuppressed = "CW_M14_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.9
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.11

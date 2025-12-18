@@ -19,16 +19,17 @@ ENT.IdlingSound.min = 1
 ENT.IdlingSound.max = 2
 
 ENT.ChasingSoundEnabled = true
-ENT.ChasingSound.name = "Stalker.Boar.Idle"
+ENT.ChasingSound.name = "Stalker.Boar.Chase"
 ENT.ChasingSound.min = 1
 ENT.ChasingSound.max = 2
-ENT.ChasingSound.chance = 20
+ENT.ChasingSound.chance = 100
 
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
 ENT.hp = 180
 ENT.hpvar = 20
+ENT.injuredact = ACT_DOD_RUN_ZOOM_BOLT
 
 ENT.FBR = 0
 ENT.FBRAP = 5
@@ -97,6 +98,10 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
+	-- npc wounded animation
+	if self:Health() < (self:GetMaxHealth() * 0.33) then
+		self:SetMovementActivity(self.injuredact)
+	end
 
 end
 

@@ -39,6 +39,9 @@ if CLIENT then
 	
 	SWEP.ShortDotPos = Vector(3.5, -4.107, 0.93)
 	SWEP.ShortDotAng = Vector(0, 0, 0)
+
+	SWEP.SightBackUpPos = Vector(5.5, 2, 1)
+	SWEP.SightBackUpAng = Vector(0, 0, 30)
 	
 	SWEP.ACOGPos = Vector(3.54, -2.107, 0.68)
 	SWEP.ACOGAng = Vector(0, 0, 0)
@@ -155,7 +158,8 @@ SWEP.WMAng = Vector(-10,0, 180)
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.Primary.ClipSize		= 30

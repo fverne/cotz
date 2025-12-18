@@ -11,21 +11,23 @@ ITEM.weight = 12.000
 ITEM.newSkin = 0
 ITEM.baseSuit = "suit_berill"
 
-ITEM.price = 152100
+ITEM.price = 252100
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.21
-ITEM.fbr = 2
-ITEM.sr = 0.30
+ITEM.br = 0.23
+ITEM.fbr = 3
+ITEM.sr = 0.41
 ITEM.fsr = 2
-ITEM.ar = 0.07
+ITEM.ar = 0.12
 ITEM.far = 2
 
-ITEM.carryinc = 11.000
-ITEM.miscslots = 1
+ITEM.carryinc = 9.600
+ITEM.exteriorSlots = 2
+ITEM.interiorSlots = 2
+ITEM.extraSlots = 1
 
 
 ITEM.skincustom[1] = {

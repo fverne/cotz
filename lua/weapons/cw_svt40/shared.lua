@@ -33,6 +33,9 @@ if CLIENT then
 	SWEP.IronsightPos = Vector(-3.475, 0, 0.82)
 	SWEP.IronsightAng = Vector(0.301, 0, -0.419)
 	
+	SWEP.SightBackUpPos = Vector(-5.25, 2, 0)
+	SWEP.SightBackUpAng = Vector(1, 0, -40)
+
 	SWEP.PSOPos = Vector(-3.195, -4, -0.07)
 	SWEP.PSOAng = Vector(0.301, 0, -0.419)
 	SWEP.PSO1AxisAlign = {right = 0, up = 0, forward = 89.581}
@@ -146,7 +149,8 @@ SWEP.Shots = 1
 SWEP.Damage = 140
 SWEP.DeployTime = 1.5
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.RecoilToSpread = 0.8 -- the M14 in particular will have 30% more recoil from continuous fire to give a feeling of "oh fuck I should stop firing 7.62x51MM in full auto at 750 RPM"

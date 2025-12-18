@@ -262,7 +262,6 @@ end
 
 function PANEL:Setup(uniqueID, iteminstanceID)
 	local item = ix.item.instances[iteminstanceID] or ix.item.list[uniqueID]
-	local invicon = item.img
 	local exIcon = ikon:GetIcon(item.uniqueID)
 	local wmax = 32
 	local hmax = 32
@@ -280,46 +279,17 @@ function PANEL:Setup(uniqueID, iteminstanceID)
 
 	if (item) then
 		self.item = uniqueID
-
+		
 		self.iteminstanceID = iteminstanceID or 0
+		local iconMaterial = ix.util.GetItemIcon(item)
 
-		if !(item.img or item.exRender) then
-			self.icon = self:Add("SpawnIcon")
-			self.icon:SetPos(2, 2)
-			self.icon:SetSize(32, 32)
-			self.icon:SetModel(item:GetModel(), item:GetSkin())
-		elseif item.img then
-			self.icon = self:Add("DImage")
-			if (invicon) then
-				self.icon:SetMaterial(invicon)
-				self.icon:SetSize(wmax, hmax)
-
-				if hmax == 32 then
-					self.icon:SetPos(18 - (16 * whratio), 2)
-				else
-					self.icon:SetPos(2, 18 - (16 * whratio))
-				end
-			end
-		elseif item.exRender then
-			self.icon = self:Add("DImage")			
-			if (exIcon) then
-				self.icon:SetMaterial(exIcon)
-				self.icon:SetSize(wmax, hmax)
-				if hmax == 32 then
-					self.icon:SetPos(18 - (16 * whratio), 2)
-				else
-					self.icon:SetPos(2, 18 - (16 * whratio))
-				end
-			else
-				ikon:renderIcon(
-					item.uniqueID,
-					item.width,
-					item.height,
-					item:GetModel(),
-					item.material,
-					item.iconCam
-				)
-			end
+		self.icon = self:Add("DImage")
+		self.icon:SetMaterial(iconMaterial)
+		self.icon:SetSize(wmax, hmax)
+		if hmax == 32 then
+			self.icon:SetPos(18 - (16 * whratio), 2)
+		else
+			self.icon:SetPos(2, 18 - (16 * whratio))
 		end
 
 		self.name:SetText(item:GetName())

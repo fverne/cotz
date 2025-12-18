@@ -71,7 +71,7 @@ vgui.Register("ixStalkerButton", PANEL, "DImageButton")
 local PANEL = {}
 
 function PANEL:Init()
-	self:SetSize(400, 560)
+	self:SetSize(ScrW()*0.2604, ScrH() * 0.66)
 	self:Dock(FILL)
 
 	ix.gui.menuInventoryContainer = self
@@ -92,7 +92,7 @@ function PANEL:Init()
 
 	ix.gui.inv1 = panel
 
-	self:SetWide(panel:GetWide() - 64)
+	self:SetWide(panel:GetWide() - (ScrW()*0.022 * ix.option.Get("inventoryScale", 1)))
 end
 
 vgui.Register("ixStalkerInventory", PANEL, "DScrollPanel")
@@ -111,11 +111,11 @@ function PANEL:Init()
 	ix.gui.menuInventoryFrame = self
 
 	local container = self:Add("ixStalkerInventory")
-	self:SetSize(container:GetWide() + 100, container:GetTall() + 100)
-	self:DockPadding(12, 108, 12, 52)
+	self:SetSize(container:GetWide() * 1.25, container:GetTall() * 1.0785)
+	self:DockPadding(container:GetWide()*0.030, container:GetTall() * 0.173, container:GetWide()*0.030, container:GetTall() * 0.082)
 
 	self.charbackground = self:Add("DImage")
-	self.charbackground:SetSize(container:GetWide() + 100, container:GetTall() + 100)
+	self.charbackground:SetSize(container:GetWide() * 1.25, container:GetTall() * 1.0785)
 	self.charbackground:SetImage( "cotz/panels/menuplayers.png" )
 	self.charbackground:SetPos(0, 0)
 	self.charbackground:SetZPos(-1)
@@ -124,9 +124,9 @@ function PANEL:Init()
 	self.name = self:Add("DLabel")
 	self.name:SetFont("stalkerregularfont2")
 	self.name:SetTextColor(color_white)
-	self.name:SetPos(24, 16)
+	self.name:SetPos(container:GetWide() * 0.06, container:GetTall() * 0.023)
 	self.name:SetContentAlignment(7)
-	self.name:SetWide(190)
+	self.name:SetWide(container:GetWide() * 0.54)
 	self.name:SetTall(self:GetTall()*0.1)
 	self.name:SetText(LocalPlayer():GetName())
 
@@ -134,14 +134,14 @@ function PANEL:Init()
 	self.rep:SetFont("stalkerregularfont3")
 	self.rep:SetTextColor(color_white)
 	self.rep:SetText("Rank: "..LocalPlayer():getCurrentRankName())
-	self.rep:SetPos(24, 42)
-	self.rep:SetWide(190)
+	self.rep:SetPos(container:GetWide() * 0.06, container:GetTall() * 0.069)
+	self.rep:SetWide(container:GetWide() * 0.54)
 	self.rep:SetContentAlignment(7)
 
 	self.money = self:Add("DLabel")
 	self.money:SetFont("stalkerregularfont3")
-	self.money:SetPos(24, 66)
-	self.money:SetWide(180)
+	self.money:SetPos(container:GetWide() * 0.06, container:GetTall() * 0.11)
+	self.money:SetWide(container:GetWide() * 0.625)
 	self.money:SetContentAlignment(6)
 	self.money:SetText(ix.currency.Get(LocalPlayer():GetCharacter():GetMoney()))
 
@@ -150,8 +150,8 @@ function PANEL:Init()
 	local maxWeight = ix.config.Get("maxWeight", 30)
 	self.weight = self:Add("DLabel")
 	self.weight:SetFont("stalkerregularfont3")
-	self.weight:SetPos(200, 633)
-	self.weight:SetWide(155)
+	self.weight:SetPos(container:GetWide()*0.4, container:GetTall()*1.038)
+	self.weight:SetWide(container:GetWide()*0.8)
 	self.weight:SetContentAlignment(6)
 	if (ix.option.Get("imperial", false)) then
 		self.weight:SetText(math.Round(carry * 2.20462, 2).." lbs / "..math.Round(maxWeight * 2.20462, 2).." lbs")
@@ -160,8 +160,8 @@ function PANEL:Init()
 	end
 	
 	self.charbackgroundicon = self:Add("DImage")
-	self.charbackgroundicon:SetSize(138, 76)
-	self.charbackgroundicon:SetPos(230, 13)
+	self.charbackgroundicon:SetSize(container:GetWide()*0.46, container:GetTall()*0.126)
+	self.charbackgroundicon:SetPos(container:GetWide()*0.755, container:GetTall()*0.023)
 	self.charbackgroundicon:SetZPos(-1)
 
 	if LocalPlayer():GetCharacter():GetPdaavatar() then 

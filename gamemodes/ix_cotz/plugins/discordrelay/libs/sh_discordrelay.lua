@@ -1,11 +1,17 @@
 ix.discordrelay = ix.discordrelay or {}
 
 function ix.discordrelay.RelayChatToDiscord(name, text)
+	if pcall(require, "chttp") and CHTTP ~= nil then
+		relay_http = CHTTP
+	else
+		relay_http = HTTP
+	end
+
     local name = name or "Unknown"
     local text = text or "Unintelligible"
 	local avatar_url = "https://i.imgur.com/gYv1qmH.png"
 
-	HTTP({
+	relay_http({
 		url = ix.config.Get("webUrl"),
 		method = "POST",
 		body = util.TableToJSON({

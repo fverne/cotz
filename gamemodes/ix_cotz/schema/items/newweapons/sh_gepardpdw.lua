@@ -7,7 +7,7 @@ ITEM.weaponCategory = "primary"
 ITEM.width = 3
 ITEM.price = 14500
 ITEM.height = 2
-ITEM.canAttach = false
+ITEM.validAttachments = {"md_kobra","md_microt1","md_eotech","md_aimpoint","md_cmore", "md_reflex","md_tundra9mm"}
 
 ITEM.bulletweight = 0.008
 ITEM.unloadedweight = 2.0
@@ -16,7 +16,7 @@ ITEM.unloadedweight = 2.0
 
 
 function ITEM:GetWeight()
-  return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
+  return self:GetData("weight", self.unloadedweight) + (self.bulletweight * self:GetData("ammo", 0))
 end
 
 ITEM.iconCam = {
@@ -51,6 +51,7 @@ ITEM.pacData = {
 				["ClassName"] = "event",
 				["UniqueID"] = "1036853672",
 				["Event"] = "weapon_class",
+				["Invert"] = false,
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
 				["Arguments"] = "cw_gepardpdw@@0",

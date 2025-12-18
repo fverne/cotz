@@ -47,7 +47,10 @@ if CLIENT then
 	
 	SWEP.MicroT1Pos = Vector(-2.55, 1.5, -0.15)
 	SWEP.MicroT1Ang = Vector(0, 0, 0)
-	
+
+	SWEP.SightBackUpPos = Vector(-4.5, 2, 0)
+	SWEP.SightBackUpAng = Vector(2, 1, -40)
+
 	SWEP.AimpointPos = Vector(-2.541, -3.504, -0.233)
 	SWEP.AimpointAng = Vector(0, 0, 0)
 	
@@ -60,6 +63,9 @@ if CLIENT then
 
 	SWEP.SprintPos = Vector(1.786, 0, -1)
 	SWEP.SprintAng = Vector(-10.778, 27.573, 0)
+
+	SWEP.SightBackUpPos = Vector(-3.8, 5, 0)
+	SWEP.SightBackUpAng = Vector(0, 0.8, -30)
 	
 	SWEP.CustomizePos = Vector(12.121, -4.907, -0.461)
 	SWEP.CustomizeAng = Vector(17.232, 58.485, 19.311)
@@ -182,7 +188,8 @@ SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x39MM"
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.FireDelay = 0.066

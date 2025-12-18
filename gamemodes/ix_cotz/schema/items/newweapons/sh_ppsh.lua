@@ -17,7 +17,7 @@ ITEM.unloadedweight = 3.63
 
 
 function ITEM:GetWeight()
-  return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
+  return self:GetData("weight", self.unloadedweight) + (self.bulletweight * self:GetData("ammo", 0))
 end
 
 ITEM.iconCam = {
@@ -52,6 +52,7 @@ ITEM.pacData = {
 				["ClassName"] = "event",
 				["UniqueID"] = "1044232402",
 				["Event"] = "weapon_class",
+				["Invert"] = false,
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
 				["Arguments"] = "cw_ppsh@@0",

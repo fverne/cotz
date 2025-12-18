@@ -15,15 +15,17 @@ ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 ITEM.isGasmask = false 
 ITEM.isHelmet = false
 
-ITEM.br = 0.01
-ITEM.fbr = 0
-ITEM.sr = 0.11
-ITEM.fsr = 0
+ITEM.br = 0.04
+ITEM.fbr = 1
+ITEM.sr = 0.16
+ITEM.fsr = 1
 ITEM.ar = 0.07
 ITEM.far = 1
 
-ITEM.carryinc = 5.000
-ITEM.miscslots = 1
+ITEM.carryinc = 4.180
+ITEM.exteriorSlots = 1
+ITEM.interiorSlots = 0
+ITEM.extraSlots = 0
 
 ITEM.bodyGroups = {
 	["vest"] = 0,

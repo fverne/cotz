@@ -105,7 +105,8 @@ SWEP.FireDelay = 0.18
 SWEP.FireSound = "CW_STRIKER_FIRE"
 SWEP.Recoil = 3
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.07
@@ -121,7 +122,8 @@ SWEP.DeployTime = 1
 
 SWEP.ReloadStartTime = 0.3
 SWEP.InsertShellTime = 0.6
-SWEP.ReloadFinishWait = 1
+SWEP.ReloadFinishWait = 0.5
 SWEP.ShotgunReload = true
+SWEP.AlwaysPlayReloadEnd = true
 
 SWEP.Chamberable = false

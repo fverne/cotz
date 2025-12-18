@@ -134,7 +134,8 @@ SWEP.FireSound = "CW_PP2000_FIRE"
 SWEP.FireSoundSuppressed = "CW_UMP45_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.3
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.065
@@ -147,7 +148,7 @@ SWEP.Shots = 1
 SWEP.Damage = 48
 SWEP.DeployTime = 0.8
 
-SWEP.ReloadSpeed = 1
+SWEP.ReloadSpeed = 1.2
 SWEP.ReloadTime = 3.4
 SWEP.ReloadTime_Empty = 3.4
 SWEP.ReloadHalt = 3.6

@@ -7,7 +7,7 @@ if CLIENT then
 	SWEP.PrintName = "AKs-74u"
 	SWEP.CSMuzzleFlashes = true
 	
-	SWEP.IronsightPos = Vector(-2.428, -4.005, 0.815)
+	SWEP.IronsightPos = Vector(-2.428, -3.005, 0.815)
 	SWEP.IronsightAng = Vector(0, 0, 0)
 	
 	SWEP.AimpointPos = Vector(-2.371, -2.59, -0.925)
@@ -33,6 +33,9 @@ if CLIENT then
 	
 	SWEP.AlternativePos = Vector(-0.24, 0, -0.48)
 	SWEP.AlternativeAng = Vector(0, 0, 0)
+
+	SWEP.SightBackUpPos = Vector(-4, 2, 0)
+	SWEP.SightBackUpAng = Vector(0, -0.3, -30)
 
 	SWEP.ACOGPos = Vector(-2.448, -2.107, -1.155)
 	SWEP.ACOGAng = Vector(0, 0, 0)
@@ -148,7 +151,8 @@ SWEP.WorldModel		= "models/weapons/w_smg_aks.mdl"
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.Primary.ClipSize		= 30

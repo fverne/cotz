@@ -58,6 +58,9 @@ if CLIENT then
 	SWEP.CmorePos = Vector(3.579, 0, 0.859)
 	SWEP.CmoreAng = Vector(-2.6, -0.03, -1.3)
 
+	SWEP.SightBackUpPos = Vector(6, 0, 0)
+	SWEP.SightBackUpAng = Vector(0, 1, 40)
+
 	SWEP.CustomizePos = Vector(1.879, 0, 0.959)
 	SWEP.CustomizeAng = Vector(5.107, -10.954, -6.332)
 
@@ -130,7 +133,7 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
-SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFOV	= 60
 SWEP.AimViewModelFOV = 60
 SWEP.ViewModelFlip	= true
 SWEP.ViewModel		= "models/weapons/v_rif_tg552.mdl"
@@ -156,7 +159,8 @@ SWEP.FireSound = "CW_SG552_FIRE"
 SWEP.FireSoundSuppressed = "CW_SG552_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.7
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.1

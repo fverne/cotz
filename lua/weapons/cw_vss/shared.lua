@@ -44,7 +44,10 @@ if CLIENT then
 	
 	SWEP.CmorePos = Vector(-2.53, 1.5, -0.15)
 	SWEP.CmoreAng = Vector(0, 0, 0)
-	
+
+	SWEP.SightBackUpPos = Vector(-4.5, 2, 0)
+	SWEP.SightBackUpAng = Vector(2, 1, -40)
+
 	SWEP.ReflexPos = Vector(-2.53, -3.823, 0.15)
 	SWEP.ReflexAng = Vector(0, 0, 0)
 	
@@ -67,7 +70,7 @@ if CLIENT then
 	SWEP.CustomizePos = Vector(12.121, -4.907, -0.461)
 	SWEP.CustomizeAng = Vector(17.232, 58.485, 19.311)
 		
-	SWEP.BackupSights = {["md_acog"] = {[1] = Vector(-2.021, -4.864, -1.122), [2] = Vector(0, 0, 0)}}
+	-- SWEP.BackupSights = {["md_acog"] = {[1] = Vector(-2.021, -4.864, -1.122), [2] = Vector(0, 0, 0)}}
 
 	SWEP.SightWithRail = true
 	SWEP.PSO1AxisAlign = {right = 0, up = 0, forward = 90}
@@ -168,7 +171,8 @@ SWEP.FireModes = {"auto", "semi"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.Author			= "Spy"

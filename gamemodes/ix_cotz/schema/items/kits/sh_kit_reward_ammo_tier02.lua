@@ -14,7 +14,7 @@ ITEM.iconCam = {
 }
 
 ITEM.upgradeItem = "kit_reward_ammo_tier03"
-ITEM.upgradeCost = 20000
+ITEM.upgradeCost = 8000
 
 ITEM.items = {
 	{

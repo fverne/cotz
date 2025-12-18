@@ -4,7 +4,7 @@ local gradient = ix.util.GetMaterial("vgui/gradient-d")
 function PANEL:Init()
 	self.loading = true
 
-	self.ANIM_SPEED = 0.15
+	self.ANIM_SPEED = 0
 
 	gui.EnableScreenClicker(true)
 

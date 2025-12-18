@@ -50,13 +50,19 @@ if CLIENT then
 	
 	SWEP.MicroT1Pos = Vector(-2.55, 1.5, -0.15)
 	SWEP.MicroT1Ang = Vector(0, 0, 0)
-	
+
+	SWEP.SightBackUpPos = Vector(-4.5, 2, 0)
+	SWEP.SightBackUpAng = Vector(2, 1, -40)
+
 	SWEP.AimpointPos = Vector(-2.541, -3.504, -0.233)
 	SWEP.AimpointAng = Vector(0, 0, 0)
 	
 	SWEP.ShortDotPos = Vector(-2.517, -3.504, -0.166)
 	SWEP.ShortDotAng = Vector(0, 0, 0)
 
+	SWEP.SightBackUpPos = Vector(-4.5, 2, 0)
+	SWEP.SightBackUpAng = Vector(2, 1, -40)
+	
 	SWEP.ACOGPos = Vector(-2.537, -2.504, -0.61)
 	SWEP.ACOGAng = Vector(0, 0, 0)
 	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
@@ -67,7 +73,7 @@ if CLIENT then
 	SWEP.CustomizePos = Vector(12.121, -4.907, -0.461)
 	SWEP.CustomizeAng = Vector(17.232, 58.485, 19.311)
 		
-	SWEP.BackupSights = {["md_acog"] = {[1] = Vector(-2.021, -4.864, -1.122), [2] = Vector(0, 0, 0)}}
+	-- SWEP.BackupSights = {["md_acog"] = {[1] = Vector(-2.021, -4.864, -1.122), [2] = Vector(0, 0, 0)}}
 
 	SWEP.SightWithRail = true
 	SWEP.PSO1AxisAlign = {right = 0, up = 0, forward = 90}
@@ -194,7 +200,8 @@ SWEP.Recoil = 1.4
 
 SWEP.SuppressedOnEquip = false
 
-SWEP.WearDamage = 0.08
+SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
 SWEP.HipSpread = 0.11

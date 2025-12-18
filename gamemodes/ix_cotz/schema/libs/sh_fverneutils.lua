@@ -27,7 +27,7 @@ function ix.util.HandleChat(name, message)
     // Relay to other servers
 	if (ix.crossserverchat) then
 		local icon = "vgui/icons/news.png"
-		ix.crossserverchat.PostMessage(nil, name, message, icon)
+		ix.crossserverchat.PostMessage(name, message, icon)
 	end
 
     // Relay to discord
@@ -38,6 +38,8 @@ end
 
 --overwrites the original helix one
 function ix.util.GetMaterial(materialPath, materialArguments)
+    if !isstring(materialPath) then return materialPath end
+
     -- Cache the material.
     ix.util.cachedMaterials = ix.util.cachedMaterials or {}
     ix.util.cachedMaterials[materialPath] = ix.util.cachedMaterials[materialPath] or Material(materialPath, materialArguments or "noclamp smooth")

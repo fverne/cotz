@@ -16,8 +16,9 @@ PLUGIN.currentEvents = {} --To keep track of and update running events
 function PLUGIN:GetFirstNameBySteamID(client)
 	local steamid = client:AccountID()
 	local firstname
+	local index = steamid % #self.stalkernames
 
-	firstname = steamid % #self.stalkernames
+	firstname = index == 0 and 1 or index
 
 	return self.stalkernames[firstname]
 end
@@ -25,8 +26,9 @@ end
 function PLUGIN:GetLastNameBySteamID(client)
 	local steamid = client:AccountID()
 	local lastname
+	local index = steamid % #self.stalkersnames
 
-	lastname = steamid % #self.stalkersnames
+	lastname = index == 0 and 1 or index
 	
 	return self.stalkersnames[lastname]
 end
@@ -68,7 +70,7 @@ do
 end
 
 --pda avatar tied to steam id on char creation
-function PLUGIN:GetPDAAvatar(client)
+function PLUGIN:GetNewCharPDAAvatar(client)
 	local steamid = client:AccountID()
 	local avatar
 
@@ -78,5 +80,5 @@ function PLUGIN:GetPDAAvatar(client)
 end
 
 function PLUGIN:OnCharacterCreated(client, character)
-	character:SetPdaavatar(self:GetPDAAvatar(client))
+	character:SetPdaavatar(self:GetNewCharPDAAvatar(client))
 end

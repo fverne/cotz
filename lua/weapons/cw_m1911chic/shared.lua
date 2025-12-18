@@ -146,7 +146,7 @@ if CustomizableWeaponry then
 	SWEP.FireSoundSuppressed = "CW_SILVERBALLER_FIRE_SD"
 	SWEP.Recoil = 1.7
 
-	SWEP.WearDamage = 0.22
+	SWEP.WearDamage = 0.14
 	SWEP.WearEffect = 0.05
 
 	SWEP.HipSpread = 0.035

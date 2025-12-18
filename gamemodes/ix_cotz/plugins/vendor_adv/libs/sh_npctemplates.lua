@@ -109,21 +109,6 @@ ix.npctemplates.templates["tutorialnpc"] = {
 		["drug_cigarette_1"] 	= { nil, 6, SELLANDBUY, 6, 1, 3 },
 		["drug_cigarette_2"] 	= { nil, 6, SELLANDBUY, 6, 1, 3 },
 
-		["drink_vodka_2"] 	= { nil, 8, SELLANDBUY, 8, 1, 8 },
-		["drink_bottlebeer_3"] 	= { nil, 6, SELLANDBUY, 6, 1, 3 },
-		["drink_canbeer_1"] 	= { nil, 12, SELLANDBUY, 12, 1, 8 },
-		["drink_canbeer_2"] 	= { nil, 12, SELLANDBUY, 12, 1, 8 },
-		["drink_bottlewaterdirty"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 5 },
-
-		["food_oldmeat"] 	= { nil, 2, SELLANDBUY, 2, 0.1, 2 },
-		["food_can_tushonka"] 	= { 110, 2, SELLANDBUY, 2, 4, 2 },
-		["food_can_sprats"] 	= { 130, 2, SELLANDBUY, 2, 4, 2 },
-
-		["knife1"] 	= { nil, 12, SELLANDBUY, 12, 2, 3 },
-		["hidestasher_cutlery"] 	= { nil, 6, SELLANDBUY, 6, 2, 3 },
-		["lowtiercooker"] 	= { nil, 3, SELLANDBUY, 3, 2, 3 },
-		["lowtiercookerfuel"] 	= { nil, 20, SELLANDBUY, 20, 1, 15 },
-
 		["part_bear"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 		["part_blinddog"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 		["part_bloodsucker"] 	= { nil, nil, BUYONLY, nil, nil, nil },
@@ -191,7 +176,9 @@ ix.npctemplates.templates["cooknpc"] = {
 	--animgroup 	= 4,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["lowtiercooker"] 	= { nil, 2, SELLANDBUY, 2, 1, 2 },
+		["hightiercooker"] 	= { nil, 3, SELLANDBUY, 3, 1, 3},
+		["value_kerosene"]	= { nil, 20, SELLONLY, 20, 1, 15 },
+
 		["lowtiercookerfuel"] 	= { nil, 40, SELLANDBUY, 40, 1, 20 },
 
 		["drug_cigarette_1"] 	= { nil, 5, SELLANDBUY, 5, 1, 5 },
@@ -210,11 +197,13 @@ ix.npctemplates.templates["cooknpc"] = {
 		["drink_vodka_2"] 	= { nil, 8, SELLANDBUY, 8, 1, 8 },
 		["drink_vodka_3"] 	= { nil, 4, SELLANDBUY, 4, 1, 3 },
 
-        ["food_bread"] 	= { nil, 20, SELLANDBUY, 20, 1, 5 },
-        ["food_nuts_1"] 	= { nil, 40, SELLANDBUY, 40, 1, 5 },
-        ["food_oldmeat"] 	= { nil, 10, SELLANDBUY, 10, 1, 5 },
-        ["food_sausage_1"] 	= { nil, 10, SELLANDBUY, 10, 1, 5 },
-        ["food_can_sprats"] 	= { nil, 3, SELLANDBUY, 3, 1, 3 },
+        -- ["food_bread"] 	= { nil, 20, SELLANDBUY, 20, 1, 5 },
+        -- ["food_nuts_1"] 	= { nil, 40, SELLANDBUY, 40, 1, 5 },
+        -- ["food_oldmeat"] 	= { nil, 10, SELLANDBUY, 10, 1, 5 },
+        -- ["food_sausage_1"] 	= { nil, 10, SELLANDBUY, 10, 1, 5 },
+        ["food_can_sprats"] 	= { 200, 3, SELLANDBUY, 3, 1, 3 },
+
+        ["waterflask"] = { nil, 5, SELLANDBUY, 5, 1, 5 },
 
 		--[[
 		["meat_blinddog"] 	= { nil, nil, BUYONLY, nil, nil, nil },
@@ -372,6 +361,7 @@ ix.npctemplates.templates["ecologistnpc"] = {
 		["hide_tark"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 		["hide_vareshka"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 
+		["artifact_grapes"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_arachno"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_battery"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_blowncap"] = { nil, nil, BUYONLY, nil, nil, nil },
@@ -402,6 +392,10 @@ ix.npctemplates.templates["ecologistnpc"] = {
 		["artifact_sparkler"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_thorn"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_urchin"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_photo"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_moon"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_compass"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_storm"] = { nil, nil, BUYONLY, nil, nil, nil },
 	},
 }
 
@@ -598,6 +592,7 @@ ix.npctemplates.templates["unisgnpc3"] = {
 		["hide_tark"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 		["hide_vareshka"] 	= { nil, nil, BUYONLY, nil, nil, nil },
 
+		["artifact_grapes"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_arachno"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_battery"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_blowncap"] = { nil, nil, BUYONLY, nil, nil, nil },
@@ -628,6 +623,10 @@ ix.npctemplates.templates["unisgnpc3"] = {
 		["artifact_sparkler"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_thorn"] = { nil, nil, BUYONLY, nil, nil, nil },
 		["artifact_urchin"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_photo"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_moon"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_compass"] = { nil, nil, BUYONLY, nil, nil, nil },
+		["artifact_storm"] = { nil, nil, BUYONLY, nil, nil, nil },
 	},
 }
 
@@ -692,21 +691,34 @@ ix.npctemplates.templates["medicnpc"] = {
 }
 
 
-ix.npctemplates.templates["technpc2"] = {
-	name 		= "'Tinker'",
-	description = "A free man.",
+ix.npctemplates.templates["firststalkernpc"] = {
+	name 		= "'The Original'",
+	description = "The first stalker in the zone.",
 	model 		= "models/legends/freeman.mdl",
 	skin 		= 0,
 	bubble 		= 0,
 	scale 		= 0.3,
-	dialogueid 	= "tinkernpc",
+	dialogueid 	= "firststalkernpc",
 	soundgroup 	= "technpc2",
 	idleanim 	= "trader_idle",
 	buyAll 		= false,
 	--animgroup 	= 4,
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
-		["value_nuts"] 	= { nil, 4, SELLANDBUY, 4, 2, 4 },
+		["drink_vodka_2"] 	= { nil, 8, SELLANDBUY, 8, 1, 8 },
+		["drink_bottlebeer_3"] 	= { nil, 6, SELLANDBUY, 6, 1, 3 },
+		["drink_canbeer_1"] 	= { nil, 12, SELLANDBUY, 12, 1, 8 },
+		["drink_canbeer_2"] 	= { nil, 12, SELLANDBUY, 12, 1, 8 },
+		["drink_bottlewaterdirty"] 	= { nil, 10, SELLANDBUY, 10, 0.5, 5 },
+
+		["food_oldmeat"] 	= { nil, 2, SELLANDBUY, 2, 0.1, 2 },
+		["food_can_tushonka"] 	= { 110, 2, SELLANDBUY, 2, 4, 2 },
+		["food_can_sprats"] 	= { 130, 2, SELLANDBUY, 2, 4, 2 },
+
+		["knife1"] 	= { nil, 12, SELLANDBUY, 12, 2, 3 },
+		["hidestasher_cutlery"] 	= { nil, 6, SELLANDBUY, 6, 2, 3 },
+		["lowtiercooker"] 	= { nil, 3, SELLANDBUY, 3, 2, 3 },
+		["lowtiercookerfuel"] 	= { nil, 20, SELLANDBUY, 20, 1, 15 },
 
 	},
 }
@@ -726,6 +738,23 @@ ix.npctemplates.templates["cconnpc"] = {
 	items = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 
+	},
+}
+
+ix.npctemplates.templates["arenanpc"] = {
+	name 		= "'Arena Master'",
+	description = "You are met with a relaxed gaze as you approach.",
+	model 		= "models/legends/garyk.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0.3,
+	dialogueid 	= "arenanpc",
+	soundgroup 	= "nosound",
+	idleanim 	= "trader_idle",
+	-- animgroup 	= 3,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		["medic_medkit_1"] 	= { nil, 6, SELLONLY, 6, 2, 6 },
 	},
 }
 

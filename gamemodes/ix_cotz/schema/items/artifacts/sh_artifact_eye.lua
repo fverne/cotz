@@ -10,7 +10,7 @@ ITEM.rarity = 6
 ITEM.baseweight = 0.180
 ITEM.varweight  = 0.100
 
-ITEM.fueltier = 2
+ITEM.fueltier = 1
 
 ITEM.exRender = true
 
@@ -19,6 +19,10 @@ ITEM.iconCam = {
 	ang = Angle(-9.81, 236.01, 37.647060394287),
 	fov = 3.7
 }
+
+function ITEM:PopulateTooltipIndividual(tooltip)
+    ix.util.PropertyDesc(tooltip, "Low Tier Cooking Fuel", Color(64, 224, 208))
+end
 
 ITEM:Hook("take", function(item)
 	if(item.player)then
@@ -36,6 +40,7 @@ ITEM:Hook("take", function(item)
 	end
 end)
 
+
 ITEM.functions.combine = {
 	OnCanRun = function(item, data)
 		if (!data) or (!data[1]) then
@@ -43,13 +48,13 @@ ITEM.functions.combine = {
 		end
 
 		local targetItem = ix.item.instances[data[1]]
-		return (targetItem.cookertier and targetItem.cookertier >= item.fueltier)
+		return (targetItem.cookertier and targetItem.cookertier == item.fueltier)
 
 	end,
 	OnRun = function(item, data)
 		local targetItem = ix.item.instances[data[1]]
-		if ( targetItem.cookertier and targetItem.cookertier <= item.fueltier and !targetItem:GetData("cancook", false) ) then
-			targetItem:SetData("cancook", true)
+		if ( targetItem.cookertier and targetItem.cookertier == item.fueltier ) then
+			targetItem:SetData("fuel", targetItem.maxFuel)
 		end
 
 		return false

@@ -15,17 +15,27 @@ ix = ix or {}
 ix.crossserverchat = ix.crossserverchat or {}
 ix.crossserverchat.queue = ix.crossserverchat.queue or {}
 
+local icon =  Material("vgui/icons/news.png")
 ix.chat.Register("gpdainternal", {
 	CanSay = function(self, speaker, text)
-
 		return true
 	end,
 	OnChatAdd = function(self, speaker, text, bAnonymous, data)
-		chat.AddText(Color(180,61,61), "[GPDA-"..data.name.."] ", color_white, ix.util.GetMaterial(data.icon), ": "..data.message)
+		if data.name == "SYSTEM" then
+			chat.AddText(Color(180,61,61), "[GPDA-"..(data.name or speaker:GetName() or "SYSTEM").."] ", Color(0,241,255), Material(data.icon) or icon, ": "..(data.message) or text)
+		else
+			chat.AddText(Color(180,61,61), "[GPDA-"..(data.name or speaker:GetName() or "SYSTEM").."] ", color_white, Material(data.icon) or icon, ": "..(data.message) or text)
+		end
+		
 	end,
 	prefix = {},
-	CanHear = function(self, speaker, listener)
-		listener:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO )
+	CanHear = function(self, speaker, listener, data)
+		if data.name == "SYSTEM" then
+			listener:EmitSound( "stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO )
+		else
+			listener:EmitSound( "stalkersound/da-2_beep1.ogg", 90, 100, 1, CHAN_AUTO )
+		end
+		
 
 		return true
 	end,
@@ -75,15 +85,16 @@ if (SERVER) then
 				for _, v in pairs(result) do
 					if (istable(v)) then
 						local id = tonumber(v.id)
-						local name = v.name or "Unknown"
+						local name = v.name or "SYSTEM"
 						local text = v.text or "<corrupted message>"
 						local icon = v.icon or "vgui/icons/news.png"
+						local sound = v.sound or "stalkersound/pda/pda_news.wav"
 
 						if (id > tonumber(ix.plugin.list["simplecrossserverchat"].lastSeenId)) then
 							ix.plugin.list["simplecrossserverchat"].lastSeenId = tonumber(id)
 						end
 
-						table.insert(ix.crossserverchat.queue, {name, text, icon})
+						table.insert(ix.crossserverchat.queue, {name, text, icon, sound})
 					end
 				end
 			end
@@ -97,15 +108,18 @@ if (SERVER) then
 			local msg = ix.crossserverchat.queue[1]
 			table.remove(ix.crossserverchat.queue, 1)
 
+			print("[IX GPDA] "..msg[1]..": "..msg[2])
+
 			ix.chat.Send(nil, "gpdainternal", "", nil, nil, {
 				name = msg[1],
 				message = msg[2],
-				icon = msg[3]
+				icon = msg[3],
+				sound = msg[4]
 			})
 		end
 	end
 
-	function PLUGIN:PostMessage(name, text, icon)
+	function ix.crossserverchat.PostMessage(name, text, icon)
 
 		local datatoinsert = {}
 		if(not istable(data))then
@@ -130,7 +144,7 @@ if (SERVER) then
 		query:Execute()
 	end
 
-	ix.crossserverchat.PostMessage = PLUGIN.PostMessage
+	-- ix.crossserverchat.PostMessage = PLUGIN.PostMessage
 
 	function PLUGIN:SaveData()
 		self:SetData(tonumber(self.lastSeenId))

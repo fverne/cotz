@@ -11,7 +11,7 @@ ITEM.newSkin = 14
 ITEM.baseSuit = "suit_exoskeleton"
 ITEM.suitVariant = "anarchist"
 
-ITEM.price = 1810200
+ITEM.price = 9999999999
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
@@ -26,7 +26,9 @@ ITEM.ar = 0.27
 ITEM.far = 3
 
 ITEM.carryinc = 64.000
-ITEM.miscslots = 3
+ITEM.exteriorSlots = 2
+ITEM.interiorSlots = 3
+ITEM.extraSlots = 2
 
 
 

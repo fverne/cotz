@@ -15,6 +15,10 @@ ix.char.RegisterVar("radiation", {
 local playerMeta = FindMetaTable("Player")
 local entityMeta = FindMetaTable("Entity")
 
+local geigerHeavy = {"geiger/heavy/geiger_heavy_1.wav", "geiger/heavy/geiger_heavy_2.wav", "geiger/heavy/geiger_heavy_3.wav", "geiger/heavy/geiger_heavy_4.wav", "geiger/heavy/geiger_heavy_5.wav", }
+local geigerLight = {"geiger/light/geiger_light_1.wav", "geiger/light/geiger_light_2.wav", "geiger/light/geiger_light_3.wav", "geiger/light/geiger_light_4.wav", "geiger/light/geiger_light_5.wav", }
+
+
 function playerMeta:getRadiation()
 	return (self:GetNetVar("radiation")) or 0
 end
@@ -46,14 +50,46 @@ function PLUGIN:PostPlayerLoadout(client)
 	end
 end
 
-function playerMeta:getRadResist()
+function playerMeta:getPercentageRadResist()
+	local res = 1
+	local char = self:GetCharacter()
+	local items = char:GetInventory():GetItems(true)
+
+	for j, i in pairs(items) do
+		if (i.getRadProt and i:GetData("equip") == true) then
+			res = res * (1 - i:getRadProt())
+
+			
+			--For artifacts, kevlarplates, mutant hides, etc..
+			if i.isBodyArmor then
+				local attachments = i:GetData("attachments", i.miscSlots)
+				for k,v in pairs(attachments) do
+					if !v then
+						continue
+					end
+
+					for _, attachment in pairs (v) do
+						if (!ix.armortables.attachments[attachment]) then continue end
+						if ix.armortables.attachments[attachment].radProt then
+							res = res * (1 - ix.armortables.attachments[attachment].radProt)
+						end
+					end
+				end
+			end
+		end
+	end
+
+	return res
+end
+
+function playerMeta:getFlatRadResist()
 	local res = 0
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems(true)
 
 	for j, i in pairs(items) do
-		if (i.radProt and i:GetData("equip") == true) then
-			res = res + i.radProt
+		if (i.flatRadProt and i:GetData("equip") == true) then
+			res = res + i.flatRadProt
 		end
 	end
 
@@ -68,11 +104,22 @@ end
 
 function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 	--RADIATION OVERRIDE
-	if ( entity:IsPlayer() and entity:Alive() and dmgInfo:IsDamageType(DMG_RADIATION)) then
+	if (entity:IsPlayer() and entity:Alive() and entity:GetCharacter() and dmgInfo:IsDamageType(DMG_RADIATION) and entity:GetMoveType() != MOVETYPE_NOCLIP) then
 		local radAmount = (dmgInfo:GetDamage()/10)
-		local radResist = entity:getRadResist()
+		local percentageRadResist = entity:getPercentageRadResist()
+		local flatRadResist = entity:getFlatRadResist()
+		local finalRadDamage = radAmount * percentageRadResist
+		finalRadDamage = finalRadDamage - flatRadResist
+
+		if finalRadDamage > 0 and entity:hasGeiger() then -- taking damage
+			local randomsound = table.Random(geigerHeavy)
+			entity:EmitSound(randomsound)
+		elseif finalRadDamage == 0 and entity:hasGeiger() then -- close to taking dmg
+			local randomsound = table.Random(geigerLight)
+			entity:EmitSound(randomsound)
+		end
 		
-		entity:addRadiation(math.Clamp(radAmount - radResist ,0, 100))
+		entity:addRadiation(math.Clamp(finalRadDamage,0, 100))
 		dmgInfo:SetDamage(0)
 	end
 end

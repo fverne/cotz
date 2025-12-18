@@ -23,13 +23,16 @@ if CLIENT then
 	SWEP.IronsightPos = Vector(-2.018, 0, 0.1)
 	SWEP.IronsightAng = Vector(-0.4, -0.01, 4.5)
 	
-	SWEP.ShortDotPos = Vector(-1.995, -5, -0.675)
+	SWEP.ShortDotPos = Vector(-1.97, -7, -0.72)
 	SWEP.ShortDotAng = Vector(-0.4, -0.01, 4.5)
 	SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
 
 	SWEP.RMRPos = Vector(-1.99, 0, -0.275)
 	SWEP.RMRAng = Vector(-0.4, -0.01, 4.5)
-	
+
+	SWEP.SightBackUpPos = Vector(-2.017, 0.01, 0.11)
+	SWEP.SightBackUpAng = Vector(-0.41, -0.01, 4.5)
+
 	SWEP.SprintPos = Vector(0, -5.01, -5.2)
 	SWEP.SprintAng = Vector(30, -10, -5)
 	
@@ -144,12 +147,12 @@ SWEP.Damage = 250
 SWEP.DeployTime = 0.7
 SWEP.Chamberable = false
 
-SWEP.ReloadSpeed = 1
+SWEP.ReloadSpeed = 1.1
 SWEP.ReloadTime = 3.4
 SWEP.ReloadHalt = 3.5
 
 SWEP.ReloadTime_Empty = 3.4
 SWEP.ReloadHalt_Empty = 3.5
 
-SWEP.WearDamage = 0.22
+SWEP.WearDamage = 0.14
 SWEP.WearEffect = 0.05

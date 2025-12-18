@@ -98,7 +98,7 @@ SWEP.Animations = {fire = {"fire"},
 
 function SWEP:postPrimaryAttack()
 	if CLIENT then
-		timer.Simple(0.5, function() 
+		timer.Simple(0.2, function() 
 			self:sendWeaponAnim("pump", 1, 0)
 		end)
 	end
@@ -145,7 +145,7 @@ SWEP.Primary.DefaultClip	= 6
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= ".44 Magnum"
 
-SWEP.FireDelay = 1.5
+SWEP.FireDelay = 1.3
 SWEP.FireSound = "LAX410_FIRE"
 SWEP.Recoil = 7.5
 
@@ -160,7 +160,7 @@ SWEP.Shots = 1
 SWEP.Damage = 180
 SWEP.DeployTime = .5
 
-SWEP.ReloadSpeed = 0.8
+SWEP.ReloadSpeed = 1.4
 SWEP.ReloadStartTime = .5
 SWEP.InsertShellTime = 1.2
 SWEP.ReloadFinishWait = 1.2

@@ -149,12 +149,15 @@ hook.Add("ix_OnJobComplete", "intern_gasAnalyzerReadings", function(client, npci
 end)
 
 
+local map = "rp_marsh_cs"
+
 
 ix.progression.Register("oldTimerKillIntro", {
 	name = "STORY: Cleaning up the Zone",
 	description = "Cleaning up the zone",
 	keyNpc = "'Old Timer'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		-- Find next treshold
 		local tresh = 0
@@ -276,9 +279,10 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 	description = "Collecting lots of meat for the Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldTimerItemDelivery_mainMeat"] = ix.progression.status["oldTimerItemDelivery_mainMeat"] or {}
-		local dat = ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData
+		local dat = status or ix.progression.status["oldTimerItemDelivery_mainMeat"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -298,8 +302,8 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 		local itemids = {
 			["meat_blinddog"] = 30,
 			["part_blinddog"] 	= 10,
-			["meat_cat"] 	= 10,
-			["part_cat"] 	= 5,
+			["meat_flesh"] 	= 30,
+			["part_flesh"] 	= 15,
 			["meat_tushkano"] 	= 30,
 			["part_tushkano"] 	= 10,
 			["meat_boar"] = 20,
@@ -390,9 +394,10 @@ ix.progression.Register("technutItemDelivery_Main", {
 	description = "Collecting important components for Technut.",
 	keyNpc = "'Technut'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["technutItemDelivery_Main"] = ix.progression.status["technutItemDelivery_Main"] or {}
-		local dat = ix.progression.status["technutItemDelivery_Main"].complexData
+		local dat = status or ix.progression.status["technutItemDelivery_Main"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -493,9 +498,10 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 	description = "Collecting statues for Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldTimerItemDelivery_mainStatue"] = ix.progression.status["oldTimerItemDelivery_mainStatue"] or {}
-		local dat = ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData
+		local dat = status or ix.progression.status["oldTimerItemDelivery_mainStatue"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -594,6 +600,7 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 -- 	description = "Scanning the Zone",
 -- 	keyNpc = "'Mute'",
 -- 	defaultActive = true,
+	-- progMap = map,
 -- 	BuildResponse = function(self, npcname, status)
 -- 		-- Find next treshold
 -- 		local tresh = 0
@@ -635,9 +642,10 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	description = "Helping to build a true radiocommunications center.",
 	keyNpc = "'Mute'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"] = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"] or {}
-		local dat = ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData
+		local dat = status or ix.progression.status["stalkerNetAdminDelivery_mainRadioTower"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -654,10 +662,10 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	GetItemIds = function()
 		local itemids = {
 			["value_wirelesstrans"] 	= 10,
-			["value_tape_electric"] = 40,
+			["value_tape_electric"] = 30,
 			["value_phone_new"] 	= 5,
-			["value_phone_old"] 	= 10,
-			["value_wire_light"]	= 60
+			["value_phone_old"] 	= 5,
+			["value_wire_light"]	= 30
 		}
 
 		return itemids
@@ -719,11 +727,13 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	end
 })
 
+map = "rp_waystation"
 ix.progression.Register("quarterMasterDelivery_activateItem", {
 	name = "STORY: Making Connections",
 	description = "Bring the flash drive to Quartermaster.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		return "I chatted with a guy, what was his name, Mute? He should have a flash drive with information for me. I ain't budging 'till I get that."
 	end,
@@ -795,9 +805,10 @@ ix.progression.Register("quarterMasterDelivery_main", {
 	description = "Bring Quartermaster something to drink.",
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["quarterMasterDelivery_main"] = ix.progression.status["quarterMasterDelivery_main"] or {}
-		local dat = ix.progression.status["quarterMasterDelivery_main"].complexData
+		local dat = status or ix.progression.status["quarterMasterDelivery_main"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -818,7 +829,7 @@ ix.progression.Register("quarterMasterDelivery_main", {
 			["drink_spirit_3"] 	= 5,
 			["drink_vodka_5"] 		= 5,
 			["drink_vodka_6"] 		= 5,
-			["drug_cigar"] 			= 20,
+			["drug_cigar"] 			= 10,
 			["drug_cocaine"] 		= 5,
 			["drug_cigarette_5"] 	= 30,
 			["drug_cigarette_6"] 	= 30,
@@ -882,6 +893,7 @@ ix.progression.Register("boss_dataTasks", {
 	description = "Extract data from various computers",
 	keyNpc = "'Boss'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		-- Find next treshold
 		local tresh = 0
@@ -935,6 +947,7 @@ ix.progression.Register("smartass_rfTasks", {
 	description = "Scanning the Zone",
 	keyNpc = "'Smartass'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		-- Find next treshold
 		local tresh = 0
@@ -983,19 +996,21 @@ ix.progression.Register("smartass_rfTasks", {
 		},
 	},
 	progressthresholds = {
-		[1] = 100,
+		[1] = 60,
 	}
 })
 
 
+map = "rp_marsh_cs"
 ix.progression.Register("beanstalkItemDelivery_Documents", {
 	name = "STORY: Well Documented",
 	description = "Beanstalk wants documents.",
 	keyNpc = "'Beanstalk'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["beanstalkItemDelivery_Documents"] = ix.progression.status["beanstalkItemDelivery_Documents"] or {}
-		local dat = ix.progression.status["beanstalkItemDelivery_Documents"].complexData
+		local dat = status or ix.progression.status["beanstalkItemDelivery_Documents"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1012,12 +1027,12 @@ ix.progression.Register("beanstalkItemDelivery_Documents", {
 		return str	end,
 	GetItemIds = function()
 		local itemids = {
-			["value_documents_14"] 	= 40,
-			["value_documents_7"] 	= 40,
-			["value_documents_12"] 	= 40,
-			["value_documents_13"] 	= 40,
-			["value_documents_11"] 	= 40,
-			["value_documents_10"] 	= 40,
+			["value_documents_14"] 	= 5,
+			["value_documents_7"] 	= 10,
+			["value_documents_12"] 	= 10,
+			["value_documents_13"] 	= 5,
+			["value_documents_11"] 	= 10,
+			["value_documents_10"] 	= 10,
 		}
 
 		return itemids
@@ -1073,9 +1088,10 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 	description = "Egghead wants artifacts.",
 	keyNpc = "'Egghead'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["eggheadItemDelivery_artifacts"] = ix.progression.status["eggheadItemDelivery_artifacts"] or {}
-		local dat = ix.progression.status["eggheadItemDelivery_artifacts"].complexData
+		local dat = status or ix.progression.status["eggheadItemDelivery_artifacts"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1092,11 +1108,11 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 		return str	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_battery"] 	= 30,
-			["artifact_blowncap"] 	= 30,
-			["artifact_capacitor"] 	= 10,
-			["artifact_sparkler"] 	= 10,
-			["artifact_flash"] 	= 10,
+			["artifact_battery"] 	= 10,
+			["artifact_blowncap"] 	= 10,
+			["artifact_capacitor"] 	= 3,
+			["artifact_sparkler"] 	= 5,
+			["artifact_flash"] 	= 5,
 			["artifact_moonlight"] 	= 3,
 		}
 
@@ -1155,6 +1171,7 @@ ix.progression.Register("intern_gasAnalyzerReadings", {
 	description = "Scanning Pripyat",
 	keyNpc = "'Intern'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		-- Find next treshold
 		local tresh = 0
@@ -1205,17 +1222,19 @@ ix.progression.Register("intern_gasAnalyzerReadings", {
 		},
 	},
 	progressthresholds = {
-		[1] = 150,
+		[1] = 90,
 	}
 })
 
 
 
+map = "rp_pripyat_remaster"
 ix.progression.Register("computerDelivery_activateItem", {
 	name = "STORY: Getting Access",
 	description = "Bring the secured container to the computer.",
 	keyNpc = "'Computer'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		return "** 'ACCESS DENIED' is written in bold letters on the screen **"
 	end,
@@ -1271,9 +1290,10 @@ ix.progression.Register("computerDelivery_main", {
 	description = "Set up the supercomputer with components.",
 	keyNpc = "'Computer'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["computerDelivery_main"] = ix.progression.status["computerDelivery_main"] or {}
-		local dat = ix.progression.status["computerDelivery_main"].complexData
+		local dat = status or ix.progression.status["computerDelivery_main"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -1295,7 +1315,7 @@ ix.progression.Register("computerDelivery_main", {
 			["value_frequencymodulator"]= 7,
 			["value_motorclean"] 		= 20,
 			["value_engine"] 			= 5,
-			["value_gasoline"] 			= 50,
+			["value_gasoline"] 			= 100,
 		}
 
 		return itemids
@@ -1345,6 +1365,7 @@ ix.progression.Register("computer_artifactTasks", {
 	description = "Analyzing Artifacts",
 	keyNpc = "'Computer'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		-- Find next treshold
 		local tresh = 0

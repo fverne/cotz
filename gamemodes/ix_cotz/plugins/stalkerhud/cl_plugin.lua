@@ -209,7 +209,7 @@ function PLUGIN:HUDPaint()
 
 					if ammoBox then
 						if ix.item.list[ammoBox] then
-							AmmoImage = ix.item.list[ammoBox].img
+							AmmoImage = ix.util.GetMaterial(ix.item.list[ammoBox].img)
 
 							surface.SetMaterial(AmmoImage)
 							surface.SetDrawColor(Color(255, 255, 255, 255))

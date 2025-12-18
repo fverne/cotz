@@ -133,7 +133,7 @@ SWEP.Primary.Automatic		= true
 
 SWEP.Primary.Ammo			= "12 Gauge"
 
-SWEP.FireDelay = 0.9
+SWEP.FireDelay = 0.8
 SWEP.FireSound = "DOIM37_FIRE"
 SWEP.FireSoundSuppressed = "DOIM37_FIRE"
 SWEP.Recoil = 4.2

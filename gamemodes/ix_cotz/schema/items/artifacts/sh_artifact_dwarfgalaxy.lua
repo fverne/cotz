@@ -9,3 +9,21 @@ ITEM.flag = "A"
 ITEM.rarity = 4
 ITEM.baseweight = 0.450
 ITEM.varweight  = 0.100
+
+ITEM.functions.use = {
+	name = "Grasp",
+    icon = "icon16/help.png",
+    sound = "physics/metal/chain_impact_soft2.wav",
+    OnRun = function(item)
+        if(item:GetData("cooldown",0) < os.time())then
+        	item:SetData("cooldown", os.time() + 15 )
+            item.player:RemoveBuff( "buff_hijump" , {})
+            item.player:AddBuff("buff_hijump", 5, { amount = 200 })
+        end
+
+        return false
+    end,
+    OnCanRun = function(item)
+        return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
+    end
+}

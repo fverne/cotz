@@ -40,6 +40,8 @@ ITEM.functions.use = {
 			player:SetHunger(hunger + item.hunger)
 		end)
 
+		ix.chat.Send(item.player, "iteminternal", "lights his "..item.name.." and inhales deeply.", false)
+
 		quantity = quantity - 1
 
 		if (quantity >= 1) then
@@ -47,8 +49,6 @@ ITEM.functions.use = {
 			return false
 		end
 		
-		ix.chat.Send(item.player, "iteminternal", "lights his "..item.name.." and inhales deeply.", false)
-
 		return true
 	end,
 	OnCanRun = function(item)

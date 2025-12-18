@@ -1,11 +1,14 @@
+local map = "rp_marsh_cs"
+
 ix.progression.Register("oldtimerItemDelivery_Knife1", {
 	name = "Backstabbing 1",
 	description = "Prove your worth as a small game hunter to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldtimerItemDelivery_Knife1"] = ix.progression.status["oldtimerItemDelivery_Knife1"] or {}
-		local dat = ix.progression.status["oldtimerItemDelivery_Knife1"].complexData
+		local dat = status or ix.progression.status["oldtimerItemDelivery_Knife1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -25,7 +28,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 			["hide_flesh"] = 10,
 			["hide_tushkano"] = 5,
 			["part_zombie_1"] = 40,
-			["part_swampcontroller_2"] = 5,
+			["part_swampcontroller_2"] = 1,
 		}	
 
 		return itemids
@@ -92,9 +95,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 	description = "Prove your worth as a big game hunter to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldtimerItemDelivery_Knife2"] = ix.progression.status["oldtimerItemDelivery_Knife2"] or {}
-		local dat = ix.progression.status["oldtimerItemDelivery_Knife2"].complexData
+		local dat = status or ix.progression.status["oldtimerItemDelivery_Knife2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -110,10 +114,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["hide_spider"] = 5,
+			["hide_spider"] = 3,
 			["hide_controller"] = 5,
 			["hide_vareshka"] = 5,
-			["part_controller_2"] = 10,
+			["part_controller_2"] = 2,
 		}	
 
 		return itemids
@@ -179,9 +183,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 	description = "Prove your worth as a knife fighter to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldtimerItemDelivery_Knife3"] = ix.progression.status["oldtimerItemDelivery_Knife3"] or {}
-		local dat = ix.progression.status["oldtimerItemDelivery_Knife3"].complexData
+		local dat = status or ix.progression.status["oldtimerItemDelivery_Knife3"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -200,8 +205,8 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 			["hide_pseudogiant"] = 4,
 			["hide_chimera"] = 4,
 			["hide_karlik"] = 4,
-			["part_electrocontroller_2"] = 10,
-			["part_karlik_2"] = 10,
+			["part_electrocontroller_2"] = 3,
+			["part_karlik_2"] = 3,
 		}	
 
 		return itemids
@@ -267,9 +272,10 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 	description = "Prove your worth as a warrior to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = true,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldtimerItemDelivery_Melee"] = ix.progression.status["oldtimerItemDelivery_Melee"] or {}
-		local dat = ix.progression.status["oldtimerItemDelivery_Melee"].complexData
+		local dat = status or ix.progression.status["oldtimerItemDelivery_Melee"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -360,9 +366,10 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 	description = "Prove your worth as a seeker to Old Timer",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldtimerItemDelivery_Hidestash1"] = ix.progression.status["oldtimerItemDelivery_Hidestash1"] or {}
-		local dat = ix.progression.status["oldtimerItemDelivery_Hidestash1"].complexData
+		local dat = status or ix.progression.status["oldtimerItemDelivery_Hidestash1"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -445,9 +452,10 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 	description = "Prove your worth as a treasure hunter to Old Timer.",
 	keyNpc = "'Old Timer'",
 	defaultActive = false,
+	progMap = map,
 	BuildResponse = function(self, npcname, status)
 		ix.progression.status["oldtimerItemDelivery_Hidestash2"] = ix.progression.status["oldtimerItemDelivery_Hidestash2"] or {}
-		local dat = ix.progression.status["oldtimerItemDelivery_Hidestash2"].complexData
+		local dat = status or ix.progression.status["oldtimerItemDelivery_Hidestash2"].complexData
 
 		local itemids = self:GetItemIds()
 
@@ -463,7 +471,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 	end,
 	GetItemIds = function()
 		local itemids = {
-			["artifact_bolt"] = 50,
+			["artifact_bolt"] = 40,
 		}	
 
 		return itemids

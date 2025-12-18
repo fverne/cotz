@@ -12,17 +12,28 @@ ix.chat.Register("iteminternal", {
 })
 
 --adds automatic me's when picking up and dropping items
-function PLUGIN:OnItemTransferred(item, curInv, inventory)
+function PLUGIN:OnItemTransferred(item, curInv, targetInv)
 	if curInv:GetID() == 0 then
-		local client = inventory:GetOwner()
-		ix.chat.Send(client, "iteminternal", Format("picks up the %s.", item.name), false)
+		local pickupClient = targetInv:GetOwner()
+		ix.chat.Send(pickupClient, "iteminternal", Format("picks up the %s.", item:GetName()), false)
+
+		if item:GetData("bTemporary") then
+			item:SetData("bTemporary", false)
+		end
 	end
 
-	if inventory:GetID() == 0 then
-		local client = curInv:GetOwner()
-		if client then
-			ix.chat.Send(client, "iteminternal", Format("drops their %s.", item.name), false)
+	if targetInv:GetID() == 0 then
+		local dropClient = curInv:GetOwner()
+		if dropClient then
+			ix.chat.Send(dropClient, "iteminternal", Format("drops their %s.", item:GetName()), false)
 		end
+	end
+end
+
+function PLUGIN:PopulateItemTooltip(tooltip, item)
+	if item.entity and item:GetData("bTemporary") then
+		ix.util.MarkedDeletionDesc(tooltip)
+		-- ix.util.PropertyDesc(tooltip, "Marked for Deletion", Color(255, 0, 0), ix.util.GetMaterial("vgui/ui/stalker/armorupgrades/explosion.png"), 1000)
 	end
 end
 
@@ -141,11 +152,16 @@ if (SERVER) then
 
 	--disable damage from trigger_hurt
 	function PLUGIN:EntityTakeDamage( target, dmginfo )
-		if dmginfo:GetAttacker():GetClass() == "trigger_hurt" and dmginfo:GetDamageType() == DMG_GENERIC then
+		if dmginfo:GetAttacker() and dmginfo:GetAttacker():GetClass() == "trigger_hurt" and dmginfo:GetDamageType() == DMG_GENERIC then
 			return true
 		end
 	end
 end
+
+ix.option.Add("inventoryScale", ix.type.number, 1, {
+	category = "appearance", min = 0.1, max = 2, decimals = 1
+})
+
 
 if (CLIENT) then
 	function PLUGIN:CharacterLoaded()
@@ -190,7 +206,7 @@ function PLUGIN:InitializedPlugins()
 	ix.command.list["becomeclass"] = nil
 	ix.command.list["chardesc"] = nil
 	ix.command.list["eventpda"] = nil
-	ix.command.list["looc"] = nil
+	-- ix.command.list["looc"] = nil
 	ix.command.list["charfallover"] = nil
 	ix.command.list["chargetup"] = nil
 	ix.command.list["setvoicemail"] = nil
@@ -198,7 +214,7 @@ end
 
 --needs to be done for both chat class and command
 function PLUGIN:InitializedChatClasses()
-	ix.chat.classes["looc"] = nil
+	-- ix.chat.classes["looc"] = nil
 	ix.chat.classes["connect"] = nil
 	ix.chat.classes["disconnect"] = nil
 end
@@ -241,13 +257,50 @@ ix.chat.Register("playerleave", {
 })
 
 if (SERVER) then
+	-- -- LPDA join
+	-- function PLUGIN:CharacterLoaded(character)
+	-- 	ix.chat.Send(nil, "playerjoin", string.format("%s has connected to STALKERNET.", character:GetName()))
+	-- end
+	
+	-- -- LPDA disconnect
+	-- function PLUGIN:PlayerDisconnected(client)
+	-- 	if( client:GetCharacter() ) then
+	-- 		ix.chat.Send(nil, "playerleave", string.format("%s has lost connection to STALKERNET.", client:GetCharacter():GetName()))
+	-- 	end
+	-- end
+	
+	local newsicon = "vgui/icons/news.png"
+	--GPDA join
 	function PLUGIN:CharacterLoaded(character)
-		ix.chat.Send(nil, "playerjoin", string.format("%s has connected to STALKERNET.", character:GetName()))
+		local mapName = game.GetMap()
+		if ix.plugin.list["simplecrossserver"].mapdata[game.GetMap()] then
+			mapName = ix.plugin.list["simplecrossserver"].mapdata[game.GetMap()].name		
+		end
+		local message = string.format("%s has connected to STALKERNET at %s.", character:GetName(), mapName)
+		ix.chat.Send(nil, "gpdainternal", "", nil, nil, {
+			name = "SYSTEM",
+			message = message,
+			icon = newsicon,
+			sound = "stalkersound/pda/pda_news.wav"
+		})
+		ix.crossserverchat.PostMessage("SYSTEM", message, newsicon)
 	end
 
+	--GPDA disconnect
 	function PLUGIN:PlayerDisconnected(client)
 		if( client:GetCharacter() ) then
-			ix.chat.Send(nil, "playerleave", string.format("%s has lost connection to STALKERNET.", client:GetCharacter():GetName()))
+			local mapName = game.GetMap()
+			if ix.plugin.list["simplecrossserver"].mapdata[game.GetMap()] then
+				mapName = ix.plugin.list["simplecrossserver"].mapdata[game.GetMap()].name		
+			end
+			local message = string.format("%s has disconnected from STALKERNET at %s.", client:GetCharacter():GetName(), mapName)
+			ix.chat.Send(nil, "gpdainternal", "", nil, nil, {
+				name = "SYSTEM",
+				message = message,
+				icon = newsicon,
+				sound = "stalkersound/pda/pda_news.wav",
+			})
+			ix.crossserverchat.PostMessage("SYSTEM", message, newsicon)
 		end
 	end
 end
@@ -280,6 +333,15 @@ function PLUGIN:CanTransferItem(item, oldInventory, newInventory)
 		end
 
 		return false
+	end
+
+	if item.noDrop then
+		local owner = item:GetOwner()
+		if IsValid(owner) and newInventory != oldInventory then
+			owner:Notify("That item cannot be transferred out of your inventory!")
+
+			return false
+		end
 	end
 
 	return true

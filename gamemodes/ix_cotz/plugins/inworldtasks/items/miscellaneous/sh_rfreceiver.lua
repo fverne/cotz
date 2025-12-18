@@ -65,7 +65,7 @@ ITEM.functions.zCheck = {
 			local pointtbl = item:GetData("points", {})
 			netstream.Start(item.player, "ix_ShowTaskPositions", item:GetData("points", {}), "vgui/icons/quest2.png")
 		else
-			item.player:Notify("This isn't the right area for this task")
+			item.player:Notify("This isn't the right area for this task. Location: " .. item:GetData("map", ""))
 		end
 
 		return false

@@ -9,7 +9,7 @@ ITEM.height = 2
 ITEM.weight = 0.230
 ITEM.flatweight = 0.220
 
-ITEM.thirst = -25
+ITEM.thirst = -15
 ITEM.quantity = 3
 
 ITEM.isDrink = true

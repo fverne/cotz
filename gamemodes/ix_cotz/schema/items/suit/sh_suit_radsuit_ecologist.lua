@@ -7,26 +7,28 @@ ITEM.longdesc = "A competently made western entry-man suit worn for high risk as
 ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/radsuit.png")
-ITEM.weight = 22.600
+ITEM.weight = 13.500
 ITEM.newSkin = 4
 ITEM.baseSuit = "suit_radsuit"
 ITEM.suitVariant = "ecologist"
 
-ITEM.price = 900920
+ITEM.price = 3301012
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.39
+ITEM.br = 0.38
 ITEM.fbr = 4
-ITEM.sr = 0.73
+ITEM.sr = 0.57
 ITEM.fsr = 4
-ITEM.ar = 0.27
+ITEM.ar = 0.42
 ITEM.far = 2
 
-ITEM.carryinc = 21.000
-ITEM.miscslots = 4
+ITEM.carryinc = 16.20
+ITEM.exteriorSlots = 2
+ITEM.interiorSlots = 3
+ITEM.extraSlots = 2
 
 
 -- ITEM.skincustom[1] = {

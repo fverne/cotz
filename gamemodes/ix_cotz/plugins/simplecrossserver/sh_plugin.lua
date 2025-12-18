@@ -31,6 +31,9 @@ function PLUGIN:CanPlayerUseCharacter(client, char)
 	end
 
 	if (curmap != game.GetMap() ) then
+		timer.Simple(1, function()
+			self:RedirectPlayerToRightMap(client, curmap)
+		end)
 		return false, "Character not in this map. Character is only loadable on '"..curmap.."'." 
 	end
 end
@@ -157,6 +160,8 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 	--sanity check
 	if mapdata[map] != nil then
 		local tempip = mapdata[map].serverip
+		local newMapName= mapdata[map].name
+
 		if mapdata[map].loadzones[loadzone] != nil then
 			local position = character:GetData("newpos",{})
 
@@ -170,8 +175,17 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 		end
 
 		character:SetData("curmap", map)
+		character:SetData("bInBlowoutWhenStart", false) -- so players dont get killed if they transition after blowout started.
 
-		ix.chat.Send(nil, "playerjoin", string.format("%s has switched area.", character:GetName()))
+		local newsicon = "vgui/icons/news.png"
+		local message = string.format("%s is moving to %s.", character:GetName(), newMapName)
+		ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+			name = "SYSTEM",
+			message = message,
+			icon = newsicon,
+			sound = "stalkersound/pda/pda_news.wav",
+		})
+		ix.crossserverchat.PostMessage("SYSTEM", message, newsicon)
 
 		-- If RedirectPlayer has been called, the character has been moved to the new map, and should no longer be usable
 		character:Save()
@@ -194,10 +208,20 @@ function PLUGIN:RedirectPlayerNoLoadZone(client, map)
 	--sanity check
 	if mapdata[map] != nil then
 		local tempip = mapdata[map].serverip
+		local newMapName = mapdata[map].name
 
 		character:SetData("curmap", map)
+		character:SetData("bInBlowoutWhenStart", false) -- so players dont get killed if they transition after blowout started.
 
-		ix.chat.Send(nil, "playerjoin", string.format("%s has switched area.", character:GetName()))
+		local newsicon = "vgui/icons/news.png"
+		local message = string.format("%s is moving to %s.", character:GetName(), newMapName)
+		ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+			name = "SYSTEM",
+			message = message,
+			icon = newsicon,
+			sound = "stalkersound/pda/pda_news.wav",
+		})
+		ix.crossserverchat.PostMessage("SYSTEM", message, newsicon)
 
 		-- If RedirectPlayerNoLoadZone has been called, the character has been moved to the new map, and should no longer be usable
 		character:Save()
@@ -211,6 +235,13 @@ function PLUGIN:RedirectPlayerNoLoadZone(client, map)
 	end
 end
 
+function PLUGIN:RedirectPlayerToRightMap(client, map)
+	local mapdata = self.mapdata
+	if mapdata[map] != nil then
+		local tempip = mapdata[map].serverip
+		netstream.Start(client, "ixPlayerAskConnect", client, tempip)
+	end
+end
 
 if (CLIENT) then
 	netstream.Hook("ixPlayerAskConnect", function(client, address)

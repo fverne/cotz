@@ -14,15 +14,14 @@ ITEM.unloadedweight = 3.6
 
 
 function ITEM:GetWeight()
-  return self.unloadedweight + (self.bulletweight * self:GetData("ammo", 0))
+  return self:GetData("weight", self.unloadedweight) + (self.bulletweight * self:GetData("ammo", 0))
 end
 
 ITEM.iconCam = {
-	pos = Vector(-10, -200, -0.5),
+	pos = Vector(4, -200, -0.5),
 	ang = Angle(0, 90, 0),
 	fov = 14,
 }
-
 ITEM.pacData = {
 [1] = {
 	["children"] = {
@@ -39,7 +38,7 @@ ITEM.pacData = {
 						["EditorExpand"] = true,
 						["UniqueID"] = "8592523121",
 						["Bone"] = "spine 2",
-						["Name"] = "toz34",
+						["Name"] = "toz34special",
 					},
 				},
 			},
@@ -48,9 +47,10 @@ ITEM.pacData = {
 				["ClassName"] = "event",
 				["UniqueID"] = "1424656542",
 				["Event"] = "weapon_class",
+				["Invert"] = false,
 				["EditorExpand"] = true,
 				["Name"] = "weapon class find simple\"@@1\"",
-				["Arguments"] = "cw_toz34@@0",
+				["Arguments"] = "cw_toz34special@@0",
 			},
 		},
 	},

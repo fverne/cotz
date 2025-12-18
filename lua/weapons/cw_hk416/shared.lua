@@ -94,6 +94,8 @@ if CLIENT then
 	SWEP.ShortDotAng = Vector(0.203, -0.015, 0)
 	SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
 	
+	SWEP.SightBackUpPos = Vector(3.9, 1, 0)
+	SWEP.SightBackUpAng = Vector(2, 0, 35)
 
 	SWEP.CustomizePos = Vector(-5.54, 2.516, -0.764)
 	SWEP.CustomizeAng = Vector(21.302, -28.997, -18.444)
@@ -208,7 +210,8 @@ end
 	SWEP.FireDelay = 0.066666666666667
 	SWEP.Recoil = 1.05
 
-	SWEP.WearDamage = 0.08
+	SWEP.DurabilityDamageChance = 0.005
+SWEP.WearDamage = 0.05
 	SWEP.WearEffect = 0.007
 
 	SWEP.HipSpread = 0.045

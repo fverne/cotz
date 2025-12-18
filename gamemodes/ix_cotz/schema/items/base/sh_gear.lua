@@ -21,6 +21,7 @@ ITEM.ar = 0
 ITEM.far = 0
 ITEM.pr = 0
 ITEM.fpr = 0
+ITEM.flatRadProt = 0
 ITEM.radProt = 0
 ITEM.resistance = true
 
@@ -363,6 +364,19 @@ function ITEM:getFPR()
 		end
 	end
 	
+	return res
+end
+
+function ITEM:getRadProt()
+	local res = self.radProt
+	local upgrades = self:GetData("upgrades", {})
+
+	for k,v in pairs(upgrades) do
+		if upgrades[v].radProt ~= nil then
+			res = res + upgrades[v].radProt
+		end
+	end
+
 	return res
 end
 

@@ -7,6 +7,7 @@ ITEM.longdesc = "No Longer Description Available"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 0
+ITEM.suitVariant = "default"
 
 ITEM.outfitCategory = "model"
 ITEM.isBodyArmor = true
@@ -21,6 +22,7 @@ ITEM.ar = 0
 ITEM.far = 0
 ITEM.pr = 0
 ITEM.fpr = 0
+ITEM.flatRadProt = 0
 ITEM.radProt = 0
 
 ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
@@ -29,7 +31,15 @@ ITEM.canRepair = true
 
 ITEM.weight = 0
 
-ITEM.miscslots = 1
+ITEM.exteriorSlots = 0
+ITEM.interiorSlots = 0
+ITEM.extraSlots = 0
+
+ITEM.miscSlots = {
+	["exteriorSlots"] = {},
+	["interiorSlots"] = {},
+	["extraSlots"] = {},
+}
 
 --[[
 -- This will change a player's skin after changing the model. Keep in mind it starts at 0.
@@ -121,16 +131,16 @@ if (CLIENT) then
 		if !self.entity then
 			ix.util.DrawSuitResistances(tooltip, self)
 
-			if((self.miscslots or 0) > 0) then
-				local attachmenttitle = tooltip:AddRow("attachments")
-				attachmenttitle:SetText("\nAttachments: ")
+			if((self.exteriorSlots or 0) > 0) then
+				local attachmenttitle = tooltip:AddRow("attachments1")
+				attachmenttitle:SetText("\nExterior Attachments: ")
 				attachmenttitle:SizeToContents()
 
 				local lastrow = attachmenttitle
 
-				local attachmentdata = self:GetData("attachments", {})
-				for i = 1, (self.miscslots or 0) do
-					local attachmenttmp = tooltip:AddRowAfter("attachments", "attachment"..i)
+				local attachmentdata = self:GetData("attachments", self.miscSlots)["exteriorSlots"]
+				for i = 1, (self.exteriorSlots or 0) do
+					local attachmenttmp = tooltip:AddRowAfter("attachments1", "attachment1"..i)
 					local attachmentstr = "  ⬜ None"
 					attachmenttmp:SetTextColor(Color(120,120,120))
 					if(attachmentdata[i]) then
@@ -146,7 +156,60 @@ if (CLIENT) then
 
 					lastrow = attachmenttmp
 				end
+			end
 
+			if((self.interiorSlots or 0) > 0) then
+				local attachmenttitle = tooltip:AddRow("attachments2")
+				attachmenttitle:SetText("\nInterior Attachments: ")
+				attachmenttitle:SizeToContents()
+
+				local lastrow = attachmenttitle
+
+				local attachmentdata = self:GetData("attachments", self.miscSlots)["interiorSlots"]
+				for i = 1, (self.interiorSlots or 0) do
+					local attachmenttmp = tooltip:AddRowAfter("attachments2", "attachment2"..i)
+					local attachmentstr = "  ⬜ None"
+					attachmenttmp:SetTextColor(Color(120,120,120))
+					if(attachmentdata[i]) then
+						attachmentstr = "  ⬛ "
+						if (!ix.armortables.attachments[attachmentdata[i]]) then continue end
+						attachmentstr = attachmentstr..ix.armortables.attachments[attachmentdata[i]].name
+						attachmenttmp:SetTextColor(Color(255,255,255))
+					end
+
+					attachmenttmp:SetText(attachmentstr)
+					attachmenttmp:SetFont("ixSmallFont")
+					attachmenttmp:SizeToContents()
+
+					lastrow = attachmenttmp
+				end
+			end
+
+			if((self.extraSlots or 0) > 0) then
+				local attachmenttitle = tooltip:AddRow("attachments3")
+				attachmenttitle:SetText("\nMiscellaneous Attachments: ")
+				attachmenttitle:SizeToContents()
+
+				local lastrow = attachmenttitle
+
+				local attachmentdata = self:GetData("attachments", self.miscSlots)["extraSlots"]
+				for i = 1, (self.extraSlots or 0) do
+					local attachmenttmp = tooltip:AddRowAfter("attachments3", "attachment3"..i)
+					local attachmentstr = "  ⬜ None"
+					attachmenttmp:SetTextColor(Color(120,120,120))
+					if(attachmentdata[i]) then
+						attachmentstr = "  ⬛ "
+						if (!ix.armortables.attachments[attachmentdata[i]]) then continue end
+						attachmentstr = attachmentstr..ix.armortables.attachments[attachmentdata[i]].name
+						attachmenttmp:SetTextColor(Color(255,255,255))
+					end
+
+					attachmenttmp:SetText(attachmentstr)
+					attachmenttmp:SetFont("ixSmallFont")
+					attachmenttmp:SizeToContents()
+
+					lastrow = attachmenttmp
+				end
 			end
 			
 			if self:GetData("setSkin", self.newSkin) then
@@ -172,7 +235,9 @@ if (CLIENT) then
 			if self.isBackpack then
 	        	ix.util.PropertyDesc2(tooltip, "Backpack", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 	        end
-
+	        if self.isExoskeleton then
+	        	ix.util.PropertyDesc2(tooltip, "Exoskeleton", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
+	        end
 	        if (self.PopulateTooltipIndividual) then
 		      self:PopulateTooltipIndividual(tooltip)
 		    end
@@ -228,6 +293,16 @@ end
 
 function ITEM:OnInstanced()
 	self:SetData("durability", 100)
+
+	self:SetData("maxMiscSlots", {
+		["exteriorSlots"] = self.exteriorSlots,
+		["interiorSlots"] = self.interiorSlots,
+		["extraSlots"] = self.extraSlots,
+	})
+	
+	if !self:GetData("attachments") then
+		self:SetData("attachments", self.miscSlots)
+	end
 end
 
 ITEM.functions.zCustomizeSkin = {
@@ -359,7 +434,7 @@ ITEM.functions.Equip = {
 
 			ply:RecalculateResistances()
 			ply:ReevaluateOverlay()
-
+			ix.weight.Update(ply:GetCharacter())
 			char:SetData("oldModel" .. item.outfitCategory, char:GetData("oldModel" .. item.outfitCategory, ply:GetModel()))
 			char:SetModel(item.newModel)
 
@@ -392,7 +467,12 @@ ITEM.functions.detach = {
 	isMulti = true,
 	multiOptions = function(item, client)
 		local targets = {}
-		local curattach = item:GetData("attachments") or {}
+		local curattach = {}
+		for _, v in pairs(item:GetData("attachments", item.miscSlots)) do
+			for _, suitAttachment in pairs(v) do
+				table.insert(curattach, suitAttachment)
+			end
+		end
 
 		for k = 1, #curattach do
 			table.insert(targets, {
@@ -408,20 +488,17 @@ ITEM.functions.detach = {
 	end,
 	OnRun = function(item, data)
 		if data[1] then
-
-			local curattach = item:GetData("attachments") or {}
-			local iterator = 0
-			for i = 1, #curattach do
-				iterator = iterator+1
-				if curattach[i] == data[1] then
-					break
+			local curattach = item:GetData("attachments", item.miscSlots)
+			
+			for _, categories in pairs(curattach) do
+				for _, suitAttachment in pairs(categories) do
+					if suitAttachment == data[1] then
+						table.RemoveByValue(categories, suitAttachment)
+						break
+					end
 				end
 			end
-
-			if table.remove(curattach,iterator) != data[1] then
-				return false
-			end
-
+			
 			if not item.player:GetCharacter():GetInventory():Add(ix.armortables.attachments[data[1]].uID) then
 				local position = item.player:GetItemDropPos()
 				ix.item.Spawn(ix.armortables.attachments[data[1]].uID, position, nil, AngleRand())
@@ -437,6 +514,7 @@ ITEM.functions.detach = {
 
 			-- Recalc resistances
 			item.player:RecalculateResistances()
+			ix.weight.Update(item.player:GetCharacter())
 
 		else
 			item.player:Notify("No attachment selected.")
@@ -531,12 +609,18 @@ function ITEM:getBR()
 	end
 	
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
-		if (!ix.armortables.attachments[v]) then continue end
-		if ix.armortables.attachments[v].br then
-			res = res * (1 - ix.armortables.attachments[v].br)
+		if !v then
+			continue
+		end
+
+		for _, attachment in pairs (v) do
+			if (!ix.armortables.attachments[attachment]) then continue end
+			if ix.armortables.attachments[attachment].br then
+				res = res * (1 - ix.armortables.attachments[attachment].br)
+			end
 		end
 	end
 
@@ -581,12 +665,18 @@ function ITEM:getSR()
 	end
 	
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
-		if (!ix.armortables.attachments[v]) then continue end
-		if ix.armortables.attachments[v].sr then
-			res = res * (1 - ix.armortables.attachments[v].sr)
+		if !v then
+			continue
+		end
+		
+		for _, attachment in pairs (v) do
+			if (!ix.armortables.attachments[attachment]) then continue end
+			if ix.armortables.attachments[attachment].sr then
+				res = res * (1 - ix.armortables.attachments[attachment].sr)
+			end
 		end
 	end
 
@@ -631,12 +721,18 @@ function ITEM:getPR()
 	end
 
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
-		if (!ix.armortables.attachments[v]) then continue end
-		if ix.armortables.attachments[v].pr then
-			res = res * (1 - ix.armortables.attachments[v].pr)
+		if !v then
+			continue
+		end
+		
+		for _, attachment in pairs (v) do
+			if (!ix.armortables.attachments[attachment]) then continue end
+			if ix.armortables.attachments[attachment].pr then
+				res = res * (1 - ix.armortables.attachments[attachment].pr)
+			end
 		end
 	end
 
@@ -655,12 +751,18 @@ function ITEM:getFPR()
 	end
 
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 
 	for k,v in pairs(attachments) do
-		if (!ix.armortables.attachments[v]) then continue end
-		if ix.armortables.attachments[v].fpr then
-			res = res + ix.armortables.attachments[v].fpr
+		if !v then
+			continue
+		end
+		
+		for _, attachment in pairs (v) do
+			if (!ix.armortables.attachments[attachment]) then continue end
+			if ix.armortables.attachments[attachment].fpr then
+				res = res + ix.armortables.attachments[attachment].fpr
+			end
 		end
 	end
 	
@@ -685,16 +787,58 @@ function ITEM:getAR()
 	end
 	
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
-		if (!ix.armortables.attachments[v]) then continue end
-		if ix.armortables.attachments[v].ar then
-			res = res * (1 - ix.armortables.attachments[v].ar)
+		if !v then
+			continue
+		end
+		
+		for _, attachment in pairs (v) do
+			if (!ix.armortables.attachments[attachment]) then continue end
+			if ix.armortables.attachments[attachment].ar then
+				res = res * (1 - ix.armortables.attachments[attachment].ar)
+			end
 		end
 	end
 
 	return res
+end
+
+function ITEM:getRadProt()
+	local res = 1
+	local upgrades = self:GetData("upgrades", {})
+
+	if self:GetData("durability",100) < 80 then
+		res = 1 - (self.radProt * (self:GetData("durability",0)/80))
+	else
+		res = 1 - self.radProt
+	end
+	
+	for k,v in pairs(upgrades) do
+		if (!ix.armortables.upgrades[v]) then continue end
+		if ix.armortables.upgrades[v].radProt then
+			res = res - ix.armortables.upgrades[v].radProt 
+		end
+	end
+	
+	--For artifacts, kevlarplates, mutant hides, etc..
+	local attachments = self:GetData("attachments", self.miscSlots)
+	
+	for k,v in pairs(attachments) do
+		if !v then
+			continue
+		end
+		
+		for _, attachment in pairs (v) do
+			if (!ix.armortables.attachments[attachment]) then continue end
+			if ix.armortables.attachments[attachment].radProt then
+				res = res * (1 - ix.armortables.attachments[attachment].radProt )
+			end
+		end
+	end
+
+	return 1 - res -- this is inverted for radprot!!!
 end
 
 function ITEM:getFAR() 
@@ -730,12 +874,18 @@ function ITEM:GetWeight()
   end
 	
 	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
-		if (!ix.armortables.attachments[v]) then continue end
-		if ix.armortables.attachments[v].weight then
-			retval = retval + ix.armortables.attachments[v].weight
+		if !v then
+			continue
+		end
+		
+		for _, attachment in pairs (v) do
+			if (!ix.armortables.attachments[attachment]) then continue end
+			if ix.armortables.attachments[attachment].weight then
+				retval = retval + ix.armortables.attachments[attachment].weight
+			end
 		end
 	end
 
@@ -743,23 +893,35 @@ function ITEM:GetWeight()
 end
 
 function ITEM:RunAllAttachmentAttach()
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 	
 	for k,v in pairs(attachments) do
-		if (!ix.armortables.attachments[v]) then continue end
-		if ix.armortables.attachments[v].onAttach then
-			ix.armortables.attachments[v].onAttach(self:GetOwner(), self)
+		if !v then
+			continue
+		end
+		
+		for _, attachment in pairs (v) do
+			if (!ix.armortables.attachments[attachment]) then continue end
+			if ix.armortables.attachments[attachment].onAttach then
+				ix.armortables.attachments[attachment].onAttach(self:GetOwner(), self)
+			end
 		end
 	end
 end
 
 function ITEM:RunAllAttachmentDetach()
-	local attachments = self:GetData("attachments", {})
+	local attachments = self:GetData("attachments", self.miscSlots)
 
 	for k,v in pairs(attachments) do
-		if (!ix.armortables.attachments[v]) then continue end
-		if ix.armortables.attachments[v].onDetach then
-			ix.armortables.attachments[v].onDetach(self:GetOwner(), self)
+		if !v then
+			continue
+		end
+		
+		for _, attachment in pairs (v) do
+			if (!ix.armortables.attachments[attachment]) then continue end
+			if ix.armortables.attachments[attachment].onDetach then
+				ix.armortables.attachments[attachment].onDetach(self:GetOwner(), self)
+			end
 		end
 	end
 end
