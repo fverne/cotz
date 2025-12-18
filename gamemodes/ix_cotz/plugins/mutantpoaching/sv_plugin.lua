@@ -126,7 +126,7 @@ ix.poaching.MutantParts = {
 	},
 	["hellhound"] = {
 		["meattype"] = "meat_hellhound",
-		["parts"] = {{"part_hellhound", 20}, {"hide_hellhound", 3}},
+		["parts"] = {{"part_hellhound", 50}},-- {"hide_hellhound", 3}},
 	},
 	["electrochimera"] = {
 		["meattype"] = "meat_chimera",
