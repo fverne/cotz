@@ -393,8 +393,7 @@ DIALOGUE.addTopic("ChangeSuitVariant", {
 
 		for k,v in pairs(items) do
 			if v.baseSuit and !v:GetData("equip") then
-				local convertcost = math.Round(v.price / 10)
-				table.insert(dynopts, {statement = v:GetName().." - "..ix.currency.Get(convertcost), topicID = "ChangeSuitVariant", dyndata = {itemuid = v.uniqueID, itemid = v:GetID(), cost = convertcost, baseSuit = v.baseSuit}})
+				table.insert(dynopts, {statement = v:GetName(), topicID = "ChangeSuitVariant", dyndata = {itemuid = v.uniqueID, itemid = v:GetID(), baseSuit = v.baseSuit}})
 			end
 		end
 		
@@ -403,9 +402,6 @@ DIALOGUE.addTopic("ChangeSuitVariant", {
 	ResolveDynamicOption = function(self, client, target, dyndata)
 
 		-- Return the next topicID
-		if( !client:GetCharacter():HasMoney(dyndata.cost)) then
-			return "NotEnoughMoneySuitVariantChange"
-		end
 		return "ChangeSuitVariantP2", dyndata
 	end,
 })
@@ -418,10 +414,10 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 	DynamicPreCallback = function(self, player, target, dyndata)
 		if(dyndata) then
 			if (CLIENT) then
-				self.response = string.format("Which suit would you like instead? It will cost you %s. Be sure to remove attachments beforehand.", ix.currency.Get(dyndata.cost))
+				self.response = string.format("Which suit would you like instead? Be sure to remove attachments beforehand.")
 			end
 
-			target.selectedsuitstruct = { dyndata.itemid, dyndata.itemuid, dyndata.cost, dyndata.baseSuit }
+			target.selectedsuitstruct = { dyndata.itemid, dyndata.itemuid, dyndata.baseSuit }
 		end
 	end,
 	GetDynamicOptions = function(self, client, target)
@@ -438,8 +434,8 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 
 		local suitVariants = {}
 		for _, v in pairs(ix.item.list) do
-			if target.selectedsuitstruct[4] == v.baseSuit and variants[v.suitVariant] then
-				table.insert(suitVariants, {uniqueID = v.uniqueID, name = v.name})
+			if target.selectedsuitstruct[3] == v.baseSuit and variants[v.suitVariant] then
+				table.insert(suitVariants, {uniqueID = v.uniqueID, name = v.name, price = v.price/10, suitVariant = v.suitVariant})
 			end
 		end
 
@@ -449,7 +445,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 				continue
 			end
 
-			table.insert(dynopts, {statement = "["..(v.uniqueID:gsub("^.*_","")):gsub("^%l", string.upper).."] "..v.name.." with cost "..ix.currency.Get(target.selectedsuitstruct[3]), topicID = "ChangeSuitVariantP2", dyndata = {suitVariantUID = v.uniqueID, accepted = true}})
+			table.insert(dynopts, {statement = "["..v.suitVariant:gsub("^%l", string.upper).."] "..v.name.." with cost "..ix.currency.Get(math.Round(v.price)), topicID = "ChangeSuitVariantP2", dyndata = {suitVariantUID = v.uniqueID, accepted = true}})
 		end
 
 		table.insert(dynopts, {statement = "Actually, nevermind...", topicID = "ChangeSuitVariantP2", dyndata = {accepted = false}})
@@ -462,6 +458,12 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 	end,
 	ResolveDynamicOption = function(self, client, target, dyndata)
 		if( SERVER and dyndata.accepted ) then
+			local finalPrice = math.Round(ix.item.list[dyndata.suitVariantUID].price/10)
+			if !client:GetCharacter():HasMoney(finalPrice) then
+				client:Notify("You don't have enough money!")
+				return "BackTopic"
+			end
+
 			if (client:GetCharacter():GetData("carry", 0) >= ix.weight.BaseWeight(client:GetCharacter())) then
 				client:Notify("You are extremely overencumbered and can't do that!")
 				return "BackTopic"
@@ -473,8 +475,8 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 				client:Notify("Can't exchange suit with installed attachments!")
 				return "BackTopic"
 			end
-			ix.dialogue.notifyMoneyLost(client, ix.currency.Get(target.selectedsuitstruct[3]))
-			client:GetCharacter():TakeMoney(target.selectedsuitstruct[3])
+			ix.dialogue.notifyMoneyLost(client, ix.currency.Get(finalPrice))
+			client:GetCharacter():TakeMoney(finalPrice)
 
 			originalSuit:Remove()
 			client:GetCharacter():SetData("carry", ix.weight.CalculateWeight(client:GetCharacter()))
