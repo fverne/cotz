@@ -7,7 +7,7 @@ ITEM.longdesc = "No Longer Description Available"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 0
-ITEM.suitVariant = "baseline"
+ITEM.suitVariant = "default"
 
 ITEM.outfitCategory = "model"
 ITEM.isBodyArmor = true
