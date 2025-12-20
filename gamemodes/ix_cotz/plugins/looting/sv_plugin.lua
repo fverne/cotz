@@ -32,24 +32,26 @@ PLUGIN.HumanModels = {
 function PLUGIN:PlayerButtonDown(client,key)
     local Hit = client:GetEyeTraceNoCursor()
     local npc = Hit.Entity
-    if (client:GetNetVar("isLooting") == true && key == KEY_F ) then
+    if (client:GetNetVar("IsLooting") == true && key == KEY_F ) then
        ix.util.PlayerActionInterrupt(client)
        npc:SetNetVar("beingLooted",false)
     end
 end
 
 function PLUGIN:KeyPress(client, key)
-    if (client:GetNetVar("isLooting") == true ) then
+    if (client:GetNetVar("IsLooting") == true ) then
        ix.util.PlayerActionInterrupt(client)
     end
 
     local Hit = client:GetEyeTraceNoCursor()
     local npc = Hit.Entity
     local items = client:GetCharacter():GetInventory():GetItems()
-    if !(npc) or !(table.HasValue(self.HumanModels, npc:GetModel())) then
+    if !(npc) then
         return
     end
-
+    if !(table.HasValue(self.HumanModels, npc:GetModel())) then
+        return
+    end
     if client:GetCharacter() and client:Alive() then
         if (key == IN_USE) then
             if (npc:IsRagdoll() and npc:GetPos():Distance( client:GetPos() ) <= 55) then
@@ -129,6 +131,7 @@ function PLUGIN:BeginLooting(client, npc)
                     client:Notify("You found nothing.")
                 end
                 npc:SetNetVar("loot", "")
+                player:SetNetVar("IsLooting", false)
             end)
         end
     end
