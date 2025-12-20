@@ -56,7 +56,7 @@ ITEM.functions.useSave = {
     sound = "physics/metal/chain_impact_soft2.wav",
     OnRun = function(item)
 
-		item:SetData("savedspawn", {item.player:GetPos(), Angle(), game.GetMap()})
+		item:SetData("savedspawn", {item.player:GetPos() + Vector(0,0,20), Angle(), game.GetMap()})
         item.player:Notify("Location Set")
         return false
     end,
