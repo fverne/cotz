@@ -84,6 +84,14 @@ PLUGIN.buffs[ "buff_radprotect" ] = {
 	end,
 }
 
+PLUGIN.buffs[ "buff_townradprotect" ] = {
+	name = "Town Radiation Protection",
+	desc = "You're protected from radiation around safe areas.",
+	func = function( player, parameter)
+		
+	end,
+}
+
 PLUGIN.buffs[ "buff_psysuppress" ] = {
 	name = "Psy Suppression",
 	desc = "Psychic effects are suppressed.",
