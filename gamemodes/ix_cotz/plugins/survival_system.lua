@@ -176,7 +176,7 @@ ix.command.Add("charsetthirst", {
 		local target = ix.util.FindPlayer(target)
 		local thirst = tonumber(thirst)
 
-		if !target then
+		if !(target) then
 			client:Notify("Invalid Target!")
 			return
 		end
@@ -202,7 +202,7 @@ ix.command.Add("charsethunger", {
 		local target = ix.util.FindPlayer(target)
 		local hunger = tonumber(hunger)
 
-		if !target then
+		if !(target) then
 			client:Notify("Invalid Target!")
 			return
 		end
@@ -216,5 +216,51 @@ ix.command.Add("charsethunger", {
             target:Notify(client:Name().." has set your hunger to "..hunger)
         end
         target:UpdateHungerState(target)
+	end
+})
+
+ix.command.Add("chargetthirst", {
+	adminOnly = true,
+	arguments = {
+		ix.type.string,
+	},
+	OnRun = function(self, client, target)
+		local target = ix.util.FindPlayer(target)
+
+		if !(target) then
+			client:Notify("Invalid Target!")
+			return
+		end
+
+		local thirst = target:GetThirst()
+
+		if client == target then
+            client:Notify("Your thirst is at "..thirst)
+        else
+            client:Notify(target:Name().."'s thirst is at "..thirst)
+        end
+	end
+})
+
+
+ix.command.Add("chargethunger", {
+	adminOnly = true,
+	arguments = {
+		ix.type.string,
+	},
+	OnRun = function(self, client, target)
+		local target = ix.util.FindPlayer(target)
+
+		if !(target) then
+			client:Notify("Invalid Target!")
+			return
+		end
+		local hunger = target:GetHunger()
+
+		if client == target then
+            client:Notify("Your hunger is at "..hunger)
+        else
+            client:Notify(target:Name().."'s hunger is at "..hunger)
+        end
 	end
 })
