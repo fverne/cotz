@@ -129,7 +129,7 @@ ix.command.Add("SetData", {
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local stasheditem = ix.item.instances
 
-		if (!data or !isnumber(data)) then
+		if (!data) then
 			return "@invalidArg", 2
 		end
 
