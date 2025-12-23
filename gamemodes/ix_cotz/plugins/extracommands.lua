@@ -117,12 +117,12 @@ ix.command.Add("spawnitem", {
 	end
 })
 
-ix.command.Add("setdata", {
-	description = "sets number data on the items you look at",
+ix.command.Add("SetData", {
+	description = "Sets data on the items you look at. If data is number, it converts that from string to number.",
 	adminOnly = true,
 	arguments = {
 		ix.type.string,
-		ix.type.number
+		ix.type.string
 	},
 	OnRun = function(self, client, key, data)
 		local trace = client:GetEyeTraceNoCursor()
@@ -131,6 +131,10 @@ ix.command.Add("setdata", {
 
 		if (!data or !isnumber(data)) then
 			return "@invalidArg", 2
+		end
+
+		if tonumber(data) then
+			data = tonumber(data)
 		end
 
 		for k, v in pairs( stasheditem ) do
@@ -147,34 +151,31 @@ ix.command.Add("setdata", {
 	end
 })
 
-ix.command.Add("setdatastring", {
-	description = "sets string data on the items you look at",
-	adminOnly = true,
-	arguments = {
+ix.command.Add("CharSetData", {
+    adminOnly = true,
+    description = "Sets data on a character. If data is number, it converts that from string to number.",
+    arguments = {
+		ix.type.character,
 		ix.type.string,
-		ix.type.text
+		ix.type.string
 	},
-	OnRun = function(self, client, key, data)
-		local trace = client:GetEyeTraceNoCursor()
-		local hitpos = trace.HitPos + trace.HitNormal*5
-		local items = ix.item.instances
+    OnRun = function(self, client, target, key, data)
+        if not target then
+            client:Notify("Invalid Target!")
 
-		if (!data or !isstring(data)) then
-			return "@invalidArg", 2
+            return
+        end
+
+		if not data then
+			client:Notify("No data to set.")
 		end
 
-		for k, v in pairs( items ) do
-			if v:GetEntity() then
-			local dist = hitpos:Distance(client:GetPos())
-			local distance = v:GetEntity():GetPos():Distance( hitpos )
-				if distance <= 32 then
-					v:SetData(key, data)
-
-					client:Notify( "Data set successfully.")
-				end
-			end
+		if tonumber(data) then
+			data = tonumber(data)
 		end
-	end
+
+		target:SetData(key, data)
+    end
 })
 
 ix.command.Add("CharResetValues", {
