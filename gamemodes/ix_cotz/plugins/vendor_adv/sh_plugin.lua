@@ -277,7 +277,7 @@ if (SERVER) then
 
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
 
-			data[2] = math.max(tonumber(data[2]) or 0, 1)
+			data[2] = math.max(tonumber(data[2]) or 0, 0)
 			entity.items[uniqueID][VENDOR_RESTOCK_AMOUNT] = data[2]
 
 			UpdateEditReceivers(entity.receivers, key, data)

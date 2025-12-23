@@ -304,7 +304,7 @@ function PANEL:Init()
 				Derma_StringRequest(
 					itemTable.GetName and itemTable:GetName() or L(itemTable.name),
 					"Set Vendor restock amount",
-					amt or 1,
+					amt or 0,
 					function(text)
 						self:updateVendor("stockAmount", {uniqueID, text})
 					end
