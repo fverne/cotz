@@ -835,3 +835,22 @@ properties.Add("vendor_edit", {
 		net.Send(client)
 	end
 })
+
+if SERVER then
+	ix.log.AddType("vendorTraded", function(client, ...)
+		local arg = {...}
+		local isSell = arg[1]
+		local itemName = arg[2]
+		local vendorName = arg[3]
+
+		if isSell then
+			return Format("%s sold '%s' to vendor %s.", client:Name(), itemName, vendorName)
+		else
+			return Format("%s bought '%s' from vendor %s.", client:Name(), itemName, vendorName)
+		end
+	end)
+	
+	function PLUGIN:CharacterVendorTraded(client, entity, uniqueID, isSellingToVendor)
+		ix.log.Add(client, "vendorTraded", isSellingToVendor, ix.item.list[uniqueID]:GetName(), entity:GetDisplayName())
+	end
+end
