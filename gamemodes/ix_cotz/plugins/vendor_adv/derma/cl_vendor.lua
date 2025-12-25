@@ -205,10 +205,12 @@ function PANEL:OnItemSelected(panel)
 	
 	if !isSherpaClient then
 		if (panel.isLocal) then
+			self.vendorBuy:SetText(L"sell".." ("..ix.currency.Get(price)..")")
+
 			if self.entity:GetSherpa() then
+				self.vendorBuy:SetText("You cannot sell to this vendor.")
 				self.vendorBuy:SetEnabled(false)
 			end
-			self.vendorBuy:SetText(L"sell".." ("..ix.currency.Get(price)..")")
 		else
 			self.vendorSell:SetText(L"purchase".." ("..ix.currency.Get(price)..")")
 		end
