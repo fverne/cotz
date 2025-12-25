@@ -132,7 +132,7 @@ end
 function PANEL:removeItem(uniqueID, listID, iteminstanceID)
 	if (!listID or listID == "selling") then
 		if (IsValid(self.sellingList[uniqueID])) then
-			self.sellingList[uniqueID].stock.curstock = math.max(self.sellingList[uniqueID].stock.curstock - 1,0)
+			self.sellingList[uniqueID].stock.curstock = math.max(self.sellingList[uniqueID].stock.curstock - 1,1)
 			self.sellingList[uniqueID].stock:SetText(string.format("Stock: %d/%d", self.sellingList[uniqueID].stock.curstock, ix.gui.vendor.entity.items[uniqueID][VENDOR_MAXSTOCK]))
 			
 			if self.sellingList[uniqueID].stock.curstock <= 0 then
@@ -162,14 +162,6 @@ function PANEL:Setup(entity)
 	for k, _ in SortedPairs(entity.items) do
 		self:addItem(k, "selling")
 	end
-	
-	-- if entity:GetSherpa() then
-		for k, v in SortedPairs(entity.items) do
-			if v[2] and v[2] > 0 then
-				self:addItem(k, "selling")
-			end
-		end
-	-- end
 
 	for _, v in SortedPairs(LocalPlayer():GetCharacter():GetInventory():GetItems()) do
 		if !v.noDrop then
