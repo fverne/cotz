@@ -106,7 +106,7 @@ function PANEL:addItem(uniqueID, listID, iteminstanceID)
 
 	if ((!listID or listID == "selling") and !IsValid(self.sellingList[uniqueID])
 	and ix.item.list[uniqueID]) then
-		if (data and data[VENDOR_MODE] and data[VENDOR_MODE] != VENDOR_BUYONLY) then
+		if (data and data[VENDOR_MODE] and data[VENDOR_MODE] != VENDOR_BUYONLY) or entity:GetSherpa() then
 			local item = self.sellingItems:Add("ixVendorAdvItem")
 			item:Setup(uniqueID)
 
@@ -134,7 +134,11 @@ function PANEL:removeItem(uniqueID, listID, iteminstanceID)
 		if (IsValid(self.sellingList[uniqueID])) then
 			self.sellingList[uniqueID].stock.curstock = math.max(self.sellingList[uniqueID].stock.curstock - 1,0)
 			self.sellingList[uniqueID].stock:SetText(string.format("Stock: %d/%d", self.sellingList[uniqueID].stock.curstock, ix.gui.vendor.entity.items[uniqueID][VENDOR_MAXSTOCK]))
-			--self.sellingList[uniqueID]:Remove()
+			
+			if self.sellingList[uniqueID].stock.curstock <= 0 then
+				self.sellingList[uniqueID]:Remove()
+			end
+			
 			self.sellingItems:InvalidateLayout()
 		end
 	end
@@ -157,6 +161,14 @@ function PANEL:Setup(entity)
 
 	for k, _ in SortedPairs(entity.items) do
 		self:addItem(k, "selling")
+	end
+	
+	if entity:GetSherpa() then
+		for k, v in SortedPairs(entity.items) do
+			if v[2] and v[2] > 0 then
+				self:addItem(k, "selling")
+			end
+		end
 	end
 
 	for _, v in SortedPairs(LocalPlayer():GetCharacter():GetInventory():GetItems()) do
@@ -197,12 +209,22 @@ end
 
 function PANEL:OnItemSelected(panel)
 	local price = self.entity:GetPrice(panel.item, panel.isLocal, panel.iteminstanceID)
-
-	if (panel.isLocal) then
-		self.vendorBuy:SetText(L"sell".." ("..ix.currency.Get(price)..")")
+	local isSherpaClient = LocalPlayer():GetCharacter():HasSherpaVendor(self.entity:GetDisplayName())
+	
+	if !isSherpaClient then
+		if (panel.isLocal) then
+			self.vendorBuy:SetText(L"sell".." ("..ix.currency.Get(price)..")")
+		else
+			self.vendorSell:SetText(L"purchase".." ("..ix.currency.Get(price)..")")
+		end
 	else
-		self.vendorSell:SetText(L"purchase".." ("..ix.currency.Get(price)..")")
+		if (panel.isLocal) then
+			self.vendorBuy:SetText("Give to vendor")
+		else
+			self.vendorSell:SetText("Take from vendor")
+		end
 	end
+	
 end
 
 vgui.Register("ixVendorAdv", PANEL, "ixStalkerFrame")

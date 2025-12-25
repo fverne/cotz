@@ -87,7 +87,8 @@ if (SERVER) then
 				soundgroup = entity:GetSoundGroup(),
 				animgroup = entity:GetAnimGroupId(),
 				idleanim = entity:GetIdleAnim(),
-				buyall = entity:GetBuyAll()
+				buyall = entity:GetBuyAll(),
+				sherpa = entity:GetSherpa(),
 			}
 		end
 
@@ -137,6 +138,7 @@ if (SERVER) then
 			entity:SetAnimGroupId(v.animgroup or 0)
 			entity:SetIdleAnim(v.idleanim or "")
 			entity:SetBuyAll(v.buyall or false)
+			entity:SetSherpa(v.sherpa or false)
 		end
 	end
 
@@ -380,6 +382,7 @@ if (SERVER) then
 		end
 
 		local entity = client.ixVendorAdv
+		local isSherpaClient = client:GetCharacter():HasSherpaVendor(entity:GetDisplayName())
 
 		if (!IsValid(entity) or client:GetPos():Distance(entity:GetPos()) > 192) then
 			return
@@ -389,8 +392,11 @@ if (SERVER) then
 		local iteminstanceID = net.ReadUInt(32)
 		local isSellingToVendor = net.ReadBool()
 
-		if (entity.items[uniqueID] and
-			hook.Run("CanPlayerTradeWithVendor", client, entity, uniqueID, isSellingToVendor) != false) or entity:GetBuyAll() then
+		if (!entity.items[uniqueID] and !isSherpaClient and !entity:GetBuyAll()) then
+			return
+		end
+
+		if (hook.Run("CanPlayerTradeWithVendor", client, entity, uniqueID, isSellingToVendor) != false) then
 			local price = entity:GetPrice(uniqueID, isSellingToVendor, iteminstanceID)
 
 			if (isSellingToVendor) then
@@ -402,8 +408,10 @@ if (SERVER) then
 				end
 
 				local invOkay = true
+				local quantity
 
 				for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
+					quantity = ix.item.instances[v:GetID()]:GetData("quantity")
 					if (v.uniqueID == uniqueID and v:GetID() != 0 and ix.item.instances[v:GetID()] and v:GetID() == iteminstanceID and v:GetData("equip", false) == false) then
 						timer.Simple(0.1, function()
 						client:SelectWeapon("ix_hands" or "tfa_nmrih_combatknife" or "tfa_nmrih_oldknife" or "tfa_nmrih_shankknife" or "tfa_nmrih_survivalknife") -- yuck 
@@ -425,30 +433,54 @@ if (SERVER) then
 					return client:NotifyLocalized("tellAdmin", "trd!iid")
 				end
 
-				client:GetCharacter():GiveMoney(price)
-				client:NotifyLocalized("businessSell", name, ix.currency.Get(price))
-				entity:TakeMoney(price)
-				--entity:AddStock(uniqueID)
+				if isSherpaClient then
+					client:Notify("Gave item to vendor.")
+				else
+					client:GetCharacter():GiveMoney(price)
+					client:NotifyLocalized("businessSell", name, ix.currency.Get(price))
+					entity:TakeMoney(price)
+				end
+				
+
+				local item = ix.item.list[uniqueID]
+
+				if item.quantity and quantity and (quantity < item.quantity) then
+					-- item is not full quantity, vendor doesnt restock it :)
+				elseif item:GetData("durability", 100) != 100 or item:GetData("wear", 100) != 100 then
+					-- item is not pristine, its not added to the vendor stock :)
+				else
+					if isSherpaClient then
+						entity:SherpaAddStock(uniqueID)
+					end
+				end
 
 				PLUGIN:SaveData()
 				hook.Run("CharacterVendorTraded", client, entity, uniqueID, isSellingToVendor)
 			else
 				local stock = entity:GetStock(uniqueID)
 
+				if stock == nil and isSherpaClient then
+					stock = 0
+				end
+
 				if (stock and stock < 1) then
 					return client:NotifyLocalized("vendorNoStock")
 				end
 
-				if (!client:GetCharacter():HasMoney(price)) then
+				if (!client:GetCharacter():HasMoney(price) and !isSherpaClient) then
 					return client:NotifyLocalized("canNotAfford")
 				end
 
 				local name = L(ix.item.list[uniqueID].name, client)
 
-				client:GetCharacter():TakeMoney(price)
-				client:NotifyLocalized("businessPurchase", name, ix.currency.Get(price))
-
-				entity:GiveMoney(price)
+				if isSherpaClient then
+					client:Notify("Took item from vendor.")
+				else
+					client:GetCharacter():TakeMoney(price)
+					client:NotifyLocalized("businessPurchase", name, ix.currency.Get(price))
+					entity:GiveMoney(price)
+				end
+				
 
 				if (!client:GetCharacter():GetInventory():Add(uniqueID)) then
 					ix.item.Spawn(uniqueID, client)
@@ -460,7 +492,11 @@ if (SERVER) then
 					net.Send(client)
 				end
 
-				entity:TakeStock(uniqueID)
+				if isSherpaClient then
+					entity:SherpaTakeStock(uniqueID)
+				else
+					entity:TakeStock(uniqueID)
+				end
 
 				PLUGIN:SaveData()
 				hook.Run("CharacterVendorTraded", client, entity, uniqueID, isSellingToVendor)

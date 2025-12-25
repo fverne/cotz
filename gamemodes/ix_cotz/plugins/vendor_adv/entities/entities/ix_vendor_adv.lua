@@ -15,6 +15,7 @@ ENT.restockCheckTimer = 0
 function ENT:SetupDataTables()
 	self:NetworkVar("Bool", 0, "NoBubble")
 	self:NetworkVar("Bool", 1, "BuyAll")
+	self:NetworkVar("Bool", 2, "Sherpa")
 	self:NetworkVar("String", 0, "DisplayName")
 	self:NetworkVar("String", 1, "Description")
 	self:NetworkVar("String", 2, "IdleAnim")
@@ -282,6 +283,28 @@ if (SERVER) then
 		self:AddStock(uniqueID, -(value or 1))
 	end
 
+	function ENT:SherpaAddStock(uniqueID, value)
+		if (!self.items[uniqueID]) then
+			self.items[uniqueID] = {nil, 0, SELLANDBUY, 100, 0, 0}
+		end
+
+
+		self:SetStock(uniqueID, self:GetStock(uniqueID) + (value or 1))
+	end
+
+	function ENT:SherpaTakeStock(uniqueID, value)
+		if !self.items[uniqueID] then return end
+		if (!self.items[uniqueID][VENDOR_MAXSTOCK]) then
+			return
+		end
+
+		self:AddStock(uniqueID, -(value or 1))
+
+		if self:GetStock(uniqueID) <= 0 then
+			self.items[uniqueID] = nil
+		end
+	end
+
 
 	function ENT:RestockThink()
 		local theTime = os.time()
@@ -442,6 +465,7 @@ function ENT:LoadTemplate(templatename)
 		self.money = tmplt.money or self.money
 		self.scale = tmplt.scale or self.scale
 		self:SetBuyAll(tmplt.buyAll or self:GetBuyAll())
+		self:SetSherpa(tmplt.sherpa or self:GetSherpa())
 		self.dialogueid = tmplt.dialogueid or self.dialogueid
 		self:SetSoundGroup(tmplt.soundgroup or self:GetSoundGroup())
 		self:SetAnimGroupId(tmplt.animgroup or self:GetAnimGroupId())

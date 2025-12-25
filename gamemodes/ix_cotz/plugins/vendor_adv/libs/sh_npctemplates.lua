@@ -758,6 +758,27 @@ ix.npctemplates.templates["arenanpc"] = {
 	},
 }
 
+ix.npctemplates.templates["communitynpc"] = {
+	name 		= "Community NPC",
+	description = "Big",
+	model 		= "models/legends/garyk.mdl",
+	skin 		= 0,
+	bubble 		= 0,
+	scale 		= 0,
+	dialogueid 	= "communitynpc",
+	soundgroup 	= "nosound",
+	idleanim 	= "trader_idle",
+	buyAll = true,
+	sherpa = true,
+	-- animgroup 	= 3,
+	items = {
+	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
+		-- ["medic_medkit_1"] 	= { nil, 0, SELLANDBUY, 100, 0.01, 0 },
+	},
+}
+
+
+
 -- No sounds emitted
 ix.npctemplates.soundtemplates["nosound"] = {
 	"stalkersound/inv_nosound.mp3",

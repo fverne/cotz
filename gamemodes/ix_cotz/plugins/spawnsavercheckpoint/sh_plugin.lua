@@ -65,6 +65,13 @@ if (SERVER) then
 			end
 
 			client:SetPos(spawndata[1])
+
+            local positions = ix.util.FindEmptySpace(client, {client})
+
+            for _, v in ipairs(positions) do
+                client:SetPos(v)
+                if not client:IsStuck() then return end
+            end
 		end
 	end
 
