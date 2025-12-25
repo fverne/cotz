@@ -411,9 +411,9 @@ if (SERVER) then
 				local quantity
 
 				for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
-					local itm = ix.item.instances[v:GetID()]
-					quantity = itm:GetData("quantity", item.quantity or item.ammoAmount)
-					if (v.uniqueID == uniqueID and v:GetID() != 0 and itm and v:GetID() == iteminstanceID and v:GetData("equip", false) == false) then
+					local item = ix.item.instances[v:GetID()]
+					quantity = item:GetData("quantity", item.quantity or item.ammoAmount)
+					if (v.uniqueID == uniqueID and v:GetID() != 0 and item and v:GetID() == iteminstanceID and v:GetData("equip", false) == false) then
 						timer.Simple(0.1, function()
 						client:SelectWeapon("ix_hands" or "tfa_nmrih_combatknife" or "tfa_nmrih_oldknife" or "tfa_nmrih_shankknife" or "tfa_nmrih_survivalknife") -- yuck 
 					  end)
