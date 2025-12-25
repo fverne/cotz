@@ -163,13 +163,13 @@ function PANEL:Setup(entity)
 		self:addItem(k, "selling")
 	end
 	
-	if entity:GetSherpa() then
+	-- if entity:GetSherpa() then
 		for k, v in SortedPairs(entity.items) do
 			if v[2] and v[2] > 0 then
 				self:addItem(k, "selling")
 			end
 		end
-	end
+	-- end
 
 	for _, v in SortedPairs(LocalPlayer():GetCharacter():GetInventory():GetItems()) do
 		if !v.noDrop then
