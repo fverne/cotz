@@ -74,10 +74,6 @@ DIALOGUE.addTopic("TradeSherpaTopic", {
 		if (SERVER) then
 			local character = client:GetCharacter()
 
-			-- if character and !(character:HasSherpaVendor(target:GetDisplayName())) then
-			-- 	return
-			-- end
-
 			target.receivers[#target.receivers + 1] = client
 
 			local items = {}

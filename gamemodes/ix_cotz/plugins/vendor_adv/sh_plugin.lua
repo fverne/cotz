@@ -492,11 +492,7 @@ if (SERVER) then
 					net.Send(client)
 				end
 
-				if isSherpaClient then
-					entity:SherpaTakeStock(uniqueID)
-				else
-					entity:TakeStock(uniqueID)
-				end
+				entity:SherpaTakeStock(uniqueID)
 
 				PLUGIN:SaveData()
 				hook.Run("CharacterVendorTraded", client, entity, uniqueID, isSellingToVendor)
