@@ -12,7 +12,7 @@ DIALOGUE.name = "Community NPC"
 DIALOGUE.addTopic("GREETING", {
 	response = "** Silence **",
 	options = {
-		"TradeSherpaTopic", 
+		"TradeTopic", 
 		-- "HealTopic",
 		-- "JoinArena",
 		-- "TutorialTopic",
@@ -46,7 +46,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
 	response = "What would you like to know?",
 	options = {
-		"TradeSherpaTopic", 
+		"TradeTopic", 
 		-- "HealTopic",
 		-- "JoinArena",
 		-- "TutorialTopic",
