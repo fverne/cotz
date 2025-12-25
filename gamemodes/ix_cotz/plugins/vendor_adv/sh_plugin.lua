@@ -333,7 +333,7 @@ if (SERVER) then
 			data = math.Round(math.abs(tonumber(data) or 0))
 
 			entity:SetMoney(data)
-			-- feedback = false
+			feedback = false
 		elseif (key == "scale") then
 			data = tonumber(data) or 0.5
 

@@ -67,9 +67,9 @@ DIALOGUE.addTopic("GOODBYE", {
 ----------------------START-TRADER-START------------------------
 ----------------------------------------------------------------
 
-DIALOGUE.addTopic("TradeSherpaTopic", {
+DIALOGUE.addTopic("TradeTopic", {
 	statement = "Want to trade?",
-	response = "No.",
+	response = "Yes",
 	postCallback = function(self, client, target)
 		if (SERVER) then
 			local character = client:GetCharacter()
@@ -77,6 +77,7 @@ DIALOGUE.addTopic("TradeSherpaTopic", {
 			target.receivers[#target.receivers + 1] = client
 
 			local items = {}
+
 			-- Only send what is needed.
 			for k, v in pairs(target.items) do
 				if (!table.IsEmpty(v) and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])) then

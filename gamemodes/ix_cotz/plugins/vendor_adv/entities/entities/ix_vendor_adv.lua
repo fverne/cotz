@@ -285,7 +285,7 @@ if (SERVER) then
 
 	function ENT:SherpaAddStock(uniqueID, value)
 		if (!self.items[uniqueID]) then
-			self.items[uniqueID] = {nil, 0, SELLANDBUY, 100, 0, 0}
+			self.items[uniqueID] = {nil, 0, VENDOR_SELLANDBUY, 100, 0, 0}
 		end
 
 
