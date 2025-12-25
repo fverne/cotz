@@ -132,7 +132,7 @@ end
 function PANEL:removeItem(uniqueID, listID, iteminstanceID)
 	if (!listID or listID == "selling") then
 		if (IsValid(self.sellingList[uniqueID])) then
-			self.sellingList[uniqueID].stock.curstock = math.max(self.sellingList[uniqueID].stock.curstock - 1,1)
+			self.sellingList[uniqueID].stock.curstock = math.max(self.sellingList[uniqueID].stock.curstock - 1,0)
 			self.sellingList[uniqueID].stock:SetText(string.format("Stock: %d/%d", self.sellingList[uniqueID].stock.curstock, ix.gui.vendor.entity.items[uniqueID][VENDOR_MAXSTOCK]))
 			
 			if self.sellingList[uniqueID].stock.curstock <= 0 then
