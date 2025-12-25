@@ -411,8 +411,9 @@ if (SERVER) then
 				local quantity
 
 				for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
-					quantity = ix.item.instances[v:GetID()]:GetData("quantity")
-					if (v.uniqueID == uniqueID and v:GetID() != 0 and ix.item.instances[v:GetID()] and v:GetID() == iteminstanceID and v:GetData("equip", false) == false) then
+					local itm = ix.item.instances[v:GetID()]
+					quantity = itm:GetData("quantity", item.quantity or item.ammoAmount)
+					if (v.uniqueID == uniqueID and v:GetID() != 0 and itm and v:GetID() == iteminstanceID and v:GetData("equip", false) == false) then
 						timer.Simple(0.1, function()
 						client:SelectWeapon("ix_hands" or "tfa_nmrih_combatknife" or "tfa_nmrih_oldknife" or "tfa_nmrih_shankknife" or "tfa_nmrih_survivalknife") -- yuck 
 					  end)
@@ -443,8 +444,14 @@ if (SERVER) then
 				
 
 				local item = ix.item.list[uniqueID]
+				local itemMaxQuant
+				if item.ammoAmount then
+					itemMaxQuant = item.ammoAmount
+				else
+					itemMaxQuant = item.quantity
+				end
 
-				if item.quantity and quantity and (quantity < item.quantity) then
+				if itemMaxQuant and quantity and (quantity < itemMaxQuant) then
 					-- item is not full quantity, vendor doesnt restock it :)
 				elseif item:GetData("durability", 100) != 100 or item:GetData("wear", 100) != 100 then
 					-- item is not pristine, its not added to the vendor stock :)

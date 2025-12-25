@@ -10,7 +10,7 @@ DIALOGUE.name = "Community NPC"
 -- to react to progression levels
 
 DIALOGUE.addTopic("GREETING", {
-	response = "** Silence **",
+	response = "Me love cheese!",
 	options = {
 		"TradeTopic", 
 		-- "HealTopic",
@@ -44,7 +44,7 @@ DIALOGUE.addTopic("GREETING", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
-	response = "What would you like to know?",
+	response = "Yes yes!",
 	options = {
 		"TradeTopic", 
 		-- "HealTopic",
@@ -60,7 +60,7 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "** You take your leave **",
-	response = "** Silence **"
+	response = "You come back soon!"
 })
 
 ----------------------------------------------------------------
@@ -69,7 +69,7 @@ DIALOGUE.addTopic("GOODBYE", {
 
 DIALOGUE.addTopic("TradeTopic", {
 	statement = "Want to trade?",
-	response = "Yes",
+	response = "Oooooooo, shinyyyyyyy!",
 	postCallback = function(self, client, target)
 		if (SERVER) then
 			local character = client:GetCharacter()
