@@ -422,6 +422,7 @@ ITEM.functions.Equip = {
 
 		
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 6, function(ply) 
+			if item.invID != ply:GetCharacter():GetInventory():GetID() then return end
 
 			item:SetData("equip", true)
 			ply:AddPart(item.uniqueID, item)
