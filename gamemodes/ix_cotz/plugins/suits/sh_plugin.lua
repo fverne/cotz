@@ -134,7 +134,7 @@ function playerMeta:getPercentageBulletRes()
 
 	for k, v in pairs(items) do
 		if (v.isBodyArmor and v:GetData("equip")) then
-			res = v:getBR(v)
+			res = res * v:getBR(v)
 		end
 
 		if (v.br ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
@@ -179,7 +179,7 @@ function playerMeta:getPercentageSlashRes()
 
 	for k, v in pairs(items) do
 		if (v.isBodyArmor and v:GetData("equip")) then
-			res = v:getSR(v)
+			res = res * v:getSR(v)
 		end
 
 		if (v.sr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
@@ -224,7 +224,7 @@ function playerMeta:getPercentageAnomalyRes()
 
 	for k, v in pairs(items) do
 		if (v.isBodyArmor and v:GetData("equip")) then
-			res = v:getAR(v)
+			res = res * v:getAR(v)
 		end
 
 		if (v.ar ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
@@ -270,7 +270,7 @@ function playerMeta:getPercentagePsyRes()
 
 	for k, v in pairs(items) do
 		if (v.isBodyArmor and v:GetData("equip")) then
-			res = v:getPR(v)
+			res = res * v:getPR(v)
 		end
 
 		if (v.pr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
