@@ -146,7 +146,10 @@ ITEM.functions.useAll = {
               break
             end
             v:Remove()
-            char:GetInventory():Add(v.meal, 1, {["weight"] = v:GetWeight()})
+            if not char:GetInventory():Add(v.meal, 1, {["weight"] = v:GetWeight()}) then
+              ix.item.Spawn(v.meal, position, nil, AngleRand(), {["weight"] = v:GetWeight()})
+              client:Notify("No space in your inventory! Items have been dropped.")
+            end
           end
           ix.chat.Send(player, "iteminternal", "finished cooking "..cookquantity.." portions of meat.", false)
         end)
@@ -181,7 +184,10 @@ function ITEM:CookMeat(item, targetID)
     
     ix.util.PlayerPerformBlackScreenAction(client, "Cooking...", 6, function(player) 
       target:Remove()
-      client:GetCharacter():GetInventory():Add(target.meal, 1, {["weight"] = target:GetWeight()})
+      if not client:GetCharacter():GetInventory():Add(target.meal, 1, {["weight"] = target:GetWeight()}) then
+        ix.item.Spawn(target.meal, position, nil, AngleRand(), {["weight"] = target:GetWeight()})
+        client:Notify("No space in your inventory! Items have been dropped.")
+      end
       player:Notify(target.name.." successfully cooked.")
       ix.chat.Send(player, "iteminternal", "uses their "..self.name.." to cook some "..target.name..".", false)
     end)

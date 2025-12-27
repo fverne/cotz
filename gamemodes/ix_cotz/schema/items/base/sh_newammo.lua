@@ -102,7 +102,10 @@ ITEM.functions.split = {
 			if quantity <= 0 then
 				return false
 			end
-
+			if not client:GetCharacter():GetInventory():Add(item.uniqueID, 1, {["quantity"] = data[1]}) then
+				ix.item.Spawn(item.uniqueID, client:GetItemDropPos(), nil, AngleRand(), {["quantity"] = data[1]})
+				client:Notify("No space in your inventory! Items have been dropped.")
+            end
 			client:GetCharacter():GetInventory():Add(item.uniqueID, 1, {["quantity"] = data[1]})
 
 			item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
