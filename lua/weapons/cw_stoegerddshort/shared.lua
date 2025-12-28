@@ -129,7 +129,7 @@ SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "passive"
-SWEP.FireModes = {"break"}
+SWEP.FireModes = {"break","2burst"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
@@ -182,4 +182,17 @@ SWEP.SnapToIdlePostReload = true
 
 function SWEP:IndividualInitialize()
 	self:setBodygroup( 1 , 2 )
+end
+
+SWEP.Shots_Base = 9
+function SWEP:IndividualThink()
+	if self.FireMode == "2burst" and self:Clip1() > 1 then
+		self.AmmoPerShot = 2
+		self.Shots = self.Shots_Base * 2
+		self.Recoil = self.Recoil_Orig * 1.75
+	else
+		self.AmmoPerShot = 1
+		self.Shots = self.Shots_Base
+		self.Recoil = self.Recoil_Orig
+	end
 end
