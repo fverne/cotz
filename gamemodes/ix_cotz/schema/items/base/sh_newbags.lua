@@ -84,6 +84,7 @@ ITEM.functions.Equip = {
 		end
 
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 4, function(ply) 
+			if item.invID != ply:GetCharacter():GetInventory():GetID() then return end
 			item:SetData("equip", true)
 			ply:AddPart(item.uniqueID, item)
 			char:UpdateWeight()
