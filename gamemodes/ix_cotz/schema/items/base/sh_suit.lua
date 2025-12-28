@@ -490,14 +490,20 @@ ITEM.functions.detach = {
 	OnRun = function(item, data)
 		if data[1] then
 			local curattach = item:GetData("attachments", item.miscSlots)
+			local removedAttachment = false
 			
 			for _, categories in pairs(curattach) do
 				for _, suitAttachment in pairs(categories) do
 					if suitAttachment == data[1] then
-						table.RemoveByValue(categories, suitAttachment)
+						removedAttachment = table.RemoveByValue(categories, suitAttachment)
 						break
 					end
 				end
+			end
+
+			if !removedAttachment then
+				item.player:Notify("You are detaching too fast!")
+				return false
 			end
 			
 			if not item.player:GetCharacter():GetInventory():Add(ix.armortables.attachments[data[1]].uID) then
