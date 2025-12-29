@@ -3,8 +3,8 @@ att.name = "am_slugrounds"
 att.displayName = "Slug rounds"
 att.displayNameShort = "Slug"
 
-att.statModifiers = {DamageMult = 4,
-	AimSpreadMult = 2}
+att.statModifiers = {DamageMult = 4, ClumpSpreadMult = -0.4}
+	-- AimSpreadMult = 2}
 
 if CLIENT then
 	att.displayIcon = surface.GetTextureID("atts/slugrounds")
@@ -13,8 +13,8 @@ if CLIENT then
 end
 
 function att:attachFunc()
+	self.Shots_Base = 1
 	self.Shots = 1
-	self.ClumpSpread = nil
 	self:unloadWeapon()
 	self.Primary.Ammo = "12 Gauge -SG-"
 end
@@ -22,7 +22,7 @@ end
 function att:detachFunc()
 	self:unloadWeapon()
 	self.Shots = self.Shots_Orig
-	self.ClumpSpread = self.ClumpSpread_Orig
+	self.Shots_Base = self.Shots_Orig
 	self.Primary.Ammo = "12 Gauge"
 end
 

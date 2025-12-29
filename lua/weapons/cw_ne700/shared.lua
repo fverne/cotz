@@ -110,7 +110,7 @@ SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "passive"
-SWEP.FireModes = {"semi"}
+SWEP.FireModes = {"semi","2burst"}
 SWEP.Base = "cw_base"
 SWEP.Category = "STALKER Weapons"
 
@@ -161,6 +161,7 @@ SWEP.ReloadTime = 3
 SWEP.ReloadTime_Empty = 3
 SWEP.ReloadHalt = 3.05
 SWEP.ReloadHalt_Empty = 3.05
+SWEP.Knockback = 250
 
 function SWEP:postPrimaryAttack()
 	if CLIENT then
@@ -171,6 +172,22 @@ function SWEP:postPrimaryAttack()
 		end)
 	end
 	if SERVER then
-		self.Owner:SetVelocity(self.Owner:EyeAngles():Forward()*-250)
+		self.Owner:SetVelocity(self.Owner:EyeAngles():Forward()*-(self.Knockback))
+	end
+end
+
+function SWEP:IndividualThink()
+	if self.FireMode == "2burst" and self:Clip1() > 1 then
+		self.Knockback = 400
+		self.AmmoPerShot = 2
+		self.Shots = self.Shots_Base * 2
+		self.Recoil = self.Recoil_Orig * 1.75
+		self.ClumpSpread = 0.008
+	else
+		self.Knockback = 250
+		self.AmmoPerShot = 1
+		self.Shots = self.Shots_Base
+		self.Recoil = self.Recoil_Orig
+		self.ClumpSpread = nil
 	end
 end
