@@ -301,7 +301,11 @@ function ITEM:OnInstanced()
 	})
 	
 	if !self:GetData("attachments") then
-		self:SetData("attachments", self.miscSlots)
+		self:SetData("attachments", {
+			["exteriorSlots"] = {},
+			["interiorSlots"] = {},
+			["extraSlots"] = {},
+		})
 	end
 end
 
@@ -489,7 +493,7 @@ ITEM.functions.detach = {
 	end,
 	OnRun = function(item, data)
 		if data[1] then
-			local curattach = item:GetData("attachments", item.miscSlots)
+			local curattach = item:GetData("attachments", table.Copy(item.miscSlots))
 			local removedAttachment = false
 			
 			for _, categories in pairs(curattach) do
@@ -518,7 +522,6 @@ ITEM.functions.detach = {
 			end
 
 			item:SetData("attachments", curattach)
-
 			-- Recalc resistances
 			item.player:RecalculateResistances()
 			ix.weight.Update(item.player:GetCharacter())
