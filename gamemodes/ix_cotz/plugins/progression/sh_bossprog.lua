@@ -607,7 +607,7 @@ ix.progression.Register("bossItemDelivery_7", {
 			if (npc) then
 				npc:AddItemToList("suit_exoskeleton", nil, 5, "SELLANDBUY", 5, 1, 5)
 				npc:AddItemToList("headwear_spartan", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("gear_exoskeletonframe", nil, 5, "SELLANDBUY", 5, 1, 5)
+				-- npc:AddItemToList("gear_exoskeletonframe", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("bossItemDelivery_7", true)
