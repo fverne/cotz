@@ -46,7 +46,7 @@ function PLUGIN:KeyPress(client, key)
     local Hit = client:GetEyeTraceNoCursor()
     local npc = Hit.Entity
     local items = client:GetCharacter():GetInventory():GetItems()
-    if !(npc) then
+    if !(IsValid(npc)) then
         return
     end
     if !(table.HasValue(self.HumanModels, npc:GetModel())) then
@@ -79,7 +79,7 @@ function PLUGIN:BeginLooting(client, npc)
     --Do animation and spawn loot
     local Hit = client:GetEyeTraceNoCursor()
     local npc = Hit.Entity
-    if !(npc) then
+    if !(IsValid(npc)) then
         client:Notify("You are not looking at a corpse")
         return
     end
