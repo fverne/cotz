@@ -3,7 +3,7 @@ att.name = "am_dartrounds"
 att.displayName = "Dart rounds"
 att.displayNameShort = "Dart"
 
-att.statModifiers = {DamageMult = 4, ClumpSpreadMult = -0.4}
+att.statModifiers = {DamageMult = 5, ClumpSpreadMult = -0.4}
 	-- AimSpreadMult = 2}
 
 if CLIENT then
