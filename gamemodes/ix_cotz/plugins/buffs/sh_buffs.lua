@@ -83,6 +83,13 @@ PLUGIN.buffs[ "buff_radprotect" ] = {
 		
 	end,
 }
+PLUGIN.buffs[ "buff_passivehealthregen" ] = {
+	name = "Passive Regeneration",
+	desc = "You're slowly regaining health.",
+	func = function( player, parameter)
+		
+	end,
+}
 
 PLUGIN.buffs[ "buff_townradprotect" ] = {
 	name = "Town Radiation Protection",

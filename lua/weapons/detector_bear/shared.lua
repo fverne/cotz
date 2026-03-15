@@ -92,7 +92,8 @@ SWEP.WElements = {
 
 SWEP.VElements = {
 	["detector"] = { type = "Model", model = "models/kali/miscstuff/stalker/detector_bear.mdl", bone = "lwrist", rel = "", pos = Vector(4, 1.1, -0.519), angle = Angle(-59.611, 31.558, 162.468), size = Vector(0.699, 0.699, 0.699), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {[1] = 1} },
-	--["detector"] = { type = "Model", model = "models/kali/miscstuff/stalker/detector_bear.mdl", bone = "l-upperarm", rel = "", pos = Vector(8.831, 0.518, -2.5), angle = Angle(33.895, 68.96, 17.531), size = Vector(0.5, 0.5, 0.5), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {[1] = 1} },
+	["screenanchor"] = { type = "Model", model = "models/hunter/plates/plate075x1.mdl", bone = "lwrist", rel = "", pos = Vector(4, 1.1, -2.519), angle = Angle(-59.611, 30, 162.468), size = Vector(0.07, 0.07, 0.07), color = Color(255, 255, 255, 0), surpresslightning = true, material = "", skin = 0, bodygroup = {[1] = 1} },
+	["screen"] = { type = "Quad", bone = "Base", rel = "screenanchor", pos = Vector(1.5, 0.1, .710), angle = Angle(0, -90, 0), size = 0.040, draw_func = nil},
 	["element_name"] = { type = "Model", model = "models/kali/miscstuff/stalker/bolt.mdl", bone = "Base", rel = "", pos = Vector(0, 0, 0), angle = Angle(12.857, -29.222, 180), size = Vector(0.755, 0.755, 0.755), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
 }
 
@@ -261,70 +262,71 @@ anomalies["models/nasca/etherealsrp_artifacts/snowflake.mdl"] = true
 anomalies["models/nasca/etherealsrp_artifacts/urchin.mdl"] = true
 ]]--
 
-if CLIENT then
-	local matScreen = Material("models/kali/miscstuff/stalker/detectors/detector_bear_c"); 
-	local RTTexture = GetRenderTarget("DTC_BEAR", 512, 512); 
+-- OLD CODE, doesn't glow in the dark
+-- if CLIENT then
+-- 	local matScreen = Material("models/kali/miscstuff/stalker/detectors/detector_bear_c"); 
+-- 	local RTTexture = GetRenderTarget("DTC_BEAR", 512, 512); 
 
-	local dot = surface.GetTextureID("models/kali/miscstuff/stalker/detectors/detector_bear_segment_copy");
-	local bg = surface.GetTextureID("models/kali/miscstuff/stalker/detectors/detector_bear_copy");
+-- 	local dot = surface.GetTextureID("models/kali/miscstuff/stalker/detectors/detector_bear_segment_copy");
+-- 	local bg = surface.GetTextureID("models/kali/miscstuff/stalker/detectors/detector_bear_copy");
 
-	function SWEP:RenderScreen()
+-- 	function SWEP:RenderScreen()
 
-		local NewRT = RTTexture;
-		local oldW = ScrW();
-		local oldH = ScrH();
-		local ply = LocalPlayer();
+-- 		local NewRT = RTTexture;
+-- 		local oldW = ScrW();
+-- 		local oldH = ScrH();
+-- 		local ply = LocalPlayer();
 
-		matScreen:SetTexture( "$basetexture", NewRT);
+-- 		matScreen:SetTexture( "$basetexture", NewRT);
 
-		local OldRT = render.GetRenderTarget();
-		render.SetRenderTarget(NewRT);
-		render.SetViewPort( 0, 0, 512, 512);
+-- 		local OldRT = render.GetRenderTarget();
+-- 		render.SetRenderTarget(NewRT);
+-- 		render.SetViewPort( 0, 0, 512, 512);
 
-		cam.Start2D();
+-- 		cam.Start2D();
 
-			render.Clear( 50, 50, 100, 0 );
+-- 			render.Clear( 50, 50, 100, 0 );
 
-			surface.SetDrawColor( 255, 255, 255, 255 );
-			surface.SetTexture( bg );
-			surface.DrawTexturedRect( 0, 0, 512, 512);
+-- 			surface.SetDrawColor( 255, 255, 255, 255 );
+-- 			surface.SetTexture( bg );
+-- 			surface.DrawTexturedRect( 0, 0, 512, 512);
 
-			surface.SetTexture(dot);
+-- 			surface.SetTexture(dot);
 
 
-			local anoms = {}
-			for k,v in pairs(ents.FindInSphere(self:GetOwner():GetPos(), 301)) do
-				if v:GetClass() == "ix_item" then
-					if anomalies[string.lower(v:GetModel())] then
-						table.insert(anoms, v)
-					end
-				end
-			end
-			local dist = 301
-			local ent = nil
-			for k,v in pairs(anoms) do
-				if v:GetPos():Distance(LocalPlayer():GetPos()) < dist then
-					dist = v:GetPos():Distance(LocalPlayer():GetPos())
-					ent = v
-				end
-			end
-			if dist < 300 then
-				local ang = ply:GetAngles();
-				local pos = ent:GetPos() - ply:GetShootPos()
-				surface.SetDrawColor(255, 255, 255, 255)
-				pos:Rotate(Angle(0, -1*ang.Yaw, 0));
-				if (math.abs(pos.z)<2000) then
-					surface.DrawTexturedRectRotated( 131, 118, 150, 150, ((pos:Angle().y % 15) / 15 < 0.5 and pos:Angle().y - (pos:Angle().y % 15) or (pos:Angle().y % 15) / 15 >= 0.5 and pos:Angle().y - (pos:Angle().y % 15)  + 15) + 30  )//�������. �� ������� ������� ������� ���� �� 15(� ��������� 24 �������. 360/24 = 15) � ���� ������� ������ �������� 15, �� �� ���� �������� �������, � ���� ������� ������ �������� 15, �� �� ���� �������� ������� � ���������� 15. ��� ����� ������. ����� ������� �� �������� ����, ������� 15. ������� 'Black Pheonix'� �� �����.
-				end
-			end
+-- 			local anoms = {}
+-- 			for k,v in pairs(ents.FindInSphere(self:GetOwner():GetPos(), 301)) do
+-- 				if v:GetClass() == "ix_item" then
+-- 					if anomalies[string.lower(v:GetModel())] then
+-- 						table.insert(anoms, v)
+-- 					end
+-- 				end
+-- 			end
+-- 			local dist = 301
+-- 			local ent = nil
+-- 			for k,v in pairs(anoms) do
+-- 				if v:GetPos():Distance(LocalPlayer():GetPos()) < dist then
+-- 					dist = v:GetPos():Distance(LocalPlayer():GetPos())
+-- 					ent = v
+-- 				end
+-- 			end
+-- 			if dist < 300 then
+-- 				local ang = ply:GetAngles();
+-- 				local pos = ent:GetPos() - ply:GetShootPos()
+-- 				surface.SetDrawColor(255, 255, 255, 255)
+-- 				pos:Rotate(Angle(0, -1*ang.Yaw, 0));
+-- 				if (math.abs(pos.z)<2000) then
+-- 					surface.DrawTexturedRectRotated( 131, 118, 150, 150, ((pos:Angle().y % 15) / 15 < 0.5 and pos:Angle().y - (pos:Angle().y % 15) or (pos:Angle().y % 15) / 15 >= 0.5 and pos:Angle().y - (pos:Angle().y % 15)  + 15) + 30  )//�������. �� ������� ������� ������� ���� �� 15(� ��������� 24 �������. 360/24 = 15) � ���� ������� ������ �������� 15, �� �� ���� �������� �������, � ���� ������� ������ �������� 15, �� �� ���� �������� ������� � ���������� 15. ��� ����� ������. ����� ������� �� �������� ����, ������� 15. ������� 'Black Pheonix'� �� �����.
+-- 				end
+-- 			end
 
-		cam.End2D();
+-- 		cam.End2D();
 
-		render.SetRenderTarget(OldRT);
-		render.SetViewPort( 0, 0, oldW, oldH )
+-- 		render.SetRenderTarget(OldRT);
+-- 		render.SetViewPort( 0, 0, oldW, oldH )
 
-	end
-end
+-- 	end
+-- end
 SWEP.LastBeep = 0
 function SWEP:Think()
 	if CLIENT then
@@ -336,6 +338,31 @@ function SWEP:Think()
 				end
 			end
 		end
+
+		self.VElements["screen"].draw_func = function( weapon )
+			local function DrawPointOnThatShit(material, x, y, ang, size )
+				surface.SetMaterial(Material(material))
+				surface.DrawTexturedRectRotated(x, y, size, size, ang )
+			end
+			local dist = 301
+			local ent = nil
+			for k,v in pairs(anoms) do
+				if v:GetPos():Distance(self.Owner:GetPos()) < dist then
+					dist = v:GetPos():Distance(self.Owner:GetPos())
+					ent = v
+				end
+			end
+			if dist < 300 then
+				local ang = self.Owner:GetAngles();
+				local pos = ent:GetPos() - self.Owner:GetShootPos()
+				surface.SetDrawColor(255, 255, 255, 255)
+				pos:Rotate(Angle(0, -1*ang.Yaw, 0));
+				if (math.abs(pos.z)<2000) then
+					DrawPointOnThatShit("models/kali/miscstuff/stalker/detectors/detector_bear_segment_copy", -9, 51.8, ((pos:Angle().y % 15) / 15 < 0.5 and pos:Angle().y - (pos:Angle().y % 15) or (pos:Angle().y % 15) / 15 >= 0.5 and pos:Angle().y - (pos:Angle().y % 15)  + 15) + 30, 42 )
+				end
+			end
+		end
+
 		local dist = 301
 		local ent = nil
 		for k,v in pairs(anoms) do
@@ -344,9 +371,13 @@ function SWEP:Think()
 				ent = v
 			end
 		end
-		if dist < 300 and self.LastBeep + dist/300 - CurTime() <= 0 then
-			self.LastBeep = CurTime()
-			self.Owner:EmitSound(Sound("stalkerdetectors/echo.wav"), 100, 100)//math.Clamp(250-dist/2,50,250))
+
+
+		if dist < 300 then
+			if self.LastBeep + dist/300 - CurTime() <= 0 then
+				self.LastBeep = CurTime()
+				self.Owner:EmitSound(Sound("stalkerdetectors/echo.wav"), 100, 100)//math.Clamp(250-dist/2,50,250))
+			end
 		end
 	end
 end

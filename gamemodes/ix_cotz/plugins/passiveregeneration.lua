@@ -1,5 +1,5 @@
-PLUGIN.name = "fverne"
-PLUGIN.author = "Passive Regeneration"
+PLUGIN.name = "Passive Regeneration"
+PLUGIN.author = "fverne"
 PLUGIN.description = "Adds passive regeneration to players around certain objects."
 
 PLUGIN.healingEntities = {}
@@ -60,7 +60,7 @@ if SERVER then
 
 				if v2.nextRegen and v2.nextRegen <= CurTime() then
 					v2:SetHealth(math.min(v2:Health() + ix.config.Get("regenHealAmount", 1), v2:GetMaxHealth()))
-
+					v2:AddBuff("buff_passivehealthregen", ix.config.Get("regenHealInterval", 8), {})
 					if v:GetClass() == "ix_vendor_adv" then
 						v2:AddBuff("buff_townradprotect", ix.config.Get("regenHealInterval", 8), {})
 					end

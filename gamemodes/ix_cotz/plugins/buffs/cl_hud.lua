@@ -29,6 +29,14 @@ function PLUGIN:HUDPaint()
 		ix.util.DrawBuffIcon("stalker/ui/art.png", posW+incW*2, posH, ScrW()*0.016, ScrH()*0.032, Color(255, 0, 0, 255), math.Round(LocalPlayer():HasBuff("debuff_radiation")[1]-CurTime()+0.5))
 	end
 
+	if LocalPlayer():HasBuff("buff_hijump") then
+		ix.util.DrawBuffIcon("gui/arrow", posW+incW*3, posH+incH, ScrW()*0.016, ScrH()*0.032, Color(255, 255, 150, 255), math.Round(LocalPlayer():HasBuff("buff_hijump")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("buff_lightningsprint") then
+		ix.util.DrawBuffIcon("stalker/ui/stamina.png", posW+incW*3, posH+incH*2, ScrW()*0.016, ScrH()*0.032, Color(255, 255, 150, 255))
+	end
+
 	if LocalPlayer():HasBuff("buff_psysuppress") then
 		ix.util.DrawBuffIcon("stalker/ui/psy.png", posW+incW*6, posH+incH*3, ScrW()*0.016, ScrH()*0.032, Color(0, 255, 0), math.Round(LocalPlayer():HasBuff("buff_psysuppress")[1]-CurTime()+0.5))
 	end
@@ -43,5 +51,12 @@ function PLUGIN:HUDPaint()
 
 	if LocalPlayer():HasBuff("debuff_psy") then
 		ix.util.DrawBuffIcon("stalker/ui/psy.png", posW+incW*6, posH, ScrW()*0.016, ScrH()*0.032, Color(255, 0, 0, 255), math.Round(LocalPlayer():HasBuff("debuff_psy")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("buff_passivehealthregen") then
+		ix.util.DrawBuffIcon("stalker/ui/heart.png", posW-incW, posH+incH, ScrW()*0.016, ScrH()*0.032, Color(130, 200, 130, 150))
+	end
+	if LocalPlayer():HasBuff("buff_townradprotect") then
+		ix.util.DrawBuffIcon("stalker/ui/art.png", posW-incW, posH+incH*2, ScrW()*0.016, ScrH()*0.032, Color(130, 200, 130, 150))
 	end
 end
