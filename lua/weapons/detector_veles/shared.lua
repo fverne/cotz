@@ -333,9 +333,11 @@ function SWEP:Think()
 		local dist = 401
 		local ent = nil
 		for k,v in pairs(anoms) do
-			if v:GetPos():Distance(self.Owner:GetPos()) < dist then
-				dist = v:GetPos():Distance(self.Owner:GetPos())
-				ent = v
+			if v:IsValid() then
+				if v:GetPos():Distance(self.Owner:GetPos()) < dist then
+					dist = v:GetPos():Distance(self.Owner:GetPos())
+					ent = v
+				end
 			end
 		end
 		if dist < 400 and self.LastBeep + dist/400 - CurTime() <= 0 then
