@@ -249,42 +249,56 @@ anomalies["models/nasca/etherealsrp_artifacts/thorn.mdl"] = true
 anomalies["models/nasca/etherealsrp_artifacts/mamas_beads.mdl"] = true
 ]]--
 
-
-SWEP.LastBeep = 0
+SWEP.LastBeepCl = 0 -- two parts (client and server) for high ping sound suavemente
+SWEP.LastBeepSv = 0
+SWEP.LastScan = 0
+SWEP.Anomalies = {}
+SWEP.Dist = 150
 function SWEP:Think()
-	if CLIENT then
-		local anoms = {}
-		for k,v in pairs(ents.FindInSphere(self:GetOwner():GetPos(), 300)) do
+	if self.LastScan < CurTime() then
+		self.Anomalies = {}
+		for k,v in pairs(ents.GetAll()) do
 			if v:GetClass() == "ix_item" then
 				if anomalies[string.lower(v:GetModel())] then
-					table.insert(anoms, v)
+					table.insert(self.Anomalies, v)
 				end
 			end
 		end
-		local dist = 101
-		local ent = nil
-		for k,v in pairs(anoms) do
-			local pos = v:GetPos()
-			local dek = pos - self.Owner:GetShootPos()
-			local aimvec = self.Owner:GetAimVector()
-			local sos = dek:GetNormalized()
-			local dot = sos:Dot(aimvec)
-			local clampdot = (1-math.Clamp(dot, 0, 0.5))
-			if v:GetPos():Distance(self.Owner:GetPos())*clampdot < dist then
-				dist = v:GetPos():Distance(self.Owner:GetPos())*clampdot
+		self.LastScan = CurTime() + 0.5
+	end
+
+	local dist = self.Dist + 1
+	local ent = nil
+	for k,v in pairs(self.Anomalies) do
+		if v:IsValid() then
+			if v:GetPos():Distance(self.Owner:GetPos()) < dist then
+				dist = v:GetPos():Distance(self.Owner:GetPos())
 				ent = v
 			end
 		end
-		if dist < 100 then
-			if self.LastBeep + dist/100 - CurTime() <= 0 then
-				self.LastBeep = CurTime()
+	end
+	if CLIENT then
+		if dist < self.Dist and ent:IsValid() then
+			if self.LastBeepCl + math.Max(dist/self.Dist, 0.1) - CurTime() <= 0 then
 				self.VElements["echo"].skin = 2
 				timer.Simple(0.1, function()
 					if IsValid(self) and IsValid(self.Weapon) then
 						self.VElements["echo"].skin = 1
 					end
 				end)
-				self.Owner:EmitSound(Sound("stalkerdetectors/echo.wav"), 100, 100)//math.Clamp(250-dist/2,50,250))
+				self.LastBeepCl = CurTime()
+				self.Owner:EmitSound(Sound("stalkerdetectors/echo.wav"), 70, 100)   --math.Clamp(250-dist/2,50,250))
+			end
+		end
+	end
+	if SERVER then
+		if dist < self.Dist then
+			if self.LastBeepSv + math.Max(dist/self.Dist, 0.1) - CurTime() <= 0 then
+				self.LastBeepSv = CurTime()
+				local rf = RecipientFilter()
+				rf:AddAllPlayers()
+				rf:RemovePlayer(self.Owner)
+				self.Owner:EmitSound(Sound("stalkerdetectors/echo.wav"), 70, 100, 1, CHAN_AUTO, 0, 1, rf)   --math.Clamp(250-dist/2,50,250))
 			end
 		end
 	end

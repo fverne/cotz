@@ -262,123 +262,64 @@ anomalies["models/nasca/etherealsrp_artifacts/snowflake.mdl"] = true
 anomalies["models/nasca/etherealsrp_artifacts/urchin.mdl"] = true
 ]]--
 
--- OLD CODE, doesn't glow in the dark
--- if CLIENT then
--- 	local matScreen = Material("models/kali/miscstuff/stalker/detectors/detector_bear_c"); 
--- 	local RTTexture = GetRenderTarget("DTC_BEAR", 512, 512); 
-
--- 	local dot = surface.GetTextureID("models/kali/miscstuff/stalker/detectors/detector_bear_segment_copy");
--- 	local bg = surface.GetTextureID("models/kali/miscstuff/stalker/detectors/detector_bear_copy");
-
--- 	function SWEP:RenderScreen()
-
--- 		local NewRT = RTTexture;
--- 		local oldW = ScrW();
--- 		local oldH = ScrH();
--- 		local ply = LocalPlayer();
-
--- 		matScreen:SetTexture( "$basetexture", NewRT);
-
--- 		local OldRT = render.GetRenderTarget();
--- 		render.SetRenderTarget(NewRT);
--- 		render.SetViewPort( 0, 0, 512, 512);
-
--- 		cam.Start2D();
-
--- 			render.Clear( 50, 50, 100, 0 );
-
--- 			surface.SetDrawColor( 255, 255, 255, 255 );
--- 			surface.SetTexture( bg );
--- 			surface.DrawTexturedRect( 0, 0, 512, 512);
-
--- 			surface.SetTexture(dot);
-
-
--- 			local anoms = {}
--- 			for k,v in pairs(ents.FindInSphere(self:GetOwner():GetPos(), 301)) do
--- 				if v:GetClass() == "ix_item" then
--- 					if anomalies[string.lower(v:GetModel())] then
--- 						table.insert(anoms, v)
--- 					end
--- 				end
--- 			end
--- 			local dist = 301
--- 			local ent = nil
--- 			for k,v in pairs(anoms) do
--- 				if v:GetPos():Distance(LocalPlayer():GetPos()) < dist then
--- 					dist = v:GetPos():Distance(LocalPlayer():GetPos())
--- 					ent = v
--- 				end
--- 			end
--- 			if dist < 300 then
--- 				local ang = ply:GetAngles();
--- 				local pos = ent:GetPos() - ply:GetShootPos()
--- 				surface.SetDrawColor(255, 255, 255, 255)
--- 				pos:Rotate(Angle(0, -1*ang.Yaw, 0));
--- 				if (math.abs(pos.z)<2000) then
--- 					surface.DrawTexturedRectRotated( 131, 118, 150, 150, ((pos:Angle().y % 15) / 15 < 0.5 and pos:Angle().y - (pos:Angle().y % 15) or (pos:Angle().y % 15) / 15 >= 0.5 and pos:Angle().y - (pos:Angle().y % 15)  + 15) + 30  )//�������. �� ������� ������� ������� ���� �� 15(� ��������� 24 �������. 360/24 = 15) � ���� ������� ������ �������� 15, �� �� ���� �������� �������, � ���� ������� ������ �������� 15, �� �� ���� �������� ������� � ���������� 15. ��� ����� ������. ����� ������� �� �������� ����, ������� 15. ������� 'Black Pheonix'� �� �����.
--- 				end
--- 			end
-
--- 		cam.End2D();
-
--- 		render.SetRenderTarget(OldRT);
--- 		render.SetViewPort( 0, 0, oldW, oldH )
-
--- 	end
--- end
-SWEP.LastBeep = 0
+SWEP.LastBeepCl = 0 -- two parts (client and server) for high ping sound suavemente
+SWEP.LastBeepSv = 0
+SWEP.LastScan = 0
+SWEP.Anomalies = {}
+SWEP.Dist = 300
 function SWEP:Think()
-	if CLIENT then
-		local anoms = {}
+	if self.LastScan < CurTime() then
+		self.Anomalies = {}
 		for k,v in pairs(ents.GetAll()) do
 			if v:GetClass() == "ix_item" then
 				if anomalies[string.lower(v:GetModel())] then
-					table.insert(anoms, v)
+					table.insert(self.Anomalies, v)
 				end
 			end
 		end
+		self.LastScan = CurTime() + 0.5
+	end
 
-		self.VElements["screen"].draw_func = function( weapon )
-			local function DrawPointOnThatShit(material, x, y, ang, size )
-				surface.SetMaterial(Material(material))
-				surface.DrawTexturedRectRotated(x, y, size, size, ang )
-			end
-			local dist = 301
-			local ent = nil
-			for k,v in pairs(anoms) do
-				if v:IsValid() then
-					if v:GetPos():Distance(self.Owner:GetPos()) < dist then
-						dist = v:GetPos():Distance(self.Owner:GetPos())
-						ent = v
-					end
-				end
-			end
-			if dist < 300 then
-				local ang = self.Owner:GetAngles();
-				local pos = ent:GetPos() - self.Owner:GetShootPos()
-				surface.SetDrawColor(255, 255, 255, 255)
-				pos:Rotate(Angle(0, -1*ang.Yaw, 0));
-				if (math.abs(pos.z)<2000) then
-					DrawPointOnThatShit("models/kali/miscstuff/stalker/detectors/detector_bear_segment_copy", -9, 51.8, ((pos:Angle().y % 15) / 15 < 0.5 and pos:Angle().y - (pos:Angle().y % 15) or (pos:Angle().y % 15) / 15 >= 0.5 and pos:Angle().y - (pos:Angle().y % 15)  + 15) + 30, 42 )
-				end
-			end
-		end
-
-		local dist = 301
-		local ent = nil
-		for k,v in pairs(anoms) do
+	local dist = self.Dist + 1
+	local ent = nil
+	for k,v in pairs(self.Anomalies) do
+		if v:IsValid() then
 			if v:GetPos():Distance(self.Owner:GetPos()) < dist then
 				dist = v:GetPos():Distance(self.Owner:GetPos())
 				ent = v
 			end
 		end
+	end
+	if CLIENT then
+		self.VElements["screen"].draw_func = function( weapon )
+			local function DrawPointOnThatShit(material, x, y, ang, size )
+				surface.SetMaterial(Material(material))
+				surface.DrawTexturedRectRotated(x, y, size, size, ang )
+			end
 
-
-		if dist < 300 then
-			if self.LastBeep + dist/300 - CurTime() <= 0 then
-				self.LastBeep = CurTime()
-				self.Owner:EmitSound(Sound("stalkerdetectors/echo.wav"), 100, 100)//math.Clamp(250-dist/2,50,250))
+			if dist < self.Dist and ent:IsValid() then
+				local ang = self.Owner:GetAngles();
+				local pos = ent:GetPos() - self.Owner:GetShootPos()
+				surface.SetDrawColor(255, 255, 255, 255)
+				pos:Rotate(Angle(0, -1*ang.Yaw, 0));
+				if (math.abs(pos.z)<2000) and pos then
+					DrawPointOnThatShit("models/kali/miscstuff/stalker/detectors/detector_bear_segment_copy", -9, 51.8, ((pos:Angle().y % 15) / 15 < 0.5 and pos:Angle().y - (pos:Angle().y % 15) or (pos:Angle().y % 15) / 15 >= 0.5 and pos:Angle().y - (pos:Angle().y % 15)  + 15) + 30, 42 )
+				end
+				if self.LastBeepCl + math.Max(dist/self.Dist, 0.1) - CurTime() <= 0 then
+					self.LastBeepCl = CurTime()
+					self.Owner:EmitSound(Sound("stalkerdetectors/echo.wav"), 70, 100)   --math.Clamp(250-dist/2,50,250))
+				end
+			end
+		end
+	end
+	if SERVER then
+		if dist < self.Dist then
+			if self.LastBeepSv + math.Max(dist/self.Dist, 0.1) - CurTime() <= 0 then
+				self.LastBeepSv = CurTime()
+				local rf = RecipientFilter()
+				rf:AddAllPlayers()
+				rf:RemovePlayer(self.Owner)
+				self.Owner:EmitSound(Sound("stalkerdetectors/echo.wav"), 70, 100, 1, CHAN_AUTO, 0, 1, rf)   --math.Clamp(250-dist/2,50,250))
 			end
 		end
 	end
