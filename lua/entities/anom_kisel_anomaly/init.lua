@@ -36,44 +36,6 @@ function ENT:Initialize()
 	end
 end
 
--- function ENT:StartTouch(ent)
--- 	timer.Create("kisel_activated_once", 0.01, 1, function()
--- 		self:SetNWBool("Activated", true)
--- 		self:EmitSound("bfuzz_hit");
--- 		--util.BlastDamage( self, self, self:GetPos(), 100, 70)
--- 		ent:TakeDamage(40, self, self)
--- 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
--- 			local bodyexplodesounds = {"anomaly/anomaly_body_tear_1.wav", "anomaly/anomaly_body_tear_2.wav"}
--- 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
--- 			ParticleEffect("wick_gore_bloodsplash_new" , ent:GetPos(), Angle( 0, 0, 0 ) )
--- 			ent:Remove()
--- 		elseif ent.ixItemID and ix.item.instances[ent.ixItemID].isWeapon then
--- 			ent:Remove()
--- 		end
--- 	end)	
--- 	timer.Create("kisel_recharge", 0.5, 0, function()
--- 		self:SetNWBool("Activated", false)
--- 	end)
--- 	timer.Create("kisel_activated", 0.65, 0, function()
--- 		self:SetNWBool("Activated", true)
--- 		self:EmitSound("bfuzz_hit");
--- 		--util.BlastDamage( self, self, self:GetPos(), 100, 70)
--- 		ent:TakeDamage(70, self, self)
--- 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
--- 			ent:Remove()
--- 		end
--- 	end)
--- end
-
--- function ENT:EndTouch()
--- 	timer.Stop("kisel_activated")
--- 	timer.Stop("kisel_recharge")
--- 	self.Timer = "kisel_" .. self:EntIndex()
--- 	timer.Create( self.Timer, 0.5, 1, function()
--- 		self:SetNWBool("Activated", false)
--- 	end)
--- end
-
 function ENT:Touch(ent)
 	if not self.Active then return end
 	if timer.Exists(self:EntIndex().."_kisel_activated_"..ent:EntIndex()) then return end
@@ -103,7 +65,6 @@ function ENT:Touch(ent)
 		self.ActiveOnce = true
 	end)
 end
-
 
 function ENT:SpawnFunction( ply, tr, ClassName, activator )
 	if ( !tr.Hit ) then return end

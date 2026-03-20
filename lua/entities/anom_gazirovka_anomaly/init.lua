@@ -38,50 +38,6 @@ function ENT:Initialize()
 	end
 end
 
--- function ENT:StartTouch(ent)
--- 	timer.Create("gazirovka_activated_once"..self:EntIndex(), 0.01, 1, function()
--- 		self:EmitSound("bfuzz_hit")
--- 		ParticleEffect( "gazirovka_activated", self:GetPos(), Angle( 0, 0, 0 ) )
--- 		--util.BlastDamage( self, self, self:GetPos(), 100, 110)
--- 		ent:TakeDamage(70, self, self)
--- 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
--- 			ent:Remove()
--- 		end
--- 		self:StopParticles()
--- 		self:SetNWBool("StopParticle", true)
--- 	end)	
--- 	timer.Create("gazirovka_recharge"..self:EntIndex(), 1.95, 0, function()
--- 		self:SetNWBool("StopParticle", false)
--- 	end)
--- 	timer.Create("gazirovka_activated"..self:EntIndex(), 2.0, 0, function()
--- 		self:EmitSound("bfuzz_hit")
--- 		self:StopSound("buzz_idle")
--- 		ParticleEffect( "gazirovka_activated", self:GetPos(), Angle( 0, 0, 0 ) )
--- 		--util.BlastDamage( self, self, self:GetPos(), 100, 110)
--- 		ent:TakeDamage(70, self, self)
--- 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
--- 			local bodyexplodesounds = {"anomaly/anomaly_body_tear_1.wav", "anomaly/anomaly_body_tear_2.wav"}
--- 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
--- 			ParticleEffect("wick_gore_bloodsplash_new" , ent:GetPos(), Angle( 0, 0, 0 ) )
--- 			ent:Remove()
--- 		elseif ent.ixItemID and ix.item.instances[ent.ixItemID].isWeapon then
--- 			ent:Remove()
--- 		end
--- 		self:StopParticles()
--- 		self:SetNWBool("StopParticle", true)
--- 	end)
--- end
-
--- function ENT:EndTouch()
--- 	timer.Stop("gazirovka_activated"..self:EntIndex())
--- 	timer.Stop("gazirovka_recharge"..self:EntIndex())
--- 	self.Timer = "gazirovka_" .. self:EntIndex()
--- 	timer.Create( self.Timer, 1.9, 1, function()
--- 		ParticleEffect("gazirovka", self:GetPos(), Angle(0,0,0), self)
--- 		self:SetNWBool("Activated", false)
--- 	end)
--- end
-
 function ENT:Touch(ent)
 	if not self.Active then return end
 	if timer.Exists(self:EntIndex().."_gazirovka_activated_"..ent:EntIndex()) then return end
