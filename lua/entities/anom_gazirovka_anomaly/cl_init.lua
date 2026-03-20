@@ -6,9 +6,18 @@ ENT.SleepTimer = 0
 ENT.IsSleeping = true --starts the anomaly out sleeping so it doesn't use a ton of server assets
 ENT.PlayingSound = false
 
+sound.Add( {
+	name = "buzz_idle",
+	channel = CHAN_STATIC,
+	volume = 0.25,
+	level = 70,
+	pitch = 100,
+	sound = "anomaly/buzz_idle.wav"
+} )
+
 function ENT:Initialize()
 	self.particle = CreateParticleSystem( self, "gazirovka", PATTACH_ABSORIGIN_FOLLOW, 0, Vector(0,0,0) )
-	self:SetModel("models/anomaly/anomaly_fix.mdl")	
+	-- self:SetModel("models/anomaly/anomaly_fix.mdl")	
 	--self:EmitSound("buzz_idle")
 end
 

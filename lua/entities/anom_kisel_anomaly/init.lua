@@ -7,15 +7,6 @@ hook.Add( "OnDamagedByExplosion", "DisableSound", function()
 end )
 
 sound.Add( {
-	name = "buzz_idle",
-	channel = CHAN_STATIC,
-	volume = 0.25,
-	level = 70,
-	pitch = 100,
-	sound = "anomaly/buzz_idle.wav"
-} )
-
-sound.Add( {
 	name = "bfuzz_hit",
 	channel = CHAN_STATIC,
 	volume = 1,
@@ -26,7 +17,8 @@ sound.Add( {
 
 function ENT:Initialize()
 	self:SetModel("models/props_junk/watermelon01.mdl")
-
+	self.Active = true
+	self.ActiveOnce = true
 	self:PhysicsInit(SOLID_VPHYSICS)
 	self:SetMoveType(MOVETYPE_VPHYSICS)  
 	self:SetSolid(SOLID_BBOX)	
@@ -44,12 +36,19 @@ function ENT:Initialize()
 	end
 end
 
-function ENT:StartTouch(ent)
-	timer.Create("kisel_activated_once", 0.01, 1, function()
-		self:SetNWBool("Activated", true)
-		self:EmitSound("bfuzz_hit");
-		--util.BlastDamage( self, self, self:GetPos(), 100, 70)
-		ent:TakeDamage(70, self, self)
+function ENT:Touch(ent)
+	if not self.Active then return end
+	if timer.Exists(self:EntIndex().."_kisel_activated_"..ent:EntIndex()) then return end
+	if self.ActiveOnce then 
+		timer.Create(self:EntIndex().."_kisel_activated_sound", 0, 1, function()
+			self:SetNWBool("Activated", true)
+			self:EmitSound("bfuzz_hit");
+		end)	
+		self.ActiveOnce = false	
+	end
+	
+	timer.Create(self:EntIndex().."_kisel_activated_"..ent:EntIndex(), 0, 1, function()  -- Timer for multiple entity damage
+		ent:TakeDamage(40, self, self)
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			local bodyexplodesounds = {"anomaly/anomaly_body_tear_1.wav", "anomaly/anomaly_body_tear_2.wav"}
 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
@@ -58,27 +57,12 @@ function ENT:StartTouch(ent)
 		elseif ent.ixItemID and ix.item.instances[ent.ixItemID].isWeapon then
 			ent:Remove()
 		end
+		self.Active = false
 	end)	
-	timer.Create("kisel_recharge", 0.5, 0, function()
+	timer.Create(self:EntIndex().."_kisel_cooldown", 0.65, 1, function()
 		self:SetNWBool("Activated", false)
-	end)
-	timer.Create("kisel_activated", 0.65, 0, function()
-		self:SetNWBool("Activated", true)
-		self:EmitSound("bfuzz_hit");
-		--util.BlastDamage( self, self, self:GetPos(), 100, 70)
-		ent:TakeDamage(70, self, self)
-		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
-			ent:Remove()
-		end
-	end)
-end
-
-function ENT:EndTouch()
-	timer.Stop("kisel_activated")
-	timer.Stop("kisel_recharge")
-	self.Timer = "kisel_" .. self:EntIndex()
-	timer.Create( self.Timer, 0.5, 1, function()
-		self:SetNWBool("Activated", false)
+		self.Active = true
+		self.ActiveOnce = true
 	end)
 end
 
@@ -99,9 +83,6 @@ function ENT:SpawnFunction( ply, tr, ClassName, activator )
 end
 
 function ENT:OnRemove()
-	self.Timer = "kisel_" .. self:EntIndex()
+	timer.Stop(self:EntIndex().."_kisel_cooldown")
 	self:StopSound("buzz_idle")
-	timer.Stop("kisel_activated")
-	timer.Stop("kisel_recharge")
-	timer.Stop(self.Timer)
 end

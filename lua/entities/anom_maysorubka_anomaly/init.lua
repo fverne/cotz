@@ -24,6 +24,8 @@ function ENT:Initialize()
 	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
 	self:SetName("Tramplin Anomaly")
 	self:SetTrigger(1)
+	self.Active = true
+	self.ActiveOnce = true
 	self:SetCollisionBounds( Vector( -60, -60, -5 ), Vector( 60, 60, 40 ) )
 	self:SetRenderMode( RENDERMODE_TRANSTEXTURE ) 
 	self:SetColor(Color(0,0,0,0))
@@ -36,12 +38,22 @@ function ENT:Initialize()
 	end
 end
 
-function ENT:StartTouch(ent)
-	self:EmitSound("anomaly/anomaly_gravy_hit1.mp3")
-	timer.Create("myasorubka_activated_once", 0.1, 1, function()
-		self:EmitSound("myasorubka_blast");
-		ParticleEffect( "myasorubka_activated", self:GetPos() + Vector(0,0,41), Angle( 0, 0, 0 ) )
-		--util.BlastDamage( self, self, self:GetPos(), 150, 150)
+function ENT:Touch(ent)
+	if not self.Active then return end
+	if timer.Exists(self:EntIndex().."_myasorubka_activated_"..ent:EntIndex()) then return end
+	if self.ActiveOnce then 
+		timer.Create(self:EntIndex().."_myasorubka_activated_sound", 0, 1, function()
+			self:EmitSound("anomaly/anomaly_gravy_hit1.mp3")
+			self:EmitSound("myasorubka_blast");
+			ParticleEffect( "myasorubka_activated", self:GetPos() + Vector(0,0,41), Angle( 0, 0, 0 ) )
+			self:StopParticles()
+			self:SetNWBool("StopParticle", true)
+			self:StopSound("myasorubka_idle")
+		end)	
+		self.ActiveOnce = false
+	end
+	
+	timer.Create(self:EntIndex().."_myasorubka_activated_"..ent:EntIndex(), 0, 1, function()  -- Timer for multiple entity damage
 		ent:TakeDamage(75, self, self)
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			local bodyexplodesounds = {"anomaly/anomaly_body_tear_1.wav", "anomaly/anomaly_body_tear_2.wav"}
@@ -51,33 +63,16 @@ function ENT:StartTouch(ent)
 		elseif ent.ixItemID and ix.item.instances[ent.ixItemID].isWeapon then
 			ent:Remove()
 		end
-		self:StopParticles()
-		self:SetNWBool("StopParticle", true)
-		self:StopSound("myasorubka_idle")
+		self.Active = false
 	end)	
-	timer.Create("myasorubka_activated", 1.4, 0, function()
-		self:EmitSound("myasorubka_blast");
-		self:StopSound("myasorubka_idle")
-		ParticleEffect( "myasorubka_activated", self:GetPos() + Vector(0,0,41), Angle( 0, 0, 0 ) )
-		--util.BlastDamage( self, self, self:GetPos(), 150, 150)
-		ent:TakeDamage(75, self, self)
-		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
-			ent:Remove()
-		end
-		self:StopParticles()
-		self:SetNWBool("StopParticle", true)
+	timer.Create(self:EntIndex().."_myasorubka_cooldown", 1.2, 1, function()
+		self:SetNWBool("StopParticle", false)
+		self.Active = true
+		self.ActiveOnce = true
 	end)
 end
 
-function ENT:EndTouch()
-	timer.Stop("myasorubka_activated")
-	timer.Stop("myasorubka_recharge")
-	self.Timer = "myasorubka_" .. self:EntIndex()
-	timer.Create( self.Timer, 0.5, 1, function()
-		self:SetNWBool("StopParticle", false)
-	self:SetNWBool("Activated", false)
-	end)
-end
+
 
 function ENT:SpawnFunction( ply, tr, ClassName, activator )
 	if ( !tr.Hit ) then return end
@@ -95,9 +90,6 @@ function ENT:SpawnFunction( ply, tr, ClassName, activator )
 end
 
 function ENT:OnRemove()
-	self.Timer = "myasorubka_" .. self:EntIndex()
+	timer.Stop(self:EntIndex().."_myasorubka_cooldown")
 	self:StopSound("myasorubka_idle")
-	timer.Stop(self.Timer)
-	timer.Stop("myasorubka_activated")
-	timer.Stop("myasorubka_recharge")
 end
