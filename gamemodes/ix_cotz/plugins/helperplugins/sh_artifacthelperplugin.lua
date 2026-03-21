@@ -19,7 +19,7 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
             end
         else
             local halo = target:GetCharacter():GetInventory():HasItem("artifact_halo")
-            if halo and halo:GetData("cooldown", 0) < os.time() and (target:Health() - dmginfo:GetDamage()) <= 0 and target:IsAlive() then
+            if halo and halo:GetData("cooldown", 0) < os.time() and (target:Health() - dmginfo:GetDamage()) <= 0 and target:Alive() then
                 if math.random(1, 100) <= 10 then
                     halo:SetData("cooldown", os.time() + 15)
                     dmginfo:SetDamage(0)
