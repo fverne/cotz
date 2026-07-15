@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_pist_ruger23a1.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-6.862, 3.164, 3.017),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3543276351",

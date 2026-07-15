@@ -37,6 +37,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_snip_svu.mdl",
 						["ClassName"] = "model",
+												["Translucent"] = true,
 						["Position"] = Vector(9.2, -4, -2.7),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3859539124",

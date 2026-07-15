@@ -39,6 +39,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_erect_re500.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-8.1, 10.5, -0.78),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3589648235",

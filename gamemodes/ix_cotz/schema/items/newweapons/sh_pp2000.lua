@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_bf4_pp2000.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(9.2, -4.2, -3.4),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3540269892",

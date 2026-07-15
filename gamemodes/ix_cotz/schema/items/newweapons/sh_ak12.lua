@@ -40,6 +40,7 @@ ITEM.pacData = {
 						["Angles"] = Angle(180, 0, 0),
 						["Model"] = "models/weapons/w_rif_ak12.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] =	Vector(12, -4, -3),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3512531291",

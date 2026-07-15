@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(11.662, -4.309, -2.877),
 						["Model"] = "models/khrcw2/doipack/w_suomi.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "8883938491",
 						["Bone"] = "spine 2",

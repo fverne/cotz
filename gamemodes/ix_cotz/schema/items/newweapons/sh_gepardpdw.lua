@@ -39,6 +39,7 @@ ITEM.pacData = {
 						["Position"] = Vector(4.8, -4, -4),
 						["Model"] = "models/weapons/tfa_l4d2/w_gepard.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "8544325421",
 						["Bone"] = "spine 2",

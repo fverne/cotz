@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(-8, 1.7, 3),
 						["Model"] = "models/weapons/w_tfa_dmm5k.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "79468794673",
 						["Bone"] = "chest",

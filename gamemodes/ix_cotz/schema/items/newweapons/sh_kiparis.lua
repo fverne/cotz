@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(4.75, -3.5, -5.38),
 						["Model"] = "models/dobytchick/weapons/gmzone/deadair/w_kiparis.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "8544325421",
 						["Bone"] = "spine 2",

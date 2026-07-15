@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/srp/weapons/w_fort12.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-9.11, 8.792, 0.84),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3540503835",

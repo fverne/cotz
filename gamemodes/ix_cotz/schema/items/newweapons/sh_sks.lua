@@ -37,6 +37,7 @@ ITEM.pacData = {
 						["Angles"] = Angle(0, 0, 180),
 						["Model"] = "models/weapons/world/rifles/sks.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] =	Vector(15.415, -4.194, -4.119),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3888831291",

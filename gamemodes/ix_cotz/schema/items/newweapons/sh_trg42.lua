@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/tgr/w_spin_scout.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(16.349, -4.266, -1.726),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3578648314",

@@ -37,6 +37,7 @@ ITEM.pacData = {
 						["Angles"] = Angle(0, 180, 180),
 						["Model"] = "models/weapons/world/rifles/rk95.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] =	Vector(10.203, -4.154, -4.08),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3547382491",

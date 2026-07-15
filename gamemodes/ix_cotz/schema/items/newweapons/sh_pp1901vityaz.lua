@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(16.922, -4.424, -0.666),
 						["Model"] = "models/weapons/w_smg_pp19vityaz.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "7793894673",
 						["Bone"] = "spine 2",

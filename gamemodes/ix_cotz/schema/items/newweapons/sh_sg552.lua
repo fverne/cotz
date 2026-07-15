@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_rif_tg552.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(12, -4.195, -1.495),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3522668235",

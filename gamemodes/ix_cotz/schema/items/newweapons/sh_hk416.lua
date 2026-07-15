@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(-7, -3.2, 9.8),
 						["Model"] = "models/weapons/w_cwkk_hk416.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "8551155421",
 						["Bone"] = "chest",

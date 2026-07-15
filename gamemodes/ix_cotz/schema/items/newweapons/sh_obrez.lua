@@ -37,6 +37,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons3/mosina.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-23, -7, 0),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3578648235",

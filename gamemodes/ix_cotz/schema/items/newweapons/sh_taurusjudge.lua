@@ -37,6 +37,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/cwc_judge/w_khri_410jury.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-7.5, 2.084, 0.609),
 						["AngleOffset"] = Angle(0, 170, 0),
 						["EditorExpand"] = true,
