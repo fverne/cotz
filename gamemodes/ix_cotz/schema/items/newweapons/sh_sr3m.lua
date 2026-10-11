@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(-2.7, -4.3, -6.3),
 						["Model"] = "models/weapons/w_dmg_vikhr.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "7767986673",
 						["Bone"] = "spine 2",

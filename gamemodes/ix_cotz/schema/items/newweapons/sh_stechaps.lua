@@ -33,6 +33,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_ma85_wf_pt10.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-6.72, -1.028, 4.074),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3532329835",

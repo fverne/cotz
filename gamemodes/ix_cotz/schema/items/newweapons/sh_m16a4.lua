@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(16.543, -4.312, -1.374),
 						["Model"] = "models/weapons/m16a4/w_rif_m16a4.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "8553655421",
 						["Bone"] = "spine 2",

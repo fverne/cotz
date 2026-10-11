@@ -35,6 +35,7 @@ ITEM.pacData = {
 						["Position"] = Vector(2.152, -5.054, -3.132),
 						["Model"] = "models/weapons/w_sv98_scopeless.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "8544253421",
 						["Bone"] = "spine 2",

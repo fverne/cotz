@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_shot_shortygun.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-8.284, -1.114, 3.494),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3547763835",

@@ -42,6 +42,7 @@ ITEM.pacData = {
 						["Position"] = Vector(11.765, -4.449, -1.126),
 						["Model"] = "models/weapons/w_ro2_dp28.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Size"] = 0.9,
 						["EditorExpand"] = true,
 						["UniqueID"] = "7923896121",

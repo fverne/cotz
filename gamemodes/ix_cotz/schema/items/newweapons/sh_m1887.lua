@@ -35,6 +35,7 @@ ITEM.pacData = {
 						["Position"] = Vector(-8, -1, 9),
 						["Model"] = "models/weapons/w_shot_m1887.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "8592533121",
 						["Bone"] = "chest",

@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Angles"] = Angle(0, 0, 180),
 						["Model"] = "models/weapons/w_tfa_mn14_classic_hd.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] =	Vector(0.415, -4.194, -4.119),
 						["EditorExpand"] = true,
 						["UniqueID"] = "26643642",

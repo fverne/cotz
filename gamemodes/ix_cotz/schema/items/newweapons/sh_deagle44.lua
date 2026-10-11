@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_pist_deagle.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-9.88, 5.552, -2.062),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3544642735",

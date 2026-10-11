@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Angles"] = Angle(180, 0, 0),
 						["Model"] = "models/weapons/w_ins2_warface_barret_m98b.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] =	Vector(14.702, -4.244, -1.16),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3547696121",

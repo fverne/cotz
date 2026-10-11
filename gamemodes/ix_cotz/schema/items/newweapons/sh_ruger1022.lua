@@ -37,6 +37,7 @@ ITEM.pacData = {
 						["Position"] = Vector(10.662, -4.192, -3.821),
 						["Model"] = "models/weapons/tfa_nmrih/w_fa_ruger1022.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "8544325421",
 						["Bone"] = "spine 2",

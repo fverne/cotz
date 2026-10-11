@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(14.98, -4.153, -1.175),
 						["Model"] = "models/khrcw2/w_khri_khrtoz194.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "15233125",
 						["Bone"] = "spine 2",

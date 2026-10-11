@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_pist_lyxn_dualb.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Angles"] = Angle(90, -90, 0),
 						["Position"] = Vector(-6, -2.4, 9.3),
 						["AngleOffset"] = Angle(0, -10.5, 0),

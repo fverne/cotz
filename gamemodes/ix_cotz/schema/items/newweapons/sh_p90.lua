@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(11.188, -4.175, -0.658),
 						["Model"] = "models/weapons/therambotnic09/w_cst_p90.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "8544325862",
 						["Bone"] = "spine 2",

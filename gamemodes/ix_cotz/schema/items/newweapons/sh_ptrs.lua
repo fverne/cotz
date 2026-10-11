@@ -38,6 +38,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_grub_ptrs.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Angles"] = Angle(-22.22, 0, -153),
 						["Position"] = Vector(21.7, -4.7, 6),
 						["EditorExpand"] = true,

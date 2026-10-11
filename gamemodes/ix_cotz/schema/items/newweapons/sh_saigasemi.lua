@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_bfh_saiga308.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(14.784, -4.193, -2.951),
 						["EditorExpand"] = true,
 						["UniqueID"] = "9611660162",

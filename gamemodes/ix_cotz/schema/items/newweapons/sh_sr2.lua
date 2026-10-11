@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(2.7, -4.8, 4.2),
 						["Model"] = "models/sr-2m veresk/sr2.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "326463246",
 						["Bone"] = "spine 2",

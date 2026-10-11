@@ -39,6 +39,7 @@ ITEM.pacData = {
 						["Position"] = Vector(11.8, -5, -2.1),
 						["Model"] = "models/weapons/w_fc4_700nitro_fixed.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "6782786768",
 						["Bone"] = "spine 2",

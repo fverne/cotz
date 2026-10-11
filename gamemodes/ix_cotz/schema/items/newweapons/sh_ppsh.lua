@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(16.759, -7.327, 4.486),
 						["Name"] = "ppsh",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Size"] = 0.8,
 						["UniqueID"] = "3544245692",
 						["Angles"] = Angle(60.521, 89.241, 4.292),

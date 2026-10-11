@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(11.98, -4.153, -3.575),
 						["Model"] = "models/wick/weapons/stalker/stcopwep/w_mp153_model.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "15635315",
 						["Bone"] = "spine 2",

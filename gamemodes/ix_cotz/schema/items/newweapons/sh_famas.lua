@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(2.141, -4.444, 2.193),
 						["Model"] = "models/weapons/w_rif_famas.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "7809869952",
 						["Bone"] = "spine 2",

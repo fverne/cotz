@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/khrcw2/doipack/w_lugerp08.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-6.775, 4.688, 3.354),
 						["EditorExpand"] = true,
 						["UniqueID"] = "362833359835",

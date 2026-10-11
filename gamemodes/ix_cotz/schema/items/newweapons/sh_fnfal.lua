@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(13.596, -4.444, -1.874),
 						["Model"] = "models/hgn/srp/weapons/w_rif_fnfal.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "3327382291",
 						["Bone"] = "spine 2",

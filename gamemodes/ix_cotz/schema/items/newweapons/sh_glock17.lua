@@ -37,6 +37,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/cw2_g18/w_dmg_glock.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-6.774, 2.172, 3.359),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3547633835",

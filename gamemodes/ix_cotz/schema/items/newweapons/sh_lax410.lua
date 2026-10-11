@@ -40,6 +40,7 @@ ITEM.pacData = {
 						["Position"] = Vector(11.98, -4.153, -3.575),
 						["Model"] = "models/weapons/w_bocw_ironhide.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "15513215",
 						["Bone"] = "spine 2",

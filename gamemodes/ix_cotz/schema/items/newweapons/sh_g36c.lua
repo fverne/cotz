@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(14.673, -4.309, -1.334),
 						["Model"] = "models/weapons/cw20_g36c.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "7809869091",
 						["Bone"] = "spine 2",
