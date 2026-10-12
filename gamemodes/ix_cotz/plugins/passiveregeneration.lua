@@ -64,9 +64,9 @@ if SERVER then
 					if v:GetClass() == "ix_vendor_adv" then
 						v2:AddBuff("buff_townradprotect", ix.config.Get("regenHealInterval", 8), {})
 					end
+
+					v2.nextRegen = CurTime() + ix.config.Get("regenHealInterval", 8)
 				end
-				
-				v2.nextRegen = CurTime() + ix.config.Get("regenHealInterval", 8)
 			end
 		end
 
