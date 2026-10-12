@@ -90,14 +90,20 @@ ITEM.functions.use = {
 		local hunger = item.player:GetCharacter():GetData("hunger", 100)
 		local thirst = item.player:GetCharacter():GetData("thirst", 100)
 		local client = item.player
-
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
-			player:SetHunger(hunger + item:GetHunger())
-			player:SetThirst(thirst + item:GetThirst())
-			player:UpdateHungerState(item.player)
-		end)
-
-		return true
+		if not (hunger > 150 and item:GetHunger() > 0) and not (thirst > 150 and item:GetThirst() > 0) then
+			ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
+				player:SetHunger(hunger + item:GetHunger())
+				player:SetThirst(thirst + item:GetThirst())
+				player:UpdateHungerState(item.player)
+			end)
+			return true
+		else
+			timer.Simple(0.1, function()
+				client:StopSound(item.sound or "items/battery_pickup.wav")
+			end)
+			client:Notify("You are too full to consume that!")
+			return false
+		end
 	end
 }
 
