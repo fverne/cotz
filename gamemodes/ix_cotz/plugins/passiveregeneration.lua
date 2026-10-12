@@ -58,6 +58,10 @@ if SERVER then
 			for _, v2 in pairs(ents.FindInSphere(v:GetPos(), radius)) do
 				if !v2:IsPlayer() or !v2:GetCharacter() then continue end
 
+				if !v2.nextRegen then
+					v2.nextRegen = CurTime()
+				end
+
 				if v2.nextRegen and v2.nextRegen <= CurTime() then
 					v2:SetHealth(math.min(v2:Health() + ix.config.Get("regenHealAmount", 1), v2:GetMaxHealth()))
 					v2:AddBuff("buff_passivehealthregen", ix.config.Get("regenHealInterval", 8), {})
