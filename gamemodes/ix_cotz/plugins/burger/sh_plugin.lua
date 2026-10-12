@@ -5,6 +5,7 @@ PLUGIN.desc = "Adds a command to summon a burger"
 
 
 ix.command.Add("GodBlessAmerica", {
+    adminOnly = true,
     alias = {"burger", "cheeseburger"},
     description = "Summon a cheeseburger.",
     OnRun = function(self, client)
