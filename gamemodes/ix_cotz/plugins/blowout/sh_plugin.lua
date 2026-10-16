@@ -128,10 +128,12 @@ if (SERVER) then
 		end
         
         if client:GetCharacter():GetData("bInBlowoutWhenStart", false) then
-            client:Kill()
-            client:Notify("Your character disconnected during a blowout, and was killed.")
+            timer.Simple(0, function()
+                client:Kill()
+                client:Notify("Your character disconnected during a blowout, and was killed.")
+            end)
         end
-
+        
         client:GetCharacter():SetData("bInBlowoutWhenStart", false)
     end
 
