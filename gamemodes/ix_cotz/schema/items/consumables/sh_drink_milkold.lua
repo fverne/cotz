@@ -12,19 +12,16 @@ ITEM.flatweight = 0.080
 ITEM.thirst = 17
 ITEM.quantity = 3
 
+ITEM.message = "takes a swig of their "..ITEM.name.."."
 ITEM.sound = "stalkersound/inv_drink_beak.mp3"
 ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/milkold.png")
 
-ITEM:Hook("use", function(item)
-	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-	item.player:AddBuff("debuff_radiation", 10, { amount = 0.5 })
+function ITEM:PopulateTooltipIndividual(tooltip)
+	ix.util.PropertyDesc(tooltip, "Radioactive", Color(255, 0, 0))
+end
 
-	--item.player:DamagePsyHealth(5)
-	--item.player:TakeDamage(5)
-
-	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
-end)
+ITEM.blackScreenAction = function(item, player)
+	player:AddBuff("debuff_radiation", 10, { amount = 0.5 })
+end
 
 ITEM:DecideFunction()
-
-ITEM.weight = 1.08

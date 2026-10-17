@@ -12,15 +12,12 @@ ITEM.flatweight = 0.080
 ITEM.thirst = 17
 ITEM.quantity = 3
 
+ITEM.message = "takes a swig of their "..ITEM.name.."."
 ITEM.sound = "stalkersound/inv_drink_flask_effect.mp3"
 ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/milk.png")
 
-ITEM:Hook("use", function(item)
-	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-	item.player:AddBuff("buff_staminarestore", 10, { amount = 1 })
-	--item.player:AddBuff("buff_psyhealthrestore", 10, { amount = 0.15 })
-
-	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
-end)
+ITEM.blackScreenAction = function(item, player)
+	player:AddBuff("buff_staminarestore", 10, { amount = 1 })
+end
 
 ITEM:DecideFunction()

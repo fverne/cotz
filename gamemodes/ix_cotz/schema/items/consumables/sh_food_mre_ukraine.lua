@@ -12,12 +12,8 @@ ITEM.flatweight = 0.05
 ITEM.hunger = 24
 ITEM.quantity = 3
 
+ITEM.message = "eats a bit of their "..ITEM.name.."."
 ITEM.sound = "stalkersound/inv_eat_ration1.mp3"
 --ITEM.img = ix.util.GetMaterial("vgui/hud/items/food/mre_ukraine.png")
-
-ITEM:Hook("use", function(item)
-	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-	ix.chat.Send(item.player, "iteminternal", "eats a bit of their "..item.name..".", false)
-end)
 
 ITEM:DecideFunction()
