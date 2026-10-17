@@ -12,21 +12,24 @@ ITEM.flatweight = 0.250
 ITEM.thirst = 10
 ITEM.quantity = 4
 
-
 ITEM.alcohol = 10
 
+ITEM.message = "takes a swig of their "..ITEM.name.."."
 ITEM.sound = "stalkersound/inv_flask.mp3"
 ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/bottlebeer_1.png")
 
 function ITEM:PopulateTooltipIndividual(tooltip)
-    ix.util.PropertyDesc(tooltip, "Light Alcohol", Color(64, 224, 208))
+	ix.util.PropertyDesc(tooltip, "Light Alcohol", Color(64, 224, 208))
 end
 
-ITEM:Hook("use", function(item)
-	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-	item.player:AddBuff("buff_radiationremoval", 10, { amount = 0.15 })
+-- ITEM:Hook("use", function(item)
+-- 	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
+-- 	item.player:AddBuff("buff_radiationremoval", 10, { amount = 0.15 })
+-- 	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
+-- end)
 
-	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
-end)
+ITEM.blackScreenAction = function(item, player)
+	player:AddBuff("buff_radiationremoval", 10, { amount = 0.15 })
+end
 
 ITEM:DecideFunction()

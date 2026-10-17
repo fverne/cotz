@@ -12,6 +12,7 @@ ITEM.flatweight = 0
 ITEM.hunger = 9
 ITEM.quantity = 2
 
+ITEM.message = "eats a bit of their "..ITEM.name.."."
 ITEM.sound = "stalkersound/inv_food.mp3"
 
 ITEM.exRender = true
@@ -20,11 +21,6 @@ ITEM.iconCam = {
 	ang = Angle(90, 0, -180),
 	fov = 2.3,
 }
-
-ITEM:Hook("use", function(item)
-	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-	ix.chat.Send(item.player, "iteminternal", "eats a bit of their "..item.name..".", false)
-end)
 
 ITEM:DecideFunction()
 

@@ -11,6 +11,10 @@ ITEM.weight = 0 --make sure you set this
 ITEM.WeightPerThirst = -0.25
 ITEM.WeightPerHunger = 0.5
 
+ITEM.message = nil
+
+ITEM.blackScreenAction = function(item, player) return end
+
 function ITEM:GetDescription()
     local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
     local quantdesc = ""
@@ -59,16 +63,19 @@ ITEM.functions.use = {
 		local thirst = item.player:GetCharacter():GetData("thirst", 100)
 		local client = item.player
 		if not (hunger > 150 and item:GetHunger() > 0) and not (thirst > 150 and item:GetThirst() > 0) then
+			client:EmitSound(item.sound or "items/battery_pickup.wav")
+			if item.message then
+				ix.chat.Send(client, "iteminternal", item.message, false)
+			end
+
 			ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
 				player:SetHunger(hunger + item:GetHunger())
 				player:SetThirst(thirst + item:GetThirst())
 				player:UpdateHungerState(item.player)
+				item.blackScreenAction(item, player)
 			end)
 			return true
 		else
-			timer.Simple(0.1, function()
-				client:StopSound(item.sound or "items/battery_pickup.wav")
-			end)
 			client:Notify("You are too full to consume that!")
 			return false
 		end
