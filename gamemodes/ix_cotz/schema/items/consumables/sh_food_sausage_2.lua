@@ -12,11 +12,7 @@ ITEM.flatweight = 0
 ITEM.hunger = 11
 ITEM.quantity = 2
 
+ITEM.message = "eats a bit of their "..ITEM.name.."."
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
-
-ITEM:Hook("use", function(item)
-	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-	ix.chat.Send(item.player, "iteminternal", "takes a bite out of their "..item.name..".", false)
-end)
 
 ITEM:DecideFunction()

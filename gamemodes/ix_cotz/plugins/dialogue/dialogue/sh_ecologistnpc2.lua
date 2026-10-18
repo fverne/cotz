@@ -528,7 +528,26 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 				client:Notify("You are extremely overencumbered and can't do that!")
 				return "BackTopic"
 			end
+
 			local originalSuit = ix.item.instances[target.selectedsuitstruct[1]]
+
+			-- Check if the item exists
+			if (originalSuit) == nil then
+				client:Notify("Something went wrong! Try again.")
+				return "BackTopic"
+			end
+			-- Check if the item is in player inventory
+			if (originalSuit:GetPlayerID() ~= client:SteamID64()) then
+				client:Notify("Something went very wrong! Try again.")
+				return "BackTopic"
+			end
+
+			-- Check if the item is valid for exchange
+			if not (originalSuit.baseSuit ~= nil and ix.item.list[dyndata.suitVariantUID].baseSuit == originalSuit.baseSuit) then
+				client:Notify("Something went extremely wrong!")
+				return "BackTopic"
+			end
+
 			if !table.IsEmpty((originalSuit:GetData("attachments", originalSuit.miscSlots)["exteriorSlots"])) or 
 			!table.IsEmpty((originalSuit:GetData("attachments", originalSuit.miscSlots)["interiorSlots"])) or 
 			!table.IsEmpty((originalSuit:GetData("attachments", originalSuit.miscSlots)["extraSlots"])) then
