@@ -1963,7 +1963,7 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 
 			local npc = ix.progression.GetNPCFromName("'Haggler'")
 			if (npc) then
-				npc:AddItemToList("mosinnagant", nil, 5, "SELLANDBUY", 5, 1, 5)
+				npc:AddItemToList("mosin", nil, 5, "SELLANDBUY", 5, 1, 5)
 			end
 
 			ix.progression.SetCompleted("hagglerItemDelivery_2211", true)
