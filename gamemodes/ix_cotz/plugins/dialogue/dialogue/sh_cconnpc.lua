@@ -4,9 +4,9 @@ DIALOGUE.name = "CCON NPC"
 -- Copy&Paste from this file to build new NPCs
 
 -- Progression can be done by calling this:
--- 				ix.progression.AddProgessionValue(progressionIdentifier, amountToIncrement, client:Name())
+-- 				ix.progression.AddProgressionValue(client:GetCharacter(), progressionIdentifier, amountToIncrement)
 -- and
---  			ix.progression.GetProgressionValue(progressionIdentifier)
+--  			ix.progression.GetProgressionValue(client:GetCharacter(), progressionIdentifier)
 -- to react to progression levels
 
 DIALOGUE.addTopic("GREETING", {

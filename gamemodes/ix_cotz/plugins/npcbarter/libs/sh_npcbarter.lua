@@ -2,10 +2,11 @@ ix.npcbarter = ix.npcbarter or {}
 ix.npcbarter.barterdict = ix.npcbarter.barterdict or {}
 ix.npcbarter.activebarters = ix.npcbarter.activebarters or {}
 
-function ix.npcbarter.GetActiveBartersForNPC(npcname)
+function ix.npcbarter.GetActiveBartersForNPC(character, npcname)
 	local ret = {}
+	if (not ix.progression.CanUseNPC(character, npcname)) then return ret end
 
-	for barterid,_ in pairs(ix.npcbarter.barterdict[npcname]) do
+	for barterid,_ in pairs(ix.npcbarter.barterdict[npcname] or {}) do
 		if(ix.npcbarter.activebarters[barterid]) then
 			table.insert(ret, barterid)
 		end
@@ -47,8 +48,6 @@ if SERVER then
 
 	function ix.npcbarter.SetActive(barterid, active)
 		if (ix.npcbarter.barterdict[barterid]) then
-			ix.npcbarter.activebarters[barterid] = ix.progression.status[progid] or {}
-
 			ix.npcbarter.activebarters[barterid] = tobool(active)
 		end
 	end
@@ -93,7 +92,7 @@ else
 	net.Receive("npcbarter_sync", function(len, pl)
 		net.Start("npcbarter_sync_receive")
 			net.WriteTable(ix.npcbarter.activebarters)
-		net.Broadcast()
+		net.Send(pl)
 	end)
 
 	net.Receive("npcbarter_execute", function(len, pl)
@@ -101,6 +100,14 @@ else
 		local barterid = net.ReadString()
 		local item = net.ReadString()
 
+		local character = pl:GetCharacter()
+		if (not character or not ix.progression.CanUseNPC(character, npcname)) then return end
+		local nearby = false
+		for _, vendor in ipairs(ents.FindByClass("ix_vendor_adv")) do
+			if (vendor:GetDisplayName() == npcname and vendor:CanAccess(pl)
+				and pl:GetPos():DistToSqr(vendor:GetPos()) <= 192 * 192) then nearby = true break end
+		end
+		if (not nearby) then return end
 		local isbarteractive = ix.npcbarter.activebarters[barterid]
 
 		local out = "No such barter exists."

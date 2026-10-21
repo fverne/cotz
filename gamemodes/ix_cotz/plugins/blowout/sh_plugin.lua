@@ -163,13 +163,13 @@ if (SERVER) then
         end
 
         if math.Round(self.NextBlowout) == math.Round(os.time() + 30) and self.BlowoutVars.ProgressionWarningUsed == false then
-            if ix.progression.IsCompleted("muteItemDelivery_BlowoutWarning") then
-                for k, ply in pairs( player.GetAll() ) do
-                    ix.chat.Send(ply, "eventpdainternal", "A blowout is about to hit, seek shelter!", true, ply)
-                    // ply:EmitSound( "stalkersound/pda/pda.wav", 50, 100, 1, CHAN_AUTO )
+            for _, ply in ipairs(player.GetAll()) do
+                local character = ply:GetCharacter()
+                if (character and ix.progression.IsCompleted(character, "muteItemDelivery_BlowoutWarning")) then
+                    ix.chat.Send(ply, "eventpdainternal", "A blowout is about to hit, seek shelter!", true, {ply})
                 end
-                self.BlowoutVars.ProgressionWarningUsed = true
             end
+            self.BlowoutVars.ProgressionWarningUsed = true
         end
 
         if self.NextBlowout < os.time() and (not self.BlowoutVars.BlowoutStarted) then

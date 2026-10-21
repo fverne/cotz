@@ -42,7 +42,9 @@ DIALOGUE.addTopic("TradeTopic", {
 			-- Only send what is needed.
 			for k, v in pairs(target.items) do
 				if (!table.IsEmpty(v) and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])) then
-					items[k] = v
+					if (ix.progression.CanBuyItem(character, target:GetDisplayName(), k)) then
+						items[k] = v
+					end
 				end
 			end
 
@@ -122,7 +124,7 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 		-- Return the next topicID
 		return "BackTopic"
 	end,
-	ShouldAdd = function()
+	ShouldAdd = function(self, client, target)
 		if (LocalPlayer():GetCharacter():GetJobs()["'Boss'"]) then
 			return true
 		end
@@ -210,7 +212,7 @@ DIALOGUE.addTopic("GetTask", {
 		-- Return the next topicID
 		return "ConfirmTask", {description = ix.jobs.getFormattedDescInactive(dyndata.identifier), identifier = dyndata.identifier}
 	end,
-	ShouldAdd = function()
+	ShouldAdd = function(self, client, target)
 		if (!LocalPlayer():GetCharacter():GetJobs()["'Boss'"]) then
 			return true
 		end
@@ -261,7 +263,7 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 		-- Return the next topicID
 		return "BackTopic", dynopts
 	end,
-	ShouldAdd = function()
+	ShouldAdd = function(self, client, target)
 		if (!LocalPlayer():GetCharacter():GetJobs()["'Boss'"]) then
 			return true
 		end
@@ -275,7 +277,7 @@ DIALOGUE.addTopic("RepairItems", {
 	options = {
 		"BackTopic"
 	},
-	--ShouldAdd = function() return ix.GetProgression("funy") end,
+	--ShouldAdd = function(self, client, target) return ix.GetProgression("funy") end,
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
 
@@ -379,51 +381,15 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 	statement = "",
 	response = "",
 	IsDynamicFollowup = true,
-	options = {
-		"BackTopic"
-	},
+	options = {"BackTopic"},
 	DynamicPreCallback = function(self, player, target, dyndata)
-		if (dyndata) then
-			if(CLIENT)then
-				self.response = string.format("Nice work, this %s will help our cause.", ix.item.list[dyndata.itemid].name)
-			else
-				if ix.progression.IsActive(dyndata.progid) then
-					
-					local item = player:GetCharacter():GetInventory():HasItem(dyndata.itemid)
-
-					local dat = ix.progression.status[dyndata.progid].complexData
-					dat = dat or {}
-					local amtcur = dat[dyndata.itemid] or 0
-
-					local reqitems = ix.progression.GetComplexProgressionReqs(dyndata.progid)
-					local amtreq = reqitems[dyndata.itemid]
-
-					local amtneed = amtreq - amtcur
-
-					if(item)then
-						local amtavailable = item:GetData("quantity", item.quantity or 1)
-						local amtfinal = amtavailable >= amtneed and amtneed or amtavailable
-
-						--Adds reward
-						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item, amtfinal)
-						player:addReputation(repReward)
-						ix.dialogue.notifyReputationReceive(player, repReward)
-						player:GetCharacter():GiveMoney(monReward)
-						ix.dialogue.notifyMoneyReceive(player, monReward)
-						
-						item:SetData("quantity", item:GetData("quantity",0) - amtfinal)
-						
-						if(item:GetData("quantity", 0) < 1)then
-							item:Remove()
-						end
-
-						ix.progression.AddComplexProgressionValue(dyndata.progid, {dyndata.itemid, amtfinal}, player:Name())
-					end
-				end
-			end	
+		if (SERVER and istable(dyndata)) then
+			ix.progression.TurnIn(player, target, dyndata.progid, dyndata.itemid)
+		elseif (CLIENT) then
+			self.response = "Let me check what you have brought."
 		end
 	end,
-} )
+})
 
 DIALOGUE.addTopic("ViewProgression", {
 	statement = "",
@@ -440,9 +406,9 @@ DIALOGUE.addTopic("ViewProgression", {
 		--local identifier = player:GetCharacter():GetData("curdialogprog")
 		local identifier 	= self.tmp
 		self.tmp = nil
-		local progstatus 	= ix.progression.GetComplexProgressionValue(identifier)
+		local progstatus 	= ix.progression.GetComplexProgressionValue(client:GetCharacter(), identifier)
 		local progdef 		= ix.progression.definitions[identifier]
-		if(progdef.fnAddComplexProgression)then
+		if(progdef.GetItemIds)then
 			local progitems 	= progdef.GetItemIds()
 			local missingitems  = {}
 
@@ -477,13 +443,13 @@ DIALOGUE.addTopic("ViewProgression", {
 		if (dyndata) then
 			if(CLIENT)then
 				local progdef 		= ix.progression.definitions[dyndata.identifier]
-				local progstatus 	= ix.progression.status[dyndata.identifier]
+				local progstatus 	= ix.progression.GetLine(player:GetCharacter(), dyndata.identifier)
 
-				if progdef.fnAddComplexProgression then
-					progstatus = ix.progression.GetComplexProgressionValue(dyndata.identifier)
+				if progdef.GetItemIds then
+					progstatus = ix.progression.GetComplexProgressionValue(player:GetCharacter(), dyndata.identifier)
 				end
 
-				self.response = progdef:BuildResponse(progdef, progstatus)
+				self.response = progdef:BuildResponse(target:GetDisplayName(), progstatus)
 				self.tmp = dyndata.identifier
 			end
 		end
@@ -499,19 +465,16 @@ DIALOGUE.addTopic("AboutProgression", {
 	},
 	preCallback = function(self, client, target)
 		if( CLIENT ) then
-			if #ix.progression.GetActiveProgressions("'Boss'") <= 0 then
+			if #ix.progression.GetActiveProgressions(client:GetCharacter(), "'Boss'") <= 0 then
 				self.response = "Nothing at the moment."
 			end
-
-			net.Start("progression_sync")
-			net.SendToServer()
 		end
 	end,
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
 
-		for _, progid in pairs(ix.progression.GetActiveProgressions("'Boss'")) do
+		for _, progid in pairs(ix.progression.GetActiveProgressions(client:GetCharacter(), "'Boss'")) do
 			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})
 		end
 
@@ -526,8 +489,8 @@ DIALOGUE.addTopic("AboutProgression", {
 		-- Return the next topicID
 		return "ViewProgression", dyndata
 	end,
-	ShouldAdd = function()
-		return #ix.progression.GetActiveProgressions("'Boss'") > 0
+	ShouldAdd = function(self, client, target)
+		return #ix.progression.GetActiveProgressions(client:GetCharacter(), "'Boss'") > 0
 	end,
 })
 

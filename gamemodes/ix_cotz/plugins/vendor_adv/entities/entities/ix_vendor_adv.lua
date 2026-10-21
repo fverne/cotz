@@ -64,6 +64,7 @@ function ENT:Initialize()
 end
 
 function ENT:CanAccess(client)
+	if (not client:GetCharacter() or not ix.progression.CanUseNPC(client:GetCharacter(), self:GetDisplayName())) then return false end
 	local bAccess = false
 	local uniqueID = ix.faction.indices[client:Team()].uniqueID
 

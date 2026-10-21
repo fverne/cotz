@@ -6,9 +6,14 @@ ix.progression.Register("hagglerItemDelivery_1", {
 	keyNpc = "'Haggler'",
 	defaultActive = true,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"fort12", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Haggler'", args = {"m1911", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Haggler'", args = {"brhp", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_11", "hagglerItemDelivery_12"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_1"] = ix.progression.status["hagglerItemDelivery_1"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_1"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -26,66 +31,16 @@ ix.progression.Register("hagglerItemDelivery_1", {
 		local itemids = {
 			["value_nuts"] = 90,
 			["value_toiletpaper"] = 15,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_1"].complexData = ix.progression.status["hagglerItemDelivery_1"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_1"].complexData[item] = ix.progression.status["hagglerItemDelivery_1"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_1"].complexData[item] = ix.progression.status["hagglerItemDelivery_1"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_1"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_1"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_1"].complexData[item] = ix.progression.status["hagglerItemDelivery_1"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_1"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "My supplier came through. We've got UKM Fort-12 and merc-issue M1911s and Browning Hi-Powers now in stock. Come see me when you've got a chance."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("fort12", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("m1911", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("brhp", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_1", true)
-			ix.progression.SetActive("hagglerItemDelivery_11", true) 
-			ix.progression.SetActive("hagglerItemDelivery_12", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "My supplier came through. We've got UKM Fort-12 and merc-issue M1911s and Browning Hi-Powers now in stock. Come see me when you've got a chance."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -95,9 +50,13 @@ ix.progression.Register("hagglerItemDelivery_11", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"lax410s", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Haggler'", args = {"sten", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_111", "hagglerItemDelivery_112"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_11"] = ix.progression.status["hagglerItemDelivery_11"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_11"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -115,65 +74,16 @@ ix.progression.Register("hagglerItemDelivery_11", {
 		local itemids = {
 			["value_capacitors"] = 100,
 			["value_glue_1"] = 20,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_11"].complexData = ix.progression.status["hagglerItemDelivery_11"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_11"].complexData[item] = ix.progression.status["hagglerItemDelivery_11"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_11"].complexData[item] = ix.progression.status["hagglerItemDelivery_11"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_11"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_11"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_11"].complexData[item] = ix.progression.status["hagglerItemDelivery_11"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_11"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Workshop is up and running. If you're interested in a short lever action shotgun or a STEN gun, come find me."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("lax410s", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("sten", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_11", true)
-			ix.progression.SetActive("hagglerItemDelivery_111", true) 
-			ix.progression.SetActive("hagglerItemDelivery_112", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Workshop is up and running. If you're interested in a short lever action shotgun or a STEN gun, come find me."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -183,9 +93,12 @@ ix.progression.Register("hagglerItemDelivery_111", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"lax410", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_1111"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_111"] = ix.progression.status["hagglerItemDelivery_111"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_111"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -204,63 +117,16 @@ ix.progression.Register("hagglerItemDelivery_111", {
 			["value_nails"] = 40,
 			["value_tape_duct"] = 25,
 			["value_hose"] = 15,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_111"].complexData = ix.progression.status["hagglerItemDelivery_111"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_111"].complexData[item] = ix.progression.status["hagglerItemDelivery_111"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_111"].complexData[item] = ix.progression.status["hagglerItemDelivery_111"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_111"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_111"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_111"].complexData[item] = ix.progression.status["hagglerItemDelivery_111"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_111"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Lathe is online. Come give these new long barrel lever action shotguns a try."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("lax410", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_111", true)
-			ix.progression.SetActive("hagglerItemDelivery_1111", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Lathe is online. Come give these new long barrel lever action shotguns a try."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -270,9 +136,12 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"swmodel29", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Haggler'", args = {"44magnum", nil, 150, "SELLANDBUY", 150, 1, 150}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_1111"] = ix.progression.status["hagglerItemDelivery_1111"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_1111"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -290,66 +159,18 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 		local itemids = {
 			["value_tape_electric"] = 30,
 			["value_detergent"] = 30,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_1111"].complexData = ix.progression.status["hagglerItemDelivery_1111"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_1111"].complexData[item] = ix.progression.status["hagglerItemDelivery_1111"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_1111"].complexData[item] = ix.progression.status["hagglerItemDelivery_1111"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_1111"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_1111"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_1111"].complexData[item] = ix.progression.status["hagglerItemDelivery_1111"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_1111"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "First shipment of .44 Magnum revolvers just came in. If you want one of these wristbreakers, come and say hello."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("swmodel29", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("44magnum", nil, 150, "SELLANDBUY", 150, 1, 150)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_1111", true)
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "First shipment of .44 Magnum revolvers just came in. If you want one of these wristbreakers, come and say hello."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
 
 ix.progression.Register("hagglerItemDelivery_112", {
 	name = "Kitting Up 1.1.2",
@@ -357,9 +178,11 @@ ix.progression.Register("hagglerItemDelivery_112", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"sterling", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_112"] = ix.progression.status["hagglerItemDelivery_112"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_112"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -377,61 +200,16 @@ ix.progression.Register("hagglerItemDelivery_112", {
 		local itemids = {
 			["value_goldchain"] = 4,
 			["value_wire_light"] = 60,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_112"].complexData = ix.progression.status["hagglerItemDelivery_112"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_112"].complexData[item] = ix.progression.status["hagglerItemDelivery_112"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_112"].complexData[item] = ix.progression.status["hagglerItemDelivery_112"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_112"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_112"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_112"].complexData[item] = ix.progression.status["hagglerItemDelivery_112"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_112"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Just finished refitting the first batch of Sterling guns. Come and get 'em if you've got the rubles to spare."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("sterling", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_112", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Just finished refitting the first batch of Sterling guns. Come and get 'em if you've got the rubles to spare."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -441,9 +219,13 @@ ix.progression.Register("hagglerItemDelivery_12", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"toz66", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Haggler'", args = {"toz66short", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_121", "hagglerItemDelivery_122"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_12"] = ix.progression.status["hagglerItemDelivery_12"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_12"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -461,64 +243,16 @@ ix.progression.Register("hagglerItemDelivery_12", {
 		local itemids = {
 			["value_sparkplug"] = 30,
 			["value_glue_2"] = 25,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_12"].complexData = ix.progression.status["hagglerItemDelivery_12"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_12"].complexData[item] = ix.progression.status["hagglerItemDelivery_12"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_12"].complexData[item] = ix.progression.status["hagglerItemDelivery_12"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_12"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_12"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_12"].complexData[item] = ix.progression.status["hagglerItemDelivery_12"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_12"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "TOZ-66 shipment just hit the shelves. Come spent your hard earned cash on the rookie's dream gun."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("toz66", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("toz66short", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_12", true)
-			ix.progression.SetActive("hagglerItemDelivery_121", true)
-			ix.progression.SetActive("hagglerItemDelivery_1221", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "TOZ-66 shipment just hit the shelves. Come spent your hard earned cash on the rookie's dream gun."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -528,9 +262,13 @@ ix.progression.Register("hagglerItemDelivery_121", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"sks", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Haggler'", args = {"rugermini14", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_1211"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_121"] = ix.progression.status["hagglerItemDelivery_121"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_121"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -548,63 +286,16 @@ ix.progression.Register("hagglerItemDelivery_121", {
 		local itemids = {
 			["value_toothpaste"] = 35,
 			["value_statue_horse"] = 5,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_121"].complexData = ix.progression.status["hagglerItemDelivery_121"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_121"].complexData[item] = ix.progression.status["hagglerItemDelivery_121"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_121"].complexData[item] = ix.progression.status["hagglerItemDelivery_121"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_121"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_121"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_121"].complexData[item] = ix.progression.status["hagglerItemDelivery_121"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_121"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "SKS and Mini-14 rifles are ready to go if you don't mind the damn grease smell. I hope you all appreciate the bullshit I go through for you all."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("sks", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("rugermini14", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_121", true)
-			ix.progression.SetActive("hagglerItemDelivery_1211", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "SKS and Mini-14 rifles are ready to go if you don't mind the damn grease smell. I hope you all appreciate the bullshit I go through for you all."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -614,9 +305,12 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"saigasemi", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_12111"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_1211"] = ix.progression.status["hagglerItemDelivery_1211"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_1211"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -634,62 +328,16 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 		local itemids = {
 			["value_engine"] = 4,
 			["value_nuts"] = 80,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_1211"].complexData = ix.progression.status["hagglerItemDelivery_1211"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_1211"].complexData[item] = ix.progression.status["hagglerItemDelivery_1211"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_1211"].complexData[item] = ix.progression.status["hagglerItemDelivery_1211"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_1211"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_1211"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_1211"].complexData[item] = ix.progression.status["hagglerItemDelivery_1211"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_1211"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Saigas are now in stock. Come and get 'em before someone else does."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("saigasemi", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_1211", true)
-			ix.progression.SetActive("hagglerItemDelivery_12111", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Saigas are now in stock. Come and get 'em before someone else does."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -699,9 +347,13 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"w9422357", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Haggler'", args = {"357magnum", nil, 15, "SELLANDBUY", 15, 1, 15}}
+	},
+	nextProgressions = {"hagglerItemDelivery_121111"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_12111"] = ix.progression.status["hagglerItemDelivery_12111"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_12111"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -718,63 +370,16 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 	GetItemIds = function()
 		local itemids = {
 			["value_gunpowder_blue"] = 30,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_12111"].complexData = ix.progression.status["hagglerItemDelivery_12111"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_12111"].complexData[item] = ix.progression.status["hagglerItemDelivery_12111"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_12111"].complexData[item] = ix.progression.status["hagglerItemDelivery_12111"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_12111"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_12111"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_12111"].complexData[item] = ix.progression.status["hagglerItemDelivery_12111"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_12111"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Big bore rifles are up for grabs. Come get your mutant hunting kit."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("w9422357", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("357magnum", nil, 15, "SELLANDBUY", 15, 1, 15)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_12111", true)
-			ix.progression.SetActive("hagglerItemDelivery_121111", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Big bore rifles are up for grabs. Come get your mutant hunting kit."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -784,9 +389,12 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"g2500mag", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Haggler'", args = {"500magnum", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_121111"] = ix.progression.status["hagglerItemDelivery_121111"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_121111"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -804,62 +412,16 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 		local itemids = {
 			["value_phone_new"] = 15,
 			["value_watch"] = 20,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_121111"].complexData = ix.progression.status["hagglerItemDelivery_121111"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_121111"].complexData[item] = ix.progression.status["hagglerItemDelivery_121111"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_121111"].complexData[item] = ix.progression.status["hagglerItemDelivery_121111"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_121111"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_121111"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_121111"].complexData[item] = ix.progression.status["hagglerItemDelivery_121111"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_121111"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Tourists were happy with the magnums; even got some .500 Magnum revolvers in along with the refit Contenders. Come grab one if you want to give a boar a really bad day."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("g2500mag", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("500magnum", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_121111", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Tourists were happy with the magnums; even got some .500 Magnum revolvers in along with the refit Contenders. Come grab one if you want to give a boar a really bad day."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -869,9 +431,13 @@ ix.progression.Register("hagglerItemDelivery_122", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"kiparis", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Haggler'", args = {"kp31", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_1221"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_122"] = ix.progression.status["hagglerItemDelivery_122"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_122"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -889,63 +455,16 @@ ix.progression.Register("hagglerItemDelivery_122", {
 		local itemids = {
 			["value_detergent"] = 30,
 			["value_car_battery"] = 5,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_122"].complexData = ix.progression.status["hagglerItemDelivery_122"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_122"].complexData[item] = ix.progression.status["hagglerItemDelivery_122"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_122"].complexData[item] = ix.progression.status["hagglerItemDelivery_122"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_122"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_122"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_122"].complexData[item] = ix.progression.status["hagglerItemDelivery_122"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_122"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Crates just got here. I've got Kiparis machine pistols and Suomi SMGs on the shelves now."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("kiparis", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("kp31", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_122", true)
-			ix.progression.SetActive("hagglerItemDelivery_1221", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Crates just got here. I've got Kiparis machine pistols and Suomi SMGs on the shelves now."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -955,9 +474,12 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"mac11", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_12211"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_1221"] = ix.progression.status["hagglerItemDelivery_1221"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_1221"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -975,62 +497,16 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 		local itemids = {
 			["value_waterfilter"] = 8,
 			["value_bolts"] = 80,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_1221"].complexData = ix.progression.status["hagglerItemDelivery_1221"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_1221"].complexData[item] = ix.progression.status["hagglerItemDelivery_1221"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_1221"].complexData[item] = ix.progression.status["hagglerItemDelivery_1221"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_1221"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_1221"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_1221"].complexData[item] = ix.progression.status["hagglerItemDelivery_1221"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_1221"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Finally got my lathe upgraded, I've got Mac-11 machine pistols up for grabs. Perfect fast-firing 9x19 kit for those who like the candle that burns twice as bright."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("mac11", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_1221", true)
-			ix.progression.SetActive("hagglerItemDelivery_12211", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Finally got my lathe upgraded, I've got Mac-11 machine pistols up for grabs. Perfect fast-firing 9x19 kit for those who like the candle that burns twice as bright."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1040,9 +516,11 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"m1911chic", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_12211"] = ix.progression.status["hagglerItemDelivery_12211"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_12211"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1060,61 +538,16 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 		local itemids = {
 			["value_techtool_2"] = 2,
 			["value_gunoil"] = 20,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_12211"].complexData = ix.progression.status["hagglerItemDelivery_12211"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_12211"].complexData[item] = ix.progression.status["hagglerItemDelivery_12211"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_12211"].complexData[item] = ix.progression.status["hagglerItemDelivery_12211"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_12211"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_12211"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_12211"].complexData[item] = ix.progression.status["hagglerItemDelivery_12211"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_12211"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Quartermaster was pleased with what we gave him and they seem to be useful, so I'll be stocking the Colt Chicago from now on. If you want a custom little piece, now's the time."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("m1911chic", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_12211", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Quartermaster was pleased with what we gave him and they seem to be useful, so I'll be stocking the Colt Chicago from now on. If you want a custom little piece, now's the time."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1124,9 +557,13 @@ ix.progression.Register("hagglerItemDelivery_2", {
 	keyNpc = "'Haggler'",
 	defaultActive = true,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"toz34", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Haggler'", args = {"toz34short", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_21", "hagglerItemDelivery_22"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_2"] = ix.progression.status["hagglerItemDelivery_2"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_2"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1144,65 +581,16 @@ ix.progression.Register("hagglerItemDelivery_2", {
 		local itemids = {
 			["value_bolts"] = 130,
 			["value_sparkplug"] = 10,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_2"].complexData = ix.progression.status["hagglerItemDelivery_2"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_2"].complexData[item] = ix.progression.status["hagglerItemDelivery_2"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_2"].complexData[item] = ix.progression.status["hagglerItemDelivery_2"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_2"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_2"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_2"].complexData[item] = ix.progression.status["hagglerItemDelivery_2"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_2"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "TOZ-34 over-under shotguns are in. From Russia with love, eh?"
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("toz34", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("toz34short", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_2", true)
-			ix.progression.SetActive("hagglerItemDelivery_21", true) 
-			ix.progression.SetActive("hagglerItemDelivery_22", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "TOZ-34 over-under shotguns are in. From Russia with love, eh?"
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1212,9 +600,12 @@ ix.progression.Register("hagglerItemDelivery_21", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"sako85nato", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_211", "hagglerItemDelivery_212"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_21"] = ix.progression.status["hagglerItemDelivery_21"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_21"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1231,64 +622,16 @@ ix.progression.Register("hagglerItemDelivery_21", {
 	GetItemIds = function()
 		local itemids = {
 			["value_gunpowder_green"] = 15,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_21"].complexData = ix.progression.status["hagglerItemDelivery_21"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_21"].complexData[item] = ix.progression.status["hagglerItemDelivery_21"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_21"].complexData[item] = ix.progression.status["hagglerItemDelivery_21"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_21"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_21"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_21"].complexData[item] = ix.progression.status["hagglerItemDelivery_21"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_21"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "SAKO-85 rifles in 5.56 are in. If you want to try out a NATO cartridge, come see me."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("sako85nato", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_21", true)
-			ix.progression.SetActive("hagglerItemDelivery_211", true) 
-			ix.progression.SetActive("hagglerItemDelivery_212", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "SAKO-85 rifles in 5.56 are in. If you want to try out a NATO cartridge, come see me."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1298,9 +641,12 @@ ix.progression.Register("hagglerItemDelivery_211", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"c96carbine", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_2111"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_211"] = ix.progression.status["hagglerItemDelivery_211"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_211"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1317,62 +663,16 @@ ix.progression.Register("hagglerItemDelivery_211", {
 	GetItemIds = function()
 		local itemids = {
 			["value_carbattery"] = 8,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_211"].complexData = ix.progression.status["hagglerItemDelivery_211"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_211"].complexData[item] = ix.progression.status["hagglerItemDelivery_211"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_211"].complexData[item] = ix.progression.status["hagglerItemDelivery_211"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_211"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_211"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_211"].complexData[item] = ix.progression.status["hagglerItemDelivery_211"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_211"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Handmade C96 carbines are now in. Come and get them!"
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("c96carbine", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_211", true)
-			ix.progression.SetActive("hagglerItemDelivery_2111", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Handmade C96 carbines are now in. Come and get them!"
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1382,9 +682,11 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"ppsh", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_2111"] = ix.progression.status["hagglerItemDelivery_2111"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_2111"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1401,62 +703,16 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 	GetItemIds = function()
 		local itemids = {
 			["value_siliconetube"] = 40,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_2111"].complexData = ix.progression.status["hagglerItemDelivery_2111"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_2111"].complexData[item] = ix.progression.status["hagglerItemDelivery_2111"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_2111"].complexData[item] = ix.progression.status["hagglerItemDelivery_2111"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_2111"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_2111"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_2111"].complexData[item] = ix.progression.status["hagglerItemDelivery_2111"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_2111"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "My guys came back; it was a legit stash. If you want a PPSh, I've got them for sale now."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("ppsh", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_2111", true)
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "My guys came back; it was a legit stash. If you want a PPSh, I've got them for sale now."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1466,9 +722,12 @@ ix.progression.Register("hagglerItemDelivery_212", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"toz194", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_2121"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_212"] = ix.progression.status["hagglerItemDelivery_212"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_212"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1486,62 +745,16 @@ ix.progression.Register("hagglerItemDelivery_212", {
 		local itemids = {
 			["value_battery"] = 90,
 			["value_motorclean"] = 15,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_212"].complexData = ix.progression.status["hagglerItemDelivery_212"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_212"].complexData[item] = ix.progression.status["hagglerItemDelivery_212"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_212"].complexData[item] = ix.progression.status["hagglerItemDelivery_212"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_212"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_212"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_212"].complexData[item] = ix.progression.status["hagglerItemDelivery_212"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_212"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Pump action TOZ-194 shotguns are in. Come and get them while they're hot."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("toz194", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_212", true)
-			ix.progression.SetActive("hagglerItemDelivery_2121", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Pump action TOZ-194 shotguns are in. Come and get them while they're hot."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1551,9 +764,12 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"m1887", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_21211"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_2121"] = ix.progression.status["hagglerItemDelivery_2121"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_2121"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1570,62 +786,16 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 	GetItemIds = function()
 		local itemids = {
 			["value_wire_heavy"] = 5,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_2121"].complexData = ix.progression.status["hagglerItemDelivery_2121"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_2121"].complexData[item] = ix.progression.status["hagglerItemDelivery_2121"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_2121"].complexData[item] = ix.progression.status["hagglerItemDelivery_2121"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_2121"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_2121"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_2121"].complexData[item] = ix.progression.status["hagglerItemDelivery_2121"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_2121"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "M1887s are in. Come give them a try."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("m1887", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_2121", true)
-			ix.progression.SetActive("hagglerItemDelivery_21211", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "M1887s are in. Come give them a try."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1635,9 +805,11 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"ithaca37", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_21211"] = ix.progression.status["hagglerItemDelivery_21211"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_21211"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1655,61 +827,16 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 		local itemids = {
 			["value_wire_copper"] = 40,
 			["value_9vbattery"] = 70,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_21211"].complexData = ix.progression.status["hagglerItemDelivery_21211"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_21211"].complexData[item] = ix.progression.status["hagglerItemDelivery_21211"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_21211"].complexData[item] = ix.progression.status["hagglerItemDelivery_21211"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_21211"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_21211"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_21211"].complexData[item] = ix.progression.status["hagglerItemDelivery_21211"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_21211"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Ithaca shotguns are in. They should keep you going."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("ithaca37", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_21211", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Ithaca shotguns are in. They should keep you going."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1719,9 +846,13 @@ ix.progression.Register("hagglerItemDelivery_22", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"saigasemi545", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Haggler'", args = {"mp34", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_221", "hagglerItemDelivery_222"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_22"] = ix.progression.status["hagglerItemDelivery_22"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_22"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1739,65 +870,16 @@ ix.progression.Register("hagglerItemDelivery_22", {
 		local itemids = {
 			["value_lightbulb"] = 60,
 			["value_gasoline"] = 20,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_22"].complexData = ix.progression.status["hagglerItemDelivery_22"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_22"].complexData[item] = ix.progression.status["hagglerItemDelivery_22"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_22"].complexData[item] = ix.progression.status["hagglerItemDelivery_22"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_22"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_22"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_22"].complexData[item] = ix.progression.status["hagglerItemDelivery_22"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_22"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "MP34 shipment just came in a few minutes ago and I'm starting on the Saiga 5.45 rechambers. First come, first serve."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("saigasemi545", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("mp34", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_22", true)
-			ix.progression.SetActive("hagglerItemDelivery_221", true) 
-			ix.progression.SetActive("hagglerItemDelivery_222", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "MP34 shipment just came in a few minutes ago and I'm starting on the Saiga 5.45 rechambers. First come, first serve."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1807,9 +889,13 @@ ix.progression.Register("hagglerItemDelivery_221", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"sako85", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Haggler'", args = {"w1895", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_2211"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_221"] = ix.progression.status["hagglerItemDelivery_221"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_221"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1828,63 +914,16 @@ ix.progression.Register("hagglerItemDelivery_221", {
 			["value_hose"] = 90,
 			["value_wire_light"] = 60,
 			["value_propanetank"] = 15,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_221"].complexData = ix.progression.status["hagglerItemDelivery_221"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_221"].complexData[item] = ix.progression.status["hagglerItemDelivery_221"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_221"].complexData[item] = ix.progression.status["hagglerItemDelivery_221"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_221"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_221"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_221"].complexData[item] = ix.progression.status["hagglerItemDelivery_221"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_221"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "The Finn came through. If you want an original SAKO-85 or the Winchester 1895, come and grab one."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("sako85", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("w1895", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_221", true)
-			ix.progression.SetActive("hagglerItemDelivery_2211", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "The Finn came through. If you want an original SAKO-85 or the Winchester 1895, come and grab one."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1894,9 +933,12 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"mosin", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_22111"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_2211"] = ix.progression.status["hagglerItemDelivery_2211"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_2211"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1914,62 +956,16 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 		local itemids = {
 			["value_paracord"] = 40,
 			["value_wirelesstrans"] = 1,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_2211"].complexData = ix.progression.status["hagglerItemDelivery_2211"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_2211"].complexData[item] = ix.progression.status["hagglerItemDelivery_2211"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_2211"].complexData[item] = ix.progression.status["hagglerItemDelivery_2211"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_2211"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_2211"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_2211"].complexData[item] = ix.progression.status["hagglerItemDelivery_2211"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_2211"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "Mosins are in. If you want to help me out with the second part of the shipment, now's the time."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("mosin", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_2211", true)
-			ix.progression.SetActive("hagglerItemDelivery_22111", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "Mosins are in. If you want to help me out with the second part of the shipment, now's the time."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1979,9 +975,11 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"svt40", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_22111"] = ix.progression.status["hagglerItemDelivery_22111"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_22111"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1998,61 +996,16 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 	GetItemIds = function()
 		local itemids = {
 			["value_glue_3"] = 200,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_22111"].complexData = ix.progression.status["hagglerItemDelivery_22111"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_22111"].complexData[item] = ix.progression.status["hagglerItemDelivery_22111"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_22111"].complexData[item] = ix.progression.status["hagglerItemDelivery_22111"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_22111"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_22111"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_22111"].complexData[item] = ix.progression.status["hagglerItemDelivery_22111"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_22111"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "SVT-40 rifles are in. That's probably going to be the last that my Russian supplier can get us."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("svt40", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_22111", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "SVT-40 rifles are in. That's probably going to be the last that my Russian supplier can get us."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -2062,9 +1015,12 @@ ix.progression.Register("hagglerItemDelivery_222", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"mp40", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_2221"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_222"] = ix.progression.status["hagglerItemDelivery_222"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_222"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -2082,62 +1038,16 @@ ix.progression.Register("hagglerItemDelivery_222", {
 		local itemids = {
 			["value_techtool_1"] = 6,
 			["value_nails"] = 40,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_222"].complexData = ix.progression.status["hagglerItemDelivery_222"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_222"].complexData[item] = ix.progression.status["hagglerItemDelivery_222"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_222"].complexData[item] = ix.progression.status["hagglerItemDelivery_222"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_222"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_222"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_222"].complexData[item] = ix.progression.status["hagglerItemDelivery_222"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_222"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "The MP40 repair shop is ready to go; I've got the first sample ready for sale."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("mp40", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_222", true)
-			ix.progression.SetActive("hagglerItemDelivery_2221", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "The MP40 repair shop is ready to go; I've got the first sample ready for sale."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -2147,9 +1057,12 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"aks74u", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"hagglerItemDelivery_22211"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_2221"] = ix.progression.status["hagglerItemDelivery_2221"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_2221"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -2168,62 +1081,16 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 			["value_gunspray"] = 10,
 			["value_guncleaner"] = 10,
 			["value_lubricant"] = 10,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_2221"].complexData = ix.progression.status["hagglerItemDelivery_2221"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_2221"].complexData[item] = ix.progression.status["hagglerItemDelivery_2221"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_2221"].complexData[item] = ix.progression.status["hagglerItemDelivery_2221"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_2221"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_2221"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_2221"].complexData[item] = ix.progression.status["hagglerItemDelivery_2221"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_2221"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "AKS-74u crate just came in from the SBU. I advise you move quick; I've got a feeling these are going to fly off the shelves."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("aks74u", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_2221", true)
-			ix.progression.SetActive("hagglerItemDelivery_22211", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "AKS-74u crate just came in from the SBU. I advise you move quick; I've got a feeling these are going to fly off the shelves."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -2233,9 +1100,11 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 	keyNpc = "'Haggler'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"akm", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["hagglerItemDelivery_22211"] = ix.progression.status["hagglerItemDelivery_22211"] or {}
-		local dat = status or ix.progression.status["hagglerItemDelivery_22211"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -2254,61 +1123,15 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 			["value_gunspray"] = 30,
 			["value_guncleaner"] = 30,
 			["value_lubricant"] = 30,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["hagglerItemDelivery_22211"].complexData = ix.progression.status["hagglerItemDelivery_22211"].complexData or {}
-		ix.progression.status["hagglerItemDelivery_22211"].complexData[item] = ix.progression.status["hagglerItemDelivery_22211"].complexData[item] or 0
-		ix.progression.status["hagglerItemDelivery_22211"].complexData[item] = ix.progression.status["hagglerItemDelivery_22211"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["hagglerItemDelivery_22211"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["hagglerItemDelivery_22211"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["hagglerItemDelivery_22211"].complexData[item] = ix.progression.status["hagglerItemDelivery_22211"].complexData[item] or 0
-			if amt > ix.progression.status["hagglerItemDelivery_22211"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Haggler'"
-				local message = "AKMs are in. This is probably gonna be the best I can do for a long while at least, so come grab them while you can."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Haggler'")
-			if (npc) then
-				npc:AddItemToList("akm", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("hagglerItemDelivery_22211", true)
-			ix.progression.SetActive("hagglerItemDelivery_222111", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Haggler'"
+			local message = "AKMs are in. This is probably gonna be the best I can do for a long while at least, so come grab them while you can."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })

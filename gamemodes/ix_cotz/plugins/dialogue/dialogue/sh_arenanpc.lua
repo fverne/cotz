@@ -4,9 +4,9 @@ DIALOGUE.name = "Arena NPC"
 -- Copy&Paste from this file to build new NPCs
 
 -- Progression can be done by calling this:
--- 				ix.progression.AddProgessionValue(progressionIdentifier, amountToIncrement, client:Name())
+-- 				ix.progression.AddProgressionValue(client:GetCharacter(), progressionIdentifier, amountToIncrement)
 -- and
---  			ix.progression.GetProgressionValue(progressionIdentifier)
+--  			ix.progression.GetProgressionValue(client:GetCharacter(), progressionIdentifier)
 -- to react to progression levels
 
 DIALOGUE.addTopic("GREETING", {
@@ -80,7 +80,9 @@ DIALOGUE.addTopic("TradeTopic", {
 			-- Only send what is needed.
 			for k, v in pairs(target.items) do
 				if (!table.IsEmpty(v) and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])) then
-					items[k] = v
+					if (ix.progression.CanBuyItem(character, target:GetDisplayName(), k)) then
+						items[k] = v
+					end
 				end
 			end
 
@@ -510,7 +512,7 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 		-- Return the next topicID
 		return "BackTopic", dynopts
 	end,
-	ShouldAdd = function()
+	ShouldAdd = function(self, client, target)
 		if (!LocalPlayer():GetCharacter():GetJobs()["'The Original'"]) then
 			return true
 		end
@@ -565,7 +567,7 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 		-- Return the next topicID
 		return "BackTopic"
 	end,
-	ShouldAdd = function()
+	ShouldAdd = function(self, client, target)
 		if (LocalPlayer():GetCharacter():GetJobs()["'The Original'"]) then
 			return true
 		end

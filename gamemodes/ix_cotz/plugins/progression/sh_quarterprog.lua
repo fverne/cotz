@@ -6,9 +6,13 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"mp5", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Quartermaster'", args = {"mossberg500", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_11", "quartermasterItemDelivery_12"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_1"] = ix.progression.status["quartermasterItemDelivery_1"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_1"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -25,65 +29,16 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 	GetItemIds = function()
 		local itemids = {
 			["part_snork_1"] = 10,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_1"].complexData = ix.progression.status["quartermasterItemDelivery_1"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_1"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_1"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_1"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_1"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_1"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_1"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "Alright, you've convinced me that we can do business together. My stock of MP5 SMGs is now open to buyers."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("mp5", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("mossberg500", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_1", true)
-			ix.progression.SetActive("quartermasterItemDelivery_11", true) 
-			ix.progression.SetActive("quartermasterItemDelivery_12", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "Alright, you've convinced me that we can do business together. My stock of MP5 SMGs is now open to buyers."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -93,9 +48,14 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"mateba", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Quartermaster'", args = {"ak74", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Quartermaster'", args = {"l85", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_111", "quartermasterItemDelivery_112"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_11"] = ix.progression.status["quartermasterItemDelivery_11"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_11"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -114,66 +74,16 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 			["ruger1022"] = 10,
 			["w9422"] = 10,
 			["sako85varmint"] = 10,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_11"].complexData = ix.progression.status["quartermasterItemDelivery_11"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_11"].complexData[item] = ix.progression.status["quartermasterItemDelivery_11"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_11"].complexData[item] = ix.progression.status["quartermasterItemDelivery_11"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_11"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_11"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_11"].complexData[item] = ix.progression.status["quartermasterItemDelivery_11"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_11"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "Shipment cleared. If you're interested in an AK-74, L85, or a Mateba .44 revolver, bring your coin."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("mateba", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("ak74", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("l85", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_11", true)
-			ix.progression.SetActive("quartermasterItemDelivery_111", true) 
-			ix.progression.SetActive("quartermasterItemDelivery_112", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "Shipment cleared. If you're interested in an AK-74, L85, or a Mateba .44 revolver, bring your coin."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -183,9 +93,13 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"lax44", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Quartermaster'", args = {"g36c", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_1111"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_111"] = ix.progression.status["quartermasterItemDelivery_111"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_111"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -205,64 +119,16 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 			["part_cat"] = 40,
 			["part_pseudodog"] = 70,
 			["part_bloodsucker"] = 20,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_111"].complexData = ix.progression.status["quartermasterItemDelivery_111"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_111"].complexData[item] = ix.progression.status["quartermasterItemDelivery_111"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_111"].complexData[item] = ix.progression.status["quartermasterItemDelivery_111"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_111"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_111"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_111"].complexData[item] = ix.progression.status["quartermasterItemDelivery_111"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_111"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "Stash is secure and shipment got here. If you're interested in a .44 lever action or a G36c, now's the time to see me."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("lax44", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("g36c", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_111", true)
-			ix.progression.SetActive("quartermasterItemDelivery_1111", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "Stash is secure and shipment got here. If you're interested in a .44 lever action or a G36c, now's the time to see me."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -272,9 +138,11 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"sg552", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_1111"] = ix.progression.status["quartermasterItemDelivery_1111"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_1111"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -291,62 +159,16 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 	GetItemIds = function()
 		local itemids = {
 			["part_izlom"] = 50,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_1111"].complexData = ix.progression.status["quartermasterItemDelivery_1111"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_1111"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1111"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_1111"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1111"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_1111"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_1111"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_1111"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1111"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_1111"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "My people feel a lot safer now. As promised, SG552 rifles are now available for sale."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("sg552", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_1111", true)
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "My people feel a lot safer now. As promised, SG552 rifles are now available for sale."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -356,9 +178,13 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"aek971", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Quartermaster'", args = {"an94k", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_1121"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_112"] = ix.progression.status["quartermasterItemDelivery_112"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_112"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -380,64 +206,16 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 			["value_documents_9"] = 1,
 			["value_documents_10"] = 1,
 			["value_documents_11"] = 1,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_112"].complexData = ix.progression.status["quartermasterItemDelivery_112"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_112"].complexData[item] = ix.progression.status["quartermasterItemDelivery_112"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_112"].complexData[item] = ix.progression.status["quartermasterItemDelivery_112"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_112"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_112"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_112"].complexData[item] = ix.progression.status["quartermasterItemDelivery_112"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_112"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "The check cleared and I got the crates. If you want an AEK-971 or a AN94k straight out of the storehouses, contact me."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("aek971", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("an94k", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_112", true)
-			ix.progression.SetActive("quartermasterItemDelivery_1121", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "The check cleared and I got the crates. If you want an AEK-971 or a AN94k straight out of the storehouses, contact me."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -447,9 +225,12 @@ ix.progression.Register("quartermasterItemDelivery_1121", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"rk95", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_11211"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_1121"] = ix.progression.status["quartermasterItemDelivery_1121"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_1121"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -469,63 +250,16 @@ ix.progression.Register("quartermasterItemDelivery_1121", {
 			["value_documents_10"] = 3,
 			["value_documents_11"] = 3,
 			["value_powerbank"] = 15,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_1121"].complexData = ix.progression.status["quartermasterItemDelivery_1121"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_1121"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1121"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_1121"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1121"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_1121"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_1121"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_1121"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1121"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_1121"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "Business talks went well; the first new shipment of SAKO RK 95 rifles just arrived. You can purchase them now."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("rk95", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_1121", true)
-			ix.progression.SetActive("quartermasterItemDelivery_11211", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "Business talks went well; the first new shipment of SAKO RK 95 rifles just arrived. You can purchase them now."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -535,9 +269,11 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"ak12", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_11211"] = ix.progression.status["quartermasterItemDelivery_11211"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_11211"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -556,61 +292,16 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 			["value_gunpowder_green"] = 100,
 			["value_gunpowder_blue"] = 90,
 			["value_gunpowder_red"] = 80,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_11211"].complexData = ix.progression.status["quartermasterItemDelivery_11211"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_11211"].complexData[item] = ix.progression.status["quartermasterItemDelivery_11211"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_11211"].complexData[item] = ix.progression.status["quartermasterItemDelivery_11211"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_11211"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_11211"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_11211"].complexData[item] = ix.progression.status["quartermasterItemDelivery_11211"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_11211"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "First crate of AK-12s just came in. Anyone feel like buying?"
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("ak12", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_11211", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "First crate of AK-12s just came in. Anyone feel like buying?"
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -620,9 +311,13 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"m3super90", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Quartermaster'", args = {"fiveseven", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_121", "quartermasterItemDelivery_122"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_12"] = ix.progression.status["quartermasterItemDelivery_12"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_12"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -640,65 +335,16 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 		local itemids = {
 			["hidestash_1"] = 10,
 			["hidestash_2"] = 5,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_12"].complexData = ix.progression.status["quartermasterItemDelivery_12"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_12"].complexData[item] = ix.progression.status["quartermasterItemDelivery_12"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_12"].complexData[item] = ix.progression.status["quartermasterItemDelivery_12"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_12"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_12"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_12"].complexData[item] = ix.progression.status["quartermasterItemDelivery_12"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_12"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "Your data's been invaluable. I've added the M3 Super 90 and FN FiveseveN to my stock; they should help you deal with a variety of threats."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("m3super90", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("fiveseven", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_12", true)
-			ix.progression.SetActive("quartermasterItemDelivery_121", true) 
-			ix.progression.SetActive("quartermasterItemDelivery_122", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "Your data's been invaluable. I've added the M3 Super 90 and FN FiveseveN to my stock; they should help you deal with a variety of threats."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -708,9 +354,12 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"p90", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Quartermaster'", args = {"ump45", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_121"] = ix.progression.status["quartermasterItemDelivery_121"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_121"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -727,62 +376,16 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 	GetItemIds = function()
 		local itemids = {
 			["part_pseudogiant"] = 1,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_121"].complexData = ix.progression.status["quartermasterItemDelivery_121"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_121"].complexData[item] = ix.progression.status["quartermasterItemDelivery_121"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_121"].complexData[item] = ix.progression.status["quartermasterItemDelivery_121"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_121"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_121"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_121"].complexData[item] = ix.progression.status["quartermasterItemDelivery_121"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_121"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "The pseudogiant has been found and killed. Good work; I'm releasing the P90 and UMP-45 into regular distribution."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("p90", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("ump45", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_121", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "The pseudogiant has been found and killed. Good work; I'm releasing the P90 and UMP-45 into regular distribution."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -792,9 +395,12 @@ ix.progression.Register("quartermasterItemDelivery_122", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"lr300", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_1221"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_122"] = ix.progression.status["quartermasterItemDelivery_122"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_122"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -811,63 +417,16 @@ ix.progression.Register("quartermasterItemDelivery_122", {
 	GetItemIds = function()
 		local itemids = {
 			["part_psydog"] = 3,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_122"].complexData = ix.progression.status["quartermasterItemDelivery_122"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_122"].complexData[item] = ix.progression.status["quartermasterItemDelivery_122"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_122"].complexData[item] = ix.progression.status["quartermasterItemDelivery_122"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_122"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_122"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_122"].complexData[item] = ix.progression.status["quartermasterItemDelivery_122"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_122"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "LR 300 rifles just hit the shelves. Come and see me if you want to buy one."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("lr300", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_122", true)
-			ix.progression.SetActive("quartermasterItemDelivery_1221", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "LR 300 rifles just hit the shelves. Come and see me if you want to buy one."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -877,9 +436,12 @@ ix.progression.Register("quartermasterItemDelivery_1221", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"m16a4", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_12211"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_1221"] = ix.progression.status["quartermasterItemDelivery_1221"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_1221"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -896,63 +458,16 @@ ix.progression.Register("quartermasterItemDelivery_1221", {
 	GetItemIds = function()
 		local itemids = {
 			["food_mre_usa"] = 100,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_1221"].complexData = ix.progression.status["quartermasterItemDelivery_1221"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_1221"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1221"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_1221"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1221"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_1221"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_1221"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_1221"].complexData[item] = ix.progression.status["quartermasterItemDelivery_1221"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_1221"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "The West was pleased and they've further provided us with some American rifles. Come get your M16A4s here."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("m16a4", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_1221", true)
-			ix.progression.SetActive("quartermasterItemDelivery_12211", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "The West was pleased and they've further provided us with some American rifles. Come get your M16A4s here."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -962,9 +477,11 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"fnfal", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_12211"] = ix.progression.status["quartermasterItemDelivery_12211"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_12211"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -981,61 +498,16 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 	GetItemIds = function()
 		local itemids = {
 			["hide_pseudogiant"] = 1,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_12211"].complexData = ix.progression.status["quartermasterItemDelivery_12211"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_12211"].complexData[item] = ix.progression.status["quartermasterItemDelivery_12211"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_12211"].complexData[item] = ix.progression.status["quartermasterItemDelivery_12211"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_12211"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_12211"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_12211"].complexData[item] = ix.progression.status["quartermasterItemDelivery_12211"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_12211"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "You all came through for me so I'm doing likewise. I've now got FN FAL rifles in stock."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("fnfal", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_12211", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "You all came through for me so I'm doing likewise. I've now got FN FAL rifles in stock."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1045,9 +517,12 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"swr8", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_21", "quartermasterItemDelivery_22"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_2"] = ix.progression.status["quartermasterItemDelivery_2"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_2"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1064,64 +539,16 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 	GetItemIds = function()
 		local itemids = {
 			["part_burer_1"] = 10,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_2"].complexData = ix.progression.status["quartermasterItemDelivery_2"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_2"].complexData[item] = ix.progression.status["quartermasterItemDelivery_2"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_2"].complexData[item] = ix.progression.status["quartermasterItemDelivery_2"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_2"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_2"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_2"].complexData[item] = ix.progression.status["quartermasterItemDelivery_2"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_2"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "Alright, data about heavy pistols suggests that the S&W R8 is a good fit for my local market. Come and pick one up if you want eight rounds of .357 and a dream."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("swr8", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_2", true)
-			ix.progression.SetActive("quartermasterItemDelivery_21", true) 
-			ix.progression.SetActive("quartermasterItemDelivery_22", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "Alright, data about heavy pistols suggests that the S&W R8 is a good fit for my local market. Come and pick one up if you want eight rounds of .357 and a dream."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1131,9 +558,13 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"taurusragingbull", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Quartermaster'", args = {"mp9a1", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_211", "quartermasterItemDelivery_212"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_21"] = ix.progression.status["quartermasterItemDelivery_21"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_21"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1151,65 +582,16 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 		local itemids = {
 			["hidestash_2"] = 45,
 			["hidestash_3"] = 10,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_21"].complexData = ix.progression.status["quartermasterItemDelivery_21"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_21"].complexData[item] = ix.progression.status["quartermasterItemDelivery_21"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_21"].complexData[item] = ix.progression.status["quartermasterItemDelivery_21"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_21"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_21"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_21"].complexData[item] = ix.progression.status["quartermasterItemDelivery_21"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_21"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "I now offer the Taurus Raging Bull; a .44 hand cannon that should give any mutants a bad day. As a bonus, I've opened up my stock of MP9 machine pistols for purchase."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("taurusragingbull", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("mp9a1", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_21", true)
-			ix.progression.SetActive("quartermasterItemDelivery_211", true) 
-			ix.progression.SetActive("quartermasterItemDelivery_212", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "I now offer the Taurus Raging Bull; a .44 hand cannon that should give any mutants a bad day. As a bonus, I've opened up my stock of MP9 machine pistols for purchase."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1219,9 +601,12 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"uzi", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Quartermaster'", args = {"pp1901vityaz", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_211"] = ix.progression.status["quartermasterItemDelivery_211"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_211"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1238,62 +623,16 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 	GetItemIds = function()
 		local itemids = {
 			["meat_flesh"] = 300,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_211"].complexData = ix.progression.status["quartermasterItemDelivery_211"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_211"].complexData[item] = ix.progression.status["quartermasterItemDelivery_211"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_211"].complexData[item] = ix.progression.status["quartermasterItemDelivery_211"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_211"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_211"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_211"].complexData[item] = ix.progression.status["quartermasterItemDelivery_211"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_211"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "Good news; my supplier suddenly found a bunch of UZI and Vityaz SMGs. Lucky us, right?"
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("uzi", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("pp1901vityaz", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_211", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "Good news; my supplier suddenly found a bunch of UZI and Vityaz SMGs. Lucky us, right?"
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1303,9 +642,12 @@ ix.progression.Register("quartermasterItemDelivery_212", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"famas", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_2121"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_212"] = ix.progression.status["quartermasterItemDelivery_212"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_212"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1323,63 +665,16 @@ ix.progression.Register("quartermasterItemDelivery_212", {
 		local itemids = {
 			["food_mre_ukraine"] = 50,
 			["food_mre_russia"] = 50,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_212"].complexData = ix.progression.status["quartermasterItemDelivery_212"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_212"].complexData[item] = ix.progression.status["quartermasterItemDelivery_212"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_212"].complexData[item] = ix.progression.status["quartermasterItemDelivery_212"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_212"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_212"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_212"].complexData[item] = ix.progression.status["quartermasterItemDelivery_212"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_212"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "FAMAS rifles just arrived here. If you're interested, I'm selling them."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("famas", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_212", true)
-			ix.progression.SetActive("quartermasterItemDelivery_2121", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "FAMAS rifles just arrived here. If you're interested, I'm selling them."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1389,9 +684,11 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"aug", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_2121"] = ix.progression.status["quartermasterItemDelivery_2121"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_2121"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1411,61 +708,16 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 			["value_pcpart_psu"] = 1,
 			["value_pcpart_hdd"] = 2,
 			["value_pcpart_ssd"] = 2,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_2121"].complexData = ix.progression.status["quartermasterItemDelivery_2121"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_2121"].complexData[item] = ix.progression.status["quartermasterItemDelivery_2121"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_2121"].complexData[item] = ix.progression.status["quartermasterItemDelivery_2121"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_2121"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_2121"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_2121"].complexData[item] = ix.progression.status["quartermasterItemDelivery_2121"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_2121"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "The Steyr AUG is now available for purchase. That will be the last assault rifle we see from the West, so hope you like it."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("aug", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_2121", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "The Steyr AUG is now available for purchase. That will be the last assault rifle we see from the West, so hope you like it."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1475,9 +727,13 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"rem870", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Quartermaster'", args = {"mr96", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_221", "quartermasterItemDelivery_222"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_22"] = ix.progression.status["quartermasterItemDelivery_22"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_22"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1495,65 +751,16 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 		local itemids = {
 			["artifact_battery"] = 10,
 			["part_electrocontroller_1"] = 1,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_22"].complexData = ix.progression.status["quartermasterItemDelivery_22"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_22"].complexData[item] = ix.progression.status["quartermasterItemDelivery_22"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_22"].complexData[item] = ix.progression.status["quartermasterItemDelivery_22"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_22"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_22"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_22"].complexData[item] = ix.progression.status["quartermasterItemDelivery_22"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_22"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "The West was more than happy to provide; the Remington 870AE and the MR96 revolver are up for grabs."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("rem870", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("mr96", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_22", true)
-			ix.progression.SetActive("quartermasterItemDelivery_221", true) 
-			ix.progression.SetActive("quartermasterItemDelivery_222", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "The West was more than happy to provide; the Remington 870AE and the MR96 revolver are up for grabs."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1563,9 +770,11 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"mp153", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_221"] = ix.progression.status["quartermasterItemDelivery_221"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_221"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1583,61 +792,16 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 		local itemids = {
 			["artifact_eye"] = 15,
 			["part_hellhound"] = 8, -- PLACEHOLDER, DOESNT EXIST YET
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_221"].complexData = ix.progression.status["quartermasterItemDelivery_221"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_221"].complexData[item] = ix.progression.status["quartermasterItemDelivery_221"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_221"].complexData[item] = ix.progression.status["quartermasterItemDelivery_221"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_221"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_221"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_221"].complexData[item] = ix.progression.status["quartermasterItemDelivery_221"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_221"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "You spoke and I listened; the MP-153 semi automatic shotgun is up for grabs."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("mp153", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_221", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "You spoke and I listened; the MP-153 semi automatic shotgun is up for grabs."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1647,9 +811,12 @@ ix.progression.Register("quartermasterItemDelivery_222", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"sv98", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"quartermasterItemDelivery_2221"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_222"] = ix.progression.status["quartermasterItemDelivery_222"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_222"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1666,62 +833,16 @@ ix.progression.Register("quartermasterItemDelivery_222", {
 	GetItemIds = function()
 		local itemids = {
 			["artifact_mamasbeads"] = 4,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_222"].complexData = ix.progression.status["quartermasterItemDelivery_222"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_222"].complexData[item] = ix.progression.status["quartermasterItemDelivery_222"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_222"].complexData[item] = ix.progression.status["quartermasterItemDelivery_222"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_222"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_222"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_222"].complexData[item] = ix.progression.status["quartermasterItemDelivery_222"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_222"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "The SV-98 is up for sale. Come grab one if you fancy yourself a sniper."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("sv98", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_222", true)
-			ix.progression.SetActive("quartermasterItemDelivery_2221", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "The SV-98 is up for sale. Come grab one if you fancy yourself a sniper."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -1731,9 +852,11 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 	keyNpc = "'Quartermaster'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"svd", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["quartermasterItemDelivery_2221"] = ix.progression.status["quartermasterItemDelivery_2221"] or {}
-		local dat = status or ix.progression.status["quartermasterItemDelivery_2221"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -1750,61 +873,15 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 	GetItemIds = function()
 		local itemids = {
 			["artifact_crystal"] = 25,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["quartermasterItemDelivery_2221"].complexData = ix.progression.status["quartermasterItemDelivery_2221"].complexData or {}
-		ix.progression.status["quartermasterItemDelivery_2221"].complexData[item] = ix.progression.status["quartermasterItemDelivery_2221"].complexData[item] or 0
-		ix.progression.status["quartermasterItemDelivery_2221"].complexData[item] = ix.progression.status["quartermasterItemDelivery_2221"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["quartermasterItemDelivery_2221"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["quartermasterItemDelivery_2221"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["quartermasterItemDelivery_2221"].complexData[item] = ix.progression.status["quartermasterItemDelivery_2221"].complexData[item] or 0
-			if amt > ix.progression.status["quartermasterItemDelivery_2221"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Quartermaster'"
-				local message = "The SVD is now available to buy. That's all the work I have for you guys; feel free to drop by and say hi, though."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Quartermaster'")
-			if (npc) then
-				npc:AddItemToList("svd", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("quartermasterItemDelivery_2221", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Quartermaster'"
+			local message = "The SVD is now available to buy. That's all the work I have for you guys; feel free to drop by and say hi, though."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-

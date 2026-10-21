@@ -4,9 +4,9 @@ DIALOGUE.name = "Community NPC"
 -- Copy&Paste from this file to build new NPCs
 
 -- Progression can be done by calling this:
--- 				ix.progression.AddProgessionValue(progressionIdentifier, amountToIncrement, client:Name())
+-- 				ix.progression.AddProgressionValue(client:GetCharacter(), progressionIdentifier, amountToIncrement)
 -- and
---  			ix.progression.GetProgressionValue(progressionIdentifier)
+--  			ix.progression.GetProgressionValue(client:GetCharacter(), progressionIdentifier)
 -- to react to progression levels
 
 DIALOGUE.addTopic("GREETING", {
@@ -81,7 +81,9 @@ DIALOGUE.addTopic("TradeTopic", {
 			-- Only send what is needed.
 			for k, v in pairs(target.items) do
 				if (!table.IsEmpty(v) and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])) then
-					items[k] = v
+					if (ix.progression.CanBuyItem(character, target:GetDisplayName(), k)) then
+						items[k] = v
+					end
 				end
 			end
 
@@ -121,7 +123,7 @@ DIALOGUE.addTopic("StartBarter", {
 	},
 	preCallback = function(self, client, target)
 		if( CLIENT ) then
-			local barters = ix.npcbarter.GetActiveBartersForNPC("'Spicy Lemon'")
+			local barters = ix.npcbarter.GetActiveBartersForNPC(client:GetCharacter(), "'Spicy Lemon'")
 
 			if #barters <= 0 then
 				self.response = "** The list is empty. **"
@@ -143,7 +145,7 @@ DIALOGUE.addTopic("StartBarter", {
 	GetDynamicOptions = function(self, client, target)
 		local dynopts = {}
 
-		for _, barterid in pairs(ix.npcbarter.GetActiveBartersForNPC("'Spicy Lemon'")) do
+		for _, barterid in pairs(ix.npcbarter.GetActiveBartersForNPC(client:GetCharacter(), "'Spicy Lemon'")) do
 			local barterstruct = ix.npcbarter.barterdict["'Spicy Lemon'"][barterid]
 
 			local barterItem = barterstruct.barterItem

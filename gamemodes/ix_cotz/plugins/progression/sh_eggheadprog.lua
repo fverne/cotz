@@ -6,9 +6,12 @@ ix.progression.Register("eggheadItemDelivery_Detector1", {
 	keyNpc = "'Egghead'",
 	defaultActive = true,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Egghead'", args = {"detectorecho", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
+	nextProgressions = {"eggheadItemDelivery_Detector2", "eggheadItemDelivery_Suit1", "eggheadItemDelivery_Aid1"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["eggheadItemDelivery_Detector1"] = ix.progression.status["eggheadItemDelivery_Detector1"] or {}
-		local dat = status or ix.progression.status["eggheadItemDelivery_Detector1"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -27,66 +30,16 @@ ix.progression.Register("eggheadItemDelivery_Detector1", {
 			["artifact_bolt"] = 5,
 			["artifact_bonecluster"] = 1,
 			["artifact_mementomori"] = 1,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["eggheadItemDelivery_Detector1"].complexData = ix.progression.status["eggheadItemDelivery_Detector1"].complexData or {}
-		ix.progression.status["eggheadItemDelivery_Detector1"].complexData[item] = ix.progression.status["eggheadItemDelivery_Detector1"].complexData[item] or 0
-		ix.progression.status["eggheadItemDelivery_Detector1"].complexData[item] = ix.progression.status["eggheadItemDelivery_Detector1"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["eggheadItemDelivery_Detector1"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["eggheadItemDelivery_Detector1"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["eggheadItemDelivery_Detector1"].complexData[item] = ix.progression.status["eggheadItemDelivery_Detector1"].complexData[item] or 0
-			if amt > ix.progression.status["eggheadItemDelivery_Detector1"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Egghead'"
-				local message = "I've had a breakthrough! It is now possible to detect anomalous substances, come by and pick up a detector!"
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Egghead'")
-			if (npc) then
-				npc:AddItemToList("detectorecho", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-
-			ix.progression.SetCompleted("eggheadItemDelivery_Detector1", true)
-
-			ix.progression.SetActive("eggheadItemDelivery_Detector2", true) 
-			ix.progression.SetActive("eggheadItemDelivery_Suit1", true) 
-			ix.progression.SetActive("eggheadItemDelivery_Aid1", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Egghead'"
+			local message = "I've had a breakthrough! It is now possible to detect anomalous substances, come by and pick up a detector!"
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -95,9 +48,12 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Egghead'", args = {"detectorbear", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
+	nextProgressions = {"eggheadItemDelivery_Detector3"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["eggheadItemDelivery_Detector2"] = ix.progression.status["eggheadItemDelivery_Detector2"] or {}
-		local dat = status or ix.progression.status["eggheadItemDelivery_Detector2"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -118,64 +74,16 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 			["artifact_capacitor"] = 1,
 			["artifact_panacea"] = 4,
 			["artifact_moonlight"] = 2,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["eggheadItemDelivery_Detector2"].complexData = ix.progression.status["eggheadItemDelivery_Detector2"].complexData or {}
-		ix.progression.status["eggheadItemDelivery_Detector2"].complexData[item] = ix.progression.status["eggheadItemDelivery_Detector2"].complexData[item] or 0
-		ix.progression.status["eggheadItemDelivery_Detector2"].complexData[item] = ix.progression.status["eggheadItemDelivery_Detector2"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["eggheadItemDelivery_Detector2"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["eggheadItemDelivery_Detector2"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["eggheadItemDelivery_Detector2"].complexData[item] = ix.progression.status["eggheadItemDelivery_Detector2"].complexData[item] or 0
-			if amt > ix.progression.status["eggheadItemDelivery_Detector2"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Egghead'"
-				local message = "Thanks to your dilligence, I was able to improve on the design of the detectors, allowing one to more accurately pinpoint the location. Oh, and the new detectors are of course for sale."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Egghead'")
-			if (npc) then
-				npc:AddItemToList("detectorbear", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-
-			ix.progression.SetCompleted("eggheadItemDelivery_Detector2", true)
-
-			ix.progression.SetActive("eggheadItemDelivery_Detector3", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Egghead'"
+			local message = "Thanks to your dilligence, I was able to improve on the design of the detectors, allowing one to more accurately pinpoint the location. Oh, and the new detectors are of course for sale."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -184,9 +92,11 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Egghead'", args = {"detectorveles", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["eggheadItemDelivery_Detector3"] = ix.progression.status["eggheadItemDelivery_Detector3"] or {}
-		local dat = status or ix.progression.status["eggheadItemDelivery_Detector3"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -212,57 +122,12 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["eggheadItemDelivery_Detector3"].complexData = ix.progression.status["eggheadItemDelivery_Detector3"].complexData or {}
-		ix.progression.status["eggheadItemDelivery_Detector3"].complexData[item] = ix.progression.status["eggheadItemDelivery_Detector3"].complexData[item] or 0
-		ix.progression.status["eggheadItemDelivery_Detector3"].complexData[item] = ix.progression.status["eggheadItemDelivery_Detector3"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["eggheadItemDelivery_Detector3"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["eggheadItemDelivery_Detector3"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["eggheadItemDelivery_Detector3"].complexData[item] = ix.progression.status["eggheadItemDelivery_Detector3"].complexData[item] or 0
-			if amt > ix.progression.status["eggheadItemDelivery_Detector3"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Egghead'"
-				local message = "I was able to improve on the design of the detectors, allowing one to more precisely pinpoint the location."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Egghead'")
-			if (npc) then
-				npc:AddItemToList("detectorveles", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-			ix.progression.SetCompleted("eggheadItemDelivery_Detector3", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Egghead'"
+			local message = "I was able to improve on the design of the detectors, allowing one to more precisely pinpoint the location."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -271,9 +136,12 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Egghead'", args = {"suit_ssp99", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
+	nextProgressions = {"eggheadItemDelivery_Suit2"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["eggheadItemDelivery_Suit1"] = ix.progression.status["eggheadItemDelivery_Suit1"] or {}
-		local dat = status or ix.progression.status["eggheadItemDelivery_Suit1"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -296,59 +164,12 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["eggheadItemDelivery_Suit1"].complexData = ix.progression.status["eggheadItemDelivery_Suit1"].complexData or {}
-		ix.progression.status["eggheadItemDelivery_Suit1"].complexData[item] = ix.progression.status["eggheadItemDelivery_Suit1"].complexData[item] or 0
-		ix.progression.status["eggheadItemDelivery_Suit1"].complexData[item] = ix.progression.status["eggheadItemDelivery_Suit1"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["eggheadItemDelivery_Suit1"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["eggheadItemDelivery_Suit1"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["eggheadItemDelivery_Suit1"].complexData[item] = ix.progression.status["eggheadItemDelivery_Suit1"].complexData[item] or 0
-			if amt > ix.progression.status["eggheadItemDelivery_Suit1"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Egghead'"
-				local message = "## PLACEHOLDER ## - SSP99 unlocked."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Egghead'")
-			if (npc) then
-				npc:AddItemToList("suit_ssp99", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-			ix.progression.SetCompleted("eggheadItemDelivery_Suit1", true)
-
-			ix.progression.SetActive("eggheadItemDelivery_Suit2", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Egghead'"
+			local message = "## PLACEHOLDER ## - SSP99 unlocked."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -357,9 +178,12 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Egghead'", args = {"suit_ssp99m", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
+	nextProgressions = {"eggheadItemDelivery_Suit3"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["eggheadItemDelivery_Suit2"] = ix.progression.status["eggheadItemDelivery_Suit2"] or {}
-		local dat = status or ix.progression.status["eggheadItemDelivery_Suit2"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -383,59 +207,12 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["eggheadItemDelivery_Suit2"].complexData = ix.progression.status["eggheadItemDelivery_Suit2"].complexData or {}
-		ix.progression.status["eggheadItemDelivery_Suit2"].complexData[item] = ix.progression.status["eggheadItemDelivery_Suit2"].complexData[item] or 0
-		ix.progression.status["eggheadItemDelivery_Suit2"].complexData[item] = ix.progression.status["eggheadItemDelivery_Suit2"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["eggheadItemDelivery_Suit2"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["eggheadItemDelivery_Suit2"]:GetItemIds()
-
-		local isdone = true
-		
-		for item, amt in pairs(finished) do
-			ix.progression.status["eggheadItemDelivery_Suit2"].complexData[item] = ix.progression.status["eggheadItemDelivery_Suit2"].complexData[item] or 0
-			if amt > ix.progression.status["eggheadItemDelivery_Suit2"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Egghead'"
-				local message = "## PLACEHOLDER ## - SSP99m unlocked."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Egghead'")
-			if (npc) then
-				npc:AddItemToList("suit_ssp99m", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-			ix.progression.SetCompleted("eggheadItemDelivery_Suit2", true)
-
-			ix.progression.SetActive("eggheadItemDelivery_Suit3", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Egghead'"
+			local message = "## PLACEHOLDER ## - SSP99m unlocked."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -444,9 +221,11 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Egghead'", args = {"suit_seva", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["eggheadItemDelivery_Suit3"] = ix.progression.status["eggheadItemDelivery_Suit3"] or {}
-		local dat = status or ix.progression.status["eggheadItemDelivery_Suit3"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -469,57 +248,12 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["eggheadItemDelivery_Suit3"].complexData = ix.progression.status["eggheadItemDelivery_Suit3"].complexData or {}
-		ix.progression.status["eggheadItemDelivery_Suit3"].complexData[item] = ix.progression.status["eggheadItemDelivery_Suit3"].complexData[item] or 0
-		ix.progression.status["eggheadItemDelivery_Suit3"].complexData[item] = ix.progression.status["eggheadItemDelivery_Suit3"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["eggheadItemDelivery_Suit3"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["eggheadItemDelivery_Suit3"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["eggheadItemDelivery_Suit3"].complexData[item] = ix.progression.status["eggheadItemDelivery_Suit3"].complexData[item] or 0
-			if amt > ix.progression.status["eggheadItemDelivery_Suit3"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Egghead'"
-				local message = "## PLACEHOLDER ## - SEVA unlocked."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Egghead'")
-			if (npc) then
-				npc:AddItemToList("suit_seva", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-			ix.progression.SetCompleted("eggheadItemDelivery_Suit3", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Egghead'"
+			local message = "## PLACEHOLDER ## - SEVA unlocked."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -528,9 +262,14 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Egghead'", args = {"medic_stimpak_1", nil, 10, "SELLANDBUY", 10, 1, 10}},
+		{npc = "'Egghead'", args = {"medic_antirad_2", nil, 10, "SELLANDBUY", 10, 1, 10}},
+		{npc = "'Egghead'", args = {"medic_psyheal_2", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
+	nextProgressions = {"eggheadItemDelivery_Aid2"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["eggheadItemDelivery_Aid1"] = ix.progression.status["eggheadItemDelivery_Aid1"] or {}
-		local dat = status or ix.progression.status["eggheadItemDelivery_Aid1"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -556,61 +295,12 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["eggheadItemDelivery_Aid1"].complexData = ix.progression.status["eggheadItemDelivery_Aid1"].complexData or {}
-		ix.progression.status["eggheadItemDelivery_Aid1"].complexData[item] = ix.progression.status["eggheadItemDelivery_Aid1"].complexData[item] or 0
-		ix.progression.status["eggheadItemDelivery_Aid1"].complexData[item] = ix.progression.status["eggheadItemDelivery_Aid1"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["eggheadItemDelivery_Aid1"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["eggheadItemDelivery_Aid1"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["eggheadItemDelivery_Aid1"].complexData[item] = ix.progression.status["eggheadItemDelivery_Aid1"].complexData[item] or 0
-			if amt > ix.progression.status["eggheadItemDelivery_Aid1"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Egghead'"
-				local message = "## PLACEHOLDER ## - Stimpak MkI, Antiradiation Drugs, Psyheal Drugs unlocked."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Egghead'")
-			if (npc) then
-				npc:AddItemToList("medic_stimpak_1", nil, 10, "SELLANDBUY", 10, 1, 10)
-				npc:AddItemToList("medic_antirad_2", nil, 10, "SELLANDBUY", 10, 1, 10)
-				npc:AddItemToList("medic_psyheal_2", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-			ix.progression.SetCompleted("eggheadItemDelivery_Aid1", true)
-
-			ix.progression.SetActive("eggheadItemDelivery_Aid2", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Egghead'"
+			local message = "## PLACEHOLDER ## - Stimpak MkI, Antiradiation Drugs, Psyheal Drugs unlocked."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -619,9 +309,13 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Egghead'", args = {"medic_stimpak_2", nil, 10, "SELLANDBUY", 10, 1, 10}},
+		{npc = "'Egghead'", args = {"medic_antipsychotic_2", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
+	nextProgressions = {"eggheadItemDelivery_Aid3"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["eggheadItemDelivery_Aid2"] = ix.progression.status["eggheadItemDelivery_Aid2"] or {}
-		local dat = status or ix.progression.status["eggheadItemDelivery_Aid2"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -647,60 +341,12 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["eggheadItemDelivery_Aid2"].complexData = ix.progression.status["eggheadItemDelivery_Aid2"].complexData or {}
-		ix.progression.status["eggheadItemDelivery_Aid2"].complexData[item] = ix.progression.status["eggheadItemDelivery_Aid2"].complexData[item] or 0
-		ix.progression.status["eggheadItemDelivery_Aid2"].complexData[item] = ix.progression.status["eggheadItemDelivery_Aid2"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["eggheadItemDelivery_Aid2"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["eggheadItemDelivery_Aid2"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["eggheadItemDelivery_Aid2"].complexData[item] = ix.progression.status["eggheadItemDelivery_Aid2"].complexData[item] or 0
-			if amt > ix.progression.status["eggheadItemDelivery_Aid2"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Egghead'"
-				local message = "## PLACEHOLDER ## - Stimpak MkII, Psyblock Drugs unlocked."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Egghead'")
-			if (npc) then
-				npc:AddItemToList("medic_stimpak_2", nil, 10, "SELLANDBUY", 10, 1, 10)
-				npc:AddItemToList("medic_antipsychotic_2", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-			ix.progression.SetCompleted("eggheadItemDelivery_Aid2", true)
-
-			ix.progression.SetActive("eggheadItemDelivery_Aid3", true) 
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Egghead'"
+			local message = "## PLACEHOLDER ## - Stimpak MkII, Psyblock Drugs unlocked."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -709,9 +355,12 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 	description = "## PLACEHOLDER ##",
 	keyNpc = "'Egghead'",
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Egghead'", args = {"medic_stimpak_3", nil, 10, "SELLANDBUY", 10, 1, 10}},
+		{npc = "'Egghead'", args = {"medic_antipsychotic_3", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["eggheadItemDelivery_Aid3"] = ix.progression.status["eggheadItemDelivery_Aid3"] or {}
-		local dat = status or ix.progression.status["eggheadItemDelivery_Aid3"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -734,57 +383,11 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["eggheadItemDelivery_Aid3"].complexData = ix.progression.status["eggheadItemDelivery_Aid3"].complexData or {}
-		ix.progression.status["eggheadItemDelivery_Aid3"].complexData[item] = ix.progression.status["eggheadItemDelivery_Aid3"].complexData[item] or 0
-		ix.progression.status["eggheadItemDelivery_Aid3"].complexData[item] = ix.progression.status["eggheadItemDelivery_Aid3"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["eggheadItemDelivery_Aid3"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["eggheadItemDelivery_Aid3"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["eggheadItemDelivery_Aid3"].complexData[item] = ix.progression.status["eggheadItemDelivery_Aid3"].complexData[item] or 0
-			if amt > ix.progression.status["eggheadItemDelivery_Aid3"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Egghead'"
-				local message = "## PLACEHOLDER ## - Stimpak MkIII, Psyblock Drugs unlocked."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Egghead'")
-			if (npc) then
-				npc:AddItemToList("medic_stimpak_3", nil, 10, "SELLANDBUY", 10, 1, 10)
-				npc:AddItemToList("medic_antipsychotic_3", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-			ix.progression.SetCompleted("eggheadItemDelivery_Aid3", true)
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Egghead'"
+			local message = "## PLACEHOLDER ## - Stimpak MkIII, Psyblock Drugs unlocked."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })

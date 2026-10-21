@@ -194,7 +194,7 @@ function PANEL:prepareOptions(options)
 	self.buttonList = {}
 	for k, topicID in ipairs(options) do
 		topic = self.tree[topicID]
-		if (topic.statement != "" and topic:ShouldAdd()) then
+		if (topic.statement != "" and topic:ShouldAdd(LocalPlayer(), self.target)) then
 			self.buttonList[k] = self.options:Add("DLabel")
 			self.buttonList[k]:Dock(TOP)
 			self.buttonList[k]:DockMargin(4, 0, 4, 4)
@@ -246,7 +246,7 @@ function PANEL:prepareDynamicOptions(dynopts, normalopts)
 	for k, topicID in ipairs(normalopts) do
 		local index = nButs + k
 		topic = self.tree[topicID]
-		if(topic:ShouldAdd())then
+		if(topic:ShouldAdd(LocalPlayer(), self.target))then
 			self.buttonList[index] = self.options:Add("DLabel")
 			self.buttonList[index]:Dock(TOP)
 			self.buttonList[index]:DockMargin(4, 0, 4, 4)

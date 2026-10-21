@@ -453,28 +453,28 @@ function PANEL:Init()
 
 	table.Add(npcidentifiers, initialNpcs)
 
-	if ix.progression.IsCompleted("oldTimerKillIntro") then
+	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerKillIntro") then
 		local tradenpc = {
 			"'Haggler'",
 		}
 		table.Add(npcidentifiers, tradenpc)
 	end
 
-	if ix.progression.IsCompleted("oldTimerItemDelivery_mainMeat") then
+	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerItemDelivery_mainMeat") then
 		local cooknpc = {
 			"'Spicy Lemon'",
 		}
 		table.Add(npcidentifiers, cooknpc)
 	end
 
-	if ix.progression.IsCompleted("oldTimerItemDelivery_mainStatue") then
+	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerItemDelivery_mainStatue") then
 		local mutenpc = {
 			"'Mute'",
 		}
 		table.Add(npcidentifiers, mutenpc)
 	end
 
-	if ix.progression.IsCompleted("smartass_rfTasks") then
+	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "smartass_rfTasks") then
 		local ecologistNpcs = {
 			"'Egghead'",
 			"'Beanstalk'",
@@ -483,7 +483,7 @@ function PANEL:Init()
 		table.Add(npcidentifiers, ecologistNpcs)
 	end
 
-	if ix.progression.IsCompleted("computerDelivery_activateItem") then
+	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "intern_gasAnalyzerReadings") then
 		local pripyatNpcs = {
 			"'Computer'",
 		}
@@ -491,12 +491,12 @@ function PANEL:Init()
 	end
 
 	for _, npcidentifier in pairs(npcidentifiers) do
-		for k, v in pairs(ix.progression.GetActiveProgressions(npcidentifier)) do
+		for k, v in pairs(ix.progression.GetActiveProgressions(LocalPlayer():GetCharacter(), npcidentifier)) do
 			local progDef = ix.progression.definitions[v]
 			if progDef and not progDef.GetItemIds then continue end
-			local progstatus = ix.progression.GetComplexProgressionValue(v)
+			local progstatus = ix.progression.GetComplexProgressionValue(LocalPlayer():GetCharacter(), v)
 			for itemName, amt in pairs(progDef.GetItemIds()) do
-				if self.highlghtItems[itemName] == nil and progstatus and progstatus[itemName] and (amt - progstatus[itemName]) > 0 then
+				if self.highlghtItems[itemName] == nil and progstatus and (amt - (progstatus[itemName] or 0)) > 0 then
 					self.highlghtItems[itemName] = "Progression"
 				elseif self.highlghtItems[itemName] == "Task" then
 					self.highlghtItems[itemName] = "Both"

@@ -18,9 +18,6 @@ ix.util.Include("sh_definitions.lua")
 function PLUGIN:LoadData()
 	ix.npcbarter.activebarters = self:GetData() or {}
 
-	for progid, _ in pairs(ix.progression.definitions) do
-		ix.progression.InvokeProgression(progid)
-	end
 
 	for npcname, _ in pairs(ix.npcbarter.barterdict) do
 		for barterid, barterstruct in pairs(ix.npcbarter.barterdict[npcname]) do

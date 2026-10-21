@@ -17,45 +17,43 @@ if (SERVER) then
 		client:Freeze(freeze)
 	end)
 
-	net.Receive("ixPreCallback", function(len, client)
-		treeID = net.ReadString()
-		topicID = net.ReadString()
-		target = net.ReadEntity()
+	local function AccessibleTopic(client, treeID, topicID, target)
+		local character = client:GetCharacter()
+		if (not character or not IsValid(target) or target:GetClass() ~= "ix_vendor_adv"
+			or target.dialogueid ~= treeID or client:GetPos():DistToSqr(target:GetPos()) > 192 * 192
+			or not target:CanAccess(client)) then return end
+		local tree = ix.dialogue.list[treeID]
+		local topic = tree and tree.tree[topicID]
+		if (not topic) then return end
+		if (treeID == "owlnpc" and string.find(topicID, "Storage", 1, true)
+			and not ix.progression.IsCompleted(character, "cleanerItemDelivery_Storage")) then return end
+		if (treeID == "technpc" and string.find(topicID, "Paint", 1, true)
+			and not ix.progression.IsCompleted(character, "technutItemDelivery_SuitPainting")) then return end
+		return topic
+	end
 
-		topic = ix.dialogue.list[treeID].tree[topicID]
-
-		topic.preCallback(topic, client, target)
-	end)
-
-	net.Receive("ixPostCallback", function(len, client)
-		treeID = net.ReadString()
-		topicID = net.ReadString()
-		target = net.ReadEntity()
-
-		topic = ix.dialogue.list[treeID].tree[topicID]
-
-		topic.postCallback(topic, client, target)
-	end)
-
-	net.Receive("ixDialogueResolveDynamic", function(len, client)
-		local treeID 	= net.ReadString()
-		local topicID = net.ReadString()
-		local target 	= net.ReadEntity()
-		local dyndata = net.ReadTable()
-		local topic = ix.dialogue.list[treeID].tree[topicID]
-
-		topic.ResolveDynamicOption(topic, client, target, dyndata)
-	end)
-
-	net.Receive("ixPreDynamicCallback", function(len, client)
-		local treeID 	= net.ReadString()
-		local topicID = net.ReadString()
-		local target 	= net.ReadEntity()
-		local dyndata = net.ReadTable()
-		local topic = ix.dialogue.list[treeID].tree[topicID]
-
-		topic.DynamicPreCallback(topic, client, target, dyndata)
-	end)
+	for network, callback in pairs({
+		ixPreCallback = "preCallback",
+		ixPostCallback = "postCallback",
+		ixDialogueResolveDynamic = "ResolveDynamicOption",
+		ixPreDynamicCallback = "DynamicPreCallback"
+	}) do
+		-- Capture each callback separately for Lua 5.1 closures.
+		local callbackName = callback
+		net.Receive(network, function(length, client)
+			local treeID = net.ReadString()
+			local topicID = net.ReadString()
+			local target = net.ReadEntity()
+			local data
+			if (callbackName == "ResolveDynamicOption" or callbackName == "DynamicPreCallback") then
+				data = net.ReadTable()
+			end
+			local topic = AccessibleTopic(client, treeID, topicID, target)
+			if (topic and isfunction(topic[callbackName])) then
+				topic[callbackName](topic, client, target, data)
+			end
+		end)
+	end
 
 	netstream.Hook("ix_requestNicknameChange", function(client, requestedNickname)
 		if client and client:getReputation() >= 4100 then --Professional

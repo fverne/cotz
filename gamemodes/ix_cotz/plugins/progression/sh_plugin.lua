@@ -1,11 +1,9 @@
 PLUGIN.name = "Progression"
 PLUGIN.author = "gumlefar"
-PLUGIN.desc = "System for tracking serverwide progression and performing actions based on progression levels."
+PLUGIN.desc = "Persistent individual character progression and personal NPC unlocks."
 
 ix.progression = ix.progression or {}
-ix.progression.status = ix.progression.status or {}
 ix.progression.definitions = ix.progression.definitions or {}
-ix.progression.foreignstatus = ix.progression.foreignstatus or {}
 
 PLUGIN.checktime = 0
 
@@ -26,68 +24,37 @@ ix.util.Include("sh_jittersprog.lua")
 ix.util.Include("sh_eggheadprog.lua")
 ix.util.Include("sh_bossprog.lua")
 
+-- Preserve the legacy save for rollback; it never seeds personal progress.
 function PLUGIN:LoadData()
-	ix.progression.status = self:GetData() or {}
-
-	for progid, _ in pairs(ix.progression.definitions) do
-		ix.progression.InvokeProgression(progid)
-	end
+	local saved = self:GetData() or {}
+	self.legacyProgression = saved.version == 2 and saved.legacy or saved
 end
 
 function PLUGIN:SaveData()
-	self:SetData(ix.progression.status)
+	self:SetData({version = 2, legacy = self.legacyProgression or {}})
 end
 
-function PLUGIN:PlayerSpawn(client, transition)
-	net.Start("progression_sync_receive")
-	net.WriteTable(ix.progression.status)
-	net.Send(client)
+if (SERVER) then
+	function PLUGIN:PlayerLoadedCharacter(client, character, previousCharacter)
+		ix.progression.InitializeCharacterProgression(character)
+	end
 
-	net.Start("progressionforeign_sync_receive")
-	net.WriteTable(ix.progression.foreignstatus)
-	net.Send(client)
-end
-
-if(SERVER)then
+	function PLUGIN:PostLoadData()
+		self.worldDataLoaded = true
+		self:SetupProgressionWorld()
+	end
 
 	function PLUGIN:Think()
-		if self.checktime > CurTime() then return end
+		if (not self.worldDataLoaded or (self.checktime or 0) > CurTime()) then return end
 		self.checktime = CurTime() + 15
-
-		self:GetForeignProgression()
-		self:DumpOwnProgression()
-	end
-
-	function PLUGIN:GetForeignProgression()
-		ix.progression.foreignstatus = {}
-
-		ix.plugin.list["simplecrossserverdata"]:GetXServerData("_progression", function(result)
-			if (istable(result) and #result > 0) then
-				for _, v in pairs(result) do
-					if (istable(v)) then
-						local key = v.key
-						local data = util.JSONToTable(v.json_data or "[]")
-
-						if not string.StartsWith(key,game.GetMap()) then
-							ix.progression.foreignstatus[key] = data
-						end
-					end
-				end
-			end
-		end)
-	end
-
-	function PLUGIN:DumpOwnProgression()
-		local key = game.GetMap().."_progression"
-
-		ix.plugin.list["simplecrossserverdata"]:SetXServerData(key, ix.progression.status)
+		self:SetupProgressionWorld()
 	end
 end
 
 function PLUGIN:PopulateHelpMenu(tabs)
     tabs["progression"] = function(container)
 		local title = container:Add("DLabel")
-        title:SetText("Overall Progression")
+        title:SetText("Your Progression")
         title:SetFont("stalkerregularbigfont")
         title:Dock(TOP)
         title:InvalidateLayout(true)
@@ -96,7 +63,7 @@ function PLUGIN:PopulateHelpMenu(tabs)
 		local intro = container:Add("DLabel")
         intro:SetWrap(true)
         intro:SetFont("stalkerregularfont")
-        intro:SetText("Below is a list of known NPCs and what they need for various progressions. Might be slightly outdated due to the slow networking conditions of the zone.")
+        intro:SetText("Below is a list of known NPCs and what they need for various progressions. Progress and unlocks belong to your current character.")
         intro:Dock(TOP)
         intro:DockMargin(0, 16, 0, 0)
         intro:SetAutoStretchVertical(true)
@@ -114,28 +81,28 @@ function PLUGIN:PopulateHelpMenu(tabs)
 
 		table.Add(npcidentifiers, initialNpcs)
 
-		if ix.progression.IsCompleted("oldTimerKillIntro") then
+		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerKillIntro") then
 			local tradenpc = {
 				"'Haggler'",
 			}
 			table.Add(npcidentifiers, tradenpc)
 		end
 
-		if ix.progression.IsCompleted("oldTimerItemDelivery_mainMeat") then
+		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerItemDelivery_mainMeat") then
 			local cooknpc = {
 				"'Spicy Lemon'",
 			}
 			table.Add(npcidentifiers, cooknpc)
 		end
 
-		if ix.progression.IsCompleted("oldTimerItemDelivery_mainStatue") then
+		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerItemDelivery_mainStatue") then
 			local mutenpc = {
 				"'Mute'",
 			}
 			table.Add(npcidentifiers, mutenpc)
 		end
 
-		if ix.progression.IsCompleted("smartass_rfTasks") then
+		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "smartass_rfTasks") then
 			local ecologistNpcs = {
 				"'Egghead'",
 				"'Beanstalk'",
@@ -144,7 +111,7 @@ function PLUGIN:PopulateHelpMenu(tabs)
 			table.Add(npcidentifiers, ecologistNpcs)
 		end
 
-		if ix.progression.IsCompleted("computerDelivery_activateItem") then
+		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "intern_gasAnalyzerReadings") then
 			local pripyatNpcs = {
 				"'Computer'",
 			}
@@ -161,14 +128,12 @@ function PLUGIN:PopulateHelpMenu(tabs)
 			npctitle:SetAutoStretchVertical(true)
 
 			local activeProgressions = 0
-			for k, v in pairs(ix.progression.GetActiveProgressions(npcidentifier)) do
+			for k, v in pairs(ix.progression.GetActiveProgressions(LocalPlayer():GetCharacter(), npcidentifier)) do
 				local progdef = ix.progression.definitions[v]
-				local progstatus = ix.progression.GetComplexProgressionValue(v)
+				local character = LocalPlayer():GetCharacter()
+				local progstatus = progdef.GetItemIds and ix.progression.GetComplexProgressionValue(character, v)
+					or ix.progression.GetLine(character, v)
 				
-				if ix.progression.IsCompleted(v) then
-					continue
-				end
-
 				activeProgressions = activeProgressions + 1
 	
 				local progressiontitle = container:Add("DLabel")
@@ -180,7 +145,7 @@ function PLUGIN:PopulateHelpMenu(tabs)
 				progressiontitle:SetAutoStretchVertical(true)
 
 	
-				if(progdef.fnAddComplexProgression)then	
+				if (progdef.BuildResponse) then
 					local descriptiontext = progdef:BuildResponse(progdef.keyNpc, progstatus)
 					local progressiondescription = container:Add("DLabel")
 					progressiondescription:SetWrap(true)

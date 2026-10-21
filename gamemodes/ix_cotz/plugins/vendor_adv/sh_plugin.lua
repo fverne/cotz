@@ -382,7 +382,9 @@ if (SERVER) then
 		end
 
 		local entity = client.ixVendorAdv
-		local isSherpaClient = client:GetCharacter():HasSherpaVendor(entity:GetDisplayName())
+		local character = client:GetCharacter()
+		if (not character or not IsValid(entity) or not entity:CanAccess(client)) then return end
+		local isSherpaClient = character:HasSherpaVendor(entity:GetDisplayName())
 
 		if (!IsValid(entity) or client:GetPos():Distance(entity:GetPos()) > 192) then
 			return
@@ -391,6 +393,8 @@ if (SERVER) then
 		local uniqueID = net.ReadString()
 		local iteminstanceID = net.ReadUInt(32)
 		local isSellingToVendor = net.ReadBool()
+
+		if (not isSellingToVendor and not ix.progression.CanBuyItem(character, entity:GetDisplayName(), uniqueID)) then return end
 
 		if (!entity.items[uniqueID] and !isSherpaClient and !entity:GetBuyAll()) then
 			return

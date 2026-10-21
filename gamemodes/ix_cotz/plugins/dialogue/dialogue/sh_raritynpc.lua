@@ -53,7 +53,9 @@ DIALOGUE.addTopic("TradeTopic", {
 			-- Only send what is needed.
 			for k, v in pairs(target.items) do
 				if (!table.IsEmpty(v) and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])) then
-					items[k] = v
+					if (ix.progression.CanBuyItem(character, target:GetDisplayName(), k)) then
+						items[k] = v
+					end
 				end
 			end
 

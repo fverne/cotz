@@ -1,234 +1,228 @@
 ix.progression = ix.progression or {}
-ix.progression.status = ix.progression.status or {}
-ix.progression.foreignstatus = ix.progression.foreignstatus or {}
+ix.progression.definitions = ix.progression.definitions or {}
 
+-- World NPCs are shared entities; access to their services belongs to a character.
+ix.progression.npcRequirements = {
+	["'Haggler'"] = "oldTimerKillIntro",
+	["'Spicy Lemon'"] = "oldTimerItemDelivery_mainMeat",
+	["'Mute'"] = "oldTimerItemDelivery_mainStatue",
+	["'Egghead'"] = "smartass_rfTasks",
+	["'Beanstalk'"] = "smartass_rfTasks",
+	["'Intern'"] = "smartass_rfTasks",
+	["'Computer'"] = "intern_gasAnalyzerReadings",
+	["'???'"] = "computer_artifactTasks",
+}
 
-function ix.progression.SetProgressionValue(progid, amount, playername)
-	if (ix.progression.definitions[progid]) then
-		ix.progression.status[progid] = ix.progression.status[progid] or {}
-
-		local preval = ix.progression.status[progid].value or 0
-
-		ix.progression.status[progid].value = amount
-
-		for level, threshold in pairs(ix.progression.definitions[progid].progressthresholds) do
-			if( preval < threshold && ix.progression.status[progid].value >= threshold) then
-				ix.progression.InvokeProgressionLevel(progid, level) -- If we pass a threshold, run the function
-			end
-		end
-	end
+function ix.progression.GetLine(character, progid)
+	local line = ix.progression.GetCharacterProgressionLine(character, progid)
+	line.value = line.value or 0
+	line.complexData = line.complexData or {}
+	line.hasfuncrun = line.hasfuncrun or {}
+	return line
 end
 
-function ix.progression.SetActive(progid, active)
-	if (ix.progression.definitions[progid]) then
-		ix.progression.status[progid] = ix.progression.status[progid] or {}
-
-		ix.progression.status[progid].active = tobool(active)
-	end
+function ix.progression.IsCompleted(character, progid)
+	return ix.progression.GetLine(character, progid).completed == true
 end
 
-function ix.progression.IsActive(progid)
-	if (ix.progression.definitions[progid]) then
-		ix.progression.status[progid] = ix.progression.status[progid] or {}
-		if(ix.progression.status[progid].active == nil) then
-			if(ix.progression.definitions[progid].defaultActive)then
-				ix.progression.status[progid].active = true
-			else
-				ix.progression.status[progid].active = false
-			end
-		end
-
-		local foreignactive = false
-
-		for _,foreign in pairs(ix.progression.foreignstatus) do
-			if foreign[progid] and foreign[progid].active then
-				foreignactive = foreignactive or foreign[progid].active
-			end
-		end
-
-		return ix.progression.status[progid].active or foreignactive
-	else
-		return false
-	end
+function ix.progression.CanUseNPC(character, npcname)
+	if (not character) then return false end
+	local required = ix.progression.npcRequirements[npcname]
+	return not required or ix.progression.IsCompleted(character, required)
 end
 
--- Marks progression as completed and inactive.
-function ix.progression.SetCompleted(progid)
-	if (ix.progression.definitions[progid]) then
-		ix.progression.status[progid] = ix.progression.status[progid] or {}
-		
-		ix.progression.status[progid].active = false
-		ix.progression.status[progid].completed = true
-	end
+function ix.progression.IsActive(character, progid)
+	local definition = ix.progression.definitions[progid]
+	if (not definition) then return false end
+	local line = ix.progression.GetLine(character, progid)
+	if (line.completed or not ix.progression.CanUseNPC(character, definition.keyNpc)) then return false end
+	if (line.active ~= nil) then return line.active == true end
+	return definition.defaultActive == true
 end
 
--- Returns if progression is completed, otherwise false.
-function ix.progression.IsCompleted(progid)
-	if (ix.progression.definitions[progid]) then
-		ix.progression.status[progid] = ix.progression.status[progid] or {}
-
-		local foreigncompleted = false
-
-		for _,foreign in pairs(ix.progression.foreignstatus) do
-			if foreign[progid] and foreign[progid].completed then
-				foreigncompleted = foreigncompleted or foreign[progid].completed
-			end
-		end
-
-		return ix.progression.status[progid].completed or foreigncompleted
-	else
-		return false
-	end
+function ix.progression.GetProgressionValue(character, progid)
+	return ix.progression.GetLine(character, progid).value
 end
 
-function ix.progression.GetProgressionValue(progid)
-	if (ix.progression.definitions[progid]) then
-		ix.progression.status[progid] = ix.progression.status[progid] or {}
-		ix.progression.status[progid].value = ix.progression.status[progid].value or 0
-
-		local foreignvalue
-
-		for _,foreign in pairs(ix.progression.foreignstatus) do
-			if foreign[progid] and foreign[progid].value or 0 then
-				foreignvalue = foreignvalue or foreign[progid].value or 0
-			end
-		end
-		
-		return ix.progression.status[progid].value or foreignvalue
-	end
-end
-
-function ix.progression.GetActiveProgressions(npcidentifier)
-	local ret = {}
-
-	for progid,progstruct in pairs(ix.progression.definitions) do
-		if(progstruct.keyNpc == npcidentifier and ix.progression.IsActive(progid)) then
-			table.insert(ret, progid)
-		end
-	end
-
-	return ret
-end
-
-function ix.progression.AddProgessionValue(progid, amount, playername)
-	if (ix.progression.definitions[progid]) then
-		ix.progression.SetProgressionValue(progid, ix.progression.GetProgressionValue(progid) + amount, playername)
-
-		ix.progression.status[progid] = ix.progression.status[progid] or {}
-
-		ix.progression.status[progid].contributors = ix.progression.status[progid].contributors or {}
-		ix.progression.status[progid].contributors[playername] = ix.progression.status[progid].contributors[playername] or 0
-		ix.progression.status[progid].contributors[playername] = ix.progression.status[progid].contributors[playername] + amount
-	end
-end
-
-function ix.progression.GetComplexProgressionValue(progid)
-    if (ix.progression.definitions[progid]) and ix.progression.definitions[progid].fnGetComplexProgression then
-        local foreign = ix.progression.foreignstatus[ix.progression.definitions[progid].progMap.."_progression"]
-        if foreign and foreign[progid] and foreign[progid].complexData then
-            return foreign[progid].complexData
-        end
-
-        return ix.progression.definitions[progid].fnGetComplexProgression()
-    end
+function ix.progression.GetComplexProgressionValue(character, progid)
+	return ix.progression.GetLine(character, progid).complexData
 end
 
 function ix.progression.GetComplexProgressionReqs(progid)
-	if (ix.progression.definitions[progid]) and ix.progression.definitions[progid].GetItemIds then
-		return ix.progression.definitions[progid].GetItemIds()
-	end
+	local definition = ix.progression.definitions[progid]
+	return definition and definition.GetItemIds and definition:GetItemIds() or {}
 end
 
-function ix.progression.AddComplexProgressionValue(progid, dat, playername)
-	if (ix.progression.definitions[progid]) and ix.progression.definitions[progid].fnAddComplexProgression and ix.progression.definitions[progid].fnCheckComplexProgression then
-		 -- In complex progressions, the progression definition is responsible for taking care of everything
-		ix.progression.definitions[progid].fnAddComplexProgression(dat, playername)
-		ix.progression.definitions[progid].fnCheckComplexProgression()
-	end
-end
-
-function ix.progression.RemoveProgressionValue(progid, amount, playername)
-  ix.progression.AddProgressionValue(progid, -amount, playername)
-end
-
-function ix.progression.InvokeProgression(progid)
-	local totalprogression = ix.progression.GetProgressionValue(progid)
-	local levelreached = 0
-
-	for level, threshold in pairs(ix.progression.definitions[progid].progressthresholds) do
-		if(totalprogression >= threshold) then 
-			levelreached = level 
-		else 
-			break
+function ix.progression.GetActiveProgressions(character, npcidentifier)
+	local result = {}
+	for progid, definition in pairs(ix.progression.definitions) do
+		if (definition.keyNpc == npcidentifier and ix.progression.IsActive(character, progid)) then
+			result[#result + 1] = progid
 		end
 	end
-
-	ix.progression.status[progid].hasfuncrun = ix.progression.status[progid].hasfuncrun or {}
-
-	-- Call all unlocked functions
-	for k, func in pairs(ix.progression.definitions[progid].progressfunctions) do
-		if(k > levelreached) then return end
-		if( func.RunOnce && !(ix.progression.status[progid].hasfuncrun[k] or false)) then
-			func:OnRun()
-			ix.progression.status[progid].hasfuncrun[k] = true
-		elseif (!func.RunOnce) then
-			func:OnRun()
-			ix.progression.status[progid].hasfuncrun[k] = true
-		end
-	end
-end
-
-function ix.progression.InvokeProgressionLevel(progid, level)
-
-	ix.progression.status[progid].hasfuncrun = ix.progression.status[progid].hasfuncrun or {}
-
-	local func = ix.progression.definitions[progid].progressfunctions[level]
-	func:OnRun()
-	ix.progression.status[progid] = ix.progression.status[progid] or {}
-	ix.progression.status[progid].hasfuncrun = ix.progression.status[progid].hasfuncrun or {}
-	ix.progression.status[progid].hasfuncrun[level] = true
-	
-end
-
-function ix.progression.GetContributors(progid)
-	return ix.progression.status[progid].contributors or {}
+	table.sort(result)
+	return result
 end
 
 function ix.progression.GetNPCFromName(npcname)
 	for _, entity in ipairs(ents.FindByClass("ix_vendor_adv")) do
-		if( entity:GetDisplayName() == npcname) then
-			return entity
+		if (entity:GetDisplayName() == npcname) then return entity end
+	end
+end
+
+function ix.progression.CanBuyItem(character, npcname, itemid)
+	if (not ix.progression.CanUseNPC(character, npcname)) then return false end
+	local locked = false
+	for progid, definition in pairs(ix.progression.definitions) do
+		for _, unlock in ipairs(definition.vendorUnlocks or {}) do
+			if (unlock.npc == npcname and unlock.args[1] == itemid) then
+				locked = true
+				if (ix.progression.IsCompleted(character, progid)) then return true end
+			end
+		end
+	end
+	return not locked
+end
+
+if (SERVER) then
+	local function UpdateLine(character, progid, callback)
+		assert(ix.progression.definitions[progid], "Unknown progression: "..tostring(progid))
+		local record = ix.progression.GetCharacterProgression(character)
+		local line = ix.progression.GetLine(character, progid)
+		callback(line)
+		record.lines[progid] = line
+		ix.progression.SetCharacterProgression(character, record)
+	end
+
+	function ix.progression.SetActive(character, progid, active)
+		UpdateLine(character, progid, function(line) line.active = tobool(active) end)
+	end
+
+	function ix.progression.SetCompleted(character, progid)
+		local definition = ix.progression.definitions[progid]
+		assert(definition, "Unknown progression: "..tostring(progid))
+		local record = ix.progression.GetCharacterProgression(character)
+		local line = ix.progression.GetLine(character, progid)
+		line.active = false
+		line.completed = true
+		record.lines[progid] = line
+		for _, nextID in ipairs(definition.nextProgressions or {}) do
+			assert(ix.progression.definitions[nextID], "Unknown progression: "..nextID)
+			record.lines[nextID] = record.lines[nextID] or {}
+			if (not record.lines[nextID].completed) then record.lines[nextID].active = true end
+		end
+		ix.progression.SetCharacterProgression(character, record)
+	end
+
+	function ix.progression.Notify(character, name, message)
+		local client = character:GetPlayer()
+		if (IsValid(client) and client:GetCharacter() == character) then
+			ix.chat.Send(nil, "npcpdainternal", "", nil, {client}, {name = name, message = message})
 		end
 	end
 
-	return nil
-end
+	local function CanAdvance(character, progid)
+		local definition = ix.progression.definitions[progid]
+		return definition and definition.progMap == game.GetMap() and ix.progression.IsActive(character, progid)
+	end
 
-if CLIENT then
-	net.Receive("progression_sync_receive", function(len)
-		local tbl = net.ReadTable()
+	function ix.progression.InvokeProgressionLevel(character, progid, level)
+		local definition = ix.progression.definitions[progid]
+		local callback = definition and definition.progressfunctions and definition.progressfunctions[level]
+		if (not callback or ix.progression.GetLine(character, progid).hasfuncrun[tostring(level)]) then return end
+		-- Mark before calling out so repeated requests cannot run this threshold twice.
+		UpdateLine(character, progid, function(line) line.hasfuncrun[tostring(level)] = true end)
+		callback:OnRun(character)
+	end
 
-		ix.progression.status = tbl
-	end)
+	function ix.progression.InvokeProgression(character, progid)
+		local definition = ix.progression.definitions[progid]
+		local value = ix.progression.GetProgressionValue(character, progid)
+		for level, threshold in ipairs(definition.progressthresholds or {}) do
+			if (value >= threshold) then ix.progression.InvokeProgressionLevel(character, progid, level) end
+		end
+	end
 
-	net.Receive("progressionforeign_sync_receive", function(len)
-		local tbl = net.ReadTable()
+	function ix.progression.SetProgressionValue(character, progid, amount)
+		if (not CanAdvance(character, progid) or not isnumber(amount) or amount ~= amount or amount == math.huge or amount == -math.huge) then return false end
+		local definition = ix.progression.definitions[progid]
+		local thresholds = definition.progressthresholds or {}
+		local final = thresholds[#thresholds]
+		amount = math.max(0, final and math.min(amount, final) or amount)
+		UpdateLine(character, progid, function(line) line.value = amount end)
+		ix.progression.InvokeProgression(character, progid)
+		if (final and amount >= final) then ix.progression.SetCompleted(character, progid) end
+		character:Save()
+		return true
+	end
 
-		ix.progression.foreignstatus = tbl
-	end)
+	function ix.progression.AddProgressionValue(character, progid, amount)
+		if (not isnumber(amount)) then return false end
+		return ix.progression.SetProgressionValue(character, progid, ix.progression.GetProgressionValue(character, progid) + amount)
+	end
 
-else
-	util.AddNetworkString( "progression_sync" )
-	util.AddNetworkString( "progression_sync_receive" )
-	util.AddNetworkString( "progressionforeign_sync_receive" )
+	-- Retain the historical spelling for extensions, with the new owner argument.
+	ix.progression.AddProgessionValue = ix.progression.AddProgressionValue
 
-	net.Receive("progression_sync", function(len, pl)
-		net.Start("progression_sync_receive")
-			net.WriteTable(ix.progression.status)
-		net.Broadcast()
-		
-		net.Start("progressionforeign_sync_receive")
-			net.WriteTable(ix.progression.foreignstatus)
-		net.Broadcast()
-	end)
+	function ix.progression.RemoveProgressionValue(character, progid, amount)
+		if (not isnumber(amount)) then return false end
+		return ix.progression.AddProgressionValue(character, progid, -amount)
+	end
+
+	function ix.progression.AddComplexProgressionValue(character, progid, data)
+		if (not CanAdvance(character, progid) or not istable(data)) then return false end
+		local itemid, amount = data[1], data[2]
+		local required = ix.progression.GetComplexProgressionReqs(progid)[itemid]
+		if (not required or not isnumber(amount) or amount ~= amount or amount <= 0 or amount == math.huge) then return false end
+		local line = ix.progression.GetLine(character, progid)
+		amount = math.min(math.floor(amount), required - (line.complexData[itemid] or 0))
+		if (amount <= 0) then return false end
+		line.complexData[itemid] = (line.complexData[itemid] or 0) + amount
+		local completed = true
+		for id, count in pairs(ix.progression.GetComplexProgressionReqs(progid)) do
+			if ((line.complexData[id] or 0) < count) then completed = false end
+		end
+		UpdateLine(character, progid, function(stored)
+			stored.complexData = line.complexData
+			if (completed) then stored.completed = true stored.active = false end
+		end)
+		if (completed) then
+			ix.progression.SetCompleted(character, progid)
+			local definition = ix.progression.definitions[progid]
+			if (definition.OnComplete) then definition.OnComplete(character) end
+		end
+		return amount
+	end
+
+	-- The server derives the accepted quantity and rewards from inventory state.
+	function ix.progression.TurnIn(client, target, progid, itemid)
+		local character = client:GetCharacter()
+		local definition = ix.progression.definitions[progid]
+		if (not character or not IsValid(target) or target:GetClass() ~= "ix_vendor_adv" or not definition
+			or target:GetDisplayName() ~= definition.keyNpc or client:GetPos():DistToSqr(target:GetPos()) > 192 * 192
+			or not target:CanAccess(client) or not CanAdvance(character, progid)) then return false end
+		local required = ix.progression.GetComplexProgressionReqs(progid)[itemid]
+		if (not required) then return false end
+		local remaining = required - (ix.progression.GetComplexProgressionValue(character, progid)[itemid] or 0)
+		local item = character:GetInventory():HasItem(itemid)
+		if (not item or remaining <= 0) then return false end
+		local available = item:GetData("quantity", item.quantity or 1)
+		if (not isnumber(available) or available ~= available or available == math.huge) then return false end
+		local amount = math.floor(math.min(available, remaining))
+		if (amount <= 0) then return false end
+		local reputation, money = ix.util.GetValueFromProgressionTurnin(item, amount)
+		-- Consume before running completion callbacks or giving rewards.
+		if (amount == available) then
+			if (item:Remove() == false) then return false end
+		else
+			item:SetData("quantity", available - amount)
+		end
+		ix.progression.AddComplexProgressionValue(character, progid, {itemid, amount})
+		client:addReputation(reputation)
+		character:GiveMoney(money)
+		ix.dialogue.notifyReputationReceive(client, reputation)
+		ix.dialogue.notifyMoneyReceive(client, money)
+		character:Save()
+		return true
+	end
 end

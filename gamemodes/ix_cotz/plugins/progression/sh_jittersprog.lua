@@ -6,9 +6,13 @@ ix.progression.Register("jittersItemDelivery_medical1", {
 	keyNpc = "'Jitters'",
 	defaultActive = true,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Jitters'", args = {"medic_medkit_1", nil, 10, "SELLANDBUY", 10, 1, 10}},
+		{npc = "'Jitters'", args = {"medic_medkit_2", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
+	nextProgressions = {"jittersItemDelivery_medical2"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["jittersItemDelivery_medical1"] = ix.progression.status["jittersItemDelivery_medical1"] or {}
-		local dat = status or ix.progression.status["jittersItemDelivery_medical1"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -28,67 +32,18 @@ ix.progression.Register("jittersItemDelivery_medical1", {
 
             ["drug_caffeine"] = 10,
 			["drug_painkillers"] = 10,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["jittersItemDelivery_medical1"].complexData = ix.progression.status["jittersItemDelivery_medical1"].complexData or {}
-		ix.progression.status["jittersItemDelivery_medical1"].complexData[item] = ix.progression.status["jittersItemDelivery_medical1"].complexData[item] or 0
-		ix.progression.status["jittersItemDelivery_medical1"].complexData[item] = ix.progression.status["jittersItemDelivery_medical1"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["jittersItemDelivery_medical1"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["jittersItemDelivery_medical1"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["jittersItemDelivery_medical1"].complexData[item] = ix.progression.status["jittersItemDelivery_medical1"].complexData[item] or 0
-			if amt > ix.progression.status["jittersItemDelivery_medical1"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Jitters'"
-				local message = "Jitters here. Thanks for the... uhm... medication. As a reward I have more medical equipment in stock."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Jitters'")
-			if (npc) then
-				npc:AddItemToList("medic_medkit_1", nil, 10, "SELLANDBUY", 10, 1, 10)
-				npc:AddItemToList("medic_medkit_2", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-			ix.progression.SetCompleted("jittersItemDelivery_medical1", true)
-            ix.progression.SetActive("jittersItemDelivery_medical2", true)
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Jitters'"
+			local message = "Jitters here. Thanks for the... uhm... medication. As a reward I have more medical equipment in stock."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
 
 ix.progression.Register("jittersItemDelivery_medical2", {
 	name = "Due Treatment 2",
@@ -96,9 +51,14 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 	keyNpc = "'Jitters'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Jitters'", args = {"medic_bandage_2", nil, 10, "SELLANDBUY", 10, 1, 10}},
+		{npc = "'Jitters'", args = {"medic_medkit_3", nil, 10, "SELLANDBUY", 10, 1, 10}},
+		{npc = "'Jitters'", args = {"medic_antirad_1", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
+	nextProgressions = {"jittersItemDelivery_medical3"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["jittersItemDelivery_medical2"] = ix.progression.status["jittersItemDelivery_medical2"] or {}
-		local dat = status or ix.progression.status["jittersItemDelivery_medical2"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -120,68 +80,18 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 
 			["drug_mints"] = 200,
 			["drug_morphine"] = 10,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["jittersItemDelivery_medical2"].complexData = ix.progression.status["jittersItemDelivery_medical2"].complexData or {}
-		ix.progression.status["jittersItemDelivery_medical2"].complexData[item] = ix.progression.status["jittersItemDelivery_medical2"].complexData[item] or 0
-		ix.progression.status["jittersItemDelivery_medical2"].complexData[item] = ix.progression.status["jittersItemDelivery_medical2"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["jittersItemDelivery_medical2"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["jittersItemDelivery_medical2"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["jittersItemDelivery_medical2"].complexData[item] = ix.progression.status["jittersItemDelivery_medical2"].complexData[item] or 0
-			if amt > ix.progression.status["jittersItemDelivery_medical2"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Jitters'"
-				local message = "Jitters here. Thanks again for your help. As a reward I have more medical equipment in stock. Come see me again soon!"
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Jitters'")
-			if (npc) then
-                npc:AddItemToList("medic_bandage_2", nil, 10, "SELLANDBUY", 10, 1, 10)
-				npc:AddItemToList("medic_medkit_3", nil, 10, "SELLANDBUY", 10, 1, 10)
-				npc:AddItemToList("medic_antirad_1", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-			ix.progression.SetCompleted("jittersItemDelivery_medical2", true)
-            ix.progression.SetActive("jittersItemDelivery_medical3", true)
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Jitters'"
+			local message = "Jitters here. Thanks again for your help. As a reward I have more medical equipment in stock. Come see me again soon!"
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
 
 ix.progression.Register("jittersItemDelivery_medical3", {
 	name = "Due Treatment 3",
@@ -189,9 +99,13 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 	keyNpc = "'Jitters'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Jitters'", args = {"medic_bandage_3", nil, 10, "SELLANDBUY", 10, 1, 10}},
+		{npc = "'Jitters'", args = {"medic_medkit_4", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
+	nextProgressions = {"jittersItemDelivery_medical4"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["jittersItemDelivery_medical3"] = ix.progression.status["jittersItemDelivery_medical3"] or {}
-		local dat = status or ix.progression.status["jittersItemDelivery_medical3"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -211,67 +125,18 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 			["drug_cigarette_6"] = 30,
 
 			["drug_marijuana"] = 10,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["jittersItemDelivery_medical3"].complexData = ix.progression.status["jittersItemDelivery_medical3"].complexData or {}
-		ix.progression.status["jittersItemDelivery_medical3"].complexData[item] = ix.progression.status["jittersItemDelivery_medical3"].complexData[item] or 0
-		ix.progression.status["jittersItemDelivery_medical3"].complexData[item] = ix.progression.status["jittersItemDelivery_medical3"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["jittersItemDelivery_medical3"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["jittersItemDelivery_medical3"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["jittersItemDelivery_medical3"].complexData[item] = ix.progression.status["jittersItemDelivery_medical3"].complexData[item] or 0
-			if amt > ix.progression.status["jittersItemDelivery_medical3"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Jitters'"
-				local message = "Jitters here. I have a stock of army syrette kits and new bandages for you."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Jitters'")
-			if (npc) then
-                npc:AddItemToList("medic_bandage_3", nil, 10, "SELLANDBUY", 10, 1, 10)
-				npc:AddItemToList("medic_medkit_4", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-			ix.progression.SetCompleted("jittersItemDelivery_medical3", true)
-            ix.progression.SetActive("jittersItemDelivery_medical4", true)
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Jitters'"
+			local message = "Jitters here. I have a stock of army syrette kits and new bandages for you."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
 
 ix.progression.Register("jittersItemDelivery_medical4", {
 	name = "Due Treatment 4",
@@ -279,9 +144,13 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 	keyNpc = "'Jitters'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Jitters'", args = {"medic_medkit_5", nil, 10, "SELLANDBUY", 10, 1, 10}},
+		{npc = "'Jitters'", args = {"medic_medkit_6", nil, 10, "SELLANDBUY", 10, 1, 10}},
+		{npc = "'Jitters'", args = {"medic_antirad_2", nil, 10, "SELLANDBUY", 10, 1, 10}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["jittersItemDelivery_medical4"] = ix.progression.status["jittersItemDelivery_medical4"] or {}
-		local dat = status or ix.progression.status["jittersItemDelivery_medical4"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -299,63 +168,15 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 		local itemids = {
             ["drug_cigar"] = 20,
 			["drug_cocaine"] = 10,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["jittersItemDelivery_medical4"].complexData = ix.progression.status["jittersItemDelivery_medical4"].complexData or {}
-		ix.progression.status["jittersItemDelivery_medical4"].complexData[item] = ix.progression.status["jittersItemDelivery_medical4"].complexData[item] or 0
-		ix.progression.status["jittersItemDelivery_medical4"].complexData[item] = ix.progression.status["jittersItemDelivery_medical4"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["jittersItemDelivery_medical4"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["jittersItemDelivery_medical4"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["jittersItemDelivery_medical4"].complexData[item] = ix.progression.status["jittersItemDelivery_medical4"].complexData[item] or 0
-			if amt > ix.progression.status["jittersItemDelivery_medical4"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Jitters'"
-				local message = "Jitters here. I have a stock of scientist stuff. Don't tell them!"
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Jitters'")
-			if (npc) then
-                npc:AddItemToList("medic_medkit_5", nil, 10, "SELLANDBUY", 10, 1, 10)
-				npc:AddItemToList("medic_medkit_6", nil, 10, "SELLANDBUY", 10, 1, 10)
-				npc:AddItemToList("medic_antirad_2", nil, 10, "SELLANDBUY", 10, 1, 10)
-			end
-
-			ix.progression.SetCompleted("jittersItemDelivery_medical4", true)
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Jitters'"
+			local message = "Jitters here. I have a stock of scientist stuff. Don't tell them!"
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })

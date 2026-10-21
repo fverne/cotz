@@ -1,18 +1,17 @@
 local map = "rp_marsh_cs"
 
-----------
--- Medical
-----------
-
 ix.progression.Register("spicylemonItemDelivery_Medical1", {
 	name = "Medical Imports 1",
 	description = "Spicy Lemon is interested in getting a side project going.",
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = true,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"drug_mints", nil, 1, "SELLANDBUY", 1, 4, 1}}
+	},
+	nextProgressions = {"spicylemonItemDelivery_Medical2"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["spicylemonItemDelivery_Medical1"] = ix.progression.status["spicylemonItemDelivery_Medical1"] or {}
-		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical1"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -29,63 +28,16 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 	GetItemIds = function()
 		local itemids = {
 			["meal_tushkano"] = 15,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["spicylemonItemDelivery_Medical1"].complexData = ix.progression.status["spicylemonItemDelivery_Medical1"].complexData or {}
-		ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item] or 0
-		ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["spicylemonItemDelivery_Medical1"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["spicylemonItemDelivery_Medical1"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item] or 0
-			if amt > ix.progression.status["spicylemonItemDelivery_Medical1"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Spicy Lemon'"
-				local message = "My laboratory is online and I now offer common breath mints. They are not much, but they are handy for radiation removal in a pinch."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
-			if (npc) then
-				npc:AddItemToList("drug_mints", nil, 1, "SELLANDBUY", 1, 4, 1)
-			end
-
-			ix.progression.SetCompleted("spicylemonItemDelivery_Medical1", true)
-			ix.progression.SetActive("spicylemonItemDelivery_Medical2", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Spicy Lemon'"
+			local message = "My laboratory is online and I now offer common breath mints. They are not much, but they are handy for radiation removal in a pinch."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
 
@@ -95,9 +47,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"drug_caffeine", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"spicylemonItemDelivery_Medical3", "spicylemonItemDelivery_Food"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["spicylemonItemDelivery_Medical2"] = ix.progression.status["spicylemonItemDelivery_Medical2"] or {}
-		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical2"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -114,67 +69,18 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 	GetItemIds = function()
 		local itemids = {
 			["meal_flesh"] = 65,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["spicylemonItemDelivery_Medical2"].complexData = ix.progression.status["spicylemonItemDelivery_Medical2"].complexData or {}
-		ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item] or 0
-		ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["spicylemonItemDelivery_Medical2"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["spicylemonItemDelivery_Medical2"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item] or 0
-			if amt > ix.progression.status["spicylemonItemDelivery_Medical2"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Spicy Lemon'"
-				local message = "I now carry caffeine tablets for those stalkers wanting a little extra stamina in their travels. Come and see me."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
-			if (npc) then
-				npc:AddItemToList("drug_caffeine", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("spicylemonItemDelivery_Medical2", true)
-			ix.progression.SetActive("spicylemonItemDelivery_Medical3", true) 
-			ix.progression.SetActive("technutItemDelivery_Food", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Spicy Lemon'"
+			local message = "I now carry caffeine tablets for those stalkers wanting a little extra stamina in their travels. Come and see me."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
 
 ix.progression.Register("spicylemonItemDelivery_Medical3", {
 	name = "Medical Imports 3",
@@ -182,9 +88,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"medic_psyheal_1", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"spicylemonItemDelivery_Medical4", "spicylemonItemDelivery_Vodka"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["spicylemonItemDelivery_Medical3"] = ix.progression.status["spicylemonItemDelivery_Medical3"] or {}
-		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical3"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -201,67 +110,18 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 	GetItemIds = function()
 		local itemids = {
 			["meal_boar"] = 165,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["spicylemonItemDelivery_Medical3"].complexData = ix.progression.status["spicylemonItemDelivery_Medical3"].complexData or {}
-		ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item] or 0
-		ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["spicylemonItemDelivery_Medical3"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["spicylemonItemDelivery_Medical3"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item] or 0
-			if amt > ix.progression.status["spicylemonItemDelivery_Medical3"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Spicy Lemon'"
-				local message = "I have begun mixing batches of Modafine; though it is harsh on the system, it is a great anti-psy drug."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
-			if (npc) then
-				npc:AddItemToList("medic_psyheal_1", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("spicylemonItemDelivery_Medical3", true)
-			ix.progression.SetActive("spicylemonItemDelivery_Medical4", true) 
-			ix.progression.SetActive("technutItemDelivery_Vodka", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Spicy Lemon'"
+			local message = "I have begun mixing batches of Modafine; though it is harsh on the system, it is a great anti-psy drug."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
 
 ix.progression.Register("spicylemonItemDelivery_Medical4", {
 	name = "Medical Imports 4",
@@ -269,9 +129,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical4", {
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"medic_antipsychotic_1", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"spicylemonItemDelivery_Medical5"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["spicylemonItemDelivery_Medical4"] = ix.progression.status["spicylemonItemDelivery_Medical4"] or {}
-		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical4"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -288,67 +151,18 @@ ix.progression.Register("spicylemonItemDelivery_Medical4", {
 	GetItemIds = function()
 		local itemids = {
 			["meal_cat"] = 190,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["spicylemonItemDelivery_Medical4"].complexData = ix.progression.status["spicylemonItemDelivery_Medical4"].complexData or {}
-		ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item] or 0
-		ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["spicylemonItemDelivery_Medical4"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["spicylemonItemDelivery_Medical4"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item] or 0
-			if amt > ix.progression.status["spicylemonItemDelivery_Medical4"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Spicy Lemon'"
-				local message = "I now carry Asenapine tablets. They are useful for lowering the effect of psy fields and Controller attacks."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
-			if (npc) then
-				npc:AddItemToList("medic_antipsychotic_1", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("spicylemonItemDelivery_Medical4", true)
-			ix.progression.SetActive("spicylemonItemDelivery_Medical5", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Spicy Lemon'"
+			local message = "I now carry Asenapine tablets. They are useful for lowering the effect of psy fields and Controller attacks."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
-
 
 ix.progression.Register("spicylemonItemDelivery_Medical5", {
 	name = "Medical Imports 5",
@@ -356,9 +170,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"drug_painkillers", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"spicylemonItemDelivery_Medical6", "spicylemonItemDelivery_Spirits"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["spicylemonItemDelivery_Medical5"] = ix.progression.status["spicylemonItemDelivery_Medical5"] or {}
-		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical5"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -375,68 +192,18 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 	GetItemIds = function()
 		local itemids = {
 			["meal_snork"] = 190,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["spicylemonItemDelivery_Medical5"].complexData = ix.progression.status["spicylemonItemDelivery_Medical5"].complexData or {}
-		ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item] or 0
-		ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["spicylemonItemDelivery_Medical5"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["spicylemonItemDelivery_Medical5"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item] or 0
-			if amt > ix.progression.status["spicylemonItemDelivery_Medical5"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Spicy Lemon'"
-				local message = "I now carry painkillers; more specifically, Codeine tablets. If you find yourself aching and desire a pick me up, come and see me."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
-			if (npc) then
-				npc:AddItemToList("drug_painkillers", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("spicylemonItemDelivery_Medical5", true)
-			ix.progression.SetActive("spicylemonItemDelivery_Medical6", true) 
-			ix.progression.SetActive("technutItemDelivery_Spirits", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Spicy Lemon'"
+			local message = "I now carry painkillers; more specifically, Codeine tablets. If you find yourself aching and desire a pick me up, come and see me."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
-
 
 ix.progression.Register("spicylemonItemDelivery_Medical6", {
 	name = "Medical Imports 6",
@@ -444,9 +211,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical6", {
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"drug_adrenaline", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"spicylemonItemDelivery_Medical7"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["spicylemonItemDelivery_Medical6"] = ix.progression.status["spicylemonItemDelivery_Medical6"] or {}
-		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical6"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -463,66 +233,18 @@ ix.progression.Register("spicylemonItemDelivery_Medical6", {
 	GetItemIds = function()
 		local itemids = {
 			["meal_bloodsucker"] = 190,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["spicylemonItemDelivery_Medical6"].complexData = ix.progression.status["spicylemonItemDelivery_Medical6"].complexData or {}
-		ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item] or 0
-		ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["spicylemonItemDelivery_Medical6"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["spicylemonItemDelivery_Medical6"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item] or 0
-			if amt > ix.progression.status["spicylemonItemDelivery_Medical6"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Spicy Lemon'"
-				local message = "I now offer Adrenaline autoinjectors for sale; these handy little pens should get you back in the fight and keep you in it for some time."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
-			if (npc) then
-				npc:AddItemToList("drug_adrenaline", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("spicylemonItemDelivery_Medical6", true)
-			ix.progression.SetActive("spicylemonItemDelivery_Medical7", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Spicy Lemon'"
+			local message = "I now offer Adrenaline autoinjectors for sale; these handy little pens should get you back in the fight and keep you in it for some time."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
 
 ix.progression.Register("spicylemonItemDelivery_Medical7", {
 	name = "Medical Imports 7",
@@ -530,9 +252,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"drug_morphine", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"spicylemonItemDelivery_Brew"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["spicylemonItemDelivery_Medical7"] = ix.progression.status["spicylemonItemDelivery_Medical7"] or {}
-		local dat = status or ix.progression.status["spicylemonItemDelivery_Medical7"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -549,70 +274,18 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 	GetItemIds = function()
 		local itemids = {
 			["meal_sprig"] = 100,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["spicylemonItemDelivery_Medical7"].complexData = ix.progression.status["spicylemonItemDelivery_Medical7"].complexData or {}
-		ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item] or 0
-		ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["spicylemonItemDelivery_Medical7"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["spicylemonItemDelivery_Medical7"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item] or 0
-			if amt > ix.progression.status["spicylemonItemDelivery_Medical7"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Spicy Lemon'"
-				local message = "I now offer Morphine injectors. Please use them responsibly; I would hate to see anyone overdose..."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
-			if (npc) then
-				npc:AddItemToList("drug_morphine", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("spicylemonItemDelivery_Medical7", true)
-			ix.progression.SetActive("technutItemDelivery_Brew", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Spicy Lemon'"
+			local message = "I now offer Morphine injectors. Please use them responsibly; I would hate to see anyone overdose..."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
-
--------------------
--- Food and Alcohol
--------------------
 
 ix.progression.Register("spicylemonItemDelivery_Food", {
 	name = "Food for the poor",
@@ -620,9 +293,19 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = true,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"drink_bottlebeer_6", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Spicy Lemon'", args = {"drink_canwater", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Spicy Lemon'", args = {"drink_energydrink_4", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Spicy Lemon'", args = {"drink_energydrink_2", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Spicy Lemon'", args = {"food_cheese_2", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Spicy Lemon'", args = {"food_nuts_2", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Spicy Lemon'", args = {"food_can_tomato", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Spicy Lemon'", args = {"food_can_tushonka", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
+	nextProgressions = {"spicylemonItemDelivery_Vodka"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["spicylemonItemDelivery_Food"] = ix.progression.status["spicylemonItemDelivery_Food"] or {}
-		local dat = status or ix.progression.status["spicylemonItemDelivery_Food"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -639,73 +322,18 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 	GetItemIds = function()
 		local itemids = {
 			["drink_energydrink_4"] = 40,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["spicylemonItemDelivery_Food"].complexData = ix.progression.status["spicylemonItemDelivery_Food"].complexData or {}
-		ix.progression.status["spicylemonItemDelivery_Food"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Food"].complexData[item] or 0
-		ix.progression.status["spicylemonItemDelivery_Food"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Food"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["spicylemonItemDelivery_Food"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["spicylemonItemDelivery_Food"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["spicylemonItemDelivery_Food"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Food"].complexData[item] or 0
-			if amt > ix.progression.status["spicylemonItemDelivery_Food"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Spicy Lemon'"
-				local message = "I now offer purified food and drink from outside the Zone."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
-			if (npc) then
-				npc:AddItemToList("drink_bottlebeer_6", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("drink_canwater", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("drink_energydrink_4", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("drink_energydrink_2", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("food_cheese_2", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("food_nuts_2", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("food_can_tomato", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("food_can_tushonka", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("spicylemonItemDelivery_Food", true)
-			ix.progression.SetActive("spicylemonItemDelivery_Vodka", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Spicy Lemon'"
+			local message = "I now offer purified food and drink from outside the Zone."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
 
 ix.progression.Register("spicylemonItemDelivery_Vodka", {
 	name = "Drinks for the poor",
@@ -713,9 +341,14 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"drink_vodka_4", nil, 5, "SELLANDBUY", 5, 1, 5}},
+		{npc = "'Spicy Lemon'", args = {"drink_vodka_5", nil, 1, "SELLANDBUY", 1, 6, 1}},
+		{npc = "'Spicy Lemon'", args = {"drink_vodka_6", nil, 1, "SELLANDBUY", 1, 6, 1}}
+	},
+	nextProgressions = {"spicylemonItemDelivery_Spirits"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["spicylemonItemDelivery_Vodka"] = ix.progression.status["spicylemonItemDelivery_Vodka"] or {}
-		local dat = status or ix.progression.status["spicylemonItemDelivery_Vodka"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -732,68 +365,18 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 	GetItemIds = function()
 		local itemids = {
 			["drink_energydrink_5"] = 40,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["spicylemonItemDelivery_Vodka"].complexData = ix.progression.status["spicylemonItemDelivery_Vodka"].complexData or {}
-		ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item] or 0
-		ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["spicylemonItemDelivery_Vodka"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["spicylemonItemDelivery_Vodka"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item] or 0
-			if amt > ix.progression.status["spicylemonItemDelivery_Vodka"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Spicy Lemon'"
-				local message = "The first imports of high shelf local vodka have arrived. Come and see the brands for yourselves."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
-			if (npc) then
-				npc:AddItemToList("drink_vodka_4", nil, 5, "SELLANDBUY", 5, 1, 5)
-				npc:AddItemToList("drink_vodka_5", nil, 1, "SELLANDBUY", 1, 6, 1)
-				npc:AddItemToList("drink_vodka_6", nil, 1, "SELLANDBUY", 1, 6, 1)
-			end
-
-			ix.progression.SetCompleted("spicylemonItemDelivery_Vodka", true)
-			ix.progression.SetActive("spicylemonItemDelivery_Spirits", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Spicy Lemon'"
+			local message = "The first imports of high shelf local vodka have arrived. Come and see the brands for yourselves."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
 
 ix.progression.Register("spicylemonItemDelivery_Spirits", {
 	name = "Drinks for the rich",
@@ -801,9 +384,15 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"drink_spirit_1", nil, 1, "SELLANDBUY", 1, 6, 1}},
+		{npc = "'Spicy Lemon'", args = {"drink_spirit_2", nil, 1, "SELLANDBUY", 1, 6, 1}},
+		{npc = "'Spicy Lemon'", args = {"drink_spirit_3", nil, 1, "SELLANDBUY", 1, 6, 1}},
+		{npc = "'Spicy Lemon'", args = {"drink_wine", nil, 1, "SELLANDBUY", 1, 6, 1}}
+	},
+	nextProgressions = {"spicylemonItemDelivery_Brew"},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["spicylemonItemDelivery_Spirits"] = ix.progression.status["spicylemonItemDelivery_Spirits"] or {}
-		local dat = status or ix.progression.status["spicylemonItemDelivery_Spirits"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -820,70 +409,18 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 	GetItemIds = function()
 		local itemids = {
 			["drink_energydrink_6"] = 40,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["spicylemonItemDelivery_Spirits"].complexData = ix.progression.status["spicylemonItemDelivery_Spirits"].complexData or {}
-		ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item] or 0
-		ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["spicylemonItemDelivery_Spirits"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["spicylemonItemDelivery_Spirits"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item] or 0
-			if amt > ix.progression.status["spicylemonItemDelivery_Spirits"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Spicy Lemon'"
-				local message = "Fine international spirits have just arrived from the Cordon. Grab a bottle and kick back with your friends."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
-			if (npc) then
-				npc:AddItemToList("drink_spirit_1", nil, 1, "SELLANDBUY", 1, 6, 1)
-				npc:AddItemToList("drink_spirit_2", nil, 1, "SELLANDBUY", 1, 6, 1)
-				npc:AddItemToList("drink_spirit_3", nil, 1, "SELLANDBUY", 1, 6, 1)
-                npc:AddItemToList("drink_wine", nil, 1, "SELLANDBUY", 1, 6, 1)
-			end
-
-			ix.progression.SetCompleted("spicylemonItemDelivery_Spirits", true)
-			ix.progression.SetActive("spicylemonItemDelivery_Brew", true) 
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Spicy Lemon'"
+			local message = "Fine international spirits have just arrived from the Cordon. Grab a bottle and kick back with your friends."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })
-
-
 
 ix.progression.Register("spicylemonItemDelivery_Brew", {
 	name = "Drinks for the smart",
@@ -891,9 +428,11 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 	keyNpc = "'Spicy Lemon'",
 	defaultActive = false,
 	progMap = map,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"miscaid_swampbrew", nil, 5, "SELLANDBUY", 5, 1, 5}}
+	},
 	BuildResponse = function(self, npcname, status)
-		ix.progression.status["spicylemonItemDelivery_Brew"] = ix.progression.status["spicylemonItemDelivery_Brew"] or {}
-		local dat = status or ix.progression.status["spicylemonItemDelivery_Brew"].complexData
+		local dat = status or {}
 
 		local itemids = self:GetItemIds()
 
@@ -913,61 +452,15 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 			["meal_pseudogiant"] = 50,
 			["meal_karlik"] = 50,
 			["meal_spider"] = 50,
-		}	
+		}
 
 		return itemids
 	end,
-	progressfunctions = {
-		[1] = {
-			OnRun = function()
-				
-			end,
-			RunOnce = false,
-		},
-	},
-	progressthresholds = {
-		[1] = 1,
-	},
-	fnAddComplexProgression = function(dat, playername)
-		local item = dat[1]
-		local amt = dat[2]
-
-		ix.progression.status["spicylemonItemDelivery_Brew"].complexData = ix.progression.status["spicylemonItemDelivery_Brew"].complexData or {}
-		ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item] or 0
-		ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item]+amt
-	end,
-	fnGetComplexProgression = function()
-		return ix.progression.status["spicylemonItemDelivery_Brew"].complexData
-	end,
-	fnCheckComplexProgression = function()
-		local finished =  ix.progression.definitions["spicylemonItemDelivery_Brew"]:GetItemIds()
-
-		local isdone = true
-
-		for item, amt in pairs(finished) do
-			ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item] = ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item] or 0
-			if amt > ix.progression.status["spicylemonItemDelivery_Brew"].complexData[item] then isdone = false end
-		end
-
-		if isdone then
-
-			timer.Simple(60, function()
-				local name = "'Spicy Lemon'"
-				local message = "Though it has taken some experimentation, I have finished a medicinal brew that I believe will be perfect for the Zone's conditions... although the taste leaves something to be desired."
-				ix.util.HandleChat(name, message)
-				ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-					name = name,
-					message = message
-				})
-			end)
-
-			local npc = ix.progression.GetNPCFromName("'Spicy Lemon'")
-			if (npc) then
-				npc:AddItemToList("miscaid_swampbrew", nil, 5, "SELLANDBUY", 5, 1, 5)
-			end
-
-			ix.progression.SetCompleted("spicylemonItemDelivery_Brew", true)
-
-		end
+	OnComplete = function(character)
+		timer.Simple(60, function()
+			local name = "'Spicy Lemon'"
+			local message = "Though it has taken some experimentation, I have finished a medicinal brew that I believe will be perfect for the Zone's conditions... although the taste leaves something to be desired."
+			ix.progression.Notify(character, name, message)
+		end)
 	end
 })

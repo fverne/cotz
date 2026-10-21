@@ -209,17 +209,11 @@ if SERVER then
 
 		self:spawnEvent(eventpoint, spawn)
 		
-		if ix.progression.IsCompleted("muteItemDelivery_Broadcast") then
-			self.pdachatter = true
-		else
-			self.pdachatter = false
-		end
-
-		if self.pdachatter == true then
-			if math.Rand(1,100) <= self.pdachatterchance then
-				for k, ply in pairs( player.GetAll() ) do
-					ix.chat.Send(ply, "eventpdainternal", Format(spawn.pdabroadcast, eventpoint[2]), true, ply)
-					 // ply:EmitSound( "stalkersound/pda/pda.wav", 50, 100, 1, CHAN_AUTO )
+		if (math.Rand(1, 100) <= self.pdachatterchance) then
+			for _, ply in ipairs(player.GetAll()) do
+				local character = ply:GetCharacter()
+				if (character and ix.progression.IsCompleted(character, "muteItemDelivery_Broadcast")) then
+					ix.chat.Send(ply, "eventpdainternal", Format(spawn.pdabroadcast, eventpoint[2]), true, {ply})
 				end
 			end
 		end
