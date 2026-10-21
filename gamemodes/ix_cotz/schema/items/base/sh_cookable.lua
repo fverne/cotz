@@ -104,7 +104,7 @@ ITEM.functions.use = {
 			ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
 				player:SetHunger(hunger + item:GetHunger())
 				player:SetThirst(thirst + item:GetThirst())
-				player:UpdateHungerState(item.player)
+				player:UpdateHungerState(player)
 				item.blackScreenAction(item, player)
 			end)
 			return true

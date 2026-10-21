@@ -85,10 +85,10 @@ function ITEM:DecideFunction()
 					ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
 						player:SetHunger(hunger + item.hunger)
 						player:SetThirst(thirst + item.thirst)
-						player:UpdateHungerState(item.player)
+						player:UpdateHungerState(player)
 						item.blackScreenAction(item, player)
 						if item.alcohol > 0 then
-							item.player:IncreaseDrunkLevel(item.alcohol)
+							player:IncreaseDrunkLevel(item.alcohol)
 						end
 					end)
 				else
