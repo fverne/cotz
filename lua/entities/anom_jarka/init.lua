@@ -70,7 +70,6 @@ function ENT:Touch(ent)
 	timer.Create(self:EntIndex().."_jarka_sound_cooldown", 11, 1, function()
 		self:StopSound("jarka_blast")
 		self:StopParticles()
-		print("yes")
 		ParticleEffect("jarka_inactive", self:GetPos(), Angle(0,0,0), self)
 		self.ActiveOnce = true
 	end)
