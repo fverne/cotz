@@ -301,7 +301,11 @@ function ITEM:OnInstanced()
 	})
 	
 	if !self:GetData("attachments") then
-		self:SetData("attachments", self.miscSlots)
+		self:SetData("attachments", {
+			["exteriorSlots"] = {},
+			["interiorSlots"] = {},
+			["extraSlots"] = {},
+		})
 	end
 end
 
@@ -422,6 +426,7 @@ ITEM.functions.Equip = {
 
 		
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 6, function(ply) 
+			if item.invID != ply:GetCharacter():GetInventory():GetID() then return end
 
 			item:SetData("equip", true)
 			ply:AddPart(item.uniqueID, item)
@@ -488,15 +493,21 @@ ITEM.functions.detach = {
 	end,
 	OnRun = function(item, data)
 		if data[1] then
-			local curattach = item:GetData("attachments", item.miscSlots)
+			local curattach = item:GetData("attachments", table.Copy(item.miscSlots))
+			local removedAttachment = false
 			
 			for _, categories in pairs(curattach) do
 				for _, suitAttachment in pairs(categories) do
 					if suitAttachment == data[1] then
-						table.RemoveByValue(categories, suitAttachment)
+						removedAttachment = table.RemoveByValue(categories, suitAttachment)
 						break
 					end
 				end
+			end
+
+			if !removedAttachment then
+				item.player:Notify("You are detaching too fast!")
+				return false
 			end
 			
 			if not item.player:GetCharacter():GetInventory():Add(ix.armortables.attachments[data[1]].uID) then
@@ -511,7 +522,6 @@ ITEM.functions.detach = {
 			end
 
 			item:SetData("attachments", curattach)
-
 			-- Recalc resistances
 			item.player:RecalculateResistances()
 			ix.weight.Update(item.player:GetCharacter())

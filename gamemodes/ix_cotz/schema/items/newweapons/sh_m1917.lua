@@ -37,6 +37,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/khrcw2/doipack/w_sw1917.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-7.063, 5.647, 2.876),
 						["EditorExpand"] = true,
 						["UniqueID"] = "33589648235",

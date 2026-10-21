@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(14.98, -4.153, -1.175),
 						["Model"] = "models/weapons/w_shot_remington.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "7793798673",
 						["Bone"] = "spine 2",

@@ -40,6 +40,7 @@ ITEM.pacData = {
 						["Position"] = Vector(15.658203125, 0.03999999910593, -12.88525390625),
 						["Model"] = "models/weapons/arc9/darsu_eft/w_mp18.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "7682768276",
 						["Bone"] = "spine 2",

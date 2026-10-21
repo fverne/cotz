@@ -37,6 +37,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/cw2/pistols/w_contender.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-7.5, 2.084, 0.609),
 						["AngleOffset"] = Angle(0, -10.5, 0),
 						["EditorExpand"] = true,

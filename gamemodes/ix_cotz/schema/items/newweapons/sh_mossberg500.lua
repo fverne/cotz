@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(-2.502, -4.31, -2.254),
 						["Model"] = "models/weapons/w_shot_mossberg5.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "78798794673",
 						["Bone"] = "spine 2",

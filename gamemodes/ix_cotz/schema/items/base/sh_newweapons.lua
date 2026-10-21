@@ -240,6 +240,7 @@ ITEM.functions.Equip = {
 	icon = "icon16/stalker/equip.png",
 	OnRun = function(item)
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Equipping...", 4, function(ply) 
+			if item.invID != ply:GetCharacter():GetInventory():GetID() then return end
 			item:Equip(ply)
 		end)
 		return false

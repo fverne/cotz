@@ -126,7 +126,7 @@ ITEM.functions.use = {
 		end
 		
 		local slot = ix.armortables.attachments[item.attachName].slot
-		local targetAttach = target:GetData("attachments", target.miscSlots) or {}
+		local targetAttach = target:GetData("attachments", table.Copy(target.miscSlots)) or {}
 		local targetMiscSlotAttach = targetAttach[slot]
 		if targetMiscSlotAttach then
 			if #targetMiscSlotAttach >= target:GetData("maxMiscSlots", {["exteriorSlots"] = target.exteriorSlots,["interiorSlots"] = target.interiorSlots,["extraSlots"] = target.extraSlots})[slot] then
@@ -138,9 +138,8 @@ ITEM.functions.use = {
 		if( isfunction(ix.armortables.attachments[item.attachName].onAttach) ) then
 			ix.armortables.attachments[item.attachName].onAttach(client, target)
 		end
-
 		table.insert(targetMiscSlotAttach,item.attachName)
-		targetAttach[slot] = targetMiscSlotAttach
+		targetAttach[slot] = targetMiscSlotAttach -- Probably isn't required? Since the whole thing with tables is super weird
 
 		target:SetData("attachments", targetAttach)
 		client:Notify("Installed "..item.name.." on "..target.name)

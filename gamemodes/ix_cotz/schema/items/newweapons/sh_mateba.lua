@@ -39,6 +39,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/cwc_mateba/w_pist_mateba.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-9.679, 9.712, 0.126),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3589648235",

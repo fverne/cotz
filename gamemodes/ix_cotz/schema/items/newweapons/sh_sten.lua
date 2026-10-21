@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(6.518, -4.195, -2.685),
 						["Model"] = "models/weapons/w_smg_ste.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "8883945391",
 						["Bone"] = "spine 2",

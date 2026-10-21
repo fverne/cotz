@@ -16,12 +16,12 @@ ITEM.cookable = true
 ITEM.meattier = 1
 ITEM.meal = "drink_bottlewater"
 
+ITEM.message = "takes a swig of their "..ITEM.name.."."
 ITEM.sound = "stalkersound/inv_drink_beak.mp3"
 ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/bottlewaterdirty.png")
 
-ITEM:Hook("use", function(item)
-	item.player:AddBuff("debuff_radiation", 10, { amount = 0.25 })
-	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
-end)
+ITEM.blackScreenAction = function(item, player)
+	player:AddBuff("debuff_radiation", 10, { amount = 0.25 })
+end
 
 ITEM:DecideFunction()

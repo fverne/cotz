@@ -33,7 +33,7 @@ ITEM.functions.use = {
 		local quantity = item:GetData("quantity", item.quantity)
         local hunger = item.player:GetCharacter():GetData("hunger", 100)
         
-        player:SetHunger(hunger + 40)
+        item.player:SetHunger(hunger + 40)
 		
 		ix.chat.Send(item.player, "iteminternal", "injects himself with the "..item.name..".", false)
 		

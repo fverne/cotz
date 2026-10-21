@@ -13,6 +13,10 @@ ITEM.thirst = 0
 ITEM.empty = false
 ITEM.quantity = 1
 
+ITEM.message = nil
+
+ITEM.blackScreenAction = function(item, player) return end
+
 ITEM.weight = 0
 ITEM.flatweight = 0
 
@@ -71,19 +75,30 @@ function ITEM:DecideFunction()
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
 				local thirst = item.player:GetCharacter():GetData("thirst", 100)
 				local client = item.player
+				if not (hunger > 150 and item.hunger > 0) and not (thirst > 150 and item.thirst > 0) then
 
-				ix.util.PlayerPerformBlackScreenAction(item.player, "Drinking", 5, function(player) 
-					player:SetHunger(hunger + item.hunger)
-					player:SetThirst(thirst + item.thirst)
-				end)
+					client:EmitSound(item.sound or "items/battery_pickup.wav")
+					if item.message then
+						ix.chat.Send(client, "iteminternal", item.message, false)
+					end
+
+					ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
+						player:SetHunger(hunger + item.hunger)
+						player:SetThirst(thirst + item.thirst)
+						player:UpdateHungerState(item.player)
+						item.blackScreenAction(item, player)
+						if item.alcohol > 0 then
+							item.player:IncreaseDrunkLevel(item.alcohol)
+						end
+					end)
+				else
+					client:Notify("You are too full to drink that!")
+					return false
+				end
 
 				local quantity = item:GetData("quantity", item.quantity)
 				
 				item.player:UpdateThirstState(item.player)
-
-				if item.alcohol > 0 then
-					item.player:IncreaseDrunkLevel(item.alcohol)
-				end
 				
 				if item.empty then
 					local inv = item.player:GetCharacter():GetInventory()
@@ -110,11 +125,23 @@ function ITEM:DecideFunction()
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
 				local thirst = item.player:GetCharacter():GetData("thirst", 100)
 				local client = item.player
+				if not (hunger > 150 and item.hunger > 0) and not (thirst > 150 and item.thirst > 0) then
 
-				ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
-					player:SetHunger(hunger + item.hunger)
-					player:SetThirst(thirst + item.thirst)
-				end)
+					client:EmitSound(item.sound or "items/battery_pickup.wav")
+					if item.message then
+						ix.chat.Send(client, "iteminternal", item.message, false)
+					end
+
+					ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
+						player:SetHunger(hunger + item.hunger)
+						player:SetThirst(thirst + item.thirst)
+						player:UpdateHungerState(item.player)
+						item.blackScreenAction(item, player)
+					end)
+				else
+					client:Notify("You are too full to eat that!")
+					return false
+				end
 
 				local quantity = item:GetData("quantity", item.quantity)
 				item.player:UpdateHungerState(item.player)
@@ -143,11 +170,23 @@ function ITEM:DecideFunction()
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
 				local thirst = item.player:GetCharacter():GetData("thirst", 100)
 				local client = item.player
+				if not (hunger > 150 and item.hunger > 0) and not (thirst > 150 and item.thirst > 0) then
 
-				ix.util.PlayerPerformBlackScreenAction(item.player, "Consuming", 5, function(player) 
-					player:SetHunger(hunger + item.hunger)
-					player:SetThirst(thirst + item.thirst)
-				end)
+					client:EmitSound(item.sound or "items/battery_pickup.wav")
+					if item.message then
+						ix.chat.Send(client, "iteminternal", item.message, false)
+					end
+
+					ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
+						player:SetHunger(hunger + item.hunger)
+						player:SetThirst(thirst + item.thirst)
+						player:UpdateHungerState(item.player)
+						item.blackScreenAction(item, player)
+					end)
+				else
+					client:Notify("You are too full to consume that!")
+					return false
+				end
 
 				local quantity = item:GetData("quantity", item.quantity)
 				item.player:UpdateHungerState(item.player)

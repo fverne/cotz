@@ -106,7 +106,7 @@ function PANEL:addItem(uniqueID, listID, iteminstanceID)
 
 	if ((!listID or listID == "selling") and !IsValid(self.sellingList[uniqueID])
 	and ix.item.list[uniqueID]) then
-		if (data and data[VENDOR_MODE] and data[VENDOR_MODE] != VENDOR_BUYONLY) then
+		if (data and data[VENDOR_MODE] and data[VENDOR_MODE] != VENDOR_BUYONLY) or entity:GetSherpa() then
 			local item = self.sellingItems:Add("ixVendorAdvItem")
 			item:Setup(uniqueID)
 
@@ -134,7 +134,11 @@ function PANEL:removeItem(uniqueID, listID, iteminstanceID)
 		if (IsValid(self.sellingList[uniqueID])) then
 			self.sellingList[uniqueID].stock.curstock = math.max(self.sellingList[uniqueID].stock.curstock - 1,0)
 			self.sellingList[uniqueID].stock:SetText(string.format("Stock: %d/%d", self.sellingList[uniqueID].stock.curstock, ix.gui.vendor.entity.items[uniqueID][VENDOR_MAXSTOCK]))
-			--self.sellingList[uniqueID]:Remove()
+			
+			if self.sellingList[uniqueID].stock.curstock <= 0 then
+				self.sellingList[uniqueID]:Remove()
+			end
+			
 			self.sellingItems:InvalidateLayout()
 		end
 	end
@@ -197,12 +201,27 @@ end
 
 function PANEL:OnItemSelected(panel)
 	local price = self.entity:GetPrice(panel.item, panel.isLocal, panel.iteminstanceID)
+	local isSherpaClient = LocalPlayer():GetCharacter():HasSherpaVendor(self.entity:GetDisplayName())
+	
+	if !isSherpaClient then
+		if (panel.isLocal) then
+			self.vendorBuy:SetText(L"sell".." ("..ix.currency.Get(price)..")")
 
-	if (panel.isLocal) then
-		self.vendorBuy:SetText(L"sell".." ("..ix.currency.Get(price)..")")
+			if self.entity:GetSherpa() then
+				self.vendorBuy:SetText("You cannot sell to this vendor.")
+				self.vendorBuy:SetEnabled(false)
+			end
+		else
+			self.vendorSell:SetText(L"purchase".." ("..ix.currency.Get(price)..")")
+		end
 	else
-		self.vendorSell:SetText(L"purchase".." ("..ix.currency.Get(price)..")")
+		if (panel.isLocal) then
+			self.vendorBuy:SetText("Give to vendor")
+		else
+			self.vendorSell:SetText("Take from vendor")
+		end
 	end
+	
 end
 
 vgui.Register("ixVendorAdv", PANEL, "ixStalkerFrame")

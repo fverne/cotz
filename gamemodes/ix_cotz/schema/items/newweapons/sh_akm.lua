@@ -37,6 +37,7 @@ ITEM.pacData = {
 						["Angles"] = Angle(180, 0, 0),
 						["Model"] = "models/weapons/w_ops_ak47.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] =	Vector(11.522, -4.244, -1.16),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3543421491",

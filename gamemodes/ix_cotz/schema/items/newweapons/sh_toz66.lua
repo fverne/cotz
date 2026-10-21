@@ -39,6 +39,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Angles"] = Angle(0, 0, 180),
 						["Position"] = Vector(12.7, -4, -2.4),
 						["EditorExpand"] = true,

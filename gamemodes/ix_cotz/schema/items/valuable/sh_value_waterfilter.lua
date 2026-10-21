@@ -7,6 +7,6 @@ ITEM.width = 1
 ITEM.height = 2
 ITEM.price = 3400
 
-ITEM.flatweight = 2.100
+ITEM.flatweight = 0.950
 
 ITEM.img = ix.util.GetMaterial("vgui/hud/valuable/waterfilter.png")

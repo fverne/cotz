@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(11, -5.1, 0.1),
 						["Model"] = "models/weapons/tfa_ins2/wpn_mp27_w.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "2352355232",
 						["Bone"] = "spine 2",

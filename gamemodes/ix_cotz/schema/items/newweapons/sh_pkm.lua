@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(11.188, -4.175, -0.658),
 						["Model"] = "models/weapons/w_mach_pkmbenis.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "7923894673",
 						["Bone"] = "spine 2",

@@ -14,13 +14,12 @@ ITEM.WeightPerLevel = 0.131
 ITEM.meal = "meal_blinddog"
 
 ITEM.img = ix.util.GetMaterial("cotz/ui/icons/food_13.png")
-
+ITEM.message = "eats a bit of their "..ITEM.name.."."
 ITEM.sound = "stalkersound/inv_eat_mutant_food.mp3"
-ITEM:Hook("use", function(item)
-	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-	item.player:AddBuff("debuff_radiation", 10, { amount = 16/20 })
-	ix.chat.Send(item.player, "iteminternal", "eats a bit of their "..item.name..".", false)
-end)
+
+ITEM.blackScreenAction = function(item, player)
+	player:AddBuff("debuff_radiation", 10, { amount = 16/20 })
+end
 
 function ITEM:PopulateTooltipIndividual(tooltip)
 	if !self.entity then

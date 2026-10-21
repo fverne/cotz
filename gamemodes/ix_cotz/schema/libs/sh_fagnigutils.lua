@@ -55,6 +55,7 @@ function ix.util.PlayerActionInterrupt(player)
         player:ScreenFade(SCREENFADE.PURGE, Color(0, 0, 0, 250), 0.1, 0)
         player:ScreenFade(SCREENFADE.IN, Color(0, 0, 0, 250), 0.2, 0)
         player:SetNetVar("IsPoaching", false) -- in case we poach
+        player:SetNetVar("IsLooting", false) -- in case we loot
     end
 end
 

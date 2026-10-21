@@ -61,7 +61,7 @@ end
 
 
 -- draws buff icons, such as healing, psyblock, staminaregen with a white square background
-function ix.util.DrawBuffIcon(iconstring, posX, posY, sizeX, sizeY, col)
+function ix.util.DrawBuffIcon(iconstring, posX, posY, sizeX, sizeY, col, text)
     local background = ix.util.GetMaterial("stalker/ui/square.png", "noclamp smooth")
     local icon = ix.util.GetMaterial(iconstring, "noclamp smooth")
     local padding = sizeX * 0.1
@@ -76,4 +76,11 @@ function ix.util.DrawBuffIcon(iconstring, posX, posY, sizeX, sizeY, col)
     surface.SetMaterial(icon)
     surface.SetDrawColor(Color(0, 0, 0, 255))
     surface.DrawTexturedRect(posX, posY + padding, sizeX, sizeY - (padding * 2))
+    --draw centered text if provided 
+    if text then
+        surface.SetTextColor(255,255,255,255)
+        surface.SetFont("TargetIDSmall")
+        surface.SetTextPos( posX+sizeX/2-surface.GetTextSize(text)/2, posY+sizeY/2 )
+        surface.DrawText( text ) -- Draw the text
+    end
 end

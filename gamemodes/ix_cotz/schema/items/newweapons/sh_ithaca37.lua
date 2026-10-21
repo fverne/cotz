@@ -39,6 +39,7 @@ ITEM.pacData = {
 						["Position"] = Vector(2.253, -3.558, -4.24),
 						["Model"] = "models/khrcw2/doipack/w_ithaca37.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "ithaca37_1",
 						["Bone"] = "spine 2",

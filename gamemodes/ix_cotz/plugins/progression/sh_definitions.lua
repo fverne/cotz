@@ -112,7 +112,7 @@ hook.Add("ix_OnJobComplete", "smartass_rfTasks", function(client, npcidentifier,
 	end
 end)
 
-hook.Add("ix_OnJobComplete", "Computer_artifactTasks", function(client, npcidentifier, identifier)
+hook.Add("ix_OnJobComplete", "computer_artifactTasks", function(client, npcidentifier, identifier)
 	local iscorrecttasktype = false
 
 	local categories = {
@@ -1159,7 +1159,7 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 		if isdone then
 			ix.progression.SetCompleted("eggheadItemDelivery_artifacts", true)
 
-			ix.progression.SetActive("intern_GasAnalyzerReadings", true) -- Main Progression
+			ix.progression.SetActive("intern_gasAnalyzerReadings", true) -- Main Progression
 		end
 	end
 })

@@ -7,15 +7,6 @@ hook.Add( "OnDamagedByExplosion", "DisableSound", function()
 end )
 
 sound.Add( {
-	name = "electra_idle",
-	channel = CHAN_STATIC,
-	volume = 0.3,
-	level = 70,
-	pitch = 100,
-	sound = "anomaly/electra_idle1.wav"
-} )
-
-sound.Add( {
 	name = "electra_blast",
 	channel = CHAN_STATIC,
 	volume = 1,
@@ -33,6 +24,8 @@ function ENT:Initialize()
 	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
 	self:SetName("Electra Anomaly")
 	self:SetTrigger(1)
+	self.Active = true
+	self.ActiveOnce = true
 	self:SetCollisionBounds( Vector( -60, -60, -5 ), Vector( 60, 60, 80 ) )
 	self:SetNWBool("StopParticle", false)
 	self:SetRenderMode( RENDERMODE_TRANSTEXTURE ) 
@@ -45,16 +38,26 @@ function ENT:Initialize()
 	end
 end
 
-function ENT:StartTouch(ent)
-	local dmg = DamageInfo()
-	dmg:SetDamage(70)
-	dmg:SetAttacker(self)
-	dmg:SetDamageType(DMG_SHOCK)
-	dmg:SetInflictor(self)
-	timer.Create("electra_activated_once"..self:EntIndex(), 0.01, 1, function()
-		self:EmitSound("electra_blast")
-		ParticleEffect( "electra_activated", self:GetPos(), Angle( 0, 0, 0 ) )
-		--util.BlastDamage( self, self, self:GetPos(), 200, 110)
+function ENT:Touch(ent)
+	if not self.Active then return end
+	if timer.Exists(self:EntIndex().."_electra_activated_"..ent:EntIndex()) then return end
+	if self.ActiveOnce then 
+		timer.Create(self:EntIndex().."_electra_activated_sound", 0, 1, function()
+			self:EmitSound("electra_blast")
+			ParticleEffect( "electra_activated", self:GetPos(), Angle( 0, 0, 0 ) )
+			self:StopParticles()
+			self:SetNWBool("StopParticle", true)
+	 		self:StopSound("electra_idle")
+		end)
+		self.ActiveOnce = false
+	end
+	
+	timer.Create(self:EntIndex().."_electra_activated_"..ent:EntIndex(), 0, 1, function()  -- Timer for multiple entity damage
+		local dmg = DamageInfo()
+		dmg:SetDamage(70)
+		dmg:SetAttacker(self)
+		dmg:SetDamageType(DMG_SHOCK)
+		dmg:SetInflictor(self)
 		ent:TakeDamageInfo(dmg)
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			local bodyexplodesounds = {"anomaly/anomaly_body_tear_1.wav", "anomaly/anomaly_body_tear_2.wav"}
@@ -64,34 +67,12 @@ function ENT:StartTouch(ent)
 		elseif ent.ixItemID and ix.item.instances[ent.ixItemID].isWeapon then
 			ent:Remove()
 		end
-		self:StopParticles()
-		self:SetNWBool("StopParticle", true)
-		self:StopSound("electra_idle")
+		self.Active = false
 	end)	
-	timer.Create("electra_recharge"..self:EntIndex(), 1.95, 0, function()
+	timer.Create(self:EntIndex().."_electra_cooldown", 1.9, 1, function()
 		self:SetNWBool("StopParticle", false)
-	end)
-	timer.Create("electra_activated"..self:EntIndex(), 2.0, 0, function()
-		self:EmitSound("electra_blast")
-		self:StopSound("electra_idle")
-		ParticleEffect( "electra_activated", self:GetPos(), Angle( 0, 0, 0 ) )
-		--util.BlastDamage( self, self, self:GetPos(), 200, 110)
-		ent:TakeDamageInfo(dmg)
-		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
-			ent:Remove()
-		end
-		self:SetNWBool("StopParticle", true)
-		self:StopParticles()
-	end)
-end
-
-function ENT:EndTouch()
-	timer.Stop("electra_activated"..self:EntIndex())
-	timer.Stop("electra_recharge"..self:EntIndex())
-	self.Timer = "electra_" .. self:EntIndex()
-	timer.Create( self.Timer, 1.9, 1, function()
-		self:SetNWBool("StopParticle", false)
-		self:SetNWBool("Activated", false)
+		self.Active = true
+		self.ActiveOnce = true
 	end)
 end
 
@@ -111,8 +92,7 @@ function ENT:SpawnFunction( ply, tr, ClassName, activator )
 end
 
 function ENT:OnRemove()
-	self.Timer = "electra_" .. self:EntIndex()
-	self.Timer = "electra_activated" .. self:EntIndex()
+	timer.Stop(self:EntIndex().."_electra_cooldown")
 	self:StopSound("electra_idle")
-	timer.Stop(self.Timer)
+
 end

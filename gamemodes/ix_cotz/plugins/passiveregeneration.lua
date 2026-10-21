@@ -1,5 +1,5 @@
-PLUGIN.name = "fverne"
-PLUGIN.author = "Passive Regeneration"
+PLUGIN.name = "Passive Regeneration"
+PLUGIN.author = "fverne"
 PLUGIN.description = "Adds passive regeneration to players around certain objects."
 
 PLUGIN.healingEntities = {}
@@ -47,10 +47,9 @@ if SERVER then
 	
 	function PLUGIN:Think()
 		if nextHealTime > CurTime() then return end
-		
 		for k, v in pairs(self.healingEntities) do
-			if !IsValid(v:GetClass()) then table.RemoveByValue(self.healingEntities, v) return end
-			
+			if !IsValid(v) then table.RemoveByValue(self.healingEntities, v) return end
+
 			local radius = ix.config.Get("regenHealRadius", 256)
 			if v:GetClass() == "ix_vendor_adv" then
 				radius = ix.config.Get("regenHealRadiusVendorMult", ix.config.Get("regenHealRadius", 256) * 8)
@@ -59,11 +58,19 @@ if SERVER then
 			for _, v2 in pairs(ents.FindInSphere(v:GetPos(), radius)) do
 				if !v2:IsPlayer() or !v2:GetCharacter() then continue end
 
+				if !v2.nextRegen then
+					v2.nextRegen = CurTime()
+				end
+
 				if v2.nextRegen and v2.nextRegen <= CurTime() then
 					v2:SetHealth(math.min(v2:Health() + ix.config.Get("regenHealAmount", 1), v2:GetMaxHealth()))
+					v2:AddBuff("buff_passivehealthregen", ix.config.Get("regenHealInterval", 8), {})
+					if v:GetClass() == "ix_vendor_adv" then
+						v2:AddBuff("buff_townradprotect", ix.config.Get("regenHealInterval", 8), {})
+					end
+
+					v2.nextRegen = CurTime() + ix.config.Get("regenHealInterval", 8)
 				end
-				
-				v2.nextRegen = CurTime() + ix.config.Get("regenHealInterval", 8)
 			end
 		end
 

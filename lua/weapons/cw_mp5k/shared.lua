@@ -166,7 +166,7 @@ SWEP.Shots = 1
 SWEP.Damage = 46
 SWEP.DeployTime = 0.8
 
-SWEP.ReloadSpeed = 1.3
+SWEP.ReloadSpeed = 1.4
 SWEP.ReloadTime = 2
 SWEP.ReloadTime_Empty = 2.2
 SWEP.ReloadHalt = 2.6

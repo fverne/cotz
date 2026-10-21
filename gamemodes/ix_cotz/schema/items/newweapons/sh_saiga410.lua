@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/cw2/weapons/w_saiga_chan.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(12.524, -4.193, -1.228),
 						["EditorExpand"] = true,
 						["UniqueID"] = "46546546",

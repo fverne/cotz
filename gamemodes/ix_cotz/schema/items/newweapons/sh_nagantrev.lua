@@ -33,6 +33,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/khrcw2/pistols/w_cz52.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-6.82, 2.691, 3.236),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3544642191",

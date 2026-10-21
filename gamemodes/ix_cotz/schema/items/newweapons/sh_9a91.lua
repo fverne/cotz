@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(-1.724, -4.195, -3.961),
 						["Model"] = "models/flaymi/anomaly/weapons/w_models/9a91.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "7767986673",
 						["Bone"] = "spine 2",

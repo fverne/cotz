@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/cw2/pistols/w_makarov.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-9.266, 6.039, -0.924),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3589789835",

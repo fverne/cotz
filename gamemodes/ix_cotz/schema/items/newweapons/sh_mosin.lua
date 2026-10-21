@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(12.493, -4.312, -3.803),
 						["Model"] = "models/weapons/ws mosin/w_ws_mosin.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "8542553421",
 						["Bone"] = "spine 2",

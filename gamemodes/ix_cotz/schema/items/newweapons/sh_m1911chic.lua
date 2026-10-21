@@ -39,6 +39,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/w_silverballer.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-8.571, 3.525, 0.823),
 						["EditorExpand"] = true,
 						["UniqueID"] = "35897338512535",

@@ -12,12 +12,8 @@ ITEM.flatweight = 0.025
 ITEM.thirst = 17
 ITEM.quantity = 2
 
+ITEM.message = "takes a swig of their "..ITEM.name.."."
 ITEM.sound = "stalkersound/inv_drink_flask.mp3"
 ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/bottlewater.png")
-
-ITEM:Hook("use", function(item)
-	item.player:EmitSound(item.sound or "items/battery_pickup.wav")
-	ix.chat.Send(item.player, "iteminternal", "takes a swig of their "..item.name..".", false)
-end)
 
 ITEM:DecideFunction()

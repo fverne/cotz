@@ -37,6 +37,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/khrcw2/doipack/w_c96c.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(11.765, -4.449, -2.752),
 						["EditorExpand"] = true,
 						["UniqueID"] = "c96carbine",

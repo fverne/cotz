@@ -18,7 +18,7 @@ ENT.PlayingSound = false
 function ENT:Initialize()
 	self.particle = CreateParticleSystem( self, "tramplin_type2", PATTACH_ABSORIGIN_FOLLOW, 0, Vector(0,0,0) )
 	--self:EmitSound("myasorubka_idle")
-	self:SetModel("models/anomaly/anomaly_fix.mdl")	
+	-- self:SetModel("models/anomaly/anomaly_fix.mdl") -- Lmao, this SetModel prevents self:StopSound("myasorubka_idle") on remove
 end
 
 function ENT:Think()

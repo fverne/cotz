@@ -272,16 +272,6 @@ anomalies["models/kek1ch/psi_field.mdl"] = true
 
 ]]--
 
-if CLIENT then
-
-		/*self.VElements["screen"].draw_func = function( weapon )
-			//surface.SetDrawColor(quadInnerColor)
-			draw.SimpleText(weapon:Clip1(), "QuadFont", 0, 0, Color(0,255,0,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-		end*/
-
-end
-SWEP.LastBeep = 0
-
 function PointOnCircle( ang, radius, offX, offY )
 	ang = math.rad( ang )
 	local x = math.cos( ang ) * -radius + offX
@@ -289,58 +279,72 @@ function PointOnCircle( ang, radius, offX, offY )
 	return x, y
 end
 
+SWEP.LastBeepCl = 0 -- two parts (client and server) for high ping sound suavemente
+SWEP.LastBeepSv = 0
+SWEP.LastScan = 0
+SWEP.Anomalies = {}
+SWEP.Dist = 400
 function SWEP:Think()
-	if CLIENT then
-			self.VElements["screen"].draw_func = function( weapon )
-
-				local function DrawPointOnThatShit(material, x, y, ang, size )
-					surface.SetMaterial(Material(material))
-					surface.DrawTexturedRectRotated(x, y, size, size, ang )
-				end
-
-				local plypos = self.Owner:GetPos()
-					for k, v in pairs( ents.FindInSphere(self:GetOwner():GetPos(), 701) ) do//pairs(shits) do
-
-						if ( v:IsValid() ) then
-
-						local tstdeg = ( (v:GetPos() - self.Owner:GetPos()):Angle().yaw - self.Owner:EyeAngles().yaw ) - 90
-						local dest = self.Owner:GetPos():Distance(v:GetPos())-- plypos.x - v:GetPos().x, plypos.y - v:GetPos().y
-						local x, y = PointOnCircle( tstdeg, dest/30, -2, 21 )
-
-						if dest < 700 then
-							if v:GetClass() == "ix_item" then
-								if anomalies[string.lower(v:GetModel())] then
-									--print(v:GetClass())
-									surface.SetDrawColor( 0, 255, 0, 255 )
-									DrawPointOnThatShit("icon16/control_play.png", x, y, v:GetAngles().yaw, 2 )
-									--draw.SimpleText(".", "QuadFont", 0, 0, Color(0,255,0,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-								end
-							end
-						end
-
-						end
-
-					end
-		end
-		local anoms = {}
+	if self.LastScan < CurTime() then
+		self.Anomalies = {}
 		for k,v in pairs(ents.GetAll()) do
 			if v:GetClass() == "ix_item" then
 				if anomalies[string.lower(v:GetModel())] then
-					table.insert(anoms, v)
+					table.insert(self.Anomalies, v)
 				end
 			end
 		end
-		local dist = 401
-		local ent = nil
-		for k,v in pairs(anoms) do
+		self.LastScan = CurTime() + 0.5
+	end
+
+	local dist = self.Dist + 1
+	local ent = nil
+	for k,v in pairs(self.Anomalies) do
+		if v:IsValid() then
 			if v:GetPos():Distance(self.Owner:GetPos()) < dist then
 				dist = v:GetPos():Distance(self.Owner:GetPos())
 				ent = v
 			end
 		end
-		if dist < 400 and self.LastBeep + dist/400 - CurTime() <= 0 then
-			self.LastBeep = CurTime()
-			self.Owner:EmitSound(Sound("stalkerdetectors/echo.wav"), 100, 100)//math.Clamp(250-dist/2,50,250))
+	end
+	if CLIENT then
+		self.VElements["screen"].draw_func = function( weapon )
+			local function DrawPointOnThatShit(material, x, y, ang, size )
+				surface.SetMaterial(Material(material))
+				surface.DrawTexturedRectRotated(x, y, size, size, ang )
+			end
+
+			local plypos = self.Owner:GetPos()
+			for k, v in pairs( self.Anomalies ) do
+				if ( v:IsValid() ) then
+
+					local tstdeg = ( (v:GetPos() - self.Owner:GetPos()):Angle().yaw - self.Owner:EyeAngles().yaw ) - 90
+					local dest = self.Owner:GetPos():Distance(v:GetPos())-- plypos.x - v:GetPos().x, plypos.y - v:GetPos().y
+					local x, y = PointOnCircle( tstdeg, dest/30, -2, 21 )
+
+					if dest < 700 then
+						surface.SetDrawColor( 0, 255, 0, 255 )
+						DrawPointOnThatShit("icon16/control_play.png", x, y, v:GetAngles().yaw, 2 )
+					end
+				end
+			end
+		end
+		if dist < self.Dist and ent:IsValid() then
+			if self.LastBeepCl + math.Max(dist/self.Dist, 0.1) - CurTime() <= 0 then
+				self.LastBeepCl = CurTime()
+				self.Owner:EmitSound(Sound("stalkerdetectors/echo.wav"), 70, 100)   --math.Clamp(250-dist/2,50,250))
+			end
+		end
+	end
+	if SERVER then
+		if dist < self.Dist then
+			if self.LastBeepSv + math.Max(dist/self.Dist, 0.1) - CurTime() <= 0 then
+				self.LastBeepSv = CurTime()
+				local rf = RecipientFilter()
+				rf:AddAllPlayers()
+				rf:RemovePlayer(self.Owner)
+				self.Owner:EmitSound(Sound("stalkerdetectors/echo.wav"), 70, 100, 1, CHAN_AUTO, 0, 1, rf)   --math.Clamp(250-dist/2,50,250))
+			end
 		end
 	end
 end

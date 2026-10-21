@@ -457,24 +457,6 @@ tempJob.icon = "propic/event/loot"
 tempJob.tier = 1
 tempJob.requiredItem = "part_electrocontroller_1"
 tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_weapon_tier05"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 5
-tempJob.categories = {"item_part_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_part_electrocontroller")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d electrocontroller brain(s)."
-tempJob.desc = "%d electrocontroller brain(s)."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "part_electrocontroller_2"
-tempJob.numberRec = 1
 tempJob.reward = {{"kit_reward_weapon_tier06"}}
 tempJob.rewardCount = 1
 tempJob.repReward = 5
@@ -483,3 +465,21 @@ tempJob.categories = {"item_part_NPC_hard"}
 ix.jobs.register(tempJob, "ItemJob1_part_electrocontroller")
 
 tempJob = nil
+
+
+-- local tempJob = {}
+
+-- tempJob.name = "Hand over %d electrocontroller brain(s)."
+-- tempJob.desc = "%d electrocontroller brain(s)."
+-- tempJob.icon = "propic/event/loot"
+-- tempJob.tier = 1
+-- tempJob.requiredItem = "part_electrocontroller_2"
+-- tempJob.numberRec = 1
+-- tempJob.reward = {{"kit_reward_weapon_tier06"}}
+-- tempJob.rewardCount = 1
+-- tempJob.repReward = 5
+-- tempJob.categories = {"item_part_NPC_hard"}
+
+-- ix.jobs.register(tempJob, "ItemJob2_part_electrocontroller")
+
+-- tempJob = nil

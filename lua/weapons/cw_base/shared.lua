@@ -307,6 +307,7 @@ SWEP.BurstSpreadIncMul = 0.5
 SWEP.BurstRecoilMul = 0.85
 SWEP.DeployTime = 1
 SWEP.Shots = 1
+SWEP.Shots_Base = 1
 SWEP.FromActionToNormalWait = 0
 SWEP.ShotgunReloadState = 0
 SWEP.ReloadSpeed = 1

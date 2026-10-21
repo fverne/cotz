@@ -126,7 +126,7 @@ ix.poaching.MutantParts = {
 	},
 	["hellhound"] = {
 		["meattype"] = "meat_hellhound",
-		["parts"] = {{"part_hellhound", 20}, {"hide_hellhound", 3}},
+		["parts"] = {{"part_hellhound", 50}},-- {"hide_hellhound", 3}},
 	},
 	["electrochimera"] = {
 		["meattype"] = "meat_chimera",
@@ -149,6 +149,12 @@ ix.poaching.MutantParts = {
 		["parts"] = {{"part_spider", 20}, {"hide_spider", 8}},
 	},
 
+}
+ix.poaching.KnifeTime = {
+		["tfa_nmrih_combatknife"] =  3,
+		["tfa_nmrih_oldknife"] =  3.5,
+		["tfa_nmrih_shankknife"] = 4,
+		["tfa_nmrih_survivalknife"] = 3,
 }
 
 function PLUGIN:PlayerButtonDown(client,key)
@@ -234,19 +240,20 @@ function PLUGIN:OpenPoachMenu(client, mutant, knife)
 
                 return
             end
-
+            local weaponClass = client:GetActiveWeapon():GetClass()
+            local poachingTime = ix.poaching.KnifeTime[weaponClass] or 5
             --client:ForceSequence("cidle_knife", nil, 5)
             npc:SetNetVar("beingSkinned", true)
             npc:EmitSound("stalkersound/inv_mutant_loot_animal.ogg", 60)
             client:SetNetVar("IsPoaching", true)
-
-            timer.Simple(5, function()
+            
+            timer.Simple(poachingTime, function()
               if (IsValid(npc)) then
                 npc:SetNetVar("beingSkinned", false)
               end
             end)
 
-            ix.util.PlayerPerformBlackScreenAction(client, "Poaching", 5, function(player)
+            ix.util.PlayerPerformBlackScreenAction(client, "Poaching", poachingTime, function(player)
                 if not player:GetNetVar("IsPoaching") then
                     npc:StopSound("stalkersound/inv_mutant_loot_animal.ogg")
 

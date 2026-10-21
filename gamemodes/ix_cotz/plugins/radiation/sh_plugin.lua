@@ -111,6 +111,12 @@ function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 		local finalRadDamage = radAmount * percentageRadResist
 		finalRadDamage = finalRadDamage - flatRadResist
 
+		if ix.plugin.list["buffs"] then
+			if entity:HasBuff("buff_townradprotect") then
+				finalRadDamage = -1
+			end
+		end
+
 		if finalRadDamage > 0 and entity:hasGeiger() then -- taking damage
 			local randomsound = table.Random(geigerHeavy)
 			entity:EmitSound(randomsound)

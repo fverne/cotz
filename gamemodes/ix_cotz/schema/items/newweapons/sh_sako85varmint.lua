@@ -38,6 +38,7 @@ ITEM.pacData = {
 						["Position"] = Vector(14.155, -4.192, -4.03),
 						["Model"] = "models/weapons/tfa_nmrih/w_fa_sako85_ironsights.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["EditorExpand"] = true,
 						["UniqueID"] = "4561465641",
 						["Bone"] = "spine 2",

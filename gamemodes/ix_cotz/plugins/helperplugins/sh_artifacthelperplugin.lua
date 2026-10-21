@@ -5,6 +5,10 @@
 function PLUGIN:EntityTakeDamage(target, dmginfo)
     -- Capacitor + Halo
     if target:IsPlayer() then
+        if !target:GetCharacter() then
+            return
+        end
+        
         if dmginfo:IsDamageType(DMG_SHOCK) then
             local cap = target:GetCharacter():GetInventory():HasItem("artifact_capacitor")
             if cap and cap:GetData("cooldown", 0) < os.time() then
@@ -15,7 +19,7 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
             end
         else
             local halo = target:GetCharacter():GetInventory():HasItem("artifact_halo")
-            if halo and halo:GetData("cooldown", 0) < os.time() and (target:Health() - dmginfo:GetDamage()) <= 0 then
+            if halo and halo:GetData("cooldown", 0) < os.time() and (target:Health() - dmginfo:GetDamage()) <= 0 and target:Alive() then
                 if math.random(1, 100) <= 10 then
                     halo:SetData("cooldown", os.time() + 15)
                     dmginfo:SetDamage(0)

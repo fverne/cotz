@@ -36,6 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Model"] = "models/weapons/cw_pist_m1911.mdl",
 						["ClassName"] = "model",
+						["Translucent"] = true,
 						["Position"] = Vector(-9.071, 9.525, 0.823),
 						["EditorExpand"] = true,
 						["UniqueID"] = "3589733835",

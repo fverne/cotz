@@ -11,6 +11,7 @@ if CLIENT then
 end
 
 function att:attachFunc()
+	self.Shots_Base = 3
 	self.Shots = 3
 	self:unloadWeapon()
 	self.Primary.Ammo = "12 Gauge -TR-"
@@ -19,6 +20,7 @@ end
 function att:detachFunc()
 	self:unloadWeapon()
 	self.Shots = self.Shots_Orig
+	self.Shots_Base = self.Shots_Orig
 	self.Primary.Ammo = "12 Gauge"
 end
 
