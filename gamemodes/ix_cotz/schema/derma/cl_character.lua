@@ -285,22 +285,22 @@ function PANEL:Init()
 	if (!bHasCharacter or (ix.config.Get("charloadremove", false) and bHasCharacter and LocalPlayer().GetCharacter)) then
 		--self.loadButton:SetDisabled(true)
 		self.loadButton:Hide()
-
-		-- reload ui button (for nasty bug when you connect/change maps)
-		self.reloadMenuButton = self.mainButtonList:Add("ixMenuButton")
-		self.reloadMenuButton:SetText("search for characters")
-		self.reloadMenuButton:SizeToContents()
-		self.reloadMenuButton.DoClick = function()
-			self.reloadMenuButton:Hide()
-			if (ix.config.Get("charloadremove", false) and bHasCharacter and LocalPlayer().GetCharacter) then
-				self.loadButton:Show()
-				self.loadButton:SlideDown(0)
+		if not (LocalPlayer():GetCharacter() and #ix.characters <= 1) then -- no reload button for 1-char (regular) players with loaded character 
+			-- reload ui button (for nasty bug when you connect/change maps)
+			self.reloadMenuButton = self.mainButtonList:Add("ixMenuButton")
+			self.reloadMenuButton:SetText("search for characters")
+			self.reloadMenuButton:SizeToContents()
+			self.reloadMenuButton.DoClick = function()
+				self.reloadMenuButton:Hide()
+				if (ix.config.Get("charloadremove", false) and bHasCharacter and LocalPlayer().GetCharacter) then
+					self.loadButton:Show()
+					self.loadButton:SlideDown(0)
+				end
+				if (#ix.characters < charmaximum) then
+					self.createButton:Show()
+					self.createButton:SlideDown(0)
+				end
 			end
-			if (#ix.characters < charmaximum) then
-				self.createButton:Show()
-				self.createButton:SlideDown(0)
-			end
-
 		end
 	end
 

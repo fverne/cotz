@@ -2,6 +2,10 @@ AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_init.lua")
 include("shared.lua")
 
+-- Explicit balancing parameters used by the spreadsheet export/import tool.
+ENT.BalanceDamage = 70
+ENT.BalanceCooldown = 1.9
+
 hook.Add( "OnDamagedByExplosion", "DisableSound", function()
 	return true
 end )
@@ -54,7 +58,7 @@ function ENT:Touch(ent)
 	
 	timer.Create(self:EntIndex().."_electra_activated_"..ent:EntIndex(), 0, 1, function()  -- Timer for multiple entity damage
 		local dmg = DamageInfo()
-		dmg:SetDamage(70)
+		dmg:SetDamage(self.BalanceDamage)
 		dmg:SetAttacker(self)
 		dmg:SetDamageType(DMG_SHOCK)
 		dmg:SetInflictor(self)
@@ -69,7 +73,7 @@ function ENT:Touch(ent)
 		end
 		self.Active = false
 	end)	
-	timer.Create(self:EntIndex().."_electra_cooldown", 1.9, 1, function()
+	timer.Create(self:EntIndex().."_electra_cooldown", self.BalanceCooldown, 1, function()
 		self:SetNWBool("StopParticle", false)
 		self.Active = true
 		self.ActiveOnce = true

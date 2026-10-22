@@ -116,6 +116,13 @@ COTZ uses Garry's Mod Lua and Helix's plugin/schema conventions. A useful starti
 
 Follow each file's `cl_`, `sh_`, and `sv_` conventions when changing client, shared, or server logic. Test changes in a multiplayer development environment; database, network, and state changes deserve particular care.
 
+### Balancing spreadsheets
+
+GitHub Actions can export item, weapon, mutant, and anomaly configuration into an
+Excel workbook and turn supported spreadsheet edits into a Lua pull request.
+See the [balancing workbook guide](docs/balance/README.md) for export/import
+instructions, validation rules, and coverage limitations.
+
 ### Contributing
 
 Bug reports, fixes, and improvements are welcome through [GitHub Issues](https://github.com/fverne/cotz/issues) and [Pull Requests](https://github.com/fverne/cotz/pulls). For a useful report, include reproduction steps, the affected map or plugin, relevant console errors, and whether the problem occurs in multiplayer or on a dedicated server.
