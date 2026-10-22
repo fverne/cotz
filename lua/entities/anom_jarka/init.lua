@@ -1,6 +1,10 @@
 AddCSLuaFile("shared.lua")
 include("shared.lua")
 
+-- Explicit balancing parameters used by the spreadsheet export/import tool.
+ENT.BalanceDamage = 30
+ENT.BalanceCooldown = 0.5
+
 ENT.cooldown = 0
 
 hook.Add( "OnDamagedByExplosion", "DisableSound", function()
@@ -51,7 +55,7 @@ function ENT:Touch(ent)
 	end
 	
 	timer.Create(self:EntIndex().."_jarka_activated_"..ent:EntIndex(), 0, 1, function()  -- Timer for multiple entity damage
-		ent:TakeDamage(30, self, self)
+		ent:TakeDamage(self.BalanceDamage, self, self)
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			local bodyexplodesounds = {"anomaly/anomaly_body_tear_1.wav", "anomaly/anomaly_body_tear_2.wav"}
 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
@@ -63,7 +67,7 @@ function ENT:Touch(ent)
 		self.Active = false
 	end)	
 
-	timer.Create(self:EntIndex().."_jarka_cooldown", 0.5, 1, function()
+	timer.Create(self:EntIndex().."_jarka_cooldown", self.BalanceCooldown, 1, function()
 		self.Active = true
 	end)
 

@@ -1,0 +1,35 @@
+name: Export balancing workbook
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master, main]
+    paths:
+      - 'gamemodes/ix_cotz/**'
+      - 'lua/entities/**'
+      - 'lua/weapons/**'
+      - 'tools/balance/**'
+      - '.github/workflows/balance-*.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: tools/balance/requirements.txt
+      - run: python -m pip install -r tools/balance/requirements.txt
+      - run: python tools/balance/balance.py export
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cotz-balance-${{ github.sha }}
+          path: balance-output/
+          retention-days: 90

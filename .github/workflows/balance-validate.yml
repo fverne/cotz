@@ -1,0 +1,38 @@
+name: Validate balancing tools
+
+on:
+  pull_request:
+    paths:
+      - 'gamemodes/ix_cotz/**'
+      - 'lua/entities/**'
+      - 'lua/weapons/**'
+      - 'tools/balance/**'
+      - '.github/workflows/balance-*.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: tools/balance/requirements.txt
+      - run: python -m pip install -r tools/balance/requirements.txt
+      - run: python -m unittest discover -s tools/balance/tests -v
+      - run: python tools/balance/balance.py export
+      - name: Verify unchanged workbook produces no edits
+        run: |
+          python tools/balance/balance.py import --workbook balance-output/balance.xlsx --baseline balance-output/baseline.json --apply
+          git diff --exit-code -- gamemodes/ix_cotz lua
+      - uses: actions/upload-artifact@v4
+        with:
+          name: validated-balance-${{ github.sha }}
+          path: balance-output/
