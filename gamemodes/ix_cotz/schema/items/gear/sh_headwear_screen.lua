@@ -11,6 +11,8 @@ ITEM.isHelmet = true
 ITEM.isBackpack = true
 ITEM.outfitCategory = "Backpack"
 ITEM.carryinc = 18
+ITEM.baseSuit = "headwear_screen"
+ITEM.suitVariant = "baseline"
 
 ITEM.br = 0.01
 ITEM.fbr = 0
