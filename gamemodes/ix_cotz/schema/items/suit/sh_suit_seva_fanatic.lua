@@ -11,6 +11,7 @@ ITEM.overlayPath = "vgui/overlays/hud_sci"
 ITEM.weight = 10.40
 ITEM.baseSuit = "suit_seva"
 -- ITEM.suitVariant = "fanatic"
+ITEM.suitVariant = "UNAVAILABLE"
 
 ITEM.price = 588500
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability

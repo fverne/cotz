@@ -451,7 +451,7 @@ DIALOGUE.addTopic("ChangeSuitVariant", {
 		local items = client:GetCharacter():GetInventory():GetItems()
 
 		for k,v in pairs(items) do
-			if v.baseSuit and !v:GetData("equip") then
+			if v.baseSuit then
 				table.insert(dynopts, {statement = v:GetName(), topicID = "ChangeSuitVariant", dyndata = {itemuid = v.uniqueID, itemid = v:GetID(), baseSuit = v.baseSuit}})
 			end
 		end
@@ -536,7 +536,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 				return "BackTopic"
 			end
 			-- Check if the item is in player inventory
-			if (originalSuit:GetPlayerID() ~= client:SteamID64()) then
+			if originalSuit.invID ~= client:GetCharacter():GetInventory():GetID() then
 				client:Notify("Something went very wrong! Try again.")
 				return "BackTopic"
 			end
@@ -553,6 +553,26 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 				client:Notify("Can't exchange suit with installed attachments!")
 				return "BackTopic"
 			end
+
+			if originalSuit:GetData("equip") then 
+				if hook.Run("CanPlayerUnequipItem", client, originalSuit) == false then 
+					client:Notify("Couldn't unequip the suit, try again!")
+					return "BackTopic"
+				else
+					if originalSuit.RemoveOutfit then 
+						originalSuit:RemoveOutfit(client)
+					elseif originalSuit.RemovePart then
+						originalSuit:RemovePart(client)
+					else
+						client:Notify("Code is not coding, notify the developer!")
+						return "BackTopic"
+					end
+					client:RecalculateResistances()
+					client:ReevaluateOverlay()
+					originalSuit:OnUnequipped()
+				end
+			end
+			
 			ix.dialogue.notifyMoneyLost(client, ix.currency.Get(finalPrice))
 			client:GetCharacter():TakeMoney(finalPrice)
 
