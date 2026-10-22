@@ -100,7 +100,7 @@ class RoundTripTests(unittest.TestCase):
         self.run_git('add', 'gamemodes', 'lua')
         self.run_git('commit', '-qm', 'Fixture')
 
-    def edit(self, field, value, tab='Items', ident='medkit'):
+    def edit(self, field, value, tab='Items - aid', ident='medkit'):
         book = load_workbook(self.workbook)
         sheet = book[tab]
         headers = [cell.value for cell in sheet[1]]
@@ -169,7 +169,7 @@ class RoundTripTests(unittest.TestCase):
     def test_reordered_rows_are_safe(self):
         self.edit('price', 400)
         book = load_workbook(self.workbook)
-        sheet = book['Items']
+        sheet = book['Items - aid']
         rows = list(sheet.values)[1:]
         sheet.delete_rows(2, sheet.max_row)
         for row in reversed(rows):
@@ -193,7 +193,7 @@ class RoundTripTests(unittest.TestCase):
                 with contextlib.redirect_stdout(io.StringIO()):
                     balance.export(self.root, self.out)
                 book = load_workbook(self.workbook)
-                sheet = book['Items']
+                sheet = book['Items - aid']
                 if mode == 'missing':
                     sheet.delete_rows(2)
                 elif mode == 'duplicate':
@@ -236,6 +236,64 @@ class RoundTripTests(unittest.TestCase):
         entities, warnings = balance.scan(self.root)
         self.assertEqual([e['fields'] for e in entities if e['id'] == 'medkit'], [{}, {}])
         self.assertTrue(any('Duplicate ID' in message for _, message in warnings))
+
+
+    def test_category_sheets_use_inherited_names_and_only_relevant_fields(self):
+        self.write(self.root / 'gamemodes/ix_cotz/schema/items/base/sh_aid.lua', b'ITEM.category = "Medical"\n')
+        self.write(self.root / 'gamemodes/ix_cotz/schema/items/newammo/sh_ammo.lua', b'ITEM.category = "Ammunition"\nITEM.ammoAmount = 60\nITEM.weight = 0.01\n')
+        self.write(self.root / 'gamemodes/ix_cotz/schema/items/aid/sh_special.lua', b'ITEM.category = "Special Aid"\nITEM.restore = 5\n')
+        self.commit()
+        with contextlib.redirect_stdout(io.StringIO()):
+            balance.export(self.root, self.out)
+        book = load_workbook(self.workbook)
+        self.assertNotIn('Items', book.sheetnames)
+        medical = [cell.value for cell in book['Items - Medical'][1]]
+        ammo = [cell.value for cell in book['Items - Ammunition'][1]]
+        special = [cell.value for cell in book['Items - Special Aid'][1]]
+        self.assertEqual(medical, ['ID', 'Source', 'Name', 'Base', 'price', 'weight'])
+        self.assertEqual(ammo, ['ID', 'Source', 'Name', 'Base', 'ammoAmount', 'weight'])
+        self.assertEqual(special, ['ID', 'Source', 'Name', 'Base', 'restore'])
+        for sheet in book:
+            headers = [cell.value for cell in sheet[1]]
+            self.assertNotIn('Availability', headers)
+            self.assertNotIn('Class / Ammo', headers)
+        book.close()
+        self.edit('price', 400, tab='Items - Medical')
+        self.edit('ammoAmount', 80, tab='Items - Ammunition', ident='ammo')
+        self.assertEqual(len(self.apply()['changes']), 2)
+        self.assertEqual(self.item.read_bytes(), self.original.replace(b'365', b'400'))
+
+    def test_row_moved_to_another_category_is_rejected(self):
+        self.write(self.root / 'gamemodes/ix_cotz/schema/items/misc/sh_misc.lua', b'ITEM.price = 10\nITEM.weight = 1\n')
+        self.commit()
+        with contextlib.redirect_stdout(io.StringIO()):
+            balance.export(self.root, self.out)
+        book = load_workbook(self.workbook)
+        row = [cell.value for cell in book['Items - aid'][2]]
+        book['Items - aid'].delete_rows(2)
+        book['Items - misc'].append(row)
+        book.save(self.workbook)
+        book.close()
+        with self.assertRaisesRegex(balance.BalanceError, 'unknown or duplicate row'):
+            self.apply()
+
+    def test_legacy_schema_requires_fresh_export(self):
+        manifest = json.loads(self.baseline.read_text())
+        manifest['schema'] = 1
+        self.baseline.write_text(json.dumps(manifest))
+        with self.assertRaisesRegex(balance.BalanceError, 'fresh workbook'):
+            self.apply()
+
+
+class LayoutTests(unittest.TestCase):
+    def test_category_names_are_valid_and_unique_excel_titles(self):
+        categories = ['Medical', 'medical', 'A/B', 'A:B', 'x' * 60]
+        entities = [{'tab': 'Items', 'category': category, 'fields': {}} for category in categories]
+        names = list(balance.workbook_layout(entities))[:len(categories)]
+        self.assertEqual(len(set(name.casefold() for name in names)), len(categories))
+        for name in names:
+            self.assertLessEqual(len(name), 31)
+            self.assertFalse(any(c in name for c in '\\/*?:[]'))
 
 
 if __name__ == '__main__':

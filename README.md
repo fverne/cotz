@@ -120,7 +120,7 @@ Follow each file's `cl_`, `sh_`, and `sv_` conventions when changing client, sha
 
 GitHub Actions can export item, weapon, mutant, and anomaly configuration into an
 Excel workbook and turn supported spreadsheet edits into a Lua pull request.
-See the [balancing workbook guide](tools/balance/README.md) for export/import
+See the [balancing workbook guide](docs/balance/README.md) for export/import
 instructions, validation rules, and coverage limitations.
 
 ### Contributing

@@ -23,7 +23,7 @@ import tempfile
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font, PatternFill, Protection
 
-SCHEMA = 1
+SCHEMA = 2
 ROOT = Path(__file__).resolve().parents[2]
 ITEM_FIELDS = set("price width height weight flatweight baseweight varweight BaseWeight WeightPerLevel quantity restore restoreduration ammoAmount bulletweight unloadedweight br fbr ar far sr fsr pr fpr radProt flatRadProt rarity JumpPower carryinc exteriorSlots interiorSlots extraSlots hunger thirst alcohol psyheal psyblock radrem WeightPerHunger WeightPerThirst pricepertier upgradeCost meattier fueltier knifetier cookertier maxFuel maxStack".split())
 WEAPON_FIELDS = set("Damage FireDelay Primary.ClipSize Primary.DefaultClip Primary.Automatic DurabilityDamageChance WearDamage HipSpread AimSpread Recoil ClumpSpread VelocitySensitivity Shots".split())
@@ -31,14 +31,14 @@ MUTANT_FIELDS = set("hp hpvar BR FBR FBRAP MinRangeDist MaxRangeDist".split())
 ANOMALY_FIELDS = set("BalanceDamage BalanceCooldown BalanceRadius".split())
 POOLS = {"commonArtifacts", "rareArtifacts", "veryRareArtifacts"}
 FIELD_FIELDS = {"interval"} | POOLS
-READ_FIELDS = {"name", "PrintName", "base", "Base", "class", "ammo", "entityname"}
+READ_FIELDS = {"name", "PrintName", "base", "Base", "category", "entityname"}
 INTEGER_FIELDS = {"width", "height", "quantity", "ammoAmount", "Primary.ClipSize", "Primary.DefaultClip", "rarity", "exteriorSlots", "interiorSlots", "extraSlots", "maxStack", "meattier", "fueltier", "knifetier", "cookertier"}
 TAB_FIELDS = {
     "Items": ITEM_FIELDS, "Item bases": ITEM_FIELDS, "Weapons": WEAPON_FIELDS,
     "Mutants": MUTANT_FIELDS, "Anomalies": ANOMALY_FIELDS,
     "Anomaly fields": FIELD_FIELDS,
 }
-IDENTITY = ["ID", "Source", "Name", "Base", "Class / Ammo", "Availability"]
+IDENTITY = ["ID", "Source", "Name", "Base"]
 
 
 class BalanceError(ValueError):
@@ -257,7 +257,7 @@ def scan(root):
     entities = []
     warnings = []
 
-    def add(path, tab, ident, prefix, allowed, availability):
+    def add(path, tab, ident, prefix, allowed):
         relative = path.relative_to(root).as_posix()
         source = path.read_bytes().decode("utf-8")
         try:
@@ -270,9 +270,10 @@ def scan(root):
         entity = {"tab": tab, "id": ident, "source": relative,
                   "name": fields.get("name", fields.get("PrintName", {})).get("value", ident),
                   "base": fields.get("base", fields.get("Base", {})).get("value", ""),
-                  "link": fields.get("class", fields.get("ammo", {})).get("value", ""),
-                  "availability": availability,
+                  "category": fields.get("category", {}).get("value", "") if prefix == "ITEM" else "",
                   "fields": {k: v for k, v in fields.items() if k in allowed}}
+        if not isinstance(entity["category"], str):
+            entity["category"] = ""
         if prefix == "ITEM" and not entity["base"] and path.parent.name != "items":
             entity["base"] = "base_" + path.parent.name if path.parent.name != "base" else ""
         # Textual metadata is not a configuration edit target in this version.
@@ -289,16 +290,15 @@ def scan(root):
 
     for path in item_files(root):
         base = path.parent.name == "base"
-        add(path, "Item bases" if base else "Items", ("base_" if base else "") + path.stem[3:], "ITEM", ITEM_FIELDS,
-            "Schema definition" if "/schema/" in path.as_posix() else "Plugin definition; runtime enablement not verified")
+        add(path, "Item bases" if base else "Items", ("base_" if base else "") + path.stem[3:], "ITEM", ITEM_FIELDS)
     for path in sorted((root / "lua/weapons").glob("*/shared.lua")):
-        add(path, "Weapons", path.parent.name, "SWEP", WEAPON_FIELDS, "Definition; external dependencies not verified")
+        add(path, "Weapons", path.parent.name, "SWEP", WEAPON_FIELDS)
     for pattern, tab, allowed in [("npc_mutant_*", "Mutants", MUTANT_FIELDS), ("anom_*", "Anomalies", ANOMALY_FIELDS)]:
         for folder in sorted((root / "lua/entities").glob(pattern)):
             for name in ("shared.lua", "init.lua"):
                 path = folder / name
                 if path.is_file():
-                    add(path, tab, folder.name + "/" + name, "ENT", allowed, "Definition; runtime overrides not resolved")
+                    add(path, tab, folder.name + "/" + name, "ENT", allowed)
     path = root / "gamemodes/ix_cotz/plugins/anomalycontroller/sh_anomalydefs.lua"
     if path.is_file():
         source = path.read_bytes().decode("utf-8")
@@ -328,10 +328,21 @@ def scan(root):
                              "source": path.relative_to(root).as_posix(),
                              "name": fields.get("name", {}).get("value", ""),
                              "base": fields.get("entityname", {}).get("value", ""),
-                             "link": "",
-                             "availability": "Plugin definition; runtime enablement not verified",
+                             "category": "",
                              "fields": {k: v for k, v in fields.items() if k in FIELD_FIELDS}})
     counts = Counter((e["tab"], e["id"]) for e in entities)
+    bases = {e["id"]: e for e in entities if e["tab"] == "Item bases" and counts[e["tab"], e["id"]] == 1}
+    for entity in entities:
+        if entity["tab"] != "Items":
+            continue
+        category = entity["category"]
+        base = entity["base"]
+        visited = set()
+        while not category and base in bases and base not in visited:
+            visited.add(base)
+            category = bases[base]["category"]
+            base = bases[base]["base"]
+        entity["category"] = category or (Path(entity["source"]).parent.name if Path(entity["source"]).parent.name != "items" else "Uncategorized")
     for entity in entities:
         if counts[entity["tab"], entity["id"]] > 1:
             warnings.append([entity["source"], f"Duplicate ID {entity['id']}; all matching definitions are read-only."])
@@ -354,6 +365,26 @@ def append_safe(sheet, values):
             cell.data_type = "s"  # Names starting with '=' must remain text.
 
 
+def workbook_layout(entities):
+    """Derive sheets and editable columns from the immutable export baseline."""
+    layout = {}
+    categories = sorted({e["category"] for e in entities if e["tab"] == "Items"})
+    used = {name.casefold() for name in [*TAB_FIELDS, "Metadata", "Coverage", "Column guide"]}
+    for category in categories:
+        raw = "Items - " + category
+        name = re.sub(r"[\\/*?:\[\]]", "_", raw).strip("'")
+        if len(name) > 31 or name != raw or name.casefold() in used:
+            name = name[:22] + "-" + hashlib.sha256(category.encode()).hexdigest()[:8]
+        used.add(name.casefold())
+        rows = [e for e in entities if e["tab"] == "Items" and e["category"] == category]
+        columns = sorted({field for e in rows for field in e["fields"]})
+        layout[name] = (rows, columns)
+    for tab, allowed in TAB_FIELDS.items():
+        if tab != "Items":
+            layout[tab] = ([e for e in entities if e["tab"] == tab], sorted(allowed))
+    return layout
+
+
 def export(root, output, preview=False):
     entities, warnings = scan(root)
     commit = git(root, "rev-parse", "HEAD")
@@ -371,21 +402,18 @@ def export(root, output, preview=False):
                 ["Inheritance", "Explicit source values only. Edit defaults on Item bases; inherited/runtime values are not expanded."],
                 ["Scope", "Definitions discovered using schema/plugin item paths and entity/weapon directories; runtime availability is not verified."]]:
         append_safe(meta, row)
-    for tab, allowed in TAB_FIELDS.items():
+    for tab, (rows, columns) in workbook_layout(entities).items():
         sheet = book.create_sheet(tab)
-        columns = sorted(allowed)
         append_safe(sheet, IDENTITY + columns)
-        for entity in entities:
-            if entity["tab"] != tab:
-                continue
-            append_safe(sheet, [entity["id"], entity["source"], entity["name"], entity["base"], entity["link"], entity["availability"]] +
+        for entity in rows:
+            append_safe(sheet, [entity["id"], entity["source"], entity["name"], entity["base"]] +
                         [display(entity["fields"][f]["value"]) if f in entity["fields"] else None for f in columns])
             for index, field in enumerate(columns, len(IDENTITY) + 1):
                 if field in entity["fields"]:
                     cell = sheet.cell(sheet.max_row, index)
                     cell.fill = PatternFill("solid", fgColor="DDEEFF")
                     cell.protection = Protection(locked=False)
-        sheet.freeze_panes = "G2"
+        sheet.freeze_panes = "E2"
         sheet.auto_filter.ref = sheet.dimensions
     coverage = book.create_sheet("Coverage")
     append_safe(coverage, ["Source", "Limitation"])
@@ -418,8 +446,10 @@ def export(root, output, preview=False):
 def trusted_baseline(root, manifest):
     """Reconstruct baseline from an ancestor Git commit; never trust workbook paths."""
     commit = manifest.get("commit", "")
-    if not re.fullmatch(r"[0-9a-f]{40,64}", commit) or manifest.get("schema") != SCHEMA:
-        raise BalanceError("Invalid baseline schema/commit")
+    if manifest.get("schema") != SCHEMA:
+        raise BalanceError("Unsupported baseline schema; generate a fresh workbook and baseline.json.")
+    if not re.fullmatch(r"[0-9a-f]{40,64}", commit):
+        raise BalanceError("Invalid baseline commit")
     try:
         git(root, "merge-base", "--is-ancestor", commit, "HEAD")
         archive = subprocess.check_output(["git", "-C", str(root), "archive", commit, "gamemodes/ix_cotz", "lua"])
@@ -492,27 +522,28 @@ def import_book(root, workbook, baseline, report, apply=False):
     errors = []
     seen = set()
     item_ids = {e["id"] for e in current.values() if e["tab"] == "Items"}
-    for tab, allowed in TAB_FIELDS.items():
+    for tab, (rows, columns) in workbook_layout(manifest["entities"]).items():
         if tab not in book:
             errors.append(f"Missing sheet: {tab}")
             continue
         sheet = book[tab]
         headers = [cell.value for cell in sheet[1]]
-        if headers != IDENTITY + sorted(allowed):
+        if headers != IDENTITY + columns:
             errors.append(f"{tab}: columns have been changed")
             continue
+        sheet_expected = {(e["id"], e["source"]): e for e in rows}
         for row in sheet.iter_rows(min_row=2):
             values = [c.value for c in row]
             if all(v is None for v in values):
                 continue
-            ident = (tab, str(values[0]), values[1])
+            old = sheet_expected.get((str(values[0]), values[1]))
+            ident = key(old) if old else None
             label = f"{tab}/{values[0]} ({values[1]})"
-            if ident not in expected or ident in seen:
+            if old is None or ident in seen:
                 errors.append(f"{label}: unknown or duplicate row")
                 continue
             seen.add(ident)
-            old = expected[ident]
-            identity = [old["id"], old["source"], old["name"], old["base"], old["link"], old["availability"]]
+            identity = [old["id"], old["source"], old["name"], old["base"]]
             # XLSX readers represent saved empty strings as empty cells.
             identity = [None if v == "" else v for v in identity]
             if values[:len(IDENTITY)] != identity:
@@ -579,12 +610,12 @@ def main():
     parser.add_argument("--root", type=Path, default=ROOT)
     commands = parser.add_subparsers(dest="command", required=True)
     exp = commands.add_parser("export")
-    exp.add_argument("--output", type=Path, default=Path("balance-output"))
+    exp.add_argument("--output", type=Path, default=Path("docs/balance/output"))
     exp.add_argument("--preview", action="store_true", help="Allow uncommitted source for inspection; cannot import until the baseline matches a commit")
     imp = commands.add_parser("import")
     imp.add_argument("--workbook", type=Path, required=True)
     imp.add_argument("--baseline", type=Path, required=True)
-    imp.add_argument("--report", type=Path, default=Path("balance-output/import-report.json"))
+    imp.add_argument("--report", type=Path, default=Path("docs/balance/output/import-report.json"))
     imp.add_argument("--apply", action="store_true", help="Write files after validating the entire workbook")
     args = parser.parse_args()
     try:

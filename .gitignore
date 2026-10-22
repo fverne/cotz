@@ -6,6 +6,6 @@ gamemodes/STALKER_Roleplay/plugins/bodygrouphelpercancer.lua
 .idea/vcs.xml
 
 # Generated balancing exports and Python caches.
-/balance-output/
+/docs/balance/output/
 __pycache__/
 *.pyc

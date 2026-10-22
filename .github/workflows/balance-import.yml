@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       workbook:
-        description: 'Committed workbook path under balance-input/ (e.g. balance-input/balance.xlsx)'
+        description: 'Committed workbook path under docs/balance/input/ (e.g. docs/balance/input/balance.xlsx)'
         required: true
-        default: 'balance-input/balance.xlsx'
+        default: 'docs/balance/input/balance.xlsx'
       baseline:
-        description: 'Matching committed baseline JSON under balance-input/'
+        description: 'Matching committed baseline JSON under docs/balance/input/'
         required: true
-        default: 'balance-input/baseline.json'
+        default: 'docs/balance/input/baseline.json'
       apply:
         description: 'Create or update a pull request after validation (otherwise dry run)'
         type: boolean
@@ -36,8 +36,8 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-          cache-dependency-path: tools/balance/requirements.txt
-      - run: python -m pip install -r tools/balance/requirements.txt
+          cache-dependency-path: docs/balance/requirements.txt
+      - run: python -m pip install -r docs/balance/requirements.txt
       - name: Validate and import
         env:
           BALANCE_WORKBOOK: ${{ inputs.workbook }}
@@ -52,10 +52,10 @@ jobs:
           paths = []
           for variable in ('BALANCE_WORKBOOK', 'BALANCE_BASELINE'):
               path = (root / os.environ[variable]).resolve()
-              if not path.is_relative_to(root / 'balance-input') or not path.is_file():
-                  raise SystemExit('Inputs must be existing files under balance-input/')
+              if not path.is_relative_to(root / 'docs/balance/input') or not path.is_file():
+                  raise SystemExit('Inputs must be existing files under docs/balance/input/')
               paths.append(str(path))
-          command = ['python', 'tools/balance/balance.py', 'import',
+          command = ['python', 'docs/balance/balance.py', 'import',
                      '--workbook', paths[0], '--baseline', paths[1]]
           if os.environ['BALANCE_APPLY'] == 'true':
               command.append('--apply')
@@ -66,7 +66,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: balance-import-report-${{ github.run_id }}
-          path: balance-output/import-report.json
+          path: docs/balance/output/import-report.json
           if-no-files-found: ignore
       - name: Create or update balancing PR
         if: inputs.apply
@@ -90,7 +90,7 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          report = json.loads(Path('balance-output/import-report.json').read_text())
+          report = json.loads(Path('docs/balance/output/import-report.json').read_text())
           lines = ['Apply balancing spreadsheet edits to the Lua configuration.', '',
                    f"Baseline commit: `{report['baseline_commit']}`", '',
                    'Validated every workbook row and checked concurrent source changes before writing.',

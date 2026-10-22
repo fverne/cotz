@@ -5,6 +5,12 @@ import the edits back into the original files. The importer never executes Lua.
 It validates all rows before writing and detects concurrent edits using a Git
 commit baseline. Python 3.10+ and the dependencies in `requirements.txt` are required.
 
+The tool, tests, dependencies, and this guide live in `docs/balance/`. Submitted
+workbooks go in `docs/balance/input/`; generated workbooks and reports go in
+`docs/balance/output/` (ignored by Git). Workflow entry points remain in
+`.github/workflows/`, as required by GitHub Actions. Game configuration remains
+in its original Lua paths so Garry's Mod can load it.
+
 ## GitHub Actions
 
 After these files are merged into the repository's default branch:
@@ -18,7 +24,7 @@ After these files are merged into the repository's default branch:
 3. Edit the blue cells in the workbook. Excel and LibreOffice can edit XLSX files.
    Other editors must preserve cell types, sheet names, and metadata.
 4. Commit the edited workbook and its **unchanged original** baseline under
-   `balance-input/` on the default branch. Do not replace the baseline with one
+   `docs/balance/input/` on the default branch. Do not replace the baseline with one
    from a newer export. A normal PR can be used to submit the input files.
 5. Run **Import balancing workbook**, entering their paths. Leave `apply`
    unchecked first to validate and download the JSON change report.
@@ -46,22 +52,22 @@ From the repository root:
 
 ```bash
 python3 -m venv /tmp/cotz-balance-venv
-/tmp/cotz-balance-venv/bin/pip install -r tools/balance/requirements.txt
+/tmp/cotz-balance-venv/bin/pip install -r docs/balance/requirements.txt
 
 # Configuration must be committed so the export has a reproducible baseline.
-/tmp/cotz-balance-venv/bin/python tools/balance/balance.py export
+/tmp/cotz-balance-venv/bin/python docs/balance/balance.py export
 
-# Edit balance-output/balance.xlsx, then preview the changes:
-/tmp/cotz-balance-venv/bin/python tools/balance/balance.py import \
-  --workbook balance-output/balance.xlsx \
-  --baseline balance-output/baseline.json
+# Edit docs/balance/output/balance.xlsx, then preview the changes:
+/tmp/cotz-balance-venv/bin/python docs/balance/balance.py import \
+  --workbook docs/balance/output/balance.xlsx \
+  --baseline docs/balance/output/baseline.json
 
-# Apply after reviewing balance-output/import-report.json:
-/tmp/cotz-balance-venv/bin/python tools/balance/balance.py import \
-  --workbook balance-output/balance.xlsx \
-  --baseline balance-output/baseline.json --apply
+# Apply after reviewing docs/balance/output/import-report.json:
+/tmp/cotz-balance-venv/bin/python docs/balance/balance.py import \
+  --workbook docs/balance/output/balance.xlsx \
+  --baseline docs/balance/output/baseline.json --apply
 
-/tmp/cotz-balance-venv/bin/python -m unittest discover -s tools/balance/tests -v
+/tmp/cotz-balance-venv/bin/python -m unittest discover -s docs/balance/tests -v
 ```
 
 Use `export --preview` to inspect uncommitted configuration. Such a preview is
@@ -72,13 +78,13 @@ need the baseline commit in their history; Actions checks out full history.
 `--root /path/to/cotz` before the command selects another checkout. `export
 --output <directory>` changes the output directory. Import defaults to a dry run;
 `--apply` is the only option that writes game files. Reports are written to
-`balance-output/import-report.json` unless overridden with `--report`.
+`docs/balance/output/import-report.json` unless overridden with `--report`.
 
 ## Workbook contents
 
 | Sheet | Editable configuration |
 | --- | --- |
-| Items | Price, dimensions, weight parameters, healing/quantity fields, ammo amount, protection, artifact parameters |
+| Items - &lt;category&gt; | One sheet per item category, containing only supported attributes explicitly used by that category |
 | Item bases | The same fields on shared item defaults |
 | Weapons | Damage, fire delay, magazine/default ammo, automatic mode, spread/recoil, durability parameters |
 | Mutants | Health, health variation, resistance parameters, range settings |
@@ -88,9 +94,17 @@ need the baseline commit in their history; Actions checks out full history.
 | Column guide | Units and interpretation notes |
 | Coverage | Unsupported expressions, duplicate IDs, and behavior embedded in code |
 
-Names, IDs, sources, base identifiers, class/ammo links, and availability notes
-are read-only. Blue cells are the only supported edit targets. Cell colors are a
-visual guide; import validation enforces the restrictions even if the workbook
+Item categories use each item's explicit `ITEM.category`, then the category of
+its item base (including base chains). When no literal category is available,
+the item directory name is used, or `Uncategorized` for root items. For example,
+`Items - Aid` contains medical-item attributes, while `Items - Ammunition`
+contains ammo attributes. Columns unused by every item in a category are omitted.
+Category names that exceed Excel's sheet-title limit or contain invalid characters
+receive a shortened, unique title. `Item bases` remains a separate defaults sheet.
+
+Names, IDs, sources, and base identifiers are read-only. Blue cells are the only
+supported edit targets. Cell colors are a visual guide; import validation
+enforces the restrictions even if the workbook
 is altered. Sheets are not password protected, allowing normal sorting/filtering.
 
 Artifact pools are JSON arrays, for example:
@@ -103,6 +117,9 @@ Order and duplicates are preserved. New pool entries must reference discovered
 item IDs. An empty array clears a supported pool; an empty cell is invalid.
 
 ## Validation and conflicts
+
+This layout uses baseline schema 2. Workbooks and baselines from schema 1 need a
+fresh export before importing; do not mix old baselines with new workbooks.
 
 Rows are matched by sheet, ID, and source path, so sorting rows is safe. All
 baseline rows must remain present exactly once. Adding/removing definitions,
