@@ -118,6 +118,9 @@ end
 function meta:GetPlayer()
 	return self.client
 end
+function meta:GetName()
+	return self.name or "Test Stalker"
+end
 function meta:GetInventory()
 	return self.inventory
 end
@@ -366,10 +369,17 @@ check(
 	"whole-stack turn-in removes inventory item"
 )
 
--- A delayed personal message must not target a different selected character.
+-- Completion broadcasts credit the finishing character and keep the NPC message.
 messages = {}
+a.name = "Finishing Stalker"
 api.Notify(a, "NPC", "hello")
-check(#messages == 1 and messages[1][5][1] == a.client, "message sent only to owner")
+check(#messages == 1 and messages[1][5] == nil, "completion message broadcast to all players")
+check(messages[1][2] == "npcpdainternal", "completion broadcast uses GPDA")
+check(messages[1][6].name == "NPC", "completion broadcast keeps NPC sender")
+check(
+	messages[1][6].message == "hello (Completed by Finishing Stalker.)",
+	"completion broadcast includes the original message and finishing character name"
+)
 a.client.GetCharacter = function()
 	return b
 end

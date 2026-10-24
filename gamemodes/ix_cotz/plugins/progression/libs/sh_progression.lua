@@ -140,7 +140,10 @@ if SERVER then
 	function ix.progression.Notify(character, name, message)
 		local client = character:GetPlayer()
 		if IsValid(client) and client:GetCharacter() == character then
-			ix.chat.Send(nil, "npcpdainternal", "", nil, { client }, { name = name, message = message })
+			ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
+				name = name,
+				message = string.format("%s (Completed by %s.)", message, character:GetName()),
+			})
 		end
 	end
 

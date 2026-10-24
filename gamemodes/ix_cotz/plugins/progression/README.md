@@ -163,7 +163,8 @@ restrictions still apply.
 
 `/ProgressionGrant <character> <progressionID>` marks a milestone complete, activates
 its successors, assigns newly accessible deliveries, and unlocks any associated
-NPC arrival. It does not replay turn-in rewards or personal completion messages.
+NPC arrival. It does not replay turn-in rewards or GPDA completion broadcasts.
+Completion broadcasts include the finishing character's name alongside the NPC's message.
 
 ## Integration API
 
