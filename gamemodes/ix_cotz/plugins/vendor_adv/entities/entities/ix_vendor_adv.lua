@@ -8,9 +8,6 @@ ENT.isVendor = true
 ENT.bNoPersist = true
 ENT.AutomaticFrameAdvance = true
 
-ENT.RestockThinkInterval = 600
-ENT.restockCheckTimer = 0
-
 function ENT:SetupDataTables()
 	self:NetworkVar("Bool", 0, "NoBubble")
 	self:NetworkVar("Bool", 1, "BuyAll")
@@ -24,7 +21,6 @@ end
 
 function ENT:Initialize()
 	if SERVER then
-		self.restockCheckTimer = CurTime() + self.RestockThinkInterval
 		self:SetModel("models/mossman.mdl")
 		self:SetUseType(SIMPLE_USE)
 		self:SetMoveType(MOVETYPE_NONE)
@@ -93,7 +89,10 @@ function ENT:CanTalkTo(client)
 	return true
 end
 
-function ENT:GetStock(uniqueID)
+function ENT:GetStock(uniqueID, character)
+	if SERVER and character then
+		return ix.vendorStock.Get(character, self, uniqueID)
+	end
 	if self.items[uniqueID] and self.items[uniqueID][VENDOR_MAXSTOCK] then
 		return self.items[uniqueID][VENDOR_STOCK] or 0, self.items[uniqueID][VENDOR_MAXSTOCK]
 	end
@@ -151,7 +150,8 @@ function ENT:CanSellToPlayer(client, uniqueID)
 		return false
 	end
 
-	if data[VENDOR_STOCK] and data[VENDOR_STOCK] < 1 then
+	local stock = self:GetStock(uniqueID, client:GetCharacter())
+	if stock and stock < 1 then
 		return false
 	end
 
@@ -276,7 +276,10 @@ if SERVER then
 		end
 	end
 
-	function ENT:SetStock(uniqueID, value)
+	function ENT:SetStock(uniqueID, value, character)
+		if character then
+			return ix.vendorStock.Set(character, self, uniqueID, value)
+		end
 		if not self.items[uniqueID][VENDOR_MAXSTOCK] then
 			return
 		end
@@ -286,82 +289,43 @@ if SERVER then
 
 		net.Start("ixVendorAdvStock")
 		net.WriteString(uniqueID)
-		net.WriteUInt(value, 16)
-		net.Send(self.receivers)
+		net.WriteUInt(self.items[uniqueID][VENDOR_STOCK], 16)
+		local editors = {}
+		for _, client in ipairs(self.receivers) do
+			if IsValid(client) and client.ixVendorAdvEditing == self then
+				editors[#editors + 1] = client
+			end
+		end
+		net.Send(editors)
 	end
 
-	function ENT:AddStock(uniqueID, value)
-		if not self.items[uniqueID] then
-			return
-		end
-		if not self.items[uniqueID][VENDOR_MAXSTOCK] then
-			return
-		end
-
-		self:SetStock(uniqueID, self:GetStock(uniqueID) + (value or 1))
-	end
-
-	function ENT:TakeStock(uniqueID, value)
-		if not self.items[uniqueID][VENDOR_MAXSTOCK] then
+	function ENT:AddStock(uniqueID, value, character)
+		assert(character, "Stock changes require a character")
+		local stock = self:GetStock(uniqueID, character)
+		if stock == nil then
 			return
 		end
 
-		self:AddStock(uniqueID, -(value or 1))
+		return self:SetStock(uniqueID, stock + (value or 1), character)
 	end
 
-	function ENT:SherpaAddStock(uniqueID, value)
+	function ENT:TakeStock(uniqueID, value, character)
+		return self:AddStock(uniqueID, -(value or 1), character)
+	end
+
+	function ENT:SherpaAddStock(uniqueID, value, character)
 		if not self.items[uniqueID] then
 			self.items[uniqueID] = { nil, 0, VENDOR_SELLANDBUY, 100, 0, 0 }
 		end
 
-		self:SetStock(uniqueID, self:GetStock(uniqueID) + (value or 1))
+		return self:AddStock(uniqueID, value, character)
 	end
 
-	function ENT:SherpaTakeStock(uniqueID, value)
-		if not self.items[uniqueID] then
-			return
-		end
-		if not self.items[uniqueID][VENDOR_MAXSTOCK] then
-			return
-		end
-
-		self:AddStock(uniqueID, -(value or 1))
-
-		if self:GetStock(uniqueID) <= 0 then
-			self.items[uniqueID] = nil
-		end
-	end
-
-	function ENT:RestockThink()
-		local theTime = os.time()
-
-		if not self.items then
-			return
-		end
-
-		for k, v in pairs(self.items) do
-			if not v[VENDOR_RESTOCK_AMOUNT] then
-				continue
-			end
-
-			v[VENDOR_RESTOCK_TIME] = v[VENDOR_RESTOCK_TIME] or 0
-			v[VENDOR_RESTOCK_INTERVAL] = v[VENDOR_RESTOCK_INTERVAL] or 0.5
-			v[VENDOR_RESTOCK_AMOUNT] = v[VENDOR_RESTOCK_AMOUNT] or 1
-
-			if v[VENDOR_RESTOCK_TIME] < theTime then
-				-- Interval is in hours, os.time() is in seconds
-				v[VENDOR_RESTOCK_TIME] = theTime + v[VENDOR_RESTOCK_INTERVAL] * 60 * 60
-				self:AddStock(k, v[VENDOR_RESTOCK_AMOUNT])
-			end
-		end
+	function ENT:SherpaTakeStock(uniqueID, value, character)
+		return self:TakeStock(uniqueID, value, character)
 	end
 
 	function ENT:Think()
-		if self.restockCheckTimer < CurTime() then
-			self:RestockThink()
-			self.restockCheckTimer = CurTime() + self.RestockThinkInterval
-		end
-
 		self:NextThink(CurTime())
 
 		return true
@@ -474,7 +438,8 @@ function ENT:LoadTemplate(templateName)
 		if template.items then
 			local vendorMult = ix.config.Get("VendorStockMult")
 
-			for uniqueID, data in pairs(template.items) do
+			for uniqueID, templateData in pairs(template.items) do
+				local data = table.Copy(templateData)
 				if data[2] ~= nil then
 					data[2] = data[2] * vendorMult
 				end

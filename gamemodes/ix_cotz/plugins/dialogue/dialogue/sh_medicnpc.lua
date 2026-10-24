@@ -44,7 +44,7 @@ DIALOGUE.addTopic("TradeTopic", {
 
 			local items = {}
 			-- Only send what is needed.
-			for k, v in pairs(target.items) do
+			for k, v in pairs(ix.vendorStock.GetItems(character, target)) do
 				if
 					not table.IsEmpty(v)
 					and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])
@@ -57,6 +57,7 @@ DIALOGUE.addTopic("TradeTopic", {
 
 			target.scale = target.scale or 0.5
 			client.ixVendorAdv = target
+			client.ixVendorAdvEditing = nil
 
 			-- force sync to prevent outdated inventories while buying/selling
 			if character then

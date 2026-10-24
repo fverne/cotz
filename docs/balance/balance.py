@@ -23,6 +23,8 @@ import tempfile
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font, PatternFill, Protection
 
+from progression import build_tabs as progression_tabs
+
 SCHEMA = 2
 ROOT = Path(__file__).resolve().parents[2]
 ITEM_FIELDS = set("price width height weight flatweight baseweight varweight BaseWeight WeightPerLevel quantity restore restoreduration ammoAmount bulletweight unloadedweight br fbr ar far sr fsr pr fpr radProt flatRadProt rarity JumpPower carryinc exteriorSlots interiorSlots extraSlots hunger thirst alcohol psyheal psyblock radrem WeightPerHunger WeightPerThirst pricepertier upgradeCost meattier fueltier knifetier cookertier maxFuel maxStack".split())
@@ -400,7 +402,8 @@ def export(root, output, preview=False):
                 ["Instructions", "Edit blue cells only. IDs and source paths must remain unchanged. Import requires baseline.json."],
                 ["Missing values", "Blank means absent/unsupported, not zero. Adding or clearing fields is not supported."],
                 ["Inheritance", "Explicit source values only. Edit defaults on Item bases; inherited/runtime values are not expanded."],
-                ["Scope", "Definitions discovered using schema/plugin item paths and entity/weapon directories; runtime availability is not verified."]]:
+                ["Scope", "Definitions discovered using schema/plugin item paths and entity/weapon directories; runtime availability is not verified."],
+                ["Progression", "Five gray, read-only tabs describe the current progression. Edits to those tabs are ignored by import; requirements are unchanged."]]:
         append_safe(meta, row)
     for tab, (rows, columns) in workbook_layout(entities).items():
         sheet = book.create_sheet(tab)
@@ -415,6 +418,17 @@ def export(root, output, preview=False):
                     cell.protection = Protection(locked=False)
         sheet.freeze_panes = "E2"
         sheet.auto_filter.ref = sheet.dimensions
+    overview_tabs, overview_warnings = progression_tabs(root, entities, tokenize, lua_string)
+    warnings.extend(overview_warnings)
+    for tab, rows in overview_tabs.items():
+        sheet = book.create_sheet(tab)
+        for row in rows:
+            append_safe(sheet, row)
+        sheet.freeze_panes = "B2"
+        sheet.auto_filter.ref = sheet.dimensions
+        for row in sheet.iter_rows(min_row=2):
+            for cell in row:
+                cell.fill = PatternFill("solid", fgColor="F2F2F2")
     coverage = book.create_sheet("Coverage")
     append_safe(coverage, ["Source", "Limitation"])
     for row in warnings:
@@ -430,6 +444,11 @@ def export(root, output, preview=False):
                 ["br / fbr / ar / far", "Raw item protection parameters, as named in Lua"],
                 ["interval", "Anomaly-controller spacing parameter in Source units"],
                 ["*Artifacts", "JSON array of item IDs; order and duplicates are preserved"],
+                ["Progression tabs", "Read-only current-source overview; edits are ignored by import. No requirements have been rebalanced."],
+                ["Required units / Total raw units", "Hand-in quantity units, not item stacks, loot finds, acquisition time, or an expected playthrough total"],
+                ["Initially active definition", "defaultActive in source; the character must also have access to the NPC"],
+                ["Activated by completion of (any)", "Incoming nextProgressions edges; one predecessor completion activates a step, subject to NPC access"],
+                ["Progression unlock coverage", "Declarative successors, NPC access, vendor items, world arrivals, and selected storage/painting/PDA gates; callbacks and external plugins are not exhaustively analyzed"],
                 ["Other columns", "Exact Lua attribute names; consult the linked source before interpreting effects"]]:
         append_safe(dictionary, row)
     for sheet in book:

@@ -124,6 +124,29 @@ class RoundTripTests(unittest.TestCase):
         data = json.loads(self.baseline.read_text())
         self.assertNotIn('inactive', {e['id'] for e in data['entities']})
 
+    def test_progression_tabs_are_read_only_views_and_do_not_change_import(self):
+        self.write(self.root / 'gamemodes/ix_cotz/plugins/progression/sh_test.lua', b'''
+ix.progression.Register("test", {
+name = "Test", keyNpc = "Guide", progMap = "map", defaultActive = true,
+GetItemIds = function() return {["medkit"] = 5} end,
+})
+''')
+        self.commit()
+        with contextlib.redirect_stdout(io.StringIO()):
+            balance.export(self.root, self.out)
+        book = load_workbook(self.workbook)
+        self.assertEqual(book['Progression steps'].max_row, 2)
+        sheet = book['Progression hand-ins']
+        self.assertEqual(sheet.cell(2, 7).value, 5)
+        self.assertEqual(sheet.cell(2, 7).fill.fgColor.rgb, '00F2F2F2')
+        self.assertTrue(sheet.cell(2, 7).protection.locked)
+        sheet.cell(2, 7, 1)
+        book.save(self.workbook)
+        book.close()
+        self.edit('price', 400)
+        self.assertEqual(len(self.apply()['changes']), 1)
+        self.assertEqual(self.item.read_bytes(), self.original.replace(b'365', b'400'))
+
     def test_single_edit_preserves_bom_crlf_comments_and_other_literals(self):
         self.edit('price', 400)
         self.assertEqual(len(self.apply()['changes']), 1)

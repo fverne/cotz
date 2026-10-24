@@ -5,6 +5,27 @@ Requirements and thresholds retain their existing amounts. Different characters
 on the same account start independently. NPC arrivals are persistent global world
 unlocks triggered when any character completes the associated milestone.
 
+## Progression overview workbook
+
+The [balancing workbook](../../../../docs/balance/README.md#reviewing-current-progression)
+now includes five read-only progression tabs: NPC overview, steps and chain links,
+item hand-ins, unlocks, and item demand. Export it with:
+
+```bash
+/tmp/cotz-balance-venv/bin/python docs/balance/balance.py export
+```
+
+Run from the repository root after following the workbook's Python setup instructions.
+The result is `docs/balance/output/balance.xlsx`; the export workflow also includes
+it in its downloadable artifact. These views document current requirements before
+personal quantities and randomized item pools are introduced. Editing the progression
+tabs does not import changes into Lua.
+
+The current catalog contains 139 steps: 134 item hand-ins and five job progressions.
+The hand-ins contain 321 requirement entries covering 196 distinct item IDs. Counts
+are quantity units, not stacks or loot finds. The workbook regenerates these details
+from source and shows personal access separately from the four global NPC arrivals.
+
 ## Storage and server transfers
 
 Character data stores `progression = {version = 2, lines = {...}}`. Reads return
@@ -29,7 +50,23 @@ restores NPC arrivals only; it never grants personal progress or service access.
 Existing vendor inventories remain intact, but progression items are gated by the
 buyer's personal milestones even if they were already added by the old system.
 Missing progression catalog items are registered automatically without resetting
-existing stock. Stock and vendor money remain shared.
+existing catalog configuration. Limited stock is personal to each character; vendor
+money remains shared.
+
+Personal vendor stock is stored server-side in character data under `vendorStock`.
+The identity is the map plus NPC display name, so respawning the same NPC does not
+reset a character's supply. NPCs with the same name on the same map share that
+character's stock; renaming an NPC creates a different stock identity. Characters
+on the same account have independent supplies. Purchases and sherpa stock changes
+save the character immediately and send stock updates only to that shopper.
+
+The NPC catalog defines initial stock, maximum stock, restock amount, and interval
+in hours. Restocks are calculated from elapsed wall time when opening the shop or
+checking stock for a trade, including time offline, and are capped at the configured
+maximum. Reopening a shop cannot replay a refill. Zero interval or amount disables
+refilling; unlimited-stock items remain unlimited. Admin stock edits configure the
+catalog defaults rather than overwriting every character's current count. Changes
+to catalog settings are reflected when shoppers reopen the vendor.
 
 The four NPC arrivals unlock globally on the first character's completion and
 are placed once on their configured map after saved vendors have loaded. Global
@@ -72,6 +109,9 @@ character; there is no global client progression cache.
 From the addon root, run `luatex --luaonly tests/progression_spec.lua` (or
 `lua tests/progression_spec.lua`). This exercises the actual progression library
 and all definitions using GMod/Helix stand-ins.
+
+Run `luatex --luaonly tests/vendor_stock_spec.lua` for personal stock isolation,
+elapsed restocking, saved-state restoration, and real vendor purchase-handler checks.
 
 Before live rollout, verify with two clients in Garry's Mod:
 

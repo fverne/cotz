@@ -90,6 +90,11 @@ need the baseline commit in their history; Actions checks out full history.
 | Mutants | Health, health variation, resistance parameters, range settings |
 | Anomalies | Explicit `BalanceDamage`, `BalanceCooldown`, and `BalanceRadius` fields where defined |
 | Anomaly fields | Spacing and common/rare/very-rare artifact pools |
+| Progression overview | Read-only NPC summary: step counts, starting definitions, NPC access milestones, and maps |
+| Progression steps | Read-only step catalog: descriptions, incoming/outgoing chain links, personal NPC gates, quantities, and job thresholds |
+| Progression hand-ins | Read-only row per required item: step, NPC, map, item ID/name, required units, definition status, and source location |
+| Progression unlocks | Read-only successor activations, vendor items, personal NPC/service access, and global NPC arrivals |
+| Progression item demand | Read-only item reuse, summed requirements, largest single requirement, and requesting NPCs/steps |
 | Metadata | Commit, baseline checksum, editing instructions |
 | Column guide | Units and interpretation notes |
 | Coverage | Unsupported expressions, duplicate IDs, and behavior embedded in code |
@@ -106,6 +111,39 @@ Names, IDs, sources, and base identifiers are read-only. Blue cells are the only
 supported edit targets. Cell colors are a visual guide; import validation
 enforces the restrictions even if the workbook
 is altered. Sheets are not password protected, allowing normal sorting/filtering.
+
+### Reviewing current progression
+
+Start with `Progression overview` to choose an NPC, then filter `Progression steps`
+by that NPC. The incoming and outgoing progression IDs show the branches. Incoming
+links are **alternatives**: completion of any listed predecessor activates the step;
+they are not an AND checklist. `Initially active definition` reflects `defaultActive`
+only; personal NPC access is still required. Maps are resolved at each registration,
+including changes to the map variable within a definition file.
+
+Use `Progression hand-ins` for exact requirements and `Progression item demand`
+to identify repeated demand before rebalancing. Counts are **quantity units**, not
+inventory stacks or loot finds. Spawned stack quantities and acquisition rates are
+not calculated. Totals across branches are a catalog sum, not the cost of a required
+playthrough. Item names come from the existing item scan; missing or ambiguous IDs
+are flagged rather than silently resolved.
+
+`Progression unlocks` distinguishes personal NPC/service access and vendor purchase
+eligibility and stock from global NPC arrivals. Limited stock and restock clocks
+belong to each character; vendor money remains shared. It also includes the
+completion gates used by storage, suit painting, blowout warnings, and event
+broadcasts. Other conditions may apply in those consumers. Completion callbacks,
+messages, jobs, crafting, and external plugin behavior are not exhaustively analyzed;
+consult the listed source paths and line numbers. Unsupported extraction and broken
+successor references appear in `Coverage`.
+
+All five progression tabs use gray cells and are **informational only**. Editing
+them does not alter Lua: the importer ignores these tabs. Existing blue balance
+cells retain their normal export/import behavior. No progression quantities or
+item pools are changed by this documentation update. Fresh exports regenerate
+these views from the current checkout, so there is no manually maintained copy of
+the requirements. The baseline schema remains 2 because these views add no import
+fields; generate a fresh workbook to see the new tabs.
 
 Artifact pools are JSON arrays, for example:
 

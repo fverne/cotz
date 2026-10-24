@@ -61,6 +61,21 @@ if SERVER then
 
 	util.AddNetworkString("ixVendorAdvTemplate")
 
+	function PLUGIN:PlayerLoadedCharacter(client)
+		local vendor = client.ixVendorAdv
+		if IsValid(vendor) then
+			for index = #vendor.receivers, 1, -1 do
+				if vendor.receivers[index] == client then
+					table.remove(vendor.receivers, index)
+				end
+			end
+		end
+		client.ixVendorAdv = nil
+		client.ixVendorAdvEditing = nil
+		net.Start("ixVendorAdvClose")
+		net.Send(client)
+	end
+
 	function PLUGIN:SaveData()
 		local data = {}
 
@@ -178,10 +193,20 @@ if SERVER then
 			end
 
 			client.ixVendorAdv = nil
+			client.ixVendorAdvEditing = nil
 		end
 	end)
 
 	local function updateEditReceivers(receivers, key, value)
+		if string.sub(key, 1, 5) == "stock" then
+			local editors = {}
+			for _, client in ipairs(receivers) do
+				if IsValid(client) and client.ixVendorAdvEditing then
+					editors[#editors + 1] = client
+				end
+			end
+			receivers = editors
+		end
 		net.Start("ixVendorAdvEdit")
 		net.WriteString(key)
 		net.WriteType(value)
@@ -235,8 +260,8 @@ if SERVER then
 		elseif key == "stockDisable" then
 			local uniqueID = data[1]
 
-			entity.items[data] = entity.items[uniqueID] or {}
-			entity.items[data][VENDOR_MAXSTOCK] = nil
+			entity.items[uniqueID] = entity.items[uniqueID] or {}
+			entity.items[uniqueID][VENDOR_MAXSTOCK] = nil
 
 			updateEditReceivers(entity.receivers, key, data)
 		elseif key == "stockMax" then
@@ -484,14 +509,15 @@ if SERVER then
 					-- item is not pristine, its not added to the vendor stock :)
 				else
 					if isSherpaClient then
-						entity:SherpaAddStock(uniqueID)
+						entity:SherpaAddStock(uniqueID, 1, character)
 					end
 				end
 
+				character:Save()
 				PLUGIN:SaveData()
 				hook.Run("CharacterVendorTraded", client, entity, uniqueID, isSellingToVendor)
 			else
-				local stock = entity:GetStock(uniqueID)
+				local stock = entity:GetStock(uniqueID, character)
 
 				if stock == nil and isSherpaClient then
 					stock = 0
@@ -526,11 +552,12 @@ if SERVER then
 				end
 
 				if isSherpaClient then
-					entity:SherpaTakeStock(uniqueID)
+					entity:SherpaTakeStock(uniqueID, 1, character)
 				else
-					entity:TakeStock(uniqueID)
+					entity:TakeStock(uniqueID, 1, character)
 				end
 
+				character:Save()
 				PLUGIN:SaveData()
 				hook.Run("CharacterVendorTraded", client, entity, uniqueID, isSellingToVendor)
 			end
@@ -543,6 +570,15 @@ else
 	VENDOR_TEXT[VENDOR_SELLANDBUY] = "vendorBoth"
 	VENDOR_TEXT[VENDOR_BUYONLY] = "vendorBuy"
 	VENDOR_TEXT[VENDOR_SELLONLY] = "vendorSell"
+
+	net.Receive("ixVendorAdvClose", function()
+		if IsValid(ix.gui.vendorEditor) then
+			ix.gui.vendorEditor:Remove()
+		end
+		if IsValid(ix.gui.vendor) then
+			ix.gui.vendor:Remove()
+		end
+	end)
 
 	net.Receive("ixVendorAdvOpen", function()
 		local entity = net.ReadEntity()
@@ -792,6 +828,20 @@ else
 
 		entity.items[uniqueID] = entity.items[uniqueID] or {}
 		entity.items[uniqueID][VENDOR_STOCK] = amount
+		local itemPanel = panel.sellingList and panel.sellingList[uniqueID]
+		if amount > 0 and not IsValid(itemPanel) then
+			panel:addItem(uniqueID, "selling")
+			itemPanel = panel.sellingList[uniqueID]
+		end
+		if IsValid(itemPanel) and IsValid(itemPanel.stock) then
+			itemPanel.stock.curstock = amount
+			itemPanel.stock:SetText(
+				string.format("Stock: %d/%d", amount, entity.items[uniqueID][VENDOR_MAXSTOCK])
+			)
+			if amount == 0 then
+				itemPanel:Remove()
+			end
+		end
 
 		local editor = ix.gui.vendorEditor
 
@@ -858,6 +908,7 @@ properties.Add("vendor_edit", {
 		end
 
 		client.ixVendorAdv = entity
+		client.ixVendorAdvEditing = entity
 
 		net.Start("ixVendorAdvEditor")
 		net.WriteEntity(entity)
