@@ -93,7 +93,7 @@ need the baseline commit in their history; Actions checks out full history.
 | Progression overview | Read-only NPC summary: step counts, starting definitions, NPC access milestones, and maps |
 | Progression steps | Read-only step catalog: descriptions, incoming/outgoing chain links, personal NPC gates, quantities, and job thresholds |
 | Progression hand-ins | Read-only row per required item: step, NPC, map, item ID/name, required units, definition status, and source location |
-| Progression unlocks | Read-only successor activations, vendor items, personal NPC/service access, and global NPC arrivals |
+| Progression unlocks | Read-only successor activations, vendor items with personal stock/restock settings, personal NPC/service access, and global NPC arrivals |
 | Progression item demand | Read-only item reuse, summed requirements, largest single requirement, and requesting NPCs/steps |
 | Metadata | Commit, baseline checksum, editing instructions |
 | Column guide | Units and interpretation notes |
@@ -136,6 +136,28 @@ broadcasts. Other conditions may apply in those consumers. Completion callbacks,
 messages, jobs, crafting, and external plugin behavior are not exhaustively analyzed;
 consult the listed source paths and line numbers. Unsupported extraction and broken
 successor references appear in `Coverage`.
+
+### Personal vendor stock
+
+Each character has their own limited stock and restock clock for each NPC. Buying
+an item cannot deplete another character's supply, including another character on
+the same account. NPC entities, catalog definitions, and vendor money remain shared.
+
+Vendor entries in `Progression unlocks` show the initial stock, maximum stock,
+restock amount, and restock interval as labeled values in `Details`. Stock counts
+are base configuration values multiplied by `VendorStockMult`; intervals are in
+hours and are not multiplied. The workbook describes these settings, not a live
+character's remaining stock.
+
+Stock persists across reconnects and NPC respawns, keyed by map and NPC display
+name. Reopening a shop does not reset it. Elapsed restocks, including time offline,
+are applied when the shop is opened or stock is checked for a trade, capped at the
+configured maximum. Zero restock interval or amount disables refilling. Items with
+unlimited stock remain unlimited. Changing characters closes the current shop.
+
+Admin stock edits change catalog defaults; they do not reset every character's
+remaining supply. NPCs with the same display name on the same map use the same
+stock identity for a character. Renaming an NPC creates a different identity.
 
 All five progression tabs use gray cells and are **informational only**. Editing
 them does not alter Lua: the importer ignores these tabs. Existing blue balance

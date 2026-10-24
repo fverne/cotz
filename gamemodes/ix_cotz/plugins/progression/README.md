@@ -53,6 +53,15 @@ Missing progression catalog items are registered automatically without resetting
 existing catalog configuration. Limited stock is personal to each character; vendor
 money remains shared.
 
+## Personal vendor stock
+
+One character's purchases never deplete another character's supply, including
+characters on the same account. The workbook marks vendor unlocks as
+`Personal access and stock`, with labeled initial stock, maximum stock, restock
+amount, and interval in the `Details` column. Stock counts there are base values
+multiplied by `VendorStockMult`; the interval is in hours and is not multiplied.
+These are catalog settings, not live remaining stock for a character.
+
 Personal vendor stock is stored server-side in character data under `vendorStock`.
 The identity is the map plus NPC display name, so respawning the same NPC does not
 reset a character's supply. NPCs with the same name on the same map share that
@@ -67,6 +76,9 @@ maximum. Reopening a shop cannot replay a refill. Zero interval or amount disabl
 refilling; unlimited-stock items remain unlimited. Admin stock edits configure the
 catalog defaults rather than overwriting every character's current count. Changes
 to catalog settings are reflected when shoppers reopen the vendor.
+Changing characters closes the active vendor session.
+
+## Global NPC arrivals
 
 The four NPC arrivals unlock globally on the first character's completion and
 are placed once on their configured map after saved vendors have loaded. Global

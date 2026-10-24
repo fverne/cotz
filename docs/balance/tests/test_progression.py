@@ -102,6 +102,12 @@ function ix.progression.Register(id, data) end
         unlocks = tabs["Progression unlocks"][1:]
         self.assertIn("Global on first completion", {row[3] for row in unlocks})
         self.assertIn("Personal access and stock", {row[3] for row in unlocks})
+        vendor = next(row for row in unlocks if row[2] == "Vendor catalog item")
+        self.assertIn("Initial stock (base): 5", vendor[7])
+        self.assertIn("Maximum stock (base): 5", vendor[7])
+        self.assertIn("Restock interval (hours): 1", vendor[7])
+        self.assertIn("Restock amount (base): 5", vendor[7])
+        self.assertIn("VendorStockMult", vendor[7])
         self.assertIn("Storage dialogue access", {row[2] for row in unlocks})
         self.assertIn("Full NPC dialogue and services", {row[2] for row in unlocks})
 
