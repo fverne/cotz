@@ -157,7 +157,7 @@ DIALOGUE.addTopic("JoinArena", {
 
 			table.insert(
 				dynamicOptions,
-				{ statement = v:GetName(), topicID = "JoinArena", dynamicData = { player = v } }
+				{ statement = v:GetName(), topicID = "JoinArena", dyndata = { player = v } }
 			)
 		end
 
@@ -231,7 +231,7 @@ DIALOGUE.addTopic("HealTopic", {
 		table.insert(dynamicOptions, {
 			statement = "My Physical Health ( " .. client:Health() .. "% ) - " .. ix.currency.Get(hpCost),
 			topicID = "HealTopic",
-			dynamicData = { cost = hpCost, type = "hp" },
+			dyndata = { cost = hpCost, type = "hp" },
 		})
 		-- table.insert(dynopts, {statement = "My Radiation Level ( "..client:getRadiation().."% ) -
 		-- "..ix.currency.Get(radCost), topicID = "HealTopic", dyndata = {cost = radCost, type="rad"}})
@@ -272,12 +272,12 @@ DIALOGUE.addTopic("ConfirmHeal", {
 			{
 				statement = "I can agree to that. Go ahead and heal me.",
 				topicID = "ConfirmHeal",
-				dynamicData = { accepted = true },
+				dyndata = { accepted = true },
 			},
 			{
 				statement = "On second thought...",
 				topicID = "ConfirmHeal",
-				dynamicData = { accepted = false },
+				dyndata = { accepted = false },
 			},
 		}
 
@@ -451,7 +451,7 @@ DIALOGUE.addTopic("GetTask", {
 				table.insert(dynamicOptions, {
 					statement = ix.jobs.getFormattedNameInactive(v),
 					topicID = "GetTask",
-					dynamicData = { identifier = v },
+					dyndata = { identifier = v },
 				})
 			end
 		end
@@ -485,8 +485,8 @@ DIALOGUE.addTopic("ConfirmTask", {
 	end,
 	GetDynamicOptions = function(self, client, target)
 		local dynamicOptions = {
-			{ statement = "I'll take it", topicID = "ConfirmTask", dynamicData = { accepted = true } },
-			{ statement = "I'll pass", topicID = "ConfirmTask", dynamicData = { accepted = false } },
+			{ statement = "I'll take it", topicID = "ConfirmTask", dyndata = { accepted = true } },
+			{ statement = "I'll pass", topicID = "ConfirmTask", dyndata = { accepted = false } },
 		}
 
 		return dynamicOptions
@@ -534,17 +534,17 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 			table.insert(dynamicOptions, {
 				statement = "A trivial task.",
 				topicID = "GetTaskByDifficulty",
-				dynamicData = { difficulty = "easy" },
+				dyndata = { difficulty = "easy" },
 			})
 			table.insert(dynamicOptions, {
 				statement = "A challenging task.",
 				topicID = "GetTaskByDifficulty",
-				dynamicData = { difficulty = "medium" },
+				dyndata = { difficulty = "medium" },
 			})
 			table.insert(dynamicOptions, {
 				statement = "A hard task.",
 				topicID = "GetTaskByDifficulty",
-				dynamicData = { difficulty = "hard" },
+				dyndata = { difficulty = "hard" },
 			})
 		end
 
@@ -600,7 +600,7 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 					{
 						statement = string.format("Hand over 1 %s", ix.item.list[itemuid].name),
 						topicID = "AboutWorkTopic",
-						dynamicData = { identifier = itemuid },
+						dyndata = { identifier = itemuid },
 					},
 				}
 			end
@@ -667,9 +667,9 @@ DIALOGUE.addTopic("ChangeSuitVariant", {
 				table.insert(dynamicOptions, {
 					statement = v:GetName() .. " - " .. ix.currency.Get(convertcost),
 					topicID = "ChangeSuitVariant",
-					dynamicData = {
+					dyndata = {
 						itemuid = v.uniqueID,
-						itemID = v:GetID(),
+						itemid = v:GetID(),
 						cost = convertcost,
 						baseSuit = v.baseSuit,
 					},
@@ -743,14 +743,14 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 					.. " with cost "
 					.. ix.currency.Get(target.selectedsuitstruct[3]),
 				topicID = "ChangeSuitVariantP2",
-				dynamicData = { suitVariantUID = v.uniqueID, accepted = true },
+				dyndata = { suitVariantUID = v.uniqueID, accepted = true },
 			})
 		end
 
 		table.insert(dynamicOptions, {
 			statement = "Actually, nevermind...",
 			topicID = "ChangeSuitVariantP2",
-			dynamicData = { accepted = false },
+			dyndata = { accepted = false },
 		})
 
 		-- Return table of options

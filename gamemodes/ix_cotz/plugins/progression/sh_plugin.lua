@@ -8,9 +8,11 @@ ix.progression.definitions = ix.progression.definitions or {}
 PLUGIN.checktime = 0
 
 function ix.progression.Register(progressionID, data)
+	data.id = progressionID
 	ix.progression.definitions[progressionID] = data
 end
 
+ix.util.Include("sh_requirementpools.lua")
 ix.util.Include("sh_definitions.lua")
 
 ix.util.Include("sh_technutprog.lua")
@@ -24,25 +26,13 @@ ix.util.Include("sh_jittersprog.lua")
 ix.util.Include("sh_eggheadprog.lua")
 ix.util.Include("sh_bossprog.lua")
 
--- Legacy completion restores world changes without seeding personal progress.
 function PLUGIN:LoadData()
 	local saved = self:GetData() or {}
-	self.legacyProgression = saved.version == 2 and saved.legacy or saved
 	self.worldUnlocks = saved.worldUnlocks or {}
-	for progressionID, definition in pairs(ix.progression.definitions) do
-		local legacy = self.legacyProgression and self.legacyProgression[progressionID]
-		if definition.worldNPC and istable(legacy) and legacy.completed then
-			self.worldUnlocks[progressionID] = true
-		end
-	end
 end
 
 function PLUGIN:SaveData()
-	self:SetData({
-		version = 2,
-		legacy = self.legacyProgression or {},
-		worldUnlocks = self.worldUnlocks or {},
-	})
+	self:SetData({ version = 3, worldUnlocks = self.worldUnlocks or {} })
 end
 
 if SERVER then
@@ -51,6 +41,7 @@ if SERVER then
 	end
 
 	function PLUGIN:PostLoadData()
+		ix.progression.ValidateRequirementPools()
 		self.worldDataLoaded = true
 		self:SetupProgressionWorld()
 	end
@@ -152,7 +143,7 @@ function PLUGIN:PopulateHelpMenu(tabs)
 			do
 				local definition = ix.progression.definitions[v]
 				local character = LocalPlayer():GetCharacter()
-				local progressionStatus = definition.GetItemIds
+				local progressionStatus = definition.requirementSlots
 						and ix.progression.GetComplexProgressionValue(character, v)
 					or ix.progression.GetLine(character, v)
 
@@ -167,7 +158,8 @@ function PLUGIN:PopulateHelpMenu(tabs)
 				progressionTitle:SetAutoStretchVertical(true)
 
 				if definition.BuildResponse then
-					local descriptionText = definition:BuildResponse(definition.keyNpc, progressionStatus)
+					local descriptionText =
+						definition:BuildResponse(definition.keyNpc, progressionStatus, character)
 					local progressionDescription = container:Add("DLabel")
 					progressionDescription:SetWrap(true)
 					progressionDescription:SetFont("stalkerregularsmallfont")

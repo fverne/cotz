@@ -1,136 +1,193 @@
-# Character progression
+# Personal character progression
 
-Personal progression is owned by a Helix **character**, not a Steam account or a map.
-Requirements and thresholds retain their existing amounts. Different characters
-on the same account start independently. NPC arrivals are persistent global world
-unlocks triggered when any character completes the associated milestone.
+Progression belongs to a Helix **character**, including other characters on the same
+account. All 134 delivery steps now use saved personal requirements. Bulk hand-ins
+are reduced; fixed story keys keep their single-item requirements. The five
+job-completion progressions also use one-sixteenth of their original thresholds, rounded up. NPC arrivals remain
+persistent global unlocks triggered by the first character to complete their milestone.
+
+## Personal delivery assignments
+
+A delivery definition contains `requirementSlots`. Each slot names a curated pool
+and a positive integer `quantity`. When the step becomes active and its NPC is
+personally unlocked, the server selects one candidate per slot and requests exactly
+that slot's quantity.
+
+Each delivery's budget is its original shared total divided by 16, rounded up,
+with at least one item per category. Split the budget as evenly as possible across
+all slots; any remainder goes to the first slots. Candidate spawn stack sizes do
+not multiply the request. Counts are raw quantity units, not stacks or guaranteed
+loot finds. Task thresholds are also divided by 16 and rounded up, with a minimum
+of one task. This is fresh-start balancing; no save migration is provided.
+
+World loot tables come in map pairs: 1/2 are Marsh ordinary/hard-to-find loot,
+3/4 are Waystation, and 5/6 are Pripyat. Definitions declare a `lootMapTier`
+ceiling for curation and documentation. Opening low-tier branches and the Marsh
+story deliveries use local pools; later branches can introduce later-map hardware.
+Regression checks compare every candidate's earliest active worldspawn map against
+the ceiling. Non-world rewards, harvesting and vendors need their own availability
+review; they do not imply a worldspawn route. See the balance rationale for the
+exact branch policy and map table.
+
+The server saves the chosen item IDs, quantities, slot selections, and assignment
+version in the character's progression line. Clients read those saved requirements;
+they never roll their own. Reopening dialogue, reconnecting, changing characters,
+restarting, transferring servers, or changing pool definitions cannot reroll an
+existing assignment. Every uncompleted step receives its assignment at most once.
+
+There are 405 slots across the 134 deliveries and 85 pools covering 223 item IDs.
+Most deliveries combine three categories; later tasks can combine four, and
+Detector3 combines six. Six single-unit story or specimen deliveries retain one
+slot; three other deliveries have two. Related categories share candidates across
+the catalog, while slots used together in one delivery remain disjoint. Pools
+with multiple candidates spread demand across characters; they
+do not guarantee different rolls for every pair of characters. Deliberate single-item
+exceptions include story keys, specialty tools, and items without a comparable
+substitute. Each exception and its rationale is visible in the workbook.
+
+Examples:
+
+| Step | Previous requirements | Personal request |
+| --- | --- | --- |
+| Haggler: Kitting Up 1 | 90 nuts and 15 toilet rolls | 3 nuts or bolts, 2 household supplies and 2 workshop supplies |
+| Old Timer: Feeding the Hungry | 155 units across eight mutant products | 4 units of one common meat, 3 small-mutant specimens and 3 ungulate specimens |
+| Quartermaster: flesh delivery | 300 flesh meat | 7 units of one common meat, 6 ungulate specimens and 6 small-predator specimens |
+| Egghead: Detector3 | 18 artifact units | Six specimens: exceptional, Bubble, Burner, Electro, Fruitpunch and Whirlgig selections |
+
+Artifact categories describe acquisition sources rather than mandatory travel checks.
+Caches and trading remain valid ways to obtain the assigned items. The pool and
+quantity rationale is documented in `docs/balance/progression/README.md`.
+| Quartermaster introduction | One quest flash drive | The same specific flash drive |
+
+Dialogue descriptions, available hand-in options, the progression help menu,
+inventory highlights, and server validation all use the same character-aware
+requirements query. Another pool member is not accepted unless it was assigned to
+that character. Hand-ins consume only the remaining required quantity; excess
+stack units stay in the inventory. Completed requirements cannot be submitted again.
+
+Currency and reputation are based on the consumed fraction, not the original stack.
+Fractional credits accumulate in the progression line before rounding, so splitting
+a delivery into multiple requests cannot multiply rewards. Completion callbacks and
+successor activation retain their existing behavior and run once.
 
 ## Progression overview workbook
 
-The [balancing workbook](../../../../docs/balance/README.md#reviewing-current-progression)
-now includes five read-only progression tabs: NPC overview, steps and chain links,
-item hand-ins, unlocks, and item demand. Export it with:
+See the [balancing workbook guide](../../../../docs/balance/README.md#reviewing-current-progression)
+for setup, then export from the repository root:
 
 ```bash
 /tmp/cotz-balance-venv/bin/python docs/balance/balance.py export
 ```
 
-Run from the repository root after following the workbook's Python setup instructions.
-The result is `docs/balance/output/balance.xlsx`; the export workflow also includes
-it in its downloadable artifact. These views document current requirements before
-personal quantities and randomized item pools are introduced. Editing the progression
-tabs does not import changes into Lua.
+The result is `docs/balance/output/balance.xlsx`; GitHub's export workflow also
+includes it in its downloadable artifact. The read-only progression views show:
 
-The current catalog contains 139 steps: 134 item hand-ins and five job progressions.
-The hand-ins contain 321 requirement entries covering 196 distinct item IDs. Counts
-are quantity units, not stacks or loot finds. The workbook regenerates these details
-from source and shows personal access separately from the four global NPC arrivals.
+- NPC summaries and all 139 steps, including incoming/outgoing chain links.
+- Candidate hand-ins grouped by slot. Rows in one slot are alternatives, not a combined shopping list.
+- Personal service/vendor unlocks and the four global NPC arrivals.
+- Potential item demand, pool candidates, quantity multipliers, and rarity rationale.
+- Before/after requirements for every delivery, including all single-item exceptions.
+- Acquisition evidence from weighted loot, spawned quantities, poaching, cooking, and anomaly tiers.
 
-## Storage and server transfers
+The workbook describes possible assignments, not live character assignments.
+Acquisition probabilities are conditional on the listed source, not an overall
+per-map drop rate. Map spawn-point configuration and mutant encounter frequency
+are not available from these definitions and require server playtesting. See the
+[balance rationale](../../../../docs/balance/progression/README.md).
 
-Character data stores `progression = {version = 2, lines = {...}}`. Reads return
-snapshots; writes use `SetCharacterProgression`. Helix replicates this data only
-to its owner and includes it in character saves. Turn-ins and numeric progression
-updates save the character. The existing cross-server transfer code also saves
-characters before redirecting them.
+## Fresh-start storage and server transfers
 
-All participating servers must use the same character database/schema and this
-version of the addon. The progression plugin no longer reads or writes
-`<map>_progression` records in `ix_xserverdata`; old records can remain archived.
-Do not run mixed old/new progression implementations across linked servers.
+This release targets the planned database and server-data wipe. There is **no
+migration or legacy completion import**. Character records use
+`progression = {version = 3, lines = {...}}`; records from older versions are rejected.
+New characters start without contributions or completed milestones. Their initially
+active, accessible delivery steps receive and save personal assignments.
 
-## Existing saves
+Helix replicates progression data only to its owner and saves it with the character.
+Assignments, hand-ins, and numeric updates save the character. All participating
+servers must share the character database/schema and this addon version. The
+cross-server transfer path saves characters before redirecting them. Progression
+no longer uses `<map>_progression` records in `ix_xserverdata`.
 
-Characters start with empty personal progression. Old global completion and
-contributor names are not imported into individual progress.
-
-The plugin save preserves the previous global table as
-`{version = 2, legacy = <previous save>, worldUnlocks = {...}}`. Legacy completion
-restores NPC arrivals only; it never grants personal progress or service access.
-Existing vendor inventories remain intact, but progression items are gated by the
-buyer's personal milestones even if they were already added by the old system.
-Missing progression catalog items are registered automatically without resetting
-existing catalog configuration. Limited stock is personal to each character; vendor
-money remains shared.
+Plugin data stores `{version = 3, worldUnlocks = {...}}` for global NPC arrivals.
+It does not seed a character's personal milestones.
 
 ## Personal vendor stock
 
 One character's purchases never deplete another character's supply, including
-characters on the same account. The workbook marks vendor unlocks as
-`Personal access and stock`, with labeled initial stock, maximum stock, restock
-amount, and interval in the `Details` column. Stock counts there are base values
-multiplied by `VendorStockMult`; the interval is in hours and is not multiplied.
-These are catalog settings, not live remaining stock for a character.
+characters on the same account. `Progression unlocks` labels vendor entries
+`Personal access and stock` and shows the initial stock, maximum stock, restock
+amount, and interval. Stock counts are base values multiplied by `VendorStockMult`;
+the interval is in hours and is not multiplied. These are catalog settings, not
+live remaining stock. Vendor money remains shared.
 
-Personal vendor stock is stored server-side in character data under `vendorStock`.
-The identity is the map plus NPC display name, so respawning the same NPC does not
-reset a character's supply. NPCs with the same name on the same map share that
-character's stock; renaming an NPC creates a different stock identity. Characters
-on the same account have independent supplies. Purchases and sherpa stock changes
-save the character immediately and send stock updates only to that shopper.
+Personal stock is stored server-side under `vendorStock`, keyed by map plus NPC
+display name. Respawning the same NPC does not reset it. NPCs with the same name
+on the same map use the same stock identity for a character; renaming an NPC creates
+a different identity. Purchases and sherpa stock changes save the character and
+send stock updates only to that shopper. Changing characters closes the shop.
 
-The NPC catalog defines initial stock, maximum stock, restock amount, and interval
-in hours. Restocks are calculated from elapsed wall time when opening the shop or
-checking stock for a trade, including time offline, and are capped at the configured
-maximum. Reopening a shop cannot replay a refill. Zero interval or amount disables
-refilling; unlimited-stock items remain unlimited. Admin stock edits configure the
-catalog defaults rather than overwriting every character's current count. Changes
-to catalog settings are reflected when shoppers reopen the vendor.
-Changing characters closes the active vendor session.
+Elapsed restocks, including time offline, are calculated when opening the shop or
+checking stock for a trade and are capped at the configured maximum. Zero interval
+or amount disables refilling; unlimited items remain unlimited. Admin stock edits
+change catalog defaults, not every character's remaining count. Shoppers see updated
+catalog settings when reopening the vendor.
 
-## Global NPC arrivals
+## Global NPC arrivals and administration
 
-The four NPC arrivals unlock globally on the first character's completion and
-are placed once on their configured map after saved vendors have loaded. Global
-arrival flags survive restarts, and existing saved NPCs remain in place. Characters
-without the personal milestone can have a short introduction conversation with
-these NPCs. Full dialogue, trade, and barter require the character's own unlock.
-Faction and class restrictions still apply to conversations.
+The four progression NPC arrivals unlock globally on first completion and are placed
+once on their configured map after saved vendors load. Their arrival flags survive
+restarts. Characters without the personal milestone receive limited dialogue;
+full dialogue, trade, and barter require their own unlock. Faction and class
+restrictions still apply.
 
-Back up the database and server data directory before deploying. Rollback requires
-restoring that backup together with the previous addon version; the embedded
-legacy archive alone is not a complete server backup.
-
-Admins can use `/ProgressionGrant <character> <progressionID>` to mark a milestone
-complete and activate its immediate successors. Grants do not give turn-in
-rewards or replay messages. Grants also unlock any associated global NPC arrival.
-Grant preceding story milestones as needed to restore
-a particular character's desired starting point.
+`/ProgressionGrant <character> <progressionID>` marks a milestone complete, activates
+its successors, assigns newly accessible deliveries, and unlocks any associated
+NPC arrival. It does not replay turn-in rewards or personal completion messages.
 
 ## Integration API
 
-Server mutations and shared queries require an explicit character:
+Queries and mutations require an explicit character:
 
 ```lua
 ix.progression.IsActive(character, progressionID)
 ix.progression.IsCompleted(character, progressionID)
 ix.progression.GetLine(character, progressionID)
+ix.progression.GetRequirements(character, progressionID)
+ix.progression.GetNeededItems(character)
 ix.progression.GetActiveProgressions(character, npcName)
 ix.progression.AddProgressionValue(character, progressionID, amount)
 ix.progression.TurnIn(client, vendorEntity, progressionID, itemID)
 ```
 
-Definitions use `GetItemIds`, `OnComplete(character)`, `nextProgressions`, and
-`vendorUnlocks`. Numeric definitions use ordered thresholds and
-`OnRun(self, character)`. Completion bookkeeping is centralized. Loading saved
-progress never replays completion callbacks. Client UI queries use the selected
-character; there is no global client progression cache.
+`GetRequirements` returns a snapshot of the saved item-to-quantity map. On the server,
+it ensures an active step has an assignment before returning it. On clients, it only
+reads replicated data. `GetComplexProgressionReqs` aliases this character-aware API.
+`GetItemIds` is no longer used. `GetNeededItems` returns outstanding assigned quantities
+for inventory highlighting.
+
+Definitions use `requirementSlots`, `OnComplete(character)`, `nextProgressions`, and
+`vendorUnlocks`. Pools live in `sh_requirementpools.lua`; each candidate has an `item` ID.
+Slots define positive integer `quantity` values. Numeric definitions use scaled ordered thresholds and
+`OnRun(self, character)`. `BuildResponse(npcName, status, character)` receives the
+selected character so it can describe the actual saved request.
 
 ## Validation
 
-From the addon root, run `luatex --luaonly tests/progression_spec.lua` (or
-`lua tests/progression_spec.lua`). This exercises the actual progression library
-and all definitions using GMod/Helix stand-ins.
+From the addon root:
 
-Run `luatex --luaonly tests/vendor_stock_spec.lua` for personal stock isolation,
-elapsed restocking, saved-state restoration, and real vendor purchase-handler checks.
+```bash
+luatex --luaonly tests/progression_spec.lua
+luatex --luaonly tests/vendor_stock_spec.lua
+/tmp/cotz-balance-venv/bin/python -m unittest discover -s docs/balance/tests -v
+```
 
-Before live rollout, verify with two clients in Garry's Mod:
+Tests cover all definitions, persistent assignments, alternate pool selections,
+server rejection of unassigned items, the real dialogue producer/UI/consumer path,
+partial stacks, reward splitting, one-time completion, personal stock, source
+acquisition evidence, and workbook import isolation.
 
-- One character's job completion and partial turn-ins leave the other unchanged.
-- Vendor catalogs, storage, painting, and NPC access follow personal milestones.
-- NPC arrival unlocks are shared; locked characters receive only limited dialogue.
-- Locked requests fail server-side, including repeated turn-ins.
-- PDA announcements and blowout/event warnings reach only eligible characters.
-- Switching characters, reconnecting, restarting, and transferring servers retain
-  the correct personal progress without replaying rewards or spawning duplicates.
+Before rollout, playtest early, middle, and late branches with multiple clients.
+Compare assignment difficulty and availability on each configured map. Check that
+reconnects, character switches, restarts, and transfers preserve assignments and stock,
+and that global NPC arrivals never grant another character's personal access.

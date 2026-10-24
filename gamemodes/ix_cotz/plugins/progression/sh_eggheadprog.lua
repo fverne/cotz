@@ -14,10 +14,10 @@ ix.progression.Register("eggheadItemDelivery_Detector1", {
 		"eggheadItemDelivery_Suit1",
 		"eggheadItemDelivery_Aid1",
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = "## PLACEHOLDER ## - Unlocks Echo Detector:\n"
 
@@ -31,15 +31,12 @@ ix.progression.Register("eggheadItemDelivery_Detector1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_bolt"] = 5,
-			["artifact_bonecluster"] = 1,
-			["artifact_mementomori"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "common_artifacts", quantity = 1 },
+		{ pool = "electrical_artifacts", quantity = 1 },
+		{ pool = "chemical_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
@@ -61,10 +58,10 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 		{ npc = "'Egghead'", args = { "detectorbear", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
 	nextProgressions = { "eggheadItemDelivery_Detector3" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = "## PLACEHOLDER ## - Unlocks Bear Detector:\n"
 
@@ -78,17 +75,13 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_crystal"] = 5,
-			["artifact_mamasbeads"] = 5,
-			["artifact_capacitor"] = 1,
-			["artifact_panacea"] = 4,
-			["artifact_moonlight"] = 2,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "rare_field_artifacts", quantity = 1 },
+		{ pool = "rare_electrical_artifacts", quantity = 1 },
+		{ pool = "chemical_artifacts", quantity = 1 },
+		{ pool = "gravitational_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
@@ -111,10 +104,10 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 	vendorUnlocks = {
 		{ npc = "'Egghead'", args = { "detectorveles", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = "## PLACEHOLDER ## - Unlocks Veles Detector:\n"
 
@@ -128,18 +121,15 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_gmamasbeads"] = 4,
-			["artifact_galaxy"] = 4,
-			["artifact_arachno"] = 4,
-			["artifact_halo"] = 2,
-			["artifact_gaia"] = 3,
-			["artifact_midas"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "exceptional_artifacts", quantity = 1 },
+		{ pool = "bubble_artifacts", quantity = 1 },
+		{ pool = "burner_artifacts", quantity = 1 },
+		{ pool = "rare_electrical_artifacts", quantity = 1 },
+		{ pool = "chemical_artifacts", quantity = 1 },
+		{ pool = "gravitational_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
@@ -161,10 +151,10 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 		{ npc = "'Egghead'", args = { "suit_ssp99", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
 	nextProgressions = { "eggheadItemDelivery_Suit2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = "## PLACEHOLDER ## - Unlocks SSP99:\n"
 
@@ -178,15 +168,12 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["hide_pseudodog"] = 5,
-			["hide_cat"] = 10,
-			["hide_blinddog"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "predator_hides", quantity = 1 },
+		{ pool = "common_hides", quantity = 1 },
+		{ pool = "common_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
@@ -205,10 +192,10 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 		{ npc = "'Egghead'", args = { "suit_ssp99m", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
 	nextProgressions = { "eggheadItemDelivery_Suit3" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = "## PLACEHOLDER ## - Unlocks SSP99m:\n"
 
@@ -222,16 +209,12 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["hide_bloodsucker"] = 5,
-			["hide_vareshka"] = 5,
-			["hide_chimera"] = 5,
-			["hide_controller"] = 5,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "predator_hides", quantity = 1 },
+		{ pool = "elite_hides", quantity = 1 },
+		{ pool = "exotic_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
@@ -249,10 +232,10 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 	vendorUnlocks = {
 		{ npc = "'Egghead'", args = { "suit_seva", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = "## PLACEHOLDER ## - Unlocks SEVA:\n"
 
@@ -266,15 +249,12 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["hide_pseudogiant"] = 5,
-			["hide_electrocontroller"] = 5,
-			["hide_karlik"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "elite_hides", quantity = 1 },
+		{ pool = "predator_hides", quantity = 1 },
+		{ pool = "brains", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
@@ -295,10 +275,10 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 		{ npc = "'Egghead'", args = { "medic_psyheal_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
 	nextProgressions = { "eggheadItemDelivery_Aid2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = ("## PLACEHOLDER ## - Unlocks Stimpak MkI, Antiradiation " .. "Drugs, Psyheal Drugs:\n")
 
@@ -312,18 +292,12 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_swampcontroller_2"] = 3,
-			["part_tark"] = 15,
-			["part_sprig"] = 15,
-			["part_spider"] = 20,
-			["part_snork_2"] = 5,
-			["part_cat"] = 20,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "brains", quantity = 2 },
+		{ pool = "exotic_parts", quantity = 2 },
+		{ pool = "chemical_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
@@ -345,10 +319,10 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 		{ npc = "'Egghead'", args = { "medic_antipsychotic_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
 	nextProgressions = { "eggheadItemDelivery_Aid3" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = "## PLACEHOLDER ## - Unlocks Stimpak MkII, Psyblock Drugs:\n"
 
@@ -362,18 +336,12 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_controller_2"] = 4,
-			["part_vareshka"] = 20,
-			["part_skeleton"] = 20,
-			["part_karlik_2"] = 3,
-			["part_burer_2"] = 4,
-			["part_pseudodog"] = 30,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "brains", quantity = 2 },
+		{ pool = "exotic_parts", quantity = 2 },
+		{ pool = "rare_electrical_artifacts", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
@@ -392,10 +360,10 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 		{ npc = "'Egghead'", args = { "medic_stimpak_3", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 		{ npc = "'Egghead'", args = { "medic_antipsychotic_3", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = "## PLACEHOLDER ## - Unlocks Stimpak MkIII, Psyblock Drugs:\n"
 
@@ -409,15 +377,13 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_pseudogiant"] = 20,
-			["part_electrocontroller_2"] = 4,
-			["part_chimera"] = 40,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "elite_parts", quantity = 1 },
+		{ pool = "brains", quantity = 1 },
+		{ pool = "rare_field_artifacts", quantity = 1 },
+		{ pool = "exceptional_electrical_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"

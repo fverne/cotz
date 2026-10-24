@@ -10,10 +10,10 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 		{ npc = "'Technut'", args = { "suit_mailjacket", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Suit2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I've been thinking about improving these jackets we're "
@@ -32,14 +32,12 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_nuts"] = 50,
-			["value_bolts"] = 50,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "fasteners", quantity = 3 },
+		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "adhesives", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -64,10 +62,10 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 		{ npc = "'Technut'", args = { "suit_trenchcoat_tan", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Suit3" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"You ever notice how tough the skin of some of these mutants "
@@ -85,14 +83,12 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_paracord"] = 15,
-			["hide_blinddog"] = 8,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "field_maintenance", quantity = 1 },
+		{ pool = "common_hides", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -119,10 +115,10 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 		"technutItemDelivery_Suit4",
 		"technutItemDelivery_Helmet1",
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"All this suit construction has given me some ideas for "
@@ -141,14 +137,11 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_documents_14"] = 1,
-			["value_documents_13"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "small_electronics", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -167,10 +160,10 @@ ix.progression.Register("technutItemDelivery_SuitNBC", {
 	vendorUnlocks = {
 		{ npc = "'Technut'", args = { "suit_nbc", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I have an idea for the sunrise that should make it more "
@@ -190,14 +183,12 @@ ix.progression.Register("technutItemDelivery_SuitNBC", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_waterfilter"] = 10,
-			["medic_antirad_1"] = 15,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "filters", quantity = 1 },
+		{ pool = "antirad", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -220,10 +211,10 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 		{ npc = "'Technut'", args = { "suit_cs1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Suit5", "technutItemDelivery_Attachment1" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"The next outfit I have in mind is a bit more heavily armored, "
@@ -243,13 +234,12 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["drug_cigarette_4"] = 200,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "cigarettes", quantity = 5 },
+		{ pool = "workshop_supplies", quantity = 4 },
+		{ pool = "adhesives", quantity = 4 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -269,10 +259,10 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 		{ npc = "'Technut'", args = { "suit_wind", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Suit6", "technutItemDelivery_AttachmentFabric1" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I've heard from some of the guys that the CS1 is too heavy, "
@@ -293,14 +283,12 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["drug_tobacco_1"] = 160,
-			["drug_tobacco_2"] = 80,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "tobacco", quantity = 5 },
+		{ pool = "documents_technical", quantity = 5 },
+		{ pool = "workshop_supplies", quantity = 5 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -322,10 +310,10 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 		{ npc = "'Technut'", args = { "suit_cs2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Suit7", "technutItemDelivery_AttachmentKevlar1" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"From seeing the previous model, CS1, in action, it's clear "
@@ -345,16 +333,12 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["drink_spirit_3"] = 40,
-			["drink_canbeer_3"] = 60,
-			["drink_canbeer_4"] = 70,
-			["drink_canbeer_5"] = 100,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "spirits", quantity = 6 },
+		{ pool = "beer", quantity = 6 },
+		{ pool = "field_maintenance", quantity = 5 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -377,10 +361,10 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 		{ npc = "'Technut'", args = { "suit_cs3", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_AttachmentFrame1", "technutItemDelivery_AttachmentCarbon" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"The CS2 is an improvement on the CS1, but it doesn't protect "
@@ -399,13 +383,12 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["drink_wine"] = 20,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "wine", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 1 },
+		{ pool = "documents_technical", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -424,10 +407,10 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 	keyNpc = "'Technut'",
 	defaultActive = true,
 	progMap = MAP,
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"It's a bit hard to tell you all apart with those balaclavas, "
@@ -446,13 +429,12 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_glue_2"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "adhesives", quantity = 1 },
+		{ pool = "cleaning", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -476,10 +458,10 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 		{ npc = "'Technut'", args = { "helm_steel_arab", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Helmet2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Fancy vests is good and all, but protected body won't save "
@@ -498,13 +480,12 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_glue_3"] = 5, -- Placeholder?
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "adhesives", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -524,10 +505,10 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 		{ npc = "'Technut'", args = { "headwear_cs1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Helmet3" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Well, I agree, a simple steel cap is not a good option. "
@@ -546,18 +527,12 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_carbattery"] = 3,
-			["value_wire_heavy"] = 2,
-			["value_tape_electric"] = 15,
-			["value_tape_duct"] = 10,
-			["value_motorclean"] = 5,
-			["value_gasoline"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "heavy_electrical", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "computer_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -578,10 +553,10 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 		{ npc = "'Technut'", args = { "helm_operator_rus_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Helmet4" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Flight helmets are good, but looks like we need more down-to-earth "
@@ -599,13 +574,12 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_droplet"] = 5,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "common_artifacts", quantity = 1 },
+		{ pool = "electrical_artifacts", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -626,10 +600,10 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 		{ npc = "'Technut'", args = { "headwear_cs4", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Helmet5" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"You know what? Why don't I just combine a decent helmet "
@@ -647,14 +621,12 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_droplet"] = 20,
-			["artifact_crystal"] = 12,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "common_artifacts", quantity = 1 },
+		{ pool = "rare_field_artifacts", quantity = 1 },
+		{ pool = "rare_electrical_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -674,10 +646,10 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 		{ npc = "'Technut'", args = { "helm_sphere08", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Helmet6" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Hey! So, the PASGT is all well and good, but it isn't giving "
@@ -696,14 +668,13 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_bonecluster"] = 50,
-			["artifact_arachno"] = 5,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "common_artifacts", quantity = 1 },
+		{ pool = "exceptional_artifacts", quantity = 1 },
+		{ pool = "chemical_artifacts", quantity = 1 },
+		{ pool = "rare_electrical_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -726,10 +697,10 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 		{ npc = "'Technut'", args = { "headwear_psz12", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Helmet7" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I've gotten a good look at one of the Spetsnaz Sphere-12 "
@@ -748,14 +719,13 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_slug"] = 25,
-			["artifact_mica"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "chemical_artifacts", quantity = 1 },
+		{ pool = "exceptional_artifacts", quantity = 1 },
+		{ pool = "burner_artifacts", quantity = 1 },
+		{ pool = "rare_electrical_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -774,10 +744,10 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 	vendorUnlocks = {
 		{ npc = "'Technut'", args = { "helm_operator_nato", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, the Sphere-08 project is going alright, but it's really "
@@ -796,14 +766,13 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_mamasbeads"] = 15,
-			["artifact_gmamasbeads"] = 3,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "rare_field_artifacts", quantity = 1 },
+		{ pool = "bubble_artifacts", quantity = 1 },
+		{ pool = "exceptional_electrical_artifacts", quantity = 1 },
+		{ pool = "chemical_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -827,10 +796,10 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 		{ npc = "'Technut'", args = { "mask_respirator", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Mask2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, the Swamps are pretty toxic... before we go much further "
@@ -849,16 +818,12 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_engine"] = 5,
-			["value_waterfilter"] = 2,
-			["value_tape_heavy"] = 4,
-			["value_tape_duct"] = 12,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "heavy_components", quantity = 1 },
+		{ pool = "filters", quantity = 1 },
+		{ pool = "adhesives", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -882,10 +847,10 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 		{ npc = "'Technut'", args = { "mask_eo20", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Mask3" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, respirators are nice, but they don't protect your eyes "
@@ -904,13 +869,12 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_gasoline"] = 20,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "fuel", quantity = 1 },
+		{ pool = "filters", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -933,10 +897,10 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 		{ npc = "'Technut'", args = { "mask_xm40", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Mask4" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I don't know if you've noticed, but the filters on the "
@@ -956,13 +920,12 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_gasoline"] = 30,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "fuel", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -984,10 +947,10 @@ ix.progression.Register("technutItemDelivery_Mask4", {
 		{ npc = "'Technut'", args = { "mask_m40", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 		{ npc = "'Technut'", args = { "mask_m50", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I got my hands on new tools. I've been trying my best to "
@@ -1005,13 +968,11 @@ ix.progression.Register("technutItemDelivery_Mask4", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_techtool_3"] = 2,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "specialty_tools", quantity = 1 },
+		{ pool = "documents_technical", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -1032,10 +993,10 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 		{ npc = "'Technut'", args = { "attachment_ceramicplate_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Attachment2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, a lot of these suits have plate carriers, but we kinda "
@@ -1053,14 +1014,12 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["cmore"] = 5,
-			["foregrip"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "common_optics", quantity = 1 },
+		{ pool = "attachments", quantity = 1 },
+		{ pool = "maintenance", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -1081,10 +1040,10 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 		{ npc = "'Technut'", args = { "attachment_ceramicplate_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_Attachment3" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"The handmade plates are okay, but they fold pretty quickly "
@@ -1103,14 +1062,12 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["cobrasuppressor"] = 5,
-			["tundrasuppressor"] = 8,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "suppressors", quantity = 1 },
+		{ pool = "powder", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -1130,10 +1087,10 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 		{ npc = "'Technut'", args = { "attachment_steelplate_3", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 		{ npc = "'Technut'", args = { "attachment_ceramicplate_3", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"As we're pushing further north, we're gonna need better "
@@ -1152,14 +1109,12 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["pbssuppressor"] = 5,
-			["sakersuppressor"] = 4,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "suppressors", quantity = 1 },
+		{ pool = "maintenance", quantity = 1 },
+		{ pool = "computer_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -1179,10 +1134,10 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 		{ npc = "'Technut'", args = { "attachment_fabric_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_AttachmentFabric2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"If you're interested in going artefact hunting, you're "
@@ -1202,13 +1157,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["suit_io7a"] = 40,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "suit_materials", quantity = 1 },
+		{ pool = "common_hides", quantity = 1 },
+		{ pool = "adhesives", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -1229,10 +1183,10 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 	vendorUnlocks = {
 		{ npc = "'Technut'", args = { "attachment_fabric_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"How's the insulating fabric treating you? I managed to "
@@ -1251,13 +1205,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_zombie_1"] = 100,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "humanoid_parts", quantity = 3 },
+		{ pool = "common_hides", quantity = 2 },
+		{ pool = "workshop_supplies", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -1277,10 +1230,10 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 		{ npc = "'Technut'", args = { "attachment_aluframe", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_AttachmentFrame2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Even with big backpacks, have you noticed how damn heavy "
@@ -1300,13 +1253,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["food_can_sprats"] = 200,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "canned_food", quantity = 5 },
+		{ pool = "industrial_supplies", quantity = 4 },
+		{ pool = "workshop_supplies", quantity = 4 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -1329,10 +1281,10 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 	vendorUnlocks = {
 		{ npc = "'Technut'", args = { "attachment_steelframe", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, the aluminium frame is all well and good, but then "
@@ -1351,14 +1303,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_techtool_1"] = 10,
-			["value_techtool_2"] = 5,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "basic_tools", quantity = 1 },
+		{ pool = "advanced_parts", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -1379,10 +1329,10 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 	vendorUnlocks = {
 		{ npc = "'Technut'", args = { "attachment_carbonfibre", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I got my hands on some plans for a lining even better than "
@@ -1401,13 +1351,12 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_toiletpaper"] = 110,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "cleaning", quantity = 3 },
+		{ pool = "adhesives", quantity = 2 },
+		{ pool = "workshop_supplies", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -1431,10 +1380,10 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 		{ npc = "'Technut'", args = { "attachment_kevlar_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "technutItemDelivery_AttachmentKevlar2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, steel and ceramic plates are good, but they're also "
@@ -1455,13 +1404,12 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_battery"] = 200,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "batteries", quantity = 5 },
+		{ pool = "industrial_supplies", quantity = 4 },
+		{ pool = "workshop_supplies", quantity = 4 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
@@ -1480,10 +1428,10 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 	vendorUnlocks = {
 		{ npc = "'Technut'", args = { "attachment_kevlar_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"The K119 seems to be doing the job well, but there's always "
@@ -1501,13 +1449,12 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_9vbattery"] = 250,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "batteries", quantity = 6 },
+		{ pool = "documents_technical", quantity = 5 },
+		{ pool = "field_maintenance", quantity = 5 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"

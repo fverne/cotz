@@ -146,7 +146,7 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 					{
 						statement = string.format("Hand over 1 %s", ix.item.list[itemuid].name),
 						topicID = "AboutWorkTopic",
-						dynamicData = { identifier = itemuid },
+						dyndata = { identifier = itemuid },
 					},
 				}
 			end
@@ -217,8 +217,8 @@ DIALOGUE.addTopic("ConfirmTask", {
 	end,
 	GetDynamicOptions = function(self, client, target)
 		local dynamicOptions = {
-			{ statement = "I'll take it.", topicID = "ConfirmTask", dynamicData = { accepted = true } },
-			{ statement = "I'll pass.", topicID = "ConfirmTask", dynamicData = { accepted = false } },
+			{ statement = "I'll take it.", topicID = "ConfirmTask", dyndata = { accepted = true } },
+			{ statement = "I'll pass.", topicID = "ConfirmTask", dyndata = { accepted = false } },
 		}
 		-- Return table of options
 		-- statement : String shown to player
@@ -272,7 +272,7 @@ DIALOGUE.addTopic("GetTask", {
 				table.insert(dynamicOptions, {
 					statement = ix.jobs.getFormattedNameInactive(v),
 					topicID = "GetTask",
-					dynamicData = { identifier = v },
+					dyndata = { identifier = v },
 				})
 			end
 		end
@@ -319,17 +319,17 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 			table.insert(dynamicOptions, {
 				statement = "A trivial task.",
 				topicID = "GetTaskByDifficulty",
-				dynamicData = { difficulty = "easy" },
+				dyndata = { difficulty = "easy" },
 			})
 			table.insert(dynamicOptions, {
 				statement = "A challenging task.",
 				topicID = "GetTaskByDifficulty",
-				dynamicData = { difficulty = "medium" },
+				dyndata = { difficulty = "medium" },
 			})
 			table.insert(dynamicOptions, {
 				statement = "A hard task.",
 				topicID = "GetTaskByDifficulty",
-				dynamicData = { difficulty = "hard" },
+				dyndata = { difficulty = "hard" },
 			})
 		end
 
@@ -395,8 +395,8 @@ DIALOGUE.addTopic("ViewProgression", {
 		self.tmp = nil
 		local progressionStatus = ix.progression.GetComplexProgressionValue(client:GetCharacter(), identifier)
 		local definition = ix.progression.definitions[identifier]
-		if definition.GetItemIds then
-			local progitems = definition.GetItemIds()
+		if definition.requirementSlots then
+			local progitems = ix.progression.GetRequirements(client:GetCharacter(), identifier)
 			local missingitems = {}
 
 			for progitem, cnt in pairs(progitems) do
@@ -414,7 +414,7 @@ DIALOGUE.addTopic("ViewProgression", {
 				table.insert(dynamicOptions, {
 					statement = "Hand over " .. ix.item.list[progitem].name,
 					topicID = "ViewProgression",
-					dynamicData = { progressionID = identifier, itemID = progitem },
+					dyndata = { progid = identifier, itemid = progitem },
 				})
 			end
 		end
@@ -440,14 +440,18 @@ DIALOGUE.addTopic("ViewProgression", {
 				local progressionStatus =
 					ix.progression.GetLine(player:GetCharacter(), dynamicData.identifier)
 
-				if definition.GetItemIds then
+				if definition.requirementSlots then
 					progressionStatus = ix.progression.GetComplexProgressionValue(
 						player:GetCharacter(),
 						dynamicData.identifier
 					)
 				end
 
-				self.response = definition:BuildResponse(target:GetDisplayName(), progressionStatus)
+				self.response = definition:BuildResponse(
+					target:GetDisplayName(),
+					progressionStatus,
+					player:GetCharacter()
+				)
 				self.tmp = dynamicData.identifier
 			end
 		end
@@ -476,7 +480,7 @@ DIALOGUE.addTopic("AboutProgression", {
 			table.insert(dynamicOptions, {
 				statement = ix.progression.definitions[progressionID].name,
 				topicID = "AboutProgression",
-				dynamicData = { identifier = progressionID },
+				dyndata = { identifier = progressionID },
 			})
 		end
 

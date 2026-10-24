@@ -177,7 +177,7 @@ ix.progression.Register("oldTimerKillIntro", {
 		},
 	},
 	progressthresholds = {
-		[1] = 15,
+		[1] = 1,
 	},
 })
 
@@ -193,10 +193,10 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 		ang = Angle(0.000, -178.989, 0.000),
 	},
 	nextProgressions = { "technutItemDelivery_Main" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, we're in need of a lot of food if we want to stay alive "
@@ -221,20 +221,12 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["meat_blinddog"] = 30,
-			["part_blinddog"] = 10,
-			["meat_flesh"] = 30,
-			["part_flesh"] = 15,
-			["meat_tushkano"] = 30,
-			["part_tushkano"] = 10,
-			["meat_boar"] = 20,
-			["part_boar"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "common_meat", quantity = 4 },
+		{ pool = "small_parts", quantity = 3 },
+		{ pool = "common_parts", quantity = 3 },
+	},
 	OnComplete = function(character)
 		timer.Simple(5, function()
 			local name = "'Old Timer'"
@@ -276,10 +268,10 @@ ix.progression.Register("technutItemDelivery_Main", {
 		{ npc = "'Technut'", args = { "fabricplate_1", nil, 1, "SELLANDBUY", 1, 3, 1 } },
 	},
 	nextProgressions = { "oldTimerItemDelivery_mainStatue" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I'm currently working on setting up rudimentary radiocommunications, "
@@ -304,18 +296,13 @@ ix.progression.Register("technutItemDelivery_Main", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_tape_electric"] = 15,
-			["value_wire_heavy"] = 10,
-			["value_tape_duct"] = 10,
-			["value_capacitors"] = 100,
-			["value_sparkplug"] = 10,
-			["value_carbattery"] = 5,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "repair_electrical", quantity = 3 },
+		{ pool = "heavy_electrical_map1", quantity = 3 },
+		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "small_electronics", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Technut'"
@@ -351,10 +338,10 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 		ang = Angle(0.000, -116.989, 0.000),
 	},
 	nextProgressions = { "stalkerNetAdminDelivery_mainRadioTower" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Great work on Technut's little project, but it got me thinking. "
@@ -378,15 +365,12 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_statue_cat"] = 10,
-			["value_statue_lion"] = 7,
-			["value_statue_horse"] = 5,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "statues", quantity = 1 },
+		{ pool = "administrative_documents", quantity = 1 },
+		{ pool = "common_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Old Timer'"
@@ -415,10 +399,10 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	vendorUnlocks = {
 		{ npc = "'Mute'", args = { "quest_flashdrive", nil, 1, "SELLANDBUY", 1, 3, 1 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"** The man looks around erratically, points at a schematic "
@@ -436,17 +420,12 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_wirelesstrans"] = 10,
-			["value_tape_electric"] = 30,
-			["value_phone_new"] = 5,
-			["value_phone_old"] = 5,
-			["value_wire_light"] = 30,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "consumer_electronics", quantity = 2 },
+		{ pool = "repair_electrical", quantity = 2 },
+		{ pool = "heavy_electrical_map1", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(45, function()
 			local name = "'Mute'"
@@ -474,20 +453,17 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 		"quartermasterItemDelivery_2",
 		"bossItemDelivery_1",
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		return (
 			"I chatted with a guy, what was his name, Mute? He should "
 			.. "have a flash drive with information for me. I ain't budging "
 			.. "'till I get that."
 		)
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["quest_flashdrive"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "flashdrive", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(5, function()
 			local name = "'Quartermaster'"
@@ -504,10 +480,10 @@ ix.progression.Register("quarterMasterDelivery_main", {
 	defaultActive = false,
 	progMap = MAP,
 	nextProgressions = { "boss_dataTasks" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Alright boys, lets see some hands, who likes booze? That's "
@@ -527,19 +503,12 @@ ix.progression.Register("quarterMasterDelivery_main", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["drink_spirit_3"] = 5,
-			["drink_vodka_5"] = 5,
-			["drink_vodka_6"] = 5,
-			["drug_cigar"] = 10,
-			["drug_cocaine"] = 5,
-			["drug_cigarette_5"] = 30,
-			["drug_cigarette_6"] = 30,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "spirits", quantity = 2 },
+		{ pool = "premium_cigarettes", quantity = 2 },
+		{ pool = "administrative_documents", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(5, function()
 			local name = "'Quartermaster'"
@@ -595,7 +564,7 @@ ix.progression.Register("boss_dataTasks", {
 		},
 	},
 	progressthresholds = {
-		[1] = 50,
+		[1] = 4,
 	},
 })
 
@@ -651,7 +620,7 @@ ix.progression.Register("smartass_rfTasks", {
 		},
 	},
 	progressthresholds = {
-		[1] = 60,
+		[1] = 4,
 	},
 })
 
@@ -663,10 +632,10 @@ ix.progression.Register("beanstalkItemDelivery_Documents", {
 	defaultActive = true,
 	progMap = MAP,
 	nextProgressions = { "eggheadItemDelivery_artifacts" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Greetings. I won't ask how you got down here, who you are. "
@@ -687,18 +656,13 @@ ix.progression.Register("beanstalkItemDelivery_Documents", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_documents_14"] = 5,
-			["value_documents_7"] = 10,
-			["value_documents_12"] = 10,
-			["value_documents_13"] = 5,
-			["value_documents_11"] = 10,
-			["value_documents_10"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "documents_research", quantity = 1 },
+		{ pool = "documents_field", quantity = 1 },
+		{ pool = "administrative_documents", quantity = 1 },
+	},
 	OnComplete = function(character) end,
 })
 
@@ -709,10 +673,10 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 	defaultActive = false,
 	progMap = MAP,
 	nextProgressions = { "intern_gasAnalyzerReadings" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Hello. I have discovered some strange phenomena deep within "
@@ -737,18 +701,13 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_battery"] = 10,
-			["artifact_blowncap"] = 10,
-			["artifact_capacitor"] = 3,
-			["artifact_sparkler"] = 5,
-			["artifact_flash"] = 5,
-			["artifact_moonlight"] = 3,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "electrical_artifacts", quantity = 1 },
+		{ pool = "rare_electrical_artifacts", quantity = 1 },
+		{ pool = "chemical_artifacts", quantity = 1 },
+		{ pool = "burner_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character) end,
 })
 
@@ -805,7 +764,7 @@ ix.progression.Register("intern_gasAnalyzerReadings", {
 		},
 	},
 	progressthresholds = {
-		[1] = 90,
+		[1] = 6,
 	},
 })
 
@@ -817,16 +776,13 @@ ix.progression.Register("computerDelivery_activateItem", {
 	defaultActive = true,
 	progMap = MAP,
 	nextProgressions = { "computerDelivery_main" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		return "** 'ACCESS DENIED' is written in bold letters on the screen **"
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["quest_computeraccess"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "computer_case", quantity = 1 },
+	},
 	OnComplete = function(character) end,
 })
 
@@ -837,10 +793,10 @@ ix.progression.Register("computerDelivery_main", {
 	defaultActive = false,
 	progMap = MAP,
 	nextProgressions = { "computer_artifactTasks" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"** The computer prints a list of items on the screen, and "
@@ -858,19 +814,13 @@ ix.progression.Register("computerDelivery_main", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_memorymodule"] = 10,
-			["value_calculationunit"] = 5,
-			["value_monitoringunit"] = 3,
-			["value_frequencymodulator"] = 7,
-			["value_motorclean"] = 20,
-			["value_engine"] = 5,
-			["value_gasoline"] = 100,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "radio_components", quantity = 3 },
+		{ pool = "heavy_components", quantity = 3 },
+		{ pool = "fuel", quantity = 2 },
+		{ pool = "computer_parts", quantity = 2 },
+	},
 	OnComplete = function(character) end,
 })
 
@@ -917,6 +867,6 @@ ix.progression.Register("computer_artifactTasks", {
 		},
 	},
 	progressthresholds = {
-		[1] = 100,
+		[1] = 7,
 	},
 })

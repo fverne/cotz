@@ -96,8 +96,8 @@ DIALOGUE.addTopic("ViewProgression", {
 		self.tmp = nil
 		local progressionStatus = ix.progression.GetComplexProgressionValue(client:GetCharacter(), identifier)
 		local definition = ix.progression.definitions[identifier]
-		if definition.GetItemIds then
-			local progitems = definition.GetItemIds()
+		if definition.requirementSlots then
+			local progitems = ix.progression.GetRequirements(client:GetCharacter(), identifier)
 			local missingitems = {}
 
 			for progitem, cnt in pairs(progitems) do
@@ -115,7 +115,7 @@ DIALOGUE.addTopic("ViewProgression", {
 				table.insert(dynamicOptions, {
 					statement = "Hand over " .. ix.item.list[progitem].name,
 					topicID = "ViewProgression",
-					dynamicData = { progressionID = identifier, itemID = progitem },
+					dyndata = { progid = identifier, itemid = progitem },
 				})
 			end
 		end
@@ -141,14 +141,18 @@ DIALOGUE.addTopic("ViewProgression", {
 				local progressionStatus =
 					ix.progression.GetLine(player:GetCharacter(), dynamicData.identifier)
 
-				if definition.GetItemIds then
+				if definition.requirementSlots then
 					progressionStatus = ix.progression.GetComplexProgressionValue(
 						player:GetCharacter(),
 						dynamicData.identifier
 					)
 				end
 
-				self.response = definition:BuildResponse(target:GetDisplayName(), progressionStatus)
+				self.response = definition:BuildResponse(
+					target:GetDisplayName(),
+					progressionStatus,
+					player:GetCharacter()
+				)
 				self.tmp = dynamicData.identifier
 			end
 		end
@@ -192,7 +196,7 @@ DIALOGUE.addTopic("AboutProgression", {
 			table.insert(dynamicOptions, {
 				statement = ix.progression.definitions[progressionID].name,
 				topicID = "AboutProgression",
-				dynamicData = { identifier = progressionID },
+				dyndata = { identifier = progressionID },
 			})
 		end
 
@@ -237,26 +241,26 @@ DIALOGUE.addTopic("HealTopic", {
 		table.insert(dynamicOptions, {
 			statement = "My Physical Health ( " .. client:Health() .. "% ) - " .. ix.currency.Get(hpCost),
 			topicID = "HealTopic",
-			dynamicData = { cost = hpCost, type = "hp" },
+			dyndata = { cost = hpCost, type = "hp" },
 		})
 		table.insert(dynamicOptions, {
 			statement = "My Radiation Level ( " .. client:getRadiation() .. "% ) - " .. ix.currency.Get(
 				radCost
 			),
 			topicID = "HealTopic",
-			dynamicData = { cost = radCost, type = "rad" },
+			dyndata = { cost = radCost, type = "rad" },
 		})
 		table.insert(dynamicOptions, {
 			statement = "My Mental Health ( " .. client:GetPsyHealth() .. "% ) - " .. ix.currency.Get(
 				psyCost
 			),
 			topicID = "HealTopic",
-			dynamicData = { cost = psyCost, type = "psy" },
+			dyndata = { cost = psyCost, type = "psy" },
 		})
 		table.insert(dynamicOptions, {
 			statement = "Everything - " .. ix.currency.Get(hpCost + radCost + psyCost),
 			topicID = "HealTopic",
-			dynamicData = { cost = hpCost + radCost + psyCost, type = "all" },
+			dyndata = { cost = hpCost + radCost + psyCost, type = "all" },
 		})
 
 		return dynamicOptions
@@ -291,12 +295,12 @@ DIALOGUE.addTopic("ConfirmHeal", {
 			{
 				statement = "I can agree to that. Go ahead and heal me.",
 				topicID = "ConfirmHeal",
-				dynamicData = { accepted = true },
+				dyndata = { accepted = true },
 			},
 			{
 				statement = "On second thought...",
 				topicID = "ConfirmHeal",
-				dynamicData = { accepted = false },
+				dyndata = { accepted = false },
 			},
 		}
 

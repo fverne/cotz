@@ -1,10 +1,13 @@
 """Read-only progression workbook views. Lua is inspected, never executed."""
 from collections import Counter, defaultdict
+import json
+import math
 
 
 TAB_NAMES = (
     "Progression overview", "Progression steps", "Progression hand-ins",
     "Progression unlocks", "Progression item demand",
+    "Progression pools", "Progression rebalance",
 )
 
 SERVICE_SOURCES = {
@@ -176,12 +179,15 @@ def collect(root, tokenize, decode):
                 data = fields(tokens[i + 8:end], decode)
                 step = {"id": ident, "source": relative,
                         "line": source.count("\n", 0, tokens[i].start) + 1,
-                        "requirements": {}, "next": [], "vendor": [], "world": {}}
-                for name in ("name", "description", "keyNpc", "defaultActive", "progMap"):
+                        "requirements": {}, "slots": [], "next": [], "vendor": [], "world": {}}
+                for name in ("name", "description", "keyNpc", "defaultActive", "progMap", "lootMapTier"):
                     step[name] = scalar(data[name], decode, constants) if name in data else ""
                 step["next"] = array(data["nextProgressions"], decode) if "nextProgressions" in data else []
                 step["thresholds"] = array(data["progressthresholds"], decode) if "progressthresholds" in data else []
-                step["kind"] = "Item hand-in" if "GetItemIds" in data else "Job completions"
+                step["kind"] = "Item hand-in" if "GetItemIds" in data or "requirementSlots" in data else "Job completions"
+                for entry in entries(data["requirementSlots"]) if "requirementSlots" in data else []:
+                    slot = fields(entry, decode)
+                    step["slots"].append({key: scalar(value, decode) for key, value in slot.items()})
                 if "GetItemIds" in data:
                     try:
                         step["requirements"] = requirements(data["GetItemIds"], decode)
@@ -203,19 +209,43 @@ def collect(root, tokenize, decode):
     return steps, gates, notices
 
 
+def collect_pools(root, tokenize, decode):
+    path = root / "gamemodes/ix_cotz/plugins/progression/sh_requirementpools.lua"
+    if not path.is_file():
+        return {}
+    source = path.read_text(encoding="utf-8")
+    tokens = tokenize(source)
+    for i in range(len(tokens) - 6):
+        if [t.value for t in tokens[i:i + 6]] != ["ix", ".", "progression", ".", "itemPools", "="]:
+            continue
+        end = table_end(tokens, i + 6)
+        pools = {}
+        for ident, body in fields(tokens[i + 6:end], decode).items():
+            data = fields(body, decode)
+            pool = {key: scalar(data[key], decode) for key in ("name", "tier", "evidence")}
+            pool["candidates"] = [{key: scalar(value, decode) for key, value in fields(entry, decode).items()}
+                                  for entry in entries(data["candidates"])]
+            pool["source"] = path.relative_to(root).as_posix()
+            pools[ident] = pool
+        return pools
+    raise ValueError("Missing literal progression itemPools table")
+
+
 def build_tabs(root, entities, tokenize, decode):
     steps, gates, notices = collect(root, tokenize, decode)
+    pools = collect_pools(root, tokenize, decode)
     items = defaultdict(list)
     for entity in entities:
         if entity["tab"] == "Items":
             items[entity["id"]].append(entity)
 
     def item_name(ident):
-        found = items[ident]
+        found = items.get(ident, [])
         return found[0]["name"] if len(found) == 1 else ident
 
     def item_status(ident):
-        return "Found" if len(items[ident]) == 1 else "Duplicate definitions" if items[ident] else "Not found in scanned items"
+        found = items.get(ident, [])
+        return "Found" if len(found) == 1 else "Duplicate definitions" if found else "Not found in scanned items"
 
     previous = defaultdict(list)
     for step in steps:
@@ -234,24 +264,53 @@ def build_tabs(root, entities, tokenize, decode):
                                       "NPC access milestone", "Maps", "Scope / reading notes"]]
     tabs["Progression steps"] = [["Progression ID", "Name", "NPC", "Type", "Map", "Initially active definition",
                                    "Activated by completion of (any)", "NPC access milestone", "Next steps",
-                                   "Item types required", "Total raw units", "Job thresholds", "Description", "Source", "Line"]]
-    tabs["Progression hand-ins"] = [["Progression ID", "Step", "NPC", "Map", "Item ID", "Item", "Required units",
-                                      "Item definition status", "Source", "Line"]]
+                                   "Item types required", "Total raw units", "Job thresholds", "Description", "Source", "Line",
+                                   "Loot map ceiling",
+                                   "Min assigned raw units", "Max assigned raw units", "Assignment policy"]]
+    tabs["Progression hand-ins"] = [["Progression ID", "Step", "NPC", "Map", "Item ID", "Item", "Units if selected",
+                                      "Item definition status", "Source", "Line", "Slot", "Pool", "Pool tier", "Selection",
+                                      "Loot map ceiling"]]
     tabs["Progression unlocks"] = [["Progression ID", "Step", "Unlock type", "Scope", "Target NPC / template",
                                      "Item / next step", "Name", "Details", "Source", "Line"]]
-    tabs["Progression item demand"] = [["Item ID", "Item", "Steps requesting item", "Total raw units across all steps",
+    tabs["Progression item demand"] = [["Item ID", "Item", "Steps potentially requesting item", "Potential raw units across all steps",
                                          "Largest single requirement", "NPCs", "Progression IDs", "Item definition status"]]
+    tabs["Progression pools"] = [["Pool ID", "Pool", "Tier", "Item ID", "Item",
+                                   "Candidates", "Rarity / acquisition rationale", "Source"]]
+    tabs["Progression rebalance"] = [["Progression ID", "Step", "NPC", "Original item types", "Original raw units",
+                                       "Personal slots", "Min assigned raw units", "Max assigned raw units",
+                                       "Pools", "Single-item exceptions", "Source", "Original / 16 rounded up",
+                                       "Extra units to retain categories", "Original job thresholds", "Personal job thresholds"]]
+    original_path = root / "docs/balance/progression/original-requirements.json"
+    original = json.loads(original_path.read_text()) if original_path.is_file() else {}
+    tasks_path = root / "docs/balance/progression/original-task-requirements.json"
+    original_tasks = json.loads(tasks_path.read_text()) if tasks_path.is_file() else {}
+    for ident, pool in sorted(pools.items()):
+        for candidate in pool["candidates"]:
+            item = candidate["item"]
+            tabs["Progression pools"].append([ident, pool["name"], pool["tier"], item, item_name(item),
+                                               len(pool["candidates"]), pool["evidence"], pool["source"]])
     grouped = defaultdict(list)
     demand = defaultdict(list)
     for step in steps:
         grouped[step["keyNpc"]].append(step)
         ident, req = step["id"], step["requirements"]
+        minimum = maximum = 0
+        for slot in step["slots"]:
+            candidates = pools.get(slot["pool"], {}).get("candidates", [])
+            if not candidates:
+                notices.append([step["source"], f"{ident}: unknown or empty pool {slot['pool']}"])
+                continue
+            minimum += slot["quantity"]
+            maximum += slot["quantity"]
         tabs["Progression steps"].append([
             ident, step["name"], step["keyNpc"], step["kind"], step["progMap"], step["defaultActive"],
             "; ".join(previous[ident]), gates.get(step["keyNpc"], ""), "; ".join(step["next"]),
-            len(req) if step["kind"] == "Item hand-in" else None,
-            sum(req.values()) if step["kind"] == "Item hand-in" else None,
+            len(step["slots"]) or (len(req) if step["kind"] == "Item hand-in" else None),
+            minimum if step["slots"] else sum(req.values()) if req else None,
             "; ".join(f"{value:g}" for value in step["thresholds"]), step["description"], step["source"], step["line"],
+            step["lootMapTier"],
+            minimum if step["slots"] else None, maximum if step["slots"] else None,
+            "One server-selected item per slot; saved per character at unlock" if step["slots"] else "",
         ])
         for item, amount in sorted(req.items()):
             tabs["Progression hand-ins"].append([
@@ -259,6 +318,35 @@ def build_tabs(root, entities, tokenize, decode):
                 item_status(item), step["source"], step["line"],
             ])
             demand[item].append((step, amount))
+        for index, slot in enumerate(step["slots"], 1):
+            pool = pools.get(slot["pool"])
+            if not pool:
+                continue
+            for candidate in pool["candidates"]:
+                item, amount = candidate["item"], slot["quantity"]
+                tabs["Progression hand-ins"].append([
+                    ident, step["name"], step["keyNpc"], step["progMap"], item, item_name(item), amount,
+                    item_status(item), step["source"], step["line"], index, slot["pool"], pool["tier"],
+                    "One candidate in this slot; remaining rows are alternatives",
+                    step["lootMapTier"],
+                ])
+                demand[item].append((step, amount))
+        if step["slots"]:
+            old = original.get(ident, {})
+            exceptions = [s["pool"] for s in step["slots"] if len(pools.get(s["pool"], {}).get("candidates", [])) == 1]
+            tabs["Progression rebalance"].append([
+                ident, step["name"], step["keyNpc"], len(old) if old else None,
+                sum(old.values()) if old else None, len(step["slots"]), minimum, maximum,
+                "; ".join(s["pool"] for s in step["slots"]), "; ".join(exceptions), step["source"],
+                math.ceil(sum(old.values()) / 16) if old else None,
+                max(0, minimum - math.ceil(sum(old.values()) / 16)) if old else None, "", "",
+            ])
+        elif ident in original_tasks:
+            tabs["Progression rebalance"].append([
+                ident, step["name"], step["keyNpc"], None, None, None, None, None, "", "", step["source"],
+                None, None, "; ".join(str(n) for n in original_tasks[ident]),
+                "; ".join(f"{n:g}" for n in step["thresholds"]),
+            ])
 
         def unlock(kind, scope, target, value, name="", details=""):
             tabs["Progression unlocks"].append([
@@ -324,9 +412,10 @@ def build_tabs(root, entities, tokenize, decode):
             "Units are not loot finds or a playthrough total; branches may be alternatives. "
             "Callbacks and external gates require source review.",
         ])
-    for item, rows in sorted(demand.items(), key=lambda pair: (-len(pair[1]), pair[0])):
+    for item in sorted(set(items) | set(demand), key=lambda item: (-len(demand.get(item, [])), item)):
+        rows = demand.get(item, [])
         tabs["Progression item demand"].append([
-            item, item_name(item), len(rows), sum(amount for _, amount in rows), max(amount for _, amount in rows),
+            item, item_name(item), len(rows), sum(amount for _, amount in rows), max((amount for _, amount in rows), default=0),
             "; ".join(sorted({s["keyNpc"] for s, _ in rows})), "; ".join(s["id"] for s, _ in rows), item_status(item),
         ])
     return tabs, notices

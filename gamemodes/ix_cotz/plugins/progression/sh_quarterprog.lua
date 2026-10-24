@@ -11,10 +11,10 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 		{ npc = "'Quartermaster'", args = { "mossberg500", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_11", "quartermasterItemDelivery_12" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, you're one of the hotshots from the Swamp that Haggler "
@@ -38,13 +38,12 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_snork_1"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "humanoid_parts", quantity = 1 },
+		{ pool = "common_parts", quantity = 1 },
+		{ pool = "small_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -69,10 +68,10 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 		{ npc = "'Quartermaster'", args = { "l85", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_111", "quartermasterItemDelivery_112" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Alright, you've proven yourself at least a bit useful. "
@@ -94,15 +93,12 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["ruger1022"] = 10,
-			["w9422"] = 10,
-			["sako85varmint"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "rimfire_rifles", quantity = 1 },
+		{ pool = "maintenance", quantity = 1 },
+		{ pool = "powder", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -126,10 +122,10 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 		{ npc = "'Quartermaster'", args = { "g36c", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_1111" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Got another job for you if you're interested in helping "
@@ -153,16 +149,12 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_boar"] = 80,
-			["part_cat"] = 40,
-			["part_pseudodog"] = 70,
-			["part_bloodsucker"] = 20,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "common_parts", quantity = 5 },
+		{ pool = "small_parts", quantity = 5 },
+		{ pool = "humanoid_parts", quantity = 4 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -185,10 +177,10 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 	vendorUnlocks = {
 		{ npc = "'Quartermaster'", args = { "sg552", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"We've got a problem, stalker. My shipments are getting "
@@ -210,13 +202,12 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_izlom"] = 50,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "humanoid_parts", quantity = 2 },
+		{ pool = "large_parts", quantity = 1 },
+		{ pool = "rare_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -239,10 +230,10 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 		{ npc = "'Quartermaster'", args = { "an94k", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_1121" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Got an interesting one for you; I've gotten an offer from "
@@ -265,18 +256,12 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_documents_2"] = 1,
-			["value_documents_4"] = 1,
-			["value_documents_5"] = 1,
-			["value_documents_9"] = 1,
-			["value_documents_10"] = 1,
-			["value_documents_11"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "documents_field", quantity = 1 },
+		{ pool = "documents_research", quantity = 1 },
+		{ pool = "administrative_documents", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -300,10 +285,10 @@ ix.progression.Register("quartermasterItemDelivery_1121", {
 		{ npc = "'Quartermaster'", args = { "rk95", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_11211" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Good timing; I've got work. Unfortunately, one of my suppliers "
@@ -327,16 +312,13 @@ ix.progression.Register("quartermasterItemDelivery_1121", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_documents_9"] = 3,
-			["value_documents_10"] = 3,
-			["value_documents_11"] = 3,
-			["value_powerbank"] = 15,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "documents_field", quantity = 1 },
+		{ pool = "documents_research", quantity = 1 },
+		{ pool = "field_instruments", quantity = 1 },
+		{ pool = "administrative_documents", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -358,10 +340,10 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 	vendorUnlocks = {
 		{ npc = "'Quartermaster'", args = { "ak12", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"The Russians are back in touch again, and their shopping "
@@ -384,15 +366,12 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_gunpowder_green"] = 100,
-			["value_gunpowder_blue"] = 90,
-			["value_gunpowder_red"] = 80,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "powder", quantity = 6 },
+		{ pool = "maintenance", quantity = 6 },
+		{ pool = "industrial_supplies", quantity = 5 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -413,10 +392,10 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 		{ npc = "'Quartermaster'", args = { "fiveseven", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_121", "quartermasterItemDelivery_122" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I've got no outstanding work right now, although... no, "
@@ -437,14 +416,12 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["hidestash_1"] = 10,
-			["hidestash_2"] = 5,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "stash_notes", quantity = 1 },
+		{ pool = "administrative_documents", quantity = 1 },
+		{ pool = "documents_field", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -468,10 +445,10 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 		{ npc = "'Quartermaster'", args = { "p90", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 		{ npc = "'Quartermaster'", args = { "ump45", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"It's time for another test, stalker. You've proven yourself "
@@ -492,13 +469,10 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_pseudogiant"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "elite_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -521,10 +495,10 @@ ix.progression.Register("quartermasterItemDelivery_122", {
 		{ npc = "'Quartermaster'", args = { "lr300", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_1221" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"No, I don't need data this time, but I do need some help. "
@@ -546,13 +520,11 @@ ix.progression.Register("quartermasterItemDelivery_122", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_psydog"] = 3,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "brains", quantity = 1 },
+		{ pool = "exotic_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -574,10 +546,10 @@ ix.progression.Register("quartermasterItemDelivery_1221", {
 		{ npc = "'Quartermaster'", args = { "m16a4", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_12211" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Alright, our friends from the West were very pleased with "
@@ -601,13 +573,12 @@ ix.progression.Register("quartermasterItemDelivery_1221", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["food_mre_usa"] = 100,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "mre", quantity = 3 },
+		{ pool = "common_meals", quantity = 2 },
+		{ pool = "spirits", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -629,10 +600,10 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 	vendorUnlocks = {
 		{ npc = "'Quartermaster'", args = { "fnfal", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"No direct import order this time, the Westerners have a "
@@ -654,13 +625,10 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["hide_pseudogiant"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "elite_hides", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -683,10 +651,10 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 		{ npc = "'Quartermaster'", args = { "swr8", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_21", "quartermasterItemDelivery_22" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Time for a data gathering mission. I've been getting complaints "
@@ -706,13 +674,12 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_burer_1"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "large_parts", quantity = 1 },
+		{ pool = "exotic_parts", quantity = 1 },
+		{ pool = "humanoid_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -737,10 +704,10 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 		{ npc = "'Quartermaster'", args = { "mp9a1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_211", "quartermasterItemDelivery_212" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"The S&W R8 seems to satisfy most people, but I've found "
@@ -761,14 +728,12 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["hidestash_2"] = 45,
-			["hidestash_3"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "stash_notes", quantity = 2 },
+		{ pool = "veteran_stash", quantity = 1 },
+		{ pool = "administrative_documents", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -792,10 +757,10 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 		{ npc = "'Quartermaster'", args = { "uzi", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 		{ npc = "'Quartermaster'", args = { "pp1901vityaz", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I've gotten a request for some SMGs that are cheaper than "
@@ -815,13 +780,12 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["meat_flesh"] = 300,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "common_meat", quantity = 7 },
+		{ pool = "common_parts", quantity = 6 },
+		{ pool = "small_parts", quantity = 6 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -843,10 +807,10 @@ ix.progression.Register("quartermasterItemDelivery_212", {
 		{ npc = "'Quartermaster'", args = { "famas", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_2121" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"The West has reached out again, and they've got yet another "
@@ -867,14 +831,12 @@ ix.progression.Register("quartermasterItemDelivery_212", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["food_mre_ukraine"] = 50,
-			["food_mre_russia"] = 50,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "mre", quantity = 3 },
+		{ pool = "local_beer", quantity = 2 },
+		{ pool = "common_meals", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -893,10 +855,10 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 	vendorUnlocks = {
 		{ npc = "'Quartermaster'", args = { "aug", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"We've gotten about all we can from the West, and it's time "
@@ -916,16 +878,12 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_pcpart_gpu"] = 1,
-			["value_pcpart_psu"] = 1,
-			["value_pcpart_hdd"] = 2,
-			["value_pcpart_ssd"] = 2,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "computer_parts", quantity = 1 },
+		{ pool = "advanced_parts", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -950,10 +908,10 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 		{ npc = "'Quartermaster'", args = { "mr96", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_221", "quartermasterItemDelivery_222" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"A group of pretty influential mutant hunters have been "
@@ -978,14 +936,12 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_battery"] = 10,
-			["part_electrocontroller_1"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "electrical_artifacts", quantity = 1 },
+		{ pool = "elite_parts", quantity = 1 },
+		{ pool = "chemical_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -1007,10 +963,10 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 	vendorUnlocks = {
 		{ npc = "'Quartermaster'", args = { "mp153", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I think it's time to expand my market into kit that's a "
@@ -1032,14 +988,12 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_eye"] = 15,
-			["part_hellhound"] = 8, -- PLACEHOLDER, DOESNT EXIST YET
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "rare_field_artifacts", quantity = 1 },
+		{ pool = "hellhound_part", quantity = 1 },
+		{ pool = "rare_electrical_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -1061,10 +1015,10 @@ ix.progression.Register("quartermasterItemDelivery_222", {
 		{ npc = "'Quartermaster'", args = { "sv98", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_2221" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I've seen a lot of the swamp stalkers coming in with Mosin "
@@ -1085,13 +1039,12 @@ ix.progression.Register("quartermasterItemDelivery_222", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_mamasbeads"] = 4,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "rare_field_artifacts", quantity = 1 },
+		{ pool = "gravitational_artifacts", quantity = 1 },
+		{ pool = "documents_field", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"
@@ -1110,10 +1063,10 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 	vendorUnlocks = {
 		{ npc = "'Quartermaster'", args = { "svd", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"It's been a long road together, but I have one last job "
@@ -1135,13 +1088,12 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_crystal"] = 25,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "rare_field_artifacts", quantity = 1 },
+		{ pool = "chemical_artifacts", quantity = 1 },
+		{ pool = "rare_electrical_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Quartermaster'"

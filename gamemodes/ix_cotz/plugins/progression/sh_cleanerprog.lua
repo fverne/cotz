@@ -6,10 +6,10 @@ ix.progression.Register("cleanerItemDelivery_Storage", {
 	keyNpc = "'Cleaner'",
 	defaultActive = true,
 	progMap = MAP,
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Greetings, stalker. If you've noticed, you aren't capble "
@@ -31,13 +31,10 @@ ix.progression.Register("cleanerItemDelivery_Storage", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_bolt"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "common_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Cleaner'"

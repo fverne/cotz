@@ -461,76 +461,8 @@ function PANEL:Init()
 		self.highlghtItems[jobDef.requiredItem] = "Task"
 	end
 
-	local npcIdentifiers = {}
-	local initialNpcs = {
-		"'Old Timer'",
-		"'Technut'",
-		"'Jitters'",
-		"'Cleaner'",
-		"'Quartermaster'",
-		"'Boss'",
-		"'Smartass'",
-	}
-
-	table.Add(npcIdentifiers, initialNpcs)
-
-	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerKillIntro") then
-		local tradeNPC = {
-			"'Haggler'",
-		}
-		table.Add(npcIdentifiers, tradeNPC)
-	end
-
-	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerItemDelivery_mainMeat") then
-		local cookNPC = {
-			"'Spicy Lemon'",
-		}
-		table.Add(npcIdentifiers, cookNPC)
-	end
-
-	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerItemDelivery_mainStatue") then
-		local muteNPC = {
-			"'Mute'",
-		}
-		table.Add(npcIdentifiers, muteNPC)
-	end
-
-	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "smartass_rfTasks") then
-		local ecologistNpcs = {
-			"'Egghead'",
-			"'Beanstalk'",
-			"'Intern'",
-		}
-		table.Add(npcIdentifiers, ecologistNpcs)
-	end
-
-	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "intern_gasAnalyzerReadings") then
-		local pripyatNpcs = {
-			"'Computer'",
-		}
-		table.Add(npcIdentifiers, pripyatNpcs)
-	end
-
-	for _, npcIdentifier in pairs(npcIdentifiers) do
-		for _, v in pairs(ix.progression.GetActiveProgressions(LocalPlayer():GetCharacter(), npcIdentifier)) do
-			local progDef = ix.progression.definitions[v]
-			if progDef and not progDef.GetItemIds then
-				continue
-			end
-			local progressionStatus =
-				ix.progression.GetComplexProgressionValue(LocalPlayer():GetCharacter(), v)
-			for itemName, amount in pairs(progDef.GetItemIds()) do
-				if
-					self.highlghtItems[itemName] == nil
-					and progressionStatus
-					and (amount - (progressionStatus[itemName] or 0)) > 0
-				then
-					self.highlghtItems[itemName] = "Progression"
-				elseif self.highlghtItems[itemName] == "Task" then
-					self.highlghtItems[itemName] = "Both"
-				end
-			end
-		end
+	for item in pairs(ix.progression.GetNeededItems(LocalPlayer():GetCharacter())) do
+		self.highlghtItems[item] = self.highlghtItems[item] == "Task" and "Both" or "Progression"
 	end
 end
 

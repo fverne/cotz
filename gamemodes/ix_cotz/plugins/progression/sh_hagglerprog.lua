@@ -12,10 +12,10 @@ ix.progression.Register("hagglerItemDelivery_1", {
 		{ npc = "'Haggler'", args = { "brhp", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_11", "hagglerItemDelivery_12" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I'll be honest, stalker, this place is kind of a slouch. "
@@ -41,14 +41,12 @@ ix.progression.Register("hagglerItemDelivery_1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_nuts"] = 90,
-			["value_toiletpaper"] = 15,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "fasteners", quantity = 3 },
+		{ pool = "cleaning", quantity = 2 },
+		{ pool = "workshop_supplies", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -73,10 +71,10 @@ ix.progression.Register("hagglerItemDelivery_11", {
 		{ npc = "'Haggler'", args = { "sten", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_111", "hagglerItemDelivery_112" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"The shipment of pistols is handy, but they're only good "
@@ -98,14 +96,12 @@ ix.progression.Register("hagglerItemDelivery_11", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_capacitors"] = 100,
-			["value_glue_1"] = 20,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "small_electronics", quantity = 3 },
+		{ pool = "adhesives", quantity = 3 },
+		{ pool = "workshop_supplies", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -128,10 +124,10 @@ ix.progression.Register("hagglerItemDelivery_111", {
 		{ npc = "'Haggler'", args = { "lax410", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_1111" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Happy with my work in the shop so far? I am too, but my "
@@ -154,15 +150,12 @@ ix.progression.Register("hagglerItemDelivery_111", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_nails"] = 40,
-			["value_tape_duct"] = 25,
-			["value_hose"] = 15,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "fasteners", quantity = 2 },
+		{ pool = "cleaning", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -184,10 +177,10 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 		{ npc = "'Haggler'", args = { "swmodel29", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 		{ npc = "'Haggler'", args = { "44magnum", nil, 150, "SELLANDBUY", 150, 1, 150 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I'm milking my supplies in the SBU for all they're worth, "
@@ -211,14 +204,12 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_tape_electric"] = 30,
-			["value_detergent"] = 30,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "repair_electrical", quantity = 2 },
+		{ pool = "cleaning", quantity = 1 },
+		{ pool = "consumer_electronics", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -240,10 +231,10 @@ ix.progression.Register("hagglerItemDelivery_112", {
 	vendorUnlocks = {
 		{ npc = "'Haggler'", args = { "sterling", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I don't know if you've spent any time using it, but I really, "
@@ -270,14 +261,12 @@ ix.progression.Register("hagglerItemDelivery_112", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_goldchain"] = 4,
-			["value_wire_light"] = 60,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "small_valuables", quantity = 2 },
+		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -301,10 +290,10 @@ ix.progression.Register("hagglerItemDelivery_12", {
 		{ npc = "'Haggler'", args = { "toz66short", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_121", "hagglerItemDelivery_122" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"If you've got time, I've got something you can help me "
@@ -328,14 +317,12 @@ ix.progression.Register("hagglerItemDelivery_12", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_sparkplug"] = 30,
-			["value_glue_2"] = 25,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "repair_electrical", quantity = 2 },
+		{ pool = "adhesives", quantity = 1 },
+		{ pool = "small_electronics", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -359,10 +346,10 @@ ix.progression.Register("hagglerItemDelivery_121", {
 		{ npc = "'Haggler'", args = { "rugermini14", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_1211" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, I had the great idea to start importing some Cold War "
@@ -388,14 +375,12 @@ ix.progression.Register("hagglerItemDelivery_121", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_toothpaste"] = 35,
-			["value_statue_horse"] = 5,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "cleaning", quantity = 1 },
+		{ pool = "statues", quantity = 1 },
+		{ pool = "administrative_documents", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -419,10 +404,10 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 		{ npc = "'Haggler'", args = { "saigasemi", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_12111" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, I'm thinking that these imported arms are all well "
@@ -445,14 +430,12 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_engine"] = 4,
-			["value_nuts"] = 80,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "heavy_components", quantity = 2 },
+		{ pool = "fasteners", quantity = 2 },
+		{ pool = "fuel", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -473,10 +456,10 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 		{ npc = "'Haggler'", args = { "357magnum", nil, 15, "SELLANDBUY", 15, 1, 15 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_121111" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, Quartermaster got in touch with me with an offer. We've "
@@ -485,8 +468,8 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 			.. "gonna need something a little more beefy than what we've "
 			.. "got if we want to start pushing north. Like typical Quartermaster, "
 			.. "though, he's offering to sell us the weapon without a reliable "
-			.. "means of getting the ammo. He's wanting fifty jars of gunpowder, "
-			.. "the shitty stuff used for pistol reloads. You up to it?\n\nREQUIRED "
+			.. "means of getting the ammo. He's wanting supplies for pistol "
+			.. "reloads and workshop upkeep. You up to it?\n\nREQUIRED "
 			.. "ITEMS:"
 		)
 
@@ -500,13 +483,12 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_gunpowder_blue"] = 30,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "powder", quantity = 1 },
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "maintenance", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -526,10 +508,10 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 		{ npc = "'Haggler'", args = { "g2500mag", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 		{ npc = "'Haggler'", args = { "500magnum", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"We've got a golden opportunity here, stalker! Word about "
@@ -553,14 +535,12 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_phone_new"] = 15,
-			["value_watch"] = 20,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "consumer_electronics", quantity = 1 },
+		{ pool = "small_valuables", quantity = 1 },
+		{ pool = "administrative_documents", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -585,10 +565,10 @@ ix.progression.Register("hagglerItemDelivery_122", {
 		{ npc = "'Haggler'", args = { "kp31", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_1221" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Yo, got another opportunity here. My Russian supplier came "
@@ -609,14 +589,12 @@ ix.progression.Register("hagglerItemDelivery_122", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_detergent"] = 30,
-			["value_carbattery"] = 5,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "cleaning", quantity = 1 },
+		{ pool = "heavy_electrical_map1", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -639,10 +617,10 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 		{ npc = "'Haggler'", args = { "mac11", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_12211" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Alright, I think I've about hit my limit with this hand "
@@ -663,14 +641,12 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_waterfilter"] = 8,
-			["value_bolts"] = 80,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "filters", quantity = 2 },
+		{ pool = "fasteners", quantity = 2 },
+		{ pool = "industrial_supplies", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -693,10 +669,10 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 	vendorUnlocks = {
 		{ npc = "'Haggler'", args = { "m1911chic", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Good seeing you. You remember way back when we got the "
@@ -719,14 +695,12 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_techtool_2"] = 2,
-			["value_gunoil"] = 20,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "advanced_parts", quantity = 1 },
+		{ pool = "field_maintenance", quantity = 1 },
+		{ pool = "documents_technical", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -752,10 +726,10 @@ ix.progression.Register("hagglerItemDelivery_2", {
 		{ npc = "'Haggler'", args = { "toz34short", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_21", "hagglerItemDelivery_22" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, if you're like me, you're probably getting pretty goddamn "
@@ -776,14 +750,12 @@ ix.progression.Register("hagglerItemDelivery_2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_bolts"] = 130,
-			["value_sparkplug"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "fasteners", quantity = 3 },
+		{ pool = "repair_electrical", quantity = 3 },
+		{ pool = "small_electronics", quantity = 3 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -803,10 +775,10 @@ ix.progression.Register("hagglerItemDelivery_21", {
 		{ npc = "'Haggler'", args = { "sako85nato", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_211", "hagglerItemDelivery_212" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"You seen some of the shitty peashooters chambered in .22 "
@@ -828,13 +800,12 @@ ix.progression.Register("hagglerItemDelivery_21", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_gunpowder_green"] = 15,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "powder", quantity = 1 },
+		{ pool = "maintenance", quantity = 1 },
+		{ pool = "administrative_documents", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -856,10 +827,10 @@ ix.progression.Register("hagglerItemDelivery_211", {
 		{ npc = "'Haggler'", args = { "c96carbine", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_2111" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, combining some of the knowledge that I gained working "
@@ -883,13 +854,12 @@ ix.progression.Register("hagglerItemDelivery_211", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_carbattery"] = 8,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "heavy_electrical_map1", quantity = 1 },
+		{ pool = "small_electronics", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -908,10 +878,10 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 	vendorUnlocks = {
 		{ npc = "'Haggler'", args = { "ppsh", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I've been seeing stalkers run around the the PPSh SMG; "
@@ -934,13 +904,12 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_siliconetube"] = 40,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "workshop_supplies", quantity = 1 },
+		{ pool = "adhesives", quantity = 1 },
+		{ pool = "cleaning", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -963,10 +932,10 @@ ix.progression.Register("hagglerItemDelivery_212", {
 		{ npc = "'Haggler'", args = { "toz194", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_2121" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I think we're starting to reach the point now where double "
@@ -987,14 +956,12 @@ ix.progression.Register("hagglerItemDelivery_212", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_battery"] = 90,
-			["value_motorclean"] = 15,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "batteries", quantity = 3 },
+		{ pool = "engine_care", quantity = 2 },
+		{ pool = "repair_electrical", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -1014,10 +981,10 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 		{ npc = "'Haggler'", args = { "m1887", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_21211" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Quartermaster has reached me with an offer for some vintage "
@@ -1038,13 +1005,12 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_wire_heavy"] = 5,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "heavy_electrical", quantity = 1 },
+		{ pool = "small_electronics", quantity = 1 },
+		{ pool = "cleaning", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -1063,10 +1029,10 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 	vendorUnlocks = {
 		{ npc = "'Haggler'", args = { "ithaca37", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"The TOZ-194 is nice and all, but its lack of a stock and "
@@ -1088,14 +1054,12 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_wire_copper"] = 40,
-			["value_9vbattery"] = 70,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "small_electronics", quantity = 3 },
+		{ pool = "batteries", quantity = 2 },
+		{ pool = "workshop_supplies", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -1116,10 +1080,10 @@ ix.progression.Register("hagglerItemDelivery_22", {
 		{ npc = "'Haggler'", args = { "mp34", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_221", "hagglerItemDelivery_222" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, if you're had any experience with the 7.62 rifles you'll "
@@ -1141,14 +1105,12 @@ ix.progression.Register("hagglerItemDelivery_22", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_lightbulb"] = 60,
-			["value_gasoline"] = 20,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "fuel", quantity = 2 },
+		{ pool = "heavy_electrical_map1", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -1172,10 +1134,10 @@ ix.progression.Register("hagglerItemDelivery_221", {
 		{ npc = "'Haggler'", args = { "w1895", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_2211" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I found out who my supplier was using to get the shitty "
@@ -1199,15 +1161,12 @@ ix.progression.Register("hagglerItemDelivery_221", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_hose"] = 90,
-			["value_wire_light"] = 60,
-			["value_propanetank"] = 15,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "workshop_supplies", quantity = 4 },
+		{ pool = "repair_electrical", quantity = 4 },
+		{ pool = "small_electronics", quantity = 3 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -1230,10 +1189,10 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 		{ npc = "'Haggler'", args = { "mosin", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_22111" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"My Russian supplier has a two part shipment. The first "
@@ -1254,14 +1213,12 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_paracord"] = 40,
-			["value_wirelesstrans"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "field_maintenance", quantity = 1 },
+		{ pool = "consumer_electronics", quantity = 1 },
+		{ pool = "computer_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -1283,10 +1240,10 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 	vendorUnlocks = {
 		{ npc = "'Haggler'", args = { "svt40", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Right, part two of the shipment. Bolt actions are all well "
@@ -1307,13 +1264,12 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_glue_3"] = 200,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "adhesives", quantity = 5 },
+		{ pool = "repair_electrical", quantity = 4 },
+		{ pool = "workshop_supplies", quantity = 4 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -1336,10 +1292,10 @@ ix.progression.Register("hagglerItemDelivery_222", {
 		{ npc = "'Haggler'", args = { "mp40", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_2221" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"So, you've probably run into a MP40 or two in your time "
@@ -1360,14 +1316,12 @@ ix.progression.Register("hagglerItemDelivery_222", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_techtool_1"] = 6,
-			["value_nails"] = 40,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "basic_tools", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 1 },
+		{ pool = "small_electronics", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -1389,10 +1343,10 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 		{ npc = "'Haggler'", args = { "aks74u", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_22211" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"After all this bullshit, it's finally time; it's finally "
@@ -1416,15 +1370,12 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_gunspray"] = 10,
-			["value_guncleaner"] = 10,
-			["value_lubricant"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "maintenance", quantity = 1 },
+		{ pool = "powder", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
@@ -1447,10 +1398,10 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 	vendorUnlocks = {
 		{ npc = "'Haggler'", args = { "akm", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"We've had a long and prosperous relationship together, "
@@ -1471,15 +1422,12 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_gunspray"] = 30,
-			["value_guncleaner"] = 30,
-			["value_lubricant"] = 30,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "maintenance", quantity = 2 },
+		{ pool = "fuel", quantity = 2 },
+		{ pool = "repair_electrical", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"

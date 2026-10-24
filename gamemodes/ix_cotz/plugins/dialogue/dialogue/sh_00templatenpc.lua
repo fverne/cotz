@@ -181,7 +181,7 @@ DIALOGUE.addTopic("GetTask", {
 				table.insert(dynamicOptions, {
 					statement = ix.jobs.getFormattedNameInactive(v),
 					topicID = "GetTask",
-					dynamicData = { identifier = v },
+					dyndata = { identifier = v },
 				})
 			end
 		end
@@ -215,8 +215,8 @@ DIALOGUE.addTopic("ConfirmTask", {
 	end,
 	GetDynamicOptions = function(self, client, target)
 		local dynamicOptions = {
-			{ statement = "I'll take it", topicID = "ConfirmTask", dynamicData = { accepted = true } },
-			{ statement = "I'll pass", topicID = "ConfirmTask", dynamicData = { accepted = false } },
+			{ statement = "I'll take it", topicID = "ConfirmTask", dyndata = { accepted = true } },
+			{ statement = "I'll pass", topicID = "ConfirmTask", dyndata = { accepted = false } },
 		}
 
 		return dynamicOptions
@@ -264,17 +264,17 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 			table.insert(dynamicOptions, {
 				statement = "A trivial task.",
 				topicID = "GetTaskByDifficulty",
-				dynamicData = { difficulty = "easy" },
+				dyndata = { difficulty = "easy" },
 			})
 			table.insert(dynamicOptions, {
 				statement = "A challenging task.",
 				topicID = "GetTaskByDifficulty",
-				dynamicData = { difficulty = "medium" },
+				dyndata = { difficulty = "medium" },
 			})
 			table.insert(dynamicOptions, {
 				statement = "A hard task.",
 				topicID = "GetTaskByDifficulty",
-				dynamicData = { difficulty = "hard" },
+				dyndata = { difficulty = "hard" },
 			})
 		end
 
@@ -330,7 +330,7 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 					{
 						statement = string.format("Hand over 1 %s", ix.item.list[itemuid].name),
 						topicID = "AboutWorkTopic",
-						dynamicData = { identifier = itemuid },
+						dyndata = { identifier = itemuid },
 					},
 				}
 			end
@@ -393,7 +393,7 @@ DIALOGUE.addTopic("SpecialSaleTopic", {
 			table.insert(dynamicOptions, {
 				statement = dialogue .. " (Price: " .. gamblePrice .. ")",
 				topicID = "SpecialSaleTopic",
-				dynamicData = { categoryid = categoryId, cost = gamblePrice },
+				dyndata = { categoryid = categoryId, cost = gamblePrice },
 			})
 		end
 
@@ -430,11 +430,11 @@ DIALOGUE.addTopic("ConfirmSpecialSale", {
 	end,
 	GetDynamicOptions = function(self, client, target)
 		local dynamicOptions = {
-			{ statement = "Sure, here.", topicID = "ConfirmSpecialSale", dynamicData = { accepted = true } },
+			{ statement = "Sure, here.", topicID = "ConfirmSpecialSale", dyndata = { accepted = true } },
 			{
 				statement = "That's too expensive for me.",
 				topicID = "ConfirmSpecialSale",
-				dynamicData = { accepted = false },
+				dyndata = { accepted = false },
 			},
 		}
 
@@ -502,9 +502,9 @@ DIALOGUE.addTopic("RepairItems", {
 							.. "% Wear ) - "
 							.. ix.currency.Get(repaircost),
 						topicID = "RepairItems",
-						dynamicData = {
+						dyndata = {
 							itemuid = v.uniqueID,
-							itemID = v:GetID(),
+							itemid = v:GetID(),
 							cost = repaircost,
 							type = "wear",
 						},
@@ -523,9 +523,9 @@ DIALOGUE.addTopic("RepairItems", {
 							.. "% Durability ) - "
 							.. ix.currency.Get(repaircost),
 						topicID = "RepairItems",
-						dynamicData = {
+						dyndata = {
 							itemuid = v.uniqueID,
-							itemID = v:GetID(),
+							itemid = v:GetID(),
 							cost = repaircost,
 							type = "durability",
 						},
@@ -569,12 +569,12 @@ DIALOGUE.addTopic("ConfirmRepair", {
 			{
 				statement = "That's fine, repair it.",
 				topicID = "ConfirmRepair",
-				dynamicData = { accepted = true },
+				dyndata = { accepted = true },
 			},
 			{
 				statement = "On second thought...",
 				topicID = "ConfirmRepair",
-				dynamicData = { accepted = false },
+				dyndata = { accepted = false },
 			},
 		}
 

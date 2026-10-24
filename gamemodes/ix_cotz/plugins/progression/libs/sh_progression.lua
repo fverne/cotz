@@ -1,6 +1,8 @@
 ix.progression = ix.progression or {}
 ix.progression.definitions = ix.progression.definitions or {}
 
+local REWARD_ROUNDING_EPSILON = 0.000000001
+
 -- World NPCs are shared entities; access to their services belongs to a character.
 ix.progression.npcRequirements = {
 	["'Haggler'"] = "oldTimerKillIntro",
@@ -59,12 +61,6 @@ function ix.progression.GetComplexProgressionValue(character, progressionID)
 	return ix.progression.GetLine(character, progressionID).complexData
 end
 
-function ix.progression.GetComplexProgressionReqs(progressionID)
-	local definition = ix.progression.definitions[progressionID]
-
-	return definition and definition.GetItemIds and definition:GetItemIds() or {}
-end
-
 function ix.progression.GetActiveProgressions(character, npcIdentifier)
 	local result = {}
 	for progressionID, definition in pairs(ix.progression.definitions) do
@@ -118,6 +114,7 @@ if SERVER then
 		updateLine(character, progressionID, function(line)
 			line.active = tobool(active)
 		end)
+		ix.progression.AssignActiveRequirements(character)
 	end
 
 	function ix.progression.SetCompleted(character, progressionID)
@@ -136,6 +133,7 @@ if SERVER then
 			end
 		end
 		ix.progression.SetCharacterProgression(character, record)
+		ix.progression.AssignActiveRequirements(character)
 		if ix.progression.UnlockWorldNPC then
 			ix.progression.UnlockWorldNPC(progressionID)
 		end
@@ -233,7 +231,7 @@ if SERVER then
 			return false
 		end
 		local itemID, amount = data[1], data[2]
-		local required = ix.progression.GetComplexProgressionReqs(progressionID)[itemID]
+		local required = ix.progression.GetRequirements(character, progressionID)[itemID]
 		if not required or not isnumber(amount) or amount ~= amount or amount <= 0 or amount == math.huge then
 			return false
 		end
@@ -244,7 +242,7 @@ if SERVER then
 		end
 		line.complexData[itemID] = (line.complexData[itemID] or 0) + amount
 		local completed = true
-		for id, count in pairs(ix.progression.GetComplexProgressionReqs(progressionID)) do
+		for id, count in pairs(ix.progression.GetRequirements(character, progressionID)) do
 			if (line.complexData[id] or 0) < count then
 				completed = false
 			end
@@ -267,6 +265,23 @@ if SERVER then
 		return amount
 	end
 
+	local function creditTurnInRewards(character, progressionID, reputation, money)
+		local reputationDelta, moneyDelta
+		updateLine(character, progressionID, function(line)
+			line.rewardCredit = line.rewardCredit or { reputation = 0, money = 0 }
+			line.rewardsPaid = line.rewardsPaid or { reputation = 0, money = 0 }
+			line.rewardCredit.reputation = line.rewardCredit.reputation + reputation
+			line.rewardCredit.money = line.rewardCredit.money + money
+			local reputationTotal = math.floor(line.rewardCredit.reputation + 0.5 + REWARD_ROUNDING_EPSILON)
+			local moneyTotal = math.floor(line.rewardCredit.money + 0.5 + REWARD_ROUNDING_EPSILON)
+			reputationDelta = reputationTotal - line.rewardsPaid.reputation
+			moneyDelta = moneyTotal - line.rewardsPaid.money
+			line.rewardsPaid = { reputation = reputationTotal, money = moneyTotal }
+		end)
+
+		return reputationDelta, moneyDelta
+	end
+
 	-- The server derives the accepted quantity and rewards from inventory state.
 	function ix.progression.TurnIn(client, target, progressionID, itemID)
 		local character = client:GetCharacter()
@@ -283,7 +298,7 @@ if SERVER then
 		then
 			return false
 		end
-		local required = ix.progression.GetComplexProgressionReqs(progressionID)[itemID]
+		local required = ix.progression.GetRequirements(character, progressionID)[itemID]
 		if not required then
 			return false
 		end
@@ -311,6 +326,7 @@ if SERVER then
 			item:SetData("quantity", available - amount)
 		end
 		ix.progression.AddComplexProgressionValue(character, progressionID, { itemID, amount })
+		reputation, money = creditTurnInRewards(character, progressionID, reputation, money)
 		client:addReputation(reputation)
 		character:GiveMoney(money)
 		ix.dialogue.notifyReputationReceive(client, reputation)

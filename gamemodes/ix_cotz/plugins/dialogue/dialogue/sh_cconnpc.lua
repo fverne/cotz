@@ -78,22 +78,22 @@ DIALOGUE.addTopic("WishTopic", {
 		table.insert(dynamicOptions, {
 			statement = "I wish to carry more of the riches of the zone.",
 			topicID = "WishTopic",
-			dynamicData = { cost = finalcost, type = "carryinc" },
+			dyndata = { cost = finalcost, type = "carryinc" },
 		})
 		table.insert(dynamicOptions, {
 			statement = "I wish for anomalous skin.",
 			topicID = "WishTopic",
-			dynamicData = { cost = finalcost, type = "far" },
+			dyndata = { cost = finalcost, type = "far" },
 		})
 		table.insert(dynamicOptions, {
 			statement = "I wish for kevlar in my skin.",
 			topicID = "WishTopic",
-			dynamicData = { cost = finalcost, type = "fbsr" },
+			dyndata = { cost = finalcost, type = "fbsr" },
 		})
 		table.insert(dynamicOptions, {
 			statement = "I wish for my health to improve.",
 			topicID = "WishTopic",
-			dynamicData = { cost = finalcost, type = "hp" },
+			dyndata = { cost = finalcost, type = "hp" },
 		})
 
 		local items = client:GetCharacter():GetInventory():GetItems()
@@ -102,14 +102,14 @@ DIALOGUE.addTopic("WishTopic", {
 				table.insert(dynamicOptions, {
 					statement = "I wish for my " .. v:GetName() .. " to never deteriorate.",
 					topicID = "WishTopic",
-					dynamicData = { cost = finalcost, type = "weapon", itemID = v:GetID() },
+					dyndata = { cost = finalcost, type = "weapon", itemid = v:GetID() },
 				})
 			end
 			if v.canRepair and v.isBodyArmor then
 				table.insert(dynamicOptions, {
 					statement = "I wish for my " .. v:GetName() .. " never to deteriorate.",
 					topicID = "WishTopic",
-					dynamicData = { cost = finalcost, type = "suit", itemID = v:GetID() },
+					dyndata = { cost = finalcost, type = "suit", itemid = v:GetID() },
 				})
 			end
 		end
@@ -154,8 +154,8 @@ DIALOGUE.addTopic("ConfirmWish", {
 	end,
 	GetDynamicOptions = function(self, client, target)
 		local dynamicOptions = {
-			{ statement = "Go ahead, bless me.", topicID = "ConfirmWish", dynamicData = { accepted = true } },
-			{ statement = "Actually, wait.", topicID = "ConfirmWish", dynamicData = { accepted = false } },
+			{ statement = "Go ahead, bless me.", topicID = "ConfirmWish", dyndata = { accepted = true } },
+			{ statement = "Actually, wait.", topicID = "ConfirmWish", dyndata = { accepted = false } },
 		}
 
 		-- Return table of options

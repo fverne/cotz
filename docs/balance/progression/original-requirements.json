@@ -1,0 +1,591 @@
+{
+  "bossItemDelivery_1": {
+    "part_boar": 15,
+    "part_blinddog": 15
+  },
+  "bossItemDelivery_2": {
+    "part_cat": 20,
+    "part_flesh": 20
+  },
+  "bossItemDelivery_3": {
+    "part_snork_2": 20,
+    "part_zombie_2": 20
+  },
+  "bossItemDelivery_4": {
+    "part_tark": 25,
+    "part_sprig": 25
+  },
+  "bossItemDelivery_5": {
+    "part_controller_1": 30,
+    "part_chimera": 30
+  },
+  "bossItemDelivery_6": {
+    "part_controller_2": 5,
+    "part_pseudogiant": 30
+  },
+  "bossItemDelivery_7": {
+    "part_electrocontroller_1": 10,
+    "part_hellhound": 35
+  },
+  "cleanerItemDelivery_Storage": {
+    "artifact_bolt": 1
+  },
+  "oldTimerItemDelivery_mainMeat": {
+    "meat_blinddog": 30,
+    "part_blinddog": 10,
+    "meat_flesh": 30,
+    "part_flesh": 15,
+    "meat_tushkano": 30,
+    "part_tushkano": 10,
+    "meat_boar": 20,
+    "part_boar": 10
+  },
+  "technutItemDelivery_Main": {
+    "value_tape_electric": 15,
+    "value_wire_heavy": 10,
+    "value_tape_duct": 10,
+    "value_capacitors": 100,
+    "value_sparkplug": 10,
+    "value_carbattery": 5
+  },
+  "oldTimerItemDelivery_mainStatue": {
+    "value_statue_cat": 10,
+    "value_statue_lion": 7,
+    "value_statue_horse": 5
+  },
+  "stalkerNetAdminDelivery_mainRadioTower": {
+    "value_wirelesstrans": 10,
+    "value_tape_electric": 30,
+    "value_phone_new": 5,
+    "value_phone_old": 5,
+    "value_wire_light": 30
+  },
+  "quarterMasterDelivery_activateItem": {
+    "quest_flashdrive": 1
+  },
+  "quarterMasterDelivery_main": {
+    "drink_spirit_3": 5,
+    "drink_vodka_5": 5,
+    "drink_vodka_6": 5,
+    "drug_cigar": 10,
+    "drug_cocaine": 5,
+    "drug_cigarette_5": 30,
+    "drug_cigarette_6": 30
+  },
+  "beanstalkItemDelivery_Documents": {
+    "value_documents_14": 5,
+    "value_documents_7": 10,
+    "value_documents_12": 10,
+    "value_documents_13": 5,
+    "value_documents_11": 10,
+    "value_documents_10": 10
+  },
+  "eggheadItemDelivery_artifacts": {
+    "artifact_battery": 10,
+    "artifact_blowncap": 10,
+    "artifact_capacitor": 3,
+    "artifact_sparkler": 5,
+    "artifact_flash": 5,
+    "artifact_moonlight": 3
+  },
+  "computerDelivery_activateItem": {
+    "quest_computeraccess": 1
+  },
+  "computerDelivery_main": {
+    "value_memorymodule": 10,
+    "value_calculationunit": 5,
+    "value_monitoringunit": 3,
+    "value_frequencymodulator": 7,
+    "value_motorclean": 20,
+    "value_engine": 5,
+    "value_gasoline": 100
+  },
+  "eggheadItemDelivery_Detector1": {
+    "artifact_bolt": 5,
+    "artifact_bonecluster": 1,
+    "artifact_mementomori": 1
+  },
+  "eggheadItemDelivery_Detector2": {
+    "artifact_crystal": 5,
+    "artifact_mamasbeads": 5,
+    "artifact_capacitor": 1,
+    "artifact_panacea": 4,
+    "artifact_moonlight": 2
+  },
+  "eggheadItemDelivery_Detector3": {
+    "artifact_gmamasbeads": 4,
+    "artifact_galaxy": 4,
+    "artifact_arachno": 4,
+    "artifact_halo": 2,
+    "artifact_gaia": 3,
+    "artifact_midas": 1
+  },
+  "eggheadItemDelivery_Suit1": {
+    "hide_pseudodog": 5,
+    "hide_cat": 10,
+    "hide_blinddog": 10
+  },
+  "eggheadItemDelivery_Suit2": {
+    "hide_bloodsucker": 5,
+    "hide_vareshka": 5,
+    "hide_chimera": 5,
+    "hide_controller": 5
+  },
+  "eggheadItemDelivery_Suit3": {
+    "hide_pseudogiant": 5,
+    "hide_electrocontroller": 5,
+    "hide_karlik": 10
+  },
+  "eggheadItemDelivery_Aid1": {
+    "part_swampcontroller_2": 3,
+    "part_tark": 15,
+    "part_sprig": 15,
+    "part_spider": 20,
+    "part_snork_2": 5,
+    "part_cat": 20
+  },
+  "eggheadItemDelivery_Aid2": {
+    "part_controller_2": 4,
+    "part_vareshka": 20,
+    "part_skeleton": 20,
+    "part_karlik_2": 3,
+    "part_burer_2": 4,
+    "part_pseudodog": 30
+  },
+  "eggheadItemDelivery_Aid3": {
+    "part_pseudogiant": 20,
+    "part_electrocontroller_2": 4,
+    "part_chimera": 40
+  },
+  "hagglerItemDelivery_1": {
+    "value_nuts": 90,
+    "value_toiletpaper": 15
+  },
+  "hagglerItemDelivery_11": {
+    "value_capacitors": 100,
+    "value_glue_1": 20
+  },
+  "hagglerItemDelivery_111": {
+    "value_nails": 40,
+    "value_tape_duct": 25,
+    "value_hose": 15
+  },
+  "hagglerItemDelivery_1111": {
+    "value_tape_electric": 30,
+    "value_detergent": 30
+  },
+  "hagglerItemDelivery_112": {
+    "value_goldchain": 4,
+    "value_wire_light": 60
+  },
+  "hagglerItemDelivery_12": {
+    "value_sparkplug": 30,
+    "value_glue_2": 25
+  },
+  "hagglerItemDelivery_121": {
+    "value_toothpaste": 35,
+    "value_statue_horse": 5
+  },
+  "hagglerItemDelivery_1211": {
+    "value_engine": 4,
+    "value_nuts": 80
+  },
+  "hagglerItemDelivery_12111": {
+    "value_gunpowder_blue": 30
+  },
+  "hagglerItemDelivery_121111": {
+    "value_phone_new": 15,
+    "value_watch": 20
+  },
+  "hagglerItemDelivery_122": {
+    "value_detergent": 30,
+    "value_carbattery": 5
+  },
+  "hagglerItemDelivery_1221": {
+    "value_waterfilter": 8,
+    "value_bolts": 80
+  },
+  "hagglerItemDelivery_12211": {
+    "value_techtool_2": 2,
+    "value_gunoil": 20
+  },
+  "hagglerItemDelivery_2": {
+    "value_bolts": 130,
+    "value_sparkplug": 10
+  },
+  "hagglerItemDelivery_21": {
+    "value_gunpowder_green": 15
+  },
+  "hagglerItemDelivery_211": {
+    "value_carbattery": 8
+  },
+  "hagglerItemDelivery_2111": {
+    "value_siliconetube": 40
+  },
+  "hagglerItemDelivery_212": {
+    "value_battery": 90,
+    "value_motorclean": 15
+  },
+  "hagglerItemDelivery_2121": {
+    "value_wire_heavy": 5
+  },
+  "hagglerItemDelivery_21211": {
+    "value_wire_copper": 40,
+    "value_9vbattery": 70
+  },
+  "hagglerItemDelivery_22": {
+    "value_lightbulb": 60,
+    "value_gasoline": 20
+  },
+  "hagglerItemDelivery_221": {
+    "value_hose": 90,
+    "value_wire_light": 60,
+    "value_propanetank": 15
+  },
+  "hagglerItemDelivery_2211": {
+    "value_paracord": 40,
+    "value_wirelesstrans": 1
+  },
+  "hagglerItemDelivery_22111": {
+    "value_glue_3": 200
+  },
+  "hagglerItemDelivery_222": {
+    "value_techtool_1": 6,
+    "value_nails": 40
+  },
+  "hagglerItemDelivery_2221": {
+    "value_gunspray": 10,
+    "value_guncleaner": 10,
+    "value_lubricant": 10
+  },
+  "hagglerItemDelivery_22211": {
+    "value_gunspray": 30,
+    "value_guncleaner": 30,
+    "value_lubricant": 30
+  },
+  "jittersItemDelivery_medical1": {
+    "drug_tobacco_1": 30,
+    "drug_caffeine": 10,
+    "drug_painkillers": 10
+  },
+  "jittersItemDelivery_medical2": {
+    "drug_cigarette_4": 30,
+    "drug_cigarette_3": 30,
+    "drug_tobacco_2": 30,
+    "drug_mints": 200,
+    "drug_morphine": 10
+  },
+  "jittersItemDelivery_medical3": {
+    "drug_cigarette_5": 30,
+    "drug_cigarette_6": 30,
+    "drug_marijuana": 10
+  },
+  "jittersItemDelivery_medical4": {
+    "drug_cigar": 20,
+    "drug_cocaine": 10
+  },
+  "muteItemDelivery_Binoc1": {
+    "value_techtool_1": 2,
+    "value_wire_light": 25,
+    "value_tape_duct": 40
+  },
+  "muteItemDelivery_Binoc2": {
+    "value_techtool_1": 6
+  },
+  "muteItemDelivery_Binoc3": {
+    "value_techtool_2": 2,
+    "value_wire_copper": 50
+  },
+  "muteItemDelivery_Binoc4": {
+    "value_techtool_2": 5,
+    "value_frequencymodulator": 3,
+    "value_wire_heavy": 30
+  },
+  "muteItemDelivery_Anomaly": {
+    "value_techtool_1": 1,
+    "value_wire_copper": 10
+  },
+  "muteItemDelivery_Detector": {
+    "detectorecho": 1
+  },
+  "muteItemDelivery_Broadcast": {
+    "value_frequencymodulator": 1,
+    "value_techtool_3": 1,
+    "value_wirelesstrans": 15
+  },
+  "muteItemDelivery_BlowoutWarning": {
+    "value_frequencymodulator": 1,
+    "value_techtool_3": 1,
+    "value_wirelesstrans": 2
+  },
+  "oldtimerItemDelivery_Knife1": {
+    "hide_blinddog": 10,
+    "hide_flesh": 10,
+    "hide_tushkano": 5,
+    "part_zombie_1": 40,
+    "part_swampcontroller_2": 1
+  },
+  "oldtimerItemDelivery_Knife2": {
+    "hide_spider": 3,
+    "hide_controller": 5,
+    "hide_vareshka": 5,
+    "part_controller_2": 2
+  },
+  "oldtimerItemDelivery_Knife3": {
+    "hide_pseudogiant": 4,
+    "hide_chimera": 4,
+    "hide_karlik": 4,
+    "part_electrocontroller_2": 3,
+    "part_karlik_2": 3
+  },
+  "oldtimerItemDelivery_Melee": {
+    "fireaxe": 5,
+    "crowbar": 5,
+    "hatchet": 5,
+    "machete": 5,
+    "leadpipe": 5,
+    "sledgehammer": 5
+  },
+  "oldtimerItemDelivery_Hidestash1": {
+    "artifact_bolt": 15
+  },
+  "oldtimerItemDelivery_Hidestash2": {
+    "artifact_bolt": 40
+  },
+  "quartermasterItemDelivery_1": {
+    "part_snork_1": 10
+  },
+  "quartermasterItemDelivery_11": {
+    "ruger1022": 10,
+    "w9422": 10,
+    "sako85varmint": 10
+  },
+  "quartermasterItemDelivery_111": {
+    "part_boar": 80,
+    "part_cat": 40,
+    "part_pseudodog": 70,
+    "part_bloodsucker": 20
+  },
+  "quartermasterItemDelivery_1111": {
+    "part_izlom": 50
+  },
+  "quartermasterItemDelivery_112": {
+    "value_documents_2": 1,
+    "value_documents_4": 1,
+    "value_documents_5": 1,
+    "value_documents_9": 1,
+    "value_documents_10": 1,
+    "value_documents_11": 1
+  },
+  "quartermasterItemDelivery_1121": {
+    "value_documents_9": 3,
+    "value_documents_10": 3,
+    "value_documents_11": 3,
+    "value_powerbank": 15
+  },
+  "quartermasterItemDelivery_11211": {
+    "value_gunpowder_green": 100,
+    "value_gunpowder_blue": 90,
+    "value_gunpowder_red": 80
+  },
+  "quartermasterItemDelivery_12": {
+    "hidestash_1": 10,
+    "hidestash_2": 5
+  },
+  "quartermasterItemDelivery_121": {
+    "part_pseudogiant": 1
+  },
+  "quartermasterItemDelivery_122": {
+    "part_psydog": 3
+  },
+  "quartermasterItemDelivery_1221": {
+    "food_mre_usa": 100
+  },
+  "quartermasterItemDelivery_12211": {
+    "hide_pseudogiant": 1
+  },
+  "quartermasterItemDelivery_2": {
+    "part_burer_1": 10
+  },
+  "quartermasterItemDelivery_21": {
+    "hidestash_2": 45,
+    "hidestash_3": 10
+  },
+  "quartermasterItemDelivery_211": {
+    "meat_flesh": 300
+  },
+  "quartermasterItemDelivery_212": {
+    "food_mre_ukraine": 50,
+    "food_mre_russia": 50
+  },
+  "quartermasterItemDelivery_2121": {
+    "value_pcpart_gpu": 1,
+    "value_pcpart_psu": 1,
+    "value_pcpart_hdd": 2,
+    "value_pcpart_ssd": 2
+  },
+  "quartermasterItemDelivery_22": {
+    "artifact_battery": 10,
+    "part_electrocontroller_1": 1
+  },
+  "quartermasterItemDelivery_221": {
+    "artifact_eye": 15,
+    "part_hellhound": 8
+  },
+  "quartermasterItemDelivery_222": {
+    "artifact_mamasbeads": 4
+  },
+  "quartermasterItemDelivery_2221": {
+    "artifact_crystal": 25
+  },
+  "spicylemonItemDelivery_Medical1": {
+    "meal_tushkano": 15
+  },
+  "spicylemonItemDelivery_Medical2": {
+    "meal_flesh": 65
+  },
+  "spicylemonItemDelivery_Medical3": {
+    "meal_boar": 165
+  },
+  "spicylemonItemDelivery_Medical4": {
+    "meal_cat": 190
+  },
+  "spicylemonItemDelivery_Medical5": {
+    "meal_snork": 190
+  },
+  "spicylemonItemDelivery_Medical6": {
+    "meal_bloodsucker": 190
+  },
+  "spicylemonItemDelivery_Medical7": {
+    "meal_sprig": 100
+  },
+  "spicylemonItemDelivery_Food": {
+    "drink_energydrink_4": 40
+  },
+  "spicylemonItemDelivery_Vodka": {
+    "drink_energydrink_5": 40
+  },
+  "spicylemonItemDelivery_Spirits": {
+    "drink_energydrink_6": 40
+  },
+  "spicylemonItemDelivery_Brew": {
+    "meal_chimera": 50,
+    "meal_pseudogiant": 50,
+    "meal_karlik": 50,
+    "meal_spider": 50
+  },
+  "technutItemDelivery_Suit1": {
+    "value_nuts": 50,
+    "value_bolts": 50
+  },
+  "technutItemDelivery_Suit2": {
+    "value_paracord": 15,
+    "hide_blinddog": 8
+  },
+  "technutItemDelivery_Suit3": {
+    "value_documents_14": 1,
+    "value_documents_13": 1
+  },
+  "technutItemDelivery_SuitNBC": {
+    "value_waterfilter": 10,
+    "medic_antirad_1": 15
+  },
+  "technutItemDelivery_Suit4": {
+    "drug_cigarette_4": 200
+  },
+  "technutItemDelivery_Suit5": {
+    "drug_tobacco_1": 160,
+    "drug_tobacco_2": 80
+  },
+  "technutItemDelivery_Suit6": {
+    "drink_spirit_3": 40,
+    "drink_canbeer_3": 60,
+    "drink_canbeer_4": 70,
+    "drink_canbeer_5": 100
+  },
+  "technutItemDelivery_Suit7": {
+    "drink_wine": 20
+  },
+  "technutItemDelivery_SuitPainting": {
+    "value_glue_2": 10
+  },
+  "technutItemDelivery_Helmet1": {
+    "value_glue_3": 5
+  },
+  "technutItemDelivery_Helmet2": {
+    "value_carbattery": 3,
+    "value_wire_heavy": 2,
+    "value_tape_electric": 15,
+    "value_tape_duct": 10,
+    "value_motorclean": 5,
+    "value_gasoline": 10
+  },
+  "technutItemDelivery_Helmet3": {
+    "artifact_droplet": 5
+  },
+  "technutItemDelivery_Helmet4": {
+    "artifact_droplet": 20,
+    "artifact_crystal": 12
+  },
+  "technutItemDelivery_Helmet5": {
+    "artifact_bonecluster": 50,
+    "artifact_arachno": 5
+  },
+  "technutItemDelivery_Helmet6": {
+    "artifact_slug": 25,
+    "artifact_mica": 10
+  },
+  "technutItemDelivery_Helmet7": {
+    "artifact_mamasbeads": 15,
+    "artifact_gmamasbeads": 3
+  },
+  "technutItemDelivery_Mask1": {
+    "value_engine": 5,
+    "value_waterfilter": 2,
+    "value_tape_heavy": 4,
+    "value_tape_duct": 12
+  },
+  "technutItemDelivery_Mask2": {
+    "value_gasoline": 20
+  },
+  "technutItemDelivery_Mask3": {
+    "value_gasoline": 30
+  },
+  "technutItemDelivery_Mask4": {
+    "value_techtool_3": 2
+  },
+  "technutItemDelivery_Attachment1": {
+    "cmore": 5,
+    "foregrip": 10
+  },
+  "technutItemDelivery_Attachment2": {
+    "cobrasuppressor": 5,
+    "tundrasuppressor": 8
+  },
+  "technutItemDelivery_Attachment3": {
+    "pbssuppressor": 5,
+    "sakersuppressor": 4
+  },
+  "technutItemDelivery_AttachmentFabric1": {
+    "suit_io7a": 40
+  },
+  "technutItemDelivery_AttachmentFabric2": {
+    "part_zombie_1": 100
+  },
+  "technutItemDelivery_AttachmentFrame1": {
+    "food_can_sprats": 200
+  },
+  "technutItemDelivery_AttachmentFrame2": {
+    "value_techtool_1": 10,
+    "value_techtool_2": 5
+  },
+  "technutItemDelivery_AttachmentCarbon": {
+    "value_toiletpaper": 110
+  },
+  "technutItemDelivery_AttachmentKevlar1": {
+    "value_battery": 200
+  },
+  "technutItemDelivery_AttachmentKevlar2": {
+    "value_9vbattery": 250
+  }
+}

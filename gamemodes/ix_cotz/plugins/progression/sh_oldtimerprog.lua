@@ -10,10 +10,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 		{ npc = "'Old Timer'", args = { "knife2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "oldtimerItemDelivery_Knife2", "oldtimerItemDelivery_Hidestash1" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"You are still new to the Zone, stalker. You may have been "
@@ -34,17 +34,12 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["hide_blinddog"] = 10,
-			["hide_flesh"] = 10,
-			["hide_tushkano"] = 5,
-			["part_zombie_1"] = 40,
-			["part_swampcontroller_2"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "common_hides", quantity = 2 },
+		{ pool = "humanoid_parts", quantity = 2 },
+		{ pool = "common_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Old Timer'"
@@ -66,10 +61,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 		{ npc = "'Old Timer'", args = { "knife3", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "oldtimerItemDelivery_Knife3" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"You may have seen some of the game the Zone has to offer, "
@@ -89,16 +84,12 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["hide_spider"] = 3,
-			["hide_controller"] = 5,
-			["hide_vareshka"] = 5,
-			["part_controller_2"] = 2,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "predator_hides", quantity = 1 },
+		{ pool = "brains", quantity = 1 },
+		{ pool = "large_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Old Timer'"
@@ -120,10 +111,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 	vendorUnlocks = {
 		{ npc = "'Old Timer'", args = { "knife4", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"You and yours are seasoned fighters; I can see it in your "
@@ -145,17 +136,12 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["hide_pseudogiant"] = 4,
-			["hide_chimera"] = 4,
-			["hide_karlik"] = 4,
-			["part_electrocontroller_2"] = 3,
-			["part_karlik_2"] = 3,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "elite_hides", quantity = 1 },
+		{ pool = "brains", quantity = 1 },
+		{ pool = "exotic_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Old Timer'"
@@ -182,10 +168,10 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 		{ npc = "'Old Timer'", args = { "hatchet", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 		{ npc = "'Old Timer'", args = { "machete", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Do you carry a melee weapon with you, stalker? They are "
@@ -206,18 +192,12 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["fireaxe"] = 5,
-			["crowbar"] = 5,
-			["hatchet"] = 5,
-			["machete"] = 5,
-			["leadpipe"] = 5,
-			["sledgehammer"] = 5,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "melee_tools", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 1 },
+		{ pool = "maintenance", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Old Timer'"
@@ -241,10 +221,10 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 		{ npc = "'Old Timer'", args = { "hidestasher_cleaningkit", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "oldtimerItemDelivery_Hidestash2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Have you found some of the hidden secrets of the Zone, "
@@ -264,13 +244,12 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_bolt"] = 15,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "common_artifacts", quantity = 1 },
+		{ pool = "electrical_artifacts", quantity = 1 },
+		{ pool = "common_hides", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Old Timer'"
@@ -293,10 +272,10 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 	vendorUnlocks = {
 		{ npc = "'Old Timer'", args = { "hidestasher_shovel", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Have you grown tired of using small hand tools in your "
@@ -317,13 +296,12 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["artifact_bolt"] = 40,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "common_artifacts", quantity = 1 },
+		{ pool = "chemical_artifacts", quantity = 1 },
+		{ pool = "predator_hides", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Old Timer'"

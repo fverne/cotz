@@ -24,6 +24,8 @@ from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font, PatternFill, Protection
 
 from progression import build_tabs as progression_tabs
+from progression import collect_pools
+from acquisition import build_audit as acquisition_audit
 
 SCHEMA = 2
 ROOT = Path(__file__).resolve().parents[2]
@@ -403,7 +405,7 @@ def export(root, output, preview=False):
                 ["Missing values", "Blank means absent/unsupported, not zero. Adding or clearing fields is not supported."],
                 ["Inheritance", "Explicit source values only. Edit defaults on Item bases; inherited/runtime values are not expanded."],
                 ["Scope", "Definitions discovered using schema/plugin item paths and entity/weapon directories; runtime availability is not verified."],
-                ["Progression", "Five gray, read-only tabs describe the current progression. Edits to those tabs are ignored by import; requirements are unchanged."]]:
+                ["Progression", "Gray, read-only tabs describe personal requirement slots, candidate pools, unlocks, stock, rebalance comparisons, and source acquisition evidence. Edits to those tabs are ignored by import."]]:
         append_safe(meta, row)
     for tab, (rows, columns) in workbook_layout(entities).items():
         sheet = book.create_sheet(tab)
@@ -420,6 +422,10 @@ def export(root, output, preview=False):
         sheet.auto_filter.ref = sheet.dimensions
     overview_tabs, overview_warnings = progression_tabs(root, entities, tokenize, lua_string)
     warnings.extend(overview_warnings)
+    acquisition_rows, acquisition_warnings = acquisition_audit(
+        root, entities, collect_pools(root, tokenize, lua_string), tokenize, lua_string)
+    overview_tabs["Acquisition audit"] = acquisition_rows
+    warnings.extend(acquisition_warnings)
     for tab, rows in overview_tabs.items():
         sheet = book.create_sheet(tab)
         for row in rows:
@@ -429,6 +435,8 @@ def export(root, output, preview=False):
         for row in sheet.iter_rows(min_row=2):
             for cell in row:
                 cell.fill = PatternFill("solid", fgColor="F2F2F2")
+            if tab == "Acquisition audit" and isinstance(row[7].value, (int, float)):
+                row[7].number_format = "0.00%"
     coverage = book.create_sheet("Coverage")
     append_safe(coverage, ["Source", "Limitation"])
     for row in warnings:
@@ -444,8 +452,15 @@ def export(root, output, preview=False):
                 ["br / fbr / ar / far", "Raw item protection parameters, as named in Lua"],
                 ["interval", "Anomaly-controller spacing parameter in Source units"],
                 ["*Artifacts", "JSON array of item IDs; order and duplicates are preserved"],
-                ["Progression tabs", "Read-only current-source overview; edits are ignored by import. No requirements have been rebalanced."],
-                ["Required units / Total raw units", "Hand-in quantity units, not item stacks, loot finds, acquisition time, or an expected playthrough total"],
+                ["Progression tabs", "Read-only source overview; edits are ignored by import. Personal requirements are selected once at unlock and saved by the game."],
+                ["Units if selected", "Fixed slot quantity. Original shared totals divide by 16, round up, and split evenly across categories, with at least one item per category. Rows in a slot are alternatives."],
+                ["Min / Max assigned raw units", "Equal totals: candidate selection changes item IDs, not quantities. Units are not stacks or guaranteed loot finds."],
+                ["Extra units to retain categories", "Amount above ceil(original total / 16) needed for at least one item per category."],
+                ["Personal job thresholds", "Original task-completion counts divided by 16, rounded up, with a minimum of one."],
+                ["Potential raw units across all steps", "Catalog sum over all candidate possibilities and branches; not the amount one character must collect."],
+                ["Conditional probability", "Chance within the named loot table or after harvesting the named quarry. Map availability and overall encounter rates are not inferred."],
+                ["World map tier / World spawn class", "worldspawn_1/2 = Marsh, 3/4 = Waystation, 5/6 = Pripyat. Odd tables are normal world loot; even tables are hard to find. Non-world routes do not establish map availability."],
+                ["Loot map ceiling", "Highest intended world-loot map tier for this delivery. Candidates with worldspawn routes must have an active entry at or below this tier. Opening low-tier quests use tier 1."],
                 ["Initially active definition", "defaultActive in source; the character must also have access to the NPC"],
                 ["Activated by completion of (any)", "Incoming nextProgressions edges; one predecessor completion activates a step, subject to NPC access"],
                 ["Progression unlock coverage", "Declarative successors, NPC access, vendor items, world arrivals, and selected storage/painting/PDA gates; callbacks and external plugins are not exhaustively analyzed"],

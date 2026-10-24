@@ -16,6 +16,9 @@ local function check(condition, message)
 	checks = checks + 1
 	assert(condition, message)
 end
+math.random = function(minimum)
+	return minimum
+end
 SERVER = true
 CLIENT = false
 istable = function(value)
@@ -129,11 +132,14 @@ end
 local base = "gamemodes/ix_cotz/plugins/progression/"
 dofile(base .. "libs/sh_storage.lua")
 dofile(base .. "libs/sh_progression.lua")
+dofile(base .. "libs/sh_requirements.lua")
 local api = ix.progression
 function api.Register(id, definition)
+	definition.id = id
 	api.definitions[id] = definition
 end
 for _, filename in ipairs({
+	"requirementpools",
 	"definitions",
 	"technutprog",
 	"cleanerprog",
@@ -155,7 +161,7 @@ check(not pcall(api.GetCharacterProgression, {}), "owner must be a Helix charact
 api.InitializeCharacterProgression(a)
 api.InitializeCharacterProgression(b)
 api.InitializeCharacterProgression(a)
-check(a.replications == 1, "initialization is idempotent")
+check(a.replications == 2, "initialization is idempotent")
 check(not pcall(api.SetCharacterProgression, a, { version = 99, lines = {} }), "unknown versions rejected")
 local snapshot = api.GetCharacterProgression(a)
 snapshot.lines.example = { value = 4 }
@@ -163,7 +169,7 @@ check(a.data.progression.lines.example == nil, "reads return snapshots")
 api.SetCharacterProgression(a, snapshot)
 snapshot.lines.example.value = 99
 check(api.GetCharacterProgression(a).lines.example.value == 4, "writes copy snapshots")
-check(next(b.data.progression.lines) == nil, "storage is isolated")
+check(b.data.progression.lines.example == nil, "storage is isolated")
 local restored = character()
 restored.data = copy(a.data)
 api.InitializeCharacterProgression(restored)
@@ -187,8 +193,24 @@ for id, definition in pairs(api.definitions) do
 	end
 	api.SetActive(a, id, true)
 	currentMap = definition.progMap
-	if definition.GetItemIds then
+	if definition.requirementSlots then
 		complexCount = complexCount + 1
+		local response = definition:BuildResponse(definition.keyNpc, {}, a)
+		check(type(response) == "string" and #response > 0, "delivery descriptions receive their character")
+		local firstPool = api.itemPools[definition.requirementSlots[1].pool]
+		if firstPool.tier ~= "fixed" then
+			for item, amount in pairs(api.GetRequirements(a, id)) do
+				local standard = string.find(response, amount .. " " .. ix.item.list[item].name, 1, true)
+				local computer = string.find(response, ix.item.list[item].name .. " : " .. amount, 1, true)
+				local pieces =
+					string.find(response, amount .. " pieces of " .. ix.item.list[item].name, 1, true)
+				local radio = string.find(response, ix.item.list[item].name .. ": " .. amount, 1, true)
+				check(
+					standard or computer or pieces or radio,
+					id .. ": description matches " .. amount .. " " .. item
+				)
+			end
+		end
 		local completionCount = 0
 		local original = definition.OnComplete
 		definition.OnComplete = function(owner)
@@ -198,7 +220,7 @@ for id, definition in pairs(api.definitions) do
 			end
 		end
 		check(not api.AddComplexProgressionValue(a, id, { "invalid", 1 }), "invalid requirement rejected")
-		for item, amount in pairs(definition:GetItemIds()) do
+		for item, amount in pairs(api.GetRequirements(a, id)) do
 			check(not api.AddComplexProgressionValue(a, id, { item, -1 }), "negative contribution rejected")
 			check(not api.AddComplexProgressionValue(a, id, { item, 0 / 0 }), "NaN contribution rejected")
 			check(
@@ -208,7 +230,7 @@ for id, definition in pairs(api.definitions) do
 		end
 		check(api.IsCompleted(a, id), id .. " completes")
 		check(completionCount == 1, id .. " completion callback runs once")
-		for item in pairs(definition:GetItemIds()) do
+		for item in pairs(api.GetRequirements(a, id)) do
 			check(not api.AddComplexProgressionValue(a, id, { item, 1 }), "completed line rejects repeats")
 		end
 		check(completionCount == 1, "repeated requests cannot replay completion")
@@ -216,7 +238,11 @@ for id, definition in pairs(api.definitions) do
 	else
 		numericCount = numericCount + 1
 		local last = definition.progressthresholds[#definition.progressthresholds]
-		check(api.AddProgressionValue(a, id, last), id .. " numeric progression advances")
+		if last > 1 then
+			check(api.AddProgressionValue(a, id, last - 1), id .. " advances below personal threshold")
+			check(not api.IsCompleted(a, id), id .. " waits for the final personal task")
+		end
+		check(api.AddProgressionValue(a, id, 1), id .. " numeric progression advances")
 		check(api.IsCompleted(a, id), id .. " numeric progression completes")
 		local scheduled = #timers
 		api.InvokeProgression(a, id)
@@ -231,7 +257,7 @@ for id, definition in pairs(api.definitions) do
 	check(next(api.GetComplexProgressionValue(b, id)) == nil, "other character receives no contributions")
 	for _, nextID in ipairs(definition.nextProgressions or {}) do
 		check(api.GetLine(a, nextID).active == true, "successor activated for owner")
-		check(b.data.progression.lines[nextID] == nil, "successor not activated for others")
+		check(api.GetLine(b, nextID).active ~= true, "successor not activated for others")
 	end
 	for _, unlock in ipairs(definition.vendorUnlocks or {}) do
 		check(api.CanBuyItem(a, unlock.npc, unlock.args[1]), "owner may buy unlocked item")
@@ -292,7 +318,7 @@ check(
 	a.money == 2 and inventoryItem.quantity == 4 and not api.IsCompleted(b, "cleanerItemDelivery_Storage"),
 	"duplicate requests cannot award rewards or affect others"
 )
-check(a.saves == 1, "turn-in saves character after rewards")
+check(a.saves >= 2, "assignment and turn-in both save character")
 
 -- Inventory removal can fail; never grant progress or rewards in that case.
 local c = character()
@@ -419,11 +445,11 @@ for _, job in ipairs({
 	check(api.GetProgressionValue(b, job[2]) == 0, "job hook does not credit others")
 end
 
--- Real plugin lifecycle archives global data and waits for vendor loading.
+-- Global arrivals persist independently and wait for vendor loading.
 ix.util.Include = function(filename)
 	dofile(base .. filename)
 end
-local oldGlobal = { oldTimerKillIntro = { completed = true } }
+local oldGlobal = { version = 3, worldUnlocks = { oldTimerKillIntro = true } }
 local savedPluginData = copy(oldGlobal)
 function PLUGIN:GetData()
 	return savedPluginData
@@ -438,27 +464,27 @@ function PLUGIN:SetupProgressionWorld()
 end
 dofile(base .. "sh_plugin.lua")
 PLUGIN:LoadData()
-check(PLUGIN.worldUnlocks.oldTimerKillIntro, "legacy completion preserves global NPC arrival")
+check(PLUGIN.worldUnlocks.oldTimerKillIntro, "saved global NPC arrival restored")
 PLUGIN:Think()
 check(setupCalls == 0, "world setup waits for saved vendors")
 PLUGIN:PostLoadData()
 check(setupCalls == 1, "world setup runs after saved vendors load")
 PLUGIN:SaveData()
 check(
-	savedPluginData.version == 2 and savedPluginData.legacy.oldTimerKillIntro.completed,
-	"global save archived"
+	savedPluginData.version == 3 and savedPluginData.worldUnlocks.oldTimerKillIntro,
+	"world arrivals saved without a legacy archive"
 )
-check(savedPluginData.worldUnlocks.oldTimerKillIntro, "world arrivals stored alongside legacy archive")
+check(savedPluginData.worldUnlocks.oldTimerKillIntro, "world arrival flag persists")
 PLUGIN.worldUnlocks.computer_artifactTasks = true
 PLUGIN:SaveData()
 PLUGIN.worldUnlocks = {}
 PLUGIN:LoadData()
 check(PLUGIN.worldUnlocks.computer_artifactTasks, "new global arrivals survive a save/load cycle")
 PLUGIN:SaveData()
-check(savedPluginData.legacy.legacy == nil, "archive does not nest on subsequent loads")
+check(savedPluginData.legacy == nil, "fresh-start save has no migration archive")
 a = character()
 PLUGIN:PlayerLoadedCharacter(a.client, a)
-check(next(a.data.progression.lines) == nil, "legacy completion not imported into character")
+check(not api.IsCompleted(a, "oldTimerKillIntro"), "global arrival does not grant personal completion")
 
 -- Real dialogue network handlers enforce progression before invoking callbacks.
 local networkHandlers, readStrings, readTarget = {}, {}, nil
@@ -630,15 +656,315 @@ check(
 	"faction restrictions still apply to dialogue"
 )
 
+-- Fresh requirements are assigned server-side and saved once per unlock.
+math.random = function(minimum)
+	return minimum
+end
+local first = character()
+api.InitializeCharacterProgression(first)
+check(not api.GetLine(first, "hagglerItemDelivery_1").requirements, "locked NPC has no assignment yet")
+api.SetCompleted(first, "oldTimerKillIntro")
+local firstRequirements = api.GetRequirements(first, "hagglerItemDelivery_1")
+check(firstRequirements.value_nuts == 3, "personal fasteners receive three of the seven scaled units")
+check(firstRequirements.value_toiletpaper == 2, "personal household supplies receive two of the seven scaled units")
+local savedAssignment = copy(first.data)
+local savedCalls = first.saves
+math.random = function(_, maximum)
+	return maximum
+end
+api.AssignActiveRequirements(first)
+local sameRequirements = api.GetRequirements(first, "hagglerItemDelivery_1")
+check(
+	sameRequirements.value_nuts == 3 and first.saves == savedCalls,
+	"reopening cannot reroll or resave assignments"
+)
+local second = character()
+api.InitializeCharacterProgression(second)
+api.SetCompleted(second, "oldTimerKillIntro")
+local secondRequirements = api.GetRequirements(second, "hagglerItemDelivery_1")
+check(
+	secondRequirements.value_bolts == 3 and not secondRequirements.value_nuts,
+	"another character receives a different pool item"
+)
+firstRequirements.value_nuts = 999
+check(
+	api.GetRequirements(first, "hagglerItemDelivery_1").value_nuts == 3,
+	"requirements queries return snapshots"
+)
+local reconnected = character()
+reconnected.data = copy(savedAssignment)
+api.InitializeCharacterProgression(reconnected)
+check(
+	api.GetRequirements(reconnected, "hagglerItemDelivery_1").value_nuts == 3,
+	"reconnect preserves selected items"
+)
+local savedMap = currentMap
+currentMap = "rp_pripyat_remaster"
+check(
+	api.GetRequirements(reconnected, "hagglerItemDelivery_1").value_nuts == 3,
+	"map transfer cannot reroll assignments"
+)
+currentMap = savedMap
+check(
+	not api.AddComplexProgressionValue(first, "hagglerItemDelivery_1", { "value_bolts", 1 }),
+	"another pool candidate is rejected unless personally assigned"
+)
+for _, slot in ipairs(api.definitions.hagglerItemDelivery_1.requirementSlots) do
+	check(slot.quantity > 0 and slot.quantity % 1 == 0, "slot quantities are positive integers")
+end
+local keyCharacter = character()
+api.SetActive(keyCharacter, "quarterMasterDelivery_activateItem", true)
+check(
+	api.GetRequirements(keyCharacter, "quarterMasterDelivery_activateItem").quest_flashdrive == 1,
+	"story keys retain their exact identity and single quantity"
+)
+local detectorID = "eggheadItemDelivery_Detector3"
+local selectionRandom = math.random
+for roll = 1, 2 do
+	math.random = function(minimum, maximum)
+		return roll == 1 and minimum or maximum
+	end
+	local researcher = character()
+	api.InitializeCharacterProgression(researcher)
+	api.SetCompleted(researcher, api.npcRequirements[api.definitions[detectorID].keyNpc])
+	api.SetActive(researcher, detectorID, true)
+	local requirements = api.GetRequirements(researcher, detectorID)
+	local line = api.GetLine(researcher, detectorID)
+	local specimenCount = 0
+	for _, amount in pairs(requirements) do
+		specimenCount = specimenCount + 1
+		check(amount == 1, "hard detector requests one specimen per category")
+	end
+	check(specimenCount == 6 and #line.selections == 6, "hard detector preserves six distinct categories")
+	for _, selection in ipairs(line.selections) do
+		check(requirements[selection.item] == 1, "saved detector categories match assigned specimens")
+	end
+end
+math.random = selectionRandom
+api.ValidateRequirementPools()
+local invalidPool = api.itemPools.fasteners
+api.itemPools.fasteners = nil
+check(not pcall(api.ValidateRequirementPools), "invalid pool definitions fail validation")
+api.itemPools.fasteners = invalidPool
+
+-- Check the real dialogue producer, visible description, UI selection and server consumer together.
+local dialogue = { tree = {} }
+dialogue.addTopic = function(id, data)
+	dialogue.tree[id] = data
+end
+DIALOGUE = dialogue
+dofile("gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_medicnpc.lua")
+DIALOGUE = nil
+local patient = character()
+math.random = function(minimum)
+	return minimum
+end
+api.InitializeCharacterProgression(patient)
+local chosenItem, chosenAmount = next(api.GetRequirements(patient, "jittersItemDelivery_medical1"))
+local stack = { quantity = chosenAmount + 1 }
+function stack:GetData(key, default)
+	return self[key] or default
+end
+function stack:SetData(key, value)
+	self[key] = value
+end
+patient.inventory = {
+	HasItem = function(_, id)
+		return id == chosenItem and stack or nil
+	end,
+}
+local medic = {
+	dialogueid = "medicnpc",
+	GetClass = function()
+		return "ix_vendor_adv"
+	end,
+	GetDisplayName = function()
+		return "'Jitters'"
+	end,
+	GetPos = function()
+		return position
+	end,
+	CanAccess = function()
+		return true
+	end,
+}
+CLIENT = true
+local view = dialogue.tree.ViewProgression
+view:DynamicPreCallback(patient.client, medic, { identifier = "jittersItemDelivery_medical1" })
+check(
+	string.find(view.response, chosenAmount .. " " .. chosenItem, 1, true),
+	"dialogue describes actual personal quantities"
+)
+local options = view:GetDynamicOptions(patient.client, medic)
+check(
+	#options == 1
+		and options[1].dyndata.progid == "jittersItemDelivery_medical1"
+		and options[1].dyndata.itemid == chosenItem,
+	"dialogue options use the established payload contract"
+)
+local panelType
+vgui = {
+	Register = function(_, panel)
+		panelType = panel
+	end,
+}
+ix.util.GetMaterial = function() end
+net.WriteTable = function() end
+net.SendToServer = function() end
+dofile("gamemodes/ix_cotz/plugins/dialogue/derma/cl_dialogue.lua")
+local pickedTopic, pickedData
+local panel = setmetatable({
+	target = medic,
+	treeID = "medicnpc",
+	tree = dialogue.tree,
+	options = {
+		Add = function()
+			return {
+				Dock = function() end,
+				DockMargin = function() end,
+				SetText = function() end,
+				SetTextColor = function() end,
+				SetFont = function() end,
+				SetMouseInputEnabled = function() end,
+			}
+		end,
+	},
+	startTopic = function(_, id, data)
+		pickedTopic, pickedData = id, data
+	end,
+}, { __index = panelType })
+LocalPlayer = function()
+	return patient.client
+end
+Color = function()
+	return {}
+end
+panel:prepareDynamicOptions(options, {})
+panel.buttonList[1].DoClick()
+check(
+	pickedTopic == "HandInComplexProgressionItemTopic" and pickedData.itemid == chosenItem,
+	"real UI forwards the selected payload to the hand-in topic"
+)
+CLIENT = false
+dialogue.tree[pickedTopic]:DynamicPreCallback(patient.client, medic, pickedData)
+check(
+	stack.quantity == 1
+		and api.GetComplexProgressionValue(patient, pickedData.progid)[chosenItem] == chosenAmount,
+	"real server consumer accepts only the assigned remaining quantity"
+)
+
+-- The real reward helper prices the consumed fraction, not the whole remaining stack.
+local rewardFile = assert(io.open("gamemodes/ix_cotz/schema/libs/sh_fverneutils.lua"))
+local rewardSource = rewardFile:read("*a")
+rewardFile:close()
+math.Round = function(value)
+	return math.floor(value + 0.5)
+end
+assert(compile(rewardSource:sub(1, assert(rewardSource:find("-- Performs", 1, true)) - 1)))()
+local pricedStack = {
+	quantity = 10,
+	price = 100,
+	GetData = function()
+		return 10
+	end,
+	GetPrice = function()
+		return 100
+	end,
+}
+local _, partialMoney = ix.util.GetValueFromProgressionTurnin(pricedStack, 2)
+local _, fullMoney = ix.util.GetValueFromProgressionTurnin(pricedStack, 10)
+check(partialMoney == 12 and fullMoney == 60, "partial hand-ins receive only proportional currency")
+check(_G.value == nil, "reward calculation does not leak global mutable state")
+
+-- Rounding credits accumulate across requests, so splitting a stack cannot multiply rewards.
+api.itemPools.reward_test = { candidates = { { item = "reward_test" } } }
+api.Register("reward_test", {
+	keyNpc = "Tester",
+	progMap = currentMap,
+	defaultActive = true,
+	requirementSlots = { { pool = "reward_test", quantity = 10 } },
+})
+local function rewardCharacter()
+	local owner = character()
+	local inventoryStack
+	owner.inventory = {
+		HasItem = function()
+			return inventoryStack
+		end,
+	}
+	local function supply(amount)
+		inventoryStack = { quantity = 10, price = 1, remaining = amount }
+		function inventoryStack:GetData()
+			return self.remaining
+		end
+		function inventoryStack:GetPrice()
+			return math.Round(self.price * self:GetData("quantity", self.quantity) / self.quantity)
+		end
+		function inventoryStack:Remove()
+			return true
+		end
+	end
+
+	return owner, supply
+end
+local bulk, supplyBulk = rewardCharacter()
+local split, supplySplit = rewardCharacter()
+local rewardNPC = {
+	GetClass = function()
+		return "ix_vendor_adv"
+	end,
+	GetDisplayName = function()
+		return "Tester"
+	end,
+	GetPos = function()
+		return position
+	end,
+	CanAccess = function()
+		return true
+	end,
+}
+supplyBulk(10)
+check(api.TurnIn(bulk.client, rewardNPC, "reward_test", "reward_test"), "whole reward stack accepted")
+for _ = 1, 10 do
+	supplySplit(1)
+	check(api.TurnIn(split.client, rewardNPC, "reward_test", "reward_test"), "split reward stack accepted")
+end
+check(
+	bulk.money == split.money and bulk.reputation == split.reputation,
+	"splitting the same quantity cannot multiply currency or reputation"
+)
+check(
+	not api.TurnIn(split.client, rewardNPC, "reward_test", "reward_test"),
+	"completed reward ledger rejects repeats"
+)
+api.definitions.reward_test = nil
+api.itemPools.reward_test = nil
+check(
+	api.GetNeededItems(first).value_nuts and not api.GetNeededItems(first).value_bolts,
+	"inventory highlights contain personally assigned items only"
+)
+check(
+	not api.GetNeededItems(patient)[chosenItem],
+	"fulfilled personal items leave the inventory highlight set"
+)
+
 -- Client API permits snapshots but does not expose mutation functions.
 ix.progression = nil
 SERVER = false
 CLIENT = true
 dofile(base .. "libs/sh_storage.lua")
 dofile(base .. "libs/sh_progression.lua")
+dofile(base .. "libs/sh_requirements.lua")
 check(
-	ix.progression.SetCharacterProgression == nil and ix.progression.SetCompleted == nil,
+	ix.progression.SetCharacterProgression == nil
+		and ix.progression.SetCompleted == nil
+		and ix.progression.AssignActiveRequirements == nil,
 	"client has no mutation API"
+)
+ix.progression.definitions = api.definitions
+check(
+	ix.progression.GetRequirements(first, "hagglerItemDelivery_1").value_nuts == 3,
+	"client reads saved personal requirements"
 )
 check(ix.progression.GetLine(a, "cleanerItemDelivery_Storage").completed, "client reads character-owned data")
 print(

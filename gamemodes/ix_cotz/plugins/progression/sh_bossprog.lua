@@ -10,10 +10,10 @@ ix.progression.Register("bossItemDelivery_1", {
 		{ npc = "'Boss'", args = { "suit_io7a", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "bossItemDelivery_2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I have a ton of stockpile sitting here collecting dust "
@@ -32,14 +32,12 @@ ix.progression.Register("bossItemDelivery_1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_boar"] = 15,
-			["part_blinddog"] = 15,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "common_parts", quantity = 1 },
+		{ pool = "small_parts", quantity = 1 },
+		{ pool = "humanoid_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
@@ -59,10 +57,10 @@ ix.progression.Register("bossItemDelivery_2", {
 		{ npc = "'Boss'", args = { "suit_ps5m", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "bossItemDelivery_3" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I have more suits in my stockpile. Next up is a lightweight "
@@ -79,14 +77,12 @@ ix.progression.Register("bossItemDelivery_2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_cat"] = 20,
-			["part_flesh"] = 20,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "small_parts", quantity = 1 },
+		{ pool = "common_parts", quantity = 1 },
+		{ pool = "large_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
@@ -106,10 +102,10 @@ ix.progression.Register("bossItemDelivery_3", {
 		{ npc = "'Boss'", args = { "suit_berill", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "bossItemDelivery_4" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I have more suits in my stockpile. Next up is the military "
@@ -126,14 +122,12 @@ ix.progression.Register("bossItemDelivery_3", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_snork_2"] = 20,
-			["part_zombie_2"] = 20,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "rare_parts", quantity = 1 },
+		{ pool = "small_parts", quantity = 1 },
+		{ pool = "humanoid_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
@@ -153,10 +147,10 @@ ix.progression.Register("bossItemDelivery_4", {
 		{ npc = "'Boss'", args = { "suit_skat10", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "bossItemDelivery_5" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I have more suits in my stockpile. Next up is the prototype " .. "Skat10.\n\nREQUIRED ITEMS:"
@@ -172,14 +166,12 @@ ix.progression.Register("bossItemDelivery_4", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_tark"] = 25,
-			["part_sprig"] = 25,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "exotic_parts", quantity = 2 },
+		{ pool = "large_parts", quantity = 1 },
+		{ pool = "humanoid_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
@@ -199,10 +191,10 @@ ix.progression.Register("bossItemDelivery_5", {
 		{ npc = "'Boss'", args = { "suit_skat9", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "bossItemDelivery_6" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I have more suits in my stockpile. Next up is the exclusive " .. "Skat9.\n\nREQUIRED ITEMS:"
@@ -218,14 +210,13 @@ ix.progression.Register("bossItemDelivery_5", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_controller_1"] = 30,
-			["part_chimera"] = 30,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "elite_parts", quantity = 1 },
+		{ pool = "chimera_part", quantity = 1 },
+		{ pool = "exotic_parts", quantity = 1 },
+		{ pool = "large_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
@@ -246,10 +237,10 @@ ix.progression.Register("bossItemDelivery_6", {
 		{ npc = "'Boss'", args = { "headwear_rad", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "bossItemDelivery_7" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = ("I have more suits in my stockpile. Next up is the Radsuit.\n\nREQUIRED " .. "ITEMS:")
 
@@ -263,14 +254,13 @@ ix.progression.Register("bossItemDelivery_6", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_controller_2"] = 5,
-			["part_pseudogiant"] = 30,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "brains", quantity = 1 },
+		{ pool = "elite_parts", quantity = 1 },
+		{ pool = "rare_parts", quantity = 1 },
+		{ pool = "exotic_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
@@ -290,10 +280,10 @@ ix.progression.Register("bossItemDelivery_7", {
 		{ npc = "'Boss'", args = { "suit_exoskeleton", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 		{ npc = "'Boss'", args = { "headwear_spartan", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = ("I have one last suit in my repository - the exoskeleton. " .. "\n\nREQUIRED ITEMS:")
 
@@ -307,14 +297,13 @@ ix.progression.Register("bossItemDelivery_7", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["part_electrocontroller_1"] = 10,
-			["part_hellhound"] = 35,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "elite_parts", quantity = 1 },
+		{ pool = "hellhound_part", quantity = 1 },
+		{ pool = "brains", quantity = 1 },
+		{ pool = "large_parts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"

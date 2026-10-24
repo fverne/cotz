@@ -11,10 +11,10 @@ ix.progression.Register("jittersItemDelivery_medical1", {
 		{ npc = "'Jitters'", args = { "medic_medkit_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
 	nextProgressions = { "jittersItemDelivery_medical2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Hey uhh, It's pretty tough out here, am I right? How about "
@@ -31,16 +31,12 @@ ix.progression.Register("jittersItemDelivery_medical1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["drug_tobacco_1"] = 30,
-
-			["drug_caffeine"] = 10,
-			["drug_painkillers"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "tobacco", quantity = 2 },
+		{ pool = "stimulants", quantity = 1 },
+		{ pool = "common_meals", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Jitters'"
@@ -65,10 +61,10 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 		{ npc = "'Jitters'", args = { "medic_antirad_1", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
 	nextProgressions = { "jittersItemDelivery_medical3" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"I feel like we are bonding. How about we help each other " .. "again?\n\nREQUIRED ITEMS:"
@@ -84,18 +80,12 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["drug_cigarette_4"] = 30,
-			["drug_cigarette_3"] = 30,
-			["drug_tobacco_2"] = 30,
-
-			["drug_mints"] = 200,
-			["drug_morphine"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "cigarettes", quantity = 7 },
+		{ pool = "rare_drugs", quantity = 6 },
+		{ pool = "antirad", quantity = 6 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Jitters'"
@@ -120,10 +110,10 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 		{ npc = "'Jitters'", args = { "medic_medkit_4", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
 	nextProgressions = { "jittersItemDelivery_medical4" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = "Hello friend! How about we help each other again?\n\nREQUIRED ITEMS:"
 
@@ -137,16 +127,12 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["drug_cigarette_5"] = 30,
-			["drug_cigarette_6"] = 30,
-
-			["drug_marijuana"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "premium_cigarettes", quantity = 2 },
+		{ pool = "rare_drugs", quantity = 2 },
+		{ pool = "stimulants", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Jitters'"
@@ -169,10 +155,10 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 		{ npc = "'Jitters'", args = { "medic_medkit_6", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 		{ npc = "'Jitters'", args = { "medic_antirad_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = "Hello friend! How about we help each other again?\n\nREQUIRED ITEMS:"
 
@@ -186,14 +172,13 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["drug_cigar"] = 20,
-			["drug_cocaine"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "cigar", quantity = 1 },
+		{ pool = "rare_drugs", quantity = 1 },
+		{ pool = "tobacco", quantity = 1 },
+		{ pool = "antirad", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Jitters'"

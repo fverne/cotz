@@ -14,10 +14,10 @@ ix.progression.Register("muteItemDelivery_Binoc1", {
 		"muteItemDelivery_Anomaly",
 		"muteItemDelivery_BlowoutWarning",
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Mute makes a series of frantic gestures before shoving "
@@ -35,15 +35,12 @@ ix.progression.Register("muteItemDelivery_Binoc1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_techtool_1"] = 2,
-			["value_wire_light"] = 25,
-			["value_tape_duct"] = 40,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "basic_tools", quantity = 2 },
+		{ pool = "repair_electrical", quantity = 2 },
+		{ pool = "small_electronics", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "Ilyuha Hobo"
@@ -66,10 +63,10 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 		{ npc = "'Mute'", args = { "binoculars_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "muteItemDelivery_Binoc3", "muteItemDelivery_Broadcast" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Mute tries and fails to articulate a concept before pointing "
@@ -87,13 +84,12 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_techtool_1"] = 6,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "basic_tools", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "Ilyuha Hobo"
@@ -116,10 +112,10 @@ ix.progression.Register("muteItemDelivery_Binoc3", {
 		{ npc = "'Mute'", args = { "binoculars_4", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "muteItemDelivery_Binoc4" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Mute simply points at a drawing on the table beside him. "
@@ -137,14 +133,12 @@ ix.progression.Register("muteItemDelivery_Binoc3", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_techtool_2"] = 2,
-			["value_wire_copper"] = 50,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "advanced_parts_map1", quantity = 2 },
+		{ pool = "small_electronics", quantity = 1 },
+		{ pool = "documents_technical", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "Ilyuha Hobo"
@@ -169,10 +163,10 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 	vendorUnlocks = {
 		{ npc = "'Mute'", args = { "binoculars_3", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Mute gestures toward his workbench, where a set of binoculars "
@@ -191,15 +185,12 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_techtool_2"] = 5,
-			["value_frequencymodulator"] = 3,
-			["value_wire_heavy"] = 30,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "advanced_parts", quantity = 1 },
+		{ pool = "consumer_electronics", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "Vadim Nasty"
@@ -222,10 +213,10 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 		{ npc = "'Mute'", args = { "anomalydetector", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "muteItemDelivery_Detector" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Mute motions toward a disassembled geiger counter on his "
@@ -244,14 +235,12 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_techtool_1"] = 1,
-			["value_wire_copper"] = 10,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "basic_tools", quantity = 1 },
+		{ pool = "small_electronics", quantity = 1 },
+		{ pool = "electrical_artifacts", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "Ilyuha Hobo"
@@ -273,10 +262,10 @@ ix.progression.Register("muteItemDelivery_Detector", {
 	vendorUnlocks = {
 		{ npc = "'Mute'", args = { "detectorecho", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Apparently the last detector was not enough. Mute is making "
@@ -295,13 +284,10 @@ ix.progression.Register("muteItemDelivery_Detector", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["detectorecho"] = 1,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "detector", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "Vadim Nasty"
@@ -319,10 +305,10 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 	keyNpc = "'Mute'",
 	defaultActive = false,
 	progMap = MAP,
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Mute shoves some kind of blueprint in your face. It looks "
@@ -340,15 +326,12 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_frequencymodulator"] = 1,
-			["value_techtool_3"] = 1,
-			["value_wirelesstrans"] = 15,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "specialty_tools", quantity = 1 },
+		{ pool = "consumer_electronics", quantity = 1 },
+		{ pool = "documents_technical", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Mute'"
@@ -364,10 +347,10 @@ ix.progression.Register("muteItemDelivery_BlowoutWarning", {
 	keyNpc = "'Mute'",
 	defaultActive = false,
 	progMap = MAP,
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Mute shoves some kind of schematics towards you. It looks "
@@ -385,15 +368,12 @@ ix.progression.Register("muteItemDelivery_BlowoutWarning", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["value_frequencymodulator"] = 1,
-			["value_techtool_3"] = 1,
-			["value_wirelesstrans"] = 2,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "consumer_electronics", quantity = 1 },
+		{ pool = "small_electronics", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Mute'"

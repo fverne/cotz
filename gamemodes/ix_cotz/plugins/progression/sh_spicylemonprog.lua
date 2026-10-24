@@ -10,10 +10,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 		{ npc = "'Spicy Lemon'", args = { "drug_mints", nil, 1, "SELLANDBUY", 1, 4, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Medical2" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Hello, stalker. You may not know it, but I am a chemist "
@@ -34,13 +34,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["meal_tushkano"] = 15,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "common_meals", quantity = 1 },
+		{ pool = "local_refreshments", quantity = 1 },
+		{ pool = "canned_food", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
@@ -64,10 +63,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 		{ npc = "'Spicy Lemon'", args = { "drug_caffeine", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Medical3", "spicylemonItemDelivery_Food" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"My new laboratory equipment shows great promise, but it "
@@ -87,13 +86,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["meal_flesh"] = 65,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "common_meals", quantity = 2 },
+		{ pool = "local_beer", quantity = 2 },
+		{ pool = "canned_food", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
@@ -116,10 +114,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 		{ npc = "'Spicy Lemon'", args = { "medic_psyheal_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Medical4", "spicylemonItemDelivery_Vodka" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Good day, stalker. You may have noticed, but the Swamps "
@@ -142,13 +140,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["meal_boar"] = 165,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "common_meals", quantity = 4 },
+		{ pool = "predator_meals", quantity = 4 },
+		{ pool = "local_refreshments", quantity = 3 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
@@ -171,10 +168,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical4", {
 		{ npc = "'Spicy Lemon'", args = { "medic_antipsychotic_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Medical5" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"While having Modafine is useful, it is better to avoid "
@@ -194,13 +191,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical4", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["meal_cat"] = 190,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "common_meals", quantity = 4 },
+		{ pool = "predator_meals", quantity = 4 },
+		{ pool = "spirits", quantity = 4 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
@@ -223,10 +219,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 		{ npc = "'Spicy Lemon'", args = { "drug_painkillers", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Medical6", "spicylemonItemDelivery_Spirits" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Do your wounds ache, stalker? I am saddened to hear it; "
@@ -247,13 +243,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["meal_snork"] = 190,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "predator_meals", quantity = 4 },
+		{ pool = "common_meals", quantity = 4 },
+		{ pool = "local_beer", quantity = 4 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
@@ -277,10 +272,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical6", {
 		{ npc = "'Spicy Lemon'", args = { "drug_adrenaline", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Medical7" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"The mutants out there are not getting easier to deal with, "
@@ -302,13 +297,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical6", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["meal_bloodsucker"] = 190,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "predator_meals", quantity = 4 },
+		{ pool = "exotic_meals", quantity = 4 },
+		{ pool = "spirits", quantity = 4 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
@@ -332,10 +326,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 		{ npc = "'Spicy Lemon'", args = { "drug_morphine", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Brew" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Though Codeine is useful after combat, I am looking to "
@@ -356,13 +350,12 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["meal_sprig"] = 100,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 3,
+	requirementSlots = {
+		{ pool = "exotic_meals", quantity = 3 },
+		{ pool = "predator_meals", quantity = 2 },
+		{ pool = "energy_drinks", quantity = 2 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
@@ -392,10 +385,10 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 		{ npc = "'Spicy Lemon'", args = { "food_can_tushonka", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Vodka" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Good day, stalker. You have no doubt encountered mutant "
@@ -416,13 +409,12 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["drink_energydrink_4"] = 40,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "local_refreshments", quantity = 1 },
+		{ pool = "common_meals", quantity = 1 },
+		{ pool = "canned_food", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
@@ -444,10 +436,10 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 		{ npc = "'Spicy Lemon'", args = { "drink_vodka_6", nil, 1, "SELLANDBUY", 1, 6, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Spirits" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"One look at you tells me all I need to know, stalker. You "
@@ -468,13 +460,12 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["drink_energydrink_5"] = 40,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "local_refreshments", quantity = 1 },
+		{ pool = "common_meals", quantity = 1 },
+		{ pool = "spirits", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
@@ -500,10 +491,10 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 		{ npc = "'Spicy Lemon'", args = { "drink_wine", nil, 1, "SELLANDBUY", 1, 6, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Brew" },
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Not satisfied with local vodka? This is no issue; I completely "
@@ -525,13 +516,12 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["drink_energydrink_6"] = 40,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 1,
+	requirementSlots = {
+		{ pool = "local_refreshments", quantity = 1 },
+		{ pool = "predator_meals", quantity = 1 },
+		{ pool = "local_beer", quantity = 1 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
@@ -553,10 +543,10 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 	vendorUnlocks = {
 		{ npc = "'Spicy Lemon'", args = { "miscaid_swampbrew", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcName, status)
+	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
-		local itemIDs = self:GetItemIds()
+		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
 			"Hello, stalker. My interest does not lie with chemistry "
@@ -577,16 +567,13 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 
 		return str
 	end,
-	GetItemIds = function()
-		local itemIDs = {
-			["meal_chimera"] = 50,
-			["meal_pseudogiant"] = 50,
-			["meal_karlik"] = 50,
-			["meal_spider"] = 50,
-		}
-
-		return itemIDs
-	end,
+	lootMapTier = 2,
+	requirementSlots = {
+		{ pool = "elite_meals", quantity = 4 },
+		{ pool = "exotic_meals", quantity = 3 },
+		{ pool = "spirits", quantity = 3 },
+		{ pool = "local_refreshments", quantity = 3 },
+	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"

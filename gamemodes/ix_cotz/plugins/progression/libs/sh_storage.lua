@@ -1,7 +1,7 @@
 ix.progression = ix.progression or {}
 
 local DATA_KEY = "progression"
-local DATA_VERSION = 2
+local DATA_VERSION = 3
 
 local function validateCharacter(character)
 	assert(
@@ -53,7 +53,6 @@ if SERVER then
 		character:SetData(DATA_KEY, table.Copy(record))
 	end
 
-	-- Never seed personal progress from the legacy server-wide status table.
 	function ix.progression.InitializeCharacterProgression(character)
 		validateCharacter(character)
 
@@ -62,5 +61,6 @@ if SERVER then
 		else
 			validateRecord(character:GetData(DATA_KEY))
 		end
+		ix.progression.AssignActiveRequirements(character)
 	end
 end

@@ -168,7 +168,7 @@ DIALOGUE.addTopic("StartBarter", {
 					.. "x "
 					.. ix.item.list[reqitem[1]].name,
 				topicID = "StartBarter",
-				dynamicData = { npcName = "'Spicy Lemon'", identifier = barterid, reqitem = reqitem[1] },
+				dyndata = { npcname = "'Spicy Lemon'", identifier = barterid, reqitem = reqitem[1] },
 			})
 			-- end
 		end

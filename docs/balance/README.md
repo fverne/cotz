@@ -82,7 +82,7 @@ need the baseline commit in their history; Actions checks out full history.
 
 ## Workbook contents
 
-| Sheet | Editable configuration |
+| Sheet | Contents / editability |
 | --- | --- |
 | Items - &lt;category&gt; | One sheet per item category, containing only supported attributes explicitly used by that category |
 | Item bases | The same fields on shared item defaults |
@@ -92,9 +92,12 @@ need the baseline commit in their history; Actions checks out full history.
 | Anomaly fields | Spacing and common/rare/very-rare artifact pools |
 | Progression overview | Read-only NPC summary: step counts, starting definitions, NPC access milestones, and maps |
 | Progression steps | Read-only step catalog: descriptions, incoming/outgoing chain links, personal NPC gates, quantities, and job thresholds |
-| Progression hand-ins | Read-only row per required item: step, NPC, map, item ID/name, required units, definition status, and source location |
+| Progression hand-ins | Read-only candidate rows grouped by personal slot: step, NPC, item, quantity if selected, pool, and source |
 | Progression unlocks | Read-only successor activations, vendor items with personal stock/restock settings, personal NPC/service access, and global NPC arrivals |
-| Progression item demand | Read-only item reuse, summed requirements, largest single requirement, and requesting NPCs/steps |
+| Progression item demand | All scanned item IDs, including zero-demand items, with read-only potential demand across all possible selections |
+| Progression pools | Read-only pool candidates, rarity categories, and acquisition rationale |
+| Progression rebalance | Read-only comparison of original requirements against each step's personal assignment range and exceptions |
+| Acquisition audit | Read-only source loot probabilities, spawn quantities, harvest/cooking routes, and anomaly tiers |
 | Metadata | Commit, baseline checksum, editing instructions |
 | Column guide | Units and interpretation notes |
 | Coverage | Unsupported expressions, duplicate IDs, and behavior embedded in code |
@@ -121,12 +124,47 @@ they are not an AND checklist. `Initially active definition` reflects `defaultAc
 only; personal NPC access is still required. Maps are resolved at each registration,
 including changes to the map variable within a definition file.
 
-Use `Progression hand-ins` for exact requirements and `Progression item demand`
-to identify repeated demand before rebalancing. Counts are **quantity units**, not
-inventory stacks or loot finds. Spawned stack quantities and acquisition rates are
-not calculated. Totals across branches are a catalog sum, not the cost of a required
-playthrough. Item names come from the existing item scan; missing or ambiguous IDs
-are flagged rather than silently resolved.
+Use `Progression hand-ins` to inspect candidates for each requirement slot. **Only
+one candidate per slot is assigned to a character**; other rows in that slot are
+alternatives. `Units if selected` is the slot's fixed quantity, shared by every
+candidate in that slot. Each original shared total is divided by 16, rounded up,
+and split evenly across the categories with a minimum of one item per category.
+`Progression steps` shows the total quantity; minimum and maximum are equal because
+random selection changes item IDs, not counts. Job thresholds also divide by 16
+and round up.
+
+Counts are quantity units, not inventory stacks, guaranteed loot finds, or elapsed
+playtime. `Progression item demand` includes every scanned item ID, showing zero
+for items unused by progression, and retains any referenced IDs missing from the
+scan. It sums potential requirements across all possible selections.
+Those totals include alternatives and branches, so they are not a
+combined shopping list or required playthrough cost. Item names come from the
+existing item scan; missing or ambiguous IDs are flagged rather than silently resolved.
+
+`Progression pools` shows candidates and the rarity/acquisition rationale for each
+pool. `Progression rebalance` compares all 134 deliveries and five task thresholds
+against their original shared requirements. It shows the divided item targets and
+extra units required to keep at least one item per category. See the [balance rationale](progression/README.md).
+Most deliveries now request three categories, with broader candidate selections
+and overlap between related pools across the catalog. Detector3 requests six
+specimens covering all five anomaly families plus an exceptional artifact.
+The hand-in and pool tabs show every alternative; each character receives only
+one candidate per slot. `value_personal` remains outside progression.
+`Acquisition audit` includes conditional probabilities within each weighted loot
+table, explicit spawn quantities, simple instance quantity ranges, guaranteed meat,
+rare trophy probabilities, cooking inputs, and artifact field tiers.
+Worldspawn tables 1/2 belong to the Marsh, 3/4 to Waystation,
+and 5/6 to Pripyat; odd tables are ordinary loot and even tables are hard to find.
+The audit labels each world route with its map tier, map name and spawn class.
+Step and hand-in tabs show each delivery's `Loot map ceiling`; early low-tier
+branches exclude later-map world candidates. Non-world routes remain explicit
+and require their own availability review. It also includes
+original items removed by the rebalance. Server map spawn-point configuration and
+mutant encounter frequency are not resolved; these require live playtesting.
+
+The game assigns and saves requests once at unlock. Reconnecting, changing maps,
+opening dialogue, or editing pool definitions does not reroll existing assignments.
+Fixed story keys and specialist single-item exceptions are listed explicitly.
 
 `Progression unlocks` distinguishes personal NPC/service access and vendor purchase
 eligibility and stock from global NPC arrivals. Limited stock and restock clocks
@@ -159,13 +197,14 @@ Admin stock edits change catalog defaults; they do not reset every character's
 remaining supply. NPCs with the same display name on the same map use the same
 stock identity for a character. Renaming an NPC creates a different identity.
 
-All five progression tabs use gray cells and are **informational only**. Editing
+All progression and acquisition tabs use gray cells and are **informational only**. Editing
 them does not alter Lua: the importer ignores these tabs. Existing blue balance
-cells retain their normal export/import behavior. No progression quantities or
-item pools are changed by this documentation update. Fresh exports regenerate
-these views from the current checkout, so there is no manually maintained copy of
-the requirements. The baseline schema remains 2 because these views add no import
-fields; generate a fresh workbook to see the new tabs.
+cells retain their normal export/import behavior. Edit personal delivery slots and
+pools in their Lua definitions; fresh exports regenerate these views. The historical
+JSON snapshot is documentation only, not runtime migration support. The planned
+server wipe starts everyone with new assignments. Runtime progression uses version 3;
+the workbook baseline remains schema 2 because these read-only views add no import
+fields. Generate a fresh workbook to see the new tabs.
 
 Artifact pools are JSON arrays, for example:
 
