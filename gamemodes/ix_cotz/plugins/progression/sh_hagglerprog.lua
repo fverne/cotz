@@ -612,7 +612,7 @@ ix.progression.Register("hagglerItemDelivery_122", {
 	GetItemIds = function()
 		local itemIDs = {
 			["value_detergent"] = 30,
-			["value_car_battery"] = 5,
+			["value_carbattery"] = 5,
 		}
 
 		return itemIDs
