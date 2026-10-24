@@ -64,6 +64,25 @@ hook.Add("DoPluginIncludes", "ixDialogueLib", function(path)
 	ix.dialogue.LoadFromDir(path.."/dialogue")
 end)
 
+function ix.dialogue.ProgressionTurnIn(topic, client, target, data)
+	if CLIENT then
+		topic.waitForProgressionResponse = true
+
+		return
+	end
+	if not istable(data) then
+		return
+	end
+	local accepted, response = ix.progression.TurnIn(client, target, data.progid, data.itemid)
+	if not accepted then
+		response = "I couldn't accept that delivery. Check what this task still needs and what you're carrying."
+	end
+	net.Start("cotz/dialogue/progression-response")
+	net.WriteEntity(target)
+	net.WriteString(response)
+	net.Send(client)
+end
+
 if SERVER then
 
 function ix.dialogue.notify(client, type, text)

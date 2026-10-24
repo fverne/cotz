@@ -4,6 +4,7 @@ PLUGIN.desc = "System for communication between all NPCs."
 
 if SERVER then
 	util.AddNetworkString("ixDialogue")
+	util.AddNetworkString("cotz/dialogue/progression-response")
 	util.AddNetworkString("ixDialogueNotify")
 	util.AddNetworkString("ixDialogueFreeze")
 	util.AddNetworkString("ixPreCallback")

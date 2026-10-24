@@ -71,7 +71,9 @@ function PLUGIN:PopulateHelpMenu(tabs)
 			(
 				"Below is a list of known NPCs and what they need for various "
 				.. "progressions. Progress and unlocks belong to your current "
-				.. "character."
+				.. "character. Finish every item requirement in a task to receive "
+				.. "reputation, 30% of the handed-in value, and one item from a requested group. "
+				.. "Groups with only one item give extra money instead."
 			)
 		)
 		intro:Dock(TOP)

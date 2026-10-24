@@ -370,11 +370,7 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 	IsDynamicFollowup = true,
 	options = { "BackTopic" },
 	DynamicPreCallback = function(self, player, target, dynamicData)
-		if SERVER and istable(dynamicData) then
-			ix.progression.TurnIn(player, target, dynamicData.progid, dynamicData.itemid)
-		elseif CLIENT then
-			self.response = "Let me check what you have brought."
-		end
+		ix.dialogue.ProgressionTurnIn(self, player, target, dynamicData)
 	end,
 })
 

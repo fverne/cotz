@@ -76,7 +76,11 @@ function PANEL:startTopic(topicID, dynamicData)
 		self:dialogue(LocalPlayer():GetCharacter():GetName(), topic.statement, true)
 	end
 
-	self:dialogue(self:targetName(), topic.response, true, ix.config.Get("chatColor"), topicID)
+	if topic.waitForProgressionResponse then
+		self:prepareOptions(topic.options)
+	else
+		self:dialogue(self:targetName(), topic.response, true, ix.config.Get("chatColor"), topicID)
+	end
 end
 
 function PANEL:dialogue(name, message, instant, color, topicID)
@@ -324,6 +328,15 @@ net.Receive("ixDialogue", function()
 	ix.gui.dialogue = vgui.Create("ixDialogue")
 	ix.gui.dialogue.target = target
 	ix.gui.dialogue.treeID = treeID
+end)
+
+net.Receive("cotz/dialogue/progression-response", function()
+	local target = net.ReadEntity()
+	local response = net.ReadString()
+	local panel = ix.gui.dialogue
+	if IsValid(panel) and panel.target == target then
+		panel:dialogue(panel:targetName(), response, true, ix.config.Get("chatColor"))
+	end
 end)
 
 net.Receive("ixDialogueNotify", function()

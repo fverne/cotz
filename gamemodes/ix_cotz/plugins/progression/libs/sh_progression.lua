@@ -1,8 +1,6 @@
 ix.progression = ix.progression or {}
 ix.progression.definitions = ix.progression.definitions or {}
 
-local REWARD_ROUNDING_EPSILON = 0.000000001
-
 -- World NPCs are shared entities; access to their services belongs to a character.
 ix.progression.npcRequirements = {
 	["'Haggler'"] = "oldTimerKillIntro",
@@ -256,6 +254,7 @@ if SERVER then
 		end)
 		if completed then
 			ix.progression.SetCompleted(character, progressionID)
+			ix.progression.PayCompletionRewards(character, progressionID)
 			local definition = ix.progression.definitions[progressionID]
 			if definition.OnComplete then
 				definition.OnComplete(character)
@@ -263,23 +262,6 @@ if SERVER then
 		end
 
 		return amount
-	end
-
-	local function creditTurnInRewards(character, progressionID, reputation, money)
-		local reputationDelta, moneyDelta
-		updateLine(character, progressionID, function(line)
-			line.rewardCredit = line.rewardCredit or { reputation = 0, money = 0 }
-			line.rewardsPaid = line.rewardsPaid or { reputation = 0, money = 0 }
-			line.rewardCredit.reputation = line.rewardCredit.reputation + reputation
-			line.rewardCredit.money = line.rewardCredit.money + money
-			local reputationTotal = math.floor(line.rewardCredit.reputation + 0.5 + REWARD_ROUNDING_EPSILON)
-			local moneyTotal = math.floor(line.rewardCredit.money + 0.5 + REWARD_ROUNDING_EPSILON)
-			reputationDelta = reputationTotal - line.rewardsPaid.reputation
-			moneyDelta = moneyTotal - line.rewardsPaid.money
-			line.rewardsPaid = { reputation = reputationTotal, money = moneyTotal }
-		end)
-
-		return reputationDelta, moneyDelta
 	end
 
 	-- The server derives the accepted quantity and rewards from inventory state.
@@ -308,7 +290,7 @@ if SERVER then
 		if not item or remaining <= 0 then
 			return false
 		end
-		local available = item:GetData("quantity", item.quantity or 1)
+		local available = item:GetData("quantity", item.quantity or item.ammoAmount or 1)
 		if not isnumber(available) or available ~= available or available == math.huge then
 			return false
 		end
@@ -316,6 +298,7 @@ if SERVER then
 		if amount <= 0 then
 			return false
 		end
+		local itemName = item.name or ix.item.list[itemID].name
 		local reputation, money = ix.util.GetValueFromProgressionTurnin(item, amount)
 		-- Consume before running completion callbacks or giving rewards.
 		if amount == available then
@@ -325,14 +308,19 @@ if SERVER then
 		else
 			item:SetData("quantity", available - amount)
 		end
+		ix.dialogue.notifyItemLost(client, string.format("%s x%d", itemName, amount))
+		ix.progression.AccrueTurnInRewards(character, progressionID, reputation, money, itemID)
 		ix.progression.AddComplexProgressionValue(character, progressionID, { itemID, amount })
-		reputation, money = creditTurnInRewards(character, progressionID, reputation, money)
-		client:addReputation(reputation)
-		character:GiveMoney(money)
-		ix.dialogue.notifyReputationReceive(client, reputation)
-		ix.dialogue.notifyMoneyReceive(client, money)
 		character:Save()
+		local response = string.format("Received %d x %s for %s. ", amount, itemName, definition.name)
+		if ix.progression.IsCompleted(character, progressionID) then
+			response = response .. "That's everything I asked for. The task is complete, and your reward is paid."
+		elseif remaining > amount then
+			response = response .. string.format("I still need %d more of this item to meet the request.", remaining - amount)
+		else
+			response = response .. "That's enough of this item. Bring the other supplies to finish the task."
+		end
 
-		return true
+		return true, response
 	end
 end

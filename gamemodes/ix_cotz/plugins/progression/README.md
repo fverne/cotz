@@ -65,10 +65,30 @@ requirements query. Another pool member is not accepted unless it was assigned t
 that character. Hand-ins consume only the remaining required quantity; excess
 stack units stay in the inventory. Completed requirements cannot be submitted again.
 
-Currency and reputation are based on the consumed fraction, not the original stack.
-Fractional credits accumulate in the progression line before rounding, so splitting
-a delivery into multiple requests cannot multiply rewards. Completion callbacks and
-successor activation retain their existing behavior and run once.
+Delivery rewards are paid once, when all requirements of the progression task are
+fulfilled. Partial hand-ins only save credit; they give no currency, reputation or
+items. Currency is 30% of the combined value actually consumed. Reputation is twice
+the previous formula: `2 * (5 + (fullStackValue * 0.1)^0.25)` per full stack, scaled
+by the fraction consumed. Both totals accumulate before rounding at completion, so
+splitting a delivery into multiple requests cannot multiply rewards.
+
+Completion also gives a single item from one randomly chosen assigned requirement
+pool that has alternatives, excluding the submitted item. Single-item pools
+give an additional 30% of their submitted value in money instead of an item (60%
+total for those items). The reward item's quantity is half the chosen group's
+assigned requirement quantity, rounded down with a minimum of one. For example,
+a selected request for 12 units of `drug_cigarette_3` rewards one `drug_cigarette_4`
+item with quantity 6.
+The item goes into the character's inventory; if it does not fit, it is dropped
+at the player's item drop position. The saved completion marker prevents repeat
+payouts, including after reconnecting. Administrative milestone grants do not pay
+delivery rewards.
+
+Existing partial-task credit is converted to the new rates on the next hand-in.
+Previously paid amounts are deducted from the final payout, with a minimum of zero;
+money already paid is never reclaimed. Completed tasks are not paid again.
+Completion callbacks and successor activation retain their existing behavior and
+run once.
 
 ## Progression overview workbook
 

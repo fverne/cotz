@@ -1,8 +1,9 @@
 ix.util = ix.util or {}
 
 local TURN_IN_BASE_REPUTATION = 5
+local TURN_IN_REPUTATION_MULTIPLIER = 2
 local TURN_IN_VALUE_FACTOR = 0.1
-local TURN_IN_BUYBACK_RATE = 0.6
+local TURN_IN_BUYBACK_RATE = 0.3
 
 function ix.util.GetValueFromProgressionTurnin(item, count)
 	local maximumQuantity = item.quantity or item.ammoAmount or 1
@@ -27,7 +28,7 @@ function ix.util.GetValueFromProgressionTurnin(item, count)
 	local accepted = math.min(count or available, available)
 	local unitPrice = fullValue / maximumQuantity
 	local fullReputation = TURN_IN_BASE_REPUTATION + (fullValue * TURN_IN_VALUE_FACTOR) ^ 0.25
-	local reputation = fullReputation * accepted / maximumQuantity
+	local reputation = fullReputation * accepted / maximumQuantity * TURN_IN_REPUTATION_MULTIPLIER
 	local currency = unitPrice * accepted * TURN_IN_BUYBACK_RATE
 
 	return reputation, currency

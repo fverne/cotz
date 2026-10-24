@@ -43,6 +43,7 @@ Angle = Vector
 unpack = unpack or table.unpack
 table.Copy = copy
 local timers, messages, callbacks, currentMap = {}, {}, {}, "rp_marsh_cs"
+local lostItems = {}
 timer = {
 	Simple = function(delay, callback)
 		timers[#timers + 1] = callback
@@ -87,12 +88,25 @@ ix = {
 			return amount, amount * 2
 		end,
 	},
-	dialogue = { notifyReputationReceive = function() end, notifyMoneyReceive = function() end },
+	dialogue = {
+		notifyReputationReceive = function() end,
+		notifyMoneyReceive = function() end,
+		notifyItemGet = function() end,
+		notifyItemLost = function(client, description)
+			lostItems[#lostItems + 1] = { client = client, description = description }
+		end,
+	},
 	command = { Add = function() end },
 	type = { character = 1, string = 2 },
 	npctemplates = { templates = {} },
 }
 local meta = ix.meta.character
+local function addReward(inventory, itemID, amount, data)
+	inventory.rewards = inventory.rewards or {}
+	inventory.rewards[#inventory.rewards + 1] = { item = itemID, amount = amount, data = copy(data) }
+
+	return true
+end
 meta.__index = meta
 function meta:GetData(key)
 	return self.data[key]
@@ -115,6 +129,7 @@ function meta:Save()
 end
 local function character()
 	local char = setmetatable({ data = {}, replications = 0, saves = 0, money = 0 }, meta)
+	char.inventory = { Add = addReward }
 	char.client = {
 		GetCharacter = function()
 			return char
@@ -133,6 +148,7 @@ local base = "gamemodes/ix_cotz/plugins/progression/"
 dofile(base .. "libs/sh_storage.lua")
 dofile(base .. "libs/sh_progression.lua")
 dofile(base .. "libs/sh_requirements.lua")
+dofile(base .. "libs/sv_rewards.lua")
 local api = ix.progression
 function api.Register(id, definition)
 	definition.id = id
@@ -280,6 +296,7 @@ function inventoryItem:Remove()
 	self.removed = true
 end
 a.inventory = {
+	Add = addReward,
 	HasItem = function(_, id)
 		if id == "artifact_bolt" and not inventoryItem.removed then
 			return inventoryItem
@@ -305,7 +322,11 @@ check(not api.TurnIn(a.client, target, "cleanerItemDelivery_Storage", "invalid")
 currentMap = "rp_waystation"
 check(not api.TurnIn(a.client, target, "cleanerItemDelivery_Storage", "artifact_bolt"), "wrong map rejected")
 currentMap = "rp_marsh_cs"
-check(api.TurnIn(a.client, target, "cleanerItemDelivery_Storage", "artifact_bolt"), "valid turn-in accepted")
+local accepted, response = api.TurnIn(a.client, target, "cleanerItemDelivery_Storage", "artifact_bolt")
+check(accepted, "valid turn-in accepted")
+check(#lostItems == 1 and lostItems[1].client == a.client, "only accepted delivery notifies its owner")
+check(lostItems[1].description == "artifact_bolt x1", "lost-item notification uses consumed quantity")
+check(string.find(response, "task is complete", 1, true), "completed hand-in confirms task completion")
 check(
 	inventoryItem.quantity == 4 and a.money == 2 and a.reputation == 1,
 	"only required amount consumed and rewarded"
@@ -318,6 +339,7 @@ check(
 	a.money == 2 and inventoryItem.quantity == 4 and not api.IsCompleted(b, "cleanerItemDelivery_Storage"),
 	"duplicate requests cannot award rewards or affect others"
 )
+check(#lostItems == 1, "duplicate delivery sends no lost-item notification")
 check(a.saves >= 2, "assignment and turn-in both save character")
 
 -- Inventory removal can fail; never grant progress or rewards in that case.
@@ -335,6 +357,7 @@ check(
 	c.money == 0 and not api.IsCompleted(c, "cleanerItemDelivery_Storage"),
 	"failed removal gives no progress or rewards"
 )
+check(#lostItems == 1, "failed removal sends no lost-item notification")
 inventoryItem.Remove = function(self)
 	self.removed = true
 end
@@ -748,6 +771,9 @@ check(not pcall(api.ValidateRequirementPools), "invalid pool definitions fail va
 api.itemPools.fasteners = invalidPool
 
 -- Check the real dialogue producer, visible description, UI selection and server consumer together.
+SERVER = false
+dofile("gamemodes/ix_cotz/plugins/dialogue/libs/sh_dialogue.lua")
+SERVER = true
 local dialogue = { tree = {} }
 dialogue.addTopic = function(id, data)
 	dialogue.tree[id] = data
@@ -769,6 +795,7 @@ function stack:SetData(key, value)
 	self[key] = value
 end
 patient.inventory = {
+	Add = addReward,
 	HasItem = function(_, id)
 		return id == chosenItem and stack or nil
 	end,
@@ -845,13 +872,35 @@ check(
 	pickedTopic == "HandInComplexProgressionItemTopic" and pickedData.itemid == chosenItem,
 	"real UI forwards the selected payload to the hand-in topic"
 )
+dialogue.tree[pickedTopic]:DynamicPreCallback(patient.client, medic, pickedData)
+check(dialogue.tree[pickedTopic].waitForProgressionResponse, "client waits for authoritative hand-in response")
 CLIENT = false
 dialogue.tree[pickedTopic]:DynamicPreCallback(patient.client, medic, pickedData)
+check(string.find(dialogueTree, chosenItem, 1, true), "server sends accepted item in dialogue response")
+local deliveredResponse
+ix.gui = { dialogue = panel }
+ix.config.Get = function() end
+panel.dialogue = function(_, _, text)
+	deliveredResponse = text
+end
+readTarget = medic
+readStrings = { dialogueTree }
+networkHandlers["cotz/dialogue/progression-response"]()
+check(deliveredResponse == dialogueTree, "client renders server-confirmed hand-in response")
+readTarget = target
+readStrings = { "stale response" }
+networkHandlers["cotz/dialogue/progression-response"]()
+check(deliveredResponse == dialogueTree, "response for another NPC does not enter the dialogue")
 check(
 	stack.quantity == 1
 		and api.GetComplexProgressionValue(patient, pickedData.progid)[chosenItem] == chosenAmount,
 	"real server consumer accepts only the assigned remaining quantity"
 )
+
+local notificationsBeforeRetry = #lostItems
+dialogue.tree[pickedTopic]:DynamicPreCallback(patient.client, medic, pickedData)
+check(string.find(dialogueTree, "couldn't accept", 1, true), "rejected delivery returns an honest NPC response")
+check(#lostItems == notificationsBeforeRetry, "rejected dialogue retry shows no lost-item icon")
 
 -- The real reward helper prices the consumed fraction, not the whole remaining stack.
 local rewardFile = assert(io.open("gamemodes/ix_cotz/schema/libs/sh_fverneutils.lua"))
@@ -873,7 +922,9 @@ local pricedStack = {
 }
 local _, partialMoney = ix.util.GetValueFromProgressionTurnin(pricedStack, 2)
 local _, fullMoney = ix.util.GetValueFromProgressionTurnin(pricedStack, 10)
-check(partialMoney == 12 and fullMoney == 60, "partial hand-ins receive only proportional currency")
+check(partialMoney == 6 and fullMoney == 30, "completion credit is 30% of consumed value")
+local fullReputation = ix.util.GetValueFromProgressionTurnin(pricedStack, 10)
+check(math.abs(fullReputation - 2 * (5 + 10 ^ 0.25)) < 0.000001, "reputation credit is doubled")
 check(_G.value == nil, "reward calculation does not leak global mutable state")
 
 -- Rounding credits accumulate across requests, so splitting a stack cannot multiply rewards.
@@ -884,21 +935,28 @@ api.Register("reward_test", {
 	defaultActive = true,
 	requirementSlots = { { pool = "reward_test", quantity = 10 } },
 })
-local function rewardCharacter()
+local function rewardCharacter(useAmmoDefault)
 	local owner = character()
 	local inventoryStack
 	owner.inventory = {
+		Add = addReward,
 		HasItem = function()
 			return inventoryStack
 		end,
 	}
 	local function supply(amount)
 		inventoryStack = { quantity = 10, price = 1, remaining = amount }
+		if useAmmoDefault then
+			inventoryStack.quantity = nil
+			inventoryStack.ammoAmount = 10
+		end
 		function inventoryStack:GetData()
-			return self.remaining
+			return useAmmoDefault and self.ammoAmount or self.remaining
 		end
 		function inventoryStack:GetPrice()
-			return math.Round(self.price * self:GetData("quantity", self.quantity) / self.quantity)
+			local maximum = self.quantity or self.ammoAmount
+
+			return math.Round(self.price * self:GetData("quantity", maximum) / maximum)
 		end
 		function inventoryStack:Remove()
 			return true
@@ -928,6 +986,10 @@ check(api.TurnIn(bulk.client, rewardNPC, "reward_test", "reward_test"), "whole r
 for _ = 1, 10 do
 	supplySplit(1)
 	check(api.TurnIn(split.client, rewardNPC, "reward_test", "reward_test"), "split reward stack accepted")
+	if not api.IsCompleted(split, "reward_test") then
+		check(split.money == 0 and not split.reputation, "partial deliveries pay no currency or reputation")
+		check(not split.inventory.rewards, "partial deliveries give no item rewards")
+	end
 end
 check(
 	bulk.money == split.money and bulk.reputation == split.reputation,
@@ -937,6 +999,182 @@ check(
 	not api.TurnIn(split.client, rewardNPC, "reward_test", "reward_test"),
 	"completed reward ledger rejects repeats"
 )
+check(bulk.money == 1 and bulk.reputation == 11, "completion rounds base money and singleton bonus together")
+check(not bulk.inventory.rewards, "singleton pools give money instead of items")
+local ammoOwner, supplyAmmo = rewardCharacter(true)
+supplyAmmo(10)
+check(api.TurnIn(ammoOwner.client, rewardNPC, "reward_test", "reward_test"), "ammo default stack accepted")
+check(api.IsCompleted(ammoOwner, "reward_test"), "ammo without quantity data contributes the full ammoAmount")
+local moneyBeforeRepeat = split.money
+api.PayCompletionRewards(split, "reward_test")
+check(
+	split.money == moneyBeforeRepeat and not split.inventory.rewards,
+	"repeated completion cannot pay the singleton bonus twice"
+)
+
+-- Completion selects one assigned group and gives one alternative with half its required quantity.
+ix.item.list.drug_cigarette_3 = { name = "Star", quantity = 10, price = 100 }
+ix.item.list.drug_cigarette_4 = { name = "Spark", quantity = 10, price = 100 }
+ix.item.list.drug_cigarette_5 = { name = "Lucky Strike", quantity = 20, price = 200 }
+ix.item.list.drug_cigarette_6 = { name = "Marlboro", quantity = 20, price = 200 }
+local completionCalls = 0
+api.Register("reward_groups", {
+	keyNpc = "Tester",
+	progMap = currentMap,
+	defaultActive = true,
+	requirementSlots = {
+		{ pool = "cigarettes", quantity = 12 },
+		{ pool = "premium_cigarettes", quantity = 3 },
+	},
+	OnComplete = function()
+		completionCalls = completionCalls + 1
+	end,
+})
+local groupOwner = character()
+local stocks = {}
+local function installInventory(owner)
+	owner.inventory = {
+		Add = addReward,
+		HasItem = function(_, itemID)
+			return stocks[itemID]
+		end,
+	}
+end
+local function supplyItem(itemID, quantity)
+	local stock = setmetatable({ remaining = quantity }, { __index = ix.item.list[itemID] })
+	function stock:GetData(_, default)
+		return self.remaining or default
+	end
+	function stock:SetData(_, value)
+		self.remaining = value
+	end
+	function stock:Remove()
+		stocks[itemID] = nil
+	end
+	stocks[itemID] = stock
+end
+installInventory(groupOwner)
+supplyItem("drug_cigarette_3", 10)
+accepted, response = api.TurnIn(groupOwner.client, rewardNPC, "reward_groups", "drug_cigarette_3")
+check(accepted, "first stack accepted")
+check(string.find(response, "I still need 2 more", 1, true), "partial delivery reports remaining units")
+check(groupOwner.money == 0 and not groupOwner.reputation, "unfinished group task pays nothing")
+local reloadedOwner = character()
+reloadedOwner.data = copy(groupOwner.data)
+groupOwner = reloadedOwner
+installInventory(groupOwner)
+api.InitializeCharacterProgression(groupOwner)
+supplyItem("drug_cigarette_3", 10)
+accepted, response = api.TurnIn(groupOwner.client, rewardNPC, "reward_groups", "drug_cigarette_3")
+check(accepted, "restored credit accepts remainder")
+check(string.find(response, "other supplies", 1, true), "fulfilled item explains other requirements remain")
+check(stocks.drug_cigarette_3.remaining == 8, "excess units remain in the submitted stack")
+check(groupOwner.money == 0 and not groupOwner.inventory.rewards, "fulfilling one group pays nothing")
+supplyItem("drug_cigarette_5", 3)
+check(api.TurnIn(groupOwner.client, rewardNPC, "reward_groups", "drug_cigarette_5"), "last group completes task")
+check(groupOwner.money == 45, "completion pays 30% of all 150 currency of consumed items")
+local expectedReputation = math.floor(2 * (5 + 10 ^ 0.25) * (12 / 10 + 3 / 20) + 0.5)
+check(groupOwner.reputation == expectedReputation, "completion sums doubled reputation from every group")
+local groupRewards = groupOwner.inventory.rewards
+check(
+	#groupRewards == 1 and groupRewards[1].amount == 1
+		and groupRewards[1].item == "drug_cigarette_4" and groupRewards[1].data.quantity == 6,
+	"multiple groups give only one item with half the selected group's required quantity"
+)
+check(completionCalls == 1, "completion callback runs once alongside the rewards")
+local completedRestore = character()
+completedRestore.data = copy(groupOwner.data)
+api.PayCompletionRewards(completedRestore, "reward_groups")
+check(completedRestore.money == 0 and not completedRestore.inventory.rewards, "save/load cannot replay rewards")
+
+-- Only singleton groups add extra currency in a task with mixed group sizes.
+ix.item.list.reward_test = { name = "Singleton", price = 100 }
+api.Register("reward_mixed", {
+	keyNpc = "Tester",
+	progMap = currentMap,
+	defaultActive = true,
+	requirementSlots = {
+		{ pool = "cigarettes", quantity = 2 },
+		{ pool = "reward_test", quantity = 2 },
+	},
+})
+local mixedOwner = character()
+installInventory(mixedOwner)
+supplyItem("reward_test", 1)
+check(api.TurnIn(mixedOwner.client, rewardNPC, "reward_mixed", "reward_test"), "partial singleton accepted")
+check(mixedOwner.money == 0 and not mixedOwner.inventory.rewards, "singleton bonus waits for completion")
+local mixedReload = character()
+mixedReload.data = copy(mixedOwner.data)
+mixedOwner = mixedReload
+installInventory(mixedOwner)
+supplyItem("reward_test", 1)
+check(api.TurnIn(mixedOwner.client, rewardNPC, "reward_mixed", "reward_test"), "restored singleton accepted")
+supplyItem("drug_cigarette_3", 2)
+check(api.TurnIn(mixedOwner.client, rewardNPC, "reward_mixed", "drug_cigarette_3"), "mixed task completes")
+check(mixedOwner.money == 126, "200 singleton value pays 120; 20 alternative-group value pays 6")
+check(
+	#mixedOwner.inventory.rewards == 1
+		and mixedOwner.inventory.rewards[1].item == "drug_cigarette_4"
+		and mixedOwner.inventory.rewards[1].data.quantity == 1,
+	"mixed task only gives an item for the group with alternatives"
+)
+api.definitions.reward_mixed = nil
+
+-- Full inventories drop the same reward data at the player's item drop position.
+local dropped = {}
+ix.item.Spawn = function(itemID, dropPosition, _, _, data)
+	dropped[#dropped + 1] = { item = itemID, position = dropPosition, data = copy(data) }
+end
+local overflow = character()
+overflow.data = copy(groupOwner.data)
+overflow.data.progression.lines.reward_groups.completionRewardsPaid = nil
+overflow.data.progression.lines.reward_groups.rewardsPaid = { money = 0, reputation = 0 }
+overflow.inventory.Add = function()
+	return false
+end
+overflow.client.GetItemDropPos = function()
+	return position
+end
+overflow.client.Notify = function() end
+api.PayCompletionRewards(overflow, "reward_groups")
+check(
+	#dropped == 1 and dropped[1].position == position and dropped[1].data.quantity == 6,
+	"inventory overflow drops one reward item with half the selected group's required quantity"
+)
+local otherGroup = character()
+otherGroup.data = copy(groupOwner.data)
+otherGroup.data.progression.lines.reward_groups.completionRewardsPaid = nil
+otherGroup.data.progression.lines.reward_groups.rewardsPaid = { money = 0, reputation = 0 }
+local originalRandom = math.random
+math.random = function(_, maximum)
+	return maximum
+end
+api.PayCompletionRewards(otherGroup, "reward_groups")
+math.random = originalRandom
+check(
+	#otherGroup.inventory.rewards == 1
+		and otherGroup.inventory.rewards[1].item == "drug_cigarette_6"
+		and otherGroup.inventory.rewards[1].data.quantity == 1,
+	"odd required quantities round down when halved"
+)
+
+-- Previously paid partial deliveries are repriced once and deducted from completion payouts.
+ix.item.list.reward_test = { name = "Singleton", quantity = 10, price = 200 }
+local legacy, supplyLegacy = rewardCharacter()
+api.InitializeCharacterProgression(legacy)
+local legacyRecord = api.GetCharacterProgression(legacy)
+legacyRecord.lines.reward_test.rewardCredit = { reputation = 5, money = 60 }
+legacyRecord.lines.reward_test.rewardsPaid = { reputation = 5, money = 60 }
+legacyRecord.lines.reward_test.complexData = { reward_test = 5 }
+api.SetCharacterProgression(legacy, legacyRecord)
+supplyLegacy(5)
+check(api.TurnIn(legacy.client, rewardNPC, "reward_test", "reward_test"), "legacy partial task completes")
+check(legacy.money == 0, "previous money payouts are not duplicated or clawed back")
+check(
+	api.GetLine(legacy, "reward_test").rewardCredit.money == 30.15,
+	"legacy credit is converted from 60% to 30% once"
+)
+api.definitions.reward_groups = nil
 api.definitions.reward_test = nil
 api.itemPools.reward_test = nil
 check(
