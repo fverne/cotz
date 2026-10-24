@@ -472,7 +472,7 @@ DIALOGUE.addTopic("ChangeSuitVariant", {
 		local items = client:GetCharacter():GetInventory():GetItems()
 
 		for _, v in pairs(items) do
-			if v.baseSuit and not v:GetData("equip") then
+			if v.baseSuit then
 				table.insert(dynamicOptions, {
 					statement = v:GetName(),
 					topicID = "ChangeSuitVariant",
@@ -503,7 +503,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 				)
 			end
 
-			target.selectedsuitstruct = { dynamicData.itemid, dynamicData.itemuid, dynamicData.baseSuit }
+			target.selectedsuitstruct = { dynamicData.itemID, dynamicData.itemuid, dynamicData.baseSuit }
 		end
 	end,
 	GetDynamicOptions = function(self, client, target)
@@ -585,7 +585,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 				return "BackTopic"
 			end
 			-- Check if the item is in player inventory
-			if originalSuit:GetPlayerID() ~= client:SteamID64() then
+			if originalSuit.invID ~= client:GetCharacter():GetInventory():GetID() then
 				client:Notify("Something went very wrong! Try again.")
 
 				return "BackTopic"
@@ -618,6 +618,29 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 
 				return "BackTopic"
 			end
+
+			if originalSuit:GetData("equip") then
+				if hook.Run("CanPlayerUnequipItem", client, originalSuit) == false then
+					client:Notify("Couldn't unequip the suit, try again!")
+
+					return "BackTopic"
+				end
+
+				if originalSuit.RemoveOutfit then
+					originalSuit:RemoveOutfit(client)
+				elseif originalSuit.RemovePart then
+					originalSuit:RemovePart(client)
+				else
+					client:Notify("Code is not coding, notify the developer!")
+
+					return "BackTopic"
+				end
+
+				client:RecalculateResistances()
+				client:ReevaluateOverlay()
+				originalSuit:OnUnequipped()
+			end
+
 			ix.dialogue.notifyMoneyLost(client, ix.currency.Get(finalPrice))
 			client:GetCharacter():TakeMoney(finalPrice)
 
