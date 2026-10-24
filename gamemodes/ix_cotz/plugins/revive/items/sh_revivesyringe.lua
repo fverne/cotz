@@ -12,29 +12,33 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local ply = item.player
 		local traceRes = ply:GetEyeTrace()
-		if ( IsValid( traceRes.Entity ) and traceRes.Entity:GetClass( ) == "prop_ragdoll" ) then
+		if IsValid(traceRes.Entity) and traceRes.Entity:GetClass() == "prop_ragdoll" then
 			print(traceRes.Entity)
 			local traceEnt = traceRes.Entity
-			if ( traceEnt.isDeadBody ) then
+			if traceEnt.isDeadBody then
 				print(traceEnt)
-				if not ( IsValid( traceEnt.player ) ) then
-					ply:notify( "You cannot revive a disconnected player's body." )
+				if not (IsValid(traceEnt.player)) then
+					ply:notify("You cannot revive a disconnected player's body.")
+
 					return false
 				end
 
 				traceEnt.player:UnSpectate()
 				traceEnt.player:SetNetVar("resurrected", true)
+				hook.Run("PrePlayerRevived", traceEnt.player)
 				traceEnt.player:Spawn()
-				traceEnt.player:SetHealth( 1 ) 
+				traceEnt.player:SetHealth(1)
 				traceEnt.player:SetPos(traceEnt:GetPos())
-				ply:Notify( "You revived "..traceEnt.player:GetName() )
-				traceEnt.player:Notify( "You were revived by "..ply:GetName() )
-
+				ply:Notify("You revived " .. traceEnt.player:GetName())
+				traceEnt.player:Notify("You were revived by " .. ply:GetName())
 			end
 		end
+
 		return true
 	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity)) and (item:GetData("stashcoordinates", nil) == nil) and item.invID == item.player:GetCharacter():GetInventory():GetID()
-	end
+		return (not IsValid(item.entity))
+			and (item:GetData("stashcoordinates", nil) == nil)
+			and item.invID == item.player:GetCharacter():GetInventory():GetID()
+	end,
 }

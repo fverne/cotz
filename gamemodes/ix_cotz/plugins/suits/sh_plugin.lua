@@ -6,26 +6,31 @@ PLUGIN.desc = "Compatible with bad air and localized damage, plus it adds damage
 ix.util.Include("cl_plugin.lua")
 
 ix.config.Add("disablePVP", true, "If true, disables player versus player damage.", nil, {
-	category = "pvp"
+	category = "pvp",
 })
 
-function PLUGIN:EntityTakeDamage( target, dmginfo )
-	--disable pvp
+function PLUGIN:EntityTakeDamage(target, dmginfo)
+	if hook.Run("ShouldBlockSafeZoneDamage", target, dmginfo) then
+		dmginfo:SetDamage(0)
+
+		return true
+	end
+	-- disable pvp
 	local attacker = dmginfo:GetAttacker()
-	if (ix.config.Get("disablePVP", true)) then
-		if target:IsPlayer() and attacker:IsPlayer() and (target != attacker) then
+	if ix.config.Get("disablePVP", true) then
+		if target:IsPlayer() and attacker:IsPlayer() and (target ~= attacker) then
 			return
 		end
 	end
 
-	if target:IsPlayer() and attacker:IsPlayer() and (target != attacker) then
+	if target:IsPlayer() and attacker:IsPlayer() and (target ~= attacker) then
 		if attacker:GetLocalVar("inArena", false) and target:GetLocalVar("inArena", false) then
 			return
 		end
 	end
 
 	-- Bullet resistance
-	if ( target:IsPlayer() and dmginfo:IsDamageType(DMG_BULLET)) then
+	if target:IsPlayer() and dmginfo:IsDamageType(DMG_BULLET) then
 		local damage = dmginfo:GetDamage()
 		local perRes = target:GetNWFloat("ixperbulletres")
 		local flatRes = target:GetNWInt("ixflatbulletres")
@@ -34,23 +39,23 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		damage = damage - flatRes
 		damage = damage * perRes
 
-		--Make sure we dont heal the player
-		damage = math.max(damage,0)
+		-- Make sure we dont heal the player
+		damage = math.max(damage, 0)
 
 		if IsValid(ix.temp.Corpses[target]) then
 			damage = 0
 		end
 
 		-- wishes
-		if suit != nil and !suit:GetData("unlimitedDurability", nil) then
+		if suit ~= nil and not suit:GetData("unlimitedDurability", nil) then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
 		end
 
 		dmginfo:SetDamage(damage)
 	end
 
-    -- Slash (Mutant) resistance
-	if ( target:IsPlayer() and dmginfo:IsDamageType(DMG_SLASH)) then
+	-- Slash (Mutant) resistance
+	if target:IsPlayer() and dmginfo:IsDamageType(DMG_SLASH) then
 		local damage = dmginfo:GetDamage()
 		local perRes = target:GetNWFloat("ixperslashres")
 		local flatRes = target:GetNWInt("ixflatslashres")
@@ -59,22 +64,22 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		damage = damage - flatRes
 		damage = damage * perRes
 
-		--Make sure we dont heal the player
-		damage = math.max(damage,0)
+		-- Make sure we dont heal the player
+		damage = math.max(damage, 0)
 
 		if IsValid(ix.temp.Corpses[target]) then
 			damage = 0
 		end
 
 		-- wishes
-		if suit != nil and !suit:GetData("unlimitedDurability", nil) then
+		if suit ~= nil and not suit:GetData("unlimitedDurability", nil) then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
 		end
 
 		dmginfo:SetDamage(damage)
 	end
 
-	--Anomaly resistance
+	-- Anomaly resistance
 	local anomtypes = {}
 	anomtypes[DMG_SHOCK] = true
 	anomtypes[DMG_BURN] = true
@@ -86,7 +91,7 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 	anomtypes[DMG_SLOWBURN] = true
 	anomtypes[DMG_GENERIC] = true
 
-	if ( target:IsPlayer() and anomtypes[dmginfo:GetDamageType()]) then
+	if target:IsPlayer() and anomtypes[dmginfo:GetDamageType()] then
 		local damage = dmginfo:GetDamage()
 		local perRes = target:GetNWFloat("ixperanomres")
 		local flatRes = target:GetNWInt("ixflatanomres")
@@ -95,11 +100,11 @@ function PLUGIN:EntityTakeDamage( target, dmginfo )
 		damage = damage - flatRes
 		damage = damage * perRes
 
-		--Make sure we dont heal the player
-		damage = math.max(damage,0)
+		-- Make sure we dont heal the player
+		damage = math.max(damage, 0)
 
 		-- wishes
-		if suit != nil and !suit:GetData("unlimitedDurability", nil) then
+		if suit ~= nil and not suit:GetData("unlimitedDurability", nil) then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 50, 0, 100))
 		end
 
@@ -110,16 +115,16 @@ end
 -- pvp disable blood decals
 function PLUGIN:ScalePlayerDamage(ply, hitgroup, dmginfo)
 	local attacker = dmginfo:GetAttacker()
-	if ply:IsPlayer() and attacker:IsPlayer() and (ply != attacker) then
+	if ply:IsPlayer() and attacker:IsPlayer() and (ply ~= attacker) then
 		if ply:GetLocalVar("inArena", false) and attacker:GetLocalVar("inArena", false) then
 			return
 		end
 	end
 
-	--disable pvp
-	if (ix.config.Get("disablePVP", true)) then
+	-- disable pvp
+	if ix.config.Get("disablePVP", true) then
 		local attacker = dmginfo:GetAttacker()
-		if ply:IsPlayer() and attacker:IsPlayer() and (ply != attacker) then
+		if ply:IsPlayer() and attacker:IsPlayer() and (ply ~= attacker) then
 			return true
 		end
 	end
@@ -132,17 +137,15 @@ function playerMeta:getPercentageBulletRes()
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems()
 
-	for k, v in pairs(items) do
-		if (v.isBodyArmor and v:GetData("equip")) then
+	for _, v in pairs(items) do
+		if v.isBodyArmor and v:GetData("equip") then
 			res = res * v:getBR(v)
 		end
 
-		if (v.br ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+		if v.br ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
 			res = res * (1 - v.br)
 		end
 	end
-
-	--BUFFS GO HERE
 
 	return res
 end
@@ -152,22 +155,20 @@ function playerMeta:getFlatBulletRes()
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems()
 
-	for k, v in pairs(items) do
-		if (v.isBodyArmor and v:GetData("equip")) then
+	for _, v in pairs(items) do
+		if v.isBodyArmor and v:GetData("equip") then
 			res = res + v:getFBR(v)
 		end
 
-		if (v.fbr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+		if v.fbr ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
 			res = res + v.fbr
 		end
 	end
 
-	--Wishes adds +2 fbr
+	-- Wishes adds +2 fbr
 	if char:GetData("wishes", {})["fbsr"] then
 		res = res + 2
 	end
-
-	--BUFFS GO HERE
 
 	return res
 end
@@ -177,17 +178,15 @@ function playerMeta:getPercentageSlashRes()
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems()
 
-	for k, v in pairs(items) do
-		if (v.isBodyArmor and v:GetData("equip")) then
+	for _, v in pairs(items) do
+		if v.isBodyArmor and v:GetData("equip") then
 			res = res * v:getSR(v)
 		end
 
-		if (v.sr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+		if v.sr ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
 			res = res * (1 - v.sr)
 		end
 	end
-
-	--BUFFS GO HERE
 
 	return res
 end
@@ -197,22 +196,20 @@ function playerMeta:getFlatSlashRes()
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems()
 
-	for k, v in pairs(items) do
-		if (v.isBodyArmor and v:GetData("equip")) then
+	for _, v in pairs(items) do
+		if v.isBodyArmor and v:GetData("equip") then
 			res = res + v:getFSR(v)
 		end
 
-		if (v.fsr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+		if v.fsr ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
 			res = res + v.fsr
 		end
 	end
 
-	--Wishes adds +2 fbr
+	-- Wishes adds +2 fbr
 	if char:GetData("wishes", {})["fbsr"] then
 		res = res + 2
 	end
-
-	--BUFFS GO HERE
 
 	return res
 end
@@ -222,17 +219,15 @@ function playerMeta:getPercentageAnomalyRes()
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems()
 
-	for k, v in pairs(items) do
-		if (v.isBodyArmor and v:GetData("equip")) then
+	for _, v in pairs(items) do
+		if v.isBodyArmor and v:GetData("equip") then
 			res = res * v:getAR(v)
 		end
 
-		if (v.ar ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+		if v.ar ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
 			res = res * (1 - v.ar)
 		end
 	end
-
-	--BUFFS GO HERE
 
 	return res
 end
@@ -242,43 +237,38 @@ function playerMeta:getFlatAnomalyRes()
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems()
 
-	for k, v in pairs(items) do
-		if (v.isBodyArmor and v:GetData("equip")) then
+	for _, v in pairs(items) do
+		if v.isBodyArmor and v:GetData("equip") then
 			res = res + v:getFAR(v)
 		end
 
-		if (v.far ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+		if v.far ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
 			res = res + v.far
 		end
 	end
 
-	--Wishes adds +5 far
+	-- Wishes adds +5 far
 	if char:GetData("wishes", {})["far"] then
 		res = res + 5
 	end
 
-	--BUFFS GO HERE
-
 	return res
 end
-
 
 function playerMeta:getPercentagePsyRes()
 	local res = 1
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems()
 
-	for k, v in pairs(items) do
-		if (v.isBodyArmor and v:GetData("equip")) then
+	for _, v in pairs(items) do
+		if v.isBodyArmor and v:GetData("equip") then
 			res = res * v:getPR(v)
 		end
 
-		if (v.pr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+		if v.pr ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
 			res = res * (1 - v.pr)
 		end
 	end
-
-	--BUFFS GO HERE
 
 	return res
 end
@@ -288,17 +278,15 @@ function playerMeta:getFlatPsyRes()
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems()
 
-	for k, v in pairs(items) do
-		if (v.isBodyArmor and v:GetData("equip")) then
+	for _, v in pairs(items) do
+		if v.isBodyArmor and v:GetData("equip") then
 			res = res + v:getFPR(v)
 		end
 
-		if (v.fpr ~= nil and !v.isBodyArmor and v:GetData("equip") == true) then
+		if v.fpr ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
 			res = res + v.fpr
 		end
 	end
-
-	--BUFFS GO HERE
 
 	return res
 end
@@ -309,14 +297,15 @@ function playerMeta:getEquippedBodyArmor()
 	if inventory then
 		local items = char:GetInventory():GetItems(true)
 
-		for k, v in pairs(items) do
-			if (v.isBodyArmor and v:GetData("equip")) then
+		for _, v in pairs(items) do
+			if v.isBodyArmor and v:GetData("equip") then
 				return v
 			end
 		end
 
 		return nil
 	end
+
 	return nil
 end
 
@@ -326,14 +315,15 @@ function playerMeta:getEquippedHelmet()
 	if inventory then
 		local items = char:GetInventory():GetItems(true)
 
-		for k, v in pairs(items) do
-			if (v.isHelmet and v:GetData("equip")) then
+		for _, v in pairs(items) do
+			if v.isHelmet and v:GetData("equip") then
 				return v
 			end
 		end
 
 		return nil
 	end
+
 	return nil
 end
 
@@ -343,14 +333,15 @@ function playerMeta:getEquippedGasmask()
 	if inventory then
 		local items = char:GetInventory():GetItems(true)
 
-		for k, v in pairs(items) do
-			if (v.isGasmask and v:GetData("equip")) then
+		for _, v in pairs(items) do
+			if v.isGasmask and v:GetData("equip") then
 				return v
 			end
 		end
 
 		return nil
 	end
+
 	return nil
 end
 
@@ -371,8 +362,8 @@ function playerMeta:ReevaluateOverlay()
 	if inventory then
 		local items = char:GetInventory():GetItems(true)
 
-		for k, v in pairs(items) do
-			if (v.overlayPath and v:GetData("equip")) then
+		for _, v in pairs(items) do
+			if v.overlayPath and v:GetData("equip") then
 				self:SetNetVar("gasmask", false)
 			else
 				self:SetNetVar("gasmask", true)
@@ -396,20 +387,20 @@ end
 -- end
 
 function PLUGIN:EntityEmitSound(sndTable)
-    local client = sndTable.Entity
-    if (client and IsValid(client) and client:IsPlayer() and client:GetCharacter()) then
-        local gasmaskequip = client:getEquippedGasmask()
+	local client = sndTable.Entity
+	if client and IsValid(client) and client:IsPlayer() and client:GetCharacter() then
+		local gasmaskequip = client:getEquippedGasmask()
 
-        if gasmaskequip then
-            local sndName = sndTable.SoundName:lower()
+		if gasmaskequip then
+			local sndName = sndTable.SoundName:lower()
 
-            if (sndName:find("male") or sndName:find("voice")) then
-                sndTable.DSP = 15
-            end
+			if sndName:find("male") or sndName:find("voice") then
+				sndTable.DSP = 15
+			end
 
-            return true
-        end
-    end
+			return true
+		end
+	end
 end
 
 function PLUGIN:PostPlayerLoadout(client)
