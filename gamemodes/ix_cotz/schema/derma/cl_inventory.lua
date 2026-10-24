@@ -1,15 +1,14 @@
-
 local RECEIVER_NAME = "ixInventoryItem"
 
 -- The queue for the rendered icons.
 ICON_RENDER_QUEUE = ICON_RENDER_QUEUE or {}
 
 -- To make making inventory variant, This must be followed up.
-local function RenderNewIcon(panel, itemTable)
+local function renderNewIcon(panel, itemTable)
 	local model = itemTable:GetModel()
 
 	-- re-render icons
-	if ((itemTable.iconCam and !ICON_RENDER_QUEUE[string.lower(model)]) or itemTable.forceRender) then
+	if (itemTable.iconCam and not ICON_RENDER_QUEUE[string.lower(model)]) or itemTable.forceRender then
 		local iconCam = itemTable.iconCam
 		iconCam = {
 			cam_pos = iconCam.pos,
@@ -18,18 +17,16 @@ local function RenderNewIcon(panel, itemTable)
 		}
 		ICON_RENDER_QUEUE[string.lower(model)] = true
 
-		panel.Icon:RebuildSpawnIconEx(
-			iconCam
-		)
+		panel.Icon:RebuildSpawnIconEx(iconCam)
 	end
 end
 
-local function InventoryAction(action, itemID, invID, data)
+local function inventoryAction(action, itemID, invID, data)
 	net.Start("ixInventoryAction")
-		net.WriteString(action)
-		net.WriteUInt(itemID, 32)
-		net.WriteUInt(invID, 32)
-		net.WriteTable(data or {})
+	net.WriteString(action)
+	net.WriteUInt(itemID, 32)
+	net.WriteUInt(invID, 32)
+	net.WriteTable(data or {})
 	net.SendToServer()
 end
 
@@ -43,10 +40,10 @@ function PANEL:Init()
 end
 
 function PANEL:OnMousePressed(code)
-  if (code == MOUSE_MIDDLE) then
-    self:DoMiddleClick()
-	elseif (code == MOUSE_LEFT and self:IsDraggable()) then
-		if (!input.IsShiftDown()) then
+	if code == MOUSE_MIDDLE then
+		self:DoMiddleClick()
+	elseif code == MOUSE_LEFT and self:IsDraggable() then
+		if not input.IsShiftDown() then
 			self:MouseCapture(true)
 			self:DragMousePress(code)
 
@@ -55,12 +52,12 @@ function PANEL:OnMousePressed(code)
 			local itemTable = self.itemTable
 			local inventory = ix.item.inventories[self.inventoryID]
 
-			if (itemTable and inventory) then
+			if itemTable and inventory then
 				hook.Run("ItemPressedLeftShift", self, itemTable, inventory)
 			end
 		end
-	elseif (code == MOUSE_RIGHT and self.DoRightClick) then
-		if (!input.IsShiftDown()) then
+	elseif code == MOUSE_RIGHT and self.DoRightClick then
+		if not input.IsShiftDown() then
 			self:DoRightClick()
 		else
 			self:DoRightShiftClick() -- quick use items
@@ -69,23 +66,25 @@ function PANEL:OnMousePressed(code)
 end
 
 function PANEL:DoRightShiftClick()
-	if (self.nextClickTime or 0) > CurTime() then return end
+	if (self.nextClickTime or 0) > CurTime() then
+		return
+	end
 	self.nextClickTime = CurTime() + 0.5
 
 	local itemTable = self.itemTable
 	local invID = self.inventoryID
 	local inventory = ix.item.inventories[invID]
 
-	if (itemTable and inventory) then
+	if itemTable and inventory then
 		itemTable.player = LocalPlayer()
 
 		local info, action = hook.Run("ItemPressedRightShift", self, itemTable, inventory)
 
-		if !(info and action) then
-			if (itemTable.functions.use) then
+		if not (info and action) then
+			if itemTable.functions.use then
 				info = itemTable.functions.use
 				action = "use"
-			elseif (itemTable:GetData("equip")) then
+			elseif itemTable:GetData("equip") then
 				info = itemTable.functions.EquipUn
 				action = "EquipUn"
 			else
@@ -94,12 +93,12 @@ function PANEL:DoRightShiftClick()
 			end
 		end
 
-		if (info and info.OnCanRun and info.OnCanRun(itemTable) != false) then
+		if info and info.OnCanRun and info.OnCanRun(itemTable) ~= false then
 			net.Start("ixInventoryAction")
-				net.WriteString(action)
-				net.WriteUInt(itemTable.id, 32)
-				net.WriteUInt(invID, 32)
-				net.WriteTable({})
+			net.WriteString(action)
+			net.WriteUInt(itemTable.id, 32)
+			net.WriteUInt(invID, 32)
+			net.WriteTable({})
 			net.SendToServer()
 		end
 
@@ -108,29 +107,31 @@ function PANEL:DoRightShiftClick()
 end
 
 function PANEL:DoMiddleClick()
-	if (self.nextMiddleClickTime or 0) > CurTime() then return end
+	if (self.nextMiddleClickTime or 0) > CurTime() then
+		return
+	end
 	self.nextMiddleClickTime = CurTime() + 0.5
 
 	local itemTable = self.itemTable
 	local invID = self.inventoryID
 	local inventory = ix.item.inventories[invID]
 
-	if (itemTable and inventory) then
+	if itemTable and inventory then
 		itemTable.player = LocalPlayer()
 
 		local info, action = hook.Run("ItemPressedMiddle", self, itemTable, inventory)
 
-		if !(info and action) then
-				info = itemTable.functions.throwaway
-				action = "throwaway"
+		if not (info and action) then
+			info = itemTable.functions.throwaway
+			action = "throwaway"
 		end
 
-		if (info and info.OnCanRun and info.OnCanRun(itemTable) != false) then
+		if info and info.OnCanRun and info.OnCanRun(itemTable) ~= false then
 			net.Start("ixInventoryAction")
-				net.WriteString(action)
-				net.WriteUInt(itemTable.id, 32)
-				net.WriteUInt(invID, 32)
-				net.WriteTable({})
+			net.WriteString(action)
+			net.WriteUInt(itemTable.id, 32)
+			net.WriteUInt(invID, 32)
+			net.WriteTable({})
 			net.SendToServer()
 		end
 
@@ -139,13 +140,14 @@ function PANEL:DoMiddleClick()
 end
 
 function PANEL:OnMouseReleased(code)
-	-- move the item into the world if we're dropping on something that doesn't handle inventory item drops
-	if (!dragndrop.m_ReceiverSlot or dragndrop.m_ReceiverSlot.Name != RECEIVER_NAME) then
+	-- move the item into the world if we're dropping on something that doesn't handle inventory item
+	-- drops
+	if not dragndrop.m_ReceiverSlot or dragndrop.m_ReceiverSlot.Name ~= RECEIVER_NAME then
 		self:OnDrop(dragndrop.IsDragging())
 	end
 
 	self:DragMouseRelease(code)
-	self:SetZPos(999) --apparently fixes items not being grabbable in right side of inv when set to 999 instead of 99
+	self:SetZPos(999) -- apparently fixes items not being grabbable in right side of inv when set to 999 instead of 99
 	self:MouseCapture(false)
 end
 
@@ -153,14 +155,14 @@ function PANEL:DoRightClick()
 	local itemTable = self.itemTable
 	local inventory = self.inventoryID
 
-	if (itemTable and inventory) then
+	if itemTable and inventory then
 		itemTable.player = LocalPlayer()
 
 		local menu = DermaMenu()
 		local override = hook.Run("CreateItemInteractionMenu", self, menu, itemTable)
 
-		if (override == true) then
-			if (menu.Remove) then
+		if override == true then
+			if menu.Remove then
 				menu:Remove()
 			end
 
@@ -168,50 +170,56 @@ function PANEL:DoRightClick()
 		end
 
 		for k, v in SortedPairs(itemTable.functions) do
-			if (k == "drop" or k == "combine" or k == "throwaway" or (v.OnCanRun and v.OnCanRun(itemTable) == false)) then
+			if
+				k == "drop"
+				or k == "combine"
+				or k == "throwaway"
+				or (v.OnCanRun and v.OnCanRun(itemTable) == false)
+			then
 				continue
 			end
 
 			-- is Multi-Option Function
-			if (v.isMulti) then
+			if v.isMulti then
 				local subMenu, subMenuOption = menu:AddSubMenu(L(v.name or k), function()
 					itemTable.player = LocalPlayer()
-						local send = true
+					local send = true
 
-						if (v.OnClick) then
-							send = v.OnClick(itemTable)
-						end
+					if v.OnClick then
+						send = v.OnClick(itemTable)
+					end
 
-						if (v.sound) then
-							surface.PlaySound(v.sound)
-						end
+					if v.sound then
+						surface.PlaySound(v.sound)
+					end
 
-						if (send != false) then
-							InventoryAction(k, itemTable.id, inventory)
-						end
+					if send ~= false then
+						inventoryAction(k, itemTable.id, inventory)
+					end
 					itemTable.player = nil
 				end)
 				subMenuOption:SetImage(v.icon or "icon16/brick.png")
 
-				if (v.multiOptions) then
-					local options = isfunction(v.multiOptions) and v.multiOptions(itemTable, LocalPlayer()) or v.multiOptions
+				if v.multiOptions then
+					local options = isfunction(v.multiOptions) and v.multiOptions(itemTable, LocalPlayer())
+						or v.multiOptions
 
 					for _, sub in pairs(options) do
 						subMenu:AddOption(L(sub.name or "subOption"), function()
 							itemTable.player = LocalPlayer()
-								local send = true
+							local send = true
 
-								if (sub.OnClick) then
-									send = sub.OnClick(itemTable)
-								end
+							if sub.OnClick then
+								send = sub.OnClick(itemTable)
+							end
 
-								if (sub.sound) then
-									surface.PlaySound(sub.sound)
-								end
+							if sub.sound then
+								surface.PlaySound(sub.sound)
+							end
 
-								if (send != false) then
-									InventoryAction(k, itemTable.id, inventory, sub.data)
-								end
+							if send ~= false then
+								inventoryAction(k, itemTable.id, inventory, sub.data)
+							end
 							itemTable.player = nil
 						end)
 					end
@@ -219,19 +227,19 @@ function PANEL:DoRightClick()
 			else
 				menu:AddOption(L(v.name or k), function()
 					itemTable.player = LocalPlayer()
-						local send = true
+					local send = true
 
-						if (v.OnClick) then
-							send = v.OnClick(itemTable)
-						end
+					if v.OnClick then
+						send = v.OnClick(itemTable)
+					end
 
-						if (v.sound) then
-							surface.PlaySound(v.sound)
-						end
+					if v.sound then
+						surface.PlaySound(v.sound)
+					end
 
-						if (send != false) then
-							InventoryAction(k, itemTable.id, inventory)
-						end
+					if send ~= false then
+						inventoryAction(k, itemTable.id, inventory)
+					end
 					itemTable.player = nil
 				end):SetImage(v.icon or "icon16/brick.png")
 			end
@@ -240,22 +248,22 @@ function PANEL:DoRightClick()
 		-- we want drop to show up as the last option
 		local info = itemTable.functions.throwaway
 
-		if (info and info.OnCanRun and info.OnCanRun(itemTable) != false) then
+		if info and info.OnCanRun and info.OnCanRun(itemTable) ~= false then
 			local subMenu, subMenuOption = menu:AddSubMenu("Throw Away", function()
 				itemTable.player = LocalPlayer()
-					local send = true
+				local send = true
 
-					if (info.OnClick) then
-						send = info.OnClick(itemTable)
-					end
+				if info.OnClick then
+					send = info.OnClick(itemTable)
+				end
 
-					if (info.sound) then
-						surface.PlaySound(info.sound)
-					end
+				if info.sound then
+					surface.PlaySound(info.sound)
+				end
 
-					if (send != false) then
-						InventoryAction("throwaway", itemTable.id, inventory, {bTemporary = true})
-					end
+				if send ~= false then
+					inventoryAction("throwaway", itemTable.id, inventory, { bTemporary = true })
+				end
 				itemTable.player = nil
 			end)
 			subMenuOption:SetImage("icon16/stalker/drop.png")
@@ -265,21 +273,20 @@ function PANEL:DoRightClick()
 				itemTable.player = LocalPlayer()
 				local send = true
 
-				if (dropInfo.OnClick) then
+				if dropInfo.OnClick then
 					send = dropInfo.OnClick(itemTable)
 				end
 
-				if (dropInfo.sound) then
+				if dropInfo.sound then
 					surface.PlaySound(dropInfo.sound)
 				end
 
-				if (send != false) then
-					InventoryAction("drop", itemTable.id, inventory)
+				if send ~= false then
+					inventoryAction("drop", itemTable.id, inventory)
 				end
 				itemTable.player = nil
 			end)
 			dropOption:SetImage("icon16/stalker/drop.png")
-
 		end
 
 		menu:Open()
@@ -290,28 +297,28 @@ end
 function PANEL:OnDrop(bDragging, inventoryPanel, inventory, gridX, gridY)
 	local item = self.itemTable
 
-	if (!item or !bDragging) then
+	if not item or not bDragging then
 		return
 	end
 
-	if (!IsValid(inventoryPanel)) then
+	if not IsValid(inventoryPanel) then
 		local inventoryID = self.inventoryID
 
-		if (inventoryID) then
-			InventoryAction("throwaway", item.id, inventoryID, {bTemporary = true})
+		if inventoryID then
+			inventoryAction("throwaway", item.id, inventoryID, { bTemporary = true })
 		end
-	elseif (inventoryPanel:IsAllEmpty(gridX, gridY, item.width, item.height, self)) then
+	elseif inventoryPanel:IsAllEmpty(gridX, gridY, item.width, item.height, self) then
 		local oldX, oldY = self.gridX, self.gridY
 
-		if (oldX != gridX or oldY != gridY or self.inventoryID != inventoryPanel.invID) then
+		if oldX ~= gridX or oldY ~= gridY or self.inventoryID ~= inventoryPanel.invID then
 			self:Move(gridX, gridY, inventoryPanel)
 		end
-	elseif (inventory:GetItemAt(gridX, gridY) != nil) then --combine reddit
+	elseif inventory:GetItemAt(gridX, gridY) ~= nil then -- combine reddit
 		if gridX and gridY then
 			local targetItem = inventory:GetItemAt(gridX, gridY)
-			if (targetItem) then
-				if(item.functions.combine) then
-					InventoryAction("combine",item.id,self.inventoryID,{targetItem.id})
+			if targetItem then
+				if item.functions.combine then
+					inventoryAction("combine", item.id, self.inventoryID, { targetItem.id })
 				end
 			end
 		end
@@ -323,11 +330,11 @@ function PANEL:Move(newX, newY, givenInventory, bNoSend)
 	local oldX, oldY = self.gridX, self.gridY
 	local oldParent = self:GetParent()
 
-	if (givenInventory:OnTransfer(oldX, oldY, newX, newY, oldParent, bNoSend) == false) then
+	if givenInventory:OnTransfer(oldX, oldY, newX, newY, oldParent, bNoSend) == false then
 		return
 	end
 
-	local x = (newX - 1) * iconSize + givenInventory:GetWide()*0.002
+	local x = (newX - 1) * iconSize + givenInventory:GetWide() * 0.002
 	local y = (newY - 1) * iconSize + givenInventory:GetPadding(2)
 
 	self.gridX = newX
@@ -336,9 +343,9 @@ function PANEL:Move(newX, newY, givenInventory, bNoSend)
 	self:SetParent(givenInventory)
 	self:SetPos(x, y)
 
-	if (self.slots) then
+	if self.slots then
 		for _, v in ipairs(self.slots) do
-			if (IsValid(v) and v.item == self) then
+			if IsValid(v) and v.item == self then
 				v.item = nil
 			end
 		end
@@ -359,13 +366,12 @@ end
 function PANEL:PaintOver(width, height)
 	local itemTable = self.itemTable
 
-	if (itemTable and itemTable.PaintOver) then
+	if itemTable and itemTable.PaintOver then
 		itemTable.PaintOver(self, itemTable, width, height)
 	end
 end
 
-function PANEL:ExtraPaint(width, height)
-end
+function PANEL:ExtraPaint(width, height) end
 
 local blackCol = Color(0, 0, 0, 85)
 local yellowCol = Color(255, 192, 0, 20)
@@ -376,12 +382,12 @@ local gradientRMat = Material("vgui/gradient-r")
 
 function PANEL:Paint(width, height)
 	surface.SetDrawColor(blackCol)
-	surface.DrawRect(2, 2, width - self:GetWide()*0.002, height - self:GetWide()*0.002)
+	surface.DrawRect(2, 2, width - self:GetWide() * 0.002, height - self:GetWide() * 0.002)
 
 	local itemTable = self.itemTable
 	local parent = self:GetParent()
 
-	if (itemTable and itemTable.uniqueID) then
+	if itemTable and itemTable.uniqueID then
 		if parent and parent.highlghtItems and parent.highlghtItems[itemTable.uniqueID] then
 			if parent.highlghtItems[itemTable.uniqueID] == "Task" then
 				surface.SetDrawColor(yellowCol)
@@ -392,13 +398,28 @@ function PANEL:Paint(width, height)
 			if parent.highlghtItems[itemTable.uniqueID] == "Both" then
 				surface.SetDrawColor(yellowCol)
 				surface.SetMaterial(gradientLMat)
-				surface.DrawTexturedRect(2, 2, width * 0.5 - self:GetWide()*0.002, height - self:GetWide()*0.002)
+				surface.DrawTexturedRect(
+					2,
+					2,
+					width * 0.5 - self:GetWide() * 0.002,
+					height - self:GetWide() * 0.002
+				)
 				surface.SetDrawColor(purpleCol)
 				surface.SetMaterial(gradientRMat)
-				surface.DrawTexturedRect(width * 0.5 + 2, 2, width * 0.5 - self:GetWide()*0.002, height - self:GetWide()*0.002)
+				surface.DrawTexturedRect(
+					width * 0.5 + 2,
+					2,
+					width * 0.5 - self:GetWide() * 0.002,
+					height - self:GetWide() * 0.002
+				)
 			else
 				surface.SetMaterial(gradientMat)
-				surface.DrawTexturedRect(2, 2, width - self:GetWide()*0.002, height - self:GetWide()*0.002)
+				surface.DrawTexturedRect(
+					2,
+					2,
+					width - self:GetWide() * 0.002,
+					height - self:GetWide() * 0.002
+				)
 			end
 		end
 	end
@@ -415,11 +436,11 @@ AccessorFunc(PANEL, "iconSize", "IconSize", FORCE_NUMBER)
 AccessorFunc(PANEL, "bHighlighted", "Highlighted", FORCE_BOOL)
 
 function PANEL:Init()
-	self:SetIconSize(ScrW()*0.0277 * ix.option.Get("inventoryScale", 1))
+	self:SetIconSize(ScrW() * 0.0277 * ix.option.Get("inventoryScale", 1))
 	self:ShowCloseButton(false)
 	self:SetDraggable(true)
 	self:SetSizable(true)
-	self:SetTitle(L"inv")
+	self:SetTitle(L("inv"))
 	self:Receiver(RECEIVER_NAME, self.ReceiveDrop)
 
 	self.btnMinim:SetVisible(false)
@@ -431,7 +452,7 @@ function PANEL:Init()
 
 	self.highlghtItems = {}
 
-	for k, v in pairs(LocalPlayer():GetCharacter():GetJobs()) do
+	for _, v in pairs(LocalPlayer():GetCharacter():GetJobs()) do
 		local jobDef = ix.jobs.list[v.identifier]
 		if not jobDef or not jobDef.requiredItem then
 			continue
@@ -440,7 +461,7 @@ function PANEL:Init()
 		self.highlghtItems[jobDef.requiredItem] = "Task"
 	end
 
-	local npcidentifiers = {}
+	local npcIdentifiers = {}
 	local initialNpcs = {
 		"'Old Timer'",
 		"'Technut'",
@@ -451,27 +472,27 @@ function PANEL:Init()
 		"'Smartass'",
 	}
 
-	table.Add(npcidentifiers, initialNpcs)
+	table.Add(npcIdentifiers, initialNpcs)
 
 	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerKillIntro") then
-		local tradenpc = {
+		local tradeNPC = {
 			"'Haggler'",
 		}
-		table.Add(npcidentifiers, tradenpc)
+		table.Add(npcIdentifiers, tradeNPC)
 	end
 
 	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerItemDelivery_mainMeat") then
-		local cooknpc = {
+		local cookNPC = {
 			"'Spicy Lemon'",
 		}
-		table.Add(npcidentifiers, cooknpc)
+		table.Add(npcIdentifiers, cookNPC)
 	end
 
 	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerItemDelivery_mainStatue") then
-		local mutenpc = {
+		local muteNPC = {
 			"'Mute'",
 		}
-		table.Add(npcidentifiers, mutenpc)
+		table.Add(npcIdentifiers, muteNPC)
 	end
 
 	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "smartass_rfTasks") then
@@ -480,23 +501,30 @@ function PANEL:Init()
 			"'Beanstalk'",
 			"'Intern'",
 		}
-		table.Add(npcidentifiers, ecologistNpcs)
+		table.Add(npcIdentifiers, ecologistNpcs)
 	end
 
 	if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "intern_gasAnalyzerReadings") then
 		local pripyatNpcs = {
 			"'Computer'",
 		}
-		table.Add(npcidentifiers, pripyatNpcs)
+		table.Add(npcIdentifiers, pripyatNpcs)
 	end
 
-	for _, npcidentifier in pairs(npcidentifiers) do
-		for k, v in pairs(ix.progression.GetActiveProgressions(LocalPlayer():GetCharacter(), npcidentifier)) do
+	for _, npcIdentifier in pairs(npcIdentifiers) do
+		for _, v in pairs(ix.progression.GetActiveProgressions(LocalPlayer():GetCharacter(), npcIdentifier)) do
 			local progDef = ix.progression.definitions[v]
-			if progDef and not progDef.GetItemIds then continue end
-			local progstatus = ix.progression.GetComplexProgressionValue(LocalPlayer():GetCharacter(), v)
-			for itemName, amt in pairs(progDef.GetItemIds()) do
-				if self.highlghtItems[itemName] == nil and progstatus and (amt - (progstatus[itemName] or 0)) > 0 then
+			if progDef and not progDef.GetItemIds then
+				continue
+			end
+			local progressionStatus =
+				ix.progression.GetComplexProgressionValue(LocalPlayer():GetCharacter(), v)
+			for itemName, amount in pairs(progDef.GetItemIds()) do
+				if
+					self.highlghtItems[itemName] == nil
+					and progressionStatus
+					and (amount - (progressionStatus[itemName] or 0)) > 0
+				then
 					self.highlghtItems[itemName] = "Progression"
 				elseif self.highlghtItems[itemName] == "Task" then
 					self.highlghtItems[itemName] = "Both"
@@ -511,15 +539,15 @@ function PANEL:GetPadding(index)
 end
 
 function PANEL:SetTitle(text)
-	if (text == nil) then
-		self.oldPadding = {self:GetDockPadding()}
+	if text == nil then
+		self.oldPadding = { self:GetDockPadding() }
 
 		self.lblTitle:SetText("")
 		self.lblTitle:SetVisible(false)
 
 		self:DockPadding(5, 5, 5, 5)
 	else
-		if (self.oldPadding) then
+		if self.oldPadding then
 			self:DockPadding(unpack(self.oldPadding))
 			self.oldPadding = nil
 		end
@@ -531,7 +559,7 @@ end
 function PANEL:FitParent(invWidth, invHeight)
 	local parent = self:GetParent()
 
-	if (!IsValid(parent)) then
+	if not IsValid(parent) then
 		return
 	end
 
@@ -539,9 +567,9 @@ function PANEL:FitParent(invWidth, invHeight)
 	local padding = 4
 	local iconSize
 
-	if (invWidth > invHeight) then
+	if invWidth > invHeight then
 		iconSize = (width - padding * 2) / invWidth
-	elseif (invHeight > invWidth) then
+	elseif invHeight > invWidth then
 		iconSize = (height - padding * 2) / invHeight
 	else
 		-- we use height because the titlebar will make it more tall than it is wide
@@ -553,9 +581,9 @@ function PANEL:FitParent(invWidth, invHeight)
 end
 
 function PANEL:OnRemove()
-	if (self.childPanels) then
+	if self.childPanels then
 		for _, v in ipairs(self.childPanels) do
-			if (v != self) then
+			if v ~= self then
 				v:Remove()
 			end
 		end
@@ -572,7 +600,7 @@ function PANEL:ViewOnly()
 	end
 end
 
-local function AddHighlightRow(tooltip, text, color)
+local function addHighlightRow(tooltip, text, color)
 	local row = tooltip:AddRowAfter("name", "Task")
 	row:SetText("")
 
@@ -596,17 +624,21 @@ local function AddHighlightRow(tooltip, text, color)
 end
 
 function PANEL:SetInventory(inventory, bFitParent)
-	if (inventory.slots) then
+	if inventory.slots then
 		local invWidth, invHeight = inventory:GetSize()
 		self.invID = inventory:GetID()
 
-		if (IsValid(ix.gui.inv1) and ix.gui.inv1.childPanels and inventory != LocalPlayer():GetCharacter():GetInventory()) then
+		if
+			IsValid(ix.gui.inv1)
+			and ix.gui.inv1.childPanels
+			and inventory ~= LocalPlayer():GetCharacter():GetInventory()
+		then
 			self:SetIconSize(ix.gui.inv1:GetIconSize())
 			self:SetPaintedManually(true)
 			self.bNoBackgroundBlur = true
 
 			ix.gui.inv1.childPanels[#ix.gui.inv1.childPanels + 1] = self
-		elseif (bFitParent) then
+		elseif bFitParent then
 			self:FitParent(invWidth, invHeight)
 		else
 			self:SetSize(self.iconSize, self.iconSize)
@@ -616,15 +648,23 @@ function PANEL:SetInventory(inventory, bFitParent)
 
 		for x, items in pairs(inventory.slots) do
 			for y, data in pairs(items) do
-				if (!data.id) then continue end
+				if not data.id then
+					continue
+				end
 
 				local item = ix.item.instances[data.id]
 
-				if (item and !IsValid(self.panels[item.id])) then
-					local icon = self:AddIcon(item:GetModel() or "models/props_junk/popcan01a.mdl",
-						x, y, item.width, item.height, item:GetSkin())
+				if item and not IsValid(self.panels[item.id]) then
+					local icon = self:AddIcon(
+						item:GetModel() or "models/props_junk/popcan01a.mdl",
+						x,
+						y,
+						item.width,
+						item.height,
+						item:GetSkin()
+					)
 
-					if (IsValid(icon)) then
+					if IsValid(icon) then
 						icon:SetHelixTooltip(function(tooltip)
 							ix.hud.PopulateItemTooltip(tooltip, item)
 							local highlightText = self.highlghtItems[item.uniqueID]
@@ -666,7 +706,7 @@ end
 function PANEL:PerformLayout(width, height)
 	BaseClass.PerformLayout(self, width, height)
 
-	if (self.Sizing and self.gridW and self.gridH) then
+	if self.Sizing and self.gridW and self.gridH then
 		local newWidth = (width - 8) / self.gridW
 		local newHeight = (height - self:GetPadding(2) + self:GetPadding(4)) / self.gridH
 
@@ -720,7 +760,7 @@ function PANEL:RebuildItems()
 	end
 
 	for _, v in pairs(self.panels) do
-		if (IsValid(v)) then
+		if IsValid(v) then
 			v:SetPos(self.slots[v.gridX][v.gridY]:GetPos())
 			v:SetSize(v.gridW * iconSize, v.gridH * iconSize)
 		end
@@ -731,18 +771,21 @@ function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
 	local iconSize = self.iconSize
 	local item = itemPanel:GetItemTable()
 
-	if (item) then
+	if item then
 		local inventory = ix.item.inventories[self.invID]
-		local dropX = math.ceil((mouseX - self:GetWide()*0.002 - (itemPanel.gridW - 1) * 32) / iconSize)
+		local dropX = math.ceil((mouseX - self:GetWide() * 0.002 - (itemPanel.gridW - 1) * 32) / iconSize)
 		local dropY = math.ceil((mouseY - self:GetPadding(2) - (itemPanel.gridH - 1) * 32) / iconSize)
 
 		-- don't draw grid if we're dragging it out of bounds
-		if (inventory) then
+		if inventory then
 			local invWidth, invHeight = inventory:GetSize()
 
-			if (dropX < 1 or dropY < 1 or
-				dropX + itemPanel.gridW - 1 > invWidth or
-				dropY + itemPanel.gridH - 1 > invHeight) then
+			if
+				dropX < 1
+				or dropY < 1
+				or dropX + itemPanel.gridW - 1 > invWidth
+				or dropY + itemPanel.gridH - 1 > invHeight
+			then
 				return
 			end
 		end
@@ -756,15 +799,17 @@ function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
 
 				bEmpty = self:IsEmpty(x2, y2, itemPanel)
 
-				if (!bEmpty) then
-					-- no need to iterate further since we know something is blocking the hovered grid cells, break through both loops
+				if not bEmpty then
+					-- no need to iterate further since we know something is blocking the hovered grid
+					-- cells, break through both loops
 					goto finish
 				end
 			end
 		end
 
 		::finish::
-		local previewColor = ColorAlpha(derma.GetColor(bEmpty and "Success" or "Error", self, Color(200, 0, 0)), 20)
+		local previewColor =
+			ColorAlpha(derma.GetColor(bEmpty and "Success" or "Error", self, Color(200, 0, 0)), 20)
 
 		surface.SetDrawColor(previewColor)
 		surface.DrawRect(
@@ -779,10 +824,10 @@ end
 function PANEL:PaintOver(width, height)
 	local panel = self.previewPanel
 
-	if (IsValid(panel)) then
+	if IsValid(panel) then
 		local itemPanel = (dragndrop.GetDroppable() or {})[1]
 
-		if (IsValid(itemPanel)) then
+		if IsValid(itemPanel) then
 			self:PaintDragPreview(width, height, self.previewX, self.previewY, itemPanel)
 		end
 	end
@@ -791,13 +836,14 @@ function PANEL:PaintOver(width, height)
 end
 
 function PANEL:IsEmpty(x, y, this)
-	return (self.slots[x] and self.slots[x][y]) and (!IsValid(self.slots[x][y].item) or self.slots[x][y].item == this)
+	return (self.slots[x] and self.slots[x][y])
+		and (not IsValid(self.slots[x][y].item) or self.slots[x][y].item == this)
 end
 
 function PANEL:IsAllEmpty(x, y, width, height, this)
 	for x2 = 0, width - 1 do
 		for y2 = 0, height - 1 do
-			if (!self:IsEmpty(x + x2, y + y2, this)) then
+			if not self:IsEmpty(x + x2, y + y2, this) then
 				return false
 			end
 		end
@@ -812,39 +858,44 @@ function PANEL:OnTransfer(oldX, oldY, x, y, oldInventory, noSend)
 	local inventory2 = inventories[self.invID]
 	local item
 
-	if (inventory) then
+	if inventory then
 		item = inventory:GetItemAt(oldX, oldY)
-		
-		if (!item) then
+
+		if not item then
 			return false
 		end
 
-		if (hook.Run("CanTransferItem", item, inventories[oldInventory.invID], inventories[self.invID]) == false) then
+		if
+			hook.Run("CanTransferItem", item, inventories[oldInventory.invID], inventories[self.invID])
+			== false
+		then
 			return false, "notAllowed"
 		end
 
-		if (item.CanTransfer and
-			item:CanTransfer(inventory, inventory != inventory2 and inventory2 or nil) == false) then
+		if
+			item.CanTransfer
+			and item:CanTransfer(inventory, inventory ~= inventory2 and inventory2 or nil) == false
+		then
 			return false
 		end
 	end
 
-	if (!noSend) then
+	if not noSend then
 		net.Start("ixInventoryMove")
-			net.WriteUInt(oldX, 6)
-			net.WriteUInt(oldY, 6)
-			net.WriteUInt(x, 6)
-			net.WriteUInt(y, 6)
-			net.WriteUInt(oldInventory.invID, 32)
-			net.WriteUInt(self != oldInventory and self.invID or oldInventory.invID, 32)
+		net.WriteUInt(oldX, 6)
+		net.WriteUInt(oldY, 6)
+		net.WriteUInt(x, 6)
+		net.WriteUInt(y, 6)
+		net.WriteUInt(oldInventory.invID, 32)
+		net.WriteUInt(self ~= oldInventory and self.invID or oldInventory.invID, 32)
 		net.SendToServer()
 	end
 
-	if (inventory) then
+	if inventory then
 		inventory.slots[oldX][oldY] = nil
 	end
 
-	if (item and inventory2) then
+	if item and inventory2 then
 		inventory2.slots[x] = inventory2.slots[x] or {}
 		inventory2.slots[x][y] = item
 	end
@@ -856,7 +907,7 @@ function PANEL:AddIcon(model, x, y, w, h, skin)
 	w = w or 1
 	h = h or 1
 
-	if (self.slots[x] and self.slots[x][y]) then
+	if self.slots[x] and self.slots[x][y] then
 		local panel = self:Add("ixItemIcon")
 		panel:SetSize(w * iconSize, h * iconSize)
 		panel:SetZPos(999)
@@ -870,7 +921,7 @@ function PANEL:AddIcon(model, x, y, w, h, skin)
 
 		local inventory = ix.item.inventories[self.invID]
 
-		if (!inventory) then
+		if not inventory then
 			return
 		end
 
@@ -879,15 +930,15 @@ function PANEL:AddIcon(model, x, y, w, h, skin)
 		panel:SetInventoryID(inventory:GetID())
 		panel:SetItemTable(itemTable)
 
-		if (self.panels[itemTable:GetID()]) then
+		if self.panels[itemTable:GetID()] then
 			self.panels[itemTable:GetID()]:Remove()
 		end
 
-		if (itemTable.exRender) then
+		if itemTable.exRender then
 			panel.Icon:SetVisible(false)
 			panel.ExtraPaint = function(this, panelX, panelY)
 				local exIcon = ikon:GetIcon(itemTable.uniqueID)
-				if (exIcon) then
+				if exIcon then
 					surface.SetMaterial(exIcon)
 					surface.SetDrawColor(color_white)
 					surface.DrawTexturedRect(0, 0, panelX, panelY)
@@ -902,11 +953,11 @@ function PANEL:AddIcon(model, x, y, w, h, skin)
 					)
 				end
 			end
-		elseif (itemTable:GetData("img", itemTable.img)) then
+		elseif itemTable:GetData("img", itemTable.img) then
 			panel.Icon:SetVisible(false)
 			panel.ExtraPaint = function(this, panelX, panelY)
 				local icon = ix.util.GetMaterial(itemTable:GetData("img", itemTable.img))
-				if (icon) then
+				if icon then
 					surface.SetMaterial(icon)
 					surface.SetDrawColor(color_white)
 					surface.DrawTexturedRect(0, 0, panelX, panelY)
@@ -914,7 +965,7 @@ function PANEL:AddIcon(model, x, y, w, h, skin)
 			end
 		else
 			-- yeah..
-			RenderNewIcon(panel, itemTable)
+			renderNewIcon(panel, itemTable)
 		end
 
 		panel.slots = {}
@@ -923,7 +974,7 @@ function PANEL:AddIcon(model, x, y, w, h, skin)
 			for i2 = 0, h - 1 do
 				local slot = self.slots[x + i] and self.slots[x + i][y + i2]
 
-				if (IsValid(slot)) then
+				if IsValid(slot) then
 					slot.item = panel
 					panel.slots[#panel.slots + 1] = slot
 				else
@@ -945,16 +996,17 @@ end
 function PANEL:ReceiveDrop(panels, bDropped, menuIndex, x, y)
 	local panel = panels[1]
 
-	if (!IsValid(panel)) then
+	if not IsValid(panel) then
 		self.previewPanel = nil
+
 		return
 	end
 
-	if (bDropped) then
+	if bDropped then
 		local inventory = ix.item.inventories[self.invID]
 
-		if (inventory and panel.OnDrop) then
-			local dropX = math.ceil((x - self:GetWide()*0.002 - (panel.gridW - 1) * 32) / self.iconSize)
+		if inventory and panel.OnDrop then
+			local dropX = math.ceil((x - self:GetWide() * 0.002 - (panel.gridW - 1) * 32) / self.iconSize)
 			local dropY = math.ceil((y - self:GetPadding(2) - (panel.gridH - 1) * 32) / self.iconSize)
 
 			panel:OnDrop(true, self, inventory, dropX, dropY)
@@ -970,9 +1022,8 @@ end
 
 vgui.Register("ixInventory", PANEL, "DFrame")
 
-hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
-
-end)
+-- These identifiers replace Helix's inventory hooks.
+hook.Add("CreateMenuButtons", "ixInventory", function(tabs) end)
 
 hook.Add("PostRenderVGUI", "ixInvHelper", function()
 	local pnl = ix.gui.inv1

@@ -1,14 +1,14 @@
 PLUGIN.name = "Progression"
 PLUGIN.author = "gumlefar"
-PLUGIN.desc = "Persistent character progression with shared world unlocks and personal NPC services."
+PLUGIN.desc = ("Persistent character progression with shared world unlocks " .. "and personal NPC services.")
 
 ix.progression = ix.progression or {}
 ix.progression.definitions = ix.progression.definitions or {}
 
 PLUGIN.checktime = 0
 
-function ix.progression.Register(progid, data)
-	ix.progression.definitions[progid] = data
+function ix.progression.Register(progressionID, data)
+	ix.progression.definitions[progressionID] = data
 end
 
 ix.util.Include("sh_definitions.lua")
@@ -29,19 +29,23 @@ function PLUGIN:LoadData()
 	local saved = self:GetData() or {}
 	self.legacyProgression = saved.version == 2 and saved.legacy or saved
 	self.worldUnlocks = saved.worldUnlocks or {}
-	for progid, definition in pairs(ix.progression.definitions) do
-		local legacy = self.legacyProgression and self.legacyProgression[progid]
+	for progressionID, definition in pairs(ix.progression.definitions) do
+		local legacy = self.legacyProgression and self.legacyProgression[progressionID]
 		if definition.worldNPC and istable(legacy) and legacy.completed then
-			self.worldUnlocks[progid] = true
+			self.worldUnlocks[progressionID] = true
 		end
 	end
 end
 
 function PLUGIN:SaveData()
-	self:SetData({version = 2, legacy = self.legacyProgression or {}, worldUnlocks = self.worldUnlocks or {}})
+	self:SetData({
+		version = 2,
+		legacy = self.legacyProgression or {},
+		worldUnlocks = self.worldUnlocks or {},
+	})
 end
 
-if (SERVER) then
+if SERVER then
 	function PLUGIN:PlayerLoadedCharacter(client, character, previousCharacter)
 		ix.progression.InitializeCharacterProgression(character)
 	end
@@ -52,30 +56,38 @@ if (SERVER) then
 	end
 
 	function PLUGIN:Think()
-		if (not self.worldDataLoaded or (self.checktime or 0) > CurTime()) then return end
+		if not self.worldDataLoaded or (self.checktime or 0) > CurTime() then
+			return
+		end
 		self.checktime = CurTime() + 15
 		self:SetupProgressionWorld()
 	end
 end
 
 function PLUGIN:PopulateHelpMenu(tabs)
-    tabs["progression"] = function(container)
+	tabs["progression"] = function(container)
 		local title = container:Add("DLabel")
-        title:SetText("Your Progression")
-        title:SetFont("stalkerregularbigfont")
-        title:Dock(TOP)
-        title:InvalidateLayout(true)
-        title:SetAutoStretchVertical(true)
+		title:SetText("Your Progression")
+		title:SetFont("stalkerregularbigfont")
+		title:Dock(TOP)
+		title:InvalidateLayout(true)
+		title:SetAutoStretchVertical(true)
 
 		local intro = container:Add("DLabel")
-        intro:SetWrap(true)
-        intro:SetFont("stalkerregularfont")
-        intro:SetText("Below is a list of known NPCs and what they need for various progressions. Progress and unlocks belong to your current character.")
-        intro:Dock(TOP)
-        intro:DockMargin(0, 16, 0, 0)
-        intro:SetAutoStretchVertical(true)
+		intro:SetWrap(true)
+		intro:SetFont("stalkerregularfont")
+		intro:SetText(
+			(
+				"Below is a list of known NPCs and what they need for various "
+				.. "progressions. Progress and unlocks belong to your current "
+				.. "character."
+			)
+		)
+		intro:Dock(TOP)
+		intro:DockMargin(0, 16, 0, 0)
+		intro:SetAutoStretchVertical(true)
 
-		local npcidentifiers = {}
+		local npcIdentifiers = {}
 		local initialNpcs = {
 			"'Old Timer'",
 			"'Technut'",
@@ -86,27 +98,27 @@ function PLUGIN:PopulateHelpMenu(tabs)
 			"'Smartass'",
 		}
 
-		table.Add(npcidentifiers, initialNpcs)
+		table.Add(npcIdentifiers, initialNpcs)
 
 		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerKillIntro") then
-			local tradenpc = {
+			local tradeNPC = {
 				"'Haggler'",
 			}
-			table.Add(npcidentifiers, tradenpc)
+			table.Add(npcIdentifiers, tradeNPC)
 		end
 
 		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerItemDelivery_mainMeat") then
-			local cooknpc = {
+			local cookNPC = {
 				"'Spicy Lemon'",
 			}
-			table.Add(npcidentifiers, cooknpc)
+			table.Add(npcIdentifiers, cookNPC)
 		end
 
 		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerItemDelivery_mainStatue") then
-			local mutenpc = {
+			local muteNPC = {
 				"'Mute'",
 			}
-			table.Add(npcidentifiers, mutenpc)
+			table.Add(npcIdentifiers, muteNPC)
 		end
 
 		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "smartass_rfTasks") then
@@ -115,57 +127,59 @@ function PLUGIN:PopulateHelpMenu(tabs)
 				"'Beanstalk'",
 				"'Intern'",
 			}
-			table.Add(npcidentifiers, ecologistNpcs)
+			table.Add(npcIdentifiers, ecologistNpcs)
 		end
 
 		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "intern_gasAnalyzerReadings") then
 			local pripyatNpcs = {
 				"'Computer'",
 			}
-			table.Add(npcidentifiers, pripyatNpcs)
+			table.Add(npcIdentifiers, pripyatNpcs)
 		end
 
-		for _, npcidentifier in pairs(npcidentifiers) do
-			local npctitle = container:Add("DLabel")
-			npctitle:SetWrap(true)
-			npctitle:SetFont("stalkerregularbigfont")
-			npctitle:SetText(npcidentifier)
-			npctitle:Dock(TOP)
-			npctitle:DockMargin(0, 16, 0, 0)
-			npctitle:SetAutoStretchVertical(true)
+		for _, npcIdentifier in pairs(npcIdentifiers) do
+			local npcTitle = container:Add("DLabel")
+			npcTitle:SetWrap(true)
+			npcTitle:SetFont("stalkerregularbigfont")
+			npcTitle:SetText(npcIdentifier)
+			npcTitle:Dock(TOP)
+			npcTitle:DockMargin(0, 16, 0, 0)
+			npcTitle:SetAutoStretchVertical(true)
 
 			local activeProgressions = 0
-			for k, v in pairs(ix.progression.GetActiveProgressions(LocalPlayer():GetCharacter(), npcidentifier)) do
-				local progdef = ix.progression.definitions[v]
+			for _, v in
+				pairs(ix.progression.GetActiveProgressions(LocalPlayer():GetCharacter(), npcIdentifier))
+			do
+				local definition = ix.progression.definitions[v]
 				local character = LocalPlayer():GetCharacter()
-				local progstatus = progdef.GetItemIds and ix.progression.GetComplexProgressionValue(character, v)
+				local progressionStatus = definition.GetItemIds
+						and ix.progression.GetComplexProgressionValue(character, v)
 					or ix.progression.GetLine(character, v)
-				
-				activeProgressions = activeProgressions + 1
-	
-				local progressiontitle = container:Add("DLabel")
-				progressiontitle:SetWrap(true)
-				progressiontitle:SetFont("stalkerregularfont")
-				progressiontitle:SetText(progdef.name)
-				progressiontitle:Dock(TOP)
-				progressiontitle:DockMargin(0, 16, 0, 0)
-				progressiontitle:SetAutoStretchVertical(true)
 
-	
-				if (progdef.BuildResponse) then
-					local descriptiontext = progdef:BuildResponse(progdef.keyNpc, progstatus)
-					local progressiondescription = container:Add("DLabel")
-					progressiondescription:SetWrap(true)
-					progressiondescription:SetFont("stalkerregularsmallfont")
-					progressiondescription:SetText(descriptiontext)
-					progressiondescription:Dock(TOP)
-					progressiondescription:DockMargin(0, 16, 0, 0)
-					progressiondescription:SetAutoStretchVertical(true)
+				activeProgressions = activeProgressions + 1
+
+				local progressionTitle = container:Add("DLabel")
+				progressionTitle:SetWrap(true)
+				progressionTitle:SetFont("stalkerregularfont")
+				progressionTitle:SetText(definition.name)
+				progressionTitle:Dock(TOP)
+				progressionTitle:DockMargin(0, 16, 0, 0)
+				progressionTitle:SetAutoStretchVertical(true)
+
+				if definition.BuildResponse then
+					local descriptionText = definition:BuildResponse(definition.keyNpc, progressionStatus)
+					local progressionDescription = container:Add("DLabel")
+					progressionDescription:SetWrap(true)
+					progressionDescription:SetFont("stalkerregularsmallfont")
+					progressionDescription:SetText(descriptionText)
+					progressionDescription:Dock(TOP)
+					progressionDescription:DockMargin(0, 16, 0, 0)
+					progressionDescription:SetAutoStretchVertical(true)
 				end
 			end
 
 			if activeProgressions == 0 then
-				npctitle:Remove()
+				npcTitle:Remove()
 			end
 		end
 	end

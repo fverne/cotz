@@ -1,37 +1,44 @@
-local map = "rp_waystation"
+local MAP = "rp_waystation"
 
 ix.progression.Register("bossItemDelivery_1", {
 	name = "Cleaning Inventory 1",
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	progMap = map,
+	progMap = MAP,
 	vendorUnlocks = {
-		{npc = "'Boss'", args = {"suit_io7a", nil, 5, "SELLANDBUY", 5, 1, 5}}
+		{ npc = "'Boss'", args = { "suit_io7a", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	nextProgressions = {"bossItemDelivery_2"},
-	BuildResponse = function(self, npcname, status)
-		local dat = status or {}
+	nextProgressions = { "bossItemDelivery_2" },
+	BuildResponse = function(self, npcName, status)
+		local data = status or {}
 
-		local itemids = self:GetItemIds()
+		local itemIDs = self:GetItemIds()
 
-		local str = "I have a ton of stockpile sitting here collecting dust in the research station. I'm willing to sell some to you if you help me out. First off the bat is a mercenary suit.\n\nREQUIRED ITEMS:"
+		local str = (
+			"I have a ton of stockpile sitting here collecting dust "
+			.. "in the research station. I'm willing to sell some to you "
+			.. "if you help me out. First off the bat is a mercenary suit.\n\nREQUIRED "
+			.. "ITEMS:"
+		)
 
-		for item, amt in pairs(itemids) do
-			local tmp = 0
-			if (dat and dat[item]) then tmp = dat[item] end
-			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		for item, amount in pairs(itemIDs) do
+			local currentAmount = 0
+			if data and data[item] then
+				currentAmount = data[item]
+			end
+			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
 		end
 
 		return str
 	end,
 	GetItemIds = function()
-		local itemids = {
+		local itemIDs = {
 			["part_boar"] = 15,
 			["part_blinddog"] = 15,
 		}
 
-		return itemids
+		return itemIDs
 	end,
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -39,7 +46,7 @@ ix.progression.Register("bossItemDelivery_1", {
 			local message = "IO7a's now available for purchase."
 			ix.progression.Notify(character, name, message)
 		end)
-	end
+	end,
 })
 
 ix.progression.Register("bossItemDelivery_2", {
@@ -47,33 +54,38 @@ ix.progression.Register("bossItemDelivery_2", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	progMap = map,
+	progMap = MAP,
 	vendorUnlocks = {
-		{npc = "'Boss'", args = {"suit_ps5m", nil, 5, "SELLANDBUY", 5, 1, 5}}
+		{ npc = "'Boss'", args = { "suit_ps5m", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	nextProgressions = {"bossItemDelivery_3"},
-	BuildResponse = function(self, npcname, status)
-		local dat = status or {}
+	nextProgressions = { "bossItemDelivery_3" },
+	BuildResponse = function(self, npcName, status)
+		local data = status or {}
 
-		local itemids = self:GetItemIds()
+		local itemIDs = self:GetItemIds()
 
-		local str = "I have more suits in my stockpile. Next up is a lightweight Universal Protection Suit.\n\nREQUIRED ITEMS:"
+		local str = (
+			"I have more suits in my stockpile. Next up is a lightweight "
+			.. "Universal Protection Suit.\n\nREQUIRED ITEMS:"
+		)
 
-		for item, amt in pairs(itemids) do
-			local tmp = 0
-			if (dat and dat[item]) then tmp = dat[item] end
-			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		for item, amount in pairs(itemIDs) do
+			local currentAmount = 0
+			if data and data[item] then
+				currentAmount = data[item]
+			end
+			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
 		end
 
 		return str
 	end,
 	GetItemIds = function()
-		local itemids = {
+		local itemIDs = {
 			["part_cat"] = 20,
 			["part_flesh"] = 20,
 		}
 
-		return itemids
+		return itemIDs
 	end,
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -81,7 +93,7 @@ ix.progression.Register("bossItemDelivery_2", {
 			local message = "PS5M's now available for purchase."
 			ix.progression.Notify(character, name, message)
 		end)
-	end
+	end,
 })
 
 ix.progression.Register("bossItemDelivery_3", {
@@ -89,33 +101,38 @@ ix.progression.Register("bossItemDelivery_3", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	progMap = map,
+	progMap = MAP,
 	vendorUnlocks = {
-		{npc = "'Boss'", args = {"suit_berill", nil, 5, "SELLANDBUY", 5, 1, 5}}
+		{ npc = "'Boss'", args = { "suit_berill", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	nextProgressions = {"bossItemDelivery_4"},
-	BuildResponse = function(self, npcname, status)
-		local dat = status or {}
+	nextProgressions = { "bossItemDelivery_4" },
+	BuildResponse = function(self, npcName, status)
+		local data = status or {}
 
-		local itemids = self:GetItemIds()
+		local itemIDs = self:GetItemIds()
 
-		local str = "I have more suits in my stockpile. Next up is the military standard issue Berill-5M.\n\nREQUIRED ITEMS:"
+		local str = (
+			"I have more suits in my stockpile. Next up is the military "
+			.. "standard issue Berill-5M.\n\nREQUIRED ITEMS:"
+		)
 
-		for item, amt in pairs(itemids) do
-			local tmp = 0
-			if (dat and dat[item]) then tmp = dat[item] end
-			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		for item, amount in pairs(itemIDs) do
+			local currentAmount = 0
+			if data and data[item] then
+				currentAmount = data[item]
+			end
+			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
 		end
 
 		return str
 	end,
 	GetItemIds = function()
-		local itemids = {
+		local itemIDs = {
 			["part_snork_2"] = 20,
 			["part_zombie_2"] = 20,
 		}
 
-		return itemids
+		return itemIDs
 	end,
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -123,7 +140,7 @@ ix.progression.Register("bossItemDelivery_3", {
 			local message = "Berill-5M's now available for purchase."
 			ix.progression.Notify(character, name, message)
 		end)
-	end
+	end,
 })
 
 ix.progression.Register("bossItemDelivery_4", {
@@ -131,33 +148,37 @@ ix.progression.Register("bossItemDelivery_4", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	progMap = map,
+	progMap = MAP,
 	vendorUnlocks = {
-		{npc = "'Boss'", args = {"suit_skat10", nil, 5, "SELLANDBUY", 5, 1, 5}}
+		{ npc = "'Boss'", args = { "suit_skat10", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	nextProgressions = {"bossItemDelivery_5"},
-	BuildResponse = function(self, npcname, status)
-		local dat = status or {}
+	nextProgressions = { "bossItemDelivery_5" },
+	BuildResponse = function(self, npcName, status)
+		local data = status or {}
 
-		local itemids = self:GetItemIds()
+		local itemIDs = self:GetItemIds()
 
-		local str = "I have more suits in my stockpile. Next up is the prototype Skat10.\n\nREQUIRED ITEMS:"
+		local str = (
+			"I have more suits in my stockpile. Next up is the prototype " .. "Skat10.\n\nREQUIRED ITEMS:"
+		)
 
-		for item, amt in pairs(itemids) do
-			local tmp = 0
-			if (dat and dat[item]) then tmp = dat[item] end
-			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		for item, amount in pairs(itemIDs) do
+			local currentAmount = 0
+			if data and data[item] then
+				currentAmount = data[item]
+			end
+			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
 		end
 
 		return str
 	end,
 	GetItemIds = function()
-		local itemids = {
+		local itemIDs = {
 			["part_tark"] = 25,
 			["part_sprig"] = 25,
 		}
 
-		return itemids
+		return itemIDs
 	end,
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -165,7 +186,7 @@ ix.progression.Register("bossItemDelivery_4", {
 			local message = "Skat-10 Armoured Suits are now available for purchase."
 			ix.progression.Notify(character, name, message)
 		end)
-	end
+	end,
 })
 
 ix.progression.Register("bossItemDelivery_5", {
@@ -173,33 +194,37 @@ ix.progression.Register("bossItemDelivery_5", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	progMap = map,
+	progMap = MAP,
 	vendorUnlocks = {
-		{npc = "'Boss'", args = {"suit_skat9", nil, 5, "SELLANDBUY", 5, 1, 5}}
+		{ npc = "'Boss'", args = { "suit_skat9", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	nextProgressions = {"bossItemDelivery_6"},
-	BuildResponse = function(self, npcname, status)
-		local dat = status or {}
+	nextProgressions = { "bossItemDelivery_6" },
+	BuildResponse = function(self, npcName, status)
+		local data = status or {}
 
-		local itemids = self:GetItemIds()
+		local itemIDs = self:GetItemIds()
 
-		local str = "I have more suits in my stockpile. Next up is the exclusive Skat9.\n\nREQUIRED ITEMS:"
+		local str = (
+			"I have more suits in my stockpile. Next up is the exclusive " .. "Skat9.\n\nREQUIRED ITEMS:"
+		)
 
-		for item, amt in pairs(itemids) do
-			local tmp = 0
-			if (dat and dat[item]) then tmp = dat[item] end
-			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		for item, amount in pairs(itemIDs) do
+			local currentAmount = 0
+			if data and data[item] then
+				currentAmount = data[item]
+			end
+			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
 		end
 
 		return str
 	end,
 	GetItemIds = function()
-		local itemids = {
+		local itemIDs = {
 			["part_controller_1"] = 30,
 			["part_chimera"] = 30,
 		}
 
-		return itemids
+		return itemIDs
 	end,
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -207,7 +232,7 @@ ix.progression.Register("bossItemDelivery_5", {
 			local message = "Skat-9 Armoured Suits are now available for purchase."
 			ix.progression.Notify(character, name, message)
 		end)
-	end
+	end,
 })
 
 ix.progression.Register("bossItemDelivery_6", {
@@ -215,34 +240,36 @@ ix.progression.Register("bossItemDelivery_6", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	progMap = map,
+	progMap = MAP,
 	vendorUnlocks = {
-		{npc = "'Boss'", args = {"suit_radsuit", nil, 5, "SELLANDBUY", 5, 1, 5}},
-		{npc = "'Boss'", args = {"headwear_rad", nil, 5, "SELLANDBUY", 5, 1, 5}}
+		{ npc = "'Boss'", args = { "suit_radsuit", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Boss'", args = { "headwear_rad", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	nextProgressions = {"bossItemDelivery_7"},
-	BuildResponse = function(self, npcname, status)
-		local dat = status or {}
+	nextProgressions = { "bossItemDelivery_7" },
+	BuildResponse = function(self, npcName, status)
+		local data = status or {}
 
-		local itemids = self:GetItemIds()
+		local itemIDs = self:GetItemIds()
 
-		local str = "I have more suits in my stockpile. Next up is the Radsuit.\n\nREQUIRED ITEMS:"
+		local str = ("I have more suits in my stockpile. Next up is the Radsuit.\n\nREQUIRED " .. "ITEMS:")
 
-		for item, amt in pairs(itemids) do
-			local tmp = 0
-			if (dat and dat[item]) then tmp = dat[item] end
-			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		for item, amount in pairs(itemIDs) do
+			local currentAmount = 0
+			if data and data[item] then
+				currentAmount = data[item]
+			end
+			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
 		end
 
 		return str
 	end,
 	GetItemIds = function()
-		local itemids = {
+		local itemIDs = {
 			["part_controller_2"] = 5,
 			["part_pseudogiant"] = 30,
 		}
 
-		return itemids
+		return itemIDs
 	end,
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -250,7 +277,7 @@ ix.progression.Register("bossItemDelivery_6", {
 			local message = "Radsuits are now available for purchase."
 			ix.progression.Notify(character, name, message)
 		end)
-	end
+	end,
 })
 
 ix.progression.Register("bossItemDelivery_7", {
@@ -258,33 +285,35 @@ ix.progression.Register("bossItemDelivery_7", {
 	description = "Help Boss amass parts.",
 	keyNpc = "'Boss'",
 	defaultActive = false,
-	progMap = map,
+	progMap = MAP,
 	vendorUnlocks = {
-		{npc = "'Boss'", args = {"suit_exoskeleton", nil, 5, "SELLANDBUY", 5, 1, 5}},
-		{npc = "'Boss'", args = {"headwear_spartan", nil, 5, "SELLANDBUY", 5, 1, 5}}
+		{ npc = "'Boss'", args = { "suit_exoskeleton", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Boss'", args = { "headwear_spartan", nil, 5, "SELLANDBUY", 5, 1, 5 } },
 	},
-	BuildResponse = function(self, npcname, status)
-		local dat = status or {}
+	BuildResponse = function(self, npcName, status)
+		local data = status or {}
 
-		local itemids = self:GetItemIds()
+		local itemIDs = self:GetItemIds()
 
-		local str = "I have one last suit in my repository - the exoskeleton. \n\nREQUIRED ITEMS:"
+		local str = ("I have one last suit in my repository - the exoskeleton. " .. "\n\nREQUIRED ITEMS:")
 
-		for item, amt in pairs(itemids) do
-			local tmp = 0
-			if (dat and dat[item]) then tmp = dat[item] end
-			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		for item, amount in pairs(itemIDs) do
+			local currentAmount = 0
+			if data and data[item] then
+				currentAmount = data[item]
+			end
+			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
 		end
 
 		return str
 	end,
 	GetItemIds = function()
-		local itemids = {
+		local itemIDs = {
 			["part_electrocontroller_1"] = 10,
 			["part_hellhound"] = 35,
 		}
 
-		return itemids
+		return itemIDs
 	end,
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -292,5 +321,5 @@ ix.progression.Register("bossItemDelivery_7", {
 			local message = "Exoskeletons and protoype Spartan helmets are now available for purchase."
 			ix.progression.Notify(character, name, message)
 		end)
-	end
+	end,
 })

@@ -3,44 +3,41 @@ DIALOGUE.name = "Medic NPC"
 DIALOGUE.addTopic("GREETING", {
 	response = "Welcome!",
 	options = {
-        "TradeTopic", 
+		"TradeTopic",
 		"HealTopic",
 		"AboutProgression",
-		"GOODBYE"
+		"GOODBYE",
 	},
 	preCallback = function(self, client, target)
 		-- Only needed if NPC offers tasks
 		-- 4th argument is the categories to grab tasks from
 		-- 5th argument is the amount of tasks to grab
-		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkillgroupeasy"}, 4)
-	end
+		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkillgroupeasy"},
+		-- 4)
+	end,
 })
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
 	response = "What would you like to know?",
 	options = {
-		"TradeTopic", 
+		"TradeTopic",
 		"HealTopic",
 		"AboutProgression",
-		"GOODBYE"
-	} --Should be identical to GREETING's options
+		"GOODBYE",
+	}, -- Should be identical to GREETING's options
 })
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you!",
-	response = "Take care, STALKER..."
+	response = "Take care, STALKER...",
 })
-
-----------------------------------------------------------------
-----------------------START-TRADER-START------------------------
-----------------------------------------------------------------
 
 DIALOGUE.addTopic("TradeTopic", {
 	statement = "Want to trade?",
 	response = "How can I help?",
 	postCallback = function(self, client, target)
-		if (SERVER) then
+		if SERVER then
 			local character = client:GetCharacter()
 
 			target.receivers[#target.receivers + 1] = client
@@ -48,8 +45,11 @@ DIALOGUE.addTopic("TradeTopic", {
 			local items = {}
 			-- Only send what is needed.
 			for k, v in pairs(target.items) do
-				if (!table.IsEmpty(v) and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])) then
-					if (ix.progression.CanBuyItem(character, target:GetDisplayName(), k)) then
+				if
+					not table.IsEmpty(v)
+					and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])
+				then
+					if ix.progression.CanBuyItem(character, target:GetDisplayName(), k) then
 						items[k] = v
 					end
 				end
@@ -59,15 +59,15 @@ DIALOGUE.addTopic("TradeTopic", {
 			client.ixVendorAdv = target
 
 			-- force sync to prevent outdated inventories while buying/selling
-			if (character) then
+			if character then
 				character:GetInventory():Sync(client, true)
 			end
 
 			net.Start("ixVendorAdvOpen")
-				net.WriteEntity(target)
-				net.WriteUInt(target.money or 0, 16)
-				net.WriteTable(items)
-				net.WriteFloat(target.scale or 0.5)
+			net.WriteEntity(target)
+			net.WriteUInt(target.money or 0, 16)
+			net.WriteTable(items)
+			net.WriteFloat(target.scale or 0.5)
 			net.Send(client)
 
 			ix.log.Add(client, "vendorUse", target:GetDisplayName())
@@ -75,46 +75,47 @@ DIALOGUE.addTopic("TradeTopic", {
 	end,
 	options = {
 		"BackTopic",
-	}
+	},
 })
-
-----------------------------------------------------------------
-------------------------END-TRADER-END--------------------------
-----------------------------------------------------------------
-
 
 DIALOGUE.addTopic("ViewProgression", {
 	statement = "",
 	response = "",
 	options = {
-		"BackTopic"
+		"BackTopic",
 	},
 
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
+		local dynamicOptions = {}
 
-		--disgusting
-		--local identifier = player:GetCharacter():GetData("curdialogprog")
-		local identifier 	= self.tmp
+		-- disgusting
+		-- local identifier = player:GetCharacter():GetData("curdialogprog")
+		local identifier = self.tmp
 		self.tmp = nil
-		local progstatus 	= ix.progression.GetComplexProgressionValue(client:GetCharacter(), identifier)
-		local progdef 		= ix.progression.definitions[identifier]
-		if(progdef.GetItemIds)then
-			local progitems 	= progdef.GetItemIds()
-			local missingitems  = {}
+		local progressionStatus = ix.progression.GetComplexProgressionValue(client:GetCharacter(), identifier)
+		local definition = ix.progression.definitions[identifier]
+		if definition.GetItemIds then
+			local progitems = definition.GetItemIds()
+			local missingitems = {}
 
-			for progitem,cnt in pairs(progitems) do
+			for progitem, cnt in pairs(progitems) do
 				local curcnt = 0
-				if(progstatus and progstatus[progitem]) then curcnt = progstatus[progitem] end
+				if progressionStatus and progressionStatus[progitem] then
+					curcnt = progressionStatus[progitem]
+				end
 
-				if(curcnt < cnt and client:GetCharacter():GetInventory():HasItem(progitem))then
+				if curcnt < cnt and client:GetCharacter():GetInventory():HasItem(progitem) then
 					table.insert(missingitems, progitem)
 				end
 			end
 
 			for _, progitem in pairs(missingitems) do
-				table.insert(dynopts, {statement = "Hand over "..ix.item.list[progitem].name, topicID = "ViewProgression", dyndata = {progid = identifier, itemid = progitem}})
+				table.insert(dynamicOptions, {
+					statement = "Hand over " .. ix.item.list[progitem].name,
+					topicID = "ViewProgression",
+					dynamicData = { progressionID = identifier, itemID = progitem },
+				})
 			end
 		end
 
@@ -122,27 +123,32 @@ DIALOGUE.addTopic("ViewProgression", {
 		-- statement : String shown to player
 		-- topicID : should be identical to addTopic id
 		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
 
+		return dynamicOptions
+	end,
+	ResolveDynamicOption = function(self, client, target, dynamicData)
 		-- Return the next topicID
-		return "HandInComplexProgressionItemTopic", dyndata
+
+		return "HandInComplexProgressionItemTopic", dynamicData
 	end,
 
 	IsDynamicFollowup = true,
-	DynamicPreCallback = function(self, player, target, dyndata)
-		if (dyndata) then
-			if(CLIENT)then
-				local progdef 		= ix.progression.definitions[dyndata.identifier]
-				local progstatus 	= ix.progression.GetLine(player:GetCharacter(), dyndata.identifier)
+	DynamicPreCallback = function(self, player, target, dynamicData)
+		if dynamicData then
+			if CLIENT then
+				local definition = ix.progression.definitions[dynamicData.identifier]
+				local progressionStatus =
+					ix.progression.GetLine(player:GetCharacter(), dynamicData.identifier)
 
-				if progdef.GetItemIds then
-					progstatus = ix.progression.GetComplexProgressionValue(player:GetCharacter(), dyndata.identifier)
+				if definition.GetItemIds then
+					progressionStatus = ix.progression.GetComplexProgressionValue(
+						player:GetCharacter(),
+						dynamicData.identifier
+					)
 				end
 
-				self.response = progdef:BuildResponse(target:GetDisplayName(), progstatus)
-				self.tmp = dyndata.identifier
+				self.response = definition:BuildResponse(target:GetDisplayName(), progressionStatus)
+				self.tmp = dynamicData.identifier
 			end
 		end
 	end,
@@ -152,11 +158,11 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 	statement = "",
 	response = "",
 	IsDynamicFollowup = true,
-	options = {"BackTopic"},
-	DynamicPreCallback = function(self, player, target, dyndata)
-		if (SERVER and istable(dyndata)) then
-			ix.progression.TurnIn(player, target, dyndata.progid, dyndata.itemid)
-		elseif (CLIENT) then
+	options = { "BackTopic" },
+	DynamicPreCallback = function(self, player, target, dynamicData)
+		if SERVER and istable(dynamicData) then
+			ix.progression.TurnIn(player, target, dynamicData.progid, dynamicData.itemid)
+		elseif CLIENT then
 			self.response = "Let me check what you have brought."
 		end
 	end,
@@ -166,10 +172,10 @@ DIALOGUE.addTopic("AboutProgression", {
 	statement = "What do you need help with?",
 	response = "I have a few things I need done.",
 	options = {
-		"BackTopic"
+		"BackTopic",
 	},
 	preCallback = function(self, client, target)
-		if( CLIENT ) then
+		if CLIENT then
 			if #ix.progression.GetActiveProgressions(client:GetCharacter(), "'Jitters'") <= 0 then
 				self.response = "Nothing at the moment."
 			end
@@ -177,68 +183,90 @@ DIALOGUE.addTopic("AboutProgression", {
 	end,
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
+		local dynamicOptions = {}
 
-		for _, progid in pairs(ix.progression.GetActiveProgressions(client:GetCharacter(), "'Jitters'")) do
-			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})
+		for _, progressionID in
+			pairs(ix.progression.GetActiveProgressions(client:GetCharacter(), "'Jitters'"))
+		do
+			table.insert(dynamicOptions, {
+				statement = ix.progression.definitions[progressionID].name,
+				topicID = "AboutProgression",
+				dynamicData = { identifier = progressionID },
+			})
 		end
 
 		-- Return table of options
 		-- statement : String shown to player
 		-- topicID : should be identical to addTopic id
 		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
 
+		return dynamicOptions
+	end,
+	ResolveDynamicOption = function(self, client, target, dynamicData)
 		-- Return the next topicID
-		return "ViewProgression", dyndata
+
+		return "ViewProgression", dynamicData
 	end,
 	ShouldAdd = function(self, client, target)
 		return #ix.progression.GetActiveProgressions(client:GetCharacter(), "'Jitters'") > 0
 	end,
 })
 
-
-----------------------------------------------------------------
------------------------START-HEAL-START-------------------------
-----------------------------------------------------------------
-
 DIALOGUE.addTopic("HealTopic", {
 	statement = "Can you patch me up?",
 	response = "What would you like me to look at?",
 	IsDynamic = true,
 	options = {
-		"BackTopic"
+		"BackTopic",
 	},
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
-        local pricePerHp = 2
-        local pricePerRad = 3
-        local pricePerPsy = 4
+		local dynamicOptions = {}
+		local pricePerHp = 2
+		local pricePerRad = 3
+		local pricePerPsy = 4
 
-        local percentPerHp = (100 - client:Health())
-        local percentPerRad = (client:getRadiation())
-        local percentPerPsy = (100 - client:GetPsyHealth())
+		local percentPerHp = (100 - client:Health())
+		local percentPerRad = (client:getRadiation())
+		local percentPerPsy = (100 - client:GetPsyHealth())
 
-        local hpCost = math.Round(percentPerHp * pricePerHp)
-        local radCost = math.Round(percentPerRad * pricePerRad)
-        local psyCost = math.Round(percentPerPsy * pricePerPsy)
+		local hpCost = math.Round(percentPerHp * pricePerHp)
+		local radCost = math.Round(percentPerRad * pricePerRad)
+		local psyCost = math.Round(percentPerPsy * pricePerPsy)
 
-        table.insert(dynopts, {statement = "My Physical Health ( "..client:Health().."% ) - "..ix.currency.Get(hpCost), topicID = "HealTopic", dyndata = {cost = hpCost, type="hp"}})
-        table.insert(dynopts, {statement = "My Radiation Level ( "..client:getRadiation().."% ) - "..ix.currency.Get(radCost), topicID = "HealTopic", dyndata = {cost = radCost, type="rad"}})
-        table.insert(dynopts, {statement = "My Mental Health ( "..client:GetPsyHealth().."% ) - "..ix.currency.Get(psyCost), topicID = "HealTopic", dyndata = {cost = psyCost, type="psy"}})
-        table.insert(dynopts, {statement = "Everything - "..ix.currency.Get(hpCost + radCost + psyCost), topicID = "HealTopic", dyndata = {cost = hpCost + radCost + psyCost, type="all"}})
+		table.insert(dynamicOptions, {
+			statement = "My Physical Health ( " .. client:Health() .. "% ) - " .. ix.currency.Get(hpCost),
+			topicID = "HealTopic",
+			dynamicData = { cost = hpCost, type = "hp" },
+		})
+		table.insert(dynamicOptions, {
+			statement = "My Radiation Level ( " .. client:getRadiation() .. "% ) - " .. ix.currency.Get(
+				radCost
+			),
+			topicID = "HealTopic",
+			dynamicData = { cost = radCost, type = "rad" },
+		})
+		table.insert(dynamicOptions, {
+			statement = "My Mental Health ( " .. client:GetPsyHealth() .. "% ) - " .. ix.currency.Get(
+				psyCost
+			),
+			topicID = "HealTopic",
+			dynamicData = { cost = psyCost, type = "psy" },
+		})
+		table.insert(dynamicOptions, {
+			statement = "Everything - " .. ix.currency.Get(hpCost + radCost + psyCost),
+			topicID = "HealTopic",
+			dynamicData = { cost = hpCost + radCost + psyCost, type = "all" },
+		})
 
-		return dynopts
+		return dynamicOptions
 	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-
+	ResolveDynamicOption = function(self, client, target, dynamicData)
 		-- Return the next topicID
-		if( !client:GetCharacter():HasMoney(dyndata.cost)) then
+		if not client:GetCharacter():HasMoney(dynamicData.cost) then
 			return "NotEnoughMoneyHeal"
 		end
-		return "ConfirmHeal", dyndata
+
+		return "ConfirmHeal", dynamicData
 	end,
 })
 
@@ -247,50 +275,59 @@ DIALOGUE.addTopic("ConfirmHeal", {
 	response = "",
 	IsDynamicFollowup = true,
 	IsDynamic = true,
-	DynamicPreCallback = function(self, player, target, dyndata)
-		if(dyndata) then
-			if (CLIENT) then
-				self.response = string.format("Patching you up will cost you %s.", ix.currency.Get(dyndata.cost))
+	DynamicPreCallback = function(self, player, target, dynamicData)
+		if dynamicData then
+			if CLIENT then
+				self.response =
+					string.format("Patching you up will cost you %s.", ix.currency.Get(dynamicData.cost))
 			else
-				target.healstruct = { dyndata.cost, dyndata.type }
+				target.healstruct = { dynamicData.cost, dynamicData.type }
 			end
 		end
 	end,
 	GetDynamicOptions = function(self, client, target)
-
-		local dynopts = {
-			{statement = "I can agree to that. Go ahead and heal me.", topicID = "ConfirmHeal", dyndata = {accepted = true}},
-			{statement = "On second thought...", topicID = "ConfirmHeal", dyndata = {accepted = false}},
+		local dynamicOptions = {
+			{
+				statement = "I can agree to that. Go ahead and heal me.",
+				topicID = "ConfirmHeal",
+				dynamicData = { accepted = true },
+			},
+			{
+				statement = "On second thought...",
+				topicID = "ConfirmHeal",
+				dynamicData = { accepted = false },
+			},
 		}
 
 		-- Return table of options
 		-- statement : String shown to player
 		-- topicID : should be identical to addTopic id
 		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
+
+		return dynamicOptions
 	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-		if( SERVER and dyndata.accepted ) then
+	ResolveDynamicOption = function(self, client, target, dynamicData)
+		if SERVER and dynamicData.accepted then
 			ix.dialogue.notifyMoneyLost(client, target.healstruct[1])
 			client:GetCharacter():TakeMoney(target.healstruct[1])
 
-            if target.healstruct[2] == "hp" then
-                client:SetHealth(100)
-            elseif target.healstruct[2] == "rad" then
-                client:setRadiation(0)
-            elseif target.healstruct[2] == "psy" then
-                client:SetPsyHealth(100)
-            elseif target.healstruct[2] == "all" then
-                client:SetHealth(100)
-                client:setRadiation(0)
-                client:SetPsyHealth(100)
-            end
-
+			if target.healstruct[2] == "hp" then
+				client:SetHealth(100)
+			elseif target.healstruct[2] == "rad" then
+				client:setRadiation(0)
+			elseif target.healstruct[2] == "psy" then
+				client:SetPsyHealth(100)
+			elseif target.healstruct[2] == "all" then
+				client:SetHealth(100)
+				client:setRadiation(0)
+				client:SetPsyHealth(100)
+			end
 		end
-		if(SERVER)then
+		if SERVER then
 			target.healstruct = nil
 		end
 		-- Return the next topicID
+
 		return "BackTopic"
 	end,
 })
@@ -299,10 +336,6 @@ DIALOGUE.addTopic("NotEnoughMoneyHeal", {
 	statement = "",
 	response = "Not enough money for that.",
 	options = {
-		"BackTopic"
-	}
+		"BackTopic",
+	},
 })
-
-----------------------------------------------------------------
--------------------------END-HEAL-END---------------------------
-----------------------------------------------------------------

@@ -1,48 +1,56 @@
-local map = "rp_marsh_cs"
+local MAP = "rp_marsh_cs"
 
 ix.progression.Register("jittersItemDelivery_medical1", {
 	name = "Due Treatment 1",
 	description = "Jitters take a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = true,
-	progMap = map,
+	progMap = MAP,
 	vendorUnlocks = {
-		{npc = "'Jitters'", args = {"medic_medkit_1", nil, 10, "SELLANDBUY", 10, 1, 10}},
-		{npc = "'Jitters'", args = {"medic_medkit_2", nil, 10, "SELLANDBUY", 10, 1, 10}}
+		{ npc = "'Jitters'", args = { "medic_medkit_1", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Jitters'", args = { "medic_medkit_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
-	nextProgressions = {"jittersItemDelivery_medical2"},
-	BuildResponse = function(self, npcname, status)
-		local dat = status or {}
+	nextProgressions = { "jittersItemDelivery_medical2" },
+	BuildResponse = function(self, npcName, status)
+		local data = status or {}
 
-		local itemids = self:GetItemIds()
+		local itemIDs = self:GetItemIds()
 
-		local str = "Hey uhh, It's pretty tough out here, am I right? How about we help each other out.\n\nREQUIRED ITEMS:"
+		local str = (
+			"Hey uhh, It's pretty tough out here, am I right? How about "
+			.. "we help each other out.\n\nREQUIRED ITEMS:"
+		)
 
-		for item, amt in pairs(itemids) do
-			local tmp = 0
-			if (dat and dat[item]) then tmp = dat[item] end
-			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		for item, amount in pairs(itemIDs) do
+			local currentAmount = 0
+			if data and data[item] then
+				currentAmount = data[item]
+			end
+			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
 		end
 
 		return str
 	end,
 	GetItemIds = function()
-		local itemids = {
-            ["drug_tobacco_1"] = 30,
+		local itemIDs = {
+			["drug_tobacco_1"] = 30,
 
-            ["drug_caffeine"] = 10,
+			["drug_caffeine"] = 10,
 			["drug_painkillers"] = 10,
 		}
 
-		return itemids
+		return itemIDs
 	end,
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Jitters'"
-			local message = "Jitters here. Thanks for the... uhm... medication. As a reward I have more medical equipment in stock."
+			local message = (
+				"Jitters here. Thanks for the... uhm... medication. As a "
+				.. "reward I have more medical equipment in stock."
+			)
 			ix.progression.Notify(character, name, message)
 		end)
-	end
+	end,
 })
 
 ix.progression.Register("jittersItemDelivery_medical2", {
@@ -50,47 +58,55 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 	description = "Jitters take a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = false,
-	progMap = map,
+	progMap = MAP,
 	vendorUnlocks = {
-		{npc = "'Jitters'", args = {"medic_bandage_2", nil, 10, "SELLANDBUY", 10, 1, 10}},
-		{npc = "'Jitters'", args = {"medic_medkit_3", nil, 10, "SELLANDBUY", 10, 1, 10}},
-		{npc = "'Jitters'", args = {"medic_antirad_1", nil, 10, "SELLANDBUY", 10, 1, 10}}
+		{ npc = "'Jitters'", args = { "medic_bandage_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Jitters'", args = { "medic_medkit_3", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Jitters'", args = { "medic_antirad_1", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
-	nextProgressions = {"jittersItemDelivery_medical3"},
-	BuildResponse = function(self, npcname, status)
-		local dat = status or {}
+	nextProgressions = { "jittersItemDelivery_medical3" },
+	BuildResponse = function(self, npcName, status)
+		local data = status or {}
 
-		local itemids = self:GetItemIds()
+		local itemIDs = self:GetItemIds()
 
-		local str = "I feel like we are bonding. How about we help each other again?\n\nREQUIRED ITEMS:"
+		local str = (
+			"I feel like we are bonding. How about we help each other " .. "again?\n\nREQUIRED ITEMS:"
+		)
 
-		for item, amt in pairs(itemids) do
-			local tmp = 0
-			if (dat and dat[item]) then tmp = dat[item] end
-			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		for item, amount in pairs(itemIDs) do
+			local currentAmount = 0
+			if data and data[item] then
+				currentAmount = data[item]
+			end
+			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
 		end
 
 		return str
 	end,
 	GetItemIds = function()
-		local itemids = {
-            ["drug_cigarette_4"] = 30,
+		local itemIDs = {
+			["drug_cigarette_4"] = 30,
 			["drug_cigarette_3"] = 30,
-            ["drug_tobacco_2"] = 30,
+			["drug_tobacco_2"] = 30,
 
 			["drug_mints"] = 200,
 			["drug_morphine"] = 10,
 		}
 
-		return itemids
+		return itemIDs
 	end,
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Jitters'"
-			local message = "Jitters here. Thanks again for your help. As a reward I have more medical equipment in stock. Come see me again soon!"
+			local message = (
+				"Jitters here. Thanks again for your help. As a reward I "
+				.. "have more medical equipment in stock. Come see me again "
+				.. "soon!"
+			)
 			ix.progression.Notify(character, name, message)
 		end)
-	end
+	end,
 })
 
 ix.progression.Register("jittersItemDelivery_medical3", {
@@ -98,44 +114,48 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 	description = "Jitters take a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = false,
-	progMap = map,
+	progMap = MAP,
 	vendorUnlocks = {
-		{npc = "'Jitters'", args = {"medic_bandage_3", nil, 10, "SELLANDBUY", 10, 1, 10}},
-		{npc = "'Jitters'", args = {"medic_medkit_4", nil, 10, "SELLANDBUY", 10, 1, 10}}
+		{ npc = "'Jitters'", args = { "medic_bandage_3", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Jitters'", args = { "medic_medkit_4", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
-	nextProgressions = {"jittersItemDelivery_medical4"},
-	BuildResponse = function(self, npcname, status)
-		local dat = status or {}
+	nextProgressions = { "jittersItemDelivery_medical4" },
+	BuildResponse = function(self, npcName, status)
+		local data = status or {}
 
-		local itemids = self:GetItemIds()
+		local itemIDs = self:GetItemIds()
 
 		local str = "Hello friend! How about we help each other again?\n\nREQUIRED ITEMS:"
 
-		for item, amt in pairs(itemids) do
-			local tmp = 0
-			if (dat and dat[item]) then tmp = dat[item] end
-			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		for item, amount in pairs(itemIDs) do
+			local currentAmount = 0
+			if data and data[item] then
+				currentAmount = data[item]
+			end
+			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
 		end
 
 		return str
 	end,
 	GetItemIds = function()
-		local itemids = {
-            ["drug_cigarette_5"] = 30,
+		local itemIDs = {
+			["drug_cigarette_5"] = 30,
 			["drug_cigarette_6"] = 30,
 
 			["drug_marijuana"] = 10,
 		}
 
-		return itemids
+		return itemIDs
 	end,
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Jitters'"
-			local message = "Jitters here. I have a stock of army syrette kits and new bandages for you."
+			local message = (
+				"Jitters here. I have a stock of army syrette kits and new " .. "bandages for you."
+			)
 			ix.progression.Notify(character, name, message)
 		end)
-	end
+	end,
 })
 
 ix.progression.Register("jittersItemDelivery_medical4", {
@@ -143,34 +163,36 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 	description = "Jitters take a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = false,
-	progMap = map,
+	progMap = MAP,
 	vendorUnlocks = {
-		{npc = "'Jitters'", args = {"medic_medkit_5", nil, 10, "SELLANDBUY", 10, 1, 10}},
-		{npc = "'Jitters'", args = {"medic_medkit_6", nil, 10, "SELLANDBUY", 10, 1, 10}},
-		{npc = "'Jitters'", args = {"medic_antirad_2", nil, 10, "SELLANDBUY", 10, 1, 10}}
+		{ npc = "'Jitters'", args = { "medic_medkit_5", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Jitters'", args = { "medic_medkit_6", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Jitters'", args = { "medic_antirad_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
 	},
-	BuildResponse = function(self, npcname, status)
-		local dat = status or {}
+	BuildResponse = function(self, npcName, status)
+		local data = status or {}
 
-		local itemids = self:GetItemIds()
+		local itemIDs = self:GetItemIds()
 
 		local str = "Hello friend! How about we help each other again?\n\nREQUIRED ITEMS:"
 
-		for item, amt in pairs(itemids) do
-			local tmp = 0
-			if (dat and dat[item]) then tmp = dat[item] end
-			str = str..string.format("\n%d %s", amt - tmp, ix.item.list[item].name)
+		for item, amount in pairs(itemIDs) do
+			local currentAmount = 0
+			if data and data[item] then
+				currentAmount = data[item]
+			end
+			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
 		end
 
 		return str
 	end,
 	GetItemIds = function()
-		local itemids = {
-            ["drug_cigar"] = 20,
+		local itemIDs = {
+			["drug_cigar"] = 20,
 			["drug_cocaine"] = 10,
 		}
 
-		return itemids
+		return itemIDs
 	end,
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -178,5 +200,5 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 			local message = "Jitters here. I have a stock of scientist stuff. Don't tell them!"
 			ix.progression.Notify(character, name, message)
 		end)
-	end
+	end,
 })

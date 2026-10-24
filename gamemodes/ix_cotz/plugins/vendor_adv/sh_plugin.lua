@@ -1,6 +1,7 @@
-
--- luacheck: globals VENDOR_BUY VENDOR_SELL VENDOR_BOTH VENDOR_WELCOME VENDOR_LEAVE VENDOR_NOTRADE VENDOR_PRICE
--- luacheck: globals VENDOR_STOCK VENDOR_MODE VENDOR_MAXSTOCK VENDOR_SELLANDBUY VENDOR_SELLONLY VENDOR_BUYONLY VENDOR_TEXT
+-- luacheck: globals VENDOR_BUY VENDOR_SELL VENDOR_BOTH VENDOR_WELCOME VENDOR_LEAVE VENDOR_NOTRADE
+-- VENDOR_PRICE
+-- luacheck: globals VENDOR_STOCK VENDOR_MODE VENDOR_MAXSTOCK VENDOR_SELLANDBUY VENDOR_SELLONLY
+-- VENDOR_BUYONLY VENDOR_TEXT
 
 local PLUGIN = PLUGIN
 
@@ -8,16 +9,17 @@ PLUGIN.name = "Vendors - Advanced"
 PLUGIN.author = "Chessnut - expanded by gumlefar"
 PLUGIN.description = "Adds NPC vendors that can sell things."
 
--- PLEASE NOTE: Requires the "dialogue" plugin present in the plugin folder, or this plugin will not function correctly
+-- PLEASE NOTE: Requires the "dialogue" plugin present in the plugin folder, or this plugin will not
+-- function correctly
 
 ix.config.Add("VendorStockMult", 10, "Multiplier for vendor stock.", nil, {
-	data = {min = 1, max = 100},
-	category = "vendor"
+	data = { min = 1, max = 100 },
+	category = "vendor",
 })
 
 CAMI.RegisterPrivilege({
 	Name = "Helix - Manage Vendors",
-	MinAccess = "admin"
+	MinAccess = "admin",
 })
 
 VENDOR_BUY = 1
@@ -45,7 +47,7 @@ VENDOR_SELLONLY = 2
 -- Only buy the item from the player.
 VENDOR_BUYONLY = 3
 
-if (SERVER) then
+if SERVER then
 	util.AddNetworkString("ixVendorAdvOpen")
 	util.AddNetworkString("ixVendorAdvClose")
 	util.AddNetworkString("ixVendorAdvTrade")
@@ -109,7 +111,7 @@ if (SERVER) then
 
 			local physObj = entity:GetPhysicsObject()
 
-			if (IsValid(physObj)) then
+			if IsValid(physObj) then
 				physObj:EnableMotion(false)
 				physObj:Sleep()
 			end
@@ -146,11 +148,11 @@ if (SERVER) then
 		local tradeData = vendor.items[itemID]
 		local char = client:GetCharacter()
 
-		if (!tradeData or !char) then
+		if not tradeData or not char then
 			return false
 		end
 
-		if (!char:HasMoney(tradeData[1] or 0)) then
+		if not char:HasMoney(tradeData[1] or 0) then
 			return false
 		end
 
@@ -158,16 +160,17 @@ if (SERVER) then
 	end
 
 	ix.log.AddType("vendorUse", function(client, ...)
-		local arg = {...}
+		local arg = { ... }
+
 		return string.format("%s used the '%s' vendor.", client:Name(), arg[1])
 	end)
 
 	net.Receive("ixVendorAdvClose", function(length, client)
 		local entity = client.ixVendorAdv
 
-		if (IsValid(entity)) then
+		if IsValid(entity) then
 			for k, v in ipairs(entity.receivers) do
-				if (v == client) then
+				if v == client then
 					table.remove(entity.receivers, k)
 
 					break
@@ -178,21 +181,21 @@ if (SERVER) then
 		end
 	end)
 
-	local function UpdateEditReceivers(receivers, key, value)
+	local function updateEditReceivers(receivers, key, value)
 		net.Start("ixVendorAdvEdit")
-			net.WriteString(key)
-			net.WriteType(value)
+		net.WriteString(key)
+		net.WriteType(value)
 		net.Send(receivers)
 	end
 
 	net.Receive("ixVendorAdvEdit", function(length, client)
-		if (!CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil)) then
+		if not CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) then
 			return
 		end
 
 		local entity = client.ixVendorAdv
 
-		if (!IsValid(entity)) then
+		if not IsValid(entity) then
 			return
 		end
 
@@ -200,72 +203,74 @@ if (SERVER) then
 		local data = net.ReadType()
 		local feedback = true
 
-		if (key == "name") then
+		if key == "name" then
 			entity:SetDisplayName(data)
-		elseif (key == "description") then
+		elseif key == "description" then
 			entity:SetDescription(data)
-		elseif (key == "dialogueid") then
+		elseif key == "dialogueid" then
 			entity:SetDialogueID(data)
-		elseif (key == "bubble") then
+		elseif key == "bubble" then
 			entity:SetNoBubble(data)
-		elseif (key == "mode") then
+		elseif key == "mode" then
 			local uniqueID = data[1]
 
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
 			entity.items[uniqueID][VENDOR_MODE] = data[2]
 
-			UpdateEditReceivers(entity.receivers, key, data)
-		elseif (key == "price") then
+			updateEditReceivers(entity.receivers, key, data)
+		elseif key == "price" then
 			local uniqueID = data[1]
 			data[2] = tonumber(data[2])
 
-			if (data[2]) then
+			if data[2] then
 				data[2] = math.Round(data[2])
 			end
 
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
 			entity.items[uniqueID][VENDOR_PRICE] = data[2]
 
-			UpdateEditReceivers(entity.receivers, key, data)
+			updateEditReceivers(entity.receivers, key, data)
 
 			data = uniqueID
-		elseif (key == "stockDisable") then
+		elseif key == "stockDisable" then
 			local uniqueID = data[1]
 
 			entity.items[data] = entity.items[uniqueID] or {}
 			entity.items[data][VENDOR_MAXSTOCK] = nil
 
-			UpdateEditReceivers(entity.receivers, key, data)
-		elseif (key == "stockMax") then
+			updateEditReceivers(entity.receivers, key, data)
+		elseif key == "stockMax" then
 			local uniqueID = data[1]
 			data[2] = math.max(math.Round(tonumber(data[2]) or 1), 1)
 
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
 			entity.items[uniqueID][VENDOR_MAXSTOCK] = data[2]
-			entity.items[uniqueID][VENDOR_STOCK] = math.Clamp(entity.items[uniqueID][VENDOR_STOCK] or data[2], 1, data[2])
+			entity.items[uniqueID][VENDOR_STOCK] =
+				math.Clamp(entity.items[uniqueID][VENDOR_STOCK] or data[2], 1, data[2])
 
 			data[3] = entity.items[uniqueID][VENDOR_STOCK]
 
-			UpdateEditReceivers(entity.receivers, key, data)
+			updateEditReceivers(entity.receivers, key, data)
 
 			data = uniqueID
-		elseif (key == "stock") then
+		elseif key == "stock" then
 			local uniqueID = data[1]
 
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
 
-			if (!entity.items[uniqueID][VENDOR_MAXSTOCK]) then
+			if not entity.items[uniqueID][VENDOR_MAXSTOCK] then
 				data[2] = math.max(math.Round(tonumber(data[2]) or 0), 0)
 				entity.items[uniqueID][VENDOR_MAXSTOCK] = data[2]
 			end
 
-			data[2] = math.Clamp(math.Round(tonumber(data[2]) or 0), 0, entity.items[uniqueID][VENDOR_MAXSTOCK])
+			data[2] =
+				math.Clamp(math.Round(tonumber(data[2]) or 0), 0, entity.items[uniqueID][VENDOR_MAXSTOCK])
 			entity.items[uniqueID][VENDOR_STOCK] = data[2]
 
-			UpdateEditReceivers(entity.receivers, key, data)
+			updateEditReceivers(entity.receivers, key, data)
 
 			data = uniqueID
-		elseif (key == "stockInterval") then
+		elseif key == "stockInterval" then
 			local uniqueID = data[1]
 
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
@@ -273,8 +278,8 @@ if (SERVER) then
 			data[2] = math.max(tonumber(data[2]) or 0, 0.1)
 			entity.items[uniqueID][VENDOR_RESTOCK_INTERVAL] = data[2]
 
-			UpdateEditReceivers(entity.receivers, key, data)
-		elseif (key == "stockAmount") then
+			updateEditReceivers(entity.receivers, key, data)
+		elseif key == "stockAmount" then
 			local uniqueID = data[1]
 
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
@@ -282,84 +287,83 @@ if (SERVER) then
 			data[2] = math.max(tonumber(data[2]) or 0, 0)
 			entity.items[uniqueID][VENDOR_RESTOCK_AMOUNT] = data[2]
 
-			UpdateEditReceivers(entity.receivers, key, data)
-
-		elseif (key == "faction") then
+			updateEditReceivers(entity.receivers, key, data)
+		elseif key == "faction" then
 			local faction = ix.faction.teams[data]
 
-			if (faction) then
-				entity.factions[data] = !entity.factions[data]
+			if faction then
+				entity.factions[data] = not entity.factions[data]
 
-				if (!entity.factions[data]) then
+				if not entity.factions[data] then
 					entity.factions[data] = nil
 				end
 			end
 
 			local uniqueID = data
-			data = {uniqueID, entity.factions[uniqueID]}
-		elseif (key == "class") then
+			data = { uniqueID, entity.factions[uniqueID] }
+		elseif key == "class" then
 			local class
 
 			for _, v in ipairs(ix.class.list) do
-				if (v.uniqueID == data) then
+				if v.uniqueID == data then
 					class = v
 
 					break
 				end
 			end
 
-			if (class) then
-				entity.classes[data] = !entity.classes[data]
+			if class then
+				entity.classes[data] = not entity.classes[data]
 
-				if (!entity.classes[data]) then
+				if not entity.classes[data] then
 					entity.classes[data] = nil
 				end
 			end
 
 			local uniqueID = data
-			data = {uniqueID, entity.classes[uniqueID]}
-		elseif (key == "model") then
+			data = { uniqueID, entity.classes[uniqueID] }
+		elseif key == "model" then
 			entity:SetModel(data)
 			entity:SetSolid(SOLID_BBOX)
 			entity:PhysicsInit(SOLID_BBOX)
 			entity:SetAnim()
-		elseif (key == "useMoney") then
-			if (entity.money) then
+		elseif key == "useMoney" then
+			if entity.money then
 				entity:SetMoney()
 			else
 				entity:SetMoney(0)
 			end
-		elseif (key == "money") then
+		elseif key == "money" then
 			data = math.Round(math.abs(tonumber(data) or 0))
 
 			entity:SetMoney(data)
 			feedback = false
-		elseif (key == "scale") then
+		elseif key == "scale" then
 			data = tonumber(data) or 0.5
 
 			entity.scale = data
 
-			UpdateEditReceivers(entity.receivers, key, data)
-		elseif (key == "soundgroup") then
+			updateEditReceivers(entity.receivers, key, data)
+		elseif key == "soundgroup" then
 			entity:SetSoundGroup(data)
-		elseif (key == "animgroup") then
+		elseif key == "animgroup" then
 			entity:SetAnimGroupId(data)
 		end
 
 		PLUGIN:SaveData()
 
-		if (feedback) then
+		if feedback then
 			local receivers = {}
 
 			for _, v in ipairs(entity.receivers) do
-				if (CAMI.PlayerHasAccess(v, "Helix - Manage Vendors", nil)) then
+				if CAMI.PlayerHasAccess(v, "Helix - Manage Vendors", nil) then
 					receivers[#receivers + 1] = v
 				end
 			end
 
 			net.Start("ixVendorAdvEditFinish")
-				net.WriteString(key)
-				net.WriteType(data)
+			net.WriteString(key)
+			net.WriteType(data)
 			net.Send(receivers)
 		end
 	end)
@@ -367,15 +371,15 @@ if (SERVER) then
 	net.Receive("ixVendorAdvTemplate", function(length, client)
 		local entity = client.ixVendorAdv
 
-		local templatename = net.ReadString()
+		local templateName = net.ReadString()
 
-		if (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil)) then
-			entity:LoadTemplate(templatename)
+		if CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) then
+			entity:LoadTemplate(templateName)
 		end
 	end)
 
 	net.Receive("ixVendorAdvTrade", function(length, client)
-		if ((client.ixVendorAdvTry or 0) < CurTime()) then
+		if (client.ixVendorAdvTry or 0) < CurTime() then
 			client.ixVendorAdvTry = CurTime() + 0.5
 		else
 			return client:NotifyLocalized("vendorBuyCooldown")
@@ -383,31 +387,38 @@ if (SERVER) then
 
 		local entity = client.ixVendorAdv
 		local character = client:GetCharacter()
-		if (not character or not IsValid(entity) or not entity:CanAccess(client)) then return end
+		if not character or not IsValid(entity) or not entity:CanAccess(client) then
+			return
+		end
 		local isSherpaClient = character:HasSherpaVendor(entity:GetDisplayName())
 
-		if (!IsValid(entity) or client:GetPos():Distance(entity:GetPos()) > 192) then
+		if not IsValid(entity) or client:GetPos():Distance(entity:GetPos()) > 192 then
 			return
 		end
 
 		local uniqueID = net.ReadString()
-		local iteminstanceID = net.ReadUInt(32)
+		local itemInstanceID = net.ReadUInt(32)
 		local isSellingToVendor = net.ReadBool()
 
-		if (not isSellingToVendor and not ix.progression.CanBuyItem(character, entity:GetDisplayName(), uniqueID)) then return end
-
-		if (!entity.items[uniqueID] and !isSherpaClient and !entity:GetBuyAll()) then
+		if
+			not isSellingToVendor
+			and not ix.progression.CanBuyItem(character, entity:GetDisplayName(), uniqueID)
+		then
 			return
 		end
 
-		if (hook.Run("CanPlayerTradeWithVendor", client, entity, uniqueID, isSellingToVendor) != false) then
-			local price = entity:GetPrice(uniqueID, isSellingToVendor, iteminstanceID)
+		if not entity.items[uniqueID] and not isSherpaClient and not entity:GetBuyAll() then
+			return
+		end
 
-			if (isSellingToVendor) then
+		if hook.Run("CanPlayerTradeWithVendor", client, entity, uniqueID, isSellingToVendor) ~= false then
+			local price = entity:GetPrice(uniqueID, isSellingToVendor, itemInstanceID)
+
+			if isSellingToVendor then
 				local found = false
 				local name
 
-				if (!entity:HasMoney(price)) then
+				if not entity:HasMoney(price) then
 					return client:NotifyLocalized("vendorNoMoney")
 				end
 
@@ -417,10 +428,22 @@ if (SERVER) then
 				for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
 					local item = ix.item.instances[v:GetID()]
 					quantity = item:GetData("quantity", item.quantity or item.ammoAmount)
-					if (v.uniqueID == uniqueID and v:GetID() != 0 and item and v:GetID() == iteminstanceID and v:GetData("equip", false) == false) then
+					if
+						v.uniqueID == uniqueID
+						and v:GetID() ~= 0
+						and item
+						and v:GetID() == itemInstanceID
+						and v:GetData("equip", false) == false
+					then
 						timer.Simple(0.1, function()
-						client:SelectWeapon("ix_hands" or "tfa_nmrih_combatknife" or "tfa_nmrih_oldknife" or "tfa_nmrih_shankknife" or "tfa_nmrih_survivalknife") -- yuck 
-					  end)
+							client:SelectWeapon(
+								"ix_hands"
+									or "tfa_nmrih_combatknife"
+									or "tfa_nmrih_oldknife"
+									or "tfa_nmrih_shankknife"
+									or "tfa_nmrih_survivalknife"
+							) -- yuck
+						end)
 						invOkay = v:Remove()
 						found = true
 						name = L(v.name, client)
@@ -429,12 +452,13 @@ if (SERVER) then
 					end
 				end
 
-				if (!found) then
+				if not found then
 					return
 				end
 
-				if (!invOkay) then
+				if not invOkay then
 					client:GetCharacter():GetInventory():Sync(client, true)
+
 					return client:NotifyLocalized("tellAdmin", "trd!iid")
 				end
 
@@ -445,7 +469,6 @@ if (SERVER) then
 					client:NotifyLocalized("businessSell", name, ix.currency.Get(price))
 					entity:TakeMoney(price)
 				end
-				
 
 				local item = ix.item.list[uniqueID]
 				local itemMaxQuant
@@ -457,7 +480,7 @@ if (SERVER) then
 
 				if itemMaxQuant and quantity and (quantity < itemMaxQuant) then
 					-- item is not full quantity, vendor doesnt restock it :)
-				elseif item:GetData("durability", 100) != 100 or item:GetData("wear", 100) != 100 then
+				elseif item:GetData("durability", 100) ~= 100 or item:GetData("wear", 100) ~= 100 then
 					-- item is not pristine, its not added to the vendor stock :)
 				else
 					if isSherpaClient then
@@ -474,11 +497,11 @@ if (SERVER) then
 					stock = 0
 				end
 
-				if (stock and stock < 1) then
+				if stock and stock < 1 then
 					return client:NotifyLocalized("vendorNoStock")
 				end
 
-				if (!client:GetCharacter():HasMoney(price) and !isSherpaClient) then
+				if not client:GetCharacter():HasMoney(price) and not isSherpaClient then
 					return client:NotifyLocalized("canNotAfford")
 				end
 
@@ -491,15 +514,14 @@ if (SERVER) then
 					client:NotifyLocalized("businessPurchase", name, ix.currency.Get(price))
 					entity:GiveMoney(price)
 				end
-				
 
-				if (!client:GetCharacter():GetInventory():Add(uniqueID)) then
+				if not client:GetCharacter():GetInventory():Add(uniqueID) then
 					ix.item.Spawn(uniqueID, client)
 					client:NotifyLocalized("vendorItemDropped")
 				else
 					net.Start("ixVendorAdvAddItem")
-						net.WriteString(uniqueID)
-						net.WriteUInt(0,32)
+					net.WriteString(uniqueID)
+					net.WriteUInt(0, 32)
 					net.Send(client)
 				end
 
@@ -525,7 +547,7 @@ else
 	net.Receive("ixVendorAdvOpen", function()
 		local entity = net.ReadEntity()
 
-		if (!IsValid(entity)) then
+		if not IsValid(entity) then
 			return
 		end
 
@@ -541,7 +563,7 @@ else
 	net.Receive("ixVendorAdvEditor", function()
 		local entity = net.ReadEntity()
 
-		if (!IsValid(entity) or !CAMI.PlayerHasAccess(LocalPlayer(), "Helix - Manage Vendors", nil)) then
+		if not IsValid(entity) or not CAMI.PlayerHasAccess(LocalPlayer(), "Helix - Manage Vendors", nil) then
 			return
 		end
 
@@ -551,7 +573,7 @@ else
 		entity.messages = net.ReadTable()
 		entity.factions = net.ReadTable()
 		entity.classes = net.ReadTable()
-		entity.dialogueid = net.ReadString();
+		entity.dialogueid = net.ReadString()
 
 		ix.gui.vendor = vgui.Create("ixVendorAdv")
 		ix.gui.vendor:SetReadOnly(true)
@@ -562,41 +584,41 @@ else
 	net.Receive("ixVendorAdvEdit", function()
 		local panel = ix.gui.vendor
 
-		if (!IsValid(panel)) then
+		if not IsValid(panel) then
 			return
 		end
 
 		local entity = panel.entity
 
-		if (!IsValid(entity)) then
+		if not IsValid(entity) then
 			return
 		end
 
 		local key = net.ReadString()
 		local data = net.ReadType()
 
-		if (key == "mode") then
+		if key == "mode" then
 			entity.items[data[1]] = entity.items[data[1]] or {}
 			entity.items[data[1]][VENDOR_MODE] = data[2]
 
-			if (!data[2]) then
+			if not data[2] then
 				panel:removeItem(data[1])
-			elseif (data[2] == VENDOR_SELLANDBUY) then
+			elseif data[2] == VENDOR_SELLANDBUY then
 				panel:addItem(data[1])
 			else
 				panel:addItem(data[1], data[2] == VENDOR_SELLONLY and "selling" or "buying")
 				panel:removeItem(data[1], data[2] == VENDOR_SELLONLY and "buying" or "selling")
 			end
-		elseif (key == "price") then
+		elseif key == "price" then
 			local uniqueID = data[1]
 
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
 			entity.items[uniqueID][VENDOR_PRICE] = tonumber(data[2])
-		elseif (key == "stockDisable") then
-			if (entity.items[data]) then
+		elseif key == "stockDisable" then
+			if entity.items[data] then
 				entity.items[data][VENDOR_MAXSTOCK] = nil
 			end
-		elseif (key == "stockMax") then
+		elseif key == "stockMax" then
 			local uniqueID = data[1]
 			local value = data[2]
 			local current = data[3]
@@ -604,43 +626,39 @@ else
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
 			entity.items[uniqueID][VENDOR_MAXSTOCK] = value
 			entity.items[uniqueID][VENDOR_STOCK] = current
-		elseif (key == "stock") then
+		elseif key == "stock" then
 			local uniqueID = data[1]
 			local value = data[2]
 
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
 
-			if (!entity.items[uniqueID][VENDOR_MAXSTOCK]) then
+			if not entity.items[uniqueID][VENDOR_MAXSTOCK] then
 				entity.items[uniqueID][VENDOR_MAXSTOCK] = value
 			end
 
 			entity.items[uniqueID][VENDOR_STOCK] = value
-
-		elseif (key == "stockInterval") then
+		elseif key == "stockInterval" then
 			local uniqueID = data[1]
 			local value = data[2]
 
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
 
-			if(!entity.items[uniqueID][VENDOR_RESTOCK_AMOUNT]) then
+			if not entity.items[uniqueID][VENDOR_RESTOCK_AMOUNT] then
 				entity.items[uniqueID][VENDOR_RESTOCK_AMOUNT] = 1
 			end
 
 			entity.items[uniqueID][VENDOR_RESTOCK_INTERVAL] = value
-
-
-		elseif (key == "stockAmount") then
+		elseif key == "stockAmount" then
 			local uniqueID = data[1]
 			local value = data[2]
 
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
 
-			if(!entity.items[uniqueID][VENDOR_RESTOCK_INTERVAL]) then
+			if not entity.items[uniqueID][VENDOR_RESTOCK_INTERVAL] then
 				entity.items[uniqueID][VENDOR_RESTOCK_INTERVAL] = 1
 			end
 			entity.items[uniqueID][VENDOR_RESTOCK_AMOUNT] = value
-
-		elseif (key == "scale") then
+		elseif key == "scale" then
 			entity.scale = data
 		end
 	end)
@@ -649,78 +667,78 @@ else
 		local panel = ix.gui.vendor
 		local editor = ix.gui.vendorEditor
 
-		if (!IsValid(panel) or !IsValid(editor)) then
+		if not IsValid(panel) or not IsValid(editor) then
 			return
 		end
 
 		local entity = panel.entity
 
-		if (!IsValid(entity)) then
+		if not IsValid(entity) then
 			return
 		end
 
 		local key = net.ReadString()
 		local data = net.ReadType()
 
-		if (key == "name") then
+		if key == "name" then
 			editor.name:SetText(data)
-		elseif (key == "description") then
+		elseif key == "description" then
 			editor.description:SetText(data)
-		elseif (key == "dialogueid") then
+		elseif key == "dialogueid" then
 			editor.dialogueid:SetText(data)
-		elseif (key == "bubble") then
+		elseif key == "bubble" then
 			editor.bubble.noSend = true
 			editor.bubble:SetValue(data and 1 or 0)
-		elseif (key == "mode") then
-			if (data[2] == nil) then
-				editor.lines[data[1]]:SetValue(2, L"none")
+		elseif key == "mode" then
+			if data[2] == nil then
+				editor.lines[data[1]]:SetValue(2, L("none"))
 			else
 				editor.lines[data[1]]:SetValue(2, L(VENDOR_TEXT[data[2]]))
 			end
-		elseif (key == "price") then
+		elseif key == "price" then
 			editor.lines[data]:SetValue(3, entity:GetPrice(data))
-		elseif (key == "stockDisable") then
+		elseif key == "stockDisable" then
 			editor.lines[data]:SetValue(4, "-")
-		elseif (key == "stockMax" or key == "stock") then
+		elseif key == "stockMax" or key == "stock" then
 			local current, max = entity:GetStock(data)
 
-			editor.lines[data]:SetValue(4, current.."/"..max)
-		elseif (key == "stockInterval") then
-			local _, amt = entity:GetStockInterval(data[1])
+			editor.lines[data]:SetValue(4, current .. "/" .. max)
+		elseif key == "stockInterval" then
+			local _, amount = entity:GetStockInterval(data[1])
 
-			editor.lines[data[1]]:SetValue(5, data[2]..":"..amt)
-		elseif (key == "stockAmount") then
+			editor.lines[data[1]]:SetValue(5, data[2] .. ":" .. amt)
+		elseif key == "stockAmount" then
 			local interval, _ = entity:GetStockInterval(data[1])
 
-			editor.lines[data[1]]:SetValue(5, interval..":"..data[2])
-		elseif (key == "faction") then
+			editor.lines[data[1]]:SetValue(5, interval .. ":" .. data[2])
+		elseif key == "faction" then
 			local uniqueID = data[1]
 			local state = data[2]
 			local editPanel = ix.gui.editorFaction
 
 			entity.factions[uniqueID] = state
 
-			if (IsValid(editPanel) and IsValid(editPanel.factions[uniqueID])) then
+			if IsValid(editPanel) and IsValid(editPanel.factions[uniqueID]) then
 				editPanel.factions[uniqueID]:SetChecked(state == true)
 			end
-		elseif (key == "class") then
+		elseif key == "class" then
 			local uniqueID = data[1]
 			local state = data[2]
 			local editPanel = ix.gui.editorFaction
 
 			entity.classes[uniqueID] = state
 
-			if (IsValid(editPanel) and IsValid(editPanel.classes[uniqueID])) then
+			if IsValid(editPanel) and IsValid(editPanel.classes[uniqueID]) then
 				editPanel.classes[uniqueID]:SetChecked(state == true)
 			end
-		elseif (key == "model") then
+		elseif key == "model" then
 			editor.model:SetText(entity:GetModel())
-		elseif (key == "scale") then
+		elseif key == "scale" then
 			editor.sellScale.noSend = true
 			editor.sellScale:SetValue(data)
-		elseif (key == "soundgroup") then
+		elseif key == "soundgroup" then
 			entity:SetSoundGroup(data)
-		elseif (key == "animgroup") then
+		elseif key == "animgroup" then
 			entity:SetAnimGroupId(data)
 		end
 
@@ -730,27 +748,27 @@ else
 	net.Receive("ixVendorAdvMoney", function()
 		local panel = ix.gui.vendor
 
-		if (!IsValid(panel)) then
+		if not IsValid(panel) then
 			return
 		end
 
 		local entity = panel.entity
 
-		if (!IsValid(entity)) then
+		if not IsValid(entity) then
 			return
 		end
 
 		local value = net.ReadUInt(16)
-		value = value != -1 and value or nil
+		value = value ~= -1 and value or nil
 
 		entity.money = value
 
 		local editor = ix.gui.vendorEditor
 
-		if (IsValid(editor)) then
-			local useMoney = tonumber(value) != nil
+		if IsValid(editor) then
+			local useMoney = tonumber(value) ~= nil
 
-			editor.money:SetDisabled(!useMoney)
+			editor.money:SetDisabled(not useMoney)
 			editor.money:SetEnabled(useMoney)
 			editor.money:SetText(useMoney and value or "∞")
 		end
@@ -759,13 +777,13 @@ else
 	net.Receive("ixVendorAdvStock", function()
 		local panel = ix.gui.vendor
 
-		if (!IsValid(panel)) then
+		if not IsValid(panel) then
 			return
 		end
 
 		local entity = panel.entity
 
-		if (!IsValid(entity)) then
+		if not IsValid(entity) then
 			return
 		end
 
@@ -777,7 +795,7 @@ else
 
 		local editor = ix.gui.vendorEditor
 
-		if (IsValid(editor)) then
+		if IsValid(editor) then
 			local _, max = entity:GetStock(uniqueID)
 
 			editor.lines[uniqueID]:SetValue(4, amount .. "/" .. max)
@@ -786,10 +804,10 @@ else
 
 	net.Receive("ixVendorAdvAddItem", function()
 		local uniqueID = net.ReadString()
-		local iteminstanceID = net.ReadUInt(32)
+		local itemInstanceID = net.ReadUInt(32)
 
-		if (IsValid(ix.gui.vendor)) then
-			ix.gui.vendor:addItem(uniqueID, "buying", iteminstanceID)
+		if IsValid(ix.gui.vendor) then
+			ix.gui.vendor:addItem(uniqueID, "buying", itemInstanceID)
 		end
 	end)
 end
@@ -800,31 +818,41 @@ properties.Add("vendor_edit", {
 	MenuIcon = "icon16/user_edit.png",
 
 	Filter = function(self, entity, client)
-		if (!IsValid(entity)) then return false end
-		if (entity:GetClass() != "ix_vendor_adv") then return false end
-		if (!gamemode.Call( "CanProperty", client, "vendor_edit", entity)) then return false end
+		if not IsValid(entity) then
+			return false
+		end
+		if entity:GetClass() ~= "ix_vendor_adv" then
+			return false
+		end
+		if not gamemode.Call("CanProperty", client, "vendor_edit", entity) then
+			return false
+		end
 
 		return CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil)
 	end,
 
 	Action = function(self, entity)
 		self:MsgStart()
-			net.WriteEntity(entity)
+		net.WriteEntity(entity)
 		self:MsgEnd()
 	end,
 
 	Receive = function(self, length, client)
 		local entity = net.ReadEntity()
 
-		if (!IsValid(entity)) then return end
-		if (!self:Filter(entity, client)) then return end
+		if not IsValid(entity) then
+			return
+		end
+		if not self:Filter(entity, client) then
+			return
+		end
 
 		entity.receivers[#entity.receivers + 1] = client
 
 		local itemsTable = {}
 
 		for k, v in pairs(entity.items) do
-			if (!table.IsEmpty(v)) then
+			if not table.IsEmpty(v) then
 				itemsTable[k] = v
 			end
 		end
@@ -832,21 +860,21 @@ properties.Add("vendor_edit", {
 		client.ixVendorAdv = entity
 
 		net.Start("ixVendorAdvEditor")
-			net.WriteEntity(entity)
-			net.WriteUInt(entity.money or 0, 16)
-			net.WriteTable(itemsTable)
-			net.WriteFloat(entity.scale or 0.5)
-			net.WriteTable(entity.messages)
-			net.WriteTable(entity.factions)
-			net.WriteTable(entity.classes)
-			net.WriteString(entity.dialogueid)
+		net.WriteEntity(entity)
+		net.WriteUInt(entity.money or 0, 16)
+		net.WriteTable(itemsTable)
+		net.WriteFloat(entity.scale or 0.5)
+		net.WriteTable(entity.messages)
+		net.WriteTable(entity.factions)
+		net.WriteTable(entity.classes)
+		net.WriteString(entity.dialogueid)
 		net.Send(client)
-	end
+	end,
 })
 
 if SERVER then
 	ix.log.AddType("vendorTraded", function(client, ...)
-		local arg = {...}
+		local arg = { ... }
 		local isSell = arg[1]
 		local itemName = arg[2]
 		local vendorName = arg[3]
@@ -857,8 +885,14 @@ if SERVER then
 			return Format("%s bought '%s' from vendor %s.", client:Name(), itemName, vendorName)
 		end
 	end)
-	
+
 	function PLUGIN:CharacterVendorTraded(client, entity, uniqueID, isSellingToVendor)
-		ix.log.Add(client, "vendorTraded", isSellingToVendor, ix.item.list[uniqueID]:GetName(), entity:GetDisplayName())
+		ix.log.Add(
+			client,
+			"vendorTraded",
+			isSellingToVendor,
+			ix.item.list[uniqueID]:GetName(),
+			entity:GetDisplayName()
+		)
 	end
 end

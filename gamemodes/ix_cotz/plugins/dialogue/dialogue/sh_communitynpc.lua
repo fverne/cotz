@@ -12,7 +12,7 @@ DIALOGUE.name = "Community NPC"
 DIALOGUE.addTopic("GREETING", {
 	response = "Me love cheese!",
 	options = {
-		"TradeTopic", 
+		"TradeTopic",
 		-- "HealTopic",
 		-- "JoinArena",
 		-- "TutorialTopic",
@@ -20,13 +20,14 @@ DIALOGUE.addTopic("GREETING", {
 		-- "ChangeSuitVariant",
 		-- "AboutWorkTopic",
 		-- "GetTaskByDifficulty",
-		"GOODBYE"
+		"GOODBYE",
 	},
 	preCallback = function(self, client, target)
 		-- Only needed if NPC offers tasks
 		-- 4th argument is the categories to grab tasks from
 		-- 5th argument is the amount of tasks to grab
-		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkillgroupeasy"}, 4)
+		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkillgroupeasy"},
+		-- 4)
 
 		-- alternative npc task giving by difficulty
 		-- if (SERVER) then
@@ -34,19 +35,19 @@ DIALOGUE.addTopic("GREETING", {
 		-- 		local possibleJobs = {}
 		-- 		possibleJobs["easy"] = {"item_part_NPC_easy"}
 		-- 		possibleJobs["medium"] = {"item_part_NPC_medium"}
-		-- 		possibleJobs["hard"] = {"item_part_NPC_hard"}			
-	
+		-- 		possibleJobs["hard"] = {"item_part_NPC_hard"}
+
 		-- 		target:SetNetVar("possibleJobs", possibleJobs)
 		-- 	end
 		-- end
-	end
+	end,
 })
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
 	response = "Yes yes!",
 	options = {
-		"TradeTopic", 
+		"TradeTopic",
 		-- "HealTopic",
 		-- "JoinArena",
 		-- "TutorialTopic",
@@ -54,24 +55,20 @@ DIALOGUE.addTopic("BackTopic", {
 		-- "ChangeSuitVariant",
 		-- "AboutWorkTopic",
 		-- "GetTaskByDifficulty",
-		"GOODBYE"
-	} --Should be identical to GREETING's options
+		"GOODBYE",
+	}, -- Should be identical to GREETING's options
 })
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "** You take your leave **",
-	response = "You come back soon!"
+	response = "You come back soon!",
 })
-
-----------------------------------------------------------------
-----------------------START-TRADER-START------------------------
-----------------------------------------------------------------
 
 DIALOGUE.addTopic("TradeTopic", {
 	statement = "Want to trade?",
 	response = "Oooooooo, shinyyyyyyy!",
 	postCallback = function(self, client, target)
-		if (SERVER) then
+		if SERVER then
 			local character = client:GetCharacter()
 
 			target.receivers[#target.receivers + 1] = client
@@ -80,8 +77,11 @@ DIALOGUE.addTopic("TradeTopic", {
 
 			-- Only send what is needed.
 			for k, v in pairs(target.items) do
-				if (!table.IsEmpty(v) and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])) then
-					if (ix.progression.CanBuyItem(character, target:GetDisplayName(), k)) then
+				if
+					not table.IsEmpty(v)
+					and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])
+				then
+					if ix.progression.CanBuyItem(character, target:GetDisplayName(), k) then
 						items[k] = v
 					end
 				end
@@ -92,15 +92,15 @@ DIALOGUE.addTopic("TradeTopic", {
 			client.ixVendorAdv = target
 
 			-- force sync to prevent outdated inventories while buying/selling
-			if (character) then
+			if character then
 				character:GetInventory():Sync(client, true)
 			end
 
 			net.Start("ixVendorAdvOpen")
-				net.WriteEntity(target)
-				net.WriteUInt(target.money or 0, 16)
-				net.WriteTable(items)
-				net.WriteFloat(target.scale or 0.5)
+			net.WriteEntity(target)
+			net.WriteUInt(target.money or 0, 16)
+			net.WriteTable(items)
+			net.WriteFloat(target.scale or 0.5)
 			net.Send(client)
 
 			ix.log.Add(client, "vendorUse", target:GetDisplayName())
@@ -108,21 +108,17 @@ DIALOGUE.addTopic("TradeTopic", {
 	end,
 	options = {
 		"BackTopic",
-	}
+	},
 })
-
-----------------------------------------------------------------
-------------------------END-TRADER-END--------------------------
-----------------------------------------------------------------
 
 DIALOGUE.addTopic("StartBarter", {
 	statement = "** Read the list of barters **",
 	response = "",
 	options = {
-		"BackTopic"
+		"BackTopic",
 	},
 	preCallback = function(self, client, target)
-		if( CLIENT ) then
+		if CLIENT then
 			local barters = ix.npcbarter.GetActiveBartersForNPC(client:GetCharacter(), "'Spicy Lemon'")
 
 			if #barters <= 0 then
@@ -135,15 +131,21 @@ DIALOGUE.addTopic("StartBarter", {
 
 				for _, barter in pairs(barters) do
 					local barterTable = ix.npcbarter.barterdict["'Spicy Lemon'"][barter]
-					self.response = self.response.."\n    "..string.format(barterTable.description, ix.item.list[barterTable.barterItem[1]].name, barterTable.reqItem[2], ix.item.list[barterTable.reqItem[1]].name)
+					self.response = self.response
+						.. "\n    "
+						.. string.format(
+							barterTable.description,
+							ix.item.list[barterTable.barterItem[1]].name,
+							barterTable.reqItem[2],
+							ix.item.list[barterTable.reqItem[1]].name
+						)
 				end
 			end
-
 		end
 	end,
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
+		local dynamicOptions = {}
 
 		for _, barterid in pairs(ix.npcbarter.GetActiveBartersForNPC(client:GetCharacter(), "'Spicy Lemon'")) do
 			local barterstruct = ix.npcbarter.barterdict["'Spicy Lemon'"][barterid]
@@ -152,10 +154,21 @@ DIALOGUE.addTopic("StartBarter", {
 			local barterCnt = barterItem[2] or 1
 
 			-- for _, reqitem in pairs(barterstruct.reqItem) do
-				local reqitem = barterstruct.reqItem
-				local reqItemCnt = reqitem[2] or 1
+			local reqitem = barterstruct.reqItem
+			local reqItemCnt = reqitem[2] or 1
 
-				table.insert(dynopts, {statement = "I'd like "..barterCnt.."x "..ix.item.list[barterItem[1]].name.." for my "..reqItemCnt.."x "..ix.item.list[reqitem[1]].name, topicID = "StartBarter", dyndata = {npcname = "'Spicy Lemon'", identifier = barterid, reqitem = reqitem[1]}})
+			table.insert(dynamicOptions, {
+				statement = "I'd like "
+					.. barterCnt
+					.. "x "
+					.. ix.item.list[barterItem[1]].name
+					.. " for my "
+					.. reqItemCnt
+					.. "x "
+					.. ix.item.list[reqitem[1]].name,
+				topicID = "StartBarter",
+				dynamicData = { npcName = "'Spicy Lemon'", identifier = barterid, reqitem = reqitem[1] },
+			})
 			-- end
 		end
 
@@ -163,20 +176,16 @@ DIALOGUE.addTopic("StartBarter", {
 		-- statement : String shown to player
 		-- topicID : should be identical to addTopic id
 		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
 
+		return dynamicOptions
+	end,
+	ResolveDynamicOption = function(self, client, target, dynamicData)
 		if CLIENT then
-			ix.npcbarter.TryExecuteBarter(dyndata.npcname, dyndata.identifier, dyndata.reqitem)
+			ix.npcbarter.TryExecuteBarter(dynamicData.npcname, dynamicData.identifier, dynamicData.reqitem)
 		end
 
 		-- Return the next topicID
-		return "BackTopic", dyndata
+
+		return "BackTopic", dynamicData
 	end,
 })
-
-
-
-
-
