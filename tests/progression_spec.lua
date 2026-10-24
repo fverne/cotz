@@ -185,8 +185,10 @@ a.client.GetCharacter = function() return b end
 api.Notify(a, "NPC", "late")
 check(#messages == 1, "delayed message suppressed after switching characters")
 
--- Shared world setup is independent of character progress and remains idempotent.
-PLUGIN = {}
+-- World arrivals unlock once globally without sharing personal service access.
+local worldSave
+PLUGIN = {worldDataLoaded = true}
+function PLUGIN:SaveData() worldSave = copy(self.worldUnlocks) end
 dofile(base.."libs/sv_world.lua")
 currentMap = "rp_marsh_cs"
 local spawnCount, catalogCount = 0, 0
@@ -205,10 +207,26 @@ vendors[#vendors + 1] = {
 	end
 }
 PLUGIN:SetupProgressionWorld()
+check(spawnCount == 0, "NPC arrivals wait for global unlocks")
+for id, definition in pairs(api.definitions) do
+	if definition.worldNPC and definition.progMap == currentMap then
+		api.SetCompleted(a, id)
+		check(worldSave[id], "first personal completion saves global arrival")
+		check(not api.IsCompleted(b, id), "global arrival does not complete another character's milestone")
+		api.SetCompleted(b, id)
+	end
+end
 local spawned, stocked = spawnCount, catalogCount
 PLUGIN:SetupProgressionWorld()
 check(spawned == 3 and spawnCount == spawned, "world NPCs spawned once per map")
 check(stocked > 0 and catalogCount == stocked, "catalog setup is idempotent")
+PLUGIN.worldUnlocks = copy(worldSave)
+vendors = {}
+PLUGIN:SetupProgressionWorld()
+check(spawnCount == spawned + 3, "saved global arrivals restore missing NPCs")
+currentMap = api.definitions.computer_artifactTasks.progMap
+api.SetCompleted(a, "computer_artifactTasks")
+check(spawnCount == spawned + 4, "arrival on the second map is also global")
 
 -- Exercise every job-completion hook against the real registered line.
 ix.jobs = {list = {test = {categories = {}}}}
@@ -240,16 +258,23 @@ local savedPluginData = copy(oldGlobal)
 function PLUGIN:GetData() return savedPluginData end
 function PLUGIN:SetData(value) savedPluginData = value end
 local setupCalls = 0
+PLUGIN.worldDataLoaded = nil
 function PLUGIN:SetupProgressionWorld() setupCalls = setupCalls + 1 end
 dofile(base.."sh_plugin.lua")
 PLUGIN:LoadData()
+check(PLUGIN.worldUnlocks.oldTimerKillIntro, "legacy completion preserves global NPC arrival")
 PLUGIN:Think()
 check(setupCalls == 0, "world setup waits for saved vendors")
 PLUGIN:PostLoadData()
 check(setupCalls == 1, "world setup runs after saved vendors load")
 PLUGIN:SaveData()
 check(savedPluginData.version == 2 and savedPluginData.legacy.oldTimerKillIntro.completed, "global save archived")
+check(savedPluginData.worldUnlocks.oldTimerKillIntro, "world arrivals stored alongside legacy archive")
+PLUGIN.worldUnlocks.computer_artifactTasks = true
+PLUGIN:SaveData()
+PLUGIN.worldUnlocks = {}
 PLUGIN:LoadData()
+check(PLUGIN.worldUnlocks.computer_artifactTasks, "new global arrivals survive a save/load cycle")
 PLUGIN:SaveData()
 check(savedPluginData.legacy.legacy == nil, "archive does not nest on subsequent loads")
 a = character()
@@ -266,7 +291,8 @@ net = {
 	ReadTable = function() return {} end
 }
 netstream = {Hook = function() end}
-FindMetaTable = function() return {} end
+local playerMeta = {}
+FindMetaTable = function() return playerMeta end
 ix.config = {Add = function() end}
 dofile("gamemodes/ix_cotz/plugins/dialogue/sh_plugin.lua")
 local invoked = 0
@@ -281,9 +307,9 @@ readTarget = {
 	GetPos = function() return position end,
 	CanAccess = function() return true end
 }
-local function request(network, tree, topicID)
+local function request(network, tree, topicID, client)
 	readStrings = {tree, topicID}
-	networkHandlers[network](0, a.client)
+	networkHandlers[network](0, client or a.client)
 end
 for _, network in ipairs({"ixPreCallback", "ixPostCallback", "ixDialogueResolveDynamic", "ixPreDynamicCallback"}) do
 	request(network, "owlnpc", "OpenStorage")
@@ -312,6 +338,59 @@ position.DistToSqr = function() return 193 * 193 end
 request("ixPreDynamicCallback", "technpc", "ConfirmPaint")
 check(invoked == 2, "remote dialogue request rejected")
 position.DistToSqr = function() return 0 end
+
+-- Exercise real interaction methods while leaving unrelated GLua entity code unloaded.
+local vendorFile = assert(io.open("gamemodes/ix_cotz/plugins/vendor_adv/entities/entities/ix_vendor_adv.lua"))
+local vendorSource = vendorFile:read("*a")
+vendorFile:close()
+ENT = {}
+local compile = loadstring or load
+assert(compile(vendorSource:match("(function ENT:CanAccess.-)function ENT:GetStock")))()
+assert(compile(vendorSource:match("(function ENT:Use.-)function ENT:SetDialogueID")))()
+table.IsEmpty = function(value) return next(value) == nil end
+ix.faction = {indices = {[1] = {uniqueID = "stalker"}}}
+ix.class = {list = {}}
+hook.Run = function() end
+isentity = IsValid
+local dialogueTree
+net.Start = function() end
+net.WriteEntity = function() end
+net.WriteString = function(value) dialogueTree = value end
+net.Send = function() end
+local lockedCharacter = character()
+local client = lockedCharacter.client
+client.Team = function() return 1 end
+client.dialogue = playerMeta.dialogue
+client.Freeze = function() end
+local vendor = setmetatable({
+	dialogueid = "tradernpc", factions = {}, classes = {}, messages = {},
+	GetClass = function() return "ix_vendor_adv" end,
+	GetDisplayName = function() return "'Haggler'" end,
+	GetPos = function() return position end,
+}, {__index = ENT})
+check(vendor:CanTalkTo(client) and not vendor:CanAccess(client), "locked character can talk but cannot use services")
+vendor:Use(client)
+check(dialogueTree == "progressionlocked", "locked interaction opens limited dialogue")
+local lockedDialogue = {tree = {}}
+lockedDialogue.addTopic = function(id, data) lockedDialogue.tree[id] = data end
+DIALOGUE = lockedDialogue
+dofile("gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_progressionlocked.lua")
+DIALOGUE = nil
+check(#lockedDialogue.tree.GREETING.options == 2, "limited greeting offers introduction and goodbye")
+for _, entry in pairs(lockedDialogue.tree) do
+	check(not entry.preCallback and not entry.postCallback and not entry.IsDynamic,
+		"limited dialogue has no service callbacks")
+end
+readTarget = vendor
+ix.dialogue.list.tradernpc = {tree = {TradeTopic = topic}}
+request("ixPostCallback", "tradernpc", "TradeTopic", client)
+check(invoked == 2, "locked character cannot forge full dialogue callbacks")
+api.SetCompleted(lockedCharacter, "oldTimerKillIntro")
+check(vendor:CanAccess(client), "personal milestone grants service access")
+vendor:Use(client)
+check(dialogueTree == "tradernpc", "unlocked interaction opens normal dialogue")
+vendor.factions = {other = true}
+check(not vendor:CanTalkTo(client) and not vendor:CanAccess(client), "faction restrictions still apply to dialogue")
 
 -- Client API permits snapshots but does not expose mutation functions.
 ix.progression = nil

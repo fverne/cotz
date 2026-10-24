@@ -75,6 +75,10 @@ local playerMeta = FindMetaTable("Player")
 
 function playerMeta:dialogue(id, target)
 	if not isentity(target) then return end
+	if target:GetClass() == "ix_vendor_adv"
+		and not ix.progression.CanUseNPC(self:GetCharacter(), target:GetDisplayName()) then
+		id = "progressionlocked"
+	end
 
 	if (CLIENT) then
 		ix.gui.dialogue = vgui.Create("ixDialogue")

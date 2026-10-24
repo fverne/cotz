@@ -1,8 +1,21 @@
--- Catalog/placement setup is idempotent and independent of player completion.
+local progressionPlugin = PLUGIN
+
+function ix.progression.UnlockWorldNPC(progid)
+	local definition = ix.progression.definitions[progid]
+	if not definition or not definition.worldNPC then return end
+	progressionPlugin.worldUnlocks = progressionPlugin.worldUnlocks or {}
+	if progressionPlugin.worldUnlocks[progid] then return end
+	progressionPlugin.worldUnlocks[progid] = true
+	progressionPlugin:SaveData()
+	if progressionPlugin.worldDataLoaded then progressionPlugin:SetupProgressionWorld() end
+end
+
+-- World arrivals persist globally; service access remains character-owned.
 function PLUGIN:SetupProgressionWorld()
-	for _, definition in pairs(ix.progression.definitions) do
+	for progid, definition in pairs(ix.progression.definitions) do
 		local spawn = definition.worldNPC
-		if (spawn and definition.progMap == game.GetMap()) then
+		local unlocked = self.worldUnlocks and self.worldUnlocks[progid]
+		if (spawn and unlocked and definition.progMap == game.GetMap()) then
 			local template = ix.npctemplates.templates[spawn.template]
 			if (template and not ix.progression.GetNPCFromName(template.name)) then
 				ix.util.SpawnAdvVendor(spawn.template, spawn.pos, spawn.ang)
@@ -26,7 +39,7 @@ ix.command.Add("ProgressionGrant", {
 	arguments = {ix.type.character, ix.type.string},
 	OnRun = function(self, client, character, progid)
 		if (not ix.progression.definitions[progid]) then return "Unknown progression." end
-		-- Administrative grants restore access without replaying world effects or rewards.
+		-- Grants restore access and NPC arrivals without replaying personal rewards.
 		ix.progression.SetCompleted(character, progid)
 		character:Save()
 		return "Progression milestone granted."

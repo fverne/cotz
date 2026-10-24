@@ -1,6 +1,6 @@
 PLUGIN.name = "Progression"
 PLUGIN.author = "gumlefar"
-PLUGIN.desc = "Persistent individual character progression and personal NPC unlocks."
+PLUGIN.desc = "Persistent character progression with shared world unlocks and personal NPC services."
 
 ix.progression = ix.progression or {}
 ix.progression.definitions = ix.progression.definitions or {}
@@ -24,14 +24,21 @@ ix.util.Include("sh_jittersprog.lua")
 ix.util.Include("sh_eggheadprog.lua")
 ix.util.Include("sh_bossprog.lua")
 
--- Preserve the legacy save for rollback; it never seeds personal progress.
+-- Legacy completion restores world changes without seeding personal progress.
 function PLUGIN:LoadData()
 	local saved = self:GetData() or {}
 	self.legacyProgression = saved.version == 2 and saved.legacy or saved
+	self.worldUnlocks = saved.worldUnlocks or {}
+	for progid, definition in pairs(ix.progression.definitions) do
+		local legacy = self.legacyProgression and self.legacyProgression[progid]
+		if definition.worldNPC and istable(legacy) and legacy.completed then
+			self.worldUnlocks[progid] = true
+		end
+	end
 end
 
 function PLUGIN:SaveData()
-	self:SetData({version = 2, legacy = self.legacyProgression or {}})
+	self:SetData({version = 2, legacy = self.legacyProgression or {}, worldUnlocks = self.worldUnlocks or {}})
 end
 
 if (SERVER) then

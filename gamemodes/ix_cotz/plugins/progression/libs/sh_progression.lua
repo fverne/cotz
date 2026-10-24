@@ -112,6 +112,7 @@ if (SERVER) then
 			if (not record.lines[nextID].completed) then record.lines[nextID].active = true end
 		end
 		ix.progression.SetCharacterProgression(character, record)
+		if ix.progression.UnlockWorldNPC then ix.progression.UnlockWorldNPC(progid) end
 	end
 
 	function ix.progression.Notify(character, name, message)

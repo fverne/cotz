@@ -1,8 +1,9 @@
 # Character progression
 
-Progression is owned by a Helix **character**, not a Steam account or a map.
+Personal progression is owned by a Helix **character**, not a Steam account or a map.
 Requirements and thresholds retain their existing amounts. Different characters
-on the same account start independently.
+on the same account start independently. NPC arrivals are persistent global world
+unlocks triggered when any character completes the associated milestone.
 
 ## Storage and server transfers
 
@@ -23,15 +24,19 @@ Characters start with empty personal progression. Old global completion and
 contributor names are not imported into individual progress.
 
 The plugin save preserves the previous global table as
-`{version = 2, legacy = <previous save>}`. It does not use this archive for gameplay.
+`{version = 2, legacy = <previous save>, worldUnlocks = {...}}`. Legacy completion
+restores NPC arrivals only; it never grants personal progress or service access.
 Existing vendor inventories remain intact, but progression items are gated by the
 buyer's personal milestones even if they were already added by the old system.
 Missing progression catalog items are registered automatically without resetting
 existing stock. Stock and vendor money remain shared.
 
-The four NPCs previously spawned by completion are now placed once per map after
-saved vendors have loaded. They remain visible world entities; their dialogue,
-trade, and barter access is restricted by personal milestones.
+The four NPC arrivals unlock globally on the first character's completion and
+are placed once on their configured map after saved vendors have loaded. Global
+arrival flags survive restarts, and existing saved NPCs remain in place. Characters
+without the personal milestone can have a short introduction conversation with
+these NPCs. Full dialogue, trade, and barter require the character's own unlock.
+Faction and class restrictions still apply to conversations.
 
 Back up the database and server data directory before deploying. Rollback requires
 restoring that backup together with the previous addon version; the embedded
@@ -39,7 +44,8 @@ legacy archive alone is not a complete server backup.
 
 Admins can use `/ProgressionGrant <character> <progressionID>` to mark a milestone
 complete and activate its immediate successors. Grants do not give turn-in
-rewards or replay messages. Grant preceding story milestones as needed to restore
+rewards or replay messages. Grants also unlock any associated global NPC arrival.
+Grant preceding story milestones as needed to restore
 a particular character's desired starting point.
 
 ## Integration API
@@ -71,6 +77,7 @@ Before live rollout, verify with two clients in Garry's Mod:
 
 - One character's job completion and partial turn-ins leave the other unchanged.
 - Vendor catalogs, storage, painting, and NPC access follow personal milestones.
+- NPC arrival unlocks are shared; locked characters receive only limited dialogue.
 - Locked requests fail server-side, including repeated turn-ins.
 - PDA announcements and blowout/event warnings reach only eligible characters.
 - Switching characters, reconnecting, restarting, and transferring servers retain

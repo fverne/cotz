@@ -64,11 +64,16 @@ function ENT:Initialize()
 end
 
 function ENT:CanAccess(client)
-	if (not client:GetCharacter() or not ix.progression.CanUseNPC(client:GetCharacter(), self:GetDisplayName())) then return false end
+	return self:CanTalkTo(client)
+		and ix.progression.CanUseNPC(client:GetCharacter(), self:GetDisplayName())
+end
+
+function ENT:CanTalkTo(client)
+	if not client:GetCharacter() then return false end
 	local bAccess = false
 	local uniqueID = ix.faction.indices[client:Team()].uniqueID
 
-	if (self.factions and !table.IsEmpty(self.factions)) then
+	if (self.factions and not table.IsEmpty(self.factions)) then
 		if (self.factions[uniqueID]) then
 			bAccess = true
 		else
@@ -76,11 +81,11 @@ function ENT:CanAccess(client)
 		end
 	end
 
-	if (bAccess and self.classes and !table.IsEmpty(self.classes)) then
+	if (bAccess and self.classes and not table.IsEmpty(self.classes)) then
 		local class = ix.class.list[client:GetCharacter():GetClass()]
 		local classID = class and class.uniqueID
 
-		if (classID and !self.classes[classID]) then
+		if (classID and not self.classes[classID]) then
 			return false
 		end
 	end
@@ -216,7 +221,7 @@ if (SERVER) then
 	function ENT:Use(activator)
 		local character = activator:GetCharacter()
 
-		if (!self:CanAccess(activator) or hook.Run("CanPlayerUseVendor", activator) == false) then
+		if (not self:CanTalkTo(activator) or hook.Run("CanPlayerUseVendor", activator) == false) then
 			if (self.messages[VENDOR_NOTRADE]) then
 				activator:ChatPrint(self:GetDisplayName()..": "..self.messages[VENDOR_NOTRADE])
 			else
