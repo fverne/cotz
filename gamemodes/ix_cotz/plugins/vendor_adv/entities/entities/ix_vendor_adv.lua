@@ -436,26 +436,14 @@ function ENT:LoadTemplate(templateName)
 		local items = {}
 
 		if template.items then
-			local vendorMult = ix.config.Get("VendorStockMult")
-
 			for uniqueID, templateData in pairs(template.items) do
-				local data = table.Copy(templateData)
-				if data[2] ~= nil then
-					data[2] = data[2] * vendorMult
-				end
-
-				if data[4] ~= nil then
-					data[4] = data[4] * vendorMult
-				end
-
-				if data[6] ~= nil then
-					data[6] = data[6] * vendorMult
-				end
-
-				items[tostring(uniqueID)] = data
+				items[tostring(uniqueID)] = table.Copy(templateData)
 			end
 		end
 
+		if not template.sherpa then
+			ix.vendorStock.ApplyDefaults(items)
+		end
 		self.items = items
 		self.factions = template.factions or self.factions
 		self.classes = template.classes or self.classes
@@ -482,12 +470,13 @@ if SERVER then
 
 			self.items[uniqueID] = {
 				setPrice,
-				stock * ix.config.Get("VendorStockMult"),
+				stock,
 				TRADE_MODES[mode],
-				maxStock * ix.config.Get("VendorStockMult"),
+				maxStock,
 				restockInterval,
-				restockAmount * ix.config.Get("VendorStockMult"),
+				restockAmount,
 			}
+			ix.vendorStock.ApplyDefaults({[uniqueID] = self.items[uniqueID]})
 		end
 	end
 end

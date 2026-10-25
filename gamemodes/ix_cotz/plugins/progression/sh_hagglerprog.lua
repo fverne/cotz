@@ -7,9 +7,9 @@ ix.progression.Register("hagglerItemDelivery_1", {
 	defaultActive = true,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "fort12", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Haggler'", args = { "m1911", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Haggler'", args = { "brhp", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "fort12", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Haggler'", args = { "m1911", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Haggler'", args = { "brhp", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_11", "hagglerItemDelivery_12" },
 	BuildResponse = function(self, npcName, status, character)
@@ -65,8 +65,8 @@ ix.progression.Register("hagglerItemDelivery_11", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "lax410s", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Haggler'", args = { "sten", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "lax410s", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Haggler'", args = { "sten", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_111", "hagglerItemDelivery_112" },
 	BuildResponse = function(self, npcName, status, character)
@@ -118,7 +118,7 @@ ix.progression.Register("hagglerItemDelivery_111", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "lax410", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "lax410", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_1111" },
 	BuildResponse = function(self, npcName, status, character)
@@ -172,8 +172,8 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "swmodel29", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Haggler'", args = { "44magnum", nil, 150, "SELLANDBUY", 150, 1, 150 } },
+		{ npc = "'Haggler'", args = { "swmodel29", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Haggler'", args = { "44magnum", nil, 4, "SELLANDBUY", 4, 12, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -227,7 +227,7 @@ ix.progression.Register("hagglerItemDelivery_112", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "sterling", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "sterling", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -284,8 +284,8 @@ ix.progression.Register("hagglerItemDelivery_12", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "toz66", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Haggler'", args = { "toz66short", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "toz66", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Haggler'", args = { "toz66short", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_121", "hagglerItemDelivery_122" },
 	BuildResponse = function(self, npcName, status, character)
@@ -339,8 +339,8 @@ ix.progression.Register("hagglerItemDelivery_121", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "sks", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Haggler'", args = { "rugermini14", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "sks", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Haggler'", args = { "rugermini14", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_1211" },
 	BuildResponse = function(self, npcName, status, character)
@@ -397,7 +397,7 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "saigasemi", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "saigasemi", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_12111" },
 	BuildResponse = function(self, npcName, status, character)
@@ -451,8 +451,8 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "w9422357", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Haggler'", args = { "357magnum", nil, 15, "SELLANDBUY", 15, 1, 15 } },
+		{ npc = "'Haggler'", args = { "w9422357", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Haggler'", args = { "357magnum", nil, 4, "SELLANDBUY", 4, 12, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_121111" },
 	BuildResponse = function(self, npcName, status, character)
@@ -508,8 +508,8 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "g2500mag", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Haggler'", args = { "500magnum", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "g2contender500", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Haggler'", args = { "500magnum", nil, 4, "SELLANDBUY", 4, 12, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -564,8 +564,8 @@ ix.progression.Register("hagglerItemDelivery_122", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "kiparis", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Haggler'", args = { "kp31", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "kiparis", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Haggler'", args = { "kp31", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_1221" },
 	BuildResponse = function(self, npcName, status, character)
@@ -617,7 +617,7 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "mac11", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "mac11", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_12211" },
 	BuildResponse = function(self, npcName, status, character)
@@ -669,7 +669,7 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "m1911chic", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "m1911chic", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -723,8 +723,8 @@ ix.progression.Register("hagglerItemDelivery_2", {
 	defaultActive = true,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "toz34", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Haggler'", args = { "toz34short", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "toz34", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Haggler'", args = { "toz34short", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_21", "hagglerItemDelivery_22" },
 	BuildResponse = function(self, npcName, status, character)
@@ -775,7 +775,7 @@ ix.progression.Register("hagglerItemDelivery_21", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "sako85nato", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "sako85nato", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_211", "hagglerItemDelivery_212" },
 	BuildResponse = function(self, npcName, status, character)
@@ -827,7 +827,7 @@ ix.progression.Register("hagglerItemDelivery_211", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "c96carbine", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "c96carbine", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_2111" },
 	BuildResponse = function(self, npcName, status, character)
@@ -882,7 +882,7 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "ppsh", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "ppsh", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -935,7 +935,7 @@ ix.progression.Register("hagglerItemDelivery_212", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "toz194", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "toz194", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_2121" },
 	BuildResponse = function(self, npcName, status, character)
@@ -987,7 +987,7 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "m1887", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "m1887", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_21211" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1039,7 +1039,7 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "ithaca37", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "ithaca37", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -1092,8 +1092,8 @@ ix.progression.Register("hagglerItemDelivery_22", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "saigasemi545", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Haggler'", args = { "mp34", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "saigasemi545", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Haggler'", args = { "mp34", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_221", "hagglerItemDelivery_222" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1145,8 +1145,8 @@ ix.progression.Register("hagglerItemDelivery_221", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "sako85", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Haggler'", args = { "w1895", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "sako85", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Haggler'", args = { "w1895", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_2211" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1201,7 +1201,7 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "mosin", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "mosin", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_22111" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1253,7 +1253,7 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "svt40", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "svt40", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -1305,7 +1305,7 @@ ix.progression.Register("hagglerItemDelivery_222", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "mp40", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "mp40", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_2221" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1357,7 +1357,7 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "aks74u", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "aks74u", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "hagglerItemDelivery_22211" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1412,7 +1412,7 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "akm", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Haggler'", args = { "akm", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}

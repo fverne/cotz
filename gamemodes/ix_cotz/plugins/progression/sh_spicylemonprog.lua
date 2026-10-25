@@ -7,7 +7,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 	defaultActive = true,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "drug_mints", nil, 1, "SELLANDBUY", 1, 4, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "drug_mints", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Medical2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -58,7 +58,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "drug_caffeine", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Spicy Lemon'", args = { "drug_caffeine", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Medical3", "spicylemonItemDelivery_Food" },
 	BuildResponse = function(self, npcName, status, character)
@@ -109,7 +109,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "medic_psyheal_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Spicy Lemon'", args = { "medic_psyheal_1", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Medical4", "spicylemonItemDelivery_Vodka" },
 	BuildResponse = function(self, npcName, status, character)
@@ -164,7 +164,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical4", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "medic_antipsychotic_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Spicy Lemon'", args = { "medic_antipsychotic_1", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Medical5" },
 	BuildResponse = function(self, npcName, status, character)
@@ -217,7 +217,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "drug_painkillers", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Spicy Lemon'", args = { "drug_painkillers", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Medical6", "spicylemonItemDelivery_Spirits" },
 	BuildResponse = function(self, npcName, status, character)
@@ -272,7 +272,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical6", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "drug_adrenaline", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Spicy Lemon'", args = { "drug_adrenaline", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Medical7" },
 	BuildResponse = function(self, npcName, status, character)
@@ -329,7 +329,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "drug_morphine", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Spicy Lemon'", args = { "drug_morphine", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Brew" },
 	BuildResponse = function(self, npcName, status, character)
@@ -386,14 +386,14 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 	defaultActive = true,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "drink_bottlebeer_6", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_canwater", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_energydrink_4", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_energydrink_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Spicy Lemon'", args = { "food_cheese_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Spicy Lemon'", args = { "food_nuts_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Spicy Lemon'", args = { "food_can_tomato", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Spicy Lemon'", args = { "food_can_tushonka", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Spicy Lemon'", args = { "drink_bottlebeer_6", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "drink_canwater", nil, 4, "SELLANDBUY", 4, 12, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "drink_energydrink_4", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "drink_energydrink_2", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "food_cheese_2", nil, 4, "SELLANDBUY", 4, 12, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "food_nuts_2", nil, 4, "SELLANDBUY", 4, 12, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "food_can_tomato", nil, 4, "SELLANDBUY", 4, 12, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "food_can_tushonka", nil, 4, "SELLANDBUY", 4, 12, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Vodka" },
 	BuildResponse = function(self, npcName, status, character)
@@ -446,9 +446,9 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "drink_vodka_4", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_vodka_5", nil, 1, "SELLANDBUY", 1, 6, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_vodka_6", nil, 1, "SELLANDBUY", 1, 6, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "drink_vodka_4", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "drink_vodka_5", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "drink_vodka_6", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Spirits" },
 	BuildResponse = function(self, npcName, status, character)
@@ -502,10 +502,10 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "drink_spirit_1", nil, 1, "SELLANDBUY", 1, 6, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_spirit_2", nil, 1, "SELLANDBUY", 1, 6, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_spirit_3", nil, 1, "SELLANDBUY", 1, 6, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_wine", nil, 1, "SELLANDBUY", 1, 6, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "drink_spirit_1", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "drink_spirit_2", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "drink_spirit_3", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{ npc = "'Spicy Lemon'", args = { "drink_wine", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	nextProgressions = { "spicylemonItemDelivery_Brew" },
 	BuildResponse = function(self, npcName, status, character)
@@ -562,7 +562,7 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "miscaid_swampbrew", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Spicy Lemon'", args = { "miscaid_swampbrew", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}

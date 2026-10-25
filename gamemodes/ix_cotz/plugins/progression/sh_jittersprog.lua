@@ -7,8 +7,8 @@ ix.progression.Register("jittersItemDelivery_medical1", {
 	defaultActive = true,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Jitters'", args = { "medic_medkit_1", nil, 10, "SELLANDBUY", 10, 1, 10 } },
-		{ npc = "'Jitters'", args = { "medic_medkit_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Jitters'", args = { "medic_medkit_1", nil, 3, "SELLANDBUY", 3, 12, 1 } },
+		{ npc = "'Jitters'", args = { "medic_medkit_2", nil, 3, "SELLANDBUY", 3, 12, 1 } },
 	},
 	nextProgressions = { "jittersItemDelivery_medical2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -55,9 +55,9 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Jitters'", args = { "medic_bandage_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
-		{ npc = "'Jitters'", args = { "medic_medkit_3", nil, 10, "SELLANDBUY", 10, 1, 10 } },
-		{ npc = "'Jitters'", args = { "medic_antirad_1", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Jitters'", args = { "medic_bandage_2", nil, 3, "SELLANDBUY", 3, 12, 1 } },
+		{ npc = "'Jitters'", args = { "medic_medkit_3", nil, 3, "SELLANDBUY", 3, 12, 1 } },
+		{ npc = "'Jitters'", args = { "medic_antirad_1", nil, 3, "SELLANDBUY", 3, 12, 1 } },
 	},
 	nextProgressions = { "jittersItemDelivery_medical3" },
 	BuildResponse = function(self, npcName, status, character)
@@ -105,8 +105,8 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Jitters'", args = { "medic_bandage_3", nil, 10, "SELLANDBUY", 10, 1, 10 } },
-		{ npc = "'Jitters'", args = { "medic_medkit_4", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Jitters'", args = { "medic_bandage_3", nil, 3, "SELLANDBUY", 3, 12, 1 } },
+		{ npc = "'Jitters'", args = { "medic_medkit_4", nil, 3, "SELLANDBUY", 3, 12, 1 } },
 	},
 	nextProgressions = { "jittersItemDelivery_medical4" },
 	BuildResponse = function(self, npcName, status, character)
@@ -155,9 +155,9 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Jitters'", args = { "medic_medkit_5", nil, 10, "SELLANDBUY", 10, 1, 10 } },
-		{ npc = "'Jitters'", args = { "medic_medkit_6", nil, 10, "SELLANDBUY", 10, 1, 10 } },
-		{ npc = "'Jitters'", args = { "medic_antirad_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Jitters'", args = { "medic_medkit_5", nil, 3, "SELLANDBUY", 3, 12, 1 } },
+		{ npc = "'Jitters'", args = { "medic_medkit_6", nil, 3, "SELLANDBUY", 3, 12, 1 } },
+		{ npc = "'Jitters'", args = { "medic_antirad_2", nil, 3, "SELLANDBUY", 3, 12, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}

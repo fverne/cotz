@@ -7,7 +7,7 @@ ix.progression.Register("bossItemDelivery_1", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Boss'", args = { "suit_io7a", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Boss'", args = { "suit_io7a", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "bossItemDelivery_2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -18,8 +18,8 @@ ix.progression.Register("bossItemDelivery_1", {
 		local str = (
 			"I have a ton of stockpile sitting here collecting dust "
 			.. "in the research station. I'm willing to sell some to you "
-			.. "if you help me out. First off the bat is a mercenary suit.\n\nREQUIRED "
-			.. "ITEMS:"
+			.. "if you help me out. First is the IO7a, a basic vest and uniform. "
+			.. "It's budget protection, not an upgrade over the heavier suits Technut sells.\n\nREQUIRED ITEMS:"
 		)
 
 		for item, amount in pairs(itemIDs) do
@@ -56,7 +56,7 @@ ix.progression.Register("bossItemDelivery_2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Boss'", args = { "suit_ps5m", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Boss'", args = { "suit_ps5m", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "bossItemDelivery_3" },
 	BuildResponse = function(self, npcName, status, character)
@@ -81,8 +81,8 @@ ix.progression.Register("bossItemDelivery_2", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "small_parts", quantity = 4 },
-		{ pool = "common_parts", quantity = 4 },
+		{ pool = "small_parts", quantity = 10 },
+		{ pool = "common_parts", quantity = 12 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -104,7 +104,7 @@ ix.progression.Register("bossItemDelivery_3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Boss'", args = { "suit_berill", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Boss'", args = { "suit_berill", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "bossItemDelivery_4" },
 	BuildResponse = function(self, npcName, status, character)
@@ -129,9 +129,10 @@ ix.progression.Register("bossItemDelivery_3", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "rare_parts", quantity = 1 },
-		{ pool = "small_parts", quantity = 3 },
-		{ pool = "humanoid_parts", quantity = 2 },
+		{ pool = "rare_parts", quantity = 3 },
+		{ pool = "small_parts", quantity = 8 },
+		{ pool = "humanoid_parts", quantity = 5 },
+		{ pool = "common_meat", quantity = 13 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -153,7 +154,7 @@ ix.progression.Register("bossItemDelivery_4", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Boss'", args = { "suit_skat10", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Boss'", args = { "suit_skat10", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "bossItemDelivery_5" },
 	BuildResponse = function(self, npcName, status, character)
@@ -177,11 +178,11 @@ ix.progression.Register("bossItemDelivery_4", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "exotic_parts", quantity = 1 },
-		{ pool = "large_parts", quantity = 2 },
-		{ pool = "humanoid_parts", quantity = 2 },
-		{ pool = "common_meat", quantity = 3 },
-		{ pool = "common_hides", quantity = 1 },
+		{ pool = "exotic_parts", quantity = 5 },
+		{ pool = "large_parts", quantity = 6 },
+		{ pool = "humanoid_parts", quantity = 5 },
+		{ pool = "common_meat", quantity = 13 },
+		{ pool = "common_hides", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -203,7 +204,7 @@ ix.progression.Register("bossItemDelivery_5", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Boss'", args = { "suit_skat9", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Boss'", args = { "suit_skat9", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "bossItemDelivery_6" },
 	BuildResponse = function(self, npcName, status, character)
@@ -227,12 +228,12 @@ ix.progression.Register("bossItemDelivery_5", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "elite_parts", quantity = 1 },
-		{ pool = "chimera_part", quantity = 1 },
-		{ pool = "exotic_parts", quantity = 2 },
-		{ pool = "large_parts", quantity = 2 },
-		{ pool = "common_meat", quantity = 4 },
-		{ pool = "common_hides", quantity = 1 },
+		{ pool = "elite_parts", quantity = 3 },
+		{ pool = "chimera_part", quantity = 5 },
+		{ pool = "exotic_parts", quantity = 5 },
+		{ pool = "large_parts", quantity = 6 },
+		{ pool = "common_meat", quantity = 15 },
+		{ pool = "common_hides", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -254,8 +255,8 @@ ix.progression.Register("bossItemDelivery_6", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Boss'", args = { "suit_radsuit", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Boss'", args = { "headwear_rad", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Boss'", args = { "suit_radsuit", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Boss'", args = { "headwear_rad", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "bossItemDelivery_7" },
 	BuildResponse = function(self, npcName, status, character)
@@ -277,13 +278,13 @@ ix.progression.Register("bossItemDelivery_6", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "brains", quantity = 1 },
-		{ pool = "elite_parts", quantity = 1 },
-		{ pool = "rare_parts", quantity = 1 },
-		{ pool = "exotic_parts", quantity = 1 },
-		{ pool = "common_meat", quantity = 5 },
-		{ pool = "common_hides", quantity = 1 },
-		{ pool = "predator_hides", quantity = 1 },
+		{ pool = "brains", quantity = 2 },
+		{ pool = "elite_parts", quantity = 3 },
+		{ pool = "rare_parts", quantity = 3 },
+		{ pool = "exotic_parts", quantity = 5 },
+		{ pool = "common_meat", quantity = 16 },
+		{ pool = "common_hides", quantity = 3 },
+		{ pool = "predator_hides", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -305,8 +306,8 @@ ix.progression.Register("bossItemDelivery_7", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Boss'", args = { "suit_exoskeleton", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Boss'", args = { "headwear_spartan", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Boss'", args = { "suit_exoskeleton", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Boss'", args = { "headwear_spartan", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -327,14 +328,14 @@ ix.progression.Register("bossItemDelivery_7", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "elite_parts", quantity = 1 },
-		{ pool = "hellhound_part", quantity = 4 },
-		{ pool = "brains", quantity = 1 },
-		{ pool = "large_parts", quantity = 3 },
-		{ pool = "common_meat", quantity = 6 },
-		{ pool = "common_hides", quantity = 1 },
-		{ pool = "predator_hides", quantity = 1 },
-		{ pool = "elite_hides", quantity = 1 },
+		{ pool = "elite_parts", quantity = 4 },
+		{ pool = "hellhound_part", quantity = 12 },
+		{ pool = "brains", quantity = 2 },
+		{ pool = "large_parts", quantity = 8 },
+		{ pool = "common_meat", quantity = 18 },
+		{ pool = "common_hides", quantity = 3 },
+		{ pool = "predator_hides", quantity = 2 },
+		{ pool = "elite_hides", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()

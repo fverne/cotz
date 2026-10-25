@@ -7,8 +7,8 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "mp5", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Quartermaster'", args = { "mossberg500", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "mp5", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Quartermaster'", args = { "mossberg500", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_11", "quartermasterItemDelivery_12" },
 	BuildResponse = function(self, npcName, status, character)
@@ -65,9 +65,9 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "mateba", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Quartermaster'", args = { "ak74", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Quartermaster'", args = { "l85", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "mateba", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Quartermaster'", args = { "ak74", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Quartermaster'", args = { "l85", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_111", "quartermasterItemDelivery_112" },
 	BuildResponse = function(self, npcName, status, character)
@@ -123,8 +123,8 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "lax44", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Quartermaster'", args = { "g36c", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "lax44", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Quartermaster'", args = { "g36c", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_1111" },
 	BuildResponse = function(self, npcName, status, character)
@@ -183,7 +183,7 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "sg552", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "sg552", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -240,8 +240,8 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "aek971", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Quartermaster'", args = { "an94k", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "aek971", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Quartermaster'", args = { "an94k", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_1121" },
 	BuildResponse = function(self, npcName, status, character)
@@ -299,7 +299,7 @@ ix.progression.Register("quartermasterItemDelivery_1121", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "rk95", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "rk95", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_11211" },
 	BuildResponse = function(self, npcName, status, character)
@@ -359,7 +359,7 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "ak12", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "ak12", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -418,8 +418,8 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "m3super90", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Quartermaster'", args = { "fiveseven", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "m3super90", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Quartermaster'", args = { "fiveseven", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_121", "quartermasterItemDelivery_122" },
 	BuildResponse = function(self, npcName, status, character)
@@ -474,8 +474,8 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "p90", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Quartermaster'", args = { "ump45", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "p90", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Quartermaster'", args = { "ump45", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -530,7 +530,7 @@ ix.progression.Register("quartermasterItemDelivery_122", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "lr300", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "lr300", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_1221" },
 	BuildResponse = function(self, npcName, status, character)
@@ -587,7 +587,7 @@ ix.progression.Register("quartermasterItemDelivery_1221", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "m16a4", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "m16a4", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_12211" },
 	BuildResponse = function(self, npcName, status, character)
@@ -647,7 +647,7 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "fnfal", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "fnfal", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -705,7 +705,7 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "swr8", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "swr8", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_21", "quartermasterItemDelivery_22" },
 	BuildResponse = function(self, npcName, status, character)
@@ -758,8 +758,8 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "taurusragingbull", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Quartermaster'", args = { "mp9a1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "taurusragingbull", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Quartermaster'", args = { "mp9a1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_211", "quartermasterItemDelivery_212" },
 	BuildResponse = function(self, npcName, status, character)
@@ -814,8 +814,8 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "uzi", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Quartermaster'", args = { "pp1901vityaz", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "uzi", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Quartermaster'", args = { "pp1901vityaz", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -869,7 +869,7 @@ ix.progression.Register("quartermasterItemDelivery_212", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "famas", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "famas", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_2121" },
 	BuildResponse = function(self, npcName, status, character)
@@ -925,7 +925,7 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "aug", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "aug", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -980,8 +980,8 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "rem870", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Quartermaster'", args = { "mr96", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "rem870ae", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Quartermaster'", args = { "mr96", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_221", "quartermasterItemDelivery_222" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1040,7 +1040,7 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "mp153", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "mp153", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -1096,7 +1096,7 @@ ix.progression.Register("quartermasterItemDelivery_222", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "sv98", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "sv98", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "quartermasterItemDelivery_2221" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1152,7 +1152,7 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "svd", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Quartermaster'", args = { "svd", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}

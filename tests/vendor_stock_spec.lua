@@ -264,4 +264,101 @@ check(
 	sentMessage == "ixVendorAdvClose" and recipient == buyerClient,
 	"switching closes only that client's shop"
 )
+ix.item.list.ammo = {isAmmo = true}
+ix.item.list.drink_bottlewater = {category = "Consumables"}
+ix.item.list.medic_bandage_1 = {category = "Aid"}
+ix.item.list.drug_adrenaline = {category = "Aid"}
+ix.item.list.rifle = {isWeapon = true}
+local policies = {
+	ammo = {4, 12},
+	drink_bottlewater = {4, 12},
+	medic_bandage_1 = {3, 12},
+	drug_adrenaline = {2, 12},
+	value_kerosene = {2, 12},
+	lowtiercookerfuel = {2, 12},
+	rifle = {1, 48},
+}
+local legacyItems = {trophy = {nil, nil, VENDOR_BUYONLY}}
+for uniqueID in pairs(policies) do
+	legacyItems[uniqueID] = {nil, 100, VENDOR_SELLANDBUY, 100, 0.5, 10}
+end
+ix.vendorStock.ApplyDefaults(legacyItems)
+for uniqueID, expected in pairs(policies) do
+	local data = legacyItems[uniqueID]
+	check(data[VENDOR_STOCK] == expected[1] and data[VENDOR_MAXSTOCK] == expected[1],
+		"saved catalog is capped for " .. uniqueID)
+	check(data[VENDOR_RESTOCK_INTERVAL] == expected[2] and data[VENDOR_RESTOCK_AMOUNT] == 1,
+		"saved catalog receives the correct refill policy for " .. uniqueID)
+end
+check(legacyItems.trophy[VENDOR_MAXSTOCK] == nil, "buy-only entries remain uncapped")
+legacyItems.rifle[VENDOR_STOCK] = 0
+ix.vendorStock.ApplyDefaults(legacyItems)
+check(legacyItems.rifle[VENDOR_STOCK] == 0, "catalog migration does not refill depleted stock")
+local limitedShop = vendor()
+limitedShop.items = legacyItems
+local shopper = character()
+for uniqueID, expected in pairs(policies) do
+	limitedShop.items[uniqueID][VENDOR_STOCK] = expected[1]
+end
+now = now + 47 * 3600
+check(limitedShop:GetStock("rifle", shopper) == 1, "equipment starts with one item")
+now = now + 47 * 3600
+limitedShop:TakeStock("rifle", 1, shopper)
+now = now + 3600
+check(limitedShop:GetStock("rifle", shopper) == 0, "full shelves cannot bank idle refill time")
+now = now + 47 * 3600 - 1
+check(limitedShop:GetStock("rifle", shopper) == 0, "equipment waits the full 48 hours")
+now = now + 1
+check(limitedShop:GetStock("rifle", shopper) == 1, "equipment refills one at 48 hours")
+limitedShop:TakeStock("ammo", 4, shopper)
+now = now + 12 * 3600 - 1
+check(limitedShop:GetStock("ammo", shopper) == 0, "consumables wait the full 12 hours")
+now = now + 1
+check(limitedShop:GetStock("ammo", shopper) == 1, "consumables refill only one at 12 hours")
+now = now + 120 * 3600
+check(limitedShop:GetStock("ammo", shopper) == 4, "offline refill respects the reduced cap")
+limitedShop:AddItemToList("rifle", nil, 100, "SELLANDBUY", 100, 1, 10)
+check(limitedShop.items.rifle[VENDOR_MAXSTOCK] == 1, "existing catalog entries are not overwritten")
+local addedShop = vendor()
+addedShop:AddItemToList("rifle", nil, 100, "SELLANDBUY", 100, 1, 10)
+check(addedShop.items.rifle[VENDOR_MAXSTOCK] == 1
+	and addedShop.items.rifle[VENDOR_RESTOCK_INTERVAL] == 48
+	and addedShop.items.rifle[VENDOR_RESTOCK_AMOUNT] == 1,
+	"new progression items use absolute limits despite legacy arguments")
+dofile(base .. "libs/sh_npctemplates.lua")
+local catalogEntries = 0
+for _, template in pairs(ix.npctemplates.templates) do
+	for uniqueID, data in pairs(template.items or {}) do
+		if data[VENDOR_MODE] ~= VENDOR_BUYONLY then
+			catalogEntries = catalogEntries + 1
+			local maximum = data[VENDOR_MAXSTOCK]
+			local interval = data[VENDOR_RESTOCK_INTERVAL]
+			check(data[VENDOR_STOCK] == maximum, "default stock starts full for " .. uniqueID)
+			check((maximum == 1 and interval == 48)
+				or (maximum >= 2 and maximum <= 4 and interval == 12),
+				"default entry follows a stock policy for " .. uniqueID)
+			check(data[VENDOR_RESTOCK_AMOUNT] == 1, "default entry replenishes one for " .. uniqueID)
+		end
+	end
+end
+check(catalogEntries > 0, "default sale entries were checked")
+ix.item.list["22lr"] = {isAmmo = true}
+ix.item.list["45acp"] = {isAmmo = true}
+ix.item.list["45acp41"] = {isAmmo = true}
+local templateShop = vendor()
+local templateMethods = {
+	"Model", "Skin", "NoBubble", "DisplayName", "Description", "BuyAll", "Sherpa",
+	"SoundGroup", "AnimGroupId", "IdleAnim",
+}
+for _, name in ipairs(templateMethods) do
+	templateShop["Set" .. name] = function() end
+	templateShop["Get" .. name] = function() end
+end
+templateShop:LoadTemplate("technpc")
+check(templateShop.items["22lr"][VENDOR_MAXSTOCK] == 4
+	and templateShop.items["22lr"][VENDOR_RESTOCK_AMOUNT] == 1,
+	"template loading does not multiply consumable stock")
+check(templateShop.items.ruger1022[VENDOR_MAXSTOCK] == 1
+	and templateShop.items.ruger1022[VENDOR_RESTOCK_INTERVAL] == 48,
+	"template loading enforces equipment limits")
 print(string.format("PASS: %d personal vendor stock checks", checks))

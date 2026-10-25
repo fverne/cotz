@@ -7,7 +7,7 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 	defaultActive = true,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "suit_mailjacket", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "suit_mailjacket", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Suit2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -56,10 +56,10 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "suit_trenchcoat_black", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "suit_trenchcoat_brown", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "suit_trenchcoat_green", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "suit_trenchcoat_tan", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "suit_trenchcoat_black", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "suit_trenchcoat_brown", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "suit_trenchcoat_green", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "suit_trenchcoat_tan", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Suit3" },
 	BuildResponse = function(self, npcName, status, character)
@@ -108,7 +108,7 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "suit_sunrise", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "suit_sunrise", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = {
 		"technutItemDelivery_SuitNBC",
@@ -163,7 +163,7 @@ ix.progression.Register("technutItemDelivery_SuitNBC", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "suit_nbc", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "suit_nbc", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -214,7 +214,7 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "suit_cs1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "suit_cs1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Suit5", "technutItemDelivery_Attachment1" },
 	BuildResponse = function(self, npcName, status, character)
@@ -266,7 +266,7 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "suit_wind", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "suit_wind", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Suit6", "technutItemDelivery_AttachmentFabric1" },
 	BuildResponse = function(self, npcName, status, character)
@@ -320,7 +320,7 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "suit_cs2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "suit_cs2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Suit7", "technutItemDelivery_AttachmentKevlar1" },
 	BuildResponse = function(self, npcName, status, character)
@@ -374,7 +374,7 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "suit_cs3", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "suit_cs3", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_AttachmentFrame1", "technutItemDelivery_AttachmentCarbon" },
 	BuildResponse = function(self, npcName, status, character)
@@ -473,9 +473,9 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "helm_steel_ger", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "helm_steel_rus", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "helm_steel_arab", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "helm_steel_ger", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "helm_steel_rus", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "helm_steel_arab", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Helmet2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -526,7 +526,7 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "headwear_cs1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "headwear_cs1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Helmet3" },
 	BuildResponse = function(self, npcName, status, character)
@@ -578,8 +578,8 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "helm_operator_rus_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "helm_operator_rus_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "helm_operator_rus_1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "helm_operator_rus_2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Helmet4" },
 	BuildResponse = function(self, npcName, status, character)
@@ -631,8 +631,8 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "headwear_cs2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "headwear_cs4", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "headwear_cs2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "headwear_cs4", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Helmet5" },
 	BuildResponse = function(self, npcName, status, character)
@@ -685,7 +685,7 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "helm_sphere08", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "helm_sphere08", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Helmet6" },
 	BuildResponse = function(self, npcName, status, character)
@@ -739,8 +739,8 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "helm_sphere12", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "headwear_psz12", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "helm_sphere12", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "headwear_psz12", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Helmet7" },
 	BuildResponse = function(self, npcName, status, character)
@@ -795,7 +795,7 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "helm_operator_nato", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "helm_operator_nato", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -850,8 +850,8 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 	defaultActive = true,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "mask_halfmask", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "mask_respirator", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "mask_halfmask", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "mask_respirator", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Mask2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -900,8 +900,8 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "mask_gp5", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "mask_eo20", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "mask_gp5", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "mask_eo20", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Mask3" },
 	BuildResponse = function(self, npcName, status, character)
@@ -951,8 +951,8 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "mask_pmk3", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "mask_xm40", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "mask_pmk3", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "mask_xm40", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Mask4" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1004,8 +1004,8 @@ ix.progression.Register("technutItemDelivery_Mask4", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "mask_m40", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "mask_m50", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "mask_m40", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "mask_m50", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -1054,8 +1054,8 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_steelplate_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "attachment_ceramicplate_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "attachment_steelplate_1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "attachment_ceramicplate_1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Attachment2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1106,8 +1106,8 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_steelplate_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "attachment_ceramicplate_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "attachment_steelplate_2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "attachment_ceramicplate_2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_Attachment3" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1160,8 +1160,8 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_steelplate_3", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Technut'", args = { "attachment_ceramicplate_3", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "attachment_steelplate_3", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Technut'", args = { "attachment_ceramicplate_3", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -1214,7 +1214,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_fabric_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "attachment_fabric_1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_AttachmentFabric2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1268,7 +1268,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_fabric_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "attachment_fabric_2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -1321,7 +1321,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_aluframe", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "attachment_aluframe", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_AttachmentFrame2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1376,7 +1376,7 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_steelframe", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "attachment_steelframe", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -1430,7 +1430,7 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_carbonfibre", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "attachment_carbonfibre", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -1483,7 +1483,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_kevlar_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "attachment_kevlar_1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "technutItemDelivery_AttachmentKevlar2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1539,7 +1539,7 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_kevlar_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Technut'", args = { "attachment_kevlar_2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}

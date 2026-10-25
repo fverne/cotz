@@ -465,7 +465,7 @@ def export(root, output, preview=False):
                 ["Activated by completion of (any)", "Incoming nextProgressions edges; one predecessor completion activates a step, subject to NPC access"],
                 ["Progression unlock coverage", "Declarative successors, NPC access, vendor items, world arrivals, and selected storage/painting/PDA gates; callbacks and external plugins are not exhaustively analyzed"],
                 ["Vendor stock scope", "Limited stock and restock clocks belong to each character. Another character's purchases do not reduce your supply. Vendor money remains shared."],
-                ["Vendor stock base values", "Initial stock, maximum stock, and restock amount in Progression unlocks are multiplied by VendorStockMult; restock intervals are in hours and are not multiplied. These are catalog settings, not live character balances."],
+                ["Vendor stock values", "Initial stock, maximum stock, and restock amount in Progression unlocks are absolute item counts; restock intervals are in real hours. These are catalog settings, not live character balances."],
                 ["Vendor stock persistence", "Per-character stock persists across reconnects and NPC respawns, keyed by map and NPC display name. Elapsed offline restocks are applied on opening/checking stock and capped at the maximum; zero interval or amount disables refill."],
                 ["Other columns", "Exact Lua attribute names; consult the linked source before interpreting effects"]]:
         append_safe(dictionary, row)

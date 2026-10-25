@@ -7,7 +7,7 @@ ix.progression.Register("muteItemDelivery_Binoc1", {
 	defaultActive = true,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Mute'", args = { "binoculars_2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Mute'", args = { "binoculars_2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = {
 		"muteItemDelivery_Binoc2",
@@ -59,7 +59,7 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Mute'", args = { "binoculars_1", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Mute'", args = { "binoculars_1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "muteItemDelivery_Binoc3", "muteItemDelivery_Broadcast" },
 	BuildResponse = function(self, npcName, status, character)
@@ -109,7 +109,7 @@ ix.progression.Register("muteItemDelivery_Binoc3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Mute'", args = { "binoculars_4", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Mute'", args = { "binoculars_4", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "muteItemDelivery_Binoc4" },
 	BuildResponse = function(self, npcName, status, character)
@@ -164,7 +164,7 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Mute'", args = { "binoculars_3", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Mute'", args = { "binoculars_3", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -219,7 +219,7 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Mute'", args = { "anomalydetector", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Mute'", args = { "anomalydetector", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "muteItemDelivery_Detector" },
 	BuildResponse = function(self, npcName, status, character)
@@ -270,7 +270,7 @@ ix.progression.Register("muteItemDelivery_Detector", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Mute'", args = { "detectorecho", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Mute'", args = { "detectorecho", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}

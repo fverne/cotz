@@ -7,7 +7,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 	defaultActive = true,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Old Timer'", args = { "knife2", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Old Timer'", args = { "knife2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "oldtimerItemDelivery_Knife2", "oldtimerItemDelivery_Hidestash1" },
 	BuildResponse = function(self, npcName, status, character)
@@ -59,7 +59,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Old Timer'", args = { "knife3", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Old Timer'", args = { "knife3", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "oldtimerItemDelivery_Knife3" },
 	BuildResponse = function(self, npcName, status, character)
@@ -113,7 +113,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Old Timer'", args = { "knife4", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Old Timer'", args = { "knife4", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -171,11 +171,11 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 	defaultActive = true,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Old Timer'", args = { "bat", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Old Timer'", args = { "fireaxe", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Old Timer'", args = { "fubar", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Old Timer'", args = { "hatchet", nil, 5, "SELLANDBUY", 5, 1, 5 } },
-		{ npc = "'Old Timer'", args = { "machete", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Old Timer'", args = { "bat", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Old Timer'", args = { "fireaxe", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Old Timer'", args = { "fubar", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Old Timer'", args = { "hatchet", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{ npc = "'Old Timer'", args = { "machete", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -225,7 +225,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Old Timer'", args = { "hidestasher_cleaningkit", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Old Timer'", args = { "hidestasher_cleaningkit", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "oldtimerItemDelivery_Hidestash2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -279,7 +279,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Old Timer'", args = { "hidestasher_shovel", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{ npc = "'Old Timer'", args = { "hidestasher_shovel", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}

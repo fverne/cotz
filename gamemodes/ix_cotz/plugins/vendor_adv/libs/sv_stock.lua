@@ -15,6 +15,7 @@ local function getLine(character, vendor, uniqueID)
 		line = { count = math.min(catalog[VENDOR_STOCK] or 0, maximum), updated = now }
 		data[key][uniqueID] = line
 	end
+	line.count = math.Clamp(line.count, 0, maximum)
 	local interval, amount = vendor:GetStockInterval(uniqueID)
 	local seconds = interval * SECONDS_PER_HOUR
 	if seconds > 0 and amount > 0 then
@@ -23,6 +24,10 @@ local function getLine(character, vendor, uniqueID)
 		line.updated = line.updated + periods * seconds
 	end
 	line.count = math.Clamp(line.count, 0, maximum)
+	if line.count == maximum then
+		-- Full shelves cannot bank a partial interval for an immediate post-purchase refill.
+		line.updated = now
+	end
 	character:SetData(DATA_KEY, data, true)
 
 	return line, maximum, data

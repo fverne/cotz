@@ -12,11 +12,6 @@ PLUGIN.description = "Adds NPC vendors that can sell things."
 -- PLEASE NOTE: Requires the "dialogue" plugin present in the plugin folder, or this plugin will not
 -- function correctly
 
-ix.config.Add("VendorStockMult", 10, "Multiplier for vendor stock.", nil, {
-	data = { min = 1, max = 100 },
-	category = "vendor",
-})
-
 CAMI.RegisterPrivilege({
 	Name = "Helix - Manage Vendors",
 	MinAccess = "admin",
@@ -46,6 +41,55 @@ VENDOR_SELLANDBUY = 1
 VENDOR_SELLONLY = 2
 -- Only buy the item from the player.
 VENDOR_BUYONLY = 3
+
+ix.vendorStock = ix.vendorStock or {}
+
+local CONSUMABLE_CATEGORIES = {
+	["Consumables"] = true,
+	["Aid"] = true,
+	["Cooked Meat"] = true,
+	["Cookable Meat"] = true,
+}
+local FREQUENT_DRINKS = {
+	drink_bottlewater = true,
+	drink_bottlewaterdirty = true,
+	drink_canwater = true,
+	drink_bottletea = true,
+}
+local FUEL_ITEMS = {value_kerosene = true, lowtiercookerfuel = true}
+
+function ix.vendorStock.GetPolicy(uniqueID)
+	local item = ix.item.list[uniqueID] or {}
+	local prefix = uniqueID:match("^([^_]+)_")
+	if item.isAmmo then
+		return 4, 12
+	end
+	if prefix == "food" or prefix == "meal" or FREQUENT_DRINKS[uniqueID] then
+		return 4, 12
+	end
+	if uniqueID:match("^medic_bandage_") or uniqueID:match("^medic_medkit_")
+		or uniqueID:match("^medic_antirad_") then
+		return 3, 12
+	end
+	if CONSUMABLE_CATEGORIES[item.category] or FUEL_ITEMS[uniqueID]
+		or prefix == "drug" or prefix == "medic" or prefix == "miscaid" or prefix == "drink" then
+		return 2, 12
+	end
+
+	return 1, 48
+end
+
+function ix.vendorStock.ApplyDefaults(items)
+	for uniqueID, data in pairs(items) do
+		if data[VENDOR_MODE] ~= VENDOR_BUYONLY then
+			local maximum, interval = ix.vendorStock.GetPolicy(uniqueID)
+			data[VENDOR_STOCK] = math.Clamp(data[VENDOR_STOCK] or maximum, 0, maximum)
+			data[VENDOR_MAXSTOCK] = maximum
+			data[VENDOR_RESTOCK_INTERVAL] = interval
+			data[VENDOR_RESTOCK_AMOUNT] = 1
+		end
+	end
+end
 
 if SERVER then
 	util.AddNetworkString("ixVendorAdvOpen")
@@ -156,6 +200,9 @@ if SERVER then
 			entity:SetIdleAnim(v.idleanim or "")
 			entity:SetBuyAll(v.buyall or false)
 			entity:SetSherpa(v.sherpa or false)
+			if not v.sherpa then
+				ix.vendorStock.ApplyDefaults(entity.items)
+			end
 		end
 	end
 

@@ -103,11 +103,11 @@ function ix.progression.Register(id, data) end
         self.assertIn("Global on first completion", {row[3] for row in unlocks})
         self.assertIn("Personal access and stock", {row[3] for row in unlocks})
         vendor = next(row for row in unlocks if row[2] == "Vendor catalog item")
-        self.assertIn("Initial stock (base): 5", vendor[7])
-        self.assertIn("Maximum stock (base): 5", vendor[7])
+        self.assertIn("Initial stock: 5", vendor[7])
+        self.assertIn("Maximum stock: 5", vendor[7])
         self.assertIn("Restock interval (hours): 1", vendor[7])
-        self.assertIn("Restock amount (base): 5", vendor[7])
-        self.assertIn("VendorStockMult", vendor[7])
+        self.assertIn("Restock amount: 5", vendor[7])
+        self.assertIn("Stock counts are absolute (no multiplier)", vendor[7])
         self.assertIn("Storage dialogue access", {row[2] for row in unlocks})
         self.assertIn("Full NPC dialogue and services", {row[2] for row in unlocks})
 
@@ -229,6 +229,20 @@ ix.progression.Register("delivery", {name = "Hardware", keyNpc = "Trader", progM
         self.assertGreater(costs[1, 'elite_meals'], costs[1, 'common_meals'])
         self.assertGreater(mutant_effort(root, 'chimera'), mutant_effort(root, 'dog'))
         self.assertGreater(mutant_effort(root, 'controller'), mutant_effort(root, 'flesh'))
+
+    def test_boss_suit_effort_continues_technut_without_overvaluing_io7a(self):
+        from progression_pacing import plan, GROWTH
+        root = Path(__file__).resolve().parents[3]
+        _, planned = plan(root)
+        self.assertLess(planned['bossItemDelivery_1']['effort'],
+                        planned['technutItemDelivery_Suit4']['effort'])
+        for boss, technut in (('bossItemDelivery_2', 'technutItemDelivery_Suit5'),
+                              ('bossItemDelivery_3', 'technutItemDelivery_Suit7')):
+            self.assertIn(technut, planned[boss]['parents'])
+            self.assertGreaterEqual(planned[boss]['effort'], planned[technut]['effort'] * GROWTH)
+        for number in range(3, 8):
+            self.assertGreater(planned[f'bossItemDelivery_{number}']['effort'],
+                               planned['technutItemDelivery_Suit7']['effort'])
 
     def test_slot_counts_grow_with_difficulty_and_continue_from_haggler_to_quartermaster(self):
         root = Path(__file__).resolve().parents[3]

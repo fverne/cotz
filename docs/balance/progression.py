@@ -360,15 +360,15 @@ def build_tabs(root, entities, tokenize, decode):
                 unlock("Full NPC dialogue and services", "Personal", npc, "",
                        details="Other characters receive limited dialogue; their own milestone is required.")
         for npc, args in step["vendor"]:
-            stock_fields = [("Initial stock (base)", 2), ("Maximum stock (base)", 4),
-                            ("Restock interval (hours)", 5), ("Restock amount (base)", 6)]
+            stock_fields = [("Initial stock", 2), ("Maximum stock", 4),
+                            ("Restock interval (hours)", 5), ("Restock amount", 6)]
             stock_details = []
             for label, index in stock_fields:
                 value = args[index] if index < len(args) else None
                 text = f"{value:g}" if isinstance(value, (int, float)) else "Unspecified"
                 stock_details.append(f"{label}: {text}")
             unlock("Vendor catalog item", "Personal access and stock", npc, args[0], item_name(args[0]),
-                   "; ".join(stock_details) + ". Stock counts use VendorStockMult. "
+                   "; ".join(stock_details) + ". Stock counts are absolute (no multiplier). "
                    "Stock and restock clocks belong to each character; vendor money is shared.")
         if step["world"]:
             world = step["world"]

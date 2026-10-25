@@ -55,6 +55,15 @@ rounded, actual modeled effort. Dependencies include successor links and NPC acc
 gates; Quartermaster's gear roots continue above Haggler's terminal branches.
 This balancing dependency does not add gameplay unlock requirements.
 
+Boss continues Technut's suit curve by equipment tier: the PS5M step costs at
+least 25% more modeled effort than Technut's Wind step, and Berill costs at least
+25% more than his final CS3 step. Later Boss steps grow from that baseline.
+The IO7a remains a cheap introductory unlock: its 0.13 ballistic, 0.19 rupture
+and 0.06 anomaly resistance do not justify a late-game requirement. Berill adds
+a fourth category before the five-to-eight-category SKAT and endgame requests.
+These are pacing dependencies only; players do not need to finish Technut's
+quests to activate Boss's existing quest chain. Existing saved requests stay fixed.
+
 Divide the target effort across categories, round quantities down with a minimum
 of one, then add units to the least-funded category until the target is reached.
 Rare loot and dangerous trophy hunts therefore request fewer units than plentiful
@@ -84,9 +93,9 @@ one per successor edge, reaching eight on Gearing Up 1.1.2.1.1 and 1.2.2.1.1.
 This affects requirements; activation links and NPC access gates are unchanged.
 Detector3 is the final detector upgrade and explicitly uses eight slots.
 
-The catalog contains 559 personal slots across 85 pools with 223 distinct candidate
+The catalog contains 560 personal slots across 85 pools with 223 distinct candidate
 item IDs. The distribution by slot count is: 20 one-slot deliveries, 20 two-slot,
-23 three-slot, 9 four-slot, 13 five-slot, 27 six-slot, 9 seven-slot, and 13 eight-slot.
+22 three-slot, 10 four-slot, 13 five-slot, 27 six-slot, 9 seven-slot, and 13 eight-slot.
 Current quantities and task thresholds are listed in [the pacing table](pacing.md).
 The catalog includes alternative branches, so its sum is not a mandatory playthrough
 cost. Category breadth remains one to eight slots; quantity tuning uses source effort.

@@ -183,8 +183,8 @@ the same account. NPC entities, catalog definitions, and vendor money remain sha
 
 Vendor entries in `Progression unlocks` show the initial stock, maximum stock,
 restock amount, and restock interval as labeled values in `Details`. Stock counts
-are base configuration values multiplied by `VendorStockMult`; intervals are in
-hours and are not multiplied. The workbook describes these settings, not a live
+are absolute item counts; intervals are in real hours. The old `VendorStockMult`
+setting no longer applies. The workbook describes these settings, not a live
 character's remaining stock.
 
 Stock persists across reconnects and NPC respawns, keyed by map and NPC display

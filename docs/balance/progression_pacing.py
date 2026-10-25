@@ -101,6 +101,10 @@ def plan(root):
     haggler_ends = {s['id'] for s in steps if s['id'].startswith('hagglerItemDelivery_') and not s['next']}
     for ident in ('quartermasterItemDelivery_1', 'quartermasterItemDelivery_2'):
         parents[ident].update(haggler_ends)
+    # IO7a is entry-level stock, not a successor to Technut's heavy suits.
+    # PS5M overlaps Wind; Berill starts the heavier equipment continuation.
+    parents['bossItemDelivery_2'].add('technutItemDelivery_Suit5')
+    parents['bossItemDelivery_3'].add('technutItemDelivery_Suit7')
     result = {}
 
     def visit(ident, visiting):

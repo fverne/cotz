@@ -7,7 +7,7 @@ ix.progression.Register("eggheadItemDelivery_Detector1", {
 	defaultActive = true,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Egghead'", args = { "detectorecho", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Egghead'", args = { "detectorecho", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = {
 		"eggheadItemDelivery_Detector2",
@@ -54,7 +54,7 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 	keyNpc = "'Egghead'",
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Egghead'", args = { "detectorbear", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Egghead'", args = { "detectorbear", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "eggheadItemDelivery_Detector3" },
 	BuildResponse = function(self, npcName, status, character)
@@ -99,7 +99,7 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 	keyNpc = "'Egghead'",
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Egghead'", args = { "detectorveles", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Egghead'", args = { "detectorveles", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -148,7 +148,7 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 	keyNpc = "'Egghead'",
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Egghead'", args = { "suit_ssp99", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Egghead'", args = { "suit_ssp99", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "eggheadItemDelivery_Suit2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -194,7 +194,7 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 	keyNpc = "'Egghead'",
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Egghead'", args = { "suit_ssp99m", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Egghead'", args = { "suit_ssp99m", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	nextProgressions = { "eggheadItemDelivery_Suit3" },
 	BuildResponse = function(self, npcName, status, character)
@@ -242,7 +242,7 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 	keyNpc = "'Egghead'",
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Egghead'", args = { "suit_seva", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Egghead'", args = { "suit_seva", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -291,9 +291,9 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 	keyNpc = "'Egghead'",
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Egghead'", args = { "medic_stimpak_1", nil, 10, "SELLANDBUY", 10, 1, 10 } },
-		{ npc = "'Egghead'", args = { "medic_antirad_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
-		{ npc = "'Egghead'", args = { "medic_psyheal_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Egghead'", args = { "medic_stimpak_1", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{ npc = "'Egghead'", args = { "medic_antirad_2", nil, 3, "SELLANDBUY", 3, 12, 1 } },
+		{ npc = "'Egghead'", args = { "medic_psyheal_2", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	nextProgressions = { "eggheadItemDelivery_Aid2" },
 	BuildResponse = function(self, npcName, status, character)
@@ -338,8 +338,8 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 	keyNpc = "'Egghead'",
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Egghead'", args = { "medic_stimpak_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
-		{ npc = "'Egghead'", args = { "medic_antipsychotic_2", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Egghead'", args = { "medic_stimpak_2", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{ npc = "'Egghead'", args = { "medic_antipsychotic_2", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	nextProgressions = { "eggheadItemDelivery_Aid3" },
 	BuildResponse = function(self, npcName, status, character)
@@ -387,8 +387,8 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 	keyNpc = "'Egghead'",
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Egghead'", args = { "medic_stimpak_3", nil, 10, "SELLANDBUY", 10, 1, 10 } },
-		{ npc = "'Egghead'", args = { "medic_antipsychotic_3", nil, 10, "SELLANDBUY", 10, 1, 10 } },
+		{ npc = "'Egghead'", args = { "medic_stimpak_3", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{ npc = "'Egghead'", args = { "medic_antipsychotic_3", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}

@@ -6,12 +6,12 @@ See [the model assumptions](README.md#quantity-and-effort-decisions).
 | Step | Depth including access gates | Estimated effort | Quantities / jobs |
 | --- | ---: | ---: | --- |
 | bossItemDelivery_1 | 1 | 16.7 | 6 |
-| bossItemDelivery_2 | 2 | 23.5 | 4, 4 |
-| bossItemDelivery_3 | 3 | 31.3 | 1, 3, 2 |
-| bossItemDelivery_4 | 4 | 42.9 | 1, 2, 2, 3, 1 |
-| bossItemDelivery_5 | 5 | 56.4 | 1, 1, 2, 2, 4, 1 |
-| bossItemDelivery_6 | 6 | 86.5 | 1, 1, 1, 1, 5, 1, 1 |
-| bossItemDelivery_7 | 7 | 120.0 | 1, 4, 1, 3, 6, 1, 1, 1 |
+| bossItemDelivery_2 | 5 | 64.4 | 10, 12 |
+| bossItemDelivery_3 | 7 | 111.1 | 3, 8, 5, 13 |
+| bossItemDelivery_4 | 8 | 143.2 | 5, 6, 5, 13, 3 |
+| bossItemDelivery_5 | 9 | 182.2 | 3, 5, 5, 6, 15, 3 |
+| bossItemDelivery_6 | 10 | 235.3 | 2, 3, 3, 5, 16, 3, 2 |
+| bossItemDelivery_7 | 11 | 303.9 | 4, 12, 2, 8, 18, 3, 2, 2 |
 | cleanerItemDelivery_Storage | 0 | 10.9 | 3 |
 | oldTimerKillIntro | 0 | 8.0 | 1 |
 | oldTimerItemDelivery_mainMeat | 1 | 10.6 | 8 |

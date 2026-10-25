@@ -135,9 +135,22 @@ It does not seed a character's personal milestones.
 One character's purchases never deplete another character's supply, including
 characters on the same account. `Progression unlocks` labels vendor entries
 `Personal access and stock` and shows the initial stock, maximum stock, restock
-amount, and interval. Stock counts are base values multiplied by `VendorStockMult`;
-the interval is in hours and is not multiplied. These are catalog settings, not
-live remaining stock. Vendor money remains shared.
+amount, and interval. Counts are absolute; the old `VendorStockMult` setting no
+longer applies. These are catalog settings, not live remaining stock. Vendor money
+remains shared.
+
+Purchasable defaults and progression unlocks use these limits:
+
+- Ammunition, food, cooked meals, water, and tea: maximum 4.
+- Bandages, medkits, and anti-radiation medicine: maximum 3.
+- Other consumables (including specialty medicine, alcohol, and fuel): maximum 2.
+- Equipment, weapons, armor, attachments, and reusable tools: maximum 1.
+
+Consumables replenish one item every 12 real hours; equipment replenishes one
+every 48 real hours. Initial catalog stock starts at the maximum. Loading saved
+vendors applies these defaults and clamps existing personal stock on access without
+resetting depleted stock. Buy-only entries and player-deposited Sherpa goods are
+excluded. Admins can still override stock settings after loading.
 
 Personal stock is stored server-side under `vendorStock`, keyed by map plus NPC
 display name. Respawning the same NPC does not reset it. NPCs with the same name
@@ -147,7 +160,8 @@ send stock updates only to that shopper. Changing characters closes the shop.
 
 Elapsed restocks, including time offline, are calculated when opening the shop or
 checking stock for a trade and are capped at the configured maximum. Zero interval
-or amount disables refilling; unlimited items remain unlimited. Admin stock edits
+or amount disables refilling. Full shelves do not bank restock time: the first
+purchase from a full shelf starts a complete interval. Admin stock edits
 change catalog defaults, not every character's remaining count. Shoppers see updated
 catalog settings when reopening the vendor.
 
