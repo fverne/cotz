@@ -36,15 +36,18 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "common_hides", quantity = 2 },
+		{ pool = "common_hides", quantity = 1 },
 		{ pool = "humanoid_parts", quantity = 2 },
 		{ pool = "common_parts", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Old Timer'"
-			local message = (
-				"You all seem ready for tougher game. I now have proper " .. "knives available for purchase."
+			local message = string.format(
+				"%s, those trophies tell me you can handle more than stray dogs. You've earned a "
+				.. "proper blade. Come see me; I'll sell you a hunting knife that'll hold up against "
+				.. "tougher game.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -93,9 +96,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Old Timer'"
-			local message = (
-				"You are ready. To those passionate hunters among you, I "
-				.. "now offer my best knives for sale."
+			local message = string.format(
+				"%s, you've faced the larger beasts and lived to bring back proof. I'll sell you my "
+				.. "best hunting knives. Keep your edge sharp and your wits sharper.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -145,10 +149,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Old Timer'"
-			local message = (
-				"There are true knife fighters among you. I now offer bayonets "
-				.. "more suited to combat than hunting to those fond of the "
-				.. "dance of blades."
+			local message = string.format(
+				"%s, you've earned your place in the dance of blades. I'll sell you a bayonet now; "
+				.. "that steel is made for a fight, not just dressing a carcass.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -201,10 +205,10 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Old Timer'"
-			local message = (
-				"Though the middle ages are long behind us, I see within "
-				.. "you all a warrior's spirit. I now carry new melee weapons "
-				.. "that are a cut above what you previously had."
+			local message = string.format(
+				"%s, there's a warrior's spirit in you. Come see me about axes, machetes and the "
+				.. "rest of my melee weapons. I'll sell you something worthy of that spirit.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -253,10 +257,10 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Old Timer'"
-			local message = (
-				"I see in you the eyes of seekers and hands stained with "
-				.. "dirt from a long dig, yet the rewards speak for themselves. "
-				.. "I now offer sturdier tools for digging."
+			local message = string.format(
+				"%s, you've got a seeker's eye and the dirt under your nails to prove it. I'll sell "
+				.. "you a sturdier digging tool; you've earned better than a spoon.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -305,10 +309,10 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Old Timer'"
-			local message = (
-				"You are ready to move on from smaller tools. For those "
-				.. "of you who are proud excavators, I now offer entrenching "
-				.. "tools."
+			local message = string.format(
+				"%s, you've mastered the smaller tools. I'll sell you an entrenching shovel now. "
+				.. "Use it wisely; the Zone doesn't give up its buried secrets easily.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)

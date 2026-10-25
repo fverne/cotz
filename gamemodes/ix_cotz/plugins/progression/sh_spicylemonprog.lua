@@ -43,10 +43,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
-			local message = (
-				"My laboratory is online and I now offer common breath mints. "
-				.. "They are not much, but they are handy for radiation removal "
-				.. "in a pinch."
+			local message = string.format(
+				"%s, your delivery helped get my little laboratory working. I can sell you the "
+				.. "antiradiation breath mints now. A modest start, but useful in a pinch.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -95,9 +95,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
-			local message = (
-				"I now carry caffeine tablets for those stalkers wanting "
-				.. "a little extra stamina in their travels. Come and see me."
+			local message = string.format(
+				"%s, thanks for keeping my work supplied. I'll sell you caffeine tablets now if you "
+				.. "need something for those long trips. Sleep is still a fine invention, though.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -149,9 +150,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
-			local message = (
-				"I have begun mixing batches of Modafine; though it is harsh "
-				.. "on the system, it is a great anti-psy drug."
+			local message = string.format(
+				"%s, your supplies helped me prepare the Modafine. You can buy it from me now. "
+				.. "Useful against psy exposure, but rather harsh on the system.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -200,9 +202,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical4", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
-			local message = (
-				"I now carry Asenapine tablets. They are useful for lowering "
-				.. "the effect of psy fields and Controller attacks."
+			local message = string.format(
+				"%s, I can now sell you Asenapine tablets, thanks to your help. They may help you "
+				.. "cope with psy fields and Controllers. Do read the label.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -252,10 +255,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
-			local message = (
-				"I now carry painkillers; more specifically, Codeine tablets. "
-				.. "If you find yourself aching and desire a pick me up, come "
-				.. "and see me."
+			local message = string.format(
+				"%s, you've earned access to my Codeine tablets. Come see me to buy some for your "
+				.. "medical pouch; I'd prefer you didn't have to limp all the way here.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -306,10 +309,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical6", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
-			local message = (
-				"I now offer Adrenaline autoinjectors for sale; these handy "
-				.. "little pens should get you back in the fight and keep you "
-				.. "in it for some time."
+			local message = string.format(
+				"%s, those supplies were just what I needed. I'll sell you adrenaline autoinjectors "
+				.. "now. A handy addition to your kit when a trip takes a bad turn.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -359,9 +362,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
-			local message = (
-				"I now offer Morphine injectors. Please use them responsibly; "
-				.. "I would hate to see anyone overdose..."
+			local message = string.format(
+				"%s, I trust you enough to sell you morphine injectors now. Come see me if you need "
+				.. "them, and please be responsible with the dosage.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -418,7 +422,11 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
-			local message = "I now offer purified food and drink from outside the Zone."
+			local message = string.format(
+				"%s, your help with the supplies has earned you a place on my import list. You can "
+				.. "buy purified food and drink from me now. A little taste of life outside.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -469,9 +477,10 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
-			local message = (
-				"The first imports of high shelf local vodka have arrived. "
-				.. "Come and see the brands for yourselves."
+			local message = string.format(
+				"%s, your delivery went down well with my contacts. I'll sell you the better local "
+				.. "vodkas now. Come take a look at the labels when you're back.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -525,9 +534,10 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
-			local message = (
-				"Fine international spirits have just arrived from the Cordon. "
-				.. "Grab a bottle and kick back with your friends."
+			local message = string.format(
+				"%s, the bottles from the Cordon arrived safely. After your help, I'm happy to sell "
+				.. "you the imported spirits. Perhaps save one for an evening with friends.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -577,11 +587,10 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Spicy Lemon'"
-			local message = (
-				"Though it has taken some experimentation, I have finished "
-				.. "a medicinal brew that I believe will be perfect for the "
-				.. "Zone's conditions... although the taste leaves something "
-				.. "to be desired."
+			local message = string.format(
+				"%s, your ingredients helped me finish the medicinal brew. You can buy it from me "
+				.. "now. I think you'll appreciate the result rather more than the flavour.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)

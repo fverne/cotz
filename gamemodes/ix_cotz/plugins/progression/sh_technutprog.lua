@@ -41,8 +41,10 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"The first product of our combined efforts are ready, come " .. "by and buy a mail jacket."
+			local message = string.format(
+				"%s, the materials you brought are holding together nicely! I'll sell you a mail "
+				.. "jacket now. Come have a look at what your work made possible.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -92,9 +94,10 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"Come on over, I got some freshly finished trenchcoats for "
-				.. "you all, for a price of course."
+			local message = string.format(
+				"%s, your delivery let me finish the trenchcoats. You can buy them from me now. "
+				.. "Pick a colour; looking miserable in the rain is optional.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -145,7 +148,11 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "Stalkers, I've got some fresh suit prototypes, ready for purchase."
+			local message = string.format(
+				"%s, your help got the Sunrise prototype finished. I'll sell you the suit now. Come "
+				.. "see how it fits before you head back out.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -192,9 +199,10 @@ ix.progression.Register("technutItemDelivery_SuitNBC", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"I finished the prototype of the closed respiratory variant "
-				.. "of the sunrise suit. They're ready for purchase."
+			local message = string.format(
+				"%s, the closed respiratory suit is finished, thanks to your supplies. You can buy "
+				.. "the NBC variant from me now. Come take a look at the seals.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -243,7 +251,11 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "I just finished a batch of armored suits, they're ready for purchase."
+			local message = string.format(
+				"%s, your materials went into the CS1 design. I'll sell you one of those armoured "
+				.. "suits now. Come see what I've put together.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -292,8 +304,10 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"I just finished a batch of lightweight Wind suits, they're " .. "ready for purchase now."
+			local message = string.format(
+				"%s, I've finished the Wind suit with your help. You can buy it from me now if "
+				.. "you'd like something lighter for your next trip.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -342,9 +356,10 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"I just finished my work on the new iteration of the CS "
-				.. "type suits, they're ready for purchase now."
+			local message = string.format(
+				"%s, your delivery helped me finish the CS2 design. I'll sell you the improved suit "
+				.. "now. Come see how the new armour sits.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -392,9 +407,10 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"I just finished a batch of heavily armored suits, the CS3's, "
-				.. "they're ready for purchase now."
+			local message = string.format(
+				"%s, those materials did the trick. You can buy the heavy CS3 suit from me now. "
+				.. "You'll feel the weight, but there's a reason for all that armour.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -438,8 +454,10 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"You've gotta pimp your suits, different patches and camouflages " .. "are now available."
+			local message = string.format(
+				"%s, you've earned a little custom work. I can change your suit's patches and "
+				.. "camouflage now. Come see me when you want a new look.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -489,7 +507,11 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "Steel helmets are up and available for purchase."
+			local message = string.format(
+				"%s, the steel helmets are ready after your delivery. I'll sell you one now. Better "
+				.. "a dent in the helmet than a dent in your skull, eh?",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -536,7 +558,11 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "Prepare to fly through the Zone with the new headgear!"
+			local message = string.format(
+				"%s, your materials helped finish the CS headgear. You can buy it from me now. Come "
+				.. "try it on before your next trip.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -583,7 +609,11 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "Operator helmets now in store. Get them while they are hot!"
+			local message = string.format(
+				"%s, thanks for the supplies. I'll sell you the operator helmets now. Come find one "
+				.. "that fits your head and your budget.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -630,7 +660,11 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "Frag helmets with respirator are now available, come and buy!"
+			local message = string.format(
+				"%s, the frag helmets and respirator headgear are ready. Your help earned you "
+				.. "access to buy them; come see how they fit.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -678,8 +712,10 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"I've figured out how to reproduce Sphere-08 helmets! Come " .. "grab some noggin protection!"
+			local message = string.format(
+				"%s, your delivery helped me get the Sphere-08 helmets sorted. I'll sell you one "
+				.. "now. Come get some proper noggin protection.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -729,7 +765,11 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "I've now got Sphere-12 heavy helmets, and PSZ12's as an added bonus!"
+			local message = string.format(
+				"%s, I've got the Sphere-12 helmets and PSZ12 headgear ready with your help. You "
+				.. "can buy them from me now if you need heavier protection.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -776,9 +816,10 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"I now carry ACH helmets! These babies from the West are "
-				.. "both protective and lightweight!"
+			local message = string.format(
+				"%s, your contribution got you access to the ACH helmets. I'll sell you one of "
+				.. "these Western beauties; come feel how light they are.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -827,9 +868,10 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"I've managed to whip up a batch of respirators! Come grab "
-				.. "one to keep yourself safe from radiation!"
+			local message = string.format(
+				"%s, the respirators are ready, thanks to your supplies. I'll sell you one now. "
+				.. "Come find something to put between your lungs and the Zone.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -878,8 +920,10 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"GP-5 and EO20 gas masks have been refit and are now safe " .. "for use! No asbestos for us!"
+			local message = string.format(
+				"%s, I've finished refitting the GP-5 and EO-20 masks with your help. You can buy "
+				.. "them from me now. No old asbestos surprises in these ones.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -929,8 +973,10 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"I've managed to refit the EO-20 to take 40mm external filters! " .. "Come and grab one!"
+			local message = string.format(
+				"%s, your delivery helped me get the next masks ready. I'll sell you the PMK-3 and "
+				.. "XM40 now. Come take a look before you head into the muck.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -976,7 +1022,11 @@ ix.progression.Register("technutItemDelivery_Mask4", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "I've got my hands on the best of the best, come get em!"
+			local message = string.format(
+				"%s, you've helped me get hold of the M40 and M50 masks. I'll sell them to you now. "
+				.. "Come see me if you're ready to upgrade.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -1023,7 +1073,11 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "I've managed to put together some basic steel and ceramic armour plates!"
+			local message = string.format(
+				"%s, those supplies let me put together the basic steel and ceramic armour inserts. "
+				.. "You can buy them from me now. Come give your suit a little help.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -1071,7 +1125,11 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "I've managed to fabricate some better quality plates! Come grab them!"
+			local message = string.format(
+				"%s, I've finished the improved steel and ceramic inserts with your materials. I'll "
+				.. "sell you the new plates now; come take a look at the workmanship.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -1118,7 +1176,11 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "High quality ballistic inserts are now available for purchase!"
+			local message = string.format(
+				"%s, your latest delivery was just what I needed for the best steel and ceramic "
+				.. "inserts. You've earned access to buy them. Come see me about an upgrade.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -1166,8 +1228,10 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"Insulating fabrics are now available! No burning to death " .. "if I can help it!"
+			local message = string.format(
+				"%s, the insulating fabric is ready, thanks to your help. You can buy it from me "
+				.. "now. Let's give your suit a little more protection from the heat.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -1214,7 +1278,11 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "Heavy insulating fabric layers are now available! Come hit me up!"
+			local message = string.format(
+				"%s, I've finished the heavy insulating fabric with your supplies. I'll sell you "
+				.. "the thicker layers now. Come see what'll fit your suit.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -1262,10 +1330,10 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"Aluminium backpack frames are now available for sale! Come "
-				.. "save your back some pain! Just be careful around anomalies, "
-				.. "though..."
+			local message = string.format(
+				"%s, your delivery got the aluminium backpack frames finished. You can buy one from "
+				.. "me now. Your back will thank you; just mind those anomalies.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -1312,8 +1380,10 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"Steel backpack frames are now available! Be extra careful " .. "around anomalies, though!"
+			local message = string.format(
+				"%s, the steel backpack frames are ready with your help. I'll sell you one now. "
+				.. "Sturdy kit, but be careful carrying all that metal near anomalies.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -1360,10 +1430,10 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"Carbon fibre inserts are now available! They're really "
-				.. "expensive, but you can find nothing better for anomaly "
-				.. "protection!"
+			local message = string.format(
+				"%s, your materials helped me finish the carbon fibre inserts. I'll sell them to "
+				.. "you now. They're expensive, but worth a look for your anomaly protection.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -1413,7 +1483,11 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = "K119 Kevlar plates are here to help keep you in the fight!"
+			local message = string.format(
+				"%s, the K119 Kevlar inserts are finished, thanks to your supplies. You can buy "
+				.. "them from me now. Come see about fitting some to your kit.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -1458,9 +1532,10 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Technut'"
-			local message = (
-				"K29 Kevlar plates are now in production! They're lightweight, "
-				.. "comfortable, and have the bonus of keeping you alive!"
+			local message = string.format(
+				"%s, your help got the K29 Kevlar inserts ready. I'll sell you the new plates now. "
+				.. "Light, comfortable, and a better use of your money than another funeral.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)

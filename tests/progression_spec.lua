@@ -369,22 +369,54 @@ check(
 	"whole-stack turn-in removes inventory item"
 )
 
--- Completion broadcasts credit the finishing character and keep the NPC message.
+-- Completion broadcasts preserve the personalised dialogue and NPC sender.
 messages = {}
 a.name = "Finishing Stalker"
-api.Notify(a, "NPC", "hello")
+api.Notify(a, "NPC", "Finishing Stalker, you've earned my trust.")
 check(#messages == 1 and messages[1][5] == nil, "completion message broadcast to all players")
 check(messages[1][2] == "npcpdainternal", "completion broadcast uses GPDA")
 check(messages[1][6].name == "NPC", "completion broadcast keeps NPC sender")
 check(
-	messages[1][6].message == "hello (Completed by Finishing Stalker.)",
-	"completion broadcast includes the original message and finishing character name"
+	messages[1][6].message == "Finishing Stalker, you've earned my trust.",
+	"completion broadcast preserves dialogue without adding a completion suffix"
 )
 a.client.GetCharacter = function()
 	return b
 end
 api.Notify(a, "NPC", "late")
 check(#messages == 1, "delayed message suppressed after switching characters")
+
+-- Exercise every completion and story threshold, including delayed follow-up speakers.
+local dialogueOwner = character()
+dialogueOwner.name = "Stalker 100%"
+local dialogueCount = 0
+for id, definition in pairs(api.definitions) do
+	timers, messages = {}, {}
+	if definition.OnComplete then
+		definition.OnComplete(dialogueOwner)
+	end
+	for _, callback in pairs(definition.progressfunctions or {}) do
+		callback:OnRun(dialogueOwner)
+	end
+	local timerIndex = 1
+	while timerIndex <= #timers do
+		timers[timerIndex]()
+		timerIndex = timerIndex + 1
+	end
+	for _, broadcast in ipairs(messages) do
+		dialogueCount = dialogueCount + 1
+		local dialogue = broadcast[6].message
+		check(broadcast[5] == nil, id .. ": personalised dialogue remains global")
+		check(
+			string.find(dialogue, dialogueOwner:GetName(), 1, true),
+			id .. ": dialogue addresses the unlocking character by name"
+		)
+		check(not string.find(dialogue, "PLACEHOLDER", 1, true), id .. ": completion dialogue is finished")
+		check(not string.find(dialogue, "Completed by", 1, true), id .. ": dialogue has no generic suffix")
+	end
+end
+check(dialogueCount == 143, "all progression announcements were exercised")
+timers, messages = {}, {}
 
 -- World arrivals unlock once globally without sharing personal service access.
 local worldSave

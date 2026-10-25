@@ -44,9 +44,10 @@ ix.progression.Register("muteItemDelivery_Binoc1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "Ilyuha Hobo"
-			local message = (
-				"Ilyuha Hobo here. Mute seems to have found some binoculars "
-				.. "somewhere and is selling them."
+			local message = string.format(
+				"%s, Ilyuha Hobo here. Mute wanted you to know he'll sell you binoculars now. Seems "
+				.. "your delivery made an impression; go see him if you want a pair.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -93,9 +94,10 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "Ilyuha Hobo"
-			local message = (
-				"Ilyuha Hobo here again. Mute's found himself some new binoculars "
-				.. "somewhere. Looks like they're rangefinders."
+			local message = string.format(
+				"%s, it's Ilyuha again. Mute's letting you buy his rangefinding binoculars after "
+				.. "that last delivery. Might save you guessing how far away those teeth are.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -142,10 +144,10 @@ ix.progression.Register("muteItemDelivery_Binoc3", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "Ilyuha Hobo"
-			local message = (
-				"Ilyuha Hobo once again. Mute's apparently carrying a third "
-				.. "variety of binoculars. I'm guessing they're more powerful "
-				.. "than others."
+			local message = string.format(
+				"%s, Ilyuha here. Mute has the stronger binoculars ready for you to buy. You've "
+				.. "earned a better look at whatever's waiting out there.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -194,9 +196,10 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "Vadim Nasty"
-			local message = (
-				"Vadim Nasty here with Mute. Looks like he's selling some "
-				.. "binoculars with NVG modules in them. Useful!"
+			local message = string.format(
+				"%s, Vadim Nasty here with Mute. Your delivery got you access to his night vision "
+				.. "binoculars. Come buy a pair if you'd rather see what moves in the dark.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -244,9 +247,10 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "Ilyuha Hobo"
-			local message = (
-				"Man, this anomaly detector Mute sold me earlier just saved "
-				.. "my bacon! Should consider picking one up!"
+			local message = string.format(
+				"%s, Ilyuha here. Mute says you can buy an anomaly detector from him now. Mine "
+				.. "saved my bacon earlier; I'd take him up on it.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -291,8 +295,10 @@ ix.progression.Register("muteItemDelivery_Detector", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "Vadim Nasty"
-			local message = (
-				"I just made fat cash from this artifact I found, all thanks " .. "to Mutes detector!"
+			local message = string.format(
+				"%s, Vadim here. Mute will sell you an artifact detector now, thanks to your help. "
+				.. "Mine paid for itself already. Go see him if you want to try your luck.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -335,7 +341,10 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Mute'"
-			local message = "The Zone mutant tracking service is now operational."
+			local message = string.format(
+				"%s. Your access to mutant tracking is enabled. Check your PDA.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -377,7 +386,10 @@ ix.progression.Register("muteItemDelivery_BlowoutWarning", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Mute'"
-			local message = "The Zone blowout warning system is now operational."
+			local message = string.format(
+				"%s. Your access to blowout warnings is enabled. Watch your PDA.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,

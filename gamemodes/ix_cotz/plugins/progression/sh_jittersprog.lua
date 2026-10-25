@@ -40,9 +40,10 @@ ix.progression.Register("jittersItemDelivery_medical1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Jitters'"
-			local message = (
-				"Jitters here. Thanks for the... uhm... medication. As a "
-				.. "reward I have more medical equipment in stock."
+			local message = string.format(
+				"%s, Jitters here. Thanks for the... uhm... supplies. I'll sell you my basic "
+				.. "medical kits now. Try to come back before you actually need one, alright?",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -89,10 +90,10 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Jitters'"
-			local message = (
-				"Jitters here. Thanks again for your help. As a reward I "
-				.. "have more medical equipment in stock. Come see me again "
-				.. "soon!"
+			local message = string.format(
+				"%s, thanks for helping me out again. I can sell you better bandages, medical kits "
+				.. "and some antirads now. Just... don't take everything at once.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -136,8 +137,10 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Jitters'"
-			local message = (
-				"Jitters here. I have a stock of army syrette kits and new " .. "bandages for you."
+			local message = string.format(
+				"%s, I put aside the better bandages and army syrette kits for you to buy. You've "
+				.. "been good to me. I'd, uhm, like to keep you in one piece.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -182,7 +185,11 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Jitters'"
-			local message = "Jitters here. I have a stock of scientist stuff. Don't tell them!"
+			local message = string.format(
+				"%s, you've earned a look at my scientific medical kits and stronger antirads. I'll "
+				.. "sell them to you, but... maybe don't ask where I got them.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,

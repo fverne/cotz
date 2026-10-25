@@ -41,7 +41,11 @@ ix.progression.Register("bossItemDelivery_1", {
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
-			local message = "IO7a's now available for purchase."
+			local message = string.format(
+				"%s, you delivered. I'll sell you the IO7a suits now. Bring the money when you're "
+				.. "ready.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -86,7 +90,11 @@ ix.progression.Register("bossItemDelivery_2", {
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
-			local message = "PS5M's now available for purchase."
+			local message = string.format(
+				"%s, you've held up your end. The PS5M suits are open to you now. See me if you "
+				.. "want to buy one.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -131,7 +139,11 @@ ix.progression.Register("bossItemDelivery_3", {
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
-			local message = "Berill-5M's now available for purchase."
+			local message = string.format(
+				"%s, good work. You've earned access to my Berill-5M suits. Protection costs money; "
+				.. "you know where to find me.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -175,7 +187,11 @@ ix.progression.Register("bossItemDelivery_4", {
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
-			local message = "Skat-10 Armoured Suits are now available for purchase."
+			local message = string.format(
+				"%s, I can count on you. I'll sell you a Skat-10 armoured suit now. Come prepared "
+				.. "to pay for it.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -220,7 +236,11 @@ ix.progression.Register("bossItemDelivery_5", {
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
-			local message = "Skat-9 Armoured Suits are now available for purchase."
+			local message = string.format(
+				"%s, you've earned a place among my serious customers. I'll sell you the Skat-9 "
+				.. "suits. Make the protection count.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -264,7 +284,11 @@ ix.progression.Register("bossItemDelivery_6", {
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
-			local message = "Radsuits are now available for purchase."
+			local message = string.format(
+				"%s, our arrangement now includes radsuits. Come see me if you want to buy one "
+				.. "before your next trip.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -307,7 +331,11 @@ ix.progression.Register("bossItemDelivery_7", {
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Boss'"
-			local message = "Exoskeletons and protoype Spartan helmets are now available for purchase."
+			local message = string.format(
+				"%s, you've proved reliable enough for my best equipment. I'll sell you "
+				.. "exoskeletons and prototype Spartan helmets. Bring serious money.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,

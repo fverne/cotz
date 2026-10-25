@@ -50,10 +50,10 @@ ix.progression.Register("hagglerItemDelivery_1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"My supplier came through. We've got UKM Fort-12 and merc-issue "
-				.. "M1911s and Browning Hi-Powers now in stock. Come see me "
-				.. "when you've got a chance."
+			local message = string.format(
+				"%s, your delivery kept my supplier happy. I'll sell you Fort-12s, M1911s and "
+				.. "Browning Hi-Powers now. Bring your rubles and we'll get you a better sidearm.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -105,9 +105,10 @@ ix.progression.Register("hagglerItemDelivery_11", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"Workshop is up and running. If you're interested in a short "
-				.. "lever action shotgun or a STEN gun, come find me."
+			local message = string.format(
+				"%s, your tools got the workshop running. I'll sell you the short lever action "
+				.. "shotguns and STENs now. Rough around the edges, but they'll do the job.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -159,8 +160,10 @@ ix.progression.Register("hagglerItemDelivery_111", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"Lathe is online. Come give these new long barrel lever " .. "action shotguns a try."
+			local message = string.format(
+				"%s, the lathe is running with your help. You can buy the long barrel lever action "
+				.. "shotguns from me now. Come see what that extra barrel gets you.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -213,9 +216,10 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"First shipment of .44 Magnum revolvers just came in. If "
-				.. "you want one of these wristbreakers, come and say hello."
+			local message = string.format(
+				"%s, my contact liked what you brought. I'll sell you the .44 Magnum revolvers now. "
+				.. "Bring cash, and try not to blame me for your wrist afterwards.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -270,9 +274,10 @@ ix.progression.Register("hagglerItemDelivery_112", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"Just finished refitting the first batch of Sterling guns. "
-				.. "Come and get 'em if you've got the rubles to spare."
+			local message = string.format(
+				"%s, your supplies helped me refit the Sterlings. You've earned access to buy one. "
+				.. "Come see me when you've got the rubles.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -326,9 +331,10 @@ ix.progression.Register("hagglerItemDelivery_12", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"TOZ-66 shipment just hit the shelves. Come spent your hard "
-				.. "earned cash on the rookie's dream gun."
+			local message = string.format(
+				"%s, that delivery got the TOZ-66 shipment through. I'll sell you one now. Come "
+				.. "spend some of that hard-earned cash on the rookie's dream gun.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -384,10 +390,10 @@ ix.progression.Register("hagglerItemDelivery_121", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"SKS and Mini-14 rifles are ready to go if you don't mind "
-				.. "the damn grease smell. I hope you all appreciate the bullshit "
-				.. "I go through for you all."
+			local message = string.format(
+				"%s, the SKS and Mini-14 rifles are cleaned up and ready for you to buy. Your "
+				.. "delivery helped, but getting that damn grease off was still my problem.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -439,7 +445,11 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = "Saigas are now in stock. Come and get 'em before someone else does."
+			local message = string.format(
+				"%s, your help with the supplier paid off. I'll sell you the Saiga shotguns now. "
+				.. "Come see me when you're ready to put some money down.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -492,7 +502,11 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = "Big bore rifles are up for grabs. Come get your mutant hunting kit."
+			local message = string.format(
+				"%s, you've earned access to the big bore rifles. Come see me if you want to buy "
+				.. "some proper mutant hunting kit. The ammunition bill is your problem.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -544,10 +558,10 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"Tourists were happy with the magnums; even got some .500 "
-				.. "Magnum revolvers in along with the refit Contenders. Come "
-				.. "grab one if you want to give a boar a really bad day."
+			local message = string.format(
+				"%s, your delivery kept the tourists happy. I'll sell you the refit Contenders and "
+				.. ".500 Magnum revolvers now. Either should give a boar a very bad day.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -598,9 +612,10 @@ ix.progression.Register("hagglerItemDelivery_122", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"Crates just got here. I've got Kiparis machine pistols "
-				.. "and Suomi SMGs on the shelves now."
+			local message = string.format(
+				"%s, the crates got here thanks to your help. You can buy Kiparis machine pistols "
+				.. "and Suomi SMGs from me now. Bring money, not promises.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -650,10 +665,10 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"Finally got my lathe upgraded, I've got Mac-11 machine "
-				.. "pistols up for grabs. Perfect fast-firing 9x19 kit for "
-				.. "those who like the candle that burns twice as bright."
+			local message = string.format(
+				"%s, your supplies helped me upgrade the lathe. I'll sell you the Mac-11 machine "
+				.. "pistols now. Fast little things; try to make the ammunition last.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -704,11 +719,10 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"Quartermaster was pleased with what we gave him and they "
-				.. "seem to be useful, so I'll be stocking the Colt Chicago "
-				.. "from now on. If you want a custom little piece, now's the "
-				.. "time."
+			local message = string.format(
+				"%s, Quartermaster was pleased with your delivery. I'll sell you the Colt Chicago "
+				.. "now. If you want that custom little piece, come talk money.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -759,7 +773,11 @@ ix.progression.Register("hagglerItemDelivery_2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = "TOZ-34 over-under shotguns are in. From Russia with love, eh?"
+			local message = string.format(
+				"%s, your delivery came through, so I'll sell you the TOZ-34 over-under shotguns "
+				.. "now. From Russia with love, eh? Love still costs rubles.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -809,8 +827,10 @@ ix.progression.Register("hagglerItemDelivery_21", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"SAKO-85 rifles in 5.56 are in. If you want to try out a " .. "NATO cartridge, come see me."
+			local message = string.format(
+				"%s, you've earned access to my SAKO-85 rifles in 5.56. Come buy one if you want to "
+				.. "try a NATO cartridge. I expect payment either way.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -863,7 +883,11 @@ ix.progression.Register("hagglerItemDelivery_211", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = "Handmade C96 carbines are now in. Come and get them!"
+			local message = string.format(
+				"%s, your supplies got the handmade C96 carbines finished. I'll sell you one now. "
+				.. "Come admire the work, then open your wallet.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -913,9 +937,10 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"My guys came back; it was a legit stash. If you want a "
-				.. "PPSh, I've got them for sale now."
+			local message = string.format(
+				"%s, your lead checked out; my guys found the stash. You've earned access to buy a "
+				.. "PPSh from me. Come see me if you want one.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -965,7 +990,11 @@ ix.progression.Register("hagglerItemDelivery_212", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = "Pump action TOZ-194 shotguns are in. Come and get them while they're hot."
+			local message = string.format(
+				"%s, that delivery sorted the TOZ-194 shipment. I'll sell you the pump action "
+				.. "shotguns now. Bring the money when you're back this way.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -1014,7 +1043,11 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = "M1887s are in. Come give them a try."
+			local message = string.format(
+				"%s, your help got the M1887s here. You can buy one from me now. Come have a look "
+				.. "if you fancy a lever action with a little history.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -1063,7 +1096,11 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = "Ithaca shotguns are in. They should keep you going."
+			local message = string.format(
+				"%s, your delivery kept the deal moving. I'll sell you the Ithaca shotguns now. "
+				.. "Come see me if you want one for the next trip.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -1114,9 +1151,10 @@ ix.progression.Register("hagglerItemDelivery_22", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"MP34 shipment just came in a few minutes ago and I'm starting "
-				.. "on the Saiga 5.45 rechambers. First come, first serve."
+			local message = string.format(
+				"%s, your supplies paid off. I'll sell you the MP34s and rechambered Saiga 5.45s "
+				.. "now. You've done your part; bring cash for mine.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -1170,9 +1208,10 @@ ix.progression.Register("hagglerItemDelivery_221", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"The Finn came through. If you want an original SAKO-85 "
-				.. "or the Winchester 1895, come and grab one."
+			local message = string.format(
+				"%s, the Finn came through after your delivery. You can buy the original SAKO-85 "
+				.. "and Winchester 1895 from me now. Come see which one suits you.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -1222,9 +1261,10 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"Mosins are in. If you want to help me out with the second "
-				.. "part of the shipment, now's the time."
+			local message = string.format(
+				"%s, your help got the Mosins here. I'll sell you one now. If you want to work on "
+				.. "the second part of the shipment, I've got another job for you too.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -1273,9 +1313,10 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"SVT-40 rifles are in. That's probably going to be the last "
-				.. "that my Russian supplier can get us."
+			local message = string.format(
+				"%s, your last delivery got the SVT-40s through. You can buy them from me now. "
+				.. "That's probably the last my Russian supplier can manage for a while.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -1325,8 +1366,10 @@ ix.progression.Register("hagglerItemDelivery_222", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"The MP40 repair shop is ready to go; I've got the first " .. "sample ready for sale."
+			local message = string.format(
+				"%s, your tools got the MP40 repair bench working. I'll sell you the restored guns "
+				.. "now. Come see what a little work can do for old steel.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -1379,10 +1422,10 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"AKS-74u crate just came in from the SBU. I advise you move "
-				.. "quick; I've got a feeling these are going to fly off the "
-				.. "shelves."
+			local message = string.format(
+				"%s, the SBU sent the AKS-74u crate after your delivery. I'll sell you one now. "
+				.. "Come talk prices before my contact starts asking awkward questions.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -1431,10 +1474,10 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Haggler'"
-			local message = (
-				"AKMs are in. This is probably gonna be the best I can do "
-				.. "for a long while at least, so come grab them while you "
-				.. "can."
+			local message = string.format(
+				"%s, you held up your end all the way through. I'll sell you the AKMs now. That's "
+				.. "the best I can get for a while, so come see me if you want one.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)

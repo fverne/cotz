@@ -142,7 +142,7 @@ if SERVER then
 		if IsValid(client) and client:GetCharacter() == character then
 			ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
 				name = name,
-				message = string.format("%s (Completed by %s.)", message, character:GetName()),
+				message = message,
 			})
 		end
 	end

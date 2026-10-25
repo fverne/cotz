@@ -157,18 +157,19 @@ ix.progression.Register("oldTimerKillIntro", {
 		[1] = {
 			OnRun = function(self, character)
 				local name = "'Old Timer'"
-				local message = (
-					"Good job, you've lowered the mutant population a bit, and "
-					.. "as such we've gained a slight foothold in the zone. Come "
-					.. "have a chat, I have a new task for you all."
+				local message = string.format(
+					"%s, good work thinning out those mutants. You've made the camp a little safer. "
+					.. "Come have a chat; I've got another task for you.",
+					character:GetName()
 				)
 				ix.progression.Notify(character, name, message)
 
 				timer.Simple(15, function()
 					local name = "'Haggler'"
-					local message = (
-						"Hello everyone! I see you're all doing quite well for yourselves. "
-						.. "I have some wares if you got the cash."
+					local message = string.format(
+						"%s, Haggler here. Old Timer tells me you can pull your weight. Come see me if you "
+						.. "want to do business; I've got wares and work for you.",
+						character:GetName()
 					)
 					ix.progression.Notify(character, name, message)
 				end)
@@ -230,26 +231,30 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 	OnComplete = function(character)
 		timer.Simple(5, function()
 			local name = "'Old Timer'"
-			local message = (
-				"We're good on food, for now. To everyone that contributed, "
-				.. "great work. Go say hi to my old friend 'Spicy Lemon', he's "
-				.. "here to help cook all the food you've worked so hard for."
+			local message = string.format(
+				"%s, your haul will help keep the camp fed. Good work. Go see my old friend Spicy "
+				.. "Lemon; he'll help you make something of what you've brought back.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
 
 		timer.Simple(15, function()
 			local name = "'Spicy Lemon'"
-			local message = (
-				"Hello everyone, please bring me all your food, I'll cook " .. "you the finest delicacies."
+			local message = string.format(
+				"%s, Old Timer told me about your hunting. Come see me with your food and we'll "
+				.. "talk cooking. No sense wasting a good haul on a bad meal.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
 
 		timer.Simple(30, function()
 			local name = "'Technut'"
-			local message = (
-				"Everyone, come in. I need some help with one of my projects, " .. "find me in my cabin."
+			local message = string.format(
+				"%s, I heard you've been helping Old Timer. I could use that sort of help on a "
+				.. "project of my own. Come find me in my cabin.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -306,20 +311,20 @@ ix.progression.Register("technutItemDelivery_Main", {
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Technut'"
-			local message = (
-				"Thank you all for your help with my radio project, my messages "
-				.. "are finally getting through. I managed to strike a deal "
-				.. "with some people I know, and they'll supply me with military "
-				.. "grade fabrics and plates."
+			local message = string.format(
+				"%s, your components got my radio working! I've reached my contacts, and you can "
+				.. "buy military grade fabrics and plates from me now. Come see what they've sent.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
 
 		timer.Simple(45, function()
 			local name = "'Old Timer'"
-			local message = (
-				"Hello everyone, the new radio equipment gave me an idea. "
-				.. "Come see me, maybe we can work something out."
+			local message = string.format(
+				"%s, your work on Technut's radio gave me an idea. Come see me; there's someone I "
+				.. "think you could help me get in touch with.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -374,17 +379,20 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 	OnComplete = function(character)
 		timer.Simple(15, function()
 			local name = "'Old Timer'"
-			local message = (
-				"Arrangements have been made, and my good friend, you can "
-				.. "call him 'Mute', has arrived. He's a bit eccentric, so "
-				.. "keep that in mind."
+			local message = string.format(
+				"%s, the things you brought settled my arrangement with Mute. Go see him about the "
+				.. "radio work. He's an old friend, but a little eccentric; keep that in mind.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
 
 		timer.Simple(45, function()
 			local name = "'Mute'"
-			local message = "Come."
+			local message = string.format(
+				"%s. Come.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -429,11 +437,10 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	OnComplete = function(character)
 		timer.Simple(45, function()
 			local name = "'Mute'"
-			local message = (
-				"I got some correspondence with a guy in a deeper territory, "
-				.. "he calls himself 'Quartermaster'. We need his help arming "
-				.. "ourselves. Please go see what he needs before he'll help "
-				.. "us."
+			local message = string.format(
+				"%s. Tower working. You can buy the flash drive from me. Take it to Quartermaster "
+				.. "in the deeper territory. He has information we need.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -467,7 +474,11 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 	OnComplete = function(character)
 		timer.Simple(5, function()
 			local name = "'Quartermaster'"
-			local message = "Alright, we can talk business, come over here."
+			local message = string.format(
+				"%s, Mute's information checks out. You and I can talk business now. Come over and "
+				.. "we'll discuss what you can do for me.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -512,9 +523,10 @@ ix.progression.Register("quarterMasterDelivery_main", {
 	OnComplete = function(character)
 		timer.Simple(5, function()
 			local name = "'Quartermaster'"
-			local message = (
-				"Thanks for the booze, you earned my trust. Go talk to Boss, "
-				.. "he might have some juicy information for you."
+			local message = string.format(
+				"%s, thanks for the booze. You've earned my trust. Go talk to Boss; he might have "
+				.. "some information worth your while.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -551,12 +563,20 @@ ix.progression.Register("boss_dataTasks", {
 		[1] = {
 			OnRun = function(self, character)
 				local name = "'Boss'"
-				local message = "Good work stalkers, you've gotten me a lot of interesting information."
+				local message = string.format(
+					"%s, good work on those extractions. You've brought me useful information. I've "
+					.. "passed your name to Smartass; go see what he needs.",
+					character:GetName()
+				)
 				ix.progression.Notify(character, name, message)
 
 				timer.Simple(10, function()
 					local name = "'Smartass'"
-					local message = "Come see me."
+					local message = string.format(
+						"%s, Boss says you can get things done. Come see me. I've got some fieldwork "
+						.. "that'll put that to the test.",
+						character:GetName()
+					)
 					ix.progression.Notify(character, name, message)
 				end)
 			end,
@@ -601,17 +621,19 @@ ix.progression.Register("smartass_rfTasks", {
 		[1] = {
 			OnRun = function(self, character)
 				local name = "'Smartass'"
-				local message = "I'm rarely surprised, but that was quicker than I thought. Good job."
+				local message = string.format(
+					"%s, I'm rarely surprised, but you finished those scans quicker than I expected. "
+					.. "Good work. I've let Boss know you held up your end.",
+					character:GetName()
+				)
 				ix.progression.Notify(character, name, message)
 
 				timer.Simple(10, function()
 					local name = "'Boss'"
-					local message = (
-						"You've been helping us out a lot, so thank you for that. "
-						.. "Listen, don't tell anyone, but I can sell you some unmarked "
-						.. "access cards we got while scavenging the underground. We "
-						.. "have plenty, so it's not a big deal for us to give something "
-						.. "back to you."
+					local message = string.format(
+						"%s, you've done useful work for us. I'll sell you the unmarked bunker access cards "
+						.. "we recovered underground. Come see me about one before your next trip.",
+						character:GetName()
 					)
 					ix.progression.Notify(character, name, message)
 				end)
@@ -746,16 +768,20 @@ ix.progression.Register("intern_gasAnalyzerReadings", {
 		[1] = {
 			OnRun = function(self, character)
 				local name = "'Intern'"
-				local message = "Thanks for 'accompanying' me to Pripyat. I'm very grateful for your help."
+				local message = string.format(
+					"%s, thanks for helping me with the readings in Pripyat. I'm very grateful. I've "
+					.. "sent your results to Egghead; I think he'll want a word with you.",
+					character:GetName()
+				)
 				ix.progression.Notify(character, name, message)
 
 				timer.Simple(10, function()
 					local name = "'Egghead'"
-					local message = (
-						"The apparatus is assembled and ready for use, I pinpointed "
-						.. "the location of the phenomena to be in a laboratory underneath "
-						.. "Pripyat. Hence, I have a keycard for the laboratory available "
-						.. "as well. Best of luck."
+					local message = string.format(
+						"%s, your readings pinpointed the phenomena beneath Pripyat. You can now buy the "
+						.. "computer access apparatus and laboratory keycard from me. See me before you leave, "
+						.. "and good luck.",
+						character:GetName()
 					)
 					ix.progression.Notify(character, name, message)
 				end)
@@ -855,10 +881,10 @@ ix.progression.Register("computer_artifactTasks", {
 			OnRun = function(self, character)
 				timer.Simple(5, function()
 					local name = "'Egghead'"
-					local message = (
-						"Stalkers, my readings are going crazy, a large release "
-						.. "of energy was just detected at the laboratory. What's going "
-						.. "on?"
+					local message = string.format(
+						"%s, I've detected a large energy release at the laboratory after your work with "
+						.. "the computer. What's happening down there? Report back when you can.",
+						character:GetName()
 					)
 					ix.progression.Notify(character, name, message)
 				end)

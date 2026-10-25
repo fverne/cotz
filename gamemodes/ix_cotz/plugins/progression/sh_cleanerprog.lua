@@ -12,7 +12,7 @@ ix.progression.Register("cleanerItemDelivery_Storage", {
 		local itemIDs = ix.progression.GetRequirements(character, self.id)
 
 		local str = (
-			"Greetings, stalker. If you've noticed, you aren't capble "
+			"Greetings, stalker. If you've noticed, you aren't capable "
 			.. "of carrying everything you own; it's simply impossible. "
 			.. "Stashes are risky, but I've got a little side business "
 			.. "that I'm putting together that I think could be beneficial "
@@ -38,7 +38,11 @@ ix.progression.Register("cleanerItemDelivery_Storage", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Cleaner'"
-			local message = "For a small fee, you can now get your stuff stored by yours truly."
+			local message = string.format(
+				"%s, you came through for me, so here's our arrangement: I'll store your belongings "
+				.. "for a fee. Come see me when you need something kept safe.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,

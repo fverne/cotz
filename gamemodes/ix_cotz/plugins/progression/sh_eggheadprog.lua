@@ -40,9 +40,10 @@ ix.progression.Register("eggheadItemDelivery_Detector1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
-			local message = (
-				"I've had a breakthrough! It is now possible to detect anomalous "
-				.. "substances, come by and pick up a detector!"
+			local message = string.format(
+				"%s, your samples made the difference! I've completed the first anomalous substance "
+				.. "detector. You may purchase one from me for your fieldwork.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -85,11 +86,10 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
-			local message = (
-				"Thanks to your dilligence, I was able to improve on the "
-				.. "design of the detectors, allowing one to more accurately "
-				.. "pinpoint the location. Oh, and the new detectors are of "
-				.. "course for sale."
+			local message = string.format(
+				"%s, your diligence has paid off. I've improved the detector's ability to locate "
+				.. "anomalous substances. You may purchase the revised model from me.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -133,9 +133,10 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
-			local message = (
-				"I was able to improve on the design of the detectors, allowing "
-				.. "one to more precisely pinpoint the location."
+			local message = string.format(
+				"%s, the latest detector is ready. Your contributions helped me refine its "
+				.. "precision further; come see me if you wish to purchase one.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -177,7 +178,12 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
-			local message = "## PLACEHOLDER ## - SSP99 unlocked."
+			local message = string.format(
+				"%s, your contribution to the research warrants better protection. I can now "
+				.. "authorise you to purchase an SSP-99 scientific suit. Visit me before your next "
+				.. "expedition.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -218,7 +224,11 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
-			local message = "## PLACEHOLDER ## - SSP99m unlocked."
+			local message = string.format(
+				"%s, you've earned clearance to purchase the SSP-99M suit. Your continued "
+				.. "assistance has been invaluable; come see me about the improved protection.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -258,7 +268,11 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
-			local message = "## PLACEHOLDER ## - SEVA unlocked."
+			local message = string.format(
+				"%s, I can now authorise you to purchase a SEVA suit. Your work deserves proper "
+				.. "equipment for the conditions you'll encounter out there.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -301,8 +315,10 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
-			local message = (
-				"## PLACEHOLDER ## - Stimpak MkI, Antiradiation Drugs, Psyheal " .. "Drugs unlocked."
+			local message = string.format(
+				"%s, thank you for the specimens. I can now supply you with Stimpak Mk I, "
+				.. "antiradiation drugs and Psyheal drugs. See me to purchase what you need.",
+				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
@@ -345,7 +361,11 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
-			local message = "## PLACEHOLDER ## - Stimpak MkII, Psyblock Drugs unlocked."
+			local message = string.format(
+				"%s, your latest specimens have advanced our work. I can now sell you Stimpak Mk II "
+				.. "and Psyblock drugs. Please follow the dosage instructions.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
@@ -387,7 +407,11 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 	OnComplete = function(character)
 		timer.Simple(60, function()
 			local name = "'Egghead'"
-			local message = "## PLACEHOLDER ## - Stimpak MkIII, Psyblock Drugs unlocked."
+			local message = string.format(
+				"%s, excellent work with those specimens. You now have clearance to purchase "
+				.. "Stimpak Mk III and the stronger Psyblock drugs from me. Use them carefully.",
+				character:GetName()
+			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
