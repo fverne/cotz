@@ -279,7 +279,7 @@ def build_tabs(root, entities, tokenize, decode):
     tabs["Progression rebalance"] = [["Progression ID", "Step", "NPC", "Original item types", "Original raw units",
                                        "Personal slots", "Min assigned raw units", "Max assigned raw units",
                                        "Pools", "Single-item exceptions", "Source", "Original / 16 rounded up",
-                                       "Extra units to retain categories", "Original job thresholds", "Personal job thresholds"]]
+                                       "Units above original / 16", "Original job thresholds", "Personal job thresholds"]]
     original_path = root / "docs/balance/progression/original-requirements.json"
     original = json.loads(original_path.read_text()) if original_path.is_file() else {}
     tasks_path = root / "docs/balance/progression/original-task-requirements.json"

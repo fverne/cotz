@@ -36,9 +36,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "common_hides", quantity = 1 },
-		{ pool = "humanoid_parts", quantity = 2 },
-		{ pool = "common_parts", quantity = 1 },
+		{ pool = "common_hides", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -92,6 +90,8 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 		{ pool = "predator_hides", quantity = 1 },
 		{ pool = "brains", quantity = 1 },
 		{ pool = "large_parts", quantity = 1 },
+		{ pool = "common_parts", quantity = 2 },
+		{ pool = "small_parts", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -145,6 +145,11 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 		{ pool = "elite_hides", quantity = 1 },
 		{ pool = "brains", quantity = 1 },
 		{ pool = "exotic_parts", quantity = 1 },
+		{ pool = "common_parts", quantity = 2 },
+		{ pool = "small_parts", quantity = 2 },
+		{ pool = "large_parts", quantity = 1 },
+		{ pool = "humanoid_parts", quantity = 1 },
+		{ pool = "common_hides", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -198,9 +203,7 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "melee_tools", quantity = 1 },
-		{ pool = "workshop_supplies", quantity = 1 },
-		{ pool = "maintenance", quantity = 1 },
+		{ pool = "melee_tools", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -253,6 +256,8 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 		{ pool = "common_artifacts", quantity = 1 },
 		{ pool = "electrical_artifacts", quantity = 1 },
 		{ pool = "common_hides", quantity = 1 },
+		{ pool = "common_parts", quantity = 2 },
+		{ pool = "small_parts", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -305,6 +310,11 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 		{ pool = "common_artifacts", quantity = 1 },
 		{ pool = "chemical_artifacts", quantity = 1 },
 		{ pool = "predator_hides", quantity = 1 },
+		{ pool = "common_parts", quantity = 1 },
+		{ pool = "small_parts", quantity = 1 },
+		{ pool = "large_parts", quantity = 1 },
+		{ pool = "humanoid_parts", quantity = 1 },
+		{ pool = "common_hides", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()

@@ -40,9 +40,10 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "humanoid_parts", quantity = 1 },
-		{ pool = "common_parts", quantity = 1 },
-		{ pool = "small_parts", quantity = 1 },
+		{ pool = "humanoid_parts", quantity = 4 },
+		{ pool = "common_parts", quantity = 6 },
+		{ pool = "small_parts", quantity = 6 },
+		{ pool = "large_parts", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -96,9 +97,11 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "rimfire_rifles", quantity = 1 },
-		{ pool = "maintenance", quantity = 1 },
-		{ pool = "powder", quantity = 1 },
+		{ pool = "rimfire_rifles", quantity = 2 },
+		{ pool = "maintenance", quantity = 3 },
+		{ pool = "powder", quantity = 3 },
+		{ pool = "industrial_supplies", quantity = 2 },
+		{ pool = "documents_technical", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -153,9 +156,12 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "common_parts", quantity = 5 },
-		{ pool = "small_parts", quantity = 5 },
+		{ pool = "common_parts", quantity = 8 },
+		{ pool = "small_parts", quantity = 8 },
 		{ pool = "humanoid_parts", quantity = 4 },
+		{ pool = "large_parts", quantity = 5 },
+		{ pool = "rare_parts", quantity = 2 },
+		{ pool = "exotic_parts", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -206,9 +212,13 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "humanoid_parts", quantity = 2 },
-		{ pool = "large_parts", quantity = 1 },
-		{ pool = "rare_parts", quantity = 1 },
+		{ pool = "humanoid_parts", quantity = 5 },
+		{ pool = "large_parts", quantity = 5 },
+		{ pool = "rare_parts", quantity = 2 },
+		{ pool = "common_parts", quantity = 8 },
+		{ pool = "small_parts", quantity = 8 },
+		{ pool = "exotic_parts", quantity = 4 },
+		{ pool = "elite_parts", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -262,9 +272,12 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "documents_field", quantity = 1 },
-		{ pool = "documents_research", quantity = 1 },
-		{ pool = "administrative_documents", quantity = 1 },
+		{ pool = "documents_field", quantity = 4 },
+		{ pool = "documents_research", quantity = 2 },
+		{ pool = "administrative_documents", quantity = 2 },
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "field_instruments", quantity = 1 },
+		{ pool = "small_electronics", quantity = 5 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -318,10 +331,13 @@ ix.progression.Register("quartermasterItemDelivery_1121", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "documents_field", quantity = 1 },
-		{ pool = "documents_research", quantity = 1 },
-		{ pool = "field_instruments", quantity = 1 },
-		{ pool = "administrative_documents", quantity = 1 },
+		{ pool = "documents_field", quantity = 4 },
+		{ pool = "documents_research", quantity = 2 },
+		{ pool = "field_instruments", quantity = 2 },
+		{ pool = "administrative_documents", quantity = 2 },
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "small_electronics", quantity = 6 },
+		{ pool = "repair_electrical", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -373,9 +389,14 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "powder", quantity = 6 },
-		{ pool = "maintenance", quantity = 6 },
-		{ pool = "industrial_supplies", quantity = 5 },
+		{ pool = "powder", quantity = 5 },
+		{ pool = "maintenance", quantity = 4 },
+		{ pool = "industrial_supplies", quantity = 2 },
+		{ pool = "documents_technical", quantity = 2 },
+		{ pool = "repair_electrical", quantity = 4 },
+		{ pool = "fasteners", quantity = 20 },
+		{ pool = "workshop_supplies", quantity = 4 },
+		{ pool = "batteries", quantity = 12 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -429,7 +450,9 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 	requirementSlots = {
 		{ pool = "stash_notes", quantity = 1 },
 		{ pool = "administrative_documents", quantity = 1 },
-		{ pool = "documents_field", quantity = 1 },
+		{ pool = "documents_field", quantity = 3 },
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "documents_research", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -480,7 +503,12 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "elite_parts", quantity = 1 },
+		{ pool = "elite_parts", quantity = 2 },
+		{ pool = "common_parts", quantity = 7 },
+		{ pool = "small_parts", quantity = 6 },
+		{ pool = "humanoid_parts", quantity = 4 },
+		{ pool = "large_parts", quantity = 5 },
+		{ pool = "rare_parts", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -533,7 +561,11 @@ ix.progression.Register("quartermasterItemDelivery_122", {
 	lootMapTier = 2,
 	requirementSlots = {
 		{ pool = "brains", quantity = 1 },
-		{ pool = "exotic_parts", quantity = 1 },
+		{ pool = "exotic_parts", quantity = 4 },
+		{ pool = "common_parts", quantity = 7 },
+		{ pool = "small_parts", quantity = 6 },
+		{ pool = "humanoid_parts", quantity = 4 },
+		{ pool = "large_parts", quantity = 5 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -587,9 +619,13 @@ ix.progression.Register("quartermasterItemDelivery_1221", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "mre", quantity = 3 },
-		{ pool = "common_meals", quantity = 2 },
-		{ pool = "spirits", quantity = 2 },
+		{ pool = "mre", quantity = 1 },
+		{ pool = "common_meals", quantity = 8 },
+		{ pool = "spirits", quantity = 3 },
+		{ pool = "canned_food", quantity = 5 },
+		{ pool = "local_refreshments", quantity = 5 },
+		{ pool = "local_beer", quantity = 4 },
+		{ pool = "tobacco", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -641,6 +677,13 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 	lootMapTier = 2,
 	requirementSlots = {
 		{ pool = "elite_hides", quantity = 1 },
+		{ pool = "common_parts", quantity = 8 },
+		{ pool = "small_parts", quantity = 8 },
+		{ pool = "humanoid_parts", quantity = 5 },
+		{ pool = "large_parts", quantity = 5 },
+		{ pool = "rare_parts", quantity = 2 },
+		{ pool = "exotic_parts", quantity = 4 },
+		{ pool = "elite_parts", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -690,9 +733,10 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "large_parts", quantity = 1 },
-		{ pool = "exotic_parts", quantity = 1 },
-		{ pool = "humanoid_parts", quantity = 1 },
+		{ pool = "large_parts", quantity = 4 },
+		{ pool = "exotic_parts", quantity = 3 },
+		{ pool = "humanoid_parts", quantity = 4 },
+		{ pool = "common_parts", quantity = 6 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -744,9 +788,11 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "stash_notes", quantity = 2 },
+		{ pool = "stash_notes", quantity = 1 },
 		{ pool = "veteran_stash", quantity = 1 },
 		{ pool = "administrative_documents", quantity = 1 },
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "documents_field", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -796,9 +842,12 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "common_meat", quantity = 7 },
-		{ pool = "common_parts", quantity = 6 },
-		{ pool = "small_parts", quantity = 6 },
+		{ pool = "common_meat", quantity = 12 },
+		{ pool = "common_parts", quantity = 8 },
+		{ pool = "small_parts", quantity = 8 },
+		{ pool = "humanoid_parts", quantity = 5 },
+		{ pool = "large_parts", quantity = 6 },
+		{ pool = "rare_parts", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -849,9 +898,12 @@ ix.progression.Register("quartermasterItemDelivery_212", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "mre", quantity = 3 },
-		{ pool = "local_beer", quantity = 2 },
-		{ pool = "common_meals", quantity = 2 },
+		{ pool = "mre", quantity = 1 },
+		{ pool = "local_beer", quantity = 5 },
+		{ pool = "common_meals", quantity = 9 },
+		{ pool = "canned_food", quantity = 5 },
+		{ pool = "local_refreshments", quantity = 5 },
+		{ pool = "spirits", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -902,7 +954,11 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 	requirementSlots = {
 		{ pool = "computer_parts", quantity = 1 },
 		{ pool = "advanced_parts", quantity = 1 },
-		{ pool = "industrial_supplies", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 2 },
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "documents_field", quantity = 5 },
+		{ pool = "documents_research", quantity = 2 },
+		{ pool = "administrative_documents", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -958,9 +1014,11 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "electrical_artifacts", quantity = 1 },
-		{ pool = "elite_parts", quantity = 1 },
-		{ pool = "chemical_artifacts", quantity = 1 },
+		{ pool = "electrical_artifacts", quantity = 3 },
+		{ pool = "elite_parts", quantity = 2 },
+		{ pool = "chemical_artifacts", quantity = 2 },
+		{ pool = "gravitational_artifacts", quantity = 1 },
+		{ pool = "rare_electrical_artifacts", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1011,9 +1069,12 @@ ix.progression.Register("quartermasterItemDelivery_221", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "rare_field_artifacts", quantity = 1 },
-		{ pool = "hellhound_part", quantity = 1 },
-		{ pool = "rare_electrical_artifacts", quantity = 1 },
+		{ pool = "rare_field_artifacts", quantity = 2 },
+		{ pool = "hellhound_part", quantity = 6 },
+		{ pool = "rare_electrical_artifacts", quantity = 2 },
+		{ pool = "electrical_artifacts", quantity = 3 },
+		{ pool = "chemical_artifacts", quantity = 2 },
+		{ pool = "gravitational_artifacts", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1064,9 +1125,12 @@ ix.progression.Register("quartermasterItemDelivery_222", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "rare_field_artifacts", quantity = 1 },
+		{ pool = "rare_field_artifacts", quantity = 2 },
 		{ pool = "gravitational_artifacts", quantity = 1 },
-		{ pool = "documents_field", quantity = 1 },
+		{ pool = "documents_field", quantity = 3 },
+		{ pool = "electrical_artifacts", quantity = 3 },
+		{ pool = "chemical_artifacts", quantity = 2 },
+		{ pool = "rare_electrical_artifacts", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1117,9 +1181,13 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "rare_field_artifacts", quantity = 1 },
-		{ pool = "chemical_artifacts", quantity = 1 },
-		{ pool = "rare_electrical_artifacts", quantity = 1 },
+		{ pool = "rare_field_artifacts", quantity = 2 },
+		{ pool = "chemical_artifacts", quantity = 2 },
+		{ pool = "rare_electrical_artifacts", quantity = 2 },
+		{ pool = "electrical_artifacts", quantity = 3 },
+		{ pool = "gravitational_artifacts", quantity = 1 },
+		{ pool = "bubble_artifacts", quantity = 1 },
+		{ pool = "documents_research", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()

@@ -33,9 +33,7 @@ ix.progression.Register("eggheadItemDelivery_Detector1", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "common_artifacts", quantity = 1 },
-		{ pool = "electrical_artifacts", quantity = 1 },
-		{ pool = "chemical_artifacts", quantity = 1 },
+		{ pool = "common_artifacts", quantity = 21 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -78,10 +76,9 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "rare_field_artifacts", quantity = 1 },
-		{ pool = "rare_electrical_artifacts", quantity = 1 },
-		{ pool = "chemical_artifacts", quantity = 1 },
-		{ pool = "gravitational_artifacts", quantity = 1 },
+		{ pool = "rare_field_artifacts", quantity = 3 },
+		{ pool = "rare_electrical_artifacts", quantity = 4 },
+		{ pool = "chemical_artifacts", quantity = 5 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -125,10 +122,12 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 	requirementSlots = {
 		{ pool = "exceptional_artifacts", quantity = 1 },
 		{ pool = "bubble_artifacts", quantity = 1 },
-		{ pool = "burner_artifacts", quantity = 1 },
-		{ pool = "rare_electrical_artifacts", quantity = 1 },
-		{ pool = "chemical_artifacts", quantity = 1 },
+		{ pool = "burner_artifacts", quantity = 2 },
+		{ pool = "rare_electrical_artifacts", quantity = 2 },
+		{ pool = "chemical_artifacts", quantity = 2 },
 		{ pool = "gravitational_artifacts", quantity = 1 },
+		{ pool = "documents_research", quantity = 2 },
+		{ pool = "documents_technical", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -171,9 +170,9 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "predator_hides", quantity = 1 },
-		{ pool = "common_hides", quantity = 1 },
-		{ pool = "common_parts", quantity = 1 },
+		{ pool = "predator_hides", quantity = 3 },
+		{ pool = "common_hides", quantity = 4 },
+		{ pool = "common_parts", quantity = 17 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -217,9 +216,12 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "predator_hides", quantity = 1 },
+		{ pool = "predator_hides", quantity = 2 },
 		{ pool = "elite_hides", quantity = 1 },
-		{ pool = "exotic_parts", quantity = 1 },
+		{ pool = "exotic_parts", quantity = 5 },
+		{ pool = "documents_research", quantity = 3 },
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "field_instruments", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -262,8 +264,13 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 	lootMapTier = 2,
 	requirementSlots = {
 		{ pool = "elite_hides", quantity = 1 },
-		{ pool = "predator_hides", quantity = 1 },
-		{ pool = "brains", quantity = 1 },
+		{ pool = "predator_hides", quantity = 2 },
+		{ pool = "brains", quantity = 2 },
+		{ pool = "documents_research", quantity = 2 },
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "field_instruments", quantity = 2 },
+		{ pool = "administrative_documents", quantity = 2 },
+		{ pool = "small_electronics", quantity = 7 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -308,9 +315,9 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "brains", quantity = 2 },
-		{ pool = "exotic_parts", quantity = 2 },
-		{ pool = "chemical_artifacts", quantity = 1 },
+		{ pool = "brains", quantity = 3 },
+		{ pool = "exotic_parts", quantity = 7 },
+		{ pool = "chemical_artifacts", quantity = 5 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -355,8 +362,11 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 	lootMapTier = 2,
 	requirementSlots = {
 		{ pool = "brains", quantity = 2 },
-		{ pool = "exotic_parts", quantity = 2 },
+		{ pool = "exotic_parts", quantity = 5 },
 		{ pool = "rare_electrical_artifacts", quantity = 2 },
+		{ pool = "documents_research", quantity = 3 },
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "field_instruments", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -399,10 +409,14 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "elite_parts", quantity = 1 },
-		{ pool = "brains", quantity = 1 },
-		{ pool = "rare_field_artifacts", quantity = 1 },
+		{ pool = "elite_parts", quantity = 3 },
+		{ pool = "brains", quantity = 2 },
+		{ pool = "rare_field_artifacts", quantity = 2 },
 		{ pool = "exceptional_electrical_artifacts", quantity = 1 },
+		{ pool = "documents_research", quantity = 2 },
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "field_instruments", quantity = 2 },
+		{ pool = "administrative_documents", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()

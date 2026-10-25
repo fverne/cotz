@@ -43,9 +43,7 @@ ix.progression.Register("hagglerItemDelivery_1", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "fasteners", quantity = 3 },
-		{ pool = "cleaning", quantity = 2 },
-		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "fasteners", quantity = 10 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -98,9 +96,7 @@ ix.progression.Register("hagglerItemDelivery_11", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "small_electronics", quantity = 3 },
-		{ pool = "adhesives", quantity = 3 },
-		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "small_electronics", quantity = 5 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -154,8 +150,7 @@ ix.progression.Register("hagglerItemDelivery_111", {
 	lootMapTier = 1,
 	requirementSlots = {
 		{ pool = "workshop_supplies", quantity = 2 },
-		{ pool = "fasteners", quantity = 2 },
-		{ pool = "cleaning", quantity = 1 },
+		{ pool = "fasteners", quantity = 9 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -209,9 +204,8 @@ ix.progression.Register("hagglerItemDelivery_1111", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "repair_electrical", quantity = 2 },
-		{ pool = "cleaning", quantity = 1 },
-		{ pool = "consumer_electronics", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 3 },
+		{ pool = "cleaning", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -267,9 +261,8 @@ ix.progression.Register("hagglerItemDelivery_112", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "small_valuables", quantity = 2 },
-		{ pool = "repair_electrical", quantity = 1 },
-		{ pool = "industrial_supplies", quantity = 1 },
+		{ pool = "small_valuables", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -324,9 +317,7 @@ ix.progression.Register("hagglerItemDelivery_12", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "repair_electrical", quantity = 2 },
-		{ pool = "adhesives", quantity = 1 },
-		{ pool = "small_electronics", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -383,9 +374,8 @@ ix.progression.Register("hagglerItemDelivery_121", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "cleaning", quantity = 1 },
-		{ pool = "statues", quantity = 1 },
-		{ pool = "administrative_documents", quantity = 1 },
+		{ pool = "cleaning", quantity = 2 },
+		{ pool = "statues", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -439,8 +429,7 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 	lootMapTier = 2,
 	requirementSlots = {
 		{ pool = "heavy_components", quantity = 2 },
-		{ pool = "fasteners", quantity = 2 },
-		{ pool = "fuel", quantity = 2 },
+		{ pool = "fasteners", quantity = 13 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -495,9 +484,9 @@ ix.progression.Register("hagglerItemDelivery_12111", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "powder", quantity = 1 },
+		{ pool = "powder", quantity = 3 },
 		{ pool = "documents_technical", quantity = 1 },
-		{ pool = "maintenance", quantity = 1 },
+		{ pool = "maintenance", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -551,9 +540,9 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "consumer_electronics", quantity = 1 },
-		{ pool = "small_valuables", quantity = 1 },
-		{ pool = "administrative_documents", quantity = 1 },
+		{ pool = "consumer_electronics", quantity = 3 },
+		{ pool = "small_valuables", quantity = 2 },
+		{ pool = "administrative_documents", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -605,9 +594,8 @@ ix.progression.Register("hagglerItemDelivery_122", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "cleaning", quantity = 1 },
+		{ pool = "cleaning", quantity = 2 },
 		{ pool = "heavy_electrical_map1", quantity = 1 },
-		{ pool = "workshop_supplies", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -659,8 +647,7 @@ ix.progression.Register("hagglerItemDelivery_1221", {
 	lootMapTier = 2,
 	requirementSlots = {
 		{ pool = "filters", quantity = 2 },
-		{ pool = "fasteners", quantity = 2 },
-		{ pool = "industrial_supplies", quantity = 2 },
+		{ pool = "fasteners", quantity = 12 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -713,7 +700,7 @@ ix.progression.Register("hagglerItemDelivery_12211", {
 	lootMapTier = 2,
 	requirementSlots = {
 		{ pool = "advanced_parts", quantity = 1 },
-		{ pool = "field_maintenance", quantity = 1 },
+		{ pool = "field_maintenance", quantity = 2 },
 		{ pool = "documents_technical", quantity = 1 },
 	},
 	OnComplete = function(character)
@@ -766,9 +753,7 @@ ix.progression.Register("hagglerItemDelivery_2", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "fasteners", quantity = 3 },
-		{ pool = "repair_electrical", quantity = 3 },
-		{ pool = "small_electronics", quantity = 3 },
+		{ pool = "fasteners", quantity = 10 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -820,9 +805,7 @@ ix.progression.Register("hagglerItemDelivery_21", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "powder", quantity = 1 },
-		{ pool = "maintenance", quantity = 1 },
-		{ pool = "administrative_documents", quantity = 1 },
+		{ pool = "powder", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -877,8 +860,7 @@ ix.progression.Register("hagglerItemDelivery_211", {
 	lootMapTier = 1,
 	requirementSlots = {
 		{ pool = "heavy_electrical_map1", quantity = 1 },
-		{ pool = "small_electronics", quantity = 1 },
-		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "small_electronics", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -930,9 +912,8 @@ ix.progression.Register("hagglerItemDelivery_2111", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "workshop_supplies", quantity = 1 },
-		{ pool = "adhesives", quantity = 1 },
-		{ pool = "cleaning", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 3 },
+		{ pool = "adhesives", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -983,9 +964,8 @@ ix.progression.Register("hagglerItemDelivery_212", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "batteries", quantity = 3 },
+		{ pool = "batteries", quantity = 5 },
 		{ pool = "engine_care", quantity = 2 },
-		{ pool = "repair_electrical", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1036,9 +1016,8 @@ ix.progression.Register("hagglerItemDelivery_2121", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "heavy_electrical", quantity = 1 },
-		{ pool = "small_electronics", quantity = 1 },
-		{ pool = "cleaning", quantity = 1 },
+		{ pool = "heavy_electrical", quantity = 2 },
+		{ pool = "small_electronics", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1089,9 +1068,9 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "small_electronics", quantity = 3 },
-		{ pool = "batteries", quantity = 2 },
-		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "small_electronics", quantity = 5 },
+		{ pool = "batteries", quantity = 8 },
+		{ pool = "workshop_supplies", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1144,9 +1123,7 @@ ix.progression.Register("hagglerItemDelivery_22", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "workshop_supplies", quantity = 2 },
-		{ pool = "fuel", quantity = 2 },
-		{ pool = "heavy_electrical_map1", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1201,9 +1178,8 @@ ix.progression.Register("hagglerItemDelivery_221", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "workshop_supplies", quantity = 4 },
-		{ pool = "repair_electrical", quantity = 4 },
-		{ pool = "small_electronics", quantity = 3 },
+		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "repair_electrical", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1254,9 +1230,8 @@ ix.progression.Register("hagglerItemDelivery_2211", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "field_maintenance", quantity = 1 },
-		{ pool = "consumer_electronics", quantity = 1 },
-		{ pool = "computer_parts", quantity = 1 },
+		{ pool = "field_maintenance", quantity = 2 },
+		{ pool = "consumer_electronics", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1306,9 +1281,9 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "adhesives", quantity = 5 },
-		{ pool = "repair_electrical", quantity = 4 },
-		{ pool = "workshop_supplies", quantity = 4 },
+		{ pool = "adhesives", quantity = 3 },
+		{ pool = "repair_electrical", quantity = 2 },
+		{ pool = "workshop_supplies", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1360,8 +1335,7 @@ ix.progression.Register("hagglerItemDelivery_222", {
 	lootMapTier = 1,
 	requirementSlots = {
 		{ pool = "basic_tools", quantity = 1 },
-		{ pool = "workshop_supplies", quantity = 1 },
-		{ pool = "small_electronics", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1415,9 +1389,8 @@ ix.progression.Register("hagglerItemDelivery_2221", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "maintenance", quantity = 1 },
-		{ pool = "powder", quantity = 1 },
-		{ pool = "workshop_supplies", quantity = 1 },
+		{ pool = "maintenance", quantity = 3 },
+		{ pool = "powder", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1467,7 +1440,7 @@ ix.progression.Register("hagglerItemDelivery_22211", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "maintenance", quantity = 2 },
+		{ pool = "maintenance", quantity = 3 },
 		{ pool = "fuel", quantity = 2 },
 		{ pool = "repair_electrical", quantity = 2 },
 	},

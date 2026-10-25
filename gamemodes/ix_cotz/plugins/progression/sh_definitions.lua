@@ -224,9 +224,7 @@ ix.progression.Register("oldTimerItemDelivery_mainMeat", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "common_meat", quantity = 4 },
-		{ pool = "small_parts", quantity = 3 },
-		{ pool = "common_parts", quantity = 3 },
+		{ pool = "common_meat", quantity = 8 },
 	},
 	OnComplete = function(character)
 		timer.Simple(5, function()
@@ -303,10 +301,8 @@ ix.progression.Register("technutItemDelivery_Main", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "repair_electrical", quantity = 3 },
-		{ pool = "heavy_electrical_map1", quantity = 3 },
-		{ pool = "workshop_supplies", quantity = 2 },
-		{ pool = "small_electronics", quantity = 2 },
+		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "heavy_electrical_map1", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -374,7 +370,7 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 	requirementSlots = {
 		{ pool = "statues", quantity = 1 },
 		{ pool = "administrative_documents", quantity = 1 },
-		{ pool = "common_parts", quantity = 1 },
+		{ pool = "common_parts", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -430,9 +426,10 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "consumer_electronics", quantity = 2 },
+		{ pool = "consumer_electronics", quantity = 1 },
 		{ pool = "repair_electrical", quantity = 2 },
 		{ pool = "heavy_electrical_map1", quantity = 1 },
+		{ pool = "small_electronics", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(45, function()
@@ -516,9 +513,10 @@ ix.progression.Register("quarterMasterDelivery_main", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "spirits", quantity = 2 },
-		{ pool = "premium_cigarettes", quantity = 2 },
-		{ pool = "administrative_documents", quantity = 2 },
+		{ pool = "spirits", quantity = 1 },
+		{ pool = "premium_cigarettes", quantity = 1 },
+		{ pool = "administrative_documents", quantity = 1 },
+		{ pool = "small_electronics", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(5, function()
@@ -642,7 +640,7 @@ ix.progression.Register("smartass_rfTasks", {
 		},
 	},
 	progressthresholds = {
-		[1] = 4,
+		[1] = 5,
 	},
 })
 
@@ -681,9 +679,10 @@ ix.progression.Register("beanstalkItemDelivery_Documents", {
 	lootMapTier = 2,
 	requirementSlots = {
 		{ pool = "documents_technical", quantity = 1 },
-		{ pool = "documents_research", quantity = 1 },
-		{ pool = "documents_field", quantity = 1 },
-		{ pool = "administrative_documents", quantity = 1 },
+		{ pool = "documents_research", quantity = 2 },
+		{ pool = "documents_field", quantity = 4 },
+		{ pool = "administrative_documents", quantity = 2 },
+		{ pool = "small_electronics", quantity = 5 },
 	},
 	OnComplete = function(character) end,
 })
@@ -725,10 +724,12 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "electrical_artifacts", quantity = 1 },
-		{ pool = "rare_electrical_artifacts", quantity = 1 },
-		{ pool = "chemical_artifacts", quantity = 1 },
-		{ pool = "burner_artifacts", quantity = 1 },
+		{ pool = "electrical_artifacts", quantity = 4 },
+		{ pool = "rare_electrical_artifacts", quantity = 2 },
+		{ pool = "chemical_artifacts", quantity = 3 },
+		{ pool = "burner_artifacts", quantity = 2 },
+		{ pool = "small_electronics", quantity = 6 },
+		{ pool = "repair_electrical", quantity = 3 },
 	},
 	OnComplete = function(character) end,
 })
@@ -790,7 +791,7 @@ ix.progression.Register("intern_gasAnalyzerReadings", {
 		},
 	},
 	progressthresholds = {
-		[1] = 6,
+		[1] = 17,
 	},
 })
 
@@ -842,10 +843,14 @@ ix.progression.Register("computerDelivery_main", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "radio_components", quantity = 3 },
-		{ pool = "heavy_components", quantity = 3 },
-		{ pool = "fuel", quantity = 2 },
-		{ pool = "computer_parts", quantity = 2 },
+		{ pool = "radio_components", quantity = 1 },
+		{ pool = "heavy_components", quantity = 1 },
+		{ pool = "fuel", quantity = 1 },
+		{ pool = "computer_parts", quantity = 1 },
+		{ pool = "small_electronics", quantity = 3 },
+		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "documents_technical", quantity = 1 },
 	},
 	OnComplete = function(character) end,
 })
@@ -893,6 +898,6 @@ ix.progression.Register("computer_artifactTasks", {
 		},
 	},
 	progressthresholds = {
-		[1] = 7,
+		[1] = 14,
 	},
 })

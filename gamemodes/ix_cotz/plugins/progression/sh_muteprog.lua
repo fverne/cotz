@@ -37,9 +37,7 @@ ix.progression.Register("muteItemDelivery_Binoc1", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "basic_tools", quantity = 2 },
-		{ pool = "repair_electrical", quantity = 2 },
-		{ pool = "small_electronics", quantity = 1 },
+		{ pool = "basic_tools", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -88,8 +86,8 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 	lootMapTier = 1,
 	requirementSlots = {
 		{ pool = "basic_tools", quantity = 1 },
-		{ pool = "industrial_supplies", quantity = 1 },
-		{ pool = "workshop_supplies", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 2 },
+		{ pool = "workshop_supplies", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -137,9 +135,12 @@ ix.progression.Register("muteItemDelivery_Binoc3", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "advanced_parts_map1", quantity = 2 },
-		{ pool = "small_electronics", quantity = 1 },
+		{ pool = "advanced_parts_map1", quantity = 1 },
+		{ pool = "small_electronics", quantity = 3 },
 		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -190,8 +191,13 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 	lootMapTier = 2,
 	requirementSlots = {
 		{ pool = "advanced_parts", quantity = 1 },
-		{ pool = "consumer_electronics", quantity = 1 },
-		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "consumer_electronics", quantity = 2 },
+		{ pool = "repair_electrical", quantity = 2 },
+		{ pool = "small_electronics", quantity = 3 },
+		{ pool = "industrial_supplies", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "batteries", quantity = 6 },
+		{ pool = "documents_technical", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -240,9 +246,9 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "basic_tools", quantity = 1 },
-		{ pool = "small_electronics", quantity = 1 },
-		{ pool = "electrical_artifacts", quantity = 1 },
+		{ pool = "basic_tools", quantity = 2 },
+		{ pool = "small_electronics", quantity = 4 },
+		{ pool = "electrical_artifacts", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -291,6 +297,11 @@ ix.progression.Register("muteItemDelivery_Detector", {
 	lootMapTier = 1,
 	requirementSlots = {
 		{ pool = "detector", quantity = 1 },
+		{ pool = "small_electronics", quantity = 3 },
+		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "batteries", quantity = 5 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -337,6 +348,9 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 		{ pool = "specialty_tools", quantity = 1 },
 		{ pool = "consumer_electronics", quantity = 1 },
 		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "small_electronics", quantity = 3 },
+		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -379,9 +393,9 @@ ix.progression.Register("muteItemDelivery_BlowoutWarning", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "consumer_electronics", quantity = 1 },
-		{ pool = "small_electronics", quantity = 1 },
-		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "consumer_electronics", quantity = 3 },
+		{ pool = "small_electronics", quantity = 4 },
+		{ pool = "repair_electrical", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()

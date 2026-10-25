@@ -3,7 +3,7 @@
 Progression belongs to a Helix **character**, including other characters on the same
 account. All 134 delivery steps now use saved personal requirements. Bulk hand-ins
 are reduced; fixed story keys keep their single-item requirements. The five
-job-completion progressions also use one-sixteenth of their original thresholds, rounded up. NPC arrivals remain
+job-completion progressions use the same increasing effort curve as deliveries. NPC arrivals remain
 persistent global unlocks triggered by the first character to complete their milestone.
 
 ## Personal delivery assignments
@@ -13,12 +13,14 @@ and a positive integer `quantity`. When the step becomes active and its NPC is
 personally unlocked, the server selects one candidate per slot and requests exactly
 that slot's quantity.
 
-Each delivery's budget is its original shared total divided by 16, rounded up,
-with at least one item per category. Split the budget as evenly as possible across
-all slots; any remainder goes to the first slots. Candidate spawn stack sizes do
-not multiply the request. Counts are raw quantity units, not stacks or guaranteed
-loot finds. Task thresholds are also divided by 16 and rounded up, with a minimum
-of one task. This is fresh-start balancing; no save migration is provided.
+Delivery and job requirements follow a source-based effort curve. Each successor
+requires at least 25% more modeled average acquisition effort than its prerequisites.
+Map difficulty, normalized loot odds, spawned yields, poaching odds and mutant combat
+danger inform quantities. Plentiful supplies need more units than rare trophies.
+Counts are raw quantity units. Story access keys remain single-item requests.
+The model is an offline tuning tool; runtime definitions contain literal quantities.
+See the [model and assumptions](../../../../docs/balance/progression/README.md#quantity-and-effort-decisions)
+and [per-step estimates](../../../../docs/balance/progression/pacing.md).
 
 World loot tables come in map pairs: 1/2 are Marsh ordinary/hard-to-find loot,
 3/4 are Waystation, and 5/6 are Pripyat. Definitions declare a `lootMapTier`
@@ -35,29 +37,25 @@ they never roll their own. Reopening dialogue, reconnecting, changing characters
 restarting, transferring servers, or changing pool definitions cannot reroll an
 existing assignment. Every uncompleted step receives its assignment at most once.
 
-There are 405 slots across the 134 deliveries and 85 pools covering 223 item IDs.
-Most deliveries combine three categories; later tasks can combine four, and
-Detector3 combines six. Six single-unit story or specimen deliveries retain one
-slot; three other deliveries have two. Related categories share candidates across
+There are 559 slots across the 134 deliveries and 85 pools covering 223 item IDs.
+Optional quest lines start at one requirement and grow towards eight as their
+successor depth increases. Haggler and Quartermaster share one difficulty range:
+Haggler uses one slot at depths 0–1, two at depths 2–3, and three from depth 4
+onward; Quartermaster's gear branches continue with four at their roots and add
+one per successor depth, reaching eight. Shorter branches can finish below the
+maximum. Story deliveries use explicit pacing; access keys remain single-item
+requests. Detector3 retains its six anomaly categories and adds two document slots.
+
+Related categories share candidates across
 the catalog, while slots used together in one delivery remain disjoint. Pools
 with multiple candidates spread demand across characters; they
 do not guarantee different rolls for every pair of characters. Deliberate single-item
 exceptions include story keys, specialty tools, and items without a comparable
 substitute. Each exception and its rationale is visible in the workbook.
 
-Examples:
-
-| Step | Previous requirements | Personal request |
-| --- | --- | --- |
-| Haggler: Kitting Up 1 | 90 nuts and 15 toilet rolls | 3 nuts or bolts, 2 household supplies and 2 workshop supplies |
-| Old Timer: Feeding the Hungry | 155 units across eight mutant products | 4 units of one common meat, 3 small-mutant specimens and 3 ungulate specimens |
-| Quartermaster: flesh delivery | 300 flesh meat | 7 units of one common meat, 6 ungulate specimens and 6 small-predator specimens |
-| Egghead: Detector3 | 18 artifact units | Six specimens: exceptional, Bubble, Burner, Electro, Fruitpunch and Whirlgig selections |
-
 Artifact categories describe acquisition sources rather than mandatory travel checks.
-Caches and trading remain valid ways to obtain the assigned items. The pool and
-quantity rationale is documented in `docs/balance/progression/README.md`.
-| Quartermaster introduction | One quest flash drive | The same specific flash drive |
+Caches and trading remain valid ways to obtain the assigned items. Existing saved
+assignments keep their original quantities; newly assigned steps use the new tuning.
 
 Dialogue descriptions, available hand-in options, the progression help menu,
 inventory highlights, and server validation all use the same character-aware

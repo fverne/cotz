@@ -34,9 +34,7 @@ ix.progression.Register("bossItemDelivery_1", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "common_parts", quantity = 1 },
-		{ pool = "small_parts", quantity = 1 },
-		{ pool = "humanoid_parts", quantity = 1 },
+		{ pool = "common_parts", quantity = 6 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -83,9 +81,8 @@ ix.progression.Register("bossItemDelivery_2", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "small_parts", quantity = 1 },
-		{ pool = "common_parts", quantity = 1 },
-		{ pool = "large_parts", quantity = 1 },
+		{ pool = "small_parts", quantity = 4 },
+		{ pool = "common_parts", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -133,8 +130,8 @@ ix.progression.Register("bossItemDelivery_3", {
 	lootMapTier = 2,
 	requirementSlots = {
 		{ pool = "rare_parts", quantity = 1 },
-		{ pool = "small_parts", quantity = 1 },
-		{ pool = "humanoid_parts", quantity = 1 },
+		{ pool = "small_parts", quantity = 3 },
+		{ pool = "humanoid_parts", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -180,9 +177,11 @@ ix.progression.Register("bossItemDelivery_4", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "exotic_parts", quantity = 2 },
-		{ pool = "large_parts", quantity = 1 },
-		{ pool = "humanoid_parts", quantity = 1 },
+		{ pool = "exotic_parts", quantity = 1 },
+		{ pool = "large_parts", quantity = 2 },
+		{ pool = "humanoid_parts", quantity = 2 },
+		{ pool = "common_meat", quantity = 3 },
+		{ pool = "common_hides", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -230,8 +229,10 @@ ix.progression.Register("bossItemDelivery_5", {
 	requirementSlots = {
 		{ pool = "elite_parts", quantity = 1 },
 		{ pool = "chimera_part", quantity = 1 },
-		{ pool = "exotic_parts", quantity = 1 },
-		{ pool = "large_parts", quantity = 1 },
+		{ pool = "exotic_parts", quantity = 2 },
+		{ pool = "large_parts", quantity = 2 },
+		{ pool = "common_meat", quantity = 4 },
+		{ pool = "common_hides", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -280,6 +281,9 @@ ix.progression.Register("bossItemDelivery_6", {
 		{ pool = "elite_parts", quantity = 1 },
 		{ pool = "rare_parts", quantity = 1 },
 		{ pool = "exotic_parts", quantity = 1 },
+		{ pool = "common_meat", quantity = 5 },
+		{ pool = "common_hides", quantity = 1 },
+		{ pool = "predator_hides", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -324,9 +328,13 @@ ix.progression.Register("bossItemDelivery_7", {
 	lootMapTier = 2,
 	requirementSlots = {
 		{ pool = "elite_parts", quantity = 1 },
-		{ pool = "hellhound_part", quantity = 1 },
+		{ pool = "hellhound_part", quantity = 4 },
 		{ pool = "brains", quantity = 1 },
-		{ pool = "large_parts", quantity = 1 },
+		{ pool = "large_parts", quantity = 3 },
+		{ pool = "common_meat", quantity = 6 },
+		{ pool = "common_hides", quantity = 1 },
+		{ pool = "predator_hides", quantity = 1 },
+		{ pool = "elite_hides", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()

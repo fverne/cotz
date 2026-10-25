@@ -285,6 +285,10 @@ for id, definition in pairs(api.definitions) do
 end
 check(count == 139, "all definitions exercised")
 
+-- Use a one-unit fixture to isolate partial-stack consumption and payout checks.
+local storageQuantity = api.definitions.cleanerItemDelivery_Storage.requirementSlots[1].quantity
+api.definitions.cleanerItemDelivery_Storage.requirementSlots[1].quantity = 1
+
 -- Turn-in requests must match NPC, map, inventory, remaining amount and owner.
 currentMap = "rp_marsh_cs"
 a, b = character(), character()
@@ -368,6 +372,8 @@ check(
 	api.TurnIn(c.client, target, "cleanerItemDelivery_Storage", "artifact_bolt") and inventoryItem.removed,
 	"whole-stack turn-in removes inventory item"
 )
+
+api.definitions.cleanerItemDelivery_Storage.requirementSlots[1].quantity = storageQuantity
 
 -- Completion broadcasts preserve the personalised dialogue and NPC sender.
 messages = {}
@@ -730,8 +736,9 @@ api.InitializeCharacterProgression(first)
 check(not api.GetLine(first, "hagglerItemDelivery_1").requirements, "locked NPC has no assignment yet")
 api.SetCompleted(first, "oldTimerKillIntro")
 local firstRequirements = api.GetRequirements(first, "hagglerItemDelivery_1")
-check(firstRequirements.value_nuts == 3, "personal fasteners receive three of the seven scaled units")
-check(firstRequirements.value_toiletpaper == 2, "personal household supplies receive two of the seven scaled units")
+local openingQuantity = api.definitions.hagglerItemDelivery_1.requirementSlots[1].quantity
+check(firstRequirements.value_nuts == openingQuantity, "opening quest assigns its paced quantity")
+check(not firstRequirements.value_toiletpaper, "opening quest requests only one item type")
 local savedAssignment = copy(first.data)
 local savedCalls = first.saves
 math.random = function(_, maximum)
@@ -740,7 +747,7 @@ end
 api.AssignActiveRequirements(first)
 local sameRequirements = api.GetRequirements(first, "hagglerItemDelivery_1")
 check(
-	sameRequirements.value_nuts == 3 and first.saves == savedCalls,
+	sameRequirements.value_nuts == openingQuantity and first.saves == savedCalls,
 	"reopening cannot reroll or resave assignments"
 )
 local second = character()
@@ -748,25 +755,25 @@ api.InitializeCharacterProgression(second)
 api.SetCompleted(second, "oldTimerKillIntro")
 local secondRequirements = api.GetRequirements(second, "hagglerItemDelivery_1")
 check(
-	secondRequirements.value_bolts == 3 and not secondRequirements.value_nuts,
+	secondRequirements.value_bolts == openingQuantity and not secondRequirements.value_nuts,
 	"another character receives a different pool item"
 )
 firstRequirements.value_nuts = 999
 check(
-	api.GetRequirements(first, "hagglerItemDelivery_1").value_nuts == 3,
+	api.GetRequirements(first, "hagglerItemDelivery_1").value_nuts == openingQuantity,
 	"requirements queries return snapshots"
 )
 local reconnected = character()
 reconnected.data = copy(savedAssignment)
 api.InitializeCharacterProgression(reconnected)
 check(
-	api.GetRequirements(reconnected, "hagglerItemDelivery_1").value_nuts == 3,
+	api.GetRequirements(reconnected, "hagglerItemDelivery_1").value_nuts == openingQuantity,
 	"reconnect preserves selected items"
 )
 local savedMap = currentMap
 currentMap = "rp_pripyat_remaster"
 check(
-	api.GetRequirements(reconnected, "hagglerItemDelivery_1").value_nuts == 3,
+	api.GetRequirements(reconnected, "hagglerItemDelivery_1").value_nuts == openingQuantity,
 	"map transfer cannot reroll assignments"
 )
 currentMap = savedMap
@@ -798,11 +805,12 @@ for roll = 1, 2 do
 	local specimenCount = 0
 	for _, amount in pairs(requirements) do
 		specimenCount = specimenCount + 1
-		check(amount == 1, "hard detector requests one specimen per category")
+		check(amount >= 1, "hard detector requests positive specimen quantities")
 	end
-	check(specimenCount == 6 and #line.selections == 6, "hard detector preserves six distinct categories")
-	for _, selection in ipairs(line.selections) do
-		check(requirements[selection.item] == 1, "saved detector categories match assigned specimens")
+	check(specimenCount == 8 and #line.selections == 8, "hard detector assigns eight distinct requirements")
+	for index, selection in ipairs(line.selections) do
+		local quantity = api.definitions[detectorID].requirementSlots[index].quantity
+		check(requirements[selection.item] == quantity, "saved detector categories match assigned specimens")
 	end
 end
 math.random = selectionRandom
@@ -1243,7 +1251,7 @@ check(
 )
 ix.progression.definitions = api.definitions
 check(
-	ix.progression.GetRequirements(first, "hagglerItemDelivery_1").value_nuts == 3,
+	ix.progression.GetRequirements(first, "hagglerItemDelivery_1").value_nuts == openingQuantity,
 	"client reads saved personal requirements"
 )
 check(ix.progression.GetLine(a, "cleanerItemDelivery_Storage").completed, "client reads character-owned data")

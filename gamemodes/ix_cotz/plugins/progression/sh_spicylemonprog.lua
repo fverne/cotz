@@ -36,9 +36,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical1", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "common_meals", quantity = 1 },
-		{ pool = "local_refreshments", quantity = 1 },
-		{ pool = "canned_food", quantity = 1 },
+		{ pool = "common_meals", quantity = 8 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -88,9 +86,8 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "common_meals", quantity = 2 },
-		{ pool = "local_beer", quantity = 2 },
-		{ pool = "canned_food", quantity = 1 },
+		{ pool = "common_meals", quantity = 5 },
+		{ pool = "local_beer", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -143,7 +140,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "common_meals", quantity = 4 },
+		{ pool = "common_meals", quantity = 5 },
 		{ pool = "predator_meals", quantity = 4 },
 		{ pool = "local_refreshments", quantity = 3 },
 	},
@@ -195,9 +192,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical4", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "common_meals", quantity = 4 },
+		{ pool = "common_meals", quantity = 5 },
 		{ pool = "predator_meals", quantity = 4 },
-		{ pool = "spirits", quantity = 4 },
+		{ pool = "spirits", quantity = 2 },
+		{ pool = "exotic_meals", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -249,8 +247,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 	lootMapTier = 2,
 	requirementSlots = {
 		{ pool = "predator_meals", quantity = 4 },
-		{ pool = "common_meals", quantity = 4 },
-		{ pool = "local_beer", quantity = 4 },
+		{ pool = "common_meals", quantity = 5 },
+		{ pool = "local_beer", quantity = 3 },
+		{ pool = "exotic_meals", quantity = 4 },
+		{ pool = "elite_meals", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -304,7 +304,10 @@ ix.progression.Register("spicylemonItemDelivery_Medical6", {
 	requirementSlots = {
 		{ pool = "predator_meals", quantity = 4 },
 		{ pool = "exotic_meals", quantity = 4 },
-		{ pool = "spirits", quantity = 4 },
+		{ pool = "spirits", quantity = 2 },
+		{ pool = "common_meals", quantity = 5 },
+		{ pool = "elite_meals", quantity = 3 },
+		{ pool = "local_refreshments", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -355,9 +358,13 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "exotic_meals", quantity = 3 },
-		{ pool = "predator_meals", quantity = 2 },
-		{ pool = "energy_drinks", quantity = 2 },
+		{ pool = "exotic_meals", quantity = 4 },
+		{ pool = "predator_meals", quantity = 4 },
+		{ pool = "energy_drinks", quantity = 1 },
+		{ pool = "common_meals", quantity = 5 },
+		{ pool = "elite_meals", quantity = 3 },
+		{ pool = "local_refreshments", quantity = 3 },
+		{ pool = "local_beer", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -415,9 +422,9 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "local_refreshments", quantity = 1 },
-		{ pool = "common_meals", quantity = 1 },
-		{ pool = "canned_food", quantity = 1 },
+		{ pool = "local_refreshments", quantity = 3 },
+		{ pool = "common_meals", quantity = 5 },
+		{ pool = "canned_food", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -470,9 +477,10 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "local_refreshments", quantity = 1 },
-		{ pool = "common_meals", quantity = 1 },
-		{ pool = "spirits", quantity = 1 },
+		{ pool = "local_refreshments", quantity = 3 },
+		{ pool = "common_meals", quantity = 4 },
+		{ pool = "spirits", quantity = 2 },
+		{ pool = "predator_meals", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -527,9 +535,12 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "local_refreshments", quantity = 1 },
-		{ pool = "predator_meals", quantity = 1 },
-		{ pool = "local_beer", quantity = 1 },
+		{ pool = "local_refreshments", quantity = 3 },
+		{ pool = "predator_meals", quantity = 4 },
+		{ pool = "local_beer", quantity = 3 },
+		{ pool = "common_meals", quantity = 5 },
+		{ pool = "exotic_meals", quantity = 4 },
+		{ pool = "elite_meals", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -579,10 +590,14 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "elite_meals", quantity = 4 },
-		{ pool = "exotic_meals", quantity = 3 },
+		{ pool = "elite_meals", quantity = 3 },
+		{ pool = "exotic_meals", quantity = 5 },
 		{ pool = "spirits", quantity = 3 },
-		{ pool = "local_refreshments", quantity = 3 },
+		{ pool = "local_refreshments", quantity = 4 },
+		{ pool = "common_meals", quantity = 6 },
+		{ pool = "predator_meals", quantity = 5 },
+		{ pool = "local_beer", quantity = 4 },
+		{ pool = "canned_food", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()

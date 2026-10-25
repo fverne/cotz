@@ -34,9 +34,7 @@ ix.progression.Register("technutItemDelivery_Suit1", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "fasteners", quantity = 3 },
-		{ pool = "workshop_supplies", quantity = 2 },
-		{ pool = "adhesives", quantity = 2 },
+		{ pool = "fasteners", quantity = 8 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -89,7 +87,6 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 	requirementSlots = {
 		{ pool = "field_maintenance", quantity = 1 },
 		{ pool = "common_hides", quantity = 1 },
-		{ pool = "industrial_supplies", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -144,6 +141,7 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 	requirementSlots = {
 		{ pool = "documents_technical", quantity = 1 },
 		{ pool = "small_electronics", quantity = 1 },
+		{ pool = "fasteners", quantity = 5 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -192,9 +190,9 @@ ix.progression.Register("technutItemDelivery_SuitNBC", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "filters", quantity = 1 },
-		{ pool = "antirad", quantity = 1 },
-		{ pool = "industrial_supplies", quantity = 1 },
+		{ pool = "filters", quantity = 2 },
+		{ pool = "antirad", quantity = 4 },
+		{ pool = "industrial_supplies", quantity = 2 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -244,9 +242,9 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "cigarettes", quantity = 5 },
-		{ pool = "workshop_supplies", quantity = 4 },
-		{ pool = "adhesives", quantity = 4 },
+		{ pool = "cigarettes", quantity = 3 },
+		{ pool = "workshop_supplies", quantity = 3 },
+		{ pool = "adhesives", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -297,9 +295,10 @@ ix.progression.Register("technutItemDelivery_Suit5", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "tobacco", quantity = 5 },
-		{ pool = "documents_technical", quantity = 5 },
-		{ pool = "workshop_supplies", quantity = 5 },
+		{ pool = "tobacco", quantity = 3 },
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "fasteners", quantity = 12 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -349,9 +348,11 @@ ix.progression.Register("technutItemDelivery_Suit6", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "spirits", quantity = 6 },
-		{ pool = "beer", quantity = 6 },
-		{ pool = "field_maintenance", quantity = 5 },
+		{ pool = "spirits", quantity = 3 },
+		{ pool = "beer", quantity = 2 },
+		{ pool = "field_maintenance", quantity = 3 },
+		{ pool = "fasteners", quantity = 12 },
+		{ pool = "workshop_supplies", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -400,9 +401,12 @@ ix.progression.Register("technutItemDelivery_Suit7", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "wine", quantity = 1 },
-		{ pool = "industrial_supplies", quantity = 1 },
+		{ pool = "wine", quantity = 4 },
+		{ pool = "industrial_supplies", quantity = 2 },
 		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "fasteners", quantity = 13 },
+		{ pool = "workshop_supplies", quantity = 3 },
+		{ pool = "adhesives", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -447,9 +451,7 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "adhesives", quantity = 1 },
-		{ pool = "cleaning", quantity = 1 },
-		{ pool = "workshop_supplies", quantity = 1 },
+		{ pool = "adhesives", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -500,9 +502,9 @@ ix.progression.Register("technutItemDelivery_Helmet1", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "adhesives", quantity = 1 },
-		{ pool = "workshop_supplies", quantity = 1 },
-		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "adhesives", quantity = 3 },
+		{ pool = "workshop_supplies", quantity = 3 },
+		{ pool = "repair_electrical", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -551,9 +553,10 @@ ix.progression.Register("technutItemDelivery_Helmet2", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "heavy_electrical", quantity = 1 },
-		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "heavy_electrical", quantity = 2 },
+		{ pool = "repair_electrical", quantity = 2 },
 		{ pool = "computer_parts", quantity = 1 },
+		{ pool = "fasteners", quantity = 12 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -602,9 +605,11 @@ ix.progression.Register("technutItemDelivery_Helmet3", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "common_artifacts", quantity = 1 },
-		{ pool = "electrical_artifacts", quantity = 1 },
-		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "common_artifacts", quantity = 4 },
+		{ pool = "electrical_artifacts", quantity = 4 },
+		{ pool = "repair_electrical", quantity = 3 },
+		{ pool = "fasteners", quantity = 13 },
+		{ pool = "workshop_supplies", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -653,9 +658,12 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "common_artifacts", quantity = 1 },
-		{ pool = "rare_field_artifacts", quantity = 1 },
-		{ pool = "rare_electrical_artifacts", quantity = 1 },
+		{ pool = "common_artifacts", quantity = 4 },
+		{ pool = "rare_field_artifacts", quantity = 2 },
+		{ pool = "rare_electrical_artifacts", quantity = 2 },
+		{ pool = "fasteners", quantity = 14 },
+		{ pool = "workshop_supplies", quantity = 3 },
+		{ pool = "adhesives", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -704,10 +712,12 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "common_artifacts", quantity = 1 },
+		{ pool = "common_artifacts", quantity = 5 },
 		{ pool = "exceptional_artifacts", quantity = 1 },
-		{ pool = "chemical_artifacts", quantity = 1 },
-		{ pool = "rare_electrical_artifacts", quantity = 1 },
+		{ pool = "chemical_artifacts", quantity = 3 },
+		{ pool = "rare_electrical_artifacts", quantity = 3 },
+		{ pool = "fasteners", quantity = 19 },
+		{ pool = "workshop_supplies", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -757,10 +767,13 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "chemical_artifacts", quantity = 1 },
-		{ pool = "exceptional_artifacts", quantity = 1 },
-		{ pool = "burner_artifacts", quantity = 1 },
-		{ pool = "rare_electrical_artifacts", quantity = 1 },
+		{ pool = "chemical_artifacts", quantity = 3 },
+		{ pool = "exceptional_artifacts", quantity = 2 },
+		{ pool = "burner_artifacts", quantity = 2 },
+		{ pool = "rare_electrical_artifacts", quantity = 3 },
+		{ pool = "fasteners", quantity = 21 },
+		{ pool = "workshop_supplies", quantity = 5 },
+		{ pool = "adhesives", quantity = 6 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -808,10 +821,14 @@ ix.progression.Register("technutItemDelivery_Helmet7", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "rare_field_artifacts", quantity = 1 },
-		{ pool = "bubble_artifacts", quantity = 1 },
+		{ pool = "rare_field_artifacts", quantity = 3 },
+		{ pool = "bubble_artifacts", quantity = 2 },
 		{ pool = "exceptional_electrical_artifacts", quantity = 1 },
-		{ pool = "chemical_artifacts", quantity = 1 },
+		{ pool = "chemical_artifacts", quantity = 3 },
+		{ pool = "fasteners", quantity = 26 },
+		{ pool = "workshop_supplies", quantity = 6 },
+		{ pool = "adhesives", quantity = 7 },
+		{ pool = "cleaning", quantity = 5 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -862,8 +879,6 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 	lootMapTier = 1,
 	requirementSlots = {
 		{ pool = "heavy_components", quantity = 1 },
-		{ pool = "filters", quantity = 1 },
-		{ pool = "adhesives", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -915,7 +930,6 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 	requirementSlots = {
 		{ pool = "fuel", quantity = 1 },
 		{ pool = "filters", quantity = 1 },
-		{ pool = "industrial_supplies", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -967,7 +981,7 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 	lootMapTier = 1,
 	requirementSlots = {
 		{ pool = "fuel", quantity = 1 },
-		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "repair_electrical", quantity = 2 },
 		{ pool = "industrial_supplies", quantity = 1 },
 	},
 	OnComplete = function(character)
@@ -1018,6 +1032,7 @@ ix.progression.Register("technutItemDelivery_Mask4", {
 	requirementSlots = {
 		{ pool = "specialty_tools", quantity = 1 },
 		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "fasteners", quantity = 10 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1066,9 +1081,10 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "common_optics", quantity = 1 },
-		{ pool = "attachments", quantity = 1 },
-		{ pool = "maintenance", quantity = 1 },
+		{ pool = "common_optics", quantity = 4 },
+		{ pool = "attachments", quantity = 2 },
+		{ pool = "maintenance", quantity = 3 },
+		{ pool = "fasteners", quantity = 12 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1118,9 +1134,11 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "suppressors", quantity = 1 },
-		{ pool = "powder", quantity = 1 },
-		{ pool = "repair_electrical", quantity = 1 },
+		{ pool = "suppressors", quantity = 2 },
+		{ pool = "powder", quantity = 3 },
+		{ pool = "repair_electrical", quantity = 3 },
+		{ pool = "fasteners", quantity = 13 },
+		{ pool = "workshop_supplies", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1169,9 +1187,12 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "suppressors", quantity = 1 },
-		{ pool = "maintenance", quantity = 1 },
+		{ pool = "suppressors", quantity = 2 },
+		{ pool = "maintenance", quantity = 3 },
 		{ pool = "computer_parts", quantity = 1 },
+		{ pool = "fasteners", quantity = 14 },
+		{ pool = "workshop_supplies", quantity = 3 },
+		{ pool = "adhesives", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1221,9 +1242,11 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric1", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "suit_materials", quantity = 1 },
-		{ pool = "common_hides", quantity = 1 },
-		{ pool = "adhesives", quantity = 1 },
+		{ pool = "suit_materials", quantity = 2 },
+		{ pool = "common_hides", quantity = 2 },
+		{ pool = "adhesives", quantity = 3 },
+		{ pool = "fasteners", quantity = 12 },
+		{ pool = "workshop_supplies", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1271,9 +1294,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFabric2", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "humanoid_parts", quantity = 3 },
+		{ pool = "humanoid_parts", quantity = 4 },
 		{ pool = "common_hides", quantity = 2 },
-		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "workshop_supplies", quantity = 3 },
+		{ pool = "fasteners", quantity = 14 },
+		{ pool = "adhesives", quantity = 4 },
+		{ pool = "cleaning", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1323,9 +1349,12 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame1", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "canned_food", quantity = 5 },
-		{ pool = "industrial_supplies", quantity = 4 },
+		{ pool = "canned_food", quantity = 6 },
+		{ pool = "industrial_supplies", quantity = 2 },
 		{ pool = "workshop_supplies", quantity = 4 },
+		{ pool = "fasteners", quantity = 17 },
+		{ pool = "adhesives", quantity = 5 },
+		{ pool = "cleaning", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1373,9 +1402,13 @@ ix.progression.Register("technutItemDelivery_AttachmentFrame2", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "basic_tools", quantity = 1 },
+		{ pool = "basic_tools", quantity = 2 },
 		{ pool = "advanced_parts", quantity = 1 },
-		{ pool = "industrial_supplies", quantity = 1 },
+		{ pool = "industrial_supplies", quantity = 2 },
+		{ pool = "fasteners", quantity = 19 },
+		{ pool = "workshop_supplies", quantity = 5 },
+		{ pool = "adhesives", quantity = 5 },
+		{ pool = "cleaning", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1423,9 +1456,12 @@ ix.progression.Register("technutItemDelivery_AttachmentCarbon", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "cleaning", quantity = 3 },
-		{ pool = "adhesives", quantity = 2 },
-		{ pool = "workshop_supplies", quantity = 2 },
+		{ pool = "cleaning", quantity = 4 },
+		{ pool = "adhesives", quantity = 5 },
+		{ pool = "workshop_supplies", quantity = 4 },
+		{ pool = "fasteners", quantity = 17 },
+		{ pool = "repair_electrical", quantity = 4 },
+		{ pool = "small_electronics", quantity = 6 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1476,9 +1512,12 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar1", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "batteries", quantity = 5 },
-		{ pool = "industrial_supplies", quantity = 4 },
-		{ pool = "workshop_supplies", quantity = 4 },
+		{ pool = "batteries", quantity = 8 },
+		{ pool = "industrial_supplies", quantity = 2 },
+		{ pool = "workshop_supplies", quantity = 3 },
+		{ pool = "fasteners", quantity = 13 },
+		{ pool = "adhesives", quantity = 3 },
+		{ pool = "cleaning", quantity = 3 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1525,9 +1564,12 @@ ix.progression.Register("technutItemDelivery_AttachmentKevlar2", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "batteries", quantity = 6 },
-		{ pool = "documents_technical", quantity = 5 },
-		{ pool = "field_maintenance", quantity = 5 },
+		{ pool = "batteries", quantity = 11 },
+		{ pool = "documents_technical", quantity = 1 },
+		{ pool = "field_maintenance", quantity = 4 },
+		{ pool = "fasteners", quantity = 17 },
+		{ pool = "workshop_supplies", quantity = 4 },
+		{ pool = "adhesives", quantity = 5 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()

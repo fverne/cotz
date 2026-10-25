@@ -10,47 +10,86 @@ requirements before this rebalance, taken from commit `3dde6864`. It is used onl
 for the workbook's before/after comparison. The game never reads it, and it is not
 a save-migration mechanism.
 
-## Quantity decisions
+## Quantity and effort decisions
 
-The original requirements were shared by 16 players. For each delivery, the new
-personal raw-unit budget is `ceil(sum(original requirements) / 16)`. Split that
-budget evenly across its current category slots: use integer division, then give
-one extra unit to the first slots until the remainder is exhausted. Every candidate
-in a slot uses the slot's quantity; pool membership changes item identity, not the
-budget. Do not multiply the quantity by a candidate's spawn stack size.
+Quantities now follow an acquisition-effort curve rather than the old shared total
+split evenly and divided by 16. `../progression_pacing.py` reads the live loot,
+item instance yields, poaching, anomaly and mutant definitions without executing Lua.
+It writes literal quantities back to the progression definitions. The game does not
+run this model or change saved assignments. Reproduce the tuning from the addon root:
 
-A category must request at least one item. The effective total is therefore
-`max(number of slots, ceil(original total / 16))`. This preserves the broader
-categories without fractional items or empty requirements. The rebalance tab
-explicitly shows both the rounded one-player target and any extra units needed
-for this minimum. Story keys remain one item.
+```bash
+/tmp/cotz-balance-venv/bin/python docs/balance/progression_pacing.py --apply
+```
 
-For example, 200 original units become 13 units across three categories: 5 + 4 + 4.
-Haggler's original 105 units become 7: 3 fasteners, 2 household supplies and 2
-workshop supplies. Quartermaster's original 300 flesh meat becomes 19 units:
-7 of one common meat, 6 ungulate specimens and 6 small-predator specimens.
+[The generated pacing table](pacing.md) lists every step, its estimated effort,
+access depth and quantities. These scores are relative tuning units, not minutes
+or measured encounter rates. Assumptions are explicit in the script:
 
-The catalog contains 405 personal slots across 85 pools with 223 distinct candidate
-item IDs. Most deliveries have three categories; fifteen have four, Detector3 has
-six, six have one, and three have two. The original catalog's 8,690 raw units now
-become 698 units across all 134 definitions. That catalog sum includes alternative
-branches, not a mandatory playthrough cost. Fifty-seven deliveries need the
-one-item-per-category minimum; every delivery remains below or equal to its
-original total.
+- Marsh, Waystation and Pripyat use difficulty multipliers 1, 1.5 and 2.25.
+  Loot routes also include the source map multiplier, so later-map salvage carries
+  travel risk even when the hand-in NPC lives in the Marsh.
+- World loot uses normalized item weight times expected raw-unit yield. Unit effort
+  is `sqrt(1 / (4 * chance * yield * pointFrequency))`, at least one.
+  Hard-to-find points use assumed half availability. The square root compresses
+  extreme rarity so common supplies still matter without treating very rare drops
+  as mandatory hundreds-of-hour grinds. Stack yield informs effort, not a direct
+  multiplier of hand-in quantity.
+- Mutant danger uses `sqrt(health / 100) * (1 + bulletResistance / 50) *
+  (1 + maximumMeleeDamage / 100)`, at least one. Explicit ability multipliers account
+  for invisibility, psychic attacks, phantoms and chimera leaps. Trophy effort is
+  `sqrt(danger / (threshold / 101))`; guaranteed meat uses chance one. Cooking adds
+  0.5 effort after the square root. The easiest defined quarry is used when several
+  mutants yield the same meat. This estimates combat cost, not encounter frequency.
+- Anomaly specimens use effort 4/10/20 for common/rare/very-rare field tiers.
+  Where several documented routes exist, use the cheapest modeled route. Conditional
+  cache and reward weights cannot establish how often those sources occur; candidates
+  without a modeled world/harvest/field route use explicit rarity fallbacks 1/3/8/16.
+- Pool effort is the mean of its candidates' unit efforts. Each slot keeps one shared
+  quantity for every candidate. Random alternatives can therefore differ in effort;
+  the curve guarantees increasing **modeled average** effort, not identical rolls.
 
-Task-completion thresholds use `max(1, ceil(original threshold / 16))`:
+The target starts at eight effort units times the hand-in map multiplier and grows
+by 25% per depth. A successor must also cost at least 25% more than every prerequisite's
+rounded, actual modeled effort. Dependencies include successor links and NPC access
+gates; Quartermaster's gear roots continue above Haggler's terminal branches.
+This balancing dependency does not add gameplay unlock requirements.
 
-| Progression | Original shared tasks | Personal tasks |
-| --- | ---: | ---: |
-| Old Timer introduction | 15 | 1 |
-| Boss data tasks | 50 | 4 |
-| Smartass RF tasks | 60 | 4 |
-| Intern gas-analyzer readings | 90 | 6 |
-| Computer artifact tasks | 100 | 7 |
+Divide the target effort across categories, round quantities down with a minimum
+of one, then add units to the least-funded category until the target is reached.
+Rare loot and dangerous trophy hunts therefore request fewer units than plentiful
+supplies. Integer rounding and mandatory categories can increase effort above target.
+Single-item access gates keep quantity one and carry their preceding effort into
+successor tuning. Detector calibration inputs also remain one detector, with a
+specialist fallback effort of 16; the other categories absorb additional effort. One completed job is estimated at eight units times map difficulty;
+job thresholds round the step target up to whole jobs.
 
-`original-task-requirements.json` records the original task thresholds for the
-read-only comparison and regression checks. Like the original item snapshot, it
-is documentation data and is never loaded by the game.
+The original item and task JSON snapshots remain historical comparison data only.
+Workbook columns showing original / 16 and units above that baseline are comparisons,
+not the current quantity rule. Current requirements are read directly from Lua.
+
+## Slot progression
+
+Optional quest lines scale from one to eight slots using their depth along
+successor links within the NPC's quest file. Counts use
+`1 + floor(7 * depth / maximumDepth + 0.5)`; standalone quests use one slot.
+Short terminal branches can finish below eight. Story deliveries use explicit
+counts reflecting their place in the main story, while the flash drive and
+computer access key remain single-item deliveries.
+
+Haggler and Quartermaster form a shared difficulty range. Haggler uses one slot
+at depths 0–1, two at depths 2–3, and three from depth 4 onward, including
+Kitting Up 1.2.1.1.1. Quartermaster's gear branches start at four slots and add
+one per successor edge, reaching eight on Gearing Up 1.1.2.1.1 and 1.2.2.1.1.
+This affects requirements; activation links and NPC access gates are unchanged.
+Detector3 is the final detector upgrade and explicitly uses eight slots.
+
+The catalog contains 559 personal slots across 85 pools with 223 distinct candidate
+item IDs. The distribution by slot count is: 20 one-slot deliveries, 20 two-slot,
+23 three-slot, 9 four-slot, 13 five-slot, 27 six-slot, 9 seven-slot, and 13 eight-slot.
+Current quantities and task thresholds are listed in [the pacing table](pacing.md).
+The catalog includes alternative branches, so its sum is not a mandatory playthrough
+cost. Category breadth remains one to eight slots; quantity tuning uses source effort.
 
 ## Category breadth and overlap
 
@@ -68,13 +107,12 @@ candidate or collapse two required categories into one item type.
 
 All nine requested additions are eligible in active progression: documents 1, 2, 3,
 6 and 8, FPGA boards, LCD panels, powerbanks and military tape. `value_personal`
-remains excluded. Candidates retain their source-based rarity grouping. Quantities
-follow the divided raw-unit budget, so alternatives within a slot have equal counts;
-spawn stacks and acquisition weights remain evidence for playtesting effort.
+remains excluded. Candidates retain their source-based rarity grouping. Alternatives within a slot have equal counts;
+spawn yields, loot weights, harvesting odds and combat danger now inform quantity tuning.
 
-`eggheadItemDelivery_Detector3` requires six one-unit selections: one exceptional
-specimen plus dedicated Bubble, Burner, Electro, Fruitpunch and Whirlgig categories.
-These are based on the anomaly definitions, so a different family cannot replace
+`eggheadItemDelivery_Detector3` requires eight categories with paced quantities: one exceptional
+specimen plus dedicated Bubble, Burner, Electro, Fruitpunch and Whirlgig categories, plus research and technical documents.
+The six anomaly categories are based on the anomaly definitions, so a different family cannot replace
 the dedicated specimen. Rare thermal and gravitational pools keep their identities;
 the Bubble pool no longer accepts the electrical Halo artifact. This encourages
 exploration across families, though caches, trading and shared drops in Karusel
@@ -108,7 +146,7 @@ its delivery's ceiling. A global reward/cache route does not exempt an otherwise
 later-map world item. Both ordinary and hard-to-find tables on the permitted map
 count; `worldspawn_2` is valid early Marsh loot. Commented entries do not count.
 
-Twenty deliveries were localized without changing their quantities or slot counts.
+Twenty deliveries use localized pools; their slot counts remain unchanged.
 Early heavy-electrical pools exclude the Waystation powerbank. Early computer and
 instrument requirements use local electrical or industrial salvage instead; early
 advanced equipment keeps the advanced toolbox that actually spawns in the Marsh.
@@ -134,7 +172,8 @@ Pools are curated by acquisition route and theme, then checked against source da
 - Explicit spawn quantities override item instance defaults. Simple literal
   `OnInstanced` random quantity ranges are reported separately from stack capacity.
 - Poaching records guaranteed meat and the actual `random(0, 100) < threshold`
-  trophy probability. Quarry difficulty and encounter frequency are not inferred.
+  trophy probability. The audit reports source odds; the pacing model separately estimates quarry danger.
+  Encounter frequency remains unknown.
 - Cooked requests are traced to their raw meat and quarry. Cooking fuel and time
   remain part of their acquisition cost.
 - Artifacts are grouped using common, rare, or very-rare anomaly-field membership

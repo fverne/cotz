@@ -2,7 +2,7 @@ local MAP = "rp_marsh_cs"
 
 ix.progression.Register("jittersItemDelivery_medical1", {
 	name = "Due Treatment 1",
-	description = "Jitters take a good look at you.",
+	description = "Jitters takes a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = true,
 	progMap = MAP,
@@ -34,8 +34,6 @@ ix.progression.Register("jittersItemDelivery_medical1", {
 	lootMapTier = 1,
 	requirementSlots = {
 		{ pool = "tobacco", quantity = 2 },
-		{ pool = "stimulants", quantity = 1 },
-		{ pool = "common_meals", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -52,7 +50,7 @@ ix.progression.Register("jittersItemDelivery_medical1", {
 
 ix.progression.Register("jittersItemDelivery_medical2", {
 	name = "Due Treatment 2",
-	description = "Jitters take a good look at you.",
+	description = "Jitters takes a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = false,
 	progMap = MAP,
@@ -83,9 +81,9 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "cigarettes", quantity = 7 },
-		{ pool = "rare_drugs", quantity = 6 },
-		{ pool = "antirad", quantity = 6 },
+		{ pool = "cigarettes", quantity = 1 },
+		{ pool = "rare_drugs", quantity = 1 },
+		{ pool = "antirad", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -102,7 +100,7 @@ ix.progression.Register("jittersItemDelivery_medical2", {
 
 ix.progression.Register("jittersItemDelivery_medical3", {
 	name = "Due Treatment 3",
-	description = "Jitters take a good look at you.",
+	description = "Jitters takes a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = false,
 	progMap = MAP,
@@ -130,9 +128,12 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "premium_cigarettes", quantity = 2 },
-		{ pool = "rare_drugs", quantity = 2 },
+		{ pool = "premium_cigarettes", quantity = 1 },
+		{ pool = "rare_drugs", quantity = 1 },
 		{ pool = "stimulants", quantity = 1 },
+		{ pool = "antirad", quantity = 1 },
+		{ pool = "common_meals", quantity = 1 },
+		{ pool = "cigarettes", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -149,7 +150,7 @@ ix.progression.Register("jittersItemDelivery_medical3", {
 
 ix.progression.Register("jittersItemDelivery_medical4", {
 	name = "Due Treatment 4",
-	description = "Jitters take a good look at you.",
+	description = "Jitters takes a good look at you.",
 	keyNpc = "'Jitters'",
 	defaultActive = false,
 	progMap = MAP,
@@ -181,6 +182,10 @@ ix.progression.Register("jittersItemDelivery_medical4", {
 		{ pool = "rare_drugs", quantity = 1 },
 		{ pool = "tobacco", quantity = 1 },
 		{ pool = "antirad", quantity = 1 },
+		{ pool = "stimulants", quantity = 1 },
+		{ pool = "common_meals", quantity = 1 },
+		{ pool = "cigarettes", quantity = 1 },
+		{ pool = "premium_cigarettes", quantity = 1 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
