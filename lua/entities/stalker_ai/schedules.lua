@@ -1,4 +1,5 @@
 function ENT:RunAI( strExp )
+	if self.cotzSleeping then return end
 	if(self.PlayingAnimation==false||(self.PlayingAnimation==true&&self.PlayingGesture==true&&self.AllowSchedulesOnGesture==true)) then
 		if((self.PlayingAnimation==false||self.PlayingGesture==true)&&!self.CurrentSchedule) then
 			self:SelectSchedule()
@@ -25,6 +26,7 @@ function ENT:RunAI( strExp )
 end
 
 function ENT:SelectSchedule( iNPCState )
+	if self.cotzSleeping then return end
 	if(!isnumber(self.NextRun)) then
 		self.NextRun = CurTime()+1
 	end

@@ -20,10 +20,7 @@ PLUGIN.spawnrate = 30
 
 local icon = Material("vgui/icons/news.png")
 
-ix.config.Add("eventControllerThreshold", 70, "How many mutants should the controller keep on the map.", nil, {
-	data = {min = 10, max = 100},
-	category = "Spawning"
-})
+ix.util.Include("sh_population.lua")
 
 if SERVER then
 	local spawntime = 1
@@ -45,10 +42,15 @@ if SERVER then
 	end
 	
 	function PLUGIN:spawnEvent(eventpoint, spawn)
+		if ix.eventController ~= self then return end
 		--spawnents
 		if spawn.entities then
 			for k = 1, #spawn.entities do
 				for i = 1, spawn.entities[k][2] do
+					local class = spawn.entities[k][1]
+					local isMutant = class:sub(1, 11) == "npc_mutant_"
+					if isMutant and not self:CanPopulateMutant(nil, true) then break end
+
 					local position = self:GetSpawnLocation( eventpoint[1] )
 					local data = {}
 					data.start = position
@@ -61,10 +63,15 @@ if SERVER then
 					-- 	continue
 					-- end
 
-					local newNPC = ents.Create(spawn.entities[k][1])
-					newNPC:SetPos(position)
-					newNPC:Spawn()
-					newNPC:DropToFloor()
+					if isMutant and not self:CanPopulateMutant(position, true) then continue end
+					if isMutant then
+						self:QueueMutant(class, position, self.saferadius, true)
+					else
+						local newNPC = ents.Create(class)
+						newNPC:SetPos(position)
+						newNPC:Spawn()
+						newNPC:DropToFloor()
+					end
 				end
 			end
 		end
@@ -162,6 +169,8 @@ if SERVER then
 	end
 	
 	function PLUGIN:Think()
+		if ix.eventController ~= self then return end
+		self:UpdateMutantPerformance()
 		if table.IsEmpty(self.eventpoints) then return end
 
 		if populate then
@@ -190,7 +199,7 @@ if SERVER then
 		if spawntime > CurTime() then return end
 		spawntime = CurTime() + self.spawnrate
 
-		if( self:GetNumMutants() > ix.config.Get("eventControllerThreshold",35)) then return end
+		if self:GetNumMutants(true) >= self:GetMutantTarget() then return end
 
 		local eventpoint = table.Random(self.eventpoints[game.GetMap()])
 		if (!eventpoint) then
@@ -226,9 +235,6 @@ if SERVER then
 
 	end	
 
-	function PLUGIN:GetNumMutants()
-		return #ents.FindByClass("npc_*")
-	end
 else
 	netstream.Hook("nut_DisplaySpawnPoints", function(data)
 		for k, v in pairs(data) do
