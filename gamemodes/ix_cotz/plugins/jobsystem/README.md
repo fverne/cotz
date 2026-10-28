@@ -1,8 +1,7 @@
 ## Task rewards and existing kits
 
-Jobsystem owns repeatable job rewards, previews, acceptance, item delivery, offer migration,
-and automatic supply-claim continuation. Its character-load hook prepares existing jobs;
-its post-data-load hook validates task rewards. The `ix.taskRewards` API and saved character
+Jobsystem owns repeatable job rewards, previews, acceptance, item delivery
+and automatic supply-claim continuation. Its post-data-load hook validates task rewards. The `ix.taskRewards` API and saved character
 keys remain unchanged. Progression owns story milestones and their completion payouts.
 Jobsystem uses progression's purchase unlock checks and token-backed reward-claim service.
 
@@ -30,32 +29,27 @@ changed under "About work" after acceptance.
 Unaccepted previews stay hidden from the separate supplies menu and cannot be reserved
 through its selection endpoint.
 Each job supply choice delivers exactly one inventory item. Job supplies
-use contact profiles and job tier; legacy `rewardCount` remains ignored.
+use contact profiles and job tier.
 Uses/rounds range from 25–60% of normal capacity at tier 1, increasing by 10 percentage
 points per tier, capped at normal capacity (minimum one use/round). Equipment starts at
 30–60% durability and wear condition, increasing by 10 points per tier up to tier 5.
 Unlocked provider equipment is eligible up to catalogue prices of 2,500 / 7,500 / 15,000 /
 30,000 / 50,000 rubles by tier. These settings live beside `BuildJobChoices` in
 `libs/sh_taskrewards.lua`; each amount is deterministic for its saved offer.
-Previously prepared job offers are replaced with single-item choices and their selection
-is cleared so the player can review the new supplies. Earned status and task progress
-are preserved; old offers without a stored tier use tier 1. Already delivered items and
-rewards already transferred to the claim queue are unchanged.
 Delivery cash is 55% of the required hand-in value, using the higher of catalogue value
 and configured/live trader sale quotes, multiplied by the actual requested count.
 Stackable requirements are priced per consumed use; ammunition boxes without `quantity`
 count as whole inventory items. Actual specimen quality/value is recorded before
-consumption. Non-delivery jobs pay 55% of their original midpoint cash plus half the old
+consumption. Non-delivery jobs pay 55% of their configured midpoint cash plus half the
 supply expected value. Both components are scaled together.
 A base Swamp Controller hand (catalogue value 6,700) pays 3,685 rubles from its repeatable
 job, plus its single supply item; progression credit for that hand is 4,355 rubles.
-Existing jobs and previews receive the reduced cash rate once, replacing older higher
-quotes. `JOB_CASH_RATE` configures repeatable payouts in `libs/sh_taskrewards.lua`.
+`JOB_CASH_RATE` configures repeatable payouts in `libs/sh_taskrewards.lua`.
 Progression sets `PROGRESSION_CASH_RATE` separately in `../progression/libs/sh_rewards.lua`. Money is paid once on job completion, not during item delivery.
 A qualifying completion still earns its existing 20% personal vendor restock exactly once.
-Already-active jobs receive saved choices on character load without changing their work.
+Job previews save their cash and supplies when created; reopening and accepting reuse that offer.
 
-Profiles use existing items and provider-specific purchase checks. Legacy-kit offers
+Profiles use existing items and provider-specific purchase checks. Task-kit offers
 retain nominal-value budgeting. Higher-value offers of those types may
 include an already-authorised weapon or body armour from that provider, worth at least
 60% of the offer budget. Quantities are explicit; indivisible value and the package-size
@@ -66,11 +60,8 @@ utility; balancing still requires live playtesting.
 
 The paid upgrade dialogue is removed. Recognised task-kit types, including shared ammo/
 aid kit types used by jobs, redeem at contacts for visible choices with no fee. These types
-redeem deterministically regardless of where an old instance was found; unrelated starter,
-medical and world kits keep their opening behaviour. Existing kit definitions remain for
-saved-instance compatibility. Legacy tier-8 weapon pools were disabled and used the old
-random-item default fallback; redemption values that same default pool. The removed codeine
-reference values the existing painkiller equivalent. No new item definitions are introduced.
+redeem deterministically; unrelated starter, medical and world kits keep their opening
+behaviour. Reward definitions reference existing items and pools directly.
 
 Kit-producing Haggler/Quartermaster barters appear in the task supplies menu as explicit
 ammunition selections from their original ammunition families. Their required items and

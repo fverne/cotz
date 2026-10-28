@@ -130,7 +130,7 @@ local function wishOffer(client, data)
 			return
 		end
 	end
-	local previous = character:GetData("wishPurchases", table.Count(wishes))
+	local previous = character:GetData("wishPurchases", 0)
 
 	return {type = kind, item = item, baseCost = math.min(MAX_WISH_PRICE, previous * WISH_PRICE)}
 end
@@ -378,7 +378,7 @@ if SERVER then
 	local function applyWish(client, offer)
 		local character = client:GetCharacter()
 		local wishes = character:GetData("wishes", {}) or {}
-		local previous = character:GetData("wishPurchases", table.Count(wishes))
+		local previous = character:GetData("wishPurchases", 0)
 		if offer.item then
 			offer.item:SetData("unlimitedDurability", true)
 		else

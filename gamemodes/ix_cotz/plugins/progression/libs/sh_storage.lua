@@ -1,7 +1,6 @@
 ix.progression = ix.progression or {}
 
 local DATA_KEY = "progression"
-local DATA_VERSION = 3
 
 local function validateCharacter(character)
 	assert(
@@ -11,13 +10,13 @@ local function validateCharacter(character)
 end
 
 local function newRecord()
-	return { version = DATA_VERSION, lines = {} }
+	return {lines = {}}
 end
 
 local function validateRecord(record)
 	assert(
-		istable(record) and record.version == DATA_VERSION and istable(record.lines),
-		"Unsupported or invalid character progression record"
+		istable(record) and istable(record.lines),
+		"Invalid character progression record"
 	)
 end
 

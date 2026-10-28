@@ -72,10 +72,6 @@ ix.command.Add("CharResetJobs", {
 })
 
 if SERVER then
-	function PLUGIN:PlayerLoadedCharacter(client, character, previousCharacter)
-		ix.taskRewards.PrepareExistingJobs(character)
-	end
-
 	function PLUGIN:PostLoadData()
 		ix.taskRewards.Validate()
 	end

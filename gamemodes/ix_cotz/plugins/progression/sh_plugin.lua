@@ -43,7 +43,7 @@ function PLUGIN:LoadData()
 end
 
 function PLUGIN:SaveData()
-	self:SetData({ version = 3, worldUnlocks = self.worldUnlocks or {} })
+	self:SetData({worldUnlocks = self.worldUnlocks or {}})
 end
 
 if SERVER then

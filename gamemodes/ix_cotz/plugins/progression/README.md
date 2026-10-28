@@ -20,8 +20,6 @@ Qualifying jobs and completed logical delivery milestones replenish 20% of each 
 
 Checkpoint and arena item rewards remain pending if the inventory is full. Helix's asynchronous inventory confirmation clears a tokenised claim; restored claims recognise an already inserted item before attempting another grant. Arena progression credits distinct human opponents only, with no credit for disconnects, timeouts or repeated opponents.
 
-Existing version-three completed milestones retain all split purchase access. Existing saved original assignments follow their original requirements and suppress replacement preparation stages; they are not rerolled. Other database versions still require the planned fresh-start handling described below.
-
 NPC-specific conversation text is in `plugins/dialogue/dialogue/sh_*.lua`. Original progression request text and completion announcements remain in the NPC progression files. Added stages live alongside the respective NPC’s original definitions in `sh_*prog.lua`, with shared requirement/reward rendering in `libs/sh_expansion.lua`. Shared dialogue ordering keeps GOODBYE last and main menus consistent across contacts.
 
 Validation:
@@ -63,8 +61,8 @@ the ceiling. Non-world rewards, harvesting and vendors need their own availabili
 review; they do not imply a worldspawn route. See the balance rationale for the
 exact branch policy and map table.
 
-The server saves the chosen item IDs, quantities, slot selections, and assignment
-version in the character's progression line. Clients read those saved requirements;
+The server saves the chosen item IDs, quantities and slot selections in the character's
+progression line. Clients read those saved requirements;
 they never roll their own. Reopening dialogue, reconnecting, changing characters,
 restarting, transferring servers, or changing pool definitions cannot reroll an
 existing assignment. Every uncompleted step receives its assignment at most once.
@@ -98,8 +96,7 @@ stack units stay in the inventory. Completed requirements cannot be submitted ag
 Delivery rewards are paid once, when all requirements of the progression task are
 fulfilled. Partial hand-ins only save credit; they give no currency, reputation or
 items. Currency is 65% of hand-in value. Repeatable delivery jobs pay 55%.
-Catalogue value, trader overrides and specimen quality are respected. Legacy cash and
-supply-value bonuses do not raise either delivery rate.
+Catalogue value, trader overrides and specimen quality are respected.
 Ammunition is priced per consumed round. Credit accumulates without rounding; completion
 rounds cash up once and deducts amounts already paid. Reputation is twice
 the previous formula: `2 * (5 + (fullStackValue * 0.1)^0.25)` per full stack, scaled
@@ -110,15 +107,10 @@ Progression tasks pay their existing money and reputation automatically on compl
 They do not create selectable supply offers. Singleton and multi-item pools use the same
 cash rate. Authored commissions retain their fixed supplies,
 services and progression unlocks; these do not offer a player-selected reward.
-Obsolete progression supply offers are retired on character load without replaying payouts.
-Previously queued fixed rewards remain claimable through their progression task dialogue.
+Queued fixed rewards remain claimable through their progression task dialogue.
 
-Existing partial-task cash credit is repriced from saved contributions at the new rate on
-the next hand-in. When contribution quantities are unavailable, prior credit is scaled by
-the change in rates. Reputation credit from version two onward is preserved; older
-reputation credit retains its original migration.
-Previously paid amounts are deducted from the final payout, with a minimum of zero;
-money already paid is never reclaimed. Completed tasks are not paid again.
+Hand-ins accumulate credit at the configured rate. Programme checkpoints pay the increase
+above their prior cumulative payout; completed tasks cannot pay again.
 Completion callbacks and successor activation retain their existing behavior and
 run once.
 
@@ -159,8 +151,8 @@ The implemented reward allocations are listed in the [expansion specification](.
 
 ## Fresh-start storage and server transfers
 
-This release targets the planned database and server-data wipe. Versions older than three have no migration or legacy completion import. Existing version-three assignments and completions retain the compatibility described above. Character records use
-`progression = {version = 3, lines = {...}}`; records from older versions are rejected.
+Progression uses the current graph and storage layout directly, without save upgrades.
+Character records use `progression = {lines = {...}, rewardGroups = {...}}`.
 New characters start without contributions or completed milestones. Their initially
 active, accessible delivery steps receive and save personal assignments.
 
@@ -170,7 +162,7 @@ servers must share the character database/schema and this addon version. The
 cross-server transfer path saves characters before redirecting them. Progression
 no longer uses `<map>_progression` records in `ix_xserverdata`.
 
-Plugin data stores `{version = 3, worldUnlocks = {...}}` for global NPC arrivals.
+Plugin data stores `{worldUnlocks = {...}}` for global NPC arrivals.
 It does not seed a character's personal milestones.
 
 ## Personal vendor stock
@@ -273,7 +265,7 @@ and that global NPC arrivals never grant another character's personal access.
 
 ## Repeatable jobs and task supplies
 
-Repeatable job previews, acceptance, delivery, supply offers, legacy kits and their migrations
+Repeatable job previews, acceptance, delivery, supply offers and task kits
 belong to [jobsystem](../jobsystem/README.md). Progression keeps story milestones, job-completion
 milestone listeners, purchase unlock checks and the shared token-backed reward-claim service.
 Its own delivery payout rate is configured in `libs/sh_rewards.lua`.

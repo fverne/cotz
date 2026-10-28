@@ -56,7 +56,7 @@ function ix.progression.IsActive(character, progressionID)
 	end
 	if definition.milestoneGroup and definition.milestoneGroup ~= progressionID then
 		local final = ix.progression.GetLine(character, definition.milestoneGroup)
-		if final.completed or (final.requirements and not final.segmentVersion) then
+		if final.completed then
 			return false
 		end
 	end
@@ -66,10 +66,6 @@ function ix.progression.IsActive(character, progressionID)
 	end
 	if line.active ~= nil then
 		return line.active == true
-	end
-
-	if definition.milestoneGroup == progressionID and line.requirements and not line.segmentVersion then
-		return true
 	end
 
 	return definition.defaultActive == true
@@ -257,9 +253,6 @@ if SERVER then
 			ix.progression.GetProgressionValue(character, progressionID) + amount
 		)
 	end
-
-	-- Retain the historical spelling for extensions, with the new owner argument.
-	ix.progression.AddProgessionValue = ix.progression.AddProgressionValue
 
 	function ix.progression.RemoveProgressionValue(character, progressionID, amount)
 		if not isnumber(amount) then

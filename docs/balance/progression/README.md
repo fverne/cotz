@@ -18,7 +18,7 @@ Fixed supplies, provider-bound service credits, permanent service discounts and 
 
 Job checkpoints are cumulative and retain the original final totals. Intern's effort report uses Pripyat field-work difficulty even though the hand-in contact lives in Marsh. Any map-independent optional contact uses its declared acquisition ceiling for its effort comparison. No backpack exchange progression is included.
 
-The workbook also reports personal stock-capacity unlocks. Delivery rewards share rounding and one final item bonus within their logical milestone. Runtime menu ordering, persistent programme previews and saved-character compatibility are documented in the progression plugin README.
+The workbook also reports personal stock-capacity unlocks. Delivery rewards share rounding and one final item bonus within their logical milestone. Runtime menu ordering, persistent programme previews and character persistence are documented in the progression plugin README.
 
 The following rationale records the original source model and pool policy; references to 134 deliveries, five counters, exponential successor growth and fixed slot-count distributions describe the baseline rather than the expanded graph.
 

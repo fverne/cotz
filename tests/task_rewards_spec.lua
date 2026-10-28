@@ -101,10 +101,6 @@ check(api.ExpectedValue("kit_reward_demo") == 17.5, "kit valuation uses weights 
 ix.item.list.kit_reward_nested = {items = {{{1, "nested"}}}}
 ix.randomitems.tables.nested = {{1, {"kit_reward_demo"}}}
 check(api.ExpectedValue("kit_reward_nested") == 17.5, "nested kits are valued without rolling contents")
-check(api.ExpectedValue("drug_codeine", {quantity = 2}) == 20, "removed codeine has an explicit legacy valuation")
-ix.randomitems.tables.default = {{1, {"22lr", {quantity = 2}}}}
-ix.item.list.kit_reward_master = {items = {{{1, "task_reward_weapon_08_high"}}}}
-check(api.ExpectedValue("kit_reward_master") == 4, "disabled master pool preserves its former default-pool fallback")
 ix.randomitems.tables.cycle = {{1, {"kit_reward_cycle"}}}
 ix.item.list.kit_reward_cycle = {items = {{{1, "cycle"}}}}
 check(not pcall(api.ExpectedValue, "kit_reward_cycle"), "cyclic kit definitions cannot recurse indefinitely")
@@ -148,7 +144,7 @@ for tier = 1, 5 do
 			check(#choice.items == 1, "job choices always contain one inventory item")
 			local reward = choice.items[1]
 			local item = ix.item.list[reward.item]
-			check(reward.item ~= "bagrubles", "job supplies never top up legacy value with cash")
+			check(reward.item ~= "bagrubles", "job supplies never top up supply value with cash")
 			check(reward.data.quantity >= 1 and reward.data.quantity <= (item.quantity or item.ammoAmount),
 				"job uses and ammunition stay within normal item capacity")
 		end
@@ -220,13 +216,13 @@ local function kit(actor, id)
 
 	return item
 end
-local legacy = actor()
-kit(legacy, 77)
-local kitChoice = api.BuildChoices(legacy, "'Haggler'", api.ExpectedValue("kit_reward_demo"), "kit:77")[1]
-check(not api.RedeemKit(legacy, "'Haggler'", 77, 1, "changed"), "stale kit quote does not consume it")
-check(legacy.inventory.items[77], "rejected redemption preserves the owned kit")
-check(api.RedeemKit(legacy, "'Haggler'", 77, 1, kitChoice.label), "legacy kit redeems without paying an upgrade fee")
-check(not api.RedeemKit(legacy, "'Haggler'", 77, 1, kitChoice.label), "same kit cannot redeem twice")
+local kitOwner = actor()
+kit(kitOwner, 77)
+local kitChoice = api.BuildChoices(kitOwner, "'Haggler'", api.ExpectedValue("kit_reward_demo"), "kit:77")[1]
+check(not api.RedeemKit(kitOwner, "'Haggler'", 77, 1, "changed"), "stale kit quote does not consume it")
+check(kitOwner.inventory.items[77], "rejected redemption preserves the owned kit")
+check(api.RedeemKit(kitOwner, "'Haggler'", 77, 1, kitChoice.label), "task kit redeems without paying an upgrade fee")
+check(not api.RedeemKit(kitOwner, "'Haggler'", 77, 1, kitChoice.label), "same kit cannot redeem twice")
 check(not api.RedeemKit(actor(), "'Haggler'", 77, 1, kitChoice.label), "other character cannot redeem an unowned kit")
 
 ix.npcbarter = {barterdict = {["'Haggler'"] = {powder = {
@@ -234,14 +230,14 @@ ix.npcbarter = {barterdict = {["'Haggler'"] = {powder = {
 }}}, activebarters = {powder = true}}
 local consumed = 0
 ix.npcbarter.ConsumeItems = function(_, _, amount) consumed = consumed + amount return true end
-local barterChoice = api.BarterChoices(legacy, "'Haggler'", "powder", ix.npcbarter.barterdict["'Haggler'"].powder)[1]
+local barterChoice = api.BarterChoices(kitOwner, "'Haggler'", "powder", ix.npcbarter.barterdict["'Haggler'"].powder)[1]
 check(barterChoice, "kit barter exposes explicit ammunition choices")
-check(not api.ExecuteBarter(legacy, "'Haggler'", "powder", 1, "wrong"), "stale barter quote is rejected")
+check(not api.ExecuteBarter(kitOwner, "'Haggler'", "powder", 1, "wrong"), "stale barter quote is rejected")
 check(consumed == 0, "invalid barter consumes no inputs")
-check(api.ExecuteBarter(legacy, "'Haggler'", "powder", 1, barterChoice.label), "converted barter grants chosen ammo")
+check(api.ExecuteBarter(kitOwner, "'Haggler'", "powder", 1, barterChoice.label), "converted barter grants chosen ammo")
 check(consumed == 2, "converted barter preserves input quantity")
 ix.npcbarter.activebarters.powder = false
-check(not api.ExecuteBarter(legacy, "'Haggler'", "powder", 1, barterChoice.label), "inactive recipe cannot execute")
+check(not api.ExecuteBarter(kitOwner, "'Haggler'", "powder", 1, barterChoice.label), "inactive recipe cannot execute")
 
 -- Load the real job path with its legacy GLua operators translated for the standalone Lua runtime.
 local handle = assert(io.open("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_jobs.lua"))
@@ -252,7 +248,7 @@ assert((loadstring or load)(source))()
 ix.jobs.list.hunt = {name = "Hunt %d", desc = "Hunt %d mutants", numberRec = {2, 5},
 	reward = {{"kit_reward_demo"}, 0}, repReward = 7, moneyReward = {10, 20}}
 ix.jobs.jobsbycategory.hunting = {"hunt"}
-check(api.FixedMoney(ix.jobs.list.hunt, 4) == 14, "non-delivery jobs scale their cash and legacy allowance to fifty-five percent")
+check(api.FixedMoney(ix.jobs.list.hunt, 4) == 14, "non-delivery jobs scale their cash and supply allowance to fifty-five percent")
 local hand = {price = 6700, pricepertier = 1700, name = "Swampcontroller Hand"}
 function hand:GetPrice() return self.price + self.pricepertier * self:GetData("tier", 0) end
 ix.item.list.part_swampcontroller_1 = hand
@@ -311,49 +307,6 @@ check(foodOwner:GetJobs().NPC.deliveredValue == 60 and foodOwner:GetJobs().NPC.m
 	"actual hand-in value and payout are saved with progress")
 check(not api.DeliverJobItem(foodOwner.client, "NPC"), "completed task cannot consume more items")
 callbacks.ix_JobTrigger = nil
-local activeLegacy = actor()
-activeLegacy.jobs["'Old Timer'"] = {identifier = "hunt", numberRec = 4, progress = 2, isCompleted = false}
-api.PrepareExistingJobs(activeLegacy)
-local migrated = activeLegacy:GetJobs()["'Old Timer'"]
-check(migrated.numberRec == 4 and migrated.progress == 2 and migrated.rewardPrepared,
-	"active-job migration saves choices without changing existing work")
-local obsolete = actor()
-obsolete.jobs["'Old Timer'"] = {identifier = "hunt", numberRec = 4, progress = 2,
-	rewardKey = "job:old", rewardPrepared = true}
-obsolete.data.taskRewardOffers = {["job:old"] = {npc = "'Old Timer'", selected = 1, earned = true,
-	choices = {{label = "192 bandages", items = {{item = "medic_bandage_1", data = {quantity = 192}}}}}}}
-api.PrepareExistingJobs(obsolete)
-local replacement = obsolete:GetData("taskRewardOffers")["job:old"]
-check(replacement.earned and not replacement.selected, "old job entitlement survives but requires a fresh selection")
-for _, choice in ipairs(replacement.choices) do
-	check(#choice.items == 1, "previously prepared oversized job offers are replaced")
-end
-check(#obsolete.inventory.received == 0, "replacing an old offer pays nothing automatically")
-local moneyOnly = activeLegacy:GetJobs()
-moneyOnly["'Old Timer'"].moneyVersion = nil
-moneyOnly["'Old Timer'"].moneyReward = 15
-activeLegacy:SetJobs(moneyOnly)
-api.PrepareExistingJobs(activeLegacy)
-check(activeLegacy:GetJobs()["'Old Timer'"].moneyReward == 14,
-	"existing single-item jobs also receive the cash migration")
-local oldHighCash = actor()
-oldHighCash.jobs["'Old Timer'"] = {identifier = "hand", numberRec = 1, progress = 0,
-	moneyReward = 99999, moneyVersion = 2, rewardVersion = api.JOB_REWARD_VERSION,
-	rewardKey = "job:old-high-cash", progressionClaim = 1}
-api.PrepareExistingJobs(oldHighCash)
-check(oldHighCash:GetJobs()["'Old Timer'"].moneyReward == 3685,
-	"existing oversized repeatable cash quotes are reduced to fifty-five percent")
-local oldHighJobs = oldHighCash:GetJobs()
-oldHighJobs["'Old Timer'"].deliveredValue = 11800
-oldHighJobs["'Old Timer'"].moneyVersion = 1
-oldHighCash:SetJobs(oldHighJobs)
-api.PrepareExistingJobs(oldHighCash)
-check(oldHighCash:GetJobs()["'Old Timer'"].moneyReward == 6490,
-	"cash migration preserves recorded specimen quality at the reduced rate")
-local migrationSaves = activeLegacy.saves
-api.PrepareExistingJobs(activeLegacy)
-check(activeLegacy.saves == migrationSaves and #activeLegacy.inventory.received == 0,
-	"migration is idempotent and pays no early rewards")
 local gated = actor()
 gated.client.rep = 249
 check(not api.PreviewJob(gated, "'Old Timer'", "medium", {"hunting"}),
@@ -536,10 +489,10 @@ check(not workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, noWork.client, target)
 	"work menu keeps its original visibility when there are no reward actions")
 check(not api.CreateOffer(viewer, "progression:menu-test", "'Old Timer'", 75, "Progression task"),
 	"new progression supply offers cannot be created")
-local legacyOffers = copy(viewer:GetData("taskRewardOffers", {}))
-legacyOffers["progression:menu-test"] = {npc = "'Old Timer'", label = "Progression task", earned = true,
+local forgedOffers = copy(viewer:GetData("taskRewardOffers", {}))
+forgedOffers["progression:menu-test"] = {npc = "'Old Timer'", label = "Progression task", earned = true,
 	choices = {{label = "Old supplies", items = {{item = "medic_bandage_1", data = {quantity = 3}}}}}}
-viewer:SetData("taskRewardOffers", legacyOffers)
+viewer:SetData("taskRewardOffers", forgedOffers)
 local menuOptions = dialogue.tree.TaskRewardChoices.GetDynamicOptions(nil, viewer.client, target)
 local hasRepeatable = false
 for _, option in ipairs(menuOptions) do
@@ -563,13 +516,6 @@ local ownOptions = ix.progression.GetDeliveryOptions(viewer, "menu-test")
 check(#ownOptions == 0, "progression task dialogue has no selectable supply rewards")
 check(not ix.progression.TurnIn(viewer.client, target, "menu-test", "supply:1"),
 	"progression dialogue rejects old supply selections")
-api.PrepareExistingJobs(viewer)
-check(not viewer:GetData("taskRewardOffers")["progression:menu-test"],
-	"old progression offers are retired when existing jobs are prepared")
-check(viewer:GetData("taskRewardOffers")[viewer:GetJobs()["'Old Timer'"].rewardKey],
-	"retiring progression offers preserves repeatable job choices")
-check(#viewer.inventory.received == 0 and viewer.money == 0,
-	"retiring obsolete progression choices does not pay extra rewards")
 ix.progression.definitions["menu-test"] = nil
 local scheduledClaims = {}
 timer.Simple = function(_, callback) scheduledClaims[#scheduledClaims + 1] = callback end

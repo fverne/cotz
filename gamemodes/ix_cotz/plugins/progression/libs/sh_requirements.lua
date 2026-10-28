@@ -1,7 +1,5 @@
 ix.progression = ix.progression or {}
 
-local ASSIGNMENT_VERSION = 1
-
 function ix.progression.GetRequirements(character, progressionID)
 	local definition = ix.progression.definitions[progressionID]
 	if not definition or not definition.requirementSlots then
@@ -15,8 +13,6 @@ function ix.progression.GetRequirements(character, progressionID)
 
 	return line.requirements or {}
 end
-
-ix.progression.GetComplexProgressionReqs = ix.progression.GetRequirements
 
 function ix.progression.GetNeededItems(character)
 	local result = {}
@@ -170,9 +166,7 @@ if SERVER then
 		for progressionID, definition in pairs(ix.progression.definitions) do
 			if definition.requirementSlots then
 				identifiers[#identifiers + 1] = progressionID
-				local final = record.lines[definition.milestoneGroup] or {}
-				if definition.milestoneGroup and ix.progression.IsActive(character, progressionID)
-					and (not final.requirements or final.segmentVersion) then
+				if definition.milestoneGroup and ix.progression.IsActive(character, progressionID) then
 					activeGroups[definition.milestoneGroup] = true
 				end
 			end
@@ -186,8 +180,6 @@ if SERVER then
 				or activeGroups[definition.milestoneGroup]
 			if not line.requirements and accessible then
 				line.requirements, line.selections = rollRequirements(definition, character, record)
-				line.assignmentVersion = ASSIGNMENT_VERSION
-				line.segmentVersion = 1
 				record.lines[progressionID] = line
 				changed = true
 			end

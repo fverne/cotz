@@ -81,7 +81,7 @@ end
 
 local function kitOptions(character, npc, options)
 	for id, item in pairs(character:GetInventory():GetItems()) do
-		if ix.taskRewards.IsLegacyKit(item.uniqueID) and not item:GetData("taskRewardRedeemed", false) then
+		if ix.taskRewards.IsTaskKit(item.uniqueID) and not item:GetData("taskRewardRedeemed", false) then
 			local choices = ix.taskRewards.BuildChoices(character, npc,
 				ix.taskRewards.ExpectedValue(item.uniqueID), "kit:" .. id)
 			for index, choice in ipairs(choices) do
@@ -98,7 +98,7 @@ end
 local function barterOptions(character, npc, options)
 	for id, barter in pairs(ix.npcbarter and ix.npcbarter.barterdict[npc] or {}) do
 		local reward = barter.barterItem
-		if ix.npcbarter.activebarters[id] and ix.taskRewards.IsLegacyKit(reward[1]) then
+		if ix.npcbarter.activebarters[id] and ix.taskRewards.IsTaskKit(reward[1]) then
 			local choices = ix.taskRewards.BarterChoices(character, npc, id, barter)
 			for index, choice in ipairs(choices) do
 				options[#options + 1] = {

@@ -8,7 +8,7 @@ The runtime now has 227 definitions across all 19 NPC templates: 219 deliveries 
 
 All original delivery quantities are preserved across each logical milestone, and original purchase unlocks are retained. Indivisible requests stay together where another split would add acquisition cost; this includes the first mask pair, while the two-unit melee request uses two stages. Radiation headgear precedes the radiation suit so the more valuable suit retains the final field proof. Original NPC-specific task descriptions are preserved. Every added stage has an authored contact-specific briefing and completion message; the shared renderer adds saved requirements, programme previews and declared benefits. Egghead’s placeholder requests are also replaced.
 
-Programme assignments are rolled and saved for all stages when the programme opens. Later requirements are previewed so extra stages do not force blind repeat expeditions. Inventory highlights and hand-ins still follow the current active stage. Cash and reputation use cumulative programme rounding; one saved supply-choice bonus is earned at the original milestone endpoint. Version-three saved assignments keep their old route and quantities without rerolling.
+Programme assignments are rolled and saved for all stages when the programme opens. Later requirements are previewed so extra stages do not force blind repeat expeditions. Inventory highlights and hand-ins still follow the current active stage. Cash and reputation use cumulative programme rounding; one saved supply-choice bonus is earned at the original milestone endpoint.
 
 Menu order is shared across NPCs: trade/barter, services, work, progression, information, then exit. GOODBYE is last even when static and dynamic options are combined. All withdrawn exchange definitions, input pools, selection paths, catalogue restrictions and related tests have been removed; no item base or backpack entity changes are part of this rework.
 
@@ -280,7 +280,7 @@ Inserted stages need explicit activation changes: redirect each incoming edge to
 
 For counters, store stage-local increments (for example RF 1, then 2, then 2) and show a cumulative programme total. Count a completed job once; do not count it in the old counter and the new counter simultaneously. Keep the final gate at the original total. Existing lifetime counters may instead keep cumulative thresholds if the UI can represent the new milestones clearly; choose one representation before coding.
 
-The README currently targets a wipe and rejects old progression versions. For that fresh-start release, use the new graph directly. If existing version-3 characters must continue, implement an explicit mapping rather than assume keeping IDs is sufficient: completed old tasks imply all replacement stages and access with no payout; active saved assignments retain their exact item IDs/quantities and partial credit, either as a legacy route to the final reward or through a reviewed partition. Keep previously earned access, do not pay preparation stages retroactively, and do not reset unrelated lines or roll assignments again. This release choice must be fixed before rollout, not improvised in completion callbacks.
+Use the current progression graph directly for the fresh-start release. Runtime code does not import old completions, partition old assignments or reprice old rewards.
 
 ## Implementation sequence and acceptance checks
 
@@ -359,9 +359,9 @@ These 36 bundle reallocations alone add **43 delivery stages**, taking the exist
 ## Completed task reward overhaul
 
 The remaining kit routes now use saved visible reward choices, documented in the
-[progression runtime guide](../../../gamemodes/ix_cotz/plugins/progression/README.md#task-rewards-and-existing-kits).
+[jobsystem runtime guide](../../../gamemodes/ix_cotz/plugins/jobsystem/README.md#task-rewards-and-existing-kits).
 Difficulty-based jobs preview the task and chosen supplies before acceptance; cash uses
-the original range midpoint. Existing job and legacy kit contents supply nominal reward
+the original range midpoint. Configured job and task-kit contents supply nominal reward
 budgets, not new kit items. Haggler's paid upgrading is removed, existing kits redeem for
 shown contents, and kit-producing barters expose explicit ammunition selections. Older
 delivery programmes earn their saved choice only at the original logical endpoint.

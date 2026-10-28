@@ -203,7 +203,7 @@ api.InitializeCharacterProgression(a)
 api.InitializeCharacterProgression(b)
 api.InitializeCharacterProgression(a)
 check(a.replications == 2, "initialization and requirement assignment are idempotent")
-check(not pcall(api.SetCharacterProgression, a, { version = 99, lines = {} }), "unknown versions rejected")
+check(not pcall(api.SetCharacterProgression, a, {lines = false}), "invalid record shape rejected")
 local snapshot = api.GetCharacterProgression(a)
 snapshot.lines.example = { value = 4 }
 check(a.data.progression.lines.example == nil, "reads return snapshots")
@@ -546,8 +546,7 @@ end
 ix.util.Include = function(filename)
 	dofile(base .. filename)
 end
-local oldGlobal = { version = 3, worldUnlocks = { oldTimerKillIntro = true } }
-local savedPluginData = copy(oldGlobal)
+local savedPluginData = {worldUnlocks = {oldTimerKillIntro = true}}
 function PLUGIN:GetData()
 	return savedPluginData
 end
@@ -568,8 +567,8 @@ PLUGIN:PostLoadData()
 check(setupCalls == 1, "world setup runs after saved vendors load")
 PLUGIN:SaveData()
 check(
-	savedPluginData.version == 3 and savedPluginData.worldUnlocks.oldTimerKillIntro,
-	"world arrivals saved without a legacy archive"
+	savedPluginData.worldUnlocks.oldTimerKillIntro,
+	"world arrivals are saved"
 )
 check(savedPluginData.worldUnlocks.oldTimerKillIntro, "world arrival flag persists")
 PLUGIN.worldUnlocks.computer_artifactTasks = true
@@ -578,7 +577,6 @@ PLUGIN.worldUnlocks = {}
 PLUGIN:LoadData()
 check(PLUGIN.worldUnlocks.computer_artifactTasks, "new global arrivals survive a save/load cycle")
 PLUGIN:SaveData()
-check(savedPluginData.legacy == nil, "fresh-start save has no migration archive")
 a = character()
 PLUGIN:PlayerLoadedCharacter(a.client, a)
 check(not api.IsCompleted(a, "oldTimerKillIntro"), "global arrival does not grant personal completion")
@@ -1214,71 +1212,6 @@ overflow.inventory.Add = addReward
 check(ix.taskRewards.ClaimNext(overflow), "queued reward can be claimed after making space")
 check(#overflow.inventory.rewards == 1, "retry delivers once")
 
--- Previously paid partial deliveries are repriced once and deducted from completion payouts.
-ix.item.list.reward_test = { name = "Singleton", quantity = 10, price = 200 }
-local legacy, supplyLegacy = rewardCharacter()
-api.InitializeCharacterProgression(legacy)
-local legacyRecord = api.GetCharacterProgression(legacy)
-legacyRecord.lines.reward_test.rewardCredit = { reputation = 5, money = 60 }
-legacyRecord.lines.reward_test.rewardsPaid = { reputation = 5, money = 60 }
-legacyRecord.lines.reward_test.complexData = { reward_test = 5 }
-api.SetCharacterProgression(legacy, legacyRecord)
-supplyLegacy(5)
-check(api.TurnIn(legacy.client, rewardNPC, "reward_test", "reward_test"), "legacy partial task completes")
-check(legacy.money == 6, "legacy completion pays only the increase above previously paid money")
-check(
-	math.abs(api.GetLine(legacy, "reward_test").rewardCredit.money - 65.325) < 0.000001,
-	"legacy cash credit is upgraded once while retaining specimen value"
-)
-local versionTwo, supplyVersionTwo = rewardCharacter()
-api.InitializeCharacterProgression(versionTwo)
-local versionTwoRecord = api.GetCharacterProgression(versionTwo)
-versionTwoRecord.lines.reward_test.rewardVersion = 2
-versionTwoRecord.lines.reward_test.rewardCredit = {reputation = 5, money = 30}
-versionTwoRecord.lines.reward_test.rewardsPaid = {reputation = 0, money = 0}
-versionTwoRecord.lines.reward_test.complexData = {reward_test = 5}
-api.SetCharacterProgression(versionTwo, versionTwoRecord)
-supplyVersionTwo(5)
-check(api.TurnIn(versionTwo.client, rewardNPC, "reward_test", "reward_test"),
-	"unfinished version-two task completes at the increased cash rate")
-local upgradedCredit = api.GetLine(versionTwo, "reward_test").rewardCredit
-check(versionTwo.money == 66 and math.abs(upgradedCredit.money - 65.325) < 0.000001,
-	"version-two money upgrades once before adding new contributions")
-check(math.abs(upgradedCredit.reputation - (10 + 0.1 ^ 0.25)) < 0.000001,
-	"cash migration does not double version-two reputation again")
-local upgradedMoney = versionTwo.money
-api.PayCompletionRewards(versionTwo, "reward_test")
-check(versionTwo.money == upgradedMoney, "new cash rate cannot replay a completed task")
-local versionThree, supplyVersionThree = rewardCharacter()
-api.InitializeCharacterProgression(versionThree)
-local versionThreeRecord = api.GetCharacterProgression(versionThree)
-versionThreeRecord.lines.reward_test.rewardVersion = 3
-versionThreeRecord.lines.reward_test.rewardCredit = {reputation = 5, money = 1000}
-versionThreeRecord.lines.reward_test.rewardsPaid = {reputation = 0, money = 0}
-versionThreeRecord.lines.reward_test.complexData = {reward_test = 5}
-api.SetCharacterProgression(versionThree, versionThreeRecord)
-supplyVersionThree(5)
-check(api.TurnIn(versionThree.client, rewardNPC, "reward_test", "reward_test"),
-	"unfinished task from the high-payout version still completes")
-check(versionThree.money == 66,
-	"saved inflated cash credit is repriced to sixty-five percent instead of retaining old bonuses")
-check(math.abs(api.GetLine(versionThree, "reward_test").rewardCredit.reputation
-	- (10 + 0.1 ^ 0.25)) < 0.000001, "reducing version-three cash preserves reputation credit")
-local versionFour = character()
-api.InitializeCharacterProgression(versionFour)
-local versionFourRecord = api.GetCharacterProgression(versionFour)
-versionFourRecord.lines.reward_test.rewardVersion = 4
-versionFourRecord.lines.reward_test.rewardCredit = {reputation = 5, money = 80}
-versionFourRecord.lines.reward_test.rewardsPaid = {reputation = 0, money = 0}
-versionFourRecord.lines.reward_test.complexData = {}
-api.SetCharacterProgression(versionFour, versionFourRecord)
-api.AccrueTurnInRewards(versionFour, "reward_test", 0, 0, "reward_test")
-local migratedFour = api.GetLine(versionFour, "reward_test")
-check(migratedFour.rewardCredit.money == 65 and migratedFour.rewardCredit.reputation == 5,
-	"version-four credit without contribution details scales from eighty to sixty-five percent")
-api.AccrueTurnInRewards(versionFour, "reward_test", 0, 0, "reward_test")
-check(api.GetLine(versionFour, "reward_test").rewardCredit.money == 65,
-	"version-four rate reduction is applied only once")
 api.definitions.reward_groups = nil
 api.definitions.reward_test = nil
 api.itemPools.reward_test = nil
@@ -1320,23 +1253,6 @@ check(not api.CanUseNPC(scientist, "'Egghead'"), "RF preparation cannot unlock s
 api.AddProgressionValue(scientist, "smartass_rfTasks", 2)
 check(api.CanUseNPC(scientist, "'Egghead'"), "scientists unlock at original final RF count")
 currentMap = "rp_marsh_cs"
-
--- Existing version-three assignments retain their route and quantities.
-local legacyStage = character()
-local legacyData = api.GetCharacterProgression(legacyStage)
-legacyData.lines.oldTimerKillIntro = {completed = true}
-legacyData.lines.hagglerItemDelivery_1 = {
-	requirements = {value_nuts = 10}, selections = {{pool = "fasteners", item = "value_nuts"}},
-	complexData = {value_nuts = 4},
-}
-api.SetCharacterProgression(legacyStage, legacyData)
-api.InitializeCharacterProgression(legacyStage)
-check(api.IsActive(legacyStage, "hagglerItemDelivery_1"), "legacy default-active assignment stays active")
-check(not api.IsActive(legacyStage, "hagglerItemDelivery_1_stage1"), "legacy route suppresses replacement stages")
-check(api.GetRequirements(legacyStage, "hagglerItemDelivery_1").value_nuts == 10,
-	"legacy assigned amount is not replaced by split quantities")
-api.SetCompleted(legacyStage, "hagglerItemDelivery_1")
-check(api.IsCompleted(legacyStage, "hagglerItemDelivery_1_stage1"), "old completion retains split purchase access")
 
 -- Helix reserves slots before its database callback; claims remain pending until confirmation.
 local asyncOwner = character()

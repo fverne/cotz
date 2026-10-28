@@ -24,10 +24,8 @@ local PROFILES = {
 local MAX_PACKAGE_ITEMS = 64
 local CHOICE_COUNT = 3
 local DIFFICULTY_REPUTATION = {medium = 250, hard = 1600}
-ix.taskRewards.JOB_REWARD_VERSION = 2
 local JOB_EQUIPMENT_LIMITS = {2500, 7500, 15000, 30000, 50000}
-ix.taskRewards.JOB_MONEY_VERSION = 3
-local JOB_LEGACY_CASH_SHARE = 0.5
+local JOB_SUPPLY_CASH_SHARE = 0.5
 local JOB_CASH_RATE = 0.55
 local CASH_ROUNDING_EPSILON = 0.000000001
 local JOB_MIN_FILL = 0.25
@@ -49,11 +47,6 @@ local GENERATED_QUANTITIES = {
 	value_currency_euro = 1,
 	value_currency_dollar = 1,
 	value_currency_rubles_coins = 1,
-}
-local LEGACY_ITEMS = {drug_codeine = "drug_painkillers"}
-local LEGACY_POOLS = {
-	task_reward_weapon_08_low = "default",
-	task_reward_weapon_08_high = "default",
 }
 
 local function average(value, default)
@@ -84,7 +77,7 @@ end
 
 local expectedItem
 local function expectedPool(poolID, depth)
-	local pool = ix.randomitems.tables[poolID] or ix.randomitems.tables[LEGACY_POOLS[poolID]]
+	local pool = ix.randomitems.tables[poolID]
 	assert(pool and #pool > 0, "Unknown task reward pool: " .. tostring(poolID))
 	local weight, value = 0, 0
 	for _, entry in ipairs(pool) do
@@ -96,7 +89,6 @@ local function expectedPool(poolID, depth)
 end
 
 expectedItem = function(itemID, data, depth)
-	itemID = LEGACY_ITEMS[itemID] or itemID
 	assert(depth <= MAX_DEPTH, "Recursive task reward kit: " .. tostring(itemID))
 	local item = assert(ix.item.list[itemID], "Unknown task reward: " .. tostring(itemID))
 	if type(item.items) ~= "table" or #item.items == 0 then
@@ -126,7 +118,7 @@ function ix.taskRewards.ExpectedValue(itemID, data)
 	return expectedItem(itemID, data, 0)
 end
 
-function ix.taskRewards.IsLegacyKit(itemID)
+function ix.taskRewards.IsTaskKit(itemID)
 	if not itemID:match("^kit_") then return false end
 	if itemID:match("^kit_reward_") then return true end
 	for _, job in pairs(ix.jobs and ix.jobs.list or {}) do
@@ -305,7 +297,7 @@ function ix.taskRewards.FixedMoney(job, count, deliveredValue)
 
 		return math.ceil(math.max(reference, deliveredValue or 0) * JOB_CASH_RATE - CASH_ROUNDING_EPSILON)
 	end
-	local base = average(job.moneyReward, 0) + ix.taskRewards.JobBudget(job) * JOB_LEGACY_CASH_SHARE
+	local base = average(job.moneyReward, 0) + ix.taskRewards.JobBudget(job) * JOB_SUPPLY_CASH_SHARE
 
 	return math.ceil(base * JOB_CASH_RATE - CASH_ROUNDING_EPSILON)
 end
@@ -338,7 +330,6 @@ function ix.taskRewards.BarterChoices(character, npc, barterID, barter)
 	local candidates, seen = {}, {}
 	local function visit(itemID, depth)
 		assert(depth <= MAX_DEPTH, "Recursive ammunition barter kit")
-		itemID = LEGACY_ITEMS[itemID] or itemID
 		local item = ix.item.list[itemID]
 		if item.isAmmo and not seen[itemID] then
 			candidates[#candidates + 1] = itemID
@@ -366,7 +357,7 @@ function ix.taskRewards.Validate()
 	for _, job in pairs(ix.jobs.list) do ix.taskRewards.JobBudget(job) end
 	for _, recipes in pairs(ix.npcbarter and ix.npcbarter.barterdict or {}) do
 		for _, recipe in pairs(recipes) do
-			if ix.taskRewards.IsLegacyKit(recipe.barterItem[1]) then
+			if ix.taskRewards.IsTaskKit(recipe.barterItem[1]) then
 				ix.taskRewards.ExpectedValue(recipe.barterItem[1], recipe.barterItem[3])
 			end
 		end

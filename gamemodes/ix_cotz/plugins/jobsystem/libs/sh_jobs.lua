@@ -12,8 +12,7 @@ ix.jobs.jobsbycategory = ix.jobs.jobsbycategory or {}
   tier -- Tier of the job, based on reputation tiers - number
   listenTrigger -- Name of the trigger to listen for - string
   numberRec -- Required number of times the trigger needs to be heard. If table a random number is selected. - number/table
-  reward -- Legacy output value; half carries into cash. Supplies use contact profiles and tier instead.
-  rewardCount -- Legacy metadata; each selected job supply is one inventory item.
+  reward -- Supply budget; half carries into cash. Supplies use contact profiles and tier instead.
   repReward -- How much rep to give a player from quest completion - number/table
 
   EXAMPLE
@@ -26,7 +25,6 @@ ix.jobs.jobsbycategory = ix.jobs.jobsbycategory or {}
   tempJob.listenTrigger = "mutantKilled"
   tempJob.numberRec = {5,10}
   tempJob.reward = {{"makarov", {["durability"] = 15}},{"9x19"}}
-  tempJob.rewardCount = {1,3}
   tempJob.repReward = 200
 
   ix.jobs.register(tempJob)
@@ -186,11 +184,6 @@ if SERVER then
 		local jobs = character:GetJobs()
 		local job = jobs[npcidentifier]
 		if not job or not job.isCompleted then return end
-		if not ix.taskRewards.PrepareJob(character, npcidentifier, job) then
-			self:Notify("Claim your pending task supplies before finishing another task.")
-
-			return
-		end
 		local claimed = character:GetData("jobClaimsPaid", {})
 		if claimed[npcidentifier] and claimed[npcidentifier] >= job.progressionClaim then return end
 		claimed[npcidentifier] = job.progressionClaim

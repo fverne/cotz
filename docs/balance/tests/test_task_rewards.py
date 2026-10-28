@@ -74,7 +74,6 @@ class TaskRewardAuditTests(unittest.TestCase):
         visited = set()
 
         def visit(item_id, chain=()):
-            item_id = self.constants['LEGACY_ITEMS'].get(item_id, item_id)
             self.assertIn(item_id, self.items, f'missing item reached via {chain}')
             self.assertNotIn(item_id, chain, 'cyclic reward graph')
             if item_id in visited:
@@ -84,7 +83,6 @@ class TaskRewardAuditTests(unittest.TestCase):
             for slot in item.get('items', []):
                 self.assertGreater(sum(entry[0] for entry in slot), 0)
                 for _, pool_id in slot:
-                    pool_id = pool_id if pool_id in self.pools else self.constants['LEGACY_POOLS'].get(pool_id)
                     self.assertIn(pool_id, self.pools, f'missing pool in {item_id}')
                     pool = self.pools[pool_id]
                     self.assertGreater(sum(entry[0] for entry in pool), 0)
