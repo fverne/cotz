@@ -61,6 +61,9 @@ ix.command.Add("CharResetJobs", {
 		if character then
 			local target = character
 		
+			for _, job in pairs(target:GetJobs()) do
+				ix.taskRewards.RemoveJobOffer(target, job)
+			end
 			target:SetJobs({})
 			client:Notify("Reset the jobs of "..character:GetName())
 			target:GetPlayer():Notify("Jobs have been reset")
@@ -70,30 +73,10 @@ ix.command.Add("CharResetJobs", {
 
 if SERVER then
 	netstream.Hook("job_deliveritem", function(client, npcidentifier)
-		local jobidentifier = client:GetCharacter():GetJobs()[npcidentifier].identifier
-		if client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier)) then
-			local item = client:GetCharacter():GetInventory():HasItem(ix.jobs.isItemJob(jobidentifier))
-			local trigger = jobidentifier
-			local noremove = false
-			local n = 0
-			if(item.quantity) then
-				for i=1, item:GetData("quantity", item.quantity) do
-					hook.Run("ix_JobTrigger", client, trigger)
-					n = n + 1
-					if (client:GetCharacter():GetJobs()[npcidentifier].isCompleted) then 
-						item:SetData("quantity", item:GetData("quantity", item.quantity)-n)
-						noremove = (item:GetData("quantity", item.quantity) > 0)
-						break 
-					end
-				end
-			else
-				hook.Run("ix_JobTrigger", client, trigger)
-			end
-			if(!noremove) then item:Remove() end
-			ix.dialogue.notifyItemLost(client, ix.item.list[ix.jobs.isItemJob(jobidentifier)].name)
+		if ix.taskRewards.DeliverJobItem(client, npcidentifier) then
 			client:Notify("Item delivered!")
 		else
-			client:Notify("Required item not in inventory!")
+			client:Notify("No matching item delivery is available.")
 		end
 	end)
 

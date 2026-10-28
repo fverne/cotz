@@ -1,5 +1,31 @@
 local MAP = "rp_waystation"
 
+ix.progression.Register("quartermasterItemDelivery_1_stage1", {
+	name = "Gearing Up 1 - 1/2",
+	description = "Gearing Up 1 - 1/2",
+	keyNpc = "'Quartermaster'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "humanoid_parts", quantity = 4},
+		{pool = "common_parts", quantity = 4},
+	},
+	nextProgressions = {"quartermasterItemDelivery_1"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "quartermasterItemDelivery_1",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"mp5", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Your introduction got you through the door. These field specimens tell me whether you "
+		.. "can support men who actually go outside. Start there, and I'll release the MP5."
+	),
+	completionMessage = "Requisition recorded. Your earned authorisations are in the catalogue.",
+})
+
 ix.progression.Register("quartermasterItemDelivery_1", {
 	name = "Gearing Up 1",
 	description = "Introduce yourself to Quartermaster.",
@@ -7,10 +33,9 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "mp5", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Quartermaster'", args = { "mossberg500", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Quartermaster'", args = {"mossberg500", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "quartermasterItemDelivery_11", "quartermasterItemDelivery_12" },
+	nextProgressions = {"quartermasterItemDelivery_11_stage1", "quartermasterItemDelivery_12_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -40,10 +65,9 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "humanoid_parts", quantity = 4 },
-		{ pool = "common_parts", quantity = 6 },
-		{ pool = "small_parts", quantity = 6 },
-		{ pool = "large_parts", quantity = 4 },
+		{pool = "common_parts", quantity = 2},
+		{pool = "small_parts", quantity = 6},
+		{pool = "large_parts", quantity = 4},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -56,6 +80,60 @@ ix.progression.Register("quartermasterItemDelivery_1", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "quartermasterItemDelivery_1",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("quartermasterItemDelivery_11_stage1", {
+	name = "Gearing Up 1.1 - 1/3",
+	description = "Gearing Up 1.1 - 1/3",
+	keyNpc = "'Quartermaster'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "rimfire_rifles", quantity = 2},
+	},
+	nextProgressions = {"quartermasterItemDelivery_11_stage2"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "quartermasterItemDelivery_11",
+	stageIndex = 1,
+	stageCount = 3,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"mateba", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"A requisition isn't a wish list. Recover the requested civilian weapons first; that "
+		.. "earns the revolver authorisation before I open the rifle allocation."
+	),
+	completionMessage = "Requisition recorded. Your earned authorisations are in the catalogue.",
+})
+
+ix.progression.Register("quartermasterItemDelivery_11_stage2", {
+	name = "Gearing Up 1.1 - 2/3",
+	description = "Gearing Up 1.1 - 2/3",
+	keyNpc = "'Quartermaster'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "maintenance", quantity = 3},
+		{pool = "powder", quantity = 1},
+	},
+	nextProgressions = {"quartermasterItemDelivery_11"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "quartermasterItemDelivery_11",
+	stageIndex = 2,
+	stageCount = 3,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"ak74", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Now for the rifle requisition. I need maintenance supplies and propellant accounted "
+		.. "for before an AK-74 goes onto your approved purchase list."
+	),
+	completionMessage = "Requisition recorded. Your earned authorisations are in the catalogue.",
 })
 
 ix.progression.Register("quartermasterItemDelivery_11", {
@@ -65,11 +143,9 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "mateba", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Quartermaster'", args = { "ak74", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Quartermaster'", args = { "l85", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Quartermaster'", args = {"l85", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "quartermasterItemDelivery_111", "quartermasterItemDelivery_112" },
+	nextProgressions = {"quartermasterItemDelivery_111_stage1", "quartermasterItemDelivery_112_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -97,11 +173,9 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "rimfire_rifles", quantity = 2 },
-		{ pool = "maintenance", quantity = 3 },
-		{ pool = "powder", quantity = 3 },
-		{ pool = "industrial_supplies", quantity = 2 },
-		{ pool = "documents_technical", quantity = 1 },
+		{pool = "powder", quantity = 2},
+		{pool = "industrial_supplies", quantity = 2},
+		{pool = "documents_technical", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -114,6 +188,36 @@ ix.progression.Register("quartermasterItemDelivery_11", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "quartermasterItemDelivery_11",
+	stageIndex = 3,
+	stageCount = 3,
+	stockUnlocks = {{npc = "'Quartermaster'", bonus = 1, items = {"545x39", "556x45", "762x39", "762x51", "9x19"}}},
+})
+
+ix.progression.Register("quartermasterItemDelivery_111_stage1", {
+	name = "Gearing Up 1.1.1 - 1/2",
+	description = "Gearing Up 1.1.1 - 1/2",
+	keyNpc = "'Quartermaster'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "common_parts", quantity = 8},
+		{pool = "small_parts", quantity = 4},
+	},
+	nextProgressions = {"quartermasterItemDelivery_111"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "quartermasterItemDelivery_111",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"lax44", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Field teams keep sending trophies and asking for ammunition in return. Verify the "
+		.. "requested specimens for me, and I'll approve the hunting-rifle allocation."
+	),
+	completionMessage = "Requisition recorded. Your earned authorisations are in the catalogue.",
 })
 
 ix.progression.Register("quartermasterItemDelivery_111", {
@@ -123,8 +227,7 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "lax44", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Quartermaster'", args = { "g36c", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Quartermaster'", args = {"g36c", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	nextProgressions = { "quartermasterItemDelivery_1111" },
 	BuildResponse = function(self, npcName, status, character)
@@ -156,12 +259,11 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "common_parts", quantity = 8 },
-		{ pool = "small_parts", quantity = 8 },
-		{ pool = "humanoid_parts", quantity = 4 },
-		{ pool = "large_parts", quantity = 5 },
-		{ pool = "rare_parts", quantity = 2 },
-		{ pool = "exotic_parts", quantity = 4 },
+		{pool = "small_parts", quantity = 4},
+		{pool = "humanoid_parts", quantity = 4},
+		{pool = "large_parts", quantity = 5},
+		{pool = "rare_parts", quantity = 2},
+		{pool = "exotic_parts", quantity = 4},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -174,6 +276,9 @@ ix.progression.Register("quartermasterItemDelivery_111", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "quartermasterItemDelivery_111",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("quartermasterItemDelivery_1111", {
@@ -233,6 +338,32 @@ ix.progression.Register("quartermasterItemDelivery_1111", {
 	end,
 })
 
+ix.progression.Register("quartermasterItemDelivery_112_stage1", {
+	name = "Gearing Up 1.1.2 - 1/2",
+	description = "Gearing Up 1.1.2 - 1/2",
+	keyNpc = "'Quartermaster'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "small_electronics", quantity = 5},
+		{pool = "documents_field", quantity = 1},
+	},
+	nextProgressions = {"quartermasterItemDelivery_112"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "quartermasterItemDelivery_112",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"aek971", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"I need equipment that works and field records I can trust. Bring the listed "
+		.. "electronics and documents before I authorise the AEK shipment."
+	),
+	completionMessage = "Requisition recorded. Your earned authorisations are in the catalogue.",
+})
+
 ix.progression.Register("quartermasterItemDelivery_112", {
 	name = "Gearing Up 1.1.2",
 	description = "Help Quartermaster close a sale with some shady customers.",
@@ -240,8 +371,7 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "aek971", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Quartermaster'", args = { "an94k", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Quartermaster'", args = {"an94k", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	nextProgressions = { "quartermasterItemDelivery_1121" },
 	BuildResponse = function(self, npcName, status, character)
@@ -272,12 +402,11 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "documents_field", quantity = 4 },
-		{ pool = "documents_research", quantity = 2 },
-		{ pool = "administrative_documents", quantity = 2 },
-		{ pool = "documents_technical", quantity = 1 },
-		{ pool = "field_instruments", quantity = 1 },
-		{ pool = "small_electronics", quantity = 5 },
+		{pool = "documents_field", quantity = 3},
+		{pool = "administrative_documents", quantity = 2},
+		{pool = "documents_research", quantity = 2},
+		{pool = "documents_technical", quantity = 1},
+		{pool = "field_instruments", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -290,6 +419,9 @@ ix.progression.Register("quartermasterItemDelivery_112", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "quartermasterItemDelivery_112",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("quartermasterItemDelivery_1121", {
@@ -409,6 +541,34 @@ ix.progression.Register("quartermasterItemDelivery_11211", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	stockUnlocks = {{npc = "'Quartermaster'", bonus = 2, items = {"545x39", "556x45", "762x39", "762x51", "9x19"}}},
+})
+
+ix.progression.Register("quartermasterItemDelivery_12_stage1", {
+	name = "Gearing Up 1.2 - 1/2",
+	description = "Gearing Up 1.2 - 1/2",
+	keyNpc = "'Quartermaster'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "stash_notes", quantity = 1},
+		{pool = "administrative_documents", quantity = 1},
+		{pool = "documents_field", quantity = 1},
+	},
+	nextProgressions = {"quartermasterItemDelivery_12"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "quartermasterItemDelivery_12",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"m3super90", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"A combat shotgun needs a supplier who can read an operational brief. Recover these "
+		.. "records and I'll approve the first part of your close-quarters requisition."
+	),
+	completionMessage = "Requisition recorded. Your earned authorisations are in the catalogue.",
 })
 
 ix.progression.Register("quartermasterItemDelivery_12", {
@@ -418,10 +578,9 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "m3super90", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Quartermaster'", args = { "fiveseven", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Quartermaster'", args = {"fiveseven", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "quartermasterItemDelivery_121", "quartermasterItemDelivery_122" },
+	nextProgressions = {"quartermasterItemDelivery_121_stage1", "quartermasterItemDelivery_122"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -448,11 +607,9 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "stash_notes", quantity = 1 },
-		{ pool = "administrative_documents", quantity = 1 },
-		{ pool = "documents_field", quantity = 3 },
-		{ pool = "documents_technical", quantity = 1 },
-		{ pool = "documents_research", quantity = 2 },
+		{pool = "documents_field", quantity = 2},
+		{pool = "documents_technical", quantity = 1},
+		{pool = "documents_research", quantity = 2},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -465,6 +622,35 @@ ix.progression.Register("quartermasterItemDelivery_12", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "quartermasterItemDelivery_12",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("quartermasterItemDelivery_121_stage1", {
+	name = "Gearing Up 1.2.1 - 1/2",
+	description = "Gearing Up 1.2.1 - 1/2",
+	keyNpc = "'Quartermaster'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "common_parts", quantity = 7},
+		{pool = "small_parts", quantity = 3},
+	},
+	nextProgressions = {"quartermasterItemDelivery_121"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "quartermasterItemDelivery_121",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"ump45", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Our patrol reports need corroborating specimens. Sort this delivery and I'll approve "
+		.. "the UMP; the P90 allocation remains on the next requisition."
+	),
+	completionMessage = "Requisition recorded. Your earned authorisations are in the catalogue.",
 })
 
 ix.progression.Register("quartermasterItemDelivery_121", {
@@ -474,8 +660,7 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "p90", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Quartermaster'", args = { "ump45", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Quartermaster'", args = {"p90", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -503,12 +688,11 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "elite_parts", quantity = 2 },
-		{ pool = "common_parts", quantity = 7 },
-		{ pool = "small_parts", quantity = 6 },
-		{ pool = "humanoid_parts", quantity = 4 },
-		{ pool = "large_parts", quantity = 5 },
-		{ pool = "rare_parts", quantity = 2 },
+		{pool = "small_parts", quantity = 3},
+		{pool = "humanoid_parts", quantity = 4},
+		{pool = "elite_parts", quantity = 2},
+		{pool = "large_parts", quantity = 5},
+		{pool = "rare_parts", quantity = 2},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -521,6 +705,9 @@ ix.progression.Register("quartermasterItemDelivery_121", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "quartermasterItemDelivery_121",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("quartermasterItemDelivery_122", {
@@ -696,6 +883,7 @@ ix.progression.Register("quartermasterItemDelivery_12211", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	stockUnlocks = {{npc = "'Quartermaster'", bonus = 2, items = {"545x39", "556x45", "762x39", "762x51", "9x19"}}},
 })
 
 ix.progression.Register("quartermasterItemDelivery_2", {
@@ -707,7 +895,7 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 	vendorUnlocks = {
 		{ npc = "'Quartermaster'", args = { "swr8", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = { "quartermasterItemDelivery_21", "quartermasterItemDelivery_22" },
+	nextProgressions = {"quartermasterItemDelivery_21_stage1", "quartermasterItemDelivery_22_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -751,6 +939,33 @@ ix.progression.Register("quartermasterItemDelivery_2", {
 	end,
 })
 
+ix.progression.Register("quartermasterItemDelivery_21_stage1", {
+	name = "Gearing Up 2.1 - 1/2",
+	description = "Gearing Up 2.1 - 1/2",
+	keyNpc = "'Quartermaster'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "stash_notes", quantity = 1},
+		{pool = "administrative_documents", quantity = 1},
+		{pool = "documents_field", quantity = 1},
+	},
+	nextProgressions = {"quartermasterItemDelivery_21"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "quartermasterItemDelivery_21",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"taurusragingbull", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Paperwork first. Those records settle a missing shipment, and a settled shipment "
+		.. "means I can authorise the next revolver sale."
+	),
+	completionMessage = "Requisition recorded. Your earned authorisations are in the catalogue.",
+})
+
 ix.progression.Register("quartermasterItemDelivery_21", {
 	name = "Gearing Up 2.1",
 	description = "Help Quartermaster complete his revolver supply.",
@@ -758,10 +973,9 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "taurusragingbull", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Quartermaster'", args = { "mp9a1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Quartermaster'", args = {"mp9a1", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "quartermasterItemDelivery_211", "quartermasterItemDelivery_212" },
+	nextProgressions = {"quartermasterItemDelivery_211_stage1", "quartermasterItemDelivery_212"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -788,11 +1002,9 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "stash_notes", quantity = 1 },
-		{ pool = "veteran_stash", quantity = 1 },
-		{ pool = "administrative_documents", quantity = 1 },
-		{ pool = "documents_technical", quantity = 1 },
-		{ pool = "documents_field", quantity = 3 },
+		{pool = "documents_field", quantity = 2},
+		{pool = "veteran_stash", quantity = 1},
+		{pool = "documents_technical", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -805,6 +1017,35 @@ ix.progression.Register("quartermasterItemDelivery_21", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "quartermasterItemDelivery_21",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("quartermasterItemDelivery_211_stage1", {
+	name = "Gearing Up 2.1.1 - 1/2",
+	description = "Gearing Up 2.1.1 - 1/2",
+	keyNpc = "'Quartermaster'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "common_meat", quantity = 12},
+		{pool = "common_parts", quantity = 4},
+	},
+	nextProgressions = {"quartermasterItemDelivery_211"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "quartermasterItemDelivery_211",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"uzi", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"A field unit eats before it shoots. Cover the provisions and specimens on the list "
+		.. "and I'll clear the Uzi allocation for you."
+	),
+	completionMessage = "Requisition recorded. Your earned authorisations are in the catalogue.",
 })
 
 ix.progression.Register("quartermasterItemDelivery_211", {
@@ -814,8 +1055,7 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "uzi", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Quartermaster'", args = { "pp1901vityaz", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Quartermaster'", args = {"pp1901vityaz", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -842,12 +1082,11 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "common_meat", quantity = 12 },
-		{ pool = "common_parts", quantity = 8 },
-		{ pool = "small_parts", quantity = 8 },
-		{ pool = "humanoid_parts", quantity = 5 },
-		{ pool = "large_parts", quantity = 6 },
-		{ pool = "rare_parts", quantity = 2 },
+		{pool = "common_parts", quantity = 4},
+		{pool = "small_parts", quantity = 8},
+		{pool = "humanoid_parts", quantity = 5},
+		{pool = "large_parts", quantity = 6},
+		{pool = "rare_parts", quantity = 2},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -860,6 +1099,9 @@ ix.progression.Register("quartermasterItemDelivery_211", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "quartermasterItemDelivery_211",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("quartermasterItemDelivery_212", {
@@ -973,6 +1215,32 @@ ix.progression.Register("quartermasterItemDelivery_2121", {
 	end,
 })
 
+ix.progression.Register("quartermasterItemDelivery_22_stage1", {
+	name = "Gearing Up 2.2 - 1/2",
+	description = "Gearing Up 2.2 - 1/2",
+	keyNpc = "'Quartermaster'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "electrical_artifacts", quantity = 3},
+		{pool = "elite_parts", quantity = 1},
+	},
+	nextProgressions = {"quartermasterItemDelivery_22"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "quartermasterItemDelivery_22",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"rem870ae", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"These anomalous samples need checking before I sign another issue form. Bring exactly "
+		.. "what is requested, and we can start with the Remington."
+	),
+	completionMessage = "Requisition recorded. Your earned authorisations are in the catalogue.",
+})
+
 ix.progression.Register("quartermasterItemDelivery_22", {
 	name = "Gearing Up 2.2",
 	description = "Help Quartermaster pick out some precision weapons.",
@@ -980,8 +1248,7 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Quartermaster'", args = { "rem870ae", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Quartermaster'", args = { "mr96", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Quartermaster'", args = {"mr96", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	nextProgressions = { "quartermasterItemDelivery_221", "quartermasterItemDelivery_222" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1014,11 +1281,10 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "electrical_artifacts", quantity = 3 },
-		{ pool = "elite_parts", quantity = 2 },
-		{ pool = "chemical_artifacts", quantity = 2 },
-		{ pool = "gravitational_artifacts", quantity = 1 },
-		{ pool = "rare_electrical_artifacts", quantity = 2 },
+		{pool = "elite_parts", quantity = 1},
+		{pool = "chemical_artifacts", quantity = 2},
+		{pool = "gravitational_artifacts", quantity = 1},
+		{pool = "rare_electrical_artifacts", quantity = 2},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1031,6 +1297,9 @@ ix.progression.Register("quartermasterItemDelivery_22", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "quartermasterItemDelivery_22",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("quartermasterItemDelivery_221", {
@@ -1200,4 +1469,51 @@ ix.progression.Register("quartermasterItemDelivery_2221", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+})
+
+ix.progression.Register("quartermasterFieldEquipment1", {
+	name = "Field equipment: patrol fittings",
+	description = "Field equipment: patrol fittings",
+	briefing = (
+		"I can authorise a basic sight and grip once the supply chain is proven. Bring the "
+		.. "requested equipment first; the rifles still have their own requisitions."
+	),
+	completionMessage = "Requisition recorded. Your earned authorisations are in the catalogue.",
+	keyNpc = "'Quartermaster'",
+	progMap = "rp_waystation",
+	defaultActive = true,
+	lootMapTier = 2,
+	prerequisites = {"quarterMasterDelivery_activateItem", "quartermasterItemDelivery_1"},
+	nextProgressions = {"quartermasterFieldEquipment2"},
+	requirementSlots = {{pool = "attachments", quantity = 1}},
+	completionBenefits = {},
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"kobra", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Quartermaster'", args = {"foregrip", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+})
+
+ix.progression.Register("quartermasterFieldEquipment2", {
+	name = "Field equipment: optical issue",
+	description = "Field equipment: optical issue",
+	briefing = (
+		"The basic issue is settled. Bring another specialist equipment delivery and I will "
+		.. "authorise the remaining patrol optics. Compatibility still depends on your weapon."
+	),
+	completionMessage = "Requisition recorded. Your earned authorisations are in the catalogue.",
+	keyNpc = "'Quartermaster'",
+	progMap = "rp_waystation",
+	defaultActive = true,
+	lootMapTier = 2,
+	prerequisites = {"quartermasterFieldEquipment1"},
+	nextProgressions = {},
+	requirementSlots = {{pool = "common_optics", quantity = 1}, {pool = "documents_field", quantity = 1}},
+	completionBenefits = {},
+	vendorUnlocks = {
+		{npc = "'Quartermaster'", args = {"eotech", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Quartermaster'", args = {"aimpoint", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Quartermaster'", args = {"microt1", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
 })

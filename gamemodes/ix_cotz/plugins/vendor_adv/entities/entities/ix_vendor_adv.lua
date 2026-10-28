@@ -290,6 +290,9 @@ if SERVER then
 		net.Start("ixVendorAdvStock")
 		net.WriteString(uniqueID)
 		net.WriteUInt(self.items[uniqueID][VENDOR_STOCK], 16)
+		net.WriteUInt(self.items[uniqueID][VENDOR_MAXSTOCK], 16)
+		net.WriteUInt(0, 14)
+		ix.vendorStock.WritePolicy(self, uniqueID)
 		local editors = {}
 		for _, client in ipairs(self.receivers) do
 			if IsValid(client) and client.ixVendorAdvEditing == self then

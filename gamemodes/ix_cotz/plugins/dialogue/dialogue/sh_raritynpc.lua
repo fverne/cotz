@@ -4,7 +4,7 @@ DIALOGUE.addTopic("GREETING", {
 	response = " ** The entity spins in silence. **",
 	options = {
 		"TradeTopic",
-		-- "SpecialSaleTopic",
+		"AboutProgression",
 		"GOODBYE",
 	},
 	preCallback = function(self, client, target)
@@ -189,7 +189,7 @@ DIALOGUE.addTopic("BackTopic", {
 	response = "...",
 	options = {
 		"TradeTopic",
-		-- "SpecialSaleTopic",
+		"AboutProgression",
 		"GOODBYE",
 	},
 	preCallback = function(self, client, target)
@@ -235,4 +235,82 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "I'll be going.",
 	response = "...",
+})
+
+DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	options = { "BackTopic" },
+	DynamicPreCallback = function(self, player, target, dynamicData)
+		ix.dialogue.ProgressionTurnIn(self, player, target, dynamicData)
+	end,
+})
+
+DIALOGUE.addTopic("ViewProgression", {
+	statement = "",
+	response = "",
+	options = {
+		"BackTopic",
+	},
+
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local identifier = self.tmp
+		self.tmp = nil
+
+		return ix.progression.GetDeliveryOptions(client:GetCharacter(), identifier)
+	end,
+	ResolveDynamicOption = function(self, client, target, dynamicData)
+		-- Return the next topicID
+
+		return "HandInComplexProgressionItemTopic", dynamicData
+	end,
+
+	IsDynamicFollowup = true,
+	DynamicPreCallback = function(self, player, target, dynamicData)
+		if dynamicData then
+			if CLIENT then
+				local definition = ix.progression.definitions[dynamicData.identifier]
+				local progressionStatus =
+					ix.progression.GetLine(player:GetCharacter(), dynamicData.identifier)
+
+				if definition.requirementSlots then
+					progressionStatus = ix.progression.GetComplexProgressionValue(
+						player:GetCharacter(),
+						dynamicData.identifier
+					)
+				end
+
+				self.response = ix.progression.DescribeTask(definition,
+					target:GetDisplayName(),
+					progressionStatus,
+					player:GetCharacter()
+				)
+				self.tmp = dynamicData.identifier
+			end
+		end
+	end,
+})
+
+DIALOGUE.addTopic("AboutProgression", {
+	statement = "Do you need help with anything?",
+	response = "These are your available progression tasks and unclaimed rewards.",
+	options = {"BackTopic"},
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local options = {}
+		for _, id in ipairs(ix.progression.GetActiveProgressions(client:GetCharacter(), target:GetDisplayName())) do
+			options[#options + 1] = {
+				statement = ix.progression.definitions[id].name,
+				topicID = "AboutProgression",
+				dyndata = {identifier = id},
+			}
+		end
+
+		return options
+	end,
+	ResolveDynamicOption = function(self, client, target, data)
+		return "ViewProgression", data
+	end,
 })

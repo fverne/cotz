@@ -133,7 +133,9 @@ function PANEL:removeItem(uniqueID, listID, iteminstanceID)
 	if (!listID or listID == "selling") then
 		if (IsValid(self.sellingList[uniqueID])) then
 			self.sellingList[uniqueID].stock.curstock = math.max(self.sellingList[uniqueID].stock.curstock - 1,0)
-			self.sellingList[uniqueID].stock:SetText(string.format("Stock: %d/%d", self.sellingList[uniqueID].stock.curstock, ix.gui.vendor.entity.items[uniqueID][VENDOR_MAXSTOCK]))
+			self.sellingList[uniqueID].stock:SetText(ix.vendorStock.FormatStock(self.sellingList[uniqueID].stock.curstock,
+				ix.gui.vendor.entity.items[uniqueID][VENDOR_MAXSTOCK],
+				ix.gui.vendor.entity.items[uniqueID][VENDOR_TASK_PROGRESS]))
 			
 			if self.sellingList[uniqueID].stock.curstock <= 0 then
 				self.sellingList[uniqueID]:Remove()
@@ -321,7 +323,7 @@ function PANEL:Setup(uniqueID, iteminstanceID)
 				local info = entity.items[self.item]
 			
 				self.stock.curstock = info[VENDOR_STOCK]
-				self.stock:SetText(string.format("Stock: %d/%d ", self.stock.curstock, info[VENDOR_MAXSTOCK]))
+				self.stock:SetText(ix.vendorStock.FormatStock(self.stock.curstock, info[VENDOR_MAXSTOCK], info[VENDOR_TASK_PROGRESS]))
 			end
 		end
 
@@ -338,7 +340,7 @@ function PANEL:Setup(uniqueID, iteminstanceID)
 			if (entity and entity.items[self.item] and entity.items[self.item][VENDOR_MAXSTOCK]) then
 				local info = entity.items[self.item]
 				local stock = tooltip:AddRowAfter("name", "stock")
-				stock:SetText(string.format("Stock: %d/%d ", info[VENDOR_STOCK], info[VENDOR_MAXSTOCK]))
+				stock:SetText(ix.vendorStock.FormatStock(info[VENDOR_STOCK], info[VENDOR_MAXSTOCK], info[VENDOR_TASK_PROGRESS]))
 				stock:SetBackgroundColor(derma.GetColor("Info", self))
 				stock:SizeToContents()
 			end

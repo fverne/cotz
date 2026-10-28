@@ -48,6 +48,8 @@ net = {
 		sentMessage = message
 	end,
 	WriteString = function() end,
+	WriteFloat = function() end,
+	WriteBool = function() end,
 	WriteUInt = function() end,
 	Send = function(client)
 		recipient = client
@@ -361,4 +363,100 @@ check(templateShop.items["22lr"][VENDOR_MAXSTOCK] == 4
 check(templateShop.items.ruger1022[VENDOR_MAXSTOCK] == 1
 	and templateShop.items.ruger1022[VENDOR_RESTOCK_INTERVAL] == 48,
 	"template loading enforces equipment limits")
+-- Personal capacity must not refill shelves or mutate the shared catalogue.
+local ranked = character()
+local rankedOther = character()
+local rankShop = vendor()
+rankShop.items = {ammo = {10, 4, VENDOR_SELLANDBUY, 4, 12, 1},
+	rifle = {10, 1, VENDOR_SELLANDBUY, 1, 48, 1}}
+ix.progression.GetStockBonus = function(owner, npc, id)
+	return id == "ammo" and (owner.rank or 0) or 0
+end
+check(rankShop:GetStock("ammo", ranked) == 4, "ranked shop starts at base stock")
+now = now + 120 * 3600
+ranked.rank = 1
+local current, maximum = rankShop:GetStock("ammo", ranked)
+check(current == 4 and maximum == 5, "capacity upgrade cannot bank old full-shelf time")
+check(rankShop:GetStock("ammo", rankedOther) == 4, "another character keeps base capacity")
+check(rankShop.items.ammo[VENDOR_MAXSTOCK] == 4, "capacity leaves the shared catalogue unchanged")
+now = now + 12 * 3600
+check(rankShop:GetStock("ammo", ranked) == 5, "new space fills at the original interval")
+rankShop:TakeStock("ammo", 5, ranked)
+ranked.rank = 2
+current, maximum = rankShop:GetStock("ammo", ranked)
+check(current == 0 and maximum == 6, "second capacity milestone does not refill depleted stock")
+check(ix.vendorStock.GetItems(ranked, rankShop).ammo[VENDOR_MAXSTOCK] == 6,
+	"personal shop copy exposes the actual maximum")
+local rankedFresh = character()
+rankedFresh.rank = 2
+current, maximum = rankShop:GetStock("ammo", rankedFresh)
+check(current == 4 and maximum == 6, "uninitialized stock does not give free upgraded starting supply")
+now = now + 12 * 3600
+check(rankShop:GetStock("ammo", ranked) == 1, "capacity does not increase passive refill quantity")
+rankShop:TakeStock("ammo", 1, ranked)
+rankShop:TakeStock("rifle", 1, ranked)
+check(ix.vendorStock.TaskRestock(ranked, rankShop, "first"), "first qualifying completion replenishes")
+check(rankShop:GetStock("ammo", ranked) == 1, "20 percent uses upgraded capacity with fractions")
+check(not ix.vendorStock.TaskRestock(ranked, rankShop, "first"), "same milestone cannot restock twice")
+for serial = 1, 4 do
+	check(ix.vendorStock.TaskRestock(ranked, rankShop, "job", serial), "new job serial can replenish")
+end
+check(rankShop:GetStock("ammo", ranked) == 6, "five completions accumulate and clamp fractional stock")
+check(rankShop:GetStock("rifle", ranked) == 1, "one-stock equipment needs five fractional contributions")
+check(not ix.vendorStock.TaskRestock(ranked, rankShop, "job", 4), "repeated job serial cannot replenish")
+rankShop.items.ammo[VENDOR_RESTOCK_INTERVAL] = 0
+local _, disabledMaximum = rankShop:GetStock("ammo", ranked)
+check(disabledMaximum == 4, "disabled refill policy receives no capacity benefit")
+
+check(string.find(ix.vendorStock.FormatStock(0, 1, 0.4), "0.40 task credit", 1, true),
+	"shop explains fractional progress when no complete item has replenished")
+-- An already-open shop receives a complete policy before rendering a newly unlocked item.
+local packets, packet = {}, nil
+net.Start = function(name) packet = {name = name} end
+local function writeField(kind, value, bits)
+	packet[#packet + 1] = {kind = kind, value = value, bits = bits}
+end
+net.WriteString = function(value) writeField("string", value) end
+net.WriteUInt = function(value, bits) writeField("uint", value, bits) end
+net.WriteFloat = function(value) writeField("float", value) end
+net.WriteBool = function(value) writeField("bool", value) end
+net.Send = function() packets[#packets + 1] = packet end
+local liveShop, liveOwner = vendor(), character()
+liveShop.items = {optic = {1.5, 1, VENDOR_SELLANDBUY, 1, 48, 1}}
+liveOwner:GetPlayer().ixVendorAdv = liveShop
+ix.vendorStock.Refresh(liveOwner, liveShop)
+check(#packets == 1 and packets[1].name == "ixVendorAdvStock", "live unlock sends a personal stock packet")
+local readIndex = 0
+local function readField(kind, bits)
+	readIndex = readIndex + 1
+	local field = packets[1][readIndex]
+	check(field and field.kind == kind and field.bits == bits, "stock protocol field matches client reader")
+
+	return field.value
+end
+net.ReadString = function() return readField("string") end
+net.ReadUInt = function(bits) return readField("uint", bits) end
+net.ReadFloat = function() return readField("float") end
+net.ReadBool = function() return readField("bool") end
+local rendered = false
+local clientShop = {items = {}}
+local panel = {entity = clientShop, sellingList = {}}
+function panel:addItem(id)
+	local policy = self.entity.items[id]
+	check(policy[VENDOR_MODE] == VENDOR_SELLANDBUY and policy[VENDOR_PRICE] == 1.5,
+		"new item has the correct sale mode and custom price before rendering")
+	check(policy[VENDOR_RESTOCK_INTERVAL] == 48 and policy[VENDOR_RESTOCK_AMOUNT] == 1,
+		"new item retains its replenishment policy")
+	self.sellingList[id] = {stock = {SetText = function() rendered = true end}}
+end
+ix.gui = {vendor = panel}
+local sourceFile = assert(io.open(base .. "sh_plugin.lua"))
+local source = sourceFile:read("*a")
+sourceFile:close()
+local start = assert(source:find('net.Receive("ixVendorAdvStock"', 1, true))
+local finish = assert(source:find('net.Receive("ixVendorAdvAddItem"', start, true))
+assert((loadstring or load)(source:sub(start, finish - 1)))()
+handlers.ixVendorAdvStock()
+check(rendered and readIndex == #packets[1], "live item appears without reopening and consumes the complete packet")
+
 print(string.format("PASS: %d personal vendor stock checks", checks))

@@ -3,33 +3,30 @@ ix.util = ix.util or {}
 local TURN_IN_BASE_REPUTATION = 5
 local TURN_IN_REPUTATION_MULTIPLIER = 2
 local TURN_IN_VALUE_FACTOR = 0.1
-local TURN_IN_BUYBACK_RATE = 0.3
 
-function ix.util.GetValueFromProgressionTurnin(item, count)
+function ix.util.GetValueFromProgressionTurnin(item, count, itemID)
 	local maximumQuantity = item.quantity or item.ammoAmount or 1
 	local available = item:GetData("quantity", maximumQuantity)
 	if available <= 0 or maximumQuantity <= 0 then
 		return 0, 0
 	end
 	local fullValue = item.price or 0
-	if item.GetPrice then
-		-- Quote a full stack without mutating inventory; partial-stack price rounding must not change rewards.
-		local quote = setmetatable({
-			GetData = function(_, key, default)
-				if key == "quantity" then
-					return maximumQuantity
-				end
+	-- Quote full capacity so splitting a stack cannot change pricing through rounding.
+	local quote = setmetatable({
+		GetData = function(_, key, default)
+			if key == "quantity" then return maximumQuantity end
 
-				return item:GetData(key, default)
-			end,
-		}, { __index = item })
-		fullValue = quote:GetPrice()
-	end
+			return item:GetData(key, default)
+		end,
+	}, {__index = item})
+	if item.GetPrice then fullValue = quote:GetPrice() end
 	local accepted = math.min(count or available, available)
 	local unitPrice = fullValue / maximumQuantity
 	local fullReputation = TURN_IN_BASE_REPUTATION + (fullValue * TURN_IN_VALUE_FACTOR) ^ 0.25
 	local reputation = fullReputation * accepted / maximumQuantity * TURN_IN_REPUTATION_MULTIPLIER
-	local currency = unitPrice * accepted * TURN_IN_BUYBACK_RATE
+	local rate = itemID and ix.taskRewards.ProgressionUnitValue(itemID, quote)
+		or unitPrice * ix.taskRewards.ProgressionCashMultiplier()
+	local currency = rate * accepted
 
 	return reputation, currency
 end

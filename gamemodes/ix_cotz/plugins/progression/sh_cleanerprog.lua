@@ -47,3 +47,52 @@ ix.progression.Register("cleanerItemDelivery_Storage", {
 		end)
 	end,
 })
+
+ix.progression.Register("cleanerLogistics1", {
+	name = "Local recovery",
+	description = "Local recovery",
+	keyNpc = "'Cleaner'",
+	progMap = "rp_marsh_cs",
+	defaultActive = true,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "workshop_supplies", quantity = 2},
+	},
+	nextProgressions = {"cleanerLogistics2"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	prerequisites = {"cleanerItemDelivery_Storage"},
+	briefing = (
+		"My shelves aren't held up by goodwill. Bring the workshop supplies and I'll put a "
+		.. "little credit against your next storage expansion."
+	),
+	completionMessage = (
+		"Delivery checked. Your storage arrangement is on the books; keep the next consignment "
+		.. "in order."
+	),
+	completionBenefits = {services = {{npc = "'Cleaner'", service = "storage", amount = 300}}},
+})
+
+ix.progression.Register("cleanerLogistics2", {
+	name = "Delivery preparation",
+	description = "Delivery preparation",
+	keyNpc = "'Cleaner'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "field_maintenance", quantity = 2},
+	},
+	nextProgressions = {},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	prerequisites = {"cleanerItemDelivery_Storage"},
+	briefing = (
+		"Deliveries arrive in every condition imaginable. Bring the field maintenance supplies "
+		.. "and I'll improve our storage arrangement. The normal size limits still apply."
+	),
+	completionMessage = (
+		"Delivery checked. Your storage arrangement is on the books; keep the next consignment "
+		.. "in order."
+	),
+	completionBenefits = {services = {{npc = "'Cleaner'", service = "storage", amount = 600}}},
+	serviceDiscounts = {{npc = "'Cleaner'", service = "storage", fraction = 0.05}},
+})

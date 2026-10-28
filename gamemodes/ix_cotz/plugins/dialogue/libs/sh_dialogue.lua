@@ -1,6 +1,58 @@
 ix.dialogue = ix.dialogue or {}
 ix.dialogue.list = ix.dialogue.list or {}
 
+local MENU_ORDER = {
+	TradeTopic = 10,
+	StartBarter = 20,
+	HealTopic = 30,
+	RepairItems = 35,
+	StorageTopic = 40,
+	PaintSuit = 45,
+	ChangeSuitVariant = 46,
+	PDAAvatarTopic = 47,
+	NicknameTopic = 48,
+	WishTopic = 49,
+	JoinArena = 50,
+	AboutWorkTopic = 60,
+	GetTask = 65,
+	GetTaskByDifficulty = 65,
+	AboutProgression = 70,
+	TaskRewardChoices = 75,
+	TutorialTopic = 80,
+	Introduction = 90,
+	BackgroundTopic = 90,
+	InterestTopic = 95,
+	BackTopic = 900,
+	GOODBYE = 1000,
+}
+
+function ix.dialogue.OrderOptions(options, mainMenu)
+	local indexed = {}
+	for index, option in ipairs(options or {}) do
+		local id = type(option) == "table" and option.topicID or option
+		local rank = 0
+		if mainMenu then
+			rank = MENU_ORDER[id] or 200
+		elseif id == "GOODBYE" or id == "BackTopic" then
+			rank = MENU_ORDER[id]
+		end
+		indexed[#indexed + 1] = {option = option, rank = rank, index = index}
+	end
+	table.sort(indexed, function(first, second)
+		if first.rank == second.rank then
+			return first.index < second.index
+		end
+
+		return first.rank < second.rank
+	end)
+	local result = {}
+	for _, entry in ipairs(indexed) do
+		result[#result + 1] = entry.option
+	end
+
+	return result
+end
+
 function ix.dialogue.LoadFromDir(directory)
 	for k, v in ipairs(file.Find(directory.."/*.lua", "LUA")) do
 		local niceName = v:sub(4, -5)
@@ -17,7 +69,7 @@ function ix.dialogue.LoadFromDir(directory)
 					response = data.response or "",
 					preCallback = data.preCallback,
 					postCallback = data.postCallback,
-					options = data.options or {},
+					options = ix.dialogue.OrderOptions(data.options, topicID == "GREETING" or topicID == "BackTopic"),
 					IsDynamic = data.IsDynamic or false,
 					GetDynamicOptions = data.GetDynamicOptions,
 					ResolveDynamicOption = data.ResolveDynamicOption,
@@ -30,6 +82,8 @@ function ix.dialogue.LoadFromDir(directory)
 			end
 
 			ix.util.Include(directory.."/"..v)
+
+			if ix.dialogue.ConfigureTaskRewards then ix.dialogue.ConfigureTaskRewards(DIALOGUE) end
 
 			DIALOGUE.name = DIALOGUE.name or "Unknown"
 
@@ -48,7 +102,7 @@ function ix.dialogue.addTopic(id, topicID, statement, response, preCallback, pos
 	topic.response = response or ""
 	topic.preCallback = preCallback
 	topic.postCallback = postCallback
-	topic.options = options or {}
+	topic.options = ix.dialogue.OrderOptions(options, topicID == "GREETING" or topicID == "BackTopic")
 
 	dialogue.tree[topicID] = topic
 end

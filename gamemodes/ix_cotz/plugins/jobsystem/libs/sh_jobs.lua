@@ -12,8 +12,8 @@ ix.jobs.jobsbycategory = ix.jobs.jobsbycategory or {}
   tier -- Tier of the job, based on reputation tiers - number
   listenTrigger -- Name of the trigger to listen for - string
   numberRec -- Required number of times the trigger needs to be heard. If table a random number is selected. - number/table
-  reward -- Item to give the player upon completion. If this is a table a random item from the table is selected, supports data - string/table
-  rewardCount -- How many times we should try to give the player an item. If table a random number is selected. - number/table
+  reward -- Legacy output value; half carries into cash. Supplies use contact profiles and tier instead.
+  rewardCount -- Legacy metadata; each selected job supply is one inventory item.
   repReward -- How much rep to give a player from quest completion - number/table
 
   EXAMPLE
@@ -55,7 +55,16 @@ function ix.jobs.getFormattedName(activejob)
 end
 
 function ix.jobs.getFormattedDesc(activejob)
-  return string.format(ix.jobs.list[activejob.identifier].desc,activejob.numberRec)
+	local text = string.format(ix.jobs.list[activejob.identifier].desc, activejob.numberRec)
+	if activejob.rewardChoices then
+		text = text .. "\nSupplies: " .. ix.taskRewards.Summary({choices = activejob.rewardChoices})
+			.. "\nPayment: " .. activejob.moneyReward .. " rubles."
+		if ix.jobs.list[activejob.identifier].requiredItem then
+			text = text .. " Better-quality hand-ins can increase this payment."
+		end
+	end
+
+	return text
 end
 
 function ix.jobs.getFormattedNameInactive(identifier)
@@ -108,7 +117,7 @@ end
 
 local playerMeta = FindMetaTable("Player")
 function playerMeta:ixHasJobFromNPC(npcidentifier)
-  curJobs = self:GetCharacter():GetJobs()
+  local curJobs = self:GetCharacter():GetJobs()
 
   if curJobs[npcidentifier] then
     return true
@@ -134,6 +143,7 @@ if SERVER then
         ix.jobs.list[identifier].OnTaskAbandon(self)
       end
 
+      ix.taskRewards.RemoveJobOffer(self:GetCharacter(), curJobs[npcidentifier])
       curJobs[npcidentifier] = nil
   
       self:GetCharacter():SetJobs(curJobs)
@@ -171,106 +181,61 @@ if SERVER then
     self:GetCharacter():SetJobs(curJobs)
   end
 
-  function playerMeta:ixJobComplete(npcidentifier)
-    --print("Completing quest with ID: "..npcidentifier)
+	function playerMeta:ixJobComplete(npcidentifier)
+		local character = self:GetCharacter()
+		local jobs = character:GetJobs()
+		local job = jobs[npcidentifier]
+		if not job or not job.isCompleted then return end
+		if not ix.taskRewards.PrepareJob(character, npcidentifier, job) then
+			self:Notify("Claim your pending task supplies before finishing another task.")
 
-    if self:ixHasJobFromNPC(npcidentifier) then
-      local curJobs = self:GetCharacter():GetJobs()
-      --Check if job is marked as complete
-      if curJobs[npcidentifier].isCompleted then
-        --Check rewards & rewardcount
-        local identifier = curJobs[npcidentifier].identifier
+			return
+		end
+		local claimed = character:GetData("jobClaimsPaid", {})
+		if claimed[npcidentifier] and claimed[npcidentifier] >= job.progressionClaim then return end
+		claimed[npcidentifier] = job.progressionClaim
+		character:SetData("jobClaimsPaid", claimed)
+		jobs[npcidentifier] = nil
+		character:SetJobs(jobs)
+		character:Save()
+		local definition = ix.jobs.list[job.identifier]
+		ix.taskRewards.EarnOffer(character, job.rewardKey)
+		self:addReputation(definition.repReward)
+		ix.dialogue.notifyReputationReceive(self, definition.repReward)
+		character:GiveMoney(job.moneyReward)
+		ix.dialogue.notifyMoneyReceive(self, job.moneyReward)
+		hook.Run("ix_OnJobComplete", self, npcidentifier, job.identifier)
+		local vendor = ix.progression.GetNPCFromName(npcidentifier)
+		if ix.vendorStock and ix.vendorStock.TaskRestock and IsValid(vendor) then
+			ix.vendorStock.TaskRestock(character, vendor, job.identifier, job.progressionClaim)
+		end
+		if definition.OnTaskComplete then definition.OnTaskComplete(self) end
+		netstream.Start(self, "ix_COTZPlayPDASound", 1)
+		character:Save()
+	end
 
-        hook.Run("ix_OnJobComplete", self, npcidentifier, identifier)
+	function playerMeta:ixJobAdd(identifier, npcidentifier, preview)
+		local character = self:GetCharacter()
+		local jobs = character:GetJobs()
+		local definition = ix.jobs.list[identifier]
+		if jobs[npcidentifier] or not definition then return false end
+		if definition.CanAcceptTask and not definition.CanAcceptTask(self) then return false end
+		local job = preview and table.Copy(preview) or {}
+		job.identifier = identifier
+		if not job.numberRec then
+			local count = definition.numberRec
+			job.numberRec = type(count) == "table" and math.random(count[1], count[2]) or count
+		end
+		job.listenTrigger = definition.listenTrigger or identifier
+		job.progress = 0
+		job.isCompleted = false
+		if not ix.taskRewards.PrepareJob(character, npcidentifier, job) then return false end
+		jobs[npcidentifier] = job
+		character:SetJobs(jobs)
+		character:Save()
+		if definition.OnTaskGet then definition.OnTaskGet(self) end
+		netstream.Start(self, "ix_COTZPlayPDASound", 2)
 
-        local reward = ix.jobs.list[identifier].reward
-
-        if(not type(reward) == "table")then
-          reward = {reward}
-        end
-
-        for k,v in pairs(reward) do
-          --Give player items
-          if (self:GetCharacter() and !self:GetCharacter():GetInventory():Add(v[1], 1, v[2] or {})) then
-            ix.item.Spawn(v[1], self:GetItemDropPos(), nil, AngleRand(), v[2] or {})
-          end
-
-          ix.dialogue.notifyItemGet(self, ix.item.list[v[1]].name)
-        end
-
-        self:addReputation(ix.jobs.list[identifier].repReward)
-        ix.dialogue.notifyReputationReceive(self, ix.jobs.list[identifier].repReward)
-
-        if (ix.jobs.list[identifier].moneyReward) then
-          if(type(ix.jobs.list[identifier].moneyReward) == "table")then
-            local mreward = math.random(ix.jobs.list[identifier].moneyReward[1], ix.jobs.list[identifier].moneyReward[2])
-            self:GetCharacter():GiveMoney(mreward)
-            ix.dialogue.notifyMoneyReceive(self, mreward)
-          else
-            self:GetCharacter():GiveMoney(ix.jobs.list[identifier].moneyReward)
-            ix.dialogue.notifyMoneyReceive(self, ix.jobs.list[identifier].moneyReward)
-          end
-        end
-
-
-        --Remove job from player
-        curJobs[npcidentifier] = nil
-
-        if(ix.jobs.list[identifier].OnTaskComplete)then
-          ix.jobs.list[identifier].OnTaskComplete(self)
-        end
-        netstream.Start(self, "ix_COTZPlayPDASound", 1)
-
-        self:GetCharacter():SetJobs(curJobs)
-      end
-    end
-  end
-
-  function playerMeta:ixJobAdd(identifier, npcidentifier)
-    --print("Adding quest with ID: "..identifier)
-    curJobs = self:GetCharacter():GetJobs()
-
-    --Check if player already has a job from this npc
-    if curJobs[npcidentifier] then return false end
-
-    if(ix.jobs.list[identifier].CanAcceptTask)then
-      if !ix.jobs.list[identifier].CanAcceptTask(self) then
-        return false
-      end
-    end
-
-    --Evaluate job parameters | numberRec, listenTrigger, progress=0, isCompleted=false |
-    temp = {}
-
-    temp.identifier = identifier
-
-    if type(ix.jobs.list[identifier].numberRec) == "table" then
-      temp.numberRec = math.random(ix.jobs.list[identifier].numberRec[1],ix.jobs.list[identifier].numberRec[2])
-    else
-      temp.numberRec = ix.jobs.list[identifier].numberRec
-    end
-
-    if ix.jobs.list[identifier].listenTrigger then
-      temp.listenTrigger = ix.jobs.list[identifier].listenTrigger
-    else
-      temp.listenTrigger = identifier
-    end
-
-    temp.progress = 0
-
-    temp.isCompleted = false
-
-    curJobs[npcidentifier] = temp
-
-    if(ix.jobs.list[identifier].OnTaskGet)then
-      ix.jobs.list[identifier].OnTaskGet(self)
-    end
-
-    netstream.Start(self, "ix_COTZPlayPDASound", 2)
-
-    self:GetCharacter():SetJobs(curJobs)
-
-    return true -- job successfully added
-  end
-
+		return true
+	end
 end

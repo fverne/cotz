@@ -61,6 +61,18 @@ if SERVER then
 		else
 			validateRecord(character:GetData(DATA_KEY))
 		end
+		local record = ix.progression.GetCharacterProgression(character)
+		local changed = false
+		for _, line in pairs(record.lines) do
+			if line.claiming then
+				line.claiming = nil
+				changed = true
+			end
+		end
+		if changed then
+			ix.progression.SetCharacterProgression(character, record)
+			character:Save()
+		end
 		ix.progression.AssignActiveRequirements(character)
 	end
 end

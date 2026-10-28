@@ -59,3 +59,14 @@ ix.command.Add("ProgressionGrant", {
 		return "Progression milestone granted."
 	end,
 })
+
+ix.command.Add("ProgressionAudit", {
+	adminOnly = true,
+	OnRun = function()
+		local definitions, contacts = ix.progression.AuditDefinitions()
+
+		return string.format("Validated %d progression definitions across %d contacts on %s. "
+			.. "Live item definitions, service rewards, catalogue thresholds and dependency graph passed.",
+			definitions, contacts, game.GetMap())
+	end,
+})

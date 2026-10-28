@@ -48,6 +48,7 @@ function PANEL:targetName()
 end
 
 function PANEL:startTopic(topicID, dynamicData)
+	self.currentTopicID = topicID
 	topic = self.tree[topicID]
 
 	self.options:Clear()
@@ -194,8 +195,8 @@ end
 
 function PANEL:prepareOptions(options)
 	self.buttonList = {}
-	for k, topicID in ipairs(options) do
-		topic = self.tree[topicID]
+	for k, topicID in ipairs(ix.dialogue.OrderOptions(options)) do
+		local topic = self.tree[topicID]
 		if topic.statement ~= "" and topic:ShouldAdd(LocalPlayer(), self.target) then
 			self.buttonList[k] = self.options:Add("DLabel")
 			self.buttonList[k]:Dock(TOP)
@@ -220,53 +221,41 @@ end
 
 function PANEL:prepareDynamicOptions(dynamicOptions, normalOptions)
 	self.buttonList = {}
-	local buttonCount = 1
-	for k, data in ipairs(dynamicOptions) do
-		local topic = self.tree[data.topicID]
-		self.buttonList[k] = self.options:Add("DLabel")
-		self.buttonList[k]:Dock(TOP)
-		self.buttonList[k]:DockMargin(4, 0, 4, 4)
-		self.buttonList[k]:SetText(data.statement)
-		self.buttonList[k]:SetTextColor(Color(20, 20, 20, 255))
-		self.buttonList[k]:SetFont("ixSmallFont")
-		self.buttonList[k]:SetMouseInputEnabled(true)
-		self.buttonList[k].Think = function()
-			if self.buttonList[k]:IsHovered() then
-				self.buttonList[k]:SetTextColor(Color(255, 255, 255))
-			else
-				self.buttonList[k]:SetTextColor(Color(220, 220, 220))
-			end
-		end
-		self.buttonList[k].DoClick = function()
-			local nextTopic, dynamicData =
-				self:ResolveDynamicOption(data.topicID, LocalPlayer(), self.target, data.dyndata)
-			self:startTopic(nextTopic, dynamicData)
-		end
-
-		buttonCount = k + 1
+	local combined = {}
+	for _, data in ipairs(dynamicOptions or {}) do
+		combined[#combined + 1] = {topicID = data.topicID, statement = data.statement,
+			data = data.dyndata, dynamic = true}
 	end
-
-	for k, topicID in ipairs(normalOptions) do
-		local index = buttonCount + k
-		topic = self.tree[topicID]
-		if topic:ShouldAdd(LocalPlayer(), self.target) then
-			self.buttonList[index] = self.options:Add("DLabel")
-			self.buttonList[index]:Dock(TOP)
-			self.buttonList[index]:DockMargin(4, 0, 4, 4)
-			self.buttonList[index]:SetText(topic.statement)
-			self.buttonList[index]:SetTextColor(Color(20, 20, 20, 255))
-			self.buttonList[index]:SetFont("ixSmallFont")
-			self.buttonList[index]:SetMouseInputEnabled(true)
-			self.buttonList[index].Think = function()
-				if self.buttonList[index]:IsHovered() then
-					self.buttonList[index]:SetTextColor(Color(255, 255, 255))
-				else
-					self.buttonList[index]:SetTextColor(Color(220, 220, 220))
-				end
+	for _, topicID in ipairs(normalOptions or {}) do
+		combined[#combined + 1] = {topicID = topicID}
+	end
+	for _, option in ipairs(ix.dialogue.OrderOptions(combined)) do
+		local topic = self.tree[option.topicID]
+		local statement = option.statement or topic.statement
+		if statement ~= "" and (not topic.ShouldAdd or topic:ShouldAdd(LocalPlayer(), self.target)) then
+			local label = self.options:Add("DLabel")
+			self.buttonList[#self.buttonList + 1] = label
+			label:Dock(TOP)
+			label:DockMargin(4, 0, 4, 4)
+			label:SetText(statement)
+			label:SetTextColor(Color(20, 20, 20, 255))
+			label:SetFont("ixSmallFont")
+			label:SetWrap(true)
+			label:SetAutoStretchVertical(true)
+			label:SetMouseInputEnabled(true)
+			local baseThink = label.Think
+			label.Think = function()
+				baseThink(label)
+				label:SetTextColor(label:IsHovered() and Color(255, 255, 255) or Color(220, 220, 220))
 			end
-
-			self.buttonList[index].DoClick = function()
-				self:startTopic(topicID)
+			label.DoClick = function()
+				if option.dynamic then
+					local nextTopic, data = self:ResolveDynamicOption(option.topicID,
+						LocalPlayer(), self.target, option.data)
+					self:startTopic(nextTopic, data)
+				else
+					self:startTopic(option.topicID)
+				end
 			end
 		end
 	end
@@ -274,7 +263,7 @@ end
 
 function PANEL:ResolveDynamicOption(topicID, client, target, dynamicData)
 	local topic = self.tree[topicID]
-	local ret = "GOODBYE"
+	local ret = topicID
 	local data = {}
 
 	if isfunction(topic.ResolveDynamicOption) then

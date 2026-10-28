@@ -3,7 +3,8 @@ PLUGIN.author = "gumlefar"
 PLUGIN.desc = ("Persistent character progression with shared world unlocks " .. "and personal NPC services.")
 
 ix.progression = ix.progression or {}
-ix.progression.definitions = ix.progression.definitions or {}
+-- Rebuild the registry on reload so removed milestones cannot remain active.
+ix.progression.definitions = {}
 
 PLUGIN.checktime = 0
 
@@ -12,6 +13,9 @@ function ix.progression.Register(progressionID, data)
 	ix.progression.definitions[progressionID] = data
 end
 
+ix.util.Include("libs/sh_taskrewards.lua")
+ix.util.Include("libs/sh_expansion.lua")
+ix.util.Include("libs/sh_services.lua")
 ix.util.Include("sh_requirementpools.lua")
 ix.util.Include("sh_definitions.lua")
 
@@ -25,6 +29,14 @@ ix.util.Include("sh_spicylemonprog.lua")
 ix.util.Include("sh_jittersprog.lua")
 ix.util.Include("sh_eggheadprog.lua")
 ix.util.Include("sh_bossprog.lua")
+ix.util.Include("sh_beanstalkprog.lua")
+ix.util.Include("sh_computerprog.lua")
+ix.util.Include("sh_originalprog.lua")
+ix.util.Include("sh_hoarderprog.lua")
+ix.util.Include("sh_noosphereprog.lua")
+ix.util.Include("sh_communityprog.lua")
+ix.util.Include("sh_smartassprog.lua")
+ix.util.Include("sh_arenaprog.lua")
 
 function PLUGIN:LoadData()
 	local saved = self:GetData() or {}
@@ -38,10 +50,11 @@ end
 if SERVER then
 	function PLUGIN:PlayerLoadedCharacter(client, character, previousCharacter)
 		ix.progression.InitializeCharacterProgression(character)
+		ix.taskRewards.PrepareExistingJobs(character)
 	end
 
 	function PLUGIN:PostLoadData()
-		ix.progression.ValidateRequirementPools()
+		ix.progression.AuditDefinitions()
 		self.worldDataLoaded = true
 		self:SetupProgressionWorld()
 	end
@@ -71,8 +84,11 @@ function PLUGIN:PopulateHelpMenu(tabs)
 			(
 				"Below is a list of known NPCs and what they need for various "
 				.. "progressions. Progress and unlocks belong to your current "
-				.. "character. Finish every item requirement in a task to receive "
-				.. "reputation, 30% of the handed-in value, and one item from a requested group. "
+				.. "character. "
+				.. "Supply milestones can increase your personal stock capacity without faster refills. "
+				.. "Finish every item requirement in a task to receive "
+				.. "reputation and 30% of the handed-in value. Standard programmes offer a saved choice of supplies; "
+				.. "specialist commissions list their fixed supplies, service credit or catalogue rewards. "
 				.. "Groups with only one item give extra money instead."
 			)
 		)
@@ -89,6 +105,11 @@ function PLUGIN:PopulateHelpMenu(tabs)
 			"'Quartermaster'",
 			"'Boss'",
 			"'Smartass'",
+			"'The Original'",
+			-- "'Hoarder'",
+			-- "'Arena Master'",
+			-- "NPC",
+			-- "'???'",
 		}
 
 		table.Add(npcIdentifiers, initialNpcs)
@@ -139,6 +160,44 @@ function PLUGIN:PopulateHelpMenu(tabs)
 			npcTitle:DockMargin(0, 16, 0, 0)
 			npcTitle:SetAutoStretchVertical(true)
 
+			local capacityItems = {}
+			for _, definition in pairs(ix.progression.definitions) do
+				for _, reward in ipairs(definition.stockUnlocks or {}) do
+					if reward.npc == npcIdentifier then
+						for _, itemID in ipairs(reward.items) do
+							local bonus = ix.progression.GetStockBonus(LocalPlayer():GetCharacter(), npcIdentifier, itemID)
+							if bonus > 0 then
+								capacityItems[itemID] = bonus
+							end
+						end
+					end
+				end
+			end
+			local capacityText = {}
+			for itemID, bonus in pairs(capacityItems) do
+				capacityText[#capacityText + 1] = ix.item.list[itemID].name .. ": +" .. bonus
+			end
+			table.sort(capacityText)
+			if #capacityText > 0 then
+				local label = container:Add("DLabel")
+				label:SetFont("stalkerregularfont")
+				label:SetWrap(true)
+				label:SetText("Personal maximum-stock bonuses from base catalogue: "
+					.. table.concat(capacityText, "; ") .. ". Passive refill speed unchanged.")
+				label:Dock(TOP)
+				label:SetAutoStretchVertical(true)
+			end
+
+			local earned = ix.progression.GetEarnedServiceText(LocalPlayer():GetCharacter(), npcIdentifier)
+			if earned ~= "" then
+				local label = container:Add("DLabel")
+				label:SetFont("stalkerregularfont")
+				label:SetWrap(true)
+				label:SetText(earned)
+				label:Dock(TOP)
+				label:SetAutoStretchVertical(true)
+			end
+
 			local activeProgressions = 0
 			for _, v in
 				pairs(ix.progression.GetActiveProgressions(LocalPlayer():GetCharacter(), npcIdentifier))
@@ -161,7 +220,7 @@ function PLUGIN:PopulateHelpMenu(tabs)
 
 				if definition.BuildResponse then
 					local descriptionText =
-						definition:BuildResponse(definition.keyNpc, progressionStatus, character)
+						ix.progression.DescribeTask(definition, definition.keyNpc, progressionStatus, character)
 					local progressionDescription = container:Add("DLabel")
 					progressionDescription:SetWrap(true)
 					progressionDescription:SetFont("stalkerregularsmallfont")
@@ -172,7 +231,7 @@ function PLUGIN:PopulateHelpMenu(tabs)
 				end
 			end
 
-			if activeProgressions == 0 then
+			if activeProgressions == 0 and #capacityText == 0 and earned == "" then
 				npcTitle:Remove()
 			end
 		end

@@ -602,7 +602,6 @@ ix.progression.itemPools = {
 		candidates = {
 			{ item = "part_boar" },
 			{ item = "part_flesh" },
-			{ item = "part_blinddog" },
 		},
 	},
 	small_parts = {

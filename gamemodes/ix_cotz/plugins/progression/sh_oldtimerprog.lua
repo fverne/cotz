@@ -9,7 +9,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 	vendorUnlocks = {
 		{ npc = "'Old Timer'", args = { "knife2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = { "oldtimerItemDelivery_Knife2", "oldtimerItemDelivery_Hidestash1" },
+	nextProgressions = {"oldtimerItemDelivery_Knife2_stage1", "oldtimerItemDelivery_Hidestash1_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -52,6 +52,28 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 	end,
 })
 
+ix.progression.Register("oldtimerItemDelivery_Knife2_stage1", {
+	name = "Backstabbing 2 - 1/2",
+	description = "Backstabbing 2 - 1/2",
+	keyNpc = "'Old Timer'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "common_parts", quantity = 2},
+	},
+	nextProgressions = {"oldtimerItemDelivery_Knife2"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "oldtimerItemDelivery_Knife2",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"Big game begins with patient work on ordinary quarry. Bring those specimens first. "
+		.. "We'll talk about the better blade when the harder proof is in."
+	),
+	completionMessage = "Good work, stalker. Keep your eyes open; the next lesson won't be kinder.",
+})
+
 ix.progression.Register("oldtimerItemDelivery_Knife2", {
 	name = "Backstabbing 2",
 	description = "Prove your worth as a big game hunter to Old Timer.",
@@ -59,9 +81,9 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Old Timer'", args = { "knife3", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Old Timer'", args = {"knife3", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "oldtimerItemDelivery_Knife3" },
+	nextProgressions = {"oldtimerItemDelivery_Knife3_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -87,11 +109,10 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "predator_hides", quantity = 1 },
-		{ pool = "brains", quantity = 1 },
-		{ pool = "large_parts", quantity = 1 },
-		{ pool = "common_parts", quantity = 2 },
-		{ pool = "small_parts", quantity = 1 },
+		{pool = "small_parts", quantity = 1},
+		{pool = "predator_hides", quantity = 1},
+		{pool = "brains", quantity = 1},
+		{pool = "large_parts", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -104,6 +125,33 @@ ix.progression.Register("oldtimerItemDelivery_Knife2", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "oldtimerItemDelivery_Knife2",
+	stageIndex = 2,
+	stageCount = 2,
+	stockUnlocks = {{npc = "'Old Timer'", bonus = 1, items = {"medic_bandage_1", "medic_bandage_2"}}},
+})
+
+ix.progression.Register("oldtimerItemDelivery_Knife3_stage1", {
+	name = "Backstabbing 3 - 1/2",
+	description = "Backstabbing 3 - 1/2",
+	keyNpc = "'Old Timer'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "common_parts", quantity = 2},
+		{pool = "small_parts", quantity = 2},
+	},
+	nextProgressions = {"oldtimerItemDelivery_Knife3"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "oldtimerItemDelivery_Knife3",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"Don't mistake a sharp blade for experience. Show me you can handle the smaller beasts "
+		.. "consistently before you go looking for the worst the Zone keeps hidden."
+	),
+	completionMessage = "Good work, stalker. Keep your eyes open; the next lesson won't be kinder.",
 })
 
 ix.progression.Register("oldtimerItemDelivery_Knife3", {
@@ -113,7 +161,7 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Old Timer'", args = { "knife4", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Old Timer'", args = {"knife4", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -142,14 +190,12 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "elite_hides", quantity = 1 },
-		{ pool = "brains", quantity = 1 },
-		{ pool = "exotic_parts", quantity = 1 },
-		{ pool = "common_parts", quantity = 2 },
-		{ pool = "small_parts", quantity = 2 },
-		{ pool = "large_parts", quantity = 1 },
-		{ pool = "humanoid_parts", quantity = 1 },
-		{ pool = "common_hides", quantity = 1 },
+		{pool = "humanoid_parts", quantity = 1},
+		{pool = "elite_hides", quantity = 1},
+		{pool = "brains", quantity = 1},
+		{pool = "exotic_parts", quantity = 1},
+		{pool = "large_parts", quantity = 1},
+		{pool = "common_hides", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -162,20 +208,47 @@ ix.progression.Register("oldtimerItemDelivery_Knife3", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "oldtimerItemDelivery_Knife3",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("oldtimerItemDelivery_Melee_stage1", {
+	name = "Clubbing - 1/2",
+	description = "Clubbing - 1/2",
+	keyNpc = "'Old Timer'",
+	progMap = "rp_marsh_cs",
+	defaultActive = true,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "melee_tools", quantity = 1},
+	},
+	nextProgressions = {"oldtimerItemDelivery_Melee"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "oldtimerItemDelivery_Melee",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Old Timer'", args = {"bat", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Old Timer'", args = {"hatchet", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Old Timer'", args = {"machete", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Old Timer'", args = {"fireaxe", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Before you swing at something with claws, learn to trust the tool in your hands. "
+		.. "Bring a little honest steel and I'll offer the simpler field weapons first."
+	),
+	completionMessage = "Good work, stalker. Keep your eyes open; the next lesson won't be kinder.",
 })
 
 ix.progression.Register("oldtimerItemDelivery_Melee", {
-	name = "Clubbing",
+	name = "Clubbing - 2/2",
 	description = "Prove your worth as a warrior to Old Timer.",
 	keyNpc = "'Old Timer'",
-	defaultActive = true,
+	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Old Timer'", args = { "bat", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Old Timer'", args = { "fireaxe", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Old Timer'", args = { "fubar", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Old Timer'", args = { "hatchet", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Old Timer'", args = { "machete", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Old Timer'", args = {"fubar", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -203,7 +276,7 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "melee_tools", quantity = 2 },
+		{pool = "melee_tools", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -216,6 +289,32 @@ ix.progression.Register("oldtimerItemDelivery_Melee", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "oldtimerItemDelivery_Melee",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("oldtimerItemDelivery_Hidestash1_stage1", {
+	name = "Hiding Secrets 1 - 1/2",
+	description = "Hiding Secrets 1 - 1/2",
+	keyNpc = "'Old Timer'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "common_artifacts", quantity = 1},
+		{pool = "electrical_artifacts", quantity = 1},
+	},
+	nextProgressions = {"oldtimerItemDelivery_Hidestash1"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "oldtimerItemDelivery_Hidestash1",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"A buried secret leaves clues, if you know where to look. Bring those anomalous finds "
+		.. "first; I'll judge the rest before selling you a better digging tool."
+	),
+	completionMessage = "Good work, stalker. Keep your eyes open; the next lesson won't be kinder.",
 })
 
 ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
@@ -225,9 +324,9 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Old Timer'", args = { "hidestasher_cleaningkit", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Old Timer'", args = {"hidestasher_cleaningkit", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "oldtimerItemDelivery_Hidestash2" },
+	nextProgressions = {"oldtimerItemDelivery_Hidestash2_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -253,11 +352,9 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "common_artifacts", quantity = 1 },
-		{ pool = "electrical_artifacts", quantity = 1 },
-		{ pool = "common_hides", quantity = 1 },
-		{ pool = "common_parts", quantity = 2 },
-		{ pool = "small_parts", quantity = 1 },
+		{pool = "common_parts", quantity = 2},
+		{pool = "small_parts", quantity = 1},
+		{pool = "common_hides", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -270,6 +367,33 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash1", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "oldtimerItemDelivery_Hidestash1",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("oldtimerItemDelivery_Hidestash2_stage1", {
+	name = "Hiding Secrets 2 - 1/2",
+	description = "Hiding Secrets 2 - 1/2",
+	keyNpc = "'Old Timer'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "common_artifacts", quantity = 1},
+		{pool = "common_parts", quantity = 1},
+		{pool = "small_parts", quantity = 1},
+	},
+	nextProgressions = {"oldtimerItemDelivery_Hidestash2"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "oldtimerItemDelivery_Hidestash2",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"The shovel comes after the groundwork. Bring the finds and ordinary specimens on this "
+		.. "list, then we'll see what the deeper caches have taught you."
+	),
+	completionMessage = "Good work, stalker. Keep your eyes open; the next lesson won't be kinder.",
 })
 
 ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
@@ -279,7 +403,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Old Timer'", args = { "hidestasher_shovel", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Old Timer'", args = {"hidestasher_shovel", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -307,14 +431,11 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "common_artifacts", quantity = 1 },
-		{ pool = "chemical_artifacts", quantity = 1 },
-		{ pool = "predator_hides", quantity = 1 },
-		{ pool = "common_parts", quantity = 1 },
-		{ pool = "small_parts", quantity = 1 },
-		{ pool = "large_parts", quantity = 1 },
-		{ pool = "humanoid_parts", quantity = 1 },
-		{ pool = "common_hides", quantity = 1 },
+		{pool = "humanoid_parts", quantity = 1},
+		{pool = "chemical_artifacts", quantity = 1},
+		{pool = "predator_hides", quantity = 1},
+		{pool = "large_parts", quantity = 1},
+		{pool = "common_hides", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -327,4 +448,7 @@ ix.progression.Register("oldtimerItemDelivery_Hidestash2", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "oldtimerItemDelivery_Hidestash2",
+	stageIndex = 2,
+	stageCount = 2,
 })

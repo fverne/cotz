@@ -4,14 +4,11 @@ DIALOGUE.addTopic("GREETING", {
 	response = "Welcome to my humble shop.",
 	options = {
 		"TradeTopic",
-		"BackgroundTopic",
-		"UpgradeTaskReward",
-		--"InterestTopic",
+		"StartBarter",
 		"AboutWorkTopic",
-		-- "GetTask",
 		"GetTaskByDifficulty",
 		"AboutProgression",
-		"StartBarter",
+		"BackgroundTopic",
 		"GOODBYE",
 	},
 	preCallback = function(self, client, target)
@@ -108,105 +105,6 @@ DIALOGUE.addTopic("BackgroundTopic3", {
 DIALOGUE.addTopic("InterestTopic", {
 	statement = "Can you tell me something interesting?",
 	response = "Not really, no.",
-	options = {
-		"BackTopic",
-	},
-})
-
-DIALOGUE.addTopic("UpgradeTaskReward", {
-	statement = "Can you upgrade my task reward to a higher tier?",
-	response = "Which task reward do you wish to exchange?",
-	IsDynamic = true,
-	options = {
-		"BackTopic",
-	},
-	GetDynamicOptions = function(self, client, target)
-		local dynamicOptions = {}
-		local items = client:GetCharacter():GetInventory():GetItems()
-
-		for _, v in pairs(items) do
-			if v.upgradeItem and v.upgradeCost then
-				table.insert(dynamicOptions, {
-					statement = v:GetName() .. " - " .. ix.currency.Get(v.upgradeCost),
-					topicID = "UpgradeTaskReward",
-					dyndata = {
-						itemuid = v.uniqueID,
-						itemid = v:GetID(),
-						cost = v.upgradeCost,
-						upgradeItem = v.upgradeItem,
-					},
-				})
-			end
-		end
-
-		return dynamicOptions
-	end,
-	ResolveDynamicOption = function(self, client, target, dynamicData)
-		-- Return the next topicID
-		if not client:GetCharacter():HasMoney(dynamicData.cost) then
-			return "NotEnoughMoney"
-		end
-
-		return "ConfirmUpgradeTaskReward", dynamicData
-	end,
-})
-
-DIALOGUE.addTopic("ConfirmUpgradeTaskReward", {
-	statement = "",
-	response = "",
-	IsDynamicFollowup = true,
-	IsDynamic = true,
-	DynamicPreCallback = function(self, player, target, dynamicData)
-		if dynamicData then
-			if CLIENT then
-				self.response = string.format(
-					"Are you sure you want to upgrade that? It will cost you %s.",
-					ix.currency.Get(dynamicData.cost)
-				)
-			end
-
-			target.selectedtaskrewardstruct =
-				{ dynamicData.itemid, dynamicData.itemuid, dynamicData.cost, dynamicData.upgradeItem }
-		end
-	end,
-	GetDynamicOptions = function(self, client, target)
-		local dynamicOptions = {
-			{
-				statement = "Yes, upgrade it.",
-				topicID = "ConfirmUpgradeTaskReward",
-				dyndata = { accepted = true },
-			},
-			{
-				statement = "Actually, hold on.",
-				topicID = "ConfirmUpgradeTaskReward",
-				dyndata = { accepted = false },
-			},
-		}
-
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-
-		return dynamicOptions
-	end,
-	ResolveDynamicOption = function(self, client, target, dynamicData)
-		if SERVER and dynamicData.accepted then
-			ix.dialogue.notifyMoneyLost(client, ix.currency.Get(target.selectedtaskrewardstruct[3]))
-			client:GetCharacter():TakeMoney(target.selectedtaskrewardstruct[3])
-
-			ix.item.instances[target.selectedtaskrewardstruct[1]]:Remove()
-			client:GetCharacter():GetInventory():Add(target.selectedtaskrewardstruct[4])
-		end
-		-- Return the next topicID
-
-		return "BackTopic"
-	end,
-})
-
-DIALOGUE.addTopic("NotEnoughMoney", {
-	statement = "",
-	response = "Not enough money for that.",
 	options = {
 		"BackTopic",
 	},
@@ -460,44 +358,10 @@ DIALOGUE.addTopic("ViewProgression", {
 
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynamicOptions = {}
-
-		-- disgusting
-		-- local identifier = player:GetCharacter():GetData("curdialogprog")
 		local identifier = self.tmp
 		self.tmp = nil
-		local progressionStatus = ix.progression.GetComplexProgressionValue(client:GetCharacter(), identifier)
-		local definition = ix.progression.definitions[identifier]
-		if definition.requirementSlots then
-			local progitems = ix.progression.GetRequirements(client:GetCharacter(), identifier)
-			local missingitems = {}
 
-			for progitem, cnt in pairs(progitems) do
-				local curcnt = 0
-				if progressionStatus and progressionStatus[progitem] then
-					curcnt = progressionStatus[progitem]
-				end
-
-				if curcnt < cnt and client:GetCharacter():GetInventory():HasItem(progitem) then
-					table.insert(missingitems, progitem)
-				end
-			end
-
-			for _, progitem in pairs(missingitems) do
-				table.insert(dynamicOptions, {
-					statement = "Hand over " .. ix.item.list[progitem].name,
-					topicID = "ViewProgression",
-					dyndata = { progid = identifier, itemid = progitem },
-				})
-			end
-		end
-
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-
-		return dynamicOptions
+		return ix.progression.GetDeliveryOptions(client:GetCharacter(), identifier)
 	end,
 	ResolveDynamicOption = function(self, client, target, dynamicData)
 		-- Return the next topicID
@@ -520,7 +384,7 @@ DIALOGUE.addTopic("ViewProgression", {
 					)
 				end
 
-				self.response = definition:BuildResponse(
+				self.response = ix.progression.DescribeTask(definition,
 					target:GetDisplayName(),
 					progressionStatus,
 					player:GetCharacter()
@@ -669,14 +533,11 @@ DIALOGUE.addTopic("BackTopic", {
 	response = "Very nice...",
 	options = {
 		"TradeTopic",
-		"BackgroundTopic",
-		"UpgradeTaskReward",
-		--"InterestTopic",
+		"StartBarter",
 		"AboutWorkTopic",
-		-- "GetTask",
 		"GetTaskByDifficulty",
 		"AboutProgression",
-		"StartBarter",
+		"BackgroundTopic",
 		"GOODBYE",
 	},
 	preCallback = function(self, client, target) end,

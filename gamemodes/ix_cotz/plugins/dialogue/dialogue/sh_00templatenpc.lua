@@ -12,12 +12,11 @@ DIALOGUE.name = "Template NPC"
 DIALOGUE.addTopic("GREETING", {
 	response = "Welcome!",
 	options = {
-		"InterestTopic",
 		"TradeTopic",
 		"RepairItems",
 		"AboutWorkTopic",
-		-- "GetTask",
 		"GetTaskByDifficulty",
+		"InterestTopic",
 		"GOODBYE",
 	},
 	preCallback = function(self, client, target)
@@ -99,11 +98,11 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
 	response = "What would you like to know?",
 	options = {
-		"InterestTopic",
 		"TradeTopic",
 		"RepairItems",
 		"AboutWorkTopic",
 		"GetTask",
+		"InterestTopic",
 		"GOODBYE",
 	}, -- Should be identical to GREETING's options
 })

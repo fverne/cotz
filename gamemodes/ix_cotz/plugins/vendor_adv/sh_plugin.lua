@@ -34,6 +34,7 @@ VENDOR_MAXSTOCK = 4
 VENDOR_RESTOCK_INTERVAL = 5
 VENDOR_RESTOCK_AMOUNT = 6
 VENDOR_RESTOCK_TIME = 7
+VENDOR_TASK_PROGRESS = 8
 
 -- Sell and buy the item.
 VENDOR_SELLANDBUY = 1
@@ -57,6 +58,15 @@ local FREQUENT_DRINKS = {
 	drink_bottletea = true,
 }
 local FUEL_ITEMS = {value_kerosene = true, lowtiercookerfuel = true}
+
+function ix.vendorStock.FormatStock(count, maximum, fraction)
+	local text = string.format("Stock: %d/%d", count, maximum)
+	if (fraction or 0) > 0 then
+		text = text .. string.format(" (+%.2f task credit)", fraction)
+	end
+
+	return text
+end
 
 function ix.vendorStock.GetPolicy(uniqueID)
 	local item = ix.item.list[uniqueID] or {}
@@ -872,9 +882,21 @@ else
 
 		local uniqueID = net.ReadString()
 		local amount = net.ReadUInt(16)
+		local maximum = net.ReadUInt(16)
+		local fraction = net.ReadUInt(14) / 10000
+		local mode = net.ReadUInt(2)
+		local price = net.ReadBool() and net.ReadFloat() or nil
+		local interval = net.ReadFloat()
+		local restockAmount = net.ReadUInt(16)
 
 		entity.items[uniqueID] = entity.items[uniqueID] or {}
 		entity.items[uniqueID][VENDOR_STOCK] = amount
+		entity.items[uniqueID][VENDOR_MAXSTOCK] = maximum
+		entity.items[uniqueID][VENDOR_TASK_PROGRESS] = fraction
+		entity.items[uniqueID][VENDOR_MODE] = mode ~= 0 and mode or nil
+		entity.items[uniqueID][VENDOR_PRICE] = price
+		entity.items[uniqueID][VENDOR_RESTOCK_INTERVAL] = interval
+		entity.items[uniqueID][VENDOR_RESTOCK_AMOUNT] = restockAmount
 		local itemPanel = panel.sellingList and panel.sellingList[uniqueID]
 		if amount > 0 and not IsValid(itemPanel) then
 			panel:addItem(uniqueID, "selling")
@@ -883,7 +905,7 @@ else
 		if IsValid(itemPanel) and IsValid(itemPanel.stock) then
 			itemPanel.stock.curstock = amount
 			itemPanel.stock:SetText(
-				string.format("Stock: %d/%d", amount, entity.items[uniqueID][VENDOR_MAXSTOCK])
+				ix.vendorStock.FormatStock(amount, maximum, fraction)
 			)
 			if amount == 0 then
 				itemPanel:Remove()

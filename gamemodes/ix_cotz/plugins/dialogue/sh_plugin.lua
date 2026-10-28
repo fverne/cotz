@@ -1,3 +1,5 @@
+ix.util.Include("libs/sh_taskrewards.lua")
+
 PLUGIN.name = "Dialogue"
 PLUGIN.author = "Pilot - expanded by gumlefar"
 PLUGIN.desc = "System for communication between all NPCs."

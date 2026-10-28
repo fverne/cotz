@@ -177,9 +177,7 @@ ix.progression.Register("oldTimerKillIntro", {
 			RunOnce = true,
 		},
 	},
-	progressthresholds = {
-		[1] = 1,
-	},
+	progressthresholds = {1},
 })
 
 ix.progression.Register("oldTimerItemDelivery_mainMeat", {
@@ -266,9 +264,9 @@ ix.progression.Register("technutItemDelivery_Main", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "steelplate_1", nil, 1, "SELLANDBUY", 1, 3, 1 } },
-		{ npc = "'Technut'", args = { "ceramicplate_1", nil, 1, "SELLANDBUY", 1, 3, 1 } },
-		{ npc = "'Technut'", args = { "fabricplate_1", nil, 1, "SELLANDBUY", 1, 3, 1 } },
+		{ npc = "'Technut'", args = { "attachment_steelplate_1", nil, 1, "SELLANDBUY", 1, 3, 1 } },
+		{ npc = "'Technut'", args = { "attachment_ceramicplate_1", nil, 1, "SELLANDBUY", 1, 3, 1 } },
+		{ npc = "'Technut'", args = { "attachment_fabric_1", nil, 1, "SELLANDBUY", 1, 3, 1 } },
 	},
 	nextProgressions = { "oldTimerItemDelivery_mainStatue" },
 	BuildResponse = function(self, npcName, status, character)
@@ -453,7 +451,7 @@ ix.progression.Register("quarterMasterDelivery_activateItem", {
 	progMap = MAP,
 	nextProgressions = {
 		"quarterMasterDelivery_main",
-		"quartermasterItemDelivery_1",
+		"quartermasterItemDelivery_1_stage1",
 		"quartermasterItemDelivery_2",
 		"bossItemDelivery_1",
 	},
@@ -558,7 +556,7 @@ ix.progression.Register("boss_dataTasks", {
 		)
 	end,
 	progressfunctions = {
-		[1] = {
+		[2] = {
 			OnRun = function(self, character)
 				local name = "'Boss'"
 				local message = string.format(
@@ -580,9 +578,17 @@ ix.progression.Register("boss_dataTasks", {
 			end,
 			RunOnce = true,
 		},
+		[1] = {OnRun = function(self, character)
+			ix.progression.CompleteCheckpoint(character, "boss_dataTasks", 1)
+		end},
 	},
-	progressthresholds = {
-		[1] = 4,
+	progressthresholds = {1, 4},
+	checkpointBenefits = {{services = {{npc = "'Technut'", service = "repair", amount = 500}}}},
+	checkpointMessages = {
+		(
+			"A clean extraction. I've put a small repair allowance on your account at Technut's. "
+			.. "Bring me the remaining data before you meet my contact."
+		),
 	},
 })
 
@@ -593,7 +599,8 @@ ix.progression.Register("smartass_rfTasks", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Boss'", args = { "accesscard_bunker", nil, 5, "SELLANDBUY", 5, 1, 5 } },
+		{npc = "'Boss'", args = {"accesscard_bunker", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Smartass'", threshold = 3, args = {"pso1", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status)
 		local threshold = 0
@@ -616,7 +623,7 @@ ix.progression.Register("smartass_rfTasks", {
 		)
 	end,
 	progressfunctions = {
-		[1] = {
+		[3] = {
 			OnRun = function(self, character)
 				local name = "'Smartass'"
 				local message = string.format(
@@ -638,9 +645,24 @@ ix.progression.Register("smartass_rfTasks", {
 			end,
 			RunOnce = true,
 		},
+		[1] = {OnRun = function(self, character)
+			ix.progression.CompleteCheckpoint(character, "smartass_rfTasks", 1)
+		end},
+		[2] = {OnRun = function(self, character)
+			ix.progression.CompleteCheckpoint(character, "smartass_rfTasks", 2)
+		end},
 	},
-	progressthresholds = {
-		[1] = 5,
+	progressthresholds = {1, 3, 5},
+	checkpointBenefits = {{items = {{item = "9x19"}}}, {}},
+	checkpointMessages = {
+		(
+			"The first survey is usable. Take the reconnaissance ammunition; I need more than one "
+			.. "reading before I trust the pattern."
+		),
+		(
+			"Your records are consistent enough for a basic optic authorisation. The last surveys "
+			.. "still decide access to the science team."
+		),
 	},
 })
 
@@ -649,42 +671,23 @@ ix.progression.Register("beanstalkItemDelivery_Documents", {
 	name = "STORY: Well Documented",
 	description = "Beanstalk wants documents.",
 	keyNpc = "'Beanstalk'",
-	defaultActive = true,
+	defaultActive = false,
 	progMap = MAP,
-	nextProgressions = { "eggheadItemDelivery_artifacts" },
-	BuildResponse = function(self, npcName, status, character)
-		local data = status or {}
-
-		local itemIDs = ix.progression.GetRequirements(character, self.id)
-
-		local str = (
-			"Greetings. I won't ask how you got down here, who you are. "
-			.. "You come from the outside, and we don't have the resources "
-			.. "to leave the safety of the bunker. I need you to gather "
-			.. "the following of various documents to aid our research:\n"
-		)
-
-		for item, amount in pairs(itemIDs) do
-			local currentAmount = 0
-			if data and data[item] then
-				currentAmount = data[item]
-			end
-			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
-		end
-
-		str = str .. "\n\nNow get going!"
-
-		return str
-	end,
+	nextProgressions = {"eggheadItemDelivery_artifacts_stage1"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "documents_technical", quantity = 1 },
-		{ pool = "documents_research", quantity = 2 },
-		{ pool = "documents_field", quantity = 4 },
-		{ pool = "administrative_documents", quantity = 2 },
-		{ pool = "small_electronics", quantity = 5 },
+		{pool = "documents_field", quantity = 1},
+		{pool = "administrative_documents", quantity = 2},
+		{pool = "documents_technical", quantity = 1},
+		{pool = "documents_research", quantity = 2},
 	},
 	OnComplete = function(character) end,
+	milestoneGroup = "beanstalkItemDelivery_Documents",
+	stageIndex = 3,
+	stageCount = 3,
+	vendorUnlocks = {
+	},
 })
 
 ix.progression.Register("eggheadItemDelivery_artifacts", {
@@ -694,44 +697,21 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 	defaultActive = false,
 	progMap = MAP,
 	nextProgressions = { "intern_gasAnalyzerReadings" },
-	BuildResponse = function(self, npcName, status, character)
-		local data = status or {}
-
-		local itemIDs = ix.progression.GetRequirements(character, self.id)
-
-		local str = (
-			"Hello. I have discovered some strange phenomena deep within "
-			.. "the depths of the zone. If my calculations are correct, "
-			.. "I need to melt certain artifacts together to achieve our "
-			.. "goal. Find me the following artifacts:\n"
-		)
-
-		for item, amount in pairs(itemIDs) do
-			local currentAmount = 0
-			if data and data[item] then
-				currentAmount = data[item]
-			end
-			str = str .. string.format("\n%d %s", amount - currentAmount, ix.item.list[item].name)
-		end
-
-		str = str
-			.. (
-				"\n\nApparently they can be found mostly in electrical anomalies, "
-				.. "but you already know this, don't you?"
-			)
-
-		return str
-	end,
+	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "electrical_artifacts", quantity = 4 },
-		{ pool = "rare_electrical_artifacts", quantity = 2 },
-		{ pool = "chemical_artifacts", quantity = 3 },
-		{ pool = "burner_artifacts", quantity = 2 },
-		{ pool = "small_electronics", quantity = 6 },
-		{ pool = "repair_electrical", quantity = 3 },
+		{pool = "electrical_artifacts", quantity = 2},
+		{pool = "repair_electrical", quantity = 3},
+		{pool = "rare_electrical_artifacts", quantity = 2},
+		{pool = "chemical_artifacts", quantity = 3},
+		{pool = "burner_artifacts", quantity = 2},
 	},
 	OnComplete = function(character) end,
+	milestoneGroup = "eggheadItemDelivery_artifacts",
+	stageIndex = 2,
+	stageCount = 2,
+	vendorUnlocks = {
+	},
 })
 
 ix.progression.Register("intern_gasAnalyzerReadings", {
@@ -766,7 +746,7 @@ ix.progression.Register("intern_gasAnalyzerReadings", {
 		)
 	end,
 	progressfunctions = {
-		[1] = {
+		[4] = {
 			OnRun = function(self, character)
 				local name = "'Intern'"
 				local message = string.format(
@@ -789,9 +769,35 @@ ix.progression.Register("intern_gasAnalyzerReadings", {
 			end,
 			RunOnce = true,
 		},
+		[1] = {OnRun = function(self, character)
+			ix.progression.CompleteCheckpoint(character, "intern_gasAnalyzerReadings", 1)
+		end},
+		[2] = {OnRun = function(self, character)
+			ix.progression.CompleteCheckpoint(character, "intern_gasAnalyzerReadings", 2)
+		end},
+		[3] = {OnRun = function(self, character)
+			ix.progression.CompleteCheckpoint(character, "intern_gasAnalyzerReadings", 3)
+		end},
 	},
-	progressthresholds = {
-		[1] = 17,
+	progressthresholds = {2, 6, 11, 17},
+	checkpointBenefits = {
+		{items = {{item = "medic_antirad_1"}}},
+		{items = {{item = "drink_bottletea"}, {item = "medic_medkit_1"}}},
+		{items = {{item = "medic_psyheal_2"}}},
+	},
+	checkpointMessages = {
+		(
+			"Two Pripyat surveys logged! Please take the radiation treatment before the next trip. "
+			.. "We still need the rest of the field programme."
+		),
+		(
+			"Six surveys reconciled. I've put together a small expedition resupply. Keep the "
+			.. "analyzer readings coming; the laboratory access isn't cleared yet."
+		),
+		(
+			"Eleven surveys! These results are finally fitting together. Take the scientific "
+			.. "treatment and finish the last six before I send the access recommendation."
+		),
 	},
 })
 
@@ -802,7 +808,7 @@ ix.progression.Register("computerDelivery_activateItem", {
 	keyNpc = "'Computer'",
 	defaultActive = true,
 	progMap = MAP,
-	nextProgressions = { "computerDelivery_main" },
+	nextProgressions = {"computerDelivery_main_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		return "** 'ACCESS DENIED' is written in bold letters on the screen **"
 	end,
@@ -820,39 +826,21 @@ ix.progression.Register("computerDelivery_main", {
 	defaultActive = false,
 	progMap = MAP,
 	nextProgressions = { "computer_artifactTasks" },
-	BuildResponse = function(self, npcName, status, character)
-		local data = status or {}
-
-		local itemIDs = ix.progression.GetRequirements(character, self.id)
-
-		local str = (
-			"** The computer prints a list of items on the screen, and "
-			.. "blinks some indicator lights in the area where it would "
-			.. "like these components placed **\n"
-		)
-
-		for item, amount in pairs(itemIDs) do
-			local currentAmount = 0
-			if data and data[item] then
-				currentAmount = data[item]
-			end
-			str = str .. string.format("\n[%s : %d]", ix.item.list[item].name, amount - currentAmount)
-		end
-
-		return str
-	end,
+	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "radio_components", quantity = 1 },
-		{ pool = "heavy_components", quantity = 1 },
-		{ pool = "fuel", quantity = 1 },
-		{ pool = "computer_parts", quantity = 1 },
-		{ pool = "small_electronics", quantity = 3 },
-		{ pool = "repair_electrical", quantity = 1 },
-		{ pool = "workshop_supplies", quantity = 2 },
-		{ pool = "documents_technical", quantity = 1 },
+		{pool = "repair_electrical", quantity = 1},
+		{pool = "radio_components", quantity = 1},
+		{pool = "heavy_components", quantity = 1},
+		{pool = "computer_parts", quantity = 1},
+		{pool = "documents_technical", quantity = 1},
 	},
 	OnComplete = function(character) end,
+	milestoneGroup = "computerDelivery_main",
+	stageIndex = 3,
+	stageCount = 3,
+	vendorUnlocks = {
+	},
 })
 
 ix.progression.Register("computer_artifactTasks", {
@@ -882,7 +870,7 @@ ix.progression.Register("computer_artifactTasks", {
 		)
 	end,
 	progressfunctions = {
-		[1] = {
+		[3] = {
 			OnRun = function(self, character)
 				timer.Simple(5, function()
 					local name = "'Egghead'"
@@ -896,8 +884,23 @@ ix.progression.Register("computer_artifactTasks", {
 			end,
 			RunOnce = true,
 		},
+		[1] = {OnRun = function(self, character)
+			ix.progression.CompleteCheckpoint(character, "computer_artifactTasks", 1)
+		end},
+		[2] = {OnRun = function(self, character)
+			ix.progression.CompleteCheckpoint(character, "computer_artifactTasks", 2)
+		end},
 	},
-	progressthresholds = {
-		[1] = 14,
+	progressthresholds = {3, 8, 14},
+	checkpointBenefits = {{items = {{item = "medic_antirad_1"}}}, {items = {{item = "medic_psyheal_2"}}}},
+	checkpointMessages = {
+		(
+			"BATCH THREE VERIFIED. Field resupply authorised. Additional anomalous material "
+			.. "required before the final energy analysis."
+		),
+		(
+			"BATCH EIGHT VERIFIED. Operator support authorised. Six additional batches required. "
+			.. "Restricted functions remain closed."
+		),
 	},
 })

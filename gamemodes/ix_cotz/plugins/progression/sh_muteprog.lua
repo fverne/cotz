@@ -61,7 +61,7 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 	vendorUnlocks = {
 		{ npc = "'Mute'", args = { "binoculars_1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = { "muteItemDelivery_Binoc3", "muteItemDelivery_Broadcast" },
+	nextProgressions = {"muteItemDelivery_Binoc3_stage1", "muteItemDelivery_Broadcast_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -102,6 +102,28 @@ ix.progression.Register("muteItemDelivery_Binoc2", {
 	end,
 })
 
+ix.progression.Register("muteItemDelivery_Binoc3_stage1", {
+	name = "Looking ahead 3 - 1/2",
+	description = "Looking ahead 3 - 1/2",
+	keyNpc = "'Mute'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "small_electronics", quantity = 3},
+	},
+	nextProgressions = {"muteItemDelivery_Binoc3"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "muteItemDelivery_Binoc3",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"Better glass. Needs working electronics first. Bring the listed components. The rest "
+		.. "of the assembly comes after."
+	),
+	completionMessage = "Received. Useful. Check what you still need for the next job.",
+})
+
 ix.progression.Register("muteItemDelivery_Binoc3", {
 	name = "Looking ahead 3",
 	description = "Mute's hands are twitchier as he works on a diagram.",
@@ -109,9 +131,9 @@ ix.progression.Register("muteItemDelivery_Binoc3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Mute'", args = { "binoculars_4", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Mute'", args = {"binoculars_4", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "muteItemDelivery_Binoc4" },
+	nextProgressions = {"muteItemDelivery_Binoc4_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -135,12 +157,11 @@ ix.progression.Register("muteItemDelivery_Binoc3", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "advanced_parts_map1", quantity = 1 },
-		{ pool = "small_electronics", quantity = 3 },
-		{ pool = "documents_technical", quantity = 1 },
-		{ pool = "repair_electrical", quantity = 1 },
-		{ pool = "industrial_supplies", quantity = 1 },
-		{ pool = "workshop_supplies", quantity = 1 },
+		{pool = "workshop_supplies", quantity = 1},
+		{pool = "repair_electrical", quantity = 1},
+		{pool = "advanced_parts_map1", quantity = 1},
+		{pool = "documents_technical", quantity = 1},
+		{pool = "industrial_supplies", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -153,6 +174,33 @@ ix.progression.Register("muteItemDelivery_Binoc3", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "muteItemDelivery_Binoc3",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("muteItemDelivery_Binoc4_stage1", {
+	name = "Looking ahead 4 - 1/2",
+	description = "Looking ahead 4 - 1/2",
+	keyNpc = "'Mute'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "small_electronics", quantity = 3},
+		{pool = "workshop_supplies", quantity = 2},
+		{pool = "batteries", quantity = 2},
+	},
+	nextProgressions = {"muteItemDelivery_Binoc4"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "muteItemDelivery_Binoc4",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"Longer observation. More preparation. Components, workshop supplies, batteries. Bring "
+		.. "those first; don't expect the final instrument unfinished."
+	),
+	completionMessage = "Received. Useful. Check what you still need for the next job.",
 })
 
 ix.progression.Register("muteItemDelivery_Binoc4", {
@@ -164,7 +212,7 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Mute'", args = { "binoculars_3", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Mute'", args = {"binoculars_3", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -190,14 +238,12 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "advanced_parts", quantity = 1 },
-		{ pool = "consumer_electronics", quantity = 2 },
-		{ pool = "repair_electrical", quantity = 2 },
-		{ pool = "small_electronics", quantity = 3 },
-		{ pool = "industrial_supplies", quantity = 1 },
-		{ pool = "workshop_supplies", quantity = 2 },
-		{ pool = "batteries", quantity = 6 },
-		{ pool = "documents_technical", quantity = 1 },
+		{pool = "batteries", quantity = 4},
+		{pool = "consumer_electronics", quantity = 2},
+		{pool = "repair_electrical", quantity = 2},
+		{pool = "advanced_parts", quantity = 1},
+		{pool = "industrial_supplies", quantity = 1},
+		{pool = "documents_technical", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -210,6 +256,9 @@ ix.progression.Register("muteItemDelivery_Binoc4", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "muteItemDelivery_Binoc4",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("muteItemDelivery_Anomaly", {
@@ -221,7 +270,7 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 	vendorUnlocks = {
 		{ npc = "'Mute'", args = { "anomalydetector", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = { "muteItemDelivery_Detector" },
+	nextProgressions = {"muteItemDelivery_Detector_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -263,6 +312,29 @@ ix.progression.Register("muteItemDelivery_Anomaly", {
 	end,
 })
 
+ix.progression.Register("muteItemDelivery_Detector_stage1", {
+	name = "Echo Detector - 1/2",
+	description = "Echo Detector - 1/2",
+	keyNpc = "'Mute'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "small_electronics", quantity = 3},
+		{pool = "workshop_supplies", quantity = 2},
+	},
+	nextProgressions = {"muteItemDelivery_Detector"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "muteItemDelivery_Detector",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"Sensing a disturbance isn't the same as finding its source. Bring the components for "
+		.. "the calibration rig. Then the detector work can begin."
+	),
+	completionMessage = "Received. Useful. Check what you still need for the next job.",
+})
+
 ix.progression.Register("muteItemDelivery_Detector", {
 	name = "Echo Detector",
 	description = "Mute is busy drawing pictures of artifacts.",
@@ -270,7 +342,7 @@ ix.progression.Register("muteItemDelivery_Detector", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Mute'", args = { "detectorecho", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Mute'", args = {"detectorecho", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -296,12 +368,10 @@ ix.progression.Register("muteItemDelivery_Detector", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "detector", quantity = 1 },
-		{ pool = "small_electronics", quantity = 3 },
-		{ pool = "repair_electrical", quantity = 1 },
-		{ pool = "industrial_supplies", quantity = 1 },
-		{ pool = "workshop_supplies", quantity = 2 },
-		{ pool = "batteries", quantity = 5 },
+		{pool = "batteries", quantity = 5},
+		{pool = "repair_electrical", quantity = 1},
+		{pool = "industrial_supplies", quantity = 1},
+		{pool = "detector", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -314,6 +384,31 @@ ix.progression.Register("muteItemDelivery_Detector", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "muteItemDelivery_Detector",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("muteItemDelivery_Broadcast_stage1", {
+	name = "Keeping tabs - 1/2",
+	description = "Keeping tabs - 1/2",
+	keyNpc = "'Mute'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "small_electronics", quantity = 3},
+	},
+	nextProgressions = {"muteItemDelivery_Broadcast"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "muteItemDelivery_Broadcast",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"A message is useless if nobody hears it. Electronics first. The expensive broadcast "
+		.. "parts stay on the final installation list."
+	),
+	completionMessage = "Received. Useful. Check what you still need for the next job.",
 })
 
 ix.progression.Register("muteItemDelivery_Broadcast", {
@@ -345,12 +440,11 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "specialty_tools", quantity = 1 },
-		{ pool = "consumer_electronics", quantity = 1 },
-		{ pool = "documents_technical", quantity = 1 },
-		{ pool = "small_electronics", quantity = 3 },
-		{ pool = "repair_electrical", quantity = 1 },
-		{ pool = "industrial_supplies", quantity = 1 },
+		{pool = "consumer_electronics", quantity = 1},
+		{pool = "repair_electrical", quantity = 1},
+		{pool = "documents_technical", quantity = 1},
+		{pool = "industrial_supplies", quantity = 1},
+		{pool = "specialty_tools", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -362,6 +456,11 @@ ix.progression.Register("muteItemDelivery_Broadcast", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "muteItemDelivery_Broadcast",
+	stageIndex = 2,
+	stageCount = 2,
+	vendorUnlocks = {
+	},
 })
 
 ix.progression.Register("muteItemDelivery_BlowoutWarning", {

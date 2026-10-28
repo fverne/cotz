@@ -10,6 +10,18 @@ requirements before this rebalance, taken from commit `3dde6864`. It is used onl
 for the workbook's before/after comparison. The game never reads it, and it is not
 a save-migration mechanism.
 
+## Current expansion policy
+
+The current runtime contains 227 definitions. The literal quantities in `milestone-baseline.json` freeze the 139 pre-expansion milestones. Split stages preserve each original pool's combined raw quantity exactly, while additional optional branches have explicit independent requirements. The pacing script audits those sums and reports source-based effort; it no longer applies another 25% increase for each preparation stage. `--apply` retains the approved literal quantities and refreshes the report.
+
+Fixed supplies, provider-bound service credits, permanent service discounts and explicit existing-item catalogue rewards are included in the [implemented allocation](expansion-plan.md#completed-reward-and-service-allocation). Briefing sources are listed in the [dialogue guide](dialogue-guide.md).
+
+Job checkpoints are cumulative and retain the original final totals. Intern's effort report uses Pripyat field-work difficulty even though the hand-in contact lives in Marsh. Any map-independent optional contact uses its declared acquisition ceiling for its effort comparison. No backpack exchange progression is included.
+
+The workbook also reports personal stock-capacity unlocks. Delivery rewards share rounding and one final item bonus within their logical milestone. Runtime menu ordering, persistent programme previews and saved-character compatibility are documented in the progression plugin README.
+
+The following rationale records the original source model and pool policy; references to 134 deliveries, five counters, exponential successor growth and fixed slot-count distributions describe the baseline rather than the expanded graph.
+
 ## Quantity and effort decisions
 
 Quantities now follow an acquisition-effort curve rather than the old shared total
@@ -93,9 +105,9 @@ one per successor edge, reaching eight on Gearing Up 1.1.2.1.1 and 1.2.2.1.1.
 This affects requirements; activation links and NPC access gates are unchanged.
 Detector3 is the final detector upgrade and explicitly uses eight slots.
 
-The catalog contains 560 personal slots across 85 pools with 223 distinct candidate
-item IDs. The distribution by slot count is: 20 one-slot deliveries, 20 two-slot,
-22 three-slot, 10 four-slot, 13 five-slot, 27 six-slot, 9 seven-slot, and 13 eight-slot.
+The expanded catalogue contains 627 personal slots across 219 deliveries and 85 pools
+with 223 distinct candidate item IDs. Original logical milestones preserve their
+combined quantities; their category counts are distributed across the inserted stages.
 Current quantities and task thresholds are listed in [the pacing table](pacing.md).
 The catalog includes alternative branches, so its sum is not a mandatory playthrough
 cost. Category breadth remains one to eight slots; quantity tuning uses source effort.

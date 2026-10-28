@@ -9,7 +9,7 @@ ix.progression.Register("bossItemDelivery_1", {
 	vendorUnlocks = {
 		{ npc = "'Boss'", args = { "suit_io7a", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = { "bossItemDelivery_2" },
+	nextProgressions = {"bossItemDelivery_2_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -49,6 +49,28 @@ ix.progression.Register("bossItemDelivery_1", {
 	end,
 })
 
+ix.progression.Register("bossItemDelivery_2_stage1", {
+	name = "Cleaning Inventory 2 - 1/2",
+	description = "Cleaning Inventory 2 - 1/2",
+	keyNpc = "'Boss'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "small_parts", quantity = 9},
+	},
+	nextProgressions = {"bossItemDelivery_2"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "bossItemDelivery_2",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"Better protection is an investment in someone who comes back. Bring the first field "
+		.. "specimens; the armour authorisation waits on the rest of the proof."
+	),
+	completionMessage = "That delivery is accounted for. Keep your next operation disciplined.",
+})
+
 ix.progression.Register("bossItemDelivery_2", {
 	name = "Cleaning Inventory 2",
 	description = "Help Boss amass parts.",
@@ -56,9 +78,9 @@ ix.progression.Register("bossItemDelivery_2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Boss'", args = { "suit_ps5m", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Boss'", args = {"suit_ps5m", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "bossItemDelivery_3" },
+	nextProgressions = {"bossItemDelivery_3_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -81,8 +103,8 @@ ix.progression.Register("bossItemDelivery_2", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "small_parts", quantity = 10 },
-		{ pool = "common_parts", quantity = 12 },
+		{pool = "small_parts", quantity = 1},
+		{pool = "common_parts", quantity = 12},
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -95,6 +117,31 @@ ix.progression.Register("bossItemDelivery_2", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "bossItemDelivery_2",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("bossItemDelivery_3_stage1", {
+	name = "Cleaning Inventory 3 - 1/2",
+	description = "Cleaning Inventory 3 - 1/2",
+	keyNpc = "'Boss'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "common_meat", quantity = 12},
+	},
+	nextProgressions = {"bossItemDelivery_3"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "bossItemDelivery_3",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"Before I commit heavier equipment, I need the support shipment covered. Feed the "
+		.. "field team first. Then we'll finish the protection requisition."
+	),
+	completionMessage = "That delivery is accounted for. Keep your next operation disciplined.",
 })
 
 ix.progression.Register("bossItemDelivery_3", {
@@ -104,7 +151,7 @@ ix.progression.Register("bossItemDelivery_3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Boss'", args = { "suit_berill", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Boss'", args = {"suit_berill", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	nextProgressions = { "bossItemDelivery_4" },
 	BuildResponse = function(self, npcName, status, character)
@@ -129,10 +176,10 @@ ix.progression.Register("bossItemDelivery_3", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "rare_parts", quantity = 3 },
-		{ pool = "small_parts", quantity = 8 },
-		{ pool = "humanoid_parts", quantity = 5 },
-		{ pool = "common_meat", quantity = 13 },
+		{pool = "common_meat", quantity = 1},
+		{pool = "small_parts", quantity = 8},
+		{pool = "humanoid_parts", quantity = 5},
+		{pool = "rare_parts", quantity = 3},
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -145,6 +192,9 @@ ix.progression.Register("bossItemDelivery_3", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "bossItemDelivery_3",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("bossItemDelivery_4", {
@@ -206,7 +256,7 @@ ix.progression.Register("bossItemDelivery_5", {
 	vendorUnlocks = {
 		{ npc = "'Boss'", args = { "suit_skat9", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = { "bossItemDelivery_6" },
+	nextProgressions = {"bossItemDelivery_6_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -248,6 +298,31 @@ ix.progression.Register("bossItemDelivery_5", {
 	end,
 })
 
+ix.progression.Register("bossItemDelivery_6_stage1", {
+	name = "Cleaning Inventory 6 - 1/2",
+	description = "Cleaning Inventory 6 - 1/2",
+	keyNpc = "'Boss'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "common_meat", quantity = 14},
+	},
+	nextProgressions = {"bossItemDelivery_6"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "bossItemDelivery_6",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Boss'", args = {"headwear_rad", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Radiation doesn't care how thick your armour is. Keep the field team fed while I "
+		.. "check the headgear seals. The suit comes after the remaining inspection."
+	),
+	completionMessage = "That delivery is accounted for. Keep your next operation disciplined.",
+})
+
 ix.progression.Register("bossItemDelivery_6", {
 	name = "Cleaning Inventory 6",
 	description = "Help Boss amass parts.",
@@ -255,10 +330,9 @@ ix.progression.Register("bossItemDelivery_6", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Boss'", args = { "suit_radsuit", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Boss'", args = { "headwear_rad", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Boss'", args = {"suit_radsuit", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "bossItemDelivery_7" },
+	nextProgressions = {"bossItemDelivery_7_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -278,13 +352,13 @@ ix.progression.Register("bossItemDelivery_6", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "brains", quantity = 2 },
-		{ pool = "elite_parts", quantity = 3 },
-		{ pool = "rare_parts", quantity = 3 },
-		{ pool = "exotic_parts", quantity = 5 },
-		{ pool = "common_meat", quantity = 16 },
-		{ pool = "common_hides", quantity = 3 },
-		{ pool = "predator_hides", quantity = 2 },
+		{pool = "common_meat", quantity = 2},
+		{pool = "brains", quantity = 2},
+		{pool = "elite_parts", quantity = 3},
+		{pool = "rare_parts", quantity = 3},
+		{pool = "exotic_parts", quantity = 5},
+		{pool = "common_hides", quantity = 3},
+		{pool = "predator_hides", quantity = 2},
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -297,6 +371,35 @@ ix.progression.Register("bossItemDelivery_6", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "bossItemDelivery_6",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("bossItemDelivery_7_stage1", {
+	name = "Cleaning Inventory 7 - 1/2",
+	description = "Cleaning Inventory 7 - 1/2",
+	keyNpc = "'Boss'",
+	progMap = "rp_waystation",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "common_meat", quantity = 18},
+		{pool = "elite_parts", quantity = 2},
+	},
+	nextProgressions = {"bossItemDelivery_7"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "bossItemDelivery_7",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Boss'", args = {"headwear_spartan", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"An exoskeleton is only useful if the operator survives the first hit. Prove you can "
+		.. "support a field unit, and I'll authorise the Spartan helmet first."
+	),
+	completionMessage = "That delivery is accounted for. Keep your next operation disciplined.",
 })
 
 ix.progression.Register("bossItemDelivery_7", {
@@ -306,8 +409,7 @@ ix.progression.Register("bossItemDelivery_7", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Boss'", args = { "suit_exoskeleton", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Boss'", args = { "headwear_spartan", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Boss'", args = {"suit_exoskeleton", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -328,14 +430,13 @@ ix.progression.Register("bossItemDelivery_7", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "elite_parts", quantity = 4 },
-		{ pool = "hellhound_part", quantity = 12 },
-		{ pool = "brains", quantity = 2 },
-		{ pool = "large_parts", quantity = 8 },
-		{ pool = "common_meat", quantity = 18 },
-		{ pool = "common_hides", quantity = 3 },
-		{ pool = "predator_hides", quantity = 2 },
-		{ pool = "elite_hides", quantity = 2 },
+		{pool = "elite_parts", quantity = 2},
+		{pool = "hellhound_part", quantity = 12},
+		{pool = "brains", quantity = 2},
+		{pool = "large_parts", quantity = 8},
+		{pool = "common_hides", quantity = 3},
+		{pool = "predator_hides", quantity = 2},
+		{pool = "elite_hides", quantity = 2},
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -348,4 +449,7 @@ ix.progression.Register("bossItemDelivery_7", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "bossItemDelivery_7",
+	stageIndex = 2,
+	stageCount = 2,
 })

@@ -368,6 +368,12 @@ function PLUGIN:PlayerDeath(victim, inflictor, attacker)
 				end
 			end
 
+			local first = arenaData.players[1].player
+			local second = arenaData.players[2].player
+			if arenaData.active and IsValid(first) and IsValid(second)
+				and (victim == first or victim == second) and (attacker == first or attacker == second) then
+				hook.Run("cotz/arena/match-completed", first, second)
+			end
 			self:EndArena(arenaName, attacker, victim)
 
 			break

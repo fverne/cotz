@@ -1,17 +1,41 @@
 local MAP = "rp_marsh_cs"
 
+ix.progression.Register("hagglerItemDelivery_1_stage1", {
+	name = "Kitting Up 1 - 1/2",
+	description = "Kitting Up 1 - 1/2",
+	keyNpc = "'Haggler'",
+	progMap = "rp_marsh_cs",
+	defaultActive = true,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "fasteners", quantity = 4},
+	},
+	nextProgressions = {"hagglerItemDelivery_1"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "hagglerItemDelivery_1",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"fort12", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"A pistol is only dependable if the little fittings stay where they belong. Find the "
+		.. "hardware on this list, and we can start with the Fort-12."
+	),
+	completionMessage = "Good, that's business settled. Come back when you're ready for the next arrangement.",
+})
+
 ix.progression.Register("hagglerItemDelivery_1", {
 	name = "Kitting Up 1",
 	description = "Help Haggler establish basic supply lines to smugglers inside the Zone.",
 	keyNpc = "'Haggler'",
-	defaultActive = true,
+	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "fort12", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Haggler'", args = { "m1911", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Haggler'", args = { "brhp", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Haggler'", args = {"m1911", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Haggler'", args = {"brhp", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "hagglerItemDelivery_11", "hagglerItemDelivery_12" },
+	nextProgressions = {"hagglerItemDelivery_11_stage1", "hagglerItemDelivery_12"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -43,7 +67,7 @@ ix.progression.Register("hagglerItemDelivery_1", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "fasteners", quantity = 10 },
+		{pool = "fasteners", quantity = 6},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -56,6 +80,34 @@ ix.progression.Register("hagglerItemDelivery_1", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "hagglerItemDelivery_1",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("hagglerItemDelivery_11_stage1", {
+	name = "Kitting Up 1.1 - 1/2",
+	description = "Kitting Up 1.1 - 1/2",
+	keyNpc = "'Haggler'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "small_electronics", quantity = 2},
+	},
+	nextProgressions = {"hagglerItemDelivery_11"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "hagglerItemDelivery_11",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"lax410s", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"I've a compact shotgun project waiting on electrical odds and ends. Bring those "
+		.. "first; the surplus submachine guns will take another delivery."
+	),
+	completionMessage = "Good, that's business settled. Come back when you're ready for the next arrangement.",
 })
 
 ix.progression.Register("hagglerItemDelivery_11", {
@@ -65,8 +117,7 @@ ix.progression.Register("hagglerItemDelivery_11", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "lax410s", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Haggler'", args = { "sten", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Haggler'", args = {"sten", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	nextProgressions = { "hagglerItemDelivery_111", "hagglerItemDelivery_112" },
 	BuildResponse = function(self, npcName, status, character)
@@ -96,7 +147,7 @@ ix.progression.Register("hagglerItemDelivery_11", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "small_electronics", quantity = 5 },
+		{pool = "small_electronics", quantity = 3},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -109,6 +160,10 @@ ix.progression.Register("hagglerItemDelivery_11", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "hagglerItemDelivery_11",
+	stageIndex = 2,
+	stageCount = 2,
+	stockUnlocks = {{npc = "'Haggler'", bonus = 1, items = {"12gauge", "9x18", "762x25", "762x39", "762x54"}}},
 })
 
 ix.progression.Register("hagglerItemDelivery_111", {
@@ -287,7 +342,7 @@ ix.progression.Register("hagglerItemDelivery_12", {
 		{ npc = "'Haggler'", args = { "toz66", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 		{ npc = "'Haggler'", args = { "toz66short", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = { "hagglerItemDelivery_121", "hagglerItemDelivery_122" },
+	nextProgressions = {"hagglerItemDelivery_121_stage1", "hagglerItemDelivery_122_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -332,6 +387,31 @@ ix.progression.Register("hagglerItemDelivery_12", {
 	end,
 })
 
+ix.progression.Register("hagglerItemDelivery_121_stage1", {
+	name = "Kitting Up 1.2.1 - 1/2",
+	description = "Kitting Up 1.2.1 - 1/2",
+	keyNpc = "'Haggler'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "cleaning", quantity = 2},
+	},
+	nextProgressions = {"hagglerItemDelivery_121"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "hagglerItemDelivery_121",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"sks", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"A good surplus rifle deserves better than decades of warehouse muck. Bring the "
+		.. "cleaning supplies, and I'll open the SKS crate for you."
+	),
+	completionMessage = "Good, that's business settled. Come back when you're ready for the next arrangement.",
+})
+
 ix.progression.Register("hagglerItemDelivery_121", {
 	name = "Kitting Up 1.2.1",
 	description = "Help Haggler deal with Quartermaster.",
@@ -339,8 +419,7 @@ ix.progression.Register("hagglerItemDelivery_121", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "sks", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Haggler'", args = { "rugermini14", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Haggler'", args = {"rugermini14", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	nextProgressions = { "hagglerItemDelivery_1211" },
 	BuildResponse = function(self, npcName, status, character)
@@ -374,8 +453,7 @@ ix.progression.Register("hagglerItemDelivery_121", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "cleaning", quantity = 2 },
-		{ pool = "statues", quantity = 3 },
+		{pool = "statues", quantity = 3},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -388,6 +466,9 @@ ix.progression.Register("hagglerItemDelivery_121", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "hagglerItemDelivery_121",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("hagglerItemDelivery_1211", {
@@ -442,6 +523,7 @@ ix.progression.Register("hagglerItemDelivery_1211", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	stockUnlocks = {{npc = "'Haggler'", bonus = 2, items = {"12gauge", "9x18", "762x25", "762x39", "762x54"}}},
 })
 
 ix.progression.Register("hagglerItemDelivery_12111", {
@@ -557,6 +639,31 @@ ix.progression.Register("hagglerItemDelivery_121111", {
 	end,
 })
 
+ix.progression.Register("hagglerItemDelivery_122_stage1", {
+	name = "Kitting Up 1.2.2 - 1/2",
+	description = "Kitting Up 1.2.2 - 1/2",
+	keyNpc = "'Haggler'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "cleaning", quantity = 1},
+	},
+	nextProgressions = {"hagglerItemDelivery_122"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "hagglerItemDelivery_122",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"kiparis", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"The Kiparis is small enough for the cramped places you lot insist on entering. Help "
+		.. "me clean up the shipment before we discuss the heavier old guns."
+	),
+	completionMessage = "Good, that's business settled. Come back when you're ready for the next arrangement.",
+})
+
 ix.progression.Register("hagglerItemDelivery_122", {
 	name = "Kitting Up 1.2.2",
 	description = "Help Haggler make an exchange with his Russian supplier.",
@@ -564,8 +671,7 @@ ix.progression.Register("hagglerItemDelivery_122", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "kiparis", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Haggler'", args = { "kp31", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Haggler'", args = {"kp31", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	nextProgressions = { "hagglerItemDelivery_1221" },
 	BuildResponse = function(self, npcName, status, character)
@@ -594,8 +700,8 @@ ix.progression.Register("hagglerItemDelivery_122", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "cleaning", quantity = 2 },
-		{ pool = "heavy_electrical_map1", quantity = 1 },
+		{pool = "cleaning", quantity = 1},
+		{pool = "heavy_electrical_map1", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -608,6 +714,9 @@ ix.progression.Register("hagglerItemDelivery_122", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "hagglerItemDelivery_122",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("hagglerItemDelivery_1221", {
@@ -726,7 +835,7 @@ ix.progression.Register("hagglerItemDelivery_2", {
 		{ npc = "'Haggler'", args = { "toz34", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 		{ npc = "'Haggler'", args = { "toz34short", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = { "hagglerItemDelivery_21", "hagglerItemDelivery_22" },
+	nextProgressions = {"hagglerItemDelivery_21", "hagglerItemDelivery_22_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -1085,6 +1194,31 @@ ix.progression.Register("hagglerItemDelivery_21211", {
 	end,
 })
 
+ix.progression.Register("hagglerItemDelivery_22_stage1", {
+	name = "Kitting Up 2.2 - 1/2",
+	description = "Kitting Up 2.2 - 1/2",
+	keyNpc = "'Haggler'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "workshop_supplies", quantity = 1},
+	},
+	nextProgressions = {"hagglerItemDelivery_22"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "hagglerItemDelivery_22",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"mp34", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Old machinery still needs workshop supplies. Cover this batch, and I'll sell you the "
+		.. "MP34; the rifle-calibre work comes afterwards."
+	),
+	completionMessage = "Good, that's business settled. Come back when you're ready for the next arrangement.",
+})
+
 ix.progression.Register("hagglerItemDelivery_22", {
 	name = "Kitting Up 2.2",
 	description = "Help Haggler trade for rifle tooling for future projects.",
@@ -1092,10 +1226,9 @@ ix.progression.Register("hagglerItemDelivery_22", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "saigasemi545", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Haggler'", args = { "mp34", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Haggler'", args = {"saigasemi545", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "hagglerItemDelivery_221", "hagglerItemDelivery_222" },
+	nextProgressions = {"hagglerItemDelivery_221_stage1", "hagglerItemDelivery_222"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -1123,7 +1256,7 @@ ix.progression.Register("hagglerItemDelivery_22", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "workshop_supplies", quantity = 3 },
+		{pool = "workshop_supplies", quantity = 2},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1136,6 +1269,34 @@ ix.progression.Register("hagglerItemDelivery_22", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "hagglerItemDelivery_22",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("hagglerItemDelivery_221_stage1", {
+	name = "Kitting Up 2.2.1 - 1/2",
+	description = "Kitting Up 2.2.1 - 1/2",
+	keyNpc = "'Haggler'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "workshop_supplies", quantity = 2},
+	},
+	nextProgressions = {"hagglerItemDelivery_221"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "hagglerItemDelivery_221",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Haggler'", args = {"w1895", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Some people want another automatic. I prefer a rifle with a little history. Bring the "
+		.. "workshop supplies and we'll start with the Winchester."
+	),
+	completionMessage = "Good, that's business settled. Come back when you're ready for the next arrangement.",
 })
 
 ix.progression.Register("hagglerItemDelivery_221", {
@@ -1145,8 +1306,7 @@ ix.progression.Register("hagglerItemDelivery_221", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Haggler'", args = { "sako85", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Haggler'", args = { "w1895", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Haggler'", args = {"sako85", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	nextProgressions = { "hagglerItemDelivery_2211" },
 	BuildResponse = function(self, npcName, status, character)
@@ -1178,8 +1338,7 @@ ix.progression.Register("hagglerItemDelivery_221", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "workshop_supplies", quantity = 2 },
-		{ pool = "repair_electrical", quantity = 2 },
+		{pool = "repair_electrical", quantity = 2},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1192,6 +1351,9 @@ ix.progression.Register("hagglerItemDelivery_221", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "hagglerItemDelivery_221",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("hagglerItemDelivery_2211", {
@@ -1296,6 +1458,7 @@ ix.progression.Register("hagglerItemDelivery_22111", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	stockUnlocks = {{npc = "'Haggler'", bonus = 2, items = {"12gauge", "9x18", "762x25", "762x39", "762x54"}}},
 })
 
 ix.progression.Register("hagglerItemDelivery_222", {

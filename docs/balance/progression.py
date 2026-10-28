@@ -137,6 +137,19 @@ def requirements(tokens, decode):
     return result
 
 
+def metadata(tokens, decode):
+    """Read declarative reward data without interpreting callbacks or computed expressions."""
+    if not tokens or tokens[0].value != "{":
+        return scalar(tokens, decode)
+    parts = entries(tokens)
+    if not parts:
+        return {}
+    named = all(len(part) >= 3 and part[0].kind == "identifier" and part[1].value == "=" for part in parts)
+    if named:
+        return {part[0].value: metadata(part[2:], decode) for part in parts}
+    return [metadata(part, decode) for part in parts]
+
+
 def collect(root, tokenize, decode):
     folder = root / "gamemodes/ix_cotz/plugins/progression"
     steps, gates, notices = [], {}, []
@@ -179,11 +192,24 @@ def collect(root, tokenize, decode):
                 data = fields(tokens[i + 8:end], decode)
                 step = {"id": ident, "source": relative,
                         "line": source.count("\n", 0, tokens[i].start) + 1,
-                        "requirements": {}, "slots": [], "next": [], "vendor": [], "world": {}}
-                for name in ("name", "description", "keyNpc", "defaultActive", "progMap", "lootMapTier"):
+                        "requirements": {}, "slots": [], "next": [], "vendor": [], "world": {}, "stock": [], "prerequisites": [], "vendorThresholds": [], "benefits": {}, "checkpoints": [], "discounts": []}
+                for name in ("name", "description", "keyNpc", "defaultActive", "progMap", "lootMapTier", "milestoneGroup", "stageIndex", "stageCount", "briefing", "completionMessage", "recognition"):
                     step[name] = scalar(data[name], decode, constants) if name in data else ""
+                for key, field in (("benefits", "completionBenefits"), ("checkpoints", "checkpointBenefits"),
+                                   ("discounts", "serviceDiscounts")):
+                    if field in data:
+                        step[key] = metadata(data[field], decode)
+                if step["briefing"]:
+                    step["description"] = step["briefing"]
                 step["next"] = array(data["nextProgressions"], decode) if "nextProgressions" in data else []
                 step["thresholds"] = array(data["progressthresholds"], decode) if "progressthresholds" in data else []
+                for key, field in (("prerequisites", "prerequisites"),):
+                    step[key] = array(data[field], decode) if field in data else []
+                for entry in entries(data["stockUnlocks"]) if "stockUnlocks" in data else []:
+                    reward = fields(entry, decode)
+                    step["stock"].append({"npc": scalar(reward["npc"], decode),
+                                          "bonus": scalar(reward["bonus"], decode),
+                                          "items": array(reward["items"], decode)})
                 step["kind"] = "Item hand-in" if "GetItemIds" in data or "requirementSlots" in data else "Job completions"
                 for entry in entries(data["requirementSlots"]) if "requirementSlots" in data else []:
                     slot = fields(entry, decode)
@@ -203,6 +229,7 @@ def collect(root, tokenize, decode):
                 for entry in entries(data["vendorUnlocks"]) if "vendorUnlocks" in data else []:
                     unlock = fields(entry, decode)
                     step["vendor"].append((scalar(unlock["npc"], decode), array(unlock["args"], decode)))
+                    step["vendorThresholds"].append(scalar(unlock["threshold"], decode) if "threshold" in unlock else None)
                 steps.append(step)
             except (ValueError, KeyError, IndexError) as exc:
                 notices.append([relative, f"{ident}: could not inspect progression: {exc}"])
@@ -359,7 +386,7 @@ def build_tabs(root, entities, tokenize, decode):
             if milestone == ident:
                 unlock("Full NPC dialogue and services", "Personal", npc, "",
                        details="Other characters receive limited dialogue; their own milestone is required.")
-        for npc, args in step["vendor"]:
+        for vendor_index, (npc, args) in enumerate(step["vendor"]):
             stock_fields = [("Initial stock", 2), ("Maximum stock", 4),
                             ("Restock interval (hours)", 5), ("Restock amount", 6)]
             stock_details = []
@@ -367,9 +394,34 @@ def build_tabs(root, entities, tokenize, decode):
                 value = args[index] if index < len(args) else None
                 text = f"{value:g}" if isinstance(value, (int, float)) else "Unspecified"
                 stock_details.append(f"{label}: {text}")
+            threshold = step["vendorThresholds"][vendor_index]
+            if threshold is not None:
+                stock_details.append(f"Personal job threshold: {threshold:g}")
             unlock("Vendor catalog item", "Personal access and stock", npc, args[0], item_name(args[0]),
                    "; ".join(stock_details) + ". Stock counts are absolute (no multiplier). "
                    "Stock and restock clocks belong to each character; vendor money is shared.")
+        for reward in step["stock"]:
+            unlock("Personal capacity", "Personal maximum stock", reward["npc"],
+                   "; ".join(reward["items"]), details=f"+{reward['bonus']:g} total from base; highest earned rank only. "
+                   "No automatic refill or faster passive restock; item access still required.")
+        def benefit_rows(benefits, prefix="", threshold=None):
+            context = f"Qualified jobs required: {threshold:g}. " if threshold is not None else ""
+            for reward in benefits.get("items", []):
+                unlock(prefix + "Fixed item reward", "Personal, once", step["keyNpc"], reward["item"],
+                       item_name(reward["item"]), context + "One full existing item. Replaces the generic pool bonus; "
+                       "inventory overflow remains a saved claim.")
+            for reward in benefits.get("services", []):
+                unlock(prefix + "Service credit", "Personal, once", reward["npc"], reward["amount"],
+                       reward["service"], context + "Offsets the actual positive service fee only; no cash conversion.")
+        benefit_rows(step["benefits"])
+        for index, benefits in enumerate(step["checkpoints"]):
+            benefit_rows(benefits, "Checkpoint ", step["thresholds"][index])
+        for discount in step["discounts"]:
+            unlock("Service discount", "Personal, permanent", discount["npc"], discount["fraction"],
+                   discount["service"], "Highest earned discount only; no stacking. Does not alter item prices.")
+        if step["recognition"]:
+            unlock("Recognition", "Personal, cosmetic", step["keyNpc"], step["recognition"],
+                   details="Shown in personal progression help; grants no combat statistics.")
         if step["world"]:
             world = step["world"]
             unlock("NPC arrival", "Global on first completion", world["template"], "",

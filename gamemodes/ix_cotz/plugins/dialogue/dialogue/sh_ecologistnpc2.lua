@@ -4,12 +4,11 @@ DIALOGUE.addTopic("GREETING", {
 	response = "Hello.",
 	options = {
 		"TradeTopic",
-		"BackgroundTopic",
+		"ChangeSuitVariant",
 		"AboutWorkTopic",
-		-- "GetTask",
 		"GetTaskByDifficulty",
 		"AboutProgression",
-		"ChangeSuitVariant",
+		"BackgroundTopic",
 		"GOODBYE",
 	},
 	preCallback = function(self, client, target)
@@ -350,44 +349,10 @@ DIALOGUE.addTopic("ViewProgression", {
 
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynamicOptions = {}
-
-		-- disgusting
-		-- local identifier = player:GetCharacter():GetData("curdialogprog")
 		local identifier = self.tmp
 		self.tmp = nil
-		local progressionStatus = ix.progression.GetComplexProgressionValue(client:GetCharacter(), identifier)
-		local definition = ix.progression.definitions[identifier]
-		if definition.requirementSlots then
-			local progitems = ix.progression.GetRequirements(client:GetCharacter(), identifier)
-			local missingitems = {}
 
-			for progitem, cnt in pairs(progitems) do
-				local curcnt = 0
-				if progressionStatus and progressionStatus[progitem] then
-					curcnt = progressionStatus[progitem]
-				end
-
-				if curcnt < cnt and client:GetCharacter():GetInventory():HasItem(progitem) then
-					table.insert(missingitems, progitem)
-				end
-			end
-
-			for _, progitem in pairs(missingitems) do
-				table.insert(dynamicOptions, {
-					statement = "Hand over " .. ix.item.list[progitem].name,
-					topicID = "ViewProgression",
-					dyndata = { progid = identifier, itemid = progitem },
-				})
-			end
-		end
-
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-
-		return dynamicOptions
+		return ix.progression.GetDeliveryOptions(client:GetCharacter(), identifier)
 	end,
 	ResolveDynamicOption = function(self, client, target, dynamicData)
 		-- Return the next topicID
@@ -410,7 +375,7 @@ DIALOGUE.addTopic("ViewProgression", {
 					)
 				end
 
-				self.response = definition:BuildResponse(
+				self.response = ix.progression.DescribeTask(definition,
 					target:GetDisplayName(),
 					progressionStatus,
 					player:GetCharacter()
@@ -671,12 +636,11 @@ DIALOGUE.addTopic("BackTopic", {
 	response = "Hmm? Spill the beans.",
 	options = {
 		"TradeTopic",
-		"BackgroundTopic",
+		"ChangeSuitVariant",
 		"AboutWorkTopic",
-		-- "GetTask",
 		"GetTaskByDifficulty",
 		"AboutProgression",
-		"ChangeSuitVariant",
+		"BackgroundTopic",
 		"GOODBYE",
 	},
 	preCallback = function(self, client, target) end,

@@ -61,7 +61,7 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 		{ npc = "'Technut'", args = { "suit_trenchcoat_green", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 		{ npc = "'Technut'", args = { "suit_trenchcoat_tan", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = { "technutItemDelivery_Suit3" },
+	nextProgressions = {"technutItemDelivery_Suit3_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -101,6 +101,29 @@ ix.progression.Register("technutItemDelivery_Suit2", {
 	end,
 })
 
+ix.progression.Register("technutItemDelivery_Suit3_stage1", {
+	name = "Suiting Up Pt. 3 - 1/2",
+	description = "Suiting Up Pt. 3 - 1/2",
+	keyNpc = "'Technut'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "small_electronics", quantity = 1},
+		{pool = "fasteners", quantity = 2},
+	},
+	nextProgressions = {"technutItemDelivery_Suit3"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "technutItemDelivery_Suit3",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"The Sunrise needs proper fittings and functioning electrical parts. Bring those first "
+		.. "while I prepare the rest of the suit work."
+	),
+	completionMessage = "That's a proper job. I'll put it to use here; don't undo my work the moment you leave.",
+})
+
 ix.progression.Register("technutItemDelivery_Suit3", {
 	name = "Suiting Up Pt. 3",
 	description = "Get Technut to help you make suits.",
@@ -108,10 +131,10 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "suit_sunrise", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Technut'", args = {"suit_sunrise", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	nextProgressions = {
-		"technutItemDelivery_SuitNBC",
+		"technutItemDelivery_SuitNBC_stage1",
 		"technutItemDelivery_Suit4",
 		"technutItemDelivery_Helmet1",
 	},
@@ -139,9 +162,8 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "documents_technical", quantity = 1 },
-		{ pool = "small_electronics", quantity = 1 },
-		{ pool = "fasteners", quantity = 5 },
+		{pool = "fasteners", quantity = 3},
+		{pool = "documents_technical", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -154,6 +176,31 @@ ix.progression.Register("technutItemDelivery_Suit3", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "technutItemDelivery_Suit3",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("technutItemDelivery_SuitNBC_stage1", {
+	name = "Closed Respiratory Upgrade - 1/2",
+	description = "Closed Respiratory Upgrade - 1/2",
+	keyNpc = "'Technut'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "antirad", quantity = 3},
+	},
+	nextProgressions = {"technutItemDelivery_SuitNBC"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "technutItemDelivery_SuitNBC",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"I'd rather test protective work here than learn about a bad seal from your corpse. "
+		.. "Bring the radiation treatments for the workshop's safety supply first."
+	),
+	completionMessage = "That's a proper job. I'll put it to use here; don't undo my work the moment you leave.",
 })
 
 ix.progression.Register("technutItemDelivery_SuitNBC", {
@@ -163,7 +210,7 @@ ix.progression.Register("technutItemDelivery_SuitNBC", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "suit_nbc", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Technut'", args = {"suit_nbc", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -190,9 +237,9 @@ ix.progression.Register("technutItemDelivery_SuitNBC", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "filters", quantity = 2 },
-		{ pool = "antirad", quantity = 4 },
-		{ pool = "industrial_supplies", quantity = 2 },
+		{pool = "antirad", quantity = 1},
+		{pool = "filters", quantity = 2},
+		{pool = "industrial_supplies", quantity = 2},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -205,6 +252,9 @@ ix.progression.Register("technutItemDelivery_SuitNBC", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "technutItemDelivery_SuitNBC",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("technutItemDelivery_Suit4", {
@@ -216,7 +266,7 @@ ix.progression.Register("technutItemDelivery_Suit4", {
 	vendorUnlocks = {
 		{ npc = "'Technut'", args = { "suit_cs1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = { "technutItemDelivery_Suit5", "technutItemDelivery_Attachment1" },
+	nextProgressions = {"technutItemDelivery_Suit5", "technutItemDelivery_Attachment1_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -464,6 +514,7 @@ ix.progression.Register("technutItemDelivery_SuitPainting", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	serviceDiscounts = {{npc = "'Technut'", service = "repair", fraction = 0.05}},
 })
 
 ix.progression.Register("technutItemDelivery_Helmet1", {
@@ -634,7 +685,7 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 		{ npc = "'Technut'", args = { "headwear_cs2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 		{ npc = "'Technut'", args = { "headwear_cs4", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = { "technutItemDelivery_Helmet5" },
+	nextProgressions = {"technutItemDelivery_Helmet5_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -678,6 +729,28 @@ ix.progression.Register("technutItemDelivery_Helmet4", {
 	end,
 })
 
+ix.progression.Register("technutItemDelivery_Helmet5_stage1", {
+	name = "Wear Protection Pt. 5 - 1/2",
+	description = "Wear Protection Pt. 5 - 1/2",
+	keyNpc = "'Technut'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 3,
+	requirementSlots = {
+		{pool = "fasteners", quantity = 14},
+	},
+	nextProgressions = {"technutItemDelivery_Helmet5"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "technutItemDelivery_Helmet5",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"The Sphere shell is only half the job. Bring the mounting hardware first; the "
+		.. "remaining work decides whether I'll sell it as protection."
+	),
+	completionMessage = "That's a proper job. I'll put it to use here; don't undo my work the moment you leave.",
+})
+
 ix.progression.Register("technutItemDelivery_Helmet5", {
 	name = "Wear Protection Pt. 5",
 	description = "Help Technut get his hands on helmets.",
@@ -685,9 +758,9 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "helm_sphere08", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Technut'", args = {"helm_sphere08", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "technutItemDelivery_Helmet6" },
+	nextProgressions = {"technutItemDelivery_Helmet6_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -712,12 +785,12 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "common_artifacts", quantity = 5 },
-		{ pool = "exceptional_artifacts", quantity = 1 },
-		{ pool = "chemical_artifacts", quantity = 3 },
-		{ pool = "rare_electrical_artifacts", quantity = 3 },
-		{ pool = "fasteners", quantity = 19 },
-		{ pool = "workshop_supplies", quantity = 4 },
+		{pool = "fasteners", quantity = 5},
+		{pool = "workshop_supplies", quantity = 4},
+		{pool = "common_artifacts", quantity = 5},
+		{pool = "chemical_artifacts", quantity = 3},
+		{pool = "rare_electrical_artifacts", quantity = 3},
+		{pool = "exceptional_artifacts", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -730,6 +803,34 @@ ix.progression.Register("technutItemDelivery_Helmet5", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "technutItemDelivery_Helmet5",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("technutItemDelivery_Helmet6_stage1", {
+	name = "Wear Protection Pt. 6 - 1/2",
+	description = "Wear Protection Pt. 6 - 1/2",
+	keyNpc = "'Technut'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 3,
+	requirementSlots = {
+		{pool = "fasteners", quantity = 17},
+	},
+	nextProgressions = {"technutItemDelivery_Helmet6"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "technutItemDelivery_Helmet6",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Technut'", args = {"headwear_psz12", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"The PSZ assembly starts with the fittings. Bring the fasteners first; I won't release "
+		.. "the heavier helmet until the rest of the protective work is checked."
+	),
+	completionMessage = "That's a proper job. I'll put it to use here; don't undo my work the moment you leave.",
 })
 
 ix.progression.Register("technutItemDelivery_Helmet6", {
@@ -739,8 +840,7 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "helm_sphere12", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Technut'", args = { "headwear_psz12", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Technut'", args = {"helm_sphere12", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	nextProgressions = { "technutItemDelivery_Helmet7" },
 	BuildResponse = function(self, npcName, status, character)
@@ -767,13 +867,13 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "chemical_artifacts", quantity = 3 },
-		{ pool = "exceptional_artifacts", quantity = 2 },
-		{ pool = "burner_artifacts", quantity = 2 },
-		{ pool = "rare_electrical_artifacts", quantity = 3 },
-		{ pool = "fasteners", quantity = 21 },
-		{ pool = "workshop_supplies", quantity = 5 },
-		{ pool = "adhesives", quantity = 6 },
+		{pool = "fasteners", quantity = 4},
+		{pool = "workshop_supplies", quantity = 5},
+		{pool = "adhesives", quantity = 6},
+		{pool = "chemical_artifacts", quantity = 3},
+		{pool = "burner_artifacts", quantity = 2},
+		{pool = "rare_electrical_artifacts", quantity = 3},
+		{pool = "exceptional_artifacts", quantity = 2},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -786,6 +886,9 @@ ix.progression.Register("technutItemDelivery_Helmet6", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "technutItemDelivery_Helmet6",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("technutItemDelivery_Helmet7", {
@@ -853,7 +956,7 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 		{ npc = "'Technut'", args = { "mask_halfmask", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 		{ npc = "'Technut'", args = { "mask_respirator", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = { "technutItemDelivery_Mask2" },
+	nextProgressions = {"technutItemDelivery_Mask2_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -893,6 +996,31 @@ ix.progression.Register("technutItemDelivery_Mask1", {
 	end,
 })
 
+ix.progression.Register("technutItemDelivery_Mask2_stage1", {
+	name = "Don't breathe this Pt. 2 - 1/2",
+	description = "Don't breathe this Pt. 2 - 1/2",
+	keyNpc = "'Technut'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "fuel", quantity = 1},
+	},
+	nextProgressions = {"technutItemDelivery_Mask2"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "technutItemDelivery_Mask2",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Technut'", args = {"mask_gp5", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Fuel keeps the workshop moving while I service these old masks. Cover that first "
+		.. "batch and I'll make the GP-5 available to you."
+	),
+	completionMessage = "That's a proper job. I'll put it to use here; don't undo my work the moment you leave.",
+})
+
 ix.progression.Register("technutItemDelivery_Mask2", {
 	name = "Don't breathe this Pt. 2",
 	description = "Help technut provide gasmasks.",
@@ -900,10 +1028,9 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "mask_gp5", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Technut'", args = { "mask_eo20", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Technut'", args = {"mask_eo20", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "technutItemDelivery_Mask3" },
+	nextProgressions = {"technutItemDelivery_Mask3_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -928,8 +1055,7 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "fuel", quantity = 1 },
-		{ pool = "filters", quantity = 1 },
+		{pool = "filters", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -942,6 +1068,35 @@ ix.progression.Register("technutItemDelivery_Mask2", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "technutItemDelivery_Mask2",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("technutItemDelivery_Mask3_stage1", {
+	name = "Don't breathe this Pt. 3 - 1/2",
+	description = "Don't breathe this Pt. 3 - 1/2",
+	keyNpc = "'Technut'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "fuel", quantity = 1},
+		{pool = "repair_electrical", quantity = 1},
+	},
+	nextProgressions = {"technutItemDelivery_Mask3"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "technutItemDelivery_Mask3",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Technut'", args = {"mask_pmk3", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"A cracked lead or a dry workshop can stop the whole mask line. Bring the fuel and "
+		.. "electrical supplies before I sign off the PMK-3."
+	),
+	completionMessage = "That's a proper job. I'll put it to use here; don't undo my work the moment you leave.",
 })
 
 ix.progression.Register("technutItemDelivery_Mask3", {
@@ -951,10 +1106,9 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "mask_pmk3", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Technut'", args = { "mask_xm40", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Technut'", args = {"mask_xm40", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "technutItemDelivery_Mask4" },
+	nextProgressions = {"technutItemDelivery_Mask4_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -980,9 +1134,8 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "fuel", quantity = 1 },
-		{ pool = "repair_electrical", quantity = 2 },
-		{ pool = "industrial_supplies", quantity = 1 },
+		{pool = "repair_electrical", quantity = 1},
+		{pool = "industrial_supplies", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -995,6 +1148,34 @@ ix.progression.Register("technutItemDelivery_Mask3", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "technutItemDelivery_Mask3",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("technutItemDelivery_Mask4_stage1", {
+	name = "Don't breathe this Pt. 4 - 1/2",
+	description = "Don't breathe this Pt. 4 - 1/2",
+	keyNpc = "'Technut'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "fasteners", quantity = 5},
+	},
+	nextProgressions = {"technutItemDelivery_Mask4"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "technutItemDelivery_Mask4",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Technut'", args = {"mask_m40", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"A good seal still needs good fittings. Bring this hardware and I'll release the M40; "
+		.. "the next mask waits on the specialist checks."
+	),
+	completionMessage = "That's a proper job. I'll put it to use here; don't undo my work the moment you leave.",
 })
 
 ix.progression.Register("technutItemDelivery_Mask4", {
@@ -1004,8 +1185,7 @@ ix.progression.Register("technutItemDelivery_Mask4", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "mask_m40", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Technut'", args = { "mask_m50", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Technut'", args = {"mask_m50", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -1030,9 +1210,9 @@ ix.progression.Register("technutItemDelivery_Mask4", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "specialty_tools", quantity = 1 },
-		{ pool = "documents_technical", quantity = 1 },
-		{ pool = "fasteners", quantity = 10 },
+		{pool = "fasteners", quantity = 5},
+		{pool = "documents_technical", quantity = 1},
+		{pool = "specialty_tools", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1045,6 +1225,34 @@ ix.progression.Register("technutItemDelivery_Mask4", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "technutItemDelivery_Mask4",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("technutItemDelivery_Attachment1_stage1", {
+	name = "Plating up Pt. 1 - 1/2",
+	description = "Plating up Pt. 1 - 1/2",
+	keyNpc = "'Technut'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "fasteners", quantity = 8},
+	},
+	nextProgressions = {"technutItemDelivery_Attachment1"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "technutItemDelivery_Attachment1",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Technut'", args = {"attachment_steelplate_1", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Steel is straightforward if the mounting is sound. Bring the fittings for the first "
+		.. "plate set; ceramics need a separate finishing pass."
+	),
+	completionMessage = "That's a proper job. I'll put it to use here; don't undo my work the moment you leave.",
 })
 
 ix.progression.Register("technutItemDelivery_Attachment1", {
@@ -1054,10 +1262,9 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_steelplate_1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Technut'", args = { "attachment_ceramicplate_1", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Technut'", args = {"attachment_ceramicplate_1", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "technutItemDelivery_Attachment2" },
+	nextProgressions = {"technutItemDelivery_Attachment2_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -1081,10 +1288,10 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "common_optics", quantity = 4 },
-		{ pool = "attachments", quantity = 2 },
-		{ pool = "maintenance", quantity = 3 },
-		{ pool = "fasteners", quantity = 12 },
+		{pool = "fasteners", quantity = 4},
+		{pool = "common_optics", quantity = 4},
+		{pool = "maintenance", quantity = 3},
+		{pool = "attachments", quantity = 2},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1097,6 +1304,34 @@ ix.progression.Register("technutItemDelivery_Attachment1", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "technutItemDelivery_Attachment1",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("technutItemDelivery_Attachment2_stage1", {
+	name = "Plating up Pt. 2 - 1/2",
+	description = "Plating up Pt. 2 - 1/2",
+	keyNpc = "'Technut'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 3,
+	requirementSlots = {
+		{pool = "fasteners", quantity = 10},
+	},
+	nextProgressions = {"technutItemDelivery_Attachment2"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "technutItemDelivery_Attachment2",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Technut'", args = {"attachment_steelplate_2", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"The next plate set needs better mounting work, not a thicker coat of paint. Bring the "
+		.. "hardware and I'll approve the steel version first."
+	),
+	completionMessage = "That's a proper job. I'll put it to use here; don't undo my work the moment you leave.",
 })
 
 ix.progression.Register("technutItemDelivery_Attachment2", {
@@ -1106,10 +1341,9 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_steelplate_2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Technut'", args = { "attachment_ceramicplate_2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Technut'", args = {"attachment_ceramicplate_2", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "technutItemDelivery_Attachment3" },
+	nextProgressions = {"technutItemDelivery_Attachment3_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -1134,11 +1368,11 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "suppressors", quantity = 2 },
-		{ pool = "powder", quantity = 3 },
-		{ pool = "repair_electrical", quantity = 3 },
-		{ pool = "fasteners", quantity = 13 },
-		{ pool = "workshop_supplies", quantity = 3 },
+		{pool = "fasteners", quantity = 3},
+		{pool = "workshop_supplies", quantity = 3},
+		{pool = "powder", quantity = 3},
+		{pool = "repair_electrical", quantity = 3},
+		{pool = "suppressors", quantity = 2},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1151,6 +1385,34 @@ ix.progression.Register("technutItemDelivery_Attachment2", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "technutItemDelivery_Attachment2",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("technutItemDelivery_Attachment3_stage1", {
+	name = "Plating up Pt. 3 - 1/2",
+	description = "Plating up Pt. 3 - 1/2",
+	keyNpc = "'Technut'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 3,
+	requirementSlots = {
+		{pool = "fasteners", quantity = 11},
+	},
+	nextProgressions = {"technutItemDelivery_Attachment3"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "technutItemDelivery_Attachment3",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Technut'", args = {"attachment_steelplate_3", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Heavy plates punish a weak attachment. Cover the mounting hardware before I release "
+		.. "this steel set, then we'll finish the ceramic work."
+	),
+	completionMessage = "That's a proper job. I'll put it to use here; don't undo my work the moment you leave.",
 })
 
 ix.progression.Register("technutItemDelivery_Attachment3", {
@@ -1160,8 +1422,7 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Technut'", args = { "attachment_steelplate_3", nil, 1, "SELLANDBUY", 1, 48, 1 } },
-		{ npc = "'Technut'", args = { "attachment_ceramicplate_3", nil, 1, "SELLANDBUY", 1, 48, 1 } },
+		{npc = "'Technut'", args = {"attachment_ceramicplate_3", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -1187,12 +1448,12 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 	end,
 	lootMapTier = 3,
 	requirementSlots = {
-		{ pool = "suppressors", quantity = 2 },
-		{ pool = "maintenance", quantity = 3 },
-		{ pool = "computer_parts", quantity = 1 },
-		{ pool = "fasteners", quantity = 14 },
-		{ pool = "workshop_supplies", quantity = 3 },
-		{ pool = "adhesives", quantity = 4 },
+		{pool = "fasteners", quantity = 3},
+		{pool = "workshop_supplies", quantity = 3},
+		{pool = "adhesives", quantity = 4},
+		{pool = "maintenance", quantity = 3},
+		{pool = "suppressors", quantity = 2},
+		{pool = "computer_parts", quantity = 1},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -1205,6 +1466,9 @@ ix.progression.Register("technutItemDelivery_Attachment3", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "technutItemDelivery_Attachment3",
+	stageIndex = 2,
+	stageCount = 2,
 })
 
 ix.progression.Register("technutItemDelivery_AttachmentFabric1", {

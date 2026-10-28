@@ -9,7 +9,9 @@ function ix.npcbarter.GetActiveBartersForNPC(character, npcName)
 	end
 
 	for barterid, _ in pairs(ix.npcbarter.barterdict[npcName] or {}) do
-		if ix.npcbarter.activebarters[barterid] then
+		local barter = ix.npcbarter.barterdict[npcName][barterid]
+		if ix.npcbarter.activebarters[barterid]
+			and not (ix.taskRewards and ix.taskRewards.IsLegacyKit(barter.barterItem[1])) then
 			table.insert(ret, barterid)
 		end
 	end
@@ -19,6 +21,13 @@ end
 
 if SERVER then
 	function ix.npcbarter.ConsumeItems(ply, item, cnt)
+		local available = 0
+		for _, entry in pairs(ply:GetCharacter():GetInventory():GetItems()) do
+			if entry.uniqueID == item then
+				available = available + entry:GetData("quantity", entry.quantity or 1)
+			end
+		end
+		if available < cnt then return false end
 		local itemstoremove = {}
 		local itemsfound = 0
 
@@ -128,6 +137,7 @@ else
 			local barterdict = ix.npcbarter.barterdict[npcName][barterid]
 			local cnt = 0
 			local rewardItem = barterdict.barterItem
+			if ix.taskRewards and ix.taskRewards.IsLegacyKit(rewardItem[1]) then return end
 
 			if barterdict.reqItem[1] == item then
 				cnt = barterdict.reqItem[2] or 1

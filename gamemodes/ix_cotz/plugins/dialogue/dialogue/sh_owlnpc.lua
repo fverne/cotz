@@ -4,14 +4,13 @@ DIALOGUE.addTopic("GREETING", {
 	response = "What is it?",
 	options = {
 		"TradeTopic",
+		"StartBarter",
 		"StorageTopic",
-		"BackgroundTopic",
-		"InterestTopic",
 		"AboutWorkTopic",
-		-- "GetTask",
 		"GetTaskByDifficulty",
 		"AboutProgression",
-		"StartBarter",
+		"BackgroundTopic",
+		"InterestTopic",
 		"GOODBYE",
 	},
 	preCallback = function(self, client, target)
@@ -94,53 +93,10 @@ DIALOGUE.addTopic("StorageTopic", {
 	end,
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynamicOptions = {}
-		local basecost = 120
-		local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 2))
-		local bankH = client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
-		local heightcost = math.Round(math.pow(basecost + 200, 1 + (bankH / 5.5)))
-		local widthcost = math.Round(math.pow(basecost, 1 + (bankW / 5.5)))
-
-		table.insert(dynamicOptions, {
-			statement = "Can I please see my storage?",
-			topicID = "StorageTopic",
-			dyndata = { option = "use" },
-		})
-
-		if bankW < ix.config.Get("bankWMax") then
-			table.insert(dynamicOptions, {
-				statement = "I want to upgrade the width. (" .. ix.currency.Get(widthcost) .. ")",
-				topicID = "StorageTopic",
-				dyndata = { direction = "horizontally", cost = widthcost },
-			})
-		end
-		if bankH < ix.config.Get("bankHMax") then
-			table.insert(dynamicOptions, {
-				statement = "I want to upgrade the height. (" .. ix.currency.Get(heightcost) .. ")",
-				topicID = "StorageTopic",
-				dyndata = { direction = "vertically", cost = heightcost },
-			})
-		end
-
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-
-		return dynamicOptions
+		return ix.progression.GetStorageOptions(client, target)
 	end,
-	ResolveDynamicOption = function(self, client, target, dynamicData)
-		if dynamicData.option == "use" then
-			return "OpenStorage"
-		end
-
-		if not client:GetCharacter():HasMoney(dynamicData.cost) then
-			return "NotEnoughMoneyStorage"
-		end
-
-		-- Return the next topicID
-
-		return "ConfirmStorageUpgrade", { direction = dynamicData.direction, cost = dynamicData.cost }
+	ResolveDynamicOption = function(self, client, target, data)
+		return ix.progression.ResolveServiceOffer(client, target, "storage", data)
 	end,
 	ShouldAdd = function(self, client, target)
 		if ix.progression.IsCompleted(client:GetCharacter(), "cleanerItemDelivery_Storage") then
@@ -201,18 +157,8 @@ DIALOGUE.addTopic("ConfirmStorageUpgrade", {
 	response = "",
 	IsDynamicFollowup = true,
 	IsDynamic = true,
-	DynamicPreCallback = function(self, player, target, dynamicData)
-		if dynamicData then
-			if CLIENT then
-				self.response = string.format(
-					"Upgrading your stash %s will cost you %s.",
-					dynamicData.direction,
-					ix.currency.Get(dynamicData.cost)
-				)
-			else
-				target.upgradestruct = { dynamicData.direction, dynamicData.cost }
-			end
-		end
+	DynamicPreCallback = function(self, client, target, data)
+		ix.progression.ConfirmService(self, client, target, "storage", data)
 	end,
 	GetDynamicOptions = function(self, client, target)
 		local dynamicOptions = {
@@ -235,43 +181,14 @@ DIALOGUE.addTopic("ConfirmStorageUpgrade", {
 
 		return dynamicOptions
 	end,
-	ResolveDynamicOption = function(self, client, target, dynamicData)
-		if SERVER and dynamicData.accepted then
-			local bankH = client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
-			local bankW = client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 2))
-
-			if target.upgradestruct[1] == "vertically" then
-				if bankH < ix.config.Get("bankHMax", 2) then
-					client:GetCharacter():SetData("bankH", bankH + 1)
-					client:Notify(
-						"Updated your storage to height: " .. client:GetCharacter():GetData("bankH")
-					)
-					client:GetCharacter():TakeMoney(target.upgradestruct[2])
-					ix.dialogue.notifyMoneyLost(client, target.upgradestruct[2])
-				else
-					client:Notify(
-						"Cannot update storage! It's height maxed, which is "
-							.. client:GetCharacter():GetData("bankH", ix.config.Get("bankH", 2))
-					)
-				end
-			elseif target.upgradestruct[1] == "horizontally" then
-				if bankW < ix.config.Get("bankWMax", 2) then
-					client:GetCharacter():SetData("bankW", bankW + 1)
-					client:Notify("Updated your storage to width: " .. client:GetCharacter():GetData("bankW"))
-					client:GetCharacter():TakeMoney(target.upgradestruct[2])
-					ix.dialogue.notifyMoneyLost(client, target.upgradestruct[2])
-				else
-					client:Notify(
-						"Cannot update storage! It's width is maxed, which is "
-							.. client:GetCharacter():GetData("bankW", ix.config.Get("bankW", 2))
-					)
-				end
+	ResolveDynamicOption = function(self, client, target, data)
+		if SERVER then
+			local accepted = type(data) == "table" and data.accepted == true
+			local completed = ix.progression.ExecuteService(client, target, "storage", accepted)
+			if accepted and not completed then
+				client:Notify("That service could not be completed. Please request a fresh quote.")
 			end
 		end
-		if SERVER then
-			target.upgradestruct = nil
-		end
-		-- Return the next topicID
 
 		return "BackTopic"
 	end,
@@ -569,44 +486,10 @@ DIALOGUE.addTopic("ViewProgression", {
 
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynamicOptions = {}
-
-		-- disgusting
-		-- local identifier = player:GetCharacter():GetData("curdialogprog")
 		local identifier = self.tmp
 		self.tmp = nil
-		local progressionStatus = ix.progression.GetComplexProgressionValue(client:GetCharacter(), identifier)
-		local definition = ix.progression.definitions[identifier]
-		if definition.requirementSlots then
-			local progitems = ix.progression.GetRequirements(client:GetCharacter(), identifier)
-			local missingitems = {}
 
-			for progitem, cnt in pairs(progitems) do
-				local curcnt = 0
-				if progressionStatus and progressionStatus[progitem] then
-					curcnt = progressionStatus[progitem]
-				end
-
-				if curcnt < cnt and client:GetCharacter():GetInventory():HasItem(progitem) then
-					table.insert(missingitems, progitem)
-				end
-			end
-
-			for _, progitem in pairs(missingitems) do
-				table.insert(dynamicOptions, {
-					statement = "Hand over " .. ix.item.list[progitem].name,
-					topicID = "ViewProgression",
-					dyndata = { progid = identifier, itemid = progitem },
-				})
-			end
-		end
-
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-
-		return dynamicOptions
+		return ix.progression.GetDeliveryOptions(client:GetCharacter(), identifier)
 	end,
 	ResolveDynamicOption = function(self, client, target, dynamicData)
 		-- Return the next topicID
@@ -629,7 +512,7 @@ DIALOGUE.addTopic("ViewProgression", {
 					)
 				end
 
-				self.response = definition:BuildResponse(
+				self.response = ix.progression.DescribeTask(definition,
 					target:GetDisplayName(),
 					progressionStatus,
 					player:GetCharacter()
@@ -767,14 +650,13 @@ DIALOGUE.addTopic("BackTopic", {
 	response = "All right.",
 	options = {
 		"TradeTopic",
+		"StartBarter",
 		"StorageTopic",
-		"BackgroundTopic",
-		"InterestTopic",
 		"AboutWorkTopic",
-		-- "GetTask",
 		"GetTaskByDifficulty",
 		"AboutProgression",
-		"StartBarter",
+		"BackgroundTopic",
+		"InterestTopic",
 		"GOODBYE",
 	},
 	preCallback = function(self, client, target) end,

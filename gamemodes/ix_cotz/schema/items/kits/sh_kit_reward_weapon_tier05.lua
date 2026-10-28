@@ -13,9 +13,6 @@ ITEM.iconCam = {
 	fov = 13.55
 }
 
-ITEM.upgradeItem = "kit_reward_weapon_tier06"
-ITEM.upgradeCost = 125000
-
 ITEM.items = {
 	{
 		{3, "task_reward_weapon_05_low"},

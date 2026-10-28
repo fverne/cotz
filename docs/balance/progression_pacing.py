@@ -5,6 +5,7 @@ character assignments remain authoritative and are never migrated by this tool.
 """
 from collections import defaultdict
 import argparse
+import json
 import math
 from pathlib import Path
 import re
@@ -83,12 +84,74 @@ def pool_efforts(root, pools):
     return costs
 
 
+def expanded_plan(root, steps, gates, pools, costs):
+    """Audit literal allocations against original budgets; new stage depth never retunes quantities."""
+    baseline = json.loads((root / "docs/balance/progression/milestone-baseline.json").read_text())
+    groups = defaultdict(list)
+    by_id = {s['id']: s for s in steps}
+    parents = defaultdict(set)
+    for step in steps:
+        groups[step['milestoneGroup'] or step['id']].append(step)
+        for successor in step['next']:
+            parents[successor].add(step['id'])
+        parents[step['id']].update(step['prerequisites'])
+        gate = gates.get(step['keyNpc'])
+        if gate and gate != step['id']:
+            parents[step['id']].add(gate)
+    for group, members in groups.items():
+        if group not in baseline or not members[0]['slots']:
+            continue
+        expected, actual = defaultdict(int), defaultdict(int)
+        for slot in baseline[group]['slots']:
+            expected[slot['pool']] += slot['quantity']
+        for member in members:
+            for slot in member['slots']:
+                actual[slot['pool']] += slot['quantity']
+        if expected != actual:
+            raise ValueError(f"Milestone {group} changed its allocated acquisition budget: {actual} != {expected}")
+    result = {}
+
+    def visit(ident, visiting):
+        if ident in result:
+            return result[ident]
+        if ident in visiting:
+            raise ValueError(f'Cyclic progression dependency: {ident}')
+        step = by_id[ident]
+        before = [visit(p, visiting | {ident}) for p in sorted(parents[ident])]
+        depth = max((p['depth'] + 1 for p in before), default=0)
+        ceiling = step['lootMapTier'] or 1
+        map_tier = MAP_TIERS.get(step['progMap'], ceiling)
+        # Intern claims in Marsh but performs hard surveys in Pripyat.
+        if ident == 'intern_gasAnalyzerReadings':
+            map_tier = 3
+        factor = MAP_EFFORT[map_tier]
+        fixed = bool(step['slots']) and all(pools[s['pool']]['tier'] == 'fixed' for s in step['slots'])
+        unit_costs = [costs[ceiling, slot['pool']] * factor for slot in step['slots']]
+        quantities = [int(slot['quantity']) for slot in step['slots']]
+        thresholds = [int(value) for value in step['thresholds']]
+        effort = sum(q * c for q, c in zip(quantities, unit_costs)) if step['slots'] else thresholds[-1] * JOB_EFFORT * factor
+        result[ident] = dict(depth=depth, target=effort, effort=effort, quantities=quantities,
+                             thresholds=thresholds, fixed=fixed, parents=sorted(parents[ident]),
+                             unitEfforts=unit_costs, group=step['milestoneGroup'] or ident)
+        return result[ident]
+
+    for ident in sorted(by_id):
+        visit(ident, set())
+    for group, members in groups.items():
+        total = sum(result[s['id']]['effort'] for s in members)
+        for step in members:
+            result[step['id']]['groupEffort'] = total
+    return steps, result
+
+
 def plan(root):
     steps, gates, warnings = progression.collect(root, balance.tokenize, balance.lua_string)
     if warnings:
         raise ValueError(warnings)
     pools = progression.collect_pools(root, balance.tokenize, balance.lua_string)
     costs = pool_efforts(root, pools)
+    if (root / "docs/balance/progression/milestone-baseline.json").is_file():
+        return expanded_plan(root, steps, gates, pools, costs)
     by_id = {s['id']: s for s in steps}
     parents = defaultdict(set)
     for step in steps:
@@ -168,9 +231,8 @@ def apply(root, steps, planned):
                                        lambda m: m[1] + str(next(values)), block)
                 assert count == len(step['slots'])
             else:
-                assert len(data['thresholds']) == 1
-                block, count = re.subn(r'(progressthresholds\s*=\s*\{\s*(?:\[1\]\s*=\s*)?)\d+',
-                                       lambda m: m[1] + str(data['thresholds'][0]), block)
+                block, count = re.subn(r'progressthresholds\s*=\s*\{[^}]*\}',
+                                       'progressthresholds = {' + ', '.join(map(str, data['thresholds'])) + '}', block)
                 assert count == 1
             source = source[:start] + block + source[end:]
         path.write_text(source)

@@ -23,7 +23,16 @@ function ix.progression.GetLine(character, progressionID)
 end
 
 function ix.progression.IsCompleted(character, progressionID)
-	return ix.progression.GetLine(character, progressionID).completed == true
+	local line = ix.progression.GetLine(character, progressionID)
+	local definition = ix.progression.definitions[progressionID]
+	if line.completed then
+		return true
+	end
+	if definition and definition.milestoneGroup and definition.milestoneGroup ~= progressionID then
+		return ix.progression.GetLine(character, definition.milestoneGroup).completed == true
+	end
+
+	return false
 end
 
 function ix.progression.CanUseNPC(character, npcName)
@@ -40,12 +49,27 @@ function ix.progression.IsActive(character, progressionID)
 	if not definition then
 		return false
 	end
+	for _, required in ipairs(definition.prerequisites or {}) do
+		if not ix.progression.IsCompleted(character, required) then
+			return false
+		end
+	end
+	if definition.milestoneGroup and definition.milestoneGroup ~= progressionID then
+		local final = ix.progression.GetLine(character, definition.milestoneGroup)
+		if final.completed or (final.requirements and not final.segmentVersion) then
+			return false
+		end
+	end
 	local line = ix.progression.GetLine(character, progressionID)
 	if line.completed or not ix.progression.CanUseNPC(character, definition.keyNpc) then
 		return false
 	end
 	if line.active ~= nil then
 		return line.active == true
+	end
+
+	if definition.milestoneGroup == progressionID and line.requirements and not line.segmentVersion then
+		return true
 	end
 
 	return definition.defaultActive == true
@@ -62,7 +86,10 @@ end
 function ix.progression.GetActiveProgressions(character, npcIdentifier)
 	local result = {}
 	for progressionID, definition in pairs(ix.progression.definitions) do
-		if definition.keyNpc == npcIdentifier and ix.progression.IsActive(character, progressionID) then
+		local line = ix.progression.GetLine(character, progressionID)
+		local pending = line.pendingRewards and #line.pendingRewards > 0
+		if definition.keyNpc == npcIdentifier and ix.progression.CanUseNPC(character, npcIdentifier)
+			and (ix.progression.IsActive(character, progressionID) or pending) then
 			result[#result + 1] = progressionID
 		end
 	end
@@ -88,7 +115,8 @@ function ix.progression.CanBuyItem(character, npcName, itemID)
 		for _, unlock in ipairs(definition.vendorUnlocks or {}) do
 			if unlock.npc == npcName and unlock.args[1] == itemID then
 				locked = true
-				if ix.progression.IsCompleted(character, progressionID) then
+				if ix.progression.IsCompleted(character, progressionID)
+					or (unlock.threshold and ix.progression.GetProgressionValue(character, progressionID) >= unlock.threshold) then
 					return true
 				end
 			end
@@ -120,6 +148,9 @@ if SERVER then
 		assert(definition, "Unknown progression: " .. tostring(progressionID))
 		local record = ix.progression.GetCharacterProgression(character)
 		local line = ix.progression.GetLine(character, progressionID)
+		if line.completed then
+			return
+		end
 		line.active = false
 		line.completed = true
 		record.lines[progressionID] = line
@@ -132,6 +163,10 @@ if SERVER then
 		end
 		ix.progression.SetCharacterProgression(character, record)
 		ix.progression.AssignActiveRequirements(character)
+		local client = character:GetPlayer()
+		if ix.vendorStock and ix.vendorStock.Refresh and IsValid(client) and IsValid(client.ixVendorAdv) then
+			ix.vendorStock.Refresh(character, client.ixVendorAdv)
+		end
 		if ix.progression.UnlockWorldNPC then
 			ix.progression.UnlockWorldNPC(progressionID)
 		end
@@ -151,7 +186,7 @@ if SERVER then
 		local definition = ix.progression.definitions[progressionID]
 
 		return definition
-			and definition.progMap == game.GetMap()
+			and (definition.progMap == game.GetMap() or definition.progMap == "*")
 			and ix.progression.IsActive(character, progressionID)
 	end
 
@@ -198,6 +233,13 @@ if SERVER then
 		ix.progression.InvokeProgression(character, progressionID)
 		if final and amount >= final then
 			ix.progression.SetCompleted(character, progressionID)
+			if definition.completionBenefits then
+				ix.progression.GrantBenefits(character, progressionID, definition.completionBenefits, "completion")
+			end
+			if definition.completionMessage then
+				ix.progression.Notify(character, definition.keyNpc,
+					character:GetName() .. ", " .. definition.completionMessage)
+			end
 		end
 		character:Save()
 
@@ -237,6 +279,7 @@ if SERVER then
 			return false
 		end
 		local line = ix.progression.GetLine(character, progressionID)
+		local definition = ix.progression.definitions[progressionID]
 		amount = math.min(math.floor(amount), required - (line.complexData[itemID] or 0))
 		if amount <= 0 then
 			return false
@@ -250,10 +293,6 @@ if SERVER then
 		end
 		updateLine(character, progressionID, function(stored)
 			stored.complexData = line.complexData
-			if completed then
-				stored.completed = true
-				stored.active = false
-			end
 		end)
 		if completed then
 			ix.progression.SetCompleted(character, progressionID)
@@ -261,6 +300,10 @@ if SERVER then
 			local definition = ix.progression.definitions[progressionID]
 			if definition.OnComplete then
 				definition.OnComplete(character)
+			end
+			if definition.completionMessage then
+				ix.progression.Notify(character, definition.keyNpc,
+					character:GetName() .. ", " .. definition.completionMessage)
 			end
 		end
 
@@ -279,8 +322,17 @@ if SERVER then
 			or target:GetDisplayName() ~= definition.keyNpc
 			or client:GetPos():DistToSqr(target:GetPos()) > 192 * 192
 			or not target:CanAccess(client)
-			or not canAdvance(character, progressionID)
+			or not (definition.progMap == game.GetMap() or definition.progMap == "*")
+			or not ix.progression.CanUseNPC(character, definition.keyNpc)
 		then
+			return false
+		end
+		if itemID == "claim" then
+			local accepted = ix.progression.ClaimRewards(character, progressionID)
+
+			return accepted, accepted and "Reward received." or "Make room in your inventory and claim again."
+		end
+		if not canAdvance(character, progressionID) then
 			return false
 		end
 		local required = ix.progression.GetRequirements(character, progressionID)[itemID]
@@ -290,7 +342,7 @@ if SERVER then
 		local remaining = required
 			- (ix.progression.GetComplexProgressionValue(character, progressionID)[itemID] or 0)
 		local item = character:GetInventory():HasItem(itemID)
-		if not item or remaining <= 0 then
+		if not item or remaining <= 0 or item:GetData("equip", false) == true then
 			return false
 		end
 		local available = item:GetData("quantity", item.quantity or item.ammoAmount or 1)
@@ -302,7 +354,7 @@ if SERVER then
 			return false
 		end
 		local itemName = item.name or ix.item.list[itemID].name
-		local reputation, money = ix.util.GetValueFromProgressionTurnin(item, amount)
+		local reputation, money = ix.util.GetValueFromProgressionTurnin(item, amount, itemID)
 		-- Consume before running completion callbacks or giving rewards.
 		if amount == available then
 			if item:Remove() == false then
@@ -317,7 +369,7 @@ if SERVER then
 		character:Save()
 		local response = string.format("Received %d x %s for %s. ", amount, itemName, definition.name)
 		if ix.progression.IsCompleted(character, progressionID) then
-			response = response .. "That's everything I asked for. The task is complete, and your reward is paid."
+			response = response .. "That's everything I asked for. The task is complete. Any reward awaiting space can be claimed here."
 		elseif remaining > amount then
 			response = response .. string.format("I still need %d more of this item to meet the request.", remaining - amount)
 		else

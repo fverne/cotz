@@ -6,13 +6,13 @@ See [the model assumptions](README.md#quantity-and-effort-decisions).
 | Step | Depth including access gates | Estimated effort | Quantities / jobs |
 | --- | ---: | ---: | --- |
 | bossItemDelivery_1 | 1 | 16.7 | 6 |
-| bossItemDelivery_2 | 5 | 64.4 | 10, 12 |
-| bossItemDelivery_3 | 7 | 111.1 | 3, 8, 5, 13 |
-| bossItemDelivery_4 | 8 | 143.2 | 5, 6, 5, 13, 3 |
-| bossItemDelivery_5 | 9 | 182.2 | 3, 5, 5, 6, 15, 3 |
-| bossItemDelivery_6 | 10 | 235.3 | 2, 3, 3, 5, 16, 3, 2 |
-| bossItemDelivery_7 | 11 | 303.9 | 4, 12, 2, 8, 18, 3, 2, 2 |
-| cleanerItemDelivery_Storage | 0 | 10.9 | 3 |
+| bossItemDelivery_2 | 3 | 36.5 | 1, 12 |
+| bossItemDelivery_3 | 5 | 87.3 | 1, 8, 5, 3 |
+| bossItemDelivery_4 | 6 | 143.2 | 5, 6, 5, 13, 3 |
+| bossItemDelivery_5 | 7 | 182.2 | 3, 5, 5, 6, 15, 3 |
+| bossItemDelivery_6 | 9 | 207.5 | 2, 2, 3, 3, 5, 3, 2 |
+| bossItemDelivery_7 | 11 | 248.4 | 2, 12, 2, 8, 3, 2, 2 |
+| cleanerItemDelivery_Storage | 0 | 3.6 | 1 |
 | oldTimerKillIntro | 0 | 8.0 | 1 |
 | oldTimerItemDelivery_mainMeat | 1 | 10.6 | 8 |
 | technutItemDelivery_Main | 2 | 13.8 | 1, 1 |
@@ -20,36 +20,124 @@ See [the model assumptions](README.md#quantity-and-effort-decisions).
 | stalkerNetAdminDelivery_mainRadioTower | 4 | 29.2 | 1, 2, 1, 2 |
 | quarterMasterDelivery_activateItem | 0 | Access key | 1 |
 | quarterMasterDelivery_main | 1 | 34.1 | 1, 1, 1, 1 |
-| boss_dataTasks | 2 | 48.0 | 4 |
-| smartass_rfTasks | 3 | 60.0 | 5 |
-| beanstalkItemDelivery_Documents | 4 | 83.4 | 1, 2, 4, 2, 5 |
-| eggheadItemDelivery_artifacts | 5 | 105.3 | 4, 2, 3, 2, 6, 3 |
-| intern_gasAnalyzerReadings | 6 | 136.0 | 17 |
-| computerDelivery_activateItem | 7 | Access key | 1 |
-| computerDelivery_main | 8 | 190.5 | 1, 1, 1, 1, 3, 1, 2, 1 |
-| computer_artifactTasks | 9 | 252.0 | 14 |
+| boss_dataTasks | 2 | 48.0 | 1, 4 |
+| smartass_rfTasks | 3 | 60.0 | 1, 3, 5 |
+| beanstalkItemDelivery_Documents | 6 | 58.5 | 1, 2, 1, 2 |
+| eggheadItemDelivery_artifacts | 8 | 80.2 | 2, 3, 2, 3, 2 |
+| intern_gasAnalyzerReadings | 9 | 306.0 | 2, 6, 11, 17 |
+| computerDelivery_activateItem | 10 | Access key | 1 |
+| computerDelivery_main | 13 | 140.1 | 1, 1, 1, 1, 1 |
+| computer_artifactTasks | 14 | 252.0 | 3, 8, 14 |
 | eggheadItemDelivery_Detector1 | 4 | 76.6 | 21 |
-| eggheadItemDelivery_Detector2 | 5 | 98.5 | 3, 4, 5 |
-| eggheadItemDelivery_Detector3 | 6 | 131.6 | 1, 1, 2, 2, 2, 1, 2, 1 |
+| eggheadItemDelivery_Detector2 | 6 | 51.8 | 2, 5 |
+| eggheadItemDelivery_Detector3 | 9 | 90.8 | 1, 1, 1, 2, 2, 1 |
 | eggheadItemDelivery_Suit1 | 5 | 100.7 | 3, 4, 17 |
-| eggheadItemDelivery_Suit2 | 6 | 128.2 | 2, 1, 5, 3, 1, 2 |
-| eggheadItemDelivery_Suit3 | 7 | 169.7 | 1, 2, 2, 2, 1, 2, 2, 7 |
-| eggheadItemDelivery_Aid1 | 5 | 100.5 | 3, 7, 5 |
-| eggheadItemDelivery_Aid2 | 6 | 128.2 | 2, 5, 2, 3, 1, 2 |
-| eggheadItemDelivery_Aid3 | 7 | 168.0 | 3, 2, 2, 1, 2, 1, 2, 2 |
-| hagglerItemDelivery_1 | 1 | 10.0 | 10 |
-| hagglerItemDelivery_11 | 2 | 14.2 | 5 |
-| hagglerItemDelivery_111 | 3 | 17.9 | 2, 9 |
-| hagglerItemDelivery_1111 | 4 | 25.0 | 3, 2 |
-| hagglerItemDelivery_112 | 3 | 18.3 | 1, 2 |
-| hagglerItemDelivery_12 | 2 | 14.5 | 3 |
-| hagglerItemDelivery_121 | 3 | 21.4 | 2, 3 |
-| hagglerItemDelivery_1211 | 4 | 31.9 | 2, 13 |
-| hagglerItemDelivery_12111 | 5 | 41.1 | 3, 1, 3 |
-| hagglerItemDelivery_121111 | 6 | 56.0 | 3, 2, 2 |
-| hagglerItemDelivery_122 | 3 | 19.4 | 2, 1 |
-| hagglerItemDelivery_1221 | 4 | 27.8 | 2, 12 |
-| hagglerItemDelivery_12211 | 5 | 46.6 | 1, 2, 1 |
+| eggheadItemDelivery_Suit2 | 7 | 74.5 | 2, 3, 1, 2 |
+| eggheadItemDelivery_Suit3 | 8 | 169.7 | 1, 2, 2, 2, 1, 2, 2, 7 |
+| eggheadItemDelivery_Aid1 | 7 | 43.0 | 2, 5 |
+| eggheadItemDelivery_Aid2 | 9 | 87.3 | 1, 2, 3, 1, 2 |
+| eggheadItemDelivery_Aid3 | 11 | 111.8 | 1, 2, 2, 1, 2, 1 |
+| quartermasterFieldEquipment1 | 3 | 12.0 | 1 |
+| quartermasterFieldEquipment2 | 4 | 9.9 | 1, 1 |
+| bossItemDelivery_6_stage1 | 8 | 27.8 | 14 |
+| bossItemDelivery_7_stage1 | 10 | 55.5 | 18, 2 |
+| eggheadItemDelivery_Aid1_stage1 | 5 | 37.3 | 3 |
+| eggheadItemDelivery_Aid1_stage2 | 6 | 20.1 | 5 |
+| eggheadItemDelivery_Aid2_stage1 | 8 | 41.0 | 2, 4 |
+| eggheadItemDelivery_Aid3_stage1 | 10 | 56.3 | 2, 3, 1 |
+| hagglerItemDelivery_1_stage1 | 1 | 4.0 | 4 |
+| hagglerItemDelivery_11_stage1 | 3 | 5.7 | 2 |
+| hagglerItemDelivery_121_stage1 | 4 | 10.5 | 2 |
+| hagglerItemDelivery_122_stage1 | 4 | 5.2 | 1 |
+| hagglerItemDelivery_22_stage1 | 2 | 4.4 | 1 |
+| hagglerItemDelivery_221_stage1 | 4 | 8.9 | 2 |
+| jittersItemDelivery_medical1_stage1 | 0 | 4.3 | 1 |
+| jittersItemDelivery_medical2_stage1 | 2 | 5.0 | 1 |
+| jittersItemDelivery_medical2_stage2 | 3 | 3.0 | 1 |
+| jittersItemDelivery_medical3_stage1 | 5 | 4.8 | 1, 1 |
+| jittersItemDelivery_medical4_stage1 | 7 | 6.1 | 1, 1 |
+| jittersItemDelivery_medical4_stage2 | 8 | 11.5 | 1, 1, 1 |
+| oldtimerItemDelivery_Melee_stage1 | 0 | 4.4 | 1 |
+| quartermasterItemDelivery_1_stage1 | 1 | 32.8 | 4, 4 |
+| quartermasterItemDelivery_11_stage1 | 3 | 17.0 | 2 |
+| quartermasterItemDelivery_11_stage2 | 4 | 25.9 | 3, 1 |
+| quartermasterItemDelivery_111_stage1 | 6 | 34.7 | 8, 4 |
+| quartermasterItemDelivery_112_stage1 | 6 | 26.7 | 5, 1 |
+| quartermasterItemDelivery_12_stage1 | 3 | 38.9 | 1, 1, 1 |
+| quartermasterItemDelivery_121_stage1 | 5 | 28.8 | 7, 3 |
+| quartermasterItemDelivery_21_stage1 | 2 | 38.9 | 1, 1, 1 |
+| quartermasterItemDelivery_211_stage1 | 4 | 34.9 | 12, 4 |
+| quartermasterItemDelivery_22_stage1 | 2 | 27.9 | 3, 1 |
+| spicylemonItemDelivery_Food_stage1 | 4 | 3.6 | 2 |
+| spicylemonItemDelivery_Food_stage2 | 5 | 3.6 | 2 |
+| spicylemonItemDelivery_Food_stage3 | 6 | 7.8 | 1, 2 |
+| spicylemonItemDelivery_Vodka_stage1 | 8 | 10.3 | 4, 1 |
+| spicylemonItemDelivery_Spirits_stage1 | 10 | 20.4 | 5, 3, 1 |
+| technutItemDelivery_Helmet6_stage1 | 10 | 17.0 | 17 |
+| technutItemDelivery_Mask2_stage1 | 1 | 4.9 | 1 |
+| technutItemDelivery_Mask3_stage1 | 3 | 9.8 | 1, 1 |
+| technutItemDelivery_Mask4_stage1 | 5 | 5.0 | 5 |
+| technutItemDelivery_Attachment1_stage1 | 5 | 8.0 | 8 |
+| technutItemDelivery_Attachment2_stage1 | 7 | 10.0 | 10 |
+| technutItemDelivery_Attachment3_stage1 | 9 | 11.0 | 11 |
+| oldtimerItemDelivery_Knife2_stage1 | 1 | 3.7 | 2 |
+| oldtimerItemDelivery_Knife3_stage1 | 3 | 7.8 | 2, 2 |
+| oldtimerItemDelivery_Hidestash1_stage1 | 1 | 7.6 | 1, 1 |
+| oldtimerItemDelivery_Hidestash2_stage1 | 3 | 7.6 | 1, 1, 1 |
+| muteItemDelivery_Binoc3_stage1 | 6 | 8.5 | 3 |
+| muteItemDelivery_Binoc4_stage1 | 8 | 20.6 | 3, 2, 2 |
+| muteItemDelivery_Detector_stage1 | 6 | 17.4 | 3, 2 |
+| muteItemDelivery_Broadcast_stage1 | 6 | 8.5 | 3 |
+| technutItemDelivery_Suit3_stage1 | 2 | 4.8 | 1, 2 |
+| technutItemDelivery_SuitNBC_stage1 | 4 | 9.0 | 3 |
+| technutItemDelivery_Helmet5_stage1 | 8 | 14.0 | 14 |
+| eggheadItemDelivery_Detector2_stage1 | 5 | 46.8 | 3, 2 |
+| eggheadItemDelivery_Detector3_stage1 | 7 | 30.9 | 2, 1 |
+| eggheadItemDelivery_Detector3_stage2 | 8 | 10.0 | 1 |
+| eggheadItemDelivery_Suit2_stage1 | 6 | 53.6 | 2, 1, 3 |
+| eggheadItemDelivery_artifacts_stage1 | 7 | 25.1 | 6, 2 |
+| beanstalkItemDelivery_Documents_stage1 | 4 | 8.5 | 3 |
+| beanstalkItemDelivery_Documents_stage2 | 5 | 16.4 | 2, 3 |
+| computerDelivery_main_stage1 | 11 | 12.8 | 2 |
+| computerDelivery_main_stage2 | 12 | 37.5 | 1, 2, 1 |
+| bossItemDelivery_2_stage1 | 2 | 27.9 | 9 |
+| bossItemDelivery_3_stage1 | 4 | 23.8 | 12 |
+| spicylemonItemDelivery_Brew_stage1 | 12 | 39.9 | 6, 3, 4, 1 |
+| originalSurvival1 | 0 | 6.0 | 2 |
+| originalSurvival2 | 1 | 3.6 | 2 |
+| originalSurvival3 | 2 | 5.6 | 3 |
+| hoarderCollection1 | 0 | 13.0 | 1 |
+| hoarderCollection2 | 1 | 24.0 | 2 |
+| hoarderCollection3 | 2 | 24.0 | 2 |
+| hoarderCollection4 | 3 | 30.0 | 2 |
+| noosphereAttunement1 | 15 | 16.4 | 2 |
+| noosphereAttunement2 | 16 | 45.0 | 2 |
+| noosphereAttunement3 | 17 | 45.0 | 1 |
+| communitySupport1 | 0 | 6.0 | 2 |
+| communitySupport2 | 1 | 6.0 | 6 |
+| communitySupport3 | 2 | 17.8 | 4 |
+| cleanerLogistics1 | 1 | 8.9 | 2 |
+| cleanerLogistics2 | 2 | 10.5 | 2 |
+| beanstalkExpedition1 | 7 | 28.4 | 2 |
+| smartassRecon1 | 3 | 4.5 | 1 |
+| smartassRecon2 | 4 | 10.7 | 2 |
+| smartassRecon3 | 5 | 24.0 | 2 |
+| arenaProgramme1 | 0 | 8.0 | 1 |
+| arenaProgramme2 | 1 | 8.0 | 1 |
+| arenaProgramme3 | 2 | 8.0 | 1 |
+| hagglerItemDelivery_1 | 2 | 6.0 | 6 |
+| hagglerItemDelivery_11 | 4 | 8.5 | 3 |
+| hagglerItemDelivery_111 | 5 | 17.9 | 2, 9 |
+| hagglerItemDelivery_1111 | 6 | 25.0 | 3, 2 |
+| hagglerItemDelivery_112 | 5 | 18.3 | 1, 2 |
+| hagglerItemDelivery_12 | 3 | 14.5 | 3 |
+| hagglerItemDelivery_121 | 5 | 10.9 | 3 |
+| hagglerItemDelivery_1211 | 6 | 31.9 | 2, 13 |
+| hagglerItemDelivery_12111 | 7 | 41.1 | 3, 1, 3 |
+| hagglerItemDelivery_121111 | 8 | 56.0 | 3, 2, 2 |
+| hagglerItemDelivery_122 | 5 | 14.2 | 1, 1 |
+| hagglerItemDelivery_1221 | 6 | 27.8 | 2, 12 |
+| hagglerItemDelivery_12211 | 7 | 46.6 | 1, 2, 1 |
 | hagglerItemDelivery_2 | 1 | 10.0 | 10 |
 | hagglerItemDelivery_21 | 2 | 14.5 | 4 |
 | hagglerItemDelivery_211 | 3 | 20.3 | 1, 4 |
@@ -57,52 +145,52 @@ See [the model assumptions](README.md#quantity-and-effort-decisions).
 | hagglerItemDelivery_212 | 3 | 22.0 | 5, 2 |
 | hagglerItemDelivery_2121 | 4 | 30.1 | 2, 4 |
 | hagglerItemDelivery_21211 | 5 | 40.3 | 5, 8, 3 |
-| hagglerItemDelivery_22 | 2 | 13.3 | 3 |
-| hagglerItemDelivery_221 | 3 | 18.6 | 2, 2 |
-| hagglerItemDelivery_2211 | 4 | 25.3 | 2, 3 |
-| hagglerItemDelivery_22111 | 5 | 33.9 | 3, 2, 3 |
-| hagglerItemDelivery_222 | 3 | 19.0 | 1, 2 |
-| hagglerItemDelivery_2221 | 4 | 24.5 | 3, 3 |
-| hagglerItemDelivery_22211 | 5 | 33.1 | 3, 2, 2 |
-| jittersItemDelivery_medical1 | 0 | 8.6 | 2 |
-| jittersItemDelivery_medical2 | 1 | 13.5 | 1, 1, 1 |
-| jittersItemDelivery_medical3 | 2 | 21.8 | 1, 1, 1, 1, 1, 1 |
-| jittersItemDelivery_medical4 | 3 | 31.2 | 1, 1, 1, 1, 1, 1, 1, 1 |
+| hagglerItemDelivery_22 | 3 | 8.9 | 2 |
+| hagglerItemDelivery_221 | 5 | 9.7 | 2 |
+| hagglerItemDelivery_2211 | 6 | 25.3 | 2, 3 |
+| hagglerItemDelivery_22111 | 7 | 33.9 | 3, 2, 3 |
+| hagglerItemDelivery_222 | 4 | 19.0 | 1, 2 |
+| hagglerItemDelivery_2221 | 5 | 24.5 | 3, 3 |
+| hagglerItemDelivery_22211 | 6 | 33.1 | 3, 2, 2 |
+| jittersItemDelivery_medical1 | 1 | 4.3 | 1 |
+| jittersItemDelivery_medical2 | 4 | 5.5 | 1 |
+| jittersItemDelivery_medical3 | 6 | 17.0 | 1, 1, 1, 1 |
+| jittersItemDelivery_medical4 | 9 | 13.5 | 1, 1, 1 |
 | muteItemDelivery_Binoc1 | 4 | 30.4 | 3 |
 | muteItemDelivery_Binoc2 | 5 | 42.6 | 1, 2, 3 |
-| muteItemDelivery_Binoc3 | 6 | 66.0 | 1, 3, 1, 1, 1, 1 |
-| muteItemDelivery_Binoc4 | 7 | 92.2 | 1, 2, 2, 3, 1, 2, 6, 1 |
+| muteItemDelivery_Binoc3 | 7 | 57.4 | 1, 1, 1, 1, 1 |
+| muteItemDelivery_Binoc4 | 9 | 71.5 | 4, 2, 2, 1, 1, 1 |
 | muteItemDelivery_Anomaly | 5 | 43.6 | 2, 4, 3 |
-| muteItemDelivery_Detector | 6 | 55.8 | 1, 3, 1, 1, 2, 5 |
-| muteItemDelivery_Broadcast | 6 | 122.0 | 1, 1, 1, 3, 1, 1 |
+| muteItemDelivery_Detector | 7 | 38.3 | 5, 1, 1, 1 |
+| muteItemDelivery_Broadcast | 7 | 113.5 | 1, 1, 1, 1, 1 |
 | muteItemDelivery_BlowoutWarning | 5 | 40.6 | 3, 4, 3 |
 | oldtimerItemDelivery_Knife1 | 0 | 15.1 | 2 |
-| oldtimerItemDelivery_Knife2 | 1 | 34.1 | 1, 1, 1, 2, 1 |
-| oldtimerItemDelivery_Knife3 | 2 | 53.9 | 1, 1, 1, 2, 2, 1, 1, 1 |
-| oldtimerItemDelivery_Melee | 0 | 8.9 | 2 |
-| oldtimerItemDelivery_Hidestash1 | 1 | 21.0 | 1, 1, 1, 2, 1 |
-| oldtimerItemDelivery_Hidestash2 | 2 | 41.6 | 1, 1, 1, 1, 1, 1, 1, 1 |
-| quartermasterItemDelivery_1 | 7 | 74.4 | 4, 6, 6, 4 |
-| quartermasterItemDelivery_11 | 8 | 107.3 | 2, 3, 3, 2, 1 |
-| quartermasterItemDelivery_111 | 9 | 137.0 | 8, 8, 4, 5, 2, 4 |
-| quartermasterItemDelivery_1111 | 10 | 172.1 | 5, 5, 2, 8, 8, 4, 3 |
-| quartermasterItemDelivery_112 | 9 | 146.4 | 4, 2, 2, 1, 1, 5 |
-| quartermasterItemDelivery_1121 | 10 | 193.7 | 4, 2, 2, 2, 1, 6, 3 |
-| quartermasterItemDelivery_11211 | 11 | 247.1 | 5, 4, 2, 2, 4, 20, 4, 12 |
-| quartermasterItemDelivery_12 | 8 | 96.0 | 1, 1, 3, 1, 2 |
-| quartermasterItemDelivery_121 | 9 | 123.7 | 2, 7, 6, 4, 5, 2 |
-| quartermasterItemDelivery_122 | 9 | 124.4 | 1, 4, 7, 6, 4, 5 |
-| quartermasterItemDelivery_1221 | 10 | 155.6 | 1, 8, 3, 5, 5, 4, 3 |
-| quartermasterItemDelivery_12211 | 11 | 195.5 | 1, 8, 8, 5, 5, 2, 4, 3 |
-| quartermasterItemDelivery_2 | 7 | 74.0 | 4, 3, 4, 6 |
-| quartermasterItemDelivery_21 | 8 | 115.6 | 1, 1, 1, 1, 3 |
-| quartermasterItemDelivery_211 | 9 | 146.5 | 12, 8, 8, 5, 6, 2 |
-| quartermasterItemDelivery_212 | 9 | 150.7 | 1, 5, 9, 5, 5, 4 |
-| quartermasterItemDelivery_2121 | 10 | 190.5 | 1, 1, 2, 1, 5, 2, 2 |
-| quartermasterItemDelivery_22 | 8 | 99.0 | 3, 2, 2, 1, 2 |
-| quartermasterItemDelivery_221 | 9 | 127.5 | 2, 6, 2, 3, 2, 1 |
-| quartermasterItemDelivery_222 | 9 | 125.2 | 2, 1, 3, 3, 2, 2 |
-| quartermasterItemDelivery_2221 | 10 | 160.6 | 2, 2, 2, 3, 1, 1, 2 |
+| oldtimerItemDelivery_Knife2 | 2 | 30.4 | 1, 1, 1, 1 |
+| oldtimerItemDelivery_Knife3 | 4 | 46.1 | 1, 1, 1, 1, 1, 1 |
+| oldtimerItemDelivery_Melee | 1 | 4.4 | 1 |
+| oldtimerItemDelivery_Hidestash1 | 2 | 13.3 | 2, 1, 1 |
+| oldtimerItemDelivery_Hidestash2 | 4 | 34.1 | 1, 1, 1, 1, 1 |
+| quartermasterItemDelivery_1 | 2 | 41.6 | 2, 6, 4 |
+| quartermasterItemDelivery_11 | 5 | 64.5 | 2, 2, 1 |
+| quartermasterItemDelivery_111 | 7 | 102.3 | 4, 4, 5, 2, 4 |
+| quartermasterItemDelivery_1111 | 8 | 172.1 | 5, 5, 2, 8, 8, 4, 3 |
+| quartermasterItemDelivery_112 | 7 | 119.7 | 3, 2, 2, 1, 1 |
+| quartermasterItemDelivery_1121 | 8 | 193.7 | 4, 2, 2, 2, 1, 6, 3 |
+| quartermasterItemDelivery_11211 | 9 | 247.1 | 5, 4, 2, 2, 4, 20, 4, 12 |
+| quartermasterItemDelivery_12 | 4 | 57.0 | 2, 1, 2 |
+| quartermasterItemDelivery_121 | 6 | 94.9 | 3, 4, 2, 5, 2 |
+| quartermasterItemDelivery_122 | 5 | 124.4 | 1, 4, 7, 6, 4, 5 |
+| quartermasterItemDelivery_1221 | 6 | 155.6 | 1, 8, 3, 5, 5, 4, 3 |
+| quartermasterItemDelivery_12211 | 7 | 195.5 | 1, 8, 8, 5, 5, 2, 4, 3 |
+| quartermasterItemDelivery_2 | 1 | 74.0 | 4, 3, 4, 6 |
+| quartermasterItemDelivery_21 | 3 | 76.7 | 2, 1, 1 |
+| quartermasterItemDelivery_211 | 5 | 111.5 | 4, 8, 5, 6, 2 |
+| quartermasterItemDelivery_212 | 4 | 150.7 | 1, 5, 9, 5, 5, 4 |
+| quartermasterItemDelivery_2121 | 5 | 190.5 | 1, 1, 2, 1, 5, 2, 2 |
+| quartermasterItemDelivery_22 | 3 | 71.1 | 1, 2, 1, 2 |
+| quartermasterItemDelivery_221 | 4 | 127.5 | 2, 6, 2, 3, 2, 1 |
+| quartermasterItemDelivery_222 | 4 | 125.2 | 2, 1, 3, 3, 2, 2 |
+| quartermasterItemDelivery_2221 | 5 | 160.6 | 2, 2, 2, 3, 1, 1, 2 |
 | spicylemonItemDelivery_Medical1 | 2 | 14.6 | 8 |
 | spicylemonItemDelivery_Medical2 | 3 | 21.1 | 5, 4 |
 | spicylemonItemDelivery_Medical3 | 4 | 27.2 | 5, 4, 3 |
@@ -110,37 +198,37 @@ See [the model assumptions](README.md#quantity-and-effort-decisions).
 | spicylemonItemDelivery_Medical5 | 6 | 44.5 | 4, 5, 3, 4, 2 |
 | spicylemonItemDelivery_Medical6 | 7 | 58.1 | 4, 4, 2, 5, 3, 3 |
 | spicylemonItemDelivery_Medical7 | 8 | 74.1 | 4, 4, 1, 5, 3, 3, 3 |
-| spicylemonItemDelivery_Food | 4 | 27.1 | 3, 5, 3 |
-| spicylemonItemDelivery_Vodka | 5 | 35.2 | 3, 4, 2, 4 |
-| spicylemonItemDelivery_Spirits | 7 | 57.3 | 3, 4, 3, 5, 4, 3 |
-| spicylemonItemDelivery_Brew | 9 | 96.5 | 3, 5, 3, 4, 6, 5, 4, 4 |
+| spicylemonItemDelivery_Food | 7 | 12.0 | 1, 3 |
+| spicylemonItemDelivery_Vodka | 9 | 24.9 | 2, 2, 4 |
+| spicylemonItemDelivery_Spirits | 11 | 36.9 | 3, 3, 4, 3 |
+| spicylemonItemDelivery_Brew | 13 | 56.6 | 4, 4, 4, 3, 5 |
 | technutItemDelivery_Suit1 | 0 | 8.0 | 8 |
 | technutItemDelivery_Suit2 | 1 | 12.8 | 1, 1 |
-| technutItemDelivery_Suit3 | 2 | 30.4 | 1, 1, 5 |
-| technutItemDelivery_SuitNBC | 3 | 47.0 | 2, 4, 2 |
-| technutItemDelivery_Suit4 | 3 | 39.4 | 3, 3, 3 |
-| technutItemDelivery_Suit5 | 4 | 50.4 | 3, 1, 2, 12 |
-| technutItemDelivery_Suit6 | 5 | 66.8 | 3, 2, 3, 12, 3 |
-| technutItemDelivery_Suit7 | 6 | 85.0 | 4, 2, 1, 13, 3, 3 |
+| technutItemDelivery_Suit3 | 3 | 25.6 | 3, 1 |
+| technutItemDelivery_SuitNBC | 5 | 38.0 | 1, 2, 2 |
+| technutItemDelivery_Suit4 | 4 | 39.4 | 3, 3, 3 |
+| technutItemDelivery_Suit5 | 5 | 50.4 | 3, 1, 2, 12 |
+| technutItemDelivery_Suit6 | 6 | 66.8 | 3, 2, 3, 12, 3 |
+| technutItemDelivery_Suit7 | 7 | 85.0 | 4, 2, 1, 13, 3, 3 |
 | technutItemDelivery_SuitPainting | 0 | 10.9 | 3 |
-| technutItemDelivery_Helmet1 | 3 | 38.8 | 3, 3, 3 |
-| technutItemDelivery_Helmet2 | 4 | 55.9 | 2, 2, 1, 12 |
-| technutItemDelivery_Helmet3 | 5 | 71.4 | 4, 4, 3, 13, 3 |
-| technutItemDelivery_Helmet4 | 6 | 93.3 | 4, 2, 2, 14, 3, 4 |
-| technutItemDelivery_Helmet5 | 7 | 121.2 | 5, 1, 3, 3, 19, 4 |
-| technutItemDelivery_Helmet6 | 8 | 171.3 | 3, 2, 2, 3, 21, 5, 6 |
-| technutItemDelivery_Helmet7 | 9 | 215.4 | 3, 2, 1, 3, 26, 6, 7, 5 |
+| technutItemDelivery_Helmet1 | 4 | 38.8 | 3, 3, 3 |
+| technutItemDelivery_Helmet2 | 5 | 55.9 | 2, 2, 1, 12 |
+| technutItemDelivery_Helmet3 | 6 | 71.4 | 4, 4, 3, 13, 3 |
+| technutItemDelivery_Helmet4 | 7 | 93.3 | 4, 2, 2, 14, 3, 4 |
+| technutItemDelivery_Helmet5 | 9 | 107.2 | 5, 4, 5, 3, 3, 1 |
+| technutItemDelivery_Helmet6 | 11 | 154.3 | 4, 5, 6, 3, 2, 3, 2 |
+| technutItemDelivery_Helmet7 | 12 | 215.4 | 3, 2, 1, 3, 26, 6, 7, 5 |
 | technutItemDelivery_Mask1 | 0 | 9.4 | 1 |
-| technutItemDelivery_Mask2 | 1 | 16.4 | 1, 1 |
-| technutItemDelivery_Mask3 | 2 | 24.2 | 1, 2, 1 |
-| technutItemDelivery_Mask4 | 3 | 79.9 | 1, 1, 10 |
-| technutItemDelivery_Attachment1 | 4 | 53.6 | 4, 2, 3, 12 |
-| technutItemDelivery_Attachment2 | 5 | 67.7 | 2, 3, 3, 13, 3 |
-| technutItemDelivery_Attachment3 | 6 | 87.1 | 2, 3, 1, 14, 3, 4 |
-| technutItemDelivery_AttachmentFabric1 | 5 | 67.4 | 2, 2, 3, 12, 3 |
-| technutItemDelivery_AttachmentFabric2 | 6 | 87.2 | 4, 2, 3, 14, 4, 3 |
-| technutItemDelivery_AttachmentFrame1 | 7 | 111.1 | 6, 2, 4, 17, 5, 4 |
-| technutItemDelivery_AttachmentFrame2 | 8 | 139.4 | 2, 1, 2, 19, 5, 5, 4 |
-| technutItemDelivery_AttachmentCarbon | 7 | 110.4 | 4, 5, 4, 17, 4, 6 |
-| technutItemDelivery_AttachmentKevlar1 | 6 | 84.8 | 8, 2, 3, 13, 3, 3 |
-| technutItemDelivery_AttachmentKevlar2 | 7 | 108.1 | 11, 1, 4, 17, 4, 5 |
+| technutItemDelivery_Mask2 | 2 | 11.5 | 1 |
+| technutItemDelivery_Mask3 | 4 | 14.4 | 1, 1 |
+| technutItemDelivery_Mask4 | 6 | 74.9 | 5, 1, 1 |
+| technutItemDelivery_Attachment1 | 6 | 45.6 | 4, 4, 3, 2 |
+| technutItemDelivery_Attachment2 | 8 | 57.7 | 3, 3, 3, 3, 2 |
+| technutItemDelivery_Attachment3 | 10 | 76.1 | 3, 3, 4, 3, 2, 1 |
+| technutItemDelivery_AttachmentFabric1 | 6 | 67.4 | 2, 2, 3, 12, 3 |
+| technutItemDelivery_AttachmentFabric2 | 7 | 87.2 | 4, 2, 3, 14, 4, 3 |
+| technutItemDelivery_AttachmentFrame1 | 8 | 111.1 | 6, 2, 4, 17, 5, 4 |
+| technutItemDelivery_AttachmentFrame2 | 9 | 139.4 | 2, 1, 2, 19, 5, 5, 4 |
+| technutItemDelivery_AttachmentCarbon | 8 | 110.4 | 4, 5, 4, 17, 4, 6 |
+| technutItemDelivery_AttachmentKevlar1 | 7 | 84.8 | 8, 2, 3, 13, 3, 3 |
+| technutItemDelivery_AttachmentKevlar2 | 8 | 108.1 | 11, 1, 4, 17, 4, 5 |

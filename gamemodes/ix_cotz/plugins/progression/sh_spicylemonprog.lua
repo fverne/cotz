@@ -60,7 +60,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical2", {
 	vendorUnlocks = {
 		{ npc = "'Spicy Lemon'", args = { "drug_caffeine", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
-	nextProgressions = { "spicylemonItemDelivery_Medical3", "spicylemonItemDelivery_Food" },
+	nextProgressions = {"spicylemonItemDelivery_Medical3", "spicylemonItemDelivery_Food_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -111,7 +111,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical3", {
 	vendorUnlocks = {
 		{ npc = "'Spicy Lemon'", args = { "medic_psyheal_1", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
-	nextProgressions = { "spicylemonItemDelivery_Medical4", "spicylemonItemDelivery_Vodka" },
+	nextProgressions = {"spicylemonItemDelivery_Medical4", "spicylemonItemDelivery_Vodka_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -219,7 +219,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical5", {
 	vendorUnlocks = {
 		{ npc = "'Spicy Lemon'", args = { "drug_painkillers", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
-	nextProgressions = { "spicylemonItemDelivery_Medical6", "spicylemonItemDelivery_Spirits" },
+	nextProgressions = {"spicylemonItemDelivery_Medical6", "spicylemonItemDelivery_Spirits_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -331,7 +331,7 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 	vendorUnlocks = {
 		{ npc = "'Spicy Lemon'", args = { "drug_morphine", nil, 2, "SELLANDBUY", 2, 12, 1 } },
 	},
-	nextProgressions = { "spicylemonItemDelivery_Brew" },
+	nextProgressions = {"spicylemonItemDelivery_Brew_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -379,23 +379,96 @@ ix.progression.Register("spicylemonItemDelivery_Medical7", {
 	end,
 })
 
+ix.progression.Register("spicylemonItemDelivery_Food_stage1", {
+	name = "Food for the poor - 1/4",
+	description = "Food for the poor - 1/4",
+	keyNpc = "'Spicy Lemon'",
+	progMap = "rp_marsh_cs",
+	defaultActive = true,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "common_meals", quantity = 2},
+	},
+	nextProgressions = {"spicylemonItemDelivery_Food_stage2"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "spicylemonItemDelivery_Food",
+	stageIndex = 1,
+	stageCount = 4,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"drink_canwater", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Spicy Lemon'", args = {"drink_bottlebeer_6", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"A hungry stalker is bad company, but a thirsty one is worse. Bring the cooked "
+		.. "portions first and I'll sort the first drinks shipment for you."
+	),
+	completionMessage = "Now that's a useful delivery! I'll keep the kitchen moving; you keep coming back alive.",
+})
+
+ix.progression.Register("spicylemonItemDelivery_Food_stage2", {
+	name = "Food for the poor - 2/4",
+	description = "Food for the poor - 2/4",
+	keyNpc = "'Spicy Lemon'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "common_meals", quantity = 2},
+	},
+	nextProgressions = {"spicylemonItemDelivery_Food_stage3"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "spicylemonItemDelivery_Food",
+	stageIndex = 2,
+	stageCount = 4,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"food_nuts_2", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Spicy Lemon'", args = {"food_cheese_2", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Good, nobody's fainting at the table. Keep those meals coming and I can spare the "
+		.. "better snacks for your next trip."
+	),
+	completionMessage = "Now that's a useful delivery! I'll keep the kitchen moving; you keep coming back alive.",
+})
+
+ix.progression.Register("spicylemonItemDelivery_Food_stage3", {
+	name = "Food for the poor - 3/4",
+	description = "Food for the poor - 3/4",
+	keyNpc = "'Spicy Lemon'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "common_meals", quantity = 1},
+		{pool = "local_refreshments", quantity = 2},
+	},
+	nextProgressions = {"spicylemonItemDelivery_Food"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "spicylemonItemDelivery_Food",
+	stageIndex = 3,
+	stageCount = 4,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"food_can_tomato", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Spicy Lemon'", args = {"food_can_tushonka", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Hot food keeps this place alive; tins keep you alive when you leave it. Bring the "
+		.. "next portions and drinks so I can put canned provisions aside."
+	),
+	completionMessage = "Now that's a useful delivery! I'll keep the kitchen moving; you keep coming back alive.",
+})
+
 ix.progression.Register("spicylemonItemDelivery_Food", {
 	name = "Food for the poor",
 	description = "Spicy Lemon is interested in importing some food.",
 	keyNpc = "'Spicy Lemon'",
-	defaultActive = true,
+	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "drink_bottlebeer_6", nil, 2, "SELLANDBUY", 2, 12, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_canwater", nil, 4, "SELLANDBUY", 4, 12, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_energydrink_4", nil, 2, "SELLANDBUY", 2, 12, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_energydrink_2", nil, 2, "SELLANDBUY", 2, 12, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "food_cheese_2", nil, 4, "SELLANDBUY", 4, 12, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "food_nuts_2", nil, 4, "SELLANDBUY", 4, 12, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "food_can_tomato", nil, 4, "SELLANDBUY", 4, 12, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "food_can_tushonka", nil, 4, "SELLANDBUY", 4, 12, 1 } },
+		{npc = "'Spicy Lemon'", args = {"drink_energydrink_4", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Spicy Lemon'", args = {"drink_energydrink_2", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "spicylemonItemDelivery_Vodka" },
+	nextProgressions = {"spicylemonItemDelivery_Vodka_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -422,9 +495,8 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "local_refreshments", quantity = 3 },
-		{ pool = "common_meals", quantity = 5 },
-		{ pool = "canned_food", quantity = 3 },
+		{pool = "local_refreshments", quantity = 1},
+		{pool = "canned_food", quantity = 3},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -437,6 +509,50 @@ ix.progression.Register("spicylemonItemDelivery_Food", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "spicylemonItemDelivery_Food",
+	stageIndex = 4,
+	stageCount = 4,
+	stockUnlocks = {
+		{
+			npc = "'Spicy Lemon'",
+			bonus = 1,
+			items = {
+				"drink_bottlewater",
+				"drink_bottletea",
+				"food_can_sprats",
+				"food_cheese_2",
+				"food_nuts_2",
+				"food_can_tomato",
+				"food_can_tushonka",
+			},
+		},
+	},
+})
+
+ix.progression.Register("spicylemonItemDelivery_Vodka_stage1", {
+	name = "Drinks for the poor - 1/2",
+	description = "Drinks for the poor - 1/2",
+	keyNpc = "'Spicy Lemon'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "common_meals", quantity = 4},
+		{pool = "local_refreshments", quantity = 1},
+	},
+	nextProgressions = {"spicylemonItemDelivery_Vodka"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "spicylemonItemDelivery_Vodka",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"drink_vodka_4", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"There's vodka, and then there's the bottle I don't put out for just anyone. Help with "
+		.. "this order and I'll show you the first of the better stuff."
+	),
+	completionMessage = "Now that's a useful delivery! I'll keep the kitchen moving; you keep coming back alive.",
 })
 
 ix.progression.Register("spicylemonItemDelivery_Vodka", {
@@ -446,11 +562,10 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "drink_vodka_4", nil, 2, "SELLANDBUY", 2, 12, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_vodka_5", nil, 2, "SELLANDBUY", 2, 12, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_vodka_6", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{npc = "'Spicy Lemon'", args = {"drink_vodka_5", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Spicy Lemon'", args = {"drink_vodka_6", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "spicylemonItemDelivery_Spirits" },
+	nextProgressions = {"spicylemonItemDelivery_Spirits_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -477,10 +592,9 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "local_refreshments", quantity = 3 },
-		{ pool = "common_meals", quantity = 4 },
-		{ pool = "spirits", quantity = 2 },
-		{ pool = "predator_meals", quantity = 4 },
+		{pool = "local_refreshments", quantity = 2},
+		{pool = "spirits", quantity = 2},
+		{pool = "predator_meals", quantity = 4},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -493,6 +607,36 @@ ix.progression.Register("spicylemonItemDelivery_Vodka", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "spicylemonItemDelivery_Vodka",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("spicylemonItemDelivery_Spirits_stage1", {
+	name = "Drinks for the rich - 1/2",
+	description = "Drinks for the rich - 1/2",
+	keyNpc = "'Spicy Lemon'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "common_meals", quantity = 5},
+		{pool = "local_refreshments", quantity = 3},
+		{pool = "predator_meals", quantity = 1},
+	},
+	nextProgressions = {"spicylemonItemDelivery_Spirits"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "spicylemonItemDelivery_Spirits",
+	stageIndex = 1,
+	stageCount = 2,
+	vendorUnlocks = {
+		{npc = "'Spicy Lemon'", args = {"drink_wine", nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
+	briefing = (
+		"Not every celebration has to taste like paint stripper. Bring the provisions on my "
+		.. "list and we'll begin with the wine shipment."
+	),
+	completionMessage = "Now that's a useful delivery! I'll keep the kitchen moving; you keep coming back alive.",
 })
 
 ix.progression.Register("spicylemonItemDelivery_Spirits", {
@@ -502,12 +646,11 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "drink_spirit_1", nil, 2, "SELLANDBUY", 2, 12, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_spirit_2", nil, 2, "SELLANDBUY", 2, 12, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_spirit_3", nil, 2, "SELLANDBUY", 2, 12, 1 } },
-		{ npc = "'Spicy Lemon'", args = { "drink_wine", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{npc = "'Spicy Lemon'", args = {"drink_spirit_1", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Spicy Lemon'", args = {"drink_spirit_2", nil, 1, "SELLANDBUY", 1, 48, 1}},
+		{npc = "'Spicy Lemon'", args = {"drink_spirit_3", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	nextProgressions = { "spicylemonItemDelivery_Brew" },
+	nextProgressions = {"spicylemonItemDelivery_Brew_stage1"},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -535,12 +678,10 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "local_refreshments", quantity = 3 },
-		{ pool = "predator_meals", quantity = 4 },
-		{ pool = "local_beer", quantity = 3 },
-		{ pool = "common_meals", quantity = 5 },
-		{ pool = "exotic_meals", quantity = 4 },
-		{ pool = "elite_meals", quantity = 3 },
+		{pool = "predator_meals", quantity = 3},
+		{pool = "local_beer", quantity = 3},
+		{pool = "exotic_meals", quantity = 4},
+		{pool = "elite_meals", quantity = 3},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -553,6 +694,34 @@ ix.progression.Register("spicylemonItemDelivery_Spirits", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "spicylemonItemDelivery_Spirits",
+	stageIndex = 2,
+	stageCount = 2,
+})
+
+ix.progression.Register("spicylemonItemDelivery_Brew_stage1", {
+	name = "Drinks for the smart - 1/2",
+	description = "Drinks for the smart - 1/2",
+	keyNpc = "'Spicy Lemon'",
+	progMap = "rp_marsh_cs",
+	defaultActive = false,
+	lootMapTier = 2,
+	requirementSlots = {
+		{pool = "common_meals", quantity = 6},
+		{pool = "spirits", quantity = 3},
+		{pool = "local_refreshments", quantity = 4},
+		{pool = "predator_meals", quantity = 1},
+	},
+	nextProgressions = {"spicylemonItemDelivery_Brew"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	milestoneGroup = "spicylemonItemDelivery_Brew",
+	stageIndex = 1,
+	stageCount = 2,
+	briefing = (
+		"My special brew doesn't begin with a mysterious bottle. It begins with good food, "
+		.. "proper spirits and somebody reliable enough to bring both. Start there."
+	),
+	completionMessage = "Now that's a useful delivery! I'll keep the kitchen moving; you keep coming back alive.",
 })
 
 ix.progression.Register("spicylemonItemDelivery_Brew", {
@@ -562,7 +731,7 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 	defaultActive = false,
 	progMap = MAP,
 	vendorUnlocks = {
-		{ npc = "'Spicy Lemon'", args = { "miscaid_swampbrew", nil, 2, "SELLANDBUY", 2, 12, 1 } },
+		{npc = "'Spicy Lemon'", args = {"miscaid_swampbrew", nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
@@ -590,14 +759,11 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 	end,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "elite_meals", quantity = 3 },
-		{ pool = "exotic_meals", quantity = 5 },
-		{ pool = "spirits", quantity = 3 },
-		{ pool = "local_refreshments", quantity = 4 },
-		{ pool = "common_meals", quantity = 6 },
-		{ pool = "predator_meals", quantity = 5 },
-		{ pool = "local_beer", quantity = 4 },
-		{ pool = "canned_food", quantity = 4 },
+		{pool = "predator_meals", quantity = 4},
+		{pool = "local_beer", quantity = 4},
+		{pool = "canned_food", quantity = 4},
+		{pool = "elite_meals", quantity = 3},
+		{pool = "exotic_meals", quantity = 5},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -610,4 +776,22 @@ ix.progression.Register("spicylemonItemDelivery_Brew", {
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+	milestoneGroup = "spicylemonItemDelivery_Brew",
+	stageIndex = 2,
+	stageCount = 2,
+	stockUnlocks = {
+		{
+			npc = "'Spicy Lemon'",
+			bonus = 2,
+			items = {
+				"drink_bottlewater",
+				"drink_bottletea",
+				"food_can_sprats",
+				"food_cheese_2",
+				"food_nuts_2",
+				"food_can_tomato",
+				"food_can_tushonka",
+			},
+		},
+	},
 })

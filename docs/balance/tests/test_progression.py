@@ -169,55 +169,128 @@ ix.progression.Register("delivery", {name = "Hardware", keyNpc = "Trader", progM
             self.assertEqual(steps[1][steps[0].index('Total raw units')], 2)
             self.assertEqual(steps[1][-3:-1], [2, 2])
 
-    def test_all_current_steps_match_source_effort_curve(self):
+    def test_expanded_segments_preserve_original_quantity_and_reward_budgets(self):
         import json
+        from collections import Counter, defaultdict
+        from progression_pacing import plan
+        root = Path(__file__).resolve().parents[3]
+        steps, gates, warnings = progression.collect(root, balance.tokenize, balance.lua_string)
+        pools = progression.collect_pools(root, balance.tokenize, balance.lua_string)
+        baseline = json.loads((root / 'docs/balance/progression/milestone-baseline.json').read_text())
+        self.assertEqual(warnings, [])
+        self.assertEqual(len(baseline), 139)
+        self.assertEqual(len(steps), 227)
+        self.assertEqual(len({s['keyNpc'] for s in steps}), 19)
+        _, planned = plan(root)
+        groups = defaultdict(list)
+        for step in steps:
+            groups[step['milestoneGroup'] or step['id']].append(step)
+            self.assertEqual(planned[step['id']]['quantities'], [x['quantity'] for x in step['slots']])
+            self.assertEqual(planned[step['id']]['thresholds'], step['thresholds'])
+            self.assertLessEqual(len(step['slots']), 8)
+            previous = set()
+            for slot in step['slots']:
+                self.assertGreater(slot['quantity'], 0)
+                self.assertEqual(slot['quantity'] % 1, 0)
+                current = {c['item'] for c in pools[slot['pool']]['candidates']}
+                self.assertFalse(previous & current)
+                previous.update(current)
+        corrections = {'steelplate_1': 'attachment_steelplate_1',
+                       'ceramicplate_1': 'attachment_ceramicplate_1', 'fabricplate_1': 'attachment_fabric_1'}
+        for ident, old in baseline.items():
+            members = groups[ident]
+            expected, actual = Counter(), Counter()
+            for slot in old['slots']:
+                expected[slot['pool']] += slot['quantity']
+            for member in members:
+                for slot in member['slots']:
+                    actual[slot['pool']] += slot['quantity']
+                self.assertEqual(member['lootMapTier'], old['ceiling'])
+            self.assertEqual(expected, actual, ident)
+            old_rewards = Counter(corrections.get(args[0], args[0]) for _, args in old['vendor'])
+            new_rewards = Counter(args[0] for m in members for _, args in m['vendor'])
+            if ident == 'smartass_rfTasks':
+                old_rewards['pso1'] += 1
+            self.assertEqual(old_rewards, new_rewards, ident)
+            if old['thresholds']:
+                self.assertEqual(max(x for m in members for x in m['thresholds']), max(old['thresholds']))
+        self.assertEqual(gates["'Intern'"], 'smartass_rfTasks')
+        self.assertNotIn("'Quartermaster'", gates)
+
+    def test_authored_briefings_and_role_rewards_are_complete(self):
         root = Path(__file__).resolve().parents[3]
         steps, _, warnings = progression.collect(root, balance.tokenize, balance.lua_string)
-        pools = progression.collect_pools(root, balance.tokenize, balance.lua_string)
-        original = json.loads((root / 'docs/balance/progression/original-requirements.json').read_text())
-        entities, _ = balance.scan(root)
-        item_ids = {e['id'] for e in entities if e['tab'] == 'Items'}
         self.assertEqual(warnings, [])
-        tasks = json.loads((root / 'docs/balance/progression/original-task-requirements.json').read_text())
-        self.assertEqual(tasks, {
-            'oldTimerKillIntro': [15], 'boss_dataTasks': [50], 'smartass_rfTasks': [60],
-            'intern_gasAnalyzerReadings': [90], 'computer_artifactTasks': [100],
-        })
-        current_tasks = {s['id']: s['thresholds'] for s in steps if s['thresholds']}
-        from progression_pacing import plan
-        _, planned = plan(root)
-        self.assertEqual(current_tasks, {ident: data['thresholds'] for ident, data in planned.items()
-                                         if data['thresholds']})
-        personal = {s['id']: s for s in steps if s['slots']}
-        self.assertEqual(set(personal), set(original))
-        for ident, step in personal.items():
-            with self.subTest(progression=ident):
-                self.assertLessEqual(len(step['slots']), 8)
-                self.assertGreaterEqual(len(step['slots']), 1)
-                maximum = 0
-                previous = set()
-                for slot in step['slots']:
-                    self.assertGreater(slot['quantity'], 0)
-                    self.assertEqual(slot['quantity'] % 1, 0)
-                    pool = pools[slot['pool']]
-                    self.assertTrue(pool['evidence'])
-                    if pool['tier'] == 'fixed':
-                        self.assertEqual(slot['quantity'], 1)
-                    candidates = pool['candidates']
-                    self.assertTrue(candidates)
-                    current = {c['item'] for c in candidates}
-                    self.assertTrue(current <= item_ids)
-                    self.assertFalse(previous & current, 'Slot overlap would make assignment order affect difficulty')
-                    previous.update(current)
-                    maximum += slot['quantity']
-                self.assertEqual([slot['quantity'] for slot in step['slots']], planned[ident]['quantities'])
-        for ident, data in planned.items():
-            if data['fixed']:
+        by_id = {step['id']: step for step in steps}
+        entities, _ = balance.scan(root)
+        item_ids = {entry['id'] for entry in entities if entry['tab'] == 'Items'}
+        import json
+        baseline = json.loads((root / 'docs/balance/progression/milestone-baseline.json').read_text())
+        for step in steps:
+            if step['id'] not in baseline:
+                self.assertGreater(len(step['briefing']), 60, step['id'])
+                self.assertTrue(step['completionMessage'], step['id'])
+                self.assertNotIn('description =', step['briefing'])
+            for _, args in step['vendor']:
+                self.assertIn(args[0], item_ids, step['id'])
+            for benefits in [step['benefits'], *step['checkpoints']]:
+                for reward in benefits.get('items', []):
+                    self.assertIn(reward['item'], item_ids, step['id'])
+        self.assertEqual(by_id['smartass_rfTasks']['vendorThresholds'], [None, 3])
+        self.assertEqual(by_id['arenaProgramme1']['benefits']['services'][0]['service'], 'treatment')
+        self.assertEqual(by_id['arenaProgramme2']['benefits']['items'][0]['item'], 'medic_medkit_1')
+        self.assertEqual(by_id['quartermasterFieldEquipment1']['prerequisites'],
+                         ['quarterMasterDelivery_activateItem', 'quartermasterItemDelivery_1'])
+        self.assertEqual(by_id['originalSurvival1']['benefits']['items'][0]['item'], 'food_can_tushonka')
+
+    def test_progressions_are_loaded_from_their_contact_files(self):
+        root = Path(__file__).resolve().parents[3]
+        folder = root / 'gamemodes/ix_cotz/plugins/progression'
+        steps, _, warnings = progression.collect(root, balance.tokenize, balance.lua_string)
+        self.assertEqual(warnings, [])
+        self.assertEqual(len(steps), len({step['id'] for step in steps}))
+        plugin = (folder / 'sh_plugin.lua').read_text()
+        contact_files = {
+            "'Boss'": 'sh_bossprog.lua',
+            "'Egghead'": 'sh_eggheadprog.lua',
+            "'Haggler'": 'sh_hagglerprog.lua',
+            "'Jitters'": 'sh_jittersprog.lua',
+            "'Old Timer'": 'sh_oldtimerprog.lua',
+            "'Quartermaster'": 'sh_quarterprog.lua',
+            "'Spicy Lemon'": 'sh_spicylemonprog.lua',
+            "'Technut'": 'sh_technutprog.lua',
+            "'Mute'": 'sh_muteprog.lua',
+            "'Computer'": 'sh_computerprog.lua',
+            "'Intern'": 'sh_internprog.lua',
+            "'The Original'": 'sh_originalprog.lua',
+            "'Hoarder'": 'sh_hoarderprog.lua',
+            "'???'": 'sh_noosphereprog.lua',
+            'NPC': 'sh_communityprog.lua',
+            "'Cleaner'": 'sh_cleanerprog.lua',
+            "'Beanstalk'": 'sh_beanstalkprog.lua',
+            "'Smartass'": 'sh_smartassprog.lua',
+            "'Arena Master'": 'sh_arenaprog.lua',
+        }
+        for step in steps:
+            if step['source'].endswith('sh_definitions.lua'):
                 continue
-            for parent in data['parents']:
-                self.assertGreaterEqual(data['effort'] + 1e-8, planned[parent]['effort'] * 1.25, ident)
-        self.assertEqual(personal['quarterMasterDelivery_activateItem']['slots'], [{'pool': 'flashdrive', 'quantity': 1}])
-        self.assertEqual(pools['flashdrive']['candidates'], [{'item': 'quest_flashdrive'}])
+            filename = contact_files[step['keyNpc']]
+            self.assertTrue(step['source'].endswith('/' + filename), step['id'])
+            self.assertEqual(plugin.count(f'ix.util.Include("{filename}")'), 1, filename)
+        self.assertFalse((folder / 'sh_expansion.lua').exists())
+        self.assertFalse((folder / 'sh_equipmentprog.lua').exists())
+
+    def test_service_rewards_and_checkpoint_thresholds_are_exported(self):
+        root = Path(__file__).resolve().parents[3]
+        tabs, warnings = progression.build_tabs(root, [], balance.tokenize, balance.lua_string)
+        self.assertEqual(warnings, [])
+        rows = tabs['Progression unlocks'][1:]
+        kinds = {row[2] for row in rows}
+        for kind in ('Service credit', 'Checkpoint Service credit', 'Fixed item reward',
+                     'Checkpoint Fixed item reward', 'Service discount', 'Recognition'):
+            self.assertIn(kind, kinds)
+        rf = [row for row in rows if row[0] == 'smartass_rfTasks' and row[2] == 'Vendor catalog item']
+        self.assertTrue(any('Personal job threshold: 3' in str(row) and 'pso1' in row for row in rf))
 
     def test_effort_uses_loot_availability_and_mutant_danger(self):
         from progression_pacing import pool_efforts, mutant_effort
@@ -230,47 +303,30 @@ ix.progression.Register("delivery", {name = "Hardware", keyNpc = "Trader", progM
         self.assertGreater(mutant_effort(root, 'chimera'), mutant_effort(root, 'dog'))
         self.assertGreater(mutant_effort(root, 'controller'), mutant_effort(root, 'flesh'))
 
-    def test_boss_suit_effort_continues_technut_without_overvaluing_io7a(self):
+    def test_boss_logical_milestones_keep_cross_contact_equipment_comparisons(self):
         from progression_pacing import plan, GROWTH
         root = Path(__file__).resolve().parents[3]
         _, planned = plan(root)
-        self.assertLess(planned['bossItemDelivery_1']['effort'],
-                        planned['technutItemDelivery_Suit4']['effort'])
+        self.assertLess(planned['bossItemDelivery_1']['groupEffort'],
+                        planned['technutItemDelivery_Suit4']['groupEffort'])
         for boss, technut in (('bossItemDelivery_2', 'technutItemDelivery_Suit5'),
                               ('bossItemDelivery_3', 'technutItemDelivery_Suit7')):
-            self.assertIn(technut, planned[boss]['parents'])
-            self.assertGreaterEqual(planned[boss]['effort'], planned[technut]['effort'] * GROWTH)
+            self.assertGreaterEqual(planned[boss]['groupEffort'], planned[technut]['groupEffort'] * GROWTH)
         for number in range(3, 8):
-            self.assertGreater(planned[f'bossItemDelivery_{number}']['effort'],
-                               planned['technutItemDelivery_Suit7']['effort'])
+            self.assertGreater(planned[f'bossItemDelivery_{number}']['groupEffort'],
+                               planned['technutItemDelivery_Suit7']['groupEffort'])
 
-    def test_slot_counts_grow_with_difficulty_and_continue_from_haggler_to_quartermaster(self):
+    def test_stock_rewards_are_visible_in_export(self):
         root = Path(__file__).resolve().parents[3]
         steps, _, warnings = progression.collect(root, balance.tokenize, balance.lua_string)
         self.assertEqual(warnings, [])
-        by_id = {step['id']: step for step in steps}
+        tabs, warnings = progression.build_tabs(root, [], balance.tokenize, balance.lua_string)
+        self.assertEqual(warnings, [])
+        kinds = {row[2] for row in tabs['Progression unlocks'][1:]}
+        self.assertIn('Personal capacity', kinds)
         for step in steps:
-            if not step['slots'] or step['source'].endswith('sh_definitions.lua'):
-                continue
-            for successor in step['next']:
-                following = by_id[successor]
-                if following['source'] == step['source']:
-                    self.assertLessEqual(len(step['slots']), len(following['slots']), step['id'])
-        for prefix, minimum, maximum in (('hagglerItemDelivery_', 1, 3),
-                                         ('quartermasterItemDelivery_', 4, 8)):
-            counts = [len(step['slots']) for step in steps if step['id'].startswith(prefix)]
-            self.assertEqual(min(counts), minimum)
-            self.assertEqual(max(counts), maximum)
-            for branch in ('1', '2'):
-                self.assertEqual(len(by_id[prefix + branch]['slots']), minimum)
-        self.assertEqual(len(by_id['hagglerItemDelivery_12111']['slots']), 3)
-        self.assertEqual(len(by_id['quartermasterItemDelivery_11211']['slots']), 8)
-        self.assertEqual(len(by_id['quartermasterItemDelivery_12211']['slots']), 8)
-        for prefix in ('bossItemDelivery_', 'jittersItemDelivery_', 'muteItemDelivery_',
-                       'oldtimerItemDelivery_', 'spicylemonItemDelivery_', 'technutItemDelivery_'):
-            counts = [len(step['slots']) for step in steps if step['id'].startswith(prefix)]
-            self.assertEqual(min(counts), 1, prefix)
-            self.assertEqual(max(counts), 8, prefix)
+            for reward in step['stock']:
+                self.assertIn(reward['bonus'], (1, 2))
 
     def test_requested_items_are_used_and_hard_detector_covers_anomaly_families(self):
         from collections import Counter
@@ -296,7 +352,7 @@ ix.progression.Register("delivery", {name = "Hardware", keyNpc = "Trader", progM
             'rare_electrical_artifacts', 'chemical_artifacts', 'gravitational_artifacts',
         }
         self.assertTrue(expected <= {slot['pool'] for slot in detector['slots']})
-        self.assertEqual(len(detector['slots']), 8)
+        self.assertEqual(len(detector['slots']), 6)
         self.assertTrue(all(slot['quantity'] >= 1 for slot in detector['slots']))
         entities, _ = balance.scan(root)
         fields = {entity['name']: entity for entity in entities if entity['tab'] == 'Anomaly fields'}
