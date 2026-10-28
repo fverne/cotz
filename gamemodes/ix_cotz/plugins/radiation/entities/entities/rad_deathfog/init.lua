@@ -93,7 +93,7 @@ function ENT:Think()
 
 	if self.Timer > CurTime() then return end
 	
-	for k,v in pairs( player.GetAll() ) do
+	for k, v in player.Iterator() do
 	
 		local pos = v:GetPos()
 		pos.z = self.Entity:GetPos().z

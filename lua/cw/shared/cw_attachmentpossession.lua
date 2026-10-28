@@ -146,7 +146,7 @@ function CustomizableWeaponry:countMissingAttachments(ply, tbl)
 end
 
 function CustomizableWeaponry:updateAdminCVars()
-	for k, v in pairs(player.GetAll()) do
+	for k, v in player.Iterator() do
 		if v:IsAdmin() then
 			for k2, v2 in ipairs(CustomizableWeaponry.registeredAttachments) do
 				v:ConCommand(v2.clcvar .. space .. GetConVarNumber(v2.cvar))

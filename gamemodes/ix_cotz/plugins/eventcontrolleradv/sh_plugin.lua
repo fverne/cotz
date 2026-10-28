@@ -191,7 +191,7 @@ if SERVER then
 			return 
 		end
 
-		self.spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * #player.GetAll()))
+		self.spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * player.GetCount()))
 
 		local spawn = table.Random(self.eventdefs)
 		local n = 0

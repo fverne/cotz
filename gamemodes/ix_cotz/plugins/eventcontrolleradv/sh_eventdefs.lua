@@ -37,7 +37,7 @@
 		difficulty = 1,
 		funcPrestart = function(dat)
 			ix.item.Spawn("makarov", dat.eventpoint[1], nil, AngleRand(), {["durability"] = 30})
-			for k, ply in pairs( player.GetAll() ) do
+			for k, ply in player.Iterator() do
 				ix.chat.Send(ply, "eventpdainternal", Format("The dead walks the earth at %s.", dat.eventpoint[2]), true, ply)
 			end
 
@@ -82,7 +82,7 @@
 			end
 
 			if zombalive < 3 then
-				for k, ply in pairs( player.GetAll() ) do
+				for k, ply in player.Iterator() do
 					ix.chat.Send(ply, "eventpdainternal", "More zombies rise from the ground.", true, ply)
 				end
 				for i=#dat.data.zombies,#dat.data.zombies+3 do

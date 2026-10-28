@@ -106,7 +106,7 @@ end
 
 function ENT:OnRemove()
 
-	for k,v in pairs( player.GetAll() ) do
+	for k, v in player.Iterator() do
 
 		if IsValid( v ) and v:Alive() and self.Entity:GetPos():Distance( v:GetPos() ) < self.Distance then
 

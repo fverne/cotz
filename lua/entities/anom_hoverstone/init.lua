@@ -103,7 +103,7 @@ function ENT:Think()
 
 	local active = false
 
-	for k,v in pairs( player.GetAll() ) do
+	for k, v in player.Iterator() do
 
 		if v:GetPos():Distance( self.Entity:GetPos() ) < 2000 then
 

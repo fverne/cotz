@@ -93,7 +93,7 @@ function PLUGIN:Think()
 	if checktime < CurTime() then
 		checktime = CurTime() + 3
 
-		for k, v in pairs(player.GetAll()) do
+		for k, v in player.Iterator() do
 			for j, c in pairs(self.loadpoints) do
 				if v:GetPos():Distance(c[1]) < 128 then
 					if v:GetCharacter() and !v:GetCharacter().inmenu then

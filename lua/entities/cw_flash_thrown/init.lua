@@ -64,7 +64,7 @@ function ENT:Fuse(t)
 			
 			self:EmitSound("weapons/flashbang/flashbang_explode2.wav", 85, 100)
 			
-			for key, obj in ipairs(player.GetAll()) do
+			for key, obj in player.Iterator() do
 				if obj:Alive() then
 					local bone = obj:LookupBone("ValveBiped.Bip01_Head1")
 					

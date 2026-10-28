@@ -398,7 +398,7 @@ else
 	end
 
 	function ENT:PlayerNearby()
-		for k,v in pairs(player.GetAll()) do
+		for k, v in player.Iterator() do
 			if self:GetPos():Distance(v:GetPos()) < 200 then return true end
 		end
 

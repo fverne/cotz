@@ -95,7 +95,7 @@ if (SERVER) then
             [MOVETYPE_OBSERVER] = true
         }
 
-        for _, v in pairs(player.GetAll()) do
+		for _, v in player.Iterator() do
             if !self:IsPosSafe(v:GetShootPos(), v, {}) and not movetypes[v:GetMoveType()] and v:GetCharacter() and v:Alive() then
                 if !v:GetCharacter() then
                     return
@@ -107,7 +107,7 @@ if (SERVER) then
     end
 
     function PLUGIN:RemoveBlowoutMarkFromPlayers()
-        for _, v in pairs(player.GetAll()) do
+		for _, v in player.Iterator() do
             if v:GetCharacter() then
                 v:GetCharacter():SetData("bInBlowoutWhenStart", false)
             end        
@@ -138,7 +138,7 @@ if (SERVER) then
     end
 
     function PLUGIN:ShutDown()
-        for _, v in pairs(player.GetAll()) do
+		for _, v in player.Iterator() do
             if !v:GetCharacter() then
                 return
             end
@@ -154,7 +154,7 @@ if (SERVER) then
         if CT < self.NextThink then return end
 
         if math.Round(self.NextBlowout) == math.Round(os.time() + 60) and self.BlowoutVars.AdminWarningUsed == false then
-            for k, v in pairs(player.GetAll()) do
+			for k, v in player.Iterator() do
                 if v:IsAdmin() then
                     v:Notify("[ADMIN] A blowout is going to happen in 60 seconds. You can stop this if you wish by typing /blowoutresetcycle in chat.")
                 end
@@ -164,7 +164,7 @@ if (SERVER) then
 
         if math.Round(self.NextBlowout) == math.Round(os.time() + 30) and self.BlowoutVars.ProgressionWarningUsed == false then
             if ix.progression.IsCompleted("muteItemDelivery_BlowoutWarning") then
-                for k, ply in pairs( player.GetAll() ) do
+				for k, ply in player.Iterator() do
                     ix.chat.Send(ply, "eventpdainternal", "A blowout is about to hit, seek shelter!", true, ply)
                     // ply:EmitSound( "stalkersound/pda/pda.wav", 50, 100, 1, CHAN_AUTO )
                 end
@@ -238,7 +238,7 @@ if (SERVER) then
                     table.insert(tracefilter, ent)
                 end
 
-                for _, v in pairs(player.GetAll()) do
+				for _, v in player.Iterator() do
                     if (not self:IsPosSafe(v:GetShootPos(), v, tracefilter) and not movetypes[v:GetMoveType()] and v:GetCharacter() and v:Alive()) then
                         v:Kill()
                     end
@@ -253,7 +253,7 @@ if (SERVER) then
                     ix.plugin.list["anomalycontroller"]:trySpawnArtifacts()
                 end
                 if ix.config.Get("blowoutRemoveNPCs", false) then
-                    for k, v in pairs(ents.GetAll()) do
+					for k, v in ents.Iterator() do
                         if IsValid(v) and (v:IsNPC() or baseclass.Get(v:GetClass()).Base == 'base_nextbot' or baseclass.Get(v:GetClass()).Base == 'nz_base' or baseclass.Get(v:GetClass()).Base == 'nz_risen') and not IsFriendEntityName(v:GetClass()) then
                             v:Remove()
                         end

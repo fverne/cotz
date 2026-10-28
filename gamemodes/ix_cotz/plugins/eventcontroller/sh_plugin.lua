@@ -217,7 +217,7 @@ if SERVER then
 
 		if self.pdachatter == true then
 			if math.Rand(1,100) <= self.pdachatterchance then
-				for k, ply in pairs( player.GetAll() ) do
+				for k, ply in player.Iterator() do
 					ix.chat.Send(ply, "eventpdainternal", Format(spawn.pdabroadcast, eventpoint[2]), true, ply)
 					 // ply:EmitSound( "stalkersound/pda/pda.wav", 50, 100, 1, CHAN_AUTO )
 				end
