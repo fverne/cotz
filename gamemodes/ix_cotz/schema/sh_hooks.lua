@@ -4,6 +4,10 @@ function Schema:CanDrive(client, entity)
 end
 
 function Schema:CanPlayerUseBusiness(client, uniqueID)
+	if not ix.config.Get("allowBusiness", true) then
+		return false
+	end
+
 	if !client:GetCharacter():HasFlags("1") then
     	return false
     end

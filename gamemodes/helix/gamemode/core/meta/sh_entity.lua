@@ -35,29 +35,15 @@ function meta:IsDoor()
 	return (class and class:find("door") != nil)
 end
 
+--- Returns `true` if the given entity is lockable (for example, a button, door, or vehicle) and is locked.
+-- @realm shared
+-- @treturn bool Whether or not this entity is locked; `false` if this entity cannot be locked at all
+-- (e.g not a button, door, or vehicle)
+function meta:IsLocked()
+	return self:GetInternalVariable("m_bLocked") == true
+end
+
 if (SERVER) then
-	--- Returns `true` if the given entity is a button or door and is locked.
-	-- @realm server
-	-- @treturn bool Whether or not this entity is locked; `false` if this entity cannot be locked at all
-	-- (e.g not a button or door)
-	function meta:IsLocked()
-		if (self:IsVehicle()) then
-			local datatable = self:GetSaveTable()
-
-			if (datatable) then
-				return datatable.VehicleLocked
-			end
-		else
-			local datatable = self:GetSaveTable()
-
-			if (datatable) then
-				return datatable.m_bLocked
-			end
-		end
-
-		return false
-	end
-
 	--- Returns the neighbouring door entity for double doors.
 	-- @realm shared
 	-- @treturn[1] Entity This door's partner
@@ -71,9 +57,7 @@ if (SERVER) then
 	-- @treturn[1] Entity Entity that is blocking this door
 	-- @treturn[2] nil If this entity is not a door, or there is no blocking entity
 	function meta:GetBlocker()
-		local datatable = self:GetSaveTable()
-
-		return datatable.pBlocker
+		return self:GetInternalVariable( "pBlocker" )
 	end
 
 	--- Blasts a door off its hinges. Internally, this hides the door entity, spawns a physics prop with the same model, and
@@ -121,7 +105,7 @@ if (SERVER) then
 				self.ignoreUse = false
 				self.ixIsMuted = false
 
-				for _, v in ipairs(ents.GetAll()) do
+				for _, v in ents.Iterator() do
 					if (v:GetParent() == self) then
 						v:SetNotSolid(false)
 						v:SetNoDraw(false)
@@ -150,7 +134,7 @@ if (SERVER) then
 			dummy:SetBodygroup(v.id, self:GetBodygroup(v.id))
 		end
 
-		for _, v in ipairs(ents.GetAll()) do
+		for _, v in ents.Iterator() do
 			if (v:GetParent() == self) then
 				v:SetNotSolid(true)
 				v:SetNoDraw(true)

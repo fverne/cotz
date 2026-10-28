@@ -104,15 +104,7 @@ if (SERVER) then
 
 			entity:SetModel(v.model)
 			entity:SetSkin(v.skin or 0)
-			entity:SetSolid(SOLID_BBOX)
-			entity:PhysicsInit(SOLID_BBOX)
-
-			local physObj = entity:GetPhysicsObject()
-
-			if (IsValid(physObj)) then
-				physObj:EnableMotion(false)
-				physObj:Sleep()
-			end
+			entity:InitPhysObj()
 
 			entity:SetNoBubble(v.bubble)
 			entity:SetDisplayName(v.name)
@@ -230,12 +222,16 @@ if (SERVER) then
 
 			data = uniqueID
 		elseif (key == "stockDisable") then
-			local uniqueID = data[1]
+			local uniqueID = data
 
-			entity.items[data] = entity.items[uniqueID] or {}
-			entity.items[data][VENDOR_MAXSTOCK] = nil
+			if not isstring(uniqueID) or not ix.item.list[uniqueID] then
+				return
+			end
 
-			UpdateEditReceivers(entity.receivers, key, data)
+			entity.items[uniqueID] = entity.items[uniqueID] or {}
+			entity.items[uniqueID][VENDOR_MAXSTOCK] = nil
+
+			UpdateEditReceivers(entity.receivers, key, uniqueID)
 		elseif (key == "stockMax") then
 			local uniqueID = data[1]
 			data[2] = math.max(math.Round(tonumber(data[2]) or 1), 1)
@@ -320,8 +316,7 @@ if (SERVER) then
 			data = {uniqueID, entity.classes[uniqueID]}
 		elseif (key == "model") then
 			entity:SetModel(data)
-			entity:SetSolid(SOLID_BBOX)
-			entity:PhysicsInit(SOLID_BBOX)
+			entity:InitPhysObj()
 			entity:SetAnim()
 		elseif (key == "useMoney") then
 			if (entity.money) then
@@ -382,7 +377,13 @@ if (SERVER) then
 		end
 
 		local entity = client.ixVendorAdv
-		local isSherpaClient = client:GetCharacter():HasSherpaVendor(entity:GetDisplayName())
+		local character = client:GetCharacter()
+
+		if not character or not IsValid(entity) or not entity:CanAccess(client) then
+			return
+		end
+
+		local isSherpaClient = character:HasSherpaVendor(entity:GetDisplayName())
 
 		if (!IsValid(entity) or client:GetPos():Distance(entity:GetPos()) > 192) then
 			return
@@ -392,12 +393,16 @@ if (SERVER) then
 		local iteminstanceID = net.ReadUInt(32)
 		local isSellingToVendor = net.ReadBool()
 
+		if not ix.item.list[uniqueID] then
+			return
+		end
+
 		if (!entity.items[uniqueID] and !isSherpaClient and !entity:GetBuyAll()) then
 			return
 		end
 
 		if (hook.Run("CanPlayerTradeWithVendor", client, entity, uniqueID, isSellingToVendor) != false) then
-			local price = entity:GetPrice(uniqueID, isSellingToVendor, iteminstanceID)
+			local price = entity:GetPrice(uniqueID, isSellingToVendor, isSellingToVendor and iteminstanceID or nil)
 
 			if (isSellingToVendor) then
 				local found = false
@@ -412,8 +417,8 @@ if (SERVER) then
 
 				for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
 					local item = ix.item.instances[v:GetID()]
-					quantity = item:GetData("quantity", item.quantity or item.ammoAmount)
-					if (v.uniqueID == uniqueID and v:GetID() != 0 and item and v:GetID() == iteminstanceID and v:GetData("equip", false) == false) then
+					if (item and v.uniqueID == uniqueID and v:GetID() != 0 and v:GetID() == iteminstanceID and v:GetData("equip", false) == false) then
+						quantity = item:GetData("quantity", item.quantity or item.ammoAmount)
 						timer.Simple(0.1, function()
 						client:SelectWeapon("ix_hands" or "tfa_nmrih_combatknife" or "tfa_nmrih_oldknife" or "tfa_nmrih_shankknife" or "tfa_nmrih_survivalknife") -- yuck 
 					  end)
@@ -464,6 +469,10 @@ if (SERVER) then
 				PLUGIN:SaveData()
 				hook.Run("CharacterVendorTraded", client, entity, uniqueID, isSellingToVendor)
 			else
+				if not entity:CanSellToPlayer(client, uniqueID) then
+					return
+				end
+
 				local stock = entity:GetStock(uniqueID)
 
 				if stock == nil and isSherpaClient then

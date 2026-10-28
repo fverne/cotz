@@ -143,7 +143,7 @@ end)
 -- On player uneqipped the item, Removes a weapon from the player and keep the ammo in the item.
 ITEM.functions.EquipUn = { -- sorry, for name order.
 	name = "Take Off",
-	tip = "equipTip",
+	tip = "unequipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 4, function(ply)

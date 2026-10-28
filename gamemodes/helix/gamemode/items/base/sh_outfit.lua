@@ -116,6 +116,7 @@ function ITEM:AddOutfit(client)
 		end
 	end
 
+	self:GetOwner():SetupHands()
 	self:OnEquipped()
 end
 
@@ -205,6 +206,7 @@ function ITEM:RemoveOutfit(client)
 		self:RemoveAttachment(k, client)
 	end
 
+	self:GetOwner():SetupHands()
 	self:OnUnequipped()
 end
 
@@ -240,8 +242,8 @@ ITEM:Hook("drop", function(item)
 end)
 
 ITEM.functions.EquipUn = { -- sorry, for name order.
-	name = "Unequip",
-	tip = "equipTip",
+	name = "unequip",
+	tip = "unequipTip",
 	icon = "icon16/cross.png",
 	OnRun = function(item)
 		item:RemoveOutfit(item.player)
@@ -256,19 +258,18 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 }
 
 ITEM.functions.Equip = {
-	name = "Equip",
+	name = "equip",
 	tip = "equipTip",
 	icon = "icon16/tick.png",
 	OnRun = function(item)
 		local client = item.player
 		local char = client:GetCharacter()
-		local items = char:GetInventory():GetItems()
 
-		for _, v in pairs(items) do
-			if (v.id != item.id) then
-				local itemTable = ix.item.instances[v.id]
+		for _, k in pairs(char:GetInventory():GetItems()) do
+			if (k.id != item.id) then
+				local itemTable = ix.item.instances[k.id]
 
-				if (itemTable.pacData and v.outfitCategory == item.outfitCategory and itemTable:GetData("equip")) then
+				if (itemTable.pacData and k.outfitCategory == item.outfitCategory and itemTable:GetData("equip")) then
 					client:NotifyLocalized(item.equippedNotify or "outfitAlreadyEquipped")
 					return false
 				end

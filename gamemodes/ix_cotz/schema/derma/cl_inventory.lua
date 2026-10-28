@@ -897,8 +897,9 @@ function PANEL:AddIcon(model, x, y, w, h, skin)
 						itemTable.width,
 						itemTable.height,
 						itemTable:GetModel(),
-						itemTable.material,
-						itemTable.iconCam
+						itemTable.iconCam,
+						nil,
+						itemTable:GetMaterial()
 					)
 				end
 			end
