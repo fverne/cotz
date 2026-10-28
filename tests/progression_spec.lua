@@ -50,6 +50,7 @@ timer = {
 	end,
 }
 hook = {
+	Run = function() end,
 	Add = function(event, id, callback)
 		callbacks[id] = callback
 	end,
@@ -161,8 +162,9 @@ dofile(base .. "libs/sh_progression.lua")
 dofile(base .. "libs/sh_requirements.lua")
 dofile(base .. "libs/sh_expansion.lua")
 dofile(base .. "libs/sh_services.lua")
-dofile(base .. "libs/sh_taskrewards.lua")
-dofile(base .. "libs/sv_taskrewards.lua")
+dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_taskrewards.lua")
+dofile(base .. "libs/sh_rewards.lua")
+dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sv_taskrewards.lua")
 dofile(base .. "libs/sv_rewards.lua")
 local api = ix.progression
 function api.Register(id, definition)
@@ -604,6 +606,9 @@ FindMetaTable = function()
 	return playerMeta
 end
 ix.config = { Add = function() end }
+ix.util.Include = function(filename)
+	dofile("gamemodes/ix_cotz/plugins/dialogue/" .. filename)
+end
 dofile("gamemodes/ix_cotz/plugins/dialogue/sh_plugin.lua")
 local invoked = 0
 local topic = {}

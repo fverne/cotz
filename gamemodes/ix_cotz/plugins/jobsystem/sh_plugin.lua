@@ -72,6 +72,14 @@ ix.command.Add("CharResetJobs", {
 })
 
 if SERVER then
+	function PLUGIN:PlayerLoadedCharacter(client, character, previousCharacter)
+		ix.taskRewards.PrepareExistingJobs(character)
+	end
+
+	function PLUGIN:PostLoadData()
+		ix.taskRewards.Validate()
+	end
+
 	netstream.Hook("job_deliveritem", function(client, npcidentifier)
 		if ix.taskRewards.DeliverJobItem(client, npcidentifier) then
 			client:Notify("Item delivered!")

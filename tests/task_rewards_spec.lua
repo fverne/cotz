@@ -42,8 +42,9 @@ local base = "gamemodes/ix_cotz/plugins/progression/"
 dofile(base .. "libs/sh_storage.lua")
 dofile(base .. "libs/sh_progression.lua")
 dofile(base .. "libs/sh_expansion.lua")
-dofile(base .. "libs/sh_taskrewards.lua")
-dofile(base .. "libs/sv_taskrewards.lua")
+dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_taskrewards.lua")
+dofile(base .. "libs/sh_rewards.lua")
+dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sv_taskrewards.lua")
 ix.progression.AssignActiveRequirements = function() end
 local api = ix.taskRewards
 local meta = ix.meta.character
@@ -260,7 +261,7 @@ local delivery = {name = "Hand over %d hands", numberRec = 1, requiredItem = "pa
 ix.jobs.list.hand = delivery
 check(api.FixedMoney(delivery, 1) == 3685, "swampcontroller task cash is fifty-five percent of hand-in value")
 check(api.FixedMoney(delivery, 3) == 11055, "cash floor covers every requested specimen")
-check(api.ProgressionUnitValue("part_swampcontroller_1") == 4355,
+check(ix.progression.HandInUnitValue("part_swampcontroller_1") == 4355,
 	"progression hand cash is sixty-five percent of hand-in value")
 local specimen = setmetatable({GetData = function(_, key, default)
 	if key == "tier" then return 3 end
@@ -282,14 +283,14 @@ check(api.FixedMoney(foodJob, 3) == 33, "stacked deliveries are valued per use, 
 local foodOwner = actor()
 foodOwner.jobs.NPC = {identifier = "food", numberRec = 3, progress = 0}
 ix.jobs.list.food = foodJob
-check(math.abs(api.ProgressionUnitValue("food") - 13) < 0.000001, "progression stacks are valued per consumed use")
+check(math.abs(ix.progression.HandInUnitValue("food") - 13) < 0.000001, "progression stacks are valued per consumed use")
 ix.jobs.list.highFood = {requiredItem = "food", numberRec = {2, 5}, moneyReward = 2000, reward = {}}
-check(math.abs(api.ProgressionUnitValue("food") - 13) < 0.000001,
+check(math.abs(ix.progression.HandInUnitValue("food") - 13) < 0.000001,
 	"old repeatable cash bonuses cannot increase the sixty-five percent progression rate")
 ix.jobs.list.highFood = nil
 local ammoJob = {requiredItem = "22lr", numberRec = 1, moneyReward = 100, reward = {}}
 ix.jobs.list.ammoComparison = ammoJob
-check(math.abs(api.ProgressionUnitValue("22lr") * ix.item.list["22lr"].ammoAmount - 13) < 0.000001,
+check(math.abs(ix.progression.HandInUnitValue("22lr") * ix.item.list["22lr"].ammoAmount - 13) < 0.000001,
 	"progression ammunition pays sixty-five percent of a full box per consumed round")
 ix.jobs.list.ammoComparison = nil
 local food = {quantity = 5, data = {quantity = 5}, GetData = function(self, key, default)
@@ -570,6 +571,23 @@ check(viewer:GetData("taskRewardOffers")[viewer:GetJobs()["'Old Timer'"].rewardK
 check(#viewer.inventory.received == 0 and viewer.money == 0,
 	"retiring obsolete progression choices does not pay extra rewards")
 ix.progression.definitions["menu-test"] = nil
+local scheduledClaims = {}
+timer.Simple = function(_, callback) scheduledClaims[#scheduledClaims + 1] = callback end
+local packageOwner = actor()
+ix.progression.QueueReward(packageOwner, "taskRewardClaims", {item = "medic_bandage_1"})
+ix.progression.QueueReward(packageOwner, "taskRewardClaims", {item = "medic_bandage_1"})
+check(api.ClaimNext(packageOwner) and #scheduledClaims == 1,
+	"jobsystem schedules continuation after the first supply claim")
+scheduledClaims[1]()
+check(#packageOwner.inventory.received == 2 and #scheduledClaims == 1,
+	"jobsystem drains the package and stops when the claim queue is empty")
+ix.progression.QueueReward(packageOwner, "story-claim", {item = "medic_bandage_1"})
+ix.progression.QueueReward(packageOwner, "story-claim", {item = "medic_bandage_1"})
+ix.progression.ClaimRewards(packageOwner, "story-claim")
+check(#scheduledClaims == 1 and #ix.progression.GetLine(packageOwner, "story-claim").pendingRewards == 1,
+	"job supply continuation leaves progression claims player-driven")
+timer.Simple = function() end
+
 SERVER, CLIENT = false, true
 dofile("gamemodes/ix_cotz/plugins/dialogue/libs/sh_taskrewards.lua")
 local activePacket = previewPacket

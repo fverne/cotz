@@ -29,7 +29,6 @@ local JOB_EQUIPMENT_LIMITS = {2500, 7500, 15000, 30000, 50000}
 ix.taskRewards.JOB_MONEY_VERSION = 3
 local JOB_LEGACY_CASH_SHARE = 0.5
 local JOB_CASH_RATE = 0.55
-local PROGRESSION_CASH_RATE = 0.65
 local CASH_ROUNDING_EPSILON = 0.000000001
 local JOB_MIN_FILL = 0.25
 local JOB_MAX_FILL = 0.6
@@ -309,18 +308,6 @@ function ix.taskRewards.FixedMoney(job, count, deliveredValue)
 	local base = average(job.moneyReward, 0) + ix.taskRewards.JobBudget(job) * JOB_LEGACY_CASH_SHARE
 
 	return math.ceil(base * JOB_CASH_RATE - CASH_ROUNDING_EPSILON)
-end
-
-function ix.taskRewards.ProgressionCashMultiplier()
-	return PROGRESSION_CASH_RATE
-end
-
-function ix.taskRewards.ProgressionUnitValue(itemID, instance)
-	local item = instance or ix.item.list[itemID]
-	local units = not item.quantity and average(item.ammoAmount, 1) or 1
-	local value = ix.taskRewards.HandInUnitValue(itemID, instance)
-
-	return value / math.max(1, units) * PROGRESSION_CASH_RATE
 end
 
 function ix.taskRewards.CanTakeDifficulty(character, difficulty)

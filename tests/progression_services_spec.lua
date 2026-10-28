@@ -27,7 +27,7 @@ IsValid = function(value) return type(value) == "table" and not value.invalid en
 istable = function(value) return type(value) == "table" end
 isnumber = function(value) return type(value) == "number" end
 tobool = function(value) return value == true end
-hook = {Add = function() end}
+hook = {Add = function() end, Run = function() end}
 game = {GetMap = function() return "rp_marsh_cs" end}
 local position = {DistToSqr = function() return 0 end}
 local config = {bankW = 2, bankH = 2, bankWMax = 4, bankHMax = 4}

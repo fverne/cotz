@@ -89,7 +89,6 @@ if SERVER then
 
 	function ix.progression.AuditDefinitions()
 		ix.progression.ValidateRequirementPools()
-		if ix.taskRewards and ix.jobs and ix.randomitems then ix.taskRewards.Validate() end
 		local visiting, complete = {}, {}
 		local definitions = ix.progression.definitions
 		local function visit(id)

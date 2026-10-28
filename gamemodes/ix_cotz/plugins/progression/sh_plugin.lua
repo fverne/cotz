@@ -13,7 +13,6 @@ function ix.progression.Register(progressionID, data)
 	ix.progression.definitions[progressionID] = data
 end
 
-ix.util.Include("libs/sh_taskrewards.lua")
 ix.util.Include("libs/sh_expansion.lua")
 ix.util.Include("libs/sh_services.lua")
 ix.util.Include("sh_requirementpools.lua")
@@ -50,7 +49,6 @@ end
 if SERVER then
 	function PLUGIN:PlayerLoadedCharacter(client, character, previousCharacter)
 		ix.progression.InitializeCharacterProgression(character)
-		ix.taskRewards.PrepareExistingJobs(character)
 	end
 
 	function PLUGIN:PostLoadData()

@@ -16,12 +16,12 @@ local function prepareCredit(line, record)
 		line.rewardCredit.reputation = line.rewardCredit.reputation * LEGACY_REPUTATION_FACTOR
 	end
 	local previousRate = PREVIOUS_CASH_RATES[line.rewardVersion] or PREVIOUS_CASH_RATE
-	line.rewardCredit.money = line.rewardCredit.money * ix.taskRewards.ProgressionCashMultiplier() / previousRate
+	line.rewardCredit.money = line.rewardCredit.money * ix.progression.CashMultiplier() / previousRate
 	local quotedMoney, contributions = 0, 0
 	local function quoteContributions(saved)
 		for itemID, amount in pairs(saved or {}) do
 			contributions = contributions + amount
-			quotedMoney = quotedMoney + ix.taskRewards.ProgressionUnitValue(itemID) * amount
+			quotedMoney = quotedMoney + ix.progression.HandInUnitValue(itemID) * amount
 		end
 	end
 	if line.sources then

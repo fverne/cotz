@@ -201,14 +201,7 @@ if SERVER then
 		ix.progression.SetCharacterProgression(character, record)
 		character:Save()
 		ix.dialogue.notifyItemGet(character:GetPlayer(), ix.progression.DescribeItemReward(reward))
-		if progressionID == "taskRewardClaims" and #line.pendingRewards > 0 then
-			timer.Simple(0, function()
-				local client = character:GetPlayer()
-				if IsValid(client) and client:GetCharacter() == character then
-					ix.progression.ClaimRewards(character, progressionID)
-				end
-			end)
-		end
+		hook.Run("cotz/progression/reward-claimed", character, progressionID, line)
 
 		return true
 	end

@@ -24,8 +24,8 @@ function ix.util.GetValueFromProgressionTurnin(item, count, itemID)
 	local unitPrice = fullValue / maximumQuantity
 	local fullReputation = TURN_IN_BASE_REPUTATION + (fullValue * TURN_IN_VALUE_FACTOR) ^ 0.25
 	local reputation = fullReputation * accepted / maximumQuantity * TURN_IN_REPUTATION_MULTIPLIER
-	local rate = itemID and ix.taskRewards.ProgressionUnitValue(itemID, quote)
-		or unitPrice * ix.taskRewards.ProgressionCashMultiplier()
+	local rate = itemID and ix.progression.HandInUnitValue(itemID, quote)
+		or unitPrice * ix.progression.CashMultiplier()
 	local currency = rate * accepted
 
 	return reputation, currency

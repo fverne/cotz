@@ -295,3 +295,14 @@ function ix.taskRewards.PrepareExistingJobs(character)
 		character:Save()
 	end
 end
+
+-- Task supply packages drain automatically; progression claims remain player-driven.
+hook.Add("cotz/progression/reward-claimed", "cotz/jobsystem/claim-next-supply", function(character, lineID, line)
+	if lineID ~= CLAIM_LINE or #line.pendingRewards == 0 then return end
+	timer.Simple(0, function()
+		local client = character:GetPlayer()
+		if IsValid(client) and client:GetCharacter() == character then
+			ix.taskRewards.ClaimNext(character)
+		end
+	end)
+end)

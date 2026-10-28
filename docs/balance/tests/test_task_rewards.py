@@ -64,7 +64,7 @@ class TaskRewardAuditTests(unittest.TestCase):
                     value = (assigned_table(tokens, i + 4) if tokens[i + 4].value == '{'
                              else literal(tokens[i + 4:i + 5]))
                     cls.jobs.append(value)
-        tokens = balance.tokenize((folder / 'plugins/progression/libs/sh_taskrewards.lua').read_text())
+        tokens = balance.tokenize((folder / 'plugins/jobsystem/libs/sh_taskrewards.lua').read_text())
         cls.constants = {}
         for i in range(len(tokens) - 3):
             if tokens[i].value == 'local' and tokens[i + 2].value == '=' and tokens[i + 3].value == '{':
