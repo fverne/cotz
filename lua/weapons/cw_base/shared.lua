@@ -290,9 +290,7 @@ SWEP.FiremodesEnabled = true
 SWEP.SuppressedOnEquip = false
 SWEP.CanCustomize = true
 
--- KLAMT
-timerdelay = 0
---
+local AMMO_CHECK_INTERVAL = 0.5
 
 SWEP.DurabilityDamageChance = 0.01
 SWEP.WearDamage = 0.0
@@ -545,7 +543,16 @@ function SWEP:GetDeployTime()
 	return self.DeployTime
 end
 
+function SWEP:RefreshInventoryAmmo()
+	if not SERVER or self.ixAmmoRestorePending then return end
+	local owner = self:GetOwner()
+	if not IsValid(owner) or not owner:IsPlayer() or not owner:Alive() or not owner:GetCharacter() then return end
+
+	hook.Run("AmmoCheck", owner, self)
+end
+
 function SWEP:Deploy()
+	self:RefreshInventoryAmmo()
 	self.holsterSound = true
 	self.dt.State = CW_IDLE
 	self.dt.HolsterDelay = 0
@@ -680,6 +687,8 @@ function SWEP:Holster(wep)
 end
 
 function SWEP:Reload()
+	self:RefreshInventoryAmmo()
+
 	local CT = CurTime()
 
 	if self.ReloadDelay or CT < self.ReloadWait or self.dt.State == CW_ACTION or self.ShotgunReloadState != 0 then
@@ -815,8 +824,9 @@ function SWEP:beginReload()
 end
 
 function SWEP:finishReload()
+	self:RefreshInventoryAmmo()
+
 	local mag, ammo = self:Clip1(), self.Owner:GetAmmoCount(self.Primary.Ammo)
-	hook.Run("WeaponReloadFinished",self.Owner,self.ShotgunReload)
 
 	if mag > 0 then
 		if self.SnapToIdlePostReload then
@@ -829,8 +839,9 @@ function SWEP:finishReload()
 	if not suppressReloadLogic then
 		if self.ReloadAmount then
 			if SERVER then
-				self:SetClip1(math.Clamp(mag + self.ReloadAmount, 0, self.Primary.ClipSize))
-				self.Owner:RemoveAmmo(self.ReloadAmount, self.Primary.Ammo)
+				local loadedRounds = math.max(0, math.min(self.ReloadAmount, ammo, self.Primary.ClipSize - mag))
+				self:SetClip1(mag + loadedRounds)
+				self:GetOwner():RemoveAmmo(loadedRounds, self.Primary.Ammo)
 			end
 		else
 			if mag > 0 then
@@ -859,6 +870,11 @@ function SWEP:finishReload()
 				end
 			end
 		end
+	end
+
+	if SERVER then
+		local loadedRounds = math.max(self:Clip1() - mag, 0)
+		hook.Run("WeaponReloadFinished", self:GetOwner(), self.ShotgunReload, self, loadedRounds)
 	end
 
 	CustomizableWeaponry.callbacks.processCategory(self, "finishReload")
@@ -996,9 +1012,9 @@ function SWEP:Think()
 		return
 	end
 
-	if timerdelay < CurTime() then
-		timerdelay = CurTime() + 0.5
-		hook.Run("AmmoCheck", self.Owner, self)
+	if SERVER and (self.nextAmmoCheck or 0) <= CurTime() then
+		self.nextAmmoCheck = CurTime() + AMMO_CHECK_INTERVAL
+		self:RefreshInventoryAmmo()
 	end
 	CustomizableWeaponry.actionSequence.process(self)
 
@@ -1179,12 +1195,13 @@ function SWEP:Think()
 					self.Owner:SetAnimation(PLAYER_RELOAD)
 				end
 
-				local mag, ammo = self:Clip1(), self.Owner:GetAmmoCount(self.Primary.Ammo)
+				self:RefreshInventoryAmmo()
+				local mag, ammo = self:Clip1(), self:GetOwner():GetAmmoCount(self.Primary.Ammo)
 
-				if SERVER then
+				if SERVER and ammo > 0 then
 					self:SetClip1(mag + 1)
-					self.Owner:SetAmmo(ammo - 1, self.Primary.Ammo)
-					hook.Run("ProcessShotgunReload",self.Owner)
+					self:GetOwner():SetAmmo(ammo - 1, self.Primary.Ammo)
+					hook.Run("ProcessShotgunReload", self:GetOwner(), self)
 				end
 
 				self.ReloadDelay = CT + self.InsertShellTime / self.ReloadSpeed
@@ -1196,7 +1213,7 @@ function SWEP:Think()
 				end
 
 				-- if we've filled up the weapon (or we have no ammo left), we go to the "end reload" state
-				if mag + 1 == maxReloadAmount or ammo - 1 == 0 then
+				if mag + 1 >= maxReloadAmount or ammo <= 1 then
 					self.ShotgunReloadState = 2
 				end
 			end
