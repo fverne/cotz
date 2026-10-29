@@ -3,6 +3,7 @@ ix.progression = ix.progression or {}
 local CREDIT_KEY = "progressionServiceCredits"
 local QUOTE_LIFETIME = 60
 local MAX_DISCOUNT = 0.15
+local REPAIR_COST_MULTIPLIER = 2
 local SERVICE_CONTACTS = {
 	repair = { ["'Technut'"] = true, ["'Boss'"] = true },
 	treatment = { ["'Jitters'"] = true, ["'Arena Master'"] = true },
@@ -19,6 +20,24 @@ function ix.progression.GetServiceCredit(character, npc, service)
 	local credits = character:GetData(CREDIT_KEY, {}) or {}
 
 	return credits[npc .. "/" .. service] or 0
+end
+
+function ix.progression.ServiceCreditCapacity(character, npc, service)
+	if not SERVICE_CONTACTS[service] or not SERVICE_CONTACTS[service][npc]
+		or not ix.progression.CanUseNPC(character, npc) then return 0 end
+
+	return math.max(0, CREDIT_LIMITS[service] - ix.progression.GetServiceCredit(character, npc, service))
+end
+
+function ix.progression.AddServiceCredit(character, npc, service, amount)
+	if not SERVER or type(amount) ~= "number" or amount <= 0 or amount % 1 ~= 0
+		or ix.progression.ServiceCreditCapacity(character, npc, service) < amount then return false end
+	local credits = table.Copy(character:GetData(CREDIT_KEY, {}) or {})
+	local key = npc .. "/" .. service
+	credits[key] = (credits[key] or 0) + amount
+	character:SetData(CREDIT_KEY, credits)
+
+	return true
 end
 
 local function definitionDiscount(definition, npc, service)
@@ -69,7 +88,9 @@ local function repairOffer(client, data)
 		return
 	end
 
-	return {item = item, field = field, baseCost = math.max(0, math.Round(missing * item:GetRepairCost()))}
+	local baseCost = math.max(0, math.Round(missing * item:GetRepairCost())) * REPAIR_COST_MULTIPLIER
+
+	return {item = item, field = field, baseCost = baseCost}
 end
 
 local function treatmentOffer(client, data, npc)

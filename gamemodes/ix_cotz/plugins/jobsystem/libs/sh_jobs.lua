@@ -55,8 +55,10 @@ end
 function ix.jobs.getFormattedDesc(activejob)
 	local text = string.format(ix.jobs.list[activejob.identifier].desc, activejob.numberRec)
 	if activejob.rewardChoices then
-		text = text .. "\nSupplies: " .. ix.taskRewards.Summary({choices = activejob.rewardChoices})
-			.. "\nPayment: " .. activejob.moneyReward .. " rubles."
+		local selected = activejob.rewardChoices[activejob.supplyChoice or 0]
+		local supplies = selected and selected.label or ix.taskRewards.Summary({choices = activejob.rewardChoices})
+		text = text .. "\n\nSupplies:\n  • " .. supplies:gsub(" %+ ", "\n  • ")
+			.. "\n\nPayment: " .. activejob.moneyReward .. " rubles."
 		if ix.jobs.list[activejob.identifier].requiredItem then
 			text = text .. " Better-quality hand-ins can increase this payment."
 		end
@@ -192,6 +194,7 @@ if SERVER then
 		character:SetJobs(jobs)
 		character:Save()
 		local definition = ix.jobs.list[job.identifier]
+		ix.taskRewards.RecordCompletion(character, npcidentifier, job)
 		ix.taskRewards.EarnOffer(character, job.rewardKey)
 		self:addReputation(definition.repReward)
 		ix.dialogue.notifyReputationReceive(self, definition.repReward)
@@ -225,6 +228,7 @@ if SERVER then
 		if not ix.taskRewards.PrepareJob(character, npcidentifier, job) then return false end
 		jobs[npcidentifier] = job
 		character:SetJobs(jobs)
+		ix.taskRewards.SelectOffer(character, npcidentifier, job.rewardKey, job.supplyChoice or 1)
 		character:Save()
 		if definition.OnTaskGet then definition.OnTaskGet(self) end
 		netstream.Start(self, "ix_COTZPlayPDASound", 2)

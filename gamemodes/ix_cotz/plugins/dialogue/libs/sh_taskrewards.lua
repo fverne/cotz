@@ -4,7 +4,7 @@ local REWARD_DATA_KEY = "taskRewardOffers"
 local CLAIM_LINE = "taskRewardClaims"
 local INTERACTION_DISTANCE = 192
 local ACTION_INTERVAL = 0.15
-local SHOW_TASK_SUPPLIES = false
+local SHOW_TASK_SUPPLIES = true
 
 if SERVER then
 	util.AddNetworkString("cotz/dialogue/task-offer")
@@ -41,7 +41,11 @@ else
 		local target = net.ReadEntity()
 		local panel = ix.gui.dialogue
 		if IsValid(panel) and panel.target == target and panel.tree.TaskRewardChoices then
-			panel:startTopic("TaskRewardChoices")
+			if panel.currentTopicID == "TaskRewardChoices" then
+				panel.options:Clear()
+				local topic = panel.tree.TaskRewardChoices
+				panel:prepareDynamicOptions(topic.GetDynamicOptions(topic, LocalPlayer(), target), topic.options)
+			end
 		end
 	end)
 end
@@ -61,16 +65,30 @@ local function canChoose(client, target)
 	return true
 end
 
+local function supplyText(label)
+	return (label:gsub(" %+ ", "\n      + "))
+end
+
+local function supplyLines(offer)
+	local lines = {}
+	for _, choice in ipairs(offer.choices or {}) do
+		lines[#lines + 1] = "  • " .. supplyText(choice.label)
+	end
+
+	return table.concat(lines, "\n")
+end
+
 local function offerOptions(character, npc)
 	local options = {}
 	for key, offer in pairs(character:GetData(REWARD_DATA_KEY, {})) do
-		if key:match("^job:") and ix.taskRewards.CanSelectOffer(character, npc, key, offer) then
+		local isTask = key:match("^job:") or key:match("^bonus:")
+		if isTask and ix.taskRewards.CanSelectOffer(character, npc, key, offer) then
 			for index, choice in ipairs(offer.choices) do
 				options[#options + 1] = {
-					statement = offer.label .. (offer.earned and " — claim: " or " — reserve: ")
-						.. (offer.selected == index and "[Selected] " or "") .. choice.label,
+					statement = offer.label .. (offer.earned and "\nClaim: " or "\nReserve: ")
+						.. (offer.selected == index and "[Selected] " or "") .. supplyText(choice.label),
 					topicID = "TaskRewardChoices",
-					dyndata = {kind = "offer", key = key, choice = index},
+					dyndata = {kind = "offer", key = key, choice = index, label = choice.label},
 				}
 			end
 		end
@@ -135,10 +153,10 @@ local function configureJobPreview(dialogue)
 				if preview then
 					local definition = ix.jobs.list[preview.identifier]
 					local offer = character:GetData(REWARD_DATA_KEY, {})[preview.rewardKey]
-					local supply = offer and offer.choices[preview.supplyChoice]
+					local supply = offer and supplyLines(offer)
 					local label = string.format(definition.name, preview.numberRec)
-						.. " — " .. preview.moneyReward .. " rubles"
-					if supply then label = label .. "; supplies: " .. supply.label end
+						.. "\nPayment: " .. preview.moneyReward .. " rubles"
+					if supply then label = label .. "\nSupplies (choose one):\n" .. supply end
 					rows[#rows + 1] = {difficulty = difficulty, label = label}
 				end
 			end
@@ -177,15 +195,17 @@ local function configureJobPreview(dialogue)
 			if preview then
 				local definition = ix.jobs.list[preview.identifier]
 
-				local description = string.format(definition.desc, preview.numberRec) .. "\nPayment: " .. preview.moneyReward
+				local description = string.format(definition.desc, preview.numberRec) .. "\n\nPayment: " .. preview.moneyReward
 					.. " rubles."
 				if definition.requiredItem then
-					description = description .. " Better-quality hand-ins can increase this payment."
+					description = description .. "\nBetter-quality hand-ins can increase this payment."
 				end
 				local offer = client:GetCharacter():GetData(REWARD_DATA_KEY, {})[preview.rewardKey]
-				local supply = offer and offer.choices[preview.supplyChoice]
-				if supply then description = description .. "\nSupplies: " .. supply.label end
-				local choices = supply and {supply} or {}
+				local supply = offer and supplyLines(offer)
+				if supply then description = description .. "\n\nSupplies:\n" .. supply end
+				description = description .. "\n\n" .. ix.taskRewards.BonusStatus(client:GetCharacter(), target:GetDisplayName())
+				description = description .. "\nOnly unused supply allowance is added to this trader's bonus."
+				local choices = offer and offer.choices or {}
 				net.Start("cotz/dialogue/task-offer")
 				net.WriteEntity(target)
 				net.WriteString(difficulty)
@@ -209,9 +229,9 @@ local function configureJobPreview(dialogue)
 		GetDynamicOptions = function(_, client)
 			local preview = client.cotzTaskPreview or {}
 			local options = {}
-			for _, choice in ipairs(preview.choices or {}) do
-				options[#options + 1] = {statement = "Accept — " .. choice.label,
-					topicID = "ConfirmSupplyTask", dyndata = {difficulty = preview.difficulty}}
+			for index, choice in ipairs(preview.choices or {}) do
+				options[#options + 1] = {statement = "Accept task with:\n  • " .. supplyText(choice.label),
+					topicID = "ConfirmSupplyTask", dyndata = {difficulty = preview.difficulty, choice = index}}
 			end
 			if #options == 0 then
 				options[1] = {statement = "Accept task", topicID = "ConfirmSupplyTask",
@@ -236,9 +256,20 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 	configureJobPreview(dialogue)
 	local workTopic = dialogue.tree.AboutWorkTopic
 	dialogue.addTopic("TaskRewardChoices", {
-		statement = "Choose or claim task supplies.",
+		statement = "Choose or claim task rewards.",
 		ShouldAdd = function() return SHOW_TASK_SUPPLIES end,
-		response = "Reserve your repeatable task reward before finishing, or claim earned job supplies here. "
+		preCallback = function(self, client, target)
+			if CLIENT then
+				self.response = "Choose supplies or repair credit for your earned bonus.\n"
+					.. ix.taskRewards.BonusStatus(client:GetCharacter(), target:GetDisplayName())
+			elseif canChoose(client, target) then
+				ix.taskRewards.RefreshBonuses(client:GetCharacter(), target:GetDisplayName())
+				net.Start("cotz/dialogue/task-rewards-refresh")
+				net.WriteEntity(target)
+				net.Send(client)
+			end
+		end,
+		response = "Choose task supplies or claim your five-task bonus here. "
 			.. "Existing task kits can be exchanged without an upgrade fee. "
 			.. "Make space in your inventory, then claim any remaining supplies.",
 		IsDynamic = true,
@@ -263,8 +294,10 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 		ResolveDynamicOption = function(_, client, target, data)
 			if SERVER and type(data) == "table" and canChoose(client, target) then
 				local character = client:GetCharacter()
-				if data.kind == "offer" and type(data.key) == "string" and data.key:match("^job:") then
-					ix.taskRewards.SelectOffer(character, target:GetDisplayName(), data.key, data.choice)
+				local isOffer = data.kind == "offer" and type(data.key) == "string"
+				and (data.key:match("^job:") or data.key:match("^bonus:"))
+				if isOffer then
+					ix.taskRewards.SelectOffer(character, target:GetDisplayName(), data.key, data.choice, data.label)
 				elseif data.kind == "kit" then
 					ix.taskRewards.RedeemKit(character, target:GetDisplayName(), data.item, data.choice, data.label)
 				elseif data.kind == "barter" then

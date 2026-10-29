@@ -24,16 +24,14 @@ local PROFILES = {
 local MAX_PACKAGE_ITEMS = 64
 local CHOICE_COUNT = 3
 local DIFFICULTY_REPUTATION = {medium = 250, hard = 1600}
-local JOB_EQUIPMENT_LIMITS = {2500, 7500, 15000, 30000, 50000}
+local JOB_SUPPLY_SHARE = 1
+local JOB_MAX_SUPPLY_ITEMS = 2
+local JOB_MIN_SUPPLY_BUDGET = 600
+local BONUS_INTERVAL = 5
+local CREDIT_PREMIUM = 1.3
 local JOB_SUPPLY_CASH_SHARE = 0.5
 local JOB_CASH_RATE = 0.55
 local CASH_ROUNDING_EPSILON = 0.000000001
-local JOB_MIN_FILL = 0.25
-local JOB_MAX_FILL = 0.6
-local JOB_TIER_FILL = 0.1
-local JOB_MIN_CONDITION = 30
-local JOB_MAX_CONDITION = 60
-local JOB_TIER_CONDITION = 10
 local MAX_DEPTH = 12
 local GENERATED_QUANTITIES = {
 	value_capacitors = 2.5,
@@ -160,48 +158,103 @@ local function equipmentChoices(character, npc, budget, minimum)
 	return result
 end
 
-function ix.taskRewards.BuildJobChoices(character, npc, tier, seed)
-	tier = math.Clamp(math.floor(tonumber(tier) or 1), 1, #JOB_EQUIPMENT_LIMITS)
-	local candidates = {}
-	for _, itemID in ipairs(PROFILES[npc] or PROFILES["NPC"]) do
-		if ix.item.list[itemID] and ix.progression.CanBuyItem(character, npc, itemID) then
-			candidates[#candidates + 1] = itemID
+function ix.taskRewards.SupplyCatalogue(character, npc)
+	local result, seen = {}, {}
+	local function consider(itemID)
+		local item = ix.item.list[itemID]
+		local isSupply = item and not item.isWeapon and not item.isBodyArmor
+			and (item.isAmmo or item.quantity or itemID:match("^hidestash_") or itemID:match("^attachment_"))
+		if isSupply and not seen[itemID] and ix.progression.CanBuyItem(character, npc, itemID) then
+			result[#result + 1] = itemID
+			seen[itemID] = true
 		end
 	end
-	local equipment = equipmentChoices(character, npc, JOB_EQUIPMENT_LIMITS[tier], 0)
+	for _, itemID in ipairs(PROFILES[npc] or PROFILES["NPC"]) do consider(itemID) end
+	for _, definition in pairs(ix.progression.definitions) do
+		for _, unlock in ipairs(definition.vendorUnlocks or {}) do
+			if unlock.npc == npc then consider(unlock.args[1]) end
+		end
+	end
+	table.sort(result)
+
+	return result
+end
+
+function ix.taskRewards.SupplyBudget(job, count)
+	return math.max(JOB_MIN_SUPPLY_BUDGET,
+		math.floor(ix.taskRewards.FixedMoney(job, count) * JOB_SUPPLY_SHARE))
+end
+
+function ix.taskRewards.BonusInterval()
+	return BONUS_INTERVAL
+end
+
+function ix.taskRewards.TraderBonusProgress(character, npc)
+	local state = character:GetData("taskCompletionBonus", {})
+	if state.traders then return table.Copy(state.traders[npc] or {}) end
+	local latestNPC, latestClaim = nil, 0
+	for trader, claim in pairs(state.claims or {}) do
+		if claim > latestClaim then latestNPC, latestClaim = trader, claim end
+	end
+	if npc == latestNPC then return {count = state.count or 0, budget = state.budget or 0} end
+
+	return {}
+end
+
+function ix.taskRewards.BonusStatus(character, npc)
+	local progress = ix.taskRewards.TraderBonusProgress(character, npc)
+
+	return string.format("Five-task bonus with %s: %d/%d completed\nBonus value earned: %d rubles.",
+		npc, progress.count or 0, ix.taskRewards.BonusInterval(), progress.budget or 0)
+end
+
+function ix.taskRewards.BuildJobChoices(character, npc, budget, seed)
+	local candidates = {}
+	for _, itemID in ipairs(ix.taskRewards.SupplyCatalogue(character, npc)) do
+		local unit = ix.taskRewards.UnitValue(itemID)
+		if unit > 0 and unit <= budget then candidates[#candidates + 1] = itemID end
+	end
 	local hash = 0
 	for index = 1, #seed do hash = (hash * 31 + seed:byte(index)) % 65521 end
 	local result = {}
-	local count = math.min(CHOICE_COUNT, #candidates + (#equipment > 0 and 1 or 0))
-	for index = 1, count do
-		local isEquipment = #equipment > 0 and index == count
-		local itemID = isEquipment and equipment[hash % #equipment + 1]
-			or candidates[(hash + index - 1) % #candidates + 1]
+	for index = 1, math.min(CHOICE_COUNT, #candidates) do
+		local itemID = candidates[(hash + index - 1) % #candidates + 1]
 		local item = ix.item.list[itemID]
-		local data = {}
-		local label = item.name .. " x1"
-		local roll = ((hash + index * 7919) % 101) / 100
-		if item.isWeapon or item.isBodyArmor then
-			local condition = math.min(100, math.floor(JOB_MIN_CONDITION + (tier - 1) * JOB_TIER_CONDITION
-				+ roll * (JOB_MAX_CONDITION - JOB_MIN_CONDITION)))
-			data.durability = condition
-			if item.isWeapon then data.wear = condition end
-			label = label .. " (" .. condition .. "% durability"
-				.. (item.isWeapon and ", " .. condition .. "% wear condition" or "") .. ")"
-		elseif item.quantity or item.ammoAmount then
-			local capacity = math.max(1, math.floor(average(item.quantity or item.ammoAmount, 1)))
-			local fill = math.min(1, JOB_MIN_FILL + (tier - 1) * JOB_TIER_FILL
-				+ roll * (JOB_MAX_FILL - JOB_MIN_FILL))
-			data.quantity = math.max(1, math.floor(capacity * fill))
-			label = label .. " (" .. data.quantity .. (item.isAmmo and " rounds)" or " uses)")
+		local capacity = math.max(1, math.floor(average(item.quantity or item.ammoAmount, 1)))
+		local units = math.min(capacity * JOB_MAX_SUPPLY_ITEMS,
+			math.floor(budget / ix.taskRewards.UnitValue(itemID)))
+		local rewards, labels = {}, {}
+		while units > 0 do
+			local quantity = math.min(capacity, units)
+			local data = (item.quantity or item.ammoAmount) and {quantity = quantity} or {}
+			rewards[#rewards + 1] = {item = itemID, data = data}
+			labels[#labels + 1] = item.name .. ((item.quantity or item.ammoAmount)
+				and " (" .. quantity .. (item.isAmmo and " rounds)" or " uses)") or " x1")
+			units = units - quantity
 		end
-		result[#result + 1] = {label = label, items = {{item = itemID, data = data}}}
+		result[#result + 1] = {label = table.concat(labels, " + "), items = rewards}
 	end
 
 	return result
 end
 
-function ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue)
+function ix.taskRewards.BuildBonusChoices(character, npc, budget, seed)
+	local result = {}
+	local catalogue = ix.taskRewards.SupplyCatalogue(character, npc)
+	for _, choice in ipairs(ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, true)) do
+		if choice.items[1].item ~= "bagrubles" then result[#result + 1] = choice end
+	end
+	local credit = math.floor(budget * CREDIT_PREMIUM)
+	if ix.progression.ServiceCreditCapacity
+		and ix.progression.ServiceCreditCapacity(character, "'Technut'", "repair") >= credit then
+		result[#result + 1] = {label = "Technut repair credit: " .. credit .. " rubles", items = {},
+			services = {{npc = "'Technut'", service = "repair", amount = credit}}}
+	end
+
+	return result
+end
+
+function ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, suppliesOnly)
 	local candidates = {}
 	for _, itemID in ipairs(catalogue or PROFILES[npc] or PROFILES["NPC"]) do
 		local item = ix.item.list[itemID]
@@ -234,13 +287,13 @@ function ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue)
 			or math.min(math.floor(budget / ix.taskRewards.UnitValue(itemID)), stack * MAX_PACKAGE_ITEMS)
 		local remainder = math.floor(budget - units * ix.taskRewards.UnitValue(itemID))
 		local label = item.name .. " x" .. units
-		if remainder > 0 then
+		if remainder > 0 and not suppliesOnly then
 			rewards[#rewards + 1] = {item = "bagrubles", data = {quantity = remainder}}
 			label = label .. " + " .. remainder .. " rubles"
 		end
 		result[#result + 1] = {label = label, items = rewards}
 	end
-	if #result == 0 and budget >= 1 then
+	if #result == 0 and budget >= 1 and not suppliesOnly then
 		result[1] = {label = "Supply allowance: " .. math.floor(budget) .. " rubles",
 			items = {{item = "bagrubles", data = {quantity = math.floor(budget)}}}}
 	end

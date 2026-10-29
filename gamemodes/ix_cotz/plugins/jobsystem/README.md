@@ -8,7 +8,7 @@ Jobsystem uses progression's purchase unlock checks and token-backed reward-clai
 `libs/sh_taskrewards.lua` defines contact profiles, nominal-value budgeting and visible
 packages. `libs/sv_taskrewards.lua` persists offers and transfers selected rewards into
 the existing token-backed claim queue. Dialogue's `libs/sh_taskrewards.lua` installs
-"Choose or claim task supplies" (currently hidden by `SHOW_TASK_SUPPLIES = false`), and an
+"Choose or claim task rewards", and an
 authoritative task preview. Contacts without a work topic retain the main-menu entry.
 Saved supplies keep "About work" accessible even after the active job is finished.
 That menu lists repeatable job offers. Progression tasks pay money and reputation
@@ -19,23 +19,42 @@ Medium repeatable tasks require 250 reputation; hard tasks require 1,600. Easy t
 have no reputation gate. Preview generation and acceptance both enforce the requirements,
 including when reputation changes after a preview was saved. Locked categories are hidden.
 
-The work menu shows a concrete saved offer from each configured unlocked easy/medium/hard category,
-with the exact task count, cash and one server-selected random supply in its label.
-The confirmation dialogue states both the cash and the assigned supply. Reputation amounts
-and vendor-restock details are omitted. Reopening the task preserves the supply assignment. Acceptance reserves the revealed supply without a
-player-selected index. Reputation amounts remain hidden in confirmation. Declining
-returns to the main dialogue and keeps the conversation open. Supplies can still be
-changed under "About work" after acceptance.
-Unaccepted previews stay hidden from the separate supplies menu and cannot be reserved
-through its selection endpoint.
-Each job supply choice delivers exactly one inventory item. Job supplies
-use contact profiles and job tier.
-Uses/rounds range from 25–60% of normal capacity at tier 1, increasing by 10 percentage
-points per tier, capped at normal capacity (minimum one use/round). Equipment starts at
-30–60% durability and wear condition, increasing by 10 points per tier up to tier 5.
-Unlocked provider equipment is eligible up to catalogue prices of 2,500 / 7,500 / 15,000 /
-30,000 / 50,000 rubles by tier. These settings live beside `BuildJobChoices` in
-`libs/sh_taskrewards.lua`; each amount is deterministic for its saved offer.
+The work menu shows a concrete saved offer from each unlocked difficulty, including
+requirements, cash and up to three supply packages. Players select their package when
+accepting and can change it through the rewards menu before completion. Each package
+contains one or two existing supply items, with explicit uses/rounds and no worn weapons
+or suits. A supply allowance is 100% of the task's fixed reference cash payment, with a minimum
+of 600 rubles even for easy tasks; quantities
+respect that budget and normal stack capacities. Cash value alone determines the quantity,
+up to two full stacks, regardless of the easy/medium/hard category. Quantities fill the
+first item before spilling into the second; partial stacks show their exact uses/rounds. Unspent allowance is banked toward the
+same trader's five-task bonus. A catalogue with no affordable eligible items banks the whole allowance.
+
+Every five repeatable completions for the same trader earn a bonus at that trader.
+Each trader has a separate completion counter and accumulated bonus value. Progress persists without a time limit or streak reset. Only the unused portion of each task's supply allowance contributes to the bonus;
+there is no base contribution or percentage of ordinary cash added. Higher-quality hand-ins
+can increase ordinary cash but do not inflate the bonus. Task previews explain this rule;
+the rewards menu shows progress and the accumulated value. If five tasks leave no unused
+allowance, the cycle resets without creating an empty bonus offer. Existing earned bonuses
+and previously accumulated value are preserved.
+
+An earned bonus offers visible supply packages within the same budget or Technut
+repair credit with 30% more face value. Credit appears only when the whole award fits
+within the existing 20,000 balance cap and Technut is accessible. Claim-time checks prevent
+lost credit if capacity changes. Credit is provider-bound and applies after repair discounts;
+it cannot become cash. Supplies remain available when credit is unavailable.
+Bonus packages never include cash or ruble items, including rounding remainders.
+Legacy unclaimed offers are rebuilt with the same earned budget before selection.
+Kit and barter redemption retain their existing remainder handling. Full inventories retain token-backed claims.
+
+Contact profiles and earned vendor supply unlocks determine eligible ammunition,
+consumables, stash containers and protective attachments. Bonus catalogues refresh when
+the rewards menu opens, respecting new unlocks without changing the earned budget.
+Unlocks never multiply the payment for identical work. Preview packages are saved and
+stable; already accepted jobs retain their assigned rewards. Cached unaccepted previews receive
+the increased allowance when reopened, preserving the task identity and requirements. Abandonment grants neither
+bonus progress nor payment. Finite story/progression tasks do not count toward the bonus.
+
 Delivery cash is 55% of the required hand-in value, using the higher of catalogue value
 and configured/live trader sale quotes, multiplied by the actual requested count.
 Stackable requirements are priced per consumed use; ammunition boxes without `quantity`
@@ -43,7 +62,7 @@ count as whole inventory items. Actual specimen quality/value is recorded before
 consumption. Non-delivery jobs pay 55% of their configured midpoint cash plus half the
 supply expected value. Both components are scaled together.
 A base Swamp Controller hand (catalogue value 6,700) pays 3,685 rubles from its repeatable
-job, plus its single supply item; progression credit for that hand is 4,355 rubles.
+job, plus its chosen supply package; progression credit for that hand is 4,355 rubles.
 `JOB_CASH_RATE` configures repeatable payouts in `libs/sh_taskrewards.lua`.
 Progression sets `PROGRESSION_CASH_RATE` separately in `../progression/libs/sh_rewards.lua`. Money is paid once on job completion, not during item delivery.
 A qualifying completion still earns its existing 20% personal vendor restock exactly once.
@@ -80,3 +99,9 @@ Additional checks:
 luatex --luaonly tests/task_rewards_spec.lua
 /tmp/cotz-balance-venv/bin/python -m unittest discover -s docs/balance/tests -p test_task_rewards.py -v
 ```
+
+Legacy global partial progress is preserved at the most recently credited trader, using
+the greatest saved completion serial. Its earlier trader attribution cannot be recovered.
+Existing earned bonus offers retain their original trader and value. New progress is
+stored per trader under `taskCompletionBonus.traders`; `BonusStatus` calls the displayed
+amount "Bonus value earned" rather than "Banked" to distinguish it from spendable cash.

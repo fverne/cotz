@@ -1,5 +1,6 @@
 local PANEL = {}
 local gradient = ix.util.GetMaterial("vgui/gradient-d")
+local OPTION_INPUT_DELAY = 0.6
 
 function PANEL:Init()
 	self.loading = true
@@ -7,6 +8,7 @@ function PANEL:Init()
 	self.ANIM_SPEED = 0
 
 	gui.EnableScreenClicker(true)
+	self:MakePopup()
 
 	self:Dock(BOTTOM)
 	self:DockMargin(ScrW() * 0.25, 0, ScrW() * 0.25, ScrH() * 0.05)
@@ -27,6 +29,8 @@ function PANEL:Init()
 end
 
 function PANEL:Think()
+	if self.exiting then return end
+
 	if self.loading then
 		if self.target and self.treeID then
 			self.tree = ix.dialogue.list[self.treeID].tree
@@ -37,6 +41,50 @@ function PANEL:Think()
 	end
 
 	gui.EnableScreenClicker(true)
+	if self.optionInputDeadline and RealTime() >= self.optionInputDeadline then
+		local optionIndex = tonumber(self.optionInput)
+		self.optionInput = nil
+		self.optionInputDeadline = nil
+		if self:HasFocus() then
+			self:SelectOption(optionIndex)
+		end
+	end
+end
+
+function PANEL:SelectOption(optionIndex)
+	local button = self.buttonList and self.buttonList[optionIndex]
+	if self.exiting or not IsValid(button) then return end
+
+	button:DoClick()
+end
+
+function PANEL:OnKeyCodePressed(keyCode)
+	if self.loading or self.exiting or not self.buttonList then return end
+
+	local digit
+	if keyCode >= KEY_0 and keyCode <= KEY_9 then
+		digit = keyCode - KEY_0
+	elseif keyCode >= KEY_PAD_0 and keyCode <= KEY_PAD_9 then
+		digit = keyCode - KEY_PAD_0
+	else
+		return
+	end
+
+	local optionInput = (self.optionInput or "") .. digit
+	local optionIndex = tonumber(optionInput)
+	self.optionInput = nil
+	self.optionInputDeadline = nil
+	if optionIndex < 1 or optionIndex > #self.buttonList then return end
+
+	-- Wait only when another visible option starts with the same digits (e.g. 1 and 10).
+	if optionIndex * 10 <= #self.buttonList then
+		self.optionInput = optionInput
+		self.optionInputDeadline = RealTime() + OPTION_INPUT_DELAY
+
+		return
+	end
+
+	self:SelectOption(optionIndex)
 end
 
 function PANEL:targetName()
@@ -48,10 +96,15 @@ function PANEL:targetName()
 end
 
 function PANEL:startTopic(topicID, dynamicData)
+	if self.exiting then return end
+
 	self.currentTopicID = topicID
 	topic = self.tree[topicID]
 
 	self.options:Clear()
+	self.buttonList = {}
+	self.optionInput = nil
+	self.optionInputDeadline = nil
 
 	-- Run pre-callback, if there is one
 	if isfunction(topic.preCallback) then
@@ -85,6 +138,8 @@ function PANEL:startTopic(topicID, dynamicData)
 end
 
 function PANEL:dialogue(name, message, instant, color, topicID)
+	if self.exiting then return end
+
 	self.nametitle = self.chatbox:Add("DLabel")
 	self.nametitle:Dock(TOP)
 	self.nametitle:DockMargin(0, 0, 0, 4)
@@ -195,13 +250,14 @@ end
 
 function PANEL:prepareOptions(options)
 	self.buttonList = {}
-	for k, topicID in ipairs(ix.dialogue.OrderOptions(options)) do
+	for _, topicID in ipairs(ix.dialogue.OrderOptions(options)) do
 		local topic = self.tree[topicID]
 		if topic.statement ~= "" and topic:ShouldAdd(LocalPlayer(), self.target) then
+			local k = #self.buttonList + 1
 			self.buttonList[k] = self.options:Add("DLabel")
 			self.buttonList[k]:Dock(TOP)
 			self.buttonList[k]:DockMargin(4, 0, 4, 4)
-			self.buttonList[k]:SetText(topic.statement)
+			self.buttonList[k]:SetText(k .. ". " .. topic.statement)
 			self.buttonList[k]:SetTextColor(Color(20, 20, 20, 255))
 			self.buttonList[k]:SetFont("ixSmallFont")
 			self.buttonList[k]:SetMouseInputEnabled(true)
@@ -237,7 +293,7 @@ function PANEL:prepareDynamicOptions(dynamicOptions, normalOptions)
 			self.buttonList[#self.buttonList + 1] = label
 			label:Dock(TOP)
 			label:DockMargin(4, 0, 4, 4)
-			label:SetText(statement)
+			label:SetText(#self.buttonList .. ". " .. statement)
 			label:SetTextColor(Color(20, 20, 20, 255))
 			label:SetFont("ixSmallFont")
 			label:SetWrap(true)
@@ -280,19 +336,28 @@ function PANEL:ResolveDynamicOption(topicID, client, target, dynamicData)
 end
 
 function PANEL:exit()
+	if self.exiting then return end
+
+	self.exiting = true
+	self.optionInput = nil
+	self.optionInputDeadline = nil
+	self:SetKeyboardInputEnabled(false)
+	self:SetMouseInputEnabled(false)
+
 	if timer.Exists("typewriter") then
 		timer.Remove("typewriter")
 	end
 
-	self:AlphaTo(0, self.ANIM_SPEED, 1, function()
-		gui.EnableScreenClicker(false)
-		self:Remove()
-
-		net.Start("ixDialogueFreeze")
-		net.WriteBool(false)
-		net.SendToServer()
-
+	gui.EnableScreenClicker(false)
+	net.Start("ixDialogueFreeze")
+	net.WriteBool(false)
+	net.SendToServer()
+	if ix.gui.dialogue == self then
 		ix.gui.dialogue = nil
+	end
+
+	self:AlphaTo(0, self.ANIM_SPEED, 0, function()
+		self:Remove()
 	end)
 end
 
@@ -309,6 +374,22 @@ function PANEL:Paint(w, h)
 end
 
 vgui.Register("ixDialogue", PANEL, "EditablePanel")
+
+hook.Add("OnPauseMenuShow", "cotz/dialogue/escape-exit", function()
+	local vendor = ix.gui.vendor
+	if IsValid(vendor) and vendor:IsVisible() then
+		vendor:Close()
+
+		return false
+	end
+
+	local panel = ix.gui.dialogue
+	if not IsValid(panel) or panel.exiting or not panel:HasFocus() then return end
+
+	panel:exit()
+
+	return false
+end)
 
 net.Receive("ixDialogue", function()
 	local target = net.ReadEntity()

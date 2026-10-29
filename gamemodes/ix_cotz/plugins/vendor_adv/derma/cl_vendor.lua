@@ -181,6 +181,14 @@ function PANEL:OnRemove()
 	if (IsValid(ix.gui.vendorEditor)) then
 		ix.gui.vendorEditor:Remove()
 	end
+
+	if ix.gui.vendor == self then
+		ix.gui.vendor = nil
+		local dialogue = ix.gui.dialogue
+		if IsValid(dialogue) and not dialogue.exiting then
+			dialogue:RequestFocus()
+		end
+	end
 end
 
 function PANEL:Think()

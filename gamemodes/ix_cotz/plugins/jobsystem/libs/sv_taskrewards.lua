@@ -4,6 +4,7 @@ local OFFER_KEY = "taskRewardOffers"
 local CLAIM_LINE = "taskRewardClaims"
 local MAX_OFFERS = 512
 local MAX_PENDING_REWARDS = 1024
+local BONUS_KEY = "taskCompletionBonus"
 
 local function offersFor(character)
 	return table.Copy(character:GetData(OFFER_KEY, {}) or {})
@@ -20,9 +21,9 @@ function ix.taskRewards.CreateOffer(character, key, npc, budget, label, jobTier)
 	local count = 0
 	for _ in pairs(offers) do count = count + 1 end
 	if count >= MAX_OFFERS and key:match("^job:") then return end
-	local choices = jobTier and ix.taskRewards.BuildJobChoices(character, npc, jobTier, key)
+	local choices = jobTier and ix.taskRewards.BuildJobChoices(character, npc, budget, key)
 		or ix.taskRewards.BuildChoices(character, npc, budget, key)
-	if #choices == 0 then return end
+	if #choices == 0 then choices = {{label = "No supplies available", items = {}}} end
 	local offer = {npc = npc, label = label, choices = choices}
 	offers[key] = offer
 	saveOffers(character, offers)
@@ -34,11 +35,29 @@ local function paySelected(character, key, offers)
 	local offer = offers[key]
 	if not offer or not offer.earned or not offer.selected then return false end
 	local choice = offer.choices[offer.selected]
+	if key:match("^bonus:") then
+		if choice.money then return false end
+		for _, reward in ipairs(choice.items) do
+			if reward.item == "bagrubles" then return false end
+		end
+	end
+	for _, service in ipairs(choice.services or {}) do
+		if ix.progression.ServiceCreditCapacity(character, service.npc, service.service) < service.amount then
+			character:GetPlayer():Notify("Repair credit is full. Choose another bonus reward or spend credit first.")
+
+			return false
+		end
+	end
 	local record = ix.progression.GetCharacterProgression(character)
 	local claimLine = CLAIM_LINE
 	local line = record.lines[claimLine] or {}
 	line.pendingRewards = line.pendingRewards or {}
 	if #line.pendingRewards + #choice.items > MAX_PENDING_REWARDS then return false end
+	for _, service in ipairs(choice.services or {}) do
+		if not ix.progression.AddServiceCredit(character, service.npc, service.service, service.amount) then
+			return false
+		end
+	end
 	for _, reward in ipairs(choice.items) do
 		line.pendingRewards[#line.pendingRewards + 1] =
 			ix.progression.PrepareReward(character, claimLine, line, table.Copy(reward))
@@ -64,15 +83,28 @@ function ix.taskRewards.EarnOffer(character, key)
 	return true
 end
 
-function ix.taskRewards.SelectOffer(character, npc, key, index)
+function ix.taskRewards.SelectOffer(character, npc, key, index, label)
 	local offers = offersFor(character)
 	local offer = offers[key]
+	if offer and key:match("^bonus:") and offer.npc == npc then
+		offer.choices = ix.taskRewards.BuildBonusChoices(character, npc, offer.budget, key)
+		offer.selected = nil
+		saveOffers(character, offers)
+	end
 	if not ix.taskRewards.CanSelectOffer(character, npc, key, offer)
 		or type(index) ~= "number" or index % 1 ~= 0
-		or not offer.choices[index] then
+		or not offer.choices[index]
+		or (label ~= nil and offer.choices[index].label ~= label) then
 		return false
 	end
 	offer.selected = index
+	if key:match("^job:") and not offer.earned then
+		local jobs = character:GetJobs()
+		if jobs[npc] and jobs[npc].rewardKey == key then
+			jobs[npc].supplyChoice = index
+			character:SetJobs(jobs)
+		end
+	end
 	saveOffers(character, offers)
 	character:Save()
 	paySelected(character, key, offers)
@@ -86,15 +118,72 @@ function ix.taskRewards.PrepareJob(character, npc, job)
 	local serial = character:GetData("jobClaimSerial", 0) + 1
 	character:SetData("jobClaimSerial", serial)
 	local key = "job:" .. serial
-	local offer = ix.taskRewards.CreateOffer(character, key, npc, 0,
-		ix.jobs.getFormattedName(job), definition.tier or 1)
+	local budget = ix.taskRewards.SupplyBudget(definition, job.numberRec)
+	local tier = definition.tier or 1
+	local offer = ix.taskRewards.CreateOffer(character, key, npc, budget,
+		ix.jobs.getFormattedName(job), tier)
 	if not offer then return false end
 	job.progressionClaim = serial
 	job.rewardKey = key
+	job.supplyBudget = budget
 	job.moneyReward = ix.taskRewards.FixedMoney(definition, job.numberRec)
 	job.rewardChoices = table.Copy(offer.choices)
 
 	return key
+end
+
+function ix.taskRewards.RecordCompletion(character, npc, job)
+	local state = table.Copy(character:GetData(BONUS_KEY, {}) or {})
+	state.claims = state.claims or {}
+	if not state.traders then
+		state.traders = {}
+		for trader in pairs(state.claims) do
+			state.traders[trader] = ix.taskRewards.TraderBonusProgress(character, trader)
+		end
+		state.count, state.budget = nil, nil
+	end
+	local progress = state.traders[npc] or {}
+	state.traders[npc] = progress
+	if (state.claims[npc] or 0) >= job.progressionClaim then return end
+	state.claims[npc] = job.progressionClaim
+	local unspent = 0
+	local offer = offersFor(character)[job.rewardKey]
+	if job.supplyBudget and offer and offer.selected then
+		local value = 0
+		for _, reward in ipairs(offer.choices[offer.selected].items) do
+			value = value + ix.taskRewards.ExpectedValue(reward.item, reward.data)
+		end
+		unspent = math.max(0, math.floor(job.supplyBudget - value))
+	end
+	progress.count = (progress.count or 0) + 1
+	progress.budget = (progress.budget or 0) + unspent
+	if progress.count >= ix.taskRewards.BonusInterval() then
+		if progress.budget > 0 then
+			local key = "bonus:" .. job.progressionClaim
+			local offers = offersFor(character)
+			offers[key] = {npc = npc, label = "Five-task bonus", earned = true, budget = progress.budget,
+				choices = ix.taskRewards.BuildBonusChoices(character, npc, progress.budget, key)}
+			saveOffers(character, offers)
+			character:GetPlayer():Notify("Five tasks completed for " .. npc
+				.. "! Choose your bonus under About work / Task rewards.")
+		else
+			character:GetPlayer():Notify("Five tasks completed for " .. npc
+				.. ". No unused supply allowance accumulated this cycle.")
+		end
+		progress.count, progress.budget = 0, 0
+	end
+	character:SetData(BONUS_KEY, state)
+end
+
+function ix.taskRewards.RefreshBonuses(character, npc)
+	local offers = offersFor(character)
+	for key, offer in pairs(offers) do
+		if key:match("^bonus:") and offer.npc == npc then
+			offer.selected = nil
+			offer.choices = ix.taskRewards.BuildBonusChoices(character, npc, offer.budget, key)
+		end
+	end
+	saveOffers(character, offers)
 end
 
 function ix.taskRewards.DeliverJobItem(client, npc)
@@ -196,12 +285,34 @@ function ix.taskRewards.PreviewJob(character, npc, difficulty, categories)
 	local previews = table.Copy(character:GetData("taskJobPreviews", {}) or {})
 	previews[npc] = previews[npc] or {}
 	local preview = previews[npc][difficulty]
-	if preview then return preview end
+	if preview then
+		local definition = ix.jobs.list[preview.identifier]
+		local budget = ix.taskRewards.SupplyBudget(definition, preview.numberRec)
+		local offers = offersFor(character)
+		local offer = offers[preview.rewardKey]
+		local needsUpdate = budget > (preview.supplyBudget or 0) or preview.supplyDifficulty ~= nil
+		if needsUpdate and offer and not offer.earned then
+			local choices = ix.taskRewards.BuildJobChoices(character, npc, budget, preview.rewardKey)
+			if #choices > 0 then
+				offer.choices = choices
+				preview.supplyBudget = budget
+				preview.supplyDifficulty = nil
+				preview.difficulty = difficulty
+				preview.rewardChoices = table.Copy(choices)
+				preview.supplyChoice = math.min(preview.supplyChoice or 1, #choices)
+				saveOffers(character, offers)
+				character:SetData("taskJobPreviews", previews)
+				character:Save()
+			end
+		end
+
+		return preview
+	end
 	local id = ix.jobs.getJobFromCategory(categories)
 	local definition = ix.jobs.list[id]
 	local count = definition.numberRec
 	if type(count) == "table" then count = math.random(count[1], count[2]) end
-	preview = {identifier = id, numberRec = count}
+	preview = {identifier = id, numberRec = count, difficulty = difficulty}
 	if not ix.taskRewards.PrepareJob(character, npc, preview) then return end
 	preview.supplyChoice = math.random(#preview.rewardChoices)
 	previews[npc][difficulty] = preview
@@ -218,7 +329,8 @@ function ix.taskRewards.AcceptJob(client, npc, difficulty, choice)
 	local preview = previews[npc] and previews[npc][difficulty]
 	if not preview or character:GetJobs()[npc] then return false end
 	local offer = (character:GetData("taskRewardOffers", {}) or {})[preview.rewardKey]
-	if choice ~= nil and choice ~= preview.supplyChoice then return false end
+	choice = choice or preview.supplyChoice
+	if not offer or not offer.choices[choice] then return false end
 	if offer then
 		offer.selected = nil
 		local offers = offersFor(character)
@@ -226,8 +338,8 @@ function ix.taskRewards.AcceptJob(client, npc, difficulty, choice)
 		saveOffers(character, offers)
 	end
 	if not client:ixJobAdd(preview.identifier, npc, preview) then return false end
-	if preview.supplyChoice then
-		ix.taskRewards.SelectOffer(character, npc, preview.rewardKey, preview.supplyChoice)
+	if choice then
+		ix.taskRewards.SelectOffer(character, npc, preview.rewardKey, choice)
 	end
 	-- Other difficulty previews are no longer claimable entitlements.
 	for key, other in pairs(previews[npc]) do

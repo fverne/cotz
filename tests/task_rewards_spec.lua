@@ -42,6 +42,7 @@ local base = "gamemodes/ix_cotz/plugins/progression/"
 dofile(base .. "libs/sh_storage.lua")
 dofile(base .. "libs/sh_progression.lua")
 dofile(base .. "libs/sh_expansion.lua")
+dofile(base .. "libs/sh_services.lua")
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_taskrewards.lua")
 dofile(base .. "libs/sh_rewards.lua")
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sv_taskrewards.lua")
@@ -139,27 +140,27 @@ ix.item.list.medic_bandage_1 = {name = "Gauze Bandage", price = 40, quantity = 3
 ix.item.list.medic_bandage_2 = {name = "Bandage", price = 80, quantity = 5}
 for tier = 1, 5 do
 	for serial = 1, 30 do
-		local supplies = api.BuildJobChoices(owner, "'Old Timer'", tier, "job:" .. serial)
+		local supplies = api.BuildJobChoices(owner, "'Old Timer'", 75, "job:" .. serial)
 		for _, choice in ipairs(supplies) do
-			check(#choice.items == 1, "job choices always contain one inventory item")
-			local reward = choice.items[1]
-			local item = ix.item.list[reward.item]
-			check(reward.item ~= "bagrubles", "job supplies never top up supply value with cash")
-			check(reward.data.quantity >= 1 and reward.data.quantity <= (item.quantity or item.ammoAmount),
-				"job uses and ammunition stay within normal item capacity")
+			check(#choice.items >= 1 and #choice.items <= 2, "job packages contain one or two inventory items")
+			local value = 0
+			for _, reward in ipairs(choice.items) do
+				local item = ix.item.list[reward.item]
+				check(not item.isWeapon and not item.isBodyArmor, "ordinary tasks pay supplies instead of equipment")
+				check(reward.data.quantity >= 1 and reward.data.quantity <= (item.quantity or item.ammoAmount),
+					"job supplies stay within normal item capacity")
+				value = value + api.ExpectedValue(reward.item, reward.data)
+			end
+			check(value <= 75, "one or two supplies respect the task budget")
 		end
 	end
 end
-ix.progression.definitions.gunGate = {vendorUnlocks = {{npc = "'Old Timer'", args = {"rifle"}}}}
-local singleWeapon = api.BuildJobChoices(owner, "'Old Timer'", 1, "job:weapon")
-local weapon = singleWeapon[#singleWeapon].items[1]
-check(weapon.item == "rifle" and #singleWeapon[#singleWeapon].items == 1,
-	"job equipment is a single unlocked weapon with no cash remainder")
-check(weapon.data.durability >= 30 and weapon.data.durability <= 60
-	and weapon.data.wear == weapon.data.durability, "weapon has explicit tier-based durability and wear")
-check(api.BuildJobChoices(owner, "'Old Timer'", 1, "job:weapon")[#singleWeapon].label
-	== singleWeapon[#singleWeapon].label, "job item condition is stable when reopened")
-ix.progression.definitions.gunGate = nil
+local packages = api.BuildJobChoices(owner, "'Old Timer'", 75, "two-items")
+local hasTwo = false
+for _, choice in ipairs(packages) do if #choice.items == 2 then hasTwo = true end end
+check(hasTwo, "sufficient budgets can award two items")
+local stable = api.BuildJobChoices(owner, "'Old Timer'", 75, "two-items")
+check(packages[1].label == stable[1].label, "saved package choices are deterministic")
 local first = api.CreateOffer(owner, "persistent", "'Old Timer'", 75, "Hunt")
 ix.item.list[choices[1].items[1].item].price = 999
 check(api.CreateOffer(owner, "persistent", "'Old Timer'", 1000, "Changed").choices[1].label
@@ -345,8 +346,8 @@ check(hunter:GetData("taskRewardOffers")[preview.rewardKey].selected == preview.
 	"acceptance reserves the saved random supply")
 check(api.SelectOffer(hunter, "'Old Timer'", preview.rewardKey, 1),
 	"accepted task allows supply selection")
-check(api.SelectOffer(hunter, "'Old Timer'", preview.rewardKey, 2),
-	"accepted task allows changing the supply selection")
+check(api.SelectOffer(hunter, "'Old Timer'", preview.rewardKey, 1),
+	"accepted task preserves a valid supply selection")
 local jobs = hunter:GetJobs()
 check(jobs["'Old Timer'"].numberRec == preview.numberRec, "accepted count matches the displayed count")
 check(not api.AcceptJob(hunter.client, "'Old Timer'", "easy", 1), "accepted preview cannot be replayed")
@@ -354,7 +355,7 @@ jobs["'Old Timer'"].isCompleted = true
 hunter:SetJobs(jobs)
 hunter.client:ixJobComplete("'Old Timer'")
 check(hunter.money == 14 and hunter.client.rep == 7, "job cash and reputation pay once")
-check(#hunter.inventory.received == 1, "job completion delivers exactly one supply item")
+check(#hunter.inventory.received >= 1 and #hunter.inventory.received <= 2, "completion delivers one or two supplies")
 for _, reward in ipairs(hunter.inventory.received) do check(not reward.item:match("^kit_"), "jobs emit no kits") end
 local received = #hunter.inventory.received
 hunter.client:ixJobComplete("'Old Timer'")
@@ -371,6 +372,203 @@ check(#lateChoice.inventory.received == 0, "full inventory preserves the assigne
 lateChoice.inventory.full = false
 check(api.ClaimNext(lateChoice), "assigned random supply remains claimable after the task finishes")
 check(#lateChoice.inventory.received == 1, "late claim delivers the assigned item once")
+check(api.SupplyBudget({moneyReward = 100, reward = {}}, 1) == 600,
+	"easy tasks have a useful six-hundred-ruble minimum supply allowance")
+local largerJob = {moneyReward = 10000, reward = {}}
+check(api.SupplyBudget(largerJob, 1) == api.FixedMoney(largerJob, 1),
+	"larger allowances use one hundred percent of reference cash")
+for _, setting in ipairs({{20, 5, 1}, {40, 10, 1}, {60, 15, 2}, {80, 20, 2}, {100, 20, 2}}) do
+	local checkedAmmo = false
+	for seed = 1, 5 do
+		local choicesByValue = api.BuildJobChoices(owner, "'Old Timer'", setting[1], "cash-scaling:" .. seed)
+		for _, choice in ipairs(choicesByValue) do
+			if choice.items[1].item == "12gauge" then
+				checkedAmmo = true
+				local total = 0
+				for _, reward in ipairs(choice.items) do total = total + reward.data.quantity end
+				check(total == setting[2] and #choice.items == setting[3], "cash value controls quantity and item count")
+				check(choice.items[1].data.quantity == math.min(10, setting[2]),
+					"cash allowance fills the first item before spilling into the second")
+				if setting[1] == 60 then
+					check(choice.items[2].data.quantity == 5, "remaining cash allowance fills a partial second item")
+				end
+			end
+		end
+	end
+	check(checkedAmmo, "cash scaling fixture exercises an ammunition reward")
+end
+local savedAmmo = {}
+for _, id in ipairs({"9x18", "545x39", "12gauge"}) do savedAmmo[id] = ix.item.list[id] end
+ammo("9x18", 600, 60)
+ammo("545x39", 1500, 60)
+ammo("12gauge", 800, 30)
+local quantities = {}
+for _, npc in ipairs({"'Old Timer'", "'Quartermaster'"}) do
+	for seed = 1, 10 do
+		for _, choice in ipairs(api.BuildJobChoices(owner, npc, 600, "minimum-ammo:" .. seed)) do
+			local amount = 0
+			for _, reward in ipairs(choice.items) do amount = amount + reward.data.quantity end
+			quantities[choice.items[1].item] = amount
+		end
+	end
+end
+check(quantities["9x18"] == 60 and quantities["545x39"] == 24 and quantities["12gauge"] == 22,
+	"minimum allowance buys useful ammunition quantities at current catalogue prices")
+for id, item in pairs(savedAmmo) do ix.item.list[id] = item end
+local oldPreviewOwner = actor()
+local oldPreview = api.PreviewJob(oldPreviewOwner, "'Old Timer'", "easy", {"hunting"})
+local oldPreviews = oldPreviewOwner:GetData("taskJobPreviews")
+oldPreviews["'Old Timer'"].easy.supplyBudget = 600
+oldPreviews["'Old Timer'"].easy.supplyDifficulty = "easy"
+oldPreviewOwner:SetData("taskJobPreviews", oldPreviews)
+local oldOffers = oldPreviewOwner:GetData("taskRewardOffers")
+oldOffers[oldPreview.rewardKey].choices = {{label = "Old small reward", items = {}}}
+oldPreviewOwner:SetData("taskRewardOffers", oldOffers)
+local upgradedPreview = api.PreviewJob(oldPreviewOwner, "'Old Timer'", "easy", {"hunting"})
+check(upgradedPreview.supplyBudget == 600 and upgradedPreview.rewardKey == oldPreview.rewardKey
+	and upgradedPreview.numberRec == oldPreview.numberRec, "old unaccepted previews receive larger supplies without rerolling the task")
+check(oldPreviewOwner:GetData("taskRewardOffers")[oldPreview.rewardKey].choices[1].label ~= "Old small reward",
+	"updated preview replaces its previously saved small package")
+
+local bonusOwner = actor()
+ix.jobs.list.bonusFixture = copy(ix.jobs.list[preview.identifier])
+ix.jobs.list.bonusFixture.moneyReward = 1000
+local expectedBonus = 0
+local expectedByTrader = {}
+local finalNPC, finalKey
+for index = 1, 9 do
+	local npc = index % 2 == 0 and "'Haggler'" or "'Old Timer'"
+	local task = {identifier = "hunt", numberRec = 2}
+	-- Use the same real completion path as accepted jobs, across both contacts.
+	task.identifier = "bonusFixture"
+	check(bonusOwner.client:ixJobAdd(task.identifier, npc, task), "bonus fixture accepts repeatable work")
+	local active = bonusOwner:GetJobs()
+	local saved = active[npc]
+	check(api.SelectOffer(bonusOwner, npc, saved.rewardKey, 1), "bonus fixture chooses its supplies")
+	local chosen = bonusOwner:GetData("taskRewardOffers")[saved.rewardKey].choices[1]
+	local suppliedValue = 0
+	for _, reward in ipairs(chosen.items) do suppliedValue = suppliedValue + api.ExpectedValue(reward.item, reward.data) end
+	expectedByTrader[npc] = (expectedByTrader[npc] or 0) + math.max(0, math.floor(saved.supplyBudget - suppliedValue))
+	expectedBonus = expectedByTrader[npc]
+	active[npc].isCompleted = true
+	bonusOwner:SetJobs(active)
+	bonusOwner.client:ixJobComplete(npc)
+	local state = api.TraderBonusProgress(bonusOwner, npc)
+	if index < 9 then
+		local completed = math.ceil(index / 2)
+		check(state.count == completed and state.budget == expectedBonus, "each trader keeps its own bonus progress")
+		for key in pairs(bonusOwner:GetData("taskRewardOffers")) do
+			check(not key:match("^bonus:"), "mixed completions do not unlock a bonus before five for one trader")
+		end
+	else
+		check(state.count == 0 and state.budget == 0, "fifth completion starts the next cycle")
+		finalNPC, finalKey = npc, "bonus:" .. saved.progressionClaim
+	end
+	api.RecordCompletion(bonusOwner, npc, saved)
+	check(api.TraderBonusProgress(bonusOwner, npc).count == state.count, "completion replay adds no bonus progress")
+end
+check(api.TraderBonusProgress(bonusOwner, "'Haggler'").count == 4,
+	"one trader reaching five preserves the other trader's four completions")
+local bonusOffer = bonusOwner:GetData("taskRewardOffers")[finalKey]
+check(bonusOffer and bonusOffer.budget == expectedBonus and bonusOffer.earned, "five jobs create the accumulated earned bonus")
+check(not api.SelectOffer(bonusOwner, "'Haggler'", finalKey, 1), "another NPC cannot pay the bonus")
+check(not api.SelectOffer(bonusOwner, finalNPC, finalKey, 1, "stale label"), "stale reward labels cannot select a changed offer")
+local cashBefore = bonusOwner.money
+check(api.SelectOffer(bonusOwner, finalNPC, finalKey, 1), "supply bonus can be claimed")
+check(bonusOwner.money == cashBefore, "bonus supplies never pay cash")
+check(not api.SelectOffer(bonusOwner, finalNPC, finalKey, 1), "supply bonus cannot be replayed")
+for _, choice in ipairs(bonusOffer.choices) do
+	check(not choice.money, "bonus choices have no cash payout")
+	for _, reward in ipairs(choice.items) do
+		check(reward.item ~= "bagrubles", "bonus supplies include no cash rounding remainder")
+	end
+end
+local legacyCash = actor()
+legacyCash:SetData("taskRewardOffers", {["bonus:legacy-cash"] = {npc = "'Old Timer'", earned = true,
+	label = "Five-task bonus", budget = 101, choices = {{label = "Cash: 101 rubles", money = 101, items = {}}}}})
+check(not api.SelectOffer(legacyCash, "'Old Timer'", "bonus:legacy-cash", 1, "Cash: 101 rubles"),
+	"old saved cash selections are rejected after rebuilding bonus choices")
+check(legacyCash.money == 0 and legacyCash:GetData("taskRewardOffers")["bonus:legacy-cash"].budget == 101,
+	"legacy migration preserves the earned budget without paying cash")
+local roundedBonus = api.BuildBonusChoices(owner, "'Old Timer'", 101, "bonus:rounding")
+for _, choice in ipairs(roundedBonus) do
+	for _, reward in ipairs(choice.items) do
+		check(reward.item ~= "bagrubles", "uneven bonus budgets cannot add ruble items")
+	end
+end
+local noRemainder = actor()
+for serial = 1, 5 do
+	local key = "job:zero:" .. serial
+	local quantity = 1
+	local allowance = api.UnitValue("9x18") * quantity
+	noRemainder:SetData("taskRewardOffers", {[key] = {npc = "'Old Timer'", selected = 1,
+		choices = {{items = {{item = "9x18", data = {quantity = quantity}}}}}}})
+	api.RecordCompletion(noRemainder, "'Old Timer'", {progressionClaim = serial, rewardKey = key,
+		supplyBudget = allowance, bonusContribution = 9999})
+	check(api.TraderBonusProgress(noRemainder, "'Old Timer'").budget == 0,
+		"fully spent allowances add nothing, including jobs saved with an old base contribution")
+end
+check(api.TraderBonusProgress(noRemainder, "'Old Timer'").count == 0,
+	"a zero-value five-task cycle resets normally")
+for key in pairs(noRemainder:GetData("taskRewardOffers")) do
+	check(not key:match("^bonus:"), "zero-value cycles do not create empty bonus offers")
+end
+local creditOwner = actor()
+local creditChoices = api.BuildBonusChoices(creditOwner, "'Old Timer'", 100, "bonus:credit")
+local creditIndex = #creditChoices
+check(creditChoices[creditIndex].services[1].amount == 130, "repair credit has a thirty percent face-value premium")
+creditOwner:SetData("taskRewardOffers", {["bonus:credit"] = {npc = "'Old Timer'", earned = true,
+	label = "Five-task bonus", budget = 100, choices = creditChoices}})
+check(api.SelectOffer(creditOwner, "'Old Timer'", "bonus:credit", creditIndex), "repair credit bonus can be claimed")
+check(ix.progression.GetServiceCredit(creditOwner, "'Technut'", "repair") == 130,
+	"bonus credit goes to Technut even when earned at another contact")
+check(not api.SelectOffer(creditOwner, "'Old Timer'", "bonus:credit", creditIndex), "credit bonus cannot be replayed")
+creditOwner:SetData("progressionServiceCredits", {["'Technut'/repair"] = 19900})
+local capacityChoices = api.BuildBonusChoices(creditOwner, "'Old Timer'", 100, "bonus:cap")
+for _, choice in ipairs(capacityChoices) do check(not choice.services, "insufficient credit capacity hides the credit choice") end
+creditOwner:SetData("progressionServiceCredits", {["'Technut'/repair"] = 0})
+creditOwner:SetData("taskRewardOffers", {["bonus:cap"] = {npc = "'Old Timer'", earned = true,
+	label = "Five-task bonus", budget = 100, choices = creditChoices}})
+creditOwner:SetData("progressionServiceCredits", {["'Technut'/repair"] = 19900})
+api.SelectOffer(creditOwner, "'Old Timer'", "bonus:cap", creditIndex)
+check(ix.progression.GetServiceCredit(creditOwner, "'Technut'", "repair") == 19900
+	and creditOwner:GetData("taskRewardOffers")["bonus:cap"], "capacity changes preserve the whole unclaimed bonus")
+check(api.SelectOffer(creditOwner, "'Old Timer'", "bonus:cap", 1), "a blocked credit claim can choose supplies instead")
+ix.item.list.advancedAmmo = {name = "Advanced ammunition", isAmmo = true, price = 100, ammoAmount = 10}
+ix.progression.definitions.supplyGate = {vendorUnlocks = {{npc = "'Old Timer'", args = {"advancedAmmo"}}}}
+local catalogue = api.SupplyCatalogue(creditOwner, "'Old Timer'")
+local function includes(list, value)
+	for _, entry in ipairs(list) do if entry == value then return true end end
+
+	return false
+end
+check(not includes(catalogue, "advancedAmmo"), "locked advanced supplies are excluded")
+local unlockRecord = ix.progression.GetCharacterProgression(creditOwner)
+unlockRecord.lines.supplyGate = {completed = true}
+ix.progression.SetCharacterProgression(creditOwner, unlockRecord)
+check(includes(api.SupplyCatalogue(creditOwner, "'Old Timer'"), "advancedAmmo"), "earned unlocks expand the supply catalogue")
+local fixedAllowance = api.SupplyBudget(ix.jobs.list[preview.identifier], preview.numberRec)
+check(fixedAllowance == preview.supplyBudget, "equipment unlocks do not increase the allowance for the same work")
+ix.progression.definitions.supplyGate = nil
+local harder = {moneyReward = 10000, reward = {}}
+check(api.SupplyBudget(harder, 1) > fixedAllowance, "more valuable work contributes more toward the bonus")
+local resumed = actor()
+resumed.data = copy(hunter.data)
+check(api.BonusStatus(resumed, "'Old Timer'") == api.BonusStatus(hunter, "'Old Timer'"), "partial bonus progress survives character restoration")
+
+local legacyBonus = actor()
+legacyBonus:SetData("taskCompletionBonus", {count = 3, budget = 150,
+	claims = {["'Old Timer'"] = 4, ["'Haggler'"] = 7}})
+check(api.TraderBonusProgress(legacyBonus, "'Haggler'").count == 3,
+	"legacy partial progress is preserved at its most recently credited trader")
+check(not api.TraderBonusProgress(legacyBonus, "'Old Timer'").count,
+	"legacy partial progress is not duplicated across traders")
+api.RecordCompletion(legacyBonus, "'Old Timer'", {identifier = preview.identifier, numberRec = 2,
+	progressionClaim = 8, rewardKey = "job:8", bonusContribution = 20})
+check(api.TraderBonusProgress(legacyBonus, "'Haggler'").budget == 150
+	and api.TraderBonusProgress(legacyBonus, "'Old Timer'").count == 1,
+	"first new completion migrates legacy value without combining trader progress")
+
 -- The real dialogue path sends a server-owned preview; server return values alone are not a UI response.
 CurTime = function() return 100 end
 local packets, receivers, packet = {}, {}, nil
@@ -392,7 +590,7 @@ dialogue.addTopic = function(id, data) dialogue.tree[id] = data end
 ix.dialogue.ConfigureTaskRewards(dialogue)
 check(dialogue.tree.GREETING.options[1] == "TaskRewardChoices"
 	and dialogue.tree.GREETING.options[2] == "GOODBYE", "reward menu keeps goodbye last")
-check(not dialogue.tree.TaskRewardChoices.ShouldAdd(), "task supplies entry is hidden for NPCs without a work topic")
+check(dialogue.tree.TaskRewardChoices.ShouldAdd(), "reward entry is available for claiming bonuses")
 local viewer = actor()
 local position = {DistToSqr = function() return 0 end}
 function viewer.client:GetPos() return position end
@@ -406,7 +604,7 @@ check(packets[1].name == "cotz/dialogue/task-list" and listPacket[1] == target a
 	"work menu sends actual offers only for configured categories")
 check(listPacket[3] == "easy" and listPacket[4]:find("Hunt ", 1, true)
 	and listPacket[4]:find("rubles", 1, true) and not listPacket[4]:find("reputation", 1, true)
-	and listPacket[4]:find("supplies:", 1, true), "task row shows its requirement, cash and supplies without reputation")
+	and listPacket[4]:find("Supplies (choose one):\n", 1, true), "task row shows its requirement, cash and supplies without reputation")
 viewer.client.cotzTaskRewardNext = nil
 dialogue.tree.GetTaskByDifficulty.preCallback(nil, viewer.client, target)
 check(packets[2].values[4] == listPacket[4], "reopening the work menu preserves the offered task and rewards")
@@ -415,22 +613,23 @@ dialogue.tree.GetTaskByDifficulty.ResolveDynamicOption(nil, viewer.client, targe
 check(packets[3].name == "cotz/dialogue/task-offer", "choosing a listed task sends its authoritative preview")
 check(not viewer:GetJobs()["'Old Timer'"], "network preview has no task acceptance side effect")
 local previewPacket = packets[3].values
-check(previewPacket[1] == target and previewPacket[2] == "easy" and previewPacket[4] == 1,
+check(previewPacket[1] == target and previewPacket[2] == "easy" and previewPacket[4] >= 1,
 	"preview reveals exactly one random supply")
 local shownPreview = viewer:GetData("taskJobPreviews")["'Old Timer'"].easy
 local shownOffer = viewer:GetData("taskRewardOffers")[shownPreview.rewardKey]
-check(previewPacket[5] == shownOffer.choices[shownPreview.supplyChoice].label,
+check(previewPacket[5] == shownOffer.choices[1].label,
 	"confirmation shows the exact supply randomly assigned by the server")
 check(not previewPacket[3]:find("reputation", 1, true) and previewPacket[3]:find("rubles", 1, true),
 	"confirmation keeps cash visible and hides reputation")
-check(listPacket[4]:find(previewPacket[5], 1, true)
-	and previewPacket[3]:find("Supplies: " .. previewPacket[5], 1, true),
+local displayedSupply = previewPacket[5]:gsub(" %+ ", "\n      + ")
+check(listPacket[4]:find(displayedSupply, 1, true)
+	and previewPacket[3]:find("Supplies:\n  • " .. displayedSupply, 1, true),
 	"task list and NPC dialogue both show the same assigned supply reward")
 check(not previewPacket[3]:find("restock", 1, true) and not listPacket[4]:find("restock", 1, true),
 	"task reward text does not mention vendor restocking")
 local otherSupply = shownPreview.supplyChoice % #shownOffer.choices + 1
-check(not api.AcceptJob(viewer.client, "'Old Timer'", "easy", otherSupply),
-	"acceptance cannot substitute a different supply for the server's random choice")
+check(not api.AcceptJob(viewer.client, "'Old Timer'", "easy", 999),
+	"acceptance rejects an invalid supply choice")
 local multiViewer = actor()
 multiViewer.client.rep = 1600
 function multiViewer.client:GetPos() return position end
@@ -472,18 +671,18 @@ local hiddenChoices = workDialogue.tree.TaskRewardChoices.GetDynamicOptions(nil,
 check(#hiddenChoices == 0, "unaccepted previews are absent from the supplies menu")
 viewer.client.cotzTaskPreview = {difficulty = "easy", choices = {{label = "Preview supplies"}}}
 local confirmation = dialogue.tree.ConfirmSupplyTask.GetDynamicOptions(nil, viewer.client)
-check(#confirmation == 2 and confirmation[1].statement == "Accept — Preview supplies"
-	and not confirmation[1].dyndata.choice, "acceptance screen displays one assigned supply without a choice index")
+check(#confirmation == 2 and confirmation[1].statement == "Accept task with:\n  • Preview supplies"
+	and confirmation[1].dyndata.choice == 1, "acceptance screen displays one assigned supply without a choice index")
 check(not api.AcceptJob(viewer.client, "'Old Timer'", "easy", 900),
 	"invalid preview supply choice cannot accept a job")
 check(not viewer:GetJobs()["'Old Timer'"], "invalid preview choice leaves the task unaccepted")
 check(api.AcceptJob(viewer.client, "'Old Timer'", "easy"), "preview can be accepted with its random supply")
 check(viewer:GetData("taskRewardOffers")[viewer:GetJobs()["'Old Timer'"].rewardKey].selected == shownPreview.supplyChoice,
 	"random supply is reserved after the task is accepted")
-check(not workDialogue.tree.TaskRewardChoices.ShouldAdd(nil, viewer.client, target),
-	"task supplies entry stays hidden even with an accepted job")
-check(not workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, viewer.client, target),
-	"hidden task supplies do not override the original work-topic visibility")
+check(workDialogue.tree.TaskRewardChoices.ShouldAdd(nil, viewer.client, target),
+	"accepted jobs expose supply choices")
+check(workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, viewer.client, target),
+	"accepted jobs keep reward actions accessible")
 local noWork = actor()
 check(not workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, noWork.client, target),
 	"work menu keeps its original visibility when there are no reward actions")

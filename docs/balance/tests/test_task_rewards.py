@@ -67,7 +67,8 @@ class TaskRewardAuditTests(unittest.TestCase):
         tokens = balance.tokenize((folder / 'plugins/jobsystem/libs/sh_taskrewards.lua').read_text())
         cls.constants = {}
         for i in range(len(tokens) - 3):
-            if tokens[i].value == 'local' and tokens[i + 2].value == '=' and tokens[i + 3].value == '{':
+            if (tokens[i].value == 'local' and tokens[i + 1].value.isupper()
+                    and tokens[i + 2].value == '=' and tokens[i + 3].value == '{'):
                 cls.constants[tokens[i + 1].value] = assigned_table(tokens, i + 3)
 
     def test_all_task_reward_graphs_resolve_to_real_items_without_cycles(self):

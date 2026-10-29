@@ -129,17 +129,17 @@ check(api.GetServiceCredit(first, "'Technut'", "repair") == 100, "credit has the
 check(api.GetServiceCredit(first, "'Boss'", "repair") == 0, "credit belongs to the named provider")
 check(api.GetServiceCredit(second, "'Technut'", "repair") == 0, "another character has no credit")
 local offer = api.BuildServiceOffer(first.client, tech, "repair", {itemid = 11, cost = 0, type = "hp"})
-check(offer.baseCost == 200 and offer.cost == 100 and offer.field == "wear", "repair ignores forged price and field")
-api.ConfirmService({}, first.client, tech, "repair", {itemid = 11, cost = 100})
-api.ConfirmService({}, second.client, tech, "repair", {itemid = 22, cost = 200})
+check(offer.baseCost == 400 and offer.cost == 300 and offer.field == "wear", "repair ignores forged price and field")
+api.ConfirmService({}, first.client, tech, "repair", {itemid = 11, cost = 300})
+api.ConfirmService({}, second.client, tech, "repair", {itemid = 22, cost = 400})
 local firstMoney, secondMoney = first.money, second.money
 check(api.ExecuteService(first.client, tech, "repair", true), "first concurrent quote executes")
 check(firstItem.data.wear == 100 and secondItem.data.wear == 80, "one shopper cannot overwrite another shopper's repair")
-check(first.money == firstMoney - 100, "only the uncovered fee is charged")
+check(first.money == firstMoney - 300, "only the uncovered fee is charged")
 check(api.GetServiceCredit(first, "'Technut'", "repair") == 0, "actual credit is consumed once")
 check(not api.ExecuteService(first.client, tech, "repair", true), "confirmation cannot replay")
 check(api.ExecuteService(second.client, tech, "repair", true), "second shopper retains their own quote")
-check(secondItem.data.wear == 100 and second.money == secondMoney - 200, "second shopper pays their own fee")
+check(secondItem.data.wear == 100 and second.money == secondMoney - 400, "second shopper pays their own fee")
 check(not api.BuildServiceOffer(first.client, tech, "repair", {itemid = 22}), "another character's item rejected")
 firstItem.data.wear = 50
 api.ConfirmService({}, first.client, tech, "repair", {itemid = 11})
@@ -209,6 +209,18 @@ check(not api.BuildServiceOffer(first.client, wish, "wish", {type = "carryinc"})
 check(not api.BuildServiceOffer(first.client, wish, "wish", {type = "weapon", itemid = 22}), "wish cannot alter another character's item")
 local suit = repairItem(first, 33, false)
 check(not api.BuildServiceOffer(first.client, wish, "wish", {type = "weapon", itemid = 33}), "suit cannot masquerade as weapon wish")
+local suitOffer = api.BuildServiceOffer(first.client, tech, "repair", {itemid = 33})
+check(suitOffer.baseCost == 600 and suitOffer.field == "durability", "suit repair costs are doubled")
+local bossOffer = api.BuildServiceOffer(first.client, vendor("'Boss'"), "repair", {itemid = 33})
+check(bossOffer.baseCost == 600 and bossOffer.cost == 600, "Boss charges the same doubled repair price")
+api.Register("repairDiscount", {nextProgressions = {},
+	serviceDiscounts = {{npc = "'Technut'", service = "repair", fraction = 0.05}}})
+local discountCharacter = actor()
+repairItem(discountCharacter, 44, false)
+api.SetCompleted(discountCharacter, "repairDiscount")
+local discountedRepair = api.BuildServiceOffer(discountCharacter.client, tech, "repair", {itemid = 44})
+check(discountedRepair.baseCost == 600 and discountedRepair.cost == 570,
+	"earned repair discount applies after doubling the base price")
 local restored = actor()
 restored.data = copy(first.data)
 check(api.GetServiceCredit(restored, "'Jitters'", "treatment") == api.GetServiceCredit(first, "'Jitters'", "treatment"),
@@ -240,7 +252,7 @@ firstItem.data.wear = 90
 confirmation:DynamicPreCallback(first.client, tech, {itemid = 11, cost = 0})
 confirmation:ResolveDynamicOption(first.client, tech, {accepted = true})
 check(firstItem.data.wear == 90, "forged cheap confirmation cannot repair an item")
-confirmation:DynamicPreCallback(first.client, tech, {itemid = 11, cost = 100})
+confirmation:DynamicPreCallback(first.client, tech, {itemid = 11, cost = 200})
 confirmation:ResolveDynamicOption(first.client, tech, {accepted = true})
 check(firstItem.data.wear == 100, "real repair confirmation uses recalculated per-player quote")
 local clinical = loadTopic("sh_medicnpc.lua", "ConfirmHeal")
@@ -252,7 +264,7 @@ check(api.ResolveServiceOffer(first.client, tech, "repair", false) == "BackTopic
 	"invalid service payload is rejected before indexing")
 firstItem.data.wear = 90
 local serviceTopic, serviceData = api.ResolveServiceOffer(first.client, tech, "repair", {itemid = 11, cost = 0})
-check(serviceTopic == "ConfirmRepair" and serviceData.cost == 100,
+check(serviceTopic == "ConfirmRepair" and serviceData.cost == 200,
 	"service selection replaces a forged client price with the authoritative fee")
 check(api.ResolveServiceOffer(first.client, cleaner, "storage", {option = "use"}) == "OpenStorage",
 	"unlocked storage remains available through the service menu")
