@@ -9,7 +9,8 @@ Jobsystem uses progression's purchase unlock checks and token-backed reward-clai
 packages. `libs/sv_taskrewards.lua` persists offers and transfers selected rewards into
 the existing token-backed claim queue. Dialogue's `libs/sh_taskrewards.lua` installs
 "Choose or claim task rewards", and an
-authoritative task preview. Contacts without a work topic retain the main-menu entry.
+authoritative task preview. Contacts without a work topic show the main-menu entry only when a relevant reward,
+kit exchange, barter or pending supply claim is available.
 Saved supplies keep "About work" accessible even after the active job is finished.
 That menu lists repeatable job offers. Progression tasks pay money and reputation
 through their own completion flow, without selectable supply rewards. Existing kit and

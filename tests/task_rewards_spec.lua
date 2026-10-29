@@ -590,7 +590,6 @@ dialogue.addTopic = function(id, data) dialogue.tree[id] = data end
 ix.dialogue.ConfigureTaskRewards(dialogue)
 check(dialogue.tree.GREETING.options[1] == "TaskRewardChoices"
 	and dialogue.tree.GREETING.options[2] == "GOODBYE", "reward menu keeps goodbye last")
-check(dialogue.tree.TaskRewardChoices.ShouldAdd(), "reward entry is available for claiming bonuses")
 local viewer = actor()
 local position = {DistToSqr = function() return 0 end}
 function viewer.client:GetPos() return position end
@@ -598,6 +597,16 @@ local target = {GetClass = function() return "ix_vendor_adv" end,
 	CanAccess = function() return true end, GetPos = function() return position end,
 	GetDisplayName = function() return "'Old Timer'" end,
 	GetNetVar = function() return {easy = {"hunting"}} end}
+check(not dialogue.tree.TaskRewardChoices.ShouldAdd(nil, viewer.client, target),
+	"traders without a work submenu hide empty task reward entries")
+local rootRewardOwner = actor()
+rootRewardOwner:SetData("taskRewardOffers", {["bonus:root"] = {npc = "'Old Timer'", earned = true,
+	label = "Five-task bonus", budget = 100, choices = {{label = "Supplies", items = {}}}}})
+check(dialogue.tree.TaskRewardChoices.ShouldAdd(nil, rootRewardOwner.client, target),
+	"traders without a work submenu still expose relevant earned rewards")
+local unrelatedRoot = {GetDisplayName = function() return "'Jitters'" end}
+check(not dialogue.tree.TaskRewardChoices.ShouldAdd(nil, rootRewardOwner.client, unrelatedRoot),
+	"a bonus at another trader does not expose task rewards at Jitters")
 dialogue.tree.GetTaskByDifficulty.preCallback(nil, viewer.client, target)
 local listPacket = packets[1].values
 check(packets[1].name == "cotz/dialogue/task-list" and listPacket[1] == target and listPacket[2] == 1,

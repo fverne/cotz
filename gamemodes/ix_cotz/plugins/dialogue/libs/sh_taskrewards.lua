@@ -257,7 +257,18 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 	local workTopic = dialogue.tree.AboutWorkTopic
 	dialogue.addTopic("TaskRewardChoices", {
 		statement = "Choose or claim task rewards.",
-		ShouldAdd = function() return SHOW_TASK_SUPPLIES end,
+		ShouldAdd = function(_, client, target)
+			if not SHOW_TASK_SUPPLIES then return false end
+			if workTopic then return true end
+			local character = client:GetCharacter()
+			local npc = target:GetDisplayName()
+			local options = offerOptions(character, npc)
+			kitOptions(character, npc, options)
+			barterOptions(character, npc, options)
+			local pending = ix.progression.GetLine(character, CLAIM_LINE).pendingRewards
+
+			return #options > 0 or (pending and #pending > 0) or false
+		end,
 		preCallback = function(self, client, target)
 			if CLIENT then
 				self.response = "Choose supplies or repair credit for your earned bonus.\n"
