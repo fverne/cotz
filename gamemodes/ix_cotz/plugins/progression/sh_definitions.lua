@@ -123,7 +123,7 @@ hook.Add("ix_OnJobComplete", "computer_artifactTasks", function(client, npcident
 		if categories[v] then iscorrecttasktype = true end
 	end
 
-	if npcidentifier == "'Mute'" and iscorrecttasktype then
+	if npcidentifier == "'Computer'" and iscorrecttasktype then
 		if ix.progression.IsActive("computer_artifactTasks") then
 			ix.progression.AddProgessionValue("computer_artifactTasks", 1, client:Name())
 		end
@@ -1355,7 +1355,7 @@ ix.progression.Register("computerDelivery_main", {
 		if isdone then
 			ix.progression.SetCompleted("computerDelivery_main", true)
 
-			ix.progression.SetActive("computerArtifactTasks_main", true) -- Main Progression
+			ix.progression.SetActive("computer_artifactTasks", true)
 		end
 	end
 })
