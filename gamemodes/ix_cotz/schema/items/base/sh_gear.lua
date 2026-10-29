@@ -29,6 +29,11 @@ ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
 ITEM.weight = 0
 
+ITEM.miscSlots = {
+	["exteriorSlots"] = {},
+	["interiorSlots"] = {},
+	["extraSlots"] = {},
+}
 
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
