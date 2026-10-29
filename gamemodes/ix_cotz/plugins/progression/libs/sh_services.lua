@@ -413,6 +413,7 @@ if SERVER then
 
 	local function applyRepair(client, offer)
 		offer.item:SetData(offer.field, 100)
+		if offer.item.GetDurabilityScale then client:RecalculateResistances() end
 		if offer.item.isWeapon and offer.item.class then
 			local weapon = client:GetWeapon(offer.item.class)
 			if IsValid(weapon) then weapon:SetWeaponWear(100) end

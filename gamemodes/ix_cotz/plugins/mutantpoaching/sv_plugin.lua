@@ -157,134 +157,132 @@ ix.poaching.KnifeTime = {
 		["tfa_nmrih_survivalknife"] = 3,
 }
 
-function PLUGIN:PlayerButtonDown(client,key)
-    local Hit = client:GetEyeTraceNoCursor()
-    local npc = Hit.Entity
-    if (client:GetNetVar("IsPoaching") == true && key == KEY_F ) then
-       ix.util.PlayerActionInterrupt(client)
-       npc:SetNetVar("beingSkinned",false)
-    end
+local POACH_DISTANCE = 55
+local DEFAULT_POACH_TIME = 5
+local activePoaches = {}
+
+local function finishPoach(client, operation)
+	if activePoaches[client] ~= operation then return end
+	activePoaches[client] = nil
+	if IsValid(client) then
+		client:SetNetVar("IsPoaching", false)
+	end
+	if IsValid(operation.npc) then
+		operation.npc:SetNetVar("beingSkinned", false)
+		operation.npc:StopSound("stalkersound/inv_mutant_loot_animal.ogg")
+	end
+end
+
+local function ownedKnife(client, knifeID)
+	local character = client:GetCharacter()
+	if not character then return end
+	local knife = character:GetInventory():GetItems()[knifeID]
+	if not knife or not knife.isPoachKnife or not knife:GetData("equip", false) then return end
+
+	return knife
+end
+
+function PLUGIN:PlayerButtonDown(client, key)
+	local operation = activePoaches[client]
+	if key ~= KEY_F or not operation then return end
+	ix.util.PlayerActionInterrupt(client)
+	finishPoach(client, operation)
 end
 
 function PLUGIN:KeyPress(client, key)
+	local operation = activePoaches[client]
+	if operation then
+		ix.util.PlayerActionInterrupt(client)
+		finishPoach(client, operation)
 
-    if (client:GetNetVar("IsPoaching") == true ) then
-       ix.util.PlayerActionInterrupt(client)
-    end
-
-	local Hit = client:GetEyeTraceNoCursor()
-	local npc = Hit.Entity
-	local items = client:GetCharacter():GetInventory():GetItems()
-	local mutant
-	if IsValid(npc) then
-		mutant = ix.poaching.MutantTable[npc:GetModel()]
+		return
 	end
-	local knife = nil
+	if key ~= IN_USE or not client:Alive() or not client:GetCharacter() then return end
+	local npc = client:GetEyeTraceNoCursor().Entity
+	if not IsValid(npc) or not npc:IsRagdoll() then return end
+	local mutant = ix.poaching.MutantTable[npc:GetModel()]
+	if not mutant or npc:GetPos():Distance(client:GetPos()) > POACH_DISTANCE then return end
+	for _, knife in pairs(client:GetCharacter():GetInventory():GetItems()) do
+		if knife.isPoachKnife and knife:GetData("equip", false) then
+			self:OpenPoachMenu(client, mutant, knife:GetID())
 
-	if client:GetCharacter() and client:Alive() then
-		if (key == IN_USE) then
-			if (npc:IsRagdoll() and ix.poaching.MutantTable[npc:GetModel()] and npc:GetPos():Distance( client:GetPos() ) <= 55) then
-				for _, v in pairs(items) do
-					if v:GetData("equip") and v.isPoachKnife then
-						knife = ix.item.instances[v.id].id
-					end
-				end
-
-				if (knife != nil) then
-					ix.plugin.list["mutantpoaching"]:OpenPoachMenu(client, mutant, knife)
-				else
-					client:Notify("You need a knife to poach mutants.")
-				end
-			end
+			return
 		end
 	end
+	client:Notify("You need an equipped knife to poach mutants.")
 end
 
-function PLUGIN:OpenPoachMenu(client, mutant, knife)
-    local weapon = client:GetActiveWeapon()
+local function givePoachingLoot(client, inventory, mutant, knifeTier)
+	local parts = ix.poaching.MutantParts[mutant]
+	local loot = {parts.meattype}
+	for _, part in ipairs(parts.parts) do
+		if math.random(0, 100) < part[2] then
+			loot[#loot + 1] = part[1]
+		end
+	end
+	local position = client:GetItemDropPos()
+	for _, uniqueID in ipairs(loot) do
+		local data = {
+			weight = ix.util.GetMutantMeatWeight(uniqueID, knifeTier),
+			tier = knifeTier,
+		}
+		if not inventory:Add(uniqueID, 1, data) then
+			ix.item.Spawn(uniqueID, position, function(_, entity) entity.bTemporary = true end, AngleRand(), data)
+			position = position + Vector(0, 0, 5)
+			client:Notify("No space in your inventory! Items have been dropped.")
+		end
+	end
+	ix.weight.Update(client:GetCharacter())
+end
 
-    if (weapon and weapon:IsValid()) then
-        local class = weapon:GetClass()
+function PLUGIN:OpenPoachMenu(client, mutant, knifeID)
+	if activePoaches[client] or not client:Alive() then return end
+	local knife = ownedKnife(client, knifeID)
+	if not knife or not ix.poaching.MutantParts[mutant] then return end
+	if ix.poaching.GetSharpness(knife) <= 0 then
+		client:Notify("Your knife is dull. Use a sharpening stone before poaching.")
 
-        if class:find("cw_") then
-            if weapon:isReloading() then return client:Notify("You can not poach while you are reloading a weapon!") end
-        end
-    end
+		return
+	end
+	local weapon = client:GetActiveWeapon()
+	if IsValid(weapon) and weapon:GetClass():find("cw_") and weapon:isReloading() then
+		client:Notify("You can not poach while you are reloading a weapon!")
 
-    local char = client:GetCharacter()
-    local inv = char:GetInventory()
+		return
+	end
+	local npc = client:GetEyeTraceNoCursor().Entity
+	if not IsValid(npc) or not npc:IsRagdoll() then return end
+	if ix.poaching.MutantTable[npc:GetModel()] ~= mutant then return end
+	if npc:GetPos():Distance(client:GetPos()) > POACH_DISTANCE then return end
+	if npc:GetNetVar("beingSkinned", false) then
+		client:Notify("That mutant is being skinned by someone else!")
 
-    if (not inv:HasItem(ix.item.instances[knife].uniqueID)) then
-        client:Notify("Stop cheating, and notify developers")
-    end
+		return
+	end
+	local character = client:GetCharacter()
+	local operation = {npc = npc, character = character, knife = knife}
+	local poachingTime = ix.poaching.KnifeTime[knife.class] or DEFAULT_POACH_TIME
+	activePoaches[client] = operation
+	npc:SetNetVar("beingSkinned", true)
+	npc:EmitSound("stalkersound/inv_mutant_loot_animal.ogg", 60)
+	client:SetNetVar("IsPoaching", true)
 
-    local mutanttable = ix.poaching.MutantParts[mutant]
-    local knifetier = ix.item.instances[knife].knifetier
-    local loot = {}
-    table.insert(loot, mutanttable["meattype"])
+	ix.util.PlayerPerformBlackScreenAction(client, "Poaching", poachingTime, function(player)
+		if activePoaches[player] ~= operation then return end
+		local wasPoaching = player:GetNetVar("IsPoaching", false)
+		finishPoach(player, operation)
+		if not wasPoaching or not player:Alive() or player:GetCharacter() ~= character then return end
+		if ownedKnife(player, knifeID) ~= knife or ix.poaching.GetSharpness(knife) <= 0 then return end
+		if not IsValid(npc) or ix.poaching.MutantTable[npc:GetModel()] ~= mutant then return end
+		if npc:GetPos():Distance(player:GetPos()) > POACH_DISTANCE then return end
+		local knifeTier = ix.poaching.GetKnifeTier(knife)
+		ix.poaching.WearKnife(knife)
+		npc:Remove()
+		givePoachingLoot(player, character:GetInventory(), mutant, knifeTier)
+	end)
 
-    for _, v in pairs(mutanttable["parts"]) do
-        if (math.random(0, 100) < v[2]) then
-            table.insert(loot, v[1])
-        end
-    end
-
-    --Do animation, remove ragdoll and spawn loot
-    local Hit = client:GetEyeTraceNoCursor()
-    local npc = Hit.Entity
-
-    if npc then
-        if (npc:IsRagdoll() and ix.poaching.MutantTable[npc:GetModel()] and npc:GetPos():Distance(client:GetPos()) <= 55) then
-            if npc:GetNetVar("beingSkinned", false) then
-                client:Notify("That mutant is being skinned by someone else!")
-
-                return
-            end
-            local weaponClass = client:GetActiveWeapon():GetClass()
-            local poachingTime = ix.poaching.KnifeTime[weaponClass] or 5
-            --client:ForceSequence("cidle_knife", nil, 5)
-            npc:SetNetVar("beingSkinned", true)
-            npc:EmitSound("stalkersound/inv_mutant_loot_animal.ogg", 60)
-            client:SetNetVar("IsPoaching", true)
-            
-            timer.Simple(poachingTime, function()
-              if (IsValid(npc)) then
-                npc:SetNetVar("beingSkinned", false)
-              end
-            end)
-
-            ix.util.PlayerPerformBlackScreenAction(client, "Poaching", poachingTime, function(player)
-                if not player:GetNetVar("IsPoaching") then
-                    npc:StopSound("stalkersound/inv_mutant_loot_animal.ogg")
-
-                    return
-                end
-
-                local position = client:GetItemDropPos()
-
-                if ( IsValid(npc) and ix.poaching.MutantTable[npc:GetModel()] == mutant ) then
-                    npc:Remove()
-
-                    for _, v in pairs(loot) do
-                        local weight = ix.util.GetMutantMeatWeight(v, knifetier)
-                        local dat = {}
-
-                        dat = {
-                           	["weight"] = weight,
-                            ["tier"] = knifetier
-                        }
-
-                        if (IsValid(client) and client:GetCharacter() and not inv:Add(v, 1, dat)) then
-                            ix.item.Spawn(v, position, function(item, ent) ent.bTemporary = true end, AngleRand(), dat)
-                            position = position + Vector(0, 0, 5)
-                            client:Notify("No space in your inventory! Items have been dropped.")
-                        end
-                    end
-
-                    player:SetNetVar("IsPoaching", false)
-                    ix.weight.Update(client:GetCharacter())
-                end
-            end)
-        end
-    end
+	-- The shared action helper skips its callback when another system interrupts it.
+	timer.Simple(poachingTime + 0.1, function()
+		finishPoach(client, operation)
+	end)
 end

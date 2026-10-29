@@ -17,6 +17,7 @@ ITEM.weight = 0.450
 
 ITEM.knifetier = 1
 ITEM.isPoachKnife = true
+ITEM.canRepair = false
 
 ITEM.exRender = true
 ITEM.iconCam = {

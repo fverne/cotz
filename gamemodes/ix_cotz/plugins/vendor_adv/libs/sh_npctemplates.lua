@@ -100,6 +100,8 @@ ix.npctemplates.templates["tutorialnpc"] = {
 	-- ["uniqueid"] = { 1: Special set price, 2: Starting stock, 3: Mode [1:B/S, 2:S, 3:B], 4: Maximum stock, 5: Restock interval in hours, 6: Restock amount }
 		-- ["flashlight"] 	= { nil, 8, SELLANDBUY, 8, 0.10, 2 },
 		["headlamp"] 	= { nil, 1, SELLANDBUY, 1, 48, 1},
+		["sharpening_stone"] = {nil, 2, SELLANDBUY, 2, 12, 1},
+		["sharpening_stone_fine"] = {nil, 2, SELLANDBUY, 2, 12, 1},
 		["geigercounter"] 	= { nil, 1, SELLANDBUY, 1, 48, 1},
 
 		["medic_bandage_1"] = { nil, 3, SELLANDBUY, 3, 12, 1},

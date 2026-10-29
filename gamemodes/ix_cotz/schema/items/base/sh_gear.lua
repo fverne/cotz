@@ -28,6 +28,19 @@ ITEM.resistance = true
 ITEM.equipIcon = ix.util.GetMaterial("materials/vgui/ui/stalker/misc/equip.png")
 
 ITEM.weight = 0
+ITEM.canRepair = true
+
+local FULL_PROTECTION_DURABILITY = 80
+
+function ITEM:GetRepairCost()
+	return self.price ^ (1 / 3)
+end
+
+function ITEM:GetDurabilityScale()
+	if not (self.isHelmet or self.isGasmask) then return 1 end
+
+	return math.Clamp(self:GetData("durability", 100) / FULL_PROTECTION_DURABILITY, 0, 1)
+end
 
 ITEM.miscSlots = {
 	["exteriorSlots"] = {},
@@ -68,11 +81,7 @@ if (CLIENT) then
 		surface.SetMaterial(item.equipIcon)
 		surface.DrawTexturedRect(w-23,h-23,19,19)
 
-		local dura = 0
-
-		if (item:GetData("durability")) then
-			dura = item:GetData("durability",0)
-		end
+		local dura = item:GetData("durability", 100)
 
 		//durability
 		surface.SetMaterial(Texture2)
@@ -275,7 +284,7 @@ function ITEM:getBR()
 		end
 	end
 
-	return res
+	return res * self:GetDurabilityScale()
 end
 
 function ITEM:getFBR()
@@ -288,7 +297,7 @@ function ITEM:getFBR()
 		end
 	end
 
-	return res
+	return res * self:GetDurabilityScale()
 end
 
 function ITEM:getSR() 
@@ -301,7 +310,7 @@ function ITEM:getSR()
 		end
 	end
 
-	return res
+	return res * self:GetDurabilityScale()
 end
 
 function ITEM:getFSR() 
@@ -315,7 +324,7 @@ function ITEM:getFSR()
 		end
 	end
 	
-	return res
+	return res * self:GetDurabilityScale()
 end
 
 function ITEM:getAR()
@@ -328,7 +337,7 @@ function ITEM:getAR()
 		end
 	end
 
-	return res
+	return res * self:GetDurabilityScale()
 end
 
 function ITEM:getFAR()
@@ -341,7 +350,7 @@ function ITEM:getFAR()
 		end
 	end
 
-	return res
+	return res * self:GetDurabilityScale()
 end
 
 
@@ -356,7 +365,7 @@ function ITEM:getPR()
 		end
 	end
 
-	return res
+	return res * self:GetDurabilityScale()
 end
 
 function ITEM:getFPR() 
@@ -370,7 +379,7 @@ function ITEM:getFPR()
 		end
 	end
 	
-	return res
+	return res * self:GetDurabilityScale()
 end
 
 function ITEM:getRadProt()
@@ -383,7 +392,7 @@ function ITEM:getRadProt()
 		end
 	end
 
-	return res
+	return res * self:GetDurabilityScale()
 end
 
 

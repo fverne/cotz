@@ -34,18 +34,22 @@ if (CLIENT) then
 
 		local dura = 0
 
-		if (item:GetData("durability", false)) then
+		if item.isPoachKnife then
+			dura = ix.poaching.GetSharpness(item)
+		elseif (item:GetData("durability", false)) then
 			dura = item:GetData("durability",0)
 		end
 
 		//durability
-		if dura != 0 then
+		if dura ~= 0 or item.isPoachKnife then
 			surface.SetMaterial(Texture2)
 			surface.SetDrawColor(Color(120, 120, 120, 255))
 			surface.DrawTexturedRectUV(5, h - 10, 38, 4.6, 0, 0, 0.2, 1)
 
 			surface.SetMaterial(Texture2)
-			if (dura >= 80) then 
+			if item.isPoachKnife and dura > ix.poaching.Sharpness.default then
+				surface.SetDrawColor(80, 160, 255, 255)
+			elseif dura >= 80 then
 				surface.SetDrawColor(Color(120, 255, 120, 255))
 			elseif (dura >= 60) then 
 				surface.SetDrawColor(Color(180, 255, 120, 255))
@@ -81,6 +85,15 @@ function ITEM:GetDescription()
 end
 
 function ITEM:PopulateTooltip(tooltip)
+	if self.isPoachKnife then
+		local sharpness = ix.poaching.GetSharpness(self)
+		local text = string.format("Sharpness: %d%% | Poaching tier: %d", sharpness, ix.poaching.GetKnifeTier(self))
+		ix.util.PropertyDesc(tooltip, text, Color(64, 224, 208))
+		if sharpness > ix.poaching.Sharpness.default then
+			ix.util.PropertyDesc(tooltip, "+1 tier for the next poach", Color(64, 224, 208))
+		end
+	end
+
     if (!self.entity) then
         if self.weaponCategory == "secondary" then
         	ix.util.PropertyDesc2(tooltip, "Secondary Weapon", Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))

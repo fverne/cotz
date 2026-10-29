@@ -89,7 +89,7 @@ function playerMeta:getFlatRadResist()
 
 	for j, i in pairs(items) do
 		if (i.flatRadProt and i:GetData("equip") == true) then
-			res = res + i.flatRadProt
+			res = res + i.flatRadProt * (i.GetDurabilityScale and i:GetDurabilityScale() or 1)
 		end
 	end
 
@@ -105,6 +105,7 @@ end
 function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 	--RADIATION OVERRIDE
 	if (entity:IsPlayer() and entity:Alive() and entity:GetCharacter() and dmgInfo:IsDamageType(DMG_RADIATION) and entity:GetMoveType() != MOVETYPE_NOCLIP) then
+		ix.util.DamageHeadgear(entity, dmgInfo)
 		local radAmount = (dmgInfo:GetDamage()/10)
 		local percentageRadResist = entity:getPercentageRadResist()
 		local flatRadResist = entity:getFlatRadResist()

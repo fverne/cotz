@@ -589,7 +589,9 @@ DIALOGUE.addTopic("ConfirmRepair", {
 			ix.dialogue.notifyMoneyLost(client, target.repairstruct[2])
 			client:GetCharacter():TakeMoney(target.repairstruct[2])
 
-			ix.item.instances[target.repairstruct[1]]:SetData(target.repairstruct[3], 100)
+			local item = ix.item.instances[target.repairstruct[1]]
+			item:SetData(target.repairstruct[3], 100)
+			if item.GetDurabilityScale then client:RecalculateResistances() end
 		end
 		if SERVER then
 			target.repairstruct = nil
