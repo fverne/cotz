@@ -540,9 +540,8 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 			return dat
 		end,
 		funcShouldEnd = function(dat)
-			local shouldend = os.time() > dat.timeout
-
-			return shouldend
+			-- An interrupted setup may leave an active event without a deadline.
+			return not isnumber(dat.timeout) or os.time() > dat.timeout
 		end,
 		funcEnd = function(dat)
 			
@@ -692,9 +691,8 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 			return dat
 		end,
 		funcShouldEnd = function(dat)
-			local shouldend = os.time() > dat.timeout
-
-			return shouldend
+			-- An interrupted setup may leave an active event without a deadline.
+			return not isnumber(dat.timeout) or os.time() > dat.timeout
 		end,
 		funcEnd = function(dat)
 			
@@ -722,9 +720,8 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 			return dat
 		end,
 		funcShouldEnd = function(dat)
-			local shouldend = os.time() > dat.timeout
-
-			return shouldend
+			-- An interrupted setup may leave an active event without a deadline.
+			return not isnumber(dat.timeout) or os.time() > dat.timeout
 		end,
 		funcEnd = function(dat)
 			
@@ -752,9 +749,8 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 			return dat
 		end,
 		funcShouldEnd = function(dat)
-			local shouldend = os.time() > dat.timeout
-
-			return shouldend
+			-- An interrupted setup may leave an active event without a deadline.
+			return not isnumber(dat.timeout) or os.time() > dat.timeout
 		end,
 		funcEnd = function(dat)
 			
@@ -782,9 +778,8 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 			return dat
 		end,
 		funcShouldEnd = function(dat)
-			local shouldend = os.time() > dat.timeout
-
-			return shouldend
+			-- An interrupted setup may leave an active event without a deadline.
+			return not isnumber(dat.timeout) or os.time() > dat.timeout
 		end,
 		funcEnd = function(dat)
 			
@@ -812,9 +807,8 @@ PLUGIN.eventdefs["map1_event_shippingcrate"] = {
 			return dat
 		end,
 		funcShouldEnd = function(dat)
-			local shouldend = os.time() > dat.timeout
-
-			return shouldend
+			-- An interrupted setup may leave an active event without a deadline.
+			return not isnumber(dat.timeout) or os.time() > dat.timeout
 		end,
 		funcEnd = function(dat)
 			

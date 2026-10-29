@@ -109,19 +109,18 @@ if SERVER then
 		end
 		if isClear(eventpoint[1]) then
 			local key = spawn.key
-			if(!self.currentEvents[key]) then
-				self.currentEvents[key] = {}
-				self.currentEvents[key].data = {}
-				self.currentEvents[key].eventpoint = eventpoint
-				self.currentEvents[key].eventDef = spawn.key
+			if not self.currentEvents[key] then
+				local definition = self.eventdefs[key]
+				local event = {
+					data = {},
+					eventpoint = eventpoint,
+					eventDef = key,
+				}
 
-
-				local tmpfunc = self.eventdefs[spawn.key].funcPrestart
-				local data = tmpfunc(self.currentEvents[key])
-				self.currentEvents[key] = data
-				tmpfunc = self.eventdefs[spawn.key].funcStart
-				data = tmpfunc(self.currentEvents[key])
-				self.currentEvents[key] = data
+				-- Setup can fail while spawning external dupes; only track fully started events.
+				event = definition.funcPrestart(event)
+				event = definition.funcStart(event)
+				self.currentEvents[key] = event
 			end
 		end
 	end
