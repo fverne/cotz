@@ -9,7 +9,11 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 	vendorUnlocks = {
 		{ npc = "'Old Timer'", args = { "knife2", nil, 1, "SELLANDBUY", 1, 48, 1 } },
 	},
-	nextProgressions = {"oldtimerItemDelivery_Knife2_stage1", "oldtimerItemDelivery_Hidestash1_stage1"},
+	nextProgressions = {
+		"oldtimerItemDelivery_Knife2_stage1",
+		"oldtimerItemDelivery_Hidestash1_stage1",
+		"oldtimerItemDelivery_Sharpening1",
+	},
 	BuildResponse = function(self, npcName, status, character)
 		local data = status or {}
 
@@ -44,12 +48,59 @@ ix.progression.Register("oldtimerItemDelivery_Knife1", {
 			local message = string.format(
 				"%s, those trophies tell me you can handle more than stray dogs. You've earned a "
 				.. "proper blade. Come see me; I'll sell you a hunting knife that'll hold up against "
-				.. "tougher game.",
+				.. "tougher game. Ask me about keeping its edge sharp, too.",
 				character:GetName()
 			)
 			ix.progression.Notify(character, name, message)
 		end)
 	end,
+})
+
+ix.progression.Register("oldtimerItemDelivery_Sharpening1", {
+	name = "Keeping an Edge 1",
+	description = "Learn to maintain your hunting knife with Old Timer.",
+	keyNpc = "'Old Timer'",
+	defaultActive = true,
+	prerequisites = {"oldtimerItemDelivery_Knife1"},
+	progMap = MAP,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "field_maintenance", quantity = 1},
+		{pool = "common_parts", quantity = 1},
+	},
+	vendorUnlocks = {
+		{npc = "'Old Timer'", args = {"sharpening_stone", nil, 2, "SELLANDBUY", 2, 12, 1}},
+	},
+	nextProgressions = {"oldtimerItemDelivery_Sharpening2"},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	briefing = (
+		"A good knife still needs looking after. Bring some field maintenance supplies and a clean "
+		.. "trophy from ordinary quarry. I'll teach you to keep an edge and sell you sharpening stones."
+	),
+	completionMessage = "You've learned the basics. I'll sell you sharpening stones now.",
+})
+
+ix.progression.Register("oldtimerItemDelivery_Sharpening2", {
+	name = "Keeping an Edge 2",
+	description = "Improve your sharpening technique with Old Timer.",
+	keyNpc = "'Old Timer'",
+	defaultActive = false,
+	prerequisites = {"oldtimerItemDelivery_Sharpening1"},
+	progMap = MAP,
+	lootMapTier = 1,
+	requirementSlots = {
+		{pool = "field_maintenance", quantity = 2},
+		{pool = "small_parts", quantity = 1},
+	},
+	vendorUnlocks = {
+		{npc = "'Old Timer'", args = {"sharpening_stone_fine", nil, 2, "SELLANDBUY", 2, 12, 1}},
+	},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	briefing = (
+		"Keeping a blade usable is one thing; honing it for a clean cut is another. Bring more "
+		.. "maintenance supplies and a trophy from tougher quarry. Then we'll talk about fine stones."
+	),
+	completionMessage = "That's a proper edge. Fine sharpening stones are available to you now.",
 })
 
 ix.progression.Register("oldtimerItemDelivery_Knife2_stage1", {

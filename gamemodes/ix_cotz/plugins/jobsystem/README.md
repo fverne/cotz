@@ -3,7 +3,7 @@
 Jobsystem owns repeatable job rewards, previews, acceptance, item delivery
 and automatic supply-claim continuation. Its post-data-load hook validates task rewards. The `ix.taskRewards` API and saved character
 keys remain unchanged. Progression owns story milestones and their completion payouts.
-Jobsystem uses progression's purchase unlock checks and token-backed reward-claim service.
+Jobsystem uses progression's NPC access checks, purchase unlocks and token-backed reward-claim service.
 
 `libs/sh_taskrewards.lua` defines contact profiles, nominal-value budgeting and visible
 packages. `libs/sv_taskrewards.lua` persists offers and transfers selected rewards into
@@ -48,12 +48,16 @@ Bonus packages never include cash or ruble items, including rounding remainders.
 Legacy unclaimed offers are rebuilt with the same earned budget before selection.
 Kit and barter redemption retain their existing remainder handling. Full inventories retain token-backed claims.
 
-Contact profiles and earned vendor supply unlocks determine eligible ammunition,
-consumables, stash containers and protective attachments. Bonus catalogues refresh when
-the rewards menu opens, respecting new unlocks without changing the earned budget.
+Contact profiles and each contact's full progression vendor catalogue determine eligible consumable
+rewards: ammunition, food, drinks, medicine, charcoal, sharpening stones and the four-use cleaning kit.
+All eligible supplies are in the reward pool regardless of purchase progression. NPC access still
+applies, and receiving a reward never grants permission to buy it. Equipment, armour attachments,
+other tools and stash notes/PDAs are excluded from ordinary task and five-task bonus supply catalogues.
+Cleaner's configured reward profile also excludes hidestash notes and PDAs.
+Bonus catalogues refresh when the rewards menu opens without changing the earned budget.
 Unlocks never multiply the payment for identical work. Preview packages are saved and
 stable; already accepted jobs retain their assigned rewards. Cached unaccepted previews receive
-the increased allowance when reopened, preserving the task identity and requirements. Abandonment grants neither
+the increased allowance and catalogue revisions when reopened, preserving the task identity and requirements. Abandonment grants neither
 bonus progress nor payment. Finite story/progression tasks do not count toward the bonus.
 
 Delivery cash is 55% of the required hand-in value, using the higher of catalogue value
@@ -69,7 +73,7 @@ Progression sets `PROGRESSION_CASH_RATE` separately in `../progression/libs/sh_r
 A qualifying completion still earns its existing 20% personal vendor restock exactly once.
 Job previews save their cash and supplies when created; reopening and accepting reuse that offer.
 
-Profiles use existing items and provider-specific purchase checks. Task-kit offers
+Kit redemption retains its original profiles and provider-specific purchase checks. Task-kit offers
 retain nominal-value budgeting. Higher-value offers of those types may
 include an already-authorised weapon or body armour from that provider, worth at least
 60% of the offer budget. Quantities are explicit; indivisible value and the package-size

@@ -2,27 +2,65 @@ ix.taskRewards = ix.taskRewards or {}
 
 local PROFILES = {
 	["'Old Timer'"] = {
-		"12gauge", "22lr", "9x18", "medic_bandage_1", "medic_bandage_2", "sharpening_stone_fine",
+		"12gauge", "22lr", "9x18", "medic_bandage_1", "medic_bandage_2", "sharpening_stone",
+		"sharpening_stone_fine", "drink_bottlewater", "food_can_tushonka", "medic_medkit_1",
 	},
-	["'Technut'"] = {"22lr", "45acp41", "attachment_fabric_1", "attachment_ceramicplate_1"},
-	["'Jitters'"] = {"medic_bandage_1", "medic_medkit_1", "medic_bandage_2", "medic_medkit_3"},
-	["'Cleaner'"] = {"12gauge", "22lr", "9x19", "hidestash_1", "hidestash_2", "hidestash_3"},
-	["'Haggler'"] = {"12gauge", "9x18", "762x25", "762x39", "762x54", "45acp41"},
-	["'Spicy Lemon'"] = {"drink_bottlewater", "drink_bottletea", "food_can_sprats", "lowtiercookerfuel"},
-	["'Mute'"] = {"headlamp", "geigercounter", "binoculars_5", "compass"},
-	["'Quartermaster'"] = {"545x39", "556x45", "762x39", "762x51", "9x19"},
-	["'Boss'"] = {"545x39", "556x45", "762x51", "12gaugetr"},
-	["'Smartass'"] = {"9x19", "pso1", "cmore", "acog", "shortdot"},
-	["'Egghead'"] = {"medic_stimpak_1", "medic_psyheal_2", "medic_antirad_2"},
-	["'Beanstalk'"] = {"9x19", "medic_antirad_1", "medic_psyheal_1"},
-	["'Intern'"] = {"medic_antirad_1", "medic_psyheal_1", "medic_medkit_5"},
-	["'Computer'"] = {"medic_antirad_1", "medic_psyheal_2"},
-	["'The Original'"] = {"food_can_tushonka", "drink_bottlewater", "lowtiercookerfuel", "medic_bandage_1"},
-	["'Hoarder'"] = {"500magnum", "127x55", "700nitro", "338lapua", "57x28"},
-	["'Arena Master'"] = {"medic_bandage_1", "medic_medkit_1"},
-	["'???'"] = {"medic_psyheal_2", "medic_antirad_2"},
+	["'Technut'"] = {
+		"22lr", "45acp41", "attachment_fabric_1", "attachment_ceramicplate_1", "9x18", "45acp", "medic_bandage_2",
+	},
+	["'Jitters'"] = {
+		"medic_bandage_1", "medic_medkit_1", "medic_bandage_2", "medic_medkit_3", "medic_medkit_2",
+		"medic_antirad_1", "drug_painkillers",
+	},
+	["'Cleaner'"] = {"12gauge", "22lr", "9x19", "medic_bandage_1", "drink_bottlewater", "lowtiercookerfuel"},
+	["'Haggler'"] = {
+		"12gauge", "9x18", "762x25", "762x39", "762x54", "45acp41", "45acp", "9x19", "food_can_beans",
+	},
+	["'Spicy Lemon'"] = {
+		"drink_bottlewater", "drink_bottletea", "food_can_sprats", "lowtiercookerfuel", "food_bread",
+		"food_can_beans", "food_can_corn", "food_raisins", "drug_caffeine",
+	},
+	["'Mute'"] = {
+		"headlamp", "geigercounter", "binoculars_5", "compass", "drink_bottlewater", "medic_bandage_1",
+		"drug_caffeine",
+	},
+	["'Quartermaster'"] = {
+		"545x39", "556x45", "762x39", "762x51", "9x19", "medic_bandage_1", "medic_medkit_1", "drug_painkillers",
+	},
+	["'Boss'"] = {
+		"545x39", "556x45", "762x51", "12gaugetr", "medic_bandage_1", "medic_medkit_1", "drug_painkillers",
+	},
+	["'Smartass'"] = {"9x19", "pso1", "cmore", "acog", "shortdot", "45acp", "medic_medkit_1", "drug_caffeine"},
+	["'Egghead'"] = {
+		"medic_stimpak_1", "medic_psyheal_2", "medic_antirad_2", "medic_antipsychotic_1", "drug_caffeine",
+		"medic_medkit_1",
+	},
+	["'Beanstalk'"] = {
+		"9x19", "medic_antirad_1", "medic_psyheal_1", "medic_antipsychotic_1", "drug_caffeine", "medic_medkit_1",
+	},
+	["'Intern'"] = {
+		"medic_antirad_1", "medic_psyheal_1", "medic_medkit_5", "medic_antipsychotic_1", "drug_caffeine",
+		"medic_medkit_1",
+	},
+	["'Computer'"] = {
+		"medic_antirad_1", "medic_psyheal_2", "medic_antipsychotic_1", "drug_caffeine", "medic_medkit_1",
+	},
+	["'The Original'"] = {
+		"food_can_tushonka", "drink_bottlewater", "lowtiercookerfuel", "medic_bandage_1", "food_bread",
+		"food_can_beans", "drink_bottletea",
+	},
+	["'Hoarder'"] = {
+		"500magnum", "127x55", "700nitro", "338lapua", "57x28", "45acp", "drug_painkillers", "drink_bottlewater",
+	},
+	["'Arena Master'"] = {
+		"medic_bandage_1", "medic_medkit_1", "medic_bandage_2", "drug_painkillers", "drug_caffeine",
+	},
+	["'???'"] = {
+		"medic_psyheal_2", "medic_antirad_2", "medic_antipsychotic_1", "drug_caffeine", "medic_medkit_1",
+	},
 	["NPC"] = {"drink_bottlewater", "drink_bottletea", "medic_bandage_1"},
 }
+local SUPPLY_CATALOGUE_VERSION = 3
 local MAX_PACKAGE_ITEMS = 64
 local CHOICE_COUNT = 3
 local DIFFICULTY_REPUTATION = {medium = 250, hard = 1600}
@@ -160,14 +198,30 @@ local function equipmentChoices(character, npc, budget, minimum)
 	return result
 end
 
+function ix.taskRewards.SupplyCatalogueVersion()
+	return SUPPLY_CATALOGUE_VERSION
+end
+
+function ix.taskRewards.IsConsumableSupply(itemID)
+	local item = ix.item.list[itemID]
+	if not item or item.isWeapon or item.isBodyArmor then return false end
+	if item.isAmmo or item.sharpnessRestored then return true end
+	local consumable = item.base == "base_aid" or item.base == "base_consumables"
+		or itemID:match("^medic_") or itemID:match("^drug_")
+		or itemID:match("^food_") or itemID:match("^drink_") or itemID == "lowtiercookerfuel"
+		or itemID == "hidestasher_cleaningkit"
+
+	return consumable and type(item.quantity) == "number" and item.quantity > 0 or false
+end
+
+local function canReceiveSupply(character, npc, itemID)
+	return ix.progression.CanUseNPC(character, npc) and ix.taskRewards.IsConsumableSupply(itemID)
+end
+
 function ix.taskRewards.SupplyCatalogue(character, npc)
 	local result, seen = {}, {}
 	local function consider(itemID)
-		local item = ix.item.list[itemID]
-		local isSupply = item and not item.isWeapon and not item.isBodyArmor
-			and (item.isAmmo or item.quantity or item.sharpnessRestored
-				or itemID:match("^hidestash_") or itemID:match("^attachment_"))
-		if isSupply and not seen[itemID] and ix.progression.CanBuyItem(character, npc, itemID) then
+		if not seen[itemID] and canReceiveSupply(character, npc, itemID) then
 			result[#result + 1] = itemID
 			seen[itemID] = true
 		end
@@ -262,7 +316,9 @@ function ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, su
 	for _, itemID in ipairs(catalogue or PROFILES[npc] or PROFILES["NPC"]) do
 		local item = ix.item.list[itemID]
 		local unit = item and ix.taskRewards.UnitValue(itemID) or 0
-		if unit > 0 and unit <= budget and ix.progression.CanBuyItem(character, npc, itemID) then
+		local eligible = suppliesOnly and canReceiveSupply(character, npc, itemID)
+			or not suppliesOnly and ix.progression.CanBuyItem(character, npc, itemID)
+		if unit > 0 and unit <= budget and eligible then
 			candidates[#candidates + 1] = itemID
 		end
 	end

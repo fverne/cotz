@@ -542,7 +542,7 @@ local function includes(list, value)
 
 	return false
 end
-check(not includes(catalogue, "advancedAmmo"), "locked advanced supplies are excluded")
+check(includes(catalogue, "advancedAmmo"), "all consumable rewards are available before purchase unlocks")
 local unlockRecord = ix.progression.GetCharacterProgression(creditOwner)
 unlockRecord.lines.supplyGate = {completed = true}
 ix.progression.SetCharacterProgression(creditOwner, unlockRecord)
@@ -782,26 +782,199 @@ check(#dialogue.tree.GetTaskByDifficulty.GetDynamicOptions(nil, catalogueReader.
 catalogueReader.client.rep = 250
 check(#dialogue.tree.GetTaskByDifficulty.GetDynamicOptions(nil, catalogueReader.client, target) == 2,
 	"client shows medium but hides hard tasks at 250 reputation")
-ITEM = {}
-dofile("gamemodes/ix_cotz/schema/items/sh_sharpening_stone_fine.lua")
-ix.item.list.sharpening_stone_fine = ITEM
+math.Round = function(value) return math.floor(value + 0.5) end
+ITEM = {functions = {}}
+dofile("gamemodes/ix_cotz/schema/items/base/sh_sharpeningstones.lua")
+local stoneBase = copy(ITEM)
+local stoneIDs = {"sharpening_stone", "sharpening_stone_fine"}
+for _, itemID in ipairs(stoneIDs) do
+	ITEM = copy(stoneBase)
+	dofile("gamemodes/ix_cotz/schema/items/sh_" .. itemID .. ".lua")
+	ix.item.list[itemID] = ITEM
+end
+local originalRegister = ix.progression.Register
+ix.progression.Register = function(id, definition) ix.progression.definitions[id] = definition end
+dofile("gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua")
+ix.progression.Register = originalRegister
 local stoneRecipient = actor()
+for _, itemID in ipairs(stoneIDs) do
+	check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), itemID),
+		"sharpening stones can be task rewards before their purchase unlock")
+	check(not ix.progression.CanBuyItem(stoneRecipient, "'Old Timer'", itemID),
+		"sharpening stones require progression to buy")
+end
+check(not ix.progression.IsActive(stoneRecipient, "oldtimerItemDelivery_Sharpening1"),
+	"sharpening track is unavailable before the first knife")
+local stoneRecord = ix.progression.GetCharacterProgression(stoneRecipient)
+stoneRecord.lines.oldtimerItemDelivery_Knife1 = {completed = true}
+ix.progression.SetCharacterProgression(stoneRecipient, stoneRecord)
+check(ix.progression.IsActive(stoneRecipient, "oldtimerItemDelivery_Sharpening1"),
+	"first knife unlocks sharpening track even for an existing character")
+for _, itemID in ipairs(stoneIDs) do
+	check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), itemID),
+		"sharpening stone reward eligibility is independent of the knife track")
+end
+stoneRecord.lines.oldtimerItemDelivery_Knife2 = {completed = true}
+ix.progression.SetCharacterProgression(stoneRecipient, stoneRecord)
 check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), "sharpening_stone_fine"),
-	"fine sharpening stones are eligible Old Timer task supplies")
-local stoneOffers = 0
+	"fine stone rewards are available independently of sharpening progression")
+ix.progression.SetCompleted(stoneRecipient, "oldtimerItemDelivery_Sharpening1")
+check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), "sharpening_stone"),
+	"Keeping an Edge 1 unlocks normal stones for tasks")
+check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), "sharpening_stone_fine"),
+	"fine stones remain eligible after Keeping an Edge 1")
+check(ix.progression.IsActive(stoneRecipient, "oldtimerItemDelivery_Sharpening2"),
+	"completing first sharpening task activates the second")
+ix.progression.SetCompleted(stoneRecipient, "oldtimerItemDelivery_Sharpening2")
+local stoneOffers = {}
+for _, itemID in ipairs(stoneIDs) do
+	check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), itemID),
+		"unlocked sharpening stones are eligible task supplies")
+end
 for seed = 1, 30 do
 	for _, choice in ipairs(api.BuildJobChoices(stoneRecipient, "'Old Timer'", 600, "stones:" .. seed)) do
-		if choice.items[1].item == "sharpening_stone_fine" then
-			stoneOffers = stoneOffers + 1
-			check(#choice.items == 2, "task budget awards two individual fine sharpening stones")
+		local itemID = choice.items[1].item
+		if includes(stoneIDs, itemID) then
+			stoneOffers[itemID] = true
+			check(#choice.items == 2, "task budget awards two sharpening stones")
 			local value = 0
 			for _, reward in ipairs(choice.items) do
-				check(reward.data.quantity == nil, "single-use stones are not turned into quantity stacks")
+				check(reward.data.quantity == 3, "task reward stones each have three uses")
 				value = value + api.ExpectedValue(reward.item, reward.data)
 			end
-			check(value <= 600, "fine sharpening stone rewards respect the task supply budget")
+			check(value <= 600, "sharpening stone rewards respect the task supply budget")
 		end
 	end
 end
-check(stoneOffers > 0, "generated task choices offer fine sharpening stones")
+for _, itemID in ipairs(stoneIDs) do
+	check(stoneOffers[itemID], "generated task choices offer " .. itemID)
+end
+local supplyOwner = actor()
+ix.item.list.medic_medkit_2 = {name = "Medical Syrette Kit", price = 740, quantity = 2}
+ix.item.list.medic_antirad_1 = {name = "Old antirad", price = 850, quantity = 2}
+ix.item.list.drug_caffeine = {name = "Caffeine", price = 760, quantity = 4}
+ix.item.list.medic_antipsychotic_1 = {name = "Asenapine", price = 450, quantity = 8}
+ix.item.list.attachment_reward_test = {name = "Plate", price = 50, quantity = 2}
+ix.item.list.hidestasher_reward_test = {name = "Tool", price = 50, quantity = 2}
+ix.item.list.hidestash_1 = {name = "Note", price = 50}
+ix.item.list.rewardEquipment = {name = "Equipment", price = 50, quantity = 2}
+ix.item.list.medic_locked_reward_test = {name = "Advanced aid", price = 100, quantity = 2}
+ix.progression.definitions.earlySupplyTest = {vendorUnlocks = {
+	{npc = "'Jitters'", args = {"medic_medkit_2"}},
+	{npc = "'Jitters'", args = {"medic_antirad_1"}},
+	{npc = "'Jitters'", args = {"drug_painkillers"}},
+	{npc = "'Jitters'", args = {"medic_locked_reward_test"}},
+	{npc = "'Jitters'", args = {"attachment_reward_test"}},
+	{npc = "'Jitters'", args = {"hidestasher_reward_test"}},
+	{npc = "'Jitters'", args = {"hidestash_1"}},
+	{npc = "'Jitters'", args = {"rewardEquipment"}},
+}}
+local earlyCatalogue = api.SupplyCatalogue(supplyOwner, "'Jitters'")
+for _, itemID in ipairs({"medic_medkit_2", "medic_antirad_1", "drug_painkillers"}) do
+	check(includes(earlyCatalogue, itemID), "approved low-end supply is available before its shop unlock")
+	check(not ix.progression.CanBuyItem(supplyOwner, "'Jitters'", itemID),
+		"early task rewards do not grant purchase authorisation")
+end
+check(includes(earlyCatalogue, "medic_locked_reward_test"), "all configured aid is eligible before shop unlocks")
+local supplyRecord = ix.progression.GetCharacterProgression(supplyOwner)
+supplyRecord.lines.earlySupplyTest = {completed = true}
+ix.progression.SetCharacterProgression(supplyOwner, supplyRecord)
+local earnedCatalogue = api.SupplyCatalogue(supplyOwner, "'Jitters'")
+check(includes(earnedCatalogue, "medic_locked_reward_test"), "consumables remain available after purchase unlocks")
+for _, itemID in ipairs({"attachment_reward_test", "hidestasher_reward_test", "hidestash_1", "rewardEquipment"}) do
+	check(not includes(earnedCatalogue, itemID), "equipment and reusable items stay excluded after unlock")
+	check(not api.IsConsumableSupply(itemID), "quantity alone does not make equipment consumable")
+end
+supplyRecord.lines.earlySupplyTest = nil
+ix.progression.SetCharacterProgression(supplyOwner, supplyRecord)
+local earlySeen, bonusSeen = {}, {}
+for serial = 1, 25 do
+	for _, choice in ipairs(api.BuildJobChoices(supplyOwner, "'Jitters'", 600, "early:" .. serial)) do
+		check(#choice.items <= 2, "early supplies retain the ordinary two-item cap")
+		local value = 0
+		for _, reward in ipairs(choice.items) do
+			earlySeen[reward.item] = true
+			check(api.IsConsumableSupply(reward.item), "ordinary rewards contain only consumable supplies")
+			value = value + api.ExpectedValue(reward.item, reward.data)
+		end
+		check(value <= 600, "early ordinary packages respect their supply budget")
+	end
+	for _, choice in ipairs(api.BuildBonusChoices(supplyOwner, "'Jitters'", 600, "early-bonus:" .. serial)) do
+		local value = 0
+		for _, reward in ipairs(choice.items) do
+			bonusSeen[reward.item] = true
+			check(api.IsConsumableSupply(reward.item), "bonus rewards contain only consumable supplies")
+			value = value + api.ExpectedValue(reward.item, reward.data)
+		end
+		check(value <= 600, "early bonus packages respect their supply budget")
+	end
+end
+check(earlySeen.medic_medkit_2 and bonusSeen.medic_medkit_2,
+	"locked syrette kits appear in both ordinary and bonus choices")
+check(#api.SupplyCatalogue(supplyOwner, "'Mute'") == 0, "early supplies cannot bypass Mute access")
+check(#api.SupplyCatalogue(supplyOwner, "'Egghead'") == 0, "early supplies cannot bypass scientist access")
+supplyRecord = ix.progression.GetCharacterProgression(supplyOwner)
+supplyRecord.lines.oldTimerItemDelivery_mainStatue = {completed = true}
+ix.progression.SetCharacterProgression(supplyOwner, supplyRecord)
+check(includes(api.SupplyCatalogue(supplyOwner, "'Mute'"), "drug_caffeine"),
+	"Mute provides consumable supplies after gaining NPC access")
+ix.progression.definitions.earlySupplyTest = nil
+local catalogueOwner = actor()
+local cataloguePreview = api.PreviewJob(catalogueOwner, "'Old Timer'", "easy", {"hunting"})
+local cataloguePreviews = catalogueOwner:GetData("taskJobPreviews")
+cataloguePreviews["'Old Timer'"].easy.supplyCatalogueVersion = nil
+cataloguePreviews["'Old Timer'"].easy.rewardChoices = {{label = "Outdated catalogue", items = {}}}
+catalogueOwner:SetData("taskJobPreviews", cataloguePreviews)
+local refreshed = api.PreviewJob(catalogueOwner, "'Old Timer'", "easy", {"hunting"})
+check(refreshed.rewardKey == cataloguePreview.rewardKey and refreshed.numberRec == cataloguePreview.numberRec,
+	"catalogue migration preserves the preview task identity and requirements")
+check(refreshed.supplyCatalogueVersion == api.SupplyCatalogueVersion()
+	and refreshed.rewardChoices[1].label ~= "Outdated catalogue", "unaccepted previews refresh their catalogue")
+check(api.AcceptJob(catalogueOwner.client, "'Old Timer'", "easy"), "updated catalogue preview can be accepted")
+local acceptedCatalogue = catalogueOwner:GetJobs()["'Old Timer'"]
+local acceptedLabel = catalogueOwner:GetData("taskRewardOffers")[acceptedCatalogue.rewardKey].choices[1].label
+check(not api.PreviewJob(catalogueOwner, "'Old Timer'", "easy", {"hunting"}),
+	"active assignments prevent preview migrations")
+check(catalogueOwner:GetData("taskRewardOffers")[acceptedCatalogue.rewardKey].choices[1].label == acceptedLabel,
+	"accepted assignments keep their saved supplies")
+
+local cleaningOwner = actor()
+ix.item.list.hidestasher_cleaningkit = {name = "Cleaning kit", price = 900, quantity = 4}
+ix.progression.definitions.cleaningSupplyTest = {vendorUnlocks = {
+	{npc = "'Old Timer'", args = {"hidestasher_cleaningkit"}},
+}}
+check(api.IsConsumableSupply("hidestasher_cleaningkit"), "four-use cleaning kits qualify as task supplies")
+check(includes(api.SupplyCatalogue(cleaningOwner, "'Old Timer'"), "hidestasher_cleaningkit"),
+	"cleaning kits are task rewards before their purchase unlock")
+local cleaningRecord = ix.progression.GetCharacterProgression(cleaningOwner)
+cleaningRecord.lines.cleaningSupplyTest = {completed = true}
+ix.progression.SetCharacterProgression(cleaningOwner, cleaningRecord)
+check(includes(api.SupplyCatalogue(cleaningOwner, "'Old Timer'"), "hidestasher_cleaningkit"),
+	"unlocked cleaning kits return to Old Timer's catalogue")
+local cleaningSeen, cleaningBonusSeen = false, false
+for serial = 1, 30 do
+	for _, choice in ipairs(api.BuildJobChoices(cleaningOwner, "'Old Timer'", 600, "cleaning:" .. serial)) do
+		for _, reward in ipairs(choice.items) do
+			if reward.item == "hidestasher_cleaningkit" then
+				cleaningSeen = true
+				check(reward.data.quantity == 2, "cleaning kits use budgeted partial charges")
+			end
+		end
+	end
+	for _, choice in ipairs(api.BuildBonusChoices(cleaningOwner, "'Old Timer'", 600, "cleaning-bonus:" .. serial)) do
+		for _, reward in ipairs(choice.items) do
+			if reward.item == "hidestasher_cleaningkit" then cleaningBonusSeen = true end
+		end
+	end
+	for _, choice in ipairs(api.BuildChoices(cleaningOwner, "'Cleaner'", 600, "cleaner:" .. serial)) do
+		for _, reward in ipairs(choice.items) do
+			check(not reward.item:match("^hidestash_"), "Cleaner profiles exclude stash notes and PDAs")
+		end
+	end
+end
+check(cleaningSeen and cleaningBonusSeen, "cleaning kits appear in ordinary and five-task bonus rewards")
+check(not includes(api.SupplyCatalogue(cleaningOwner, "'Cleaner'"), "hidestash_1"),
+	"Cleaner repeatable supplies exclude stash notes")
+ix.progression.definitions.cleaningSupplyTest = nil
+
 print("PASS: " .. checks .. " task reward checks")

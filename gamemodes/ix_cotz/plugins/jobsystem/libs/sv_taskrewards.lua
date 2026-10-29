@@ -126,6 +126,7 @@ function ix.taskRewards.PrepareJob(character, npc, job)
 	job.progressionClaim = serial
 	job.rewardKey = key
 	job.supplyBudget = budget
+	job.supplyCatalogueVersion = ix.taskRewards.SupplyCatalogueVersion()
 	job.moneyReward = ix.taskRewards.FixedMoney(definition, job.numberRec)
 	job.rewardChoices = table.Copy(offer.choices)
 
@@ -291,11 +292,13 @@ function ix.taskRewards.PreviewJob(character, npc, difficulty, categories)
 		local offers = offersFor(character)
 		local offer = offers[preview.rewardKey]
 		local needsUpdate = budget > (preview.supplyBudget or 0) or preview.supplyDifficulty ~= nil
+			or preview.supplyCatalogueVersion ~= ix.taskRewards.SupplyCatalogueVersion()
 		if needsUpdate and offer and not offer.earned then
 			local choices = ix.taskRewards.BuildJobChoices(character, npc, budget, preview.rewardKey)
 			if #choices > 0 then
 				offer.choices = choices
 				preview.supplyBudget = budget
+				preview.supplyCatalogueVersion = ix.taskRewards.SupplyCatalogueVersion()
 				preview.supplyDifficulty = nil
 				preview.difficulty = difficulty
 				preview.rewardChoices = table.Copy(choices)

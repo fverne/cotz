@@ -5,6 +5,7 @@ local function check(condition, message)
 	assert(condition, message)
 end
 
+math.Round = function(value) return math.floor(value + 0.5) end
 math.Clamp = function(value, minimum, maximum) return math.max(minimum, math.min(maximum, value)) end
 IsValid = function(value) return type(value) == "table" and not value.invalid end
 istable = function(value) return type(value) == "table" end
@@ -130,11 +131,20 @@ items[2] = stone
 local sharpen = stone.functions.Sharpen
 check(sharpen.OnCanRun(stone), "owned stone is usable")
 knife:SetData("sharpness", 50)
-check(sharpen.OnRun(stone, {1}) == true, "valid sharpening consumes the stone")
+check(stone:GetData("quantity", stone.quantity) == 3, "new stones have three uses")
+check(sharpen.OnRun(stone, {1}) == false, "first sharpening keeps the stone")
+check(stone:GetData("quantity") == 2 and stone:GetPrice() == 100, "first use reduces quantity and resale value")
 check(ix.poaching.GetSharpness(knife) == 75, "stone restores 25 sharpness")
-check(sharpen.OnRun(stone, {1}) == true and ix.poaching.GetSharpness(knife) == 100, "stone restores to 100")
+check(sharpen.OnRun(stone, {1}) == false and ix.poaching.GetSharpness(knife) == 100, "second use keeps stone")
+check(stone:GetData("quantity") == 1, "second sharpening leaves one use")
 check(sharpen.OnRun(stone, {1}) == true and ix.poaching.GetSharpness(knife) == 101, "sharpness caps at 101")
+check(stone:GetData("quantity") == 0 and not sharpen.OnCanRun(stone), "third use exhausts stone")
+knife:SetData("sharpness", 0)
+check(sharpen.OnRun(stone, {1}) == false, "exhausted stones cannot sharpen")
+stone:SetData("quantity", 3)
+knife:SetData("sharpness", 101)
 check(sharpen.OnRun(stone, {1}) == false, "full knife does not consume a stone")
+check(stone:GetData("quantity") == 3, "failed sharpening preserves remaining uses")
 check(sharpen.OnRun(stone, {}) == false, "missing target is rejected")
 check(sharpen.OnRun(stone, "bad") == false, "malformed target is rejected")
 items[1] = nil
@@ -150,7 +160,8 @@ ITEM = {}
 dofile("gamemodes/ix_cotz/schema/items/sh_sharpening_stone_fine.lua")
 stone.sharpnessRestored = ITEM.sharpnessRestored
 knife:SetData("sharpness", 0)
-check(sharpen.OnRun(stone, {1}) == true and ix.poaching.GetSharpness(knife) == 50, "fine stone restores dull knife")
+check(sharpen.OnRun(stone, {1}) == false and ix.poaching.GetSharpness(knife) == 50, "fine stone restores dull knife")
+check(stone:GetData("quantity") == 2, "fine stone also retains two remaining uses")
 for index = 1, 4 do
 	ITEM = {}
 	dofile("gamemodes/ix_cotz/schema/items/miscweapons/sh_knife" .. index .. ".lua")

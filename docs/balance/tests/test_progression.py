@@ -179,7 +179,7 @@ ix.progression.Register("delivery", {name = "Hardware", keyNpc = "Trader", progM
         baseline = json.loads((root / 'docs/balance/progression/milestone-baseline.json').read_text())
         self.assertEqual(warnings, [])
         self.assertEqual(len(baseline), 139)
-        self.assertEqual(len(steps), 227)
+        self.assertEqual(len(steps), 229)
         self.assertEqual(len({s['keyNpc'] for s in steps}), 19)
         _, planned = plan(root)
         groups = defaultdict(list)

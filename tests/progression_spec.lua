@@ -842,7 +842,7 @@ for roll = 1, 2 do
 end
 math.random = selectionRandom
 local auditedDefinitions, auditedContacts = api.AuditDefinitions()
-check(auditedDefinitions == 227 and auditedContacts == 19, "full runtime graph audit covers all contacts")
+check(auditedDefinitions == 229 and auditedContacts == 19, "full runtime graph audit covers all contacts")
 local originalPrerequisites = api.definitions.originalSurvival1.prerequisites
 api.definitions.originalSurvival1.prerequisites = {"originalSurvival1"}
 check(not pcall(api.AuditDefinitions), "runtime audit rejects prerequisite cycles")
