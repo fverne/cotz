@@ -61,8 +61,10 @@ ITEM.functions.Sharpen = {
 		if not character then return targets end
 		for _, knife in pairs(character:GetInventory():GetItems()) do
 			if knife.isPoachKnife and ix.poaching.GetSharpness(knife) < ix.poaching.Sharpness.maximum then
+				local label = string.format("%s (%d%%)", knife.name, ix.poaching.GetSharpness(knife))
+				-- Inventory menus pass this label through L(), which formats it again.
 				targets[#targets + 1] = {
-					name = string.format("%s (%d%%)", knife.name, ix.poaching.GetSharpness(knife)),
+					name = label:gsub("%%", "%%%%"),
 					data = {knife:GetID()},
 				}
 			end
