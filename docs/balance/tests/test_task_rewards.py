@@ -45,7 +45,7 @@ class TaskRewardAuditTests(unittest.TestCase):
                 if tokens[i + 2].value in {'items', 'itemsForcedDrop'} and tokens[i + 4].value == '{':
                     data[tokens[i + 2].value] = assigned_table(tokens, i + 4)
             cls.items[path.stem[3:]] = data
-        for path in (folder / 'plugins/randomitem/libs').glob('*.lua'):
+        for path in (folder / 'plugins/randomitem').rglob('*.lua'):
             tokens = balance.tokenize(path.read_text())
             for i in range(len(tokens) - 9):
                 if [t.value for t in tokens[i:i + 6]] != ['ix', '.', 'randomitems', '.', 'tables', '[']:
@@ -57,7 +57,7 @@ class TaskRewardAuditTests(unittest.TestCase):
                 except ValueError:
                     # Unrelated computed pools cannot be task-kit dependencies below.
                     pass
-        for path in (folder / 'plugins/jobsystem').glob('sh_*.lua'):
+        for path in (folder / 'plugins/jobsystem/definitions').glob('sh_*.lua'):
             tokens = balance.tokenize(path.read_text())
             for i in range(len(tokens) - 4):
                 if [t.value for t in tokens[i:i + 4]] == ['tempJob', '.', 'reward', '=']:

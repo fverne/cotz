@@ -15,7 +15,7 @@ class ProgressionTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.folder = self.root / "gamemodes/ix_cotz/plugins/progression"
-        self.folder.mkdir(parents=True)
+        (self.folder / "definitions").mkdir(parents=True)
         (self.folder / "libs").mkdir()
         (self.folder / "libs/sh_progression.lua").write_text('''
 ix.progression.npcRequirements = {["Trader"] = "intro"}
@@ -49,7 +49,7 @@ ix.progression.Register("delivery", {
 })
 function ix.progression.Register(id, data) end
 '''
-        (self.folder / "sh_definitions.lua").write_text(self.source)
+        (self.folder / "definitions/sh_definitions.lua").write_text(self.source)
 
     def collect(self):
         return progression.collect(self.root, balance.tokenize, balance.lua_string)
@@ -70,7 +70,7 @@ function ix.progression.Register(id, data) end
 
     def test_computed_requirements_are_reported_without_inventing_counts(self):
         source = self.source.replace('return requirements', 'requirements["nuts"] = GetCount()\n return requirements')
-        (self.folder / "sh_definitions.lua").write_text(source)
+        (self.folder / "definitions/sh_definitions.lua").write_text(source)
         steps, _, warnings = self.collect()
         self.assertEqual(len(steps), 2)
         self.assertEqual(steps[1]["requirements"], {})
@@ -130,7 +130,7 @@ function ix.progression.Register(id, data) end
         self.assertEqual(demand["paper"][-1], "Not found in scanned items")
 
     def test_duplicate_ids_and_missing_successors_are_visible(self):
-        (self.folder / "sh_extra.lua").write_text('''
+        (self.folder / "definitions/sh_extra.lua").write_text('''
 ix.progression.Register("intro", {name = "Duplicate", keyNpc = "Guide", progMap = "map_a",
 defaultActive = false, nextProgressions = {"missing"}, progressthresholds = {1}})
 ''')
@@ -144,14 +144,14 @@ class PersonalRequirementTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             base = root / 'gamemodes/ix_cotz/plugins/progression'
-            base.mkdir(parents=True)
-            (base / 'sh_requirementpools.lua').write_text('''
+            (base / "definitions").mkdir(parents=True)
+            (base / 'definitions/sh_requirementpools.lua').write_text('''
 ix.progression.itemPools = {
  fasteners = {name = "Fasteners", tier = "common", evidence = "Equal weights; different stack sizes",
  candidates = {{item = "nuts"}, {item = "bolts"}}},
 }
 ''')
-            (base / 'sh_definitions.lua').write_text('''
+            (base / 'definitions/sh_definitions.lua').write_text('''
 ix.progression.Register("delivery", {name = "Hardware", keyNpc = "Trader", progMap = "map",
  defaultActive = true, requirementSlots = {{pool = "fasteners", quantity = 2}}})
 ''')
@@ -304,9 +304,9 @@ ix.progression.Register("delivery", {name = "Hardware", keyNpc = "Trader", progM
                 continue
             filename = contact_files[step['keyNpc']]
             self.assertTrue(step['source'].endswith('/' + filename), step['id'])
-            self.assertEqual(plugin.count(f'ix.util.Include("{filename}")'), 1, filename)
-        self.assertFalse((folder / 'sh_expansion.lua').exists())
-        self.assertFalse((folder / 'sh_equipmentprog.lua').exists())
+            self.assertEqual(plugin.count(f'ix.util.Include("definitions/{filename}")'), 1, filename)
+        self.assertFalse((folder / 'definitions/sh_expansion.lua').exists())
+        self.assertFalse((folder / 'definitions/sh_equipmentprog.lua').exists())
 
     def test_service_rewards_and_checkpoint_thresholds_are_exported(self):
         root = Path(__file__).resolve().parents[3]

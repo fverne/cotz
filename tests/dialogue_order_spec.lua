@@ -4,9 +4,13 @@ local function check(condition, message)
 	checks = checks + 1
 	assert(condition, message)
 end
-ix = {util = {GetMaterial = function() end}}
+ix = {util = {GetMaterial = function() end, Include = function(filename)
+	dofile("gamemodes/" .. filename)
+end}}
+net = {Receive = function() end}
 hook = {Add = function() end}
 dofile("gamemodes/ix_cotz/plugins/dialogue/libs/sh_dialogue.lua")
+check(type(ix.dialogue.ConfigureTaskRewards) == "function", "reward integration loads before NPC conversations")
 local original = {"GOODBYE", "BackgroundTopic", "AboutProgression", "TradeTopic", "RepairItems", "StartBarter"}
 local ordered = ix.dialogue.OrderOptions(original, true)
 check(table.concat(ordered, ",") == "TradeTopic,StartBarter,RepairItems,AboutProgression,BackgroundTopic,GOODBYE",
@@ -118,7 +122,7 @@ panel:OnKeyCodePressed(KEY_0 + 2)
 check(clicked == nil, "loading and closing dialogues cannot activate shortcuts")
 panel.exiting = false
 SERVER, CLIENT = false, true
-dofile("gamemodes/ix_cotz/plugins/dialogue/libs/sh_taskrewards.lua")
+dofile("gamemodes/ix_cotz/plugins/jobsystem/integrations/sh_dialogue.lua")
 local workDialogue = {tree = {
 	GREETING = {options = {"AboutWorkTopic", "GOODBYE"}},
 	BackTopic = {statement = "Let's talk about something else.", options = {"GOODBYE"}},

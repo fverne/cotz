@@ -50,7 +50,7 @@ def build_audit(root, entities, pools, tokenize, decode):
                      group, weight, total, chance, quantity, limits[0], limits[1], source,
                      items.get(item, {}).get("source", ""), *worldspawn_scope(group), note])
 
-    for path in sorted((root / "gamemodes/ix_cotz/plugins/randomitem/libs").glob("*.lua")):
+    for path in sorted((root / "gamemodes/ix_cotz/plugins/randomitem").rglob("*.lua")):
         source = path.read_text(encoding="utf-8-sig")
         tokens = tokenize(source)
         for i in range(len(tokens) - 10):

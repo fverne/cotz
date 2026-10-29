@@ -58,7 +58,7 @@ Use existing items and services first. The implementation below includes explici
 
 The pre-expansion baseline contains **139 progression definitions: 134 deliveries and five job counters**, owned by 14 NPCs. There are 19 vendor templates in total. Appendix A allocates existing shop unlocks; the contact plans below also cover the five templates without progression.
 
-The audit uses `plugins/progression/sh_*prog.lua`, `sh_definitions.lua`, `libs/sh_progression.lua`, vendor templates, dialogue and the job system, under `gamemodes/ix_cotz/`. Pacing assumptions come from `docs/balance/progression_pacing.py` and the progression balance rationale. No game Lua was executed.
+The audit uses `plugins/progression/definitions/sh_*prog.lua`, `definitions/sh_definitions.lua`, `libs/sh_progression.lua`, vendor templates, dialogue and the job system, under `gamemodes/ix_cotz/`. Pacing assumptions come from `docs/balance/progression_pacing.py` and the progression balance rationale. No game Lua was executed.
 
 - Old Timer's knife line jumps from one category to five and then eight; Jitters goes 1 → 3 → 6 → 8 in four steps. Egghead's detector line goes 1 → 3 → 8. These are the strongest candidates for intermediate work.
 - Old Timer grants five melee weapons at once; Spicy Lemon grants eight food/drink items at once. Medical, scientific and weapon milestones often grant multiple different upgrades together.

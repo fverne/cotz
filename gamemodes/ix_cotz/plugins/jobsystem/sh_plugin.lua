@@ -34,14 +34,14 @@ ix.char.RegisterVar("jobs", {
 	bNoDisplay = true,
 })
 
-ix.util.Include("sh_itemjobs_artifacts_pc.lua")
-ix.util.Include("sh_itemjobs_artifacts.lua")
-ix.util.Include("sh_itemjobs_meals.lua")
-ix.util.Include("sh_itemjobs_parts.lua")
-ix.util.Include("sh_itemjobs_world.lua")
-ix.util.Include("sh_killjobs_humans.lua")
-ix.util.Include("sh_killjobs_mutants.lua")
-ix.util.Include("sh_specialjobs.lua")
+ix.util.Include("definitions/sh_itemjobs_artifacts_pc.lua")
+ix.util.Include("definitions/sh_itemjobs_artifacts.lua")
+ix.util.Include("definitions/sh_itemjobs_meals.lua")
+ix.util.Include("definitions/sh_itemjobs_parts.lua")
+ix.util.Include("definitions/sh_itemjobs_world.lua")
+ix.util.Include("definitions/sh_killjobs_humans.lua")
+ix.util.Include("definitions/sh_killjobs_mutants.lua")
+ix.util.Include("definitions/sh_specialjobs.lua")
 ix.util.Include("sh_listeners.lua")
 ix.util.Include("cl_plugin.lua")
 

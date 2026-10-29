@@ -1,7 +1,7 @@
 # Personal progression balance rationale
 
 The runtime source of truth is `gamemodes/ix_cotz/plugins/progression/`: delivery
-slots are declared on each step and candidate pools in `sh_requirementpools.lua`.
+slots are declared on each step and candidate pools in `definitions/sh_requirementpools.lua`.
 The workbook regenerates its views from those files. No game Lua is executed by
 the documentation exporter.
 

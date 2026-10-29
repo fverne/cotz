@@ -193,7 +193,7 @@ for _, filename in ipairs({
 	"smartassprog",
 	"arenaprog",
 }) do
-	dofile(base .. "sh_" .. filename .. ".lua")
+	dofile(base .. "definitions/sh_" .. filename .. ".lua")
 end
 
 local a, b = character(), character()
@@ -605,7 +605,7 @@ FindMetaTable = function()
 end
 ix.config = { Add = function() end }
 ix.util.Include = function(filename)
-	dofile("gamemodes/ix_cotz/plugins/dialogue/" .. filename)
+	dofile("gamemodes/" .. filename)
 end
 dofile("gamemodes/ix_cotz/plugins/dialogue/sh_plugin.lua")
 local invoked = 0
@@ -986,7 +986,7 @@ check(string.find(dialogueTree, "couldn't accept", 1, true), "rejected delivery 
 check(#lostItems == notificationsBeforeRetry, "rejected dialogue retry shows no lost-item icon")
 
 -- The real reward helper prices the consumed fraction, not the whole remaining stack.
-local rewardFile = assert(io.open("gamemodes/ix_cotz/schema/libs/sh_fverneutils.lua"))
+local rewardFile = assert(io.open("gamemodes/ix_cotz/schema/libs/sh_util.lua"))
 local rewardSource = rewardFile:read("*a")
 rewardFile:close()
 math.Round = function(value)

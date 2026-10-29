@@ -166,7 +166,7 @@ def collect(root, tokenize, decode):
                 except ValueError as exc:
                     notices.append([library.relative_to(root).as_posix(), str(exc)])
                 break
-    for path in sorted(folder.glob("sh_*.lua")):
+    for path in sorted((folder / "definitions").glob("sh_*.lua")):
         source = path.read_text(encoding="utf-8")
         tokens = tokenize(source)
         constants, skip_until = {}, 0
@@ -237,7 +237,7 @@ def collect(root, tokenize, decode):
 
 
 def collect_pools(root, tokenize, decode):
-    path = root / "gamemodes/ix_cotz/plugins/progression/sh_requirementpools.lua"
+    path = root / "gamemodes/ix_cotz/plugins/progression/definitions/sh_requirementpools.lua"
     if not path.is_file():
         return {}
     source = path.read_text(encoding="utf-8")

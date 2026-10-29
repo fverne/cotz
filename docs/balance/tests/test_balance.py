@@ -125,7 +125,7 @@ class RoundTripTests(unittest.TestCase):
         self.assertNotIn('inactive', {e['id'] for e in data['entities']})
 
     def test_progression_tabs_are_read_only_views_and_do_not_change_import(self):
-        self.write(self.root / 'gamemodes/ix_cotz/plugins/progression/sh_test.lua', b'''
+        self.write(self.root / 'gamemodes/ix_cotz/plugins/progression/definitions/sh_test.lua', b'''
 ix.progression.Register("test", {
 name = "Test", keyNpc = "Guide", progMap = "map", defaultActive = true,
 GetItemIds = function() return {["medkit"] = 5} end,

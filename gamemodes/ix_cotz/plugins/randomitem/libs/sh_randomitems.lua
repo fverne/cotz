@@ -86,50 +86,50 @@ ix.randomitems.tables["default"] = {
   {200, {"9x19", { ["quantity"] = 25}}},
 }
 
-ix.util.Include("ix_entbox_drops.lua","shared")
-ix.util.Include("ix_wood_entbox_drops.lua","shared")
-ix.util.Include("ix_paper_entbox_drops.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/ix_entbox_drops.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/ix_wood_entbox_drops.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/ix_paper_entbox_drops.lua","shared")
 
-ix.util.Include("worldspawn_1.lua","shared")
-ix.util.Include("worldspawn_2.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/worldspawn_1.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/worldspawn_2.lua","shared")
 
-ix.util.Include("worldspawn_3.lua","shared")
-ix.util.Include("worldspawn_4.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/worldspawn_3.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/worldspawn_4.lua","shared")
 
-ix.util.Include("worldspawn_5.lua","shared")
-ix.util.Include("worldspawn_6.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/worldspawn_5.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/worldspawn_6.lua","shared")
 
-ix.util.Include("reward_aid_low.lua","shared")
-ix.util.Include("reward_aid_high.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/reward_aid_low.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/reward_aid_high.lua","shared")
 
-ix.util.Include("reward_ammo_low.lua","shared")
-ix.util.Include("reward_ammo_high.lua","shared")
-ix.util.Include("reward_ammo_rare.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/reward_ammo_low.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/reward_ammo_high.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/reward_ammo_rare.lua","shared")
 
-ix.util.Include("reward_consumable.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/reward_consumable.lua","shared")
 
-ix.util.Include("reward_generic_valuable.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/reward_generic_valuable.lua","shared")
 
-ix.util.Include("event_anomaly_burner.lua","shared")
-ix.util.Include("event_anomaly_redrazor.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/event_anomaly_burner.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/event_anomaly_redrazor.lua","shared")
 
-ix.util.Include("stash_tier_1.lua","shared")
-ix.util.Include("stash_tier_2.lua","shared")
-ix.util.Include("stash_tier_3.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/stash_tier_1.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/stash_tier_2.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/stash_tier_3.lua","shared")
 
-ix.util.Include("cache_ammo.lua","shared")
-ix.util.Include("cache_weapons.lua","shared")
-ix.util.Include("cache_misc.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/cache_ammo.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/cache_weapons.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/cache_misc.lua","shared")
 
-ix.util.Include("specialsale_raritynpc.lua","shared")
-ix.util.Include("specialsale_owlnpc.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/specialsale_raritynpc.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/specialsale_owlnpc.lua","shared")
 
-ix.util.Include("human_npc_drops.lua", "shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/human_npc_drops.lua", "shared")
 
-ix.util.Include("money.lua", "shared")
-ix.util.Include("backpacks.lua", "shared")
-ix.util.Include("newchar.lua","shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/money.lua", "shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/backpacks.lua", "shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/newchar.lua","shared")
 
-ix.util.Include("task_rewards_ammo.lua", "shared")
-ix.util.Include("task_rewards_medical.lua", "shared")
-ix.util.Include("task_rewards_weapons.lua", "shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/task_rewards_ammo.lua", "shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/task_rewards_medical.lua", "shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/task_rewards_weapons.lua", "shared")

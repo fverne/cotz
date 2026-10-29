@@ -40,12 +40,12 @@ Features vary in maturity and may need configuration or external content to work
 │       ├── gamemode/          # Gamemode entry points
 │       └── ix_cotz.txt        # Gamemode definition
 ├── lua/                       # Shared Garry's Mod Lua resources
-├── !unused plugins/           # Archived/inactive plugin code
+├── archive/                   # Inactive plugins, item versions, and backup effects
 ├── addon.txt
 └── LICENSE
 ```
 
-**Note:** The `!unused plugins/` directory is not the active plugin directory and should not be treated as part of the standard installation.
+See [Repository layout](docs/repository-layout.md) for file ownership and loading rules. The `archive/` directory contains inactive reference code.
 
 ## Requirements
 
@@ -94,6 +94,8 @@ These are **starting points for experienced Garry's Mod server administrators**,
 The first-time setup plugin also contains presets for `rp_waystation` and `rp_pripyat_remaster`. Check their files before using them with a specific map or modified installation.
 
 For a new map, follow the [map setup guide](docs/map-setup.md). It covers building and exporting an FTS preset, configuring spawns and travel, plugin dependencies, and deployment checks.
+
+Use the companion [map content design guide](docs/map-content-design.md) to plan new town NPCs, loot, artifacts, jobs, progression, encounters, and exploration, including the implementation work that connects them.
 
 ## Multi-server configuration
 

@@ -7,7 +7,7 @@ Jobsystem uses progression's NPC access checks, purchase unlocks and token-backe
 
 `libs/sh_taskrewards.lua` defines contact profiles, nominal-value budgeting and visible
 packages. `libs/sv_taskrewards.lua` persists offers and transfers selected rewards into
-the existing token-backed claim queue. Dialogue's `libs/sh_taskrewards.lua` installs
+the existing token-backed claim queue. `integrations/sh_dialogue.lua` installs
 "Choose or claim task rewards", and an
 authoritative task preview. Contacts without a work topic show the main-menu entry only when a relevant reward,
 kit exchange, barter or pending supply claim is available.

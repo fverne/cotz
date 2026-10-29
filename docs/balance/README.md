@@ -258,7 +258,7 @@ are not committed by the exporter itself.
 The discovery rules match the bundled Helix item loader's root and one-category
 depth for schema and CoTZ plugin item directories. Nested `old/` subdirectories
 are not recursively loaded. Top-level folders named `old` are still considered
-by the loader. Archived `!unused plugins/` and bundled Helix framework items are
+by the loader. Archived `archive/plugins/` and bundled Helix framework items are
 excluded. Plugin enablement, external addons, runtime-generated items, include
 ordering, and runtime overrides are not resolved. Duplicate item IDs are
 reported and made read-only rather than choosing an arbitrary definition.

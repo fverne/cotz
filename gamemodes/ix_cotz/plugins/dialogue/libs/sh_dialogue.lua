@@ -114,6 +114,9 @@ function ix.dialogue.getTopic(id, topicID)
 	return dialogue.tree[topicID]
 end
 
+-- Reward topics must be available before DoPluginIncludes registers NPC conversations.
+ix.util.Include("ix_cotz/plugins/jobsystem/integrations/sh_dialogue.lua")
+
 hook.Add("DoPluginIncludes", "ixDialogueLib", function(path)
 	ix.dialogue.LoadFromDir(path.."/dialogue")
 end)

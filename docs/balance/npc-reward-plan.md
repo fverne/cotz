@@ -292,53 +292,53 @@ Generated from the current source. All base items and active barter outputs are 
 
 | Granting progression | Gate | Purchase authorisation |
 |---|---|---|
-| [technutItemDelivery_Main](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L260) | completion | `attachment_steelplate_1` |
-| [technutItemDelivery_Main](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L260) | completion | `attachment_ceramicplate_1` |
-| [technutItemDelivery_Main](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L260) | completion | `attachment_fabric_1` |
-| [technutItemDelivery_Helmet6_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L811) | completion | `headwear_psz12` |
-| [technutItemDelivery_Mask2_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L999) | completion | `mask_gp5` |
-| [technutItemDelivery_Mask3_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1076) | completion | `mask_pmk3` |
-| [technutItemDelivery_Mask4_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1156) | completion | `mask_m40` |
-| [technutItemDelivery_Attachment1_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1233) | completion | `attachment_steelplate_1` |
-| [technutItemDelivery_Attachment2_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1312) | completion | `attachment_steelplate_2` |
-| [technutItemDelivery_Attachment3_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1393) | completion | `attachment_steelplate_3` |
-| [technutItemDelivery_Suit1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L3) | completion | `suit_mailjacket` |
-| [technutItemDelivery_Suit2](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L52) | completion | `suit_trenchcoat_black` |
-| [technutItemDelivery_Suit2](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L52) | completion | `suit_trenchcoat_brown` |
-| [technutItemDelivery_Suit2](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L52) | completion | `suit_trenchcoat_green` |
-| [technutItemDelivery_Suit2](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L52) | completion | `suit_trenchcoat_tan` |
-| [technutItemDelivery_Suit3](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L127) | completion | `suit_sunrise` |
-| [technutItemDelivery_SuitNBC](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L206) | completion | `suit_nbc` |
-| [technutItemDelivery_Suit4](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L260) | completion | `suit_cs1` |
-| [technutItemDelivery_Suit5](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L312) | completion | `suit_wind` |
-| [technutItemDelivery_Suit6](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L366) | completion | `suit_cs2` |
-| [technutItemDelivery_Suit7](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L420) | completion | `suit_cs3` |
-| [technutItemDelivery_Helmet1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L520) | completion | `helm_steel_ger` |
-| [technutItemDelivery_Helmet1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L520) | completion | `helm_steel_rus` |
-| [technutItemDelivery_Helmet1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L520) | completion | `helm_steel_arab` |
-| [technutItemDelivery_Helmet2](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L573) | completion | `headwear_cs1` |
-| [technutItemDelivery_Helmet3](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L625) | completion | `helm_operator_rus_1` |
-| [technutItemDelivery_Helmet3](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L625) | completion | `helm_operator_rus_2` |
-| [technutItemDelivery_Helmet4](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L678) | completion | `headwear_cs2` |
-| [technutItemDelivery_Helmet4](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L678) | completion | `headwear_cs4` |
-| [technutItemDelivery_Helmet5](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L754) | completion | `helm_sphere08` |
-| [technutItemDelivery_Helmet6](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L836) | completion | `helm_sphere12` |
-| [technutItemDelivery_Helmet7](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L894) | completion | `helm_operator_nato` |
-| [technutItemDelivery_Mask1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L949) | completion | `mask_halfmask` |
-| [technutItemDelivery_Mask1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L949) | completion | `mask_respirator` |
-| [technutItemDelivery_Mask2](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1024) | completion | `mask_eo20` |
-| [technutItemDelivery_Mask3](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1102) | completion | `mask_xm40` |
-| [technutItemDelivery_Mask4](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1181) | completion | `mask_m50` |
-| [technutItemDelivery_Attachment1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1258) | completion | `attachment_ceramicplate_1` |
-| [technutItemDelivery_Attachment2](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1337) | completion | `attachment_ceramicplate_2` |
-| [technutItemDelivery_Attachment3](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1418) | completion | `attachment_ceramicplate_3` |
-| [technutItemDelivery_AttachmentFabric1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1474) | completion | `attachment_fabric_1` |
-| [technutItemDelivery_AttachmentFabric2](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1528) | completion | `attachment_fabric_2` |
-| [technutItemDelivery_AttachmentFrame1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1581) | completion | `attachment_aluframe` |
-| [technutItemDelivery_AttachmentFrame2](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1636) | completion | `attachment_steelframe` |
-| [technutItemDelivery_AttachmentCarbon](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1690) | completion | `attachment_carbonfibre` |
-| [technutItemDelivery_AttachmentKevlar1](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1743) | completion | `attachment_kevlar_1` |
-| [technutItemDelivery_AttachmentKevlar2](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L1799) | completion | `attachment_kevlar_2` |
+| [technutItemDelivery_Main](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L260) | completion | `attachment_steelplate_1` |
+| [technutItemDelivery_Main](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L260) | completion | `attachment_ceramicplate_1` |
+| [technutItemDelivery_Main](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L260) | completion | `attachment_fabric_1` |
+| [technutItemDelivery_Helmet6_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L811) | completion | `headwear_psz12` |
+| [technutItemDelivery_Mask2_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L999) | completion | `mask_gp5` |
+| [technutItemDelivery_Mask3_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1076) | completion | `mask_pmk3` |
+| [technutItemDelivery_Mask4_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1156) | completion | `mask_m40` |
+| [technutItemDelivery_Attachment1_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1233) | completion | `attachment_steelplate_1` |
+| [technutItemDelivery_Attachment2_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1312) | completion | `attachment_steelplate_2` |
+| [technutItemDelivery_Attachment3_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1393) | completion | `attachment_steelplate_3` |
+| [technutItemDelivery_Suit1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L3) | completion | `suit_mailjacket` |
+| [technutItemDelivery_Suit2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L52) | completion | `suit_trenchcoat_black` |
+| [technutItemDelivery_Suit2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L52) | completion | `suit_trenchcoat_brown` |
+| [technutItemDelivery_Suit2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L52) | completion | `suit_trenchcoat_green` |
+| [technutItemDelivery_Suit2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L52) | completion | `suit_trenchcoat_tan` |
+| [technutItemDelivery_Suit3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L127) | completion | `suit_sunrise` |
+| [technutItemDelivery_SuitNBC](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L206) | completion | `suit_nbc` |
+| [technutItemDelivery_Suit4](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L260) | completion | `suit_cs1` |
+| [technutItemDelivery_Suit5](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L312) | completion | `suit_wind` |
+| [technutItemDelivery_Suit6](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L366) | completion | `suit_cs2` |
+| [technutItemDelivery_Suit7](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L420) | completion | `suit_cs3` |
+| [technutItemDelivery_Helmet1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L520) | completion | `helm_steel_ger` |
+| [technutItemDelivery_Helmet1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L520) | completion | `helm_steel_rus` |
+| [technutItemDelivery_Helmet1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L520) | completion | `helm_steel_arab` |
+| [technutItemDelivery_Helmet2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L573) | completion | `headwear_cs1` |
+| [technutItemDelivery_Helmet3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L625) | completion | `helm_operator_rus_1` |
+| [technutItemDelivery_Helmet3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L625) | completion | `helm_operator_rus_2` |
+| [technutItemDelivery_Helmet4](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L678) | completion | `headwear_cs2` |
+| [technutItemDelivery_Helmet4](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L678) | completion | `headwear_cs4` |
+| [technutItemDelivery_Helmet5](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L754) | completion | `helm_sphere08` |
+| [technutItemDelivery_Helmet6](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L836) | completion | `helm_sphere12` |
+| [technutItemDelivery_Helmet7](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L894) | completion | `helm_operator_nato` |
+| [technutItemDelivery_Mask1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L949) | completion | `mask_halfmask` |
+| [technutItemDelivery_Mask1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L949) | completion | `mask_respirator` |
+| [technutItemDelivery_Mask2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1024) | completion | `mask_eo20` |
+| [technutItemDelivery_Mask3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1102) | completion | `mask_xm40` |
+| [technutItemDelivery_Mask4](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1181) | completion | `mask_m50` |
+| [technutItemDelivery_Attachment1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1258) | completion | `attachment_ceramicplate_1` |
+| [technutItemDelivery_Attachment2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1337) | completion | `attachment_ceramicplate_2` |
+| [technutItemDelivery_Attachment3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1418) | completion | `attachment_ceramicplate_3` |
+| [technutItemDelivery_AttachmentFabric1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1474) | completion | `attachment_fabric_1` |
+| [technutItemDelivery_AttachmentFabric2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1528) | completion | `attachment_fabric_2` |
+| [technutItemDelivery_AttachmentFrame1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1581) | completion | `attachment_aluframe` |
+| [technutItemDelivery_AttachmentFrame2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1636) | completion | `attachment_steelframe` |
+| [technutItemDelivery_AttachmentCarbon](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1690) | completion | `attachment_carbonfibre` |
+| [technutItemDelivery_AttachmentKevlar1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1743) | completion | `attachment_kevlar_1` |
+| [technutItemDelivery_AttachmentKevlar2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L1799) | completion | `attachment_kevlar_2` |
 
 ### Old Timer (`tutorialnpc`)
 
@@ -352,16 +352,16 @@ Generated from the current source. All base items and active barter outputs are 
 
 | Granting progression | Gate | Purchase authorisation |
 |---|---|---|
-| [oldtimerItemDelivery_Melee_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua#L216) | completion | `bat` |
-| [oldtimerItemDelivery_Melee_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua#L216) | completion | `hatchet` |
-| [oldtimerItemDelivery_Melee_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua#L216) | completion | `machete` |
-| [oldtimerItemDelivery_Melee_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua#L216) | completion | `fireaxe` |
-| [oldtimerItemDelivery_Knife1](../../gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua#L3) | completion | `knife2` |
-| [oldtimerItemDelivery_Knife2](../../gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua#L77) | completion | `knife3` |
-| [oldtimerItemDelivery_Knife3](../../gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua#L157) | completion | `knife4` |
-| [oldtimerItemDelivery_Melee](../../gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua#L244) | completion | `fubar` |
-| [oldtimerItemDelivery_Hidestash1](../../gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua#L320) | completion | `hidestasher_cleaningkit` |
-| [oldtimerItemDelivery_Hidestash2](../../gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua#L399) | completion | `hidestasher_shovel` |
+| [oldtimerItemDelivery_Melee_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua#L216) | completion | `bat` |
+| [oldtimerItemDelivery_Melee_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua#L216) | completion | `hatchet` |
+| [oldtimerItemDelivery_Melee_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua#L216) | completion | `machete` |
+| [oldtimerItemDelivery_Melee_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua#L216) | completion | `fireaxe` |
+| [oldtimerItemDelivery_Knife1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua#L3) | completion | `knife2` |
+| [oldtimerItemDelivery_Knife2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua#L77) | completion | `knife3` |
+| [oldtimerItemDelivery_Knife3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua#L157) | completion | `knife4` |
+| [oldtimerItemDelivery_Melee](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua#L244) | completion | `fubar` |
+| [oldtimerItemDelivery_Hidestash1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua#L320) | completion | `hidestasher_cleaningkit` |
+| [oldtimerItemDelivery_Hidestash2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua#L399) | completion | `hidestasher_shovel` |
 
 ### Spicy Lemon (`cooknpc`)
 
@@ -375,29 +375,29 @@ Generated from the current source. All base items and active barter outputs are 
 
 | Granting progression | Gate | Purchase authorisation |
 |---|---|---|
-| [spicylemonItemDelivery_Food_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L382) | completion | `drink_canwater` |
-| [spicylemonItemDelivery_Food_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L382) | completion | `drink_bottlebeer_6` |
-| [spicylemonItemDelivery_Food_stage2](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L408) | completion | `food_nuts_2` |
-| [spicylemonItemDelivery_Food_stage2](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L408) | completion | `food_cheese_2` |
-| [spicylemonItemDelivery_Food_stage3](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L434) | completion | `food_can_tomato` |
-| [spicylemonItemDelivery_Food_stage3](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L434) | completion | `food_can_tushonka` |
-| [spicylemonItemDelivery_Vodka_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L532) | completion | `drink_vodka_4` |
-| [spicylemonItemDelivery_Spirits_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L615) | completion | `drink_wine` |
-| [spicylemonItemDelivery_Medical1](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L3) | completion | `drug_mints` |
-| [spicylemonItemDelivery_Medical2](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L54) | completion | `drug_caffeine` |
-| [spicylemonItemDelivery_Medical3](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L105) | completion | `medic_psyheal_1` |
-| [spicylemonItemDelivery_Medical4](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L160) | completion | `medic_antipsychotic_1` |
-| [spicylemonItemDelivery_Medical5](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L213) | completion | `drug_painkillers` |
-| [spicylemonItemDelivery_Medical6](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L268) | completion | `drug_adrenaline` |
-| [spicylemonItemDelivery_Medical7](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L325) | completion | `drug_morphine` |
-| [spicylemonItemDelivery_Food](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L461) | completion | `drink_energydrink_4` |
-| [spicylemonItemDelivery_Food](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L461) | completion | `drink_energydrink_2` |
-| [spicylemonItemDelivery_Vodka](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L558) | completion | `drink_vodka_5` |
-| [spicylemonItemDelivery_Vodka](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L558) | completion | `drink_vodka_6` |
-| [spicylemonItemDelivery_Spirits](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L642) | completion | `drink_spirit_1` |
-| [spicylemonItemDelivery_Spirits](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L642) | completion | `drink_spirit_2` |
-| [spicylemonItemDelivery_Spirits](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L642) | completion | `drink_spirit_3` |
-| [spicylemonItemDelivery_Brew](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L727) | completion | `miscaid_swampbrew` |
+| [spicylemonItemDelivery_Food_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L382) | completion | `drink_canwater` |
+| [spicylemonItemDelivery_Food_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L382) | completion | `drink_bottlebeer_6` |
+| [spicylemonItemDelivery_Food_stage2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L408) | completion | `food_nuts_2` |
+| [spicylemonItemDelivery_Food_stage2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L408) | completion | `food_cheese_2` |
+| [spicylemonItemDelivery_Food_stage3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L434) | completion | `food_can_tomato` |
+| [spicylemonItemDelivery_Food_stage3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L434) | completion | `food_can_tushonka` |
+| [spicylemonItemDelivery_Vodka_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L532) | completion | `drink_vodka_4` |
+| [spicylemonItemDelivery_Spirits_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L615) | completion | `drink_wine` |
+| [spicylemonItemDelivery_Medical1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L3) | completion | `drug_mints` |
+| [spicylemonItemDelivery_Medical2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L54) | completion | `drug_caffeine` |
+| [spicylemonItemDelivery_Medical3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L105) | completion | `medic_psyheal_1` |
+| [spicylemonItemDelivery_Medical4](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L160) | completion | `medic_antipsychotic_1` |
+| [spicylemonItemDelivery_Medical5](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L213) | completion | `drug_painkillers` |
+| [spicylemonItemDelivery_Medical6](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L268) | completion | `drug_adrenaline` |
+| [spicylemonItemDelivery_Medical7](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L325) | completion | `drug_morphine` |
+| [spicylemonItemDelivery_Food](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L461) | completion | `drink_energydrink_4` |
+| [spicylemonItemDelivery_Food](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L461) | completion | `drink_energydrink_2` |
+| [spicylemonItemDelivery_Vodka](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L558) | completion | `drink_vodka_5` |
+| [spicylemonItemDelivery_Vodka](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L558) | completion | `drink_vodka_6` |
+| [spicylemonItemDelivery_Spirits](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L642) | completion | `drink_spirit_1` |
+| [spicylemonItemDelivery_Spirits](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L642) | completion | `drink_spirit_2` |
+| [spicylemonItemDelivery_Spirits](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L642) | completion | `drink_spirit_3` |
+| [spicylemonItemDelivery_Brew](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L727) | completion | `miscaid_swampbrew` |
 
 ### Haggler (`tradernpc`)
 
@@ -411,45 +411,45 @@ Generated from the current source. All base items and active barter outputs are 
 
 | Granting progression | Gate | Purchase authorisation |
 |---|---|---|
-| [hagglerItemDelivery_1_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L3) | completion | `fort12` |
-| [hagglerItemDelivery_11_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L88) | completion | `lax410s` |
-| [hagglerItemDelivery_121_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L390) | completion | `sks` |
-| [hagglerItemDelivery_122_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L642) | completion | `kiparis` |
-| [hagglerItemDelivery_22_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1197) | completion | `mp34` |
-| [hagglerItemDelivery_221_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1277) | completion | `w1895` |
-| [hagglerItemDelivery_1](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L28) | completion | `m1911` |
-| [hagglerItemDelivery_1](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L28) | completion | `brhp` |
-| [hagglerItemDelivery_11](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L113) | completion | `sten` |
-| [hagglerItemDelivery_111](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L169) | completion | `lax410` |
-| [hagglerItemDelivery_1111](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L223) | completion | `swmodel29` |
-| [hagglerItemDelivery_1111](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L223) | completion | `44magnum` |
-| [hagglerItemDelivery_112](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L278) | completion | `sterling` |
-| [hagglerItemDelivery_12](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L335) | completion | `toz66` |
-| [hagglerItemDelivery_12](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L335) | completion | `toz66short` |
-| [hagglerItemDelivery_121](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L415) | completion | `rugermini14` |
-| [hagglerItemDelivery_1211](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L474) | completion | `saigasemi` |
-| [hagglerItemDelivery_12111](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L529) | completion | `w9422357` |
-| [hagglerItemDelivery_12111](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L529) | completion | `357magnum` |
-| [hagglerItemDelivery_121111](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L586) | completion | `g2contender500` |
-| [hagglerItemDelivery_121111](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L586) | completion | `500magnum` |
-| [hagglerItemDelivery_122](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L667) | completion | `kp31` |
-| [hagglerItemDelivery_1221](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L722) | completion | `mac11` |
-| [hagglerItemDelivery_12211](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L774) | completion | `m1911chic` |
-| [hagglerItemDelivery_2](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L828) | completion | `toz34` |
-| [hagglerItemDelivery_2](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L828) | completion | `toz34short` |
-| [hagglerItemDelivery_21](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L880) | completion | `sako85nato` |
-| [hagglerItemDelivery_211](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L932) | completion | `c96carbine` |
-| [hagglerItemDelivery_2111](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L987) | completion | `ppsh` |
-| [hagglerItemDelivery_212](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1040) | completion | `toz194` |
-| [hagglerItemDelivery_2121](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1092) | completion | `m1887` |
-| [hagglerItemDelivery_21211](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1144) | completion | `ithaca37` |
-| [hagglerItemDelivery_22](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1222) | completion | `saigasemi545` |
-| [hagglerItemDelivery_221](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1302) | completion | `sako85` |
-| [hagglerItemDelivery_2211](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1359) | completion | `mosin` |
-| [hagglerItemDelivery_22111](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1411) | completion | `svt40` |
-| [hagglerItemDelivery_222](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1464) | completion | `mp40` |
-| [hagglerItemDelivery_2221](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1516) | completion | `aks74u` |
-| [hagglerItemDelivery_22211](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1571) | completion | `akm` |
+| [hagglerItemDelivery_1_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L3) | completion | `fort12` |
+| [hagglerItemDelivery_11_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L88) | completion | `lax410s` |
+| [hagglerItemDelivery_121_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L390) | completion | `sks` |
+| [hagglerItemDelivery_122_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L642) | completion | `kiparis` |
+| [hagglerItemDelivery_22_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1197) | completion | `mp34` |
+| [hagglerItemDelivery_221_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1277) | completion | `w1895` |
+| [hagglerItemDelivery_1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L28) | completion | `m1911` |
+| [hagglerItemDelivery_1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L28) | completion | `brhp` |
+| [hagglerItemDelivery_11](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L113) | completion | `sten` |
+| [hagglerItemDelivery_111](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L169) | completion | `lax410` |
+| [hagglerItemDelivery_1111](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L223) | completion | `swmodel29` |
+| [hagglerItemDelivery_1111](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L223) | completion | `44magnum` |
+| [hagglerItemDelivery_112](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L278) | completion | `sterling` |
+| [hagglerItemDelivery_12](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L335) | completion | `toz66` |
+| [hagglerItemDelivery_12](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L335) | completion | `toz66short` |
+| [hagglerItemDelivery_121](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L415) | completion | `rugermini14` |
+| [hagglerItemDelivery_1211](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L474) | completion | `saigasemi` |
+| [hagglerItemDelivery_12111](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L529) | completion | `w9422357` |
+| [hagglerItemDelivery_12111](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L529) | completion | `357magnum` |
+| [hagglerItemDelivery_121111](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L586) | completion | `g2contender500` |
+| [hagglerItemDelivery_121111](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L586) | completion | `500magnum` |
+| [hagglerItemDelivery_122](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L667) | completion | `kp31` |
+| [hagglerItemDelivery_1221](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L722) | completion | `mac11` |
+| [hagglerItemDelivery_12211](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L774) | completion | `m1911chic` |
+| [hagglerItemDelivery_2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L828) | completion | `toz34` |
+| [hagglerItemDelivery_2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L828) | completion | `toz34short` |
+| [hagglerItemDelivery_21](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L880) | completion | `sako85nato` |
+| [hagglerItemDelivery_211](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L932) | completion | `c96carbine` |
+| [hagglerItemDelivery_2111](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L987) | completion | `ppsh` |
+| [hagglerItemDelivery_212](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1040) | completion | `toz194` |
+| [hagglerItemDelivery_2121](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1092) | completion | `m1887` |
+| [hagglerItemDelivery_21211](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1144) | completion | `ithaca37` |
+| [hagglerItemDelivery_22](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1222) | completion | `saigasemi545` |
+| [hagglerItemDelivery_221](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1302) | completion | `sako85` |
+| [hagglerItemDelivery_2211](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1359) | completion | `mosin` |
+| [hagglerItemDelivery_22111](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1411) | completion | `svt40` |
+| [hagglerItemDelivery_222](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1464) | completion | `mp40` |
+| [hagglerItemDelivery_2221](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1516) | completion | `aks74u` |
+| [hagglerItemDelivery_22211](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1571) | completion | `akm` |
 
 ### Mute (`stalkernetnpc`)
 
@@ -463,13 +463,13 @@ Generated from the current source. All base items and active barter outputs are 
 
 | Granting progression | Gate | Purchase authorisation |
 |---|---|---|
-| [stalkerNetAdminDelivery_mainRadioTower](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L395) | completion | `quest_flashdrive` |
-| [muteItemDelivery_Binoc1](../../gamemodes/ix_cotz/plugins/progression/sh_muteprog.lua#L3) | completion | `binoculars_2` |
-| [muteItemDelivery_Binoc2](../../gamemodes/ix_cotz/plugins/progression/sh_muteprog.lua#L55) | completion | `binoculars_1` |
-| [muteItemDelivery_Binoc3](../../gamemodes/ix_cotz/plugins/progression/sh_muteprog.lua#L127) | completion | `binoculars_4` |
-| [muteItemDelivery_Binoc4](../../gamemodes/ix_cotz/plugins/progression/sh_muteprog.lua#L206) | completion | `binoculars_3` |
-| [muteItemDelivery_Anomaly](../../gamemodes/ix_cotz/plugins/progression/sh_muteprog.lua#L264) | completion | `anomalydetector` |
-| [muteItemDelivery_Detector](../../gamemodes/ix_cotz/plugins/progression/sh_muteprog.lua#L338) | completion | `detectorecho` |
+| [stalkerNetAdminDelivery_mainRadioTower](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L395) | completion | `quest_flashdrive` |
+| [muteItemDelivery_Binoc1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_muteprog.lua#L3) | completion | `binoculars_2` |
+| [muteItemDelivery_Binoc2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_muteprog.lua#L55) | completion | `binoculars_1` |
+| [muteItemDelivery_Binoc3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_muteprog.lua#L127) | completion | `binoculars_4` |
+| [muteItemDelivery_Binoc4](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_muteprog.lua#L206) | completion | `binoculars_3` |
+| [muteItemDelivery_Anomaly](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_muteprog.lua#L264) | completion | `anomalydetector` |
+| [muteItemDelivery_Detector](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_muteprog.lua#L338) | completion | `detectorecho` |
 
 ### Egghead (`ecologistnpc`)
 
@@ -483,21 +483,21 @@ Generated from the current source. All base items and active barter outputs are 
 
 | Granting progression | Gate | Purchase authorisation |
 |---|---|---|
-| [intern_gasAnalyzerReadings](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L717) | completion | `quest_computeraccess` |
-| [intern_gasAnalyzerReadings](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L717) | completion | `accesscard_laboratory` |
-| [eggheadItemDelivery_Detector1](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L3) | completion | `detectorecho` |
-| [eggheadItemDelivery_Detector2](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L62) | completion | `detectorbear` |
-| [eggheadItemDelivery_Detector3](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L143) | completion | `detectorveles` |
-| [eggheadItemDelivery_Suit1](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L183) | completion | `suit_ssp99` |
-| [eggheadItemDelivery_Suit2](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L241) | completion | `suit_ssp99m` |
-| [eggheadItemDelivery_Suit3](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L279) | completion | `suit_seva` |
-| [eggheadItemDelivery_Aid1](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L367) | completion | `medic_stimpak_1` |
-| [eggheadItemDelivery_Aid2](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L431) | completion | `medic_stimpak_2` |
-| [eggheadItemDelivery_Aid3](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L497) | completion | `medic_stimpak_3` |
-| [eggheadItemDelivery_Aid1_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L316) | completion | `medic_psyheal_2` |
-| [eggheadItemDelivery_Aid1_stage2](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L342) | completion | `medic_antirad_2` |
-| [eggheadItemDelivery_Aid2_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L405) | completion | `medic_antipsychotic_2` |
-| [eggheadItemDelivery_Aid3_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L470) | completion | `medic_antipsychotic_3` |
+| [intern_gasAnalyzerReadings](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L717) | completion | `quest_computeraccess` |
+| [intern_gasAnalyzerReadings](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L717) | completion | `accesscard_laboratory` |
+| [eggheadItemDelivery_Detector1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L3) | completion | `detectorecho` |
+| [eggheadItemDelivery_Detector2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L62) | completion | `detectorbear` |
+| [eggheadItemDelivery_Detector3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L143) | completion | `detectorveles` |
+| [eggheadItemDelivery_Suit1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L183) | completion | `suit_ssp99` |
+| [eggheadItemDelivery_Suit2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L241) | completion | `suit_ssp99m` |
+| [eggheadItemDelivery_Suit3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L279) | completion | `suit_seva` |
+| [eggheadItemDelivery_Aid1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L367) | completion | `medic_stimpak_1` |
+| [eggheadItemDelivery_Aid2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L431) | completion | `medic_stimpak_2` |
+| [eggheadItemDelivery_Aid3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L497) | completion | `medic_stimpak_3` |
+| [eggheadItemDelivery_Aid1_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L316) | completion | `medic_psyheal_2` |
+| [eggheadItemDelivery_Aid1_stage2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L342) | completion | `medic_antirad_2` |
+| [eggheadItemDelivery_Aid2_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L405) | completion | `medic_antipsychotic_2` |
+| [eggheadItemDelivery_Aid3_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L470) | completion | `medic_antipsychotic_3` |
 
 ### Beanstalk (`ecologistnpc2`)
 
@@ -535,42 +535,42 @@ Generated from the current source. All base items and active barter outputs are 
 
 | Granting progression | Gate | Purchase authorisation |
 |---|---|---|
-| [quartermasterFieldEquipment1](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1474) | completion | `kobra` |
-| [quartermasterFieldEquipment1](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1474) | completion | `foregrip` |
-| [quartermasterFieldEquipment2](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1497) | completion | `eotech` |
-| [quartermasterFieldEquipment2](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1497) | completion | `aimpoint` |
-| [quartermasterFieldEquipment2](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1497) | completion | `microt1` |
-| [quartermasterItemDelivery_1_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L3) | completion | `mp5` |
-| [quartermasterItemDelivery_11_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L88) | completion | `mateba` |
-| [quartermasterItemDelivery_11_stage2](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L113) | completion | `ak74` |
-| [quartermasterItemDelivery_111_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L197) | completion | `lax44` |
-| [quartermasterItemDelivery_112_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L341) | completion | `aek971` |
-| [quartermasterItemDelivery_12_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L547) | completion | `m3super90` |
-| [quartermasterItemDelivery_121_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L630) | completion | `ump45` |
-| [quartermasterItemDelivery_21_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L942) | completion | `taurusragingbull` |
-| [quartermasterItemDelivery_211_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1025) | completion | `uzi` |
-| [quartermasterItemDelivery_22_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1218) | completion | `rem870ae` |
-| [quartermasterItemDelivery_1](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L29) | completion | `mossberg500` |
-| [quartermasterItemDelivery_11](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L139) | completion | `l85` |
-| [quartermasterItemDelivery_111](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L223) | completion | `g36c` |
-| [quartermasterItemDelivery_1111](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L284) | completion | `sg552` |
-| [quartermasterItemDelivery_112](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L367) | completion | `an94k` |
-| [quartermasterItemDelivery_1121](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L427) | completion | `rk95` |
-| [quartermasterItemDelivery_11211](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L487) | completion | `ak12` |
-| [quartermasterItemDelivery_12](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L574) | completion | `fiveseven` |
-| [quartermasterItemDelivery_121](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L656) | completion | `p90` |
-| [quartermasterItemDelivery_122](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L713) | completion | `lr300` |
-| [quartermasterItemDelivery_1221](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L770) | completion | `m16a4` |
-| [quartermasterItemDelivery_12211](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L830) | completion | `fnfal` |
-| [quartermasterItemDelivery_2](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L889) | completion | `swr8` |
-| [quartermasterItemDelivery_21](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L969) | completion | `mp9a1` |
-| [quartermasterItemDelivery_211](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1051) | completion | `pp1901vityaz` |
-| [quartermasterItemDelivery_212](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1107) | completion | `famas` |
-| [quartermasterItemDelivery_2121](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1163) | completion | `aug` |
-| [quartermasterItemDelivery_22](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1244) | completion | `mr96` |
-| [quartermasterItemDelivery_221](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1305) | completion | `mp153` |
-| [quartermasterItemDelivery_222](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1361) | completion | `sv98` |
-| [quartermasterItemDelivery_2221](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L1417) | completion | `svd` |
+| [quartermasterFieldEquipment1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1474) | completion | `kobra` |
+| [quartermasterFieldEquipment1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1474) | completion | `foregrip` |
+| [quartermasterFieldEquipment2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1497) | completion | `eotech` |
+| [quartermasterFieldEquipment2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1497) | completion | `aimpoint` |
+| [quartermasterFieldEquipment2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1497) | completion | `microt1` |
+| [quartermasterItemDelivery_1_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L3) | completion | `mp5` |
+| [quartermasterItemDelivery_11_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L88) | completion | `mateba` |
+| [quartermasterItemDelivery_11_stage2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L113) | completion | `ak74` |
+| [quartermasterItemDelivery_111_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L197) | completion | `lax44` |
+| [quartermasterItemDelivery_112_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L341) | completion | `aek971` |
+| [quartermasterItemDelivery_12_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L547) | completion | `m3super90` |
+| [quartermasterItemDelivery_121_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L630) | completion | `ump45` |
+| [quartermasterItemDelivery_21_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L942) | completion | `taurusragingbull` |
+| [quartermasterItemDelivery_211_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1025) | completion | `uzi` |
+| [quartermasterItemDelivery_22_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1218) | completion | `rem870ae` |
+| [quartermasterItemDelivery_1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L29) | completion | `mossberg500` |
+| [quartermasterItemDelivery_11](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L139) | completion | `l85` |
+| [quartermasterItemDelivery_111](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L223) | completion | `g36c` |
+| [quartermasterItemDelivery_1111](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L284) | completion | `sg552` |
+| [quartermasterItemDelivery_112](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L367) | completion | `an94k` |
+| [quartermasterItemDelivery_1121](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L427) | completion | `rk95` |
+| [quartermasterItemDelivery_11211](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L487) | completion | `ak12` |
+| [quartermasterItemDelivery_12](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L574) | completion | `fiveseven` |
+| [quartermasterItemDelivery_121](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L656) | completion | `p90` |
+| [quartermasterItemDelivery_122](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L713) | completion | `lr300` |
+| [quartermasterItemDelivery_1221](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L770) | completion | `m16a4` |
+| [quartermasterItemDelivery_12211](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L830) | completion | `fnfal` |
+| [quartermasterItemDelivery_2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L889) | completion | `swr8` |
+| [quartermasterItemDelivery_21](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L969) | completion | `mp9a1` |
+| [quartermasterItemDelivery_211](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1051) | completion | `pp1901vityaz` |
+| [quartermasterItemDelivery_212](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1107) | completion | `famas` |
+| [quartermasterItemDelivery_2121](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1163) | completion | `aug` |
+| [quartermasterItemDelivery_22](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1244) | completion | `mr96` |
+| [quartermasterItemDelivery_221](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1305) | completion | `mp153` |
+| [quartermasterItemDelivery_222](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1361) | completion | `sv98` |
+| [quartermasterItemDelivery_2221](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L1417) | completion | `svd` |
 
 ### Boss (`unisgnpc2`)
 
@@ -584,16 +584,16 @@ Generated from the current source. All base items and active barter outputs are 
 
 | Granting progression | Gate | Purchase authorisation |
 |---|---|---|
-| [bossItemDelivery_1](../../gamemodes/ix_cotz/plugins/progression/sh_bossprog.lua#L3) | completion | `suit_io7a` |
-| [bossItemDelivery_2](../../gamemodes/ix_cotz/plugins/progression/sh_bossprog.lua#L74) | completion | `suit_ps5m` |
-| [bossItemDelivery_3](../../gamemodes/ix_cotz/plugins/progression/sh_bossprog.lua#L147) | completion | `suit_berill` |
-| [bossItemDelivery_4](../../gamemodes/ix_cotz/plugins/progression/sh_bossprog.lua#L200) | completion | `suit_skat10` |
-| [bossItemDelivery_5](../../gamemodes/ix_cotz/plugins/progression/sh_bossprog.lua#L250) | completion | `suit_skat9` |
-| [bossItemDelivery_6](../../gamemodes/ix_cotz/plugins/progression/sh_bossprog.lua#L326) | completion | `suit_radsuit` |
-| [bossItemDelivery_7](../../gamemodes/ix_cotz/plugins/progression/sh_bossprog.lua#L405) | completion | `suit_exoskeleton` |
-| [smartass_rfTasks](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L595) | completion | `accesscard_bunker` |
-| [bossItemDelivery_6_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_bossprog.lua#L301) | completion | `headwear_rad` |
-| [bossItemDelivery_7_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_bossprog.lua#L379) | completion | `headwear_spartan` |
+| [bossItemDelivery_1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_bossprog.lua#L3) | completion | `suit_io7a` |
+| [bossItemDelivery_2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_bossprog.lua#L74) | completion | `suit_ps5m` |
+| [bossItemDelivery_3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_bossprog.lua#L147) | completion | `suit_berill` |
+| [bossItemDelivery_4](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_bossprog.lua#L200) | completion | `suit_skat10` |
+| [bossItemDelivery_5](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_bossprog.lua#L250) | completion | `suit_skat9` |
+| [bossItemDelivery_6](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_bossprog.lua#L326) | completion | `suit_radsuit` |
+| [bossItemDelivery_7](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_bossprog.lua#L405) | completion | `suit_exoskeleton` |
+| [smartass_rfTasks](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L595) | completion | `accesscard_bunker` |
+| [bossItemDelivery_6_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_bossprog.lua#L301) | completion | `headwear_rad` |
+| [bossItemDelivery_7_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_bossprog.lua#L379) | completion | `headwear_spartan` |
 
 ### Smartass (`unisgnpc3`)
 
@@ -607,16 +607,16 @@ Generated from the current source. All base items and active barter outputs are 
 
 | Granting progression | Gate | Purchase authorisation |
 |---|---|---|
-| [smartass_rfTasks](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L595) | checkpoint 3 | `pso1` |
-| [smartassRecon1](../../gamemodes/ix_cotz/plugins/progression/sh_smartassprog.lua#L1) | completion | `pso1` |
-| [smartassRecon1](../../gamemodes/ix_cotz/plugins/progression/sh_smartassprog.lua#L1) | completion | `cmore` |
-| [smartassRecon2](../../gamemodes/ix_cotz/plugins/progression/sh_smartassprog.lua#L29) | completion | `acog` |
-| [smartassRecon2](../../gamemodes/ix_cotz/plugins/progression/sh_smartassprog.lua#L29) | completion | `shortdot` |
-| [smartassRecon3](../../gamemodes/ix_cotz/plugins/progression/sh_smartassprog.lua#L56) | completion | `nightforce` |
-| [smartassRecon3](../../gamemodes/ix_cotz/plugins/progression/sh_smartassprog.lua#L56) | completion | `pbssuppressor` |
-| [smartassRecon3](../../gamemodes/ix_cotz/plugins/progression/sh_smartassprog.lua#L56) | completion | `sakersuppressor` |
-| [smartassRecon3](../../gamemodes/ix_cotz/plugins/progression/sh_smartassprog.lua#L56) | completion | `tundrasuppressor` |
-| [smartassRecon3](../../gamemodes/ix_cotz/plugins/progression/sh_smartassprog.lua#L56) | completion | `cobrasuppressor` |
+| [smartass_rfTasks](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L595) | checkpoint 3 | `pso1` |
+| [smartassRecon1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_smartassprog.lua#L1) | completion | `pso1` |
+| [smartassRecon1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_smartassprog.lua#L1) | completion | `cmore` |
+| [smartassRecon2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_smartassprog.lua#L29) | completion | `acog` |
+| [smartassRecon2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_smartassprog.lua#L29) | completion | `shortdot` |
+| [smartassRecon3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_smartassprog.lua#L56) | completion | `nightforce` |
+| [smartassRecon3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_smartassprog.lua#L56) | completion | `pbssuppressor` |
+| [smartassRecon3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_smartassprog.lua#L56) | completion | `sakersuppressor` |
+| [smartassRecon3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_smartassprog.lua#L56) | completion | `tundrasuppressor` |
+| [smartassRecon3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_smartassprog.lua#L56) | completion | `cobrasuppressor` |
 
 ### Hoarder (`raritynpc`)
 
@@ -630,9 +630,9 @@ Generated from the current source. All base items and active barter outputs are 
 
 | Granting progression | Gate | Purchase authorisation |
 |---|---|---|
-| [hoarderCollection2](../../gamemodes/ix_cotz/plugins/progression/sh_hoarderprog.lua#L21) | completion | `sw500` |
-| [hoarderCollection3](../../gamemodes/ix_cotz/plugins/progression/sh_hoarderprog.lua#L42) | completion | `vssk` |
-| [hoarderCollection4](../../gamemodes/ix_cotz/plugins/progression/sh_hoarderprog.lua#L63) | completion | `nitro` |
+| [hoarderCollection2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hoarderprog.lua#L21) | completion | `sw500` |
+| [hoarderCollection3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hoarderprog.lua#L42) | completion | `vssk` |
+| [hoarderCollection4](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hoarderprog.lua#L63) | completion | `nitro` |
 
 ### Computer (`computernpc`)
 
@@ -658,16 +658,16 @@ Generated from the current source. All base items and active barter outputs are 
 
 | Granting progression | Gate | Purchase authorisation |
 |---|---|---|
-| [jittersItemDelivery_medical1_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L3) | completion | `medic_medkit_1` |
-| [jittersItemDelivery_medical2_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L78) | completion | `medic_bandage_2` |
-| [jittersItemDelivery_medical2_stage2](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L103) | completion | `medic_antirad_1` |
-| [jittersItemDelivery_medical3_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L194) | completion | `medic_bandage_3` |
-| [jittersItemDelivery_medical4_stage1](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L271) | completion | `medic_medkit_5` |
-| [jittersItemDelivery_medical4_stage2](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L297) | completion | `medic_medkit_6` |
-| [jittersItemDelivery_medical1](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L28) | completion | `medic_medkit_2` |
-| [jittersItemDelivery_medical2](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L128) | completion | `medic_medkit_3` |
-| [jittersItemDelivery_medical3](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L220) | completion | `medic_medkit_4` |
-| [jittersItemDelivery_medical4](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L324) | completion | `medic_antirad_2` |
+| [jittersItemDelivery_medical1_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L3) | completion | `medic_medkit_1` |
+| [jittersItemDelivery_medical2_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L78) | completion | `medic_bandage_2` |
+| [jittersItemDelivery_medical2_stage2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L103) | completion | `medic_antirad_1` |
+| [jittersItemDelivery_medical3_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L194) | completion | `medic_bandage_3` |
+| [jittersItemDelivery_medical4_stage1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L271) | completion | `medic_medkit_5` |
+| [jittersItemDelivery_medical4_stage2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L297) | completion | `medic_medkit_6` |
+| [jittersItemDelivery_medical1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L28) | completion | `medic_medkit_2` |
+| [jittersItemDelivery_medical2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L128) | completion | `medic_medkit_3` |
+| [jittersItemDelivery_medical3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L220) | completion | `medic_medkit_4` |
+| [jittersItemDelivery_medical4](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L324) | completion | `medic_antirad_2` |
 
 ### The Original (`firststalkernpc`)
 
@@ -723,18 +723,18 @@ Values are total bonus from base, not additional bonuses to sum. Purchase access
 
 | Contact | Granting progression | Total bonus | Eligible IDs |
 |---|---|---|---|
-| 'Egghead' | [eggheadItemDelivery_Aid1](../../gamemodes/ix_cotz/plugins/progression/sh_eggheadprog.lua#L367) | +1 | `medic_psyheal_2`, `medic_stimpak_1` |
-| 'Haggler' | [hagglerItemDelivery_11](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L113) | +1 | `12gauge`, `9x18`, `762x25`, `762x39`, `762x54` |
-| 'Haggler' | [hagglerItemDelivery_1211](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L474) | +2 | `12gauge`, `9x18`, `762x25`, `762x39`, `762x54` |
-| 'Haggler' | [hagglerItemDelivery_22111](../../gamemodes/ix_cotz/plugins/progression/sh_hagglerprog.lua#L1411) | +2 | `12gauge`, `9x18`, `762x25`, `762x39`, `762x54` |
-| 'Jitters' | [jittersItemDelivery_medical2](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L128) | +1 | `medic_bandage_1`, `medic_bandage_2`, `medic_bandage_3`, `medic_medkit_1`, `medic_medkit_2`, `medic_medkit_3`, `medic_medkit_4`, `medic_medkit_5`, `medic_medkit_6` |
-| 'Jitters' | [jittersItemDelivery_medical4](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L324) | +2 | `medic_bandage_1`, `medic_bandage_2`, `medic_bandage_3`, `medic_medkit_1`, `medic_medkit_2`, `medic_medkit_3`, `medic_medkit_4`, `medic_medkit_5`, `medic_medkit_6` |
-| 'Old Timer' | [oldtimerItemDelivery_Knife2](../../gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua#L77) | +1 | `medic_bandage_1`, `medic_bandage_2` |
-| 'Quartermaster' | [quartermasterItemDelivery_11](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L139) | +1 | `545x39`, `556x45`, `762x39`, `762x51`, `9x19` |
-| 'Quartermaster' | [quartermasterItemDelivery_11211](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L487) | +2 | `545x39`, `556x45`, `762x39`, `762x51`, `9x19` |
-| 'Quartermaster' | [quartermasterItemDelivery_12211](../../gamemodes/ix_cotz/plugins/progression/sh_quarterprog.lua#L830) | +2 | `545x39`, `556x45`, `762x39`, `762x51`, `9x19` |
-| 'Spicy Lemon' | [spicylemonItemDelivery_Food](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L461) | +1 | `drink_bottlewater`, `drink_bottletea`, `food_can_sprats`, `food_cheese_2`, `food_nuts_2`, `food_can_tomato`, `food_can_tushonka` |
-| 'Spicy Lemon' | [spicylemonItemDelivery_Brew](../../gamemodes/ix_cotz/plugins/progression/sh_spicylemonprog.lua#L727) | +2 | `drink_bottlewater`, `drink_bottletea`, `food_can_sprats`, `food_cheese_2`, `food_nuts_2`, `food_can_tomato`, `food_can_tushonka` |
+| 'Egghead' | [eggheadItemDelivery_Aid1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_eggheadprog.lua#L367) | +1 | `medic_psyheal_2`, `medic_stimpak_1` |
+| 'Haggler' | [hagglerItemDelivery_11](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L113) | +1 | `12gauge`, `9x18`, `762x25`, `762x39`, `762x54` |
+| 'Haggler' | [hagglerItemDelivery_1211](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L474) | +2 | `12gauge`, `9x18`, `762x25`, `762x39`, `762x54` |
+| 'Haggler' | [hagglerItemDelivery_22111](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hagglerprog.lua#L1411) | +2 | `12gauge`, `9x18`, `762x25`, `762x39`, `762x54` |
+| 'Jitters' | [jittersItemDelivery_medical2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L128) | +1 | `medic_bandage_1`, `medic_bandage_2`, `medic_bandage_3`, `medic_medkit_1`, `medic_medkit_2`, `medic_medkit_3`, `medic_medkit_4`, `medic_medkit_5`, `medic_medkit_6` |
+| 'Jitters' | [jittersItemDelivery_medical4](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L324) | +2 | `medic_bandage_1`, `medic_bandage_2`, `medic_bandage_3`, `medic_medkit_1`, `medic_medkit_2`, `medic_medkit_3`, `medic_medkit_4`, `medic_medkit_5`, `medic_medkit_6` |
+| 'Old Timer' | [oldtimerItemDelivery_Knife2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua#L77) | +1 | `medic_bandage_1`, `medic_bandage_2` |
+| 'Quartermaster' | [quartermasterItemDelivery_11](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L139) | +1 | `545x39`, `556x45`, `762x39`, `762x51`, `9x19` |
+| 'Quartermaster' | [quartermasterItemDelivery_11211](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L487) | +2 | `545x39`, `556x45`, `762x39`, `762x51`, `9x19` |
+| 'Quartermaster' | [quartermasterItemDelivery_12211](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_quarterprog.lua#L830) | +2 | `545x39`, `556x45`, `762x39`, `762x51`, `9x19` |
+| 'Spicy Lemon' | [spicylemonItemDelivery_Food](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L461) | +1 | `drink_bottlewater`, `drink_bottletea`, `food_can_sprats`, `food_cheese_2`, `food_nuts_2`, `food_can_tomato`, `food_can_tushonka` |
+| 'Spicy Lemon' | [spicylemonItemDelivery_Brew](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_spicylemonprog.lua#L727) | +2 | `drink_bottlewater`, `drink_bottletea`, `food_can_sprats`, `food_cheese_2`, `food_nuts_2`, `food_can_tomato`, `food_can_tushonka` |
 
 ## Appendix C — current fixed benefits and service discounts
 
@@ -742,35 +742,35 @@ Checkpoint counts are cumulative. Items use their existing default quantities un
 
 | Contact / milestone | Award timing | Fixed benefit |
 |---|---|---|
-| 'Boss' / [boss_dataTasks](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L532) | 1 jobs | 500 repair credit at 'Technut' |
-| 'Smartass' / [smartass_rfTasks](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L595) | 1 jobs | `9x19` |
-| 'Intern' / [intern_gasAnalyzerReadings](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L717) | 2 jobs | `medic_antirad_1` |
-| 'Intern' / [intern_gasAnalyzerReadings](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L717) | 6 jobs | `drink_bottletea`; `medic_medkit_1` |
-| 'Intern' / [intern_gasAnalyzerReadings](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L717) | 11 jobs | `medic_psyheal_2` |
-| 'Computer' / [computer_artifactTasks](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L846) | 3 jobs | `medic_antirad_1` |
-| 'Computer' / [computer_artifactTasks](../../gamemodes/ix_cotz/plugins/progression/sh_definitions.lua#L846) | 8 jobs | `medic_psyheal_2` |
-| 'The Original' / [originalSurvival1](../../gamemodes/ix_cotz/plugins/progression/sh_originalprog.lua#L1) | Completion | `food_can_tushonka`; `drink_bottlewater` |
-| 'The Original' / [originalSurvival2](../../gamemodes/ix_cotz/plugins/progression/sh_originalprog.lua#L21) | Completion | `lowtiercookerfuel` |
-| 'The Original' / [originalSurvival3](../../gamemodes/ix_cotz/plugins/progression/sh_originalprog.lua#L41) | Completion | `medic_bandage_2`; `food_can_tushonka` |
-| 'Hoarder' / [hoarderCollection1](../../gamemodes/ix_cotz/plugins/progression/sh_hoarderprog.lua#L1) | Completion | `500magnum` |
-| 'Hoarder' / [hoarderCollection2](../../gamemodes/ix_cotz/plugins/progression/sh_hoarderprog.lua#L21) | Completion | `500magnum` |
-| 'Hoarder' / [hoarderCollection3](../../gamemodes/ix_cotz/plugins/progression/sh_hoarderprog.lua#L42) | Completion | `127x55` |
-| 'Hoarder' / [hoarderCollection4](../../gamemodes/ix_cotz/plugins/progression/sh_hoarderprog.lua#L63) | Completion | `700nitro` |
-| '???' / [noosphereAttunement1](../../gamemodes/ix_cotz/plugins/progression/sh_noosphereprog.lua#L1) | Completion | Recognition: Heard by the Noosphere |
-| '???' / [noosphereAttunement2](../../gamemodes/ix_cotz/plugins/progression/sh_noosphereprog.lua#L22) | Completion | 25000 wish credit at '???' |
-| '???' / [noosphereAttunement3](../../gamemodes/ix_cotz/plugins/progression/sh_noosphereprog.lua#L42) | Earned completion | 2.5% wish discount at '???' |
-| '???' / [noosphereAttunement3](../../gamemodes/ix_cotz/plugins/progression/sh_noosphereprog.lua#L42) | Completion | Recognition: Witness of the Noosphere |
-| NPC / [communitySupport1](../../gamemodes/ix_cotz/plugins/progression/sh_communityprog.lua#L1) | Completion | `drink_bottlewater`; `drink_bottletea` |
-| NPC / [communitySupport2](../../gamemodes/ix_cotz/plugins/progression/sh_communityprog.lua#L21) | Completion | `medic_bandage_1` |
-| NPC / [communitySupport3](../../gamemodes/ix_cotz/plugins/progression/sh_communityprog.lua#L41) | Completion | `food_can_tushonka` |
-| NPC / [communitySupport3](../../gamemodes/ix_cotz/plugins/progression/sh_communityprog.lua#L41) | Completion | Recognition: Trusted Community Supplier |
-| 'Cleaner' / [cleanerLogistics1](../../gamemodes/ix_cotz/plugins/progression/sh_cleanerprog.lua#L51) | Completion | 300 storage credit at 'Cleaner' |
-| 'Cleaner' / [cleanerLogistics2](../../gamemodes/ix_cotz/plugins/progression/sh_cleanerprog.lua#L75) | Completion | 600 storage credit at 'Cleaner' |
-| 'Cleaner' / [cleanerLogistics2](../../gamemodes/ix_cotz/plugins/progression/sh_cleanerprog.lua#L75) | Earned completion | 5.0% storage discount at 'Cleaner' |
-| 'Beanstalk' / [beanstalkExpedition1](../../gamemodes/ix_cotz/plugins/progression/sh_beanstalkprog.lua#L52) | Completion | `medic_antirad_1`; `medic_psyheal_1` |
-| 'Arena Master' / [arenaProgramme1](../../gamemodes/ix_cotz/plugins/progression/sh_arenaprog.lua#L1) | Completion | 150 treatment credit at 'Arena Master' |
-| 'Arena Master' / [arenaProgramme2](../../gamemodes/ix_cotz/plugins/progression/sh_arenaprog.lua#L19) | Completion | `medic_medkit_1` |
-| 'Arena Master' / [arenaProgramme3](../../gamemodes/ix_cotz/plugins/progression/sh_arenaprog.lua#L37) | Earned completion | 10.0% treatment discount at 'Arena Master' |
-| 'Arena Master' / [arenaProgramme3](../../gamemodes/ix_cotz/plugins/progression/sh_arenaprog.lua#L37) | Completion | Recognition: Arena Veteran |
-| 'Jitters' / [jittersItemDelivery_medical3](../../gamemodes/ix_cotz/plugins/progression/sh_jittersprog.lua#L220) | Earned completion | 5.0% treatment discount at 'Jitters' |
-| 'Technut' / [technutItemDelivery_SuitPainting](../../gamemodes/ix_cotz/plugins/progression/sh_technutprog.lua#L474) | Earned completion | 5.0% repair discount at 'Technut' |
+| 'Boss' / [boss_dataTasks](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L532) | 1 jobs | 500 repair credit at 'Technut' |
+| 'Smartass' / [smartass_rfTasks](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L595) | 1 jobs | `9x19` |
+| 'Intern' / [intern_gasAnalyzerReadings](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L717) | 2 jobs | `medic_antirad_1` |
+| 'Intern' / [intern_gasAnalyzerReadings](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L717) | 6 jobs | `drink_bottletea`; `medic_medkit_1` |
+| 'Intern' / [intern_gasAnalyzerReadings](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L717) | 11 jobs | `medic_psyheal_2` |
+| 'Computer' / [computer_artifactTasks](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L846) | 3 jobs | `medic_antirad_1` |
+| 'Computer' / [computer_artifactTasks](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_definitions.lua#L846) | 8 jobs | `medic_psyheal_2` |
+| 'The Original' / [originalSurvival1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_originalprog.lua#L1) | Completion | `food_can_tushonka`; `drink_bottlewater` |
+| 'The Original' / [originalSurvival2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_originalprog.lua#L21) | Completion | `lowtiercookerfuel` |
+| 'The Original' / [originalSurvival3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_originalprog.lua#L41) | Completion | `medic_bandage_2`; `food_can_tushonka` |
+| 'Hoarder' / [hoarderCollection1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hoarderprog.lua#L1) | Completion | `500magnum` |
+| 'Hoarder' / [hoarderCollection2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hoarderprog.lua#L21) | Completion | `500magnum` |
+| 'Hoarder' / [hoarderCollection3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hoarderprog.lua#L42) | Completion | `127x55` |
+| 'Hoarder' / [hoarderCollection4](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_hoarderprog.lua#L63) | Completion | `700nitro` |
+| '???' / [noosphereAttunement1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_noosphereprog.lua#L1) | Completion | Recognition: Heard by the Noosphere |
+| '???' / [noosphereAttunement2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_noosphereprog.lua#L22) | Completion | 25000 wish credit at '???' |
+| '???' / [noosphereAttunement3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_noosphereprog.lua#L42) | Earned completion | 2.5% wish discount at '???' |
+| '???' / [noosphereAttunement3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_noosphereprog.lua#L42) | Completion | Recognition: Witness of the Noosphere |
+| NPC / [communitySupport1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_communityprog.lua#L1) | Completion | `drink_bottlewater`; `drink_bottletea` |
+| NPC / [communitySupport2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_communityprog.lua#L21) | Completion | `medic_bandage_1` |
+| NPC / [communitySupport3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_communityprog.lua#L41) | Completion | `food_can_tushonka` |
+| NPC / [communitySupport3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_communityprog.lua#L41) | Completion | Recognition: Trusted Community Supplier |
+| 'Cleaner' / [cleanerLogistics1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_cleanerprog.lua#L51) | Completion | 300 storage credit at 'Cleaner' |
+| 'Cleaner' / [cleanerLogistics2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_cleanerprog.lua#L75) | Completion | 600 storage credit at 'Cleaner' |
+| 'Cleaner' / [cleanerLogistics2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_cleanerprog.lua#L75) | Earned completion | 5.0% storage discount at 'Cleaner' |
+| 'Beanstalk' / [beanstalkExpedition1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_beanstalkprog.lua#L52) | Completion | `medic_antirad_1`; `medic_psyheal_1` |
+| 'Arena Master' / [arenaProgramme1](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_arenaprog.lua#L1) | Completion | 150 treatment credit at 'Arena Master' |
+| 'Arena Master' / [arenaProgramme2](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_arenaprog.lua#L19) | Completion | `medic_medkit_1` |
+| 'Arena Master' / [arenaProgramme3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_arenaprog.lua#L37) | Earned completion | 10.0% treatment discount at 'Arena Master' |
+| 'Arena Master' / [arenaProgramme3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_arenaprog.lua#L37) | Completion | Recognition: Arena Veteran |
+| 'Jitters' / [jittersItemDelivery_medical3](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_jittersprog.lua#L220) | Earned completion | 5.0% treatment discount at 'Jitters' |
+| 'Technut' / [technutItemDelivery_SuitPainting](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_technutprog.lua#L474) | Earned completion | 5.0% repair discount at 'Technut' |

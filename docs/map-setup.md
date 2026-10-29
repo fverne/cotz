@@ -4,6 +4,9 @@ This guide covers preparing a map for COTZ's current plugins, capturing its layo
 as a First Time Setup (FTS) preset, and deploying that preset. FTS is a one-time
 population tool, not a map editor or a migration system.
 
+For deciding which NPCs, items, artifacts, tasks, and encounters the map needs,
+use the companion [map content design guide](map-content-design.md).
+
 Paths below are relative to the repository unless they begin with `garrysmod/`.
 Commands beginning with `/` are Helix chat commands run by a connected player.
 Use a superadmin setup character: FTS commands require admin access, but most
@@ -29,7 +32,7 @@ in the cross-server definitions does **not** necessarily have an FTS preset.
 
 ## 2. Register an empty preset before populating it
 
-Create `gamemodes/ix_cotz/plugins/firsttimesetup/sh_<mapname>.lua`. Replace
+Create `gamemodes/ix_cotz/plugins/firsttimesetup/presets/sh_<mapname>.lua`. Replace
 `rp_your_map` below with the exact result of `game.GetMap()` (no `.bsp` suffix):
 
 ```lua
@@ -54,7 +57,7 @@ Add an explicit include alongside the other map includes in
 [`firsttimesetup/sh_plugin.lua`](../gamemodes/ix_cotz/plugins/firsttimesetup/sh_plugin.lua):
 
 ```lua
-ix.util.Include("sh_rp_your_map.lua")
+ix.util.Include("presets/sh_rp_your_map.lua")
 ```
 
 Keep every top-level table and all eight `plugindata` tables, even for unused
@@ -251,7 +254,7 @@ review of home-map and character-location routing.
 - Hidden stash descriptions become player-facing location clues. Populate
   reachable destinations and check map-specific stash items under
   `hidestashspawner/items/miscellaneous/` if adding stash rewards for the new map.
-- Review [`jobsystem/sh_specialjobs.lua`](../gamemodes/ix_cotz/plugins/jobsystem/sh_specialjobs.lua)
+- Review [`jobsystem/definitions/sh_specialjobs.lua`](../gamemodes/ix_cotz/plugins/jobsystem/definitions/sh_specialjobs.lua)
   for task item data that explicitly targets existing maps. FTS does not retarget
   those jobs. Gas analyzer, RF, and stash tasks depend on controller points;
   empty point sets cannot provide usable destinations.

@@ -20,7 +20,7 @@ Qualifying jobs and completed logical delivery milestones replenish 20% of each 
 
 Checkpoint and arena item rewards remain pending if the inventory is full. Helix's asynchronous inventory confirmation clears a tokenised claim; restored claims recognise an already inserted item before attempting another grant. Arena progression credits distinct human opponents only, with no credit for disconnects, timeouts or repeated opponents.
 
-NPC-specific conversation text is in `plugins/dialogue/dialogue/sh_*.lua`. Original progression request text and completion announcements remain in the NPC progression files. Added stages live alongside the respective NPC’s original definitions in `sh_*prog.lua`, with shared requirement/reward rendering in `libs/sh_expansion.lua`. Shared dialogue ordering keeps GOODBYE last and main menus consistent across contacts.
+NPC-specific conversation text is in `plugins/dialogue/dialogue/sh_*.lua`. Original progression request text and completion announcements remain in the NPC progression files. Added stages live alongside the respective NPC’s original definitions in `definitions/sh_*prog.lua`, with shared requirement/reward rendering in `libs/sh_expansion.lua`. Shared dialogue ordering keeps GOODBYE last and main menus consistent across contacts.
 
 Validation:
 
@@ -141,7 +141,7 @@ are not available from these definitions and require server playtesting. See the
 
 ## Authored rewards and services
 
-Added stage briefings and completion messages live in the respective NPC’s `sh_*prog.lua` file. Quartermaster’s optional attachment branch is in `sh_quarterprog.lua`; scientific briefs are in `sh_eggheadprog.lua`. See the [dialogue source guide](../../../../docs/balance/progression/dialogue-guide.md).
+Added stage briefings and completion messages live in the respective NPC’s `definitions/sh_*prog.lua` file. Quartermaster’s optional attachment branch is in `definitions/sh_quarterprog.lua`; scientific briefs are in `definitions/sh_eggheadprog.lua`. See the [dialogue source guide](../../../../docs/balance/progression/dialogue-guide.md).
 
 Definitions may declare `completionBenefits` (fixed `items` and/or provider-bound `services`), `checkpointBenefits`, `checkpointMessages`, `serviceDiscounts` and `recognition`. Fixed completion benefits accompany the progression cash premium and existing reputation. Numeric checkpoints do not duplicate the ordinary job payout. Recognition appears in personal progression help. Service discounts use the greatest earned fraction, capped at 15%; they never stack or alter item prices.
 
@@ -236,7 +236,7 @@ reads replicated data. `GetComplexProgressionReqs` aliases this character-aware 
 for inventory highlighting.
 
 Definitions use `requirementSlots`, `OnComplete(character)`, `nextProgressions`, and
-`vendorUnlocks`. Pools live in `sh_requirementpools.lua`; each candidate has an `item` ID.
+`vendorUnlocks`. Pools live in `definitions/sh_requirementpools.lua`; each candidate has an `item` ID.
 Slots define positive integer `quantity` values. Numeric definitions use scaled ordered thresholds and
 `OnRun(self, character)`. `BuildResponse(npcName, status, character)` receives the
 selected character so it can describe the actual saved request.

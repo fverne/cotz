@@ -582,8 +582,8 @@ for _, method in ipairs({"WriteEntity", "WriteString", "WriteUInt"}) do
 	net[method] = function(value) packet.values[#packet.values + 1] = value end
 end
 ix.gui = {}
+ix.util = {Include = function(filename) dofile("gamemodes/" .. filename) end}
 dofile("gamemodes/ix_cotz/plugins/dialogue/libs/sh_dialogue.lua")
-dofile("gamemodes/ix_cotz/plugins/dialogue/libs/sh_taskrewards.lua")
 local dialogue = {tree = {GREETING = {options = {"GOODBYE"}},
 	BackTopic = {options = {"GOODBYE"}}, GetTaskByDifficulty = {}}}
 dialogue.addTopic = function(id, data) dialogue.tree[id] = data end
@@ -743,7 +743,7 @@ check(#scheduledClaims == 1 and #ix.progression.GetLine(packageOwner, "story-cla
 timer.Simple = function() end
 
 SERVER, CLIENT = false, true
-dofile("gamemodes/ix_cotz/plugins/dialogue/libs/sh_taskrewards.lua")
+dofile("gamemodes/ix_cotz/plugins/jobsystem/integrations/sh_dialogue.lua")
 local activePacket = previewPacket
 local offset = 0
 local function read()
@@ -794,7 +794,7 @@ for _, itemID in ipairs(stoneIDs) do
 end
 local originalRegister = ix.progression.Register
 ix.progression.Register = function(id, definition) ix.progression.definitions[id] = definition end
-dofile("gamemodes/ix_cotz/plugins/progression/sh_oldtimerprog.lua")
+dofile("gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua")
 ix.progression.Register = originalRegister
 local stoneRecipient = actor()
 for _, itemID in ipairs(stoneIDs) do
