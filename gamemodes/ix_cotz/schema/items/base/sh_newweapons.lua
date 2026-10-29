@@ -191,12 +191,12 @@ ITEM:Hook("drop", function(item)
 		end
 
 		if (IsValid(weapon)) then
-			local ammoType = weapon:GetPrimaryAmmoType()
+			local ammoType = item:GetWeaponAmmoType(weapon)
 
 			weapon.ixItem = nil
 
 			if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-				item:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
+				item:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(ammoType), -3, -2)))
 			else
 				item:SetData("ammoType", nil)
 			end
@@ -285,7 +285,7 @@ function ITEM:Unload(player)
 	local ammoSubClass = ""
 
 	if isEquipped then
-		ammoType = weapon:GetPrimaryAmmoType()
+		ammoType = self:GetWeaponAmmoType(weapon)
 		ammoAmount = weapon:Clip1()
 	else 
 		ammoType = self:GetAmmoType()
@@ -475,13 +475,13 @@ function ITEM:Unequip(client, bPlaySound, bRemoveItem)
 	end
 
 	if (IsValid(weapon)) then
-		local ammoType = weapon:GetPrimaryAmmoType()
+		local ammoType = self:GetWeaponAmmoType(weapon)
 
 		weapon.ixItem = nil
 
 		self:SetData("ammo", weapon:Clip1())
 		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
+			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(ammoType), -3, -2)))
 		else
 			self:SetData("ammoType", nil)
 		end
@@ -589,20 +589,27 @@ function ITEM:GetAmmoType()
 	end
 end
 
+function ITEM:GetWeaponAmmoType(weapon)
+	-- CW attachments update Primary.Ammo before the engine ammo ID refreshes on deploy.
+	if weapon.CW20Weapon and weapon.Primary and weapon.Primary.Ammo then
+		return game.GetAmmoID(weapon.Primary.Ammo)
+	end
+
+	return weapon:GetPrimaryAmmoType()
+end
+
 function ITEM:OnSave()
 	local weapon = self.player:GetWeapon(self.class)
 
-	if (IsValid(weapon)) && self:GetData("equip",false) then
+	if IsValid(weapon) and self:GetData("equip", false) then
 		self:SetData("ammo", weapon:Clip1())
 		self:SetData("wear", weapon:GetWeaponWear())
 		self:SetData("durability", weapon:GetWeaponDurability())
 
-		local ammoType = weapon:GetPrimaryAmmoType()
+		local ammoType = self:GetWeaponAmmoType(weapon)
 
-		if self.player:GetActiveWeapon() == weapon and string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
-		elseif string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
+		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(ammoType), -3, -2)))
 		else
 			self:SetData("ammoType", nil)
 		end
