@@ -313,7 +313,7 @@ hook.Add("PopulateHelpMenu", "ixHelpMenu", function(tabs)
 
 			local description = panel:Add("DLabel")
 			description:SetFont("ixMediumLightFont")
-			description:SetText(v.description)
+			description:SetText(L(v.description))
 			description:Dock(FILL)
 			description:SetTextColor(color_white)
 			description:SetExpensiveShadow(1, color_black)

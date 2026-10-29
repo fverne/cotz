@@ -247,7 +247,7 @@ end
 	Renders the Icon with given arguments.
 	returns nothing
 ]]--
-function ikon:renderIcon(name, w, h, mdl, material, camInfo, updateCache)
+function ikon:renderIcon(name, w, h, mdl, camInfo, updateCache, material)
 	if (#ikon.requestList > 0) then return IKON_BUSY end
 	if (ikon.requestList[name]) then return IKON_PROCESSING end
 	if (!w or !h or !mdl) then return IKON_SOMETHINGWRONG end
@@ -256,7 +256,6 @@ function ikon:renderIcon(name, w, h, mdl, material, camInfo, updateCache)
 	ikon.curWidth = w or 1
 	ikon.curHeight = h or 1
 	ikon.renderModel = mdl
-	ikon.renderMaterial = material or ""
 
 	if (camInfo) then
 		ikon.info = camInfo
@@ -273,7 +272,7 @@ function ikon:renderIcon(name, w, h, mdl, material, camInfo, updateCache)
 	end
 
 	ikon.renderEntity:SetModel(ikon.renderModel)
-	ikon.renderEntity:SetMaterial(ikon.renderMaterial)
+	ikon.renderEntity:SetMaterial(material or "")
 
 	local bone = ikon.renderEntity:LookupBone("ValveBiped.Bip01_Head1")
 
@@ -337,7 +336,7 @@ end
 concommand.Add("ix_flushicon", function()
 	local root = "helix/icons/" .. schemaName
 
-	for _, v in pairs(file.Find(root .. "/*.png", "DATA")) do
+	for _, v in ipairs(file.Find(root .. "/*.png", "DATA")) do
 		file.Delete(root .. "/" .. v)
 	end
 

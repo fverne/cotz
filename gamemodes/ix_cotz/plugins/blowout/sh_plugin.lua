@@ -117,7 +117,7 @@ if SERVER then
 			[MOVETYPE_OBSERVER] = true,
 		}
 
-		for _, v in pairs(player.GetAll()) do
+		for _, v in player.Iterator() do
 			if
 				not self:IsPosSafe(v:GetShootPos(), v, {})
 				and not movetypes[v:GetMoveType()]
@@ -134,7 +134,7 @@ if SERVER then
 	end
 
 	function PLUGIN:RemoveBlowoutMarkFromPlayers()
-		for _, v in pairs(player.GetAll()) do
+		for _, v in player.Iterator() do
 			if v:GetCharacter() then
 				v:GetCharacter():SetData("bInBlowoutWhenStart", false)
 			end
@@ -164,7 +164,7 @@ if SERVER then
 	end
 
 	function PLUGIN:ShutDown()
-		for _, v in pairs(player.GetAll()) do
+		for _, v in player.Iterator() do
 			if not v:GetCharacter() then
 				return
 			end
@@ -186,7 +186,7 @@ if SERVER then
 			math.Round(self.NextBlowout) == math.Round(os.time() + 60)
 			and self.BlowoutVars.AdminWarningUsed == false
 		then
-			for _, v in pairs(player.GetAll()) do
+			for _, v in player.Iterator() do
 				if v:IsAdmin() then
 					v:Notify(
 						(
@@ -204,7 +204,7 @@ if SERVER then
 			math.Round(self.NextBlowout) == math.Round(os.time() + 30)
 			and self.BlowoutVars.ProgressionWarningUsed == false
 		then
-			for _, ply in ipairs(player.GetAll()) do
+			for _, ply in player.Iterator() do
 				local character = ply:GetCharacter()
 				if character and ix.progression.IsCompleted(character, "muteItemDelivery_BlowoutWarning") then
 					ix.chat.Send(
@@ -285,7 +285,7 @@ if SERVER then
 					table.insert(tracefilter, ent)
 				end
 
-				for _, v in pairs(player.GetAll()) do
+				for _, v in player.Iterator() do
 					if
 						not self:IsPosSafe(v:GetShootPos(), v, tracefilter)
 						and not movetypes[v:GetMoveType()]
@@ -305,7 +305,7 @@ if SERVER then
 					ix.plugin.list["anomalycontroller"]:trySpawnArtifacts()
 				end
 				if ix.config.Get("blowoutRemoveNPCs", false) then
-					for _, v in pairs(ents.GetAll()) do
+					for _, v in ents.Iterator() do
 						if
 							IsValid(v)
 							and (v:IsNPC() or baseclass.Get(v:GetClass()).Base == "base_nextbot" or baseclass.Get(

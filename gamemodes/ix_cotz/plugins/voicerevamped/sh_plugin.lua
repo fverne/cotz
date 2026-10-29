@@ -270,7 +270,7 @@ function PLUGIN:HUDPaint()
 end
 
 function PLUGIN:PostDrawTranslucentRenderables()
-    for _, ply in ipairs(player.GetAll()) do
+	for _, ply in player.Iterator() do
         if ply == LocalPlayer() or (GetViewEntity() == LocalPlayer()) then return end
         if not ply:Alive() then return end
         if not ix.config.Get("allowVoice", false) then return end
@@ -305,13 +305,13 @@ if (CLIENT) then
 end
 
 concommand.Add("printranges", function()
-    for k, v in pairs(player.GetAll()) do
+	for k, v in player.Iterator() do
         print("Ranges:" .. v:GetNetVar("voiceRange"))
     end
 end)
 
 concommand.Add("setranges", function(ply, cmd, args)
-    for k, v in pairs(player.GetAll()) do
+	for k, v in player.Iterator() do
         v:SetNetVar("voiceRange", tonumber(args[1]))
     end
 end)

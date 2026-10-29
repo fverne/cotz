@@ -289,6 +289,7 @@ function ITEM:RemoveOutfit(client)
 	end
 
 	self:GetOwner():GetCharacter():SetData("groups", bgroups)
+	client:SetupHands()
 end
 
 function ITEM:OnInstanced()
@@ -359,7 +360,7 @@ end)
 
 ITEM.functions.EquipUn = { -- sorry, for name order.
 	name = "Take Off",
-	tip = "equipTip",
+	tip = "unequipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)		
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 6, function(ply) 
@@ -451,6 +452,7 @@ ITEM.functions.Equip = {
 				end
 			end
 
+			ply:SetupHands()
 			item:OnLoadout()
 		end)
 

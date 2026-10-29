@@ -175,15 +175,7 @@ if SERVER then
 
 			entity:SetModel(v.model)
 			entity:SetSkin(v.skin or 0)
-			entity:SetSolid(SOLID_BBOX)
-			entity:PhysicsInit(SOLID_BBOX)
-
-			local physObj = entity:GetPhysicsObject()
-
-			if IsValid(physObj) then
-				physObj:EnableMotion(false)
-				physObj:Sleep()
-			end
+			entity:InitPhysObj()
 
 			entity:SetNoBubble(v.bubble)
 			entity:SetDisplayName(v.name)
@@ -315,12 +307,16 @@ if SERVER then
 
 			data = uniqueID
 		elseif key == "stockDisable" then
-			local uniqueID = data[1]
+			local uniqueID = data
+
+			if not isstring(uniqueID) or not ix.item.list[uniqueID] then
+				return
+			end
 
 			entity.items[uniqueID] = entity.items[uniqueID] or {}
 			entity.items[uniqueID][VENDOR_MAXSTOCK] = nil
 
-			updateEditReceivers(entity.receivers, key, data)
+			updateEditReceivers(entity.receivers, key, uniqueID)
 		elseif key == "stockMax" then
 			local uniqueID = data[1]
 			data[2] = math.max(math.Round(tonumber(data[2]) or 1), 1)
@@ -406,8 +402,7 @@ if SERVER then
 			data = { uniqueID, entity.classes[uniqueID] }
 		elseif key == "model" then
 			entity:SetModel(data)
-			entity:SetSolid(SOLID_BBOX)
-			entity:PhysicsInit(SOLID_BBOX)
+			entity:InitPhysObj()
 			entity:SetAnim()
 		elseif key == "useMoney" then
 			if entity.money then
@@ -482,6 +477,10 @@ if SERVER then
 		local itemInstanceID = net.ReadUInt(32)
 		local isSellingToVendor = net.ReadBool()
 
+		if not ix.item.list[uniqueID] then
+			return
+		end
+
 		if
 			not isSellingToVendor
 			and not ix.progression.CanBuyItem(character, entity:GetDisplayName(), uniqueID)
@@ -494,7 +493,7 @@ if SERVER then
 		end
 
 		if hook.Run("CanPlayerTradeWithVendor", client, entity, uniqueID, isSellingToVendor) ~= false then
-			local price = entity:GetPrice(uniqueID, isSellingToVendor, itemInstanceID)
+			local price = entity:GetPrice(uniqueID, isSellingToVendor, isSellingToVendor and itemInstanceID or nil)
 
 			if isSellingToVendor then
 				local found = false
@@ -509,14 +508,14 @@ if SERVER then
 
 				for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
 					local item = ix.item.instances[v:GetID()]
-					quantity = item:GetData("quantity", item.quantity or item.ammoAmount)
 					if
-						v.uniqueID == uniqueID
+						item
+						and v.uniqueID == uniqueID
 						and v:GetID() ~= 0
-						and item
 						and v:GetID() == itemInstanceID
 						and v:GetData("equip", false) == false
 					then
+						quantity = item:GetData("quantity", item.quantity or item.ammoAmount)
 						timer.Simple(0.1, function()
 							client:SelectWeapon(
 								"ix_hands"
@@ -574,6 +573,10 @@ if SERVER then
 				PLUGIN:SaveData()
 				hook.Run("CharacterVendorTraded", client, entity, uniqueID, isSellingToVendor)
 			else
+				if not entity:CanSellToPlayer(client, uniqueID) then
+					return
+				end
+
 				local stock = entity:GetStock(uniqueID, character)
 
 				if stock == nil and isSherpaClient then

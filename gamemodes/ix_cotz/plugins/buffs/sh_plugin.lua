@@ -73,7 +73,7 @@ if (SERVER) then
 	-- This hook handles every player's buff effect.
 	-- I suggest you do not touch this function unless you know what you're doing.
 	function PLUGIN:Think()
-		for k, v in pairs ( player.GetAll() ) do
+		for k, v in player.Iterator() do
 			if !( v:IsValid() and v:Alive() ) then continue end 
 			local tblBuffs = v:GetNetVar( "buffs" ) or {}
 			for name, dat in pairs( tblBuffs ) do
@@ -91,7 +91,7 @@ if (SERVER) then
 else
 
 	function PLUGIN:Think()
-		for k, v in pairs ( player.GetAll() ) do
+		for k, v in player.Iterator() do
 			if !( v:IsValid() and v:Alive() ) then continue end 
 			local tblBuffs = v:GetNetVar( "buffs" ) or {}
 			for name, dat in pairs( tblBuffs ) do

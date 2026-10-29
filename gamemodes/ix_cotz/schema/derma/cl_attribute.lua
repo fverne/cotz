@@ -52,6 +52,7 @@ function PANEL:Init()
 	self.value = 0
 	self.deltaValue = self.value
 	self.max = 10
+	self.animateSpeed = 15
 	self.min = 0
 
 	self.bar = self:Add("DPanel")
@@ -136,7 +137,7 @@ function PANEL:Think()
 		end
 	end
 
-	self.deltaValue = math.Approach(self.deltaValue, self.value, FrameTime() * 15)
+	self.deltaValue = math.Approach(self.deltaValue, self.value, FrameTime() * self.animateSpeed)
 end
 
 function PANEL:DoChange()

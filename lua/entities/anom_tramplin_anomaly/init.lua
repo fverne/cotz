@@ -54,17 +54,26 @@ function ENT:SpawnFunction( ply, tr, ClassName, activator )
 end
 
 function ENT:Think()
-		for k,v in pairs(ents.FindInSphere(self:GetPos()+Vector(0,0,300),300)) do
-			if v == self then return end
-			if v:IsPlayer() then
-				v:SetVelocity( (self:GetPos()+Vector(0,0,300) - v:GetPos()) * 1.5)
-			end
+	if ix and ix.eventController and not ix.eventController:HasPlayerNear(self:GetPos(), 2500) then
+		self:NextThink(CurTime() + 1)
+
+		return true
+	end
+	for _, v in ipairs(ents.FindInSphere(self:GetPos()+Vector(0,0,300),300)) do
+		if v == self then return end
+		if v:IsPlayer() then
+			v:SetVelocity( (self:GetPos()+Vector(0,0,300) - v:GetPos()) * 1.5)
 		end
+	end
+	self:NextThink(CurTime() + 0.2)
+
+	return true
 end
 
-function ENT:StartTouch( ply )
+function ENT:StartTouch(ent)
 	if not self.Active == true then 
-	timer.Create("tramplin_activated_once", 0.01, 1, function()
+	timer.Create("tramplin_activated_once" .. self:EntIndex(), 0.01, 1, function()
+		if not IsValid(self) then return end
 		self:EmitSound("tramplin_blast");
 		ParticleEffect( "tramplin_activated", self:GetPos(), Angle( 0, 0, 0 ) )
 		self:StopParticles()
@@ -73,13 +82,16 @@ function ENT:StartTouch( ply )
 		self.Active = true
 	end)
 	timer.Create("tramplin_stop_sound"..self:EntIndex(), 2, 1, function()
+		if not IsValid(self) then return end
 		self:StopSound("tramplin_idle")
 	end)
 	timer.Create("tramplin_recharge"..self:EntIndex(), 6.7, 1, function()
+		if not IsValid(self) then return end
 		self:SetNWBool("StopParticle", false)
 	self.Active = false
 	end)
 	timer.Create("tramplin_activated"..self:EntIndex(), 6, 1, function()
+		if not IsValid(self) then return end
 		ParticleEffect( "tramplin_blast", self:GetPos(), Angle( 0, 0, 0 ) )
 		util.BlastDamage( self, self, self:GetPos()+Vector(50,50,300), 250, 400)
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
@@ -87,7 +99,8 @@ function ENT:StartTouch( ply )
 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
 			ParticleEffect("wick_gore_bloodsplash_new" , ent:GetPos(), Angle( 0, 0, 0 ) )
 			ent:Remove()
-		elseif ent.ixItemID and ix.item.instances[ent.ixItemID].isWeapon then
+		elseif IsValid(ent) and ent.ixItemID and ix.item.instances[ent.ixItemID]
+			and ix.item.instances[ent.ixItemID].isWeapon then
 			ent:Remove()
 		end
 		--ply:TakeDamage(99999, self, self)
@@ -96,10 +109,11 @@ function ENT:StartTouch( ply )
 end
 
 function ENT:OnRemove()
+	timer.Remove("tramplin_activated_once" .. self:EntIndex())
 	self.Timer = "tramplin_" .. self:EntIndex()
 	self:StopSound("tramplin_idle")
-	timer.Stop(self.Timer)
-	timer.Stop("tramplin_recharge"..self:EntIndex())
-	timer.Stop("tramplin_activated"..self:EntIndex())
-	timer.Stop("tramplin_stop_sound"..self:EntIndex())
+	timer.Remove(self.Timer)
+	timer.Remove("tramplin_recharge"..self:EntIndex())
+	timer.Remove("tramplin_activated"..self:EntIndex())
+	timer.Remove("tramplin_stop_sound"..self:EntIndex())
 end

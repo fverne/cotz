@@ -171,7 +171,7 @@ else
 	local damageTime = CurTime()
 	function PLUGIN:Think()
 		if (thinkTime < CurTime()) then
-			for k, v in ipairs(player.GetAll()) do
+			for k, v in player.Iterator() do
 				if v:GetNetVar("radiation", 0) == 100 then
 					if v:Alive() then
 						v:Kill()
@@ -184,7 +184,7 @@ else
 		
 		--damage
 		if (damageTime < CurTime()) then
-			for k, v in ipairs(player.GetAll()) do
+			for k, v in player.Iterator() do
 				if (v:Alive()) then
 					if (v:GetNetVar("radiation", 0) > 45 and v:GetNetVar("radiation", 0) < 75) then
 						v:addRadiation(-0.5)

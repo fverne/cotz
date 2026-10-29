@@ -11,14 +11,15 @@ function ix.util.GetItemIcon(item)
     elseif exIcon then
         icon = exIcon
     else
-        ikon:renderIcon(
-            item.uniqueID,
-            item.width,
-            item.height,
-            item:GetModel(),
-            item.material,
-            item.iconCam
-        )
+		ikon:renderIcon(
+			item.uniqueID,
+			item.width,
+			item.height,
+			item:GetModel(),
+			item.iconCam,
+			nil,
+			item:GetMaterial()
+		)
         icon = ikon:GetIcon(item.uniqueID)
     end
 

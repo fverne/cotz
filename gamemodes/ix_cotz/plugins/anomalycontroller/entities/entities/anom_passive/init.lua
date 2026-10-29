@@ -2,9 +2,7 @@ AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
 
 include('shared.lua')
-local delayTime = 0
 local damage = 5
-local damageRange = 0
 
 function ENT:SpawnFunction( ply, tr )
 	if ( !tr.Hit ) then return end
@@ -34,14 +32,20 @@ function ENT:Initialize()
 		phys:Wake()
 	end
 	
-	damageRange = self:getNetVar("range") or 600
+	self.cotzNextDamage = CurTime() + (self:EntIndex() % 10) * 0.02
 end
 
 function ENT:Think()
-	if delayTime < CurTime() then
-		delayTime = CurTime() + 0.2
-		for k, v in pairs( ents.FindInSphere( self.Entity:GetPos(), damageRange )  ) do
-			if v:IsPlayer() and v:IsValid() then
+	local damageRange = math.max(self:GetNetVar("range", 600), 1)
+	if ix and ix.eventController and not ix.eventController:HasPlayerNear(self:GetPos(), damageRange + 1000) then
+		self:NextThink(CurTime() + 1)
+
+		return true
+	end
+	if CurTime() >= (self.cotzNextDamage or 0) then
+		self.cotzNextDamage = CurTime() + 0.2
+		for _, v in player.Iterator() do
+			if self:GetPos():DistToSqr(v:GetPos()) <= damageRange * damageRange then
 				local dist = v:GetPos():Distance(self.Entity:GetPos())
 				local scale = 1 - (dist / damageRange)
 				
@@ -54,6 +58,9 @@ function ENT:Think()
 			end
 		end
 	end
+	self:NextThink(self.cotzNextDamage)
+
+	return true
 end
 
 function ENT:Use( activator, caller, type, value )

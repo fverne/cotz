@@ -1501,9 +1501,28 @@ function SWEP:DrawWorldModel()
 	end
 
 	if self.DrawTraditionalWorldModel then
+		local owner = self:GetOwner()
+
+		-- A parented world model needs bone merging to follow the owner's hand.
+		if IsValid(owner) and self:GetParent() == owner and not self:IsEffectActive(EF_BONEMERGE) then
+			self:AddEffects(EF_BONEMERGE)
+			self:InvalidateBoneCache()
+		end
+
 		self:DrawModel()
 	else
 		local wm = self.WMEnt
+
+		-- Clientside models can disappear while the weapon entity remains valid.
+		if not IsValid(wm) and self.WM then
+			wm = ClientsideModel(self.WM, RENDERGROUP_BOTH)
+
+			if IsValid(wm) then
+				wm:SetNoDraw(true)
+				CustomizableWeaponry.cmodels:add(wm, self)
+				self.WMEnt = wm
+			end
+		end
 
 		if IsValid(wm) then
 			if IsValid(self.Owner) then

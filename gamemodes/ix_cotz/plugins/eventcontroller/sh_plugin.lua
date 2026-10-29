@@ -25,16 +25,7 @@ PLUGIN.spawnrate = 30
 
 local icon = Material("vgui/icons/news.png")
 
-ix.config.Add(
-	"eventControllerThreshold",
-	70,
-	"How many mutants should the controller keep on the map.",
-	nil,
-	{
-		data = { min = 10, max = 100 },
-		category = "Spawning",
-	}
-)
+ix.util.Include("sh_population.lua")
 
 if SERVER then
 	local spawntime = 1
@@ -56,10 +47,15 @@ if SERVER then
 	end
 
 	function PLUGIN:spawnEvent(eventpoint, spawn)
+		if ix.eventController ~= self then return end
 		-- spawnents
 		if spawn.entities then
 			for k = 1, #spawn.entities do
 				for _ = 1, spawn.entities[k][2] do
+					local class = spawn.entities[k][1]
+					local isMutant = class:sub(1, 11) == "npc_mutant_"
+					if isMutant and not self:CanPopulateMutant(nil, true) then break end
+
 					local position = self:GetSpawnLocation(eventpoint[1])
 					local data = {}
 					data.start = position
@@ -72,10 +68,15 @@ if SERVER then
 					-- 	continue
 					-- end
 
-					local newNPC = ents.Create(spawn.entities[k][1])
-					newNPC:SetPos(position)
-					newNPC:Spawn()
-					newNPC:DropToFloor()
+					if isMutant and not self:CanPopulateMutant(position, true) then continue end
+					if isMutant then
+						self:QueueMutant(class, position, self.saferadius, true)
+					else
+						local newNPC = ents.Create(class)
+						newNPC:SetPos(position)
+						newNPC:Spawn()
+						newNPC:DropToFloor()
+					end
 				end
 			end
 		end
@@ -101,7 +102,7 @@ if SERVER then
 		if spawn.loot then
 			--[[for k = 1, #spawn.loot do
 				for i = 1, spawn.loot[k][2] do
-					local position = self:GetSpawnLocation( eventpoint[1] )
+					local position = self:GetSpawnLocation(eventpoint[1])
 					local data = {}
 					data.start = position
 					data.endpos = position
@@ -176,9 +177,9 @@ if SERVER then
 	end
 
 	function PLUGIN:Think()
-		if table.IsEmpty(self.eventpoints) then
-			return
-		end
+		if ix.eventController ~= self then return end
+		self:UpdateMutantPerformance()
+		if table.IsEmpty(self.eventpoints) then return end
 
 		if populate then
 			for _ = 1, self.populateAmount do
@@ -210,7 +211,7 @@ if SERVER then
 		end
 		spawntime = CurTime() + self.spawnrate
 
-		if self:GetNumMutants() > ix.config.Get("eventControllerThreshold", 35) then
+		if self:GetNumMutants(true) >= self:GetMutantTarget() then
 			return
 		end
 
@@ -236,7 +237,7 @@ if SERVER then
 		self:spawnEvent(eventpoint, spawn)
 
 		if math.Rand(1, 100) <= self.pdachatterchance then
-			for _, ply in ipairs(player.GetAll()) do
+			for _, ply in player.Iterator() do
 				local character = ply:GetCharacter()
 				if character and ix.progression.IsCompleted(character, "muteItemDelivery_Broadcast") then
 					ix.chat.Send(
@@ -251,9 +252,6 @@ if SERVER then
 		end
 	end
 
-	function PLUGIN:GetNumMutants()
-		return #ents.FindByClass("npc_*")
-	end
 else
 	netstream.Hook("nut_DisplaySpawnPoints", function(data)
 		for _, v in pairs(data) do

@@ -191,17 +191,19 @@ ITEM:Hook("drop", function(item)
 		end
 
 		if (IsValid(weapon)) then
-			local ammoType = weapon:GetPrimaryAmmoType()
+			local ammoType = item:GetWeaponAmmoType(weapon)
 
 			weapon.ixItem = nil
 
-			if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-				item:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
-			else
-				item:SetData("ammoType", nil)
+			if not weapon.ixAmmoRestorePending then
+				if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+					item:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(ammoType), -3, -2)))
+				else
+					item:SetData("ammoType", nil)
+				end
+
+				item:SetData("ammo", weapon:Clip1())
 			end
-				
-			item:SetData("ammo", weapon:Clip1())
 			item:SetData("wear", weapon:GetWeaponWear())
 			item:SetData("durability", weapon:GetWeaponDurability())
 
@@ -216,8 +218,8 @@ end)
 
 -- On player uneqipped the item, Removes a weapon from the player and keep the ammo in the item.
 ITEM.functions.EquipUn = { -- sorry, for name order.
-	name = "Unequip",
-	tip = "equipTip",
+	name = "unequip",
+	tip = "unequipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)
 		ix.util.PlayerPerformBlackScreenAction(item.player, "Unequipping...", 4, function(ply) 
@@ -235,7 +237,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 
 -- On player eqipped the item, Gives a weapon to player and load the ammo data from the item.
 ITEM.functions.Equip = {
-	name = "Equip",
+	name = "equip",
 	tip = "equipTip",
 	icon = "icon16/stalker/equip.png",
 	OnRun = function(item)
@@ -285,7 +287,7 @@ function ITEM:Unload(player)
 	local ammoSubClass = ""
 
 	if isEquipped then
-		ammoType = weapon:GetPrimaryAmmoType()
+		ammoType = self:GetWeaponAmmoType(weapon)
 		ammoAmount = weapon:Clip1()
 	else 
 		ammoType = self:GetAmmoType()
@@ -362,32 +364,6 @@ function ITEM:Equip(client)
 		end
 	end
 
-	if self.canAttach == true then
-		local hasrun = false
-
-		timer.Simple(0.1,function()
-			local attachments = self:GetData("attachments") or {}
-			local weapon1 = client:GetWeapon(self.class)
-			if(weapon1:GetClass() == self.class and weapon1.attachSpecificAttachment)then
-				for k = 1, #attachments do
-					weapon1:attachSpecificAttachment(attachments[k])
-				end
-				hasrun = true
-			end
-		end)
-
-		timer.Simple(0.5,function() -- To make up for lag
-			local attachments = self:GetData("attachments") or {}
-			local weapon1 = client:GetWeapon(self.class)
-			
-			if(weapon1:GetClass() == self.class and not hasrun)then
-				for k = 1, #attachments do
-					weapon1:attachSpecificAttachment(attachments[k])
-				end
-			end
-		end)
-	end
-
 	if (client:HasWeapon(self.class)) then
 		client:StripWeapon(self.class)
 	end
@@ -418,22 +394,9 @@ function ITEM:Equip(client)
 			client:SetAmmo(1, ammoType)
 		end
 
-		if self:GetData("ammoRechamber") then
-			weapon:attachSpecificAttachment(self:GetData("ammoRechamber").attachmentName)
-		end
-
 		weapon:SetWeaponWear( self:GetData("wear", 100) )
 		weapon:SetWeaponDurability( self:GetData("durability", 100) )
 		self:SetData("equip", true)
-		if self:GetData("ammoType") ~= nil then
-			timer.Simple(0.1,function()
-				local weapon1 = client:GetWeapon(self.class)
-
-				weapon1:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
-
-				weapon1:SetClip1(self:GetData("ammo", 0))
-			end)
-		end
 
 		if (self.isGrenade) then
 			weapon:SetClip1(1)
@@ -443,6 +406,9 @@ function ITEM:Equip(client)
 		end
 
 		weapon.ixItem = self
+		if not self.isGrenade then
+			self:RestoreWeaponAmmo(client, weapon)
+		end
 
 		if (self.OnEquipWeapon) then
 			self:OnEquipWeapon(client, weapon)
@@ -475,15 +441,17 @@ function ITEM:Unequip(client, bPlaySound, bRemoveItem)
 	end
 
 	if (IsValid(weapon)) then
-		local ammoType = weapon:GetPrimaryAmmoType()
+		local ammoType = self:GetWeaponAmmoType(weapon)
 
 		weapon.ixItem = nil
 
-		self:SetData("ammo", weapon:Clip1())
-		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
-		else
-			self:SetData("ammoType", nil)
+		if not weapon.ixAmmoRestorePending then
+			self:SetData("ammo", weapon:Clip1())
+			if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+				self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(ammoType), -3, -2)))
+			else
+				self:SetData("ammoType", nil)
+			end
 		end
 		self:SetData("durability", weapon:GetWeaponDurability())
 		self:SetData("wear", weapon:GetWeaponWear())
@@ -524,6 +492,33 @@ function ITEM:CanTransfer(oldInventory, newInventory)
 	return true
 end
 
+function ITEM:RestoreWeaponAmmo(client, weapon)
+	weapon.ixAmmoRestorePending = true
+	timer.Simple(0.1, function()
+		if not IsValid(client) or not client:Alive() or not IsValid(weapon) then return end
+		if client:GetWeapon(self.class) ~= weapon or weapon.ixItem ~= self then return end
+		if not self:GetData("equip") then return end
+		if self.canAttach and weapon.attachSpecificAttachment then
+			for _, attachment in ipairs(self:GetData("attachments", {})) do
+				weapon:attachSpecificAttachment(attachment)
+			end
+		end
+		local rechamber = self:GetData("ammoRechamber")
+		if rechamber then
+			weapon:attachSpecificAttachment(rechamber.attachmentName)
+		end
+		local subtype = ix.weapontables.ammosubtypes[self:GetData("ammoType")]
+		if subtype then
+			weapon:attachSpecificAttachment(subtype.uID)
+		end
+		weapon:SetClip1(self:GetData("ammo", 0))
+		weapon.ixAmmoRestorePending = nil
+		if weapon.RefreshInventoryAmmo then
+			weapon:RefreshInventoryAmmo()
+		end
+	end)
+end
+
 function ITEM:OnLoadout()
 	if (self:GetData("equip")) then
 		local client = self.player
@@ -535,36 +530,13 @@ function ITEM:OnLoadout()
 			client:RemoveAmmo(weapon:Clip1(), weapon:GetPrimaryAmmoType())
 			client.carryWeapons[self.weaponCategory] = weapon
 
-			if self:GetData("ammoRechamber") then
-				weapon:attachSpecificAttachment(self:GetData("ammoRechamber").attachmentName)
-			end
-			
 			-- if wish granted
 			if self:GetData("unlimitedDurability", nil) then
 				-- weapon.WearDamage = 0
 				weapon.DurabilityDamageChance = 0
 			end
 
-			timer.Simple(0.1,function()
-				if IsValid(weapon) then
-					if self:GetData("ammoType") != nil then
-						weapon:attachSpecificAttachment(ix.weapontables.ammosubtypes[self:GetData("ammoType")].uID)
-					end
-					weapon:SetClip1(self:GetData("ammo", 0))
-				end
-			end)
-
-			if self.canAttach == true then
-				timer.Simple(0.1,function()
-					if IsValid(weapon) then
-						local attachments = self:GetData("attachments") or {}
-
-						for k = 1, #attachments do
-							weapon:attachSpecificAttachment(attachments[k])
-						end
-					end
-				end)
-			end
+			self:RestoreWeaponAmmo(client, weapon)
 
 			weapon.ixItem = self
 			weapon:SetWeaponWear( self:GetData("wear", 0))
@@ -589,20 +561,29 @@ function ITEM:GetAmmoType()
 	end
 end
 
+function ITEM:GetWeaponAmmoType(weapon)
+	-- CW attachments update Primary.Ammo before the engine ammo ID refreshes on deploy.
+	if weapon.CW20Weapon and weapon.Primary and weapon.Primary.Ammo then
+		return game.GetAmmoID(weapon.Primary.Ammo)
+	end
+
+	return weapon:GetPrimaryAmmoType()
+end
+
 function ITEM:OnSave()
+	if not self.player:Alive() then return end
+
 	local weapon = self.player:GetWeapon(self.class)
 
-	if (IsValid(weapon)) && self:GetData("equip",false) then
+	if IsValid(weapon) and not weapon.ixAmmoRestorePending and self:GetData("equip", false) then
 		self:SetData("ammo", weapon:Clip1())
 		self:SetData("wear", weapon:GetWeaponWear())
 		self:SetData("durability", weapon:GetWeaponDurability())
 
-		local ammoType = weapon:GetPrimaryAmmoType()
+		local ammoType = self:GetWeaponAmmoType(weapon)
 
-		if self.player:GetActiveWeapon() == weapon and string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
-		elseif string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(weapon:GetPrimaryAmmoType()), -3, -2)))
+		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
+			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(ammoType), -3, -2)))
 		else
 			self:SetData("ammoType", nil)
 		end
@@ -689,13 +670,31 @@ ITEM.functions.detach = {
 	end,
 }
 
+function ITEM:OnWeaponDeath(client)
+	local weapon = client:GetWeapon(self.class)
+	if IsValid(weapon) then
+		if not weapon.ixAmmoRestorePending then
+			local ammoName = game.GetAmmoName(self:GetWeaponAmmoType(weapon)) or ""
+			self:SetData("ammoType", ammoName:match(" %-(%w%w)%-$"))
+		end
+		weapon:SetClip1(0)
+		weapon.ReloadDelay = nil
+		weapon.ShotgunReloadState = 0
+	end
+	self:SetData("ammo", nil)
+end
+
 hook.Add("PlayerDeath", "ixStripClip", function(client)
 	client.carryWeapons = {}
 
 	if client:GetCharacter() then
 		for _, v in pairs(client:GetCharacter():GetInventory():GetItems()) do
 			if (v.isWeapon and v:GetData("equip")) then
-				v:SetData("ammo", nil)
+				if v.OnWeaponDeath then
+					v:OnWeaponDeath(client)
+				else
+					v:SetData("ammo", nil)
+				end
 				--v:SetData("equip", nil)
 
 				if (v.pacData) then

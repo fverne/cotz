@@ -76,7 +76,7 @@ if CLIENT then
 	
 	local function TFARenderScreen()
 		
-		for k,v in pairs(player.GetAll()) do
+		for k, v in player.Iterator() do
 			
 			if IsValid(v) then
 			

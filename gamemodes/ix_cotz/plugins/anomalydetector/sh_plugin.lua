@@ -20,7 +20,7 @@ function playerMeta:hasAnomdetector()
 end
 
 function PLUGIN:Think()
-	for k,v in pairs(player.GetAll()) do
+	for k, v in player.Iterator() do
 		if v.LastBeep == nil then 
 			v.LastBeep = 0 
 		end

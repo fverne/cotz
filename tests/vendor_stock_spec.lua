@@ -356,7 +356,10 @@ for _, name in ipairs(templateMethods) do
 	templateShop["Set" .. name] = function() end
 	templateShop["Get" .. name] = function() end
 end
+local physicsRebuilt = false
+templateShop.InitPhysObj = function() physicsRebuilt = true end
 templateShop:LoadTemplate("technpc")
+check(physicsRebuilt, "template model changes rebuild vendor collision physics")
 check(templateShop.items["22lr"][VENDOR_MAXSTOCK] == 4
 	and templateShop.items["22lr"][VENDOR_RESTOCK_AMOUNT] == 1,
 	"template loading does not multiply consumable stock")

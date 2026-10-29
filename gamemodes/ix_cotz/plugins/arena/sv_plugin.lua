@@ -430,7 +430,7 @@ function PLUGIN:EndArena(arenaName, winner, loser)
 	timer.Remove("ixArenaDurationTimer_" .. arenaName)
 
 	if IsValid(winner) and winner:IsPlayer() then
-		for k, ply in pairs( player.GetAll() ) do
+		for k, ply in player.Iterator() do
 			ix.chat.Send(ply, "eventpdainternal", Format("%s has defeated %s in the arena!", winner:GetName(), loser:GetName()), true, ply)
 		end
 

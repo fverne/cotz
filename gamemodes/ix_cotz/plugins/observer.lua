@@ -56,7 +56,7 @@ if (CLIENT) then
 			!client:InVehicle() and CAMI.PlayerHasAccess(client, "Helix - Observer", nil)) then
 			local scrW, scrH = ScrW(), ScrH()
 
-			for _, v in ipairs(player.GetAll()) do
+			for _, v in player.Iterator() do
 				if (v == client or !v:GetCharacter() or client:GetAimVector():Dot((v:GetPos() - client:GetPos()):GetNormal()) < 0.65) then
 					continue
 				end
@@ -110,7 +110,7 @@ if (CLIENT) then
 				ix.util.DrawText(text, x, y - size, ColorAlpha(teamColor, alpha), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, nil, alpha)
 			end
 
-			for k, v in ipairs(ents.GetAll()) do
+			for k, v in ents.Iterator() do
 
 				screenPosition = v:GetPos():ToScreen()
 

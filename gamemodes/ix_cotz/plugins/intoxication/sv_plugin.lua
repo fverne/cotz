@@ -16,7 +16,7 @@ function PLUGIN:Think()
     end
 
     if self.next_think <= CurTime() then
-        for k, v in next, player.GetAll() do
+		for k, v in player.Iterator() do
             local level = v:GetDrunkLevel()
 
             if level > 0 then

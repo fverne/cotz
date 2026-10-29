@@ -109,7 +109,7 @@ if (SERVER) then
                 self.IsRestarting = true
                 RunConsoleCommand("changelevel", game.GetMap())
             else
-                for _, v in pairs(player.GetAll()) do
+				for _, v in player.Iterator() do
                     self:NotifyServerRestart(v, self:GetTimeToRestart())
                 end
 

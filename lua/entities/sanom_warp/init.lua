@@ -60,7 +60,9 @@ function ENT:Think()
 		local tbl = ents.FindByClass( "prop_phys*" )
 		tbl = table.Add( tbl, ents.FindByClass( "prop_veh*" ) )
 		tbl = table.Add( tbl, ents.FindByClass( "npc*" ) )
-		tbl = table.Add( tbl, player.GetAll() )
+		for _, client in player.Iterator() do
+			tbl[#tbl + 1] = client
+		end
 		
 		for k,v in pairs( tbl ) do
 			

@@ -25,8 +25,12 @@ function ENT:Initialize()
 		self:SetUseType(SIMPLE_USE)
 		self:SetMoveType(MOVETYPE_NONE)
 		self:DrawShadow(true)
-		self:SetSolid(SOLID_BBOX)
-		self:PhysicsInit(SOLID_BBOX)
+		self:InitPhysObj()
+		self:AddCallback("OnAngleChange", function(entity)
+			local mins, maxs = entity:GetAxisAlignedBoundingBox()
+
+			entity:SetCollisionBounds(mins, maxs)
+		end)
 		self:SetNWBool("NoDrag", true)
 
 		self.items = {}
@@ -42,13 +46,6 @@ function ENT:Initialize()
 		self.receivers = {}
 
 		self.ShouldResetSequence = false
-
-		local physObj = self:GetPhysicsObject()
-
-		if IsValid(physObj) then
-			physObj:EnableMotion(false)
-			physObj:Sleep()
-		end
 	end
 
 	timer.Simple(1, function()
@@ -56,6 +53,23 @@ function ENT:Initialize()
 			self:SetAnim()
 		end
 	end)
+end
+
+function ENT:InitPhysObj()
+	local mins, maxs = self:GetAxisAlignedBoundingBox()
+
+	if self:PhysicsInitBox(mins, maxs) then
+		local physObj = self:GetPhysicsObject()
+		physObj:EnableMotion(false)
+		physObj:Sleep()
+	end
+end
+
+function ENT:GetAxisAlignedBoundingBox()
+	local mins, maxs = self:GetModelBounds()
+	mins = Vector(mins.x, mins.y, 0)
+
+	return self:GetRotatedAABB(mins, maxs)
 end
 
 function ENT:CanAccess(client)
@@ -106,6 +120,12 @@ function ENT:GetStockInterval(uniqueID)
 end
 
 function ENT:GetPrice(uniqueID, selling, itemInstanceID)
+	local itemTable = ix.item.list[uniqueID]
+
+	if not itemTable then
+		return 0
+	end
+
 	local instance = ix.item.instances[itemInstanceID]
 	local price = ix.item.list[uniqueID] and self.items[uniqueID] and self.items[uniqueID][VENDOR_PRICE]
 		or (instance and ix.item.list[uniqueID].GetPrice and instance:GetPrice())
@@ -136,26 +156,28 @@ function ENT:GetPrice(uniqueID, selling, itemInstanceID)
 end
 
 function ENT:CanSellToPlayer(client, uniqueID)
+	local character = client:GetCharacter()
 	local data = self.items[uniqueID]
 
-	if not data or not client:GetCharacter() or not ix.item.list[uniqueID] then
+	if not character or not ix.item.list[uniqueID] or not self:CanAccess(client) then
 		return false
 	end
 
-	if data[VENDOR_MODE] == VENDOR_BUYONLY then
-		return false
+	local isSherpaClient = character:HasSherpaVendor(self:GetDisplayName())
+
+	if not isSherpaClient then
+		if not data or (data[VENDOR_MODE] ~= VENDOR_SELLONLY and data[VENDOR_MODE] ~= VENDOR_SELLANDBUY) then
+			return false
+		end
+
+		if not character:HasMoney(self:GetPrice(uniqueID)) then
+			return false
+		end
 	end
 
-	if not client:GetCharacter():HasMoney(self:GetPrice(uniqueID)) then
-		return false
-	end
+	local stock = self:GetStock(uniqueID, character)
 
-	local stock = self:GetStock(uniqueID, client:GetCharacter())
-	if stock and stock < 1 then
-		return false
-	end
-
-	return true
+	return (stock == nil and not isSherpaClient) or (stock ~= nil and stock >= 1)
 end
 
 function ENT:CanBuyFromPlayer(client, uniqueID)
@@ -239,7 +261,7 @@ if SERVER then
 	function ENT:Use(activator)
 		local character = activator:GetCharacter()
 
-		if not self:CanTalkTo(activator) or hook.Run("CanPlayerUseVendor", activator) == false then
+		if not self:CanTalkTo(activator) or hook.Run("CanPlayerUseVendor", activator, self) == false then
 			if self.messages[VENDOR_NOTRADE] then
 				activator:ChatPrint(self:GetDisplayName() .. ": " .. self.messages[VENDOR_NOTRADE])
 			else
@@ -354,10 +376,8 @@ else
 	end
 
 	function ENT:PlayerNearby()
-		for _, v in pairs(player.GetAll()) do
-			if self:GetPos():Distance(v:GetPos()) < 200 then
-				return true
-			end
+		for _, v in player.Iterator() do
+			if self:GetPos():Distance(v:GetPos()) < 200 then return true end
 		end
 
 		return false
@@ -427,6 +447,10 @@ function ENT:LoadTemplate(templateName)
 	if template ~= nil then
 		self:SetModel(template.model or self.model)
 		self:SetSkin(template.skin or 0)
+
+		if SERVER then
+			self:InitPhysObj()
+		end
 
 		self:SetNoBubble(template.bubble or self:GetNoBubble())
 		self:SetDisplayName(template.name or self:GetDisplayName())
