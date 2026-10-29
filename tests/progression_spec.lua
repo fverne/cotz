@@ -1005,7 +1005,7 @@ local pricedStack = {
 }
 local _, partialMoney = ix.util.GetValueFromProgressionTurnin(pricedStack, 2)
 local _, fullMoney = ix.util.GetValueFromProgressionTurnin(pricedStack, 10)
-check(partialMoney == 13 and fullMoney == 65, "progression cash is sixty-five percent of consumed value")
+check(partialMoney == 12 and fullMoney == 60, "progression cash is sixty percent of consumed value")
 local fullReputation = ix.util.GetValueFromProgressionTurnin(pricedStack, 10)
 check(math.abs(fullReputation - 2 * (5 + 10 ^ 0.25)) < 0.000001, "reputation credit is doubled")
 check(_G.value == nil, "reward calculation does not leak global mutable state")
@@ -1155,7 +1155,7 @@ check(stocks.drug_cigarette_3.remaining == 8, "excess units remain in the submit
 check(groupOwner.money == 0 and not groupOwner.inventory.rewards, "fulfilling one group pays nothing")
 supplyItem("drug_cigarette_5", 3)
 check(api.TurnIn(groupOwner.client, rewardNPC, "reward_groups", "drug_cigarette_5"), "last group completes task")
-check(groupOwner.money == 98, "completion pays sixty-five percent of all 150 currency of consumed items")
+check(groupOwner.money == 90, "completion pays sixty percent of all 150 currency of consumed items")
 local expectedReputation = math.floor(2 * (5 + 10 ^ 0.25) * (12 / 10 + 3 / 20) + 0.5)
 check(groupOwner.reputation == expectedReputation, "completion sums doubled reputation from every group")
 check(not (groupOwner:GetData("taskRewardOffers", {}) or {})["progression:reward_groups"],
@@ -1193,7 +1193,7 @@ supplyItem("reward_test", 1)
 check(api.TurnIn(mixedOwner.client, rewardNPC, "reward_mixed", "reward_test"), "restored singleton accepted")
 supplyItem("drug_cigarette_3", 2)
 check(api.TurnIn(mixedOwner.client, rewardNPC, "reward_mixed", "drug_cigarette_3"), "mixed task completes")
-check(mixedOwner.money == 143, "singleton and alternative pools use the same sixty-five percent cash rate")
+check(mixedOwner.money == 132, "singleton and alternative pools use the same sixty percent cash rate")
 check(not ix.taskRewards.SelectOffer(mixedOwner, "Tester", "progression:reward_mixed", 1),
 	"mixed task has no selectable supply reward")
 check(not mixedOwner.inventory.rewards, "mixed task retains only its money and reputation payout")
@@ -1335,7 +1335,7 @@ check(api.TurnIn(programmeOwner.client, programmeNPC, programmeID, programmeItem
 local totalUnits = firstCount + finalCount
 local expectedReputation = math.floor(2 * (5 + 10 ^ 0.25) * totalUnits / 10 + 0.5)
 check(programmeOwner.reputation == expectedReputation, "programme reputation rounds its cumulative credit")
-check(programmeOwner.money == math.ceil(6.5 * totalUnits), "programme cash uses cumulative hand-ins at the new premium")
+check(programmeOwner.money == math.ceil(6 * totalUnits), "programme cash pays sixty percent of cumulative hand-ins")
 check(not (programmeOwner:GetData("taskRewardOffers", {}) or {})["progression:" .. programmeID],
 	"multi-stage progression does not create selectable rewards")
 check(not programmeOwner.inventory.rewards, "programme completion pays money and reputation only")
@@ -1365,7 +1365,7 @@ local originalNPC = {
 }
 check(api.TurnIn(newcomer.client, originalNPC, "originalSurvival1", provisionID),
 	"newcomer commission completes through the real hand-in path")
-check(newcomer.money == math.ceil(provisionCount * 6.5), "fixed commissions receive the same sixty-five percent cash rate")
+check(newcomer.money == math.ceil(provisionCount * 6), "fixed commissions receive the same sixty percent cash rate")
 check(#newcomer.inventory.rewards == 1
 	and #api.GetLine(newcomer, "originalSurvival1").pendingRewards == 1,
 	"commission retains the second advertised supply as a durable pending claim")
@@ -1374,7 +1374,7 @@ check(#newcomer.inventory.rewards == 2, "commission replaces the random pool bon
 check(newcomer.inventory.rewards[1].item == "food_can_tushonka"
 	and newcomer.inventory.rewards[2].item == "drink_bottlewater", "commission grants exactly its advertised supplies")
 api.PayCompletionRewards(newcomer, "originalSurvival1")
-check(#newcomer.inventory.rewards == 2 and newcomer.money == math.ceil(provisionCount * 6.5),
+check(#newcomer.inventory.rewards == 2 and newcomer.money == math.ceil(provisionCount * 6),
 	"fixed commission cash and supplies cannot be replayed")
 local intelligenceWorker = character()
 api.SetActive(intelligenceWorker, "boss_dataTasks", true)

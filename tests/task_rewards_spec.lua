@@ -256,10 +256,24 @@ ix.item.list.part_swampcontroller_1 = hand
 local delivery = {name = "Hand over %d hands", numberRec = 1, requiredItem = "part_swampcontroller_1",
 	reward = {{"kit_reward_demo"}}, repReward = 5}
 ix.jobs.list.hand = delivery
-check(api.FixedMoney(delivery, 1) == 3685, "swampcontroller task cash is fifty-five percent of hand-in value")
-check(api.FixedMoney(delivery, 3) == 11055, "cash floor covers every requested specimen")
-check(ix.progression.HandInUnitValue("part_swampcontroller_1") == 4355,
-	"progression hand cash is sixty-five percent of hand-in value")
+check(api.FixedMoney(delivery, 1) == 3350, "swampcontroller task cash is fifty percent of hand-in value")
+check(api.SupplyBudget(delivery, 1) == 3685, "delivery supplies retain their previous budget despite changed cash")
+check(api.FixedMoney(delivery, 3) == 10050, "cash floor covers every requested specimen")
+ix.jobs.jobsbycategory.handDelivery = {"hand"}
+local deliveryViewer = actor()
+local deliveryPreview = api.PreviewJob(deliveryViewer, "'Old Timer'", "easy", {"handDelivery"})
+local savedDeliveryChoices = copy(deliveryPreview.rewardChoices)
+local savedDeliveryBudget = deliveryPreview.supplyBudget
+local oldDeliveryPreviews = copy(deliveryViewer:GetData("taskJobPreviews"))
+oldDeliveryPreviews["'Old Timer'"].easy.moneyReward = 3685
+deliveryViewer:SetData("taskJobPreviews", oldDeliveryPreviews)
+local refreshedDelivery = api.PreviewJob(deliveryViewer, "'Old Timer'", "easy", {"handDelivery"})
+check(refreshedDelivery.moneyReward == 3350, "cached delivery previews refresh their cash payout")
+check(refreshedDelivery.supplyBudget == savedDeliveryBudget
+	and refreshedDelivery.rewardChoices[1].label == savedDeliveryChoices[1].label,
+	"cash refresh preserves the saved supply budget and offered items")
+check(ix.progression.HandInUnitValue("part_swampcontroller_1") == 4020,
+	"progression hand cash is sixty percent of hand-in value")
 local specimen = setmetatable({GetData = function(_, key, default)
 	if key == "tier" then return 3 end
 
@@ -267,28 +281,28 @@ local specimen = setmetatable({GetData = function(_, key, default)
 end}, {__index = hand})
 check(api.HandInUnitValue("part_swampcontroller_1", specimen) == 11800,
 	"actual specimen tier increases opportunity cost")
-check(api.FixedMoney(delivery, 1, 11800) == 6490, "high-quality specimen scales the fifty-five percent cash payout")
+check(api.FixedMoney(delivery, 1, 11800) == 5900, "high-quality specimen scales the fifty percent cash payout")
 ix.npctemplates = {templates = {one = {items = {part_swampcontroller_1 = {20000, nil, 3}}, scale = 0.8},
 	two = {items = {part_swampcontroller_1 = {2, nil, 3}}}}}
 check(api.HandInUnitValue("part_swampcontroller_1") == 16000,
 	"best trader override is considered without multiplying prices between traders")
-check(api.FixedMoney(delivery, 1) == 8800, "delivery cash is fifty-five percent of configured trader reference value")
+check(api.FixedMoney(delivery, 1) == 8000, "delivery cash is fifty percent of configured trader reference value")
 ix.npctemplates = nil
 ix.item.list.food = {name = "Food", price = 100, quantity = 5}
 local foodJob = {requiredItem = "food", numberRec = 3, reward = {}, moneyReward = 0}
-check(api.FixedMoney(foodJob, 3) == 33, "stacked deliveries are valued per use, not per full stack")
+check(api.FixedMoney(foodJob, 3) == 30, "stacked deliveries are valued per use, not per full stack")
 local foodOwner = actor()
 foodOwner.jobs.NPC = {identifier = "food", numberRec = 3, progress = 0}
 ix.jobs.list.food = foodJob
-check(math.abs(ix.progression.HandInUnitValue("food") - 13) < 0.000001, "progression stacks are valued per consumed use")
+check(math.abs(ix.progression.HandInUnitValue("food") - 12) < 0.000001, "progression stacks are valued per consumed use")
 ix.jobs.list.highFood = {requiredItem = "food", numberRec = {2, 5}, moneyReward = 2000, reward = {}}
-check(math.abs(ix.progression.HandInUnitValue("food") - 13) < 0.000001,
-	"old repeatable cash bonuses cannot increase the sixty-five percent progression rate")
+check(math.abs(ix.progression.HandInUnitValue("food") - 12) < 0.000001,
+	"old repeatable cash bonuses cannot increase the sixty percent progression rate")
 ix.jobs.list.highFood = nil
 local ammoJob = {requiredItem = "22lr", numberRec = 1, moneyReward = 100, reward = {}}
 ix.jobs.list.ammoComparison = ammoJob
-check(math.abs(ix.progression.HandInUnitValue("22lr") * ix.item.list["22lr"].ammoAmount - 13) < 0.000001,
-	"progression ammunition pays sixty-five percent of a full box per consumed round")
+check(math.abs(ix.progression.HandInUnitValue("22lr") * ix.item.list["22lr"].ammoAmount - 12) < 0.000001,
+	"progression ammunition pays sixty percent of a full box per consumed round")
 ix.jobs.list.ammoComparison = nil
 local food = {quantity = 5, data = {quantity = 5}, GetData = function(self, key, default)
 	return self.data[key] or default
@@ -304,7 +318,7 @@ end
 ix.dialogue.notifyItemLost = function() end
 check(api.DeliverJobItem(foodOwner.client, "NPC"), "delivery records consumed units")
 check(food.data.quantity == 2 and not food.removed, "partial stack hand-in preserves surplus uses")
-check(foodOwner:GetJobs().NPC.deliveredValue == 60 and foodOwner:GetJobs().NPC.moneyReward == 33,
+check(foodOwner:GetJobs().NPC.deliveredValue == 60 and foodOwner:GetJobs().NPC.moneyReward == 30,
 	"actual hand-in value and payout are saved with progress")
 check(not api.DeliverJobItem(foodOwner.client, "NPC"), "completed task cannot consume more items")
 callbacks.ix_JobTrigger = nil
@@ -630,7 +644,7 @@ check(previewPacket[5] == shownOffer.choices[1].label,
 	"confirmation shows the exact supply randomly assigned by the server")
 check(not previewPacket[3]:find("reputation", 1, true) and previewPacket[3]:find("rubles", 1, true),
 	"confirmation keeps cash visible and hides reputation")
-local displayedSupply = previewPacket[5]:gsub(" %+ ", "\n      + ")
+local displayedSupply = previewPacket[5]
 check(listPacket[4]:find(displayedSupply, 1, true)
 	and previewPacket[3]:find("Supplies:\n  • " .. displayedSupply, 1, true),
 	"task list and NPC dialogue both show the same assigned supply reward")
@@ -789,7 +803,7 @@ local stoneBase = copy(ITEM)
 local stoneIDs = {"sharpening_stone", "sharpening_stone_fine"}
 for _, itemID in ipairs(stoneIDs) do
 	ITEM = copy(stoneBase)
-	dofile("gamemodes/ix_cotz/schema/items/sh_" .. itemID .. ".lua")
+	dofile("gamemodes/ix_cotz/schema/items/sharpeningstones/sh_" .. itemID .. ".lua")
 	ix.item.list[itemID] = ITEM
 end
 local originalRegister = ix.progression.Register

@@ -309,6 +309,13 @@ function ix.taskRewards.PreviewJob(character, npc, difficulty, categories)
 			end
 		end
 
+		local cash = ix.taskRewards.FixedMoney(definition, preview.numberRec)
+		if preview.moneyReward ~= cash then
+			preview.moneyReward = cash
+			character:SetData("taskJobPreviews", previews)
+			character:Save()
+		end
+
 		return preview
 	end
 	local id = ix.jobs.getJobFromCategory(categories)

@@ -70,7 +70,9 @@ local JOB_MIN_SUPPLY_BUDGET = 600
 local BONUS_INTERVAL = 5
 local CREDIT_PREMIUM = 1.3
 local JOB_SUPPLY_CASH_SHARE = 0.5
-local JOB_CASH_RATE = 0.55
+local JOB_CASH_RATE = 0.50
+-- Preserve supply budgets and non-delivery cash independently of turn-in payouts.
+local JOB_REFERENCE_CASH_RATE = 0.55
 local CASH_ROUNDING_EPSILON = 0.000000001
 local MAX_DEPTH = 12
 local GENERATED_QUANTITIES = {
@@ -237,9 +239,21 @@ function ix.taskRewards.SupplyCatalogue(character, npc)
 	return result
 end
 
+local function fixedMoney(job, count, deliveredValue, rate)
+	if job.requiredItem then
+		local amount = count or average(job.numberRec, 1)
+		local reference = ix.taskRewards.HandInUnitValue(job.requiredItem) * amount
+
+		return math.ceil(math.max(reference, deliveredValue or 0) * rate - CASH_ROUNDING_EPSILON)
+	end
+	local base = average(job.moneyReward, 0) + ix.taskRewards.JobBudget(job) * JOB_SUPPLY_CASH_SHARE
+
+	return math.ceil(base * rate - CASH_ROUNDING_EPSILON)
+end
+
 function ix.taskRewards.SupplyBudget(job, count)
 	return math.max(JOB_MIN_SUPPLY_BUDGET,
-		math.floor(ix.taskRewards.FixedMoney(job, count) * JOB_SUPPLY_SHARE))
+		math.floor(fixedMoney(job, count, nil, JOB_REFERENCE_CASH_RATE) * JOB_SUPPLY_SHARE))
 end
 
 function ix.taskRewards.BonusInterval()
@@ -403,15 +417,9 @@ function ix.taskRewards.HandInUnitValue(itemID, instance)
 end
 
 function ix.taskRewards.FixedMoney(job, count, deliveredValue)
-	if job.requiredItem then
-		local amount = count or average(job.numberRec, 1)
-		local reference = ix.taskRewards.HandInUnitValue(job.requiredItem) * amount
+	local rate = job.requiredItem and JOB_CASH_RATE or JOB_REFERENCE_CASH_RATE
 
-		return math.ceil(math.max(reference, deliveredValue or 0) * JOB_CASH_RATE - CASH_ROUNDING_EPSILON)
-	end
-	local base = average(job.moneyReward, 0) + ix.taskRewards.JobBudget(job) * JOB_SUPPLY_CASH_SHARE
-
-	return math.ceil(base * JOB_CASH_RATE - CASH_ROUNDING_EPSILON)
+	return fixedMoney(job, count, deliveredValue, rate)
 end
 
 function ix.taskRewards.CanTakeDifficulty(character, difficulty)

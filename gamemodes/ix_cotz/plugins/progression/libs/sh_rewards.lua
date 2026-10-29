@@ -1,6 +1,6 @@
 ix.progression = ix.progression or {}
 
-local PROGRESSION_CASH_RATE = 0.65
+local PROGRESSION_CASH_RATE = 0.60
 
 function ix.progression.CashMultiplier()
 	return PROGRESSION_CASH_RATE

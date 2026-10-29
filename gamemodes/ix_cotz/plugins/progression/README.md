@@ -95,7 +95,7 @@ stack units stay in the inventory. Completed requirements cannot be submitted ag
 
 Delivery rewards are paid once, when all requirements of the progression task are
 fulfilled. Partial hand-ins only save credit; they give no currency, reputation or
-items. Currency is 65% of hand-in value. Repeatable delivery jobs pay 55%.
+items. Currency is 60% of hand-in value. Repeatable delivery jobs pay 50%.
 Catalogue value, trader overrides and specimen quality are respected.
 Ammunition is priced per consumed round. Credit accumulates without rounding; completion
 rounds cash up once and deducts amounts already paid. Reputation is twice

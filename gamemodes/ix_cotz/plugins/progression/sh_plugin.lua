@@ -85,9 +85,9 @@ function PLUGIN:PopulateHelpMenu(tabs)
 				.. "character. "
 				.. "Supply milestones can increase your personal stock capacity without faster refills. "
 				.. "Finish every item requirement in a task to receive "
-				.. "reputation and 30% of the handed-in value. Standard programmes offer a saved choice of supplies; "
-				.. "specialist commissions list their fixed supplies, service credit or catalogue rewards. "
-				.. "Groups with only one item give extra money instead."
+				.. string.format("reputation and %g%% of the handed-in value. ", ix.progression.CashMultiplier() * 100)
+				.. "Commissions may also grant their listed fixed supplies, service credit or catalogue rewards. "
+				.. "Any pending item rewards remain available to claim."
 			)
 		)
 		intro:Dock(TOP)

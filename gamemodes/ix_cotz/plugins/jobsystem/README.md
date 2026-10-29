@@ -24,8 +24,8 @@ The work menu shows a concrete saved offer from each unlocked difficulty, includ
 requirements, cash and up to three supply packages. Players select their package when
 accepting and can change it through the rewards menu before completion. Each package
 contains one or two existing supply items, with explicit uses/rounds and no worn weapons
-or suits. A supply allowance is 100% of the task's fixed reference cash payment, with a minimum
-of 600 rubles even for easy tasks; quantities
+or suits. A supply allowance uses the task's fixed reference cash payment at an independent
+55% rate, with a minimum of 600 rubles even for easy tasks; quantities
 respect that budget and normal stack capacities. Cash value alone determines the quantity,
 up to two full stacks, regardless of the easy/medium/hard category. Quantities fill the
 first item before spilling into the second; partial stacks show their exact uses/rounds. Unspent allowance is banked toward the
@@ -60,15 +60,17 @@ stable; already accepted jobs retain their assigned rewards. Cached unaccepted p
 the increased allowance and catalogue revisions when reopened, preserving the task identity and requirements. Abandonment grants neither
 bonus progress nor payment. Finite story/progression tasks do not count toward the bonus.
 
-Delivery cash is 55% of the required hand-in value, using the higher of catalogue value
+Delivery cash is 50% of the required hand-in value, using the higher of catalogue value
 and configured/live trader sale quotes, multiplied by the actual requested count.
 Stackable requirements are priced per consumed use; ammunition boxes without `quantity`
 count as whole inventory items. Actual specimen quality/value is recorded before
 consumption. Non-delivery jobs pay 55% of their configured midpoint cash plus half the
 supply expected value. Both components are scaled together.
-A base Swamp Controller hand (catalogue value 6,700) pays 3,685 rubles from its repeatable
-job, plus its chosen supply package; progression credit for that hand is 4,355 rubles.
-`JOB_CASH_RATE` configures repeatable payouts in `libs/sh_taskrewards.lua`.
+A base Swamp Controller hand (catalogue value 6,700) pays 3,350 rubles from its repeatable
+job, plus its chosen supply package; progression credit for that hand is 4,020 rubles.
+`JOB_CASH_RATE` configures repeatable delivery payouts in `libs/sh_taskrewards.lua`.
+`JOB_REFERENCE_CASH_RATE` preserves supply budgets and non-delivery cash at their existing values.
+Cached unaccepted delivery previews refresh their cash without rerolling their supplies.
 Progression sets `PROGRESSION_CASH_RATE` separately in `../progression/libs/sh_rewards.lua`. Money is paid once on job completion, not during item delivery.
 A qualifying completion still earns its existing 20% personal vendor restock exactly once.
 Job previews save their cash and supplies when created; reopening and accepting reuse that offer.
