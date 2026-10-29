@@ -948,10 +948,30 @@ end
 function ENT:ExpressionFinished( strExp )
 end
 
+local PENDING_TARGET_ABILITIES = {"isAttacking", "IsJumping", "IsLongJumping", "isBigJumping"}
+
+function ENT:STALKERNPCCancelPendingTargetAbilities()
+	if IsValid(self:GetEnemy()) then return end
+
+	local cancelled = false
+	for _, field in ipairs(PENDING_TARGET_ABILITIES) do
+		-- State 1 is the windup; later states must still run their landing/recovery cleanup.
+		if self[field] == 1 then
+			self[field] = 0
+			cancelled = true
+		end
+	end
+	if not cancelled then return end
+
+	self:STALKERNPCStopAllTimers()
+	self:STALKERNPCClearAnimation()
+end
+
 function ENT:Think()
 	if self.cotzSleeping then return end
 	if(GetConVar("ai_disabled"):GetInt()==0&&self.IsAlive==true) then
 
+		self:STALKERNPCCancelPendingTargetAbilities()
 		self:STALKERNPCThink()
 
 		if(self.PlayingAnimation==true) then
