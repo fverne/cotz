@@ -45,7 +45,9 @@ Features vary in maturity and may need configuration or external content to work
 └── LICENSE
 ```
 
-See [Repository layout](docs/repository-layout.md) for file ownership and loading rules. The `archive/` directory contains inactive reference code.
+See [Repository layout](docs/repository-layout.md) for file ownership and loading rules. The `archive/` directory contains inactive reference code and is included in Git clones only.
+
+ZIP and tarball downloads omit development tools, tests, workflows, planning documents, and archived code. Clone the repository to get these files; downloads retain the runtime files, licenses, and setup and layout guides.
 
 ## Requirements
 
@@ -95,7 +97,7 @@ The first-time setup plugin also contains presets for `rp_waystation` and `rp_pr
 
 For a new map, follow the [map setup guide](docs/map-setup.md). It covers building and exporting an FTS preset, configuring spawns and travel, plugin dependencies, and deployment checks.
 
-Use the companion [map content design guide](docs/map-content-design.md) to plan new town NPCs, loot, artifacts, jobs, progression, encounters, and exploration, including the implementation work that connects them.
+Use the companion [map content design guide](https://github.com/fverne/cotz/blob/master/docs/map-content-design.md) to plan new town NPCs, loot, artifacts, jobs, progression, encounters, and exploration, including the implementation work that connects them.
 
 ## Multi-server configuration
 
@@ -124,7 +126,7 @@ Follow each file's `cl_`, `sh_`, and `sv_` conventions when changing client, sha
 
 GitHub Actions can export item, weapon, mutant, and anomaly configuration into an
 Excel workbook and turn supported spreadsheet edits into a Lua pull request.
-See the [balancing workbook guide](docs/balance/README.md) for export/import
+See the [balancing workbook guide](https://github.com/fverne/cotz/blob/master/docs/balance/README.md) for export/import
 instructions, validation rules, and coverage limitations.
 
 ### Contributing
