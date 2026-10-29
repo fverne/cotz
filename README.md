@@ -93,6 +93,8 @@ These are **starting points for experienced Garry's Mod server administrators**,
 
 The first-time setup plugin also contains presets for `rp_waystation` and `rp_pripyat_remaster`. Check their files before using them with a specific map or modified installation.
 
+For a new map, follow the [map setup guide](docs/map-setup.md). It covers building and exporting an FTS preset, configuring spawns and travel, plugin dependencies, and deployment checks.
+
 ## Multi-server configuration
 
 COTZ contains cross-server travel and data-sharing plugins. If you plan to run multiple maps as separate servers:

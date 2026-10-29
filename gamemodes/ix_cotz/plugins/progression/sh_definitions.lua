@@ -368,7 +368,7 @@ ix.progression.Register("oldTimerItemDelivery_mainStatue", {
 	requirementSlots = {
 		{ pool = "statues", quantity = 1 },
 		{ pool = "administrative_documents", quantity = 1 },
-		{ pool = "common_parts", quantity = 3 },
+		{ pool = "common_parts", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(15, function()
@@ -424,10 +424,10 @@ ix.progression.Register("stalkerNetAdminDelivery_mainRadioTower", {
 	end,
 	lootMapTier = 1,
 	requirementSlots = {
-		{ pool = "consumer_electronics", quantity = 1 },
-		{ pool = "repair_electrical", quantity = 2 },
-		{ pool = "heavy_electrical_map1", quantity = 1 },
-		{ pool = "small_electronics", quantity = 2 },
+		{ pool = "consumer_electronics", quantity = 2 },
+		{ pool = "repair_electrical", quantity = 4 },
+		{ pool = "heavy_electrical_map1", quantity = 2 },
+		{ pool = "small_electronics", quantity = 4 },
 	},
 	OnComplete = function(character)
 		timer.Simple(45, function()
@@ -677,10 +677,10 @@ ix.progression.Register("beanstalkItemDelivery_Documents", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "documents_field", quantity = 1},
-		{pool = "administrative_documents", quantity = 2},
-		{pool = "documents_technical", quantity = 1},
-		{pool = "documents_research", quantity = 2},
+		{pool = "documents_field", quantity = 2},
+		{pool = "administrative_documents", quantity = 4},
+		{pool = "documents_technical", quantity = 2},
+		{pool = "documents_research", quantity = 4},
 	},
 	OnComplete = function(character) end,
 	milestoneGroup = "beanstalkItemDelivery_Documents",
@@ -700,11 +700,11 @@ ix.progression.Register("eggheadItemDelivery_artifacts", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "electrical_artifacts", quantity = 2},
-		{pool = "repair_electrical", quantity = 3},
-		{pool = "rare_electrical_artifacts", quantity = 2},
-		{pool = "chemical_artifacts", quantity = 3},
-		{pool = "burner_artifacts", quantity = 2},
+		{pool = "electrical_artifacts", quantity = 5},
+		{pool = "repair_electrical", quantity = 7},
+		{pool = "rare_electrical_artifacts", quantity = 5},
+		{pool = "chemical_artifacts", quantity = 7},
+		{pool = "burner_artifacts", quantity = 5},
 	},
 	OnComplete = function(character) end,
 	milestoneGroup = "eggheadItemDelivery_artifacts",
@@ -829,11 +829,11 @@ ix.progression.Register("computerDelivery_main", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 3,
 	requirementSlots = {
-		{pool = "repair_electrical", quantity = 1},
-		{pool = "radio_components", quantity = 1},
-		{pool = "heavy_components", quantity = 1},
-		{pool = "computer_parts", quantity = 1},
-		{pool = "documents_technical", quantity = 1},
+		{pool = "repair_electrical", quantity = 4},
+		{pool = "radio_components", quantity = 4},
+		{pool = "heavy_components", quantity = 4},
+		{pool = "computer_parts", quantity = 4},
+		{pool = "documents_technical", quantity = 4},
 	},
 	OnComplete = function(character) end,
 	milestoneGroup = "computerDelivery_main",

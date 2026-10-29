@@ -1,6 +1,6 @@
 ITEM.name = "Sharpening Stone"
-ITEM.description = "A whetstone with three uses. Each use restores 25% knife sharpness, up to 101%."
-ITEM.longdesc = "Use Sharpen and select a knife. Above 100% sharpness grants +1 tier for one poach."
+ITEM.description = "A set of three whetstones."
+ITEM.longdesc = "A set of three different whetstones, each with different grit levels. Used to sharpen knives and other bladed tools. Can be used to restore the sharpness of poaching knives."
 ITEM.model = "models/lostsignalproject/items/repair/sharpening_stones.mdl"
 ITEM.category = "Consumables"
 ITEM.width = 1

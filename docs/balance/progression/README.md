@@ -12,7 +12,30 @@ a save-migration mechanism.
 
 ## Current expansion policy
 
-The current runtime contains 227 definitions. The literal quantities in `milestone-baseline.json` freeze the 139 pre-expansion milestones. Split stages preserve each original pool's combined raw quantity exactly, while additional optional branches have explicit independent requirements. The pacing script audits those sums and reports source-based effort; it no longer applies another 25% increase for each preparation stage. `--apply` retains the approved literal quantities and refreshes the report.
+The current runtime contains 229 definitions. Item types, candidate pools and slot
+counts are unchanged by the quantity taper. `quantity-baseline.json` freezes each
+of the 221 delivery steps before the taper; `milestone-baseline.json` retains the
+139 original logical milestones for auditing their pre-taper allocations.
+
+Delivery quantities now scale by logical milestone depth, including successor
+links, prerequisites and NPC access gates. All stages within a split milestone
+share its depth, so inserted preparation stages do not accelerate the taper.
+Equipment comparisons also carry Haggler into Quartermaster and Technut into
+Boss's heavier suits, using the existing pacing relationships described below;
+these do not introduce gameplay prerequisites.
+The first three levels (depths 0–2) keep their original quantities. Each later
+level adds 0.5 to the multiplier: depth 3 is 1.5×, depth 4 is 2×, depth 7 is
+3.5×, and depth 12 or above is capped at 6×. Each slot's original quantity is
+multiplied and rounded down to a whole unit; small quantities may therefore
+remain unchanged at the start of the taper. Story keys and detector calibration
+inputs retain their original quantities. Job completion thresholds stay unchanged.
+
+`progression_pacing.py --apply` reproduces literal Lua quantities from the frozen
+baseline, so running it repeatedly does not compound the increase. The generated
+[pacing table](pacing.md) shows logical depth, multiplier and final quantities.
+Existing saved character assignments remain authoritative; only newly assigned
+requests use the increased quantities. A programme whose future stages were
+already assigned also keeps those saved requests.
 
 Fixed supplies, provider-bound service credits, permanent service discounts and explicit existing-item catalogue rewards are included in the [implemented allocation](expansion-plan.md#completed-reward-and-service-allocation). Briefing sources are listed in the [dialogue guide](dialogue-guide.md).
 
@@ -107,8 +130,8 @@ Detector3 is the final detector upgrade and explicitly uses eight slots.
 
 The expanded catalogue contains 627 personal slots across 219 deliveries and 85 pools
 with 223 distinct candidate item IDs. Original logical milestones preserve their
-combined quantities; their category counts are distributed across the inserted stages.
-Current quantities and task thresholds are listed in [the pacing table](pacing.md).
+pre-taper allocations in the frozen baseline; their category counts are distributed across the inserted stages.
+Current tapered quantities and unchanged task thresholds are listed in [the pacing table](pacing.md).
 The catalog includes alternative branches, so its sum is not a mandatory playthrough
 cost. Category breadth remains one to eight slots; quantity tuning uses source effort.
 

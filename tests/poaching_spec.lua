@@ -130,11 +130,23 @@ local stone = item(2, setmetatable({player = client}, {__index = stoneBase}))
 items[2] = stone
 local sharpen = stone.functions.Sharpen
 check(sharpen.OnCanRun(stone), "owned stone is usable")
+ix.option = {Get = function(_, default) return default end}
+dofile("gamemodes/helix/gamemode/core/libs/sh_language.lua")
+ix.lang.stored.english = {}
 knife:SetData("sharpness", 50)
+local options = sharpen.multiOptions(stone, client)
+check(#options == 1 and L(options[1].name) == "Knife (50%)", "right-click knife label localizes without errors")
+knife.name = "Knife 100%"
+options = sharpen.multiOptions(stone, client)
+check(L(options[1].name) == "Knife 100% (50%)", "percent signs in knife names also display correctly")
+knife.name = "Knife"
+knife:SetData("sharpness", 101)
+check(#sharpen.multiOptions(stone, client) == 0, "fully sharpened knives stay out of the menu")
+knife:SetData("sharpness", 70)
 check(stone:GetData("quantity", stone.quantity) == 3, "new stones have three uses")
 check(sharpen.OnRun(stone, {1}) == false, "first sharpening keeps the stone")
 check(stone:GetData("quantity") == 2 and stone:GetPrice() == 100, "first use reduces quantity and resale value")
-check(ix.poaching.GetSharpness(knife) == 75, "stone restores 25 sharpness")
+check(ix.poaching.GetSharpness(knife) == 85, "stone restores 15 sharpness")
 check(sharpen.OnRun(stone, {1}) == false and ix.poaching.GetSharpness(knife) == 100, "second use keeps stone")
 check(stone:GetData("quantity") == 1, "second sharpening leaves one use")
 check(sharpen.OnRun(stone, {1}) == true and ix.poaching.GetSharpness(knife) == 101, "sharpness caps at 101")
@@ -157,7 +169,7 @@ client:SetNetVar("IsPoaching", true)
 check(not sharpen.OnCanRun(stone) and sharpen.OnRun(stone, {1}) == false, "cannot sharpen during poaching")
 client:SetNetVar("IsPoaching", false)
 ITEM = {}
-dofile("gamemodes/ix_cotz/schema/items/sh_sharpening_stone_fine.lua")
+dofile("gamemodes/ix_cotz/schema/items/sharpeningstones/sh_sharpening_stone_fine.lua")
 stone.sharpnessRestored = ITEM.sharpnessRestored
 knife:SetData("sharpness", 0)
 check(sharpen.OnRun(stone, {1}) == false and ix.poaching.GetSharpness(knife) == 50, "fine stone restores dull knife")

@@ -169,7 +169,7 @@ ix.progression.Register("delivery", {name = "Hardware", keyNpc = "Trader", progM
             self.assertEqual(steps[1][steps[0].index('Total raw units')], 2)
             self.assertEqual(steps[1][-3:-1], [2, 2])
 
-    def test_expanded_segments_preserve_original_quantity_and_reward_budgets(self):
+    def test_expanded_segments_preserve_original_allocations_and_reward_budgets(self):
         import json
         from collections import Counter, defaultdict
         from progression_pacing import plan
@@ -177,6 +177,7 @@ ix.progression.Register("delivery", {name = "Hardware", keyNpc = "Trader", progM
         steps, gates, warnings = progression.collect(root, balance.tokenize, balance.lua_string)
         pools = progression.collect_pools(root, balance.tokenize, balance.lua_string)
         baseline = json.loads((root / 'docs/balance/progression/milestone-baseline.json').read_text())
+        quantities = json.loads((root / 'docs/balance/progression/quantity-baseline.json').read_text())
         self.assertEqual(warnings, [])
         self.assertEqual(len(baseline), 139)
         self.assertEqual(len(steps), 229)
@@ -203,7 +204,7 @@ ix.progression.Register("delivery", {name = "Hardware", keyNpc = "Trader", progM
             for slot in old['slots']:
                 expected[slot['pool']] += slot['quantity']
             for member in members:
-                for slot in member['slots']:
+                for slot in quantities.get(member['id'], []):
                     actual[slot['pool']] += slot['quantity']
                 self.assertEqual(member['lootMapTier'], old['ceiling'])
             self.assertEqual(expected, actual, ident)
@@ -216,6 +217,33 @@ ix.progression.Register("delivery", {name = "Hardware", keyNpc = "Trader", progM
                 self.assertEqual(max(x for m in members for x in m['thresholds']), max(old['thresholds']))
         self.assertEqual(gates["'Intern'"], 'smartass_rfTasks')
         self.assertNotIn("'Quartermaster'", gates)
+
+    def test_quantity_taper_preserves_early_steps_categories_and_fixed_inputs(self):
+        from progression_pacing import tapered_quantities
+        root = Path(__file__).resolve().parents[3]
+        steps, gates, _ = progression.collect(root, balance.tokenize, balance.lua_string)
+        pools = progression.collect_pools(root, balance.tokenize, balance.lua_string)
+        baseline, planned = tapered_quantities(root, steps, gates, pools)
+        by_depth = {}
+        for step in steps:
+            data = planned[step['id']]
+            depth = data['logicalDepth']
+            by_depth[depth] = data['multiplier']
+            self.assertEqual([s['quantity'] for s in step['slots']], data['quantities'], step['id'])
+            self.assertEqual([s['pool'] for s in step['slots']],
+                             [s['pool'] for s in baseline.get(step['id'], [])])
+            for old, amount in zip(baseline.get(step['id'], []), data['quantities']):
+                self.assertGreaterEqual(amount, old['quantity'])
+                self.assertLessEqual(amount, old['quantity'] * 6)
+                if depth <= 2 or pools[old['pool']]['tier'] == 'fixed':
+                    self.assertEqual(amount, old['quantity'], step['id'])
+                elif depth == 12:
+                    self.assertEqual(amount, old['quantity'] * 6, step['id'])
+        self.assertEqual(by_depth[2], 1)
+        self.assertEqual(by_depth[3], 1.5)
+        self.assertEqual(by_depth[7], 3.5)
+        self.assertEqual(by_depth[12], 6)
+        self.assertEqual(sorted(by_depth.values()), [by_depth[d] for d in sorted(by_depth)])
 
     def test_authored_briefings_and_role_rewards_are_complete(self):
         root = Path(__file__).resolve().parents[3]

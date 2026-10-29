@@ -6,7 +6,7 @@ ix.progression.Register("noosphereAttunement1", {
 	defaultActive = true,
 	lootMapTier = 3,
 	requirementSlots = {
-		{pool = "common_artifacts", quantity = 2},
+		{pool = "common_artifacts", quantity = 10},
 	},
 	nextProgressions = {"noosphereAttunement2"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -27,7 +27,7 @@ ix.progression.Register("noosphereAttunement2", {
 	defaultActive = false,
 	lootMapTier = 3,
 	requirementSlots = {
-		{pool = "rare_field_artifacts", quantity = 2},
+		{pool = "rare_field_artifacts", quantity = 11},
 	},
 	nextProgressions = {"noosphereAttunement3"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -47,7 +47,7 @@ ix.progression.Register("noosphereAttunement3", {
 	defaultActive = false,
 	lootMapTier = 3,
 	requirementSlots = {
-		{pool = "exceptional_artifacts", quantity = 1},
+		{pool = "exceptional_artifacts", quantity = 6},
 	},
 	nextProgressions = {},
 	BuildResponse = ix.progression.BuildDeliveryResponse,

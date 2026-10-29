@@ -68,7 +68,7 @@ ix.progression.Register("hoarderCollection4", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "rare_field_artifacts", quantity = 2},
+		{pool = "rare_field_artifacts", quantity = 3},
 	},
 	nextProgressions = {},
 	BuildResponse = ix.progression.BuildDeliveryResponse,

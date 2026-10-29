@@ -1,0 +1,2968 @@
+{
+  "beanstalkExpedition1": [
+    {
+      "pool": "field_instruments",
+      "quantity": 2.0
+    }
+  ],
+  "beanstalkItemDelivery_Documents": [
+    {
+      "pool": "documents_field",
+      "quantity": 1.0
+    },
+    {
+      "pool": "administrative_documents",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_research",
+      "quantity": 2.0
+    }
+  ],
+  "beanstalkItemDelivery_Documents_stage1": [
+    {
+      "pool": "small_electronics",
+      "quantity": 3.0
+    }
+  ],
+  "beanstalkItemDelivery_Documents_stage2": [
+    {
+      "pool": "small_electronics",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_field",
+      "quantity": 3.0
+    }
+  ],
+  "bossItemDelivery_1": [
+    {
+      "pool": "common_parts",
+      "quantity": 6.0
+    }
+  ],
+  "bossItemDelivery_2": [
+    {
+      "pool": "small_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "common_parts",
+      "quantity": 12.0
+    }
+  ],
+  "bossItemDelivery_2_stage1": [
+    {
+      "pool": "small_parts",
+      "quantity": 9.0
+    }
+  ],
+  "bossItemDelivery_3": [
+    {
+      "pool": "common_meat",
+      "quantity": 1.0
+    },
+    {
+      "pool": "small_parts",
+      "quantity": 8.0
+    },
+    {
+      "pool": "humanoid_parts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "rare_parts",
+      "quantity": 3.0
+    }
+  ],
+  "bossItemDelivery_3_stage1": [
+    {
+      "pool": "common_meat",
+      "quantity": 12.0
+    }
+  ],
+  "bossItemDelivery_4": [
+    {
+      "pool": "exotic_parts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 6.0
+    },
+    {
+      "pool": "humanoid_parts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "common_meat",
+      "quantity": 13.0
+    },
+    {
+      "pool": "common_hides",
+      "quantity": 3.0
+    }
+  ],
+  "bossItemDelivery_5": [
+    {
+      "pool": "elite_parts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "chimera_part",
+      "quantity": 5.0
+    },
+    {
+      "pool": "exotic_parts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 6.0
+    },
+    {
+      "pool": "common_meat",
+      "quantity": 15.0
+    },
+    {
+      "pool": "common_hides",
+      "quantity": 3.0
+    }
+  ],
+  "bossItemDelivery_6": [
+    {
+      "pool": "common_meat",
+      "quantity": 2.0
+    },
+    {
+      "pool": "brains",
+      "quantity": 2.0
+    },
+    {
+      "pool": "elite_parts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "rare_parts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "exotic_parts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "common_hides",
+      "quantity": 3.0
+    },
+    {
+      "pool": "predator_hides",
+      "quantity": 2.0
+    }
+  ],
+  "bossItemDelivery_6_stage1": [
+    {
+      "pool": "common_meat",
+      "quantity": 14.0
+    }
+  ],
+  "bossItemDelivery_7": [
+    {
+      "pool": "elite_parts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "hellhound_part",
+      "quantity": 12.0
+    },
+    {
+      "pool": "brains",
+      "quantity": 2.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 8.0
+    },
+    {
+      "pool": "common_hides",
+      "quantity": 3.0
+    },
+    {
+      "pool": "predator_hides",
+      "quantity": 2.0
+    },
+    {
+      "pool": "elite_hides",
+      "quantity": 2.0
+    }
+  ],
+  "bossItemDelivery_7_stage1": [
+    {
+      "pool": "common_meat",
+      "quantity": 18.0
+    },
+    {
+      "pool": "elite_parts",
+      "quantity": 2.0
+    }
+  ],
+  "cleanerItemDelivery_Storage": [
+    {
+      "pool": "common_artifacts",
+      "quantity": 1.0
+    }
+  ],
+  "cleanerLogistics1": [
+    {
+      "pool": "workshop_supplies",
+      "quantity": 2.0
+    }
+  ],
+  "cleanerLogistics2": [
+    {
+      "pool": "field_maintenance",
+      "quantity": 2.0
+    }
+  ],
+  "communitySupport1": [
+    {
+      "pool": "canned_food",
+      "quantity": 2.0
+    }
+  ],
+  "communitySupport2": [
+    {
+      "pool": "fasteners",
+      "quantity": 6.0
+    }
+  ],
+  "communitySupport3": [
+    {
+      "pool": "workshop_supplies",
+      "quantity": 4.0
+    }
+  ],
+  "computerDelivery_activateItem": [
+    {
+      "pool": "computer_case",
+      "quantity": 1.0
+    }
+  ],
+  "computerDelivery_main": [
+    {
+      "pool": "repair_electrical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "radio_components",
+      "quantity": 1.0
+    },
+    {
+      "pool": "heavy_components",
+      "quantity": 1.0
+    },
+    {
+      "pool": "computer_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    }
+  ],
+  "computerDelivery_main_stage1": [
+    {
+      "pool": "small_electronics",
+      "quantity": 2.0
+    }
+  ],
+  "computerDelivery_main_stage2": [
+    {
+      "pool": "small_electronics",
+      "quantity": 1.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 2.0
+    },
+    {
+      "pool": "fuel",
+      "quantity": 1.0
+    }
+  ],
+  "eggheadItemDelivery_Aid1": [
+    {
+      "pool": "exotic_parts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "chemical_artifacts",
+      "quantity": 5.0
+    }
+  ],
+  "eggheadItemDelivery_Aid1_stage1": [
+    {
+      "pool": "brains",
+      "quantity": 3.0
+    }
+  ],
+  "eggheadItemDelivery_Aid1_stage2": [
+    {
+      "pool": "exotic_parts",
+      "quantity": 5.0
+    }
+  ],
+  "eggheadItemDelivery_Aid2": [
+    {
+      "pool": "exotic_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "rare_electrical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_research",
+      "quantity": 3.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "field_instruments",
+      "quantity": 2.0
+    }
+  ],
+  "eggheadItemDelivery_Aid2_stage1": [
+    {
+      "pool": "brains",
+      "quantity": 2.0
+    },
+    {
+      "pool": "exotic_parts",
+      "quantity": 4.0
+    }
+  ],
+  "eggheadItemDelivery_Aid3": [
+    {
+      "pool": "brains",
+      "quantity": 1.0
+    },
+    {
+      "pool": "rare_field_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_research",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "field_instruments",
+      "quantity": 2.0
+    },
+    {
+      "pool": "exceptional_electrical_artifacts",
+      "quantity": 1.0
+    }
+  ],
+  "eggheadItemDelivery_Aid3_stage1": [
+    {
+      "pool": "administrative_documents",
+      "quantity": 2.0
+    },
+    {
+      "pool": "elite_parts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "brains",
+      "quantity": 1.0
+    }
+  ],
+  "eggheadItemDelivery_Detector1": [
+    {
+      "pool": "common_artifacts",
+      "quantity": 21.0
+    }
+  ],
+  "eggheadItemDelivery_Detector2": [
+    {
+      "pool": "rare_electrical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "chemical_artifacts",
+      "quantity": 5.0
+    }
+  ],
+  "eggheadItemDelivery_Detector2_stage1": [
+    {
+      "pool": "rare_field_artifacts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "rare_electrical_artifacts",
+      "quantity": 2.0
+    }
+  ],
+  "eggheadItemDelivery_Detector3": [
+    {
+      "pool": "exceptional_artifacts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "bubble_artifacts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "burner_artifacts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "rare_electrical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "chemical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "gravitational_artifacts",
+      "quantity": 1.0
+    }
+  ],
+  "eggheadItemDelivery_Detector3_stage1": [
+    {
+      "pool": "documents_research",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    }
+  ],
+  "eggheadItemDelivery_Detector3_stage2": [
+    {
+      "pool": "burner_artifacts",
+      "quantity": 1.0
+    }
+  ],
+  "eggheadItemDelivery_Suit1": [
+    {
+      "pool": "predator_hides",
+      "quantity": 3.0
+    },
+    {
+      "pool": "common_hides",
+      "quantity": 4.0
+    },
+    {
+      "pool": "common_parts",
+      "quantity": 17.0
+    }
+  ],
+  "eggheadItemDelivery_Suit2": [
+    {
+      "pool": "exotic_parts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_research",
+      "quantity": 3.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "field_instruments",
+      "quantity": 2.0
+    }
+  ],
+  "eggheadItemDelivery_Suit2_stage1": [
+    {
+      "pool": "predator_hides",
+      "quantity": 2.0
+    },
+    {
+      "pool": "elite_hides",
+      "quantity": 1.0
+    },
+    {
+      "pool": "exotic_parts",
+      "quantity": 3.0
+    }
+  ],
+  "eggheadItemDelivery_Suit3": [
+    {
+      "pool": "elite_hides",
+      "quantity": 1.0
+    },
+    {
+      "pool": "predator_hides",
+      "quantity": 2.0
+    },
+    {
+      "pool": "brains",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_research",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "field_instruments",
+      "quantity": 2.0
+    },
+    {
+      "pool": "administrative_documents",
+      "quantity": 2.0
+    },
+    {
+      "pool": "small_electronics",
+      "quantity": 7.0
+    }
+  ],
+  "eggheadItemDelivery_artifacts": [
+    {
+      "pool": "electrical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 3.0
+    },
+    {
+      "pool": "rare_electrical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "chemical_artifacts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "burner_artifacts",
+      "quantity": 2.0
+    }
+  ],
+  "eggheadItemDelivery_artifacts_stage1": [
+    {
+      "pool": "small_electronics",
+      "quantity": 6.0
+    },
+    {
+      "pool": "electrical_artifacts",
+      "quantity": 2.0
+    }
+  ],
+  "hagglerItemDelivery_1": [
+    {
+      "pool": "fasteners",
+      "quantity": 6.0
+    }
+  ],
+  "hagglerItemDelivery_11": [
+    {
+      "pool": "small_electronics",
+      "quantity": 3.0
+    }
+  ],
+  "hagglerItemDelivery_111": [
+    {
+      "pool": "workshop_supplies",
+      "quantity": 2.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 9.0
+    }
+  ],
+  "hagglerItemDelivery_1111": [
+    {
+      "pool": "repair_electrical",
+      "quantity": 3.0
+    },
+    {
+      "pool": "cleaning",
+      "quantity": 2.0
+    }
+  ],
+  "hagglerItemDelivery_112": [
+    {
+      "pool": "small_valuables",
+      "quantity": 1.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 2.0
+    }
+  ],
+  "hagglerItemDelivery_11_stage1": [
+    {
+      "pool": "small_electronics",
+      "quantity": 2.0
+    }
+  ],
+  "hagglerItemDelivery_12": [
+    {
+      "pool": "repair_electrical",
+      "quantity": 3.0
+    }
+  ],
+  "hagglerItemDelivery_121": [
+    {
+      "pool": "statues",
+      "quantity": 3.0
+    }
+  ],
+  "hagglerItemDelivery_1211": [
+    {
+      "pool": "heavy_components",
+      "quantity": 2.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 13.0
+    }
+  ],
+  "hagglerItemDelivery_12111": [
+    {
+      "pool": "powder",
+      "quantity": 3.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "maintenance",
+      "quantity": 3.0
+    }
+  ],
+  "hagglerItemDelivery_121111": [
+    {
+      "pool": "consumer_electronics",
+      "quantity": 3.0
+    },
+    {
+      "pool": "small_valuables",
+      "quantity": 2.0
+    },
+    {
+      "pool": "administrative_documents",
+      "quantity": 2.0
+    }
+  ],
+  "hagglerItemDelivery_121_stage1": [
+    {
+      "pool": "cleaning",
+      "quantity": 2.0
+    }
+  ],
+  "hagglerItemDelivery_122": [
+    {
+      "pool": "cleaning",
+      "quantity": 1.0
+    },
+    {
+      "pool": "heavy_electrical_map1",
+      "quantity": 1.0
+    }
+  ],
+  "hagglerItemDelivery_1221": [
+    {
+      "pool": "filters",
+      "quantity": 2.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 12.0
+    }
+  ],
+  "hagglerItemDelivery_12211": [
+    {
+      "pool": "advanced_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "field_maintenance",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    }
+  ],
+  "hagglerItemDelivery_122_stage1": [
+    {
+      "pool": "cleaning",
+      "quantity": 1.0
+    }
+  ],
+  "hagglerItemDelivery_1_stage1": [
+    {
+      "pool": "fasteners",
+      "quantity": 4.0
+    }
+  ],
+  "hagglerItemDelivery_2": [
+    {
+      "pool": "fasteners",
+      "quantity": 10.0
+    }
+  ],
+  "hagglerItemDelivery_21": [
+    {
+      "pool": "powder",
+      "quantity": 4.0
+    }
+  ],
+  "hagglerItemDelivery_211": [
+    {
+      "pool": "heavy_electrical_map1",
+      "quantity": 1.0
+    },
+    {
+      "pool": "small_electronics",
+      "quantity": 4.0
+    }
+  ],
+  "hagglerItemDelivery_2111": [
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 4.0
+    }
+  ],
+  "hagglerItemDelivery_212": [
+    {
+      "pool": "batteries",
+      "quantity": 5.0
+    },
+    {
+      "pool": "engine_care",
+      "quantity": 2.0
+    }
+  ],
+  "hagglerItemDelivery_2121": [
+    {
+      "pool": "heavy_electrical",
+      "quantity": 2.0
+    },
+    {
+      "pool": "small_electronics",
+      "quantity": 4.0
+    }
+  ],
+  "hagglerItemDelivery_21211": [
+    {
+      "pool": "small_electronics",
+      "quantity": 5.0
+    },
+    {
+      "pool": "batteries",
+      "quantity": 8.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    }
+  ],
+  "hagglerItemDelivery_22": [
+    {
+      "pool": "workshop_supplies",
+      "quantity": 2.0
+    }
+  ],
+  "hagglerItemDelivery_221": [
+    {
+      "pool": "repair_electrical",
+      "quantity": 2.0
+    }
+  ],
+  "hagglerItemDelivery_2211": [
+    {
+      "pool": "field_maintenance",
+      "quantity": 2.0
+    },
+    {
+      "pool": "consumer_electronics",
+      "quantity": 3.0
+    }
+  ],
+  "hagglerItemDelivery_22111": [
+    {
+      "pool": "adhesives",
+      "quantity": 3.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 2.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    }
+  ],
+  "hagglerItemDelivery_221_stage1": [
+    {
+      "pool": "workshop_supplies",
+      "quantity": 2.0
+    }
+  ],
+  "hagglerItemDelivery_222": [
+    {
+      "pool": "basic_tools",
+      "quantity": 1.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 2.0
+    }
+  ],
+  "hagglerItemDelivery_2221": [
+    {
+      "pool": "maintenance",
+      "quantity": 3.0
+    },
+    {
+      "pool": "powder",
+      "quantity": 3.0
+    }
+  ],
+  "hagglerItemDelivery_22211": [
+    {
+      "pool": "maintenance",
+      "quantity": 3.0
+    },
+    {
+      "pool": "fuel",
+      "quantity": 2.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 2.0
+    }
+  ],
+  "hagglerItemDelivery_22_stage1": [
+    {
+      "pool": "workshop_supplies",
+      "quantity": 1.0
+    }
+  ],
+  "hoarderCollection1": [
+    {
+      "pool": "small_valuables",
+      "quantity": 1.0
+    }
+  ],
+  "hoarderCollection2": [
+    {
+      "pool": "attachments",
+      "quantity": 2.0
+    }
+  ],
+  "hoarderCollection3": [
+    {
+      "pool": "suppressors",
+      "quantity": 2.0
+    }
+  ],
+  "hoarderCollection4": [
+    {
+      "pool": "rare_field_artifacts",
+      "quantity": 2.0
+    }
+  ],
+  "jittersItemDelivery_medical1": [
+    {
+      "pool": "tobacco",
+      "quantity": 1.0
+    }
+  ],
+  "jittersItemDelivery_medical1_stage1": [
+    {
+      "pool": "tobacco",
+      "quantity": 1.0
+    }
+  ],
+  "jittersItemDelivery_medical2": [
+    {
+      "pool": "rare_drugs",
+      "quantity": 1.0
+    }
+  ],
+  "jittersItemDelivery_medical2_stage1": [
+    {
+      "pool": "cigarettes",
+      "quantity": 1.0
+    }
+  ],
+  "jittersItemDelivery_medical2_stage2": [
+    {
+      "pool": "antirad",
+      "quantity": 1.0
+    }
+  ],
+  "jittersItemDelivery_medical3": [
+    {
+      "pool": "stimulants",
+      "quantity": 1.0
+    },
+    {
+      "pool": "antirad",
+      "quantity": 1.0
+    },
+    {
+      "pool": "cigarettes",
+      "quantity": 1.0
+    },
+    {
+      "pool": "rare_drugs",
+      "quantity": 1.0
+    }
+  ],
+  "jittersItemDelivery_medical3_stage1": [
+    {
+      "pool": "common_meals",
+      "quantity": 1.0
+    },
+    {
+      "pool": "premium_cigarettes",
+      "quantity": 1.0
+    }
+  ],
+  "jittersItemDelivery_medical4": [
+    {
+      "pool": "premium_cigarettes",
+      "quantity": 1.0
+    },
+    {
+      "pool": "cigar",
+      "quantity": 1.0
+    },
+    {
+      "pool": "rare_drugs",
+      "quantity": 1.0
+    }
+  ],
+  "jittersItemDelivery_medical4_stage1": [
+    {
+      "pool": "common_meals",
+      "quantity": 1.0
+    },
+    {
+      "pool": "tobacco",
+      "quantity": 1.0
+    }
+  ],
+  "jittersItemDelivery_medical4_stage2": [
+    {
+      "pool": "antirad",
+      "quantity": 1.0
+    },
+    {
+      "pool": "stimulants",
+      "quantity": 1.0
+    },
+    {
+      "pool": "cigarettes",
+      "quantity": 1.0
+    }
+  ],
+  "muteItemDelivery_Anomaly": [
+    {
+      "pool": "basic_tools",
+      "quantity": 2.0
+    },
+    {
+      "pool": "small_electronics",
+      "quantity": 4.0
+    },
+    {
+      "pool": "electrical_artifacts",
+      "quantity": 3.0
+    }
+  ],
+  "muteItemDelivery_Binoc1": [
+    {
+      "pool": "basic_tools",
+      "quantity": 3.0
+    }
+  ],
+  "muteItemDelivery_Binoc2": [
+    {
+      "pool": "basic_tools",
+      "quantity": 1.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 2.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    }
+  ],
+  "muteItemDelivery_Binoc3": [
+    {
+      "pool": "workshop_supplies",
+      "quantity": 1.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "advanced_parts_map1",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 1.0
+    }
+  ],
+  "muteItemDelivery_Binoc3_stage1": [
+    {
+      "pool": "small_electronics",
+      "quantity": 3.0
+    }
+  ],
+  "muteItemDelivery_Binoc4": [
+    {
+      "pool": "batteries",
+      "quantity": 4.0
+    },
+    {
+      "pool": "consumer_electronics",
+      "quantity": 2.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 2.0
+    },
+    {
+      "pool": "advanced_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    }
+  ],
+  "muteItemDelivery_Binoc4_stage1": [
+    {
+      "pool": "small_electronics",
+      "quantity": 3.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 2.0
+    },
+    {
+      "pool": "batteries",
+      "quantity": 2.0
+    }
+  ],
+  "muteItemDelivery_BlowoutWarning": [
+    {
+      "pool": "consumer_electronics",
+      "quantity": 3.0
+    },
+    {
+      "pool": "small_electronics",
+      "quantity": 4.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 3.0
+    }
+  ],
+  "muteItemDelivery_Broadcast": [
+    {
+      "pool": "consumer_electronics",
+      "quantity": 1.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 1.0
+    },
+    {
+      "pool": "specialty_tools",
+      "quantity": 1.0
+    }
+  ],
+  "muteItemDelivery_Broadcast_stage1": [
+    {
+      "pool": "small_electronics",
+      "quantity": 3.0
+    }
+  ],
+  "muteItemDelivery_Detector": [
+    {
+      "pool": "batteries",
+      "quantity": 5.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 1.0
+    },
+    {
+      "pool": "detector",
+      "quantity": 1.0
+    }
+  ],
+  "muteItemDelivery_Detector_stage1": [
+    {
+      "pool": "small_electronics",
+      "quantity": 3.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 2.0
+    }
+  ],
+  "noosphereAttunement1": [
+    {
+      "pool": "common_artifacts",
+      "quantity": 2.0
+    }
+  ],
+  "noosphereAttunement2": [
+    {
+      "pool": "rare_field_artifacts",
+      "quantity": 2.0
+    }
+  ],
+  "noosphereAttunement3": [
+    {
+      "pool": "exceptional_artifacts",
+      "quantity": 1.0
+    }
+  ],
+  "oldTimerItemDelivery_mainMeat": [
+    {
+      "pool": "common_meat",
+      "quantity": 8.0
+    }
+  ],
+  "oldTimerItemDelivery_mainStatue": [
+    {
+      "pool": "statues",
+      "quantity": 1.0
+    },
+    {
+      "pool": "administrative_documents",
+      "quantity": 1.0
+    },
+    {
+      "pool": "common_parts",
+      "quantity": 3.0
+    }
+  ],
+  "oldtimerItemDelivery_Hidestash1": [
+    {
+      "pool": "common_parts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "small_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "common_hides",
+      "quantity": 1.0
+    }
+  ],
+  "oldtimerItemDelivery_Hidestash1_stage1": [
+    {
+      "pool": "common_artifacts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "electrical_artifacts",
+      "quantity": 1.0
+    }
+  ],
+  "oldtimerItemDelivery_Hidestash2": [
+    {
+      "pool": "humanoid_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "chemical_artifacts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "predator_hides",
+      "quantity": 1.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "common_hides",
+      "quantity": 1.0
+    }
+  ],
+  "oldtimerItemDelivery_Hidestash2_stage1": [
+    {
+      "pool": "common_artifacts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "common_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "small_parts",
+      "quantity": 1.0
+    }
+  ],
+  "oldtimerItemDelivery_Knife1": [
+    {
+      "pool": "common_hides",
+      "quantity": 2.0
+    }
+  ],
+  "oldtimerItemDelivery_Knife2": [
+    {
+      "pool": "small_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "predator_hides",
+      "quantity": 1.0
+    },
+    {
+      "pool": "brains",
+      "quantity": 1.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 1.0
+    }
+  ],
+  "oldtimerItemDelivery_Knife2_stage1": [
+    {
+      "pool": "common_parts",
+      "quantity": 2.0
+    }
+  ],
+  "oldtimerItemDelivery_Knife3": [
+    {
+      "pool": "humanoid_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "elite_hides",
+      "quantity": 1.0
+    },
+    {
+      "pool": "brains",
+      "quantity": 1.0
+    },
+    {
+      "pool": "exotic_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "common_hides",
+      "quantity": 1.0
+    }
+  ],
+  "oldtimerItemDelivery_Knife3_stage1": [
+    {
+      "pool": "common_parts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "small_parts",
+      "quantity": 2.0
+    }
+  ],
+  "oldtimerItemDelivery_Melee": [
+    {
+      "pool": "melee_tools",
+      "quantity": 1.0
+    }
+  ],
+  "oldtimerItemDelivery_Melee_stage1": [
+    {
+      "pool": "melee_tools",
+      "quantity": 1.0
+    }
+  ],
+  "oldtimerItemDelivery_Sharpening1": [
+    {
+      "pool": "field_maintenance",
+      "quantity": 1.0
+    },
+    {
+      "pool": "common_parts",
+      "quantity": 1.0
+    }
+  ],
+  "oldtimerItemDelivery_Sharpening2": [
+    {
+      "pool": "field_maintenance",
+      "quantity": 2.0
+    },
+    {
+      "pool": "small_parts",
+      "quantity": 1.0
+    }
+  ],
+  "originalSurvival1": [
+    {
+      "pool": "canned_food",
+      "quantity": 2.0
+    }
+  ],
+  "originalSurvival2": [
+    {
+      "pool": "common_meals",
+      "quantity": 2.0
+    }
+  ],
+  "originalSurvival3": [
+    {
+      "pool": "common_parts",
+      "quantity": 3.0
+    }
+  ],
+  "quarterMasterDelivery_activateItem": [
+    {
+      "pool": "flashdrive",
+      "quantity": 1.0
+    }
+  ],
+  "quarterMasterDelivery_main": [
+    {
+      "pool": "spirits",
+      "quantity": 1.0
+    },
+    {
+      "pool": "premium_cigarettes",
+      "quantity": 1.0
+    },
+    {
+      "pool": "administrative_documents",
+      "quantity": 1.0
+    },
+    {
+      "pool": "small_electronics",
+      "quantity": 1.0
+    }
+  ],
+  "quartermasterFieldEquipment1": [
+    {
+      "pool": "attachments",
+      "quantity": 1.0
+    }
+  ],
+  "quartermasterFieldEquipment2": [
+    {
+      "pool": "common_optics",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_field",
+      "quantity": 1.0
+    }
+  ],
+  "quartermasterItemDelivery_1": [
+    {
+      "pool": "common_parts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "small_parts",
+      "quantity": 6.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 4.0
+    }
+  ],
+  "quartermasterItemDelivery_11": [
+    {
+      "pool": "powder",
+      "quantity": 2.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    }
+  ],
+  "quartermasterItemDelivery_111": [
+    {
+      "pool": "small_parts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "humanoid_parts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "rare_parts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "exotic_parts",
+      "quantity": 4.0
+    }
+  ],
+  "quartermasterItemDelivery_1111": [
+    {
+      "pool": "humanoid_parts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "rare_parts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "common_parts",
+      "quantity": 8.0
+    },
+    {
+      "pool": "small_parts",
+      "quantity": 8.0
+    },
+    {
+      "pool": "exotic_parts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "elite_parts",
+      "quantity": 3.0
+    }
+  ],
+  "quartermasterItemDelivery_111_stage1": [
+    {
+      "pool": "common_parts",
+      "quantity": 8.0
+    },
+    {
+      "pool": "small_parts",
+      "quantity": 4.0
+    }
+  ],
+  "quartermasterItemDelivery_112": [
+    {
+      "pool": "documents_field",
+      "quantity": 3.0
+    },
+    {
+      "pool": "administrative_documents",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_research",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "field_instruments",
+      "quantity": 1.0
+    }
+  ],
+  "quartermasterItemDelivery_1121": [
+    {
+      "pool": "documents_field",
+      "quantity": 4.0
+    },
+    {
+      "pool": "documents_research",
+      "quantity": 2.0
+    },
+    {
+      "pool": "field_instruments",
+      "quantity": 2.0
+    },
+    {
+      "pool": "administrative_documents",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "small_electronics",
+      "quantity": 6.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 3.0
+    }
+  ],
+  "quartermasterItemDelivery_11211": [
+    {
+      "pool": "powder",
+      "quantity": 5.0
+    },
+    {
+      "pool": "maintenance",
+      "quantity": 4.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 2.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 4.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 20.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 4.0
+    },
+    {
+      "pool": "batteries",
+      "quantity": 12.0
+    }
+  ],
+  "quartermasterItemDelivery_112_stage1": [
+    {
+      "pool": "small_electronics",
+      "quantity": 5.0
+    },
+    {
+      "pool": "documents_field",
+      "quantity": 1.0
+    }
+  ],
+  "quartermasterItemDelivery_11_stage1": [
+    {
+      "pool": "rimfire_rifles",
+      "quantity": 2.0
+    }
+  ],
+  "quartermasterItemDelivery_11_stage2": [
+    {
+      "pool": "maintenance",
+      "quantity": 3.0
+    },
+    {
+      "pool": "powder",
+      "quantity": 1.0
+    }
+  ],
+  "quartermasterItemDelivery_12": [
+    {
+      "pool": "documents_field",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_research",
+      "quantity": 2.0
+    }
+  ],
+  "quartermasterItemDelivery_121": [
+    {
+      "pool": "small_parts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "humanoid_parts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "elite_parts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "rare_parts",
+      "quantity": 2.0
+    }
+  ],
+  "quartermasterItemDelivery_121_stage1": [
+    {
+      "pool": "common_parts",
+      "quantity": 7.0
+    },
+    {
+      "pool": "small_parts",
+      "quantity": 3.0
+    }
+  ],
+  "quartermasterItemDelivery_122": [
+    {
+      "pool": "brains",
+      "quantity": 1.0
+    },
+    {
+      "pool": "exotic_parts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "common_parts",
+      "quantity": 7.0
+    },
+    {
+      "pool": "small_parts",
+      "quantity": 6.0
+    },
+    {
+      "pool": "humanoid_parts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 5.0
+    }
+  ],
+  "quartermasterItemDelivery_1221": [
+    {
+      "pool": "mre",
+      "quantity": 1.0
+    },
+    {
+      "pool": "common_meals",
+      "quantity": 8.0
+    },
+    {
+      "pool": "spirits",
+      "quantity": 3.0
+    },
+    {
+      "pool": "canned_food",
+      "quantity": 5.0
+    },
+    {
+      "pool": "local_refreshments",
+      "quantity": 5.0
+    },
+    {
+      "pool": "local_beer",
+      "quantity": 4.0
+    },
+    {
+      "pool": "tobacco",
+      "quantity": 3.0
+    }
+  ],
+  "quartermasterItemDelivery_12211": [
+    {
+      "pool": "elite_hides",
+      "quantity": 1.0
+    },
+    {
+      "pool": "common_parts",
+      "quantity": 8.0
+    },
+    {
+      "pool": "small_parts",
+      "quantity": 8.0
+    },
+    {
+      "pool": "humanoid_parts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "rare_parts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "exotic_parts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "elite_parts",
+      "quantity": 3.0
+    }
+  ],
+  "quartermasterItemDelivery_12_stage1": [
+    {
+      "pool": "stash_notes",
+      "quantity": 1.0
+    },
+    {
+      "pool": "administrative_documents",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_field",
+      "quantity": 1.0
+    }
+  ],
+  "quartermasterItemDelivery_1_stage1": [
+    {
+      "pool": "humanoid_parts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "common_parts",
+      "quantity": 4.0
+    }
+  ],
+  "quartermasterItemDelivery_2": [
+    {
+      "pool": "large_parts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "exotic_parts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "humanoid_parts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "common_parts",
+      "quantity": 6.0
+    }
+  ],
+  "quartermasterItemDelivery_21": [
+    {
+      "pool": "documents_field",
+      "quantity": 2.0
+    },
+    {
+      "pool": "veteran_stash",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    }
+  ],
+  "quartermasterItemDelivery_211": [
+    {
+      "pool": "common_parts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "small_parts",
+      "quantity": 8.0
+    },
+    {
+      "pool": "humanoid_parts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "large_parts",
+      "quantity": 6.0
+    },
+    {
+      "pool": "rare_parts",
+      "quantity": 2.0
+    }
+  ],
+  "quartermasterItemDelivery_211_stage1": [
+    {
+      "pool": "common_meat",
+      "quantity": 12.0
+    },
+    {
+      "pool": "common_parts",
+      "quantity": 4.0
+    }
+  ],
+  "quartermasterItemDelivery_212": [
+    {
+      "pool": "mre",
+      "quantity": 1.0
+    },
+    {
+      "pool": "local_beer",
+      "quantity": 5.0
+    },
+    {
+      "pool": "common_meals",
+      "quantity": 9.0
+    },
+    {
+      "pool": "canned_food",
+      "quantity": 5.0
+    },
+    {
+      "pool": "local_refreshments",
+      "quantity": 5.0
+    },
+    {
+      "pool": "spirits",
+      "quantity": 4.0
+    }
+  ],
+  "quartermasterItemDelivery_2121": [
+    {
+      "pool": "computer_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "advanced_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_field",
+      "quantity": 5.0
+    },
+    {
+      "pool": "documents_research",
+      "quantity": 2.0
+    },
+    {
+      "pool": "administrative_documents",
+      "quantity": 2.0
+    }
+  ],
+  "quartermasterItemDelivery_21_stage1": [
+    {
+      "pool": "stash_notes",
+      "quantity": 1.0
+    },
+    {
+      "pool": "administrative_documents",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_field",
+      "quantity": 1.0
+    }
+  ],
+  "quartermasterItemDelivery_22": [
+    {
+      "pool": "elite_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "chemical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "gravitational_artifacts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "rare_electrical_artifacts",
+      "quantity": 2.0
+    }
+  ],
+  "quartermasterItemDelivery_221": [
+    {
+      "pool": "rare_field_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "hellhound_part",
+      "quantity": 6.0
+    },
+    {
+      "pool": "rare_electrical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "electrical_artifacts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "chemical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "gravitational_artifacts",
+      "quantity": 1.0
+    }
+  ],
+  "quartermasterItemDelivery_222": [
+    {
+      "pool": "rare_field_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "gravitational_artifacts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_field",
+      "quantity": 3.0
+    },
+    {
+      "pool": "electrical_artifacts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "chemical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "rare_electrical_artifacts",
+      "quantity": 2.0
+    }
+  ],
+  "quartermasterItemDelivery_2221": [
+    {
+      "pool": "rare_field_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "chemical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "rare_electrical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "electrical_artifacts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "gravitational_artifacts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "bubble_artifacts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "documents_research",
+      "quantity": 2.0
+    }
+  ],
+  "quartermasterItemDelivery_22_stage1": [
+    {
+      "pool": "electrical_artifacts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "elite_parts",
+      "quantity": 1.0
+    }
+  ],
+  "smartassRecon1": [
+    {
+      "pool": "common_optics",
+      "quantity": 1.0
+    }
+  ],
+  "smartassRecon2": [
+    {
+      "pool": "documents_field",
+      "quantity": 2.0
+    }
+  ],
+  "smartassRecon3": [
+    {
+      "pool": "suppressors",
+      "quantity": 2.0
+    }
+  ],
+  "spicylemonItemDelivery_Brew": [
+    {
+      "pool": "predator_meals",
+      "quantity": 4.0
+    },
+    {
+      "pool": "local_beer",
+      "quantity": 4.0
+    },
+    {
+      "pool": "canned_food",
+      "quantity": 4.0
+    },
+    {
+      "pool": "elite_meals",
+      "quantity": 3.0
+    },
+    {
+      "pool": "exotic_meals",
+      "quantity": 5.0
+    }
+  ],
+  "spicylemonItemDelivery_Brew_stage1": [
+    {
+      "pool": "common_meals",
+      "quantity": 6.0
+    },
+    {
+      "pool": "spirits",
+      "quantity": 3.0
+    },
+    {
+      "pool": "local_refreshments",
+      "quantity": 4.0
+    },
+    {
+      "pool": "predator_meals",
+      "quantity": 1.0
+    }
+  ],
+  "spicylemonItemDelivery_Food": [
+    {
+      "pool": "local_refreshments",
+      "quantity": 1.0
+    },
+    {
+      "pool": "canned_food",
+      "quantity": 3.0
+    }
+  ],
+  "spicylemonItemDelivery_Food_stage1": [
+    {
+      "pool": "common_meals",
+      "quantity": 2.0
+    }
+  ],
+  "spicylemonItemDelivery_Food_stage2": [
+    {
+      "pool": "common_meals",
+      "quantity": 2.0
+    }
+  ],
+  "spicylemonItemDelivery_Food_stage3": [
+    {
+      "pool": "common_meals",
+      "quantity": 1.0
+    },
+    {
+      "pool": "local_refreshments",
+      "quantity": 2.0
+    }
+  ],
+  "spicylemonItemDelivery_Medical1": [
+    {
+      "pool": "common_meals",
+      "quantity": 8.0
+    }
+  ],
+  "spicylemonItemDelivery_Medical2": [
+    {
+      "pool": "common_meals",
+      "quantity": 5.0
+    },
+    {
+      "pool": "local_beer",
+      "quantity": 4.0
+    }
+  ],
+  "spicylemonItemDelivery_Medical3": [
+    {
+      "pool": "common_meals",
+      "quantity": 5.0
+    },
+    {
+      "pool": "predator_meals",
+      "quantity": 4.0
+    },
+    {
+      "pool": "local_refreshments",
+      "quantity": 3.0
+    }
+  ],
+  "spicylemonItemDelivery_Medical4": [
+    {
+      "pool": "common_meals",
+      "quantity": 5.0
+    },
+    {
+      "pool": "predator_meals",
+      "quantity": 4.0
+    },
+    {
+      "pool": "spirits",
+      "quantity": 2.0
+    },
+    {
+      "pool": "exotic_meals",
+      "quantity": 3.0
+    }
+  ],
+  "spicylemonItemDelivery_Medical5": [
+    {
+      "pool": "predator_meals",
+      "quantity": 4.0
+    },
+    {
+      "pool": "common_meals",
+      "quantity": 5.0
+    },
+    {
+      "pool": "local_beer",
+      "quantity": 3.0
+    },
+    {
+      "pool": "exotic_meals",
+      "quantity": 4.0
+    },
+    {
+      "pool": "elite_meals",
+      "quantity": 2.0
+    }
+  ],
+  "spicylemonItemDelivery_Medical6": [
+    {
+      "pool": "predator_meals",
+      "quantity": 4.0
+    },
+    {
+      "pool": "exotic_meals",
+      "quantity": 4.0
+    },
+    {
+      "pool": "spirits",
+      "quantity": 2.0
+    },
+    {
+      "pool": "common_meals",
+      "quantity": 5.0
+    },
+    {
+      "pool": "elite_meals",
+      "quantity": 3.0
+    },
+    {
+      "pool": "local_refreshments",
+      "quantity": 3.0
+    }
+  ],
+  "spicylemonItemDelivery_Medical7": [
+    {
+      "pool": "exotic_meals",
+      "quantity": 4.0
+    },
+    {
+      "pool": "predator_meals",
+      "quantity": 4.0
+    },
+    {
+      "pool": "energy_drinks",
+      "quantity": 1.0
+    },
+    {
+      "pool": "common_meals",
+      "quantity": 5.0
+    },
+    {
+      "pool": "elite_meals",
+      "quantity": 3.0
+    },
+    {
+      "pool": "local_refreshments",
+      "quantity": 3.0
+    },
+    {
+      "pool": "local_beer",
+      "quantity": 3.0
+    }
+  ],
+  "spicylemonItemDelivery_Spirits": [
+    {
+      "pool": "predator_meals",
+      "quantity": 3.0
+    },
+    {
+      "pool": "local_beer",
+      "quantity": 3.0
+    },
+    {
+      "pool": "exotic_meals",
+      "quantity": 4.0
+    },
+    {
+      "pool": "elite_meals",
+      "quantity": 3.0
+    }
+  ],
+  "spicylemonItemDelivery_Spirits_stage1": [
+    {
+      "pool": "common_meals",
+      "quantity": 5.0
+    },
+    {
+      "pool": "local_refreshments",
+      "quantity": 3.0
+    },
+    {
+      "pool": "predator_meals",
+      "quantity": 1.0
+    }
+  ],
+  "spicylemonItemDelivery_Vodka": [
+    {
+      "pool": "local_refreshments",
+      "quantity": 2.0
+    },
+    {
+      "pool": "spirits",
+      "quantity": 2.0
+    },
+    {
+      "pool": "predator_meals",
+      "quantity": 4.0
+    }
+  ],
+  "spicylemonItemDelivery_Vodka_stage1": [
+    {
+      "pool": "common_meals",
+      "quantity": 4.0
+    },
+    {
+      "pool": "local_refreshments",
+      "quantity": 1.0
+    }
+  ],
+  "stalkerNetAdminDelivery_mainRadioTower": [
+    {
+      "pool": "consumer_electronics",
+      "quantity": 1.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 2.0
+    },
+    {
+      "pool": "heavy_electrical_map1",
+      "quantity": 1.0
+    },
+    {
+      "pool": "small_electronics",
+      "quantity": 2.0
+    }
+  ],
+  "technutItemDelivery_Attachment1": [
+    {
+      "pool": "fasteners",
+      "quantity": 4.0
+    },
+    {
+      "pool": "common_optics",
+      "quantity": 4.0
+    },
+    {
+      "pool": "maintenance",
+      "quantity": 3.0
+    },
+    {
+      "pool": "attachments",
+      "quantity": 2.0
+    }
+  ],
+  "technutItemDelivery_Attachment1_stage1": [
+    {
+      "pool": "fasteners",
+      "quantity": 8.0
+    }
+  ],
+  "technutItemDelivery_Attachment2": [
+    {
+      "pool": "fasteners",
+      "quantity": 3.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    },
+    {
+      "pool": "powder",
+      "quantity": 3.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 3.0
+    },
+    {
+      "pool": "suppressors",
+      "quantity": 2.0
+    }
+  ],
+  "technutItemDelivery_Attachment2_stage1": [
+    {
+      "pool": "fasteners",
+      "quantity": 10.0
+    }
+  ],
+  "technutItemDelivery_Attachment3": [
+    {
+      "pool": "fasteners",
+      "quantity": 3.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 4.0
+    },
+    {
+      "pool": "maintenance",
+      "quantity": 3.0
+    },
+    {
+      "pool": "suppressors",
+      "quantity": 2.0
+    },
+    {
+      "pool": "computer_parts",
+      "quantity": 1.0
+    }
+  ],
+  "technutItemDelivery_Attachment3_stage1": [
+    {
+      "pool": "fasteners",
+      "quantity": 11.0
+    }
+  ],
+  "technutItemDelivery_AttachmentCarbon": [
+    {
+      "pool": "cleaning",
+      "quantity": 4.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 5.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 4.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 17.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 4.0
+    },
+    {
+      "pool": "small_electronics",
+      "quantity": 6.0
+    }
+  ],
+  "technutItemDelivery_AttachmentFabric1": [
+    {
+      "pool": "suit_materials",
+      "quantity": 2.0
+    },
+    {
+      "pool": "common_hides",
+      "quantity": 2.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 3.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 12.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    }
+  ],
+  "technutItemDelivery_AttachmentFabric2": [
+    {
+      "pool": "humanoid_parts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "common_hides",
+      "quantity": 2.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 14.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 4.0
+    },
+    {
+      "pool": "cleaning",
+      "quantity": 3.0
+    }
+  ],
+  "technutItemDelivery_AttachmentFrame1": [
+    {
+      "pool": "canned_food",
+      "quantity": 6.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 2.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 4.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 17.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 5.0
+    },
+    {
+      "pool": "cleaning",
+      "quantity": 4.0
+    }
+  ],
+  "technutItemDelivery_AttachmentFrame2": [
+    {
+      "pool": "basic_tools",
+      "quantity": 2.0
+    },
+    {
+      "pool": "advanced_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 2.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 19.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 5.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 5.0
+    },
+    {
+      "pool": "cleaning",
+      "quantity": 4.0
+    }
+  ],
+  "technutItemDelivery_AttachmentKevlar1": [
+    {
+      "pool": "batteries",
+      "quantity": 8.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 2.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 13.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 3.0
+    },
+    {
+      "pool": "cleaning",
+      "quantity": 3.0
+    }
+  ],
+  "technutItemDelivery_AttachmentKevlar2": [
+    {
+      "pool": "batteries",
+      "quantity": 11.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "field_maintenance",
+      "quantity": 4.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 17.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 4.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 5.0
+    }
+  ],
+  "technutItemDelivery_Helmet1": [
+    {
+      "pool": "adhesives",
+      "quantity": 3.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 3.0
+    }
+  ],
+  "technutItemDelivery_Helmet2": [
+    {
+      "pool": "heavy_electrical",
+      "quantity": 2.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 2.0
+    },
+    {
+      "pool": "computer_parts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 12.0
+    }
+  ],
+  "technutItemDelivery_Helmet3": [
+    {
+      "pool": "common_artifacts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "electrical_artifacts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 3.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 13.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    }
+  ],
+  "technutItemDelivery_Helmet4": [
+    {
+      "pool": "common_artifacts",
+      "quantity": 4.0
+    },
+    {
+      "pool": "rare_field_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "rare_electrical_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 14.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 4.0
+    }
+  ],
+  "technutItemDelivery_Helmet5": [
+    {
+      "pool": "fasteners",
+      "quantity": 5.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 4.0
+    },
+    {
+      "pool": "common_artifacts",
+      "quantity": 5.0
+    },
+    {
+      "pool": "chemical_artifacts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "rare_electrical_artifacts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "exceptional_artifacts",
+      "quantity": 1.0
+    }
+  ],
+  "technutItemDelivery_Helmet5_stage1": [
+    {
+      "pool": "fasteners",
+      "quantity": 14.0
+    }
+  ],
+  "technutItemDelivery_Helmet6": [
+    {
+      "pool": "fasteners",
+      "quantity": 4.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 5.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 6.0
+    },
+    {
+      "pool": "chemical_artifacts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "burner_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "rare_electrical_artifacts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "exceptional_artifacts",
+      "quantity": 2.0
+    }
+  ],
+  "technutItemDelivery_Helmet6_stage1": [
+    {
+      "pool": "fasteners",
+      "quantity": 17.0
+    }
+  ],
+  "technutItemDelivery_Helmet7": [
+    {
+      "pool": "rare_field_artifacts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "bubble_artifacts",
+      "quantity": 2.0
+    },
+    {
+      "pool": "exceptional_electrical_artifacts",
+      "quantity": 1.0
+    },
+    {
+      "pool": "chemical_artifacts",
+      "quantity": 3.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 26.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 6.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 7.0
+    },
+    {
+      "pool": "cleaning",
+      "quantity": 5.0
+    }
+  ],
+  "technutItemDelivery_Main": [
+    {
+      "pool": "repair_electrical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "heavy_electrical_map1",
+      "quantity": 1.0
+    }
+  ],
+  "technutItemDelivery_Mask1": [
+    {
+      "pool": "heavy_components",
+      "quantity": 1.0
+    }
+  ],
+  "technutItemDelivery_Mask2": [
+    {
+      "pool": "filters",
+      "quantity": 1.0
+    }
+  ],
+  "technutItemDelivery_Mask2_stage1": [
+    {
+      "pool": "fuel",
+      "quantity": 1.0
+    }
+  ],
+  "technutItemDelivery_Mask3": [
+    {
+      "pool": "repair_electrical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 1.0
+    }
+  ],
+  "technutItemDelivery_Mask3_stage1": [
+    {
+      "pool": "fuel",
+      "quantity": 1.0
+    },
+    {
+      "pool": "repair_electrical",
+      "quantity": 1.0
+    }
+  ],
+  "technutItemDelivery_Mask4": [
+    {
+      "pool": "fasteners",
+      "quantity": 5.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "specialty_tools",
+      "quantity": 1.0
+    }
+  ],
+  "technutItemDelivery_Mask4_stage1": [
+    {
+      "pool": "fasteners",
+      "quantity": 5.0
+    }
+  ],
+  "technutItemDelivery_Suit1": [
+    {
+      "pool": "fasteners",
+      "quantity": 8.0
+    }
+  ],
+  "technutItemDelivery_Suit2": [
+    {
+      "pool": "field_maintenance",
+      "quantity": 1.0
+    },
+    {
+      "pool": "common_hides",
+      "quantity": 1.0
+    }
+  ],
+  "technutItemDelivery_Suit3": [
+    {
+      "pool": "fasteners",
+      "quantity": 3.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    }
+  ],
+  "technutItemDelivery_Suit3_stage1": [
+    {
+      "pool": "small_electronics",
+      "quantity": 1.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 2.0
+    }
+  ],
+  "technutItemDelivery_Suit4": [
+    {
+      "pool": "cigarettes",
+      "quantity": 3.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 3.0
+    }
+  ],
+  "technutItemDelivery_Suit5": [
+    {
+      "pool": "tobacco",
+      "quantity": 3.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 2.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 12.0
+    }
+  ],
+  "technutItemDelivery_Suit6": [
+    {
+      "pool": "spirits",
+      "quantity": 3.0
+    },
+    {
+      "pool": "beer",
+      "quantity": 2.0
+    },
+    {
+      "pool": "field_maintenance",
+      "quantity": 3.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 12.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    }
+  ],
+  "technutItemDelivery_Suit7": [
+    {
+      "pool": "wine",
+      "quantity": 4.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 2.0
+    },
+    {
+      "pool": "documents_technical",
+      "quantity": 1.0
+    },
+    {
+      "pool": "fasteners",
+      "quantity": 13.0
+    },
+    {
+      "pool": "workshop_supplies",
+      "quantity": 3.0
+    },
+    {
+      "pool": "adhesives",
+      "quantity": 3.0
+    }
+  ],
+  "technutItemDelivery_SuitNBC": [
+    {
+      "pool": "antirad",
+      "quantity": 1.0
+    },
+    {
+      "pool": "filters",
+      "quantity": 2.0
+    },
+    {
+      "pool": "industrial_supplies",
+      "quantity": 2.0
+    }
+  ],
+  "technutItemDelivery_SuitNBC_stage1": [
+    {
+      "pool": "antirad",
+      "quantity": 3.0
+    }
+  ],
+  "technutItemDelivery_SuitPainting": [
+    {
+      "pool": "adhesives",
+      "quantity": 3.0
+    }
+  ]
+}

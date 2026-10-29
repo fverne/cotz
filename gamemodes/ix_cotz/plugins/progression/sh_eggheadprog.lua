@@ -17,7 +17,7 @@ ix.progression.Register("eggheadItemDelivery_Detector1", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "common_artifacts", quantity = 21 },
+		{ pool = "common_artifacts", quantity = 42 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -44,8 +44,8 @@ ix.progression.Register("eggheadItemDelivery_Detector2_stage1", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "rare_field_artifacts", quantity = 3},
-		{pool = "rare_electrical_artifacts", quantity = 2},
+		{pool = "rare_field_artifacts", quantity = 7},
+		{pool = "rare_electrical_artifacts", quantity = 5},
 	},
 	nextProgressions = {"eggheadItemDelivery_Detector2"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -71,8 +71,8 @@ ix.progression.Register("eggheadItemDelivery_Detector2", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "rare_electrical_artifacts", quantity = 2},
-		{pool = "chemical_artifacts", quantity = 5},
+		{pool = "rare_electrical_artifacts", quantity = 5},
+		{pool = "chemical_artifacts", quantity = 12},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -103,8 +103,8 @@ ix.progression.Register("eggheadItemDelivery_Detector3_stage1", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "documents_research", quantity = 2},
-		{pool = "documents_technical", quantity = 1},
+		{pool = "documents_research", quantity = 6},
+		{pool = "documents_technical", quantity = 3},
 	},
 	nextProgressions = {"eggheadItemDelivery_Detector3_stage2"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -126,7 +126,7 @@ ix.progression.Register("eggheadItemDelivery_Detector3_stage2", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "burner_artifacts", quantity = 1},
+		{pool = "burner_artifacts", quantity = 3},
 	},
 	nextProgressions = {"eggheadItemDelivery_Detector3"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -151,12 +151,12 @@ ix.progression.Register("eggheadItemDelivery_Detector3", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "exceptional_artifacts", quantity = 1},
-		{pool = "bubble_artifacts", quantity = 1},
-		{pool = "burner_artifacts", quantity = 1},
-		{pool = "rare_electrical_artifacts", quantity = 2},
-		{pool = "chemical_artifacts", quantity = 2},
-		{pool = "gravitational_artifacts", quantity = 1},
+		{pool = "exceptional_artifacts", quantity = 3},
+		{pool = "bubble_artifacts", quantity = 3},
+		{pool = "burner_artifacts", quantity = 3},
+		{pool = "rare_electrical_artifacts", quantity = 6},
+		{pool = "chemical_artifacts", quantity = 6},
+		{pool = "gravitational_artifacts", quantity = 3},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -192,9 +192,9 @@ ix.progression.Register("eggheadItemDelivery_Suit1", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "predator_hides", quantity = 3 },
-		{ pool = "common_hides", quantity = 4 },
-		{ pool = "common_parts", quantity = 17 },
+		{ pool = "predator_hides", quantity = 7 },
+		{ pool = "common_hides", quantity = 10 },
+		{ pool = "common_parts", quantity = 42 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -222,9 +222,9 @@ ix.progression.Register("eggheadItemDelivery_Suit2_stage1", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "predator_hides", quantity = 2},
-		{pool = "elite_hides", quantity = 1},
-		{pool = "exotic_parts", quantity = 3},
+		{pool = "predator_hides", quantity = 6},
+		{pool = "elite_hides", quantity = 3},
+		{pool = "exotic_parts", quantity = 9},
 	},
 	nextProgressions = {"eggheadItemDelivery_Suit2"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -250,10 +250,10 @@ ix.progression.Register("eggheadItemDelivery_Suit2", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "exotic_parts", quantity = 2},
-		{pool = "documents_research", quantity = 3},
-		{pool = "documents_technical", quantity = 1},
-		{pool = "field_instruments", quantity = 2},
+		{pool = "exotic_parts", quantity = 6},
+		{pool = "documents_research", quantity = 9},
+		{pool = "documents_technical", quantity = 3},
+		{pool = "field_instruments", quantity = 6},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -287,14 +287,14 @@ ix.progression.Register("eggheadItemDelivery_Suit3", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{ pool = "elite_hides", quantity = 1 },
-		{ pool = "predator_hides", quantity = 2 },
-		{ pool = "brains", quantity = 2 },
-		{ pool = "documents_research", quantity = 2 },
-		{ pool = "documents_technical", quantity = 1 },
-		{ pool = "field_instruments", quantity = 2 },
-		{ pool = "administrative_documents", quantity = 2 },
-		{ pool = "small_electronics", quantity = 7 },
+		{ pool = "elite_hides", quantity = 3 },
+		{ pool = "predator_hides", quantity = 7 },
+		{ pool = "brains", quantity = 7 },
+		{ pool = "documents_research", quantity = 7 },
+		{ pool = "documents_technical", quantity = 3 },
+		{ pool = "field_instruments", quantity = 7 },
+		{ pool = "administrative_documents", quantity = 7 },
+		{ pool = "small_electronics", quantity = 24 },
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -321,7 +321,7 @@ ix.progression.Register("eggheadItemDelivery_Aid1_stage1", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "brains", quantity = 3},
+		{pool = "brains", quantity = 7},
 	},
 	nextProgressions = {"eggheadItemDelivery_Aid1_stage2"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -347,7 +347,7 @@ ix.progression.Register("eggheadItemDelivery_Aid1_stage2", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "exotic_parts", quantity = 5},
+		{pool = "exotic_parts", quantity = 12},
 	},
 	nextProgressions = {"eggheadItemDelivery_Aid1"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -376,8 +376,8 @@ ix.progression.Register("eggheadItemDelivery_Aid1", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "exotic_parts", quantity = 2},
-		{pool = "chemical_artifacts", quantity = 5},
+		{pool = "exotic_parts", quantity = 5},
+		{pool = "chemical_artifacts", quantity = 12},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -410,8 +410,8 @@ ix.progression.Register("eggheadItemDelivery_Aid2_stage1", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "brains", quantity = 2},
-		{pool = "exotic_parts", quantity = 4},
+		{pool = "brains", quantity = 6},
+		{pool = "exotic_parts", quantity = 12},
 	},
 	nextProgressions = {"eggheadItemDelivery_Aid2"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -440,11 +440,11 @@ ix.progression.Register("eggheadItemDelivery_Aid2", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "exotic_parts", quantity = 1},
-		{pool = "rare_electrical_artifacts", quantity = 2},
-		{pool = "documents_research", quantity = 3},
-		{pool = "documents_technical", quantity = 1},
-		{pool = "field_instruments", quantity = 2},
+		{pool = "exotic_parts", quantity = 3},
+		{pool = "rare_electrical_artifacts", quantity = 6},
+		{pool = "documents_research", quantity = 9},
+		{pool = "documents_technical", quantity = 3},
+		{pool = "field_instruments", quantity = 6},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -475,9 +475,9 @@ ix.progression.Register("eggheadItemDelivery_Aid3_stage1", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "administrative_documents", quantity = 2},
-		{pool = "elite_parts", quantity = 3},
-		{pool = "brains", quantity = 1},
+		{pool = "administrative_documents", quantity = 7},
+		{pool = "elite_parts", quantity = 10},
+		{pool = "brains", quantity = 3},
 	},
 	nextProgressions = {"eggheadItemDelivery_Aid3"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -505,12 +505,12 @@ ix.progression.Register("eggheadItemDelivery_Aid3", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "brains", quantity = 1},
-		{pool = "rare_field_artifacts", quantity = 2},
-		{pool = "documents_research", quantity = 2},
-		{pool = "documents_technical", quantity = 1},
-		{pool = "field_instruments", quantity = 2},
-		{pool = "exceptional_electrical_artifacts", quantity = 1},
+		{pool = "brains", quantity = 3},
+		{pool = "rare_field_artifacts", quantity = 7},
+		{pool = "documents_research", quantity = 7},
+		{pool = "documents_technical", quantity = 3},
+		{pool = "field_instruments", quantity = 7},
+		{pool = "exceptional_electrical_artifacts", quantity = 3},
 	},
 	OnComplete = function(character)
 		timer.Simple(60, function()
@@ -541,8 +541,8 @@ ix.progression.Register("eggheadItemDelivery_artifacts_stage1", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "small_electronics", quantity = 6},
-		{pool = "electrical_artifacts", quantity = 2},
+		{pool = "small_electronics", quantity = 15},
+		{pool = "electrical_artifacts", quantity = 5},
 	},
 	nextProgressions = {"eggheadItemDelivery_artifacts"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,

@@ -28,6 +28,52 @@ ABILITY_EFFORT = {"bloodsucker": 1.5, "burer": 1.5, "psydog": 1.5, "karlik": 1.5
                   "fastcontroller": 2, "chimera": 1.5, "electrochimera": 1.75}
 GROWTH = 1.25
 JOB_EFFORT = 8
+UNCHANGED_DEPTH = 2
+MAX_QUANTITY_DEPTH = 12
+MAX_QUANTITY_MULTIPLIER = 6
+
+
+def tapered_quantities(root, steps, gates, pools):
+    """Scale frozen quantities by logical milestone depth, ignoring inserted stages."""
+    baseline = json.loads((root / 'docs/balance/progression/quantity-baseline.json').read_text())
+    groups = {step['id']: step['milestoneGroup'] or step['id'] for step in steps}
+    parents = defaultdict(set)
+    for step in steps:
+        group = groups[step['id']]
+        for successor in step['next']:
+            if groups[successor] != group:
+                parents[groups[successor]].add(group)
+        required = step['prerequisites'] + ([gates[step['keyNpc']]] if step['keyNpc'] in gates else [])
+        parents[group].update(groups[ident] for ident in required if groups[ident] != group)
+    # Preserve equipment tier comparisons without adding gameplay prerequisites.
+    parents['bossItemDelivery_2'].add('technutItemDelivery_Suit5')
+    parents['bossItemDelivery_3'].add('technutItemDelivery_Suit7')
+    haggler_ends = {groups[s['id']] for s in steps
+                    if s['id'].startswith('hagglerItemDelivery_') and not s['next']}
+    for ident in ('quartermasterItemDelivery_1', 'quartermasterItemDelivery_2'):
+        parents[ident].update(haggler_ends)
+    depths = {}
+
+    def visit(group, visiting):
+        if group in depths:
+            return depths[group]
+        if group in visiting:
+            raise ValueError(f'Cyclic logical milestone: {group}')
+        depths[group] = max((visit(p, visiting | {group}) + 1 for p in parents[group]), default=0)
+        return depths[group]
+
+    result = {}
+    for step in steps:
+        depth = visit(groups[step['id']], set())
+        taper = max(0, min(1, (depth - UNCHANGED_DEPTH) / (MAX_QUANTITY_DEPTH - UNCHANGED_DEPTH)))
+        multiplier = 1 + (MAX_QUANTITY_MULTIPLIER - 1) * taper
+        slots = baseline.get(step['id'], [])
+        if [s['pool'] for s in slots] != [s['pool'] for s in step['slots']]:
+            raise ValueError(f"Quantity baseline slots differ: {step['id']}")
+        quantities = [int(s['quantity']) if pools[s['pool']]['tier'] == 'fixed'
+                      else math.floor(s['quantity'] * multiplier) for s in slots]
+        result[step['id']] = dict(logicalDepth=depth, multiplier=multiplier, quantities=quantities)
+    return baseline, result
 
 
 def mutant_effort(root, mutant):
@@ -85,8 +131,9 @@ def pool_efforts(root, pools):
 
 
 def expanded_plan(root, steps, gates, pools, costs):
-    """Audit literal allocations against original budgets; new stage depth never retunes quantities."""
+    """Audit original allocations and taper quantities without increasing category breadth."""
     baseline = json.loads((root / "docs/balance/progression/milestone-baseline.json").read_text())
+    quantity_baseline, tapered = tapered_quantities(root, steps, gates, pools)
     groups = defaultdict(list)
     by_id = {s['id']: s for s in steps}
     parents = defaultdict(set)
@@ -105,7 +152,7 @@ def expanded_plan(root, steps, gates, pools, costs):
         for slot in baseline[group]['slots']:
             expected[slot['pool']] += slot['quantity']
         for member in members:
-            for slot in member['slots']:
+            for slot in quantity_baseline.get(member['id'], []):
                 actual[slot['pool']] += slot['quantity']
         if expected != actual:
             raise ValueError(f"Milestone {group} changed its allocated acquisition budget: {actual} != {expected}")
@@ -127,12 +174,14 @@ def expanded_plan(root, steps, gates, pools, costs):
         factor = MAP_EFFORT[map_tier]
         fixed = bool(step['slots']) and all(pools[s['pool']]['tier'] == 'fixed' for s in step['slots'])
         unit_costs = [costs[ceiling, slot['pool']] * factor for slot in step['slots']]
-        quantities = [int(slot['quantity']) for slot in step['slots']]
+        quantities = tapered[ident]['quantities']
         thresholds = [int(value) for value in step['thresholds']]
         effort = sum(q * c for q, c in zip(quantities, unit_costs)) if step['slots'] else thresholds[-1] * JOB_EFFORT * factor
         result[ident] = dict(depth=depth, target=effort, effort=effort, quantities=quantities,
                              thresholds=thresholds, fixed=fixed, parents=sorted(parents[ident]),
                              unitEfforts=unit_costs, group=step['milestoneGroup'] or ident)
+        result[ident].update(logicalDepth=tapered[ident]['logicalDepth'],
+                             multiplier=tapered[ident]['multiplier'])
         return result[ident]
 
     for ident in sorted(by_id):
@@ -249,13 +298,15 @@ if __name__ == '__main__':
         report = ["# Progression pacing estimates\n",
                   "Generated by `progression_pacing.py --apply`. Scores are relative effort, not minutes.",
                   "See [the model assumptions](README.md#quantity-and-effort-decisions).\n",
-                  "| Step | Depth including access gates | Estimated effort | Quantities / jobs |",
-                  "| --- | ---: | ---: | --- |"]
+                  "| Step | Depth including access gates | Logical depth | Quantity multiplier | Estimated effort | Quantities / jobs |",
+                  "| --- | ---: | ---: | ---: | ---: | --- |"]
         for step in steps:
             data = planned[step['id']]
             effort = 'Access key' if data['fixed'] else f"{data['effort']:.1f}"
             amounts = data['quantities'] or data['thresholds']
-            report.append(f"| {step['id']} | {data['depth']} | {effort} | {', '.join(map(str, amounts))} |")
+            multiplier = f"{data.get('multiplier', 1):g}×" if step['slots'] and not data['fixed'] else '1×'
+            report.append(f"| {step['id']} | {data['depth']} | {data.get('logicalDepth', data['depth'])} | "
+                          f"{multiplier} | {effort} | {', '.join(map(str, amounts))} |")
         (root / 'docs/balance/progression/pacing.md').write_text('\n'.join(report) + '\n')
     for step in steps:
         data = planned[step['id']]

@@ -6,7 +6,7 @@ ix.progression.Register("computerDelivery_main_stage1", {
 	defaultActive = false,
 	lootMapTier = 3,
 	requirementSlots = {
-		{pool = "small_electronics", quantity = 2},
+		{pool = "small_electronics", quantity = 8},
 	},
 	nextProgressions = {"computerDelivery_main_stage2"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -31,9 +31,9 @@ ix.progression.Register("computerDelivery_main_stage2", {
 	defaultActive = false,
 	lootMapTier = 3,
 	requirementSlots = {
-		{pool = "small_electronics", quantity = 1},
-		{pool = "workshop_supplies", quantity = 2},
-		{pool = "fuel", quantity = 1},
+		{pool = "small_electronics", quantity = 4},
+		{pool = "workshop_supplies", quantity = 8},
+		{pool = "fuel", quantity = 4},
 	},
 	nextProgressions = {"computerDelivery_main"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,

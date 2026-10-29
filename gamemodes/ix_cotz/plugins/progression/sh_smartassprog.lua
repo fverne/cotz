@@ -34,7 +34,7 @@ ix.progression.Register("smartassRecon2", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "documents_field", quantity = 2},
+		{pool = "documents_field", quantity = 4},
 	},
 	nextProgressions = {"smartassRecon3"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -61,7 +61,7 @@ ix.progression.Register("smartassRecon3", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "suppressors", quantity = 2},
+		{pool = "suppressors", quantity = 5},
 	},
 	nextProgressions = {},
 	BuildResponse = ix.progression.BuildDeliveryResponse,

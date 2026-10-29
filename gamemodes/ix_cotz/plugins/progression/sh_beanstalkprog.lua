@@ -6,7 +6,7 @@ ix.progression.Register("beanstalkItemDelivery_Documents_stage1", {
 	defaultActive = true,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "small_electronics", quantity = 3},
+		{pool = "small_electronics", quantity = 6},
 	},
 	nextProgressions = {"beanstalkItemDelivery_Documents_stage2"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -31,8 +31,8 @@ ix.progression.Register("beanstalkItemDelivery_Documents_stage2", {
 	defaultActive = false,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "small_electronics", quantity = 2},
-		{pool = "documents_field", quantity = 3},
+		{pool = "small_electronics", quantity = 4},
+		{pool = "documents_field", quantity = 6},
 	},
 	nextProgressions = {"beanstalkItemDelivery_Documents"},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
@@ -57,7 +57,7 @@ ix.progression.Register("beanstalkExpedition1", {
 	defaultActive = true,
 	lootMapTier = 2,
 	requirementSlots = {
-		{pool = "field_instruments", quantity = 2},
+		{pool = "field_instruments", quantity = 5},
 	},
 	nextProgressions = {},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
