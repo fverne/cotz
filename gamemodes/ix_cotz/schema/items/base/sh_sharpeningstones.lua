@@ -1,14 +1,14 @@
 ITEM.name = "Sharpening Stone"
 ITEM.description = "A whetstone with three uses. Each use restores 25% knife sharpness, up to 101%."
 ITEM.longdesc = "Use Sharpen and select a knife. Above 100% sharpness grants +1 tier for one poach."
-ITEM.model = "models/props_debris/concrete_chunk05g.mdl"
+ITEM.model = "models/lostsignalproject/items/repair/sharpening_stones.mdl"
 ITEM.category = "Consumables"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 150
 ITEM.weight = 0.2
 ITEM.flatweight = 0
-ITEM.sharpnessRestored = 25
+ITEM.sharpnessRestored = 15
 ITEM.quantity = 3
 
 function ITEM:GetDescription()
