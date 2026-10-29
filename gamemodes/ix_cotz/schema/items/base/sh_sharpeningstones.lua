@@ -13,10 +13,8 @@ ITEM.quantity = 3
 
 function ITEM:GetDescription()
 	return string.format(
-		"%s\n\n%d/%d uses remaining.\n\n%s",
+		"%s\n\n%s",
 		self.description,
-		self:GetData("quantity", self.quantity),
-		self.quantity,
 		self.longdesc
 	)
 end
