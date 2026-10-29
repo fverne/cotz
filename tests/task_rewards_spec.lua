@@ -782,4 +782,26 @@ check(#dialogue.tree.GetTaskByDifficulty.GetDynamicOptions(nil, catalogueReader.
 catalogueReader.client.rep = 250
 check(#dialogue.tree.GetTaskByDifficulty.GetDynamicOptions(nil, catalogueReader.client, target) == 2,
 	"client shows medium but hides hard tasks at 250 reputation")
+ITEM = {}
+dofile("gamemodes/ix_cotz/schema/items/sh_sharpening_stone_fine.lua")
+ix.item.list.sharpening_stone_fine = ITEM
+local stoneRecipient = actor()
+check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), "sharpening_stone_fine"),
+	"fine sharpening stones are eligible Old Timer task supplies")
+local stoneOffers = 0
+for seed = 1, 30 do
+	for _, choice in ipairs(api.BuildJobChoices(stoneRecipient, "'Old Timer'", 600, "stones:" .. seed)) do
+		if choice.items[1].item == "sharpening_stone_fine" then
+			stoneOffers = stoneOffers + 1
+			check(#choice.items == 2, "task budget awards two individual fine sharpening stones")
+			local value = 0
+			for _, reward in ipairs(choice.items) do
+				check(reward.data.quantity == nil, "single-use stones are not turned into quantity stacks")
+				value = value + api.ExpectedValue(reward.item, reward.data)
+			end
+			check(value <= 600, "fine sharpening stone rewards respect the task supply budget")
+		end
+	end
+end
+check(stoneOffers > 0, "generated task choices offer fine sharpening stones")
 print("PASS: " .. checks .. " task reward checks")

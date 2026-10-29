@@ -1,7 +1,9 @@
 ix.taskRewards = ix.taskRewards or {}
 
 local PROFILES = {
-	["'Old Timer'"] = {"12gauge", "22lr", "9x18", "medic_bandage_1", "medic_bandage_2"},
+	["'Old Timer'"] = {
+		"12gauge", "22lr", "9x18", "medic_bandage_1", "medic_bandage_2", "sharpening_stone_fine",
+	},
 	["'Technut'"] = {"22lr", "45acp41", "attachment_fabric_1", "attachment_ceramicplate_1"},
 	["'Jitters'"] = {"medic_bandage_1", "medic_medkit_1", "medic_bandage_2", "medic_medkit_3"},
 	["'Cleaner'"] = {"12gauge", "22lr", "9x19", "hidestash_1", "hidestash_2", "hidestash_3"},
@@ -163,7 +165,8 @@ function ix.taskRewards.SupplyCatalogue(character, npc)
 	local function consider(itemID)
 		local item = ix.item.list[itemID]
 		local isSupply = item and not item.isWeapon and not item.isBodyArmor
-			and (item.isAmmo or item.quantity or itemID:match("^hidestash_") or itemID:match("^attachment_"))
+			and (item.isAmmo or item.quantity or item.sharpnessRestored
+				or itemID:match("^hidestash_") or itemID:match("^attachment_"))
 		if isSupply and not seen[itemID] and ix.progression.CanBuyItem(character, npc, itemID) then
 			result[#result + 1] = itemID
 			seen[itemID] = true
