@@ -66,7 +66,7 @@ local function canChoose(client, target)
 end
 
 local function supplyText(label)
-	return (label:gsub(" %+ ", "\n      + "))
+	return (label:gsub(" %+ ", " + "))
 end
 
 local function supplyLines(offer)
