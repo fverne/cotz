@@ -19,6 +19,7 @@ local COLORS = {
 	hover = Color(169, 171, 149),
 	text = Color(216, 215, 201),
 	muted = Color(116, 119, 107),
+	teal = Color(73, 140, 143),
 	green = Color(105, 139, 87),
 	amber = Color(167, 143, 81),
 	red = Color(154, 84, 70),
@@ -32,11 +33,11 @@ local PROTECTION = {
 	{name = "Psy", multiplier = "ixperpsyres", flat = "ixflatpsyres"},
 }
 
-local function drawSegments(x, y, width, height, fraction)
+local function drawSegments(x, y, width, height, fraction, fillColor)
 	local segments = 12
 	local gap = 2
 	local segmentWidth = (width - gap * (segments - 1)) / segments
-	local color = fraction > 0.6 and COLORS.green or (fraction > 0.3 and COLORS.amber or COLORS.red)
+	local color = fillColor or (fraction > 0.8 and COLORS.green or (fraction > 0.4 and COLORS.amber or COLORS.red))
 
 	for index = 1, segments do
 		surface.SetDrawColor(index / segments <= fraction and color or COLORS.track)
@@ -71,12 +72,16 @@ local function paintCard(card, width, height)
 	local padding = card.padding or 6
 	local barHeight = math.max(3, math.floor(card.scale * 4))
 	local barY = height - padding - barHeight
-	if wear ~= nil then
-		drawSegments(padding, barY, width - padding * 2, barHeight, math.Clamp(wear / 100, 0, 1))
-		barY = barY - barHeight - math.max(2, math.floor(card.scale * 3))
+	local conditionColor
+	if card.item.isPoachKnife and ix.poaching and condition > ix.poaching.Sharpness.default then
+		conditionColor = COLORS.teal
 	end
 	drawSegments(padding, barY, width - padding * 2, barHeight,
-		math.Clamp(condition / 100, 0, 1))
+		math.Clamp(condition / 100, 0, 1), conditionColor)
+	if wear ~= nil then
+		barY = barY - barHeight - math.max(2, math.floor(card.scale * 3))
+		drawSegments(padding, barY, width - padding * 2, barHeight, math.Clamp(wear / 100, 0, 1))
+	end
 end
 
 local function paintHeader(_, width)
