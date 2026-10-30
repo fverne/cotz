@@ -42,6 +42,10 @@ ix.util.Include("definitions/sh_itemjobs_world.lua")
 ix.util.Include("definitions/sh_killjobs_humans.lua")
 ix.util.Include("definitions/sh_killjobs_mutants.lua")
 ix.util.Include("definitions/sh_specialjobs.lua")
+ix.util.Include("definitions/sh_fieldjobs.lua")
+ix.util.Include("sv_fieldtasks.lua")
+ix.util.Include("sv_fielddefence.lua")
+ix.util.Include("cl_fieldtasks.lua")
 ix.util.Include("sh_listeners.lua")
 ix.util.Include("cl_plugin.lua")
 
@@ -63,6 +67,7 @@ ix.command.Add("CharResetJobs", {
 		
 			for _, job in pairs(target:GetJobs()) do
 				ix.taskRewards.RemoveJobOffer(target, job)
+				if job.fieldTask then ix.jobs.field.Cleanup(target, job) end
 			end
 			target:SetJobs({})
 			client:Notify("Reset the jobs of "..character:GetName())

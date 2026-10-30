@@ -19,6 +19,7 @@ local function CalculateCredit(entity, attacker, trigger)
 end
 
 function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
+	ix.jobs.field.DefenceKilled(entity)
   local class = string.lower(entity:GetClass())
   if attacker:IsPlayer() then
 

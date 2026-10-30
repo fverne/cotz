@@ -108,11 +108,22 @@ function ix.jobs.getJobFromTier(tier)
 end
 
 function ix.jobs.getJobFromCategory(categories)
-  if (!istable(categories)) then categories = {categories} end
+	if not istable(categories) then categories = {categories} end
+	local pools = {}
+	for _, category in ipairs(categories) do
+		local available = {}
+		for _, id in ipairs(ix.jobs.jobsbycategory[category] or {}) do
+			local definition = ix.jobs.list[id]
+			if definition and (not definition.fieldType or ix.jobs.field.IsAvailable(definition)) then
+				available[#available + 1] = id
+			end
+		end
+		if #available > 0 then pools[#pools + 1] = available end
+	end
+	if #pools == 0 then return end
+	local pool = pools[math.random(#pools)]
 
-  local randomcat = categories[ math.random( #categories ) ]
-
-  return ix.jobs.jobsbycategory[randomcat][ math.random( #ix.jobs.jobsbycategory[randomcat] ) ]
+	return pool[math.random(#pool)]
 end
 
 local playerMeta = FindMetaTable("Player")
@@ -133,26 +144,25 @@ end)
 if SERVER then
   local playerMeta = FindMetaTable("Player")
 
-  -- Remove job with no reward given
-  function playerMeta:ixJobRemove(npcidentifier)
-    if self:GetCharacter():GetData("lastTaskAbandon", 0) < os.time() then
-      curJobs = self:GetCharacter():GetJobs()
-
-      local identifier = curJobs[npcidentifier].identifier
-      if(ix.jobs.list[identifier].OnTaskAbandon)then
-        ix.jobs.list[identifier].OnTaskAbandon(self)
-      end
-
-      ix.taskRewards.RemoveJobOffer(self:GetCharacter(), curJobs[npcidentifier])
-      curJobs[npcidentifier] = nil
-  
-      self:GetCharacter():SetJobs(curJobs)
-
-      self:GetCharacter():SetData("lastTaskAbandon", os.time() + ix.config.Get("taskAbandonCooldown", 3600))
-    else
-      self:Notify("You can't abandon another task so soon!")
-    end
-  end
+	function playerMeta:ixJobRemove(npcidentifier)
+		local character = self:GetCharacter()
+		if not character then return end
+		if character:GetData("lastTaskAbandon", 0) >= os.time() then
+			self:Notify("You can't abandon another task so soon!")
+			return
+		end
+		local jobs = character:GetJobs()
+		local job = jobs[npcidentifier]
+		if not job then return end
+		local definition = ix.jobs.list[job.identifier]
+		if definition.OnTaskAbandon then definition.OnTaskAbandon(self) end
+		ix.taskRewards.RemoveJobOffer(character, job)
+		if job.fieldTask then ix.jobs.field.Cleanup(character, job) end
+		jobs[npcidentifier] = nil
+		character:SetJobs(jobs)
+		character:SetData("lastTaskAbandon", os.time() + ix.config.Get("taskAbandonCooldown", 3600))
+		character:Save()
+	end
 
   function playerMeta:ixJobEvaluate(trigger)
     --print("Evaluating quest with ID: "..trigger)
@@ -160,7 +170,7 @@ if SERVER then
     --Check if player has quest
     local curJobs = self:GetCharacter():GetJobs()
     for k,v in pairs(curJobs) do
-      if v.listenTrigger == trigger or v.identifier == trigger then
+      if not v.fieldTask and (v.listenTrigger == trigger or v.identifier == trigger) then
 
         --Progress quest for player OR mark as completed
         local curProgress = curJobs[k].progress
@@ -186,9 +196,11 @@ if SERVER then
 		local jobs = character:GetJobs()
 		local job = jobs[npcidentifier]
 		if not job or not job.isCompleted then return end
+		if job.fieldTask and not ix.jobs.field.CanComplete(character, job) then return end
 		local claimed = character:GetData("jobClaimsPaid", {})
 		if claimed[npcidentifier] and claimed[npcidentifier] >= job.progressionClaim then return end
 		claimed[npcidentifier] = job.progressionClaim
+		if job.fieldTask then ix.jobs.field.Cleanup(character, job) end
 		character:SetData("jobClaimsPaid", claimed)
 		jobs[npcidentifier] = nil
 		character:SetJobs(jobs)
@@ -226,6 +238,10 @@ if SERVER then
 		job.progress = 0
 		job.isCompleted = false
 		if not ix.taskRewards.PrepareJob(character, npcidentifier, job) then return false end
+		if definition.fieldType and not ix.jobs.field.Assign(character, npcidentifier, job) then
+			self:Notify("No usable field task locations are available for this assignment.")
+			return false
+		end
 		jobs[npcidentifier] = job
 		character:SetJobs(jobs)
 		ix.taskRewards.SelectOffer(character, npcidentifier, job.rewardKey, job.supplyChoice or 1)

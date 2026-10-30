@@ -112,3 +112,166 @@ the greatest saved completion serial. Its earlier trader attribution cannot be r
 Existing earned bonus offers retain their original trader and value. New progress is
 stored per trader under `taskCompletionBonus.traders`; `BonusStatus` calls the displayed
 amount "Bonus value earned" rather than "Banked" to distinguish it from spendable cash.
+
+## Repeatable field assignments
+
+Jobsystem owns equipment recovery, sensor deployment/retrieval, radio triangulation,
+dead-drop circuits and field research defence.
+Their runtime, cargo items, world entity and PDA controls all live in this plugin.
+No new map spawn-point definitions or per-assignment staff setup are required.
+
+- **Recovery:** search around an approximate marker, collect a 2x2, 2.5 kg case, and return it.
+- **Sensor:** choose a deployment position within 512 units of the assigned survey point,
+  using the PDA's Field work menu. The sensor is placed in front of the player after a
+  ground/clearance check. Leave at least 512 units from the deployed sensor and allow
+  120 seconds of recording, then collect the 1x2, 0.5 kg recorder and return it.
+  Recording continues while the character is offline; departure must have been observed
+  while playing, and is saved separately.
+- **Triangulation:** use the PDA to take three readings, each at least 512 units from
+  previous readings and at least 15 degrees different in bearing to the source.
+  Bearings use the schema compass convention (north along +X, east along -Y).
+  The final reading reveals the site; collect the 2x1, 0.75 kg transmitter and return it.
+- **Dead-drop circuit:** collect a 2x2, 5 kg sealed parcel at one existing point and
+  deliver it to another through the PDA's Deliver parcel action. Pickup and delivery
+  must be at least 2,048 units apart. Pickup alone earns nothing; delivery consumes the
+  matching parcel and saves completion. Return to the contact to receive payment.
+- **Research defence:** start the sampler at the assigned site through the PDA. Stay
+  within 768 units, clear the waves and complete 90 seconds of defended recording, then
+  collect the 1x2, 0.5 kg results recorder and return it. The sampler has 250 health.
+  Visible encounter mutants within 160 units disrupt it for 8 damage per mutant per
+  second. Its own attackers can also damage it directly; unrelated players cannot.
+  Bundled mutant AI targets defenders, so proximity disruption supplies the equipment
+  threat without changing the NPC framework. Easy jobs have two small waves; medium
+  and hard jobs have three waves with tougher configured compositions.
+
+Open **Field work** on an accepted job in the PDA task list for directions, readings
+or deployment, research startup, and parcel delivery. Markers last 30 seconds; Show
+assignment displays them again. A recovery
+marker gives a search area rather than the exact case position. Wrong-map status reports
+the target map. Easy/medium/hard definitions target Swamps/Waystation/Pripyat respectively,
+following the existing field jobs' regional difficulty convention. Target maps, categories,
+reference payments and reputation are in `definitions/sh_fieldjobs.lua`. Existing reputation
+gates, supply choices, completion bonuses and completion/restock handling still apply.
+The configured reference cash is processed by the ordinary reward calculation; it is not
+the final cash payout displayed in the preview.
+
+### Reusing and combining point pools
+
+Edit `libs/sh_fieldtasks.lua`. `field.sources` maps source names to existing plugin/table
+pairs. Each supported table is keyed by map, with the position at `row[1]`:
+
+| Source | Existing data |
+| --- | --- |
+| `stash` | `hidestashspawner.stashspawnpoints` |
+| `event` | `eventcontroller.eventpoints` |
+| `anomaly` | `anomalycontroller.anomalypoints` |
+| `radiation` | `radiationcontroller.radiationpoints` |
+
+`field.pools` provides composable aliases: `packages = {"stash"}`, `rf = {"event"}`,
+and `gas = {"anomaly", "radiation"}`. Each `field.settings` task has its own `sources`
+list. For example, change recovery to use both existing survey families:
+
+```lua
+recovery = {sources = {"gas", "rf"}, cargo = "job_recovery_case", searchRadius = 384},
+```
+
+Lists can combine raw sources and pool aliases. Collection deduplicates positions,
+handles missing providers/maps and cyclic aliases, and never changes source tables.
+All five tasks may share the same pools. Empty field pools are excluded from new
+offers, including cached previews while those providers are unavailable. Restoring the
+provider restores that preview without rerolling it. Existing non-field offers remain
+eligible. A currently disabled provider may still have loaded data, so remove its source
+from the task configuration if those points should not be used.
+
+Dead drops configure pickup `sources` and `destinationSources` separately, plus
+`minRouteDistance`. For example, `sources = {"packages"}` and
+`destinationSources = {"rf", "gas"}` make a stash-to-survey circuit. Routes without
+a sufficiently separated pair are excluded from offers. Both endpoints are saved when
+the task is accepted. Losing the parcel reopens pickup on that same route. Completed
+delivery remains complete after the parcel is consumed or the character reconnects.
+
+Research defence configures sampler `sources` and `attackSources` separately. Both
+default to `rf`, reusing event points. A site needs at least one approach 512–4,096
+units away and within 256 vertical units. Up to eight approaches are saved; models
+and NPC hulls are checked for ground/clearance at runtime. Attack points occupied by
+nearby players are skipped. Existing point data cannot guarantee navigable NPC paths;
+verify representative sites in-game, especially buildings and underground areas.
+Wave class lists and counts, health, recording duration, disruption, radius and retry
+parameters live in `field.settings.defence`. Wave compositions are rolled once on
+acceptance and saved. An unavailable population manager or missing approaches hides
+these offers. The default global limits are three simultaneous defence encounters and
+two task NPC spawn attempts per one-second update, across all defenders.
+
+Task attackers check the installed event controller's `CanSpawnMutant(position, true)`
+and register immediately through `RegisterMutant`, so live and queued global/regional
+caps remain authoritative. The generic spawn queue does not return owned NPC references;
+these bounded encounters create and register their own NPCs to track kills and cleanup.
+The existing jobsystem kill listener forwards deaths without changing dispatch order or
+ordinary kill credit. Removing an NPC without a death event does not clear its wave;
+the missing attacker is replaced subject to the same spawn/cap checks.
+
+Defence recording advances only while the assigned character is alive and near the
+sampler. Leaving, dying, changing characters, disconnecting or restarting the server
+removes ephemeral attackers and interrupts the current wave. On return, completed waves,
+recording time and sampler health are retained; only the unfinished wave restarts.
+Unrelated nearby players can help fight but cannot substitute for the assigned defender
+or collect the results. Destroying the sampler or exceeding the 300-second active-attempt
+limit fails the attempt. After a saved 30-second delay, explicitly restarting resets the
+attempt at the same site with the same saved wave composition. Failures pay nothing.
+Abandonment, reset and completion remove the encounter's remaining owned NPCs.
+Removing the population manager pauses active research. Unloading jobsystem removes
+its world objects and attackers and disables retained field-action callbacks; saved
+assignments and carried cargo remain available when the plugin is loaded again.
+
+Assignments save their selected map, position, search area, timing, reading requirements,
+readings and stage inside the existing character `jobs` field. Changing pools affects
+future assignments; it does not reroll accepted work. There are no new persistence keys
+requiring a world migration or reset. Remote-map point clearance can only be checked
+after travel. Objects use a model-sized ground trace with small nearby placement offsets;
+obstructed sites retry and notify the owner. Existing source points still need to be
+reachable in the deployed map; source coordinates alone cannot prove accessibility.
+
+### Ownership and lifecycle
+
+The server checks active assignment, character identity, map, distance, life/restriction
+state and action cooldowns. World objects are ephemeral `ix_job_field_object` entities,
+created only when the assigned living character is within 1,024 units. Sensors appear
+after deployment; transmitters appear after the required readings. Objects despawn beyond
+1,536 units or after character departure, death, abandonment, completion or reset, then
+reappear at their saved site when appropriate. They are excluded from Helix persistence.
+Updates run once a second and iterate active players/jobs rather than scanning world entities.
+
+Only the assigned character can collect an object. Cargo stores its character and unique
+job claim, cannot be dropped or transferred to another inventory, and occupies the main
+inventory. Pickup first creates the item asynchronously, rechecks the active character,
+claim, distance and entity in the callback, then transfers the existing item synchronously.
+A pending lock prevents repeated collection; failed transfers remove only the new item,
+leaving the objective available. Timed-out requests unlock after 30 seconds; late callbacks
+are discarded by request identity, so retries cannot grant duplicate cargo. Requests are
+also retired when their world object leaves the active set. This avoids treating `Inventory:Add(string)`'s initial
+slot reservation as successful item delivery. The cargo's installed `ITEM:CanTransfer`
+callback also enforces its binding because COTZ's existing `corechanges` hook can return
+`true` and stop subsequent plugin hooks. No competing hook registrations were converted.
+
+Completion checks for the matching cargo before paying, consumes it, and uses the existing
+claim/reward path. Inventory state repairs the carrying stage after an interrupted save.
+Lost cargo reopens recovery at the same site. Abandoning or resetting removes cargo and
+invalidates pending pickup callbacks. SQL failures remain visible through Helix; this
+plugin does not wrap or replace the framework database layer.
+
+Regression checks:
+
+```bash
+luatex --luaonly tests/field_tasks_spec.lua
+luatex --luaonly tests/task_rewards_spec.lua
+luatex --luaonly tests/population_performance_spec.lua
+```
+
+The standalone checks mock Garry's Mod and do not establish multiplayer correctness.
+Before deployment, verify all five tasks with two players, owner-only Use, full/overweight
+inventories, PDA layout and compass bearings, obstruction/ground clearance at representative
+source points, map travel, character switches, disconnect/restart recovery, abandonment,
+admin reset, and single payment with the ordinary supplies/bonus/restock flow.
+For circuits, verify both endpoints, missing cargo, repeated delivery and post-delivery
+reconnects. For defence, verify navigation, population saturation, sampler disruption,
+group assistance, failure/retry, interruption during each wave, and attacker cleanup.

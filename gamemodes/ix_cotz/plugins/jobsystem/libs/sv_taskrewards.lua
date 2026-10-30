@@ -288,6 +288,7 @@ function ix.taskRewards.PreviewJob(character, npc, difficulty, categories)
 	local preview = previews[npc][difficulty]
 	if preview then
 		local definition = ix.jobs.list[preview.identifier]
+		if definition.fieldType and not ix.jobs.field.IsAvailable(definition) then return end
 		local budget = ix.taskRewards.SupplyBudget(definition, preview.numberRec)
 		local offers = offersFor(character)
 		local offer = offers[preview.rewardKey]
@@ -320,6 +321,7 @@ function ix.taskRewards.PreviewJob(character, npc, difficulty, categories)
 	end
 	local id = ix.jobs.getJobFromCategory(categories)
 	local definition = ix.jobs.list[id]
+	if not definition then return end
 	local count = definition.numberRec
 	if type(count) == "table" then count = math.random(count[1], count[2]) end
 	preview = {identifier = id, numberRec = count, difficulty = difficulty}

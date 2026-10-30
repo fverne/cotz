@@ -991,4 +991,23 @@ check(not includes(api.SupplyCatalogue(cleaningOwner, "'Cleaner'"), "hidestash_1
 	"Cleaner repeatable supplies exclude stash notes")
 ix.progression.definitions.cleaningSupplyTest = nil
 
+local fieldViewer = actor()
+local fieldAvailable = true
+ix.jobs.field = {IsAvailable = function() return fieldAvailable end}
+ix.jobs.list.fieldPreviewTest = {name = "Recover equipment", desc = "Recover equipment", fieldType = "recovery",
+	numberRec = 1, tier = 1, reward = {}, moneyReward = 3000, repReward = 25}
+ix.jobs.jobsbycategory.fieldPreviewTest = {"fieldPreviewTest"}
+local fieldPreview = api.PreviewJob(fieldViewer, "'Old Timer'", "easy", {"fieldPreviewTest"})
+check(fieldPreview and fieldPreview.rewardKey and #fieldPreview.rewardChoices > 0,
+	"field objectives receive ordinary saved cash and supply previews")
+fieldAvailable = false
+check(not api.PreviewJob(fieldViewer, "'Old Timer'", "easy", {"fieldPreviewTest"}),
+	"cached field previews are hidden while point sources are unavailable")
+check(not api.PreviewJob(actor(), "'Old Timer'", "easy", {"fieldPreviewTest"}),
+	"new previews do not select unavailable field objectives")
+fieldAvailable = true
+local restoredField = api.PreviewJob(fieldViewer, "'Old Timer'", "easy", {"fieldPreviewTest"})
+check(restoredField.rewardKey == fieldPreview.rewardKey and restoredField.moneyReward == fieldPreview.moneyReward,
+	"restoring point sources preserves saved preview identity and payment")
+
 print("PASS: " .. checks .. " task reward checks")
