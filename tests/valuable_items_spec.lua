@@ -72,6 +72,7 @@ ix.util.Include = function(path)
 end
 local itemRoot = "gamemodes/ix_cotz/schema/items/"
 ix.item.Register("base_valuable", nil, true, itemRoot .. "base/sh_valuable.lua")
+ix.item.Register("base_valuables_test", nil, true, itemRoot .. "base/sh_valuables_test.lua")
 local capacities = {value_pcpart_ram = 5, value_screws = 4, value_pcpart_cpu = 6}
 ix.randomitems = {tables = {}, tableweights = {}}
 local itemIDs = {
@@ -127,10 +128,10 @@ local itemIDs = {
 	"value_archive_cassette",
 }
 for _, id in ipairs(itemIDs) do
-	local path = itemRoot .. "valuable/sh_" .. id .. ".lua"
-	ix.item.Register(id, "base_valuable", false, path)
+	local path = itemRoot .. "valuables_test/sh_" .. id .. ".lua"
+	ix.item.Register(id, "base_valuables_test", false, path)
 	local item = ix.item.list[id]
-	check(item.base == "base_valuable", "all new items use the existing valuable base")
+	check(item.base == "base_valuables_test", "test items use the forwarding valuable base")
 	check(item.price > 0 and item.width >= 1 and item.height >= 1, "positive concrete tuning")
 	check(#item.longdesc > 200 and #item.description > 10, "both descriptions are supplied")
 	check(item.model:match("%.mdl$") and item.exRender == true, "model and extended icon are configured")

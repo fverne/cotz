@@ -65,6 +65,13 @@ select `base_newammo`, `base_newbags`, and `base_newweapons`. Item files retain 
 base relationships. Entity and weapon framework paths likewise remain stable. New organizational
 folders inside `items/` cannot be assumed to load recursively.
 
+`schema/items/valuables_test/` contains the 378 implemented items listed in the combined valuables
+and supply/job workbook. The `recovery_` and `supply_` filename segments have been removed,
+which also changes their filename-derived item IDs. The kerosene container uses
+`value_kerosene_container` to avoid the existing `value_kerosene` ID. Its `base_valuables_test` base
+inherits `base_valuable`, so Helix discovers the folder normally and retains the shared valuable
+mechanics. The workbook's existing-item comparator tab is reference data, not part of this group.
+
 ## Archive
 
 - `archive/plugins/`: the former `!unused plugins/` tree (90 files).
