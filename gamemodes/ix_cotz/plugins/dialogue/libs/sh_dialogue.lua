@@ -126,7 +126,6 @@ local function configureQuestions(dialogue)
 	if tree.BackTopic then
 		options[#options + 1] = "BackTopic"
 	end
-	options[#options + 1] = "GOODBYE"
 
 	dialogue.addTopic("QuestionsTopic", {
 		statement = "Can I ask you something?",
