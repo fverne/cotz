@@ -1,3 +1,79 @@
+# Job System
+
+## Editing definitions
+
+Restart after editing shared definitions. Job IDs, category IDs, cargo item IDs, network names and
+saved character keys remain stable. Existing accepted field jobs keep their saved destinations,
+recording parameters, selected rewards and defence wave rolls; definition edits tune new assignments.
+No save reset or first-time setup is required.
+
+| Change | Edit |
+| --- | --- |
+| Point providers/pools, sources per job, search radius, sensor timing, reading spacing, routes, defence waves/health/duration | `definitions/sh_fieldsettings.lua` |
+| Generic field-job names/descriptions, categories, difficulty maps, reference money and reputation | `definitions/sh_fieldjobs.lua` |
+| Reward cash rates, supply budgets/limits, bonus interval, reputation gates and fallback contact profiles | `definitions/sh_rewardsettings.lua` |
+| NPC offer lifetime/count, request distance/rate, kill-credit radius and default abandon cooldown | `definitions/sh_settings.lua` |
+| NPC classes/patterns and species/group kill triggers | `definitions/sh_killcredit.lua` |
+| Item hand-ins and kill-job counts, categories, reputation and reward budgets | Existing `definitions/sh_itemjobs_*.lua` and `sh_killjobs_*.lua` |
+| Legacy survey/package tool item, initial tool data, completion keys and rewards | `definitions/sh_specialjobs.lua` |
+| Cargo model, inventory size and weight | `items/jobcargo/sh_job_*.lua` |
+| Town contact job specialty, maps, payouts, supplies and finite objectives | `townnpcs/definitions/sh_<contact>.lua` |
+
+Ordinary definitions call `ix.jobs.register({...}, "stable-id")` directly. Legacy tool jobs call
+`ix.jobs.RegisterToolJob`; their item configuration is data and their shared callbacks live in
+`libs/sh_tooljobs.lua`. Reward profiles here are fallbacks; town contacts install their own supplies
+from their contact definitions. `moneyReward` is reference cash processed by reward calculations,
+not necessarily the final preview payment. Preserve field names and units when tuning.
+
+Existing map points are the default: recovery uses stash/event points, sensors anomaly/radiation
+points, triangulation event/stash points, dead drops stash pickup and stash/event destinations, and
+research defence event points. Optional authored town points are added to these sources. No manual
+point placement is needed when existing providers contain suitable points for the destination map.
+
+## Runtime ownership and loading
+
+Helix loads `libs/sh_00_definitions.lua` before the other libraries. It explicitly includes configuration
+using full gamemode paths so definitions are available to the shared field and reward libraries.
+`sh_plugin.lua` registers character storage, loads job definitions and explicitly includes realm files.
+The dialogue plugin still loads `integrations/sh_dialogue.lua` early to register reward topics.
+
+- `libs/sh_jobs.lua`: registry, category/tier selection and shared formatting.
+- `sv_jobs.lua`: character acceptance, progress, completion and abandonment.
+- `sv_npcjobs.lua`: persistent NPC offer lists, legacy network requests and the admin reset command.
+- `sv_listeners.lua`: server kill/chat triggers using the editable kill-credit rules.
+- `libs/sh_fieldtasks.lua`: shared point collection, route selection and field validation.
+- `sv_fieldplacement.lua` and `sv_fieldassignment.lua`: placement hulls and saved assignment creation.
+- `sv_fieldactions.lua`: PDA requests, readings, deployment, delivery and status markers.
+- `sv_fieldtasks.lua`: live cargo, asynchronous pickup, periodic updates and cleanup.
+- `sv_fielddefence.lua`: research encounters, owned attackers and wave progression.
+- `sv_cargo.lua`: item transfer and world-object protection hooks.
+- `libs/sh_taskrewards.lua` and `libs/sv_taskrewards.lua`: reward calculations, saved offers and claims.
+- `cl_plugin.lua` and `cl_fieldtasks.lua`: Tasks menu and field markers.
+
+Public legacy job/player API names remain available for existing dialogue and item callers. The
+`ix_JobTrigger` callback retains its original `hook.Add` dispatch stage; it is server-only and is not
+also registered as a plugin method. The existing reward-claim continuation hook retains its stage too.
+NPC offer requests validate character, contact identity, access, distance and server rate limits. The
+legacy Computer menu may still send categories/count, but these are taken from `settings.legacyOffers`
+on the server. Other contacts use the current authoritative task-preview flow.
+
+## Regression checks
+
+From the addon root:
+
+```sh
+luatex --luaonly tests/jobsystem_spec.lua
+luatex --luaonly tests/jobs_loading_spec.lua
+luatex --luaonly tests/field_tasks_spec.lua
+luatex --luaonly tests/task_rewards_spec.lua
+luatex --luaonly tests/jobs_menu_spec.lua
+luatex --luaonly tests/townnpcs_spec.lua
+```
+
+Standalone mocks do not establish GMod runtime correctness. In multiplayer, verify acceptance,
+pickup, abandon/reaccept, full inventory, rewards, reconnect/map travel and server restart, plus
+representative defence sites and legacy Computer/tool jobs. Do not reset saved data for these checks.
+
 The [town NPC extension](../townnpcs/README.md) generates per-contact work categories
 and finite field commissions from editable definitions. Server acceptance verifies contact ownership,
 reputation and active progression. Finite commissions pay only their progression reward and do not
@@ -170,7 +246,7 @@ the final cash payout displayed in the preview.
 
 ### Reusing and combining point pools
 
-Edit `libs/sh_fieldtasks.lua`. `field.sources` maps source names to existing plugin/table
+Edit `definitions/sh_fieldsettings.lua`. `field.sources` maps source names to existing plugin/table
 pairs. Each supported table is keyed by map, with the position at `row[1]`:
 
 | Source | Existing data |

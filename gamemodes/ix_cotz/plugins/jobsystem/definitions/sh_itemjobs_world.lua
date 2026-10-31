@@ -1,1967 +1,1469 @@
---[[
-  --TestJob
-  local tempJob = {}
-
-  tempJob.name = "Hand over Say sneed %d times."                  --Name that will be shown in dialogue when selecting tasks
-  tempJob.desc = "I need you to sneed %d times for me." --Description of task, will be shown to the player when deciding to take quest or not
-  tempJob.icon = "propic/event/loot"          --Icon, unused?
-  tempJob.tier = 1                                      --Tier, unused?
-  tempJob.listenTrigger = "chatSayTest"                 --trigger word to listen for in the ix_JobTrigger hook, see sh_listeners
-  tempJob.numberRec = 5                                 --integer amount of times the listenTrigger must be run through the ix_JobTrigger hook
-  tempJob.reward = {{"tokarev"}}                     --table of item ids for rewarding the player with
-  tempJob.rewardCount = 1                               --how many items should the player get
-  tempJob.repReward = 80                                --how much reputation should be awarded for completion
-  tempJob.categories = {"mutantkilleasy"}               --table of category identifiers, used for when npc gets tasks
-  tempJob.moneyReward = {2000,4000} OR 3000             --for adding money to the player, can technically be done through itemreward as well
-
-  ix.jobs.register(tempJob, "TestJob")                  --If item delivery quest, the final part of the quest identifier should read "_<uniqueid>" for proper operation
-
-  tempJob.requiredItem = "part_boar" --special member for items
-
-]]--
-
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d SSD."
-tempJob.desc = "%d SSD."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_pcpart_ssd"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 9
-tempJob.moneyReward = {800, 1800}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_pcpart_ssd")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d SSDs."
-tempJob.desc = "%d SSDs."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_pcpart_ssd"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 21
-tempJob.moneyReward = {1600, 2800}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_pcpart_ssd")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d HDD."
-tempJob.desc = "%d HDD."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_pcpart_hdd"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 6
-tempJob.moneyReward = {600, 1200}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_pcpart_hdd")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d HDDs."
-tempJob.desc = "%d HDDs."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_pcpart_hdd"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 17
-tempJob.moneyReward = {800, 1400}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_pcpart_hdd")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d PSU."
-tempJob.desc = "%d PSU."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_pcpart_psu"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 10
-tempJob.moneyReward = {400, 900}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_pcpart_psu")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d PSUs."
-tempJob.desc = "%d PSUs."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_pcpart_psu"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 23
-tempJob.moneyReward = {900, 1400}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_pcpart_psu")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d LCD Panel."
-tempJob.desc = "%d LCD Panel."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_pcpart_lcd"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 10
-tempJob.moneyReward = {900, 1100}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_pcpart_lcd")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d LCD Panels."
-tempJob.desc = "%d LCD Panels."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_pcpart_lcd"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 21
-tempJob.moneyReward = {1300, 1400}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_pcpart_lcd")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d GPU."
-tempJob.desc = "%d GPU."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_pcpart_gpu"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 21
-tempJob.moneyReward = {2300, 2400}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_pcpart_gpu")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d GPUs."
-tempJob.desc = "%d GPUs."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_pcpart_gpu"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 45
-tempJob.moneyReward = {5300, 6400}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_pcpart_gpu")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d FPGAs."
-tempJob.desc = "%d FPGAs."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_pcpart_fpga"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 12
-tempJob.moneyReward = {1900, 2100}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_pcpart_fpga")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d FPGAs."
-tempJob.desc = "%d FPGAs."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_pcpart_fpga"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardcount = 1
-tempJob.repReward = 29
-tempJob.moneyReward = {4900, 5100}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_pcpart_fpga")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Powerbank."
-tempJob.desc = "%d Powerbank."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_powerbank"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 10
-tempJob.moneyReward = {500, 800}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_powerbank")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Powerbanks."
-tempJob.desc = "%d Powerbanks."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_powerbank"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 22
-tempJob.moneyReward = {1500, 1800}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_powerbank")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Wireless Transmitter Module."
-tempJob.desc = "%d Wireless Transmitter Module."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_wirelesstrans"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 30
-tempJob.moneyReward = {2000, 3500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_wirelesstrans")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Wireless Transmitter Modules."
-tempJob.desc = "%d Wireless Transmitter Modules."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_wirelesstrans"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 45
-tempJob.moneyReward = {5000, 8500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_wirelesstrans")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Capacitors."
-tempJob.desc = "%d Capacitors."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_capacitors"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 5
-tempJob.moneyReward = {250, 750}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_capacitors")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Capacitors."
-tempJob.desc = "%d Capacitors."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_capacitors"
-tempJob.numberRec = 10
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 5
-tempJob.moneyReward = {2000, 2300}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_capacitors")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Electric Tape."
-tempJob.desc = "%d Electric Tape."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_tape_electric"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 1
-tempJob.moneyReward = {250, 750}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_tape_electric")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Electric Tapes."
-tempJob.desc = "%d Electric Tapes."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_tape_electric"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 6
-tempJob.moneyReward = {500, 1000}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_tape_electric")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Electrical Wire."
-tempJob.desc = "%d Electrical Wire."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_wire_light"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 1
-tempJob.moneyReward = {350, 460}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_wire_light")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Electrical Wires."
-tempJob.desc = "%d Electrical Wires."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_wire_light"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 3
-tempJob.moneyReward = {750, 960}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_wire_light")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d 1.5 Volt Batteries."
-tempJob.desc = "%d 1.5 Volt Batteries."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_battery"
-tempJob.numberRec = 3
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 2
-tempJob.moneyReward = {400, 600}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_battery")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d 1.5 Volt Batteries."
-tempJob.desc = "%d 1.5 Volt Batteries."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_battery"
-tempJob.numberRec = 20
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 12
-tempJob.moneyReward = {2000, 3500}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_battery")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d 9 Volt Batteries."
-tempJob.desc = "%d 9 Volt Batteries."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_9vbattery"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 3
-tempJob.moneyReward = {500, 700}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_9vbattery")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d 9 Volt Batteries."
-tempJob.desc = "%d 9 Volt Batteries."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_9vbattery"
-tempJob.numberRec = 4
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 8
-tempJob.moneyReward = {960, 1200}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_9vbattery")
-
-tempJob = nil
-
------------------------------------------------------
------------------------------------------------------
--------- ITEM RETRIEVAL - GUNS/REPAIRING  -----------
------------------------------------------------------
------------------------------------------------------
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Household Glue."
-tempJob.desc = "%d Household Glue."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_glue_1"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 2
-tempJob.moneyReward = {330, 480}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_glue_1")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Household Glue."
-tempJob.desc = "%d Household Glue."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_glue_1"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 5
-tempJob.moneyReward = {500, 900}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_glue_1")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Superglue."
-tempJob.desc = "%d Superglue."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_glue_2"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 3
-tempJob.moneyReward = {350, 600}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_glue_2")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Superglue."
-tempJob.desc = "%d Superglue."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_glue_2"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 12
-tempJob.moneyReward = {500, 960}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_glue_2")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Texture Glue."
-tempJob.desc = "%d Texture Glue."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_glue_3"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 5
-tempJob.moneyReward = {360, 750}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_glue_3")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Texture Glue."
-tempJob.desc = "%d Texture Glue."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_glue_3"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 9
-tempJob.moneyReward = {400, 780}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_glue_3")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Universal Glue."
-tempJob.desc = "%d Universal Glue."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_glue_4"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 7
-tempJob.moneyReward = {300, 450}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_glue_4")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Universal Glue."
-tempJob.desc = "%d Universal Glue."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_glue_4"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardcount = 1
-tempJob.repReward = 12
-tempJob.moneyReward = {300, 450}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_glue_4")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Military-Grade Weapon Cleaner."
-tempJob.desc = "%d Military-Grade Weapon Cleaner."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_guncleaner"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 10
-tempJob.moneyReward = {300, 450}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_guncleaner")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Military-Grade Weapon Cleaner."
-tempJob.desc = "%d Military-Grade Weapon Cleaner."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_guncleaner"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardcount = 1
-tempJob.repReward = 21
-tempJob.moneyReward = {550, 870}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_guncleaner")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Civilian-Grade Gun Oil."
-tempJob.desc = "%d Civilian-Grade Gun Oil."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_gunoil"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 6
-tempJob.moneyReward = {500, 850}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_gunoil")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Civilian-Grade Gun Oil."
-tempJob.desc = "%d Civilian-Grade Gun Oil."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_gunoil"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 13
-tempJob.moneyReward = {500, 850}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_gunoil")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Weapon Lubricant Spray."
-tempJob.desc = "%d Weapon Lubricant Spray."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_gunspray"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 8
-tempJob.moneyReward = {500, 850}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_gunspray")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Weapon Lubricant Spray."
-tempJob.desc = "%d Weapon Lubricant Spray."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_gunspray"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardcount = 1
-tempJob.repReward = 17
-tempJob.moneyReward = {500, 850}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_gunspray")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Firearm Lubricant."
-tempJob.desc = "%d Firearm Lubricant."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_lubricant"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 5
-tempJob.moneyReward = {500, 850}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_lubricant")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Firearm Lubricant."
-tempJob.desc = "%d Firearm Lubricant."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_lubricant"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 11
-tempJob.moneyReward = {300, 450}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_lubricant")
-
-tempJob = nil
-
------------------------------------------------------
------------------------------------------------------
--------- ITEM RETRIEVAL - MECHANICAL/TOWN -----------
------------------------------------------------------
------------------------------------------------------
-
--- Mixed kits
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Bolts."
-tempJob.desc = "%d Bolts."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_bolts"
-tempJob.numberRec = 4
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 2
-tempJob.moneyReward = {100, 150}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_bolts")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Bolts."
-tempJob.desc = "%d Bolts."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_bolts"
-tempJob.numberRec = 20
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardcount = 1
-tempJob.repReward = 12
-tempJob.moneyReward = {500, 700}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_bolts")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Nuts."
-tempJob.desc = "%d Nuts."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_nuts"
-tempJob.numberRec = 4
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 2
-tempJob.moneyReward = {120, 170}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_nuts")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Nuts."
-tempJob.desc = "%d Nuts."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_nuts"
-tempJob.numberRec = 20
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 12
-tempJob.moneyReward = {600, 650}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_nuts")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Propane Tank."
-tempJob.desc = "%d Propane Tank."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_propanetank"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 8
-tempJob.moneyReward = {800, 1000}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_propanetank")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Propane Tanks."
-tempJob.desc = "%d Propane Tanks."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_propanetank"
-tempJob.numberRec = 4
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardcount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {1000, 1200}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_propanetank")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Gasoline Can."
-tempJob.desc = "%d Gasoline Can."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_gasoline"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {600, 900}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_gasoline")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Gasoline Cans."
-tempJob.desc = "%d Gasoline Cans."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_gasoline"
-tempJob.numberRec = 4
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardcount = 1
-tempJob.repReward = 25
-tempJob.moneyReward = {1500, 1600}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_gasoline")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Kerosene Can."
-tempJob.desc = "%d Kerosene Can."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_kerosene"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {1200, 2500}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_kerosene")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Kerosene Cans."
-tempJob.desc = "%d Kerosene Cans."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_kerosene"
-tempJob.numberRec = 4
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {2000, 2500}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_kerosene")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Diesel Motor Conditioner."
-tempJob.desc = "%d Diesel Motor Conditioner."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_motorclean"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 8
-tempJob.moneyReward = {600, 880}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_motorclean")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Diesel Motor Conditioners."
-tempJob.desc = "%d Diesel Motor Conditioners."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_motorclean"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardcount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {1000, 1350}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_motorclean")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Spark Plugs."
-tempJob.desc = "%d Spark Plugs."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_sparkplug"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 3
-tempJob.moneyReward = {200, 400}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_sparkplug")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Spark Plugs."
-tempJob.desc = "%d Spark Plugs."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_sparkplug"
-tempJob.numberRec = 5
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardcount = 1
-tempJob.repReward = 9
-tempJob.moneyReward = {300, 600}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_sparkplug")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Light Bulb."
-tempJob.desc = "%d Light Bulb."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_lightbulb"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 2
-tempJob.moneyReward = {150, 200}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_lightbulb")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Light Bulbs."
-tempJob.desc = "%d Light Bulbs."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_lightbulb"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardcount = 1
-tempJob.repReward = 5
-tempJob.moneyReward = {150, 400}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_lightbulb")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Car Battery."
-tempJob.desc = "%d Car Battery."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_carbattery"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {1500, 2200}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_carbattery")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Car Batteries."
-tempJob.desc = "%d Car Batteries."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_carbattery"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {1900, 2400}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_carbattery")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Duct Tape."
-tempJob.desc = "%d Duct Tape."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_tape_duct"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 1
-tempJob.moneyReward = {300, 450}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_tape_duct")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Duct Tapes."
-tempJob.desc = "%d Duct Tapes."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_tape_duct"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 3
-tempJob.moneyReward = {450, 700}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_tape_duct")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Military-Grade Adhesive Tape."
-tempJob.desc = "%d Military-Grade Adhesive Tape."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_tape_heavy"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 7
-tempJob.moneyReward = {500, 800}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_tape_heavy")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Military-Grade Adhesive Tape."
-tempJob.desc = "%d Military-Grade Adhesive Tape."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_tape_heavy"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 12
-tempJob.moneyReward = {700, 950}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_tape_heavy")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Diesel Engine."
-tempJob.desc = "%d Diesel Engine."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_engine"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 12
-tempJob.moneyReward = {500, 800}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_engine")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Diesel Engines."
-tempJob.desc = "%d Diesel Engines."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_engine"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardcount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {500, 800}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_engine")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Water Filter."
-tempJob.desc = "%d Water Filter."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_waterfilter"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 10
-tempJob.moneyReward = {1500, 1700}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_waterfilter")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Water Filters."
-tempJob.desc = "%d Water Filters."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_waterfilter"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {1800, 1900}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_waterfilter")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Pack of Nails."
-tempJob.desc = "%d Pack of Nails."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_nails"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 6
-tempJob.moneyReward = {200, 800}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_nails")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Packs of Nails."
-tempJob.desc = "%d Packs of Nails."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_nails"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 14
-tempJob.moneyReward = {600, 800}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_nails")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Copper Wire."
-tempJob.desc = "%d Copper Wire."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_wire_copper"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 4
-tempJob.moneyReward = {800, 1200}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_wire_copper")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Copper Wire."
-tempJob.desc = "%d Copper Wire."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_wire_copper"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 9
-tempJob.moneyReward = {1100, 1300}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_wire_copper")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Heavy Duty Cabling."
-tempJob.desc = "%d Heavy Duty Cabling."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_wire_heavy"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 10
-tempJob.moneyReward = {300, 650}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_wire_heavy")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Heavy Duty Cabling."
-tempJob.desc = "%d Heavy Duty Cabling."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_wire_heavy"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {405, 800}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_wire_heavy")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Plastic Hose."
-tempJob.desc = "%d Plastic Hose."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_hose"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 6
-tempJob.moneyReward = {250, 360}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_hose")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Plastic Hoses."
-tempJob.desc = "%d Plastic Hoses."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_hose"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 14
-tempJob.moneyReward = {360, 450}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_hose")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Paracord."
-tempJob.desc = "%d Paracord."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_paracord"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 8
-tempJob.moneyReward = {760, 1100}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_paracord")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Paracord."
-tempJob.desc = "%d Paracord."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_paracord"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {500, 790}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_paracord")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Alkaline Booster."
-tempJob.desc = "%d Alkaline Booster."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_detergent"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 6
-tempJob.moneyReward = {600, 900}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_detergent")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Alkaline Booster."
-tempJob.desc = "%d Alkaline Booster."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_detergent"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardcount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {600, 900}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_detergent")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Toothpaste."
-tempJob.desc = "%d Toothpaste."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_toothpaste"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 2
-tempJob.moneyReward = {100, 200}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_toothpaste")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Toothpaste."
-tempJob.desc = "%d Toothpaste."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_toothpaste"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 5
-tempJob.moneyReward = {200, 500}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_toothpaste")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Toilet Paper."
-tempJob.desc = "%d Toilet Paper."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_toiletpaper"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 2
-tempJob.moneyReward = {100, 150}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_toiletpaper")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Toilet Papers."
-tempJob.desc = "%d Toilet Papers."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_toiletpaper"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 4
-tempJob.moneyReward = {125, 450}
-tempJob.categories = {"item_world_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2_value_toiletpaper")
-
-tempJob = nil
-
-
-
--------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------
--------- ITEM RETRIEVAL - RICHES (Single Item, as they are rare) --------------------
--------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------
-
--- Lots of money, generic valuables
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Cat Statuette."
-tempJob.desc = "%d Cat Statuette."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_statue_cat"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 25
-tempJob.moneyReward = {600, 900}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_statue_cat")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Horse Statuette."
-tempJob.desc = "%d Horse Statuette."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_statue_horse"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 25
-tempJob.moneyReward = {1000, 2200}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_statue_horse")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Lion Statuette."
-tempJob.desc = "%d Lion Statuette."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_statue_lion"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 25
-tempJob.moneyReward = {960, 1200}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_statue_lion")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Watch."
-tempJob.desc = "%d Watch."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_watch"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 25
-tempJob.moneyReward = {2500, 3600}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_watch")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Gold Chain."
-tempJob.desc = "%d Gold Chain."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_goldchain"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 45
-tempJob.moneyReward = {3000, 4800}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_goldchain")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Old Smartphone (Broken)."
-tempJob.desc = "%d Old Smartphone (Broken)."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_phone_old"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 25
-tempJob.moneyReward = {1250, 1800}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_phone_old")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d New Smartphone (Broken)."
-tempJob.desc = "%d New Smartphone (Broken)."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_phone_new"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {3000, 6000}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_phone_new")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Empty Notebook."
-tempJob.desc = "%d Empty Notebook."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_1"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_1"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {200, 400}
-tempJob.categories = {"item_world_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_1")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Trading Ledger."
-tempJob.desc = "%d Trading Ledger."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_2"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_2")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Scientist Curriculum Vitae."
-tempJob.desc = "%d Scientist Curriculum Vitae."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_3"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_3")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Scribbled Scientific Notes."
-tempJob.desc = "%d Scribbled Scientific Notes."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_4"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_4")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Handdrawn Anomaly Map."
-tempJob.desc = "%d Handdrawn Anomaly Map."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_5"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_5")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Pump Station Checklist."
-tempJob.desc = "%d Pump Station Checklist."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_6"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_6")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over %d Firearm Assembly Illustration."
-tempJob.desc = "%d Firearm Assembly Illustration."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_7"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_7")
-
-tempJob = nil
-
-  local tempJob = {}
-
-tempJob.name = "Hand over %d Unreadable Torn Note."
-tempJob.desc = "%d Unreadable Torn Note."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_8"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_8")
-
-tempJob = nil
-
-  local tempJob = {}
-
-tempJob.name = "Hand over %d Swamps Research Documents."
-tempJob.desc = "%d Swamps Research Documents."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_9"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_9")
-
-tempJob = nil
-
-
-  local tempJob = {}
-
-tempJob.name = "Hand over %d Anomalous Material Report."
-tempJob.desc = "%d Anomalous Material Report."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_10"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_10")
-
-tempJob = nil
-
-  local tempJob = {}
-
-tempJob.name = "Hand over %d Artifact Research Ledger."
-tempJob.desc = "%d Artifact Research Ledger."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_11"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_11")
-
-tempJob = nil
-
-  local tempJob = {}
-
-tempJob.name = "Hand over %d Soviet Manual of Arms."
-tempJob.desc = "%d Soviet Manual of Arms."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_12"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_12")
-
-tempJob = nil
-
-  local tempJob = {}
-
-tempJob.name = "Hand over %d Manufacture of Gear Wheels."
-tempJob.desc = "%d Manufacture of Gear Wheels."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_13"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_13")
-
-tempJob = nil
-
-  local tempJob = {}
-
-tempJob.name = "Hand over %d Kevlar Sewing Manual."
-tempJob.desc = "%d Kevlar Sewing Manual."
-tempJob.icon = "propic/event/loot"
-tempJob.tier = 1
-tempJob.requiredItem = "value_documents_14"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 35
-tempJob.moneyReward = {500, 1500}
-tempJob.categories = {"item_world_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1_value_documents_14")
-
-tempJob = nil
+ix.jobs.register({
+	name = "Hand over %d SSD.",
+	desc = "%d SSD.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_pcpart_ssd",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 9,
+	moneyReward = {800, 1800},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_pcpart_ssd")
+
+ix.jobs.register({
+	name = "Hand over %d SSDs.",
+	desc = "%d SSDs.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_pcpart_ssd",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 21,
+	moneyReward = {1600, 2800},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob2_value_pcpart_ssd")
+
+ix.jobs.register({
+	name = "Hand over %d HDD.",
+	desc = "%d HDD.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_pcpart_hdd",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 6,
+	moneyReward = {600, 1200},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_pcpart_hdd")
+
+ix.jobs.register({
+	name = "Hand over %d HDDs.",
+	desc = "%d HDDs.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_pcpart_hdd",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 17,
+	moneyReward = {800, 1400},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob2_value_pcpart_hdd")
+
+ix.jobs.register({
+	name = "Hand over %d PSU.",
+	desc = "%d PSU.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_pcpart_psu",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 10,
+	moneyReward = {400, 900},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_pcpart_psu")
+
+ix.jobs.register({
+	name = "Hand over %d PSUs.",
+	desc = "%d PSUs.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_pcpart_psu",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 23,
+	moneyReward = {900, 1400},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob2_value_pcpart_psu")
+
+ix.jobs.register({
+	name = "Hand over %d LCD Panel.",
+	desc = "%d LCD Panel.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_pcpart_lcd",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 10,
+	moneyReward = {900, 1100},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_pcpart_lcd")
+
+ix.jobs.register({
+	name = "Hand over %d LCD Panels.",
+	desc = "%d LCD Panels.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_pcpart_lcd",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 21,
+	moneyReward = {1300, 1400},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob2_value_pcpart_lcd")
+
+ix.jobs.register({
+	name = "Hand over %d GPU.",
+	desc = "%d GPU.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_pcpart_gpu",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 21,
+	moneyReward = {2300, 2400},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_pcpart_gpu")
+
+ix.jobs.register({
+	name = "Hand over %d GPUs.",
+	desc = "%d GPUs.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_pcpart_gpu",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 45,
+	moneyReward = {5300, 6400},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob2_value_pcpart_gpu")
+
+ix.jobs.register({
+	name = "Hand over %d FPGAs.",
+	desc = "%d FPGAs.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_pcpart_fpga",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 12,
+	moneyReward = {1900, 2100},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_pcpart_fpga")
+
+ix.jobs.register({
+	name = "Hand over %d FPGAs.",
+	desc = "%d FPGAs.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_pcpart_fpga",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardcount = 1,
+	repReward = 29,
+	moneyReward = {4900, 5100},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob2_value_pcpart_fpga")
+
+ix.jobs.register({
+	name = "Hand over %d Powerbank.",
+	desc = "%d Powerbank.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_powerbank",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 10,
+	moneyReward = {500, 800},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_powerbank")
+
+ix.jobs.register({
+	name = "Hand over %d Powerbanks.",
+	desc = "%d Powerbanks.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_powerbank",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 22,
+	moneyReward = {1500, 1800},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob2_value_powerbank")
+
+ix.jobs.register({
+	name = "Hand over %d Wireless Transmitter Module.",
+	desc = "%d Wireless Transmitter Module.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_wirelesstrans",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 30,
+	moneyReward = {2000, 3500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_wirelesstrans")
+
+ix.jobs.register({
+	name = "Hand over %d Wireless Transmitter Modules.",
+	desc = "%d Wireless Transmitter Modules.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_wirelesstrans",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 45,
+	moneyReward = {5000, 8500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob2_value_wirelesstrans")
+
+ix.jobs.register({
+	name = "Hand over %d Capacitors.",
+	desc = "%d Capacitors.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_capacitors",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 5,
+	moneyReward = {250, 750},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_capacitors")
+
+ix.jobs.register({
+	name = "Hand over %d Capacitors.",
+	desc = "%d Capacitors.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_capacitors",
+	numberRec = 10,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 5,
+	moneyReward = {2000, 2300},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_capacitors")
+
+ix.jobs.register({
+	name = "Hand over %d Electric Tape.",
+	desc = "%d Electric Tape.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_tape_electric",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 1,
+	moneyReward = {250, 750},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_tape_electric")
+
+ix.jobs.register({
+	name = "Hand over %d Electric Tapes.",
+	desc = "%d Electric Tapes.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_tape_electric",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 6,
+	moneyReward = {500, 1000},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_tape_electric")
+
+ix.jobs.register({
+	name = "Hand over %d Electrical Wire.",
+	desc = "%d Electrical Wire.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_wire_light",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 1,
+	moneyReward = {350, 460},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_wire_light")
+
+ix.jobs.register({
+	name = "Hand over %d Electrical Wires.",
+	desc = "%d Electrical Wires.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_wire_light",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 3,
+	moneyReward = {750, 960},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_wire_light")
+
+ix.jobs.register({
+	name = "Hand over %d 1.5 Volt Batteries.",
+	desc = "%d 1.5 Volt Batteries.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_battery",
+	numberRec = 3,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 2,
+	moneyReward = {400, 600},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_battery")
+
+ix.jobs.register({
+	name = "Hand over %d 1.5 Volt Batteries.",
+	desc = "%d 1.5 Volt Batteries.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_battery",
+	numberRec = 20,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 12,
+	moneyReward = {2000, 3500},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_battery")
+
+ix.jobs.register({
+	name = "Hand over %d 9 Volt Batteries.",
+	desc = "%d 9 Volt Batteries.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_9vbattery",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 3,
+	moneyReward = {500, 700},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_9vbattery")
+
+ix.jobs.register({
+	name = "Hand over %d 9 Volt Batteries.",
+	desc = "%d 9 Volt Batteries.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_9vbattery",
+	numberRec = 4,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 8,
+	moneyReward = {960, 1200},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_9vbattery")
+
+ix.jobs.register({
+	name = "Hand over %d Household Glue.",
+	desc = "%d Household Glue.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_glue_1",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 2,
+	moneyReward = {330, 480},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_glue_1")
+
+ix.jobs.register({
+	name = "Hand over %d Household Glue.",
+	desc = "%d Household Glue.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_glue_1",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 5,
+	moneyReward = {500, 900},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_glue_1")
+
+ix.jobs.register({
+	name = "Hand over %d Superglue.",
+	desc = "%d Superglue.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_glue_2",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 3,
+	moneyReward = {350, 600},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_glue_2")
+
+ix.jobs.register({
+	name = "Hand over %d Superglue.",
+	desc = "%d Superglue.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_glue_2",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 12,
+	moneyReward = {500, 960},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_glue_2")
+
+ix.jobs.register({
+	name = "Hand over %d Texture Glue.",
+	desc = "%d Texture Glue.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_glue_3",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 5,
+	moneyReward = {360, 750},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_glue_3")
+
+ix.jobs.register({
+	name = "Hand over %d Texture Glue.",
+	desc = "%d Texture Glue.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_glue_3",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 9,
+	moneyReward = {400, 780},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_glue_3")
+
+ix.jobs.register({
+	name = "Hand over %d Universal Glue.",
+	desc = "%d Universal Glue.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_glue_4",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 7,
+	moneyReward = {300, 450},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_glue_4")
+
+ix.jobs.register({
+	name = "Hand over %d Universal Glue.",
+	desc = "%d Universal Glue.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_glue_4",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardcount = 1,
+	repReward = 12,
+	moneyReward = {300, 450},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_glue_4")
+
+ix.jobs.register({
+	name = "Hand over %d Military-Grade Weapon Cleaner.",
+	desc = "%d Military-Grade Weapon Cleaner.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_guncleaner",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 10,
+	moneyReward = {300, 450},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_guncleaner")
+
+ix.jobs.register({
+	name = "Hand over %d Military-Grade Weapon Cleaner.",
+	desc = "%d Military-Grade Weapon Cleaner.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_guncleaner",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardcount = 1,
+	repReward = 21,
+	moneyReward = {550, 870},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob2_value_guncleaner")
+
+ix.jobs.register({
+	name = "Hand over %d Civilian-Grade Gun Oil.",
+	desc = "%d Civilian-Grade Gun Oil.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_gunoil",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 6,
+	moneyReward = {500, 850},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_gunoil")
+
+ix.jobs.register({
+	name = "Hand over %d Civilian-Grade Gun Oil.",
+	desc = "%d Civilian-Grade Gun Oil.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_gunoil",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 13,
+	moneyReward = {500, 850},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob2_value_gunoil")
+
+ix.jobs.register({
+	name = "Hand over %d Weapon Lubricant Spray.",
+	desc = "%d Weapon Lubricant Spray.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_gunspray",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 8,
+	moneyReward = {500, 850},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_gunspray")
+
+ix.jobs.register({
+	name = "Hand over %d Weapon Lubricant Spray.",
+	desc = "%d Weapon Lubricant Spray.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_gunspray",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardcount = 1,
+	repReward = 17,
+	moneyReward = {500, 850},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob2_value_gunspray")
+
+ix.jobs.register({
+	name = "Hand over %d Firearm Lubricant.",
+	desc = "%d Firearm Lubricant.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_lubricant",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 5,
+	moneyReward = {500, 850},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_lubricant")
+
+ix.jobs.register({
+	name = "Hand over %d Firearm Lubricant.",
+	desc = "%d Firearm Lubricant.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_lubricant",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 11,
+	moneyReward = {300, 450},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_lubricant")
+
+ix.jobs.register({
+	name = "Hand over %d Bolts.",
+	desc = "%d Bolts.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_bolts",
+	numberRec = 4,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 2,
+	moneyReward = {100, 150},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_bolts")
+
+ix.jobs.register({
+	name = "Hand over %d Bolts.",
+	desc = "%d Bolts.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_bolts",
+	numberRec = 20,
+	reward = {{"hidestash_1"}},
+	rewardcount = 1,
+	repReward = 12,
+	moneyReward = {500, 700},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_bolts")
+
+ix.jobs.register({
+	name = "Hand over %d Nuts.",
+	desc = "%d Nuts.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_nuts",
+	numberRec = 4,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 2,
+	moneyReward = {120, 170},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_nuts")
+
+ix.jobs.register({
+	name = "Hand over %d Nuts.",
+	desc = "%d Nuts.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_nuts",
+	numberRec = 20,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 12,
+	moneyReward = {600, 650},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_nuts")
+
+ix.jobs.register({
+	name = "Hand over %d Propane Tank.",
+	desc = "%d Propane Tank.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_propanetank",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 8,
+	moneyReward = {800, 1000},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob1_value_propanetank")
+
+ix.jobs.register({
+	name = "Hand over %d Propane Tanks.",
+	desc = "%d Propane Tanks.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_propanetank",
+	numberRec = 4,
+	reward = {{"hidestash_1"}},
+	rewardcount = 1,
+	repReward = 20,
+	moneyReward = {1000, 1200},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob2_value_propanetank")
+
+ix.jobs.register({
+	name = "Hand over %d Gasoline Can.",
+	desc = "%d Gasoline Can.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_gasoline",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {600, 900},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob1_value_gasoline")
+
+ix.jobs.register({
+	name = "Hand over %d Gasoline Cans.",
+	desc = "%d Gasoline Cans.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_gasoline",
+	numberRec = 4,
+	reward = {{"hidestash_1"}},
+	rewardcount = 1,
+	repReward = 25,
+	moneyReward = {1500, 1600},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob2_value_gasoline")
+
+ix.jobs.register({
+	name = "Hand over %d Kerosene Can.",
+	desc = "%d Kerosene Can.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_kerosene",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 15,
+	moneyReward = {1200, 2500},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob1_value_kerosene")
+
+ix.jobs.register({
+	name = "Hand over %d Kerosene Cans.",
+	desc = "%d Kerosene Cans.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_kerosene",
+	numberRec = 4,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {2000, 2500},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob2_value_kerosene")
+
+ix.jobs.register({
+	name = "Hand over %d Diesel Motor Conditioner.",
+	desc = "%d Diesel Motor Conditioner.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_motorclean",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 8,
+	moneyReward = {600, 880},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob1_value_motorclean")
+
+ix.jobs.register({
+	name = "Hand over %d Diesel Motor Conditioners.",
+	desc = "%d Diesel Motor Conditioners.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_motorclean",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardcount = 1,
+	repReward = 15,
+	moneyReward = {1000, 1350},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob2_value_motorclean")
+
+ix.jobs.register({
+	name = "Hand over %d Spark Plugs.",
+	desc = "%d Spark Plugs.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_sparkplug",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 3,
+	moneyReward = {200, 400},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_sparkplug")
+
+ix.jobs.register({
+	name = "Hand over %d Spark Plugs.",
+	desc = "%d Spark Plugs.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_sparkplug",
+	numberRec = 5,
+	reward = {{"hidestash_1"}},
+	rewardcount = 1,
+	repReward = 9,
+	moneyReward = {300, 600},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_sparkplug")
+
+ix.jobs.register({
+	name = "Hand over %d Light Bulb.",
+	desc = "%d Light Bulb.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_lightbulb",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 2,
+	moneyReward = {150, 200},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_lightbulb")
+
+ix.jobs.register({
+	name = "Hand over %d Light Bulbs.",
+	desc = "%d Light Bulbs.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_lightbulb",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardcount = 1,
+	repReward = 5,
+	moneyReward = {150, 400},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_lightbulb")
+
+ix.jobs.register({
+	name = "Hand over %d Car Battery.",
+	desc = "%d Car Battery.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_carbattery",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 15,
+	moneyReward = {1500, 2200},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob1_value_carbattery")
+
+ix.jobs.register({
+	name = "Hand over %d Car Batteries.",
+	desc = "%d Car Batteries.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_carbattery",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {1900, 2400},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob2_value_carbattery")
+
+ix.jobs.register({
+	name = "Hand over %d Duct Tape.",
+	desc = "%d Duct Tape.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_tape_duct",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = {1,1},
+	repReward = 1,
+	moneyReward = {300, 450},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_tape_duct")
+
+ix.jobs.register({
+	name = "Hand over %d Duct Tapes.",
+	desc = "%d Duct Tapes.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_tape_duct",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 3,
+	moneyReward = {450, 700},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_tape_duct")
+
+ix.jobs.register({
+	name = "Hand over %d Military-Grade Adhesive Tape.",
+	desc = "%d Military-Grade Adhesive Tape.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_tape_heavy",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 7,
+	moneyReward = {500, 800},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob1_value_tape_heavy")
+
+ix.jobs.register({
+	name = "Hand over %d Military-Grade Adhesive Tape.",
+	desc = "%d Military-Grade Adhesive Tape.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_tape_heavy",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 12,
+	moneyReward = {700, 950},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob2_value_tape_heavy")
+
+ix.jobs.register({
+	name = "Hand over %d Diesel Engine.",
+	desc = "%d Diesel Engine.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_engine",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = {1,1},
+	repReward = 12,
+	moneyReward = {500, 800},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob1_value_engine")
+
+ix.jobs.register({
+	name = "Hand over %d Diesel Engines.",
+	desc = "%d Diesel Engines.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_engine",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardcount = 1,
+	repReward = 20,
+	moneyReward = {500, 800},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob2_value_engine")
+
+ix.jobs.register({
+	name = "Hand over %d Water Filter.",
+	desc = "%d Water Filter.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_waterfilter",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 10,
+	moneyReward = {1500, 1700},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob1_value_waterfilter")
+
+ix.jobs.register({
+	name = "Hand over %d Water Filters.",
+	desc = "%d Water Filters.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_waterfilter",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {1800, 1900},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob2_value_waterfilter")
+
+ix.jobs.register({
+	name = "Hand over %d Pack of Nails.",
+	desc = "%d Pack of Nails.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_nails",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 6,
+	moneyReward = {200, 800},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_nails")
+
+ix.jobs.register({
+	name = "Hand over %d Packs of Nails.",
+	desc = "%d Packs of Nails.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_nails",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 14,
+	moneyReward = {600, 800},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_nails")
+
+ix.jobs.register({
+	name = "Hand over %d Copper Wire.",
+	desc = "%d Copper Wire.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_wire_copper",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = {1,1},
+	repReward = 4,
+	moneyReward = {800, 1200},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_wire_copper")
+
+ix.jobs.register({
+	name = "Hand over %d Copper Wire.",
+	desc = "%d Copper Wire.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_wire_copper",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = {1,1},
+	repReward = 9,
+	moneyReward = {1100, 1300},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_wire_copper")
+
+ix.jobs.register({
+	name = "Hand over %d Heavy Duty Cabling.",
+	desc = "%d Heavy Duty Cabling.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_wire_heavy",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 10,
+	moneyReward = {300, 650},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob1_value_wire_heavy")
+
+ix.jobs.register({
+	name = "Hand over %d Heavy Duty Cabling.",
+	desc = "%d Heavy Duty Cabling.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_wire_heavy",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 15,
+	moneyReward = {405, 800},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob2_value_wire_heavy")
+
+ix.jobs.register({
+	name = "Hand over %d Plastic Hose.",
+	desc = "%d Plastic Hose.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_hose",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = {1,1},
+	repReward = 6,
+	moneyReward = {250, 360},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_hose")
+
+ix.jobs.register({
+	name = "Hand over %d Plastic Hoses.",
+	desc = "%d Plastic Hoses.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_hose",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 14,
+	moneyReward = {360, 450},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_hose")
+
+ix.jobs.register({
+	name = "Hand over %d Paracord.",
+	desc = "%d Paracord.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_paracord",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 8,
+	moneyReward = {760, 1100},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_paracord")
+
+ix.jobs.register({
+	name = "Hand over %d Paracord.",
+	desc = "%d Paracord.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_paracord",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 15,
+	moneyReward = {500, 790},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_paracord")
+
+ix.jobs.register({
+	name = "Hand over %d Alkaline Booster.",
+	desc = "%d Alkaline Booster.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_detergent",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 6,
+	moneyReward = {600, 900},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_detergent")
+
+ix.jobs.register({
+	name = "Hand over %d Alkaline Booster.",
+	desc = "%d Alkaline Booster.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_detergent",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardcount = 1,
+	repReward = 15,
+	moneyReward = {600, 900},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_detergent")
+
+ix.jobs.register({
+	name = "Hand over %d Toothpaste.",
+	desc = "%d Toothpaste.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_toothpaste",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 2,
+	moneyReward = {100, 200},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_toothpaste")
+
+ix.jobs.register({
+	name = "Hand over %d Toothpaste.",
+	desc = "%d Toothpaste.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_toothpaste",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 5,
+	moneyReward = {200, 500},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_toothpaste")
+
+ix.jobs.register({
+	name = "Hand over %d Toilet Paper.",
+	desc = "%d Toilet Paper.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_toiletpaper",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = {1,1},
+	repReward = 2,
+	moneyReward = {100, 150},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob1_value_toiletpaper")
+
+ix.jobs.register({
+	name = "Hand over %d Toilet Papers.",
+	desc = "%d Toilet Papers.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_toiletpaper",
+	numberRec = 2,
+	reward = {{"hidestash_1"}},
+	rewardCount = 1,
+	repReward = 4,
+	moneyReward = {125, 450},
+	categories = {"item_world_NPC_easy"},
+}, "ItemJob2_value_toiletpaper")
+
+ix.jobs.register({
+	name = "Hand over %d Cat Statuette.",
+	desc = "%d Cat Statuette.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_statue_cat",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 25,
+	moneyReward = {600, 900},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_statue_cat")
+
+ix.jobs.register({
+	name = "Hand over %d Horse Statuette.",
+	desc = "%d Horse Statuette.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_statue_horse",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 25,
+	moneyReward = {1000, 2200},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_statue_horse")
+
+ix.jobs.register({
+	name = "Hand over %d Lion Statuette.",
+	desc = "%d Lion Statuette.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_statue_lion",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 25,
+	moneyReward = {960, 1200},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_statue_lion")
+
+ix.jobs.register({
+	name = "Hand over %d Watch.",
+	desc = "%d Watch.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_watch",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 25,
+	moneyReward = {2500, 3600},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_watch")
+
+ix.jobs.register({
+	name = "Hand over %d Gold Chain.",
+	desc = "%d Gold Chain.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_goldchain",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 45,
+	moneyReward = {3000, 4800},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_goldchain")
+
+ix.jobs.register({
+	name = "Hand over %d Old Smartphone (Broken).",
+	desc = "%d Old Smartphone (Broken).",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_phone_old",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 25,
+	moneyReward = {1250, 1800},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_phone_old")
+
+ix.jobs.register({
+	name = "Hand over %d New Smartphone (Broken).",
+	desc = "%d New Smartphone (Broken).",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_phone_new",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {3000, 6000},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_phone_new")
+
+ix.jobs.register({
+	name = "Hand over %d Empty Notebook.",
+	desc = "%d Empty Notebook.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_1",
+	numberRec = 1,
+	reward = {{"hidestash_1"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {200, 400},
+	categories = {"item_world_NPC_medium"},
+}, "ItemJob1_value_documents_1")
+
+ix.jobs.register({
+	name = "Hand over %d Trading Ledger.",
+	desc = "%d Trading Ledger.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_2",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_2")
+
+ix.jobs.register({
+	name = "Hand over %d Scientist Curriculum Vitae.",
+	desc = "%d Scientist Curriculum Vitae.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_3",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_3")
+
+ix.jobs.register({
+	name = "Hand over %d Scribbled Scientific Notes.",
+	desc = "%d Scribbled Scientific Notes.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_4",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_4")
+
+ix.jobs.register({
+	name = "Hand over %d Handdrawn Anomaly Map.",
+	desc = "%d Handdrawn Anomaly Map.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_5",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_5")
+
+ix.jobs.register({
+	name = "Hand over %d Pump Station Checklist.",
+	desc = "%d Pump Station Checklist.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_6",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_6")
+
+ix.jobs.register({
+	name = "Hand over %d Firearm Assembly Illustration.",
+	desc = "%d Firearm Assembly Illustration.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_7",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_7")
+
+ix.jobs.register({
+	name = "Hand over %d Unreadable Torn Note.",
+	desc = "%d Unreadable Torn Note.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_8",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_8")
+
+ix.jobs.register({
+	name = "Hand over %d Swamps Research Documents.",
+	desc = "%d Swamps Research Documents.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_9",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_9")
+
+ix.jobs.register({
+	name = "Hand over %d Anomalous Material Report.",
+	desc = "%d Anomalous Material Report.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_10",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_10")
+
+ix.jobs.register({
+	name = "Hand over %d Artifact Research Ledger.",
+	desc = "%d Artifact Research Ledger.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_11",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_11")
+
+ix.jobs.register({
+	name = "Hand over %d Soviet Manual of Arms.",
+	desc = "%d Soviet Manual of Arms.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_12",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_12")
+
+ix.jobs.register({
+	name = "Hand over %d Manufacture of Gear Wheels.",
+	desc = "%d Manufacture of Gear Wheels.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_13",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_13")
+
+ix.jobs.register({
+	name = "Hand over %d Kevlar Sewing Manual.",
+	desc = "%d Kevlar Sewing Manual.",
+	icon = "propic/event/loot",
+	tier = 1,
+	requiredItem = "value_documents_14",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = {1,1},
+	repReward = 35,
+	moneyReward = {500, 1500},
+	categories = {"item_world_NPC_hard"},
+}, "ItemJob1_value_documents_14")

@@ -2,8 +2,8 @@ ix.taskRewards = ix.taskRewards or {}
 
 local OFFER_KEY = "taskRewardOffers"
 local CLAIM_LINE = "taskRewardClaims"
-local MAX_OFFERS = 512
-local MAX_PENDING_REWARDS = 1024
+local MAX_OFFERS = ix.taskRewards.settings.maxOffers
+local MAX_PENDING_REWARDS = ix.taskRewards.settings.maxPendingRewards
 local BONUS_KEY = "taskCompletionBonus"
 
 local function offersFor(character)

@@ -39,7 +39,6 @@ game = {GetMap = function() return map end}
 MASK_SOLID = 1
 util = {
 	AddNetworkString = function() end,
-	GetModelBounds = function() return Vector(-8, -8, 0), Vector(8, 8, 16) end,
 	TraceHull = function(trace)
 		return {Hit = not blocked, StartSolid = blocked, HitNormal = Vector(0, 0, 1),
 			HitPos = trace.start - Vector(0, 0, 32)}
@@ -64,6 +63,10 @@ ents = {Create = function(class)
 	function entity:SetPos(position) self.position = position end
 	function entity:GetPos() return self.position end
 	function entity:SetModel(model) self.model = model end
+	function entity:GetModelBounds()
+		assert(self.model, "SetModel precedes reading bounds")
+		return Vector(-8, -8, 0), Vector(8, 8, 16)
+	end
 	function entity:Spawn() end
 	function entity:Remove() self.invalid = true end
 	function entity:GetClass() return self.class end
@@ -80,13 +83,21 @@ ents = {Create = function(class)
 end}
 
 local base = "gamemodes/ix_cotz/plugins/jobsystem/"
+ix.jobs = ix.jobs or {}
+ix.jobs.field = ix.jobs.field or {}
+ix.taskRewards = ix.taskRewards or {}
+for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredit"}) do
+	dofile("gamemodes/ix_cotz/plugins/jobsystem/definitions/sh_" .. name .. ".lua")
+end
 dofile(base .. "libs/sh_fieldtasks.lua")
 local field = ix.jobs.field
-local handle = assert(io.open(base .. "libs/sh_jobs.lua"))
-local source = handle:read("*a")
-handle:close()
-assert((loadstring or load)(source:gsub("!=", "~="):gsub("!", "not ")))()
+dofile(base .. "libs/sh_jobs.lua")
+dofile(base .. "sv_jobs.lua")
+dofile(base .. "sv_fieldplacement.lua")
+dofile(base .. "sv_fieldassignment.lua")
+dofile(base .. "sv_fieldactions.lua")
 dofile(base .. "sv_fieldtasks.lua")
+dofile(base .. "sv_cargo.lua")
 dofile(base .. "sv_fielddefence.lua")
 ITEM = {functions = {}}
 dofile(base .. "items/base/sh_jobcargo.lua")
@@ -201,6 +212,8 @@ end
 
 local client, character, inventory = actor()
 local job = assign(character, "recovery")
+check(objects[#objects].class == "prop_dynamic" and objects[#objects].invalid,
+	"model bounds probe is removed after assignment")
 check(not field.CanComplete(character, job), "no cargo means no completion")
 client:ixJobEvaluate(job.identifier)
 check(not character.jobs.Contact.isCompleted, "generic completion triggers cannot finish field assignments")
@@ -513,10 +526,7 @@ local function livingAttackers()
 	end
 	return result
 end
-handle = assert(io.open(base .. "sh_listeners.lua"))
-source = handle:read("*a")
-handle:close()
-assert((loadstring or load)(source:gsub("!=", "~="):gsub("!", "not ")))()
+dofile(base .. "sv_listeners.lua")
 local function killWave()
 	for _, npc in ipairs(livingAttackers()) do
 		npc:SetHealth(0)

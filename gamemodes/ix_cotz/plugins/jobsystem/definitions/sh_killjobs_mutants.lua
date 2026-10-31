@@ -1,1423 +1,1027 @@
---[[
-  --TestJob
-  local tempJob = {}
-
-  tempJob.name = "Kill Say sneed %d times."                  --Name that will be shown in dialogue when selecting tasks
-  tempJob.desc = "I need you to sneed %d times for me." --Description of task, will be shown to the player when deciding to take quest or not
-  tempJob.icon = "stalker/questpaper_item.png"          --Icon, unused?
-  tempJob.tier = 1                                      --Tier, unused?
-  tempJob.listenTrigger = "chatSayTest"                 --trigger word to listen for in the ix_JobTrigger hook, see sh_listeners
-  tempJob.numberRec = 5                                 --integer amount of times the listenTrigger must be run through the ix_JobTrigger hook
-  tempJob.reward = {{"tokarev"}}                     --table of item ids for rewarding the player with
-  tempJob.rewardCount = 1                               --how many items should the player get
-  tempJob.repReward = 80                                --how much reputation should be awarded for completion
-  tempJob.categories = {"mutantkilleasy"}               --table of category identifiers, used for when npc gets tasks
-  tempJob.moneyReward = {2000,4000} OR 3000             --for adding money to the player, can technically be done through itemreward as well
-
-  ix.jobs.register(tempJob, "TestJob")                  --If item delivery quest, the final part of the quest identifier should read "_<uniqueid>" for proper operation
-
-]]--
-
-
-
---random amount of mutants
-local tempJob = {}
-
-tempJob.name = "Kill %d mutants."
-tempJob.desc = "%d mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 1
-tempJob.listenTrigger = "mutantKilled"
-tempJob.numberRec = 12
-tempJob.reward = {{"762x25", { ["quantity"] = 25 }}, {"22lr", { ["quantity"] = 35 }}, {"9x18", { ["quantity"] = 25 }}, {"9x19", { ["quantity"] = 25 }}, {"45acp", { ["quantity"] = 25 }}}
-tempJob.rewardCount = 2
-tempJob.repReward = 12
-tempJob.moneyReward = {750, 1100}
-tempJob.categories = {"mutantkillgroupeasy"}
-
-ix.jobs.register(tempJob, "killMutantsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d mutants."
-tempJob.desc = "%d mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "mutantKilled"
-tempJob.numberRec = 24
-tempJob.reward = {"kit_ammo_m_low"}
-tempJob.rewardCount = 2
-tempJob.repReward = 21
-tempJob.moneyReward = {1250, 1650}
-tempJob.categories = {"mutantkillgroupeasy"}
-
-ix.jobs.register(tempJob, "killMutantsMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d mutants."
-tempJob.desc = "%d mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "mutantKilled"
-tempJob.numberRec = 40
-tempJob.reward = {"kit_ammo_med"}
-tempJob.rewardCount = 2
-tempJob.repReward = 34
-tempJob.moneyReward = {2500, 2900}
-tempJob.categories = {"mutantkillgroupeasy"}
-
-ix.jobs.register(tempJob, "killMutantsHigh")
-
-tempJob = nil
-
-
--- Humanoid Mutants
-local tempJob = {}
-
-tempJob.name = "Kill %d humanoid mutants."
-tempJob.desc = "%d humanoid mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupHumanoidKilled"
-tempJob.numberRec = 5
-tempJob.reward = {{"kit_ammo_low"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 10
-tempJob.moneyReward = {400, 600}
-tempJob.categories = {"mutantkillgroupeasy"}
-
-ix.jobs.register(tempJob, "killHumanoidsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d humanoid mutants."
-tempJob.desc = "%d humanoid mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupHumanoidKilled"
-tempJob.numberRec = 9
-tempJob.reward = {{"kit_ammo_low"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 13
-tempJob.moneyReward = {600, 800}
-tempJob.categories = {"mutantkillgroupeasy"}
-
-ix.jobs.register(tempJob, "killHumanoidsMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d humanoid mutants."
-tempJob.desc = "%d humanoid mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupHumanoidKilled"
-tempJob.numberRec = 15
-tempJob.reward = {{"kit_ammo_med"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 21
-tempJob.moneyReward = {900, 1300}
-tempJob.categories = {"mutantkillgroupeasy"}
-
-ix.jobs.register(tempJob, "killHumanoidsHigh")
-
-tempJob = nil
-
--- Predator Mutants
-local tempJob = {}
-
-tempJob.name = "Kill %d predator mutants."
-tempJob.desc = "%d predator mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupPredatorKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_ammo_low"}, 0}
-tempJob.rewardCount = 1
-tempJob.repReward = 8
-tempJob.moneyReward = {500, 600}
-tempJob.categories = {"mutantkillgroupmedium"}
-
-ix.jobs.register(tempJob, "killPredatorsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d predator mutants."
-tempJob.desc = "%d predator mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupPredatorKilled"
-tempJob.numberRec = 4
-tempJob.reward = {{"kit_ammo_low"}, 0}
-tempJob.rewardCount = 2
-tempJob.repReward = 12
-tempJob.moneyReward = {800, 1000}
-tempJob.categories = {"mutantkillgroupmedium"}
-
-ix.jobs.register(tempJob, "killPredatorsMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d predator mutants."
-tempJob.desc = "%d predator mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupPredatorKilled"
-tempJob.numberRec = 6
-tempJob.reward = {{"kit_ammo_low"}, {"kit_ammo_low"}, 0}
-tempJob.rewardCount = 2
-tempJob.repReward = 18
-tempJob.moneyReward = {1200, 1400}
-tempJob.categories = {"mutantkillgroupmedium"}
-
-ix.jobs.register(tempJob, "killPredatorsHigh")
-
-tempJob = nil
-
-
--- Canine Mutants
-local tempJob = {}
-
-tempJob.name = "Kill %d canine mutants."
-tempJob.desc = "%d canine mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupCanineKilled"
-tempJob.numberRec = 5
-tempJob.reward = {{"kit_ammo_low"}, {"kit_ammo_low"}, 0}
-tempJob.rewardCount = 1
-tempJob.repReward = 7
-tempJob.moneyReward = {350, 460}
-tempJob.categories = {"mutantkillgroupeasy"}
-
-ix.jobs.register(tempJob, "killCaninesLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d canine mutants."
-tempJob.desc = "%d canine mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupCanineKilled"
-tempJob.numberRec = 9
-tempJob.reward = {{"kit_ammo_low"}, {"kit_ammo_low"}, 0}
-tempJob.rewardCount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {600, 800}
-tempJob.categories = {"mutantkillgroupeasy"}
-
-ix.jobs.register(tempJob, "killCaninesMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d canine mutants."
-tempJob.desc = "%d canine mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupCanineKilled"
-tempJob.numberRec = 13
-tempJob.reward = {{"kit_ammo_low"}, {"kit_ammo_low"}, 0}
-tempJob.rewardCount = 2
-tempJob.repReward = 20
-tempJob.moneyReward = {700, 1000}
-tempJob.categories = {"mutantkillgroupeasy"}
-
-ix.jobs.register(tempJob, "killCaninesHigh")
-
-tempJob = nil
-
--- Meat Mutants
-local tempJob = {}
-
-tempJob.name = "Kill %d meat mutants."
-tempJob.desc = "%d meat mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupMeatKilled"
-tempJob.numberRec = 4
-tempJob.reward = {{"kit_ammo_low"}, 0}
-tempJob.rewardCount = 1
-tempJob.repReward = 5
-tempJob.moneyReward = {150, 250}
-tempJob.categories = {"mutantkillgroupeasy"}
-
-ix.jobs.register(tempJob, "killMeatsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d meat mutants."
-tempJob.desc = "%d meat mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupMeatKilled"
-tempJob.numberRec = 8
-tempJob.reward = {{"kit_ammo_low"}, 0}
-tempJob.rewardCount = 1
-tempJob.repReward = 10
-tempJob.moneyReward = {190, 370}
-tempJob.categories = {"mutantkillgroupeasy"}
-
-ix.jobs.register(tempJob, "killMeatsMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d meat mutants."
-tempJob.desc = "%d meat mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupMeatKilled"
-tempJob.numberRec = 14
-tempJob.reward = {{"kit_ammo_low"}, 0}
-tempJob.rewardCount = 2
-tempJob.repReward = 15
-tempJob.moneyReward = {470, 770}
-tempJob.categories = {"mutantkillgroupeasy"}
-
-ix.jobs.register(tempJob, "killMeatsHigh")
-
-tempJob = nil
-
--- Psychic Mutants
-local tempJob = {}
-
-tempJob.name = "Kill %d psychic mutants."
-tempJob.desc = "%d psychic mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupPsyKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_ammo_rare"}, 0}
-tempJob.rewardCount = 1
-tempJob.repReward = 50
-tempJob.moneyReward = {2000, 4000}
-tempJob.categories = {"mutantkillgroupmedium"}
-
-ix.jobs.register(tempJob, "killPsyLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d psychic mutants."
-tempJob.desc = "%d psychic mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupPsyKilled"
-tempJob.numberRec = 4
-tempJob.reward = {{"kit_ammo_rare"}, 0}
-tempJob.rewardCount = 1
-tempJob.repReward = 75
-tempJob.moneyReward = {3000, 6000}
-tempJob.categories = {"mutantkillgroupmedium"}
-
-ix.jobs.register(tempJob, "killPsyMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d psychic mutants."
-tempJob.desc = "%d psychic mutants."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 2
-tempJob.listenTrigger = "groupPsyKilled"
-tempJob.numberRec = 6
-tempJob.reward = {{"kit_ammo_rare"}, 0}
-tempJob.rewardCount = 2
-tempJob.repReward = 120
-tempJob.moneyReward = {4000, 7000}
-tempJob.categories = {"mutantkillgroupmedium"}
-
-ix.jobs.register(tempJob, "killPsyHigh")
-
-tempJob = nil
-
---rodents
-
-local tempJob = {}
-
-tempJob.name = "Kill %d rodents."
-tempJob.desc = "%d rodents."
-tempJob.icon = "vgui/icons/tushkandead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "rodentKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 2
-tempJob.moneyReward = {120, 180}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killRodentsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d rodents."
-tempJob.desc = "%d rodents."
-tempJob.icon = "vgui/icons/tushkandead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "rodentKilled"
-tempJob.numberRec = 5
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 6
-tempJob.moneyReward = {260, 420}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killRodentsMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d rodents."
-tempJob.desc = "%d rodents."
-tempJob.icon = "vgui/icons/tushkandead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "rodentKilled"
-tempJob.numberRec = 8
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 9
-tempJob.moneyReward = {320, 490}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killRodentsHigh")
-
-tempJob = nil
-
---hellhounds
-
-local tempJob = {}
-
-tempJob.name = "Kill %d hellhounds."
-tempJob.desc = "%d hellhounds."
-tempJob.icon = "vgui/icons/dogdead.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "hellhoundKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_ammo_low"}, {"kit_ammo_med"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 9
-tempJob.moneyReward = {900, 1500}
-tempJob.categories = {"mutantkillhard"}
-
-ix.jobs.register(tempJob, "killHellhoundsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d hellhounds."
-tempJob.desc = "%d hellhounds."
-tempJob.icon = "vgui/icons/dogdead.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "hellhoundKilled"
-tempJob.numberRec = 4
-tempJob.reward = {{"kit_ammo_low"}, {"kit_ammo_med"}}
-tempJob.rewardCount = 2
-tempJob.repReward = 17
-tempJob.moneyReward = {1200, 1800}
-tempJob.categories = {"mutantkillhard"}
-
-ix.jobs.register(tempJob, "killHellhoundsHigh")
-
-tempJob = nil
-
--- Zombies
-
-local tempJob = {}
-
-tempJob.name = "Kill %d zombies."
-tempJob.desc = "%d zombies."
-tempJob.icon = "vgui/icons/face_42.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "zombieKilled"
-tempJob.numberRec = 3
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 5
-tempJob.moneyReward = {320, 490}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killZombiesLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d zombies."
-tempJob.desc = "%d zombies."
-tempJob.icon = "vgui/icons/face_42.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "zombieKilled"
-tempJob.numberRec = 7
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 8
-tempJob.moneyReward = {480, 600}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killZombiesMid")
-
-tempJob = nil    
-
-local tempJob = {}
-
-tempJob.name = "Kill %d zombies."
-tempJob.desc = "%d zombies."
-tempJob.icon = "vgui/icons/face_42.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "zombieKilled"
-tempJob.numberRec = 12
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 12
-tempJob.moneyReward = {550, 700}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killZombiesHigh")
-
-tempJob = nil   
-
--- Cats
-
-local tempJob = {}
-
-tempJob.name = "Kill %d cats."
-tempJob.desc = "%d cats."
-tempJob.icon = "entities/vj_mutant_cat3.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "catKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 8
-tempJob.moneyReward = {600, 900}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killCatsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d cats."
-tempJob.desc = "%d cats."
-tempJob.icon = "entities/vj_mutant_cat3.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "catKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 12
-tempJob.moneyReward = {850, 1150}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killCatsMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d cats."
-tempJob.desc = "%d cats."
-tempJob.icon = "entities/vj_mutant_cat3.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "catKilled"
-tempJob.numberRec = 4
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 16
-tempJob.moneyReward = {1000, 1400}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killCatsHigh")
-
-tempJob = nil
-
--- bloodsuckers
-
-local tempJob = {}
-
-tempJob.name = "Kill %d bloodsuckers."
-tempJob.desc = "%d bloodsuckers."
-tempJob.icon = "vgui/icons/sosdead.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "bloodsuckerKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 12
-tempJob.moneyReward = {1200, 1400}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killBloodsuckersLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d bloodsuckers."
-tempJob.desc = "%d bloodsuckers."
-tempJob.icon = "vgui/icons/sosdead.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "bloodsuckerKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 18
-tempJob.moneyReward = {1300, 1690}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killBloodsuckersMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d bloodsuckers."
-tempJob.desc = "%d bloodsuckers."
-tempJob.icon = "vgui/icons/sosdead.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "bloodsuckerKilled"
-tempJob.numberRec = 4
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 25
-tempJob.moneyReward = {1550, 1890}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killBloodsuckersHigh")
-
-tempJob = nil
-
--- boars
-
-local tempJob = {}
-
-tempJob.name = "Kill %d boars."
-tempJob.desc = "%d boars."
-tempJob.icon = "vgui/icons/kabandead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "boarKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 3
-tempJob.moneyReward = {200, 300}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killBoarsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d boars."
-tempJob.desc = "%d boars."
-tempJob.icon = "vgui/icons/kabandead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "boarKilled"
-tempJob.numberRec = 3
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 5
-tempJob.moneyReward = {350, 500}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killBoarsMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d boars."
-tempJob.desc = "%d boars."
-tempJob.icon = "vgui/icons/kabandead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "boarKilled"
-tempJob.numberRec = 6
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 9
-tempJob.moneyReward = {450, 700}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killBoarsHigh")
-
-tempJob = nil
-
-
--- Burers
-local tempJob = {}
-
-tempJob.name = "Kill %d burers."
-tempJob.desc = "%d burers."
-tempJob.icon = "entities/vj_mutant_burer.png"
-tempJob.tier = 3
-tempJob.listenTrigger = "burerKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 35
-tempJob.moneyReward = {2500, 5000}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killBurersLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d burers."
-tempJob.desc = "%d burers."
-tempJob.icon = "entities/vj_mutant_burer.png"
-tempJob.tier = 3
-tempJob.listenTrigger = "burerKilled"
-tempJob.numberRec = 3
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 75
-tempJob.moneyReward = {6000, 8500}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killBurersHigh")
-
-tempJob = nil
-
-
--- Chimeras
-local tempJob = {}
-
-tempJob.name = "Kill %d chimeras."
-tempJob.desc = "%d chimeras."
-tempJob.icon = "entities/vj_mutant_chimera.png"
-tempJob.tier = 3
-tempJob.listenTrigger = "chimeraKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier03"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 45
-tempJob.moneyReward = {5000, 8500}
-tempJob.categories = {"mutantkillhard"}
-
-ix.jobs.register(tempJob, "killChimerasLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d chimeras."
-tempJob.desc = "%d chimeras."
-tempJob.icon = "entities/vj_mutant_chimera.png"
-tempJob.tier = 4
-tempJob.listenTrigger = "chimeraKilled"
-tempJob.numberRec = 3
-tempJob.reward = {{"kit_reward_ammo_tier03"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 70
-tempJob.moneyReward = {12000, 16500}
-tempJob.categories = {"mutantkillhard"}
-
-ix.jobs.register(tempJob, "killChimerasHigh")
-
-tempJob = nil
-
--- ElectroChimeras
-local tempJob = {}
-
-tempJob.name = "Kill %d electro-chimeras."
-tempJob.desc = "%d electro-chimeras."
-tempJob.icon = "entities/vj_mutant_chimera5.png"
-tempJob.tier = 3
-tempJob.listenTrigger = "electrochimeraKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier04"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 79
-tempJob.moneyReward = {8000, 11000}
-tempJob.categories = {"mutantkillhard"}
-
-ix.jobs.register(tempJob, "killChimerasLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d electro-chimeras."
-tempJob.desc = "%d electro-chimeras."
-tempJob.icon = "entities/vj_mutant_chimera5.png"
-tempJob.tier = 4
-tempJob.listenTrigger = "electrochimeraKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_ammo_tier04"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 120
-tempJob.moneyReward = {15500, 19600}
-tempJob.categories = {"mutantkillhard"}
-
-ix.jobs.register(tempJob, "killChimerasHigh")
-
-tempJob = nil
-
--- Bear
--- local tempJob = {}
-
--- tempJob.name = "Kill %d bears."
--- tempJob.desc = "%d bears."
--- tempJob.icon = "propic/event/mutanthunt"
--- tempJob.tier = 3
--- tempJob.listenTrigger = "bearKilled"
--- tempJob.numberRec = 1
--- tempJob.reward = {{"kit_mixed_high"}}
--- tempJob.rewardCount = 1
--- tempJob.repReward = 30
--- tempJob.moneyReward = {3500, 6500}
--- tempJob.categories = {"mutantkillhard"}
-
--- ix.jobs.register(tempJob, "killBearLow")
-
--- tempJob = nil
-
--- local tempJob = {}
-
--- tempJob.name = "Kill %d bears."
--- tempJob.desc = "%d bears."
--- tempJob.icon = "propic/event/mutanthunt"
--- tempJob.tier = 4
--- tempJob.listenTrigger = "bearKilled"
--- tempJob.numberRec = 3
--- tempJob.reward = {{"kit_ammo_med"}, {"kit_mixed_high"}}
--- tempJob.rewardCount = 1
--- tempJob.repReward = 55
--- tempJob.moneyReward = {7000, 12000}
--- tempJob.categories = {"mutantkillhard"}
-
--- ix.jobs.register(tempJob, "killBearHigh")
-
--- tempJob = nil
-
--- Controllers
-
-local tempJob = {}
-
-tempJob.name = "Kill %d controllers."
-tempJob.desc = "%d controllers."
-tempJob.icon = "entities/vj_mutant_controler.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "controllerKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 40
-tempJob.moneyReward = {10000, 14400}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killControllersLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d controllers."
-tempJob.desc = "%d controllers."
-tempJob.icon = "entities/vj_mutant_controler.png"
-tempJob.tier = 3
-tempJob.listenTrigger = "controllerKilled"
-tempJob.numberRec = {2,3}
-tempJob.reward = {{"kit_reward_ammo_tier03"}}
-tempJob.rewardCount = 1
-tempJob.moneyReward = {14000, 18500}
-tempJob.repReward = 95
-tempJob.categories = {"mutantkillhard"}
-
-ix.jobs.register(tempJob, "killControllersHigh")
-
--- dogs
-
-local tempJob = {}
-
-tempJob.name = "Kill %d blind dogs."
-tempJob.desc = "%d blind dogs."
-tempJob.icon = "vgui/icons/dogdead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "blinddogKilled"
-tempJob.numberRec = 3
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 4
-tempJob.moneyReward = {300, 490}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killDogsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d blind dogs."
-tempJob.desc = "%d blind dogs."
-tempJob.icon = "vgui/icons/dogdead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "blinddogKilled"
-tempJob.numberRec = 6
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 7
-tempJob.moneyReward = {500, 550}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killDogsMid")
-
-tempJob = nil 
-
-local tempJob = {}
-
-tempJob.name = "Kill %d blind dogs."
-tempJob.desc = "%d blind dogs."
-tempJob.icon = "vgui/icons/dogdead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "blinddogKilled"
-tempJob.numberRec = 12
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 13
-tempJob.moneyReward = {800, 900}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killDogsHigh")
-
-tempJob = nil  
-
---fleshes
-
-local tempJob = {}
-
-tempJob.name = "Kill %d fleshes."
-tempJob.desc = "%d fleshes."
-tempJob.icon = "vgui/icons/plotdead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "fleshKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 1
-tempJob.moneyReward = {120, 175}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killFleshesLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d fleshes."
-tempJob.desc = "%d fleshes."
-tempJob.icon = "vgui/icons/plotdead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "fleshKilled"
-tempJob.numberRec = 5
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 2
-tempJob.moneyReward = {210, 290}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killFleshesMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d fleshes."
-tempJob.desc = "%d fleshes."
-tempJob.icon = "vgui/icons/plotdead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "fleshKilled"
-tempJob.numberRec = 10
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 5
-tempJob.moneyReward = {300, 400}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killFleshesHigh")
-
-tempJob = nil
-
--- pseudodogs
-
-local tempJob = {}
-
-tempJob.name = "Kill %d pseudodogs."
-tempJob.desc = "%d pseudodogs."
-tempJob.icon = "vgui/icons/psi-dogdead.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "pseudodogKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 7
-tempJob.moneyReward = {450, 600}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killPseudodogsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d pseudodogs."
-tempJob.desc = "%d pseudodogs."
-tempJob.icon = "vgui/icons/psi-dogdead.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "pseudodogKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 12
-tempJob.moneyReward = {600, 900}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killPseudodogsMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d pseudodogs."
-tempJob.desc = "%d pseudodogs."
-tempJob.icon = "vgui/icons/psi-dogdead.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "pseudodogKilled"
-tempJob.numberRec = 3
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 17
-tempJob.moneyReward = {750, 1000}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killPseudodogsHigh")
-
-tempJob = nil
-
--- Snork
-
-local tempJob = {}
-
-tempJob.name = "Kill %d snorks."
-tempJob.desc = "%d snorks."
-tempJob.icon = "vgui/icons/snorkdead.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "snorkKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 10
-tempJob.moneyReward = {500, 750}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killSnorksLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d snorks."
-tempJob.desc = "%d snorks."
-tempJob.icon = "vgui/icons/snorkdead.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "snorkKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 14
-tempJob.moneyReward = {750, 1000}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killSnorksMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d snorks."
-tempJob.desc = "%d snorks."
-tempJob.icon = "vgui/icons/snorkdead.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "snorkKilled"
-tempJob.numberRec = 4
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 20
-tempJob.moneyReward = {1000, 1250}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killSnorksHigh")
-
-tempJob = nil
-
-
--- psydogs
-local tempJob = {}
-
-tempJob.name = "Kill %d psydogs."
-tempJob.desc = "%d psydogs."
-tempJob.icon = "entities/vj_mutant_psydog.png"
-tempJob.tier = 2
-tempJob.listenTrigger = "psydogKilled"
-tempJob.numberRec = {1,1}
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 15
-tempJob.moneyReward = {800, 1100}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killPsydogsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d psydogs."
-tempJob.desc = "%d psydogs."
-tempJob.icon = "entities/vj_mutant_psydog.png"
-tempJob.tier = 3
-tempJob.listenTrigger = "psydogKilled"
-tempJob.numberRec = {2,3}
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 20
-tempJob.moneyReward = {950, 1300}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killPsydogsLow")
-
-tempJob = nil
-
--- Pseudogiants
-
-local tempJob = {}
-
-tempJob.name = "Kill %d pseudogiants."
-tempJob.desc = "%d pseudogiants."
-tempJob.icon = "entities/vj_mutant_pseudogiant.png"
-tempJob.tier = 3
-tempJob.listenTrigger = "pseudogiantKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier04"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 75
-tempJob.moneyReward = {8000, 9500}
-tempJob.categories = {"mutantkillhard"}
-
-ix.jobs.register(tempJob, "killPseudogiantsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d pseudogiants."
-tempJob.desc = "%d pseudogiants."
-tempJob.icon = "entities/vj_mutant_pseudogiant.png"
-tempJob.tier = 4
-tempJob.listenTrigger = "pseudogiantKilled"
-tempJob.numberRec = {2,3}
-tempJob.reward = {{"kit_reward_ammo_tier04"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 150
-tempJob.moneyReward = {12000, 14000}
-tempJob.categories = {"mutantkillhard"}
-
-ix.jobs.register(tempJob, "killPseudogiantsHigh")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Kill %d izloms."
-tempJob.desc = "%d izloms."
-tempJob.icon = "entities/vj_mutant_izlom4.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "izlomKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = {1,1}
-tempJob.repReward = 25
-tempJob.moneyReward = {1500, 2000}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killIzlomsLow")
-
-tempJob = nil
-
--- Spider
-
-local tempJob = {}
-
-tempJob.name = "Kill %d spiders."
-tempJob.desc = "%d spiders."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 1
-tempJob.listenTrigger = "spiderKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 12
-tempJob.moneyReward = {800, 1200}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killSpidersLow")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Kill %d spiders."
-tempJob.desc = "%d spiders."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 1
-tempJob.listenTrigger = "spiderKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 18
-tempJob.moneyReward = {1300, 1500}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killSpidersMid")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "Kill %d spiders."
-tempJob.desc = "%d spiders."
-tempJob.icon = "propic/event/mutanthunt"
-tempJob.tier = 1
-tempJob.listenTrigger = "spiderKilled"
-tempJob.numberRec = 4
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 30
-tempJob.moneyReward = {1900, 2500}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killSpidersHigh")
-
-tempJob = nil
-
--- Tark
-
-local tempJob = {}
-
-tempJob.name = "Kill %d tarks."
-tempJob.desc = "%d tarks."
-tempJob.icon = "entities/vj_mutant_tark.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "tarkKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {600, 800}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killTarksLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d tarks."
-tempJob.desc = "%d tarks."
-tempJob.icon = "entities/vj_mutant_tark.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "tarkKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {1500, 1700}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killTarksMid")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d tarks."
-tempJob.desc = "%d tarks."
-tempJob.icon = "entities/vj_mutant_tark.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "tarkKilled"
-tempJob.numberRec = 3
-tempJob.reward = {{"kit_reward_ammo_tier01"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 25
-tempJob.moneyReward = {2400, 2700}
-tempJob.categories = {"mutantkilleasy"}
-
-ix.jobs.register(tempJob, "killTarksHigh")
-
-tempJob = nil
-
--- Sprig
-local tempJob = {}
-
-tempJob.name = "Kill %d sprigs."
-tempJob.desc = "%d sprigs."
-tempJob.icon = "entities/vj_mutant_zanoza.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "sprigKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {1000, 1800}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killSprigsLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d sprigs."
-tempJob.desc = "%d sprigs."
-tempJob.icon = "entities/vj_mutant_zanoza.png"
-tempJob.tier = 1
-tempJob.listenTrigger = "sprigKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 25
-tempJob.moneyReward = {1600, 2500}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killSprigsHigh")
-
-tempJob = nil
-
--- Vareshka
-
-local tempJob = {}
-
-tempJob.name = "Kill %d vareshkas."
-tempJob.desc = "%d vareshkas."
-tempJob.icon = "entities/vj_mutant_borya.png"
-tempJob.tier = 3
-tempJob.listenTrigger = "vareshkaKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 25
-tempJob.moneyReward = {3000, 5500}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killVareshkasLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d vareshkas."
-tempJob.desc = "%d vareshkas."
-tempJob.icon = "entities/vj_mutant_borya.png"
-tempJob.tier = 3
-tempJob.listenTrigger = "vareshkaKilled"
-tempJob.numberRec = 2
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 35
-tempJob.moneyReward = {4500, 7600}
-tempJob.categories = {"mutantkillmedium"}
-
-ix.jobs.register(tempJob, "killVareshkasHigh")
-
-tempJob = nil
-
--- Karlik
-
-local tempJob = {}
-
-tempJob.name = "Kill %d karliks."
-tempJob.desc = "%d karliks."
-tempJob.icon = "entities/vj_mutant_karlik2.png"
-tempJob.tier = 3
-tempJob.listenTrigger = "karlikKilled"
-tempJob.numberRec = 1
-tempJob.reward = {{"kit_reward_ammo_tier02"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 60
-tempJob.moneyReward = {4000, 8400}
-tempJob.categories = {"mutantkillhard"}
-
-ix.jobs.register(tempJob, "killKarliksLow")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Kill %d karliks."
-tempJob.desc = "%d karliks."
-tempJob.icon = "entities/vj_mutant_karlik2.png"
-tempJob.tier = 3
-tempJob.listenTrigger = "karlikKilled"
-tempJob.numberRec = 3
-tempJob.reward = {{"kit_reward_ammo_tier03"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 90
-tempJob.moneyReward = {9000, 15000}
-tempJob.categories = {"mutantkillhard"}
-
-ix.jobs.register(tempJob, "killKarliksHigh")
-
-tempJob = nil
-
--- Skeleton
-
-local tempJob = {}
-
-tempJob.name = "Kill %d skeletons."
-tempJob.desc = "%d skeletons."
-tempJob.icon = "entities/vj_mutant_zombi3.png"
-tempJob.tier = 3
-tempJob.listenTrigger = "skeletonKilled"
-tempJob.numberRec = 8
-tempJob.reward = {{"kit_reward_ammo_tier03"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 60
-tempJob.moneyReward = {11000, 22000}
-tempJob.categories = {"mutantkillhard"}
-
-ix.jobs.register(tempJob, "killSkeleton")
-
-tempJob = nil
+ix.jobs.register({
+	name = "Kill %d mutants.",
+	desc = "%d mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 1,
+	listenTrigger = "mutantKilled",
+	numberRec = 12,
+	reward = {
+		{"762x25", { ["quantity"] = 25 }},
+		{"22lr", { ["quantity"] = 35 }},
+		{"9x18", { ["quantity"] = 25 }},
+		{"9x19", { ["quantity"] = 25 }},
+		{"45acp", { ["quantity"] = 25 }},
+	},
+	rewardCount = 2,
+	repReward = 12,
+	moneyReward = {750, 1100},
+	categories = {"mutantkillgroupeasy"},
+}, "killMutantsLow")
+
+ix.jobs.register({
+	name = "Kill %d mutants.",
+	desc = "%d mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "mutantKilled",
+	numberRec = 24,
+	reward = {"kit_ammo_m_low"},
+	rewardCount = 2,
+	repReward = 21,
+	moneyReward = {1250, 1650},
+	categories = {"mutantkillgroupeasy"},
+}, "killMutantsMid")
+
+ix.jobs.register({
+	name = "Kill %d mutants.",
+	desc = "%d mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "mutantKilled",
+	numberRec = 40,
+	reward = {"kit_ammo_med"},
+	rewardCount = 2,
+	repReward = 34,
+	moneyReward = {2500, 2900},
+	categories = {"mutantkillgroupeasy"},
+}, "killMutantsHigh")
+
+ix.jobs.register({
+	name = "Kill %d humanoid mutants.",
+	desc = "%d humanoid mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupHumanoidKilled",
+	numberRec = 5,
+	reward = {{"kit_ammo_low"}},
+	rewardCount = 1,
+	repReward = 10,
+	moneyReward = {400, 600},
+	categories = {"mutantkillgroupeasy"},
+}, "killHumanoidsLow")
+
+ix.jobs.register({
+	name = "Kill %d humanoid mutants.",
+	desc = "%d humanoid mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupHumanoidKilled",
+	numberRec = 9,
+	reward = {{"kit_ammo_low"}},
+	rewardCount = 1,
+	repReward = 13,
+	moneyReward = {600, 800},
+	categories = {"mutantkillgroupeasy"},
+}, "killHumanoidsMid")
+
+ix.jobs.register({
+	name = "Kill %d humanoid mutants.",
+	desc = "%d humanoid mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupHumanoidKilled",
+	numberRec = 15,
+	reward = {{"kit_ammo_med"}},
+	rewardCount = 1,
+	repReward = 21,
+	moneyReward = {900, 1300},
+	categories = {"mutantkillgroupeasy"},
+}, "killHumanoidsHigh")
+
+ix.jobs.register({
+	name = "Kill %d predator mutants.",
+	desc = "%d predator mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupPredatorKilled",
+	numberRec = 2,
+	reward = {{"kit_ammo_low"}, 0},
+	rewardCount = 1,
+	repReward = 8,
+	moneyReward = {500, 600},
+	categories = {"mutantkillgroupmedium"},
+}, "killPredatorsLow")
+
+ix.jobs.register({
+	name = "Kill %d predator mutants.",
+	desc = "%d predator mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupPredatorKilled",
+	numberRec = 4,
+	reward = {{"kit_ammo_low"}, 0},
+	rewardCount = 2,
+	repReward = 12,
+	moneyReward = {800, 1000},
+	categories = {"mutantkillgroupmedium"},
+}, "killPredatorsMid")
+
+ix.jobs.register({
+	name = "Kill %d predator mutants.",
+	desc = "%d predator mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupPredatorKilled",
+	numberRec = 6,
+	reward = {{"kit_ammo_low"}, {"kit_ammo_low"}, 0},
+	rewardCount = 2,
+	repReward = 18,
+	moneyReward = {1200, 1400},
+	categories = {"mutantkillgroupmedium"},
+}, "killPredatorsHigh")
+
+ix.jobs.register({
+	name = "Kill %d canine mutants.",
+	desc = "%d canine mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupCanineKilled",
+	numberRec = 5,
+	reward = {{"kit_ammo_low"}, {"kit_ammo_low"}, 0},
+	rewardCount = 1,
+	repReward = 7,
+	moneyReward = {350, 460},
+	categories = {"mutantkillgroupeasy"},
+}, "killCaninesLow")
+
+ix.jobs.register({
+	name = "Kill %d canine mutants.",
+	desc = "%d canine mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupCanineKilled",
+	numberRec = 9,
+	reward = {{"kit_ammo_low"}, {"kit_ammo_low"}, 0},
+	rewardCount = 1,
+	repReward = 15,
+	moneyReward = {600, 800},
+	categories = {"mutantkillgroupeasy"},
+}, "killCaninesMid")
+
+ix.jobs.register({
+	name = "Kill %d canine mutants.",
+	desc = "%d canine mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupCanineKilled",
+	numberRec = 13,
+	reward = {{"kit_ammo_low"}, {"kit_ammo_low"}, 0},
+	rewardCount = 2,
+	repReward = 20,
+	moneyReward = {700, 1000},
+	categories = {"mutantkillgroupeasy"},
+}, "killCaninesHigh")
+
+ix.jobs.register({
+	name = "Kill %d meat mutants.",
+	desc = "%d meat mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupMeatKilled",
+	numberRec = 4,
+	reward = {{"kit_ammo_low"}, 0},
+	rewardCount = 1,
+	repReward = 5,
+	moneyReward = {150, 250},
+	categories = {"mutantkillgroupeasy"},
+}, "killMeatsLow")
+
+ix.jobs.register({
+	name = "Kill %d meat mutants.",
+	desc = "%d meat mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupMeatKilled",
+	numberRec = 8,
+	reward = {{"kit_ammo_low"}, 0},
+	rewardCount = 1,
+	repReward = 10,
+	moneyReward = {190, 370},
+	categories = {"mutantkillgroupeasy"},
+}, "killMeatsMid")
+
+ix.jobs.register({
+	name = "Kill %d meat mutants.",
+	desc = "%d meat mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupMeatKilled",
+	numberRec = 14,
+	reward = {{"kit_ammo_low"}, 0},
+	rewardCount = 2,
+	repReward = 15,
+	moneyReward = {470, 770},
+	categories = {"mutantkillgroupeasy"},
+}, "killMeatsHigh")
+
+ix.jobs.register({
+	name = "Kill %d psychic mutants.",
+	desc = "%d psychic mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupPsyKilled",
+	numberRec = 2,
+	reward = {{"kit_ammo_rare"}, 0},
+	rewardCount = 1,
+	repReward = 50,
+	moneyReward = {2000, 4000},
+	categories = {"mutantkillgroupmedium"},
+}, "killPsyLow")
+
+ix.jobs.register({
+	name = "Kill %d psychic mutants.",
+	desc = "%d psychic mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupPsyKilled",
+	numberRec = 4,
+	reward = {{"kit_ammo_rare"}, 0},
+	rewardCount = 1,
+	repReward = 75,
+	moneyReward = {3000, 6000},
+	categories = {"mutantkillgroupmedium"},
+}, "killPsyMid")
+
+ix.jobs.register({
+	name = "Kill %d psychic mutants.",
+	desc = "%d psychic mutants.",
+	icon = "propic/event/mutanthunt",
+	tier = 2,
+	listenTrigger = "groupPsyKilled",
+	numberRec = 6,
+	reward = {{"kit_ammo_rare"}, 0},
+	rewardCount = 2,
+	repReward = 120,
+	moneyReward = {4000, 7000},
+	categories = {"mutantkillgroupmedium"},
+}, "killPsyHigh")
+
+ix.jobs.register({
+	name = "Kill %d rodents.",
+	desc = "%d rodents.",
+	icon = "vgui/icons/tushkandead.png",
+	tier = 1,
+	listenTrigger = "rodentKilled",
+	numberRec = 2,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 2,
+	moneyReward = {120, 180},
+	categories = {"mutantkilleasy"},
+}, "killRodentsLow")
+
+ix.jobs.register({
+	name = "Kill %d rodents.",
+	desc = "%d rodents.",
+	icon = "vgui/icons/tushkandead.png",
+	tier = 1,
+	listenTrigger = "rodentKilled",
+	numberRec = 5,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 6,
+	moneyReward = {260, 420},
+	categories = {"mutantkilleasy"},
+}, "killRodentsMid")
+
+ix.jobs.register({
+	name = "Kill %d rodents.",
+	desc = "%d rodents.",
+	icon = "vgui/icons/tushkandead.png",
+	tier = 1,
+	listenTrigger = "rodentKilled",
+	numberRec = 8,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 9,
+	moneyReward = {320, 490},
+	categories = {"mutantkilleasy"},
+}, "killRodentsHigh")
+
+ix.jobs.register({
+	name = "Kill %d hellhounds.",
+	desc = "%d hellhounds.",
+	icon = "vgui/icons/dogdead.png",
+	tier = 2,
+	listenTrigger = "hellhoundKilled",
+	numberRec = 2,
+	reward = {{"kit_ammo_low"}, {"kit_ammo_med"}},
+	rewardCount = 1,
+	repReward = 9,
+	moneyReward = {900, 1500},
+	categories = {"mutantkillhard"},
+}, "killHellhoundsLow")
+
+ix.jobs.register({
+	name = "Kill %d hellhounds.",
+	desc = "%d hellhounds.",
+	icon = "vgui/icons/dogdead.png",
+	tier = 2,
+	listenTrigger = "hellhoundKilled",
+	numberRec = 4,
+	reward = {{"kit_ammo_low"}, {"kit_ammo_med"}},
+	rewardCount = 2,
+	repReward = 17,
+	moneyReward = {1200, 1800},
+	categories = {"mutantkillhard"},
+}, "killHellhoundsHigh")
+
+ix.jobs.register({
+	name = "Kill %d zombies.",
+	desc = "%d zombies.",
+	icon = "vgui/icons/face_42.png",
+	tier = 2,
+	listenTrigger = "zombieKilled",
+	numberRec = 3,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 5,
+	moneyReward = {320, 490},
+	categories = {"mutantkilleasy"},
+}, "killZombiesLow")
+
+ix.jobs.register({
+	name = "Kill %d zombies.",
+	desc = "%d zombies.",
+	icon = "vgui/icons/face_42.png",
+	tier = 2,
+	listenTrigger = "zombieKilled",
+	numberRec = 7,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 8,
+	moneyReward = {480, 600},
+	categories = {"mutantkilleasy"},
+}, "killZombiesMid")
+
+ix.jobs.register({
+	name = "Kill %d zombies.",
+	desc = "%d zombies.",
+	icon = "vgui/icons/face_42.png",
+	tier = 2,
+	listenTrigger = "zombieKilled",
+	numberRec = 12,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 12,
+	moneyReward = {550, 700},
+	categories = {"mutantkilleasy"},
+}, "killZombiesHigh")
+
+ix.jobs.register({
+	name = "Kill %d cats.",
+	desc = "%d cats.",
+	icon = "entities/vj_mutant_cat3.png",
+	tier = 1,
+	listenTrigger = "catKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = {1,1},
+	repReward = 8,
+	moneyReward = {600, 900},
+	categories = {"mutantkilleasy"},
+}, "killCatsLow")
+
+ix.jobs.register({
+	name = "Kill %d cats.",
+	desc = "%d cats.",
+	icon = "entities/vj_mutant_cat3.png",
+	tier = 2,
+	listenTrigger = "catKilled",
+	numberRec = 2,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 12,
+	moneyReward = {850, 1150},
+	categories = {"mutantkilleasy"},
+}, "killCatsMid")
+
+ix.jobs.register({
+	name = "Kill %d cats.",
+	desc = "%d cats.",
+	icon = "entities/vj_mutant_cat3.png",
+	tier = 2,
+	listenTrigger = "catKilled",
+	numberRec = 4,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 16,
+	moneyReward = {1000, 1400},
+	categories = {"mutantkilleasy"},
+}, "killCatsHigh")
+
+ix.jobs.register({
+	name = "Kill %d bloodsuckers.",
+	desc = "%d bloodsuckers.",
+	icon = "vgui/icons/sosdead.png",
+	tier = 2,
+	listenTrigger = "bloodsuckerKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = {1,1},
+	repReward = 12,
+	moneyReward = {1200, 1400},
+	categories = {"mutantkillmedium"},
+}, "killBloodsuckersLow")
+
+ix.jobs.register({
+	name = "Kill %d bloodsuckers.",
+	desc = "%d bloodsuckers.",
+	icon = "vgui/icons/sosdead.png",
+	tier = 2,
+	listenTrigger = "bloodsuckerKilled",
+	numberRec = 2,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = {1,1},
+	repReward = 18,
+	moneyReward = {1300, 1690},
+	categories = {"mutantkillmedium"},
+}, "killBloodsuckersMid")
+
+ix.jobs.register({
+	name = "Kill %d bloodsuckers.",
+	desc = "%d bloodsuckers.",
+	icon = "vgui/icons/sosdead.png",
+	tier = 2,
+	listenTrigger = "bloodsuckerKilled",
+	numberRec = 4,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = 1,
+	repReward = 25,
+	moneyReward = {1550, 1890},
+	categories = {"mutantkillmedium"},
+}, "killBloodsuckersHigh")
+
+ix.jobs.register({
+	name = "Kill %d boars.",
+	desc = "%d boars.",
+	icon = "vgui/icons/kabandead.png",
+	tier = 1,
+	listenTrigger = "boarKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = {1,1},
+	repReward = 3,
+	moneyReward = {200, 300},
+	categories = {"mutantkilleasy"},
+}, "killBoarsLow")
+
+ix.jobs.register({
+	name = "Kill %d boars.",
+	desc = "%d boars.",
+	icon = "vgui/icons/kabandead.png",
+	tier = 1,
+	listenTrigger = "boarKilled",
+	numberRec = 3,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = {1,1},
+	repReward = 5,
+	moneyReward = {350, 500},
+	categories = {"mutantkilleasy"},
+}, "killBoarsMid")
+
+ix.jobs.register({
+	name = "Kill %d boars.",
+	desc = "%d boars.",
+	icon = "vgui/icons/kabandead.png",
+	tier = 1,
+	listenTrigger = "boarKilled",
+	numberRec = 6,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = {1,1},
+	repReward = 9,
+	moneyReward = {450, 700},
+	categories = {"mutantkilleasy"},
+}, "killBoarsHigh")
+
+ix.jobs.register({
+	name = "Kill %d burers.",
+	desc = "%d burers.",
+	icon = "entities/vj_mutant_burer.png",
+	tier = 3,
+	listenTrigger = "burerKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = 1,
+	repReward = 35,
+	moneyReward = {2500, 5000},
+	categories = {"mutantkillmedium"},
+}, "killBurersLow")
+
+ix.jobs.register({
+	name = "Kill %d burers.",
+	desc = "%d burers.",
+	icon = "entities/vj_mutant_burer.png",
+	tier = 3,
+	listenTrigger = "burerKilled",
+	numberRec = 3,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = 1,
+	repReward = 75,
+	moneyReward = {6000, 8500},
+	categories = {"mutantkillmedium"},
+}, "killBurersHigh")
+
+ix.jobs.register({
+	name = "Kill %d chimeras.",
+	desc = "%d chimeras.",
+	icon = "entities/vj_mutant_chimera.png",
+	tier = 3,
+	listenTrigger = "chimeraKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier03"}},
+	rewardCount = 1,
+	repReward = 45,
+	moneyReward = {5000, 8500},
+	categories = {"mutantkillhard"},
+}, "killChimerasLow")
+
+ix.jobs.register({
+	name = "Kill %d chimeras.",
+	desc = "%d chimeras.",
+	icon = "entities/vj_mutant_chimera.png",
+	tier = 4,
+	listenTrigger = "chimeraKilled",
+	numberRec = 3,
+	reward = {{"kit_reward_ammo_tier03"}},
+	rewardCount = 1,
+	repReward = 70,
+	moneyReward = {12000, 16500},
+	categories = {"mutantkillhard"},
+}, "killChimerasHigh")
+
+ix.jobs.register({
+	name = "Kill %d electro-chimeras.",
+	desc = "%d electro-chimeras.",
+	icon = "entities/vj_mutant_chimera5.png",
+	tier = 3,
+	listenTrigger = "electrochimeraKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier04"}},
+	rewardCount = 1,
+	repReward = 79,
+	moneyReward = {8000, 11000},
+	categories = {"mutantkillhard"},
+}, "killChimerasLow")
+
+ix.jobs.register({
+	name = "Kill %d electro-chimeras.",
+	desc = "%d electro-chimeras.",
+	icon = "entities/vj_mutant_chimera5.png",
+	tier = 4,
+	listenTrigger = "electrochimeraKilled",
+	numberRec = 2,
+	reward = {{"kit_reward_ammo_tier04"}},
+	rewardCount = 1,
+	repReward = 120,
+	moneyReward = {15500, 19600},
+	categories = {"mutantkillhard"},
+}, "killChimerasHigh")
+
+ix.jobs.register({
+	name = "Kill %d controllers.",
+	desc = "%d controllers.",
+	icon = "entities/vj_mutant_controler.png",
+	tier = 2,
+	listenTrigger = "controllerKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = 1,
+	repReward = 40,
+	moneyReward = {10000, 14400},
+	categories = {"mutantkillmedium"},
+}, "killControllersLow")
+
+ix.jobs.register({
+	name = "Kill %d controllers.",
+	desc = "%d controllers.",
+	icon = "entities/vj_mutant_controler.png",
+	tier = 3,
+	listenTrigger = "controllerKilled",
+	numberRec = {2,3},
+	reward = {{"kit_reward_ammo_tier03"}},
+	rewardCount = 1,
+	moneyReward = {14000, 18500},
+	repReward = 95,
+	categories = {"mutantkillhard"},
+}, "killControllersHigh")
+
+ix.jobs.register({
+	name = "Kill %d blind dogs.",
+	desc = "%d blind dogs.",
+	icon = "vgui/icons/dogdead.png",
+	tier = 1,
+	listenTrigger = "blinddogKilled",
+	numberRec = 3,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = {1,1},
+	repReward = 4,
+	moneyReward = {300, 490},
+	categories = {"mutantkilleasy"},
+}, "killDogsLow")
+
+ix.jobs.register({
+	name = "Kill %d blind dogs.",
+	desc = "%d blind dogs.",
+	icon = "vgui/icons/dogdead.png",
+	tier = 1,
+	listenTrigger = "blinddogKilled",
+	numberRec = 6,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 7,
+	moneyReward = {500, 550},
+	categories = {"mutantkilleasy"},
+}, "killDogsMid")
+
+ix.jobs.register({
+	name = "Kill %d blind dogs.",
+	desc = "%d blind dogs.",
+	icon = "vgui/icons/dogdead.png",
+	tier = 1,
+	listenTrigger = "blinddogKilled",
+	numberRec = 12,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 13,
+	moneyReward = {800, 900},
+	categories = {"mutantkilleasy"},
+}, "killDogsHigh")
+
+ix.jobs.register({
+	name = "Kill %d fleshes.",
+	desc = "%d fleshes.",
+	icon = "vgui/icons/plotdead.png",
+	tier = 1,
+	listenTrigger = "fleshKilled",
+	numberRec = 2,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 1,
+	moneyReward = {120, 175},
+	categories = {"mutantkilleasy"},
+}, "killFleshesLow")
+
+ix.jobs.register({
+	name = "Kill %d fleshes.",
+	desc = "%d fleshes.",
+	icon = "vgui/icons/plotdead.png",
+	tier = 1,
+	listenTrigger = "fleshKilled",
+	numberRec = 5,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 2,
+	moneyReward = {210, 290},
+	categories = {"mutantkilleasy"},
+}, "killFleshesMid")
+
+ix.jobs.register({
+	name = "Kill %d fleshes.",
+	desc = "%d fleshes.",
+	icon = "vgui/icons/plotdead.png",
+	tier = 1,
+	listenTrigger = "fleshKilled",
+	numberRec = 10,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 5,
+	moneyReward = {300, 400},
+	categories = {"mutantkilleasy"},
+}, "killFleshesHigh")
+
+ix.jobs.register({
+	name = "Kill %d pseudodogs.",
+	desc = "%d pseudodogs.",
+	icon = "vgui/icons/psi-dogdead.png",
+	tier = 1,
+	listenTrigger = "pseudodogKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = {1,1},
+	repReward = 7,
+	moneyReward = {450, 600},
+	categories = {"mutantkilleasy"},
+}, "killPseudodogsLow")
+
+ix.jobs.register({
+	name = "Kill %d pseudodogs.",
+	desc = "%d pseudodogs.",
+	icon = "vgui/icons/psi-dogdead.png",
+	tier = 2,
+	listenTrigger = "pseudodogKilled",
+	numberRec = 2,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = {1,1},
+	repReward = 12,
+	moneyReward = {600, 900},
+	categories = {"mutantkilleasy"},
+}, "killPseudodogsMid")
+
+ix.jobs.register({
+	name = "Kill %d pseudodogs.",
+	desc = "%d pseudodogs.",
+	icon = "vgui/icons/psi-dogdead.png",
+	tier = 2,
+	listenTrigger = "pseudodogKilled",
+	numberRec = 3,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = {1,1},
+	repReward = 17,
+	moneyReward = {750, 1000},
+	categories = {"mutantkilleasy"},
+}, "killPseudodogsHigh")
+
+ix.jobs.register({
+	name = "Kill %d snorks.",
+	desc = "%d snorks.",
+	icon = "vgui/icons/snorkdead.png",
+	tier = 2,
+	listenTrigger = "snorkKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = {1,1},
+	repReward = 10,
+	moneyReward = {500, 750},
+	categories = {"mutantkillmedium"},
+}, "killSnorksLow")
+
+ix.jobs.register({
+	name = "Kill %d snorks.",
+	desc = "%d snorks.",
+	icon = "vgui/icons/snorkdead.png",
+	tier = 2,
+	listenTrigger = "snorkKilled",
+	numberRec = 2,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = {1,1},
+	repReward = 14,
+	moneyReward = {750, 1000},
+	categories = {"mutantkillmedium"},
+}, "killSnorksMid")
+
+ix.jobs.register({
+	name = "Kill %d snorks.",
+	desc = "%d snorks.",
+	icon = "vgui/icons/snorkdead.png",
+	tier = 2,
+	listenTrigger = "snorkKilled",
+	numberRec = 4,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = {1,1},
+	repReward = 20,
+	moneyReward = {1000, 1250},
+	categories = {"mutantkillmedium"},
+}, "killSnorksHigh")
+
+ix.jobs.register({
+	name = "Kill %d psydogs.",
+	desc = "%d psydogs.",
+	icon = "entities/vj_mutant_psydog.png",
+	tier = 2,
+	listenTrigger = "psydogKilled",
+	numberRec = {1,1},
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = {1,1},
+	repReward = 15,
+	moneyReward = {800, 1100},
+	categories = {"mutantkillmedium"},
+}, "killPsydogsLow")
+
+ix.jobs.register({
+	name = "Kill %d psydogs.",
+	desc = "%d psydogs.",
+	icon = "entities/vj_mutant_psydog.png",
+	tier = 3,
+	listenTrigger = "psydogKilled",
+	numberRec = {2,3},
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = {1,1},
+	repReward = 20,
+	moneyReward = {950, 1300},
+	categories = {"mutantkillmedium"},
+}, "killPsydogsLow")
+
+ix.jobs.register({
+	name = "Kill %d pseudogiants.",
+	desc = "%d pseudogiants.",
+	icon = "entities/vj_mutant_pseudogiant.png",
+	tier = 3,
+	listenTrigger = "pseudogiantKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier04"}},
+	rewardCount = 1,
+	repReward = 75,
+	moneyReward = {8000, 9500},
+	categories = {"mutantkillhard"},
+}, "killPseudogiantsLow")
+
+ix.jobs.register({
+	name = "Kill %d pseudogiants.",
+	desc = "%d pseudogiants.",
+	icon = "entities/vj_mutant_pseudogiant.png",
+	tier = 4,
+	listenTrigger = "pseudogiantKilled",
+	numberRec = {2,3},
+	reward = {{"kit_reward_ammo_tier04"}},
+	rewardCount = 1,
+	repReward = 150,
+	moneyReward = {12000, 14000},
+	categories = {"mutantkillhard"},
+}, "killPseudogiantsHigh")
+
+ix.jobs.register({
+	name = "Kill %d izloms.",
+	desc = "%d izloms.",
+	icon = "entities/vj_mutant_izlom4.png",
+	tier = 1,
+	listenTrigger = "izlomKilled",
+	numberRec = 2,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = {1,1},
+	repReward = 25,
+	moneyReward = {1500, 2000},
+	categories = {"mutantkillmedium"},
+}, "killIzlomsLow")
+
+ix.jobs.register({
+	name = "Kill %d spiders.",
+	desc = "%d spiders.",
+	icon = "propic/event/mutanthunt",
+	tier = 1,
+	listenTrigger = "spiderKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = 1,
+	repReward = 12,
+	moneyReward = {800, 1200},
+	categories = {"mutantkillmedium"},
+}, "killSpidersLow")
+
+ix.jobs.register({
+	name = "Kill %d spiders.",
+	desc = "%d spiders.",
+	icon = "propic/event/mutanthunt",
+	tier = 1,
+	listenTrigger = "spiderKilled",
+	numberRec = 2,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = 1,
+	repReward = 18,
+	moneyReward = {1300, 1500},
+	categories = {"mutantkillmedium"},
+}, "killSpidersMid")
+
+ix.jobs.register({
+	name = "Kill %d spiders.",
+	desc = "%d spiders.",
+	icon = "propic/event/mutanthunt",
+	tier = 1,
+	listenTrigger = "spiderKilled",
+	numberRec = 4,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = 1,
+	repReward = 30,
+	moneyReward = {1900, 2500},
+	categories = {"mutantkillmedium"},
+}, "killSpidersHigh")
+
+ix.jobs.register({
+	name = "Kill %d tarks.",
+	desc = "%d tarks.",
+	icon = "entities/vj_mutant_tark.png",
+	tier = 1,
+	listenTrigger = "tarkKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 15,
+	moneyReward = {600, 800},
+	categories = {"mutantkilleasy"},
+}, "killTarksLow")
+
+ix.jobs.register({
+	name = "Kill %d tarks.",
+	desc = "%d tarks.",
+	icon = "entities/vj_mutant_tark.png",
+	tier = 1,
+	listenTrigger = "tarkKilled",
+	numberRec = 2,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {1500, 1700},
+	categories = {"mutantkilleasy"},
+}, "killTarksMid")
+
+ix.jobs.register({
+	name = "Kill %d tarks.",
+	desc = "%d tarks.",
+	icon = "entities/vj_mutant_tark.png",
+	tier = 1,
+	listenTrigger = "tarkKilled",
+	numberRec = 3,
+	reward = {{"kit_reward_ammo_tier01"}},
+	rewardCount = 1,
+	repReward = 25,
+	moneyReward = {2400, 2700},
+	categories = {"mutantkilleasy"},
+}, "killTarksHigh")
+
+ix.jobs.register({
+	name = "Kill %d sprigs.",
+	desc = "%d sprigs.",
+	icon = "entities/vj_mutant_zanoza.png",
+	tier = 1,
+	listenTrigger = "sprigKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = 1,
+	repReward = 15,
+	moneyReward = {1000, 1800},
+	categories = {"mutantkillmedium"},
+}, "killSprigsLow")
+
+ix.jobs.register({
+	name = "Kill %d sprigs.",
+	desc = "%d sprigs.",
+	icon = "entities/vj_mutant_zanoza.png",
+	tier = 1,
+	listenTrigger = "sprigKilled",
+	numberRec = 2,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = 1,
+	repReward = 25,
+	moneyReward = {1600, 2500},
+	categories = {"mutantkillmedium"},
+}, "killSprigsHigh")
+
+ix.jobs.register({
+	name = "Kill %d vareshkas.",
+	desc = "%d vareshkas.",
+	icon = "entities/vj_mutant_borya.png",
+	tier = 3,
+	listenTrigger = "vareshkaKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = 1,
+	repReward = 25,
+	moneyReward = {3000, 5500},
+	categories = {"mutantkillmedium"},
+}, "killVareshkasLow")
+
+ix.jobs.register({
+	name = "Kill %d vareshkas.",
+	desc = "%d vareshkas.",
+	icon = "entities/vj_mutant_borya.png",
+	tier = 3,
+	listenTrigger = "vareshkaKilled",
+	numberRec = 2,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = 1,
+	repReward = 35,
+	moneyReward = {4500, 7600},
+	categories = {"mutantkillmedium"},
+}, "killVareshkasHigh")
+
+ix.jobs.register({
+	name = "Kill %d karliks.",
+	desc = "%d karliks.",
+	icon = "entities/vj_mutant_karlik2.png",
+	tier = 3,
+	listenTrigger = "karlikKilled",
+	numberRec = 1,
+	reward = {{"kit_reward_ammo_tier02"}},
+	rewardCount = 1,
+	repReward = 60,
+	moneyReward = {4000, 8400},
+	categories = {"mutantkillhard"},
+}, "killKarliksLow")
+
+ix.jobs.register({
+	name = "Kill %d karliks.",
+	desc = "%d karliks.",
+	icon = "entities/vj_mutant_karlik2.png",
+	tier = 3,
+	listenTrigger = "karlikKilled",
+	numberRec = 3,
+	reward = {{"kit_reward_ammo_tier03"}},
+	rewardCount = 1,
+	repReward = 90,
+	moneyReward = {9000, 15000},
+	categories = {"mutantkillhard"},
+}, "killKarliksHigh")
+
+ix.jobs.register({
+	name = "Kill %d skeletons.",
+	desc = "%d skeletons.",
+	icon = "entities/vj_mutant_zombi3.png",
+	tier = 3,
+	listenTrigger = "skeletonKilled",
+	numberRec = 8,
+	reward = {{"kit_reward_ammo_tier03"}},
+	rewardCount = 1,
+	repReward = 60,
+	moneyReward = {11000, 22000},
+	categories = {"mutantkillhard"},
+}, "killSkeleton")

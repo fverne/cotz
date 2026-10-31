@@ -1,676 +1,517 @@
----
--- Artifact jobs - Could technically be under item jobs, but just to avoid having that file grow to 3k+ lines
---                 These are split into two, one for egghead and one for the computer
---                 Egghead gives items, money and rep, whereas the computer only gives money and rep
----
-
-------------------------------------------------
------------ ITEM RETRIEVAL - ARTIFACT ----------
------------           EGGHEAD         ----------
-------------------------------------------------
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Arachno."
-tempJob.desc = "1 Arachno."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_arachno"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {10000, 13000}
-tempJob.categories = {"artifactcollect_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_arachno")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 2 Batteries."
-tempJob.desc = "2 Batteries."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_battery"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 30
-tempJob.moneyReward = {16500, 18400}
-tempJob.categories = {"artifactcollect_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_battery")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Blown Capacitor."
-tempJob.desc = "1 Blown Capacitor."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_blowncap"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {7000, 9500}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_blowncap")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Anomalous Bolt."
-tempJob.desc = "1 Anomalous Bolt."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_bolt"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {800, 900}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_bolt")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 2 Anomalous Bolts."
-tempJob.desc = "2 Anomalous Bolts."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_bolt"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 25
-tempJob.moneyReward = {1900, 2100}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2eco_artifact_bolt")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 5 Anomalous Bolts."
-tempJob.desc = "5 Anomalous Bolts."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_bolt"
-tempJob.numberRec = 5
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 40
-tempJob.moneyReward = {5000, 6000}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob3eco_artifact_bolt")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Bone Cluster."
-tempJob.desc = "1 Bone Cluster."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_bonecluster"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {2000, 4500}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_bonecluster")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 2 Bone Clusters."
-tempJob.desc = "2 Bone Clusters."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_bonecluster"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 25
-tempJob.moneyReward = {5000, 8000}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2eco_artifact_bonecluster")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Capacitor."
-tempJob.desc = "1 Capacitor."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_capacitor"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 15
-tempJob.moneyReward = {17000, 22000}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_capacitor")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Cell."
-tempJob.desc = "1 Cell."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_cell"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {6200, 8600}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_cell")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Crystal."
-tempJob.desc = "1 Crystal."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_crystal"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {10000, 13000}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_crystal")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Droplet."
-tempJob.desc = "1 Droplet."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_droplet"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {2500, 3800}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_droplet")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Dwarf Galaxy."
-tempJob.desc = "1 Dwarf Galaxy."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_dwarfgalaxy"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {2000, 4000}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_dwarfgalaxy")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Dwarf Galaxy."
-tempJob.desc = "1 Dwarf Galaxy."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_dwarfgalaxy"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {10000, 16000}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob2eco_artifact_dwarfgalaxy")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Eye."
-tempJob.desc = "1 Eye."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_eye"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {15000, 19000}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_eye")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Flame."
-tempJob.desc = "1 Flame."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_flame"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {24000, 29000}
-tempJob.categories = {"artifactcollect_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_flame")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Flash."
-tempJob.desc = "1 Flash."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_flash"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {3000, 5500}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_flash")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Gaia."
-tempJob.desc = "1 Gaia."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_gaia"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {3000, 5500}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_gaia")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Galaxy."
-tempJob.desc = "1 Galaxy."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_galaxy"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {18000, 23000}
-tempJob.categories = {"artifactcollect_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_galaxy")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Grandmamas Beads."
-tempJob.desc = "1 Grandmamas Beads."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_gmamasbeads"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {26000, 30000}
-tempJob.categories = {"artifactcollect_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_galaxy")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Halo."
-tempJob.desc = "1 Halo."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_halo"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {20000, 21000}
-tempJob.categories = {"artifactcollect_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_halo")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Kolobok."
-tempJob.desc = "1 Kolobok."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_kolobok"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {6500, 8400}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_kolobok")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Mama's Beads."
-tempJob.desc = "1 Mama's Beads."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_mamasbeads"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {6000, 9000}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_mamasbeads")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Memento Mori."
-tempJob.desc = "1 Memento Mori."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_mementomori"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {3000, 5500}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_mementomori")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Mica."
-tempJob.desc = "1 Mica."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_mica"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {10000, 13000}
-tempJob.categories = {"artifactcollect_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_mica")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Moonlight."
-tempJob.desc = "1 Moonlight."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_moonlight"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {8500, 11000}
-tempJob.categories = {"artifactcollect_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_moonlight")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Moonlight."
-tempJob.desc = "1 Moonlight."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_moonlight"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {8500, 11000}
-tempJob.categories = {"artifactcollect_NPC_hard"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_moonlight")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Mycelia."
-tempJob.desc = "1 Mycelia."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_mycelia"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {7000, 9000}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_mycelia")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Panacea."
-tempJob.desc = "1 Panacea."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_panacea"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {1000, 2000}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_panacea")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Slime."
-tempJob.desc = "1 Slime."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_slime"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {500, 1000}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_slime")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 2 Slimes."
-tempJob.desc = "2 Slimes."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_slime"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {2500, 3500}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2eco_artifact_slime")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Slug."
-tempJob.desc = "1 Slug."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_slug"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {4000, 5000}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_slug")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Sparkler."
-tempJob.desc = "1 Sparkler."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_sparkler"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {500, 1000}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_sparkler")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 2 Sparklers."
-tempJob.desc = "2 Sparklers."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_sparkler"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {1500, 3000}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob2eco_artifact_sparkler")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Thorn."
-tempJob.desc = "1 Thorn."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_thorn"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {500, 1000}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_thorn")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 2 Thorns."
-tempJob.desc = "2 Thorns."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_thorn"
-tempJob.numberRec = 2
-tempJob.reward = {{"hidestash_2"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {1500, 3000}
-tempJob.categories = {"artifactcollect_NPC_easy"}
-
-ix.jobs.register(tempJob, "ItemJob2eco_artifact_thorn")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "Hand over 1 Urchin."
-tempJob.desc = "1 Urchin."
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_urchin"
-tempJob.numberRec = 1
-tempJob.reward = {{"hidestash_3"}}
-tempJob.rewardCount = 1
-tempJob.repReward = 20
-tempJob.moneyReward = {3000, 4000}
-tempJob.categories = {"artifactcollect_NPC_medium"}
-
-ix.jobs.register(tempJob, "ItemJob1eco_artifact_urchin")
-
-tempJob = nil
+ix.jobs.register({
+	name = "Hand over 1 Arachno.",
+	desc = "1 Arachno.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_arachno",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {10000, 13000},
+	categories = {"artifactcollect_NPC_hard"},
+}, "ItemJob1eco_artifact_arachno")
+
+ix.jobs.register({
+	name = "Hand over 2 Batteries.",
+	desc = "2 Batteries.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_battery",
+	numberRec = 2,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 30,
+	moneyReward = {16500, 18400},
+	categories = {"artifactcollect_NPC_hard"},
+}, "ItemJob1eco_artifact_battery")
+
+ix.jobs.register({
+	name = "Hand over 1 Blown Capacitor.",
+	desc = "1 Blown Capacitor.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_blowncap",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 15,
+	moneyReward = {7000, 9500},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob1eco_artifact_blowncap")
+
+ix.jobs.register({
+	name = "Hand over 1 Anomalous Bolt.",
+	desc = "1 Anomalous Bolt.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_bolt",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 15,
+	moneyReward = {800, 900},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob1eco_artifact_bolt")
+
+ix.jobs.register({
+	name = "Hand over 2 Anomalous Bolts.",
+	desc = "2 Anomalous Bolts.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_bolt",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 25,
+	moneyReward = {1900, 2100},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob2eco_artifact_bolt")
+
+ix.jobs.register({
+	name = "Hand over 5 Anomalous Bolts.",
+	desc = "5 Anomalous Bolts.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_bolt",
+	numberRec = 5,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 40,
+	moneyReward = {5000, 6000},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob3eco_artifact_bolt")
+
+ix.jobs.register({
+	name = "Hand over 1 Bone Cluster.",
+	desc = "1 Bone Cluster.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_bonecluster",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 15,
+	moneyReward = {2000, 4500},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob1eco_artifact_bonecluster")
+
+ix.jobs.register({
+	name = "Hand over 2 Bone Clusters.",
+	desc = "2 Bone Clusters.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_bonecluster",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 25,
+	moneyReward = {5000, 8000},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob2eco_artifact_bonecluster")
+
+ix.jobs.register({
+	name = "Hand over 1 Capacitor.",
+	desc = "1 Capacitor.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_capacitor",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 15,
+	moneyReward = {17000, 22000},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob1eco_artifact_capacitor")
+
+ix.jobs.register({
+	name = "Hand over 1 Cell.",
+	desc = "1 Cell.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_cell",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {6200, 8600},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob1eco_artifact_cell")
+
+ix.jobs.register({
+	name = "Hand over 1 Crystal.",
+	desc = "1 Crystal.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_crystal",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {10000, 13000},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob1eco_artifact_crystal")
+
+ix.jobs.register({
+	name = "Hand over 1 Droplet.",
+	desc = "1 Droplet.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_droplet",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {2500, 3800},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob1eco_artifact_droplet")
+
+ix.jobs.register({
+	name = "Hand over 1 Dwarf Galaxy.",
+	desc = "1 Dwarf Galaxy.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_dwarfgalaxy",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {2000, 4000},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob1eco_artifact_dwarfgalaxy")
+
+ix.jobs.register({
+	name = "Hand over 1 Dwarf Galaxy.",
+	desc = "1 Dwarf Galaxy.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_dwarfgalaxy",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {10000, 16000},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob2eco_artifact_dwarfgalaxy")
+
+ix.jobs.register({
+	name = "Hand over 1 Eye.",
+	desc = "1 Eye.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_eye",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {15000, 19000},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob1eco_artifact_eye")
+
+ix.jobs.register({
+	name = "Hand over 1 Flame.",
+	desc = "1 Flame.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_flame",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {24000, 29000},
+	categories = {"artifactcollect_NPC_hard"},
+}, "ItemJob1eco_artifact_flame")
+
+ix.jobs.register({
+	name = "Hand over 1 Flash.",
+	desc = "1 Flash.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_flash",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {3000, 5500},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob1eco_artifact_flash")
+
+ix.jobs.register({
+	name = "Hand over 1 Gaia.",
+	desc = "1 Gaia.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_gaia",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {3000, 5500},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob1eco_artifact_gaia")
+
+ix.jobs.register({
+	name = "Hand over 1 Galaxy.",
+	desc = "1 Galaxy.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_galaxy",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {18000, 23000},
+	categories = {"artifactcollect_NPC_hard"},
+}, "ItemJob1eco_artifact_galaxy")
+
+ix.jobs.register({
+	name = "Hand over 1 Grandmamas Beads.",
+	desc = "1 Grandmamas Beads.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_gmamasbeads",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {26000, 30000},
+	categories = {"artifactcollect_NPC_hard"},
+}, "ItemJob1eco_artifact_galaxy")
+
+ix.jobs.register({
+	name = "Hand over 1 Halo.",
+	desc = "1 Halo.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_halo",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {20000, 21000},
+	categories = {"artifactcollect_NPC_hard"},
+}, "ItemJob1eco_artifact_halo")
+
+ix.jobs.register({
+	name = "Hand over 1 Kolobok.",
+	desc = "1 Kolobok.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_kolobok",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {6500, 8400},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob1eco_artifact_kolobok")
+
+ix.jobs.register({
+	name = "Hand over 1 Mama's Beads.",
+	desc = "1 Mama's Beads.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_mamasbeads",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {6000, 9000},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob1eco_artifact_mamasbeads")
+
+ix.jobs.register({
+	name = "Hand over 1 Memento Mori.",
+	desc = "1 Memento Mori.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_mementomori",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {3000, 5500},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob1eco_artifact_mementomori")
+
+ix.jobs.register({
+	name = "Hand over 1 Mica.",
+	desc = "1 Mica.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_mica",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {10000, 13000},
+	categories = {"artifactcollect_NPC_hard"},
+}, "ItemJob1eco_artifact_mica")
+
+ix.jobs.register({
+	name = "Hand over 1 Moonlight.",
+	desc = "1 Moonlight.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_moonlight",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {8500, 11000},
+	categories = {"artifactcollect_NPC_hard"},
+}, "ItemJob1eco_artifact_moonlight")
+
+ix.jobs.register({
+	name = "Hand over 1 Moonlight.",
+	desc = "1 Moonlight.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_moonlight",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {8500, 11000},
+	categories = {"artifactcollect_NPC_hard"},
+}, "ItemJob1eco_artifact_moonlight")
+
+ix.jobs.register({
+	name = "Hand over 1 Mycelia.",
+	desc = "1 Mycelia.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_mycelia",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {7000, 9000},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob1eco_artifact_mycelia")
+
+ix.jobs.register({
+	name = "Hand over 1 Panacea.",
+	desc = "1 Panacea.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_panacea",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {1000, 2000},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob1eco_artifact_panacea")
+
+ix.jobs.register({
+	name = "Hand over 1 Slime.",
+	desc = "1 Slime.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_slime",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {500, 1000},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob1eco_artifact_slime")
+
+ix.jobs.register({
+	name = "Hand over 2 Slimes.",
+	desc = "2 Slimes.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_slime",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {2500, 3500},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob2eco_artifact_slime")
+
+ix.jobs.register({
+	name = "Hand over 1 Slug.",
+	desc = "1 Slug.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_slug",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {4000, 5000},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob1eco_artifact_slug")
+
+ix.jobs.register({
+	name = "Hand over 1 Sparkler.",
+	desc = "1 Sparkler.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_sparkler",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {500, 1000},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob1eco_artifact_sparkler")
+
+ix.jobs.register({
+	name = "Hand over 2 Sparklers.",
+	desc = "2 Sparklers.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_sparkler",
+	numberRec = 2,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {1500, 3000},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob2eco_artifact_sparkler")
+
+ix.jobs.register({
+	name = "Hand over 1 Thorn.",
+	desc = "1 Thorn.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_thorn",
+	numberRec = 1,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {500, 1000},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob1eco_artifact_thorn")
+
+ix.jobs.register({
+	name = "Hand over 2 Thorns.",
+	desc = "2 Thorns.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_thorn",
+	numberRec = 2,
+	reward = {{"hidestash_2"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {1500, 3000},
+	categories = {"artifactcollect_NPC_easy"},
+}, "ItemJob2eco_artifact_thorn")
+
+ix.jobs.register({
+	name = "Hand over 1 Urchin.",
+	desc = "1 Urchin.",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_urchin",
+	numberRec = 1,
+	reward = {{"hidestash_3"}},
+	rewardCount = 1,
+	repReward = 20,
+	moneyReward = {3000, 4000},
+	categories = {"artifactcollect_NPC_medium"},
+}, "ItemJob1eco_artifact_urchin")

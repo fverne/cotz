@@ -34,6 +34,12 @@ for path in itemFiles:lines() do
 	end
 end
 itemFiles:close()
+ix.jobs = ix.jobs or {}
+ix.jobs.field = ix.jobs.field or {}
+ix.taskRewards = ix.taskRewards or {}
+for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredit"}) do
+	dofile("gamemodes/ix_cotz/plugins/jobsystem/definitions/sh_" .. name .. ".lua")
+end
 dofile(base .. "jobsystem/libs/sh_taskrewards.lua")
 dofile(base .. "progression/libs/sh_rewards.lua")
 dofile(base .. "progression/libs/sv_rewards.lua")

@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 local marker
 local nextRequest = 0
-local MARKER_SECONDS = 30
+local MARKER_SECONDS = ix.jobs.field.runtimeSettings.markerSeconds
 local MARKER_COLOR = Color(235, 200, 100)
 local METRES_PER_UNIT = 0.01905
 local MARKER_OFFSET = Vector(0, 0, 24)

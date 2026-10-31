@@ -1,516 +1,382 @@
----
--- Artifact jobs - Could technically be under item jobs, but just to avoid having that file grow to 3k+ lines
---                 These are split into two, one for egghead and one for the computer
---                 Egghead gives items, money and rep, whereas the computer only gives money and rep
----
-
-------------------------------------------------
------------ ITEM RETRIEVAL - ARTIFACT ----------
------------          COMPUTER         ----------
-------------------------------------------------
-
-local tempJob = {}
-
-tempJob.name = "** 1 Arachno **."
-tempJob.desc = "** The computer shows an image of a spindly artifact, loosely reminiscent of a spider. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_arachno"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 18
-tempJob.moneyReward = {7000, 9000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_arachno")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Battery **."
-tempJob.desc = "** The computer shows an image of an artifact, consisting of three bars connected at either end with an electric current running between them. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_battery"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 22
-tempJob.moneyReward = {5200, 7200}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_battery")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Blown Capacitor **."
-tempJob.desc = "** The computer shows an image of an artifact, consisting of two plates at a fixed distance from one another. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_blowncap"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 18
-tempJob.moneyReward = {3000, 4800}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_bcap")
-
-tempJob = nil
-
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Capacitor **."
-tempJob.desc = "** The computer shows an image of an artifact, consisting of two plates at a fixed distance from one another. A strange substance is present between them. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_capacitor"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 18
-tempJob.moneyReward = {10000, 13000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_cap")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Cell **."
-tempJob.desc = "** The computer shows an image of a spherical artifact. You can make out some sort of mass inside the sphere. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_cell"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 18
-tempJob.moneyReward = {5300, 7800}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_cell")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Crystal **."
-tempJob.desc = "** The computer shows an image of a crystalline artifact. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_crystal"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 22
-tempJob.moneyReward = {5000, 7200}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_crystal")
-
-tempJob = nil
-
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Droplet **."
-tempJob.desc = "** The computer shows an image of a small teardrop shaped artifact. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_droplet"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 22
-tempJob.moneyReward = {1800, 2900}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_droplet")
-
-tempJob = nil
-
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Dwarf Galaxy **."
-tempJob.desc = "** The computer shows an image of a small sphere with smaller spheres locked in orbit around it. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_dwarfgalaxy"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 30
-tempJob.moneyReward = {6000, 8500}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_dwarfgalaxy")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Eye **."
-tempJob.desc = "** The computer shows an image of a teardrop shaped artifact. A readout in the corner shows high temperatures. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_eye"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 25
-tempJob.moneyReward = {8500, 10000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_eye")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Flame **."
-tempJob.desc = "** The computer shows an image of a spherical. A readout in the corner shows extreme temperatures. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_flame"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 130
-tempJob.moneyReward = {25000, 30000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_flame")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Flash **."
-tempJob.desc = "** The computer shows an image of a small shining ball of an artifact. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_flash"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 22
-tempJob.moneyReward = {4900, 6900}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_flash")
-
-tempJob = nil
-
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Gaia **."
-tempJob.desc = "** The computer shows an image of a spherical artifact encased in a wing-like shroud. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_gaia"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 65
-tempJob.moneyReward = {11000, 13000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_gaia")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Galaxy **."
-tempJob.desc = "** The computer shows an image of a sphere with smaller spheres locked in orbit around it. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_galaxy"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 86
-tempJob.moneyReward = {22000, 29000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_galaxy")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Grandmamas Beads **."
-tempJob.desc = "** The computer shows an image of an artifact consisting of a string of spheres. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_gmamasbeads"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 86
-tempJob.moneyReward = {17500, 21000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_gmamasbeads")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Halo **."
-tempJob.desc = "** The computer shows an image of a halo-shaped object. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_halo"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 33
-tempJob.moneyReward = {6800, 9000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_halo")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Kolobok **."
-tempJob.desc = "** The computer shows an image of a small, spiky artifact. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_kolobok"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 33
-tempJob.moneyReward = {8600, 12400}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_kolobok")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Mama's Beads **."
-tempJob.desc = "** The computer shows an image of a ladder-like structure of beads. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_mamasbeads"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 27
-tempJob.moneyReward = {7500, 9600}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_mamasbeads")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Memento Mori **."
-tempJob.desc = "** The computer shows an image of a skull shaped artifact. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_mementomori"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 17
-tempJob.moneyReward = {3000, 4500}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_mementomori")
-
-tempJob = nil
-
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Mica **."
-tempJob.desc = "** The computer shows an image of a rock shaped artifact. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_mica"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 22
-tempJob.moneyReward = {6000, 8500}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_mica")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Midas **."
-tempJob.desc = "** The computer shows an image of a reflective artifact shaped like a dotted sphere. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_midas"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 400
-tempJob.moneyReward = {70000, 80000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_midas")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Moonlight **."
-tempJob.desc = "** The computer shows an image of a small glowing orb. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_moonlight"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 35
-tempJob.moneyReward = {12000, 14000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_moonlight")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Panacea **."
-tempJob.desc = "** The computer shows an image of a small bracelet. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_panacea"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 32
-tempJob.moneyReward = {8500, 10000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_panacea")
-
-tempJob = nil
-
-local tempJob = {}
-
-tempJob.name = "** 1 Slime **."
-tempJob.desc = "** The computer shows an image of a porous rock. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_slime"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 15
-tempJob.moneyReward = {3400, 4000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_slime")
-
-tempJob = nil
-
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Slug **."
-tempJob.desc = "** The computer shows an image of a jelly-like artifact covered in stone plates. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_slug"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 22
-tempJob.moneyReward = {6500, 7500}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_slug")
-
-tempJob = nil
-
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Sparkler **."
-tempJob.desc = "** The computer shows an image of a small glowing orb. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_sparkler"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 12
-tempJob.moneyReward = {3200, 3800}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_sparkler")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Thorn **."
-tempJob.desc = "** The computer shows an image of a small thorny artifact. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_thorn"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 9
-tempJob.moneyReward = {1500, 2400}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_thorn")
-
-tempJob = nil
-
-
-local tempJob = {}
-
-tempJob.name = "** 1 Urchin **."
-tempJob.desc = "** The computer shows an image of a spiky artifact. **"
-tempJob.icon = "propic/event/artifact"
-tempJob.tier = 1
-tempJob.requiredItem = "artifact_urchin"
-tempJob.numberRec = 1
-tempJob.reward = {}
-tempJob.rewardCount = 0
-tempJob.repReward = 19
-tempJob.moneyReward = {5900, 7000}
-tempJob.categories = {"artifactcollect_computer"}
-
-ix.jobs.register(tempJob, "ItemJob1pc_artifact_urchin")
-
-tempJob = nil
+ix.jobs.register({
+	name = "** 1 Arachno **.",
+	desc = "** The computer shows an image of a spindly artifact, loosely reminiscent of a spider. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_arachno",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 18,
+	moneyReward = {7000, 9000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_arachno")
+
+ix.jobs.register({
+	name = "** 1 Battery **.",
+	desc = "** The computer shows an image of an artifact, consisting of three bars connected at "
+		.. "either end with an electric current running between them. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_battery",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 22,
+	moneyReward = {5200, 7200},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_battery")
+
+ix.jobs.register({
+	name = "** 1 Blown Capacitor **.",
+	desc = "** The computer shows an image of an artifact, consisting of two plates at a fixed "
+		.. "distance from one another. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_blowncap",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 18,
+	moneyReward = {3000, 4800},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_bcap")
+
+ix.jobs.register({
+	name = "** 1 Capacitor **.",
+	desc = "** The computer shows an image of an artifact, consisting of two plates at a fixed "
+		.. "distance from one another. A strange substance is present between them. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_capacitor",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 18,
+	moneyReward = {10000, 13000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_cap")
+
+ix.jobs.register({
+	name = "** 1 Cell **.",
+	desc = "** The computer shows an image of a spherical artifact. You can make out some sort of"
+		.. " mass inside the sphere. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_cell",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 18,
+	moneyReward = {5300, 7800},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_cell")
+
+ix.jobs.register({
+	name = "** 1 Crystal **.",
+	desc = "** The computer shows an image of a crystalline artifact. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_crystal",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 22,
+	moneyReward = {5000, 7200},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_crystal")
+
+ix.jobs.register({
+	name = "** 1 Droplet **.",
+	desc = "** The computer shows an image of a small teardrop shaped artifact. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_droplet",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 22,
+	moneyReward = {1800, 2900},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_droplet")
+
+ix.jobs.register({
+	name = "** 1 Dwarf Galaxy **.",
+	desc = "** The computer shows an image of a small sphere with smaller spheres locked in orbit around it. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_dwarfgalaxy",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 30,
+	moneyReward = {6000, 8500},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_dwarfgalaxy")
+
+ix.jobs.register({
+	name = "** 1 Eye **.",
+	desc = "** The computer shows an image of a teardrop shaped artifact. A readout in the corner"
+		.. " shows high temperatures. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_eye",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 25,
+	moneyReward = {8500, 10000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_eye")
+
+ix.jobs.register({
+	name = "** 1 Flame **.",
+	desc = "** The computer shows an image of a spherical. A readout in the corner shows extreme temperatures. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_flame",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 130,
+	moneyReward = {25000, 30000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_flame")
+
+ix.jobs.register({
+	name = "** 1 Flash **.",
+	desc = "** The computer shows an image of a small shining ball of an artifact. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_flash",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 22,
+	moneyReward = {4900, 6900},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_flash")
+
+ix.jobs.register({
+	name = "** 1 Gaia **.",
+	desc = "** The computer shows an image of a spherical artifact encased in a wing-like shroud. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_gaia",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 65,
+	moneyReward = {11000, 13000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_gaia")
+
+ix.jobs.register({
+	name = "** 1 Galaxy **.",
+	desc = "** The computer shows an image of a sphere with smaller spheres locked in orbit around it. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_galaxy",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 86,
+	moneyReward = {22000, 29000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_galaxy")
+
+ix.jobs.register({
+	name = "** 1 Grandmamas Beads **.",
+	desc = "** The computer shows an image of an artifact consisting of a string of spheres. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_gmamasbeads",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 86,
+	moneyReward = {17500, 21000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_gmamasbeads")
+
+ix.jobs.register({
+	name = "** 1 Halo **.",
+	desc = "** The computer shows an image of a halo-shaped object. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_halo",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 33,
+	moneyReward = {6800, 9000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_halo")
+
+ix.jobs.register({
+	name = "** 1 Kolobok **.",
+	desc = "** The computer shows an image of a small, spiky artifact. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_kolobok",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 33,
+	moneyReward = {8600, 12400},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_kolobok")
+
+ix.jobs.register({
+	name = "** 1 Mama's Beads **.",
+	desc = "** The computer shows an image of a ladder-like structure of beads. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_mamasbeads",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 27,
+	moneyReward = {7500, 9600},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_mamasbeads")
+
+ix.jobs.register({
+	name = "** 1 Memento Mori **.",
+	desc = "** The computer shows an image of a skull shaped artifact. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_mementomori",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 17,
+	moneyReward = {3000, 4500},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_mementomori")
+
+ix.jobs.register({
+	name = "** 1 Mica **.",
+	desc = "** The computer shows an image of a rock shaped artifact. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_mica",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 22,
+	moneyReward = {6000, 8500},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_mica")
+
+ix.jobs.register({
+	name = "** 1 Midas **.",
+	desc = "** The computer shows an image of a reflective artifact shaped like a dotted sphere. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_midas",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 400,
+	moneyReward = {70000, 80000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_midas")
+
+ix.jobs.register({
+	name = "** 1 Moonlight **.",
+	desc = "** The computer shows an image of a small glowing orb. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_moonlight",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 35,
+	moneyReward = {12000, 14000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_moonlight")
+
+ix.jobs.register({
+	name = "** 1 Panacea **.",
+	desc = "** The computer shows an image of a small bracelet. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_panacea",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 32,
+	moneyReward = {8500, 10000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_panacea")
+
+ix.jobs.register({
+	name = "** 1 Slime **.",
+	desc = "** The computer shows an image of a porous rock. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_slime",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 15,
+	moneyReward = {3400, 4000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_slime")
+
+ix.jobs.register({
+	name = "** 1 Slug **.",
+	desc = "** The computer shows an image of a jelly-like artifact covered in stone plates. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_slug",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 22,
+	moneyReward = {6500, 7500},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_slug")
+
+ix.jobs.register({
+	name = "** 1 Sparkler **.",
+	desc = "** The computer shows an image of a small glowing orb. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_sparkler",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 12,
+	moneyReward = {3200, 3800},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_sparkler")
+
+ix.jobs.register({
+	name = "** 1 Thorn **.",
+	desc = "** The computer shows an image of a small thorny artifact. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_thorn",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 9,
+	moneyReward = {1500, 2400},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_thorn")
+
+ix.jobs.register({
+	name = "** 1 Urchin **.",
+	desc = "** The computer shows an image of a spiky artifact. **",
+	icon = "propic/event/artifact",
+	tier = 1,
+	requiredItem = "artifact_urchin",
+	numberRec = 1,
+	reward = {},
+	rewardCount = 0,
+	repReward = 19,
+	moneyReward = {5900, 7000},
+	categories = {"artifactcollect_computer"},
+}, "ItemJob1pc_artifact_urchin")

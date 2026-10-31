@@ -245,6 +245,12 @@ check(another.functions.combine.OnRun(another, {target.id}) == false, "per-playe
 check(another:GetData("quantity") == 1 and target:GetData("quantity") == 4, "cooldown preserves quantities")
 
 ix.taskRewards = {}
+ix.jobs = ix.jobs or {}
+ix.jobs.field = ix.jobs.field or {}
+ix.taskRewards = ix.taskRewards or {}
+for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredit"}) do
+	dofile("gamemodes/ix_cotz/plugins/jobsystem/definitions/sh_" .. name .. ".lua")
+end
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_taskrewards.lua")
 for id in pairs(capacities) do
 	local item = ix.item.list[id]

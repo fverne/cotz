@@ -162,6 +162,8 @@ dofile(base .. "libs/sh_progression.lua")
 dofile(base .. "libs/sh_requirements.lua")
 dofile(base .. "libs/sh_expansion.lua")
 dofile(base .. "libs/sh_services.lua")
+ix.taskRewards = ix.taskRewards or {}
+dofile("gamemodes/ix_cotz/plugins/jobsystem/definitions/sh_rewardsettings.lua")
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_taskrewards.lua")
 dofile(base .. "libs/sh_rewards.lua")
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sv_taskrewards.lua")

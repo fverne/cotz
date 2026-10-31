@@ -3,54 +3,6 @@ ix.jobs.field = ix.jobs.field or {}
 
 local field = ix.jobs.field
 
--- Sources read existing plugin data. Pools can include sources and other pools.
-field.sources = {
-	stash = {plugin = "hidestashspawner", key = "stashspawnpoints"},
-	event = {plugin = "eventcontroller", key = "eventpoints"},
-	anomaly = {plugin = "anomalycontroller", key = "anomalypoints"},
-	radiation = {plugin = "radiationcontroller", key = "radiationpoints"},
-}
-
-field.pools = {
-	gas = {"anomaly", "radiation"},
-	rf = {"event"},
-	packages = {"stash"},
-}
-
-field.settings = {
-	recovery = {sources = {"packages", "rf"}, cargo = "job_recovery_case", searchRadius = 384},
-	sensor = {sources = {"gas"}, cargo = "job_sensor_recorder", recordSeconds = 120,
-		leaveDistance = 512, deployDistance = 512},
-	triangulation = {sources = {"rf", "packages"}, cargo = "job_signal_transmitter",
-		readingCount = 3, readingDistance = 512, bearingAngle = 15},
-	deadDrop = {sources = {"packages"}, destinationSources = {"packages", "rf"},
-		cargo = "job_dead_drop_parcel", minRouteDistance = 2048},
-	defence = {
-		sources = {"rf"}, attackSources = {"rf"}, cargo = "job_research_results",
-		minAttackDistance = 512, maxAttackDistance = 4096, maxHeightDifference = 256, maxSpawnPoints = 8,
-		defendDistance = 768, duration = 90, samplerHealth = 250, threatRadius = 160, threatDamage = 8,
-		waveInterval = 10, attemptTimeout = 300, retryDelay = 30, playerSafeDistance = 256,
-		waves = {
-			{{classes = {"npc_mutant_dog"}, count = 2},
-				{classes = {"npc_mutant_dog", "npc_mutant_pseudodog"}, count = 2}},
-			{{classes = {"npc_mutant_dog", "npc_mutant_pseudodog"}, count = 3},
-				{classes = {"npc_mutant_snork"}, count = 2},
-				{classes = {"npc_mutant_pseudodog", "npc_mutant_snork"}, count = 3}},
-			{{classes = {"npc_mutant_snork"}, count = 3},
-				{classes = {"npc_mutant_bloodsucker"}, count = 2},
-				{classes = {"npc_mutant_snork", "npc_mutant_bloodsucker"}, count = 3}},
-		},
-	},
-}
-
-field.spawnDistance = 1024
-field.despawnDistance = 1536
-field.useDistance = 128
-field.actionInterval = 1
-field.updateInterval = 1
-field.maxDefences = 3
-field.defenceSpawnBudget = 2
-
 function field.Pack(position)
 	return {position.x, position.y, position.z}
 end

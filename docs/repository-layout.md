@@ -28,8 +28,9 @@ Paths below are relative to `gamemodes/ix_cotz/plugins/`.
 
 | Location | Purpose |
 | --- | --- |
-| `jobsystem/definitions/` | Repeatable item, kill, and special job definitions. |
-| `jobsystem/libs/` | Job API and shared/server task reward implementation. |
+| `jobsystem/definitions/` | Editable job definitions, field point pools/mechanics, reward settings and kill-credit rules. |
+| `jobsystem/libs/` | Early definition bootstrap, shared registry/field APIs, tool-job callbacks and task rewards. |
+| `jobsystem/sv_*.lua` | Explicitly loaded character jobs, NPC offers, field assignment/actions/runtime and cargo protection. |
 | `jobsystem/integrations/sh_dialogue.lua` | Task offers, reward choices, and their dialogue networking. Formerly `dialogue/libs/sh_taskrewards.lua`. |
 | `townnpcs/definitions/` | Editable town contact jobs, sparse progression trees, dialogue prompts, pools and field sites. Installed after existing registries load; see the plugin README. |
 | `progression/definitions/` | NPC milestones, shared definitions, and requirement pool data. |

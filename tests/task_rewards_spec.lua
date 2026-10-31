@@ -46,6 +46,12 @@ ix.progression.npcRequirements["'Egghead'"] = "cotz/town/smartass/SM07"
 
 dofile(base .. "libs/sh_expansion.lua")
 dofile(base .. "libs/sh_services.lua")
+ix.jobs = ix.jobs or {}
+ix.jobs.field = ix.jobs.field or {}
+ix.taskRewards = ix.taskRewards or {}
+for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredit"}) do
+	dofile("gamemodes/ix_cotz/plugins/jobsystem/definitions/sh_" .. name .. ".lua")
+end
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_taskrewards.lua")
 dofile(base .. "libs/sh_rewards.lua")
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sv_taskrewards.lua")
@@ -243,12 +249,8 @@ check(consumed == 2, "converted barter preserves input quantity")
 ix.npcbarter.activebarters.powder = false
 check(not api.ExecuteBarter(kitOwner, "'Haggler'", "powder", 1, barterChoice.label), "inactive recipe cannot execute")
 
--- Load the real job path with its legacy GLua operators translated for the standalone Lua runtime.
-local handle = assert(io.open("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_jobs.lua"))
-local source = handle:read("*a")
-handle:close()
-source = source:gsub("!=", "~="):gsub("!", "not ")
-assert((loadstring or load)(source))()
+dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_jobs.lua")
+dofile("gamemodes/ix_cotz/plugins/jobsystem/sv_jobs.lua")
 ix.jobs.list.hunt = {name = "Hunt %d", desc = "Hunt %d mutants", numberRec = {2, 5},
 	reward = {{"kit_reward_demo"}, 0}, repReward = 7, moneyReward = {10, 20}}
 ix.jobs.jobsbycategory.hunting = {"hunt"}

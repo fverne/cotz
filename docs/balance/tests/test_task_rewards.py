@@ -59,17 +59,17 @@ class TaskRewardAuditTests(unittest.TestCase):
                     pass
         for path in (folder / 'plugins/jobsystem/definitions').glob('sh_*.lua'):
             tokens = balance.tokenize(path.read_text())
-            for i in range(len(tokens) - 4):
-                if [t.value for t in tokens[i:i + 4]] == ['tempJob', '.', 'reward', '=']:
-                    value = (assigned_table(tokens, i + 4) if tokens[i + 4].value == '{'
-                             else literal(tokens[i + 4:i + 5]))
+            for i in range(len(tokens) - 2):
+                if tokens[i].value == 'reward' and tokens[i + 1].value == '=':
+                    value = (assigned_table(tokens, i + 2) if tokens[i + 2].value == '{'
+                             else literal(tokens[i + 2:i + 3]))
                     cls.jobs.append(value)
-        tokens = balance.tokenize((folder / 'plugins/jobsystem/libs/sh_taskrewards.lua').read_text())
-        cls.constants = {}
-        for i in range(len(tokens) - 3):
-            if (tokens[i].value == 'local' and tokens[i + 1].value.isupper()
-                    and tokens[i + 2].value == '=' and tokens[i + 3].value == '{'):
-                cls.constants[tokens[i + 1].value] = assigned_table(tokens, i + 3)
+        tokens = balance.tokenize((folder / 'plugins/jobsystem/definitions/sh_rewardsettings.lua').read_text())
+        cls.profiles = None
+        for i in range(len(tokens) - 2):
+            if tokens[i].value == 'profiles' and tokens[i + 1].value == '=':
+                cls.profiles = assigned_table(tokens, i + 2)
+                break
 
     def test_all_task_reward_graphs_resolve_to_real_items_without_cycles(self):
         visited = set()
@@ -104,7 +104,7 @@ class TaskRewardAuditTests(unittest.TestCase):
         self.assertGreater(len(self.jobs), 100)
 
     def test_every_contact_profile_uses_existing_items(self):
-        profiles = self.constants['PROFILES']
+        profiles = self.profiles
         self.assertEqual(len(profiles), 19)
         for contact, items in profiles.items():
             self.assertEqual(len(items), len(set(items)), contact)
