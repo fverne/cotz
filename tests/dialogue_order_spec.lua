@@ -18,6 +18,86 @@ check(table.concat(ordered, ",") == "TradeTopic,StartBarter,RepairItems,AboutPro
 check(original[1] == "GOODBYE", "ordering does not mutate supplied option tables")
 local actions = ix.dialogue.OrderOptions({"GOODBYE", "BackTopic", "second", "first"})
 check(table.concat(actions, ",") == "second,first,BackTopic,GOODBYE", "submenu choices retain their deliberate order")
+local originalInclude = ix.util.Include
+local originalFile = file
+local greetingCallback = function() end
+local conditionalQuestion = function(_, client) return client.allowQuestions end
+local fixtureNames = {"sh_newcontact.lua", "sh_oldcontact.lua", "sh_services.lua", "sh_locked.lua"}
+file = {Find = function() return fixtureNames end}
+ix.util.Include = function(path)
+	local isNew = path:find("sh_newcontact.lua", 1, true)
+	local isOld = path:find("sh_oldcontact.lua", 1, true)
+	local isLocked = path:find("sh_locked.lua", 1, true)
+	local rootOptions
+	if isNew then
+		rootOptions = {"SpecialtyTopic", "BackgroundTopic", "AdviceTopic", "ContactsTopic", "GOODBYE"}
+	elseif isOld then
+		rootOptions = {"TradeTopic", "RepairItems", "AboutWorkTopic", "AboutProgression", "BackgroundTopic",
+			"TutorialTopic", "GOODBYE"}
+	else
+		rootOptions = {isLocked and "Introduction" or "TradeTopic", "GOODBYE"}
+	end
+	DIALOGUE.addTopic("GREETING", {options = rootOptions, preCallback = greetingCallback})
+	DIALOGUE.addTopic("BackTopic", {statement = "Main menu.", options = rootOptions})
+	DIALOGUE.addTopic("GOODBYE", {statement = "Leave."})
+	for _, topicID in ipairs(rootOptions) do
+		if topicID ~= "GOODBYE" then
+			DIALOGUE.addTopic(topicID, {statement = topicID, options = {"BackTopic"}})
+		end
+	end
+	if isOld then
+		DIALOGUE.addTopic("BackgroundTopic", {
+			statement = "Background.", options = {"BackgroundTopic2", "BackTopic"},
+			ShouldAdd = conditionalQuestion,
+		})
+		DIALOGUE.addTopic("BackgroundTopic2", {statement = "More.", options = {"BackTopic"}})
+		DIALOGUE.addTopic("TutorialTopic", {
+			statement = "Tutorial.", options = {"BackTopic"}, ShouldAdd = conditionalQuestion,
+		})
+	end
+end
+ix.dialogue.LoadFromDir("fixture")
+ix.util.Include = originalInclude
+file = originalFile
+local function hasOption(topic, topicID)
+	for _, option in ipairs(topic.options) do
+		if option == topicID then return true end
+	end
+
+	return false
+end
+local newTree = ix.dialogue.list.newcontact.tree
+check(newTree.QuestionsTopic.statement == "Can I ask you something?", "flavour submenu has the requested label")
+for _, rootID in ipairs({"GREETING", "BackTopic"}) do
+	check(hasOption(newTree[rootID], "QuestionsTopic"), "both main menus link to questions")
+	for _, topicID in ipairs({"SpecialtyTopic", "BackgroundTopic", "AdviceTopic", "ContactsTopic"}) do
+		check(not hasOption(newTree[rootID], topicID), "informational topics leave the root")
+		check(hasOption(newTree.QuestionsTopic, topicID), "informational topics remain reachable")
+		check(hasOption(newTree[topicID], "QuestionsBackTopic"), "flavour replies return to the question list")
+	end
+end
+check(newTree.QuestionsTopic.response == "", "grouping does not invent spoken responses for silent contacts")
+check(hasOption(newTree.QuestionsTopic, "BackTopic") and hasOption(newTree.QuestionsTopic, "GOODBYE"),
+	"questions offer both the main menu and an exit")
+check(newTree.QuestionsTopic.options[#newTree.QuestionsTopic.options] == "GOODBYE",
+	"questions keep goodbye last")
+local oldTree = ix.dialogue.list.oldcontact.tree
+check(oldTree.GREETING.preCallback == greetingCallback, "greeting side effects are preserved")
+for _, topicID in ipairs({"TradeTopic", "RepairItems", "AboutWorkTopic", "AboutProgression"}) do
+	check(hasOption(oldTree.GREETING, topicID), "important actions remain at the root")
+	check(not hasOption(oldTree.QuestionsTopic, topicID), "important actions do not enter flavour menus")
+end
+check(hasOption(oldTree.AboutWorkTopic, "TaskRewardChoices"), "job reward integration is retained")
+check(not hasOption(oldTree.QuestionsTopic, "TaskRewardChoices"), "reward claims stay outside questions")
+check(hasOption(oldTree.RepairItems, "BackTopic"), "services still return to their main menu")
+check(hasOption(oldTree.BackgroundTopic2, "QuestionsBackTopic"), "nested background replies return to questions")
+check(oldTree.BackgroundTopic.ShouldAdd == conditionalQuestion, "original question access checks are preserved")
+check(not oldTree.QuestionsTopic:ShouldAdd({allowQuestions = false}), "empty conditional submenus are hidden")
+check(oldTree.QuestionsTopic:ShouldAdd({allowQuestions = true}), "available conditional questions expose the submenu")
+check(not ix.dialogue.list.services.tree.QuestionsTopic, "service-only NPCs gain no empty flavour submenu")
+check(not ix.dialogue.list.locked.tree.QuestionsTopic
+	and hasOption(ix.dialogue.list.locked.tree.GREETING, "Introduction"),
+	"actionable locked-access introductions remain at the root")
 net = {Receive = function() end}
 local pauseMenuHook
 hook.Add = function(event, _, callback)

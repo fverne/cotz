@@ -1,3 +1,7 @@
+The main menu's **Tasks** tab contains the current task list, including Abandon and
+Field work actions. Tasks have their own page alongside Help and You, including when
+there are no active jobs. The You tab contains the backpack and equipment.
+
 ## Task rewards and existing kits
 
 Jobsystem owns repeatable job rewards, previews, acceptance, item delivery

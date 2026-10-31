@@ -18,10 +18,12 @@ local MENU_ORDER = {
 	GetTaskByDifficulty = 65,
 	AboutProgression = 70,
 	TaskRewardChoices = 75,
+	QuestionsTopic = 80,
 	TutorialTopic = 80,
 	Introduction = 90,
 	BackgroundTopic = 90,
 	InterestTopic = 95,
+	QuestionsBackTopic = 890,
 	BackTopic = 900,
 	GOODBYE = 1000,
 }
@@ -33,7 +35,7 @@ function ix.dialogue.OrderOptions(options, mainMenu)
 		local rank = 0
 		if mainMenu then
 			rank = MENU_ORDER[id] or 200
-		elseif id == "GOODBYE" or id == "BackTopic" then
+		elseif id == "GOODBYE" or id == "BackTopic" or id == "QuestionsBackTopic" then
 			rank = MENU_ORDER[id]
 		end
 		indexed[#indexed + 1] = {option = option, rank = rank, index = index}
@@ -51,6 +53,90 @@ function ix.dialogue.OrderOptions(options, mainMenu)
 	end
 
 	return result
+end
+
+local FLAVOUR_TOPICS = {
+	BackgroundTopic = true,
+	InterestTopic = true,
+	TutorialTopic = true,
+	SpecialtyTopic = true,
+	AdviceTopic = true,
+	ContactsTopic = true,
+}
+
+local function configureQuestions(dialogue)
+	local tree = dialogue.tree
+	local questions = {}
+	local included = {}
+
+	for _, rootID in ipairs({"GREETING", "BackTopic"}) do
+		local root = tree[rootID]
+		for _, topicID in ipairs(root and root.options or {}) do
+			if FLAVOUR_TOPICS[topicID] and tree[topicID] and not included[topicID] then
+				questions[#questions + 1] = topicID
+				included[topicID] = true
+			end
+		end
+	end
+
+	if #questions == 0 then
+		return
+	end
+
+	for _, rootID in ipairs({"GREETING", "BackTopic"}) do
+		local root = tree[rootID]
+		if root then
+			local options = {"QuestionsTopic"}
+			for _, topicID in ipairs(root.options) do
+				if not included[topicID] then
+					options[#options + 1] = topicID
+				end
+			end
+			root.options = ix.dialogue.OrderOptions(options, true)
+		end
+	end
+
+	for topicID, topic in pairs(tree) do
+		local isFlavour = FLAVOUR_TOPICS[topicID] or topicID:match("^BackgroundTopic")
+			or topicID:match("^Interest") or topicID:match("^TutorialTopic")
+		if isFlavour then
+			local options = {}
+			for _, option in ipairs(topic.options) do
+				options[#options + 1] = option == "BackTopic" and "QuestionsBackTopic" or option
+			end
+			topic.options = ix.dialogue.OrderOptions(options)
+		end
+	end
+
+	local function hasQuestions(_, client, target)
+		for _, topicID in ipairs(questions) do
+			local topic = tree[topicID]
+			if topic.statement ~= "" and topic:ShouldAdd(client, target) then
+				return true
+			end
+		end
+
+		return false
+	end
+
+	local options = {}
+	for _, topicID in ipairs(questions) do
+		options[#options + 1] = topicID
+	end
+	if tree.BackTopic then
+		options[#options + 1] = "BackTopic"
+	end
+	options[#options + 1] = "GOODBYE"
+
+	dialogue.addTopic("QuestionsTopic", {
+		statement = "Can I ask you something?",
+		options = options,
+		ShouldAdd = hasQuestions,
+	})
+	dialogue.addTopic("QuestionsBackTopic", {
+		statement = "Back to my questions.",
+		options = options,
+	})
 end
 
 function ix.dialogue.LoadFromDir(directory)
@@ -84,6 +170,7 @@ function ix.dialogue.LoadFromDir(directory)
 			ix.util.Include(directory.."/"..v)
 
 			if ix.dialogue.ConfigureTaskRewards then ix.dialogue.ConfigureTaskRewards(DIALOGUE) end
+			configureQuestions(DIALOGUE)
 
 			DIALOGUE.name = DIALOGUE.name or "Unknown"
 

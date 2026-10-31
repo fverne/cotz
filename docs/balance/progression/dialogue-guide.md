@@ -33,7 +33,17 @@ Progression request and completion flavour has separate sources:
 - [libs/sh_expansion.lua](../../../gamemodes/ix_cotz/plugins/progression/libs/sh_expansion.lua): shared requirements, future-stage preview, claim options and reward-summary rendering. This adds saved character state to the authored briefings.
 - [libs/sh_services.lua](../../../gamemodes/ix_cotz/plugins/progression/libs/sh_services.lua): service option labels, actual prices, credits and discount explanations.
 
-Main-menu ordering and exit placement are enforced in [dialogue/libs/sh_dialogue.lua](../../../gamemodes/ix_cotz/plugins/dialogue/libs/sh_dialogue.lua) and the dialogue panel. The shared priority is trade/barter, services, work, progression, information, then GOODBYE. Back/exit options remain below dynamic choices. Static lists use the same order; templates and progression-locked contacts also keep GOODBYE last.
+Main-menu ordering and exit placement are enforced in [dialogue/libs/sh_dialogue.lua](../../../gamemodes/ix_cotz/plugins/dialogue/libs/sh_dialogue.lua) and the dialogue panel. The shared priority is trade/barter, services, work, progression, questions, then GOODBYE. Back/exit options remain below dynamic choices. Static lists use the same order; templates and progression-locked contacts also keep GOODBYE last.
+
+During loading, background, interest/gossip, tutorial, specialty, advice, and contact-information
+topics offered by GREETING or BackTopic move under **Can I ask you something?** (QuestionsTopic).
+Their existing text, callbacks, and availability conditions remain in the NPC's definition file.
+Nested flavour replies return through QuestionsBackTopic; services still use BackTopic to return
+to the main menu. The questions submenu offers both a main-menu return and GOODBYE, and hides
+when all its questions are unavailable. NPCs with no offered flavour topics gain no empty submenu.
+Actionable Introduction topics, such as access directions for a locked contact, remain at the root.
+The shared grouping runs after task-reward integration, so jobs and supply claims stay outside
+the questions submenu. No NPC-specific dialogue text needs to be moved into shared code.
 
 A model/template's display name and dialogue binding live in [vendor_adv/libs/sh_npctemplates.lua](../../../gamemodes/ix_cotz/plugins/vendor_adv/libs/sh_npctemplates.lua). Changing an NPC's name affects saved vendor stock identity, so edit flavour in the dialogue/progression sources instead of renaming the template merely to change its voice.
 

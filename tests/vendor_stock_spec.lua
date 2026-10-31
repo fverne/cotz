@@ -82,6 +82,9 @@ game = {
 	end,
 }
 ix = {
+	util = {Include = function(path)
+		return dofile("gamemodes/" .. path)
+	end},
 	config = {
 		Add = function() end,
 		Get = function()

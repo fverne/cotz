@@ -99,6 +99,10 @@ For a new map, follow the [map setup guide](docs/map-setup.md). It covers buildi
 
 Use the companion [map content design guide](https://github.com/fverne/cotz/blob/master/docs/map-content-design.md) to plan new town NPCs, loot, artifacts, jobs, progression, encounters, and exploration, including the implementation work that connects them.
 
+The proposed [town NPC overhaul](docs/npc-overhaul/README.md) records the planned roster,
+progression, dialogue relationships, and implementation requirements. It is a design proposal,
+not a description of implemented gameplay.
+
 ## Multi-server configuration
 
 COTZ contains cross-server travel and data-sharing plugins. If you plan to run multiple maps as separate servers:

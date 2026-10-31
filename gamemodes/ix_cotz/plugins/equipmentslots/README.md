@@ -6,8 +6,8 @@ and GPS tracker slots. Drag an item from the backpack onto a compatible slot or
 use its usual Equip action.
 Each `ixStalkerInventoryPanel` gets an equipment companion, including the **You**
 tab, Cleaner storage, other containers, and standalone inventory windows. On the
-You tab it remains embedded immediately left of the backpack, with the journal
-using the remaining space. Closing a backpack removes its own equipment companion.
+You tab it remains embedded immediately left of the backpack, using the remaining
+space. Tasks are in their own main-menu tab. Closing a backpack removes its own equipment companion.
 Multiple views have independent panels and receive the same equipment updates.
 
 Storage displays the container on the left, equipment in the middle, and the

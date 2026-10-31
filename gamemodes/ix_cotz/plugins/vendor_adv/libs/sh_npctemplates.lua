@@ -940,3 +940,15 @@ ix.npctemplates.animtemplates["monolithidle"] = {
 ix.npctemplates.animtemplates["idle_idle"] = {
 	"idle",
 }
+
+ix.util.Include("ix_cotz/plugins/vendor_adv/definitions/sh_atlas.lua")
+ix.util.Include("ix_cotz/plugins/vendor_adv/definitions/sh_ballast.lua")
+ix.util.Include("ix_cotz/plugins/vendor_adv/definitions/sh_brass.lua")
+ix.util.Include("ix_cotz/plugins/vendor_adv/definitions/sh_gasket.lua")
+ix.util.Include("ix_cotz/plugins/vendor_adv/definitions/sh_latch.lua")
+ix.util.Include("ix_cotz/plugins/vendor_adv/definitions/sh_ledger.lua")
+ix.util.Include("ix_cotz/plugins/vendor_adv/definitions/sh_spool.lua")
+ix.util.Include("ix_cotz/plugins/vendor_adv/definitions/sh_spoor.lua")
+ix.util.Include("ix_cotz/plugins/vendor_adv/definitions/sh_suture.lua")
+ix.util.Include("ix_cotz/plugins/vendor_adv/definitions/sh_vesper.lua")
+ix.util.Include("ix_cotz/plugins/vendor_adv/definitions/sh_wake.lua")
