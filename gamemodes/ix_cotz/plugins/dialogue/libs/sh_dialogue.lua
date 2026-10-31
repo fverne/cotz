@@ -17,6 +17,7 @@ local MENU_ORDER = {
 	GetTask = 65,
 	GetTaskByDifficulty = 65,
 	AboutProgression = 70,
+	TownProgression = 70,
 	TaskRewardChoices = 75,
 	QuestionsTopic = 80,
 	TutorialTopic = 80,
@@ -148,6 +149,7 @@ function ix.dialogue.LoadFromDir(directory)
 			end
 
 			DIALOGUE.tree = {}
+			local dialogue = DIALOGUE
 			DIALOGUE.addTopic = function(topicID, data)
 				local topicData = {
 					statement = data.statement or "",
@@ -163,7 +165,7 @@ function ix.dialogue.LoadFromDir(directory)
 					ShouldAdd = data.ShouldAdd or function() return true end
 				}
 
-				DIALOGUE.tree[topicID] = topicData
+				dialogue.tree[topicID] = topicData
 			end
 
 			ix.util.Include(directory.."/"..v)
@@ -199,6 +201,8 @@ function ix.dialogue.getTopic(id, topicID)
 
 	return dialogue.tree[topicID]
 end
+
+ix.util.Include("ix_cotz/plugins/dialogue/integrations/sh_trade.lua")
 
 -- Reward topics must be available before DoPluginIncludes registers NPC conversations.
 ix.util.Include("ix_cotz/plugins/jobsystem/integrations/sh_dialogue.lua")

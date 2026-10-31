@@ -183,7 +183,7 @@ api.Register("sameDiscount", {nextProgressions = {}, serviceDiscounts = {{npc = 
 api.SetCompleted(first, "sameDiscount")
 check(api.GetServiceDiscount(first, "'Arena Master'", "treatment") == 0.1, "alternative discounts do not add together")
 check(not api.BuildServiceOffer(first.client, cleaner, "storage", {direction = "horizontally"}), "storage still requires its access milestone")
-complete(first, "cleanerItemDelivery_Storage")
+complete(first, "cotz/town/cleaner/CL01")
 api.GrantBenefits(first, "storageFixture", {services = {{npc = "'Cleaner'", service = "storage", amount = 300}}}, "once")
 local expansion = api.BuildServiceOffer(first.client, cleaner, "storage", {direction = "horizontally", cost = 0})
 check(expansion.baseCost == math.Round(120 ^ (1 + 2 / 5.5)), "storage retains its existing price curve")

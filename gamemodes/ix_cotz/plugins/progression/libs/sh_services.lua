@@ -118,7 +118,7 @@ end
 
 local function storageOffer(client, data)
 	local character = client:GetCharacter()
-	if not ix.progression.IsCompleted(character, "cleanerItemDelivery_Storage") then
+	if not ix.progression.IsCompleted(character, "cotz/town/cleaner/CL01") then
 		return
 	end
 	local horizontal = data.direction == "horizontally"
@@ -218,7 +218,7 @@ local SERVICE_TOPICS = {
 function ix.progression.ResolveServiceOffer(client, target, service, data)
 	if type(data) ~= "table" then return "BackTopic" end
 	if service == "storage" and data.option == "use" then
-		return ix.progression.IsCompleted(client:GetCharacter(), "cleanerItemDelivery_Storage")
+		return ix.progression.IsCompleted(client:GetCharacter(), "cotz/town/cleaner/CL01")
 			and "OpenStorage" or "BackTopic"
 	end
 	local offer = ix.progression.BuildServiceOffer(client, target, service, data)

@@ -2,24 +2,22 @@
 
 [Contact index](README.md) · [Design overview](../README.md) · [Progression rules](../progression-and-rewards.md)
 
-**Review draft; no runtime implementation.** Read the contact index's shared authoring rules first.
-Exact item quantities, job totals, coordinates, prices, and unresolved reward IDs are not assigned.
+**Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
 ## Contact brief
 
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.
 - **Identity:** New: persistent historian who values maintenance ledgers over heroic tales.
-- **Model:** Not selected; verify available mounted assets before implementation.
+- **Model:** Replaceable Half-Life 2 placeholder in the appearance definition; choose the final mounted model in-game.
 - **Only repeatable category:** Document deliveries.
 - **Finite plan:** 22 steps; **6 hand-ins, 5 job checkpoints, 11 authored objectives**.
-- **Design labels:** CA01 onward, used only in these documents; final runtime IDs need a compatibility review.
+- **Step labels:** CA01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 
 ## Chapter and dependency structure
 
-This first draft is sequential within and between chapters. A later branch split must retain every
-equipment-tier dependency. C1 onward are cumulative, contact-specific job checkpoints, not one-job
-requirements or lifetime totals. Numerical thresholds and counting baselines require balancing.
-Cross-contact upgrade gates are additional requirements on the same player character.
+The runtime graph has 2 shared introduction nodes, two narrow branches, then a
+6-node conclusion requiring both branch tips. The chapter table groups story themes; it does not
+impose a single sequential line. Explicit cross-contact equipment prerequisites remain required.
 
 | Chapter | Design steps | Story direction |
 | --- | --- | --- |
@@ -29,9 +27,10 @@ Cross-contact upgrade gates are additional requirements on the same player chara
 | 4 | CA15–CA18 | Concealed operation |
 | 5 | CA19–CA22 | Pripyat archive |
 
-## Objectives and small rewards
+## Proposed narrative objectives and rewards
 
-Rewards below supplement the ordinary finite progression payout where applicable. Purchase access
+The chapter tables below preserve proposed story direction; they do not define runtime rewards.
+Use the linked contact definition and unlock ledger for implemented requirements and benefits. Purchase access
 does not grant the item. A clue must identify a real authored destination. A capacity increase does
 not fill shelves. Each generic equipment slot remains unassigned until its item and upgrade gates
 pass the catalogue audit; it must not be implemented as a convenient arbitrary item.
@@ -88,7 +87,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 Equipment slots need the lower-tier milestone at the assigned owner. Archive progress cannot give a superior detector, optic or backpack early. Excluded NPC item allocation remains an audit task.
 
 An unresolved lower-tier prerequisite is an implementation blocker for that reward, not permission
-to leave it ungated. Preserve earned permissions through the migration ledger. Check alternate
+to leave it ungated. Current catalogue milestones are the only equipment permissions. Check alternate
 authored shops, barters, and fixed rewards for shortcuts; do not restrict ordinary player trading
 or reset existing characters as a side effect of this plan.
 
@@ -112,19 +111,42 @@ A final greeting or recognition is personal unless an explicitly global event is
 Ordinary document hand-ins use obtainable loot; unique archive evidence is authored field work. Dates, restricted operations and locations remain draft fiction.
 
 - Sites and story evidence above are proposed map content, not asserted existing spawns.
-- Use existing item/job primitives where suitable; finite story integration, evidence items, and
-  multi-stage completion still need authoritative events and saved-state design.
+- Use existing item/job primitives where suitable; finite commissions are implemented with the existing field primitives. Bespoke evidence items and
+  multi-stage investigations still need separate mechanics.
 - Prove every hand-in source and all required preparation are accessible before its unlock.
 - No NPC, reward terminal, or hand-in service is placed in Pripyat. Travel there only after
   ordinary access is earned; return to this contact's home to conclude and claim.
 - Keep task cargo character-bound and recoverable after inventory failure, restart, or transfer.
 - Validate distinct field objectives rather than counting ordinary job completion twice.
 
-## Current-source reference and unlock audit
+## Definition files
 
-This is a new contact; no existing runtime file or model is assigned. Create definitions in the
-owning dialogue, progression, job, and vendor systems following the implementation handoff.
+- [Jobs, catalogue, task dialogue and progression](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_carbon.lua).
+- [Appearance and base stock](../../../gamemodes/ix_cotz/plugins/vendor_adv/definitions/sh_carbon.lua).
+- [Conversation](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_carbonnpc.lua).
 
-This is not the complete effective catalogue or the old-to-new unlock ledger. Some old items move
-to other contacts; all must retain reachable progression access somewhere. Capture other shared
-definitions, dynamic rewards, stock benefits, and excluded-contact allocations in the full audit.
+The [equipment index](../unlock-ledger.md) and loaded catalogue tables define current allocations.
+Only current milestone IDs grant access; old completions and stock are not migrated.
+
+## Runtime definition and sparse tree
+
+[Editable contact definition](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_carbon.lua) · [Runtime setup](../../../gamemodes/ix_cotz/plugins/townnpcs/README.md) · [Unlock ledger](../unlock-ledger.md)
+
+| Part | Nodes in order |
+| --- | --- |
+| Shared introduction | CA01 → CA02 |
+| Supplies and work | CA03 → CA05 → CA07 → CA09 → CA11 → CA13 → CA15 |
+| Field work and story | CA04 → CA06 → CA08 → CA10 → CA12 → CA14 → CA16 |
+| Conclusion after both branches | CA17 → CA18 → CA19 → CA20 → CA21 → CA22 |
+
+Equipment gates can add prerequisites across these branches or contacts. The requires and
+crossRequires fields plus the shared catalogue upgrade chains are authoritative.
+Edit job.kind, job.pools, job.quantities, job.minimumValue and job.maps to tune repeatable work.
+Edit dialogue prompts and progression briefings/completion text in the contact definition;
+background and gossip remain in the existing conversation file.
+
+The tables above retain the original story/reward direction. Actual item IDs, quantities, cumulative
+targets, stock benefits, discounts and catalogue access are now specified by the runtime definitions
+and unlock ledger. Field commissions use configured point pools; physical locations still need map
+authoring and multiplayer verification. No live rescue or bespoke multi-site investigation mechanic
+is implied by the narrative. Arena objectives count completed eligible bouts, not an unreported win.

@@ -31,12 +31,15 @@ Paths below are relative to `gamemodes/ix_cotz/plugins/`.
 | `jobsystem/definitions/` | Repeatable item, kill, and special job definitions. |
 | `jobsystem/libs/` | Job API and shared/server task reward implementation. |
 | `jobsystem/integrations/sh_dialogue.lua` | Task offers, reward choices, and their dialogue networking. Formerly `dialogue/libs/sh_taskrewards.lua`. |
+| `townnpcs/definitions/` | Editable town contact jobs, sparse progression trees, dialogue prompts, pools and field sites. Installed after existing registries load; see the plugin README. |
 | `progression/definitions/` | NPC milestones, shared definitions, and requirement pool data. |
 | `progression/libs/` | Progression state, requirements, rewards, services, and world unlock APIs. |
 | `randomitem/pools/` | Weighted loot tables for world spawns, caches, rewards, vendors, and events. |
 | `randomitem/libs/sh_randomitems.lua` | Random item selection API and explicit pool loading. |
 | `firsttimesetup/presets/` | Map-specific setup data, loaded explicitly by `sh_plugin.lua`. |
 | `dialogue/libs/` | Dialogue registration, option ordering, and conversation APIs. |
+| `vendor_adv/definitions/` | Individual vendor appearances, identities, base items and dialogue bindings; explicit includes in libs/sh_npctemplates.lua. |
+| `dialogue/libs/sh_towncontacts.lua` | Shared current town work/progression actions; NPC root actions are declared in conversation files. |
 | `dialogue/dialogue/` | NPC conversation definitions, discovered by the custom dialogue loader. |
 | Other plugin `items/`, `entities/`, `derma/`, `libs/` | Files owned by the corresponding gameplay feature. |
 

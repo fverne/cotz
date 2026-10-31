@@ -1,17 +1,20 @@
 DIALOGUE.name = "Vesper"
+DIALOGUE.townContact = "vesper"
+
+ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Check what you need for the return trip.")
 
 DIALOGUE.addTopic("GREETING", {
 	response = "You can admire the field from here. Closer costs preparation.",
-	options = {"SpecialtyTopic", "BackgroundTopic", "AdviceTopic", "ContactsTopic", "GOODBYE"},
-})
-
-DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "What sort of work do you handle?",
-	response = (
-		"Sensor work. Deploy it, let it record, collect it. I'm checking the sites before offering a "
-		.. "survey."
-	),
-	options = {"BackTopic", "GOODBYE"},
+	options = {
+		"BackgroundTopic",
+		"AdviceTopic",
+		"ContactsTopic",
+		"GOODBYE",
+		"TradeTopic",
+		"AboutWorkTopic",
+		"TownProgression",
+		"GetTaskByDifficulty",
+	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
@@ -44,7 +47,16 @@ DIALOGUE.addTopic("ContactsTopic", {
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
 	response = "You can admire the field from here. Closer costs preparation.",
-	options = {"SpecialtyTopic", "BackgroundTopic", "AdviceTopic", "ContactsTopic", "GOODBYE"},
+	options = {
+		"BackgroundTopic",
+		"AdviceTopic",
+		"ContactsTopic",
+		"GOODBYE",
+		"TradeTopic",
+		"AboutWorkTopic",
+		"TownProgression",
+		"GetTaskByDifficulty",
+	},
 })
 
 DIALOGUE.addTopic("GOODBYE", {

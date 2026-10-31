@@ -34,10 +34,11 @@ Conversation can finish a completed field step; avoid padding the count with a s
 Arena milestones count distinct qualifying bouts/opponents under the existing anti-farming rules;
 its exact mix of hand-ins and authored competitive objectives needs a bespoke review.
 
-For trackers, choose and display the counting baseline before authoring thresholds. Proposed policy:
-start when that programme becomes available, save its baseline, and retain cumulative credit for all
-its checkpoints. Work between checkpoints should not disappear. Back-credit for earlier lifetime jobs
-is an open decision. Do not silently use lifetime counts or reset counts between stages.
+Runtime trackers count cumulative successful jobs with that exact town contact, starting with the current system. There is no import of previous numeric counters. Thresholds are 2, 5, 9, 14, 20, 27, and 35 where the contact has those checkpoints. Work between
+checkpoints remains credited. Field commissions do not increment repeatable-job counters.
+Trees share a short trunk, split into two narrow branches, then join before the finale. Item-family
+prerequisites can add cross-branch or cross-contact links; the loaded graph defines actual availability.
+
 A single valid completion may earn ordinary job payment and advance its intended finite tracker;
 it must not create duplicate job payments or advance unrelated NPC programmes.
 
@@ -79,33 +80,20 @@ Audit other genuine upgrade families, including detectors and sharpening stones,
 effects and consumers. Do not assume every weapon, tool, or armour option forms one linear hierarchy;
 sidegrades can have parallel branches. Record each classification and prerequisite in the unlock ledger.
 Check alternate authored purchases, barters, and fixed rewards for accidental shortcuts. Existing loot,
-player trading, and earned permissions need explicit review rather than an unrequested blanket restriction.
+and player trading remain separate acquisition paths.
 
 The requirement concerns distribution across NPCs, not account-wide access. Progression and purchase
 access remain personal to each player character unless the user explicitly changes that policy.
 
-Before replacing any progression, make a complete ledger from the live definitions, not old planning
-spreadsheets. Cover all current contacts, including excluded ???, Computer, community NPC, and Hoarder.
-For each old vendor unlock record:
+The [equipment index](unlock-ledger.md) lists all 210 current gated items and their sellers/milestones.
+Each contact's catalogue table is authoritative for trade terms and placement. Current definitions
+retain the item routes assembled for the overhaul, including equipment formerly sold by excluded contacts.
+Secret Hoarder spawning and separate wish services remain outside the town roster.
 
-| Required ledger field | Purpose |
-| --- | --- |
-| Old progression ID, seller, item ID | Trace every source and distinguish duplicate unlocks. |
-| New seller, home map, and step ID | Establish an actual destination and loaded catalogue entry. |
-| Access prerequisites and acquisition sources | Prevent cyclic locks and accidentally earlier availability. |
-| Upgrade family, previous tier, and required milestone | Preserve lower-tier relevance across sellers and parallel branches. |
-| Trade mode, pricing, stock/refill policy | Preserve item availability without silently promising identical balance. |
-| Existing-completion migration | Preserve earned access when its old source moves. |
-| Coverage status and reason | Every entry must be retained, merged with an equivalent route, or explicitly unresolved. |
-
-Every currently unlocked item must retain a progression acquisition route somewhere in the roster.
-Duplicate old routes can map to one documented route, provided earned permissions are preserved.
-Removed NPCs are not permission to delete their item unlocks. Hoarder's secret periodic lifecycle stays
-outside the overhaul; review overlaps without exposing his identity or stripping secret content by accident.
-Wish mechanics and other unique non-vendor services are not automatically promised replacements.
-
-Old Timer's verified starting allocation is in the worked example. The whole-roster ledger is still
-outstanding; these documents do not claim that full coverage has been audited.
+Only current milestones grant access. There are no old-ID aliases, earned-permission imports, stock
+identity conversions or grandfathered prerequisites. Obsolete saved data is not reset or interpreted
+as new progress. Tests cover reachable nodes, configured tier prerequisites and current permissions.
+Live acquisition pacing and economy still need playtesting.
 
 ## Dependency and availability review
 

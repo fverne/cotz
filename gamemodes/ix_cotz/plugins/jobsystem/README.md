@@ -1,5 +1,11 @@
-The main menu's **Tasks** tab contains the current task list, including Abandon and
-Field work actions. Tasks have their own page alongside Help and You, including when
+The [town NPC extension](../townnpcs/README.md) generates per-contact work categories
+and finite field commissions from editable definitions. Server acceptance verifies contact ownership,
+reputation and active progression. Finite commissions pay only their progression reward and do not
+advance repeatable-job counters, reward bonuses or restock events. Only current town job definitions are used; there is no town preview or assignment migration.
+
+The main menu's **Tasks** tab contains the current task list, including descriptions, selected rewards, progress, Abandon and
+Field work actions. The scrollable cards use the equipment menu palette, borders and scaled typography,
+and refresh when accepted tasks change. Tasks have their own page alongside Help and You, including when
 there are no active jobs. The You tab contains the backpack and equipment.
 
 ## Task rewards and existing kits
@@ -12,21 +18,23 @@ Jobsystem uses progression's NPC access checks, purchase unlocks and token-backe
 `libs/sh_taskrewards.lua` defines contact profiles, nominal-value budgeting and visible
 packages. `libs/sv_taskrewards.lua` persists offers and transfers selected rewards into
 the existing token-backed claim queue. `integrations/sh_dialogue.lua` installs
-"Choose or claim task rewards", and an
-authoritative task preview. Contacts without a work topic show the main-menu entry only when a relevant reward,
-kit exchange, barter or pending supply claim is available.
-Saved supplies keep "About work" accessible even after the active job is finished.
+"Claim rewards" and an authoritative task preview. Contacts without a work topic show the main-menu entry only when a relevant reward,
+kit exchange, barter or pending reward claim is available.
+Pending rewards keep "About work" accessible even after the active job is finished.
 That menu lists repeatable job offers. Progression tasks pay money and reputation
-through their own completion flow, without selectable supply rewards. Existing kit and
-barter exchanges remain available through the supplies menu.
+through their own completion flow, without selectable item rewards. Existing kit and
+barter exchanges remain available through the rewards menu.
 
 Medium repeatable tasks require 250 reputation; hard tasks require 1,600. Easy tasks
 have no reputation gate. Preview generation and acceptance both enforce the requirements,
 including when reputation changes after a preview was saved. Locked categories are hidden.
 
-The work menu shows a concrete saved offer from each unlocked difficulty, including
-requirements, cash and up to three supply packages. Players select their package when
-accepting and can change it through the rewards menu before completion. Each package
+The work menu shows a concrete saved offer from each unlocked difficulty with its
+task name and cash. Opening an offer shows its description, with up to three reward packages
+shown once on the acceptance buttons. Players select their reward package when
+accepting. That selection is then locked on the server, including while a completed reward awaits delivery.
+About work only offers claims for earned rewards and bonuses, kit exchanges and barters;
+it cannot change an accepted task reward. Saved selections and pending claims remain intact. Each package
 contains one or two existing supply items, with explicit uses/rounds and no worn weapons
 or suits. A supply allowance uses the task's fixed reference cash payment at an independent
 55% rate, with a minimum of 600 rubles even for easy tasks; quantities
@@ -38,8 +46,8 @@ same trader's five-task bonus. A catalogue with no affordable eligible items ban
 Every five repeatable completions for the same trader earn a bonus at that trader.
 Each trader has a separate completion counter and accumulated bonus value. Progress persists without a time limit or streak reset. Only the unused portion of each task's supply allowance contributes to the bonus;
 there is no base contribution or percentage of ordinary cash added. Higher-quality hand-ins
-can increase ordinary cash but do not inflate the bonus. Task previews explain this rule;
-the rewards menu shows progress and the accumulated value. If five tasks leave no unused
+can increase ordinary cash but do not inflate the bonus. The rewards menu shows progress
+and the accumulated value. If five tasks leave no unused
 allowance, the cycle resets without creating an empty bonus offer. Existing earned bonuses
 and previously accumulated value are preserved.
 
@@ -108,6 +116,7 @@ Additional checks:
 
 ```bash
 luatex --luaonly tests/task_rewards_spec.lua
+luatex --luaonly tests/jobs_menu_spec.lua
 /tmp/cotz-balance-venv/bin/python -m unittest discover -s docs/balance/tests -p test_task_rewards.py -v
 ```
 

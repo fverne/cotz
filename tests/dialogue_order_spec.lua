@@ -77,10 +77,14 @@ for _, rootID in ipairs({"GREETING", "BackTopic"}) do
 	end
 end
 check(newTree.QuestionsTopic.response == "", "grouping does not invent spoken responses for silent contacts")
-check(hasOption(newTree.QuestionsTopic, "BackTopic") and hasOption(newTree.QuestionsTopic, "GOODBYE"),
-	"questions offer both the main menu and an exit")
-check(newTree.QuestionsTopic.options[#newTree.QuestionsTopic.options] == "GOODBYE",
-	"questions keep goodbye last")
+check(hasOption(newTree.QuestionsTopic, "BackTopic") and not hasOption(newTree.QuestionsTopic, "GOODBYE"),
+	"questions return to the main menu, where goodbye remains available")
+check(newTree.QuestionsTopic.options[#newTree.QuestionsTopic.options] == "BackTopic",
+	"questions keep the main-menu return last")
+newTree = ix.dialogue.list.newcontact.tree
+ix.dialogue.list.newcontact.addTopic("LateRegistration", {statement = "Late topic."})
+check(newTree.LateRegistration and not ix.dialogue.list.oldcontact.tree.LateRegistration,
+	"late topic registration captures the owning dialogue instead of the loader global")
 local oldTree = ix.dialogue.list.oldcontact.tree
 check(oldTree.GREETING.preCallback == greetingCallback, "greeting side effects are preserved")
 for _, topicID in ipairs({"TradeTopic", "RepairItems", "AboutWorkTopic", "AboutProgression"}) do

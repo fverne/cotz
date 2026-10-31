@@ -3,13 +3,7 @@ ix.progression.definitions = ix.progression.definitions or {}
 
 -- World NPCs are shared entities; access to their services belongs to a character.
 ix.progression.npcRequirements = {
-	["'Haggler'"] = "oldTimerKillIntro",
-	["'Spicy Lemon'"] = "oldTimerItemDelivery_mainMeat",
-	["'Mute'"] = "oldTimerItemDelivery_mainStatue",
-	["'Egghead'"] = "smartass_rfTasks",
-	["'Beanstalk'"] = "smartass_rfTasks",
-	["'Intern'"] = "smartass_rfTasks",
-	["'Computer'"] = "intern_gasAnalyzerReadings",
+	["'Computer'"] = "cotz/town/intern/IN15",
 	["'???'"] = "computer_artifactTasks",
 }
 
@@ -106,6 +100,9 @@ function ix.progression.CanBuyItem(character, npcName, itemID)
 	if not ix.progression.CanUseNPC(character, npcName) then
 		return false
 	end
+	if ix.townNPCs and ix.townNPCs.itemGates[itemID] then
+		return ix.townNPCs:CanBuyItem(character, itemID)
+	end
 	local locked = false
 	for progressionID, definition in pairs(ix.progression.definitions) do
 		for _, unlock in ipairs(definition.vendorUnlocks or {}) do
@@ -158,6 +155,7 @@ if SERVER then
 			end
 		end
 		ix.progression.SetCharacterProgression(character, record)
+		if ix.townNPCs then ix.townNPCs:OnCompleted(character, progressionID) end
 		ix.progression.AssignActiveRequirements(character)
 		local client = character:GetPlayer()
 		if ix.vendorStock and ix.vendorStock.Refresh and IsValid(client) and IsValid(client.ixVendorAdv) then
@@ -233,8 +231,10 @@ if SERVER then
 				ix.progression.GrantBenefits(character, progressionID, definition.completionBenefits, "completion")
 			end
 			if definition.completionMessage then
+				local message = definition.completionMessage
+				if not definition.townContact then message = character:GetName() .. ", " .. message end
 				ix.progression.Notify(character, definition.keyNpc,
-					character:GetName() .. ", " .. definition.completionMessage)
+					message)
 			end
 		end
 		character:Save()
@@ -295,8 +295,10 @@ if SERVER then
 				definition.OnComplete(character)
 			end
 			if definition.completionMessage then
+				local message = definition.completionMessage
+				if not definition.townContact then message = character:GetName() .. ", " .. message end
 				ix.progression.Notify(character, definition.keyNpc,
-					character:GetName() .. ", " .. definition.completionMessage)
+					message)
 			end
 		end
 
@@ -360,13 +362,13 @@ if SERVER then
 		ix.progression.AccrueTurnInRewards(character, progressionID, reputation, money, itemID)
 		ix.progression.AddComplexProgressionValue(character, progressionID, { itemID, amount })
 		character:Save()
-		local response = string.format("Received %d x %s for %s. ", amount, itemName, definition.name)
+		local response = string.format("Received %d x %s. ", amount, itemName)
 		if ix.progression.IsCompleted(character, progressionID) then
-			response = response .. "That's everything I asked for. The task is complete. Any reward awaiting space can be claimed here."
+			response = response .. "Task complete. Claim any pending rewards here."
 		elseif remaining > amount then
-			response = response .. string.format("I still need %d more of this item to meet the request.", remaining - amount)
+			response = response .. string.format("Still needed: %d.", remaining - amount)
 		else
-			response = response .. "That's enough of this item. Bring the other supplies to finish the task."
+			response = response .. "Bring the remaining items."
 		end
 
 		return true, response

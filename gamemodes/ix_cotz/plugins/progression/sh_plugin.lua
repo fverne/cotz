@@ -16,26 +16,12 @@ end
 ix.util.Include("libs/sh_expansion.lua")
 ix.util.Include("libs/sh_services.lua")
 ix.util.Include("definitions/sh_requirementpools.lua")
-ix.util.Include("definitions/sh_definitions.lua")
 
-ix.util.Include("definitions/sh_technutprog.lua")
-ix.util.Include("definitions/sh_cleanerprog.lua")
-ix.util.Include("definitions/sh_hagglerprog.lua")
-ix.util.Include("definitions/sh_muteprog.lua")
-ix.util.Include("definitions/sh_oldtimerprog.lua")
-ix.util.Include("definitions/sh_quarterprog.lua")
-ix.util.Include("definitions/sh_spicylemonprog.lua")
-ix.util.Include("definitions/sh_jittersprog.lua")
-ix.util.Include("definitions/sh_eggheadprog.lua")
-ix.util.Include("definitions/sh_bossprog.lua")
-ix.util.Include("definitions/sh_beanstalkprog.lua")
+ix.util.Include("definitions/sh_computer_story.lua")
 ix.util.Include("definitions/sh_computerprog.lua")
-ix.util.Include("definitions/sh_originalprog.lua")
 ix.util.Include("definitions/sh_hoarderprog.lua")
 ix.util.Include("definitions/sh_noosphereprog.lua")
 ix.util.Include("definitions/sh_communityprog.lua")
-ix.util.Include("definitions/sh_smartassprog.lua")
-ix.util.Include("definitions/sh_arenaprog.lua")
 
 function PLUGIN:LoadData()
 	local saved = self:GetData() or {}
@@ -83,10 +69,10 @@ function PLUGIN:PopulateHelpMenu(tabs)
 				"Below is a list of known NPCs and what they need for various "
 				.. "progressions. Progress and unlocks belong to your current "
 				.. "character. "
-				.. "Supply milestones can increase your personal stock capacity without faster refills. "
+				.. "Stock rewards increase your personal stock capacity without faster refills. "
 				.. "Finish every item requirement in a task to receive "
 				.. string.format("reputation and %g%% of the handed-in value. ", ix.progression.CashMultiplier() * 100)
-				.. "Commissions may also grant their listed fixed supplies, service credit or catalogue rewards. "
+				.. "Commissions may also grant their listed item rewards, service credit or purchase access. "
 				.. "Any pending item rewards remain available to claim."
 			)
 		)
@@ -95,59 +81,12 @@ function PLUGIN:PopulateHelpMenu(tabs)
 		intro:SetAutoStretchVertical(true)
 
 		local npcIdentifiers = {}
-		local initialNpcs = {
-			"'Old Timer'",
-			"'Technut'",
-			"'Jitters'",
-			"'Cleaner'",
-			"'The Original'",
-			"'Quartermaster'",
-			"'Boss'",
-			"'Smartass'",
-			-- "'Hoarder'",
-			-- "'Arena Master'",
-			-- "NPC",
-			-- "'???'",
-		}
-
-		table.Add(npcIdentifiers, initialNpcs)
-
-		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerKillIntro") then
-			local tradeNPC = {
-				"'Haggler'",
-			}
-			table.Add(npcIdentifiers, tradeNPC)
+		for name in pairs(ix.townNPCs and ix.townNPCs.byName or {}) do
+			if ix.progression.CanUseNPC(LocalPlayer():GetCharacter(), name) then
+				npcIdentifiers[#npcIdentifiers + 1] = name
+			end
 		end
-
-		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerItemDelivery_mainMeat") then
-			local cookNPC = {
-				"'Spicy Lemon'",
-			}
-			table.Add(npcIdentifiers, cookNPC)
-		end
-
-		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "oldTimerItemDelivery_mainStatue") then
-			local muteNPC = {
-				"'Mute'",
-			}
-			table.Add(npcIdentifiers, muteNPC)
-		end
-
-		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "smartass_rfTasks") then
-			local ecologistNpcs = {
-				"'Egghead'",
-				"'Beanstalk'",
-				"'Intern'",
-			}
-			table.Add(npcIdentifiers, ecologistNpcs)
-		end
-
-		if ix.progression.IsCompleted(LocalPlayer():GetCharacter(), "intern_gasAnalyzerReadings") then
-			local pripyatNpcs = {
-				"'Computer'",
-			}
-			table.Add(npcIdentifiers, pripyatNpcs)
-		end
+		table.sort(npcIdentifiers)
 
 		for _, npcIdentifier in pairs(npcIdentifiers) do
 			local npcTitle = container:Add("DLabel")

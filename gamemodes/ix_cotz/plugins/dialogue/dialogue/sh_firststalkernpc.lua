@@ -1,45 +1,20 @@
-DIALOGUE.name = "Tinker NPC"
+DIALOGUE.name = "The Original"
+DIALOGUE.townContact = "the-original"
 
--- Template NPC showcasing all currently implemented features
--- Copy&Paste from this file to build new NPCs
-
--- Progression can be done by calling this:
--- 				ix.progression.AddProgressionValue(client:GetCharacter(), progressionIdentifier, amountToIncrement)
--- and
---  			ix.progression.GetProgressionValue(client:GetCharacter(), progressionIdentifier)
--- to react to progression levels
+ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Yes!")
 
 DIALOGUE.addTopic("GREETING", {
 	response = "Hello, I'm the original. The first stalker in the zone. What do you need?",
 	options = {
 		"TradeTopic",
 		"ChangeSuitVariant",
-		"AboutWorkTopic",
-		"GetTaskByDifficulty",
-		"AboutProgression",
 		"TutorialTopic",
 		"InterestTopic",
 		"GOODBYE",
+		"AboutWorkTopic",
+		"TownProgression",
+		"GetTaskByDifficulty",
 	},
-	preCallback = function(self, client, target)
-		-- Only needed if NPC offers tasks
-		-- 4th argument is the categories to grab tasks from
-		-- 5th argument is the amount of tasks to grab
-		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantkillgroupeasy"},
-		-- 4)
-
-		-- alternative npc task giving by difficulty
-		if SERVER then
-			if target:GetNetVar("possibleJobs") == nil then
-				local possibleJobs = {}
-				possibleJobs["easy"] = { "item_part_NPC_easy" }
-				possibleJobs["medium"] = { "item_part_NPC_medium" }
-				possibleJobs["hard"] = { "item_part_NPC_hard" }
-
-				target:SetNetVar("possibleJobs", possibleJobs)
-			end
-		end
-	end,
 })
 
 DIALOGUE.addTopic("BackTopic", {
@@ -48,12 +23,12 @@ DIALOGUE.addTopic("BackTopic", {
 	options = {
 		"TradeTopic",
 		"ChangeSuitVariant",
-		"AboutWorkTopic",
-		"GetTaskByDifficulty",
-		"AboutProgression",
 		"TutorialTopic",
 		"InterestTopic",
 		"GOODBYE",
+		"AboutWorkTopic",
+		"TownProgression",
+		"GetTaskByDifficulty",
 	}, -- Should be identical to GREETING's options
 })
 
@@ -62,53 +37,6 @@ DIALOGUE.addTopic("GOODBYE", {
 	response = "Take care, STALKER...",
 })
 
-DIALOGUE.addTopic("TradeTopic", {
-	statement = "Want to trade?",
-	response = "Yes!",
-	postCallback = function(self, client, target)
-		if SERVER then
-			local character = client:GetCharacter()
-
-			target.receivers[#target.receivers + 1] = client
-
-			local items = {}
-			-- Only send what is needed.
-			for k, v in pairs(ix.vendorStock.GetItems(character, target)) do
-				if
-					not table.IsEmpty(v)
-					and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])
-				then
-					if ix.progression.CanBuyItem(character, target:GetDisplayName(), k) then
-						items[k] = v
-					end
-				end
-			end
-
-			target.scale = target.scale or 0.5
-			client.ixVendorAdv = target
-			client.ixVendorAdvEditing = nil
-
-			-- force sync to prevent outdated inventories while buying/selling
-			if character then
-				character:GetInventory():Sync(client, true)
-			end
-
-			net.Start("ixVendorAdvOpen")
-			net.WriteEntity(target)
-			net.WriteUInt(target.money or 0, 16)
-			net.WriteTable(items)
-			net.WriteFloat(target.scale or 0.5)
-			net.Send(client)
-
-			ix.log.Add(client, "vendorUse", target:GetDisplayName())
-		end
-	end,
-	options = {
-		"BackTopic",
-	},
-})
-
--- Tutorial start
 DIALOGUE.addTopic("TutorialTopic", {
 	statement = "I have a few questions, I just arrived here.",
 	response = "What do you want to know?",
@@ -234,229 +162,6 @@ DIALOGUE.addTopic("TutorialTopic3", {
 	options = {
 		"TutorialTopicBack",
 	},
-})
-
--- Tutorial end
-
-DIALOGUE.addTopic("GetTask", {
-	statement = "Do you have any work for me?",
-	response = "Yes, have a look.",
-	options = {
-		"BackTopic",
-	},
-	preCallback = function(self, client, target)
-		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
-			self.response = "I already gave you some work."
-		end
-	end,
-	IsDynamic = true,
-	GetDynamicOptions = function(self, client, target)
-		local dynamicOptions = {}
-
-		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
-			local jobs = target:GetNetVar("jobs")
-
-			for _, v in pairs(jobs) do
-				table.insert(dynamicOptions, {
-					statement = ix.jobs.getFormattedNameInactive(v),
-					topicID = "GetTask",
-					dyndata = { identifier = v },
-				})
-			end
-		end
-
-		return dynamicOptions
-	end,
-	ResolveDynamicOption = function(self, client, target, dynamicData)
-		-- Return the next topicID
-
-		return "ConfirmTask",
-			{
-				description = ix.jobs.getFormattedDescInactive(dynamicData.identifier),
-				identifier = dynamicData.identifier,
-			}
-	end,
-})
-
-DIALOGUE.addTopic("ConfirmTask", {
-	statement = "",
-	response = "",
-	IsDynamicFollowup = true,
-	IsDynamic = true,
-	DynamicPreCallback = function(self, player, target, dynamicData)
-		if dynamicData then
-			if CLIENT then
-				self.response = dynamicData.description
-			else
-				target.taskid = dynamicData.identifier
-			end
-		end
-	end,
-	GetDynamicOptions = function(self, client, target)
-		local dynamicOptions = {
-			{ statement = "I'll take it", topicID = "ConfirmTask", dyndata = { accepted = true } },
-			{ statement = "I'll pass", topicID = "ConfirmTask", dyndata = { accepted = false } },
-		}
-
-		return dynamicOptions
-	end,
-	ResolveDynamicOption = function(self, client, target, dynamicData)
-		if SERVER then
-			if dynamicData.accepted then
-				if not ix.jobs.NPCHasJob(target:GetDisplayName(), target.taskid) then
-					client:Notify("Task was taken by somebody else!")
-				else
-					ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(target.taskid))
-
-					client:ixJobAdd(target.taskid, target:GetDisplayName())
-
-					ix.jobs.setNPCJobTaken(target:GetDisplayName(), target.taskid)
-				end
-			end
-
-			target.taskid = nil
-		end
-
-		-- Return the next topicID
-
-		return "BackTopic"
-	end,
-})
-
--- alternative based on difficulty
-DIALOGUE.addTopic("GetTaskByDifficulty", {
-	statement = "Do you have any work for me?",
-	response = "Yes, what difficulty task are you looking for?.",
-	options = {
-		"BackTopic",
-	},
-	preCallback = function(self, client, target)
-		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
-			self.response = "I already gave you some work."
-		end
-	end,
-	IsDynamic = true,
-	GetDynamicOptions = function(self, client, target)
-		local dynamicOptions = {}
-
-		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
-			table.insert(dynamicOptions, {
-				statement = "A trivial task.",
-				topicID = "GetTaskByDifficulty",
-				dyndata = { difficulty = "easy" },
-			})
-			table.insert(dynamicOptions, {
-				statement = "A challenging task.",
-				topicID = "GetTaskByDifficulty",
-				dyndata = { difficulty = "medium" },
-			})
-			table.insert(dynamicOptions, {
-				statement = "A hard task.",
-				topicID = "GetTaskByDifficulty",
-				dyndata = { difficulty = "hard" },
-			})
-		end
-
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-
-		return dynamicOptions
-	end,
-	ResolveDynamicOption = function(self, client, target, dynamicData)
-		if SERVER then
-			local possibleJobs = target:GetNetVar("possibleJobs")
-			local jobCategories = possibleJobs[dynamicData.difficulty]
-			local jobid = ix.jobs.getJobFromCategory(jobCategories)
-
-			if not client:ixJobAdd(jobid, target:GetDisplayName()) then
-				return "BackTopic", dynamicOptions
-			end
-			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(jobid))
-			ix.jobs.setNPCJobTaken(target:GetDisplayName(), jobid)
-		end
-
-		-- Return the next topicID
-
-		return "BackTopic", dynamicOptions
-	end,
-	ShouldAdd = function(self, client, target)
-		if not LocalPlayer():GetCharacter():GetJobs()["'The Original'"] then
-			return true
-		end
-	end,
-})
-
-DIALOGUE.addTopic("AboutWorkTopic", {
-	statement = "About work...",
-	response = "",
-	IsDynamic = true,
-	options = {
-		"BackTopic",
-	},
-	GetDynamicOptions = function(self, client, target)
-		local dynamicOptions = {}
-
-		if client:ixHasJobFromNPC(target:GetDisplayName()) then
-			local jobs = client:GetCharacter():GetJobs()
-
-			-- If it's an item delivery quest, let the player hand in an item
-			local itemuid = ix.jobs.isItemJob(jobs[target:GetDisplayName()].identifier)
-
-			if itemuid and not jobs[target:GetDisplayName()].isCompleted then
-				dynamicOptions = {
-					{
-						statement = string.format("Hand over 1 %s", ix.item.list[itemuid].name),
-						topicID = "AboutWorkTopic",
-						dyndata = { identifier = itemuid },
-					},
-				}
-			end
-		end
-
-		return dynamicOptions
-	end,
-	preCallback = function(self, client, target)
-		if client:ixHasJobFromNPC(target:GetDisplayName()) then
-			local jobs = client:GetCharacter():GetJobs()
-			if jobs[target:GetDisplayName()].isCompleted then
-				if SERVER then
-					ix.dialogue.notifyTaskComplete(
-						client,
-						ix.jobs.getFormattedName(jobs[target:GetDisplayName()])
-					)
-					client:ixJobComplete(target:GetDisplayName())
-				end
-				if CLIENT then
-					self.response = "Great work on the job, here's your reward."
-				end
-			else
-				if CLIENT then
-					self.response = string.format(
-						"Have you finished %s yet?",
-						ix.jobs.getFormattedName(jobs[target:GetDisplayName()])
-					)
-				end
-			end
-		else
-			if CLIENT then
-				self.response = "You're not working for me right now."
-			end
-		end
-	end,
-	ResolveDynamicOption = function(self, client, target, dynamicData)
-		netstream.Start("job_deliveritem", target:GetDisplayName())
-
-		-- Return the next topicID
-
-		return "BackTopic"
-	end,
-	ShouldAdd = function(self, client, target)
-		if LocalPlayer():GetCharacter():GetJobs()["'The Original'"] then
-			return true
-		end
-	end,
 })
 
 DIALOGUE.addTopic("ChangeSuitVariant", {
@@ -767,83 +472,5 @@ DIALOGUE.addTopic("InterestMoreTopic", {
 
 			self.response = table.Random(tbl)
 		end
-	end,
-})
-
-DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
-	statement = "",
-	response = "",
-	IsDynamicFollowup = true,
-	options = { "BackTopic" },
-	DynamicPreCallback = function(self, player, target, dynamicData)
-		ix.dialogue.ProgressionTurnIn(self, player, target, dynamicData)
-	end,
-})
-
-DIALOGUE.addTopic("ViewProgression", {
-	statement = "",
-	response = "",
-	options = {
-		"BackTopic",
-	},
-
-	IsDynamic = true,
-	GetDynamicOptions = function(self, client, target)
-		local identifier = self.tmp
-		self.tmp = nil
-
-		return ix.progression.GetDeliveryOptions(client:GetCharacter(), identifier)
-	end,
-	ResolveDynamicOption = function(self, client, target, dynamicData)
-		-- Return the next topicID
-
-		return "HandInComplexProgressionItemTopic", dynamicData
-	end,
-
-	IsDynamicFollowup = true,
-	DynamicPreCallback = function(self, player, target, dynamicData)
-		if dynamicData then
-			if CLIENT then
-				local definition = ix.progression.definitions[dynamicData.identifier]
-				local progressionStatus =
-					ix.progression.GetLine(player:GetCharacter(), dynamicData.identifier)
-
-				if definition.requirementSlots then
-					progressionStatus = ix.progression.GetComplexProgressionValue(
-						player:GetCharacter(),
-						dynamicData.identifier
-					)
-				end
-
-				self.response = ix.progression.DescribeTask(definition,
-					target:GetDisplayName(),
-					progressionStatus,
-					player:GetCharacter()
-				)
-				self.tmp = dynamicData.identifier
-			end
-		end
-	end,
-})
-
-DIALOGUE.addTopic("AboutProgression", {
-	statement = "Do you need help with anything?",
-	response = "These are your available progression tasks and unclaimed rewards.",
-	options = {"BackTopic"},
-	IsDynamic = true,
-	GetDynamicOptions = function(self, client, target)
-		local options = {}
-		for _, id in ipairs(ix.progression.GetActiveProgressions(client:GetCharacter(), target:GetDisplayName())) do
-			options[#options + 1] = {
-				statement = ix.progression.definitions[id].name,
-				topicID = "AboutProgression",
-				dyndata = {identifier = id},
-			}
-		end
-
-		return options
-	end,
-	ResolveDynamicOption = function(self, client, target, data)
-		return "ViewProgression", data
 	end,
 })

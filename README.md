@@ -99,9 +99,9 @@ For a new map, follow the [map setup guide](docs/map-setup.md). It covers buildi
 
 Use the companion [map content design guide](https://github.com/fverne/cotz/blob/master/docs/map-content-design.md) to plan new town NPCs, loot, artifacts, jobs, progression, encounters, and exploration, including the implementation work that connects them.
 
-The proposed [town NPC overhaul](docs/npc-overhaul/README.md) records the planned roster,
-progression, dialogue relationships, and implementation requirements. It is a design proposal,
-not a description of implemented gameplay.
+The [town NPC references](docs/npc-overhaul/README.md) retain story proposals alongside links to
+implemented contact definitions. Read the [runtime guide](gamemodes/ix_cotz/plugins/townnpcs/README.md)
+for current mechanics, editing, migration and in-game setup still required.
 
 ## Multi-server configuration
 
@@ -148,3 +148,5 @@ The repository contains an [MIT license](LICENSE). **That does not automatically
 S.T.A.L.K.E.R. is associated with GSC Game World. This is a community-made project and is not presented as an official S.T.A.L.K.E.R. release.
 
 ---
+
+Town NPC authoring: [runtime and editing guide](gamemodes/ix_cotz/plugins/townnpcs/README.md) · [design references](docs/npc-overhaul/README.md).

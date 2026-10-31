@@ -1,0 +1,36 @@
+local SELLANDBUY = 1
+
+ix.npctemplates.templates["tradernpc"] = {
+	name = "'Haggler'",
+	description = "The man before you is of larger stature. He has a wild look in his eyes.",
+	model = "models/legends/krohobor.mdl",
+	skin = 0,
+	bubble = 0,
+	scale = 0.4,
+	dialogueid = "tradernpc",
+	soundgroup = "GenericGuard",
+	idleanim = "bandit2_idle2",
+	animgroup = 5,
+	items = {
+		["762x25"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["9x18"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["12gauge"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["762x54"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["762x39"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["556x45"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["545x39"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["22lr"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["45acp"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["45acp41"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+
+		["ij600"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["mp27"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["c96"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["cz52"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["makarov"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["tokarev"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["m1917"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["skorpion"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["obrez"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+	},
+}

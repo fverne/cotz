@@ -41,6 +41,9 @@ ix = {
 local base = "gamemodes/ix_cotz/plugins/progression/"
 dofile(base .. "libs/sh_storage.lua")
 dofile(base .. "libs/sh_progression.lua")
+ix.progression.npcRequirements["'Mute'"] = "cotz/town/old-timer/OT19"
+ix.progression.npcRequirements["'Egghead'"] = "cotz/town/smartass/SM07"
+
 dofile(base .. "libs/sh_expansion.lua")
 dofile(base .. "libs/sh_services.lua")
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_taskrewards.lua")
@@ -358,10 +361,24 @@ check(not api.AcceptJob(hunter.client, "'Old Timer'", "unknown"), "unpreviewed t
 check(api.AcceptJob(hunter.client, "'Old Timer'", "easy"), "acceptance binds the saved task preview")
 check(hunter:GetData("taskRewardOffers")[preview.rewardKey].selected == preview.supplyChoice,
 	"acceptance reserves the saved random supply")
-check(api.SelectOffer(hunter, "'Old Timer'", preview.rewardKey, 1),
-	"accepted task allows supply selection")
-check(api.SelectOffer(hunter, "'Old Timer'", preview.rewardKey, 1),
-	"accepted task preserves a valid supply selection")
+check(not api.SelectOffer(hunter, "'Old Timer'", preview.rewardKey, 1),
+	"accepted task rejects reward changes")
+check(hunter:GetData("taskRewardOffers")[preview.rewardKey].selected == preview.supplyChoice,
+	"rejected reward change preserves the accepted selection")
+local rewardChoiceOwner = actor()
+local choicePreview = api.PreviewJob(rewardChoiceOwner, "'Old Timer'", "easy", {"hunting"})
+local chosenIndex = choicePreview.supplyChoice % #choicePreview.rewardChoices + 1
+check(api.AcceptJob(rewardChoiceOwner.client, "'Old Timer'", "easy", chosenIndex),
+	"an explicit acceptance choice is accepted")
+local acceptedChoice = rewardChoiceOwner:GetJobs()["'Old Timer'"]
+check(acceptedChoice.supplyChoice == chosenIndex
+	and rewardChoiceOwner:GetData("taskRewardOffers")[acceptedChoice.rewardKey].selected == chosenIndex,
+	"acceptance locks the chosen package rather than the preview default")
+local restoredChoice = actor()
+restoredChoice.data = copy(rewardChoiceOwner.data)
+restoredChoice.jobs = copy(rewardChoiceOwner.jobs)
+check(not api.SelectOffer(restoredChoice, "'Old Timer'", acceptedChoice.rewardKey,
+	chosenIndex % #choicePreview.rewardChoices + 1), "reward locking survives save/load")
 local jobs = hunter:GetJobs()
 check(jobs["'Old Timer'"].numberRec == preview.numberRec, "accepted count matches the displayed count")
 check(not api.AcceptJob(hunter.client, "'Old Timer'", "easy", 1), "accepted preview cannot be replayed")
@@ -458,7 +475,7 @@ for index = 1, 9 do
 	check(bonusOwner.client:ixJobAdd(task.identifier, npc, task), "bonus fixture accepts repeatable work")
 	local active = bonusOwner:GetJobs()
 	local saved = active[npc]
-	check(api.SelectOffer(bonusOwner, npc, saved.rewardKey, 1), "bonus fixture chooses its supplies")
+	check(not api.SelectOffer(bonusOwner, npc, saved.rewardKey, 1), "bonus fixture keeps its accepted reward")
 	local chosen = bonusOwner:GetData("taskRewardOffers")[saved.rewardKey].choices[1]
 	local suppliedValue = 0
 	for _, reward in ipairs(chosen.items) do suppliedValue = suppliedValue + api.ExpectedValue(reward.item, reward.data) end
@@ -627,7 +644,7 @@ check(packets[1].name == "cotz/dialogue/task-list" and listPacket[1] == target a
 	"work menu sends actual offers only for configured categories")
 check(listPacket[3] == "easy" and listPacket[4]:find("Hunt ", 1, true)
 	and listPacket[4]:find("rubles", 1, true) and not listPacket[4]:find("reputation", 1, true)
-	and listPacket[4]:find("Supplies (choose one):\n", 1, true), "task row shows its requirement, cash and supplies without reputation")
+	and not listPacket[4]:find("Reward:", 1, true), "task row shows requirement and cash without repeating rewards")
 viewer.client.cotzTaskRewardNext = nil
 dialogue.tree.GetTaskByDifficulty.preCallback(nil, viewer.client, target)
 check(packets[2].values[4] == listPacket[4], "reopening the work menu preserves the offered task and rewards")
@@ -645,9 +662,9 @@ check(previewPacket[5] == shownOffer.choices[1].label,
 check(not previewPacket[3]:find("reputation", 1, true) and previewPacket[3]:find("rubles", 1, true),
 	"confirmation keeps cash visible and hides reputation")
 local displayedSupply = previewPacket[5]
-check(listPacket[4]:find(displayedSupply, 1, true)
-	and previewPacket[3]:find("Supplies:\n  • " .. displayedSupply, 1, true),
-	"task list and NPC dialogue both show the same assigned supply reward")
+check(not previewPacket[3]:find(displayedSupply, 1, true)
+	and previewPacket[3]:find("Choose your reward below.", 1, true),
+	"confirmation leaves reward packages in acceptance options without repeating them")
 check(not previewPacket[3]:find("restock", 1, true) and not listPacket[4]:find("restock", 1, true),
 	"task reward text does not mention vendor restocking")
 local otherSupply = shownPreview.supplyChoice % #shownOffer.choices + 1
@@ -694,7 +711,7 @@ local hiddenChoices = workDialogue.tree.TaskRewardChoices.GetDynamicOptions(nil,
 check(#hiddenChoices == 0, "unaccepted previews are absent from the supplies menu")
 viewer.client.cotzTaskPreview = {difficulty = "easy", choices = {{label = "Preview supplies"}}}
 local confirmation = dialogue.tree.ConfirmSupplyTask.GetDynamicOptions(nil, viewer.client)
-check(#confirmation == 2 and confirmation[1].statement == "Accept task with:\n  • Preview supplies"
+check(#confirmation == 2 and confirmation[1].statement == "Accept — Preview supplies"
 	and confirmation[1].dyndata.choice == 1, "acceptance screen displays one assigned supply without a choice index")
 check(not api.AcceptJob(viewer.client, "'Old Timer'", "easy", 900),
 	"invalid preview supply choice cannot accept a job")
@@ -704,8 +721,10 @@ check(viewer:GetData("taskRewardOffers")[viewer:GetJobs()["'Old Timer'"].rewardK
 	"random supply is reserved after the task is accepted")
 check(workDialogue.tree.TaskRewardChoices.ShouldAdd(nil, viewer.client, target),
 	"accepted jobs expose supply choices")
-check(workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, viewer.client, target),
-	"accepted jobs keep reward actions accessible")
+check(not workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, viewer.client, target),
+	"accepted jobs do not expose reward changes through About work")
+check(#workDialogue.tree.TaskRewardChoices.GetDynamicOptions(nil, viewer.client, target) == 0,
+	"accepted rewards are absent from claim choices")
 local noWork = actor()
 check(not workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, noWork.client, target),
 	"work menu keeps its original visibility when there are no reward actions")
@@ -723,7 +742,7 @@ for _, option in ipairs(menuOptions) do
 		hasRepeatable = true
 	end
 end
-check(hasRepeatable, "repeatable task rewards remain in the supplies menu")
+check(not hasRepeatable, "accepted task rewards remain locked in the claim menu")
 viewer.client.cotzTaskRewardNext = nil
 dialogue.tree.TaskRewardChoices.ResolveDynamicOption(nil, viewer.client, target,
 	{kind = "offer", key = "progression:menu-test", choice = 1})
@@ -806,40 +825,20 @@ for _, itemID in ipairs(stoneIDs) do
 	dofile("gamemodes/ix_cotz/schema/items/sharpeningstones/sh_" .. itemID .. ".lua")
 	ix.item.list[itemID] = ITEM
 end
-local originalRegister = ix.progression.Register
-ix.progression.Register = function(id, definition) ix.progression.definitions[id] = definition end
-dofile("gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua")
-ix.progression.Register = originalRegister
+ix.progression.definitions.stonePurchase = {
+	vendorUnlocks = {{npc = "'Old Timer'", args = {"sharpening_stone"}},
+		{npc = "'Old Timer'", args = {"sharpening_stone_fine"}}},
+}
 local stoneRecipient = actor()
 for _, itemID in ipairs(stoneIDs) do
 	check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), itemID),
-		"sharpening stones can be task rewards before their purchase unlock")
+		"ungated standalone supply profiles can offer stones")
 	check(not ix.progression.CanBuyItem(stoneRecipient, "'Old Timer'", itemID),
-		"sharpening stones require progression to buy")
+		"the purchase gate remains authoritative")
 end
-check(not ix.progression.IsActive(stoneRecipient, "oldtimerItemDelivery_Sharpening1"),
-	"sharpening track is unavailable before the first knife")
 local stoneRecord = ix.progression.GetCharacterProgression(stoneRecipient)
-stoneRecord.lines.oldtimerItemDelivery_Knife1 = {completed = true}
+stoneRecord.lines.stonePurchase = {completed = true}
 ix.progression.SetCharacterProgression(stoneRecipient, stoneRecord)
-check(ix.progression.IsActive(stoneRecipient, "oldtimerItemDelivery_Sharpening1"),
-	"first knife unlocks sharpening track even for an existing character")
-for _, itemID in ipairs(stoneIDs) do
-	check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), itemID),
-		"sharpening stone reward eligibility is independent of the knife track")
-end
-stoneRecord.lines.oldtimerItemDelivery_Knife2 = {completed = true}
-ix.progression.SetCharacterProgression(stoneRecipient, stoneRecord)
-check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), "sharpening_stone_fine"),
-	"fine stone rewards are available independently of sharpening progression")
-ix.progression.SetCompleted(stoneRecipient, "oldtimerItemDelivery_Sharpening1")
-check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), "sharpening_stone"),
-	"Keeping an Edge 1 unlocks normal stones for tasks")
-check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), "sharpening_stone_fine"),
-	"fine stones remain eligible after Keeping an Edge 1")
-check(ix.progression.IsActive(stoneRecipient, "oldtimerItemDelivery_Sharpening2"),
-	"completing first sharpening task activates the second")
-ix.progression.SetCompleted(stoneRecipient, "oldtimerItemDelivery_Sharpening2")
 local stoneOffers = {}
 for _, itemID in ipairs(stoneIDs) do
 	check(includes(api.SupplyCatalogue(stoneRecipient, "'Old Timer'"), itemID),
@@ -928,7 +927,7 @@ check(earlySeen.medic_medkit_2 and bonusSeen.medic_medkit_2,
 check(#api.SupplyCatalogue(supplyOwner, "'Mute'") == 0, "early supplies cannot bypass Mute access")
 check(#api.SupplyCatalogue(supplyOwner, "'Egghead'") == 0, "early supplies cannot bypass scientist access")
 supplyRecord = ix.progression.GetCharacterProgression(supplyOwner)
-supplyRecord.lines.oldTimerItemDelivery_mainStatue = {completed = true}
+supplyRecord.lines["cotz/town/old-timer/OT19"] = {completed = true}
 ix.progression.SetCharacterProgression(supplyOwner, supplyRecord)
 check(includes(api.SupplyCatalogue(supplyOwner, "'Mute'"), "drug_caffeine"),
 	"Mute provides consumable supplies after gaining NPC access")

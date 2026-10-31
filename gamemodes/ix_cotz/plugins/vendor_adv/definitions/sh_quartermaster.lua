@@ -1,0 +1,46 @@
+local SELLANDBUY = 1
+
+ix.npctemplates.templates["unisgnpc"] = {
+	name = "'Quartermaster'",
+	description = "Looking at the stern gaze from the man in front of you makes you want to break eye contact.",
+	model = "models/mirotvor/mirotvor3.mdl",
+	skin = 0,
+	bubble = 0,
+	scale = 0.3,
+	dialogueid = "unisgnpc",
+	soundgroup = "unisgnpc",
+	idleanim = "pistolidle2",
+	buyAll = true,
+	items = {
+		["9x18"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["9x18hp"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["9x19"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["9x19hp"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["9x21"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["45acp"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["357magnum"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["44magnum"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["762x39"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["556x45"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["545x39"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["762x51"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["762x54"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["12gauge"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["12gaugesg"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["9x39"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["57x28"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["50ae"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+
+		["glock17"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["ar159mm"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["mp5k"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["pp2000"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+
+		["stoegerdd"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["stoegerddshort"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["m3supershort"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+
+		["beretta92"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+		["p99"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+	},
+}

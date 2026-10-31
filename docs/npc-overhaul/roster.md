@@ -9,8 +9,8 @@ that category. Finite story objectives may use other activities. Chapter sequenc
 five-part outlines, with parallel specialist branches allowed within them.
 
 See the [individual contact directory](contacts/README.md) for named steps, rewards, dialogue,
-and prerequisite details. Those initial per-contact drafts use sequential chapters; optional
-branching can be added during review while preserving equipment-tier gates.
+and prerequisite details. The runtime definitions use sparse trees with two long branches and a short joined finale,
+while preserving equipment-tier prerequisites. Arena Master stays in Marsh beside the existing dupe.
 
 ## Marsh: survival and community
 
@@ -26,13 +26,13 @@ branching can be added during review while preserving equipment-tier gates.
 | Atlas | New: patient, meticulous former surveyor, concerned for missing explorers. | Sensor deployment and retrieval | Marsh landmarks → unreliable routes → Garbage approaches → missing survey teams → Pripyat route. | Route notes, authored stash clues, survey supplies, advanced assignments. | 22 |
 | Gasket | New: gruff utilities caretaker who treats the generator like an unreliable relative. | Utility supply deliveries | Generator → water infrastructure → spare supplies → emergency reserves → long-term provision. | Fuel, filters, utility barters, reserve stock; visible repairs are a separate proposed mechanic. | 22 |
 | Ballast | New: dry-humoured ferryman, patient and respectful of dangerous water. | Equipment recovery | Stranded shipments → abandoned landings → missing boat crew → disputed freight → waterside supply route. | Waterside clues, recovery supplies, cargo barters; functional crossings deferred. | 22 |
+| Arena Master | Existing relaxed arena organiser. | Arena bouts | Qualification → varied opponents → intermediate competition → veteran challenges → championship. | Combat supplies, existing equipment variants, arena recognition, milestone prizes. Optional competitive line. | 22 |
 
 ## Garbage: salvage and contested trade
 
 | NPC | Identity and role | Repeatable category | Progression chapters | Small unlocks and services | Step target |
 | --- | --- | --- | --- | --- | ---: |
 | Cleaner | Existing dismissive, discreet contact. | Dead-drop circuits | Discretion → caches → compromised drops → distribution network → secure routes. | Storage services and expansions, stash Cleaning kit, Shovel, discreet barters. | 28 |
-| Arena Master | Existing relaxed arena organiser. | Arena bouts | Qualification → varied opponents → intermediate competition → veteran challenges → championship. | Combat supplies, existing equipment variants, arena recognition, milestone prizes. Optional competitive line. | 22 |
 | Beanstalk | Existing concerned scientist. | Research defence | Field station → dump contamination → environmental changes → remote sampling → Pripyat comparison. | Environmental protection, science equipment, field supplies. | 24 |
 | Smartass | Existing smirking, irreverent specialist. | Radio triangulation | Missing beacons → interference → false signals → organised operation → Pripyat endpoint. | Reconnaissance equipment, intelligence, specialist supplies, purchase authorisations. | 24 |
 | Latch | New: blunt former industrial worker who sees useful machinery beneath rust. | Industrial salvage deliveries | Sorting yard → workshop tools → machinery → industrial sites → Pripyat components. | Tools separately, Fireaxe, FUBar, industrial barters, recovery equipment. | 22 |

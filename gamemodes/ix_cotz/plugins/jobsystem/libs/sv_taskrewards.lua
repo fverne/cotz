@@ -23,7 +23,7 @@ function ix.taskRewards.CreateOffer(character, key, npc, budget, label, jobTier)
 	if count >= MAX_OFFERS and key:match("^job:") then return end
 	local choices = jobTier and ix.taskRewards.BuildJobChoices(character, npc, budget, key)
 		or ix.taskRewards.BuildChoices(character, npc, budget, key)
-	if #choices == 0 then choices = {{label = "No supplies available", items = {}}} end
+	if #choices == 0 then choices = {{label = "No item rewards available", items = {}}} end
 	local offer = {npc = npc, label = label, choices = choices}
 	offers[key] = offer
 	saveOffers(character, offers)
@@ -118,6 +118,15 @@ function ix.taskRewards.PrepareJob(character, npc, job)
 	local serial = character:GetData("jobClaimSerial", 0) + 1
 	character:SetData("jobClaimSerial", serial)
 	local key = "job:" .. serial
+	if definition.townProgression then
+		job.progressionClaim = serial
+		job.rewardKey = key
+		job.supplyBudget = 0
+		job.moneyReward = 0
+		job.rewardChoices = {}
+
+		return key
+	end
 	local budget = ix.taskRewards.SupplyBudget(definition, job.numberRec)
 	local tier = definition.tier or 1
 	local offer = ix.taskRewards.CreateOffer(character, key, npc, budget,
@@ -169,7 +178,7 @@ function ix.taskRewards.RecordCompletion(character, npc, job)
 				.. "! Choose your bonus under About work / Task rewards.")
 		else
 			character:GetPlayer():Notify("Five tasks completed for " .. npc
-				.. ". No unused supply allowance accumulated this cycle.")
+				.. ". No unused reward allowance accumulated this cycle.")
 		end
 		progress.count, progress.budget = 0, 0
 	end
@@ -349,10 +358,8 @@ function ix.taskRewards.AcceptJob(client, npc, difficulty, choice)
 		offers[preview.rewardKey] = offer
 		saveOffers(character, offers)
 	end
+	preview.supplyChoice = choice
 	if not client:ixJobAdd(preview.identifier, npc, preview) then return false end
-	if choice then
-		ix.taskRewards.SelectOffer(character, npc, preview.rewardKey, choice)
-	end
 	-- Other difficulty previews are no longer claimable entitlements.
 	for key, other in pairs(previews[npc]) do
 		if key ~= difficulty then ix.taskRewards.RemoveJobOffer(character, other) end

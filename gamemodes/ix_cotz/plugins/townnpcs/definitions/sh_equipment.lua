@@ -1,0 +1,16 @@
+PLUGIN.upgradeChains = {
+	{"knife2", "knife3", "knife4"},
+	{"sharpening_stone", "sharpening_stone_fine"},
+	{"hidestasher_cleaningkit", "hidestasher_shovel"},
+	{"binoculars_2", "binoculars_1", "binoculars_4", "binoculars_3"},
+	{"detectorecho", "detectorbear", "detectorveles"},
+	{"medic_medkit_1", "medic_medkit_2", "medic_medkit_3", "medic_medkit_4", "medic_medkit_5", "medic_medkit_6"},
+	{"medic_bandage_2", "medic_bandage_3"},
+	{"medic_antirad_1", "medic_antirad_2"},
+	{"suit_mailjacket", "suit_io7a"},
+	{"suit_sunrise", "suit_ps5m"},
+	{"taurusragingbull", "sw500"},
+	{"sv98", "vssk"},
+	{"toz34", "nitro"},
+	{"backpack_sling", "backpack_tourist", "backpack_vkbo", "backpack_1_large"},
+}

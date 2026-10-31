@@ -1,9 +1,11 @@
 # Town NPC overhaul design
 
-Planning reference, 31 October 2026. **The full overhaul is not implemented.**
-The 11 new contacts now have manually placeable appearance and basic dialogue scaffolds;
-their progression, jobs, and economy remain design-only. See the
-[scaffold setup guide](../../gamemodes/ix_cotz/plugins/vendor_adv/README.md).
+Runtime and design reference, 31 October 2026. **Town NPC implementation is now present.**
+There are 27 town contacts (15 existing, 12 new) with 646 new finite nodes.
+Carbon is included in the new-contact definitions. Arena Master is based in Marsh.
+See the [runtime/editing guide](../../gamemodes/ix_cotz/plugins/townnpcs/README.md)
+and [unlock ledger](unlock-ledger.md). Physical placement, field-site authoring, economy/pacing,
+and multiplayer verification remain deployment work.
 This folder records the conversation's current direction, replacing earlier roster drafts.
 It is intended for both human review and future implementation work.
 
@@ -16,7 +18,7 @@ It is intended for both human review and future implementation work.
 | [Old Timer worked example](old-timer.md) | A concrete 28-step draft, branch structure, reward redistribution, and sample dialogue. |
 | [Individual contact designs](contacts/README.md) | The other 26 NPCs: 618 named objectives, chapter plans, small rewards, dialogue samples, and upgrade gates. |
 | [Relationships and dialogue](dialogue-and-relationships.md) | Social connections, referrals, progression reactions, and editable dialogue requirements. |
-| [Implementation handoff](implementation.md) | Source locations, definition-file design, missing mechanics, migration, and verification. |
+| [Implementation handoff](implementation.md) | Source locations, definition-file design, missing mechanics and verification. |
 
 ## User requirements
 
@@ -35,20 +37,23 @@ It is intended for both human review and future implementation work.
 - Exclude ???, Computer, and the community NPC from this town overhaul.
 - Hoarder is also excluded: he remains a secret NPC that appears periodically.
   Do not turn him into a permanent contact or advertise him through ordinary referrals.
-- The latest authorised runtime phase is new-contact appearance and basic dialogue only.
-  Progression and the old-NPC overhaul remain deferred.
+- All contacts are now implemented with editable work and sparse progression trees.
+- Arena Master remains in Marsh, where the arena dupe is located.
+- Keep the trees sparse: two narrow branches rather than one long line or a dense web.
 
 ## Working design, subject to review
 
 | Home | Existing contacts | New contacts | Total | Proposed finite steps |
 | --- | ---: | ---: | ---: | ---: |
-| Marsh | 7 | 3 | 10 | 248 |
-| Garbage | 4 | 5 | 9 | 212 |
-| Waystation | 5 | 3 | 8 | 186 |
+| Marsh | 8 | 3 | 11 | 270 |
+| Garbage | 3 | 5 | 8 | 190 |
+| Waystation | 4 | 4 | 8 | 186 |
 | Pripyat | 0 | 0 | 0 | 0 |
-| **Total** | **16** | **11** | **27** | **646** |
+| **Total** | **15** | **12** | **27** | **646** |
 
-The 646 steps are a planning budget, not implemented content or a promised duration.
+The 646 town nodes are registered from contact definitions. Standalone non-town content is separate;
+replaced town definitions and migration/legacy compatibility paths are removed.
+Their count does not establish a completion-time promise.
 The previously discussed per-contact ranges now total **544–704**, after removing the
 community NPC and Hoarder. Earlier 29-contact totals are obsolete.
 
@@ -60,23 +65,23 @@ An NPC's home does not restrict all their objectives to that map.
 Job categories here are player-facing specialties. Medical deliveries and ammunition
 deliveries use similar mechanics but distinct item lists. Equipment recovery remains
 one category regardless of the case's contents. Do not disguise duplicate categories
-through different names. Exact runtime category IDs still need to be mapped.
+through different names. Runtime category IDs are generated per contact and difficulty from its editable job definition.
 
 ## Decisions still open
 
-1. Final item-by-item allocation of the complete current vendor-unlock catalogue.
-2. Garbage's actual map identifier, landmarks, travel links, loot tiers, and placements.
-3. Exact step objectives, item quantities, cumulative job thresholds, prices, and reward amounts.
+1. Review the implemented unlock ledger and item-family pacing in live play.
+2. Garbage's identifier is mz_garbage; final landmarks, travel links, loot placement and NPC positions still need authoring.
+3. Playtest the configured quantities, cumulative job thresholds, prices and reward amounts.
 4. Final main-story travel gates, arrival rules, and cross-NPC prerequisites.
-5. Migration of existing completions, assignments, stock, and pending rewards.
+5. Verify current character persistence and reward recovery in multiplayer.
 6. New field-story mechanics and any visible town changes or functional ferry crossings.
-7. Models and final dialogue for new NPCs.
+7. Final models and refined flavour dialogue for new NPCs.
 8. Boundary between preserved secret Hoarder content and redistribution of his current unlocks.
 
-Do not treat a chapter title, sample line, step budget, or suggested reward as a finished definition.
-Runtime guides describe what works today; these documents describe the proposed replacement.
-The individual contact drafts now fill the full 646-step outline, but unresolved item slots,
-quantities, sites, upgrade comparisons, and save migrations still require authoring and validation.
+The loaded definitions are authoritative for quantities, mechanics, rewards, and prerequisites.
+Contact documents preserve narrative direction alongside a runtime section. A story about several
+landmarks currently uses a single configured field assignment unless its definition says otherwise;
+custom multi-site investigations and visible town changes remain future work.
 
 ## Related references
 

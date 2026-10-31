@@ -57,7 +57,7 @@ function ix.jobs.getFormattedDesc(activejob)
 	if activejob.rewardChoices then
 		local selected = activejob.rewardChoices[activejob.supplyChoice or 0]
 		local supplies = selected and selected.label or ix.taskRewards.Summary({choices = activejob.rewardChoices})
-		text = text .. "\n\nSupplies:\n  • " .. supplies:gsub(" %+ ", "\n  • ")
+		text = text .. "\n\nReward: " .. supplies
 			.. "\n\nPayment: " .. activejob.moneyReward .. " rubles."
 		if ix.jobs.list[activejob.identifier].requiredItem then
 			text = text .. " Better-quality hand-ins can increase this payment."
@@ -204,17 +204,22 @@ if SERVER then
 		character:SetData("jobClaimsPaid", claimed)
 		jobs[npcidentifier] = nil
 		character:SetJobs(jobs)
+		if ix.townNPCs and ix.townNPCs.installed then
+			ix.townNPCs:JobCompleted(self, npcidentifier, job.identifier)
+		end
 		character:Save()
 		local definition = ix.jobs.list[job.identifier]
-		ix.taskRewards.RecordCompletion(character, npcidentifier, job)
-		ix.taskRewards.EarnOffer(character, job.rewardKey)
-		self:addReputation(definition.repReward)
-		ix.dialogue.notifyReputationReceive(self, definition.repReward)
-		character:GiveMoney(job.moneyReward)
-		ix.dialogue.notifyMoneyReceive(self, job.moneyReward)
+		if not definition.townProgression then
+			ix.taskRewards.RecordCompletion(character, npcidentifier, job)
+			ix.taskRewards.EarnOffer(character, job.rewardKey)
+			self:addReputation(definition.repReward)
+			ix.dialogue.notifyReputationReceive(self, definition.repReward)
+			character:GiveMoney(job.moneyReward)
+			ix.dialogue.notifyMoneyReceive(self, job.moneyReward)
+		end
 		hook.Run("ix_OnJobComplete", self, npcidentifier, job.identifier)
 		local vendor = ix.progression.GetNPCFromName(npcidentifier)
-		if ix.vendorStock and ix.vendorStock.TaskRestock and IsValid(vendor) then
+		if not definition.townProgression and ix.vendorStock and ix.vendorStock.TaskRestock and IsValid(vendor) then
 			ix.vendorStock.TaskRestock(character, vendor, job.identifier, job.progressionClaim)
 		end
 		if definition.OnTaskComplete then definition.OnTaskComplete(self) end
@@ -227,6 +232,8 @@ if SERVER then
 		local jobs = character:GetJobs()
 		local definition = ix.jobs.list[identifier]
 		if jobs[npcidentifier] or not definition then return false end
+		if ix.townNPCs and ix.townNPCs.installed
+			and not ix.townNPCs:CanAcceptJob(character, npcidentifier, definition) then return false end
 		if definition.CanAcceptTask and not definition.CanAcceptTask(self) then return false end
 		local job = preview and table.Copy(preview) or {}
 		job.identifier = identifier

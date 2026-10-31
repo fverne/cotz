@@ -1,8 +1,8 @@
-# Advanced vendor NPC scaffolds
+# Advanced vendor definitions
 
-The 11 new town NPCs have appearance definitions and basic conversations. They can be placed
-manually with the existing advanced vendor tools. No progression, repeatable jobs, trade stock,
-barters, or service rewards have been added. Existing NPC definitions remain unchanged.
+The 12 new town contacts have editable appearance definitions and conversations. The
+[town NPC plugin](../townnpcs/README.md) installs jobs, progression trees, catalogue gates,
+and task dialogue for all 27 contacts while preserving existing identities and services.
 
 ## Place a new contact
 
@@ -24,36 +24,42 @@ open its **Edit Vendor** property, select the contact, and click **Load**.
 | Waystation | Suture | /spawnadvvendor suturenpc | [sh_suture.lua](definitions/sh_suture.lua) |
 | Waystation | Ledger | /spawnadvvendor ledgernpc | [sh_ledger.lua](definitions/sh_ledger.lua) |
 | Waystation | Spool | /spawnadvvendor spoolnpc | [sh_spool.lua](definitions/sh_spool.lua) |
+| Waystation | Carbon | /spawnadvvendor carbonnpc | [sh_carbon.lua](definitions/sh_carbon.lua) |
 
-The planned home is guidance for placement, not an enforced map restriction. Garbage's map ID
-and positions are not assigned. No contacts are automatically spawned or moved, and no map
-presets are changed.
+Prefer **/TownNPCPlace <slug>**, for example **/TownNPCPlace arena-master**, on the contact's
+home map. It validates the map and duplicate identity, installs missing stock, and saves immediately.
+Arena Master belongs on rp_marsh_cs; Garbage is mz_garbage. The generic commands above remain
+available for manual editing and do not enforce home maps. Existing saved contacts need to be
+moved manually. The overhaul does not guess positions or relocate vendors across servers.
 
-Use fresh vendor entities for these scaffolds. Appearance defaults use replaceable Half-Life 2
+Use fresh vendor entities for new contacts. Appearance defaults use replaceable Half-Life 2
 human models, silent greetings, and automatic idle selection. Select your final mounted models,
 skin, bodygroups, and animations in the definition or vendor editor. These are not final model choices.
 The template's scale field is the vendor sale-price factor, not character/model size.
 
 ## Edit appearance and conversation
 
-- Appearance, name, model, skin, idle animation, and dialogue binding:
-  definitions/sh_<contact>.lua in this plugin.
+- Appearance, name, model, skin, idle animation, base stock and dialogue binding for every contact:
+  definitions/sh_<contact>.lua in this plugin. Existing templates are split out of the old monolithic table.
 - Editable introduction, specialty, advice, contacts, back, and goodbye text:
   ../dialogue/dialogue/sh_<contact>npc.lua.
 - Example: [Atlas conversation](../dialogue/dialogue/sh_atlasnpc.lua).
 - The matching template ID and dialogue ID are <contact>npc, for example atlasnpc.
   Keep these IDs and display names stable once placed; names participate in saved vendor identity.
 
-Each conversation explains the contact's specialty but explicitly has no assignment ready.
-Introductions, specialty explanations, advice, and contacts appear inside **Can I ask you something?**,
-grouped by the shared dialogue loader. The root is reserved for actions and that submenu entry.
-SpecialtyTopic is informational, deliberately separate from the existing AboutWorkTopic job/reward
-integration. No job categories, progression registrations, or new network handlers are installed.
+Introductions, specialty explanations, advice, and contacts appear inside **Can I ask you something?**.
+The root is reserved for actions and that submenu entry. The town plugin installs work/progression
+and updates specialty text after dialogue registration. Edit job settings and progression text in
+../townnpcs/definitions/sh_<contact>.lua; edit flavour in the conversation file.
+
+Shared stock assembly lives in libs/sh_towncontacts.lua. The town plugin supplies contact configuration;
+this plugin owns template updates and placed-vendor stock handling. Catalogue unlocks and supply lists
+are authored beside each town contact's progression, rather than duplicated in vendor definitions.
 
 Template definitions are explicitly included from libs/sh_npctemplates.lua on both realms using
-ix.util.Include. Dialogue files are discovered by the existing dialogue directory loader. There is
-no new loader or plugin. Shared inclusion follows the
-[Helix ix.util guidance](https://docs.gethelix.co/libraries/ix.util/) and the bundled loader.
+ix.util.Include. Dialogue files are discovered by the existing dialogue directory loader.
+Shared inclusion follows the [Helix ix.util guidance](https://docs.gethelix.co/libraries/ix.util/)
+and the bundled loader.
 
 ## Saving placements and updating definitions
 
@@ -82,6 +88,6 @@ Relevant standalone checks from the repository root:
 These checks do not establish Garry's Mod runtime correctness. In a multiplayer development session,
 check the template dropdown, spawn each contact, inspect its model/idle, open every conversation
 branch, use Back and Goodbye, confirm ordinary players can talk, and save/restart to verify placement
-and dialogue bindings. Check that no work, trade, or progression offer appears for a fresh character.
+and dialogue bindings. Check trading, the single job specialty, progression branches, services, and pending reward claims.
 
-Full future design: [NPC overhaul](../../../../docs/npc-overhaul/README.md).
+Runtime and design reference: [NPC overhaul](../../../../docs/npc-overhaul/README.md).

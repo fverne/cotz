@@ -29,6 +29,7 @@ end
 
 -- World arrivals persist globally; service access remains character-owned.
 function PLUGIN:SetupProgressionWorld()
+	if ix.townNPCs and ix.townNPCs.installed and game.GetMap() == "rp_pripyat_remaster" then return end
 	for progressionID, definition in pairs(ix.progression.definitions) do
 		local spawn = definition.worldNPC
 		local unlocked = self.worldUnlocks and self.worldUnlocks[progressionID]
@@ -52,7 +53,6 @@ ix.command.Add("ProgressionGrant", {
 		if not ix.progression.definitions[progressionID] then
 			return "Unknown progression."
 		end
-		-- Grants restore access and NPC arrivals without replaying personal rewards.
 		ix.progression.SetCompleted(character, progressionID)
 		character:Save()
 

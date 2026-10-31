@@ -1,5 +1,14 @@
 # NPC dialogue
 
+Each town conversation declares DIALOGUE.townContact and its root action IDs. At InitializedPlugins,
+[townnpcs](../townnpcs/README.md) binds its contact data through dialogue's
+libs/sh_towncontacts.lua. That file owns the shared work/progression handlers. Superseded per-NPC
+job and progression topics are deleted, rather than replaced or hidden at runtime.
+
+Ordinary dialogue, flavour and service responses stay in the conversation file. Shared trading uses
+ix.dialogue.AddTradeTopic from integrations/sh_trade.lua; it does not copy another NPC's tree.
+Task prompts, briefings and completion text stay beside the contact's jobs/progression definitions.
+
 Conversation definitions live in dialogue/sh_<dialogueID>.lua. The existing loader discovers
 these shared files and registers their topics on both realms. Vendor templates bind to them
 through dialogueid.
@@ -21,7 +30,7 @@ When all collected topics are conditionally unavailable, the submenu entry is hi
 BackgroundTopic*, Interest*, and TutorialTopic* follow-up branches return through
 QuestionsBackTopic instead of the main BackTopic. The six entry topics above follow the same
 rule. Services, jobs, and progression continue to use BackTopic for the main menu. Questions
-include both a main-menu return and Goodbye. Actionable Introduction topics stay at root.
+include a main-menu return; Goodbye remains at the root. Actionable Introduction topics stay at root.
 
 New flavour topic families should be added deliberately to the shared classifier and regression
 checks. Do not classify topics by their player-facing text: a question can also be a service action.

@@ -239,7 +239,7 @@ if SERVER then
 		if math.Rand(1, 100) <= self.pdachatterchance then
 			for _, ply in player.Iterator() do
 				local character = ply:GetCharacter()
-				if character and ix.progression.IsCompleted(character, "muteItemDelivery_Broadcast") then
+				if character and ix.progression.IsCompleted(character, "cotz/town/mute/MU15") then
 					ix.chat.Send(
 						ply,
 						"eventpdainternal",

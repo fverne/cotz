@@ -4,15 +4,17 @@
 
 These 26 new documents cover the other **618** proposed steps. Together with the
 [28-step Old Timer example](../old-timer.md), the plan remains **27 contacts and 646 steps**.
-The documents are detailed authoring drafts, not runtime definitions or a completed unlock audit.
+Each contact now has an editable runtime definition linked below its design.
+The [unlock ledger](../unlock-ledger.md) records the implemented allocation.
 
 ## How to read a contact document
 
 Each has a contact brief, five chapter ranges, individually named objectives and small rewards,
 upgrade requirements, relationship notes, sample dialogue, implementation limits, and source references.
 Design labels such as QM11 are review references, not final persistent progression IDs.
-Every step follows the previous one unless an additional prerequisite is explicitly stated.
-Optional branch redesigns must preserve upgrade order.
+Each contact has an explicitly authored introduction, two narrow branches, and a joined conclusion.
+Introduction and conclusion lengths vary by contact; runtime sections show the actual structure.
+Per-contact runtime sections list the actual branch nodes; equipment cross-links remain mandatory.
 
 Exactly half the steps in these new drafts use ordinary hand-ins or job checkpoints, alternating
 hand-in and tracker across those slots. The other half are authored field or competitive objectives.
@@ -40,45 +42,45 @@ invented records and identities are proposals until mapped and implemented.
 
 ### Marsh
 
-| Contact | Repeatable category | Steps | Mix: hand-ins / trackers / authored |
+| Contact | Repeatable category | Steps | Runtime definition |
 | --- | --- | ---: | --- |
-| [Old Timer](../old-timer.md) | Mutant hunting | 28 | 7 / 7 / 14 |
-| [Spicy Lemon](spicy-lemon.md) | Meal deliveries | 26 | 7 / 6 / 13 |
-| [Haggler](haggler.md) | Hostile human elimination | 26 | 7 / 6 / 13 |
-| [Jitters](jitters.md) | Medical supply deliveries | 26 | 7 / 6 / 13 |
-| [Technut](technut.md) | Industrial salvage deliveries | 28 | 7 / 7 / 14 |
-| [Mute](mute.md) | Electronics deliveries | 24 | 6 / 6 / 12 |
-| [The Original](the-original.md) | Mutant specimen deliveries | 24 | 6 / 6 / 12 |
-| [Atlas](atlas.md) | Sensor deployment and retrieval | 22 | 6 / 5 / 11 |
-| [Gasket](gasket.md) | Utility supply deliveries | 22 | 6 / 5 / 11 |
-| [Ballast](ballast.md) | Equipment recovery | 22 | 6 / 5 / 11 |
+| [Old Timer](../old-timer.md) | Mutant hunting | 28 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_old_timer.lua) |
+| [Spicy Lemon](spicy-lemon.md) | Meal deliveries | 26 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_spicy_lemon.lua) |
+| [Haggler](haggler.md) | Hostile human elimination | 26 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_haggler.lua) |
+| [Jitters](jitters.md) | Medical supply deliveries | 26 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_jitters.lua) |
+| [Technut](technut.md) | Industrial salvage deliveries | 28 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_technut.lua) |
+| [Mute](mute.md) | Electronics deliveries | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_mute.lua) |
+| [The Original](the-original.md) | Mutant specimen deliveries | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_the_original.lua) |
+| [Atlas](atlas.md) | Sensor deployment and retrieval | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_atlas.lua) |
+| [Gasket](gasket.md) | Utility supply deliveries | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_gasket.lua) |
+| [Ballast](ballast.md) | Equipment recovery | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_ballast.lua) |
+| [Arena Master](arena-master.md) | Arena bouts | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_arena_master.lua) |
 
 ### Garbage
 
-| Contact | Repeatable category | Steps | Mix: hand-ins / trackers / authored |
+| Contact | Repeatable category | Steps | Runtime definition |
 | --- | --- | ---: | --- |
-| [Cleaner](cleaner.md) | Dead-drop circuits | 28 | 7 / 7 / 14 |
-| [Arena Master](arena-master.md) | Arena bouts | 22 | 6 / 5 / 11 |
-| [Beanstalk](beanstalk.md) | Research defence | 24 | 6 / 6 / 12 |
-| [Smartass](smartass.md) | Radio triangulation | 24 | 6 / 6 / 12 |
-| [Latch](latch.md) | Industrial salvage deliveries | 22 | 6 / 5 / 11 |
-| [Spoor](spoor.md) | Mutant hunting | 22 | 6 / 5 / 11 |
-| [Brass](brass.md) | Ammunition deliveries | 24 | 6 / 6 / 12 |
-| [Wake](wake.md) | Equipment recovery | 22 | 6 / 5 / 11 |
-| [Vesper](vesper.md) | Sensor deployment and retrieval | 24 | 6 / 6 / 12 |
+| [Cleaner](cleaner.md) | Dead-drop circuits | 28 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_cleaner.lua) |
+| [Beanstalk](beanstalk.md) | Research defence | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_beanstalk.lua) |
+| [Smartass](smartass.md) | Radio triangulation | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_smartass.lua) |
+| [Latch](latch.md) | Industrial salvage deliveries | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_latch.lua) |
+| [Spoor](spoor.md) | Mutant hunting | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_spoor.lua) |
+| [Brass](brass.md) | Ammunition deliveries | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_brass.lua) |
+| [Wake](wake.md) | Equipment recovery | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_wake.lua) |
+| [Vesper](vesper.md) | Sensor deployment and retrieval | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_vesper.lua) |
 
 ### Waystation
 
-| Contact | Repeatable category | Steps | Mix: hand-ins / trackers / authored |
+| Contact | Repeatable category | Steps | Runtime definition |
 | --- | --- | ---: | --- |
-| [Quartermaster](quartermaster.md) | Ammunition deliveries | 24 | 6 / 6 / 12 |
-| [Boss](boss.md) | Hostile human elimination | 22 | 6 / 5 / 11 |
-| [Egghead](egghead.md) | Artifact deliveries | 26 | 7 / 6 / 13 |
-| [Intern](intern.md) | Sensor deployment and retrieval | 24 | 6 / 6 / 12 |
-| [Suture](suture.md) | Textile supply deliveries | 24 | 6 / 6 / 12 |
-| [Ledger](ledger.md) | Dead-drop circuits | 22 | 6 / 5 / 11 |
-| [Spool](spool.md) | Radio triangulation | 22 | 6 / 5 / 11 |
-| [Carbon](carbon.md) | Document deliveries | 22 | 6 / 5 / 11 |
+| [Quartermaster](quartermaster.md) | Ammunition deliveries | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_quartermaster.lua) |
+| [Boss](boss.md) | Hostile human elimination | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_boss.lua) |
+| [Egghead](egghead.md) | Artifact deliveries | 26 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_egghead.lua) |
+| [Intern](intern.md) | Sensor deployment and retrieval | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_intern.lua) |
+| [Suture](suture.md) | Textile supply deliveries | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_suture.lua) |
+| [Ledger](ledger.md) | Dead-drop circuits | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_ledger.lua) |
+| [Spool](spool.md) | Radio triangulation | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_spool.lua) |
+| [Carbon](carbon.md) | Document deliveries | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_carbon.lua) |
 
 ## Explicit upgrade dependencies to preserve
 
@@ -92,7 +94,7 @@ invented records and identities are proposals until mapped and implemented.
 | Bandages | Existing basic access → JT05 → JT13. | Stock benefits are separate from purchase tiers. |
 | Anti-radiation medicine | JT09 → JT21. | Imported alternate sources must obey the same order. |
 | Stash equipment | Existing baseline access → CL05 stash Cleaning kit → CL09 Shovel. | Check actual tool interactions and baseline sources. |
-| Carrying equipment | SU03 → SU09 → SU15 → SU19. | Exact items and trade-off comparison unresolved; no shortcut at another seller. |
+| Carrying equipment | SU03 → SU09 → SU15 → SU19. | Sling → School → Army → Large Modern Military backpack; requires each previous carrying milestone. |
 | Reinforcement | TN13 → SU07 → SU11 → SU21 if these are direct replacements. | IDs/stat review required; candidate dependencies are blockers until resolved. |
 | Protective suits, headwear, plates, optics, specialised ammunition | See local gates in each contact document; record exact previous item and milestone. | Full shared catalogue audit required before implementation. |
 

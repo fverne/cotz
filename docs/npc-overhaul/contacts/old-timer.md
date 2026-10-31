@@ -1,6 +1,6 @@
 # Old Timer: worked progression example
 
-[Design index](README.md) · [Rules](progression-and-rewards.md)
+[Design index](README.md) · [Rules](../progression-and-rewards.md)
 
 **Draft for review; not a ready-to-register quest list.** This revision reconciles the earlier
 28-step story with the later requirement for regular hand-ins and job trackers. It replaces the
@@ -63,7 +63,7 @@ No authored notebook or keepsake is counted as one of the seven ordinary hand-in
 ## Preserve and redistribute his current vendor unlocks
 
 Verified against the current
-[Old Timer definitions](../../gamemodes/ix_cotz/plugins/progression/definitions/sh_oldtimerprog.lua).
+[Old Timer definitions](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_old_timer.lua).
 Seller assignments below are proposed. All item IDs must remain valid; no rename is implied.
 
 | Item ID | Current item name | Proposed seller | Proposed milestone |
@@ -84,7 +84,7 @@ Seller assignments below are proposed. All item IDs must remain valid; no rename
 The stash Cleaning kit is not a weapon cleaning kit. Old Timer's current bandage capacity benefit
 for medic_bandage_1 and medic_bandage_2 is proposed to move into Jitters' stock progression.
 The table covers Old Timer's current vendor items, not the whole roster's audit or his complete
-current story effects. Existing Haggler/Spicy Lemon/Mute arrival milestones also need explicit mapping.
+current story effects. Haggler, Spicy Lemon and Mute access refers directly to current Old Timer milestones.
 
 The knife purchase chain is explicitly step 3 (knife2) → step 12 (knife3) → Quartermaster's
 local knife4 milestone, which requires step 12 on the same player character. Quartermaster cannot

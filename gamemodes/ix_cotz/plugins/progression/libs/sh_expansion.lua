@@ -60,7 +60,7 @@ function ix.progression.BuildDeliveryResponse(self, npcName, status, character)
 		parts[#parts + 1] = "Purchase access: " .. ix.item.list[unlock.args[1]].name
 	end
 	for _, unlock in ipairs(self.stockUnlocks or {}) do
-		parts[#parts + 1] = string.format("Personal supply reserve: +%d maximum stock for selected supplies.",
+		parts[#parts + 1] = string.format("Stock reward: +%d maximum stock for selected items.",
 			unlock.bonus)
 		parts[#parts + 1] = "Refill speed unchanged; no automatic refill."
 	end
@@ -124,11 +124,12 @@ function ix.progression.DescribeTask(definition, npcName, status, character)
 	end
 	local text = definition:BuildResponse(npcName, status, character)
 	local benefits = ix.progression.GetBenefitSummary(definition, character)
-	if benefits ~= "" then text = text .. "\nEarned rewards: " .. benefits end
-	if definition.BuildResponse ~= ix.progression.BuildDeliveryResponse then
+	if benefits ~= "" then text = text .. "\nRewards: " .. benefits end
+	-- Town responses already include the shared stock reward summary.
+	if definition.BuildResponse ~= ix.progression.BuildDeliveryResponse and not definition.townContact then
 		for _, reward in ipairs(definition.stockUnlocks or {}) do
-			text = text .. string.format("\nPersonal supply reward: +%d total maximum stock from base "
-				.. "for selected supplies. Passive refill speed unchanged.", reward.bonus)
+			text = text .. string.format("\nStock reward: +%d maximum stock "
+				.. "for selected items; refill speed unchanged.", reward.bonus)
 		end
 	end
 

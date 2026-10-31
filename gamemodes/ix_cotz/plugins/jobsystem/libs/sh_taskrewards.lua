@@ -60,6 +60,11 @@ local PROFILES = {
 	},
 	["NPC"] = {"drink_bottlewater", "drink_bottletea", "medic_bandage_1"},
 }
+
+function ix.taskRewards.SetProfile(npc, items)
+	PROFILES[npc] = table.Copy(items)
+end
+
 local SUPPLY_CATALOGUE_VERSION = 3
 local MAX_PACKAGE_ITEMS = 64
 local CHOICE_COUNT = 3
@@ -220,6 +225,9 @@ function ix.taskRewards.IsConsumableSupply(itemID)
 end
 
 local function canReceiveSupply(character, npc, itemID)
+	if ix.townNPCs and ix.townNPCs.installed and ix.townNPCs.itemGates[itemID]
+		and not ix.townNPCs:CanBuyItem(character, itemID) then return false end
+
 	return ix.progression.CanUseNPC(character, npc) and ix.taskRewards.IsConsumableSupply(itemID)
 end
 
@@ -370,7 +378,7 @@ function ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, su
 		result[#result + 1] = {label = label, items = rewards}
 	end
 	if #result == 0 and budget >= 1 and not suppliesOnly then
-		result[1] = {label = "Supply allowance: " .. math.floor(budget) .. " rubles",
+		result[1] = {label = "Reward allowance: " .. math.floor(budget) .. " rubles",
 			items = {{item = "bagrubles", data = {quantity = math.floor(budget)}}}}
 	end
 
@@ -434,7 +442,9 @@ end
 
 function ix.taskRewards.CanSelectOffer(character, npc, key, offer)
 	if not offer or offer.npc ~= npc or type(key) ~= "string" then return false end
-	if not key:match("^job:") or offer.earned then return true end
+	if not key:match("^job:") then return true end
+	if offer.selected then return false end
+	if offer.earned then return true end
 	local job = character:GetJobs()[npc]
 
 	return job ~= nil and job.rewardKey == key
