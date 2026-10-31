@@ -7,6 +7,7 @@ PLUGIN.map_presets = {}
 ix.util.Include("presets/sh_rp_marsh_cs.lua")
 ix.util.Include("presets/sh_rp_pripyat_remaster.lua")
 ix.util.Include("presets/sh_rp_waystation.lua")
+ix.util.Include("presets/sh_mz_garbage.lua")
 
 if SERVER then
 
