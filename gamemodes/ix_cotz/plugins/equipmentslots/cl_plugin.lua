@@ -2,13 +2,18 @@ local PLUGIN = PLUGIN
 local PANEL = {}
 PLUGIN.equipmentViews = setmetatable({}, {__mode = "k"})
 
-function PLUGIN:SendEquipmentAction(item, index, equipping)
+function PLUGIN:SendEquipmentAction(item, index, equipping, x, y)
 	if (self.nextAction or 0) > RealTime() then return end
 	self.nextAction = RealTime() + 0.25
 	net.Start("cotz/equipment/action")
 		net.WriteUInt(item.id, 32)
 		net.WriteUInt(index, 4)
 		net.WriteBool(equipping)
+		net.WriteBool(x ~= nil and y ~= nil)
+		if x and y then
+			net.WriteUInt(x, 6)
+			net.WriteUInt(y, 6)
+		end
 	net.SendToServer()
 end
 
@@ -67,6 +72,13 @@ local function paintCard(card, width, height)
 	local hovered = card:IsHovered() or (IsValid(card.icon) and card.icon:IsHovered())
 	surface.SetDrawColor(hovered and COLORS.hover or COLORS.border)
 	surface.DrawOutlinedRect(0, 0, width, height)
+	local item = card.item
+	if item and (item.isGeiger or item.isAnomalydetector) then
+		local size = math.max(5, math.floor((card.scale or 1) * 7))
+		local padding = card.padding or 6
+		surface.SetDrawColor(item:GetData("powered", true) and COLORS.green or COLORS.red)
+		surface.DrawRect(width - padding - size, height - padding - size, size, size)
+	end
 	local condition, wear = itemConditions(card.item)
 	if not condition then return end
 	local padding = card.padding or 6
@@ -113,9 +125,11 @@ function PANEL:Init()
 	self.cards = {}
 	self.headers = {}
 	self.statistics = {}
-	self.title = self:Add("DLabel")
+	self.title = self:Add("DButton")
+	self.title.DoClick = function() self:OpenHotkeys() end
+	self.title:SetTooltip("Configure item hotkeys")
 	self.title:Dock(TOP)
-	self.title:SetText("EQUIPMENT")
+	self.title:SetText("EQUIPMENT  /  HOTKEYS")
 	self.title:SetTextColor(COLORS.text)
 	self.footer = self:Add("DPanel")
 	self.footer:Dock(BOTTOM)
@@ -175,12 +189,72 @@ function PANEL:AddEquipmentIcon(card, item, index)
 	icon.gridW = item.width
 	icon.gridH = item.height
 	icon:SetHelixTooltip(function(tooltip) ix.hud.PopulateItemTooltip(tooltip, item) end)
-	icon.OnDrop = function(_, dropped, target, inventory)
-		if dropped and inventory and inventory:GetID() == self.inventoryID then
-			PLUGIN:SendEquipmentAction(item, index, false)
+	-- Keep the draggable image compact while allowing presses anywhere on its owning card.
+	icon.Paint = icon.ExtraPaint
+	local onMouseReleased = icon.OnMouseReleased
+	icon.OnMouseReleased = function(this, code)
+		local dragging = dragndrop.IsDragging()
+		onMouseReleased(this, code)
+		if code == MOUSE_LEFT and not dragging then self:ChooseSlotItem(index) end
+	end
+	card.OnMousePressed = function(_, code) icon:OnMousePressed(code) end
+	card.OnMouseReleased = function(_, code) icon:OnMouseReleased(code) end
+	icon.OnDrop = function(_, dropped, target, inventory, x, y)
+		if dropped and inventory and inventory:GetID() == self.inventoryID and x and y then
+			PLUGIN:SendEquipmentAction(item, index, false, x, y)
 		end
 	end
 	card.icon = icon
+end
+
+function PANEL:ChooseSlotItem(index)
+	local character = LocalPlayer():GetCharacter()
+	local inventory = character and character:GetInventory()
+	if not inventory then return end
+	local menu = DermaMenu()
+	local count = 0
+	for _, item in pairs(inventory:GetItems(true)) do
+		if not item:GetData("equip") and not PLUGIN:IsEquipmentCell(item.gridX) then
+			for _, slotIndex in ipairs(PLUGIN:GetItemSlots(item)) do
+				if slotIndex == index and item.functions.Equip then
+					local candidate = item
+					menu:AddOption(item:GetName(), function()
+						PLUGIN:SendEquipmentAction(candidate, index, true)
+					end)
+					count = count + 1
+				end
+			end
+		end
+	end
+	if count == 0 then menu:AddOption("No matching items in your backpack"):SetEnabled(false) end
+	menu:Open()
+end
+
+function PANEL:OpenHotkeys()
+	local hotkeys = ix.plugin.Get("itemhotkeys")
+	local character = LocalPlayer():GetCharacter()
+	if not hotkeys or not character then return end
+	local bindings = {"gm_showhelp", "gm_showteam", "gm_showspare1", "gm_showspare2"}
+	local menu = DermaMenu()
+	for index, binding in ipairs(bindings) do
+		local hotkeyIndex = index
+		local key = string.upper(input.LookupBinding(binding, true) or "Unbound")
+		local selected = character:GetHotkeyItemName(index)
+		local choices = menu:AddSubMenu("Hotkey " .. index .. " (" .. key .. ")")
+		choices:AddOption("None", function()
+			ix.option.Set("Hotkey" .. hotkeyIndex, "nil")
+		end):SetChecked(not selected or selected == "nil")
+		for uniqueID in SortedPairs(hotkeys.hotkeyitems) do
+			local item = character:GetInventory():HasItem(uniqueID)
+			if item then
+				local itemID = uniqueID
+				choices:AddOption(item:GetName(), function()
+					ix.option.Set("Hotkey" .. hotkeyIndex, itemID)
+				end):SetChecked(selected == itemID)
+			end
+		end
+	end
+	menu:Open()
 end
 
 function PANEL:Rebuild(inventory)
@@ -199,7 +273,9 @@ function PANEL:Rebuild(inventory)
 	end
 
 	for index, slot in ipairs(PLUGIN.slots) do
-		local card = self.content:Add("DPanel")
+		local card = self.content:Add("DButton")
+		card:SetText("")
+		card.DoClick = function() self:ChooseSlotItem(index) end
 		card.item = occupied[index]
 		card.Paint = paintCard
 		card:Receiver("ixInventoryItem", function(_, panels, dropped)
@@ -209,16 +285,12 @@ function PANEL:Rebuild(inventory)
 			if item then PLUGIN:SendEquipmentAction(item, index, true) end
 		end)
 		card.label = card:Add("DLabel")
-		card.label:SetText(string.upper(slot.name))
+		card.label:SetText(card.item and card.item.isPDA and "PDA - RETURN TO BACKPACK" or string.upper(slot.name))
 		card.label:SetTextColor(COLORS.text)
 		card.label:SetWrap(true)
+		card.label:SetMouseInputEnabled(false)
 		if card.item then
 			self:AddEquipmentIcon(card, card.item, index)
-		else
-			card.empty = card:Add("DLabel")
-			card.empty:SetText("EMPTY")
-			card.empty:SetTextColor(COLORS.muted)
-			card.empty:SetContentAlignment(5)
 		end
 		self.cards[index] = card
 	end
@@ -263,15 +335,15 @@ function PANEL:LayoutCard(card, bounds, scale, padding)
 	local iconHeight = math.max(1, bounds.h - headerHeight - padding * 3)
 
 	if IsValid(card.icon) then
-		card.icon:SetPos(padding, headerHeight)
-		card.icon:SetSize(bounds.w - padding * 2, iconHeight)
+		local item = card.item
+		local grid = self.inventoryPanel.cotzEquipmentInventoryGrid
+		local size = math.min(grid:GetIconSize(), (bounds.w - padding * 2) / item.width, iconHeight / item.height)
+		local iconWidth, iconHeight = item.width * size, item.height * size
+		card.icon:SetPos((bounds.w - iconWidth) / 2, headerHeight)
+		card.icon:SetSize(iconWidth, iconHeight)
 		card.unequip:SetFont("cotzEquipmentSmall")
 		card.unequip:SetPos(bounds.w - buttonSize - padding, padding)
 		card.unequip:SetSize(buttonSize, buttonSize)
-	elseif IsValid(card.empty) then
-		card.empty:SetFont("cotzEquipmentSmall")
-		card.empty:SetPos(padding, headerHeight)
-		card.empty:SetSize(bounds.w - padding * 2, iconHeight)
 	end
 end
 
@@ -426,6 +498,7 @@ function PLUGIN:AttachInventoryEquipment(inventoryPanel)
 	local inventory = character and character:GetInventory()
 	if not inventory or not inventory.vars.cotzEquipmentWidth then return end
 	local inMenu = page.subpanelName == "you"
+	if not inMenu then return end
 	-- Dock the inventory first, equipment second, and the existing journal into the remaining space.
 	local journalPanel
 	for _, child in ipairs(page:GetChildren()) do

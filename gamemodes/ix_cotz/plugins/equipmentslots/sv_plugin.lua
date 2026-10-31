@@ -84,7 +84,7 @@ function PLUGIN:ValidateContext(context)
 	if not IsValid(client) or client:GetCharacter() ~= context.character then return false end
 	if ix.item.instances[context.item.id] ~= context.item then return false end
 	if (context.item:GetData("equip") == true) ~= context.wasEquipped then return false end
-	local allowed, reason = self:CheckEquipmentAction(context.item, client, context.equipping)
+	local allowed, reason = self:CheckEquipmentAction(context.item, client, context.equipping, false, context.position)
 	if not allowed then client:Notify(reason) return false end
 	local callback = context.item.functions[context.action]
 
@@ -135,10 +135,11 @@ function PLUGIN:InstallServerCompatibility()
 			x, y = PLUGIN:GetStoragePosition(slots[1])
 			local fits = PLUGIN.inventoryOriginals.CanItemFit(inventory, x, y, self.width, self.height, self)
 			if not fits then error("The equipment storage region is already occupied", 2) end
-		elseif PLUGIN:IsEquipmentCell(self.gridX) then
+		elseif PLUGIN:IsEquipmentCell(self.gridX)
+			or (PLUGIN.actionContext and PLUGIN.actionContext.item == self and PLUGIN.actionContext.position) then
 			local context = PLUGIN.actionContext
 			if not (context and context.item == self and context.dropping) then
-				x, y = inventory:FindEmptySlot(self.width, self.height, true)
+				x, y = PLUGIN:GetUnequipPosition(self, inventory, context and context.position)
 				if not x then error("Equipment must have backpack space before unequipping", 2) end
 			end
 		end
@@ -181,11 +182,13 @@ function PLUGIN:InstallServerCompatibility()
 			return originals.PerformInventoryAction(client, action, target, inventoryID, data)
 		end
 		if not item.functions[action] then return end
-		local allowed, reason = PLUGIN:CheckEquipmentAction(item, client, equipping)
+		local position = not equipping and istable(data) and data.equipmentPosition or nil
+		local allowed, reason = PLUGIN:CheckEquipmentAction(item, client, equipping, false, position)
 		if not allowed then client:Notify(reason) return end
 		local context = {
 			item = item, client = client, character = client:GetCharacter(), action = action,
-			equipping = equipping, wasEquipped = item:GetData("equip") == true, expires = CurTime() + 1,
+			equipping = equipping, position = position,
+			wasEquipped = item:GetData("equip") == true, expires = CurTime() + 1,
 		}
 		PLUGIN.pending[client] = context
 		local result = PLUGIN:RunWithContext(context, function()
@@ -223,6 +226,8 @@ net.Receive("cotz/equipment/action", function(_, client)
 	local item = ix.item.instances[net.ReadUInt(32)]
 	local index = net.ReadUInt(4)
 	local equipping = net.ReadBool()
+	local position
+	if net.ReadBool() then position = {net.ReadUInt(6), net.ReadUInt(6)} end
 	if not item or not PLUGIN.slots[index] then return end
 	local matches = false
 
@@ -234,10 +239,10 @@ net.Receive("cotz/equipment/action", function(_, client)
 	-- A third-party drop veto can leave an already unequipped item in its reserved cells.
 	if not equipping and not item:GetData("equip") and PLUGIN:IsEquipmentCell(item.gridX) then
 		if PLUGIN:GetPending(client) then return end
-		local allowed, reason = PLUGIN:CheckEquipmentAction(item, client, false)
+		local allowed, reason = PLUGIN:CheckEquipmentAction(item, client, false, false, position)
 		if not allowed then client:Notify(reason) return end
 		local inventory = client:GetCharacter():GetInventory()
-		local x, y = inventory:FindEmptySlot(item.width, item.height, true)
+		local x, y = PLUGIN:GetUnequipPosition(item, inventory, position)
 		PLUGIN:RelocateItem(item, inventory, x, y)
 		if not inventory.noSave then
 			local query = mysql:Update("ix_items")
@@ -249,5 +254,6 @@ net.Receive("cotz/equipment/action", function(_, client)
 		return
 	end
 
-	ix.item.PerformInventoryAction(client, equipping and "Equip" or "EquipUn", item, item.invID)
+	ix.item.PerformInventoryAction(client, equipping and "Equip" or "EquipUn", item, item.invID,
+		position and {equipmentPosition = position})
 end)

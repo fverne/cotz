@@ -747,8 +747,8 @@ function PANEL:PaintDragPreview(width, height, mouseX, mouseY, itemPanel)
 		surface.DrawRect(
 			(dropX - 1) * iconSize + 4,
 			(dropY - 1) * iconSize + self:GetPadding(2),
-			itemPanel:GetWide(),
-			itemPanel:GetTall()
+			itemPanel.gridW * iconSize,
+			itemPanel.gridH * iconSize
 		)
 	end
 end

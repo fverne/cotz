@@ -92,7 +92,7 @@ inventoryMeta.__index = inventoryMeta
 ix = {meta = {inventory = inventoryMeta, item = itemMeta}, item = {inventories = {}, instances = {}, list = {}}}
 ix.inventory = {}
 ix.util = {Include = function(path)
-	if path:sub(1, 3) == "sv_" then dofile("gamemodes/ix_cotz/plugins/equipmentslots/" .. path) end
+	if path == "sv_plugin.lua" then dofile("gamemodes/ix_cotz/plugins/equipmentslots/" .. path) end
 end}
 local inventoryPath = "gamemodes/helix/gamemode/core/meta/sh_inventory.lua"
 for _, method in ipairs({
@@ -435,7 +435,54 @@ receivers["cotz/equipment/action"](0, client)
 check(not plugin:IsEquipmentCell(vetoed.gridX) and not vetoed.data.equip,
 	"Inactive reserved items can return to the backpack without repeating unequip effects")
 
-for _, name in ipairs({"sh_plugin.lua", "sv_plugin.lua", "cl_plugin.lua"}) do
+inventory = newInventory(90)
+inventory.client = client
+plugin:ConfigureInventory(inventory)
+local positioned = newItem({isHelmet = true})
+perform(positioned, "Equip")
+advance(0.3)
+reads = {positioned.id, 2, false, true, 6, 4}
+receivers["cotz/equipment/action"](0, client)
+check(not positioned.data.equip and positioned.gridX == 6 and positioned.gridY == 4,
+	"Drag unequip uses the exact preview coordinates rather than the first free position")
+check(inventory:GetItemAt(6, 4) == positioned and inventory:GetItemAt(7, 5) == positioned,
+	"The requested footprint contains the same item instance")
+perform(positioned, "Equip")
+local positionBlocker = newItem({width = 1, height = 1}, 7, 5)
+advance(0.3)
+reads = {positioned.id, 2, false, true, 6, 4}
+receivers["cotz/equipment/action"](0, client)
+check(positioned.data.equip and plugin:IsEquipmentCell(positioned.gridX),
+	"An occupied destination rejects unequip without choosing another free position")
+for _, position in ipairs({{0, 1}, {32, 1}, {8, 6}, {1.5, 1}, {"1", 1}}) do
+	check(not plugin:GetUnequipPosition(positioned, inventory, position),
+		"Invalid coordinates and reserved cells cannot be used as unequip destinations")
+end
+inventory:Remove(positionBlocker.id, true, true, true)
+positioned.delayed = true
+local effectsBefore = positioned.effects
+advance(0.3)
+reads = {positioned.id, 2, false, true, 6, 4}
+receivers["cotz/equipment/action"](0, client)
+place(positionBlocker, 7, 5)
+advance(4.1)
+check(positioned.data.equip and positioned.effects == effectsBefore,
+	"Delayed unequip rechecks the requested cells before removing item effects")
+inventory:Remove(positionBlocker.id, true, true, true)
+advance(0.3)
+reads = {positioned.id, 2, false, true, 6, 4}
+receivers["cotz/equipment/action"](0, client)
+advance(4.1)
+check(not positioned.data.equip and positioned.gridX == 6 and positioned.gridY == 4,
+	"Delayed unequip retains the requested position until completion")
+
+check(plugin:GetItemSlots({weaponCategory = "Binoculars"})[1] == 10, "Binoculars use the former PDA region")
+check(#plugin:GetItemSlots({isPDA = true, gridX = 1}) == 0, "Backpack PDAs have no equipment slot")
+check(plugin:GetItemSlots({isPDA = true, gridX = 40})[1] == 10, "Saved PDAs remain recoverable")
+check(plugin:GetItemSlots({isPDA = true}, 40)[1] == 10, "Client anchor coordinates retain access to saved PDAs")
+check(plugin:GetItemSlots({isGeiger = true})[1] == 11, "Other saved slot regions keep their positions")
+
+for _, name in ipairs({"sh_plugin.lua", "sv_plugin.lua", "cl_plugin.lua", "sv_admin.lua", "cl_admin.lua"}) do
 	check(loadfile("gamemodes/ix_cotz/plugins/equipmentslots/" .. name) ~= nil, name .. " parses as standard Lua")
 end
 print("Equipment slots: " .. checks .. " checks passed")

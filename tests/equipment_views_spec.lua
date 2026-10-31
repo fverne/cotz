@@ -133,51 +133,20 @@ storage.OnRemove = classes.ixStorageView.OnRemove
 local inventory = inventoryPanel(storage)
 check(inventory.originalInit and not inventory.cotzEquipmentPanel, "Original init runs before deferred attachment")
 runDeferred()
-local equipment = inventory.cotzEquipmentPanel
-check(equipment and equipment:GetParent() == storage, "Storage receives an equipment companion")
-check(equipment.companion and equipment.manual, "Companion participates in manual storage painting")
-check(inventory.cotzEquipmentInventoryGrid:GetParent() == inventory, "Each frame retains its own backpack grid")
-check(grid:GetWide() <= 1600 * 0.3, "Large storage grids leave room for equipment")
-check(grid.gridW == 10 and grid.gridH == 12, "Visual resizing does not change storage capacity")
-check(grid.x + grid.width < equipment.x, "Equipment is to the right of storage")
-check(equipment.x + equipment.width < inventory.x, "Equipment is to the left of the backpack")
-check(equipment.y >= 0 and equipment.y + equipment.height <= storage.height, "Storage equipment fits vertically")
-local host = storage.cotzEquipmentHost
-check(host and host:GetName() == "EditablePanel" and host.popups == 1 and host.raised,
-	"An editable popup host raises the storage group above existing dialogue popups")
-check(storage:GetParent() == host, "The entire storage view shares the foreground popup")
-check(plugin:AttachInventoryEquipment(inventory) == equipment, "Repeated attachment reuses the same companion")
-check(host.popups == 1, "Repeated attachment does not steal focus again")
-
+check(not inventory.cotzEquipmentPanel, "Storage, including Cleaner storage, has no equipment companion")
+check(not storage.cotzEquipmentHost, "Storage keeps its original popup ownership")
+check(grid.width == 800 and grid.height == 1000, "Equipment does not resize storage")
+check(plugin:AttachInventoryEquipment(inventory) == nil, "Explicit attachment also excludes storage")
 local world = panel(nil, "World")
-world.width, world.height = 1600, 900
 local standalone = inventoryPanel(world)
-standalone:SetPos(1100, 80)
 runDeferred()
-check(standalone.cotzEquipmentPanel and standalone.cotzEquipmentPanel.popups == 1,
-	"Standalone inventory creation also shows equipment")
-check(standalone.cotzEquipmentPanel.x + standalone.cotzEquipmentPanel.width < standalone.x,
-	"Standalone equipment uses available space beside its owner")
-check(not equipment.removed, "Creating another view does not remove existing equipment")
-environment.ix.gui.inv1 = standalone.cotzEquipmentInventoryGrid
-callbacks["cotz/equipment/refresh"]()
-check(equipment.rebuilds == 2 and standalone.cotzEquipmentPanel.rebuilds == 2,
-	"State refresh updates every visible equipment view")
-check(inventory.cotzEquipmentInventoryGrid.refreshes == 1
-	and standalone.cotzEquipmentInventoryGrid.refreshes == 1, "Each view refreshes its own backpack grid once")
-plugin:OnScreenSizeChanged()
-check(equipment.rebuilds == 3 and standalone.cotzEquipmentPanel.rebuilds == 3,
-	"Resolution changes update every equipment companion")
-standalone:OnRemove()
-check(standalone.originalRemoved and standalone.cotzEquipmentPanel.removed,
-	"Owner cleanup removes its companion and preserves the original callback")
-check(not equipment.removed, "Closing one inventory leaves other equipment views alone")
+check(not standalone.cotzEquipmentPanel, "Standalone windows do not show the equipment menu")
 local closedBeforeAttach = inventoryPanel(world)
 closedBeforeAttach.removed = true
 runDeferred()
 check(not closedBeforeAttach.cotzEquipmentPanel, "Deferred attachment ignores an inventory already closed")
 storage:OnRemove()
-check(storage.originalRemoved and host.removed, "Storage cleanup preserves the callback and removes its popup host")
+check(storage.originalRemoved, "Storage cleanup preserves the original callback")
 
 local youPage = panel(nil, "ixSubpanel")
 youPage.subpanelName = "you"
@@ -190,16 +159,18 @@ check(not youEquipment.companion and youEquipment:GetParent() == youPage,
 	"The You equipment remains embedded in the menu page")
 check(not youEquipment.popups, "Embedded equipment never opens an extra popup")
 
-for _, resolution in ipairs({{1024, 768}, {1280, 720}, {1920, 1080}, {3440, 1440}, {3840, 2160}}) do
-	local width, height = resolution[1], resolution[2]
-	local backpackWidth, backpackHeight = width * 0.28, height * 0.82
-	local storageWidth, storageHeight = width * 0.30, height * 0.80
-	local bounds = plugin:GetStorageEquipmentBounds(width, height, backpackWidth, backpackHeight,
-		storageWidth, storageHeight)
-	check(bounds.storage.x + storageWidth < bounds.equipment.x, "Storage and equipment never overlap")
-	check(bounds.equipment.x + bounds.equipment.w < bounds.inventory.x, "Equipment and backpack never overlap")
-	check(bounds.inventory.x + backpackWidth <= width, "Backpack stays on screen")
-	check(bounds.equipment.y >= 0 and bounds.equipment.y + bounds.equipment.h <= height,
-		"Equipment stays on screen")
-end
+local otherPage = panel(nil, "ixSubpanel")
+otherPage.subpanelName = "you"
+local otherInventory = inventoryPanel(otherPage)
+runDeferred()
+local otherEquipment = otherInventory.cotzEquipmentPanel
+environment.ix.gui.inv1 = otherInventory.cotzEquipmentInventoryGrid
+callbacks["cotz/equipment/refresh"]()
+check(youEquipment.rebuilds == 2 and otherEquipment.rebuilds == 2, "Refresh updates all menu views")
+check(youInventory.cotzEquipmentInventoryGrid.refreshes == 1, "Refresh updates the menu's own grid")
+plugin:OnScreenSizeChanged()
+check(youEquipment.rebuilds == 3 and otherEquipment.rebuilds == 3, "Resolution changes rebuild menu equipment")
+otherInventory:OnRemove()
+check(otherInventory.originalRemoved and otherEquipment.removed, "Closing a view removes its equipment")
+check(not youEquipment.removed, "Independent menu views retain their equipment")
 print("Equipment views: " .. checks .. " checks passed")

@@ -20,7 +20,7 @@ PLUGIN.slots = {
 	{id = "secondary", name = "Secondary weapon", category = "secondary"},
 	{id = "knife", name = "Knife", category = "knife"},
 	{id = "artifactdetector", name = "Artifact detector", category = "artifactdetector"},
-	{id = "pda", name = "PDA", field = "isPDA"},
+	{id = "binoculars", name = "Binoculars", category = "Binoculars"},
 	{id = "geiger", name = "Geiger counter", field = "isGeiger"},
 	{id = "anomalydetector", name = "Anomaly detector", field = "isAnomalydetector"},
 	{id = "headlamp", name = "Headlamp", field = "isHeadLamp"},
@@ -28,8 +28,11 @@ PLUGIN.slots = {
 	{id = "gps", name = "GPS tracker", field = "isGpstracker"},
 }
 
-function PLUGIN:GetItemSlots(item)
+function PLUGIN:GetItemSlots(item, x)
 	local slots = {}
+
+	-- Retain access to PDAs saved in the former slot until their owner returns them to the backpack.
+	if item.isPDA and self:IsEquipmentCell(x or item.gridX) then return {10} end
 
 	for index, slot in ipairs(self.slots) do
 		if (slot.field and item[slot.field]) or (slot.category and item.weaponCategory == slot.category) then
@@ -55,7 +58,7 @@ function PLUGIN:GetSlotItems(inventory)
 	-- Sync stores client items at their anchor cells without assigning item.gridX/gridY.
 	for item, x in inventory:Iter() do
 		if item:GetData("equip") or self:IsEquipmentCell(x) then
-			for _, index in ipairs(self:GetItemSlots(item)) do
+			for _, index in ipairs(self:GetItemSlots(item, x)) do
 				occupied[index] = item
 			end
 		end
@@ -74,7 +77,17 @@ function PLUGIN:ConfigureInventory(inventory, width, height)
 	inventory:SetSize(self.storageWidth, math.max(height, self.storageHeight))
 end
 
-function PLUGIN:CheckEquipmentAction(item, client, equipping, dropping)
+function PLUGIN:GetUnequipPosition(item, inventory, position)
+	if not position then return inventory:FindEmptySlot(item.width, item.height, true) end
+	if not istable(position) then return end
+	local x, y = position[1], position[2]
+	if not isnumber(x) or not isnumber(y) or x % 1 ~= 0 or y % 1 ~= 0 then return end
+	if not inventory:CanItemFit(x, y, item.width, item.height) then return end
+
+	return x, y
+end
+
+function PLUGIN:CheckEquipmentAction(item, client, equipping, dropping, position)
 	local character = IsValid(client) and client:GetCharacter()
 	local inventory = character and character:GetInventory()
 	if not inventory or item.invID ~= inventory:GetID() or inventory:GetItemByID(item.id, true) ~= item then
@@ -86,6 +99,7 @@ function PLUGIN:CheckEquipmentAction(item, client, equipping, dropping)
 	local slots = self:GetItemSlots(item)
 	if #slots == 0 then return false, "This item has no equipment slot." end
 	if equipping then
+		if item.isPDA then return false, "PDAs no longer have an equipment slot." end
 		if item.width > self.cellSize or item.height > self.cellSize then
 			return false, "This item is too large for an equipment slot."
 		end
@@ -96,10 +110,10 @@ function PLUGIN:CheckEquipmentAction(item, client, equipping, dropping)
 				return false, self.slots[index].name .. " is already occupied. Unequip it first."
 			end
 		end
-	elseif self:IsEquipmentCell(item.gridX) then
+	elseif self:IsEquipmentCell(item.gridX) or position then
 		if not dropping then
-			local x = inventory:FindEmptySlot(item.width, item.height, true)
-			if not x then return false, "There is no room in your backpack to unequip this item." end
+			local x = self:GetUnequipPosition(item, inventory, position)
+			if not x then return false, "The item does not fit in the requested backpack space." end
 		end
 		if item.GetCarryInc and item:GetCarryInc() and not character:CanRemoveCarry(item) then
 			return false, "Removing this item would make you too overencumbered."
@@ -169,5 +183,7 @@ function PLUGIN:InitializedPlugins()
 end
 
 ix.util.Include("sv_plugin.lua")
+ix.util.Include("sv_admin.lua")
+ix.util.Include("cl_admin.lua")
 ix.util.Include("cl_layout.lua")
 ix.util.Include("cl_plugin.lua")
