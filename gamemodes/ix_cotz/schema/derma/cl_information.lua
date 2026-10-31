@@ -433,13 +433,6 @@ hook.Add("CreateMenuButtons", "ixCharInfo", function(tabs)
 			--inventory:SetPos(container:GetWide() - inventory:GetWide() - container:GetWide()*0.01, 0)
 			inventory:Dock(RIGHT)
 			inventory:InvalidateLayout()
-			
-			-- dont show the jobs panel if there are no jobs taken
-			if !table.IsEmpty(LocalPlayer():GetCharacter():GetJobs()) then
-				local tasks = container:Add("ixCharacterJournalPanel")
-				tasks:Dock(FILL)
-				tasks:DockMargin(0,0,14,0)
-			end			
 		end,
 		OnSelected = function(info, container)
 			--ix.gui.menu:SetCharacterOverview(true)

@@ -1,4 +1,13 @@
+local PLUGIN = PLUGIN
+
 if(CLIENT) then
+
+	function PLUGIN:CreateMenuButtons(tabs)
+		tabs["tasks"] = function(container)
+			local tasks = container:Add("ixCharacterJournalPanel")
+			tasks:Dock(FILL)
+		end
+	end
 
 	local PANEL = {}
 	local background = ix.util.GetMaterial("cotz/panels/questbackground_tall.png")
