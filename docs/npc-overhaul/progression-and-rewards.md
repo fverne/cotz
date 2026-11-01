@@ -61,12 +61,21 @@ Use current cash, reputation, reward, and restock behaviour as the starting poin
 permission to mint an additional ordinary job payout. Repeated milestone restocking across hundreds
 of stages needs an economy review before implementation.
 
-## Preserve all existing vendor item unlocks
+## Equipment acquisition policy (November 2026 revision)
+
+The current [unlock ledger](unlock-ledger.md) supersedes the earlier 210-item allocation.
+Sell base suits only; themed and looted versions require suit conversion unlocks. Exclude Radsuits,
+Exoskeleton suits, Nosorog and their variants, the exoskeleton frame, the three top helmets, and
+the eight reserved guns documented in the runtime guide. Other active guns have purchase routes.
+Ammunition may share one earned unlock across multiple sellers. Medicine instead has independent
+progression at each seller. The four most expensive backpacks are reserved. Each suit variant
+requires its own exact conversion milestone as well as its base suit unlock.
+New travel, exchange and information services remain [future work](reward-followups.md).
 
 ### Equipment upgrade order
 
-Redistributing sellers must preserve the usefulness of earlier equipment. Keep direct upgrades on
-one NPC's ordered progression branch where practical. If an upgrade belongs with another seller,
+Redistributing sellers must preserve the usefulness of earlier equipment. Use master-branch item prices as the progression baseline for suits and gear.
+Keep direct upgrades on one NPC's ordered progression branch where practical. If an upgrade belongs with another seller,
 its unlock must require both that seller's local milestone and the previous tier's progression
 milestone on the same player character. A later home map, higher price, reputation threshold, or
 longer-looking quest is not a substitute for an explicit dependency.
@@ -85,7 +94,7 @@ and player trading remain separate acquisition paths.
 The requirement concerns distribution across NPCs, not account-wide access. Progression and purchase
 access remain personal to each player character unless the user explicitly changes that policy.
 
-The [equipment index](unlock-ledger.md) lists all 210 current gated items and their sellers/milestones.
+The [equipment index](unlock-ledger.md) lists current gated items and their sellers/milestones.
 Each contact's catalogue table is authoritative for trade terms and placement. Current definitions
 retain the item routes assembled for the overhaul, including equipment formerly sold by excluded contacts.
 Secret Hoarder spawning and separate wish services remain outside the town roster.

@@ -56,10 +56,17 @@ PLUGIN:Register("latch", {
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["fubar"] = {step = "LA13",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["lax410s"] = {step = "LA07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["m3supershort"] = {step = "LA07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["stoegerddshort"] = {step = "LA07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
 		{
 			id = "LA01",
+			completionCash = 275,
 			name = "A Place to Sort",
 			kind = "delivery",
 			requires = {},
@@ -84,6 +91,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA02",
+			completionCash = 450,
 			name = "The Missing Inventory",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Return it to this"
@@ -98,38 +106,22 @@ PLUGIN:Register("latch", {
 				cargo = "town_quest_manifest",
 				label = "The Missing Inventory - Warehouse Packing List A",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA03",
+			completionCash = 0,
 			name = "Worth Picking Up",
 			kind = "tracker",
 			requires = {"LA02"},
 			briefing = "Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust.",
 			completion = "You've kept useful parts coming. I can tell you're looking before you pick things up.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA04",
+			completionCash = 650,
 			name = "The Broken Bench",
 			kind = "field",
 			objective = "Recover Stickered Tool Case from the assigned search area in Garbage. Return it to this"
@@ -144,19 +136,11 @@ PLUGIN:Register("latch", {
 				cargo = "town_quest_tools",
 				label = "The Broken Bench - Stickered Tool Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA05",
+			completionCash = 575,
 			name = "Useful Steel",
 			kind = "delivery",
 			requires = {"LA04"},
@@ -168,19 +152,11 @@ PLUGIN:Register("latch", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA06",
+			completionCash = 850,
 			name = "A Machine With a Number",
 			kind = "field",
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Garbage. Return it to this"
@@ -212,25 +188,19 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA07",
+			completionCash = 0,
 			name = "Sorted Properly",
 			kind = "tracker",
 			requires = {"LA05"},
 			briefing = "Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust.",
 			completion = "You've kept useful parts coming. I can tell you're looking before you pick things up.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA08",
+			capacity = {kind = "weight", amount = 1},
+			completionCash = 1050,
 			name = "The Borrowed Specification",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Garbage. Deliver it to"
@@ -246,19 +216,11 @@ PLUGIN:Register("latch", {
 				label = "The Borrowed Specification - Official File Folder",
 				recipient = "technut",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA09",
+			completionCash = 875,
 			name = "Moving Parts",
 			kind = "delivery",
 			requires = {"LA07"},
@@ -270,19 +232,11 @@ PLUGIN:Register("latch", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA10",
+			completionCash = 1250,
 			name = "The Wrong Replacement",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Garbage. Return it to this"
@@ -297,38 +251,22 @@ PLUGIN:Register("latch", {
 				cargo = "town_quest_equipment",
 				label = "The Wrong Replacement - Striped Equipment Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA11",
+			completionCash = 0,
 			name = "More Than Scrap",
 			kind = "tracker",
 			requires = {"LA09"},
 			briefing = "Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust.",
 			completion = "You've kept useful parts coming. I can tell you're looking before you pick things up.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA12",
+			completionCash = 1450,
 			name = "The Old Workshop",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Deliver it to"
@@ -357,6 +295,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA13",
+			completionCash = 1175,
 			name = "Heavy Work",
 			kind = "delivery",
 			requires = {"LA11"},
@@ -368,19 +307,12 @@ PLUGIN:Register("latch", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA14",
+			capacity = {kind = "weight", amount = 1},
+			completionCash = 1650,
 			name = "The Precision Crate",
 			kind = "field",
 			objective = "Recover Stickered Tool Case from the assigned search area in Waystation. Return it to this"
@@ -395,38 +327,22 @@ PLUGIN:Register("latch", {
 				cargo = "town_quest_tools",
 				label = "The Precision Crate - Stickered Tool Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA15",
+			completionCash = 0,
 			name = "A Working Yard",
 			kind = "tracker",
 			requires = {"LA13"},
 			briefing = "Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust.",
 			completion = "You've kept useful parts coming. I can tell you're looking before you pick things up.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA16",
+			completionCash = 1850,
 			name = "Where It Was Built",
 			kind = "field",
 			objective = "Recover Corporate Records Folder from the assigned search area in Pripyat. Deliver it to"
@@ -442,19 +358,11 @@ PLUGIN:Register("latch", {
 				label = "Where It Was Built - Corporate Records Folder",
 				recipient = "carbon",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA17",
+			completionCash = 1475,
 			name = "Parts Worth Carrying",
 			kind = "delivery",
 			requires = {"LA15"},
@@ -466,19 +374,11 @@ PLUGIN:Register("latch", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA18",
+			completionCash = 2050,
 			name = "The Last Bearing",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
@@ -505,25 +405,18 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA19",
+			completionCash = 0,
 			name = "Nothing Wasted",
 			kind = "tracker",
 			requires = {"LA17", "LA18"},
 			briefing = "Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust.",
 			completion = "You've kept useful parts coming. I can tell you're looking before you pick things up.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA20",
+			completionCash = 2250,
 			name = "The Load Test",
 			kind = "field",
 			objective = "Deploy the recorder in Garbage, leave it to record, then retrieve Numbered Data Module 0013."
@@ -538,16 +431,7 @@ PLUGIN:Register("latch", {
 				cargo = "town_quest_module",
 				label = "The Load Test - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "drink_bottlewater",
 				bonus = 2,
@@ -555,6 +439,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA21",
+			completionCash = 1775,
 			name = "Ready for Assembly",
 			kind = "delivery",
 			requires = {"LA20"},
@@ -566,19 +451,12 @@ PLUGIN:Register("latch", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA22",
+			capacity = {kind = "weight", amount = 1},
+			completionCash = 2450,
 			name = "The Commissioning Plate",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Garbage. Return it to this"
@@ -593,16 +471,7 @@ PLUGIN:Register("latch", {
 				cargo = "town_quest_official",
 				label = "The Commissioning Plate - Official File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Latch's trusted contact",
 		},
 	},

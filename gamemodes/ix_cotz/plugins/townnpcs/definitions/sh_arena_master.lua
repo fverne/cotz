@@ -19,9 +19,12 @@ PLUGIN:Register("arena-master", {
 		progressionPrompt = "What else needs doing?",
 		progression = "I've got equipment to sort and a few missing records. And, of course, there's the arena.",
 	},
+	catalogue = {
+	},
 	progression = {
 		{
 			id = "AR01",
+			completionCash = 275,
 			name = "Before the Bell",
 			kind = "delivery",
 			requires = {},
@@ -46,6 +49,7 @@ PLUGIN:Register("arena-master", {
 		},
 		{
 			id = "AR02",
+			completionCash = 0,
 			name = "The Missing Register",
 			kind = "arena",
 			requires = {"AR01"},
@@ -55,19 +59,11 @@ PLUGIN:Register("arena-master", {
 			),
 			completion = "Good match. Take a breather before you sign up again.",
 			target = 1,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR03",
+			completionCash = 0,
 			name = "First Opponents",
 			kind = "tracker",
 			requires = {"AR02"},
@@ -77,19 +73,11 @@ PLUGIN:Register("arena-master", {
 			),
 			completion = "A few different opponents now. You're getting a proper feel for it.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR04",
+			completionCash = 0,
 			name = "A Fair Match",
 			kind = "arena",
 			requires = {"AR03"},
@@ -99,19 +87,11 @@ PLUGIN:Register("arena-master", {
 			),
 			completion = "Good match. Take a breather before you sign up again.",
 			target = 1,
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR05",
+			completionCash = 575,
 			name = "Equipment Inspection",
 			kind = "delivery",
 			requires = {"AR04"},
@@ -123,19 +103,11 @@ PLUGIN:Register("arena-master", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR06",
+			completionCash = 850,
 			name = "The Damaged Shipment",
 			kind = "field",
 			objective = "Recover Armour Plate Transit Case from the assigned search area in Marsh. Deliver it to"
@@ -168,6 +140,7 @@ PLUGIN:Register("arena-master", {
 		},
 		{
 			id = "AR07",
+			completionCash = 0,
 			name = "Not the Same Face",
 			kind = "tracker",
 			requires = {"AR05"},
@@ -177,19 +150,11 @@ PLUGIN:Register("arena-master", {
 			),
 			completion = "A few different opponents now. You're getting a proper feel for it.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR08",
+			completionCash = 0,
 			name = "The Referee's Record",
 			kind = "arena",
 			requires = {"AR06"},
@@ -199,19 +164,11 @@ PLUGIN:Register("arena-master", {
 			),
 			completion = "Good match. Take a breather before you sign up again.",
 			target = 1,
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR09",
+			completionCash = 875,
 			name = "Patch the Kit",
 			kind = "delivery",
 			requires = {"AR07"},
@@ -223,19 +180,11 @@ PLUGIN:Register("arena-master", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR10",
+			completionCash = 1250,
 			name = "The Supplier's Seal",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
@@ -251,19 +200,11 @@ PLUGIN:Register("arena-master", {
 				label = "The Supplier's Seal - Warehouse Packing List A",
 				recipient = "brass",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR11",
+			completionCash = 0,
 			name = "A Broader Field",
 			kind = "tracker",
 			requires = {"AR09"},
@@ -273,18 +214,11 @@ PLUGIN:Register("arena-master", {
 			),
 			completion = "A few different opponents now. You're getting a proper feel for it.",
 			target = 9,
-			benefits = {
-				services = {
-					{
-						npc = "'Arena Master'",
-						service = "treatment",
-						amount = 150,
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR12",
+			completionCash = 0,
 			name = "An Honest Result",
 			kind = "arena",
 			requires = {"AR10"},
@@ -307,6 +241,7 @@ PLUGIN:Register("arena-master", {
 		},
 		{
 			id = "AR13",
+			completionCash = 1175,
 			name = "No Empty Cabinets",
 			kind = "delivery",
 			requires = {"AR11"},
@@ -318,19 +253,11 @@ PLUGIN:Register("arena-master", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR14",
+			completionCash = 1650,
 			name = "A Fighter's Effects",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
@@ -345,19 +272,11 @@ PLUGIN:Register("arena-master", {
 				cargo = "town_quest_personnel",
 				label = "A Fighter's Effects - Personnel File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR15",
+			completionCash = 0,
 			name = "Veteran Company",
 			kind = "tracker",
 			requires = {"AR13"},
@@ -367,19 +286,11 @@ PLUGIN:Register("arena-master", {
 			),
 			completion = "A few different opponents now. You're getting a proper feel for it.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR16",
+			completionCash = 0,
 			name = "The Missing Result",
 			kind = "arena",
 			requires = {"AR14"},
@@ -389,19 +300,11 @@ PLUGIN:Register("arena-master", {
 			),
 			completion = "Good match. Take a breather before you sign up again.",
 			target = 1,
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR17",
+			completionCash = 1475,
 			name = "Ready for the Final",
 			kind = "delivery",
 			requires = {"AR15"},
@@ -413,19 +316,11 @@ PLUGIN:Register("arena-master", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR18",
+			completionCash = 0,
 			name = "A Place in the Record",
 			kind = "arena",
 			requires = {"AR16"},
@@ -448,6 +343,7 @@ PLUGIN:Register("arena-master", {
 		},
 		{
 			id = "AR19",
+			completionCash = 0,
 			name = "Championship Form",
 			kind = "tracker",
 			requires = {"AR17", "AR18"},
@@ -457,19 +353,11 @@ PLUGIN:Register("arena-master", {
 			),
 			completion = "A few different opponents now. You're getting a proper feel for it.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR20",
+			completionCash = 0,
 			name = "The Championship Bout",
 			kind = "arena",
 			requires = {"AR19"},
@@ -479,17 +367,7 @@ PLUGIN:Register("arena-master", {
 			),
 			completion = "Good match. Take a breather before you sign up again.",
 			target = 1,
-			discounts = {{npc = "'Arena Master'", service = "treatment", fraction = 0.1}},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "drink_bottlewater",
 				bonus = 2,
@@ -497,6 +375,7 @@ PLUGIN:Register("arena-master", {
 		},
 		{
 			id = "AR21",
+			completionCash = 1775,
 			name = "The Next Season",
 			kind = "delivery",
 			requires = {"AR20"},
@@ -508,19 +387,11 @@ PLUGIN:Register("arena-master", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR22",
+			completionCash = 2450,
 			name = "The Name on the Board",
 			kind = "field",
 			objective = "Recover Corporate Records Folder from the assigned search area in Marsh. Return it to this"
@@ -535,16 +406,7 @@ PLUGIN:Register("arena-master", {
 				cargo = "town_quest_archive",
 				label = "The Name on the Board - Corporate Records Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Arena Master's trusted contact",
 		},
 	},

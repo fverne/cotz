@@ -19,9 +19,14 @@ function PLUGIN:StepID(contact, step)
 	return "cotz/town/" .. contact .. "/" .. step
 end
 
-function PLUGIN:CanBuyItem(character, item)
+function PLUGIN:CanBuyItem(character, item, npcName)
+	if self:IsPurchaseExcluded(item) then return false end
 	local gate = self.itemGates[item]
 	if not gate then return end
+	if gate.sellers then
+		gate = gate.sellers[npcName]
+		if not gate then return false end
+	end
 
 	return ix.progression.IsCompleted(character, gate.id)
 end
@@ -79,4 +84,42 @@ function PLUGIN:InstallContacts()
 		local dialogue = assert(ix.dialogue.list[template.dialogueid], "Missing town conversation")
 		ix.dialogue.ConfigureTownContact(dialogue, contact)
 	end
+end
+
+-- Derived from earned milestones, so reconnects and repeated callbacks cannot duplicate capacity.
+function PLUGIN:GetCapacityBonus(character, kind)
+	if not character then return 0 end
+	local total = 0
+	for id, reward in pairs(self.capacityMilestones or {}) do
+		if reward.kind == kind and ix.progression.IsCompleted(character, id) then
+			total = total + reward.amount
+		end
+	end
+
+	return math.min(total, kind == "weight" and 5 or 2)
+end
+
+function PLUGIN:IsPurchaseExcluded(itemID)
+	local item = ix.item.list[itemID]
+	if item and item.baseSuit and item.baseSuit ~= itemID then return true end
+	for _, reserved in ipairs(self.reservedEquipment or {}) do
+		if itemID == reserved or (item and item.baseSuit == reserved) then return true end
+	end
+
+	return false
+end
+
+function PLUGIN:CanChangeSuitVariant(character, itemID)
+	local item = ix.item.list[itemID]
+	if not item or not item.baseSuit then return false end
+	for _, reserved in ipairs(self.reservedEquipment or {}) do
+		if item.baseSuit == reserved then return false end
+	end
+	local gate = self.itemGates[item.baseSuit]
+
+	local variant = self.variantUnlocks[itemID]
+	local unlocked = itemID == item.baseSuit or (variant
+		and ix.progression.IsCompleted(character, self:StepID(variant.contact, variant.step)))
+
+	return gate ~= nil and unlocked and ix.progression.IsCompleted(character, gate.id)
 end

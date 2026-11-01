@@ -19,30 +19,37 @@ PLUGIN:Register("boss", {
 		progression = "Supplies and field reports. Tell me which assignment you can finish.",
 	},
 	catalogue = {
+		["helm_operator_rus_2"] = {step = "BO07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["headwear_cs1"] = {step = "BO09",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["headwear_cs2"] = {step = "BO11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["9a91"] = {step = "BO21",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["accesscard_bunker"] = {step = "BO01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["headwear_rad"] = {step = "BO11",
+		["asval"] = {step = "BO21",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["headwear_spartan"] = {step = "BO15",
+		["dp28"] = {step = "BO17",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_berill"] = {step = "BO05",
+		["rpk"] = {step = "BO17",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_exoskeleton"] = {step = "BO17",
+		["sr3m"] = {step = "BO21",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_io7a"] = {step = "BO01",
+		["suit_berill"] = {step = "BO15",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_ps5m"] = {step = "BO03",
+		["suit_io7a"] = {step = "BO08",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_radsuit"] = {step = "BO13",
+		["suit_ps5m"] = {step = "BO12",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_skat10"] = {step = "BO07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_skat9"] = {step = "BO09",
+		["vss"] = {step = "BO21",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
 		{
 			id = "BO01",
+			completionCash = 275,
 			name = "Operational Basics",
 			kind = "delivery",
 			requires = {},
@@ -67,6 +74,7 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO02",
+			completionCash = 450,
 			name = "The Missing Patrol",
 			kind = "field",
 			objective = "Recover Military Records Folder I from the assigned search area in Waystation. Return it to"
@@ -81,38 +89,22 @@ PLUGIN:Register("boss", {
 				cargo = "town_quest_orders",
 				label = "The Missing Patrol - Military Records Folder I",
 			},
-			benefits = {
-				items = {
-					{
-						item = "556x45",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO03",
+			completionCash = 0,
 			name = "Follow Instructions",
 			kind = "tracker",
 			requires = {"BO02"},
 			briefing = "Bandits threatening the operation. The targets on the order. No freelancing.",
 			completion = "You've dealt with the assigned targets. Keep to the orders.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO04",
+			completionCash = 650,
 			name = "The Forward Record",
 			kind = "field",
 			objective = "Recover Military Records Folder II from the assigned search area in Waystation. Return it to"
@@ -127,19 +119,11 @@ PLUGIN:Register("boss", {
 				cargo = "town_quest_military",
 				label = "The Forward Record - Military Records Folder II",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO05",
+			completionCash = 575,
 			name = "Staying Equipped",
 			kind = "delivery",
 			requires = {"BO03"},
@@ -151,19 +135,11 @@ PLUGIN:Register("boss", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "545x39",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO06",
+			completionCash = 850,
 			name = "The Interrupted Shipment",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Waystation. Return it to"
@@ -195,25 +171,18 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO07",
+			completionCash = 0,
 			name = "Pressure on the Route",
 			kind = "tracker",
 			requires = {"BO05"},
 			briefing = "Bandits threatening the operation. The targets on the order. No freelancing.",
 			completion = "You've dealt with the assigned targets. Keep to the orders.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO08",
+			completionCash = 1050,
 			name = "The Supply Register",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Deliver it to"
@@ -229,19 +198,11 @@ PLUGIN:Register("boss", {
 				label = "The Supply Register - Warehouse Packing List A",
 				recipient = "quartermaster",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO09",
+			completionCash = 875,
 			name = "Orders and Receipts",
 			kind = "delivery",
 			requires = {"BO07"},
@@ -253,19 +214,11 @@ PLUGIN:Register("boss", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "545x39",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO10",
+			completionCash = 1250,
 			name = "The Missing Names",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Waystation. Deliver it to"
@@ -281,38 +234,22 @@ PLUGIN:Register("boss", {
 				label = "The Missing Names - Personnel File Folder",
 				recipient = "wake",
 			},
-			benefits = {
-				items = {
-					{
-						item = "556x45",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO11",
+			completionCash = 0,
 			name = "A Smaller Network",
 			kind = "tracker",
 			requires = {"BO09"},
 			briefing = "Bandits threatening the operation. The targets on the order. No freelancing.",
 			completion = "You've dealt with the assigned targets. Keep to the orders.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO12",
+			completionCash = 1450,
 			name = "The Second Command Post",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Waystation. Return it to"
@@ -340,6 +277,7 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO13",
+			completionCash = 1175,
 			name = "Packed for Contact",
 			kind = "delivery",
 			requires = {"BO11"},
@@ -351,19 +289,11 @@ PLUGIN:Register("boss", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "545x39",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO14",
+			completionCash = 1650,
 			name = "The Pripyat Outpost",
 			kind = "field",
 			objective = "Recover Military Records Folder I from the assigned search area in Pripyat. Return it to"
@@ -378,38 +308,22 @@ PLUGIN:Register("boss", {
 				cargo = "town_quest_orders",
 				label = "The Pripyat Outpost - Military Records Folder I",
 			},
-			benefits = {
-				items = {
-					{
-						item = "556x45",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO15",
+			completionCash = 0,
 			name = "Holding the Initiative",
 			kind = "tracker",
 			requires = {"BO13"},
 			briefing = "Bandits threatening the operation. The targets on the order. No freelancing.",
 			completion = "You've dealt with the assigned targets. Keep to the orders.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO16",
+			completionCash = 1850,
 			name = "The Handler's Orders",
 			kind = "field",
 			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Pripyat. Return it to"
@@ -424,19 +338,11 @@ PLUGIN:Register("boss", {
 				cargo = "town_quest_tape2",
 				label = "The Handler's Orders - Blue-Label Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO17",
+			completionCash = 1475,
 			name = "A Report That Holds",
 			kind = "delivery",
 			requires = {"BO15"},
@@ -448,19 +354,11 @@ PLUGIN:Register("boss", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "545x39",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO18",
+			completionCash = 2050,
 			name = "The Withheld Annex",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Pripyat. Deliver it to 'Wake'"
@@ -489,25 +387,18 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO19",
+			completionCash = 0,
 			name = "End of the Operation",
 			kind = "tracker",
 			requires = {"BO17", "BO18"},
 			briefing = "Bandits threatening the operation. The targets on the order. No freelancing.",
 			completion = "You've dealt with the assigned targets. Keep to the orders.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO20",
+			completionCash = 2250,
 			name = "The Last Command",
 			kind = "field",
 			objective = "Recover Military Records Folder II from the assigned search area in Waystation. Return it to"
@@ -522,16 +413,7 @@ PLUGIN:Register("boss", {
 				cargo = "town_quest_military",
 				label = "The Last Command - Military Records Folder II",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "545x39",
 				bonus = 2,
@@ -539,6 +421,7 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO21",
+			completionCash = 1775,
 			name = "Return to Readiness",
 			kind = "delivery",
 			requires = {"BO20"},
@@ -550,19 +433,11 @@ PLUGIN:Register("boss", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "545x39",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO22",
+			completionCash = 2450,
 			name = "The Missing Patrol's Answer",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Waystation. Return it to this"
@@ -577,16 +452,7 @@ PLUGIN:Register("boss", {
 				cargo = "town_quest_personnel",
 				label = "The Missing Patrol's Answer - Personnel File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "556x45",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Boss's trusted contact",
 		},
 	},

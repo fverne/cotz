@@ -91,6 +91,7 @@ PLUGIN:Register("spicy-lemon", {
 	progression = {
 		{
 			id = "SL01",
+			completionCash = 275,
 			name = "Pots Before Plates",
 			kind = "delivery",
 			requires = {},
@@ -118,6 +119,7 @@ PLUGIN:Register("spicy-lemon", {
 		},
 		{
 			id = "SL02",
+			completionCash = 450,
 			name = "The Cold Kitchen",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
@@ -132,38 +134,22 @@ PLUGIN:Register("spicy-lemon", {
 				cargo = "town_quest_notebook",
 				label = "The Cold Kitchen - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL03",
+			completionCash = 0,
 			name = "A Steady Table",
 			kind = "tracker",
 			requires = {"SL02"},
 			briefing = "Cooked meals. Bring me the dish on the order. Raw meat can wait until I've got a clean pot.",
 			completion = "You've kept the meals coming. I can plan a little further ahead now.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_can_tushonka",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL04",
+			completionCash = 650,
 			name = "Spoor's Contribution",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Deliver it to"
@@ -179,19 +165,11 @@ PLUGIN:Register("spicy-lemon", {
 				label = "Spoor's Contribution - Scientist's Field Diary",
 				recipient = "spoor",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL05",
+			completionCash = 575,
 			name = "Clean Enough",
 			kind = "delivery",
 			requires = {"SL03"},
@@ -206,19 +184,11 @@ PLUGIN:Register("spicy-lemon", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL06",
+			completionCash = 850,
 			name = "The Spoiled Shipment",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Return it to this"
@@ -250,25 +220,18 @@ PLUGIN:Register("spicy-lemon", {
 		},
 		{
 			id = "SL07",
+			completionCash = 0,
 			name = "Same Dish Twice",
 			kind = "tracker",
 			requires = {"SL05"},
 			briefing = "Cooked meals. Bring me the dish on the order. Raw meat can wait until I've got a clean pot.",
 			completion = "You've kept the meals coming. I can plan a little further ahead now.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_can_tushonka",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL08",
+			completionCash = 1050,
 			name = "The Missing Crate",
 			kind = "field",
 			objective = "Recover Small Yellow Transit Case from the assigned search area in Garbage. Return it to"
@@ -283,19 +246,11 @@ PLUGIN:Register("spicy-lemon", {
 				cargo = "town_quest_case",
 				label = "The Missing Crate - Small Yellow Transit Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL09",
+			completionCash = 875,
 			name = "A Proper Pantry",
 			kind = "delivery",
 			requires = {"SL07"},
@@ -310,19 +265,11 @@ PLUGIN:Register("spicy-lemon", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL10",
+			completionCash = 1250,
 			name = "The Supplier's Ledger",
 			kind = "field",
 			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
@@ -337,38 +284,22 @@ PLUGIN:Register("spicy-lemon", {
 				cargo = "town_quest_receipt",
 				label = "The Supplier's Ledger - Warehouse Packing List B",
 			},
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL11",
+			completionCash = 0,
 			name = "Feeding Travellers",
 			kind = "tracker",
 			requires = {"SL09"},
 			briefing = "Cooked meals. Bring me the dish on the order. Raw meat can wait until I've got a clean pot.",
 			completion = "You've kept the meals coming. I can plan a little further ahead now.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_can_tushonka",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL12",
+			completionCash = 1450,
 			name = "Smoke Without Supper",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
@@ -396,6 +327,7 @@ PLUGIN:Register("spicy-lemon", {
 		},
 		{
 			id = "SL13",
+			completionCash = 1175,
 			name = "Something With Flavour",
 			kind = "delivery",
 			requires = {"SL11"},
@@ -410,19 +342,11 @@ PLUGIN:Register("spicy-lemon", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL14",
+			completionCash = 1650,
 			name = "Jitters' Complaint",
 			kind = "field",
 			objective = "Recover Clinical Records Folder I from the assigned search area in Marsh. Deliver it to"
@@ -438,38 +362,22 @@ PLUGIN:Register("spicy-lemon", {
 				label = "Jitters' Complaint - Clinical Records Folder I",
 				recipient = "jitters",
 			},
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL15",
+			completionCash = 0,
 			name = "The Lunch Rush",
 			kind = "tracker",
 			requires = {"SL13"},
 			briefing = "Cooked meals. Bring me the dish on the order. Raw meat can wait until I've got a clean pot.",
 			completion = "You've kept the meals coming. I can plan a little further ahead now.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_can_tushonka",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL16",
+			completionCash = 1850,
 			name = "An Unfinished Menu",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Waystation. Return it to this"
@@ -484,19 +392,11 @@ PLUGIN:Register("spicy-lemon", {
 				cargo = "town_quest_notebook",
 				label = "An Unfinished Menu - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL17",
+			completionCash = 1475,
 			name = "Food That Travels",
 			kind = "delivery",
 			requires = {"SL15"},
@@ -511,19 +411,11 @@ PLUGIN:Register("spicy-lemon", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL18",
+			completionCash = 2050,
 			name = "The Long Walk",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0013 from the assigned search area in Marsh. Deliver it to"
@@ -552,25 +444,18 @@ PLUGIN:Register("spicy-lemon", {
 		},
 		{
 			id = "SL19",
+			completionCash = 0,
 			name = "A Place at the Fire",
 			kind = "tracker",
 			requires = {"SL17"},
 			briefing = "Cooked meals. Bring me the dish on the order. Raw meat can wait until I've got a clean pot.",
 			completion = "You've kept the meals coming. I can plan a little further ahead now.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_can_tushonka",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL20",
+			completionCash = 2250,
 			name = "The Last Cookfire",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Return it to this"
@@ -585,19 +470,11 @@ PLUGIN:Register("spicy-lemon", {
 				cargo = "town_quest_diary",
 				label = "The Last Cookfire - Scientist's Field Diary",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL21",
+			completionCash = 1775,
 			name = "Enough for Everyone",
 			kind = "delivery",
 			requires = {"SL19"},
@@ -612,19 +489,11 @@ PLUGIN:Register("spicy-lemon", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL22",
+			completionCash = 2450,
 			name = "The Cook's Detour",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
@@ -639,38 +508,22 @@ PLUGIN:Register("spicy-lemon", {
 				cargo = "town_quest_personnel",
 				label = "The Cook's Detour - Personnel File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL23",
+			completionCash = 0,
 			name = "Reliable Hands",
 			kind = "tracker",
 			requires = {"SL21", "SL22"},
 			briefing = "Cooked meals. Bring me the dish on the order. Raw meat can wait until I've got a clean pot.",
 			completion = "You've kept the meals coming. I can plan a little further ahead now.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "food_can_tushonka",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL24",
+			completionCash = 2650,
 			name = "The Recipe He Kept",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Return it to this"
@@ -695,13 +548,10 @@ PLUGIN:Register("spicy-lemon", {
 					},
 				},
 			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
 		},
 		{
 			id = "SL25",
+			completionCash = 2000,
 			name = "The Feast",
 			kind = "delivery",
 			requires = {"SL24"},
@@ -716,19 +566,11 @@ PLUGIN:Register("spicy-lemon", {
 					quantity = 7,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SL26",
+			completionCash = 2850,
 			name = "Room at the Table",
 			kind = "field",
 			objective = "Recover Old Photograph Album from the assigned search area in Marsh. Return it to this"
@@ -743,16 +585,7 @@ PLUGIN:Register("spicy-lemon", {
 				cargo = "town_quest_photo",
 				label = "Room at the Table - Old Photograph Album",
 			},
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Spicy Lemon's trusted contact",
 		},
 	},

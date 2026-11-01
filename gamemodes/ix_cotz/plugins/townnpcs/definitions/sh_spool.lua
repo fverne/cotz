@@ -25,9 +25,12 @@ PLUGIN:Register("spool", {
 		progressionPrompt = "What else needs doing?",
 		progression = "I've got missing recordings and equipment to sort. Have a look while I finish listening.",
 	},
+	catalogue = {
+	},
 	progression = {
 		{
 			id = "SO01",
+			completionCash = 275,
 			name = "Something on the Air",
 			kind = "delivery",
 			requires = {},
@@ -55,6 +58,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO02",
+			completionCash = 450,
 			name = "The Local Silence",
 			kind = "field",
 			objective = "Take the required bearings in Waystation and recover Red-Trimmed Control Unit. Return it to"
@@ -69,19 +73,11 @@ PLUGIN:Register("spool", {
 				cargo = "town_quest_control",
 				label = "The Local Silence - Red-Trimmed Control Unit",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO03",
+			completionCash = 0,
 			name = "Clear Enough to Hear",
 			kind = "tracker",
 			requires = {"SO02"},
@@ -91,19 +87,11 @@ PLUGIN:Register("spool", {
 			),
 			completion = "You've brought back a useful set of sources. It's good to have something to listen to.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO04",
+			completionCash = 650,
 			name = "The Station Log",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Waystation. Return it to"
@@ -118,19 +106,11 @@ PLUGIN:Register("spool", {
 				cargo = "town_quest_tape",
 				label = "The Station Log - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO05",
+			completionCash = 575,
 			name = "Ground and Power",
 			kind = "delivery",
 			requires = {"SO03"},
@@ -145,19 +125,11 @@ PLUGIN:Register("spool", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO06",
+			completionCash = 850,
 			name = "The Crossed Bearings",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0013 from the assigned search area in Waystation. Deliver it to"
@@ -190,6 +162,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO07",
+			completionCash = 0,
 			name = "A Voice Worth Finding",
 			kind = "tracker",
 			requires = {"SO05"},
@@ -199,19 +172,11 @@ PLUGIN:Register("spool", {
 			),
 			completion = "You've brought back a useful set of sources. It's good to have something to listen to.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO08",
+			completionCash = 1050,
 			name = "The Absent Operator",
 			kind = "field",
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Waystation. Return it to"
@@ -226,19 +191,11 @@ PLUGIN:Register("spool", {
 				cargo = "town_quest_control",
 				label = "The Absent Operator - Red-Trimmed Control Unit",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO09",
+			completionCash = 875,
 			name = "A Longer Cable",
 			kind = "delivery",
 			requires = {"SO07"},
@@ -253,19 +210,11 @@ PLUGIN:Register("spool", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO10",
+			completionCash = 1250,
 			name = "Mute's Header",
 			kind = "field",
 			objective = "Recover Tape-Labelled Flash Drive from the assigned search area in Marsh. Return it to this"
@@ -280,19 +229,11 @@ PLUGIN:Register("spool", {
 				cargo = "town_quest_drive",
 				label = "Mute's Header - Tape-Labelled Flash Drive",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO11",
+			completionCash = 0,
 			name = "Across the Static",
 			kind = "tracker",
 			requires = {"SO09"},
@@ -302,19 +243,11 @@ PLUGIN:Register("spool", {
 			),
 			completion = "You've brought back a useful set of sources. It's good to have something to listen to.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO12",
+			completionCash = 1450,
 			name = "The Garbage Relay",
 			kind = "field",
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Waystation. Return it to"
@@ -342,6 +275,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO13",
+			completionCash = 1175,
 			name = "Packed to Listen",
 			kind = "delivery",
 			requires = {"SO11"},
@@ -356,19 +290,11 @@ PLUGIN:Register("spool", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO14",
+			completionCash = 1650,
 			name = "The Unsent Call",
 			kind = "field",
 			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Waystation. Deliver it to"
@@ -384,19 +310,11 @@ PLUGIN:Register("spool", {
 				label = "The Unsent Call - Blue-Label Audio Cassette",
 				recipient = "wake",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO15",
+			completionCash = 0,
 			name = "Still on Frequency",
 			kind = "tracker",
 			requires = {"SO13"},
@@ -406,19 +324,11 @@ PLUGIN:Register("spool", {
 			),
 			completion = "You've brought back a useful set of sources. It's good to have something to listen to.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO16",
+			completionCash = 1850,
 			name = "The First Pripyat Call",
 			kind = "field",
 			objective = "Take the required bearings in Pripyat and recover Red-Trimmed Control Unit. Return it to"
@@ -433,19 +343,11 @@ PLUGIN:Register("spool", {
 				cargo = "town_quest_control",
 				label = "The First Pripyat Call - Red-Trimmed Control Unit",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO17",
+			completionCash = 1475,
 			name = "Enough Power to Return",
 			kind = "delivery",
 			requires = {"SO15"},
@@ -460,19 +362,11 @@ PLUGIN:Register("spool", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO18",
+			completionCash = 2050,
 			name = "The Last Check-in",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Deliver it to"
@@ -501,6 +395,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO19",
+			completionCash = 0,
 			name = "Nobody Left Calling",
 			kind = "tracker",
 			requires = {"SO17", "SO18"},
@@ -510,19 +405,11 @@ PLUGIN:Register("spool", {
 			),
 			completion = "You've brought back a useful set of sources. It's good to have something to listen to.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO20",
+			completionCash = 2250,
 			name = "The Receiver That Stayed On",
 			kind = "field",
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Waystation. Return it to"
@@ -537,16 +424,7 @@ PLUGIN:Register("spool", {
 				cargo = "town_quest_control",
 				label = "The Receiver That Stayed On - Red-Trimmed Control Unit",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "drink_bottlewater",
 				bonus = 2,
@@ -554,6 +432,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO21",
+			completionCash = 1775,
 			name = "Keep the Channel Open",
 			kind = "delivery",
 			requires = {"SO20"},
@@ -568,19 +447,11 @@ PLUGIN:Register("spool", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO22",
+			completionCash = 2450,
 			name = "The Message Home",
 			kind = "field",
 			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Waystation. Return it to"
@@ -595,16 +466,7 @@ PLUGIN:Register("spool", {
 				cargo = "town_quest_tape2",
 				label = "The Message Home - Blue-Label Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Spool's trusted contact",
 		},
 	},

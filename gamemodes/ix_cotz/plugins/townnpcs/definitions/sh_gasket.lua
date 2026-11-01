@@ -49,9 +49,20 @@ PLUGIN:Register("gasket", {
 			.. "gets expensive."
 		),
 	},
+	catalogue = {
+		["mask_cloth"] = {step = "GK01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_gp5"] = {step = "GK07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_halfmask"] = {step = "GK03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_respirator"] = {step = "GK05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
 	progression = {
 		{
 			id = "GK01",
+			completionCash = 275,
 			name = "Keep It Turning",
 			kind = "delivery",
 			requires = {},
@@ -76,6 +87,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK02",
+			completionCash = 450,
 			name = "The Empty Service Shed",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
@@ -90,38 +102,22 @@ PLUGIN:Register("gasket", {
 				cargo = "town_quest_notebook",
 				label = "The Empty Service Shed - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK03",
+			completionCash = 0,
 			name = "The First Reserve",
 			kind = "tracker",
 			requires = {"GK02"},
 			briefing = "Fuel, filters, service supplies. I need things we use up, not another broken machine.",
 			completion = "You've kept the consumables coming. Keep an eye on what runs out first.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK04",
+			completionCash = 650,
 			name = "Technut's Regulator",
 			kind = "field",
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Marsh. Deliver it to"
@@ -137,19 +133,11 @@ PLUGIN:Register("gasket", {
 				label = "Technut's Regulator - Red-Trimmed Control Unit",
 				recipient = "technut",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK05",
+			completionCash = 575,
 			name = "Water Before Comfort",
 			kind = "delivery",
 			requires = {"GK03"},
@@ -161,19 +149,11 @@ PLUGIN:Register("gasket", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK06",
+			completionCash = 850,
 			name = "The Pump Log",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
@@ -205,25 +185,18 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK07",
+			completionCash = 0,
 			name = "A Steady Supply",
 			kind = "tracker",
 			requires = {"GK05"},
 			briefing = "Fuel, filters, service supplies. I need things we use up, not another broken machine.",
 			completion = "You've kept the consumables coming. Keep an eye on what runs out first.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK08",
+			completionCash = 1050,
 			name = "The Bad Intake",
 			kind = "field",
 			objective = "Deploy the recorder in Marsh, leave it to record, then retrieve Numbered Data Module 0013."
@@ -238,19 +211,11 @@ PLUGIN:Register("gasket", {
 				cargo = "town_quest_module",
 				label = "The Bad Intake - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK09",
+			completionCash = 875,
 			name = "Backup Power",
 			kind = "delivery",
 			requires = {"GK07"},
@@ -262,19 +227,11 @@ PLUGIN:Register("gasket", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK10",
+			completionCash = 1250,
 			name = "The Scrap Specification",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Garbage. Deliver it to 'Latch'"
@@ -290,38 +247,22 @@ PLUGIN:Register("gasket", {
 				label = "The Scrap Specification - Official File Folder",
 				recipient = "latch",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK11",
+			completionCash = 0,
 			name = "More Than One Tank",
 			kind = "tracker",
 			requires = {"GK09"},
 			briefing = "Fuel, filters, service supplies. I need things we use up, not another broken machine.",
 			completion = "You've kept the consumables coming. Keep an eye on what runs out first.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK12",
+			completionCash = 1450,
 			name = "The Forgotten Store",
 			kind = "field",
 			objective = "Recover Small Yellow Transit Case from the assigned search area in Marsh. Return it to this"
@@ -349,6 +290,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK13",
+			completionCash = 1175,
 			name = "Before the Blowout",
 			kind = "delivery",
 			requires = {"GK11"},
@@ -360,19 +302,11 @@ PLUGIN:Register("gasket", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK14",
+			completionCash = 1650,
 			name = "The Shelter Circuit",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0022 from the assigned search area in Marsh. Return it to this"
@@ -387,38 +321,22 @@ PLUGIN:Register("gasket", {
 				cargo = "town_quest_module2",
 				label = "The Shelter Circuit - Numbered Data Module 0022",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK15",
+			completionCash = 0,
 			name = "Nothing Left Dry",
 			kind = "tracker",
 			requires = {"GK13"},
 			briefing = "Fuel, filters, service supplies. I need things we use up, not another broken machine.",
 			completion = "You've kept the consumables coming. Keep an eye on what runs out first.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK16",
+			completionCash = 1850,
 			name = "The Long Supply Line",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
@@ -434,19 +352,11 @@ PLUGIN:Register("gasket", {
 				label = "The Long Supply Line - Warehouse Packing List A",
 				recipient = "ledger",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK17",
+			completionCash = 1475,
 			name = "A Season of Spares",
 			kind = "delivery",
 			requires = {"GK15"},
@@ -458,19 +368,11 @@ PLUGIN:Register("gasket", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK18",
+			completionCash = 2050,
 			name = "The Original Manual",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Marsh. Return it to this"
@@ -498,25 +400,18 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK19",
+			completionCash = 0,
 			name = "A Town That Runs",
 			kind = "tracker",
 			requires = {"GK17", "GK18"},
 			briefing = "Fuel, filters, service supplies. I need things we use up, not another broken machine.",
 			completion = "You've kept the consumables coming. Keep an eye on what runs out first.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK20",
+			completionCash = 2250,
 			name = "The Emergency Test",
 			kind = "field",
 			objective = "Deploy the recorder in Marsh, leave it to record, then retrieve Numbered Data Module 0013."
@@ -531,16 +426,7 @@ PLUGIN:Register("gasket", {
 				cargo = "town_quest_module",
 				label = "The Emergency Test - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "drink_bottlewater",
 				bonus = 2,
@@ -548,6 +434,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK21",
+			completionCash = 1775,
 			name = "Enough in Reserve",
 			kind = "delivery",
 			requires = {"GK20"},
@@ -559,19 +446,11 @@ PLUGIN:Register("gasket", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK22",
+			completionCash = 2450,
 			name = "A Light Left On",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
@@ -586,16 +465,7 @@ PLUGIN:Register("gasket", {
 				cargo = "town_quest_notebook",
 				label = "A Light Left On - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Gasket's trusted contact",
 		},
 	},

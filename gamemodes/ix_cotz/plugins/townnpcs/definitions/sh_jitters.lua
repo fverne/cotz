@@ -70,6 +70,7 @@ PLUGIN:Register("jitters", {
 	progression = {
 		{
 			id = "JT01",
+			completionCash = 275,
 			name = "Clean Hands",
 			kind = "delivery",
 			requires = {},
@@ -94,6 +95,7 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT02",
+			completionCash = 450,
 			name = "The Empty Cabinet",
 			kind = "field",
 			objective = "Recover Clinical Records Folder I from the assigned search area in Marsh. Return it to this"
@@ -108,38 +110,22 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_clinic",
 				label = "The Empty Cabinet - Clinical Records Folder I",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT03",
+			completionCash = 0,
 			name = "Keep the Shelves Filled",
 			kind = "tracker",
 			requires = {"JT02"},
 			briefing = "Medical supplies. The right ones, please. I can't dress a wound with whatever was cheapest.",
 			completion = "The deliveries have helped. I can stop counting the same shelf quite so often.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT04",
+			completionCash = 650,
 			name = "A Missing Bag",
 			kind = "field",
 			objective = "Recover Medical Transport Case from the assigned search area in Marsh. Return it to this"
@@ -154,18 +140,11 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_medical",
 				label = "A Missing Bag - Medical Transport Case",
 			},
-			benefits = {
-				services = {
-					{
-						npc = "'Jitters'",
-						service = "treatment",
-						amount = 150,
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT05",
+			completionCash = 575,
 			name = "A Proper Dressing",
 			kind = "delivery",
 			requires = {"JT03"},
@@ -177,19 +156,11 @@ PLUGIN:Register("jitters", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT06",
+			completionCash = 850,
 			name = "The Exposure Log",
 			kind = "field",
 			objective = "Recover Clinical Records Folder II from the assigned search area in Marsh. Return it to this"
@@ -221,25 +192,18 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT07",
+			completionCash = 0,
 			name = "A Steady Clinic",
 			kind = "tracker",
 			requires = {"JT05"},
 			briefing = "Medical supplies. The right ones, please. I can't dress a wound with whatever was cheapest.",
 			completion = "The deliveries have helped. I can stop counting the same shelf quite so often.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT08",
+			completionCash = 1050,
 			name = "The Broken Instrument",
 			kind = "field",
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Marsh. Deliver it to"
@@ -255,20 +219,12 @@ PLUGIN:Register("jitters", {
 				label = "The Broken Instrument - Red-Trimmed Control Unit",
 				recipient = "technut",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			discounts = {{npc = "'Jitters'", service = "treatment", fraction = 0.05}},
 		},
 		{
 			id = "JT09",
+			completionCash = 875,
 			name = "Fever and Fallout",
 			kind = "delivery",
 			requires = {"JT07"},
@@ -280,19 +236,11 @@ PLUGIN:Register("jitters", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT10",
+			completionCash = 1250,
 			name = "The Contaminated Batch",
 			kind = "field",
 			objective = "Recover Dark-Capped Research Tube from the assigned search area in Garbage. Return it to"
@@ -307,38 +255,22 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_tube",
 				label = "The Contaminated Batch - Dark-Capped Research Tube",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT11",
+			completionCash = 0,
 			name = "The Long Queue",
 			kind = "tracker",
 			requires = {"JT09"},
 			briefing = "Medical supplies. The right ones, please. I can't dress a wound with whatever was cheapest.",
 			completion = "The deliveries have helped. I can stop counting the same shelf quite so often.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT12",
+			completionCash = 1450,
 			name = "Where the Water Came From",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0013 from the assigned search area in Marsh. Deliver it to"
@@ -367,6 +299,7 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT13",
+			completionCash = 1175,
 			name = "Better Instruments",
 			kind = "delivery",
 			requires = {"JT11"},
@@ -378,19 +311,11 @@ PLUGIN:Register("jitters", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT14",
+			completionCash = 1650,
 			name = "A Second Opinion",
 			kind = "field",
 			objective = "Recover Laboratory Log Folder from the assigned search area in Marsh. Return it to this"
@@ -405,37 +330,22 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_lab",
 				label = "A Second Opinion - Laboratory Log Folder",
 			},
-			benefits = {
-				services = {
-					{
-						npc = "'Jitters'",
-						service = "treatment",
-						amount = 150,
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT15",
+			completionCash = 0,
 			name = "Cases From Outside",
 			kind = "tracker",
 			requires = {"JT13"},
 			briefing = "Medical supplies. The right ones, please. I can't dress a wound with whatever was cheapest.",
 			completion = "The deliveries have helped. I can stop counting the same shelf quite so often.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT16",
+			completionCash = 1850,
 			name = "The Missing Volunteer",
 			kind = "field",
 			objective = "Recover Medical Transport Case from the assigned search area in Garbage. Return it to this"
@@ -450,19 +360,11 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_medical",
 				label = "The Missing Volunteer - Medical Transport Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT17",
+			completionCash = 1475,
 			name = "For the Journey",
 			kind = "delivery",
 			requires = {"JT15"},
@@ -474,19 +376,11 @@ PLUGIN:Register("jitters", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT18",
+			completionCash = 2050,
 			name = "The Field Ward",
 			kind = "field",
 			objective = "Recover Clinical Records Folder I from the assigned search area in Marsh. Deliver it to"
@@ -515,25 +409,18 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT19",
+			completionCash = 0,
 			name = "Ready for Returns",
 			kind = "tracker",
 			requires = {"JT17"},
 			briefing = "Medical supplies. The right ones, please. I can't dress a wound with whatever was cheapest.",
 			completion = "The deliveries have helped. I can stop counting the same shelf quite so often.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT20",
+			completionCash = 2250,
 			name = "No One Came Back",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Return it to"
@@ -548,19 +435,11 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_tape",
 				label = "No One Came Back - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT21",
+			completionCash = 1775,
 			name = "Comparing the Cases",
 			kind = "delivery",
 			requires = {"JT19"},
@@ -572,19 +451,11 @@ PLUGIN:Register("jitters", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT22",
+			completionCash = 2450,
 			name = "The Patient's Route",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0022 from the assigned search area in Pripyat. Return it to"
@@ -599,37 +470,22 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_module2",
 				label = "The Patient's Route - Numbered Data Module 0022",
 			},
-			benefits = {
-				services = {
-					{
-						npc = "'Jitters'",
-						service = "treatment",
-						amount = 150,
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT23",
+			completionCash = 0,
 			name = "Still Taking Patients",
 			kind = "tracker",
 			requires = {"JT21", "JT22"},
 			briefing = "Medical supplies. The right ones, please. I can't dress a wound with whatever was cheapest.",
 			completion = "The deliveries have helped. I can stop counting the same shelf quite so often.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT24",
+			completionCash = 2650,
 			name = "An Answer on Tape",
 			kind = "field",
 			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Pripyat. Return it to"
@@ -654,14 +510,11 @@ PLUGIN:Register("jitters", {
 					},
 				},
 			},
-			stock = {
-				item = "medic_bandage_1",
-				bonus = 2,
-			},
 			discounts = {{npc = "'Jitters'", service = "treatment", fraction = 0.1}},
 		},
 		{
 			id = "JT25",
+			completionCash = 2000,
 			name = "A Clinic That Holds",
 			kind = "delivery",
 			requires = {"JT24"},
@@ -673,19 +526,11 @@ PLUGIN:Register("jitters", {
 					quantity = 7,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT26",
+			completionCash = 2850,
 			name = "The Case Closed",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
@@ -700,16 +545,7 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_personnel",
 				label = "The Case Closed - Personnel File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Jitters's trusted contact",
 		},
 	},

@@ -25,9 +25,20 @@ PLUGIN:Register("vesper", {
 		progressionPrompt = "What else needs doing?",
 		progression = "There are supplies to sort and field readings to check. Pick a trip you can prepare for.",
 	},
+	catalogue = {
+		["mask_m40"] = {step = "VE19",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_m50"] = {step = "VE21",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_xm40"] = {step = "VE15",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["suit_wind"] = {step = "VE11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
 	progression = {
 		{
 			id = "VE01",
+			completionCash = 275,
 			name = "Before the Field",
 			kind = "delivery",
 			requires = {},
@@ -55,6 +66,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE02",
+			completionCash = 450,
 			name = "The Quiet Edge",
 			kind = "field",
 			objective = "Deploy the recorder in Garbage, leave it to record, then retrieve Numbered Data Module 0013."
@@ -69,19 +81,11 @@ PLUGIN:Register("vesper", {
 				cargo = "town_quest_module",
 				label = "The Quiet Edge - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE03",
+			completionCash = 0,
 			name = "Readings Worth Keeping",
 			kind = "tracker",
 			requires = {"VE02"},
@@ -91,19 +95,11 @@ PLUGIN:Register("vesper", {
 			),
 			completion = "You've brought back usable readings. Keep allowing enough supplies for the return trip.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE04",
+			completionCash = 650,
 			name = "Beanstalk's Baseline",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0022 from the assigned search area in Garbage. Deliver it to"
@@ -119,19 +115,11 @@ PLUGIN:Register("vesper", {
 				label = "Beanstalk's Baseline - Numbered Data Module 0022",
 				recipient = "spool",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE05",
+			completionCash = 575,
 			name = "Reliable Instruments",
 			kind = "delivery",
 			requires = {"VE03"},
@@ -146,19 +134,11 @@ PLUGIN:Register("vesper", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE06",
+			completionCash = 850,
 			name = "The Second Field",
 			kind = "field",
 			objective = "Deploy the recorder in Garbage, leave it to record, then retrieve Numbered Data Module 0013."
@@ -190,6 +170,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE07",
+			completionCash = 0,
 			name = "Same Method Twice",
 			kind = "tracker",
 			requires = {"VE05"},
@@ -199,19 +180,11 @@ PLUGIN:Register("vesper", {
 			),
 			completion = "You've brought back usable readings. Keep allowing enough supplies for the return trip.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE08",
+			completionCash = 1050,
 			name = "The Abandoned Detector",
 			kind = "field",
 			objective = "Recover Marked Research Case from the assigned search area in Garbage. Return it to this"
@@ -226,19 +199,11 @@ PLUGIN:Register("vesper", {
 				cargo = "town_quest_research",
 				label = "The Abandoned Detector - Marked Research Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE09",
+			completionCash = 875,
 			name = "Keep It Sealed",
 			kind = "delivery",
 			requires = {"VE07"},
@@ -253,19 +218,11 @@ PLUGIN:Register("vesper", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE10",
+			completionCash = 1250,
 			name = "The Unstable Reading",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
@@ -280,19 +237,11 @@ PLUGIN:Register("vesper", {
 				cargo = "town_quest_tape",
 				label = "The Unstable Reading - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE11",
+			completionCash = 0,
 			name = "Outside Familiar Ground",
 			kind = "tracker",
 			requires = {"VE09"},
@@ -302,19 +251,11 @@ PLUGIN:Register("vesper", {
 			),
 			completion = "You've brought back usable readings. Keep allowing enough supplies for the return trip.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE12",
+			completionCash = 1450,
 			name = "The Control Run",
 			kind = "field",
 			objective = "Deploy the recorder in Garbage, leave it to record, then retrieve Numbered Data Module 0022."
@@ -342,6 +283,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE13",
+			completionCash = 1175,
 			name = "Supplies for Distance",
 			kind = "delivery",
 			requires = {"VE11"},
@@ -356,19 +298,11 @@ PLUGIN:Register("vesper", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE14",
+			completionCash = 1650,
 			name = "The Lost Team's Notes",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Waystation. Deliver it to"
@@ -384,19 +318,11 @@ PLUGIN:Register("vesper", {
 				label = "The Lost Team's Notes - Scientist's Field Diary",
 				recipient = "wake",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE15",
+			completionCash = 0,
 			name = "Know When to Leave",
 			kind = "tracker",
 			requires = {"VE13"},
@@ -406,19 +332,11 @@ PLUGIN:Register("vesper", {
 			),
 			completion = "You've brought back usable readings. Keep allowing enough supplies for the return trip.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE16",
+			completionCash = 1850,
 			name = "The First Pripyat Field",
 			kind = "field",
 			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0013."
@@ -433,19 +351,11 @@ PLUGIN:Register("vesper", {
 				cargo = "town_quest_module",
 				label = "The First Pripyat Field - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE17",
+			completionCash = 1475,
 			name = "No Borrowed Luck",
 			kind = "delivery",
 			requires = {"VE15"},
@@ -460,19 +370,11 @@ PLUGIN:Register("vesper", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE18",
+			completionCash = 2050,
 			name = "The Team's Cache",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Garbage. Return it to this"
@@ -500,6 +402,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE19",
+			completionCash = 0,
 			name = "A Measured Risk",
 			kind = "tracker",
 			requires = {"VE17"},
@@ -509,19 +412,11 @@ PLUGIN:Register("vesper", {
 			),
 			completion = "You've brought back usable readings. Keep allowing enough supplies for the return trip.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE20",
+			completionCash = 2250,
 			name = "The Field They Chose",
 			kind = "field",
 			objective = "Deploy the recorder in Garbage, leave it to record, then retrieve Numbered Data Module 0022."
@@ -536,19 +431,11 @@ PLUGIN:Register("vesper", {
 				cargo = "town_quest_module2",
 				label = "The Field They Chose - Numbered Data Module 0022",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE21",
+			completionCash = 1775,
 			name = "Enough to Compare",
 			kind = "delivery",
 			requires = {"VE19", "VE20"},
@@ -563,19 +450,11 @@ PLUGIN:Register("vesper", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE22",
+			completionCash = 2450,
 			name = "A Different Explanation",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Deliver it to"
@@ -591,23 +470,11 @@ PLUGIN:Register("vesper", {
 				label = "A Different Explanation - Handwritten Audio Cassette",
 				recipient = "carbon",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
+			benefits = {},
 		},
 		{
 			id = "VE23",
+			completionCash = 0,
 			name = "Everyone Comes Back",
 			kind = "tracker",
 			requires = {"VE22"},
@@ -617,19 +484,11 @@ PLUGIN:Register("vesper", {
 			),
 			completion = "You've brought back usable readings. Keep allowing enough supplies for the return trip.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE24",
+			completionCash = 2650,
 			name = "The Last Recorder",
 			kind = "field",
 			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Garbage. Return it to"

@@ -18,6 +18,7 @@ local function addDependency(definition, id)
 end
 
 function PLUGIN:BuildProgressions()
+	self.capacityMilestones = {}
 	for slug, contact in pairs(self.contacts) do
 		if contact.access then
 			ix.progression.npcRequirements[contact.name] = self:StepID(contact.access.contact, contact.access.step)
@@ -39,6 +40,8 @@ function PLUGIN:BuildProgressions()
 				BuildResponse = buildResponse,
 				completionMessage = step.completion,
 				completionBenefits = step.benefits,
+				completionCash = step.completionCash,
+				capacityReward = step.capacity,
 				vendorUnlocks = {},
 				recognition = step.recognition,
 				serviceDiscounts = step.discounts,
@@ -59,6 +62,7 @@ function PLUGIN:BuildProgressions()
 			if step.kind == "field" then definition.townCommission = "cotz/town/commission/" .. slug .. "/" .. step.id end
 			ix.progression.Register(id, definition)
 			self.steps[id] = step
+			if step.capacity then self.capacityMilestones[id] = step.capacity end
 		end
 	end
 	for id in pairs(self.steps) do
@@ -74,5 +78,8 @@ end
 function PLUGIN:OnCompleted(character, id)
 	local step = self.steps[id]
 	if not step then return end
-	if SERVER then self:AdvanceCounters(character) end
+	if SERVER then
+		ix.progression.PayCompletionRewards(character, id)
+		self:AdvanceCounters(character)
+	end
 end

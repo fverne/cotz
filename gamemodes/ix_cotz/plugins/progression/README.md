@@ -21,8 +21,10 @@ clients only read replicated state. Requirements are assigned once by the server
 for current assignments. Hand-ins validate character, NPC, access, map, inventory and remaining units.
 Whole-stack removal must succeed before progress/rewards are granted.
 
-Completion cash uses 60% of consumed nominal value. Partial hand-ins do not pay early; rounding
-credit accumulates for the whole completion. Fixed benefits use token-backed pending claims;
+Non-town completion cash uses 60% of consumed nominal value. Town milestones instead declare
+completionCash explicitly; trackers and arena checkpoints pay zero additional cash. Partial hand-ins
+do not pay early. Existing accrued credit is preserved as a minimum completion payment. Town
+completion does not trigger ordinary task restocking. Fixed benefits use token-backed pending claims;
 an inventory reservation is not acknowledgement of an asynchronous insert. Full inventories keep
 rewards pending. Task descriptions separate the title, briefing, required-item list and rewards with blank lines.
 The encyclopedia displays each task title once; required-item lists use a stable order.

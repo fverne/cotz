@@ -133,7 +133,11 @@ function PLUGIN:InstallInventoryCompatibility()
 
 	function meta:GetSize()
 		if self.vars.cotzEquipmentWidth then
-			return self.vars.cotzEquipmentWidth, self.vars.cotzEquipmentHeight
+			local character = ix.char.loaded[self.owner]
+			local personal = character and character:GetInventory() == self
+			local rows = personal and ix.townNPCs and ix.townNPCs:GetCapacityBonus(character, "rows") or 0
+
+			return self.vars.cotzEquipmentWidth, math.min(63, self.vars.cotzEquipmentHeight + rows)
 		end
 
 		return originals.GetSize(self)

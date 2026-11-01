@@ -155,6 +155,7 @@ function ix.util.PlayerPerformBlackScreenAction(client, _, duration, callback)
 end
 
 PLUGIN = {}
+ix.char = {loaded = {}}
 dofile("gamemodes/ix_cotz/plugins/equipmentslots/sh_plugin.lua")
 local plugin = PLUGIN
 plugin:InitializedPlugins()
@@ -485,4 +486,18 @@ check(plugin:GetItemSlots({isGeiger = true})[1] == 11, "Other saved slot regions
 for _, name in ipairs({"sh_plugin.lua", "sv_plugin.lua", "cl_plugin.lua", "sv_admin.lua", "cl_admin.lua"}) do
 	check(loadfile("gamemodes/ix_cotz/plugins/equipmentslots/" .. name) ~= nil, name .. " parses as standard Lua")
 end
+local oldTown = ix.townNPCs
+local owner = {GetInventory = function() return inventory end}
+local previousOwner = inventory.owner
+inventory.owner = 123
+ix.char.loaded[inventory.owner] = owner
+ix.townNPCs = {GetCapacityBonus = function(_, character, kind)
+	return character == owner and kind == "rows" and 2 or 0
+end}
+local expandedWidth, expandedHeight = inventory:GetSize()
+check(expandedWidth == 8 and expandedHeight == 8, "Progression adds rows without widening storage")
+check(inventory:CanItemFit(1, 7, 1, 1), "Newly earned rows accept ordinary items")
+ix.townNPCs = oldTown
+ix.char.loaded[inventory.owner] = nil
+inventory.owner = previousOwner
 print("Equipment slots: " .. checks .. " checks passed")

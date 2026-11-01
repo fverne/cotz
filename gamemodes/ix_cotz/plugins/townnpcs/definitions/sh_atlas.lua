@@ -25,9 +25,12 @@ PLUGIN:Register("atlas", {
 			.. "back from."
 		),
 	},
+	catalogue = {
+	},
 	progression = {
 		{
 			id = "AT01",
+			completionCash = 275,
 			name = "Marks on Paper",
 			kind = "delivery",
 			requires = {},
@@ -52,6 +55,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT02",
+			completionCash = 450,
 			name = "The First Landmark",
 			kind = "field",
 			objective = "Deploy the recorder in Marsh, leave it to record, then retrieve Numbered Data Module 0013."
@@ -66,19 +70,11 @@ PLUGIN:Register("atlas", {
 				cargo = "town_quest_module",
 				label = "The First Landmark - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT03",
+			completionCash = 0,
 			name = "Repeatable Ground",
 			kind = "tracker",
 			requires = {"AT02"},
@@ -91,19 +87,11 @@ PLUGIN:Register("atlas", {
 				.. "guess."
 			),
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT04",
+			completionCash = 650,
 			name = "The Route That Shifted",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0022 from the assigned search area in Marsh. Return it to this"
@@ -118,19 +106,11 @@ PLUGIN:Register("atlas", {
 				cargo = "town_quest_module2",
 				label = "The Route That Shifted - Numbered Data Module 0022",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT05",
+			completionCash = 575,
 			name = "A Better Baseline",
 			kind = "delivery",
 			requires = {"AT03"},
@@ -142,19 +122,11 @@ PLUGIN:Register("atlas", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT06",
+			completionCash = 850,
 			name = "Ballast's Shortcut",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Deliver it to 'Ballast'"
@@ -187,6 +159,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT07",
+			completionCash = 0,
 			name = "Measured Twice",
 			kind = "tracker",
 			requires = {"AT05"},
@@ -199,19 +172,11 @@ PLUGIN:Register("atlas", {
 				.. "guess."
 			),
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT08",
+			completionCash = 1050,
 			name = "The Missing Surveyor",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Garbage. Return it to this"
@@ -226,19 +191,11 @@ PLUGIN:Register("atlas", {
 				cargo = "town_quest_diary",
 				label = "The Missing Surveyor - Scientist's Field Diary",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT09",
+			completionCash = 875,
 			name = "Paper Trail",
 			kind = "delivery",
 			requires = {"AT07"},
@@ -250,19 +207,11 @@ PLUGIN:Register("atlas", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT10",
+			completionCash = 1250,
 			name = "An Unfinished Map",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
@@ -277,19 +226,11 @@ PLUGIN:Register("atlas", {
 				cargo = "town_quest_tape",
 				label = "An Unfinished Map - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT11",
+			completionCash = 0,
 			name = "Ground Truth",
 			kind = "tracker",
 			requires = {"AT09"},
@@ -302,19 +243,11 @@ PLUGIN:Register("atlas", {
 				.. "guess."
 			),
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT12",
+			completionCash = 1450,
 			name = "The Freight Route",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
@@ -343,6 +276,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT13",
+			completionCash = 1175,
 			name = "Lines That Agree",
 			kind = "delivery",
 			requires = {"AT11"},
@@ -354,19 +288,11 @@ PLUGIN:Register("atlas", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT14",
+			completionCash = 1650,
 			name = "The Wrong Coordinates",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Marsh. Return it to this"
@@ -381,19 +307,11 @@ PLUGIN:Register("atlas", {
 				cargo = "town_quest_official",
 				label = "The Wrong Coordinates - Official File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT15",
+			completionCash = 0,
 			name = "Beyond the Margin",
 			kind = "tracker",
 			requires = {"AT13"},
@@ -406,19 +324,11 @@ PLUGIN:Register("atlas", {
 				.. "guess."
 			),
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT16",
+			completionCash = 1850,
 			name = "The Lost Team's Cache",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Waystation. Deliver it to"
@@ -434,19 +344,11 @@ PLUGIN:Register("atlas", {
 				label = "The Lost Team's Cache - Striped Equipment Case",
 				recipient = "wake",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT17",
+			completionCash = 1475,
 			name = "Preparing the Last Sheet",
 			kind = "delivery",
 			requires = {"AT15"},
@@ -458,19 +360,11 @@ PLUGIN:Register("atlas", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT18",
+			completionCash = 2050,
 			name = "The First Pripyat Mark",
 			kind = "field",
 			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0013."
@@ -498,6 +392,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT19",
+			completionCash = 0,
 			name = "A Map Worth Carrying",
 			kind = "tracker",
 			requires = {"AT17", "AT18"},
@@ -510,19 +405,11 @@ PLUGIN:Register("atlas", {
 				.. "guess."
 			),
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT20",
+			completionCash = 2250,
 			name = "The Last Survey Station",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Return it to"
@@ -537,16 +424,7 @@ PLUGIN:Register("atlas", {
 				cargo = "town_quest_tape",
 				label = "The Last Survey Station - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "drink_bottlewater",
 				bonus = 2,
@@ -554,6 +432,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT21",
+			completionCash = 1775,
 			name = "An Atlas With Names",
 			kind = "delivery",
 			requires = {"AT20"},
@@ -565,19 +444,11 @@ PLUGIN:Register("atlas", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT22",
+			completionCash = 2450,
 			name = "Finish Their Route",
 			kind = "field",
 			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0022."
@@ -592,16 +463,7 @@ PLUGIN:Register("atlas", {
 				cargo = "town_quest_module2",
 				label = "Finish Their Route - Numbered Data Module 0022",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Atlas's trusted contact",
 		},
 	},

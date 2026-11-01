@@ -43,6 +43,7 @@ PLUGIN:Register("smartass", {
 	progression = {
 		{
 			id = "SM01",
+			completionCash = 275,
 			name = "Something to Listen With",
 			kind = "delivery",
 			requires = {},
@@ -67,6 +68,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM02",
+			completionCash = 450,
 			name = "The Lost Beacon",
 			kind = "field",
 			objective = "Take the required bearings in Garbage and recover Red-Trimmed Control Unit. Return it to"
@@ -81,19 +83,11 @@ PLUGIN:Register("smartass", {
 				cargo = "town_quest_control",
 				label = "The Lost Beacon - Red-Trimmed Control Unit",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM03",
+			completionCash = 0,
 			name = "Three Bearings",
 			kind = "tracker",
 			requires = {"SM02"},
@@ -103,19 +97,11 @@ PLUGIN:Register("smartass", {
 			),
 			completion = "You've found enough sources that I'm starting to believe the bearings aren't luck.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM04",
+			completionCash = 650,
 			name = "The Wrong Frequency",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0013 from the assigned search area in Garbage. Return it to"
@@ -130,19 +116,11 @@ PLUGIN:Register("smartass", {
 				cargo = "town_quest_module",
 				label = "The Wrong Frequency - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM05",
+			completionCash = 575,
 			name = "Mounts and Glass",
 			kind = "delivery",
 			requires = {"SM03"},
@@ -154,19 +132,11 @@ PLUGIN:Register("smartass", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM06",
+			completionCash = 850,
 			name = "The Interference Site",
 			kind = "field",
 			objective = "Take the required bearings in Garbage and recover Red-Trimmed Control Unit. Return it to"
@@ -198,6 +168,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM07",
+			completionCash = 0,
 			name = "Less Guesswork",
 			kind = "tracker",
 			requires = {"SM05"},
@@ -207,19 +178,11 @@ PLUGIN:Register("smartass", {
 			),
 			completion = "You've found enough sources that I'm starting to believe the bearings aren't luck.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM08",
+			completionCash = 1050,
 			name = "Spool's Correction",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0022 from the assigned search area in Garbage. Deliver it to"
@@ -235,19 +198,11 @@ PLUGIN:Register("smartass", {
 				label = "Spool's Correction - Numbered Data Module 0022",
 				recipient = "spool",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM09",
+			completionCash = 875,
 			name = "An Honest Test",
 			kind = "delivery",
 			requires = {"SM07"},
@@ -259,19 +214,11 @@ PLUGIN:Register("smartass", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM10",
+			completionCash = 1250,
 			name = "The False Beacon",
 			kind = "field",
 			objective = "Take the required bearings in Garbage and recover Red-Trimmed Control Unit. Return it to"
@@ -286,19 +233,11 @@ PLUGIN:Register("smartass", {
 				cargo = "town_quest_control",
 				label = "The False Beacon - Red-Trimmed Control Unit",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM11",
+			completionCash = 0,
 			name = "Still on Bearing",
 			kind = "tracker",
 			requires = {"SM09"},
@@ -308,19 +247,11 @@ PLUGIN:Register("smartass", {
 			),
 			completion = "You've found enough sources that I'm starting to believe the bearings aren't luck.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM12",
+			completionCash = 1450,
 			name = "The Receiver List",
 			kind = "field",
 			objective = "Recover Corporate Records Folder from the assigned search area in Waystation. Deliver it to"
@@ -349,6 +280,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM13",
+			completionCash = 1175,
 			name = "Quiet Equipment",
 			kind = "delivery",
 			requires = {"SM11"},
@@ -360,19 +292,11 @@ PLUGIN:Register("smartass", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM14",
+			completionCash = 1650,
 			name = "Mute's Missing Packet",
 			kind = "field",
 			objective = "Recover Tape-Labelled Flash Drive from the assigned search area in Garbage. Return it to"
@@ -387,19 +311,11 @@ PLUGIN:Register("smartass", {
 				cargo = "town_quest_drive",
 				label = "Mute's Missing Packet - Tape-Labelled Flash Drive",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM15",
+			completionCash = 0,
 			name = "Better Than Luck",
 			kind = "tracker",
 			requires = {"SM13"},
@@ -409,19 +325,11 @@ PLUGIN:Register("smartass", {
 			),
 			completion = "You've found enough sources that I'm starting to believe the bearings aren't luck.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM16",
+			completionCash = 1850,
 			name = "A Signal Across Maps",
 			kind = "field",
 			objective = "Take the required bearings in Garbage and recover Red-Trimmed Control Unit. Return it to"
@@ -436,19 +344,11 @@ PLUGIN:Register("smartass", {
 				cargo = "town_quest_control",
 				label = "A Signal Across Maps - Red-Trimmed Control Unit",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM17",
+			completionCash = 1475,
 			name = "Packed for the Roofs",
 			kind = "delivery",
 			requires = {"SM15"},
@@ -460,19 +360,11 @@ PLUGIN:Register("smartass", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM18",
+			completionCash = 2050,
 			name = "The Rooftop Source",
 			kind = "field",
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Pripyat. Return it to this"
@@ -500,6 +392,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM19",
+			completionCash = 0,
 			name = "No More False Positives",
 			kind = "tracker",
 			requires = {"SM17"},
@@ -509,19 +402,11 @@ PLUGIN:Register("smartass", {
 			),
 			completion = "You've found enough sources that I'm starting to believe the bearings aren't luck.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM20",
+			completionCash = 2250,
 			name = "The Handler's Record",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Deliver it to"
@@ -537,19 +422,11 @@ PLUGIN:Register("smartass", {
 				label = "The Handler's Record - Handwritten Audio Cassette",
 				recipient = "carbon",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM21",
+			completionCash = 1775,
 			name = "The Last Calibration",
 			kind = "delivery",
 			requires = {"SM19", "SM20"},
@@ -561,19 +438,11 @@ PLUGIN:Register("smartass", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM22",
+			completionCash = 2450,
 			name = "Two Signals One Source",
 			kind = "field",
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Pripyat. Return it to this"
@@ -588,23 +457,11 @@ PLUGIN:Register("smartass", {
 				cargo = "town_quest_control",
 				label = "Two Signals One Source - Red-Trimmed Control Unit",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
+			benefits = {},
 		},
 		{
 			id = "SM23",
+			completionCash = 0,
 			name = "Found You",
 			kind = "tracker",
 			requires = {"SM22"},
@@ -614,19 +471,11 @@ PLUGIN:Register("smartass", {
 			),
 			completion = "You've found enough sources that I'm starting to believe the bearings aren't luck.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM24",
+			completionCash = 2650,
 			name = "The Silent Frequency",
 			kind = "field",
 			objective = "Recover Tagged Security Flash Drive from the assigned search area in Garbage. Return it to"

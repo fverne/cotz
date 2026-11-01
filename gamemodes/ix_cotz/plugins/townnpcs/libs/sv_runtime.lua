@@ -3,7 +3,22 @@ local STATE_KEY = "townNPCProgression"
 
 function PLUGIN:InitializeTownCharacter(character)
 	if not character:GetData(STATE_KEY) then
-		character:SetData(STATE_KEY, {counts = {}, claims = {}, opponents = {}, pending = {}})
+		character:SetData(STATE_KEY, {counts = {}, claims = {}, opponents = {}, pending = {}, rewardVersion = 2})
+		character:Save()
+	end
+	local state = table.Copy(character:GetData(STATE_KEY))
+	if state.rewardVersion ~= 2 then
+		-- Existing field/checkpoint completions must not mint the new cash payouts on upgrade.
+		-- Preserve accrued delivery credit and all pending item claims.
+		local record = ix.progression.GetCharacterProgression(character)
+		for id, line in pairs(record.lines) do
+			if self.steps[id] and line.completed and not line.rewardCredit then
+				line.completionRewardsPaid = true
+			end
+		end
+		ix.progression.SetCharacterProgression(character, record)
+		state.rewardVersion = 2
+		character:SetData(STATE_KEY, state)
 		character:Save()
 	end
 	self:RecoverCompletions(character)
@@ -47,6 +62,7 @@ function PLUGIN:RecoverCompletions(character)
 	local record = ix.progression.GetCharacterProgression(character)
 	for id, line in pairs(record.lines) do
 		local definition = self.steps[id] and ix.progression.definitions[id]
+		if definition and line.completed then ix.progression.PayCompletionRewards(character, id) end
 		if definition and line.completed and definition.completionBenefits
 			and not (line.benefitsClaimed or {}).completion then
 			ix.progression.GrantBenefits(character, id, definition.completionBenefits, "completion")

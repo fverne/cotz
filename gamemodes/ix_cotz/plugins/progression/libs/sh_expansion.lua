@@ -103,6 +103,17 @@ end
 
 function ix.progression.GetBenefitSummary(definition, character)
 	local parts = benefitText(definition.completionBenefits or {})
+	for _, itemID in ipairs(definition.variantUnlocks or {}) do
+		parts[#parts + 1] = "Suit conversion access: " .. ix.item.list[itemID].name
+	end
+	if definition.capacityReward then
+		local reward = definition.capacityReward
+		local unit = reward.kind == "weight" and "kg carry capacity" or "inventory row"
+		parts[#parts + 1] = string.format("Permanent character upgrade: +%d %s", reward.amount, unit)
+	end
+	if definition.completionCash and definition.completionCash > 0 then
+		parts[#parts + 1] = string.format("%d rubles on completion", definition.completionCash)
+	end
 	for _, reward in ipairs(definition.serviceDiscounts or {}) do
 		parts[#parts + 1] = string.format("%g%% %s discount at %s", reward.fraction * 100,
 			reward.service, reward.npc)

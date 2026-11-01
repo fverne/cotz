@@ -19,12 +19,63 @@ PLUGIN:Register("spoor", {
 		progression = "Supplies and field observations. I'd like to know why the animals are moving, too.",
 	},
 	catalogue = {
+		["12gaugedt"] = {unlockContact = "brass", step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["12gaugesg"] = {unlockContact = "brass", step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["12gaugemg"] = {unlockContact = "brass", step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["12gaugetr"] = {unlockContact = "brass", step = "BR21",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["22lrap"] = {unlockContact = "brass", step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["22lrhp"] = {unlockContact = "brass", step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["338lapua"] = {unlockContact = "brass", step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["338lapuaap"] = {unlockContact = "brass", step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["338lapuahp"] = {unlockContact = "brass", step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x51"] = {unlockContact = "brass", step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x51ap"] = {unlockContact = "brass", step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x51hp"] = {unlockContact = "brass", step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x54"] = {unlockContact = "brass", step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x54ap"] = {unlockContact = "brass", step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x54hp"] = {unlockContact = "brass", step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["lax44"] = {step = "SP17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["machete"] = {step = "SP05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mosin"] = {step = "SP11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["obrez"] = {step = "SP07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["saigasemi"] = {step = "SP11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["sako85"] = {step = "SP11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["sako85nato"] = {step = "SP07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["svt40"] = {step = "SP17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["sw500"] = {step = "SP17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["w1895"] = {step = "SP07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["w9422357"] = {step = "SP11",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
 		{
 			id = "SP01",
+			completionCash = 275,
 			name = "Reading the Remains",
 			kind = "delivery",
 			requires = {},
@@ -49,6 +100,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP02",
+			completionCash = 450,
 			name = "The Scavenger's Camp",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
@@ -63,38 +115,22 @@ PLUGIN:Register("spoor", {
 				cargo = "town_quest_notebook",
 				label = "The Scavenger's Camp - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP03",
+			completionCash = 0,
 			name = "Clear the Approach",
 			kind = "tracker",
 			requires = {"SP02"},
 			briefing = "Mutants on the routes. The job is to clear them, not to chase a trophy into another pack.",
 			completion = "You've cleared enough trouble for now. Keep watching where the others go.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP04",
+			completionCash = 650,
 			name = "Where They Feed",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
@@ -109,19 +145,11 @@ PLUGIN:Register("spoor", {
 				cargo = "town_quest_tape",
 				label = "Where They Feed - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP05",
+			completionCash = 575,
 			name = "Tools for the Field",
 			kind = "delivery",
 			requires = {"SP03"},
@@ -133,19 +161,11 @@ PLUGIN:Register("spoor", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP06",
+			completionCash = 850,
 			name = "Lemon's Complaint",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Garbage. Deliver it to"
@@ -178,25 +198,18 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP07",
+			completionCash = 0,
 			name = "A Safer Yard",
 			kind = "tracker",
 			requires = {"SP05"},
 			briefing = "Mutants on the routes. The job is to clear them, not to chase a trophy into another pack.",
 			completion = "You've cleared enough trouble for now. Keep watching where the others go.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP08",
+			completionCash = 1050,
 			name = "The Displaced Pack",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
@@ -211,19 +224,11 @@ PLUGIN:Register("spoor", {
 				cargo = "town_quest_notebook",
 				label = "The Displaced Pack - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP09",
+			completionCash = 875,
 			name = "Different Quarry",
 			kind = "delivery",
 			requires = {"SP07"},
@@ -235,19 +240,11 @@ PLUGIN:Register("spoor", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP10",
+			completionCash = 1250,
 			name = "Tracks in the Wrong Place",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0013 from the assigned search area in Garbage. Return it to"
@@ -262,38 +259,22 @@ PLUGIN:Register("spoor", {
 				cargo = "town_quest_module",
 				label = "Tracks in the Wrong Place - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP11",
+			completionCash = 0,
 			name = "Patient Work",
 			kind = "tracker",
 			requires = {"SP09"},
 			briefing = "Mutants on the routes. The job is to clear them, not to chase a trophy into another pack.",
 			completion = "You've cleared enough trouble for now. Keep watching where the others go.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP12",
+			completionCash = 1450,
 			name = "The Empty Hide",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Garbage. Return it to this"
@@ -321,6 +302,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP13",
+			completionCash = 1175,
 			name = "Proof of Change",
 			kind = "delivery",
 			requires = {"SP11"},
@@ -332,19 +314,11 @@ PLUGIN:Register("spoor", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP14",
+			completionCash = 1650,
 			name = "The Pattern Breaks",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0022 from the assigned search area in Waystation. Deliver it to"
@@ -360,38 +334,22 @@ PLUGIN:Register("spoor", {
 				label = "The Pattern Breaks - Numbered Data Module 0022",
 				recipient = "atlas",
 			},
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP15",
+			completionCash = 0,
 			name = "No Easy Quarry",
 			kind = "tracker",
 			requires = {"SP13"},
 			briefing = "Mutants on the routes. The job is to clear them, not to chase a trophy into another pack.",
 			completion = "You've cleared enough trouble for now. Keep watching where the others go.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP16",
+			completionCash = 1850,
 			name = "The First Pripyat Trail",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Pripyat. Return it to this"
@@ -406,19 +364,11 @@ PLUGIN:Register("spoor", {
 				cargo = "town_quest_diary",
 				label = "The First Pripyat Trail - Scientist's Field Diary",
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP17",
+			completionCash = 1475,
 			name = "Preparing for the Worst",
 			kind = "delivery",
 			requires = {"SP15"},
@@ -430,19 +380,11 @@ PLUGIN:Register("spoor", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP18",
+			completionCash = 2050,
 			name = "The Survivor's Cache",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
@@ -470,25 +412,18 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP19",
+			completionCash = 0,
 			name = "The Dangerous Ones",
 			kind = "tracker",
 			requires = {"SP17", "SP18"},
 			briefing = "Mutants on the routes. The job is to clear them, not to chase a trophy into another pack.",
 			completion = "You've cleared enough trouble for now. Keep watching where the others go.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP20",
+			completionCash = 2250,
 			name = "The Last Observation",
 			kind = "field",
 			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Pripyat. Return it to"
@@ -503,16 +438,7 @@ PLUGIN:Register("spoor", {
 				cargo = "town_quest_tape2",
 				label = "The Last Observation - Blue-Label Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "12gauge",
 				bonus = 2,
@@ -520,6 +446,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP21",
+			completionCash = 1775,
 			name = "What the Records Missed",
 			kind = "delivery",
 			requires = {"SP20"},
@@ -531,19 +458,11 @@ PLUGIN:Register("spoor", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP22",
+			completionCash = 2450,
 			name = "The Hunter's Proof",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
@@ -558,16 +477,7 @@ PLUGIN:Register("spoor", {
 				cargo = "town_quest_notebook",
 				label = "The Hunter's Proof - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Spoor's trusted contact",
 		},
 	},

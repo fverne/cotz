@@ -45,14 +45,53 @@ PLUGIN:Register("suture", {
 		),
 	},
 	catalogue = {
-		["backpack_sling"] = {step = "SU03", terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["backpack_tourist"] = {step = "SU09", terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["backpack_vkbo"] = {step = "SU15", terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["backpack_1_large"] = {step = "SU19", terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_sling"] = {step = "SU01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_duffle"] = {step = "SU03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_sanitar"] = {step = "SU03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_tbag"] = {step = "SU05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_tourist"] = {step = "SU05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_takedown_1"] = {step = "SU07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_takedown_2"] = {step = "SU07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_mbss"] = {step = "SU09",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_vkbo"] = {step = "SU09",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_pilgrim"] = {step = "SU11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_scavbackpack"] = {step = "SU11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_1"] = {step = "SU13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_3"] = {step = "SU15",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_2"] = {step = "SU17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_1_large"] = {step = "SU19",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_3_large"] = {step = "SU21",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_2_large"] = {step = "SU23",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["suit_trenchcoat_black"] = {step = "SU05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["suit_trenchcoat_brown"] = {step = "SU05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["suit_trenchcoat_green"] = {step = "SU05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["suit_trenchcoat_tan"] = {step = "SU05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
 		{
 			id = "SU01",
+			completionCash = 275,
 			name = "A Bench and a Needle",
 			kind = "delivery",
 			requires = {},
@@ -77,6 +116,7 @@ PLUGIN:Register("suture", {
 		},
 		{
 			id = "SU02",
+			completionCash = 450,
 			name = "The Missing Pattern",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Waystation. Return it to this"
@@ -91,38 +131,22 @@ PLUGIN:Register("suture", {
 				cargo = "town_quest_official",
 				label = "The Missing Pattern - Official File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU03",
+			completionCash = 0,
 			name = "Seams That Hold",
 			kind = "tracker",
 			requires = {"SU02"},
 			briefing = "Repair and carrying supplies. Bring what's on the list; I'll check what is fit to use.",
 			completion = "You've kept the materials coming. I have something worth working with now.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU04",
+			completionCash = 650,
 			name = "A Broken Strap",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Waystation. Return it to"
@@ -137,19 +161,11 @@ PLUGIN:Register("suture", {
 				cargo = "town_quest_equipment",
 				label = "A Broken Strap - Striped Equipment Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU05",
+			completionCash = 575,
 			name = "Cloth for the Weather",
 			kind = "delivery",
 			requires = {"SU04"},
@@ -161,19 +177,11 @@ PLUGIN:Register("suture", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU06",
+			completionCash = 850,
 			name = "The Forgotten Measurements",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Waystation. Return it to this"
@@ -205,25 +213,18 @@ PLUGIN:Register("suture", {
 		},
 		{
 			id = "SU07",
+			completionCash = 0,
 			name = "A Proper Fit",
 			kind = "tracker",
 			requires = {"SU05"},
 			briefing = "Repair and carrying supplies. Bring what's on the list; I'll check what is fit to use.",
 			completion = "You've kept the materials coming. I have something worth working with now.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU08",
+			completionCash = 1050,
 			name = "The Workshop Scrapbook",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Garbage. Deliver it to"
@@ -239,19 +240,11 @@ PLUGIN:Register("suture", {
 				label = "The Workshop Scrapbook - Scientist's Field Diary",
 				recipient = "latch",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU09",
+			completionCash = 875,
 			name = "Load Before Luxury",
 			kind = "delivery",
 			requires = {"SU07"},
@@ -263,19 +256,11 @@ PLUGIN:Register("suture", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU10",
+			completionCash = 1250,
 			name = "The Loaded Pack",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0013 from the assigned search area in Waystation. Return it to"
@@ -290,38 +275,22 @@ PLUGIN:Register("suture", {
 				cargo = "town_quest_module",
 				label = "The Loaded Pack - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU11",
+			completionCash = 0,
 			name = "Built to Last",
 			kind = "tracker",
 			requires = {"SU09"},
 			briefing = "Repair and carrying supplies. Bring what's on the list; I'll check what is fit to use.",
 			completion = "You've kept the materials coming. I have something worth working with now.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU12",
+			completionCash = 1450,
 			name = "The Quartermaster's Specification",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Waystation. Deliver it to"
@@ -350,6 +319,7 @@ PLUGIN:Register("suture", {
 		},
 		{
 			id = "SU13",
+			completionCash = 1175,
 			name = "More Than Canvas",
 			kind = "delivery",
 			requires = {"SU11"},
@@ -361,19 +331,11 @@ PLUGIN:Register("suture", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU14",
+			completionCash = 1650,
 			name = "The Failed Seam",
 			kind = "field",
 			objective = "Recover Worn Striped Equipment Case from the assigned search area in Waystation. Return it"
@@ -388,38 +350,22 @@ PLUGIN:Register("suture", {
 				cargo = "town_quest_worncase",
 				label = "The Failed Seam - Worn Striped Equipment Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU15",
+			completionCash = 0,
 			name = "Work Under Weight",
 			kind = "tracker",
 			requires = {"SU13"},
 			briefing = "Repair and carrying supplies. Bring what's on the list; I'll check what is fit to use.",
 			completion = "You've kept the materials coming. I have something worth working with now.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU16",
+			completionCash = 1850,
 			name = "The Long Expedition's Kit",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Waystation. Deliver it to"
@@ -435,19 +381,11 @@ PLUGIN:Register("suture", {
 				label = "The Long Expedition's Kit - Personnel File Folder",
 				recipient = "ledger",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU17",
+			completionCash = 1475,
 			name = "Weather and Fallout",
 			kind = "delivery",
 			requires = {"SU15"},
@@ -459,19 +397,11 @@ PLUGIN:Register("suture", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU18",
+			completionCash = 2050,
 			name = "The Pripyat Trial",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0022 from the assigned search area in Pripyat. Return it to"
@@ -499,25 +429,18 @@ PLUGIN:Register("suture", {
 		},
 		{
 			id = "SU19",
+			completionCash = 0,
 			name = "No Loose Ends",
 			kind = "tracker",
 			requires = {"SU17"},
 			briefing = "Repair and carrying supplies. Bring what's on the list; I'll check what is fit to use.",
 			completion = "You've kept the materials coming. I have something worth working with now.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU20",
+			completionCash = 2250,
 			name = "The Missing Outfitter",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Pripyat. Return it to this"
@@ -532,19 +455,11 @@ PLUGIN:Register("suture", {
 				cargo = "town_quest_personnel",
 				label = "The Missing Outfitter - Personnel File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU21",
+			completionCash = 1775,
 			name = "Final Fittings",
 			kind = "delivery",
 			requires = {"SU19", "SU20"},
@@ -556,19 +471,11 @@ PLUGIN:Register("suture", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU22",
+			completionCash = 2450,
 			name = "The Return Journey Test",
 			kind = "field",
 			objective = "Deploy the recorder in Waystation, leave it to record, then retrieve Numbered Data Module"
@@ -583,42 +490,23 @@ PLUGIN:Register("suture", {
 				cargo = "town_quest_module",
 				label = "The Return Journey Test - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
+			benefits = {},
 		},
 		{
 			id = "SU23",
+			completionCash = 0,
 			name = "Fit for the Journey",
 			kind = "tracker",
 			requires = {"SU22"},
 			briefing = "Repair and carrying supplies. Bring what's on the list; I'll check what is fit to use.",
 			completion = "You've kept the materials coming. I have something worth working with now.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SU24",
+			capacity = {kind = "rows", amount = 1},
+			completionCash = 2650,
 			name = "The Outfitter's Pattern",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Waystation. Return it to this"

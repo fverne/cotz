@@ -45,9 +45,12 @@ PLUGIN:Register("carbon", {
 			.. "with?"
 		),
 	},
+	catalogue = {
+	},
 	progression = {
 		{
 			id = "CA01",
+			completionCash = 275,
 			name = "Somewhere to File It",
 			kind = "delivery",
 			requires = {},
@@ -75,6 +78,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA02",
+			completionCash = 450,
 			name = "The Maintenance Office",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Waystation. Return it to this"
@@ -89,19 +93,11 @@ PLUGIN:Register("carbon", {
 				cargo = "town_quest_official",
 				label = "The Maintenance Office - Official File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA03",
+			completionCash = 0,
 			name = "A Useful Record",
 			kind = "tracker",
 			requires = {"CA02"},
@@ -111,19 +107,11 @@ PLUGIN:Register("carbon", {
 				.. "recollections."
 			),
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA04",
+			completionCash = 650,
 			name = "A Date That Does Not Fit",
 			kind = "field",
 			objective = "Recover Corporate Records Folder from the assigned search area in Garbage. Return it to this"
@@ -138,19 +126,11 @@ PLUGIN:Register("carbon", {
 				cargo = "town_quest_archive",
 				label = "A Date That Does Not Fit - Corporate Records Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA05",
+			completionCash = 575,
 			name = "An Ordered Shelf",
 			kind = "delivery",
 			requires = {"CA03"},
@@ -165,19 +145,11 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA06",
+			completionCash = 850,
 			name = "The Original's Account",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Waystation. Deliver it to 'The"
@@ -210,6 +182,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA07",
+			completionCash = 0,
 			name = "Facts With Sources",
 			kind = "tracker",
 			requires = {"CA05"},
@@ -219,19 +192,11 @@ PLUGIN:Register("carbon", {
 				.. "recollections."
 			),
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA08",
+			completionCash = 1050,
 			name = "The Missing Annex",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Waystation. Return it to this"
@@ -246,19 +211,11 @@ PLUGIN:Register("carbon", {
 				cargo = "town_quest_official",
 				label = "The Missing Annex - Official File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA09",
+			completionCash = 875,
 			name = "Names and Numbers",
 			kind = "delivery",
 			requires = {"CA07"},
@@ -273,19 +230,11 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA10",
+			completionCash = 1250,
 			name = "Egghead's Citation",
 			kind = "field",
 			objective = "Recover Laboratory Log Folder from the assigned search area in Waystation. Return it to this"
@@ -300,19 +249,11 @@ PLUGIN:Register("carbon", {
 				cargo = "town_quest_lab",
 				label = "Egghead's Citation - Laboratory Log Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA11",
+			completionCash = 0,
 			name = "A History That Agrees",
 			kind = "tracker",
 			requires = {"CA09"},
@@ -322,19 +263,11 @@ PLUGIN:Register("carbon", {
 				.. "recollections."
 			),
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA12",
+			completionCash = 1450,
 			name = "The Restricted Copy",
 			kind = "field",
 			objective = "Recover Loose Intelligence Dossier from the assigned search area in Waystation. Return it to"
@@ -362,6 +295,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA13",
+			completionCash = 1175,
 			name = "Ready for the Archive",
 			kind = "delivery",
 			requires = {"CA11"},
@@ -376,19 +310,11 @@ PLUGIN:Register("carbon", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA14",
+			completionCash = 1650,
 			name = "The Pripyat Index",
 			kind = "field",
 			objective = "Recover Corporate Records Folder from the assigned search area in Pripyat. Return it to this"
@@ -403,19 +329,11 @@ PLUGIN:Register("carbon", {
 				cargo = "town_quest_archive",
 				label = "The Pripyat Index - Corporate Records Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA15",
+			completionCash = 0,
 			name = "Every Page Accounted For",
 			kind = "tracker",
 			requires = {"CA13"},
@@ -425,19 +343,11 @@ PLUGIN:Register("carbon", {
 				.. "recollections."
 			),
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA16",
+			completionCash = 1850,
 			name = "The Administrative Trail",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Pripyat. Deliver it to"
@@ -453,19 +363,11 @@ PLUGIN:Register("carbon", {
 				label = "The Administrative Trail - Official File Folder",
 				recipient = "ledger",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA17",
+			completionCash = 1475,
 			name = "The Missing Context",
 			kind = "delivery",
 			requires = {"CA15", "CA16"},
@@ -480,19 +382,11 @@ PLUGIN:Register("carbon", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA18",
+			completionCash = 2050,
 			name = "The False Summary",
 			kind = "field",
 			objective = "Recover Blue Research Dossier from the assigned search area in Waystation. Return it to this"
@@ -520,6 +414,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA19",
+			completionCash = 0,
 			name = "A Complete Dossier",
 			kind = "tracker",
 			requires = {"CA18"},
@@ -529,19 +424,11 @@ PLUGIN:Register("carbon", {
 				.. "recollections."
 			),
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA20",
+			completionCash = 2250,
 			name = "The Surviving Archive",
 			kind = "field",
 			objective = "Recover Corporate Records Folder from the assigned search area in Pripyat. Return it to this"
@@ -556,16 +443,7 @@ PLUGIN:Register("carbon", {
 				cargo = "town_quest_archive",
 				label = "The Surviving Archive - Corporate Records Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "drink_bottlewater",
 				bonus = 2,
@@ -573,6 +451,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA21",
+			completionCash = 1775,
 			name = "Preserve the Originals",
 			kind = "delivery",
 			requires = {"CA20"},
@@ -587,19 +466,11 @@ PLUGIN:Register("carbon", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA22",
+			completionCash = 2450,
 			name = "The Last Witness on Paper",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Waystation. Return it to"
@@ -614,16 +485,7 @@ PLUGIN:Register("carbon", {
 				cargo = "town_quest_diary",
 				label = "The Last Witness on Paper - Scientist's Field Diary",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Carbon's trusted contact",
 		},
 	},

@@ -224,7 +224,8 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 
 		local suitVariants = {}
 		for _, v in pairs(ix.item.list) do
-			if target.selectedsuitstruct[3] == v.baseSuit and variants[v.suitVariant] then
+			if target.selectedsuitstruct[3] == v.baseSuit and variants[v.suitVariant]
+				and ix.townNPCs:CanChangeSuitVariant(client:GetCharacter(), v.uniqueID) then
 				table.insert(suitVariants, {
 					uniqueID = v.uniqueID,
 					name = v.name,
@@ -267,6 +268,9 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 	end,
 	ResolveDynamicOption = function(self, client, target, dynamicData)
 		if SERVER and dynamicData.accepted then
+			if not ix.townNPCs:CanChangeSuitVariant(client:GetCharacter(), dynamicData.suitVariantUID) then
+				return "BackTopic"
+			end
 			local finalPrice = math.Round(ix.item.list[dynamicData.suitVariantUID].price / 10)
 			if not client:GetCharacter():HasMoney(finalPrice) then
 				client:Notify("You don't have enough money!")

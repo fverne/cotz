@@ -100,8 +100,8 @@ function ix.progression.CanBuyItem(character, npcName, itemID)
 	if not ix.progression.CanUseNPC(character, npcName) then
 		return false
 	end
-	if ix.townNPCs and ix.townNPCs.itemGates[itemID] then
-		return ix.townNPCs:CanBuyItem(character, itemID)
+	if ix.townNPCs and (ix.townNPCs.itemGates[itemID] or ix.townNPCs:IsPurchaseExcluded(itemID)) then
+		return ix.townNPCs:CanBuyItem(character, itemID, npcName)
 	end
 	local locked = false
 	for progressionID, definition in pairs(ix.progression.definitions) do

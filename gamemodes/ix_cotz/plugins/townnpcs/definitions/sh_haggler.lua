@@ -22,90 +22,101 @@ PLUGIN:Register("haggler", {
 		progression = "Missing invoices, missing goods, people asking to be paid twice. Pick a problem.",
 	},
 	catalogue = {
-		["357magnum"] = {step = "HG13",
-			terms = {nil, 4, "SELLANDBUY", 4, 12, 1}},
-		["44magnum"] = {step = "HG11",
-			terms = {nil, 4, "SELLANDBUY", 4, 12, 1}},
-		["500magnum"] = {step = "HG15",
-			terms = {nil, 4, "SELLANDBUY", 4, 12, 1}},
-		["akm"] = {step = "HG11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["aks74u"] = {step = "HG09",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["bat"] = {step = "HG01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["brhp"] = {step = "HG03",
+		["beretta92"] = {step = "HG03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["c96carbine"] = {step = "HG05",
+		["brhp"] = {step = "HG01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["c96"] = {step = "HG03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["c96carbine"] = {step = "HG03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["cz52"] = {step = "HG01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["fort12"] = {step = "HG01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["g2contender500"] = {step = "HG15",
+		["g2contender"] = {step = "HG01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["ithaca37"] = {step = "HG09",
+		["g2contender500"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["kiparis"] = {step = "HG07",
+		["glock17"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["kp31"] = {step = "HG09",
+		["glock18"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["lax410"] = {step = "HG09",
+		["ij600"] = {step = "HG03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["lax410s"] = {step = "HG05",
+		["kiparis"] = {step = "HG03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["kp31"] = {step = "HG07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["lugerp08"] = {step = "HG03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["m1887"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["m1911"] = {step = "HG03",
+		["m1911"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["m1911chic"] = {step = "HG13",
+		["m1911chic"] = {step = "HG11",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mac11"] = {step = "HG11",
+		["m1917"] = {step = "HG01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mosin"] = {step = "HG11",
+		["m1928"] = {step = "HG07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mac11"] = {step = "HG03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["makarov"] = {step = "HG01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mp18"] = {step = "HG07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mp27"] = {step = "HG03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["mp34"] = {step = "HG03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["mp40"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["ppsh"] = {step = "HG07",
+		["mp5k"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["rugermini14"] = {step = "HG09",
+		["nagantrev"] = {step = "HG01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["saigasemi"] = {step = "HG11",
+		["obrezmalfunction"] = {step = "HG11",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["saigasemi545"] = {step = "HG05",
+		["p99"] = {step = "HG03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sako85"] = {step = "HG09",
+		["ppsh"] = {step = "HG03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sako85nato"] = {step = "HG03",
+		["rugermini14"] = {step = "HG07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["rugermk3"] = {step = "HG03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["saigasemi545"] = {step = "HG07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["skorpion"] = {step = "HG03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["sks"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sten"] = {step = "HG07",
+		["stechaps"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sterling"] = {step = "HG09",
+		["sten"] = {step = "HG03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["svt40"] = {step = "HG13",
+		["sterling"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["swmodel29"] = {step = "HG11",
+		["taurusjudge"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz194"] = {step = "HG05",
+		["tokarev"] = {step = "HG01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz34"] = {step = "HG01",
+		["toz194"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz34short"] = {step = "HG01",
+		["toz34"] = {step = "HG03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz66"] = {step = "HG05",
+		["toz66"] = {step = "HG03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz66short"] = {step = "HG05",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["w1895"] = {step = "HG07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["w9422357"] = {step = "HG13",
+		["uzi"] = {step = "HG07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
 		{
 			id = "HG01",
+			completionCash = 275,
 			name = "Opening the Shutters",
 			kind = "delivery",
 			requires = {},
@@ -130,6 +141,7 @@ PLUGIN:Register("haggler", {
 		},
 		{
 			id = "HG02",
+			completionCash = 450,
 			name = "The Missing Invoice",
 			kind = "field",
 			objective = "Recover Warehouse Packing List B from the assigned search area in Marsh. Return it to this"
@@ -144,19 +156,11 @@ PLUGIN:Register("haggler", {
 				cargo = "town_quest_receipt",
 				label = "The Missing Invoice - Warehouse Packing List B",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG03",
+			completionCash = 0,
 			name = "A Small Problem",
 			kind = "tracker",
 			requires = {"HG02"},
@@ -166,19 +170,11 @@ PLUGIN:Register("haggler", {
 			),
 			completion = "You've kept your end of the arrangement. I remember reliable people.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG04",
+			completionCash = 650,
 			name = "Who Pays Twice",
 			kind = "field",
 			objective = "Recover Corporate Letter from the assigned search area in Marsh. Return it to this contact"
@@ -193,19 +189,11 @@ PLUGIN:Register("haggler", {
 				cargo = "town_quest_contract",
 				label = "Who Pays Twice - Corporate Letter",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG05",
+			completionCash = 575,
 			name = "Working Capital",
 			kind = "delivery",
 			requires = {"HG04"},
@@ -217,19 +205,11 @@ PLUGIN:Register("haggler", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG06",
+			completionCash = 850,
 			name = "The Wrong Seal",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Return it to this"
@@ -261,6 +241,7 @@ PLUGIN:Register("haggler", {
 		},
 		{
 			id = "HG07",
+			completionCash = 0,
 			name = "Safer Roads",
 			kind = "tracker",
 			requires = {"HG05"},
@@ -270,19 +251,11 @@ PLUGIN:Register("haggler", {
 			),
 			completion = "You've kept your end of the arrangement. I remember reliable people.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG08",
+			completionCash = 1050,
 			name = "The Abandoned Stall",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
@@ -297,19 +270,11 @@ PLUGIN:Register("haggler", {
 				cargo = "town_quest_notebook",
 				label = "The Abandoned Stall - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG09",
+			completionCash = 875,
 			name = "Stock Worth Carrying",
 			kind = "delivery",
 			requires = {"HG07"},
@@ -321,19 +286,11 @@ PLUGIN:Register("haggler", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG10",
+			completionCash = 1250,
 			name = "Two Sets of Books",
 			kind = "field",
 			objective = "Recover Warehouse Packing List B from the assigned search area in Marsh. Deliver it to"
@@ -349,19 +306,11 @@ PLUGIN:Register("haggler", {
 				label = "Two Sets of Books - Warehouse Packing List B",
 				recipient = "ledger",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG11",
+			completionCash = 0,
 			name = "Paying Customers",
 			kind = "tracker",
 			requires = {"HG09"},
@@ -371,19 +320,11 @@ PLUGIN:Register("haggler", {
 			),
 			completion = "You've kept your end of the arrangement. I remember reliable people.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG12",
+			completionCash = 1450,
 			name = "The Collector's Route",
 			kind = "field",
 			objective = "Recover Loose Intelligence Dossier from the assigned search area in Marsh. Return it to this"
@@ -411,6 +352,7 @@ PLUGIN:Register("haggler", {
 		},
 		{
 			id = "HG13",
+			completionCash = 1175,
 			name = "An Honest Sample",
 			kind = "delivery",
 			requires = {"HG11"},
@@ -422,19 +364,11 @@ PLUGIN:Register("haggler", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG14",
+			completionCash = 1650,
 			name = "A Broken Agreement",
 			kind = "field",
 			objective = "Recover Corporate Letter from the assigned search area in Garbage. Return it to this contact"
@@ -449,19 +383,11 @@ PLUGIN:Register("haggler", {
 				cargo = "town_quest_contract",
 				label = "A Broken Agreement - Corporate Letter",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG15",
+			completionCash = 0,
 			name = "No More Tolls",
 			kind = "tracker",
 			requires = {"HG13"},
@@ -471,19 +397,11 @@ PLUGIN:Register("haggler", {
 			),
 			completion = "You've kept your end of the arrangement. I remember reliable people.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG16",
+			completionCash = 1850,
 			name = "The Broker's Copy",
 			kind = "field",
 			objective = "Recover Corporate Letter from the assigned search area in Waystation. Deliver it to 'Carbon'"
@@ -499,19 +417,11 @@ PLUGIN:Register("haggler", {
 				label = "The Broker's Copy - Corporate Letter",
 				recipient = "carbon",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG17",
+			completionCash = 1475,
 			name = "Shelf Space",
 			kind = "delivery",
 			requires = {"HG15"},
@@ -523,19 +433,11 @@ PLUGIN:Register("haggler", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG18",
+			completionCash = 2050,
 			name = "The Shipment List",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
@@ -564,6 +466,7 @@ PLUGIN:Register("haggler", {
 		},
 		{
 			id = "HG19",
+			completionCash = 0,
 			name = "A Wider Market",
 			kind = "tracker",
 			requires = {"HG17"},
@@ -573,19 +476,11 @@ PLUGIN:Register("haggler", {
 			),
 			completion = "You've kept your end of the arrangement. I remember reliable people.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG20",
+			completionCash = 2250,
 			name = "The Empty Depot",
 			kind = "field",
 			objective = "Recover Corporate Records Folder from the assigned search area in Marsh. Return it to this"
@@ -600,19 +495,11 @@ PLUGIN:Register("haggler", {
 				cargo = "town_quest_archive",
 				label = "The Empty Depot - Corporate Records Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG21",
+			completionCash = 1775,
 			name = "Proof of Delivery",
 			kind = "delivery",
 			requires = {"HG19", "HG20"},
@@ -624,19 +511,11 @@ PLUGIN:Register("haggler", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG22",
+			completionCash = 2450,
 			name = "The Unpaid Supplier",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
@@ -651,19 +530,11 @@ PLUGIN:Register("haggler", {
 				cargo = "town_quest_personnel",
 				label = "The Unpaid Supplier - Personnel File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG23",
+			completionCash = 0,
 			name = "Closing the Account",
 			kind = "tracker",
 			requires = {"HG22"},
@@ -673,19 +544,11 @@ PLUGIN:Register("haggler", {
 			),
 			completion = "You've kept your end of the arrangement. I remember reliable people.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG24",
+			completionCash = 2650,
 			name = "The Last Ledger",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
@@ -710,13 +573,10 @@ PLUGIN:Register("haggler", {
 					},
 				},
 			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
 		},
 		{
 			id = "HG25",
+			completionCash = 2000,
 			name = "A Shop That Lasts",
 			kind = "delivery",
 			requires = {"HG24"},
@@ -728,19 +588,11 @@ PLUGIN:Register("haggler", {
 					quantity = 7,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "HG26",
+			completionCash = 2850,
 			name = "Nobody Collects Here",
 			kind = "field",
 			objective = "Recover Corporate Letter from the assigned search area in Marsh. Return it to this contact"
@@ -755,16 +607,7 @@ PLUGIN:Register("haggler", {
 				cargo = "town_quest_contract",
 				label = "Nobody Collects Here - Corporate Letter",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Haggler's trusted contact",
 		},
 	},

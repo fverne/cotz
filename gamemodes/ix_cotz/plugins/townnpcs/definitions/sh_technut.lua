@@ -51,6 +51,26 @@ PLUGIN:Register("technut", {
 		),
 	},
 	catalogue = {
+		["helm_tanker"] = {step = "TN01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["helm_steel_arab"] = {step = "TN03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["helm_steel_ger"] = {step = "TN03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["helm_steel_rus"] = {step = "TN03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["headwear_riot"] = {step = "TN05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["helm_operator_rus_1"] = {step = "TN13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["headwear_screen"] = {step = "TN13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["headwear_cs4"] = {step = "TN15",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["helm_sphere08"] = {step = "TN17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["helm_sphere12"] = {step = "TN19",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["attachment_aluframe"] = {step = "TN15",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["attachment_carbonfibre"] = {step = "TN15",
@@ -77,72 +97,21 @@ PLUGIN:Register("technut", {
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["attachment_steelplate_3"] = {step = "TN17",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["headwear_cs1"] = {step = "TN09",
+		["suit_cs1"] = {step = "TN09",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["headwear_cs2"] = {step = "TN13",
+		["suit_cs2"] = {step = "TN13",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["headwear_cs4"] = {step = "TN13",
+		["suit_cs3"] = {step = "TN16",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["headwear_psz12"] = {step = "TN17",
+		["suit_mailjacket"] = {step = "TN03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_operator_nato"] = {step = "TN21",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_operator_rus_1"] = {step = "TN11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_operator_rus_2"] = {step = "TN11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_sphere08"] = {step = "TN15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_sphere12"] = {step = "TN19",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_steel_arab"] = {step = "TN07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_steel_ger"] = {step = "TN07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_steel_rus"] = {step = "TN07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_eo20"] = {step = "TN05",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_gp5"] = {step = "TN03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_halfmask"] = {step = "TN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_m40"] = {step = "TN11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_m50"] = {step = "TN13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_pmk3"] = {step = "TN07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_respirator"] = {step = "TN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_xm40"] = {step = "TN09",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_cs1"] = {step = "TN07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_cs2"] = {step = "TN11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_cs3"] = {step = "TN13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_mailjacket"] = {step = "TN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_nbc"] = {step = "TN07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_sunrise"] = {step = "TN05",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_trenchcoat_black"] = {step = "TN03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_trenchcoat_brown"] = {step = "TN03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_trenchcoat_green"] = {step = "TN03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_trenchcoat_tan"] = {step = "TN03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_wind"] = {step = "TN09",
+		["suit_sunrise"] = {step = "TN07",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
 		{
 			id = "TN01",
+			completionCash = 275,
 			name = "A Bench to Work On",
 			kind = "delivery",
 			requires = {},
@@ -170,6 +139,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN02",
+			completionCash = 450,
 			name = "The Missing Toolbox",
 			kind = "field",
 			objective = "Recover Stickered Tool Case from the assigned search area in Marsh. Return it to this"
@@ -184,18 +154,11 @@ PLUGIN:Register("technut", {
 				cargo = "town_quest_tools",
 				label = "The Missing Toolbox - Stickered Tool Case",
 			},
-			benefits = {
-				services = {
-					{
-						npc = "'Technut'",
-						service = "repair",
-						amount = 500,
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN03",
+			completionCash = 0,
 			name = "Keeping Busy",
 			kind = "tracker",
 			requires = {"TN02"},
@@ -205,19 +168,11 @@ PLUGIN:Register("technut", {
 				.. "for spares."
 			),
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN04",
+			completionCash = 650,
 			name = "A Regulator for Gasket",
 			kind = "field",
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Marsh. Deliver it to"
@@ -233,19 +188,11 @@ PLUGIN:Register("technut", {
 				label = "A Regulator for Gasket - Red-Trimmed Control Unit",
 				recipient = "gasket",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN05",
+			completionCash = 575,
 			name = "Something Accurate",
 			kind = "delivery",
 			requires = {"TN04"},
@@ -260,19 +207,11 @@ PLUGIN:Register("technut", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN06",
+			completionCash = 850,
 			name = "The Misaligned Jig",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Marsh. Return it to this"
@@ -304,6 +243,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN07",
+			completionCash = 0,
 			name = "Reliable Parts",
 			kind = "tracker",
 			requires = {"TN05"},
@@ -313,19 +253,11 @@ PLUGIN:Register("technut", {
 				.. "for spares."
 			),
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN08",
+			completionCash = 1050,
 			name = "An Engineer's Notes",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
@@ -340,18 +272,11 @@ PLUGIN:Register("technut", {
 				cargo = "town_quest_notebook",
 				label = "An Engineer's Notes - Tied Leather Journal",
 			},
-			benefits = {
-				services = {
-					{
-						npc = "'Technut'",
-						service = "repair",
-						amount = 500,
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN09",
+			completionCash = 875,
 			name = "Steel and Seals",
 			kind = "delivery",
 			requires = {"TN07"},
@@ -366,19 +291,11 @@ PLUGIN:Register("technut", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN10",
+			completionCash = 1250,
 			name = "Latch's Find",
 			kind = "field",
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Marsh. Deliver it to"
@@ -394,19 +311,11 @@ PLUGIN:Register("technut", {
 				label = "Latch's Find - Red-Trimmed Control Unit",
 				recipient = "latch",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN11",
+			completionCash = 0,
 			name = "Proper Workshop",
 			kind = "tracker",
 			requires = {"TN09"},
@@ -416,20 +325,12 @@ PLUGIN:Register("technut", {
 				.. "for spares."
 			),
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			discounts = {{npc = "'Technut'", service = "repair", fraction = 0.05}},
 		},
 		{
 			id = "TN12",
+			completionCash = 1450,
 			name = "The Precision Crate",
 			kind = "field",
 			objective = "Recover Stickered Tool Case from the assigned search area in Garbage. Return it to this"
@@ -457,6 +358,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN13",
+			completionCash = 1175,
 			name = "A Better Fit",
 			kind = "delivery",
 			requires = {"TN11"},
@@ -471,19 +373,11 @@ PLUGIN:Register("technut", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN14",
+			completionCash = 1650,
 			name = "Patterns in Metal",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Marsh. Return it to this"
@@ -498,19 +392,11 @@ PLUGIN:Register("technut", {
 				cargo = "town_quest_official",
 				label = "Patterns in Metal - Official File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN15",
+			completionCash = 0,
 			name = "More Than a Patch",
 			kind = "tracker",
 			requires = {"TN13"},
@@ -520,19 +406,11 @@ PLUGIN:Register("technut", {
 				.. "for spares."
 			),
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN16",
+			completionCash = 1850,
 			name = "The Missing Technician",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Marsh. Return it to this"
@@ -547,18 +425,11 @@ PLUGIN:Register("technut", {
 				cargo = "town_quest_tape",
 				label = "The Missing Technician - Handwritten Audio Cassette",
 			},
-			benefits = {
-				services = {
-					{
-						npc = "'Technut'",
-						service = "repair",
-						amount = 500,
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN17",
+			completionCash = 1475,
 			name = "Instrument Grade",
 			kind = "delivery",
 			requires = {"TN15"},
@@ -573,19 +444,11 @@ PLUGIN:Register("technut", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN18",
+			completionCash = 2050,
 			name = "The Test Assembly",
 			kind = "field",
 			objective = "Recover Marked Research Case from the assigned search area in Waystation. Return it to this"
@@ -613,6 +476,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN19",
+			completionCash = 0,
 			name = "Holding Together",
 			kind = "tracker",
 			requires = {"TN17"},
@@ -622,19 +486,11 @@ PLUGIN:Register("technut", {
 				.. "for spares."
 			),
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN20",
+			completionCash = 2250,
 			name = "The Damaged Register",
 			kind = "field",
 			objective = "Recover Corporate Records Folder from the assigned search area in Marsh. Deliver it to"
@@ -650,19 +506,11 @@ PLUGIN:Register("technut", {
 				label = "The Damaged Register - Corporate Records Folder",
 				recipient = "carbon",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN21",
+			completionCash = 1775,
 			name = "A Workshop in Reserve",
 			kind = "delivery",
 			requires = {"TN19"},
@@ -677,19 +525,11 @@ PLUGIN:Register("technut", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN22",
+			completionCash = 2450,
 			name = "The Machine's Origin",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Pripyat. Return it to this"
@@ -704,19 +544,11 @@ PLUGIN:Register("technut", {
 				cargo = "town_quest_official",
 				label = "The Machine's Origin - Official File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN23",
+			completionCash = 0,
 			name = "Precision Work",
 			kind = "tracker",
 			requires = {"TN21", "TN22"},
@@ -726,19 +558,11 @@ PLUGIN:Register("technut", {
 				.. "for spares."
 			),
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN24",
+			completionCash = 2650,
 			name = "The Last Component",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
@@ -765,6 +589,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN25",
+			completionCash = 2000,
 			name = "Ready to Rebuild",
 			kind = "delivery",
 			requires = {"TN24"},
@@ -779,20 +604,12 @@ PLUGIN:Register("technut", {
 					quantity = 7,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			discounts = {{npc = "'Technut'", service = "repair", fraction = 0.1}},
 		},
 		{
 			id = "TN26",
+			completionCash = 2850,
 			name = "A Test Under Load",
 			kind = "field",
 			objective = "Deploy the recorder in Marsh, leave it to record, then retrieve Numbered Data Module 0013."
@@ -807,23 +624,11 @@ PLUGIN:Register("technut", {
 				cargo = "town_quest_module",
 				label = "A Test Under Load - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
+			benefits = {},
 		},
 		{
 			id = "TN27",
+			completionCash = 0,
 			name = "It Runs Again",
 			kind = "tracker",
 			requires = {"TN26"},
@@ -833,19 +638,11 @@ PLUGIN:Register("technut", {
 				.. "for spares."
 			),
 			target = 35,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN28",
+			completionCash = 3000,
 			name = "The Engineer's Signature",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Marsh. Return it to this"
@@ -860,16 +657,7 @@ PLUGIN:Register("technut", {
 				cargo = "town_quest_official",
 				label = "The Engineer's Signature - Official File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Technut's trusted contact",
 		},
 	},

@@ -27,9 +27,12 @@ PLUGIN:Register("ballast", {
 		progressionPrompt = "What else needs doing?",
 		progression = "There are stranded cases and missing freight records. Tell me which one you're going after.",
 	},
+	catalogue = {
+	},
 	progression = {
 		{
 			id = "BA01",
+			completionCash = 275,
 			name = "A Dry Package",
 			kind = "delivery",
 			requires = {},
@@ -54,6 +57,7 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA02",
+			completionCash = 450,
 			name = "The First Stranding",
 			kind = "field",
 			objective = "Recover Small Yellow Transit Case from the assigned search area in Marsh. Return it to this"
@@ -68,19 +72,11 @@ PLUGIN:Register("ballast", {
 				cargo = "town_quest_case",
 				label = "The First Stranding - Small Yellow Transit Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA03",
+			completionCash = 0,
 			name = "Nothing Left Behind",
 			kind = "tracker",
 			requires = {"BA02"},
@@ -90,19 +86,11 @@ PLUGIN:Register("ballast", {
 			),
 			completion = "You've brought enough cargo back for me to know you can carry it without losing half of it.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA04",
+			completionCash = 650,
 			name = "The Rotten Landing",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
@@ -117,19 +105,11 @@ PLUGIN:Register("ballast", {
 				cargo = "town_quest_notebook",
 				label = "The Rotten Landing - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA05",
+			completionCash = 575,
 			name = "Fuel for the Return",
 			kind = "delivery",
 			requires = {"BA03"},
@@ -141,19 +121,11 @@ PLUGIN:Register("ballast", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA06",
+			completionCash = 850,
 			name = "A Missing Mooring",
 			kind = "field",
 			objective = "Recover Stickered Tool Case from the assigned search area in Marsh. Return it to this"
@@ -185,6 +157,7 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA07",
+			completionCash = 0,
 			name = "A Reliable Pair of Hands",
 			kind = "tracker",
 			requires = {"BA05"},
@@ -194,19 +167,11 @@ PLUGIN:Register("ballast", {
 			),
 			completion = "You've brought enough cargo back for me to know you can carry it without losing half of it.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA08",
+			completionCash = 1050,
 			name = "The Crew List",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
@@ -221,19 +186,11 @@ PLUGIN:Register("ballast", {
 				cargo = "town_quest_personnel",
 				label = "The Crew List - Personnel File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA09",
+			completionCash = 875,
 			name = "Names on the Manifest",
 			kind = "delivery",
 			requires = {"BA07"},
@@ -245,19 +202,11 @@ PLUGIN:Register("ballast", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA10",
+			completionCash = 1250,
 			name = "The Floating Trail",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Marsh. Return it to this"
@@ -272,19 +221,11 @@ PLUGIN:Register("ballast", {
 				cargo = "town_quest_tape",
 				label = "The Floating Trail - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA11",
+			completionCash = 0,
 			name = "Recover What Matters",
 			kind = "tracker",
 			requires = {"BA09"},
@@ -294,19 +235,11 @@ PLUGIN:Register("ballast", {
 			),
 			completion = "You've brought enough cargo back for me to know you can carry it without losing half of it.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA12",
+			completionCash = 1450,
 			name = "The Disputed Cargo",
 			kind = "field",
 			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Deliver it to 'Brass'"
@@ -335,6 +268,7 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA13",
+			completionCash = 1175,
 			name = "Patch and Pack",
 			kind = "delivery",
 			requires = {"BA11"},
@@ -346,19 +280,11 @@ PLUGIN:Register("ballast", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA14",
+			completionCash = 1650,
 			name = "The Other Landing",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
@@ -374,19 +300,11 @@ PLUGIN:Register("ballast", {
 				label = "The Other Landing - Warehouse Packing List A",
 				recipient = "ledger",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA15",
+			completionCash = 0,
 			name = "The Long Haul Back",
 			kind = "tracker",
 			requires = {"BA13"},
@@ -396,19 +314,11 @@ PLUGIN:Register("ballast", {
 			),
 			completion = "You've brought enough cargo back for me to know you can carry it without losing half of it.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA16",
+			completionCash = 1850,
 			name = "A Voice From Shore",
 			kind = "field",
 			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Marsh. Return it to this"
@@ -423,19 +333,11 @@ PLUGIN:Register("ballast", {
 				cargo = "town_quest_tape2",
 				label = "A Voice From Shore - Blue-Label Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA17",
+			completionCash = 1475,
 			name = "A Boat in Reserve",
 			kind = "delivery",
 			requires = {"BA15"},
@@ -447,19 +349,11 @@ PLUGIN:Register("ballast", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA18",
+			completionCash = 2050,
 			name = "The Last Mooring",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
@@ -487,6 +381,7 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA19",
+			completionCash = 0,
 			name = "Safe to Bring Home",
 			kind = "tracker",
 			requires = {"BA17", "BA18"},
@@ -496,19 +391,11 @@ PLUGIN:Register("ballast", {
 			),
 			completion = "You've brought enough cargo back for me to know you can carry it without losing half of it.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA20",
+			completionCash = 2250,
 			name = "The Missing Logbook",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Deliver it to 'Carbon'"
@@ -524,16 +411,7 @@ PLUGIN:Register("ballast", {
 				label = "The Missing Logbook - Tied Leather Journal",
 				recipient = "carbon",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "drink_bottlewater",
 				bonus = 2,
@@ -541,6 +419,7 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA21",
+			completionCash = 1775,
 			name = "A Working Landing",
 			kind = "delivery",
 			requires = {"BA20"},
@@ -552,19 +431,11 @@ PLUGIN:Register("ballast", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA22",
+			completionCash = 2450,
 			name = "The First Return Cargo",
 			kind = "field",
 			objective = "Recover Small Yellow Transit Case from the assigned search area in Marsh. Deliver it to"
@@ -580,16 +451,7 @@ PLUGIN:Register("ballast", {
 				label = "The First Return Cargo - Small Yellow Transit Case",
 				recipient = "ledger",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Ballast's trusted contact",
 		},
 	},

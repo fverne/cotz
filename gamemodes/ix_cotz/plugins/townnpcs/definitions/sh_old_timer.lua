@@ -24,14 +24,29 @@ PLUGIN:Register("old-timer", {
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["knife3"] = {step = "OT12",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["ruger1022"] = {step = "OT03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["sako85varmint"] = {step = "OT03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["sharpening_stone"] = {step = "OT07",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 		["sharpening_stone_fine"] = {step = "OT19",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["suit_anorak"] = {step = "OT01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["toz106"] = {step = "OT03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["toz34short"] = {step = "OT03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["toz66short"] = {step = "OT03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["w9422"] = {step = "OT03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
 		{
 			id = "OT01",
+			completionCash = 275,
 			name = "Before You Leave",
 			kind = "delivery",
 			requires = {},
@@ -56,6 +71,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT02",
+			completionCash = 450,
 			name = "Know Your Ground",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
@@ -70,38 +86,22 @@ PLUGIN:Register("old-timer", {
 				cargo = "town_quest_notebook",
 				label = "Know Your Ground - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT03",
+			completionCash = 0,
 			name = "Something With Teeth",
 			kind = "tracker",
 			requires = {"OT02"},
 			briefing = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
 			completion = "You came back. Good. I'll let you buy a better knife. Don't mistake it for experience.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT04",
+			completionCash = 650,
 			name = "Bring Something Back",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Return it to this"
@@ -116,19 +116,11 @@ PLUGIN:Register("old-timer", {
 				cargo = "town_quest_diary",
 				label = "Bring Something Back - Scientist's Field Diary",
 			},
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT05",
+			completionCash = 575,
 			name = "A Place to Hide",
 			kind = "delivery",
 			requires = {"OT04"},
@@ -140,19 +132,11 @@ PLUGIN:Register("old-timer", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT06",
+			completionCash = 850,
 			name = "Ready Enough",
 			kind = "field",
 			objective = "Recover Small Yellow Transit Case from the assigned search area in Marsh. Return it to this"
@@ -184,25 +168,19 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT07",
+			completionCash = 0,
 			name = "Look After Your Kit",
 			kind = "tracker",
 			requires = {"OT05"},
 			briefing = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
 			completion = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT08",
+			capacity = {kind = "weight", amount = 1},
+			completionCash = 1050,
 			name = "Travel Light",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Marsh. Return it to this"
@@ -217,19 +195,11 @@ PLUGIN:Register("old-timer", {
 				cargo = "town_quest_equipment",
 				label = "Travel Light - Striped Equipment Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT09",
+			completionCash = 875,
 			name = "Bad Water",
 			kind = "delivery",
 			requires = {"OT07"},
@@ -241,19 +211,11 @@ PLUGIN:Register("old-timer", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT10",
+			completionCash = 1250,
 			name = "Enough for the Walk Home",
 			kind = "field",
 			objective = "Recover Small Yellow Transit Case from the assigned search area in Marsh. Return it to this"
@@ -268,38 +230,22 @@ PLUGIN:Register("old-timer", {
 				cargo = "town_quest_case",
 				label = "Enough for the Walk Home - Small Yellow Transit Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT11",
+			completionCash = 0,
 			name = "Old Habits",
 			kind = "tracker",
 			requires = {"OT09"},
 			briefing = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
 			completion = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT12",
+			completionCash = 1450,
 			name = "Keep Yourself Alive",
 			kind = "field",
 			objective = "Recover Worn Striped Equipment Case from the assigned search area in Marsh. Return it to"
@@ -327,6 +273,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT13",
+			completionCash = 1175,
 			name = "Tracks at the Fence",
 			kind = "delivery",
 			requires = {"OT11"},
@@ -338,19 +285,11 @@ PLUGIN:Register("old-timer", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT14",
+			completionCash = 1650,
 			name = "Thin the Pack",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
@@ -365,38 +304,23 @@ PLUGIN:Register("old-timer", {
 				cargo = "town_quest_notebook",
 				label = "Thin the Pack - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT15",
+			completionCash = 0,
 			name = "What They Leave Behind",
 			kind = "tracker",
 			requires = {"OT13"},
 			briefing = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
 			completion = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT16",
+			capacity = {kind = "weight", amount = 1},
+			completionCash = 1850,
 			name = "Not Normal Behaviour",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Marsh. Return it to this"
@@ -411,19 +335,11 @@ PLUGIN:Register("old-timer", {
 				cargo = "town_quest_tape",
 				label = "Not Normal Behaviour - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT17",
+			completionCash = 1475,
 			name = "The Empty Camp",
 			kind = "delivery",
 			requires = {"OT15"},
@@ -435,19 +351,11 @@ PLUGIN:Register("old-timer", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT18",
+			completionCash = 2050,
 			name = "Leave a Way Out",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Return it to this"
@@ -475,25 +383,18 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT19",
+			completionCash = 0,
 			name = "An Old Name",
 			kind = "tracker",
 			requires = {"OT17"},
 			briefing = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
 			completion = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT20",
+			completionCash = 2250,
 			name = "The Convoy That Never Arrived",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Deliver it to"
@@ -512,19 +413,11 @@ PLUGIN:Register("old-timer", {
 				label = "The Convoy That Never Arrived - Warehouse Packing List A",
 				recipient = "ledger",
 			},
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT21",
+			completionCash = 1775,
 			name = "Someone Kept Records",
 			kind = "delivery",
 			requires = {"OT19"},
@@ -536,19 +429,11 @@ PLUGIN:Register("old-timer", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT22",
+			completionCash = 2450,
 			name = "A Voice on Tape",
 			kind = "field",
 			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Waystation. Deliver it to"
@@ -564,38 +449,22 @@ PLUGIN:Register("old-timer", {
 				label = "A Voice on Tape - Blue-Label Audio Cassette",
 				recipient = "spool",
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT23",
+			completionCash = 0,
 			name = "What He Was Carrying",
 			kind = "tracker",
 			requires = {"OT21"},
 			briefing = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
 			completion = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT24",
+			completionCash = 2650,
 			name = "The Last Address",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Pripyat. Return it to this"
@@ -623,6 +492,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT25",
+			completionCash = 2000,
 			name = "Past the Turn Back Point",
 			kind = "delivery",
 			requires = {"OT23", "OT24"},
@@ -634,19 +504,11 @@ PLUGIN:Register("old-timer", {
 					quantity = 7,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT26",
+			completionCash = 2850,
 			name = "He Made It This Far",
 			kind = "field",
 			objective = "Recover Old Photograph Album from the assigned search area in Pripyat. Return it to this"
@@ -661,42 +523,22 @@ PLUGIN:Register("old-timer", {
 				cargo = "town_quest_photo",
 				label = "He Made It This Far - Old Photograph Album",
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "medic_bandage_1",
-				bonus = 2,
-			},
+			benefits = {},
 		},
 		{
 			id = "OT27",
+			completionCash = 0,
 			name = "Bring Him Home",
 			kind = "tracker",
 			requires = {"OT26"},
 			briefing = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
 			completion = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
 			target = 35,
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT28",
+			completionCash = 3000,
 			name = "Nothing Left Unsaid",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Pripyat. Return it to this"
@@ -711,16 +553,7 @@ PLUGIN:Register("old-timer", {
 				cargo = "town_quest_personnel",
 				label = "Nothing Left Unsaid - Personnel File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Old Timer's trusted contact",
 		},
 	},

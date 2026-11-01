@@ -25,9 +25,12 @@ PLUGIN:Register("intern", {
 		progressionPrompt = "What else needs doing?",
 		progression = "I've got supplies to collect and readings to check. I can show you what I still need.",
 	},
+	catalogue = {
+	},
 	progression = {
 		{
 			id = "IN01",
+			completionCash = 275,
 			name = "An Instrument of My Own",
 			kind = "delivery",
 			requires = {},
@@ -55,6 +58,7 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN02",
+			completionCash = 450,
 			name = "The Calibration Point",
 			kind = "field",
 			objective = "Deploy the recorder in Waystation, leave it to record, then retrieve Numbered Data Module"
@@ -69,19 +73,11 @@ PLUGIN:Register("intern", {
 				cargo = "town_quest_module",
 				label = "The Calibration Point - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN03",
+			completionCash = 0,
 			name = "Readings on Time",
 			kind = "tracker",
 			requires = {"IN02"},
@@ -91,19 +87,11 @@ PLUGIN:Register("intern", {
 			),
 			completion = "Those surveys have helped. I can account for the readings now.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN04",
+			completionCash = 650,
 			name = "The Mislabelled Sample",
 			kind = "field",
 			objective = "Recover Laboratory Log Folder from the assigned search area in Waystation. Return it to this"
@@ -118,19 +106,11 @@ PLUGIN:Register("intern", {
 				cargo = "town_quest_lab",
 				label = "The Mislabelled Sample - Laboratory Log Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN05",
+			completionCash = 575,
 			name = "Clean Containers",
 			kind = "delivery",
 			requires = {"IN03"},
@@ -145,19 +125,11 @@ PLUGIN:Register("intern", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN06",
+			completionCash = 850,
 			name = "Beanstalk's Control",
 			kind = "field",
 			objective = "Deploy the recorder in Garbage, leave it to record, then retrieve Numbered Data Module 0022."
@@ -189,6 +161,7 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN07",
+			completionCash = 0,
 			name = "Same Place Same Method",
 			kind = "tracker",
 			requires = {"IN05"},
@@ -198,19 +171,11 @@ PLUGIN:Register("intern", {
 			),
 			completion = "Those surveys have helped. I can account for the readings now.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN08",
+			completionCash = 1050,
 			name = "The Missing Interval",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Waystation. Deliver it"
@@ -226,19 +191,11 @@ PLUGIN:Register("intern", {
 				label = "The Missing Interval - Handwritten Audio Cassette",
 				recipient = "spool",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN09",
+			completionCash = 875,
 			name = "Something to Compare",
 			kind = "delivery",
 			requires = {"IN07"},
@@ -253,19 +210,11 @@ PLUGIN:Register("intern", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN10",
+			completionCash = 1250,
 			name = "The Senior's Notebook",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Waystation. Return it to"
@@ -280,19 +229,11 @@ PLUGIN:Register("intern", {
 				cargo = "town_quest_diary",
 				label = "The Senior's Notebook - Scientist's Field Diary",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN11",
+			completionCash = 0,
 			name = "A Wider Baseline",
 			kind = "tracker",
 			requires = {"IN09"},
@@ -302,19 +243,11 @@ PLUGIN:Register("intern", {
 			),
 			completion = "Those surveys have helped. I can account for the readings now.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN12",
+			completionCash = 1450,
 			name = "The Field Vesper Chose",
 			kind = "field",
 			objective = "Deploy the recorder in Waystation, leave it to record, then retrieve Numbered Data Module"
@@ -342,6 +275,7 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN13",
+			completionCash = 1175,
 			name = "Ready for the Distance",
 			kind = "delivery",
 			requires = {"IN11"},
@@ -356,19 +290,11 @@ PLUGIN:Register("intern", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN14",
+			completionCash = 1650,
 			name = "The Lost Calibration Case",
 			kind = "field",
 			objective = "Recover Marked Research Case from the assigned search area in Waystation. Deliver it to"
@@ -384,19 +310,11 @@ PLUGIN:Register("intern", {
 				label = "The Lost Calibration Case - Marked Research Case",
 				recipient = "technut",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN15",
+			completionCash = 0,
 			name = "My Own Figures",
 			kind = "tracker",
 			requires = {"IN13"},
@@ -406,19 +324,11 @@ PLUGIN:Register("intern", {
 			),
 			completion = "Those surveys have helped. I can account for the readings now.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN16",
+			completionCash = 1850,
 			name = "The First Pripyat Series",
 			kind = "field",
 			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0022."
@@ -433,19 +343,11 @@ PLUGIN:Register("intern", {
 				cargo = "town_quest_module2",
 				label = "The First Pripyat Series - Numbered Data Module 0022",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN17",
+			completionCash = 1475,
 			name = "Without Missing Pages",
 			kind = "delivery",
 			requires = {"IN15"},
@@ -460,19 +362,11 @@ PLUGIN:Register("intern", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN18",
+			completionCash = 2050,
 			name = "The Contradictory Site",
 			kind = "field",
 			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0013."
@@ -500,6 +394,7 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN19",
+			completionCash = 0,
 			name = "Enough to Stand Behind",
 			kind = "tracker",
 			requires = {"IN17"},
@@ -509,19 +404,11 @@ PLUGIN:Register("intern", {
 			),
 			completion = "Those surveys have helped. I can account for the readings now.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN20",
+			completionCash = 2250,
 			name = "The Earlier Team",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Deliver it to"
@@ -537,19 +424,11 @@ PLUGIN:Register("intern", {
 				label = "The Earlier Team - Handwritten Audio Cassette",
 				recipient = "wake",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN21",
+			completionCash = 1775,
 			name = "The Last Calibration",
 			kind = "delivery",
 			requires = {"IN19", "IN20"},
@@ -564,19 +443,11 @@ PLUGIN:Register("intern", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN22",
+			completionCash = 2450,
 			name = "The Independent Control",
 			kind = "field",
 			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0022."
@@ -591,23 +462,11 @@ PLUGIN:Register("intern", {
 				cargo = "town_quest_module2",
 				label = "The Independent Control - Numbered Data Module 0022",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
+			benefits = {},
 		},
 		{
 			id = "IN23",
+			completionCash = 0,
 			name = "Put My Name on It",
 			kind = "tracker",
 			requires = {"IN22"},
@@ -617,19 +476,11 @@ PLUGIN:Register("intern", {
 			),
 			completion = "Those surveys have helped. I can account for the readings now.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN24",
+			completionCash = 2650,
 			name = "The Missing Observation",
 			kind = "field",
 			objective = "Recover Laboratory Log Folder from the assigned search area in Waystation. Return it to this"

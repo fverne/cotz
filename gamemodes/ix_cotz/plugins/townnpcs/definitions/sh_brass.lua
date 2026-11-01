@@ -40,9 +40,160 @@ PLUGIN:Register("brass", {
 		progressionPrompt = "What else needs doing?",
 		progression = "We can count supplies here. Missing consignments need somebody to go and find the records.",
 	},
+	catalogue = {
+		["127x55"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["12gaugedt"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["12gaugesg"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["12gaugemg"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["12gaugetr"] = {step = "BR21",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["145x114"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["145x114ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["145x114hp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["22lrap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["22lrhp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["338lapua"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["338lapuaap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["338lapuahp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["357magnum"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["357magnumap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["357magnumhp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["44magnum"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["44magnumap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["44magnumhp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["45acp"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["45acpap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["45acphp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["45acp41"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["500magnum"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["500magnumap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["500magnumhp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["50ae"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["50aeap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["50aehp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["545x39"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["545x39ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["545x39hp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["556x45"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["556x45ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["556x45hp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["57x28"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["57x28ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["57x28hp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["700nitro"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x25"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x25ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x25hp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x39"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x39ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x39hp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x51"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x51ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x51hp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x54"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x54ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x54hp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["93x64"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["9x18ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["9x18hp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["9x19"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["9x19ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["9x19hp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["9x21"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["9x21ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["9x21hp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["9x39"] = {step = "BR03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["9x39ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["9x39hp"] = {step = "BR15",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["ithaca37"] = {step = "BR11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["lax410"] = {step = "BR11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["m3super90"] = {step = "BR11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mossberg500"] = {step = "BR11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mp153"] = {step = "BR11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["rem870ae"] = {step = "BR11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["saiga12"] = {step = "BR17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["saiga410"] = {step = "BR17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["stoegerdd"] = {step = "BR11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["striker"] = {step = "BR17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["toz34special"] = {step = "BR17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
 	progression = {
 		{
 			id = "BR01",
+			completionCash = 275,
 			name = "Count It Twice",
 			kind = "delivery",
 			requires = {},
@@ -67,6 +218,7 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR02",
+			completionCash = 450,
 			name = "The Broken Seal",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Return it to this"
@@ -81,38 +233,22 @@ PLUGIN:Register("brass", {
 				cargo = "town_quest_manifest",
 				label = "The Broken Seal - Warehouse Packing List A",
 			},
-			benefits = {
-				items = {
-					{
-						item = "9x18",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR03",
+			completionCash = 0,
 			name = "Reliable Quantities",
 			kind = "tracker",
 			requires = {"BR02"},
 			briefing = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
 			completion = "Your deliveries match the orders. That makes you easier to deal with than most.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "9x19",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR04",
+			completionCash = 650,
 			name = "The Missing Boxes",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Garbage. Return it to this"
@@ -127,19 +263,11 @@ PLUGIN:Register("brass", {
 				cargo = "town_quest_equipment",
 				label = "The Missing Boxes - Striped Equipment Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR05",
+			completionCash = 575,
 			name = "Another Chamber",
 			kind = "delivery",
 			requires = {"BR03"},
@@ -151,19 +279,11 @@ PLUGIN:Register("brass", {
 					quantity = 12,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR06",
+			completionCash = 850,
 			name = "The Depot Register",
 			kind = "field",
 			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
@@ -195,25 +315,18 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR07",
+			completionCash = 0,
 			name = "Not One Round Short",
 			kind = "tracker",
 			requires = {"BR05"},
 			briefing = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
 			completion = "Your deliveries match the orders. That makes you easier to deal with than most.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "9x19",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR08",
+			completionCash = 1050,
 			name = "The Mixed Shipment",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Return it to this"
@@ -228,19 +341,11 @@ PLUGIN:Register("brass", {
 				cargo = "town_quest_manifest",
 				label = "The Mixed Shipment - Warehouse Packing List A",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR09",
+			completionCash = 875,
 			name = "Shot and Shell",
 			kind = "delivery",
 			requires = {"BR07"},
@@ -252,19 +357,11 @@ PLUGIN:Register("brass", {
 					quantity = 24,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR10",
+			completionCash = 1250,
 			name = "The Supplier's Stamp",
 			kind = "field",
 			objective = "Recover Corporate Letter from the assigned search area in Garbage. Deliver it to 'Latch' in"
@@ -280,38 +377,22 @@ PLUGIN:Register("brass", {
 				label = "The Supplier's Stamp - Corporate Letter",
 				recipient = "latch",
 			},
-			benefits = {
-				items = {
-					{
-						item = "9x18",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR11",
+			completionCash = 0,
 			name = "Enough for the Shift",
 			kind = "tracker",
 			requires = {"BR09"},
 			briefing = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
 			completion = "Your deliveries match the orders. That makes you easier to deal with than most.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "9x19",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR12",
+			completionCash = 1450,
 			name = "Ledger's Missing Receipt",
 			kind = "field",
 			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Deliver it to"
@@ -340,6 +421,7 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR13",
+			completionCash = 1175,
 			name = "Rifle Stock",
 			kind = "delivery",
 			requires = {"BR11"},
@@ -351,19 +433,11 @@ PLUGIN:Register("brass", {
 					quantity = 24,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR14",
+			completionCash = 1650,
 			name = "The Military Manifest",
 			kind = "field",
 			objective = "Recover Military Records Folder II from the assigned search area in Waystation. Deliver it"
@@ -379,38 +453,22 @@ PLUGIN:Register("brass", {
 				label = "The Military Manifest - Military Records Folder II",
 				recipient = "quartermaster",
 			},
-			benefits = {
-				items = {
-					{
-						item = "9x18",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR15",
+			completionCash = 0,
 			name = "A Working Depot",
 			kind = "tracker",
 			requires = {"BR13"},
 			briefing = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
 			completion = "Your deliveries match the orders. That makes you easier to deal with than most.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "9x19",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR16",
+			completionCash = 1850,
 			name = "The Empty Truck",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
@@ -425,19 +483,11 @@ PLUGIN:Register("brass", {
 				cargo = "town_quest_tape",
 				label = "The Empty Truck - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR17",
+			completionCash = 1475,
 			name = "Specialist Loads",
 			kind = "delivery",
 			requires = {"BR15"},
@@ -449,19 +499,11 @@ PLUGIN:Register("brass", {
 					quantity = 36,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR18",
+			completionCash = 2050,
 			name = "The Pripyat Consignment",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
@@ -489,25 +531,18 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR19",
+			completionCash = 0,
 			name = "Supply Under Pressure",
 			kind = "tracker",
 			requires = {"BR17"},
 			briefing = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
 			completion = "Your deliveries match the orders. That makes you easier to deal with than most.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "9x19",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR20",
+			completionCash = 2250,
 			name = "The Wrong Recipient",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Pripyat. Deliver it to"
@@ -523,19 +558,11 @@ PLUGIN:Register("brass", {
 				label = "The Wrong Recipient - Official File Folder",
 				recipient = "ledger",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR21",
+			completionCash = 1775,
 			name = "Rounds in Reserve",
 			kind = "delivery",
 			requires = {"BR19", "BR20"},
@@ -547,19 +574,11 @@ PLUGIN:Register("brass", {
 					quantity = 36,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR22",
+			completionCash = 2450,
 			name = "The Final Receipt",
 			kind = "field",
 			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
@@ -574,42 +593,22 @@ PLUGIN:Register("brass", {
 				cargo = "town_quest_receipt",
 				label = "The Final Receipt - Warehouse Packing List B",
 			},
-			benefits = {
-				items = {
-					{
-						item = "9x18",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "12gauge",
-				bonus = 2,
-			},
+			benefits = {},
 		},
 		{
 			id = "BR23",
+			completionCash = 0,
 			name = "Every Box Accounted For",
 			kind = "tracker",
 			requires = {"BR22"},
 			briefing = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
 			completion = "Your deliveries match the orders. That makes you easier to deal with than most.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "9x19",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR24",
+			completionCash = 2650,
 			name = "The Depot's Copy",
 			kind = "field",
 			objective = "Recover Corporate Letter from the assigned search area in Garbage. Return it to this contact"

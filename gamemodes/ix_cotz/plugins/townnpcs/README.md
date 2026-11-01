@@ -167,3 +167,56 @@ hard electronics and research requests favour Pripyat. Pocket effects, insignia 
 can require human corpse loot; some technical/research records require hidden caches. Recovered
 medical stock, provisions and ordnance remain valuable objects with no implied consumable functionality.
 Acquisition frequency and the smaller payouts on cheap additions still need multiplayer playtesting.
+
+## Reward overhaul (November 2026)
+
+The [unlock ledger](../../../../docs/npc-overhaul/unlock-ledger.md) records current sellers,
+earned gates, master-branch price references, conversion unlocks, cash and capacity awards.
+Concrete contact files remain authoritative. Shared ammunition `unlockContact` allocations point to one canonical milestone. Medicine gates
+are keyed by seller, so completing one provider never unlocks medicine at another provider.
+Compilation rejects conflicting shared gates rather than depending on iteration order.
+
+All 130 gun definitions are accounted for: 122 purchase routes and eight reserved guns.
+Radsuits, Exoskeleton suits, Nosorog, the exoskeleton frame and the top three helmets are also
+excluded from progression purchases. The four most expensive backpacks on master are also
+reserved: backpack_4 and backpack_5 (20,000 each), backpack_4_large (32,500), and
+backpack_5_large (34,500). Themed and looted suits are excluded even if a saved vendor
+still lists them. Existing stock rows are retained; authoritative purchase checks enforce exclusion.
+Suit and gear chains follow master prices. Equal-price backpack alternatives use carrying capacity.
+Trenchcoat colours share one equivalent purchase tier. Variants require both base and exact variant conversion
+milestones; variants in the same family have separate milestones; existing conversion conversations enforce those checks on the server as well as previews.
+
+Medicine has independent local progressions at Jitters, Wake, Quartermaster and appropriate
+scientists, including local earlier-tier prerequisites. Ammunition and
+its variants share Brass's earned milestones at Quartermaster and, for hunting calibres, Spoor.
+Basic 12 gauge, .22 LR and 9x18 remain ungated. Variant ammunition progresses by master price within
+its family. Shared unlock permission does not waive NPC access or supply stock.
+
+Each step declares completionCash. Delivery payments range from 275 to 2,000 rubles; field payments
+from 450 to 3,000. Trackers and arena milestones pay zero extra cash. Gifts remain at introductory
+steps and every sixth step; selected stock benefits remain at steps 6 and 20. Only Jitters and
+Technut retain permanent service discounts (5%, replaced by 10%). These are initial tuning values,
+not measured effort equivalence; acquisition and economy playtesting remain necessary.
+
+Old Timer OT08/OT16 and Latch LA08/LA14/LA22 award +1 kg each (five total). Cleaner CL14 and
+Suture SU24 award one carried-inventory row each (two total). Capacity derives from current earned
+milestones, independently of equipment. Existing characters with those milestones receive capacity;
+no counter increments or inventory-item movement are required. Equipment slots resolve expanded
+public grid dimensions through character progression while keeping their reserved region intact.
+
+### Existing saves
+
+InitializeTownCharacter applies rewardVersion 2 once. Previously completed town nodes without an
+accrued cash ledger are marked paid so they do not retroactively mint new cash. Existing accrued
+hand-in credit, paid flags, assignments and pending item claims are preserved. Newly completed nodes
+use the new payments. Conversion and purchase gates use current earned milestones; existing owned
+items are not removed. No database reset or first-time setup is required.
+
+### Deferred mechanics
+
+As agreed, new travel passages, additional cosmetic skin services, storage expansion rewards,
+information archives, and new exchange offers are future mechanics. They are not displayed as
+functional milestone rewards in this release. See the [remaining reward work](../../../../docs/npc-overhaul/reward-followups.md).
+Restart all map servers together. Multiplayer verification must cover existing and fresh characters,
+shared vendors, conversions, expanded-grid sync/reconnect, weight enforcement, full inventories,
+and interrupted claims. Standalone specs cannot establish those runtime behaviours.

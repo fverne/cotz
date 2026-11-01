@@ -198,7 +198,7 @@ for item, gate in pairs(town.itemGates) do
 end
 local equipmentCount = 0
 for _ in pairs(town.itemGates) do equipmentCount = equipmentCount + 1 end
-check(equipmentCount == 210, "all current equipment allocations remain in contact catalogues")
+check(equipmentCount > 210, "expanded equipment allocations are present in contact catalogues")
 check(not town.legacy and not town.previousPrerequisites and not town.CanContinueLegacy,
 	"the town runtime has no migration or legacy compatibility layer")
 local currentMap = "rp_marsh_cs"
@@ -282,7 +282,7 @@ town:JobCompleted(hunter.client, "'Old Timer'", "cotz/town/old-timer/easy")
 local firstKnife = town:StepID("old-timer", "OT03")
 check(ix.progression.IsCompleted(hunter, firstKnife), "cumulative hunting checkpoint completes its active node")
 check(ix.progression.CanUseNPC(hunter, "'Haggler'"), "current milestone directly opens Haggler access")
-check(#ix.progression.GetLine(hunter, firstKnife).pendingRewards == 1, "full inventory keeps the earned fixed reward")
+check(#ix.progression.GetLine(hunter, firstKnife).pendingRewards == 0, "tracker does not duplicate job supplies")
 check(not town:CanAcceptJob(hunter, "'Old Timer'", ix.jobs.list["cotz/town/spoor/easy"]),
 	"another contact's job cannot be accepted through a forged identifier")
 check(not town:CanAcceptJob(hunter, "'Old Timer'", ix.jobs.list["cotz/town/old-timer/hard"]),
@@ -571,6 +571,8 @@ end
 check(included["definitions/sh_config.lua"] and included["definitions/sh_equipment.lua"], "shared configuration and equipment families are explicitly loaded")
 local notify, message = ix.progression.Notify
 ix.progression.Notify = function(_, _, text) message = text end
+ix.dialogue.notifyReputationReceive = function() end
+ix.dialogue.notifyMoneyReceive = function() end
 local quiet = character()
 town:InitializeTownCharacter(quiet)
 ix.progression.SetCompleted(quiet, town:StepID("old-timer", "OT19"))
@@ -589,5 +591,118 @@ for _, definition in pairs(ix.progression.definitions) do
 		check(count == #definition.stockUnlocks, "town stock rewards are described once")
 	end
 end
+
+-- Equipment dependencies must remain acyclic after crossing contact trees.
+local visiting, visited = {}, {}
+local function visit(id)
+	check(not visiting[id], "progression graph has no cycle at " .. id)
+	if visited[id] then return end
+	visiting[id] = true
+	for _, required in ipairs(ix.progression.definitions[id].prerequisites or {}) do visit(required) end
+	visiting[id], visited[id] = nil, true
+end
+for id in pairs(town.steps) do visit(id) end
+
+-- Reward overhaul: exhaustive acquisition coverage and shared, deterministic gates.
+local gunFiles = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items/newweapons"))
+local availableGuns, reservedGuns = 0, 0
+for path in gunFiles:lines() do
+	local itemID = path:match("/sh_([^/]+)%.lua$")
+	if town:IsPurchaseExcluded(itemID) then
+		reservedGuns = reservedGuns + 1
+	else
+		check(town.itemGates[itemID], "every non-reserved gun has a purchase route: " .. itemID)
+		availableGuns = availableGuns + 1
+	end
+end
+gunFiles:close()
+check(availableGuns == 122 and reservedGuns == 8, "all 130 guns are accounted for")
+for itemID, allocation in pairs(town.variantUnlocks) do
+	check(not town.itemGates[itemID], "variants cannot enter the purchase catalogue")
+	check(ix.progression.definitions[town:StepID(allocation.contact, allocation.step)],
+		"every conversion has a valid milestone")
+end
+local medkit = "medic_medkit_2"
+check(not town.contacts.wake.catalogue[medkit].unlockContact, "Wake's medicine has local progression")
+local shared = character()
+local jittersGate = town.itemGates[medkit].sellers["'Jitters'"].id
+local wakeGate = town.itemGates[medkit].sellers["'Wake'"].id
+local record = ix.progression.GetCharacterProgression(shared)
+record.lines[jittersGate] = {completed = true}
+ix.progression.SetCharacterProgression(shared, record)
+check(town:CanBuyItem(shared, medkit, "'Jitters'"), "Jitters recognises his own unlock")
+check(not town:CanBuyItem(shared, medkit, "'Wake'"), "Jitters cannot unlock Wake's medicine")
+local independent = character()
+local record = ix.progression.GetCharacterProgression(independent)
+record.lines[wakeGate] = {completed = true}
+ix.progression.SetCharacterProgression(independent, record)
+check(town:CanBuyItem(independent, medkit, "'Wake'"), "Wake can unlock medicine independently")
+check(not town:CanBuyItem(independent, medkit, "'Jitters'"), "Wake cannot unlock Jitters's medicine")
+for _, seller in ipairs({"'Jitters'", "'Wake'", "'Quartermaster'"}) do
+	local lower = town.itemGates.medic_medkit_1.sellers[seller]
+	local higher = town.itemGates.medic_medkit_2.sellers[seller]
+	local found = false
+	for _, id in ipairs(ix.progression.definitions[higher.id].prerequisites) do
+		if id == lower.id then found = true end
+	end
+	check(found, "each seller requires its own previous medkit tier")
+end
+for _, item in ipairs({"backpack_4", "backpack_5", "backpack_4_large", "backpack_5_large"}) do
+	check(town:IsPurchaseExcluded(item) and not town.itemGates[item], "top backpack is reserved: " .. item)
+end
+local carrying = character()
+local record = ix.progression.GetCharacterProgression(carrying)
+for id, step in pairs(town.steps) do
+	if step.capacity then record.lines[id] = {completed = true} end
+end
+ix.progression.SetCharacterProgression(carrying, record)
+check(town:GetCapacityBonus(carrying, "weight") == 5, "five small weight awards total five kilograms")
+check(town:GetCapacityBonus(carrying, "rows") == 2, "two separate inventory awards total two rows")
+check(town:GetCapacityBonus(character(), "rows") == 0, "capacity belongs to the character")
+local commissionReward = character()
+local id = town:StepID("ballast", "BA02")
+local record = ix.progression.GetCharacterProgression(commissionReward)
+record.lines[id] = {completed = true}
+ix.progression.SetCharacterProgression(commissionReward, record)
+ix.progression.PayCompletionRewards(commissionReward, id)
+local earned = commissionReward.money
+check(earned == town.steps[id].completionCash, "field commissions receive exactly their listed payment")
+ix.progression.PayCompletionRewards(commissionReward, id)
+check(commissionReward.money == earned, "completion payments cannot be replayed")
+local oldValue = ix.item.list.suit_sunrise_anarchist
+ix.item.list.suit_sunrise_anarchist = {baseSuit = "suit_sunrise"}
+check(town:IsPurchaseExcluded("suit_sunrise_anarchist"), "variants are blocked even at saved vendors")
+check(not town:CanChangeSuitVariant(character(), "suit_sunrise_anarchist"), "conversion requires earned progress")
+local variantOwner = character()
+local record = ix.progression.GetCharacterProgression(variantOwner)
+local variant = town.variantUnlocks.suit_sunrise_anarchist
+record.lines[town:StepID(variant.contact, variant.step)] = {completed = true}
+ix.progression.SetCharacterProgression(variantOwner, record)
+check(not town:CanChangeSuitVariant(variantOwner, "suit_sunrise_anarchist"), "variant cannot bypass its base suit")
+record.lines[town.itemGates.suit_sunrise.id] = {completed = true}
+ix.progression.SetCharacterProgression(variantOwner, record)
+check(town:CanChangeSuitVariant(variantOwner, "suit_sunrise_anarchist"), "base plus variant milestones allow conversion")
+local sibling = town.variantUnlocks.suit_sunrise_authority
+check(sibling.step ~= variant.step or sibling.contact ~= variant.contact,
+	"variants within a suit family have separate unlock milestones")
+local oldSibling = ix.item.list.suit_sunrise_authority
+ix.item.list.suit_sunrise_authority = {baseSuit = "suit_sunrise"}
+check(not town:CanChangeSuitVariant(variantOwner, "suit_sunrise_authority"),
+	"unlocking Anarchist conversion does not authorise Authority conversion")
+ix.item.list.suit_sunrise_authority = oldSibling
+ix.item.list.suit_sunrise_anarchist = oldValue
+
+local upgrading = character({townNPCProgression = {counts = {}, claims = {}, opponents = {}, pending = {}}})
+local record = ix.progression.GetCharacterProgression(upgrading)
+local oldCommission = town:StepID("ballast", "BA02")
+local oldHandIn = town:StepID("ballast", "BA01")
+record.lines[oldCommission] = {completed = true}
+record.lines[oldHandIn] = {completed = true, rewardCredit = {money = 9000, reputation = 0}}
+ix.progression.SetCharacterProgression(upgrading, record)
+town:InitializeTownCharacter(upgrading)
+check(upgrading:GetData("townNPCProgression").rewardVersion == 2, "existing saves migrate reward policy once")
+check(upgrading.money == 9000, "migration preserves accrued credit without retroactive commission cash")
+town:InitializeTownCharacter(upgrading)
+check(upgrading.money == 9000, "reconnect cannot repeat migrated rewards")
 
 print(string.format("PASS: %d town NPC checks", checks))

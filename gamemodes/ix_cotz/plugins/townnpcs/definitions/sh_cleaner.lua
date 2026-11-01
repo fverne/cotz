@@ -31,6 +31,7 @@ PLUGIN:Register("cleaner", {
 	progression = {
 		{
 			id = "CL01",
+			completionCash = 275,
 			name = "A Package That Stays Shut",
 			kind = "delivery",
 			requires = {},
@@ -55,6 +56,7 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL02",
+			completionCash = 450,
 			name = "The Unattended Drop",
 			kind = "field",
 			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Return it to this"
@@ -69,38 +71,22 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_evidence",
 				label = "The Unattended Drop - Orange Evidence Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL03",
+			completionCash = 0,
 			name = "On Time and Unopened",
 			kind = "tracker",
 			requires = {"CL02"},
 			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
 			completion = "The deliveries are counted. No need to tell me about them twice.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL04",
+			completionCash = 650,
 			name = "The Wrong Marker",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
@@ -115,19 +101,11 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_notebook",
 				label = "The Wrong Marker - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL05",
+			completionCash = 575,
 			name = "A Cleaner Way In",
 			kind = "delivery",
 			requires = {"CL04"},
@@ -139,19 +117,11 @@ PLUGIN:Register("cleaner", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL06",
+			completionCash = 850,
 			name = "An Empty Hiding Place",
 			kind = "field",
 			objective = "Recover Tagged Security Flash Drive from the assigned search area in Garbage. Return it to"
@@ -183,25 +153,18 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL07",
+			completionCash = 0,
 			name = "No Questions",
 			kind = "tracker",
 			requires = {"CL05"},
 			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
 			completion = "The deliveries are counted. No need to tell me about them twice.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL08",
+			completionCash = 1050,
 			name = "The Missing Runner",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
@@ -216,19 +179,11 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_tape",
 				label = "The Missing Runner - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL09",
+			completionCash = 875,
 			name = "Digging Deeper",
 			kind = "delivery",
 			requires = {"CL07"},
@@ -240,19 +195,11 @@ PLUGIN:Register("cleaner", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL10",
+			completionCash = 1250,
 			name = "The Buried Register",
 			kind = "field",
 			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
@@ -267,38 +214,22 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_receipt",
 				label = "The Buried Register - Warehouse Packing List B",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL11",
+			completionCash = 0,
 			name = "A Quiet Service",
 			kind = "tracker",
 			requires = {"CL09"},
 			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
 			completion = "The deliveries are counted. No need to tell me about them twice.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL12",
+			completionCash = 1450,
 			name = "The Duplicate Seal",
 			kind = "field",
 			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Return it to this"
@@ -326,6 +257,7 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL13",
+			completionCash = 1175,
 			name = "Safe and Dry",
 			kind = "delivery",
 			requires = {"CL11"},
@@ -337,19 +269,12 @@ PLUGIN:Register("cleaner", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL14",
+			capacity = {kind = "rows", amount = 1},
+			completionCash = 1650,
 			name = "Ledger's Missing Copy",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Deliver it to"
@@ -365,39 +290,22 @@ PLUGIN:Register("cleaner", {
 				label = "Ledger's Missing Copy - Warehouse Packing List A",
 				recipient = "ledger",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL15",
+			completionCash = 0,
 			name = "Across the Boundary",
 			kind = "tracker",
 			requires = {"CL13"},
 			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
 			completion = "The deliveries are counted. No need to tell me about them twice.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			discounts = {{npc = "'Cleaner'", service = "storage", fraction = 0.05}},
+			benefits = {},
 		},
 		{
 			id = "CL16",
+			completionCash = 1850,
 			name = "The False Destination",
 			kind = "field",
 			objective = "Recover Tagged Security Flash Drive from the assigned search area in Garbage. Deliver it to"
@@ -412,19 +320,11 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_security",
 				label = "The False Destination - Tagged Security Flash Drive",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL17",
+			completionCash = 1475,
 			name = "A Better Reserve",
 			kind = "delivery",
 			requires = {"CL15"},
@@ -436,19 +336,11 @@ PLUGIN:Register("cleaner", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL18",
+			completionCash = 2050,
 			name = "The Other Register",
 			kind = "field",
 			objective = "Recover Corporate Records Folder from the assigned search area in Waystation. Deliver it to"
@@ -477,25 +369,18 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL19",
+			completionCash = 0,
 			name = "Without a Trace",
 			kind = "tracker",
 			requires = {"CL17"},
 			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
 			completion = "The deliveries are counted. No need to tell me about them twice.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL20",
+			completionCash = 2250,
 			name = "The Unmanned Depot",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
@@ -510,19 +395,11 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_equipment",
 				label = "The Unmanned Depot - Striped Equipment Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL21",
+			completionCash = 1775,
 			name = "Nobody's Spare Key",
 			kind = "delivery",
 			requires = {"CL19"},
@@ -534,19 +411,11 @@ PLUGIN:Register("cleaner", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL22",
+			completionCash = 2450,
 			name = "A Cache With Two Owners",
 			kind = "field",
 			objective = "Recover Corporate Letter from the assigned search area in Pripyat. Return it to this contact"
@@ -561,38 +430,22 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_contract",
 				label = "A Cache With Two Owners - Corporate Letter",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL23",
+			completionCash = 0,
 			name = "The Last Circuit",
 			kind = "tracker",
 			requires = {"CL21"},
 			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
 			completion = "The deliveries are counted. No need to tell me about them twice.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL24",
+			completionCash = 2650,
 			name = "The Burned Address",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Pripyat. Return it to this"
@@ -620,6 +473,7 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL25",
+			completionCash = 2000,
 			name = "Room to Keep It",
 			kind = "delivery",
 			requires = {"CL23", "CL24"},
@@ -631,19 +485,11 @@ PLUGIN:Register("cleaner", {
 					quantity = 7,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL26",
+			completionCash = 2850,
 			name = "The Cache That Stayed Closed",
 			kind = "field",
 			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Deliver it to the"
@@ -658,42 +504,22 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_evidence",
 				label = "The Cache That Stayed Closed - Orange Evidence Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
+			benefits = {},
 		},
 		{
 			id = "CL27",
+			completionCash = 0,
 			name = "Trusted With the Route",
 			kind = "tracker",
 			requires = {"CL26"},
 			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
 			completion = "The deliveries are counted. No need to tell me about them twice.",
 			target = 35,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL28",
+			completionCash = 3000,
 			name = "No More Missing Parcels",
 			kind = "field",
 			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
@@ -708,16 +534,7 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_receipt",
 				label = "No More Missing Parcels - Warehouse Packing List B",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Cleaner's trusted contact",
 		},
 	},

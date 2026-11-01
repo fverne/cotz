@@ -41,9 +41,12 @@ PLUGIN:Register("the-original", {
 		progressionPrompt = "What else needs doing?",
 		progression = "There are a few things I'd like to compare with what I remember. You can help with that.",
 	},
+	catalogue = {
+	},
 	progression = {
 		{
 			id = "OR01",
+			completionCash = 275,
 			name = "A Familiar Beast",
 			kind = "delivery",
 			requires = {},
@@ -68,6 +71,7 @@ PLUGIN:Register("the-original", {
 		},
 		{
 			id = "OR02",
+			completionCash = 450,
 			name = "Where It Fed",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
@@ -82,38 +86,22 @@ PLUGIN:Register("the-original", {
 				cargo = "town_quest_notebook",
 				label = "Where It Fed - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR03",
+			completionCash = 0,
 			name = "Proof in the Bag",
 			kind = "tracker",
 			requires = {"OR02"},
 			briefing = "Mutant parts. Not just the impressive ones. Small changes tell you a great deal.",
 			completion = "You've brought enough specimens for a useful comparison. Keep looking at the small details.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR04",
+			completionCash = 650,
 			name = "The First Account",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Return it to this"
@@ -128,19 +116,11 @@ PLUGIN:Register("the-original", {
 				cargo = "town_quest_diary",
 				label = "The First Account - Scientist's Field Diary",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR05",
+			completionCash = 575,
 			name = "Teeth and Hide",
 			kind = "delivery",
 			requires = {"OR04"},
@@ -152,19 +132,11 @@ PLUGIN:Register("the-original", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR06",
+			completionCash = 850,
 			name = "The Wrong Tracks",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Marsh. Return it to this"
@@ -196,25 +168,18 @@ PLUGIN:Register("the-original", {
 		},
 		{
 			id = "OR07",
+			completionCash = 0,
 			name = "Different Quarry",
 			kind = "tracker",
 			requires = {"OR05"},
 			briefing = "Mutant parts. Not just the impressive ones. Small changes tell you a great deal.",
 			completion = "You've brought enough specimens for a useful comparison. Keep looking at the small details.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR08",
+			completionCash = 1050,
 			name = "The Scarred Tree",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
@@ -229,19 +194,11 @@ PLUGIN:Register("the-original", {
 				cargo = "town_quest_notebook",
 				label = "The Scarred Tree - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR09",
+			completionCash = 875,
 			name = "What Changed",
 			kind = "delivery",
 			requires = {"OR07"},
@@ -253,19 +210,11 @@ PLUGIN:Register("the-original", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR10",
+			completionCash = 1250,
 			name = "A Story With Dates",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Deliver it to"
@@ -281,38 +230,22 @@ PLUGIN:Register("the-original", {
 				label = "A Story With Dates - Scientist's Field Diary",
 				recipient = "carbon",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR11",
+			completionCash = 0,
 			name = "Enough to Compare",
 			kind = "tracker",
 			requires = {"OR09"},
 			briefing = "Mutant parts. Not just the impressive ones. Small changes tell you a great deal.",
 			completion = "You've brought enough specimens for a useful comparison. Keep looking at the small details.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR12",
+			completionCash = 1450,
 			name = "The Second Witness",
 			kind = "field",
 			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Marsh. Return it to this"
@@ -340,6 +273,7 @@ PLUGIN:Register("the-original", {
 		},
 		{
 			id = "OR13",
+			completionCash = 1175,
 			name = "Old Wounds",
 			kind = "delivery",
 			requires = {"OR11"},
@@ -351,19 +285,11 @@ PLUGIN:Register("the-original", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR14",
+			completionCash = 1650,
 			name = "The Camp Before This One",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Waystation. Return it to this"
@@ -378,38 +304,22 @@ PLUGIN:Register("the-original", {
 				cargo = "town_quest_notebook",
 				label = "The Camp Before This One - Tied Leather Journal",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR15",
+			completionCash = 0,
 			name = "A Hunter's Patience",
 			kind = "tracker",
 			requires = {"OR13"},
 			briefing = "Mutant parts. Not just the impressive ones. Small changes tell you a great deal.",
 			completion = "You've brought enough specimens for a useful comparison. Keep looking at the small details.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR16",
+			completionCash = 1850,
 			name = "The Name He Forgot",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Return it to this"
@@ -424,19 +334,11 @@ PLUGIN:Register("the-original", {
 				cargo = "town_quest_diary",
 				label = "The Name He Forgot - Scientist's Field Diary",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR17",
+			completionCash = 1475,
 			name = "A Different Kind of Proof",
 			kind = "delivery",
 			requires = {"OR15"},
@@ -448,19 +350,11 @@ PLUGIN:Register("the-original", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR18",
+			completionCash = 2050,
 			name = "The Route He Remembers",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Pripyat. Deliver it to 'Atlas'"
@@ -489,25 +383,18 @@ PLUGIN:Register("the-original", {
 		},
 		{
 			id = "OR19",
+			completionCash = 0,
 			name = "The Worst of It",
 			kind = "tracker",
 			requires = {"OR17"},
 			briefing = "Mutant parts. Not just the impressive ones. Small changes tell you a great deal.",
 			completion = "You've brought enough specimens for a useful comparison. Keep looking at the small details.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR20",
+			completionCash = 2250,
 			name = "Under the Old Mark",
 			kind = "field",
 			objective = "Recover Orange Evidence Case from the assigned search area in Pripyat. Return it to this"
@@ -522,19 +409,11 @@ PLUGIN:Register("the-original", {
 				cargo = "town_quest_evidence",
 				label = "Under the Old Mark - Orange Evidence Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR21",
+			completionCash = 1775,
 			name = "No Two Alike",
 			kind = "delivery",
 			requires = {"OR19", "OR20"},
@@ -546,19 +425,11 @@ PLUGIN:Register("the-original", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR22",
+			completionCash = 2450,
 			name = "The Place in the Story",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Return it to"
@@ -573,42 +444,22 @@ PLUGIN:Register("the-original", {
 				cargo = "town_quest_tape",
 				label = "The Place in the Story - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
+			benefits = {},
 		},
 		{
 			id = "OR23",
+			completionCash = 0,
 			name = "First Does Not Mean Last",
 			kind = "tracker",
 			requires = {"OR22"},
 			briefing = "Mutant parts. Not just the impressive ones. Small changes tell you a great deal.",
 			completion = "You've brought enough specimens for a useful comparison. Keep looking at the small details.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR24",
+			completionCash = 2650,
 			name = "What Actually Happened",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"

@@ -28,9 +28,12 @@ PLUGIN:Register("ledger", {
 			.. "parcel."
 		),
 	},
+	catalogue = {
+	},
 	progression = {
 		{
 			id = "LE01",
+			completionCash = 275,
 			name = "Labels That Last",
 			kind = "delivery",
 			requires = {},
@@ -55,6 +58,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE02",
+			completionCash = 450,
 			name = "The First Route",
 			kind = "field",
 			objective = "Recover Small Yellow Transit Case from the assigned search area in Waystation. Deliver it to"
@@ -69,19 +73,11 @@ PLUGIN:Register("ledger", {
 				cargo = "town_quest_case",
 				label = "The First Route - Small Yellow Transit Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE03",
+			completionCash = 0,
 			name = "Delivered Intact",
 			kind = "tracker",
 			requires = {"LE02"},
@@ -91,19 +87,11 @@ PLUGIN:Register("ledger", {
 			),
 			completion = "The completed deliveries are on the record. You've been consistent.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE04",
+			completionCash = 650,
 			name = "The Missing Receipt",
 			kind = "field",
 			objective = "Recover Warehouse Packing List B from the assigned search area in Waystation. Return it to"
@@ -118,19 +106,11 @@ PLUGIN:Register("ledger", {
 				cargo = "town_quest_receipt",
 				label = "The Missing Receipt - Warehouse Packing List B",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE05",
+			completionCash = 575,
 			name = "Stock for the Road",
 			kind = "delivery",
 			requires = {"LE03"},
@@ -142,19 +122,11 @@ PLUGIN:Register("ledger", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE06",
+			completionCash = 850,
 			name = "Ballast's Landing Copy",
 			kind = "field",
 			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
@@ -187,6 +159,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE07",
+			completionCash = 0,
 			name = "On Both Sides",
 			kind = "tracker",
 			requires = {"LE05"},
@@ -196,19 +169,11 @@ PLUGIN:Register("ledger", {
 			),
 			completion = "The completed deliveries are on the record. You've been consistent.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE08",
+			completionCash = 1050,
 			name = "The Interrupted Connection",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Garbage. Deliver it to"
@@ -224,19 +189,11 @@ PLUGIN:Register("ledger", {
 				label = "The Interrupted Connection - Striped Equipment Case",
 				recipient = "cleaner",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE09",
+			completionCash = 875,
 			name = "Paperwork That Matches",
 			kind = "delivery",
 			requires = {"LE07"},
@@ -248,19 +205,11 @@ PLUGIN:Register("ledger", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE10",
+			completionCash = 1250,
 			name = "The Duplicate Destination",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Waystation. Return it to this"
@@ -275,19 +224,11 @@ PLUGIN:Register("ledger", {
 				cargo = "town_quest_official",
 				label = "The Duplicate Destination - Official File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE11",
+			completionCash = 0,
 			name = "More Than Local",
 			kind = "tracker",
 			requires = {"LE09"},
@@ -297,19 +238,11 @@ PLUGIN:Register("ledger", {
 			),
 			completion = "The completed deliveries are on the record. You've been consistent.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE12",
+			completionCash = 1450,
 			name = "The Missing Dispatcher",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Waystation. Return it to"
@@ -337,6 +270,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE13",
+			completionCash = 1175,
 			name = "For the Remote Cache",
 			kind = "delivery",
 			requires = {"LE11"},
@@ -348,19 +282,11 @@ PLUGIN:Register("ledger", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE14",
+			completionCash = 1650,
 			name = "The Last Scheduled Drop",
 			kind = "field",
 			objective = "Recover Orange Evidence Case from the assigned search area in Waystation. Deliver it to the"
@@ -375,19 +301,11 @@ PLUGIN:Register("ledger", {
 				cargo = "town_quest_evidence",
 				label = "The Last Scheduled Drop - Orange Evidence Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE15",
+			completionCash = 0,
 			name = "A Dependable Circuit",
 			kind = "tracker",
 			requires = {"LE13"},
@@ -397,19 +315,11 @@ PLUGIN:Register("ledger", {
 			),
 			completion = "The completed deliveries are on the record. You've been consistent.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE16",
+			completionCash = 1850,
 			name = "The Unmanned Pripyat Cache",
 			kind = "field",
 			objective = "Recover Marked Research Case from the assigned search area in Pripyat. Deliver it to the"
@@ -424,19 +334,11 @@ PLUGIN:Register("ledger", {
 				cargo = "town_quest_research",
 				label = "The Unmanned Pripyat Cache - Marked Research Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE17",
+			completionCash = 1475,
 			name = "Proof on Paper",
 			kind = "delivery",
 			requires = {"LE15"},
@@ -448,19 +350,11 @@ PLUGIN:Register("ledger", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE18",
+			completionCash = 2050,
 			name = "The Dispatcher's Detour",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Return it to"
@@ -488,6 +382,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE19",
+			completionCash = 0,
 			name = "The Route Holds",
 			kind = "tracker",
 			requires = {"LE17", "LE18"},
@@ -497,19 +392,11 @@ PLUGIN:Register("ledger", {
 			),
 			completion = "The completed deliveries are on the record. You've been consistent.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE20",
+			completionCash = 2250,
 			name = "The Return Consignment",
 			kind = "field",
 			objective = "Recover Small Yellow Transit Case from the assigned search area in Pripyat. Deliver it to"
@@ -524,16 +411,7 @@ PLUGIN:Register("ledger", {
 				cargo = "town_quest_case",
 				label = "The Return Consignment - Small Yellow Transit Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "drink_bottlewater",
 				bonus = 2,
@@ -541,6 +419,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE21",
+			completionCash = 1775,
 			name = "The Next Shipment",
 			kind = "delivery",
 			requires = {"LE20"},
@@ -552,19 +431,11 @@ PLUGIN:Register("ledger", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE22",
+			completionCash = 2450,
 			name = "The Last Receipt",
 			kind = "field",
 			objective = "Recover Warehouse Packing List B from the assigned search area in Waystation. Return it to"
@@ -579,16 +450,7 @@ PLUGIN:Register("ledger", {
 				cargo = "town_quest_receipt",
 				label = "The Last Receipt - Warehouse Packing List B",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Ledger's trusted contact",
 		},
 	},

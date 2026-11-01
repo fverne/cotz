@@ -50,6 +50,10 @@ PLUGIN:Register("egghead", {
 		),
 	},
 	catalogue = {
+		["medic_psyheal_1"] = {step = "EG01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["medic_antipsychotic_1"] = {step = "EG07",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 		["accesscard_laboratory"] = {step = "EG01",
 			terms = {nil, 5, "SELLANDBUY", 5, 1, 5}},
 		["detectorbear"] = {step = "EG11",
@@ -72,16 +76,15 @@ PLUGIN:Register("egghead", {
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["quest_computeraccess"] = {step = "EG01",
 			terms = {nil, 5, "SELLANDBUY", 5, 1, 5}},
-		["suit_seva"] = {step = "EG07",
+		["suit_seva"] = {step = "EG19",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_ssp99"] = {step = "EG03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_ssp99m"] = {step = "EG05",
+		["suit_ssp99m"] = {step = "EG17",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
 		{
 			id = "EG01",
+			completionCash = 275,
 			name = "A First Reference",
 			kind = "delivery",
 			requires = {},
@@ -106,6 +109,7 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG02",
+			completionCash = 450,
 			name = "The Control Notebook",
 			kind = "field",
 			objective = "Recover Scientist's Field Diary from the assigned search area in Waystation. Return it to"
@@ -120,38 +124,22 @@ PLUGIN:Register("egghead", {
 				cargo = "town_quest_diary",
 				label = "The Control Notebook - Scientist's Field Diary",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG03",
+			completionCash = 0,
 			name = "A Useful Assistant",
 			kind = "tracker",
 			requires = {"EG02"},
 			briefing = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
 			completion = "You've brought enough specimens for a useful comparison. Thank you for keeping at it.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG04",
+			completionCash = 650,
 			name = "The Old Field Station",
 			kind = "field",
 			objective = "Recover Marked Research Case from the assigned search area in Waystation. Return it to this"
@@ -166,19 +154,11 @@ PLUGIN:Register("egghead", {
 				cargo = "town_quest_research",
 				label = "The Old Field Station - Marked Research Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG05",
+			completionCash = 575,
 			name = "Different Origins",
 			kind = "delivery",
 			requires = {"EG04"},
@@ -190,19 +170,11 @@ PLUGIN:Register("egghead", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG06",
+			completionCash = 850,
 			name = "The Comparison Site",
 			kind = "field",
 			objective = "Deploy the recorder in Waystation, leave it to record, then retrieve Numbered Data Module"
@@ -234,25 +206,18 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG07",
+			completionCash = 0,
 			name = "An Orderly Collection",
 			kind = "tracker",
 			requires = {"EG05"},
 			briefing = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
 			completion = "You've brought enough specimens for a useful comparison. Thank you for keeping at it.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG08",
+			completionCash = 1050,
 			name = "The Missing Calibration",
 			kind = "field",
 			objective = "Recover Laboratory Log Folder from the assigned search area in Garbage. Return it to this"
@@ -267,19 +232,11 @@ PLUGIN:Register("egghead", {
 				cargo = "town_quest_lab",
 				label = "The Missing Calibration - Laboratory Log Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG09",
+			completionCash = 875,
 			name = "A Reliable Reading",
 			kind = "delivery",
 			requires = {"EG07"},
@@ -291,19 +248,11 @@ PLUGIN:Register("egghead", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG10",
+			completionCash = 1250,
 			name = "The Failed Trial",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0022 from the assigned search area in Waystation. Return it to"
@@ -318,38 +267,22 @@ PLUGIN:Register("egghead", {
 				cargo = "town_quest_module2",
 				label = "The Failed Trial - Numbered Data Module 0022",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG11",
+			completionCash = 0,
 			name = "A Better Instrument",
 			kind = "tracker",
 			requires = {"EG09"},
 			briefing = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
 			completion = "You've brought enough specimens for a useful comparison. Thank you for keeping at it.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG12",
+			completionCash = 1450,
 			name = "The Paired Samples",
 			kind = "field",
 			objective = "Recover Laboratory Log Folder from the assigned search area in Waystation. Return it to this"
@@ -377,6 +310,7 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG13",
+			completionCash = 1175,
 			name = "Protection for the Work",
 			kind = "delivery",
 			requires = {"EG11"},
@@ -388,19 +322,11 @@ PLUGIN:Register("egghead", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG14",
+			completionCash = 1650,
 			name = "Beanstalk's Objection",
 			kind = "field",
 			objective = "Recover Clinical Records Folder I from the assigned search area in Garbage. Deliver it to"
@@ -416,38 +342,22 @@ PLUGIN:Register("egghead", {
 				label = "Beanstalk's Objection - Clinical Records Folder I",
 				recipient = "vesper",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG15",
+			completionCash = 0,
 			name = "A Collection With Context",
 			kind = "tracker",
 			requires = {"EG13"},
 			briefing = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
 			completion = "You've brought enough specimens for a useful comparison. Thank you for keeping at it.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG16",
+			completionCash = 1850,
 			name = "The Archived Finding",
 			kind = "field",
 			objective = "Recover Blue Research Dossier from the assigned search area in Waystation. Deliver it to"
@@ -463,19 +373,11 @@ PLUGIN:Register("egghead", {
 				label = "The Archived Finding - Blue Research Dossier",
 				recipient = "carbon",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG17",
+			completionCash = 1475,
 			name = "Before Pripyat",
 			kind = "delivery",
 			requires = {"EG15"},
@@ -487,19 +389,11 @@ PLUGIN:Register("egghead", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG18",
+			completionCash = 2050,
 			name = "The Pripyat Baseline",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0013 from the assigned search area in Pripyat. Return it to"
@@ -527,25 +421,18 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG19",
+			completionCash = 0,
 			name = "Results That Repeat",
 			kind = "tracker",
 			requires = {"EG17"},
 			briefing = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
 			completion = "You've brought enough specimens for a useful comparison. Thank you for keeping at it.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG20",
+			completionCash = 2250,
 			name = "The Unfinished Experiment",
 			kind = "field",
 			objective = "Recover Marked Research Case from the assigned search area in Pripyat. Return it to this"
@@ -560,19 +447,11 @@ PLUGIN:Register("egghead", {
 				cargo = "town_quest_research",
 				label = "The Unfinished Experiment - Marked Research Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG21",
+			completionCash = 1775,
 			name = "Precision at Last",
 			kind = "delivery",
 			requires = {"EG19", "EG20"},
@@ -584,19 +463,11 @@ PLUGIN:Register("egghead", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG22",
+			completionCash = 2450,
 			name = "The Family Resemblance",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0022 from the assigned search area in Pripyat. Return it to"
@@ -611,38 +482,22 @@ PLUGIN:Register("egghead", {
 				cargo = "town_quest_module2",
 				label = "The Family Resemblance - Numbered Data Module 0022",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG23",
+			completionCash = 0,
 			name = "A Complete Reference",
 			kind = "tracker",
 			requires = {"EG22"},
 			briefing = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
 			completion = "You've brought enough specimens for a useful comparison. Thank you for keeping at it.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG24",
+			completionCash = 2650,
 			name = "The Programme's Missing Page",
 			kind = "field",
 			objective = "Recover Corporate Records Folder from the assigned search area in Waystation. Deliver it to"
@@ -668,13 +523,10 @@ PLUGIN:Register("egghead", {
 					},
 				},
 			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
 		},
 		{
 			id = "EG25",
+			completionCash = 2000,
 			name = "Preserve the Findings",
 			kind = "delivery",
 			requires = {"EG24"},
@@ -686,19 +538,11 @@ PLUGIN:Register("egghead", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG26",
+			completionCash = 2850,
 			name = "The Last Control Record",
 			kind = "field",
 			objective = "Recover Laboratory Log Folder from the assigned search area in Waystation. Return it to this"
@@ -713,16 +557,7 @@ PLUGIN:Register("egghead", {
 				cargo = "town_quest_lab",
 				label = "The Last Control Record - Laboratory Log Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Egghead's trusted contact",
 		},
 	},

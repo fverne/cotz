@@ -28,9 +28,36 @@ PLUGIN:Register("beanstalk", {
 			.. "trust the result."
 		),
 	},
+	catalogue = {
+		["medic_psyheal_1"] = {step = "BN01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["medic_antipsychotic_1"] = {step = "BN07",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["medic_antipsychotic_2"] = {step = "BN09",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_antipsychotic_3"] = {step = "BN13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_psyheal_2"] = {step = "BN03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_stimpak_1"] = {step = "BN07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_stimpak_2"] = {step = "BN11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_stimpak_3"] = {step = "BN15",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_eo20"] = {step = "BN09",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_pmk3"] = {step = "BN11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["suit_nbc"] = {step = "BN14",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["suit_ssp99"] = {step = "BN10",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
 	progression = {
 		{
 			id = "BN01",
+			completionCash = 275,
 			name = "A Station in the Dust",
 			kind = "delivery",
 			requires = {},
@@ -55,6 +82,7 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN02",
+			completionCash = 450,
 			name = "The First Baseline",
 			kind = "field",
 			objective = (
@@ -69,19 +97,11 @@ PLUGIN:Register("beanstalk", {
 				map = "mz_garbage",
 				tier = 1,
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN03",
+			completionCash = 0,
 			name = "Results That Survive",
 			kind = "tracker",
 			requires = {"BN02"},
@@ -91,19 +111,11 @@ PLUGIN:Register("beanstalk", {
 			),
 			completion = "You've brought back a useful set of results. Please keep using the same care.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN04",
+			completionCash = 650,
 			name = "The Buried Meter",
 			kind = "field",
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Garbage. Return it to this"
@@ -118,19 +130,11 @@ PLUGIN:Register("beanstalk", {
 				cargo = "town_quest_control",
 				label = "The Buried Meter - Red-Trimmed Control Unit",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN05",
+			completionCash = 575,
 			name = "Keeping It Sealed",
 			kind = "delivery",
 			requires = {"BN03"},
@@ -142,19 +146,11 @@ PLUGIN:Register("beanstalk", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN06",
+			completionCash = 850,
 			name = "Two Sides of the Heap",
 			kind = "field",
 			objective = "Recover Laboratory Log Folder from the assigned search area in Garbage. Return it to this"
@@ -186,6 +182,7 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN07",
+			completionCash = 0,
 			name = "A Consistent Sample",
 			kind = "tracker",
 			requires = {"BN05"},
@@ -195,19 +192,11 @@ PLUGIN:Register("beanstalk", {
 			),
 			completion = "You've brought back a useful set of results. Please keep using the same care.",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN08",
+			completionCash = 1050,
 			name = "Vesper's Reading",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0013 from the assigned search area in Garbage. Deliver it to"
@@ -223,19 +212,11 @@ PLUGIN:Register("beanstalk", {
 				label = "Vesper's Reading - Numbered Data Module 0013",
 				recipient = "vesper",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN09",
+			completionCash = 875,
 			name = "Clean Instruments",
 			kind = "delivery",
 			requires = {"BN07"},
@@ -247,19 +228,11 @@ PLUGIN:Register("beanstalk", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN10",
+			completionCash = 1250,
 			name = "The Control Site",
 			kind = "field",
 			objective = (
@@ -274,19 +247,11 @@ PLUGIN:Register("beanstalk", {
 				map = "mz_garbage",
 				tier = 2,
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN11",
+			completionCash = 0,
 			name = "Enough to Compare",
 			kind = "tracker",
 			requires = {"BN09"},
@@ -296,19 +261,11 @@ PLUGIN:Register("beanstalk", {
 			),
 			completion = "You've brought back a useful set of results. Please keep using the same care.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN12",
+			completionCash = 1450,
 			name = "The Dirty Filter",
 			kind = "field",
 			objective = "Recover Clinical Records Folder I from the assigned search area in Garbage. Return it to"
@@ -336,6 +293,7 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN13",
+			completionCash = 1175,
 			name = "A Field Lab in Reserve",
 			kind = "delivery",
 			requires = {"BN11"},
@@ -347,19 +305,11 @@ PLUGIN:Register("beanstalk", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN14",
+			completionCash = 1650,
 			name = "Beyond the Dumps",
 			kind = "field",
 			objective = (
@@ -374,19 +324,11 @@ PLUGIN:Register("beanstalk", {
 				map = "mz_garbage",
 				tier = 2,
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN15",
+			completionCash = 0,
 			name = "Work Under Pressure",
 			kind = "tracker",
 			requires = {"BN13"},
@@ -396,19 +338,11 @@ PLUGIN:Register("beanstalk", {
 			),
 			completion = "You've brought back a useful set of results. Please keep using the same care.",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN16",
+			completionCash = 1850,
 			name = "The Contradictory Result",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0022 from the assigned search area in Waystation. Deliver it to"
@@ -424,19 +358,11 @@ PLUGIN:Register("beanstalk", {
 				label = "The Contradictory Result - Numbered Data Module 0022",
 				recipient = "vesper",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN17",
+			completionCash = 1475,
 			name = "Preparing the Comparison",
 			kind = "delivery",
 			requires = {"BN15"},
@@ -448,19 +374,11 @@ PLUGIN:Register("beanstalk", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN18",
+			completionCash = 2050,
 			name = "Pripyat Baseline",
 			kind = "field",
 			objective = (
@@ -488,6 +406,7 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN19",
+			completionCash = 0,
 			name = "Holding the Site",
 			kind = "tracker",
 			requires = {"BN17", "BN18"},
@@ -497,19 +416,11 @@ PLUGIN:Register("beanstalk", {
 			),
 			completion = "You've brought back a useful set of results. Please keep using the same care.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN20",
+			completionCash = 2250,
 			name = "The Abandoned Station",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Return it to"
@@ -524,19 +435,11 @@ PLUGIN:Register("beanstalk", {
 				cargo = "town_quest_tape",
 				label = "The Abandoned Station - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN21",
+			completionCash = 1775,
 			name = "A Clean Comparison",
 			kind = "delivery",
 			requires = {"BN20"},
@@ -548,19 +451,11 @@ PLUGIN:Register("beanstalk", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN22",
+			completionCash = 2450,
 			name = "The Last Control",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0013 from the assigned search area in Pripyat. Return it to"
@@ -575,23 +470,11 @@ PLUGIN:Register("beanstalk", {
 				cargo = "town_quest_module",
 				label = "The Last Control - Numbered Data Module 0013",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
+			benefits = {},
 		},
 		{
 			id = "BN23",
+			completionCash = 0,
 			name = "Findings Worth Keeping",
 			kind = "tracker",
 			requires = {"BN22"},
@@ -601,19 +484,11 @@ PLUGIN:Register("beanstalk", {
 			),
 			completion = "You've brought back a useful set of results. Please keep using the same care.",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN24",
+			completionCash = 2650,
 			name = "A Result They Both Accept",
 			kind = "field",
 			objective = "Recover Laboratory Log Folder from the assigned search area in Garbage. Deliver it to"

@@ -28,9 +28,32 @@ PLUGIN:Register("wake", {
 			.. "too."
 		),
 	},
+	catalogue = {
+		["medic_antirad_1"] = {step = "WA09",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_antirad_2"] = {step = "WA21",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_bandage_2"] = {step = "WA05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_bandage_3"] = {step = "WA13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_medkit_1"] = {step = "WA07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_medkit_2"] = {step = "WA11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_medkit_3"] = {step = "WA15",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_medkit_4"] = {step = "WA17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_medkit_5"] = {step = "WA19",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_medkit_6"] = {step = "WA22",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+	},
 	progression = {
 		{
 			id = "WA01",
+			completionCash = 275,
 			name = "Names Before Numbers",
 			kind = "delivery",
 			requires = {},
@@ -55,6 +78,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA02",
+			completionCash = 450,
 			name = "The Unmarked Camp",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Garbage. Return it to this"
@@ -69,19 +93,11 @@ PLUGIN:Register("wake", {
 				cargo = "town_quest_personnel",
 				label = "The Unmarked Camp - Personnel File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA03",
+			completionCash = 0,
 			name = "Someone Goes Looking",
 			kind = "tracker",
 			requires = {"WA02"},
@@ -91,19 +107,11 @@ PLUGIN:Register("wake", {
 			),
 			completion = "You've brought back cases that would otherwise still be out there. I appreciate that.",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA04",
+			completionCash = 650,
 			name = "The Name on the Strap",
 			kind = "field",
 			objective = "Recover Old Photograph Album from the assigned search area in Garbage. Return it to this"
@@ -118,19 +126,11 @@ PLUGIN:Register("wake", {
 				cargo = "town_quest_photo",
 				label = "The Name on the Strap - Old Photograph Album",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA05",
+			completionCash = 575,
 			name = "A Searcher's Kit",
 			kind = "delivery",
 			requires = {"WA04"},
@@ -142,19 +142,11 @@ PLUGIN:Register("wake", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA06",
+			completionCash = 850,
 			name = "The Convoy List",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Garbage. Deliver it to"
@@ -187,6 +179,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA07",
+			completionCash = 0,
 			name = "Bring Back What You Can",
 			kind = "tracker",
 			requires = {"WA05"},
@@ -196,18 +189,11 @@ PLUGIN:Register("wake", {
 			),
 			completion = "You've brought back cases that would otherwise still be out there. I appreciate that.",
 			target = 5,
-			benefits = {
-				services = {
-					{
-						npc = "'Jitters'",
-						service = "treatment",
-						amount = 150,
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA08",
+			completionCash = 1050,
 			name = "The Last Check-in",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
@@ -222,19 +208,11 @@ PLUGIN:Register("wake", {
 				cargo = "town_quest_tape",
 				label = "The Last Check-in - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA09",
+			completionCash = 875,
 			name = "Keeping the Record",
 			kind = "delivery",
 			requires = {"WA07"},
@@ -246,19 +224,11 @@ PLUGIN:Register("wake", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA10",
+			completionCash = 1250,
 			name = "Atlas' Missing Mark",
 			kind = "field",
 			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Deliver it to 'Atlas'"
@@ -274,19 +244,11 @@ PLUGIN:Register("wake", {
 				label = "Atlas' Missing Mark - Tied Leather Journal",
 				recipient = "atlas",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA11",
+			completionCash = 0,
 			name = "A Longer Search",
 			kind = "tracker",
 			requires = {"WA09"},
@@ -296,19 +258,11 @@ PLUGIN:Register("wake", {
 			),
 			completion = "You've brought back cases that would otherwise still be out there. I appreciate that.",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA12",
+			completionCash = 1450,
 			name = "The Diverted Convoy",
 			kind = "field",
 			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Return it to this"
@@ -336,6 +290,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA13",
+			completionCash = 1175,
 			name = "Ready to Follow",
 			kind = "delivery",
 			requires = {"WA11"},
@@ -347,19 +302,11 @@ PLUGIN:Register("wake", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA14",
+			completionCash = 1650,
 			name = "The Withheld Copy",
 			kind = "field",
 			objective = "Recover Official File Folder from the assigned search area in Garbage. Deliver it to"
@@ -375,19 +322,11 @@ PLUGIN:Register("wake", {
 				label = "The Withheld Copy - Official File Folder",
 				recipient = "carbon",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA15",
+			completionCash = 0,
 			name = "No One Written Off",
 			kind = "tracker",
 			requires = {"WA13"},
@@ -397,18 +336,11 @@ PLUGIN:Register("wake", {
 			),
 			completion = "You've brought back cases that would otherwise still be out there. I appreciate that.",
 			target = 14,
-			benefits = {
-				services = {
-					{
-						npc = "'Technut'",
-						service = "repair",
-						amount = 500,
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA16",
+			completionCash = 1850,
 			name = "The Pripyat Camp",
 			kind = "field",
 			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
@@ -423,19 +355,11 @@ PLUGIN:Register("wake", {
 				cargo = "town_quest_equipment",
 				label = "The Pripyat Camp - Striped Equipment Case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA17",
+			completionCash = 1475,
 			name = "The Records Agree",
 			kind = "delivery",
 			requires = {"WA15"},
@@ -447,19 +371,11 @@ PLUGIN:Register("wake", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA18",
+			completionCash = 2050,
 			name = "The Last Transmission",
 			kind = "field",
 			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Pripyat. Return it to"
@@ -487,6 +403,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA19",
+			completionCash = 0,
 			name = "Still Looking",
 			kind = "tracker",
 			requires = {"WA17", "WA18"},
@@ -496,19 +413,11 @@ PLUGIN:Register("wake", {
 			),
 			completion = "You've brought back cases that would otherwise still be out there. I appreciate that.",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA20",
+			completionCash = 2250,
 			name = "Personal Effects",
 			kind = "field",
 			objective = "Recover Old Photograph Album from the assigned search area in Garbage. Return it to this"
@@ -523,16 +432,7 @@ PLUGIN:Register("wake", {
 				cargo = "town_quest_photo",
 				label = "Personal Effects - Old Photograph Album",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "drink_bottlewater",
 				bonus = 2,
@@ -540,6 +440,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA21",
+			completionCash = 1775,
 			name = "A Place in the Ledger",
 			kind = "delivery",
 			requires = {"WA20"},
@@ -551,19 +452,11 @@ PLUGIN:Register("wake", {
 					quantity = 2,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA22",
+			completionCash = 2450,
 			name = "The Final Name",
 			kind = "field",
 			objective = "Recover Personnel File Folder from the assigned search area in Garbage. Return it to this"
@@ -578,16 +471,7 @@ PLUGIN:Register("wake", {
 				cargo = "town_quest_personnel",
 				label = "The Final Name - Personnel File Folder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Wake's trusted contact",
 		},
 	},

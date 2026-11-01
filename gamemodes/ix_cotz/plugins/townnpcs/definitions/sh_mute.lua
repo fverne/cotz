@@ -64,6 +64,7 @@ PLUGIN:Register("mute", {
 	progression = {
 		{
 			id = "MU01",
+			completionCash = 275,
 			name = "A Loose Connection",
 			kind = "delivery",
 			requires = {},
@@ -88,6 +89,7 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU02",
+			completionCash = 450,
 			name = "The Silent Repeater",
 			kind = "field",
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Marsh. Return it to this"
@@ -102,38 +104,22 @@ PLUGIN:Register("mute", {
 				cargo = "town_quest_control",
 				label = "The Silent Repeater - Red-Trimmed Control Unit",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU03",
+			completionCash = 0,
 			name = "Signals Getting Through",
 			kind = "tracker",
 			requires = {"MU02"},
 			briefing = "** He pushes a list of electronic components towards you. **",
 			completion = "** He checks the delivery tally and underlines it once. **",
 			target = 2,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU04",
+			completionCash = 650,
 			name = "The Missing Address",
 			kind = "field",
 			objective = "Recover Tape-Labelled Flash Drive from the assigned search area in Marsh. Return it to this"
@@ -148,19 +134,11 @@ PLUGIN:Register("mute", {
 				cargo = "town_quest_drive",
 				label = "The Missing Address - Tape-Labelled Flash Drive",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU05",
+			completionCash = 575,
 			name = "A Clearer Picture",
 			kind = "delivery",
 			requires = {"MU03"},
@@ -172,19 +150,11 @@ PLUGIN:Register("mute", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU06",
+			completionCash = 850,
 			name = "A Line Through the Marsh",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0013 from the assigned search area in Marsh. Return it to this"
@@ -216,25 +186,18 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU07",
+			completionCash = 0,
 			name = "Not Just Static",
 			kind = "tracker",
 			requires = {"MU05"},
 			briefing = "** He pushes a list of electronic components towards you. **",
 			completion = "** He checks the delivery tally and underlines it once. **",
 			target = 5,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU08",
+			completionCash = 1050,
 			name = "Spool's Packet",
 			kind = "field",
 			objective = "Recover Tagged Security Flash Drive from the assigned search area in Garbage. Deliver it to"
@@ -250,19 +213,11 @@ PLUGIN:Register("mute", {
 				label = "Spool's Packet - Tagged Security Flash Drive",
 				recipient = "spool",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU09",
+			completionCash = 875,
 			name = "Noisy Components",
 			kind = "delivery",
 			requires = {"MU07"},
@@ -274,19 +229,11 @@ PLUGIN:Register("mute", {
 					quantity = 3,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU10",
+			completionCash = 1250,
 			name = "The Duplicate Message",
 			kind = "field",
 			objective = "Recover Marked Data Disc I from the assigned search area in Marsh. Return it to this contact"
@@ -301,38 +248,22 @@ PLUGIN:Register("mute", {
 				cargo = "town_quest_disc",
 				label = "The Duplicate Message - Marked Data Disc I",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU11",
+			completionCash = 0,
 			name = "A Stable Link",
 			kind = "tracker",
 			requires = {"MU09"},
 			briefing = "** He pushes a list of electronic components towards you. **",
 			completion = "** He checks the delivery tally and underlines it once. **",
 			target = 9,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU12",
+			completionCash = 1450,
 			name = "The Unlisted Receiver",
 			kind = "field",
 			objective = "Take the required bearings in Marsh and recover Red-Trimmed Control Unit. Return it to this"
@@ -360,6 +291,7 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU13",
+			completionCash = 1175,
 			name = "Looking Further",
 			kind = "delivery",
 			requires = {"MU11"},
@@ -371,19 +303,11 @@ PLUGIN:Register("mute", {
 					quantity = 4,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU14",
+			completionCash = 1650,
 			name = "The Second Copy",
 			kind = "field",
 			objective = "Recover Marked Data Disc I from the assigned search area in Waystation. Deliver it to"
@@ -399,38 +323,22 @@ PLUGIN:Register("mute", {
 				label = "The Second Copy - Marked Data Disc I",
 				recipient = "spool",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU15",
+			completionCash = 0,
 			name = "Beyond Local Range",
 			kind = "tracker",
 			requires = {"MU13"},
 			briefing = "** He pushes a list of electronic components towards you. **",
 			completion = "** He checks the delivery tally and underlines it once. **",
 			target = 14,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU16",
+			completionCash = 1850,
 			name = "A Message With No Sender",
 			kind = "field",
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Marsh. Return it to this"
@@ -445,19 +353,11 @@ PLUGIN:Register("mute", {
 				cargo = "town_quest_tape",
 				label = "A Message With No Sender - Handwritten Audio Cassette",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU17",
+			completionCash = 1475,
 			name = "The Final Lens",
 			kind = "delivery",
 			requires = {"MU15"},
@@ -469,19 +369,11 @@ PLUGIN:Register("mute", {
 					quantity = 5,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU18",
+			completionCash = 2050,
 			name = "The Old Routing Table",
 			kind = "field",
 			objective = "Recover Corporate Records Folder from the assigned search area in Pripyat. Deliver it to"
@@ -510,25 +402,18 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU19",
+			completionCash = 0,
 			name = "No Lost Packets",
 			kind = "tracker",
 			requires = {"MU17"},
 			briefing = "** He pushes a list of electronic components towards you. **",
 			completion = "** He checks the delivery tally and underlines it once. **",
 			target = 20,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU20",
+			completionCash = 2250,
 			name = "Someone on the Line",
 			kind = "field",
 			objective = "Recover Numbered Data Module 0022 from the assigned search area in Pripyat. Return it to"
@@ -543,19 +428,11 @@ PLUGIN:Register("mute", {
 				cargo = "town_quest_module2",
 				label = "Someone on the Line - Numbered Data Module 0022",
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU21",
+			completionCash = 1775,
 			name = "Parts for a Clean Link",
 			kind = "delivery",
 			requires = {"MU19", "MU20"},
@@ -567,19 +444,11 @@ PLUGIN:Register("mute", {
 					quantity = 6,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU22",
+			completionCash = 2450,
 			name = "The Broken Handshake",
 			kind = "field",
 			objective = "Take the required bearings in Pripyat and recover Red-Trimmed Control Unit. Return it to"
@@ -594,42 +463,22 @@ PLUGIN:Register("mute", {
 				cargo = "town_quest_control",
 				label = "The Broken Handshake - Red-Trimmed Control Unit",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
+			benefits = {},
 		},
 		{
 			id = "MU23",
+			completionCash = 0,
 			name = "Message Received",
 			kind = "tracker",
 			requires = {"MU22"},
 			briefing = "** He pushes a list of electronic components towards you. **",
 			completion = "** He checks the delivery tally and underlines it once. **",
 			target = 27,
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU24",
+			completionCash = 2650,
 			name = "The Last Address",
 			kind = "field",
 			objective = "Recover Tagged Security Flash Drive from the assigned search area in Marsh. Return it to"
