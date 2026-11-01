@@ -37,6 +37,20 @@ PLUGIN:Register("latch", {
 		quantities = {2, 4, 7},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Workshop stock (trade goods)",
+				items = {"value_bolts", "value_nuts", "value_guncleaner"}},
+			{label = "Salvage protection",
+				items = {"medic_bandage_1", "drug_painkillers"}},
+			{label = "Shift provisions",
+				items = {"food_can_tushonka", "drink_bottlewater"}},
+		},
+		bonusItems = {
+			"fireaxe",
+			"fubar",
+		},
+	},
 	dialogue = {
 		delivery = "Here. Keep the labels with it.",
 		completedGreeting = (

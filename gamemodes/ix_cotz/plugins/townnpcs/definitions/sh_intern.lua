@@ -14,6 +14,16 @@ PLUGIN:Register("intern", {
 		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Routine survey",
+				items = {"drink_bottlewater", "medic_bandage_1"}},
+			{label = "Exposure precautions",
+				items = {"medic_antirad_1"}},
+			{label = "Overtime",
+				items = {"drug_caffeine", "food_raisins"}},
+		},
+	},
 	dialogue = {
 		completedGreeting = (
 			"Hello! I've been keeping my own notes in order. It's rather nice to know what I want to say "

@@ -168,19 +168,27 @@ function ix.taskRewards.RecordCompletion(character, npc, job)
 	progress.count = (progress.count or 0) + 1
 	progress.budget = (progress.budget or 0) + unspent
 	if progress.count >= ix.taskRewards.BonusInterval() then
+		local remainingBudget = 0
 		if progress.budget > 0 then
 			local key = "bonus:" .. job.progressionClaim
-			local offers = offersFor(character)
-			offers[key] = {npc = npc, label = "Five-task bonus", earned = true, budget = progress.budget,
-				choices = ix.taskRewards.BuildBonusChoices(character, npc, progress.budget, key)}
-			saveOffers(character, offers)
-			character:GetPlayer():Notify("Five tasks completed for " .. npc
-				.. "! Choose your bonus under About work / Task rewards.")
+			local choices = ix.taskRewards.BuildBonusChoices(character, npc, progress.budget, key)
+			if #choices == 0 then
+				remainingBudget = progress.budget
+				character:GetPlayer():Notify("Five tasks completed for " .. npc
+					.. ". Bonus value retained until a themed reward is affordable and unlocked.")
+			else
+				local offers = offersFor(character)
+				offers[key] = {npc = npc, label = "Five-task bonus", earned = true,
+					budget = progress.budget, choices = choices}
+				saveOffers(character, offers)
+				character:GetPlayer():Notify("Five tasks completed for " .. npc
+					.. "! Choose your bonus under About work / Task rewards.")
+			end
 		else
 			character:GetPlayer():Notify("Five tasks completed for " .. npc
 				.. ". No unused reward allowance accumulated this cycle.")
 		end
-		progress.count, progress.budget = 0, 0
+		progress.count, progress.budget = 0, remainingBudget
 	end
 	character:SetData(BONUS_KEY, state)
 end
@@ -305,18 +313,17 @@ function ix.taskRewards.PreviewJob(character, npc, difficulty, categories)
 			or preview.supplyCatalogueVersion ~= ix.taskRewards.SupplyCatalogueVersion()
 		if needsUpdate and offer and not offer.earned then
 			local choices = ix.taskRewards.BuildJobChoices(character, npc, budget, preview.rewardKey)
-			if #choices > 0 then
-				offer.choices = choices
-				preview.supplyBudget = budget
-				preview.supplyCatalogueVersion = ix.taskRewards.SupplyCatalogueVersion()
-				preview.supplyDifficulty = nil
-				preview.difficulty = difficulty
-				preview.rewardChoices = table.Copy(choices)
-				preview.supplyChoice = math.min(preview.supplyChoice or 1, #choices)
-				saveOffers(character, offers)
-				character:SetData("taskJobPreviews", previews)
-				character:Save()
-			end
+			if #choices == 0 then choices = {{label = "No item rewards available", items = {}}} end
+			offer.choices = choices
+			preview.supplyBudget = budget
+			preview.supplyCatalogueVersion = ix.taskRewards.SupplyCatalogueVersion()
+			preview.supplyDifficulty = nil
+			preview.difficulty = difficulty
+			preview.rewardChoices = table.Copy(choices)
+			preview.supplyChoice = math.min(preview.supplyChoice or 1, #choices)
+			saveOffers(character, offers)
+			character:SetData("taskJobPreviews", previews)
+			character:Save()
 		end
 
 		local cash = ix.taskRewards.FixedMoney(definition, preview.numberRec)

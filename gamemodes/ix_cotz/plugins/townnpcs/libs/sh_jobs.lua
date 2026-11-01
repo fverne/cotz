@@ -147,6 +147,7 @@ function PLUGIN:BuildJobs()
 	for _, contact in pairs(self.contacts) do
 		contact.categories = {}
 		ix.taskRewards.SetProfile(contact.name, contact.supplies)
+		ix.taskRewards.SetTownProfile(contact.name, contact.rewards)
 		for tier, difficulty in ipairs(DIFFICULTIES) do registerRepeatable(contact, difficulty, tier) end
 		for _, step in ipairs(contact.progression) do
 			if step.kind == "field" then registerCommission(contact, step) end

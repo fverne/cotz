@@ -39,6 +39,22 @@ PLUGIN:Register("mute", {
 		quantities = {2, 4, 7},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Components (trade goods)",
+				items = {"value_battery", "value_capacitors", "value_pcpart_ram"}},
+			{label = "Night shift",
+				items = {"drug_caffeine", "drink_bottletea"}},
+			{label = "Field callout",
+				items = {"drink_bottlewater", "medic_bandage_1"}},
+		},
+		bonusItems = {
+			"binoculars_2",
+			"binoculars_1",
+			"binoculars_4",
+			"binoculars_3",
+		},
+	},
 	dialogue = {
 		completedGreeting = (
 			"** He looks up from the bench as you approach. He clears a space for your things, then "

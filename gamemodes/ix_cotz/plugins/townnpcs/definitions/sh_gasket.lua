@@ -34,6 +34,16 @@ PLUGIN:Register("gasket", {
 		quantities = {2, 4, 7},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Fuel allowance",
+				items = {"lowtiercookerfuel"}},
+			{label = "Utility stores (trade goods)",
+				items = {"value_battery", "value_waterfilter", "value_airfilter"}},
+			{label = "Reserve provisions",
+				items = {"drink_bottlewater", "food_bread"}},
+		},
+	},
 	dialogue = {
 		delivery = "Put it on the clear bench. Not beside the fuel.",
 		completedGreeting = (

@@ -9,6 +9,16 @@ PLUGIN:Register("old-timer", {
 		quantities = {5, 9, 15},
 	},
 	supplies = {"medic_bandage_1", "12gauge", "22lr", "food_bread"},
+	rewards = {
+		packages = {
+			{label = "Hunting rounds",
+				items = {"12gauge", "22lr"}},
+			{label = "Field upkeep",
+				items = {"sharpening_stone", "sharpening_stone_fine"}},
+			{label = "Trail provisions",
+				items = {"food_bread", "medic_bandage_1"}},
+		},
+	},
 	dialogue = {
 		completedGreeting = (
 			"Good to see you. Put the pack down if you're staying a while; you don't have to stand ready "

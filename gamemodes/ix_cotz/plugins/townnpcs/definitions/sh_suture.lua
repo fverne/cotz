@@ -32,6 +32,20 @@ PLUGIN:Register("suture", {
 		quantities = {2, 4, 7},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Sewing stock (trade goods)",
+				items = {"value_sewingkit", "value_tools_sewing"}},
+			{label = "Reinforcement stock (trade goods)",
+				items = {"value_tape_duct", "value_tape_heavy"}},
+			{label = "Expedition provisions",
+				items = {"food_raisins", "drink_bottlewater"}},
+		},
+		bonusItems = {
+			"attachment_fabric_1",
+			"attachment_fabric_2",
+		},
+	},
 	dialogue = {
 		delivery = "Set it down carefully. I want to see what condition it arrived in.",
 		completedGreeting = (

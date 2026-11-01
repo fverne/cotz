@@ -35,6 +35,17 @@ PLUGIN:Register("technut", {
 		quantities = {2, 4, 7},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Bench supplies (trade goods)",
+				items = {"value_nuts", "value_bolts", "value_guncleaner"}},
+			{label = "Workshop stock (trade goods)",
+				items = {"value_screws", "value_motorclean"}},
+			{label = "Workshop provisions",
+				items = {"drink_bottlewater", "food_bread"}},
+		},
+		bonusService = "repair",
+	},
 	dialogue = {
 		delivery = "Over here, buddy. Let me see what we have got.",
 		completedGreeting = (

@@ -547,26 +547,26 @@ for key in pairs(noRemainder:GetData("taskRewardOffers")) do
 	check(not key:match("^bonus:"), "zero-value cycles do not create empty bonus offers")
 end
 local creditOwner = actor()
-local creditChoices = api.BuildBonusChoices(creditOwner, "'Old Timer'", 100, "bonus:credit")
+local creditChoices = api.BuildBonusChoices(creditOwner, "'Technut'", 100, "bonus:credit")
 local creditIndex = #creditChoices
 check(creditChoices[creditIndex].services[1].amount == 130, "repair credit has a thirty percent face-value premium")
-creditOwner:SetData("taskRewardOffers", {["bonus:credit"] = {npc = "'Old Timer'", earned = true,
+creditOwner:SetData("taskRewardOffers", {["bonus:credit"] = {npc = "'Technut'", earned = true,
 	label = "Five-task bonus", budget = 100, choices = creditChoices}})
-check(api.SelectOffer(creditOwner, "'Old Timer'", "bonus:credit", creditIndex), "repair credit bonus can be claimed")
+check(api.SelectOffer(creditOwner, "'Technut'", "bonus:credit", creditIndex), "repair credit bonus can be claimed")
 check(ix.progression.GetServiceCredit(creditOwner, "'Technut'", "repair") == 130,
-	"bonus credit goes to Technut even when earned at another contact")
-check(not api.SelectOffer(creditOwner, "'Old Timer'", "bonus:credit", creditIndex), "credit bonus cannot be replayed")
+	"bonus credit belongs to the issuing repair provider")
+check(not api.SelectOffer(creditOwner, "'Technut'", "bonus:credit", creditIndex), "credit bonus cannot be replayed")
 creditOwner:SetData("progressionServiceCredits", {["'Technut'/repair"] = 19900})
-local capacityChoices = api.BuildBonusChoices(creditOwner, "'Old Timer'", 100, "bonus:cap")
+local capacityChoices = api.BuildBonusChoices(creditOwner, "'Technut'", 100, "bonus:cap")
 for _, choice in ipairs(capacityChoices) do check(not choice.services, "insufficient credit capacity hides the credit choice") end
 creditOwner:SetData("progressionServiceCredits", {["'Technut'/repair"] = 0})
-creditOwner:SetData("taskRewardOffers", {["bonus:cap"] = {npc = "'Old Timer'", earned = true,
+creditOwner:SetData("taskRewardOffers", {["bonus:cap"] = {npc = "'Technut'", earned = true,
 	label = "Five-task bonus", budget = 100, choices = creditChoices}})
 creditOwner:SetData("progressionServiceCredits", {["'Technut'/repair"] = 19900})
-api.SelectOffer(creditOwner, "'Old Timer'", "bonus:cap", creditIndex)
+api.SelectOffer(creditOwner, "'Technut'", "bonus:cap", creditIndex)
 check(ix.progression.GetServiceCredit(creditOwner, "'Technut'", "repair") == 19900
 	and creditOwner:GetData("taskRewardOffers")["bonus:cap"], "capacity changes preserve the whole unclaimed bonus")
-check(api.SelectOffer(creditOwner, "'Old Timer'", "bonus:cap", 1), "a blocked credit claim can choose supplies instead")
+check(api.SelectOffer(creditOwner, "'Technut'", "bonus:cap", 1), "a blocked credit claim can choose supplies instead")
 ix.item.list.advancedAmmo = {name = "Advanced ammunition", isAmmo = true, price = 100, ammoAmount = 10}
 ix.progression.definitions.supplyGate = {vendorUnlocks = {{npc = "'Old Timer'", args = {"advancedAmmo"}}}}
 local catalogue = api.SupplyCatalogue(creditOwner, "'Old Timer'")
@@ -1010,5 +1010,199 @@ fieldAvailable = true
 local restoredField = api.PreviewJob(fieldViewer, "'Old Timer'", "easy", {"fieldPreviewTest"})
 check(restoredField.rewardKey == fieldPreview.rewardKey and restoredField.moneyReward == fieldPreview.moneyReward,
 	"restoring point sources preserves saved preview identity and payment")
+
+do
+	local contacts = {}
+	SERVER, CLIENT = true, false
+	local previousPlugin = PLUGIN
+	PLUGIN = {Register = function(_, id, contact) contacts[id] = contact end}
+	local paths = assert(io.popen("rg --files gamemodes/ix_cotz/plugins/townnpcs/definitions"))
+	for path in paths:lines() do
+		if not (path:match("sh_config.lua$") or path:match("sh_equipment.lua$") or path:match("sh_sites.lua$")) then
+			dofile(path)
+		end
+	end
+	paths:close()
+	PLUGIN = previousPlugin
+	local sources = {}
+	paths = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items gamemodes/ix_cotz/plugins"))
+	for path in paths:lines() do
+		if path:find("/items/", 1, true) then
+			local id = path:match("/sh_([^/]+)%.lua$")
+			if id then
+				if path:find("/items/base/", 1, true) then id = "base_" .. id end
+				local file = assert(io.open(path))
+				sources[id] = {text = file:read("*a"), path = path}
+				file:close()
+			end
+		end
+	end
+	paths:close()
+	local function loadReward(id)
+		local source = assert(sources[id], "Reward uses a real item: " .. id)
+		local text = source.text
+		local baseID = text:match("ITEM.base = \"([^\"]+)\"")
+			or "base_" .. source.path:match("/items/([^/]+)/")
+		local parent = sources[baseID] and loadReward(baseID) or {}
+		local item = {name = id, price = tonumber(text:match("ITEM.price = ([%d%.]+)")) or parent.price or 100,
+			quantity = tonumber(text:match("ITEM.quantity = (%d+)")) or parent.quantity,
+			ammoAmount = tonumber(text:match("ITEM.ammoAmount = (%d+)")) or parent.ammoAmount,
+			isAmmo = source.path:find("/newammo/", 1, true) ~= nil or parent.isAmmo,
+			sharpnessRestored = text:find("ITEM.sharpnessRestored", 1, true) ~= nil or parent.sharpnessRestored}
+		setmetatable(item, {__index = parent})
+		if text:find("return self.price * self:GetData", 1, true) then
+			function item:GetPrice() return self.price * self:GetData("quantity", self.quantity) end
+		end
+		ix.item.list[id] = item
+
+		return item
+	end
+	local count = 0
+	for _, contact in pairs(contacts) do
+		count = count + 1
+		check(contact.rewards and #contact.rewards.packages == 3, "each town contact has three themed packages")
+		for _, package in ipairs(contact.rewards.packages) do
+			for _, id in ipairs(package.items) do
+				loadReward(id)
+				check(api.IsConsumableSupply(id) or id:match("^value_"),
+					"ordinary theme uses supported consumables or trade goods: " .. id)
+			end
+		end
+		for _, id in ipairs(contact.rewards.bonusItems or {}) do loadReward(id) end
+		api.SetTownProfile(contact.name, contact.rewards)
+	end
+	check(count == 27, "reward overhaul covers all 27 contacts")
+	local bossOwner = actor()
+	local bossChoices = api.BuildBonusChoices(bossOwner, "'Boss'", 100, "bonus:boss")
+	local bossCredit = #bossChoices
+	check(bossChoices[bossCredit].services[1].npc == "'Boss'", "Boss offers his own repair credit")
+	bossOwner:SetData("taskRewardOffers", {["bonus:boss"] = {npc = "'Boss'", earned = true,
+		budget = 100, choices = bossChoices}})
+	check(api.SelectOffer(bossOwner, "'Boss'", "bonus:boss", bossCredit), "themed provider credit can be claimed")
+	check(ix.progression.GetServiceCredit(bossOwner, "'Boss'", "repair") == 130
+		and ix.progression.GetServiceCredit(bossOwner, "'Technut'", "repair") == 0,
+		"Boss's bonus pays only Boss credit with the existing premium")
+	local recipient = actor()
+	local record = ix.progression.GetCharacterProgression(recipient)
+	record.lines["cotz/town/old-timer/OT19"] = {completed = true}
+	record.lines["cotz/town/smartass/SM07"] = {completed = true}
+	ix.progression.SetCharacterProgression(recipient, record)
+	for _, contact in pairs(contacts) do
+		local allowed = {}
+		for _, package in ipairs(contact.rewards.packages) do
+			for _, id in ipairs(package.items) do allowed[id] = true end
+		end
+		for _, budget in ipairs({600, 1500, 10000}) do
+			for serial = 1, 10 do
+				local choices = api.BuildJobChoices(recipient, contact.name, budget, "theme:" .. serial)
+				check(#choices > 0 and #choices <= 3, "every contact has affordable ordinary choices")
+				for _, choice in ipairs(choices) do
+					check(#choice.items > 0 and #choice.items <= 2, "themed jobs retain the two-item cap")
+					local value = 0
+					for _, reward in ipairs(choice.items) do
+						check(allowed[reward.item], "ordinary rewards stay within the contact's dedicated list")
+						value = value + api.ExpectedValue(reward.item, reward.data)
+						local item = ix.item.list[reward.item]
+						if item.quantity or item.ammoAmount then
+							check(reward.data.quantity > 0
+								and reward.data.quantity <= (item.quantity or item.ammoAmount),
+								"stacked trade goods and supplies have explicit legal quantities")
+						end
+					end
+					check(value <= budget, "themed packages respect the unchanged allowance")
+				end
+			end
+		end
+		local bonus = api.BuildBonusChoices(recipient, contact.name, 1500, "theme:bonus")
+		for _, choice in ipairs(bonus) do
+			for _, service in ipairs(choice.services or {}) do
+				check(service.npc == contact.name, "credit remains with its issuing provider")
+				check(contact.name == "'Technut'" or contact.name == "'Boss'", "only repair providers issue credit")
+			end
+		end
+	end
+	ix.progression.definitions.themeLeak = {vendorUnlocks = {{npc = "'Technut'", args = {"medic_antirad_1"}}}}
+	check(not includes(api.SupplyCatalogue(recipient, "'Technut'"), "medic_antirad_1"),
+		"vendor catalogue changes cannot leak into dedicated task rewards")
+	ix.progression.definitions.themeLeak = nil
+	local profile = contacts.technut.rewards
+	local before = api.BuildJobChoices(recipient, "'Technut'", 600, "theme:stable")
+	check(before[1].label == api.BuildJobChoices(recipient, "'Technut'", 600, "theme:stable")[1].label,
+		"themed choices remain deterministic")
+	check(before[1].label:find("trade goods", 1, true), "maintenance valuables are labelled honestly")
+	api.SetTownProfile("'Technut'", {packages = {{label = "Exact bolts", items = {"value_bolts"}}}})
+	local goods = api.BuildJobChoices(recipient, "'Technut'", 600, "theme:goods")[1]
+	check(goods.items[1].data.quantity == 20 and goods.items[2].data.quantity == 3,
+		"per-unit valuable prices produce exact stacks instead of random spawn quantities")
+	recipient.inventory.full = true
+	api.CreateOffer(recipient, "theme:claim", "'Technut'", 600, "Workshop job", 1)
+	api.SelectOffer(recipient, "'Technut'", "theme:claim", 1)
+	api.EarnOffer(recipient, "theme:claim")
+	check(#ix.progression.GetLine(recipient, "taskRewardClaims").pendingRewards == 2,
+		"full inventories preserve themed trade goods in the existing claim queue")
+	api.SetTownProfile("'Technut'", profile)
+	recipient.inventory.full = false
+	check(api.ClaimNext(recipient), "themed trade goods resume delivery after space becomes available")
+	local unlocked = true
+	local previousTown = ix.townNPCs
+	ix.townNPCs = {installed = true, itemGates = {
+		medic_antirad_1 = {sellers = {["'Jitters'"] = {}}}, attachment_fabric_1 = {},
+	}, IsPurchaseExcluded = function() return false end,
+		CanBuyItem = function(_, _, id, seller)
+			if id == "medic_antirad_1" then return unlocked and seller == "'Jitters'" end
+			return unlocked
+		end}
+	unlocked = false
+	check(not includes(api.SupplyCatalogue(recipient, "'Vesper'"), "medic_antirad_1"),
+		"support medicine respects its real seller's progression gate")
+	local function hasEquipment(choices, id)
+		for _, choice in ipairs(choices) do
+			for _, reward in ipairs(choice.items) do if reward.item == id then return true end end
+		end
+		return false
+	end
+	check(not hasEquipment(api.BuildBonusChoices(recipient, "'Suture'", 50000, "theme:equipment"),
+		"attachment_fabric_1"), "locked reinforcement cannot appear in bonuses")
+	unlocked = true
+	check(includes(api.SupplyCatalogue(recipient, "'Vesper'"), "medic_antirad_1"),
+		"support medicine becomes available after a real seller's milestone")
+	check(includes(api.SupplyCatalogue(recipient, "'Jitters'"), "medic_antirad_1"),
+		"a medic's own unlocked supplies remain available")
+	check(hasEquipment(api.BuildBonusChoices(recipient, "'Suture'", 50000, "theme:equipment"),
+		"attachment_fabric_1"), "earned reinforcement can appear as an explicit bonus")
+	ix.townNPCs = previousTown
+	local fresh = actor()
+	check(#api.BuildJobChoices(fresh, "'Mute'", 600, "theme:access") == 0,
+		"dedicated profiles preserve contact access requirements")
+	check(catalogueOwner:GetData("taskRewardOffers")[acceptedCatalogue.rewardKey].choices[1].label == acceptedLabel,
+		"installing themed profiles leaves an existing accepted reward intact")
+	local cachedOwner = actor()
+	local cached = api.PreviewJob(cachedOwner, "'Old Timer'", "easy", {"hunting"})
+	local cachedPreviews = cachedOwner:GetData("taskJobPreviews")
+	cachedPreviews["'Old Timer'"].easy.supplyCatalogueVersion = nil
+	cachedOwner:SetData("taskJobPreviews", cachedPreviews)
+	api.SetTownProfile("'Old Timer'", {packages = {{label = "Expensive goods", items = {"value_motorclean"}}}})
+	local refreshed = api.PreviewJob(cachedOwner, "'Old Timer'", "easy", {"hunting"})
+	check(refreshed.identifier == cached.identifier and refreshed.numberRec == cached.numberRec,
+		"theme refresh preserves cached job identity and requirements")
+	check(refreshed.rewardChoices[1].label == "No item rewards available",
+		"an unaffordable theme retires old unaccepted supplies instead of leaking them")
+	local saver = actor()
+	for serial = 1, 10 do
+		local key = "job:theme-saving:" .. serial
+		saver:SetData("taskRewardOffers", {[key] = {npc = "'Old Timer'", selected = 1,
+			choices = {{items = {}}}}})
+		api.RecordCompletion(saver, "'Old Timer'", {rewardKey = key, progressionClaim = serial,
+			supplyBudget = serial <= 5 and 1 or 500})
+		if serial == 5 then
+			check(api.TraderBonusProgress(saver, "'Old Timer'").budget == 5,
+				"unaffordable five-task value stays banked for the next cycle")
+			check(not saver:GetData("taskRewardOffers")["bonus:5"], "unaffordable cycles create no empty offers")
+		end
+	end
+	check(saver:GetData("taskRewardOffers")["bonus:10"].budget == 2505,
+		"retained value combines with later completions into a claimable themed bonus")
+	api.SetTownProfile("'Old Timer'", contacts["old-timer"].rewards)
+end
 
 print("PASS: " .. checks .. " task reward checks")

@@ -8,6 +8,16 @@ PLUGIN:Register("arena-master", {
 		description = "Arena bouts",
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Between rounds",
+				items = {"medic_bandage_1", "drink_bottlewater"}},
+			{label = "Recovery",
+				items = {"medic_medkit_1", "drug_painkillers"}},
+			{label = "Next bout",
+				items = {"9x19", "12gauge"}},
+		},
+	},
 	dialogue = {
 		completedGreeting = (
 			"Good to see you. Match on your mind, or are you giving yourself a well-earned afternoon "

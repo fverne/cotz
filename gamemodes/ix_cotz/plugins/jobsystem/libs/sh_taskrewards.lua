@@ -17,9 +17,14 @@ local JOB_REFERENCE_CASH_RATE = settings.jobReferenceCashRate
 local CASH_ROUNDING_EPSILON = settings.cashRoundingEpsilon
 local MAX_DEPTH = settings.maxDepth
 local GENERATED_QUANTITIES = settings.generatedQuantities
+local townProfiles = {}
 
 function ix.taskRewards.SetProfile(npc, items)
 	PROFILES[npc] = table.Copy(items)
+end
+
+function ix.taskRewards.SetTownProfile(npc, profile)
+	townProfiles[npc] = table.Copy(profile)
 end
 
 local function average(value, default)
@@ -149,11 +154,40 @@ function ix.taskRewards.IsConsumableSupply(itemID)
 	return consumable and type(item.quantity) == "number" and item.quantity > 0 or false
 end
 
+local function townRewardUnlocked(character, npc, itemID)
+	local town = ix.townNPCs
+	if not town or not town.installed then return true end
+	local gate = town.itemGates[itemID]
+	if not gate then return not town:IsPurchaseExcluded(itemID) end
+	if not gate.sellers or gate.sellers[npc] then return town:CanBuyItem(character, itemID, npc) end
+	-- Support contacts can supply medicine after a real seller's personal milestone is earned.
+	for seller in pairs(gate.sellers) do
+		if town:CanBuyItem(character, itemID, seller) then return true end
+	end
+
+	return false
+end
+
 local function canReceiveSupply(character, npc, itemID)
+	local profile = townProfiles[npc]
+	if profile then
+		if not ix.progression.CanUseNPC(character, npc) or not townRewardUnlocked(character, npc, itemID) then
+			return false
+		end
+		for _, package in ipairs(profile.packages) do
+			for _, candidate in ipairs(package.items) do
+				if candidate == itemID then return true end
+			end
+		end
+
+		return false
+	end
 	if ix.townNPCs and ix.townNPCs.installed and ix.townNPCs.itemGates[itemID]
 		and not ix.townNPCs:CanBuyItem(character, itemID) then return false end
 
-	return ix.progression.CanUseNPC(character, npc) and ix.taskRewards.IsConsumableSupply(itemID)
+	if not ix.progression.CanUseNPC(character, npc) then return false end
+
+	return ix.taskRewards.IsConsumableSupply(itemID)
 end
 
 function ix.taskRewards.SupplyCatalogue(character, npc)
@@ -163,6 +197,15 @@ function ix.taskRewards.SupplyCatalogue(character, npc)
 			result[#result + 1] = itemID
 			seen[itemID] = true
 		end
+	end
+	local profile = townProfiles[npc]
+	if profile then
+		for _, package in ipairs(profile.packages) do
+			for _, itemID in ipairs(package.items) do consider(itemID) end
+		end
+		table.sort(result)
+
+		return result
 	end
 	for _, itemID in ipairs(PROFILES[npc] or PROFILES["NPC"]) do consider(itemID) end
 	for _, definition in pairs(ix.progression.definitions) do
@@ -215,7 +258,44 @@ function ix.taskRewards.BonusStatus(character, npc)
 		npc, progress.count or 0, ix.taskRewards.BonusInterval(), progress.budget or 0)
 end
 
+local function themedChoices(character, npc, budget, seed, maximumItems)
+	local profile = townProfiles[npc]
+	local result = {}
+	local hash = 0
+	for index = 1, #seed do hash = (hash * 31 + seed:byte(index)) % 65521 end
+	for _, package in ipairs(profile.packages) do
+		local candidates = {}
+		for _, itemID in ipairs(package.items) do
+			local unit = ix.item.list[itemID] and ix.taskRewards.UnitValue(itemID) or 0
+			if unit > 0 and unit <= budget and canReceiveSupply(character, npc, itemID) then
+				candidates[#candidates + 1] = itemID
+			end
+		end
+		if #candidates > 0 then
+			local itemID = candidates[hash % #candidates + 1]
+			local item = ix.item.list[itemID]
+			local stack = math.max(1, math.floor(average(item.quantity or item.ammoAmount, 1)))
+			local quantity = math.min(stack * maximumItems, math.floor(budget / ix.taskRewards.UnitValue(itemID)))
+			local rewards = {}
+			local remaining = quantity
+			while remaining > 0 do
+				local units = math.min(stack, remaining)
+				rewards[#rewards + 1] = {item = itemID,
+					data = (item.quantity or item.ammoAmount) and {quantity = units} or {}}
+				remaining = remaining - units
+			end
+			local unitLabel = item.isAmmo and " rounds" or itemID:match("^value_") and " units" or " uses"
+			local amount = (item.quantity or item.ammoAmount) and " (" .. quantity .. unitLabel .. ")"
+				or " x" .. quantity
+			result[#result + 1] = {label = package.label .. ": " .. item.name .. amount, items = rewards}
+		end
+	end
+
+	return result
+end
+
 function ix.taskRewards.BuildJobChoices(character, npc, budget, seed)
+	if townProfiles[npc] then return themedChoices(character, npc, budget, seed, JOB_MAX_SUPPLY_ITEMS) end
 	local candidates = {}
 	for _, itemID in ipairs(ix.taskRewards.SupplyCatalogue(character, npc)) do
 		local unit = ix.taskRewards.UnitValue(itemID)
@@ -247,15 +327,28 @@ end
 
 function ix.taskRewards.BuildBonusChoices(character, npc, budget, seed)
 	local result = {}
-	local catalogue = ix.taskRewards.SupplyCatalogue(character, npc)
-	for _, choice in ipairs(ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, true)) do
-		if choice.items[1].item ~= "bagrubles" then result[#result + 1] = choice end
+	local profile = townProfiles[npc]
+	if profile then
+		result = themedChoices(character, npc, budget, seed, MAX_PACKAGE_ITEMS)
+		for _, itemID in ipairs(profile.bonusItems or {}) do
+			local value = ix.taskRewards.UnitValue(itemID)
+			if value > 0 and value <= budget and townRewardUnlocked(character, npc, itemID)
+				and ix.progression.CanBuyItem(character, npc, itemID) then
+				result[#result + 1] = {label = "Equipment: " .. ix.item.list[itemID].name .. " x1",
+					items = {{item = itemID, data = {}}}}
+			end
+		end
+	else
+		local catalogue = ix.taskRewards.SupplyCatalogue(character, npc)
+		result = ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, true)
 	end
 	local credit = math.floor(budget * CREDIT_PREMIUM)
-	if ix.progression.ServiceCreditCapacity
-		and ix.progression.ServiceCreditCapacity(character, "'Technut'", "repair") >= credit then
-		result[#result + 1] = {label = "Technut repair credit: " .. credit .. " rubles", items = {},
-			services = {{npc = "'Technut'", service = "repair", amount = credit}}}
+	local service = profile and profile.bonusService
+	if not profile and (npc == "'Technut'" or npc == "'Boss'") then service = "repair" end
+	if service and credit > 0 and ix.progression.ServiceCreditCapacity
+		and ix.progression.ServiceCreditCapacity(character, npc, service) >= credit then
+		result[#result + 1] = {label = npc .. " " .. service .. " credit: " .. credit .. " rubles", items = {},
+			services = {{npc = npc, service = service, amount = credit}}}
 	end
 
 	return result
@@ -409,6 +502,18 @@ function ix.taskRewards.BarterChoices(character, npc, barterID, barter)
 end
 
 function ix.taskRewards.Validate()
+	for npc, profile in pairs(townProfiles) do
+		assert(#profile.packages > 0 and #profile.packages <= CHOICE_COUNT, "Invalid reward packages: " .. npc)
+		for _, package in ipairs(profile.packages) do
+			assert(type(package.label) == "string" and #package.items > 0, "Empty reward package: " .. npc)
+			for _, id in ipairs(package.items) do
+				local item = assert(ix.item.list[id], "Unknown town reward: " .. id)
+				assert(ix.taskRewards.IsConsumableSupply(id) or id:match("^value_")
+					and item.base ~= "base_quests" and not item.isFieldCargo, "Invalid ordinary town reward: " .. id)
+			end
+		end
+		for _, id in ipairs(profile.bonusItems or {}) do assert(ix.item.list[id], "Unknown town bonus: " .. id) end
+	end
 	for _, items in pairs(PROFILES) do
 		for _, id in ipairs(items) do assert(ix.item.list[id], "Unknown contact supply: " .. id) end
 	end

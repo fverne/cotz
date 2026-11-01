@@ -13,6 +13,16 @@ PLUGIN:Register("cleaner", {
 		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Cache upkeep",
+				items = {"hidestasher_cleaningkit"}},
+			{label = "Courier supplies",
+				items = {"food_raisins", "drink_bottlewater"}},
+			{label = "Contingency",
+				items = {"9x19", "medic_bandage_1"}},
+		},
+	},
 	dialogue = {
 		delivery = "Leave it here. Keep it closed.",
 		completedGreeting = (

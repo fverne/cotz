@@ -33,6 +33,16 @@ PLUGIN:Register("jitters", {
 		quantities = {2, 4, 7},
 	},
 	supplies = {"medic_bandage_1", "medic_medkit_1", "medic_antirad_1", "drug_painkillers"},
+	rewards = {
+		packages = {
+			{label = "Bleeding control",
+				items = {"medic_bandage_1", "medic_bandage_2", "medic_bandage_3"}},
+			{label = "Trauma supplies",
+				items = {"medic_medkit_1", "medic_medkit_2", "drug_painkillers"}},
+			{label = "Exposure treatment",
+				items = {"medic_antirad_1", "medic_antirad_2"}},
+		},
+	},
 	dialogue = {
 		delivery = "Here, here. Let me check the label before you go.",
 		completedGreeting = (

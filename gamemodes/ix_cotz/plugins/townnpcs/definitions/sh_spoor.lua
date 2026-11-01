@@ -9,6 +9,16 @@ PLUGIN:Register("spoor", {
 		quantities = {5, 9, 15},
 	},
 	supplies = {"12gauge", "22lr", "medic_bandage_1", "drink_bottlewater"},
+	rewards = {
+		packages = {
+			{label = "Hunting ammunition",
+				items = {"12gauge", "762x54", "762x51"}},
+			{label = "Edge upkeep",
+				items = {"sharpening_stone", "sharpening_stone_fine"}},
+			{label = "Long hunt",
+				items = {"food_raisins", "drink_bottlewater"}},
+		},
+	},
 	dialogue = {
 		delivery = "Set it down. Tell me if anything happened to it on the way.",
 		completedGreeting = (

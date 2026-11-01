@@ -13,6 +13,16 @@ PLUGIN:Register("wake", {
 		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Recovery medicine",
+				items = {"medic_bandage_1", "medic_medkit_1"}},
+			{label = "Exposure supplies",
+				items = {"medic_antirad_1", "medic_antirad_2"}},
+			{label = "Search provisions",
+				items = {"food_can_tushonka", "drink_bottlewater"}},
+		},
+	},
 	dialogue = {
 		delivery = "Put it here. I will keep it with the search records.",
 		completedGreeting = (

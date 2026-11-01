@@ -14,6 +14,16 @@ PLUGIN:Register("beanstalk", {
 		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Research safety",
+				items = {"medic_psyheal_1", "medic_antipsychotic_1"}},
+			{label = "Emergency response",
+				items = {"medic_medkit_1", "medic_stimpak_1"}},
+			{label = "Long watch",
+				items = {"drug_caffeine", "food_can_beans"}},
+		},
+	},
 	dialogue = {
 		completedGreeting = (
 			"Hello again. Keep clear of the tray, as usual. You know why I ask, which is a considerable "

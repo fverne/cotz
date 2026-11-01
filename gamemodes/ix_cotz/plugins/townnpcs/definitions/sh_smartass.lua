@@ -9,6 +9,27 @@ PLUGIN:Register("smartass", {
 		quantities = {1, 2, 5},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Electronics stock (trade goods)",
+				items = {"value_capacitors", "value_pcpart_ram", "value_pcpart_cpu"}},
+			{label = "Overtime",
+				items = {"drug_caffeine", "drink_energydrink_2"}},
+			{label = "Extraction provisions",
+				items = {"drink_bottlewater", "food_raisins"}},
+		},
+		bonusItems = {
+			"pso1",
+			"cmore",
+			"acog",
+			"shortdot",
+			"nightforce",
+			"cobrasuppressor",
+			"pbssuppressor",
+			"sakersuppressor",
+			"tundrasuppressor",
+		},
+	},
 	dialogue = {
 		completedGreeting = (
 			"You again. At least I can reasonably expect something useful to come of the interruption. "

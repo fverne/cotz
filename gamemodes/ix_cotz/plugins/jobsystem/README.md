@@ -17,12 +17,13 @@ No save reset or first-time setup is required.
 | Item hand-ins and kill-job counts, categories, reputation and reward budgets | Existing `definitions/sh_itemjobs_*.lua` and `sh_killjobs_*.lua` |
 | Legacy survey/package tool item, initial tool data, completion keys and rewards | `definitions/sh_specialjobs.lua` |
 | Cargo model, inventory size and weight | `items/jobcargo/sh_job_*.lua` |
-| Town contact job specialty, maps, payouts, supplies and finite objectives | `townnpcs/definitions/sh_<contact>.lua` |
+| Town contact job specialty, maps, payouts, vendor supplies, reward packages and finite objectives | `townnpcs/definitions/sh_<contact>.lua` |
 
 Ordinary definitions call `ix.jobs.register({...}, "stable-id")` directly. Legacy tool jobs call
 `ix.jobs.RegisterToolJob`; their item configuration is data and their shared callbacks live in
-`libs/sh_tooljobs.lua`. Reward profiles here are fallbacks; town contacts install their own supplies
-from their contact definitions. `moneyReward` is reference cash processed by reward calculations,
+`libs/sh_tooljobs.lua`. Reward profiles here are fallbacks and kit-redemption catalogues. Town contacts
+install dedicated `rewards` definitions separately from their ordinary vendor `supplies`.
+`moneyReward` is reference cash processed by reward calculations,
 not necessarily the final preview payment. Preserve field names and units when tuning.
 
 Existing map points are the default: recovery uses stash/event points, sensors anomaly/radiation
@@ -114,9 +115,12 @@ task name and cash. Opening an offer shows its description, with up to three rew
 shown once on the acceptance buttons. Players select their reward package when
 accepting. That selection is then locked on the server, including while a completed reward awaits delivery.
 About work only offers claims for earned rewards and bonuses, kit exchanges and barters;
-it cannot change an accepted task reward. Saved selections and pending claims remain intact. Each package
-contains one or two existing supply items, with explicit uses/rounds and no worn weapons
-or suits. A supply allowance uses the task's fixed reference cash payment at an independent
+it cannot change an accepted task reward. Saved selections and pending claims remain intact. Each ordinary package
+contains one or two existing supply items or explicitly selected trade goods, with exact quantities
+and no weapons or suits. Each town contact defines up to three named package families; one affordable,
+unlocked candidate per family is selected deterministically for each saved offer. Labels identify
+maintenance materials and electronics as trade goods, without promising new repair or power mechanics.
+A supply allowance uses the task's fixed reference cash payment at an independent
 55% rate, with a minimum of 600 rubles even for easy tasks; quantities
 respect that budget and normal stack capacities. Cash value alone determines the quantity,
 up to two full stacks, regardless of the easy/medium/hard category. Quantities fill the
@@ -128,25 +132,33 @@ Each trader has a separate completion counter and accumulated bonus value. Progr
 there is no base contribution or percentage of ordinary cash added. Higher-quality hand-ins
 can increase ordinary cash but do not inflate the bonus. The rewards menu shows progress
 and the accumulated value. If five tasks leave no unused
-allowance, the cycle resets without creating an empty bonus offer. Existing earned bonuses
+allowance, the cycle resets without creating an empty bonus offer. If positive value cannot yet buy
+an eligible themed reward, it remains banked and joins the next five-task cycle. Existing earned bonuses
 and previously accumulated value are preserved.
 
-An earned bonus offers visible supply packages within the same budget or Technut
-repair credit with 30% more face value. Credit appears only when the whole award fits
-within the existing 20,000 balance cap and Technut is accessible. Claim-time checks prevent
-lost credit if capacity changes. Credit is provider-bound and applies after repair discounts;
-it cannot become cash. Supplies remain available when credit is unavailable.
+An earned bonus offers larger versions of that contact's themed packages. Only Technut and Boss
+add repair credit, bound to the issuing provider, with 30% more face value. Credit appears only when
+the whole award fits within the existing 20,000 balance cap and the provider is accessible.
+Claim-time checks prevent lost credit if capacity changes. Credit applies after repair discounts
+and cannot become cash. Other contacts do not offer Technut credit.
+Mute, Atlas, Latch, Suture and Smartass also have explicit equipment bonus lists: binoculars,
+a compass, industrial tools, fabric reinforcement and optics/suppressors respectively. These
+choices contain one item, fit the earned budget and respect existing personal purchase gates.
+They never grant purchase permission or add items to vendor stock.
 Bonus packages never include cash or ruble items, including rounding remainders.
-Legacy unclaimed offers are rebuilt with the same earned budget before selection.
-Kit and barter redemption retain their existing remainder handling. Full inventories retain token-backed claims.
+Unclaimed bonus choices refresh with the same earned budget. Kit and barter redemption retain
+their existing remainder handling. Full inventories retain token-backed claims.
 
-Contact profiles and each contact's full progression vendor catalogue determine eligible consumable
-rewards: ammunition, food, drinks, medicine, charcoal, sharpening stones and the four-use cleaning kit.
-All eligible supplies are in the reward pool regardless of purchase progression. NPC access still
-applies, and receiving a reward never grants permission to buy it. Equipment, armour attachments,
-other tools and stash notes/PDAs are excluded from ordinary task and five-task bonus supply catalogues.
-Cleaner's configured reward profile also excludes hidestash notes and PDAs.
-Bonus catalogues refresh when the rewards menu opens without changing the earned budget.
+Town contact rewards are authored under `rewards.packages` in each contact definition. Each entry
+has a `label` and candidate `items`. Optional `bonusItems` and `bonusService` configure larger bonuses.
+These lists are separate from `supplies`, which still configures ordinary vendor stock and legacy
+kit redemption. Vendor unlock catalogues do not automatically expand town task rewards.
+Ordinary rewards include existing ammunition, food, drinks, medicine, charcoal, sharpening stones,
+the stash cleaning kit and selected mechanical, electronic, textile and archive trade goods.
+Existing town equipment/ammunition gates apply. Medicines use the contact's own seller milestone
+where present; support contacts without a medicine catalogue require a completed milestone at a
+real seller. Contact access always applies. Standalone non-town reward profiles retain their
+existing consumable catalogue behaviour.
 Unlocks never multiply the payment for identical work. Preview packages are saved and
 stable; already accepted jobs retain their assigned rewards. Cached unaccepted previews receive
 the increased allowance and catalogue revisions when reopened, preserving the task identity and requirements. Abandonment grants neither
@@ -197,7 +209,7 @@ Additional checks:
 ```bash
 luatex --luaonly tests/task_rewards_spec.lua
 luatex --luaonly tests/jobs_menu_spec.lua
-/tmp/cotz-balance-venv/bin/python -m unittest discover -s docs/balance/tests -p test_task_rewards.py -v
+python -m unittest discover -s docs/balance/tests -p test_task_rewards.py -v
 ```
 
 Legacy global partial progress is preserved at the most recently credited trader, using

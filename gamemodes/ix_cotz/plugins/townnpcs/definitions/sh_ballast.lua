@@ -13,6 +13,16 @@ PLUGIN:Register("ballast", {
 		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Recovery provisions",
+				items = {"food_can_tushonka", "drink_bottlewater"}},
+			{label = "Wet-work injuries",
+				items = {"medic_bandage_1", "drug_painkillers"}},
+			{label = "Overnight supplies",
+				items = {"lowtiercookerfuel", "food_can_beans"}},
+		},
+	},
 	dialogue = {
 		delivery = "Over here. If it is still dry, we are off to a good start.",
 		completedGreeting = (

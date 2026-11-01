@@ -10,6 +10,17 @@ PLUGIN:Register("boss", {
 		quantities = {5, 9, 15},
 	},
 	supplies = {"545x39", "556x45", "medic_bandage_1", "drug_painkillers"},
+	rewards = {
+		packages = {
+			{label = "Assault resupply",
+				items = {"545x39", "556x45", "9x39"}},
+			{label = "Casualty supplies",
+				items = {"medic_bandage_1", "medic_medkit_1", "drug_painkillers"}},
+			{label = "Operational provisions",
+				items = {"drink_bottlewater", "food_can_tushonka"}},
+		},
+		bonusService = "repair",
+	},
 	dialogue = {
 		completedGreeting = (
 			"Good to see you back. You've earned a proper hearing. What do you need?"

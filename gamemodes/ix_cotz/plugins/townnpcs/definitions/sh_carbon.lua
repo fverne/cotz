@@ -33,6 +33,16 @@ PLUGIN:Register("carbon", {
 		quantities = {2, 4, 7},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Archive supplies (trade goods)",
+				items = {"value_officepaper", "value_tape_duct"}},
+			{label = "Reading provisions",
+				items = {"drink_bottletea", "food_bread"}},
+			{label = "Field research",
+				items = {"medic_bandage_1", "drink_bottlewater"}},
+		},
+	},
 	dialogue = {
 		delivery = "On the clear part of the desk. Keep any loose pages with it.",
 		completedGreeting = (

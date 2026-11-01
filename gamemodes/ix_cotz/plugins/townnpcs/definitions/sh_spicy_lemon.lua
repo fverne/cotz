@@ -32,6 +32,16 @@ PLUGIN:Register("spicy-lemon", {
 		quantities = {2, 4, 7},
 	},
 	supplies = {"drink_bottlewater", "food_bread", "food_can_tushonka", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Packed lunch",
+				items = {"food_can_tushonka", "food_can_beans", "food_bread"}},
+			{label = "Drinks",
+				items = {"drink_bottlewater", "drink_bottletea", "drink_energydrink_2"}},
+			{label = "Camp cooking",
+				items = {"lowtiercookerfuel", "food_can_corn"}},
+		},
+	},
 	dialogue = {
 		completedGreeting = (
 			"Back again? Good. Tell me what you need before everyone else discovers I'm taking a moment "

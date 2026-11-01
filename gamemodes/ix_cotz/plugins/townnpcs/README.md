@@ -61,7 +61,13 @@ job.rewards can override money/reputation per difficulty; defaults live in sh_co
 contact.supplyStock can override initial, maximum, interval and amount for that NPC.
 Only delivery jobs declare pools and delivery tiers. Quantities apply to deliveries, eliminations and
 computer extraction; destination maps apply to field jobs. Omit settings ignored by the selected kind.
-The supplies list serves both the task reward profile and ordinary vendor stock.
+The `supplies` list configures ordinary vendor stock and legacy kit redemption. Repeatable task
+rewards are separate: `rewards.packages` contains up to three `{label, items}` families. Each saved
+offer selects one affordable eligible candidate per family, with explicit quantities and a two-item
+limit. `rewards.bonusItems` lists optional equipment for larger five-task bonuses; existing purchase
+gates still apply. `rewards.bonusService = "repair"` gives Technut and Boss provider-bound repair
+credit choices. Thematic reward lists never add vendor stock or purchase unlocks.
+See the jobsystem README for budgets, bonus banking, gate rules and claim recovery.
 
 Spoken task text stays in the contact's dialogue and progression fields. step.objective separately
 explains the actual field interaction. Mute communicates through written lists and gestures.

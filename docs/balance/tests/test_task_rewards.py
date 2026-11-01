@@ -115,3 +115,32 @@ class TaskRewardAuditTests(unittest.TestCase):
         folder = ROOT / 'gamemodes/ix_cotz/plugins/dialogue'
         for path in folder.rglob('*.lua'):
             self.assertNotIn('UpgradeTaskReward', path.read_text(), path)
+
+    def test_town_rewards_are_explicit_and_separate_from_stock(self):
+        folder = ROOT / 'gamemodes/ix_cotz/plugins/townnpcs/definitions'
+        contacts = 0
+        for path in folder.glob('sh_*.lua'):
+            tokens = balance.tokenize(path.read_text())
+            profiles = [assigned_table(tokens, i + 2) for i in range(len(tokens) - 2)
+                        if tokens[i].value == 'rewards' and tokens[i + 1].value == '='
+                        and tokens[i + 2].value == '{']
+            if not profiles:
+                continue
+            self.assertEqual(len(profiles), 1, path)
+            contacts += 1
+            profile = profiles[0]
+            self.assertEqual(len(profile['packages']), 3, path)
+            labels = set()
+            for package in profile['packages']:
+                self.assertNotIn(package['label'], labels, path)
+                labels.add(package['label'])
+                self.assertTrue(package['items'], path)
+                for item in package['items']:
+                    self.assertIn(item, self.items, path)
+                    self.assertFalse(item.startswith(('kit_', 'town_quest_', 'bagrubles')), path)
+            for item in profile.get('bonusItems', []):
+                self.assertIn(item, self.items, path)
+            if 'bonusService' in profile:
+                self.assertIn(path.stem, {'sh_technut', 'sh_boss'})
+                self.assertEqual(profile['bonusService'], 'repair')
+        self.assertEqual(contacts, 27)

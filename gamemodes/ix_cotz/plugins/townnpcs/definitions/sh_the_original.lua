@@ -32,6 +32,16 @@ PLUGIN:Register("the-original", {
 		quantities = {2, 4, 7},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Expedition provisions",
+				items = {"food_can_tushonka", "drink_bottlewater"}},
+			{label = "Camp supplies",
+				items = {"lowtiercookerfuel", "food_bread"}},
+			{label = "Close encounters",
+				items = {"medic_bandage_1", "12gauge"}},
+		},
+	},
 	dialogue = {
 		delivery = "Bring it over. Let me have a look at what survived.",
 		completedGreeting = (

@@ -13,6 +13,16 @@ PLUGIN:Register("ledger", {
 		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Short route",
+				items = {"food_raisins", "drink_bottlewater"}},
+			{label = "Long haul",
+				items = {"food_can_tushonka", "food_can_beans"}},
+			{label = "Emergency stop",
+				items = {"medic_bandage_1", "lowtiercookerfuel"}},
+		},
+	},
 	dialogue = {
 		delivery = "The parcel first. Then I can close the entry.",
 		completedGreeting = (

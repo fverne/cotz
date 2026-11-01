@@ -11,6 +11,16 @@ PLUGIN:Register("haggler", {
 		quantities = {5, 9, 15},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Sidearm stock",
+				items = {"9x18", "762x25", "9x19"}},
+			{label = "Cheap firepower",
+				items = {"12gauge", "45acp41", "762x39"}},
+			{label = "Road supplies",
+				items = {"food_can_beans", "drink_bottlewater"}},
+		},
+	},
 	dialogue = {
 		completedGreeting = (
 			"There you are. It's pleasant to see a customer whose promises don't need chasing all over "

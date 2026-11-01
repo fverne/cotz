@@ -13,6 +13,16 @@ PLUGIN:Register("spool", {
 		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Radio spares (trade goods)",
+				items = {"value_battery", "value_capacitors", "value_tape_electric"}},
+			{label = "Night watch",
+				items = {"drug_caffeine", "drink_bottletea"}},
+			{label = "Field callout",
+				items = {"food_raisins", "medic_bandage_1"}},
+		},
+	},
 	dialogue = {
 		delivery = "Right, one moment. Let me find the matching entry.",
 		completedGreeting = (

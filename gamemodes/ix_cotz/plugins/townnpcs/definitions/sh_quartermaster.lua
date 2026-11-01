@@ -33,6 +33,16 @@ PLUGIN:Register("quartermaster", {
 		quantities = {2, 4, 7},
 	},
 	supplies = {"545x39", "556x45", "9x19", "medic_bandage_1"},
+	rewards = {
+		packages = {
+			{label = "Rifle issue",
+				items = {"545x39", "556x45", "762x39", "762x51"}},
+			{label = "Sidearm issue",
+				items = {"9x19", "45acp", "57x28"}},
+			{label = "Field dressing",
+				items = {"medic_bandage_1", "medic_medkit_1", "medic_medkit_2"}},
+		},
+	},
 	dialogue = {
 		delivery = "Place the consignment here for inspection.",
 		completedGreeting = (

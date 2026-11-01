@@ -13,6 +13,19 @@ PLUGIN:Register("atlas", {
 		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Survey provisions",
+				items = {"drink_bottlewater", "food_raisins"}},
+			{label = "Field safety",
+				items = {"medic_bandage_1", "medic_antirad_1"}},
+			{label = "Long survey",
+				items = {"food_can_beans", "drink_bottletea"}},
+		},
+		bonusItems = {
+			"compass",
+		},
+	},
 	dialogue = {
 		delivery = "Here, please. I will check it against the route record.",
 		completedGreeting = (

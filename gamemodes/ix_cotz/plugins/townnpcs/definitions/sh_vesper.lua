@@ -13,6 +13,16 @@ PLUGIN:Register("vesper", {
 		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Radiation supplies",
+				items = {"medic_antirad_1", "medic_antirad_2"}},
+			{label = "Emergency extraction",
+				items = {"medic_bandage_1", "medic_medkit_1"}},
+			{label = "Prospecting provisions",
+				items = {"drink_bottlewater", "food_raisins"}},
+		},
+	},
 	dialogue = {
 		delivery = "Put it where I can check the label. Tell me if it was damaged on the way.",
 		completedGreeting = (

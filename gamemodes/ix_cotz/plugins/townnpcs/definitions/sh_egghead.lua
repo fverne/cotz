@@ -35,6 +35,16 @@ PLUGIN:Register("egghead", {
 		quantities = {2, 4, 7},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	rewards = {
+		packages = {
+			{label = "Anomaly recovery",
+				items = {"medic_psyheal_1", "medic_psyheal_2"}},
+			{label = "Exposure treatment",
+				items = {"medic_antirad_1", "medic_antirad_2"}},
+			{label = "Emergency research supplies",
+				items = {"medic_antipsychotic_1", "medic_stimpak_1"}},
+		},
+	},
 	dialogue = {
 		completedGreeting = (
 			"Hello again. Something to compare, or simply a question? We can probably find time for "
