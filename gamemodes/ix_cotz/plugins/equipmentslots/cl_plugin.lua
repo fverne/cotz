@@ -332,14 +332,19 @@ function PANEL:LayoutCard(card, bounds, scale, padding)
 	card.label:SetFont("cotzEquipmentSmall")
 	card.label:SetPos(padding, padding)
 	card.label:SetSize(bounds.w - padding * 2 - (card.item and buttonSize or 0), headerHeight)
-	local iconAreaHeight = math.max(1, bounds.h - headerHeight - padding * 3)
+	local barHeight = math.max(3, math.floor(scale * 4))
+	local barGap = math.max(2, math.floor(scale * 3))
+	local iconGap = math.max(2, math.floor(scale * 2))
+	local iconTop = padding + headerHeight + iconGap
+	local iconBottom = bounds.h - padding - barHeight * 2 - barGap - iconGap
+	local iconAreaHeight = math.max(1, iconBottom - iconTop)
 
 	if IsValid(card.icon) then
 		local item = card.item
 		local grid = self.inventoryPanel.cotzEquipmentInventoryGrid
 		local size = math.min(grid:GetIconSize(), (bounds.w - padding * 2) / item.width, iconAreaHeight / item.height)
 		local iconWidth, iconHeight = item.width * size, item.height * size
-		local iconY = headerHeight + padding * 2 + (iconAreaHeight - iconHeight) / 2
+		local iconY = iconTop + (iconAreaHeight - iconHeight) / 2
 		card.icon:SetPos((bounds.w - iconWidth) / 2, iconY)
 		card.icon:SetSize(iconWidth, iconHeight)
 		card.unequip:SetFont("cotzEquipmentSmall")
