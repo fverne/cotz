@@ -19,7 +19,6 @@ PLUGIN:Register("quartermaster", {
 			medium = {
 				pools = {
 					"valuables_ordnance_salvage",
-					"valuables_official_records",
 				},
 				quantity = 1,
 			},

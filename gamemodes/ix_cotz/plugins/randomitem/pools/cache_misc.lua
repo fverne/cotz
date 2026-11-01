@@ -85,35 +85,29 @@ ix.randomitems.tables["cache_valuable"] = {
 }
 
 ix.randomitems.tables["cache_documents_tier1"] = {
-	{2889, {"value_med_journal_1"}},
-	{2889, {"value_med_journal_2"}},
-	{2364, {"value_scientistdiary"}},
-	{1858, {"value_lab_journal"}},
+	{4706, {"value_documents_1"}},
+	{2973, {"value_documents_6"}},
+	{2321, {"value_documents_2"}},
 }
 
 ix.randomitems.tables["cache_documents_tier2"] = {
-	{3276, {"value_scientistdiary"}},
-	{2574, {"value_lab_journal"}},
-	{1897, {"value_handbook_circuits"}},
-	{2253, {"value_info_tgdocs"}},
+	{10000, {"value_handbook_circuits"}},
 }
 
 ix.randomitems.tables["cache_documents_tier3"] = {
-	{2163, {"value_handbook_circuits"}},
-	{2568, {"value_info_tgdocs"}},
-	{1447, {"value_documents_10"}},
-	{1494, {"value_documents_14"}},
-	{1154, {"value_documents_9"}},
-	{1174, {"value_documents_13"}},
+	{2910, {"value_handbook_circuits"}},
+	{1947, {"value_documents_10"}},
+	{2010, {"value_documents_14"}},
+	{1553, {"value_documents_9"}},
+	{1580, {"value_documents_13"}},
 }
 
 ix.randomitems.tables["cache_documents_tier4"] = {
-	{2988, {"value_info_tgdocs"}},
-	{1683, {"value_documents_10"}},
-	{1738, {"value_documents_14"}},
-	{1343, {"value_documents_9"}},
-	{1366, {"value_documents_13"}},
-	{882, {"value_documents_11"}},
+	{2400, {"value_documents_10"}},
+	{2479, {"value_documents_14"}},
+	{1915, {"value_documents_9"}},
+	{1948, {"value_documents_13"}},
+	{1258, {"value_documents_11"}},
 }
 
 ix.randomitems.tables["cache_valuables_tier1"] = {
@@ -128,25 +122,21 @@ ix.randomitems.tables["cache_valuables_tier1"] = {
 }
 
 ix.randomitems.tables["cache_valuables_tier2"] = {
-	{883, {"value_electro_gyroscope"}},
-	{883, {"value_militarybattery"}},
-	{1177, {"value_radio_repeater"}},
-	{1486, {"value_phaserelay"}},
-	{1569, {"value_antique_teapot"}},
-	{2172, {"value_container_moderator_toolbox"}},
-	{974, {"value_electr_adv_converter"}},
-	{856, {"value_phaseantenna"}},
+	{1128, {"value_electro_gyroscope"}},
+	{1128, {"value_militarybattery"}},
+	{1504, {"value_radio_repeater"}},
+	{1898, {"value_phaserelay"}},
+	{2004, {"value_antique_teapot"}},
+	{1244, {"value_electr_adv_converter"}},
+	{1094, {"value_phaseantenna"}},
 }
 
 ix.randomitems.tables["cache_valuables_tier3"] = {
-	{1167, {"value_pcpart_cpu"}},
-	{1010, {"value_quest_flight_recorder"}},
-	{1094, {"value_spherical_recorder"}},
-	{1251, {"value_pocketwatch"}},
-	{1167, {"value_mysterious_device"}},
-	{1545, {"value_electr_adv_controller"}},
-	{1383, {"value_field_laptop"}},
-	{1383, {"value_med_surgicalroll"}},
+	{1735, {"value_pcpart_cpu"}},
+	{1859, {"value_pocketwatch"}},
+	{2296, {"value_electr_adv_controller"}},
+	{2055, {"value_field_laptop"}},
+	{2055, {"value_med_surgicalroll"}},
 }
 
 ix.randomitems.tables["cache_valuables_tier4"] = {

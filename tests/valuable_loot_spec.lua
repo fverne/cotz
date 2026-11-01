@@ -9,10 +9,17 @@ for key, pool in pairs(ix.progression.itemPools) do
 		for _, candidate in ipairs(pool.candidates) do reviewedItems[candidate.item] = true end
 	end
 end
-local files = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items/valuables_test gamemodes/ix_cotz/schema/items/valuable"))
+local questItems = {}
+local questFiles = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items/quests"))
+for path in questFiles:lines() do questItems[assert(path:match("/sh_(.+)%.lua$"))] = true end
+questFiles:close()
+local files = assert(io.popen(
+	"rg --files gamemodes/ix_cotz/schema/items/valuables_test "
+		.. "gamemodes/ix_cotz/schema/items/valuable gamemodes/ix_cotz/schema/items/quests"
+))
 for path in files:lines() do
 	local itemID = path:match("/sh_(.+)%.lua$")
-	if path:find("/valuables_test/", 1, true) or reviewedItems[itemID] then
+	if not questItems[itemID] and (path:find("/valuables_test/", 1, true) or reviewedItems[itemID]) then
 		local file = assert(io.open(path))
 		local source = file:read("*a")
 		file:close()
@@ -97,7 +104,9 @@ local npcOnly = {
 }
 for _, id in ipairs(npcOnly) do
 	assert(not worldSeen[id], "NPC pocket valuable leaked into worldspawn: " .. id)
-	assert(humanSeen[id], "NPC pocket valuable has no acquisition route: " .. id)
+	if not questItems[id] then
+		assert(humanSeen[id], "NPC pocket valuable has no acquisition route: " .. id)
+	end
 end
 for id in pairs(humanSeen) do seen[id] = true end
 dofile(root .. "pools/cache_misc.lua")
@@ -122,10 +131,17 @@ local cacheDocuments = {
 }
 for _, id in ipairs(cacheDocuments) do
 	assert(not worldSeen[id], "High-end document leaked into worldspawn: " .. id)
-	assert(cacheSeen[id], "High-end document has no cache route: " .. id)
+	if not questItems[id] then
+		assert(cacheSeen[id], "High-end document has no cache route: " .. id)
+	end
 end
 for id in pairs(cacheSeen) do seen[id] = true end
 
+for _, rows in pairs(ix.randomitems.tables) do
+	for _, row in ipairs(rows) do
+		assert(not questItems[row[2][1]], "Quest item leaked into loot: " .. row[2][1])
+	end
+end
 local count = 0
 for id in pairs(prices) do
 	assert(seen[id], "No world, human or cache acquisition route: " .. id)

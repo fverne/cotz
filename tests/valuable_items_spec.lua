@@ -73,6 +73,7 @@ end
 local itemRoot = "gamemodes/ix_cotz/schema/items/"
 ix.item.Register("base_valuable", nil, true, itemRoot .. "base/sh_valuable.lua")
 ix.item.Register("base_valuables_test", nil, true, itemRoot .. "base/sh_valuables_test.lua")
+ix.item.Register("base_quests", nil, true, itemRoot .. "base/sh_quests.lua")
 local capacities = {value_pcpart_ram = 5, value_screws = 4, value_pcpart_cpu = 6}
 ix.randomitems = {tables = {}, tableweights = {}}
 local itemIDs = {
@@ -133,7 +134,13 @@ for _, id in ipairs(itemIDs) do
 	if existing then
 		existing:close()
 	else
-		folder = "valuable"
+		folder = "quests"
+		existing = io.open(itemRoot .. folder .. "/sh_" .. id .. ".lua")
+		if existing then
+			existing:close()
+		else
+			folder = "valuable"
+		end
 	end
 	local path = itemRoot .. folder .. "/sh_" .. id .. ".lua"
 	local expectedBase = "base_" .. folder
@@ -266,4 +273,17 @@ for id in pairs(capacities) do
 	check(ix.taskRewards.ExpectedValue(id) == item.price * 1.5, "task estimate uses the mean of the 1-2 spawn roll")
 	check(ix.taskRewards.ExpectedValue(id, {quantity = 2}) == item.price * 2, "explicit reward quantity is retained")
 end
+local questFiles = assert(io.popen("rg --files " .. itemRoot .. "quests"))
+local questCount = 0
+for path in questFiles:lines() do
+	local id = assert(path:match("/sh_(.+)%.lua$"))
+	check(not read(path):find("ITEM.base", 1, true), "quest definitions inherit through their folder")
+	ix.item.Register(id, "base_quests", false, path)
+	local item = ix.item.list[id]
+	check(item.base == "base_quests", "quest items use the folder base")
+	check(item.GetWeight == ix.item.base.base_valuable.GetWeight, "quest items retain valuable mechanics")
+	questCount = questCount + 1
+end
+questFiles:close()
+check(questCount > 0, "quest candidates are registered")
 print("valuable_items_spec: " .. checks .. " checks passed")

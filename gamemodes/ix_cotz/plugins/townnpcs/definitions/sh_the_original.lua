@@ -12,14 +12,12 @@ PLUGIN:Register("the-original", {
 			easy = {
 				pools = {
 					"valuables_personal_effects",
-					"valuables_audio_cassettes",
 				},
 				quantity = 1,
 			},
 			medium = {
 				pools = {
 					"valuables_decorative_valuables",
-					"valuables_faction_patches",
 				},
 				quantity = 1,
 			},

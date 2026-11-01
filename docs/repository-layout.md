@@ -69,15 +69,17 @@ select `base_newammo`, `base_newbags`, and `base_newweapons`. Item files retain 
 base relationships. Entity and weapon framework paths likewise remain stable. New organizational
 folders inside `items/` cannot be assumed to load recursively.
 
-`schema/items/valuables_test/` and `schema/items/valuable/` contain the 378 implemented items
-listed in the combined valuables and supply/job workbook. The `recovery_` and `supply_` filename segments have been removed,
-which also changes their filename-derived item IDs. The kerosene container uses
-`value_kerosene_container` to avoid the existing `value_kerosene` ID. Its `base_valuables_test` base
-inherits `base_valuable`, so Helix discovers the folder normally and retains the shared valuable
-mechanics. The 34 related boxes, bags, carriers, and smaller containers live in `valuable/`
-and inherit `base_valuable` through the folder loader. The remaining 344 definitions stay in
-`valuables_test/`. Filenames and item IDs are unchanged. The workbook's existing-item comparator tab
-is reference data, not part of this group.
+The 378 implemented items listed in the combined valuables and supply/job workbook are split across
+`schema/items/valuables_test/`, `schema/items/valuable/`, and `schema/items/quests/`.
+The `recovery_` and `supply_` filename segments have been removed, which also changes their
+filename-derived item IDs. The kerosene container uses `value_kerosene_container` to avoid the
+existing `value_kerosene` ID. `base_valuables_test` and `base_quests` inherit `base_valuable`,
+so Helix discovers both folders normally and retains the shared valuable mechanics.
+The 36 related boxes, bags, carriers, and smaller containers moved to `valuable/`; 82 selected
+quest candidates moved to `quests/`. See [quest item candidates](quest-items.md) for their inventory
+and selection criteria. These moves preserve filenames and item IDs. Quest IDs are excluded from ordinary loot and job hand-in pools. Dedicated progression
+acquisition is still to be authored.
+The workbook's existing-item comparator tab is reference data, not part of this group.
 
 ## Archive
 

@@ -12,7 +12,10 @@ end
 local root = "gamemodes/ix_cotz/plugins/randomitem/pools/"
 dofile(root .. "cache_misc.lua")
 local prices = {}
-local files = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items/valuable gamemodes/ix_cotz/schema/items/valuables_test"))
+local files = assert(io.popen(
+	"rg --files gamemodes/ix_cotz/schema/items/valuables_test "
+		.. "gamemodes/ix_cotz/schema/items/valuable gamemodes/ix_cotz/schema/items/quests"
+))
 for path in files:lines() do
 	local id = path:match("/sh_([^/]+)%.lua$")
 	prices[id] = tonumber(read(path):match("ITEM.price%s*=%s*(%d+)"))

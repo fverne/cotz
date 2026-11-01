@@ -1,6 +1,6 @@
 # Valuables hand-in catalogue
 
-All 378 concrete items in `schema/items/valuables_test/` are classified below. The 50 new
+The 296 non-quest valuables are classified below. The 46
 `valuables_*` pools live in `progression/definitions/sh_requirementpools.lua` and are loaded directly into the
 shared progression pool registry. Selected pools now feed the twelve town item-delivery contacts by difficulty; see the
 [town delivery allocation](../gamemodes/ix_cotz/plugins/townnpcs/README.md#regional-valuable-deliveries).
@@ -24,63 +24,63 @@ provisions; Carbon for records; Quartermaster for military records and ordnance;
 for collectibles and insignia. Scientific equipment/samples can use finite ecologist hand-ins
 without replacing their current repeatable specialties.
 
-Each authoring pool contains 4–12 candidates. Categories separate armour panels from textiles,
+Each authoring pool contains 1–12 candidates after quest exclusions. Categories separate armour panels from textiles,
 computer parts from portable computers and media, documents by purpose, and transit cases by use.
 Filters share a pool with air/fluid fittings. Clinical, trauma and diagnostic stock remain separate.
 Research injectors are split by their visible label families without claiming distinct drug effects.
-Existing live pools retain their candidates and sizes until acquisition is playtested.
+Quest items are excluded; empty pools and their job references have been removed.
 
 ## Pool index
 
 | Pool | Candidates |
 | --- | ---: |
 | `valuables_armour_panels` | 6 |
-| `valuables_audio_cassettes` | 10 |
+
 | `valuables_cleaning_supplies` | 12 |
 | `valuables_clinical_supplies` | 7 |
 | `valuables_computer_parts` | 7 |
-| `valuables_control_electronics` | 7 |
+| `valuables_control_electronics` | 5 |
 | `valuables_cutting_tools` | 6 |
-| `valuables_data_archives` | 8 |
+| `valuables_data_archives` | 1 |
 | `valuables_decorative_valuables` | 8 |
 | `valuables_drivers_wrenches` | 8 |
 | `valuables_electrical_supplies` | 9 |
 | `valuables_electronic_components` | 8 |
-| `valuables_equipment_pouches` | 6 |
-| `valuables_faction_patches` | 7 |
-| `valuables_field_records` | 8 |
+| `valuables_equipment_pouches` | 5 |
+
+| `valuables_field_records` | 6 |
 | `valuables_filtration` | 4 |
-| `valuables_flash_media` | 7 |
+| `valuables_flash_media` | 4 |
 | `valuables_fuel_supplies` | 11 |
 | `valuables_instruments` | 8 |
-| `valuables_irregular_patches` | 6 |
+| `valuables_irregular_patches` | 1 |
 | `valuables_medical_equipment` | 8 |
-| `valuables_military_cases` | 7 |
-| `valuables_office_records` | 9 |
-| `valuables_official_records` | 8 |
+| `valuables_military_cases` | 4 |
+| `valuables_office_records` | 6 |
+
 | `valuables_ordnance_salvage` | 7 |
 | `valuables_personal_effects` | 8 |
 | `valuables_portable_computers` | 4 |
 | `valuables_portable_power` | 5 |
-| `valuables_printed_material` | 10 |
+| `valuables_printed_material` | 9 |
 | `valuables_protective_textiles` | 9 |
 | `valuables_provisions` | 6 |
 | `valuables_radio_components` | 5 |
 | `valuables_radio_equipment` | 8 |
-| `valuables_recording_equipment` | 8 |
-| `valuables_reinforced_cases` | 7 |
+| `valuables_recording_equipment` | 4 |
+| `valuables_reinforced_cases` | 2 |
 | `valuables_repair_parts` | 12 |
 | `valuables_research_injectors_a` | 7 |
 | `valuables_research_injectors_b` | 7 |
-| `valuables_research_records` | 5 |
-| `valuables_research_samples` | 6 |
+
+| `valuables_research_samples` | 4 |
 | `valuables_sample_carriers` | 6 |
-| `valuables_secured_cases` | 6 |
-| `valuables_specialist_cases` | 6 |
-| `valuables_survey_equipment` | 8 |
+| `valuables_secured_cases` | 1 |
+| `valuables_specialist_cases` | 2 |
+| `valuables_survey_equipment` | 6 |
 | `valuables_technical_records` | 6 |
 | `valuables_textile_supplies` | 12 |
-| `valuables_transit_cases` | 10 |
+| `valuables_transit_cases` | 7 |
 | `valuables_trauma_supplies` | 7 |
 | `valuables_workshop_consumables` | 8 |
 | `valuables_workshop_tools` | 10 |
@@ -89,7 +89,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 
 | Item ID | Item name | Pool |
 | --- | --- | --- |
-| `value_air_journal` | Flight Log Folder | `valuables_field_records` |
 | `value_airfilter` | Air Filter Housing | `valuables_filtration` |
 | `value_ais_sart` | Emergency Locator Unit | `valuables_radio_equipment` |
 | `value_anomaly_plant` | Anomalous Botanical Sample | `valuables_research_samples` |
@@ -98,18 +97,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_antique_vase` | Old Ceramic Vase | `valuables_decorative_valuables` |
 | `value_archive_cassette` | Archive Cassette | `valuables_recording_equipment` |
 | `value_awl` | Awl | `valuables_cutting_tools` |
-| `value_badge_bandit` | Bandit Insignia | `valuables_irregular_patches` |
-| `value_badge_csky` | Clear Sky Insignia | `valuables_faction_patches` |
-| `value_badge_defiance` | Defiance Insignia | `valuables_faction_patches` |
-| `value_badge_dolg` | Duty Insignia | `valuables_faction_patches` |
-| `value_badge_ecolog` | Ecologist Insignia | `valuables_faction_patches` |
-| `value_badge_freedom` | Freedom Insignia | `valuables_faction_patches` |
-| `value_badge_greh` | Sin Insignia | `valuables_irregular_patches` |
-| `value_badge_isg` | ISG Insignia | `valuables_faction_patches` |
-| `value_badge_merc` | Mercenary Insignia | `valuables_irregular_patches` |
-| `value_badge_military` | Military Insignia | `valuables_faction_patches` |
-| `value_badge_monolith` | Monolith Insignia | `valuables_irregular_patches` |
-| `value_badge_renegade` | Renegade Insignia | `valuables_irregular_patches` |
 | `value_ballistic1` | Segmented Armour Panel | `valuables_armour_panels` |
 | `value_ballistic11` | Dense Armour Insert | `valuables_armour_panels` |
 | `value_ballistic3` | Padded Armour Panel | `valuables_armour_panels` |
@@ -141,32 +128,11 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_clothbook2` | Orange Sewing Handbook | `valuables_technical_records` |
 | `value_coffee` | Ground Coffee Tin | `valuables_provisions` |
 | `value_container_ammo` | Ammunition Transit Can | `valuables_military_cases` |
-| `value_container_arena_battlepass_s1` | Blue Decorated Transit Box | `valuables_transit_cases` |
-| `value_container_arena_battlepass_s2` | Red Decorated Transit Box | `valuables_transit_cases` |
 | `value_container_cardholder` | Metal Card Sleeve | `valuables_equipment_pouches` |
-| `value_container_case_kompromat` | Orange Evidence Case | `valuables_specialist_cases` |
-| `value_container_cultic_kappa` | Marked Research Case | `valuables_specialist_cases` |
-| `value_container_gamma` | Striped Equipment Case | `valuables_reinforced_cases` |
-| `value_container_gamma_damaged` | Worn Striped Equipment Case | `valuables_reinforced_cases` |
-| `value_container_gamma_prestige` | Brown Reinforced Case | `valuables_reinforced_cases` |
-| `value_container_gamma_tue` | Pale Reinforced Case | `valuables_reinforced_cases` |
-| `value_container_grenadebox` | Grey Ordnance Case | `valuables_military_cases` |
 | `value_container_injectorcase` | Injector Transport Pouch | `valuables_equipment_pouches` |
-| `value_container_items_thicc` | Large Ribbed Transit Case | `valuables_reinforced_cases` |
 | `value_container_junkbox` | Deep Utility Crate | `valuables_reinforced_cases` |
-| `value_container_keys_case` | Textured Key Case | `valuables_equipment_pouches` |
 | `value_container_lopouch` | Document Delivery Pouch | `valuables_equipment_pouches` |
-| `value_container_meds` | Medical Transport Case | `valuables_specialist_cases` |
-| `value_container_moderator_toolbox` | Stickered Tool Case | `valuables_specialist_cases` |
-| `value_container_money` | Cash Transit Case | `valuables_transit_cases` |
 | `value_container_parls` | Military Transit Crate | `valuables_military_cases` |
-| `value_container_pistolcase` | Small Padded Equipment Case | `valuables_military_cases` |
-| `value_container_plates_case` | Armour Plate Transit Case | `valuables_military_cases` |
-| `value_container_secured_alpha` | Small Yellow Transit Case | `valuables_secured_cases` |
-| `value_container_secured_beta` | Flat Yellow Transit Case | `valuables_secured_cases` |
-| `value_container_secured_epsilon` | Long Yellow Transit Case | `valuables_secured_cases` |
-| `value_container_secured_kappa` | Black-and-Orange Transit Case | `valuables_secured_cases` |
-| `value_container_secured_theta` | Strapped Transit Case | `valuables_secured_cases` |
 | `value_container_smallitems` | Small Utility Pouch | `valuables_equipment_pouches` |
 | `value_container_trackcase` | Grey Tracking Case | `valuables_specialist_cases` |
 | `value_container_weapon_thicc` | Long Heavy Equipment Case | `valuables_military_cases` |
@@ -187,7 +153,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_electr_adv_ultralink` | Data Link Module | `valuables_radio_components` |
 | `value_electr_card_programmer` | Recovered Card Programmer | `valuables_control_electronics` |
 | `value_electr_components` | Loose Electronic Components | `valuables_electronic_components` |
-| `value_electr_controller_quest` | Red-Trimmed Control Unit | `valuables_control_electronics` |
 | `value_electr_countermeasure` | Military Electronics Assembly | `valuables_control_electronics` |
 | `value_electr_gary_zont` | Compact Radio Assembly | `valuables_radio_equipment` |
 | `value_electr_hdd_quest` | Recovered Hard Drive | `valuables_computer_parts` |
@@ -196,17 +161,11 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_electr_tplug` | Three-Way Socket Adapter | `valuables_electrical_supplies` |
 | `value_electricdrill` | Cordless Drill | `valuables_workshop_tools` |
 | `value_electro_gyroscope` | Boxed Inertial Sensor | `valuables_instruments` |
-| `value_electroniccase_0013` | Numbered Data Module 0013 | `valuables_data_archives` |
-| `value_electroniccase_0022` | Numbered Data Module 0022 | `valuables_data_archives` |
-| `value_electroniccase_0031` | Numbered Data Module 0031 | `valuables_data_archives` |
-| `value_electroniccase_0048` | Numbered Data Module 0048 | `valuables_data_archives` |
-| `value_electroniccase_0052` | Numbered Data Module 0052 | `valuables_data_archives` |
 | `value_energy_accum` | Camera Battery Pack | `valuables_portable_power` |
 | `value_energy_cyclon` | Cylindrical Battery Assembly | `valuables_portable_power` |
 | `value_energy_greenbat` | Rechargeable Cell | `valuables_portable_power` |
 | `value_envelope` | Plain Envelope | `valuables_office_records` |
 | `value_event_labyrinth_chem_container` | Marked Chemical Carrier | `valuables_sample_carriers` |
-| `value_event_labyrinth_videocassette` | Stained Video Cassette | `valuables_recording_equipment` |
 | `value_expandingfoam` | Expanding Foam | `valuables_workshop_consumables` |
 | `value_explosive_charge` | Wired Demolition Assembly | `valuables_ordnance_salvage` |
 | `value_fabric_aramid` | Folded Aramid Fabric | `valuables_textile_supplies` |
@@ -224,8 +183,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_flash_card_ironkey` | Metal Flash Drive | `valuables_flash_media` |
 | `value_flash_card_ironkey_slider` | Metal Slider Flash Drive | `valuables_flash_media` |
 | `value_flash_card_slider` | Blue-Loop Flash Drive | `valuables_flash_media` |
-| `value_flash_card_slider_kerman` | Tape-Labelled Flash Drive | `valuables_flash_media` |
-| `value_flash_card_slider_sanitar` | Blue-Taped Flash Drive | `valuables_flash_media` |
 | `value_flyer_01` | Shooting Magazine Bundle | `valuables_printed_material` |
 | `value_flyer_02` | Equipment Magazine Bundle | `valuables_printed_material` |
 | `value_flyer_03` | Worn Magazine Bundle | `valuables_printed_material` |
@@ -237,7 +194,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_guide` | Pocket Survival Guide | `valuables_technical_records` |
 | `value_gyroscope` | Precision Gyroscope | `valuables_instruments` |
 | `value_gyrotachometer` | Gyrotachometer Assembly | `valuables_instruments` |
-| `value_hacktool_mechanic` | Improvised Electronic Tool | `valuables_control_electronics` |
 | `value_hammer` | Workshop Hammer | `valuables_workshop_tools` |
 | `value_handbook_circuits` | Circuit Design Handbook | `valuables_technical_records` |
 | `value_handbook_materials` | Industrial Materials Handbook | `valuables_technical_records` |
@@ -248,16 +204,11 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_household_toothpaste1` | Toothpaste Tube | `valuables_cleaning_supplies` |
 | `value_household_tree_life_extender` | Plant Preservative Bottle | `valuables_cleaning_supplies` |
 | `value_hultafors_db5000` | Workshop Sledgehammer | `valuables_workshop_tools` |
-| `value_info_cd_disk_i` | Marked Data Disc I | `valuables_data_archives` |
-| `value_info_cd_disk_ii` | Marked Data Disc II | `valuables_data_archives` |
-| `value_info_diary_friend_mechanic` | Tied Leather Journal | `valuables_field_records` |
 | `value_info_labrys` | Labrys Booklet | `valuables_printed_material` |
 | `value_info_maps` | Survey Map Bundle | `valuables_field_records` |
 | `value_info_militaryflash` | Rugged Data Cartridge | `valuables_flash_media` |
 | `value_info_moleskine` | Pocket Field Notebook | `valuables_field_records` |
 | `value_info_securedtape` | Archive Tape Cartridge | `valuables_data_archives` |
-| `value_info_tgdocs` | Blue Research Dossier | `valuables_research_records` |
-| `value_info_videocassette_cyborg` | Labelled Video Cassette | `valuables_recording_equipment` |
 | `value_injector_2a2` | 2A2 Research Injector | `valuables_research_injectors_a` |
 | `value_injector_3btg` | 3-b-TG Research Injector | `valuables_research_injectors_a` |
 | `value_injector_ahf1m` | AHF1-M Research Injector | `valuables_research_injectors_a` |
@@ -272,7 +223,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_injector_sj9` | SJ9 Research Injector | `valuables_research_injectors_b` |
 | `value_injector_trimadol` | Trimadol Research Injector | `valuables_research_injectors_b` |
 | `value_injector_xtg12` | XTG-12 Research Injector | `valuables_research_injectors_b` |
-| `value_intelligence` | Loose Intelligence Dossier | `valuables_official_records` |
 | `value_ipcamera` | Recovered Wireless Camera | `valuables_electronic_components` |
 | `value_ir_ms2000` | Infrared Marker Unit | `valuables_radio_equipment` |
 | `value_jamming` | Recovered Interference Unit | `valuables_radio_equipment` |
@@ -281,7 +231,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_key_danexert` | Key with Souvenir Fob | `valuables_personal_effects` |
 | `value_key_labyrinth_torch` | Gas Torch Assembly | `valuables_workshop_tools` |
 | `value_knife_box_low` | Labelled Parts Box | `valuables_transit_cases` |
-| `value_lab_journal` | Laboratory Log Folder | `valuables_research_records` |
 | `value_labyrinth_valve` | Salvaged Valve Wheel | `valuables_filtration` |
 | `value_lamp_efficient` | Energy-Saving Lamp | `valuables_electrical_supplies` |
 | `value_lamp_uv` | Ultraviolet Lamp | `valuables_electrical_supplies` |
@@ -289,7 +238,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_large_parts` | Large Mechanical Parts | `valuables_repair_parts` |
 | `value_lcddirty` | Cracked Display Panel | `valuables_electronic_components` |
 | `value_letter` | Stamped Letter | `valuables_office_records` |
-| `value_letter_tg` | Corporate Letter | `valuables_official_records` |
 | `value_lighter_gold` | Gold-Plated Lighter | `valuables_decorative_valuables` |
 | `value_lightkeeper_amulet` | Tooth Pendant | `valuables_personal_effects` |
 | `value_magnet` | Ring Magnet Assembly | `valuables_electrical_supplies` |
@@ -303,8 +251,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_med_haemostatic` | Haemostatic Dressing Packet | `valuables_trauma_supplies` |
 | `value_med_ibuprofen` | Ibuprofen Bottle | `valuables_clinical_supplies` |
 | `value_med_injectiondevice` | Clinical Injection Device | `valuables_trauma_supplies` |
-| `value_med_journal_1` | Clinical Records Folder I | `valuables_research_records` |
-| `value_med_journal_2` | Clinical Records Folder II | `valuables_research_records` |
 | `value_med_ledx` | Skin Transilluminator | `valuables_medical_equipment` |
 | `value_med_ledx_red` | Red Skin Transilluminator | `valuables_medical_equipment` |
 | `value_med_medicalstock` | Assorted Medical Stock | `valuables_clinical_supplies` |
@@ -324,20 +270,13 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_med_vitamins` | Vitamin Bottle | `valuables_clinical_supplies` |
 | `value_metalparts` | Metal Spare Parts | `valuables_repair_parts` |
 | `value_milimap` | Military Map Sheet | `valuables_field_records` |
-| `value_military_secret_documents_1` | Military Records Folder I | `valuables_official_records` |
-| `value_military_secret_documents_2` | Military Records Folder II | `valuables_official_records` |
-| `value_military_secret_documents_3` | Military Records Folder III | `valuables_official_records` |
 | `value_militarybattery` | Heavy Military Battery | `valuables_portable_power` |
 | `value_militaryboard` | Military Circuit Board | `valuables_electronic_components` |
 | `value_minedetector` | Green Survey Equipment Case | `valuables_survey_equipment` |
 | `value_mining_kit` | Mining Tool Belt | `valuables_workshop_tools` |
 | `value_multitul_0` | Folding Multitool | `valuables_workshop_tools` |
-| `value_mysterious_device` | Unidentified Instrument Assembly | `valuables_survey_equipment` |
 | `value_note_book_coming_closed` | Embossed Hardback Book | `valuables_printed_material` |
 | `value_note_folder_closed_cardboard` | Plain Cardboard Folder | `valuables_office_records` |
-| `value_note_folder_closed_cardboard_personal` | Personnel File Folder | `valuables_official_records` |
-| `value_note_folder_closed_cardboard_state` | Official File Folder | `valuables_official_records` |
-| `value_note_folder_closed_terragroup` | Corporate Records Folder | `valuables_official_records` |
 | `value_note_newspaper_folded_01` | Folded Newspaper | `valuables_printed_material` |
 | `value_note_newspaper_folded_02` | Illustrated Newspaper | `valuables_printed_material` |
 | `value_notepad_a5_closed_01` | Large Spiral Notebook | `valuables_office_records` |
@@ -351,9 +290,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_other_lupo` | Coffee Bean Jar | `valuables_provisions` |
 | `value_other_tea` | Boxed Loose Tea | `valuables_provisions` |
 | `value_other_uzrgm_fuse` | Recovered Grenade Fuze | `valuables_ordnance_salvage` |
-| `value_packinglist_goshan` | Warehouse Packing List A | `valuables_office_records` |
-| `value_packinglist_idea` | Warehouse Packing List B | `valuables_office_records` |
-| `value_packinglist_oli` | Warehouse Packing List C | `valuables_office_records` |
 | `value_parcel` | Addressed Parcel | `valuables_transit_cases` |
 | `value_parts` | Small Parts Tin | `valuables_repair_parts` |
 | `value_pcpart_cpu` | Desktop Processor | `valuables_computer_parts` |
@@ -365,7 +301,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_pda3` | Recovered Blue PDA | `valuables_portable_computers` |
 | `value_phaseantenna` | Phased Antenna Array | `valuables_radio_components` |
 | `value_phaserelay` | Phase Relay Module | `valuables_radio_components` |
-| `value_photograph_album` | Old Photograph Album | `valuables_printed_material` |
 | `value_pipewrench` | Pipe Wrench | `valuables_drivers_wrenches` |
 | `value_plastic` | Polymer Repair Sheet | `valuables_workshop_consumables` |
 | `value_plasticbag_labyrinth` | Stained Sample Bag | `valuables_research_samples` |
@@ -378,24 +313,12 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_powerfilter` | Electrical Power Filter | `valuables_electrical_supplies` |
 | `value_precisiontools` | Precision Screwdriver Set | `valuables_drivers_wrenches` |
 | `value_pressuregauge` | Pressure Gauge | `valuables_instruments` |
-| `value_psi_helmet` | Recovered Experimental Headset | `valuables_survey_equipment` |
 | `value_pukt90` | Boxed Instrument Consignment | `valuables_transit_cases` |
 | `value_quest_biohazard_case` | Biohazard Transport Case | `valuables_sample_carriers` |
-| `value_quest_flight_recorder` | Recovered Flight Recorder | `valuables_recording_equipment` |
 | `value_radio` | Recovered Handheld Radio | `valuables_radio_equipment` |
 | `value_radio_repeater` | Recovered Radio Relay | `valuables_radio_equipment` |
 | `value_ratpoison` | Rat Poison | `valuables_cleaning_supplies` |
 | `value_receiver1` | Pocket Radio Receiver | `valuables_radio_equipment` |
-| `value_recorder_tape_02` | Blue-Label Audio Cassette | `valuables_audio_cassettes` |
-| `value_recorder_tape_03` | Yellow-Label Audio Cassette | `valuables_audio_cassettes` |
-| `value_recorder_tape_04` | White Audio Cassette | `valuables_audio_cassettes` |
-| `value_recorder_tape_05` | Red Audio Cassette | `valuables_audio_cassettes` |
-| `value_recorder_tape_06` | Handwritten Audio Cassette | `valuables_audio_cassettes` |
-| `value_recorder_tape_08` | Black Audio Cassette | `valuables_audio_cassettes` |
-| `value_recorder_tape_09` | Dark Labelled Audio Cassette | `valuables_audio_cassettes` |
-| `value_recorder_tape_10` | Blue-Strip Audio Cassette | `valuables_audio_cassettes` |
-| `value_recorder_tape_11` | Red Labelled Audio Cassette | `valuables_audio_cassettes` |
-| `value_recorder_tape_12` | Green Audio Cassette | `valuables_audio_cassettes` |
 | `value_retardant1` | Orange Protective Tape | `valuables_protective_textiles` |
 | `value_retardant10` | Grey Protective Tape | `valuables_protective_textiles` |
 | `value_retardant11` | Grey Lining Bundle | `valuables_protective_textiles` |
@@ -412,7 +335,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_sas` | Ribbed Storage Drive | `valuables_computer_parts` |
 | `value_scanner_anomaly` | Recovered Anomaly Survey Station | `valuables_survey_equipment` |
 | `value_scanner_artefact` | Recovered Specimen Survey Station | `valuables_survey_equipment` |
-| `value_scientistdiary` | Scientist's Field Diary | `valuables_research_records` |
 | `value_screwdriver` | Flathead Screwdriver | `valuables_drivers_wrenches` |
 | `value_screws` | Pack of Screws | `valuables_repair_parts` |
 | `value_security_box` | Metal Security Drawer | `valuables_transit_cases` |
@@ -425,8 +347,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_soap` | Bar of Soap | `valuables_cleaning_supplies` |
 | `value_soda` | Baking Soda Carton | `valuables_cleaning_supplies` |
 | `value_spec_recorder` | Pocket Voice Recorder | `valuables_recording_equipment` |
-| `value_spec_tgflashkey` | Tagged Security Flash Drive | `valuables_flash_media` |
-| `value_spherical_recorder` | Spherical Flight Recorder | `valuables_recording_equipment` |
 | `value_statue_raven` | Raven Statuette | `valuables_decorative_valuables` |
 | `value_strelets_amulet` | Tag and Wooden Token | `valuables_personal_effects` |
 | `value_sugar` | Sugar Carton | `valuables_provisions` |
@@ -435,8 +355,6 @@ Existing live pools retain their candidates and sizes until acquisition is playt
 | `value_tapemeasure` | Tape Measure | `valuables_workshop_tools` |
 | `value_tarp` | Folded Tarpaulin | `valuables_textile_supplies` |
 | `value_textolite` | Bare Circuit Boards | `valuables_electronic_components` |
-| `value_tg_vi_24` | Dark-Capped Research Tube | `valuables_research_samples` |
-| `value_tg_vi_24_antivirus` | Green-Capped Research Tube | `valuables_research_samples` |
 | `value_thermalmodule` | Thermal Imaging Module | `valuables_instruments` |
 | `value_thermobag` | Insulated Sample Carrier | `valuables_sample_carriers` |
 | `value_thick_diary` | Thick Pocket Diary | `valuables_field_records` |

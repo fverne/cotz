@@ -4,7 +4,7 @@ Worldspawn pool ownership is Swamps 1/2, Garbage regular/rare, Waystation 3/4, a
 The randomitem library explicitly includes all eight pools on both realms. Map spawn definitions
 must select these pool IDs; registering a pool does not place loot spawners or change map presets.
 
-All 378 `valuables_test` items have a worldspawn, human-corpse or hidden-cache acquisition route. Household cleaning stock
+All 296 non-quest valuables have a worldspawn, human-corpse or hidden-cache acquisition route. Household cleaning stock
 and dry provisions appear in every region. Swamps favours everyday supplies, field records and
 personal effects; Garbage favours scrap, hand tools, repair stock and worn equipment cases;
 Waystation favours industrial, military and clinical equipment; Pripyat favours computers,
@@ -103,29 +103,19 @@ This source split concerns worldspawn versus human pools, not vendor inventories
 
 | NPC pocket valuables moved out of worldspawn |
 | --- |
-| `value_badge_bandit` |
-| `value_badge_merc` |
-| `value_badge_military` |
-| `value_badge_renegade` |
 | `value_barter_walletwz` |
 | `value_bogatir_moreman_tag` |
 | `value_chevron_bear` |
 | `value_info_militaryflash` |
-| `value_intelligence` |
 | `value_key_danexert` |
 | `value_letter` |
-| `value_military_secret_documents_1` |
-| `value_military_secret_documents_2` |
-| `value_military_secret_documents_3` |
 | `value_other_bage_ng` |
-| `value_photograph_album` |
-| `value_spec_tgflashkey` |
 | `value_strelets_amulet` |
 | `value_thin_diary` |
 | `value_wallet` |
 
 World pools are reweighted after removal, retaining their category budgets and regional value
-progression. The combined acquisition test checks all 378 valuables remain obtainable and that
+progression. The combined acquisition test checks all 296 non-quest valuables remain obtainable and that
 the listed NPC-only pocket items cannot reappear in worldspawn unnoticed. Existing saved NPCs
 and corpses use their saved pool IDs; pool membership changes take effect on new loot rolls.
 
@@ -138,8 +128,8 @@ chooses the matching `cache_valuables_tierN` at weight 6 or the existing artifac
 an 85.7% chance of a rare valuable, not a worldspawn filler item. Selection seven always chooses
 `cache_documents_tierN`. These eight new tables live in the already-loaded `cache_misc.lua`.
 
-Rookie documents are clinical/field journals; higher tiers add specialist references, research
-dossiers and the valuable legacy research/manual documents. The following eleven IDs are removed
+Rookie documents use ordinary legacy documents; higher tiers retain specialist references and
+legacy research/manual documents. The following non-quest IDs are removed
 from all eight worldspawn pools, with their acquisition routed through cache documents:
 
 - `value_documents_10`
@@ -148,22 +138,17 @@ from all eight worldspawn pools, with their acquisition routed through cache doc
 - `value_documents_14`
 - `value_documents_9`
 - `value_handbook_circuits`
-- `value_info_tgdocs`
-- `value_lab_journal`
-- `value_med_journal_1`
-- `value_med_journal_2`
-- `value_scientistdiary`
 
 The cache valuable pools make otherwise rare items ordinary cache results. Early kits include
 precision tools, sensors and collectible salvage; middle kits include military batteries, radio
 modules and instruments; high-end kits include processors, flight recorders and surgical kit;
 top kits include thermal modules, military boards, SSDs, laptops, survey stations and diagnostic
-instruments. Each tier has eight valuable candidates. Document and valuable weights are proportional to
+instruments. Quest assets are excluded from every tier. Document and valuable weights are proportional to
 `1 / ITEM.price`, normalized to 10,000 with integer rounding: an item costing twice as much has
 roughly half the selection chance within the same pool. Equal-priced items have equal odds
 within one weight point. Weights are authored values; retuning prices requires updating weights.
 Both document and valuable average nominal values rise by kit tier. These rare valuables remain
-possible in worldspawn; only the eleven listed documents are removed from worldspawn here.
+possible in worldspawn; only the listed non-quest documents are removed from worldspawn here.
 
 No extra loot rolls, resets, new item IDs or changes to stash-note tier chances are introduced.
 Existing kit items use these definitions when opened. Regression checks:
@@ -171,3 +156,9 @@ Existing kit items use these definitions when opened. Regression checks:
 The tests follow notes to kits to pools, verify the seven selections and the rare-valuable chance,
 validate item references and increasing cache value, and protect cache documents from returning
 to worldspawn. Opening/pickup, inventory overflow and live cache frequency still need multiplayer QA.
+
+## Reserved quest assets
+
+All IDs defined in `schema/items/quests/` are excluded from worldspawn, NPC drops and caches.
+Remaining affected loot weights are normalized to 10,000. Dedicated progression acquisition
+will be authored separately; no saved inventories or accepted assignments are reset.

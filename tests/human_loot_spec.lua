@@ -49,7 +49,7 @@ for key, rows in pairs(ix.randomitems.tables) do
 		if data then assert(data.quantity and data.quantity >= 1, "Invalid pocket stack") end
 		total = total + row[1]
 	end
-	assert(valuables >= 20, "Each NPC role needs expanded pocket-loot variety: " .. key)
+	assert(valuables >= 12, "Each NPC role needs non-quest pocket-loot variety: " .. key)
 	assert(total == 10000, "Pool must total 10,000: " .. key)
 	if key:match("^z_") then
 		for id in pairs(unique) do

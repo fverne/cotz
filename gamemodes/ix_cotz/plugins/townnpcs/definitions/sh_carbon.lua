@@ -19,14 +19,12 @@ PLUGIN:Register("carbon", {
 			},
 			medium = {
 				pools = {
-					"valuables_official_records",
 					"valuables_technical_records",
 				},
 				quantity = 1,
 			},
 			hard = {
 				pools = {
-					"valuables_research_records",
 					"valuables_data_archives",
 				},
 				quantity = 2,

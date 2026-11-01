@@ -20,7 +20,6 @@ PLUGIN:Register("egghead", {
 			medium = {
 				pools = {
 					"valuables_research_samples",
-					"valuables_research_records",
 				},
 				quantity = 1,
 			},
