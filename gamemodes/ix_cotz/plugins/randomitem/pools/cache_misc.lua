@@ -83,3 +83,79 @@ ix.randomitems.tables["cache_valuable"] = {
   {1, {"cassette_standart"}},
   {1, {"cassette_true"}},
 }
+
+ix.randomitems.tables["cache_documents_tier1"] = {
+	{2889, {"value_med_journal_1"}},
+	{2889, {"value_med_journal_2"}},
+	{2364, {"value_scientistdiary"}},
+	{1858, {"value_lab_journal"}},
+}
+
+ix.randomitems.tables["cache_documents_tier2"] = {
+	{3276, {"value_scientistdiary"}},
+	{2574, {"value_lab_journal"}},
+	{1897, {"value_handbook_circuits"}},
+	{2253, {"value_info_tgdocs"}},
+}
+
+ix.randomitems.tables["cache_documents_tier3"] = {
+	{2163, {"value_handbook_circuits"}},
+	{2568, {"value_info_tgdocs"}},
+	{1447, {"value_documents_10"}},
+	{1494, {"value_documents_14"}},
+	{1154, {"value_documents_9"}},
+	{1174, {"value_documents_13"}},
+}
+
+ix.randomitems.tables["cache_documents_tier4"] = {
+	{2988, {"value_info_tgdocs"}},
+	{1683, {"value_documents_10"}},
+	{1738, {"value_documents_14"}},
+	{1343, {"value_documents_9"}},
+	{1366, {"value_documents_13"}},
+	{882, {"value_documents_11"}},
+}
+
+ix.randomitems.tables["cache_valuables_tier1"] = {
+	{1328, {"value_precisiontools"}},
+	{1549, {"value_circuitboard"}},
+	{1549, {"value_sensor_a"}},
+	{1328, {"value_sensor_d"}},
+	{1327, {"value_antique_vase"}},
+	{1162, {"value_statue_raven"}},
+	{664, {"value_optical_lens"}},
+	{1093, {"value_powerfilter"}},
+}
+
+ix.randomitems.tables["cache_valuables_tier2"] = {
+	{883, {"value_electro_gyroscope"}},
+	{883, {"value_militarybattery"}},
+	{1177, {"value_radio_repeater"}},
+	{1486, {"value_phaserelay"}},
+	{1569, {"value_antique_teapot"}},
+	{2172, {"value_container_moderator_toolbox"}},
+	{974, {"value_electr_adv_converter"}},
+	{856, {"value_phaseantenna"}},
+}
+
+ix.randomitems.tables["cache_valuables_tier3"] = {
+	{1167, {"value_pcpart_cpu"}},
+	{1010, {"value_quest_flight_recorder"}},
+	{1094, {"value_spherical_recorder"}},
+	{1251, {"value_pocketwatch"}},
+	{1167, {"value_mysterious_device"}},
+	{1545, {"value_electr_adv_controller"}},
+	{1383, {"value_field_laptop"}},
+	{1383, {"value_med_surgicalroll"}},
+}
+
+ix.randomitems.tables["cache_valuables_tier4"] = {
+	{969, {"value_thermalmodule"}},
+	{1417, {"value_militaryboard"}},
+	{1204, {"value_electr_ssd"}},
+	{1354, {"value_pcpart_laptop"}},
+	{1417, {"value_scanner_anomaly"}},
+	{1587, {"value_scanner_artefact"}},
+	{969, {"value_med_ledx"}},
+	{1083, {"value_med_ledx_red"}},
+}

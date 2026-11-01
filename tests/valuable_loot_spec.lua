@@ -55,9 +55,70 @@ for _, pair in ipairs(maps) do
 	end
 	assert(means[2] > means[1], "Rare loot must be more valuable than regular loot")
 end
+local worldSeen = seen
+local humanSeen = {}
+dofile(root .. "pools/human_npc_drops.lua")
+for key, rows in pairs(ix.randomitems.tables) do
+	if key:match("_loot$") then
+		for _, row in ipairs(rows) do humanSeen[row[2][1]] = true end
+	end
+end
+local npcOnly = {
+	"value_badge_bandit",
+	"value_badge_merc",
+	"value_badge_military",
+	"value_badge_renegade",
+	"value_barter_walletwz",
+	"value_bogatir_moreman_tag",
+	"value_chevron_bear",
+	"value_info_militaryflash",
+	"value_intelligence",
+	"value_key_danexert",
+	"value_letter",
+	"value_military_secret_documents_1",
+	"value_military_secret_documents_2",
+	"value_military_secret_documents_3",
+	"value_other_bage_ng",
+	"value_photograph_album",
+	"value_spec_tgflashkey",
+	"value_strelets_amulet",
+	"value_thin_diary",
+	"value_wallet",
+}
+for _, id in ipairs(npcOnly) do
+	assert(not worldSeen[id], "NPC pocket valuable leaked into worldspawn: " .. id)
+	assert(humanSeen[id], "NPC pocket valuable has no acquisition route: " .. id)
+end
+for id in pairs(humanSeen) do seen[id] = true end
+dofile(root .. "pools/cache_misc.lua")
+local cacheSeen = {}
+for key, rows in pairs(ix.randomitems.tables) do
+	if key:match("^cache_documents_tier") or key:match("^cache_valuables_tier") then
+		for _, row in ipairs(rows) do cacheSeen[row[2][1]] = true end
+	end
+end
+local cacheDocuments = {
+	"value_documents_10",
+	"value_documents_11",
+	"value_documents_13",
+	"value_documents_14",
+	"value_documents_9",
+	"value_handbook_circuits",
+	"value_info_tgdocs",
+	"value_lab_journal",
+	"value_med_journal_1",
+	"value_med_journal_2",
+	"value_scientistdiary",
+}
+for _, id in ipairs(cacheDocuments) do
+	assert(not worldSeen[id], "High-end document leaked into worldspawn: " .. id)
+	assert(cacheSeen[id], "High-end document has no cache route: " .. id)
+end
+for id in pairs(cacheSeen) do seen[id] = true end
+
 local count = 0
 for id in pairs(prices) do
-	assert(seen[id], "No world acquisition route: " .. id)
+	assert(seen[id], "No world, human or cache acquisition route: " .. id)
 	count = count + 1
 end
-print(string.format("PASS: %d valuables reachable through eight loaded, themed loot pools", count))
+print(string.format("PASS: %d valuables reachable through loaded world, human or cache loot pools", count))

@@ -40,12 +40,11 @@ ITEM.items = {
 		{10, "task_reward_backpacks_05"},
 	},
 	{
-		{2, "reward_generic_valuable"},
+		{6, "cache_valuables_tier2"},
 		{1, "cache_artifact_tier1"},
-		{4, "worldspawn_2"},
 	},
 	{
-		{1, "worldspawn_3"},
+		{1, "cache_documents_tier2"},
 	},
 }
 

@@ -3,7 +3,7 @@
 All 378 concrete items in `schema/items/valuables_test/` are classified below. The 50 new
 `valuables_*` pools live in `progression/definitions/sh_requirementpools.lua` and are loaded directly into the
 shared progression pool registry. They remain authoring pools, not enabled NPC offers yet. All items now
-have regional worldspawn entries; see the [regional loot guide](../gamemodes/ix_cotz/plugins/randomitem/README.md).
+have regional worldspawn, human-corpse or hidden-cache entries; see the [regional loot guide](../gamemodes/ix_cotz/plugins/randomitem/README.md).
 Playtest acquisition rates before enabling contact `job.pools` or progression requirement slots.
 
 Existing hand-in pools remain unchanged so current offers and rarity-constrained progression
