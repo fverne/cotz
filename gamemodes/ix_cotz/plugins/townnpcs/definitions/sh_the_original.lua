@@ -8,6 +8,29 @@ PLUGIN:Register("the-original", {
 		category = "Mutant specimen deliveries",
 		description = "Mutant specimen deliveries",
 		pools = {"common_parts", "small_parts", "common_hides"},
+		deliveryTiers = {
+			easy = {
+				pools = {
+					"valuables_personal_effects",
+					"valuables_audio_cassettes",
+				},
+				quantity = 1,
+			},
+			medium = {
+				pools = {
+					"valuables_decorative_valuables",
+					"valuables_faction_patches",
+				},
+				quantity = 1,
+			},
+			hard = {
+				pools = {
+					"valuables_irregular_patches",
+					"valuables_specialist_cases",
+				},
+				quantity = 2,
+			},
+		},
 		quantities = {2, 4, 7},
 		maps = {
 			easy = "rp_marsh_cs",

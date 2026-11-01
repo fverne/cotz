@@ -50,8 +50,8 @@ added to the weapon estimate. Rounding and random instance variation can change 
 | `worldspawn_6` | 91 | 3507 | 39.57% |
 
 The hand-in catalogue remains separate: these loot entries do not automatically enable the new
-`valuables_*` pools in NPC jobs or progression. Review acquisition frequency in multiplayer before
-assigning those pools. No world reset, save migration or first-time setup is required.
+`valuables_*` pools in NPC jobs or progression. Selected pools are now assigned by difficulty in town delivery jobs; see the townnpcs README.
+Review their acquisition frequency in multiplayer. No world reset, save migration or first-time setup is required.
 
 Checks: `luatex --luaonly tests/valuable_loot_spec.lua`,
 `luatex --luaonly tests/valuable_pools_spec.lua`, and `luatex --luaonly tests/valuable_items_spec.lua`.

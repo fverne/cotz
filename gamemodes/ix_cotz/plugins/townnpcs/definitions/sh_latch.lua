@@ -8,6 +8,32 @@ PLUGIN:Register("latch", {
 		category = "Industrial salvage deliveries",
 		description = "Industrial salvage deliveries",
 		pools = {"fasteners", "basic_tools", "workshop_supplies"},
+		deliveryTiers = {
+			easy = {
+				pools = {
+					"valuables_workshop_tools",
+					"valuables_drivers_wrenches",
+					"valuables_repair_parts",
+				},
+				quantity = 1,
+			},
+			medium = {
+				pools = {
+					"valuables_workshop_consumables",
+					"valuables_transit_cases",
+					"valuables_electrical_supplies",
+				},
+				quantity = 1,
+			},
+			hard = {
+				pools = {
+					"valuables_reinforced_cases",
+					"valuables_secured_cases",
+					"valuables_instruments",
+				},
+				quantity = 2,
+			},
+		},
 		quantities = {2, 4, 7},
 		maps = {
 			easy = "mz_garbage",

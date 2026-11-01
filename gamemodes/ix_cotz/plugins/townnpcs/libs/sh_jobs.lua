@@ -10,16 +10,49 @@ local function registerJob(contact, id, data)
 	ix.jobs.register(data, id)
 end
 
-local function registerDeliveries(contact, base, category, tier)
-	for _, poolID in ipairs(contact.job.pools) do
+local spawnBatches = {}
+
+local function collectSpawnBatches()
+	spawnBatches = {}
+	for poolID, rows in pairs(ix.randomitems.tables) do
+		local acquisition = poolID:find("worldspawn_", 1, true) == 1 or poolID:match("_loot$")
+			or poolID:match("_entbox_drops$") or poolID:match("^cache_documents_") or poolID:match("^cache_valuables_")
+		if acquisition then
+			for _, row in ipairs(rows) do
+				local itemID, data = row[2][1], row[2][2]
+				local item = ix.item.list[itemID]
+				if item and item.quantity and item.quantity > 0 then
+					local defaults = PLUGIN.settings.spawnBatches[itemID] or {item.quantity, item.quantity}
+					local quantity = data and data.quantity
+					local low = type(quantity) == "table" and quantity[1] or quantity or defaults[1]
+					local high = type(quantity) == "table" and quantity[2] or quantity or defaults[2]
+					local bounds = spawnBatches[itemID] or {low, high}
+					spawnBatches[itemID] = {math.min(bounds[1], low), math.max(bounds[2], high)}
+				end
+			end
+		end
+	end
+end
+
+local function deliveryQuantity(itemID, tier, fallback)
+	local bounds = spawnBatches[itemID]
+	if not bounds then return fallback end
+	if tier == 1 then return bounds[1] end
+	if tier == 2 then return bounds[2] end
+
+	return bounds[2] + 1
+end
+
+local function registerDeliveries(contact, base, category, tier, pools, quantity, minimum)
+	for _, poolID in ipairs(pools) do
 		local pool = assert(ix.progression.itemPools[poolID], "Unknown town job pool: " .. poolID)
 		for _, candidate in ipairs(pool.candidates) do
 			local item = assert(ix.item.list[candidate.item], "Missing town delivery item: " .. candidate.item)
 			local unit = math.max(1, ix.taskRewards.HandInUnitValue(candidate.item))
-			local minimum = (contact.job.minimumValue or {})[tier] or 0
 			local job = table.Copy(base)
 			job.requiredItem = candidate.item
-			job.numberRec = math.max(contact.job.quantities[tier], math.ceil(minimum / unit))
+			local fallback = math.max(quantity, math.ceil(minimum / unit))
+			job.numberRec = deliveryQuantity(candidate.item, tier, fallback)
 			job.name = "Deliver %d " .. item.name .. "."
 			job.desc = contact.job.description .. " Deliver %d required units."
 			registerJob(contact, category .. "/" .. candidate.item, job)
@@ -40,7 +73,12 @@ local function registerRepeatable(contact, difficulty, tier)
 	}
 	contact.categories[difficulty] = {category}
 	if kind == "delivery" then
-		registerDeliveries(contact, job, category, tier)
+		registerDeliveries(contact, job, category, tier, contact.job.pools,
+			contact.job.quantities[tier], (contact.job.minimumValue or {})[tier] or 0)
+		local deliveryTier = (contact.job.deliveryTiers or {})[difficulty]
+		if deliveryTier then
+			registerDeliveries(contact, job, category, tier, deliveryTier.pools, deliveryTier.quantity, 0)
+		end
 		return
 	end
 	if kind == "dataExtract" then
@@ -98,6 +136,7 @@ local function registerCommission(contact, step)
 end
 
 function PLUGIN:BuildJobs()
+	collectSpawnBatches()
 	for _, contact in pairs(self.contacts) do
 		contact.categories = {}
 		ix.taskRewards.SetProfile(contact.name, contact.supplies)

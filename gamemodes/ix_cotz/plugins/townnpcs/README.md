@@ -118,5 +118,40 @@ Finite commissions and progression IDs remain unchanged.
 
 The [valuables hand-in catalogue](../../../../docs/valuable-hand-in-pools.md) reviews every
 `valuables_test` item and defines 50 reusable `valuables_*` pools in progression’s `definitions/sh_requirementpools.lua`.
-These pools await acquisition playtesting before being enabled in NPC offers or progression slots.
+Repeatable delivery contacts enable selected pools by difficulty; finite progression slots retain their existing pools.
 Run `luatex --luaonly tests/valuable_pools_spec.lua` to check full item coverage and valid candidates.
+
+## Regional valuable deliveries
+
+All twelve item-delivery contacts retain their existing requests and add `job.deliveryTiers`.
+Each difficulty lists additional pools and a whole-item quantity: one for easy/medium, two for hard.
+These additions bypass the legacy minimum-value floor, which would inflate cheap whole-item requests.
+Job IDs, accepted assignments and finite progression stay unchanged. Quantity-bearing items instead
+use acquisition batch bounds: easy = smallest batch, medium = largest batch, hard = largest batch + 1.
+These bounds override quantity/value floors. World, breakable-box, human-pocket and cache loot data overrides are
+combined across regions; `settings.spawnBatches` records random `OnInstanced` yields where capacity
+differs from the initial amount. Update that table when those item callbacks change. Ammunition
+without `ITEM.quantity` retains its existing whole-box counting and request amounts.
+Delivery maps are acquisition guidance, not a restriction on where an item must be found.
+
+| Contact / home | Easy additions | Medium additions | Hard additions |
+| --- | --- | --- | --- |
+| Gasket / Marsh | Cleaning, fuel | Filtration, electrical stock | Portable power, reinforced cases |
+| Jitters / Marsh | Clinical stock | Trauma stock, medical equipment | Research injectors |
+| Technut / Marsh | Workshop consumables, drivers/wrenches | Tools, cutting tools, repair parts | Instruments, control electronics |
+| Mute / Marsh | Components, power | Radios, radio parts, flash media | Computers, controls, archives, recording equipment |
+| Spicy Lemon / Marsh | Provisions | Provisions | Provisions |
+| The Original / Marsh | Personal effects, music cassettes | Collectibles, faction patches | Irregular patches, specialist cases |
+| Latch / Garbage | Tools, drivers/wrenches, repair parts | Consumables, transit cases, electrical stock | Reinforced/secured cases, instruments |
+| Brass / Garbage | Equipment pouches | Military cases | Ordnance salvage |
+| Suture / Waystation | Textiles, pouches | Protective textiles | Armour panels |
+| Carbon / Waystation | Office/field records, printed material | Official/technical records | Research records, data archives |
+| Quartermaster / Waystation | Military cases, pouches | Ordnance salvage, official records | Secured cases, control electronics |
+| Egghead / Waystation | Sample carriers, survey gear | Research samples/records | Instruments, research injectors |
+
+Easy additions favour home-region themes. Pools contain alternatives with different acquisition routes,
+so a particular request can still require travel. Medium workshop requests favour Garbage/Waystation;
+hard electronics and research requests favour Pripyat. Pocket effects, insignia and military records
+can require human corpse loot; some technical/research records require hidden caches. Recovered
+medical stock, provisions and ordnance remain valuable objects with no implied consumable functionality.
+Acquisition frequency and the smaller payouts on cheap additions still need multiplayer playtesting.

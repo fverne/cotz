@@ -8,6 +8,29 @@ PLUGIN:Register("quartermaster", {
 		category = "Ammunition deliveries",
 		description = "Ammunition deliveries",
 		pools = {"town_ammunition_military"},
+		deliveryTiers = {
+			easy = {
+				pools = {
+					"valuables_military_cases",
+					"valuables_equipment_pouches",
+				},
+				quantity = 1,
+			},
+			medium = {
+				pools = {
+					"valuables_ordnance_salvage",
+					"valuables_official_records",
+				},
+				quantity = 1,
+			},
+			hard = {
+				pools = {
+					"valuables_secured_cases",
+					"valuables_control_electronics",
+				},
+				quantity = 2,
+			},
+		},
 		quantities = {2, 4, 7},
 		maps = {
 			easy = "rp_waystation",

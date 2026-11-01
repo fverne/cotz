@@ -9,6 +9,30 @@ PLUGIN:Register("egghead", {
 		category = "Artifact deliveries",
 		description = "Artifact deliveries",
 		pools = {"common_artifacts", "electrical_artifacts"},
+		deliveryTiers = {
+			easy = {
+				pools = {
+					"valuables_sample_carriers",
+					"valuables_survey_equipment",
+				},
+				quantity = 1,
+			},
+			medium = {
+				pools = {
+					"valuables_research_samples",
+					"valuables_research_records",
+				},
+				quantity = 1,
+			},
+			hard = {
+				pools = {
+					"valuables_instruments",
+					"valuables_research_injectors_a",
+					"valuables_research_injectors_b",
+				},
+				quantity = 2,
+			},
+		},
 		quantities = {2, 4, 7},
 		maps = {
 			easy = "rp_waystation",

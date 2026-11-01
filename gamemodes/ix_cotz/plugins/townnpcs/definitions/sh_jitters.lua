@@ -8,6 +8,28 @@ PLUGIN:Register("jitters", {
 		category = "Medical supply deliveries",
 		description = "Medical supply deliveries",
 		pools = {"town_medical"},
+		deliveryTiers = {
+			easy = {
+				pools = {
+					"valuables_clinical_supplies",
+				},
+				quantity = 1,
+			},
+			medium = {
+				pools = {
+					"valuables_trauma_supplies",
+					"valuables_medical_equipment",
+				},
+				quantity = 1,
+			},
+			hard = {
+				pools = {
+					"valuables_research_injectors_a",
+					"valuables_research_injectors_b",
+				},
+				quantity = 2,
+			},
+		},
 		quantities = {2, 4, 7},
 		maps = {
 			easy = "rp_marsh_cs",

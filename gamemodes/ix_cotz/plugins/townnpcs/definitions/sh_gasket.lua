@@ -8,6 +8,29 @@ PLUGIN:Register("gasket", {
 		category = "Utility supply deliveries",
 		description = "Utility supply deliveries",
 		pools = {"fuel", "filters", "engine_care"},
+		deliveryTiers = {
+			easy = {
+				pools = {
+					"valuables_cleaning_supplies",
+					"valuables_fuel_supplies",
+				},
+				quantity = 1,
+			},
+			medium = {
+				pools = {
+					"valuables_filtration",
+					"valuables_electrical_supplies",
+				},
+				quantity = 1,
+			},
+			hard = {
+				pools = {
+					"valuables_portable_power",
+					"valuables_reinforced_cases",
+				},
+				quantity = 2,
+			},
+		},
 		quantities = {2, 4, 7},
 		maps = {
 			easy = "rp_marsh_cs",

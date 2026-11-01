@@ -9,6 +9,26 @@ PLUGIN:Register("spicy-lemon", {
 		category = "Meal deliveries",
 		description = "Meal deliveries",
 		pools = {"common_meals", "predator_meals"},
+		deliveryTiers = {
+			easy = {
+				pools = {
+					"valuables_provisions",
+				},
+				quantity = 1,
+			},
+			medium = {
+				pools = {
+					"valuables_provisions",
+				},
+				quantity = 1,
+			},
+			hard = {
+				pools = {
+					"valuables_provisions",
+				},
+				quantity = 2,
+			},
+		},
 		quantities = {2, 4, 7},
 		maps = {
 			easy = "rp_marsh_cs",

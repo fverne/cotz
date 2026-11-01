@@ -8,6 +8,26 @@ PLUGIN:Register("brass", {
 		category = "Ammunition deliveries",
 		description = "Ammunition deliveries",
 		pools = {"town_ammunition"},
+		deliveryTiers = {
+			easy = {
+				pools = {
+					"valuables_equipment_pouches",
+				},
+				quantity = 1,
+			},
+			medium = {
+				pools = {
+					"valuables_military_cases",
+				},
+				quantity = 1,
+			},
+			hard = {
+				pools = {
+					"valuables_ordnance_salvage",
+				},
+				quantity = 2,
+			},
+		},
 		quantities = {2, 4, 7},
 		maps = {
 			easy = "mz_garbage",

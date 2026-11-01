@@ -8,6 +8,30 @@ PLUGIN:Register("technut", {
 		category = "Industrial salvage deliveries",
 		description = "Industrial salvage deliveries",
 		pools = {"fasteners", "basic_tools", "workshop_supplies"},
+		deliveryTiers = {
+			easy = {
+				pools = {
+					"valuables_workshop_consumables",
+					"valuables_drivers_wrenches",
+				},
+				quantity = 1,
+			},
+			medium = {
+				pools = {
+					"valuables_workshop_tools",
+					"valuables_cutting_tools",
+					"valuables_repair_parts",
+				},
+				quantity = 1,
+			},
+			hard = {
+				pools = {
+					"valuables_instruments",
+					"valuables_control_electronics",
+				},
+				quantity = 2,
+			},
+		},
 		quantities = {2, 4, 7},
 		maps = {
 			easy = "rp_marsh_cs",

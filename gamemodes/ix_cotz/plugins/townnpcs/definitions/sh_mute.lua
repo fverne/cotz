@@ -9,6 +9,33 @@ PLUGIN:Register("mute", {
 		category = "Electronics deliveries",
 		description = "Electronics deliveries",
 		pools = {"small_electronics", "batteries", "radio_components"},
+		deliveryTiers = {
+			easy = {
+				pools = {
+					"valuables_electronic_components",
+					"valuables_portable_power",
+				},
+				quantity = 1,
+			},
+			medium = {
+				pools = {
+					"valuables_radio_components",
+					"valuables_radio_equipment",
+					"valuables_flash_media",
+				},
+				quantity = 1,
+			},
+			hard = {
+				pools = {
+					"valuables_computer_parts",
+					"valuables_portable_computers",
+					"valuables_control_electronics",
+					"valuables_data_archives",
+					"valuables_recording_equipment",
+				},
+				quantity = 2,
+			},
+		},
 		quantities = {2, 4, 7},
 		maps = {
 			easy = "rp_marsh_cs",

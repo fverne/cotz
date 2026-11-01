@@ -2,15 +2,14 @@
 
 All 378 concrete items in `schema/items/valuables_test/` are classified below. The 50 new
 `valuables_*` pools live in `progression/definitions/sh_requirementpools.lua` and are loaded directly into the
-shared progression pool registry. They remain authoring pools, not enabled NPC offers yet. All items now
-have regional worldspawn, human-corpse or hidden-cache entries; see the [regional loot guide](../gamemodes/ix_cotz/plugins/randomitem/README.md).
-Playtest acquisition rates before enabling contact `job.pools` or progression requirement slots.
-
-Existing hand-in pools remain unchanged so current offers and rarity-constrained progression
-requirements do not change before acquisition is playtested. Saved personal assignments are untouched.
-The new pools use `uncommon` as a provisional catalogue tier, not a verified world-drop rarity;
-review acquisition and split rarity tiers before using them for finite progression requirements.
-Repeatable delivery cash uses item value through the existing reward calculation.
+shared progression pool registry. Selected pools now feed the twelve town item-delivery contacts by difficulty; see the
+[town delivery allocation](../gamemodes/ix_cotz/plugins/townnpcs/README.md#regional-valuable-deliveries).
+All items have regional worldspawn, human-corpse or hidden-cache entries; see the
+[regional loot guide](../gamemodes/ix_cotz/plugins/randomitem/README.md).
+New repeatable whole-item requests use one item on easy/medium and two on hard, separately from
+legacy quantities/value floors. Quantity-bearing delivery items use spawn-batch minimum/maximum/maximum + 1 for easy/medium/hard.
+Existing pools, saved assignments and finite progression remain unchanged.
+The `uncommon` catalogue tier is provisional, not verified drop rarity. Live acquisition still needs playtesting.
 
 Names and descriptions determine these groups. Cases and pouches are requested as recovered
 objects, not as their implied contents. Medical stock and research injectors are valuables, not
@@ -18,7 +17,7 @@ usable healing items. Ordnance salvage does not gain explosive functionality. In
 objects, not proof that the player killed a faction member. Data media do not carry extraction-job
 completion credit. Individual tools are separate from the existing tiered toolbox pools.
 
-Suggested contacts when acquisition is ready: Technut/Latch for workshop stock and cases;
+Contact themes: Technut/Latch for workshop stock and cases;
 Mute for electronics, computers and data; Jitters for clinical equipment; Suture for textiles
 and armour materials; Gasket for household, filtration and fuel supplies; Spicy Lemon for dry
 provisions; Carbon for records; Quartermaster for military records and ordnance; The Original

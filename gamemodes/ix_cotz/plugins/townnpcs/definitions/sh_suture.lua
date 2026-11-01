@@ -8,6 +8,27 @@ PLUGIN:Register("suture", {
 		category = "Textile supply deliveries",
 		description = "Textile supply deliveries",
 		pools = {"town_textiles"},
+		deliveryTiers = {
+			easy = {
+				pools = {
+					"valuables_textile_supplies",
+					"valuables_equipment_pouches",
+				},
+				quantity = 1,
+			},
+			medium = {
+				pools = {
+					"valuables_protective_textiles",
+				},
+				quantity = 1,
+			},
+			hard = {
+				pools = {
+					"valuables_armour_panels",
+				},
+				quantity = 2,
+			},
+		},
 		quantities = {2, 4, 7},
 		maps = {
 			easy = "rp_waystation",

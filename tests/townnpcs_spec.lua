@@ -29,7 +29,11 @@ for path in itemFiles:lines() do
 	if path:find("/items/", 1, true) then
 		local id = path:match("/sh_([^/]+)%.lua$")
 		if id then
-			ix.item.list[id] = {name = id, price = 100, quantity = 1}
+			local file = assert(io.open(path))
+			local source = file:read("*a")
+			file:close()
+			local quantity = tonumber(source:match("ITEM.quantity = (%d+)"))
+			ix.item.list[id] = {name = id, price = 100, quantity = quantity}
 		end
 	end
 end
@@ -69,7 +73,28 @@ table.sort(paths)
 for _, path in ipairs(paths) do dofile(path) end
 local town = ix.townNPCs
 town:BuildProgressions()
+ix.randomitems = {tables = {}}
+for _, pool in ipairs({"worldspawn_1", "worldspawn_2", "worldspawn_garbage_regular",
+	"worldspawn_garbage_rare", "worldspawn_3", "worldspawn_4", "worldspawn_5", "worldspawn_6",
+	"human_npc_drops", "cache_misc", "ix_entbox_drops", "ix_wood_entbox_drops", "ix_paper_entbox_drops"}) do
+	dofile(base .. "randomitem/pools/" .. pool .. ".lua")
+end
+ix.item.list.value_nuts.quantity = 20
+ix.item.list.value_bolts.quantity = 20
+ix.item.list.value_kerosene.quantity = 8
+ix.item.list.medic_bandage_1.quantity = 3
+ix.item.list.medic_medkit_1.quantity = 3
 town:BuildJobs()
+local function request(contact, difficulty, item)
+	return ix.jobs.list["cotz/town/" .. contact .. "/" .. difficulty .. "/" .. item].numberRec
+end
+check(request("technut", "easy", "value_nuts") == 3, "easy uses nuts minimum yield, not value floor")
+check(request("technut", "medium", "value_nuts") == 8, "medium uses one maximum batch")
+check(request("technut", "hard", "value_nuts") == 9, "hard nuts require more than one maximum batch")
+check(request("latch", "easy", "value_bolts") == 4, "bolts use their own minimum")
+check(request("latch", "hard", "value_bolts") == 9, "bolts hard exceeds maximum batch")
+check(request("gasket", "easy", "value_kerosene") == 2, "explicit spawn data overrides container capacity")
+check(request("jitters", "hard", "medic_bandage_1") > 3, "hard medical work exceeds spawned uses")
 town:ConfigureSources()
 town.installed = true
 local count, contactCount = 0, 0
@@ -95,6 +120,33 @@ for _, contact in pairs(town.contacts) do
 	end
 	check(root == 1 and forks > 0 and joins > 0, "each contact has a sparse tree, not a linear chain")
 end
+local deliveryContacts = 0
+for id, contact in pairs(town.contacts) do
+	if contact.job.deliveryTiers then
+		deliveryContacts = deliveryContacts + 1
+		for _, difficulty in ipairs({"easy", "medium", "hard"}) do
+			local settings = contact.job.deliveryTiers[difficulty]
+			local seen = {}
+			check(settings.quantity == (difficulty == "hard" and 2 or 1), "whole-item quantities stay small")
+			for _, poolID in ipairs(settings.pools) do
+				for _, candidate in ipairs(ix.progression.itemPools[poolID].candidates) do
+					check(not seen[candidate.item], "delivery tier cannot register duplicate items")
+					seen[candidate.item] = true
+					local jobID = "cotz/town/" .. id .. "/" .. difficulty .. "/" .. candidate.item
+					local job = ix.jobs.list[jobID]
+					check(job and job.requiredItem == candidate.item, "new valuables register real delivery jobs")
+					if not ix.item.list[candidate.item].quantity then
+						check(job.numberRec == settings.quantity, "whole-item requests retain tier quantities")
+					end
+				end
+			end
+		end
+	end
+end
+check(deliveryContacts == 12, "all twelve delivery contacts have regional additions")
+check(not ix.jobs.list["cotz/town/mute/easy/value_field_laptop"], "Marsh easy work excludes laptops")
+check(ix.jobs.list["cotz/town/mute/hard/value_field_laptop"], "Mute can commission Pripyat computers")
+
 check(contactCount == 27 and count == 646, "all contacts and proposed steps are registered")
 check(town.contacts["arena-master"].map == "rp_marsh_cs", "arena stays with the Marsh dupe")
 check(town.contacts.latch.map == "mz_garbage", "Garbage uses the supplied map ID")

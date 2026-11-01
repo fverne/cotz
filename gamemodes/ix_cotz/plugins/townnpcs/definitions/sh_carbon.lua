@@ -8,6 +8,30 @@ PLUGIN:Register("carbon", {
 		category = "Document deliveries",
 		description = "Document deliveries",
 		pools = {"administrative_documents", "documents_field", "documents_technical"},
+		deliveryTiers = {
+			easy = {
+				pools = {
+					"valuables_office_records",
+					"valuables_field_records",
+					"valuables_printed_material",
+				},
+				quantity = 1,
+			},
+			medium = {
+				pools = {
+					"valuables_official_records",
+					"valuables_technical_records",
+				},
+				quantity = 1,
+			},
+			hard = {
+				pools = {
+					"valuables_research_records",
+					"valuables_data_archives",
+				},
+				quantity = 2,
+			},
+		},
 		quantities = {2, 4, 7},
 		maps = {
 			easy = "rp_waystation",
