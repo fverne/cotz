@@ -25,6 +25,19 @@ function PLUGIN:ValidateContacts()
 			if step.kind == "field" and not ix.jobs.field.settings[step.field.kind] then
 				report(step.id .. " uses unknown field mechanic " .. step.field.kind)
 			end
+			if step.kind == "field" and step.field.cargo then
+				local cargo = ix.item.list[step.field.cargo]
+				if not cargo or not cargo.isFieldCargo then
+					report(step.id .. " uses invalid bound cargo " .. step.field.cargo)
+				end
+			end
+			if step.kind == "field" and step.field.recipient then
+				local recipient = self.contacts[step.field.recipient]
+				if not recipient or recipient == contact or recipient.map == "rp_pripyat_remaster"
+					or step.field.kind == "deadDrop" or step.field.kind == "defence" then
+					report(step.id .. " uses invalid delivery recipient " .. step.field.recipient)
+				end
+			end
 		end
 		local rewards = contact.job.rewards or self.settings.jobRewards
 		for _, difficulty in ipairs(DIFFICULTIES) do

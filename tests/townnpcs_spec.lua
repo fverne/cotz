@@ -33,7 +33,8 @@ for path in itemFiles:lines() do
 			local source = file:read("*a")
 			file:close()
 			local quantity = tonumber(source:match("ITEM.quantity = (%d+)"))
-			ix.item.list[id] = {name = id, price = 100, quantity = quantity}
+			ix.item.list[id] = {name = id, price = 100, quantity = quantity,
+				isFieldCargo = path:find("/items/jobcargo/", 1, true) ~= nil}
 		end
 	end
 end
@@ -148,6 +149,32 @@ check(not ix.jobs.list["cotz/town/mute/easy/value_field_laptop"], "Marsh easy wo
 check(ix.jobs.list["cotz/town/mute/hard/value_field_laptop"], "Mute can commission Pripyat computers")
 
 check(contactCount == 27 and count == 646, "all contacts and proposed steps are registered")
+local cargoCount, recipientCount, dropCount = 0, 0, 0
+for _, contact in pairs(town.contacts) do
+	for _, step in ipairs(contact.progression) do
+		if step.field and step.field.cargo then
+			cargoCount = cargoCount + 1
+			local definition = ix.jobs.list["cotz/town/commission/" .. contact.id .. "/" .. step.id]
+			check(ix.item.list[step.field.cargo].isFieldCargo,
+				"authored cargo inherits binding and transfer protection")
+			check(definition.fieldCargo == step.field.cargo and definition.fieldCargoName == step.field.label,
+				"commission registration preserves its explicit cargo and identity")
+			if step.field.recipient then
+				recipientCount = recipientCount + 1
+				local recipient = town.contacts[step.field.recipient]
+				check(recipient and recipient ~= contact and not recipient.access,
+					"current courier destinations are distinct contacts with no progression access gate")
+				check(definition.fieldRecipient == recipient.name and definition.fieldRecipientMap == recipient.map,
+					"NPC delivery destinations compile to the actual vendor identity and home map")
+				check(step.objective:find(recipient.name, 1, true), "the objective names its actual delivery recipient")
+			end
+			if step.field.kind == "deadDrop" then dropCount = dropCount + 1 end
+		end
+	end
+end
+check(cargoCount == 312 and recipientCount == 76 and dropCount == 6,
+	"authored commissions use custom recovery cargo, contact deliveries and field-cache deliveries")
+check(#town:ValidateContacts() == 0, "all current cargo and recipient declarations validate")
 check(town.contacts["arena-master"].map == "rp_marsh_cs", "arena stays with the Marsh dupe")
 check(town.contacts.latch.map == "mz_garbage", "Garbage uses the supplied map ID")
 check(town.contacts.smartass.map == "rp_waystation", "Smartass lives in Waystation")
@@ -383,6 +410,8 @@ for _, contact in pairs(town.contacts) do
 	check(tree.TradeTopic.postCallback == ix.dialogue.OpenVendor, "all town trading uses the owning shared handler")
 	check(contact.job.kind == "arena" or offered.GetTaskByDifficulty, "non-arena contacts offer their category")
 	check(tree.TownView and tree.TownCommission and tree.TownHandIn, "finite commissions and hand-ins are wired")
+	check(offered.TownDeliveries and tree.TownDeliveries.ResolveDynamicOption,
+		"every contact exposes the conditional incoming-delivery action")
 	check(tree.AboutWorkTopic.response == contact.job.description, "each callback belongs to its own contact")
 	check(not contact.dialogue.progression:find("branch"), "NPC speech does not explain graph internals")
 	for _, step in ipairs(contact.progression) do
@@ -394,6 +423,41 @@ for _, contact in pairs(town.contacts) do
 		end
 	end
 end
+local deliveryReader = character()
+local incomingJobs = {}
+deliveryReader.GetJobs = function() return incomingJobs end
+local incomingTree = ix.dialogue.list[ix.npctemplates.templates[town.contacts.ledger.template].dialogueid].tree
+local incoming = incomingTree.TownDeliveries
+check(not incoming.ShouldAdd(nil, deliveryReader.client), "incoming delivery dialogue is hidden without cargo")
+incomingJobs["'Ballast'"] = {rewardKey = "job:incoming", fieldTask = {
+	recipient = "'Ledger'", cargoName = "Landing record", stage = "carrying",
+}}
+check(incoming.ShouldAdd(nil, deliveryReader.client), "the actual receiving contact exposes incoming cargo")
+local oldSortedPairs, oldCurTime = SortedPairs, CurTime
+SortedPairs, CurTime = pairs, function() return 100 end
+local incomingOptions = incoming.GetDynamicOptions(nil, deliveryReader.client)
+check(#incomingOptions == 1 and incomingOptions[1].dyndata.claim == "job:incoming",
+	"delivery options carry the accepted assignment claim")
+local previousInteract, previousDeliver = town.CanInteract, ix.jobs.field.DeliverToContact
+local deliveredCalls = 0
+local receivingVendor = {}
+ix.jobs.field.DeliverToContact = function(client, target, npc, claim)
+	check(client == deliveryReader.client and target == receivingVendor and npc == "'Ballast'"
+		and claim == "job:incoming", "dialogue forwards the selected owner and claim to authoritative delivery")
+	deliveredCalls = deliveredCalls + 1
+end
+town.CanInteract = function() return false end
+incoming.ResolveDynamicOption(nil, deliveryReader.client, receivingVendor, incomingOptions[1].dyndata)
+check(deliveredCalls == 0, "inaccessible receiving vendors cannot invoke a delivery")
+town.CanInteract = function() return true end
+incoming.ResolveDynamicOption(nil, deliveryReader.client, receivingVendor, incomingOptions[1].dyndata)
+incoming.ResolveDynamicOption(nil, deliveryReader.client, receivingVendor, incomingOptions[1].dyndata)
+check(deliveredCalls == 1, "incoming delivery dialogue rate-limits repeated requests on the server")
+incomingJobs["'Ballast'"].fieldTask.stage = "delivered"
+check(not incoming.ShouldAdd(nil, deliveryReader.client), "receipted cargo disappears from incoming delivery dialogue")
+town.CanInteract, ix.jobs.field.DeliverToContact = previousInteract, previousDeliver
+SortedPairs, CurTime = oldSortedPairs, oldCurTime
+
 local vendor = {
 	items = {medic_bandage_1 = {321, 0, 2, 7, 99, 1}},
 	GetDisplayName = function() return "'Jitters'" end,
@@ -458,6 +522,19 @@ local errors = town:ValidateContacts()
 check(#errors == 1 and errors[1]:find("atlas: AT01 requires missing step AT_missing", 1, true),
 	"definition diagnostics identify the contact, objective and invalid prerequisite")
 town.contacts.atlas.progression[1].requires = savedRequires
+local fieldStep = town.contacts.atlas.progression[2]
+local savedCargo, savedRecipient = fieldStep.field.cargo, fieldStep.field.recipient
+fieldStep.field.cargo = "missing_cargo"
+errors = town:ValidateContacts()
+check(#errors == 1 and errors[1]:find("AT02 uses invalid bound cargo missing_cargo", 1, true),
+	"invalid custom cargo prevents town startup")
+fieldStep.field.cargo, fieldStep.field.recipient = savedCargo, "missing-contact"
+errors = town:ValidateContacts()
+check(#errors == 1 and errors[1]:find("AT02 uses invalid delivery recipient missing-contact", 1, true),
+	"unknown delivery recipients prevent town startup")
+fieldStep.field.recipient = "atlas"
+check(#town:ValidateContacts() == 1, "a commission cannot name its own issuer as an intermediate recipient")
+fieldStep.field.recipient = savedRecipient
 local available = ix.jobs.field.IsAvailable
 ix.jobs.field.IsAvailable = function(definition) return definition.fieldMap ~= "mz_garbage" end
 local missing = town:GetMissingFieldSites()

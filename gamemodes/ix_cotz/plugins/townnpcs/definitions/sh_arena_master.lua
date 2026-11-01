@@ -138,14 +138,18 @@ PLUGIN:Register("arena-master", {
 			id = "AR06",
 			name = "The Damaged Shipment",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Armour Plate Transit Case from the assigned search area in Marsh. Deliver it to"
+				.. " 'Suture' in Waystation, then return here to finish the assignment.",
 			requires = {"AR04"},
 			briefing = "Recover a protective-equipment case along the supply route.",
-			completion = "You found it. Much appreciated.",
+			completion = "Good. Someone has to keep track of what arrives between bouts.",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_armour",
+				label = "The Damaged Shipment - Armour Plate Transit Case",
+				recipient = "suture",
 			},
 			benefits = {
 				items = {
@@ -234,14 +238,18 @@ PLUGIN:Register("arena-master", {
 			id = "AR10",
 			name = "The Supplier's Seal",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
+				.. " 'Brass' in Garbage, then return here to finish the assignment.",
 			requires = {"AR08"},
 			briefing = "Recover evidence identifying an interrupted arena shipment.",
-			completion = "Set it here. I'll go through it between matches.",
+			completion = "Good. Someone has to keep track of what arrives between bouts.",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_manifest",
+				label = "The Supplier's Seal - Warehouse Packing List A",
+				recipient = "brass",
 			},
 			benefits = {
 				items = {
@@ -325,7 +333,8 @@ PLUGIN:Register("arena-master", {
 			id = "AR14",
 			name = "A Fighter's Effects",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"AR12"},
 			briefing = "Recover a former competitor's equipment case.",
 			completion = "Let's see what you brought back.",
@@ -333,6 +342,8 @@ PLUGIN:Register("arena-master", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_personnel",
+				label = "A Fighter's Effects - Personnel File Folder",
 			},
 			benefits = {
 				items = {
@@ -512,7 +523,8 @@ PLUGIN:Register("arena-master", {
 			id = "AR22",
 			name = "The Name on the Board",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Corporate Records Folder from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"AR21"},
 			briefing = "Recover the historic competitor's final evidence for the arena records.",
 			completion = "Set it here. I'll go through it between matches.",
@@ -520,6 +532,8 @@ PLUGIN:Register("arena-master", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_archive",
+				label = "The Name on the Board - Corporate Records Folder",
 			},
 			benefits = {
 				items = {

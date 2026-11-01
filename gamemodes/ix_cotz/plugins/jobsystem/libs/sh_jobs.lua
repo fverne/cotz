@@ -47,7 +47,9 @@ function jobs.getFormattedName(job)
 end
 
 function ix.jobs.getFormattedDesc(activejob)
-	local text = string.format(ix.jobs.list[activejob.identifier].desc, activejob.numberRec)
+	local description = activejob.fieldTask and ix.jobs.field.DescribeAssignment(activejob)
+		or ix.jobs.list[activejob.identifier].desc
+	local text = string.format(description, activejob.numberRec)
 	if activejob.rewardChoices then
 		local selected = activejob.rewardChoices[activejob.supplyChoice or 0]
 		local supplies = selected and selected.label or ix.taskRewards.Summary({choices = activejob.rewardChoices})

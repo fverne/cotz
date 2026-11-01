@@ -33,6 +33,7 @@ PLUGIN:Register("the-original", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
+		delivery = "Bring it over. Let me have a look at what survived.",
 		completedGreeting = "Paper remembers one thing. People remember another. Keep both.",
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
@@ -69,7 +70,8 @@ PLUGIN:Register("the-original", {
 			id = "OR02",
 			name = "Where It Fed",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"OR01"},
 			briefing = "Retrieve observations from a Marsh feeding site.",
 			completion = "Let's see what they thought worth writing down.",
@@ -77,6 +79,8 @@ PLUGIN:Register("the-original", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_notebook",
+				label = "Where It Fed - Tied Leather Journal",
 			},
 			benefits = {
 				items = {
@@ -112,7 +116,8 @@ PLUGIN:Register("the-original", {
 			id = "OR04",
 			name = "The First Account",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"OR03"},
 			briefing = "Recover an early expedition note near a local landmark.",
 			completion = "Hand it here. I may recognise something.",
@@ -120,6 +125,8 @@ PLUGIN:Register("the-original", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_diary",
+				label = "The First Account - Scientist's Field Diary",
 			},
 			benefits = {
 				items = {
@@ -160,7 +167,8 @@ PLUGIN:Register("the-original", {
 			id = "OR06",
 			name = "The Wrong Tracks",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"OR04"},
 			briefing = "Collect a recorder from a disputed hunting site.",
 			completion = "Interesting. I'll need time with this.",
@@ -168,6 +176,8 @@ PLUGIN:Register("the-original", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_tape",
+				label = "The Wrong Tracks - Handwritten Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -207,7 +217,8 @@ PLUGIN:Register("the-original", {
 			id = "OR08",
 			name = "The Scarred Tree",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"OR06"},
 			briefing = "Recover a field sketch in Garbage.",
 			completion = "Let's see what they thought worth writing down.",
@@ -215,6 +226,8 @@ PLUGIN:Register("the-original", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_notebook",
+				label = "The Scarred Tree - Tied Leather Journal",
 			},
 			benefits = {
 				items = {
@@ -255,14 +268,18 @@ PLUGIN:Register("the-original", {
 			id = "OR10",
 			name = "A Story With Dates",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Deliver it to"
+				.. " 'Carbon' in Waystation, then return here to finish the assignment.",
 			requires = {"OR08"},
 			briefing = "Recover a dated expedition log for Carbon to compare.",
-			completion = "Hand it here. I may recognise something.",
+			completion = "They have the record. Good. Let them read it before they tell me what happened.",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_diary",
+				label = "A Story With Dates - Scientist's Field Diary",
+				recipient = "carbon",
 			},
 			benefits = {
 				items = {
@@ -298,7 +315,8 @@ PLUGIN:Register("the-original", {
 			id = "OR12",
 			name = "The Second Witness",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"OR10"},
 			briefing = "Recover a recorded eyewitness account at an abandoned camp.",
 			completion = "Interesting. I'll need time with this.",
@@ -306,6 +324,8 @@ PLUGIN:Register("the-original", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_tape2",
+				label = "The Second Witness - Blue-Label Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -346,7 +366,8 @@ PLUGIN:Register("the-original", {
 			id = "OR14",
 			name = "The Camp Before This One",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"OR12"},
 			briefing = "Retrieve the original expedition's camp record in Waystation territory.",
 			completion = "Let's see what they thought worth writing down.",
@@ -354,6 +375,8 @@ PLUGIN:Register("the-original", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_notebook",
+				label = "The Camp Before This One - Tied Leather Journal",
 			},
 			benefits = {
 				items = {
@@ -389,7 +412,8 @@ PLUGIN:Register("the-original", {
 			id = "OR16",
 			name = "The Name He Forgot",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"OR14"},
 			briefing = "Recover a missing page from a remote field cache.",
 			completion = "Hand it here. I may recognise something.",
@@ -397,6 +421,8 @@ PLUGIN:Register("the-original", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_diary",
+				label = "The Name He Forgot - Scientist's Field Diary",
 			},
 			benefits = {
 				items = {
@@ -437,14 +463,18 @@ PLUGIN:Register("the-original", {
 			id = "OR18",
 			name = "The Route He Remembers",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Pripyat. Deliver it to 'Atlas'"
+				.. " in Marsh, then return here to finish the assignment.",
 			requires = {"OR16"},
 			briefing = "Recover a survey record on the old Pripyat approach.",
-			completion = "Interesting. I'll need time with this.",
+			completion = "They have the record. Good. Let them read it before they tell me what happened.",
 			field = {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_official",
+				label = "The Route He Remembers - Official File Folder",
+				recipient = "atlas",
 			},
 			benefits = {
 				items = {
@@ -480,7 +510,8 @@ PLUGIN:Register("the-original", {
 			id = "OR20",
 			name = "Under the Old Mark",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Orange Evidence Case from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"OR18"},
 			briefing = "Retrieve expedition evidence from a Pripyat landmark.",
 			completion = "Let's see what they thought worth writing down.",
@@ -488,6 +519,8 @@ PLUGIN:Register("the-original", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_evidence",
+				label = "Under the Old Mark - Orange Evidence Case",
 			},
 			benefits = {
 				items = {
@@ -528,7 +561,8 @@ PLUGIN:Register("the-original", {
 			id = "OR22",
 			name = "The Place in the Story",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"OR21"},
 			briefing = "Recover the encounter's final recorder in Pripyat.",
 			completion = "Hand it here. I may recognise something.",
@@ -536,6 +570,8 @@ PLUGIN:Register("the-original", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_tape",
+				label = "The Place in the Story - Handwritten Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -575,7 +611,8 @@ PLUGIN:Register("the-original", {
 			id = "OR24",
 			name = "What Actually Happened",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"OR23"},
 			briefing = "Recover the last expedition evidence and confront the complete account.",
 			completion = "Interesting. I'll need time with this.",
@@ -583,6 +620,8 @@ PLUGIN:Register("the-original", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_personnel",
+				label = "What Actually Happened - Personnel File Folder",
 			},
 			benefits = {
 				items = {

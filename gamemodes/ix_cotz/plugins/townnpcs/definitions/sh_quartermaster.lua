@@ -34,6 +34,7 @@ PLUGIN:Register("quartermaster", {
 	},
 	supplies = {"545x39", "556x45", "9x19", "medic_bandage_1"},
 	dialogue = {
+		delivery = "Place the consignment here for inspection.",
 		completedGreeting = "The agreement stands. Keep your end of it and we'll keep ours.",
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
@@ -152,7 +153,8 @@ PLUGIN:Register("quartermaster", {
 			id = "QM02",
 			name = "The Missing Requisition",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Military Records Folder I from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"QM01"},
 			briefing = "Recover a procurement record in Waystation territory.",
 			completion = "Hand over the case and its records.",
@@ -160,6 +162,8 @@ PLUGIN:Register("quartermaster", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_orders",
+				label = "The Missing Requisition - Military Records Folder I",
 			},
 			benefits = {
 				items = {
@@ -195,7 +199,8 @@ PLUGIN:Register("quartermaster", {
 			id = "QM04",
 			name = "The Misrouted Crate",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Striped Equipment Case from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"QM03"},
 			briefing = "Recover a sealed equipment case on a regional route.",
 			completion = "I will compare it with the requisition.",
@@ -203,6 +208,8 @@ PLUGIN:Register("quartermaster", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_equipment",
+				label = "The Misrouted Crate - Striped Equipment Case",
 			},
 			benefits = {
 				items = {
@@ -243,14 +250,18 @@ PLUGIN:Register("quartermaster", {
 			id = "QM06",
 			name = "The Depot Copy",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Deliver it to"
+				.. " 'Brass' in Garbage, then return here to finish the assignment.",
 			requires = {"QM04"},
 			briefing = "Retrieve a depot register in Garbage.",
-			completion = "Received. Wait while I check the markings.",
+			completion = "Receipt confirmed. The consignment is accounted for.",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_receipt",
+				label = "The Depot Copy - Warehouse Packing List B",
+				recipient = "brass",
 			},
 			benefits = {
 				items = {
@@ -290,7 +301,8 @@ PLUGIN:Register("quartermaster", {
 			id = "QM08",
 			name = "The Supplier's Mark",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List A from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"QM06"},
 			briefing = "Recover supplier evidence from an abandoned freight site.",
 			completion = "Hand over the case and its records.",
@@ -298,6 +310,8 @@ PLUGIN:Register("quartermaster", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_manifest",
+				label = "The Supplier's Mark - Warehouse Packing List A",
 			},
 			benefits = {
 				items = {
@@ -338,7 +352,8 @@ PLUGIN:Register("quartermaster", {
 			id = "QM10",
 			name = "The Returned Equipment",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"QM08"},
 			briefing = "Recover a field inspection record in Waystation territory.",
 			completion = "I will compare it with the requisition.",
@@ -346,6 +361,8 @@ PLUGIN:Register("quartermaster", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_official",
+				label = "The Returned Equipment - Official File Folder",
 			},
 			benefits = {
 				items = {
@@ -387,7 +404,8 @@ PLUGIN:Register("quartermaster", {
 			id = "QM12",
 			name = "The Lost Agreement",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Corporate Letter from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"QM10"},
 			briefing = "Recover the old procurement contract.",
 			completion = "Received. Wait while I check the markings.",
@@ -395,6 +413,8 @@ PLUGIN:Register("quartermaster", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_contract",
+				label = "The Lost Agreement - Corporate Letter",
 			},
 			benefits = {
 				items = {
@@ -435,14 +455,18 @@ PLUGIN:Register("quartermaster", {
 			id = "QM14",
 			name = "The Wrong Model",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Military Records Folder II from the assigned search area in Waystation. Deliver it"
+				.. " to 'Latch' in Garbage, then return here to finish the assignment.",
 			requires = {"QM12"},
 			briefing = "Recover a serial-number record for a diverted shipment.",
-			completion = "Hand over the case and its records.",
+			completion = "Receipt confirmed. The consignment is accounted for.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_military",
+				label = "The Wrong Model - Military Records Folder II",
+				recipient = "latch",
 			},
 			benefits = {
 				items = {
@@ -478,7 +502,8 @@ PLUGIN:Register("quartermaster", {
 			id = "QM16",
 			name = "The Field Test",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0013 from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"QM14"},
 			briefing = "Retrieve an equipment-trial recorder from a remote site.",
 			completion = "I will compare it with the requisition.",
@@ -486,6 +511,8 @@ PLUGIN:Register("quartermaster", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_module",
+				label = "The Field Test - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -526,7 +553,8 @@ PLUGIN:Register("quartermaster", {
 			id = "QM18",
 			name = "The Pripyat Manifest",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List A from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"QM16"},
 			briefing = "Recover expedition supply records in Pripyat.",
 			completion = "Received. Wait while I check the markings.",
@@ -534,6 +562,8 @@ PLUGIN:Register("quartermaster", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_manifest",
+				label = "The Pripyat Manifest - Warehouse Packing List A",
 			},
 			benefits = {
 				items = {
@@ -569,7 +599,8 @@ PLUGIN:Register("quartermaster", {
 			id = "QM20",
 			name = "The Abandoned Stores",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"QM18"},
 			briefing = "Recover an equipment case at a Pripyat supply site.",
 			completion = "Hand over the case and its records.",
@@ -577,6 +608,8 @@ PLUGIN:Register("quartermaster", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_equipment",
+				label = "The Abandoned Stores - Striped Equipment Case",
 			},
 			benefits = {
 				items = {
@@ -617,14 +650,18 @@ PLUGIN:Register("quartermaster", {
 			id = "QM22",
 			name = "The Contractor's Copy",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Corporate Letter from the assigned search area in Waystation. Deliver it to 'Carbon'"
+				.. " in Waystation, then return here to finish the assignment.",
 			requires = {"QM21"},
 			briefing = "Recover the supply agreement's surviving annex.",
-			completion = "I will compare it with the requisition.",
+			completion = "Receipt confirmed. The consignment is accounted for.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_contract",
+				label = "The Contractor's Copy - Corporate Letter",
+				recipient = "carbon",
 			},
 			benefits = {
 				items = {
@@ -664,7 +701,8 @@ PLUGIN:Register("quartermaster", {
 			id = "QM24",
 			name = "The Signed Requisition",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Military Records Folder I from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"QM23"},
 			briefing = "Retrieve the agreement's last field record and return.",
 			completion = "Received. Wait while I check the markings.",
@@ -672,6 +710,8 @@ PLUGIN:Register("quartermaster", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_orders",
+				label = "The Signed Requisition - Military Records Folder I",
 			},
 			benefits = {
 				items = {

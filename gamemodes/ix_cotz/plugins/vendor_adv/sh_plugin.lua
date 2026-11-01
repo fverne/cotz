@@ -476,6 +476,8 @@ if SERVER then
 		local uniqueID = net.ReadString()
 		local itemInstanceID = net.ReadUInt(32)
 		local isSellingToVendor = net.ReadBool()
+		local soldItem = isSellingToVendor and ix.item.instances[itemInstanceID]
+		if soldItem and soldItem.isFieldCargo then return end
 
 		if not ix.item.list[uniqueID] then
 			return

@@ -106,7 +106,8 @@ PLUGIN:Register("beanstalk", {
 			id = "BN04",
 			name = "The Buried Meter",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"BN03"},
 			briefing = "Recover a lost instrument case at a dump.",
 			completion = "Good. I'll compare it with the control.",
@@ -114,6 +115,8 @@ PLUGIN:Register("beanstalk", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_control",
+				label = "The Buried Meter - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -154,17 +157,17 @@ PLUGIN:Register("beanstalk", {
 			id = "BN06",
 			name = "Two Sides of the Heap",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Garbage. Return to this contact to finish the assignment."
-			),
+			objective = "Recover Laboratory Log Folder from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"BN04"},
 			briefing = "Recover the dump comparison record.",
 			completion = "Carefully, please. That still needs checking.",
 			field = {
-				kind = "sensor",
+				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_lab",
+				label = "Two Sides of the Heap - Laboratory Log Folder",
 			},
 			benefits = {
 				items = {
@@ -207,14 +210,18 @@ PLUGIN:Register("beanstalk", {
 			id = "BN08",
 			name = "Vesper's Reading",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0013 from the assigned search area in Garbage. Deliver it to"
+				.. " 'Vesper' in Garbage, then return here to finish the assignment.",
 			requires = {"BN06"},
 			briefing = "Recover a disputed recorder from an anomaly approach.",
-			completion = "Give me the record before it gets mixed in with the others.",
+			completion = "They have the record now. We can stop comparing results from memory.",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_module",
+				label = "Vesper's Reading - Numbered Data Module 0013",
+				recipient = "vesper",
 			},
 			benefits = {
 				items = {
@@ -304,7 +311,8 @@ PLUGIN:Register("beanstalk", {
 			id = "BN12",
 			name = "The Dirty Filter",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Clinical Records Folder I from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"BN10"},
 			briefing = "Retrieve a field station's exposure record.",
 			completion = "Carefully, please. That still needs checking.",
@@ -312,6 +320,8 @@ PLUGIN:Register("beanstalk", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_clinic",
+				label = "The Dirty Filter - Clinical Records Folder I",
 			},
 			benefits = {
 				items = {
@@ -401,14 +411,18 @@ PLUGIN:Register("beanstalk", {
 			id = "BN16",
 			name = "The Contradictory Result",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0022 from the assigned search area in Waystation. Deliver it to"
+				.. " 'Vesper' in Garbage, then return here to finish the assignment.",
 			requires = {"BN14"},
 			briefing = "Recover a second control recorder in Waystation territory.",
-			completion = "Good. I'll compare it with the control.",
+			completion = "They have the record now. We can stop comparing results from memory.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_module2",
+				label = "The Contradictory Result - Numbered Data Module 0022",
+				recipient = "vesper",
 			},
 			benefits = {
 				items = {
@@ -498,7 +512,8 @@ PLUGIN:Register("beanstalk", {
 			id = "BN20",
 			name = "The Abandoned Station",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"BN19"},
 			briefing = "Recover an earlier team's recorder in Pripyat.",
 			completion = "Give me the record before it gets mixed in with the others.",
@@ -506,6 +521,8 @@ PLUGIN:Register("beanstalk", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_tape",
+				label = "The Abandoned Station - Handwritten Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -546,7 +563,8 @@ PLUGIN:Register("beanstalk", {
 			id = "BN22",
 			name = "The Last Control",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0013 from the assigned search area in Pripyat. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"BN21"},
 			briefing = "Complete the final defended Pripyat recording.",
 			completion = "Good. I'll compare it with the control.",
@@ -554,6 +572,8 @@ PLUGIN:Register("beanstalk", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_module",
+				label = "The Last Control - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -596,14 +616,18 @@ PLUGIN:Register("beanstalk", {
 			id = "BN24",
 			name = "A Result They Both Accept",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Laboratory Log Folder from the assigned search area in Garbage. Deliver it to"
+				.. " 'Carbon' in Waystation, then return here to finish the assignment.",
 			requires = {"BN23"},
 			briefing = "Recover missing control evidence and return the completed comparison.",
-			completion = "Carefully, please. That still needs checking.",
+			completion = "They have the record now. We can stop comparing results from memory.",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_lab",
+				label = "A Result They Both Accept - Laboratory Log Folder",
+				recipient = "carbon",
 			},
 			benefits = {
 				items = {

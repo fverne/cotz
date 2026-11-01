@@ -97,7 +97,7 @@ function field.FindCargo(character, job)
 end
 
 function field.CanComplete(character, job)
-	if job.fieldTask and job.fieldTask.kind == "deadDrop" then return job.fieldTask.stage == "delivered" end
+	if job.fieldTask and field.NeedsDelivery(job.fieldTask) then return job.fieldTask.stage == "delivered" end
 	if job.fieldTask and job.fieldTask.kind == "defence" then
 		local defence = job.fieldTask.defence
 		if defence.completedWaves ~= #defence.waves or defence.guardedSeconds < defence.duration
@@ -105,6 +105,33 @@ function field.CanComplete(character, job)
 	end
 
 	return job.fieldTask and job.fieldTask.stage == "carrying" and field.FindCargo(character, job) ~= nil
+end
+
+function field.NeedsDelivery(state)
+	return state.kind == "deadDrop" or state.recipient ~= nil
+end
+
+function field.DescribeAssignment(job)
+	local state = job.fieldTask
+	if state.description then return state.description end
+	-- Older accepted commissions have no description snapshot. Derive their instructions
+	-- from the saved assignment rather than a newly authored recipient or cargo definition.
+	local item = ix.item.list[state.cargo]
+	local text = "Use Field work to locate and collect " .. (state.cargoName or item.name) .. "."
+	if state.kind == "sensor" then
+		text = "Use Field work to deploy the sensor. Leave it to record, then collect it."
+	elseif state.kind == "triangulation" then
+		text = "Use Field work to take the required bearings, then collect the source."
+	elseif state.kind == "defence" then
+		text = "Use Field work to start the sampler. Defend it until recording finishes, then collect the results."
+	end
+	if state.recipient then
+		text = text .. " Deliver it to " .. state.recipient .. "."
+	elseif state.kind == "deadDrop" then
+		text = text .. " Deliver it to the assigned cache using Field work."
+	end
+
+	return text .. " Return to the issuing contact to finish the assignment."
 end
 
 function field.CanRead(state, position, settings)

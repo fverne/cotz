@@ -26,6 +26,15 @@ function field.Status(client, npc, job)
 		client:Notify("Parcel delivered. Return to " .. npc .. " for payment.")
 		return
 	end
+	if state.stage == "carrying" and state.recipient then
+		client:Notify("Deliver the cargo to " .. state.recipient .. " in " .. state.recipientMap
+			.. ", then return to " .. npc .. ".")
+		if state.recipientMap == game.GetMap() then
+			local recipient = ix.progression.GetNPCFromName(state.recipient)
+			if IsValid(recipient) then marker(client, recipient:GetPos(), "Deliver to " .. state.recipient) end
+		end
+		return
+	end
 	if state.stage == "carrying" and state.kind ~= "deadDrop" then
 		client:Notify("Return the recovered cargo to " .. npc .. ".")
 		return
@@ -61,6 +70,22 @@ function field.Status(client, npc, job)
 	end
 	local radius = state.kind == "sensor" and state.stage == "deploy" and state.deployDistance or state.searchRadius
 	marker(client, position, label, radius)
+end
+
+function field.DeliverToContact(client, target, npc, claim)
+	if type(npc) ~= "string" or type(claim) ~= "string" then return false end
+	local character, job = field.ActiveJob(client, npc, claim)
+	if not character or not ix.townNPCs:CanInteract(client, target) then return false end
+	local state = job.fieldTask
+	if state.stage ~= "carrying" or state.recipient ~= target:GetDisplayName()
+		or state.recipientMap ~= game.GetMap() then return false end
+	local cargo = field.FindCargo(character, job)
+	if not cargo or cargo:Remove() == false then return false end
+	state.stage, job.progress, job.isCompleted = "delivered", job.numberRec, true
+	field.SaveJob(character, npc, job)
+	client:Notify("Delivery accepted by " .. state.recipient .. ". Return to " .. npc .. ".")
+
+	return true
 end
 
 local function deliverDrop(client, character, npc, job)

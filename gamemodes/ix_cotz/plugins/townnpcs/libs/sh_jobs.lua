@@ -122,6 +122,8 @@ local function registerCommission(contact, step)
 		desc = step.briefing .. "\n" .. step.objective,
 		fieldType = step.field.kind,
 		fieldMap = step.field.map,
+		fieldCargo = step.field.cargo,
+		fieldCargoName = step.field.label,
 		tier = step.field.tier,
 		numberRec = 1,
 		moneyReward = 0,
@@ -132,6 +134,11 @@ local function registerCommission(contact, step)
 			return ix.progression.IsActive(client:GetCharacter(), progressionID)
 		end,
 	}
+	if step.field.recipient then
+		local recipient = PLUGIN.contacts[step.field.recipient]
+		definition.fieldRecipient = recipient.name
+		definition.fieldRecipientMap = recipient.map
+	end
 	registerJob(contact, "cotz/town/commission/" .. contact.id .. "/" .. step.id, definition)
 end
 

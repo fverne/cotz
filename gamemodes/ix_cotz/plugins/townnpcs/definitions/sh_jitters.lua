@@ -34,6 +34,7 @@ PLUGIN:Register("jitters", {
 	},
 	supplies = {"medic_bandage_1", "medic_medkit_1", "medic_antirad_1", "drug_painkillers"},
 	dialogue = {
+		delivery = "Here, here. Let me check the label before you go.",
 		completedGreeting = "A full cabinet. I might actually sleep tonight.",
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
@@ -95,7 +96,8 @@ PLUGIN:Register("jitters", {
 			id = "JT02",
 			name = "The Empty Cabinet",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Clinical Records Folder I from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"JT01"},
 			briefing = "Recover a clinic inventory from a Marsh aid station.",
 			completion = "Careful with that. I need to read it.",
@@ -103,6 +105,8 @@ PLUGIN:Register("jitters", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_clinic",
+				label = "The Empty Cabinet - Clinical Records Folder I",
 			},
 			benefits = {
 				items = {
@@ -138,7 +142,8 @@ PLUGIN:Register("jitters", {
 			id = "JT04",
 			name = "A Missing Bag",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Medical Transport Case from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"JT03"},
 			briefing = "Recover a medic's abandoned case in Marsh.",
 			completion = "You brought it back. Good. Give me a moment.",
@@ -146,6 +151,8 @@ PLUGIN:Register("jitters", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_medical",
+				label = "A Missing Bag - Medical Transport Case",
 			},
 			benefits = {
 				services = {
@@ -185,7 +192,8 @@ PLUGIN:Register("jitters", {
 			id = "JT06",
 			name = "The Exposure Log",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Clinical Records Folder II from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"JT04"},
 			briefing = "Retrieve patient observations from a field shelter.",
 			completion = "Leave it on the clean side of the desk, please.",
@@ -193,6 +201,8 @@ PLUGIN:Register("jitters", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_clinic2",
+				label = "The Exposure Log - Clinical Records Folder II",
 			},
 			benefits = {
 				items = {
@@ -232,14 +242,18 @@ PLUGIN:Register("jitters", {
 			id = "JT08",
 			name = "The Broken Instrument",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Marsh. Deliver it to"
+				.. " 'Technut' in Marsh, then return here to finish the assignment.",
 			requires = {"JT06"},
 			briefing = "Recover diagnostic equipment from a local supply site.",
-			completion = "Careful with that. I need to read it.",
+			completion = "Delivered? Good, good. One less thing to chase while somebody bleeds on the floor.",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_control",
+				label = "The Broken Instrument - Red-Trimmed Control Unit",
+				recipient = "technut",
 			},
 			benefits = {
 				items = {
@@ -281,7 +295,8 @@ PLUGIN:Register("jitters", {
 			id = "JT10",
 			name = "The Contaminated Batch",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Dark-Capped Research Tube from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"JT08"},
 			briefing = "Collect sealed batch evidence from Garbage.",
 			completion = "You brought it back. Good. Give me a moment.",
@@ -289,6 +304,8 @@ PLUGIN:Register("jitters", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_tube",
+				label = "The Contaminated Batch - Dark-Capped Research Tube",
 			},
 			benefits = {
 				items = {
@@ -324,14 +341,18 @@ PLUGIN:Register("jitters", {
 			id = "JT12",
 			name = "Where the Water Came From",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0013 from the assigned search area in Marsh. Deliver it to"
+				.. " 'Gasket' in Marsh, then return here to finish the assignment.",
 			requires = {"JT10"},
 			briefing = "Retrieve a recorder near a suspect water source.",
-			completion = "Leave it on the clean side of the desk, please.",
+			completion = "Delivered? Good, good. One less thing to chase while somebody bleeds on the floor.",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_module",
+				label = "Where the Water Came From - Numbered Data Module 0013",
+				recipient = "gasket",
 			},
 			benefits = {
 				items = {
@@ -372,7 +393,8 @@ PLUGIN:Register("jitters", {
 			id = "JT14",
 			name = "A Second Opinion",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Laboratory Log Folder from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"JT12"},
 			briefing = "Recover a research note needed to compare exposure cases.",
 			completion = "Careful with that. I need to read it.",
@@ -380,6 +402,8 @@ PLUGIN:Register("jitters", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_lab",
+				label = "A Second Opinion - Laboratory Log Folder",
 			},
 			benefits = {
 				services = {
@@ -414,7 +438,8 @@ PLUGIN:Register("jitters", {
 			id = "JT16",
 			name = "The Missing Volunteer",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Medical Transport Case from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"JT14"},
 			briefing = "Recover a volunteer medic's case in Garbage.",
 			completion = "You brought it back. Good. Give me a moment.",
@@ -422,6 +447,8 @@ PLUGIN:Register("jitters", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_medical",
+				label = "The Missing Volunteer - Medical Transport Case",
 			},
 			benefits = {
 				items = {
@@ -462,14 +489,18 @@ PLUGIN:Register("jitters", {
 			id = "JT18",
 			name = "The Field Ward",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Clinical Records Folder I from the assigned search area in Marsh. Deliver it to"
+				.. " 'Wake' in Garbage, then return here to finish the assignment.",
 			requires = {"JT16"},
 			briefing = "Retrieve a treatment log at an abandoned regional aid post.",
-			completion = "Leave it on the clean side of the desk, please.",
+			completion = "Delivered? Good, good. One less thing to chase while somebody bleeds on the floor.",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_clinic",
+				label = "The Field Ward - Clinical Records Folder I",
+				recipient = "wake",
 			},
 			benefits = {
 				items = {
@@ -505,7 +536,8 @@ PLUGIN:Register("jitters", {
 			id = "JT20",
 			name = "No One Came Back",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"JT18"},
 			briefing = "Recover a clinic recorder from a Pripyat expedition site.",
 			completion = "Careful with that. I need to read it.",
@@ -513,6 +545,8 @@ PLUGIN:Register("jitters", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_tape",
+				label = "No One Came Back - Handwritten Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -553,7 +587,8 @@ PLUGIN:Register("jitters", {
 			id = "JT22",
 			name = "The Patient's Route",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0022 from the assigned search area in Pripyat. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"JT20"},
 			briefing = "Retrieve the expedition's last exposure readings in Pripyat.",
 			completion = "You brought it back. Good. Give me a moment.",
@@ -561,6 +596,8 @@ PLUGIN:Register("jitters", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_module2",
+				label = "The Patient's Route - Numbered Data Module 0022",
 			},
 			benefits = {
 				services = {
@@ -595,7 +632,8 @@ PLUGIN:Register("jitters", {
 			id = "JT24",
 			name = "An Answer on Tape",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Pripyat. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"JT23"},
 			briefing = "Recover the final medical recorder in Pripyat.",
 			completion = "Leave it on the clean side of the desk, please.",
@@ -603,6 +641,8 @@ PLUGIN:Register("jitters", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_tape2",
+				label = "An Answer on Tape - Blue-Label Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -648,7 +688,8 @@ PLUGIN:Register("jitters", {
 			id = "JT26",
 			name = "The Case Closed",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"JT25"},
 			briefing = "Recover identifying evidence at the last exposure site and return to the clinic.",
 			completion = "Careful with that. I need to read it.",
@@ -656,6 +697,8 @@ PLUGIN:Register("jitters", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_personnel",
+				label = "The Case Closed - Personnel File Folder",
 			},
 			benefits = {
 				items = {

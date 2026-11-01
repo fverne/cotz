@@ -35,6 +35,7 @@ PLUGIN:Register("gasket", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
+		delivery = "Put it on the clear bench. Not beside the fuel.",
 		completedGreeting = (
 			"You've covered what I needed for the service work. Now let's see who borrows it "
 			.. "first."
@@ -77,7 +78,8 @@ PLUGIN:Register("gasket", {
 			id = "GK02",
 			name = "The Empty Service Shed",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"GK01"},
 			briefing = "Recover generator service notes in Marsh.",
 			completion = "Here, away from the fuel. Let me open it.",
@@ -85,6 +87,8 @@ PLUGIN:Register("gasket", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_notebook",
+				label = "The Empty Service Shed - Tied Leather Journal",
 			},
 			benefits = {
 				items = {
@@ -120,14 +124,18 @@ PLUGIN:Register("gasket", {
 			id = "GK04",
 			name = "Technut's Regulator",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Marsh. Deliver it to"
+				.. " 'Technut' in Marsh, then return here to finish the assignment.",
 			requires = {"GK03"},
 			briefing = "Recover a utility component case from a Marsh service site.",
-			completion = "Good. Let's see what they wrote down.",
+			completion = "About time that reached the right bench. Perhaps we can keep something running now.",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_control",
+				label = "Technut's Regulator - Red-Trimmed Control Unit",
+				recipient = "technut",
 			},
 			benefits = {
 				items = {
@@ -168,17 +176,17 @@ PLUGIN:Register("gasket", {
 			id = "GK06",
 			name = "The Pump Log",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Marsh. Return to this contact to finish the assignment."
-			),
+			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"GK04"},
 			briefing = "Retrieve the last maintenance record at a waterside facility.",
 			completion = "You found it. Saves another argument about the specifications.",
 			field = {
-				kind = "sensor",
+				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_notebook",
+				label = "The Pump Log - Tied Leather Journal",
 			},
 			benefits = {
 				items = {
@@ -218,10 +226,8 @@ PLUGIN:Register("gasket", {
 			id = "GK08",
 			name = "The Bad Intake",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Marsh. Return to this contact to finish the assignment."
-			),
+			objective = "Deploy the recorder in Marsh, leave it to record, then retrieve Numbered Data Module 0013."
+				.. " Return it to this contact to finish the assignment.",
 			requires = {"GK06"},
 			briefing = "Deploy and recover a recorder near an intake site.",
 			completion = "Here, away from the fuel. Let me open it.",
@@ -229,6 +235,8 @@ PLUGIN:Register("gasket", {
 				kind = "sensor",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_module",
+				label = "The Bad Intake - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -269,14 +277,18 @@ PLUGIN:Register("gasket", {
 			id = "GK10",
 			name = "The Scrap Specification",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Garbage. Deliver it to 'Latch'"
+				.. " in Garbage, then return here to finish the assignment.",
 			requires = {"GK08"},
 			briefing = "Recover a part specification in Garbage for Latch.",
-			completion = "Good. Let's see what they wrote down.",
+			completion = "About time that reached the right bench. Perhaps we can keep something running now.",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_official",
+				label = "The Scrap Specification - Official File Folder",
+				recipient = "latch",
 			},
 			benefits = {
 				items = {
@@ -312,7 +324,8 @@ PLUGIN:Register("gasket", {
 			id = "GK12",
 			name = "The Forgotten Store",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Small Yellow Transit Case from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"GK10"},
 			briefing = "Recover a reserve supply case near industrial wreckage.",
 			completion = "You found it. Saves another argument about the specifications.",
@@ -320,6 +333,8 @@ PLUGIN:Register("gasket", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_case",
+				label = "The Forgotten Store - Small Yellow Transit Case",
 			},
 			benefits = {
 				items = {
@@ -360,7 +375,8 @@ PLUGIN:Register("gasket", {
 			id = "GK14",
 			name = "The Shelter Circuit",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0022 from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"GK12"},
 			briefing = "Recover a service recorder at a remote shelter.",
 			completion = "Here, away from the fuel. Let me open it.",
@@ -368,6 +384,8 @@ PLUGIN:Register("gasket", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_module2",
+				label = "The Shelter Circuit - Numbered Data Module 0022",
 			},
 			benefits = {
 				items = {
@@ -403,14 +421,18 @@ PLUGIN:Register("gasket", {
 			id = "GK16",
 			name = "The Long Supply Line",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
+				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
 			requires = {"GK14"},
 			briefing = "Retrieve freight evidence on a regional utility route.",
-			completion = "Good. Let's see what they wrote down.",
+			completion = "About time that reached the right bench. Perhaps we can keep something running now.",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_manifest",
+				label = "The Long Supply Line - Warehouse Packing List A",
+				recipient = "ledger",
 			},
 			benefits = {
 				items = {
@@ -451,7 +473,8 @@ PLUGIN:Register("gasket", {
 			id = "GK18",
 			name = "The Original Manual",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"GK16"},
 			briefing = "Recover old utility documentation at a remote facility.",
 			completion = "You found it. Saves another argument about the specifications.",
@@ -459,6 +482,8 @@ PLUGIN:Register("gasket", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_official",
+				label = "The Original Manual - Official File Folder",
 			},
 			benefits = {
 				items = {
@@ -494,10 +519,8 @@ PLUGIN:Register("gasket", {
 			id = "GK20",
 			name = "The Emergency Test",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Marsh. Return to this contact to finish the assignment."
-			),
+			objective = "Deploy the recorder in Marsh, leave it to record, then retrieve Numbered Data Module 0013."
+				.. " Return it to this contact to finish the assignment.",
 			requires = {"GK19"},
 			briefing = "Deploy and recover a recorder at a service site.",
 			completion = "Here, away from the fuel. Let me open it.",
@@ -505,6 +528,8 @@ PLUGIN:Register("gasket", {
 				kind = "sensor",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_module",
+				label = "The Emergency Test - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -549,7 +574,8 @@ PLUGIN:Register("gasket", {
 			id = "GK22",
 			name = "A Light Left On",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"GK21"},
 			briefing = "Recover the last service record and conclude the utilities project.",
 			completion = "Good. Let's see what they wrote down.",
@@ -557,6 +583,8 @@ PLUGIN:Register("gasket", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_notebook",
+				label = "A Light Left On - Tied Leather Journal",
 			},
 			benefits = {
 				items = {

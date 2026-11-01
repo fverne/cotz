@@ -120,7 +120,8 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL02",
 			name = "The Cold Kitchen",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SL01"},
 			briefing = "Recover the kitchen's missing recipe notebook in Marsh.",
 			completion = "Let me wash my hands before I open that.",
@@ -128,6 +129,8 @@ PLUGIN:Register("spicy-lemon", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_notebook",
+				label = "The Cold Kitchen - Tied Leather Journal",
 			},
 			benefits = {
 				items = {
@@ -163,14 +166,18 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL04",
 			name = "Spoor's Contribution",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Deliver it to"
+				.. " 'Spoor' in Garbage, then return here to finish the assignment.",
 			requires = {"SL02"},
 			briefing = "Recover a meat-handling ledger at a deserted hunting camp.",
-			completion = "Set it here. I want to see what survived.",
+			completion = "They got it? Good. That should settle the paperwork. Now, have you eaten?",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_diary",
+				label = "Spoor's Contribution - Scientist's Field Diary",
+				recipient = "spoor",
 			},
 			benefits = {
 				items = {
@@ -214,7 +221,8 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL06",
 			name = "The Spoiled Shipment",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SL04"},
 			briefing = "Retrieve shipment evidence from a Marsh supply cache.",
 			completion = "You carried that all the way back? Come and sit by the stove.",
@@ -222,6 +230,8 @@ PLUGIN:Register("spicy-lemon", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_manifest",
+				label = "The Spoiled Shipment - Warehouse Packing List A",
 			},
 			benefits = {
 				items = {
@@ -261,7 +271,8 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL08",
 			name = "The Missing Crate",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Small Yellow Transit Case from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SL06"},
 			briefing = "Recover a cookware case along the Garbage route.",
 			completion = "Let me wash my hands before I open that.",
@@ -269,6 +280,8 @@ PLUGIN:Register("spicy-lemon", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_case",
+				label = "The Missing Crate - Small Yellow Transit Case",
 			},
 			benefits = {
 				items = {
@@ -312,7 +325,8 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL10",
 			name = "The Supplier's Ledger",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SL08"},
 			briefing = "Retrieve a supplier record in Garbage.",
 			completion = "Set it here. I want to see what survived.",
@@ -320,6 +334,8 @@ PLUGIN:Register("spicy-lemon", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_receipt",
+				label = "The Supplier's Ledger - Warehouse Packing List B",
 			},
 			benefits = {
 				items = {
@@ -355,7 +371,8 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL12",
 			name = "Smoke Without Supper",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SL10"},
 			briefing = "Recover a cooking log from an abandoned camp.",
 			completion = "You carried that all the way back? Come and sit by the stove.",
@@ -363,6 +380,8 @@ PLUGIN:Register("spicy-lemon", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_notebook",
+				label = "Smoke Without Supper - Tied Leather Journal",
 			},
 			benefits = {
 				items = {
@@ -406,14 +425,18 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL14",
 			name = "Jitters' Complaint",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Clinical Records Folder I from the assigned search area in Marsh. Deliver it to"
+				.. " 'Jitters' in Marsh, then return here to finish the assignment.",
 			requires = {"SL12"},
 			briefing = "Recover clinic ration observations from a field shelter.",
-			completion = "Let me wash my hands before I open that.",
+			completion = "They got it? Good. That should settle the paperwork. Now, have you eaten?",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_clinic",
+				label = "Jitters' Complaint - Clinical Records Folder I",
+				recipient = "jitters",
 			},
 			benefits = {
 				items = {
@@ -449,7 +472,8 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL16",
 			name = "An Unfinished Menu",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SL14"},
 			briefing = "Recover a traveller's annotated menu in Waystation territory.",
 			completion = "Set it here. I want to see what survived.",
@@ -457,6 +481,8 @@ PLUGIN:Register("spicy-lemon", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_notebook",
+				label = "An Unfinished Menu - Tied Leather Journal",
 			},
 			benefits = {
 				items = {
@@ -500,14 +526,18 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL18",
 			name = "The Long Walk",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0013 from the assigned search area in Marsh. Deliver it to"
+				.. " 'Gasket' in Marsh, then return here to finish the assignment.",
 			requires = {"SL16"},
 			briefing = "Collect a ration-test recorder along a regional route.",
-			completion = "You carried that all the way back? Come and sit by the stove.",
+			completion = "They got it? Good. That should settle the paperwork. Now, have you eaten?",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_module",
+				label = "The Long Walk - Numbered Data Module 0013",
+				recipient = "gasket",
 			},
 			benefits = {
 				items = {
@@ -543,7 +573,8 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL20",
 			name = "The Last Cookfire",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SL18"},
 			briefing = "Recover a missing cook's journal from a remote camp.",
 			completion = "Let me wash my hands before I open that.",
@@ -551,6 +582,8 @@ PLUGIN:Register("spicy-lemon", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_diary",
+				label = "The Last Cookfire - Scientist's Field Diary",
 			},
 			benefits = {
 				items = {
@@ -594,7 +627,8 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL22",
 			name = "The Cook's Detour",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SL20"},
 			briefing = "Recover the cook's personal case beyond the usual supply route.",
 			completion = "Set it here. I want to see what survived.",
@@ -602,6 +636,8 @@ PLUGIN:Register("spicy-lemon", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_personnel",
+				label = "The Cook's Detour - Personnel File Folder",
 			},
 			benefits = {
 				items = {
@@ -637,7 +673,8 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL24",
 			name = "The Recipe He Kept",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SL23"},
 			briefing = "Recover the journal's missing page from the cook's last cache.",
 			completion = "You carried that all the way back? Come and sit by the stove.",
@@ -645,6 +682,8 @@ PLUGIN:Register("spicy-lemon", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_diary",
+				label = "The Recipe He Kept - Scientist's Field Diary",
 			},
 			benefits = {
 				items = {
@@ -692,7 +731,8 @@ PLUGIN:Register("spicy-lemon", {
 			id = "SL26",
 			name = "Room at the Table",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Old Photograph Album from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SL25"},
 			briefing = "Recover the cook's keepsake and return for the meal's conclusion.",
 			completion = "Let me wash my hands before I open that.",
@@ -700,6 +740,8 @@ PLUGIN:Register("spicy-lemon", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_photo",
+				label = "Room at the Table - Old Photograph Album",
 			},
 			benefits = {
 				items = {

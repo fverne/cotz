@@ -4,12 +4,13 @@ function field.Assign(character, npc, job)
 	local definition = ix.jobs.list[job.identifier]
 	local settings = field.settings[definition.fieldType]
 	if not settings then return false end
+	local cargo = definition.fieldCargo or settings.cargo
 	local map = definition.fieldMap or game.GetMap()
 	local points = field.CollectPoints(settings.sources, map)
 	if #points == 0 then return false end
 	table.Shuffle(points)
 	local function usable(candidate)
-		return map ~= game.GetMap() or field.GroundPoint(candidate, settings.cargo) ~= nil
+		return map ~= game.GetMap() or field.GroundPoint(candidate, cargo) ~= nil
 	end
 	local point, destination, approaches
 	if definition.fieldType == "deadDrop" then
@@ -33,7 +34,9 @@ function field.Assign(character, npc, job)
 		bearingAngle = settings.bearingAngle,
 		recordSeconds = settings.recordSeconds, leaveDistance = settings.leaveDistance,
 		deployDistance = settings.deployDistance,
-		cargo = settings.cargo, searchRadius = searchRadius,
+		cargo = cargo, cargoName = definition.fieldCargoName,
+		description = definition.desc, searchRadius = searchRadius,
+		recipient = definition.fieldRecipient, recipientMap = definition.fieldRecipientMap,
 	}
 	if definition.fieldType == "defence" then
 		field.AssignDefence(job.fieldTask, settings, definition.tier, approaches)

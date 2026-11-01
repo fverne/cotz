@@ -33,6 +33,7 @@ PLUGIN:Register("suture", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
+		delivery = "Set it down carefully. I want to see what condition it arrived in.",
 		completedGreeting = "It fits. It holds. Now try bringing it back that way.",
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
@@ -78,7 +79,8 @@ PLUGIN:Register("suture", {
 			id = "SU02",
 			name = "The Missing Pattern",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SU01"},
 			briefing = "Recover a workshop pattern case in Waystation territory.",
 			completion = "Keep it together. I want to see how it was packed.",
@@ -86,6 +88,8 @@ PLUGIN:Register("suture", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_official",
+				label = "The Missing Pattern - Official File Folder",
 			},
 			benefits = {
 				items = {
@@ -121,7 +125,8 @@ PLUGIN:Register("suture", {
 			id = "SU04",
 			name = "A Broken Strap",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Striped Equipment Case from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SU03"},
 			briefing = "Recover a freight worker's equipment case.",
 			completion = "Let me look at the measurements.",
@@ -129,6 +134,8 @@ PLUGIN:Register("suture", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_equipment",
+				label = "A Broken Strap - Striped Equipment Case",
 			},
 			benefits = {
 				items = {
@@ -169,17 +176,17 @@ PLUGIN:Register("suture", {
 			id = "SU06",
 			name = "The Forgotten Measurements",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Waystation. Return to this contact to finish the assignment."
-			),
+			objective = "Recover Tied Leather Journal from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SU04"},
 			briefing = "Retrieve a fitting record at a regional workshop.",
 			completion = "Thank you. I'll examine it at the bench.",
 			field = {
-				kind = "sensor",
+				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_notebook",
+				label = "The Forgotten Measurements - Tied Leather Journal",
 			},
 			benefits = {
 				items = {
@@ -219,14 +226,18 @@ PLUGIN:Register("suture", {
 			id = "SU08",
 			name = "The Workshop Scrapbook",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Scientist's Field Diary from the assigned search area in Garbage. Deliver it to"
+				.. " 'Latch' in Garbage, then return here to finish the assignment.",
 			requires = {"SU06"},
 			briefing = "Recover materials notes in Garbage.",
-			completion = "Keep it together. I want to see how it was packed.",
+			completion = "In their hands, then. Good. A specification is no use folded up in your pocket.",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_diary",
+				label = "The Workshop Scrapbook - Scientist's Field Diary",
+				recipient = "latch",
 			},
 			benefits = {
 				items = {
@@ -267,7 +278,8 @@ PLUGIN:Register("suture", {
 			id = "SU10",
 			name = "The Loaded Pack",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0013 from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SU08"},
 			briefing = "Retrieve a field-test recorder along a freight route.",
 			completion = "Let me look at the measurements.",
@@ -275,6 +287,8 @@ PLUGIN:Register("suture", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_module",
+				label = "The Loaded Pack - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -310,14 +324,18 @@ PLUGIN:Register("suture", {
 			id = "SU12",
 			name = "The Quartermaster's Specification",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Waystation. Deliver it to"
+				.. " 'Quartermaster' in Waystation, then return here to finish the assignment.",
 			requires = {"SU10"},
 			briefing = "Recover an equipment specification at a remote supply site.",
-			completion = "Thank you. I'll examine it at the bench.",
+			completion = "In their hands, then. Good. A specification is no use folded up in your pocket.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_official",
+				label = "The Quartermaster's Specification - Official File Folder",
+				recipient = "quartermaster",
 			},
 			benefits = {
 				items = {
@@ -358,7 +376,8 @@ PLUGIN:Register("suture", {
 			id = "SU14",
 			name = "The Failed Seam",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Worn Striped Equipment Case from the assigned search area in Waystation. Return it"
+				.. " to this contact to finish the assignment.",
 			requires = {"SU12"},
 			briefing = "Recover a damaged trial case in regional ruins.",
 			completion = "Keep it together. I want to see how it was packed.",
@@ -366,6 +385,8 @@ PLUGIN:Register("suture", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_worncase",
+				label = "The Failed Seam - Worn Striped Equipment Case",
 			},
 			benefits = {
 				items = {
@@ -401,14 +422,18 @@ PLUGIN:Register("suture", {
 			id = "SU16",
 			name = "The Long Expedition's Kit",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Personnel File Folder from the assigned search area in Waystation. Deliver it to"
+				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
 			requires = {"SU14"},
 			briefing = "Recover an expedition equipment record in Waystation territory.",
-			completion = "Let me look at the measurements.",
+			completion = "In their hands, then. Good. A specification is no use folded up in your pocket.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_personnel",
+				label = "The Long Expedition's Kit - Personnel File Folder",
+				recipient = "ledger",
 			},
 			benefits = {
 				items = {
@@ -449,7 +474,8 @@ PLUGIN:Register("suture", {
 			id = "SU18",
 			name = "The Pripyat Trial",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0022 from the assigned search area in Pripyat. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SU16"},
 			briefing = "Retrieve an outfitting test recorder in Pripyat.",
 			completion = "Thank you. I'll examine it at the bench.",
@@ -457,6 +483,8 @@ PLUGIN:Register("suture", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_module2",
+				label = "The Pripyat Trial - Numbered Data Module 0022",
 			},
 			benefits = {
 				items = {
@@ -492,7 +520,8 @@ PLUGIN:Register("suture", {
 			id = "SU20",
 			name = "The Missing Outfitter",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Personnel File Folder from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SU18"},
 			briefing = "Recover a field fitter's personal case in Pripyat.",
 			completion = "Keep it together. I want to see how it was packed.",
@@ -500,6 +529,8 @@ PLUGIN:Register("suture", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_personnel",
+				label = "The Missing Outfitter - Personnel File Folder",
 			},
 			benefits = {
 				items = {
@@ -540,10 +571,8 @@ PLUGIN:Register("suture", {
 			id = "SU22",
 			name = "The Return Journey Test",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Waystation. Return to this contact to finish the assignment."
-			),
+			objective = "Deploy the recorder in Waystation, leave it to record, then retrieve Numbered Data Module"
+				.. " 0013. Return it to this contact to finish the assignment.",
 			requires = {"SU21"},
 			briefing = "Deploy and retrieve a equipment recorder along an expedition route.",
 			completion = "Let me look at the measurements.",
@@ -551,6 +580,8 @@ PLUGIN:Register("suture", {
 				kind = "sensor",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_module",
+				label = "The Return Journey Test - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -590,7 +621,8 @@ PLUGIN:Register("suture", {
 			id = "SU24",
 			name = "The Outfitter's Pattern",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SU23"},
 			briefing = "Recover the final expedition pattern and finish the project.",
 			completion = "Thank you. I'll examine it at the bench.",
@@ -598,6 +630,8 @@ PLUGIN:Register("suture", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_official",
+				label = "The Outfitter's Pattern - Official File Folder",
 			},
 			benefits = {
 				items = {

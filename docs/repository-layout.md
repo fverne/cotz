@@ -77,8 +77,8 @@ existing `value_kerosene` ID. `base_valuables_test` and `base_quests` inherit `b
 so Helix discovers both folders normally and retains the shared valuable mechanics.
 The 36 related boxes, bags, carriers, and smaller containers moved to `valuable/`; 82 selected
 quest candidates moved to `quests/`. See [quest item candidates](quest-items.md) for their inventory
-and selection criteria. These moves preserve filenames and item IDs. Quest IDs are excluded from ordinary loot and job hand-in pools. Dedicated progression
-acquisition is still to be authored.
+and selection criteria. These moves preserve filenames and item IDs. Quest IDs are excluded from ordinary loot and job hand-in pools. Bound town commission variants now reuse selected quest assets with separate `town_quest_*` IDs;
+see [quest commissions](npc-overhaul/quest-commissions.md). Original valuable IDs are unchanged.
 The workbook's existing-item comparator tab is reference data, not part of this group.
 
 ## Archive

@@ -14,6 +14,7 @@ PLUGIN:Register("cleaner", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
+		delivery = "Leave it here. Keep it closed.",
 		completedGreeting = "Everything arrived. That's all anyone needs to know.",
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
@@ -56,7 +57,8 @@ PLUGIN:Register("cleaner", {
 			id = "CL02",
 			name = "The Unattended Drop",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CL01"},
 			briefing = "Complete a two-point drop in Garbage.",
 			completion = "Leave it. I'll check it later.",
@@ -64,6 +66,8 @@ PLUGIN:Register("cleaner", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_evidence",
+				label = "The Unattended Drop - Orange Evidence Case",
 			},
 			benefits = {
 				items = {
@@ -99,7 +103,8 @@ PLUGIN:Register("cleaner", {
 			id = "CL04",
 			name = "The Wrong Marker",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CL03"},
 			briefing = "Recover a drop's placement record.",
 			completion = "Seal looks intact. Good.",
@@ -107,6 +112,8 @@ PLUGIN:Register("cleaner", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_notebook",
+				label = "The Wrong Marker - Tied Leather Journal",
 			},
 			benefits = {
 				items = {
@@ -147,7 +154,8 @@ PLUGIN:Register("cleaner", {
 			id = "CL06",
 			name = "An Empty Hiding Place",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Tagged Security Flash Drive from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"CL04"},
 			briefing = "Recover evidence from a compromised cache.",
 			completion = "That's what I needed.",
@@ -155,6 +163,8 @@ PLUGIN:Register("cleaner", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_security",
+				label = "An Empty Hiding Place - Tagged Security Flash Drive",
 			},
 			benefits = {
 				items = {
@@ -194,7 +204,8 @@ PLUGIN:Register("cleaner", {
 			id = "CL08",
 			name = "The Missing Runner",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"CL06"},
 			briefing = "Recover a runner's recorder at a freight route.",
 			completion = "Leave it. I'll check it later.",
@@ -202,6 +213,8 @@ PLUGIN:Register("cleaner", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_tape",
+				label = "The Missing Runner - Handwritten Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -242,7 +255,8 @@ PLUGIN:Register("cleaner", {
 			id = "CL10",
 			name = "The Buried Register",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CL08"},
 			briefing = "Recover the distribution register from a hidden field site.",
 			completion = "Seal looks intact. Good.",
@@ -250,6 +264,8 @@ PLUGIN:Register("cleaner", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_receipt",
+				label = "The Buried Register - Warehouse Packing List B",
 			},
 			benefits = {
 				items = {
@@ -285,7 +301,8 @@ PLUGIN:Register("cleaner", {
 			id = "CL12",
 			name = "The Duplicate Seal",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CL10"},
 			briefing = "Retrieve evidence from a second compromised drop.",
 			completion = "That's what I needed.",
@@ -293,6 +310,8 @@ PLUGIN:Register("cleaner", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_evidence",
+				label = "The Duplicate Seal - Orange Evidence Case",
 			},
 			benefits = {
 				items = {
@@ -333,14 +352,18 @@ PLUGIN:Register("cleaner", {
 			id = "CL14",
 			name = "Ledger's Missing Copy",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Deliver it to"
+				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
 			requires = {"CL12"},
 			briefing = "Recover freight evidence from a regional cache.",
-			completion = "Leave it. I'll check it later.",
+			completion = "It arrived. Good. Leave the rest with me.",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_manifest",
+				label = "Ledger's Missing Copy - Warehouse Packing List A",
+				recipient = "ledger",
 			},
 			benefits = {
 				items = {
@@ -377,10 +400,8 @@ PLUGIN:Register("cleaner", {
 			id = "CL16",
 			name = "The False Destination",
 			kind = "field",
-			objective = (
-				"Collect the parcel at the first marker and deliver it to the second in Garbage. Return to "
-				.. "this contact to finish the assignment."
-			),
+			objective = "Recover Tagged Security Flash Drive from the assigned search area in Garbage. Deliver it to"
+				.. " the assigned cache using Field work, then return here.",
 			requires = {"CL14"},
 			briefing = "Complete a delivery to a corrected cache endpoint.",
 			completion = "Seal looks intact. Good.",
@@ -388,6 +409,8 @@ PLUGIN:Register("cleaner", {
 				kind = "deadDrop",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_security",
+				label = "The False Destination - Tagged Security Flash Drive",
 			},
 			benefits = {
 				items = {
@@ -428,14 +451,18 @@ PLUGIN:Register("cleaner", {
 			id = "CL18",
 			name = "The Other Register",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Corporate Records Folder from the assigned search area in Waystation. Deliver it to"
+				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
 			requires = {"CL16"},
 			briefing = "Recover a distribution backup in Waystation territory.",
-			completion = "That's what I needed.",
+			completion = "It arrived. Good. Leave the rest with me.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_archive",
+				label = "The Other Register - Corporate Records Folder",
+				recipient = "ledger",
 			},
 			benefits = {
 				items = {
@@ -471,7 +498,8 @@ PLUGIN:Register("cleaner", {
 			id = "CL20",
 			name = "The Unmanned Depot",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CL18"},
 			briefing = "Recover a case at a Pripyat supply cache.",
 			completion = "Leave it. I'll check it later.",
@@ -479,6 +507,8 @@ PLUGIN:Register("cleaner", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_equipment",
+				label = "The Unmanned Depot - Striped Equipment Case",
 			},
 			benefits = {
 				items = {
@@ -519,7 +549,8 @@ PLUGIN:Register("cleaner", {
 			id = "CL22",
 			name = "A Cache With Two Owners",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Corporate Letter from the assigned search area in Pripyat. Return it to this contact"
+				.. " to finish the assignment.",
 			requires = {"CL20"},
 			briefing = "Recover the cache ownership record in Pripyat.",
 			completion = "Seal looks intact. Good.",
@@ -527,6 +558,8 @@ PLUGIN:Register("cleaner", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_contract",
+				label = "A Cache With Two Owners - Corporate Letter",
 			},
 			benefits = {
 				items = {
@@ -562,7 +595,8 @@ PLUGIN:Register("cleaner", {
 			id = "CL24",
 			name = "The Burned Address",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CL22"},
 			briefing = "Recover the final routing record in Pripyat.",
 			completion = "That's what I needed.",
@@ -570,6 +604,8 @@ PLUGIN:Register("cleaner", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_official",
+				label = "The Burned Address - Official File Folder",
 			},
 			benefits = {
 				items = {
@@ -610,10 +646,8 @@ PLUGIN:Register("cleaner", {
 			id = "CL26",
 			name = "The Cache That Stayed Closed",
 			kind = "field",
-			objective = (
-				"Collect the parcel at the first marker and deliver it to the second in Garbage. Return to "
-				.. "this contact to finish the assignment."
-			),
+			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Deliver it to the"
+				.. " assigned cache using Field work, then return here.",
 			requires = {"CL25"},
 			briefing = "Complete the network's last sealed delivery.",
 			completion = "Leave it. I'll check it later.",
@@ -621,6 +655,8 @@ PLUGIN:Register("cleaner", {
 				kind = "deadDrop",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_evidence",
+				label = "The Cache That Stayed Closed - Orange Evidence Case",
 			},
 			benefits = {
 				items = {
@@ -660,7 +696,8 @@ PLUGIN:Register("cleaner", {
 			id = "CL28",
 			name = "No More Missing Parcels",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CL27"},
 			briefing = "Recover closure evidence from the supply route and return.",
 			completion = "Seal looks intact. Good.",
@@ -668,6 +705,8 @@ PLUGIN:Register("cleaner", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_receipt",
+				label = "No More Missing Parcels - Warehouse Packing List B",
 			},
 			benefits = {
 				items = {

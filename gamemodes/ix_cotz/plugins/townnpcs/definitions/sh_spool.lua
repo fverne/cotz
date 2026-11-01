@@ -14,6 +14,7 @@ PLUGIN:Register("spool", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
+		delivery = "Right, one moment. Let me find the matching entry.",
 		completedGreeting = "They left a message. Someone should hear it.",
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
@@ -56,10 +57,8 @@ PLUGIN:Register("spool", {
 			id = "SO02",
 			name = "The Local Silence",
 			kind = "field",
-			objective = (
-				"Take the required bearings, locate the source, and recover the transmitter in Waystation. "
-				.. "Return to this contact to finish the assignment."
-			),
+			objective = "Take the required bearings in Waystation and recover Red-Trimmed Control Unit. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SO01"},
 			briefing = "Triangulate and recover a transmitter near Waystation.",
 			completion = "Give me a moment. I want to hear this properly.",
@@ -67,6 +66,8 @@ PLUGIN:Register("spool", {
 				kind = "triangulation",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_control",
+				label = "The Local Silence - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -105,7 +106,8 @@ PLUGIN:Register("spool", {
 			id = "SO04",
 			name = "The Station Log",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SO02"},
 			briefing = "Recover a failed station's recorder.",
 			completion = "You found it. Leave it beside the receiver.",
@@ -113,6 +115,8 @@ PLUGIN:Register("spool", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_tape",
+				label = "The Station Log - Handwritten Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -156,14 +160,18 @@ PLUGIN:Register("spool", {
 			id = "SO06",
 			name = "The Crossed Bearings",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0013 from the assigned search area in Waystation. Deliver it to"
+				.. " 'Technut' in Marsh, then return here to finish the assignment.",
 			requires = {"SO04"},
 			briefing = "Recover a calibration record disputed by Smartass.",
-			completion = "Thanks. I'll check the recording.",
+			completion = "Good. I will let them know which entry it belongs with. Saves another call going in circles.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_module",
+				label = "The Crossed Bearings - Numbered Data Module 0013",
+				recipient = "technut",
 			},
 			benefits = {
 				items = {
@@ -206,7 +214,8 @@ PLUGIN:Register("spool", {
 			id = "SO08",
 			name = "The Absent Operator",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SO06"},
 			briefing = "Locate a source and retrieve its recorded message.",
 			completion = "Give me a moment. I want to hear this properly.",
@@ -214,6 +223,8 @@ PLUGIN:Register("spool", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_control",
+				label = "The Absent Operator - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -257,7 +268,8 @@ PLUGIN:Register("spool", {
 			id = "SO10",
 			name = "Mute's Header",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Tape-Labelled Flash Drive from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SO08"},
 			briefing = "Recover a damaged network record in Marsh.",
 			completion = "You found it. Leave it beside the receiver.",
@@ -265,6 +277,8 @@ PLUGIN:Register("spool", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_drive",
+				label = "Mute's Header - Tape-Labelled Flash Drive",
 			},
 			benefits = {
 				items = {
@@ -303,7 +317,8 @@ PLUGIN:Register("spool", {
 			id = "SO12",
 			name = "The Garbage Relay",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SO10"},
 			briefing = "Locate and retrieve a source near a freight route.",
 			completion = "Thanks. I'll check the recording.",
@@ -311,6 +326,8 @@ PLUGIN:Register("spool", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_control",
+				label = "The Garbage Relay - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -354,14 +371,18 @@ PLUGIN:Register("spool", {
 			id = "SO14",
 			name = "The Unsent Call",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Waystation. Deliver it to"
+				.. " 'Wake' in Garbage, then return here to finish the assignment.",
 			requires = {"SO12"},
 			briefing = "Recover an expedition check-in recording in regional ruins.",
-			completion = "Give me a moment. I want to hear this properly.",
+			completion = "Good. I will let them know which entry it belongs with. Saves another call going in circles.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_tape2",
+				label = "The Unsent Call - Blue-Label Audio Cassette",
+				recipient = "wake",
 			},
 			benefits = {
 				items = {
@@ -400,10 +421,8 @@ PLUGIN:Register("spool", {
 			id = "SO16",
 			name = "The First Pripyat Call",
 			kind = "field",
-			objective = (
-				"Take the required bearings, locate the source, and recover the transmitter in Pripyat. "
-				.. "Return to this contact to finish the assignment."
-			),
+			objective = "Take the required bearings in Pripyat and recover Red-Trimmed Control Unit. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SO14"},
 			briefing = "Triangulate and collect a transmitter in Pripyat.",
 			completion = "You found it. Leave it beside the receiver.",
@@ -411,6 +430,8 @@ PLUGIN:Register("spool", {
 				kind = "triangulation",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_control",
+				label = "The First Pripyat Call - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -454,14 +475,18 @@ PLUGIN:Register("spool", {
 			id = "SO18",
 			name = "The Last Check-in",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Deliver it to"
+				.. " 'Wake' in Garbage, then return here to finish the assignment.",
 			requires = {"SO16"},
 			briefing = "Recover a second expedition recorder deeper in Pripyat.",
-			completion = "Thanks. I'll check the recording.",
+			completion = "Good. I will let them know which entry it belongs with. Saves another call going in circles.",
 			field = {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_tape",
+				label = "The Last Check-in - Handwritten Audio Cassette",
+				recipient = "wake",
 			},
 			benefits = {
 				items = {
@@ -500,7 +525,8 @@ PLUGIN:Register("spool", {
 			id = "SO20",
 			name = "The Receiver That Stayed On",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SO19"},
 			briefing = "Locate and retrieve the expedition's final source.",
 			completion = "Give me a moment. I want to hear this properly.",
@@ -508,6 +534,8 @@ PLUGIN:Register("spool", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_control",
+				label = "The Receiver That Stayed On - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -555,7 +583,8 @@ PLUGIN:Register("spool", {
 			id = "SO22",
 			name = "The Message Home",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SO21"},
 			briefing = "Recover the last unsent recording and return it to the station.",
 			completion = "You found it. Leave it beside the receiver.",
@@ -563,6 +592,8 @@ PLUGIN:Register("spool", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_tape2",
+				label = "The Message Home - Blue-Label Audio Cassette",
 			},
 			benefits = {
 				items = {

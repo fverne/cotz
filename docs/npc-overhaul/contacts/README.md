@@ -38,6 +38,13 @@ Late chapter names or a later map do not enforce access: implement explicit pers
 Never place a contact, receiving NPC, or claim terminal in Pripyat. Fixed-location field sites,
 invented records and identities are proposals until mapped and implemented.
 
+## Authored commission update
+
+312 field commissions now use named bound quest cargo, including 76 deliveries to another contact
+and six field-cache deliveries. The per-contact story tables below remain design references.
+See the [commission inventory](../quest-commissions.md) and runtime definitions for current
+items, interactions and receiving contacts. Rewards still conclude at the issuer.
+
 ## Contact directory
 
 ### Marsh

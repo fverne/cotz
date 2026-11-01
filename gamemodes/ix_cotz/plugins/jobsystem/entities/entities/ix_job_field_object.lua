@@ -29,7 +29,7 @@ else
 	function ENT:OnPopulateEntityInfo(tooltip)
 		local title = tooltip:AddRow("name")
 		title:SetImportant()
-		title:SetText(self.PrintName)
+		title:SetText(self:GetNWString("cotz/jobsystem/cargo-name", self.PrintName))
 		title:SizeToContents()
 		local description = tooltip:AddRow("description")
 		description:SetText("Assigned equipment. Only the stalker on this task can collect it with Use.")

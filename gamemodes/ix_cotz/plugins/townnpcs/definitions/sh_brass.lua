@@ -32,6 +32,7 @@ PLUGIN:Register("brass", {
 	},
 	supplies = {"12gauge", "9x18", "9x19", "medic_bandage_1"},
 	dialogue = {
+		delivery = "Set it down. I will check the consignment against the entry.",
 		completedGreeting = "Every consignment accounted for. Let's keep it that way.",
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
@@ -68,7 +69,8 @@ PLUGIN:Register("brass", {
 			id = "BR02",
 			name = "The Broken Seal",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"BR01"},
 			briefing = "Recover depot packing records in Garbage.",
 			completion = "Let's check the consignment marks.",
@@ -76,6 +78,8 @@ PLUGIN:Register("brass", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_manifest",
+				label = "The Broken Seal - Warehouse Packing List A",
 			},
 			benefits = {
 				items = {
@@ -111,7 +115,8 @@ PLUGIN:Register("brass", {
 			id = "BR04",
 			name = "The Missing Boxes",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Striped Equipment Case from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"BR03"},
 			briefing = "Recover a sealed freight case near a vehicle graveyard.",
 			completion = "Put it here. I want the paperwork kept together.",
@@ -119,6 +124,8 @@ PLUGIN:Register("brass", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_equipment",
+				label = "The Missing Boxes - Striped Equipment Case",
 			},
 			benefits = {
 				items = {
@@ -159,7 +166,8 @@ PLUGIN:Register("brass", {
 			id = "BR06",
 			name = "The Depot Register",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"BR04"},
 			briefing = "Retrieve a recovered depot inventory.",
 			completion = "Good. I'll compare it with my copy.",
@@ -167,6 +175,8 @@ PLUGIN:Register("brass", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_receipt",
+				label = "The Depot Register - Warehouse Packing List B",
 			},
 			benefits = {
 				items = {
@@ -206,7 +216,8 @@ PLUGIN:Register("brass", {
 			id = "BR08",
 			name = "The Mixed Shipment",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"BR06"},
 			briefing = "Recover evidence identifying a wrongly labelled consignment.",
 			completion = "Let's check the consignment marks.",
@@ -214,6 +225,8 @@ PLUGIN:Register("brass", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_manifest",
+				label = "The Mixed Shipment - Warehouse Packing List A",
 			},
 			benefits = {
 				items = {
@@ -254,14 +267,18 @@ PLUGIN:Register("brass", {
 			id = "BR10",
 			name = "The Supplier's Stamp",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Corporate Letter from the assigned search area in Garbage. Deliver it to 'Latch' in"
+				.. " Garbage, then return here to finish the assignment.",
 			requires = {"BR08"},
 			briefing = "Retrieve supplier paperwork in regional ruins.",
-			completion = "Put it here. I want the paperwork kept together.",
+			completion = "Received and accounted for. That is how a consignment ends.",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_contract",
+				label = "The Supplier's Stamp - Corporate Letter",
+				recipient = "latch",
 			},
 			benefits = {
 				items = {
@@ -297,14 +314,18 @@ PLUGIN:Register("brass", {
 			id = "BR12",
 			name = "Ledger's Missing Receipt",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Deliver it to"
+				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
 			requires = {"BR10"},
 			briefing = "Recover a freight receipt on a regional route.",
-			completion = "Good. I'll compare it with my copy.",
+			completion = "Received and accounted for. That is how a consignment ends.",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_receipt",
+				label = "Ledger's Missing Receipt - Warehouse Packing List B",
+				recipient = "ledger",
 			},
 			benefits = {
 				items = {
@@ -345,14 +366,18 @@ PLUGIN:Register("brass", {
 			id = "BR14",
 			name = "The Military Manifest",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Military Records Folder II from the assigned search area in Waystation. Deliver it"
+				.. " to 'Quartermaster' in Waystation, then return here to finish the assignment.",
 			requires = {"BR12"},
 			briefing = "Recover a military supply record in Waystation territory.",
-			completion = "Let's check the consignment marks.",
+			completion = "Received and accounted for. That is how a consignment ends.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_military",
+				label = "The Military Manifest - Military Records Folder II",
+				recipient = "quartermaster",
 			},
 			benefits = {
 				items = {
@@ -388,7 +413,8 @@ PLUGIN:Register("brass", {
 			id = "BR16",
 			name = "The Empty Truck",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"BR14"},
 			briefing = "Recover a driver recorder at a remote supply site.",
 			completion = "Put it here. I want the paperwork kept together.",
@@ -396,6 +422,8 @@ PLUGIN:Register("brass", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_tape",
+				label = "The Empty Truck - Handwritten Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -436,7 +464,8 @@ PLUGIN:Register("brass", {
 			id = "BR18",
 			name = "The Pripyat Consignment",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"BR16"},
 			briefing = "Recover a sealed case in Pripyat.",
 			completion = "Good. I'll compare it with my copy.",
@@ -444,6 +473,8 @@ PLUGIN:Register("brass", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_equipment",
+				label = "The Pripyat Consignment - Striped Equipment Case",
 			},
 			benefits = {
 				items = {
@@ -479,14 +510,18 @@ PLUGIN:Register("brass", {
 			id = "BR20",
 			name = "The Wrong Recipient",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Pripyat. Deliver it to"
+				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
 			requires = {"BR18"},
 			briefing = "Recover a destination record in Pripyat.",
-			completion = "Let's check the consignment marks.",
+			completion = "Received and accounted for. That is how a consignment ends.",
 			field = {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_official",
+				label = "The Wrong Recipient - Official File Folder",
+				recipient = "ledger",
 			},
 			benefits = {
 				items = {
@@ -527,7 +562,8 @@ PLUGIN:Register("brass", {
 			id = "BR22",
 			name = "The Final Receipt",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"BR21"},
 			briefing = "Recover the shipment's final freight record.",
 			completion = "Put it here. I want the paperwork kept together.",
@@ -535,6 +571,8 @@ PLUGIN:Register("brass", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_receipt",
+				label = "The Final Receipt - Warehouse Packing List B",
 			},
 			benefits = {
 				items = {
@@ -574,7 +612,8 @@ PLUGIN:Register("brass", {
 			id = "BR24",
 			name = "The Depot's Copy",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Corporate Letter from the assigned search area in Garbage. Return it to this contact"
+				.. " to finish the assignment.",
 			requires = {"BR23"},
 			briefing = "Recover a supplier's surviving agreement and return it.",
 			completion = "Good. I'll compare it with my copy.",
@@ -582,6 +621,8 @@ PLUGIN:Register("brass", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_contract",
+				label = "The Depot's Copy - Corporate Letter",
 			},
 			benefits = {
 				items = {

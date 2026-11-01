@@ -139,6 +139,44 @@ local function configureProgression(dialogue, contact)
 
 end
 
+local function configureDeliveries(dialogue, contact)
+	dialogue.tree.GREETING.options[#dialogue.tree.GREETING.options + 1] = "TownDeliveries"
+	dialogue.addTopic("TownDeliveries", {
+		statement = "I have a delivery for you.",
+		response = contact.dialogue.delivery or "Let me see what you've brought.",
+		options = {"BackTopic"},
+		IsDynamic = true,
+		ShouldAdd = function(_, client)
+			for _, job in pairs(client:GetCharacter():GetJobs()) do
+				local state = job.fieldTask
+				if state and state.recipient == contact.name and state.stage == "carrying" then return true end
+			end
+
+			return false
+		end,
+		GetDynamicOptions = function(_, client)
+			local options = {}
+			for npc, job in SortedPairs(client:GetCharacter():GetJobs()) do
+				local state = job.fieldTask
+				if state and state.recipient == contact.name and state.stage == "carrying" then
+					options[#options + 1] = {statement = "Hand over " .. (state.cargoName or "the cargo") .. ".",
+						topicID = "TownDeliveries", dyndata = {npc = npc, claim = job.rewardKey}}
+				end
+			end
+
+			return options
+		end,
+		ResolveDynamicOption = function(_, client, target, data)
+			if type(data) == "table" and type(data.npc) == "string" and type(data.claim) == "string"
+				and allowAction(client, target) then
+				ix.jobs.field.DeliverToContact(client, target, data.npc, data.claim)
+			end
+
+			return "BackTopic"
+		end,
+	})
+end
+
 function ix.dialogue.ConfigureTownContact(dialogue, contact)
 	assert(dialogue.townContact == contact.id, "Town conversation is bound to the wrong contact")
 	local greeting = dialogue.tree.GREETING
@@ -154,5 +192,6 @@ function ix.dialogue.ConfigureTownContact(dialogue, contact)
 	end
 	configureWork(dialogue, contact)
 	configureProgression(dialogue, contact)
+	configureDeliveries(dialogue, contact)
 	ix.dialogue.ConfigureTaskRewards(dialogue)
 end

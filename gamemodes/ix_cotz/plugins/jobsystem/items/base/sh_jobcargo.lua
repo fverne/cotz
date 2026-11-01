@@ -17,6 +17,14 @@ function ITEM:GetWeight()
 	return self.flatweight
 end
 
+function ITEM:GetName()
+	return self:GetData("fieldName", self.name)
+end
+
 function ITEM:GetDescription()
-	return self.description .. "\nReturn this to the contact who issued your assignment."
+	local recipient = self:GetData("fieldRecipient")
+	local instruction = recipient and "\nDeliver this to " .. recipient .. "."
+		or "\nReturn this to the contact who issued your assignment."
+
+	return self.description .. instruction
 end

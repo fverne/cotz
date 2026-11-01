@@ -10,8 +10,10 @@ The folder inherits `base_quests`, which forwards to `base_valuable`. Concrete d
 no base overrides. Filenames, item IDs, tuning and existing saved instances are preserved.
 
 Quest IDs are excluded from ordinary random loot, NPC drops, hidden caches and shared job
-hand-in pools. Future progression definitions must provide their acquisition and one-time
-consumption rules. Existing saved inventories and accepted assignments are not rewritten.
+hand-in pools. Town progression now uses 33 separate bound cargo variants of selected assets, with zero price
+and commission-specific labels. Their acquisition and delivery rules are described in the
+[commission inventory](npc-overhaul/quest-commissions.md). The original valuable IDs remain excluded
+from ordinary acquisition; existing saved inventories and accepted assignments are not rewritten.
 
 | Item | Item ID | Reason for selection |
 | --- | --- | --- |

@@ -63,6 +63,7 @@ ents = {Create = function(class)
 	function entity:SetPos(position) self.position = position end
 	function entity:GetPos() return self.position end
 	function entity:SetModel(model) self.model = model end
+	function entity:SetNWString(key, value) self[key] = value end
 	function entity:GetModelBounds()
 		assert(self.model, "SetModel precedes reading bounds")
 		return Vector(-8, -8, 0), Vector(8, 8, 16)
@@ -689,6 +690,103 @@ ix.eventController = manager
 update(client, character)
 entity = field.GetObject(character, character.jobs.Contact)
 check(#livingAttackers() > 0, "restoring population management resumes the interrupted wave")
+
+Angle = function(...) return {...} end
+ITEM = {}
+dofile("gamemodes/ix_cotz/plugins/townnpcs/items/jobcargo/sh_town_quest_notebook.lua")
+ix.item.list.town_quest_notebook = setmetatable(ITEM, {__index = cargoBase})
+local courierClient, courier, courierInventory = actor()
+local courierDefinition = {
+	fieldType = "recovery", fieldMap = map, fieldCargo = "town_quest_notebook",
+	fieldCargoName = "Landing maintenance log", fieldRecipient = "Ledger", fieldRecipientMap = "rp_waystation",
+	desc = "Recover the landing log and deliver it to Ledger.", moneyReward = 0, repReward = 0,
+}
+ix.jobs.list.courier_test = courierDefinition
+local courierJob = {identifier = "courier_test", rewardKey = "job:courier", progressionClaim = now,
+	numberRec = 1, progress = 0, moneyReward = 0}
+check(field.Assign(courier, "Ballast", courierJob), "custom cargo gets a usable assigned recovery site")
+courier.jobs.Ballast = copy(courierJob)
+check(courierJob.fieldTask.cargo == "town_quest_notebook"
+	and courierJob.fieldTask.recipient == "Ledger", "cargo and recipient are saved on acceptance")
+courierDefinition.fieldCargo, courierDefinition.fieldRecipient = "job_recovery_case", "Changed recipient"
+check(courierJob.fieldTask.cargo == "town_quest_notebook" and courierJob.fieldTask.recipient == "Ledger",
+	"definition edits cannot rewrite an accepted commission")
+check(ix.jobs.getFormattedDesc(courierJob):find("deliver it to Ledger", 1, true),
+	"accepted commissions retain their description snapshot")
+local oldAssignment = copy(courierJob)
+oldAssignment.fieldTask.description, oldAssignment.fieldTask.recipient = nil, nil
+check(not ix.jobs.getFormattedDesc(oldAssignment):find("Ledger", 1, true),
+	"older saved recoveries do not inherit a newly authored recipient")
+courierClient.position = field.Unpack(courierJob.fieldTask.point)
+update(courierClient, courier)
+local courierObject = field.GetObject(courier, courierJob)
+check(courierObject.model == ix.item.list.town_quest_notebook.model,
+	"the world object uses the commission's custom cargo model")
+check(courierObject["cotz/jobsystem/cargo-name"] == "Landing maintenance log",
+	"world cargo displays the commission-specific name")
+courierInventory.full = true
+field.Collect(courierClient, courierObject)
+flush()
+check(not field.FindCargo(courier, courierJob), "full inventories leave custom cargo recoverable at its site")
+courierInventory.full = false
+now = now + 2
+field.Collect(courierClient, courierObject)
+flush()
+local deliveredCargo = field.FindCargo(courier, courierJob)
+check(deliveredCargo and deliveredCargo:GetName() == "Landing maintenance log",
+	"collected cargo carries its commission-specific inventory name")
+check(deliveredCargo:GetDescription():find("Deliver this to Ledger", 1, true),
+	"cargo descriptions name the receiving contact")
+check(not courier.jobs.Ballast.isCompleted and not field.CanComplete(courier, courier.jobs.Ballast),
+	"collecting a delivery item does not complete its commission")
+courierClient:ixJobComplete("Ballast")
+check(courier.jobs.Ballast ~= nil, "issuer cannot complete a commission before the recipient receives cargo")
+update(courierClient, courier)
+check(not courier.jobs.Ballast.isCompleted, "periodic recovery updates cannot bypass the recipient")
+local recipient = {name = "Ledger", position = courierClient.position}
+function recipient:GetDisplayName() return self.name end
+function recipient:GetPos() return self.position end
+local previousTown = ix.townNPCs
+ix.townNPCs = {CanInteract = function(_, actor, target)
+	return IsValid(target) and not target.denied and actor:GetPos():DistToSqr(target:GetPos()) <= 128 ^ 2
+end}
+map = "rp_waystation"
+check(not field.DeliverToContact(courierClient, recipient, "Ballast", "job:expired"),
+	"stale delivery claims are rejected")
+recipient.name = "Carbon"
+check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
+	"another contact cannot receive the consignment")
+recipient.name, recipient.denied = "Ledger", true
+check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
+	"recipient access checks apply to delivery")
+recipient.denied, recipient.position = false, courierClient.position + Vector(1000, 0, 0)
+check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
+	"remote recipient hand-ins are rejected")
+recipient.position = courierClient.position
+map = "rp_marsh_cs"
+check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
+	"the saved recipient map is enforced")
+map = "rp_waystation"
+check(not field.DeliverToContact(stranger, recipient, "Ballast", courierJob.rewardKey),
+	"another character cannot deliver this consignment")
+local removeCargo = deliveredCargo.Remove
+deliveredCargo.Remove = function() return false end
+check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey)
+	and courier.jobs.Ballast.fieldTask.stage == "carrying", "failed removal grants no delivery credit")
+deliveredCargo.Remove = removeCargo
+check(field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
+	"the named recipient accepts and consumes the matching cargo")
+check(deliveredCargo.removed and courier.jobs.Ballast.fieldTask.stage == "delivered"
+	and courier.jobs.Ballast.isCompleted, "recipient receipt is saved before returning to the issuer")
+check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
+	"repeated delivery cannot consume or credit twice")
+local receipt = copy(courier.jobs.Ballast)
+check(field.CanComplete(courier, receipt), "a restored delivered assignment completes without carrying consumed cargo")
+map = courierJob.fieldTask.map
+update(courierClient, courier)
+check(not field.GetObject(courier, courierJob), "delivered cargo cannot respawn at the original site")
+ix.townNPCs = previousTown
+
 PLUGIN:OnUnload()
 check(entity.invalid and #livingAttackers() == 0, "plugin unload removes field objects and owned attackers")
 local markerCount = markers

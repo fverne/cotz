@@ -14,6 +14,7 @@ PLUGIN:Register("vesper", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
+		delivery = "Put it where I can check the label. Tell me if it was damaged on the way.",
 		completedGreeting = "We brought the results home. That's what makes it a successful expedition.",
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
@@ -56,10 +57,8 @@ PLUGIN:Register("vesper", {
 			id = "VE02",
 			name = "The Quiet Edge",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Garbage. Return to this contact to finish the assignment."
-			),
+			objective = "Deploy the recorder in Garbage, leave it to record, then retrieve Numbered Data Module 0013."
+				.. " Return it to this contact to finish the assignment.",
 			requires = {"VE01"},
 			briefing = "Deploy and retrieve a sensor at a Garbage anomaly approach.",
 			completion = "You're back. Let me check the recorder.",
@@ -67,6 +66,8 @@ PLUGIN:Register("vesper", {
 				kind = "sensor",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_module",
+				label = "The Quiet Edge - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -105,14 +106,18 @@ PLUGIN:Register("vesper", {
 			id = "VE04",
 			name = "Beanstalk's Baseline",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0022 from the assigned search area in Garbage. Deliver it to"
+				.. " 'Spool' in Garbage, then return here to finish the assignment.",
 			requires = {"VE02"},
 			briefing = "Recover a control recorder away from the field.",
-			completion = "Good. We'll look at the reading here.",
+			completion = "Delivered, and you made it back. That is the useful part. I will mark it done.",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_module2",
+				label = "Beanstalk's Baseline - Numbered Data Module 0022",
+				recipient = "spool",
 			},
 			benefits = {
 				items = {
@@ -156,10 +161,8 @@ PLUGIN:Register("vesper", {
 			id = "VE06",
 			name = "The Second Field",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Garbage. Return to this contact to finish the assignment."
-			),
+			objective = "Deploy the recorder in Garbage, leave it to record, then retrieve Numbered Data Module 0013."
+				.. " Return it to this contact to finish the assignment.",
 			requires = {"VE04"},
 			briefing = "Record conditions at a different Garbage field.",
 			completion = "Leave it with me. Have some water.",
@@ -167,6 +170,8 @@ PLUGIN:Register("vesper", {
 				kind = "sensor",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_module",
+				label = "The Second Field - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -209,7 +214,8 @@ PLUGIN:Register("vesper", {
 			id = "VE08",
 			name = "The Abandoned Detector",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Marked Research Case from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"VE06"},
 			briefing = "Recover a prospector's field case.",
 			completion = "You're back. Let me check the recorder.",
@@ -217,6 +223,8 @@ PLUGIN:Register("vesper", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_research",
+				label = "The Abandoned Detector - Marked Research Case",
 			},
 			benefits = {
 				items = {
@@ -260,7 +268,8 @@ PLUGIN:Register("vesper", {
 			id = "VE10",
 			name = "The Unstable Reading",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"VE08"},
 			briefing = "Retrieve a recorder from a disputed field site.",
 			completion = "Good. We'll look at the reading here.",
@@ -268,6 +277,8 @@ PLUGIN:Register("vesper", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_tape",
+				label = "The Unstable Reading - Handwritten Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -306,10 +317,8 @@ PLUGIN:Register("vesper", {
 			id = "VE12",
 			name = "The Control Run",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Garbage. Return to this contact to finish the assignment."
-			),
+			objective = "Deploy the recorder in Garbage, leave it to record, then retrieve Numbered Data Module 0022."
+				.. " Return it to this contact to finish the assignment.",
 			requires = {"VE10"},
 			briefing = "Record at a regional control site.",
 			completion = "Leave it with me. Have some water.",
@@ -317,6 +326,8 @@ PLUGIN:Register("vesper", {
 				kind = "sensor",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_module2",
+				label = "The Control Run - Numbered Data Module 0022",
 			},
 			benefits = {
 				items = {
@@ -360,14 +371,18 @@ PLUGIN:Register("vesper", {
 			id = "VE14",
 			name = "The Lost Team's Notes",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Scientist's Field Diary from the assigned search area in Waystation. Deliver it to"
+				.. " 'Wake' in Garbage, then return here to finish the assignment.",
 			requires = {"VE12"},
 			briefing = "Recover a prospecting log in Waystation territory.",
-			completion = "You're back. Let me check the recorder.",
+			completion = "Delivered, and you made it back. That is the useful part. I will mark it done.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_diary",
+				label = "The Lost Team's Notes - Scientist's Field Diary",
+				recipient = "wake",
 			},
 			benefits = {
 				items = {
@@ -406,10 +421,8 @@ PLUGIN:Register("vesper", {
 			id = "VE16",
 			name = "The First Pripyat Field",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Pripyat. Return to this contact to finish the assignment."
-			),
+			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0013."
+				.. " Return it to this contact to finish the assignment.",
 			requires = {"VE14"},
 			briefing = "Deploy and retrieve a recorder at a Pripyat field.",
 			completion = "Good. We'll look at the reading here.",
@@ -417,6 +430,8 @@ PLUGIN:Register("vesper", {
 				kind = "sensor",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_module",
+				label = "The First Pripyat Field - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -460,7 +475,8 @@ PLUGIN:Register("vesper", {
 			id = "VE18",
 			name = "The Team's Cache",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Striped Equipment Case from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"VE16"},
 			briefing = "Recover a lost prospecting team's equipment case.",
 			completion = "Leave it with me. Have some water.",
@@ -468,6 +484,8 @@ PLUGIN:Register("vesper", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_equipment",
+				label = "The Team's Cache - Striped Equipment Case",
 			},
 			benefits = {
 				items = {
@@ -506,10 +524,8 @@ PLUGIN:Register("vesper", {
 			id = "VE20",
 			name = "The Field They Chose",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Garbage. Return to this contact to finish the assignment."
-			),
+			objective = "Deploy the recorder in Garbage, leave it to record, then retrieve Numbered Data Module 0022."
+				.. " Return it to this contact to finish the assignment.",
 			requires = {"VE18"},
 			briefing = "Record the team's last known anomaly site.",
 			completion = "You're back. Let me check the recorder.",
@@ -517,6 +533,8 @@ PLUGIN:Register("vesper", {
 				kind = "sensor",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_module2",
+				label = "The Field They Chose - Numbered Data Module 0022",
 			},
 			benefits = {
 				items = {
@@ -560,14 +578,18 @@ PLUGIN:Register("vesper", {
 			id = "VE22",
 			name = "A Different Explanation",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Deliver it to"
+				.. " 'Carbon' in Waystation, then return here to finish the assignment.",
 			requires = {"VE21"},
 			briefing = "Recover a missing control recorder in Pripyat.",
-			completion = "Good. We'll look at the reading here.",
+			completion = "Delivered, and you made it back. That is the useful part. I will mark it done.",
 			field = {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_tape",
+				label = "A Different Explanation - Handwritten Audio Cassette",
+				recipient = "carbon",
 			},
 			benefits = {
 				items = {
@@ -610,7 +632,8 @@ PLUGIN:Register("vesper", {
 			id = "VE24",
 			name = "The Last Recorder",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"VE23"},
 			briefing = "Retrieve the expedition's final recorder and return its account.",
 			completion = "Leave it with me. Have some water.",
@@ -618,6 +641,8 @@ PLUGIN:Register("vesper", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_tape2",
+				label = "The Last Recorder - Blue-Label Audio Cassette",
 			},
 			benefits = {
 				items = {

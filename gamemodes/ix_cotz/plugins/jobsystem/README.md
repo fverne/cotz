@@ -44,6 +44,10 @@ The dialogue plugin still loads `integrations/sh_dialogue.lua` early to register
 - `libs/sh_fieldtasks.lua`: shared point collection, route selection and field validation.
 - `sv_fieldplacement.lua` and `sv_fieldassignment.lua`: placement hulls and saved assignment creation.
 - `sv_fieldactions.lua`: PDA requests, readings, deployment, delivery and status markers.
+  Town commissions can override cargo/labels and nominate a receiving NPC. Accepted assignments
+  snapshot those values and their description; recipient hand-ins consume cargo before recording
+  delivery, then the player returns to the issuer for progression completion. See the
+  [commission inventory](../../../../docs/npc-overhaul/quest-commissions.md).
 - `sv_fieldtasks.lua`: live cargo, asynchronous pickup, periodic updates and cleanup.
 - `sv_fielddefence.lua`: research encounters, owned attackers and wave progression.
 - `sv_cargo.lua`: item transfer and world-object protection hooks.

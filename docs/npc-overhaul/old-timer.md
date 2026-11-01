@@ -23,8 +23,10 @@ The final keepsake story rewards supplies/recognition rather than an obsolete st
 
 ## Implemented objectives
 
-Field sites are assigned from configured point pools. Unique notebooks and keepsakes use the
-existing bound commission cargo; physical locations require authoring and multiplayer testing.
+Field sites are assigned from configured point pools. Notebooks and keepsakes now use named bound quest cargo.
+OT20 delivers the convoy record to Ledger,
+and OT22 delivers the recording to Spool, before returning to Old Timer for completion.
+See the [commission inventory](quest-commissions.md). Physical locations still require multiplayer testing.
 Quantities below are initial tuning, not measured completion times.
 
 | ID | Objective | Kind | Requirement/target/region | Reward |

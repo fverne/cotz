@@ -90,7 +90,8 @@ PLUGIN:Register("mute", {
 			id = "MU02",
 			name = "The Silent Repeater",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"MU01"},
 			briefing = "** He writes \"The Silent Repeater\" on a field order, then marks the place to look. **",
 			completion = "** He takes the case without looking up. **",
@@ -98,6 +99,8 @@ PLUGIN:Register("mute", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_control",
+				label = "The Silent Repeater - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -133,7 +136,8 @@ PLUGIN:Register("mute", {
 			id = "MU04",
 			name = "The Missing Address",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Tape-Labelled Flash Drive from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"MU02"},
 			briefing = "** He writes \"The Missing Address\" on a field order, then marks the place to look. **",
 			completion = "** He checks the seal, then draws it closer. **",
@@ -141,6 +145,8 @@ PLUGIN:Register("mute", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_drive",
+				label = "The Missing Address - Tape-Labelled Flash Drive",
 			},
 			benefits = {
 				items = {
@@ -181,7 +187,8 @@ PLUGIN:Register("mute", {
 			id = "MU06",
 			name = "A Line Through the Marsh",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0013 from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"MU04"},
 			briefing = "** He writes \"A Line Through the Marsh\" on a field order, then marks the place to look. **",
 			completion = "** He turns the record over and studies the reverse. **",
@@ -189,6 +196,8 @@ PLUGIN:Register("mute", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_module",
+				label = "A Line Through the Marsh - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -228,14 +237,18 @@ PLUGIN:Register("mute", {
 			id = "MU08",
 			name = "Spool's Packet",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Tagged Security Flash Drive from the assigned search area in Garbage. Deliver it to"
+				.. " 'Spool' in Garbage, then return here to finish the assignment.",
 			requires = {"MU06"},
 			briefing = "** He writes \"Spool's Packet\" on a field order, then marks the place to look. **",
-			completion = "** He takes the case without looking up. **",
+			completion = "** He checks the recipient against the dispatch note, then puts a line through the entry. **",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_security",
+				label = "Spool's Packet - Tagged Security Flash Drive",
+				recipient = "spool",
 			},
 			benefits = {
 				items = {
@@ -276,7 +289,8 @@ PLUGIN:Register("mute", {
 			id = "MU10",
 			name = "The Duplicate Message",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Marked Data Disc I from the assigned search area in Marsh. Return it to this contact"
+				.. " to finish the assignment.",
 			requires = {"MU08"},
 			briefing = "** He writes \"The Duplicate Message\" on a field order, then marks the place to look. **",
 			completion = "** He checks the seal, then draws it closer. **",
@@ -284,6 +298,8 @@ PLUGIN:Register("mute", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_disc",
+				label = "The Duplicate Message - Marked Data Disc I",
 			},
 			benefits = {
 				items = {
@@ -319,10 +335,8 @@ PLUGIN:Register("mute", {
 			id = "MU12",
 			name = "The Unlisted Receiver",
 			kind = "field",
-			objective = (
-				"Take the required bearings, locate the source, and recover the transmitter in Marsh. Return "
-				.. "to this contact to finish the assignment."
-			),
+			objective = "Take the required bearings in Marsh and recover Red-Trimmed Control Unit. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"MU10"},
 			briefing = "** He writes \"The Unlisted Receiver\" on a field order, then marks the place to look. **",
 			completion = "** He turns the record over and studies the reverse. **",
@@ -330,6 +344,8 @@ PLUGIN:Register("mute", {
 				kind = "triangulation",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_control",
+				label = "The Unlisted Receiver - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -370,14 +386,18 @@ PLUGIN:Register("mute", {
 			id = "MU14",
 			name = "The Second Copy",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Marked Data Disc I from the assigned search area in Waystation. Deliver it to"
+				.. " 'Spool' in Garbage, then return here to finish the assignment.",
 			requires = {"MU12"},
 			briefing = "** He writes \"The Second Copy\" on a field order, then marks the place to look. **",
-			completion = "** He takes the case without looking up. **",
+			completion = "** He checks the recipient against the dispatch note, then puts a line through the entry. **",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_disc",
+				label = "The Second Copy - Marked Data Disc I",
+				recipient = "spool",
 			},
 			benefits = {
 				items = {
@@ -413,7 +433,8 @@ PLUGIN:Register("mute", {
 			id = "MU16",
 			name = "A Message With No Sender",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"MU14"},
 			briefing = "** He writes \"A Message With No Sender\" on a field order, then marks the place to look. **",
 			completion = "** He checks the seal, then draws it closer. **",
@@ -421,6 +442,8 @@ PLUGIN:Register("mute", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_tape",
+				label = "A Message With No Sender - Handwritten Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -461,17 +484,18 @@ PLUGIN:Register("mute", {
 			id = "MU18",
 			name = "The Old Routing Table",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Pripyat. Return to this contact to finish the assignment."
-			),
+			objective = "Recover Corporate Records Folder from the assigned search area in Pripyat. Deliver it to"
+				.. " 'Carbon' in Waystation, then return here to finish the assignment.",
 			requires = {"MU16"},
 			briefing = "** He writes \"The Old Routing Table\" on a field order, then marks the place to look. **",
-			completion = "** He turns the record over and studies the reverse. **",
+			completion = "** He checks the recipient against the dispatch note, then puts a line through the entry. **",
 			field = {
-				kind = "sensor",
+				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_archive",
+				label = "The Old Routing Table - Corporate Records Folder",
+				recipient = "carbon",
 			},
 			benefits = {
 				items = {
@@ -507,7 +531,8 @@ PLUGIN:Register("mute", {
 			id = "MU20",
 			name = "Someone on the Line",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0022 from the assigned search area in Pripyat. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"MU18"},
 			briefing = "** He writes \"Someone on the Line\" on a field order, then marks the place to look. **",
 			completion = "** He takes the case without looking up. **",
@@ -515,6 +540,8 @@ PLUGIN:Register("mute", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_module2",
+				label = "Someone on the Line - Numbered Data Module 0022",
 			},
 			benefits = {
 				items = {
@@ -555,10 +582,8 @@ PLUGIN:Register("mute", {
 			id = "MU22",
 			name = "The Broken Handshake",
 			kind = "field",
-			objective = (
-				"Take the required bearings, locate the source, and recover the transmitter in Pripyat. "
-				.. "Return to this contact to finish the assignment."
-			),
+			objective = "Take the required bearings in Pripyat and recover Red-Trimmed Control Unit. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"MU21"},
 			briefing = "** He writes \"The Broken Handshake\" on a field order, then marks the place to look. **",
 			completion = "** He checks the seal, then draws it closer. **",
@@ -566,6 +591,8 @@ PLUGIN:Register("mute", {
 				kind = "triangulation",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_control",
+				label = "The Broken Handshake - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -605,7 +632,8 @@ PLUGIN:Register("mute", {
 			id = "MU24",
 			name = "The Last Address",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Tagged Security Flash Drive from the assigned search area in Marsh. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"MU23"},
 			briefing = "** He writes \"The Last Address\" on a field order, then marks the place to look. **",
 			completion = "** He turns the record over and studies the reverse. **",
@@ -613,6 +641,8 @@ PLUGIN:Register("mute", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_security",
+				label = "The Last Address - Tagged Security Flash Drive",
 			},
 			benefits = {
 				items = {

@@ -34,6 +34,7 @@ PLUGIN:Register("carbon", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
+		delivery = "On the clear part of the desk. Keep any loose pages with it.",
 		completedGreeting = "Now the dates agree. Whether anyone likes the answer is another matter.",
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
@@ -76,7 +77,8 @@ PLUGIN:Register("carbon", {
 			id = "CA02",
 			name = "The Maintenance Office",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CA01"},
 			briefing = "Recover a facility index in regional ruins.",
 			completion = "Let me look at the date first.",
@@ -84,6 +86,8 @@ PLUGIN:Register("carbon", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_official",
+				label = "The Maintenance Office - Official File Folder",
 			},
 			benefits = {
 				items = {
@@ -122,7 +126,8 @@ PLUGIN:Register("carbon", {
 			id = "CA04",
 			name = "A Date That Does Not Fit",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Corporate Records Folder from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CA02"},
 			briefing = "Retrieve a second dated record in Garbage.",
 			completion = "Good. I'll compare it with the other copy.",
@@ -130,6 +135,8 @@ PLUGIN:Register("carbon", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_archive",
+				label = "A Date That Does Not Fit - Corporate Records Folder",
 			},
 			benefits = {
 				items = {
@@ -173,14 +180,18 @@ PLUGIN:Register("carbon", {
 			id = "CA06",
 			name = "The Original's Account",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Waystation. Deliver it to 'The"
+				.. " Original' in Marsh, then return here to finish the assignment.",
 			requires = {"CA04"},
 			briefing = "Recover a contemporaneous expedition note for comparison.",
-			completion = "Thank you. I'll record where it was recovered.",
+			completion = "The record has reached someone who can check it. Keep the dates in mind.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_notebook",
+				label = "The Original's Account - Tied Leather Journal",
+				recipient = "the-original",
 			},
 			benefits = {
 				items = {
@@ -223,7 +234,8 @@ PLUGIN:Register("carbon", {
 			id = "CA08",
 			name = "The Missing Annex",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CA06"},
 			briefing = "Recover a facility annex from a regional office site.",
 			completion = "Let me look at the date first.",
@@ -231,6 +243,8 @@ PLUGIN:Register("carbon", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_official",
+				label = "The Missing Annex - Official File Folder",
 			},
 			benefits = {
 				items = {
@@ -274,7 +288,8 @@ PLUGIN:Register("carbon", {
 			id = "CA10",
 			name = "Egghead's Citation",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Laboratory Log Folder from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CA08"},
 			briefing = "Recover a referenced research record.",
 			completion = "Good. I'll compare it with the other copy.",
@@ -282,6 +297,8 @@ PLUGIN:Register("carbon", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_lab",
+				label = "Egghead's Citation - Laboratory Log Folder",
 			},
 			benefits = {
 				items = {
@@ -320,7 +337,8 @@ PLUGIN:Register("carbon", {
 			id = "CA12",
 			name = "The Restricted Copy",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Loose Intelligence Dossier from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"CA10"},
 			briefing = "Recover field evidence of an operation omitted from official records.",
 			completion = "Thank you. I'll record where it was recovered.",
@@ -328,6 +346,8 @@ PLUGIN:Register("carbon", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_intel",
+				label = "The Restricted Copy - Loose Intelligence Dossier",
 			},
 			benefits = {
 				items = {
@@ -371,7 +391,8 @@ PLUGIN:Register("carbon", {
 			id = "CA14",
 			name = "The Pripyat Index",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Corporate Records Folder from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CA12"},
 			briefing = "Recover an archive index in Pripyat.",
 			completion = "Let me look at the date first.",
@@ -379,6 +400,8 @@ PLUGIN:Register("carbon", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_archive",
+				label = "The Pripyat Index - Corporate Records Folder",
 			},
 			benefits = {
 				items = {
@@ -417,14 +440,18 @@ PLUGIN:Register("carbon", {
 			id = "CA16",
 			name = "The Administrative Trail",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Pripyat. Deliver it to"
+				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
 			requires = {"CA14"},
 			briefing = "Retrieve a surviving operations log at a second Pripyat site.",
-			completion = "Good. I'll compare it with the other copy.",
+			completion = "The record has reached someone who can check it. Keep the dates in mind.",
 			field = {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_official",
+				label = "The Administrative Trail - Official File Folder",
+				recipient = "ledger",
 			},
 			benefits = {
 				items = {
@@ -468,7 +495,8 @@ PLUGIN:Register("carbon", {
 			id = "CA18",
 			name = "The False Summary",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Blue Research Dossier from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CA17"},
 			briefing = "Recover the original record behind an altered report.",
 			completion = "Thank you. I'll record where it was recovered.",
@@ -476,6 +504,8 @@ PLUGIN:Register("carbon", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_dossier",
+				label = "The False Summary - Blue Research Dossier",
 			},
 			benefits = {
 				items = {
@@ -514,7 +544,8 @@ PLUGIN:Register("carbon", {
 			id = "CA20",
 			name = "The Surviving Archive",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Corporate Records Folder from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"CA19"},
 			briefing = "Recover the central archive record in Pripyat.",
 			completion = "Let me look at the date first.",
@@ -522,6 +553,8 @@ PLUGIN:Register("carbon", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_archive",
+				label = "The Surviving Archive - Corporate Records Folder",
 			},
 			benefits = {
 				items = {
@@ -569,7 +602,8 @@ PLUGIN:Register("carbon", {
 			id = "CA22",
 			name = "The Last Witness on Paper",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Scientist's Field Diary from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"CA21"},
 			briefing = "Retrieve the final dated field record and return the complete dossier.",
 			completion = "Good. I'll compare it with the other copy.",
@@ -577,6 +611,8 @@ PLUGIN:Register("carbon", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_diary",
+				label = "The Last Witness on Paper - Scientist's Field Diary",
 			},
 			benefits = {
 				items = {

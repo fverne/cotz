@@ -36,6 +36,7 @@ PLUGIN:Register("technut", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
+		delivery = "Over here, buddy. Let me see what we have got.",
 		completedGreeting = (
 			"You've brought back enough for me to get on with the work, buddy. What else have you "
 			.. "found?"
@@ -171,7 +172,8 @@ PLUGIN:Register("technut", {
 			id = "TN02",
 			name = "The Missing Toolbox",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Stickered Tool Case from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"TN01"},
 			briefing = "Recover a Marsh workshop case.",
 			completion = "Oh, let me see! Mind the oil on the bench.",
@@ -179,6 +181,8 @@ PLUGIN:Register("technut", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_tools",
+				label = "The Missing Toolbox - Stickered Tool Case",
 			},
 			benefits = {
 				services = {
@@ -216,14 +220,18 @@ PLUGIN:Register("technut", {
 			id = "TN04",
 			name = "A Regulator for Gasket",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Marsh. Deliver it to"
+				.. " 'Gasket' in Marsh, then return here to finish the assignment.",
 			requires = {"TN03"},
 			briefing = "Recover a regulator from a utility service cache.",
-			completion = "You found it! Let's see what we've got.",
+			completion = "Good, buddy. Much easier when the part and the person who needs it are in the same room.",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_control",
+				label = "A Regulator for Gasket - Red-Trimmed Control Unit",
+				recipient = "gasket",
 			},
 			benefits = {
 				items = {
@@ -267,7 +275,8 @@ PLUGIN:Register("technut", {
 			id = "TN06",
 			name = "The Misaligned Jig",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"TN04"},
 			briefing = "Retrieve a workshop calibration record.",
 			completion = "Careful with the case, buddy. I want to open it myself.",
@@ -275,6 +284,8 @@ PLUGIN:Register("technut", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_official",
+				label = "The Misaligned Jig - Official File Folder",
 			},
 			benefits = {
 				items = {
@@ -317,7 +328,8 @@ PLUGIN:Register("technut", {
 			id = "TN08",
 			name = "An Engineer's Notes",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"TN06"},
 			briefing = "Recover machinery notes in Garbage.",
 			completion = "Oh, let me see! Mind the oil on the bench.",
@@ -325,6 +337,8 @@ PLUGIN:Register("technut", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_notebook",
+				label = "An Engineer's Notes - Tied Leather Journal",
 			},
 			benefits = {
 				services = {
@@ -367,14 +381,18 @@ PLUGIN:Register("technut", {
 			id = "TN10",
 			name = "Latch's Find",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Marsh. Deliver it to"
+				.. " 'Latch' in Garbage, then return here to finish the assignment.",
 			requires = {"TN08"},
 			briefing = "Recover an identification plate from industrial wreckage.",
-			completion = "You found it! Let's see what we've got.",
+			completion = "Good, buddy. Much easier when the part and the person who needs it are in the same room.",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_control",
+				label = "Latch's Find - Red-Trimmed Control Unit",
+				recipient = "latch",
 			},
 			benefits = {
 				items = {
@@ -414,7 +432,8 @@ PLUGIN:Register("technut", {
 			id = "TN12",
 			name = "The Precision Crate",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Stickered Tool Case from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"TN10"},
 			briefing = "Recover a tool case in Garbage.",
 			completion = "Careful with the case, buddy. I want to open it myself.",
@@ -422,6 +441,8 @@ PLUGIN:Register("technut", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_tools",
+				label = "The Precision Crate - Stickered Tool Case",
 			},
 			benefits = {
 				items = {
@@ -465,7 +486,8 @@ PLUGIN:Register("technut", {
 			id = "TN14",
 			name = "Patterns in Metal",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"TN12"},
 			briefing = "Retrieve an assembly drawing at a regional workshop.",
 			completion = "Oh, let me see! Mind the oil on the bench.",
@@ -473,6 +495,8 @@ PLUGIN:Register("technut", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_official",
+				label = "Patterns in Metal - Official File Folder",
 			},
 			benefits = {
 				items = {
@@ -511,7 +535,8 @@ PLUGIN:Register("technut", {
 			id = "TN16",
 			name = "The Missing Technician",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"TN14"},
 			briefing = "Recover a technician's recorder near an abandoned workshop.",
 			completion = "You found it! Let's see what we've got.",
@@ -519,6 +544,8 @@ PLUGIN:Register("technut", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_tape",
+				label = "The Missing Technician - Handwritten Audio Cassette",
 			},
 			benefits = {
 				services = {
@@ -561,7 +588,8 @@ PLUGIN:Register("technut", {
 			id = "TN18",
 			name = "The Test Assembly",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Marked Research Case from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"TN16"},
 			briefing = "Recover a test assembly case in Waystation territory.",
 			completion = "Careful with the case, buddy. I want to open it myself.",
@@ -569,6 +597,8 @@ PLUGIN:Register("technut", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_research",
+				label = "The Test Assembly - Marked Research Case",
 			},
 			benefits = {
 				items = {
@@ -607,14 +637,18 @@ PLUGIN:Register("technut", {
 			id = "TN20",
 			name = "The Damaged Register",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Corporate Records Folder from the assigned search area in Marsh. Deliver it to"
+				.. " 'Carbon' in Waystation, then return here to finish the assignment.",
 			requires = {"TN18"},
 			briefing = "Recover equipment-service records from a remote facility.",
-			completion = "Oh, let me see! Mind the oil on the bench.",
+			completion = "Good, buddy. Much easier when the part and the person who needs it are in the same room.",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_archive",
+				label = "The Damaged Register - Corporate Records Folder",
+				recipient = "carbon",
 			},
 			benefits = {
 				items = {
@@ -658,17 +692,17 @@ PLUGIN:Register("technut", {
 			id = "TN22",
 			name = "The Machine's Origin",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Pripyat. Return to this contact to finish the assignment."
-			),
+			objective = "Recover Official File Folder from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"TN20"},
 			briefing = "Retrieve a manufacturing record at a Pripyat industrial site.",
 			completion = "You found it! Let's see what we've got.",
 			field = {
-				kind = "sensor",
+				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_official",
+				label = "The Machine's Origin - Official File Folder",
 			},
 			benefits = {
 				items = {
@@ -707,7 +741,8 @@ PLUGIN:Register("technut", {
 			id = "TN24",
 			name = "The Last Component",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"TN23"},
 			briefing = "Recover the restoration machine's final case in Pripyat.",
 			completion = "Careful with the case, buddy. I want to open it myself.",
@@ -715,6 +750,8 @@ PLUGIN:Register("technut", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_equipment",
+				label = "The Last Component - Striped Equipment Case",
 			},
 			benefits = {
 				services = {
@@ -758,10 +795,8 @@ PLUGIN:Register("technut", {
 			id = "TN26",
 			name = "A Test Under Load",
 			kind = "field",
-			objective = (
-				"Deploy the recorder at the marked site, remain in range until it finishes, and collect it "
-				.. "in Marsh. Return to this contact to finish the assignment."
-			),
+			objective = "Deploy the recorder in Marsh, leave it to record, then retrieve Numbered Data Module 0013."
+				.. " Return it to this contact to finish the assignment.",
 			requires = {"TN25"},
 			briefing = "Deploy and retrieve a test recorder at the machinery survey site.",
 			completion = "Oh, let me see! Mind the oil on the bench.",
@@ -769,6 +804,8 @@ PLUGIN:Register("technut", {
 				kind = "sensor",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_module",
+				label = "A Test Under Load - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -811,7 +848,8 @@ PLUGIN:Register("technut", {
 			id = "TN28",
 			name = "The Engineer's Signature",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Marsh. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"TN27"},
 			briefing = "Recover the machine's commissioning record and finish the restoration.",
 			completion = "You found it! Let's see what we've got.",
@@ -819,6 +857,8 @@ PLUGIN:Register("technut", {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
+				cargo = "town_quest_official",
+				label = "The Engineer's Signature - Official File Folder",
 			},
 			benefits = {
 				items = {

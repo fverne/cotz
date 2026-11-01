@@ -10,6 +10,7 @@ PLUGIN:Register("spoor", {
 	},
 	supplies = {"12gauge", "22lr", "medic_bandage_1", "drink_bottlewater"},
 	dialogue = {
+		delivery = "Set it down. Tell me if anything happened to it on the way.",
 		completedGreeting = "Now we know why they moved. Better than another tall tale.",
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
@@ -50,7 +51,8 @@ PLUGIN:Register("spoor", {
 			id = "SP02",
 			name = "The Scavenger's Camp",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SP01"},
 			briefing = "Recover observations beside a Garbage hunting ground.",
 			completion = "Where you found it is marked? Good.",
@@ -58,6 +60,8 @@ PLUGIN:Register("spoor", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_notebook",
+				label = "The Scavenger's Camp - Tied Leather Journal",
 			},
 			benefits = {
 				items = {
@@ -93,7 +97,8 @@ PLUGIN:Register("spoor", {
 			id = "SP04",
 			name = "Where They Feed",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SP02"},
 			briefing = "Retrieve a recorder from a feeding site.",
 			completion = "Let me look at the observations.",
@@ -101,6 +106,8 @@ PLUGIN:Register("spoor", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_tape",
+				label = "Where They Feed - Handwritten Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -141,14 +148,18 @@ PLUGIN:Register("spoor", {
 			id = "SP06",
 			name = "Lemon's Complaint",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Scientist's Field Diary from the assigned search area in Garbage. Deliver it to"
+				.. " 'Jitters' in Marsh, then return here to finish the assignment.",
 			requires = {"SP04"},
 			briefing = "Recover meat-handling notes from an abandoned camp.",
-			completion = "Set it here. I'll compare the records.",
+			completion = "Good. They have the record. Now we can compare what was actually found.",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_diary",
+				label = "Lemon's Complaint - Scientist's Field Diary",
+				recipient = "jitters",
 			},
 			benefits = {
 				items = {
@@ -188,7 +199,8 @@ PLUGIN:Register("spoor", {
 			id = "SP08",
 			name = "The Displaced Pack",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SP06"},
 			briefing = "Recover observations from a second hunting ground.",
 			completion = "Where you found it is marked? Good.",
@@ -196,6 +208,8 @@ PLUGIN:Register("spoor", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_notebook",
+				label = "The Displaced Pack - Tied Leather Journal",
 			},
 			benefits = {
 				items = {
@@ -236,7 +250,8 @@ PLUGIN:Register("spoor", {
 			id = "SP10",
 			name = "Tracks in the Wrong Place",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0013 from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SP08"},
 			briefing = "Collect a recorder along a disturbed regional route.",
 			completion = "Let me look at the observations.",
@@ -244,6 +259,8 @@ PLUGIN:Register("spoor", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_module",
+				label = "Tracks in the Wrong Place - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -279,7 +296,8 @@ PLUGIN:Register("spoor", {
 			id = "SP12",
 			name = "The Empty Hide",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Personnel File Folder from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SP10"},
 			briefing = "Recover a hunter's case at a remote observation site.",
 			completion = "Set it here. I'll compare the records.",
@@ -287,6 +305,8 @@ PLUGIN:Register("spoor", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_personnel",
+				label = "The Empty Hide - Personnel File Folder",
 			},
 			benefits = {
 				items = {
@@ -327,14 +347,18 @@ PLUGIN:Register("spoor", {
 			id = "SP14",
 			name = "The Pattern Breaks",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0022 from the assigned search area in Waystation. Deliver it to"
+				.. " 'Atlas' in Marsh, then return here to finish the assignment.",
 			requires = {"SP12"},
 			briefing = "Retrieve a survey recorder in Waystation territory.",
-			completion = "Where you found it is marked? Good.",
+			completion = "Good. They have the record. Now we can compare what was actually found.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_module2",
+				label = "The Pattern Breaks - Numbered Data Module 0022",
+				recipient = "atlas",
 			},
 			benefits = {
 				items = {
@@ -370,7 +394,8 @@ PLUGIN:Register("spoor", {
 			id = "SP16",
 			name = "The First Pripyat Trail",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Scientist's Field Diary from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SP14"},
 			briefing = "Recover an observer's notebook at a Pripyat hunting site.",
 			completion = "Let me look at the observations.",
@@ -378,6 +403,8 @@ PLUGIN:Register("spoor", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_diary",
+				label = "The First Pripyat Trail - Scientist's Field Diary",
 			},
 			benefits = {
 				items = {
@@ -418,7 +445,8 @@ PLUGIN:Register("spoor", {
 			id = "SP18",
 			name = "The Survivor's Cache",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SP16"},
 			briefing = "Recover a hunter's abandoned case deeper in Pripyat.",
 			completion = "Set it here. I'll compare the records.",
@@ -426,6 +454,8 @@ PLUGIN:Register("spoor", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_equipment",
+				label = "The Survivor's Cache - Striped Equipment Case",
 			},
 			benefits = {
 				items = {
@@ -461,7 +491,8 @@ PLUGIN:Register("spoor", {
 			id = "SP20",
 			name = "The Last Observation",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Pripyat. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SP19"},
 			briefing = "Retrieve the target species' observation recorder in Pripyat.",
 			completion = "Where you found it is marked? Good.",
@@ -469,6 +500,8 @@ PLUGIN:Register("spoor", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_tape2",
+				label = "The Last Observation - Blue-Label Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -513,7 +546,8 @@ PLUGIN:Register("spoor", {
 			id = "SP22",
 			name = "The Hunter's Proof",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SP21"},
 			briefing = "Recover the final hunting observations in Pripyat.",
 			completion = "Let me look at the observations.",
@@ -521,6 +555,8 @@ PLUGIN:Register("spoor", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_notebook",
+				label = "The Hunter's Proof - Tied Leather Journal",
 			},
 			benefits = {
 				items = {

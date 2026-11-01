@@ -47,7 +47,11 @@ copy of another NPC's conversation.
 Each contact has an explicit sparse tree: a short introduction, two narrow branches and a joined
 conclusion. The requires and crossRequires fields describe local and cross-contact prerequisites;
 equipment families can add further dependencies. Stable IDs look like cotz/town/quartermaster/QM11.
-Approximately half the objectives are item hand-ins or cumulative job checkpoints. Checkpoints
+The tree includes 316 field commissions, with 312 now declaring custom bound quest cargo.
+Of these, 230 return cargo to the issuer, 76 deliver it to another town contact, and six
+deliver it to a field cache. The remaining four retain research-defence sampler/results cargo.
+See the [commission inventory](../../../../docs/npc-overhaul/quest-commissions.md) for every assignment.
+The other objectives are item hand-ins, cumulative job checkpoints and arena bouts. Checkpoints
 usually require 2/5/9/14/20/27/35 completed jobs with that contact. Finite commissions do not count
 as ordinary repeatable work and do not award an extra repeatable cash/reward/restock payout.
 
@@ -92,8 +96,13 @@ Restart after updating the files. Existing entity positions are not guessed or a
   512–4,096 units away with navigation and safe clearance. Author Pripyat sites without town contacts.
 - Existing saved Pripyat vendors require manual removal and saving. Do not rerun first-time setup.
 
-Field stories use existing configured point pools and bound cargo. Multi-site investigations,
-individual evidence items, rescue actors and visible town upgrades are not implemented by their prose.
+Field stories use existing configured point pools and bound cargo. Each converted commission declares
+`field.cargo` and `field.label`; optional `field.recipient` names a receiving contact ID.
+Concrete cargo in `items/jobcargo/` inherits jobsystem's `base_jobcargo` and uses selected quest-asset
+models with zero price. Item labels and destinations are saved when the commission is accepted.
+NPC deliveries use **I have a delivery for you** at the receiving contact, followed by a return to
+the issuer. Existing accepted jobs retain their saved cargo/destination; no save reset is required.
+Multi-site investigations, rescue actors and visible town upgrades are not implemented by their prose.
 New NPC models remain replaceable placeholders. Place and playtest sites before deployment.
 
 ## Verification

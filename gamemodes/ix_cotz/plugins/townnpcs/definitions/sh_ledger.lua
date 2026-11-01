@@ -14,6 +14,7 @@ PLUGIN:Register("ledger", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
+		delivery = "The parcel first. Then I can close the entry.",
 		completedGreeting = "Outbound, inbound, accounted for. That's a route we can keep.",
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
@@ -56,10 +57,8 @@ PLUGIN:Register("ledger", {
 			id = "LE02",
 			name = "The First Route",
 			kind = "field",
-			objective = (
-				"Collect the parcel at the first marker and deliver it to the second in Waystation. Return "
-				.. "to this contact to finish the assignment."
-			),
+			objective = "Recover Small Yellow Transit Case from the assigned search area in Waystation. Deliver it to"
+				.. " the assigned cache using Field work, then return here.",
 			requires = {"LE01"},
 			briefing = "Complete a regional dead-drop circuit.",
 			completion = "I'll record that as returned.",
@@ -67,6 +66,8 @@ PLUGIN:Register("ledger", {
 				kind = "deadDrop",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_case",
+				label = "The First Route - Small Yellow Transit Case",
 			},
 			benefits = {
 				items = {
@@ -105,7 +106,8 @@ PLUGIN:Register("ledger", {
 			id = "LE04",
 			name = "The Missing Receipt",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List B from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"LE02"},
 			briefing = "Recover a receipt from a Waystation freight cache.",
 			completion = "Set it with the freight records.",
@@ -113,6 +115,8 @@ PLUGIN:Register("ledger", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
+				cargo = "town_quest_receipt",
+				label = "The Missing Receipt - Warehouse Packing List B",
 			},
 			benefits = {
 				items = {
@@ -153,14 +157,18 @@ PLUGIN:Register("ledger", {
 			id = "LE06",
 			name = "Ballast's Landing Copy",
 			kind = "field",
-			objective = "Recover the marked case in Marsh. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
+				.. " 'Ballast' in Marsh, then return here to finish the assignment.",
 			requires = {"LE04"},
 			briefing = "Recover a landing manifest in Marsh.",
-			completion = "Thank you. Let me check the reference.",
+			completion = "Delivered, confirmed, entered. That closes this consignment.",
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
+				cargo = "town_quest_manifest",
+				label = "Ballast's Landing Copy - Warehouse Packing List A",
+				recipient = "ballast",
 			},
 			benefits = {
 				items = {
@@ -203,14 +211,18 @@ PLUGIN:Register("ledger", {
 			id = "LE08",
 			name = "The Interrupted Connection",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Striped Equipment Case from the assigned search area in Garbage. Deliver it to"
+				.. " 'Cleaner' in Garbage, then return here to finish the assignment.",
 			requires = {"LE06"},
 			briefing = "Recover a freight case on the Garbage route.",
-			completion = "I'll record that as returned.",
+			completion = "Delivered, confirmed, entered. That closes this consignment.",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_equipment",
+				label = "The Interrupted Connection - Striped Equipment Case",
+				recipient = "cleaner",
 			},
 			benefits = {
 				items = {
@@ -251,7 +263,8 @@ PLUGIN:Register("ledger", {
 			id = "LE10",
 			name = "The Duplicate Destination",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Official File Folder from the assigned search area in Waystation. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"LE08"},
 			briefing = "Recover paired route records from regional caches.",
 			completion = "Set it with the freight records.",
@@ -259,6 +272,8 @@ PLUGIN:Register("ledger", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_official",
+				label = "The Duplicate Destination - Official File Folder",
 			},
 			benefits = {
 				items = {
@@ -297,7 +312,8 @@ PLUGIN:Register("ledger", {
 			id = "LE12",
 			name = "The Missing Dispatcher",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"LE10"},
 			briefing = "Retrieve a dispatcher recorder in regional ruins.",
 			completion = "Thank you. Let me check the reference.",
@@ -305,6 +321,8 @@ PLUGIN:Register("ledger", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_tape",
+				label = "The Missing Dispatcher - Handwritten Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -345,10 +363,8 @@ PLUGIN:Register("ledger", {
 			id = "LE14",
 			name = "The Last Scheduled Drop",
 			kind = "field",
-			objective = (
-				"Collect the parcel at the first marker and deliver it to the second in Waystation. Return "
-				.. "to this contact to finish the assignment."
-			),
+			objective = "Recover Orange Evidence Case from the assigned search area in Waystation. Deliver it to the"
+				.. " assigned cache using Field work, then return here.",
 			requires = {"LE12"},
 			briefing = "Complete a remote cache delivery.",
 			completion = "I'll record that as returned.",
@@ -356,6 +372,8 @@ PLUGIN:Register("ledger", {
 				kind = "deadDrop",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_evidence",
+				label = "The Last Scheduled Drop - Orange Evidence Case",
 			},
 			benefits = {
 				items = {
@@ -394,10 +412,8 @@ PLUGIN:Register("ledger", {
 			id = "LE16",
 			name = "The Unmanned Pripyat Cache",
 			kind = "field",
-			objective = (
-				"Collect the parcel at the first marker and deliver it to the second in Pripyat. Return to "
-				.. "this contact to finish the assignment."
-			),
+			objective = "Recover Marked Research Case from the assigned search area in Pripyat. Deliver it to the"
+				.. " assigned cache using Field work, then return here.",
 			requires = {"LE14"},
 			briefing = "Complete a delivery to a Pripyat cache.",
 			completion = "Set it with the freight records.",
@@ -405,6 +421,8 @@ PLUGIN:Register("ledger", {
 				kind = "deadDrop",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_research",
+				label = "The Unmanned Pripyat Cache - Marked Research Case",
 			},
 			benefits = {
 				items = {
@@ -445,7 +463,8 @@ PLUGIN:Register("ledger", {
 			id = "LE18",
 			name = "The Dispatcher's Detour",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"LE16"},
 			briefing = "Recover the missing dispatcher's recorder in Pripyat.",
 			completion = "Thank you. Let me check the reference.",
@@ -453,6 +472,8 @@ PLUGIN:Register("ledger", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_tape",
+				label = "The Dispatcher's Detour - Handwritten Audio Cassette",
 			},
 			benefits = {
 				items = {
@@ -491,14 +512,17 @@ PLUGIN:Register("ledger", {
 			id = "LE20",
 			name = "The Return Consignment",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Small Yellow Transit Case from the assigned search area in Pripyat. Deliver it to"
+				.. " the assigned cache using Field work, then return here.",
 			requires = {"LE19"},
 			briefing = "Complete the return leg from a Pripyat cache.",
 			completion = "I'll record that as returned.",
 			field = {
-				kind = "recovery",
+				kind = "deadDrop",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_case",
+				label = "The Return Consignment - Small Yellow Transit Case",
 			},
 			benefits = {
 				items = {
@@ -543,7 +567,8 @@ PLUGIN:Register("ledger", {
 			id = "LE22",
 			name = "The Last Receipt",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Warehouse Packing List B from the assigned search area in Waystation. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"LE21"},
 			briefing = "Recover the route's final receipt and return to Waystation.",
 			completion = "Set it with the freight records.",
@@ -551,6 +576,8 @@ PLUGIN:Register("ledger", {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_receipt",
+				label = "The Last Receipt - Warehouse Packing List B",
 			},
 			benefits = {
 				items = {

@@ -70,7 +70,10 @@ function field.Collect(client, entity)
 	pending[key] = request
 	-- Instance first, then transfer the existing item synchronously. Inventory:Add(string)
 	-- returns reserved coordinates before its database callback has created the item.
-	ix.item.Instance(0, state.cargo, {fieldOwner = character:GetID(), fieldClaim = job.rewardKey},
+	local recipient = state.recipient or (state.kind == "deadDrop" and "the assigned cache") or npc
+	local data = {fieldOwner = character:GetID(), fieldClaim = job.rewardKey,
+		fieldName = state.cargoName, fieldRecipient = recipient}
+	ix.item.Instance(0, state.cargo, data,
 		0, 0, function(item)
 			if pending[key] ~= request then item:Remove() return end
 			pending[key] = nil
@@ -93,12 +96,15 @@ function field.Collect(client, entity)
 				return
 			end
 			active.fieldTask.stage = "carrying"
-			active.isCompleted = active.fieldTask.kind ~= "deadDrop"
+			active.isCompleted = not field.NeedsDelivery(active.fieldTask)
 			active.progress = active.isCompleted and active.numberRec or 0
 			field.SaveJob(character, npc, active)
 			entity:Remove()
 			entities[key] = nil
-			if active.fieldTask.kind == "deadDrop" then
+			if active.fieldTask.recipient then
+				client:Notify("Cargo recovered. Deliver it to " .. active.fieldTask.recipient
+					.. ", then return to " .. npc .. ".")
+			elseif active.fieldTask.kind == "deadDrop" then
 				client:Notify("Parcel collected. Use Field work to locate the destination and deliver it.")
 			else
 				client:Notify("Cargo recovered. Return it to " .. npc .. " for payment.")
@@ -120,6 +126,7 @@ function field.SpawnObject(character, npc, job)
 	if not IsValid(entity) then return end
 	entity.fieldOwner, entity.fieldNPC, entity.fieldClaim = character:GetID(), npc, job.rewardKey
 	entity:SetModel(ix.item.list[job.fieldTask.cargo].model)
+	entity:SetNWString("cotz/jobsystem/cargo-name", job.fieldTask.cargoName or ix.item.list[job.fieldTask.cargo].name)
 	entity:SetPos(point)
 	entity:Spawn()
 	if job.fieldTask.kind == "defence" then entity:SetHealth(job.fieldTask.defence.health) end
@@ -182,7 +189,7 @@ function field.UpdateJob(client, character, npc, job, keep)
 	local key = keyFor(character, job)
 	local position = client:GetPos()
 	if field.FindCargo(character, job) then
-		local complete = state.kind ~= "deadDrop"
+		local complete = not field.NeedsDelivery(state)
 		if state.stage ~= "carrying" or job.isCompleted ~= complete then
 			state.stage, job.progress, job.isCompleted = "carrying", complete and job.numberRec or 0, complete
 			field.SaveJob(character, npc, job)

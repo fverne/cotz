@@ -69,10 +69,8 @@ PLUGIN:Register("smartass", {
 			id = "SM02",
 			name = "The Lost Beacon",
 			kind = "field",
-			objective = (
-				"Take the required bearings, locate the source, and recover the transmitter in Garbage. "
-				.. "Return to this contact to finish the assignment."
-			),
+			objective = "Take the required bearings in Garbage and recover Red-Trimmed Control Unit. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SM01"},
 			briefing = "Triangulate and recover a source in Garbage.",
 			completion = "Let's hear what all the fuss was about.",
@@ -80,6 +78,8 @@ PLUGIN:Register("smartass", {
 				kind = "triangulation",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_control",
+				label = "The Lost Beacon - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -118,7 +118,8 @@ PLUGIN:Register("smartass", {
 			id = "SM04",
 			name = "The Wrong Frequency",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0013 from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SM02"},
 			briefing = "Recover a beacon calibration record.",
 			completion = "Hand it over. I'll see whether it agrees with the last one.",
@@ -126,6 +127,8 @@ PLUGIN:Register("smartass", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_module",
+				label = "The Wrong Frequency - Numbered Data Module 0013",
 			},
 			benefits = {
 				items = {
@@ -166,10 +169,8 @@ PLUGIN:Register("smartass", {
 			id = "SM06",
 			name = "The Interference Site",
 			kind = "field",
-			objective = (
-				"Take the required bearings, locate the source, and recover the transmitter in Garbage. "
-				.. "Return to this contact to finish the assignment."
-			),
+			objective = "Take the required bearings in Garbage and recover Red-Trimmed Control Unit. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SM04"},
 			briefing = "Take bearings and recover a jammer's field record.",
 			completion = "Good. Something I can actually check.",
@@ -177,6 +178,8 @@ PLUGIN:Register("smartass", {
 				kind = "triangulation",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_control",
+				label = "The Interference Site - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -219,14 +222,18 @@ PLUGIN:Register("smartass", {
 			id = "SM08",
 			name = "Spool's Correction",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Numbered Data Module 0022 from the assigned search area in Garbage. Deliver it to"
+				.. " 'Spool' in Garbage, then return here to finish the assignment.",
 			requires = {"SM06"},
 			briefing = "Recover a disputed signal recorder along a freight route.",
-			completion = "Let's hear what all the fuss was about.",
+			completion = "It reached the right desk. Miracles do happen. I will mark it off.",
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
+				cargo = "town_quest_module2",
+				label = "Spool's Correction - Numbered Data Module 0022",
+				recipient = "spool",
 			},
 			benefits = {
 				items = {
@@ -267,10 +274,8 @@ PLUGIN:Register("smartass", {
 			id = "SM10",
 			name = "The False Beacon",
 			kind = "field",
-			objective = (
-				"Take the required bearings, locate the source, and recover the transmitter in Garbage. "
-				.. "Return to this contact to finish the assignment."
-			),
+			objective = "Take the required bearings in Garbage and recover Red-Trimmed Control Unit. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SM08"},
 			briefing = "Triangulate and recover a deliberately misleading source.",
 			completion = "Hand it over. I'll see whether it agrees with the last one.",
@@ -278,6 +283,8 @@ PLUGIN:Register("smartass", {
 				kind = "triangulation",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_control",
+				label = "The False Beacon - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -316,14 +323,18 @@ PLUGIN:Register("smartass", {
 			id = "SM12",
 			name = "The Receiver List",
 			kind = "field",
-			objective = "Recover the marked case in Waystation. Return to this contact to finish the assignment.",
+			objective = "Recover Corporate Records Folder from the assigned search area in Waystation. Deliver it to"
+				.. " 'Quartermaster' in Waystation, then return here to finish the assignment.",
 			requires = {"SM10"},
 			briefing = "Recover a receiver register in Waystation territory.",
-			completion = "Good. Something I can actually check.",
+			completion = "It reached the right desk. Miracles do happen. I will mark it off.",
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
+				cargo = "town_quest_archive",
+				label = "The Receiver List - Corporate Records Folder",
+				recipient = "quartermaster",
 			},
 			benefits = {
 				items = {
@@ -364,7 +375,8 @@ PLUGIN:Register("smartass", {
 			id = "SM14",
 			name = "Mute's Missing Packet",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Tape-Labelled Flash Drive from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SM12"},
 			briefing = "Recover a diagnostic recording at a remote relay.",
 			completion = "Let's hear what all the fuss was about.",
@@ -372,6 +384,8 @@ PLUGIN:Register("smartass", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_drive",
+				label = "Mute's Missing Packet - Tape-Labelled Flash Drive",
 			},
 			benefits = {
 				items = {
@@ -410,10 +424,8 @@ PLUGIN:Register("smartass", {
 			id = "SM16",
 			name = "A Signal Across Maps",
 			kind = "field",
-			objective = (
-				"Take the required bearings, locate the source, and recover the transmitter in Garbage. "
-				.. "Return to this contact to finish the assignment."
-			),
+			objective = "Take the required bearings in Garbage and recover Red-Trimmed Control Unit. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SM14"},
 			briefing = "Take bearings at a regional transmitter site.",
 			completion = "Hand it over. I'll see whether it agrees with the last one.",
@@ -421,6 +433,8 @@ PLUGIN:Register("smartass", {
 				kind = "triangulation",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_control",
+				label = "A Signal Across Maps - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -461,7 +475,8 @@ PLUGIN:Register("smartass", {
 			id = "SM18",
 			name = "The Rooftop Source",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SM16"},
 			briefing = "Locate and recover a transmitter at a Pripyat signal site.",
 			completion = "Good. Something I can actually check.",
@@ -469,6 +484,8 @@ PLUGIN:Register("smartass", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_control",
+				label = "The Rooftop Source - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -507,14 +524,18 @@ PLUGIN:Register("smartass", {
 			id = "SM20",
 			name = "The Handler's Record",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Deliver it to"
+				.. " 'Carbon' in Waystation, then return here to finish the assignment.",
 			requires = {"SM18"},
 			briefing = "Recover the operation's command recording in Pripyat.",
-			completion = "Let's hear what all the fuss was about.",
+			completion = "It reached the right desk. Miracles do happen. I will mark it off.",
 			field = {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_tape",
+				label = "The Handler's Record - Handwritten Audio Cassette",
+				recipient = "carbon",
 			},
 			benefits = {
 				items = {
@@ -555,7 +576,8 @@ PLUGIN:Register("smartass", {
 			id = "SM22",
 			name = "Two Signals One Source",
 			kind = "field",
-			objective = "Recover the marked case in Pripyat. Return to this contact to finish the assignment.",
+			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Pripyat. Return it to this"
+				.. " contact to finish the assignment.",
 			requires = {"SM21"},
 			briefing = "Locate and recover a transmitter in Pripyat.",
 			completion = "Hand it over. I'll see whether it agrees with the last one.",
@@ -563,6 +585,8 @@ PLUGIN:Register("smartass", {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
+				cargo = "town_quest_control",
+				label = "Two Signals One Source - Red-Trimmed Control Unit",
 			},
 			benefits = {
 				items = {
@@ -605,7 +629,8 @@ PLUGIN:Register("smartass", {
 			id = "SM24",
 			name = "The Silent Frequency",
 			kind = "field",
-			objective = "Recover the marked case in Garbage. Return to this contact to finish the assignment.",
+			objective = "Recover Tagged Security Flash Drive from the assigned search area in Garbage. Return it to"
+				.. " this contact to finish the assignment.",
 			requires = {"SM23"},
 			briefing = "Recover the operation's last transmitter and return its records.",
 			completion = "Good. Something I can actually check.",
@@ -613,6 +638,8 @@ PLUGIN:Register("smartass", {
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
+				cargo = "town_quest_security",
+				label = "The Silent Frequency - Tagged Security Flash Drive",
 			},
 			benefits = {
 				items = {
