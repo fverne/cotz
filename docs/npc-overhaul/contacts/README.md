@@ -62,7 +62,7 @@ invented records and identities are proposals until mapped and implemented.
 | --- | --- | ---: | --- |
 | [Cleaner](cleaner.md) | Dead-drop circuits | 28 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_cleaner.lua) |
 | [Beanstalk](beanstalk.md) | Research defence | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_beanstalk.lua) |
-| [Smartass](smartass.md) | Radio triangulation | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_smartass.lua) |
+| [Spool](spool.md) | Radio triangulation | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_spool.lua) |
 | [Latch](latch.md) | Industrial salvage deliveries | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_latch.lua) |
 | [Spoor](spoor.md) | Mutant hunting | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_spoor.lua) |
 | [Brass](brass.md) | Ammunition deliveries | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_brass.lua) |
@@ -79,7 +79,7 @@ invented records and identities are proposals until mapped and implemented.
 | [Intern](intern.md) | Sensor deployment and retrieval | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_intern.lua) |
 | [Suture](suture.md) | Textile supply deliveries | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_suture.lua) |
 | [Ledger](ledger.md) | Dead-drop circuits | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_ledger.lua) |
-| [Spool](spool.md) | Radio triangulation | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_spool.lua) |
+| [Smartass](smartass.md) | Computer data extraction | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_smartass.lua) |
 | [Carbon](carbon.md) | Document deliveries | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_carbon.lua) |
 
 ## Explicit upgrade dependencies to preserve

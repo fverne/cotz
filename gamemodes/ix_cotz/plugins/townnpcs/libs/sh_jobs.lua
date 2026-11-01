@@ -43,6 +43,25 @@ local function registerRepeatable(contact, difficulty, tier)
 		registerDeliveries(contact, job, category, tier)
 		return
 	end
+	if kind == "dataExtract" then
+		local identifier = category .. "/dataExtract"
+		job.name = "Extract data from %d computer types."
+		job.desc = contact.job.description
+		job.listenTrigger = identifier
+		job.toolItem = "dataextractor"
+		job.toolData = {ntypes = contact.job.quantities[tier], finishedtrigger = identifier}
+		job.toolCompletionKeys = {"ntypes", "finishedtrigger"}
+		job.removeToolOnComplete = true
+		job.townContact = contact.id
+		job.icon = "propic/event/area"
+		job.reward = {}
+		job.rewardCount = 0
+		-- One completion trigger covers all requested computer types.
+		job.name = string.format(job.name, job.toolData.ntypes)
+		job.desc = string.format(job.desc, job.toolData.ntypes)
+		ix.jobs.RegisterToolJob(job, identifier)
+		return
+	end
 	if kind == "arena" then return end
 	if TRIGGERS[kind] then
 		job.listenTrigger = contact.job.trigger or TRIGGERS[kind]

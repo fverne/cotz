@@ -61,7 +61,8 @@ function PLUGIN:Install()
 		local template = assert(ix.npctemplates.templates[contact.template], "Missing template: " .. contact.template)
 		assert(template.name == contact.name, "Town contact name differs from its saved vendor identity")
 		assert(contact.job.kind == "delivery" or contact.job.kind == "hunting" or contact.job.kind == "humans"
-			or contact.job.kind == "arena" or ix.jobs.field.settings[contact.job.kind], "Unknown town job kind")
+			or contact.job.kind == "arena" or contact.job.kind == "dataExtract"
+			or ix.jobs.field.settings[contact.job.kind], "Unknown town job kind")
 	end
 	self:BuildProgressions()
 	self:BuildJobs()

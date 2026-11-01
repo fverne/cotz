@@ -110,3 +110,8 @@ conversation/template registration, inventory/reward edge cases, replay protecti
 recovery. Removed town definitions are not loaded as test fixtures. Mocks do not establish GMod
 loading, networking, VGUI, navigation or database correctness. Verify these with multiplayer clients,
 four-map travel, placement/save/restart, every job family and representative current character saves.
+
+Smartass lives in Waystation and offers computer data extraction with an issued flash drive
+(1/2/5 distinct computer types for easy/medium/hard). Spool lives in Garbage and retains radio
+triangulation. Existing placed vendors must be manually relocated and saved after this change.
+Finite commissions and progression IDs remain unchanged.

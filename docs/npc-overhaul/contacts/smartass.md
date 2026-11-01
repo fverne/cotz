@@ -6,10 +6,10 @@
 
 ## Contact brief
 
-- **Home and return point:** Garbage. Every hand-in and reward claim occurs here.
+- **Home and return point:** Waystation. Every hand-in and reward claim occurs here.
 - **Identity:** Existing smirking, irreverent specialist.
 - **Model:** Preserve the installed template's model, skin, and presentation.
-- **Only repeatable category:** Radio triangulation.
+- **Only repeatable category:** Computer data extraction.
 - **Finite plan:** 24 steps; **6 hand-ins, 6 job checkpoints, 12 authored objectives**.
 - **Step labels:** SM01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

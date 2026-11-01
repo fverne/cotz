@@ -1,13 +1,13 @@
 PLUGIN:Register("smartass", {
 	name = "'Smartass'",
 	template = "unisgnpc3",
-	map = "mz_garbage",
+	map = "rp_waystation",
 	job = {
-		kind = "triangulation",
-		category = "Radio triangulation",
-		description = "Radio triangulation",
+		kind = "dataExtract",
+		category = "Computer data extraction",
+		description = "Extract data from %d computer types using the issued flash drive.",
 		pools = {"radio_components", "small_electronics"},
-		quantities = {5, 9, 15},
+		quantities = {1, 2, 5},
 		maps = {
 			easy = "mz_garbage",
 			medium = "rp_waystation",

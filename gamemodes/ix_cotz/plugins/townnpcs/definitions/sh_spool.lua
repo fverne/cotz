@@ -1,7 +1,7 @@
 PLUGIN:Register("spool", {
 	name = "'Spool'",
 	template = "spoolnpc",
-	map = "rp_waystation",
+	map = "mz_garbage",
 	job = {
 		kind = "triangulation",
 		category = "Radio triangulation",
@@ -9,7 +9,7 @@ PLUGIN:Register("spool", {
 		pools = {"radio_components", "batteries"},
 		quantities = {5, 9, 15},
 		maps = {
-			easy = "rp_waystation",
+			easy = "mz_garbage",
 			medium = "rp_waystation",
 			hard = "rp_pripyat_remaster",
 		},

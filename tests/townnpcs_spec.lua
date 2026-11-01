@@ -56,6 +56,7 @@ ix.jobs.register = function(definition, id)
 		table.insert(ix.jobs.jobsbycategory[category], id)
 	end
 end
+dofile(base .. "jobsystem/libs/sh_tooljobs.lua")
 dofile(base .. "townnpcs/libs/sh_00_townnpcs.lua")
 for _, name in ipairs({"sh_catalogue", "sh_jobs", "sh_progressions", "sh_sites", "sh_validation", "sv_runtime"}) do
 	dofile(base .. "townnpcs/libs/" .. name .. ".lua")
@@ -97,6 +98,19 @@ end
 check(contactCount == 27 and count == 646, "all contacts and proposed steps are registered")
 check(town.contacts["arena-master"].map == "rp_marsh_cs", "arena stays with the Marsh dupe")
 check(town.contacts.latch.map == "mz_garbage", "Garbage uses the supplied map ID")
+check(town.contacts.smartass.map == "rp_waystation", "Smartass lives in Waystation")
+check(town.contacts.spool.map == "mz_garbage", "Spool lives in Garbage")
+for tier, difficulty in ipairs({"easy", "medium", "hard"}) do
+	local id = "cotz/town/smartass/" .. difficulty .. "/dataExtract"
+	local job = ix.jobs.list[id]
+	check(job and job.toolItem == "dataextractor", "Smartass issues extraction tools")
+	check(job.toolData.ntypes == ({1, 2, 5})[tier], "extraction difficulty sets computer count")
+	check(job.toolData.finishedtrigger == id and job.listenTrigger == id, "extraction triggers match")
+	check(job.numberRec == 1 and not job.fieldType, "one finished drive completes extraction")
+	check(job.CanAcceptTask and job.OnTaskComplete and job.OnTaskAbandon, "tool lifecycle is installed")
+	check(ix.jobs.list["cotz/town/spool/" .. difficulty].fieldType == "triangulation",
+		"Spool retains triangulation")
+end
 local fullCount = ix.progression.AuditDefinitions()
 check(fullCount == 646 + standaloneCount, "town trees coexist only with separate non-town content")
 check(not ix.progression.definitions.oldTimerKillIntro, "superseded town definitions are absent")

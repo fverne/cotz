@@ -6,7 +6,7 @@
 
 ## Contact brief
 
-- **Home and return point:** Waystation. Every hand-in and reward claim occurs here.
+- **Home and return point:** Garbage. Every hand-in and reward claim occurs here.
 - **Identity:** New: exhausted, sociable radio operator who remembers voices.
 - **Model:** Provisional Half-Life 2 human model in the appearance definition; final model still open.
 - **Only repeatable category:** Radio triangulation.
