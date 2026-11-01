@@ -93,6 +93,9 @@ ix.util.Include("ix_cotz/plugins/randomitem/pools/ix_paper_entbox_drops.lua","sh
 ix.util.Include("ix_cotz/plugins/randomitem/pools/worldspawn_1.lua","shared")
 ix.util.Include("ix_cotz/plugins/randomitem/pools/worldspawn_2.lua","shared")
 
+ix.util.Include("ix_cotz/plugins/randomitem/pools/worldspawn_garbage_regular.lua", "shared")
+ix.util.Include("ix_cotz/plugins/randomitem/pools/worldspawn_garbage_rare.lua", "shared")
+
 ix.util.Include("ix_cotz/plugins/randomitem/pools/worldspawn_3.lua","shared")
 ix.util.Include("ix_cotz/plugins/randomitem/pools/worldspawn_4.lua","shared")
 

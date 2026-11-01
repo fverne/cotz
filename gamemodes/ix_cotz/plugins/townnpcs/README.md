@@ -118,5 +118,5 @@ Finite commissions and progression IDs remain unchanged.
 
 The [valuables hand-in catalogue](../../../../docs/valuable-hand-in-pools.md) reviews every
 `valuables_test` item and defines 50 reusable `valuables_*` pools in progression’s `definitions/sh_requirementpools.lua`.
-These pools await loot acquisition routes before being enabled in NPC offers or progression slots.
+These pools await acquisition playtesting before being enabled in NPC offers or progression slots.
 Run `luatex --luaonly tests/valuable_pools_spec.lua` to check full item coverage and valid candidates.

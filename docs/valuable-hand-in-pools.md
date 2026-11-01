@@ -2,12 +2,12 @@
 
 All 378 concrete items in `schema/items/valuables_test/` are classified below. The 50 new
 `valuables_*` pools live in `progression/definitions/sh_requirementpools.lua` and are loaded directly into the
-shared progression pool registry. They are authoring pools, not enabled NPC offers yet: none of these
-item IDs currently appears in the runtime loot tables. Enable contact `job.pools` or progression
-requirement slots only after the corresponding acquisition routes are deployed and playtested.
+shared progression pool registry. They remain authoring pools, not enabled NPC offers yet. All items now
+have regional worldspawn entries; see the [regional loot guide](../gamemodes/ix_cotz/plugins/randomitem/README.md).
+Playtest acquisition rates before enabling contact `job.pools` or progression requirement slots.
 
 Existing hand-in pools remain unchanged so current offers and rarity-constrained progression
-requirements do not start requesting unobtainable items. Saved personal assignments are untouched.
+requirements do not change before acquisition is playtested. Saved personal assignments are untouched.
 The new pools use `uncommon` as a provisional catalogue tier, not a verified world-drop rarity;
 review acquisition and split rarity tiers before using them for finite progression requirements.
 Repeatable delivery cash uses item value through the existing reward calculation.
@@ -29,7 +29,7 @@ Each authoring pool contains 4–12 candidates. Categories separate armour panel
 computer parts from portable computers and media, documents by purpose, and transit cases by use.
 Filters share a pool with air/fluid fittings. Clinical, trauma and diagnostic stock remain separate.
 Research injectors are split by their visible label families without claiming distinct drug effects.
-Existing live pools retain their candidates and sizes until loot routes are available.
+Existing live pools retain their candidates and sizes until acquisition is playtested.
 
 ## Pool index
 

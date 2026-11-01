@@ -1077,7 +1077,7 @@ ix.progression.itemPools = {
 		tier = "common",
 		candidates = {{item = "value_paracord"}, {item = "value_tape_duct"}},
 	},
-	-- Authoring pools await loot acquisition routes before use in jobs or progression slots.
+	-- Authoring pools await acquisition playtesting before use in jobs or progression slots.
 	valuables_armour_panels = {
 		name = "Recovered armour inserts",
 		tier = "uncommon",
