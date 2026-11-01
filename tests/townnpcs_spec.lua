@@ -439,8 +439,7 @@ for slug in pairs(town.contacts) do
 	local path = "definitions/sh_" .. slug:gsub("-", "_") .. ".lua"
 	check(included[path] == 1, "the real plugin entry point explicitly includes each contact exactly once")
 end
-check(included["definitions/sh_config.lua"] and included["definitions/sh_equipment.lua"]
-	and included["definitions/sh_pools.lua"], "shared configuration and equipment families are explicitly loaded")
+check(included["definitions/sh_config.lua"] and included["definitions/sh_equipment.lua"], "shared configuration and equipment families are explicitly loaded")
 local notify, message = ix.progression.Notify
 ix.progression.Notify = function(_, _, text) message = text end
 local quiet = character()

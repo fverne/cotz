@@ -4,7 +4,6 @@ PLUGIN.description = "Editable town contacts, specialised work and sparse person
 
 ix.util.Include("definitions/sh_config.lua")
 ix.util.Include("definitions/sh_equipment.lua")
-ix.util.Include("definitions/sh_pools.lua")
 ix.util.Include("definitions/sh_sites.lua")
 ix.util.Include("definitions/sh_old_timer.lua")
 ix.util.Include("definitions/sh_spicy_lemon.lua")

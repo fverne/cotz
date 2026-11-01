@@ -11,7 +11,7 @@ The town plugin owns 27 contacts and 646 finite objectives. Arena Master lives i
 | Home map, contact access, jobs, supplies, catalogue, task dialogue and progression | definitions/sh_<contact>.lua in townnpcs |
 | Default payouts, stock and interaction limits | townnpcs/definitions/sh_config.lua |
 | Equipment upgrade families | townnpcs/definitions/sh_equipment.lua |
-| Specialist requirement pools and field-site defaults | townnpcs/definitions/sh_pools.lua and sh_sites.lua |
+| Field-site defaults | townnpcs/definitions/sh_sites.lua |
 | Shared requirement pools | progression/definitions/sh_requirementpools.lua |
 | Introduction, background, advice, gossip, ordinary trade/service responses | dialogue/dialogue/sh_<dialogueid>.lua |
 | Shared town action callbacks | dialogue/libs/sh_towncontacts.lua |
@@ -115,3 +115,8 @@ Smartass lives in Waystation and offers computer data extraction with an issued 
 (1/2/5 distinct computer types for easy/medium/hard). Spool lives in Garbage and retains radio
 triangulation. Existing placed vendors must be manually relocated and saved after this change.
 Finite commissions and progression IDs remain unchanged.
+
+The [valuables hand-in catalogue](../../../../docs/valuable-hand-in-pools.md) reviews every
+`valuables_test` item and defines 50 reusable `valuables_*` pools in progression’s `definitions/sh_requirementpools.lua`.
+These pools await loot acquisition routes before being enabled in NPC offers or progression slots.
+Run `luatex --luaonly tests/valuable_pools_spec.lua` to check full item coverage and valid candidates.

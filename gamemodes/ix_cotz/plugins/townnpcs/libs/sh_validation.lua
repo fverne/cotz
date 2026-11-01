@@ -19,7 +19,7 @@ function PLUGIN:ValidateContacts()
 				if not ids[required] then report(step.id .. " requires missing step " .. required) end
 			end
 			for _, slot in ipairs(step.requirements or {}) do
-				local pool = self.requirementPools[slot.pool] or ix.progression.itemPools[slot.pool]
+				local pool = ix.progression.itemPools[slot.pool]
 				if not pool then report(step.id .. " uses unknown pool " .. slot.pool) end
 			end
 			if step.kind == "field" and not ix.jobs.field.settings[step.field.kind] then

@@ -7,7 +7,6 @@ town.byName = {}
 town.steps = {}
 town.itemGates = {}
 town.catalogues = {}
-town.requirementPools = {}
 town.installed = false
 
 function PLUGIN:Register(id, contact)

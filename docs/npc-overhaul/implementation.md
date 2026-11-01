@@ -5,7 +5,7 @@ Read the [runtime/editing guide](../../gamemodes/ix_cotz/plugins/townnpcs/README
 | Responsibility | Owner |
 | --- | --- |
 | Contact jobs, access, catalogue, progression and task dialogue | townnpcs/definitions/sh_<contact>.lua |
-| Shared balance, pools, upgrade chains and field sites | townnpcs/definitions/sh_config.lua, sh_pools.lua, sh_equipment.lua, sh_sites.lua |
+| Shared balance, pools, upgrade chains and field sites | townnpcs/definitions/sh_config.lua, sh_equipment.lua, sh_sites.lua; progression/definitions/sh_requirementpools.lua |
 | Progression storage, requirements, rewards and services | progression/libs/ |
 | Ordinary NPC conversation and declared root actions | dialogue/dialogue/sh_<dialogueid>.lua |
 | Shared work/progression callbacks | dialogue/libs/sh_towncontacts.lua |

@@ -18,7 +18,6 @@ local function addDependency(definition, id)
 end
 
 function PLUGIN:BuildProgressions()
-	for id, pool in pairs(self.requirementPools) do ix.progression.itemPools[id] = pool end
 	for slug, contact in pairs(self.contacts) do
 		if contact.access then
 			ix.progression.npcRequirements[contact.name] = self:StepID(contact.access.contact, contact.access.step)
