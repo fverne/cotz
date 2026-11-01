@@ -14,7 +14,6 @@ ix.progression.Register("computerDelivery_activateItem", {
 	requirementSlots = {
 		{ pool = "computer_case", quantity = 1 },
 	},
-	OnComplete = function(character) end,
 })
 
 ix.progression.Register("computerDelivery_main", {
@@ -33,7 +32,6 @@ ix.progression.Register("computerDelivery_main", {
 		{pool = "computer_parts", quantity = 4},
 		{pool = "documents_technical", quantity = 4},
 	},
-	OnComplete = function(character) end,
 	milestoneGroup = "computerDelivery_main",
 	stageIndex = 3,
 	stageCount = 3,

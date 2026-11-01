@@ -6,8 +6,6 @@ PLUGIN:Register("ledger", {
 		kind = "deadDrop",
 		category = "Dead-drop circuits",
 		description = "Dead-drop circuits",
-		pools = {"administrative_documents", "workshop_supplies"},
-		quantities = {5, 9, 15},
 		maps = {
 			easy = "rp_waystation",
 			medium = "rp_waystation",

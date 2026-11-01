@@ -32,11 +32,6 @@ PLUGIN:Register("quartermaster", {
 			},
 		},
 		quantities = {2, 4, 7},
-		maps = {
-			easy = "rp_waystation",
-			medium = "rp_waystation",
-			hard = "rp_pripyat_remaster",
-		},
 	},
 	supplies = {"545x39", "556x45", "9x19", "medic_bandage_1"},
 	dialogue = {

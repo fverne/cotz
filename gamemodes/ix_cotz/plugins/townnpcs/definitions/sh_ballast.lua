@@ -6,8 +6,6 @@ PLUGIN:Register("ballast", {
 		kind = "recovery",
 		category = "Equipment recovery",
 		description = "Equipment recovery",
-		pools = {"workshop_supplies", "fuel"},
-		quantities = {5, 9, 15},
 		maps = {
 			easy = "rp_marsh_cs",
 			medium = "mz_garbage",

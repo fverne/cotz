@@ -32,7 +32,7 @@ ix.progression.Register("communitySupport2", {
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	briefing = (
 		"Things break. People leave. The tools stay if someone brings the fittings. Help keep "
-		.. "the workshop together and take a field supply for the trouble."
+		.. "the workshop together and take a reward for the trouble."
 	),
 	completionMessage = "Useful things. Reliable person. The community remembers.",
 	completionBenefits = {items = {{item = "medic_bandage_1"}}},

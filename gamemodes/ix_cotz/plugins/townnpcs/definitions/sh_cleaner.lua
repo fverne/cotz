@@ -6,8 +6,6 @@ PLUGIN:Register("cleaner", {
 		kind = "deadDrop",
 		category = "Dead-drop circuits",
 		description = "Dead-drop circuits",
-		pools = {"workshop_supplies", "cleaning"},
-		quantities = {5, 9, 15},
 		maps = {
 			easy = "mz_garbage",
 			medium = "rp_waystation",

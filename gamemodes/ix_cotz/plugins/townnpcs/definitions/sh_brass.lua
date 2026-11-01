@@ -29,11 +29,6 @@ PLUGIN:Register("brass", {
 			},
 		},
 		quantities = {2, 4, 7},
-		maps = {
-			easy = "mz_garbage",
-			medium = "rp_waystation",
-			hard = "rp_pripyat_remaster",
-		},
 	},
 	supplies = {"12gauge", "9x18", "9x19", "medic_bandage_1"},
 	dialogue = {

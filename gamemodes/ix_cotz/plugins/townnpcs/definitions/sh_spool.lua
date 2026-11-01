@@ -6,8 +6,6 @@ PLUGIN:Register("spool", {
 		kind = "triangulation",
 		category = "Radio triangulation",
 		description = "Radio triangulation",
-		pools = {"radio_components", "batteries"},
-		quantities = {5, 9, 15},
 		maps = {
 			easy = "mz_garbage",
 			medium = "rp_waystation",

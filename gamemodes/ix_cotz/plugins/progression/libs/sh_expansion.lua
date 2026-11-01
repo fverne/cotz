@@ -37,7 +37,7 @@ end
 
 function ix.progression.BuildDeliveryResponse(self, npcName, status, character)
 	local line = character and ix.progression.GetLine(character, self.id) or status or {}
-	local parts = {self.name}
+	local parts = {self.name .. "\n"}
 	if self.briefing then parts[#parts + 1] = self.briefing end
 	if self.stageCount then
 		parts[#parts + 1] = string.format("Part %d of %d. "
@@ -50,10 +50,15 @@ function ix.progression.BuildDeliveryResponse(self, npcName, status, character)
 		parts[#parts + 1] = string.format("Qualified matches completed: %d/%d.", value,
 			self.progressthresholds[#self.progressthresholds])
 	else
-		parts[#parts + 1] = "REQUIRED ITEMS:"
+		parts[#parts + 1] = "\nREQUIRED ITEMS:"
+		local requirements = {}
 		for itemID, amount in pairs(ix.progression.GetRequirements(character, self.id)) do
-			parts[#parts + 1] = string.format("%d %s", amount - (line.complexData[itemID] or 0),
-				ix.item.list[itemID].name)
+			requirements[#requirements + 1] = string.format("%d %s",
+				amount - ((line.complexData or {})[itemID] or 0), ix.item.list[itemID].name)
+		end
+		table.sort(requirements)
+		for _, requirement in ipairs(requirements) do
+			parts[#parts + 1] = requirement
 		end
 	end
 	for _, unlock in ipairs(self.vendorUnlocks or {}) do
@@ -124,7 +129,7 @@ function ix.progression.DescribeTask(definition, npcName, status, character)
 	end
 	local text = definition:BuildResponse(npcName, status, character)
 	local benefits = ix.progression.GetBenefitSummary(definition, character)
-	if benefits ~= "" then text = text .. "\nRewards: " .. benefits end
+	if benefits ~= "" then text = text .. "\n\nRewards: " .. benefits end
 	-- Town responses already include the shared stock reward summary.
 	if definition.BuildResponse ~= ix.progression.BuildDeliveryResponse and not definition.townContact then
 		for _, reward in ipairs(definition.stockUnlocks or {}) do

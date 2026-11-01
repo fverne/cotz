@@ -8,13 +8,7 @@ PLUGIN:Register("haggler", {
 		trigger = "banditKilled",
 		category = "Hostile human elimination",
 		description = "Hostile human elimination",
-		pools = {"administrative_documents"},
 		quantities = {5, 9, 15},
-		maps = {
-			easy = "rp_marsh_cs",
-			medium = "mz_garbage",
-			hard = "rp_pripyat_remaster",
-		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {

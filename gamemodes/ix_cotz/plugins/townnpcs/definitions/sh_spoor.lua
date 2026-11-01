@@ -6,13 +6,7 @@ PLUGIN:Register("spoor", {
 		kind = "hunting",
 		category = "Mutant hunting",
 		description = "Mutant hunting",
-		pools = {"common_parts", "small_parts"},
 		quantities = {5, 9, 15},
-		maps = {
-			easy = "mz_garbage",
-			medium = "rp_waystation",
-			hard = "rp_pripyat_remaster",
-		},
 	},
 	supplies = {"12gauge", "22lr", "medic_bandage_1", "drink_bottlewater"},
 	dialogue = {

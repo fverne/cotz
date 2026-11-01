@@ -6,13 +6,7 @@ PLUGIN:Register("old-timer", {
 		kind = "hunting",
 		category = "Mutant hunting",
 		description = "Mutant hunting",
-		pools = {"common_parts", "common_hides"},
 		quantities = {5, 9, 15},
-		maps = {
-			easy = "rp_marsh_cs",
-			medium = "mz_garbage",
-			hard = "rp_pripyat_remaster",
-		},
 	},
 	supplies = {"medic_bandage_1", "12gauge", "22lr", "food_bread"},
 	dialogue = {

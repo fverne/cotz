@@ -7,8 +7,6 @@ PLUGIN:Register("beanstalk", {
 		kind = "defence",
 		category = "Research defence",
 		description = "Research defence",
-		pools = {"filters", "documents_research"},
-		quantities = {5, 9, 15},
 		maps = {
 			easy = "mz_garbage",
 			medium = "rp_waystation",

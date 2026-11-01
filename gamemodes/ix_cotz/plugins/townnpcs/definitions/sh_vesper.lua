@@ -6,8 +6,6 @@ PLUGIN:Register("vesper", {
 		kind = "sensor",
 		category = "Sensor deployment and retrieval",
 		description = "Sensor deployment and retrieval",
-		pools = {"field_maintenance", "documents_research"},
-		quantities = {5, 9, 15},
 		maps = {
 			easy = "mz_garbage",
 			medium = "rp_waystation",

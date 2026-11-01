@@ -6,8 +6,6 @@ PLUGIN:Register("atlas", {
 		kind = "sensor",
 		category = "Sensor deployment and retrieval",
 		description = "Sensor deployment and retrieval",
-		pools = {"field_maintenance", "batteries"},
-		quantities = {5, 9, 15},
 		maps = {
 			easy = "rp_marsh_cs",
 			medium = "mz_garbage",

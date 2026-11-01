@@ -6,8 +6,6 @@ PLUGIN:Register("wake", {
 		kind = "recovery",
 		category = "Equipment recovery",
 		description = "Equipment recovery",
-		pools = {"administrative_documents", "town_medical"},
-		quantities = {5, 9, 15},
 		maps = {
 			easy = "mz_garbage",
 			medium = "rp_waystation",

@@ -7,13 +7,7 @@ PLUGIN:Register("boss", {
 		trigger = "banditKilled",
 		category = "Hostile human elimination",
 		description = "Hostile human elimination",
-		pools = {"maintenance", "administrative_documents"},
 		quantities = {5, 9, 15},
-		maps = {
-			easy = "rp_waystation",
-			medium = "rp_waystation",
-			hard = "rp_pripyat_remaster",
-		},
 	},
 	supplies = {"545x39", "556x45", "medic_bandage_1", "drug_painkillers"},
 	dialogue = {

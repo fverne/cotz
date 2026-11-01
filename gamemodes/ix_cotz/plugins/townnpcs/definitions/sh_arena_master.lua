@@ -6,13 +6,6 @@ PLUGIN:Register("arena-master", {
 		kind = "arena",
 		category = "Arena bouts",
 		description = "Arena bouts",
-		pools = {"town_medical", "maintenance"},
-		quantities = {5, 9, 15},
-		maps = {
-			easy = "rp_marsh_cs",
-			medium = "mz_garbage",
-			hard = "rp_pripyat_remaster",
-		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {

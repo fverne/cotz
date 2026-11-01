@@ -32,11 +32,6 @@ PLUGIN:Register("the-original", {
 			},
 		},
 		quantities = {2, 4, 7},
-		maps = {
-			easy = "rp_marsh_cs",
-			medium = "mz_garbage",
-			hard = "rp_pripyat_remaster",
-		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {

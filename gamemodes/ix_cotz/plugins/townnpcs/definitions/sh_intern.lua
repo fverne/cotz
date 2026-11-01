@@ -7,8 +7,6 @@ PLUGIN:Register("intern", {
 		kind = "sensor",
 		category = "Sensor deployment and retrieval",
 		description = "Sensor deployment and retrieval",
-		pools = {"documents_research", "batteries"},
-		quantities = {5, 9, 15},
 		maps = {
 			easy = "rp_waystation",
 			medium = "rp_waystation",

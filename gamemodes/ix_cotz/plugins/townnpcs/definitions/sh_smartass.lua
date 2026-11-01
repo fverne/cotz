@@ -6,13 +6,7 @@ PLUGIN:Register("smartass", {
 		kind = "dataExtract",
 		category = "Computer data extraction",
 		description = "Extract data from %d computer types using the issued flash drive.",
-		pools = {"radio_components", "small_electronics"},
 		quantities = {1, 2, 5},
-		maps = {
-			easy = "mz_garbage",
-			medium = "rp_waystation",
-			hard = "rp_pripyat_remaster",
-		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {

@@ -158,6 +158,10 @@ function PLUGIN:PopulateHelpMenu(tabs)
 				if definition.BuildResponse then
 					local descriptionText =
 						ix.progression.DescribeTask(definition, definition.keyNpc, progressionStatus, character)
+					local heading = definition.name .. "\n"
+					if descriptionText:sub(1, #heading) == heading then
+						descriptionText = descriptionText:sub(#heading + 1):gsub("^\n+", "")
+					end
 					local progressionDescription = container:Add("DLabel")
 					progressionDescription:SetWrap(true)
 					progressionDescription:SetFont("stalkerregularsmallfont")

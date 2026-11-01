@@ -2,7 +2,7 @@ local PLUGIN = PLUGIN
 
 local function buildResponse(self, npc, status, character)
 	local text = ix.progression.BuildDeliveryResponse(self, npc, status, character)
-	if self.townObjective then text = text .. "\nObjective: " .. self.townObjective end
+	if self.townObjective then text = text .. "\n\nObjective: " .. self.townObjective end
 	local label = self.townKind == "field" and "Field commission completed:" or "Qualifying jobs completed:"
 	if self.townKind == "arena" then label = "Eligible bouts completed:" end
 
@@ -22,7 +22,7 @@ function PLUGIN:BuildProgressions()
 		if contact.access then
 			ix.progression.npcRequirements[contact.name] = self:StepID(contact.access.contact, contact.access.step)
 		end
-		for index, step in ipairs(contact.progression) do
+		for _, step in ipairs(contact.progression) do
 			local id = self:StepID(slug, step.id)
 			local definition = {
 				name = step.name,
@@ -32,9 +32,7 @@ function PLUGIN:BuildProgressions()
 				keyNpc = contact.name,
 				progMap = contact.map,
 				townContact = slug,
-				townStep = step.id,
 				townKind = step.kind,
-				townIndex = index,
 				defaultActive = #step.requires == 0 and #(step.crossRequires or {}) == 0,
 				nextProgressions = {},
 				prerequisites = {},

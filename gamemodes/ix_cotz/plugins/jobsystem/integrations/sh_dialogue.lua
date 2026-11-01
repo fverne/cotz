@@ -4,7 +4,6 @@ local REWARD_DATA_KEY = "taskRewardOffers"
 local CLAIM_LINE = "taskRewardClaims"
 local INTERACTION_DISTANCE = 192
 local ACTION_INTERVAL = 0.15
-local SHOW_TASK_SUPPLIES = true
 
 if SERVER then
 	util.AddNetworkString("cotz/dialogue/task-offer")
@@ -65,10 +64,6 @@ local function canChoose(client, target)
 	return true
 end
 
-local function supplyText(label)
-	return (label:gsub(" %+ ", " + "))
-end
-
 local function offerOptions(character, npc)
 	local options = {}
 	for key, offer in pairs(character:GetData(REWARD_DATA_KEY, {})) do
@@ -77,7 +72,7 @@ local function offerOptions(character, npc)
 			for index, choice in ipairs(offer.choices) do
 				options[#options + 1] = {
 					statement = offer.label .. "\nClaim: "
-						.. (offer.selected == index and "[Selected] " or "") .. supplyText(choice.label),
+						.. (offer.selected == index and "[Selected] " or "") .. choice.label,
 					topicID = "TaskRewardChoices",
 					dyndata = {kind = "offer", key = key, choice = index, label = choice.label},
 				}
@@ -216,7 +211,7 @@ local function configureJobPreview(dialogue)
 			local preview = client.cotzTaskPreview or {}
 			local options = {}
 			for index, choice in ipairs(preview.choices or {}) do
-				options[#options + 1] = {statement = "Accept — " .. supplyText(choice.label),
+				options[#options + 1] = {statement = "Accept — " .. choice.label,
 					topicID = "ConfirmSupplyTask", dyndata = {difficulty = preview.difficulty, choice = index}}
 			end
 			if #options == 0 then
@@ -244,7 +239,6 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 	dialogue.addTopic("TaskRewardChoices", {
 		statement = "Claim rewards.",
 		ShouldAdd = function(_, client, target)
-			if not SHOW_TASK_SUPPLIES then return false end
 			if workTopic then return true end
 			local character = client:GetCharacter()
 			local npc = target:GetDisplayName()
@@ -321,7 +315,7 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 			topic.options = ix.dialogue.OrderOptions(options, id == "GREETING" or id == "BackTopic")
 		end
 	end
-	if workTopic and SHOW_TASK_SUPPLIES then
+	if workTopic then
 		local previousShouldAdd = workTopic.ShouldAdd
 		workTopic.ShouldAdd = function(self, client, target)
 			if not previousShouldAdd or previousShouldAdd(self, client, target) then return true end

@@ -24,7 +24,9 @@ Whole-stack removal must succeed before progress/rewards are granted.
 Completion cash uses 60% of consumed nominal value. Partial hand-ins do not pay early; rounding
 credit accumulates for the whole completion. Fixed benefits use token-backed pending claims;
 an inventory reservation is not acknowledgement of an asynchronous insert. Full inventories keep
-rewards pending. Task descriptions call completion payouts rewards; stock rewards explicitly
+rewards pending. Task descriptions separate the title, briefing, required-item list and rewards with blank lines.
+The encyclopedia displays each task title once; required-item lists use a stable order.
+Task descriptions call completion payouts rewards; stock rewards explicitly
 describe purchase capacity. Hand-in replies give a short receipt and the remaining requirement or completion. Service credits, discounts and stock capacity remain separate from item gifts.
 
 Only current registered definitions participate in task discovery and equipment gating. There is no

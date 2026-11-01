@@ -35,11 +35,6 @@ PLUGIN:Register("latch", {
 			},
 		},
 		quantities = {2, 4, 7},
-		maps = {
-			easy = "mz_garbage",
-			medium = "rp_waystation",
-			hard = "rp_pripyat_remaster",
-		},
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {

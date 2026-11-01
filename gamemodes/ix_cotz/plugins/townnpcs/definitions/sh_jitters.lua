@@ -31,11 +31,6 @@ PLUGIN:Register("jitters", {
 			},
 		},
 		quantities = {2, 4, 7},
-		maps = {
-			easy = "rp_marsh_cs",
-			medium = "mz_garbage",
-			hard = "rp_pripyat_remaster",
-		},
 	},
 	supplies = {"medic_bandage_1", "medic_medkit_1", "medic_antirad_1", "drug_painkillers"},
 	dialogue = {

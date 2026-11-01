@@ -8,7 +8,7 @@ The town plugin owns 27 contacts and 646 finite objectives. Arena Master lives i
 
 | Edit | Source |
 | --- | --- |
-| Home map, contact access, jobs, supplies, catalogue, task dialogue and progression | definitions/sh_<contact>.lua in townnpcs |
+| Home map, contact access, jobs, reward items, catalogue, task dialogue and progression | definitions/sh_<contact>.lua in townnpcs |
 | Default payouts, stock and interaction limits | townnpcs/definitions/sh_config.lua |
 | Equipment upgrade families | townnpcs/definitions/sh_equipment.lua |
 | Field-site defaults | townnpcs/definitions/sh_sites.lua |
@@ -49,12 +49,15 @@ conclusion. The requires and crossRequires fields describe local and cross-conta
 equipment families can add further dependencies. Stable IDs look like cotz/town/quartermaster/QM11.
 Approximately half the objectives are item hand-ins or cumulative job checkpoints. Checkpoints
 usually require 2/5/9/14/20/27/35 completed jobs with that contact. Finite commissions do not count
-as ordinary repeatable work and do not award an extra repeatable cash/supply/restock payout.
+as ordinary repeatable work and do not award an extra repeatable cash/reward/restock payout.
 
 job.kind selects one repeatable specialty. Its category must be unique on the home map. Delivery
 pools, quantities and minimumValue tune hand-ins. job.maps selects field destinations per difficulty.
 job.rewards can override money/reputation per difficulty; defaults live in sh_config.lua.
 contact.supplyStock can override initial, maximum, interval and amount for that NPC.
+Only delivery jobs declare pools and delivery tiers. Quantities apply to deliveries, eliminations and
+computer extraction; destination maps apply to field jobs. Omit settings ignored by the selected kind.
+The supplies list serves both the task reward profile and ordinary vendor stock.
 
 Spoken task text stays in the contact's dialogue and progression fields. step.objective separately
 explains the actual field interaction. Mute communicates through written lists and gestures.

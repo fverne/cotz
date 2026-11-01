@@ -53,7 +53,7 @@ and updates specialty text after dialogue registration. Edit job settings and pr
 ../townnpcs/definitions/sh_<contact>.lua; edit flavour in the conversation file.
 
 Shared stock assembly lives in libs/sh_towncontacts.lua. The town plugin supplies contact configuration;
-this plugin owns template updates and placed-vendor stock handling. Catalogue unlocks and supply lists
+this plugin owns template updates and placed-vendor stock handling. Catalogue unlocks and reward/stock item lists
 are authored beside each town contact's progression, rather than duplicated in vendor definitions.
 
 Template definitions are explicitly included from libs/sh_npctemplates.lua on both realms using
