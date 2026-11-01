@@ -96,6 +96,14 @@ Restart after updating the files. Existing entity positions are not guessed or a
   512–4,096 units away with navigation and safe clearance. Author Pripyat sites without town contacts.
 - Existing saved Pripyat vendors require manual removal and saving. Do not rerun first-time setup.
 
+Startup checks commission destinations on every map, including maps other than the current server's.
+Missing sites produce a setup warning and leave the affected commissions unavailable. For triangulation,
+the check needs at least one point from event/stash data or an authored triangulation point for that map.
+On each destination map, use `/TownNPCAddFieldPoint triangulation` at a playtested transmitter location.
+Export the points and merge the map entries into `definitions/sh_sites.lua` on every server, then restart.
+Adding a point on Garbage does not configure Waystation or Pripyat. These checks do not establish that
+the configured positions are reachable or safe in-game.
+
 Field stories use existing configured point pools and bound cargo. Each converted commission declares
 `field.cargo` and `field.label`; optional `field.recipient` names a receiving contact ID.
 Concrete cargo in `items/jobcargo/` inherits jobsystem's `base_jobcargo` and uses selected quest-asset

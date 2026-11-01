@@ -41,7 +41,9 @@ if SERVER then
 	function PLUGIN:PostLoadData()
 		ix.plugin.Get("vendor_adv"):RefreshTownVendors(self)
 		for region, count in SortedPairs(self:GetMissingFieldSites()) do
-			ErrorNoHalt("[Town NPCs] No usable " .. region .. " sites; " .. count .. " commissions unavailable.\n")
+			print("[Town NPCs] WARNING: No configured " .. region .. " sites; " .. count .. " commissions unavailable. "
+				.. "This check includes other maps. Add points with /TownNPCAddFieldPoint on the destination map, "
+				.. "then /TownNPCExportFieldPoints and deploy definitions/sh_sites.lua to every map server.")
 		end
 	end
 
