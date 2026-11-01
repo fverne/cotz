@@ -15,17 +15,22 @@ PLUGIN:Register("ledger", {
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
 		delivery = "The parcel first. Then I can close the entry.",
-		completedGreeting = "Outbound, inbound, accounted for. That's a route we can keep.",
+		completedGreeting = (
+			"Good to see you. Your work has saved me a number of difficult enquiries. What can I help "
+			.. "you with today?"
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
 		work = (
 			"Collect the sealed parcel at the first point, deliver it to the second, then report back. Both "
-			.. "ends matter."
+			.. "ends matter. Check where the parcel goes before collecting it. I'd rather answer a question now "
+			.. "than add another uncertain delivery to the book."
 		),
 		progressionPrompt = "What else needs doing?",
 		progression = (
-			"There's freight to move and paperwork to recover. Read the destination before taking the "
-			.. "parcel."
+			"There's freight to move and paperwork to recover. Read the destination before taking the parcel. I "
+			.. "need supplies to keep things moving and surviving records to settle the gaps. Each missing entry "
+			.. "is a question I cannot responsibly cross out yet."
 		),
 	},
 	catalogue = {
@@ -37,8 +42,15 @@ PLUGIN:Register("ledger", {
 			name = "Labels That Last",
 			kind = "delivery",
 			requires = {},
-			briefing = "Deliver the listed supplies here. I'll record the quantity when it arrives.",
-			completion = "Let me enter the quantity.",
+			briefing = (
+				"Deliver the listed supplies here. I'll record the quantity when it arrives. Keep "
+				.. "everything together until I have checked it. I would like our first entry to be clear "
+				.. "enough that neither of us has to revisit it."
+			),
+			completion = (
+				"Let me enter the quantity. Entered. Thank you for making the beginning simple; there "
+				.. "will be enough complications without inventing one here."
+			),
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -248,8 +260,15 @@ PLUGIN:Register("ledger", {
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Waystation. Return it to"
 				.. " this contact to finish the assignment.",
 			requires = {"LE10"},
-			briefing = "Retrieve a dispatcher recorder in regional ruins.",
-			completion = "Thank you. Let me check the reference.",
+			briefing = (
+				"Retrieve a dispatcher recorder in regional ruins. Check the destination and return "
+				.. "instruction before leaving. A parcel waiting at the wrong end gives me two people to "
+				.. "contact instead of one."
+			),
+			completion = (
+				"Thank you. Let me check the reference. I'll update the account once I've checked the "
+				.. "details. Thank you for returning rather than leaving me to infer the outcome."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
@@ -441,8 +460,16 @@ PLUGIN:Register("ledger", {
 			objective = "Recover Warehouse Packing List B from the assigned search area in Waystation. Return it to"
 				.. " this contact to finish the assignment.",
 			requires = {"LE21"},
-			briefing = "Recover the route's final receipt and return to Waystation.",
-			completion = "Set it with the freight records.",
+			briefing = (
+				"Recover the route's final receipt and return to Waystation. Bring the receipt back here. An "
+				.. "account is easier to close when I can read the last entry myself instead of collecting versions "
+				.. "of it."
+			),
+			completion = (
+				"Set it with the freight records. I'll put it with the rest and check the sequence. You've spared "
+				.. "me a good many uncertain entries. That may sound like a modest compliment. From this side of the "
+				.. "desk, it isn't."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",

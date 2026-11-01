@@ -15,14 +15,21 @@ PLUGIN:Register("atlas", {
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
 		delivery = "Here, please. I will check it against the route record.",
-		completedGreeting = "I'll put their names on the finished sheet. They earned that much.",
+		completedGreeting = (
+			"It's good to see you back. If you have an observation to share, I have time to listen."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Set down the recorder at the assigned site. Give it time, collect it, and bring it back to me.",
+		work = (
+			"Set down the recorder at the assigned site. Give it time, collect it, and bring it back to me. "
+			.. "Keep enough time and supplies for the return. A reading left outside with its recorder doesn't "
+			.. "help anyone plan the next trip."
+		),
 		progressionPrompt = "What else needs doing?",
 		progression = (
-			"I'm checking routes and the records left by the survey teams. Choose something you can get "
-			.. "back from."
+			"I'm checking routes and the records left by the survey teams. Choose something you can get back "
+			.. "from. I want to check the surviving route records against observations we can repeat. We needn't "
+			.. "pretend every blank has an answer waiting behind it."
 		),
 	},
 	catalogue = {
@@ -34,8 +41,15 @@ PLUGIN:Register("atlas", {
 			name = "Marks on Paper",
 			kind = "delivery",
 			requires = {},
-			briefing = "I need these supplies for the survey work. Bring them here; I'll check them before packing.",
-			completion = "Thank you. I'll put it with the survey supplies.",
+			briefing = (
+				"I need these supplies for the survey work. Bring them here; I'll check them before "
+				.. "packing. Before anyone sets out, I want the preparation taken seriously. A survey is "
+				.. "difficult enough without making the equipment an uncertainty too."
+			),
+			completion = (
+				"Thank you. I'll put it with the survey supplies. I'll check and pack these carefully. "
+				.. "Thank you for starting with the things that make the rest possible."
+			),
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -253,8 +267,15 @@ PLUGIN:Register("atlas", {
 			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
 				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
 			requires = {"AT10"},
-			briefing = "Retrieve a survey record along Ledger's recorded route.",
-			completion = "That copy is where it can be used. I will mark the delivery beside the route.",
+			briefing = (
+				"Retrieve a survey record along Ledger's recorded route. Ledger needs the record in "
+				.. "Waystation. Once it reaches him, return here so I can account for the whole journey."
+			),
+			completion = (
+				"That copy is where it can be used. I will mark the delivery beside the route. Thank "
+				.. "you. A record someone can consult is rather more useful than one we both know exists "
+				.. "somewhere outside."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
@@ -454,8 +475,16 @@ PLUGIN:Register("atlas", {
 			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0022."
 				.. " Return it to this contact to finish the assignment.",
 			requires = {"AT21"},
-			briefing = "Record the final Pripyat site and return the completed evidence.",
-			completion = "Thank you. I'll mark where it came from.",
+			briefing = (
+				"Record the final Pripyat site and return the completed evidence. Let the recorder finish before "
+				.. "you collect it. This is a long journey to make for a reading we cannot use. Then bring it back "
+				.. "here."
+			),
+			completion = (
+				"Thank you. I'll mark where it came from. I'll enter the reading carefully, with the rest of the "
+				.. "route. There is work here that other people didn't get to finish. Thank you for treating it with "
+				.. "the same care as your own."
+			),
 			field = {
 				kind = "sensor",
 				map = "rp_pripyat_remaster",

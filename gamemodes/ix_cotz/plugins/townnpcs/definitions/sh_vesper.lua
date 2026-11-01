@@ -15,15 +15,23 @@ PLUGIN:Register("vesper", {
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
 		delivery = "Put it where I can check the label. Tell me if it was damaged on the way.",
-		completedGreeting = "We brought the results home. That's what makes it a successful expedition.",
+		completedGreeting = (
+			"Good to see you on this side of the trip. We can talk for a moment before either of us "
+			.. "starts planning another."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
 		work = (
 			"Deploy the sensor, let it finish, then collect it. Stay within range and keep yourself fit to "
-			.. "carry it home."
+			.. "carry it home. Decide when you'll turn back before you set out. Don't keep changing that decision "
+			.. "just because the recorder isn't quite finished."
 		),
 		progressionPrompt = "What else needs doing?",
-		progression = "There are supplies to sort and field readings to check. Pick a trip you can prepare for.",
+		progression = (
+			"There are supplies to sort and field readings to check. Pick a trip you can prepare for. The "
+			.. "equipment and the field accounts both need attention. Bring back what the order asks for; we can "
+			.. "argue about the interpretation somewhere we can hear ourselves think."
+		),
 	},
 	catalogue = {
 		["mask_m40"] = {step = "VE19",
@@ -43,10 +51,14 @@ PLUGIN:Register("vesper", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring what's on the list. Check your own kit before giving away the supplies you need to "
-				.. "get home."
+				"Bring what's on the list. Check your own kit before giving away the supplies you need "
+				.. "to get home. I'm asking for supplies, not for you to strip your own pack bare. Read the "
+				.. "list and leave yourself ready for the journey."
 			),
-			completion = "Good. Check your own supplies before you leave.",
+			completion = (
+				"Good. Check your own supplies before you leave. Useful. Now make sure you haven't left "
+				.. "yourself short. Preparation applies to the person making the delivery too."
+			),
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -288,10 +300,14 @@ PLUGIN:Register("vesper", {
 			kind = "delivery",
 			requires = {"VE11"},
 			briefing = (
-				"Bring what's on the list. Check your own kit before giving away the supplies you need to "
-				.. "get home."
+				"Bring what's on the list. Check your own kit before giving away the supplies you need "
+				.. "to get home. Go through the return instructions before you leave. It's easier to ask a "
+				.. "sensible question here than invent an answer in the field."
 			),
-			completion = "Good. Check your own supplies before you leave.",
+			completion = (
+				"Good. Check your own supplies before you leave. Good. You can leave that with me and "
+				.. "take a minute to settle. I'll check it without someone trying to rush the answer."
+			),
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -494,8 +510,15 @@ PLUGIN:Register("vesper", {
 			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Garbage. Return it to"
 				.. " this contact to finish the assignment.",
 			requires = {"VE23"},
-			briefing = "Retrieve the expedition's final recorder and return its account.",
-			completion = "Leave it with me. Have some water.",
+			briefing = (
+				"Retrieve the expedition's final recorder and return its account. Bring the recording home before "
+				.. "listening. There's no account on it worth getting distracted over while you're still out there."
+			),
+			completion = (
+				"Leave it with me. Have some water. You're back. Good. I'll give the recording a proper listen, "
+				.. "and you can stop checking over your shoulder for a minute. You've earned a quieter conversation "
+				.. "than the one waiting outside."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",

@@ -13,13 +13,22 @@ PLUGIN:Register("haggler", {
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
 		completedGreeting = (
-			"You've kept your end of the business. What can I do for you?"
+			"There you are. It's pleasant to see a customer whose promises don't need chasing all over "
+			.. "the Marsh."
 		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Bandits are bad for deliveries. Remove the ones on the order; I still need paying customers.",
+		work = (
+			"Bandits are bad for deliveries. Remove the ones on the order; I still need paying customers. Read "
+			.. "the order before you start shooting. A frightened courier isn't a bandit just because he's "
+			.. "carrying something valuable."
+		),
 		progressionPrompt = "What else needs doing?",
-		progression = "Missing invoices, missing goods, people asking to be paid twice. Pick a problem.",
+		progression = (
+			"Missing invoices, missing goods, people asking to be paid twice. Pick a problem. I can complain "
+			.. "about missing goods all day. Finding out where they went takes someone willing to walk. Bring me "
+			.. "something I can check and we can have an actual discussion."
+		),
 	},
 	catalogue = {
 		["bat"] = {step = "HG01",
@@ -120,8 +129,15 @@ PLUGIN:Register("haggler", {
 			name = "Opening the Shutters",
 			kind = "delivery",
 			requires = {},
-			briefing = "Bring what's listed here. I'll check the goods before we settle this part of the deal.",
-			completion = "As agreed. Let me count it.",
+			briefing = (
+				"Bring what's listed here. I'll check the goods before we settle this part of the deal. "
+				.. "I'd like to see how you handle a straightforward order before we start making this "
+				.. "complicated. Saves us both a great deal of talking."
+			),
+			completion = (
+				"As agreed. Let me count it. Good. You read the order and brought the goods. We may be "
+				.. "able to do business without giving each other a headache."
+			),
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -374,8 +390,14 @@ PLUGIN:Register("haggler", {
 			objective = "Recover Corporate Letter from the assigned search area in Garbage. Return it to this contact"
 				.. " to finish the assignment.",
 			requires = {"HG12"},
-			briefing = "Retrieve a supplier contract in Garbage.",
-			completion = "Hand it over. I want to read the small print.",
+			briefing = (
+				"Retrieve a supplier contract in Garbage. People are quite capable of losing things "
+				.. "without help. I want something I can check before I start pointing fingers."
+			),
+			completion = (
+				"Hand it over. I want to read the small print. Now I have something firmer than a "
+				.. "complaint to work with. Makes a pleasant change from the usual business."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
@@ -598,8 +620,15 @@ PLUGIN:Register("haggler", {
 			objective = "Recover Corporate Letter from the assigned search area in Marsh. Return it to this contact"
 				.. " to finish the assignment.",
 			requires = {"HG25"},
-			briefing = "Recover the final contract evidence for comparison with the other contracts.",
-			completion = "Hand it over. I want to read the small print.",
+			briefing = (
+				"Recover the final contract evidence for comparison with the other contracts. Keep the whole "
+				.. "letter. People have a habit of remembering the generous half of an agreement and losing the rest."
+			),
+			completion = (
+				"Hand it over. I want to read the small print. There it is. Small print and all. You've been more "
+				.. "reliable than several people who insist I call them partners. Don't let that go to your head; I "
+				.. "still expect you to read your orders."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",

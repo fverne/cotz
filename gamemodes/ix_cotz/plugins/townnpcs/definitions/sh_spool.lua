@@ -15,15 +15,23 @@ PLUGIN:Register("spool", {
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
 		delivery = "Right, one moment. Let me find the matching entry.",
-		completedGreeting = "They left a message. Someone should hear it.",
+		completedGreeting = (
+			"Oh, hello. Nice to have someone here I don't need to ask to repeat themselves through the "
+			.. "interference."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
 		work = (
-			"Take the bearings, find the source, and bring the transmitter back. I'll listen to the "
-			.. "recording here."
+			"Take the bearings, find the source, and bring the transmitter back. I'll listen to the recording "
+			.. "here. Take the bearings properly rather than choosing the one that looks convenient. I'm fond of "
+			.. "hearing people arrive where they meant to go."
 		),
 		progressionPrompt = "What else needs doing?",
-		progression = "I've got missing recordings and equipment to sort. Have a look while I finish listening.",
+		progression = (
+			"I've got missing recordings and equipment to sort. Have a look while I finish listening. There are "
+			.. "recordings to recover and equipment to keep usable. We can work through them without deciding in "
+			.. "advance what every silence means."
+		),
 	},
 	catalogue = {
 	},
@@ -35,10 +43,14 @@ PLUGIN:Register("spool", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I'm short of what's on this list. Bring it over when you can. Mind the receiver when you "
-				.. "put it down."
+				"I'm short of what's on this list. Bring it over when you can. Mind the receiver when "
+				.. "you put it down. I'm trying to get ahead of the faults instead of chasing whichever one "
+				.. "shouts loudest. A few decent components would be a start."
 			),
-			completion = "Thanks. I'll put that where I can find it.",
+			completion = (
+				"Thanks. I'll put that where I can find it. Good timing. I'll keep these separate from "
+				.. "the bits I'm still arguing with. That pile is less useful than it looks."
+			),
 			requirements = {
 				{
 					pool = "small_electronics",
@@ -253,8 +265,15 @@ PLUGIN:Register("spool", {
 			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Waystation. Return it to"
 				.. " this contact to finish the assignment.",
 			requires = {"SO10"},
-			briefing = "Locate and retrieve a source near a freight route.",
-			completion = "Thanks. I'll check the recording.",
+			briefing = (
+				"Locate and retrieve a source near a freight route. Take the time to check what the "
+				.. "order actually needs. I'm tired enough to appreciate not sorting an avoidable mix-up "
+				.. "afterwards."
+			),
+			completion = (
+				"Thanks. I'll check the recording. Thanks for seeing it through. I'll finish the "
+				.. "checking before I let myself get distracted by the receiver again."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
@@ -457,8 +476,15 @@ PLUGIN:Register("spool", {
 			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Waystation. Return it to"
 				.. " this contact to finish the assignment.",
 			requires = {"SO21"},
-			briefing = "Recover the last unsent recording and return it to the station.",
-			completion = "You found it. Leave it beside the receiver.",
+			briefing = (
+				"Recover the last unsent recording and return it to the station. Bring the cassette back here. "
+				.. "Don't try to play it in the middle of the trip; let's get it somewhere we can listen properly."
+			),
+			completion = (
+				"You found it. Leave it beside the receiver. Thanks. I'll listen when it's quiet enough to give it "
+				.. "my attention. You spend enough time waiting for a call and you forget how strange it feels to "
+				.. "have something definite in your hand."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",

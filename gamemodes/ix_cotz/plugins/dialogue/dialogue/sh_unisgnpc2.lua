@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Sure.")
 DIALOGUE.addTopic("GREETING", {
 	response = "Look what the cat dragged in.",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"RepairItems",
 		"BackgroundTopic",
@@ -110,6 +111,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about another topic.",
 	response = "Anything else?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"RepairItems",
 		"BackgroundTopic",
@@ -124,4 +126,23 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "I'll talk to you later.",
 	response = "Bye.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "What do you expect from people working for you?",
+	response = (
+		"That they understand the assignment before leaving. That they distinguish what they saw from what "
+		.. "they assumed. And that they report back. Confidence is useful if there is some competence "
+		.. "underneath it."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Can I question an assignment?",
+	response = (
+		"Before you leave, certainly. Ask about something that affects the work and I'll answer what I can. "
+		.. "I won't discuss everything about the operation because you've found a polite way to ask."
+	),
+	options = {"BackTopic"},
 })

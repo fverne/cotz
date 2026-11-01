@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "What have you
 DIALOGUE.addTopic("GREETING", {
 	response = "If you've come to complain about the lights, bring fuel next time.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -48,6 +49,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
 	response = "If you've come to complain about the lights, bring fuel next time.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -62,4 +64,23 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "Try leaving something running for once.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Why does the clinic get water first?",
+	response = (
+		"Because Jitters can't wash a wound with a promise. Everybody else can grumble at me for a bit while "
+		.. "I sort them out. He has enough trouble without wondering what came out of the tap."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Does anyone notice when everything works?",
+	response = (
+		"They notice when I ask them not to touch it. That's close enough. Quiet machinery, people "
+		.. "complaining about something else, a cup I can finish while it's hot. I don't need applause over the "
+		.. "engine."
+	),
+	options = {"BackTopic"},
 })

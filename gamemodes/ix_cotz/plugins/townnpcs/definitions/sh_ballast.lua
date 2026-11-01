@@ -16,16 +16,21 @@ PLUGIN:Register("ballast", {
 	dialogue = {
 		delivery = "Over here. If it is still dry, we are off to a good start.",
 		completedGreeting = (
-			"That freight is accounted for. Good to see you back on this side of the job."
+			"Back with both boots, I see. Always a promising start to a conversation. What do you need?"
 		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
 		work = (
-			"Recover the marked case and bring it back intact. Think about the weight before you climb down "
-			.. "for it."
+			"Recover the marked case and bring it back intact. Think about the weight before you climb down for "
+			.. "it. Have a look at the way out before you load yourself down. Finding a case and getting it home "
+			.. "are two different amounts of effort."
 		),
 		progressionPrompt = "What else needs doing?",
-		progression = "There are stranded cases and missing freight records. Tell me which one you're going after.",
+		progression = (
+			"There are stranded cases and missing freight records. Tell me which one you're going after. Some "
+			.. "freight needs collecting. Some needs records straightened out so it stops being everyone else's "
+			.. "responsibility. Neither improves by sitting here arguing about it."
+		),
 	},
 	catalogue = {
 	},
@@ -36,8 +41,15 @@ PLUGIN:Register("ballast", {
 			name = "A Dry Package",
 			kind = "delivery",
 			requires = {},
-			briefing = "I need these supplies. Bring them here, and leave yourself room to carry your own kit.",
-			completion = "Set it down. No need to throw it.",
+			briefing = (
+				"I need these supplies. Bring them here, and leave yourself room to carry your own kit. "
+				.. "Leave enough room for your own things. Starting a supply job by making yourself "
+				.. "helpless is a peculiar way to be useful."
+			),
+			completion = (
+				"Set it down. No need to throw it. Dry enough, and you're not bent double. A perfectly "
+				.. "respectable start."
+			),
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -245,8 +257,16 @@ PLUGIN:Register("ballast", {
 			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Deliver it to 'Brass'"
 				.. " in Garbage, then return here to finish the assignment.",
 			requires = {"BA10"},
-			briefing = "Retrieve shipment evidence at a Garbage freight site.",
-			completion = "Delivered dry, I hope. Good. That is one less parcel sitting between two names.",
+			briefing = (
+				"Retrieve shipment evidence at a Garbage freight site. Brass gets the case in Garbage. "
+				.. "Then come back here. He can argue the figures; I just want the delivery finished "
+				.. "properly."
+			),
+			completion = (
+				"Delivered dry, I hope. Good. That is one less parcel sitting between two names. Brass "
+				.. "can check what he has now. That saves me trying to settle an argument while the "
+				.. "evidence is still outside."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
@@ -441,8 +461,15 @@ PLUGIN:Register("ballast", {
 			objective = "Recover Small Yellow Transit Case from the assigned search area in Marsh. Deliver it to"
 				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
 			requires = {"BA21"},
-			briefing = "Complete one recovery along the supply route.",
-			completion = "Delivered dry, I hope. Good. That is one less parcel sitting between two names.",
+			briefing = (
+				"Complete one recovery along the supply route. The case goes to Ledger in Waystation. After that, "
+				.. "come back here. I want to hear you've finished the return journey as well."
+			),
+			completion = (
+				"Delivered dry, I hope. Good. That is one less parcel sitting between two names. Good. Ledger has "
+				.. "the case and you're back to tell me. I can put that job down without wondering about either of "
+				.. "you. You'd be surprised how pleasant that is."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",

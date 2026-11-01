@@ -15,17 +15,22 @@ PLUGIN:Register("wake", {
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
 		delivery = "Put it here. I will keep it with the search records.",
-		completedGreeting = "We can stop writing missing beside that name.",
+		completedGreeting = (
+			"Hello again. Thank you for coming back. If you have something to discuss, we can take our "
+			.. "time."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
 		work = (
-			"Recover the marked personal-effects case and bring it back sealed. I'll handle what we can "
-			.. "learn from it."
+			"Recover the marked personal-effects case and bring it back sealed. I'll handle what we can learn "
+			.. "from it. Bring the effects back intact. Don't decide on the road that something small isn't worth "
+			.. "keeping; it may matter to someone else."
 		),
 		progressionPrompt = "What else needs doing?",
 		progression = (
-			"I'm checking missing people's routes and belongings. Supplies help keep the searches going, "
-			.. "too."
+			"I'm checking missing people's routes and belongings. Supplies help keep the searches going, too. "
+			.. "We need supplies for searches and records we can check. Finding a case is useful. Understanding "
+			.. "what it does and doesn't tell us takes a little more care."
 		),
 	},
 	catalogue = {
@@ -57,8 +62,15 @@ PLUGIN:Register("wake", {
 			name = "Names Before Numbers",
 			kind = "delivery",
 			requires = {},
-			briefing = "I need these supplies to keep the searches going. Bring them here when you have them.",
-			completion = "Thank you. I'll keep it with the search supplies.",
+			briefing = (
+				"I need these supplies to keep the searches going. Bring them here when you have them. "
+				.. "People remember the dramatic part of a search. Keeping the supplies ready is how we "
+				.. "avoid making the search party another worry."
+			),
+			completion = (
+				"Thank you. I'll keep it with the search supplies. That will help. I'm glad you've "
+				.. "started with something practical rather than asking me for the worst story I know."
+			),
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -268,8 +280,14 @@ PLUGIN:Register("wake", {
 			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"WA10"},
-			briefing = "Recover personal effects from the convoy's regional destination.",
-			completion = "Let me check it against the missing-person records.",
+			briefing = (
+				"Recover personal effects from the convoy's regional destination. Bring back what's "
+				.. "assigned without deciding what it proves on the way. We'll examine it somewhere quiet."
+			),
+			completion = (
+				"Let me check it against the missing-person records. Thank you. I'll check it carefully. "
+				.. "You can put your pack down while I do; I won't need you to leave again this moment."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
@@ -462,8 +480,15 @@ PLUGIN:Register("wake", {
 			objective = "Recover Personnel File Folder from the assigned search area in Garbage. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"WA21"},
-			briefing = "Retrieve the final identification record and return the completed account.",
-			completion = "I'll open it here. Give me a little room.",
+			briefing = (
+				"Retrieve the final identification record and return the completed account. Keep the identifying "
+				.. "record together. Bring it here before drawing conclusions from a name you recognise on one page."
+			),
+			completion = (
+				"I'll open it here. Give me a little room. Thank you. I'll read it carefully. You haven't treated "
+				.. "these as just things to collect, and I appreciate that. Give me a little time before we talk "
+				.. "about what the papers say."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",

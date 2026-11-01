@@ -11,12 +11,23 @@ PLUGIN:Register("spoor", {
 	supplies = {"12gauge", "22lr", "medic_bandage_1", "drink_bottlewater"},
 	dialogue = {
 		delivery = "Set it down. Tell me if anything happened to it on the way.",
-		completedGreeting = "Now we know why they moved. Better than another tall tale.",
+		completedGreeting = (
+			"Hello. Seen anything worth a closer look? You know I'm happy to hear what you actually "
+			.. "noticed."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Mutants on the routes. The job is to clear them, not to chase a trophy into another pack.",
+		work = (
+			"Mutants on the routes. The job is to clear them, not to chase a trophy into another pack. Don't "
+			.. "start firing before you've looked at the ground around you. There may be more using the area than "
+			.. "the animal you came for."
+		),
 		progressionPrompt = "What else needs doing?",
-		progression = "Supplies and field observations. I'd like to know why the animals are moving, too.",
+		progression = (
+			"Supplies and field observations. I'd like to know why the animals are moving, too. Bring the "
+			.. "specimens we can examine and the observations left in the field. I'd like a clearer idea of what "
+			.. "moves through here, not a larger pile of trophies."
+		),
 	},
 	catalogue = {
 		["12gaugedt"] = {unlockContact = "brass", step = "BR03",
@@ -79,8 +90,15 @@ PLUGIN:Register("spoor", {
 			name = "Reading the Remains",
 			kind = "delivery",
 			requires = {},
-			briefing = "Bring what's listed here. Keep it in good condition; I need to examine it.",
-			completion = "Let me check the condition.",
+			briefing = (
+				"Bring what's listed here. Keep it in good condition; I need to examine it. Keep the "
+				.. "specimen as it is. Cleaning away something you find unpleasant can remove the thing I "
+				.. "wanted to see."
+			),
+			completion = (
+				"Let me check the condition. Good. Leave it there while I look. There's no need to make "
+				.. "a story out of it before we've started."
+			),
 			requirements = {
 				{
 					pool = "common_parts",
@@ -280,8 +298,14 @@ PLUGIN:Register("spoor", {
 			objective = "Recover Personnel File Folder from the assigned search area in Garbage. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"SP10"},
-			briefing = "Recover a hunter's case at a remote observation site.",
-			completion = "Set it here. I'll compare the records.",
+			briefing = (
+				"Recover a hunter's case at a remote observation site. Check the order and bring what I "
+				.. "can use. Time spent preparing is easier to spare here than after you've left."
+			),
+			completion = (
+				"Set it here. I'll compare the records. That helps. I'll check it properly before we "
+				.. "decide what comes next."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
@@ -468,8 +492,15 @@ PLUGIN:Register("spoor", {
 			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"SP21"},
-			briefing = "Recover the final hunting observations in Pripyat.",
-			completion = "Let me look at the observations.",
+			briefing = (
+				"Recover the final hunting observations in Garbage. Bring the journal back with "
+				.. "the pages in order; observations are harder to judge when somebody has helpfully rearranged them."
+			),
+			completion = (
+				"Let me look at the observations. I'll read these against what we've already got. You've kept "
+				.. "bringing back things worth looking at. That's useful work, even on the days when it doesn't give "
+				.. "us a neat answer."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",

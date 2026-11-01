@@ -9,15 +9,23 @@ PLUGIN:Register("arena-master", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
-		completedGreeting = "You've earned your place. Try not to make the next contender too nervous.",
+		completedGreeting = (
+			"Good to see you. Match on your mind, or are you giving yourself a well-earned afternoon "
+			.. "off?"
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
 		work = (
-			"Sanctioned bouts against different human opponents. Fighting the same friend all afternoon "
-			.. "doesn't count."
+			"Sanctioned bouts against different human opponents. Fighting the same friend all afternoon doesn't "
+			.. "count. Give yourself a breather between bouts. You won't impress anyone by turning up too tired to "
+			.. "put on a proper match."
 		),
 		progressionPrompt = "What else needs doing?",
-		progression = "I've got equipment to sort and a few missing records. And, of course, there's the arena.",
+		progression = (
+			"I've got equipment to sort and a few missing records. And, of course, there's the arena. The arena "
+			.. "has its share of missing equipment and untidy records. Helping me with those is less glamorous "
+			.. "than a bout, but somebody has to do it."
+		),
 	},
 	catalogue = {
 	},
@@ -28,8 +36,15 @@ PLUGIN:Register("arena-master", {
 			name = "Before the Bell",
 			kind = "delivery",
 			requires = {},
-			briefing = "Bring these supplies over when you can. There's always something to replace around here.",
-			completion = "Lovely. Put it with the arena supplies.",
+			briefing = (
+				"Bring these supplies over when you can. There's always something to replace around "
+				.. "here. Less exciting than a match, I know. Still, people notice very quickly when the "
+				.. "supplies aren't ready."
+			),
+			completion = (
+				"Lovely. Put it with the arena supplies. Much appreciated. Nice to meet someone who "
+				.. "helps before the cheering starts."
+			),
 			requirements = {
 				{
 					pool = "town_medical",
@@ -223,10 +238,14 @@ PLUGIN:Register("arena-master", {
 			kind = "arena",
 			requires = {"AR10"},
 			briefing = (
-				"Join a sanctioned bout here in Marsh against someone you haven't faced before. Finish the "
-				.. "match properly."
+				"Join a sanctioned bout here in Marsh against someone you haven't faced before. Finish "
+				.. "the match properly. Let the match be a match. A decent opponent deserves your "
+				.. "attention, and you'll get more out of it than another easy afternoon."
 			),
-			completion = "Good match. Take a breather before you sign up again.",
+			completion = (
+				"Good match. Take a breather before you sign up again. That's the sort of result worth "
+				.. "keeping. Catch your breath; the next match doesn't need you this instant."
+			),
 			target = 1,
 			benefits = {
 				items = {
@@ -397,8 +416,16 @@ PLUGIN:Register("arena-master", {
 			objective = "Recover Corporate Records Folder from the assigned search area in Marsh. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"AR21"},
-			briefing = "Recover the historic competitor's final evidence for the arena records.",
-			completion = "Set it here. I'll go through it between matches.",
+			briefing = (
+				"Recover the historic competitor's final evidence for the arena records. Keep the records together "
+				.. "when you bring them back. I'd like to give that old name something firmer to stand on than "
+				.. "another second-hand story."
+			),
+			completion = (
+				"Set it here. I'll go through it between matches. There we are. Something I can actually read "
+				.. "between matches. You've taken the unglamorous side of this seriously as well. I notice that, even "
+				.. "if it doesn't get the loudest cheer."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",

@@ -35,14 +35,22 @@ PLUGIN:Register("carbon", {
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
 		delivery = "On the clear part of the desk. Keep any loose pages with it.",
-		completedGreeting = "Now the dates agree. Whether anyone likes the answer is another matter.",
+		completedGreeting = (
+			"Hello again. I've got time if you want to talk. You've been patient enough with my "
+			.. "questions."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Documents. Keep the pages intact. A damaged date can make the rest very difficult to place.",
+		work = (
+			"Documents. Keep the pages intact. A damaged date can make the rest very difficult to place. Keep "
+			.. "loose pages with the record they came from. A scrap that looks unimportant can be the only thing "
+			.. "that tells me which account I'm reading."
+		),
 		progressionPrompt = "What else needs doing?",
 		progression = (
 			"I need records with dates and sources, and supplies to keep them readable. Which can you help "
-			.. "with?"
+			.. "with? Supplies keep the records readable. Field work gives us something to read. I am interested "
+			.. "in what survives, including the details that make a tidy explanation inconvenient."
 		),
 	},
 	catalogue = {
@@ -56,9 +64,14 @@ PLUGIN:Register("carbon", {
 			requires = {},
 			briefing = (
 				"Bring the supplies on this list. I'll keep them separate from the records until they're "
-				.. "checked."
+				.. "checked. A readable record is useful even when it seems ordinary. We can decide its "
+				.. "significance after we have kept it from disappearing into the clutter."
 			),
-			completion = "Thank you. I'll keep it away from the loose papers.",
+			completion = (
+				"Thank you. I'll keep it away from the loose papers. Thank you. I'll check what belongs "
+				.. "together before filing anything. Starting carefully saves a great deal of later "
+				.. "invention."
+			),
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -273,8 +286,16 @@ PLUGIN:Register("carbon", {
 			objective = "Recover Loose Intelligence Dossier from the assigned search area in Waystation. Return it to"
 				.. " this contact to finish the assignment.",
 			requires = {"CA10"},
-			briefing = "Recover field evidence of an operation omitted from official records.",
-			completion = "Thank you. I'll record where it was recovered.",
+			briefing = (
+				"Recover field evidence of an operation omitted from official records. Bring the "
+				.. "complete dossier. An omission is worth examining, but it doesn't entitle us to decide "
+				.. "in advance what fills it."
+			),
+			completion = (
+				"Thank you. I'll record where it was recovered. I'll note where it was found before "
+				.. "reading further. An interesting document can still mislead us if we forget its "
+				.. "circumstances."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
@@ -476,8 +497,16 @@ PLUGIN:Register("carbon", {
 			objective = "Recover Scientist's Field Diary from the assigned search area in Waystation. Return it to"
 				.. " this contact to finish the assignment.",
 			requires = {"CA21"},
-			briefing = "Retrieve the final dated field record and return the complete dossier.",
-			completion = "Good. I'll compare it with the other copy.",
+			briefing = (
+				"Retrieve the final dated field record and return the complete dossier. Keep the diary intact. I "
+				.. "want the dates around the final entry as well as the entry itself; context is easy to lose on an "
+				.. "eager first reading."
+			),
+			completion = (
+				"Good. I'll compare it with the other copy. Thank you. I'll read it alongside the other records. "
+				.. "You've given me the chance to be more careful than a good story usually allows. I intend to use "
+				.. "it."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",

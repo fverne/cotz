@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Yes")
 DIALOGUE.addTopic("GREETING", {
 	response = "Yes?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"StartBarter",
 		"NicknameTopic",
@@ -182,6 +183,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
 	response = "All right.",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"StartBarter",
 		"NicknameTopic",
@@ -197,4 +199,23 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "Come back soon, stranger...",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "What makes you stop trusting a hunter?",
+	response = (
+		"When he stops looking. Gets himself a good rifle, learns a path, then starts thinking the place "
+		.. "owes him an easy walk. I'd rather go out with someone who admits he's unsure. At least he'll listen "
+		.. "when you tell him to stop."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Do you still get unsure?",
+	response = (
+		"Of course. I just don't waste so much breath pretending otherwise. There are mornings I stay here "
+		.. "and mend things. You can call that getting old if you like. I'm here to hear you say it."
+	),
+	options = {"BackTopic"},
 })

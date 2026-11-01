@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "I'm always looking to buy
 DIALOGUE.addTopic("GREETING", {
 	response = "Hello there.",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"ChangeSuitVariant",
 		"BackgroundTopic",
@@ -234,6 +235,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about another topic.",
 	response = "Anything else?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"ChangeSuitVariant",
 		"BackgroundTopic",
@@ -248,4 +250,22 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "I'll talk to you later.",
 	response = "Bye.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Do you have to make every answer sound like an insult?",
+	response = (
+		"No. Some people bring enough of their own material. You want useful conversation, ask something "
+		.. "specific. I can complain about your question and answer it at the same time. Efficient, isn't it?"
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "What makes a question worth answering?",
+	response = (
+		"What failed, what you tried, what happened next. Spool can manage it, when he isn't arguing with "
+		.. "the answer. 'It's broken' is a complaint. I already have plenty of those, thanks."
+	),
+	options = {"BackTopic"},
 })

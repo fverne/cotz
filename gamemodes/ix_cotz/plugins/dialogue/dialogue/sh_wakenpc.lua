@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Of course. Wh
 DIALOGUE.addTopic("GREETING", {
 	response = "A name, a last location, anything they were carrying. Start there.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -48,6 +49,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
 	response = "A name, a last location, anything they were carrying. Start there.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -62,4 +64,22 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "Let someone know you made it back.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "What should someone tell you before a search?",
+	response = (
+		"What they know, and how they know it. A last location from someone who saw them is different from a "
+		.. "story passed round a table. Both can help, if nobody dresses one up as the other."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Do people expect you to promise they'll be found?",
+	response = (
+		"Yes. I understand why. I can promise to take the information seriously and be careful with what "
+		.. "comes back. I won't give someone an answer just because waiting is painful."
+	),
+	options = {"BackTopic"},
 })

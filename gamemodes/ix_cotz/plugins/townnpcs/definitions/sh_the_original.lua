@@ -34,12 +34,23 @@ PLUGIN:Register("the-original", {
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
 		delivery = "Bring it over. Let me have a look at what survived.",
-		completedGreeting = "Paper remembers one thing. People remember another. Keep both.",
+		completedGreeting = (
+			"Come to check another of my stories? All right. At least you usually bring a question worth "
+			.. "answering."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Mutant parts. Not just the impressive ones. Small changes tell you a great deal.",
+		work = (
+			"Mutant parts. Not just the impressive ones. Small changes tell you a great deal. Bring the "
+			.. "specimen listed, and don't ruin it getting it here. There's more to learn from a good look than "
+			.. "from another argument about what you think you saw."
+		),
 		progressionPrompt = "What else needs doing?",
-		progression = "There are a few things I'd like to compare with what I remember. You can help with that.",
+		progression = (
+			"There are a few things I'd like to compare with what I remember. You can help with that. I've told "
+			.. "these stories often enough. Now there are records to put beside them. You fetch what survives and "
+			.. "we'll see which questions are worth asking."
+		),
 	},
 	catalogue = {
 	},
@@ -50,8 +61,15 @@ PLUGIN:Register("the-original", {
 			name = "A Familiar Beast",
 			kind = "delivery",
 			requires = {},
-			briefing = "Bring what's listed here. I want to examine it before deciding what to make of it.",
-			completion = "Let me see the condition of it.",
+			briefing = (
+				"Bring what's listed here. I want to examine it before deciding what to make of it. "
+				.. "We'll start with something I can examine here. I'd rather have a specimen in front of "
+				.. "us than another description of an enormous beast."
+			),
+			completion = (
+				"Let me see the condition of it. There. Now we can look properly. Everyone remembers the "
+				.. "teeth; fewer people notice anything useful around them."
+			),
 			requirements = {
 				{
 					pool = "common_parts",
@@ -277,8 +295,15 @@ PLUGIN:Register("the-original", {
 			name = "Old Wounds",
 			kind = "delivery",
 			requires = {"OR11"},
-			briefing = "Bring what's listed here. I want to examine it before deciding what to make of it.",
-			completion = "Let me see the condition of it.",
+			briefing = (
+				"Bring what's listed here. I want to examine it before deciding what to make of it. "
+				.. "Don't decide the answer before the work is done. I've heard enough confident guesses "
+				.. "from people who never went to look."
+			),
+			completion = (
+				"Let me see the condition of it. I'll consider that alongside what I already know. You "
+				.. "needn't look so impatient; being old doesn't mean I read without looking."
+			),
 			requirements = {
 				{
 					pool = "common_parts",
@@ -465,8 +490,15 @@ PLUGIN:Register("the-original", {
 			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"OR23"},
-			briefing = "Recover the last expedition evidence and confront the complete account.",
-			completion = "Interesting. I'll need time with this.",
+			briefing = (
+				"Recover the last expedition evidence and confront the complete account. Bring the whole file "
+				.. "back. If we're going to pick at an old account, we can at least do it with all the pages in front "
+				.. "of us."
+			),
+			completion = (
+				"Interesting. I'll need time with this. Leave it open there. I want to read it again. You're "
+				.. "waiting for me to say whether I was right, aren't you? Give an old man time to find out."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",

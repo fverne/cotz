@@ -40,12 +40,22 @@ PLUGIN:Register("mute", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
-		completedGreeting = "** He reads the final address twice, then quietly disconnects the receiver. **",
+		completedGreeting = (
+			"** He looks up from the bench as you approach. He clears a space for your things, then "
+			.. "waits with his hands resting beside his tools. **"
+		),
 		workPrompt = "Anything on the list?",
 		offerPrompt = "Do you have an assignment?",
-		work = "** He pushes a list of electronic components towards you. **",
+		work = (
+			"** He pushes a list of electronic components towards you. ** ** He places an example component "
+			.. "beside the order, points to its contacts, then to the clean tray. **"
+		),
 		progressionPrompt = "May I see the other lists?",
-		progression = "** He lays several unfinished lists beside the receiver, leaving you room to read. **",
+		progression = (
+			"** He lays several unfinished lists beside the receiver, leaving you room to read. ** ** He "
+			.. "separates the supply list from the field orders. His hand rests briefly on the latter before he "
+			.. "turns them so you can read. **"
+		),
 	},
 	catalogue = {
 		["anomalydetector"] = {step = "MU03",
@@ -68,8 +78,15 @@ PLUGIN:Register("mute", {
 			name = "A Loose Connection",
 			kind = "delivery",
 			requires = {},
-			briefing = "** He marks the required supplies on the list and pushes it back towards you. **",
-			completion = "** He checks the components and sets them aside. **",
+			briefing = (
+				"** He marks the required supplies on the list and pushes it back towards you. ** ** He "
+				.. "clears a space beside the order and slides a loose component out of the way, leaving "
+				.. "the list unobstructed. **"
+			),
+			completion = (
+				"** He checks the components and sets them aside. ** ** He aligns the new components "
+				.. "neatly, then moves the tray closer to his tools. His shoulders relax a little. **"
+			),
 			requirements = {
 				{
 					pool = "small_electronics",
@@ -295,8 +312,16 @@ PLUGIN:Register("mute", {
 			name = "Looking Further",
 			kind = "delivery",
 			requires = {"MU11"},
-			briefing = "** He marks the required supplies on the list and pushes it back towards you. **",
-			completion = "** He checks the components and sets them aside. **",
+			briefing = (
+				"** He marks the required supplies on the list and pushes it back towards you. ** ** He "
+				.. "checks the order again, taps the relevant line, and gives you time to read it without "
+				.. "reaching for the paper. **"
+			),
+			completion = (
+				"** He checks the components and sets them aside. ** ** He studies what you brought, "
+				.. "then sets it apart from the unfinished work. A brief nod acknowledges you before he "
+				.. "resumes checking. **"
+			),
 			requirements = {
 				{
 					pool = "small_electronics",
@@ -484,8 +509,16 @@ PLUGIN:Register("mute", {
 			objective = "Recover Tagged Security Flash Drive from the assigned search area in Marsh. Return it to"
 				.. " this contact to finish the assignment.",
 			requires = {"MU23"},
-			briefing = "** He writes \"The Last Address\" on a field order, then marks the place to look. **",
-			completion = "** He turns the record over and studies the reverse. **",
+			briefing = (
+				"** He writes \"The Last Address\" on a field order, then marks the place to look. ** ** He "
+				.. "underlines the return instruction, closes the pen, and waits until you have finished reading "
+				.. "before taking his hand away. **"
+			),
+			completion = (
+				"** He turns the record over and studies the reverse. ** ** His thumb pauses on the edge of the "
+				.. "drive. He sets it carefully beside the other records, then meets your eyes and gives a slow, "
+				.. "deliberate nod. **"
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",

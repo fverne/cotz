@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Show me the goods.")
 DIALOGUE.addTopic("GREETING", {
 	response = "Hello.",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"BackgroundTopic",
 		"GOODBYE",
@@ -69,6 +70,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
 	response = "What else is there to talk about?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"BackgroundTopic",
 		"GOODBYE",
@@ -82,4 +84,24 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "Don't trip into an anomaly!",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "What do you actually enjoy about studying artifacts?",
+	response = (
+		"When something refuses to fit. Frustrating, naturally, but at least I know I'm not simply copying "
+		.. "what somebody else decided. The problem is finding enough good observations to distinguish a "
+		.. "surprise from my own mistake."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Is admitting a mistake difficult?",
+	response = (
+		"Less difficult than listening to Beanstalk identify it for me. Don't look so pleased. I'll change "
+		.. "an explanation when the evidence warrants it. I'd merely prefer the evidence to arrive before the "
+		.. "lecture."
+	),
+	options = {"BackTopic"},
 })

@@ -34,14 +34,22 @@ PLUGIN:Register("suture", {
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
 		delivery = "Set it down carefully. I want to see what condition it arrived in.",
-		completedGreeting = "It fits. It holds. Now try bringing it back that way.",
+		completedGreeting = (
+			"Come in. Put your pack down carefully; I'd like to hear how the equipment has been treating "
+			.. "you."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Repair and carrying supplies. Bring what's on the list; I'll check what is fit to use.",
+		work = (
+			"Repair and carrying supplies. Bring what's on the list; I'll check what is fit to use. Keep the "
+			.. "textiles out of the wet and away from sharp salvage. I'd prefer to judge the material before your "
+			.. "packing gives it a second career as rags."
+		),
 		progressionPrompt = "What else needs doing?",
 		progression = (
 			"There are materials to collect and fitting records to recover. Show me which job you're "
-			.. "considering."
+			.. "considering. I need sound material and patterns I can actually examine. A little care before the "
+			.. "work reaches the bench saves a surprising amount afterwards."
 		),
 	},
 	catalogue = {
@@ -95,8 +103,15 @@ PLUGIN:Register("suture", {
 			name = "A Bench and a Needle",
 			kind = "delivery",
 			requires = {},
-			briefing = "Bring the supplies listed here. Let me check the condition before putting them to use.",
-			completion = "Let me check it for damage first.",
+			briefing = (
+				"Bring the supplies listed here. Let me check the condition before putting them to use. "
+				.. "Let me inspect the material before you start folding it into the rest. A neat bundle "
+				.. "can hide damage quite effectively."
+			),
+			completion = (
+				"Let me check it for damage first. That's a useful start. Now I can spend time on the "
+				.. "work instead of wondering what has been shoved underneath it."
+			),
 			requirements = {
 				{
 					pool = "town_textiles",
@@ -323,8 +338,15 @@ PLUGIN:Register("suture", {
 			name = "More Than Canvas",
 			kind = "delivery",
 			requires = {"SU11"},
-			briefing = "Bring the supplies listed here. Let me check the condition before putting them to use.",
-			completion = "Let me check it for damage first.",
+			briefing = (
+				"Bring the supplies listed here. Let me check the condition before putting them to use. "
+				.. "Check the packing before you set out. I'd rather spend the afternoon working with what "
+				.. "arrives than undoing damage from the journey."
+			),
+			completion = (
+				"Let me check it for damage first. Thank you. I'll look at it in good light. You may sit "
+				.. "down, provided you move that folded material first."
+			),
 			requirements = {
 				{
 					pool = "town_textiles",
@@ -512,8 +534,15 @@ PLUGIN:Register("suture", {
 			objective = "Recover Official File Folder from the assigned search area in Waystation. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"SU23"},
-			briefing = "Recover the final expedition pattern and finish the project.",
-			completion = "Thank you. I'll examine it at the bench.",
+			briefing = (
+				"Recover the final expedition pattern and finish the project. Keep the pattern papers flat if you "
+				.. "can. The small measurements matter rather more than an impressive crease through the middle."
+			),
+			completion = (
+				"Thank you. I'll examine it at the bench. Thank you. I'll lay this out properly. You've been "
+				.. "patient about the little details. People tend to appreciate them only halfway through a long "
+				.. "walk, when something hasn't come apart."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",

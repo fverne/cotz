@@ -9,6 +9,7 @@ DIALOGUE.addTopic("GREETING", {
 		.. "your presence, and stares at some object on the table **"
 	),
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"PDAAvatarTopic",
 		"BackgroundTopic",
@@ -105,6 +106,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "So, anyways...",
 	response = "...",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"PDAAvatarTopic",
 		"BackgroundTopic",
@@ -120,4 +122,22 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = " ** He nods frantically.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Am I distracting you?",
+	response = (
+		"** He holds up one finger without looking away from the bench. After a few careful movements he "
+		.. "sets the tool down, turns his chair slightly, and waits. **"
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "You'd rather I waited than touched anything?",
+	response = (
+		"** He glances at your hands, then at the crowded bench. A small nod. He moves a clear tray within "
+		.. "your reach and keeps the open device on his side of the table. **"
+	),
+	options = {"BackTopic"},
 })

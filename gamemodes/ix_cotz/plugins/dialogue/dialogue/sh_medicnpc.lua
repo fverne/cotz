@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "How can I help?")
 DIALOGUE.addTopic("GREETING", {
 	response = "Welcome!",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"HealTopic",
 		"GOODBYE",
@@ -19,6 +20,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
 	response = "What would you like to know?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"HealTopic",
 		"GOODBYE",
@@ -96,4 +98,24 @@ DIALOGUE.addTopic("NotEnoughMoneyHeal", {
 	options = {
 		"BackTopic",
 	},
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Is there ever a quiet day here?",
+	response = (
+		"Sometimes. That's when I count everything twice and wonder what I've forgotten. Then somebody comes "
+		.. "in holding a hand where a bandage should be and I remember why I was counting. Sorry. You asked "
+		.. "about a quiet day, didn't you?"
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "What helps you settle down?",
+	response = (
+		"Clean water. Something to eat that hasn't gone cold while I was busy. Gasket and Lemon can be "
+		.. "impossible, but they remember those things. It helps knowing I don't have to think of absolutely "
+		.. "everything myself."
+	),
+	options = {"BackTopic"},
 })

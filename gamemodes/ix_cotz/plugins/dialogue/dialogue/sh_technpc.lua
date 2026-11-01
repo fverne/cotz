@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Absolutely!")
 DIALOGUE.addTopic("GREETING", {
 	response = "Hello, buddy!",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"RepairItems",
 		"PaintSuit",
@@ -250,6 +251,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about another topic.",
 	response = "Don't worry about it. Anything else?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"RepairItems",
 		"PaintSuit",
@@ -367,4 +369,24 @@ DIALOGUE.addTopic("PaintView", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "I'll talk to you later.",
 	response = "Hey, come back soon!",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "What's a repair you actually enjoy?",
+	response = (
+		"Hoho, something somebody swears is finished! Then you clean a contact, free one little seized part, "
+		.. "and suddenly it wants to live again. Mind you, sometimes it's completely finished. You have to let "
+		.. "me have a look before the funeral."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Does everyone let you improve their equipment?",
+	response = (
+		"Gasket says repair, not improve. Very firmly. Mute just puts his hand over whatever I'm reaching "
+		.. "for. Fair enough! It's their equipment. Still, if a thing is already on the bench, you can see why "
+		.. "I'd have ideas."
+	),
+	options = {"BackTopic"},
 })

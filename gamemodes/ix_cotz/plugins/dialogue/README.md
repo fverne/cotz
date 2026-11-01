@@ -9,6 +9,12 @@ Ordinary dialogue, flavour and service responses stay in the conversation file. 
 ix.dialogue.AddTradeTopic from integrations/sh_trade.lua; it does not copy another NPC's tree.
 Task prompts, briefings and completion text stay beside the contact's jobs/progression definitions.
 
+All 27 town contacts offer a two-part personality exchange through SpecialtyTopic and
+InterestTownFollowup in the questions menu. These are ordinary conversations available whenever
+the contact is accessible. Mute responds through gestures. Work introductions, first/middle/final
+milestone briefings and completion lines, and completed greetings have additional character dialogue
+in the contact definitions; the remaining milestone text retains its existing wording.
+
 Conversation definitions live in dialogue/sh_<dialogueID>.lua. The existing loader discovers
 these shared files and registers their topics on both realms. Vendor templates bind to them
 through dialogueid.

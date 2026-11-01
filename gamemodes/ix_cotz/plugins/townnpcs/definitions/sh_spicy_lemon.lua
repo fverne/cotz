@@ -33,12 +33,23 @@ PLUGIN:Register("spicy-lemon", {
 	},
 	supplies = {"drink_bottlewater", "food_bread", "food_can_tushonka", "lowtiercookerfuel"},
 	dialogue = {
-		completedGreeting = "Enough to go around. Been a while since I could say that.",
+		completedGreeting = (
+			"Back again? Good. Tell me what you need before everyone else discovers I'm taking a moment "
+			.. "to talk."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Cooked meals. Bring me the dish on the order. Raw meat can wait until I've got a clean pot.",
+		work = (
+			"Cooked meals. Bring me the dish on the order. Raw meat can wait until I've got a clean pot. Bring "
+			.. "the meals the order asks for. Feeding people is enough work without finding out halfway through "
+			.. "that somebody counted a snack as dinner."
+		),
 		progressionPrompt = "What else needs doing?",
-		progression = "I've got a kitchen to supply and a few missing recipes to track down. Have a look.",
+		progression = (
+			"I've got a kitchen to supply and a few missing recipes to track down. Have a look. People think a "
+			.. "kitchen begins and ends with a pot. There's fetching, keeping things usable, working out what we "
+			.. "can spare. Help with that and I'll have more time to do the part I'm good at."
+		),
 	},
 	catalogue = {
 		["drink_bottlebeer_6"] = {step = "SL05",
@@ -96,10 +107,14 @@ PLUGIN:Register("spicy-lemon", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need what's on this list before I can get on with the kitchen work. Bring it over when "
-				.. "you've got it."
+				"I need what's on this list before I can get on with the kitchen work. Bring it over "
+				.. "when you've got it. I can make a meal of what's available, but available is the "
+				.. "important word. Start by bringing what I've asked for."
 			),
-			completion = "Good, I can use that.",
+			completion = (
+				"Good, I can use that. Lovely. Now I can spend less time chasing supplies and more time "
+				.. "making sure somebody enjoys them."
+			),
 			requirements = {
 				{
 					pool = "common_meals",
@@ -352,8 +367,16 @@ PLUGIN:Register("spicy-lemon", {
 			objective = "Recover Clinical Records Folder I from the assigned search area in Marsh. Deliver it to"
 				.. " 'Jitters' in Marsh, then return here to finish the assignment.",
 			requires = {"SL12"},
-			briefing = "Recover clinic ration observations from a field shelter.",
-			completion = "They got it? Good. That should settle the paperwork. Now, have you eaten?",
+			briefing = (
+				"Recover clinic ration observations from a field shelter. I'd like to get ahead of the "
+				.. "next shortage for once. Check the order rather than deciding for yourself what the "
+				.. "kitchen ought to need."
+			),
+			completion = (
+				"They got it? Good. That should settle the paperwork. Now, have you eaten? Put it where "
+				.. "I can reach it. You've caught me at the useful part of the day, before everyone starts "
+				.. "asking when it'll be ready."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
@@ -576,8 +599,15 @@ PLUGIN:Register("spicy-lemon", {
 			objective = "Recover Old Photograph Album from the assigned search area in Marsh. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"SL25"},
-			briefing = "Recover the cook's keepsake and return for the meal's conclusion.",
-			completion = "Let me wash my hands before I open that.",
+			briefing = (
+				"Recover the cook's keepsake and return for the meal's conclusion. It's an album, so keep it away "
+				.. "from anything leaking in your pack. I can wipe a table clean. Photographs are less forgiving."
+			),
+			completion = (
+				"Let me wash my hands before I open that. Look at that. Everyone sitting still long enough for a "
+				.. "picture. Don't get used to me being quiet; I'm just having a look. You did well bringing this "
+				.. "back."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",

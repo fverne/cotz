@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Absolutely, here's what I
 DIALOGUE.addTopic("GREETING", {
 	response = "Welcome to my humble shop.",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -134,6 +135,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
 	response = "Very nice...",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -148,4 +150,23 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "See you soon...",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Do you like any of your customers?",
+	response = (
+		"Certainly. The ones who know what they want, pay for it, and leave me enough daylight to replace "
+		.. "it. You look offended. Were you hoping for a speech about friendship? I charge extra for those."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Then why bother keeping people supplied?",
+	response = (
+		"Because a customer who makes it home can come back. Try explaining that to someone who thinks "
+		.. "business means emptying every pocket on the first visit. I want you dissatisfied with my prices for "
+		.. "years."
+	),
+	options = {"BackTopic"},
 })

@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Yes!")
 DIALOGUE.addTopic("GREETING", {
 	response = "Hello, I'm the original. The first stalker in the zone. What do you need?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"ChangeSuitVariant",
 		"TutorialTopic",
@@ -21,6 +22,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
 	response = "What would you like to know?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"ChangeSuitVariant",
 		"TutorialTopic",
@@ -477,4 +479,24 @@ DIALOGUE.addTopic("InterestMoreTopic", {
 			self.response = table.Random(tbl)
 		end
 	end,
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Does it bother you when people question your stories?",
+	response = (
+		"Depends who's asking. Someone who's been out there and noticed something? I'll listen. Someone who "
+		.. "read three pages and decided the rest of us are idiots? He can buy his own drink while he explains "
+		.. "himself."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Would you admit if you'd remembered something wrong?",
+	response = (
+		"I'd want a proper look at the evidence first. Carbon would like every memory to arrive dated and "
+		.. "signed. Mine didn't. Doesn't mean it never happened. Doesn't mean I remember every damned detail, "
+		.. "either."
+	),
+	options = {"BackTopic"},
 })

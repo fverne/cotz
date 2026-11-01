@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Sure, I have some arena s
 DIALOGUE.addTopic("GREETING", {
 	response = "Greetings, I am the arena master.",
 	options = {
+		"SpecialtyTopic",
 		"HealTopic",
 		"JoinArena",
 		"TutorialTopic",
@@ -20,6 +21,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
 	response = "What would you like to know?",
 	options = {
+		"SpecialtyTopic",
 		"HealTopic",
 		"JoinArena",
 		"TutorialTopic",
@@ -516,4 +518,23 @@ DIALOGUE.addTopic("InterestMoreTopic", {
 			self.response = table.Random(tbl)
 		end
 	end,
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Do you enjoy watching people get hurt?",
+	response = (
+		"I enjoy a good match. There's a difference, even if Jitters doesn't think I remember it. Someone "
+		.. "who knows when to stop is a better prospect than a fellow who needs carrying out to prove a point."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "What makes someone worth watching?",
+	response = (
+		"They adapt. First plan goes wrong and they try another one, instead of getting furious with the "
+		.. "world. Doesn't hurt if they give the other contender a decent match, either. A foregone conclusion "
+		.. "is a dull afternoon."
+	),
+	options = {"BackTopic"},
 })

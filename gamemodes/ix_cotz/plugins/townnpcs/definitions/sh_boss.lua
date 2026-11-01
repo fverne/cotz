@@ -11,12 +11,21 @@ PLUGIN:Register("boss", {
 	},
 	supplies = {"545x39", "556x45", "medic_bandage_1", "drug_painkillers"},
 	dialogue = {
-		completedGreeting = "Operation concluded. File the report and get some rest.",
+		completedGreeting = (
+			"Good to see you back. You've earned a proper hearing. What do you need?"
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Bandits threatening the operation. The targets on the order. No freelancing.",
+		work = (
+			"Bandits threatening the operation. The targets on the order. No freelancing. Stay with the "
+			.. "specified targets. I need a threat dealt with, not a fresh problem caused by someone improvising."
+		),
 		progressionPrompt = "What else needs doing?",
-		progression = "Supplies and field reports. Tell me which assignment you can finish.",
+		progression = (
+			"Supplies and field reports. Tell me which assignment you can finish. Supplies keep the operation "
+			.. "moving. Field records let me check what happened outside this room. Neither is optional just "
+			.. "because the other sounds more interesting."
+		),
 	},
 	catalogue = {
 		["helm_operator_rus_2"] = {step = "BO07",
@@ -53,8 +62,15 @@ PLUGIN:Register("boss", {
 			name = "Operational Basics",
 			kind = "delivery",
 			requires = {},
-			briefing = "Deliver the supplies on this list. Report back here when you have them.",
-			completion = "Received.",
+			briefing = (
+				"Deliver the supplies on this list. Report back here when you have them. Begin with the "
+				.. "list. I would rather establish that you can follow a clear instruction than hear what "
+				.. "difficult work you think you deserve."
+			),
+			completion = (
+				"Received. Good. That's a useful start. Keep the same attention when the work becomes "
+				.. "less straightforward."
+			),
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -255,8 +271,15 @@ PLUGIN:Register("boss", {
 			objective = "Recover Handwritten Audio Cassette from the assigned search area in Waystation. Return it to"
 				.. " this contact to finish the assignment.",
 			requires = {"BO10"},
-			briefing = "Recover a field recorder from a hostile NPC position.",
-			completion = "I'll check this against the report.",
+			briefing = (
+				"Recover a field recorder from a hostile NPC position. Bring the recording back before "
+				.. "drawing conclusions from it. I need something I can review alongside the written "
+				.. "account."
+			),
+			completion = (
+				"I'll check this against the report. Stay a moment while I check what you've brought. If "
+				.. "there is something relevant about the recovery, tell me plainly."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",
@@ -443,8 +466,16 @@ PLUGIN:Register("boss", {
 			objective = "Recover Personnel File Folder from the assigned search area in Waystation. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"BO21"},
-			briefing = "Recover the patrol's final record and return the complete report.",
-			completion = "Good. Keep the records together.",
+			briefing = (
+				"Recover the patrol's final record and return the complete report. Bring the personnel file back "
+				.. "complete. We will establish what it supports here. Do not turn a fragment into a patrol report on "
+				.. "the way home."
+			),
+			completion = (
+				"Good. Keep the records together. I'll review it myself. Your part is finished. You've followed "
+				.. "through on difficult work; I recognise that. Get some rest before you start looking for another "
+				.. "assignment."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",

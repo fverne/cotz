@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Yes. Mind the
 DIALOGUE.addTopic("GREETING", {
 	response = "Hold on. That's a voice I haven't heard in a while.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -48,6 +49,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
 	response = "Hold on. That's a voice I haven't heard in a while.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -62,4 +64,23 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "Keep in touch.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "How do you keep listening for so long?",
+	response = (
+		"Bad tea, mostly. And people have habits. One clears his throat before every call, another "
+		.. "apologises for the noise even when there isn't any. After a while you're listening for someone, not "
+		.. "just a signal."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "What happens when you stop hearing them?",
+	response = (
+		"I check before I decide what it means. Equipment fails. People change their plans. Wake understands "
+		.. "why I won't call silence an answer. Doesn't make the waiting much easier for either of us."
+	),
+	options = {"BackTopic"},
 })

@@ -15,15 +15,23 @@ PLUGIN:Register("intern", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
-		completedGreeting = "Those are my figures. You can put my name on the report.",
+		completedGreeting = (
+			"Hello! I've been keeping my own notes in order. It's rather nice to know what I want to say "
+			.. "before anyone asks."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
 		work = (
-			"Sensor surveys. Set it up at the marked site, wait for it to finish, and bring the recorder "
-			.. "back."
+			"Sensor surveys. Set it up at the marked site, wait for it to finish, and bring the recorder back. "
+			.. "Please give the recorder the time it needs. I can check a full set of readings; I can't recreate "
+			.. "the missing part by staring at the page harder."
 		),
 		progressionPrompt = "What else needs doing?",
-		progression = "I've got supplies to collect and readings to check. I can show you what I still need.",
+		progression = (
+			"I've got supplies to collect and readings to check. I can show you what I still need. I've got the "
+			.. "supply lists and field records here. I want to understand the whole survey, including the awkward "
+			.. "bits, before I ask anyone to take my conclusions seriously."
+		),
 	},
 	catalogue = {
 	},
@@ -36,9 +44,13 @@ PLUGIN:Register("intern", {
 			requires = {},
 			briefing = (
 				"I've written down what I'm short of. Could you bring it here? I'll check it against the "
-				.. "list."
+				.. "list. I've checked the list. Twice, actually. I'd like to have the equipment ready "
+				.. "without having to ask everyone else for a spare at the last minute."
 			),
-			completion = "Oh, good. That's one thing ready.",
+			completion = (
+				"Oh, good. That's one thing ready. Thank you. I'll put these aside before somebody "
+				.. "assumes they're part of the general supply. I'm allowed to organise my own work too."
+			),
 			requirements = {
 				{
 					pool = "small_electronics",
@@ -281,9 +293,14 @@ PLUGIN:Register("intern", {
 			requires = {"IN11"},
 			briefing = (
 				"I've written down what I'm short of. Could you bring it here? I'll check it against the "
-				.. "list."
+				.. "list. Please follow the instructions on the order. I want to be able to explain the "
+				.. "work afterwards without filling the gaps with guesses."
 			),
-			completion = "Oh, good. That's one thing ready.",
+			completion = (
+				"Oh, good. That's one thing ready. Right. I'll check it against my notes before I show "
+				.. "anyone. It takes me a little longer when I'm determined not to borrow somebody else's "
+				.. "answer."
+			),
 			requirements = {
 				{
 					pool = "canned_food",
@@ -486,8 +503,16 @@ PLUGIN:Register("intern", {
 			objective = "Recover Laboratory Log Folder from the assigned search area in Waystation. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"IN23"},
-			briefing = "Recover the last field record and present a complete independent survey.",
-			completion = "Good. Give me a moment to compare the figures.",
+			briefing = (
+				"Recover the last field record and present a complete independent survey. Bring the full log back. "
+				.. "If there's something missing from my account, I want to find it before I call the survey "
+				.. "complete."
+			),
+			completion = (
+				"Good. Give me a moment to compare the figures. Let me check that once more. Yes, I'll write up "
+				.. "what the figures support. My own wording this time. Thank you for sticking with it; I know it "
+				.. "wasn't all exciting fieldwork."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",

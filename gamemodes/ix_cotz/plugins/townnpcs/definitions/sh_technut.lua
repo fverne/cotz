@@ -38,16 +38,21 @@ PLUGIN:Register("technut", {
 	dialogue = {
 		delivery = "Over here, buddy. Let me see what we have got.",
 		completedGreeting = (
-			"You've brought back enough for me to get on with the work, buddy. What else have you "
-			.. "found?"
+			"Buddy! Come and have a look, if you've got a minute. No, you don't have to fetch anything "
+			.. "first."
 		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Workshop tools and mechanical parts, buddy. Mute can have the loose circuit boards.",
+		work = (
+			"Workshop tools and mechanical parts, buddy. Mute can have the loose circuit boards. Don't strip a "
+			.. "useful tool to make a sack of mysterious pieces for me. Let me see what you've found before we "
+			.. "decide how brave to be with it."
+		),
 		progressionPrompt = "What else needs doing?",
 		progression = (
-			"I've got several things on the bench. Some need parts; some need somebody willing to go and "
-			.. "find the paperwork."
+			"I've got several things on the bench. Some need parts; some need somebody willing to go and find "
+			.. "the paperwork. The supplies keep the bench working. The records tell me what the people before us "
+			.. "intended. I like experimenting, buddy, but I'd rather know which part was supposed to move first."
 		),
 	},
 	catalogue = {
@@ -116,10 +121,14 @@ PLUGIN:Register("technut", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"These are the supplies I'm missing, buddy. Bring them to the bench and I can get on with "
-				.. "it."
+				"These are the supplies I'm missing, buddy. Bring them to the bench and I can get on "
+				.. "with it. I can improvise plenty, buddy, but a decent tool makes the clever part much "
+				.. "less likely to take my knuckles off."
 			),
-			completion = "Yes! That's the bit I needed.",
+			completion = (
+				"Yes! That's the bit I needed. Hoho, now we're getting somewhere! Give me a little space "
+				.. "here; I've finally got room to start thinking."
+			),
 			requirements = {
 				{
 					pool = "basic_tools",
@@ -400,10 +409,15 @@ PLUGIN:Register("technut", {
 			name = "More Than a Patch",
 			kind = "tracker",
 			requires = {"TN13"},
-			briefing = "Workshop tools and mechanical parts, buddy. Mute can have the loose circuit boards.",
+			briefing = (
+				"Workshop tools and mechanical parts, buddy. Mute can have the loose circuit boards. I'd "
+				.. "rather see what is actually there than guess from somebody's description. You bring it "
+				.. "back and I'll do the peering and muttering."
+			),
 			completion = (
-				"You've kept the workshop supplied. Makes a pleasant change from taking something else apart "
-				.. "for spares."
+				"You've kept the workshop supplied. Makes a pleasant change from taking something else "
+				.. "apart for spares. Let me clear the bench. No, that pile is organised, even if the "
+				.. "organisation hasn't become obvious to anyone else yet."
 			),
 			target = 14,
 			benefits = {},
@@ -648,8 +662,16 @@ PLUGIN:Register("technut", {
 			objective = "Recover Official File Folder from the assigned search area in Marsh. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"TN27"},
-			briefing = "Recover the machine's commissioning record and finish the restoration.",
-			completion = "You found it! Let's see what we've got.",
+			briefing = (
+				"Recover the machine's commissioning record and finish the restoration. I'd like the complete "
+				.. "commissioning record. There may be something useful in a boring little note that somebody else "
+				.. "would throw away."
+			),
+			completion = (
+				"You found it! Let's see what we've got. A signature. Somebody looked at this work and put their "
+				.. "name beside it. I like that. We spend so much time calling things scrap that we forget someone "
+				.. "was pleased with them once."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",

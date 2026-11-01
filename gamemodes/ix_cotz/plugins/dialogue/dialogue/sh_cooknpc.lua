@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Always - You looking for 
 DIALOGUE.addTopic("GREETING", {
 	response = "What's up?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -162,6 +163,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
 	response = "Very nice...",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -176,4 +178,24 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "See you soon...",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Do you ever get tired of cooking for everyone?",
+	response = (
+		"Of cooking? No. Of a man telling me how his mother did it while he scrapes the pot clean? Every "
+		.. "bloody day. They come back, though. Say what you like about my manners, nobody has to shout twice "
+		.. "when dinner's ready."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "You keep an eye on who eats?",
+	response = (
+		"I notice who doesn't. Old Timer can remember a track for a week and forget a meal standing beside "
+		.. "it. If there's something left in the pot, I make a nuisance of myself. Don't tell him I said that; "
+		.. "he'll get stubborn about it."
+	),
+	options = {"BackTopic"},
 })

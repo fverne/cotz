@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Keep it down!")
 DIALOGUE.addTopic("GREETING", {
 	response = "Hello.",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"ChangeSuitVariant",
 		"BackgroundTopic",
@@ -242,6 +243,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
 	response = "Hmm? Spill the beans.",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"ChangeSuitVariant",
 		"BackgroundTopic",
@@ -256,4 +258,23 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "See you soon.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Why are you so particular about the samples?",
+	response = (
+		"Because one careless hand can give me a week's worth of beautifully consistent rubbish. Then "
+		.. "somebody acts on it. Keep your hands off the tray and we can avoid the lecture that follows."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Is that why you worry about the field teams?",
+	response = (
+		"I worry because they have to work where we cannot control the conditions. Vesper knows that; we "
+		.. "disagree about the margin. I'd rather she found my questions irritating than found a question I "
+		.. "should have asked too late."
+	),
+	options = {"BackTopic"},
 })

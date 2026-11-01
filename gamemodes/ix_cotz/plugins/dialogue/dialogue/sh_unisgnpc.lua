@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "I have some spare equipme
 DIALOGUE.addTopic("GREETING", {
 	response = "Did you just crawl out of the underground?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -109,6 +110,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about another topic.",
 	response = "Anything else?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -123,4 +125,22 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "I'll talk to you later.",
 	response = "Bye.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "What makes someone a supplier you can rely on?",
+	response = (
+		"Correct goods. Correct quantities. Problems reported while there is still time to address them. You "
+		.. "do not need an elaborate introduction. You need to deliver what you agreed to deliver."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "What if the order can't be filled?",
+	response = (
+		"Say so. A shortage I know about can be planned around. A shortage concealed by optimism becomes "
+		.. "someone else's emergency. Brass understands the distinction. I recommend learning it."
+	),
+	options = {"BackTopic"},
 })

@@ -15,17 +15,22 @@ PLUGIN:Register("beanstalk", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
-		completedGreeting = "This agrees with the control. Finally, something we can both stand behind.",
+		completedGreeting = (
+			"Hello again. Keep clear of the tray, as usual. You know why I ask, which is a considerable "
+			.. "improvement on most conversations here."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
 		work = (
-			"Keep the sampler intact until it finishes, then bring me the results. Stay close enough to "
-			.. "protect it."
+			"Keep the sampler intact until it finishes, then bring me the results. Stay close enough to protect "
+			.. "it. Protect the sampler for the whole run. Leaving early because it looks quiet is a particularly "
+			.. "frustrating way to lose a result."
 		),
 		progressionPrompt = "What else needs doing?",
 		progression = (
-			"There are supplies to collect and controls to check. We need the comparison before we can "
-			.. "trust the result."
+			"There are supplies to collect and controls to check. We need the comparison before we can trust "
+			.. "the result. Supplies first where they're needed, comparisons where we have something to compare. "
+			.. "I'm not asking you to agree with me. I'm asking for enough evidence to check myself."
 		),
 	},
 	catalogue = {
@@ -61,8 +66,15 @@ PLUGIN:Register("beanstalk", {
 			name = "A Station in the Dust",
 			kind = "delivery",
 			requires = {},
-			briefing = "These are the supplies I need for the work. Keep them separate from anything contaminated.",
-			completion = "Put it on the clear tray.",
+			briefing = (
+				"These are the supplies I need for the work. Keep them separate from anything "
+				.. "contaminated. Put the supplies where I can check them before anything joins the working "
+				.. "equipment. Please don't try to help by unpacking onto a sample tray."
+			),
+			completion = (
+				"Put it on the clear tray. Thank you. I can be particular about this without enjoying "
+				.. "having to repeat myself."
+			),
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -297,8 +309,15 @@ PLUGIN:Register("beanstalk", {
 			name = "A Field Lab in Reserve",
 			kind = "delivery",
 			requires = {"BN11"},
-			briefing = "These are the supplies I need for the work. Keep them separate from anything contaminated.",
-			completion = "Put it on the clear tray.",
+			briefing = (
+				"These are the supplies I need for the work. Keep them separate from anything "
+				.. "contaminated. This is preparation, not a substitute for checking the equipment before "
+				.. "it goes out. I'd like both habits established."
+			),
+			completion = (
+				"Put it on the clear tray. Good. One less thing to worry about before the field work. I "
+				.. "will undoubtedly find another, but this helps."
+			),
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -494,8 +513,16 @@ PLUGIN:Register("beanstalk", {
 			objective = "Recover Laboratory Log Folder from the assigned search area in Garbage. Deliver it to"
 				.. " 'Carbon' in Waystation, then return here to finish the assignment.",
 			requires = {"BN23"},
-			briefing = "Recover missing control evidence and return the completed comparison.",
-			completion = "They have the record now. We can stop comparing results from memory.",
+			briefing = (
+				"Recover missing control evidence and return the completed comparison. The folder goes to Carbon "
+				.. "in Waystation. Return here afterwards; I need to know the record reached the person who will keep "
+				.. "it."
+			),
+			completion = (
+				"They have the record now. We can stop comparing results from memory. Good. Now the record can be "
+				.. "checked without either of us standing over someone's shoulder. You have been patient with the "
+				.. "precautions. I realise that isn't always easy."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",

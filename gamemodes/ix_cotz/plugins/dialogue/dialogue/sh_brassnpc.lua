@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "We'll count i
 DIALOGUE.addTopic("GREETING", {
 	response = "Put the boxes down. We'll count them before we discuss payment.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -48,6 +49,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
 	response = "Put the boxes down. We'll count them before we discuss payment.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -62,4 +64,22 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "Count what you have before you leave.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Do you really count every box yourself?",
+	response = (
+		"I count what I accept responsibility for. You can tell me a box is full. I can look. Takes less "
+		.. "time than explaining a shortage to someone who needed what wasn't there."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Doesn't that make people think you distrust them?",
+	response = (
+		"Some of them. Quartermaster understands. If we both count it, neither has to remember how "
+		.. "convincing the other fellow sounded. Honest suppliers tend to get used to it quickly."
+	),
+	options = {"BackTopic"},
 })

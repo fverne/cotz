@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Yes")
 DIALOGUE.addTopic("GREETING", {
 	response = "What is it?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"StartBarter",
 		"StorageTopic",
@@ -251,6 +252,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
 	response = "All right.",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
 		"StartBarter",
 		"StorageTopic",
@@ -267,4 +269,23 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "Come back soon, STALKER...",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "What makes a reliable courier?",
+	response = (
+		"Someone who reads the destination before picking up the parcel. Someone who doesn't turn a delivery "
+		.. "into a story with himself in the middle. You've already asked more than most of the good ones."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Would you prefer I didn't report problems?",
+	response = (
+		"Report anything that affects the job. Wrong place, missing parcel, bad route. Keep the "
+		.. "embellishments. I need to know what happened well enough to act on it, not well enough to entertain "
+		.. "a table."
+	),
+	options = {"BackTopic"},
 })

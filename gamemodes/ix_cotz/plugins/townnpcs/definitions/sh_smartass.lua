@@ -10,15 +10,23 @@ PLUGIN:Register("smartass", {
 	},
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
-		completedGreeting = "There. Silence. Almost makes you miss the interference.",
+		completedGreeting = (
+			"You again. At least I can reasonably expect something useful to come of the interruption. "
+			.. "What is it?"
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
 		work = (
-			"Take the bearings, find the transmitter, bring it back. Pointing in a promising direction "
-			.. "isn't a bearing."
+			"Take the bearings, find the transmitter, bring it back. Pointing in a promising direction isn't a "
+			.. "bearing. Let the extraction finish. Bringing back half the data with a very confident explanation "
+			.. "still leaves me with half the data."
 		),
 		progressionPrompt = "What else needs doing?",
-		progression = "Signals, missing records, a few things that don't agree. Plenty to keep us amused.",
+		progression = (
+			"Signals, missing records, a few things that don't agree. Plenty to keep us amused. There are "
+			.. "records to recover and supplies to stop the equipment becoming an expensive ornament. Pick "
+			.. "something useful. I promise to be appropriately difficult about it."
+		),
 	},
 	catalogue = {
 		["acog"] = {step = "SM03",
@@ -47,8 +55,15 @@ PLUGIN:Register("smartass", {
 			name = "Something to Listen With",
 			kind = "delivery",
 			requires = {},
-			briefing = "Bring the supplies on the list. The list is the useful bit; the excuse can stay with you.",
-			completion = "Yes, that will do. Try not to look so surprised.",
+			briefing = (
+				"Bring the supplies on the list. The list is the useful bit; the excuse can stay with "
+				.. "you. Start with the small electronics. If that goes well we can move on to the advanced "
+				.. "skill of following the rest of an instruction."
+			),
+			completion = (
+				"Yes, that will do. Try not to look so surprised. Useful components, delivered to the "
+				.. "correct person. A stronger opening than some people manage with a whole speech."
+			),
 			requirements = {
 				{
 					pool = "small_electronics",
@@ -284,8 +299,15 @@ PLUGIN:Register("smartass", {
 			name = "Quiet Equipment",
 			kind = "delivery",
 			requires = {"SM11"},
-			briefing = "Bring the supplies on the list. The list is the useful bit; the excuse can stay with you.",
-			completion = "Yes, that will do. Try not to look so surprised.",
+			briefing = (
+				"Bring the supplies on the list. The list is the useful bit; the excuse can stay with "
+				.. "you. Read the instruction through before doing the clever part. Particularly if the "
+				.. "clever part involves deciding you don't need the instruction."
+			),
+			completion = (
+				"Yes, that will do. Try not to look so surprised. That gives me something to check. Stay "
+				.. "there a moment; I may even manage it without making you explain the obvious twice."
+			),
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -481,8 +503,15 @@ PLUGIN:Register("smartass", {
 			objective = "Recover Tagged Security Flash Drive from the assigned search area in Garbage. Return it to"
 				.. " this contact to finish the assignment.",
 			requires = {"SM23"},
-			briefing = "Recover the operation's last transmitter and return its records.",
-			completion = "Good. Something I can actually check.",
+			briefing = (
+				"Recover the operation's last transmitter and return its records. Bring the drive here before "
+				.. "deciding what the records mean. Yes, even if you have a magnificent theory already prepared."
+			),
+			completion = (
+				"Good. Something I can actually check. All right. I'll check it properly. You've done enough work "
+				.. "that I won't waste your time pretending it was nothing. Don't spread that around; people will "
+				.. "expect me to be agreeable."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",

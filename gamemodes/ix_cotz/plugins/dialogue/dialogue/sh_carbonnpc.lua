@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Keep it clear
 DIALOGUE.addTopic("GREETING", {
 	response = "A date and a signature tell me more than another heroic story.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -45,6 +46,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
 	response = "What have you found?",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -59,4 +61,24 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "Keep the originals.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Why care so much about ordinary records?",
+	response = (
+		"Because people remember the dramatic hour and forget the six months around it. A service entry can "
+		.. "tell me someone was still working, still ordering parts, still expecting another week. I find that "
+		.. "worth preserving."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Do you think the people writing them expected anyone to read them?",
+	response = (
+		"Some did. Most probably wanted the next shift to stop asking the same question. Either way, I'd "
+		.. "rather understand what they meant than borrow a sentence to support a story I've already decided to "
+		.. "tell."
+	),
+	options = {"BackTopic"},
 })

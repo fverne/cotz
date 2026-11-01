@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Let me see th
 DIALOGUE.addTopic("GREETING", {
 	response = "Turn around. That strap is doing half the work of the whole pack.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -48,6 +49,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
 	response = "Turn around. That strap is doing half the work of the whole pack.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -62,4 +64,24 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "Look after the seams.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Can you really judge a trip by someone's straps?",
+	response = (
+		"I can tell what rubbed, what was overloaded, and what someone tied in a hurry. The wearer usually "
+		.. "tells me the rest while insisting none of it was their fault. Hold still long enough and equipment "
+		.. "is quite informative."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Does it bother you when your work comes back damaged?",
+	response = (
+		"It bothers me when nobody mentions where it failed. A torn seam I can inspect. 'It just went' isn't "
+		.. "much help. Arena Master's customers are particularly inventive about how nothing happened to their "
+		.. "gear."
+	),
+	options = {"BackTopic"},
 })

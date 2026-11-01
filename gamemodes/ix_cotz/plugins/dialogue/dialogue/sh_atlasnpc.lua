@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Put it down h
 DIALOGUE.addTopic("GREETING", {
 	response = "A route is only useful if it still gets you home.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -48,6 +49,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
 	response = "A route is only useful if it still gets you home.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -62,4 +64,23 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "Keep your bearings.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "What do you notice first on a map?",
+	response = (
+		"Where the notes stop. A clean line can look wonderfully certain until you ask who checked the last "
+		.. "stretch. I would rather leave a space than let someone mistake my guess for a way home."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Doesn't leaving a space make the map less useful?",
+	response = (
+		"Only if I fail to explain it. An honest uncertainty lets someone prepare. False confidence makes "
+		.. "the decision for them. Ballast will tell you that at rather greater length if you show him a line "
+		.. "through deep water."
+	),
+	options = {"BackTopic"},
 })

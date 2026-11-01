@@ -35,14 +35,22 @@ PLUGIN:Register("jitters", {
 	supplies = {"medic_bandage_1", "medic_medkit_1", "medic_antirad_1", "drug_painkillers"},
 	dialogue = {
 		delivery = "Here, here. Let me check the label before you go.",
-		completedGreeting = "A full cabinet. I might actually sleep tonight.",
+		completedGreeting = (
+			"Oh, hello. No fresh injuries, I hope? It's nice when somebody visits and I can finish a "
+			.. "sentence before reaching for something."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Medical supplies. The right ones, please. I can't dress a wound with whatever was cheapest.",
+		work = (
+			"Medical supplies. The right ones, please. I can't dress a wound with whatever was cheapest. Keep "
+			.. "the medical supplies away from whatever else you've been collecting. I can work with a shortage. "
+			.. "Finding dirt in something I thought was clean is worse."
+		),
 		progressionPrompt = "What else needs doing?",
 		progression = (
 			"I'm short of supplies. And there are field records I need before I can make sense of these "
-			.. "exposure cases."
+			.. "exposure cases. There are shortages I can point at and records I still need to understand. We can "
+			.. "deal with one thing at a time. I have to remind myself of that too."
 		),
 	},
 	catalogue = {
@@ -74,8 +82,15 @@ PLUGIN:Register("jitters", {
 			name = "Clean Hands",
 			kind = "delivery",
 			requires = {},
-			briefing = "I'm short of these. Check the list, and keep everything clean on the way here. Please.",
-			completion = "Clean enough. Put it here.",
+			briefing = (
+				"I'm short of these. Check the list, and keep everything clean on the way here. Please. "
+				.. "Check the packaging before you bring it. I don't want to discover a problem after I've "
+				.. "put it with the clean supplies."
+			),
+			completion = (
+				"Clean enough. Put it here. Thank you. It's a small thing until I reach for it and there "
+				.. "isn't any. Then it becomes the only thing I can think about."
+			),
 			requirements = {
 				{
 					pool = "town_medical",
@@ -321,8 +336,15 @@ PLUGIN:Register("jitters", {
 			objective = "Recover Laboratory Log Folder from the assigned search area in Marsh. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"JT12"},
-			briefing = "Recover a research note needed to compare exposure cases.",
-			completion = "Careful with that. I need to read it.",
+			briefing = (
+				"Recover a research note needed to compare exposure cases. I'm trying to keep a little "
+				.. "ahead of what we use. Just enough that the next interruption doesn't empty everything "
+				.. "at once."
+			),
+			completion = (
+				"Careful with that. I need to read it. Right. Let me finish checking before I put it "
+				.. "away. Sorry, I know you've been standing there; I don't want to mix anything up."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
@@ -536,8 +558,15 @@ PLUGIN:Register("jitters", {
 			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"JT25"},
-			briefing = "Recover identifying evidence at the last exposure site and return to the clinic.",
-			completion = "Careful with that. I need to read it.",
+			briefing = (
+				"Recover identifying evidence at the last exposure site and return to the clinic. Keep all the "
+				.. "identifying papers together, please. I don't want to fill a gap by guessing because a page went "
+				.. "missing on the way back."
+			),
+			completion = (
+				"Careful with that. I need to read it. All right. I've got it. Give me a moment to read before you "
+				.. "ask what it means. You've done what I asked, and you came back in one piece. That's a relief."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",

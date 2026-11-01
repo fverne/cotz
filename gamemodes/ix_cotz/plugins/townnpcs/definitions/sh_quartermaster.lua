@@ -35,12 +35,22 @@ PLUGIN:Register("quartermaster", {
 	supplies = {"545x39", "556x45", "9x19", "medic_bandage_1"},
 	dialogue = {
 		delivery = "Place the consignment here for inspection.",
-		completedGreeting = "The agreement stands. Keep your end of it and we'll keep ours.",
+		completedGreeting = (
+			"You've established that you can follow through. State what you need, and we can deal with "
+			.. "it directly."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Ammunition deliveries. Correct calibre, correct quantity. Check the order.",
+		work = (
+			"Ammunition deliveries. Correct calibre, correct quantity. Check the order. Read the calibre and "
+			.. "quantity carefully. Similar packaging does not make two consignments interchangeable."
+		),
 		progressionPrompt = "What else needs doing?",
-		progression = "Requisitions and missing supply records. Read what is needed before committing yourself.",
+		progression = (
+			"Requisitions and missing supply records. Read what is needed before committing yourself. "
+			.. "Procurement needs supplies and records that support the account. Choose work you can complete. I "
+			.. "have no use for commitments made merely to end a conversation."
+		),
 	},
 	catalogue = {
 		["127x55"] = {unlockContact = "brass", step = "BR03",
@@ -295,8 +305,15 @@ PLUGIN:Register("quartermaster", {
 			name = "A Supplier's Credentials",
 			kind = "delivery",
 			requires = {},
-			briefing = "Bring the listed supplies. I will check them against the requirement.",
-			completion = "The quantity is correct.",
+			briefing = (
+				"Bring the listed supplies. I will check them against the requirement. This establishes "
+				.. "that you can follow a requirement. Read it in full before deciding that something "
+				.. "similar will suffice."
+			),
+			completion = (
+				"The quantity is correct. Accepted. A straightforward delivery is a better introduction "
+				.. "than a list of promises."
+			),
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -528,8 +545,15 @@ PLUGIN:Register("quartermaster", {
 			name = "More Than One Role",
 			kind = "delivery",
 			requires = {"QM11"},
-			briefing = "Bring the listed supplies. I will check them against the requirement.",
-			completion = "The quantity is correct.",
+			briefing = (
+				"Bring the listed supplies. I will check them against the requirement. Do not substitute "
+				.. "your own judgement for the listed requirement. Report a difficulty while there is still "
+				.. "time to address it."
+			),
+			completion = (
+				"The quantity is correct. I will check the remainder before filing this. You may wait "
+				.. "without rearranging anything on the desk."
+			),
 			requirements = {
 				{
 					pool = "town_ammunition",
@@ -717,8 +741,16 @@ PLUGIN:Register("quartermaster", {
 			objective = "Recover Military Records Folder I from the assigned search area in Waystation. Return it to"
 				.. " this contact to finish the assignment.",
 			requires = {"QM23"},
-			briefing = "Retrieve the agreement's last field record and return.",
-			completion = "Received. Wait while I check the markings.",
+			briefing = (
+				"Retrieve the agreement's last field record and return. Return the complete military record. Leave "
+				.. "the interpretation until we can compare it here, rather than selecting the page that appears most "
+				.. "favourable."
+			),
+			completion = (
+				"Received. Wait while I check the markings. The papers are here. I will check them in full. You "
+				.. "have handled a considerable amount of work without requiring repeated reminders. That is a useful "
+				.. "standard. Maintain it."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",

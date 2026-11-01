@@ -37,16 +37,21 @@ PLUGIN:Register("egghead", {
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
 		completedGreeting = (
-			"A reference collection with context. "
-			.. "That's considerably more useful than a shelf of curiosities."
+			"Hello again. Something to compare, or simply a question? We can probably find time for "
+			.. "either."
 		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
+		work = (
+			"Artifacts. Bring the specimens requested on the order; I need to make a comparison. Keep to the "
+			.. "requested specimens. Something unusual is interesting, but it won't fill a particular gap just by "
+			.. "being unusual."
+		),
 		progressionPrompt = "What else needs doing?",
 		progression = (
-			"There are specimens to collect and old field records to check. Which would you like to help "
-			.. "with?"
+			"There are specimens to collect and old field records to check. Which would you like to help with? "
+			.. "The collection needs context, which means old records as well as specimens. I would rather check a "
+			.. "dull detail now than discover later that we've been comparing quite different things."
 		),
 	},
 	catalogue = {
@@ -88,8 +93,16 @@ PLUGIN:Register("egghead", {
 			name = "A First Reference",
 			kind = "delivery",
 			requires = {},
-			briefing = "Bring the material listed here. I'd like to check it before putting it with the others.",
-			completion = "Thank you. I'll label these before they get mixed in.",
+			briefing = (
+				"Bring the material listed here. I'd like to check it before putting it with the others. "
+				.. "We need a reference before we can make much of a comparison. You may find that less "
+				.. "exciting than collecting something nobody recognises."
+			),
+			completion = (
+				"Thank you. I'll label these before they get mixed in. A useful beginning. I'll keep the "
+				.. "labelling clear so we don't spend the rest of the programme regretting our first "
+				.. "afternoon."
+			),
 			requirements = {
 				{
 					pool = "common_artifacts",
@@ -332,8 +345,16 @@ PLUGIN:Register("egghead", {
 			objective = "Recover Clinical Records Folder I from the assigned search area in Garbage. Deliver it to"
 				.. " 'Vesper' in Garbage, then return here to finish the assignment.",
 			requires = {"EG12"},
-			briefing = "Recover environmental control evidence in Garbage.",
-			completion = "Good. A comparison is rather easier when both people have the records.",
+			briefing = (
+				"Recover environmental control evidence in Garbage. Take the records to Vesper in "
+				.. "Garbage, then return here. I would like the field perspective considered before we "
+				.. "settle the comparison."
+			),
+			completion = (
+				"Good. A comparison is rather easier when both people have the records. Good. Let her "
+				.. "examine the record without us supplying the conclusion in advance. I can survive a "
+				.. "little disagreement."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
@@ -548,8 +569,16 @@ PLUGIN:Register("egghead", {
 			objective = "Recover Laboratory Log Folder from the assigned search area in Waystation. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"EG25"},
-			briefing = "Recover the final field control and return the complete programme.",
-			completion = "Let's look at the record before deciding what it means.",
+			briefing = (
+				"Recover the final field control and return the complete programme. Bring the complete log back. A "
+				.. "control record is most useful when we can see what was done, rather than just the result someone "
+				.. "liked enough to underline."
+			),
+			completion = (
+				"Let's look at the record before deciding what it means. Good. I can work with this. You have been "
+				.. "remarkably persistent about the less spectacular parts of research. I mean that kindly. Those are "
+				.. "usually the parts that let us trust the rest."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_waystation",

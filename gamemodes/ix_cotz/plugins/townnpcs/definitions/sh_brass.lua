@@ -33,12 +33,22 @@ PLUGIN:Register("brass", {
 	supplies = {"12gauge", "9x18", "9x19", "medic_bandage_1"},
 	dialogue = {
 		delivery = "Set it down. I will check the consignment against the entry.",
-		completedGreeting = "Every consignment accounted for. Let's keep it that way.",
+		completedGreeting = (
+			"Good to see you. An order to discuss, or have you brought something for us to count?"
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
+		work = (
+			"Ammunition. Match the calibre and quantity on the order before bringing it over. Keep different "
+			.. "ammunition clearly separated. A hurried delivery just gives us both more sorting to do before we "
+			.. "know what arrived."
+		),
 		progressionPrompt = "What else needs doing?",
-		progression = "We can count supplies here. Missing consignments need somebody to go and find the records.",
+		progression = (
+			"We can count supplies here. Missing consignments need somebody to go and find the records. I want "
+			.. "the stock counted and the missing consignment records found. No extravagant claims about what "
+			.. "might be in a case will substitute for either."
+		),
 	},
 	catalogue = {
 		["127x55"] = {step = "BR03",
@@ -197,8 +207,15 @@ PLUGIN:Register("brass", {
 			name = "Count It Twice",
 			kind = "delivery",
 			requires = {},
-			briefing = "Match the list. I'll check the quantity and condition when you return.",
-			completion = "Hold on while I count it.",
+			briefing = (
+				"Match the list. I'll check the quantity and condition when you return. Do the count "
+				.. "before you set off. We will do it again here, but that is no reason to carry an "
+				.. "avoidable mistake across the map."
+			),
+			completion = (
+				"Hold on while I count it. Correct. That establishes what arrived, without either of us "
+				.. "needing to take the other's word for it."
+			),
 			requirements = {
 				{
 					pool = "town_ammunition",
@@ -425,8 +442,15 @@ PLUGIN:Register("brass", {
 			name = "Rifle Stock",
 			kind = "delivery",
 			requires = {"BR11"},
-			briefing = "Match the list. I'll check the quantity and condition when you return.",
-			completion = "Hold on while I count it.",
+			briefing = (
+				"Match the list. I'll check the quantity and condition when you return. The quantity is "
+				.. "larger; the method is the same. Keep the ammunition separated and check it against the "
+				.. "order."
+			),
+			completion = (
+				"Hold on while I count it. Yes. Wait until the count is finished before moving the "
+				.. "boxes. I prefer not to start again because somebody was being helpful."
+			),
 			requirements = {
 				{
 					pool = "town_ammunition",
@@ -614,8 +638,15 @@ PLUGIN:Register("brass", {
 			objective = "Recover Corporate Letter from the assigned search area in Garbage. Return it to this contact"
 				.. " to finish the assignment.",
 			requires = {"BR23"},
-			briefing = "Recover a supplier's surviving agreement and return it.",
-			completion = "Good. I'll compare it with my copy.",
+			briefing = (
+				"Recover a supplier's surviving agreement and return it. Bring the supplier's letter back intact. "
+				.. "I want the terms they actually wrote, including anything that wasn't convenient to repeat aloud."
+			),
+			completion = (
+				"Good. I'll compare it with my copy. Yes. Let me finish reading before we call it settled. You've "
+				.. "stayed for the counting and brought back the paperwork. I have rather more use for that than for "
+				.. "assurances."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",

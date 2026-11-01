@@ -37,16 +37,21 @@ PLUGIN:Register("gasket", {
 	dialogue = {
 		delivery = "Put it on the clear bench. Not beside the fuel.",
 		completedGreeting = (
-			"You've covered what I needed for the service work. Now let's see who borrows it "
-			.. "first."
+			"Good to see you. Give me a moment to finish this before you tell me what somebody's been "
+			.. "touching."
 		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Fuel, filters, service supplies. I need things we use up, not another broken machine.",
+		work = (
+			"Fuel, filters, service supplies. I need things we use up, not another broken machine. Everybody "
+			.. "remembers fuel when something stops. I'd rather have the next lot on hand before we reach that "
+			.. "interesting moment."
+		),
 		progressionPrompt = "What else needs doing?",
 		progression = (
-			"Start with the supplies. I've also got service records to find; guessing what a pump needs "
-			.. "gets expensive."
+			"Start with the supplies. I've also got service records to find; guessing what a pump needs gets "
+			.. "expensive. I want supplies I can use and records I can read without guessing what the last fellow "
+			.. "meant. No grand scheme. Just fewer unpleasant surprises when I take something apart."
 		),
 	},
 	catalogue = {
@@ -66,8 +71,15 @@ PLUGIN:Register("gasket", {
 			name = "Keep It Turning",
 			kind = "delivery",
 			requires = {},
-			briefing = "This is what I'm short of. Check the list before carrying something heavy all the way here.",
-			completion = "Put it down before you spill it.",
+			briefing = (
+				"This is what I'm short of. Check the list before carrying something heavy all the way "
+				.. "here. This lot is for use, not decoration. Bring what the list says and keep the "
+				.. "containers from leaking over everything else."
+			),
+			completion = (
+				"Put it down before you spill it. Good. I'll put it where it belongs before someone "
+				.. "decides it's a convenient place to rest their boots."
+			),
 			requirements = {
 				{
 					pool = "fuel",
@@ -268,8 +280,15 @@ PLUGIN:Register("gasket", {
 			objective = "Recover Small Yellow Transit Case from the assigned search area in Marsh. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"GK10"},
-			briefing = "Recover a reserve supply case near industrial wreckage.",
-			completion = "You found it. Saves another argument about the specifications.",
+			briefing = (
+				"Recover a reserve supply case near industrial wreckage. I'm interested in what's "
+				.. "recoverable, not in you straining yourself to bring back something too damaged to use."
+			),
+			completion = (
+				"You found it. Saves another argument about the specifications. Set it somewhere steady. "
+				.. "I'll inspect it before deciding what we can rely on; we've got enough surprises "
+				.. "already."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",
@@ -456,8 +475,16 @@ PLUGIN:Register("gasket", {
 			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"GK21"},
-			briefing = "Recover the last service record and conclude the utilities project.",
-			completion = "Good. Let's see what they wrote down.",
+			briefing = (
+				"Recover the last service record and conclude the utilities project. Bring the journal back whole. "
+				.. "Whoever kept servicing the place may have written down the small things nobody thought worth "
+				.. "putting in a manual."
+			),
+			completion = (
+				"Good. Let's see what they wrote down. Look at that. Someone kept making notes even when the job "
+				.. "was a nuisance. I know the feeling. You've saved me a fair amount of trouble. I'll try not to "
+				.. "spoil the moment by asking for something else."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_marsh_cs",

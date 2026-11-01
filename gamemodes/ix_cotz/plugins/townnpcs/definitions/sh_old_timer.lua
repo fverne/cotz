@@ -10,12 +10,23 @@ PLUGIN:Register("old-timer", {
 	},
 	supplies = {"medic_bandage_1", "12gauge", "22lr", "food_bread"},
 	dialogue = {
-		completedGreeting = "Still in one piece? Good. Pull up a chair.",
+		completedGreeting = (
+			"Good to see you. Put the pack down if you're staying a while; you don't have to stand ready "
+			.. "to leave every minute."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
+		work = (
+			"Mutants. Keep the approaches clear, and come back with enough ammunition to do it again. Don't "
+			.. "chase a wounded animal so far that you forget how you're getting back. I want the job done, but I "
+			.. "want you back too."
+		),
 		progressionPrompt = "What else needs doing?",
-		progression = "A few things before you wander off. After that, there's something I'd like you to look for.",
+		progression = (
+			"A few things before you wander off. After that, there's something I'd like you to look for. Some "
+			.. "of this is ordinary preparation. Some is paperwork I've put off asking anyone to fetch. Start with "
+			.. "what you can manage; I'll tell you what I need it for when we get there."
+		),
 	},
 	catalogue = {
 		["hatchet"] = {step = "OT08",
@@ -50,8 +61,15 @@ PLUGIN:Register("old-timer", {
 			name = "Before You Leave",
 			kind = "delivery",
 			requires = {},
-			briefing = "Food first. If you can't spare enough to leave here, you haven't packed enough to wander off.",
-			completion = "Good. Keep enough in your own pack. I don't want to hear you went hungry getting here.",
+			briefing = (
+				"Food first. If you can't spare enough to leave here, you haven't packed enough to "
+				.. "wander off. You'd be surprised how often a man remembers ammunition and forgets his "
+				.. "stomach. We're not starting with that mistake."
+			),
+			completion = (
+				"Good. Keep enough in your own pack. I don't want to hear you went hungry getting here. "
+				.. "That's the sensible bit done. It isn't exciting, but you'll appreciate it later."
+			),
 			requirements = {
 				{
 					pool = "canned_food",
@@ -312,8 +330,16 @@ PLUGIN:Register("old-timer", {
 			name = "What They Leave Behind",
 			kind = "tracker",
 			requires = {"OT13"},
-			briefing = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
-			completion = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
+			briefing = (
+				"Mutants. Keep the approaches clear, and come back with enough ammunition to do it "
+				.. "again. Look at the ground before you commit yourself. There's no prize for finding out "
+				.. "too late that you chose a bad way in."
+			),
+			completion = (
+				"You came back. Good. Don't let a few dead mutants convince you that you know "
+				.. "everything. Back already? Sit your pack down properly. You can tell me about it once "
+				.. "you've caught your breath."
+			),
 			target = 14,
 			benefits = {},
 		},
@@ -544,8 +570,14 @@ PLUGIN:Register("old-timer", {
 			objective = "Recover Personnel File Folder from the assigned search area in Pripyat. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"OT27"},
-			briefing = "One last case in Pripyat. Bring it here. That's all I'm asking.",
-			completion = "Leave it here. And sit down a minute. There's no hurry.",
+			briefing = (
+				"One last case in Pripyat. Bring it here. That's all I'm asking. Don't open it on the road to "
+				.. "satisfy your curiosity. Bring it back, get yourself somewhere safe, then we can take our time."
+			),
+			completion = (
+				"Leave it here. And sit down a minute. There's no hurry. I've been finding reasons not to ask for "
+				.. "this for a long time. You went anyway. I haven't got a clever bit of advice for that. Thank you."
+			),
 			field = {
 				kind = "recovery",
 				map = "rp_pripyat_remaster",

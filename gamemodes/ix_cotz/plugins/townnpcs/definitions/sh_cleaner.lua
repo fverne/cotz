@@ -15,12 +15,22 @@ PLUGIN:Register("cleaner", {
 	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
 	dialogue = {
 		delivery = "Leave it here. Keep it closed.",
-		completedGreeting = "Everything arrived. That's all anyone needs to know.",
+		completedGreeting = (
+			"You're here. Good. We can spare ourselves the usual discussion about whether instructions "
+			.. "need following."
+		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Collect the parcel. Take it to the other drop. Leave it sealed.",
+		work = (
+			"Collect the parcel. Take it to the other drop. Leave it sealed. Check both ends of the route. Once "
+			.. "you're carrying it, curiosity won't make the package any easier to deliver."
+		),
 		progressionPrompt = "What else needs doing?",
-		progression = "Supplies. Missing records. Deliveries. Pick one, and keep the details to yourself.",
+		progression = (
+			"Supplies. Missing records. Deliveries. Pick one, and keep the details to yourself. Some records "
+			.. "need finding. Some supplies need replacing. I will give you enough to do the work. Don't confuse "
+			.. "that with an invitation to discuss everyone involved."
+		),
 	},
 	catalogue = {
 		["hidestasher_cleaningkit"] = {step = "CL05",
@@ -35,8 +45,14 @@ PLUGIN:Register("cleaner", {
 			name = "A Package That Stays Shut",
 			kind = "delivery",
 			requires = {},
-			briefing = "Bring what's on the list. Leave it with me.",
-			completion = "Put it there.",
+			briefing = (
+				"Bring what's on the list. Leave it with me. It's a simple order. I'd like it to remain "
+				.. "one after you've finished reading."
+			),
+			completion = (
+				"Put it there. Correct. That's how I like an introduction: something useful arrives and "
+				.. "nobody needs a long explanation."
+			),
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -298,8 +314,15 @@ PLUGIN:Register("cleaner", {
 			name = "Across the Boundary",
 			kind = "tracker",
 			requires = {"CL13"},
-			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
-			completion = "The deliveries are counted. No need to tell me about them twice.",
+			briefing = (
+				"Collect the parcel. Take it to the other drop. Leave it sealed. Keep doing the "
+				.. "deliveries as instructed. Changing the arrangement to make yourself comfortable leaves "
+				.. "somebody else wondering what happened."
+			),
+			completion = (
+				"The deliveries are counted. No need to tell me about them twice. Reliable work. No, "
+				.. "that doesn't mean you should start taking liberties with the next parcel."
+			),
 			target = 14,
 			benefits = {},
 		},
@@ -525,8 +548,14 @@ PLUGIN:Register("cleaner", {
 			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"CL27"},
-			briefing = "Recover closure evidence from the supply route and return.",
-			completion = "Seal looks intact. Good.",
+			briefing = (
+				"Recover closure evidence from the supply route and return. Bring the packing list back complete. "
+				.. "A missing line is enough to leave an argument open. I'd like this one finished."
+			),
+			completion = (
+				"Seal looks intact. Good. That covers it. You did the work without making it everybody's business. "
+				.. "That's why I kept giving you work. Take the compliment; I'm not repeating it."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",

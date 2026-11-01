@@ -6,6 +6,7 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Check what yo
 DIALOGUE.addTopic("GREETING", {
 	response = "You can admire the field from here. Closer costs preparation.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -48,6 +49,7 @@ DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
 	response = "You can admire the field from here. Closer costs preparation.",
 	options = {
+		"SpecialtyTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -62,4 +64,23 @@ DIALOGUE.addTopic("BackTopic", {
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
 	response = "Bring yourself back with the readings.",
+})
+
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Do you enjoy being near the fields?",
+	response = (
+		"Sometimes. From a sensible distance there's plenty to look at. Up close I'm usually busy checking "
+		.. "the next thing that could make the trip shorter than intended. Enjoyment isn't much of a plan."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "Beanstalk thinks you take too many risks?",
+	response = (
+		"He worries aloud; I do the checks before I leave. We get on better when we discuss an actual trip "
+		.. "instead of whether caution is a virtue. He asks useful questions. I don't have to enjoy all of "
+		.. "them."
+	),
+	options = {"BackTopic"},
 })

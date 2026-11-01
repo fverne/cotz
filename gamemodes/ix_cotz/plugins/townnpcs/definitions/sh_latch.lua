@@ -40,15 +40,21 @@ PLUGIN:Register("latch", {
 	dialogue = {
 		delivery = "Here. Keep the labels with it.",
 		completedGreeting = (
-			"Those records give me something to work with. Better than guessing."
+			"Come in. You've earned the right to stand beside the bench without me wondering what "
+			.. "useless weight you've brought."
 		),
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
-		work = "Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust.",
+		work = (
+			"Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust. Leave the "
+			.. "useless weight where you find it. I need workable salvage, and you need your back for the next "
+			.. "trip."
+		),
 		progressionPrompt = "What else needs doing?",
 		progression = (
-			"Parts first. Then there are machinery records worth recovering. Might stop us dragging back "
-			.. "the wrong thing."
+			"Parts first. Then there are machinery records worth recovering. Might stop us dragging back the "
+			.. "wrong thing. I'll sort the material if you bring it in. The older records need fetching too; a "
+			.. "proper specification can save a lot of cutting and swearing."
 		),
 	},
 	catalogue = {
@@ -70,8 +76,15 @@ PLUGIN:Register("latch", {
 			name = "A Place to Sort",
 			kind = "delivery",
 			requires = {},
-			briefing = "This is what I need. Check its condition before you haul it back.",
-			completion = "Useful. Put it by the bench.",
+			briefing = (
+				"This is what I need. Check its condition before you haul it back. Fasteners aren't "
+				.. "glamorous. Neither is watching a useful assembly come apart because nobody wanted to "
+				.. "carry the right ones."
+			),
+			completion = (
+				"Useful. Put it by the bench. Those will do. Small things first; the heavy things are "
+				.. "much more cooperative when they're held together."
+			),
 			requirements = {
 				{
 					pool = "fasteners",
@@ -272,8 +285,15 @@ PLUGIN:Register("latch", {
 			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Deliver it to"
 				.. " 'Technut' in Marsh, then return here to finish the assignment.",
 			requires = {"LA10"},
-			briefing = "Retrieve an engineer's repair ledger in regional ruins.",
-			completion = "Right. Now they can look at the actual thing instead of guessing what I meant.",
+			briefing = (
+				"Retrieve an engineer's repair ledger in regional ruins. Check what can be recovered "
+				.. "before committing yourself to a heavy load. You don't have to impress me with the "
+				.. "weight of it."
+			),
+			completion = (
+				"Right. Now they can look at the actual thing instead of guessing what I meant. Right. "
+				.. "I'll see what we can learn from this before I start pulling anything else apart."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
@@ -462,8 +482,14 @@ PLUGIN:Register("latch", {
 			objective = "Recover Official File Folder from the assigned search area in Garbage. Return it to this"
 				.. " contact to finish the assignment.",
 			requires = {"LA21"},
-			briefing = "Recover the machine's commissioning evidence and return.",
-			completion = "Set it down. I'll open it.",
+			briefing = (
+				"Recover the machine's commissioning evidence and return. Keep the commissioning papers together. "
+				.. "I want to see what was actually specified before I start congratulating anyone's workmanship."
+			),
+			completion = (
+				"Set it down. I'll open it. Right. That's something solid to work from. People see rust and decide "
+				.. "the whole lot's finished. You've been willing to look a bit closer. I appreciate that."
+			),
 			field = {
 				kind = "recovery",
 				map = "mz_garbage",
