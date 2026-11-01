@@ -2,11 +2,20 @@
 ix = {}
 dofile("gamemodes/ix_cotz/plugins/progression/definitions/sh_requirementpools.lua")
 local items = {}
-local files = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items/valuables_test"))
+local reviewedItems = {}
+for key, pool in pairs(ix.progression.itemPools) do
+	if key:match("^valuables_") then
+		for _, candidate in ipairs(pool.candidates) do reviewedItems[candidate.item] = true end
+	end
+end
+local files = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items/valuables_test gamemodes/ix_cotz/schema/items/valuable"))
 for path in files:lines() do
-	local id = path:match("/sh_(.+)%.lua$")
-	assert(id, "Unexpected valuable definition: " .. path)
-	items[id] = true
+	local itemID = path:match("/sh_(.+)%.lua$")
+	if path:find("/valuables_test/", 1, true) or reviewedItems[itemID] then
+		local id = path:match("/sh_(.+)%.lua$")
+		assert(id, "Unexpected valuable definition: " .. path)
+		items[id] = true
+	end
 end
 files:close()
 local assigned = {}

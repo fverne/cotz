@@ -2,12 +2,22 @@
 ix = {randomitems = {tables = {}}}
 local root = "gamemodes/ix_cotz/plugins/randomitem/"
 local prices = {}
-local files = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items/valuables_test"))
+dofile("gamemodes/ix_cotz/plugins/progression/definitions/sh_requirementpools.lua")
+local reviewedItems = {}
+for key, pool in pairs(ix.progression.itemPools) do
+	if key:match("^valuables_") then
+		for _, candidate in ipairs(pool.candidates) do reviewedItems[candidate.item] = true end
+	end
+end
+local files = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items/valuables_test gamemodes/ix_cotz/schema/items/valuable"))
 for path in files:lines() do
-	local file = assert(io.open(path))
-	local source = file:read("*a")
-	file:close()
-	prices[path:match("/sh_(.+)%.lua$")] = assert(tonumber(source:match("ITEM.price = (%d+)")))
+	local itemID = path:match("/sh_(.+)%.lua$")
+	if path:find("/valuables_test/", 1, true) or reviewedItems[itemID] then
+		local file = assert(io.open(path))
+		local source = file:read("*a")
+		file:close()
+		prices[path:match("/sh_(.+)%.lua$")] = assert(tonumber(source:match("ITEM.price = (%d+)")))
+	end
 end
 files:close()
 local maps = {

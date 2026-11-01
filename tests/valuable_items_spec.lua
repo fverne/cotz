@@ -128,10 +128,18 @@ local itemIDs = {
 	"value_archive_cassette",
 }
 for _, id in ipairs(itemIDs) do
-	local path = itemRoot .. "valuables_test/sh_" .. id .. ".lua"
-	ix.item.Register(id, "base_valuables_test", false, path)
+	local folder = "valuables_test"
+	local existing = io.open(itemRoot .. folder .. "/sh_" .. id .. ".lua")
+	if existing then
+		existing:close()
+	else
+		folder = "valuable"
+	end
+	local path = itemRoot .. folder .. "/sh_" .. id .. ".lua"
+	local expectedBase = "base_" .. folder
+	ix.item.Register(id, expectedBase, false, path)
 	local item = ix.item.list[id]
-	check(item.base == "base_valuables_test", "test items use the forwarding valuable base")
+	check(item.base == expectedBase, "items use their configured valuable base")
 	check(item.price > 0 and item.width >= 1 and item.height >= 1, "positive concrete tuning")
 	check(#item.longdesc > 200 and #item.description > 10, "both descriptions are supplied")
 	check(item.model:match("%.mdl$") and item.exRender == true, "model and extended icon are configured")
