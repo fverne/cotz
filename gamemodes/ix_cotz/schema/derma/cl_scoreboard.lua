@@ -313,6 +313,15 @@ vgui.Register("ixScoreboardRow", PANEL, "EditablePanel")
 local COLORS = {
 	card = Color(12, 13, 12, 215), border = Color(93, 94, 86, 180),
 	text = Color(216, 215, 201), muted = Color(116, 119, 107), teal = Color(73, 140, 143),
+	rank = Color(138, 43, 226), green = Color(105, 139, 87),
+	amber = Color(167, 143, 81), red = Color(184, 108, 92),
+}
+local FIELD_COLORS = {
+	rank = COLORS.rank, reputation = COLORS.rank, location = COLORS.teal,
+	favoriteContact = COLORS.amber, taskEarnings = COLORS.amber,
+	mutantsKilled = COLORS.red, humansKilled = COLORS.red, rareMutantsKilled = COLORS.red,
+	speciesKilled = COLORS.amber, tasksCompleted = COLORS.green, hardTasks = COLORS.green,
+	researchOperations = COLORS.teal, recoveryOperations = COLORS.teal,
 }
 local PANEL = {}
 
@@ -330,8 +339,30 @@ end
 local function paintCard(panel, width, height)
 	surface.SetDrawColor(COLORS.card)
 	surface.DrawRect(0, 0, width, height)
-	surface.SetDrawColor(panel:IsHovered() and COLORS.teal or COLORS.border)
+	surface.SetDrawColor(panel.leaderboardInteractive and panel:IsHovered() and COLORS.teal or COLORS.border)
 	surface.DrawOutlinedRect(0, 0, width, height)
+end
+
+local DOSSIER_FIELDS = {
+	{"rank", "STALKER RANK"}, {"reputation", "REPUTATION"}, {"squad", "SQUAD"},
+	{"location", "LOCATION"}, {"favoriteContact", "FAVORITE CONTACT"},
+	{"mutantsKilled", "MUTANTS KILLED"}, {"humansKilled", "HUMAN NPCS KILLED"},
+	{"rareMutantsKilled", "RARE MUTANTS KILLED"}, {"speciesKilled", "SPECIES KILLED"},
+	{"tasksCompleted", "TASKS COMPLETED"}, {"hardTasks", "HARD TASKS"},
+	{"researchOperations", "RESEARCH OPERATIONS"}, {"recoveryOperations", "RECOVERY OPERATIONS"},
+	{"taskEarnings", "TASK EARNINGS"},
+}
+
+local function dossierLabel(parent, text, font, color)
+	local label = parent:Add("DLabel")
+	label:Dock(TOP)
+	label:SetFont(font)
+	label:SetTextColor(color)
+	label:SetText(text)
+	label:SetWrap(true)
+	label:SetAutoStretchVertical(true)
+
+	return label
 end
 
 function PANEL:Init()
@@ -345,6 +376,20 @@ function PANEL:Init()
 	self.search = self.controls:Add("DTextEntry")
 	self.search:Dock(FILL)
 	self.search:SetPlaceholderText("Search stalker or squad")
+	self.search:DockMargin(0, 0, 8, 0)
+	self.search.Paint = function(entry, width, height)
+		paintCard(entry, width, height)
+		if entry:HasFocus() then
+			surface.SetDrawColor(COLORS.teal)
+			surface.DrawOutlinedRect(0, 0, width, height)
+		end
+		if entry:GetText() == "" and not entry:HasFocus() then
+			draw.SimpleText(entry:GetPlaceholderText(), "cotzLeaderboard", 10, height / 2,
+				COLORS.muted, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+		else
+			entry:DrawTextEntryText(COLORS.text, COLORS.teal, COLORS.text)
+		end
+	end
 	self.area = self.controls:Add("DButton")
 	self.area:Dock(RIGHT)
 	self.area:SetWide(140)
@@ -361,24 +406,51 @@ function PANEL:Init()
 		self.squadOnly = not self.squadOnly
 		button:SetText(self.squadOnly and "My squad: ON" or "My squad: OFF")
 	end
+	for _, button in ipairs({self.area, self.squad}) do
+		button.leaderboardInteractive = true
+		button:DockMargin(4, 0, 0, 0)
+		button:SetTextColor(COLORS.text)
+		button.Paint = function(control, width, height)
+			paintCard(control, width, height)
+			local active = control == self.area and self.localOnly or control == self.squad and self.squadOnly
+			if active then
+				surface.SetDrawColor(COLORS.teal)
+				surface.DrawRect(0, height - 2, width, 2)
+			end
+		end
+	end
 	self.dossier = self:Add("DPanel")
 	self.dossier:Dock(RIGHT)
 	self.dossier:DockMargin(12, 12, 0, 0)
 	self.dossier.Paint = paintCard
 	self.detailScroll = self.dossier:Add("DScrollPanel")
 	self.detailScroll:Dock(FILL)
-	self.detailScroll:DockMargin(0, 110, 0, 0)
-	self.details = self.detailScroll:Add("DLabel")
-	self.details:Dock(TOP)
-	self.details:SetAutoStretchVertical(true)
-	self.details:DockMargin(16, 0, 16, 16)
-	self.details:SetWrap(true)
-	self.details:SetContentAlignment(7)
-	self.details:SetTextColor(COLORS.text)
-	self.details:SetText("Select a stalker to view their dossier.")
-	self.portrait = self.dossier:Add("DImage")
-	self.portrait:SetPos(16, 16)
-	self.portrait:SetSize(80, 80)
+	self.detailScroll:DockMargin(16, 16, 16, 16)
+	self.portrait = self.detailScroll:Add("DImage")
+	self.portrait:Dock(TOP)
+	self.portrait:DockMargin(0, 0, 0, 12)
+	self.portrait:SetTall(96)
+	self.portrait:SetKeepAspect(true)
+	self.details = dossierLabel(self.detailScroll, "Select a stalker", "ixMediumFont", COLORS.text)
+	self.details:DockMargin(0, 0, 0, 16)
+	self.dossierFields = {}
+	for _, definition in ipairs(DOSSIER_FIELDS) do
+		local card = self.detailScroll:Add("DPanel")
+		card:Dock(TOP)
+		card:DockMargin(0, 0, 0, 8)
+		card:DockPadding(10, 8, 10, 8)
+		card.Paint = paintCard
+		local caption = dossierLabel(card, definition[2], "ixSmallFont", COLORS.muted)
+		caption:DockMargin(0, 0, 0, 4)
+		local value = dossierLabel(card, "—", "ixMediumFont", COLORS.text)
+		card.PerformLayout = function(panel)
+			panel:SetTall(caption:GetTall() + value:GetTall() + 20)
+		end
+		self.dossierFields[definition[1]] = {caption = caption, value = value, card = card}
+	end
+	self.dossierNote = dossierLabel(self.detailScroll,
+		"Counters begin when tracking is enabled. Favorite contact includes saved progress.",
+		"ixSmallFont", COLORS.muted)
 	self.list = self:Add("DScrollPanel")
 	self.list:Dock(FILL)
 	self.list:DockMargin(0, 12, 0, 0)
@@ -390,21 +462,20 @@ function PANEL:SelectRecord(record)
 	self.portrait:SetImage(record.pdaavatar or "vgui/icons/face_31.png")
 	local stats = record.profile.leaderboardStats or {}
 	local location = ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player))
-	self.details:SetText(record.name .. "\n" .. rankName(record)
-		.. " · " .. math.floor(record.profile.reputation or 0) .. " reputation\n\n"
-		.. (record.squadName and record.squadName ~= "" and record.squadName or "Loner") .. "\n"
-		.. location .. "\n" .. (record.map or "") .. "\n\n"
-		.. "MUTANTS KILLED     " .. (stats.mutantsKilled or 0) .. "\n\n"
-		.. "HUMAN NPCS KILLED     " .. (stats.humansKilled or 0) .. "\n\n"
-		.. "TASKS COMPLETED     " .. (stats.tasksCompleted or 0)
-		.. "\n\nRARE MUTANTS     " .. (stats.rareMutantsKilled or 0)
-		.. "\nSPECIES KILLED     " .. (stats.speciesKilled or 0)
-		.. "\nHARD TASKS     " .. (stats.hardTasks or 0)
-		.. "\nRESEARCH OPERATIONS     " .. (stats.researchOperations or 0)
-		.. "\nRECOVERY OPERATIONS     " .. (stats.recoveryOperations or 0)
-		.. "\nTASK EARNINGS     " .. (stats.taskEarnings or 0) .. " RU"
-		.. "\nCONTACT PROGRAMMES     " .. (stats.contactProgrammes or 0)
-		.. "\n\nCounters begin when tracking is enabled. Programmes include saved progress.")
+	self.details:SetText(record.name)
+	local values = table.Copy(stats)
+	values.rank = rankName(record)
+	values.reputation = math.floor(record.profile.reputation or 0)
+	values.squad = record.squadName and record.squadName ~= "" and record.squadName or "Loner"
+	values.location = location .. "\n" .. (record.map or "")
+	values.favoriteContact = stats.favoriteContact or "None"
+	values.taskEarnings = (stats.taskEarnings or 0) .. " RU"
+	for key, field in pairs(self.dossierFields) do
+		field.value:SetText(tostring(values[key] or 0))
+		local squadColor = key == "squad" and record.squadColor
+		field.value:SetTextColor(squadColor or FIELD_COLORS[key] or COLORS.text)
+		field.card:InvalidateLayout(true)
+	end
 end
 
 function PANEL:PerformLayout(width, height)
@@ -414,7 +485,26 @@ function PANEL:PerformLayout(width, height)
 		surface.CreateFont("cotzLeaderboard", {
 			font = "alsina", size = math.floor(19 * scale), weight = 500, extended = true,
 		})
-		self.details:SetFont("cotzLeaderboard")
+		surface.CreateFont("cotzDossierTitle", {
+			font = "alsina", size = math.floor(28 * scale), weight = 600, extended = true,
+		})
+		surface.CreateFont("cotzDossierValue", {
+			font = "alsina", size = math.floor(23 * scale), weight = 500, extended = true,
+		})
+		surface.CreateFont("cotzDossierCaption", {
+			font = "alsina", size = math.floor(16 * scale), weight = 500, extended = true,
+		})
+		self.details:SetFont("cotzDossierTitle")
+		self.portrait:SetTall(math.floor(96 * scale))
+		self.dossierNote:SetFont("cotzDossierCaption")
+		for _, field in pairs(self.dossierFields) do
+			field.caption:SetFont("cotzDossierCaption")
+			field.value:SetFont("cotzDossierValue")
+			field.card:InvalidateLayout(true)
+		end
+		self.search:SetFont("cotzLeaderboard")
+		self.area:SetFont("cotzLeaderboard")
+		self.squad:SetFont("cotzLeaderboard")
 	end
 	local compact = width < 850
 	self.dossier:Dock(compact and BOTTOM or RIGHT)
@@ -455,10 +545,12 @@ function PANEL:Think()
 				row:Dock(TOP)
 				row:DockMargin(0, 0, 0, 6)
 				row:SetTall(76)
+				row.leaderboardInteractive = true
 				row:SetText("")
 				row.avatar = row:Add("DImage")
 				row.avatar:SetPos(44, 8)
-				row.avatar:SetSize(60, 60)
+				row.avatar:SetSize(90, 60)
+				row.avatar:SetKeepAspect(true)
 				row.avatar:SetMouseInputEnabled(false)
 				self.rows[id] = row
 			end
@@ -467,11 +559,12 @@ function PANEL:Think()
 			row.Paint = function(button, width, height)
 				paintCard(button, width, height)
 				draw.SimpleText("#" .. position, "ixSmallFont", 6, 28, COLORS.muted)
-				draw.SimpleText(record.name, "cotzLeaderboard", 116, 8, COLORS.text)
-				draw.SimpleText(rankName(record) .. " · " .. (squad ~= "" and squad or "Loner"),
-					"cotzLeaderboard", 116, 34, COLORS.muted)
+				draw.SimpleText(record.name, "cotzLeaderboard", 146, 8, COLORS.text)
+				local rankWidth = draw.SimpleText(rankName(record), "cotzLeaderboard", 146, 34, COLORS.rank)
+				draw.SimpleText(" · " .. (squad ~= "" and squad or "Loner"),
+					"cotzLeaderboard", 146 + rankWidth, 34, record.squadColor or COLORS.muted)
 				draw.SimpleText(ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player)),
-					"cotzLeaderboard", 116, 54, COLORS.teal)
+					"cotzLeaderboard", 146, 54, COLORS.teal)
 			end
 			row.DoClick = function() self:SelectRecord(record) end
 			row.DoRightClick = function()
@@ -492,7 +585,8 @@ function PANEL:Think()
 	if self.selected and not present[self.selected] then
 		self.selected = nil
 		self.portrait:SetImage("vgui/icons/face_31.png")
-		self.details:SetText("Select a stalker to view their dossier.")
+		self.details:SetText("Select a stalker")
+		for _, field in pairs(self.dossierFields) do field.value:SetText("—") end
 	end
 end
 

@@ -35,9 +35,13 @@ ix.townNPCs = {
 	StepID = function(_, slug, step) return slug .. "/" .. step end,
 }
 data.progression = {lines = {["test/one"] = {completed = true}}}
-assert(jobs.GetLeaderboardStats(data).contactProgrammes == 0)
+assert(jobs.GetLeaderboardStats(data).favoriteContact == "test", "partial progression establishes a favorite")
 data.progression.lines["test/two"] = {completed = true}
-assert(jobs.GetLeaderboardStats(data).contactProgrammes == 1)
-assert(jobs.GetLeaderboardStats(data).contactProgrammes == 1, "reads must not accumulate programmes")
+ix.townNPCs.contacts.other = {name = "Other", progression = {{id = "one"}, {id = "two"}}}
+data.progression.lines["other/one"] = {completed = true}
+assert(jobs.GetLeaderboardStats(data).favoriteContact == "test", "most completed steps wins")
+data.progression.lines["other/two"] = {completed = true}
+assert(jobs.GetLeaderboardStats(data).favoriteContact == "Other, test", "ties list every name in stable order")
+assert(jobs.GetLeaderboardStats({}).favoriteContact == "None", "zero progress has no favorite")
 assert(jobs.GetLeaderboardStats({}).taskEarnings == 0, "old saves receive safe defaults")
-print("leaderboard statistics: 10 checks passed")
+print("leaderboard statistics: 11 checks passed")

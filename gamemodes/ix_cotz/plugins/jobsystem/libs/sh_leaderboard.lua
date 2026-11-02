@@ -54,17 +54,25 @@ function ix.jobs.GetLeaderboardStats(data)
 	end
 	result.speciesKilled = 0
 	for _ in pairs(saved.species or {}) do result.speciesKilled = result.speciesKilled + 1 end
-	result.contactProgrammes = 0
+	local favorites = {}
+	local mostCompleted = 0
 	local lines = (data.progression or {}).lines or {}
 	local town = ix.townNPCs
 	for slug, contact in pairs(town and town.contacts or {}) do
-		local complete = contact.progression and #contact.progression > 0
+		local completed = 0
 		for _, step in ipairs(contact.progression or {}) do
 			local line = lines[town:StepID(slug, step.id)]
-			if not line or not line.completed then complete = false break end
+			if line and line.completed then completed = completed + 1 end
 		end
-		if complete then result.contactProgrammes = result.contactProgrammes + 1 end
+		if completed > mostCompleted then
+			mostCompleted = completed
+			favorites = {contact.name or slug}
+		elseif completed > 0 and completed == mostCompleted then
+			favorites[#favorites + 1] = contact.name or slug
+		end
 	end
+	table.sort(favorites)
+	result.favoriteContact = #favorites > 0 and table.concat(favorites, ", ") or "None"
 
 	return result
 end

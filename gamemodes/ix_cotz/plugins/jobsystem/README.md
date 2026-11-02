@@ -398,8 +398,9 @@ credit without receiving personal kill statistics.
 Hard tasks are tier 3 or above. Research operations are sensor or defence field assignments; recovery
 operations are recovery field assignments. Each counts at guarded hand-in, once. Task earnings count
 actual ordinary job cash payouts, excluding item rewards, bonuses and separate progression payouts.
-New counters start when deployed; existing totals are retained. Contact programmes are derived from
-saved progression: every defined step for a contact must be complete, including branches.
+New counters start when deployed; existing totals are retained. Favorite contact is derived from
+saved progression: count completed defined steps for each contact and show the names with the highest
+positive count. Ties show every matching name alphabetically; no completed steps shows None.
 Only aggregate public statistics enter cross-map snapshots; species sets and progression lines do not.
 
 Run `luatex --luaonly tests/leaderboard_stats_spec.lua` alongside the job and presence specs.
