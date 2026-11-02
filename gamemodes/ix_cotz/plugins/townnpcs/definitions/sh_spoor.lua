@@ -101,17 +101,13 @@ PLUGIN:Register("spoor", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring the parts on the list. I want to look them over properly. You can learn more from "
-				.. "what's left of an animal if you keep track of what you took, instead of throwing everything "
-				.. "in one bag and calling it a trophy."
+				"I need supplies for the hunting kit. Check the list and bring them back here when you have them. "
+				.. "Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"Set them down. I'll have a look. Thanks for bringing what I asked for; it saves us trying "
-				.. "to work out which piece came from what."
-			),
+			completion = "Good. I will look these over before the next walk.",
 			requirements = {
 				{
-					pool = "common_parts",
+					pool = "town_delivery_trail_garbage_1",
 					quantity = 1,
 				},
 			},
@@ -169,29 +165,21 @@ PLUGIN:Register("spoor", {
 		{
 			id = "SP04",
 			completionCash = 650,
-			name = "Where They Feed",
-			kind = "field",
-			objective = (
-				"Recover the feeding-site recording from the assigned search area in Garbage. Bring it back to the "
-				.. "issuing contact in Garbage."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"SP02"},
 			briefing = (
-				"There's a recorder left near a feeding site. I'd like to hear the observer before choosing an "
-				.. "explanation. Recover the feeding-site recording from the assigned search area in Garbage. Bring "
-				.. "it back to me in Garbage."
+				"I need supplies for the hunting kit. Check the list and bring them back here when you have them. "
+				.. "Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Put it here. I'll listen before looking for the part that agrees with me.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Spoor's note: "
-					.. "\"There's a recorder left near a feeding site.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_tape",
-				label = "Feeding-site recording",
+			completion = "Good. I will look these over before the next walk.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -201,12 +189,19 @@ PLUGIN:Register("spoor", {
 			name = "Tools for the Field",
 			kind = "delivery",
 			requires = {"SP03"},
-			briefing = "There's a supply list for field work. Keep your own return kit separate from the hand-in.",
-			completion = "Good. I'll put this with the field supplies.",
+			briefing = (
+				"I need supplies for the hunting kit. Check the list and bring them back here when you have them. "
+				.. "Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Good. I will look these over before the next walk.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -268,29 +263,28 @@ PLUGIN:Register("spoor", {
 		{
 			id = "SP08",
 			completionCash = 1050,
-			name = "The Displaced Pack",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the displaced-pack notebook from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SP06"},
 			briefing = (
-				"I want the second hunting-ground account. A pack turning up somewhere new doesn't tell us why it "
-				.. "left the old ground. Recover the displaced-pack notebook from the assigned search area in "
-				.. "Garbage. Bring it back to me in Garbage."
+				"I need supplies for the hunting kit. Check the list and bring them back here when you have them. "
+				.. "Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. I'll check what they saw before the animals moved.",
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Spoor's note: \"I want the "
-					.. "second hunting-ground account.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_notebook",
-				label = "Displaced-pack notebook",
+			completion = "Good. I will look these over before the next walk.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -300,11 +294,18 @@ PLUGIN:Register("spoor", {
 			name = "Different Quarry",
 			kind = "delivery",
 			requires = {"SP07"},
-			briefing = "I'd like the requested material brought in without damage from the journey.",
-			completion = "That's usable. I'll take a closer look.",
+			briefing = (
+				"I need supplies for the hunting kit. Check the list and bring them back here when you have them. "
+				.. "Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Good. I will look these over before the next walk.",
 			requirements = {
 				{
-					pool = "common_parts",
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
 					quantity = 1,
 				},
 			},
@@ -353,29 +354,32 @@ PLUGIN:Register("spoor", {
 		{
 			id = "SP12",
 			completionCash = 1450,
-			name = "The Empty Hide",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the observation-hide field case from the assigned search area in Garbage. Bring it back "
-				.. "to the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SP10"},
 			briefing = (
-				"There's a hunter's case to recover from the observation site. Bring it as it was left. Recover "
-				.. "the observation-hide field case from the assigned search area in Garbage. Bring it back to me in "
-				.. "Garbage."
+				"I need supplies for the hunting kit. Check the list and bring them back here when you have them. "
+				.. "Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Set it down. I'll check the observations before judging how the position was used.",
-			field = {
-				description = (
-					"A cardboard file folder with an emblem and printed wording on the front. Spoor's note: \"There's "
-					.. "a hunter's case to recover from the observation site.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_personnel",
-				label = "Observation-hide field case",
+			completion = "Good. I will look these over before the next walk.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -394,12 +398,23 @@ PLUGIN:Register("spoor", {
 			name = "Proof of Change",
 			kind = "delivery",
 			requires = {"SP11"},
-			briefing = "Bring this request through. A familiar specimen still deserves care getting it here.",
-			completion = "All here. Leave it where the light reaches.",
+			briefing = (
+				"I need supplies for the hunting kit. Check the list and bring them back here when you have them. "
+				.. "Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Good. I will look these over before the next walk.",
 			requirements = {
 				{
-					pool = "common_parts",
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -448,29 +463,32 @@ PLUGIN:Register("spoor", {
 		{
 			id = "SP16",
 			completionCash = 1850,
-			name = "The First Pripyat Trail",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the Pripyat observer's notebook from the assigned search area in Pripyat. Bring it back "
-				.. "to the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SP14"},
 			briefing = (
-				"An observer's notebook is still in Pripyat. I want the whole sequence, including days when "
-				.. "nothing seemed to happen. Recover the Pripyat observer's notebook from the assigned search area "
-				.. "in Pripyat. Bring it back to me in Garbage."
+				"I need supplies for the hunting kit. Check the list and bring them back here when you have them. "
+				.. "Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Leave the pages in order. I'll start before the interesting sighting.",
-			field = {
-				description = (
-					"A thick blue diary with a label fixed to the front cover. Spoor's note: \"An observer's notebook "
-					.. "is still in Pripyat.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_diary",
-				label = "Pripyat observer's notebook",
+			completion = "Good. I will look these over before the next walk.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -480,12 +498,23 @@ PLUGIN:Register("spoor", {
 			name = "Preparing for the Worst",
 			kind = "delivery",
 			requires = {"SP15"},
-			briefing = "There's a supply list for field work. Keep your own return kit separate from the hand-in.",
-			completion = "Good. I'll put this with the field supplies.",
+			briefing = (
+				"I need supplies for the hunting kit. Check the list and bring them back here when you have them. "
+				.. "Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Good. I will look these over before the next walk.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 5,
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -542,29 +571,36 @@ PLUGIN:Register("spoor", {
 		{
 			id = "SP20",
 			completionCash = 2250,
-			name = "The Last Observation",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the last species observation tape from the assigned search area in Pripyat. Bring it back "
-				.. "to the issuing contact in Garbage."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SP19"},
 			briefing = (
-				"I want the last observation recording. It may help us judge which behaviour was actually seen. "
-				.. "Recover the last species observation tape from the assigned search area in Pripyat. Bring it back "
-				.. "to me in Garbage."
+				"I need supplies for the hunting kit. Check the list and bring them back here when you have them. "
+				.. "Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Thank you. I'll listen to the account as it stands.",
-			field = {
-				description = (
-					"A pale audio cassette with a broad blue printed label and twin spool windows. Spoor's note: \"I "
-					.. "want the last observation recording.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_tape2",
-				label = "Last species observation tape",
+			completion = "Good. I will look these over before the next walk.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			stock = {
@@ -578,12 +614,27 @@ PLUGIN:Register("spoor", {
 			name = "What the Records Missed",
 			kind = "delivery",
 			requires = {"SP20"},
-			briefing = "I'd like the requested material brought in without damage from the journey.",
-			completion = "That's usable. I'll take a closer look.",
+			briefing = (
+				"I need supplies for the hunting kit. Check the list and bring them back here when you have them. "
+				.. "Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Good. I will look these over before the next walk.",
 			requirements = {
 				{
-					pool = "common_parts",
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},

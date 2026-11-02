@@ -220,18 +220,14 @@ PLUGIN:Register("brass", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need the ammunition specified on the list. Bring it here and we'll check the markings and "
-				.. "count it together. It isn't a complicated order. I'd like us both to know exactly what's "
-				.. "been handed over."
+				"I have a depot request to fill. Read the list; anything outside it will only complicate the "
+				.. "count. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"The count agrees. Thank you. I'll enter it now while the boxes are in front of me, and we "
-				.. "won't have to rely on either of us remembering later."
-			),
+			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
 				{
-					pool = "town_ammunition",
-					quantity = 12,
+					pool = "town_delivery_military_garbage_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -288,29 +284,28 @@ PLUGIN:Register("brass", {
 		{
 			id = "BR04",
 			completionCash = 650,
-			name = "The Missing Boxes",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the missing depot freight case from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BR03"},
 			briefing = (
-				"A freight case is missing from the return. I'd like the case recovered before anyone writes its "
-				.. "contents into a loss total. Recover the missing depot freight case from the assigned search area "
-				.. "in Garbage. Bring it back to me in Garbage."
+				"I have a depot request to fill. Read the list; anything outside it will only complicate the "
+				.. "count. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Set it down with the markings facing me. We'll inspect what actually came back.",
-			field = {
-				description = (
-					"A low hard case with long contrasting strips across its ribbed lid. Brass's note: \"A freight "
-					.. "case is missing from the return.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_equipment",
-				label = "Missing depot freight case",
+			completion = "That matches the request. I will enter it on my side as well.",
+			requirements = {
+				{
+					pool = "town_delivery_military_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_garbage_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -320,12 +315,19 @@ PLUGIN:Register("brass", {
 			name = "Another Chamber",
 			kind = "delivery",
 			requires = {"BR03"},
-			briefing = "Bring the supplies specified on the order. We'll count what arrives before closing it.",
-			completion = "That matches the request. Thank you.",
+			briefing = (
+				"I have a depot request to fill. Read the list; anything outside it will only complicate the "
+				.. "count. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
 				{
-					pool = "town_ammunition",
-					quantity = 12,
+					pool = "town_delivery_military_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_garbage_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -386,29 +388,28 @@ PLUGIN:Register("brass", {
 		{
 			id = "BR08",
 			completionCash = 1050,
-			name = "The Mixed Shipment",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the mislabelled consignment evidence from the assigned search area in Garbage. Bring it "
-				.. "back to the issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BR06"},
 			briefing = (
-				"There's evidence from a wrongly labelled consignment. I want to check the markings against the "
-				.. "paperwork. Recover the mislabelled consignment evidence from the assigned search area in Garbage. "
-				.. "Bring it back to me in Garbage."
+				"I have a depot request to fill. Read the list; anything outside it will only complicate the "
+				.. "count. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Keep those pieces together. The mismatch is what I need to examine.",
-			field = {
-				description = (
-					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Brass's "
-					.. "note: \"There's evidence from a wrongly labelled consignment.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_manifest",
-				label = "Mislabelled consignment evidence",
+			completion = "That matches the request. I will enter it on my side as well.",
+			requirements = {
+				{
+					pool = "town_delivery_military_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_garbage_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -418,12 +419,19 @@ PLUGIN:Register("brass", {
 			name = "Shot and Shell",
 			kind = "delivery",
 			requires = {"BR07"},
-			briefing = "I need another delivery against this list. Keep the markings readable.",
-			completion = "Received. I'll keep the count with the order.",
+			briefing = (
+				"I have a depot request to fill. Read the list; anything outside it will only complicate the "
+				.. "count. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
 				{
-					pool = "town_ammunition",
-					quantity = 24,
+					pool = "town_delivery_military_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_garbage_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -472,30 +480,32 @@ PLUGIN:Register("brass", {
 		{
 			id = "BR12",
 			completionCash = 1450,
-			name = "Ledger's Missing Receipt",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the freight receipt for Ledger from the assigned search area in Garbage. Deliver it to "
-				.. "'Ledger' in Waystation, then come back to the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BR10"},
 			briefing = (
-				"Ledger needs the receipt from that route. I'd like both ends of the transaction working from the "
-				.. "same entry. Recover the freight receipt for Ledger from the assigned search area in Garbage. "
-				.. "Deliver it to 'Ledger' in Waystation, then come back to me in Garbage."
+				"I have a depot request to fill. Read the list; anything outside it will only complicate the "
+				.. "count. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Delivered. Good. I'll stop keeping a space for somebody else's version.",
-			field = {
-				description = (
-					"A clipboard carrying a densely printed packing list and a stamped mark. Brass's note: \"Ledger "
-					.. "needs the receipt from that route.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_receipt",
-				label = "Freight receipt for Ledger",
-				recipient = "ledger",
+			completion = "That matches the request. I will enter it on my side as well.",
+			requirements = {
+				{
+					pool = "town_delivery_military_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_military_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_garbage_3",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -515,14 +525,22 @@ PLUGIN:Register("brass", {
 			kind = "delivery",
 			requires = {"BR11"},
 			briefing = (
-				"Check what is requested before packing. Similar packaging doesn't make the contents "
-				.. "interchangeable."
+				"I have a depot request to fill. Read the list; anything outside it will only complicate the "
+				.. "count. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "The delivery checks out. You can put the empty packing aside.",
+			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
 				{
-					pool = "town_ammunition",
-					quantity = 24,
+					pool = "town_delivery_military_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_military_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_garbage_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -571,29 +589,32 @@ PLUGIN:Register("brass", {
 		{
 			id = "BR16",
 			completionCash = 1850,
-			name = "The Empty Truck",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the freight driver's recording from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BR14"},
 			briefing = (
-				"I want the driver's recording. There may be a useful detail between the departure and the missing "
-				.. "freight. Recover the freight driver's recording from the assigned search area in Garbage. Bring "
-				.. "it back to me in Garbage."
+				"I have a depot request to fill. Read the list; anything outside it will only complicate the "
+				.. "count. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "I'll listen to the whole thing. No point checking an account in selected pieces.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Brass's note: \"I "
-					.. "want the driver's recording.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_tape",
-				label = "Freight driver's recording",
+			completion = "That matches the request. I will enter it on my side as well.",
+			requirements = {
+				{
+					pool = "town_delivery_military_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_military_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_garbage_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -603,12 +624,23 @@ PLUGIN:Register("brass", {
 			name = "Specialist Loads",
 			kind = "delivery",
 			requires = {"BR15"},
-			briefing = "Bring the listed supplies here. A smaller correct load is more useful than a larger argument.",
-			completion = "Count agreed. I'll put it with the appropriate stock.",
+			briefing = (
+				"I have a depot request to fill. Read the list; anything outside it will only complicate the "
+				.. "count. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
 				{
-					pool = "town_ammunition",
-					quantity = 36,
+					pool = "town_delivery_military_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_military_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_garbage_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -665,30 +697,32 @@ PLUGIN:Register("brass", {
 		{
 			id = "BR20",
 			completionCash = 2250,
-			name = "The Wrong Recipient",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the corrected destination record from the assigned search area in Pripyat. Deliver it to "
-				.. "'Ledger' in Waystation, then come back to the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BR18"},
 			briefing = (
-				"Ledger needs the destination record. A plausible recipient isn't necessarily the one the sender "
-				.. "wrote down. Recover the corrected destination record from the assigned search area in Pripyat. "
-				.. "Deliver it to 'Ledger' in Waystation, then come back to me in Garbage."
+				"I have a depot request to fill. Read the list; anything outside it will only complicate the "
+				.. "count. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Ledger has it. If the destination needs correcting, he can do it from the record.",
-			field = {
-				description = (
-					"A cardboard file folder with a small coloured crest on its cover. Brass's note: \"Ledger needs "
-					.. "the destination record.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_official",
-				label = "Corrected destination record",
-				recipient = "ledger",
+			completion = "That matches the request. I will enter it on my side as well.",
+			requirements = {
+				{
+					pool = "town_delivery_military_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_military_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_garbage_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -698,12 +732,27 @@ PLUGIN:Register("brass", {
 			name = "Rounds in Reserve",
 			kind = "delivery",
 			requires = {"BR19", "BR20"},
-			briefing = "Bring the supplies specified on the order. We'll count what arrives before closing it.",
-			completion = "That matches the request. Thank you.",
+			briefing = (
+				"I have a depot request to fill. Read the list; anything outside it will only complicate the "
+				.. "count. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
 				{
-					pool = "town_ammunition",
-					quantity = 36,
+					pool = "town_delivery_military_garbage_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_military_garbage_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_military_garbage_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_garbage_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -751,33 +800,36 @@ PLUGIN:Register("brass", {
 		{
 			id = "BR24",
 			completionCash = 2650,
-			name = "The Depot's Copy",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the supplier agreement letter from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BR23"},
 			briefing = (
-				"The supplier's surviving letter belongs with the depot papers, including the terms nobody enjoyed "
-				.. "repeating. Recover the supplier agreement letter from the assigned search area in Garbage. Bring "
-				.. "it back to me in Garbage."
+				"I have a depot request to fill. Read the list; anything outside it will only complicate the "
+				.. "count. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"I'll keep this with the agreement. You've given me an account I can check, and you've been paid "
-				.. "for the work it took. That suits me very well."
-			),
-			field = {
-				description = (
-					"A creased printed letter with a corporate mark and several small blocks of text. Brass's note: "
-					.. "\"The supplier's surviving letter belongs with the depot papers, including the terms nobody "
-					.. "enjoyed repeating.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_contract",
-				label = "Supplier agreement letter",
+			completion = "That matches the request. I will enter it on my side as well.",
+			requirements = {
+				{
+					pool = "town_delivery_military_garbage_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_military_garbage_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_military_garbage_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_garbage_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {

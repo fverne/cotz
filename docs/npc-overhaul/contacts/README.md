@@ -40,10 +40,16 @@ invented records and identities are proposals until mapped and implemented.
 
 ## Authored commission update
 
-312 field commissions now use named bound quest cargo, including 76 deliveries to another contact
-and six field-cache deliveries. The per-contact story tables below remain design references.
-See the [commission inventory](../quest-commissions.md) and runtime definitions for current
-items, interactions and receiving contacts. Rewards still conclude at the issuer.
+Half of the former 316 field commissions now use ordinary supply deliveries, split as evenly as possible
+within each contact. The 158 remaining field commissions include 154 named bound-cargo assignments,
+38 deliveries to another contact and three field-cache deliveries. Four retain research-defence cargo.
+The per-contact story tables remain design references; converted steps supersede their earlier field
+stories. See the [current commission and delivery inventory](../quest-commissions.md) for the exact
+step IDs, requirement pools, quantities and surviving field assignments. Milestone IDs, prerequisites,
+rewards and competitive bouts remain unchanged.
+
+Finite deliveries now scale by storyline depth using FTS point counts and weighted availability.
+See the [balance report](../delivery-balance.md) for the current pools, quantities and rarity estimates.
 
 ## Contact directory
 

@@ -50,7 +50,14 @@ function PLUGIN:RecoverCompletions(character)
 		local definition = ix.jobs.list[event.identifier]
 		local id = definition and definition.townProgression
 		assert(id and self.steps[id], "Unknown saved town commission: " .. event.identifier)
-		if ix.progression.IsActive(character, id) then ix.progression.SetProgressionValue(character, id, 1) end
+		if ix.progression.IsActive(character, id) then
+			if self.steps[id].retiredCommission then
+				-- An already accepted field assignment can still settle the same milestone once.
+				ix.progression.SetCompleted(character, id)
+			else
+				ix.progression.SetProgressionValue(character, id, 1)
+			end
+		end
 		if ix.progression.IsCompleted(character, id) then
 			state.pending[npc] = nil
 			changed = true

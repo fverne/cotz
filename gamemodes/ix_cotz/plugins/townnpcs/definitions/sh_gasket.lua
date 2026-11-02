@@ -84,18 +84,15 @@ PLUGIN:Register("gasket", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Fuel. The kind on the list, brought here. People get surprisingly interested in the "
-				.. "generator when it stops; I'd like to have something ready before they come and explain the "
-				.. "problem to me."
+				"There are supplies missing again. Everybody notices when something stops working; fewer people "
+				.. "notice what it takes to keep it going. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = (
-				"That's what I asked for. Good. I'll put it where it belongs. If anyone asks, the lights are "
-				.. "still on because people brought fuel, not because the machine developed a generous nature."
-			),
+			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
 				{
-					pool = "fuel",
-					quantity = 2,
+					pool = "town_delivery_utilities_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -155,30 +152,29 @@ PLUGIN:Register("gasket", {
 		{
 			id = "GK04",
 			completionCash = 650,
-			name = "Technut's Regulator",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the regulator for Technut from the assigned search area in Marsh. Deliver it to 'Technut' "
-				.. "in Marsh, then come back to the issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"GK03"},
 			briefing = (
-				"Technut wants the regulator on his bench before he'll agree with my diagnosis. Fair enough; at "
-				.. "least we'll be arguing about the same part. Recover the regulator for Technut from the assigned "
-				.. "search area in Marsh. Deliver it to 'Technut' in Marsh, then come back to me in Marsh."
+				"There are supplies missing again. Everybody notices when something stops working; fewer people "
+				.. "notice what it takes to keep it going. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "He's got it? Then he can stop improving my explanation and inspect the regulator.",
-			field = {
-				description = (
-					"A finned grey control box with a red stripe and several round front connectors. Gasket's note: "
-					.. "\"Technut wants the regulator on his bench before he'll agree with my diagnosis.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_control",
-				label = "Regulator for Technut",
-				recipient = "technut",
+			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
+			requirements = {
+				{
+					pool = "town_delivery_utilities_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -189,13 +185,18 @@ PLUGIN:Register("gasket", {
 			kind = "delivery",
 			requires = {"GK03"},
 			briefing = (
-				"The water equipment needs its share as well. Check the requested supplies before carrying a "
-				.. "substitute all the way here."
+				"There are supplies missing again. Everybody notices when something stops working; fewer people "
+				.. "notice what it takes to keep it going. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "That's useful. I'll check it before it goes beside anything clean.",
+			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
 				{
-					pool = "filters",
+					pool = "town_delivery_utilities_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_2",
 					quantity = 1,
 				},
 			},
@@ -260,29 +261,29 @@ PLUGIN:Register("gasket", {
 		{
 			id = "GK08",
 			completionCash = 1050,
-			name = "The Bad Intake",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Deploy the recorder at the assigned site in Marsh, let it finish recording, then retrieve the "
-				.. "intake survey recorder. Bring it back to the issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"GK06"},
 			briefing = (
-				"I want a recording from the intake survey. If I ask three people what they noticed, I get three "
-				.. "different days and an argument. Deploy the recorder at the assigned site in Marsh, let it finish "
-				.. "recording, then retrieve the intake survey recorder. Bring it back to me in Marsh."
+				"There are supplies missing again. Everybody notices when something stops working; fewer people "
+				.. "notice what it takes to keep it going. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Set it down clear of the fuel. I'll check the recording before blaming anything.",
-			field = {
-				description = (
-					"A flat dark electronic module with a printed number and a small circular emblem. Gasket's note: "
-					.. "\"I want a recording from the intake survey.\""
-				),
-				kind = "sensor",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_module",
-				label = "Intake survey recorder",
+			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
+			requirements = {
+				{
+					pool = "town_delivery_utilities_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -293,14 +294,19 @@ PLUGIN:Register("gasket", {
 			kind = "delivery",
 			requires = {"GK07"},
 			briefing = (
-				"There are ordinary service supplies to replace. Nobody remembers them until someone opens the "
-				.. "last container."
+				"There are supplies missing again. Everybody notices when something stops working; fewer people "
+				.. "notice what it takes to keep it going. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Thank you. I'll put the next service lot aside before someone borrows it.",
+			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
 				{
-					pool = "engine_care",
-					quantity = 3,
+					pool = "town_delivery_utilities_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -349,29 +355,33 @@ PLUGIN:Register("gasket", {
 		{
 			id = "GK12",
 			completionCash = 1450,
-			name = "The Forgotten Store",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the reserve utility case from the assigned search area in Marsh. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"GK10"},
 			briefing = (
-				"There's a reserve case to recover. I want to know what can be used before we start promising it "
-				.. "to anybody. Recover the reserve utility case from the assigned search area in Marsh. Bring it "
-				.. "back to me in Marsh."
+				"There are supplies missing again. Everybody notices when something stops working; fewer people "
+				.. "notice what it takes to keep it going. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Latches held. I'll inspect it before it goes on the shelf.",
-			field = {
-				description = (
-					"A small yellow hard case with ribbed corners and a large label on its lid. Gasket's note: "
-					.. "\"There's a reserve case to recover.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_case",
-				label = "Reserve utility case",
+			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
+			requirements = {
+				{
+					pool = "town_delivery_utilities_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -391,14 +401,23 @@ PLUGIN:Register("gasket", {
 			kind = "delivery",
 			requires = {"GK11"},
 			briefing = (
-				"I want the supplies here before the next service, while there's still time to find what we're "
-				.. "short of."
+				"There are supplies missing again. Everybody notices when something stops working; fewer people "
+				.. "notice what it takes to keep it going. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Right. I'll put them where I can reach them without searching three borrowed containers.",
+			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
 				{
-					pool = "fuel",
-					quantity = 4,
+					pool = "town_delivery_utilities_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -446,30 +465,33 @@ PLUGIN:Register("gasket", {
 		{
 			id = "GK16",
 			completionCash = 1850,
-			name = "The Long Supply Line",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the utility freight manifest from the assigned search area in Marsh. Deliver it to "
-				.. "'Ledger' in Waystation, then come back to the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"GK14"},
 			briefing = (
-				"Ledger needs the utility freight paperwork. I've got enough to do without remembering a shipment "
-				.. "differently every time someone asks. Recover the utility freight manifest from the assigned "
-				.. "search area in Marsh. Deliver it to 'Ledger' in Waystation, then come back to me in Marsh."
+				"There are supplies missing again. Everybody notices when something stops working; fewer people "
+				.. "notice what it takes to keep it going. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "If Ledger has it, I can leave the freight dispute to somebody who enjoys keeping the copies.",
-			field = {
-				description = (
-					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Gasket's "
-					.. "note: \"Ledger needs the utility freight paperwork.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_manifest",
-				label = "Utility freight manifest",
-				recipient = "ledger",
+			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
+			requirements = {
+				{
+					pool = "town_delivery_utilities_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -480,14 +502,23 @@ PLUGIN:Register("gasket", {
 			kind = "delivery",
 			requires = {"GK15"},
 			briefing = (
-				"The water equipment needs its share as well. Check the requested supplies before carrying a "
-				.. "substitute all the way here."
+				"There are supplies missing again. Everybody notices when something stops working; fewer people "
+				.. "notice what it takes to keep it going. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "That's useful. I'll check it before it goes beside anything clean.",
+			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
 				{
-					pool = "filters",
+					pool = "town_delivery_utilities_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -547,29 +578,37 @@ PLUGIN:Register("gasket", {
 		{
 			id = "GK20",
 			completionCash = 2250,
-			name = "The Emergency Test",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Deploy the recorder at the assigned site in Marsh, let it finish recording, then retrieve the "
-				.. "emergency service recorder. Bring it back to the issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"GK19"},
 			briefing = (
-				"One more service recording. I want something I can check when the next person insists a noise has "
-				.. "always been there. Deploy the recorder at the assigned site in Marsh, let it finish recording, "
-				.. "then retrieve the emergency service recorder. Bring it back to me in Marsh."
+				"There are supplies missing again. Everybody notices when something stops working; fewer people "
+				.. "notice what it takes to keep it going. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "All right. I'll go through the recording while the equipment is still where I left it.",
-			field = {
-				description = (
-					"A flat dark electronic module with a printed number and a small circular emblem. Gasket's note: "
-					.. "\"One more service recording.\""
-				),
-				kind = "sensor",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_module",
-				label = "Emergency service recorder",
+			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
+			requirements = {
+				{
+					pool = "town_delivery_utilities_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			stock = {
@@ -584,14 +623,27 @@ PLUGIN:Register("gasket", {
 			kind = "delivery",
 			requires = {"GK20"},
 			briefing = (
-				"There are ordinary service supplies to replace. Nobody remembers them until someone opens the "
-				.. "last container."
+				"There are supplies missing again. Everybody notices when something stops working; fewer people "
+				.. "notice what it takes to keep it going. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Thank you. I'll put the next service lot aside before someone borrows it.",
+			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
 				{
-					pool = "engine_care",
-					quantity = 6,
+					pool = "town_delivery_utilities_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -599,32 +651,37 @@ PLUGIN:Register("gasket", {
 		{
 			id = "GK22",
 			completionCash = 2450,
-			name = "A Light Left On",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the last caretaker's journal from the assigned search area in Marsh. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"GK21"},
 			briefing = (
-				"Whoever kept these notes had to do the ordinary maintenance too. I want the little things they "
-				.. "thought worth remembering. Recover the last caretaker's journal from the assigned search area in "
-				.. "Marsh. Bring it back to me in Marsh."
+				"There are supplies missing again. Everybody notices when something stops working; fewer people "
+				.. "notice what it takes to keep it going. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = (
-				"You've spent a lot of time helping with work people only notice when it stops. I noticed. Leave "
-				.. "the book here; you can put your feet up for once."
-			),
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Gasket's note: \"Whoever "
-					.. "kept these notes had to do the ordinary maintenance too.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_notebook",
-				label = "Last caretaker's journal",
+			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
+			requirements = {
+				{
+					pool = "town_delivery_utilities_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_utilities_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			recognition = "Gasket's trusted contact",

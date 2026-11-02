@@ -77,18 +77,14 @@ PLUGIN:Register("boss", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need the administrative records on this list delivered here. Read the order before "
-				.. "accepting it. If you need clarification, ask while we're both here; an assumption "
-				.. "discovered after you leave is much harder to correct."
+				"There is an allocation to fill. Check the request before bringing anything; I need to know what "
+				.. "I can actually issue. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"The records are here. Good. I'll go through them. You understood the assignment and "
-				.. "reported back; that's the standard I expect for whatever comes next."
-			),
+			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
 				{
-					pool = "administrative_documents",
-					quantity = 1,
+					pool = "town_delivery_military_waystation_1",
+					quantity = 9,
 				},
 			},
 			benefits = {
@@ -148,29 +144,28 @@ PLUGIN:Register("boss", {
 		{
 			id = "BO04",
 			completionCash = 650,
-			name = "The Forward Record",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the forward position's orders from the assigned search area in Waystation. Bring it back "
-				.. "to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BO03"},
 			briefing = (
-				"Recover the field orders. Knowing what was intended matters when we compare it with the report. "
-				.. "Recover the forward position's orders from the assigned search area in Waystation. Bring it back "
-				.. "to me in Waystation."
+				"There is an allocation to fill. Check the request before bringing anything; I need to know what "
+				.. "I can actually issue. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Orders received. I'll read them against the other records.",
-			field = {
-				description = (
-					"A buff-coloured document folder with printed sheets protruding at uneven angles. Boss's note: "
-					.. "\"Recover the field orders.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_military",
-				label = "Forward position's orders",
+			completion = "Received. I will account for these with the other supplies.",
+			requirements = {
+				{
+					pool = "town_delivery_military_waystation_1",
+					quantity = 18,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -180,12 +175,19 @@ PLUGIN:Register("boss", {
 			name = "Staying Equipped",
 			kind = "delivery",
 			requires = {"BO03"},
-			briefing = "The listed supplies are needed here. Verify the request before accepting the load.",
-			completion = "Delivery received. That closes the listed requirement.",
+			briefing = (
+				"There is an allocation to fill. Check the request before bringing anything; I need to know what "
+				.. "I can actually issue. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_military_waystation_1",
+					quantity = 18,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -246,30 +248,28 @@ PLUGIN:Register("boss", {
 		{
 			id = "BO08",
 			completionCash = 1050,
-			name = "The Supply Register",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the supply register for Quartermaster from the assigned search area in Garbage. Deliver "
-				.. "it to 'Quartermaster' in Waystation, then come back to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BO06"},
 			briefing = (
-				"Quartermaster needs the supply records. Let him check the allocations from the original. Recover "
-				.. "the supply register for Quartermaster from the assigned search area in Garbage. Deliver it to "
-				.. "'Quartermaster' in Waystation, then come back to me in Waystation."
+				"There is an allocation to fill. Check the request before bringing anything; I need to know what "
+				.. "I can actually issue. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "He has the register. That gives us an account we can compare rather than another estimate.",
-			field = {
-				description = (
-					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Boss's note: "
-					.. "\"Quartermaster needs the supply records.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_manifest",
-				label = "Supply register for Quartermaster",
-				recipient = "quartermaster",
+			completion = "Received. I will account for these with the other supplies.",
+			requirements = {
+				{
+					pool = "town_delivery_military_waystation_1",
+					quantity = 18,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -279,11 +279,18 @@ PLUGIN:Register("boss", {
 			name = "Orders and Receipts",
 			kind = "delivery",
 			requires = {"BO07"},
-			briefing = "Bring the requested documents here intact. We need the record before we rely on the summary.",
-			completion = "Received. I'll have the account checked.",
+			briefing = (
+				"There is an allocation to fill. Check the request before bringing anything; I need to know what "
+				.. "I can actually issue. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_military_waystation_1",
+					quantity = 18,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
 					quantity = 1,
 				},
 			},
@@ -333,29 +340,32 @@ PLUGIN:Register("boss", {
 		{
 			id = "BO12",
 			completionCash = 1450,
-			name = "The Second Command Post",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the command-post field recording from the assigned search area in Waystation. Bring it "
-				.. "back to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BO10"},
 			briefing = (
-				"Recover the position's recording. We need an account we can review beside the written orders. "
-				.. "Recover the command-post field recording from the assigned search area in Waystation. Bring it "
-				.. "back to me in Waystation."
+				"There is an allocation to fill. Check the request before bringing anything; I need to know what "
+				.. "I can actually issue. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Recording received. Interpretation can wait until I've heard it in full.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Boss's note: "
-					.. "\"Recover the position's recording.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_tape",
-				label = "Command-post field recording",
+			completion = "Received. I will account for these with the other supplies.",
+			requirements = {
+				{
+					pool = "town_delivery_military_waystation_1",
+					quantity = 27,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -375,14 +385,22 @@ PLUGIN:Register("boss", {
 			kind = "delivery",
 			requires = {"BO11"},
 			briefing = (
-				"Bring this order through as specified. If it cannot be filled, don't manufacture a substitute "
-				.. "agreement on the route."
+				"There is an allocation to fill. Check the request before bringing anything; I need to know what "
+				.. "I can actually issue. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Received. I'll account for it here.",
+			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 4,
+					pool = "town_delivery_military_waystation_1",
+					quantity = 27,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -430,29 +448,32 @@ PLUGIN:Register("boss", {
 		{
 			id = "BO16",
 			completionCash = 1850,
-			name = "The Handler's Orders",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the handler's command recording from the assigned search area in Pripyat. Bring it back "
-				.. "to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BO14"},
 			briefing = (
-				"I need the command recording intact. The surrounding instructions matter as much as the line "
-				.. "somebody remembers. Recover the handler's command recording from the assigned search area in "
-				.. "Pripyat. Bring it back to me in Waystation."
+				"There is an allocation to fill. Check the request before bringing anything; I need to know what "
+				.. "I can actually issue. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. We can review the complete sequence here.",
-			field = {
-				description = (
-					"A pale audio cassette with a broad blue printed label and twin spool windows. Boss's note: \"I "
-					.. "need the command recording intact.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_tape2",
-				label = "Handler's command recording",
+			completion = "Received. I will account for these with the other supplies.",
+			requirements = {
+				{
+					pool = "town_delivery_military_waystation_1",
+					quantity = 27,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -462,12 +483,23 @@ PLUGIN:Register("boss", {
 			name = "A Report That Holds",
 			kind = "delivery",
 			requires = {"BO15"},
-			briefing = "The listed supplies are needed here. Verify the request before accepting the load.",
-			completion = "Delivery received. That closes the listed requirement.",
+			briefing = (
+				"There is an allocation to fill. Check the request before bringing anything; I need to know what "
+				.. "I can actually issue. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 5,
+					pool = "town_delivery_military_waystation_1",
+					quantity = 27,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -525,29 +557,36 @@ PLUGIN:Register("boss", {
 		{
 			id = "BO20",
 			completionCash = 2250,
-			name = "The Last Command",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the final command record from the assigned search area in Waystation. Bring it back to "
-				.. "the issuing contact in Waystation."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BO19"},
 			briefing = (
-				"Recover the final command record. Bring the original account back before attempting to reconcile "
-				.. "it in the field. Recover the final command record from the assigned search area in Waystation. "
-				.. "Bring it back to me in Waystation."
+				"There is an allocation to fill. Check the request before bringing anything; I need to know what "
+				.. "I can actually issue. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Received. I'll keep it alongside the earlier orders while I check the sequence.",
-			field = {
-				description = (
-					"A buff-coloured document folder with printed sheets protruding at uneven angles. Boss's note: "
-					.. "\"Recover the final command record.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_military",
-				label = "Final command record",
+			completion = "Received. I will account for these with the other supplies.",
+			requirements = {
+				{
+					pool = "town_delivery_military_waystation_1",
+					quantity = 36,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			stock = {
@@ -561,12 +600,27 @@ PLUGIN:Register("boss", {
 			name = "Return to Readiness",
 			kind = "delivery",
 			requires = {"BO20"},
-			briefing = "There is another supply request. Keep it separate from the equipment needed for your own return.",
-			completion = "All requested material received.",
+			briefing = (
+				"There is an allocation to fill. Check the request before bringing anything; I need to know what "
+				.. "I can actually issue. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 6,
+					pool = "town_delivery_military_waystation_1",
+					quantity = 36,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -574,32 +628,36 @@ PLUGIN:Register("boss", {
 		{
 			id = "BO22",
 			completionCash = 2450,
-			name = "The Missing Patrol's Answer",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the patrol identification file from the assigned search area in Waystation. Bring it back "
-				.. "to the issuing contact in Waystation."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BO21"},
 			briefing = (
-				"Bring the personnel record back complete. A familiar name isn't enough to turn a fragment into a "
-				.. "patrol report. Recover the patrol identification file from the assigned search area in "
-				.. "Waystation. Bring it back to me in Waystation."
+				"There is an allocation to fill. Check the request before bringing anything; I need to know what "
+				.. "I can actually issue. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"You've finished the work and kept the account intact. I appreciate the judgement that took. I'll "
-				.. "read this before closing the report. Get some rest; the next discussion can wait."
-			),
-			field = {
-				description = (
-					"A cardboard file folder with an emblem and printed wording on the front. Boss's note: \"Bring the "
-					.. "personnel record back complete.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_personnel",
-				label = "Patrol identification file",
+			completion = "Received. I will account for these with the other supplies.",
+			requirements = {
+				{
+					pool = "town_delivery_military_waystation_1",
+					quantity = 36,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			recognition = "Boss's trusted contact",

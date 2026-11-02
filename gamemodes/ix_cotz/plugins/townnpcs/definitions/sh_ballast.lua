@@ -53,18 +53,15 @@ PLUGIN:Register("ballast", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need the maintenance supplies on this list. Bring them here and I'll put them with the "
-				.. "cargo gear. No point discovering a fastening has failed once the package is halfway down a "
-				.. "bank and both hands are occupied."
+				"I need packing supplies for the loads coming through. It is easier to keep a load dry than "
+				.. "explain afterwards why nobody thought of it. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"Good. Set them down there. I'll check the gear before I need it, which is a habit I "
-				.. "recommend even when there isn't an audience to admire it."
-			),
+			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 2,
+					pool = "town_delivery_textiles_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -121,30 +118,22 @@ PLUGIN:Register("ballast", {
 		{
 			id = "BA04",
 			completionCash = 650,
-			name = "The Rotten Landing",
-			kind = "field",
-			objective = (
-				"Recover the landing inspection journal from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"BA02"},
 			briefing = (
-				"I'd like the inspection journal before anyone tells me that landing was perfectly sound when they "
-				.. "last used it. Recover the landing inspection journal from the assigned search area in Marsh. "
-				.. "Bring it back to me in Marsh."
+				"I need packing supplies for the loads coming through. It is easier to keep a load dry than "
+				.. "explain afterwards why nobody thought of it. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Good. I'll read what the inspector actually checked.",
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Ballast's note: \"I'd like "
-					.. "the inspection journal before anyone tells me that landing was perfectly sound when they last "
-					.. "used it.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_notebook",
-				label = "Landing inspection journal",
+			completion = "Put them down here. I will sort the packing before anything leaves.",
+			requirements = {
+				{
+					pool = "town_delivery_textiles_marsh_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -154,12 +143,20 @@ PLUGIN:Register("ballast", {
 			name = "Fuel for the Return",
 			kind = "delivery",
 			requires = {"BA03"},
-			briefing = "I need the listed supplies brought here. Leave enough room to carry your own kit home too.",
-			completion = "Put it down gently. That's a useful load.",
+			briefing = (
+				"I need packing supplies for the loads coming through. It is easier to keep a load dry than "
+				.. "explain afterwards why nobody thought of it. Bring everything on the list back here; I need the "
+				.. "full delivery."
+			),
+			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_textiles_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -220,29 +217,29 @@ PLUGIN:Register("ballast", {
 		{
 			id = "BA08",
 			completionCash = 1050,
-			name = "The Crew List",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the missing crew roster from the assigned search area in Marsh. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BA06"},
 			briefing = (
-				"I want the crew roster. People remember who was supposed to travel, then start treating that as "
-				.. "who actually went. Recover the missing crew roster from the assigned search area in Marsh. Bring "
-				.. "it back to me in Marsh."
+				"I need packing supplies for the loads coming through. It is easier to keep a load dry than "
+				.. "explain afterwards why nobody thought of it. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Let me lay it flat. I'll go through the names without an audience at my shoulder.",
-			field = {
-				description = (
-					"A cardboard file folder with an emblem and printed wording on the front. Ballast's note: \"I want "
-					.. "the crew roster.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_personnel",
-				label = "Missing crew roster",
+			completion = "Put them down here. I will sort the packing before anything leaves.",
+			requirements = {
+				{
+					pool = "town_delivery_textiles_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -253,13 +250,18 @@ PLUGIN:Register("ballast", {
 			kind = "delivery",
 			requires = {"BA07"},
 			briefing = (
-				"Bring the requested supplies. Packing them properly is worth the minute it takes before setting "
-				.. "off."
+				"I need packing supplies for the loads coming through. It is easier to keep a load dry than "
+				.. "explain afterwards why nobody thought of it. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "All here. I'll stow them before anyone starts moving the pile.",
+			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_textiles_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_2",
 					quantity = 1,
 				},
 			},
@@ -308,30 +310,33 @@ PLUGIN:Register("ballast", {
 		{
 			id = "BA12",
 			completionCash = 1450,
-			name = "The Disputed Cargo",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the disputed freight evidence from the assigned search area in Garbage. Deliver it to "
-				.. "'Brass' in Garbage, then come back to the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BA10"},
 			briefing = (
-				"Brass can settle the disputed freight figures if he gets the case. I'd like to stop being asked "
-				.. "to choose a total by how convincing it sounds. Recover the disputed freight evidence from the "
-				.. "assigned search area in Garbage. Deliver it to 'Brass' in Garbage, then come back to me in Marsh."
+				"I need packing supplies for the loads coming through. It is easier to keep a load dry than "
+				.. "explain afterwards why nobody thought of it. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Brass has it now. If someone wants the figures argued over, they know where to stand.",
-			field = {
-				description = (
-					"A compact hard case with orange panels, dark protective ribs and a carrying handle. Ballast's "
-					.. "note: \"Brass can settle the disputed freight figures if he gets the case.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_evidence",
-				label = "Disputed freight evidence",
-				recipient = "brass",
+			completion = "Put them down here. I will sort the packing before anything leaves.",
+			requirements = {
+				{
+					pool = "town_delivery_textiles_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -351,14 +356,23 @@ PLUGIN:Register("ballast", {
 			kind = "delivery",
 			requires = {"BA11"},
 			briefing = (
-				"There are supplies to replace before the next recovery. Check the order, then decide what you can "
-				.. "carry."
+				"I need packing supplies for the loads coming through. It is easier to keep a load dry than "
+				.. "explain afterwards why nobody thought of it. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Good. You can get the weight off your shoulders now.",
+			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 4,
+					pool = "town_delivery_textiles_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -407,29 +421,33 @@ PLUGIN:Register("ballast", {
 		{
 			id = "BA16",
 			completionCash = 1850,
-			name = "A Voice From Shore",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the crew's shore message from the assigned search area in Marsh. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BA14"},
 			briefing = (
-				"There's another crew recording to collect. Don't spend the journey trying to decide what sort of "
-				.. "message it must be. Recover the crew's shore message from the assigned search area in Marsh. "
-				.. "Bring it back to me in Marsh."
+				"I need packing supplies for the loads coming through. It is easier to keep a load dry than "
+				.. "explain afterwards why nobody thought of it. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "You can sit while I put this away. No need to keep standing as if I'll send you straight back.",
-			field = {
-				description = (
-					"A pale audio cassette with a broad blue printed label and twin spool windows. Ballast's note: "
-					.. "\"There's another crew recording to collect.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_tape2",
-				label = "Crew's shore message",
+			completion = "Put them down here. I will sort the packing before anything leaves.",
+			requirements = {
+				{
+					pool = "town_delivery_textiles_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -439,12 +457,24 @@ PLUGIN:Register("ballast", {
 			name = "A Boat in Reserve",
 			kind = "delivery",
 			requires = {"BA15"},
-			briefing = "I'd like the reserve brought up without turning your own return into a struggle.",
-			completion = "Thank you. I'll keep it dry from this end.",
+			briefing = (
+				"I need packing supplies for the loads coming through. It is easier to keep a load dry than "
+				.. "explain afterwards why nobody thought of it. Bring everything on the list back here; I need the "
+				.. "full delivery."
+			),
+			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 5,
+					pool = "town_delivery_textiles_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -501,30 +531,37 @@ PLUGIN:Register("ballast", {
 		{
 			id = "BA20",
 			completionCash = 2250,
-			name = "The Missing Logbook",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the landing log for Carbon from the assigned search area in Marsh. Deliver it to 'Carbon' "
-				.. "in Waystation, then come back to the issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BA19"},
 			briefing = (
-				"Carbon should have the landing log to compare. I can remember a journey; he can put it beside "
-				.. "accounts I haven't seen. Recover the landing log for Carbon from the assigned search area in "
-				.. "Marsh. Deliver it to 'Carbon' in Waystation, then come back to me in Marsh."
+				"I need packing supplies for the loads coming through. It is easier to keep a load dry than "
+				.. "explain afterwards why nobody thought of it. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "He's got the book. Let him read it before anyone asks him for a tidy ending.",
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Ballast's note: \"Carbon "
-					.. "should have the landing log to compare.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_notebook",
-				label = "Landing log for Carbon",
-				recipient = "carbon",
+			completion = "Put them down here. I will sort the packing before anything leaves.",
+			requirements = {
+				{
+					pool = "town_delivery_textiles_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			stock = {
@@ -538,12 +575,28 @@ PLUGIN:Register("ballast", {
 			name = "A Working Landing",
 			kind = "delivery",
 			requires = {"BA20"},
-			briefing = "I need the listed supplies brought here. Leave enough room to carry your own kit home too.",
-			completion = "Put it down gently. That's a useful load.",
+			briefing = (
+				"I need packing supplies for the loads coming through. It is easier to keep a load dry than "
+				.. "explain afterwards why nobody thought of it. Bring everything on the list back here; I need the "
+				.. "full delivery."
+			),
+			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 6,
+					pool = "town_delivery_textiles_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -551,33 +604,37 @@ PLUGIN:Register("ballast", {
 		{
 			id = "BA22",
 			completionCash = 2450,
-			name = "The First Return Cargo",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the return freight case from the assigned search area in Marsh. Deliver it to 'Ledger' in "
-				.. "Waystation, then come back to the issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BA21"},
 			briefing = (
-				"Ledger is waiting for the recovered case. A route looks quite different when you have to finish "
-				.. "carrying the load. Recover the return freight case from the assigned search area in Marsh. "
-				.. "Deliver it to 'Ledger' in Waystation, then come back to me in Marsh."
+				"I need packing supplies for the loads coming through. It is easier to keep a load dry than "
+				.. "explain afterwards why nobody thought of it. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"You made it through and came back. I'd work with you again. Take a moment before you start "
-				.. "offering your shoulders to somebody else."
-			),
-			field = {
-				description = (
-					"A small yellow hard case with ribbed corners and a large label on its lid. Ballast's note: "
-					.. "\"Ledger is waiting for the recovered case.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_case",
-				label = "Return freight case",
-				recipient = "ledger",
+			completion = "Put them down here. I will sort the packing before anything leaves.",
+			requirements = {
+				{
+					pool = "town_delivery_textiles_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			recognition = "Ballast's trusted contact",

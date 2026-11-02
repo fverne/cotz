@@ -57,18 +57,14 @@ PLUGIN:Register("cleaner", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring the maintenance supplies on the list. Here. I need a few things prepared before I "
-				.. "send anything out. You can read an order and bring what it asks for; that's enough to start "
-				.. "with."
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"That's what I asked for. Leave it there. If you've questions about further work, ask them "
-				.. "before you pick anything up."
-			),
+			completion = "Leave them here. That settles this request.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 2,
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -125,29 +121,21 @@ PLUGIN:Register("cleaner", {
 		{
 			id = "CL04",
 			completionCash = 650,
-			name = "The Wrong Marker",
-			kind = "field",
-			objective = (
-				"Recover the drop placement notebook from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"CL03"},
 			briefing = (
-				"I want the placement record. A person remembering where the marker ought to be is how this became "
-				.. "a problem. Recover the drop placement notebook from the assigned search area in Garbage. Bring it "
-				.. "back to me in Garbage."
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
 			),
-			completion = "Leave the notebook here. I'll check the location against the account.",
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Cleaner's note: \"I want "
-					.. "the placement record.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_notebook",
-				label = "Drop placement notebook",
+			completion = "Leave them here. That settles this request.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -157,12 +145,19 @@ PLUGIN:Register("cleaner", {
 			name = "A Cleaner Way In",
 			kind = "delivery",
 			requires = {"CL04"},
-			briefing = "Bring the listed supplies here. Keep them separate from your own equipment.",
-			completion = "Received. Put them on that side.",
+			briefing = (
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
+			),
+			completion = "Leave them here. That settles this request.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -223,29 +218,28 @@ PLUGIN:Register("cleaner", {
 		{
 			id = "CL08",
 			completionCash = 1050,
-			name = "The Missing Runner",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the runner's route recording from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"CL06"},
 			briefing = (
-				"The runner's recording is still out along the freight route. I want what was recorded, including "
-				.. "the uninteresting part. Recover the runner's route recording from the assigned search area in "
-				.. "Garbage. Bring it back to me in Garbage."
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
 			),
-			completion = "Leave it. I'll listen without somebody explaining what I should hear.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Cleaner's note: "
-					.. "\"The runner's recording is still out along the freight route.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_tape",
-				label = "Runner's route recording",
+			completion = "Leave them here. That settles this request.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -255,11 +249,18 @@ PLUGIN:Register("cleaner", {
 			name = "Digging Deeper",
 			kind = "delivery",
 			requires = {"CL07"},
-			briefing = "There's a supply order to fill. Read it before substituting something you already have.",
-			completion = "That's what I requested.",
+			briefing = (
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
+			),
+			completion = "Leave them here. That settles this request.",
 			requirements = {
 				{
-					pool = "basic_tools",
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
 					quantity = 1,
 				},
 			},
@@ -308,29 +309,28 @@ PLUGIN:Register("cleaner", {
 		{
 			id = "CL12",
 			completionCash = 1450,
-			name = "The Duplicate Seal",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the duplicate-seal evidence from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"CL10"},
 			briefing = (
-				"There's a second cache record to check. Similar seals don't save us the trouble of looking at "
-				.. "both. Recover the duplicate-seal evidence from the assigned search area in Garbage. Bring it back "
-				.. "to me in Garbage."
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. I can compare the two without relying on somebody's description.",
-			field = {
-				description = (
-					"A compact hard case with orange panels, dark protective ribs and a carrying handle. Cleaner's "
-					.. "note: \"There's a second cache record to check.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_evidence",
-				label = "Duplicate-seal evidence",
+			completion = "Leave them here. That settles this request.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -349,12 +349,23 @@ PLUGIN:Register("cleaner", {
 			name = "Safe and Dry",
 			kind = "delivery",
 			requires = {"CL11"},
-			briefing = "I need the supplies on this list. The delivery ends here.",
-			completion = "Fine. I'll put it away.",
+			briefing = (
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
+			),
+			completion = "Leave them here. That settles this request.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 4,
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -404,29 +415,32 @@ PLUGIN:Register("cleaner", {
 		{
 			id = "CL16",
 			completionCash = 1850,
-			name = "The False Destination",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Collect the corrected-route parcel at the assigned pickup in Garbage and deliver it to the "
-				.. "assigned cache. Come back to the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"CL14"},
 			briefing = (
-				"The parcel goes to the assigned cache endpoint. Use the destination on this order, not the one "
-				.. "someone remembers. Collect the corrected-route parcel at the assigned pickup in Garbage and "
-				.. "deliver it to the assigned cache. Come back to me in Garbage."
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
 			),
-			completion = "Delivered to the corrected endpoint. Fine. We can stop discussing the previous instruction.",
-			field = {
-				description = (
-					"A USB drive with a large rear loop and a handwritten paper label around its body. Cleaner's "
-					.. "note: \"The parcel goes to the assigned cache endpoint.\""
-				),
-				kind = "deadDrop",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_security",
-				label = "Corrected-route parcel",
+			completion = "Leave them here. That settles this request.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -436,12 +450,23 @@ PLUGIN:Register("cleaner", {
 			name = "A Better Reserve",
 			kind = "delivery",
 			requires = {"CL15"},
-			briefing = "Bring this lot through intact. No additional arrangements to make along the way.",
-			completion = "Received. Your part is finished.",
+			briefing = (
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
+			),
+			completion = "Leave them here. That settles this request.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 5,
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -499,29 +524,32 @@ PLUGIN:Register("cleaner", {
 		{
 			id = "CL20",
 			completionCash = 2250,
-			name = "The Unmanned Depot",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the unmanned-depot case from the assigned search area in Pripyat. Bring it back to the "
-				.. "issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"CL18"},
 			briefing = (
-				"There's a case at the Pripyat supply cache. Recover it intact. Don't improve the packaging to see "
-				.. "what's inside. Recover the unmanned-depot case from the assigned search area in Pripyat. Bring it "
-				.. "back to me in Garbage."
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
 			),
-			completion = "Case received. Leave it on that side.",
-			field = {
-				description = (
-					"A low hard case with long contrasting strips across its ribbed lid. Cleaner's note: \"There's a "
-					.. "case at the Pripyat supply cache.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_equipment",
-				label = "Unmanned-depot case",
+			completion = "Leave them here. That settles this request.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -531,12 +559,23 @@ PLUGIN:Register("cleaner", {
 			name = "Nobody's Spare Key",
 			kind = "delivery",
 			requires = {"CL19"},
-			briefing = "Bring the listed supplies here. Keep them separate from your own equipment.",
-			completion = "Received. Put them on that side.",
+			briefing = (
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
+			),
+			completion = "Leave them here. That settles this request.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 6,
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -583,29 +622,36 @@ PLUGIN:Register("cleaner", {
 		{
 			id = "CL24",
 			completionCash = 2650,
-			name = "The Burned Address",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the last routing record from the assigned search area in Pripyat. Bring it back to the "
-				.. "issuing contact in Garbage."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"CL22"},
 			briefing = (
-				"Bring back the routing record from Pripyat. Keep the address pages with it; they are the reason "
-				.. "for the trip. Recover the last routing record from the assigned search area in Pripyat. Bring it "
-				.. "back to me in Garbage."
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. I can trace the route from the papers now.",
-			field = {
-				description = (
-					"A cardboard file folder with a small coloured crest on its cover. Cleaner's note: \"Bring back "
-					.. "the routing record from Pripyat.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_official",
-				label = "Last routing record",
+			completion = "Leave them here. That settles this request.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -624,12 +670,27 @@ PLUGIN:Register("cleaner", {
 			name = "Room to Keep It",
 			kind = "delivery",
 			requires = {"CL23", "CL24"},
-			briefing = "There's a supply order to fill. Read it before substituting something you already have.",
-			completion = "That's what I requested.",
+			briefing = (
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
+			),
+			completion = "Leave them here. That settles this request.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 7,
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -677,32 +738,36 @@ PLUGIN:Register("cleaner", {
 		{
 			id = "CL28",
 			completionCash = 3000,
-			name = "No More Missing Parcels",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the closing freight manifest from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"CL27"},
 			briefing = (
-				"I need the final packing list complete. One missing line leaves a useful excuse for another "
-				.. "argument. Recover the closing freight manifest from the assigned search area in Garbage. Bring it "
-				.. "back to me in Garbage."
+				"I need supplies for the next arrangements. The list is specific. Bring them here. Bring "
+				.. "everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"Leave it here. The account can be checked all the way through now. You've done what I asked; I'm "
-				.. "satisfied with the arrangement."
-			),
-			field = {
-				description = (
-					"A clipboard carrying a densely printed packing list and a stamped mark. Cleaner's note: \"I need "
-					.. "the final packing list complete.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_receipt",
-				label = "Closing freight manifest",
+			completion = "Leave them here. That settles this request.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_garbage_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_trail_garbage_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_garbage_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_garbage_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			recognition = "Cleaner's trusted contact",

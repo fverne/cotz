@@ -95,18 +95,15 @@ PLUGIN:Register("jitters", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I'm short of the medical supplies on this list. Could you bring them here? I'd like to sort "
-				.. "them before the next person arrives needing something urgently. They always seem to arrive "
-				.. "just when I've started rearranging the cabinet."
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = (
-				"Thank you. Put them here, please. I'll check and put them away. That's one less thing to "
-				.. "worry about until I think of another one."
-			),
+			completion = "Thank you. Put those here so I can check them and clear some room.",
 			requirements = {
 				{
-					pool = "town_medical",
-					quantity = 2,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -166,29 +163,22 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT04",
 			completionCash = 650,
-			name = "A Missing Bag",
-			kind = "field",
-			objective = (
-				"Recover the abandoned medic's case from the assigned search area in Marsh. Bring it back to the "
-				.. "issuing contact in Marsh."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"JT03"},
 			briefing = (
-				"There's a medic's case still out in Marsh. Please keep everything together; an unfamiliar little "
-				.. "fitting may have a purpose. Recover the abandoned medic's case from the assigned search area in "
-				.. "Marsh. Bring it back to me in Marsh."
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Set it on the clean end. I'll check it before anything joins the treatment supplies.",
-			field = {
-				description = (
-					"A pale hard case with dark catches, a carrying handle and a medical cross marking. Jitters's "
-					.. "note: \"There's a medic's case still out in Marsh.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_medical",
-				label = "Abandoned medic's case",
+			completion = "Thank you. Put those here so I can check them and clear some room.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -199,14 +189,15 @@ PLUGIN:Register("jitters", {
 			kind = "delivery",
 			requires = {"JT03"},
 			briefing = (
-				"I'd like the listed medical supplies brought here. Keep them apart from anything dirty in your "
-				.. "pack, please."
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Thank you. I'll check these before putting them with the treatment supplies.",
+			completion = "Thank you. Put those here so I can check them and clear some room.",
 			requirements = {
 				{
-					pool = "town_medical",
-					quantity = 3,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -267,30 +258,29 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT08",
 			completionCash = 1050,
-			name = "The Broken Instrument",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the diagnostic case for Technut from the assigned search area in Marsh. Deliver it to "
-				.. "'Technut' in Marsh, then come back to the issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"JT06"},
 			briefing = (
-				"Technut needs the diagnostic equipment. I'd rather he inspect it than reassure me about my "
-				.. "description of the fault. Recover the diagnostic case for Technut from the assigned search area "
-				.. "in Marsh. Deliver it to 'Technut' in Marsh, then come back to me in Marsh."
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "He has it? Good. That's one thing I can stop trying to solve between patients.",
-			field = {
-				description = (
-					"A finned grey control box with a red stripe and several round front connectors. Jitters's note: "
-					.. "\"Technut needs the diagnostic equipment.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_control",
-				label = "Diagnostic case for Technut",
-				recipient = "technut",
+			completion = "Thank you. Put those here so I can check them and clear some room.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			discounts = {{npc = "'Jitters'", service = "treatment", fraction = 0.05}},
@@ -301,12 +291,20 @@ PLUGIN:Register("jitters", {
 			name = "Fever and Fallout",
 			kind = "delivery",
 			requires = {"JT07"},
-			briefing = "There is another clinical request. Please read it before deciding a similar packet will do.",
-			completion = "That's the requested lot. I'll keep the labels with it.",
+			briefing = (
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
+			),
+			completion = "Thank you. Put those here so I can check them and clear some room.",
 			requirements = {
 				{
-					pool = "town_medical",
-					quantity = 3,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -354,33 +352,29 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT12",
 			completionCash = 1450,
-			name = "Where the Water Came From",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the water-source recorder for Gasket from the assigned search area in Marsh. Deliver it "
-				.. "to 'Gasket' in Marsh, then come back to the issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"JT10"},
 			briefing = (
-				"Gasket needs the recording from the water-source survey. He can check the utility side without my "
-				.. "interpretation getting there first. Recover the water-source recorder for Gasket from the "
-				.. "assigned search area in Marsh. Deliver it to 'Gasket' in Marsh, then come back to me in Marsh."
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = (
-				"Delivered. Thank you. I'll wait to hear what he establishes before worrying at the next "
-				.. "explanation."
-			),
-			field = {
-				description = (
-					"A flat dark electronic module with a printed number and a small circular emblem. Jitters's note: "
-					.. "\"Gasket needs the recording from the water-source survey.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_module",
-				label = "Water-source recorder for Gasket",
-				recipient = "gasket",
+			completion = "Thank you. Put those here so I can check them and clear some room.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -400,14 +394,19 @@ PLUGIN:Register("jitters", {
 			kind = "delivery",
 			requires = {"JT11"},
 			briefing = (
-				"I'd like the listed medical supplies brought here. Keep them apart from anything dirty in your "
-				.. "pack, please."
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Thank you. I'll check these before putting them with the treatment supplies.",
+			completion = "Thank you. Put those here so I can check them and clear some room.",
 			requirements = {
 				{
-					pool = "town_medical",
-					quantity = 4,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -455,29 +454,33 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT16",
 			completionCash = 1850,
-			name = "The Missing Volunteer",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the volunteer medic's records from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"JT14"},
 			briefing = (
-				"The volunteer's surviving records should come back intact. I'd like to know what they actually "
-				.. "recorded before deciding what happened to them. Recover the volunteer medic's records from the "
-				.. "assigned search area in Garbage. Bring it back to me in Marsh."
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Thank you. I'll take a moment with this. You can put your things down.",
-			field = {
-				description = (
-					"A pale hard case with dark catches, a carrying handle and a medical cross marking. Jitters's "
-					.. "note: \"The volunteer's surviving records should come back intact.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_medical",
-				label = "Volunteer medic's records",
+			completion = "Thank you. Put those here so I can check them and clear some room.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -488,14 +491,23 @@ PLUGIN:Register("jitters", {
 			kind = "delivery",
 			requires = {"JT15"},
 			briefing = (
-				"Bring the listed provisions here. And leave yourself food for the way back; I do mean yourself as "
-				.. "well."
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Good. I'll put this with the expedition supplies.",
+			completion = "Thank you. Put those here so I can check them and clear some room.",
 			requirements = {
 				{
-					pool = "canned_food",
-					quantity = 5,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -556,29 +568,33 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT20",
 			completionCash = 2250,
-			name = "No One Came Back",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the expedition clinic recording from the assigned search area in Pripyat. Bring it back "
-				.. "to the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"JT18"},
 			briefing = (
-				"I'd like the clinic recording brought back from Pripyat. Don't try to listen while you're still "
-				.. "making the journey. Recover the expedition clinic recording from the assigned search area in "
-				.. "Pripyat. Bring it back to me in Marsh."
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "You're back. Leave it here; I'll listen somewhere I can keep the notes open.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Jitters's note: "
-					.. "\"I'd like the clinic recording brought back from Pripyat.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_tape",
-				label = "Expedition clinic recording",
+			completion = "Thank you. Put those here so I can check them and clear some room.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -589,14 +605,23 @@ PLUGIN:Register("jitters", {
 			kind = "delivery",
 			requires = {"JT19"},
 			briefing = (
-				"I'd like the requested records kept together. I need the context before trying to make sense of "
-				.. "the cases."
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Thank you. I'll read the whole account before comparing it with the others.",
+			completion = "Thank you. Put those here so I can check them and clear some room.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -650,29 +675,37 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT24",
 			completionCash = 2650,
-			name = "An Answer on Tape",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the final medical cassette from the assigned search area in Pripyat. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"JT23"},
 			briefing = (
-				"There's one more medical recording in Pripyat. Bring the whole account home before interpreting a "
-				.. "voice or a symptom you recognise. Recover the final medical cassette from the assigned search "
-				.. "area in Pripyat. Bring it back to me in Marsh."
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Thank you. I'll hear it through before deciding which case it belongs beside.",
-			field = {
-				description = (
-					"A pale audio cassette with a broad blue printed label and twin spool windows. Jitters's note: "
-					.. "\"There's one more medical recording in Pripyat.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_tape2",
-				label = "Final medical cassette",
+			completion = "Thank you. Put those here so I can check them and clear some room.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -692,12 +725,28 @@ PLUGIN:Register("jitters", {
 			name = "A Clinic That Holds",
 			kind = "delivery",
 			requires = {"JT24"},
-			briefing = "There is another clinical request. Please read it before deciding a similar packet will do.",
-			completion = "That's the requested lot. I'll keep the labels with it.",
+			briefing = (
+				"I need to replenish the medical supplies. Look at the list before packing; I have enough things "
+				.. "to sort when someone actually needs treatment. Bring everything on the list back here; I need "
+				.. "the full delivery."
+			),
+			completion = "Thank you. Put those here so I can check them and clear some room.",
 			requirements = {
 				{
-					pool = "town_medical",
-					quantity = 7,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},

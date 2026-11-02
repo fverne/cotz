@@ -74,18 +74,15 @@ PLUGIN:Register("wake", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need the maintenance supplies on this list brought here. There's always something to "
-				.. "sort, secure, or set aside when belongings come back. I'd rather have the supplies ready "
-				.. "than rush through that work because someone's waiting for an answer."
+				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
+				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = (
-				"Thank you. I'll put these with the recovery supplies. It's a small job, but it gives me "
-				.. "time to handle the things people bring back with care."
-			),
+			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 2,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -142,32 +139,29 @@ PLUGIN:Register("wake", {
 		{
 			id = "WA04",
 			completionCash = 650,
-			name = "The Name on the Strap",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the camp photograph album from the assigned search area in Garbage. Bring it back to the "
-				.. "issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"WA03"},
 			briefing = (
-				"There's an album to recover from the second camp. Keep the photographs together, even if some "
-				.. "seem unrelated. Recover the camp photograph album from the assigned search area in Garbage. Bring "
-				.. "it back to me in Garbage."
+				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
+				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = (
-				"Let me set it somewhere clean. We can look at the pictures without deciding immediately who each "
-				.. "person must be."
-			),
-			field = {
-				description = (
-					"A thick worn photograph album with a small picture set into its brown cover. Wake's note: "
-					.. "\"There's an album to recover from the second camp.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_photo",
-				label = "Camp photograph album",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -177,12 +171,20 @@ PLUGIN:Register("wake", {
 			name = "A Searcher's Kit",
 			kind = "delivery",
 			requires = {"WA04"},
-			briefing = "Bring the listed search supplies here. Keep them separate from the belongings you recover.",
-			completion = "Thank you. I'll put them with the search equipment.",
+			briefing = (
+				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
+				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
+				.. "the full delivery."
+			),
+			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
-					pool = "canned_food",
-					quantity = 3,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -244,29 +246,29 @@ PLUGIN:Register("wake", {
 		{
 			id = "WA08",
 			completionCash = 1050,
-			name = "The Last Check-in",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the convoy check-in recording from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"WA06"},
 			briefing = (
-				"The convoy's check-in recording is still out on the route. I'd like to hear the complete account. "
-				.. "Recover the convoy check-in recording from the assigned search area in Garbage. Bring it back to "
-				.. "me in Garbage."
+				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
+				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "We'll listen here. You don't need to tell me what you think I should be prepared to hear.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Wake's note: \"The "
-					.. "convoy's check-in recording is still out on the route.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_tape",
-				label = "Convoy check-in recording",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -277,13 +279,18 @@ PLUGIN:Register("wake", {
 			kind = "delivery",
 			requires = {"WA07"},
 			briefing = (
-				"I need the requested provisions before another search. Leave yourself enough for the return as "
-				.. "well."
+				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
+				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Good. That takes care of the listed supplies.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
 					quantity = 1,
 				},
 			},
@@ -333,29 +340,33 @@ PLUGIN:Register("wake", {
 		{
 			id = "WA12",
 			completionCash = 1450,
-			name = "The Diverted Convoy",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the diverted convoy evidence from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"WA10"},
 			briefing = (
-				"Bring back the convoy evidence without rearranging it. We can ask what it supports once it is "
-				.. "somewhere safe. Recover the diverted convoy evidence from the assigned search area in Garbage. "
-				.. "Bring it back to me in Garbage."
+				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
+				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Thank you. I'll compare it carefully, including the parts that don't appear to fit.",
-			field = {
-				description = (
-					"A compact hard case with orange panels, dark protective ribs and a carrying handle. Wake's note: "
-					.. "\"Bring back the convoy evidence without rearranging it.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_evidence",
-				label = "Diverted convoy evidence",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -375,14 +386,23 @@ PLUGIN:Register("wake", {
 			kind = "delivery",
 			requires = {"WA11"},
 			briefing = (
-				"There's a document request to fill. Keep the records together rather than sorting what seems "
-				.. "important on the way."
+				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
+				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Thank you. I'll record the bundle before reading it.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
-					pool = "canned_food",
-					quantity = 4,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -431,29 +451,33 @@ PLUGIN:Register("wake", {
 		{
 			id = "WA16",
 			completionCash = 1850,
-			name = "The Pripyat Camp",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the Pripyat expedition case from the assigned search area in Pripyat. Bring it back to "
-				.. "the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"WA14"},
 			briefing = (
-				"The expedition's equipment case is still in Pripyat. Keep the contents together; little things "
-				.. "are easily separated from their owners. Recover the Pripyat expedition case from the assigned "
-				.. "search area in Pripyat. Bring it back to me in Garbage."
+				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
+				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Leave it here. I'll record what returned before I open anything further.",
-			field = {
-				description = (
-					"A low hard case with long contrasting strips across its ribbed lid. Wake's note: \"The "
-					.. "expedition's equipment case is still in Pripyat.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_equipment",
-				label = "Pripyat expedition case",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -463,12 +487,24 @@ PLUGIN:Register("wake", {
 			name = "The Records Agree",
 			kind = "delivery",
 			requires = {"WA15"},
-			briefing = "Bring the requested supplies through intact. We can take time with the account once they're here.",
-			completion = "Put them here, please. I'll keep them with the relevant records.",
+			briefing = (
+				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
+				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
+				.. "the full delivery."
+			),
+			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -525,29 +561,37 @@ PLUGIN:Register("wake", {
 		{
 			id = "WA20",
 			completionCash = 2250,
-			name = "Personal Effects",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the team photograph collection from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"WA19"},
 			briefing = (
-				"Recover the team's album intact. We don't need to decide what a photograph means to somebody "
-				.. "before keeping it safe. Recover the team photograph collection from the assigned search area in "
-				.. "Garbage. Bring it back to me in Garbage."
+				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
+				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "I'll put it away from the other equipment. It can stay here until we're ready to examine it.",
-			field = {
-				description = (
-					"A thick worn photograph album with a small picture set into its brown cover. Wake's note: "
-					.. "\"Recover the team's album intact.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_photo",
-				label = "Team photograph collection",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			stock = {
@@ -561,12 +605,28 @@ PLUGIN:Register("wake", {
 			name = "A Place in the Ledger",
 			kind = "delivery",
 			requires = {"WA20"},
-			briefing = "Bring the listed search supplies here. Keep them separate from the belongings you recover.",
-			completion = "Thank you. I'll put them with the search equipment.",
+			briefing = (
+				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
+				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
+				.. "the full delivery."
+			),
+			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},

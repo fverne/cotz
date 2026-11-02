@@ -182,6 +182,24 @@ check(not ix.jobs.list["cotz/town/mute/easy/value_field_laptop"], "Marsh easy wo
 check(ix.jobs.list["cotz/town/mute/hard/value_field_laptop"], "Mute can commission Pripyat computers")
 
 check(contactCount == 27 and count == 646, "all contacts and proposed steps are registered")
+local convertedCount, remainingFields = 0, 0
+for _, contact in pairs(town.contacts) do
+	local converted, fields = 0, 0
+	for _, step in ipairs(contact.progression) do
+		if step.kind == "field" then fields = fields + 1 end
+		if step.retiredCommission then
+			converted = converted + 1
+			check(step.kind == "delivery" and not step.field and #step.requirements > 0,
+				"converted commissions use ordinary delivery slots without field interactions")
+			local job = ix.jobs.list["cotz/town/commission/" .. contact.id .. "/" .. step.id]
+			check(job and not job.fieldType and not job.CanAcceptTask(),
+				"saved commission identity remains claimable but cannot issue another field assignment")
+		end
+	end
+	check(math.abs(converted - fields) <= 1, "each contact converts half its field progressions, rounded")
+	convertedCount, remainingFields = convertedCount + converted, remainingFields + fields
+end
+check(convertedCount == 158 and remainingFields == 158, "exactly half the original field commissions convert")
 local cargoCount, recipientCount, dropCount = 0, 0, 0
 for _, contact in pairs(town.contacts) do
 	for _, step in ipairs(contact.progression) do
@@ -213,7 +231,7 @@ for _, contact in pairs(town.contacts) do
 		end
 	end
 end
-check(cargoCount == 312 and recipientCount == 76 and dropCount == 6,
+check(cargoCount == 154 and recipientCount == 38 and dropCount == 3,
 	"authored commissions use custom recovery cargo, contact deliveries and field-cache deliveries")
 check(#town:ValidateContacts() == 0, "all current cargo and recipient declarations validate")
 check(town.contacts["arena-master"].map == "rp_marsh_cs", "arena stays with the Marsh dupe")
@@ -261,6 +279,47 @@ local function character(data)
 	}
 	return value
 end
+local oldHandIn = character()
+local oldHandInID = town:StepID("old-timer", "OT01")
+ix.progression.SetCharacterProgression(oldHandIn, {lines = {
+	[oldHandInID] = {
+		active = true,
+		requirements = {food_can_sprats = 2},
+		selections = {{pool = "canned_food", item = "food_can_sprats"}},
+		complexData = {food_can_sprats = 1},
+	},
+}})
+ix.progression.AssignActiveRequirements(oldHandIn)
+local oldRequirements = ix.progression.GetRequirements(oldHandIn, oldHandInID)
+check(oldRequirements.food_can_sprats == 2 and next(oldRequirements, "food_can_sprats") == nil,
+	"FTS retuning preserves an already saved requirement outside the new availability pool")
+check(ix.progression.GetComplexProgressionValue(oldHandIn, oldHandInID).food_can_sprats == 1,
+	"FTS retuning preserves partial contributions")
+check(ix.progression.AddComplexProgressionValue(oldHandIn, oldHandInID, {"food_can_sprats", 1}) == 1
+	and ix.progression.IsCompleted(oldHandIn, oldHandInID),
+	"the saved old request completes using only its remaining unit")
+
+local savedDelivery = character({townNPCProgression = {
+	counts = {}, claims = {}, opponents = {}, pending = {
+		["'Old Timer'"] = {identifier = "cotz/town/commission/old-timer/OT04", serial = 1},
+	},
+}})
+local savedID = town:StepID("old-timer", "OT04")
+local savedRecord = {lines = {[savedID] = {active = true}}}
+for _, required in ipairs(ix.progression.definitions[savedID].prerequisites) do
+	savedRecord.lines[required] = {completed = true}
+end
+ix.progression.SetCharacterProgression(savedDelivery, savedRecord)
+town:RecoverCompletions(savedDelivery)
+check(ix.progression.IsCompleted(savedDelivery, savedID),
+	"a converted commission's interrupted field completion still settles the same milestone")
+check(not savedDelivery:GetData("townNPCProgression").pending["'Old Timer'"],
+	"converted commission recovery clears the pending journal")
+local savedCash = savedDelivery.money
+check(savedCash == town.steps[savedID].completionCash, "saved field completion receives its milestone payment")
+town:RecoverCompletions(savedDelivery)
+check(savedDelivery.money == savedCash, "saved field completion cannot pay twice after conversion")
+
 for _, contact in pairs(town.contacts) do
 	currentMap = contact.map
 	for _, step in ipairs(contact.progression) do

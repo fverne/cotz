@@ -118,18 +118,15 @@ PLUGIN:Register("spicy-lemon", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need the meals on the list. Yes, meals. Before you ask why a cook wants someone else's "
-				.. "cooking, I can't keep every pot going at once, and there are people waiting to eat. Bring "
-				.. "them here and I'll have a look."
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = (
-				"Let me see. Good. No, I'm not giving you a score. There's enough to do without starting a "
-				.. "competition over who made dinner."
-			),
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
 				{
-					pool = "common_meals",
-					quantity = 2,
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -186,31 +183,22 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL04",
 			completionCash = 650,
-			name = "Spoor's Contribution",
-			kind = "field",
-			objective = (
-				"Recover the meat-handling notes for Spoor from the assigned search area in Marsh. Deliver it to "
-				.. "'Spoor' in Garbage, then come back to the issuing contact in Marsh."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"SL02"},
 			briefing = (
-				"Spoor should have the camp's meat-handling notes. If we're arguing over what can be used, I'd "
-				.. "like him looking at the account instead of my face. Recover the meat-handling notes for Spoor "
-				.. "from the assigned search area in Marsh. Deliver it to 'Spoor' in Garbage, then come back to me in "
-				.. "Marsh."
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "He's got them. Good. We can resume disagreeing with a little more information.",
-			field = {
-				description = (
-					"A thick blue diary with a label fixed to the front cover. Spicy Lemon's note: \"Spoor should have "
-					.. "the camp's meat-handling notes.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_diary",
-				label = "Meat-handling notes for Spoor",
-				recipient = "spoor",
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
+			requirements = {
+				{
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -220,15 +208,20 @@ PLUGIN:Register("spicy-lemon", {
 			name = "Clean Enough",
 			kind = "delivery",
 			requires = {"SL03"},
-			briefing = "There's another pantry request. Keep it clear of the leaking things in your pack.",
-			completion = (
-				"That's the requested lot. A pleasant change from an explanation of why something else was nearly "
-				.. "the same."
+			briefing = (
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
 				{
-					pool = "canned_food",
-					quantity = 3,
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -292,29 +285,29 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL08",
 			completionCash = 1050,
-			name = "The Missing Crate",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the cookware case from the assigned search area in Garbage. Bring it back to the issuing "
-				.. "contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SL06"},
 			briefing = (
-				"There's a cookware case left along the route. Bring the whole thing; your idea of a useless "
-				.. "little fitting may differ from mine. Recover the cookware case from the assigned search area in "
-				.. "Garbage. Bring it back to me in Marsh."
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Good. I'll lay it out before deciding what needs cleaning.",
-			field = {
-				description = (
-					"A small yellow hard case with ribbed corners and a large label on its lid. Spicy Lemon's note: "
-					.. "\"There's a cookware case left along the route.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_case",
-				label = "cookware case",
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
+			requirements = {
+				{
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -324,12 +317,20 @@ PLUGIN:Register("spicy-lemon", {
 			name = "A Proper Pantry",
 			kind = "delivery",
 			requires = {"SL07"},
-			briefing = "Bring the requested food here. Check the dish rather than guessing what I ought to want.",
-			completion = "Good. Put it where I can check it before it joins anything else.",
+			briefing = (
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
+			),
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
 				{
-					pool = "common_meals",
-					quantity = 3,
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -380,29 +381,29 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL12",
 			completionCash = 1450,
-			name = "Smoke Without Supper",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the abandoned camp cooking journal from the assigned search area in Marsh. Bring it back "
-				.. "to the issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SL10"},
 			briefing = (
-				"Bring the cooking log back. People improvise useful things when they stop pretending the proper "
-				.. "ingredients are arriving tomorrow. Recover the abandoned camp cooking journal from the assigned "
-				.. "search area in Marsh. Bring it back to me in Marsh."
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Here, away from the stove. I'll read it before deciding which ideas I can steal gracefully.",
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Spicy Lemon's note: \"Bring "
-					.. "the cooking log back.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_notebook",
-				label = "Abandoned camp cooking journal",
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
+			requirements = {
+				{
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -421,12 +422,24 @@ PLUGIN:Register("spicy-lemon", {
 			name = "Something With Flavour",
 			kind = "delivery",
 			requires = {"SL11"},
-			briefing = "Bring the requested food here. Check the dish rather than guessing what I ought to want.",
-			completion = "Good. Put it where I can check it before it joins anything else.",
+			briefing = (
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
+			),
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
 				{
-					pool = "predator_meals",
-					quantity = 4,
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -475,29 +488,33 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL16",
 			completionCash = 1850,
-			name = "An Unfinished Menu",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the traveller's annotated menu from the assigned search area in Waystation. Bring it back "
-				.. "to the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SL14"},
 			briefing = (
-				"I'd like the traveller's menu recovered. A note beside a dish can tell you more than the "
-				.. "impressive name on top. Recover the traveller's annotated menu from the assigned search area in "
-				.. "Waystation. Bring it back to me in Marsh."
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Oh, good. I'll see what they actually changed rather than admiring the handwriting.",
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Spicy Lemon's note: \"I'd "
-					.. "like the traveller's menu recovered.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_notebook",
-				label = "Traveller's annotated menu",
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
+			requirements = {
+				{
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -507,12 +524,24 @@ PLUGIN:Register("spicy-lemon", {
 			name = "Food That Travels",
 			kind = "delivery",
 			requires = {"SL15"},
-			briefing = "Bring the requested food here. Check the dish rather than guessing what I ought to want.",
-			completion = "Good. Put it where I can check it before it joins anything else.",
+			briefing = (
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
+			),
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
 				{
-					pool = "common_meals",
-					quantity = 5,
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -573,29 +602,33 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL20",
 			completionCash = 2250,
-			name = "The Last Cookfire",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the missing cook's journal from the assigned search area in Marsh. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SL18"},
 			briefing = (
-				"Bring the cook's journal home. I'd like the everyday entries as well as the recipes people "
-				.. "thought worth quoting. Recover the missing cook's journal from the assigned search area in Marsh. "
-				.. "Bring it back to me in Marsh."
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "Set it here. I'll read the working days before I start wondering about the last one.",
-			field = {
-				description = (
-					"A thick blue diary with a label fixed to the front cover. Spicy Lemon's note: \"Bring the cook's "
-					.. "journal home.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_diary",
-				label = "Missing cook's journal",
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
+			requirements = {
+				{
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -605,12 +638,24 @@ PLUGIN:Register("spicy-lemon", {
 			name = "Enough for Everyone",
 			kind = "delivery",
 			requires = {"SL19"},
-			briefing = "Bring the requested food here. Check the dish rather than guessing what I ought to want.",
-			completion = "Good. Put it where I can check it before it joins anything else.",
+			briefing = (
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
+			),
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
 				{
-					pool = "predator_meals",
-					quantity = 6,
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -661,29 +706,37 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL24",
 			completionCash = 2650,
-			name = "The Recipe He Kept",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the cook's loose recipe pages from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SL23"},
 			briefing = (
-				"There's another part of the journal to recover. Keep the pages together; I don't want a missing "
-				.. "measure improved by someone's confidence. Recover the cook's loose recipe pages from the assigned "
-				.. "search area in Marsh. Bring it back to me in Marsh."
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "There. I'll put them beside the book before deciding where they belong.",
-			field = {
-				description = (
-					"A thick blue diary with a label fixed to the front cover. Spicy Lemon's note: \"There's another "
-					.. "part of the journal to recover.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_diary",
-				label = "Cook's loose recipe pages",
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
+			requirements = {
+				{
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_4",
+					quantity = 2,
+				},
 			},
 			benefits = {
 				items = {
@@ -703,14 +756,27 @@ PLUGIN:Register("spicy-lemon", {
 			kind = "delivery",
 			requires = {"SL24"},
 			briefing = (
-				"Bring the requested provisions through. I would like to prepare the food before everyone begins "
-				.. "asking whether it's ready."
+				"I need supplies for the kitchen. Read the list; I have enough people explaining what I should "
+				.. "cook without bringing me anything to cook with. Bring everything on the list back here; I need "
+				.. "the full delivery."
 			),
-			completion = "There we are. I can work with that.",
+			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
 				{
-					pool = "canned_food",
-					quantity = 7,
+					pool = "town_delivery_kitchen_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_kitchen_marsh_4",
+					quantity = 2,
 				},
 			},
 			benefits = {},

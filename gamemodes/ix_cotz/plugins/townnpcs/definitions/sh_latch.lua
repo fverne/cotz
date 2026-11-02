@@ -92,18 +92,14 @@ PLUGIN:Register("latch", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring the fasteners on the list. I need a place where I can sort what comes in and keep the "
-				.. "useful pieces together. Without enough of these, the workbench turns into several small "
-				.. "piles on the floor."
+				"I need stock for the bench. Bring what is on the list; being nearly the right part does not make "
+				.. "a repair hold. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"That'll do. Put them there. I can get the bench sorted without having to spend the rest of "
-				.. "the day looking for the things I just put down."
-			),
+			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
 				{
-					pool = "fasteners",
-					quantity = 2,
+					pool = "town_delivery_workshop_garbage_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -160,28 +156,28 @@ PLUGIN:Register("latch", {
 		{
 			id = "LA04",
 			completionCash = 650,
-			name = "The Broken Bench",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the bench tool kit from the assigned search area in Garbage. Bring it back to the issuing "
-				.. "contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"LA03"},
 			briefing = (
-				"A workshop case is worth looking for. A decent tool can outlast the bench it was left on. Recover "
-				.. "the bench tool kit from the assigned search area in Garbage. Bring it back to me in Garbage."
+				"I need stock for the bench. Bring what is on the list; being nearly the right part does not make "
+				.. "a repair hold. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Let's see the tools before anyone decides which ones they need to borrow.",
-			field = {
-				description = (
-					"A handled tool case covered in bright stickers and contrasting printed decoration. Latch's note: "
-					.. "\"A workshop case is worth looking for.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_tools",
-				label = "bench tool kit",
+			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
+			requirements = {
+				{
+					pool = "town_delivery_workshop_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -192,13 +188,17 @@ PLUGIN:Register("latch", {
 			kind = "delivery",
 			requires = {"LA04"},
 			briefing = (
-				"Bring the listed workshop supplies here. I'd like to work with the proper pieces rather than keep "
-				.. "adapting around a shortage."
+				"I need stock for the bench. Bring what is on the list; being nearly the right part does not make "
+				.. "a repair hold. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. I'll sort them before they become another mixed pile.",
+			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
 				{
-					pool = "basic_tools",
+					pool = "town_delivery_workshop_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_2",
 					quantity = 1,
 				},
 			},
@@ -261,30 +261,28 @@ PLUGIN:Register("latch", {
 			id = "LA08",
 			capacity = {kind = "weight", amount = 1},
 			completionCash = 1050,
-			name = "The Borrowed Specification",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the assembly drawing for Technut from the assigned search area in Garbage. Deliver it to "
-				.. "'Technut' in Marsh, then come back to the issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"LA06"},
 			briefing = (
-				"Technut should have the assembly drawing himself. He'll notice details I might leave out "
-				.. "describing it. Recover the assembly drawing for Technut from the assigned search area in Garbage. "
-				.. "Deliver it to 'Technut' in Marsh, then come back to me in Garbage."
+				"I need stock for the bench. Bring what is on the list; being nearly the right part does not make "
+				.. "a repair hold. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "He's got it? Good. If he wants to propose alterations, he can at least begin with the original.",
-			field = {
-				description = (
-					"A cardboard file folder with a small coloured crest on its cover. Latch's note: \"Technut should "
-					.. "have the assembly drawing himself.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_official",
-				label = "Assembly drawing for Technut",
-				recipient = "technut",
+			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
+			requirements = {
+				{
+					pool = "town_delivery_workshop_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -294,12 +292,19 @@ PLUGIN:Register("latch", {
 			name = "Moving Parts",
 			kind = "delivery",
 			requires = {"LA07"},
-			briefing = "There's another supply list. Check what will actually serve the job before hauling it over.",
-			completion = "That will do the work. Put it on the clear end.",
+			briefing = (
+				"I need stock for the bench. Bring what is on the list; being nearly the right part does not make "
+				.. "a repair hold. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
 				{
-					pool = "workshop_supplies",
-					quantity = 3,
+					pool = "town_delivery_workshop_garbage_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -347,30 +352,32 @@ PLUGIN:Register("latch", {
 		{
 			id = "LA12",
 			completionCash = 1450,
-			name = "The Old Workshop",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the workshop repair ledger from the assigned search area in Garbage. Deliver it to "
-				.. "'Technut' in Marsh, then come back to the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"LA10"},
 			briefing = (
-				"The repair ledger goes to Technut. I'd like another pair of eyes on the old workshop methods. "
-				.. "Recover the workshop repair ledger from the assigned search area in Garbage. Deliver it to "
-				.. "'Technut' in Marsh, then come back to me in Garbage."
+				"I need stock for the bench. Bring what is on the list; being nearly the right part does not make "
+				.. "a repair hold. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. He can read it without me hovering and explaining what he ought to notice.",
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Latch's note: \"The repair "
-					.. "ledger goes to Technut.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_notebook",
-				label = "Workshop repair ledger",
-				recipient = "technut",
+			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
+			requirements = {
+				{
+					pool = "town_delivery_workshop_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_3",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -390,14 +397,22 @@ PLUGIN:Register("latch", {
 			kind = "delivery",
 			requires = {"LA11"},
 			briefing = (
-				"I need the requested material for the bench work. Don't damage useful pieces packing them around "
-				.. "heavier scrap."
+				"I need stock for the bench. Bring what is on the list; being nearly the right part does not make "
+				.. "a repair hold. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Thanks. I'll keep this apart from the rough stock.",
+			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
 				{
-					pool = "fasteners",
-					quantity = 4,
+					pool = "town_delivery_workshop_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -446,31 +461,32 @@ PLUGIN:Register("latch", {
 		{
 			id = "LA16",
 			completionCash = 1850,
-			name = "Where It Was Built",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the manufacturing records for Carbon from the assigned search area in Pripyat. Deliver it "
-				.. "to 'Carbon' in Waystation, then come back to the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"LA14"},
 			briefing = (
-				"Carbon can compare the manufacturing papers with other records. I want the history checked before "
-				.. "it becomes another workshop certainty. Recover the manufacturing records for Carbon from the "
-				.. "assigned search area in Pripyat. Deliver it to 'Carbon' in Waystation, then come back to me in "
-				.. "Garbage."
+				"I need stock for the bench. Bring what is on the list; being nearly the right part does not make "
+				.. "a repair hold. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "He has the file. We'll let him read it rather than supply the answer for him.",
-			field = {
-				description = (
-					"A blue records folder with contrasting corporate lettering along the cover. Latch's note: "
-					.. "\"Carbon can compare the manufacturing papers with other records.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_archive",
-				label = "Manufacturing records for Carbon",
-				recipient = "carbon",
+			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
+			requirements = {
+				{
+					pool = "town_delivery_workshop_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -481,14 +497,22 @@ PLUGIN:Register("latch", {
 			kind = "delivery",
 			requires = {"LA15"},
 			briefing = (
-				"Bring the supplies on this order. I'd like the preparation finished before I start assembling "
-				.. "anything."
+				"I need stock for the bench. Bring what is on the list; being nearly the right part does not make "
+				.. "a repair hold. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "All here. I can get on with the bench work now.",
+			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
 				{
-					pool = "basic_tools",
+					pool = "town_delivery_workshop_garbage_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -544,29 +568,36 @@ PLUGIN:Register("latch", {
 		{
 			id = "LA20",
 			completionCash = 2250,
-			name = "The Load Test",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Deploy the recorder at the assigned site in Garbage, let it finish recording, then retrieve the "
-				.. "machinery load-test recorder. Bring it back to the issuing contact in Garbage."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"LA19"},
 			briefing = (
-				"I want a recording from the machinery survey. An encouraging sound isn't much of a test. Deploy "
-				.. "the recorder at the assigned site in Garbage, let it finish recording, then retrieve the "
-				.. "machinery load-test recorder. Bring it back to me in Garbage."
+				"I need stock for the bench. Bring what is on the list; being nearly the right part does not make "
+				.. "a repair hold. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "All right. I'll go through the record before deciding what we can ask the assembly to do.",
-			field = {
-				description = (
-					"A flat dark electronic module with a printed number and a small circular emblem. Latch's note: "
-					.. "\"I want a recording from the machinery survey.\""
-				),
-				kind = "sensor",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_module",
-				label = "Machinery load-test recorder",
+			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
+			requirements = {
+				{
+					pool = "town_delivery_workshop_garbage_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			stock = {
@@ -581,14 +612,26 @@ PLUGIN:Register("latch", {
 			kind = "delivery",
 			requires = {"LA20"},
 			briefing = (
-				"Bring the listed workshop supplies here. I'd like to work with the proper pieces rather than keep "
-				.. "adapting around a shortage."
+				"I need stock for the bench. Bring what is on the list; being nearly the right part does not make "
+				.. "a repair hold. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. I'll sort them before they become another mixed pile.",
+			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
 				{
-					pool = "workshop_supplies",
-					quantity = 6,
+					pool = "town_delivery_workshop_garbage_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_garbage_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},

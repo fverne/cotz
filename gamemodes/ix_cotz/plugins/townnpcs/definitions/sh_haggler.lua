@@ -141,18 +141,14 @@ PLUGIN:Register("haggler", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring me the maintenance supplies on the list. I need the place kept in order, and I'd "
-				.. "rather find out whether you can fill a simple order before we discuss anything more "
-				.. "ambitious. You can inspect the terms before agreeing. I certainly would."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"That's the order. Good. We both know what was asked for and what arrived. You'd be "
-				.. "surprised how many people consider that an unreasonable standard."
-			),
+			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 2,
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -212,32 +208,21 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG04",
 			completionCash = 650,
-			name = "Who Pays Twice",
-			kind = "field",
-			objective = (
-				"Recover the extortion payment receipt from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"HG03"},
 			briefing = (
-				"There's a receipt connected with the payments being demanded. Bring it here before anybody "
-				.. "decides what I've agreed to. Recover the extortion payment receipt from the assigned search area "
-				.. "in Marsh. Bring it back to me in Marsh."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"Let me see the wording. People become wonderfully precise when they're collecting and vague when "
-				.. "they're explaining."
-			),
-			field = {
-				description = (
-					"A creased printed letter with a corporate mark and several small blocks of text. Haggler's note: "
-					.. "\"There's a receipt connected with the payments being demanded.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_contract",
-				label = "Extortion payment receipt",
+			completion = "There we are. A straightforward agreement, carried through.",
+			requirements = {
+				{
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -248,14 +233,18 @@ PLUGIN:Register("haggler", {
 			kind = "delivery",
 			requires = {"HG04"},
 			briefing = (
-				"Bring the supplies on this list. I've got uses for them already, which is a very different thing "
-				.. "from having them."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "There we are. A list becoming something useful.",
+			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trade_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -316,29 +305,28 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG08",
 			completionCash = 1050,
-			name = "The Abandoned Stall",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the abandoned trader's account book from the assigned search area in Garbage. Bring it "
-				.. "back to the issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"HG06"},
 			briefing = (
-				"There's a trader's book left in Garbage. Accounts don't improve simply because their owner "
-				.. "stopped answering questions. Recover the abandoned trader's account book from the assigned search "
-				.. "area in Garbage. Bring it back to me in Marsh."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Set it down. I want the ordinary entries as well as the impressive totals.",
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Haggler's note: \"There's a "
-					.. "trader's book left in Garbage.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_notebook",
-				label = "Abandoned trader's account book",
+			completion = "There we are. A straightforward agreement, carried through.",
+			requirements = {
+				{
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trade_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -349,14 +337,18 @@ PLUGIN:Register("haggler", {
 			kind = "delivery",
 			requires = {"HG07"},
 			briefing = (
-				"I'd like this order filled correctly. Your ingenious substitution may be somebody else's purchase "
-				.. "waiting to disappoint them."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "That's the requested lot. Excellent.",
+			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
 				{
-					pool = "canned_food",
-					quantity = 3,
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trade_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -405,29 +397,28 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG12",
 			completionCash = 1450,
-			name = "The Collector's Route",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the collector's route notes from the assigned search area in Marsh. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"HG10"},
 			briefing = (
-				"I want the route notes from the staging site. It's become expensive listening to people explain "
-				.. "where they think the collectors go. Recover the collector's route notes from the assigned search "
-				.. "area in Marsh. Bring it back to me in Marsh."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "That's useful. I'll read before deciding who has been wasting my time.",
-			field = {
-				description = (
-					"A brown document folder with loose sheets and slips protruding from its edges. Haggler's note: "
-					.. "\"I want the route notes from the staging site.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_intel",
-				label = "Collector's route notes",
+			completion = "There we are. A straightforward agreement, carried through.",
+			requirements = {
+				{
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trade_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -447,14 +438,22 @@ PLUGIN:Register("haggler", {
 			kind = "delivery",
 			requires = {"HG11"},
 			briefing = (
-				"There's another delivery to make to me. Check the list before doing anything generous with your "
-				.. "carrying space."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. We can settle an actual delivery rather than a promising departure.",
+			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 4,
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trade_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trade_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -502,30 +501,32 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG16",
 			completionCash = 1850,
-			name = "The Broker's Copy",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the broker's contract copy from the assigned search area in Waystation. Deliver it to "
-				.. "'Carbon' in Waystation, then come back to the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"HG14"},
 			briefing = (
-				"Carbon should have the duplicate contract. He'll compare the wording without becoming distracted "
-				.. "by my commercial interests. Recover the broker's contract copy from the assigned search area in "
-				.. "Waystation. Deliver it to 'Carbon' in Waystation, then come back to me in Marsh."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Delivered. A man willing to read every clause is a useful acquaintance.",
-			field = {
-				description = (
-					"A creased printed letter with a corporate mark and several small blocks of text. Haggler's note: "
-					.. "\"Carbon should have the duplicate contract.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_contract",
-				label = "Broker's contract copy",
-				recipient = "carbon",
+			completion = "There we are. A straightforward agreement, carried through.",
+			requirements = {
+				{
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trade_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trade_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -535,12 +536,23 @@ PLUGIN:Register("haggler", {
 			name = "Shelf Space",
 			kind = "delivery",
 			requires = {"HG15"},
-			briefing = "Bring the requested stock through. I would like to spend one afternoon knowing where it is.",
-			completion = "Thank you. I'll resist selling it in my imagination until it's on the shelf.",
+			briefing = (
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 5,
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trade_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trade_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -598,29 +610,32 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG20",
 			completionCash = 2250,
-			name = "The Empty Depot",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the abandoned-depot records from the assigned search area in Marsh. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"HG18"},
 			briefing = (
-				"There's paperwork left at the depot. Bring it back before someone begins selling an explanation "
-				.. "instead. Recover the abandoned-depot records from the assigned search area in Marsh. Bring it "
-				.. "back to me in Marsh."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Here, beside the other papers. I want to know which shipment each entry concerns.",
-			field = {
-				description = (
-					"A blue records folder with contrasting corporate lettering along the cover. Haggler's note: "
-					.. "\"There's paperwork left at the depot.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_archive",
-				label = "Abandoned-depot records",
+			completion = "There we are. A straightforward agreement, carried through.",
+			requirements = {
+				{
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trade_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trade_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -631,14 +646,22 @@ PLUGIN:Register("haggler", {
 			kind = "delivery",
 			requires = {"HG19", "HG20"},
 			briefing = (
-				"Bring the supplies on this list. I've got uses for them already, which is a very different thing "
-				.. "from having them."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "There we are. A list becoming something useful.",
+			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trade_marsh_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trade_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -689,29 +712,36 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG24",
 			completionCash = 2650,
-			name = "The Last Ledger",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the collector's central ledger from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"HG23"},
 			briefing = (
-				"Bring the last ledger from the outpost. I want the entries, not a confident description of who "
-				.. "owes whom. Recover the collector's central ledger from the assigned search area in Marsh. Bring "
-				.. "it back to me in Marsh."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "A proper book at last. Let me read before you ask whether this makes me generous.",
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Haggler's note: \"Bring the "
-					.. "last ledger from the outpost.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_notebook",
-				label = "Collector's central ledger",
+			completion = "There we are. A straightforward agreement, carried through.",
+			requirements = {
+				{
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_trade_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trade_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trade_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -731,14 +761,26 @@ PLUGIN:Register("haggler", {
 			kind = "delivery",
 			requires = {"HG24"},
 			briefing = (
-				"I'd like this order filled correctly. Your ingenious substitution may be somebody else's purchase "
-				.. "waiting to disappoint them."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "That's the requested lot. Excellent.",
+			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 7,
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_trade_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trade_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trade_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -746,32 +788,36 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG26",
 			completionCash = 2850,
-			name = "Nobody Collects Here",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the final trading agreement from the assigned search area in Marsh. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"HG25"},
 			briefing = (
-				"The final letter belongs with the contracts. Keep the whole thing; a favourable paragraph isn't "
-				.. "the whole agreement. Recover the final trading agreement from the assigned search area in Marsh. "
-				.. "Bring it back to me in Marsh."
+				"I have a supply request worth your time. Bring what is on the list and we can both finish this "
+				.. "bit of business satisfied. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"You've done a considerable amount of work for me. I've paid for it, naturally. Doesn't prevent me "
-				.. "appreciating a person who finishes what we agreed. Pull up a chair while I read this."
-			),
-			field = {
-				description = (
-					"A creased printed letter with a corporate mark and several small blocks of text. Haggler's note: "
-					.. "\"The final letter belongs with the contracts.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_contract",
-				label = "Final trading agreement",
+			completion = "There we are. A straightforward agreement, carried through.",
+			requirements = {
+				{
+					pool = "town_delivery_trade_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_trade_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trade_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trade_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			recognition = "Haggler's trusted contact",

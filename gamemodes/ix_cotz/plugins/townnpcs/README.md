@@ -50,10 +50,15 @@ on their home maps immediately; task prerequisites, catalogue unlocks and servic
 Each contact has an explicit sparse tree: a short introduction, two narrow branches and a joined
 conclusion. The requires and crossRequires fields describe local and cross-contact prerequisites;
 equipment families can add further dependencies. Stable IDs look like cotz/town/quartermaster/QM11.
-The tree includes 316 field commissions, with 312 now declaring custom bound quest cargo.
-Of these, 230 return cargo to the issuer, 76 deliver it to another town contact, and six
-deliver it to a field cache. The remaining four retain research-defence sampler/results cargo.
-See the [commission inventory](../../../../docs/npc-overhaul/quest-commissions.md) for every assignment.
+The tree includes 158 field commissions after converting half of the original 316 to ordinary deliveries.
+Each contact converts half its field commissions, rounded where needed. Arena bouts are unchanged.
+Of the remaining field commissions, 154 declare custom bound quest cargo: 113 return it to the issuer,
+38 deliver it to another contact, and three use field caches. Four retain research-defence cargo.
+See the [commission and delivery inventory](../../../../docs/npc-overhaul/quest-commissions.md)
+for every assignment and the converted steps' pools and quantities. Converted steps preserve their
+IDs, prerequisites, cash and benefits, and use the normal saved specific-item hand-in requirements.
+Completion-only registrations allow already accepted field assignments and pending completions to
+settle their original milestone once; new players receive the delivery request instead.
 The other objectives are item hand-ins, cumulative job checkpoints and arena bouts. Checkpoints
 usually require 2/5/9/14/20/27/35 completed jobs with that contact. Finite commissions do not count
 as ordinary repeatable work and do not award an extra repeatable cash/reward/restock payout.
@@ -75,6 +80,41 @@ See the jobsystem README for budgets, bonus banking, gate rules and claim recove
 Spoken task text stays in the contact's dialogue and progression fields. step.objective separately
 explains the actual field interaction. Mute communicates through written lists and gestures.
 Flavour stays under **Can I ask you something?**; actions and services stay at the root.
+
+### FTS delivery balance
+
+The [FTS availability report](../../../../docs/npc-overhaul/delivery-balance.md) inventories item
+points, boxes and cycling containers, combines their weights, and documents modeled rarity ratios.
+Garbage now has 61 loose-item and 199 box points; custom box pools contribute to its availability.
+Contacts without a local source for their theme use Marsh as the introductory acquisition region.
+The model does not invent local Garbage loot or infer encounter rates from hidden-stash destinations.
+
+All 327 finite delivery milestones now have 849 item slots across four phases of local prerequisite
+depth: one common item type early, then two, three and four types. Common-stock batch multiples grow
+from 1 to 4, while later requests add lower-availability bands at smaller quantities. Seventy-two
+explicit thematic/home-region pools live in progression's shared requirement registry. Pools used
+in the same delivery are disjoint, so every requested type rolls a distinct item. Exact selected
+items and quantities remain visible in the existing requirement list; briefings ask for the full list.
+
+Candidates have positive modeled world/box/cycling exposure. Introductory candidates have a source
+in the contact's starting region (local where the theme has sources; otherwise Marsh); later bands allow more travel and rarer finds.
+The report explains the population caps, pickup units, batch sizing, planning factors and exclusions.
+Repeatable specialties, milestone IDs, prerequisites, cash, benefits and field mechanics are unchanged.
+Existing saved item selections and partial contributions are retained rather than rerolled.
+
+Rebuild the static pools, requirements and report with:
+
+    python3 docs/npc-overhaul/tools/fts_delivery_balance.py --write
+
+Use `--inspect` to review candidate availability without edits. The tool only reads FTS preset data;
+it never deploys map presets or changes live saves. Checks:
+
+    python3 tests/fts_delivery_balance_spec.py
+    luatex --luaonly tests/town_delivery_sources_spec.lua
+
+The acquisition audit still checks every candidate against active sources. Live spawn density,
+competition, pickup rates, travel and economy need multiplayer playtesting; modeled full-collection
+supply is a comparative index rather than guaranteed player drops per hour.
 
 ## Persistence
 
@@ -129,6 +169,7 @@ New NPC models remain replaceable placeholders. Place and playtest sites before 
 Run from the repository root:
 
     luatex --luaonly tests/townnpcs_spec.lua
+    luatex --luaonly tests/town_delivery_sources_spec.lua
     luatex --luaonly tests/progression_spec.lua
     luatex --luaonly tests/dialogue_order_spec.lua
     luatex --luaonly tests/task_rewards_spec.lua
@@ -149,7 +190,8 @@ Finite commissions and progression IDs remain unchanged.
 
 The [valuables hand-in catalogue](../../../../docs/valuable-hand-in-pools.md) reviews every
 `valuables_test` item and defines 50 reusable `valuables_*` pools in progression’s `definitions/sh_requirementpools.lua`.
-Repeatable delivery contacts enable selected pools by difficulty; finite progression slots retain their existing pools.
+Repeatable delivery contacts enable selected pools by difficulty. Finite progression slots also reuse
+selected thematic pools; see the commission and delivery inventory.
 Run `luatex --luaonly tests/valuable_pools_spec.lua` to check full item coverage and valid candidates.
 
 ## Regional valuable deliveries
@@ -157,7 +199,7 @@ Run `luatex --luaonly tests/valuable_pools_spec.lua` to check full item coverage
 All twelve item-delivery contacts retain their existing requests and add `job.deliveryTiers`.
 Each difficulty lists additional pools and a whole-item quantity: one for easy/medium, two for hard.
 These additions bypass the legacy minimum-value floor, which would inflate cheap whole-item requests.
-Job IDs, accepted assignments and finite progression stay unchanged. Quantity-bearing items instead
+Repeatable job IDs and accepted assignments stay unchanged. Quantity-bearing items instead
 use acquisition batch bounds: easy = smallest batch, medium = largest batch, hard = largest batch + 1.
 These bounds override quantity/value floors. World, breakable-box, human-pocket and cache loot data overrides are
 combined across regions; `settings.spawnBatches` records random `OnInstanced` yields where capacity
@@ -273,7 +315,7 @@ private character notification. Mute's locked introduction uses gestures in his 
 The 27 town contacts now have expanded personal conversations, contact-specific work offers, and
 revised finite briefings and completion replies. Atlas retains his developed voice; Mute continues
 through gestures and written orders. Existing contact profiles record the accepted voice directions.
-All 316 field commissions have narrative cargo labels and descriptions, using the existing models.
+All 158 remaining field commissions have narrative cargo labels and descriptions, using the existing models.
 These are per-assignment overrides, not renamed item definitions. Jobs already accepted keep their
 saved identity; new labels and descriptions apply to new assignments without resetting progress.
 

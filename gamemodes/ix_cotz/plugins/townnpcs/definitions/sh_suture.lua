@@ -119,18 +119,15 @@ PLUGIN:Register("suture", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need the textiles on this list. Bring them here and let me see what condition they're in. "
-				.. "There is a difference between material that's worn and material that has already given up; "
-				.. "I'd like to decide which before cutting anything."
+				"I need material for the work here. Check the list before you bring a bundle; I have to see what "
+				.. "I am working with before promising a fit. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"Good. Put them on the bench. I'll sort them before I start. And thank you for bringing the "
-				.. "material in a state where I can actually see what I have to work with."
-			),
+			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
 				{
-					pool = "town_textiles",
-					quantity = 2,
+					pool = "town_delivery_textiles_waystation_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -190,29 +187,29 @@ PLUGIN:Register("suture", {
 		{
 			id = "SU04",
 			completionCash = 650,
-			name = "A Broken Strap",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the freight worker's recovered kit from the assigned search area in Waystation. Bring it "
-				.. "back to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SU03"},
 			briefing = (
-				"I'd like the worker's equipment brought back as it was found. A failed fitting tells me more "
-				.. "before somebody tries to tidy it. Recover the freight worker's recovered kit from the assigned "
-				.. "search area in Waystation. Bring it back to me in Waystation."
+				"I need material for the work here. Check the list before you bring a bundle; I have to see what "
+				.. "I am working with before promising a fit. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Leave the straps where they are. I'll inspect how the load was arranged.",
-			field = {
-				description = (
-					"A low hard case with long contrasting strips across its ribbed lid. Suture's note: \"I'd like the "
-					.. "worker's equipment brought back as it was found.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_equipment",
-				label = "Freight worker's recovered kit",
+			completion = "Thank you. Leave them flat while I inspect the material.",
+			requirements = {
+				{
+					pool = "town_delivery_textiles_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -222,12 +219,20 @@ PLUGIN:Register("suture", {
 			name = "Cloth for the Weather",
 			kind = "delivery",
 			requires = {"SU04"},
-			briefing = "Bring the listed textile supplies here. Keep them clear of anything wet or oily in your pack.",
-			completion = "Thank you. I'll inspect the material before putting it with the clean stock.",
+			briefing = (
+				"I need material for the work here. Check the list before you bring a bundle; I have to see what "
+				.. "I am working with before promising a fit. Bring everything on the list back here; I need the "
+				.. "full delivery."
+			),
+			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
 				{
-					pool = "town_textiles",
-					quantity = 3,
+					pool = "town_delivery_textiles_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -288,30 +293,29 @@ PLUGIN:Register("suture", {
 		{
 			id = "SU08",
 			completionCash = 1050,
-			name = "The Workshop Scrapbook",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the material notes for Latch from the assigned search area in Garbage. Deliver it to "
-				.. "'Latch' in Garbage, then come back to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SU06"},
 			briefing = (
-				"Latch should have the material notes. He can check what survived at the industrial end of the "
-				.. "account. Recover the material notes for Latch from the assigned search area in Garbage. Deliver "
-				.. "it to 'Latch' in Garbage, then come back to me in Waystation."
+				"I need material for the work here. Check the list before you bring a bundle; I have to see what "
+				.. "I am working with before promising a fit. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "He has them. Good. I would rather hear his judgement than agree with my own description twice.",
-			field = {
-				description = (
-					"A thick blue diary with a label fixed to the front cover. Suture's note: \"Latch should have the "
-					.. "material notes.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_diary",
-				label = "Material notes for Latch",
-				recipient = "latch",
+			completion = "Thank you. Leave them flat while I inspect the material.",
+			requirements = {
+				{
+					pool = "town_delivery_textiles_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -322,14 +326,19 @@ PLUGIN:Register("suture", {
 			kind = "delivery",
 			requires = {"SU07"},
 			briefing = (
-				"I need the requested materials. Similar colour doesn't make two fabrics suitable for the same "
-				.. "work."
+				"I need material for the work here. Check the list before you bring a bundle; I have to see what "
+				.. "I am working with before promising a fit. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "That's the requested lot. I'll keep it flat until I've checked it.",
+			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
 				{
-					pool = "town_textiles",
-					quantity = 3,
+					pool = "town_delivery_textiles_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -377,30 +386,33 @@ PLUGIN:Register("suture", {
 		{
 			id = "SU12",
 			completionCash = 1450,
-			name = "The Quartermaster's Specification",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the Quartermaster's equipment specification from the assigned search area in Waystation. "
-				.. "Deliver it to 'Quartermaster' in Waystation, then come back to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SU10"},
 			briefing = (
-				"Quartermaster needs the equipment specification. He should judge what was asked for from the page "
-				.. "itself. Recover the Quartermaster's equipment specification from the assigned search area in "
-				.. "Waystation. Deliver it to 'Quartermaster' in Waystation, then come back to me in Waystation."
+				"I need material for the work here. Check the list before you bring a bundle; I have to see what "
+				.. "I am working with before promising a fit. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Delivered. That should make the next discussion about requirements rather more precise.",
-			field = {
-				description = (
-					"A cardboard file folder with a small coloured crest on its cover. Suture's note: \"Quartermaster "
-					.. "needs the equipment specification.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_official",
-				label = "Quartermaster's equipment specification",
-				recipient = "quartermaster",
+			completion = "Thank you. Leave them flat while I inspect the material.",
+			requirements = {
+				{
+					pool = "town_delivery_textiles_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -420,18 +432,23 @@ PLUGIN:Register("suture", {
 			kind = "delivery",
 			requires = {"SU11"},
 			briefing = (
-				"Bring the supplies listed here. Let me check the condition before putting them to use. "
-				.. "Check the packing before you set out. I'd rather spend the afternoon working with what "
-				.. "arrives than undoing damage from the journey."
+				"I need material for the work here. Check the list before you bring a bundle; I have to see what "
+				.. "I am working with before promising a fit. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"Let me check it for damage first. Thank you. I'll look at it in good light. You may sit "
-				.. "down, provided you move that folded material first."
-			),
+			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
 				{
-					pool = "town_textiles",
-					quantity = 4,
+					pool = "town_delivery_textiles_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -479,30 +496,33 @@ PLUGIN:Register("suture", {
 		{
 			id = "SU16",
 			completionCash = 1850,
-			name = "The Long Expedition's Kit",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the expedition kit record for Ledger from the assigned search area in Waystation. Deliver "
-				.. "it to 'Ledger' in Waystation, then come back to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SU14"},
 			briefing = (
-				"Ledger should examine the expedition equipment record. He can check what was dispatched against "
-				.. "the outfitting account. Recover the expedition kit record for Ledger from the assigned search "
-				.. "area in Waystation. Deliver it to 'Ledger' in Waystation, then come back to me in Waystation."
+				"I need material for the work here. Check the list before you bring a bundle; I have to see what "
+				.. "I am working with before promising a fit. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "He has the file. I'll wait for his comparison before making a new list.",
-			field = {
-				description = (
-					"A cardboard file folder with an emblem and printed wording on the front. Suture's note: \"Ledger "
-					.. "should examine the expedition equipment record.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_personnel",
-				label = "Expedition kit record for Ledger",
-				recipient = "ledger",
+			completion = "Thank you. Leave them flat while I inspect the material.",
+			requirements = {
+				{
+					pool = "town_delivery_textiles_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -512,12 +532,24 @@ PLUGIN:Register("suture", {
 			name = "Weather and Fallout",
 			kind = "delivery",
 			requires = {"SU15"},
-			briefing = "There is another material order to fill. Please leave the useful edges intact.",
-			completion = "Good. That gives me something I can measure properly.",
+			briefing = (
+				"I need material for the work here. Check the list before you bring a bundle; I have to see what "
+				.. "I am working with before promising a fit. Bring everything on the list back here; I need the "
+				.. "full delivery."
+			),
+			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
 				{
-					pool = "town_textiles",
-					quantity = 5,
+					pool = "town_delivery_textiles_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -574,29 +606,33 @@ PLUGIN:Register("suture", {
 		{
 			id = "SU20",
 			completionCash = 2250,
-			name = "The Missing Outfitter",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the field fitter's personal file from the assigned search area in Pripyat. Bring it back "
-				.. "to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SU18"},
 			briefing = (
-				"The fitter's surviving papers should come home together. Work notes and personal records are "
-				.. "easily separated when people search in a hurry. Recover the field fitter's personal file from the "
-				.. "assigned search area in Pripyat. Bring it back to me in Waystation."
+				"I need material for the work here. Check the list before you bring a bundle; I have to see what "
+				.. "I am working with before promising a fit. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Thank you. I'll handle the personal pages separately once I've recorded what came back.",
-			field = {
-				description = (
-					"A cardboard file folder with an emblem and printed wording on the front. Suture's note: \"The "
-					.. "fitter's surviving papers should come home together.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_personnel",
-				label = "Field fitter's personal file",
+			completion = "Thank you. Leave them flat while I inspect the material.",
+			requirements = {
+				{
+					pool = "town_delivery_textiles_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -607,14 +643,27 @@ PLUGIN:Register("suture", {
 			kind = "delivery",
 			requires = {"SU19", "SU20"},
 			briefing = (
-				"Bring the listed supplies through. I'd rather wait for the correct material than make a "
-				.. "convincing mistake with a substitute."
+				"I need material for the work here. Check the list before you bring a bundle; I have to see what "
+				.. "I am working with before promising a fit. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "All here. I'll sort it before beginning the fitting work.",
+			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
 				{
-					pool = "town_textiles",
-					quantity = 6,
+					pool = "town_delivery_textiles_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -663,32 +712,37 @@ PLUGIN:Register("suture", {
 			id = "SU24",
 			capacity = {kind = "rows", amount = 1},
 			completionCash = 2650,
-			name = "The Outfitter's Pattern",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the final expedition pattern from the assigned search area in Waystation. Bring it back "
-				.. "to the issuing contact in Waystation."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SU23"},
 			briefing = (
-				"Bring the pattern papers back flat if you can. Small measurements become rather less useful under "
-				.. "an impressive crease. Recover the final expedition pattern from the assigned search area in "
-				.. "Waystation. Bring it back to me in Waystation."
+				"I need material for the work here. Check the list before you bring a bundle; I have to see what "
+				.. "I am working with before promising a fit. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"Leave them here. You've given the work your attention as well as your legs. I appreciate both. "
-				.. "For once, you may sit down without me asking you to turn around first."
-			),
-			field = {
-				description = (
-					"A cardboard file folder with a small coloured crest on its cover. Suture's note: \"Bring the "
-					.. "pattern papers back flat if you can.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_official",
-				label = "Final expedition pattern",
+			completion = "Thank you. Leave them flat while I inspect the material.",
+			requirements = {
+				{
+					pool = "town_delivery_textiles_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_textiles_waystation_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {

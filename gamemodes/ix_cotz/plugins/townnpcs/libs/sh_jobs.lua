@@ -159,7 +159,18 @@ function PLUGIN:BuildJobs()
 		ix.taskRewards.SetTownProfile(contact.name, contact.rewards)
 		for tier, difficulty in ipairs(DIFFICULTIES) do registerRepeatable(contact, difficulty, tier) end
 		for _, step in ipairs(contact.progression) do
-			if step.kind == "field" then registerCommission(contact, step) end
+			if step.kind == "field" then
+				registerCommission(contact, step)
+			elseif step.retiredCommission then
+				-- Saved assignments own their field state; retain only their completion identity.
+				registerJob(contact, "cotz/town/commission/" .. contact.id .. "/" .. step.id, {
+					name = step.name,
+					desc = step.briefing,
+					categories = {},
+					townProgression = self:StepID(contact.id, step.id),
+					CanAcceptTask = function() return false end,
+				})
+			end
 		end
 	end
 end

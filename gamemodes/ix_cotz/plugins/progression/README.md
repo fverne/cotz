@@ -10,6 +10,8 @@ Town content is authored in [townnpcs](../townnpcs/README.md); superseded town d
 - All shared and town requirement candidates: definitions/sh_requirementpools.lua.
   Town contacts read this registry directly; there is no separate town pool installation.
   The 46 `valuables_*` authoring pools cover 296 non-quest valuables and await acquisition playtesting.
+  Another 72 `town_delivery_*` pools split contact themes and starting regions into four FTS availability bands.
+  See [delivery balance](../../../../docs/npc-overhaul/delivery-balance.md) for generation and tuning.
 - Standalone non-town contacts: definitions/sh_computer_story.lua, sh_computerprog.lua,
   sh_hoarderprog.lua, sh_noosphereprog.lua and sh_communityprog.lua. These are separate gameplay,
   not compatibility copies of town NPC progressions. Secret Hoarder spawning remains separate.

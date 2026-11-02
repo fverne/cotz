@@ -54,19 +54,14 @@ PLUGIN:Register("intern", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Could you bring the electronics on this list? I want to make sure the instruments have what "
-				.. "they need before we begin. I've checked the list twice. That isn't because I think you "
-				.. "can't read it; I just don't want to have to ask you for another trip."
+				"I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely "
+				.. "on the readings. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"Thank you. That's everything I wrote down. I'll check the instruments now and keep these "
-				.. "together. It's nice to be able to prepare something instead of only counting what's "
-				.. "missing."
-			),
+			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 2,
+					pool = "town_delivery_research_waystation_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -124,29 +119,21 @@ PLUGIN:Register("intern", {
 		{
 			id = "IN04",
 			completionCash = 650,
-			name = "The Mislabelled Sample",
-			kind = "field",
-			objective = (
-				"Recover the field label register from the assigned search area in Waystation. Bring it back to "
-				.. "the issuing contact in Waystation."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"IN02"},
 			briefing = (
-				"There's a label register to recover. One uncertain label can make the rest of the figures look "
-				.. "much more interesting than they deserve. Recover the field label register from the assigned "
-				.. "search area in Waystation. Bring it back to me in Waystation."
+				"I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely "
+				.. "on the readings. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Thank you. I'll check the entries against the labels before changing anything.",
-			field = {
-				description = (
-					"A blue laboratory folder with loose printed record sheets extending from its edges. Intern's "
-					.. "note: \"There's a label register to recover.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_lab",
-				label = "Field label register",
+			completion = "Thanks. I will check these against my preparation list.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -157,14 +144,18 @@ PLUGIN:Register("intern", {
 			kind = "delivery",
 			requires = {"IN03"},
 			briefing = (
-				"There are supplies to bring through. I'd like to finish the preparation before calling the "
-				.. "instrument ready."
+				"I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely "
+				.. "on the readings. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. That's the requested material accounted for.",
+			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_research_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -225,33 +216,28 @@ PLUGIN:Register("intern", {
 		{
 			id = "IN08",
 			completionCash = 1050,
-			name = "The Missing Interval",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the interrupted recording for Spool from the assigned search area in Waystation. Deliver "
-				.. "it to 'Spool' in Garbage, then come back to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"IN06"},
 			briefing = (
-				"Spool needs the interrupted recording. He may recognise something useful about the fault that I "
-				.. "would put down to the survey. Recover the interrupted recording for Spool from the assigned "
-				.. "search area in Waystation. Deliver it to 'Spool' in Garbage, then come back to me in Waystation."
+				"I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely "
+				.. "on the readings. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"Delivered? Thank you. I'll wait to hear what he can establish before trying to account for the "
-				.. "gap."
-			),
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Intern's note: "
-					.. "\"Spool needs the interrupted recording.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_tape",
-				label = "Interrupted recording for Spool",
-				recipient = "spool",
+			completion = "Thanks. I will check these against my preparation list.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -261,11 +247,18 @@ PLUGIN:Register("intern", {
 			name = "Something to Compare",
 			kind = "delivery",
 			requires = {"IN07"},
-			briefing = "Bring the requested records together. I want to read the comparison before quoting it to anyone.",
-			completion = "Thank you. I'll take the time to check what they actually say.",
+			briefing = (
+				"I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely "
+				.. "on the readings. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_research_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
 					quantity = 1,
 				},
 			},
@@ -314,29 +307,28 @@ PLUGIN:Register("intern", {
 		{
 			id = "IN12",
 			completionCash = 1450,
-			name = "The Field Vesper Chose",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Deploy the recorder at the assigned site in Waystation, let it finish recording, then retrieve "
-				.. "the anomaly approach survey recorder. Bring it back to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"IN10"},
 			briefing = (
-				"This recording is from the anomaly approach. I've checked the order; please check the journey "
-				.. "before accepting it. Deploy the recorder at the assigned site in Waystation, let it finish "
-				.. "recording, then retrieve the anomaly approach survey recorder. Bring it back to me in Waystation."
+				"I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely "
+				.. "on the readings. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Thank you. Now I can compare the preparation with what actually came back.",
-			field = {
-				description = (
-					"A flat dark electronic module with a printed number and a small circular emblem. Intern's note: "
-					.. "\"This recording is from the anomaly approach.\""
-				),
-				kind = "sensor",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_module",
-				label = "Anomaly approach survey recorder",
+			completion = "Thanks. I will check these against my preparation list.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -356,19 +348,22 @@ PLUGIN:Register("intern", {
 			kind = "delivery",
 			requires = {"IN11"},
 			briefing = (
-				"I've written down what I'm short of. Could you bring it here? I'll check it against the "
-				.. "list. Please follow the instructions on the order. I want to be able to explain the "
-				.. "work afterwards without filling the gaps with guesses."
+				"I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely "
+				.. "on the readings. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"Oh, good. That's one thing ready. Right. I'll check it against my notes before I show "
-				.. "anyone. It takes me a little longer when I'm determined not to borrow somebody else's "
-				.. "answer."
-			),
+			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "canned_food",
-					quantity = 4,
+					pool = "town_delivery_research_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -417,30 +412,32 @@ PLUGIN:Register("intern", {
 		{
 			id = "IN16",
 			completionCash = 1850,
-			name = "The First Pripyat Series",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Deploy the recorder at the assigned site in Pripyat, let it finish recording, then retrieve the "
-				.. "first Pripyat survey recorder. Bring it back to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"IN14"},
 			briefing = (
-				"I'd like a complete survey recording from Pripyat. I've written the requirements down so neither "
-				.. "of us has to remember my explanation under pressure. Deploy the recorder at the assigned site in "
-				.. "Pripyat, let it finish recording, then retrieve the first Pripyat survey recorder. Bring it back "
-				.. "to me in Waystation."
+				"I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely "
+				.. "on the readings. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "You're back. I'll put the record with the setup notes before doing anything clever with it.",
-			field = {
-				description = (
-					"A flat dark electronic module marked with a number and three pale bars. Intern's note: \"I'd like "
-					.. "a complete survey recording from Pripyat.\""
-				),
-				kind = "sensor",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_module2",
-				label = "First Pripyat survey recorder",
+			completion = "Thanks. I will check these against my preparation list.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -450,12 +447,23 @@ PLUGIN:Register("intern", {
 			name = "Without Missing Pages",
 			kind = "delivery",
 			requires = {"IN15"},
-			briefing = "Bring the requested records together. I want to read the comparison before quoting it to anyone.",
-			completion = "Thank you. I'll take the time to check what they actually say.",
+			briefing = (
+				"I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely "
+				.. "on the readings. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_research_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -516,30 +524,32 @@ PLUGIN:Register("intern", {
 		{
 			id = "IN20",
 			completionCash = 2250,
-			name = "The Earlier Team",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the earlier survey recording for Wake from the assigned search area in Pripyat. Deliver "
-				.. "it to 'Wake' in Garbage, then come back to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"IN18"},
 			briefing = (
-				"Wake needs the earlier team's recording. I don't want a useful detail about the people lost "
-				.. "inside my technical summary. Recover the earlier survey recording for Wake from the assigned "
-				.. "search area in Pripyat. Deliver it to 'Wake' in Garbage, then come back to me in Waystation."
+				"I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely "
+				.. "on the readings. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "She has it. Thank you for giving her the account itself.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Intern's note: "
-					.. "\"Wake needs the earlier team's recording.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_tape",
-				label = "Earlier survey recording for Wake",
-				recipient = "wake",
+			completion = "Thanks. I will check these against my preparation list.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -549,12 +559,27 @@ PLUGIN:Register("intern", {
 			name = "The Last Calibration",
 			kind = "delivery",
 			requires = {"IN19", "IN20"},
-			briefing = "I need the supplies on this request. Keep enough for your own return too.",
-			completion = "All here. I'll put this lot aside before the cupboard acquires another explanation.",
+			briefing = (
+				"I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely "
+				.. "on the readings. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 6,
+					pool = "town_delivery_research_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -608,32 +633,36 @@ PLUGIN:Register("intern", {
 		{
 			id = "IN24",
 			completionCash = 2650,
-			name = "The Missing Observation",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the missing survey observation log from the assigned search area in Waystation. Bring it "
-				.. "back to the issuing contact in Waystation."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"IN23"},
 			briefing = (
-				"The last field record needs to come home whole. If I missed something, I want to find it before I "
-				.. "call the survey finished. Recover the missing survey observation log from the assigned search "
-				.. "area in Waystation. Bring it back to me in Waystation."
+				"I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely "
+				.. "on the readings. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"Those are my figures, with the awkward parts still attached. You've helped me finish work I can "
-				.. "answer questions about. Thank you. I think I can put my name on it without apologising first."
-			),
-			field = {
-				description = (
-					"A blue laboratory folder with loose printed record sheets extending from its edges. Intern's "
-					.. "note: \"The last field record needs to come home whole.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_lab",
-				label = "Missing survey observation log",
+			completion = "Thanks. I will check these against my preparation list.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {

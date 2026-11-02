@@ -79,18 +79,15 @@ PLUGIN:Register("smartass", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring the small electronics on this list. I need a few things in working order before I "
-				.. "start asking anyone to go near a computer. If you find something interesting on the way, "
-				.. "resist the urge to take it apart with your knife."
+				"I need parts. The list should spare us the performance where you bring something vaguely "
+				.. "technical and I explain why it is useless. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"Good. Let me check these. You brought what I asked for and didn't demonstrate your repair "
-				.. "technique on them. We're already ahead of several people I could name."
-			),
+			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 2,
+					pool = "town_delivery_electronics_waystation_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -150,29 +147,22 @@ PLUGIN:Register("smartass", {
 		{
 			id = "SM04",
 			completionCash = 650,
-			name = "The Wrong Frequency",
-			kind = "field",
-			objective = (
-				"Recover the beacon calibration file from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Waystation."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"SM02"},
 			briefing = (
-				"Recover the calibration record. A device being wrong in a consistent way can make a remarkably "
-				.. "persuasive set of bearings. Recover the beacon calibration file from the assigned search area in "
-				.. "Garbage. Bring it back to me in Waystation."
+				"I need parts. The list should spare us the performance where you bring something vaguely "
+				.. "technical and I explain why it is useless. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Good. I'll check the calibration before accusing the rest of the world of moving.",
-			field = {
-				description = (
-					"A flat dark electronic module with a printed number and a small circular emblem. Smartass's "
-					.. "note: \"Recover the calibration record.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_module",
-				label = "Beacon calibration file",
+			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_waystation_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -182,12 +172,20 @@ PLUGIN:Register("smartass", {
 			name = "Mounts and Glass",
 			kind = "delivery",
 			requires = {"SM03"},
-			briefing = "Bring the requested components. An object being electronic doesn't make it the one on the list.",
-			completion = "Good. Something I can test before hearing what it ought to do.",
+			briefing = (
+				"I need parts. The list should spare us the performance where you bring something vaguely "
+				.. "technical and I explain why it is useless. Bring everything on the list back here; I need the "
+				.. "full delivery."
+			),
+			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 3,
+					pool = "town_delivery_electronics_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -251,30 +249,29 @@ PLUGIN:Register("smartass", {
 		{
 			id = "SM08",
 			completionCash = 1050,
-			name = "Spool's Correction",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the signal recording for Spool from the assigned search area in Garbage. Deliver it to "
-				.. "'Spool' in Garbage, then come back to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SM06"},
 			briefing = (
-				"Spool needs the disputed recording. Let him hear the fault himself before he tells me why my "
-				.. "account of it is offensive. Recover the signal recording for Spool from the assigned search area "
-				.. "in Garbage. Deliver it to 'Spool' in Garbage, then come back to me in Waystation."
+				"I need parts. The list should spare us the performance where you bring something vaguely "
+				.. "technical and I explain why it is useless. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Delivered. Good. He can now argue with the same recording I'm discussing.",
-			field = {
-				description = (
-					"A flat dark electronic module marked with a number and three pale bars. Smartass's note: \"Spool "
-					.. "needs the disputed recording.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_module2",
-				label = "Signal recording for Spool",
-				recipient = "spool",
+			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -284,12 +281,20 @@ PLUGIN:Register("smartass", {
 			name = "An Honest Test",
 			kind = "delivery",
 			requires = {"SM07"},
-			briefing = "There's another equipment request. Keep the contacts clear of whatever else you're collecting.",
-			completion = "Here we are. The requested parts, without an accompanying mystery.",
+			briefing = (
+				"I need parts. The list should spare us the performance where you bring something vaguely "
+				.. "technical and I explain why it is useless. Bring everything on the list back here; I need the "
+				.. "full delivery."
+			),
+			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 3,
+					pool = "town_delivery_electronics_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -337,31 +342,29 @@ PLUGIN:Register("smartass", {
 		{
 			id = "SM12",
 			completionCash = 1450,
-			name = "The Receiver List",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the receiver register for Quartermaster from the assigned search area in Waystation. "
-				.. "Deliver it to 'Quartermaster' in Waystation, then come back to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SM10"},
 			briefing = (
-				"Quartermaster needs the receiver register. I suspect he'll enjoy finding a page where equipment "
-				.. "is described consistently. Recover the receiver register for Quartermaster from the assigned "
-				.. "search area in Waystation. Deliver it to 'Quartermaster' in Waystation, then come back to me in "
-				.. "Waystation."
+				"I need parts. The list should spare us the performance where you bring something vaguely "
+				.. "technical and I explain why it is useless. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "He has it. One fewer reason for him to ask what I meant by that sort of receiver.",
-			field = {
-				description = (
-					"A blue records folder with contrasting corporate lettering along the cover. Smartass's note: "
-					.. "\"Quartermaster needs the receiver register.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_archive",
-				label = "Receiver register for Quartermaster",
-				recipient = "quartermaster",
+			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -381,18 +384,23 @@ PLUGIN:Register("smartass", {
 			kind = "delivery",
 			requires = {"SM11"},
 			briefing = (
-				"Bring the supplies on the list. The list is the useful bit; the excuse can stay with "
-				.. "you. Read the instruction through before doing the clever part. Particularly if the "
-				.. "clever part involves deciding you don't need the instruction."
+				"I need parts. The list should spare us the performance where you bring something vaguely "
+				.. "technical and I explain why it is useless. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"Yes, that will do. Try not to look so surprised. That gives me something to check. Stay "
-				.. "there a moment; I may even manage it without making you explain the obvious twice."
-			),
+			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 4,
+					pool = "town_delivery_electronics_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -443,29 +451,33 @@ PLUGIN:Register("smartass", {
 		{
 			id = "SM16",
 			completionCash = 1850,
-			name = "A Signal Across Maps",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Take the required bearings in Garbage, locate the source, and collect the regional transmitter "
-				.. "source. Bring it back to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SM14"},
 			briefing = (
-				"I want the regional source collected. Check the bearings; an impressive explanation still doesn't "
-				.. "make two lines meet. Take the required bearings in Garbage, locate the source, and collect the "
-				.. "regional transmitter source. Bring it back to me in Waystation."
+				"I need parts. The list should spare us the performance where you bring something vaguely "
+				.. "technical and I explain why it is useless. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Good. Something we can put on the bench instead of discussing across half the region.",
-			field = {
-				description = (
-					"A finned grey control box with a red stripe and several round front connectors. Smartass's note: "
-					.. "\"I want the regional source collected.\""
-				),
-				kind = "triangulation",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_control",
-				label = "Regional transmitter source",
+			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -476,14 +488,23 @@ PLUGIN:Register("smartass", {
 			kind = "delivery",
 			requires = {"SM15"},
 			briefing = (
-				"I need the listed supplies. Don't improve the request unless you're also volunteering to explain "
-				.. "it to Quartermaster."
+				"I need parts. The list should spare us the performance where you bring something vaguely "
+				.. "technical and I explain why it is useless. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "That's what I asked for. A deeply underrated technical achievement.",
+			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 5,
+					pool = "town_delivery_electronics_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -543,30 +564,33 @@ PLUGIN:Register("smartass", {
 		{
 			id = "SM20",
 			completionCash = 2250,
-			name = "The Handler's Record",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the command recording for Carbon from the assigned search area in Pripyat. Deliver it to "
-				.. "'Carbon' in Waystation, then come back to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SM18"},
 			briefing = (
-				"Carbon needs the command recording. He can put the account beside the documents without me "
-				.. "deciding the sequence for him. Recover the command recording for Carbon from the assigned search "
-				.. "area in Pripyat. Deliver it to 'Carbon' in Waystation, then come back to me in Waystation."
+				"I need parts. The list should spare us the performance where you bring something vaguely "
+				.. "technical and I explain why it is useless. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Delivered. I'll let him read before asking whether he enjoyed my interpretation.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Smartass's note: "
-					.. "\"Carbon needs the command recording.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_tape",
-				label = "Command recording for Carbon",
-				recipient = "carbon",
+			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -577,14 +601,27 @@ PLUGIN:Register("smartass", {
 			kind = "delivery",
 			requires = {"SM19", "SM20"},
 			briefing = (
-				"Bring this lot through intact. I'd rather inspect the fault myself than admire somebody's field "
-				.. "repair."
+				"I need parts. The list should spare us the performance where you bring something vaguely "
+				.. "technical and I explain why it is useless. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Useful. I'll put it where I can find it again without a search party.",
+			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 6,
+					pool = "town_delivery_electronics_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -635,33 +672,37 @@ PLUGIN:Register("smartass", {
 		{
 			id = "SM24",
 			completionCash = 2650,
-			name = "The Silent Frequency",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the final network record drive from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Waystation."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SM23"},
 			briefing = (
-				"Bring the last drive here. Reading an intriguing filename while you're outside is how a short "
-				.. "stop becomes an expensive evening. Recover the final network record drive from the assigned "
-				.. "search area in Garbage. Bring it back to me in Waystation."
+				"I need parts. The list should spare us the performance where you bring something vaguely "
+				.. "technical and I explain why it is useless. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"You've given me enough to check the account without inventing the missing bits for entertainment. "
-				.. "Quite inconsiderate of you. Sit down if you've time; I'd like somebody else to hear the part "
-				.. "that's still annoying me."
-			),
-			field = {
-				description = (
-					"A USB drive with a large rear loop and a handwritten paper label around its body. Smartass's "
-					.. "note: \"Bring the last drive here.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_security",
-				label = "Final network record drive",
+			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_waystation_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {

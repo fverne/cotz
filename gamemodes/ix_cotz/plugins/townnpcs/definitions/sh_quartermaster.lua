@@ -319,14 +319,14 @@ PLUGIN:Register("quartermaster", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring the requested documentation here complete. An account of a record is insufficient for "
-				.. "verifying it."
+				"I need this supply request filled before I can settle the allocations. Bring the listed material "
+				.. "here for checking. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Documents received. I'll check them against the request.",
+			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
 				{
-					pool = "administrative_documents",
-					quantity = 1,
+					pool = "town_delivery_military_waystation_1",
+					quantity = 9,
 				},
 			},
 			benefits = {
@@ -383,29 +383,28 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "QM04",
 			completionCash = 650,
-			name = "The Misrouted Crate",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the misrouted equipment case from the assigned search area in Waystation. Bring it back "
-				.. "to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"QM03"},
 			briefing = (
-				"Recover the equipment case unchanged. We can establish what arrived once it is here. Recover the "
-				.. "misrouted equipment case from the assigned search area in Waystation. Bring it back to me in "
-				.. "Waystation."
+				"I need this supply request filled before I can settle the allocations. Bring the listed material "
+				.. "here for checking. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Case received. Leave it closed until there is room to inspect the contents.",
-			field = {
-				description = (
-					"A low hard case with long contrasting strips across its ribbed lid. Quartermaster's note: "
-					.. "\"Recover the equipment case unchanged.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_equipment",
-				label = "Misrouted equipment case",
+			completion = "Received. I will enter the delivery before assigning it elsewhere.",
+			requirements = {
+				{
+					pool = "town_delivery_military_waystation_1",
+					quantity = 18,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -415,12 +414,19 @@ PLUGIN:Register("quartermaster", {
 			name = "Standard Issue",
 			kind = "delivery",
 			requires = {"QM04"},
-			briefing = "The listed ammunition is required here. Verify the request before packing the delivery.",
-			completion = "Delivery received against the order.",
+			briefing = (
+				"I need this supply request filled before I can settle the allocations. Bring the listed material "
+				.. "here for checking. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
 				{
-					pool = "town_ammunition",
-					quantity = 12,
+					pool = "town_delivery_military_waystation_1",
+					quantity = 18,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -482,29 +488,28 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "QM08",
 			completionCash = 1050,
-			name = "The Supplier's Mark",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the supplier identification evidence from the assigned search area in Waystation. Bring "
-				.. "it back to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"QM06"},
 			briefing = (
-				"Recover the supplier evidence. I need to verify which consignment the markings belong to. Recover "
-				.. "the supplier identification evidence from the assigned search area in Waystation. Bring it back "
-				.. "to me in Waystation."
+				"I need this supply request filled before I can settle the allocations. Bring the listed material "
+				.. "here for checking. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Set it here. I'll check the identifying details before contacting anyone.",
-			field = {
-				description = (
-					"A printed packing list on a small clipboard with a metal clip and a circular stamp. "
-					.. "Quartermaster's note: \"Recover the supplier evidence.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_manifest",
-				label = "Supplier identification evidence",
+			completion = "Received. I will enter the delivery before assigning it elsewhere.",
+			requirements = {
+				{
+					pool = "town_delivery_military_waystation_1",
+					quantity = 18,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -514,12 +519,19 @@ PLUGIN:Register("quartermaster", {
 			name = "Fittings and Mounts",
 			kind = "delivery",
 			requires = {"QM07"},
-			briefing = "There is another supply requirement. Similar equipment is not an agreed substitute.",
-			completion = "The requested lot is here. I'll account for it.",
+			briefing = (
+				"I need this supply request filled before I can settle the allocations. Bring the listed material "
+				.. "here for checking. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
 				{
-					pool = "town_ammunition_military",
-					quantity = 3,
+					pool = "town_delivery_military_waystation_1",
+					quantity = 18,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -573,29 +585,32 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "QM12",
 			completionCash = 1450,
-			name = "The Lost Agreement",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the previous procurement agreement from the assigned search area in Waystation. Bring it "
-				.. "back to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"QM10"},
 			briefing = (
-				"Recover the old contract in full. We need the obligations as written, including the inconvenient "
-				.. "clauses. Recover the previous procurement agreement from the assigned search area in Waystation. "
-				.. "Bring it back to me in Waystation."
+				"I need this supply request filled before I can settle the allocations. Bring the listed material "
+				.. "here for checking. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Leave the pages together. I'll read the agreement before deciding which terms still apply.",
-			field = {
-				description = (
-					"A creased printed letter with a corporate mark and several small blocks of text. Quartermaster's "
-					.. "note: \"Recover the old contract in full.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_contract",
-				label = "Previous procurement agreement",
+			completion = "Received. I will enter the delivery before assigning it elsewhere.",
+			requirements = {
+				{
+					pool = "town_delivery_military_waystation_1",
+					quantity = 27,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -615,18 +630,22 @@ PLUGIN:Register("quartermaster", {
 			kind = "delivery",
 			requires = {"QM11"},
 			briefing = (
-				"Bring the listed supplies. I will check them against the requirement. Do not substitute "
-				.. "your own judgement for the listed requirement. Report a difficulty while there is still "
-				.. "time to address it."
+				"I need this supply request filled before I can settle the allocations. Bring the listed material "
+				.. "here for checking. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"The quantity is correct. I will check the remainder before filing this. You may wait "
-				.. "without rearranging anything on the desk."
-			),
+			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
 				{
-					pool = "town_ammunition",
-					quantity = 24,
+					pool = "town_delivery_military_waystation_1",
+					quantity = 27,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -675,29 +694,32 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "QM16",
 			completionCash = 1850,
-			name = "The Field Test",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the equipment trial recording from the assigned search area in Waystation. Bring it back "
-				.. "to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"QM14"},
 			briefing = (
-				"I need the equipment-trial recording. Readings and conditions must be considered together. "
-				.. "Recover the equipment trial recording from the assigned search area in Waystation. Bring it back "
-				.. "to me in Waystation."
+				"I need this supply request filled before I can settle the allocations. Bring the listed material "
+				.. "here for checking. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Recording received. I'll review the complete trial before judging the equipment.",
-			field = {
-				description = (
-					"A flat dark electronic module with a printed number and a small circular emblem. Quartermaster's "
-					.. "note: \"I need the equipment-trial recording.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_module",
-				label = "Equipment trial recording",
+			completion = "Received. I will enter the delivery before assigning it elsewhere.",
+			requirements = {
+				{
+					pool = "town_delivery_military_waystation_1",
+					quantity = 27,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -707,12 +729,23 @@ PLUGIN:Register("quartermaster", {
 			name = "Ready for Deployment",
 			kind = "delivery",
 			requires = {"QM15"},
-			briefing = "Bring the listed material through intact. Keep your own operational supplies separate.",
-			completion = "All requested material received.",
+			briefing = (
+				"I need this supply request filled before I can settle the allocations. Bring the listed material "
+				.. "here for checking. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
 				{
-					pool = "town_ammunition",
-					quantity = 36,
+					pool = "town_delivery_military_waystation_1",
+					quantity = 27,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -769,29 +802,32 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "QM20",
 			completionCash = 2250,
-			name = "The Abandoned Stores",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the abandoned stores case from the assigned search area in Pripyat. Bring it back to the "
-				.. "issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"QM18"},
 			briefing = (
-				"The equipment case is still at the Pripyat supply site. Recover the case before accounting for "
-				.. "its contents. Recover the abandoned stores case from the assigned search area in Pripyat. Bring "
-				.. "it back to me in Waystation."
+				"I need this supply request filled before I can settle the allocations. Bring the listed material "
+				.. "here for checking. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Case received. I'll inspect what survived before entering it into the account.",
-			field = {
-				description = (
-					"A low hard case with long contrasting strips across its ribbed lid. Quartermaster's note: \"The "
-					.. "equipment case is still at the Pripyat supply site.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_equipment",
-				label = "Abandoned stores case",
+			completion = "Received. I will enter the delivery before assigning it elsewhere.",
+			requirements = {
+				{
+					pool = "town_delivery_military_waystation_1",
+					quantity = 27,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -802,14 +838,26 @@ PLUGIN:Register("quartermaster", {
 			kind = "delivery",
 			requires = {"QM19", "QM20"},
 			briefing = (
-				"Bring the requested documentation here complete. An account of a record is insufficient for "
-				.. "verifying it."
+				"I need this supply request filled before I can settle the allocations. Bring the listed material "
+				.. "here for checking. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Documents received. I'll check them against the request.",
+			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_military_waystation_1",
+					quantity = 36,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -861,32 +909,36 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "QM24",
 			completionCash = 2650,
-			name = "The Signed Requisition",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the signed supply requisition from the assigned search area in Waystation. Bring it back "
-				.. "to the issuing contact in Waystation."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"QM23"},
 			briefing = (
-				"Return the complete military record. An apparently favourable page is insufficient for concluding "
-				.. "an agreement. Recover the signed supply requisition from the assigned search area in Waystation. "
-				.. "Bring it back to me in Waystation."
+				"I need this supply request filled before I can settle the allocations. Bring the listed material "
+				.. "here for checking. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"You've completed the work reliably. The record can be checked and the agreement considered on its "
-				.. "actual terms. I appreciate that. Take the time you need before discussing another undertaking."
-			),
-			field = {
-				description = (
-					"A buff-coloured folder with loose military record sheets extending beyond its cover. "
-					.. "Quartermaster's note: \"Return the complete military record.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_orders",
-				label = "Signed supply requisition",
+			completion = "Received. I will enter the delivery before assigning it elsewhere.",
+			requirements = {
+				{
+					pool = "town_delivery_military_waystation_1",
+					quantity = 36,
+				},
+				{
+					pool = "town_delivery_military_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_military_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_military_waystation_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {

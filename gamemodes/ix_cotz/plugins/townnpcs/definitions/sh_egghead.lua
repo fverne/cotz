@@ -105,17 +105,13 @@ PLUGIN:Register("egghead", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need the artifacts specified on this list. Bring them here so I can compare them "
-				.. "properly. A specimen without context is still interesting, but I'd rather know what I'm "
-				.. "looking at before it becomes somebody else's grand conclusion."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"Good. Set them there. I'll make the comparison before deciding what they mean. Yes, I know "
-				.. "that sounds cautious. Beanstalk would be delighted to hear it."
-			),
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "common_artifacts",
+					pool = "town_delivery_research_waystation_1",
 					quantity = 1,
 				},
 			},
@@ -173,32 +169,21 @@ PLUGIN:Register("egghead", {
 		{
 			id = "EG04",
 			completionCash = 650,
-			name = "The Old Field Station",
-			kind = "field",
-			objective = (
-				"Recover the field-station calibration case from the assigned search area in Waystation. Bring it "
-				.. "back to the issuing contact in Waystation."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"EG03"},
 			briefing = (
-				"There's a calibration case left at the old field station. I'd like to inspect it before assuming "
-				.. "the measurements were comparable. Recover the field-station calibration case from the assigned "
-				.. "search area in Waystation. Bring it back to me in Waystation."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"Set it on the clear side. The outside has survived; let's see what we can establish about the "
-				.. "rest."
-			),
-			field = {
-				description = (
-					"A dark reinforced case covered in pale symbols and contrasting trim. Egghead's note: \"There's a "
-					.. "calibration case left at the old field station.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_research",
-				label = "Field-station calibration case",
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -209,13 +194,17 @@ PLUGIN:Register("egghead", {
 			kind = "delivery",
 			requires = {"EG04"},
 			briefing = (
-				"I'd like the listed artifacts for comparison. Keep the request in mind before choosing what you "
-				.. "would most enjoy parting with."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Excellent. I'll examine the specimens before comparing them with the notes.",
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "common_artifacts",
+					pool = "town_delivery_research_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
 					quantity = 1,
 				},
 			},
@@ -277,29 +266,28 @@ PLUGIN:Register("egghead", {
 		{
 			id = "EG08",
 			completionCash = 1050,
-			name = "The Missing Calibration",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the detector calibration record from the assigned search area in Garbage. Bring it back "
-				.. "to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"EG06"},
 			briefing = (
-				"The detector test record is missing. It would be pleasant to know what was actually checked "
-				.. "before arguing about its accuracy. Recover the detector calibration record from the assigned "
-				.. "search area in Garbage. Bring it back to me in Waystation."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Thank you. I'll read the procedure as carefully as the figures.",
-			field = {
-				description = (
-					"A blue laboratory folder with loose printed record sheets extending from its edges. Egghead's "
-					.. "note: \"The detector test record is missing.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_lab",
-				label = "Detector calibration record",
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -310,13 +298,17 @@ PLUGIN:Register("egghead", {
 			kind = "delivery",
 			requires = {"EG07"},
 			briefing = (
-				"There is another reference request. Bring what is listed; the interesting difference may be less "
-				.. "impressive to look at."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Thank you. I'll keep this set separate while I inspect it.",
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "common_artifacts",
+					pool = "town_delivery_research_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
 					quantity = 1,
 				},
 			},
@@ -365,29 +357,28 @@ PLUGIN:Register("egghead", {
 		{
 			id = "EG12",
 			completionCash = 1450,
-			name = "The Paired Samples",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the paired-sample comparison file from the assigned search area in Waystation. Bring it "
-				.. "back to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"EG10"},
 			briefing = (
-				"Bring the comparison record back complete. I want to see how the two accounts were matched. "
-				.. "Recover the paired-sample comparison file from the assigned search area in Waystation. Bring it "
-				.. "back to me in Waystation."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "That's the file. I'll keep both sides open while I read it.",
-			field = {
-				description = (
-					"A blue laboratory folder with loose printed record sheets extending from its edges. Egghead's "
-					.. "note: \"Bring the comparison record back complete.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_lab",
-				label = "Paired-sample comparison file",
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -407,14 +398,22 @@ PLUGIN:Register("egghead", {
 			kind = "delivery",
 			requires = {"EG11"},
 			briefing = (
-				"I'd like the listed artifacts for comparison. Keep the request in mind before choosing what you "
-				.. "would most enjoy parting with."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Excellent. I'll examine the specimens before comparing them with the notes.",
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "electrical_artifacts",
-					quantity = 4,
+					pool = "town_delivery_research_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -464,30 +463,32 @@ PLUGIN:Register("egghead", {
 		{
 			id = "EG16",
 			completionCash = 1850,
-			name = "The Archived Finding",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the archived finding for Carbon from the assigned search area in Waystation. Deliver it "
-				.. "to 'Carbon' in Waystation, then come back to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"EG14"},
 			briefing = (
-				"Carbon needs the archived finding. He can check its context without relying on the quotation I "
-				.. "remembered liking. Recover the archived finding for Carbon from the assigned search area in "
-				.. "Waystation. Deliver it to 'Carbon' in Waystation, then come back to me in Waystation."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Delivered. I shall resist citing it any more confidently until he has read it.",
-			field = {
-				description = (
-					"A blue document folder with loose pages protruding from the edges. Egghead's note: \"Carbon needs "
-					.. "the archived finding.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_dossier",
-				label = "Archived finding for Carbon",
-				recipient = "carbon",
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -498,14 +499,22 @@ PLUGIN:Register("egghead", {
 			kind = "delivery",
 			requires = {"EG15"},
 			briefing = (
-				"I'd like the requested equipment brought here. Preparing the comparison includes the ordinary "
-				.. "supplies too."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. That's something I can stop borrowing from the next piece of work.",
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 5,
+					pool = "town_delivery_research_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -565,29 +574,32 @@ PLUGIN:Register("egghead", {
 		{
 			id = "EG20",
 			completionCash = 2250,
-			name = "The Unfinished Experiment",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the unfinished calibration case from the assigned search area in Pripyat. Bring it back "
-				.. "to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"EG18"},
 			briefing = (
-				"There's another calibration case still out in Pripyat. We should inspect it before treating that "
-				.. "trial as comparable. Recover the unfinished calibration case from the assigned search area in "
-				.. "Pripyat. Bring it back to me in Waystation."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. I'll put the case beside the trial papers and see what can be checked.",
-			field = {
-				description = (
-					"A dark reinforced case covered in pale symbols and contrasting trim. Egghead's note: \"There's "
-					.. "another calibration case still out in Pripyat.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_research",
-				label = "Unfinished calibration case",
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -598,14 +610,22 @@ PLUGIN:Register("egghead", {
 			kind = "delivery",
 			requires = {"EG19", "EG20"},
 			briefing = (
-				"I'd like the listed artifacts for comparison. Keep the request in mind before choosing what you "
-				.. "would most enjoy parting with."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Excellent. I'll examine the specimens before comparing them with the notes.",
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "common_artifacts",
+					pool = "town_delivery_research_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -656,30 +676,36 @@ PLUGIN:Register("egghead", {
 		{
 			id = "EG24",
 			completionCash = 2650,
-			name = "The Programme's Missing Page",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the programme archive for Carbon from the assigned search area in Waystation. Deliver it "
-				.. "to 'Carbon' in Waystation, then come back to the issuing contact in Waystation."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"EG23"},
 			briefing = (
-				"The archived research record goes to Carbon. I'd prefer he had the original while he checks the "
-				.. "missing references. Recover the programme archive for Carbon from the assigned search area in "
-				.. "Waystation. Deliver it to 'Carbon' in Waystation, then come back to me in Waystation."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Delivered. I owe him the courtesy of waiting until he's finished reading.",
-			field = {
-				description = (
-					"A blue records folder with contrasting corporate lettering along the cover. Egghead's note: \"The "
-					.. "archived research record goes to Carbon.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_archive",
-				label = "Programme archive for Carbon",
-				recipient = "carbon",
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -698,12 +724,27 @@ PLUGIN:Register("egghead", {
 			name = "Preserve the Findings",
 			kind = "delivery",
 			requires = {"EG24"},
-			briefing = "Bring the listed material intact. I want the working record as well as the attractive result.",
-			completion = "Here we are. I'll record what arrived before rearranging it.",
+			briefing = (
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_research_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
 					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -711,33 +752,36 @@ PLUGIN:Register("egghead", {
 		{
 			id = "EG26",
 			completionCash = 2850,
-			name = "The Last Control Record",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the final control log from the assigned search area in Waystation. Bring it back to the "
-				.. "issuing contact in Waystation."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"EG25"},
 			briefing = (
-				"I'd like the complete control log, including the method and the dull intervals. Those have a "
-				.. "habit of becoming important later. Recover the final control log from the assigned search area in "
-				.. "Waystation. Bring it back to me in Waystation."
+				"I need material for the research bench. Yes, there is a list; I remembered to write it before "
+				.. "getting distracted this time. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"We've got a collection someone else can examine and disagree with. That pleases me more than a "
-				.. "shelf of impressive objects. Thank you. If you've time, I'd like to show you which result is "
-				.. "still bothering me."
-			),
-			field = {
-				description = (
-					"A blue laboratory folder with loose printed record sheets extending from its edges. Egghead's "
-					.. "note: \"I'd like the complete control log, including the method and the dull intervals.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_lab",
-				label = "Final control log",
+			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
+			requirements = {
+				{
+					pool = "town_delivery_research_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_research_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_waystation_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			recognition = "Egghead's trusted contact",

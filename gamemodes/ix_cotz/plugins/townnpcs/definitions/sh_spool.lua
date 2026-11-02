@@ -55,18 +55,15 @@ PLUGIN:Register("spool", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need the small electronic parts on this list. Bring them here, would you? It's difficult "
-				.. "to keep listening when I spend half the evening coaxing an old connection back into "
-				.. "behaving. I'll make room on the desk while you're out."
+				"I need supplies for the radio bench. I would like the set ready when somebody calls, without "
+				.. "holding a connection together by hand. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = (
-				"Wonderful. Put them by the radio. I'll sort them before I lose another one under this pile. "
-				.. "If you find tea there, don't drink it; I can't remember when I made it."
-			),
+			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 2,
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -126,29 +123,22 @@ PLUGIN:Register("spool", {
 		{
 			id = "SO04",
 			completionCash = 650,
-			name = "The Station Log",
-			kind = "field",
-			objective = (
-				"Recover the failed station's audio log from the assigned search area in Waystation. Bring it back "
-				.. "to the issuing contact in Garbage."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"SO02"},
 			briefing = (
-				"The failed station's recording needs collecting. I want to hear the routine chatter too, before "
-				.. "somebody decided anything had gone wrong. Recover the failed station's audio log from the "
-				.. "assigned search area in Waystation. Bring it back to me in Garbage."
+				"I need supplies for the radio bench. I would like the set ready when somebody calls, without "
+				.. "holding a connection together by hand. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Leave it beside the receiver. I'll listen from the beginning.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Spool's note: \"The "
-					.. "failed station's recording needs collecting.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_tape",
-				label = "Failed station's audio log",
+			completion = "Thanks. Leave those by the bench; I will check them between calls.",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -159,14 +149,19 @@ PLUGIN:Register("spool", {
 			kind = "delivery",
 			requires = {"SO03"},
 			briefing = (
-				"I'd like the requested components brought here. I'm trying to finish one equipment list before "
-				.. "making a better one."
+				"I need supplies for the radio bench. I would like the set ready when somebody calls, without "
+				.. "holding a connection together by hand. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "There we are. I'll put them beside the right notes before I forget.",
+			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 3,
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -231,29 +226,29 @@ PLUGIN:Register("spool", {
 		{
 			id = "SO08",
 			completionCash = 1050,
-			name = "The Absent Operator",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the absent operator's transmitter from the assigned search area in Waystation. Bring it "
-				.. "back to the issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SO06"},
 			briefing = (
-				"I'd like the operator's source located. A recorded message is something we can examine; silence "
-				.. "alone has been giving everyone too much room. Recover the absent operator's transmitter from the "
-				.. "assigned search area in Waystation. Bring it back to me in Garbage."
+				"I need supplies for the radio bench. I would like the set ready when somebody calls, without "
+				.. "holding a connection together by hand. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "You found it. I'll put it here and listen when the bench is quiet.",
-			field = {
-				description = (
-					"A finned grey control box with a red stripe and several round front connectors. Spool's note: "
-					.. "\"I'd like the operator's source located.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_control",
-				label = "Absent operator's transmitter",
+			completion = "Thanks. Leave those by the bench; I will check them between calls.",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -264,14 +259,19 @@ PLUGIN:Register("spool", {
 			kind = "delivery",
 			requires = {"SO07"},
 			briefing = (
-				"There's another supply request. Check it before setting off; I may have explained it less clearly "
-				.. "than I intended."
+				"I need supplies for the radio bench. I would like the set ready when somebody calls, without "
+				.. "holding a connection together by hand. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "That's the requested lot. Thank you for reading the order as well as listening to me.",
+			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -319,29 +319,33 @@ PLUGIN:Register("spool", {
 		{
 			id = "SO12",
 			completionCash = 1450,
-			name = "The Garbage Relay",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the freight-route relay source from the assigned search area in Waystation. Bring it back "
-				.. "to the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SO10"},
 			briefing = (
-				"There's a relay source near the freight route to locate. Please check the bearings; I'm tired "
-				.. "enough without sorting a source from the wrong conversation. Recover the freight-route relay "
-				.. "source from the assigned search area in Waystation. Bring it back to me in Garbage."
+				"I need supplies for the radio bench. I would like the set ready when somebody calls, without "
+				.. "holding a connection together by hand. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Good. The source is here. I'll make room before I forget which set of notes goes with it.",
-			field = {
-				description = (
-					"A finned grey control box with a red stripe and several round front connectors. Spool's note: "
-					.. "\"There's a relay source near the freight route to locate.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_control",
-				label = "Freight-route relay source",
+			completion = "Thanks. Leave those by the bench; I will check them between calls.",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -360,12 +364,24 @@ PLUGIN:Register("spool", {
 			name = "Packed to Listen",
 			kind = "delivery",
 			requires = {"SO11"},
-			briefing = "Bring the listed supplies here. Leave yourself enough for the trip home too.",
-			completion = "Good. I'll keep these with the communications supplies.",
+			briefing = (
+				"I need supplies for the radio bench. I would like the set ready when somebody calls, without "
+				.. "holding a connection together by hand. Bring everything on the list back here; I need the full "
+				.. "delivery."
+			),
+			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
 				{
-					pool = "canned_food",
-					quantity = 4,
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -414,29 +430,33 @@ PLUGIN:Register("spool", {
 		{
 			id = "SO16",
 			completionCash = 1850,
-			name = "The First Pripyat Call",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Take the required bearings in Pripyat, locate the source, and collect the Pripyat transmitter "
-				.. "source. Bring it back to the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SO14"},
 			briefing = (
-				"We need the source located in Pripyat. I can wait for a prepared trip; don't let a radio order "
-				.. "hurry you into a bad departure. Take the required bearings in Pripyat, locate the source, and "
-				.. "collect the Pripyat transmitter source. Bring it back to me in Garbage."
+				"I need supplies for the radio bench. I would like the set ready when somebody calls, without "
+				.. "holding a connection together by hand. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "You're back with it. Give me a moment to put the right notes beside the receiver.",
-			field = {
-				description = (
-					"A finned grey control box with a red stripe and several round front connectors. Spool's note: "
-					.. "\"We need the source located in Pripyat.\""
-				),
-				kind = "triangulation",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_control",
-				label = "Pripyat transmitter source",
+			completion = "Thanks. Leave those by the bench; I will check them between calls.",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -447,14 +467,23 @@ PLUGIN:Register("spool", {
 			kind = "delivery",
 			requires = {"SO15"},
 			briefing = (
-				"I need the requested material before the next round of checking. Ordinary preparation, I'm "
-				.. "afraid."
+				"I need supplies for the radio bench. I would like the set ready when somebody calls, without "
+				.. "holding a connection together by hand. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Thank you. That's one less thing to remember while somebody is talking.",
+			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 5,
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -512,29 +541,37 @@ PLUGIN:Register("spool", {
 		{
 			id = "SO20",
 			completionCash = 2250,
-			name = "The Receiver That Stayed On",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the expedition's last signal source from the assigned search area in Waystation. Bring it "
-				.. "back to the issuing contact in Garbage."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"SO19"},
 			briefing = (
-				"I'd like the expedition's last source brought home. Don't decide what it must mean while you're "
-				.. "still following the bearings. Recover the expedition's last signal source from the assigned "
-				.. "search area in Waystation. Bring it back to me in Garbage."
+				"I need supplies for the radio bench. I would like the set ready when somebody calls, without "
+				.. "holding a connection together by hand. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Leave it here. I'll listen properly before asking it to answer all our questions.",
-			field = {
-				description = (
-					"A finned grey control box with a red stripe and several round front connectors. Spool's note: "
-					.. "\"I'd like the expedition's last source brought home.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_control",
-				label = "Expedition's last signal source",
+			completion = "Thanks. Leave those by the bench; I will check them between calls.",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			stock = {
@@ -549,14 +586,27 @@ PLUGIN:Register("spool", {
 			kind = "delivery",
 			requires = {"SO20"},
 			briefing = (
-				"I'd like the requested components brought here. I'm trying to finish one equipment list before "
-				.. "making a better one."
+				"I need supplies for the radio bench. I would like the set ready when somebody calls, without "
+				.. "holding a connection together by hand. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "There we are. I'll put them beside the right notes before I forget.",
+			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 6,
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},

@@ -8,7 +8,8 @@ All items have regional worldspawn, human-corpse or hidden-cache entries; see th
 [regional loot guide](../gamemodes/ix_cotz/plugins/randomitem/README.md).
 New repeatable whole-item requests use one unit on easy/medium and two on hard, separately from
 legacy quantities/value floors. Quantity-bearing delivery items use spawn-batch minimum/maximum/maximum + 1 for easy/medium/hard.
-Existing pools, saved assignments and finite progression remain unchanged.
+Existing valuables pools and saved assignments are preserved. Finite delivery progressions now use
+separate FTS availability bands; see [delivery balance](npc-overhaul/delivery-balance.md).
 Easy town item-return jobs accept any candidate in the requested pool. Different members can be handed
 in over multiple deliveries toward the same required unit count. Medium and hard jobs still require
 the named item. Existing job IDs, counts, progress, reference payment floors and reward choices are

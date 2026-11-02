@@ -74,17 +74,14 @@ PLUGIN:Register("the-original", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring me the parts on this list. I've handled enough specimens to know a useful one when I "
-				.. "see it. We'll start with something familiar, and you can decide for yourself whether "
-				.. "listening to an old stalker is worth your time."
+				"I have a request for you. Bring the things on the list and let me examine them myself; I have "
+				.. "seen enough people misidentify what they are holding. Bring everything on the list back here; I "
+				.. "need the full delivery."
 			),
-			completion = (
-				"Let's have a look. Yes, that will do. There's more to learn from a specimen than whether "
-				.. "you managed to put it down. We'll leave the rest for another day."
-			),
+			completion = "Put those here. I want a proper look before anyone starts telling the story for me.",
 			requirements = {
 				{
-					pool = "common_parts",
+					pool = "town_delivery_collectibles_marsh_1",
 					quantity = 1,
 				},
 			},
@@ -145,29 +142,29 @@ PLUGIN:Register("the-original", {
 		{
 			id = "OR04",
 			completionCash = 650,
-			name = "The First Account",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the early expedition diary from the assigned search area in Marsh. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"OR03"},
 			briefing = (
-				"There's an old expedition note to collect. I'd like to see what somebody wrote then, before we "
-				.. "all became experts on our memories. Recover the early expedition diary from the assigned search "
-				.. "area in Marsh. Bring it back to me in Marsh."
+				"I have a request for you. Bring the things on the list and let me examine them myself; I have "
+				.. "seen enough people misidentify what they are holding. Bring everything on the list back here; I "
+				.. "need the full delivery."
 			),
-			completion = "Hand it here. I'll see what I recognise before I explain what they must have meant.",
-			field = {
-				description = (
-					"A thick blue diary with a label fixed to the front cover. The Original's note: \"There's an old "
-					.. "expedition note to collect.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_diary",
-				label = "Early expedition diary",
+			completion = "Put those here. I want a proper look before anyone starts telling the story for me.",
+			requirements = {
+				{
+					pool = "town_delivery_collectibles_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -177,11 +174,19 @@ PLUGIN:Register("the-original", {
 			name = "Teeth and Hide",
 			kind = "delivery",
 			requires = {"OR04"},
-			briefing = "Bring the listed specimens here. I want a close look before deciding which story they belong in.",
-			completion = "Leave them there. I'll examine what actually survived.",
+			briefing = (
+				"I have a request for you. Bring the things on the list and let me examine them myself; I have "
+				.. "seen enough people misidentify what they are holding. Bring everything on the list back here; I "
+				.. "need the full delivery."
+			),
+			completion = "Put those here. I want a proper look before anyone starts telling the story for me.",
 			requirements = {
 				{
-					pool = "common_parts",
+					pool = "town_delivery_collectibles_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_2",
 					quantity = 1,
 				},
 			},
@@ -243,32 +248,29 @@ PLUGIN:Register("the-original", {
 		{
 			id = "OR08",
 			completionCash = 1050,
-			name = "The Scarred Tree",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the scarred-ground field sketchbook from the assigned search area in Garbage. Bring it "
-				.. "back to the issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"OR06"},
 			briefing = (
-				"There's a field sketch to recover in Garbage. I want the drawing rather than another description "
-				.. "of what it resembles. Recover the scarred-ground field sketchbook from the assigned search area "
-				.. "in Garbage. Bring it back to me in Marsh."
+				"I have a request for you. Bring the things on the list and let me examine them myself; I have "
+				.. "seen enough people misidentify what they are holding. Bring everything on the list back here; I "
+				.. "need the full delivery."
 			),
-			completion = (
-				"Good. Let me turn it round. People remember a shape differently after they've been told what to "
-				.. "see."
-			),
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. The Original's note: "
-					.. "\"There's a field sketch to recover in Garbage.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_notebook",
-				label = "Scarred-ground field sketchbook",
+			completion = "Put those here. I want a proper look before anyone starts telling the story for me.",
+			requirements = {
+				{
+					pool = "town_delivery_collectibles_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -279,13 +281,18 @@ PLUGIN:Register("the-original", {
 			kind = "delivery",
 			requires = {"OR07"},
 			briefing = (
-				"There's another specimen request. A familiar animal can still give you something you weren't "
-				.. "expecting."
+				"I have a request for you. Bring the things on the list and let me examine them myself; I have "
+				.. "seen enough people misidentify what they are holding. Bring everything on the list back here; I "
+				.. "need the full delivery."
 			),
-			completion = "Good. I'll compare the details rather than simply recognising the name.",
+			completion = "Put those here. I want a proper look before anyone starts telling the story for me.",
 			requirements = {
 				{
-					pool = "common_parts",
+					pool = "town_delivery_collectibles_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_2",
 					quantity = 1,
 				},
 			},
@@ -335,29 +342,33 @@ PLUGIN:Register("the-original", {
 		{
 			id = "OR12",
 			completionCash = 1450,
-			name = "The Second Witness",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the second witness's cassette from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"OR10"},
 			briefing = (
-				"There's another witness recording to bring back. I'd rather hear it before declaring we agree. "
-				.. "Recover the second witness's cassette from the assigned search area in Marsh. Bring it back to me "
-				.. "in Marsh."
+				"I have a request for you. Bring the things on the list and let me examine them myself; I have "
+				.. "seen enough people misidentify what they are holding. Bring everything on the list back here; I "
+				.. "need the full delivery."
 			),
-			completion = "Here. I'll listen without interrupting it to argue. A useful feature of a recording.",
-			field = {
-				description = (
-					"A pale audio cassette with a broad blue printed label and twin spool windows. The Original's "
-					.. "note: \"There's another witness recording to bring back.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_tape2",
-				label = "Second witness's cassette",
+			completion = "Put those here. I want a proper look before anyone starts telling the story for me.",
+			requirements = {
+				{
+					pool = "town_delivery_collectibles_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -377,18 +388,23 @@ PLUGIN:Register("the-original", {
 			kind = "delivery",
 			requires = {"OR11"},
 			briefing = (
-				"Bring what's listed here. I want to examine it before deciding what to make of it. "
-				.. "Don't decide the answer before the work is done. I've heard enough confident guesses "
-				.. "from people who never went to look."
+				"I have a request for you. Bring the things on the list and let me examine them myself; I have "
+				.. "seen enough people misidentify what they are holding. Bring everything on the list back here; I "
+				.. "need the full delivery."
 			),
-			completion = (
-				"Let me see the condition of it. I'll consider that alongside what I already know. You "
-				.. "needn't look so impatient; being old doesn't mean I read without looking."
-			),
+			completion = "Put those here. I want a proper look before anyone starts telling the story for me.",
 			requirements = {
 				{
-					pool = "common_parts",
+					pool = "town_delivery_collectibles_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -436,29 +452,33 @@ PLUGIN:Register("the-original", {
 		{
 			id = "OR16",
 			completionCash = 1850,
-			name = "The Name He Forgot",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the incomplete expedition diary from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"OR14"},
 			briefing = (
-				"Bring back the surviving diary. A missing name is worth looking into; it isn't an invitation to "
-				.. "choose one that fits. Recover the incomplete expedition diary from the assigned search area in "
-				.. "Marsh. Bring it back to me in Marsh."
+				"I have a request for you. Bring the things on the list and let me examine them myself; I have "
+				.. "seen enough people misidentify what they are holding. Bring everything on the list back here; I "
+				.. "need the full delivery."
 			),
-			completion = "Keep it open there. I'll check the surrounding pages before trusting recognition.",
-			field = {
-				description = (
-					"A thick blue diary with a label fixed to the front cover. The Original's note: \"Bring back the "
-					.. "surviving diary.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_diary",
-				label = "Incomplete expedition diary",
+			completion = "Put those here. I want a proper look before anyone starts telling the story for me.",
+			requirements = {
+				{
+					pool = "town_delivery_collectibles_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -469,14 +489,23 @@ PLUGIN:Register("the-original", {
 			kind = "delivery",
 			requires = {"OR15"},
 			briefing = (
-				"Bring the requested records intact. I can argue with a page much more usefully when the whole "
-				.. "thing is present."
+				"I have a request for you. Bring the things on the list and let me examine them myself; I have "
+				.. "seen enough people misidentify what they are holding. Bring everything on the list back here; I "
+				.. "need the full delivery."
 			),
-			completion = "Hand it here. I'll read before becoming offended.",
+			completion = "Put those here. I want a proper look before anyone starts telling the story for me.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_collectibles_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -534,29 +563,33 @@ PLUGIN:Register("the-original", {
 		{
 			id = "OR20",
 			completionCash = 2250,
-			name = "Under the Old Mark",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the marked expedition evidence from the assigned search area in Pripyat. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"OR18"},
 			briefing = (
-				"There's expedition evidence in Pripyat. Bring it back together; I want to see what survived, not "
-				.. "what someone selected to illustrate my story. Recover the marked expedition evidence from the "
-				.. "assigned search area in Pripyat. Bring it back to me in Marsh."
+				"I have a request for you. Bring the things on the list and let me examine them myself; I have "
+				.. "seen enough people misidentify what they are holding. Bring everything on the list back here; I "
+				.. "need the full delivery."
 			),
-			completion = "Leave it here. I can wait to be right until we've opened the case.",
-			field = {
-				description = (
-					"A compact hard case with orange panels, dark protective ribs and a carrying handle. The "
-					.. "Original's note: \"There's expedition evidence in Pripyat.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_evidence",
-				label = "Marked expedition evidence",
+			completion = "Put those here. I want a proper look before anyone starts telling the story for me.",
+			requirements = {
+				{
+					pool = "town_delivery_collectibles_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -566,12 +599,28 @@ PLUGIN:Register("the-original", {
 			name = "No Two Alike",
 			kind = "delivery",
 			requires = {"OR19", "OR20"},
-			briefing = "Bring the listed specimens here. I want a close look before deciding which story they belong in.",
-			completion = "Leave them there. I'll examine what actually survived.",
+			briefing = (
+				"I have a request for you. Bring the things on the list and let me examine them myself; I have "
+				.. "seen enough people misidentify what they are holding. Bring everything on the list back here; I "
+				.. "need the full delivery."
+			),
+			completion = "Put those here. I want a proper look before anyone starts telling the story for me.",
 			requirements = {
 				{
-					pool = "common_parts",
+					pool = "town_delivery_collectibles_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_3",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -622,32 +671,37 @@ PLUGIN:Register("the-original", {
 		{
 			id = "OR24",
 			completionCash = 2650,
-			name = "What Actually Happened",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the final expedition personnel file from the assigned search area in Marsh. Bring it back "
-				.. "to the issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"OR23"},
 			briefing = (
-				"Bring the complete file. If we're going to pick at an old account, we can at least do it with all "
-				.. "the pages in front of us. Recover the final expedition personnel file from the assigned search "
-				.. "area in Marsh. Bring it back to me in Marsh."
+				"I have a request for you. Bring the things on the list and let me examine them myself; I have "
+				.. "seen enough people misidentify what they are holding. Bring everything on the list back here; I "
+				.. "need the full delivery."
 			),
-			completion = (
-				"Set it beside me. You stayed to check the story after it stopped being easy company. I respect "
-				.. "that. Let's read it before either of us supplies the ending."
-			),
-			field = {
-				description = (
-					"A cardboard file folder with an emblem and printed wording on the front. The Original's note: "
-					.. "\"Bring the complete file.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_personnel",
-				label = "Final expedition personnel file",
+			completion = "Put those here. I want a proper look before anyone starts telling the story for me.",
+			requirements = {
+				{
+					pool = "town_delivery_collectibles_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_collectibles_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {

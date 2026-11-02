@@ -61,18 +61,15 @@ PLUGIN:Register("vesper", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Before the next field trip I need the maintenance supplies on this list. Bring them here "
-				.. "and I'll check the kit. Preparation isn't very exciting to watch, but it gives me more "
-				.. "freedom to pay attention once I'm outside."
+				"I need supplies for the next trip. Check the list; I would like to spend the walk looking at the "
+				.. "field rather than regretting what I packed. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"Good. I'll check these against the kit. I like an interesting trip as much as anyone; I "
-				.. "just prefer the equipment to be boringly dependable."
-			),
+			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 2,
+					pool = "town_delivery_research_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -129,31 +126,22 @@ PLUGIN:Register("vesper", {
 		{
 			id = "VE04",
 			completionCash = 650,
-			name = "Beanstalk's Baseline",
-			kind = "field",
-			objective = (
-				"Recover the baseline recorder for Spool from the assigned search area in Garbage. Deliver it to "
-				.. "'Spool' in Garbage, then come back to the issuing contact in Garbage."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"VE02"},
 			briefing = (
-				"Spool needs the recovered baseline recorder. I'd like the recording checked before anyone tries "
-				.. "to settle the field argument from memory. Recover the baseline recorder for Spool from the "
-				.. "assigned search area in Garbage. Deliver it to 'Spool' in Garbage, then come back to me in "
-				.. "Garbage."
+				"I need supplies for the next trip. Check the list; I would like to spend the walk looking at the "
+				.. "field rather than regretting what I packed. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Delivered. He can examine the record without my opinion talking over it.",
-			field = {
-				description = (
-					"A flat dark electronic module marked with a number and three pale bars. Vesper's note: \"Spool "
-					.. "needs the recovered baseline recorder.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_module2",
-				label = "Baseline recorder for Spool",
-				recipient = "spool",
+			completion = "Thanks. I will check these with the rest of the kit before leaving.",
+			requirements = {
+				{
+					pool = "town_delivery_research_marsh_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -164,14 +152,19 @@ PLUGIN:Register("vesper", {
 			kind = "delivery",
 			requires = {"VE03"},
 			briefing = (
-				"I need the requested components. Check the actual request before carrying a useful-looking "
-				.. "substitute."
+				"I need supplies for the next trip. Check the list; I would like to spend the walk looking at the "
+				.. "field rather than regretting what I packed. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "That's what I needed. I'll keep the lot together for the checks.",
+			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 3,
+					pool = "town_delivery_research_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -232,29 +225,29 @@ PLUGIN:Register("vesper", {
 		{
 			id = "VE08",
 			completionCash = 1050,
-			name = "The Abandoned Detector",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the abandoned prospector's case from the assigned search area in Garbage. Bring it back "
-				.. "to the issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"VE06"},
 			briefing = (
-				"A prospector's case is still out there. Bring it back unchanged; I'd like to inspect the "
-				.. "equipment before deciding why it was left. Recover the abandoned prospector's case from the "
-				.. "assigned search area in Garbage. Bring it back to me in Garbage."
+				"I need supplies for the next trip. Check the list; I would like to spend the walk looking at the "
+				.. "field rather than regretting what I packed. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Good. I'll check the case beside the field account.",
-			field = {
-				description = (
-					"A dark reinforced case covered in pale symbols and contrasting trim. Vesper's note: \"A "
-					.. "prospector's case is still out there.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_research",
-				label = "Abandoned prospector's case",
+			completion = "Thanks. I will check these with the rest of the kit before leaving.",
+			requirements = {
+				{
+					pool = "town_delivery_research_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -264,12 +257,20 @@ PLUGIN:Register("vesper", {
 			name = "Keep It Sealed",
 			kind = "delivery",
 			requires = {"VE07"},
-			briefing = "There is another supply order. Keep your own return provisions out of the hand-in.",
-			completion = "All here. You've still left yourself what you need, I hope.",
+			briefing = (
+				"I need supplies for the next trip. Check the list; I would like to spend the walk looking at the "
+				.. "field rather than regretting what I packed. Bring everything on the list back here; I need the "
+				.. "full delivery."
+			),
+			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_research_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -317,29 +318,29 @@ PLUGIN:Register("vesper", {
 		{
 			id = "VE12",
 			completionCash = 1450,
-			name = "The Control Run",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Deploy the recorder at the assigned site in Garbage, let it finish recording, then retrieve the "
-				.. "regional control recorder. Bring it back to the issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"VE10"},
 			briefing = (
-				"I'd like a recording from the control site. Do the same careful work even if the journey promises "
-				.. "to be less interesting. Deploy the recorder at the assigned site in Garbage, let it finish "
-				.. "recording, then retrieve the regional control recorder. Bring it back to me in Garbage."
+				"I need supplies for the next trip. Check the list; I would like to spend the walk looking at the "
+				.. "field rather than regretting what I packed. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Thank you. A comparison is much easier when the boring trip wasn't treated casually.",
-			field = {
-				description = (
-					"A flat dark electronic module marked with a number and three pale bars. Vesper's note: \"I'd like "
-					.. "a recording from the control site.\""
-				),
-				kind = "sensor",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_module2",
-				label = "Regional control recorder",
+			completion = "Thanks. I will check these with the rest of the kit before leaving.",
+			requirements = {
+				{
+					pool = "town_delivery_research_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -359,18 +360,23 @@ PLUGIN:Register("vesper", {
 			kind = "delivery",
 			requires = {"VE11"},
 			briefing = (
-				"Bring what's on the list. Check your own kit before giving away the supplies you need "
-				.. "to get home. Go through the return instructions before you leave. It's easier to ask a "
-				.. "sensible question here than invent an answer in the field."
+				"I need supplies for the next trip. Check the list; I would like to spend the walk looking at the "
+				.. "field rather than regretting what I packed. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"Good. Check your own supplies before you leave. Good. You can leave that with me and "
-				.. "take a minute to settle. I'll check it without someone trying to rush the answer."
-			),
+			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 4,
+					pool = "town_delivery_research_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -419,29 +425,33 @@ PLUGIN:Register("vesper", {
 		{
 			id = "VE16",
 			completionCash = 1850,
-			name = "The First Pripyat Field",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Deploy the recorder at the assigned site in Pripyat, let it finish recording, then retrieve the "
-				.. "first Pripyat field recorder. Bring it back to the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"VE14"},
 			briefing = (
-				"This survey is in Pripyat. Check the return provisions before accepting; I want you interested in "
-				.. "the result when you get home. Deploy the recorder at the assigned site in Pripyat, let it finish "
-				.. "recording, then retrieve the first Pripyat field recorder. Bring it back to me in Garbage."
+				"I need supplies for the next trip. Check the list; I would like to spend the walk looking at the "
+				.. "field rather than regretting what I packed. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "You're back with the recording. Good. We can enjoy the interesting part from here.",
-			field = {
-				description = (
-					"A flat dark electronic module with a printed number and a small circular emblem. Vesper's note: "
-					.. "\"This survey is in Pripyat.\""
-				),
-				kind = "sensor",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_module",
-				label = "First Pripyat field recorder",
+			completion = "Thanks. I will check these with the rest of the kit before leaving.",
+			requirements = {
+				{
+					pool = "town_delivery_research_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -452,14 +462,23 @@ PLUGIN:Register("vesper", {
 			kind = "delivery",
 			requires = {"VE15"},
 			briefing = (
-				"Bring the requested supplies through intact. Equipment isn't ready just because I want another "
-				.. "trip."
+				"I need supplies for the next trip. Check the list; I would like to spend the walk looking at the "
+				.. "field rather than regretting what I packed. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Thank you. I'll put this aside before planning around it.",
+			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 5,
+					pool = "town_delivery_research_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -516,29 +535,33 @@ PLUGIN:Register("vesper", {
 		{
 			id = "VE20",
 			completionCash = 2250,
-			name = "The Field They Chose",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Deploy the recorder at the assigned site in Garbage, let it finish recording, then retrieve the "
-				.. "team's last field recorder. Bring it back to the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"VE18"},
 			briefing = (
-				"We need a recording at the assigned field site. Keep the survey and the journey as careful as the "
-				.. "earlier work. Deploy the recorder at the assigned site in Garbage, let it finish recording, then "
-				.. "retrieve the team's last field recorder. Bring it back to me in Garbage."
+				"I need supplies for the next trip. Check the list; I would like to spend the walk looking at the "
+				.. "field rather than regretting what I packed. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Thank you. I'll examine the reading before borrowing a conclusion from the team's account.",
-			field = {
-				description = (
-					"A flat dark electronic module marked with a number and three pale bars. Vesper's note: \"We need "
-					.. "a recording at the assigned field site.\""
-				),
-				kind = "sensor",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_module2",
-				label = "Team's last field recorder",
+			completion = "Thanks. I will check these with the rest of the kit before leaving.",
+			requirements = {
+				{
+					pool = "town_delivery_research_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -549,14 +572,27 @@ PLUGIN:Register("vesper", {
 			kind = "delivery",
 			requires = {"VE19", "VE20"},
 			briefing = (
-				"Bring the listed maintenance supplies here. I want the preparation done before we become excited "
-				.. "about the destination."
+				"I need supplies for the next trip. Check the list; I would like to spend the walk looking at the "
+				.. "field rather than regretting what I packed. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Good. I'll inspect this before packing it.",
+			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 6,
+					pool = "town_delivery_research_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -608,32 +644,37 @@ PLUGIN:Register("vesper", {
 		{
 			id = "VE24",
 			completionCash = 2650,
-			name = "The Last Recorder",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the expedition's final cassette from the assigned search area in Garbage. Bring it back "
-				.. "to the issuing contact in Garbage."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"VE23"},
 			briefing = (
-				"Bring the final cassette home before listening. There is nothing on it worth letting the journey "
-				.. "out of your attention. Recover the expedition's final cassette from the assigned search area in "
-				.. "Garbage. Bring it back to me in Garbage."
+				"I need supplies for the next trip. Check the list; I would like to spend the walk looking at the "
+				.. "field rather than regretting what I packed. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"You brought the record back. We've worked a long way through this together, and I appreciate the "
-				.. "care you've given it. Sit down a moment. The next trip can remain an idea for now."
-			),
-			field = {
-				description = (
-					"A pale audio cassette with a broad blue printed label and twin spool windows. Vesper's note: "
-					.. "\"Bring the final cassette home before listening.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_tape2",
-				label = "Expedition's final cassette",
+			completion = "Thanks. I will check these with the rest of the kit before leaving.",
+			requirements = {
+				{
+					pool = "town_delivery_research_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {

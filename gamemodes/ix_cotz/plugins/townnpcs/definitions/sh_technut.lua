@@ -134,17 +134,13 @@ PLUGIN:Register("technut", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need a tool from this list for the bench. Bring it here and I'll see what condition it's "
-				.. "in. It doesn't have to be beautiful; it has to do the job. Although if it is beautiful, I "
-				.. "will certainly appreciate it!"
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"Oh, good! Put it here where I can find it again. That gives me one less reason to borrow "
-				.. "Gasket's things, which should make his afternoon considerably quieter."
-			),
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
 				{
-					pool = "basic_tools",
+					pool = "town_delivery_workshop_marsh_1",
 					quantity = 1,
 				},
 			},
@@ -202,30 +198,21 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN04",
 			completionCash = 650,
-			name = "A Regulator for Gasket",
-			kind = "field",
-			objective = (
-				"Recover the regulator for Gasket from the assigned search area in Marsh. Deliver it to 'Gasket' "
-				.. "in Marsh, then come back to the issuing contact in Marsh."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"TN03"},
 			briefing = (
-				"Gasket needs the recovered regulator himself. He has strong feelings about me explaining a part "
-				.. "while keeping it on my bench. Recover the regulator for Gasket from the assigned search area in "
-				.. "Marsh. Deliver it to 'Gasket' in Marsh, then come back to me in Marsh."
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "He's got it? Good. Now he can discover whether my explanation was useful at his own pace.",
-			field = {
-				description = (
-					"A finned grey control box with a red stripe and several round front connectors. Technut's note: "
-					.. "\"Gasket needs the recovered regulator himself.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_control",
-				label = "Regulator for Gasket",
-				recipient = "gasket",
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
+			requirements = {
+				{
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -236,13 +223,17 @@ PLUGIN:Register("technut", {
 			kind = "delivery",
 			requires = {"TN04"},
 			briefing = (
-				"Bring the listed workshop tools, buddy. I'm trying to get the bench ready before filling it with "
-				.. "interesting problems."
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Lovely. I'll put those away before I begin explaining what I can do with them.",
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
 				{
-					pool = "basic_tools",
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_2",
 					quantity = 1,
 				},
 			},
@@ -304,29 +295,28 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN08",
 			completionCash = 1050,
-			name = "An Engineer's Notes",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the engineer's machinery notebook from the assigned search area in Garbage. Bring it back "
-				.. "to the issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"TN06"},
 			briefing = (
-				"There are engineer's notes still out in Garbage. I want the sketches too, even the crossed-out "
-				.. "ones. Recover the engineer's machinery notebook from the assigned search area in Garbage. Bring "
-				.. "it back to me in Marsh."
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Look at that binding. They meant to keep using it. I'll read it carefully.",
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Technut's note: \"There are "
-					.. "engineer's notes still out in Garbage.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_notebook",
-				label = "Engineer's machinery notebook",
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
+			requirements = {
+				{
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -336,12 +326,19 @@ PLUGIN:Register("technut", {
 			name = "Steel and Seals",
 			kind = "delivery",
 			requires = {"TN07"},
-			briefing = "There is another workshop order to fill. Keep the little useful pieces together.",
-			completion = "Thank you, buddy. I'll find them a place that isn't the floor.",
+			briefing = (
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
 				{
-					pool = "workshop_supplies",
-					quantity = 3,
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -392,32 +389,28 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN12",
 			completionCash = 1450,
-			name = "The Precision Crate",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the precision tool case from the assigned search area in Garbage. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"TN10"},
 			briefing = (
-				"There's a precision tool case out in Garbage. Bring the case, not a selection of the interesting "
-				.. "bits. Recover the precision tool case from the assigned search area in Garbage. Bring it back to "
-				.. "me in Marsh."
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"All together! Thank you. That's much easier than looking for one tiny part in the bottom of a "
-				.. "pack."
-			),
-			field = {
-				description = (
-					"A handled tool case covered in bright stickers and contrasting printed decoration. Technut's "
-					.. "note: \"There's a precision tool case out in Garbage.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_tools",
-				label = "precision tool case",
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
+			requirements = {
+				{
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -437,14 +430,18 @@ PLUGIN:Register("technut", {
 			kind = "delivery",
 			requires = {"TN11"},
 			briefing = (
-				"Bring the requested materials here. I'd like to check their condition before I build my next idea "
-				.. "around them."
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. I can work with this without repairing it first.",
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
 				{
-					pool = "town_textiles",
-					quantity = 4,
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -495,29 +492,32 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN16",
 			completionCash = 1850,
-			name = "The Missing Technician",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the technician's workshop recording from the assigned search area in Marsh. Bring it back "
-				.. "to the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"TN14"},
 			briefing = (
-				"Recover the technician's recorder. I'd like to hear the account without somebody choosing which "
-				.. "faults matter for me. Recover the technician's workshop recording from the assigned search area "
-				.. "in Marsh. Bring it back to me in Marsh."
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Here, away from the oil. I'll listen before touching the assembly again.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Technut's note: "
-					.. "\"Recover the technician's recorder.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_tape",
-				label = "Technician's workshop recording",
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
+			requirements = {
+				{
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -528,14 +528,22 @@ PLUGIN:Register("technut", {
 			kind = "delivery",
 			requires = {"TN15"},
 			briefing = (
-				"Bring the listed workshop tools, buddy. I'm trying to get the bench ready before filling it with "
-				.. "interesting problems."
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Lovely. I'll put those away before I begin explaining what I can do with them.",
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
 				{
-					pool = "basic_tools",
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -592,30 +600,32 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN20",
 			completionCash = 2250,
-			name = "The Damaged Register",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the service archive for Carbon from the assigned search area in Marsh. Deliver it to "
-				.. "'Carbon' in Waystation, then come back to the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"TN18"},
 			briefing = (
-				"Carbon needs the service register. I can read a repair entry; he can help place it among records "
-				.. "I haven't seen. Recover the service archive for Carbon from the assigned search area in Marsh. "
-				.. "Deliver it to 'Carbon' in Waystation, then come back to me in Marsh."
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "He has the register. I'll try to contain myself until he's finished reading.",
-			field = {
-				description = (
-					"A blue records folder with contrasting corporate lettering along the cover. Technut's note: "
-					.. "\"Carbon needs the service register.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_archive",
-				label = "Service archive for Carbon",
-				recipient = "carbon",
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
+			requirements = {
+				{
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -626,14 +636,22 @@ PLUGIN:Register("technut", {
 			kind = "delivery",
 			requires = {"TN19"},
 			briefing = (
-				"I need the supplies on this request. Similar parts have a remarkable talent for fitting until the "
-				.. "final adjustment."
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "That's the right lot. Much better than another ingenious workaround.",
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
 				{
-					pool = "workshop_supplies",
-					quantity = 6,
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -684,29 +702,36 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN24",
 			completionCash = 2650,
-			name = "The Last Component",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the restoration component case from the assigned search area in Pripyat. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"TN23"},
 			briefing = (
-				"There's a component case still in Pripyat. I'd rather inspect the actual pieces than decide they "
-				.. "must fit because I want them to. Recover the restoration component case from the assigned search "
-				.. "area in Pripyat. Bring it back to me in Marsh."
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "That's it. No, don't open it over the floor. Give me a moment to clear the bench.",
-			field = {
-				description = (
-					"A low hard case with long contrasting strips across its ribbed lid. Technut's note: \"There's a "
-					.. "component case still in Pripyat.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_equipment",
-				label = "Restoration component case",
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
+			requirements = {
+				{
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				services = {
@@ -724,12 +749,27 @@ PLUGIN:Register("technut", {
 			name = "Ready to Rebuild",
 			kind = "delivery",
 			requires = {"TN24"},
-			briefing = "There is another workshop order to fill. Keep the little useful pieces together.",
-			completion = "Thank you, buddy. I'll find them a place that isn't the floor.",
+			briefing = (
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
 				{
-					pool = "fasteners",
-					quantity = 7,
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -781,33 +821,36 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN28",
 			completionCash = 3000,
-			name = "The Engineer's Signature",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the engineer commissioning record from the assigned search area in Marsh. Bring it back "
-				.. "to the issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"TN27"},
 			briefing = (
-				"Bring the complete commissioning record. A boring little annotation can save a marvellous amount "
-				.. "of mistaken work. Recover the engineer commissioning record from the assigned search area in "
-				.. "Marsh. Bring it back to me in Marsh."
+				"I need supplies for the workshop. I wrote down what I actually need, before the interesting "
+				.. "possibilities got in the way. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"You've brought back the pieces of an undertaking, not just the pieces that looked exciting. I "
-				.. "know what that costs in patience. Stay a moment, buddy. I'd like to go through this with someone "
-				.. "who helped get it here."
-			),
-			field = {
-				description = (
-					"A cardboard file folder with a small coloured crest on its cover. Technut's note: \"Bring the "
-					.. "complete commissioning record.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_official",
-				label = "Engineer commissioning record",
+			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
+			requirements = {
+				{
+					pool = "town_delivery_workshop_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_workshop_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			recognition = "Technut's trusted contact",

@@ -49,18 +49,14 @@ PLUGIN:Register("arena-master", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need the medical supplies on this list brought here. People are much keener to prepare "
-				.. "for a fight than for what happens afterwards, so I keep an eye on both. Have a look at the "
-				.. "order before you head out."
+				"Between matches I need to keep the equipment and recovery supplies in order. Bring everything on "
+				.. "the list back here; I need the full delivery."
 			),
-			completion = (
-				"Good. I'll put these with the preparations. A decent match takes more than two people with "
-				.. "something to prove."
-			),
+			completion = "Good. That gives me one less thing to chase before the next match.",
 			requirements = {
 				{
-					pool = "town_medical",
-					quantity = 2,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -126,14 +122,18 @@ PLUGIN:Register("arena-master", {
 			kind = "delivery",
 			requires = {"AR04"},
 			briefing = (
-				"There's another equipment request. I'd prefer to inspect the supplies before somebody is waiting "
-				.. "to enter."
+				"Between matches I need to keep the equipment and recovery supplies in order. Bring everything on "
+				.. "the list back here; I need the full delivery."
 			),
-			completion = "That's the requested lot. I'll sort it before the next discussion becomes urgent.",
+			completion = "Good. That gives me one less thing to chase before the next match.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -219,12 +219,19 @@ PLUGIN:Register("arena-master", {
 			name = "Patch the Kit",
 			kind = "delivery",
 			requires = {"AR07"},
-			briefing = "Bring the listed maintenance supplies here. The quiet work keeps taking place between bouts.",
-			completion = "Good. That can join the equipment without an improvised explanation.",
+			briefing = (
+				"Between matches I need to keep the equipment and recovery supplies in order. Bring everything on "
+				.. "the list back here; I need the full delivery."
+			),
+			completion = "Good. That gives me one less thing to chase before the next match.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -232,30 +239,28 @@ PLUGIN:Register("arena-master", {
 		{
 			id = "AR10",
 			completionCash = 1250,
-			name = "The Supplier's Seal",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the arena supplier's manifest from the assigned search area in Marsh. Deliver it to "
-				.. "'Brass' in Garbage, then come back to the issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"AR08"},
 			briefing = (
-				"Brass should see the shipment record. He counts before arguing, which ought to improve this "
-				.. "discussion considerably. Recover the arena supplier's manifest from the assigned search area in "
-				.. "Marsh. Deliver it to 'Brass' in Garbage, then come back to me in Marsh."
+				"Between matches I need to keep the equipment and recovery supplies in order. Bring everything on "
+				.. "the list back here; I need the full delivery."
 			),
-			completion = "He has it. Perhaps the next argument can concern a total somebody actually checked.",
-			field = {
-				description = (
-					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Arena "
-					.. "Master's note: \"Brass should see the shipment record.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_manifest",
-				label = "Arena supplier's manifest",
-				recipient = "brass",
+			completion = "Good. That gives me one less thing to chase before the next match.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -300,14 +305,22 @@ PLUGIN:Register("arena-master", {
 			kind = "delivery",
 			requires = {"AR11"},
 			briefing = (
-				"Bring the requested medical supplies here. Jitters is quite correct that an arena needs those "
-				.. "before it needs another argument."
+				"Between matches I need to keep the equipment and recovery supplies in order. Bring everything on "
+				.. "the list back here; I need the full delivery."
 			),
-			completion = "Thank you. I'll keep those with the medical supplies.",
+			completion = "Good. That gives me one less thing to chase before the next match.",
 			requirements = {
 				{
-					pool = "town_medical",
-					quantity = 4,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -376,14 +389,22 @@ PLUGIN:Register("arena-master", {
 			kind = "delivery",
 			requires = {"AR15"},
 			briefing = (
-				"There's another equipment request. I'd prefer to inspect the supplies before somebody is waiting "
-				.. "to enter."
+				"Between matches I need to keep the equipment and recovery supplies in order. Bring everything on "
+				.. "the list back here; I need the full delivery."
 			),
-			completion = "That's the requested lot. I'll sort it before the next discussion becomes urgent.",
+			completion = "Good. That gives me one less thing to chase before the next match.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 5,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -452,12 +473,27 @@ PLUGIN:Register("arena-master", {
 			name = "The Next Season",
 			kind = "delivery",
 			requires = {"AR20"},
-			briefing = "Bring the listed maintenance supplies here. The quiet work keeps taking place between bouts.",
-			completion = "Good. That can join the equipment without an improvised explanation.",
+			briefing = (
+				"Between matches I need to keep the equipment and recovery supplies in order. Bring everything on "
+				.. "the list back here; I need the full delivery."
+			),
+			completion = "Good. That gives me one less thing to chase before the next match.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 6,
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -465,32 +501,36 @@ PLUGIN:Register("arena-master", {
 		{
 			id = "AR22",
 			completionCash = 2450,
-			name = "The Name on the Board",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the historic contender's archive from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"AR21"},
 			briefing = (
-				"Bring back the old contender's surviving record. I'd like something firmer than the version that "
-				.. "improves every time it's told. Recover the historic contender's archive from the assigned search "
-				.. "area in Marsh. Bring it back to me in Marsh."
+				"Between matches I need to keep the equipment and recovery supplies in order. Bring everything on "
+				.. "the list back here; I need the full delivery."
 			),
-			completion = (
-				"You've made a name here, and helped me look after one that was being forgotten. I appreciate it. "
-				.. "Sit down if you like; you don't have to earn the chair with another match."
-			),
-			field = {
-				description = (
-					"A blue records folder with contrasting corporate lettering along the cover. Arena Master's note: "
-					.. "\"Bring back the old contender's surviving record.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_archive",
-				label = "Historic contender's archive",
+			completion = "Good. That gives me one less thing to chase before the next match.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			recognition = "Arena Master's trusted contact",

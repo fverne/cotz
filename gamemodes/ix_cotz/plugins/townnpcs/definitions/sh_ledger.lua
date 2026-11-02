@@ -55,17 +55,13 @@ PLUGIN:Register("ledger", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need the records on this list delivered here. Labels, accounts, and the paperwork around "
-				.. "a shipment are only useful if they survive long enough to be read. Bring the requested "
-				.. "materials and I'll put them to work."
+				"I need supplies for the dispatch work. Have a look at the request before you load up; it saves "
+				.. "both ends a second journey. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = (
-				"Thank you. I'll enter the delivery while it's here. That gives us an account at both ends, "
-				.. "and one less thing to reconstruct from memory."
-			),
+			completion = "Thank you. I will check these into the account before the next request arrives.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_records_waystation_1",
 					quantity = 1,
 				},
 			},
@@ -127,29 +123,21 @@ PLUGIN:Register("ledger", {
 		{
 			id = "LE04",
 			completionCash = 650,
-			name = "The Missing Receipt",
-			kind = "field",
-			objective = (
-				"Recover the Waystation freight receipt from the assigned search area in Waystation. Bring it back "
-				.. "to the issuing contact in Waystation."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"LE02"},
 			briefing = (
-				"I need the receipt from the freight cache. The sender remembers dispatching it very clearly; the "
-				.. "other end would like something in writing. Recover the Waystation freight receipt from the "
-				.. "assigned search area in Waystation. Bring it back to me in Waystation."
+				"I need supplies for the dispatch work. Have a look at the request before you load up; it saves "
+				.. "both ends a second journey. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Leave it here. I'll match the entry before notifying anyone.",
-			field = {
-				description = (
-					"A clipboard carrying a densely printed packing list and a stamped mark. Ledger's note: \"I need "
-					.. "the receipt from the freight cache.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_receipt",
-				label = "Waystation freight receipt",
+			completion = "Thank you. I will check these into the account before the next request arrives.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -159,12 +147,19 @@ PLUGIN:Register("ledger", {
 			name = "Stock for the Road",
 			kind = "delivery",
 			requires = {"LE03"},
-			briefing = "The listed provisions are needed here. Leave enough of your own for the return journey.",
-			completion = "Delivery received. I'll keep this lot with the freight supplies.",
+			briefing = (
+				"I need supplies for the dispatch work. Have a look at the request before you load up; it saves "
+				.. "both ends a second journey. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Thank you. I will check these into the account before the next request arrives.",
 			requirements = {
 				{
-					pool = "canned_food",
-					quantity = 3,
+					pool = "town_delivery_records_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -226,31 +221,28 @@ PLUGIN:Register("ledger", {
 		{
 			id = "LE08",
 			completionCash = 1050,
-			name = "The Interrupted Connection",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the interrupted-route case for Cleaner from the assigned search area in Garbage. Deliver "
-				.. "it to 'Cleaner' in Garbage, then come back to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"LE06"},
 			briefing = (
-				"Cleaner needs the case from the interrupted connection. Keep it sealed; he asked for the "
-				.. "delivery, not a courier's inventory. Recover the interrupted-route case for Cleaner from the "
-				.. "assigned search area in Garbage. Deliver it to 'Cleaner' in Garbage, then come back to me in "
-				.. "Waystation."
+				"I need supplies for the dispatch work. Have a look at the request before you load up; it saves "
+				.. "both ends a second journey. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "He has it. That settles your part of the movement.",
-			field = {
-				description = (
-					"A low hard case with long contrasting strips across its ribbed lid. Ledger's note: \"Cleaner "
-					.. "needs the case from the interrupted connection.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_equipment",
-				label = "Interrupted-route case for Cleaner",
-				recipient = "cleaner",
+			completion = "Thank you. I will check these into the account before the next request arrives.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -261,13 +253,17 @@ PLUGIN:Register("ledger", {
 			kind = "delivery",
 			requires = {"LE07"},
 			briefing = (
-				"There is another document order. Please resist sorting it into a more convincing account on the "
-				.. "road."
+				"I need supplies for the dispatch work. Have a look at the request before you load up; it saves "
+				.. "both ends a second journey. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. I can check the original bundle now.",
+			completion = "Thank you. I will check these into the account before the next request arrives.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_records_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
 					quantity = 1,
 				},
 			},
@@ -316,29 +312,32 @@ PLUGIN:Register("ledger", {
 		{
 			id = "LE12",
 			completionCash = 1450,
-			name = "The Missing Dispatcher",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the missing dispatcher's recording from the assigned search area in Waystation. Bring it "
-				.. "back to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"LE10"},
 			briefing = (
-				"The dispatcher's recorder needs recovering. I'm interested in the whole account, not just the "
-				.. "last destination mentioned. Recover the missing dispatcher's recording from the assigned search "
-				.. "area in Waystation. Bring it back to me in Waystation."
+				"I need supplies for the dispatch work. Have a look at the request before you load up; it saves "
+				.. "both ends a second journey. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Thank you. I'll listen before updating the route record.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Ledger's note: \"The "
-					.. "dispatcher's recorder needs recovering.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_tape",
-				label = "Missing dispatcher's recording",
+			completion = "Thank you. I will check these into the account before the next request arrives.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -357,12 +356,23 @@ PLUGIN:Register("ledger", {
 			name = "For the Remote Cache",
 			kind = "delivery",
 			requires = {"LE11"},
-			briefing = "The listed provisions are needed here. Leave enough of your own for the return journey.",
-			completion = "Delivery received. I'll keep this lot with the freight supplies.",
+			briefing = (
+				"I need supplies for the dispatch work. Have a look at the request before you load up; it saves "
+				.. "both ends a second journey. Bring everything on the list back here; I need the full delivery."
+			),
+			completion = "Thank you. I will check these into the account before the next request arrives.",
 			requirements = {
 				{
-					pool = "canned_food",
-					quantity = 4,
+					pool = "town_delivery_records_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -410,29 +420,32 @@ PLUGIN:Register("ledger", {
 		{
 			id = "LE16",
 			completionCash = 1850,
-			name = "The Unmanned Pripyat Cache",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Collect the Pripyat cache consignment at the assigned pickup in Pripyat and deliver it to the "
-				.. "assigned cache. Come back to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"LE14"},
 			briefing = (
-				"This consignment uses a Pripyat cache. Make your preparations before accepting; the destination "
-				.. "will not become nearer because somebody is waiting. Collect the Pripyat cache consignment at the "
-				.. "assigned pickup in Pripyat and deliver it to the assigned cache. Come back to me in Waystation."
+				"I need supplies for the dispatch work. Have a look at the request before you load up; it saves "
+				.. "both ends a second journey. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Delivery recorded. Thank you for coming back to finish the account.",
-			field = {
-				description = (
-					"A dark reinforced case covered in pale symbols and contrasting trim. Ledger's note: \"This "
-					.. "consignment uses a Pripyat cache.\""
-				),
-				kind = "deadDrop",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_research",
-				label = "Pripyat cache consignment",
+			completion = "Thank you. I will check these into the account before the next request arrives.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -443,14 +456,22 @@ PLUGIN:Register("ledger", {
 			kind = "delivery",
 			requires = {"LE15"},
 			briefing = (
-				"There is another document order. Please resist sorting it into a more convincing account on the "
-				.. "road."
+				"I need supplies for the dispatch work. Have a look at the request before you load up; it saves "
+				.. "both ends a second journey. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Good. I can check the original bundle now.",
+			completion = "Thank you. I will check these into the account before the next request arrives.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_records_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -507,29 +528,36 @@ PLUGIN:Register("ledger", {
 		{
 			id = "LE20",
 			completionCash = 2250,
-			name = "The Return Consignment",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Collect the return circuit parcel at the assigned pickup in Pripyat and deliver it to the "
-				.. "assigned cache. Come back to the issuing contact in Waystation."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"LE19"},
 			briefing = (
-				"There is a return circuit to complete through the assigned drops. Please read the direction of "
-				.. "travel rather than assuming it from the title. Collect the return circuit parcel at the assigned "
-				.. "pickup in Pripyat and deliver it to the assigned cache. Come back to me in Waystation."
+				"I need supplies for the dispatch work. Have a look at the request before you load up; it saves "
+				.. "both ends a second journey. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "Return delivery complete. Both the movement and your return are accounted for.",
-			field = {
-				description = (
-					"A small yellow hard case with ribbed corners and a large label on its lid. Ledger's note: \"There "
-					.. "is a return circuit to complete through the assigned drops.\""
-				),
-				kind = "deadDrop",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_case",
-				label = "Return circuit parcel",
+			completion = "Thank you. I will check these into the account before the next request arrives.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			stock = {
@@ -544,14 +572,26 @@ PLUGIN:Register("ledger", {
 			kind = "delivery",
 			requires = {"LE20"},
 			briefing = (
-				"Bring the supplies on this request. If something is missing, leave it missing rather than "
-				.. "guessing a substitute."
+				"I need supplies for the dispatch work. Have a look at the request before you load up; it saves "
+				.. "both ends a second journey. Bring everything on the list back here; I need the full delivery."
 			),
-			completion = "All listed supplies received. Thank you for keeping the account straightforward.",
+			completion = "Thank you. I will check these into the account before the next request arrives.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 6,
+					pool = "town_delivery_records_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},

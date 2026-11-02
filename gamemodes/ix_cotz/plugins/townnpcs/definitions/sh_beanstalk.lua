@@ -78,19 +78,15 @@ PLUGIN:Register("beanstalk", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need the maintenance supplies listed here for the station. Bring them to me, please. A "
-				.. "sample isn't much use if the equipment handling it hasn't been looked after. And do keep "
-				.. "the supplies separate from anything leaking in your pack."
+				"I need supplies for handling and checking samples. I would rather spend time preparing them than "
+				.. "explain a result I cannot trust. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = (
-				"Thank you. Put them on that clear surface. I'll check them before they go near the "
-				.. "equipment. No, that isn't an accusation; I check everything before it goes near the "
-				.. "equipment."
-			),
+			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 2,
+					pool = "town_delivery_research_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -149,29 +145,22 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "BN04",
 			completionCash = 650,
-			name = "The Buried Meter",
-			kind = "field",
-			objective = (
-				"Recover the field meter from the assigned search area in Garbage. Bring it back to the issuing "
-				.. "contact in Garbage."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"BN03"},
 			briefing = (
-				"There's an instrument left at the dump site. I want it inspected before its absence becomes the "
-				.. "explanation for every discrepancy. Recover the field meter from the assigned search area in "
-				.. "Garbage. Bring it back to me in Garbage."
+				"I need supplies for handling and checking samples. I would rather spend time preparing them than "
+				.. "explain a result I cannot trust. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Set it down carefully. I'll check the instrument against the account.",
-			field = {
-				description = (
-					"A finned grey control box with a red stripe and several round front connectors. Beanstalk's "
-					.. "note: \"There's an instrument left at the dump site.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_control",
-				label = "field meter",
+			completion = "Thank you. I will check what we can use for the next set of samples.",
+			requirements = {
+				{
+					pool = "town_delivery_research_marsh_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -181,12 +170,16 @@ PLUGIN:Register("beanstalk", {
 			name = "Keeping It Sealed",
 			kind = "delivery",
 			requires = {"BN03"},
-			briefing = "Bring the requested field supplies here. Keep them clear of anything contaminated in your pack.",
-			completion = "Thank you. I'll inspect the supplies before use.",
+			briefing = (
+				"I need supplies for handling and checking samples. I would rather spend time preparing them than "
+				.. "explain a result I cannot trust. Bring everything on the list back here; I need the full "
+				.. "delivery."
+			),
+			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_research_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -247,31 +240,29 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "BN08",
 			completionCash = 1050,
-			name = "Vesper's Reading",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the disputed field recorder for Vesper from the assigned search area in Garbage. Deliver "
-				.. "it to 'Vesper' in Garbage, then come back to the issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BN06"},
 			briefing = (
-				"Vesper needs the disputed field record. She should be able to inspect the result without my "
-				.. "objections choosing the order for her. Recover the disputed field recorder for Vesper from the "
-				.. "assigned search area in Garbage. Deliver it to 'Vesper' in Garbage, then come back to me in "
-				.. "Garbage."
+				"I need supplies for handling and checking samples. I would rather spend time preparing them than "
+				.. "explain a result I cannot trust. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "She has it. Good. I'll let her read it before asking which parts she disagrees with.",
-			field = {
-				description = (
-					"A flat dark electronic module with a printed number and a small circular emblem. Beanstalk's "
-					.. "note: \"Vesper needs the disputed field record.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_module",
-				label = "Disputed field recorder for Vesper",
-				recipient = "vesper",
+			completion = "Thank you. I will check what we can use for the next set of samples.",
+			requirements = {
+				{
+					pool = "town_delivery_research_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -281,12 +272,20 @@ PLUGIN:Register("beanstalk", {
 			name = "Clean Instruments",
 			kind = "delivery",
 			requires = {"BN07"},
-			briefing = "I need the listed material for the preparation. Clean packaging matters as well as the label.",
-			completion = "Good. Keep the packaging with the contents for now.",
+			briefing = (
+				"I need supplies for handling and checking samples. I would rather spend time preparing them than "
+				.. "explain a result I cannot trust. Bring everything on the list back here; I need the full "
+				.. "delivery."
+			),
+			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_research_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -336,29 +335,29 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "BN12",
 			completionCash = 1450,
-			name = "The Dirty Filter",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the field station exposure log from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BN10"},
 			briefing = (
-				"Recover the field station's exposure account. I want to know what was recorded rather than what "
-				.. "someone now thinks ought to have happened. Recover the field station exposure log from the "
-				.. "assigned search area in Garbage. Bring it back to me in Garbage."
+				"I need supplies for handling and checking samples. I would rather spend time preparing them than "
+				.. "explain a result I cannot trust. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Here. I'll keep the entries in order while I compare them.",
-			field = {
-				description = (
-					"A blue-green folder with medical record sheets protruding from its cover. Beanstalk's note: "
-					.. "\"Recover the field station's exposure account.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_clinic",
-				label = "Field station exposure log",
+			completion = "Thank you. I will check what we can use for the next set of samples.",
+			requirements = {
+				{
+					pool = "town_delivery_research_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -378,18 +377,19 @@ PLUGIN:Register("beanstalk", {
 			kind = "delivery",
 			requires = {"BN11"},
 			briefing = (
-				"These are the supplies I need for the work. Keep them separate from anything "
-				.. "contaminated. This is preparation, not a substitute for checking the equipment before "
-				.. "it goes out. I'd like both habits established."
+				"I need supplies for handling and checking samples. I would rather spend time preparing them than "
+				.. "explain a result I cannot trust. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = (
-				"Put it on the clear tray. Good. One less thing to worry about before the field work. I "
-				.. "will undoubtedly find another, but this helps."
-			),
+			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 4,
+					pool = "town_delivery_research_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -436,31 +436,33 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "BN16",
 			completionCash = 1850,
-			name = "The Contradictory Result",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the second control record for Vesper from the assigned search area in Waystation. Deliver "
-				.. "it to 'Vesper' in Garbage, then come back to the issuing contact in Garbage."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BN14"},
 			briefing = (
-				"Vesper should examine the second control recorder. A contradiction is worth checking before "
-				.. "either of us gives it an explanation. Recover the second control record for Vesper from the "
-				.. "assigned search area in Waystation. Deliver it to 'Vesper' in Garbage, then come back to me in "
-				.. "Garbage."
+				"I need supplies for handling and checking samples. I would rather spend time preparing them than "
+				.. "explain a result I cannot trust. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Delivered. I'll wait for her reading instead of rehearsing my response to it.",
-			field = {
-				description = (
-					"A flat dark electronic module marked with a number and three pale bars. Beanstalk's note: "
-					.. "\"Vesper should examine the second control recorder.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_module2",
-				label = "Second control record for Vesper",
-				recipient = "vesper",
+			completion = "Thank you. I will check what we can use for the next set of samples.",
+			requirements = {
+				{
+					pool = "town_delivery_research_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -471,17 +473,23 @@ PLUGIN:Register("beanstalk", {
 			kind = "delivery",
 			requires = {"BN15"},
 			briefing = (
-				"There is another supply request. Please check it before replacing something with a "
-				.. "similar-looking object."
+				"I need supplies for handling and checking samples. I would rather spend time preparing them than "
+				.. "explain a result I cannot trust. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = (
-				"That's the requested material. I can finish the preparation without adapting the method around "
-				.. "it."
-			),
+			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 5,
+					pool = "town_delivery_research_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -543,29 +551,37 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "BN20",
 			completionCash = 2250,
-			name = "The Abandoned Station",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the earlier station's research tape from the assigned search area in Pripyat. Bring it "
-				.. "back to the issuing contact in Garbage."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BN19"},
 			briefing = (
-				"The earlier team's recorder is still in Pripyat. Their account may qualify what we think we're "
-				.. "measuring. Recover the earlier station's research tape from the assigned search area in Pripyat. "
-				.. "Bring it back to me in Garbage."
+				"I need supplies for handling and checking samples. I would rather spend time preparing them than "
+				.. "explain a result I cannot trust. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Leave it beside the notes. I'll listen without assuming their question was the same as ours.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Beanstalk's note: "
-					.. "\"The earlier team's recorder is still in Pripyat.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_tape",
-				label = "Earlier station's research tape",
+			completion = "Thank you. I will check what we can use for the next set of samples.",
+			requirements = {
+				{
+					pool = "town_delivery_research_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -576,14 +592,27 @@ PLUGIN:Register("beanstalk", {
 			kind = "delivery",
 			requires = {"BN20"},
 			briefing = (
-				"Bring the listed records here intact. I need the account as written, including the "
-				.. "qualifications."
+				"I need supplies for handling and checking samples. I would rather spend time preparing them than "
+				.. "explain a result I cannot trust. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Thank you. I'll read the whole record before selecting a passage.",
+			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_research_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_marsh_3",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -634,34 +663,37 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "BN24",
 			completionCash = 2650,
-			name = "A Result They Both Accept",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the control comparison log for Carbon from the assigned search area in Garbage. Deliver "
-				.. "it to 'Carbon' in Waystation, then come back to the issuing contact in Garbage."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"BN23"},
 			briefing = (
-				"Carbon needs the missing control evidence. I want the record somewhere another reader can examine "
-				.. "it without relying on either researcher's account. Recover the control comparison log for Carbon "
-				.. "from the assigned search area in Garbage. Deliver it to 'Carbon' in Waystation, then come back to "
-				.. "me in Garbage."
+				"I need supplies for handling and checking samples. I would rather spend time preparing them than "
+				.. "explain a result I cannot trust. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = (
-				"He has the file. You've helped make this work open to checking, including the parts that remain "
-				.. "awkward. Thank you. We can talk about those without sending you out again today."
-			),
-			field = {
-				description = (
-					"A blue laboratory folder with loose printed record sheets extending from its edges. Beanstalk's "
-					.. "note: \"Carbon needs the missing control evidence.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_lab",
-				label = "Control comparison log for Carbon",
-				recipient = "carbon",
+			completion = "Thank you. I will check what we can use for the next set of samples.",
+			requirements = {
+				{
+					pool = "town_delivery_research_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_research_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_research_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_research_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {

@@ -75,17 +75,14 @@ PLUGIN:Register("carbon", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need the administrative records on this list brought here. A useful account deserves "
-				.. "somewhere to go when it arrives. Otherwise I end up with a stack of pages and an "
-				.. "increasingly imaginative system for remembering which is which."
+				"I would like some ordinary source material for the collection. Even a working record can tell us "
+				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"Thank you. I'll sort these before the next stack lands on top of them. A filing system is "
-				.. "only impressive when someone besides its inventor can find anything."
-			),
+			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_records_waystation_1",
 					quantity = 1,
 				},
 			},
@@ -146,29 +143,22 @@ PLUGIN:Register("carbon", {
 		{
 			id = "CA04",
 			completionCash = 650,
-			name = "A Date That Does Not Fit",
-			kind = "field",
-			objective = (
-				"Recover the disputed-date record from the assigned search area in Garbage. Bring it back to the "
-				.. "issuing contact in Waystation."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"CA02"},
 			briefing = (
-				"There's a second dated record to recover. I want to see the date in context before calling either "
-				.. "account wrong. Recover the disputed-date record from the assigned search area in Garbage. Bring "
-				.. "it back to me in Waystation."
+				"I would like some ordinary source material for the collection. Even a working record can tell us "
+				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Let me check the surrounding entries. One number is a tempting amount of evidence.",
-			field = {
-				description = (
-					"A blue records folder with contrasting corporate lettering along the cover. Carbon's note: "
-					.. "\"There's a second dated record to recover.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_archive",
-				label = "Disputed-date record",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -178,11 +168,19 @@ PLUGIN:Register("carbon", {
 			name = "An Ordered Shelf",
 			kind = "delivery",
 			requires = {"CA03"},
-			briefing = "Bring the requested documents here together. Please keep the little slips with the larger sheets.",
-			completion = "Thank you. I'll record what arrived before sorting it.",
+			briefing = (
+				"I would like some ordinary source material for the collection. Even a working record can tell us "
+				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
+				.. "full delivery."
+			),
+			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_records_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
 					quantity = 1,
 				},
 			},
@@ -248,29 +246,29 @@ PLUGIN:Register("carbon", {
 		{
 			id = "CA08",
 			completionCash = 1050,
-			name = "The Missing Annex",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the missing facility annex from the assigned search area in Waystation. Bring it back to "
-				.. "the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"CA06"},
 			briefing = (
-				"The annex belongs with the facility account. I'd like the pages that were inconvenient to "
-				.. "summarise as well as the summary. Recover the missing facility annex from the assigned search "
-				.. "area in Waystation. Bring it back to me in Waystation."
+				"I would like some ordinary source material for the collection. Even a working record can tell us "
+				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Here, beside the main file. I'll check which references it actually answers.",
-			field = {
-				description = (
-					"A cardboard file folder with a small coloured crest on its cover. Carbon's note: \"The annex "
-					.. "belongs with the facility account.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_official",
-				label = "Missing facility annex",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -280,11 +278,19 @@ PLUGIN:Register("carbon", {
 			name = "Names and Numbers",
 			kind = "delivery",
 			requires = {"CA07"},
-			briefing = "I'd like another set of the listed records. Their original order may be worth preserving.",
-			completion = "Leave them flat. I'll read before rearranging anything.",
+			briefing = (
+				"I would like some ordinary source material for the collection. Even a working record can tell us "
+				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
+				.. "full delivery."
+			),
+			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_records_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
 					quantity = 1,
 				},
 			},
@@ -333,32 +339,29 @@ PLUGIN:Register("carbon", {
 		{
 			id = "CA12",
 			completionCash = 1450,
-			name = "The Restricted Copy",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the restricted operations dossier from the assigned search area in Waystation. Bring it "
-				.. "back to the issuing contact in Waystation."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"CA10"},
 			briefing = (
-				"There's field evidence missing from the official account. An omission is a question; I don't want "
-				.. "to fill it with my preferred answer. Recover the restricted operations dossier from the assigned "
-				.. "search area in Waystation. Bring it back to me in Waystation."
+				"I would like some ordinary source material for the collection. Even a working record can tell us "
+				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"Leave it intact. I'll read the complete dossier before pulling out anything that looks "
-				.. "significant."
-			),
-			field = {
-				description = (
-					"A brown document folder with loose sheets and slips protruding from its edges. Carbon's note: "
-					.. "\"There's field evidence missing from the official account.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_intel",
-				label = "Restricted operations dossier",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -378,14 +381,23 @@ PLUGIN:Register("carbon", {
 			kind = "delivery",
 			requires = {"CA11"},
 			briefing = (
-				"There are more documents to collect. A dull heading is not a reason to leave a requested page "
-				.. "behind."
+				"I would like some ordinary source material for the collection. Even a working record can tell us "
+				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "Good. An ordinary entry may answer an unexpected question.",
+			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_records_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -433,30 +445,33 @@ PLUGIN:Register("carbon", {
 		{
 			id = "CA16",
 			completionCash = 1850,
-			name = "The Administrative Trail",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the operations log for Ledger from the assigned search area in Pripyat. Deliver it to "
-				.. "'Ledger' in Waystation, then come back to the issuing contact in Waystation."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"CA14"},
 			briefing = (
-				"Ledger should examine the operations log. He understands what a dispatch entry commits someone "
-				.. "else to doing. Recover the operations log for Ledger from the assigned search area in Pripyat. "
-				.. "Deliver it to 'Ledger' in Waystation, then come back to me in Waystation."
+				"I would like some ordinary source material for the collection. Even a working record can tell us "
+				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "He has the log. I'll make room for whatever qualifications he brings back with his reading.",
-			field = {
-				description = (
-					"A cardboard file folder with a small coloured crest on its cover. Carbon's note: \"Ledger should "
-					.. "examine the operations log.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_official",
-				label = "Operations log for Ledger",
-				recipient = "ledger",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -466,12 +481,24 @@ PLUGIN:Register("carbon", {
 			name = "The Missing Context",
 			kind = "delivery",
 			requires = {"CA15", "CA16"},
-			briefing = "Bring the listed records intact. I'll decide where they belong after I've examined the originals.",
-			completion = "Thank you. I'll keep this bundle separate until I've checked it.",
+			briefing = (
+				"I would like some ordinary source material for the collection. Even a working record can tell us "
+				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
+				.. "full delivery."
+			),
+			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_records_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -528,29 +555,37 @@ PLUGIN:Register("carbon", {
 		{
 			id = "CA20",
 			completionCash = 2250,
-			name = "The Surviving Archive",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the surviving archive dossier from the assigned search area in Pripyat. Bring it back to "
-				.. "the issuing contact in Waystation."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"CA19"},
 			briefing = (
-				"There's a surviving archive file in Pripyat. Keep the little slips with the larger pages; their "
-				.. "order may be worth preserving. Recover the surviving archive dossier from the assigned search "
-				.. "area in Pripyat. Bring it back to me in Waystation."
+				"I would like some ordinary source material for the collection. Even a working record can tell us "
+				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = "A complete bundle. Thank you for resisting the urge to sort it on the journey.",
-			field = {
-				description = (
-					"A blue records folder with contrasting corporate lettering along the cover. Carbon's note: "
-					.. "\"There's a surviving archive file in Pripyat.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_archive",
-				label = "Surviving archive dossier",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			stock = {
@@ -564,12 +599,28 @@ PLUGIN:Register("carbon", {
 			name = "Preserve the Originals",
 			kind = "delivery",
 			requires = {"CA20"},
-			briefing = "Bring the requested documents here together. Please keep the little slips with the larger sheets.",
-			completion = "Thank you. I'll record what arrived before sorting it.",
+			briefing = (
+				"I would like some ordinary source material for the collection. Even a working record can tell us "
+				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
+				.. "full delivery."
+			),
+			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_records_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -577,32 +628,37 @@ PLUGIN:Register("carbon", {
 		{
 			id = "CA22",
 			completionCash = 2450,
-			name = "The Last Witness on Paper",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the last dated field diary from the assigned search area in Waystation. Bring it back to "
-				.. "the issuing contact in Waystation."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"CA21"},
 			briefing = (
-				"I'd like the final diary kept intact. The dates around an entry can change how you read the entry "
-				.. "itself. Recover the last dated field diary from the assigned search area in Waystation. Bring it "
-				.. "back to me in Waystation."
+				"I would like some ordinary source material for the collection. Even a working record can tell us "
+				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
+				.. "full delivery."
 			),
-			completion = (
-				"You've helped preserve more than a conclusion. I can show how we reached it, and where the record "
-				.. "still falls quiet. Stay, if you're interested; I'd enjoy reading some of it with you."
-			),
-			field = {
-				description = (
-					"A thick blue diary with a label fixed to the front cover. Carbon's note: \"I'd like the final "
-					.. "diary kept intact.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_diary",
-				label = "Last dated field diary",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			recognition = "Carbon's trusted contact",

@@ -94,14 +94,14 @@ PLUGIN:Register("mute", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"** He lays the component list beside an empty tray, then moves the tray clear of the loose wires. "
-				.. "**"
+				"** He lays a supply list beside the equipment and underlines every entry before sliding it "
+				.. "towards you. **"
 			),
-			completion = "** He checks the delivered components against the list and places them in separate spaces. **",
+			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 2,
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -164,32 +164,21 @@ PLUGIN:Register("mute", {
 		{
 			id = "MU04",
 			completionCash = 650,
-			name = "The Missing Address",
-			kind = "field",
-			objective = (
-				"Recover the missing network address file from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"MU02"},
 			briefing = (
-				"** He turns a page of addresses towards you. One line is blank. He lays the field order across it "
-				.. "and waits. ** ** The written order reads: Recover the missing network address file from the "
-				.. "assigned search area in Marsh. Bring it back to the bench in Marsh. **"
+				"** He lays a supply list beside the equipment and underlines every entry before sliding it "
+				.. "towards you. **"
 			),
-			completion = (
-				"** He opens the file beside the address sheet, keeping a finger on the blank line while he reads. "
-				.. "**"
-			),
-			field = {
-				description = (
-					"A dark USB drive with a pale handwritten tape label around its body. Mute has marked the "
-					.. "accompanying order \"Missing network address file\"."
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_drive",
-				label = "Missing network address file",
+			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -200,14 +189,18 @@ PLUGIN:Register("mute", {
 			kind = "delivery",
 			requires = {"MU03"},
 			briefing = (
-				"** He holds an example beside the written request, turns it to show the contacts, and points back "
-				.. "to the list. **"
+				"** He lays a supply list beside the equipment and underlines every entry before sliding it "
+				.. "towards you. **"
 			),
-			completion = "** He compares the markings, gives a small nod, and draws the tray closer. **",
+			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 3,
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -271,31 +264,28 @@ PLUGIN:Register("mute", {
 		{
 			id = "MU08",
 			completionCash = 1050,
-			name = "Spool's Packet",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the network packet for Spool from the assigned search area in Garbage. Deliver it to "
-				.. "'Spool' in Garbage, then come back to the issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"MU06"},
 			briefing = (
-				"** He writes Spool's name on the dispatch slip, then draws an arrow back towards his own bench. "
-				.. "He leaves both instructions visible. ** ** The written order reads: Recover the network packet "
-				.. "for Spool from the assigned search area in Garbage. Deliver it to 'Spool' in Garbage, then come "
-				.. "back to the bench in Marsh. **"
+				"** He lays a supply list beside the equipment and underlines every entry before sliding it "
+				.. "towards you. **"
 			),
-			completion = "** He checks the receipt, sets it beside the unfinished sketch, and nods once. **",
-			field = {
-				description = (
-					"A USB drive with a large rear loop and a handwritten paper label around its body. Mute has "
-					.. "marked the accompanying order \"Network packet for Spool\"."
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 1,
-				cargo = "town_quest_security",
-				label = "Network packet for Spool",
-				recipient = "spool",
+			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -306,14 +296,18 @@ PLUGIN:Register("mute", {
 			kind = "delivery",
 			requires = {"MU07"},
 			briefing = (
-				"** He puts the requested parts list on top of the other papers, keeping one finger on its "
-				.. "heading. **"
+				"** He lays a supply list beside the equipment and underlines every entry before sliding it "
+				.. "towards you. **"
 			),
-			completion = "** He checks the list, then closes the parts drawer gently. **",
+			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
 				{
-					pool = "radio_components",
-					quantity = 3,
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -364,30 +358,28 @@ PLUGIN:Register("mute", {
 		{
 			id = "MU12",
 			completionCash = 1450,
-			name = "The Unlisted Receiver",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Take the required bearings in Marsh, locate the source, and collect the unlisted receiver "
-				.. "controller. Bring it back to the issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"MU10"},
 			briefing = (
-				"** He compares a component list with the field order. The pen hovers over an empty line before he "
-				.. "pushes the order towards you. ** ** The written order reads: Take the required bearings in Marsh, "
-				.. "locate the source, and collect the unlisted receiver controller. Bring it back to the bench in "
-				.. "Marsh. **"
+				"** He lays a supply list beside the equipment and underlines every entry before sliding it "
+				.. "towards you. **"
 			),
-			completion = "** He turns the controller slowly, checking its markings before returning to the list. **",
-			field = {
-				description = (
-					"A finned grey control box with a red stripe and several round front connectors. Mute has marked "
-					.. "the accompanying order \"Unlisted receiver controller\"."
-				),
-				kind = "triangulation",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_control",
-				label = "Unlisted receiver controller",
+			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -407,19 +399,22 @@ PLUGIN:Register("mute", {
 			kind = "delivery",
 			requires = {"MU11"},
 			briefing = (
-				"** He marks the required supplies on the list and pushes it back towards you. ** ** He "
-				.. "checks the order again, taps the relevant line, and gives you time to read it without "
-				.. "reaching for the paper. **"
+				"** He lays a supply list beside the equipment and underlines every entry before sliding it "
+				.. "towards you. **"
 			),
-			completion = (
-				"** He checks the components and sets them aside. ** ** He studies what you brought, "
-				.. "then sets it apart from the unfinished work. A brief nod acknowledges you before he "
-				.. "resumes checking. **"
-			),
+			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 4,
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -469,32 +464,32 @@ PLUGIN:Register("mute", {
 		{
 			id = "MU16",
 			completionCash = 1850,
-			name = "A Message With No Sender",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the senderless message cassette from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"MU14"},
 			briefing = (
-				"** He holds a cassette between two fingers, indicates the labelled recording on the order, and "
-				.. "clears a place beside the receiver. ** ** The written order reads: Recover the senderless message "
-				.. "cassette from the assigned search area in Marsh. Bring it back to the bench in Marsh. **"
+				"** He lays a supply list beside the equipment and underlines every entry before sliding it "
+				.. "towards you. **"
 			),
-			completion = (
-				"** He places the recovered cassette in the cleared space. His hand remains on the receiver switch "
-				.. "for a moment. **"
-			),
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Mute has marked the "
-					.. "accompanying order \"Senderless message cassette\"."
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_tape",
-				label = "Senderless message cassette",
+			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -504,12 +499,23 @@ PLUGIN:Register("mute", {
 			name = "The Final Lens",
 			kind = "delivery",
 			requires = {"MU15"},
-			briefing = "** He counts the marked entries on the list, then leaves the page facing you. **",
-			completion = "** He crosses the entries out, sets the pen down, and looks up. **",
+			briefing = (
+				"** He lays a supply list beside the equipment and underlines every entry before sliding it "
+				.. "towards you. **"
+			),
+			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
 				{
-					pool = "small_electronics",
-					quantity = 5,
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -571,33 +577,32 @@ PLUGIN:Register("mute", {
 		{
 			id = "MU20",
 			completionCash = 2250,
-			name = "Someone on the Line",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the line receiver recording from the assigned search area in Pripyat. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"MU18"},
 			briefing = (
-				"** He stops working at the receiver. A fingertip rests on the field order; then he slides it "
-				.. "across the bench without looking away from it. ** ** The written order reads: Recover the line "
-				.. "receiver recording from the assigned search area in Pripyat. Bring it back to the bench in Marsh. "
-				.. "**"
+				"** He lays a supply list beside the equipment and underlines every entry before sliding it "
+				.. "towards you. **"
 			),
-			completion = (
-				"** He fits the recording into the space beside the earlier records. He adjusts the lamp, then "
-				.. "adjusts it back. **"
-			),
-			field = {
-				description = (
-					"A flat dark electronic module marked with a number and three pale bars. Mute has marked the "
-					.. "accompanying order \"Line receiver recording\"."
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_module2",
-				label = "Line receiver recording",
+			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -608,14 +613,26 @@ PLUGIN:Register("mute", {
 			kind = "delivery",
 			requires = {"MU19", "MU20"},
 			briefing = (
-				"** He lays the component list beside an empty tray, then moves the tray clear of the loose wires. "
-				.. "**"
+				"** He lays a supply list beside the equipment and underlines every entry before sliding it "
+				.. "towards you. **"
 			),
-			completion = "** He checks the delivered components against the list and places them in separate spaces. **",
+			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
 				{
-					pool = "radio_components",
-					quantity = 6,
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -673,33 +690,36 @@ PLUGIN:Register("mute", {
 		{
 			id = "MU24",
 			completionCash = 2650,
-			name = "The Last Address",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the last network address drive from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"MU23"},
 			briefing = (
-				"** He places the drive order over the unfinished address sheet. The return instruction is "
-				.. "underlined. He closes the pen and leaves his hand beside the page while you read. ** ** The "
-				.. "written order reads: Recover the last network address drive from the assigned search area in "
-				.. "Marsh. Bring it back to the bench in Marsh. **"
+				"** He lays a supply list beside the equipment and underlines every entry before sliding it "
+				.. "towards you. **"
 			),
-			completion = (
-				"** He reads the final record twice. Then he disconnects the receiver and clears the stool beside "
-				.. "the bench. He looks towards it, then at you. **"
-			),
-			field = {
-				description = (
-					"A USB drive with a large rear loop and a handwritten paper label around its body. Mute has "
-					.. "marked the accompanying order \"Last network address drive\"."
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_security",
-				label = "Last network address drive",
+			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
+			requirements = {
+				{
+					pool = "town_delivery_electronics_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_electronics_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {

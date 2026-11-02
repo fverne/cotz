@@ -72,18 +72,15 @@ PLUGIN:Register("old-timer", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Before we talk about anything else, bring the canned food on the list. If you're going out "
-				.. "hungry already, you won't make better decisions when the walk takes longer than you "
-				.. "thought. Keep something for yourself as well."
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = (
-				"That'll do. Put it there. And check your own pack before you leave; I meant what I said "
-				.. "about keeping something back."
-			),
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
 			requirements = {
 				{
-					pool = "canned_food",
-					quantity = 2,
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 1,
 				},
 			},
 			benefits = {
@@ -140,29 +137,22 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "OT04",
 			completionCash = 650,
-			name = "Bring Something Back",
-			kind = "field",
-			objective = (
-				"Recover the hunting-camp observations from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
-			),
+			name = "A small delivery",
+			kind = "delivery",
+			retiredCommission = true,
+			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
 			requires = {"OT03"},
 			briefing = (
-				"Bring the hunting camp's observations back. Read the ground while you're there, but leave the "
-				.. "longer inspection until you're safe. Recover the hunting-camp observations from the assigned "
-				.. "search area in Marsh. Bring it back to me in Marsh."
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Let's see what they noticed. You can put your pack down before explaining the whole trip.",
-			field = {
-				description = (
-					"A thick blue diary with a label fixed to the front cover. Old Timer's note: \"Bring the hunting "
-					.. "camp's observations back.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_diary",
-				label = "Hunting-camp observations",
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -172,12 +162,20 @@ PLUGIN:Register("old-timer", {
 			name = "A Place to Hide",
 			kind = "delivery",
 			requires = {"OT04"},
-			briefing = "Bring the supplies on the list here. Keep enough of your own to walk home afterwards.",
-			completion = "Good. Put your own kit back in reach before we start talking.",
+			briefing = (
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
+			),
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -239,32 +237,29 @@ PLUGIN:Register("old-timer", {
 			id = "OT08",
 			capacity = {kind = "weight", amount = 1},
 			completionCash = 1050,
-			name = "Travel Light",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the scout's recovered pack from the assigned search area in Marsh. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"OT06"},
 			briefing = (
-				"There's a scout's load to recover. Think about carrying it back before you fill every corner of "
-				.. "your own pack. Recover the scout's recovered pack from the assigned search area in Marsh. Bring "
-				.. "it back to me in Marsh."
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = (
-				"There. Unload it slowly. You learn more about carrying on the return than you do picking a thing "
-				.. "up."
-			),
-			field = {
-				description = (
-					"A low hard case with long contrasting strips across its ribbed lid. Old Timer's note: \"There's a "
-					.. "scout's load to recover.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 1,
-				cargo = "town_quest_equipment",
-				label = "Scout's recovered pack",
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -274,12 +269,20 @@ PLUGIN:Register("old-timer", {
 			name = "Bad Water",
 			kind = "delivery",
 			requires = {"OT07"},
-			briefing = "I'd like this request filled. Read it before deciding something similar will do.",
-			completion = "That's what I asked for. I'll take it from here.",
+			briefing = (
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
+			),
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 3,
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_marsh_2",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -327,29 +330,29 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "OT12",
 			completionCash = 1450,
-			name = "Keep Yourself Alive",
-			kind = "field",
+			name = "Restocking",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the survival expedition equipment from the assigned search area in Marsh. Bring it back "
-				.. "to the issuing contact in Marsh."
+				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"OT10"},
 			briefing = (
-				"One more equipment case from the Marsh expedition. Bring it whole, and don't treat familiarity "
-				.. "with the route as permission to stop looking. Recover the survival expedition equipment from the "
-				.. "assigned search area in Marsh. Bring it back to me in Marsh."
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Set it down. You've had a proper amount of carrying to think about now.",
-			field = {
-				description = (
-					"A heavily worn hard case with faded strips running across its lid. Old Timer's note: \"One more "
-					.. "equipment case from the Marsh expedition.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_worncase",
-				label = "Survival expedition equipment",
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_marsh_2",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -368,12 +371,24 @@ PLUGIN:Register("old-timer", {
 			name = "Tracks at the Fence",
 			kind = "delivery",
 			requires = {"OT11"},
-			briefing = "Bring the requested material back intact. The walk is still part of the work.",
-			completion = "Set it down. You can take the weight off now.",
+			briefing = (
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
+			),
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
 			requirements = {
 				{
-					pool = "common_parts",
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_marsh_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -422,29 +437,33 @@ PLUGIN:Register("old-timer", {
 			id = "OT16",
 			capacity = {kind = "weight", amount = 1},
 			completionCash = 1850,
-			name = "Not Normal Behaviour",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the disturbed feeding-ground tape from the assigned search area in Marsh. Bring it back "
-				.. "to the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"OT14"},
 			briefing = (
-				"I want the recording from the feeding ground. Something unusual deserves a closer account than a "
-				.. "frightened description over supper. Recover the disturbed feeding-ground tape from the assigned "
-				.. "search area in Marsh. Bring it back to me in Marsh."
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Leave it here. I'll listen before telling you what I think it was.",
-			field = {
-				description = (
-					"A pale audio cassette with a handwritten dedication above the spool windows. Old Timer's note: "
-					.. "\"I want the recording from the feeding ground.\""
-				),
-				kind = "recovery",
-				map = "rp_marsh_cs",
-				tier = 2,
-				cargo = "town_quest_tape",
-				label = "Disturbed feeding-ground tape",
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -454,12 +473,24 @@ PLUGIN:Register("old-timer", {
 			name = "The Empty Camp",
 			kind = "delivery",
 			requires = {"OT15"},
-			briefing = "There's another hand-in to prepare. Take your time checking what you need before leaving.",
-			completion = "All here. Good. No need to tell me it was easy before you've sat down.",
+			briefing = (
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
+			),
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
 			requirements = {
 				{
-					pool = "common_parts",
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_marsh_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -519,30 +550,33 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "OT20",
 			completionCash = 2250,
-			name = "The Convoy That Never Arrived",
-			kind = "field",
+			name = "Building the reserve",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the convoy records for Ledger from the assigned search area in Garbage. Deliver it to "
-				.. "'Ledger' in Waystation, then come back to the issuing contact in Marsh."
+				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"OT18"},
 			briefing = (
-				"Ledger needs the convoy record. Take it through intact, then come back here. I'd rather he read "
-				.. "it himself. Recover the convoy records for Ledger from the assigned search area in Garbage. "
-				.. "Deliver it to 'Ledger' in Waystation, then come back to me in Marsh."
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "He has it. Good. You can take your pack off while we wait for the papers to be read.",
-			field = {
-				description = (
-					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Old Timer's "
-					.. "note: \"Ledger needs the convoy record.\""
-				),
-				kind = "recovery",
-				map = "mz_garbage",
-				tier = 2,
-				cargo = "town_quest_manifest",
-				label = "Convoy records for Ledger",
-				recipient = "ledger",
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_marsh_3",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 		},
@@ -552,12 +586,24 @@ PLUGIN:Register("old-timer", {
 			name = "Someone Kept Records",
 			kind = "delivery",
 			requires = {"OT19"},
-			briefing = "Bring the supplies on the list here. Keep enough of your own to walk home afterwards.",
-			completion = "Good. Put your own kit back in reach before we start talking.",
+			briefing = (
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
+			),
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
 			requirements = {
 				{
-					pool = "administrative_documents",
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_marsh_2",
 					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_marsh_3",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -606,29 +652,37 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "OT24",
 			completionCash = 2650,
-			name = "The Last Address",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the Pripyat address file from the assigned search area in Pripyat. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"OT22"},
 			briefing = (
-				"The next record is in Pripyat. Take enough supplies to change your mind halfway there; having an "
-				.. "address doesn't oblige you to reach it today. Recover the Pripyat address file from the assigned "
-				.. "search area in Pripyat. Bring it back to me in Marsh."
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = "Come in. Leave the file here and get the weight off your shoulders.",
-			field = {
-				description = (
-					"A cardboard file folder with a small coloured crest on its cover. Old Timer's note: \"The next "
-					.. "record is in Pripyat.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_official",
-				label = "Pripyat address file",
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_trail_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {
 				items = {
@@ -647,12 +701,28 @@ PLUGIN:Register("old-timer", {
 			name = "Past the Turn Back Point",
 			kind = "delivery",
 			requires = {"OT23", "OT24"},
-			briefing = "I'd like this request filled. Read it before deciding something similar will do.",
-			completion = "That's what I asked for. I'll take it from here.",
+			briefing = (
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
+			),
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
 			requirements = {
 				{
-					pool = "field_maintenance",
-					quantity = 7,
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_trail_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_marsh_4",
+					quantity = 1,
 				},
 			},
 			benefits = {},
@@ -700,32 +770,37 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "OT28",
 			completionCash = 3000,
-			name = "Nothing Left Unsaid",
-			kind = "field",
+			name = "A full supply order",
+			kind = "delivery",
+			retiredCommission = true,
 			objective = (
-				"Recover the companion's last record from the assigned search area in Pripyat. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
+				.. "units."
 			),
 			requires = {"OT27"},
 			briefing = (
-				"One last record. Bring it home before opening it on the road. There'll be time to read when "
-				.. "you're back. Recover the companion's last record from the assigned search area in Pripyat. Bring "
-				.. "it back to me in Marsh."
+				"There are supplies I would like brought in. Read the list before setting off, and leave enough "
+				.. "room for what you need yourself. Bring everything on the list back here; I need the full "
+				.. "delivery."
 			),
-			completion = (
-				"Leave it beside me. You've carried enough for today. Sit down a minute. I'd rather you stayed "
-				.. "while I read it."
-			),
-			field = {
-				description = (
-					"A cardboard file folder with an emblem and printed wording on the front. Old Timer's note: \"One "
-					.. "last record.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_personnel",
-				label = "Companion's last record",
+			completion = "That will do. Put it there, then check what you have left for your own walk.",
+			requirements = {
+				{
+					pool = "town_delivery_trail_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_trail_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_trail_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_trail_marsh_4",
+					quantity = 1,
+				},
 			},
 			benefits = {},
 			recognition = "Old Timer's trusted contact",
