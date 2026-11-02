@@ -8,6 +8,7 @@ local playerMeta = FindMetaTable("Player")
 
 ix.util.Include("sh_buffs.lua")
 ix.util.Include("sh_buffhooks.lua")
+ix.util.Include("sh_bleeding.lua")
 ix.util.Include("cl_hud.lua")
 
 -- player:GetBuffs()
@@ -67,12 +68,15 @@ if (SERVER) then
 	-- I suggest you do not touch this function unless you know what you're doing.
 	function PLUGIN:PlayerSpawn( player )
 		player:SetNetVar( "buffs", {} )
+		self:RestoreBleeding(player)
 	end
 
 	-- player:Think( )
 	-- This hook handles every player's buff effect.
 	-- I suggest you do not touch this function unless you know what you're doing.
 	function PLUGIN:Think()
+		self:ProcessBleeding()
+
 		for k, v in player.Iterator() do
 			if !( v:IsValid() and v:Alive() ) then continue end 
 			local tblBuffs = v:GetNetVar( "buffs" ) or {}

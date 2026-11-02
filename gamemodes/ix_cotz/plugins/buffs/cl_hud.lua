@@ -4,7 +4,26 @@ local posW = ScrW() * 0.82
 local incH = ScrH() * -0.035
 local incW = ScrW() * 0.02
 
+local bleedingColor = Color(255, 220, 0)
+
+function PLUGIN:OnScreenSizeChanged()
+	posH = ScrH() * 0.75
+	posW = ScrW() * 0.82
+	incH = ScrH() * -0.035
+	incW = ScrW() * 0.02
+end
+
 function PLUGIN:HUDPaint()
+	local severity = LocalPlayer():GetLocalVar("bleedingSeverity", 0)
+	if LocalPlayer():Alive() and LocalPlayer():GetCharacter() and severity > 0 then
+		local fraction = math.Clamp(severity / ix.config.Get("bleedingMaximum", 100), 0, 1)
+		bleedingColor.r = 255
+		bleedingColor.g = math.Round(Lerp(fraction, 220, 0))
+
+		ix.util.DrawBuffIcon("stalker/ui/heart.png", posW, posH, ScrW() * 0.016, ScrH() * 0.032,
+			bleedingColor, tostring(severity))
+	end
+
 	if LocalPlayer():HasBuff("buff_slowheal") then
 		ix.util.DrawBuffIcon("stalker/ui/heart.png", posW, posH+incH, ScrW()*0.016, ScrH()*0.032, Color(0, 190, 255), math.Round(LocalPlayer():HasBuff("buff_slowheal")[1]-CurTime()+0.5))
 	end
