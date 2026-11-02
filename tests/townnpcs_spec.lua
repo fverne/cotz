@@ -293,6 +293,10 @@ check(ix.progression.IsActive(qualified, qm), "cross-NPC prerequisite opens the 
 
 local hunter = character()
 town:InitializeTownCharacter(hunter)
+for _, contact in pairs(town.contacts) do
+	check(ix.progression.CanUseNPC(hunter, contact.name),
+		"fresh characters can access every town contact without progression")
+end
 ix.progression.SetCompleted(hunter, town:StepID("old-timer", "OT01"))
 ix.progression.SetCompleted(hunter, town:StepID("old-timer", "OT02"))
 hunter:SetData("jobClaimsPaid", {["'Old Timer'"] = 1})
@@ -304,7 +308,7 @@ hunter:SetData("jobClaimsPaid", {["'Old Timer'"] = 2})
 town:JobCompleted(hunter.client, "'Old Timer'", "cotz/town/old-timer/easy")
 local firstKnife = town:StepID("old-timer", "OT03")
 check(ix.progression.IsCompleted(hunter, firstKnife), "cumulative hunting checkpoint completes its active node")
-check(ix.progression.CanUseNPC(hunter, "'Haggler'"), "current milestone directly opens Haggler access")
+check(ix.progression.CanUseNPC(hunter, "'Haggler'"), "Haggler remains accessible after completing a milestone")
 check(#ix.progression.GetLine(hunter, firstKnife).pendingRewards == 0, "tracker does not duplicate job supplies")
 check(not town:CanAcceptJob(hunter, "'Old Timer'", ix.jobs.list["cotz/town/spoor/easy"]),
 	"another contact's job cannot be accepted through a forged identifier")

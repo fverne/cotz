@@ -2,7 +2,6 @@ PLUGIN:Register("haggler", {
 	name = "'Haggler'",
 	template = "tradernpc",
 	map = "rp_marsh_cs",
-	access = {contact = "old-timer", step = "OT03"},
 	job = {
 		kind = "humans",
 		trigger = "banditKilled",

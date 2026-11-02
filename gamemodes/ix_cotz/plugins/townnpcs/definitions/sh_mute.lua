@@ -2,7 +2,6 @@ PLUGIN:Register("mute", {
 	name = "'Mute'",
 	template = "stalkernetnpc",
 	map = "rp_marsh_cs",
-	access = {contact = "old-timer", step = "OT19"},
 	job = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},

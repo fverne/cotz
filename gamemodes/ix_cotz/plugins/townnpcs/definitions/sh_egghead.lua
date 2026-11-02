@@ -2,7 +2,6 @@ PLUGIN:Register("egghead", {
 	name = "'Egghead'",
 	template = "ecologistnpc",
 	map = "rp_waystation",
-	access = {contact = "smartass", step = "SM07"},
 	job = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},

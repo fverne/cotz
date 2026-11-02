@@ -2,7 +2,6 @@ PLUGIN:Register("beanstalk", {
 	name = "'Beanstalk'",
 	template = "ecologistnpc2",
 	map = "mz_garbage",
-	access = {contact = "smartass", step = "SM07"},
 	job = {
 		kind = "defence",
 		category = "Research defence",

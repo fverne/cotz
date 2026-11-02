@@ -2,7 +2,6 @@ PLUGIN:Register("spicy-lemon", {
 	name = "'Spicy Lemon'",
 	template = "cooknpc",
 	map = "rp_marsh_cs",
-	access = {contact = "old-timer", step = "OT06"},
 	job = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},

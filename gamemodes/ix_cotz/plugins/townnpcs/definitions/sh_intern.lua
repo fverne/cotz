@@ -2,7 +2,6 @@ PLUGIN:Register("intern", {
 	name = "'Intern'",
 	template = "ecologistnpc3",
 	map = "rp_waystation",
-	access = {contact = "smartass", step = "SM07"},
 	job = {
 		kind = "sensor",
 		category = "Sensor deployment and retrieval",

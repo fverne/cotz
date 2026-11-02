@@ -44,6 +44,9 @@ copy of another NPC's conversation.
 
 ## Progression and work
 
+All town contacts are accessible without completing another contact's progression. They can be placed
+on their home maps immediately; task prerequisites, catalogue unlocks and service benefits still apply.
+
 Each contact has an explicit sparse tree: a short introduction, two narrow branches and a joined
 conclusion. The requires and crossRequires fields describe local and cross-contact prerequisites;
 equipment families can add further dependencies. Stable IDs look like cotz/town/quartermaster/QM11.
@@ -75,7 +78,7 @@ Flavour stays under **Can I ask you something?**; actions and services stay at t
 
 ## Persistence
 
-Only current progression IDs grant access. There is no import of old completion IDs, numeric effort,
+Only current progression IDs grant progression unlocks. There is no import of old completion IDs, numeric effort,
 stock identities, old arena opponents or saved assignments from removed definitions. There are no
 version converters, grandfathered prerequisites or compatibility completion aliases. Removing these
 paths does not erase database rows; obsolete saved data is not interpreted as current progression.
