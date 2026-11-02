@@ -211,7 +211,6 @@ function PANEL:Update()
 	end
 
 	self.icon:SetHidden(!bRecognize)
-	self:SetZPos(bRecognize and 1 or 2)
 
 	-- no easy way to check bodygroups so we'll just set them anyway
 	for _, v in pairs(client:GetBodyGroups()) do
@@ -268,8 +267,9 @@ function PANEL:Think()
 		local client = self.player
 
 		if (!IsValid(client) or !client:GetCharacter() or self.character != client:GetCharacter() or self.team != client:Team()) then
+			local parent = self:GetParent()
 			self:Remove()
-			self:GetParent():SizeToContents()
+			parent:SizeToContents()
 		end
 
 		self.nextThink = CurTime() + 1
@@ -290,73 +290,47 @@ end
 
 vgui.Register("ixScoreboardRow", PANEL, "EditablePanel")
 
--- faction grouping
+-- Squad grouping; the squad plugin supplies public identity without exposing its roster.
 PANEL = {}
-
-AccessorFunc(PANEL, "faction", "Faction")
 
 function PANEL:Init()
 	self:DockMargin(0, 0, 0, 16)
 	self:SetTall(32)
-
-	self.nextThink = 0
 end
 
-function PANEL:AddPlayer(client, index)
-	if (!IsValid(client) or !client:GetCharacter() or hook.Run("ShouldShowPlayerOnScoreboard", client) == false) then
-		return false
-	end
+function PANEL:UpdateGroup(name, clients, color)
+	self:SetColor(color or ix.config.Get("color"))
+	self:SetText(name .. " (" .. #clients .. ")")
 
-	local id = index % 2 == 0 and 1 or 2
-	local panel = self:Add("ixScoreboardRow")
-	panel:SetPlayer(client)
-	panel:Dock(TOP)
-	panel:SetZPos(2)
-	panel:SetBackgroundPaintFunction(rowPaintFunctions[id])
+	table.sort(clients, function(first, second)
+		return first:getReputation() < second:getReputation()
+	end)
 
-	self:SizeToContents()
-	client.ixScoreboardSlot = panel
+	for index, client in ipairs(clients) do
+		local row = client.ixScoreboardSlot
 
-	return true
-end
-
-function PANEL:SetFaction(faction)
-	self:SetColor(faction.color)
-	self:SetText("Online Users: "..L(faction.name))
-
-	self.faction = faction
-end
-
-function PANEL:Update()
-	local faction = self.faction
-
-	if (team.NumPlayers(faction.index) == 0) then
-		self:SetVisible(false)
-		self:GetParent():InvalidateLayout()
-	else
-		local bHasPlayers
-
-		local tab = team.GetPlayers(faction.index)
-		table.sort(tab, function(p1,p2) return p1:getReputation() < p2:getReputation() end)
-
-		for k, v in pairs(tab) do
-			if (!IsValid(v.ixScoreboardSlot)) then
-				if (self:AddPlayer(v, k)) then
-					bHasPlayers = true
-				end
-			else
-				v.ixScoreboardSlot:Update()
-				bHasPlayers = true
-			end
+		if (IsValid(row) and (row:GetParent() ~= self or row.character ~= client:GetCharacter())) then
+			row:Remove()
 		end
 
-		self:SetVisible(bHasPlayers)
+		if (not IsValid(row)) then
+			row = self:Add("ixScoreboardRow")
+			row:SetPlayer(client)
+			row:Dock(TOP)
+			client.ixScoreboardSlot = row
+		else
+			row:Update()
+		end
+
+		row:SetZPos(index)
+		row:SetBackgroundPaintFunction(rowPaintFunctions[index % 2 == 0 and 1 or 2])
 	end
+
+	self:SizeToContents()
 end
 
-vgui.Register("ixScoreboardFaction", PANEL, "ixCategoryPanel")
+vgui.Register("ixScoreboardGroup", PANEL, "ixCategoryPanel")
 
--- main scoreboard panel
 PANEL = {}
 
 function PANEL:Init()
@@ -365,32 +339,51 @@ function PANEL:Init()
 	end
 
 	self:Dock(FILL)
-
-	self.factions = {}
+	self.groups = {}
 	self.nextThink = 0
-
-	for i = 1, #ix.faction.indices do
-		local faction = ix.faction.indices[i]
-
-		local panel = self:Add("ixScoreboardFaction")
-		panel:SetFaction(faction)
-		panel:Dock(TOP)
-
-		self.factions[i] = panel
-	end
-
 	ix.gui.scoreboard = self
 end
 
 function PANEL:Think()
-	if (CurTime() >= self.nextThink) then
-		for i = 1, #self.factions do
-			local factionPanel = self.factions[i]
+	if (CurTime() < self.nextThink) then return end
+	self.nextThink = CurTime() + 0.5
 
-			factionPanel:Update()
+	local groups = {}
+
+	for _, client in ipairs(player.GetAll()) do
+		local visible = client:GetCharacter() and hook.Run("ShouldShowPlayerOnScoreboard", client) ~= false
+
+		if (visible) then
+			local id, name, color
+
+			if (ix.squad and ix.squad.GetScoreboardGroup) then
+				id, name, color = ix.squad.GetScoreboardGroup(client)
+			end
+			id = id or "loners"
+			groups[id] = groups[id] or {name = name or "loners", color = color and color.r and color or nil, clients = {}}
+			table.insert(groups[id].clients, client)
+		elseif (IsValid(client.ixScoreboardSlot)) then
+			client.ixScoreboardSlot:Remove()
+		end
+	end
+
+	for id, group in pairs(groups) do
+		local panel = self.groups[id]
+
+		if (not IsValid(panel)) then
+			panel = self:Add("ixScoreboardGroup")
+			panel:Dock(TOP)
+			self.groups[id] = panel
 		end
 
-		self.nextThink = CurTime() + 0.5
+		panel:UpdateGroup(group.name, group.clients, group.color)
+	end
+
+	for id, panel in pairs(self.groups) do
+		if (not groups[id]) then
+			panel:Remove()
+			self.groups[id] = nil
+		end
 	end
 end
 
