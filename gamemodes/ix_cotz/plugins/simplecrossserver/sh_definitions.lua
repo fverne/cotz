@@ -105,3 +105,11 @@ PLUGIN.mapdata["rp_pripyat_remaster"].loadzones["base"] = {
 	ang = Angle(0.000, -123.432, 0.000), --edit me
 	desc = "The area ahead looks like the safe base."
 }
+
+
+PLUGIN.mapdata["mz_garbage"] = {}
+PLUGIN.mapdata["mz_garbage"].name = "Garbage"
+PLUGIN.mapdata["mz_garbage"].serverip = "93.163.14.129:27018"
+PLUGIN.mapdata["mz_garbage"].loadzones = PLUGIN.mapdata["mz_garbage"].loadzones or {}
+
+-- to be continued with more maps and loadzones as needed
