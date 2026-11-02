@@ -210,7 +210,7 @@ function cross.PublishRoster(rows)
 	local records = {}
 	for _, row in ipairs(rows) do
 		records[#records + 1] = {
-			profile = util.TableToJSON({leaderboardStats = (util.JSONToTable(row.profile or "{}") or {}).leaderboardStats,
+			profile = util.TableToJSON({leaderboardStats = ix.jobs.GetLeaderboardStats(util.JSONToTable(row.profile or "{}") or {}),
 				reputation = tonumber(row.reputation) or 0}),
 			characterID = tonumber(row.character_id), name = row.name or "",
 			pdaavatar = row.pdaavatar or "vgui/icons/face_31.png", state = row.state,

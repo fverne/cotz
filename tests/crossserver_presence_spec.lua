@@ -44,6 +44,7 @@ PLUGIN = {}
 local root = "gamemodes/ix_cotz/plugins/simplecrossserverdata/"
 dofile(root .. "sh_presence.lua")
 dofile(root .. "sv_presence.lua")
+dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_leaderboard.lua")
 local cross = ix.crossserver
 local rows = {}
 for id = 1, 70 do

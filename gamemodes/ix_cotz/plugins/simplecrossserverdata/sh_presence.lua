@@ -63,7 +63,7 @@ if (CLIENT) then
 					end
 					records[id] = {
 						profile = {reputation = client:getReputation(),
-							leaderboardStats = character:GetData("leaderboardStats", {})},
+							leaderboardStats = ix.jobs.GetLeaderboardStats(character:GetData())},
 						characterID = id, player = client, name = character:GetName(),
 						pdaavatar = character:GetPdaavatar(), map = game.GetMap(), fresh = true,
 						state = previous and fresh and previous.state == "travelling" and "travelling" or "online",

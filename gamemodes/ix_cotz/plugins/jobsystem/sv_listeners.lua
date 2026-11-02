@@ -29,15 +29,7 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 	if not IsValid(attacker) or not attacker:IsPlayer() then return end
 	local class = entity:GetClass():lower()
 	local character = attacker:GetCharacter()
-	if character then
-		local key = class:find("npc_mutant", 1, true) and "mutantsKilled"
-			or (class:find("npc_human", 1, true) and "humansKilled")
-		if key then
-			local stats = table.Copy(character:GetData("leaderboardStats", {}))
-			stats[key] = (stats[key] or 0) + 1
-			character:SetData("leaderboardStats", stats)
-		end
-	end
+	if character then ix.jobs.RecordLeaderboardKill(character, class) end
 	local clients
 	for _, rule in ipairs(rules) do
 		if matches(rule, class) then

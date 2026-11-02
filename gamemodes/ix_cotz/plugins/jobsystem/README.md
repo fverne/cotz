@@ -386,3 +386,21 @@ admin reset, and single payment with the ordinary supplies/bonus/restock flow.
 For circuits, verify both endpoints, missing cargo, repeated delivery and post-delivery
 reconnects. For defence, verify navigation, population saturation, sampler disruption,
 group assistance, failure/retry, interruption during each wave, and attacker cleanup.
+
+## Leaderboard statistics
+
+`libs/sh_leaderboard.lua` tracks personal kills and successful task hand-ins in the existing
+`leaderboardStats` character data. Rare kills include bloodsuckers, burers, controllers, chimeras,
+electro chimeras and pseudogiants. Species use exact configured species rules, merging controller
+variants; overlapping group triggers cannot multiply a kill. Nearby players keep their normal job
+credit without receiving personal kill statistics.
+
+Hard tasks are tier 3 or above. Research operations are sensor or defence field assignments; recovery
+operations are recovery field assignments. Each counts at guarded hand-in, once. Task earnings count
+actual ordinary job cash payouts, excluding item rewards, bonuses and separate progression payouts.
+New counters start when deployed; existing totals are retained. Contact programmes are derived from
+saved progression: every defined step for a contact must be complete, including branches.
+Only aggregate public statistics enter cross-map snapshots; species sets and progression lines do not.
+
+Run `luatex --luaonly tests/leaderboard_stats_spec.lua` alongside the job and presence specs.
+Check the scrolling dossier and local/remote totals in a multiplayer session after character save.

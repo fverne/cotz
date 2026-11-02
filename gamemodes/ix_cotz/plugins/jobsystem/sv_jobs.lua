@@ -52,9 +52,7 @@ function playerMeta:ixJobComplete(npcidentifier)
 	claimed[npcidentifier] = job.progressionClaim
 	if job.fieldTask then ix.jobs.field.Cleanup(character, job) end
 	character:SetData("jobClaimsPaid", claimed)
-	local stats = table.Copy(character:GetData("leaderboardStats", {}))
-	stats.tasksCompleted = (stats.tasksCompleted or 0) + 1
-	character:SetData("leaderboardStats", stats)
+	ix.jobs.RecordLeaderboardTask(character, definition)
 	jobs[npcidentifier] = nil
 	character:SetJobs(jobs)
 	if ix.townNPCs and ix.townNPCs.installed then
@@ -67,6 +65,9 @@ function playerMeta:ixJobComplete(npcidentifier)
 		self:addReputation(definition.repReward)
 		ix.dialogue.notifyReputationReceive(self, definition.repReward)
 		character:GiveMoney(job.moneyReward)
+		local stats = table.Copy(character:GetData("leaderboardStats", {}))
+		stats.taskEarnings = (stats.taskEarnings or 0) + job.moneyReward
+		character:SetData("leaderboardStats", stats)
 		ix.dialogue.notifyMoneyReceive(self, job.moneyReward)
 	end
 	hook.Run("ix_OnJobComplete", self, npcidentifier, job.identifier)

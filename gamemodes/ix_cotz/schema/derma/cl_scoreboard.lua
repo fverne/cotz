@@ -365,9 +365,13 @@ function PANEL:Init()
 	self.dossier:Dock(RIGHT)
 	self.dossier:DockMargin(12, 12, 0, 0)
 	self.dossier.Paint = paintCard
-	self.details = self.dossier:Add("DLabel")
-	self.details:Dock(FILL)
-	self.details:DockMargin(16, 110, 16, 16)
+	self.detailScroll = self.dossier:Add("DScrollPanel")
+	self.detailScroll:Dock(FILL)
+	self.detailScroll:DockMargin(0, 110, 0, 0)
+	self.details = self.detailScroll:Add("DLabel")
+	self.details:Dock(TOP)
+	self.details:SetAutoStretchVertical(true)
+	self.details:DockMargin(16, 0, 16, 16)
 	self.details:SetWrap(true)
 	self.details:SetContentAlignment(7)
 	self.details:SetTextColor(COLORS.text)
@@ -393,7 +397,14 @@ function PANEL:SelectRecord(record)
 		.. "MUTANTS KILLED     " .. (stats.mutantsKilled or 0) .. "\n\n"
 		.. "HUMAN NPCS KILLED     " .. (stats.humansKilled or 0) .. "\n\n"
 		.. "TASKS COMPLETED     " .. (stats.tasksCompleted or 0)
-		.. "\n\nStatistics tracked since the leaderboard update.")
+		.. "\n\nRARE MUTANTS     " .. (stats.rareMutantsKilled or 0)
+		.. "\nSPECIES KILLED     " .. (stats.speciesKilled or 0)
+		.. "\nHARD TASKS     " .. (stats.hardTasks or 0)
+		.. "\nRESEARCH OPERATIONS     " .. (stats.researchOperations or 0)
+		.. "\nRECOVERY OPERATIONS     " .. (stats.recoveryOperations or 0)
+		.. "\nTASK EARNINGS     " .. (stats.taskEarnings or 0) .. " RU"
+		.. "\nCONTACT PROGRAMMES     " .. (stats.contactProgrammes or 0)
+		.. "\n\nCounters begin when tracking is enabled. Programmes include saved progress.")
 end
 
 function PANEL:PerformLayout(width, height)

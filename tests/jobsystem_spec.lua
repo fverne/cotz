@@ -152,6 +152,7 @@ local neighbour = {IsPlayer = function() return true end, GetCharacter = functio
 client.IsPlayer = function() return true end
 client.GetPos = function() return {} end
 ents = {FindInSphere = function() return {client, neighbour} end}
+dofile(base .. "libs/sh_leaderboard.lua")
 dofile(base .. "sv_listeners.lua")
 local npc = {GetClass = function() return "npc_human_z_bandit" end, GetPos = function() return {} end}
 PLUGIN:OnNPCKilled(npc, client)
