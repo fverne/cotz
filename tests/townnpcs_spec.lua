@@ -54,13 +54,10 @@ ix.jobs = {list = {}, jobsbycategory = {}, field = {
 for _, kind in ipairs({"recovery", "sensor", "triangulation", "deadDrop", "defence"}) do
 	ix.jobs.field.settings[kind] = {sources = {}}
 end
-ix.jobs.register = function(definition, id)
-	ix.jobs.list[id] = definition
-	for _, category in ipairs(definition.categories) do
-		ix.jobs.jobsbycategory[category] = ix.jobs.jobsbycategory[category] or {}
-		table.insert(ix.jobs.jobsbycategory[category], id)
-	end
-end
+local originalFindMetaTable = FindMetaTable
+FindMetaTable = function() return {} end
+dofile(base .. "jobsystem/libs/sh_jobs.lua")
+FindMetaTable = originalFindMetaTable
 dofile(base .. "jobsystem/libs/sh_tooljobs.lua")
 dofile(base .. "townnpcs/libs/sh_00_townnpcs.lua")
 for _, name in ipairs({"sh_catalogue", "sh_jobs", "sh_progressions", "sh_sites", "sh_validation", "sv_runtime"}) do

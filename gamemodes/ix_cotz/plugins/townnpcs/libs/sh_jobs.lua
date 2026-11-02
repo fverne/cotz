@@ -166,6 +166,7 @@ function PLUGIN:BuildJobs()
 				registerJob(contact, "cotz/town/commission/" .. contact.id .. "/" .. step.id, {
 					name = step.name,
 					desc = step.briefing,
+					numberRec = 1,
 					categories = {},
 					townProgression = self:StepID(contact.id, step.id),
 					CanAcceptTask = function() return false end,
