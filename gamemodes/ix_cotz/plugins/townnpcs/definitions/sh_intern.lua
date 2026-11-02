@@ -52,13 +52,14 @@ PLUGIN:Register("intern", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I've written down what I'm short of. Could you bring it here? I'll check it against the "
-				.. "list. I've checked the list. Twice, actually. I'd like to have the equipment ready "
-				.. "without having to ask everyone else for a spare at the last minute."
+				"Could you bring the electronics on this list? I want to make sure the instruments have what "
+				.. "they need before we begin. I've checked the list twice. That isn't because I think you "
+				.. "can't read it; I just don't want to have to ask you for another trip."
 			),
 			completion = (
-				"Oh, good. That's one thing ready. Thank you. I'll put these aside before somebody "
-				.. "assumes they're part of the general supply. I'm allowed to organise my own work too."
+				"Thank you. That's everything I wrote down. I'll check the instruments now and keep these "
+				.. "together. It's nice to be able to prepare something instead of only counting what's "
+				.. "missing."
 			),
 			requirements = {
 				{

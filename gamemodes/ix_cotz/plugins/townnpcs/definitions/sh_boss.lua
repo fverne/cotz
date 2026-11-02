@@ -74,13 +74,13 @@ PLUGIN:Register("boss", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Deliver the supplies on this list. Report back here when you have them. Begin with the "
-				.. "list. I would rather establish that you can follow a clear instruction than hear what "
-				.. "difficult work you think you deserve."
+				"I need the administrative records on this list delivered here. Read the order before "
+				.. "accepting it. If you need clarification, ask while we're both here; an assumption "
+				.. "discovered after you leave is much harder to correct."
 			),
 			completion = (
-				"Received. Good. That's a useful start. Keep the same attention when the work becomes "
-				.. "less straightforward."
+				"The records are here. Good. I'll go through them. You understood the assignment and "
+				.. "reported back; that's the standard I expect for whatever comes next."
 			),
 			requirements = {
 				{

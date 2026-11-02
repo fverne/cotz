@@ -606,8 +606,8 @@ ix.progression.SetCompleted(quiet, town:StepID("old-timer", "OT19"))
 ix.progression.SetCompleted(quiet, town:StepID("mute", "MU02"))
 local quietCheckpoint = town:StepID("mute", "MU03")
 ix.progression.SetProgressionValue(quiet, quietCheckpoint, town.steps[quietCheckpoint].target)
-check(message == town.steps[quietCheckpoint].completion,
-	"completion notifications preserve the authored line without adding speech before Mute's gesture")
+check(message == quiet:GetName() .. ", " .. town.steps[quietCheckpoint].completion,
+	"town completion notifications identify the completing character, including gesture replies")
 ix.progression.Notify = notify
 
 local stockReader = character()

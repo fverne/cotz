@@ -72,13 +72,13 @@ PLUGIN:Register("the-original", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring what's listed here. I want to examine it before deciding what to make of it. "
-				.. "We'll start with something I can examine here. I'd rather have a specimen in front of "
-				.. "us than another description of an enormous beast."
+				"Bring me the parts on this list. I've handled enough specimens to know a useful one when I "
+				.. "see it. We'll start with something familiar, and you can decide for yourself whether "
+				.. "listening to an old stalker is worth your time."
 			),
 			completion = (
-				"Let me see the condition of it. There. Now we can look properly. Everyone remembers the "
-				.. "teeth; fewer people notice anything useful around them."
+				"Let's have a look. Yes, that will do. There's more to learn from a specimen than whether "
+				.. "you managed to put it down. We'll leave the rest for another day."
 			),
 			requirements = {
 				{

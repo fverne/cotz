@@ -132,13 +132,13 @@ PLUGIN:Register("technut", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"These are the supplies I'm missing, buddy. Bring them to the bench and I can get on "
-				.. "with it. I can improvise plenty, buddy, but a decent tool makes the clever part much "
-				.. "less likely to take my knuckles off."
+				"I need a tool from this list for the bench. Bring it here and I'll see what condition it's "
+				.. "in. It doesn't have to be beautiful; it has to do the job. Although if it is beautiful, I "
+				.. "will certainly appreciate it!"
 			),
 			completion = (
-				"Yes! That's the bit I needed. Hoho, now we're getting somewhere! Give me a little space "
-				.. "here; I've finally got room to start thinking."
+				"Oh, good! Put it here where I can find it again. That gives me one less reason to borrow "
+				.. "Gasket's things, which should make his afternoon considerably quieter."
 			),
 			requirements = {
 				{

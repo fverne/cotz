@@ -4,7 +4,10 @@ DIALOGUE.townContact = "gasket"
 ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "What have you got?")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "If you've come to complain about the lights, bring fuel next time.",
+	response = (
+		"If you've come to complain about the lights, bring fuel next time. Otherwise, what can I do for "
+		.. "you?"
+	),
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -67,10 +70,11 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Why does the clinic get water first?",
+	statement = "What would make your day easier?",
 	response = (
-		"Because Jitters can't wash a wound with a promise. Everybody else can grumble at me for a bit while "
-		.. "I sort them out. He has enough trouble without wondering what came out of the tap."
+		"Put things back. Same shelf, same container, lid on. Nobody believes that's a serious answer. "
+		.. "They want me to name an expensive part they can heroically fetch. I spend half my morning "
+		.. "finding what somebody borrowed for five minutes. You want gratitude? Return a funnel."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -79,8 +83,8 @@ DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "Does anyone notice when everything works?",
 	response = (
 		"They notice when I ask them not to touch it. That's close enough. Quiet machinery, people "
-		.. "complaining about something else, a cup I can finish while it's hot. I don't need applause over the "
-		.. "engine."
+		.. "complaining about something else, a cup I can finish while it's hot. I don't need applause over "
+		.. "the engine. Though I wouldn't refuse a little peace and quiet."
 	),
 	options = {"BackTopic"},
 })

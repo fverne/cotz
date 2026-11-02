@@ -91,13 +91,13 @@ PLUGIN:Register("latch", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"This is what I need. Check its condition before you haul it back. Fasteners aren't "
-				.. "glamorous. Neither is watching a useful assembly come apart because nobody wanted to "
-				.. "carry the right ones."
+				"Bring the fasteners on the list. I need a place where I can sort what comes in and keep the "
+				.. "useful pieces together. Without enough of these, the workbench turns into several small "
+				.. "piles on the floor."
 			),
 			completion = (
-				"Useful. Put it by the bench. Those will do. Small things first; the heavy things are "
-				.. "much more cooperative when they're held together."
+				"That'll do. Put them there. I can get the bench sorted without having to spend the rest of "
+				.. "the day looking for the things I just put down."
 			),
 			requirements = {
 				{

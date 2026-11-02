@@ -4,7 +4,7 @@ DIALOGUE.townContact = "egghead"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Show me the goods.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Hello.",
+	response = "Hello. Have you brought something interesting, or have you come to interrupt the search for it?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -87,11 +87,12 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "What do you actually enjoy about studying artifacts?",
+	statement = "Do you miss the university?",
 	response = (
-		"When something refuses to fit. Frustrating, naturally, but at least I know I'm not simply copying "
-		.. "what somebody else decided. The problem is finding enough good observations to distinguish a "
-		.. "surprise from my own mistake."
+		"The equipment. A library where the book you need hasn't been used to level a table. "
+		.. "Occasionally the conversation. Then I remember spending an afternoon defending a result to "
+		.. "someone who hadn't read it. Here, at least, an objection sometimes arrives in a container and "
+		.. "does something interesting."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -99,9 +100,10 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "Is admitting a mistake difficult?",
 	response = (
-		"Less difficult than listening to Beanstalk identify it for me. Don't look so pleased. I'll change "
-		.. "an explanation when the evidence warrants it. I'd merely prefer the evidence to arrive before the "
-		.. "lecture."
+		"Less difficult than listening to Beanstalk identify it for me. Don't look so pleased. I'll "
+		.. "change an explanation when the evidence warrants it. I'd merely prefer the evidence to arrive "
+		.. "before the lecture. Finding out why I was wrong can be more interesting than being right in the "
+		.. "first place."
 	),
 	options = {"BackTopic"},
 })

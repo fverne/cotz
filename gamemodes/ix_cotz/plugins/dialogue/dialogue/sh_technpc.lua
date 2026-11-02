@@ -4,7 +4,10 @@ DIALOGUE.townContact = "technut"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Absolutely!")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Hello, buddy!",
+	response = (
+		"Hello, buddy! Come in, come in. Mind the little parts on the bench; I have only just found that "
+		.. "screw."
+	),
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -372,21 +375,22 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "What's a repair you actually enjoy?",
+	statement = "Do you ever leave anything alone?",
 	response = (
-		"Hoho, something somebody swears is finished! Then you clean a contact, free one little seized part, "
-		.. "and suddenly it wants to live again. Mind you, sometimes it's completely finished. You have to let "
-		.. "me have a look before the funeral."
+		"Certainly! Mute's things, mostly. He has become very clear about that. Gasket says I should "
+		.. "finish one improvement before beginning the next, which sounds reasonable until you see the "
+		.. "next one. Bring yours here. Tell me what you need it to do first, before I get myself into "
+		.. "trouble."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Does everyone let you improve their equipment?",
+	statement = "What makes a repair satisfying?",
 	response = (
-		"Gasket says repair, not improve. Very firmly. Mute just puts his hand over whatever I'm reaching "
-		.. "for. Fair enough! It's their equipment. Still, if a thing is already on the bench, you can see why "
-		.. "I'd have ideas."
+		"When someone thinks the whole thing is finished and it only needs one stubborn part freed. Not "
+		.. "always, of course. Sometimes it really is finished. But let me look before you bury it! And if "
+		.. "I get carried away explaining, you can tell me. Gasket always does."
 	),
 	options = {"BackTopic"},
 })

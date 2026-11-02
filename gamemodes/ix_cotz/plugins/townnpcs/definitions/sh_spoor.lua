@@ -101,13 +101,13 @@ PLUGIN:Register("spoor", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring what's listed here. Keep it in good condition; I need to examine it. Keep the "
-				.. "specimen as it is. Cleaning away something you find unpleasant can remove the thing I "
-				.. "wanted to see."
+				"Bring the parts on the list. I want to look them over properly. You can learn more from "
+				.. "what's left of an animal if you keep track of what you took, instead of throwing everything "
+				.. "in one bag and calling it a trophy."
 			),
 			completion = (
-				"Let me check the condition. Good. Leave it there while I look. There's no need to make "
-				.. "a story out of it before we've started."
+				"Set them down. I'll have a look. Thanks for bringing what I asked for; it saves us trying "
+				.. "to work out which piece came from what."
 			),
 			requirements = {
 				{

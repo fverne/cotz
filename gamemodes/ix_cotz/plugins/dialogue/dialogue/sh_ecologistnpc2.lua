@@ -4,7 +4,10 @@ DIALOGUE.townContact = "beanstalk"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Keep it down!")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Hello.",
+	response = (
+		"Hello. Please don't touch the samples. You can stand there; I can still hear you perfectly "
+		.. "well."
+	),
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -19,15 +22,25 @@ DIALOGUE.addTopic("GREETING", {
 
 DIALOGUE.addTopic("BackgroundTopic", {
 	statement = "What is this place?",
-	response = "Classified. But since you are acting nice, you get to stay.",
+	response = (
+		"A research station. Some details are restricted, but you don't need a clearance to understand "
+		.. "why I want the samples left alone. One careless hand can give me a week's worth of consistent "
+		.. "rubbish, and then somebody makes a decision based on it. Ask if you're curious; just don't "
+		.. "open anything while we talk."
+	),
 	options = {
 		"BackgroundTopic2",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Alright, I'll behave.",
-	response = "Good dog. Remember we have the military on hotline.",
+	statement = "What are you researching?",
+	response = (
+		"Conditions outside, and how they change. We collect readings and compare them with controls; "
+		.. "the difficult part is knowing what else changed while we were looking. I'm more willing to "
+		.. "discuss the method than hand over someone else's research. Which, before you ask, is a "
+		.. "distinction I apply to everyone."
+	),
 	options = {
 		"BackTopic",
 	},
@@ -261,20 +274,21 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Why are you so particular about the samples?",
+	statement = "Do you think everyone outside the lab is an idiot?",
 	response = (
-		"Because one careless hand can give me a week's worth of beautifully consistent rubbish. Then "
-		.. "somebody acts on it. Keep your hands off the tray and we can avoid the lecture that follows."
+		"No. I think experienced people become very inventive about explaining why a precaution applies "
+		.. "to somebody else. Vesper certainly does. She also notices things I would miss. We manage better "
+		.. "when she tells me what happened and I resist beginning with what I told her beforehand."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Is that why you worry about the field teams?",
+	statement = "Is that why you ask so many questions?",
 	response = (
-		"I worry because they have to work where we cannot control the conditions. Vesper knows that; we "
-		.. "disagree about the margin. I'd rather she found my questions irritating than found a question I "
-		.. "should have asked too late."
+		"I worry because they have to work where we cannot control the conditions. I'd rather someone "
+		.. "found my questions irritating than discovered one I should have asked too late. That doesn't "
+		.. "make every precaution practical. It does mean we should discuss the ones we're leaving out."
 	),
 	options = {"BackTopic"},
 })

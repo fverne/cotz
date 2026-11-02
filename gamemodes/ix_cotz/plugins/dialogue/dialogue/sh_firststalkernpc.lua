@@ -4,7 +4,10 @@ DIALOGUE.townContact = "the-original"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Yes!")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Hello, I'm the original. The first stalker in the zone. What do you need?",
+	response = (
+		"You found me. They call me the Original. First stalker in the Zone, if you're asking. What can "
+		.. "I do for you?"
+	),
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -79,15 +82,10 @@ DIALOGUE.addTopic("TutorialTopic1", {
 DIALOGUE.addTopic("TutorialTopic1_1", {
 	statement = "How can I help out?",
 	response = (
-		"If we work together, I'm sure we will get this place in "
-		.. "proper shape in no time. Go talk to the other inhabitants, "
-		.. "and see if they need anything. You'll be properly rewarded. "
-		.. "Both personally by the inhabitant, but as we keep helping "
-		.. "each other out, it will unlock more opportunities for us "
-		.. "to do, and more people will move here, each with their "
-		.. "own agendas. You should ask around to see what people need "
-		.. "help with. Both us oldies, but also the younger opportunity "
-		.. "seekers like yourself."
+		"Talk to the people here and see what they need. Some will ask for supplies, some for work "
+		.. "outside. You'll have to decide who you trust and what you can manage. I can point you towards "
+		.. "a few useful conversations, but I won't pretend everyone here has the same reasons for "
+		.. "staying."
 	),
 	options = {
 		"TutorialTopicBack",
@@ -482,21 +480,22 @@ DIALOGUE.addTopic("InterestMoreTopic", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Does it bother you when people question your stories?",
+	statement = "Does everyone believe you were first?",
 	response = (
-		"Depends who's asking. Someone who's been out there and noticed something? I'll listen. Someone who "
-		.. "read three pages and decided the rest of us are idiots? He can buy his own drink while he explains "
-		.. "himself."
+		"Everyone benefits from arguing about it, apparently. Ask them who was here first and suddenly "
+		.. "they're historians. Ask who helped get this place standing and they remember an appointment "
+		.. "elsewhere. You don't have to believe every word I say. Listen long enough to find the useful "
+		.. "ones."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Would you admit if you'd remembered something wrong?",
+	statement = "Would you admit remembering something wrong?",
 	response = (
-		"I'd want a proper look at the evidence first. Carbon would like every memory to arrive dated and "
-		.. "signed. Mine didn't. Doesn't mean it never happened. Doesn't mean I remember every damned detail, "
-		.. "either."
+		"If you can show me, yes. Carbon wants every memory dated and signed. Mine didn't arrive that "
+		.. "way. Doesn't make an old account worthless, and it doesn't make it perfect either. Sit down "
+		.. "with the evidence and I'll hear you out. Just don't expect me to enjoy it."
 	),
 	options = {"BackTopic"},
 })

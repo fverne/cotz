@@ -95,16 +95,34 @@ or reset existing characters as a side effect of this plan.
 
 Trusts Ballast's local knowledge and Ledger's records. Cross-checks The Original's stories; works with Wake on missing routes.
 
-| Moment | Draft response |
-| --- | --- |
-| Greeting | A route is only useful if it still gets you home. |
-| About repeatable work | Set the recorder down, let it finish, bring it back. We need measurements we can trust. |
-| Story conclusion | I'll put their names on the finished sheet. They earned that much. |
+### Implemented voice candidate — awaiting review
 
-These samples propose tone, not final dialogue. Preserve existing voice where applicable.
-Author editable briefings, partial-progress replies, checkpoint announcements, locked responses,
-completion lines, pending-claim messages, referrals, and before/after relationship topics.
-A final greeting or recognition is personal unless an explicitly global event is designed.
+Atlas's dialogue has been rewritten for an individual review before the other contacts.
+This candidate supersedes his earlier sample lines; its new anecdotes remain subject to user review.
+
+- Patient and gently inquisitive; he enjoys hearing something he has not noticed himself.
+- Meticulous without demanding polished accounts. He helps people describe uncertainty and admits
+  when his own assumptions have made a conversation harder.
+- Uses developed, conversational answers, modest humour, and ordinary details from survey work.
+  Avoid repeated map aphorisms, lectures, and treating every conversation as a safety briefing.
+- Concern for missing explorers emerges through careful handling of their records and reluctance to
+  overstate conclusions. He does not know the contents of recovered evidence before examining it.
+- Familiarity grows through the existing progression: early practical cooperation becomes gratitude
+  for sustained work, then an invitation to stay after the final return. Parallel branches do not
+  assume the other branch has happened.
+- Relationships retain Ballast's practical challenges, Ledger's useful records, and Wake's complementary
+  recovery work. The new fence-work and pipe anecdotes are characterization for this review, not new quests.
+
+| Moment | Implemented example |
+| --- | --- |
+| Introduction | Hello. Come round this side; there's room. If you've just come in from outside, I'd like to hear how you found the walk. But catch your breath first. What can I do for you? |
+| Asking for observations | You needn't have the right words. I'd rather you described a muddy bank badly than called it a road because that sounds more useful. |
+| Admitting an assumption | The tree was a pipe. He remembered it perfectly well; I'd supplied the branches. |
+| Completed-story greeting | Hello again. I've made room beside the finished sheets. Sit down, if you have time. I'd like to hear about a walk that didn't begin with me asking you to fetch something. |
+
+All 22 finite briefings and completion replies have individual text in the linked runtime definition.
+Requirements, rewards, objective UI, destinations, prerequisites, and topic navigation are unchanged.
+Briefings explicitly include the existing Ballast, Ledger, and Wake deliveries and return to Atlas.
 
 ## Implementation and availability notes
 

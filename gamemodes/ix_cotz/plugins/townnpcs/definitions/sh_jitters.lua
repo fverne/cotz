@@ -93,13 +93,13 @@ PLUGIN:Register("jitters", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I'm short of these. Check the list, and keep everything clean on the way here. Please. "
-				.. "Check the packaging before you bring it. I don't want to discover a problem after I've "
-				.. "put it with the clean supplies."
+				"I'm short of the medical supplies on this list. Could you bring them here? I'd like to sort "
+				.. "them before the next person arrives needing something urgently. They always seem to arrive "
+				.. "just when I've started rearranging the cabinet."
 			),
 			completion = (
-				"Clean enough. Put it here. Thank you. It's a small thing until I reach for it and there "
-				.. "isn't any. Then it becomes the only thing I can think about."
+				"Thank you. Put them here, please. I'll check and put them away. That's one less thing to "
+				.. "worry about until I think of another one."
 			),
 			requirements = {
 				{

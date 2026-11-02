@@ -5,8 +5,8 @@ ix.dialogue.AddTradeTopic(DIALOGUE, "Uhh... You got anything for sale?", "...")
 
 DIALOGUE.addTopic("GREETING", {
 	response = (
-		" ** The man in front of you seems not even to aknowledge "
-		.. "your presence, and stares at some object on the table **"
+		"** He notices you, sets a small screwdriver across the open device, and waits with one hand "
+		.. "resting over the exposed components. **"
 	),
 	options = {
 		"SpecialtyTopic",
@@ -125,19 +125,21 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Am I distracting you?",
+	statement = "Can I watch?",
 	response = (
-		"** He holds up one finger without looking away from the bench. After a few careful movements he "
-		.. "sets the tool down, turns his chair slightly, and waits. **"
+		"** He looks from you to the open device. After a moment, he moves a stool away from the loose "
+		.. "components and taps its seat. ** ** You reach towards the bench. One finger rises. He waits "
+		.. "until your hand is back in your lap, then turns the device slightly so you can see. **"
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "You'd rather I waited than touched anything?",
+	statement = "Should I leave the tools alone?",
 	response = (
-		"** He glances at your hands, then at the crowded bench. A small nod. He moves a clear tray within "
-		.. "your reach and keeps the open device on his side of the table. **"
+		"** He gives you a level look, then moves an empty tray between you and the work. After a pause, "
+		.. "he places one loose screw in it and nudges it towards you. He watches until you set it down, "
+		.. "then returns to the device. **"
 	),
 	options = {"BackTopic"},
 })

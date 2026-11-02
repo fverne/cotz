@@ -73,14 +73,13 @@ PLUGIN:Register("carbon", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring the supplies on this list. I'll keep them separate from the records until they're "
-				.. "checked. A readable record is useful even when it seems ordinary. We can decide its "
-				.. "significance after we have kept it from disappearing into the clutter."
+				"I need the administrative records on this list brought here. A useful account deserves "
+				.. "somewhere to go when it arrives. Otherwise I end up with a stack of pages and an "
+				.. "increasingly imaginative system for remembering which is which."
 			),
 			completion = (
-				"Thank you. I'll keep it away from the loose papers. Thank you. I'll check what belongs "
-				.. "together before filing anything. Starting carefully saves a great deal of later "
-				.. "invention."
+				"Thank you. I'll sort these before the next stack lands on top of them. A filing system is "
+				.. "only impressive when someone besides its inventor can find anything."
 			),
 			requirements = {
 				{

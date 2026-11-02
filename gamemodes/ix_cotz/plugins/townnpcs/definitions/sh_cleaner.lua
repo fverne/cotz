@@ -56,12 +56,13 @@ PLUGIN:Register("cleaner", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring what's on the list. Leave it with me. It's a simple order. I'd like it to remain "
-				.. "one after you've finished reading."
+				"Bring the maintenance supplies on the list. Here. I need a few things prepared before I "
+				.. "send anything out. You can read an order and bring what it asks for; that's enough to start "
+				.. "with."
 			),
 			completion = (
-				"Put it there. Correct. That's how I like an introduction: something useful arrives and "
-				.. "nobody needs a long explanation."
+				"That's what I asked for. Leave it there. If you've questions about further work, ask them "
+				.. "before you pick anything up."
 			),
 			requirements = {
 				{

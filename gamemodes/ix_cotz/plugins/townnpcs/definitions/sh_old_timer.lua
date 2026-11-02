@@ -72,13 +72,13 @@ PLUGIN:Register("old-timer", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Food first. If you can't spare enough to leave here, you haven't packed enough to "
-				.. "wander off. You'd be surprised how often a man remembers ammunition and forgets his "
-				.. "stomach. We're not starting with that mistake."
+				"Before we talk about anything else, bring the canned food on the list. If you're going out "
+				.. "hungry already, you won't make better decisions when the walk takes longer than you "
+				.. "thought. Keep something for yourself as well."
 			),
 			completion = (
-				"Good. Keep enough in your own pack. I don't want to hear you went hungry getting here. "
-				.. "That's the sensible bit done. It isn't exciting, but you'll appreciate it later."
+				"That'll do. Put it there. And check your own pack before you leave; I meant what I said "
+				.. "about keeping something back."
 			),
 			requirements = {
 				{

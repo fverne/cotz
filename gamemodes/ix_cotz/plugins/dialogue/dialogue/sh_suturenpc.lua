@@ -4,7 +4,7 @@ DIALOGUE.townContact = "suture"
 ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Let me see the condition.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Turn around. That strap is doing half the work of the whole pack.",
+	response = "Hold still a moment. Your strap is twisted. There. Now, what did you come in for?",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -67,11 +67,11 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Can you really judge a trip by someone's straps?",
+	statement = "Does everything have to be practical?",
 	response = (
-		"I can tell what rubbed, what was overloaded, and what someone tied in a hurry. The wearer usually "
-		.. "tells me the rest while insisting none of it was their fault. Hold still long enough and equipment "
-		.. "is quite informative."
+		"No. You're allowed to like how something looks. I'd rather you said so than invented a "
+		.. "technical reason for wanting it. We can consider appearance after it fits. Stand naturally, "
+		.. "please. Nobody spends six hours walking with their chest pushed out like that."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -79,9 +79,9 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "Does it bother you when your work comes back damaged?",
 	response = (
-		"It bothers me when nobody mentions where it failed. A torn seam I can inspect. 'It just went' isn't "
-		.. "much help. Arena Master's customers are particularly inventive about how nothing happened to their "
-		.. "gear."
+		"It bothers me when nobody mentions where it failed. A torn seam I can inspect. 'It just went' "
+		.. "isn't much help. Arena Master's customers are particularly inventive about how nothing happened "
+		.. "to their gear. I'd rather hear the embarrassing version and make the next one fit better."
 	),
 	options = {"BackTopic"},
 })

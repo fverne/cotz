@@ -4,7 +4,7 @@ DIALOGUE.townContact = "quartermaster"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "I have some spare equipment laying around, yes.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Did you just crawl out of the underground?",
+	response = "State what you need. If this concerns an order, have the details ready.",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -128,19 +128,21 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "What makes someone a supplier you can rely on?",
+	statement = "Why can't you make an exception?",
 	response = (
-		"Correct goods. Correct quantities. Problems reported while there is still time to address them. You "
-		.. "do not need an elaborate introduction. You need to deliver what you agreed to deliver."
+		"Because I have already promised those supplies elsewhere. If your need has changed, explain it. "
+		.. "I can reconsider an allocation. I cannot issue the same equipment twice because both people "
+		.. "gave persuasive accounts of their difficulties."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What if the order can't be filled?",
+	statement = "What if an order can't be filled?",
 	response = (
-		"Say so. A shortage I know about can be planned around. A shortage concealed by optimism becomes "
-		.. "someone else's emergency. Brass understands the distinction. I recommend learning it."
+		"Say so while there is time to make another arrangement. A shortage I know about can be planned "
+		.. "around. A shortage concealed by optimism becomes someone else's emergency. Brass understands "
+		.. "the distinction. You don't need a speech; I need the facts."
 	),
 	options = {"BackTopic"},
 })

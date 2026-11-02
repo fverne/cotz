@@ -4,7 +4,7 @@ DIALOGUE.townContact = "intern"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Absolutely!")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Hello.",
+	response = "Hello. Sorry about the equipment; I was in the middle of counting it. What can I help you with?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -63,10 +63,11 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Do they really leave you counting equipment all day?",
+	statement = "Why don't you ask for more responsibility?",
 	response = (
-		"Not all day. There are forms afterwards. Sorry, that sounded worse than I meant it to. I know the "
-		.. "equipment matters. I'd just like being able to explain a result to count for something too."
+		"I have. Apparently knowing where every instrument is makes me indispensable to the cupboard. "
+		.. "Sorry, that was unkind. Someone has to do it. I'd just like a chance to make a mistake that "
+		.. "belongs to my own research for once."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -74,9 +75,9 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "What would you work on if you could choose?",
 	response = (
-		"A survey I could take responsibility for from start to finish. Set it up, check the readings, write "
-		.. "what I actually found. Vesper says knowing when to stop is part of the work. I'm trying to remember "
-		.. "that too."
+		"A survey I could take responsibility for from start to finish. Set it up, check the readings, "
+		.. "write what I actually found. Vesper says knowing when to stop is part of the work. I'm trying "
+		.. "to remember that too, even when I think I can get one more useful reading."
 	),
 	options = {"BackTopic"},
 })

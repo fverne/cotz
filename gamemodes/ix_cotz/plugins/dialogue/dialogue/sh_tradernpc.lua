@@ -4,7 +4,10 @@ DIALOGUE.townContact = "haggler"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Absolutely, here's what I have in stock.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Welcome to my humble shop.",
+	response = (
+		"Welcome. Take a look, but don't start an argument about the price until you've found something "
+		.. "you want."
+	),
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -153,20 +156,21 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Do you like any of your customers?",
+	statement = "Do you ever do someone a favour?",
 	response = (
-		"Certainly. The ones who know what they want, pay for it, and leave me enough daylight to replace "
-		.. "it. You look offended. Were you hoping for a speech about friendship? I charge extra for those."
+		"Frequently. They become terribly confused when the bill arrives. Oh, stop looking at me like "
+		.. "that. Sometimes a person needs another day to pay. I can usually tell who means it. The "
+		.. "difficult customers are the ones who mistake an extra day for a new business model."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Then why bother keeping people supplied?",
+	statement = "Why give them another day?",
 	response = (
-		"Because a customer who makes it home can come back. Try explaining that to someone who thinks "
-		.. "business means emptying every pocket on the first visit. I want you dissatisfied with my prices for "
-		.. "years."
+		"A customer who gets home can come back. Someone who feels cheated every time eventually finds "
+		.. "another seller, even if that seller charges more. I prefer you annoyed by my prices for years. "
+		.. "It's a much healthier relationship than most people manage."
 	),
 	options = {"BackTopic"},
 })

@@ -4,7 +4,7 @@ DIALOGUE.townContact = "brass"
 ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "We'll count it first.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Put the boxes down. We'll count them before we discuss payment.",
+	response = "Put the boxes where I can see the markings. If you're here for something else, say so.",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -67,10 +67,11 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Do you really count every box yourself?",
+	statement = "You think I'm shorting you?",
 	response = (
-		"I count what I accept responsibility for. You can tell me a box is full. I can look. Takes less "
-		.. "time than explaining a shortage to someone who needed what wasn't there."
+		"Haven't counted yet. You may have brought too much. People make that mistake as well, though "
+		.. "they're less offended when I notice. Put your total here beside mine. If they differ, we count "
+		.. "again. Nobody needs a character assessment over a pencil mark."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -79,7 +80,8 @@ DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "Doesn't that make people think you distrust them?",
 	response = (
 		"Some of them. Quartermaster understands. If we both count it, neither has to remember how "
-		.. "convincing the other fellow sounded. Honest suppliers tend to get used to it quickly."
+		.. "convincing the other fellow sounded. Honest suppliers tend to get used to it quickly. Once we "
+		.. "agree what's there, I know what I can promise the next person."
 	),
 	options = {"BackTopic"},
 })

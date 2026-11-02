@@ -4,7 +4,10 @@ DIALOGUE.townContact = "wake"
 ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Of course. What do you need?")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "A name, a last location, anything they were carrying. Start there.",
+	response = (
+		"Hello. If you're looking for someone, we can start with their name. Otherwise, tell me what you "
+		.. "need."
+	),
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -67,19 +70,21 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "What should someone tell you before a search?",
+	statement = "What if I can't explain a disappearance properly?",
 	response = (
-		"What they know, and how they know it. A last location from someone who saw them is different from a "
-		.. "story passed round a table. Both can help, if nobody dresses one up as the other."
+		"We can do it slowly. Start with the last time you spoke to them yourself. Anything you heard "
+		.. "afterwards, we'll write separately. You don't have to make it sound sensible before you tell "
+		.. "me. That's part of what we're here to work out."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Do people expect you to promise they'll be found?",
+	statement = "Can you promise you'll find them?",
 	response = (
-		"Yes. I understand why. I can promise to take the information seriously and be careful with what "
-		.. "comes back. I won't give someone an answer just because waiting is painful."
+		"No. I can promise to take the information seriously and be careful with what comes back. A last "
+		.. "location from someone who saw them is different from a story passed round a table. Both can "
+		.. "help, provided we don't dress one up as the other."
 	),
 	options = {"BackTopic"},
 })

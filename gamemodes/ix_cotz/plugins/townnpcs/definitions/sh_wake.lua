@@ -73,13 +73,13 @@ PLUGIN:Register("wake", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need these supplies to keep the searches going. Bring them here when you have them. "
-				.. "People remember the dramatic part of a search. Keeping the supplies ready is how we "
-				.. "avoid making the search party another worry."
+				"I need the maintenance supplies on this list brought here. There's always something to "
+				.. "sort, secure, or set aside when belongings come back. I'd rather have the supplies ready "
+				.. "than rush through that work because someone's waiting for an answer."
 			),
 			completion = (
-				"Thank you. I'll keep it with the search supplies. That will help. I'm glad you've "
-				.. "started with something practical rather than asking me for the worst story I know."
+				"Thank you. I'll put these with the recovery supplies. It's a small job, but it gives me "
+				.. "time to handle the things people bring back with care."
 			),
 			requirements = {
 				{

@@ -4,7 +4,7 @@ DIALOGUE.townContact = "arena-master"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Sure, I have some arena supplies.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Greetings, I am the arena master.",
+	response = "Welcome. Looking for a match, or just somewhere to watch people make ambitious decisions?",
 	options = {
 		"SpecialtyTopic",
 		"HealTopic",
@@ -521,20 +521,21 @@ DIALOGUE.addTopic("InterestMoreTopic", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Do you enjoy watching people get hurt?",
+	statement = "Can you tell who's going to win?",
 	response = (
-		"I enjoy a good match. There's a difference, even if Jitters doesn't think I remember it. Someone "
-		.. "who knows when to stop is a better prospect than a fellow who needs carrying out to prove a point."
+		"Sometimes. Then the favourite does something wonderfully stupid and earns everyone's attention. "
+		.. "I watch the quiet one while the loud one explains himself. Usually learn more. You thinking of "
+		.. "entering, or would you prefer to stand here and become an expert with the rest of us?"
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What makes someone worth watching?",
+	statement = "What makes a fighter worth watching?",
 	response = (
-		"They adapt. First plan goes wrong and they try another one, instead of getting furious with the "
-		.. "world. Doesn't hurt if they give the other contender a decent match, either. A foregone conclusion "
-		.. "is a dull afternoon."
+		"They adapt. First plan goes wrong and they try another instead of getting furious with the "
+		.. "world. Doesn't hurt if they give the other contender a decent match, either. A foregone "
+		.. "conclusion is a dull afternoon, whatever the winner tells you afterwards."
 	),
 	options = {"BackTopic"},
 })

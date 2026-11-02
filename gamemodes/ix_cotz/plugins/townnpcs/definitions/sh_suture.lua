@@ -118,13 +118,13 @@ PLUGIN:Register("suture", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring the supplies listed here. Let me check the condition before putting them to use. "
-				.. "Let me inspect the material before you start folding it into the rest. A neat bundle "
-				.. "can hide damage quite effectively."
+				"I need the textiles on this list. Bring them here and let me see what condition they're in. "
+				.. "There is a difference between material that's worn and material that has already given up; "
+				.. "I'd like to decide which before cutting anything."
 			),
 			completion = (
-				"Let me check it for damage first. That's a useful start. Now I can spend time on the "
-				.. "work instead of wondering what has been shoved underneath it."
+				"Good. Put them on the bench. I'll sort them before I start. And thank you for bringing the "
+				.. "material in a state where I can actually see what I have to work with."
 			),
 			requirements = {
 				{

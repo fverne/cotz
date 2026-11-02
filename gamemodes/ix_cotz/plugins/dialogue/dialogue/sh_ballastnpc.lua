@@ -4,7 +4,7 @@ DIALOGUE.townContact = "ballast"
 ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Set it down. Let me have a look.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Water's patient. Be a shame to let it outlast you over a parcel.",
+	response = "Come closer if you like. Mind the ground there; it looks firmer than it is. What have you got?",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -67,19 +67,21 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "What makes a parcel worth going back for?",
+	statement = "You don't sound impressed by urgent work.",
 	response = (
-		"Depends who needs it, what it weighs, and how foolish the trip would be. People tell you the first "
-		.. "part very loudly. You have to ask about the other two yourself."
+		"Urgent usually means someone spent three days making it my problem. I'll hear them out. Might "
+		.. "be medicine. Might be Haggler remembering a promise he made while drinking. Either way, I'd "
+		.. "like to know what I'm carrying before I discover I need another pair of hands."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "And if they say the trip is perfectly safe?",
+	statement = "What if they say the trip is perfectly safe?",
 	response = (
-		"Then I ask why they're still standing beside me. Don't mistake that for refusing the work. I just "
-		.. "like the difficult bits explained before I've got both hands full."
+		"Then I ask why they're still standing beside me. Don't mistake that for refusing the work. I "
+		.. "just like the difficult bits explained before I've got both hands full. If a person knows the "
+		.. "route, they can tell me what made them choose it."
 	),
 	options = {"BackTopic"},
 })

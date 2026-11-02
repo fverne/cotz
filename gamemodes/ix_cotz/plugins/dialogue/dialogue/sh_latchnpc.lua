@@ -4,7 +4,7 @@ DIALOGUE.townContact = "latch"
 ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Show me the condition first.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "If it still has a serial plate, it isn't just scrap.",
+	response = "Got something to show me? Put it down where I can see the part that actually does the work.",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -67,20 +67,21 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "How do you decide what is still worth salvaging?",
+	statement = "Can you teach me what to look for?",
 	response = (
-		"Look at the bits that have to fit, not the paint. A casing can look terrible and still have sound "
-		.. "parts inside. Can look lovely and be wrecked, too. Costs less to check before you've dragged it "
-		.. "halfway home."
+		"Yes. Pick it up. Tell me where you think it's worn. Don't look at me; look at the part. Being "
+		.. "wrong here costs us a minute. Better than carrying twenty kilos home because you were "
+		.. "embarrassed to ask. We'll see whether the surfaces that need to fit still do."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Do you and Technut agree on what to keep?",
+	statement = "Would Technut make the same choice?",
 	response = (
-		"Usually agree it's useful. Then he starts explaining what else it could do. I want a part that fits "
-		.. "the job in front of me. He wants three jobs and a better version by supper. Keeps things lively."
+		"Usually he'd agree it's useful. Then he'd explain what else it could do. I want a part that "
+		.. "fits the job in front of me. He wants three jobs and a better version by supper. I complain, "
+		.. "but when I can't make sense of something, he's worth asking."
 	),
 	options = {"BackTopic"},
 })

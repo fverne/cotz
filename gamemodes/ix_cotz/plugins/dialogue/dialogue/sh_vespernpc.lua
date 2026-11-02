@@ -4,7 +4,10 @@ DIALOGUE.townContact = "vesper"
 ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Check what you need for the return trip.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "You can admire the field from here. Closer costs preparation.",
+	response = (
+		"Hello. If you're thinking of going near a field, tell me what you've brought before we discuss "
+		.. "where."
+	),
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -67,20 +70,21 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Do you enjoy being near the fields?",
+	statement = "Why keep going back?",
 	response = (
-		"Sometimes. From a sensible distance there's plenty to look at. Up close I'm usually busy checking "
-		.. "the next thing that could make the trip shorter than intended. Enjoyment isn't much of a plan."
+		"Because I like finding something I haven't understood yet. There, you can tell Beanstalk I "
+		.. "admitted it. He thinks that's where the trouble starts. Sometimes he's right. I still want a "
+		.. "proper look. I just want enough supplies left to argue about it afterwards."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Beanstalk thinks you take too many risks?",
+	statement = "Does Beanstalk think you take too many risks?",
 	response = (
-		"He worries aloud; I do the checks before I leave. We get on better when we discuss an actual trip "
-		.. "instead of whether caution is a virtue. He asks useful questions. I don't have to enjoy all of "
-		.. "them."
+		"He worries aloud; I do the checks before I leave. We get on better when we discuss an actual "
+		.. "trip instead of whether caution is a virtue. He asks useful questions. I don't have to enjoy "
+		.. "all of them, and he doesn't have to enjoy all my answers."
 	),
 	options = {"BackTopic"},
 })

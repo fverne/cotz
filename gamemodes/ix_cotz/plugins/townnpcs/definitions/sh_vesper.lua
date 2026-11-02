@@ -61,13 +61,13 @@ PLUGIN:Register("vesper", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring what's on the list. Check your own kit before giving away the supplies you need "
-				.. "to get home. I'm asking for supplies, not for you to strip your own pack bare. Read the "
-				.. "list and leave yourself ready for the journey."
+				"Before the next field trip I need the maintenance supplies on this list. Bring them here "
+				.. "and I'll check the kit. Preparation isn't very exciting to watch, but it gives me more "
+				.. "freedom to pay attention once I'm outside."
 			),
 			completion = (
-				"Good. Check your own supplies before you leave. Useful. Now make sure you haven't left "
-				.. "yourself short. Preparation applies to the person making the delivery too."
+				"Good. I'll check these against the kit. I like an interesting trip as much as anyone; I "
+				.. "just prefer the equipment to be boringly dependable."
 			),
 			requirements = {
 				{

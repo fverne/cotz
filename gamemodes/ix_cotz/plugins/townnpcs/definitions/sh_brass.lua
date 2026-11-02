@@ -218,13 +218,13 @@ PLUGIN:Register("brass", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Match the list. I'll check the quantity and condition when you return. Do the count "
-				.. "before you set off. We will do it again here, but that is no reason to carry an "
-				.. "avoidable mistake across the map."
+				"I need the ammunition specified on the list. Bring it here and we'll check the markings and "
+				.. "count it together. It isn't a complicated order. I'd like us both to know exactly what's "
+				.. "been handed over."
 			),
 			completion = (
-				"Hold on while I count it. Correct. That establishes what arrived, without either of us "
-				.. "needing to take the other's word for it."
+				"The count agrees. Thank you. I'll enter it now while the boxes are in front of me, and we "
+				.. "won't have to rely on either of us remembering later."
 			),
 			requirements = {
 				{

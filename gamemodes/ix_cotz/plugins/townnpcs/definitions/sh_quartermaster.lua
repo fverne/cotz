@@ -316,13 +316,12 @@ PLUGIN:Register("quartermaster", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring the listed supplies. I will check them against the requirement. This establishes "
-				.. "that you can follow a requirement. Read it in full before deciding that something "
-				.. "similar will suffice."
+				"The records specified on this list are required here. Check the order before you leave and "
+				.. "report promptly if you cannot fill it. I will assess the delivery when it arrives."
 			),
 			completion = (
-				"The quantity is correct. Accepted. A straightforward delivery is a better introduction "
-				.. "than a list of promises."
+				"The order is complete. I will record it. You reported what was requested and delivered it; "
+				.. "that is a useful basis for further work."
 			),
 			requirements = {
 				{

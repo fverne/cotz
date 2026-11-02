@@ -4,7 +4,7 @@ DIALOGUE.townContact = "boss"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Sure.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Look what the cat dragged in.",
+	response = "Look what the cat dragged in. What brings you to my part of the operation?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -129,11 +129,12 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "What do you expect from people working for you?",
+	statement = "How am I supposed to work without the full picture?",
 	response = (
-		"That they understand the assignment before leaving. That they distinguish what they saw from what "
-		.. "they assumed. And that they report back. Confidence is useful if there is some competence "
-		.. "underneath it."
+		"Tell me which missing detail affects your decision. If it does, I'll address it. You're "
+		.. "entitled to understand the assignment and the risks we know about. You are also entitled to "
+		.. "refuse it. I'd rather settle that here than discover halfway through that we understood "
+		.. "different arrangements."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -141,8 +142,9 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "Can I question an assignment?",
 	response = (
-		"Before you leave, certainly. Ask about something that affects the work and I'll answer what I can. "
-		.. "I won't discuss everything about the operation because you've found a polite way to ask."
+		"Before you leave, certainly. Ask about something that affects the work and I'll answer what I "
+		.. "can. I won't discuss everything about the operation because you've found a polite way to ask. "
+		.. "If I don't know the answer, I'll tell you that too."
 	),
 	options = {"BackTopic"},
 })

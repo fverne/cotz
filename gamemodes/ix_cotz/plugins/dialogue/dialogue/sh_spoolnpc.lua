@@ -4,7 +4,10 @@ DIALOGUE.townContact = "spool"
 ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Yes. Mind the leads.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Hold on. That's a voice I haven't heard in a while.",
+	response = (
+		"Hold on, let me turn that down. There. Come in. Have you come from far, or are you escaping the "
+		.. "noise too?"
+	),
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -67,20 +70,22 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "How do you keep listening for so long?",
+	statement = "Does anyone call just to talk?",
 	response = (
-		"Bad tea, mostly. And people have habits. One clears his throat before every call, another "
-		.. "apologises for the noise even when there isn't any. After a while you're listening for someone, not "
-		.. "just a signal."
+		"Oh, constantly. Weather, boots, somebody else's terrible cooking. One fellow described a whole "
+		.. "card game to me because nobody at his table would listen. You complain about it, then he misses "
+		.. "a check-in and you'd happily hear every hand again. Sit down, if you've got a minute. Tell me "
+		.. "something ordinary."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What happens when you stop hearing them?",
+	statement = "What do you do when you stop hearing someone?",
 	response = (
-		"I check before I decide what it means. Equipment fails. People change their plans. Wake understands "
-		.. "why I won't call silence an answer. Doesn't make the waiting much easier for either of us."
+		"Check before I decide what it means. Equipment fails. People change their plans. Wake "
+		.. "understands why I won't call silence an answer. We compare what we know and what we only heard "
+		.. "from somebody else. Doesn't make the waiting much easier for either of us."
 	),
 	options = {"BackTopic"},
 })

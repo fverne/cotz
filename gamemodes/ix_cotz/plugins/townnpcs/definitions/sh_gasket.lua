@@ -82,13 +82,13 @@ PLUGIN:Register("gasket", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"This is what I'm short of. Check the list before carrying something heavy all the way "
-				.. "here. This lot is for use, not decoration. Bring what the list says and keep the "
-				.. "containers from leaking over everything else."
+				"Fuel. The kind on the list, brought here. People get surprisingly interested in the "
+				.. "generator when it stops; I'd like to have something ready before they come and explain the "
+				.. "problem to me."
 			),
 			completion = (
-				"Put it down before you spill it. Good. I'll put it where it belongs before someone "
-				.. "decides it's a convenient place to rest their boots."
+				"That's what I asked for. Good. I'll put it where it belongs. If anyone asks, the lights are "
+				.. "still on because people brought fuel, not because the machine developed a generous nature."
 			),
 			requirements = {
 				{

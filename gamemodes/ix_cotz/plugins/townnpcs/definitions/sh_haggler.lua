@@ -139,13 +139,13 @@ PLUGIN:Register("haggler", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring what's listed here. I'll check the goods before we settle this part of the deal. "
-				.. "I'd like to see how you handle a straightforward order before we start making this "
-				.. "complicated. Saves us both a great deal of talking."
+				"Bring me the maintenance supplies on the list. I need the place kept in order, and I'd "
+				.. "rather find out whether you can fill a simple order before we discuss anything more "
+				.. "ambitious. You can inspect the terms before agreeing. I certainly would."
 			),
 			completion = (
-				"As agreed. Let me count it. Good. You read the order and brought the goods. We may be "
-				.. "able to do business without giving each other a headache."
+				"That's the order. Good. We both know what was asked for and what arrived. You'd be "
+				.. "surprised how many people consider that an unreasonable standard."
 			),
 			requirements = {
 				{

@@ -76,13 +76,14 @@ PLUGIN:Register("beanstalk", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"These are the supplies I need for the work. Keep them separate from anything "
-				.. "contaminated. Put the supplies where I can check them before anything joins the working "
-				.. "equipment. Please don't try to help by unpacking onto a sample tray."
+				"I need the maintenance supplies listed here for the station. Bring them to me, please. A "
+				.. "sample isn't much use if the equipment handling it hasn't been looked after. And do keep "
+				.. "the supplies separate from anything leaking in your pack."
 			),
 			completion = (
-				"Put it on the clear tray. Thank you. I can be particular about this without enjoying "
-				.. "having to repeat myself."
+				"Thank you. Put them on that clear surface. I'll check them before they go near the "
+				.. "equipment. No, that isn't an accusation; I check everything before it goes near the "
+				.. "equipment."
 			),
 			requirements = {
 				{

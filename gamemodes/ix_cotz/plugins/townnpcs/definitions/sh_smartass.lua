@@ -38,15 +38,15 @@ PLUGIN:Register("smartass", {
 		workPrompt = "About the assignments.",
 		offerPrompt = "Do you have an assignment?",
 		work = (
-			"Take the bearings, find the transmitter, bring it back. Pointing in a promising direction isn't a "
-			.. "bearing. Let the extraction finish. Bringing back half the data with a very confident explanation "
-			.. "still leaves me with half the data."
+			"I need data extracted from the computers on the assignment. Take the issued flash drive, "
+			.. "find the computers, and let each extraction finish. Bring the results back. Half the data "
+			.. "and a very confident explanation still leaves me with half the data."
 		),
 		progressionPrompt = "What else needs doing?",
 		progression = (
-			"Signals, missing records, a few things that don't agree. Plenty to keep us amused. There are "
-			.. "records to recover and supplies to stop the equipment becoming an expensive ornament. Pick "
-			.. "something useful. I promise to be appropriately difficult about it."
+			"There are records to recover and supplies to stop the equipment becoming an expensive "
+			.. "ornament. Pick something useful. Read the details before you leave, and I'll do my best to "
+			.. "save the difficult remarks until you get back."
 		),
 	},
 	catalogue = {
@@ -77,13 +77,13 @@ PLUGIN:Register("smartass", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring the supplies on the list. The list is the useful bit; the excuse can stay with "
-				.. "you. Start with the small electronics. If that goes well we can move on to the advanced "
-				.. "skill of following the rest of an instruction."
+				"Bring the small electronics on this list. I need a few things in working order before I "
+				.. "start asking anyone to go near a computer. If you find something interesting on the way, "
+				.. "resist the urge to take it apart with your knife."
 			),
 			completion = (
-				"Yes, that will do. Try not to look so surprised. Useful components, delivered to the "
-				.. "correct person. A stronger opening than some people manage with a whole speech."
+				"Good. Let me check these. You brought what I asked for and didn't demonstrate your repair "
+				.. "technique on them. We're already ahead of several people I could name."
 			),
 			requirements = {
 				{

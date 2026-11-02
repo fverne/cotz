@@ -404,6 +404,31 @@ check(api.AddProgressionValue(counter, "numericFixture", 1), "numeric counter ad
 check(not api.IsCompleted(counter, "numericFixture"), "counter waits for its threshold")
 check(api.AddProgressionValue(counter, "numericFixture", 1), "threshold completes")
 check(not api.AddProgressionValue(counter, "numericFixture", 1), "completed counter rejects replay")
+local notify = api.Notify
+local completionNotice
+api.Notify = function(_, _, message) completionNotice = message end
+for _, townContact in ipairs({false, "atlas"}) do
+	local suffix = townContact or "standalone"
+	local owner = character()
+	owner.name = "Named Completer"
+	local numericID = "namedNumeric/" .. suffix
+	api.Register(numericID, {keyNpc = "Tester", progMap = currentMap, defaultActive = true,
+		townContact = townContact, progressthresholds = {1}, progressfunctions = {},
+		completionMessage = "Thank you."})
+	api.AddProgressionValue(owner, numericID, 1)
+	check(completionNotice == "Named Completer, Thank you.",
+		"numeric completions identify the character for " .. suffix)
+	local deliveryID = "namedDelivery/" .. suffix
+	api.Register(deliveryID, {keyNpc = "Tester", progMap = currentMap, defaultActive = true,
+		townContact = townContact, requirementSlots = {{pool = "fixture", quantity = 1}},
+		completionMessage = "Delivery received."})
+	completionNotice = nil
+	api.AddComplexProgressionValue(owner, deliveryID, {"artifact_bolt", 1})
+	check(completionNotice == "Named Completer, Delivery received.",
+		"delivery completions identify the character for " .. suffix)
+end
+api.Notify = notify
+
 local serverApi = ix.progression
 ix.progression = {definitions = serverApi.definitions}
 SERVER, CLIENT = false, true

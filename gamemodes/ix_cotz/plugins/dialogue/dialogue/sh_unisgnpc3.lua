@@ -4,7 +4,7 @@ DIALOGUE.townContact = "smartass"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "I'm always looking to buy artifacts and mutant parts.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Hello there.",
+	response = "Hello there. If something's broken, tell me what it did before you started helping it.",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -253,10 +253,12 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Do you have to make every answer sound like an insult?",
+	statement = "Can't you get the data yourself?",
 	response = (
-		"No. Some people bring enough of their own material. You want useful conversation, ask something "
-		.. "specific. I can complain about your question and answer it at the same time. Efficient, isn't it?"
+		"Certainly. You stay here and explain my absence to Boss. Use the phrase 'valuable field "
+		.. "experience'; he enjoys that. Or we could divide the work sensibly. You reach the computers, I "
+		.. "deal with what comes back, and neither of us has to pretend your rifle makes you qualified to "
+		.. "repair a drive."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -264,8 +266,9 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "What makes a question worth answering?",
 	response = (
-		"What failed, what you tried, what happened next. Spool can manage it, when he isn't arguing with "
-		.. "the answer. 'It's broken' is a complaint. I already have plenty of those, thanks."
+		"What failed, what you tried, what happened next. Give me something to work with and I might "
+		.. "even manage an answer without an insult. No promises, though. Spool can manage a useful "
+		.. "description when he isn't busy arguing with the answer."
 	),
 	options = {"BackTopic"},
 })

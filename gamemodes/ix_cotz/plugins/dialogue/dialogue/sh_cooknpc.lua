@@ -4,7 +4,7 @@ DIALOGUE.townContact = "spicy-lemon"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Always - You looking for a good meal?")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "What's up?",
+	response = "What's up? If you're hungry, say so. If you've come to tell me how to cook, take a number.",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -181,21 +181,21 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Do you ever get tired of cooking for everyone?",
+	statement = "Why do you keep cooking for everyone?",
 	response = (
-		"Of cooking? No. Of a man telling me how his mother did it while he scrapes the pot clean? Every "
-		.. "bloody day. They come back, though. Say what you like about my manners, nobody has to shout twice "
-		.. "when dinner's ready."
+		"Because you lot would eat cold tins until your teeth fell out. And because I'm good at it. "
+		.. "There, an honest answer. Back home, every meal came with an argument. Here they complain, "
+		.. "scrape the bowl clean, and bring it back. I find that arrangement suits me."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "You keep an eye on who eats?",
+	statement = "You notice who comes back for food?",
 	response = (
-		"I notice who doesn't. Old Timer can remember a track for a week and forget a meal standing beside "
-		.. "it. If there's something left in the pot, I make a nuisance of myself. Don't tell him I said that; "
-		.. "he'll get stubborn about it."
+		"Naturally. Someone has to know how much to make. Old Timer can remember a track for a week and "
+		.. "forget a meal standing beside it. If I put a bowl in his way, that's efficient management of "
+		.. "the kitchen. You can keep that explanation when you see him."
 	),
 	options = {"BackTopic"},
 })

@@ -4,7 +4,7 @@ DIALOGUE.townContact = "cleaner"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Yes")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "What is it?",
+	response = "What is it? If you've come to do business, get to the point.",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -146,15 +146,10 @@ DIALOGUE.addTopic("NotEnoughMoneyStorage", {
 DIALOGUE.addTopic("BackgroundTopic", {
 	statement = "Tell me about yourself.",
 	response = (
-		"Not a whole lot to know. I came here a few months ago, "
-		.. "after the military presence ramped up their presence around "
-		.. "here - turns out the swamps are the only place they haven't "
-		.. "really cut off around the perimeter of the zone, which "
-		.. "means that this is where we stay for now. I worked as a "
-		.. "trader back in the days, so thought I might as well put "
-		.. "my skills to use here too. Oh, and I have a bunch of friends "
-		.. "who can get things. And remove things, like you, if you "
-		.. "keep asking."
+		"I traded before I came here. Found people willing to pay for a secure place to leave their "
+		.. "things and for someone who knows when not to ask questions. That's enough history for a first "
+		.. "conversation. If you want to deal with me, tell me what you need and I'll tell you whether I "
+		.. "can help."
 	),
 	options = {
 		"BackTopic",
@@ -272,20 +267,21 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "What makes a reliable courier?",
+	statement = "How do I know I can trust you?",
 	response = (
-		"Someone who reads the destination before picking up the parcel. Someone who doesn't turn a delivery "
-		.. "into a story with himself in the middle. You've already asked more than most of the good ones."
+		"You don't. Start with something you can afford to lose. Check it when you get it back. Do that "
+		.. "a few times and make your own decision. If you need me to tell you what an honest man I am, "
+		.. "you're going to have an expensive stay here."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Would you prefer I didn't report problems?",
+	statement = "What if something goes wrong with a delivery?",
 	response = (
-		"Report anything that affects the job. Wrong place, missing parcel, bad route. Keep the "
-		.. "embellishments. I need to know what happened well enough to act on it, not well enough to entertain "
-		.. "a table."
+		"Tell me what affects the job. Wrong place, missing parcel, bad route. Don't improve the story "
+		.. "or leave out the part that makes you look foolish. I need enough to decide what happens next. "
+		.. "You can save the performance for someone who asked."
 	),
 	options = {"BackTopic"},
 })

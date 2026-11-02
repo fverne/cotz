@@ -47,13 +47,13 @@ PLUGIN:Register("arena-master", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring these supplies over when you can. There's always something to replace around "
-				.. "here. Less exciting than a match, I know. Still, people notice very quickly when the "
-				.. "supplies aren't ready."
+				"I need the medical supplies on this list brought here. People are much keener to prepare "
+				.. "for a fight than for what happens afterwards, so I keep an eye on both. Have a look at the "
+				.. "order before you head out."
 			),
 			completion = (
-				"Lovely. Put it with the arena supplies. Much appreciated. Nice to meet someone who "
-				.. "helps before the cheering starts."
+				"Good. I'll put these with the preparations. A decent match takes more than two people with "
+				.. "something to prove."
 			),
 			requirements = {
 				{

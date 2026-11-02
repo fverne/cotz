@@ -53,13 +53,13 @@ PLUGIN:Register("spool", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I'm short of what's on this list. Bring it over when you can. Mind the receiver when "
-				.. "you put it down. I'm trying to get ahead of the faults instead of chasing whichever one "
-				.. "shouts loudest. A few decent components would be a start."
+				"I need the small electronic parts on this list. Bring them here, would you? It's difficult "
+				.. "to keep listening when I spend half the evening coaxing an old connection back into "
+				.. "behaving. I'll make room on the desk while you're out."
 			),
 			completion = (
-				"Thanks. I'll put that where I can find it. Good timing. I'll keep these separate from "
-				.. "the bits I'm still arguing with. That pile is less useful than it looks."
+				"Wonderful. Put them by the radio. I'll sort them before I lose another one under this pile. "
+				.. "If you find tea there, don't drink it; I can't remember when I made it."
 			),
 			requirements = {
 				{

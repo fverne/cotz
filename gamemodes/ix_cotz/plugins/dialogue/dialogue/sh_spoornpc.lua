@@ -4,7 +4,10 @@ DIALOGUE.townContact = "spoor"
 ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "Let me see it.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Tell me where you saw it. Then tell me what it was eating.",
+	response = (
+		"You look as though you've been out. See anything feeding, or have you come about something "
+		.. "else?"
+	),
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -67,19 +70,21 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Why don't you care much for trophies?",
+	statement = "What makes a good hunter?",
 	response = (
-		"They tell everyone you killed something. They don't tell you why it was there. I want to know what "
-		.. "it was feeding on and where the rest went. That's more useful on the next walk."
+		"Depends what you're hunting. Patience helps. So does admitting you lost the trail. I've "
+		.. "followed the wrong tracks for an hour because I liked my first explanation. Tell that to Old "
+		.. "Timer if you want. He'll remember a longer version."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Can you tell that much from tracks?",
+	statement = "Can tracks really tell you that much?",
 	response = (
-		"Sometimes. Sometimes you can only tell where to look next. The Original doesn't much like that "
-		.. "answer. A long story is more satisfying than a patch of mud you haven't understood yet."
+		"Sometimes. Sometimes they only tell you where to look next. I want to know what was feeding "
+		.. "there, which way it went, whether anything followed. A trophy tells everyone you killed "
+		.. "something. The ground around it might make the next walk easier."
 	),
 	options = {"BackTopic"},
 })

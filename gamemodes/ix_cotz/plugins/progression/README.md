@@ -35,6 +35,9 @@ Only current registered definitions participate in task discovery and equipment 
 town migration, old-ID permission fallback, completion alias or grandfathered prerequisite handling.
 Old database rows are not rewritten or erased by loading the plugin.
 
+Completion speech prefixes the authored reply with the completing character's current name for
+both town and standalone contacts. Nearby listeners can identify who the NPC is addressing.
+
 ## Runtime and checks
 
 PlayerLoadedCharacter initializes progression storage. Town state initializes through its owning

@@ -4,7 +4,7 @@ DIALOGUE.townContact = "old-timer"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Yes")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Yes?",
+	response = "Still standing, I see. Good. What do you need?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -202,20 +202,21 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "What makes you stop trusting a hunter?",
+	statement = "When do you know someone is ready to go out?",
 	response = (
-		"When he stops looking. Gets himself a good rifle, learns a path, then starts thinking the place "
-		.. "owes him an easy walk. I'd rather go out with someone who admits he's unsure. At least he'll listen "
-		.. "when you tell him to stop."
+		"Ready for what? First time something comes out of the reeds behind you, half of what I told you "
+		.. "may leave your head. Happens. What matters is whether you left yourself somewhere to go. Show "
+		.. "me you can turn back without making excuses, and I'll worry less about sending you out again."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Do you still get unsure?",
+	statement = "Do you ever get it wrong yourself?",
 	response = (
-		"Of course. I just don't waste so much breath pretending otherwise. There are mornings I stay here "
-		.. "and mend things. You can call that getting old if you like. I'm here to hear you say it."
+		"Of course. I used to think admitting it would make people stop listening. Turns out they notice "
+		.. "anyway, and then they have to decide whether to tell you. I'd sooner have someone beside me who "
+		.. "says the path looks wrong than someone waiting politely for me to find out."
 	),
 	options = {"BackTopic"},
 })

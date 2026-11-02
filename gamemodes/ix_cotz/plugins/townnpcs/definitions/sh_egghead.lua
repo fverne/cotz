@@ -103,14 +103,13 @@ PLUGIN:Register("egghead", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Bring the material listed here. I'd like to check it before putting it with the others. "
-				.. "We need a reference before we can make much of a comparison. You may find that less "
-				.. "exciting than collecting something nobody recognises."
+				"I need the artifacts specified on this list. Bring them here so I can compare them "
+				.. "properly. A specimen without context is still interesting, but I'd rather know what I'm "
+				.. "looking at before it becomes somebody else's grand conclusion."
 			),
 			completion = (
-				"Thank you. I'll label these before they get mixed in. A useful beginning. I'll keep the "
-				.. "labelling clear so we don't spend the rest of the programme regretting our first "
-				.. "afternoon."
+				"Good. Set them there. I'll make the comparison before deciding what they mean. Yes, I know "
+				.. "that sounds cautious. Beanstalk would be delighted to hear it."
 			),
 			requirements = {
 				{

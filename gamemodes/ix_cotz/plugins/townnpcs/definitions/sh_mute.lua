@@ -94,13 +94,12 @@ PLUGIN:Register("mute", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"** He marks the required supplies on the list and pushes it back towards you. ** ** He "
-				.. "clears a space beside the order and slides a loose component out of the way, leaving "
-				.. "the list unobstructed. **"
+				"** He sets a component beside a written list and points to the required supplies. He clears "
+				.. "a space on the tray, then turns the list towards you. **"
 			),
 			completion = (
-				"** He checks the components and sets them aside. ** ** He aligns the new components "
-				.. "neatly, then moves the tray closer to his tools. His shoulders relax a little. **"
+				"** He checks the components, sets them on the tray, and gives you a small nod. He moves one "
+				.. "closer to the work in front of him. **"
 			),
 			requirements = {
 				{

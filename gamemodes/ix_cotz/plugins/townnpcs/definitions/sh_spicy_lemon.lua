@@ -116,13 +116,13 @@ PLUGIN:Register("spicy-lemon", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need what's on this list before I can get on with the kitchen work. Bring it over "
-				.. "when you've got it. I can make a meal of what's available, but available is the "
-				.. "important word. Start by bringing what I've asked for."
+				"I need the meals on the list. Yes, meals. Before you ask why a cook wants someone else's "
+				.. "cooking, I can't keep every pot going at once, and there are people waiting to eat. Bring "
+				.. "them here and I'll have a look."
 			),
 			completion = (
-				"Good, I can use that. Lovely. Now I can spend less time chasing supplies and more time "
-				.. "making sure somebody enjoys them."
+				"Let me see. Good. No, I'm not giving you a score. There's enough to do without starting a "
+				.. "competition over who made dinner."
 			),
 			requirements = {
 				{

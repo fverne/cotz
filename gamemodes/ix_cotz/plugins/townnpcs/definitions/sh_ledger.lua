@@ -53,13 +53,13 @@ PLUGIN:Register("ledger", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"Deliver the listed supplies here. I'll record the quantity when it arrives. Keep "
-				.. "everything together until I have checked it. I would like our first entry to be clear "
-				.. "enough that neither of us has to revisit it."
+				"I need the records on this list delivered here. Labels, accounts, and the paperwork around "
+				.. "a shipment are only useful if they survive long enough to be read. Bring the requested "
+				.. "materials and I'll put them to work."
 			),
 			completion = (
-				"Let me enter the quantity. Entered. Thank you for making the beginning simple; there "
-				.. "will be enough complications without inventing one here."
+				"Thank you. I'll enter the delivery while it's here. That gives us an account at both ends, "
+				.. "and one less thing to reconstruct from memory."
 			),
 			requirements = {
 				{

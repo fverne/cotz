@@ -4,7 +4,7 @@ DIALOGUE.townContact = "ledger"
 ix.dialogue.AddTradeTopic(DIALOGUE, "What do you have for sale?", "I'll check what's available.")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "If it's arrived, I need the receipt. If it hasn't, I need a reason.",
+	response = "Hello. If it's arrived, I need the receipt. If it hasn't, I need to know what happened.",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -67,19 +67,22 @@ DIALOGUE.addTopic("GOODBYE", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Why remember every overdue parcel?",
+	statement = "You remember every late parcel?",
 	response = (
-		"Because someone at the other end is making plans around it. A consignment can look like a number on "
-		.. "my desk and still be the thing that stops their work tomorrow. I try to remember both views."
+		"Most of them. The punctual ones leave fewer conversations behind. One involved three "
+		.. "explanations, two proposed destinations, and a man who insisted we'd never met. We had. He was "
+		.. "wearing the same borrowed coat. Would you like to discuss your delivery before it becomes "
+		.. "memorable?"
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What do you do when the two ends disagree?",
+	statement = "What happens when the two ends disagree?",
 	response = (
-		"Keep both accounts until I can check them. Haggler would prefer I remember only the most recent "
-		.. "conversation. Unfortunately for him, writing things down is rather the point of my being here."
+		"I keep both accounts until I can check them. Haggler would prefer I remember only the most "
+		.. "recent conversation. Unfortunately for him, writing things down is rather the point of my being "
+		.. "here. Someone at the other end is making plans around that parcel, so a tidy answer matters."
 	),
 	options = {"BackTopic"},
 })

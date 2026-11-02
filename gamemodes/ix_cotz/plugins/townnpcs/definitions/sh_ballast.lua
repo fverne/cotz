@@ -52,13 +52,13 @@ PLUGIN:Register("ballast", {
 			kind = "delivery",
 			requires = {},
 			briefing = (
-				"I need these supplies. Bring them here, and leave yourself room to carry your own kit. "
-				.. "Leave enough room for your own things. Starting a supply job by making yourself "
-				.. "helpless is a peculiar way to be useful."
+				"I need the maintenance supplies on this list. Bring them here and I'll put them with the "
+				.. "cargo gear. No point discovering a fastening has failed once the package is halfway down a "
+				.. "bank and both hands are occupied."
 			),
 			completion = (
-				"Set it down. No need to throw it. Dry enough, and you're not bent double. A perfectly "
-				.. "respectable start."
+				"Good. Set them down there. I'll check the gear before I need it, which is a habit I "
+				.. "recommend even when there isn't an audience to admire it."
 			),
 			requirements = {
 				{

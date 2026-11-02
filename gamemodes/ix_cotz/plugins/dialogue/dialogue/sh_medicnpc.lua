@@ -4,7 +4,7 @@ DIALOGUE.townContact = "jitters"
 ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "How can I help?")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Welcome!",
+	response = "Come in. Are you hurt? Sorry, I should let you answer before I start looking for a bandage.",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -101,11 +101,12 @@ DIALOGUE.addTopic("NotEnoughMoneyHeal", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Is there ever a quiet day here?",
+	statement = "Are you always this nervous?",
 	response = (
-		"Sometimes. That's when I count everything twice and wonder what I've forgotten. Then somebody comes "
-		.. "in holding a hand where a bandage should be and I remember why I was counting. Sorry. You asked "
-		.. "about a quiet day, didn't you?"
+		"When there's nothing to do, yes. Plenty of time to think of what I've missed. When someone "
+		.. "comes in hurt, there's an order to things. I know the order. It's afterwards I start wondering "
+		.. "whether I should have— Anyway. Are you here because something hurts, or are we discussing my "
+		.. "charming manner?"
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -113,9 +114,9 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "What helps you settle down?",
 	response = (
-		"Clean water. Something to eat that hasn't gone cold while I was busy. Gasket and Lemon can be "
-		.. "impossible, but they remember those things. It helps knowing I don't have to think of absolutely "
-		.. "everything myself."
+		"Clean water. Food while it's still warm. Someone else saying they've checked the door or "
+		.. "counted a shelf, and actually having done it. Gasket and Lemon can both be impossible, but they "
+		.. "remember those things. I don't have to think of absolutely everything myself."
 	),
 	options = {"BackTopic"},
 })
