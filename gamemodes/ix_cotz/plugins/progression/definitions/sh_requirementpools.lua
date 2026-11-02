@@ -5,36 +5,40 @@ ix.progression.itemPools = {
 		name = "Common fasteners",
 		tier = "common",
 		evidence = (
-			"worldspawn_1/3/5: nuts and bolts have equal weights; OnInstanced rolls 3-8 and 4-8 "
-			.. "units."
+			"worldspawn_1: nuts/bolts/nails weights 77/84/57. Screws use Garbage regular (1189); "
+			.. "stack yields are nuts 3-8, bolts 4-8, screws 1-2. Screws are a later-region alternative."
 		),
 		candidates = {
 			{ item = "value_nuts" },
 			{ item = "value_bolts" },
+			{ item = "value_nails" },
+			{ item = "value_screws" },
 		},
 	},
 	batteries = {
 		name = "Portable power",
 		tier = "common",
 		evidence = (
-			"worldspawn_1: 1.5V weight 2000, 9V 1000; spawned ranges 1-6 and 2-3. Portable power "
-			.. "alternatives; requests use the slot quantity."
+			"worldspawn_3: 1.5V/9V/D-cell weights 105/122/96. D-cells are whole items; "
+			.. "the older batteries yield multiple units. D-cells begin in Waystation."
 		),
 		candidates = {
 			{ item = "value_battery" },
 			{ item = "value_9vbattery" },
+			{ item = "value_battery_d_0" },
 		},
 	},
 	small_electronics = {
 		name = "Common electrical components",
 		tier = "common",
 		evidence = (
-			"worldspawn_1: capacitors 700, copper wire 900, household glue 900; use electrical "
-			.. "components only. Capacitors spawn 2-3 units."
+			"worldspawn_1: capacitors/copper wire/light wire weights 42/59/73. "
+			.. "Light wire also serves electrical repairs and field maintenance."
 		),
 		candidates = {
 			{ item = "value_capacitors" },
 			{ item = "value_wire_copper" },
+			{ item = "value_wire_light" },
 		},
 	},
 	workshop_supplies = {
@@ -55,27 +59,32 @@ ix.progression.itemPools = {
 		name = "Wiring and electrical insulation",
 		tier = "uncommon",
 		evidence = (
-			"worldspawn_1: electrical tape 400, light wire 350, spark plugs 400 (1-2 units), "
-			.. "paracord 400. Electrical and field repair supplies overlap."
+			"worldspawn_1: electrical tape/light wire/spark plugs/copper wire weights 64/73/70/59. "
+			.. "Paracord belongs to field repair and textiles, rather than electrical insulation."
 		),
 		candidates = {
 			{ item = "value_tape_electric" },
 			{ item = "value_wire_light" },
 			{ item = "value_sparkplug" },
-			{ item = "value_paracord" },
+			{ item = "value_wire_copper" },
 		},
 	},
 	cleaning = {
 		name = "Household cleaning supplies",
 		tier = "uncommon",
 		evidence = (
-			"worldspawn_1/4: toilet paper and toothpaste have identical weights; detergent is "
-			.. "within 1.84x."
+			"worldspawn_1: paper/toothpaste/detergent weights 85/85/68; shampoo/soap/ "
+			.. "recovered toothpaste/bleach/glass cleaner 84/79/72/74/80. All share Marsh regular loot."
 		),
 		candidates = {
 			{ item = "value_toiletpaper" },
 			{ item = "value_toothpaste" },
 			{ item = "value_detergent" },
+			{ item = "value_shampoo" },
+			{ item = "value_soap" },
+			{ item = "value_household_toothpaste1" },
+			{ item = "value_bleach" },
+			{ item = "value_glasscleaner" },
 		},
 	},
 	adhesives = {
@@ -149,26 +158,29 @@ ix.progression.itemPools = {
 		name = "Field repair supplies",
 		tier = "uncommon",
 		evidence = (
-			"worldspawn_1/3: gun oil 300, paracord 400, light wire 350 and electrical tape 400. "
-			.. "Overlaps electrical repairs and weapon maintenance at comparable weights."
+			"worldspawn_3: gun oil/paracord/light wire/electrical tape weights 72/65/72/72; "
+			.. "lubricant 57. Lubricant also belongs to weapon maintenance."
 		),
 		candidates = {
 			{ item = "value_gunoil" },
 			{ item = "value_paracord" },
 			{ item = "value_wire_light" },
 			{ item = "value_tape_electric" },
+			{ item = "value_lubricant" },
 		},
 	},
 	statues = {
 		name = "Decorative statuettes",
 		tier = "uncommon",
 		evidence = (
-			"worldspawn_2/3/4/5/6: cat/lion/horse share sources with weights within 2x."
+			"worldspawn_2: cat/lion/horse/raven weights 182/116/81/134. "
+			.. "The raven shares the Marsh rare source; other statuettes also appear in later regions."
 		),
 		candidates = {
 			{ item = "value_statue_cat" },
 			{ item = "value_statue_lion" },
 			{ item = "value_statue_horse" },
+			{ item = "value_statue_raven" },
 		},
 	},
 	powder = {
@@ -324,10 +336,12 @@ ix.progression.itemPools = {
 		name = "Engine care",
 		tier = "uncommon",
 		evidence = (
-			"Motor conditioner is a distinct mechanical consumable."
+			"Motor conditioner weights 21/42/47 in worldspawn_1/3/5; small lubricant aerosol "
+			.. "weight 20 in Garbage regular. Large aerosol (105) is excluded as substantially more common."
 		),
 		candidates = {
 			{ item = "value_motorclean" },
+			{ item = "value_wd40_100ml" },
 		},
 	},
 	stash_notes = {
@@ -1075,7 +1089,19 @@ ix.progression.itemPools = {
 	town_textiles = {
 		name = "Textile repair and carrying supplies",
 		tier = "common",
-		candidates = {{item = "value_paracord"}, {item = "value_tape_duct"}},
+		evidence = (
+			"worldspawn_1: paracord/duct tape weights 48/57; rope/grey rope/sewing kit/ "
+			.. "sewing pouch/tarpaulin 85/83/77/80/80. Whole items complement quantity-bearing tape."
+		),
+		candidates = {
+			{item = "value_paracord"},
+			{item = "value_tape_duct"},
+			{ item = "value_rope" },
+			{ item = "value_ropes" },
+			{ item = "value_sewingkit" },
+			{ item = "value_tools_sewing" },
+			{ item = "value_tarp" },
+		},
 	},
 	-- Authoring pools await acquisition playtesting before use in jobs or progression slots.
 	valuables_armour_panels = {

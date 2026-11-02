@@ -16,6 +16,16 @@ Town content is authored in [townnpcs](../townnpcs/README.md); superseded town d
 - Current town access prerequisites are compiled from contact.access. Storage, suit painting,
   broadcast and emission-warning consumers check current town milestone IDs directly.
 
+Shared supply pools allow limited thematic overlap at comparable live loot weights. Fasteners now
+include nails and screws; batteries include D-cells; cleaning accepts ordinary household stock;
+statues include the raven; field/engine maintenance gain suitable lubricant alternatives; town
+textiles include rope, sewing supplies and tarpaulin. Paracord remains in field repair and textiles
+but is excluded from electrical repairs. Electrical pools share wiring where appropriate.
+Evidence on each changed pool records current regional weights and relevant stack differences.
+Screws, D-cells and small lubricant aerosols retain their existing later-region acquisition routes;
+these alternatives are not promises of equal availability on every map. Tool tiers and story inputs
+remain distinct. Pool IDs, quantities and saved progression selections are preserved.
+
 libs/sh_storage.lua exposes character-owned snapshots. Server mutations commit through the setter;
 clients only read replicated state. Requirements are assigned once by the server and remain stable
 for current assignments. Hand-ins validate character, NPC, access, map, inventory and remaining units.
