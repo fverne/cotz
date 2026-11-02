@@ -85,7 +85,17 @@ ix.item.list.value_bolts.quantity = 20
 ix.item.list.value_kerosene.quantity = 8
 ix.item.list.medic_bandage_1.quantity = 3
 ix.item.list.medic_medkit_1.quantity = 3
+local descriptionStep
+for _, step in ipairs(town.contacts.gasket.progression) do
+	if step.field and step.field.cargo then descriptionStep = step break end
+end
+local originalCargoDescription = descriptionStep.field.description
+descriptionStep.field.description = "A recorder labelled with generator service dates."
 town:BuildJobs()
+local describedJob = ix.jobs.list["cotz/town/commission/gasket/" .. descriptionStep.id]
+check(describedJob.fieldCargoDescription == descriptionStep.field.description,
+	"commission registration carries the optional cargo description")
+descriptionStep.field.description = originalCargoDescription
 local function request(contact, difficulty, item)
 	return ix.jobs.list["cotz/town/" .. contact .. "/" .. difficulty .. "/" .. item].numberRec
 end

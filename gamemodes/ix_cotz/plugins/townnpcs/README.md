@@ -115,6 +115,8 @@ the configured positions are reachable or safe in-game.
 
 Field stories use existing configured point pools and bound cargo. Each converted commission declares
 `field.cargo` and `field.label`; optional `field.recipient` names a receiving contact ID.
+Optional `field.description` overrides the cargo description for that commission. Its label and description
+are saved on acceptance and applied to recovered cargo, while delivery instructions remain appended.
 Concrete cargo in `items/jobcargo/` inherits jobsystem's `base_jobcargo` and uses selected quest-asset
 models with zero price. Item labels and destinations are saved when the commission is accepted.
 NPC deliveries use **I have a delivery for you** at the receiving contact, followed by a return to

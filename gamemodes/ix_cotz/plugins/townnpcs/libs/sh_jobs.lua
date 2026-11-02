@@ -132,6 +132,7 @@ local function registerCommission(contact, step)
 		fieldMap = step.field.map,
 		fieldCargo = step.field.cargo,
 		fieldCargoName = step.field.label,
+		fieldCargoDescription = step.field.description,
 		tier = step.field.tier,
 		numberRec = 1,
 		moneyReward = 0,

@@ -72,7 +72,7 @@ function field.Collect(client, entity)
 	-- returns reserved coordinates before its database callback has created the item.
 	local recipient = state.recipient or (state.kind == "deadDrop" and "the assigned cache") or npc
 	local data = {fieldOwner = character:GetID(), fieldClaim = job.rewardKey,
-		fieldName = state.cargoName, fieldRecipient = recipient}
+		fieldName = state.cargoName, fieldDescription = state.cargoDescription, fieldRecipient = recipient}
 	ix.item.Instance(0, state.cargo, data,
 		0, 0, function(item)
 			if pending[key] ~= request then item:Remove() return end

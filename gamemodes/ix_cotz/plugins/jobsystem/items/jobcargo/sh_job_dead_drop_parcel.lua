@@ -8,5 +8,6 @@ ITEM.height = 2
 ITEM.flatweight = 5
 
 function ITEM:GetDescription()
-	return self.description .. "\nUse Field work in your PDA task list to find the destination and deliver it."
+	return self:GetData("fieldDescription", self.description)
+		.. "\nUse Field work in your PDA task list to find the destination and deliver it."
 end

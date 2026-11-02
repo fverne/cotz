@@ -34,7 +34,7 @@ function field.Assign(character, npc, job)
 		bearingAngle = settings.bearingAngle,
 		recordSeconds = settings.recordSeconds, leaveDistance = settings.leaveDistance,
 		deployDistance = settings.deployDistance,
-		cargo = cargo, cargoName = definition.fieldCargoName,
+		cargo = cargo, cargoName = definition.fieldCargoName, cargoDescription = definition.fieldCargoDescription,
 		description = definition.desc, searchRadius = searchRadius,
 		recipient = definition.fieldRecipient, recipientMap = definition.fieldRecipientMap,
 	}

@@ -37,6 +37,26 @@ and value the submitted item. Different candidates can contribute to the same jo
 item still anchors the quantity/payment floor and stable ID. Medium/hard requests omit `requiredPool`
 and require their specific item. Pool labels appear in easy job titles and descriptions.
 
+## Per-assignment cargo identity
+
+Job cargo supports server-side instance overrides through Helix item data:
+
+```lua
+item:SetData("fieldName", "Generator service recorder")
+item:SetData("fieldDescription", "A battered recorder with maintenance dates pencilled on its casing.")
+```
+
+`GetName()` and `GetDescription()` read these keys with `GetData`, falling back to the concrete
+item's name and description. Clear either key with `SetData(key, nil)` to restore that fallback.
+Delivery/return instructions remain appended, including dead-drop parcels' PDA instructions.
+Helix saves and synchronizes these overrides through its existing item data API.
+
+Town commissions may set `field.description` beside `field.cargo` and `field.label`.
+Registration maps it to `fieldCargoDescription`; acceptance snapshots it as `fieldTask.cargoDescription`,
+and recovery copies it to the item's `fieldDescription`. Existing assignments without this optional
+value keep the concrete item description. Definition edits affect new assignments; accepted descriptions
+remain saved for recovery or replacement cargo. Models, dimensions and weight stay on the concrete item.
+
 ## Runtime ownership and loading
 
 Helix loads `libs/sh_00_definitions.lua` before the other libraries. It explicitly includes configuration

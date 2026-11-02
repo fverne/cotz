@@ -168,13 +168,19 @@ local function actor()
 
 	return client, character, inventory
 end
+ix.jobs.RecordLeaderboardTask = function() end
+
 local itemSerial = 0
 local lastItem
 ix.item.Instance = function(_, id, data, _, _, callback)
 	callbacks[#callbacks + 1] = function()
 		itemSerial = itemSerial + 1
 		local item = setmetatable({uniqueID = id, data = data, id = itemSerial}, {__index = ix.item.list[id]})
-		function item:GetData(key) return self.data[key] end
+		function item:GetData(key, default)
+			if self.data[key] ~= nil then return self.data[key] end
+			return default
+		end
+		function item:SetData(key, value) self.data[key] = value end
 		function item:Remove()
 			self.removed = true
 			for _, character in pairs(ix.char.loaded) do
@@ -698,6 +704,7 @@ ix.item.list.town_quest_notebook = setmetatable(ITEM, {__index = cargoBase})
 local courierClient, courier, courierInventory = actor()
 local courierDefinition = {
 	fieldType = "recovery", fieldMap = map, fieldCargo = "town_quest_notebook",
+	fieldCargoDescription = "A water-stained maintenance log with a torn cover.",
 	fieldCargoName = "Landing maintenance log", fieldRecipient = "Ledger", fieldRecipientMap = "rp_waystation",
 	desc = "Recover the landing log and deliver it to Ledger.", moneyReward = 0, repReward = 0,
 }
@@ -708,6 +715,8 @@ check(field.Assign(courier, "Ballast", courierJob), "custom cargo gets a usable 
 courier.jobs.Ballast = copy(courierJob)
 check(courierJob.fieldTask.cargo == "town_quest_notebook"
 	and courierJob.fieldTask.recipient == "Ledger", "cargo and recipient are saved on acceptance")
+courierDefinition.fieldCargoDescription = "Changed description"
+courierDefinition.fieldCargoName = "Changed name"
 courierDefinition.fieldCargo, courierDefinition.fieldRecipient = "job_recovery_case", "Changed recipient"
 check(courierJob.fieldTask.cargo == "town_quest_notebook" and courierJob.fieldTask.recipient == "Ledger",
 	"definition edits cannot rewrite an accepted commission")
@@ -733,10 +742,33 @@ now = now + 2
 field.Collect(courierClient, courierObject)
 flush()
 local deliveredCargo = field.FindCargo(courier, courierJob)
+check(courierJob.fieldTask.cargoDescription == "A water-stained maintenance log with a torn cover."
+	and deliveredCargo:GetData("fieldDescription") == courierJob.fieldTask.cargoDescription,
+	"recovered cargo retains the accepted description after definition changes")
 check(deliveredCargo and deliveredCargo:GetName() == "Landing maintenance log",
 	"collected cargo carries its commission-specific inventory name")
 check(deliveredCargo:GetDescription():find("Deliver this to Ledger", 1, true),
 	"cargo descriptions name the receiving contact")
+deliveredCargo:SetData("fieldDescription", "An annotated service log.")
+check(deliveredCargo:GetDescription() == "An annotated service log.\nDeliver this to Ledger."
+	and deliveredCargo:GetName() == "Landing maintenance log", "description overrides preserve name and destination")
+deliveredCargo:SetData("fieldName", nil)
+check(deliveredCargo:GetName() == deliveredCargo.name, "clearing the name restores the concrete default")
+deliveredCargo:SetData("fieldDescription", nil)
+check(deliveredCargo:GetDescription() == deliveredCargo.description .. "\nDeliver this to Ledger.",
+	"clearing the description restores the concrete default and keeps instructions")
+deliveredCargo:SetData("fieldRecipient", nil)
+check(deliveredCargo:GetDescription() == deliveredCargo.description
+	.. "\nReturn this to the contact who issued your assignment.", "unaddressed cargo keeps return instructions")
+local parcel = setmetatable({data = {}}, {__index = ix.item.list.job_dead_drop_parcel})
+parcel.GetData, parcel.SetData = deliveredCargo.GetData, deliveredCargo.SetData
+local parcelInstruction = "\nUse Field work in your PDA task list to find the destination and deliver it."
+check(parcel:GetDescription() == parcel.description .. parcelInstruction, "dead-drop default keeps PDA instructions")
+parcel:SetData("fieldDescription", "A parcel wrapped in oilcloth.")
+check(parcel:GetDescription() == "A parcel wrapped in oilcloth." .. parcelInstruction,
+	"dead-drop description override keeps PDA instructions")
+parcel:SetData("fieldDescription", nil)
+check(parcel:GetDescription() == parcel.description .. parcelInstruction, "dead-drop description can be cleared")
 check(not courier.jobs.Ballast.isCompleted and not field.CanComplete(courier, courier.jobs.Ballast),
 	"collecting a delivery item does not complete its commission")
 courierClient:ixJobComplete("Ballast")
