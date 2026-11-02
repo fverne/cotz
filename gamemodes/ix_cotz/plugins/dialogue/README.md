@@ -21,7 +21,7 @@ through dialogueid.
 
 ## Main menu and questions
 
-The root contains trade, barter, services, repeatable work, progression, reward claims,
+The root contains trade, barter, services, repeatable work, progression, available reward/exchange actions,
 **Can I ask you something?**, and Goodbye, where those actions exist.
 
 The shared loader groups the offered BackgroundTopic, InterestTopic, TutorialTopic,
@@ -57,3 +57,8 @@ The standalone checks cover root actions, question navigation and conditions, re
 and existing UI behaviour with mocks. In multiplayer, verify main menu → questions → a nested
 reply → question list → main menu, Goodbye/Escape, and normal trade/service/job flows for old and
 new NPCs. Also check an NPC whose questions are locked and one with no flavour topics.
+
+Assignment details appear only while the character has an assignment from that NPC. There is no
+Claim rewards submenu: available exchanges and recoverable stored items appear directly at the main
+menu, with the existing server validation and pending reward queues. Names appear above every reply.
+Option colors distinguish work (amber), trade/rewards (green), questions (teal), and navigation (muted).

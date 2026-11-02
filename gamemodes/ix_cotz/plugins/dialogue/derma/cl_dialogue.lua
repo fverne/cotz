@@ -2,6 +2,22 @@ local PANEL = {}
 local gradient = ix.util.GetMaterial("vgui/gradient-d")
 local OPTION_INPUT_DELAY = 0.6
 
+local OPTION_COLORS = {
+	text = Color(216, 215, 201), hover = Color(255, 255, 255),
+	work = Color(193, 164, 96), trade = Color(145, 179, 126),
+	question = Color(109, 176, 179), back = Color(153, 157, 145),
+}
+
+local function optionColor(topicID)
+	if topicID == "GOODBYE" or topicID:find("Back", 1, true) then return OPTION_COLORS.back end
+	if topicID:find("Trade", 1, true) or topicID == "TaskRewardChoices" then return OPTION_COLORS.trade end
+	if topicID:find("Town", 1, true) or topicID:find("Task", 1, true)
+		or topicID == "AboutWorkTopic" then return OPTION_COLORS.work end
+	if topicID == "QuestionsTopic" then return OPTION_COLORS.question end
+
+	return OPTION_COLORS.text
+end
+
 function PANEL:Init()
 	self.loading = true
 
@@ -146,7 +162,8 @@ function PANEL:dialogue(name, message, instant, color, topicID)
 	self.nametitle:SetFont("stalkerregulartitlefont")
 	self.nametitle:SetWrap(true)
 	self.nametitle:SetAutoStretchVertical(true)
-	self.nametitle:SetText("")
+	self.nametitle:SetText(name)
+	self.nametitle:SizeToContentsY()
 
 	self.message = self.chatbox:Add("DLabel")
 	self.message:Dock(TOP)
@@ -258,14 +275,14 @@ function PANEL:prepareOptions(options)
 			self.buttonList[k]:Dock(TOP)
 			self.buttonList[k]:DockMargin(4, 0, 4, 4)
 			self.buttonList[k]:SetText(k .. ". " .. topic.statement)
-			self.buttonList[k]:SetTextColor(Color(20, 20, 20, 255))
+			self.buttonList[k]:SetTextColor(optionColor(topicID))
 			self.buttonList[k]:SetFont("ixSmallFont")
 			self.buttonList[k]:SetMouseInputEnabled(true)
 			self.buttonList[k].Think = function()
 				if self.buttonList[k]:IsHovered() then
-					self.buttonList[k]:SetTextColor(Color(255, 255, 255))
+					self.buttonList[k]:SetTextColor(OPTION_COLORS.hover)
 				else
-					self.buttonList[k]:SetTextColor(Color(220, 220, 220))
+					self.buttonList[k]:SetTextColor(optionColor(topicID))
 				end
 			end
 			self.buttonList[k].DoClick = function()
@@ -294,7 +311,7 @@ function PANEL:prepareDynamicOptions(dynamicOptions, normalOptions)
 			label:Dock(TOP)
 			label:DockMargin(4, 0, 4, 4)
 			label:SetText(#self.buttonList .. ". " .. statement)
-			label:SetTextColor(Color(20, 20, 20, 255))
+			label:SetTextColor(optionColor(option.topicID))
 			label:SetFont("ixSmallFont")
 			label:SetWrap(true)
 			label:SetAutoStretchVertical(true)
@@ -302,7 +319,7 @@ function PANEL:prepareDynamicOptions(dynamicOptions, normalOptions)
 			local baseThink = label.Think
 			label.Think = function()
 				baseThink(label)
-				label:SetTextColor(label:IsHovered() and Color(255, 255, 255) or Color(220, 220, 220))
+				label:SetTextColor(label:IsHovered() and OPTION_COLORS.hover or optionColor(option.topicID))
 			end
 			label.DoClick = function()
 				if option.dynamic then

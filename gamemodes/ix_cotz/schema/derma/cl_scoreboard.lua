@@ -206,6 +206,7 @@ function PANEL:Update()
 			self.avatar = Material(avatar, "smooth")
 		end
 		self.status:SetText(ix.crossserver.GetPresenceText(record, record.fresh, IsValid(self.player)))
+		self.status:SetTextColor(ix.crossserver.GetPresenceColor(record, record.fresh, IsValid(self.player)))
 		self.status:SizeToContents()
 		if (IsValid(self.mute)) then self.mute:SetVisible(IsValid(self.player) and self.player ~= LocalPlayer()) end
 		if (not IsValid(self.player)) then
@@ -346,7 +347,7 @@ end
 local DOSSIER_FIELDS = {
 	{"rank", "STALKER RANK"}, {"reputation", "REPUTATION"}, {"squad", "SQUAD"},
 	{"location", "LOCATION"}, {"favoriteContact", "FAVORITE CONTACT"},
-	{"mutantsKilled", "MUTANTS KILLED"}, {"humansKilled", "HUMAN NPCS KILLED"},
+	{"mutantsPoached", "MUTANTS POACHED"}, {"mutantsKilled", "MUTANTS KILLED"}, {"humansKilled", "HUMAN NPCS KILLED"},
 	{"rareMutantsKilled", "RARE MUTANTS KILLED"}, {"speciesKilled", "SPECIES KILLED"},
 	{"tasksCompleted", "TASKS COMPLETED"}, {"hardTasks", "HARD TASKS"},
 	{"researchOperations", "RESEARCH OPERATIONS"}, {"recoveryOperations", "RECOVERY OPERATIONS"},
@@ -467,13 +468,17 @@ function PANEL:SelectRecord(record)
 	values.rank = rankName(record)
 	values.reputation = math.floor(record.profile.reputation or 0)
 	values.squad = record.squadName and record.squadName ~= "" and record.squadName or "Loner"
-	values.location = location .. "\n" .. (record.map or "")
+	values.location = location
 	values.favoriteContact = stats.favoriteContact or "None"
 	values.taskEarnings = (stats.taskEarnings or 0) .. " RU"
 	for key, field in pairs(self.dossierFields) do
 		field.value:SetText(tostring(values[key] or 0))
-		local squadColor = key == "squad" and record.squadColor
-		field.value:SetTextColor(squadColor or FIELD_COLORS[key] or COLORS.text)
+		local color = FIELD_COLORS[key] or COLORS.text
+		if key == "squad" then color = record.squadColor or COLORS.muted end
+		if key == "location" then
+			color = ix.crossserver.GetPresenceColor(record, record.fresh, IsValid(record.player))
+		end
+		field.value:SetTextColor(color)
 		field.card:InvalidateLayout(true)
 	end
 end
@@ -564,7 +569,8 @@ function PANEL:Think()
 				draw.SimpleText(" · " .. (squad ~= "" and squad or "Loner"),
 					"cotzLeaderboard", 146 + rankWidth, 34, record.squadColor or COLORS.muted)
 				draw.SimpleText(ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player)),
-					"cotzLeaderboard", 146, 54, COLORS.teal)
+					"cotzLeaderboard", 146, 54,
+					ix.crossserver.GetPresenceColor(record, record.fresh, IsValid(record.player)))
 			end
 			row.DoClick = function() self:SelectRecord(record) end
 			row.DoRightClick = function()

@@ -40,9 +40,9 @@ else
 		local target = net.ReadEntity()
 		local panel = ix.gui.dialogue
 		if IsValid(panel) and panel.target == target and panel.tree.TaskRewardChoices then
-			if panel.currentTopicID == "TaskRewardChoices" then
+			if panel.currentTopicID == "GREETING" or panel.currentTopicID == "BackTopic" then
 				panel.options:Clear()
-				local topic = panel.tree.TaskRewardChoices
+				local topic = panel.tree[panel.currentTopicID]
 				panel:prepareDynamicOptions(topic.GetDynamicOptions(topic, LocalPlayer(), target), topic.options)
 			end
 		end
@@ -235,11 +235,9 @@ end
 function ix.dialogue.ConfigureTaskRewards(dialogue)
 	if not dialogue.tree.GREETING then return end
 	configureJobPreview(dialogue)
-	local workTopic = dialogue.tree.AboutWorkTopic
 	dialogue.addTopic("TaskRewardChoices", {
-		statement = "Claim rewards.",
+		statement = "",
 		ShouldAdd = function(_, client, target)
-			if workTopic then return true end
 			local character = client:GetCharacter()
 			local npc = target:GetDisplayName()
 			local options = offerOptions(character, npc)
@@ -249,18 +247,7 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 
 			return #options > 0 or (pending and #pending > 0) or false
 		end,
-		preCallback = function(self, client, target)
-			if CLIENT then
-				self.response = "Claim your rewards here.\n"
-					.. ix.taskRewards.BonusStatus(client:GetCharacter(), target:GetDisplayName())
-			elseif canChoose(client, target) then
-				ix.taskRewards.RefreshBonuses(client:GetCharacter(), target:GetDisplayName())
-				net.Start("cotz/dialogue/task-rewards-refresh")
-				net.WriteEntity(target)
-				net.Send(client)
-			end
-		end,
-		response = "Claim your rewards here.",
+		response = "",
 		IsDynamic = true,
 		options = {"BackTopic"},
 		GetDynamicOptions = function(_, client, target)
@@ -272,7 +259,7 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 			local line = ix.progression.GetLine(character, CLAIM_LINE)
 			if line.pendingRewards and #line.pendingRewards > 0 then
 				options[#options + 1] = {
-					statement = "Claim next reward (" .. #line.pendingRewards .. " remaining)",
+					statement = "Collect stored items (" .. #line.pendingRewards .. " remaining)",
 					topicID = "TaskRewardChoices", dyndata = {kind = "claim"},
 				}
 			end
@@ -299,7 +286,7 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 				net.Send(client)
 			end
 
-			return "TaskRewardChoices"
+			return "BackTopic"
 		end,
 	})
 	for _, id in ipairs({"GREETING", "BackTopic", "AboutWorkTopic"}) do
@@ -309,24 +296,37 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 			for _, option in ipairs(topic.options or {}) do
 				if option ~= "TaskRewardChoices" then options[#options + 1] = option end
 			end
-			if (workTopic and id == "AboutWorkTopic") or (not workTopic and id ~= "AboutWorkTopic") then
-				options[#options + 1] = "TaskRewardChoices"
-			end
 			topic.options = ix.dialogue.OrderOptions(options, id == "GREETING" or id == "BackTopic")
 		end
 	end
-	if workTopic then
-		local previousShouldAdd = workTopic.ShouldAdd
-		workTopic.ShouldAdd = function(self, client, target)
-			if not previousShouldAdd or previousShouldAdd(self, client, target) then return true end
-			local character = client:GetCharacter()
-			local npc = target:GetDisplayName()
-			local options = offerOptions(character, npc)
-			kitOptions(character, npc, options)
-			barterOptions(character, npc, options)
-			local pending = ix.progression.GetLine(character, CLAIM_LINE).pendingRewards
+	for _, id in ipairs({"GREETING", "BackTopic"}) do
+		local root = dialogue.tree[id]
+		if root then
+			root.IsDynamic = true
+			if not root.cotzRewardOptions then
+				local previous = root.GetDynamicOptions
+				root.GetDynamicOptions = function(self, client, target)
+					local options = previous and previous(self, client, target) or {}
+					local rewards = dialogue.tree.TaskRewardChoices:GetDynamicOptions(client, target)
+					for _, option in ipairs(rewards) do options[#options + 1] = option end
 
-			return #options > 0 or (pending and #pending > 0) or false
+					return options
+				end
+				root.cotzRewardOptions = true
+			end
+			if root.preCallback ~= root.cotzRewardPreCallback or not root.cotzRewardPreCallback then
+				local previous = root.preCallback
+				root.preCallback = function(self, client, target)
+					if previous then previous(self, client, target) end
+					if SERVER and canChoose(client, target) then
+						ix.taskRewards.RefreshBonuses(client:GetCharacter(), target:GetDisplayName())
+						net.Start("cotz/dialogue/task-rewards-refresh")
+						net.WriteEntity(target)
+						net.Send(client)
+					end
+				end
+				root.cotzRewardPreCallback = root.preCallback
+			end
 		end
 	end
 end

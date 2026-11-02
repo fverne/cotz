@@ -208,6 +208,7 @@ net.Receive("ixSquadInvite", function(_, client)
 		expires = target.squad_invite.expires,
 	})
 	target:NotifyLocalized("squad_invite", character:GetName(), squad.name)
+	client:Notify("Squad invitation sent to " .. targetCharacter:GetName() .. ".")
 end)
 
 net.Receive("ixSquadKickMember", function(_, client)
@@ -242,3 +243,32 @@ net.Receive("cotz/squads/accept-invite", function(_, client)
 	client.ixSquadAcceptTry = CurTime() + 1
 	ix.squad.AcceptInvite(client)
 end)
+
+local visibilityMembers = {}
+local nextVisibilityRefresh = 0
+
+function PLUGIN:SetupPlayerVisibility(client)
+	local character = client:GetCharacter()
+	local squadID = character and character:GetSquadID()
+	if not squadID or squadID == "NULL" then return end
+	if CurTime() >= nextVisibilityRefresh then
+		nextVisibilityRefresh = CurTime() + 1
+		visibilityMembers = {}
+		for _, member in ipairs(player.GetHumans()) do
+			local other = member:GetCharacter()
+			local id = other and other:GetSquadID()
+			if id and id ~= "NULL" then
+				visibilityMembers[id] = visibilityMembers[id] or {}
+				visibilityMembers[id][#visibilityMembers[id] + 1] = member
+			end
+		end
+	end
+	for _, member in ipairs(visibilityMembers[squadID] or {}) do
+		local other = IsValid(member) and member:GetCharacter()
+		if member ~= client and other and other:GetSquadID() == squadID then
+			local corpse = member:GetNWEntity("cotzSquadRagdoll")
+			local target = IsValid(corpse) and corpse or member
+			AddOriginToPVS(target:GetPos())
+		end
+	end
+end

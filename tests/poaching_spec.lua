@@ -56,7 +56,15 @@ local loot = {}
 local items = {[1] = knife}
 local inventory = {GetItems = function() return items end}
 function inventory:Add(uniqueID, _, data) loot[#loot + 1] = {uniqueID = uniqueID, data = data} return true end
-local character = {GetInventory = function() return inventory end}
+local character = {data = {}, GetInventory = function() return inventory end}
+function character:GetData(key, default) return self.data[key] or default end
+function character:SetData(key, value) self.data[key] = value end
+table.Copy = function(value)
+	local result = {}
+	for key, entry in pairs(value) do result[key] = entry end
+
+	return result
+end
 local client = {data = {}, GetCharacter = function() return character end, Alive = function() return true end}
 function client:GetNetVar(key, default)
 	if self.data[key] == nil then return default end
@@ -100,11 +108,13 @@ for _, callback in ipairs(timers) do
 end
 check(npc:GetNetVar("beingSkinned"), "old timers do not release new poaches")
 complete(client)
+check(character.data.leaderboardStats.mutantsPoached == 1, "completed poach increments statistics")
 check(npc.invalid and #loot > 0, "completed poach grants loot and removes corpse")
 check(loot[1].data.tier == 6 and loot[1].data.weight == 7, "bonus affects both tier and meat weight")
 check(ix.poaching.GetSharpness(knife) == 98, "completed poach charges wear once")
 complete(client)
 check(ix.poaching.GetSharpness(knife) == 98, "duplicate completion cannot charge twice")
+check(character.data.leaderboardStats.mutantsPoached == 1, "duplicate completion cannot count twice")
 npc = corpse()
 PLUGIN:OpenPoachMenu(client, "dog", 1)
 action(client)

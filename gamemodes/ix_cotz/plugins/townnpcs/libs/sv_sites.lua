@@ -5,6 +5,9 @@ for _, kind in ipairs(KINDS) do ALLOWED[kind] = true end
 
 function PLUGIN:LoadData()
 	local data = self:GetData({}, false, true) or {}
+	-- Retain points recorded with the superseded patrol tool as alternate spawn locations.
+	self.spawnPoints = data.spawnPoints or data.patrolPoints or {}
+	self.lastSpawnPositions = data.lastSpawnPositions or {}
 	for _, kind in ipairs(KINDS) do
 		local maps = table.Copy(self.siteDefinitions[kind] or {})
 		for map, points in pairs(data[kind] or {}) do maps[map] = points end
@@ -13,7 +16,7 @@ function PLUGIN:LoadData()
 end
 
 function PLUGIN:SaveData()
-	local data = {}
+	local data = {spawnPoints = self.spawnPoints or {}, lastSpawnPositions = self.lastSpawnPositions or {}}
 	for _, kind in ipairs(KINDS) do data[kind] = self[kind .. "Points"] or {} end
 	self:SetData(data, false, true)
 end

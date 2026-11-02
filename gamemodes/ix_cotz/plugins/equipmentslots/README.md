@@ -4,7 +4,7 @@ Adds suit, helmet, gasmask, backpack, exoskeleton, primary weapon, secondary wea
 knife, artifact detector, binoculars, Geiger counter, anomaly detector, headlamp,
 compass, and GPS tracker slots. Drag an item from the backpack onto a compatible
 slot, click anywhere on a card to choose a matching backpack item, or use its usual Equip action.
-Empty cards have no inset button or text. Equipped images have no inset background.
+Slot interiors use the same skin painting as backpack cells. Empty cards have no inset button or text. Equipped images have no inset background.
 An occupied slot must be unequipped before choosing a replacement.
 
 Equipment appears only on the **You** tab, embedded immediately left of the backpack.

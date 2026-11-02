@@ -103,6 +103,7 @@ else
 
 	function PLUGIN:PlayerSpawn( client )
 		client:UnSpectate()
+		client:SetNWEntity("cotzSquadRagdoll", NULL)
 		if not client:GetCharacter() then
 			return
 		end
@@ -140,6 +141,7 @@ else
 		ix.temp.Corpses[client]:SetNetVar("player", client)
 		ix.temp.Corpses[client]:SetAngles(client:GetAngles())
 		ix.temp.Corpses[client]:Spawn()
+		client:SetNWEntity("cotzSquadRagdoll", ix.temp.Corpses[client])
 		ix.temp.Corpses[client]:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 		local phys = ix.temp.Corpses[client]:GetPhysicsObject()
 		if phys and phys:IsValid() then

@@ -129,7 +129,8 @@ local function client(char)
 	function value:GetCharacter() return self.char end
 	function value:SteamID64() return self.char.id == 2 and "other" or "account" end
 	function value:SetLocalVar(key, entry) self[key] = entry end
-	function value:Notify() end
+	function value:Notify(text) self.notice = text end
+	function value:NotifyLocalized(key) self.localizedNotice = key end
 	function value:Alive() return false end
 	return value
 end
@@ -206,6 +207,8 @@ local inviteeClient = client(alt)
 humans = {remoteClient, inviteeClient}
 ix.char.loaded[3] = alt
 serverB.Invite(inviteeClient, remoteClient)
+check(remoteClient.notice:find("invitation sent", 1, true), "sender receives committed invite notification")
+check(inviteeClient.localizedNotice == "squad_invite", "target receives invite notification")
 check(inviteeClient.squad_invite ~= nil, "shared invitation is delivered to the target character")
 serverB.AcceptInvite(inviteeClient)
 check(query("SELECT squad_id FROM ix_squads_members WHERE character_id=3")[1].squad_id == "char:1",

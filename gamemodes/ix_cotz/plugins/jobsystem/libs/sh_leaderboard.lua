@@ -48,7 +48,7 @@ end
 function ix.jobs.GetLeaderboardStats(data)
 	local saved = data.leaderboardStats or {}
 	local result = {}
-	for _, key in ipairs({"mutantsKilled", "humansKilled", "tasksCompleted", "rareMutantsKilled",
+	for _, key in ipairs({"mutantsPoached", "mutantsKilled", "humansKilled", "tasksCompleted", "rareMutantsKilled",
 		"hardTasks", "researchOperations", "recoveryOperations", "taskEarnings"}) do
 		result[key] = saved[key] or 0
 	end

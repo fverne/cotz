@@ -278,6 +278,9 @@ function PLUGIN:OpenPoachMenu(client, mutant, knifeID)
 		local knifeTier = ix.poaching.GetKnifeTier(knife)
 		ix.poaching.WearKnife(knife)
 		npc:Remove()
+		local stats = table.Copy(character:GetData("leaderboardStats", {}))
+		stats.mutantsPoached = (stats.mutantsPoached or 0) + 1
+		character:SetData("leaderboardStats", stats)
 		givePoachingLoot(player, character:GetInventory(), mutant, knifeTier)
 	end)
 

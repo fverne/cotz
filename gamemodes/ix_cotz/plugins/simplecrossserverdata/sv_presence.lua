@@ -216,8 +216,10 @@ function cross.PublishRoster(rows)
 			pdaavatar = row.pdaavatar or "vgui/icons/face_31.png", state = row.state,
 			map = row.map or "", destination = row.destination or "",
 			squadID = row.squad_id or "", squadName = row.squad_name or "",
-			squadColor = row.squad_color and row.squad_color ~= "NULL"
-				and string.ToColor(row.squad_color) or Color(105, 139, 87),
+			squadColor = row.squad_id and row.squad_id ~= "NULL"
+				and row.squad_name and row.squad_name ~= ""
+				and row.squad_color and row.squad_color ~= "NULL"
+				and string.ToColor(row.squad_color) or Color(116, 119, 107),
 		}
 	end
 	local signature = util.TableToJSON(records)

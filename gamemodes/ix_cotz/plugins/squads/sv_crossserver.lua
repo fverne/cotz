@@ -397,6 +397,7 @@ function cross.RefreshInvites()
 				if (client.ixSquadInviteToken == inviteToken) then return end
 				client.ixSquadInviteToken = inviteToken
 				client.squad_invite = row
+				if row then client:NotifyLocalized("squad_invite", row.inviter, row.name) end
 				client:SetLocalVar("squadInvite", row and {
 					targetID = character:GetID(), name = row.name, inviter = row.inviter,
 					expires = CurTime() + tonumber(row.expires) - tonumber(row.db_now),
@@ -540,14 +541,27 @@ end
 function cross.Invite(target, client)
 	local actor, character = client:GetCharacter(), target:GetCharacter()
 	local id = actor:GetSquadID()
+	local inviteToken = token()
 	local source = mysql:Select()
-	for _, value in ipairs({scope(), character:GetID(), actor:GetID(), id, token()}) do source:SelectValue(value) end
+	for _, value in ipairs({scope(), character:GetID(), actor:GetID(), id, inviteToken}) do source:SelectValue(value) end
 	source:SelectValue(mysql.Add(mysql.Now(), 30))
 	source:WhereExpr(actorCondition(actor:GetID(), id, 1))
 	source:WhereExpr(activeCondition(id))
 	local query = mysql:Replace("ix_squads_invites")
 	query:InsertFrom(source, {"scope", "character_id", "inviter_id", "squad_id", "token", "expires"})
-	mutate(query)
+	mutate(query, function(success)
+		if not success then return end
+		local stored = mysql:Select("ix_squads_invites")
+		stored:Where("scope", scope())
+		stored:Where("character_id", character:GetID())
+		stored:Where("token", inviteToken)
+		cross.Query(stored, function(rows, failure)
+			if failure or not rows[1] then return end
+			if IsValid(client) and client:GetCharacter() == actor then
+				client:Notify("Squad invitation sent to " .. character:GetName() .. ".")
+			end
+		end)
+	end)
 end
 
 function cross.AcceptInvite(client)

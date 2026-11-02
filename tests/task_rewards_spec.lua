@@ -38,6 +38,7 @@ ix = {
 		end},
 	config = {Get = function(_, default) return default end},
 }
+dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_leaderboard.lua")
 local base = "gamemodes/ix_cotz/plugins/progression/"
 dofile(base .. "libs/sh_storage.lua")
 dofile(base .. "libs/sh_progression.lua")
@@ -659,8 +660,8 @@ local dialogue = {tree = {GREETING = {options = {"GOODBYE"}},
 	BackTopic = {options = {"GOODBYE"}}, GetTaskByDifficulty = {}}}
 dialogue.addTopic = function(id, data) dialogue.tree[id] = data end
 ix.dialogue.ConfigureTaskRewards(dialogue)
-check(dialogue.tree.GREETING.options[1] == "TaskRewardChoices"
-	and dialogue.tree.GREETING.options[2] == "GOODBYE", "reward menu keeps goodbye last")
+check(#dialogue.tree.GREETING.options == 1
+	and dialogue.tree.GREETING.options[1] == "GOODBYE", "no claim submenu remains at root")
 local viewer = actor()
 local position = {DistToSqr = function() return 0 end}
 function viewer.client:GetPos() return position end
@@ -737,12 +738,12 @@ workDialogue.addTopic = function(id, data) workDialogue.tree[id] = data end
 ix.dialogue.ConfigureTaskRewards(workDialogue)
 for _, id in ipairs({"GREETING", "BackTopic"}) do
 	for _, option in ipairs(workDialogue.tree[id].options) do
-		check(option ~= "TaskRewardChoices", "work-capable NPC main menu does not list supplies")
+		check(option ~= "TaskRewardChoices", "claim submenu is removed")
 	end
 end
-check(workDialogue.tree.AboutWorkTopic.options[1] == "TaskRewardChoices"
-	and workDialogue.tree.AboutWorkTopic.options[2] == "BackTopic",
-	"supplies live under About work before its back option")
+check(#workDialogue.tree.AboutWorkTopic.options == 1
+	and workDialogue.tree.AboutWorkTopic.options[1] == "BackTopic",
+	"assignment has no reward submenu")
 check(workDialogue.tree.TaskRewardChoices.options[1] == "BackTopic",
 	"supplies always provide a main-menu return even when work becomes unavailable")
 check(not workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, viewer.client, target),
@@ -759,8 +760,8 @@ check(not viewer:GetJobs()["'Old Timer'"], "invalid preview choice leaves the ta
 check(api.AcceptJob(viewer.client, "'Old Timer'", "easy"), "preview can be accepted with its random supply")
 check(viewer:GetData("taskRewardOffers")[viewer:GetJobs()["'Old Timer'"].rewardKey].selected == shownPreview.supplyChoice,
 	"random supply is reserved after the task is accepted")
-check(workDialogue.tree.TaskRewardChoices.ShouldAdd(nil, viewer.client, target),
-	"accepted jobs expose supply choices")
+check(not workDialogue.tree.TaskRewardChoices.ShouldAdd(nil, viewer.client, target),
+	"accepted jobs without outstanding rewards hide exchanges")
 check(not workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, viewer.client, target),
 	"accepted jobs do not expose reward changes through About work")
 check(#workDialogue.tree.TaskRewardChoices.GetDynamicOptions(nil, viewer.client, target) == 0,
@@ -1243,4 +1244,10 @@ do
 	api.SetTownProfile("'Old Timer'", contacts["old-timer"].rewards)
 end
 
+local directRewards = dialogue.tree.TaskRewardChoices.GetDynamicOptions(nil, rootRewardOwner.client, target)
+local rootRewards = dialogue.tree.GREETING.GetDynamicOptions(nil, rootRewardOwner.client, target)
+check(#rootRewards == #directRewards, "reward actions appear directly at the root")
+ix.dialogue.ConfigureTaskRewards(dialogue)
+check(#dialogue.tree.GREETING.GetDynamicOptions(nil, rootRewardOwner.client, target) == #directRewards,
+	"reconfiguring a dialogue does not duplicate direct reward actions")
 print("PASS: " .. checks .. " task reward checks")

@@ -40,6 +40,7 @@ end
 if SERVER then
 	function PLUGIN:PostLoadData()
 		ix.plugin.Get("vendor_adv"):RefreshTownVendors(self)
+		self:ApplyTownSpawnPoints()
 		for region, count in SortedPairs(self:GetMissingFieldSites()) do
 			print("[Town NPCs] WARNING: No configured " .. region .. " sites; " .. count .. " commissions unavailable. "
 				.. "This check includes other maps. Add points with /TownNPCAddFieldPoint on the destination map, "

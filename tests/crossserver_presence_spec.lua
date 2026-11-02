@@ -42,6 +42,7 @@ ix = {config = {Add = function() end, Get = function(_, default) return default 
 SERVER, CLIENT = true, false
 PLUGIN = {}
 local root = "gamemodes/ix_cotz/plugins/simplecrossserverdata/"
+ix.plugin = ix.plugin or {Get = function() end}
 dofile(root .. "sh_presence.lua")
 dofile(root .. "sv_presence.lua")
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_leaderboard.lua")
@@ -84,8 +85,20 @@ receive(packets[1])
 check(next(cross.roster) == nil, "empty snapshots clear disconnected and expired characters")
 check(cross.GetPresenceText({state = "offline"}, true) == "OFFLINE", "shared labels include offline")
 check(cross.GetPresenceText({state = "unknown"}, true) == "STATUS UNAVAILABLE", "hidden presence stays unavailable")
-check(cross.GetPresenceText({state = "online", map = "map_b"}, true) == "ONLINE · map_b",
+check(cross.GetPresenceText({state = "online", map = "map_b"}, true) == "ONLINE: MAP_B",
 	"shared labels include the remote map")
-check(cross.GetPresenceText({state = "travelling", destination = "map_c"}, true, true) == "TRAVELLING · map_c",
+check(cross.GetPresenceText({state = "travelling", destination = "map_c"}, true, true) == "TRAVELLING: MAP_C",
 	"travelling takes precedence over a still connected local entity")
+ix.plugin.Get = function() return {mapdata = {rp_marsh_cs = {name = "Swamps"}}} end
+game.GetMap = function() return "rp_marsh_cs" end
+check(cross.GetPresenceText({state = "online"}, true, true) == "ONLINE: SWAMPS",
+	"local presence uses the configured friendly map name")
+check(cross.GetPresenceText({state = "online", map = "rp_marsh_cs"}, true, false) == "ONLINE: SWAMPS",
+	"remote presence uses the same friendly map name")
+check(cross.GetPresenceColor({state = "online"}, true, true).r == 105,
+	"local online status uses green")
+check(cross.GetPresenceColor({state = "online"}, true, false).g == 140,
+	"remote online status uses teal")
+check(cross.GetPresenceColor({state = "online"}, false, false).r == 116,
+	"stale presence stays muted")
 print("cross-server presence: " .. checks .. " checks passed")

@@ -414,7 +414,7 @@ function PLUGIN:CanPlayerUnequipItem(client, item)
 end
 
 function PLUGIN:CanPlayerInteractItem(client, action, item, data)
-	return not client:GetLocalVar("arenaSpectate", false)
+	if client:GetLocalVar("arenaSpectate", false) then return false end
 end
 
 function PLUGIN:CanPlayerHoldObject(client, entity)

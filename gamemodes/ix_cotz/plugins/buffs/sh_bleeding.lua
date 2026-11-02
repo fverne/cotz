@@ -2,8 +2,8 @@ local settings = {
 	{"bleedingChanceScale", 100, 1, 1000, "Damage giving a 100% bleeding chance."},
 	{"bleedingChanceExponent", 2, 0.1, 10, "Exponent emphasizing severe hits."},
 	{"bleedingMaximum", 100, 1, 1000, "Maximum bleeding severity."},
-	{"bleedingDamageScale", 0.01, 0, 1, "HP lost per second per severity point."},
-	{"bleedingClotRate", 0.2, 0, 100, "Severity naturally removed each second."},
+	{"bleedingDamageScale", 0.04, 0, 1, "HP lost per second per severity point."},
+	{"bleedingClotRate", 1, 0, 100, "Severity naturally removed each second."},
 }
 
 for _, setting in ipairs(settings) do

@@ -102,7 +102,7 @@ function playerMeta:dialogue(id, target)
 		target:GetClass() == "ix_vendor_adv"
 		and not ix.progression.CanUseNPC(self:GetCharacter(), target:GetDisplayName())
 	then
-		id = "progressionlocked"
+		id = target:GetDisplayName() == "'Mute'" and "mutelocked" or "progressionlocked"
 	end
 
 	if CLIENT then

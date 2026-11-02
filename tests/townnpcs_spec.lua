@@ -233,6 +233,7 @@ local function character(data)
 		Add = function() return false end,
 	}
 	value.client = {
+		Notify = function() end,
 		GetCharacter = function() return value end,
 		IsBot = function() return false end,
 		getReputation = function() return value.reputation or 0 end,

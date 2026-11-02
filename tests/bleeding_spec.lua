@@ -104,29 +104,29 @@ buffs:HealBleeding(client, 500)
 near(buffs:GetBleeding(client), 0, "treatment clamps at zero")
 buffs:AddBleeding(client, 20)
 for _ = 1, 6 do now = now + 1 buffs:ProcessBleeding() end
-check(client.health == 99, "fractional damage accumulates")
-near(buffs:GetBleeding(client), 18.8, "natural clotting")
+check(client.health == 96, "fractional damage accumulates")
+near(buffs:GetBleeding(client), 14, "natural clotting")
 local saved = client.character
 buffs:PlayerDisconnected(client)
 now = now + 10000
 buffs:ProcessBleeding()
-near(saved.data.bleedingSeverity, 18.8, "offline time pauses severity")
+near(saved.data.bleedingSeverity, 14, "offline time pauses severity")
 local reconnect = player()
 reconnect.character = saved
 buffs:PlayerLoadedCharacter(reconnect)
-near(buffs:GetBleeding(reconnect), 18.8, "reconnect/cross-server data restore")
+near(buffs:GetBleeding(reconnect), 14, "reconnect/cross-server data restore")
 local sends = reconnect.sends
 buffs:RestoreBleeding(reconnect)
 check(reconnect.sends == sends, "unchanged display does not send")
 now = now + 1
 buffs:ProcessBleeding()
-near(buffs:GetBleeding(reconnect), 18.6, "spawn restore resumes bleeding")
+near(buffs:GetBleeding(reconnect), 13, "spawn restore resumes bleeding")
 buffs:PrePlayerLoadedCharacter(reconnect)
 reconnect.character = character()
 buffs:PlayerLoadedCharacter(reconnect)
 now = now + 1
 buffs:ProcessBleeding()
-near(saved.data.bleedingSeverity, 18.6, "character switch preserves old character")
+near(saved.data.bleedingSeverity, 13, "character switch preserves old character")
 local dying = player(100)
 dying.health = 1
 buffs:PlayerLoadedCharacter(dying)
@@ -215,7 +215,7 @@ roll = 0.99
 buffs:PostEntityTakeDamage(ongoing, damage(20, DMG_BULLET), true)
 now = now + 1
 buffs:ProcessBleeding()
-near(buffs:GetBleeding(ongoing), 39.8, "failed roll does not delay clotting")
+near(buffs:GetBleeding(ongoing), 39, "failed roll does not delay clotting")
 local health = ongoing.health
 buffs:ProcessBleeding()
 check(ongoing.health == health, "repeated frames do not advance bleeding")

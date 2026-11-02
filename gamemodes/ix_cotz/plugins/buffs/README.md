@@ -5,8 +5,8 @@ damage event rolls once, using post-mitigation damage: `min(damage / bleedingCha
 Defaults are scale 100 and exponent 2. Separate pellet events roll separately; combined damage flags roll once.
 A successful roll adds the damage amount to severity (maximum 100). Blocked and zero-damage events do not roll.
 
-Every second, severity causes `severity * bleedingDamageScale` HP loss (default 0.01), with fractional HP
-accumulated until whole damage can be applied. Severity then falls by `bleedingClotRate` (default 0.2).
+Every second, severity causes `severity * bleedingDamageScale` HP loss (default 0.04), with fractional HP
+accumulated until whole damage can be applied. Severity then falls by `bleedingClotRate` (default 1).
 Damage is world-attributed generic damage and can kill through normal death/revive handling.
 The HUD shows rounded-up severity in a heart icon, transitioning from yellow to red (255, 0, 0) at maximum severity. Settings are in Helix's Bleeding configuration category.
 
@@ -29,3 +29,7 @@ Run `luatex --luaonly tests/bleeding_spec.lua` from the repository root.
 Mocks do not establish runtime correctness. Multiplayer checks: bullet/pellet and mutant slash damage,
 armor and blocked hits, HUD/resolution changes, self/target bandages and cancellation, death/revive,
 character switching, reconnect, and actual cross-server save/transfer.
+
+At defaults, severity 25/50/100 produces 1/2/4 HP per second before protection.
+A severity-100 bleed clots in 100 seconds without further hits. Existing explicit server configuration
+remains authoritative; set bleedingDamageScale to 0.04 and bleedingClotRate to 1 to adopt these defaults.

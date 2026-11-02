@@ -124,6 +124,7 @@ table.Copy = function(value)
 	for key, item in pairs(value) do result[key] = item end
 	return result
 end
+ix.plugin = ix.plugin or {Get = function() end}
 dofile("gamemodes/ix_cotz/plugins/simplecrossserverdata/sh_presence.lua")
 local root = "gamemodes/ix_cotz/plugins/squads/"
 loadGLua(root .. "sh_plugin.lua")
@@ -170,7 +171,7 @@ remotePresentation:SetRecord({characterID = 900, name = "Remote medic", pdaavata
 	state = "travelling", destination = "map_c", fresh = true})
 check(remotePresentation.name.text == "Remote medic" and remotePresentation.avatarPath == "medic.png",
 	"real remote row renders saved character identity without an entity")
-check(remotePresentation.status.text == "TRAVELLING · map_c", "real remote row renders shared travel status")
+check(remotePresentation.status.text == "TRAVELLING: MAP_C", "real remote row renders shared travel status")
 remotePresentation.icon:DoRightClick()
 remotePresentation.record.fresh = false
 remotePresentation:Update()
@@ -222,7 +223,7 @@ check(scoreboard.groups.loners.text == "loners (3)", "local area includes a trav
 scoreboard.localArea:DoClick()
 scoreboard:Think()
 check(scoreboard.groups["owner-r"] ~= nil, "toggling local area off restores all maps")
-check(ix.crossserver.GetPresenceText(ix.crossserver.roster[101], true, false) == "TRAVELLING · map_b",
+check(ix.crossserver.GetPresenceText(ix.crossserver.roster[101], true, false) == "TRAVELLING: MAP_B",
 	"scoreboard and squad share travelling destination labels")
 clock = clock + 16
 local records = ix.crossserver.GetScoreboardRoster(false)
@@ -278,7 +279,7 @@ local remoteRow = view.memberTags[100]
 remoteRow.info.state, remoteRow.info.map = "online", "another_map"
 ix.squad.presenceFresh = {id = "owner-c", time = clock}
 remoteRow:UpdateCharacter()
-check(remoteRow.status.text == "ONLINE · another_map", "fresh shared presence displays the remote map")
+check(remoteRow.status.text == "ONLINE: ANOTHER_MAP", "fresh shared presence displays the remote map")
 clock = clock + 16
 remoteRow:UpdateCharacter()
 check(remoteRow.status.text == "STATUS UNAVAILABLE", "stale shared presence becomes unavailable")

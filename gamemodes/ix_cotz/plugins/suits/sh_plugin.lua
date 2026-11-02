@@ -11,6 +11,7 @@ ix.config.Add("disablePVP", true, "If true, disables player versus player damage
 })
 
 function PLUGIN:EntityTakeDamage( target, dmginfo )
+	if target:IsPlayer() and not target:Alive() then return end
 	--disable pvp
 	local attacker = dmginfo:GetAttacker()
 	if (ix.config.Get("disablePVP", true)) then

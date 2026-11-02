@@ -239,3 +239,26 @@ functional milestone rewards in this release. See the [remaining reward work](..
 Restart all map servers together. Multiplayer verification must cover existing and fresh characters,
 shared vendors, conversions, expanded-grid sync/reconnect, weight enforcement, full inventories,
 and interrupted claims. Standalone specs cannot establish those runtime behaviours.
+
+## Alternate spawn positions
+
+Place a contact normally. Stand at each alternate location and run
+`/TownNPCAddSpawnPoint <slug>` (for example, `/TownNPCAddSpawnPoint mute`), facing the direction
+that NPC should face. The first addition also records the NPC's current position. Up to 16 points
+are saved per contact/map, anywhere on its home map. Use clear, suitable ground for each position.
+`/TownNPCClearSpawnPoints <slug>` removes the alternates while leaving the current NPC in place.
+Both commands require administrator access; editing points does not move the NPC during play.
+
+After saved vendors load on each map restart, configured contacts choose a random saved point,
+excluding the previous restart's position when another distinct point exists. The previous selection
+is saved separately so a crash or stale vendor placement does not reroll the same position.
+NPCs stay at that point for the whole session. Contacts without points keep their saved placement.
+Repeated PostLoadData calls do not move them again, and newly placed contacts wait until restart.
+Points recorded with the earlier patrol tool are retained as spawn positions on the next save.
+There is no walking, patrol timer, or walking-animation override.
+
+Check `luatex --luaonly tests/bug_testing_spec.lua` for point editing, save/reload, restart selection,
+and no-repeat coverage. Verify actual placement and facing after two map restarts in multiplayer.
+
+Progression notices use local named NPC chat within chatRange of the NPC. An absent NPC uses a
+private character notification. Mute's locked introduction uses gestures in his own conversation.

@@ -1,11 +1,31 @@
 ix.crossserver = ix.crossserver or {}
 local cross = ix.crossserver
 
+local PRESENCE_COLORS = {
+	localMap = Color(105, 139, 87), remote = Color(73, 140, 143),
+	travelling = Color(167, 143, 81), unavailable = Color(116, 119, 107),
+}
+
+function cross.GetMapLabel(map)
+	local plugin = ix.plugin.Get("simplecrossserver")
+	local definition = plugin and plugin.mapdata and plugin.mapdata[map]
+
+	return string.upper(definition and definition.name or map or "UNKNOWN")
+end
+
+function cross.GetPresenceColor(info, fresh, localPlayer)
+	if fresh and info.state == "travelling" then return PRESENCE_COLORS.travelling end
+	if localPlayer then return PRESENCE_COLORS.localMap end
+	if fresh and info.state == "online" then return PRESENCE_COLORS.remote end
+
+	return PRESENCE_COLORS.unavailable
+end
+
 function cross.GetPresenceText(info, fresh, localPlayer)
-	if (fresh and info.state == "travelling") then return "TRAVELLING · " .. (info.destination or "") end
-	if (localPlayer) then return "ON THIS SERVER" end
+	if (fresh and info.state == "travelling") then return "TRAVELLING: " .. cross.GetMapLabel(info.destination) end
+	if (localPlayer) then return "ONLINE: " .. cross.GetMapLabel(game.GetMap()) end
 	if (not fresh or info.state == "unknown") then return "STATUS UNAVAILABLE" end
-	if (info.state == "online") then return "ONLINE · " .. (info.map or "") end
+	if (info.state == "online") then return "ONLINE: " .. cross.GetMapLabel(info.map) end
 	if (info.state == "offline") then return "OFFLINE" end
 
 	return "STATUS UNAVAILABLE"
@@ -30,6 +50,9 @@ if (CLIENT) then
 			record.squadID = net.ReadString()
 			record.squadName = net.ReadString()
 			record.squadColor = Color(net.ReadUInt(8), net.ReadUInt(8), net.ReadUInt(8))
+			if record.squadID == "" or record.squadID == "NULL" then
+				record.squadColor = PRESENCE_COLORS.unavailable
+			end
 			if (pending) then pending[record.characterID] = record end
 		end
 		if (finished and pending) then

@@ -79,3 +79,13 @@ PDA portraits use the scoreboard's 96:64 aspect ratio. The squad header has no i
 Invitations appear in the SQUADS creation view with an **Accept invite** button and disappear
 on expiry or character change. Acceptance uses a rate-limited server request with the same
 character, membership, inviter and expiry checks; the `/saccept` command is removed.
+
+## Compass and presence
+
+Equip a compass and join a squad to see local squadmates' names and distances below their bearings.
+Dead squadmates follow the revive ragdoll until respawn; their marker says DEAD. Squad visibility
+keeps those local entities updated outside the ordinary viewing area. Other-map members appear in
+the roster, without a local compass bearing. Online status is green on this map, teal on another map,
+amber while travelling, and muted when unavailable/offline, matching STALKERnet. Status labels use
+simplecrossserver's map names, for example ONLINE: SWAMPS. Invitations notify both sender and recipient;
+shared invitation receipts are sent only after the stored invitation is confirmed.

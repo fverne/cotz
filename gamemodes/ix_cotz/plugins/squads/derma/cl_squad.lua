@@ -465,7 +465,7 @@ function PANEL:UpdateCharacter()
 	local name = character and character:GetName() or self.info.name or ("Character #" .. self.characterID)
 	local icon = character and character:GetPdaavatar() or self.info.pdaavatar or "vgui/icons/face_31.png"
 	self.name:SetText(name)
-	local status = target and "ON THIS SERVER" or "NOT ON THIS SERVER"
+	local status = ix.crossserver.GetPresenceText(self.info, false, target ~= nil)
 	local fresh = ix.squad.presenceFresh
 	local current = LocalPlayer():GetCharacter()
 	local verified = fresh and current and fresh.id == current:GetSquadID() and CurTime() - fresh.time < 15
@@ -473,7 +473,7 @@ function PANEL:UpdateCharacter()
 		status = ix.crossserver.GetPresenceText(self.info, verified, target ~= nil)
 	end
 	self.status:SetText(status)
-	self.status:SetTextColor(target and COLORS.green or COLORS.muted)
+	self.status:SetTextColor(ix.crossserver.GetPresenceColor(self.info, verified, target ~= nil))
 	self:SetTooltip(name .. " · " .. status)
 
 	if (self.icon ~= icon) then

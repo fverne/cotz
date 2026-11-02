@@ -67,8 +67,7 @@ local function itemConditions(item)
 end
 
 local function paintCard(card, width, height)
-	surface.SetDrawColor(COLORS.card)
-	surface.DrawRect(0, 0, width, height)
+	derma.SkinFunc("PaintInventorySlot", card, width, height)
 	local hovered = card:IsHovered() or (IsValid(card.icon) and card.icon:IsHovered())
 	surface.SetDrawColor(hovered and COLORS.hover or COLORS.border)
 	surface.DrawOutlinedRect(0, 0, width, height)

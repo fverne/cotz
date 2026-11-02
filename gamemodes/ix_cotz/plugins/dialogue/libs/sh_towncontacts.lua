@@ -12,6 +12,9 @@ end
 local function configureWork(dialogue, contact)
 	dialogue.addTopic("AboutWorkTopic", {
 		statement = contact.dialogue.workPrompt,
+		ShouldAdd = function(_, client, target)
+			return client:ixHasJobFromNPC(target:GetDisplayName())
+		end,
 		response = contact.job.description,
 		options = {"BackTopic"},
 		IsDynamic = true,

@@ -72,3 +72,8 @@ No historical totals are inferred from bonus progress. Existing saves need no re
 Remote profiles read saved character reputation and statistics; they can lag until character save
 and the next roster refresh. Only the public counters and reputation enter the roster payload.
 Deploy the updated roster reader and writer together on all maps.
+
+Presence labels use simplecrossserver's friendly map names for local and remote characters, without
+an ON THIS SERVER label. STALKERnet and squads share green local, teal remote, amber travelling and
+muted unavailable colors. Loner squad labels remain grey. Character dossiers show one location line
+and include the persistent mutantsPoached statistic (completed poaches only; old saves start at zero).

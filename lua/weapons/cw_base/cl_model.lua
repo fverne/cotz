@@ -79,7 +79,9 @@ function SWEP:GetTracerOrigin()
 		return self.CenterPos
 	end
 
-	return self:getMuzzlePosition() and self:getMuzzlePosition().Pos or vector_origin
+	local muzzle = self:getMuzzlePosition()
+
+	return muzzle and muzzle.Pos or self:GetPos()
 end
 
 function SWEP:FireAnimationEvent(pos, ang, event, name)
@@ -973,6 +975,8 @@ function SWEP:PostDrawViewModel()
 end
 
 function SWEP:getMuzzlePosition()
+	if not IsValid(self.CW_VM) then return end
+
 	return self.CW_VM:GetAttachment(self.MuzzleAttachment)
 end
 
@@ -988,6 +992,7 @@ function SWEP:drawInteractionMenu()
 
 	if self.CustomizeMenuAlpha > 0 then
 		local att = self:getMuzzlePosition()
+		if not att then return end
 		local ang = EyeAngles()
 		ang:RotateAroundAxis(ang:Right(), 90)
 		ang:RotateAroundAxis(ang:Up(), -90)

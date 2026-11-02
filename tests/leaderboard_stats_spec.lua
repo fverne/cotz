@@ -44,4 +44,6 @@ data.progression.lines["other/two"] = {completed = true}
 assert(jobs.GetLeaderboardStats(data).favoriteContact == "Other, test", "ties list every name in stable order")
 assert(jobs.GetLeaderboardStats({}).favoriteContact == "None", "zero progress has no favorite")
 assert(jobs.GetLeaderboardStats({}).taskEarnings == 0, "old saves receive safe defaults")
-print("leaderboard statistics: 11 checks passed")
+assert(jobs.GetLeaderboardStats({}).mutantsPoached == 0, "old saves default to zero poaches")
+assert(jobs.GetLeaderboardStats({leaderboardStats = {mutantsPoached = 7}}).mutantsPoached == 7)
+print("leaderboard statistics: 13 checks passed")

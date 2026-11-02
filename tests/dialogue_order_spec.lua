@@ -20,7 +20,8 @@ local actions = ix.dialogue.OrderOptions({"GOODBYE", "BackTopic", "second", "fir
 check(table.concat(actions, ",") == "second,first,BackTopic,GOODBYE", "submenu choices retain their deliberate order")
 local originalInclude = ix.util.Include
 local originalFile = file
-local greetingCallback = function() end
+local greetingCalls = 0
+local greetingCallback = function() greetingCalls = greetingCalls + 1 end
 local conditionalQuestion = function(_, client) return client.allowQuestions end
 local fixtureNames = {"sh_newcontact.lua", "sh_oldcontact.lua", "sh_services.lua", "sh_locked.lua"}
 file = {Find = function() return fixtureNames end}
@@ -86,12 +87,13 @@ ix.dialogue.list.newcontact.addTopic("LateRegistration", {statement = "Late topi
 check(newTree.LateRegistration and not ix.dialogue.list.oldcontact.tree.LateRegistration,
 	"late topic registration captures the owning dialogue instead of the loader global")
 local oldTree = ix.dialogue.list.oldcontact.tree
-check(oldTree.GREETING.preCallback == greetingCallback, "greeting side effects are preserved")
+oldTree.GREETING.preCallback(oldTree.GREETING)
+check(greetingCalls == 1, "greeting side effects are preserved")
 for _, topicID in ipairs({"TradeTopic", "RepairItems", "AboutWorkTopic", "AboutProgression"}) do
 	check(hasOption(oldTree.GREETING, topicID), "important actions remain at the root")
 	check(not hasOption(oldTree.QuestionsTopic, topicID), "important actions do not enter flavour menus")
 end
-check(hasOption(oldTree.AboutWorkTopic, "TaskRewardChoices"), "job reward integration is retained")
+check(not hasOption(oldTree.AboutWorkTopic, "TaskRewardChoices"), "assignment has no reward submenu")
 check(not hasOption(oldTree.QuestionsTopic, "TaskRewardChoices"), "reward claims stay outside questions")
 check(hasOption(oldTree.RepairItems, "BackTopic"), "services still return to their main menu")
 check(hasOption(oldTree.BackgroundTopic2, "QuestionsBackTopic"), "nested background replies return to questions")
@@ -109,6 +111,7 @@ hook.Add = function(event, _, callback)
 end
 local panelType
 vgui = {Register = function(_, panel) panelType = panel end}
+Color = function() return {} end
 dofile("gamemodes/ix_cotz/plugins/dialogue/derma/cl_dialogue.lua")
 LocalPlayer = function() return {} end
 Color = function() return {} end

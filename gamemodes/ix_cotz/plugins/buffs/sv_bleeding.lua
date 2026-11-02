@@ -88,10 +88,10 @@ function PLUGIN:TickBleeding(client, state, now)
 	if not client:Alive() then return end
 
 	local severity = self:GetBleeding(client)
-	state.fraction = state.fraction + severity * ix.config.Get("bleedingDamageScale", 0.01)
+	state.fraction = state.fraction + severity * ix.config.Get("bleedingDamageScale", 0.04)
 	local damage = math.floor(state.fraction)
 	state.fraction = state.fraction - damage
-	self:SetBleedingSeverity(client, severity - ix.config.Get("bleedingClotRate", 0.2))
+	self:SetBleedingSeverity(client, severity - ix.config.Get("bleedingClotRate", 1))
 
 	if damage > 0 then
 		local damageInfo = DamageInfo()

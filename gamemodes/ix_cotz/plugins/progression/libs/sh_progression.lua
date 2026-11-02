@@ -169,10 +169,20 @@ if SERVER then
 	function ix.progression.Notify(character, name, message)
 		local client = character:GetPlayer()
 		if IsValid(client) and client:GetCharacter() == character then
-			ix.chat.Send(nil, "npcpdainternal", "", nil, nil, {
-				name = name,
-				message = message,
-			})
+			local npc = ix.progression.GetNPCFromName(name)
+			if not IsValid(npc) then
+				client:Notify(name .. ": " .. message)
+
+				return
+			end
+			local receivers = {}
+			local range = ix.config.Get("chatRange", 280)
+			for _, listener in ipairs(player.GetHumans()) do
+				if listener:GetPos():DistToSqr(npc:GetPos()) <= range ^ 2 then
+					receivers[#receivers + 1] = listener
+				end
+			end
+			ix.chat.Send(nil, "cotz_npc_say", message, false, receivers, {name = name})
 		end
 	end
 
