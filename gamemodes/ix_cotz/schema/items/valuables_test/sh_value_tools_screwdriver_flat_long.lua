@@ -3,6 +3,7 @@ ITEM.description = "A long flathead screwdriver with a dark handle and an extend
 ITEM.longdesc = "A long flathead screwdriver with a dark handle and an extended metal shaft. The grip and"
 	.. " working surfaces show ordinary handling wear, with a little grit caught in the recesses."
 	.. " It looks at home among the clutter of a mechanic's bench."
+ITEM.valuableCategory = "drivers wrenches"
 
 ITEM.model = "models/cotz/eft/barter/tools_screwdriver_flat_long.mdl"
 

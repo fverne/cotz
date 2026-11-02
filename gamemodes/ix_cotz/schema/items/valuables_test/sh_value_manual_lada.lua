@@ -4,6 +4,7 @@ ITEM.longdesc = "A thick vehicle manual with a bright printed cover and an illus
 	.. " smell clings to the paper, and the edges have softened with handling. The printed material"
 	.. " belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
 	.. " simply another object waiting for someone who recognises it."
+ITEM.valuableCategory = "technical records"
 
 ITEM.model = "models/cotz/eft/info/manual_lada.mdl"
 

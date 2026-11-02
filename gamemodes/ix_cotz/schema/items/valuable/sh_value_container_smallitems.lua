@@ -4,6 +4,7 @@ ITEM.longdesc = "A small dark zippered pouch with a textured face and a compact 
 	.. " sits along the seams and around the fittings. There is a faint smell of old packaging"
 	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching"
 	.. " inventory has followed it here."
+ITEM.valuableCategory = "equipment pouches"
 
 ITEM.model = "models/cotz/eft/containers/container_smallitems.mdl"
 

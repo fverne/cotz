@@ -4,6 +4,7 @@ ITEM.longdesc = "An ornate antique teapot with a darkened surface, an elaborate 
 	.. " spout. Fine decoration disappears beneath tarnish in the deeper recesses. It looks far too"
 	.. " formal for a makeshift camp table, though that has probably never stopped anyone from"
 	.. " putting something inappropriate beside it."
+ITEM.valuableCategory = "decorative valuables"
 
 ITEM.model = "models/cotz/eft/barter/antique_teapot.mdl"
 

@@ -4,6 +4,7 @@ ITEM.longdesc = "A stained metal cylinder with a protective ring around its uppe
 	.. " storage smell clings to its outer surface. No accompanying record establishes how it was"
 	.. " collected or what has happened to it since. Before it meant anything useful to a"
 	.. " laboratory, somebody would have to sort out that missing history."
+ITEM.valuableCategory = "ordnance salvage"
 
 ITEM.model = "models/lostsignalproject/items/misc/balloon_poison_gas.mdl"
 

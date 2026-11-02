@@ -4,6 +4,7 @@ ITEM.longdesc = "A dark green military circuit board fitted with chips, traces a
 	.. " banks. The board carries the restrained markings of equipment never intended to be"
 	.. " explained to a casual user. A little dust remains in every sheltered corner, lending its"
 	.. " precise layout a strangely deserted appearance."
+ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/illusion/eftcontainers/militaryboard.mdl"
 

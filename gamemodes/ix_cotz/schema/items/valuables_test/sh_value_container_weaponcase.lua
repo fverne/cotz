@@ -4,6 +4,7 @@ ITEM.longdesc = "A long low equipment case with recessed lid panels and several 
 	.. " sits along the seams and around the fittings. There is a faint smell of old packaging"
 	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching"
 	.. " inventory has followed it here."
+ITEM.valuableCategory = "military cases"
 
 ITEM.model = "models/cotz/eft/containers/container_weaponcase.mdl"
 

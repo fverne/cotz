@@ -4,6 +4,7 @@ ITEM.longdesc = "A dark notebook with a spiral binding running along one edge. A
 	.. " the folds and edges. It has the stale smell of paper kept somewhere damp and then allowed"
 	.. " to dry. The object offers a small, incomplete reminder that somebody once expected to come"
 	.. " back for their things."
+ITEM.valuableCategory = "office records"
 
 ITEM.model = "models/cotz/eft/info/notepad_a5_closed_01.mdl"
 

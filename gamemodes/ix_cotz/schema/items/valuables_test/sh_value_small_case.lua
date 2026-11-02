@@ -4,6 +4,7 @@ ITEM.longdesc = "A small weathered case with panelled sides, corner straps and a
 	.. " have picked up a dull film of grit, and the corners bear the small knocks of repeated"
 	.. " journeys. A stale packing-room smell hangs around the joins. It looks like an object that"
 	.. " changed hands more often than its paperwork did."
+ITEM.valuableCategory = "transit cases"
 
 ITEM.model = "models/lostsignalproject/items/misc/small_case.mdl"
 

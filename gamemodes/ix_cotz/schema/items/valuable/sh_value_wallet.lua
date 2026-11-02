@@ -4,6 +4,7 @@ ITEM.longdesc = "A brown folded wallet with a worn surface and softened corners.
 	.. " the dull polish of repeated handling. A little dust remains in the sheltered edges. It is"
 	.. " an unremarkable possession until someone notices it is missing, or recognises whose pocket"
 	.. " it used to live in."
+ITEM.valuableCategory = "personal effects"
 
 ITEM.model = "models/cotz/eft/containers/wallet.mdl"
 

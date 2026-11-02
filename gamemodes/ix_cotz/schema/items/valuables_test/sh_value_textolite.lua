@@ -3,6 +3,7 @@ ITEM.description = "A pair of green bare circuit boards covered in fine copper t
 ITEM.longdesc = "A pair of green bare circuit boards covered in fine copper traces and drilled holes. Fine"
 	.. " grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
 	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/lostsignalproject/items/quest/textolite.mdl"
 

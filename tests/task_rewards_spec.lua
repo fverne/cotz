@@ -326,6 +326,44 @@ check(food.data.quantity == 2 and not food.removed, "partial stack hand-in prese
 check(foodOwner:GetJobs().NPC.deliveredValue == 60 and foodOwner:GetJobs().NPC.moneyReward == 30,
 	"actual hand-in value and payout are saved with progress")
 check(not api.DeliverJobItem(foodOwner.client, "NPC"), "completed task cannot consume more items")
+local categoryOwner = actor()
+ix.progression.itemPools.deliveryTest = {candidates = {{item = "food"}, {item = "part_swampcontroller_1"}}}
+ix.jobs.list.categoryDelivery = copy(foodJob)
+ix.jobs.list.categoryDelivery.requiredPool = "deliveryTest"
+categoryOwner.jobs.NPC = {identifier = "categoryDelivery", numberRec = 2, progress = 0}
+local stock = {}
+function categoryOwner.inventory:HasItem(id) return stock[id] end
+check(not api.DeliverJobItem(categoryOwner.client, "NPC"), "unrelated inventory cannot satisfy a category")
+local function wholeItem(id)
+	local item = {GetData = function(_, _, default) return default end}
+	function item:Remove() stock[id] = nil end
+	stock[id] = item
+
+	return item
+end
+wholeItem("part_swampcontroller_1")
+local alternativeValue = api.HandInUnitValue("part_swampcontroller_1")
+check(api.DeliverJobItem(categoryOwner.client, "NPC"), "another category member satisfies an easy request")
+check(stock.part_swampcontroller_1 == nil and categoryOwner.jobs.NPC.progress == 1,
+	"alternative hand-in consumes only the submitted item and preserves partial progress")
+check(categoryOwner.jobs.NPC.deliveredValue == alternativeValue,
+	"category hand-ins value the actual item rather than the original reference")
+wholeItem("food")
+check(api.DeliverJobItem(categoryOwner.client, "NPC"), "different category members combine toward completion")
+check(categoryOwner.jobs.NPC.isCompleted, "mixed category hand-ins complete the requested count")
+wholeItem("food")
+check(not api.DeliverJobItem(categoryOwner.client, "NPC") and stock.food,
+	"repeated category delivery after completion consumes nothing")
+categoryOwner.jobs.NPC = {identifier = "food", numberRec = 2, progress = 0}
+stock.food = nil
+wholeItem("part_swampcontroller_1")
+check(not api.DeliverJobItem(categoryOwner.client, "NPC"), "specific requests still reject alternatives")
+ix.jobs.list.categoryDelivery.requiredPool = "missingDeliveryPool"
+categoryOwner.jobs.NPC.identifier = "categoryDelivery"
+wholeItem("food")
+check(not api.DeliverJobItem(categoryOwner.client, "NPC"), "missing category fails without consuming stock")
+ix.jobs.list.categoryDelivery = nil
+ix.progression.itemPools.deliveryTest = nil
 callbacks.ix_JobTrigger = nil
 local gated = actor()
 gated.client.rep = 249

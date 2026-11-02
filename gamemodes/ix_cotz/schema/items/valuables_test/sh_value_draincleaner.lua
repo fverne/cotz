@@ -4,6 +4,7 @@ ITEM.longdesc = "A dark drain-cleaner bottle with an angled neck and a red cap. 
 	.. " instructions that become less reassuring the longer you study them. The plastic feels"
 	.. " faintly greasy, as though it has spent years sharing a cupboard with leaking household"
 	.. " chemicals."
+ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/cotz/eft/barter/household_pipecleaner.mdl"
 

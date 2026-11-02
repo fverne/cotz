@@ -3,6 +3,7 @@ ITEM.description = "A dark power lead gathered into a loose loop."
 ITEM.longdesc = "A dark power lead gathered into a loose loop, with a plug at either end. Dust and pale"
 	.. " handling marks break up the otherwise plain insulation. It has kept the stubborn curves of"
 	.. " long storage, as if it still expects to be pushed back into the same crowded drawer."
+ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/illusion/eftcontainers/powercord.mdl"
 

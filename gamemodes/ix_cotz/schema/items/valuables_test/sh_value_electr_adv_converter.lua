@@ -3,6 +3,7 @@ ITEM.description = "A pale metal module with deep cooling fins and sockets at on
 ITEM.longdesc = "A pale metal module with deep cooling fins and sockets at one end. Dust sits around the"
 	.. " fittings, and no service record accompanies the unit. Its specialised construction may"
 	.. " interest a technician, though its condition cannot be established from the casing alone."
+ITEM.valuableCategory = "radio components"
 
 ITEM.model = "models/cotz/eft/barter/electr_adv_converter.mdl"
 

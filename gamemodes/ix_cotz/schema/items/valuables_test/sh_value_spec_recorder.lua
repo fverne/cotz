@@ -4,6 +4,7 @@ ITEM.longdesc = "A small dark recorder with side controls and a label on its bro
 	.. " cupboard smell of media kept long after the machine that used it disappeared. Small scuffs"
 	.. " interrupt the surface. The outside provides few clues to distinguish an ordinary recording"
 	.. " from something somebody would cross the Zone to recover."
+ITEM.valuableCategory = "recording equipment"
 
 ITEM.model = "models/cotz/eft/quest/spec_recorder.mdl"
 

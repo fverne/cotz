@@ -3,6 +3,7 @@ ITEM.description = "A thick cylindrical battery with a raised terminal and a gre
 ITEM.longdesc = "A thick cylindrical battery with a raised terminal and a green-and-white wrapper. Fine"
 	.. " grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
 	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.valuableCategory = "portable power"
 
 ITEM.model = "models/cotz/eft/barter/battery_d_0.mdl"
 

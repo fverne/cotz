@@ -4,6 +4,7 @@ ITEM.longdesc = "A blue transit case with reinforced ribs, side fittings and a b
 	.. " sits along the seams and around the fittings. There is a faint smell of old packaging"
 	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching"
 	.. " inventory has followed it here."
+ITEM.valuableCategory = "secured cases"
 
 ITEM.model = "models/lostsignalproject/items/quest/safe_container.mdl"
 

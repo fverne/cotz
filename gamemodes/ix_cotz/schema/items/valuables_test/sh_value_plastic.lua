@@ -3,6 +3,7 @@ ITEM.description = "A folded dark polymer sheet with a shiny crumpled surface."
 ITEM.longdesc = "A folded dark polymer sheet with a shiny crumpled surface. The covering bears small"
 	.. " handling marks and embedded dust. No inspection record establishes its grade or condition;"
 	.. " a suit technician would have to decide what could be salvaged from it."
+ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/plastic.mdl"
 

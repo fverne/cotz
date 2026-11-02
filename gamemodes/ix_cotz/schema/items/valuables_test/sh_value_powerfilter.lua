@@ -4,6 +4,7 @@ ITEM.longdesc = "A squat electrical filter housing with external connectors and 
 	.. " plate. Grime is tucked around the fittings, and the broad surfaces have the dull finish of"
 	.. " neglected industrial equipment. Its markings assume a reader who already knows exactly what"
 	.. " sort of cabinet it came from."
+ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/illusion/eftcontainers/powerfilter.mdl"
 

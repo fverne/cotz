@@ -3,6 +3,7 @@ ITEM.description = "A dark ribbed conduit wound into a tight coil with a short p
 ITEM.longdesc = "A dark ribbed conduit wound into a tight coil with a short projecting end. The surface"
 	.. " carries the dull marks of storage and handling. On a workshop shelf it would be another"
 	.. " ordinary part, waiting for somebody who knows what belongs where."
+ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/illusion/eftcontainers/helix.mdl"
 

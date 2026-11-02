@@ -3,6 +3,7 @@ ITEM.description = "Two rolls of reddish woven tape with a loose strip curled be
 ITEM.longdesc = "Two rolls of reddish woven tape with a loose strip curled beside them. The exposed edges"
 	.. " feel dry and dusty. The weave and packaging offer a small reminder of careful work done"
 	.. " with needles, shears and a clear space on a table."
+ITEM.valuableCategory = "protective textiles"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/retardant6.mdl"
 

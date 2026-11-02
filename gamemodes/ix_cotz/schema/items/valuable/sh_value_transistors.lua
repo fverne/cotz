@@ -3,6 +3,7 @@ ITEM.description = "A low dark metal parts box with a worn lid and a narrow rece
 ITEM.longdesc = "A low dark metal parts box with a worn lid and a narrow recessed seam. Fine grit has"
 	.. " settled into the sheltered edges. It is the sort of small supply a workshop can run short"
 	.. " of without noticing until the bench is already covered in unfinished work."
+ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/lostsignalproject/items/quest/transistors.mdl"
 

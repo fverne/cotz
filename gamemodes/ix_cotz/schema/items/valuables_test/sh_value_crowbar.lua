@@ -3,6 +3,7 @@ ITEM.description = "A long dark red crowbar with a forked upper hook and a flatt
 ITEM.longdesc = "A long dark red crowbar with a forked upper hook and a flattened lower end. The grip and"
 	.. " working surfaces show ordinary handling wear, with a little grit caught in the recesses."
 	.. " It looks at home among the clutter of a mechanic's bench."
+ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/lostsignalproject/items/misc/crowbar.mdl"
 

@@ -3,6 +3,7 @@ ITEM.description = "A folded bundle of green woven fabric held in a loose roll."
 ITEM.longdesc = "A folded bundle of green woven fabric held in a loose roll. The exposed edges feel dry and"
 	.. " dusty. The weave and packaging offer a small reminder of careful work done with needles,"
 	.. " shears and a clear space on a table."
+ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/fabrics1.mdl"
 

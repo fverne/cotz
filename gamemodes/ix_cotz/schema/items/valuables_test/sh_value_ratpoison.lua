@@ -4,6 +4,7 @@ ITEM.longdesc = "A small light-coloured bottle with a black cap and a bluntly wo
 	.. " warning is much easier to make out than the fine print beneath it. Dust has collected"
 	.. " around the cap, lending the whole thing the air of something best left at the back of a"
 	.. " cupboard."
+ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/cotz/eft/barter/ratkiller.mdl"
 

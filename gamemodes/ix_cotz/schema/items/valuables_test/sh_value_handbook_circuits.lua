@@ -4,6 +4,7 @@ ITEM.longdesc = "A blue technical handbook with a printed cover about microchips
 	.. " corners are rubbed and a little storage dust remains along the edges of the pages. It looks"
 	.. " like the sort of reference somebody kept within arm's reach, then stopped returning to the"
 	.. " shelf altogether."
+ITEM.valuableCategory = "technical records"
 
 ITEM.model = "models/cotz/eft/barter/info_book_circuits.mdl"
 

@@ -4,6 +4,7 @@ ITEM.longdesc = "A thin magazine with a colourful illustrated cover and a contra
 	.. " edges feel dry and slightly rough, with a faint smell of stale paper. Small handling marks"
 	.. " suggest it has passed through several pairs of hands. A careful reader might eventually"
 	.. " place it among the records it was separated from."
+ITEM.valuableCategory = "printed material"
 
 ITEM.model = "models/cotz/eft/quest/gamemagazine_01.mdl"
 

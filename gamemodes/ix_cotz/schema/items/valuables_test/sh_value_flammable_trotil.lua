@@ -4,6 +4,7 @@ ITEM.longdesc = "A rectangular wrapped block with large printed lettering on the
 	.. " surfaces carry the dust and handling marks of neglected stores. There is no matching issue"
 	.. " record or service history. It belongs on a specialist's inventory and inspection bench"
 	.. " before anyone can make sense of its condition or origin."
+ITEM.valuableCategory = "ordnance salvage"
 
 ITEM.model = "models/cotz/eft/barter/flammable_trotil.mdl"
 

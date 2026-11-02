@@ -4,6 +4,7 @@ ITEM.longdesc = "A rectangular sensor housing with a printed upper panel and soc
 	.. " Handling marks and storage dust sit around its fittings. There is no service record to"
 	.. " explain when it was last checked. Its parts and construction may interest a specialist"
 	.. " even if the original assignment can no longer be reconstructed."
+ITEM.valuableCategory = "instruments"
 
 ITEM.model = "models/lostsignalproject/items/devices/sensor_a.mdl"
 

@@ -3,6 +3,7 @@ ITEM.description = "An assortment of screwdrivers, pliers, tape and small measur
 ITEM.longdesc = "An assortment of screwdrivers, pliers, tape and small measuring tools laid together. The"
 	.. " grip and working surfaces show ordinary handling wear, with a little grit caught in the"
 	.. " recesses. It looks at home among the clutter of a mechanic's bench."
+ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/illusion/eftcontainers/toolset.mdl"
 

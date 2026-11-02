@@ -5,6 +5,7 @@ ITEM.longdesc = "A tall metal survey instrument with front controls and a small 
 	.. " casing. Handling marks and storage dust sit around its fittings. There is no service"
 	.. " record to explain when it was last checked. Its parts and construction may interest a"
 	.. " specialist even if the original assignment can no longer be reconstructed."
+ITEM.valuableCategory = "survey equipment"
 
 ITEM.model = "models/lostsignalproject/items/quest/scanner_anomaly.mdl"
 

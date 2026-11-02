@@ -4,6 +4,7 @@ ITEM.longdesc = "A compact rectangular marker unit with a recessed top panel and
 	.. " Handling marks and storage dust sit around its fittings. There is no service record to"
 	.. " explain when it was last checked. Its parts and construction may interest a specialist"
 	.. " even if the original assignment can no longer be reconstructed."
+ITEM.valuableCategory = "radio equipment"
 
 ITEM.model = "models/cotz/eft/spec/ir_ms2000.mdl"
 

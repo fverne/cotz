@@ -4,6 +4,7 @@ ITEM.longdesc = "A compact imaging module in a metal housing, with a small optic
 	.. " connection at the rear. The casing is dulled by handling, and grime follows the narrow"
 	.. " grooves along its sides. It feels like one carefully made piece of a much larger machine"
 	.. " that is no longer around to explain it."
+ITEM.valuableCategory = "instruments"
 
 ITEM.model = "models/illusion/eftcontainers/thermalmodule.mdl"
 

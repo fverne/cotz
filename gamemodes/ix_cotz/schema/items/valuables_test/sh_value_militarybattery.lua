@@ -3,6 +3,7 @@ ITEM.description = "A large dark battery with worn metal panels and recessed fit
 ITEM.longdesc = "A large dark battery with worn metal panels and recessed fittings at one end. Fine grit"
 	.. " has settled into the sheltered edges. It is the sort of small supply a workshop can run"
 	.. " short of without noticing until the bench is already covered in unfinished work."
+ITEM.valuableCategory = "portable power"
 
 ITEM.model = "models/illusion/eftcontainers/militarybattery.mdl"
 

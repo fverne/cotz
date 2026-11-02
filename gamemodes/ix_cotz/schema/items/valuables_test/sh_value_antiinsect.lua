@@ -3,6 +3,7 @@ ITEM.description = "A red aerosol can with a black cap and a bright insect-contr
 ITEM.longdesc = "A red aerosol can with a black cap and a bright insect-control label. Dust clings around"
 	.. " the closure, and the label has the tired look of goods left on a storeroom shelf. Someone"
 	.. " keeping a camp clean might still find a place for it among their supplies."
+ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/cotz/eft/barter/antiinsect.mdl"
 

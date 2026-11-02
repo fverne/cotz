@@ -4,6 +4,7 @@ ITEM.longdesc = "A wrapped pack of office paper with green branding and battered
 	.. " carries the dry smell of an old filing room, with a little dampness underneath. An entire"
 	.. " stack of blank pages feels oddly extravagant in a place where even shopping lists tend to"
 	.. " be written on scraps."
+ITEM.valuableCategory = "office records"
 
 ITEM.model = "models/illusion/eftcontainers/copypaper.mdl"
 

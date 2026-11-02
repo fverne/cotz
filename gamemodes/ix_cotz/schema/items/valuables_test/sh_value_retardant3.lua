@@ -3,6 +3,7 @@ ITEM.description = "A blue-grey fabric roll held shut by two dark straps."
 ITEM.longdesc = "A blue-grey fabric roll held shut by two dark straps. The exposed edges feel dry and"
 	.. " dusty. The weave and packaging offer a small reminder of careful work done with needles,"
 	.. " shears and a clear space on a table."
+ITEM.valuableCategory = "protective textiles"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/retardant3.mdl"
 

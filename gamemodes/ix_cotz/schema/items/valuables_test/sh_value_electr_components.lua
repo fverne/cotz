@@ -3,6 +3,7 @@ ITEM.description = "An assortment of small electronic components with loose lead
 ITEM.longdesc = "An assortment of small electronic components with loose leads and coloured bodies. Fine"
 	.. " grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
 	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/cotz/eft/barter/electr_components.mdl"
 

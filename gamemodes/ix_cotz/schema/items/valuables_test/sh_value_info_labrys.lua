@@ -4,6 +4,7 @@ ITEM.longdesc = "A dark printed booklet with a pale sheet protruding behind its 
 	.. " clings to the paper, and the edges have softened with handling. The printed material"
 	.. " belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
 	.. " simply another object waiting for someone who recognises it."
+ITEM.valuableCategory = "printed material"
 
 ITEM.model = "models/cotz/eft/barter/info_labrys.mdl"
 

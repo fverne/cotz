@@ -3,6 +3,7 @@ ITEM.description = "A tall blue lubricant can with a red cap and a narrow pale l
 ITEM.longdesc = "A tall blue lubricant can with a red cap and a narrow pale label. The surface carries the"
 	.. " dull marks of storage and handling. On a workshop shelf it would be another ordinary part,"
 	.. " waiting for somebody who knows what belongs where."
+ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/cotz/eft/barter/wd40_400ml.mdl"
 

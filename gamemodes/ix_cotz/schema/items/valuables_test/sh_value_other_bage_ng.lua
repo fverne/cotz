@@ -4,6 +4,7 @@ ITEM.longdesc = "A printed identification card attached to a looped fabric lanya
 	.. " handling wear and a little embedded dust. Detached from its original owner, the emblem is"
 	.. " a clue with very little context. An interested collector or records clerk might know where"
 	.. " it belongs, though possession alone proves little."
+ITEM.valuableCategory = "personal effects"
 
 ITEM.model = "models/cotz/eft/barter/other_bage_ng.mdl"
 

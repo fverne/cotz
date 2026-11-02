@@ -4,6 +4,7 @@ ITEM.longdesc = "A gas canister with a torch head, a small control knob and a na
 	.. " and storage dust sit around its fittings. There is no service record to explain when it"
 	.. " was last checked. Its parts and construction may interest a specialist even if the"
 	.. " original assignment can no longer be reconstructed."
+ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/cotz/eft/spec/key_labyrinth_torch.mdl"
 

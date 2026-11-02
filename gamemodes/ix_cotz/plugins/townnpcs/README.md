@@ -158,6 +158,11 @@ These bounds override quantity/value floors. World, breakable-box, human-pocket 
 combined across regions; `settings.spawnBatches` records random `OnInstanced` yields where capacity
 differs from the initial amount. Update that table when those item callbacks change. Ammunition
 without `ITEM.quantity` retains its existing whole-box counting and request amounts.
+Easy deliveries accept any item in their configured pool, including mixed members across hand-ins.
+Their titles and descriptions name the category. Medium/hard deliveries retain specific item requests.
+The candidate item in each stable job ID remains the quantity/payment reference; accepted counts,
+progress and reward choices are preserved. Each catalogued valuable declares a readable
+`valuableCategory` property displayed in its inventory tooltip. See the hand-in catalogue for labels.
 Delivery maps are acquisition guidance, not a restriction on where an item must be found.
 
 | Contact / home | Easy additions | Medium additions | Hard additions |

@@ -4,6 +4,7 @@ ITEM.longdesc = "A tall cylindrical instrument assembly with upper fittings and 
 	.. " sits around the fittings, and no service record accompanies the unit. Its specialised"
 	.. " construction may interest a technician, though its condition cannot be established from"
 	.. " the casing alone."
+ITEM.valuableCategory = "instruments"
 
 ITEM.model = "models/illusion/eftcontainers/gyrotachometer.mdl"
 

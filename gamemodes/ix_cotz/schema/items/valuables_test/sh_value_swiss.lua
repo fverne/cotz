@@ -3,6 +3,7 @@ ITEM.description = "A red folding pocket tool with a pale cross emblem and sever
 ITEM.longdesc = "A red folding pocket tool with a pale cross emblem and several closed metal implements."
 	.. " The grip and working surfaces show ordinary handling wear, with a little grit caught in"
 	.. " the recesses. It looks at home among the clutter of a mechanic's bench."
+ITEM.valuableCategory = "cutting tools"
 
 ITEM.model = "models/lostsignalproject/items/misc/swiss.mdl"
 

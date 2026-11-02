@@ -4,6 +4,7 @@ ITEM.longdesc = "An untidy collection of medical packets, blister strips and sma
 	.. " packaging varies in shape and colour, with little of the careful arrangement usually"
 	.. " associated with a pharmacy counter. It smells of cardboard and shut cupboards. Somebody"
 	.. " will have to make sense of the collection before it belongs on a proper shelf again."
+ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/illusion/eftcontainers/medpile.mdl"
 

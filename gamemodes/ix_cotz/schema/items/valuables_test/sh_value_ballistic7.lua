@@ -4,6 +4,7 @@ ITEM.longdesc = "A dark rectangular armour insert with rounded corners and a pal
 	.. " covering bears small handling marks and embedded dust. No inspection record establishes"
 	.. " its grade or condition; a suit technician would have to decide what could be salvaged from"
 	.. " it."
+ITEM.valuableCategory = "armour panels"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic7.mdl"
 

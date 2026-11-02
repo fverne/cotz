@@ -3,6 +3,7 @@ ITEM.description = "A narrow metal fuze assembly with a long lever and an attach
 ITEM.longdesc = "A narrow metal fuze assembly with a long lever and an attached pull ring. There is dust"
 	.. " around the fittings and no accompanying inventory to explain its journey. Someone"
 	.. " responsible for specialist stores would want it inspected and accounted for."
+ITEM.valuableCategory = "ordnance salvage"
 
 ITEM.model = "models/cotz/eft/barter/other_uzrgm_fuse.mdl"
 

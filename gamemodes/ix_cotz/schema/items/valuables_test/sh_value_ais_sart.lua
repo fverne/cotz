@@ -4,6 +4,7 @@ ITEM.longdesc = "A long orange locator unit with a cylindrical body and a projec
 	.. " gathered in the recessed parts, and the exterior has lost the tidy finish of freshly"
 	.. " issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
+ITEM.valuableCategory = "radio equipment"
 
 ITEM.model = "models/cotz/eft/usable/ais_sart.mdl"
 

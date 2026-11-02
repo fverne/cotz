@@ -4,6 +4,7 @@ ITEM.longdesc = "A folded length of muted green fleece fabric. The surface has a
 	.. " than the tougher cloth usually found around equipment stores. It carries a faint smell of"
 	.. " damp wool and shut cupboards, the sort that seems to return no matter how long something is"
 	.. " aired."
+ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/cotz/eft/barter/other_cloth_fleece.mdl"
 

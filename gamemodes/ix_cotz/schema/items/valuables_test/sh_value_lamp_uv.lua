@@ -4,6 +4,7 @@ ITEM.longdesc = "A specialist lamp with purple tubes rising from a light-coloure
 	.. " metal fitting. Dust collects where the tubes meet the base, and the small print has begun"
 	.. " to look rather tired. Its unusual colour makes it stand out among the more ordinary scraps"
 	.. " of electrical equipment."
+ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/cotz/eft/barter/electr_uvlamp.mdl"
 

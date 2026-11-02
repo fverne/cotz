@@ -4,6 +4,7 @@ ITEM.longdesc = "A weathered metal briefcase with rounded corners and a darkened
 	.. " the seams and around the fittings. There is a faint smell of old packaging about it. Its"
 	.. " orderly shape suggests a place on a numbered shelf, though no matching inventory has"
 	.. " followed it here."
+ITEM.valuableCategory = "transit cases"
 
 ITEM.model = "models/cotz/eft/quest/briefcase.mdl"
 

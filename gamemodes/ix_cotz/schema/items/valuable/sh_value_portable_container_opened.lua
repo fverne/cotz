@@ -4,6 +4,7 @@ ITEM.longdesc = "A tall rectangular metal carrier with its hinged lid standing o
 	.. " around the edges while the broad panels retain their familiar industrial shape. It smells"
 	.. " faintly of shut storerooms. Whatever journey brought it here has left the case with more"
 	.. " history than explanation."
+ITEM.valuableCategory = "sample carriers"
 
 ITEM.model = "models/lostsignalproject/items/misc/portable_container_opened.mdl"
 

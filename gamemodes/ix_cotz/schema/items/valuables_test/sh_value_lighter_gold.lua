@@ -4,6 +4,7 @@ ITEM.longdesc = "An open gold-plated lighter with a rectangular body, a hinged l
 	.. " exposed. The finish has lost some of its shine, especially around the edges where it has"
 	.. " been handled most. A faint, stale fuel smell remains, mixed with the familiar scent of old"
 	.. " tobacco."
+ITEM.valuableCategory = "decorative valuables"
 
 ITEM.model = "models/cotz/eft/barter/zibbo_gold_0.mdl"
 

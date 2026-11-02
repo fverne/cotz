@@ -4,6 +4,7 @@ ITEM.longdesc = "A brass skull ring with a broad band and a heavily modelled fac
 	.. " around the teeth and inside the eye sockets, making the expression look more severe. The"
 	.. " raised parts have a brighter finish, suggesting a long history of being rubbed between"
 	.. " somebody's fingers."
+ITEM.valuableCategory = "decorative valuables"
 
 ITEM.model = "models/illusion/eftcontainers/skullring.mdl"
 

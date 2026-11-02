@@ -39,14 +39,19 @@ if (CLIENT) then
     end
 end
 
-function ITEM:PopulateTooltip(tooltip)
-    if !self.entity then
-        ix.util.PropertyDesc(tooltip, "Valuable", Color(225, 223, 0))
-    end
+local PROPERTY_COLOR = CLIENT and Color(225, 223, 0)
 
-    if (self.PopulateTooltipIndividual) then
-      self:PopulateTooltipIndividual(tooltip)
-    end
+function ITEM:PopulateTooltip(tooltip)
+	if not self.entity then
+		ix.util.PropertyDesc(tooltip, "Valuable", PROPERTY_COLOR)
+		if self.valuableCategory then
+			ix.util.PropertyDesc(tooltip, self.valuableCategory, PROPERTY_COLOR)
+		end
+	end
+
+	if self.PopulateTooltipIndividual then
+		self:PopulateTooltipIndividual(tooltip)
+	end
 end
 
 function ITEM:GetWeight()

@@ -162,6 +162,17 @@ for _, id in ipairs(itemIDs) do
 		check(item.quantity == nil and item.flatweight > 0, "ordinary valuables remain fixed-weight objects")
 	end
 end
+local properties = {}
+ix.util.PropertyDesc = function(_, label) properties[#properties + 1] = label end
+local tooltipItem = ix.item.list.value_soap
+tooltipItem:PopulateTooltip({})
+check(properties[1] == "Valuable" and properties[2] == "cleaning supplies",
+	"inventory tooltips show the readable valuable category")
+properties = {}
+tooltipItem.entity = {}
+tooltipItem:PopulateTooltip({})
+check(#properties == 0, "world item tooltips retain their existing property visibility")
+tooltipItem.entity = nil
 check(#itemIDs == 50, "all 50 new definitions are registered")
 check(ix.item.base.base_valuable.functions.combine == nil, "existing valuable base has no new actions")
 check(ix.item.base.base_valuable_stack == nil, "no additional valuable base is registered")

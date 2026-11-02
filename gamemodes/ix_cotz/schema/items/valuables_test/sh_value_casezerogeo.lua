@@ -4,6 +4,7 @@ ITEM.longdesc = "A pale hard case with moulded edges, front catches and a printe
 	.. " catches have picked up a dull film of grit, and the corners bear the small knocks of"
 	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an"
 	.. " object that changed hands more often than its paperwork did."
+ITEM.valuableCategory = "survey equipment"
 
 ITEM.model = "models/cotz/eft/quest/casezerogeo.mdl"
 

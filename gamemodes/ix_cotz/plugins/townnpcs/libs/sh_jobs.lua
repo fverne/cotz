@@ -51,10 +51,18 @@ local function registerDeliveries(contact, base, category, tier, pools, quantity
 			local unit = math.max(1, ix.taskRewards.HandInUnitValue(candidate.item))
 			local job = table.Copy(base)
 			job.requiredItem = candidate.item
+			job.requiredPool = tier == 1 and poolID or nil
 			local fallback = math.max(quantity, math.ceil(minimum / unit))
 			job.numberRec = deliveryQuantity(candidate.item, tier, fallback)
 			job.name = "Deliver %d " .. item.name .. "."
 			job.desc = contact.job.description .. " Deliver %d required units."
+			if job.requiredPool then
+				local label = poolID:match("^valuables_(.+)$")
+				label = label and label:gsub("_", " ") or pool.name
+				job.name = "Deliver %d units of " .. label .. "."
+				job.desc = contact.job.description .. " Deliver %d units of " .. label
+					.. ". Any item in this category counts; different items can be combined."
+			end
 			registerJob(contact, category .. "/" .. candidate.item, job)
 		end
 	end

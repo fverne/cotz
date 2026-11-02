@@ -210,13 +210,28 @@ function ix.taskRewards.DeliverJobItem(client, npc)
 	if not job or job.isCompleted then return false end
 	local definition = ix.jobs.list[job.identifier]
 	if not definition or not definition.requiredItem then return false end
-	local item = character:GetInventory():HasItem(definition.requiredItem)
+	local inventory = character:GetInventory()
+	local item, itemID
+	if definition.requiredPool then
+		local pool = ix.progression.itemPools[definition.requiredPool]
+		if not pool then return false end
+		for _, candidate in ipairs(pool.candidates) do
+			local available = inventory:HasItem(candidate.item)
+			if available then
+				item, itemID = available, candidate.item
+				break
+			end
+		end
+	else
+		itemID = definition.requiredItem
+		item = inventory:HasItem(itemID)
+	end
 	if not item then return false end
 	local remaining = job.numberRec - (job.progress or 0)
 	local quantity = item.quantity and item:GetData("quantity", item.quantity) or 1
 	local amount = math.min(remaining, quantity)
 	if amount <= 0 then return false end
-	local value = ix.taskRewards.HandInUnitValue(definition.requiredItem, item) * amount
+	local value = ix.taskRewards.HandInUnitValue(itemID, item) * amount
 	for _ = 1, amount do hook.Run("ix_JobTrigger", client, job.identifier) end
 	local jobs = character:GetJobs()
 	job = jobs[npc]
@@ -229,7 +244,7 @@ function ix.taskRewards.DeliverJobItem(client, npc)
 		item:Remove()
 	end
 	character:Save()
-	ix.dialogue.notifyItemLost(client, ix.item.list[definition.requiredItem].name)
+	ix.dialogue.notifyItemLost(client, ix.item.list[itemID].name)
 
 	return true
 end

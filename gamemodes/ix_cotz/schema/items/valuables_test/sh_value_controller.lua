@@ -4,6 +4,7 @@ ITEM.longdesc = "A dark ribbed control unit with round connectors and a broad me
 	.. " sits around the fittings, and no service record accompanies the unit. Its specialised"
 	.. " construction may interest a technician, though its condition cannot be established from"
 	.. " the casing alone."
+ITEM.valuableCategory = "control electronics"
 
 ITEM.model = "models/illusion/eftcontainers/controller.mdl"
 

@@ -4,6 +4,7 @@ ITEM.longdesc = "A small screw-top bottle with densely printed labelling. Dust s
 	.. " cap and along the lower edge of the wrapper. The lettering promises a very ordinary sort"
 	.. " of preparedness, which makes the bottle feel unexpectedly important among the contents of"
 	.. " an abandoned supply room."
+ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/cotz/eft/barter/medical_aquatabs.mdl"
 

@@ -4,6 +4,7 @@ ITEM.longdesc = "A thick book with an embossed brown cover and a deeply textured
 	.. " feel dry and slightly rough, with a faint smell of stale paper. Small handling marks"
 	.. " suggest it has passed through several pairs of hands. A careful reader might eventually"
 	.. " place it among the records it was separated from."
+ITEM.valuableCategory = "printed material"
 
 ITEM.model = "models/cotz/eft/info/note_book_coming_closed.mdl"
 

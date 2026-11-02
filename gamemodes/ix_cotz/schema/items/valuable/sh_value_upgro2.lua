@@ -3,6 +3,7 @@ ITEM.description = "A black zippered equipment pouch with a reinforced front pan
 ITEM.longdesc = "A black zippered equipment pouch with a reinforced front panel and several seams. The"
 	.. " surface carries the dull marks of storage and handling. On a workshop shelf it would be"
 	.. " another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/lostsignalproject/items/upgrades/upgro2.mdl"
 

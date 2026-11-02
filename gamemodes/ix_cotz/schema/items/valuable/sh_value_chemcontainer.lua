@@ -4,6 +4,7 @@ ITEM.longdesc = "A plain cylindrical carrier with dark end caps and a narrow lab
 	.. " smell clings to its outer surface. No accompanying record establishes how it was collected"
 	.. " or what has happened to it since. Before it meant anything useful to a laboratory,"
 	.. " somebody would have to sort out that missing history."
+ITEM.valuableCategory = "sample carriers"
 
 ITEM.model = "models/cotz/eft/quest/chemcontainer.mdl"
 

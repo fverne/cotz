@@ -4,6 +4,7 @@ ITEM.longdesc = "A blue insulated carrier with a top handle and a pale front pan
 	.. " the seams and around the fittings. There is a faint smell of old packaging about it. Its"
 	.. " orderly shape suggests a place on a numbered shelf, though no matching inventory has"
 	.. " followed it here."
+ITEM.valuableCategory = "sample carriers"
 
 ITEM.model = "models/illusion/eftcontainers/thermobag.mdl"
 

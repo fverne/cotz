@@ -4,6 +4,7 @@ ITEM.longdesc = "A dark audio cassette with a broad violet label and contrasting
 	.. " the dry cupboard smell of media kept long after the machine that used it disappeared."
 	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an"
 	.. " ordinary recording from something somebody would cross the Zone to recover."
+ITEM.valuableCategory = "recording equipment"
 
 ITEM.model = "models/kek1ch/cassette_fiolet.mdl"
 

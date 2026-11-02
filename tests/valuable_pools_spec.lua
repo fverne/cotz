@@ -2,6 +2,7 @@
 ix = {}
 dofile("gamemodes/ix_cotz/plugins/progression/definitions/sh_requirementpools.lua")
 local items = {}
+local itemSources = {}
 local reviewedItems = {}
 for key, pool in pairs(ix.progression.itemPools) do
 	if key:match("^valuables_") then
@@ -22,6 +23,9 @@ for path in files:lines() do
 		local id = path:match("/sh_(.+)%.lua$")
 		assert(id, "Unexpected valuable definition: " .. path)
 		items[id] = true
+		local sourceFile = assert(io.open(path))
+		itemSources[id] = sourceFile:read("*a")
+		sourceFile:close()
 	end
 end
 files:close()
@@ -36,6 +40,9 @@ for id, pool in pairs(ix.progression.itemPools) do
 			assert(items[candidate.item], "Pool references a missing valuable: " .. candidate.item)
 			assert(not assigned[candidate.item], "Valuable appears in multiple review pools: " .. candidate.item)
 			assigned[candidate.item] = id
+			local expected = id:gsub("^valuables_", ""):gsub("_", " ")
+			local label = itemSources[candidate.item]:match('ITEM.valuableCategory = "([^"]+)"')
+			assert(label == expected, "Valuable category differs from its pool: " .. candidate.item)
 		end
 	end
 end

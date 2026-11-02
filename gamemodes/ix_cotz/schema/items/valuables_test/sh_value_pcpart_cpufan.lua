@@ -4,6 +4,7 @@ ITEM.longdesc = "A cooling assembly with a dark fan above a dense stack of metal
 	.. " Old dust has settled deep between the fins, beyond the reach of a casual wipe. It has the"
 	.. " stale, warm-plastic smell that seems to linger in computer cases long after the machines"
 	.. " are abandoned."
+ITEM.valuableCategory = "computer parts"
 
 ITEM.model = "models/cotz/eft/barter/electr_cpufan.mdl"
 

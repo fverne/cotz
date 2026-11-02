@@ -4,6 +4,7 @@ ITEM.longdesc = "A dark pocket notebook with a narrow ribbon trailing from its p
 	.. " softened with handling, and there is a faint smell of old paper about it. It feels like"
 	.. " something that once had a habitual place among one person's belongings. Without its owner,"
 	.. " even an ordinary object acquires an uncomfortable weight of unanswered questions."
+ITEM.valuableCategory = "field records"
 
 ITEM.model = "models/cotz/eft/barter/info_moleskine.mdl"
 

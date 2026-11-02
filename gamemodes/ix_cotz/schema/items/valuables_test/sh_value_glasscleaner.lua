@@ -4,6 +4,7 @@ ITEM.longdesc = "A pale spray bottle with a red trigger and a colourful glass-cl
 	.. " fingerprints around the neck and an old detergent smell trapped beneath the trigger. The"
 	.. " illustration on the front still suggests a much cleaner world than the one the bottle"
 	.. " currently occupies."
+ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/cotz/eft/barter/household_wiper.mdl"
 

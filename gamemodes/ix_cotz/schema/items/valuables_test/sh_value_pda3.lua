@@ -4,6 +4,7 @@ ITEM.longdesc = "A blue handheld computer with a dark screen and a raised contro
 	.. " gathered in the recessed parts, and the exterior has lost the tidy finish of freshly"
 	.. " issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
+ITEM.valuableCategory = "portable computers"
 
 ITEM.model = "models/lostsignalproject/items/devices/pda3.mdl"
 

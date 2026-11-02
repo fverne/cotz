@@ -3,6 +3,7 @@ ITEM.description = "A paired cylindrical battery assembly held beneath a labelle
 ITEM.longdesc = "A paired cylindrical battery assembly held beneath a labelled rectangular top plate. Fine"
 	.. " grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
 	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.valuableCategory = "portable power"
 
 ITEM.model = "models/cotz/eft/barter/energy_cyclon.mdl"
 

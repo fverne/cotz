@@ -3,6 +3,7 @@ ITEM.description = "A rolled olive bedspread held together by a narrow strap."
 ITEM.longdesc = "A rolled olive bedspread held together by a narrow strap. Dust has worked into the folds"
 	.. " and rough surfaces. It has the familiar, unglamorous shape of camp stores, carried from"
 	.. " one improvised shelter to the next."
+ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/lostsignalproject/items/misc/bedspread.mdl"
 

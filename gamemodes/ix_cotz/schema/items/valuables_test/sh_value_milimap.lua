@@ -4,6 +4,7 @@ ITEM.longdesc = "A printed terrain map with a dark reinforced strip along one ed
 	.. " from repeated handling, and the surface smells faintly of dry paper and old cupboards. It"
 	.. " has the look of material kept for reference through several changes of plan. Its markings"
 	.. " would need to be checked against records that are not attached to it."
+ITEM.valuableCategory = "field records"
 
 ITEM.model = "models/lostsignalproject/items/misc/milimap.mdl"
 

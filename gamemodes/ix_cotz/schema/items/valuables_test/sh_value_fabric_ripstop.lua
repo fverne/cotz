@@ -4,6 +4,7 @@ ITEM.longdesc = "A folded piece of dark ripstop fabric with a fine reinforced te
 	.. " where it has been packed down, while dust softens the outline of the folded edges. There"
 	.. " are no useful markings to distinguish it from countless other offcuts left behind in"
 	.. " storerooms."
+ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/cotz/eft/barter/other_cloth_ripstop.mdl"
 

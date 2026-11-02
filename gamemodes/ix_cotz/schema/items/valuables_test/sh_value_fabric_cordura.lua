@@ -3,6 +3,7 @@ ITEM.description = "A folded piece of dark Cordura fabric."
 ITEM.longdesc = "A folded piece of dark Cordura fabric with a coarse, close weave. The raised texture holds"
 	.. " dust more readily than the flatter edges, leaving a faint pattern when it is brushed. It"
 	.. " smells of old storage and the rubberised lining of a forgotten travel bag."
+ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/cotz/eft/barter/other_cloth_cordura.mdl"
 

@@ -4,6 +4,7 @@ ITEM.longdesc = "A pair of handheld radio units mounted together on a small base
 	.. " storage dust sit around its fittings. There is no service record to explain when it was"
 	.. " last checked. Its parts and construction may interest a specialist even if the original"
 	.. " assignment can no longer be reconstructed."
+ITEM.valuableCategory = "radio equipment"
 
 ITEM.model = "models/cotz/eft/quest/radio_repeater.mdl"
 

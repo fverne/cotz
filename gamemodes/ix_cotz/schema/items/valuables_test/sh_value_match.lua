@@ -3,6 +3,7 @@ ITEM.description = "A small pale matchbox with a dark printed illustration and a
 ITEM.longdesc = "A small pale matchbox with a dark printed illustration and a brown striker strip. The"
 	.. " outer surfaces carry a little storage dust and the marks of repeated handling. It belongs"
 	.. " to the quiet inventory of ordinary things that keep a camp supplied between expeditions."
+ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/lostsignalproject/items/misc/match.mdl"
 

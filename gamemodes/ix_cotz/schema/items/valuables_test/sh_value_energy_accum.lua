@@ -3,6 +3,7 @@ ITEM.description = "A small black rectangular battery pack with recessed contact
 ITEM.longdesc = "A small black rectangular battery pack with recessed contacts along one edge. Fine grit"
 	.. " has settled into the sheltered edges. It is the sort of small supply a workshop can run"
 	.. " short of without noticing until the bench is already covered in unfinished work."
+ITEM.valuableCategory = "portable power"
 
 ITEM.model = "models/cotz/eft/barter/energy_accum.mdl"
 

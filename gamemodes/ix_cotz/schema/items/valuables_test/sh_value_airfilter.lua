@@ -3,6 +3,7 @@ ITEM.description = "A stained cylindrical air filter housing with a broad top op
 ITEM.longdesc = "A stained cylindrical air filter housing with a broad top opening and a red side fitting."
 	.. " The surface carries the dull marks of storage and handling. On a workshop shelf it would"
 	.. " be another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.valuableCategory = "filtration"
 
 ITEM.model = "models/illusion/eftcontainers/airfilter.mdl"
 

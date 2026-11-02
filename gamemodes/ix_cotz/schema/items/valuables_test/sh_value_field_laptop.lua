@@ -4,6 +4,7 @@ ITEM.longdesc = "An open laptop with a dark screen, compact keyboard and a broad
 	.. " gathered in the recessed parts, and the exterior has lost the tidy finish of freshly"
 	.. " issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
+ITEM.valuableCategory = "portable computers"
 
 ITEM.model = "models/lostsignalproject/items/quest/laptop.mdl"
 

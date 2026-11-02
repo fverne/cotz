@@ -4,6 +4,7 @@ ITEM.longdesc = "A light-coloured cassette with a handwritten label and two dark
 	.. " scuffed around its edges, and the writing offers very little context to anyone unfamiliar"
 	.. " with the hand. Whatever its significance once was, nobody thought to leave a helpful"
 	.. " explanation with it."
+ITEM.valuableCategory = "recording equipment"
 
 ITEM.model = "models/cotz/eft/info/recorder_tape_01.mdl"
 

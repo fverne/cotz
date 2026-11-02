@@ -4,6 +4,7 @@ ITEM.longdesc = "A mechanical injection device with a broad grip and several pro
 	.. " labelled section near one end adds the only obvious colour to the otherwise subdued"
 	.. " assembly. Dirt has collected around the moving-looking joints, leaving the impression of a"
 	.. " precise tool separated from the rest of its equipment."
+ITEM.valuableCategory = "trauma supplies"
 
 ITEM.model = "models/cotz/eft/usable/meds_medinjector.mdl"
 

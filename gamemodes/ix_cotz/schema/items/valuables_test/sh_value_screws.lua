@@ -4,6 +4,7 @@ ITEM.longdesc = "A worn packet of screws beneath a blue and yellow printed heade
 	.. " and rubbed cloudy in places, with little dark marks where the metal has pressed against it."
 	.. " It looks like the sort of half-forgotten purchase that spends years at the bottom of a tool"
 	.. " drawer."
+ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/illusion/eftcontainers/packofscrews.mdl"
 

@@ -3,6 +3,7 @@ ITEM.description = "A dark metal ratchet with a round drive head and a recessed 
 ITEM.longdesc = "A dark metal ratchet with a round drive head and a recessed handle. The grip and working"
 	.. " surfaces show ordinary handling wear, with a little grit caught in the recesses. It looks"
 	.. " at home among the clutter of a mechanic's bench."
+ITEM.valuableCategory = "drivers wrenches"
 
 ITEM.model = "models/cotz/eft/barter/tools_ratchetwrench.mdl"
 

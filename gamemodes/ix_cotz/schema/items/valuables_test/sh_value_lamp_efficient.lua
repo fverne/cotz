@@ -4,6 +4,7 @@ ITEM.longdesc = "An energy-saving lamp with pale folded tubes, a light-coloured 
 	.. " fitting. The base carries printed markings, softened by handling and accumulated dust. It"
 	.. " looks like it was saved from a cupboard where every spare bulb was kept, regardless of"
 	.. " whether anyone remembered why."
+ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/cotz/eft/barter/electr_eslamp.mdl"
 

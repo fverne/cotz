@@ -5,6 +5,7 @@ ITEM.longdesc = "A tightly rolled splint with an orange outer surface and contra
 	.. " end. Its simple shape makes it look almost like an ordinary workshop offcut until examined"
 	.. " more closely. There are pale scuffs on the exposed material and a dry storage smell caught"
 	.. " between the turns."
+ITEM.valuableCategory = "trauma supplies"
 
 ITEM.model = "models/cotz/eft/usable/meds_alusplint.mdl"
 

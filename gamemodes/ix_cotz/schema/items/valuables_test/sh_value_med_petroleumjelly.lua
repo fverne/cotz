@@ -4,6 +4,7 @@ ITEM.longdesc = "A shallow round tin with an orange printed lid and a dark rim. 
 	.. " advertising than seems necessary for such a modest container. It smells faintly of old"
 	.. " ointment and dust, and the edge leaves a greasy impression on whatever it is packed"
 	.. " against."
+ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/cotz/eft/usable/vaselin.mdl"
 

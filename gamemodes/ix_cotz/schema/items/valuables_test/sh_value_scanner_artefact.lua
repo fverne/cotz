@@ -4,6 +4,7 @@ ITEM.longdesc = "A narrow survey instrument with a sloping control face and a ci
 	.. " Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
 	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
+ITEM.valuableCategory = "survey equipment"
 
 ITEM.model = "models/lostsignalproject/items/quest/scanner_artefact.mdl"
 

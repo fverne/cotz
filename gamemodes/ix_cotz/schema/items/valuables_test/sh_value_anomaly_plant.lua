@@ -4,6 +4,7 @@ ITEM.longdesc = "A fleshy star-shaped plant specimen with irregular pointed leav
 	.. " clings to its outer surface. No accompanying record establishes how it was collected or"
 	.. " what has happened to it since. Before it meant anything useful to a laboratory, somebody"
 	.. " would have to sort out that missing history."
+ITEM.valuableCategory = "research samples"
 
 ITEM.model = "models/lostsignalproject/items/quest/anomaly_plant.mdl"
 

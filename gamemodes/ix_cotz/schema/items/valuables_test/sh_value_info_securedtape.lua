@@ -4,6 +4,7 @@ ITEM.longdesc = "A square dark tape cartridge with a circular centre and a contr
 	.. " the dry cupboard smell of media kept long after the machine that used it disappeared."
 	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an"
 	.. " ordinary recording from something somebody would cross the Zone to recover."
+ITEM.valuableCategory = "data archives"
 
 ITEM.model = "models/cotz/eft/barter/info_securedtape.mdl"
 

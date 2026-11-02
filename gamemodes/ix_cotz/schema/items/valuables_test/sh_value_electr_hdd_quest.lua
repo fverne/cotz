@@ -4,6 +4,7 @@ ITEM.longdesc = "A metal hard drive with a broad printed label across its upper 
 	.. " carries a fine film of handling marks. No accompanying inventory explains where it came"
 	.. " from or whether its records survived storage. It is the sort of small object that can"
 	.. " leave a technician with a surprisingly long afternoon."
+ITEM.valuableCategory = "computer parts"
 
 ITEM.model = "models/cotz/eft/barter/electr_hdd_quest.mdl"
 

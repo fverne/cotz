@@ -4,6 +4,7 @@ ITEM.longdesc = "An assortment of slender metal surgical instruments with loops,
 	.. " Their outlines overlap into a rather uninviting tangle when laid together. The metal"
 	.. " carries the dull finish of old equipment, and there is no surviving case or inventory card"
 	.. " to say whether the collection is complete."
+ITEM.valuableCategory = "medical equipment"
 
 ITEM.model = "models/cotz/eft/barter/meds_tools.mdl"
 

@@ -4,6 +4,7 @@ ITEM.longdesc = "A folded newspaper filled with narrow columns of small print. A
 	.. " to the paper, and the edges have softened with handling. The printed material belongs to a"
 	.. " much more orderly world of counters, desks and filing shelves. Here it is simply another"
 	.. " object waiting for someone who recognises it."
+ITEM.valuableCategory = "printed material"
 
 ITEM.model = "models/cotz/eft/info/note_newspaper_folded_01.mdl"
 

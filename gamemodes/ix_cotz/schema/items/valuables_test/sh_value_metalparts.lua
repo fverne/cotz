@@ -3,6 +3,7 @@ ITEM.description = "An assortment of rusty metal fittings."
 ITEM.longdesc = "An untidy collection of metal fittings, threaded pieces and washers. Rust has given the"
 	.. " exposed surfaces a patchwork of orange and brown, while darker grime remains in the"
 	.. " recesses. They knock together with a heavy, irregular clatter whenever the bundle is moved."
+ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/cotz/eft/barter/building_metalparts.mdl"
 

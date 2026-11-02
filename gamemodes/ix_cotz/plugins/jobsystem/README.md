@@ -31,6 +31,12 @@ points, triangulation event/stash points, dead drops stash pickup and stash/even
 research defence event points. Optional authored town points are added to these sources. No manual
 point placement is needed when existing providers contain suitable points for the destination map.
 
+Town easy item-return definitions set `requiredPool` in addition to their existing `requiredItem`
+reference. Server hand-ins accept any candidate from that progression pool, count its actual units,
+and value the submitted item. Different candidates can contribute to the same job. The original
+item still anchors the quantity/payment floor and stable ID. Medium/hard requests omit `requiredPool`
+and require their specific item. Pool labels appear in easy job titles and descriptions.
+
 ## Runtime ownership and loading
 
 Helix loads `libs/sh_00_definitions.lua` before the other libraries. It explicitly includes configuration

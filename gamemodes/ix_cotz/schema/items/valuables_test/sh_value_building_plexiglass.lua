@@ -3,6 +3,7 @@ ITEM.description = "A thick pale rectangular blank with a cloudy surface and squ
 ITEM.longdesc = "A thick pale rectangular blank with a cloudy surface and squared edges. The surface"
 	.. " carries the dull marks of storage and handling. On a workshop shelf it would be another"
 	.. " ordinary part, waiting for somebody who knows what belongs where."
+ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/cotz/eft/barter/building_plexiglass.mdl"
 

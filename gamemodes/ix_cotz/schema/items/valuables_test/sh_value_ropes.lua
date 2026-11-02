@@ -3,6 +3,7 @@ ITEM.description = "A broad coil of grey rope with tightly woven strands and loo
 ITEM.longdesc = "A broad coil of grey rope with tightly woven strands and loose overlapping loops. Dust has"
 	.. " worked into the folds and rough surfaces. It has the familiar, unglamorous shape of camp"
 	.. " stores, carried from one improvised shelter to the next."
+ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/lostsignalproject/items/misc/ropes.mdl"
 

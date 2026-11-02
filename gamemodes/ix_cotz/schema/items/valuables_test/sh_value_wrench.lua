@@ -4,6 +4,7 @@ ITEM.longdesc = "A long metal wrench with an open head at one end and a ring at 
 	.. " worn smooth in the middle and darker around the recesses. Several small scratches cross the"
 	.. " stamped markings, leaving just enough to suggest that somebody once cared which size they"
 	.. " were reaching for."
+ITEM.valuableCategory = "drivers wrenches"
 
 ITEM.model = "models/illusion/eftcontainers/wrench.mdl"
 

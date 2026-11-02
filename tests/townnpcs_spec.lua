@@ -96,6 +96,28 @@ check(request("latch", "easy", "value_bolts") == 4, "bolts use their own minimum
 check(request("latch", "hard", "value_bolts") == 9, "bolts hard exceeds maximum batch")
 check(request("gasket", "easy", "value_kerosene") == 2, "explicit spawn data overrides container capacity")
 check(request("jitters", "hard", "medic_bandage_1") > 3, "hard medical work exceeds spawned uses")
+for _, contact in pairs(town.contacts) do
+	if contact.job.kind == "delivery" then
+		for _, difficulty in ipairs({"easy", "medium", "hard"}) do
+			local prefix = "cotz/town/" .. contact.id .. "/" .. difficulty .. "/"
+			for id, job in pairs(ix.jobs.list) do
+				if id:sub(1, #prefix) == prefix then
+					check((job.requiredPool ~= nil) == (difficulty == "easy"),
+						"only easy deliveries accept a complete category")
+					if job.requiredPool then
+						local member = false
+						for _, candidate in ipairs(ix.progression.itemPools[job.requiredPool].candidates) do
+							member = member or candidate.item == job.requiredItem
+						end
+						check(member, "original delivery reference belongs to the accepted category")
+						check(job.desc:find("Any item in this category counts", 1, true),
+							"easy offers explain category alternatives")
+					end
+				end
+			end
+		end
+	end
+end
 town:ConfigureSources()
 town.installed = true
 local count, contactCount = 0, 0

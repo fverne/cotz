@@ -4,6 +4,7 @@ ITEM.longdesc = "A round metal dial with a long narrow probe extending from the 
 	.. " crowded with small markings, while dirt sits around the rim and the join at the base of"
 	.. " the probe. It has the compact, practical appearance of an instrument that was once stored"
 	.. " beside a much larger piece of equipment."
+ITEM.valuableCategory = "medical equipment"
 
 ITEM.model = "models/illusion/eftcontainers/thermometer.mdl"
 

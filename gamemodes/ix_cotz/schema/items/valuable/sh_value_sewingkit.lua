@@ -3,6 +3,7 @@ ITEM.description = "A purple rectangular sewing box with a pale illustrated labe
 ITEM.longdesc = "A purple rectangular sewing box with a pale illustrated label on its lid. The exposed"
 	.. " edges feel dry and dusty. The weave and packaging offer a small reminder of careful work"
 	.. " done with needles, shears and a clear space on a table."
+ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/lostsignalproject/items/quest/sewingkit.mdl"
 

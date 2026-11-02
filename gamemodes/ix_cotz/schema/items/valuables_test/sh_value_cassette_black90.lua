@@ -4,6 +4,7 @@ ITEM.longdesc = "A dark audio cassette with a pale inset label and two spool win
 	.. " from handling, and storage dust has settled into the recesses. Its markings offer only a"
 	.. " fragment of context. Any voices, images or records it once held would need suitable"
 	.. " equipment and a patient specialist to make sense of them."
+ITEM.valuableCategory = "recording equipment"
 
 ITEM.model = "models/kek1ch/cassette_black90.mdl"
 

@@ -3,6 +3,7 @@ ITEM.description = "A broad roll of dark cloth tape with green markings inside t
 ITEM.longdesc = "A broad roll of dark cloth tape with green markings inside the cardboard core. The surface"
 	.. " carries the dull marks of storage and handling. On a workshop shelf it would be another"
 	.. " ordinary part, waiting for somebody who knows what belongs where."
+ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/cotz/eft/barter/building_kektape.mdl"
 

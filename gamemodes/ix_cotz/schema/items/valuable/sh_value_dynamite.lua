@@ -4,6 +4,7 @@ ITEM.longdesc = "A small military crate with a reinforced lid and pale stencille
 	.. " surfaces carry the dust and handling marks of neglected stores. There is no matching issue"
 	.. " record or service history. It belongs on a specialist's inventory and inspection bench"
 	.. " before anyone can make sense of its condition or origin."
+ITEM.valuableCategory = "ordnance salvage"
 
 ITEM.model = "models/lostsignalproject/items/misc/dynamite.mdl"
 

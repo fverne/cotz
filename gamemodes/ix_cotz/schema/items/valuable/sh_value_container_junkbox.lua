@@ -4,6 +4,7 @@ ITEM.longdesc = "A deep dark equipment crate with a broad lid and reinforced cor
 	.. " the seams and around the fittings. There is a faint smell of old packaging about it. Its"
 	.. " orderly shape suggests a place on a numbered shelf, though no matching inventory has"
 	.. " followed it here."
+ITEM.valuableCategory = "reinforced cases"
 
 ITEM.model = "models/cotz/eft/containers/container_junkbox.mdl"
 

@@ -4,6 +4,7 @@ ITEM.longdesc = "A low hard case with a yellow biohazard warning on its dark lid
 	.. " up a dull film of grit, and the corners bear the small knocks of repeated journeys. A"
 	.. " stale packing-room smell hangs around the joins. It looks like an object that changed"
 	.. " hands more often than its paperwork did."
+ITEM.valuableCategory = "sample carriers"
 
 ITEM.model = "models/cotz/eft/info/quest_biohazard_case.mdl"
 

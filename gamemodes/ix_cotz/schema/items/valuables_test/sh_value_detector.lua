@@ -4,6 +4,7 @@ ITEM.longdesc = "A tall narrow electronic housing with small sockets and fitting
 	.. " and storage dust sit around its fittings. There is no service record to explain when it"
 	.. " was last checked. Its parts and construction may interest a specialist even if the"
 	.. " original assignment can no longer be reconstructed."
+ITEM.valuableCategory = "survey equipment"
 
 ITEM.model = "models/cotz/eft/spec/detector.mdl"
 

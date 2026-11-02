@@ -4,6 +4,7 @@ ITEM.longdesc = "A handheld examination instrument with a pale grip, a blue band
 	.. " The casing is dull from handling, and grime remains in the joins between its sections. It"
 	.. " is carefully shaped for a precise task, with very little on the outside to explain itself"
 	.. " to anyone unfamiliar with the instrument."
+ITEM.valuableCategory = "medical equipment"
 
 ITEM.model = "models/cotz/eft/barter/medical_diagset_sanitar.mdl"
 

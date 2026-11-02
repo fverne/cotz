@@ -4,6 +4,7 @@ ITEM.longdesc = "A small pale bottle with a ribbed cap and a narrow green band a
 	.. " the wrapper is occupied by tiny print. It smells faintly of dry cupboards and old"
 	.. " packaging, like something that was repeatedly counted during stocktaking but never quite"
 	.. " reached the front of the shelf."
+ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/cotz/eft/barter/medical_vitamins.mdl"
 

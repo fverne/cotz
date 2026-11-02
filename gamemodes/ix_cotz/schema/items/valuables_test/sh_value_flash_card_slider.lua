@@ -4,6 +4,7 @@ ITEM.longdesc = "A compact dark USB drive with a blue loop at the back of its ca
 	.. " carries a fine film of handling marks. No accompanying inventory explains where it came"
 	.. " from or whether its records survived storage. It is the sort of small object that can"
 	.. " leave a technician with a surprisingly long afternoon."
+ITEM.valuableCategory = "flash media"
 
 ITEM.model = "models/cotz/eft/info/flash_card_slider.mdl"
 

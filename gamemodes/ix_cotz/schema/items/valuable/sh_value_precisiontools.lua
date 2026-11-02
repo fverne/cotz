@@ -4,6 +4,7 @@ ITEM.longdesc = "An open red-edged case holding a neat row of precision screwdri
 	.. " spaces between the tools, but the arrangement still looks surprisingly orderly. The printed"
 	.. " backing has the faded confidence of something bought for a careful job and then kept long"
 	.. " after that job was finished."
+ITEM.valuableCategory = "drivers wrenches"
 
 ITEM.model = "models/cotz/eft/barter/tools_files.mdl"
 

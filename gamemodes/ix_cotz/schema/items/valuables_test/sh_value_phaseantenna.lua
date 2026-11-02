@@ -4,6 +4,7 @@ ITEM.longdesc = "A square electronics module carrying a dense grid of copper-col
 	.. " around the fittings, and no service record accompanies the unit. Its specialised"
 	.. " construction may interest a technician, though its condition cannot be established from"
 	.. " the casing alone."
+ITEM.valuableCategory = "radio components"
 
 ITEM.model = "models/illusion/eftcontainers/phaseantenna.mdl"
 

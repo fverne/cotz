@@ -4,6 +4,7 @@ ITEM.longdesc = "A tightly rolled bundle with a dark weathered outer surface. Th
 	.. " repeated handling, and the surface smells faintly of dry paper and old cupboards. It has"
 	.. " the look of material kept for reference through several changes of plan. Its markings"
 	.. " would need to be checked against records that are not attached to it."
+ITEM.valuableCategory = "field records"
 
 ITEM.model = "models/lostsignalproject/items/misc/maps.mdl"
 

@@ -4,6 +4,7 @@ ITEM.longdesc = "A rectangular sensor housing with a printed upper panel and a s
 	.. " grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
 	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
+ITEM.valuableCategory = "instruments"
 
 ITEM.model = "models/lostsignalproject/items/devices/sensor_d.mdl"
 

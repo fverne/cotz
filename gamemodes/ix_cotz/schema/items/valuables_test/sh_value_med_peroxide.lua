@@ -4,6 +4,7 @@ ITEM.longdesc = "A pale bottle with a yellow label and a tall plastic cap. The p
 	.. " small panel, while handling marks have gathered around the neck. It has the slightly tacky"
 	.. " feel of a bottle that spent too long in a cupboard with other household and medical"
 	.. " chemicals."
+ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/cotz/eft/barter/h2o2.mdl"
 

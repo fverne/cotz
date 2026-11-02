@@ -4,6 +4,7 @@ ITEM.longdesc = "A pale wireless camera with a long aerial and a dark cylindrica
 	.. " has gathered in the recessed parts, and the exterior has lost the tidy finish of freshly"
 	.. " issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
+ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/cotz/eft/spec/ipcamera.mdl"
 

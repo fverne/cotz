@@ -6,9 +6,16 @@ shared progression pool registry. Selected pools now feed the twelve town item-d
 [town delivery allocation](../gamemodes/ix_cotz/plugins/townnpcs/README.md#regional-valuable-deliveries).
 All items have regional worldspawn, human-corpse or hidden-cache entries; see the
 [regional loot guide](../gamemodes/ix_cotz/plugins/randomitem/README.md).
-New repeatable whole-item requests use one item on easy/medium and two on hard, separately from
+New repeatable whole-item requests use one unit on easy/medium and two on hard, separately from
 legacy quantities/value floors. Quantity-bearing delivery items use spawn-batch minimum/maximum/maximum + 1 for easy/medium/hard.
 Existing pools, saved assignments and finite progression remain unchanged.
+Easy town item-return jobs accept any candidate in the requested pool. Different members can be handed
+in over multiple deliveries toward the same required unit count. Medium and hard jobs still require
+the named item. Existing job IDs, counts, progress, reference payment floors and reward choices are
+retained; actual hand-in value uses the submitted item. Accepted easy jobs also gain these alternatives.
+Each catalogued valuable declares `ITEM.valuableCategory`, shown under inventory tooltip properties.
+Labels remove the `valuables_` prefix and replace underscores with spaces: `valuables_clinical_supplies`
+appears as "clinical supplies". Pool membership remains authoritative for hand-in eligibility.
 The `uncommon` catalogue tier is provisional, not verified drop rarity. Live acquisition still needs playtesting.
 
 Names and descriptions determine these groups. Cases and pouches are requested as recovered

@@ -4,6 +4,7 @@ ITEM.longdesc = "A small stack of printed magazines with a large equipment photo
 	.. " cupboard smell clings to the paper, and the edges have softened with handling. The printed"
 	.. " material belongs to a much more orderly world of counters, desks and filing shelves. Here"
 	.. " it is simply another object waiting for someone who recognises it."
+ITEM.valuableCategory = "printed material"
 
 ITEM.model = "models/cotz/eft/quest/flyer_02.mdl"
 

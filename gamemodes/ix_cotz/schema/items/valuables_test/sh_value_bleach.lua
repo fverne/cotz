@@ -4,6 +4,7 @@ ITEM.longdesc = "A pale plastic bleach bottle with a blue cap and a moulded carr
 	.. " settled into the lettering and the tight corners around the handle. There is a sharp"
 	.. " chemical smell near the cap, strong enough to make the faded promises of household"
 	.. " freshness seem rather optimistic."
+ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/illusion/eftcontainers/bleach.mdl"
 

@@ -3,6 +3,7 @@ ITEM.description = "A thick coil of tan rope with coarse twisted fibres."
 ITEM.longdesc = "A thick coil of tan rope with coarse twisted fibres. Dust has worked into the folds and"
 	.. " rough surfaces. It has the familiar, unglamorous shape of camp stores, carried from one"
 	.. " improvised shelter to the next."
+ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/lostsignalproject/items/misc/rope.mdl"
 

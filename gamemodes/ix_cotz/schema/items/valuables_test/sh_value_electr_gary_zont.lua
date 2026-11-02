@@ -4,6 +4,7 @@ ITEM.longdesc = "A compact dark radio assembly with a coiled lead and a round pr
 	.. " around the fittings, and no service record accompanies the unit. Its specialised"
 	.. " construction may interest a technician, though its condition cannot be established from"
 	.. " the casing alone."
+ITEM.valuableCategory = "radio equipment"
 
 ITEM.model = "models/cotz/eft/barter/electr_gary_zont.mdl"
 

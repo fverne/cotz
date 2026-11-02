@@ -5,6 +5,7 @@ ITEM.longdesc = "A dark handheld radio with front controls, a small display and 
 	.. " fitting. Handling marks and storage dust sit around its fittings. There is no service"
 	.. " record to explain when it was last checked. Its parts and construction may interest a"
 	.. " specialist even if the original assignment can no longer be reconstructed."
+ITEM.valuableCategory = "radio equipment"
 
 ITEM.model = "models/lostsignalproject/items/devices/radio.mdl"
 

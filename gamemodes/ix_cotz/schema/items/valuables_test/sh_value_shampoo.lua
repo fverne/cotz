@@ -4,6 +4,7 @@ ITEM.longdesc = "A green shampoo bottle with a bright printed label and a matchi
 	.. " instructions have suffered more than the cheerful advertising on the front. A faint, sweet"
 	.. " perfume lingers around the neck, strangely out of place among the usual smells of damp"
 	.. " concrete and old smoke."
+ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/illusion/eftcontainers/shampoo.mdl"
 

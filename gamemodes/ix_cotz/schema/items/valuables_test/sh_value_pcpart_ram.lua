@@ -4,6 +4,7 @@ ITEM.longdesc = "A narrow memory module lined with dark chips and a strip of ele
 	.. " worked into the spaces between the components, while the thin board feels almost"
 	.. " insubstantial in the hand. There is very little on it to distinguish one forgotten computer"
 	.. " from the next."
+ITEM.valuableCategory = "computer parts"
 
 ITEM.model = "models/cotz/eft/barter/electr_ram.mdl"
 

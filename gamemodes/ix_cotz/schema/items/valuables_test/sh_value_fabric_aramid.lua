@@ -3,6 +3,7 @@ ITEM.description = "A folded length of tan aramid fabric."
 ITEM.longdesc = "A folded length of aramid fabric in a muted tan colour. Its tight weave and layered edges"
 	.. " give it a dense, substantial feel. There is a stale storage smell in the folds, along with"
 	.. " a little grit that seems determined to work its way into everything packed beside it."
+ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/cotz/eft/barter/other_cloth_aramid.mdl"
 

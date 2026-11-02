@@ -4,6 +4,7 @@ ITEM.longdesc = "A green circuit board crowded with chips, small components and 
 	.. " bracket along one edge. Dust has gathered around the taller parts and in the tight gaps"
 	.. " between them. Seen up close, it resembles a tiny abandoned industrial district with every"
 	.. " road leading somewhere obscure."
+ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/illusion/eftcontainers/circuitboard.mdl"
 

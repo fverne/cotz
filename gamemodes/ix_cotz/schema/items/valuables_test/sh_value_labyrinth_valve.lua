@@ -3,6 +3,7 @@ ITEM.description = "A rusted circular valve wheel with four spokes and a thick c
 ITEM.longdesc = "A rusted circular valve wheel with four spokes and a thick central hub. The surface"
 	.. " carries the dull marks of storage and handling. On a workshop shelf it would be another"
 	.. " ordinary part, waiting for somebody who knows what belongs where."
+ITEM.valuableCategory = "filtration"
 
 ITEM.model = "models/cotz/eft/spec/labyrinth_valve.mdl"
 

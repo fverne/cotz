@@ -3,6 +3,7 @@ ITEM.description = "A folded grey fabric lining with fine stitching and a tapere
 ITEM.longdesc = "A folded grey fabric lining with fine stitching and a tapered loose corner. The exposed"
 	.. " edges feel dry and dusty. The weave and packaging offer a small reminder of careful work"
 	.. " done with needles, shears and a clear space on a table."
+ITEM.valuableCategory = "protective textiles"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/retardant11.mdl"
 

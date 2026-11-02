@@ -4,6 +4,7 @@ ITEM.longdesc = "A desktop processor with a square metal lid and a green board v
 	.. " printing on top remains readable beneath a dull film of handling marks. Such a small,"
 	.. " unassuming piece of hardware to have once sat at the centre of somebody's entire working"
 	.. " day."
+ITEM.valuableCategory = "computer parts"
 
 ITEM.model = "models/cotz/eft/barter/electr_cpu.mdl"
 

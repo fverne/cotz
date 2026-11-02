@@ -4,6 +4,7 @@ ITEM.longdesc = "A shield-shaped embroidered patch with a bear emblem and contra
 	.. " show ordinary handling wear and a little embedded dust. Detached from its original owner,"
 	.. " the emblem is a clue with very little context. An interested collector or records clerk"
 	.. " might know where it belongs, though possession alone proves little."
+ITEM.valuableCategory = "irregular patches"
 
 ITEM.model = "models/cotz/eft/quest/chevron_bear.mdl"
 

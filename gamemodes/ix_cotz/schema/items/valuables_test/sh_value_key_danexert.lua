@@ -4,6 +4,7 @@ ITEM.longdesc = "A small metal key attached to a large decorative fabric fob. Th
 	.. " dull polish of repeated handling. A little dust remains in the sheltered edges. It is an"
 	.. " unremarkable possession until someone notices it is missing, or recognises whose pocket it"
 	.. " used to live in."
+ITEM.valuableCategory = "personal effects"
 
 ITEM.model = "models/cotz/eft/barter/key_danexert.mdl"
 

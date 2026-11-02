@@ -3,6 +3,7 @@ ITEM.description = "A long circuit board carrying large chips and paired red ter
 ITEM.longdesc = "A long circuit board carrying large chips and paired red terminal blocks. Dust sits around"
 	.. " the fittings, and no service record accompanies the unit. Its specialised construction may"
 	.. " interest a technician, though its condition cannot be established from the casing alone."
+ITEM.valuableCategory = "control electronics"
 
 ITEM.model = "models/cotz/eft/barter/electr_adv_controller.mdl"
 

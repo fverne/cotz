@@ -3,6 +3,7 @@ ITEM.description = "A pale rectangular field case with a carrying handle and a m
 ITEM.longdesc = "A pale rectangular field case with a carrying handle and a medical cross on its lid. There"
 	.. " is dust around the fittings and no accompanying inventory to explain its journey. Someone"
 	.. " responsible for specialist stores would want it inspected and accounted for."
+ITEM.valuableCategory = "specialist cases"
 
 ITEM.model = "models/lostsignalproject/items/misc/drugskit.mdl"
 

@@ -3,6 +3,7 @@ ITEM.description = "A flat sealed packet holding several long matches with dark 
 ITEM.longdesc = "A flat sealed packet holding several long matches with dark red heads. The outer surfaces"
 	.. " carry a little storage dust and the marks of repeated handling. It belongs to the quiet"
 	.. " inventory of ordinary things that keep a camp supplied between expeditions."
+ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/cotz/eft/barter/flammable_huntermatches.mdl"
 

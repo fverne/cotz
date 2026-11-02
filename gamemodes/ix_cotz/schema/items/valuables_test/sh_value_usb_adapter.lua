@@ -3,6 +3,7 @@ ITEM.description = "A black wall adapter with two round plug pins and pale elect
 ITEM.longdesc = "A black wall adapter with two round plug pins and pale electrical markings. Fine grit has"
 	.. " settled into the sheltered edges. It is the sort of small supply a workshop can run short"
 	.. " of without noticing until the bench is already covered in unfinished work."
+ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/cotz/eft/barter/usb_adapter.mdl"
 

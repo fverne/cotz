@@ -4,6 +4,7 @@ ITEM.longdesc = "A grey handheld computer with a dark screen and buttons above t
 	.. " and storage dust sit around its fittings. There is no service record to explain when it"
 	.. " was last checked. Its parts and construction may interest a specialist even if the"
 	.. " original assignment can no longer be reconstructed."
+ITEM.valuableCategory = "portable computers"
 
 ITEM.model = "models/lostsignalproject/items/devices/pda2.mdl"
 
