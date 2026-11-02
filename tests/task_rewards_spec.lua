@@ -327,6 +327,25 @@ check(food.data.quantity == 2 and not food.removed, "partial stack hand-in prese
 check(foodOwner:GetJobs().NPC.deliveredValue == 60 and foodOwner:GetJobs().NPC.moneyReward == 30,
 	"actual hand-in value and payout are saved with progress")
 check(not api.DeliverJobItem(foodOwner.client, "NPC"), "completed task cannot consume more items")
+local ammoOwner = actor()
+ix.jobs.list.ammoDelivery = {requiredItem = "22lr", numberRec = 3, reward = {}, moneyReward = 0}
+ammoOwner.jobs.NPC = {identifier = "ammoDelivery", numberRec = 3, progress = 0}
+local rounds = copy(food)
+rounds.quantity = nil
+rounds.ammoAmount = ix.item.list["22lr"].ammoAmount
+rounds.data.quantity = 5
+function ammoOwner.inventory:HasItem(id) if id == "22lr" then return rounds end end
+check(api.DeliverJobItem(ammoOwner.client, "NPC"), "ammunition hand-in accepts saved round quantity")
+check(rounds.data.quantity == 2 and not rounds.removed and ammoOwner.jobs.NPC.progress == 3,
+	"ammunition consumes requested rounds and preserves surplus")
+check(ammoOwner.jobs.NPC.deliveredValue == api.HandInUnitValue("22lr") * 3,
+	"ammunition hand-in is valued per consumed round")
+ammoOwner.jobs.NPC = {identifier = "ammoDelivery", numberRec = 3, progress = 0}
+rounds.Remove = function() return false end
+check(not api.DeliverJobItem(ammoOwner.client, "NPC") and ammoOwner.jobs.NPC.progress == 0,
+	"failed ammunition removal awards no job progress")
+rounds.data.quantity = 0
+check(not api.DeliverJobItem(ammoOwner.client, "NPC"), "empty ammunition stack cannot advance a job")
 local categoryOwner = actor()
 ix.progression.itemPools.deliveryTest = {candidates = {{item = "food"}, {item = "part_swampcontroller_1"}}}
 ix.jobs.list.categoryDelivery = copy(foodJob)

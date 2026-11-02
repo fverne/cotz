@@ -419,10 +419,10 @@ end
 function ix.taskRewards.HandInUnitValue(itemID, instance)
 	local item = assert(ix.item.list[itemID], "Unknown task requirement: " .. tostring(itemID))
 	local quotedItem = instance or item
-	local units = quotedItem.quantity and average(quotedItem.quantity, 1) or 1
-	local value = ix.taskRewards.UnitValue(itemID) * (item.quantity and 1 or average(item.ammoAmount, 1))
+	local units = average(quotedItem.quantity or quotedItem.ammoAmount, 1)
+	local value = ix.taskRewards.UnitValue(itemID)
 	if instance and instance.GetPrice then
-		units = quotedItem.quantity and math.max(1, instance:GetData("quantity", units)) or 1
+		units = math.max(1, instance:GetData("quantity", units))
 		value = instance:GetPrice() / units
 	end
 	local baseValue = value

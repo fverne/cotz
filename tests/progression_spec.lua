@@ -129,6 +129,16 @@ check(
 	"whole-stack turn-in removes inventory item"
 )
 
+local ammoOwner = character()
+ammoOwner.inventory = a.inventory
+inventoryItem.quantity = nil
+inventoryItem.ammoAmount = 10
+inventoryItem.removed = false
+check(api.TurnIn(ammoOwner.client, target, "storageFixture", "artifact_bolt"),
+	"progression accepts ammunition default quantity")
+check(inventoryItem.quantity == 9 and not inventoryItem.removed,
+	"progression preserves ammunition surplus after consuming one round")
+
 api.definitions.storageFixture.requirementSlots[1].quantity = storageQuantity
 
 -- The real reward helper prices the consumed fraction, not the whole remaining stack.

@@ -228,21 +228,22 @@ function ix.taskRewards.DeliverJobItem(client, npc)
 	end
 	if not item then return false end
 	local remaining = job.numberRec - (job.progress or 0)
-	local quantity = item.quantity and item:GetData("quantity", item.quantity) or 1
-	local amount = math.min(remaining, quantity)
+	local quantity = item:GetData("quantity", item.quantity or item.ammoAmount or 1)
+	if type(quantity) ~= "number" or quantity ~= quantity or quantity == math.huge then return false end
+	local amount = math.floor(math.min(remaining, quantity))
 	if amount <= 0 then return false end
 	local value = ix.taskRewards.HandInUnitValue(itemID, item) * amount
+	if quantity > amount then
+		item:SetData("quantity", quantity - amount)
+	elseif item:Remove() == false then
+		return false
+	end
 	for _ = 1, amount do hook.Run("ix_JobTrigger", client, job.identifier) end
 	local jobs = character:GetJobs()
 	job = jobs[npc]
 	job.deliveredValue = (job.deliveredValue or 0) + value
 	job.moneyReward = ix.taskRewards.FixedMoney(definition, job.numberRec, job.deliveredValue)
 	character:SetJobs(jobs)
-	if item.quantity and quantity > amount then
-		item:SetData("quantity", quantity - amount)
-	else
-		item:Remove()
-	end
 	character:Save()
 	ix.dialogue.notifyItemLost(client, ix.item.list[itemID].name)
 

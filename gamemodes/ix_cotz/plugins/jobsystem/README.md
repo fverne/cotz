@@ -37,6 +37,11 @@ and value the submitted item. Different candidates can contribute to the same jo
 item still anchors the quantity/payment floor and stable ID. Medium/hard requests omit `requiredPool`
 and require their specific item. Pool labels appear in easy job titles and descriptions.
 
+Item hand-ins count saved `quantity` units, using the item's `quantity` or `ammoAmount` as
+its default capacity and one for individual items. Ammunition counts by rounds. Only the remaining
+requested units are consumed; surplus stays in the stack. Payment uses the consumed units' value,
+and failed whole-item removal grants no progress. Progression hand-ins follow the same unit convention.
+
 ## Per-assignment cargo identity
 
 Job cargo supports server-side instance overrides through Helix item data:
