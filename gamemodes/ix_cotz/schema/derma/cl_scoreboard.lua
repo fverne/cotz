@@ -122,9 +122,10 @@ PANEL = {}
 AccessorFunc(PANEL, "paintFunction", "BackgroundPaintFunction")
 
 function PANEL:Init()
-	self:SetTall(64)
+	self:SetTall(80)
 
 	self.icon = self:Add("ixScoreboardIcon")
+	self.icon:SetWide(120)
 	self.icon:Dock(LEFT)
 	self.icon.DoRightClick = function()
 		local client = self.player
@@ -156,8 +157,8 @@ function PANEL:Init()
 	end)
 
 	self.icon.Paint = function(this, w, h)
-		local client = self.player
-		surface.SetMaterial(client:GetCharacter() and Material(client:GetCharacter():GetPdaavatar()) or Material("vgui/icons/face_31.png"))
+		if (not self.avatar) then return end
+		surface.SetMaterial(self.avatar)
 		surface.SetDrawColor(255, 255, 255)
 		surface.DrawTexturedRect(0, 0, w, h)
 	end
@@ -186,11 +187,37 @@ end
 	self.description:SetTextColor(color_white)
 	self.description:SetFont("stalkerregularinvfont")
 
+	self.status = self:Add("DLabel")
+	self.status:DockMargin(5, 0, 0, 0)
+	self.status:Dock(TOP)
+	self.status:SetTextColor(color_white)
+	self.status:SetFont("stalkerregularinvfont")
+
 	self.paintFunction = rowPaintFunctions[1]
 	self.nextThink = CurTime() + 1
 end
 
 function PANEL:Update()
+	local record = self.record
+	if (record) then
+		local avatar = record.pdaavatar or "vgui/icons/face_31.png"
+		if (self.avatarPath ~= avatar) then
+			self.avatarPath = avatar
+			self.avatar = Material(avatar, "smooth")
+		end
+		self.status:SetText(ix.crossserver.GetPresenceText(record, record.fresh, IsValid(self.player)))
+		self.status:SizeToContents()
+		if (IsValid(self.mute)) then self.mute:SetVisible(IsValid(self.player) and self.player ~= LocalPlayer()) end
+		if (not IsValid(self.player)) then
+			self.name:SetText(record.name)
+			self.name:SizeToContents()
+			self.rep:SetText("")
+			self.rep:SizeToContents()
+			self.description:SetText("")
+			self.description:SizeToContents()
+			return
+		end
+	end
 	local client = self.player
 	local model = client:GetModel()
 	local skin = client:GetSkin()
@@ -262,18 +289,11 @@ function PANEL:Update()
 	end
 end
 
-function PANEL:Think()
-	if (CurTime() >= self.nextThink) then
-		local client = self.player
-
-		if (!IsValid(client) or !client:GetCharacter() or self.character != client:GetCharacter() or self.team != client:Team()) then
-			local parent = self:GetParent()
-			self:Remove()
-			parent:SizeToContents()
-		end
-
-		self.nextThink = CurTime() + 1
-	end
+function PANEL:SetRecord(record)
+	self.record = record
+	self.player = record.player
+	self.character = IsValid(self.player) and self.player:GetCharacter() or nil
+	self:Update()
 end
 
 function PANEL:SetPlayer(client)
@@ -298,34 +318,38 @@ function PANEL:Init()
 	self:SetTall(32)
 end
 
-function PANEL:UpdateGroup(name, clients, color)
+function PANEL:UpdateGroup(name, records, color)
 	self:SetColor(color or ix.config.Get("color"))
-	self:SetText(name .. " (" .. #clients .. ")")
+	self:SetText(name .. " (" .. #records .. ")")
+	self.rows = self.rows or {}
+	local present = {}
+	table.sort(records, function(first, second)
+		local firstRep = IsValid(first.player) and first.player:getReputation() or 0
+		local secondRep = IsValid(second.player) and second.player:getReputation() or 0
+		if (firstRep == secondRep) then return first.characterID < second.characterID end
 
-	table.sort(clients, function(first, second)
-		return first:getReputation() < second:getReputation()
+		return firstRep < secondRep
 	end)
-
-	for index, client in ipairs(clients) do
-		local row = client.ixScoreboardSlot
-
-		if (IsValid(row) and (row:GetParent() ~= self or row.character ~= client:GetCharacter())) then
-			row:Remove()
-		end
-
+	for index, record in ipairs(records) do
+		local id = record.characterID
+		present[id] = true
+		local row = self.rows[id]
 		if (not IsValid(row)) then
 			row = self:Add("ixScoreboardRow")
-			row:SetPlayer(client)
 			row:Dock(TOP)
-			client.ixScoreboardSlot = row
-		else
-			row:Update()
+			self.rows[id] = row
 		end
-
+		row:SetRecord(record)
+		if (IsValid(record.player)) then record.player.ixScoreboardSlot = row end
 		row:SetZPos(index)
 		row:SetBackgroundPaintFunction(rowPaintFunctions[index % 2 == 0 and 1 or 2])
 	end
-
+	for id, row in pairs(self.rows) do
+		if (not present[id]) then
+			row:Remove()
+			self.rows[id] = nil
+		end
+	end
 	self:SizeToContents()
 end
 
@@ -340,6 +364,16 @@ function PANEL:Init()
 
 	self:Dock(FILL)
 	self.groups = {}
+	self.localArea = self:Add("DButton")
+	self.localArea:Dock(TOP)
+	self.localArea:SetZPos(-1)
+	self.localArea:SetTall(28)
+	self.localArea:SetText("Local area: OFF")
+	self.localArea.DoClick = function(button)
+		self.localOnly = not self.localOnly
+		button:SetText(self.localOnly and "Local area: ON" or "Local area: OFF")
+		self.nextThink = 0
+	end
 	self.nextThink = 0
 	ix.gui.scoreboard = self
 end
@@ -350,21 +384,18 @@ function PANEL:Think()
 
 	local groups = {}
 
-	for _, client in ipairs(player.GetAll()) do
-		local visible = client:GetCharacter() and hook.Run("ShouldShowPlayerOnScoreboard", client) ~= false
-
-		if (visible) then
-			local id, name, color
-
-			if (ix.squad and ix.squad.GetScoreboardGroup) then
-				id, name, color = ix.squad.GetScoreboardGroup(client)
-			end
-			id = id or "loners"
-			groups[id] = groups[id] or {name = name or "loners", color = color and color.r and color or nil, clients = {}}
-			table.insert(groups[id].clients, client)
-		elseif (IsValid(client.ixScoreboardSlot)) then
-			client.ixScoreboardSlot:Remove()
+	local records = ix.crossserver and ix.crossserver.GetScoreboardRoster(self.localOnly) or {}
+	for _, record in pairs(records) do
+		local id = record.squadID
+		if (not id or id == "" or id == "NULL" or not record.squadName or record.squadName == "") then
+			id = "loners"
 		end
+		local color = id ~= "loners" and record.squadColor
+		groups[id] = groups[id] or {
+			name = id == "loners" and "loners" or record.squadName,
+			color = color and color.r and color or nil, records = {},
+		}
+		table.insert(groups[id].records, record)
 	end
 
 	for id, group in pairs(groups) do
@@ -376,7 +407,7 @@ function PANEL:Think()
 			self.groups[id] = panel
 		end
 
-		panel:UpdateGroup(group.name, group.clients, group.color)
+		panel:UpdateGroup(group.name, group.records, group.color)
 	end
 
 	for id, panel in pairs(self.groups) do

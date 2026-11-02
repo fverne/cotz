@@ -269,3 +269,16 @@ function ix.squad.Leave(client)
 end
 
 ix.util.Include("sv_hooks.lua", "server")
+
+ix.util.Include("sv_crossserver.lua")
+
+if (ix.squad.cross) then
+	for _, name in ipairs({"New", "ChangeRank", "KickMember", "Leave", "Disband"}) do
+		local original = ix.squad[name]
+		local shared = ix.squad.cross[name]
+		ix.squad[name] = function(...)
+			if (ix.squad.cross.Enabled()) then return shared(...) end
+			return original(...)
+		end
+	end
+end

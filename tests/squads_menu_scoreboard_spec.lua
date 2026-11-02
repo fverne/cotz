@@ -46,6 +46,11 @@ end
 function methods:GetParent() return self.parent end
 function methods:SetText(value) self.text = value end
 function methods:SetPlayer(client) self.player = client self.character = client:GetCharacter() end
+function methods:SetRecord(record)
+	self.record = record
+	self.player = record.player
+	self.character = self.player and self.player:GetCharacter()
+end
 function methods:Update() end
 function methods:SizeToContents() end
 function methods:GetChildren()
@@ -74,7 +79,7 @@ end
 for _, name in ipairs({"Dock", "DockPadding", "SetZPos", "SetBackgroundPaintFunction",
 	"SetPaintBackground", "SetWrap", "SetAutoStretchVertical", "SetTextColor", "SetHideButtons", "SetMaterial",
 	"SetMultiline", "SetUpdateOnType", "SetPlaceholderText", "SetCursor", "SetModel", "SetTooltip",
-	"SetMouseInputEnabled", "SetEnabled", "InvalidateLayout"}) do methods[name] = function() end end
+	"SetMouseInputEnabled", "SetEnabled", "InvalidateLayout", "SetHelixTooltip", "SetVisible"}) do methods[name] = function() end end
 function IsValid(value) return type(value) == "table" and not value.removed end
 function CurTime() return clock end
 function LocalPlayer() return localClient end
@@ -113,6 +118,13 @@ ix = {
 	util = {Include = function() end, GetMaterial = function(path) return path end}, command = {Add = function() end},
 	config = {Get = function() return {} end},
 }
+game = {GetMap = function() return "map_a" end}
+table.Copy = function(value)
+	local result = {}
+	for key, item in pairs(value) do result[key] = item end
+	return result
+end
+dofile("gamemodes/ix_cotz/plugins/simplecrossserverdata/sh_presence.lua")
 local root = "gamemodes/ix_cotz/plugins/squads/"
 loadGLua(root .. "sh_plugin.lua")
 check(not vars.squadID.isLocal, "squad identity is visible to other players")
@@ -151,7 +163,19 @@ local hidden = client("owner-b", "Hidden", 0)
 hidden.hidden = true
 clients = {localClient, first, second, hidden}
 loadGLua("gamemodes/ix_cotz/schema/derma/cl_scoreboard.lua")
--- Rows use their existing presentation code in game; these checks exercise group lifecycle.
+-- Remote presentation must run without any player entity methods or local-only action menu.
+local remotePresentation = panel("ixScoreboardRow")
+remotePresentation:Init()
+remotePresentation:SetRecord({characterID = 900, name = "Remote medic", pdaavatar = "medic.png",
+	state = "travelling", destination = "map_c", fresh = true})
+check(remotePresentation.name.text == "Remote medic" and remotePresentation.avatarPath == "medic.png",
+	"real remote row renders saved character identity without an entity")
+check(remotePresentation.status.text == "TRAVELLING · map_c", "real remote row renders shared travel status")
+remotePresentation.icon:DoRightClick()
+remotePresentation.record.fresh = false
+remotePresentation:Update()
+check(remotePresentation.status.text == "STATUS UNAVAILABLE", "real row loses its online claim when stale")
+-- Group lifecycle checks use simple rows for local entity presentation.
 classes.ixScoreboardRow = {}
 local scoreboard = panel("ixScoreboard")
 scoreboard:Init()
@@ -177,6 +201,39 @@ clock = clock + 1
 scoreboard:Think()
 check(not scoreboard.groups["owner-a"], "empty groups disappear")
 check(second.ixScoreboardSlot.removed, "hidden players lose existing rows")
+-- Shared records need no player entities, remain grouped, and are deduplicated by character ID.
+ix.crossserver.rosterFresh = clock
+ix.crossserver.roster = {
+	[100] = {characterID = 100, name = "Remote scout", state = "online", map = "map_b",
+		squadID = "owner-r", squadName = "Remote squad", squadColor = Color(90, 100, 110)},
+	[101] = {characterID = 101, name = "Traveller", state = "travelling", map = "map_a", destination = "map_b"},
+	[first.character:GetID()] = {characterID = first.character:GetID(), name = "Old name", map = "map_a"},
+	[hidden.character:GetID()] = {characterID = hidden.character:GetID(), name = "Hidden", map = "map_b"},
+}
+clock = clock + 1
+scoreboard:Think()
+check(scoreboard.groups["owner-r"].text == "Remote squad (1)", "remote characters appear without a player entity")
+check(scoreboard.groups.loners.text == "loners (3)", "local characters deduplicate shared records and hidden locals stay hidden")
+local remoteGroup = scoreboard.groups["owner-r"]
+scoreboard.localArea:DoClick()
+scoreboard:Think()
+check(not scoreboard.groups["owner-r"] and remoteGroup.removed, "local area excludes other maps and removes old rows")
+check(scoreboard.groups.loners.text == "loners (3)", "local area includes a traveller whose source is the current map")
+scoreboard.localArea:DoClick()
+scoreboard:Think()
+check(scoreboard.groups["owner-r"] ~= nil, "toggling local area off restores all maps")
+check(ix.crossserver.GetPresenceText(ix.crossserver.roster[101], true, false) == "TRAVELLING · map_b",
+	"scoreboard and squad share travelling destination labels")
+clock = clock + 16
+local records = ix.crossserver.GetScoreboardRoster(false)
+check(ix.crossserver.GetPresenceText(records[100], records[100].fresh, false) == "STATUS UNAVAILABLE",
+	"stale snapshots cannot claim a remote character is online")
+check(not ix.crossserver.GetScoreboardRoster(true)[100], "stale remote maps cannot pass the local filter")
+ix.crossserver.roster = {}
+clock = clock + 1
+scoreboard:Think()
+check(not scoreboard.groups["owner-r"], "remote disconnect removes the last row and group")
+
 -- Load the real UI helpers and exercise the wrapper's state transitions.
 dofile(root .. "derma/cl_squad.lua")
 local squadView = classes.ixSquadView
@@ -217,6 +274,14 @@ check(portrait.avatar.width / portrait.avatar.height == 1.5, "PDA portraits matc
 check(not view.logo, "squad header has no icon")
 check(view.memberCount == 3, "styled roster keeps every character")
 check(view.count.text == "3 stalkers  /  1 on this server", "summary reports local presence without claiming remote status")
+local remoteRow = view.memberTags[100]
+remoteRow.info.state, remoteRow.info.map = "online", "another_map"
+ix.squad.presenceFresh = {id = "owner-c", time = clock}
+remoteRow:UpdateCharacter()
+check(remoteRow.status.text == "ONLINE · another_map", "fresh shared presence displays the remote map")
+clock = clock + 16
+remoteRow:UpdateCharacter()
+check(remoteRow.status.text == "STATUS UNAVAILABLE", "stale shared presence becomes unavailable")
 view.body:PerformLayout(1000, 600)
 check(view.overview.width + view.roster.width + 12 == 1000 and view.roster.y == 0,
 	"wide layout has separate overview and roster columns")

@@ -67,6 +67,14 @@ end
 ix.util.Include("sv_plugin.lua")
 
 if (CLIENT) then
+	net.Receive("cotz/squads/presence-fresh", function()
+		local id = net.ReadString()
+		local character = LocalPlayer():GetCharacter()
+		if (character and character:GetSquadID() == id) then
+			ix.squad.presenceFresh = {id = id, time = CurTime()}
+		end
+	end)
+
 	function PLUGIN:CreateMenuButtons(tabs)
 		tabs["squads"] = function(container)
 			local panel = container:Add("ixSquadMenu")
@@ -194,6 +202,7 @@ end
 
 if (SERVER) then
 	function ix.squad.AcceptInvite(client)
+		if (ix.squad.cross and ix.squad.cross.Enabled()) then return ix.squad.cross.AcceptInvite(client) end
 		local invite = client.squad_invite
 		client.squad_invite = nil
 		client:SetLocalVar("squadInvite", nil)

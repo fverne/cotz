@@ -71,7 +71,7 @@ if (SERVER) then
 		for characterID in pairs(self.members) do
 			local character = ix.char.loaded[characterID]
 
-			if (character) then
+			if (character and not (ix.squad.cross and ix.squad.cross.Enabled())) then
 				self.memberInfo[characterID] = {name = character:GetName(), pdaavatar = character:GetPdaavatar()}
 			end
 		end

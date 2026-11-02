@@ -4,31 +4,29 @@ Squad creation and management live in the **SQUADS** section of the Tab menu, al
 TASKS. Players without a squad see a creation button; members see the embedded management panel.
 The plugin no longer handles `gm_showspare2` (normally F4).
 
-The STALKERnet scoreboard groups online players by squad name. Players without a squad appear
-under **loners**. Empty groups disappear, and existing scoreboard visibility rules still apply.
-Grouping uses stable squad IDs, so squads with identical names remain separate groups.
+The STALKERnet scoreboard shows active characters across all connected maps by default, grouped by
+squad name. **Local area** toggles a current-map filter. Players without a squad appear under
+**loners**. Empty groups disappear, and existing scoreboard visibility rules still apply.
+Grouping uses stable squad IDs, so squads with identical names remain separate groups. The
+`simplecrossserverdata` plugin owns presence leases, travel handoffs, roster networking and shared
+status labels; squads supply authoritative public grouping metadata. See its [README](../simplecrossserverdata/README.md).
 
 ## Loading and state
 
 Helix loads `languages/` and `derma/` automatically. `sh_plugin.lua` explicitly includes the squad
 metatable and server entry point; the server entry point includes its hooks.
 
-Squad definitions use `ix_squads_squads`. Membership and officer state use the existing character
-columns `squad_id` and `squad_officer`. Changing the table name in code does not migrate an existing
-`gmodz_squads` database table.
+Cross-server membership and presence are enabled by default. See the
+[cross-server deployment and architecture guide](CROSS_MAP_PLAN.md) before deploying to shared maps.
+Every map must use the same database and schema and run this build. Shared storage imports existing
+squads without resetting them; ambiguous legacy leaders still require an explicit character mapping.
 
-New squad keys are `char:<founder character ID>`. The existing `owner` column remains the primary
-key for compatibility; it is an opaque squad identifier. Runtime `leaderID` and `members` keys are
-character IDs. Existing keys and character assignments are retained without a destructive migration.
-Legacy records resolve leadership only when exactly one member character belongs to the original
-owner account. For ambiguous records, configure `ix.squad.legacyLeaders["<existing squad key>"] = <character ID>`
-in `sh_plugin.lua` after that table is initialized, then restart. The mapped character must already be
-a member. Unresolved records log an error and retain saved assignments; they are not silently reset.
-Do not mix the old account-based server build with this build against the same shared database.
-
-Offline edits now scope SQL to the exact character ID and schema. Disband also clears unloaded
-members. This fixes account-wide updates; reliable concurrent cross-map moderation remains future work.
-See [cross-map presence and synchronization plan](CROSS_MAP_PLAN.md).
+The backend reuses Helix's account/character caches for connected players, including their inactive
+characters. Remote members remain lightweight roster records. Shared membership is authoritative;
+normal Helix character saves cannot overwrite a remote kick, promotion, or disband. The menu displays
+online map, travelling destination, offline and unavailable states for remote members. Updates normally
+propagate within five seconds; crashed sessions expire after 45 seconds. Nearby invitations persist
+across travel and remain available through **Accept invite**.
 
 `squadID` is now public character metadata. The new public `squadName` variable is display-only,
 with no database column; synchronization derives it from the authoritative squad record. It updates
@@ -43,7 +41,7 @@ currently active target character.
 The menu follows the equipment and Tasks UI: translucent dark cards, olive borders, muted labels,
 `alsina` typography, and green/teal accents. The summary shows squad identity and the number of
 members on this server. Personnel appear in rank-ordered character cards; select or right-click a
-card for the existing member actions. "Not on this server" does not imply a character is offline.
+card for the existing member actions. Remote status becomes unavailable if shared reads stop succeeding.
 
 Leaders edit the name, message and color inline, then use **Save changes**. Closing the menu
 also submits pending edits. Settings are coalesced around the server cooldown and delayed submissions
@@ -58,6 +56,8 @@ Run from the repository root:
 ```sh
 luatex --luaonly tests/squads_menu_scoreboard_spec.lua
 luatex --luaonly tests/squads_characters_spec.lua
+luatex --luaonly gamemodes/ix_cotz/plugins/simplecrossserverdata/tests/squads_crossserver_spec.lua
+luatex --luaonly tests/crossserver_presence_spec.lua
 ```
 
 The standalone spec checks Tab registration, menu state transitions, public metadata updates,

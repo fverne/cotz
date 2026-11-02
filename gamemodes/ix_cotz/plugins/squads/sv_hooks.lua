@@ -7,11 +7,18 @@ function PLUGIN:PostLoadData()
 		query:Create("color", "VARCHAR(20) DEFAULT NULL")
 		query:PrimaryKey("owner")
 	query:Execute()
+	if (ix.squad.cross) then ix.squad.cross.Initialize() end
 end
 
 function PLUGIN:PlayerLoadedCharacter(client, character)
 	client.squad_invite = nil
 	client:SetLocalVar("squadInvite", nil)
+	if (ix.squad.cross and ix.squad.cross.Enabled()) then
+		client.ixSquadSnapshot = nil
+		client.ixSquadInviteToken = nil
+		ix.squad.cross.Refresh()
+		return
+	end
 	local id = character:GetSquadID()
 	if (id == "NULL") then return end
 
@@ -31,6 +38,10 @@ function PLUGIN:PlayerLoadedCharacter(client, character)
 end
 
 function PLUGIN:PreCharacterDeleted(client, character)
+	if (ix.squad.cross and ix.squad.cross.Enabled()) then
+		ix.squad.cross.DeleteCharacter(character)
+		return
+	end
 	local id = character:GetSquadID()
 	if (id == "NULL") then return end
 	local characterID = character:GetID()
@@ -65,6 +76,9 @@ end
 
 function PLUGIN:CharacterVarChanged(character, key)
 	if (key ~= "name" and key ~= "pdaavatar") then return end
+	if (ix.squad.cross and ix.squad.cross.Enabled()) then
+		return
+	end
 	local squad = ix.squad.list[character:GetSquadID()]
 	if (squad and squad.members[character:GetID()] ~= nil) then squad:Sync() end
 end
@@ -102,6 +116,10 @@ net.Receive("ixSquadSettings", function(_, client)
 
 	local data = net.ReadTable()
 	data.logoID = nil
+	if (ix.squad.cross and ix.squad.cross.Enabled()) then
+		ix.squad.cross.SaveSettings(client, data)
+		return
+	end
 	if (table.IsEmpty(data) or !client:GetCharacter()) then return end
 
 	local squad = ix.squad.list[client:GetCharacter():GetSquadID()]
@@ -175,6 +193,10 @@ net.Receive("ixSquadInvite", function(_, client)
 	if (not targetCharacter or targetCharacter:GetSquadID() ~= "NULL") then return end
 	if (client:GetPos():DistToSqr(target:GetPos()) > 160 * 160) then return end
 
+	if (ix.squad.cross and ix.squad.cross.Enabled()) then
+		ix.squad.cross.Invite(target, client)
+		return
+	end
 	target.squad_invite = {
 		expires = CurTime() + 30,
 		inviterID = character:GetID(),
@@ -197,7 +219,8 @@ end)
 net.Receive("ixSquadRankChange", function(_, client)
 	if ((client.ixSquadRankTry or 0) > CurTime()) then return end
 	client.ixSquadRankTry = CurTime() + 2
-	ix.squad.ChangeRank(net.ReadUInt(32), client)
+	local characterID = net.ReadUInt(32)
+	ix.squad.ChangeRank(characterID, client, net.ReadUInt(2))
 end)
 
 net.Receive("ixSquadDisband", function(_, client)
@@ -205,7 +228,7 @@ net.Receive("ixSquadDisband", function(_, client)
 	client.ixSquadKickTry = CurTime() + 2
 	local character = client:GetCharacter()
 	local squad = character and ix.squad.list[character:GetSquadID()]
-	if (squad and squad:IsLeader(client)) then ix.squad.Disband(squad.owner) end
+	if (squad and squad:IsLeader(client)) then ix.squad.Disband(squad.owner, character:GetID()) end
 end)
 
 net.Receive("ixSquadLeave", function(_, client)

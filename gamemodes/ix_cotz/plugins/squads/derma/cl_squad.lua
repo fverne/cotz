@@ -397,10 +397,11 @@ function PANEL:Init()
 	self.status:SetFont("cotzSquadsSmall")
 end
 
-local function requestMemberAction(characterID, event, prompt, title)
+local function requestMemberAction(characterID, event, prompt, title, desiredRank)
 	Derma_Query(prompt, title, L("text_yes"), function()
 		net.Start(event)
 			net.WriteUInt(characterID, 32)
+			if (desiredRank ~= nil) then net.WriteUInt(desiredRank, 2) end
 		net.SendToServer()
 	end, L("text_no"))
 end
@@ -434,7 +435,7 @@ function PANEL:OnMousePressed(code)
 		local title = L(promote and "squad_menu_btn_raiseofficer" or "squad_menu_btn_demote")
 		local prompt = L(promote and "squad_menu_btn_ask_raiseofficer" or "squad_menu_btn_ask_demote")
 		menu:AddOption(title, function()
-			requestMemberAction(self.characterID, "ixSquadRankChange", prompt, title)
+			requestMemberAction(self.characterID, "ixSquadRankChange", prompt, title, promote and 1 or 0)
 		end):SetImage("icon16/user_go.png")
 	end
 
@@ -464,9 +465,16 @@ function PANEL:UpdateCharacter()
 	local name = character and character:GetName() or self.info.name or ("Character #" .. self.characterID)
 	local icon = character and character:GetPdaavatar() or self.info.pdaavatar or "vgui/icons/face_31.png"
 	self.name:SetText(name)
-	self.status:SetText(target and "ON THIS SERVER" or "NOT ON THIS SERVER")
+	local status = target and "ON THIS SERVER" or "NOT ON THIS SERVER"
+	local fresh = ix.squad.presenceFresh
+	local current = LocalPlayer():GetCharacter()
+	local verified = fresh and current and fresh.id == current:GetSquadID() and CurTime() - fresh.time < 15
+	if (self.info.state) then
+		status = ix.crossserver.GetPresenceText(self.info, verified, target ~= nil)
+	end
+	self.status:SetText(status)
 	self.status:SetTextColor(target and COLORS.green or COLORS.muted)
-	self:SetTooltip(name .. " · " .. (target and "On this server" or "Not on this server"))
+	self:SetTooltip(name .. " · " .. status)
 
 	if (self.icon ~= icon) then
 		self.icon = icon
